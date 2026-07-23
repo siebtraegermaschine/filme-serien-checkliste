@@ -1334,6 +1334,120 @@ render();
   }catch(e){ alert('Import ueber den Link fehlgeschlagen: '+e.message); }
   history.replaceState(null,'',location.pathname+location.search);
 })();
+/* ================= STREAMING (Discovery-Unterpunkt) – EINGEFÜGT ================= */
+(function(){
+  // CSS für Plattform-Überschriften
+  document.head.insertAdjacentHTML('beforeend',
+    '<style>'+
+    '.stream-head{font-weight:800;font-size:16px;margin:22px auto 8px;max-width:620px;padding:0 2px 6px;color:var(--text);border-bottom:1px solid var(--border);}'+
+    '.stream-sub{color:var(--text-dim);font-size:13px;font-weight:600;margin:10px auto 8px;max-width:620px;padding:0 2px;}'+
+    '</style>');
+
+  var STREAM=null, streamLoaded=false, streamErr=null;
+  async function loadStream(){
+    if(streamLoaded) return;
+    try{
+      var res=await fetch('streaming.json',{cache:'no-store'});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      STREAM=await res.json();
+    }catch(e){ streamErr=e; }
+    streamLoaded=true;
+  }
+  function streamLi(c, key){
+    var li=document.createElement('li'); li.className='disc';
+    var poster = c.p ? '<img class="dposter" loading="lazy" src="'+POSTER+c.p+'" alt="">' : '<div class="dposter"></div>';
+    var already = (key==='f'?ADDED.f:ADDED.s).some(function(x){return x.id===c.id;});
+    li.innerHTML =
+      poster +
+      '<div class="dinfo"><div class="dtitle">'+esc(c.t)+'</div>'+
+        '<div class="dmeta">'+esc(candMeta(c))+'</div></div>'+
+      '<button class="addbtn'+(already?' done':'')+'"'+(already?' disabled':'')+'>'+(already?'✓ hinzugefügt':'+ Liste')+'</button>';
+    var btn=li.querySelector('.addbtn');
+    if(!already) btn.addEventListener('click', function(e){
+      var arr=key==='f'?ADDED.f:ADDED.s;
+      if(!arr.some(function(x){return x.id===c.id;})){ arr.push(c); saveAdded(); rebuild(); }
+      e.target.textContent='✓ hinzugefügt'; e.target.classList.add('done'); e.target.disabled=true;
+    });
+    return li;
+  }
+  async function renderStreaming(){
+    var hint=document.createElement('div'); hint.className='disc-hint';
+    hint.textContent='Lade aktuelle Streaming-Daten …';
+    list.appendChild(hint);
+    await loadStream();
+    if(streamErr || !STREAM){
+      hint.innerHTML='Streaming-Daten konnten nicht geladen werden.<br>Der Streaming-Bereich funktioniert nur auf der Webseite (GitHub&nbsp;Pages), nicht in der PC-Vorschau/im Artefakt.';
+      return;
+    }
+    var parts=['Aktuell im Abo verfügbar (Region '+(STREAM.region||'DE')+').'];
+    if(STREAM.generated){ try{ parts.push('Stand: '+new Date(STREAM.generated).toLocaleDateString('de-DE')+'.'); }catch(e){} }
+    parts.push('Wöchentliche Aktualisierung (donnerstags).');
+    if(STREAM.sample) parts.push('⚠️ Beispieldaten – echte Daten ab dem ersten automatischen Abruf.');
+    hint.textContent=parts.join(' ');
+    var provs=STREAM.providers||[];
+    if(!provs.length){ var p=document.createElement('div'); p.className='disc-hint'; p.textContent='Noch keine Streaming-Daten vorhanden – der erste automatische Abruf erfolgt am Donnerstag.'; list.appendChild(p); return; }
+    provs.forEach(function(pv){
+      var head=document.createElement('div'); head.className='stream-head'; head.textContent=pv.name||pv.id;
+      list.appendChild(head);
+      [['🎬 Filme','f'],['📺 Serien','s']].forEach(function(pair){
+        var label=pair[0], key=pair[1];
+        var arr=pv[key]||[]; if(!arr.length) return;
+        var sh=document.createElement('div'); sh.className='stream-sub'; sh.textContent=label+' · '+arr.length;
+        list.appendChild(sh);
+        arr.forEach(function(c){ list.appendChild(streamLi(c,key)); });
+      });
+    });
+  }
+
+  // renderDiscovery überschreiben: dritter Unterpunkt "Streaming"
+  renderDiscovery = function(){
+    document.getElementById('progName').textContent='Discovery';
+    list.innerHTML='';
+    var sub=document.createElement('div'); sub.className='disc-sub';
+    sub.innerHTML='<button id="dFilme" class="'+(discType==='f'?'active':'')+'">🎬 Filme</button>'+
+                  '<button id="dSerien" class="'+(discType==='s'?'active':'')+'">📺 Serien</button>'+
+                  '<button id="dStream" class="'+(discType==='stream'?'active':'')+'">📡 Streaming</button>';
+    list.appendChild(sub);
+    document.getElementById('dFilme').onclick=function(){ discType='f'; renderDiscovery(); };
+    document.getElementById('dSerien').onclick=function(){ discType='s'; renderDiscovery(); };
+    document.getElementById('dStream').onclick=function(){ discType='stream'; renderDiscovery(); };
+    if(discType==='stream'){ renderStreaming(); return; }
+    var prof = buildProfile(discType);
+    var added = discAddedIds();
+    var pool = (discType==='f'?CAND.f:CAND.s).filter(function(c){return !added.has(c.id);});
+    var scored = pool.map(function(c){ var r=scoreCand(c,prof); return {c:c,score:r.score,shared:r.shared,dirHit:r.dirHit}; })
+                       .sort(function(a,b){ return b.score-a.score || (b.c.r||0)-(a.c.r||0); })
+                       .slice(0,100);
+    var hint=document.createElement('div'); hint.className='disc-hint';
+    hint.textContent = prof.usedAll
+      ? 'Noch wenige Haken gesetzt – die Vorschläge basieren vorerst auf der ganzen Liste. Je mehr du als gesehen markierst, desto persönlicher wird der Score.'
+      : 'Passend zu deinen als gesehen markierten Titeln – nach Genre, Besetzung und Regie. Score 0–99.';
+    list.appendChild(hint);
+    scored.forEach(function(row,idx){
+      var c=row.c;
+      var li=document.createElement('li'); li.className='disc';
+      var poster = c.p ? '<img class="dposter" loading="lazy" src="'+POSTER+c.p+'" alt="">' : '<div class="dposter"></div>';
+      var sub2=[]; if(row.dirHit) sub2.push('gleiche Regie'); if(row.shared) sub2.push(row.shared+'× Besetzung');
+      li.innerHTML =
+        '<span class="drank">'+(idx+1)+'</span>'+ poster +
+        '<div class="dinfo"><div class="dtitle">'+esc(c.t)+
+          '<span class="score'+(row.score>=60?' hi':'')+'">'+row.score+'</span></div>'+
+          '<div class="dmeta">'+esc(candMeta(c))+(sub2.length?(' · '+sub2.join(' · ')):'')+'</div></div>'+
+        '<button class="addbtn" data-id="'+c.id+'">+ Liste</button>';
+      li.querySelector('.addbtn').addEventListener('click', function(e){
+        var arr = discType==='f'?ADDED.f:ADDED.s;
+        if(!arr.some(function(x){return x.id===c.id;})){ arr.push(c); saveAdded(); rebuild(); }
+        e.target.textContent='✓ hinzugefügt'; e.target.classList.add('done'); e.target.disabled=true;
+      });
+      list.appendChild(li);
+    });
+    if(!scored.length){ var p=document.createElement('div'); p.className='disc-hint'; p.textContent='Keine Vorschläge übrig.'; list.appendChild(p); }
+  };
+
+  // Falls Discovery gerade offen ist, sofort neu zeichnen
+  if (typeof activeTab!=='undefined' && activeTab==='discovery') renderDiscovery();
+})();
+
 </script>
 </body>
 </html>
