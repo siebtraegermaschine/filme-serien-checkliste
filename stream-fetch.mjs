@@ -24,10 +24,12 @@ const MIN_YEAR = parseInt(process.env.STREAM_MIN_YEAR || '1980', 10);
 
 // Gewünschte Plattformen – per Name gematcht (robuster als feste IDs).
 const WANT = [
-  { id: 'amazon',  name: 'Amazon Prime Video', match: ['Amazon Prime Video'] },
-  { id: 'netflix', name: 'Netflix',            match: ['Netflix'] },
-  { id: 'disney',  name: 'Disney+',            match: ['Disney Plus', 'Disney+'] },
-  { id: 'apple',   name: 'Apple TV+',          match: ['Apple TV Plus', 'Apple TV+'] },
+  // fbid = feste TMDB-Provider-ID als Fallback, falls die Namens-Erkennung scheitert
+  // (z. B. wurde "Apple TV+" bei JustWatch/TMDB in "Apple TV" umbenannt).
+  { id: 'amazon',  name: 'Amazon Prime Video', fbid: 9,   match: ['Amazon Prime Video'] },
+  { id: 'netflix', name: 'Netflix',            fbid: 8,   match: ['Netflix'] },
+  { id: 'disney',  name: 'Disney+',            fbid: 337, match: ['Disney Plus', 'Disney+'] },
+  { id: 'apple',   name: 'Apple TV+',          fbid: 350, match: ['Apple TV Plus', 'Apple TV+', 'Apple TV'] },
 ];
 
 if (!KEY) { console.error('FEHLER: TMDB_API_KEY ist nicht gesetzt.'); process.exit(1); }
@@ -108,8 +110,8 @@ async function main() {
 
   const providers = [];
   for (const w of WANT) {
-    const mId = w.match.map(n => movieProv[n]).find(Boolean);
-    const tId = w.match.map(n => tvProv[n]).find(Boolean);
+    const mId = w.match.map(n => movieProv[n]).find(Boolean) || w.fbid;
+    const tId = w.match.map(n => tvProv[n]).find(Boolean) || w.fbid;
     if (!mId && !tId) { console.warn(`WARN: keine Provider-ID für ${w.name} gefunden – übersprungen.`); continue; }
     console.log(`→ ${w.name}  (Film-ID ${mId ?? '—'}, Serien-ID ${tId ?? '—'})`);
     const f = mId ? await discover('movie', mId, movieGenres) : [];
