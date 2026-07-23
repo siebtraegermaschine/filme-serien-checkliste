@@ -49,6 +49,28 @@ async function tmdb(path, params = {}) {
   throw new Error('TMDB Rate-Limit für ' + path);
 }
 
+// Besetzung (≤4) und Regie/Erfinder je Titel – ein Extra-Request mit append_to_response,
+// Ergebnisse werden gecacht, damit auf mehreren Plattformen gelistete Titel nur einmal abgefragt werden.
+const enrichCache = new Map();
+async function enrich(kind, id) {
+  const ck = kind + ':' + id;
+  if (enrichCache.has(ck)) return enrichCache.get(ck);
+  const result = { cast: [], dir: '' };
+  try {
+    const d = await tmdb(`/${kind}/${id}`, { language: LANG, append_to_response: 'credits' });
+    const cr = d.credits || {};
+    result.cast = (cr.cast || []).slice(0, 4).map(p => p.name).filter(Boolean);
+    if (kind === 'movie') {
+      const dd = (cr.crew || []).find(p => p.job === 'Director');
+      result.dir = dd ? dd.name : '';
+    } else {
+      result.dir = (d.created_by || []).map(p => p.name).filter(Boolean).join(', ');
+    }
+  } catch (e) { /* Titel ohne Credits: Felder bleiben leer */ }
+  enrichCache.set(ck, result);
+  return result;
+}
+
 async function genreMap(kind) {              // kind: 'movie' | 'tv'
   const d = await tmdb(`/genre/${kind}/list`, { language: LANG });
   const m = {}; (d.genres || []).forEach(g => m[g.id] = g.name); return m;
@@ -88,8 +110,8 @@ async function discover(kind, providerId, gmap) {
         t: kind === 'movie' ? it.title : it.name,
         y: year,
         g: (it.genre_ids || []).map(id => gmap[id]).filter(Boolean),
-        d: '',                                    // Regie: hier nicht abgefragt (Rate-Limit)
-        c: [],                                    // Besetzung: dito
+        d: '',                                    // Regie/Erfinder – unten via enrich() nachgeladen
+        c: [],                                    // Besetzung – unten via enrich() nachgeladen
         p: it.poster_path || null,
         r: it.vote_average != null ? Math.round(it.vote_average * 10) / 10 : null,
       });
@@ -98,6 +120,12 @@ async function discover(kind, providerId, gmap) {
     if (page >= (d.total_pages || 1)) break;
     page++;
     await sleep(250);
+  }
+  for (const item of out) {
+    const ex = await enrich(kind, item.id);
+    item.c = ex.cast;
+    item.d = ex.dir;
+    await sleep(120);            // sanftes Tempo gegen das Rate-Limit
   }
   return out;
 }
