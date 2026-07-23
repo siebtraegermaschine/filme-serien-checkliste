@@ -1,1 +1,48 @@
+name: Streaming-Daten aktualisieren
 
+on:
+  schedule:
+    # Jeden Donnerstag um 06:00 UTC (Sommerzeit 08:00, Winterzeit 07:00 DE)
+    - cron: "0 6 * * 4"
+  workflow_dispatch:            # erlaubt manuelles Auslösen im Actions-Tab
+
+permissions:
+  contents: write               # nötig, damit die Action streaming.json committen darf
+
+concurrency:
+  group: streaming-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: streaming.json erzeugen
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          # Optional konfigurierbar:
+          # STREAM_COUNT: "60"
+          # STREAM_MIN_VOTES: "300"
+          # STREAM_MIN_YEAR: "1980"
+        run: node stream-fetch.mjs
+
+      - name: Änderungen committen (falls vorhanden)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git status --porcelain streaming.json | grep -q .; then
+            git add streaming.json
+            git commit -m "chore: Streaming-Daten aktualisiert ($(date -u +%Y-%m-%d))"
+            git push
+            echo "streaming.json aktualisiert und gepusht."
+          else
+            echo "Keine Änderungen an streaming.json."
+          fi
