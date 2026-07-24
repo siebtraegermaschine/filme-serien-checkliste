@@ -258,12 +258,19 @@
   .disc-sub { display:flex; gap:8px; justify-content:center; margin:4px 0 16px; }
   .disc-hint { text-align:center; color:var(--text-dim); font-size:13px; margin:0 auto 14px; max-width:620px; line-height:1.5; }
   .stream-hint { text-align:center; color:var(--text-dim); font-size:13px; margin:0 auto; max-width:620px; line-height:1.5; }
-  li.disc { display:flex; gap:12px; align-items:center; background:var(--card); border:1px solid var(--border);
+  li.disc { display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--border);
     border-radius:12px; padding:10px 14px; margin-bottom:10px; }
   li.disc .drank { color:var(--text-dim); font-weight:700; width:26px; text-align:center; flex:none; }
   li.disc img.dposter { width:52px; height:78px; object-fit:cover; border-radius:6px; background:#222; flex:none; }
   li.disc .dinfo { flex:1; min-width:0; }
   li.disc .dtitle { font-weight:600; }
+  /* Streaming-Titel: gleiche Cover-Groesse, Textgroessen und Aktionsleiste wie bei Filme/Serien */
+  li.disc.stream-item img.dposter { width:68px; height:102px; }
+  @media (max-width: 640px) { li.disc.stream-item img.dposter { width:60px; height:90px; } }
+  li.disc.stream-item .dtitle { font-size:15px; line-height:1.35; }
+  li.disc.stream-item .dmeta { font-size:12px; }
+  li.disc.stream-item .dtitle-row { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+  li.disc.stream-item .dtitle-row .addbtn { padding:6px 12px; font-size:12px; flex:none; }
   li.disc .dmeta { color:var(--text-dim); font-size:13px; margin-top:2px; }
   .score { display:inline-block; margin-left:8px; padding:1px 8px; border-radius:20px; font-size:12px;
     font-weight:700; background:var(--accent-soft); color:var(--accent); vertical-align:middle; }
@@ -1793,11 +1800,12 @@ setTab('watch');
     '.disc-sub button{flex:1;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 8px;color:var(--text-dim);font-size:15px;font-weight:600;cursor:pointer;transition:all .15s;}'+
     '.disc-sub button:hover{border-color:var(--accent);color:var(--accent);}'+
     '.disc-sub button.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}'+
-    '.stream-filter{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:620px;margin:0 auto 18px;}'+
+    '.stream-filter{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start;max-width:620px;margin:0 auto 18px;}'+
     '.stream-filter button{background:var(--card);border:1px solid var(--border);border-radius:999px;padding:7px 16px;color:var(--text-dim);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}'+
     '.stream-filter button:hover{border-color:var(--accent);color:var(--accent);}'+
     '.stream-filter button.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}'+
-    'ol.list.show-details li.disc{align-items:flex-start;}'+
+    '.stream-provider-filter{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;}'+
+    '.stream-provider-filter button{flex:none;}'+
     'li.disc .details{width:100%;margin-top:9px;padding-top:9px;}'+
     '</style>');
 
@@ -1835,7 +1843,7 @@ setTab('watch');
     return idx;
   }
   function streamLi(c, key){
-    var li=document.createElement('li'); li.className='disc';
+    var li=document.createElement('li'); li.className='disc stream-item';
     li.dataset.kind = key; li.dataset.title = c.t;
     var src = kindSrc(key);
     var poster = c.p ? '<img class="dposter" loading="lazy" src="'+POSTER+c.p+'" alt="">' : '<div class="dposter"></div>';
@@ -1843,6 +1851,7 @@ setTab('watch');
     var existingIdx = state[src].data.findIndex(function(it){ return it[0]===c.t; });
     var _seen = existingIdx!==-1 && !!state[src].checked[existingIdx];
     var _watched = isWatched(src, c.t);
+    // Gleiche Aktionsleiste wie bei Filme/Serien: unten, Watchlist links, Gesehen rechts, nebeneinander.
     var actionsHtml =
       '<div class="det-actions">' +
         '<div class="det-left">' +
@@ -1850,11 +1859,12 @@ setTab('watch');
         '</div>' +
         '<button type="button" class="seen-btn'+(_seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> gesehen'+'</button>' +
       '</div>';
+    var addBtnHtml = '<button class="addbtn'+(already?' done':'')+'"'+(already?' disabled':'')+'>'+(already?'✓ hinzugefügt':'+ Liste')+'</button>';
     li.innerHTML =
       poster +
-      '<div class="dinfo"><div class="dtitle">'+esc(c.t)+'</div>'+
-        '<div class="dmeta">'+esc(candMeta(c))+'</div>'+ candDetailsHtml(c, key) + actionsHtml + '</div>'+
-      '<button class="addbtn'+(already?' done':'')+'"'+(already?' disabled':'')+'>'+(already?'✓ hinzugefügt':'+ Liste')+'</button>';
+      '<div class="dinfo">' +
+        '<div class="dtitle-row"><div class="dtitle">'+esc(c.t)+'</div>' + addBtnHtml + '</div>'+
+        '<div class="dmeta">'+esc(candMeta(c))+'</div>'+ candDetailsHtml(c, key) + actionsHtml + '</div>';
     var btn=li.querySelector('.addbtn');
     if(!already) btn.addEventListener('click', function(e){
       var arr=key==='f'?ADDED.f:ADDED.s;
@@ -1892,6 +1902,9 @@ setTab('watch');
     });
     return li;
   }
+  function providerLabel(name){
+    return (name === 'Amazon Prime Video') ? 'Amazon Prime' : name;
+  }
   async function renderStreaming(){
     list.innerHTML=''; document.getElementById('progName').textContent='Streaming';
     var hint=document.getElementById('streamHint');
@@ -1914,7 +1927,7 @@ setTab('watch');
     typeBar.appendChild(typeBtn('f','Nur Filme'));
     typeBar.appendChild(typeBtn('s','Nur Serien'));
     list.appendChild(typeBar);
-    var fbar=document.createElement('div'); fbar.className='stream-filter';
+    var fbar=document.createElement('div'); fbar.className='stream-filter stream-provider-filter';
     function fbtn(fid,label){
       var b=document.createElement('button'); b.textContent=label;
       var isActive = fid==='all' ? streamProviderFilter.size===0 : streamProviderFilter.has(fid);
@@ -1927,7 +1940,7 @@ setTab('watch');
       return b;
     }
     fbar.appendChild(fbtn('all','Alle'));
-    provs.forEach(function(pv){ fbar.appendChild(fbtn(pv.id, pv.name||pv.id)); });
+    provs.forEach(function(pv){ fbar.appendChild(fbtn(pv.id, providerLabel(pv.name)||pv.id)); });
     list.appendChild(fbar);
     var shown = streamProviderFilter.size===0 ? provs.slice() : provs.filter(function(pv){ return streamProviderFilter.has(pv.id); });
     var sortKey = effectiveSort('stream');
@@ -1948,7 +1961,7 @@ setTab('watch');
       var hasAny = typePairs.some(function(pair){ return (pv[pair[1]]||[]).length; });
       if(!hasAny) return;
       anyShown=true;
-      var head=document.createElement('div'); head.className='stream-head'; head.textContent=pv.name||pv.id;
+      var head=document.createElement('div'); head.className='stream-head'; head.textContent=providerLabel(pv.name)||pv.id;
       list.appendChild(head);
       typePairs.forEach(function(pair){
         var label=pair[0], key=pair[1];
