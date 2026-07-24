@@ -1829,13 +1829,13 @@ setTab('watch');
     '.disc-sub button{flex:1;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 8px;color:var(--text-dim);font-size:15px;font-weight:600;cursor:pointer;transition:all .15s;}'+
     '.disc-sub button:hover{border-color:var(--accent);color:var(--accent);}'+
     '.disc-sub button.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}'+
-    '.stream-filter{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start;max-width:620px;margin:0 auto 18px;}'+
-    '.stream-filter button{background:var(--card);border:1px solid var(--border);border-radius:999px;padding:7px 16px;color:var(--text-dim);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}'+
+    '.stream-filter{display:flex;flex-wrap:nowrap;gap:10px;max-width:700px;margin:0 auto 18px;}'+
+    '.stream-filter button{flex:1;width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text-dim);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;}'+
     '.stream-filter button:hover{border-color:var(--accent);color:var(--accent);}'+
     '.stream-filter button.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}'+
     'li.disc .details{width:100%;margin-top:9px;padding-top:9px;}'+
-    '.stream-provider-wrap{position:relative;display:inline-flex;}'+
-    '.stream-provider-panel{position:absolute;top:calc(100% + 6px);left:0;z-index:60;background:var(--card);'+
+    '.stream-provider-wrap{position:relative;display:flex;flex:1;min-width:0;}'+
+    '.stream-provider-panel{position:absolute;top:calc(100% + 6px);left:0;right:auto;z-index:60;background:var(--card);'+
     'border:1px solid var(--border);border-radius:10px;padding:10px 12px;min-width:200px;'+
     'box-shadow:0 10px 30px rgba(0,0,0,.5);display:none;flex-direction:column;gap:8px;}'+
     '.stream-provider-panel label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);cursor:pointer;white-space:nowrap;}'+
@@ -1843,7 +1843,7 @@ setTab('watch');
     '</style>');
 
   var STREAM=null, streamLoaded=false, streamErr=null;
-  var streamTypeFilter='all'; // 'all' | 'f' | 's'
+  var streamTypeFilter={f:true, s:true}; // Filme/Serien unabhaengig voneinander an/abwaehlbar, standardmaessig beide aktiv
   var streamProviderExcluded=new Set(); // Anbieter-IDs, die per Checkliste abgewaehlt wurden
   var providerPanelOpen=false;
   var currentProvPanel=null, currentProvBtn=null;
@@ -1897,7 +1897,6 @@ setTab('watch');
     li.dataset.providerBlob = PROVIDER_ALIASES[providerId] || providerId || '';
     var src = kindSrc(key);
     var poster = c.p ? '<img class="dposter" loading="lazy" src="'+POSTER+c.p+'" alt="">' : '<div class="dposter"></div>';
-    var already = (key==='f'?ADDED.f:ADDED.s).some(function(x){return x.id===c.id;});
     var existingIdx = state[src].data.findIndex(function(it){ return it[0]===c.t; });
     var _seen = existingIdx!==-1 && !!state[src].checked[existingIdx];
     var _watched = isWatched(src, c.t);
@@ -1909,18 +1908,11 @@ setTab('watch');
         '</div>' +
         '<button type="button" class="seen-btn'+(_seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> gesehen'+'</button>' +
       '</div>';
-    var addBtnHtml = '<button class="addbtn'+(already?' done':'')+'"'+(already?' disabled':'')+'>'+(already?'✓ hinzugefügt':'+ Liste')+'</button>';
     li.innerHTML =
       poster +
       '<div class="dinfo">' +
-        '<div class="dtitle-row"><div class="dtitle">'+esc(c.t)+'</div>' + addBtnHtml + '</div>'+
+        '<div class="dtitle-row"><div class="dtitle">'+esc(c.t)+'</div></div>'+
         '<div class="dmeta">'+esc(candMeta(c))+'</div>'+ candDetailsHtml(c, key) + actionsHtml + '</div>';
-    var btn=li.querySelector('.addbtn');
-    if(!already) btn.addEventListener('click', function(e){
-      ensureCandInList(key, c); // prüft per Titel, ob der Film/die Serie schon existiert -> keine Duplikate
-      e.target.textContent='✓ hinzugefügt'; e.target.classList.add('done'); e.target.disabled=true;
-      if(activeTab==='stream') applyFilter();
-    });
     var wlBtn=li.querySelector('.wl-btn');
     wlBtn.addEventListener('click', function(e){
       e.stopPropagation();
@@ -1931,8 +1923,6 @@ setTab('watch');
       if (on) { ensureCandInList(key, c); markStreamOrigin(src, c.t); }
       wlBtn.classList.toggle('on', on);
       wlBtn.textContent=(on?'★':'☆')+' Watchlist';
-      var addBtnEl=li.querySelector('.addbtn');
-      if(on && addBtnEl && !addBtnEl.disabled){ addBtnEl.textContent='✓ hinzugefügt'; addBtnEl.classList.add('done'); addBtnEl.disabled=true; }
       if(activeTab==='stream') applyFilter();
       wlBtn.blur();
     });
@@ -1945,8 +1935,6 @@ setTab('watch');
       s.checked[idx]=!s.checked[idx];
       saveState();
       seenBtn.classList.toggle('on', s.checked[idx]);
-      var addBtnEl=li.querySelector('.addbtn');
-      if(addBtnEl && !addBtnEl.disabled){ addBtnEl.textContent='✓ hinzugefügt'; addBtnEl.classList.add('done'); addBtnEl.disabled=true; }
       if(activeTab==='stream') applyFilter();
       seenBtn.blur();
     });
@@ -1972,10 +1960,7 @@ setTab('watch');
     var provs=STREAM.providers||[];
     if(!provs.length){ var p=document.createElement('div'); p.className='disc-hint'; p.textContent='Noch keine Streaming-Daten vorhanden – der erste automatische Abruf erfolgt am Donnerstag.'; list.appendChild(p); return; }
     var typeBar=document.createElement('div'); typeBar.className='stream-filter';
-    function typeBtn(fid,label){ var b=document.createElement('button'); b.textContent=label; if(streamTypeFilter===fid)b.className='active'; b.onclick=function(){ streamTypeFilter=fid; renderStreaming(); }; return b; }
-    typeBar.appendChild(typeBtn('all','Alle'));
-    typeBar.appendChild(typeBtn('f','Nur Filme'));
-    typeBar.appendChild(typeBtn('s','Nur Serien'));
+    // Anbieter-Button samt Dropdown ganz links, Dropdown klappt nach rechts (ins Fenster) auf.
     var provWrap=document.createElement('div'); provWrap.className='stream-provider-wrap';
     var provBtn=document.createElement('button'); provBtn.type='button';
     provBtn.className = streamProviderExcluded.size ? 'active' : '';
@@ -2004,6 +1989,21 @@ setTab('watch');
     provWrap.appendChild(provBtn); provWrap.appendChild(provPanel);
     typeBar.appendChild(provWrap);
     currentProvPanel = provPanel; currentProvBtn = provBtn;
+    // Filme/Serien sind unabhaengig voneinander an-/abwaehlbar (beide standardmaessig aktiv);
+    // mindestens einer der beiden muss aktiv bleiben.
+    function typeToggleBtn(fid,label){
+      var b=document.createElement('button'); b.type='button'; b.textContent=label;
+      if(streamTypeFilter[fid]) b.className='active';
+      b.onclick=function(){
+        var other = fid==='f' ? 's' : 'f';
+        if(streamTypeFilter[fid] && !streamTypeFilter[other]) return; // letzten aktiven Filter nicht abwaehlbar machen
+        streamTypeFilter[fid] = !streamTypeFilter[fid];
+        renderStreaming();
+      };
+      return b;
+    }
+    typeBar.appendChild(typeToggleBtn('f','Filme'));
+    typeBar.appendChild(typeToggleBtn('s','Serien'));
     list.appendChild(typeBar);
     var shown = provs.filter(function(pv){ return !streamProviderExcluded.has(pv.id); });
     var sortKey = effectiveSort('stream');
@@ -2017,7 +2017,7 @@ setTab('watch');
       return withScore.map(function(x){ return x.c; });
     }
     var typePairs = [['🎬 Filme','f'],['📺 Serien','s']].filter(function(pair){
-      return streamTypeFilter==='all' || streamTypeFilter===pair[1];
+      return !!streamTypeFilter[pair[1]];
     });
     var anyShown=false;
     shown.forEach(function(pv){
