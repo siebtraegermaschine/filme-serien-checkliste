@@ -1801,7 +1801,9 @@ setTab('watch');
     'li.disc .details{width:100%;margin-top:9px;padding-top:9px;}'+
     '</style>');
 
-  var STREAM=null, streamLoaded=false, streamErr=null; var streamFilter='all';
+  var STREAM=null, streamLoaded=false, streamErr=null;
+  var streamTypeFilter='all'; // 'all' | 'f' | 's'
+  var streamProviderFilter=new Set(); // leer = alle Anbieter
   async function loadStream(){
     if(streamLoaded) return;
     try{
@@ -1819,21 +1821,74 @@ setTab('watch');
     }
     el.textContent = streamErr ? '' : ' (Stand: wird geladen …)';
   }
+  function kindSrc(key){ return key==='s' ? 'serien' : 'filme'; }
+  // Sorgt dafür, dass ein Streaming-Titel einen Eintrag in state.filme/state.serien hat
+  // (wie ein Klick auf "+ Liste") und gibt seinen Index zurück.
+  function ensureCandInList(key, c){
+    var src=kindSrc(key);
+    var idx=state[src].data.findIndex(function(it){ return it[0]===c.t; });
+    if(idx===-1){
+      var arr = key==='f' ? ADDED.f : ADDED.s;
+      if(!arr.some(function(x){return x.id===c.id;})){ arr.push(c); saveAdded(); rebuild(); }
+      idx=state[src].data.findIndex(function(it){ return it[0]===c.t; });
+    }
+    return idx;
+  }
   function streamLi(c, key){
     var li=document.createElement('li'); li.className='disc';
     li.dataset.kind = key; li.dataset.title = c.t;
+    var src = kindSrc(key);
     var poster = c.p ? '<img class="dposter" loading="lazy" src="'+POSTER+c.p+'" alt="">' : '<div class="dposter"></div>';
     var already = (key==='f'?ADDED.f:ADDED.s).some(function(x){return x.id===c.id;});
+    var existingIdx = state[src].data.findIndex(function(it){ return it[0]===c.t; });
+    var _seen = existingIdx!==-1 && !!state[src].checked[existingIdx];
+    var _watched = isWatched(src, c.t);
+    var actionsHtml =
+      '<div class="det-actions">' +
+        '<div class="det-left">' +
+          '<button type="button" class="wl-btn'+(_watched?' on':'')+'">'+(_watched?'★':'☆')+' Watchlist</button>' +
+        '</div>' +
+        '<button type="button" class="seen-btn'+(_seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> gesehen'+'</button>' +
+      '</div>';
     li.innerHTML =
       poster +
       '<div class="dinfo"><div class="dtitle">'+esc(c.t)+'</div>'+
-        '<div class="dmeta">'+esc(candMeta(c))+'</div>'+ candDetailsHtml(c, key) + '</div>'+
+        '<div class="dmeta">'+esc(candMeta(c))+'</div>'+ candDetailsHtml(c, key) + actionsHtml + '</div>'+
       '<button class="addbtn'+(already?' done':'')+'"'+(already?' disabled':'')+'>'+(already?'✓ hinzugefügt':'+ Liste')+'</button>';
     var btn=li.querySelector('.addbtn');
     if(!already) btn.addEventListener('click', function(e){
       var arr=key==='f'?ADDED.f:ADDED.s;
       if(!arr.some(function(x){return x.id===c.id;})){ arr.push(c); saveAdded(); rebuild(); }
       e.target.textContent='✓ hinzugefügt'; e.target.classList.add('done'); e.target.disabled=true;
+    });
+    var wlBtn=li.querySelector('.wl-btn');
+    wlBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      toggleWatched(src, c.t);
+      var on=isWatched(src, c.t);
+      // Auf die Watchlist gesetzte Titel müssen auch in state.filme/serien existieren,
+      // sonst tauchen sie im Watchlist-Tab (collectWatched) nicht auf.
+      if (on) ensureCandInList(key, c);
+      wlBtn.classList.toggle('on', on);
+      wlBtn.textContent=(on?'★':'☆')+' Watchlist';
+      var addBtnEl=li.querySelector('.addbtn');
+      if(on && addBtnEl && !addBtnEl.disabled){ addBtnEl.textContent='✓ hinzugefügt'; addBtnEl.classList.add('done'); addBtnEl.disabled=true; }
+      if(activeTab==='stream') applyFilter();
+      wlBtn.blur();
+    });
+    var seenBtn=li.querySelector('.seen-btn');
+    seenBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var idx=ensureCandInList(key, c);
+      if(idx===-1) return;
+      var s=state[src];
+      s.checked[idx]=!s.checked[idx];
+      saveState();
+      seenBtn.classList.toggle('on', s.checked[idx]);
+      var addBtnEl=li.querySelector('.addbtn');
+      if(addBtnEl && !addBtnEl.disabled){ addBtnEl.textContent='✓ hinzugefügt'; addBtnEl.classList.add('done'); addBtnEl.disabled=true; }
+      if(activeTab==='stream') applyFilter();
+      seenBtn.blur();
     });
     return li;
   }
@@ -1853,12 +1908,28 @@ setTab('watch');
     hint.textContent=parts.join(' ');
     var provs=STREAM.providers||[];
     if(!provs.length){ var p=document.createElement('div'); p.className='disc-hint'; p.textContent='Noch keine Streaming-Daten vorhanden – der erste automatische Abruf erfolgt am Donnerstag.'; list.appendChild(p); return; }
+    var typeBar=document.createElement('div'); typeBar.className='stream-filter';
+    function typeBtn(fid,label){ var b=document.createElement('button'); b.textContent=label; if(streamTypeFilter===fid)b.className='active'; b.onclick=function(){ streamTypeFilter=fid; renderStreaming(); }; return b; }
+    typeBar.appendChild(typeBtn('all','Alle'));
+    typeBar.appendChild(typeBtn('f','Nur Filme'));
+    typeBar.appendChild(typeBtn('s','Nur Serien'));
+    list.appendChild(typeBar);
     var fbar=document.createElement('div'); fbar.className='stream-filter';
-    function fbtn(fid,label){ var b=document.createElement('button'); b.textContent=label; if(streamFilter===fid)b.className='active'; b.onclick=function(){ streamFilter=fid; renderStreaming(); }; return b; }
+    function fbtn(fid,label){
+      var b=document.createElement('button'); b.textContent=label;
+      var isActive = fid==='all' ? streamProviderFilter.size===0 : streamProviderFilter.has(fid);
+      if(isActive) b.className='active';
+      b.onclick=function(){
+        if(fid==='all') streamProviderFilter.clear();
+        else { if(streamProviderFilter.has(fid)) streamProviderFilter.delete(fid); else streamProviderFilter.add(fid); }
+        renderStreaming();
+      };
+      return b;
+    }
     fbar.appendChild(fbtn('all','Alle'));
     provs.forEach(function(pv){ fbar.appendChild(fbtn(pv.id, pv.name||pv.id)); });
     list.appendChild(fbar);
-    var shown = streamFilter==='all' ? provs.slice() : provs.filter(function(pv){ return pv.id===streamFilter; });
+    var shown = streamProviderFilter.size===0 ? provs.slice() : provs.filter(function(pv){ return streamProviderFilter.has(pv.id); });
     var sortKey = effectiveSort('stream');
     var prof = sortKey==='taste' ? buildProfile() : null;
     function sortArr(arr, key){
@@ -1869,10 +1940,17 @@ setTab('watch');
       withScore.sort(function(a,b){ return b.sc - a.sc; });
       return withScore.map(function(x){ return x.c; });
     }
+    var typePairs = [['🎬 Filme','f'],['📺 Serien','s']].filter(function(pair){
+      return streamTypeFilter==='all' || streamTypeFilter===pair[1];
+    });
+    var anyShown=false;
     shown.forEach(function(pv){
+      var hasAny = typePairs.some(function(pair){ return (pv[pair[1]]||[]).length; });
+      if(!hasAny) return;
+      anyShown=true;
       var head=document.createElement('div'); head.className='stream-head'; head.textContent=pv.name||pv.id;
       list.appendChild(head);
-      [['🎬 Filme','f'],['📺 Serien','s']].forEach(function(pair){
+      typePairs.forEach(function(pair){
         var label=pair[0], key=pair[1];
         var arr=pv[key]||[]; if(!arr.length) return;
         var sh=document.createElement('div'); sh.className='stream-sub'; sh.textContent=label+' · '+arr.length;
@@ -1880,6 +1958,7 @@ setTab('watch');
         sortArr(arr, key).forEach(function(c){ list.appendChild(streamLi(c,key)); });
       });
     });
+    if(!anyShown){ var pe=document.createElement('div'); pe.className='disc-hint'; pe.textContent='Keine Titel für diese Filterkombination.'; list.appendChild(pe); }
     updateSortMenuActive();
     applyFilter();
   }
