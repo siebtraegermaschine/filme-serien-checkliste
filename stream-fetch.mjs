@@ -26,7 +26,7 @@ const MIN_YEAR = parseInt(process.env.STREAM_MIN_YEAR || '1980', 10);
 const WANT = [
   // fbid = feste TMDB-Provider-ID als Fallback, falls die Namens-Erkennung scheitert
   // (z. B. wurde "Apple TV+" bei JustWatch/TMDB in "Apple TV" umbenannt).
-  { id: 'amazon',  name: 'Amazon Prime Video', fbid: 9,   match: ['Amazon Prime Video'] },
+  { id: 'amazon',  name: 'Amazon Prime',       fbid: 9,   match: ['Amazon Prime Video'] },
   { id: 'netflix', name: 'Netflix',            fbid: 8,   match: ['Netflix'] },
   { id: 'disney',  name: 'Disney+',            fbid: 337, match: ['Disney Plus', 'Disney+'] },
   { id: 'apple',   name: 'Apple TV+',          fbid: 350, match: ['Apple TV Plus', 'Apple TV+', 'Apple TV'] },
