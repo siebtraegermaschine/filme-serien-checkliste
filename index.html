@@ -263,7 +263,8 @@
   li.disc .drank { color:var(--text-dim); font-weight:700; width:26px; text-align:center; flex:none; }
   li.disc img.dposter { width:52px; height:78px; object-fit:cover; border-radius:6px; background:#222; flex:none; }
   li.disc .dinfo { flex:1; min-width:0; }
-  li.disc .dtitle { font-weight:600; }
+  li.disc .dtitle { font-weight:600; display:flex; align-items:center; gap:6px; }
+  li.disc .dtitle .score { flex:none; margin-left:auto; }
   /* Streaming-Titel: gleiche Cover-Groesse, Textgroessen und Aktionsleiste wie bei Filme/Serien */
   li.disc.stream-item img.dposter { width:68px; height:102px; }
   @media (max-width: 640px) { li.disc.stream-item img.dposter { width:60px; height:90px; } }
@@ -366,7 +367,7 @@
   /* Titel einzeilig mit … kuerzen; Taste-Score (auch zweistellig) bleibt sichtbar */
   li.item .title { display: flex; align-items: center; gap: 6px; min-width: 0; }
   li.item .title .ttext { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-  li.item .title .score { flex: none; margin-left: 0; }
+  li.item .title .score { flex: none; margin-left: auto; }
   li.item .title .ubadge { flex: none; }
   /* Zweite Zeile: IMDb-Wert, Genre, Jahr; Originaltitel/Rest bei Platzmangel in eigene Zeile darunter */
   li.item .meta { display: flex; flex-wrap: wrap; column-gap: 6px; row-gap: 2px; }
@@ -409,8 +410,8 @@
     </div>
     <div class="filter-group">
       <button id="fAll" class="active">Alle</button>
+      <button id="fOpen">Offen</button>
       <button id="fDone">Gesehen</button>
-      <button id="fWatch">☆ Watchlist</button>
     </div>
     <button id="fDetails">🔎 Details</button>
   </div>
@@ -1222,7 +1223,7 @@ function render() {
     const tagsHtml = (d.h || []).map(tagChip).join('');
     const posterThumb = d.poster ? '<img class="dposter" src="' + d.poster + '" alt="" loading="lazy">' : '<div class="dposter"></div>';
     const rowScore = scoreItem(item, d, prof);
-    const scoreBadge = '<span class="score' + (rowScore >= 60 ? ' hi' : '') + '" title="Taste Score">' + rowScore + '</span>';
+    const scoreBadge = '<span class="score' + (rowScore >= 60 ? ' hi' : '') + '" title="Taste Score" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">' + rowScore + '</span>';
     var creditRows = '';
     if (d.c && d.c.length) creditRows += '<div class="credits"><b>Besetzung:</b> ' + nameChips(d.c) + '</div>';
     if (d.d) creditRows += '<div class="credits"><b>' + dirLabel + ':</b> ' + nameChips([d.d]) + '</div>';
@@ -1436,26 +1437,26 @@ function setTab(t) {
   if (stream) {
     mode = 'all';
     btns.all.classList.add('active');
+    btns.open.classList.remove('active');
     btns.done.classList.remove('active');
-    btns.watch.classList.remove('active');
     renderStreaming();
   }
   else if (watch) { renderWatch(); }
   else { renderList(); }
 }
 
-const btns = { all: document.getElementById('fAll'), done: document.getElementById('fDone'), watch: document.getElementById('fWatch') };
+const btns = { all: document.getElementById('fAll'), open: document.getElementById('fOpen'), done: document.getElementById('fDone') };
 btns.all.onclick = () => setMode('all');
+btns.open.onclick = () => setMode('open');
 btns.done.onclick = () => setMode('done');
-btns.watch.onclick = () => setMode('watchlist');
 function setMode(m) {
   mode = m;
   // Alle/Offen/Gesehen und Discovery schliessen sich gegenseitig aus.
   const wasDisc = discOn;
   if (discOn && discBtn) { discOn = false; discBtn.classList.remove('active'); }
   btns.all.classList.toggle('active', m === 'all');
+  btns.open.classList.toggle('active', m === 'open');
   btns.done.classList.toggle('active', m === 'done');
-  btns.watch.classList.toggle('active', m === 'watchlist');
   if (wasDisc) renderList(); else applyFilter();
 }
 
@@ -1474,8 +1475,8 @@ if (discBtn) discBtn.onclick = () => {
   // Discovery ist ein eigener Bereich: Alle/Offen/Gesehen dabei abwaehlen;
   // beim Ausschalten den zuletzt aktiven Filter wieder markieren.
   btns.all.classList.toggle('active', !discOn && mode === 'all');
+  btns.open.classList.toggle('active', !discOn && mode === 'open');
   btns.done.classList.toggle('active', !discOn && mode === 'done');
-  btns.watch.classList.toggle('active', !discOn && mode === 'watchlist');
   renderList();
 };
 
@@ -1545,7 +1546,7 @@ function applyFilter() {
     li.style.display = (matchQ && matchM) ? 'flex' : 'none';
   });
   list.querySelectorAll('li.disc').forEach(li => {
-    const text = li.textContent.toLowerCase();
+    const text = li.textContent.toLowerCase() + ' ' + (li.dataset.providerBlob || '').toLowerCase();
     const matchQ = !q || text.includes(q);
     let matchM = true;
     if (activeTab === 'stream' && li.dataset.kind && li.dataset.title) {
@@ -1554,7 +1555,21 @@ function applyFilter() {
     }
     li.style.display = (matchQ && matchM) ? 'flex' : 'none';
   });
+  if (activeTab === 'stream') applyStreamHeadVisibility();
   updateProgress();
+}
+function applyStreamHeadVisibility(){
+  const children = Array.prototype.slice.call(list.children);
+  let currentHead = null, headHasVisible = false;
+  let currentSub = null, subHasVisible = false;
+  function flushSub(){ if (currentSub) currentSub.style.display = subHasVisible ? '' : 'none'; }
+  function flushHead(){ flushSub(); currentSub = null; subHasVisible = false; if (currentHead) currentHead.style.display = headHasVisible ? '' : 'none'; }
+  children.forEach(el => {
+    if (el.classList.contains('stream-head')) { flushHead(); currentHead = el; headHasVisible = false; }
+    else if (el.classList.contains('stream-sub')) { flushSub(); currentSub = el; subHasVisible = false; }
+    else if (el.classList.contains('disc') && el.style.display !== 'none') { headHasVisible = true; subHasVisible = true; }
+  });
+  flushHead();
 }
 function isSeenByTitle(src, title){
   const st = state[src];
@@ -1644,7 +1659,7 @@ function renderDiscovery(){
     li.innerHTML =
       '<span class="drank">'+(idx+1)+'</span>'+ poster +
       '<div class="dinfo"><div class="dtitle">'+esc(c.t)+
-        '<span class="score'+(row.score>=60?' hi':'')+'">'+row.score+'</span></div>'+
+        '<span class="score'+(row.score>=60?' hi':'')+'" title="Taste Score" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">'+row.score+'</span></div>'+
         '<div class="dmeta">'+esc(candMeta(c))+(sub2.length?(' · '+sub2.join(' · ')):'')+'</div>'+ candDetailsHtml(c, discType) + '</div>'+
       '<button class="addbtn" data-id="'+c.id+'">+ Liste</button>';
     li.querySelector('.addbtn').addEventListener('click', (e)=>{
@@ -1804,14 +1819,19 @@ setTab('watch');
     '.stream-filter button{background:var(--card);border:1px solid var(--border);border-radius:999px;padding:7px 16px;color:var(--text-dim);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}'+
     '.stream-filter button:hover{border-color:var(--accent);color:var(--accent);}'+
     '.stream-filter button.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}'+
-    '.stream-provider-filter{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;}'+
-    '.stream-provider-filter button{flex:none;}'+
     'li.disc .details{width:100%;margin-top:9px;padding-top:9px;}'+
     '</style>');
 
   var STREAM=null, streamLoaded=false, streamErr=null;
   var streamTypeFilter='all'; // 'all' | 'f' | 's'
-  var streamProviderFilter=new Set(); // leer = alle Anbieter
+  // Anbieter werden nicht mehr über Buttons gefiltert, sondern über das Suchfeld
+  // (siehe PROVIDER_ALIASES weiter unten und die .disc-Behandlung in applyFilter).
+  var PROVIDER_ALIASES = {
+    amazon:  'amazon prime video amazon prime prime video',
+    netflix: 'netflix',
+    disney:  'disney plus disney+',
+    apple:   'apple tv plus apple tv+ apple tv'
+  };
   async function loadStream(){
     if(streamLoaded) return;
     try{
@@ -1842,9 +1862,10 @@ setTab('watch');
     }
     return idx;
   }
-  function streamLi(c, key){
+  function streamLi(c, key, providerId){
     var li=document.createElement('li'); li.className='disc stream-item';
     li.dataset.kind = key; li.dataset.title = c.t;
+    li.dataset.providerBlob = PROVIDER_ALIASES[providerId] || providerId || '';
     var src = kindSrc(key);
     var poster = c.p ? '<img class="dposter" loading="lazy" src="'+POSTER+c.p+'" alt="">' : '<div class="dposter"></div>';
     var already = (key==='f'?ADDED.f:ADDED.s).some(function(x){return x.id===c.id;});
@@ -1867,9 +1888,9 @@ setTab('watch');
         '<div class="dmeta">'+esc(candMeta(c))+'</div>'+ candDetailsHtml(c, key) + actionsHtml + '</div>';
     var btn=li.querySelector('.addbtn');
     if(!already) btn.addEventListener('click', function(e){
-      var arr=key==='f'?ADDED.f:ADDED.s;
-      if(!arr.some(function(x){return x.id===c.id;})){ arr.push(c); saveAdded(); rebuild(); }
+      ensureCandInList(key, c); // prüft per Titel, ob der Film/die Serie schon existiert -> keine Duplikate
       e.target.textContent='✓ hinzugefügt'; e.target.classList.add('done'); e.target.disabled=true;
+      if(activeTab==='stream') applyFilter();
     });
     var wlBtn=li.querySelector('.wl-btn');
     wlBtn.addEventListener('click', function(e){
@@ -1927,22 +1948,8 @@ setTab('watch');
     typeBar.appendChild(typeBtn('f','Nur Filme'));
     typeBar.appendChild(typeBtn('s','Nur Serien'));
     list.appendChild(typeBar);
-    var fbar=document.createElement('div'); fbar.className='stream-filter stream-provider-filter';
-    function fbtn(fid,label){
-      var b=document.createElement('button'); b.textContent=label;
-      var isActive = fid==='all' ? streamProviderFilter.size===0 : streamProviderFilter.has(fid);
-      if(isActive) b.className='active';
-      b.onclick=function(){
-        if(fid==='all') streamProviderFilter.clear();
-        else { if(streamProviderFilter.has(fid)) streamProviderFilter.delete(fid); else streamProviderFilter.add(fid); }
-        renderStreaming();
-      };
-      return b;
-    }
-    fbar.appendChild(fbtn('all','Alle'));
-    provs.forEach(function(pv){ fbar.appendChild(fbtn(pv.id, providerLabel(pv.name)||pv.id)); });
-    list.appendChild(fbar);
-    var shown = streamProviderFilter.size===0 ? provs.slice() : provs.filter(function(pv){ return streamProviderFilter.has(pv.id); });
+    // Anbieter werden nicht mehr per Button gefiltert, sondern per Suchfeld (Name/Alias).
+    var shown = provs.slice();
     var sortKey = effectiveSort('stream');
     var prof = sortKey==='taste' ? buildProfile() : null;
     function sortArr(arr, key){
@@ -1968,7 +1975,7 @@ setTab('watch');
         var arr=pv[key]||[]; if(!arr.length) return;
         var sh=document.createElement('div'); sh.className='stream-sub'; sh.textContent=label+' · '+arr.length;
         list.appendChild(sh);
-        sortArr(arr, key).forEach(function(c){ list.appendChild(streamLi(c,key)); });
+        sortArr(arr, key).forEach(function(c){ list.appendChild(streamLi(c,key,pv.id)); });
       });
     });
     if(!anyShown){ var pe=document.createElement('div'); pe.className='disc-hint'; pe.textContent='Keine Titel für diese Filterkombination.'; list.appendChild(pe); }
@@ -1996,7 +2003,7 @@ setTab('watch');
       li.innerHTML =
         '<span class="drank">'+(idx+1)+'</span>'+ poster +
         '<div class="dinfo"><div class="dtitle">'+esc(c.t)+
-          '<span class="score'+(row.score>=60?' hi':'')+'" title="Taste Score">'+row.score+'</span></div>'+
+          '<span class="score'+(row.score>=60?' hi':'')+'" title="Taste Score" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">'+row.score+'</span></div>'+
           '<div class="dmeta">'+esc(candMeta(c))+'</div>'+ candDetailsHtml(c, discType) + '</div>'+
         '<button class="addbtn" data-id="'+c.id+'">+ Liste</button>';
       li.querySelector('.addbtn').addEventListener('click', function(e){
@@ -2037,7 +2044,7 @@ setTab('watch');
   document.body.appendChild(bk);
   var titleEl=bk.querySelector('.info-title'), bodyEl=bk.querySelector('.info-body');
   document.addEventListener('click', function(e){
-    var icon = e.target.closest && e.target.closest('.info-i, .info-word');
+    var icon = e.target.closest && e.target.closest('.info-i, .info-word, .score[data-ts]');
     if(icon){
       e.preventDefault(); e.stopPropagation();
       var key = icon.hasAttribute('data-imdb') ? 'imdb' : (icon.hasAttribute('data-discovery') ? 'discovery' : 'ts');
