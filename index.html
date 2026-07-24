@@ -1109,7 +1109,20 @@ function saveWatch(){ try{ localStorage.setItem(WATCH_KEY, JSON.stringify(WATCH)
 let WATCH = loadWatch();
 function watchKeyFor(src){ return src==='filme'?'f':(src==='serien'?'s':'stream'); }
 function isWatched(src, title){ return WATCH[watchKeyFor(src)].indexOf(title) !== -1; }
-function toggleWatched(src, title){ const k=watchKeyFor(src); const arr=WATCH[k]; const i=arr.indexOf(title); if(i===-1) arr.push(title); else arr.splice(i,1); saveWatch(); }
+// Merkt sich zusaetzlich, welche Watchlist-Titel ueber die Streaming-Seite hinzugefuegt wurden
+// (kein eigener Watchlist-"Topf", nur ein Herkunfts-Tag -> keine Duplikate).
+const WATCH_ORIGIN_KEY='top200-watchlist-origin-v1';
+function loadWatchOrigin(){ try{ const o=JSON.parse(localStorage.getItem(WATCH_ORIGIN_KEY))||{}; return {f:o.f||[], s:o.s||[]}; }catch(e){ return {f:[],s:[]}; } }
+function saveWatchOrigin(){ try{ localStorage.setItem(WATCH_ORIGIN_KEY, JSON.stringify(WATCH_ORIGIN)); }catch(e){} }
+let WATCH_ORIGIN = loadWatchOrigin();
+function markStreamOrigin(src, title){ const k=watchKeyFor(src); if(k==='stream') return; const arr=WATCH_ORIGIN[k]; if(arr.indexOf(title)===-1){ arr.push(title); saveWatchOrigin(); } }
+function clearStreamOrigin(src, title){ const k=watchKeyFor(src); if(k==='stream') return; const arr=WATCH_ORIGIN[k]; const i=arr.indexOf(title); if(i!==-1){ arr.splice(i,1); saveWatchOrigin(); } }
+function isStreamOrigin(src, title){ const k=watchKeyFor(src); if(k==='stream') return false; return WATCH_ORIGIN[k].indexOf(title)!==-1; }
+function toggleWatched(src, title){
+  const k=watchKeyFor(src); const arr=WATCH[k]; const i=arr.indexOf(title);
+  if(i===-1) arr.push(title); else { arr.splice(i,1); clearStreamOrigin(src, title); }
+  saveWatch();
+}
 function fmtR(r){ return r!=null ? String(r).replace('.',',') : ''; }
 function candMeta(c){ return '⭐ '+(fmtR(c.r)||'?')+' · '+((c.g&&c.g[0])||'—')+(c.y?(' · '+c.y):''); }
 function candItem(c){ return [c.t, candMeta(c)]; }
@@ -1322,7 +1335,7 @@ function collectWatched(){
       const i = s.data.findIndex((it) => it[0] === title);
       if (i >= 0) {
         const d = s.det[i] || { p:'', h:[], c:[], d:'', poster:null };
-        out.push({ src: src, i: i, item: s.data[i], d: d, score: scoreItem(s.data[i], d, profs[src]) });
+        out.push({ src: src, i: i, item: s.data[i], d: d, score: scoreItem(s.data[i], d, profs[src]), viaStream: isStreamOrigin(src, title) });
       }
     });
   });
@@ -1345,6 +1358,7 @@ function renderWatch(){
     li.className = 'item' + (state[row.src].checked[row.i] ? ' done' : '');
     li.dataset.idx = row.i;
     li.dataset.src = row.src;
+    li.dataset.viaStream = row.viaStream ? '1' : '0';
     li.innerHTML = watchRowInner(row.item, row.d, row.i, row.src, row.score);
     const detEl = li.querySelector('.details');
     if (detEl) detEl.addEventListener('click', (e) => e.stopPropagation());
@@ -1362,7 +1376,7 @@ function applyWatchFilter(){
     const matchM = watchMode === 'all'
       || (watchMode === 'f' && src === 'filme')
       || (watchMode === 's' && src === 'serien')
-      || (watchMode === 'stream' && src === 'stream');
+      || (watchMode === 'stream' && li.dataset.viaStream === '1');
     li.style.display = (matchQ && matchM) ? 'flex' : 'none';
   });
 }
@@ -1820,12 +1834,27 @@ setTab('watch');
     '.stream-filter button:hover{border-color:var(--accent);color:var(--accent);}'+
     '.stream-filter button.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}'+
     'li.disc .details{width:100%;margin-top:9px;padding-top:9px;}'+
+    '.stream-provider-wrap{position:relative;display:inline-flex;}'+
+    '.stream-provider-panel{position:absolute;top:calc(100% + 6px);left:0;z-index:60;background:var(--card);'+
+    'border:1px solid var(--border);border-radius:10px;padding:10px 12px;min-width:200px;'+
+    'box-shadow:0 10px 30px rgba(0,0,0,.5);display:none;flex-direction:column;gap:8px;}'+
+    '.stream-provider-panel label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);cursor:pointer;white-space:nowrap;}'+
+    '.stream-provider-panel input{accent-color:var(--accent);width:16px;height:16px;cursor:pointer;}'+
     '</style>');
 
   var STREAM=null, streamLoaded=false, streamErr=null;
   var streamTypeFilter='all'; // 'all' | 'f' | 's'
-  // Anbieter werden nicht mehr über Buttons gefiltert, sondern über das Suchfeld
-  // (siehe PROVIDER_ALIASES weiter unten und die .disc-Behandlung in applyFilter).
+  var streamProviderExcluded=new Set(); // Anbieter-IDs, die per Checkliste abgewaehlt wurden
+  var providerPanelOpen=false;
+  var currentProvPanel=null, currentProvBtn=null;
+  document.addEventListener('click', function(e){
+    if (providerPanelOpen && currentProvPanel && !currentProvPanel.contains(e.target) && e.target!==currentProvBtn){
+      providerPanelOpen=false;
+      currentProvPanel.style.display='none';
+      if(currentProvBtn) currentProvBtn.classList.remove('active');
+    }
+  });
+  // Suchfeld erkennt Anbieter-Namen weiterhin ueber Aliase (siehe .disc-Behandlung in applyFilter).
   var PROVIDER_ALIASES = {
     amazon:  'amazon prime video amazon prime prime video',
     netflix: 'netflix',
@@ -1899,7 +1928,7 @@ setTab('watch');
       var on=isWatched(src, c.t);
       // Auf die Watchlist gesetzte Titel müssen auch in state.filme/serien existieren,
       // sonst tauchen sie im Watchlist-Tab (collectWatched) nicht auf.
-      if (on) ensureCandInList(key, c);
+      if (on) { ensureCandInList(key, c); markStreamOrigin(src, c.t); }
       wlBtn.classList.toggle('on', on);
       wlBtn.textContent=(on?'★':'☆')+' Watchlist';
       var addBtnEl=li.querySelector('.addbtn');
@@ -1947,9 +1976,36 @@ setTab('watch');
     typeBar.appendChild(typeBtn('all','Alle'));
     typeBar.appendChild(typeBtn('f','Nur Filme'));
     typeBar.appendChild(typeBtn('s','Nur Serien'));
+    var provWrap=document.createElement('div'); provWrap.className='stream-provider-wrap';
+    var provBtn=document.createElement('button'); provBtn.type='button';
+    provBtn.className = streamProviderExcluded.size ? 'active' : '';
+    provBtn.textContent='Anbieter';
+    var provPanel=document.createElement('div'); provPanel.className='stream-provider-panel';
+    provPanel.style.display = providerPanelOpen ? 'flex' : 'none';
+    provPanel.addEventListener('click', function(e){ e.stopPropagation(); });
+    provs.forEach(function(pv){
+      var row=document.createElement('label');
+      var cb=document.createElement('input'); cb.type='checkbox'; cb.checked = !streamProviderExcluded.has(pv.id);
+      cb.addEventListener('change', function(){
+        if(cb.checked) streamProviderExcluded.delete(pv.id); else streamProviderExcluded.add(pv.id);
+        providerPanelOpen = true;
+        renderStreaming();
+      });
+      row.appendChild(cb);
+      row.appendChild(document.createTextNode(' ' + (providerLabel(pv.name) || pv.id)));
+      provPanel.appendChild(row);
+    });
+    provBtn.onclick = function(e){
+      e.stopPropagation();
+      providerPanelOpen = !providerPanelOpen;
+      provPanel.style.display = providerPanelOpen ? 'flex' : 'none';
+      provBtn.classList.toggle('active', providerPanelOpen || streamProviderExcluded.size>0);
+    };
+    provWrap.appendChild(provBtn); provWrap.appendChild(provPanel);
+    typeBar.appendChild(provWrap);
+    currentProvPanel = provPanel; currentProvBtn = provBtn;
     list.appendChild(typeBar);
-    // Anbieter werden nicht mehr per Button gefiltert, sondern per Suchfeld (Name/Alias).
-    var shown = provs.slice();
+    var shown = provs.filter(function(pv){ return !streamProviderExcluded.has(pv.id); });
     var sortKey = effectiveSort('stream');
     var prof = sortKey==='taste' ? buildProfile() : null;
     function sortArr(arr, key){
