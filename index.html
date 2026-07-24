@@ -83,21 +83,6 @@
     border-color: var(--accent);
     color: var(--accent);
   }
-  .stream-icons { display: inline-flex; gap: 4px; margin-left: 6px; vertical-align: middle; }
-  .stream-icons .si {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 20px;
-    height: 16px;
-    padding: 0 4px;
-    border: 1px solid currentColor;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 800;
-    line-height: 1;
-    color: currentColor;
-  }
   .progress-wrap {
     max-width: 700px;
     margin: 20px auto 0;
@@ -389,14 +374,14 @@
 <header>
   <div class="icons">🎬📺📡</div>
   <h1><span>Filme & Serien</span></h1>
-  <p class="sub">Sortiere die besten Filme & Serien nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i> oder nach Neuerscheinungen. Markiere, was du bereits gesehen hast, und füge Wunschtitel zu deiner Watchlist hinzu. <i>Discovery</i> schlägt dir Ungesehene Titel vor, entsprechend deines Geschmacks.</p>
+  <p class="sub">Sortiere die besten Filme & Serien nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i> oder nach Neuerscheinungen. Markiere, was du bereits gesehen hast, und füge Wunschtitel zu deiner Watchlist hinzu. <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> schlägt dir Ungesehene Titel vor, entsprechend deines Geschmacks.</p>
   <p class="pwa-hint" id="pwaHint" style="display:none">📲 Als App geöffnet – der Speicher ist hier getrennt von Safari. Falls deine Titel fehlen: in <b>Safari</b> unten „⇄ Daten sichern / übertragen" öffnen, Code kopieren – und ihn hier unten unter „Daten sichern / übertragen" einfügen.</p>
   <div class="tabs">
     <div class="tabs-duo">
       <button id="tabFilme" class="active">🎬 Filme</button>
       <button id="tabSerien">📺 Serien</button>
     </div>
-    <button id="tabStream" class="tab-wide">Aktuell bei <span class="stream-icons" aria-hidden="true"><span class="si">N</span><span class="si">P</span><span class="si">D+</span><span class="si">TV</span></span></button>
+    <button id="tabStream" class="tab-wide">Aktuell bei Netflix, Disney, Prime & Co</button>
     <button id="tabWatch" class="tab-wide">☆ Watchlist</button>
   </div>
 </header>
@@ -404,7 +389,7 @@
 <div class="toolbar">
   <div class="tb-grid">
     <div class="search-wrap">
-      <input type="text" id="search" placeholder="Titel, Genre oder Schauspieler suchen …">
+      <input type="text" id="search" placeholder="Titel, Genre oder Namen suchen …">
       <button type="button" id="searchClear" class="search-x" aria-label="Suche löschen">×</button>
     </div>
     <div class="sort-wrap">
@@ -1414,7 +1399,7 @@ wBtns.f.onclick = () => setWatchMode('f');
 wBtns.s.onclick = () => setWatchMode('s');
 wBtns.stream.onclick = () => setWatchMode('stream');
 let discOn = false;
-let sortManual = { filme: null, serien: null };
+let sortManual = { filme: null, serien: null, stream: null };
 function renderList() {
   const rec = discOn && (activeTab === 'filme' || activeTab === 'serien');
   document.querySelector('.progress-wrap').style.visibility = rec ? 'hidden' : '';
@@ -1430,11 +1415,11 @@ function setTab(t) {
   const stream = t === 'stream';
   const watch = t === 'watch';
   document.querySelector('.toolbar').style.display = '';
-  var _fg = document.querySelector('.filter-group'); if (_fg) _fg.style.display = (stream || watch) ? 'none' : 'flex';
-  var _fd = document.getElementById('fDetails'); if (_fd) _fd.style.display = (stream || watch) ? 'none' : '';
+  var _fg = document.querySelector('.filter-group'); if (_fg) _fg.style.display = watch ? 'none' : 'flex';
+  var _fd = document.getElementById('fDetails'); if (_fd) _fd.style.display = watch ? 'none' : '';
   document.querySelector('.tb-watchfilters').style.display = watch ? 'flex' : 'none';
-  searchEl.style.display = stream ? 'none' : '';
-  var _sw = document.querySelector('.sort-wrap'); if (_sw) _sw.style.display = (stream || watch) ? 'none' : 'flex';
+  searchEl.style.display = watch ? 'none' : '';
+  var _sw = document.querySelector('.sort-wrap'); if (_sw) _sw.style.display = watch ? 'none' : 'flex';
   const pw = document.querySelector('.progress-wrap');
   pw.style.display = watch ? 'none' : '';
   pw.style.visibility = stream ? '' : '';
@@ -1489,9 +1474,10 @@ if (discBtn) discBtn.onclick = () => {
 
 try {
   var _sm = JSON.parse(localStorage.getItem('top200-sort-v2') || '{}');
-  ['filme', 'serien'].forEach(function (k) { if (_sm && ['imdb', 'taste', 'year'].indexOf(_sm[k]) >= 0) sortManual[k] = _sm[k]; });
+  ['filme', 'serien', 'stream'].forEach(function (k) { if (_sm && ['imdb', 'taste', 'year'].indexOf(_sm[k]) >= 0) sortManual[k] = _sm[k]; });
 } catch (e) {}
 function effectiveSort(cat){
+  if (cat === 'stream') return sortManual.stream || 'imdb';
   if (cat !== 'filme' && cat !== 'serien') return 'imdb';
   if (sortManual[cat]) return sortManual[cat];
   var st = state[cat];
@@ -1520,6 +1506,10 @@ if (sortBtn && sortMenu) {
         sortManual[activeTab] = b.dataset.sort;
         try { localStorage.setItem('top200-sort-v2', JSON.stringify(sortManual)); } catch (e) {}
         renderList();
+      } else if (activeTab === 'stream') {
+        sortManual.stream = b.dataset.sort;
+        try { localStorage.setItem('top200-sort-v2', JSON.stringify(sortManual)); } catch (e) {}
+        renderStreaming();
       }
       updateSortMenuActive();
       sortMenu.style.display = 'none';
@@ -1549,9 +1539,20 @@ function applyFilter() {
   });
   list.querySelectorAll('li.disc').forEach(li => {
     const text = li.textContent.toLowerCase();
-    li.style.display = (!q || text.includes(q)) ? 'flex' : 'none';
+    const matchQ = !q || text.includes(q);
+    let matchM = true;
+    if (activeTab === 'stream' && li.dataset.kind && li.dataset.title) {
+      const src = li.dataset.kind === 's' ? 'serien' : 'filme';
+      matchM = mode === 'all' || (mode === 'done' && isSeenByTitle(src, li.dataset.title)) || (mode === 'watchlist' && isWatched(src, li.dataset.title));
+    }
+    li.style.display = (matchQ && matchM) ? 'flex' : 'none';
   });
   updateProgress();
+}
+function isSeenByTitle(src, title){
+  const st = state[src];
+  const idx = st.data.findIndex(it => it[0] === title);
+  return idx !== -1 && !!st.checked[idx];
 }
 
 // Klick auf Namen/Hashtags -> Filter-Popup
@@ -1580,19 +1581,26 @@ list.addEventListener('click', function(e){
 /* ================= DISCOVERY ================= */
 let discType = 'f';
 function metaGenre(meta){ const parts=String(meta).split('·'); return parts[1]?parts[1].trim():''; }
-function buildProfile(type){
-  const tab = type==='f' ? 'filme':'serien';
-  const s = state[tab];
-  let idxs = s.checked.map((c,i)=>c?i:-1).filter(i=>i>=0);
-  const usedAll = idxs.length < 5;
-  if (usedAll) idxs = s.data.map((_,i)=>i);
+function buildProfile(){
+  // Ein gemeinsames Geschmacksprofil aus Filmen UND Serien zusammen
+  // (Taste-Score, Discovery und die Streaming-Sortierung nutzen alle dieselbe Basis).
+  const cats = ['filme', 'serien'];
+  let total = 0;
+  cats.forEach(cat => { total += state[cat].checked.filter(Boolean).length; });
+  const usedAll = total < 5;
   const genre={}, cast={}, dir={};
-  for (const i of idxs){
-    const g=metaGenre(s.data[i][1]); if(g) genre[g]=(genre[g]||0)+1;
-    const det=s.det[i]||{}; (det.c||[]).forEach(a=>{ if(a) cast[a]=(cast[a]||0)+1; });
-    if(det.d) dir[det.d]=(dir[det.d]||0)+1;
-  }
-  return { genre, cast, dir, n: Math.max(1,idxs.length), usedAll };
+  let n = 0;
+  cats.forEach(cat => {
+    const s = state[cat];
+    const idxs = usedAll ? s.data.map((_,i)=>i) : s.checked.map((c,i)=>c?i:-1).filter(i=>i>=0);
+    for (const i of idxs){
+      const g=metaGenre(s.data[i][1]); if(g) genre[g]=(genre[g]||0)+1;
+      const det=s.det[i]||{}; (det.c||[]).forEach(a=>{ if(a) cast[a]=(cast[a]||0)+1; });
+      if(det.d) dir[det.d]=(dir[det.d]||0)+1;
+      n++;
+    }
+  });
+  return { genre, cast, dir, n: Math.max(1,n), usedAll };
 }
 function scoreCand(c, prof){
   let sc=0;
@@ -1813,6 +1821,7 @@ setTab('watch');
   }
   function streamLi(c, key){
     var li=document.createElement('li'); li.className='disc';
+    li.dataset.kind = key; li.dataset.title = c.t;
     var poster = c.p ? '<img class="dposter" loading="lazy" src="'+POSTER+c.p+'" alt="">' : '<div class="dposter"></div>';
     var already = (key==='f'?ADDED.f:ADDED.s).some(function(x){return x.id===c.id;});
     li.innerHTML =
@@ -1850,6 +1859,16 @@ setTab('watch');
     provs.forEach(function(pv){ fbar.appendChild(fbtn(pv.id, pv.name||pv.id)); });
     list.appendChild(fbar);
     var shown = streamFilter==='all' ? provs.slice() : provs.filter(function(pv){ return pv.id===streamFilter; });
+    var sortKey = effectiveSort('stream');
+    var prof = sortKey==='taste' ? buildProfile() : null;
+    function sortArr(arr, key){
+      var withScore = arr.map(function(c){
+        var sc = sortKey==='taste' ? scoreCand(c, prof).score : (sortKey==='year' ? (c.y||0) : (c.r||0));
+        return { c: c, sc: sc };
+      });
+      withScore.sort(function(a,b){ return b.sc - a.sc; });
+      return withScore.map(function(x){ return x.c; });
+    }
     shown.forEach(function(pv){
       var head=document.createElement('div'); head.className='stream-head'; head.textContent=pv.name||pv.id;
       list.appendChild(head);
@@ -1858,9 +1877,11 @@ setTab('watch');
         var arr=pv[key]||[]; if(!arr.length) return;
         var sh=document.createElement('div'); sh.className='stream-sub'; sh.textContent=label+' · '+arr.length;
         list.appendChild(sh);
-        arr.forEach(function(c){ list.appendChild(streamLi(c,key)); });
+        sortArr(arr, key).forEach(function(c){ list.appendChild(streamLi(c,key)); });
       });
     });
+    updateSortMenuActive();
+    applyFilter();
   }
 
   // Discovery-Empfehlungsliste rendern (Sub-Navigation entfällt, ist jetzt im Toolbar-Button)
@@ -1908,10 +1929,15 @@ setTab('watch');
 (function(){
   var INFO_TEXT = {
     ts: { title:'Taste-Score', body:'Der Taste-Score (0–99) schätzt, wie gut ein Titel zu deinem Geschmack passt. '+
-      'Er wird aus den Genres, Schauspielern und der Regie deiner als „gesehen“ markierten Filme und Serien '+
-      'berechnet – je mehr du abhakst, desto persönlicher und treffsicherer wird er.' },
+      'Er wird aus den Genres, der Besetzung und der Regie all deiner als „gesehen“ markierten Filme und Serien '+
+      'zusammen berechnet – unabhängig davon, ob es ein Film oder eine Serie ist. Je mehr du abhakst, desto '+
+      'persönlicher und treffsicherer wird er. Die gleiche Berechnung steckt auch hinter der Sortierung '+
+      '„nach Taste-Score" im Streaming-Bereich.' },
     imdb: { title:'IMDb-Bewertung', body:'Die IMDb-Bewertung ist die durchschnittliche Nutzerbewertung (0–10) '+
-      'auf der Filmdatenbank IMDb und zeigt, wie gut ein Titel bei einem breiten Publikum ankommt.' }
+      'auf der Filmdatenbank IMDb und zeigt, wie gut ein Titel bei einem breiten Publikum ankommt.' },
+    discovery: { title:'Discovery', body:'Discovery schlägt dir Filme, Serien und Streaming-Titel vor, die du noch '+
+      'nicht gesehen hast – passend zu deinem Taste-Score, also basierend auf Genres, Besetzung und Regie all '+
+      'deiner bisher als „gesehen“ markierten Filme und Serien zusammen.' }
   };
   var bk=document.createElement('div'); bk.className='modal-backdrop'; bk.id='tsModal';
   bk.innerHTML='<div class="modal"><button class="modal-x" aria-label="Schließen">&times;</button>'+
@@ -1922,7 +1948,7 @@ setTab('watch');
     var icon = e.target.closest && e.target.closest('.info-i, .info-word');
     if(icon){
       e.preventDefault(); e.stopPropagation();
-      var key = icon.hasAttribute('data-imdb') ? 'imdb' : 'ts';
+      var key = icon.hasAttribute('data-imdb') ? 'imdb' : (icon.hasAttribute('data-discovery') ? 'discovery' : 'ts');
       titleEl.textContent = INFO_TEXT[key].title;
       bodyEl.textContent = INFO_TEXT[key].body;
       bk.classList.add('open');
