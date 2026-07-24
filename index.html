@@ -320,8 +320,8 @@
   @media (hover: hover) { .modal-x:hover { color:var(--accent); } }
   /* ===== Redesign: Navigation, Watchlist, Detail-Poster, Aktionszeile ===== */
   .tabs { flex-direction: column; align-items: stretch; max-width: 430px; margin: 22px auto 0; gap: 10px; }
-  .tabs .tabs-duo { display: flex; gap: 10px; }
-  .tabs .tabs-duo button { flex: 1; }
+  .tabs .tabs-trio { display: flex; gap: 10px; }
+  .tabs .tabs-trio button { flex: 1; padding: 11px 10px; }
   .tabs button.tab-wide { width: 100%; }
   .tb-watchfilters button { flex: 1; }
   li.item .info { min-width: 0; }
@@ -385,11 +385,11 @@
   <p class="sub">Sortiere die besten Filme & Serien nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i> oder nach Neuerscheinungen. Markiere, was du bereits gesehen hast, und füge Wunschtitel zu deiner Watchlist hinzu. <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> schlägt dir Ungesehene Titel vor, entsprechend deines Geschmacks.</p>
   <p class="pwa-hint" id="pwaHint" style="display:none">📲 Als App geöffnet – der Speicher ist hier getrennt von Safari. Falls deine Titel fehlen: in <b>Safari</b> unten „⇄ Daten sichern / übertragen" öffnen, Code kopieren – und ihn hier unten unter „Daten sichern / übertragen" einfügen.</p>
   <div class="tabs">
-    <div class="tabs-duo">
+    <div class="tabs-trio">
       <button id="tabFilme" class="active">🎬 Filme</button>
       <button id="tabSerien">📺 Serien</button>
+      <button id="tabStream">📡 Streaming</button>
     </div>
-    <button id="tabStream" class="tab-wide">Aktuell bei Netflix, Disney, Prime & Co</button>
     <button id="tabWatch" class="tab-wide">☆ Watchlist</button>
   </div>
 </header>
