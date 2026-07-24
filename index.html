@@ -381,7 +381,6 @@
 </head>
 <body>
 <header>
-  <div class="icons">🎬📺📡</div>
   <h1><span>Filme & Serien</span></h1>
   <p class="sub">Sortiere die besten Filme & Serien nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i> oder nach Neuerscheinungen. Markiere, was du bereits gesehen hast, und füge Wunschtitel zu deiner Watchlist hinzu. <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> schlägt dir Ungesehene Titel vor, entsprechend deines Geschmacks.</p>
   <p class="pwa-hint" id="pwaHint" style="display:none">📲 Als App geöffnet – der Speicher ist hier getrennt von Safari. Falls deine Titel fehlen: in <b>Safari</b> unten „⇄ Daten sichern / übertragen" öffnen, Code kopieren – und ihn hier unten unter „Daten sichern / übertragen" einfügen.</p>
@@ -417,10 +416,9 @@
     <button id="fDetails">🔎 Details</button>
   </div>
   <div class="tb-row tb-watchfilters" style="display:none">
-    <button id="wAll" class="active">Alle</button>
-    <button id="wFilme">Filme</button>
-    <button id="wSerien">Serien</button>
-    <button id="wStream">Streaming</button>
+    <button id="wFilme" class="active">Filme</button>
+    <button id="wSerien" class="active">Serien</button>
+    <button id="wStream" class="active">Streaming</button>
   </div>
 </div>
 
@@ -1273,7 +1271,7 @@ function render() {
   applyFilter();
 }
 
-let watchMode = 'all';
+let watchTypeFilter = { f: true, s: true, stream: true }; // Filme/Serien/Streaming unabhaengig voneinander an/abwaehlbar, standardmaessig alle aktiv
 function wireRow(li, src, i){
   const s = state[src];
   const seenBtn = li.querySelector('.seen-btn');
@@ -1388,10 +1386,9 @@ function applyWatchFilter(){
     const seen = !!(state[src] && state[src].checked[idx]);
     const text = li.textContent.toLowerCase();
     const matchQ = !q || text.includes(q);
-    const matchType = watchMode === 'all'
-      || (watchMode === 'f' && src === 'filme')
-      || (watchMode === 's' && src === 'serien')
-      || (watchMode === 'stream' && li.dataset.viaStream === '1');
+    const matchType = (watchTypeFilter.f && src === 'filme')
+      || (watchTypeFilter.s && src === 'serien')
+      || (watchTypeFilter.stream && li.dataset.viaStream === '1');
     const matchStatus = watchStatus === 'all' || (watchStatus === 'open' && !seen) || (watchStatus === 'done' && seen);
     li.style.display = (matchQ && matchType && matchStatus) ? 'flex' : 'none';
   });
@@ -1424,21 +1421,41 @@ const tabStreamBtn = document.getElementById('tabStream');
 tabStreamBtn.onclick = () => setTab('stream');
 const tabWatchBtn = document.getElementById('tabWatch');
 tabWatchBtn.onclick = () => setTab('watch');
-const wBtns = { all: document.getElementById('wAll'), f: document.getElementById('wFilme'), s: document.getElementById('wSerien'), stream: document.getElementById('wStream') };
-function setWatchMode(m){
-  watchMode = m;
-  wBtns.all.classList.toggle('active', m === 'all');
-  wBtns.f.classList.toggle('active', m === 'f');
-  wBtns.s.classList.toggle('active', m === 's');
-  wBtns.stream.classList.toggle('active', m === 'stream');
+const wBtns = { f: document.getElementById('wFilme'), s: document.getElementById('wSerien'), stream: document.getElementById('wStream') };
+function toggleWatchType(key){
+  // Mindestens einer der drei Filter (Filme/Serien/Streaming) muss aktiv bleiben.
+  const others = Object.keys(watchTypeFilter).filter(function (k) { return k !== key; });
+  if (watchTypeFilter[key] && others.every(function (k) { return !watchTypeFilter[k]; })) return;
+  watchTypeFilter[key] = !watchTypeFilter[key];
+  wBtns.f.classList.toggle('active', watchTypeFilter.f);
+  wBtns.s.classList.toggle('active', watchTypeFilter.s);
+  wBtns.stream.classList.toggle('active', watchTypeFilter.stream);
   applyWatchFilter();
 }
-wBtns.all.onclick = () => setWatchMode('all');
-wBtns.f.onclick = () => setWatchMode('f');
-wBtns.s.onclick = () => setWatchMode('s');
-wBtns.stream.onclick = () => setWatchMode('stream');
+wBtns.f.onclick = () => toggleWatchType('f');
+wBtns.s.onclick = () => toggleWatchType('s');
+wBtns.stream.onclick = () => toggleWatchType('stream');
 let discOn = false;
 let sortManual = { filme: null, serien: null, stream: null, watch: null };
+// Sorgt dafuer, dass Button-Reihen unterhalb der Toolbar (Streaming: Anbieter/Filme/Serien;
+// Watchlist: Alle/Filme/Serien/Streaming) genauso breit sind wie die Alle/Offen/Gesehen-Reihe
+// obendrueber (Spalte 1 des tb-grid, also ohne die Details-Spalte).
+function syncFilterRowWidth(el){
+  if (!el) return;
+  var grid = document.querySelector('.tb-grid');
+  var fd = document.getElementById('fDetails');
+  if (!grid || !fd) return;
+  var gap = parseFloat(getComputedStyle(grid).columnGap || getComputedStyle(grid).gap || '10') || 10;
+  var totalW = grid.getBoundingClientRect().width;
+  var fdW = fd.getBoundingClientRect().width;
+  var col1W = totalW - fdW - gap;
+  if (col1W > 40) { el.style.width = col1W + 'px'; el.style.maxWidth = col1W + 'px'; }
+}
+window.addEventListener('resize', function(){
+  syncFilterRowWidth(document.querySelector('.stream-filter'));
+  var wf = document.querySelector('.tb-watchfilters');
+  if (wf && wf.style.display !== 'none') syncFilterRowWidth(wf);
+});
 function renderList() {
   const rec = discOn && (activeTab === 'filme' || activeTab === 'serien');
   document.querySelector('.progress-wrap').style.visibility = rec ? 'hidden' : '';
@@ -1478,6 +1495,7 @@ function setTab(t) {
     btns.all.classList.toggle('active', watchStatus === 'all');
     btns.open.classList.toggle('active', watchStatus === 'open');
     btns.done.classList.toggle('active', watchStatus === 'done');
+    syncFilterRowWidth(document.querySelector('.tb-watchfilters'));
     renderWatch();
   }
   else {
@@ -2046,6 +2064,7 @@ setTab('watch');
     typeBar.appendChild(typeToggleBtn('f','Filme'));
     typeBar.appendChild(typeToggleBtn('s','Serien'));
     list.appendChild(typeBar);
+    syncFilterRowWidth(typeBar);
     var shown = provs.filter(function(pv){ return !streamProviderExcluded.has(pv.id); });
     var sortKey = effectiveSort('stream');
     var prof = sortKey==='taste' ? buildProfile() : null;
