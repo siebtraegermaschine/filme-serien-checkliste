@@ -313,6 +313,8 @@
     line-height:1; margin-left:5px; cursor:pointer; vertical-align:middle;
     font-family:Georgia,'Times New Roman',serif; opacity:.85; }
   .info-i:hover { opacity:1; color:var(--accent); }
+  .info-word { text-decoration:underline; cursor:pointer; }
+  .info-word:hover { color:var(--accent); }
   .modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);
     z-index:100; align-items:center; justify-content:center; padding:20px; }
   .modal-backdrop.open { display:flex; }
@@ -336,7 +338,7 @@
   .det-actions { clear: both; display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); }
   .det-actions .det-left { display: flex; gap: 8px; align-items: center; }
   .det-actions button { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
-  .det-actions button:hover { border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { .det-actions button:hover { border-color: var(--accent); color: var(--accent); } }
   .det-actions .wl-btn.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   .det-actions .seen-btn.on { background: rgba(76,195,138,.15); border-color: var(--done); color: var(--done); }
   .det-actions .seen-glyph { font-size: 1.3em; line-height: 1; vertical-align: -0.06em; }
@@ -387,7 +389,7 @@
 <header>
   <div class="icons">🎬📺📡</div>
   <h1><span>Filme & Serien</span></h1>
-  <p class="sub">Sortiere die besten Filme und Serien nach <i>IMDb-Bewertung</i><span class="info-i" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">i</span>, deinem <i>Taste-Score</i><span class="info-i" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">i</span> oder nach Neuerscheinungen. Markiere, was du bereits gesehen hast, und füge Wunschtitel zu deiner Watchlist hinzu. <i>Discovery</i> schlägt dir Top-Titel vor, entsprechend deinem gesehenen Titel.</p>
+  <p class="sub">Sortiere die besten Filme & Serien nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i> oder nach Neuerscheinungen. Markiere, was du bereits gesehen hast, und füge Wunschtitel zu deiner Watchlist hinzu. <i>Discovery</i> schlägt dir Ungesehene Titel vor, entsprechend deines Geschmacks.</p>
   <p class="pwa-hint" id="pwaHint" style="display:none">📲 Als App geöffnet – der Speicher ist hier getrennt von Safari. Falls deine Titel fehlen: in <b>Safari</b> unten „⇄ Daten sichern / übertragen" öffnen, Code kopieren – und ihn hier unten unter „Daten sichern / übertragen" einfügen.</p>
   <div class="tabs">
     <div class="tabs-duo">
@@ -1240,7 +1242,7 @@ function render() {
         '<div class="det-left">' +
           '<button type="button" class="wl-btn' + (_watched ? ' on' : '') + '">' + (_watched ? '★' : '☆') + ' Watchlist</button>' +
         '</div>' +
-        '<button type="button" class="seen-btn' + (_seen ? ' on' : '') + '">' + '<span class="seen-glyph">' + (_seen ? '✓' : '☐') + '</span> gesehen' + '</button>' +
+        '<button type="button" class="seen-btn' + (_seen ? ' on' : '') + '">' + '<span class="seen-glyph">✓</span> gesehen' + '</button>' +
       '</div>';
     const detailsHtml =
       '<div class="details">' + detPoster +
@@ -1272,10 +1274,10 @@ function wireRow(li, src, i){
     s.checked[i] = !s.checked[i];
     li.classList.toggle('done', s.checked[i]);
     seenBtn.classList.toggle('on', s.checked[i]);
-    seenBtn.textContent = s.checked[i] ? '✓ gesehen' : '☐ gesehen';
     saveState();
     if (activeTab === src) updateProgress();
     if (activeTab === 'watch') applyWatchFilter(); else applyFilter();
+    seenBtn.blur();
   });
   const wlBtn = li.querySelector('.wl-btn');
   if (wlBtn) wlBtn.addEventListener('click', (e) => {
@@ -1286,6 +1288,7 @@ function wireRow(li, src, i){
     wlBtn.textContent = (on ? '★' : '☆') + ' Watchlist';
     if (activeTab === 'watch') renderWatch();
     else if (mode === 'watchlist') applyFilter();
+    wlBtn.blur();
   });
 }
 function watchRowInner(item, d, i, src, rowScore){
@@ -1305,7 +1308,7 @@ function watchRowInner(item, d, i, src, rowScore){
       '<div class="det-left">' +
         '<button type="button" class="wl-btn' + (_watched ? ' on' : '') + '">' + (_watched ? '★' : '☆') + ' Watchlist</button>' +
       '</div>' +
-      '<button type="button" class="seen-btn' + (_seen ? ' on' : '') + '">' + '<span class="seen-glyph">' + (_seen ? '✓' : '☐') + '</span> gesehen' + '</button>' +
+      '<button type="button" class="seen-btn' + (_seen ? ' on' : '') + '">' + '<span class="seen-glyph">✓</span> gesehen' + '</button>' +
     '</div>';
   const detailsHtml =
     '<div class="details">' + detPoster +
@@ -1916,7 +1919,7 @@ setTab('watch');
   document.body.appendChild(bk);
   var titleEl=bk.querySelector('.info-title'), bodyEl=bk.querySelector('.info-body');
   document.addEventListener('click', function(e){
-    var icon = e.target.closest && e.target.closest('.info-i');
+    var icon = e.target.closest && e.target.closest('.info-i, .info-word');
     if(icon){
       e.preventDefault(); e.stopPropagation();
       var key = icon.hasAttribute('data-imdb') ? 'imdb' : 'ts';
