@@ -83,6 +83,21 @@
     border-color: var(--accent);
     color: var(--accent);
   }
+  .stream-icons { display: inline-flex; gap: 4px; margin-left: 6px; vertical-align: middle; }
+  .stream-icons .si {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 16px;
+    padding: 0 4px;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1;
+    color: currentColor;
+  }
   .progress-wrap {
     max-width: 700px;
     margin: 20px auto 0;
@@ -318,7 +333,7 @@
   li.item { align-items: flex-start; }
   ol.list.show-details li.item .dposter { display: none; }
   .details .detposter { float: left; width: 120px; max-width: 34%; border-radius: 8px; margin: 2px 14px 10px 0; box-shadow: 0 2px 10px rgba(0,0,0,.45); background: var(--border); display: block; }
-  .det-actions { clear: both; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); }
+  .det-actions { clear: both; display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); }
   .det-actions .det-left { display: flex; gap: 8px; align-items: center; }
   .det-actions button { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
   .det-actions button:hover { border-color: var(--accent); color: var(--accent); }
@@ -372,14 +387,14 @@
 <header>
   <div class="icons">🎬📺📡</div>
   <h1><span>Filme & Serien</span></h1>
-  <p class="sub">Sortiert nach IMDb-Bewertung, deinem Taste Score<span class="info-i" data-ts role="button" tabindex="0" aria-label="Was ist der Taste Score?">i</span> oder Neuerscheinungen. Markiere, was du bereits gesehen hast, und füge den Titel zu deiner Watchlist hinzu. Discovery schlägt dir Top-Titel vor, entsprechend deinem gesehenen Titel.</p>
+  <p class="sub">Sortiere die besten Filme und Serien nach <i>IMDb-Bewertung</i>, deinem <i>Taste Score</i><span class="info-i" data-ts role="button" tabindex="0" aria-label="Was ist der Taste Score?">i</span> oder nach Neuerscheinungen. Markiere, was du bereits gesehen hast, und füge Titel zu deiner Watchlist hinzu. <i>Discovery</i> schlägt dir Top-Titel vor, entsprechend deinem gesehenen Titel.</p>
   <p class="pwa-hint" id="pwaHint" style="display:none">📲 Als App geöffnet – der Speicher ist hier getrennt von Safari. Falls deine Titel fehlen: in <b>Safari</b> unten „⇄ Daten sichern / übertragen" öffnen, Code kopieren – und ihn hier unten unter „Daten sichern / übertragen" einfügen.</p>
   <div class="tabs">
     <div class="tabs-duo">
       <button id="tabFilme" class="active">🎬 Filme</button>
       <button id="tabSerien">📺 Serien</button>
     </div>
-    <button id="tabStream" class="tab-wide">📡 Streaming-Anbieter</button>
+    <button id="tabStream" class="tab-wide">Aktuell bei <span class="stream-icons" aria-hidden="true"><span class="si">N</span><span class="si">P</span><span class="si">D+</span><span class="si">TV</span></span></button>
     <button id="tabWatch" class="tab-wide">☆ Watchlist</button>
   </div>
 </header>
