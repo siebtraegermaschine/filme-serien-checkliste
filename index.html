@@ -308,9 +308,9 @@
     li.item .num { min-width:18px; font-size:13px; }
     li.item .dposter { width:46px; height:69px; }
   }
-  .info-i { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px;
-    border-radius:50%; border:1px solid currentColor; font-size:10px; font-style:italic; font-weight:700;
-    line-height:1; margin-left:6px; cursor:pointer; vertical-align:middle;
+  .info-i { display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px;
+    border-radius:50%; border:1px solid currentColor; font-size:8px; font-style:italic; font-weight:700;
+    line-height:1; margin-left:5px; cursor:pointer; vertical-align:middle;
     font-family:Georgia,'Times New Roman',serif; opacity:.85; }
   .info-i:hover { opacity:1; color:var(--accent); }
   .modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);
@@ -387,7 +387,7 @@
 <header>
   <div class="icons">🎬📺📡</div>
   <h1><span>Filme & Serien</span></h1>
-  <p class="sub">Sortiere die besten Filme und Serien nach <i>IMDb-Bewertung</i>, deinem <i>Taste Score</i><span class="info-i" data-ts role="button" tabindex="0" aria-label="Was ist der Taste Score?">i</span> oder nach Neuerscheinungen. Markiere, was du bereits gesehen hast, und füge Titel zu deiner Watchlist hinzu. <i>Discovery</i> schlägt dir Top-Titel vor, entsprechend deinem gesehenen Titel.</p>
+  <p class="sub">Sortiere die besten Filme und Serien nach <i>IMDb-Bewertung</i><span class="info-i" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">i</span>, deinem <i>Taste-Score</i><span class="info-i" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">i</span> oder nach Neuerscheinungen. Markiere, was du bereits gesehen hast, und füge Wunschtitel zu deiner Watchlist hinzu. <i>Discovery</i> schlägt dir Top-Titel vor, entsprechend deinem gesehenen Titel.</p>
   <p class="pwa-hint" id="pwaHint" style="display:none">📲 Als App geöffnet – der Speicher ist hier getrennt von Safari. Falls deine Titel fehlen: in <b>Safari</b> unten „⇄ Daten sichern / übertragen" öffnen, Code kopieren – und ihn hier unten unter „Daten sichern / übertragen" einfügen.</p>
   <div class="tabs">
     <div class="tabs-duo">
@@ -1901,16 +1901,30 @@ setTab('watch');
 })();
 
 
-/* Taste-Score-Erklärung (ⓘ-Popup) */
+/* Taste-Score- & IMDb-Erklärung (ⓘ-Popup) */
 (function(){
+  var INFO_TEXT = {
+    ts: { title:'Taste-Score', body:'Der Taste-Score (0–99) schätzt, wie gut ein Titel zu deinem Geschmack passt. '+
+      'Er wird aus den Genres, Schauspielern und der Regie deiner als „gesehen“ markierten Filme und Serien '+
+      'berechnet – je mehr du abhakst, desto persönlicher und treffsicherer wird er.' },
+    imdb: { title:'IMDb-Bewertung', body:'Die IMDb-Bewertung ist die durchschnittliche Nutzerbewertung (0–10) '+
+      'auf der Filmdatenbank IMDb und zeigt, wie gut ein Titel bei einem breiten Publikum ankommt.' }
+  };
   var bk=document.createElement('div'); bk.className='modal-backdrop'; bk.id='tsModal';
   bk.innerHTML='<div class="modal"><button class="modal-x" aria-label="Schließen">&times;</button>'+
-    '<h3>Taste Score</h3><p>Der Taste Score (0–99) schätzt, wie gut ein Titel zu deinem Geschmack passt. '+
-    'Er wird aus den Genres, Schauspielern und der Regie deiner als „gesehen“ markierten Filme und Serien '+
-    'berechnet – je mehr du abhakst, desto persönlicher und treffsicherer wird er.</p></div>';
+    '<h3 class="info-title"></h3><p class="info-body"></p></div>';
   document.body.appendChild(bk);
+  var titleEl=bk.querySelector('.info-title'), bodyEl=bk.querySelector('.info-body');
   document.addEventListener('click', function(e){
-    if(e.target.closest && e.target.closest('.info-i')){ e.preventDefault(); e.stopPropagation(); bk.classList.add('open'); return; }
+    var icon = e.target.closest && e.target.closest('.info-i');
+    if(icon){
+      e.preventDefault(); e.stopPropagation();
+      var key = icon.hasAttribute('data-imdb') ? 'imdb' : 'ts';
+      titleEl.textContent = INFO_TEXT[key].title;
+      bodyEl.textContent = INFO_TEXT[key].body;
+      bk.classList.add('open');
+      return;
+    }
     if(e.target===bk || (e.target.closest && e.target.closest('.modal-x'))) bk.classList.remove('open');
   });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') bk.classList.remove('open'); });
