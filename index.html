@@ -1442,14 +1442,13 @@ let sortManual = { filme: null, serien: null, stream: null, watch: null };
 // obendrueber (Spalte 1 des tb-grid, also ohne die Details-Spalte).
 function syncFilterRowWidth(el){
   if (!el) return;
-  var grid = document.querySelector('.tb-grid');
-  var fd = document.getElementById('fDetails');
-  if (!grid || !fd) return;
-  var gap = parseFloat(getComputedStyle(grid).columnGap || getComputedStyle(grid).gap || '10') || 10;
-  var totalW = grid.getBoundingClientRect().width;
-  var fdW = fd.getBoundingClientRect().width;
-  var col1W = totalW - fdW - gap;
-  if (col1W > 40) { el.style.width = col1W + 'px'; el.style.maxWidth = col1W + 'px'; }
+  // Direkt an der Alle/Offen/Gesehen-Reihe messen (statt sie aus der Grid-Spaltenbreite
+  // zu errechnen) - robuster, da die "auto"-Spalte des tb-grid je nach Inhalt (Sortieren-
+  // oder Details-Button) unterschiedlich breit sein kann.
+  var fg = document.querySelector('.filter-group');
+  if (!fg) return;
+  var w = fg.getBoundingClientRect().width;
+  if (w > 40) { el.style.width = w + 'px'; el.style.maxWidth = w + 'px'; }
 }
 window.addEventListener('resize', function(){
   syncFilterRowWidth(document.querySelector('.stream-filter'));
@@ -1888,12 +1887,12 @@ setTab('watch');
     '.disc-sub button{flex:1;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 8px;color:var(--text-dim);font-size:15px;font-weight:600;cursor:pointer;transition:all .15s;}'+
     '@media (hover: hover){ .disc-sub button:hover{border-color:var(--accent);color:var(--accent);} }'+
     '.disc-sub button.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}'+
-    '.stream-filter{display:flex;flex-wrap:nowrap;gap:10px;max-width:700px;margin:0 auto 18px;}'+
+    '.stream-filter{display:flex;flex-wrap:nowrap;gap:10px;max-width:700px;margin:0 0 18px;}'+
     '.stream-filter button{flex:1;width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text-dim);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;}'+
     '@media (hover: hover){ .stream-filter button:hover{border-color:var(--accent);color:var(--accent);} }'+
     '.stream-filter button.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}'+
     'li.disc .details{width:100%;margin-top:9px;padding-top:9px;}'+
-    '.stream-provider-wrap{position:relative;display:flex;flex:1;min-width:0;}'+
+    '.stream-provider-wrap{position:relative;display:flex;flex:1;}'+
     '.stream-provider-panel{position:absolute;top:calc(100% + 6px);left:0;right:auto;z-index:60;background:var(--card);'+
     'border:1px solid var(--border);border-radius:10px;padding:10px 12px;min-width:200px;'+
     'box-shadow:0 10px 30px rgba(0,0,0,.5);display:none;flex-direction:column;gap:8px;}'+
