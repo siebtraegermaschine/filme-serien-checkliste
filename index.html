@@ -77,7 +77,7 @@
     cursor: pointer;
     transition: all 0.15s;
   }
-  .tabs button:hover { border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { .tabs button:hover { border-color: var(--accent); color: var(--accent); } }
   .tabs button.active {
     background: var(--accent-soft);
     border-color: var(--accent);
@@ -141,7 +141,7 @@
     cursor: pointer;
     transition: all 0.15s;
   }
-  .toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { .toolbar button:hover { border-color: var(--accent); color: var(--accent); } }
   .toolbar button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   @media (max-width: 640px) {
     .toolbar { row-gap: 8px; }
@@ -252,7 +252,7 @@
   .sync-panel button { background:var(--card); border:1px solid var(--border); border-radius:8px;
     padding:9px 16px; color:var(--text-dim); font-size:13px; font-weight:600; cursor:pointer;
     transition:all .15s; }
-  .sync-panel button:hover { border-color:var(--accent); color:var(--accent); }
+  @media (hover: hover) { .sync-panel button:hover { border-color:var(--accent); color:var(--accent); } }
   .sync-panel b { color:var(--text); }
 
   .disc-sub { display:flex; gap:8px; justify-content:center; margin:4px 0 16px; }
@@ -283,19 +283,19 @@
     border:1px solid var(--accent); border-radius:20px; padding:0 7px; vertical-align:middle; }
   li.item .dposter { width:52px; height:78px; object-fit:cover; border-radius:6px; background:#222; flex:none; display:block; }
   .details .pill, .dinfo .pill { color:var(--accent); cursor:pointer; border-bottom:1px dotted rgba(230,179,76,.5); }
-  .details .pill:hover, .dinfo .pill:hover { color:#f2cd7e; }
+  @media (hover: hover) { .details .pill:hover, .dinfo .pill:hover { color:#f2cd7e; } }
   .details .tag, .dinfo .tag { cursor:pointer; }
   .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.6); display:flex; align-items:center; justify-content:center; z-index:1000; padding:20px; }
   .modal-overlay .modal { position:relative; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px 20px 18px; max-width:360px; width:100%; box-shadow:0 10px 40px rgba(0,0,0,.5); }
   .modal-x { position:absolute; top:8px; right:10px; background:none; border:none; color:var(--text-dim); font-size:18px; cursor:pointer; line-height:1; padding:4px; }
-  .modal-x:hover { color:var(--text); }
+  @media (hover: hover) { .modal-x:hover { color:var(--text); } }
   .modal-q { color:var(--text); font-size:15px; line-height:1.5; margin:4px 0 18px; text-align:center; }
   .modal-actions { display:flex; gap:10px; justify-content:center; }
   .modal-actions button { border-radius:8px; padding:9px 20px; font-size:14px; font-weight:600; cursor:pointer; border:1px solid var(--border); transition:all .15s; }
   .modal-yes { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
-  .modal-yes:hover { background:var(--accent); color:#0e1116; }
+  @media (hover: hover) { .modal-yes:hover { background:var(--accent); color:#0e1116; } }
   .modal-no { background:var(--card); color:var(--text-dim); }
-  .modal-no:hover { border-color:var(--accent); color:var(--accent); }
+  @media (hover: hover) { .modal-no:hover { border-color:var(--accent); color:var(--accent); } }
   @media (max-width:640px) {
     li.item { gap:10px; padding:10px 12px; }
     li.item .num { min-width:18px; font-size:13px; }
@@ -305,9 +305,9 @@
     border-radius:50%; border:1px solid currentColor; font-size:8px; font-style:italic; font-weight:700;
     line-height:1; margin-left:5px; cursor:pointer; vertical-align:middle;
     font-family:Georgia,'Times New Roman',serif; opacity:.85; }
-  .info-i:hover { opacity:1; color:var(--accent); }
+  @media (hover: hover) { .info-i:hover { opacity:1; color:var(--accent); } }
   .info-word { text-decoration:underline; cursor:pointer; }
-  .info-word:hover { color:var(--accent); }
+  @media (hover: hover) { .info-word:hover { color:var(--accent); } }
   .modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);
     z-index:100; align-items:center; justify-content:center; padding:20px; }
   .modal-backdrop.open { display:flex; }
@@ -317,7 +317,7 @@
   .modal p { color:var(--text); font-size:14px; line-height:1.6; }
   .modal-x { position:absolute; top:10px; right:12px; background:none; border:none;
     color:var(--text-dim); font-size:18px; cursor:pointer; line-height:1; }
-  .modal-x:hover { color:var(--accent); }
+  @media (hover: hover) { .modal-x:hover { color:var(--accent); } }
   /* ===== Redesign: Navigation, Watchlist, Detail-Poster, Aktionszeile ===== */
   .tabs { flex-direction: column; align-items: stretch; max-width: 430px; margin: 22px auto 0; gap: 10px; }
   .tabs .tabs-duo { display: flex; gap: 10px; }
@@ -353,13 +353,14 @@
   .search-wrap #search { flex: 1; width: 100%; min-width: 0; padding-right: 34px; }
   #search:not(:placeholder-shown) { border-color: var(--accent); }
   .search-x { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: none; background: transparent; color: var(--text-dim); font-size: 20px; line-height: 1; cursor: pointer; padding: 0 6px; }
-  .search-x:hover { color: var(--accent); }
+  @media (hover: hover) { .search-x:hover { color: var(--accent); } }
   #search:placeholder-shown + .search-x { display: none; }
   .pwa-hint { max-width: 430px; margin: 12px auto 0; padding: 10px 14px; font-size: 13px; line-height: 1.5;
     color: var(--accent); background: var(--accent-soft); border: 1px solid rgba(230,179,76,.35); border-radius: 10px; text-align: center; }
   .sync-toggle { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 9px 16px;
     color: var(--text-dim); font-size: 13px; font-weight: 600; cursor: pointer; margin-bottom: 14px; }
-  .sync-toggle:hover, .sync-toggle.active { border-color: var(--accent); color: var(--accent); }
+  .sync-toggle.active { border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { .sync-toggle:hover { border-color: var(--accent); color: var(--accent); } }
   .sort-wrap > #fSort { width: 100%; }
   .filter-group { display: flex; gap: 10px; }
   .filter-group button { flex: 1; white-space: nowrap; }
@@ -1137,8 +1138,9 @@ function candDetailsHtml(c, kind){
   var rows = '';
   if (c.c && c.c.length) rows += '<div class="credits"><b>Besetzung:</b> '+nameChips(c.c)+'</div>';
   if (c.d) rows += '<div class="credits"><b>'+dirLabel+':</b> '+nameChips([c.d])+'</div>';
-  if (!tagsHtml && !rows) return '';
-  return '<div class="details">' + (tagsHtml ? '<div class="tags">'+tagsHtml+'</div>' : '') + rows + '</div>';
+  var plotHtml = c.ov ? '<div class="plot">'+esc(c.ov)+'</div>' : '';
+  if (!plotHtml && !tagsHtml && !rows) return '';
+  return '<div class="details">' + plotHtml + (tagsHtml ? '<div class="tags">'+tagsHtml+'</div>' : '') + rows + '</div>';
 }
 const BASELEN = { filme: FILME.length, serien: SERIEN.length };
 const state = {
@@ -1335,11 +1337,20 @@ function collectWatched(){
       const i = s.data.findIndex((it) => it[0] === title);
       if (i >= 0) {
         const d = s.det[i] || { p:'', h:[], c:[], d:'', poster:null };
-        out.push({ src: src, i: i, item: s.data[i], d: d, score: scoreItem(s.data[i], d, profs[src]), viaStream: isStreamOrigin(src, title) });
+        out.push({
+          src: src, i: i, item: s.data[i], d: d,
+          score: scoreItem(s.data[i], d, profs[src]),
+          rating: metaRating(s.data[i][1]),
+          year: metaYear(s.data[i][1]),
+          viaStream: isStreamOrigin(src, title)
+        });
       }
     });
   });
-  out.sort((a, b) => b.score - a.score);
+  const sortKey = effectiveSort('watch');
+  if (sortKey === 'year') out.sort((a, b) => (b.year - a.year));
+  else if (sortKey === 'taste') out.sort((a, b) => (b.score - a.score));
+  else out.sort((a, b) => (b.rating - a.rating)); // 'imdb' (Standard)
   return out;
 }
 function renderWatch(){
@@ -1347,6 +1358,7 @@ function renderWatch(){
   list.innerHTML = '';
   list.classList.remove('main-list');
   const rows = collectWatched();
+  updateSortMenuActive();
   if (!rows.length) {
     const p = document.createElement('div'); p.className = 'watch-empty';
     p.innerHTML = 'Noch keine Titel in der Watchlist.<br>Öffne bei einem Film oder einer Serie über „🔎 Details“ die Detailansicht und tippe dort auf „☆ Watchlist“.';
@@ -1367,18 +1379,23 @@ function renderWatch(){
   });
   applyWatchFilter();
 }
+let watchStatus = 'all'; // 'all' | 'open' | 'done' – nutzt dieselben Alle/Offen/Gesehen-Buttons wie Filme/Serien
 function applyWatchFilter(){
   const q = searchEl.value.toLowerCase();
   list.querySelectorAll('li.item').forEach((li) => {
     const src = li.dataset.src;
+    const idx = +li.dataset.idx;
+    const seen = !!(state[src] && state[src].checked[idx]);
     const text = li.textContent.toLowerCase();
     const matchQ = !q || text.includes(q);
-    const matchM = watchMode === 'all'
+    const matchType = watchMode === 'all'
       || (watchMode === 'f' && src === 'filme')
       || (watchMode === 's' && src === 'serien')
       || (watchMode === 'stream' && li.dataset.viaStream === '1');
-    li.style.display = (matchQ && matchM) ? 'flex' : 'none';
+    const matchStatus = watchStatus === 'all' || (watchStatus === 'open' && !seen) || (watchStatus === 'done' && seen);
+    li.style.display = (matchQ && matchType && matchStatus) ? 'flex' : 'none';
   });
+  updateProgress();
 }
 function updateProgress() {
   const s = state[activeTab];
@@ -1421,7 +1438,7 @@ wBtns.f.onclick = () => setWatchMode('f');
 wBtns.s.onclick = () => setWatchMode('s');
 wBtns.stream.onclick = () => setWatchMode('stream');
 let discOn = false;
-let sortManual = { filme: null, serien: null, stream: null };
+let sortManual = { filme: null, serien: null, stream: null, watch: null };
 function renderList() {
   const rec = discOn && (activeTab === 'filme' || activeTab === 'serien');
   document.querySelector('.progress-wrap').style.visibility = rec ? 'hidden' : '';
@@ -1437,11 +1454,12 @@ function setTab(t) {
   const stream = t === 'stream';
   const watch = t === 'watch';
   document.querySelector('.toolbar').style.display = '';
-  var _fg = document.querySelector('.filter-group'); if (_fg) _fg.style.display = watch ? 'none' : 'flex';
-  var _fd = document.getElementById('fDetails'); if (_fd) _fd.style.display = watch ? 'none' : '';
+  // Suchen, Sortieren, Alle/Offen/Gesehen und Details gibt es jetzt auf allen Tabs (auch Watchlist).
+  var _fg = document.querySelector('.filter-group'); if (_fg) _fg.style.display = 'flex';
+  var _fd = document.getElementById('fDetails'); if (_fd) _fd.style.display = '';
   document.querySelector('.tb-watchfilters').style.display = watch ? 'flex' : 'none';
-  searchEl.style.display = watch ? 'none' : '';
-  var _sw = document.querySelector('.sort-wrap'); if (_sw) _sw.style.display = watch ? 'none' : 'flex';
+  searchEl.style.display = '';
+  var _sw = document.querySelector('.sort-wrap'); if (_sw) _sw.style.display = 'flex';
   const pw = document.querySelector('.progress-wrap');
   pw.style.display = watch ? 'none' : '';
   pw.style.visibility = stream ? '' : '';
@@ -1455,14 +1473,32 @@ function setTab(t) {
     btns.done.classList.remove('active');
     renderStreaming();
   }
-  else if (watch) { renderWatch(); }
-  else { renderList(); }
+  else if (watch) {
+    // Alle/Offen/Gesehen-Buttons spiegeln hier den Watchlist-eigenen Status-Filter.
+    btns.all.classList.toggle('active', watchStatus === 'all');
+    btns.open.classList.toggle('active', watchStatus === 'open');
+    btns.done.classList.toggle('active', watchStatus === 'done');
+    renderWatch();
+  }
+  else {
+    btns.all.classList.toggle('active', mode === 'all');
+    btns.open.classList.toggle('active', mode === 'open');
+    btns.done.classList.toggle('active', mode === 'done');
+    renderList();
+  }
 }
 
 const btns = { all: document.getElementById('fAll'), open: document.getElementById('fOpen'), done: document.getElementById('fDone') };
-btns.all.onclick = () => setMode('all');
-btns.open.onclick = () => setMode('open');
-btns.done.onclick = () => setMode('done');
+btns.all.onclick = () => activeTab === 'watch' ? setWatchStatus('all') : setMode('all');
+btns.open.onclick = () => activeTab === 'watch' ? setWatchStatus('open') : setMode('open');
+btns.done.onclick = () => activeTab === 'watch' ? setWatchStatus('done') : setMode('done');
+function setWatchStatus(m){
+  watchStatus = m;
+  btns.all.classList.toggle('active', m === 'all');
+  btns.open.classList.toggle('active', m === 'open');
+  btns.done.classList.toggle('active', m === 'done');
+  applyWatchFilter();
+}
 function setMode(m) {
   mode = m;
   // Alle/Offen/Gesehen und Discovery schliessen sich gegenseitig aus.
@@ -1496,10 +1532,11 @@ if (discBtn) discBtn.onclick = () => {
 
 try {
   var _sm = JSON.parse(localStorage.getItem('top200-sort-v2') || '{}');
-  ['filme', 'serien', 'stream'].forEach(function (k) { if (_sm && ['imdb', 'taste', 'year'].indexOf(_sm[k]) >= 0) sortManual[k] = _sm[k]; });
+  ['filme', 'serien', 'stream', 'watch'].forEach(function (k) { if (_sm && ['imdb', 'taste', 'year'].indexOf(_sm[k]) >= 0) sortManual[k] = _sm[k]; });
 } catch (e) {}
 function effectiveSort(cat){
   if (cat === 'stream') return sortManual.stream || 'imdb';
+  if (cat === 'watch') return sortManual.watch || 'imdb';
   if (cat !== 'filme' && cat !== 'serien') return 'imdb';
   if (sortManual[cat]) return sortManual[cat];
   var st = state[cat];
@@ -1532,6 +1569,10 @@ if (sortBtn && sortMenu) {
         sortManual.stream = b.dataset.sort;
         try { localStorage.setItem('top200-sort-v2', JSON.stringify(sortManual)); } catch (e) {}
         renderStreaming();
+      } else if (activeTab === 'watch') {
+        sortManual.watch = b.dataset.sort;
+        try { localStorage.setItem('top200-sort-v2', JSON.stringify(sortManual)); } catch (e) {}
+        renderWatch();
       }
       updateSortMenuActive();
       sortMenu.style.display = 'none';
@@ -1827,11 +1868,11 @@ setTab('watch');
     '.stream-sub{color:var(--text-dim);font-size:13px;font-weight:600;margin:10px auto 8px;max-width:620px;padding:0 2px;}'+
     '.disc-sub{max-width:460px;margin:6px auto 16px;gap:10px;}'+
     '.disc-sub button{flex:1;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 8px;color:var(--text-dim);font-size:15px;font-weight:600;cursor:pointer;transition:all .15s;}'+
-    '.disc-sub button:hover{border-color:var(--accent);color:var(--accent);}'+
+    '@media (hover: hover){ .disc-sub button:hover{border-color:var(--accent);color:var(--accent);} }'+
     '.disc-sub button.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}'+
     '.stream-filter{display:flex;flex-wrap:nowrap;gap:10px;max-width:700px;margin:0 auto 18px;}'+
     '.stream-filter button{flex:1;width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text-dim);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;}'+
-    '.stream-filter button:hover{border-color:var(--accent);color:var(--accent);}'+
+    '@media (hover: hover){ .stream-filter button:hover{border-color:var(--accent);color:var(--accent);} }'+
     '.stream-filter button.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}'+
     'li.disc .details{width:100%;margin-top:9px;padding-top:9px;}'+
     '.stream-provider-wrap{position:relative;display:flex;flex:1;min-width:0;}'+
