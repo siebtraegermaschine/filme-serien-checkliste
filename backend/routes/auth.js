@@ -1,0 +1,145 @@
+import bcrypt from 'bcryptjs';
+import crypto from 'node:crypto';
+import { pool } from '../db/pool.js';
+import { sendPasswordResetMail } from '../lib/mailer.js';
+import { createAsyncRouter } from '../lib/asyncRouter.js';
+
+const router = createAsyncRouter();
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const BCRYPT_ROUNDS = 12;
+const RESET_TOKEN_TTL_MS = 60 * 60 * 1000; // 1 Stunde
+
+function publicUser(row) {
+  return { id: row.id, email: row.email };
+}
+
+router.post('/register', async (req, res) => {
+  const { email, password } = req.body || {};
+  if (typeof email !== 'string' || !EMAIL_RE.test(email)) {
+    return res.status(400).json({ error: 'invalid_email' });
+  }
+  if (typeof password !== 'string' || password.length < 8) {
+    return res.status(400).json({ error: 'weak_password' });
+  }
+
+  const normalizedEmail = email.trim().toLowerCase();
+  const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
+
+  try {
+    const { rows } = await pool.query(
+      `INSERT INTO users (email, password_hash) VALUES ($1, $2)
+       RETURNING id, email`,
+      [normalizedEmail, passwordHash]
+    );
+    req.session.userId = rows[0].id;
+    res.status(201).json(publicUser(rows[0]));
+  } catch (err) {
+    if (err.code === '23505') {
+      return res.status(409).json({ error: 'email_taken' });
+    }
+    throw err;
+  }
+});
+
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body || {};
+  if (typeof email !== 'string' || typeof password !== 'string') {
+    return res.status(400).json({ error: 'invalid_credentials' });
+  }
+
+  const { rows } = await pool.query(
+    `SELECT id, email, password_hash FROM users WHERE email = $1`,
+    [email.trim().toLowerCase()]
+  );
+  const user = rows[0];
+  // Bewusst konstante Fehlermeldung + immer bcrypt.compare aufrufen (auch bei
+  // unbekannter E-Mail gegen einen Dummy-Hash), um Timing-/Enumeration-Angriffe
+  // auf existierende Accounts zu erschweren.
+  const hashToCompare = user?.password_hash || '$2b$12$invalidsaltinvalidsaltinvalidsalthashvalue1234567890ab';
+  const ok = await bcrypt.compare(password, hashToCompare);
+
+  if (!user || !ok) {
+    return res.status(401).json({ error: 'invalid_credentials' });
+  }
+
+  req.session.userId = user.id;
+  res.json(publicUser(user));
+});
+
+router.post('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('fs.sid');
+    res.status(204).end();
+  });
+});
+
+router.get('/me', async (req, res) => {
+  if (!req.session?.userId) {
+    return res.status(401).json({ error: 'not_authenticated' });
+  }
+  const { rows } = await pool.query(`SELECT id, email FROM users WHERE id = $1`, [req.session.userId]);
+  if (!rows[0]) {
+    return res.status(401).json({ error: 'not_authenticated' });
+  }
+  res.json(publicUser(rows[0]));
+});
+
+router.post('/request-password-reset', async (req, res) => {
+  const { email } = req.body || {};
+  if (typeof email === 'string' && EMAIL_RE.test(email)) {
+    const normalizedEmail = email.trim().toLowerCase();
+    const { rows } = await pool.query(`SELECT id, email FROM users WHERE email = $1`, [normalizedEmail]);
+    const user = rows[0];
+    if (user) {
+      const rawToken = crypto.randomBytes(32).toString('hex');
+      const tokenHash = crypto.createHash('sha256').update(rawToken).digest('hex');
+      const expiresAt = new Date(Date.now() + RESET_TOKEN_TTL_MS);
+      await pool.query(
+        `INSERT INTO password_reset_tokens (user_id, token_hash, expires_at) VALUES ($1, $2, $3)`,
+        [user.id, tokenHash, expiresAt]
+      );
+      const resetUrl = `${process.env.APP_BASE_URL || ''}/reset-password?token=${rawToken}`;
+      await sendPasswordResetMail({ to: user.email, resetUrl });
+    }
+  }
+  // Immer identische Antwort, unabhängig davon ob die E-Mail existiert
+  // (verhindert Account-Enumeration über diesen Endpoint).
+  res.status(202).json({ ok: true });
+});
+
+router.post('/reset-password', async (req, res) => {
+  const { token, password } = req.body || {};
+  if (typeof token !== 'string' || typeof password !== 'string' || password.length < 8) {
+    return res.status(400).json({ error: 'invalid_request' });
+  }
+
+  const tokenHash = crypto.createHash('sha256').update(token).digest('hex');
+  const { rows } = await pool.query(
+    `SELECT id, user_id FROM password_reset_tokens
+     WHERE token_hash = $1 AND used_at IS NULL AND expires_at > now()`,
+    [tokenHash]
+  );
+  const tokenRow = rows[0];
+  if (!tokenRow) {
+    return res.status(400).json({ error: 'invalid_or_expired_token' });
+  }
+
+  const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    await client.query(`UPDATE users SET password_hash = $1 WHERE id = $2`, [passwordHash, tokenRow.user_id]);
+    await client.query(`UPDATE password_reset_tokens SET used_at = now() WHERE id = $1`, [tokenRow.id]);
+    await client.query('COMMIT');
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
+
+  res.status(204).end();
+});
+
+export default router;

@@ -1,0 +1,4 @@
+# Caddy holt/erneuert das Let's-Encrypt-Zertifikat automatisch fuer diese Domain.
+movietaste.de, www.movietaste.de {
+	reverse_proxy backend:3000
+}

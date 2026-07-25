@@ -1,0 +1,12 @@
+# Wird von `docker compose` automatisch zusätzlich geladen (lokale Entwicklung).
+# Oeffnet Postgres/Backend-Ports direkt auf dem Host, damit man von aussen
+# (z.B. psql, curl) rankommt. Auf dem Produktionsserver bewusst NICHT
+# vorhanden -- dort sind Postgres/Backend nur ueber das interne Docker-Netz
+# erreichbar, oeffentlich sichtbar ist ausschliesslich Caddy (80/443).
+services:
+  postgres:
+    ports:
+      - "5432:5432"
+  backend:
+    ports:
+      - "3000:3000"
