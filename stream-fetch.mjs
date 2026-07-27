@@ -5,10 +5,17 @@
  * Holt von TMDB (Daten via JustWatch) die aktuell im Abo (Flatrate) verfügbaren
  * Filme & Serien der konfigurierten Plattformen für die Region DE und schreibt
  * sie in ./streaming.json – im gleichen Feld-Format wie die Discovery-Kandidaten
- * ({id,t,y,g,d,c,p,r}), damit die "+ Liste"-Funktion identisch funktioniert.
+ * ({id,t,y,g,d,c,p,r}), plus "ov" (Kurzbeschreibung/Plot) für die Detailansicht.
  *
  * Läuft NUR in der GitHub Action (oder lokal) – der API-Key kommt aus der
  * Umgebungsvariable TMDB_API_KEY (GitHub Secret) und landet NIE im Client-Code.
+ *
+ * Ist STREAMING_API_URL gesetzt, wird das Ergebnis zusätzlich per POST an den
+ * eigenen Backend-Endpoint /api/streaming/ingest geschickt (Auth über
+ * STREAMING_INGEST_SECRET) – das ist der Zielzustand nach dem Relaunch, damit
+ * die Daten in Postgres statt in streaming.json landen. Ohne STREAMING_API_URL
+ * verhält sich das Skript wie bisher (nur lokale Datei) – nützlich solange kein
+ * Backend erreichbar ist.
  *
  * Aufruf:  TMDB_API_KEY=xxxx node stream-fetch.mjs
  * Node >= 18 (globales fetch).
@@ -20,13 +27,17 @@ const REGION = process.env.TMDB_REGION || 'DE';
 const LANG = process.env.TMDB_LANG || 'de-DE';
 const COUNT = parseInt(process.env.STREAM_COUNT || '60', 10);   // Titel je Typ & Plattform
 const MIN_VOTES = parseInt(process.env.STREAM_MIN_VOTES || '300', 10);
-const MIN_YEAR = parseInt(process.env.STREAM_MIN_YEAR || '1980', 10);
+// Keine Jahresuntergrenze mehr per Default (auch Klassiker wie "2001: Odyssee im
+// Weltraum" (1968) sollen auftauchen) -- optional weiterhin per Env-Var einschraenkbar.
+const MIN_YEAR = process.env.STREAM_MIN_YEAR ? parseInt(process.env.STREAM_MIN_YEAR, 10) : null;
+const STREAMING_API_URL = process.env.STREAMING_API_URL || '';
+const STREAMING_INGEST_SECRET = process.env.STREAMING_INGEST_SECRET || '';
 
 // Gewünschte Plattformen – per Name gematcht (robuster als feste IDs).
 const WANT = [
   // fbid = feste TMDB-Provider-ID als Fallback, falls die Namens-Erkennung scheitert
   // (z. B. wurde "Apple TV+" bei JustWatch/TMDB in "Apple TV" umbenannt).
-  { id: 'amazon',  name: 'Amazon Prime Video', fbid: 9,   match: ['Amazon Prime Video'] },
+  { id: 'amazon',  name: 'Amazon Prime',       fbid: 9,   match: ['Amazon Prime Video'] },
   { id: 'netflix', name: 'Netflix',            fbid: 8,   match: ['Netflix'] },
   { id: 'disney',  name: 'Disney+',            fbid: 337, match: ['Disney Plus', 'Disney+'] },
   { id: 'apple',   name: 'Apple TV+',          fbid: 350, match: ['Apple TV Plus', 'Apple TV+', 'Apple TV'] },
@@ -90,17 +101,18 @@ async function discover(kind, providerId, gmap) {
   const seen = new Set();
   let page = 1;
   while (out.length < COUNT && page <= 8) {
-    const d = await tmdb(`/discover/${kind}`, {
+    const params = {
       language: LANG,
       watch_region: REGION,
       with_watch_providers: providerId,
       with_watch_monetization_types: 'flatrate',
       sort_by: 'vote_average.desc',
       'vote_count.gte': MIN_VOTES,
-      [dateField]: `${MIN_YEAR}-01-01`,
       include_adult: 'false',
       page,
-    });
+    };
+    if (MIN_YEAR) params[dateField] = `${MIN_YEAR}-01-01`;
+    const d = await tmdb(`/discover/${kind}`, params);
     for (const it of (d.results || [])) {
       if (seen.has(it.id)) continue; seen.add(it.id);
       const dateStr = kind === 'movie' ? it.release_date : it.first_air_date;
@@ -114,6 +126,7 @@ async function discover(kind, providerId, gmap) {
         c: [],                                    // Besetzung – unten via enrich() nachgeladen
         p: it.poster_path || null,
         r: it.vote_average != null ? Math.round(it.vote_average * 10) / 10 : null,
+        ov: (it.overview || '').trim(),            // Kurzbeschreibung/Plot für die Detailansicht
       });
       if (out.length >= COUNT) break;
     }
@@ -153,6 +166,25 @@ async function main() {
   writeFileSync('streaming.json', JSON.stringify(doc));
   const tot = providers.reduce((a, p) => a + p.f.length + p.s.length, 0);
   console.log(`streaming.json geschrieben: ${providers.length} Plattformen, ${tot} Titel.`);
+
+  if (STREAMING_API_URL) {
+    if (!STREAMING_INGEST_SECRET) {
+      console.error('FEHLER: STREAMING_API_URL gesetzt, aber STREAMING_INGEST_SECRET fehlt.');
+      process.exit(1);
+    }
+    const res = await fetch(new URL('/api/streaming/ingest', STREAMING_API_URL), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${STREAMING_INGEST_SECRET}`,
+      },
+      body: JSON.stringify(doc),
+    });
+    if (!res.ok) {
+      throw new Error(`Ingest-API ${res.status}: ${await res.text()}`);
+    }
+    console.log(`An Backend übertragen: ${STREAMING_API_URL}`);
+  }
 }
 
 main().catch(e => { console.error(e); process.exit(1); });

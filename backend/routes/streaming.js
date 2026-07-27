@@ -21,6 +21,7 @@ function rowToCand(row) {
     p: row.poster_path,
     r: row.rating != null ? Number(row.rating) : null,
     ov: row.overview,
+    fs: row.first_seen_at ? row.first_seen_at.toISOString() : null,
   };
 }
 
@@ -66,7 +67,7 @@ router.post('/ingest', async (req, res) => {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
-    await client.query('TRUNCATE streaming_cache');
+    const runStartedAt = new Date();
     for (const provider of providers) {
       const providerId = provider.id;
       const providerName = provider.name || PROVIDER_NAMES[providerId] || providerId;
@@ -80,7 +81,11 @@ router.post('/ingest', async (req, res) => {
                title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
                director = EXCLUDED.director, cast_names = EXCLUDED.cast_names,
                poster_path = EXCLUDED.poster_path, rating = EXCLUDED.rating,
-               overview = EXCLUDED.overview, fetched_at = now()`,
+               -- Liefert TMDB an einem Tag mal keine Kurzbeschreibung (z.B. fremdsprachige
+               -- Titel ohne deutschen Overview-Text), soll eine zuvor vorhandene (ggf. manuell
+               -- nachgetragene) Beschreibung nicht durch einen Leerstring geloescht werden.
+               overview = COALESCE(NULLIF(EXCLUDED.overview, ''), streaming_cache.overview),
+               fetched_at = now()`,
             [
               providerId,
               providerName,
@@ -99,6 +104,7 @@ router.post('/ingest', async (req, res) => {
         }
       }
     }
+    await client.query('DELETE FROM streaming_cache WHERE fetched_at < $1', [runStartedAt]);
     await client.query('COMMIT');
   } catch (err) {
     await client.query('ROLLBACK');

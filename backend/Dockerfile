@@ -7,7 +7,7 @@ WORKDIR /app
 COPY backend/package.json backend/package-lock.json ./backend/
 RUN cd backend && npm ci --omit=dev
 
-COPY index.html impressum.html datenschutz.html reset-password.html ./
+COPY index.html impressum.html datenschutz.html reset-password.html logo.png ./
 COPY backend/ ./backend/
 
 WORKDIR /app/backend

@@ -56,9 +56,15 @@ CREATE TABLE IF NOT EXISTS user_progress (
   title_id   BIGINT NOT NULL REFERENCES titles(id) ON DELETE CASCADE,
   seen       BOOLEAN NOT NULL DEFAULT false,
   watchlist  BOOLEAN NOT NULL DEFAULT false,
+  -- Ob DIESE Person den Titel über den Streaming-Tab entdeckt/hinzugefügt hat
+  -- (fürs Watchlist-Filtern nach Herkunft). Bewusst hier statt auf titles.source,
+  -- da die Herkunft pro Nutzer:in unterschiedlich sein kann -- titles ist ein
+  -- geteilter Katalog, user_progress ist es nicht.
+  via_stream BOOLEAN NOT NULL DEFAULT false,
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (user_id, title_id)
 );
+ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS via_stream BOOLEAN NOT NULL DEFAULT false;
 
 -- Aktuelle Streaming-Verfügbarkeit je Anbieter (ersetzt streaming.json).
 -- Eigenständig von `titles`, da es sich um TMDB-Kandidaten handelt, die erst beim
@@ -79,6 +85,7 @@ CREATE TABLE IF NOT EXISTS streaming_cache (
   fetched_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (provider_id, type, tmdb_id)
 );
+ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS first_seen_at TIMESTAMPTZ NOT NULL DEFAULT now();
 
 -- Von connect-pg-simple genutzte Session-Tabelle (Standard-Schema des Pakets).
 CREATE TABLE IF NOT EXISTS session (
