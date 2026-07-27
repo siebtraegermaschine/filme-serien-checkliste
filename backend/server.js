@@ -22,7 +22,16 @@ if (process.env.CORS_ORIGIN) {
   app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
 }
 
-app.use(express.json({ limit: '1mb' }));
+// /api/titles/bulk-ingest bekommt ein hoeheres Limit (der woechentliche
+// Discovery-Import schickt ~5000 Titel inkl. Cast/Kurzbeschreibung in einem
+// Request, ca. 4-5 MB) -- alle anderen (oeffentlich erreichbaren) Routen
+// bleiben bewusst beim kleinen 1mb-Default als Schutz vor ueberdimensionierten
+// Requests.
+app.use('/api/titles/bulk-ingest', express.json({ limit: '10mb' }));
+app.use((req, res, next) => {
+  if (req.path === '/api/titles/bulk-ingest') return next(); // oben schon geparst
+  express.json({ limit: '1mb' })(req, res, next);
+});
 
 app.use(
   session({

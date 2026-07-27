@@ -1,0 +1,36 @@
+name: Discovery-Katalog erweitern (Filme & Serien ab Bewertung 6.0)
+
+on:
+  schedule:
+    # Woechentlich Sonntags 05:00 UTC -- unabhaengig vom taeglichen
+    # Streaming-Ingest (streaming.yml), da dieser Job deutlich mehr TMDB-
+    # Anfragen macht (Cast/Regie je Titel) und nicht taeglich noetig ist.
+    - cron: "0 5 * * 0"
+  workflow_dispatch:            # erlaubt manuelles Ausloesen im Actions-Tab
+
+concurrency:
+  group: rated-titles-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Discovery-Katalog aktualisieren
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          STREAMING_API_URL: ${{ vars.STREAMING_API_URL }}
+          TITLES_INGEST_SECRET: ${{ secrets.TITLES_INGEST_SECRET }}
+          # Optional konfigurierbar:
+          # RATED_MIN_RATING: "6"
+          # RATED_MIN_VOTES: "1000"
+        run: node discover-rated-titles.mjs

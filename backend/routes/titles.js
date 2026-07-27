@@ -148,4 +148,77 @@ router.post('/ensure', requireAuth, async (req, res) => {
   res.status(201).json(serializeTitle(rows[0]));
 });
 
+// Wird ausschließlich von der GitHub Action (discover-rated-titles.mjs) mit dem
+// Secret TITLES_INGEST_SECRET aufgerufen -- kein Nutzer-Login, sondern
+// Server-zu-Server-Authentifizierung per Bearer-Token (analog /api/streaming/ingest).
+// Traegt alle Filme/Serien ab einer TMDB-Bewertung/Stimmenzahl-Schwelle dauerhaft
+// in den Discovery-Pool ein (im Unterschied zu streaming_cache gibt es hier KEIN
+// taegliches Loeschen -- diese Titel sollen fuer immer per Suche/"Aehnliche Titel"
+// auffindbar bleiben, siehe Nutzer-Anforderung).
+//
+// Rein additiv/aktualisierend, absichtlich vorsichtig beim Ueberschreiben:
+// - source='catalog'-Zeilen werden NIE angefasst (Katalog ist manuell kuratiert).
+// - `keywords` wird nie ueberschrieben (enthaelt ggf. von Hand/Skript uebersetzte
+//   deutsche Hashtags; TMDB-Keywords sind ohnehin nur englisch verfuegbar, siehe
+//   apply-keyword-translation.mjs -- neue Zeilen bekommen bewusst KEINE Keywords,
+//   das Frontend faellt dafuer automatisch auf das (bereits deutsche) Genre zurueck).
+// - `plot` wird nur ueberschrieben, wenn der neue Wert nicht leer ist (schuetzt
+//   von Hand recherchierte Kurzbeschreibungen, siehe backfill-overviews.mjs).
+router.post('/bulk-ingest', async (req, res) => {
+  const expected = process.env.TITLES_INGEST_SECRET;
+  const provided = (req.get('authorization') || '').replace(/^Bearer\s+/i, '');
+  if (!expected || provided !== expected) {
+    return res.status(401).json({ error: 'invalid_ingest_secret' });
+  }
+
+  const { items } = req.body || {};
+  if (!Array.isArray(items)) {
+    return res.status(400).json({ error: 'invalid_payload' });
+  }
+
+  const client = await pool.connect();
+  let inserted = 0;
+  try {
+    await client.query('BEGIN');
+    for (const item of items) {
+      if (!item || !item.tmdbId || (item.type !== 'movie' && item.type !== 'series') || !item.title) continue;
+      const { rowCount } = await client.query(
+        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, plot, source)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,'discovery')
+         ON CONFLICT (tmdb_id) DO UPDATE SET
+           year = EXCLUDED.year,
+           genres = EXCLUDED.genres,
+           director = EXCLUDED.director,
+           cast_names = EXCLUDED.cast_names,
+           poster_path = EXCLUDED.poster_path,
+           rating = EXCLUDED.rating,
+           plot = COALESCE(NULLIF(EXCLUDED.plot, ''), titles.plot),
+           updated_at = now()
+         WHERE titles.source <> 'catalog'`,
+        [
+          item.tmdbId,
+          item.type,
+          String(item.title).trim(),
+          item.year || null,
+          Array.isArray(item.genres) ? item.genres : [],
+          item.director || null,
+          Array.isArray(item.cast) ? item.cast : [],
+          item.posterPath || null,
+          item.rating != null ? item.rating : null,
+          item.plot || null,
+        ]
+      );
+      inserted += rowCount;
+    }
+    await client.query('COMMIT');
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
+
+  res.json({ processed: items.length, written: inserted });
+});
+
 export default router;

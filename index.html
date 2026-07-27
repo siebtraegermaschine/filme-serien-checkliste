@@ -169,6 +169,12 @@
     user-select: none;
   }
   li.item:hover { background: var(--card-hover); }
+  /* Nach Gesehen-/Watchlist-Klick wird die Liste neu aufgebaut (siehe
+     suspendHoverUntilMouseMove) -- ohne diese Sperre wertet der Browser :hover
+     fuer das Element neu aus, das durch den Reflow zufaellig unter dem
+     (unbewegten) Mauszeiger liegt, und der Nachbar-Titel wirkt faelschlich
+     ausgewaehlt. */
+  #list.suspend-hover li.item:hover { background: var(--card); }
   li.item .num {
     min-width: 24px;
     text-align: right;
@@ -855,6 +861,18 @@ function render() {
   applyFilter();
 }
 
+// Verhindert den "Phantom-Hover" auf dem Nachbar-Titel: wird eine Zeile per
+// Gesehen-/Watchlist-Klick aus der Liste entfernt, baut renderList() die
+// komplette Liste neu auf -- der Browser wertet :hover danach fuer das Element
+// neu aus, das jetzt zufaellig unter dem (unbewegten) Mauszeiger liegt. Diese
+// Klasse deaktiviert das Hover-Highlighting, bis sich die Maus tatsaechlich
+// wieder bewegt (siehe #list.suspend-hover-Regel im CSS).
+function suspendHoverUntilMouseMove(){
+  list.classList.add('suspend-hover');
+  list.addEventListener('mousemove', function onMove(){
+    list.classList.remove('suspend-hover');
+  }, { once: true });
+}
 function wireRow(li, src, i){
   const s = state[src];
   const seenBtn = li.querySelector('.seen-btn');
@@ -871,6 +889,7 @@ function wireRow(li, src, i){
       // ODER per "Gesehen" hinzugefuegt wurden -- ein Entfernen des Gesehen-Hakens
       // muss die Zeile also verschwinden lassen, falls der Titel nicht zusaetzlich
       // watchlisted ist.
+      suspendHoverUntilMouseMove();
       rebuild();
       renderList();
       seenBtn.blur();
@@ -883,6 +902,7 @@ function wireRow(li, src, i){
       toggleWatched(src, s.data[i][0]);
       // Filme/Serien/Streaming (oben) zeigen nur watchlisted/gesehene Titel -- ein
       // Abwaehlen hier muss die Zeile also aus der aktuellen Ansicht verschwinden lassen.
+      suspendHoverUntilMouseMove();
       rebuild();
       renderList();
       wlBtn.blur();

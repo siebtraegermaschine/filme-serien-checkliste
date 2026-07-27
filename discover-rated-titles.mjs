@@ -1,0 +1,185 @@
+#!/usr/bin/env node
+/*
+ * discover-rated-titles.mjs – traegt alle Filme & Serien ab einer TMDB-
+ * Bewertungs-/Stimmenzahl-Schwelle dauerhaft in den Discovery-Pool der App
+ * ein (unabhaengig vom aktuellen Streaming-Angebot). Im Unterschied zu
+ * stream-fetch.mjs/streaming_cache gibt es hier KEIN taegliches Loeschen --
+ * einmal aufgenommene Titel bleiben fuer immer per Suche/"Aehnliche Titel"
+ * auffindbar, auch wenn sie in der ersten Discovery-Ansicht (250 Titel) nicht
+ * auftauchen. Laeuft woechentlich (siehe .github/workflows/rated-titles.yml),
+ * damit neu ueber die Schwelle steigende oder neu erschienene Titel
+ * dazukommen -- rein additiv, bestehende Katalog-Titel werden nie angefasst
+ * (siehe Schutzlogik in backend/routes/titles.js, Route POST /bulk-ingest).
+ *
+ * Aufruf:  TMDB_API_KEY=xxxx STREAMING_API_URL=https://... TITLES_INGEST_SECRET=xxx node discover-rated-titles.mjs
+ * Node >= 18 (globales fetch).
+ */
+
+const API = 'https://api.themoviedb.org/3';
+const KEY = process.env.TMDB_API_KEY;
+const LANG = process.env.TMDB_LANG || 'de-DE';
+const MIN_RATING = parseFloat(process.env.RATED_MIN_RATING || '6');
+const MIN_VOTES = parseInt(process.env.RATED_MIN_VOTES || '1000', 10);
+const STREAMING_API_URL = process.env.STREAMING_API_URL || '';
+const TITLES_INGEST_SECRET = process.env.TITLES_INGEST_SECRET || '';
+
+if (!KEY) { console.error('FEHLER: TMDB_API_KEY ist nicht gesetzt.'); process.exit(1); }
+if (!STREAMING_API_URL || !TITLES_INGEST_SECRET) {
+  console.error('FEHLER: STREAMING_API_URL und TITLES_INGEST_SECRET muessen gesetzt sein.');
+  process.exit(1);
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function tmdb(path, params = {}) {
+  const u = new URL(API + path);
+  u.searchParams.set('api_key', KEY);
+  for (const [k, v] of Object.entries(params)) u.searchParams.set(k, v);
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const res = await fetch(u);
+    if (res.status === 429) { await sleep(2000 + attempt * 1000); continue; }
+    if (!res.ok) throw new Error(`TMDB ${res.status} für ${path}`);
+    return res.json();
+  }
+  throw new Error('TMDB Rate-Limit für ' + path);
+}
+
+async function genreMap(kind) {
+  const d = await tmdb(`/genre/${kind}/list`, { language: LANG });
+  const m = {}; (d.genres || []).forEach((g) => (m[g.id] = g.name)); return m;
+}
+
+const enrichCache = new Map();
+async function enrich(kind, id) {
+  const ck = kind + ':' + id;
+  if (enrichCache.has(ck)) return enrichCache.get(ck);
+  const result = { cast: [], dir: '' };
+  try {
+    const d = await tmdb(`/${kind}/${id}`, { language: LANG, append_to_response: 'credits' });
+    const cr = d.credits || {};
+    result.cast = (cr.cast || []).slice(0, 4).map((p) => p.name).filter(Boolean);
+    if (kind === 'movie') {
+      const dd = (cr.crew || []).find((p) => p.job === 'Director');
+      result.dir = dd ? dd.name : '';
+    } else {
+      result.dir = (d.created_by || []).map((p) => p.name).filter(Boolean).join(', ');
+    }
+  } catch (e) { /* Titel ohne Credits: Felder bleiben leer */ }
+  enrichCache.set(ck, result);
+  return result;
+}
+
+async function overviewWithFallback(kind, id, primaryOverview) {
+  const ov = (primaryOverview || '').trim();
+  if (ov) return ov;
+  try {
+    const d = await tmdb(`/${kind}/${id}`, { language: 'en-US' });
+    return (d.overview || '').trim();
+  } catch (e) { return ''; }
+}
+
+async function discoverAll(kind, gmap) {
+  const out = [];
+  let page = 1;
+  let totalPages = 1;
+  do {
+    const d = await tmdb(`/discover/${kind}`, {
+      language: LANG,
+      sort_by: 'vote_average.desc',
+      'vote_average.gte': MIN_RATING,
+      'vote_count.gte': MIN_VOTES,
+      include_adult: 'false',
+      page,
+    });
+    totalPages = Math.min(d.total_pages || 1, 500); // TMDB-Limit: max. 500 Seiten je Query
+    for (const it of d.results || []) {
+      const dateStr = kind === 'movie' ? it.release_date : it.first_air_date;
+      const year = dateStr ? parseInt(dateStr.slice(0, 4), 10) : null;
+      out.push({
+        tmdbId: it.id,
+        type: kind === 'movie' ? 'movie' : 'series',
+        title: kind === 'movie' ? it.title : it.name,
+        year,
+        genres: (it.genre_ids || []).map((id2) => gmap[id2]).filter(Boolean),
+        posterPath: it.poster_path || null,
+        rating: it.vote_average != null ? Math.round(it.vote_average * 10) / 10 : null,
+        overviewRaw: it.overview || '',
+      });
+    }
+    page++;
+    await sleep(200);
+  } while (page <= totalPages);
+  return out;
+}
+
+async function main() {
+  if (process.argv.includes('--resend')) {
+    const { readFileSync } = await import('node:fs');
+    const backupPath = new URL('./rated-titles-last-run.json', import.meta.url);
+    const all = JSON.parse(readFileSync(backupPath, 'utf8'));
+    console.log(`--resend: ${all.length} Titel aus Backup geladen, Discover/Enrich uebersprungen.`);
+    await sendBatched(all);
+    return;
+  }
+
+  const [movieGenres, tvGenres] = await Promise.all([genreMap('movie'), genreMap('tv')]);
+  console.log('Discover läuft (Filme)...');
+  const movies = await discoverAll('movie', movieGenres);
+  console.log(`  ${movies.length} Filme gefunden.`);
+  console.log('Discover läuft (Serien)...');
+  const series = await discoverAll('tv', tvGenres);
+  console.log(`  ${series.length} Serien gefunden.`);
+
+  const all = [...movies, ...series];
+  console.log(`Reichere ${all.length} Titel mit Cast/Regie/Overview-Fallback an...`);
+  let done = 0;
+  for (const item of all) {
+    const kind = item.type === 'series' ? 'tv' : 'movie';
+    const ex = await enrich(kind, item.tmdbId);
+    item.cast = ex.cast;
+    item.director = ex.dir;
+    item.plot = await overviewWithFallback(kind, item.tmdbId, item.overviewRaw);
+    delete item.overviewRaw;
+    done++;
+    if (done % 200 === 0) console.log(`  ... ${done}/${all.length}`);
+    await sleep(130);
+  }
+
+  // Sicherheitsnetz: vor dem Versand lokal zwischenspeichern -- ein Netzwerk-/
+  // Server-Fehler beim finalen POST soll nicht den ganzen (u.U. 20-30 Minuten
+  // dauernden) Discover+Enrich-Lauf verwerfen. Bei --resend kann der zuletzt
+  // gespeicherte Stand erneut verschickt werden, ohne alles neu zu holen.
+  const { writeFileSync } = await import('node:fs');
+  const backupPath = new URL('./rated-titles-last-run.json', import.meta.url);
+  writeFileSync(backupPath, JSON.stringify(all));
+  console.log(`Backup geschrieben: ${backupPath.pathname}`);
+
+  await sendBatched(all);
+}
+
+async function sendBatched(all) {
+  // In Batches senden statt alles in einem Request -- haelt die Payload pro
+  // Request klein (Body-Limit der bulk-ingest-Route) und einzelne Batches
+  // koennen bei einem Fehler gezielt wiederholt werden.
+  const BATCH_SIZE = 500;
+  let totalWritten = 0;
+  for (let i = 0; i < all.length; i += BATCH_SIZE) {
+    const batch = all.slice(i, i + BATCH_SIZE);
+    console.log(`Sende Batch ${i / BATCH_SIZE + 1} (${batch.length} Titel) an ${STREAMING_API_URL} ...`);
+    const res = await fetch(new URL('/api/titles/bulk-ingest', STREAMING_API_URL), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${TITLES_INGEST_SECRET}`,
+      },
+      body: JSON.stringify({ items: batch }),
+    });
+    if (!res.ok) throw new Error(`Ingest-API ${res.status}: ${await res.text()}`);
+    const result = await res.json();
+    totalWritten += result.written;
+    console.log(`  ... ${result.processed} verarbeitet, ${result.written} geschrieben/aktualisiert.`);
+  }
+  console.log(`Fertig: insgesamt ${totalWritten} geschrieben/aktualisiert.`);
+}
+
+main().catch((e) => { console.error(e); process.exit(1); });
