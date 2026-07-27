@@ -2,10 +2,13 @@ name: Discovery-Katalog erweitern (Filme & Serien ab Bewertung 6.0)
 
 on:
   schedule:
-    # Woechentlich Sonntags 05:00 UTC -- unabhaengig vom taeglichen
-    # Streaming-Ingest (streaming.yml), da dieser Job deutlich mehr TMDB-
-    # Anfragen macht (Cast/Regie je Titel) und nicht taeglich noetig ist.
-    - cron: "0 5 * * 0"
+    # Alle 2 Tage um 05:00 UTC -- unabhaengig vom taeglichen Streaming-Ingest
+    # (streaming.yml). Bewusst nicht taeglich: dieser Job fragt pro Lauf ca.
+    # 10.000 Mal TMDB an (Cast/Regie/Overview je Titel), die zugrunde liegenden
+    # Bewertungen/Stimmenzahlen aendern sich aber kaum von Tag zu Tag -- alle 2
+    # Tage faengt neu erschienene/neu ueber die Schwelle steigende Titel zeitnah
+    # ein, ohne taeglich fast identische Daten neu abzufragen.
+    - cron: "0 5 */2 * *"
   workflow_dispatch:            # erlaubt manuelles Ausloesen im Actions-Tab
 
 concurrency:
