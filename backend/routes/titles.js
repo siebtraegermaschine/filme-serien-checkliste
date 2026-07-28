@@ -4,7 +4,7 @@ import { createAsyncRouter } from '../lib/asyncRouter.js';
 
 const router = createAsyncRouter();
 
-function serializeTitle(row) {
+export function serializeTitle(row) {
   return {
     id: row.id,
     tmdbId: row.tmdb_id,

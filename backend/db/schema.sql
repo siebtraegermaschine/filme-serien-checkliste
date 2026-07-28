@@ -66,6 +66,19 @@ CREATE TABLE IF NOT EXISTS user_progress (
 );
 ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS via_stream BOOLEAN NOT NULL DEFAULT false;
 
+-- Titel, die eine Person per Swipe aus ihrer eigenen Discovery-Ansicht entfernt
+-- hat ("Gelöschte Titel" unter Einstellungen). Rein pro Nutzer:in -- der Titel
+-- bleibt fuer alle anderen ganz normal in Discovery sichtbar, nur diese Person
+-- sieht ihn nicht mehr (bis sie ihn ueber "Zu Discovery hinzufuegen" wieder
+-- freigibt). Ueberlebt daher auch kuenftige Discovery-Katalog-Updates, da der
+-- Abgleich beim Anzeigen passiert, nicht beim Einspielen neuer Titel.
+CREATE TABLE IF NOT EXISTS user_hidden_titles (
+  user_id   BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  title_id  BIGINT NOT NULL REFERENCES titles(id) ON DELETE CASCADE,
+  hidden_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (user_id, title_id)
+);
+
 -- Aktuelle Streaming-Verfügbarkeit je Anbieter (ersetzt streaming.json).
 -- Eigenständig von `titles`, da es sich um TMDB-Kandidaten handelt, die erst beim
 -- Hinzufügen/Watchlisten durch eine:n Nutzer:in in `titles` übernommen werden.

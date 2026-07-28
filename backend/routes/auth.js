@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import { pool } from '../db/pool.js';
 import { sendPasswordResetMail } from '../lib/mailer.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
+import { requireAuth } from '../middleware/requireAuth.js';
 
 const router = createAsyncRouter();
 
@@ -140,6 +141,57 @@ router.post('/reset-password', async (req, res) => {
   }
 
   res.status(204).end();
+});
+
+// Aenderungen an Passwort/E-Mail verlangen bewusst das aktuelle Passwort erneut
+// (nicht nur die laufende Session) -- Schutz falls ein Geraet/Session-Cookie in
+// falsche Haende geraet (z.B. gemeinsam genutztes Geraet). Der Nutzer hatte das
+// nicht explizit gefordert, ist aber Standard-Sicherheitspraxis fuer sensible
+// Account-Aenderungen.
+router.put('/password', requireAuth, async (req, res) => {
+  const { currentPassword, newPassword } = req.body || {};
+  if (typeof currentPassword !== 'string' || typeof newPassword !== 'string' || newPassword.length < 8) {
+    return res.status(400).json({ error: 'invalid_request' });
+  }
+
+  const { rows } = await pool.query(`SELECT password_hash FROM users WHERE id = $1`, [req.session.userId]);
+  const user = rows[0];
+  const ok = user && (await bcrypt.compare(currentPassword, user.password_hash));
+  if (!ok) {
+    return res.status(401).json({ error: 'wrong_current_password' });
+  }
+
+  const passwordHash = await bcrypt.hash(newPassword, BCRYPT_ROUNDS);
+  await pool.query(`UPDATE users SET password_hash = $1 WHERE id = $2`, [passwordHash, req.session.userId]);
+  res.status(204).end();
+});
+
+router.put('/email', requireAuth, async (req, res) => {
+  const { currentPassword, newEmail } = req.body || {};
+  if (typeof currentPassword !== 'string' || typeof newEmail !== 'string' || !EMAIL_RE.test(newEmail)) {
+    return res.status(400).json({ error: 'invalid_request' });
+  }
+
+  const { rows } = await pool.query(`SELECT password_hash FROM users WHERE id = $1`, [req.session.userId]);
+  const user = rows[0];
+  const ok = user && (await bcrypt.compare(currentPassword, user.password_hash));
+  if (!ok) {
+    return res.status(401).json({ error: 'wrong_current_password' });
+  }
+
+  const normalizedEmail = newEmail.trim().toLowerCase();
+  try {
+    const { rows: updated } = await pool.query(
+      `UPDATE users SET email = $1 WHERE id = $2 RETURNING id, email`,
+      [normalizedEmail, req.session.userId]
+    );
+    res.json(publicUser(updated[0]));
+  } catch (err) {
+    if (err.code === '23505') {
+      return res.status(409).json({ error: 'email_taken' });
+    }
+    throw err;
+  }
 });
 
 export default router;

@@ -12,6 +12,7 @@ import progressRouter from './routes/progress.js';
 import streamingRouter from './routes/streaming.js';
 import feedbackRouter from './routes/feedback.js';
 import searchLogRouter from './routes/searchLog.js';
+import hiddenTitlesRouter from './routes/hiddenTitles.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PgSession = connectPgSimple(session);
@@ -57,6 +58,7 @@ app.use('/api/progress', progressRouter);
 app.use('/api/streaming', streamingRouter);
 app.use('/api/feedback', feedbackRouter);
 app.use('/api/search-log', searchLogRouter);
+app.use('/api/hidden-titles', hiddenTitlesRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
 const frontendRoot = path.join(__dirname, '..');

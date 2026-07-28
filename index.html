@@ -181,6 +181,7 @@
      (unbewegten) Mauszeiger liegt, und der Nachbar-Titel wirkt faelschlich
      ausgewaehlt. */
   #list.suspend-hover li.item:hover { background: var(--card); }
+  .swipeable { touch-action: pan-y; user-select: none; }
   li.item .num {
     min-width: 24px;
     text-align: right;
@@ -281,6 +282,10 @@
   .feedback-textarea { width:100%; background:var(--bg); color:var(--text); border:1px solid var(--border);
     border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; resize:vertical; box-sizing:border-box; }
   .feedback-textarea:focus { outline:none; border-color:var(--accent); }
+  .settings-menu { flex-direction:column; }
+  .settings-menu button { width:100%; }
+  .account-sep { border:none; border-top:1px solid var(--border); margin:20px 0; }
+  .unhide-btn { width:100%; }
   .auth-error { color:#e0655c; font-size:13px; min-height:16px; text-align:center; }
   .auth-error.ok { color:var(--done); }
   .auth-submit { background:var(--accent-soft); border:1px solid var(--accent); color:var(--accent);
@@ -430,6 +435,7 @@
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
     <div id="authBarUser" class="nav-menu-user" style="display:none"></div>
+    <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
     <button type="button" id="authBarLogin" class="nav-menu-item">Anmelden</button>
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
   </div>
@@ -568,6 +574,46 @@
   </div>
 </div>
 
+<div id="settingsModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="settingsModalX" aria-label="Schließen">✕</button>
+    <h3>Einstellungen</h3>
+    <div class="modal-actions settings-menu">
+      <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Titel</button>
+      <button type="button" id="settingsAccountBtn" class="modal-yes">Zugangsdaten</button>
+    </div>
+  </div>
+</div>
+
+<div id="hiddenTitlesModal" class="modal-overlay" style="display:none">
+  <div class="modal similar-modal">
+    <button class="modal-x" id="hiddenTitlesModalX" aria-label="Schließen">✕</button>
+    <h3>Gelöschte Titel</h3>
+    <ol class="list similar-modal-list" id="hiddenTitlesList"></ol>
+  </div>
+</div>
+
+<div id="accountModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="accountModalX" aria-label="Schließen">✕</button>
+    <h3>Zugangsdaten</h3>
+    <form id="passwordForm" class="auth-form">
+      <label>Aktuelles Passwort<input type="password" id="pwCurrentForPw" required autocomplete="current-password"></label>
+      <label>Neues Passwort<input type="password" id="pwNew" required minlength="8" autocomplete="new-password"></label>
+      <label>Neues Passwort bestätigen<input type="password" id="pwNewConfirm" required minlength="8" autocomplete="new-password"></label>
+      <div id="pwError" class="auth-error"></div>
+      <button type="submit" class="auth-submit">Passwort ändern</button>
+    </form>
+    <hr class="account-sep">
+    <form id="emailForm" class="auth-form">
+      <label>Aktuelles Passwort<input type="password" id="pwCurrentForEmail" required autocomplete="current-password"></label>
+      <label>Neue E-Mail-Adresse<input type="email" id="newEmail" required autocomplete="email"></label>
+      <div id="emailError" class="auth-error"></div>
+      <button type="submit" class="auth-submit">E-Mail-Adresse ändern</button>
+    </form>
+  </div>
+</div>
+
 <script>
 let FILME = [], SERIEN = [];
 let DETAILS = { filme: [], serien: [] };
@@ -581,6 +627,10 @@ const INFO_ICON = '<span class="info-i" data-ts role="button" tabindex="0" aria-
 let CURRENT_USER = null;
 let PROGRESS = new Map(); // title_id -> {seen, watchlist}
 let PENDING_AUTH_ACTIONS = [];
+// Titel-IDs, die diese Person per Swipe aus ihrer eigenen Discovery-Ansicht
+// ausgeblendet hat (siehe Einstellungen -> "Geloeschte Titel"). Rein lokaler
+// Cache des Server-Stands, gefuellt in loadCatalogAndRefresh().
+let HIDDEN_TITLE_IDS = new Set();
 
 async function apiRequest(method, path, body) {
   const res = await fetch(path, {
@@ -915,6 +965,7 @@ function render() {
       '<div class="meta">' + metaHtml(item[1], activeTab) + '</div>' +
       providerChipsHtml(d.providers) + detailsHtml + actionsHtml + '</span>';
     wireRow(li, activeTab, i);
+    attachSwipeToRemove(li, function(){ removeFromMyTitles(s.det[i].id); });
     list.appendChild(li);
   });
   document.getElementById('progName').textContent = s.label;
@@ -933,6 +984,70 @@ function suspendHoverUntilMouseMove(){
   list.addEventListener('mousemove', function onMove(){
     list.classList.remove('suspend-hover');
   }, { once: true });
+}
+
+// Generische "Nach-links-wischen, um zu entfernen"-Geste (per Pointer Events --
+// deckt Touch UND Maus-Drag ab). Wird ueber die Buttons/Links im Titel hinweg
+// ignoriert (die sollen weiter normal klickbar bleiben), unterscheidet per
+// Bewegungsrichtung zwischen "will horizontal wischen" und "will die Seite
+// vertikal scrollen" (siehe touch-action:pan-y auf .swipeable), damit ein
+// vertikaler Scroll-Versuch nicht versehentlich als Wisch-Geste startet.
+function attachSwipeToRemove(li, onRemove){
+  var THRESHOLD = 90;
+  var active = false, mode = null, startX = 0, startY = 0, dx = 0;
+  li.classList.add('swipeable');
+  li.addEventListener('pointerdown', function(e){
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    if (e.target.closest('button, a, input, textarea')) return;
+    active = true; mode = null; dx = 0;
+    startX = e.clientX; startY = e.clientY;
+    try { li.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  li.addEventListener('pointermove', function(e){
+    if (!active) return;
+    var curDx = e.clientX - startX;
+    var curDy = e.clientY - startY;
+    if (mode === null) {
+      if (Math.abs(curDx) < 8 && Math.abs(curDy) < 8) return;
+      mode = Math.abs(curDx) > Math.abs(curDy) ? 'x' : 'y';
+      if (mode === 'x') li.style.transition = 'none';
+    }
+    if (mode !== 'x') return;
+    dx = Math.min(0, curDx);
+    li.style.transform = 'translateX(' + dx + 'px)';
+    li.style.background = dx < -THRESHOLD ? 'rgba(224,101,92,0.18)' : '';
+    e.preventDefault();
+  });
+  function end(){
+    if (!active) return;
+    active = false;
+    if (mode === 'x') {
+      li.style.transition = 'transform .2s ease, opacity .2s ease';
+      if (dx < -THRESHOLD) {
+        li.style.transform = 'translateX(-110%)';
+        li.style.opacity = '0';
+        setTimeout(function(){ onRemove(); }, 180);
+      } else {
+        li.style.transform = '';
+        li.style.background = '';
+      }
+    }
+    mode = null; dx = 0;
+  }
+  li.addEventListener('pointerup', end);
+  li.addEventListener('pointercancel', end);
+}
+// Wisch-Alternative zum manuellen Abwaehlen von "gesehen"/Watchlist -- entfernt
+// den Titel komplett aus Filme/Serien/Streaming (oben), genau wie wenn man
+// beide Haken einzeln per Button entfernen wuerde.
+async function removeFromMyTitles(id){
+  if (id == null) return;
+  await updateProgressRemote(id, { seen: false, watchlist: false }).catch(function(){});
+  suspendHoverUntilMouseMove();
+  rebuild();
+  if (activeTab === 'stream') renderStreaming();
+  else if (activeTab === 'discovery') renderDiscovery();
+  else renderList();
 }
 function wireRow(li, src, i){
   const s = state[src];
@@ -1493,6 +1608,119 @@ _feedbackSubmit.onclick = function(){
   });
 };
 
+/* ---- "Einstellungen": Zwischenmenue (Gelöschte Titel / Zugangsdaten). ---- */
+var _settingsModal = document.getElementById('settingsModal');
+function openSettingsModal(){ _settingsModal.style.display = 'flex'; }
+function closeSettingsModal(){ _settingsModal.style.display = 'none'; }
+document.getElementById('settingsBtn').onclick = () => { closeNavMenu(); openSettingsModal(); };
+document.getElementById('settingsModalX').onclick = closeSettingsModal;
+_settingsModal.addEventListener('click', function(e){ if (e.target === _settingsModal) closeSettingsModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _settingsModal.style.display !== 'none') closeSettingsModal(); });
+
+/* ---- "Gelöschte Titel": per Swipe aus Discovery ausgeblendete Titel, mit
+   einzigem Button "Zu Discovery hinzufügen" statt Gesehen/Watchlist. ---- */
+function hiddenTitleLi(t){
+  var li = document.createElement('li'); li.className = 'disc stream-item';
+  var poster = t.posterBase64 ? '<img class="dposter" loading="lazy" src="'+t.posterBase64+'" alt="">'
+             : t.posterPath ? '<img class="dposter" loading="lazy" src="'+POSTER+t.posterPath+'" alt="">'
+             : '<div class="dposter"></div>';
+  var pseudoItem = { t: t.title, y: t.year, g: t.genres||[], d: t.director||'', c: t.cast||[], kw: t.keywords||[], p: t.posterPath, r: t.rating, ov: t.plot||'' };
+  var typeLabel = t.type === 'series' ? 'Serie' : 'Film';
+  li.innerHTML =
+    poster +
+    '<div class="dinfo">' +
+      '<div class="dtitle">'+esc(t.title)+'</div>'+
+      '<div class="dmeta">'+esc(candMeta(pseudoItem))+' · '+typeLabel+'</div>'+
+      candDetailsHtml(pseudoItem, t.type) +
+      '<div class="det-actions"><button type="button" class="unhide-btn">Zu Discovery hinzufügen</button></div>' +
+    '</div>';
+  li.querySelector('.unhide-btn').addEventListener('click', async function(e){
+    e.stopPropagation();
+    await apiRequest('DELETE', '/api/hidden-titles/' + t.id).catch(function(){});
+    HIDDEN_TITLE_IDS.delete(t.id);
+    li.remove();
+    if (activeTab === 'discovery') renderDiscovery();
+  });
+  li.addEventListener('click', function(e){
+    if (e.target.closest('.det-actions')) return;
+    li.classList.toggle('show-details');
+  });
+  return li;
+}
+var _hiddenModal = document.getElementById('hiddenTitlesModal');
+var _hiddenList = document.getElementById('hiddenTitlesList');
+async function openHiddenTitlesModal(){
+  closeSettingsModal();
+  _hiddenList.innerHTML = '<div class="disc-hint">Lädt …</div>';
+  _hiddenModal.style.display = 'flex';
+  try {
+    var titles = await apiRequest('GET', '/api/hidden-titles');
+    _hiddenList.innerHTML = '';
+    if (!titles.length) {
+      var p = document.createElement('div'); p.className = 'disc-hint'; p.textContent = 'Keine ausgeblendeten Titel.'; _hiddenList.appendChild(p);
+    } else {
+      titles.forEach(function(t){ _hiddenList.appendChild(hiddenTitleLi(t)); });
+    }
+  } catch (e) {
+    _hiddenList.innerHTML = '<div class="disc-hint">Konnte nicht geladen werden.</div>';
+  }
+}
+function closeHiddenTitlesModal(){ _hiddenModal.style.display = 'none'; }
+document.getElementById('settingsHiddenBtn').onclick = openHiddenTitlesModal;
+document.getElementById('hiddenTitlesModalX').onclick = closeHiddenTitlesModal;
+_hiddenModal.addEventListener('click', function(e){ if (e.target === _hiddenModal) closeHiddenTitlesModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _hiddenModal.style.display !== 'none') closeHiddenTitlesModal(); });
+
+/* ---- "Zugangsdaten": Passwort/E-Mail aendern, jeweils gegen das aktuelle
+   Passwort abgesichert (siehe backend/routes/auth.js). ---- */
+var _accountModal = document.getElementById('accountModal');
+function openAccountModal(){
+  closeSettingsModal();
+  ['pwCurrentForPw','pwNew','pwNewConfirm','pwCurrentForEmail','newEmail'].forEach(function(id){ document.getElementById(id).value = ''; });
+  ['pwError','emailError'].forEach(function(id){ var el = document.getElementById(id); el.textContent = ''; el.classList.remove('ok'); });
+  _accountModal.style.display = 'flex';
+}
+function closeAccountModal(){ _accountModal.style.display = 'none'; }
+document.getElementById('settingsAccountBtn').onclick = openAccountModal;
+document.getElementById('accountModalX').onclick = closeAccountModal;
+_accountModal.addEventListener('click', function(e){ if (e.target === _accountModal) closeAccountModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _accountModal.style.display !== 'none') closeAccountModal(); });
+
+document.getElementById('passwordForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  var errEl = document.getElementById('pwError');
+  errEl.textContent = ''; errEl.classList.remove('ok');
+  var current = document.getElementById('pwCurrentForPw').value;
+  var next = document.getElementById('pwNew').value;
+  var confirmVal = document.getElementById('pwNewConfirm').value;
+  if (next.length < 8) { errEl.textContent = 'Mindestens 8 Zeichen.'; return; }
+  if (next !== confirmVal) { errEl.textContent = 'Die beiden Passwörter stimmen nicht überein.'; return; }
+  try {
+    await apiRequest('PUT', '/api/auth/password', { currentPassword: current, newPassword: next });
+    errEl.textContent = 'Passwort geändert.'; errEl.classList.add('ok');
+    document.getElementById('passwordForm').reset();
+  } catch (err) {
+    errEl.textContent = err.code === 'wrong_current_password' ? 'Aktuelles Passwort ist falsch.' : 'Änderung fehlgeschlagen.';
+  }
+});
+
+document.getElementById('emailForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  var errEl = document.getElementById('emailError');
+  errEl.textContent = ''; errEl.classList.remove('ok');
+  var current = document.getElementById('pwCurrentForEmail').value;
+  var email = document.getElementById('newEmail').value;
+  try {
+    var user = await apiRequest('PUT', '/api/auth/email', { currentPassword: current, newEmail: email });
+    CURRENT_USER = user;
+    renderAuthBar();
+    errEl.textContent = 'E-Mail-Adresse geändert.'; errEl.classList.add('ok');
+    document.getElementById('emailForm').reset();
+  } catch (err) {
+    errEl.textContent = err.code === 'wrong_current_password' ? 'Aktuelles Passwort ist falsch.' : (err.code === 'email_taken' ? 'Diese E-Mail wird bereits verwendet.' : 'Änderung fehlgeschlagen.');
+  }
+});
+
 try { showDetails = localStorage.getItem(DETAILS_PREF_KEY) === '1'; } catch (e) {}
 detailsBtn.classList.toggle('active', showDetails);
 list.classList.toggle('show-details', showDetails);
@@ -1512,6 +1740,7 @@ const authTitle = document.getElementById('authTitle');
 const authToggle = document.getElementById('authToggle');
 const authForgot = document.getElementById('authForgot');
 const authBarUser = document.getElementById('authBarUser');
+const settingsBtn = document.getElementById('settingsBtn');
 const authBarLogin = document.getElementById('authBarLogin');
 const authBarLogout = document.getElementById('authBarLogout');
 let authMode = 'login'; // 'login' | 'register' | 'forgot'
@@ -1535,6 +1764,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNavMe
 function renderAuthBar(){
   authBarUser.textContent = CURRENT_USER ? CURRENT_USER.email : '';
   authBarUser.style.display = CURRENT_USER ? '' : 'none';
+  settingsBtn.style.display = CURRENT_USER ? '' : 'none';
   authBarLogout.style.display = CURRENT_USER ? '' : 'none';
   authBarLogin.style.display = CURRENT_USER ? 'none' : '';
 }
@@ -1637,9 +1867,12 @@ async function loadCatalogAndRefresh(){
     STREAM = streamDoc;
 
     PROGRESS = new Map();
+    HIDDEN_TITLE_IDS = new Set();
     if (CURRENT_USER) {
       const rows = await apiRequest('GET', '/api/progress');
       rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist }));
+      const hidden = await apiRequest('GET', '/api/hidden-titles');
+      hidden.forEach((t) => HIDDEN_TITLE_IDS.add(t.id));
     }
 
     buildPool(combinedRows, streamDoc);
@@ -1796,6 +2029,25 @@ function poolItemLi(item, score, opts){
     if (e.target.closest('.det-actions')) return;
     li.classList.toggle('show-details');
   });
+  // Wisch-Geste: auf Streaming entfernen (wie Gesehen+Watchlist abwaehlen),
+  // auf Discovery dauerhaft ausblenden (siehe Einstellungen -> "Geloeschte
+  // Titel"). Im "Aehnliche Titel"-Popup (suppressSimilar) kein Swipe -- der
+  // Status dort ist kontextabhaengig und eine Wisch-Geste haette keine
+  // eindeutige Bedeutung.
+  if (!(opts && opts.suppressSimilar)) {
+    if (activeTab === 'stream') {
+      attachSwipeToRemove(li, function(){ removeFromMyTitles(item.realId); });
+    } else if (activeTab === 'discovery') {
+      attachSwipeToRemove(li, function(){
+        requireLogin(async () => {
+          var id = await ensurePoolItem(item);
+          await apiRequest('POST', '/api/hidden-titles/' + id).catch(function(){});
+          HIDDEN_TITLE_IDS.add(id);
+          renderDiscovery();
+        });
+      });
+    }
+  }
   return li;
 }
 
@@ -1894,6 +2146,7 @@ async function renderStreaming(){
 function discFilterPool(){
   return POOL.filter(function(i){
     if (getWatchlistFlag(i.realId) || getSeen(i.realId)) return false;
+    if (i.realId != null && HIDDEN_TITLE_IDS.has(i.realId)) return false;
     var isMovie = i.type === 'movie';
     var isSeries = i.type === 'series';
     var isStreaming = i.providers.length > 0;
