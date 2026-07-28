@@ -18,6 +18,11 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    # Seit Wegfall des STREAM_COUNT-Deckels (vorher 60 Titel je Anbieter & Typ)
+    # werden pro Anbieter alle aktuell verfuegbaren Titel geholt (insgesamt
+    # geschaetzt bis zu ca. 22.000/Tag) -- expliziter Sicherheitsspielraum
+    # gegenueber dem GitHub-Actions-Default von 360 Minuten.
+    timeout-minutes: 240
     steps:
       - name: Repo auschecken
         uses: actions/checkout@v4
@@ -39,8 +44,8 @@ jobs:
           # und wie bisher committet.
           STREAMING_API_URL: ${{ vars.STREAMING_API_URL }}
           STREAMING_INGEST_SECRET: ${{ secrets.STREAMING_INGEST_SECRET }}
-          # Optional konfigurierbar:
-          # STREAM_COUNT: "60"
+          # Optional konfigurierbar (kein Titel-Deckel mehr -- ohne diese
+          # Variablen werden alle aktuell verfuegbaren Titel je Anbieter geholt):
           # STREAM_MIN_VOTES: "300"
           # STREAM_MIN_YEAR: "1980"
         run: node stream-fetch.mjs

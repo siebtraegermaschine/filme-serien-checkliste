@@ -25,7 +25,6 @@ const API = 'https://api.themoviedb.org/3';
 const KEY = process.env.TMDB_API_KEY;
 const REGION = process.env.TMDB_REGION || 'DE';
 const LANG = process.env.TMDB_LANG || 'de-DE';
-const COUNT = parseInt(process.env.STREAM_COUNT || '60', 10);   // Titel je Typ & Plattform
 // Keine Mindest-Stimmenzahl mehr per Default: TMDB-Stimmenzahl und IMDb-
 // Stimmenzahl sind zwei unabhaengige Zaehlungen -- gerade neuere oder nicht-
 // englischsprachige Titel (z.B. "Unfamiliar", DE-Produktion) haben bei TMDB oft
@@ -107,7 +106,8 @@ async function discover(kind, providerId, gmap) {
   const out = [];
   const seen = new Set();
   let page = 1;
-  while (out.length < COUNT && page <= 8) {
+  let totalPages = 1;
+  do {
     const params = {
       language: LANG,
       watch_region: REGION,
@@ -120,6 +120,7 @@ async function discover(kind, providerId, gmap) {
     if (MIN_VOTES) params['vote_count.gte'] = MIN_VOTES;
     if (MIN_YEAR) params[dateField] = `${MIN_YEAR}-01-01`;
     const d = await tmdb(`/discover/${kind}`, params);
+    totalPages = Math.min(d.total_pages || 1, 500); // TMDB-Limit: max. 500 Seiten je Query
     for (const it of (d.results || [])) {
       if (seen.has(it.id)) continue; seen.add(it.id);
       const dateStr = kind === 'movie' ? it.release_date : it.first_air_date;
@@ -135,12 +136,10 @@ async function discover(kind, providerId, gmap) {
         r: it.vote_average != null ? Math.round(it.vote_average * 10) / 10 : null,
         ov: (it.overview || '').trim(),            // Kurzbeschreibung/Plot für die Detailansicht
       });
-      if (out.length >= COUNT) break;
     }
-    if (page >= (d.total_pages || 1)) break;
     page++;
     await sleep(250);
-  }
+  } while (page <= totalPages);
   for (const item of out) {
     const ex = await enrich(kind, item.id);
     item.c = ex.cast;

@@ -18,8 +18,8 @@
 const API = 'https://api.themoviedb.org/3';
 const KEY = process.env.TMDB_API_KEY;
 const LANG = process.env.TMDB_LANG || 'de-DE';
-const MIN_RATING = parseFloat(process.env.RATED_MIN_RATING || '6');
-const MIN_VOTES = parseInt(process.env.RATED_MIN_VOTES || '1000', 10);
+const MIN_RATING = parseFloat(process.env.RATED_MIN_RATING || '5');
+const MIN_VOTES = parseInt(process.env.RATED_MIN_VOTES || '100', 10);
 const STREAMING_API_URL = process.env.STREAMING_API_URL || '';
 const TITLES_INGEST_SECRET = process.env.TITLES_INGEST_SECRET || '';
 

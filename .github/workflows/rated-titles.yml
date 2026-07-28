@@ -1,10 +1,10 @@
-name: Discovery-Katalog erweitern (Filme & Serien ab Bewertung 6.0)
+name: Discovery-Katalog erweitern (Filme & Serien ab Bewertung 5.0)
 
 on:
   schedule:
     # Alle 2 Tage um 05:00 UTC -- unabhaengig vom taeglichen Streaming-Ingest
     # (streaming.yml). Bewusst nicht taeglich: dieser Job fragt pro Lauf ca.
-    # 10.000 Mal TMDB an (Cast/Regie/Overview je Titel), die zugrunde liegenden
+    # 26.000 Mal TMDB an (Cast/Regie/Overview je Titel), die zugrunde liegenden
     # Bewertungen/Stimmenzahlen aendern sich aber kaum von Tag zu Tag -- alle 2
     # Tage faengt neu erschienene/neu ueber die Schwelle steigende Titel zeitnah
     # ein, ohne taeglich fast identische Daten neu abzufragen.
@@ -18,7 +18,10 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    # Seit Absenkung der Schwelle auf Bewertung>=5/Stimmen>=100 (vorher 6.0/1000)
+    # ist die Titelmenge von ca. 4.800 auf ca. 26.000 gestiegen (~5.5x) --
+    # entsprechend hochgesetzt gegenueber den vorherigen 120 Minuten.
+    timeout-minutes: 300
     steps:
       - name: Repo auschecken
         uses: actions/checkout@v4
@@ -34,6 +37,6 @@ jobs:
           STREAMING_API_URL: ${{ vars.STREAMING_API_URL }}
           TITLES_INGEST_SECRET: ${{ secrets.TITLES_INGEST_SECRET }}
           # Optional konfigurierbar:
-          # RATED_MIN_RATING: "6"
-          # RATED_MIN_VOTES: "1000"
+          # RATED_MIN_RATING: "5"
+          # RATED_MIN_VOTES: "100"
         run: node discover-rated-titles.mjs
