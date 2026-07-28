@@ -46,7 +46,7 @@
     /* env(safe-area-inset-top) ist 0 ausser bei Geraeten mit Notch/Dynamic-Island/
        Statusleiste (z.B. als installierte PWA auf dem iPhone) -- dort sonst
        ueberdeckt die Statusleiste (Akkustand etc.) das Menue oben rechts. */
-    padding: calc(16px + env(safe-area-inset-top, 0px)) 20px 22px;
+    padding: calc(6px + env(safe-area-inset-top, 0px)) 20px 22px;
     background: linear-gradient(180deg, #131820 0%, var(--bg) 100%);
     border-bottom: 1px solid var(--border);
   }
@@ -69,6 +69,10 @@
     margin-right: auto;
     line-height: 1.5;
   }
+  /* Zusaetzlicher Abstand NUR zwischen Zeile 1 und Zeile 2 (ca. 0,5x der
+     bestehenden Zeilenhoehe von 21px oben drauf) -- ein normaler <br> allein
+     kann keinen groesseren Abstand als die anderen Zeilenumbrueche bekommen. */
+  header p.sub .sub-gap { display: block; height: 10px; }
   .tabs {
     display: flex;
     justify-content: center;
@@ -256,11 +260,11 @@
   .details .credits b { color: var(--text); font-weight: 600; }
   li.item.done .details .plot { color: var(--text-dim); }
 
-  .nav-menu-btn { position:absolute; top:calc(16px + env(safe-area-inset-top, 0px)); right:16px; width:40px; height:40px;
+  .nav-menu-btn { position:absolute; top:calc(6px + env(safe-area-inset-top, 0px)); right:16px; width:40px; height:40px;
     background:var(--card); border:1px solid var(--border); border-radius:8px;
     color:var(--text); font-size:18px; cursor:pointer; z-index:20; line-height:1; }
   @media (hover: hover) { .nav-menu-btn:hover { border-color:var(--accent); color:var(--accent); } }
-  .nav-menu { position:absolute; top:calc(64px + env(safe-area-inset-top, 0px)); right:16px; z-index:20; display:none; flex-direction:column;
+  .nav-menu { position:absolute; top:calc(54px + env(safe-area-inset-top, 0px)); right:16px; z-index:20; display:none; flex-direction:column;
     gap:4px; min-width:190px; background:var(--card); border:1px solid var(--border); border-radius:10px;
     padding:8px; box-shadow:0 10px 30px rgba(0,0,0,.5); }
   .nav-menu.open { display:flex; }
@@ -436,7 +440,7 @@
 <body>
 <header>
   <h1><img class="logo" src="logo.png" alt="MovieTaste – Watch more. Search less."></h1>
-  <p class="sub"><i>Streaming-Angebote</i> sortiert nach Deinem Geschmack!<br>1. Füge die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> zu Deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen".<br>2. Sortiere nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, Deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i> oder nach <i>Neuerscheinungen</i>. 3. Nie wieder lästiges Suchen! Filme &amp; Serien genau nach Deinem Geschmack!</p>
+  <p class="sub"><i>Streaming-Angebote</i> sortiert nach deinem Geschmack!<br><span class="sub-gap"></span>1. Füge die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> zu deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen".<br>2. Sortiere nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, Veröffentlichungsjahr oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Neuerscheinungen / Neu im Streaming">Neuerscheinungen</i>.<br>3. Nie wieder lästiges Suchen! Filme &amp; Serien genau nach deinem Geschmack!</p>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
     <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
@@ -2223,7 +2227,10 @@ function renderDiscovery(){
       'auf der Filmdatenbank IMDb und zeigt, wie gut ein Titel bei einem breiten Publikum ankommt.' },
     discovery: { title:'Discovery', body:'Discovery schlägt dir Filme, Serien und Streaming-Titel vor, die du noch '+
       'nicht gesehen hast – passend zu deinem Taste-Score, also basierend auf Genres, Besetzung, Regie und mehr '+
-      'all deiner bisher per Watchlist oder „Gesehen“ markierten Filme und Serien zusammen.' }
+      'all deiner bisher per Watchlist oder „Gesehen“ markierten Filme und Serien zusammen.' },
+    newreleases: { title:'Neuerscheinungen', body:'Dahinter stecken zwei unterschiedliche Sortierungen: „Veröffentlichungsdatum“ '+
+      'sortiert danach, wann ein Film oder eine Serie ursprünglich erschienen ist. „Neu im Streaming“ sortiert danach, '+
+      'seit wann ein Titel bei einem Streaming-Anbieter neu verfügbar ist – unabhängig davon, wie alt er eigentlich ist.' }
   };
   var bk=document.createElement('div'); bk.className='modal-backdrop'; bk.id='tsModal';
   bk.innerHTML='<div class="modal"><button class="modal-x" aria-label="Schließen">&times;</button>'+
@@ -2234,7 +2241,7 @@ function renderDiscovery(){
     var icon = e.target.closest && e.target.closest('.info-i, .info-word, .score[data-ts]');
     if(icon){
       e.preventDefault(); e.stopPropagation();
-      var key = icon.hasAttribute('data-imdb') ? 'imdb' : (icon.hasAttribute('data-discovery') ? 'discovery' : 'ts');
+      var key = icon.hasAttribute('data-imdb') ? 'imdb' : (icon.hasAttribute('data-discovery') ? 'discovery' : (icon.hasAttribute('data-newreleases') ? 'newreleases' : 'ts'));
       titleEl.textContent = INFO_TEXT[key].title;
       bodyEl.textContent = INFO_TEXT[key].body;
       bk.classList.add('open');
