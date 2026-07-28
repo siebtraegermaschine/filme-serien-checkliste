@@ -26,7 +26,14 @@ const KEY = process.env.TMDB_API_KEY;
 const REGION = process.env.TMDB_REGION || 'DE';
 const LANG = process.env.TMDB_LANG || 'de-DE';
 const COUNT = parseInt(process.env.STREAM_COUNT || '60', 10);   // Titel je Typ & Plattform
-const MIN_VOTES = parseInt(process.env.STREAM_MIN_VOTES || '300', 10);
+// Keine Mindest-Stimmenzahl mehr per Default: TMDB-Stimmenzahl und IMDb-
+// Stimmenzahl sind zwei unabhaengige Zaehlungen -- gerade neuere oder nicht-
+// englischsprachige Titel (z.B. "Unfamiliar", DE-Produktion) haben bei TMDB oft
+// nur eine Handvoll Stimmen, obwohl sie bei IMDb laengst tausende haben und
+// ganz reguplaer im Streaming-Angebot laufen. Verfuegbarkeit beim Anbieter ist
+// hier schon das eigentliche Signal, die Bewertung zeigt sich trotzdem ganz
+// normal in der App. Optional weiterhin per Env-Var einschraenkbar.
+const MIN_VOTES = process.env.STREAM_MIN_VOTES ? parseInt(process.env.STREAM_MIN_VOTES, 10) : null;
 // Keine Jahresuntergrenze mehr per Default (auch Klassiker wie "2001: Odyssee im
 // Weltraum" (1968) sollen auftauchen) -- optional weiterhin per Env-Var einschraenkbar.
 const MIN_YEAR = process.env.STREAM_MIN_YEAR ? parseInt(process.env.STREAM_MIN_YEAR, 10) : null;
@@ -107,10 +114,10 @@ async function discover(kind, providerId, gmap) {
       with_watch_providers: providerId,
       with_watch_monetization_types: 'flatrate',
       sort_by: 'vote_average.desc',
-      'vote_count.gte': MIN_VOTES,
       include_adult: 'false',
       page,
     };
+    if (MIN_VOTES) params['vote_count.gte'] = MIN_VOTES;
     if (MIN_YEAR) params[dateField] = `${MIN_YEAR}-01-01`;
     const d = await tmdb(`/discover/${kind}`, params);
     for (const it of (d.results || [])) {
