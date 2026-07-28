@@ -12,7 +12,7 @@ router.use(requireAuth);
 // gespeicherten Fortschritt abgleichen kann.
 router.get('/', async (req, res) => {
   const { rows } = await pool.query(
-    `SELECT up.title_id, up.seen, up.watchlist, up.via_stream, t.tmdb_id, t.type
+    `SELECT up.title_id, up.seen, up.watchlist, up.via_stream, up.rating, t.tmdb_id, t.type
      FROM user_progress up JOIN titles t ON t.id = up.title_id
      WHERE up.user_id = $1`,
     [req.session.userId]
@@ -23,6 +23,7 @@ router.get('/', async (req, res) => {
       seen: r.seen,
       watchlist: r.watchlist,
       viaStream: r.via_stream,
+      rating: r.rating,
       tmdbId: r.tmdb_id,
       type: r.type,
     }))
@@ -39,7 +40,10 @@ router.put('/:titleId', async (req, res) => {
   if (!Number.isInteger(titleId)) {
     return res.status(400).json({ error: 'invalid_title_id' });
   }
-  const { seen, watchlist, viaStream } = req.body || {};
+  const { seen, watchlist, viaStream, rating } = req.body || {};
+  if (rating != null && (!Number.isInteger(rating) || rating < 1 || rating > 5)) {
+    return res.status(400).json({ error: 'invalid_rating' });
+  }
 
   const { rows: titleRows } = await pool.query(`SELECT id FROM titles WHERE id = $1`, [titleId]);
   if (!titleRows[0]) {
@@ -47,18 +51,19 @@ router.put('/:titleId', async (req, res) => {
   }
 
   const { rows } = await pool.query(
-    `INSERT INTO user_progress (user_id, title_id, seen, watchlist, via_stream)
-     VALUES ($1, $2, COALESCE($3, false), COALESCE($4, false), COALESCE($5, false))
+    `INSERT INTO user_progress (user_id, title_id, seen, watchlist, via_stream, rating)
+     VALUES ($1, $2, COALESCE($3, false), COALESCE($4, false), COALESCE($5, false), $6)
      ON CONFLICT (user_id, title_id) DO UPDATE SET
        seen = COALESCE($3, user_progress.seen),
        watchlist = COALESCE($4, user_progress.watchlist),
        via_stream = COALESCE($5, user_progress.via_stream),
+       rating = COALESCE($6, user_progress.rating),
        updated_at = now()
-     RETURNING title_id, seen, watchlist, via_stream`,
-    [req.session.userId, titleId, seen ?? null, watchlist ?? null, viaStream ?? null]
+     RETURNING title_id, seen, watchlist, via_stream, rating`,
+    [req.session.userId, titleId, seen ?? null, watchlist ?? null, viaStream ?? null, rating ?? null]
   );
 
-  res.json({ titleId: rows[0].title_id, seen: rows[0].seen, watchlist: rows[0].watchlist, viaStream: rows[0].via_stream });
+  res.json({ titleId: rows[0].title_id, seen: rows[0].seen, watchlist: rows[0].watchlist, viaStream: rows[0].via_stream, rating: rows[0].rating });
 });
 
 export default router;

@@ -298,6 +298,10 @@
   .settings-menu button { width:100%; }
   .account-sep { border:none; border-top:1px solid var(--border); margin:20px 0; }
   .unhide-btn { width:100%; }
+  .rating-stars { display:flex; justify-content:center; gap:6px; margin-top:16px; }
+  .rating-stars button { background:none; border:none; font-size:34px; line-height:1; padding:2px;
+    color:var(--border); cursor:pointer; transition:color .1s; }
+  .rating-stars button.active { color:var(--accent); }
   .auth-error { color:#e0655c; font-size:13px; min-height:16px; text-align:center; }
   .auth-error.ok { color:var(--done); }
   .auth-submit { background:var(--accent-soft); border:1px solid var(--accent); color:var(--accent);
@@ -636,6 +640,21 @@
   </div>
 </div>
 
+<div id="ratingModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="ratingModalX" aria-label="Abbrechen">✕</button>
+    <h3>Wie fandest du <span id="ratingModalTitle"></span>?</h3>
+    <p>1 = schlecht, 5 = sehr gut. Fließt in deinen Taste-Score ein.</p>
+    <div class="rating-stars" id="ratingStars">
+      <button type="button" data-star="1" aria-label="1 Stern – schlecht">★</button>
+      <button type="button" data-star="2" aria-label="2 Sterne">★</button>
+      <button type="button" data-star="3" aria-label="3 Sterne – ok">★</button>
+      <button type="button" data-star="4" aria-label="4 Sterne">★</button>
+      <button type="button" data-star="5" aria-label="5 Sterne – sehr gut">★</button>
+    </div>
+  </div>
+</div>
+
 <script>
 let FILME = [], SERIEN = [];
 let DETAILS = { filme: [], serien: [] };
@@ -669,10 +688,11 @@ async function apiRequest(method, path, body) {
   return res.json();
 }
 
-function progressFor(id) { return (id != null && PROGRESS.get(id)) || { seen: false, watchlist: false, viaStream: false }; }
+function progressFor(id) { return (id != null && PROGRESS.get(id)) || { seen: false, watchlist: false, viaStream: false, rating: null }; }
 function getViaStream(id) { return !!progressFor(id).viaStream; }
 function getSeen(id) { return !!progressFor(id).seen; }
 function getWatchlistFlag(id) { return !!progressFor(id).watchlist; }
+function getRating(id) { return progressFor(id).rating || null; }
 function idFor(src, title) {
   const idx = state[src].data.findIndex(it => it[0] === title);
   return idx >= 0 ? state[src].det[idx].id : null;
@@ -1077,13 +1097,20 @@ function wireRow(li, src, i){
   const seenBtn = li.querySelector('.seen-btn');
   if (seenBtn) seenBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    requireLogin(() => {
+    requireLogin(async () => {
       const id = s.det[i].id;
       const next = !s.checked[i];
       // Watchlist und Gesehen schliessen sich gegenseitig aus (siehe toggleWatched).
-      const patch = { seen: next };
-      if (next) patch.watchlist = false;
-      updateProgressRemote(id, patch).catch(() => {});
+      if (next) {
+        // Neu als "gesehen" markiert -- vorher Sterne-Bewertung abfragen (fliesst
+        // gewichtet in den Taste-Score ein, siehe buildProfile). Bricht die Person
+        // ab, bleibt "gesehen" unveraendert.
+        const stars = await openRatingStars(s.data[i][0]);
+        if (stars == null) { seenBtn.blur(); return; }
+        updateProgressRemote(id, { seen: true, watchlist: false, rating: stars }).catch(() => {});
+      } else {
+        updateProgressRemote(id, { seen: false }).catch(() => {});
+      }
       // Filme/Serien/Streaming (oben) zeigen Titel, die entweder per Watchlist-Stern
       // ODER per "Gesehen" hinzugefuegt wurden -- ein Entfernen des Gesehen-Hakens
       // muss die Zeile also verschwinden lassen, falls der Titel nicht zusaetzlich
@@ -1575,6 +1602,16 @@ document.addEventListener('click', function(e){
 /* ================= DISCOVERY ================= */
 let discTypeFilter = { f: true, s: true, stream: true };
 function metaGenre(meta){ const parts=String(meta).split('·'); return parts[1]?parts[1].trim():''; }
+// Gewicht, mit dem ein "gesehen"-Titel je nach Sterne-Bewertung ins Geschmacks-
+// profil einfliesst (siehe buildProfile) -- schlecht bewertete Titel praegen
+// Empfehlungen kaum noch, gut bewertete deutlich staerker. Unbewertete Titel
+// (reine Watchlist-Eintraege, oder "gesehen" markiert bevor es die Sterne-
+// Bewertung gab) zaehlen weiterhin neutral mit Gewicht 1.
+var RATING_WEIGHT = { 1: 0.2, 2: 0.5, 3: 1, 4: 1.5, 5: 2 };
+function profileWeightFor(id){
+  var r = getRating(id);
+  return r ? RATING_WEIGHT[r] : 1;
+}
 function buildProfile(){
   // Ein gemeinsames Geschmacksprofil aus Filmen UND Serien zusammen (Taste-Score,
   // Discovery und die Streaming-Sortierung nutzen alle dieselbe Basis). Es fliesst
@@ -1591,13 +1628,14 @@ function buildProfile(){
   cats.forEach(cat => {
     const s = state[cat];
     for (let i = 0; i < s.data.length; i++){
-      const g=metaGenre(s.data[i][1]); if(g) genre[g]=(genre[g]||0)+1;
       const det=s.det[i]||{};
-      (det.c||[]).forEach(a=>{ if(a) cast[a]=(cast[a]||0)+1; });
-      if(det.d) dir[det.d]=(dir[det.d]||0)+1;
-      (det.h||[]).forEach(k=>{ if(k) kw[k]=(kw[k]||0)+1; });
+      const w = det.id != null ? profileWeightFor(det.id) : 1;
+      const g=metaGenre(s.data[i][1]); if(g) genre[g]=(genre[g]||0)+w;
+      (det.c||[]).forEach(a=>{ if(a) cast[a]=(cast[a]||0)+w; });
+      if(det.d) dir[det.d]=(dir[det.d]||0)+w;
+      (det.h||[]).forEach(k=>{ if(k) kw[k]=(kw[k]||0)+w; });
       const yr = metaYear(s.data[i][1]); if(yr) years.push(yr);
-      n++;
+      n += w;
     }
   });
   return { genre, cast, dir, kw, years, n: Math.max(1,n), usedAll };
@@ -1894,6 +1932,49 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
   }
 });
 
+/* ---- Stern-Bewertung (1-5) beim Markieren als "gesehen": openRatingStars()
+   gibt ein Promise zurueck, das mit der gewaehlten Sternezahl (1-5) aufloest,
+   oder mit null bei Abbruch (Kreuz/Escape/Klick auf den Hintergrund) -- der
+   Aufrufer entscheidet dann, ob "gesehen" trotzdem gesetzt wird. ---- */
+var _ratingModal = document.getElementById('ratingModal');
+var _ratingStars = document.getElementById('ratingStars');
+var _ratingStarBtns = Array.from(_ratingStars.querySelectorAll('button'));
+var _ratingResolve = null;
+function highlightStars(n){
+  _ratingStarBtns.forEach(function(btn){
+    btn.classList.toggle('active', Number(btn.dataset.star) <= n);
+  });
+}
+_ratingStarBtns.forEach(function(btn){
+  btn.addEventListener('mouseenter', function(){ highlightStars(Number(btn.dataset.star)); });
+  btn.addEventListener('click', function(){
+    var n = Number(btn.dataset.star);
+    _ratingModal.style.display = 'none';
+    if (_ratingResolve) { _ratingResolve(n); _ratingResolve = null; }
+  });
+});
+_ratingStars.addEventListener('mouseleave', function(){
+  // Ohne aktive Bewertung (erster Aufruf) zurueck auf 0 -- ein bereits gesetztes
+  // Rating (erneutes Oeffnen fuer denselben Titel gibt es aktuell nicht, aber
+  // schadet auch nicht) bliebe sonst irritierend stehen.
+  highlightStars(0);
+});
+function openRatingStars(title){
+  document.getElementById('ratingModalTitle').textContent = title || 'diesen Titel';
+  highlightStars(0);
+  _ratingModal.style.display = 'flex';
+  return new Promise(function(resolve){
+    _ratingResolve = resolve;
+  });
+}
+function closeRatingModal(){
+  _ratingModal.style.display = 'none';
+  if (_ratingResolve) { _ratingResolve(null); _ratingResolve = null; }
+}
+document.getElementById('ratingModalX').onclick = closeRatingModal;
+_ratingModal.addEventListener('click', function(e){ if (e.target === _ratingModal) closeRatingModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _ratingModal.style.display !== 'none') closeRatingModal(); });
+
 try { showDetails = localStorage.getItem(DETAILS_PREF_KEY) === '1'; } catch (e) {}
 detailsBtn.classList.toggle('active', showDetails);
 list.classList.toggle('show-details', showDetails);
@@ -2043,7 +2124,7 @@ async function loadCatalogAndRefresh(){
     HIDDEN_TITLE_IDS = new Set();
     if (CURRENT_USER) {
       const rows = await apiRequest('GET', '/api/progress');
-      rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist }));
+      rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }));
       const hidden = await apiRequest('GET', '/api/hidden-titles');
       hidden.forEach((t) => HIDDEN_TITLE_IDS.add(t.id));
     }
@@ -2159,9 +2240,16 @@ function poolItemLi(item, score, opts){
       var id = await ensurePoolItem(item);
       var next = !getSeen(id);
       // Watchlist und Gesehen schliessen sich gegenseitig aus (siehe toggleWatched).
-      var patch = { seen: next };
-      if (next) patch.watchlist = false;
-      updateProgressRemote(id, patch).catch(() => {});
+      if (next) {
+        // Neu als "gesehen" markiert -- vorher Sterne-Bewertung abfragen (fliesst
+        // gewichtet in den Taste-Score ein, siehe buildProfile). Bricht die Person
+        // ab, bleibt "gesehen" unveraendert.
+        var stars = await openRatingStars(item.t);
+        if (stars == null) { seenBtn.blur(); return; }
+        updateProgressRemote(id, { seen: true, watchlist: false, rating: stars }).catch(() => {});
+      } else {
+        updateProgressRemote(id, { seen: false }).catch(() => {});
+      }
       seenBtn.classList.toggle('on', next);
       if (next) { wlBtn.classList.remove('on'); wlBtn.textContent = '☆ Watchlist'; }
       seenBtn.blur();
@@ -2353,9 +2441,6 @@ function renderDiscovery(){
   });
   var total = scored.length;
   scored = scored.slice(0, discoveryLoadLimit);
-  var hint=document.createElement('div'); hint.className='disc-hint';
-  hint.innerHTML = (prof.usedAll ? 'Noch wenige Titel markiert – ab 10 per Watchlist oder „Gesehen“ markierten Filmen/Serien wird der Taste Score persönlicher.' : 'Passend zu deinen per Watchlist oder „Gesehen“ markierten Titeln, sortiert nach Taste Score.') + INFO_ICON;
-  list.appendChild(hint);
   scored.forEach(function(row){ list.appendChild(poolItemLi(row.item, row.score)); });
   if(!scored.length){ var p=document.createElement('div'); p.className='disc-hint'; p.textContent='Keine Titel für diese Filterkombination.'; list.appendChild(p); }
   if (total > discoveryLoadLimit){
@@ -2380,10 +2465,11 @@ function renderDiscovery(){
     ts: { title:'Taste-Score', body:'Der Taste-Score (0–99) schätzt, wie gut ein Titel zu deinem Geschmack passt. '+
       'Er wird aus Genres, Film- und Serieninhalten, Besetzung, Regie und der Nähe zum Erscheinungsjahr all deiner '+
       'per Watchlist oder „Gesehen“ markierten Filme und Serien zusammen berechnet. Auch die IMDb-Bewertung des '+
-      'jeweiligen Titels fließt mit ein. Je mehr Titel du markierst, desto '+
-      'persönlicher und treffsicherer wird er. Ab 10 markierten Titeln wird auf Filme, Serien, Streaming und '+
-      'Discovery standardmäßig nach Taste-Score statt IMDb-Bewertung sortiert, sofern du die Sortierung nicht '+
-      'manuell änderst.' },
+      'jeweiligen Titels fließt mit ein. Deine 1-5-Sterne-Bewertung bei „Gesehen“-Titeln zählt zusätzlich mit: '+
+      'schlecht bewertete Titel prägen deinen Geschmack kaum noch, gut bewertete deutlich stärker. Je mehr Titel du '+
+      'markierst, desto persönlicher und treffsicherer wird er. Ab 10 markierten Titeln wird auf Filme, Serien, '+
+      'Streaming und Discovery standardmäßig nach Taste-Score statt IMDb-Bewertung sortiert, sofern du die '+
+      'Sortierung nicht manuell änderst.' },
     imdb: { title:'IMDb-Bewertung', body:'Die IMDb-Bewertung ist die durchschnittliche Nutzerbewertung (0–10) '+
       'auf der Filmdatenbank IMDb und zeigt, wie gut ein Titel bei einem breiten Publikum ankommt.' },
     discovery: { title:'Discovery', body:'Discovery schlägt dir Filme, Serien und Streaming-Titel vor, die du noch '+

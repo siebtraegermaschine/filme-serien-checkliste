@@ -65,6 +65,11 @@ CREATE TABLE IF NOT EXISTS user_progress (
   PRIMARY KEY (user_id, title_id)
 );
 ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS via_stream BOOLEAN NOT NULL DEFAULT false;
+-- 1-5-Sterne-Bewertung, die beim Markieren als "gesehen" abgefragt wird (siehe
+-- index.html, openRatingModal). Fliesst gewichtet in den Taste-Score ein (siehe
+-- buildProfile/RATING_WEIGHT) -- NULL fuer reine Watchlist-Eintraege oder
+-- Alt-Titel von vor dieser Funktion, die zaehlen weiterhin neutral (Gewicht 1).
+ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS rating SMALLINT CHECK (rating IS NULL OR rating BETWEEN 1 AND 5);
 
 -- Titel, die eine Person per Swipe aus ihrer eigenen Discovery-Ansicht entfernt
 -- hat ("Gelöschte Titel" unter Einstellungen). Rein pro Nutzer:in -- der Titel
