@@ -420,6 +420,15 @@
   .search-x { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: none; background: transparent; color: var(--text-dim); font-size: 20px; line-height: 1; cursor: pointer; padding: 0 6px; }
   @media (hover: hover) { .search-x:hover { color: var(--accent); } }
   #search:placeholder-shown + .search-x { display: none; }
+  .search-suggest { position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 30;
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.5); overflow: hidden; }
+  .search-suggest button { display: flex; width: 100%; align-items: baseline; gap: 8px;
+    padding: 9px 14px; background: none; border: none; border-bottom: 1px solid var(--border);
+    color: var(--text); font-size: 14px; text-align: left; cursor: pointer; }
+  .search-suggest button:last-child { border-bottom: none; }
+  @media (hover: hover) { .search-suggest button:hover { background: var(--card-hover); } }
+  .search-suggest .suggest-type { color: var(--text-dim); font-size: 11px; flex: none; margin-left: auto; }
   .sort-wrap > #fSort { width: 100%; }
   .filter-group { display: flex; gap: 10px; }
   .filter-group button { flex: 1; white-space: nowrap; }
@@ -466,8 +475,9 @@
 <div class="toolbar">
   <div class="tb-grid">
     <div class="search-wrap">
-      <input type="text" id="search" placeholder="Titel, Genre oder Namen suchen …">
+      <input type="text" id="search" placeholder="Titel, Genre oder Namen suchen …" autocomplete="off">
       <button type="button" id="searchClear" class="search-x" aria-label="Suche löschen">×</button>
+      <div id="searchSuggest" class="search-suggest" style="display:none"></div>
     </div>
     <div class="sort-wrap">
       <button id="fSort" type="button" title="Sortierung">⇅ Sortieren</button>
@@ -798,6 +808,7 @@ function buildPool(combinedRows, streamDoc){
       });
     });
   });
+  buildSearchIndex();
 }
 // Legt einen noch "virtuellen" Pool-Eintrag (nur aus dem Streaming-Angebot bekannt,
 // noch keine title_id) bei Bedarf serverseitig an und liefert seine interne ID.
@@ -1359,6 +1370,156 @@ if (_searchClear) _searchClear.addEventListener('click', function () {
   searchEl.value = '';
   searchEl.dispatchEvent(new Event('input'));
   searchEl.focus();
+});
+
+/* ---- Autovervollstaendigung: Kombination aus (1) Tippfehler-toleranter
+   Fuzzy-Suche (Levenshtein-Distanz, faengt z.B. "Schwarzeneger" statt
+   "Schwarzenegger" ab) und (2) einer kleinen Synonym-Liste fuer bekannte
+   Begriffs-Luecken (z.B. "Dokumentation" -> "Dokumentarfilm", die Bezeichnung
+   in unserer Datenbank). Arbeitet rein clientseitig auf dem bereits geladenen
+   POOL (Titel, Genres, Cast, Regie), kein zusaetzlicher Server-Call. ---- */
+var SEARCH_SYNONYMS = {
+  'dokumentation': 'Dokumentarfilm',
+  'doku': 'Dokumentarfilm',
+  'zeichentrick': 'Animation',
+  'zeichentrickfilm': 'Animation',
+  'kinder': 'Kids',
+  'kinderfilm': 'Kids',
+  'nachrichten': 'News',
+  'krieg': 'War & Politics',
+  'kriegsserie': 'War & Politics',
+};
+function levenshteinDistance(a, b){
+  if (a === b) return 0;
+  var m = a.length, n = b.length;
+  if (!m) return n; if (!n) return m;
+  var prev = new Array(n + 1);
+  for (var j = 0; j <= n; j++) prev[j] = j;
+  for (var i = 1; i <= m; i++){
+    var cur = [i];
+    for (var j2 = 1; j2 <= n; j2++){
+      cur[j2] = a[i-1] === b[j2-1] ? prev[j2-1] : 1 + Math.min(prev[j2-1], prev[j2], cur[j2-1]);
+    }
+    prev = cur;
+  }
+  return prev[n];
+}
+// Bestbewertete Uebereinstimmung von query gegen candidate (ganzer String UND,
+// bei mehrteiligen Namen wie "Arnold Schwarzenegger", jedes einzelne Wort --
+// sonst wuerde ein Tippfehler im Nachnamen allein wegen der Laenge des ganzen
+// Namens nie als "nah genug" gewertet). Hoeher = besser, 0 = keine Uebereinstimmung.
+function matchScore(query, candidate){
+  var q = query.toLowerCase();
+  var c = candidate.toLowerCase();
+  if (c === q) return 100;
+  if (c.indexOf(q) === 0) return 90;
+  // "query enthaelt candidate" nur ab einer gewissen Kandidaten-Laenge werten --
+  // sonst matcht ein kurzes Wort wie "Men" zufaellig als Teilstring von fast
+  // allem (z.B. steckt "men" rein zeichenweise in "Dokumentation").
+  if (c.indexOf(q) !== -1 || (c.length >= 4 && q.indexOf(c) !== -1)) return 70;
+  var words = c.split(/\s+/).concat([c]);
+  var best = 0;
+  for (var i = 0; i < words.length; i++){
+    var w = words[i];
+    if (!w) continue;
+    var maxLen = Math.max(w.length, q.length);
+    var dist = levenshteinDistance(q, w);
+    // Nur als Tippfehler werten, wenn die Distanz im Verhaeltnis zur Wortlaenge
+    // klein ist (sonst landen voellig unpassende Woerter im Vorschlag).
+    if (dist <= Math.max(1, Math.ceil(maxLen * 0.3))){
+      var score = 50 - dist * 5;
+      if (score > best) best = score;
+    }
+  }
+  return best;
+}
+var SEARCH_INDEX = [];
+function buildSearchIndex(){
+  var seen = new Set();
+  var idx = [];
+  function add(text, type){
+    if (!text) return;
+    var key = type + '|' + text.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+    idx.push({ text: text, type: type });
+  }
+  POOL.forEach(function(item){
+    add(item.t, 'Titel');
+    (item.g || []).forEach(function(g){ add(g, 'Genre'); });
+    (item.c || []).forEach(function(c){ add(c, 'Darsteller'); });
+    add(item.d, 'Regie');
+  });
+  SEARCH_INDEX = idx;
+}
+function getSearchSuggestions(query){
+  var q = query.trim();
+  if (q.length < 2) return [];
+  var results = [];
+  var qLower = q.toLowerCase();
+  // Synonym-Treffer zuerst (hoechste Prioritaet) -- z.B. "Dokumentation" tippen
+  // schlaegt direkt "Dokumentarfilm" vor, auch wenn beide Woerter sich als
+  // Zeichenketten kaum aehneln.
+  Object.keys(SEARCH_SYNONYMS).forEach(function(key){
+    if (key.indexOf(qLower) !== -1 || qLower.indexOf(key) !== -1){
+      results.push({ text: SEARCH_SYNONYMS[key], type: 'Genre', score: 95 });
+    }
+  });
+  SEARCH_INDEX.forEach(function(entry){
+    var score = matchScore(q, entry.text);
+    if (score > 0) results.push({ text: entry.text, type: entry.type, score: score });
+  });
+  var byText = new Map();
+  results.forEach(function(r){
+    var key = r.text.toLowerCase();
+    if (!byText.has(key) || byText.get(key).score < r.score) byText.set(key, r);
+  });
+  return Array.from(byText.values())
+    .sort(function(a, b){ return b.score - a.score || a.text.length - b.text.length; })
+    .slice(0, 8);
+}
+var _searchSuggestEl = document.getElementById('searchSuggest');
+function renderSearchSuggestions(){
+  var suggestions = getSearchSuggestions(searchEl.value);
+  if (!suggestions.length){ _searchSuggestEl.style.display = 'none'; return; }
+  _searchSuggestEl.innerHTML = suggestions.map(function(s){
+    return '<button type="button" data-text="' + escAttr(s.text) + '">' +
+      '<span>' + esc(s.text) + '</span><span class="suggest-type">' + esc(s.type) + '</span></button>';
+  }).join('');
+  _searchSuggestEl.style.display = 'block';
+}
+var _suppressSuggestOnFocus = false;
+function chooseSearchSuggestion(text){
+  clearTimeout(_searchSuggestTimer);
+  searchEl.value = text;
+  searchEl.dispatchEvent(new Event('input'));
+  clearTimeout(_searchSuggestTimer);
+  _searchSuggestEl.style.display = 'none';
+  _suppressSuggestOnFocus = true;
+  searchEl.focus();
+}
+_searchSuggestEl.addEventListener('click', function(e){
+  var btn = e.target.closest('button');
+  if (btn) chooseSearchSuggestion(btn.dataset.text);
+});
+var _searchSuggestTimer = null;
+searchEl.addEventListener('input', function(){
+  clearTimeout(_searchSuggestTimer);
+  _searchSuggestTimer = setTimeout(renderSearchSuggestions, 120);
+});
+searchEl.addEventListener('focus', function(){
+  // Nach Auswahl eines Vorschlags fokussiert chooseSearchSuggestion() das Feld
+  // bewusst neu (fuer sofortiges Weitertippen) -- ohne dieses Flag wuerde genau
+  // dieser Fokus-Wechsel das gerade erst geschlossene Dropdown sofort wieder
+  // aufklappen.
+  if (_suppressSuggestOnFocus) { _suppressSuggestOnFocus = false; return; }
+  if (searchEl.value.trim().length >= 2) renderSearchSuggestions();
+});
+document.addEventListener('click', function(e){
+  if (!e.target.closest('.search-wrap')) _searchSuggestEl.style.display = 'none';
+});
+searchEl.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') _searchSuggestEl.style.display = 'none';
 });
 
 function applyFilter() {
