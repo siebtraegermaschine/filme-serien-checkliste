@@ -87,6 +87,18 @@ CREATE TABLE IF NOT EXISTS streaming_cache (
 );
 ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS first_seen_at TIMESTAMPTZ NOT NULL DEFAULT now();
 
+-- Protokolliert manuell eingegebene Suchbegriffe (siehe backend/routes/searchLog.js)
+-- fuer spaetere Auswertung, welche Titel/Begriffe Nutzer:innen suchen, aber (noch)
+-- nicht finden -- Basis fuer Katalog-Erweiterungen. user_email ist NULL, wenn die
+-- suchende Person nicht eingeloggt ist.
+CREATE TABLE IF NOT EXISTS search_queries (
+  id         BIGSERIAL PRIMARY KEY,
+  query      TEXT NOT NULL,
+  user_email CITEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_search_queries_created_at ON search_queries (created_at);
+
 -- Von connect-pg-simple genutzte Session-Tabelle (Standard-Schema des Pakets).
 CREATE TABLE IF NOT EXISTS session (
   sid    VARCHAR NOT NULL COLLATE "default" PRIMARY KEY,

@@ -1204,6 +1204,29 @@ if (sortBtn && sortMenu) {
 }
 
 searchEl.addEventListener('input', applyFilter);
+// Protokolliert manuell eingegebene Suchbegriffe fuer spaetere Auswertung (siehe
+// backend/routes/searchLog.js) -- 800ms nach der letzten Eingabe (nicht bei jedem
+// Tastendruck) und dedupliziert, damit z.B. Backspace+erneutes Tippen desselben
+// Begriffs nicht doppelt landet. Faengt zusaetzlich beim Verlassen des Feldes ab,
+// falls die Person schneller wegklickt als das Debounce-Delay.
+var _searchLogTimer = null;
+var _searchLogLastSent = '';
+function logSearchQuery(q){
+  q = q.trim();
+  if (!q || q === _searchLogLastSent) return;
+  _searchLogLastSent = q;
+  apiRequest('POST', '/api/search-log', { query: q }).catch(function(){});
+}
+searchEl.addEventListener('input', function(){
+  clearTimeout(_searchLogTimer);
+  var v = searchEl.value;
+  if (!v.trim()) { _searchLogLastSent = ''; return; }
+  _searchLogTimer = setTimeout(function(){ logSearchQuery(v); }, 800);
+});
+searchEl.addEventListener('blur', function(){
+  clearTimeout(_searchLogTimer);
+  logSearchQuery(searchEl.value);
+});
 var _searchClear = document.getElementById('searchClear');
 if (_searchClear) _searchClear.addEventListener('click', function () {
   searchEl.value = '';
