@@ -10,6 +10,7 @@ import authRouter from './routes/auth.js';
 import titlesRouter from './routes/titles.js';
 import progressRouter from './routes/progress.js';
 import streamingRouter from './routes/streaming.js';
+import feedbackRouter from './routes/feedback.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PgSession = connectPgSimple(session);
@@ -53,6 +54,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/titles', titlesRouter);
 app.use('/api/progress', progressRouter);
 app.use('/api/streaming', streamingRouter);
+app.use('/api/feedback', feedbackRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
 const frontendRoot = path.join(__dirname, '..');

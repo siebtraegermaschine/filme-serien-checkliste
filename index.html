@@ -10,7 +10,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -43,7 +43,10 @@
   header {
     position: relative;
     text-align: center;
-    padding: 40px 20px 22px;
+    /* env(safe-area-inset-top) ist 0 ausser bei Geraeten mit Notch/Dynamic-Island/
+       Statusleiste (z.B. als installierte PWA auf dem iPhone) -- dort sonst
+       ueberdeckt die Statusleiste (Akkustand etc.) das Menue oben rechts. */
+    padding: calc(40px + env(safe-area-inset-top, 0px)) 20px 22px;
     background: linear-gradient(180deg, #131820 0%, var(--bg) 100%);
     border-bottom: 1px solid var(--border);
   }
@@ -252,11 +255,11 @@
   .details .credits b { color: var(--text); font-weight: 600; }
   li.item.done .details .plot { color: var(--text-dim); }
 
-  .nav-menu-btn { position:absolute; top:16px; right:16px; width:40px; height:40px;
+  .nav-menu-btn { position:absolute; top:calc(16px + env(safe-area-inset-top, 0px)); right:16px; width:40px; height:40px;
     background:var(--card); border:1px solid var(--border); border-radius:8px;
     color:var(--text); font-size:18px; cursor:pointer; z-index:20; line-height:1; }
   @media (hover: hover) { .nav-menu-btn:hover { border-color:var(--accent); color:var(--accent); } }
-  .nav-menu { position:absolute; top:64px; right:16px; z-index:20; display:none; flex-direction:column;
+  .nav-menu { position:absolute; top:calc(64px + env(safe-area-inset-top, 0px)); right:16px; z-index:20; display:none; flex-direction:column;
     gap:4px; min-width:190px; background:var(--card); border:1px solid var(--border); border-radius:10px;
     padding:8px; box-shadow:0 10px 30px rgba(0,0,0,.5); }
   .nav-menu.open { display:flex; }
@@ -275,6 +278,9 @@
   .auth-form input { background:var(--bg); color:var(--text); border:1px solid var(--border);
     border-radius:8px; padding:9px 11px; font-size:14px; }
   .auth-form input:focus { outline:none; border-color:var(--accent); }
+  .feedback-textarea { width:100%; background:var(--bg); color:var(--text); border:1px solid var(--border);
+    border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; resize:vertical; box-sizing:border-box; }
+  .feedback-textarea:focus { outline:none; border-color:var(--accent); }
   .auth-error { color:#e0655c; font-size:13px; min-height:16px; text-align:center; }
   .auth-error.ok { color:var(--done); }
   .auth-submit { background:var(--accent-soft); border:1px solid var(--accent); color:var(--accent);
@@ -417,19 +423,20 @@
 <body>
 <header>
   <h1><img class="logo" src="logo.png" alt="MovieTaste – Watch more. Search less."></h1>
-  <p class="sub">Sortiere die besten Filme & Serien nach IMDb-Bewertung, deinem Taste-Score oder nach Neuerscheinungen. Nie wieder lästiges Suchen nach Filmen & Serien die zu dir passen!</p>
+  <p class="sub">Sortiere die besten Filme & Serien nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i> oder nach Neuerscheinungen. Siehe, was aktuell im Streaming läuft, sortiert nach deinem Geschmack.<br>Nie wieder lästiges Suchen nach Filmen & Serien, die genau zu dir passen!</p>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
     <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
+    <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <div id="authBarUser" class="nav-menu-user" style="display:none"></div>
     <button type="button" id="authBarLogin" class="nav-menu-item">Anmelden</button>
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
   </div>
   <div class="tabs">
     <div class="tabs-row">
-      <button id="tabStream">📡 Streaming</button>
-      <button id="tabFilme" class="active">🎬 Filme</button>
+      <button id="tabStream" class="active">📡 Streaming</button>
+      <button id="tabFilme">🎬 Filme</button>
       <button id="tabSerien">📺 Serien</button>
     </div>
     <div class="tabs-row">
@@ -543,6 +550,21 @@
       </div>
     </div>
     <div id="installInstructions" style="display:none"></div>
+  </div>
+</div>
+
+<div id="feedbackModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="feedbackModalX" aria-label="Schließen">✕</button>
+    <h3>Feedback senden</h3>
+    <div id="feedbackForm">
+      <textarea id="feedbackText" class="feedback-textarea" rows="5" maxlength="5000" placeholder="Was möchtest du uns mitteilen?"></textarea>
+      <div id="feedbackError" class="auth-error"></div>
+      <div class="modal-actions">
+        <button type="button" id="feedbackSubmit" class="modal-yes">Absenden</button>
+      </div>
+    </div>
+    <div id="feedbackSuccess" style="display:none"><p>Danke für dein Feedback!</p></div>
   </div>
 </div>
 
@@ -772,7 +794,7 @@ function rebuild(){
   state.serien.checked = state.serien.det.map(d => getSeen(d.id));
 }
 rebuild();
-let activeTab = 'filme';
+let activeTab = 'stream';
 let mode = 'all';
 let showDetails = false;
 const DETAILS_PREF_KEY = 'top200-show-details-v1';
@@ -1409,6 +1431,45 @@ document.getElementById('installAndroid').onclick = function(){
   );
 };
 
+/* ---- "Feedback senden": einfaches Formular (nur Text + Absenden), landet per
+   E-Mail bei info@movietaste.de (siehe backend/routes/feedback.js). Oeffentlich,
+   kein Login noetig -- ist die Person eingeloggt, ergaenzt das Backend ihre
+   E-Mail automatisch, ohne dass das Formular dafuer ein Feld braucht. ---- */
+var _feedbackModal = document.getElementById('feedbackModal');
+var _feedbackForm = document.getElementById('feedbackForm');
+var _feedbackSuccess = document.getElementById('feedbackSuccess');
+var _feedbackText = document.getElementById('feedbackText');
+var _feedbackError = document.getElementById('feedbackError');
+var _feedbackSubmit = document.getElementById('feedbackSubmit');
+function openFeedbackModal(){
+  _feedbackForm.style.display = '';
+  _feedbackSuccess.style.display = 'none';
+  _feedbackText.value = '';
+  _feedbackError.textContent = '';
+  _feedbackModal.style.display = 'flex';
+}
+function closeFeedbackModal(){ _feedbackModal.style.display = 'none'; }
+document.getElementById('feedbackBtn').onclick = () => { closeNavMenu(); openFeedbackModal(); };
+document.getElementById('feedbackModalX').onclick = closeFeedbackModal;
+_feedbackModal.addEventListener('click', function(e){ if (e.target === _feedbackModal) closeFeedbackModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _feedbackModal.style.display !== 'none') closeFeedbackModal(); });
+_feedbackSubmit.onclick = function(){
+  var text = _feedbackText.value.trim();
+  if (!text) { _feedbackError.textContent = 'Bitte einen Text eingeben.'; return; }
+  _feedbackError.textContent = '';
+  _feedbackSubmit.disabled = true;
+  _feedbackSubmit.textContent = 'Sende …';
+  apiRequest('POST', '/api/feedback', { message: text }).then(function(){
+    _feedbackForm.style.display = 'none';
+    _feedbackSuccess.style.display = '';
+  }).catch(function(){
+    _feedbackError.textContent = 'Senden fehlgeschlagen, bitte später erneut versuchen.';
+  }).finally(function(){
+    _feedbackSubmit.disabled = false;
+    _feedbackSubmit.textContent = 'Absenden';
+  });
+};
+
 try { showDetails = localStorage.getItem(DETAILS_PREF_KEY) === '1'; } catch (e) {}
 detailsBtn.classList.toggle('active', showDetails);
 list.classList.toggle('show-details', showDetails);
@@ -1571,7 +1632,7 @@ async function loadCatalogAndRefresh(){
 }
 
 renderAuthBar();
-setTab('filme');
+setTab('stream');
 apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() => { CURRENT_USER = null; }).finally(() => {
   renderAuthBar();
   loadCatalogAndRefresh();
