@@ -274,6 +274,14 @@
   .similar-modal { max-width:600px; width:100%; max-height:82vh; display:flex; flex-direction:column; }
   .similar-modal h3 { color:var(--accent); font-size:17px; margin-bottom:12px; padding-right:22px; }
   .similar-modal-list { overflow-y:auto; flex:1; margin:0; -webkit-overflow-scrolling:touch; }
+  /* Im Popup ist die Spalte fuer Titel/Aktionen schmaler als auf Discovery/
+     Streaming (Poster + Modal-Rand nehmen relativ mehr Platz weg) -- kleineres
+     Poster und kompaktere Abstaende schaffen genug Raum, damit Watchlist und
+     Gesehen nebeneinander in eine Zeile passen statt umzubrechen. */
+  #similarModalList .dposter { width:52px; height:78px; }
+  #similarModalList li.disc { padding:10px 8px; gap:8px; }
+  #similarModalList .det-actions { gap:6px; }
+  #similarModalList .det-actions button { padding:8px 8px; font-size:12.5px; }
   .auth-form { display:flex; flex-direction:column; gap:12px; }
   .auth-form label { display:flex; flex-direction:column; gap:5px; font-size:13px; color:var(--text-dim); }
   .auth-form input { background:var(--bg); color:var(--text); border:1px solid var(--border);
