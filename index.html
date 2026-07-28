@@ -428,7 +428,7 @@
 <body>
 <header>
   <h1><img class="logo" src="logo.png" alt="MovieTaste – Watch more. Search less."></h1>
-  <p class="sub">Aktuelle <i>Streaming-Angebote</i> sortiert nach deinem Geschmack! Füge die historisch besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> zu deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen".<br>Sortiere alle Titel nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i> oder nach <i>Neuerscheinungen</i>. Nie wieder lästiges Suchen nach Filmen & Serien, die genau zu dir passen!</p>
+  <p class="sub">Aktuelle <i>Streaming-Angebote</i> sortiert nach deinem Geschmack! Füge die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> zu deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen".<br>Sortiere alle Titel nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i> oder nach <i>Neuerscheinungen</i>. Nie wieder lästiges Suchen nach Filmen & Serien, die genau zu dir passen!</p>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
     <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
@@ -2013,6 +2013,14 @@ function poolItemLi(item, score, opts){
       var patch = { watchlist: next };
       if (next) patch.seen = false;
       await updateProgressRemote(id, patch).catch(() => {});
+      // Direktes Update des eigenen Buttons (analog zum Gesehen-Handler oben) --
+      // noetig, weil loadCatalogAndRefresh() unten zwar #list neu rendert, aber
+      // NICHT ein ggf. gerade offenes "Aehnliche Titel"-Popup (eigene, davon
+      // unabhaengige Liste). Ohne das hier passierte in diesem Popup beim Klick
+      // auf Watchlist sichtbar gar nichts.
+      wlBtn.classList.toggle('on', next);
+      wlBtn.textContent = (next ? '★' : '☆') + ' Watchlist';
+      if (next) seenBtn.classList.remove('on');
       wlBtn.blur();
       // Watchlist-Aenderung wirkt sich auf Filme/Serien/Streaming (oben) aus --
       // deshalb komplett neu laden/rendern statt nur die Zeile zu aktualisieren.
