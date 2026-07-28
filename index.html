@@ -423,12 +423,12 @@
 <body>
 <header>
   <h1><img class="logo" src="logo.png" alt="MovieTaste – Watch more. Search less."></h1>
-  <p class="sub">Sortiere die besten Filme & Serien nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i> oder nach Neuerscheinungen. Siehe, was aktuell im Streaming läuft, sortiert nach deinem Geschmack.<br>Nie wieder lästiges Suchen nach Filmen & Serien, die genau zu dir passen!</p>
+  <p class="sub">Sortiere die besten Filme & Serien nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i> oder nach Neuerscheinungen. Siehe, was aktuell im Streaming läuft, sortiert nach deinem Geschmack. Nie wieder lästiges Suchen nach Filmen & Serien, die genau zu dir passen!</p>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
     <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
-    <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
+    <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
     <div id="authBarUser" class="nav-menu-user" style="display:none"></div>
     <button type="button" id="authBarLogin" class="nav-menu-item">Anmelden</button>
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
@@ -455,9 +455,9 @@
       <button id="fSort" type="button" title="Sortierung">⇅ Sortieren</button>
       <div id="sortMenu" class="sort-menu" style="display:none">
         <button type="button" data-sort="imdb" class="active">Sortieren nach IMDb-Bewertung</button>
-        <button type="button" data-sort="taste">nach Taste-Score</button>
         <button type="button" data-sort="year">nach Veröffentlichungsdatum</button>
         <button type="button" data-sort="newstream" id="sortNewstream">nach Neu im Streaming</button>
+        <button type="button" data-sort="taste">nach Taste-Score</button>
       </div>
     </div>
     <div class="filter-group">
@@ -1728,13 +1728,15 @@ function poolItemLi(item, score, opts){
   // (das ist ja bereits die globale Vorschlags-Ansicht) und nicht innerhalb des
   // "Ähnliche Titel"-Popups selbst (kein rekursiver Button dort, siehe opts.suppressSimilar).
   var showSimilarBtn = activeTab !== 'discovery' && !(opts && opts.suppressSimilar);
+  var seenBtnHtml = '<button type="button" class="seen-btn'+(seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> gesehen</button>';
+  var wlBtnHtml = '<div class="det-left"><button type="button" class="wl-btn'+(watchlisted?' on':'')+'">'+(watchlisted?'★':'☆')+' Watchlist</button></div>';
+  // Im "Aehnliche Titel"-Popup (suppressSimilar) links Watchlist, rechts Gesehen --
+  // ueberall sonst (Discovery/Streaming-Listen) bleibt die bisherige Reihenfolge.
+  var orderedActionsHtml = (opts && opts.suppressSimilar) ? (wlBtnHtml + seenBtnHtml) : (seenBtnHtml + wlBtnHtml);
   var actionsHtml =
     '<div class="det-actions">' +
       (showSimilarBtn ? '<button type="button" class="similar-btn">Ähnliche Titel</button>' : '') +
-      '<button type="button" class="seen-btn'+(seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> gesehen</button>' +
-      '<div class="det-left">' +
-        '<button type="button" class="wl-btn'+(watchlisted?' on':'')+'">'+(watchlisted?'★':'☆')+' Watchlist</button>' +
-      '</div>' +
+      orderedActionsHtml +
     '</div>';
   li.innerHTML =
     poster +
