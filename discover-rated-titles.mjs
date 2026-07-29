@@ -78,37 +78,70 @@ async function overviewWithFallback(kind, id, primaryOverview) {
   } catch (e) { return ''; }
 }
 
+function addItem(it, kind, gmap, out, seen) {
+  if (seen.has(it.id)) return;
+  seen.add(it.id);
+  const dateStr = kind === 'movie' ? it.release_date : it.first_air_date;
+  const year = dateStr ? parseInt(dateStr.slice(0, 4), 10) : null;
+  out.push({
+    tmdbId: it.id,
+    type: kind === 'movie' ? 'movie' : 'series',
+    title: kind === 'movie' ? it.title : it.name,
+    year,
+    genres: (it.genre_ids || []).map((id2) => gmap[id2]).filter(Boolean),
+    posterPath: it.poster_path || null,
+    rating: it.vote_average != null ? Math.round(it.vote_average * 10) / 10 : null,
+    overviewRaw: it.overview || '',
+  });
+}
+
+function fetchRange(kind, gteRating, lteRating, page) {
+  return tmdb(`/discover/${kind}`, {
+    language: LANG,
+    sort_by: 'vote_average.desc',
+    'vote_average.gte': gteRating,
+    'vote_average.lte': lteRating,
+    'vote_count.gte': MIN_VOTES,
+    include_adult: 'false',
+    page,
+  });
+}
+
+// TMDB begrenzt /discover hart auf 500 Seiten (= 10.000 Treffer) je Abfrage --
+// bei Filmen (~22.000 ab Bewertung>=5) wuerde eine einzelne, unaufgeteilte
+// Abfrage nur die (nach Bewertung sortierten) Top 10.000 liefern, der Rest
+// bliebe unerreichbar. Deshalb wird der Bewertungsbereich rekursiv in immer
+// kleinere Bloecke aufgeteilt, bis jeder Block sicher unter dem Limit bleibt.
+const MAX_PER_BUCKET = 9800;
+
+async function discoverRange(kind, gmap, gteRating, lteRating, out, seen) {
+  const d = await fetchRange(kind, gteRating, lteRating, 1);
+  const total = d.total_results || 0;
+  if (total === 0) return;
+  const totalPages = Math.min(d.total_pages || 1, 500);
+
+  if (total > MAX_PER_BUCKET && lteRating - gteRating > 0.02) {
+    const mid = Math.round(((gteRating + lteRating) / 2) * 100) / 100;
+    if (mid > gteRating && mid < lteRating) {
+      await discoverRange(kind, gmap, gteRating, mid, out, seen);
+      await discoverRange(kind, gmap, Math.round((mid + 0.01) * 100) / 100, lteRating, out, seen);
+      return;
+    }
+  }
+
+  console.log(`  Bereich ${gteRating.toFixed(2)}-${lteRating.toFixed(2)}: ${total} Treffer (${totalPages} Seiten)`);
+  for (const it of d.results || []) addItem(it, kind, gmap, out, seen);
+  for (let page = 2; page <= totalPages; page++) {
+    await sleep(200);
+    const dp = await fetchRange(kind, gteRating, lteRating, page);
+    for (const it of dp.results || []) addItem(it, kind, gmap, out, seen);
+  }
+}
+
 async function discoverAll(kind, gmap) {
   const out = [];
-  let page = 1;
-  let totalPages = 1;
-  do {
-    const d = await tmdb(`/discover/${kind}`, {
-      language: LANG,
-      sort_by: 'vote_average.desc',
-      'vote_average.gte': MIN_RATING,
-      'vote_count.gte': MIN_VOTES,
-      include_adult: 'false',
-      page,
-    });
-    totalPages = Math.min(d.total_pages || 1, 500); // TMDB-Limit: max. 500 Seiten je Query
-    for (const it of d.results || []) {
-      const dateStr = kind === 'movie' ? it.release_date : it.first_air_date;
-      const year = dateStr ? parseInt(dateStr.slice(0, 4), 10) : null;
-      out.push({
-        tmdbId: it.id,
-        type: kind === 'movie' ? 'movie' : 'series',
-        title: kind === 'movie' ? it.title : it.name,
-        year,
-        genres: (it.genre_ids || []).map((id2) => gmap[id2]).filter(Boolean),
-        posterPath: it.poster_path || null,
-        rating: it.vote_average != null ? Math.round(it.vote_average * 10) / 10 : null,
-        overviewRaw: it.overview || '',
-      });
-    }
-    page++;
-    await sleep(200);
-  } while (page <= totalPages);
+  const seen = new Set();
+  await discoverRange(kind, gmap, MIN_RATING, 10, out, seen);
   return out;
 }
 
