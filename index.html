@@ -508,6 +508,17 @@
 
 <div class="toolbar">
   <div class="tb-grid">
+    <div class="filter-group">
+      <button id="fAll" class="active">Alle</button>
+      <button id="fOpen">★ Watchlist</button>
+      <button id="fDone">✓ Gesehen</button>
+    </div>
+    <div class="tb-row tb-discfilters" style="display:none">
+      <button id="discFilme" class="active">Filme</button>
+      <button id="discSerien" class="active">Serien</button>
+      <button id="discStream" class="active">Streaming</button>
+    </div>
+    <button id="fDetails">🔎 Details</button>
     <div class="search-wrap">
       <input type="text" id="search" placeholder="Titel, Genre oder Namen suchen …" autocomplete="off">
       <button type="button" id="searchClear" class="search-x" aria-label="Suche löschen">×</button>
@@ -522,17 +533,6 @@
         <button type="button" data-sort="taste">nach Taste-Score</button>
       </div>
     </div>
-    <div class="filter-group">
-      <button id="fAll" class="active">Alle</button>
-      <button id="fOpen">★ Watchlist</button>
-      <button id="fDone">✓ Gesehen</button>
-    </div>
-    <div class="tb-row tb-discfilters" style="display:none">
-      <button id="discFilme" class="active">Filme</button>
-      <button id="discSerien" class="active">Serien</button>
-      <button id="discStream" class="active">Streaming</button>
-    </div>
-    <button id="fDetails">🔎 Details</button>
   </div>
 </div>
 
@@ -1952,7 +1952,7 @@ _settingsModal.addEventListener('click', function(e){ if (e.target === _settings
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _settingsModal.style.display !== 'none') closeSettingsModal(); });
 
 /* ---- "Gelöschte Titel": per Swipe aus Discovery ausgeblendete Titel, mit
-   einzigem Button "Zu Discovery hinzufügen" statt Gesehen/Watchlist. ---- */
+   einzigem Button "Wieder zu Discovery hinzufügen" statt Gesehen/Watchlist. ---- */
 function hiddenTitleLi(t){
   var li = document.createElement('li'); li.className = 'disc stream-item';
   var poster = t.posterBase64 ? '<img class="dposter" loading="lazy" src="'+t.posterBase64+'" alt="">'
@@ -1966,7 +1966,7 @@ function hiddenTitleLi(t){
       '<div class="dtitle">'+esc(t.title)+'</div>'+
       '<div class="dmeta">'+esc(candMeta(pseudoItem))+' · '+typeLabel+'</div>'+
       candDetailsHtml(pseudoItem, t.type) +
-      '<div class="det-actions"><button type="button" class="unhide-btn">Zu Discovery hinzufügen</button></div>' +
+      '<div class="det-actions"><button type="button" class="unhide-btn">Wieder zu Discovery hinzufügen</button></div>' +
     '</div>';
   li.querySelector('.unhide-btn').addEventListener('click', async function(e){
     e.stopPropagation();
