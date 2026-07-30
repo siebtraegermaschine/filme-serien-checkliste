@@ -33,6 +33,11 @@
     --border: #2a323e;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* Verhindert das Doppeltipp-Reinzoomen von Mobile-Safari auf Buttons (z.B.
+     "Mehr laden") -- ohne touch-action:manipulation wertet iOS zwei schnell
+     aufeinanderfolgende Taps auf demselben Button als Zoom-Geste statt als
+     zwei normale Klicks. */
+  button { touch-action: manipulation; }
   body {
     background: var(--bg);
     color: var(--text);
@@ -1368,7 +1373,14 @@ if (sortBtn && sortMenu) {
   document.addEventListener('click', function () { sortMenu.style.display = 'none'; });
 }
 
-searchEl.addEventListener('input', applyFilter);
+// Auf Discovery muss die Suche den kompletten Pool neu filtern/rendern (siehe
+// renderDiscovery/poolItemMatchesQuery), nicht nur bereits gerenderte Zeilen
+// per CSS aus-/einblenden -- sonst bleiben Treffer jenseits von
+// discoveryLoadLimit unsichtbar. Filme/Serien/Streaming bleiben beim
+// bisherigen, guenstigeren Verhalten (nur Ein-/Ausblenden per applyFilter).
+searchEl.addEventListener('input', function(){
+  if (activeTab === 'discovery') renderDiscovery(); else applyFilter();
+});
 // Protokolliert manuell eingegebene Suchbegriffe fuer spaetere Auswertung (siehe
 // backend/routes/searchLog.js) -- 800ms nach der letzten Eingabe (nicht bei jedem
 // Tastendruck) und dedupliziert, damit z.B. Backspace+erneutes Tippen desselben
@@ -2405,6 +2417,19 @@ async function renderStreaming(){
   applyFilter();
 }
 
+// Prueft, ob ein Pool-Eintrag zu einem Suchbegriff passt -- dieselben Felder,
+// die auch sichtbar in der Zeile stehen (Titel, Originaltitel, Genres/Hashtags,
+// Besetzung, Regie, Anbieter). Wird in renderDiscovery() VOR dem Sortieren/
+// Einschraenken auf discoveryLoadLimit angewendet (siehe dort), damit eine
+// Suche den kompletten Discovery-Pool durchsucht statt nur die aktuell
+// geladene Seite.
+function poolItemMatchesQuery(item, q){
+  if (!q) return true;
+  var hay = [item.t, item.ot, item.y, (item.g||[]).join(' '), (item.kw||[]).join(' '),
+             (item.c||[]).join(' '), item.d, (item.providers||[]).map(function(p){ return p.name; }).join(' ')]
+    .filter(Boolean).join(' ').toLowerCase();
+  return hay.includes(q);
+}
 // Discovery: einheitliche Ansicht ueber Katalog + Discovery-Pool + aktuelles
 // Streaming-Angebot. Filme/Serien/Streaming sind unabhaengige Haken (siehe
 // discTypeFilter/toggleDiscType) -- ein Titel erscheint, sobald er zu MINDESTENS
@@ -2427,6 +2452,13 @@ function renderDiscovery(){
   list.innerHTML='';
   var prof = buildProfile();
   var pool = discFilterPool();
+  // Bei aktiver Suche zuerst den GESAMTEN Discovery-Pool auf Treffer filtern,
+  // bevor sortiert/auf discoveryLoadLimit begrenzt wird -- sonst findet man
+  // ueber die Suche einen Titel nicht, der zwar existiert, aber score-/
+  // bewertungssortiert weiter hinten liegt als die aktuell geladene Seite
+  // (seit der Katalog-Erweiterung auf zehntausende Titel kein Randfall mehr).
+  var q = searchEl.value.trim().toLowerCase();
+  if (q) pool = pool.filter(function(item){ return poolItemMatchesQuery(item, q); });
   var sortKey = effectiveSort('discovery');
   var scored = pool.map(function(item){ return { item: item, score: scoreCand(item, prof).score }; });
   scored.sort(function(a,b){
