@@ -94,7 +94,11 @@
     text-align: left;
   }
   .sub-howto-row .sub-howto-label { font-weight: 700; flex-shrink: 0; }
-  .sub-howto-row .sub-howto-preview { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Kein text-overflow:ellipsis -- das wuerde mitten im Wort abschneiden (z.B.
+     "Dis..." von "Discovery"). Stattdessen kuerzt JS (updateHowToPreviewTruncation)
+     wortweise und haengt "…" erst NACH dem letzten noch vollstaendig passenden
+     Wort an, siehe dort. */
+  .sub-howto-row .sub-howto-preview { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; }
   .sub-howto-row .sub-howto-more { flex-shrink: 0; text-decoration: underline; }
   .sub-howto-full { margin-top: 6px; }
   .tabs {
@@ -517,7 +521,7 @@
   <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach deinem Geschmack!</b></p>
   <div class="sub sub-howto">
     <button type="button" id="subHowToToggle" class="sub-howto-row" aria-expanded="false">
-      <span class="sub-howto-preview" id="subHowToPreview">1. Füge die besten Filme &amp; Serien unter …</span>
+      <span class="sub-howto-preview" id="subHowToPreview">1. Füge die besten Filme &amp; Serien unter Discovery zu deiner „Watchlist“ hinzu oder markiere sie als „gesehen“.</span>
       <span class="sub-howto-more" id="subHowToMoreLabel">Mehr</span>
     </button>
     <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Füge die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> zu deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen".<br>2. Sortiere nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</div>
@@ -1612,6 +1616,24 @@ if (_subHowToToggle) {
     _subHowToToggle.setAttribute('aria-expanded', String(!expanded));
   });
 }
+// Vorschautext soll so lang wie moeglich (voller Satz, falls er passt) sein --
+// nur das letzte Wort, das nicht mehr vollstaendig reinpasst, wird durch "…"
+// ersetzt (statt mitten im Wort abzuschneiden wie bei CSS text-overflow:ellipsis,
+// z.B. "Dis..." von "Discovery"). Muss bei jeder Breitenaenderung neu berechnet
+// werden, da die verfuegbare Breite vom Viewport abhaengt.
+var HOWTO_PREVIEW_FULL_TEXT = _subHowToPreview ? _subHowToPreview.textContent : '';
+function updateHowToPreviewTruncation(){
+  if (!_subHowToPreview || !HOWTO_PREVIEW_FULL_TEXT) return;
+  var words = HOWTO_PREVIEW_FULL_TEXT.split(' ');
+  _subHowToPreview.textContent = HOWTO_PREVIEW_FULL_TEXT;
+  if (_subHowToPreview.scrollWidth <= _subHowToPreview.clientWidth) return;
+  for (var n = words.length - 1; n > 0; n--){
+    _subHowToPreview.textContent = words.slice(0, n).join(' ') + ' …';
+    if (_subHowToPreview.scrollWidth <= _subHowToPreview.clientWidth) break;
+  }
+}
+updateHowToPreviewTruncation();
+window.addEventListener('resize', updateHowToPreviewTruncation);
 
 // Footer: "angemeldet" verlinkt auf das Anmelden-Fenster.
 var _footerAuthLink = document.getElementById('footerAuthLink');
