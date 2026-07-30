@@ -28,6 +28,28 @@ CREATE TABLE IF NOT EXISTS titles (
 CREATE INDEX IF NOT EXISTS idx_titles_type ON titles (type);
 CREATE INDEX IF NOT EXISTS idx_titles_title_trgm ON titles USING gin (title gin_trgm_ops);
 CREATE INDEX IF NOT EXISTS idx_titles_genres ON titles USING gin (genres);
+-- TMDB vergibt Film- und Serien-IDs in getrennten, unabhaengigen Nummernkreisen --
+-- Film-ID 240 (z.B. "Der Pate - Teil II") und Serien-ID 240 sind zwei voellig
+-- verschiedene Titel, die zufaellig dieselbe Nummer tragen. Die urspruengliche
+-- UNIQUE(tmdb_id)-Regel behandelte beide faelschlich als denselben Datensatz --
+-- der Discovery-Import (ON CONFLICT (tmdb_id)) hat dadurch bei jeder Kollision
+-- die Felder des einen Titels mit denen des anderen ueberschrieben (type blieb
+-- dabei unveraendert, da nicht Teil des UPDATE SET, daher z.B. ein "movie" mit
+-- falscher Serien-Bewertung/-Beschreibung/-Jahr). Betrifft nur source<>'catalog'
+-- (die urspruenglich manuell kuratierten 300+300 Katalog-Titel sind TMDB-IDs,
+-- die beim Relaunch einzeln zugeordnet wurden und nicht kollidieren).
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'titles_tmdb_id_key') THEN
+    ALTER TABLE titles DROP CONSTRAINT titles_tmdb_id_key;
+  END IF;
+END $$;
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'titles_tmdb_id_type_key') THEN
+    ALTER TABLE titles ADD CONSTRAINT titles_tmdb_id_type_key UNIQUE (tmdb_id, type);
+  END IF;
+END $$;
 
 CREATE TABLE IF NOT EXISTS users (
   id                BIGSERIAL PRIMARY KEY,

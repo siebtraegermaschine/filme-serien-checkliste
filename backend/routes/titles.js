@@ -123,7 +123,7 @@ router.post('/ensure', requireAuth, async (req, res) => {
   const { rows } = await pool.query(
     `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, plot, source)
      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
-     ON CONFLICT (tmdb_id) DO UPDATE SET
+     ON CONFLICT (tmdb_id, type) DO UPDATE SET
        title = EXCLUDED.title,
        year = EXCLUDED.year,
        genres = EXCLUDED.genres,
@@ -191,7 +191,7 @@ router.post('/bulk-ingest', async (req, res) => {
       const { rowCount } = await client.query(
         `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, plot, source)
          VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,'discovery')
-         ON CONFLICT (tmdb_id) DO UPDATE SET
+         ON CONFLICT (tmdb_id, type) DO UPDATE SET
            year = EXCLUDED.year,
            genres = EXCLUDED.genres,
            director = EXCLUDED.director,
