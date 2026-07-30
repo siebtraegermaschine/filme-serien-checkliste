@@ -81,7 +81,6 @@
   .sub-howto-row {
     display: flex;
     align-items: baseline;
-    justify-content: space-between;
     gap: 8px;
     width: 100%;
     background: none;
@@ -99,7 +98,7 @@
      wortweise und haengt "…" erst NACH dem letzten noch vollstaendig passenden
      Wort an, siehe dort. */
   .sub-howto-row .sub-howto-preview { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; }
-  .sub-howto-row .sub-howto-more { flex-shrink: 0; text-decoration: underline; }
+  .sub-howto-row .sub-howto-more { flex-shrink: 0; text-decoration: underline; margin-left: auto; }
   .sub-howto-full { margin-top: 6px; }
   .tabs {
     display: flex;
@@ -301,8 +300,8 @@
     gap:4px; min-width:190px; background:var(--card); border:1px solid var(--border); border-radius:10px;
     padding:8px; box-shadow:0 10px 30px rgba(0,0,0,.5); }
   .nav-menu.open { display:flex; }
-  .nav-menu-user { color:var(--text-dim); font-size:13px; padding:6px 10px 10px; border-bottom:1px solid var(--border);
-    margin-bottom:4px; word-break:break-all; }
+  .nav-menu-user { color:var(--text-dim); font-size:13px; padding:10px 10px 6px; border-top:1px solid var(--border);
+    margin-top:4px; word-break:break-all; }
   .nav-menu-item { background:none; border:none; color:var(--text); font-size:14px; font-weight:600;
     text-align:left; padding:9px 10px; border-radius:6px; cursor:pointer; width:100%; }
   @media (hover: hover) { .nav-menu-item:hover { background:var(--card-hover); color:var(--accent); } }
@@ -311,6 +310,15 @@
   .similar-modal { max-width:600px; width:100%; max-height:82vh; display:flex; flex-direction:column; }
   .similar-modal h3 { color:var(--accent); font-size:17px; margin-bottom:12px; padding-right:22px; }
   .similar-modal-list { overflow-y:auto; flex:1; margin:0; -webkit-overflow-scrolling:touch; }
+  /* "Im Kino"-Seite: keine eigene Modal-/Card-Optik, sondern dieselben Zeilen wie
+     Discovery/Streaming (poolItemLi in ol.list) -- nur die Abschnitts-Ueberschriften
+     (Aktuell/In Kuerze/Bald im Kino) sind hier neu. */
+  .cinema-page-title, .cinema-heading { max-width: 700px; margin-left:auto; margin-right:auto; padding: 0 20px; box-sizing: border-box; }
+  .cinema-page-title { color:var(--accent); font-size:19px; margin-top:22px; margin-bottom:6px; }
+  .cinema-section ol.list { margin-top:10px; }
+  .cinema-heading { color:var(--text); font-size:15px; font-weight:700; }
+  .cinema-heading .cinema-count { color:var(--text-dim); font-weight:600; }
+  .cinema-empty { color:var(--text-dim); font-size:13px; padding:6px 20px; max-width:700px; margin:0 auto; box-sizing:border-box; }
   /* Im Popup ist die Spalte fuer Titel/Aktionen schmaler als auf Discovery/
      Streaming (Poster + Modal-Rand nehmen relativ mehr Platz weg) -- kleineres
      Poster und kompaktere Abstaende schaffen genug Raum, damit Watchlist und
@@ -528,13 +536,15 @@
   </div>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
+    <button type="button" id="navHomeBtn" class="nav-menu-item">Filme &amp; Serien</button>
+    <button type="button" id="cinemaBtn" class="nav-menu-item">Im Kino</button>
     <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
-    <div id="authBarUser" class="nav-menu-user" style="display:none"></div>
     <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
     <button type="button" id="authBarLogin" class="nav-menu-item">Anmelden</button>
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
+    <div id="authBarUser" class="nav-menu-user" style="display:none"></div>
   </div>
   <div class="tabs">
     <div class="tabs-row">
@@ -592,6 +602,22 @@
 
 
 <ol class="list" id="list"></ol>
+
+<div id="cinemaPage" style="display:none">
+  <h2 class="cinema-page-title">Im Kino</h2>
+  <div class="cinema-section">
+    <h3 class="cinema-heading" id="cinemaNowHeading">Aktuell im Kino</h3>
+    <ol class="list" id="cinemaNowList"></ol>
+  </div>
+  <div class="cinema-section">
+    <h3 class="cinema-heading" id="cinemaSoonHeading">In Kürze im Kino</h3>
+    <ol class="list" id="cinemaSoonList"></ol>
+  </div>
+  <div class="cinema-section">
+    <h3 class="cinema-heading" id="cinemaLaterHeading">Bald im Kino</h3>
+    <ol class="list" id="cinemaLaterList"></ol>
+  </div>
+</div>
 
 <footer>
   Dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, „Gesehen"-Status und deine „<i>Watchlist</i>" werden mit deinem Konto gespeichert, sobald du <i class="footer-auth-link" id="footerAuthLink" role="button" tabindex="0" aria-label="Anmelden">angemeldet</i> bist.<br>
@@ -1590,15 +1616,12 @@ if (_searchClear) _searchClear.addEventListener('click', function () {
   searchEl.focus();
 });
 // Logo oben verlinkt zurueck auf die Startseite (Streaming) -- inkl. Zuruecksetzen
-// einer evtl. noch eingetragenen Suche, damit man wirklich auf der "ersten Seite" landet.
+// einer evtl. noch eingetragenen Suche und Schliessen der Kino-Seite (goHome(),
+// siehe weiter unten), damit man wirklich auf der "ersten Seite" landet.
 var _logoImg = document.querySelector('h1 .logo');
 if (_logoImg) {
   _logoImg.style.cursor = 'pointer';
-  _logoImg.addEventListener('click', function () {
-    searchEl.value = '';
-    searchEl.dispatchEvent(new Event('input'));
-    setTab('stream');
-  });
+  _logoImg.addEventListener('click', function () { goHome(); });
 }
 
 // "How to"-Kurzfassung unterm ersten Satz: per Default eingeklappt (Vorschau
@@ -1992,6 +2015,113 @@ try {
     localStorage.setItem(HOWTO_SEEN_KEY, '1');
   }
 } catch (e) {}
+
+/* ---- "Im Kino": eigene Vollseite (kein Popup), nur ueber das Menue erreichbar --
+   zeigt aktuelle/kommende Kinostarts (oeffentliche /api/cinema-Route, siehe
+   backend/routes/cinema.js) mit denselben Zeilen (poolItemLi) wie Filme/Serien/
+   Discovery/Streaming, damit Optik und Watchlist-/Gesehen-Funktion identisch sind. ---- */
+let cinemaMode = false;
+let CINEMA_DATA = null;
+const cinemaListEls = {
+  now: document.getElementById('cinemaNowList'),
+  soon: document.getElementById('cinemaSoonList'),
+  later: document.getElementById('cinemaLaterList'),
+};
+const cinemaHeadingEls = {
+  now: document.getElementById('cinemaNowHeading'),
+  soon: document.getElementById('cinemaSoonHeading'),
+  later: document.getElementById('cinemaLaterHeading'),
+};
+const CINEMA_LABELS = { now: 'Aktuell im Kino', soon: 'In Kürze im Kino', later: 'Bald im Kino' };
+const CINEMA_EMPTY_TEXT = {
+  now: 'Aktuell sind keine Titel hinterlegt.',
+  soon: 'In Kürze startet aktuell nichts Neues.',
+  later: 'Für die kommenden Monate ist noch nichts hinterlegt.',
+};
+async function loadCinemaData(){
+  if (!CINEMA_DATA) CINEMA_DATA = await apiRequest('GET', '/api/cinema');
+  return CINEMA_DATA;
+}
+// Kinostarts sind eigenstaendig von POOL (siehe backend/db/schema.sql), koennen
+// aber durchaus mit einem bereits bekannten Pool-Eintrag (Katalog/Discovery/
+// Streaming) uebereinstimmen (gleiche tmdb_id) -- dann den bestehenden Eintrag
+// (inkl. realId/Watchlist-Status) weiterverwenden, statt einen zweiten,
+// "virtuellen" Eintrag mit realId=null anzulegen. Ohne diesen Abgleich wuerde
+// die Kino-Seite bei einem Titel, der laengst gewatchlistet ist, faelschlich
+// "nicht auf der Watchlist" anzeigen (siehe ensurePoolItem/POOL weiter oben).
+function cinemaRowToItem(row, poolByTmdb){
+  const tmdbId = Number(row.id);
+  const existing = poolByTmdb.get(tmdbId);
+  if (existing) return existing;
+  return {
+    realId: null, tmdbId, type: 'movie', t: row.t, ot: null, y: row.y,
+    g: row.g || [], d: row.d || '', c: row.c || [], kw: [],
+    p: row.p || null, poster64: null, r: row.r, ov: row.ov || '', providers: [],
+  };
+}
+function renderCinemaSection(key, rows, prof, poolByTmdb){
+  const el = cinemaListEls[key];
+  cinemaHeadingEls[key].textContent = CINEMA_LABELS[key] + (rows.length ? ' (' + rows.length + ')' : '');
+  el.innerHTML = '';
+  if (!rows.length) {
+    el.innerHTML = '<li class="cinema-empty">' + esc(CINEMA_EMPTY_TEXT[key]) + '</li>';
+    return;
+  }
+  rows.forEach(function(row){
+    const item = cinemaRowToItem(row, poolByTmdb);
+    const score = scoreCand(item, prof).score;
+    el.appendChild(poolItemLi(item, score));
+  });
+}
+async function renderCinemaPage(){
+  const data = await loadCinemaData();
+  const prof = buildProfile();
+  const poolByTmdb = new Map();
+  POOL.forEach(function(p){ if (p.type === 'movie' && p.tmdbId != null) poolByTmdb.set(p.tmdbId, p); });
+  renderCinemaSection('now', data.now || [], prof, poolByTmdb);
+  renderCinemaSection('soon', data.soon || [], prof, poolByTmdb);
+  renderCinemaSection('later', data.later || [], prof, poolByTmdb);
+}
+function openCinemaPage(){
+  cinemaMode = true;
+  document.querySelector('.tabs').style.display = 'none';
+  document.querySelector('.toolbar').style.display = 'none';
+  document.querySelector('.progress-wrap').style.display = 'none';
+  list.style.display = 'none';
+  document.getElementById('cinemaPage').style.display = '';
+  window.scrollTo(0, 0);
+  Object.keys(cinemaListEls).forEach(function(key){
+    cinemaListEls[key].innerHTML = '<li class="cinema-empty">Lädt …</li>';
+  });
+  renderCinemaPage().catch(function(err){
+    console.error('Kino-Daten konnten nicht geladen werden:', err);
+    Object.keys(cinemaListEls).forEach(function(key){
+      cinemaListEls[key].innerHTML = '<li class="cinema-empty">Kino-Daten konnten nicht geladen werden.</li>';
+    });
+  });
+}
+function closeCinemaPage(){
+  if (!cinemaMode) return;
+  cinemaMode = false;
+  document.getElementById('cinemaPage').style.display = 'none';
+  document.querySelector('.tabs').style.display = '';
+  document.querySelector('.toolbar').style.display = '';
+  document.querySelector('.progress-wrap').style.display = '';
+  list.style.display = '';
+}
+// Zurueck zu "Filme & Serien": per Logo-Klick (siehe unten) UND per gleichnamigem
+// Menuepunkt ganz oben im Nav-Menue -- einziger Weg zurueck aus der Kino-Seite,
+// da diese (anders als Discovery) kein eigener Tab, sondern nur ueber das Menue
+// erreichbar ist.
+function goHome(){
+  closeCinemaPage();
+  searchEl.value = '';
+  searchEl.dispatchEvent(new Event('input'));
+  setTab('stream');
+}
+document.getElementById('navHomeBtn').onclick = () => { closeNavMenu(); goHome(); };
+document.getElementById('cinemaBtn').onclick = () => { closeNavMenu(); openCinemaPage(); };
+
 /* ---- "Als App speichern": Android hat mit beforeinstallprompt eine echte
    Browser-API dafuer, iOS nicht -- Apple erlaubt keine programmatische
    Installation von Webseiten aus, dort bleibt nur eine Schritt-fuer-Schritt-

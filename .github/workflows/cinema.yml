@@ -1,0 +1,32 @@
+name: Kino-Daten aktualisieren
+
+on:
+  schedule:
+    # Taeglich um 04:30 UTC, kurz nach dem Streaming-Import (0 4 * * *) --
+    # Kinostarts aendern sich taeglich, daher taeglicher statt zweitaeglicher Lauf.
+    - cron: "30 4 * * *"
+  workflow_dispatch:            # erlaubt manuelles Ausloesen im Actions-Tab
+
+concurrency:
+  group: cinema-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Kino-Daten aktualisieren
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          STREAMING_API_URL: ${{ vars.STREAMING_API_URL }}
+          CINEMA_INGEST_SECRET: ${{ secrets.CINEMA_INGEST_SECRET }}
+        run: node cinema-fetch.mjs

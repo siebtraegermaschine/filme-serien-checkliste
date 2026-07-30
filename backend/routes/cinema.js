@@ -1,0 +1,92 @@
+import { pool } from '../db/pool.js';
+import { createAsyncRouter } from '../lib/asyncRouter.js';
+
+const router = createAsyncRouter();
+
+function rowToCand(row) {
+  return {
+    id: String(row.tmdb_id),
+    t: row.title,
+    y: row.year,
+    g: row.genres,
+    d: row.director,
+    c: row.cast_names,
+    p: row.poster_path,
+    r: row.rating != null ? Number(row.rating) : null,
+    ov: row.overview,
+    rd: row.release_date ? row.release_date.toISOString().slice(0, 10) : null,
+  };
+}
+
+// Öffentlich, kein Login nötig -- analog zu /api/streaming. "now" nach Kinostart
+// absteigend (neueste zuerst), "soon"/"later" aufsteigend (bald startende zuerst).
+router.get('/', async (req, res) => {
+  const { rows } = await pool.query(`SELECT * FROM cinema_cache ORDER BY release_date`);
+  const buckets = { now: [], soon: [], later: [] };
+  for (const row of rows) {
+    if (buckets[row.category]) buckets[row.category].push(rowToCand(row));
+  }
+  buckets.now.reverse();
+  res.json(buckets);
+});
+
+// Wird ausschließlich von der GitHub Action (cinema-fetch.mjs) mit dem Secret
+// CINEMA_INGEST_SECRET aufgerufen -- kein Nutzer-Login, sondern Server-zu-
+// Server-Authentifizierung per Bearer-Token (analog /api/streaming/ingest).
+router.post('/ingest', async (req, res) => {
+  const expected = process.env.CINEMA_INGEST_SECRET;
+  const provided = (req.get('authorization') || '').replace(/^Bearer\s+/i, '');
+  if (!expected || provided !== expected) {
+    return res.status(401).json({ error: 'invalid_ingest_secret' });
+  }
+
+  const { items } = req.body || {};
+  if (!Array.isArray(items)) {
+    return res.status(400).json({ error: 'invalid_payload' });
+  }
+
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    const runStartedAt = new Date();
+    for (const item of items) {
+      if (!item || !item.tmdbId || !item.title || !item.category) continue;
+      await client.query(
+        `INSERT INTO cinema_cache
+           (tmdb_id, title, year, genres, director, cast_names, poster_path, rating, overview, release_date, category)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+         ON CONFLICT (tmdb_id) DO UPDATE SET
+           title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
+           director = EXCLUDED.director, cast_names = EXCLUDED.cast_names,
+           poster_path = EXCLUDED.poster_path, rating = EXCLUDED.rating,
+           overview = COALESCE(NULLIF(EXCLUDED.overview, ''), cinema_cache.overview),
+           release_date = EXCLUDED.release_date, category = EXCLUDED.category,
+           fetched_at = now()`,
+        [
+          item.tmdbId,
+          item.title,
+          item.year || null,
+          Array.isArray(item.genres) ? item.genres : [],
+          item.director || null,
+          Array.isArray(item.cast) ? item.cast : [],
+          item.posterPath || null,
+          item.rating != null ? item.rating : null,
+          item.overview || null,
+          item.releaseDate || null,
+          item.category,
+        ]
+      );
+    }
+    await client.query('DELETE FROM cinema_cache WHERE fetched_at < $1', [runStartedAt]);
+    await client.query('COMMIT');
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
+
+  res.status(204).end();
+});
+
+export default router;

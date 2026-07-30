@@ -127,6 +127,28 @@ CREATE TABLE IF NOT EXISTS streaming_cache (
 );
 ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS first_seen_at TIMESTAMPTZ NOT NULL DEFAULT now();
 
+-- Aktuelle/kommende Kinostarts (Deutschland) -- analog zu streaming_cache
+-- eigenstaendig von `titles`, bis eine Person einen Titel per Watchlist/Gesehen
+-- tatsaechlich uebernimmt. category wird beim taeglichen Import aus dem
+-- Kinostart-Datum berechnet (siehe cinema-fetch.mjs): 'now' (aktuell im Kino,
+-- inkl. neu gestarteter), 'soon' (Start in den naechsten ~4 Wochen), 'later'
+-- (Start im naechsten Jahr danach).
+CREATE TABLE IF NOT EXISTS cinema_cache (
+  tmdb_id       INTEGER NOT NULL,
+  title         TEXT NOT NULL,
+  year          INTEGER,
+  genres        TEXT[] NOT NULL DEFAULT '{}',
+  director      TEXT,
+  cast_names    TEXT[] NOT NULL DEFAULT '{}',
+  poster_path   TEXT,
+  rating        NUMERIC(3,1),
+  overview      TEXT,
+  release_date  DATE,
+  category      TEXT NOT NULL CHECK (category IN ('now', 'soon', 'later')),
+  fetched_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (tmdb_id)
+);
+
 -- Protokolliert manuell eingegebene Suchbegriffe (siehe backend/routes/searchLog.js)
 -- fuer spaetere Auswertung, welche Titel/Begriffe Nutzer:innen suchen, aber (noch)
 -- nicht finden -- Basis fuer Katalog-Erweiterungen. user_email ist NULL, wenn die
