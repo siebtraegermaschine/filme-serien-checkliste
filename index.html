@@ -593,7 +593,7 @@
              der Filme/Serien/Streaming-Typfilter dagegen schon. -->
         <button id="discFilme" class="active" style="display:none">Filme</button>
         <button id="discSerien" class="active" style="display:none">Serien</button>
-        <button id="discStream" class="active" style="display:none">Streaming</button>
+        <button id="discStream" style="display:none">Im Streaming</button>
       </div>
       <button id="fDetails">🔎 Details</button>
     </div>
@@ -1076,12 +1076,15 @@ let inStreamFilterOn = false;
 // inStreamFilterOn oben, das nur die eigene Watchlist/Gesehen-Liste filtert.
 let discoveryMode = false;
 function inDiscoveryMode(){ return discoveryMode; }
-// Setzt discTypeFilter beim Einstieg in den Discovery-Modus auf alle drei
-// Kategorien (Filme/Serien/Streaming) -- bleiben danach weiterhin einzeln
-// ab-/zuschaltbar (siehe toggleDiscType).
+// Setzt beim Einstieg in den Discovery-Modus Filme UND Serien aktiv, "Im
+// Streaming" aus -- bleiben danach weiterhin einzeln ab-/zuschaltbar (siehe
+// toggleDiscType/toggleDiscInStream).
 function presetDiscTypeFilterAll(){
-  discTypeFilter = { f: true, s: true, stream: true };
-  Object.keys(discBtns).forEach(function(k){ discBtns[k].classList.toggle('active', discTypeFilter[k]); });
+  discTypeFilter = { f: true, s: true };
+  discInStreamFilterOn = false;
+  discBtns.f.classList.toggle('active', discTypeFilter.f);
+  discBtns.s.classList.toggle('active', discTypeFilter.s);
+  discBtns.stream.classList.toggle('active', discInStreamFilterOn);
   discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
 }
 let showDetails = false;
@@ -1400,9 +1403,9 @@ const discBtns = { f: document.getElementById('discFilme'), s: document.getEleme
 const DISCOVERY_PAGE_SIZE = 250;
 const DISCOVERY_LOAD_MORE_STEP = 50;
 let discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
-// Filme/Serien/Streaming sind unabhaengig voneinander an-/abwaehlbar (standardmaessig
-// alle drei aktiv = komplettes Angebot sichtbar); mindestens einer muss aktiv bleiben,
-// damit die Liste nie komplett leerlaeuft.
+// Filme/Serien sind unabhaengig voneinander an-/abwaehlbar (standardmaessig
+// beide aktiv); mindestens einer muss aktiv bleiben, damit die Liste nie
+// komplett leerlaeuft.
 function toggleDiscType(k){
   const othersActive = Object.keys(discTypeFilter).some(function(o){ return o !== k && discTypeFilter[o]; });
   if (discTypeFilter[k] && !othersActive) return;
@@ -1413,7 +1416,16 @@ function toggleDiscType(k){
 }
 discBtns.f.onclick = () => toggleDiscType('f');
 discBtns.s.onclick = () => toggleDiscType('s');
-discBtns.stream.onclick = () => toggleDiscType('stream');
+// "Im Streaming" ist ein reiner Zusatzfilter (kein dritter Typ neben Filme/
+// Serien, siehe discInStreamFilterOn oben) -- unabhaengiger einfacher Toggle,
+// ohne die "mindestens einer muss aktiv bleiben"-Regel von toggleDiscType.
+function toggleDiscInStream(){
+  discInStreamFilterOn = !discInStreamFilterOn;
+  discBtns.stream.classList.toggle('active', discInStreamFilterOn);
+  discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+  renderDiscovery();
+}
+discBtns.stream.onclick = () => toggleDiscInStream();
 let sortManual = { filme: null, serien: null, discovery: null };
 window.addEventListener('resize', function(){
   syncDetailsSortWidth();
@@ -1616,7 +1628,7 @@ function effectiveCat(){ return inDiscoveryMode() ? 'discovery' : activeTab; }
 // Ist sie dabei gerade manuell gewaehlt und wird die Option ausgeblendet, faellt
 // die Anzeige automatisch auf die uebliche Automatik zurueck (siehe effectiveSort).
 function newstreamSortApplicable(){
-  if (inDiscoveryMode()) return discTypeFilter.stream;
+  if (inDiscoveryMode()) return discInStreamFilterOn;
   return inStreamFilterOn;
 }
 function updateSortMenuActive(){
@@ -1938,7 +1950,14 @@ document.addEventListener('click', function(e){
 }, true);
 
 /* ================= DISCOVERY ================= */
-let discTypeFilter = { f: true, s: true, stream: true };
+let discTypeFilter = { f: true, s: true };
+// "Im Streaming" ist innerhalb von Discovery KEIN dritter Typ neben Filme/
+// Serien (das war dieselbe Inkonsistenz wie frueher bei Watchlist/Gesehen/
+// Streaming: ein Film, der gerade streamt, ist immer noch ein Film). Stattdessen
+// ein unabhaengiger Zusatzfilter, der die Filme/Serien-Auswahl auf aktuell
+// streamende Titel einschraenkt (siehe discFilterPool) -- analog zum "Im
+// Streaming"-Filter unter Filme/Serien ausserhalb von Discovery.
+let discInStreamFilterOn = false;
 function metaGenre(meta){ const parts=String(meta).split('·'); return parts[1]?parts[1].trim():''; }
 // Gewicht, mit dem ein "gesehen"-Titel je nach Bewertung (1-10, wie IMDb) ins
 // Geschmacksprofil einfliesst (siehe buildProfile) -- schlecht bewertete Titel
@@ -2836,20 +2855,25 @@ function poolItemMatchesQuery(item, q){
   return wordExactMatch(exactBlob, q);
 }
 // Discovery: einheitliche Ansicht ueber Katalog + Discovery-Pool + aktuelles
-// Streaming-Angebot. Filme/Serien/Streaming sind unabhaengige Haken (siehe
-// discTypeFilter/toggleDiscType) -- ein Titel erscheint, sobald er zu MINDESTENS
-// einer der angehakten Kategorien passt (bei allen dreien angehakt = komplettes
-// Angebot, identisch zum frueheren "Alle"-Button). Bereits per Watchlist oder
-// "Gesehen" markierte Titel werden ausgeblendet -- die sind ja schon unter
-// Filme/Serien/Streaming zu finden, Discovery soll nur noch Unentdecktes zeigen.
+// Streaming-Angebot. Filme/Serien sind unabhaengige Haken (siehe discTypeFilter/
+// toggleDiscType) -- ein Titel erscheint, sobald er zu MINDESTENS einem der
+// angehakten Typen passt. "Im Streaming" ist KEIN dritter Typ, sondern ein
+// zusaetzlicher (UND-verknuepfter) Filter, der die Filme/Serien-Auswahl auf
+// aktuell streamende Titel einschraenkt (siehe discInStreamFilterOn) -- ein
+// Film, der gerade streamt, ist immer noch ein Film, keine dritte Kategorie.
+// Bereits per Watchlist oder "Gesehen" markierte Titel werden ausgeblendet --
+// die sind ja schon unter Filme/Serien zu finden, Discovery soll nur noch
+// Unentdecktes zeigen.
 function discFilterPool(){
   return POOL.filter(function(i){
     if (getWatchlistFlag(i.realId) || getSeen(i.realId)) return false;
     if (i.realId != null && HIDDEN_TITLE_IDS.has(i.realId)) return false;
     var isMovie = i.type === 'movie';
     var isSeries = i.type === 'series';
-    var isStreaming = i.providers.length > 0;
-    return (discTypeFilter.f && isMovie) || (discTypeFilter.s && isSeries) || (discTypeFilter.stream && isStreaming);
+    var typeMatch = (discTypeFilter.f && isMovie) || (discTypeFilter.s && isSeries);
+    if (!typeMatch) return false;
+    if (discInStreamFilterOn && !(i.providers && i.providers.length)) return false;
+    return true;
   });
 }
 function renderDiscovery(){
