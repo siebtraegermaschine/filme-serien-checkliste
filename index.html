@@ -519,8 +519,14 @@
   @media (hover: hover) { .search-suggest button:hover { background: var(--card-hover); } }
   .search-suggest .suggest-type { color: var(--text-dim); font-size: 11px; flex: none; margin-left: auto; }
   .sort-wrap > #fSort { width: 100%; }
-  .filter-group { display: flex; gap: 10px; }
-  .filter-group button { flex: 1; white-space: nowrap; }
+  .filter-group { display: flex; gap: 6px; }
+  /* Drei statt zwei Buttons (Watchlist/Gesehen/Im Streaming) seit dem Streaming-
+     Umbau -- weniger Innenabstand + kleinerer Text, damit die Gruppe weiterhin
+     in dieselbe Breite passt wie die Suche darunter (siehe .tb-toprow), ohne den
+     Details-Button daneben zu verdecken. min-width:0 erlaubt den Buttons,
+     schmaler als ihr Text zu werden (sonst wuerden sie ueberlaufen statt zu
+     schrumpfen); text-overflow:ellipsis faengt sehr schmale Bildschirme ab. */
+  .filter-group button { flex: 1; min-width: 0; padding: 9px 8px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   #fDetails { white-space: nowrap; }
   /* Titel einzeilig mit … kuerzen; Taste-Score (auch zweistellig) bleibt sichtbar */
   li.item .title { display: flex; align-items: center; gap: 6px; min-width: 0; }
@@ -565,7 +571,7 @@
     </div>
   </div>
   <div class="disc-toprow">
-    <button id="fDiscovery">🧭 Discovery</button>
+    <button id="fDiscovery">🧭 Discovery: Neue Filme &amp; Serien entdecken</button>
   </div>
 </header>
 
