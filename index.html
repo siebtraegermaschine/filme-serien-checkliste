@@ -136,6 +136,13 @@
     padding: 11px 28px; color: var(--text-dim); font-size: 15px; font-weight:600; cursor: pointer; transition: all 0.15s; }
   @media (hover: hover) { .disc-toprow button:hover { border-color: var(--accent); color: var(--accent); } }
   .disc-toprow button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  /* Filme/Serien/Streaming-Unterfilter (nur im Discovery-Modus sichtbar) jetzt
+     direkt unter dem Discovery-Button, noch VOR der header-border-bottom-Linie
+     -- macht sichtbar, dass diese drei Buttons zu Discovery gehoeren, statt wie
+     zuvor lose zwischen Watchlist/Gesehen/Im Streaming und der Suche zu stehen.
+     Dadurch bleiben die zwei Toolbar-Zeilen darunter immer gleich, egal ob
+     Discovery aktiv ist oder nicht. */
+  header .tb-discfilters { max-width: 700px; margin: 10px auto 0; }
   .progress-wrap {
     max-width: 700px;
     margin: 20px auto 0;
@@ -318,6 +325,7 @@
   .nav-menu-item { background:none; border:none; color:var(--text); font-size:14px; font-weight:600;
     text-align:left; padding:9px 10px; border-radius:6px; cursor:pointer; width:100%; }
   @media (hover: hover) { .nav-menu-item:hover { background:var(--card-hover); color:var(--accent); } }
+  .nav-menu-sep { border:none; border-top:1px solid var(--border); margin:4px 4px; }
   .auth-modal { max-width:340px; }
   .auth-modal h3 { color:var(--accent); font-size:18px; margin-bottom:16px; text-align:center; }
   .similar-modal { max-width:600px; width:100%; max-height:82vh; display:flex; flex-direction:column; }
@@ -445,7 +453,25 @@
   .tabs { flex-direction: column; align-items: stretch; max-width: 430px; margin: 22px auto 0; gap: 10px; }
   .tabs .tabs-row { display: flex; gap: 10px; }
   .tabs .tabs-row button { flex: 1; padding: 11px 10px; }
-  .tb-discfilters button { flex: 1; }
+  /* Eigenstaendiges Styling noetig, seit tb-discfilters aus .toolbar in den
+     Header verschoben wurde (direkt unter den Discovery-Button, siehe
+     header .tb-discfilters weiter unten) -- ".toolbar button" greift dort
+     nicht mehr, ohne dieses Styling waeren es unformatierte Browser-Default-
+     Buttons (analog zu .sim-type-filters, das aus demselben Grund sein
+     eigenes Styling hat). */
+  .tb-discfilters button {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 14px;
+    color: var(--text-dim);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  @media (hover: hover) { .tb-discfilters button:hover { border-color: var(--accent); color: var(--accent); } }
+  .tb-discfilters button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   /* Ausserhalb von .toolbar (das Popup ist ein eigenstaendiges Modal) --
      dieselbe Optik wie die Discovery-Filterknoepfe (.tb-discfilters) manuell
      nachgebildet, da .toolbar button hier nicht greift. */
@@ -490,22 +516,22 @@
   .sort-menu button { text-align: left; white-space: nowrap; width: 100%; }
   .sort-menu button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   /* Toolbar als vertikaler Zeilen-Stapel statt starrem 2-Spalten-Raster --
-     noetig seit die Filme/Serien/Streaming-Unterfilter (tb-discfilters) je
-     nach Discovery-Modus ZUSAETZLICH zur (immer sichtbaren) Watchlist/Gesehen/
-     Discovery-Filterzeile erscheinen koennen: ein starres Grid mit fixer
-     Spaltenzahl wuerde bei wechselnder Anzahl sichtbarer Zeilen verrutschen
-     (CSS-Grid-Auto-Placement packt eine volle Zeile nicht rueckwirkend neben
-     eine bereits platzierte Teilzeile). .tb-toprow bildet je zwei Elemente
-     (Filter+Details bzw. Suche+Sortieren) als eigene Mini-Zeile nach demselben
-     "links flexibel, rechts inhaltsbreit"-Muster wie vorher das Grid.
-     tb-discfilters (schon .tb-row) reiht sich dazwischen einfach als eigene,
-     volle Zeile ein. */
+     .tb-toprow bildet je zwei Elemente (Filter+Details bzw. Suche+Sortieren)
+     als eigene Mini-Zeile nach dem Muster "links flexibel, rechts
+     inhaltsbreit". Die Toolbar zeigt dadurch immer genau zwei Zeilen, egal ob
+     Discovery aktiv ist -- der Filme/Serien/Streaming-Unterfilter (tb-
+     discfilters) sitzt seitdem oben im Header direkt unter dem
+     Discovery-Button statt hier dazwischen. */
   .tb-grid { display: flex; flex-direction: column; gap: 10px; }
   .tb-toprow { display: flex; gap: 10px; align-items: stretch; }
   .tb-toprow > :first-child { flex: 1; min-width: 0; }
   .search-wrap { position: relative; display: flex; min-width: 0; }
-  .search-wrap #search { flex: 1; width: 100%; min-width: 0; padding-right: 34px; }
-  #search:not(:placeholder-shown) { border-color: var(--accent); }
+  .search-wrap #search { flex: 1; width: 100%; min-width: 0; }
+  /* padding-right nur reservieren, wenn tatsaechlich Text drinsteht (dann ist
+     auch das X sichtbar, siehe #search:placeholder-shown + .search-x weiter
+     unten) -- leer bleibt der komplette Platz fuer den Platzhaltertext frei,
+     der sonst auf schmalen Bildschirmen unnoetig eng/abgeschnitten wirkte. */
+  #search:not(:placeholder-shown) { padding-right: 34px; border-color: var(--accent); }
   .search-x { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: none; background: transparent; color: var(--text-dim); font-size: 20px; line-height: 1; cursor: pointer; padding: 0 6px; }
   @media (hover: hover) { .search-x:hover { color: var(--accent); } }
   #search:placeholder-shown + .search-x { display: none; }
@@ -556,11 +582,14 @@
   </div>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
+    <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
+    <hr class="nav-menu-sep">
     <button type="button" id="navHomeBtn" class="nav-menu-item">Filme &amp; Serien</button>
     <button type="button" id="cinemaBtn" class="nav-menu-item">Im Kino</button>
+    <hr class="nav-menu-sep">
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
-    <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
+    <hr class="nav-menu-sep">
     <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
     <button type="button" id="authBarLogin" class="nav-menu-item">Anmelden</button>
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
@@ -575,6 +604,11 @@
   <div class="disc-toprow">
     <button id="fDiscovery">🧭 Discovery: Neue Filme &amp; Serien entdecken</button>
   </div>
+  <div class="tb-row tb-discfilters" style="display:none">
+    <button id="discFilme" class="active">Filme</button>
+    <button id="discSerien" class="active">Serien</button>
+    <button id="discStream" class="active">Streaming</button>
+  </div>
 </header>
 
 <div class="toolbar">
@@ -586,11 +620,6 @@
         <button id="fInStream">Im Streaming</button>
       </div>
       <button id="fDetails">🔎 Details</button>
-    </div>
-    <div class="tb-row tb-discfilters" style="display:none">
-      <button id="discFilme" class="active">Filme</button>
-      <button id="discSerien" class="active">Serien</button>
-      <button id="discStream" class="active">Streaming</button>
     </div>
     <div class="tb-toprow">
       <div class="search-wrap">
@@ -1482,19 +1511,16 @@ function setTab(t) {
   var _fd = document.getElementById('fDetails'); if (_fd) _fd.style.display = '';
   searchEl.style.display = '';
   var _sw = document.querySelector('.sort-wrap'); if (_sw) _sw.style.display = 'flex';
-  // Bleibt der Discovery-Modus beim Tab-Wechsel bestehen (siehe discoveryMode),
-  // wird der Typ-Unterfilter auf den neuen Tab umgestellt (z.B. Filme -> Serien
-  // soll dort wieder nur "Serien" zeigen, nicht die alte Filme-Auswahl).
-  // Ausserhalb des Discovery-Modus ist beim Wechsel zwischen Filme/Serien immer
-  // ausschliesslich Watchlist aktiv (Gesehen/Im Streaming lassen sich danach
-  // weiterhin zusaetzlich dazuschalten).
-  if (discoveryMode) {
-    presetDiscTypeFilterForTab(t);
-  } else {
-    watchlistFilterOn = true;
-    seenFilterOn = false;
-    inStreamFilterOn = false;
-  }
+  // Filme, Serien und Discovery sind drei sich gegenseitig ausschliessende
+  // Bereiche -- ein Klick auf Filme/Serien beendet einen laufenden Discovery-
+  // Modus (statt ihn nur auf den neuen Typ umzustellen, wie frueher). Danach
+  // ist beim Wechsel zwischen Filme/Serien immer ausschliesslich Watchlist
+  // aktiv (Gesehen/Im Streaming lassen sich danach weiterhin zusaetzlich
+  // dazuschalten).
+  discoveryMode = false;
+  watchlistFilterOn = true;
+  seenFilterOn = false;
+  inStreamFilterOn = false;
   updateFilterRowUI();
   renderCurrentTab();
 }
@@ -2148,9 +2174,18 @@ async function renderCinemaPage(){
 function openCinemaPage(){
   cinemaMode = true;
   document.querySelector('.tabs').style.display = 'none';
+  // Discovery-Button (samt Filme/Serien/Streaming-Unterfilter, falls gerade
+  // aktiv) ergibt auf der Kino-Seite keinen Sinn -- Discovery durchsucht den
+  // normalen Filme/Serien-Katalog, nicht die Kinostarts.
+  document.querySelector('.disc-toprow').style.display = 'none';
+  document.querySelector('.tb-discfilters').style.display = 'none';
   document.querySelector('.toolbar').style.display = 'none';
   document.querySelector('.progress-wrap').style.display = 'none';
   list.style.display = 'none';
+  // Nur der erste Satz ("Filme & Serien sortiert nach deinem Geschmack!")
+  // bleibt stehen -- die How-to-Kurzfassung darunter bezieht sich auf
+  // Discovery/Watchlist/Sortierung, die es auf der Kino-Seite alle nicht gibt.
+  document.querySelector('.sub-howto').style.display = 'none';
   document.getElementById('cinemaPage').style.display = '';
   window.scrollTo(0, 0);
   Object.keys(cinemaListEls).forEach(function(key){
@@ -2168,6 +2203,11 @@ function closeCinemaPage(){
   cinemaMode = false;
   document.getElementById('cinemaPage').style.display = 'none';
   document.querySelector('.tabs').style.display = '';
+  document.querySelector('.disc-toprow').style.display = '';
+  // .tb-discfilters NICHT hier pauschal wieder einblenden -- das entscheidet
+  // weiterhin updateFilterRowUI() anhand von discoveryMode (wird direkt danach
+  // ueber goHome() -> setTab() aufgerufen).
+  document.querySelector('.sub-howto').style.display = '';
   document.querySelector('.toolbar').style.display = '';
   document.querySelector('.progress-wrap').style.display = '';
   list.style.display = '';
