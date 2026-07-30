@@ -162,7 +162,12 @@
   .toolbar button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   @media (max-width: 640px) {
     .toolbar { row-gap: 8px; }
-    .toolbar input { flex-basis: 100%; min-width: 0; }
+    /* iOS Safari zoomt automatisch in die Seite rein, sobald ein Eingabefeld mit
+       font-size < 16px fokussiert wird (z.B. per Tippen ins Suchfeld) -- das
+       Reinzoomen bleibt nach dem Abschicken/Ausblenden der Tastatur bestehen,
+       bis man manuell mit zwei Fingern wieder rauszoomt. Ab 16px unterbleibt
+       der Auto-Zoom komplett. */
+    .toolbar input { flex-basis: 100%; min-width: 0; font-size: 16px; }
   }
   ol.list {
     list-style: none;
@@ -296,6 +301,9 @@
   .auth-form input { background:var(--bg); color:var(--text); border:1px solid var(--border);
     border-radius:8px; padding:9px 11px; font-size:14px; }
   .auth-form input:focus { outline:none; border-color:var(--accent); }
+  /* Wie beim Suchfeld (siehe .toolbar input) verhindert 16px auf Mobilgeraeten
+     das automatische Reinzoomen von iOS Safari beim Fokussieren. */
+  @media (max-width: 640px) { .auth-form input { font-size: 16px; } }
   .feedback-textarea { width:100%; background:var(--bg); color:var(--text); border:1px solid var(--border);
     border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; resize:vertical; box-sizing:border-box; }
   .feedback-textarea:focus { outline:none; border-color:var(--accent); }
