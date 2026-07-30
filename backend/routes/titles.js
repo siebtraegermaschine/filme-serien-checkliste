@@ -51,9 +51,15 @@ router.get('/', async (req, res) => {
     conditions.push(`title ILIKE $${params.length}`);
   }
 
+  // Kein LIMIT: der Client baut aus dieser Antwort seinen kompletten Titel-Pool
+  // (Suche, Watchlist-/Gesehen-Verknuepfung per title_id) -- ein Deckel wuerde
+  // alphabetisch spaeter einsortierte Titel silent abschneiden. Frueher lag hier
+  // ein LIMIT 5000, das seit der Discovery-Katalog-Erweiterung (~16.000 Titel)
+  // dazu fuehrte, dass Titel wie "Unfamiliar" nie eine echte title_id vom Client
+  // bekamen und ihr Watchlist-/Gesehen-Status nie dauerhaft gespeichert wurde.
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
   const { rows } = await pool.query(
-    `SELECT * FROM titles ${where} ORDER BY title ASC LIMIT 5000`,
+    `SELECT * FROM titles ${where} ORDER BY title ASC`,
     params
   );
   res.json(rows.map(serializeTitle));

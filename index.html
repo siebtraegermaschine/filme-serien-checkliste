@@ -711,8 +711,18 @@ function idFor(src, title) {
   return idx >= 0 ? state[src].det[idx].id : null;
 }
 async function updateProgressRemote(id, patch) {
-  PROGRESS.set(id, { ...progressFor(id), ...patch });
-  return apiRequest('PUT', '/api/progress/' + id, patch);
+  const prev = progressFor(id);
+  PROGRESS.set(id, { ...prev, ...patch });
+  try {
+    return await apiRequest('PUT', '/api/progress/' + id, patch);
+  } catch (e) {
+    // Server-Update fehlgeschlagen -- optimistischen Stand zuruecknehmen, sonst
+    // zeigt die UI bis zum naechsten Reload faelschlich einen Zustand an, der nie
+    // wirklich gespeichert wurde (z.B. Watchlist-Stern bleibt "an", obwohl der
+    // PUT nie durchkam).
+    PROGRESS.set(id, prev);
+    throw e;
+  }
 }
 function isWatched(src, title){ return getWatchlistFlag(idFor(src, title)); }
 // Watchlist und Gesehen schliessen sich gegenseitig aus: aktiviert man eines,
@@ -845,15 +855,26 @@ function buildPool(combinedRows, streamDoc){
 }
 // Legt einen noch "virtuellen" Pool-Eintrag (nur aus dem Streaming-Angebot bekannt,
 // noch keine title_id) bei Bedarf serverseitig an und liefert seine interne ID.
+// Cached In-Flight-Promise pro Item (statt nur item.realId zu pruefen): schliesst
+// die Luecke, in der ein zweiter, schneller Klick (z.B. ein Doppeltipp auf Mobil)
+// waehrend die erste POST-Anfrage noch laeuft ebenfalls einen eigenen
+// /api/titles/ensure-Request auslösen und mit einem noch nicht gesetzten
+// item.realId in eine Race-Condition mit der ersten Watchlist-/Gesehen-Aktion
+// laufen wuerde (siehe wlBtn/seenBtn-Handler).
 async function ensurePoolItem(item){
   if (item.realId != null) return item.realId;
-  const created = await apiRequest('POST', '/api/titles/ensure', {
-    tmdbId: item.tmdbId, type: item.type, title: item.t,
-    year: item.y, genres: item.g, director: item.d, cast: item.c, keywords: item.kw,
-    posterPath: item.p, rating: item.r, plot: item.ov, source: 'streaming',
-  });
-  item.realId = created.id;
-  return item.realId;
+  if (!item._ensuring) {
+    item._ensuring = (async () => {
+      const created = await apiRequest('POST', '/api/titles/ensure', {
+        tmdbId: item.tmdbId, type: item.type, title: item.t,
+        year: item.y, genres: item.g, director: item.d, cast: item.c, keywords: item.kw,
+        posterPath: item.p, rating: item.r, plot: item.ov, source: 'streaming',
+      });
+      item.realId = created.id;
+      return item.realId;
+    })().finally(() => { delete item._ensuring; });
+  }
+  return item._ensuring;
 }
 function poolToMeta(item){
   const parts = ['⭐ ' + (item.r != null ? fmtR(item.r) : '?')];
@@ -2256,56 +2277,78 @@ function poolItemLi(item, score, opts){
   var seenBtn = li.querySelector('.seen-btn');
   seenBtn.addEventListener('click', function(e){
     e.stopPropagation();
+    // Waehrend eine vorherige Klick-Aktion noch laeuft (z.B. Doppeltipp auf Mobil)
+    // wird ein zweiter Klick ignoriert -- sonst koennen zwei ueberlappende Aufrufe
+    // mit jeweils veraltetem next/getSeen()-Stand gegeneinander laufen und sich
+    // aufheben (Symptom: Watchlist/Gesehen "klebt" nicht zuverlaessig).
+    if (seenBtn.disabled) return;
     requireLogin(async () => {
-      var id = await ensurePoolItem(item);
-      var next = !getSeen(id);
-      // Watchlist und Gesehen schliessen sich gegenseitig aus (siehe toggleWatched).
-      if (next) {
-        // Neu als "gesehen" markiert -- vorher Sterne-Bewertung abfragen (fliesst
-        // gewichtet in den Taste-Score ein, siehe buildProfile). Bricht die Person
-        // ab, bleibt "gesehen" unveraendert.
-        var stars = await openRatingStars(item.t);
-        if (stars == null) { seenBtn.blur(); return; }
-        updateProgressRemote(id, { seen: true, watchlist: false, rating: stars }).catch(() => {});
-      } else {
-        updateProgressRemote(id, { seen: false }).catch(() => {});
+      seenBtn.disabled = true;
+      try {
+        var id = await ensurePoolItem(item);
+        var next = !getSeen(id);
+        var ok = true;
+        // Watchlist und Gesehen schliessen sich gegenseitig aus (siehe toggleWatched).
+        if (next) {
+          // Neu als "gesehen" markiert -- vorher Sterne-Bewertung abfragen (fliesst
+          // gewichtet in den Taste-Score ein, siehe buildProfile). Bricht die Person
+          // ab, bleibt "gesehen" unveraendert.
+          var stars = await openRatingStars(item.t);
+          if (stars == null) { return; }
+          try { await updateProgressRemote(id, { seen: true, watchlist: false, rating: stars }); } catch (err) { ok = false; }
+        } else {
+          try { await updateProgressRemote(id, { seen: false }); } catch (err) { ok = false; }
+        }
+        // Ohne erfolgreichen Server-Update keine optimistische UI-Aenderung --
+        // sonst zeigt der Button "an", obwohl serverseitig nichts gespeichert wurde.
+        if (!ok) return;
+        seenBtn.classList.toggle('on', next);
+        if (next) { wlBtn.classList.remove('on'); wlBtn.textContent = '☆ Watchlist'; }
+        // "Gesehen" sorgt (wie Watchlist) dafuer, dass der Titel oben unter Filme/
+        // Serien/Streaming auftaucht -- Filme/Serien lesen dafuer aus state.filme/
+        // serien.data, das nur per rebuild() aktualisiert wird (Streaming liest
+        // direkt aus POOL/PROGRESS und ist daher immer aktuell).
+        rebuild();
+        // Discovery blendet bereits markierte Titel aus -- die Zeile muss also
+        // sofort verschwinden (bzw. bei Streaming neu einsortiert werden).
+        if (activeTab === 'discovery') renderDiscovery();
+        else if (activeTab === 'stream') renderStreaming();
+      } finally {
+        seenBtn.blur();
+        seenBtn.disabled = false;
       }
-      seenBtn.classList.toggle('on', next);
-      if (next) { wlBtn.classList.remove('on'); wlBtn.textContent = '☆ Watchlist'; }
-      seenBtn.blur();
-      // "Gesehen" sorgt (wie Watchlist) dafuer, dass der Titel oben unter Filme/
-      // Serien/Streaming auftaucht -- Filme/Serien lesen dafuer aus state.filme/
-      // serien.data, das nur per rebuild() aktualisiert wird (Streaming liest
-      // direkt aus POOL/PROGRESS und ist daher immer aktuell).
-      rebuild();
-      // Discovery blendet bereits markierte Titel aus -- die Zeile muss also
-      // sofort verschwinden (bzw. bei Streaming neu einsortiert werden).
-      if (activeTab === 'discovery') renderDiscovery();
-      else if (activeTab === 'stream') renderStreaming();
     });
   });
   var wlBtn = li.querySelector('.wl-btn');
   wlBtn.addEventListener('click', function(e){
     e.stopPropagation();
+    if (wlBtn.disabled) return;
     requireLogin(async () => {
-      var id = await ensurePoolItem(item);
-      var next = !getWatchlistFlag(id);
-      // Watchlist und Gesehen schliessen sich gegenseitig aus (siehe toggleWatched).
-      var patch = { watchlist: next };
-      if (next) patch.seen = false;
-      await updateProgressRemote(id, patch).catch(() => {});
-      // Direktes Update des eigenen Buttons (analog zum Gesehen-Handler oben) --
-      // noetig, weil loadCatalogAndRefresh() unten zwar #list neu rendert, aber
-      // NICHT ein ggf. gerade offenes "Aehnliche Titel"-Popup (eigene, davon
-      // unabhaengige Liste). Ohne das hier passierte in diesem Popup beim Klick
-      // auf Watchlist sichtbar gar nichts.
-      wlBtn.classList.toggle('on', next);
-      wlBtn.textContent = (next ? '★' : '☆') + ' Watchlist';
-      if (next) seenBtn.classList.remove('on');
-      wlBtn.blur();
-      // Watchlist-Aenderung wirkt sich auf Filme/Serien/Streaming (oben) aus --
-      // deshalb komplett neu laden/rendern statt nur die Zeile zu aktualisieren.
-      await loadCatalogAndRefresh();
+      wlBtn.disabled = true;
+      try {
+        var id = await ensurePoolItem(item);
+        var next = !getWatchlistFlag(id);
+        // Watchlist und Gesehen schliessen sich gegenseitig aus (siehe toggleWatched).
+        var patch = { watchlist: next };
+        if (next) patch.seen = false;
+        var ok = true;
+        try { await updateProgressRemote(id, patch); } catch (err) { ok = false; }
+        if (!ok) return;
+        // Direktes Update des eigenen Buttons (analog zum Gesehen-Handler oben) --
+        // noetig, weil loadCatalogAndRefresh() unten zwar #list neu rendert, aber
+        // NICHT ein ggf. gerade offenes "Aehnliche Titel"-Popup (eigene, davon
+        // unabhaengige Liste). Ohne das hier passierte in diesem Popup beim Klick
+        // auf Watchlist sichtbar gar nichts.
+        wlBtn.classList.toggle('on', next);
+        wlBtn.textContent = (next ? '★' : '☆') + ' Watchlist';
+        if (next) seenBtn.classList.remove('on');
+        // Watchlist-Aenderung wirkt sich auf Filme/Serien/Streaming (oben) aus --
+        // deshalb komplett neu laden/rendern statt nur die Zeile zu aktualisieren.
+        await loadCatalogAndRefresh();
+      } finally {
+        wlBtn.blur();
+        wlBtn.disabled = false;
+      }
     });
   });
   var similarBtn = li.querySelector('.similar-btn');
