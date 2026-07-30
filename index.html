@@ -128,8 +128,12 @@
      Tabs, die bestehende header-border-bottom darunter bleibt die zweite Linie
      vor Watchlist/Gesehen/Details. */
   .disc-toprow { display:flex; justify-content:center; border-top:1px solid var(--border); margin-top:18px; padding-top:14px; }
-  .disc-toprow button { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-    padding: 9px 26px; color: var(--text-dim); font-size: 13px; font-weight:600; cursor: pointer; transition: all 0.15s; }
+  /* Gleiches Design/Groesse wie die Filme/Serien-Tabs (.tabs button) -- die Breite
+     wird zusaetzlich per JS (syncDiscoveryWidth) exakt auf die Breite von
+     .tabs .tabs-row gesetzt, damit der Button links buendig mit "Filme" beginnt
+     und rechts buendig mit "Serien" endet (siehe DOMContentLoaded/resize weiter unten). */
+  .disc-toprow button { background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 11px 28px; color: var(--text-dim); font-size: 15px; font-weight:600; cursor: pointer; transition: all 0.15s; }
   @media (hover: hover) { .disc-toprow button:hover { border-color: var(--accent); color: var(--accent); } }
   .disc-toprow button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   .progress-wrap {
@@ -371,7 +375,6 @@
   .disc-hint { text-align:center; color:var(--text-dim); font-size:13px; margin:0 auto 14px; max-width:620px; line-height:1.5; }
   .load-more-btn { display:block; margin:18px auto 6px; padding:11px 26px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--text-dim); transition:all .15s; }
   @media (hover: hover) { .load-more-btn:hover { border-color:var(--accent); color:var(--accent); } }
-  .stream-hint { text-align:center; color:var(--text-dim); font-size:13px; margin:0 auto; max-width:620px; line-height:1.5; }
   li.disc { display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--border);
     border-radius:12px; padding:10px 14px; margin-bottom:10px; }
   li.disc .drank { color:var(--text-dim); font-weight:700; width:26px; text-align:center; flex:none; }
@@ -557,15 +560,12 @@
   </div>
   <div class="tabs">
     <div class="tabs-row">
-      <button id="tabStream" class="active">📡 Netflix, Amazon Prime &amp; Co.</button>
-    </div>
-    <div class="tabs-row">
-      <button id="tabFilme">🎬 Filme</button>
+      <button id="tabFilme" class="active">🎬 Filme</button>
       <button id="tabSerien">📺 Serien</button>
     </div>
   </div>
   <div class="disc-toprow">
-    <button id="fDiscovery">Discovery</button>
+    <button id="fDiscovery">🧭 Discovery</button>
   </div>
 </header>
 
@@ -575,6 +575,7 @@
       <div class="filter-group">
         <button id="fOpen" class="active">Watchlist</button>
         <button id="fDone">Gesehen</button>
+        <button id="fInStream">Im Streaming</button>
       </div>
       <button id="fDetails">🔎 Details</button>
     </div>
@@ -608,7 +609,6 @@
     <span><b id="count">0</b> / <span id="total">300</span> gesehen</span>
   </div>
   <div class="bar"><div class="bar-fill" id="barFill"></div></div>
-  <div id="streamHint" class="stream-hint" style="display:none"></div>
 </div>
 
 
@@ -1036,21 +1036,31 @@ function rebuild(){
   state.serien.checked = state.serien.det.map(d => getSeen(d.id));
 }
 rebuild();
-let activeTab = 'stream';
+let activeTab = 'filme';
 // Ersetzt das fruehere exklusive "mode" (Alle/Ungesehen/Gesehen): Watchlist und
 // Gesehen sind jetzt zwei unabhaengige Haken. "Alle" als Button entfaellt
 // dadurch, an seine Stelle tritt der Discovery-Button (siehe discoveryMode).
-// Default beim Laden bzw. bei jedem Tab-Wechsel zwischen Streaming/Filme/Serien
-// ist ausschliesslich Watchlist aktiv (siehe setTab) -- Gesehen laesst sich
-// weiterhin zusaetzlich dazuschalten.
+// Default beim Laden bzw. bei jedem Tab-Wechsel zwischen Filme/Serien ist
+// ausschliesslich Watchlist aktiv (siehe setTab) -- Gesehen und "Im Streaming"
+// lassen sich weiterhin zusaetzlich dazuschalten.
 let watchlistFilterOn = true;
 let seenFilterOn = false;
+// Dritter, unabhaengiger Haken neben Watchlist/Gesehen (siehe applyFilter/
+// updateProgress): schraenkt Filme/Serien auf Titel ein, die AKTUELL bei
+// mindestens einem Streaming-Anbieter verfuegbar sind (item.providers.length).
+// Ersetzt den frueheren eigenstaendigen "Streaming"-Tab (der Filme/Serien nur
+// redundant nochmal gezeigt hat) -- dieselbe Einschraenkung gibt es jetzt direkt
+// unter Filme UND unter Serien statt in einem separaten dritten Bereich.
+let inStreamFilterOn = false;
 // Discovery ist keine eigene Haupt-Seite mehr, sondern ein globaler Modus,
-// der beim Wechsel zwischen Streaming/Filme/Serien bestehen bleibt (siehe
-// setTab) -- der Typ-Unterfilter (discTypeFilter) wird dabei jedesmal auf den
-// gerade aktiven Tab umgestellt, damit z.B. ein Wechsel von "Filme" (mit
-// manuell dazugeschalteter Serien-Auswahl) auf "Streaming" dort wieder nur
-// "Streaming" zeigt statt der alten Auswahl.
+// der beim Wechsel zwischen Filme/Serien bestehen bleibt (siehe setTab) -- der
+// Typ-Unterfilter (discTypeFilter) wird dabei jedesmal auf den gerade aktiven
+// Tab umgestellt, damit z.B. ein Wechsel von "Filme" (mit manuell
+// dazugeschalteter Serien-Auswahl) auf "Serien" dort wieder nur "Serien" zeigt
+// statt der alten Auswahl. Der "Streaming"-Unterfilter innerhalb von Discovery
+// (discFilme/discSerien/discStream) ist ein eigenstaendiger Mechanismus zum
+// Durchstoebern NEUER, noch nicht gemerkter Titel -- unabhaengig von
+// inStreamFilterOn oben, das nur die eigene Watchlist/Gesehen-Liste filtert.
 let discoveryMode = false;
 function inDiscoveryMode(){ return discoveryMode; }
 // Stellt discTypeFilter auf ausschliesslich den uebergebenen Tab um (Filme/
@@ -1058,7 +1068,7 @@ function inDiscoveryMode(){ return discoveryMode; }
 // Gemeinsam genutzt vom Discovery-Button (Einstieg) und setTab (Tab-Wechsel
 // waehrend des Discovery-Modus).
 function presetDiscTypeFilterForTab(t){
-  discTypeFilter = { f: t === 'filme', s: t === 'serien', stream: t === 'stream' };
+  discTypeFilter = { f: t === 'filme', s: t === 'serien', stream: false };
   Object.keys(discBtns).forEach(function(k){ discBtns[k].classList.toggle('active', discTypeFilter[k]); });
   discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
 }
@@ -1343,17 +1353,25 @@ function wireRow(li, src, i){
 function updateProgress() {
   const s = state[activeTab];
   if (!s) return;
+  // Ist "Im Streaming" aktiv, zaehlt der Fortschrittsbalken nur die aktuell
+  // streamende Teilmenge (nicht die gesamte Watchlist/Gesehen-Liste) -- alle
+  // drei Faelle unten (Watchlist/Gesehen/beide) filtern deshalb zuerst auf
+  // diese Basis-Indexmenge.
+  const base = s.data.map(function (_, i) { return i; }).filter(function (i) {
+    return !inStreamFilterOn || (s.pool[i] && s.pool[i].providers && s.pool[i].providers.length);
+  });
   let num, den;
   if (watchlistFilterOn && !seenFilterOn) {
-    const idx = s.data.map(function (_, i) { return i; }).filter(function (i) { return isWatched(activeTab, s.data[i][0]); });
+    const idx = base.filter(function (i) { return isWatched(activeTab, s.data[i][0]); });
     den = idx.length;
     num = idx.filter(function (i) { return s.checked[i]; }).length;
   } else if (seenFilterOn && !watchlistFilterOn) {
-    num = s.checked.filter(Boolean).length;
+    const idx = base.filter(function (i) { return s.checked[i]; });
+    num = idx.length;
     den = num;
   } else {
-    num = s.checked.filter(Boolean).length;
-    den = s.data.length;
+    num = base.filter(function (i) { return s.checked[i]; }).length;
+    den = base.length;
   }
   document.getElementById('count').textContent = num;
   const tot = document.getElementById('total'); if (tot) tot.textContent = den;
@@ -1363,8 +1381,6 @@ function updateProgress() {
 const tabBtns = { filme: document.getElementById('tabFilme'), serien: document.getElementById('tabSerien') };
 tabBtns.filme.onclick = () => setTab('filme');
 tabBtns.serien.onclick = () => setTab('serien');
-const tabStreamBtn = document.getElementById('tabStream');
-tabStreamBtn.onclick = () => setTab('stream');
 const discBtns = { f: document.getElementById('discFilme'), s: document.getElementById('discSerien'), stream: document.getElementById('discStream') };
 // Discovery zeigt anfangs 250 Titel, "Mehr laden" haengt jeweils 50 weitere an;
 // ein Wechsel von Filter oder Sortierung gilt als neue Liste und faengt wieder
@@ -1386,23 +1402,10 @@ function toggleDiscType(k){
 discBtns.f.onclick = () => toggleDiscType('f');
 discBtns.s.onclick = () => toggleDiscType('s');
 discBtns.stream.onclick = () => toggleDiscType('stream');
-let sortManual = { filme: null, serien: null, stream: null, discovery: null };
-// Sorgt dafuer, dass Button-Reihen unterhalb der Toolbar (Streaming: Anbieter/Filme/Serien;
-// Watchlist: Alle/Filme/Serien/Streaming) genauso breit sind wie die Alle/Offen/Gesehen-Reihe
-// obendrueber (Spalte 1 des tb-grid, also ohne die Details-Spalte).
-function syncFilterRowWidth(el){
-  if (!el) return;
-  // Direkt an der Alle/Offen/Gesehen-Reihe messen (statt sie aus der Grid-Spaltenbreite
-  // zu errechnen) - robuster, da die "auto"-Spalte des tb-grid je nach Inhalt (Sortieren-
-  // oder Details-Button) unterschiedlich breit sein kann.
-  var fg = document.querySelector('.filter-group');
-  if (!fg) return;
-  var w = fg.getBoundingClientRect().width;
-  if (w > 40) { el.style.width = w + 'px'; el.style.maxWidth = w + 'px'; }
-}
+let sortManual = { filme: null, serien: null, discovery: null };
 window.addEventListener('resize', function(){
-  syncFilterRowWidth(document.querySelector('.stream-filter'));
   syncDetailsSortWidth();
+  syncDiscoveryWidth();
 });
 // Details (obere Zeile) und Sortieren (untere Zeile) sollen immer gleich breit
 // sein -- da beide die "rechte Spalte" ihrer jeweiligen .tb-toprow sind und die
@@ -1419,6 +1422,22 @@ function syncDetailsSortWidth(){
   sw.style.width = w + 'px';
 }
 syncDetailsSortWidth();
+// Discovery-Button soll links buendig mit "Filme" beginnen und rechts buendig
+// mit "Serien" enden -- da .tabs-row seine Kinder (die beiden Tab-Buttons) ohne
+// zusaetzliches Padding eng umschliesst, entspricht dessen gerenderte Breite
+// exakt "Filme"-Breite + Abstand + "Serien"-Breite. Diese Breite wird 1:1 auf
+// den (ebenfalls zentrierten) Discovery-Button uebertragen, wodurch beide
+// Elemente exakt auf gleicher Breite ausgerichtet sind -- ueber alle
+// Breakpoints hinweg, da hier die tatsaechlich gerenderte Breite gemessen wird.
+function syncDiscoveryWidth(){
+  var row = document.querySelector('.tabs .tabs-row');
+  var btn = document.getElementById('fDiscovery');
+  if (!row || !btn) return;
+  btn.style.width = '';
+  var w = row.getBoundingClientRect().width;
+  if (w > 40) btn.style.width = w + 'px';
+}
+syncDiscoveryWidth();
 function renderList() {
   render();
 }
@@ -1428,48 +1447,48 @@ function renderList() {
 // an den verschiedenen Aufrufstellen im Code.
 function renderCurrentTab(){
   if (inDiscoveryMode()) { renderDiscovery(); return; }
-  if (activeTab === 'stream') renderStreaming();
-  else renderList();
+  renderList();
 }
 // Aktualisiert nur die Button-Zustaende/Sichtbarkeiten der Filterzeile(n) --
 // getrennt von renderCurrentTab(), damit beide unabhaengig voneinander (z.B.
-// nach einem Klick auf Watchlist/Gesehen/Discovery) aufgerufen werden koennen.
+// nach einem Klick auf Watchlist/Gesehen/Im Streaming/Discovery) aufgerufen
+// werden koennen.
 function updateFilterRowUI(){
   var disc = inDiscoveryMode();
   btns.open.classList.toggle('active', !disc && watchlistFilterOn);
   btns.done.classList.toggle('active', !disc && seenFilterOn);
+  btns.inStream.classList.toggle('active', !disc && inStreamFilterOn);
   btns.discovery.classList.toggle('active', disc);
   document.querySelector('.tb-discfilters').style.display = disc ? 'flex' : 'none';
   var pw = document.querySelector('.progress-wrap');
   pw.style.display = disc ? 'none' : '';
-  document.getElementById('streamHint').style.display = (activeTab === 'stream' && !disc) ? '' : 'none';
 }
 function setTab(t) {
   activeTab = t;
   tabBtns.filme.classList.toggle('active', t === 'filme');
   tabBtns.serien.classList.toggle('active', t === 'serien');
-  tabStreamBtn.classList.toggle('active', t === 'stream');
   document.querySelector('.toolbar').style.display = '';
   var _fd = document.getElementById('fDetails'); if (_fd) _fd.style.display = '';
   searchEl.style.display = '';
   var _sw = document.querySelector('.sort-wrap'); if (_sw) _sw.style.display = 'flex';
   // Bleibt der Discovery-Modus beim Tab-Wechsel bestehen (siehe discoveryMode),
-  // wird der Typ-Unterfilter auf den neuen Tab umgestellt (z.B. Filme -> Streaming
-  // soll dort wieder nur "Streaming" zeigen, nicht die alte Filme/Serien-Auswahl).
-  // Ausserhalb des Discovery-Modus ist beim Wechsel zwischen Streaming/Filme/
-  // Serien immer ausschliesslich Watchlist aktiv (Gesehen laesst sich danach
+  // wird der Typ-Unterfilter auf den neuen Tab umgestellt (z.B. Filme -> Serien
+  // soll dort wieder nur "Serien" zeigen, nicht die alte Filme-Auswahl).
+  // Ausserhalb des Discovery-Modus ist beim Wechsel zwischen Filme/Serien immer
+  // ausschliesslich Watchlist aktiv (Gesehen/Im Streaming lassen sich danach
   // weiterhin zusaetzlich dazuschalten).
   if (discoveryMode) {
     presetDiscTypeFilterForTab(t);
   } else {
     watchlistFilterOn = true;
     seenFilterOn = false;
+    inStreamFilterOn = false;
   }
   updateFilterRowUI();
   renderCurrentTab();
 }
 
-const btns = { open: document.getElementById('fOpen'), done: document.getElementById('fDone'), discovery: document.getElementById('fDiscovery') };
+const btns = { open: document.getElementById('fOpen'), done: document.getElementById('fDone'), inStream: document.getElementById('fInStream'), discovery: document.getElementById('fDiscovery') };
 // Watchlist/Gesehen sind unabhaengig voneinander an-/abwaehlbar (siehe
 // watchlistFilterOn/seenFilterOn) -- mindestens einer muss aktiv bleiben. Ein
 // Klick waehrend des Discovery-Modus beendet diesen und zeigt die eigene Liste
@@ -1477,7 +1496,7 @@ const btns = { open: document.getElementById('fOpen'), done: document.getElement
 btns.open.onclick = () => {
   if (inDiscoveryMode()) {
     discoveryMode = false;
-    watchlistFilterOn = true; seenFilterOn = false;
+    watchlistFilterOn = true; seenFilterOn = false; inStreamFilterOn = false;
   } else {
     if (watchlistFilterOn && !seenFilterOn) return;
     watchlistFilterOn = !watchlistFilterOn;
@@ -1488,10 +1507,23 @@ btns.open.onclick = () => {
 btns.done.onclick = () => {
   if (inDiscoveryMode()) {
     discoveryMode = false;
-    watchlistFilterOn = false; seenFilterOn = true;
+    watchlistFilterOn = false; seenFilterOn = true; inStreamFilterOn = false;
   } else {
     if (seenFilterOn && !watchlistFilterOn) return;
     seenFilterOn = !seenFilterOn;
+  }
+  updateFilterRowUI();
+  renderCurrentTab();
+};
+// "Im Streaming" ist unabhaengig von Watchlist/Gesehen kombinierbar (z.B.
+// "gesehene Filme, die aktuell im Streaming sind") -- daher hier keine
+// gegenseitige Ausschluss-Logik wie oben, nur ein einfacher Toggle.
+btns.inStream.onclick = () => {
+  if (inDiscoveryMode()) {
+    discoveryMode = false;
+    watchlistFilterOn = true; seenFilterOn = false; inStreamFilterOn = true;
+  } else {
+    inStreamFilterOn = !inStreamFilterOn;
   }
   updateFilterRowUI();
   renderCurrentTab();
@@ -1525,7 +1557,7 @@ var SORT_MANUAL_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 try {
   var _sm = JSON.parse(localStorage.getItem(SORT_MANUAL_KEY) || '{}');
   if (_sm && _sm._ts && (Date.now() - _sm._ts) < SORT_MANUAL_MAX_AGE_MS) {
-    ['filme', 'serien', 'stream', 'discovery'].forEach(function (k) { if (['imdb', 'taste', 'year', 'newstream'].indexOf(_sm[k]) >= 0) sortManual[k] = _sm[k]; });
+    ['filme', 'serien', 'discovery'].forEach(function (k) { if (['imdb', 'taste', 'year', 'newstream'].indexOf(_sm[k]) >= 0) sortManual[k] = _sm[k]; });
   } else {
     localStorage.removeItem(SORT_MANUAL_KEY);
   }
@@ -1534,7 +1566,7 @@ function saveSortManual(){
   try { localStorage.setItem(SORT_MANUAL_KEY, JSON.stringify(Object.assign({}, sortManual, { _ts: Date.now() }))); } catch (e) {}
 }
 function resetSortManual(){
-  sortManual.filme = null; sortManual.serien = null; sortManual.stream = null; sortManual.discovery = null;
+  sortManual.filme = null; sortManual.serien = null; sortManual.discovery = null;
   try { localStorage.removeItem(SORT_MANUAL_KEY); } catch (e) {}
   updateSortMenuActive();
   renderCurrentTab();
@@ -1550,7 +1582,7 @@ function tasteProfileSize(){
 // Taste-Score, weil dann genug Profildaten fuer eine sinnvolle Sortierung da sind.
 function effectiveSort(cat){
   if (sortManual[cat]) return sortManual[cat];
-  if (['filme', 'serien', 'stream', 'discovery'].indexOf(cat) === -1) return 'imdb';
+  if (['filme', 'serien', 'discovery'].indexOf(cat) === -1) return 'imdb';
   return tasteProfileSize() >= 10 ? 'taste' : 'imdb';
 }
 // Discovery ist kein eigener Tab mehr, sondern ein globaler Modus (siehe
@@ -1559,13 +1591,13 @@ function effectiveSort(cat){
 // im Discovery-Modus ist.
 function effectiveCat(){ return inDiscoveryMode() ? 'discovery' : activeTab; }
 // "Neu im Streaming" ergibt nur Sinn, wo tatsaechlich Streaming-Angebote sortiert
-// werden: auf der Streaming-Seite selbst, und im Discovery-Modus nur solange der
-// Streaming-Filter aktiv ist. Auf Filme/Serien (kein Streaming-Bezug) wird die
-// Option ausgeblendet; ist sie dabei gerade manuell gewaehlt, faellt die Anzeige
-// automatisch auf die uebliche Automatik zurueck (siehe effectiveSort).
+// werden: unter Filme/Serien nur solange der "Im Streaming"-Filter aktiv ist, im
+// Discovery-Modus nur solange dessen eigener Streaming-Unterfilter aktiv ist.
+// Ist sie dabei gerade manuell gewaehlt und wird die Option ausgeblendet, faellt
+// die Anzeige automatisch auf die uebliche Automatik zurueck (siehe effectiveSort).
 function newstreamSortApplicable(){
   if (inDiscoveryMode()) return discTypeFilter.stream;
-  return activeTab === 'stream';
+  return inStreamFilterOn;
 }
 function updateSortMenuActive(){
   var m = document.getElementById('sortMenu');
@@ -1847,25 +1879,20 @@ function applyFilter() {
     const i = +li.dataset.idx;
     const mainBlob = (li.dataset.mainBlob || li.textContent).toLowerCase();
     const matchQ = !q || mainBlob.includes(q) || wordExactMatch(li.dataset.exactBlob, q);
-    const matchM = (watchlistFilterOn && isWatched(activeTab, s.data[i][0])) || (seenFilterOn && s.checked[i]);
+    const matchM = ((watchlistFilterOn && isWatched(activeTab, s.data[i][0])) || (seenFilterOn && s.checked[i]))
+      && (!inStreamFilterOn || (s.pool[i] && s.pool[i].providers && s.pool[i].providers.length));
     li.style.display = (matchQ && matchM) ? 'flex' : 'none';
   });
+  // li.disc innerhalb von #list kommt nur noch aus dem Discovery-Modus (der
+  // frühere Streaming-Tab, der hier eine Watchlist-/Gesehen-Einschraenkung
+  // brauchte, ist entfallen) -- Discovery filtert bereits selbst (siehe
+  // discFilterPool), hier zaehlt fuers Ein-/Ausblenden nur noch die Suche.
   list.querySelectorAll('li.disc').forEach(li => {
     const mainBlob = (li.dataset.mainBlob || li.textContent).toLowerCase() + ' ' + (li.dataset.providerBlob || '').toLowerCase();
     const matchQ = !q || mainBlob.includes(q) || wordExactMatch(li.dataset.exactBlob, q);
-    let matchM = true;
-    if (activeTab === 'stream' && !inDiscoveryMode() && li.dataset.kind && li.dataset.title) {
-      const src = li.dataset.kind === 's' ? 'serien' : 'filme';
-      matchM = (watchlistFilterOn && isWatched(src, li.dataset.title)) || (seenFilterOn && isSeenByTitle(src, li.dataset.title));
-    }
-    li.style.display = (matchQ && matchM) ? 'flex' : 'none';
+    li.style.display = matchQ ? 'flex' : 'none';
   });
   updateProgress();
-}
-function isSeenByTitle(src, title){
-  const st = state[src];
-  const idx = st.data.findIndex(it => it[0] === title);
-  return idx !== -1 && !!st.checked[idx];
 }
 
 // Klick auf Namen/Hashtags -> Filter-Popup
@@ -2142,7 +2169,7 @@ function goHome(){
   closeCinemaPage();
   searchEl.value = '';
   searchEl.dispatchEvent(new Event('input'));
-  setTab('stream');
+  setTab('filme');
 }
 document.getElementById('navHomeBtn').onclick = () => { closeNavMenu(); goHome(); };
 document.getElementById('cinemaBtn').onclick = () => { closeNavMenu(); openCinemaPage(); };
@@ -2578,45 +2605,28 @@ async function loadCatalogAndRefresh(){
 }
 
 renderAuthBar();
-setTab('stream');
+setTab('filme');
 apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() => { CURRENT_USER = null; }).finally(() => {
   renderAuthBar();
   loadCatalogAndRefresh();
 });
 
-/* ================= STREAMING + DISCOVERY (vereinheitlicht) ================= */
+/* ================= DISCOVERY (vereinheitlicht mit dem Titel-Pool) ================= */
 document.head.insertAdjacentHTML('beforeend',
   '<style>'+
   'li.disc.show-details .details{display:block;}'+
   '.dproviders{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px;}'+
   '.provider-chip{display:inline-block;background:var(--card-hover);border:1px solid var(--border);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:var(--text-dim);}'+
-  '.stream-filter{display:flex;flex-wrap:nowrap;gap:10px;max-width:700px;margin:0 0 18px;}'+
-  '.stream-filter button{flex:1;width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--text-dim);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;}'+
-  '@media (hover: hover){ .stream-filter button:hover{border-color:var(--accent);color:var(--accent);} }'+
-  '.stream-filter button.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}'+
   'li.disc .details{width:100%;margin-top:9px;padding-top:9px;}'+
-  '.stream-provider-wrap{position:relative;display:flex;flex:1;}'+
-  '.stream-provider-panel{position:absolute;top:calc(100% + 6px);left:0;right:auto;z-index:60;background:var(--card);'+
-  'border:1px solid var(--border);border-radius:10px;padding:10px 12px;min-width:200px;'+
-  'box-shadow:0 10px 30px rgba(0,0,0,.5);display:none;flex-direction:column;gap:8px;}'+
-  '.stream-provider-panel label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);cursor:pointer;white-space:nowrap;}'+
-  '.stream-provider-panel input{accent-color:var(--accent);width:16px;height:16px;cursor:pointer;}'+
   '</style>');
 
+// STREAM haelt das aktuelle Streaming-Angebot (Anbieter + Titel je Anbieter,
+// siehe /api/streaming) -- wird in buildPool() genutzt, um POOL-Eintraegen ihre
+// aktuellen Anbieter (item.providers) zuzuweisen. Frueher zusaetzlich Basis fuer
+// den eigenstaendigen Streaming-Tab (mit eigenem Anbieter-Dropdown) -- der ist
+// entfallen (siehe "Im Streaming"-Filter unter Filme/Serien), STREAM selbst wird
+// aber weiterhin gebraucht.
 let STREAM = { generated: null, region: 'DE', providers: [] };
-let streamTypeFilter = { f: true, s: true }; // Filme/Serien unabhaengig voneinander an/abwaehlbar, standardmaessig beide aktiv
-let streamProviderExcluded = new Set(); // Anbieter-IDs, die per Checkliste abgewaehlt wurden
-let providerPanelOpen = false;
-let currentProvPanel = null, currentProvBtn = null;
-document.addEventListener('click', function(e){
-  if (providerPanelOpen && currentProvPanel && !currentProvPanel.contains(e.target) && e.target!==currentProvBtn){
-    providerPanelOpen=false;
-    currentProvPanel.style.display='none';
-    // Gelb bleibt/wird nur gesetzt, wenn wirklich alle Anbieter ausgewaehlt sind --
-    // nicht einfach entfernen, sonst geht "gelb" beim Schliessen per Aussenklick verloren.
-    if(currentProvBtn) currentProvBtn.classList.toggle('active', streamProviderExcluded.size===0);
-  }
-});
 // Suchfeld erkennt Anbieter-Namen weiterhin ueber Aliase (siehe .disc-Behandlung in applyFilter).
 const PROVIDER_ALIASES = {
   amazon:  'amazon prime video amazon prime prime video',
@@ -2624,18 +2634,8 @@ const PROVIDER_ALIASES = {
   disney:  'disney plus disney+',
   apple:   'apple tv plus apple tv+ apple tv'
 };
-function updateStreamStand(){
-  var el=document.getElementById('subStreamStand');
-  if(!el) return;
-  if(STREAM && STREAM.generated){
-    try{ el.textContent=' (Stand: '+new Date(STREAM.generated).toLocaleDateString('de-DE')+')'; return; }catch(e){}
-  }
-  el.textContent = '';
-}
-
-// Einheitliche Zeile fuer einen Pool-Eintrag -- genutzt sowohl von Discovery (Alle/
-// Filme/Serien/Streaming) als auch vom Top-Level-Streaming-Tab (watchlisted + gerade
-// verfuegbar). Gesehen-Button links, Watchlist-Stern-Button ganz rechts.
+// Einheitliche Zeile fuer einen Pool-Eintrag -- genutzt von Discovery (Alle/
+// Filme/Serien/Streaming). Gesehen-Button links, Watchlist-Stern-Button ganz rechts.
 function poolItemLi(item, score, opts){
   var li=document.createElement('li'); li.className='disc stream-item' + (showDetails ? ' show-details' : '');
   var key = item.type === 'series' ? 's' : 'f';
@@ -2715,7 +2715,7 @@ function poolItemLi(item, score, opts){
         // sofort verschwinden (bzw. bei Streaming neu einsortiert werden). Kein
         // Re-Render, wenn dieses poolItemLi nur im "Aehnliche Titel"-Popup auf
         // Filme/Serien steht (das ist keine der beiden Live-Ansichten hier).
-        if (inDiscoveryMode() || activeTab === 'stream') renderCurrentTab();
+        if (inDiscoveryMode()) renderCurrentTab();
       } finally {
         seenBtn.blur();
         seenBtn.disabled = false;
@@ -2752,7 +2752,7 @@ function poolItemLi(item, score, opts){
         // sorgte vorher fuer eine spuerbare Verzoegerung (mehrere Sekunden bei
         // ~26.000 Titeln) bis der Titel aus der Discovery-Liste verschwand.
         rebuild();
-        if (inDiscoveryMode() || activeTab === 'stream') renderCurrentTab();
+        if (inDiscoveryMode()) renderCurrentTab();
       } finally {
         wlBtn.blur();
         wlBtn.disabled = false;
@@ -2769,113 +2769,21 @@ function poolItemLi(item, score, opts){
     if (e.target.closest('.det-actions')) return;
     li.classList.toggle('show-details');
   });
-  // Wisch-Geste: auf Streaming (ausserhalb Discovery-Modus) entfernen (wie
-  // Gesehen+Watchlist abwaehlen), im Discovery-Modus dauerhaft ausblenden
-  // (siehe Einstellungen -> "Geloeschte Titel"). Im "Aehnliche Titel"-Popup
-  // (suppressSimilar) kein Swipe -- der Status dort ist kontextabhaengig und
-  // eine Wisch-Geste haette keine eindeutige Bedeutung. Discovery-Check MUSS
-  // vor dem Streaming-Check stehen: im Discovery-Modus fuer Streaming ist
-  // activeTab zwar 'stream', aber "ausblenden" ist hier das richtige Verhalten.
-  if (!(opts && opts.suppressSimilar)) {
-    if (inDiscoveryMode()) {
-      attachSwipeToRemove(li, function(){
-        requireLogin(async () => {
-          var id = await ensurePoolItem(item);
-          await apiRequest('POST', '/api/hidden-titles/' + id).catch(function(){});
-          HIDDEN_TITLE_IDS.add(id);
-          renderDiscovery();
-        });
+  // Wisch-Geste: im Discovery-Modus dauerhaft ausblenden (siehe Einstellungen
+  // -> "Geloeschte Titel"). Im "Aehnliche Titel"-Popup (suppressSimilar) kein
+  // Swipe -- der Status dort ist kontextabhaengig und eine Wisch-Geste haette
+  // keine eindeutige Bedeutung.
+  if (!(opts && opts.suppressSimilar) && inDiscoveryMode()) {
+    attachSwipeToRemove(li, function(){
+      requireLogin(async () => {
+        var id = await ensurePoolItem(item);
+        await apiRequest('POST', '/api/hidden-titles/' + id).catch(function(){});
+        HIDDEN_TITLE_IDS.add(id);
+        renderDiscovery();
       });
-    } else if (activeTab === 'stream') {
-      attachSwipeToRemove(li, function(){ removeFromMyTitles(item.realId); });
-    }
+    });
   }
   return li;
-}
-
-async function renderStreaming(){
-  list.innerHTML=''; document.getElementById('progName').textContent='Fortschritt Streaming';
-  updateStreamStand();
-  var provs=STREAM.providers||[];
-  var typeBar=document.createElement('div'); typeBar.className='stream-filter';
-  // Anbieter-Button samt Dropdown ganz links, Dropdown klappt nach rechts (ins Fenster) auf.
-  var provWrap=document.createElement('div'); provWrap.className='stream-provider-wrap';
-  var provBtn=document.createElement('button'); provBtn.type='button';
-  // Gelb wie Filme/Serien-Buttons, aber nur wenn WIRKLICH alle aufgefuehrten Anbieter aktiv sind.
-  provBtn.className = streamProviderExcluded.size === 0 ? 'active' : '';
-  provBtn.textContent='Streaminganbieter';
-  var provPanel=document.createElement('div'); provPanel.className='stream-provider-panel';
-  provPanel.style.display = providerPanelOpen ? 'flex' : 'none';
-  provPanel.addEventListener('click', function(e){ e.stopPropagation(); });
-  provs.forEach(function(pv){
-    var row=document.createElement('label');
-    var cb=document.createElement('input'); cb.type='checkbox'; cb.checked = !streamProviderExcluded.has(pv.id);
-    cb.addEventListener('change', function(){
-      if(cb.checked) streamProviderExcluded.delete(pv.id); else streamProviderExcluded.add(pv.id);
-      providerPanelOpen = true;
-      renderStreaming();
-    });
-    row.appendChild(cb);
-    var titleCount = (pv.f||[]).length + (pv.s||[]).length;
-    row.appendChild(document.createTextNode(' ' + (providerLabel(pv.name) || pv.id) + ' (' + titleCount + ')'));
-    provPanel.appendChild(row);
-  });
-  provBtn.onclick = function(e){
-    e.stopPropagation();
-    providerPanelOpen = !providerPanelOpen;
-    provPanel.style.display = providerPanelOpen ? 'flex' : 'none';
-    provBtn.classList.toggle('active', providerPanelOpen || streamProviderExcluded.size===0);
-  };
-  provWrap.appendChild(provBtn); provWrap.appendChild(provPanel);
-  typeBar.appendChild(provWrap);
-  currentProvPanel = provPanel; currentProvBtn = provBtn;
-  // Filme/Serien sind unabhaengig voneinander an-/abwaehlbar (beide standardmaessig aktiv);
-  // mindestens einer der beiden muss aktiv bleiben.
-  function typeToggleBtn(fid,label){
-    var b=document.createElement('button'); b.type='button'; b.textContent=label;
-    if(streamTypeFilter[fid]) b.className='active';
-    b.onclick=function(){
-      var other = fid==='f' ? 's' : 'f';
-      if(streamTypeFilter[fid] && !streamTypeFilter[other]) return; // letzten aktiven Filter nicht abwaehlbar machen
-      streamTypeFilter[fid] = !streamTypeFilter[fid];
-      renderStreaming();
-    };
-    return b;
-  }
-  typeBar.appendChild(typeToggleBtn('f','Filme'));
-  typeBar.appendChild(typeToggleBtn('s','Serien'));
-  list.appendChild(typeBar);
-  syncFilterRowWidth(typeBar);
-  var sortKey = effectiveSort('stream');
-  var prof = buildProfile();
-  function scoreFor(item){ return scoreCand(item, prof).score; }
-  function sortValFor(item){
-    if (sortKey==='newstream') return item.fs ? new Date(item.fs).getTime() : -Infinity;
-    return sortKey==='taste' ? scoreFor(item) : (sortKey==='year' ? (item.y||0) : (item.r||0));
-  }
-  // Nur was per Watchlist-Stern ODER "Gesehen" hinzugefuegt wurde UND aktuell bei
-  // mind. einem Anbieter laeuft -- das ist der neue "Streaming"-Tab (oben), keine
-  // komplette Angebotsuebersicht mehr (die gibt's jetzt unter Discovery -> Streaming).
-  var entries = POOL.filter(function(item){
-    if (!getWatchlistFlag(item.realId) && !getSeen(item.realId)) return false;
-    if (!item.providers.length) return false;
-    var key = item.type === 'series' ? 's' : 'f';
-    if (!streamTypeFilter[key]) return false;
-    return item.providers.some(function(p){ return !streamProviderExcluded.has(p.id); });
-  });
-  entries.sort(function(a,b){ return sortValFor(b) - sortValFor(a); });
-  var _streamSeen = entries.filter(function(it){ return getSeen(it.realId); }).length;
-  document.getElementById('count').textContent = _streamSeen;
-  var _streamTotal = document.getElementById('total'); if (_streamTotal) _streamTotal.textContent = entries.length;
-  document.getElementById('barFill').style.width = (entries.length ? (_streamSeen / entries.length * 100) : 0) + '%';
-  entries.forEach(function(item){ list.appendChild(poolItemLi(item, scoreFor(item))); });
-  if(!entries.length){
-    var pe=document.createElement('div'); pe.className='disc-hint';
-    pe.innerHTML='Dies ist deine Watchlist. Füge Titel über den Bereich „Discovery“ hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>.';
-    list.appendChild(pe);
-  }
-  updateSortMenuActive();
-  applyFilter();
 }
 
 // Prueft, ob ein Pool-Eintrag zu einem Suchbegriff passt -- dieselben Felder,
