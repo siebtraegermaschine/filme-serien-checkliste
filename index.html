@@ -65,7 +65,7 @@
   h1 span { color: var(--accent); }
   h1 .logo { display: block; height: 84px; width: auto; margin: 0 auto; }
   @media (max-width: 640px) { h1 .logo { height: 66px; } }
-  header p.sub {
+  header .sub {
     color: var(--text-dim);
     margin-top: 8px;
     font-size: 14px;
@@ -74,10 +74,28 @@
     margin-right: auto;
     line-height: 1.5;
   }
-  /* Zusaetzlicher Abstand NUR zwischen Zeile 1 und Zeile 2 (ca. 0,5x der
-     bestehenden Zeilenhoehe von 21px oben drauf) -- ein normaler <br> allein
-     kann keinen groesseren Abstand als die anderen Zeilenumbrueche bekommen. */
-  header p.sub .sub-gap { display: block; height: 10px; }
+  /* "How to"-Kurzfassung unter dem ersten Satz: per Default eingeklappt (nur
+     Label + Vorschau-Ausschnitt von Punkt 1 + "Mehr"-Button), klappt beim Klick
+     die vollstaendige 1./2./3.-Anleitung auf. */
+  .sub-howto { margin-top: 8px; }
+  .sub-howto-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+  }
+  .sub-howto-row .sub-howto-label { font-weight: 700; flex-shrink: 0; }
+  .sub-howto-row .sub-howto-preview { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sub-howto-row .sub-howto-more { flex-shrink: 0; text-decoration: underline; }
+  .sub-howto-full { margin-top: 6px; }
   .tabs {
     display: flex;
     justify-content: center;
@@ -483,7 +501,15 @@
 <body>
 <header>
   <h1><img class="logo" src="logo.png" alt="MovieTaste – Watch more. Search less."></h1>
-  <p class="sub"><b><i>Streaming-Angebote</i> sortiert nach deinem Geschmack!</b><br><span class="sub-gap"></span>1. Füge die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> zu deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen".<br>2. Sortiere nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</p>
+  <p class="sub"><b><i>Streaming-Angebote</i> sortiert nach deinem Geschmack!</b></p>
+  <div class="sub sub-howto">
+    <button type="button" id="subHowToToggle" class="sub-howto-row" aria-expanded="false">
+      <span class="sub-howto-label">How to</span>
+      <span class="sub-howto-preview" id="subHowToPreview">Füge die besten Filme &amp; Serien unter Discovery zu deiner „Watchlist“ hinzu oder markiere sie als „gesehen“.</span>
+      <span class="sub-howto-more" id="subHowToMoreLabel">Mehr</span>
+    </button>
+    <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Füge die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> zu deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen".<br>2. Sortiere nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</div>
+  </div>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
     <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
@@ -549,8 +575,7 @@
 <ol class="list" id="list"></ol>
 
 <footer>
-  Reihenfolge nach ungefährer IMDb-Bewertung (⭐) – Werte können sich im Zeitverlauf leicht ändern.<br>
-  Dein „Gesehen"-Status und deine Watchlist werden mit deinem Konto gespeichert, sobald du angemeldet bist – über alle Geräte hinweg.<br>
+  Dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, „Gesehen"-Status und deine „<i>Watchlist</i>" werden mit deinem Konto gespeichert, sobald du angemeldet bist.<br>
   <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
 </footer>
 
@@ -1012,7 +1037,7 @@ function render() {
   list.innerHTML = '';
   updateSortMenuActive();
   if (!s.data.length) {
-    list.innerHTML = '<li class="watch-empty">Dies ist deine Watchlist. Füge Titel über den Bereich „Discovery" hinzu.</li>';
+    list.innerHTML = '<li class="watch-empty">Dies ist deine Watchlist. Füge Titel über den Bereich „Discovery" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>.</li>';
     document.getElementById('progName').textContent = s.label;
     updateProgress();
     return;
@@ -1490,6 +1515,22 @@ if (_logoImg) {
     searchEl.value = '';
     searchEl.dispatchEvent(new Event('input'));
     setTab('stream');
+  });
+}
+
+// "How to"-Kurzfassung unterm ersten Satz: per Default eingeklappt (Vorschau
+// von Punkt 1 + "Mehr"), klappt beim Klick die volle 1./2./3.-Anleitung auf.
+var _subHowToToggle = document.getElementById('subHowToToggle');
+var _subHowToPreview = document.getElementById('subHowToPreview');
+var _subHowToFull = document.getElementById('subHowToFull');
+var _subHowToMoreLabel = document.getElementById('subHowToMoreLabel');
+if (_subHowToToggle) {
+  _subHowToToggle.addEventListener('click', function () {
+    var expanded = _subHowToFull.style.display !== 'none';
+    _subHowToFull.style.display = expanded ? 'none' : 'block';
+    _subHowToPreview.style.display = expanded ? '' : 'none';
+    _subHowToMoreLabel.textContent = expanded ? 'Mehr' : 'Weniger';
+    _subHowToToggle.setAttribute('aria-expanded', String(!expanded));
   });
 }
 
@@ -2550,7 +2591,7 @@ async function renderStreaming(){
   entries.forEach(function(item){ list.appendChild(poolItemLi(item, scoreFor(item))); });
   if(!entries.length){
     var pe=document.createElement('div'); pe.className='disc-hint';
-    pe.textContent='Dies ist deine Watchlist. Füge Titel über den Bereich „Discovery“ hinzu.';
+    pe.innerHTML='Dies ist deine Watchlist. Füge Titel über den Bereich „Discovery“ hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>.';
     list.appendChild(pe);
   }
   updateSortMenuActive();
