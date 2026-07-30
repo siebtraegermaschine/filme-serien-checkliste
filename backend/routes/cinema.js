@@ -48,20 +48,27 @@ router.post('/ingest', async (req, res) => {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
-    const runStartedAt = new Date();
+    // clock_timestamp() statt now(): now() bliebe fuer die GESAMTE Transaktion
+    // auf den Start eingefroren (Transaktions-Zeitstempel) -- damit haetten die
+    // gerade eingefuegten/aktualisierten Zeilen denselben (oder sogar einen
+    // fruoeheren) fetched_at-Wert wie runStartedAt, und der DELETE-Cleanup
+    // weiter unten haette JEDEN gerade uebertragenen Titel sofort wieder
+    // geloescht (genau das ist beim ersten echten Import passiert: 537
+    // uebertragene Titel, hinterher 0 Zeilen in cinema_cache).
+    const { rows: [{ now: runStartedAt }] } = await client.query('SELECT clock_timestamp() AS now');
     for (const item of items) {
       if (!item || !item.tmdbId || !item.title || !item.category) continue;
       await client.query(
         `INSERT INTO cinema_cache
-           (tmdb_id, title, year, genres, director, cast_names, poster_path, rating, overview, release_date, category)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+           (tmdb_id, title, year, genres, director, cast_names, poster_path, rating, overview, release_date, category, fetched_at)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11, clock_timestamp())
          ON CONFLICT (tmdb_id) DO UPDATE SET
            title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
            director = EXCLUDED.director, cast_names = EXCLUDED.cast_names,
            poster_path = EXCLUDED.poster_path, rating = EXCLUDED.rating,
            overview = COALESCE(NULLIF(EXCLUDED.overview, ''), cinema_cache.overview),
            release_date = EXCLUDED.release_date, category = EXCLUDED.category,
-           fetched_at = now()`,
+           fetched_at = clock_timestamp()`,
         [
           item.tmdbId,
           item.title,
