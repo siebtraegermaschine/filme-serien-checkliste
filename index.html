@@ -514,7 +514,7 @@
 <body>
 <header>
   <h1><img class="logo" src="logo.png" alt="MovieTaste – Watch more. Search less."></h1>
-  <p class="sub"><b><i>Streaming-Angebote</i> sortiert nach deinem Geschmack!</b></p>
+  <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach deinem Geschmack!</b></p>
   <div class="sub sub-howto">
     <button type="button" id="subHowToToggle" class="sub-howto-row" aria-expanded="false">
       <span class="sub-howto-label">How to:</span>
@@ -1350,7 +1350,23 @@ function syncFilterRowWidth(el){
 }
 window.addEventListener('resize', function(){
   syncFilterRowWidth(document.querySelector('.stream-filter'));
+  syncDetailsSortWidth();
 });
+// Details (obere Zeile) und Sortieren (untere Zeile) sollen immer gleich breit
+// sein -- da beide die "rechte Spalte" ihrer jeweiligen .tb-toprow sind und die
+// "linke Spalte" (Discovery/Watchlist/Gesehen bzw. Suchfeld) dort per flex:1
+// den jeweils verbleibenden Platz einnimmt, rutscht dadurch automatisch auch
+// die Filterzeile auf dieselbe Breite wie das Suchfeld darunter.
+function syncDetailsSortWidth(){
+  var d = document.getElementById('fDetails');
+  var sw = document.querySelector('.sort-wrap');
+  if (!d || !sw) return;
+  d.style.width = ''; sw.style.width = '';
+  var w = Math.max(d.getBoundingClientRect().width, sw.getBoundingClientRect().width);
+  d.style.width = w + 'px';
+  sw.style.width = w + 'px';
+}
+syncDetailsSortWidth();
 function renderList() {
   render();
 }
