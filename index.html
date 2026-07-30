@@ -402,6 +402,23 @@
   .tabs .tabs-row { display: flex; gap: 10px; }
   .tabs .tabs-row button { flex: 1; padding: 11px 10px; }
   .tb-discfilters button { flex: 1; }
+  /* Ausserhalb von .toolbar (das Popup ist ein eigenstaendiges Modal) --
+     dieselbe Optik wie die Discovery-Filterknoepfe (.tb-discfilters) manuell
+     nachgebildet, da .toolbar button hier nicht greift. */
+  .sim-type-filters { margin: 4px 0 14px; }
+  .sim-type-filters button {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 14px;
+    color: var(--text-dim);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  @media (hover: hover) { .sim-type-filters button:hover { border-color: var(--accent); color: var(--accent); } }
+  .sim-type-filters button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   li.item .info { min-width: 0; }
   li.item { align-items: flex-start; }
   li.item.show-details .dposter { display: none; }
@@ -466,7 +483,7 @@
 <body>
 <header>
   <h1><img class="logo" src="logo.png" alt="MovieTaste – Watch more. Search less."></h1>
-  <p class="sub"><i>Streaming-Angebote</i> sortiert nach deinem Geschmack!<br><span class="sub-gap"></span>1. Füge die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> zu deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen".<br>2. Sortiere nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Filme &amp; Serien genau nach deinem Geschmack!</p>
+  <p class="sub"><i>Streaming-Angebote</i> sortiert nach deinem Geschmack!<br><span class="sub-gap"></span>1. Füge die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> zu deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen".<br>2. Sortiere nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</p>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
     <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
@@ -507,7 +524,7 @@
     </div>
     <div class="filter-group">
       <button id="fAll" class="active">Alle</button>
-      <button id="fOpen">Ungesehen</button>
+      <button id="fOpen">★ Watchlist</button>
       <button id="fDone">Gesehen</button>
     </div>
     <div class="tb-row tb-discfilters" style="display:none">
@@ -567,6 +584,11 @@
   <div class="modal similar-modal">
     <button class="modal-x" id="similarModalX" aria-label="Schließen">✕</button>
     <h3 id="similarModalTitle">Ähnliche Titel</h3>
+    <div class="tb-row sim-type-filters" id="simTypeFilters">
+      <button type="button" id="simFilme">Filme</button>
+      <button type="button" id="simSerien">Serien</button>
+      <button type="button" id="simStream">Streaming</button>
+    </div>
     <ol class="list similar-modal-list" id="similarModalList"></ol>
   </div>
 </div>
@@ -576,7 +598,7 @@
     <button class="modal-x" id="howToModalX" aria-label="Schließen">✕</button>
     <h3>How to</h3>
     <ol class="install-steps">
-      <li>Unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> findest du die besten Filme &amp; Serien aller Zeiten, sortiert nach deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, Veröffentlichung oder „neu im Streaming".</li>
+      <li>Unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> findest du die besten Filme &amp; Serien aller Zeiten, sortiert nach deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungs<br>datum</i> oder <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.</li>
       <li>Markiere die Titel als gesehen oder füge sie zu deiner Watchlist hinzu. (Je mehr du hinzufügst, desto genauer wird dein Taste-Score.)</li>
       <li>Nie wieder lange nach neuen Filmen &amp; Serien suchen – wähle künftig einfach aus deiner Watchlist einen Film oder eine Serie aus, oder wähle aus allen aktuellen Streaming-Angeboten, vorsortiert nach deinem Taste-Score!</li>
     </ol>
@@ -932,7 +954,16 @@ function esc(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 }
-
+// Prueft, ob q als VOLLSTAENDIGES Wort in blob vorkommt (z.B. Cast-/Regie-Namen)
+// -- anders als ein normaler Teilstring-Treffer matcht "Heat" hier NICHT auf
+// "Heath" in "Heath Ledger". Titel/Genres duerfen dagegen weiterhin als
+// Teilstring matchen (das ist bei kurzen Eingaben waehrend des Tippens
+// gewuenscht, z.B. "Titan" soll "Titanic" finden).
+function wordExactMatch(blob, q){
+  if (!blob || !q) return false;
+  var words = blob.toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+  return words.indexOf(q) !== -1;
+}
 const list = document.getElementById('list');
 const searchEl = document.getElementById('search');
 
@@ -1010,6 +1041,12 @@ function render() {
     li.className = 'item' + (s.checked[i] ? ' done' : '') + (showDetails ? ' show-details' : '');
     li.dataset.idx = i;
     const d = s.det[i] || { p:'', h:[], c:[], d:'', poster:null };
+    // Getrennt fuers Suchfilter (siehe applyFilter): mainBlob per Teilstring,
+    // exactBlob (Besetzung, Regie, Hashtags/Keywords) nur per vollstaendigem Wort
+    // -- verhindert z.B. dass "Heat" faelschlich auf "Heath" in "Heath Ledger"
+    // oder auf "Theat" in einem Hashtag wie "TheaterVerfilmung" anschlaegt.
+    li.dataset.mainBlob = [item[0], item[1], (d.providers||[]).map(function(p){ return p.name; }).join(' ')].filter(Boolean).join(' ');
+    li.dataset.exactBlob = [].concat(d.c||[], d.d ? [d.d] : [], d.h||[]).join(' ');
     const dirLabel = 'Regie';
     const tagsHtml = ((d.h && d.h.length) ? d.h : [metaGenre(item[1])].filter(Boolean)).map(tagChip).join('');
     const posterThumb = d.poster ? '<img class="dposter" src="' + d.poster + '" alt="" loading="lazy">' : '<div class="dposter"></div>';
@@ -1290,12 +1327,12 @@ function setTab(t) {
 
 const btns = { all: document.getElementById('fAll'), open: document.getElementById('fOpen'), done: document.getElementById('fDone') };
 btns.all.onclick = () => setMode('all');
-btns.open.onclick = () => setMode('open');
+btns.open.onclick = () => setMode('watchlist');
 btns.done.onclick = () => setMode('done');
 function setMode(m) {
   mode = m;
   btns.all.classList.toggle('active', m === 'all');
-  btns.open.classList.toggle('active', m === 'open');
+  btns.open.classList.toggle('active', m === 'watchlist');
   btns.done.classList.toggle('active', m === 'done');
   applyFilter();
 }
@@ -1595,14 +1632,14 @@ function applyFilter() {
   const q = searchEl.value.toLowerCase();
   list.querySelectorAll('li.item').forEach(li => {
     const i = +li.dataset.idx;
-    const text = li.textContent.toLowerCase();
-    const matchQ = !q || text.includes(q);
+    const mainBlob = (li.dataset.mainBlob || li.textContent).toLowerCase();
+    const matchQ = !q || mainBlob.includes(q) || wordExactMatch(li.dataset.exactBlob, q);
     const matchM = mode === 'all' || (mode === 'open' && !s.checked[i]) || (mode === 'done' && s.checked[i]) || (mode === 'watchlist' && isWatched(activeTab, s.data[i][0]));
     li.style.display = (matchQ && matchM) ? 'flex' : 'none';
   });
   list.querySelectorAll('li.disc').forEach(li => {
-    const text = li.textContent.toLowerCase() + ' ' + (li.dataset.providerBlob || '').toLowerCase();
-    const matchQ = !q || text.includes(q);
+    const mainBlob = (li.dataset.mainBlob || li.textContent).toLowerCase() + ' ' + (li.dataset.providerBlob || '').toLowerCase();
+    const matchQ = !q || mainBlob.includes(q) || wordExactMatch(li.dataset.exactBlob, q);
     let matchM = true;
     if (activeTab === 'stream' && li.dataset.kind && li.dataset.title) {
       const src = li.dataset.kind === 's' ? 'serien' : 'filme';
@@ -1719,23 +1756,52 @@ function buildProfileFromItem(item){
    aktuell bei mind. einem Anbieter verfuegbare -- jeweils sortiert nach
    Aehnlichkeit zu GENAU diesem einen Titel (nicht zum Gesamtprofil). */
 var _simModal = document.getElementById('similarModal');
-function openSimilarModal(refItem){
+// Filter-Knoepfe im "Aehnliche Titel"-Popup (Filme/Serien/Streaming, siehe
+// simTypeFilter) -- unabhaengig voneinander an-/abwaehlbar wie bei Discovery,
+// mindestens einer muss aktiv bleiben. Ausgangszustand richtet sich beim
+// Oeffnen nach refItem.type (siehe openSimilarModal), damit sich am bisherigen
+// Standardverhalten nichts aendert, solange niemand die Knoepfe anfasst.
+var simTypeFilter = { f: true, s: false, stream: false };
+var simBtns = { f: document.getElementById('simFilme'), s: document.getElementById('simSerien'), stream: document.getElementById('simStream') };
+var _simRefItem = null, _simProf = null;
+function renderSimilarList(){
   var listEl = document.getElementById('similarModalList');
-  document.getElementById('similarModalTitle').textContent = 'Ähnliche Titel zu „' + refItem.t + '“';
   listEl.innerHTML = '';
-  var prof = buildProfileFromItem(refItem);
-  var pool;
-  if (activeTab === 'serien') pool = POOL.filter(function(i){ return i.type === 'series' && i !== refItem; });
-  else if (activeTab === 'stream') pool = POOL.filter(function(i){ return i.providers.length > 0 && i !== refItem; });
-  else pool = POOL.filter(function(i){ return i.type === 'movie' && i !== refItem; });
-  var scored = pool.map(function(i){ return { item: i, score: scoreCand(i, prof).score }; })
+  var pool = POOL.filter(function(i){
+    if (i === _simRefItem) return false;
+    var isMovie = i.type === 'movie', isSeries = i.type === 'series', isStreaming = i.providers.length > 0;
+    return (simTypeFilter.f && isMovie) || (simTypeFilter.s && isSeries) || (simTypeFilter.stream && isStreaming);
+  });
+  var scored = pool.map(function(i){ return { item: i, score: scoreCand(i, _simProf).score }; })
                     .sort(function(a,b){ return b.score - a.score || (b.item.r||0) - (a.item.r||0); })
                     .slice(0, 20);
   if (!scored.length){
-    var p = document.createElement('div'); p.className = 'disc-hint'; p.textContent = 'Keine ähnlichen Titel gefunden.'; listEl.appendChild(p);
+    var p = document.createElement('div'); p.className = 'disc-hint'; p.textContent = 'Keine ähnlichen Titel für diese Filterkombination.'; listEl.appendChild(p);
   } else {
     scored.forEach(function(row){ listEl.appendChild(poolItemLi(row.item, row.score, { suppressSimilar: true })); });
   }
+}
+function toggleSimType(k){
+  var othersActive = Object.keys(simTypeFilter).some(function(o){ return o !== k && simTypeFilter[o]; });
+  if (simTypeFilter[k] && !othersActive) return;
+  simTypeFilter[k] = !simTypeFilter[k];
+  simBtns[k].classList.toggle('active', simTypeFilter[k]);
+  renderSimilarList();
+}
+simBtns.f.onclick = () => toggleSimType('f');
+simBtns.s.onclick = () => toggleSimType('s');
+simBtns.stream.onclick = () => toggleSimType('stream');
+function openSimilarModal(refItem){
+  document.getElementById('similarModalTitle').textContent = 'Ähnliche Titel zu „' + refItem.t + '“';
+  _simRefItem = refItem;
+  _simProf = buildProfileFromItem(refItem);
+  // Ausgangszustand: wie frueher (vor den Filterknoepfen) richtet sich der
+  // Typ-Filter nach refItem.type -- ausser im Streaming-Tab, dort weiterhin
+  // alles aktuell verfuegbare (egal ob Film/Serie).
+  if (activeTab === 'stream') simTypeFilter = { f: false, s: false, stream: true };
+  else simTypeFilter = { f: refItem.type === 'movie', s: refItem.type === 'series', stream: false };
+  Object.keys(simBtns).forEach(function(k){ simBtns[k].classList.toggle('active', simTypeFilter[k]); });
+  renderSimilarList();
   _simModal.style.display = 'flex';
 }
 function closeSimilarModal(){ _simModal.style.display = 'none'; }
@@ -2246,16 +2312,23 @@ function poolItemLi(item, score, opts){
   var key = item.type === 'series' ? 's' : 'f';
   li.dataset.kind = key; li.dataset.title = item.t;
   li.dataset.providerBlob = item.providers.map(function(p){ return PROVIDER_ALIASES[p.id] || p.id; }).join(' ');
+  // Getrennt fuers Suchfilter (siehe applyFilter/poolItemMatchesQuery): mainBlob
+  // (Titel/Genres/Jahr, ohne Besetzung/Regie/Hashtags) matcht per Teilstring,
+  // exactBlob (Besetzung, Regie, Hashtags/Keywords) nur per vollstaendigem Wort
+  // -- verhindert z.B. dass "Heat" faelschlich auf "Heath" in "Heath Ledger"
+  // oder auf "Theat" in einem Hashtag wie "TheaterVerfilmung" anschlaegt.
+  li.dataset.mainBlob = [item.t, item.ot, item.y, (item.g||[]).join(' ')].filter(Boolean).join(' ');
+  li.dataset.exactBlob = [].concat(item.c||[], item.d ? [item.d] : [], item.kw||[]).join(' ');
   var poster = item.poster64 ? '<img class="dposter" loading="lazy" src="'+item.poster64+'" alt="">'
              : item.p ? '<img class="dposter" loading="lazy" src="'+POSTER+item.p+'" alt="">'
              : '<div class="dposter"></div>';
   var typeLabel = item.type === 'series' ? 'Serie' : 'Film';
   var seen = getSeen(item.realId);
   var watchlisted = getWatchlistFlag(item.realId);
-  // "Ähnliche Titel" gibt es auf Filme/Serien/Streaming, nicht auf Discovery selbst
-  // (das ist ja bereits die globale Vorschlags-Ansicht) und nicht innerhalb des
-  // "Ähnliche Titel"-Popups selbst (kein rekursiver Button dort, siehe opts.suppressSimilar).
-  var showSimilarBtn = activeTab !== 'discovery' && !(opts && opts.suppressSimilar);
+  // "Ähnliche Titel" gibt es ueberall (Filme/Serien/Streaming/Discovery), nur nicht
+  // innerhalb des "Ähnliche Titel"-Popups selbst (kein rekursiver Button dort,
+  // siehe opts.suppressSimilar).
+  var showSimilarBtn = !(opts && opts.suppressSimilar);
   var seenBtnHtml = '<button type="button" class="seen-btn'+(seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> gesehen</button>';
   var wlBtnHtml = '<div class="det-left"><button type="button" class="wl-btn'+(watchlisted?' on':'')+'">'+(watchlisted?'★':'☆')+' Watchlist</button></div>';
   // Im "Aehnliche Titel"-Popup (suppressSimilar) links Watchlist, rechts Gesehen --
@@ -2469,17 +2542,22 @@ async function renderStreaming(){
 }
 
 // Prueft, ob ein Pool-Eintrag zu einem Suchbegriff passt -- dieselben Felder,
-// die auch sichtbar in der Zeile stehen (Titel, Originaltitel, Genres/Hashtags,
-// Besetzung, Regie, Anbieter). Wird in renderDiscovery() VOR dem Sortieren/
+// die auch sichtbar in der Zeile stehen (Titel, Originaltitel, Genres, Anbieter,
+// Besetzung, Regie, Hashtags). Wird in renderDiscovery() VOR dem Sortieren/
 // Einschraenken auf discoveryLoadLimit angewendet (siehe dort), damit eine
 // Suche den kompletten Discovery-Pool durchsucht statt nur die aktuell
-// geladene Seite.
+// geladene Seite. Besetzung/Regie/Hashtags matchen nur per vollstaendigem Wort
+// (siehe wordExactMatch) -- sonst wuerde z.B. "Heat" faelschlich auf "Heath" in
+// "Heath Ledger" oder auf "Theat" in "TheaterVerfilmung" anschlagen; Titel/
+// Genres duerfen weiterhin per Teilstring matchen.
 function poolItemMatchesQuery(item, q){
   if (!q) return true;
-  var hay = [item.t, item.ot, item.y, (item.g||[]).join(' '), (item.kw||[]).join(' '),
-             (item.c||[]).join(' '), item.d, (item.providers||[]).map(function(p){ return p.name; }).join(' ')]
+  var hay = [item.t, item.ot, item.y, (item.g||[]).join(' '),
+             (item.providers||[]).map(function(p){ return p.name; }).join(' ')]
     .filter(Boolean).join(' ').toLowerCase();
-  return hay.includes(q);
+  if (hay.includes(q)) return true;
+  var exactBlob = [].concat(item.c||[], item.d ? [item.d] : [], item.kw||[]).join(' ');
+  return wordExactMatch(exactBlob, q);
 }
 // Discovery: einheitliche Ansicht ueber Katalog + Discovery-Pool + aktuelles
 // Streaming-Angebot. Filme/Serien/Streaming sind unabhaengige Haken (siehe
