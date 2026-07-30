@@ -1100,12 +1100,11 @@ let inStreamFilterOn = false;
 // inStreamFilterOn oben, das nur die eigene Watchlist/Gesehen-Liste filtert.
 let discoveryMode = false;
 function inDiscoveryMode(){ return discoveryMode; }
-// Stellt discTypeFilter auf ausschliesslich den uebergebenen Tab um (Filme/
-// Serien/Streaming bleiben trotzdem einzeln zuschaltbar, siehe toggleDiscType).
-// Gemeinsam genutzt vom Discovery-Button (Einstieg) und setTab (Tab-Wechsel
-// waehrend des Discovery-Modus).
-function presetDiscTypeFilterForTab(t){
-  discTypeFilter = { f: t === 'filme', s: t === 'serien', stream: false };
+// Setzt discTypeFilter beim Einstieg in den Discovery-Modus auf alle drei
+// Kategorien (Filme/Serien/Streaming) -- bleiben danach weiterhin einzeln
+// ab-/zuschaltbar (siehe toggleDiscType).
+function presetDiscTypeFilterAll(){
+  discTypeFilter = { f: true, s: true, stream: true };
   Object.keys(discBtns).forEach(function(k){ discBtns[k].classList.toggle('active', discTypeFilter[k]); });
   discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
 }
@@ -1567,7 +1566,7 @@ btns.inStream.onclick = () => {
 };
 btns.discovery.onclick = () => {
   if (inDiscoveryMode()) return;
-  presetDiscTypeFilterForTab(activeTab);
+  presetDiscTypeFilterAll();
   discoveryMode = true;
   updateFilterRowUI();
   renderCurrentTab();
