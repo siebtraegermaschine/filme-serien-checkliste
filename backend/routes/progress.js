@@ -41,7 +41,7 @@ router.put('/:titleId', async (req, res) => {
     return res.status(400).json({ error: 'invalid_title_id' });
   }
   const { seen, watchlist, viaStream, rating } = req.body || {};
-  if (rating != null && (!Number.isInteger(rating) || rating < 1 || rating > 5)) {
+  if (rating != null && (!Number.isInteger(rating) || rating < 1 || rating > 10)) {
     return res.status(400).json({ error: 'invalid_rating' });
   }
 

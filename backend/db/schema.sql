@@ -87,11 +87,36 @@ CREATE TABLE IF NOT EXISTS user_progress (
   PRIMARY KEY (user_id, title_id)
 );
 ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS via_stream BOOLEAN NOT NULL DEFAULT false;
--- 1-5-Sterne-Bewertung, die beim Markieren als "gesehen" abgefragt wird (siehe
--- index.html, openRatingModal). Fliesst gewichtet in den Taste-Score ein (siehe
--- buildProfile/RATING_WEIGHT) -- NULL fuer reine Watchlist-Eintraege oder
--- Alt-Titel von vor dieser Funktion, die zaehlen weiterhin neutral (Gewicht 1).
-ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS rating SMALLINT CHECK (rating IS NULL OR rating BETWEEN 1 AND 5);
+-- 1-10-Sterne-Bewertung (aehnlich IMDb), die beim Markieren als "gesehen"
+-- abgefragt wird (siehe index.html, openRatingModal). Fliesst gewichtet in den
+-- Taste-Score ein (siehe buildProfile/RATING_WEIGHT) -- NULL fuer reine
+-- Watchlist-Eintraege oder Alt-Titel von vor dieser Funktion, die zaehlen
+-- weiterhin neutral (Gewicht 1).
+ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS rating SMALLINT CHECK (rating IS NULL OR rating BETWEEN 1 AND 10);
+-- Umstellung von 1-5 auf 1-10 Sterne: bestehende Bewertungen einmalig umrechnen
+-- (1->2, 2->4, 3->5, 4->8, 5->10) und die alte 1-5-Constraint durch die neue
+-- 1-10-Constraint ersetzen. Erkennt am Constraint-Text, ob die alte 1-5-Grenze
+-- noch aktiv ist -- laeuft dadurch nur einmal, auch wenn schema.sql (wie ueblich)
+-- bei jedem Deploy erneut komplett ausgefuehrt wird.
+DO $$
+DECLARE
+  old_cons TEXT;
+BEGIN
+  SELECT conname INTO old_cons FROM pg_constraint
+    WHERE conrelid = 'user_progress'::regclass
+      AND contype = 'c'
+      AND pg_get_constraintdef(oid) LIKE '%rating%'
+      AND pg_get_constraintdef(oid) LIKE '%<= 5%';
+  IF old_cons IS NOT NULL THEN
+    EXECUTE format('ALTER TABLE user_progress DROP CONSTRAINT %I', old_cons);
+    UPDATE user_progress SET rating = CASE rating
+      WHEN 1 THEN 2 WHEN 2 THEN 4 WHEN 3 THEN 5 WHEN 4 THEN 8 WHEN 5 THEN 10
+      ELSE rating END
+      WHERE rating IS NOT NULL;
+    ALTER TABLE user_progress ADD CONSTRAINT user_progress_rating_check
+      CHECK (rating IS NULL OR rating BETWEEN 1 AND 10);
+  END IF;
+END $$;
 
 -- Titel, die eine Person per Swipe aus ihrer eigenen Discovery-Ansicht entfernt
 -- hat ("Gelöschte Titel" unter Einstellungen). Rein pro Nutzer:in -- der Titel

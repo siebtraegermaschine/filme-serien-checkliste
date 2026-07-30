@@ -342,8 +342,8 @@
   .settings-menu button { width:100%; }
   .account-sep { border:none; border-top:1px solid var(--border); margin:20px 0; }
   .unhide-btn { width:100%; }
-  .rating-stars { display:flex; justify-content:center; gap:6px; margin-top:16px; }
-  .rating-stars button { background:none; border:none; font-size:34px; line-height:1; padding:2px;
+  .rating-stars { display:flex; flex-wrap:wrap; justify-content:center; gap:4px; margin-top:16px; }
+  .rating-stars button { background:none; border:none; font-size:22px; line-height:1; padding:2px;
     color:var(--border); cursor:pointer; transition:color .1s; }
   .rating-stars button.active { color:var(--accent); }
   .auth-error { color:#e0655c; font-size:13px; min-height:16px; text-align:center; }
@@ -538,9 +538,9 @@
   <div id="navMenu" class="nav-menu">
     <button type="button" id="navHomeBtn" class="nav-menu-item">Filme &amp; Serien</button>
     <button type="button" id="cinemaBtn" class="nav-menu-item">Im Kino</button>
-    <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
+    <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
     <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
     <button type="button" id="authBarLogin" class="nav-menu-item">Anmelden</button>
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
@@ -749,13 +749,18 @@
   <div class="modal">
     <button class="modal-x" id="ratingModalX" aria-label="Abbrechen">✕</button>
     <h3>Wie fandest du <span id="ratingModalTitle"></span>?</h3>
-    <p>1 = schlecht, 5 = sehr gut. Fließt in deinen Taste-Score ein.</p>
+    <p>1 = schlecht, 10 = sehr gut. Fließt in deinen Taste-Score ein.</p>
     <div class="rating-stars" id="ratingStars">
-      <button type="button" data-star="1" aria-label="1 Stern – schlecht">★</button>
-      <button type="button" data-star="2" aria-label="2 Sterne">★</button>
-      <button type="button" data-star="3" aria-label="3 Sterne – ok">★</button>
-      <button type="button" data-star="4" aria-label="4 Sterne">★</button>
-      <button type="button" data-star="5" aria-label="5 Sterne – sehr gut">★</button>
+      <button type="button" data-star="1" aria-label="1 – schlecht">★</button>
+      <button type="button" data-star="2" aria-label="2">★</button>
+      <button type="button" data-star="3" aria-label="3">★</button>
+      <button type="button" data-star="4" aria-label="4">★</button>
+      <button type="button" data-star="5" aria-label="5 – ok">★</button>
+      <button type="button" data-star="6" aria-label="6">★</button>
+      <button type="button" data-star="7" aria-label="7">★</button>
+      <button type="button" data-star="8" aria-label="8">★</button>
+      <button type="button" data-star="9" aria-label="9">★</button>
+      <button type="button" data-star="10" aria-label="10 – sehr gut">★</button>
     </div>
   </div>
 </div>
@@ -1870,12 +1875,14 @@ document.addEventListener('click', function(e){
 /* ================= DISCOVERY ================= */
 let discTypeFilter = { f: true, s: true, stream: true };
 function metaGenre(meta){ const parts=String(meta).split('·'); return parts[1]?parts[1].trim():''; }
-// Gewicht, mit dem ein "gesehen"-Titel je nach Sterne-Bewertung ins Geschmacks-
-// profil einfliesst (siehe buildProfile) -- schlecht bewertete Titel praegen
-// Empfehlungen kaum noch, gut bewertete deutlich staerker. Unbewertete Titel
-// (reine Watchlist-Eintraege, oder "gesehen" markiert bevor es die Sterne-
-// Bewertung gab) zaehlen weiterhin neutral mit Gewicht 1.
-var RATING_WEIGHT = { 1: 0.2, 2: 0.5, 3: 1, 4: 1.5, 5: 2 };
+// Gewicht, mit dem ein "gesehen"-Titel je nach Bewertung (1-10, wie IMDb) ins
+// Geschmacksprofil einfliesst (siehe buildProfile) -- schlecht bewertete Titel
+// praegen Empfehlungen kaum noch, gut bewertete deutlich staerker. Unbewertete
+// Titel (reine Watchlist-Eintraege, oder "gesehen" markiert bevor es die
+// Bewertung gab) zaehlen weiterhin neutral mit Gewicht 1. Werte an den fruehen
+// 1-5-Werten gespiegelt (alt->neu: 2->0.2, 4->0.5, 5->1, 8->1.5, 10->2), die
+// dazwischenliegenden neuen Stufen linear interpoliert.
+var RATING_WEIGHT = { 1: 0.1, 2: 0.2, 3: 0.35, 4: 0.5, 5: 1, 6: 1.2, 7: 1.35, 8: 1.5, 9: 1.75, 10: 2 };
 function profileWeightFor(id){
   var r = getRating(id);
   return r ? RATING_WEIGHT[r] : 1;
@@ -2336,8 +2343,8 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
   }
 });
 
-/* ---- Stern-Bewertung (1-5) beim Markieren als "gesehen": openRatingStars()
-   gibt ein Promise zurueck, das mit der gewaehlten Sternezahl (1-5) aufloest,
+/* ---- Stern-Bewertung (1-10) beim Markieren als "gesehen": openRatingStars()
+   gibt ein Promise zurueck, das mit der gewaehlten Sternezahl (1-10) aufloest,
    oder mit null bei Abbruch (Kreuz/Escape/Klick auf den Hintergrund) -- der
    Aufrufer entscheidet dann, ob "gesehen" trotzdem gesetzt wird. ---- */
 var _ratingModal = document.getElementById('ratingModal');
@@ -2923,7 +2930,7 @@ function renderDiscovery(){
     ts: { title:'Taste-Score', body:'Der Taste-Score (0–99) schätzt, wie gut ein Titel zu deinem Geschmack passt. '+
       'Er wird aus Genres, Film- und Serieninhalten, Besetzung, Regie und der Nähe zum Erscheinungsjahr all deiner '+
       'per Watchlist oder „Gesehen“ markierten Filme und Serien zusammen berechnet. Auch die IMDb-Bewertung des '+
-      'jeweiligen Titels fließt mit ein. Deine 1-5-Sterne-Bewertung bei „Gesehen“-Titeln zählt zusätzlich mit: '+
+      'jeweiligen Titels fließt mit ein. Deine 1-10-Sterne-Bewertung bei „Gesehen“-Titeln zählt zusätzlich mit: '+
       'schlecht bewertete Titel prägen deinen Geschmack kaum noch, gut bewertete deutlich stärker. Je mehr Titel du '+
       'markierst, desto persönlicher und treffsicherer wird er. Ab 10 markierten Titeln wird auf Filme, Serien, '+
       'Streaming und Discovery standardmäßig nach Taste-Score statt IMDb-Bewertung sortiert, sofern du die '+
