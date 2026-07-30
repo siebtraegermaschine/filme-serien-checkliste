@@ -548,9 +548,9 @@
   <div class="tb-grid">
     <div class="tb-toprow">
       <div class="filter-group">
-        <button id="fOpen" class="active">★ Watchlist</button>
-        <button id="fDone" class="active">✓ Gesehen</button>
-        <button id="fDiscovery">🧭 Discovery</button>
+        <button id="fDiscovery">Discovery</button>
+        <button id="fOpen" class="active">Watchlist</button>
+        <button id="fDone">Gesehen</button>
       </div>
       <button id="fDetails">🔎 Details</button>
     </div>
@@ -986,17 +986,30 @@ function rebuild(){
 rebuild();
 let activeTab = 'stream';
 // Ersetzt das fruehere exklusive "mode" (Alle/Ungesehen/Gesehen): Watchlist und
-// Gesehen sind jetzt zwei unabhaengige Haken (beide standardmaessig an, was dem
-// alten "Alle" entspricht -- jeder Titel in der Liste ist ja ohnehin watchlisted
-// oder gesehen). "Alle" als Button entfaellt dadurch, an seine Stelle tritt der
-// Discovery-Button (siehe discoveryModeFor).
+// Gesehen sind jetzt zwei unabhaengige Haken. "Alle" als Button entfaellt
+// dadurch, an seine Stelle tritt der Discovery-Button (siehe discoveryMode).
+// Default beim Laden bzw. bei jedem Tab-Wechsel zwischen Streaming/Filme/Serien
+// ist ausschliesslich Watchlist aktiv (siehe setTab) -- Gesehen laesst sich
+// weiterhin zusaetzlich dazuschalten.
 let watchlistFilterOn = true;
-let seenFilterOn = true;
-// Discovery ist keine eigene Haupt-Seite mehr, sondern ein Modus INNERHALB von
-// Streaming/Filme/Serien (siehe fDiscovery-Button) -- pro Tab getrennt gemerkt,
-// damit ein Tab-Wechsel den Discovery-Modus der anderen Tabs nicht verwirft.
-let discoveryModeFor = { stream: false, filme: false, serien: false };
-function inDiscoveryMode(){ return !!discoveryModeFor[activeTab]; }
+let seenFilterOn = false;
+// Discovery ist keine eigene Haupt-Seite mehr, sondern ein globaler Modus,
+// der beim Wechsel zwischen Streaming/Filme/Serien bestehen bleibt (siehe
+// setTab) -- der Typ-Unterfilter (discTypeFilter) wird dabei jedesmal auf den
+// gerade aktiven Tab umgestellt, damit z.B. ein Wechsel von "Filme" (mit
+// manuell dazugeschalteter Serien-Auswahl) auf "Streaming" dort wieder nur
+// "Streaming" zeigt statt der alten Auswahl.
+let discoveryMode = false;
+function inDiscoveryMode(){ return discoveryMode; }
+// Stellt discTypeFilter auf ausschliesslich den uebergebenen Tab um (Filme/
+// Serien/Streaming bleiben trotzdem einzeln zuschaltbar, siehe toggleDiscType).
+// Gemeinsam genutzt vom Discovery-Button (Einstieg) und setTab (Tab-Wechsel
+// waehrend des Discovery-Modus).
+function presetDiscTypeFilterForTab(t){
+  discTypeFilter = { f: t === 'filme', s: t === 'serien', stream: t === 'stream' };
+  Object.keys(discBtns).forEach(function(k){ discBtns[k].classList.toggle('active', discTypeFilter[k]); });
+  discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+}
 let showDetails = false;
 const DETAILS_PREF_KEY = 'top200-show-details-v1';
 
@@ -1342,9 +1355,9 @@ function renderList() {
   render();
 }
 // Rendert die aktuell sichtbare Seite neu, abhaengig von activeTab UND davon, ob
-// dieser Tab gerade im Discovery-Modus ist (siehe discoveryModeFor) -- ersetzt
-// die frueheren einzelnen "if (activeTab==='discovery') renderDiscovery() ..."
-// Verzweigungen an den verschiedenen Aufrufstellen im Code.
+// gerade der (globale) Discovery-Modus aktiv ist -- ersetzt die frueheren
+// einzelnen "if (activeTab==='discovery') renderDiscovery() ..." Verzweigungen
+// an den verschiedenen Aufrufstellen im Code.
 function renderCurrentTab(){
   if (inDiscoveryMode()) { renderDiscovery(); return; }
   if (activeTab === 'stream') renderStreaming();
@@ -1372,6 +1385,18 @@ function setTab(t) {
   var _fd = document.getElementById('fDetails'); if (_fd) _fd.style.display = '';
   searchEl.style.display = '';
   var _sw = document.querySelector('.sort-wrap'); if (_sw) _sw.style.display = 'flex';
+  // Bleibt der Discovery-Modus beim Tab-Wechsel bestehen (siehe discoveryMode),
+  // wird der Typ-Unterfilter auf den neuen Tab umgestellt (z.B. Filme -> Streaming
+  // soll dort wieder nur "Streaming" zeigen, nicht die alte Filme/Serien-Auswahl).
+  // Ausserhalb des Discovery-Modus ist beim Wechsel zwischen Streaming/Filme/
+  // Serien immer ausschliesslich Watchlist aktiv (Gesehen laesst sich danach
+  // weiterhin zusaetzlich dazuschalten).
+  if (discoveryMode) {
+    presetDiscTypeFilterForTab(t);
+  } else {
+    watchlistFilterOn = true;
+    seenFilterOn = false;
+  }
   updateFilterRowUI();
   renderCurrentTab();
 }
@@ -1383,7 +1408,7 @@ const btns = { open: document.getElementById('fOpen'), done: document.getElement
 // gefiltert nach genau dem angeklickten Kriterium (siehe Rueckfrage/Antwort).
 btns.open.onclick = () => {
   if (inDiscoveryMode()) {
-    discoveryModeFor[activeTab] = false;
+    discoveryMode = false;
     watchlistFilterOn = true; seenFilterOn = false;
   } else {
     if (watchlistFilterOn && !seenFilterOn) return;
@@ -1394,7 +1419,7 @@ btns.open.onclick = () => {
 };
 btns.done.onclick = () => {
   if (inDiscoveryMode()) {
-    discoveryModeFor[activeTab] = false;
+    discoveryMode = false;
     watchlistFilterOn = false; seenFilterOn = true;
   } else {
     if (seenFilterOn && !watchlistFilterOn) return;
@@ -1405,12 +1430,8 @@ btns.done.onclick = () => {
 };
 btns.discovery.onclick = () => {
   if (inDiscoveryMode()) return;
-  // Typ-Filter beim Einstieg auf den Tab beschraenken, von dem aus man kam
-  // (Filme/Serien/Streaming bleiben trotzdem einzeln zuschaltbar, siehe toggleDiscType).
-  discTypeFilter = { f: activeTab === 'filme', s: activeTab === 'serien', stream: activeTab === 'stream' };
-  Object.keys(discBtns).forEach(function(k){ discBtns[k].classList.toggle('active', discTypeFilter[k]); });
-  discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
-  discoveryModeFor[activeTab] = true;
+  presetDiscTypeFilterForTab(activeTab);
+  discoveryMode = true;
   updateFilterRowUI();
   renderCurrentTab();
 };
@@ -1464,10 +1485,10 @@ function effectiveSort(cat){
   if (['filme', 'serien', 'stream', 'discovery'].indexOf(cat) === -1) return 'imdb';
   return tasteProfileSize() >= 10 ? 'taste' : 'imdb';
 }
-// Discovery ist kein eigener Tab mehr, sondern ein Modus innerhalb von
-// Streaming/Filme/Serien (siehe discoveryModeFor) -- fuers Sortier-Menue zaehlt
-// weiterhin ein gemeinsamer "discovery"-Schluessel, unabhaengig davon, von
-// welchem Tab aus man gerade im Discovery-Modus ist.
+// Discovery ist kein eigener Tab mehr, sondern ein globaler Modus (siehe
+// discoveryMode) -- fuers Sortier-Menue zaehlt weiterhin ein gemeinsamer
+// "discovery"-Schluessel, unabhaengig davon, von welchem Tab aus man gerade
+// im Discovery-Modus ist.
 function effectiveCat(){ return inDiscoveryMode() ? 'discovery' : activeTab; }
 // "Neu im Streaming" ergibt nur Sinn, wo tatsaechlich Streaming-Angebote sortiert
 // werden: auf der Streaming-Seite selbst, und im Discovery-Modus nur solange der
