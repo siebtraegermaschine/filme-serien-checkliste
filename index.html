@@ -123,6 +123,15 @@
     border-color: var(--accent);
     color: var(--accent);
   }
+  /* Discovery-Button: eigene Zeile unter Filme/Serien (statt Teil der Watchlist/
+     Gesehen-Gruppe im Toolbar) -- border-top ist die "Linie" direkt unter den
+     Tabs, die bestehende header-border-bottom darunter bleibt die zweite Linie
+     vor Watchlist/Gesehen/Details. */
+  .disc-toprow { display:flex; justify-content:center; border-top:1px solid var(--border); margin-top:18px; padding-top:14px; }
+  .disc-toprow button { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 9px 26px; color: var(--text-dim); font-size: 13px; font-weight:600; cursor: pointer; transition: all 0.15s; }
+  @media (hover: hover) { .disc-toprow button:hover { border-color: var(--accent); color: var(--accent); } }
+  .disc-toprow button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   .progress-wrap {
     max-width: 700px;
     margin: 20px auto 0;
@@ -555,13 +564,15 @@
       <button id="tabSerien">📺 Serien</button>
     </div>
   </div>
+  <div class="disc-toprow">
+    <button id="fDiscovery">Discovery</button>
+  </div>
 </header>
 
 <div class="toolbar">
   <div class="tb-grid">
     <div class="tb-toprow">
       <div class="filter-group">
-        <button id="fDiscovery">Discovery</button>
         <button id="fOpen" class="active">Watchlist</button>
         <button id="fDone">Gesehen</button>
       </div>
@@ -847,13 +858,20 @@ function candMeta(c){ return '⭐ '+(fmtR(c.r)||'?')+' · '+((c.g&&c.g[0])||'—
 function escAttr(str){ return esc(str).replace(/"/g,'&quot;'); }
 function tagChip(t){ return '<span class="tag" data-filter="'+escAttr(t)+'">'+esc(t)+'</span>'; }
 function nameChips(arr){ return (arr||[]).map(function(n){ return '<span class="pill" data-filter="'+escAttr(n)+'">'+esc(n)+'</span>'; }).join(', '); }
+// Manche (aeltere) Katalog-Eintraege speichern mehrere Regisseur:innen als einen
+// einzigen, kommagetrennten String (z.B. "Niels Arden Oplev, Daniel Alfredson,
+// Stieg Larsson" bei der Serie "Millennium") statt als Array wie bei Besetzung
+// -- ohne diesen Split landete das als EIN Namens-Block-Chip statt als einzeln
+// anklickbare/filterbare Namen (Suche fand den Titel zwar trotzdem per
+// Wortgrenzen-Match im ganzen Blob, aber die Anzeige war ein Klumpen).
+function splitNames(s){ return s ? String(s).split(',').map(function(n){ return n.trim(); }).filter(Boolean) : []; }
 function candDetailsHtml(c, kind){
   var dirLabel = "Regie";
   var tags = (c.kw && c.kw.length) ? c.kw : (c.g || []);
   var tagsHtml = tags.map(tagChip).join('');
   var rows = '';
   if (c.c && c.c.length) rows += '<div class="credits"><b>Besetzung:</b> '+nameChips(c.c)+'</div>';
-  if (c.d) rows += '<div class="credits"><b>'+dirLabel+':</b> '+nameChips([c.d])+'</div>';
+  if (c.d) rows += '<div class="credits"><b>'+dirLabel+':</b> '+nameChips(splitNames(c.d))+'</div>';
   var plotHtml = c.ov ? '<div class="plot">'+esc(c.ov)+'</div>' : '';
   if (!plotHtml && !tagsHtml && !rows) return '';
   return '<div class="details">' + plotHtml + (tagsHtml ? '<div class="tags">'+tagsHtml+'</div>' : '') + rows + '</div>';
@@ -1158,7 +1176,7 @@ function render() {
     const scoreBadge = '<span class="score' + (rowScore >= 60 ? ' hi' : '') + '" title="Taste Score" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">' + rowScore + '</span>';
     var creditRows = '';
     if (d.c && d.c.length) creditRows += '<div class="credits"><b>Besetzung:</b> ' + nameChips(d.c) + '</div>';
-    if (d.d) creditRows += '<div class="credits"><b>' + dirLabel + ':</b> ' + nameChips([d.d]) + '</div>';
+    if (d.d) creditRows += '<div class="credits"><b>' + dirLabel + ':</b> ' + nameChips(splitNames(d.d)) + '</div>';
     const detPoster = d.poster ? '<img class="detposter" src="' + d.poster + '" alt="" loading="lazy">' : '';
     const _watched = isWatched(activeTab, item[0]);
     const _seen = s.checked[i];
@@ -2499,7 +2517,7 @@ authForm.addEventListener('submit', async (e) => {
       // geteiltes Geraet oder ein Accountwechsel nicht die Sortierung des vorherigen
       // Nutzers uebernimmt (siehe auch 24h-Verfall und Reset bei Logout).
       resetSortManual();
-      await loadCatalogAndRefresh();
+      await loadUserProgressAndRefresh();
       runPendingActions();
     }
   } catch (err) {
@@ -2519,8 +2537,29 @@ authBarLogout.onclick = async () => {
   CURRENT_USER = null;
   renderAuthBar();
   resetSortManual();
-  await loadCatalogAndRefresh();
+  await loadUserProgressAndRefresh();
 };
+
+// Laedt ausschliesslich den nutzerspezifischen Stand (Gesehen/Watchlist,
+// ausgeblendete Titel) neu und rendert -- OHNE den kompletten Katalog (~26.000
+// Titel) plus Streaming-Angebot erneut zu holen, der sich durch Login/Logout ja
+// nicht aendert. Wird nach Login/Logout aufgerufen (siehe authForm-Submit und
+// authBarLogout weiter unten) -- vorher liess ein erneutes loadCatalogAndRefresh()
+// direkt nach jedem Login/Logout die Seite spuerbar (mehrere Sekunden) haengen.
+async function loadUserProgressAndRefresh(){
+  PROGRESS = new Map();
+  HIDDEN_TITLE_IDS = new Set();
+  if (CURRENT_USER) {
+    const [rows, hidden] = await Promise.all([
+      apiRequest('GET', '/api/progress'),
+      apiRequest('GET', '/api/hidden-titles'),
+    ]);
+    rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }));
+    hidden.forEach((t) => HIDDEN_TITLE_IDS.add(t.id));
+  }
+  rebuild();
+  renderCurrentTab();
+}
 
 /* ---- Katalog von der API laden (ersetzt die frueher eingebetteten Arrays) ---- */
 async function loadCatalogAndRefresh(){
@@ -2530,19 +2569,8 @@ async function loadCatalogAndRefresh(){
       apiRequest('GET', '/api/streaming'),
     ]);
     STREAM = streamDoc;
-
-    PROGRESS = new Map();
-    HIDDEN_TITLE_IDS = new Set();
-    if (CURRENT_USER) {
-      const rows = await apiRequest('GET', '/api/progress');
-      rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }));
-      const hidden = await apiRequest('GET', '/api/hidden-titles');
-      hidden.forEach((t) => HIDDEN_TITLE_IDS.add(t.id));
-    }
-
     buildPool(combinedRows, streamDoc);
-    rebuild();
-    renderCurrentTab();
+    await loadUserProgressAndRefresh();
   } catch (err) {
     console.error('Katalog konnte nicht geladen werden:', err);
     list.innerHTML = '<div class="disc-hint">Katalog konnte nicht geladen werden. Ist das Backend erreichbar?</div>';
@@ -2718,8 +2746,13 @@ function poolItemLi(item, score, opts){
         wlBtn.textContent = (next ? '★' : '☆') + ' Watchlist';
         if (next) seenBtn.classList.remove('on');
         // Watchlist-Aenderung wirkt sich auf Filme/Serien/Streaming (oben) aus --
-        // deshalb komplett neu laden/rendern statt nur die Zeile zu aktualisieren.
-        await loadCatalogAndRefresh();
+        // rebuild() liest dafuer direkt aus POOL/PROGRESS (beide sind durch
+        // ensurePoolItem/updateProgressRemote oben schon aktuell), ein kompletter
+        // Katalog-Refetch (loadCatalogAndRefresh) ist dafuer nicht noetig und
+        // sorgte vorher fuer eine spuerbare Verzoegerung (mehrere Sekunden bei
+        // ~26.000 Titeln) bis der Titel aus der Discovery-Liste verschwand.
+        rebuild();
+        if (inDiscoveryMode() || activeTab === 'stream') renderCurrentTab();
       } finally {
         wlBtn.blur();
         wlBtn.disabled = false;
