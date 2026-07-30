@@ -399,6 +399,7 @@
     font-family:Georgia,'Times New Roman',serif; opacity:.85; }
   @media (hover: hover) { .info-i:hover { opacity:1; color:var(--accent); } }
   .info-word { text-decoration:underline; cursor:pointer; }
+  .footer-auth-link { text-decoration:underline; cursor:pointer; }
   @media (hover: hover) { .info-word:hover { color:var(--accent); } }
   .modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);
     /* Hoeher als .modal-overlay (z-index 1000): ein info-word kann auch INNERHALB
@@ -576,7 +577,7 @@
 <ol class="list" id="list"></ol>
 
 <footer>
-  Dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, „Gesehen"-Status und deine „<i>Watchlist</i>" werden mit deinem Konto gespeichert, sobald du angemeldet bist.<br>
+  Dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, „Gesehen"-Status und deine „<i>Watchlist</i>" werden mit deinem Konto gespeichert, sobald du <i class="footer-auth-link" id="footerAuthLink" role="button" tabindex="0" aria-label="Anmelden">angemeldet</i> bist.<br>
   <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
 </footer>
 
@@ -1532,6 +1533,15 @@ if (_subHowToToggle) {
     _subHowToPreview.style.display = expanded ? '' : 'none';
     _subHowToMoreLabel.textContent = expanded ? 'Mehr' : 'Weniger';
     _subHowToToggle.setAttribute('aria-expanded', String(!expanded));
+  });
+}
+
+// Footer: "angemeldet" verlinkt auf das Anmelden-Fenster.
+var _footerAuthLink = document.getElementById('footerAuthLink');
+if (_footerAuthLink) {
+  _footerAuthLink.addEventListener('click', function () { openAuthModal(); });
+  _footerAuthLink.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openAuthModal(); }
   });
 }
 
