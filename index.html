@@ -483,7 +483,7 @@
 <body>
 <header>
   <h1><img class="logo" src="logo.png" alt="MovieTaste – Watch more. Search less."></h1>
-  <p class="sub"><i>Streaming-Angebote</i> sortiert nach deinem Geschmack!<br><span class="sub-gap"></span>1. Füge die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> zu deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen".<br>2. Sortiere nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</p>
+  <p class="sub"><b><i>Streaming-Angebote</i> sortiert nach deinem Geschmack!</b><br><span class="sub-gap"></span>1. Füge die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> zu deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen".<br>2. Sortiere nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungs<br>datum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</p>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
     <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
@@ -525,7 +525,7 @@
     <div class="filter-group">
       <button id="fAll" class="active">Alle</button>
       <button id="fOpen">★ Watchlist</button>
-      <button id="fDone">Gesehen</button>
+      <button id="fDone">✓ Gesehen</button>
     </div>
     <div class="tb-row tb-discfilters" style="display:none">
       <button id="discFilme" class="active">Filme</button>
@@ -954,15 +954,20 @@ function esc(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 }
-// Prueft, ob q als VOLLSTAENDIGES Wort in blob vorkommt (z.B. Cast-/Regie-Namen)
+// Prueft, ob q an einer Wortgrenze in blob vorkommt (z.B. Cast-/Regie-Namen)
 // -- anders als ein normaler Teilstring-Treffer matcht "Heat" hier NICHT auf
 // "Heath" in "Heath Ledger". Titel/Genres duerfen dagegen weiterhin als
 // Teilstring matchen (das ist bei kurzen Eingaben waehrend des Tippens
-// gewuenscht, z.B. "Titan" soll "Titanic" finden).
+// gewuenscht, z.B. "Titan" soll "Titanic" finden). Per Regex statt per
+// Wort-Array-Vergleich, damit auch mehrteilige Namen wie "Will Smith" als
+// Ganzes matchen (ein reiner Einzelwort-Vergleich wuerde "Will Smith" nie
+// gegen die einzelnen Tokens "Will"/"Smith" treffen).
 function wordExactMatch(blob, q){
   if (!blob || !q) return false;
-  var words = blob.toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
-  return words.indexOf(q) !== -1;
+  var lower = blob.toLowerCase();
+  var escQ = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var re = new RegExp('(^|[^\\p{L}\\p{N}])' + escQ + '(?=[^\\p{L}\\p{N}]|$)', 'u');
+  return re.test(lower);
 }
 const list = document.getElementById('list');
 const searchEl = document.getElementById('search');
@@ -1476,6 +1481,17 @@ if (_searchClear) _searchClear.addEventListener('click', function () {
   searchEl.dispatchEvent(new Event('input'));
   searchEl.focus();
 });
+// Logo oben verlinkt zurueck auf die Startseite (Streaming) -- inkl. Zuruecksetzen
+// einer evtl. noch eingetragenen Suche, damit man wirklich auf der "ersten Seite" landet.
+var _logoImg = document.querySelector('h1 .logo');
+if (_logoImg) {
+  _logoImg.style.cursor = 'pointer';
+  _logoImg.addEventListener('click', function () {
+    searchEl.value = '';
+    searchEl.dispatchEvent(new Event('input'));
+    setTab('stream');
+  });
+}
 
 /* ---- Autovervollstaendigung: Kombination aus (1) Tippfehler-toleranter
    Fuzzy-Suche (Levenshtein-Distanz, faengt z.B. "Schwarzeneger" statt
