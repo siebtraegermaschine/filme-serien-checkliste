@@ -136,13 +136,6 @@
     padding: 11px 28px; color: var(--text-dim); font-size: 15px; font-weight:600; cursor: pointer; transition: all 0.15s; }
   @media (hover: hover) { .disc-toprow button:hover { border-color: var(--accent); color: var(--accent); } }
   .disc-toprow button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-  /* Filme/Serien/Streaming-Unterfilter (nur im Discovery-Modus sichtbar) jetzt
-     direkt unter dem Discovery-Button, noch VOR der header-border-bottom-Linie
-     -- macht sichtbar, dass diese drei Buttons zu Discovery gehoeren, statt wie
-     zuvor lose zwischen Watchlist/Gesehen/Im Streaming und der Suche zu stehen.
-     Dadurch bleiben die zwei Toolbar-Zeilen darunter immer gleich, egal ob
-     Discovery aktiv ist oder nicht. */
-  header .tb-discfilters { max-width: 700px; margin: 10px auto 0; }
   .progress-wrap {
     max-width: 700px;
     margin: 20px auto 0;
@@ -453,25 +446,6 @@
   .tabs { flex-direction: column; align-items: stretch; max-width: 430px; margin: 22px auto 0; gap: 10px; }
   .tabs .tabs-row { display: flex; gap: 10px; }
   .tabs .tabs-row button { flex: 1; padding: 11px 10px; }
-  /* Eigenstaendiges Styling noetig, seit tb-discfilters aus .toolbar in den
-     Header verschoben wurde (direkt unter den Discovery-Button, siehe
-     header .tb-discfilters weiter unten) -- ".toolbar button" greift dort
-     nicht mehr, ohne dieses Styling waeren es unformatierte Browser-Default-
-     Buttons (analog zu .sim-type-filters, das aus demselben Grund sein
-     eigenes Styling hat). */
-  .tb-discfilters button {
-    flex: 1;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 9px 14px;
-    color: var(--text-dim);
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  @media (hover: hover) { .tb-discfilters button:hover { border-color: var(--accent); color: var(--accent); } }
-  .tb-discfilters button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   /* Ausserhalb von .toolbar (das Popup ist ein eigenstaendiges Modal) --
      dieselbe Optik wie die Discovery-Filterknoepfe (.tb-discfilters) manuell
      nachgebildet, da .toolbar button hier nicht greift. */
@@ -604,11 +578,6 @@
   <div class="disc-toprow">
     <button id="fDiscovery">🧭 Discovery: Neue Filme &amp; Serien entdecken</button>
   </div>
-  <div class="tb-row tb-discfilters" style="display:none">
-    <button id="discFilme" class="active">Filme</button>
-    <button id="discSerien" class="active">Serien</button>
-    <button id="discStream" class="active">Streaming</button>
-  </div>
 </header>
 
 <div class="toolbar">
@@ -618,6 +587,13 @@
         <button id="fOpen" class="active">Watchlist</button>
         <button id="fDone">Gesehen</button>
         <button id="fInStream">Im Streaming</button>
+        <!-- Nur im Discovery-Modus sichtbar, ersetzt an derselben Stelle die
+             drei Buttons oben (siehe updateFilterRowUI) -- Watchlist/Gesehen/
+             Im Streaming ergeben beim Durchstoebern von Discovery keinen Sinn,
+             der Filme/Serien/Streaming-Typfilter dagegen schon. -->
+        <button id="discFilme" class="active" style="display:none">Filme</button>
+        <button id="discSerien" class="active" style="display:none">Serien</button>
+        <button id="discStream" class="active" style="display:none">Streaming</button>
       </div>
       <button id="fDetails">🔎 Details</button>
     </div>
@@ -1491,6 +1467,15 @@ function renderCurrentTab(){
 // werden koennen.
 function updateFilterRowUI(){
   var disc = inDiscoveryMode();
+  // Watchlist/Gesehen/Im Streaming ergeben im Discovery-Modus keinen Sinn --
+  // an ihrer Stelle (dieselbe Zeile, .filter-group) erscheinen dann stattdessen
+  // die drei Discovery-Typfilter (Filme/Serien/Streaming).
+  btns.open.style.display = disc ? 'none' : '';
+  btns.done.style.display = disc ? 'none' : '';
+  btns.inStream.style.display = disc ? 'none' : '';
+  discBtns.f.style.display = disc ? '' : 'none';
+  discBtns.s.style.display = disc ? '' : 'none';
+  discBtns.stream.style.display = disc ? '' : 'none';
   btns.open.classList.toggle('active', !disc && watchlistFilterOn);
   btns.done.classList.toggle('active', !disc && seenFilterOn);
   btns.inStream.classList.toggle('active', !disc && inStreamFilterOn);
@@ -1500,7 +1485,6 @@ function updateFilterRowUI(){
   // einer als ausgewaehlt markiert sein.
   tabBtns.filme.classList.toggle('active', !disc && activeTab === 'filme');
   tabBtns.serien.classList.toggle('active', !disc && activeTab === 'serien');
-  document.querySelector('.tb-discfilters').style.display = disc ? 'flex' : 'none';
   var pw = document.querySelector('.progress-wrap');
   pw.style.display = disc ? 'none' : '';
 }
@@ -2173,11 +2157,11 @@ async function renderCinemaPage(){
 function openCinemaPage(){
   cinemaMode = true;
   document.querySelector('.tabs').style.display = 'none';
-  // Discovery-Button (samt Filme/Serien/Streaming-Unterfilter, falls gerade
-  // aktiv) ergibt auf der Kino-Seite keinen Sinn -- Discovery durchsucht den
-  // normalen Filme/Serien-Katalog, nicht die Kinostarts.
+  // Discovery-Button ergibt auf der Kino-Seite keinen Sinn -- Discovery
+  // durchsucht den normalen Filme/Serien-Katalog, nicht die Kinostarts. Der
+  // Filme/Serien/Streaming-Unterfilter steckt in .filter-group und wird damit
+  // automatisch mit ausgeblendet, wenn .toolbar gleich darunter versteckt wird.
   document.querySelector('.disc-toprow').style.display = 'none';
-  document.querySelector('.tb-discfilters').style.display = 'none';
   document.querySelector('.toolbar').style.display = 'none';
   document.querySelector('.progress-wrap').style.display = 'none';
   list.style.display = 'none';
@@ -2203,9 +2187,6 @@ function closeCinemaPage(){
   document.getElementById('cinemaPage').style.display = 'none';
   document.querySelector('.tabs').style.display = '';
   document.querySelector('.disc-toprow').style.display = '';
-  // .tb-discfilters NICHT hier pauschal wieder einblenden -- das entscheidet
-  // weiterhin updateFilterRowUI() anhand von discoveryMode (wird direkt danach
-  // ueber goHome() -> setTab() aufgerufen).
   document.querySelector('.sub-howto').style.display = '';
   document.querySelector('.toolbar').style.display = '';
   document.querySelector('.progress-wrap').style.display = '';
