@@ -554,6 +554,7 @@
      schmale Bildschirme. */
   .filter-group button { flex: 1; min-width: 0; padding: 9px 2px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
   #fInStream, #discStream { white-space: nowrap; }
+  .funnel-icon { vertical-align: -2px; margin-right: 2px; }
   /* Titel einzeilig mit … kuerzen; Taste-Score (auch zweistellig) bleibt sichtbar */
   li.item .title { display: flex; align-items: center; gap: 6px; min-width: 0; }
   li.item .title .ttext { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
@@ -621,8 +622,8 @@
            Buttons (fInStream/discStream, siehe updateFilterRowUI), beide mit
            derselben Funktion: die gerade sichtbare Liste auf aktuell
            streamende Titel einschraenken. -->
-      <button id="fInStream">▽ Nur Streaming</button>
-      <button id="discStream" style="display:none">▽ Nur Streaming</button>
+      <button id="fInStream"><svg class="funnel-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg> Nur Streaming</button>
+      <button id="discStream" style="display:none"><svg class="funnel-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg> Nur Streaming</button>
     </div>
     <div class="tb-toprow">
       <div class="search-wrap">
