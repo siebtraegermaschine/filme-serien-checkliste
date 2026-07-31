@@ -330,17 +330,18 @@
   .cinema-page-header { max-width:700px; margin:22px auto 6px; padding:0 20px; box-sizing:border-box;
     display:flex; align-items:center; justify-content:space-between; gap:12px; }
   .cinema-page-title { color:var(--accent); font-size:19px; margin:0; }
-  /* Eigenstaendiges Styling fuer den Sortier-Button auf der Kino-Seite noetig,
-     da er (anders als #fSort unter Filme/Serien) nicht in .toolbar steckt und
-     ".toolbar button" ihn deshalb nicht erreicht (gleicher Grund wie bei den
-     Discovery-Filterknoepfen weiter oben). */
-  #cinemaSort {
+  .cinema-page-actions { display:flex; align-items:center; gap:10px; }
+  /* Eigenstaendiges Styling fuer Details-/Sortier-Button auf der Kino-Seite
+     noetig, da sie (anders als #fDetails/#fSort unter Filme/Serien) nicht in
+     .toolbar stecken und ".toolbar button" sie deshalb nicht erreicht (gleicher
+     Grund wie bei den Discovery-Filterknoepfen weiter oben). */
+  #cinemaDetails, #cinemaSort {
     background: var(--card); border: 1px solid var(--border); border-radius: 8px;
     padding: 9px 14px; color: var(--text-dim); font-size: 13px; cursor: pointer;
     transition: all 0.15s; white-space: nowrap;
   }
-  @media (hover: hover) { #cinemaSort:hover { border-color: var(--accent); color: var(--accent); } }
-  #cinemaSort.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { #cinemaDetails:hover, #cinemaSort:hover { border-color: var(--accent); color: var(--accent); } }
+  #cinemaDetails.active, #cinemaSort.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   .cinema-section ol.list { margin-top:10px; }
   .cinema-heading { max-width: 700px; margin-left:auto; margin-right:auto; padding: 0 20px; box-sizing: border-box;
     color:var(--text); font-size:15px; font-weight:700; }
@@ -565,7 +566,7 @@
       <span class="sub-howto-preview" id="subHowToPreview">1. Entdecke die besten Filme &amp; Serien unter Discovery und füge sie deiner „Watchlist“ hinzu oder markiere sie als „gesehen“.</span>
       <span class="sub-howto-more" id="subHowToMoreLabel">Mehr</span>
     </button>
-    <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)<br>2. Entscheide dich einfach immer nur noch zwischen Filmen und Serien, filtere nach Titeln, die im Streaming laufen, und sortiere nach <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</div>
+    <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)<br>2. Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. <b>Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</b></div>
   </div>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
@@ -643,12 +644,15 @@
 <div id="cinemaPage" style="display:none">
   <div class="cinema-page-header">
     <h2 class="cinema-page-title">Im Kino</h2>
-    <div class="sort-wrap">
-      <button id="cinemaSort" type="button" title="Sortierung">⇅ Sortieren</button>
-      <div id="cinemaSortMenu" class="sort-menu" style="display:none">
-        <button type="button" data-sort="imdb">Sortieren nach IMDb-Bewertung</button>
-        <button type="button" data-sort="taste">nach Taste-Score</button>
-        <button type="button" data-sort="date" class="active">nach Veröffentlichungsdatum</button>
+    <div class="cinema-page-actions">
+      <button id="cinemaDetails" type="button">🔎 Details</button>
+      <div class="sort-wrap">
+        <button id="cinemaSort" type="button" title="Sortierung">⇅ Sortieren</button>
+        <div id="cinemaSortMenu" class="sort-menu" style="display:none">
+          <button type="button" data-sort="imdb">Sortieren nach IMDb-Bewertung</button>
+          <button type="button" data-sort="taste">nach Taste-Score</button>
+          <button type="button" data-sort="date" class="active">nach Veröffentlichungsdatum</button>
+        </div>
       </div>
     </div>
   </div>
@@ -715,9 +719,9 @@
     <button class="modal-x" id="howToModalX" aria-label="Schließen">✕</button>
     <h3>How to</h3>
     <ol class="install-steps">
-      <li>Unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> findest du die besten Filme &amp; Serien aller Zeiten, sortiert nach deinem <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.</li>
-      <li>Markiere die Titel als gesehen oder füge sie zu deiner Watchlist hinzu. (Je mehr du hinzufügst, desto genauer wird dein Taste-Score.)</li>
-      <li>Nie wieder lange nach neuen Filmen &amp; Serien suchen – wähle künftig einfach aus deiner Watchlist einen Film oder eine Serie aus, oder wähle aus allen aktuellen Streaming-Angeboten, vorsortiert nach deinem Taste-Score!</li>
+      <li>Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)</li>
+      <li>Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.</li>
+      <li><b>Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</b></li>
     </ol>
   </div>
 </div>
@@ -1463,8 +1467,17 @@ function syncDetailsSortWidth(){
   var d = document.getElementById('fDetails');
   var sw = document.querySelector('.sort-wrap');
   if (!d || !sw) return;
+  // Auf der Kino-Seite ist .toolbar per display:none versteckt -- ein Resize
+  // (z.B. Handy drehen) WAEHREND man dort ist, wuerde sonst 0px messen (jedes
+  // Element in einem display:none-Elternteil hat eine leere BoundingClientRect)
+  // und diese kaputte Breite dauerhaft festschreiben; sichtbar wurde das dann
+  // erst nach der Rueckkehr zu Filme/Serien (Details-Button viel zu schmal,
+  // Watchlist/Gesehen-Gruppe und Suche dafuer zu breit). offsetParent ist nur
+  // bei display:none null (nicht bei visibility:hidden o.ae.), reicht hier.
+  if (d.offsetParent === null) return;
   d.style.width = ''; sw.style.width = '';
   var w = Math.max(d.getBoundingClientRect().width, sw.getBoundingClientRect().width);
+  if (w < 40) return;
   d.style.width = w + 'px';
   sw.style.width = w + 'px';
 }
@@ -1480,6 +1493,9 @@ function syncDiscoveryWidth(){
   var row = document.querySelector('.tabs .tabs-row');
   var btn = document.getElementById('fDiscovery');
   if (!row || !btn) return;
+  // Siehe Kommentar in syncDetailsSortWidth() -- .tabs ist auf der Kino-Seite
+  // ebenfalls versteckt, ein Resize dort darf die Breite nicht kaputt neu setzen.
+  if (row.offsetParent === null) return;
   btn.style.width = '';
   var w = row.getBoundingClientRect().width;
   if (w > 40) btn.style.width = w + 'px';
@@ -1592,15 +1608,22 @@ btns.discovery.onclick = () => {
 };
 
 const detailsBtn = document.getElementById('fDetails');
-detailsBtn.onclick = () => {
+const cinemaDetailsBtn = document.getElementById('cinemaDetails');
+// Gemeinsam von #fDetails (Filme/Serien/Discovery) UND #cinemaDetails (Kino-
+// Seite) genutzt -- showDetails ist ein globaler Haken, klappt hier aber
+// gezielt NUR die Zeilen der gerade sichtbaren Seite auf/zu (Bulk-Aktion).
+// Einzelne Titel bleiben trotzdem per Klick auf die Zeile selbst individuell
+// auf-/zuklappbar, bis zum naechsten Re-Render (dann gilt wieder dieser Stand).
+function toggleShowDetails(){
   showDetails = !showDetails;
   detailsBtn.classList.toggle('active', showDetails);
-  // Klappt alle aktuell gerenderten Zeilen auf einmal auf/zu (Bulk-Aktion); einzelne
-  // Titel bleiben trotzdem per Klick auf die Zeile selbst individuell auf-/zuklappbar,
-  // bis zum naechsten Re-Render (dann gilt wieder der hier gesetzte Standard).
-  list.querySelectorAll('li.item, li.disc').forEach((li) => li.classList.toggle('show-details', showDetails));
+  cinemaDetailsBtn.classList.toggle('active', showDetails);
+  var scope = cinemaMode ? document.getElementById('cinemaPage') : list;
+  scope.querySelectorAll('li.item, li.disc').forEach((li) => li.classList.toggle('show-details', showDetails));
   try { localStorage.setItem(DETAILS_PREF_KEY, showDetails ? '1' : '0'); } catch (e) {}
-};
+}
+detailsBtn.onclick = toggleShowDetails;
+cinemaDetailsBtn.onclick = toggleShowDetails;
 
 var SORT_MANUAL_KEY = 'top200-sort-v2';
 var SORT_MANUAL_MAX_AGE_MS = 24 * 60 * 60 * 1000;
@@ -2264,6 +2287,11 @@ function closeCinemaPage(){
   document.querySelector('.toolbar').style.display = '';
   document.querySelector('.progress-wrap').style.display = '';
   list.style.display = '';
+  // Erzwingt einen frischen, korrekten Sync JETZT (wo alles wieder sichtbar
+  // ist) -- repariert auch eine evtl. bereits kaputt geschriebene Breite von
+  // einem Resize waehrend des Kino-Besuchs (siehe syncDetailsSortWidth).
+  syncDetailsSortWidth();
+  syncDiscoveryWidth();
 }
 // Zurueck zu "Filme & Serien": per Logo-Klick (siehe unten) UND per gleichnamigem
 // Menuepunkt ganz oben im Nav-Menue -- einziger Weg zurueck aus der Kino-Seite,
