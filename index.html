@@ -331,17 +331,17 @@
     display:flex; align-items:center; justify-content:space-between; gap:12px; }
   .cinema-page-title { color:var(--accent); font-size:19px; margin:0; }
   .cinema-page-actions { display:flex; align-items:center; gap:10px; }
-  /* Eigenstaendiges Styling fuer Details-/Sortier-Button auf der Kino-Seite
-     noetig, da sie (anders als #fDetails/#fSort unter Filme/Serien) nicht in
-     .toolbar stecken und ".toolbar button" sie deshalb nicht erreicht (gleicher
-     Grund wie bei den Discovery-Filterknoepfen weiter oben). */
-  #cinemaDetails, #cinemaSort {
+  /* Eigenstaendiges Styling fuer den Sortier-Button auf der Kino-Seite noetig,
+     da er (anders als #fSort unter Filme/Serien) nicht in .toolbar steckt und
+     ".toolbar button" ihn deshalb nicht erreicht (gleicher Grund wie bei den
+     Discovery-Filterknoepfen weiter oben). */
+  #cinemaSort {
     background: var(--card); border: 1px solid var(--border); border-radius: 8px;
     padding: 9px 14px; color: var(--text-dim); font-size: 13px; cursor: pointer;
     transition: all 0.15s; white-space: nowrap;
   }
-  @media (hover: hover) { #cinemaDetails:hover, #cinemaSort:hover { border-color: var(--accent); color: var(--accent); } }
-  #cinemaDetails.active, #cinemaSort.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { #cinemaSort:hover { border-color: var(--accent); color: var(--accent); } }
+  #cinemaSort.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   /* Dasselbe gilt fuer die drei Eintraege IM Dropdown (#cinemaSortMenu) -- die
      bekommen ihr Aussehen sonst ueber ".toolbar button", was hier ausserhalb
      von .toolbar ebenfalls nicht greift (nur ".sort-menu button" oben setzt
@@ -655,7 +655,6 @@
   <div class="cinema-page-header">
     <h2 class="cinema-page-title">Im Kino</h2>
     <div class="cinema-page-actions">
-      <button id="cinemaDetails" type="button">🔎 Details</button>
       <div class="sort-wrap">
         <button id="cinemaSort" type="button" title="Sortierung">⇅ Sortieren</button>
         <div id="cinemaSortMenu" class="sort-menu" style="display:none">
@@ -1618,22 +1617,17 @@ btns.discovery.onclick = () => {
 };
 
 const detailsBtn = document.getElementById('fDetails');
-const cinemaDetailsBtn = document.getElementById('cinemaDetails');
-// Gemeinsam von #fDetails (Filme/Serien/Discovery) UND #cinemaDetails (Kino-
-// Seite) genutzt -- showDetails ist ein globaler Haken, klappt hier aber
-// gezielt NUR die Zeilen der gerade sichtbaren Seite auf/zu (Bulk-Aktion).
-// Einzelne Titel bleiben trotzdem per Klick auf die Zeile selbst individuell
-// auf-/zuklappbar, bis zum naechsten Re-Render (dann gilt wieder dieser Stand).
-function toggleShowDetails(){
+detailsBtn.onclick = () => {
   showDetails = !showDetails;
   detailsBtn.classList.toggle('active', showDetails);
-  cinemaDetailsBtn.classList.toggle('active', showDetails);
-  var scope = cinemaMode ? document.getElementById('cinemaPage') : list;
-  scope.querySelectorAll('li.item, li.disc').forEach((li) => li.classList.toggle('show-details', showDetails));
+  // Klappt alle aktuell gerenderten Zeilen auf einmal auf/zu (Bulk-Aktion); einzelne
+  // Titel bleiben trotzdem per Klick auf die Zeile selbst individuell auf-/zuklappbar,
+  // bis zum naechsten Re-Render (dann gilt wieder der hier gesetzte Standard).
+  // Gilt nur fuer Filme/Serien/Discovery -- auf der Kino-Seite gibt es bewusst
+  // keinen Bulk-Button, dort klappt man Titel ausschliesslich einzeln per Klick auf.
+  list.querySelectorAll('li.item, li.disc').forEach((li) => li.classList.toggle('show-details', showDetails));
   try { localStorage.setItem(DETAILS_PREF_KEY, showDetails ? '1' : '0'); } catch (e) {}
-}
-detailsBtn.onclick = toggleShowDetails;
-cinemaDetailsBtn.onclick = toggleShowDetails;
+};
 
 var SORT_MANUAL_KEY = 'top200-sort-v2';
 var SORT_MANUAL_MAX_AGE_MS = 24 * 60 * 60 * 1000;
