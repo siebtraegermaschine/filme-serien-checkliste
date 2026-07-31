@@ -1,4 +1,8 @@
 # Caddy holt/erneuert das Let's-Encrypt-Zertifikat automatisch fuer diese Domain.
 movietaste.de, www.movietaste.de {
+	# Komprimiert Antworten (v.a. die grossen JSON-Kataloglisten, ~27MB
+	# unkomprimiert) -- ohne diese Zeile schickt Caddy alles unkomprimiert
+	# raus, obwohl der Browser per Accept-Encoding gzip anbietet.
+	encode zstd gzip
 	reverse_proxy backend:3000
 }
