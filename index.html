@@ -553,7 +553,7 @@
      schrumpfen); text-overflow:ellipsis bleibt als Sicherheitsnetz fuer sehr
      schmale Bildschirme. */
   .filter-group button { flex: 1; min-width: 0; padding: 9px 2px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
-  #fDetails { white-space: nowrap; }
+  #fInStream, #discStream { white-space: nowrap; }
   /* Titel einzeilig mit … kuerzen; Taste-Score (auch zweistellig) bleibt sichtbar */
   li.item .title { display: flex; align-items: center; gap: 6px; min-width: 0; }
   li.item .title .ttext { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
@@ -610,16 +610,19 @@
       <div class="filter-group">
         <button id="fOpen" class="active">Watchlist</button>
         <button id="fDone">Gesehen</button>
-        <button id="fInStream">Im Streaming</button>
         <!-- Nur im Discovery-Modus sichtbar, ersetzt an derselben Stelle die
-             drei Buttons oben (siehe updateFilterRowUI) -- Watchlist/Gesehen/
-             Im Streaming ergeben beim Durchstoebern von Discovery keinen Sinn,
-             der Filme/Serien/Streaming-Typfilter dagegen schon. -->
-        <button id="discFilme" class="active" style="display:none">Filme</button>
-        <button id="discSerien" class="active" style="display:none">Serien</button>
-        <button id="discStream" style="display:none">Im Streaming</button>
+             zwei Buttons oben (siehe updateFilterRowUI) -- Watchlist/Gesehen
+             ergeben beim Durchstoebern von Discovery keinen Sinn. -->
+        <button id="discFilme" class="active" style="display:none">Alle Filme</button>
+        <button id="discSerien" class="active" style="display:none">Alle Serien</button>
       </div>
-      <button id="fDetails">🔎 Details</button>
+      <!-- "Nur Streaming" sitzt dort, wo frueher der Details-Button war --
+           genau wie links steht hier je nach Discovery-Modus einer von zwei
+           Buttons (fInStream/discStream, siehe updateFilterRowUI), beide mit
+           derselben Funktion: die gerade sichtbare Liste auf aktuell
+           streamende Titel einschraenken. -->
+      <button id="fInStream">▽ Nur Streaming</button>
+      <button id="discStream" style="display:none">▽ Nur Streaming</button>
     </div>
     <div class="tb-toprow">
       <div class="search-wrap">
@@ -1467,22 +1470,29 @@ window.addEventListener('resize', function(){
   syncDetailsSortWidth();
   syncDiscoveryWidth();
 });
-// Details (obere Zeile) und Sortieren (untere Zeile) sollen immer gleich breit
-// sein -- da beide die "rechte Spalte" ihrer jeweiligen .tb-toprow sind und die
-// "linke Spalte" (Discovery/Watchlist/Gesehen bzw. Suchfeld) dort per flex:1
-// den jeweils verbleibenden Platz einnimmt, rutscht dadurch automatisch auch
-// die Filterzeile auf dieselbe Breite wie das Suchfeld darunter.
+// "Nur Streaming" (obere Zeile -- entweder #fInStream oder #discStream, je
+// nach Discovery-Modus, siehe updateFilterRowUI) und Sortieren (untere Zeile)
+// sollen immer gleich breit sein -- da beide die "rechte Spalte" ihrer
+// jeweiligen .tb-toprow sind und die "linke Spalte" (Watchlist/Gesehen bzw.
+// Suchfeld) dort per flex:1 den jeweils verbleibenden Platz einnimmt, rutscht
+// dadurch automatisch auch die Filterzeile auf dieselbe Breite wie das
+// Suchfeld darunter.
+function activeStreamSlotBtn(){
+  var a = document.getElementById('fInStream');
+  var b = document.getElementById('discStream');
+  return (a && a.offsetParent !== null) ? a : b;
+}
 function syncDetailsSortWidth(){
-  var d = document.getElementById('fDetails');
+  var d = activeStreamSlotBtn();
   var sw = document.querySelector('.sort-wrap');
   if (!d || !sw) return;
   // Auf der Kino-Seite ist .toolbar per display:none versteckt -- ein Resize
   // (z.B. Handy drehen) WAEHREND man dort ist, wuerde sonst 0px messen (jedes
   // Element in einem display:none-Elternteil hat eine leere BoundingClientRect)
   // und diese kaputte Breite dauerhaft festschreiben; sichtbar wurde das dann
-  // erst nach der Rueckkehr zu Filme/Serien (Details-Button viel zu schmal,
-  // Watchlist/Gesehen-Gruppe und Suche dafuer zu breit). offsetParent ist nur
-  // bei display:none null (nicht bei visibility:hidden o.ae.), reicht hier.
+  // erst nach der Rueckkehr zu Filme/Serien ("Nur Streaming"-Button viel zu
+  // schmal, Watchlist/Gesehen-Gruppe und Suche dafuer zu breit). offsetParent
+  // ist nur bei display:none null (nicht bei visibility:hidden o.ae.), reicht hier.
   if (d.offsetParent === null) return;
   d.style.width = ''; sw.style.width = '';
   var w = Math.max(d.getBoundingClientRect().width, sw.getBoundingClientRect().width);
@@ -1547,11 +1557,11 @@ function updateFilterRowUI(){
   tabBtns.serien.classList.toggle('active', !disc && activeTab === 'serien');
   var pw = document.querySelector('.progress-wrap');
   pw.style.display = disc ? 'none' : '';
+  syncDetailsSortWidth();
 }
 function setTab(t) {
   activeTab = t;
   document.querySelector('.toolbar').style.display = '';
-  var _fd = document.getElementById('fDetails'); if (_fd) _fd.style.display = '';
   searchEl.style.display = '';
   var _sw = document.querySelector('.sort-wrap'); if (_sw) _sw.style.display = 'flex';
   // Filme, Serien und Discovery sind drei sich gegenseitig ausschliessende
@@ -1616,18 +1626,12 @@ btns.discovery.onclick = () => {
   renderCurrentTab();
 };
 
-const detailsBtn = document.getElementById('fDetails');
-detailsBtn.onclick = () => {
-  showDetails = !showDetails;
-  detailsBtn.classList.toggle('active', showDetails);
-  // Klappt alle aktuell gerenderten Zeilen auf einmal auf/zu (Bulk-Aktion); einzelne
-  // Titel bleiben trotzdem per Klick auf die Zeile selbst individuell auf-/zuklappbar,
-  // bis zum naechsten Re-Render (dann gilt wieder der hier gesetzte Standard).
-  // Gilt nur fuer Filme/Serien/Discovery -- auf der Kino-Seite gibt es bewusst
-  // keinen Bulk-Button, dort klappt man Titel ausschliesslich einzeln per Klick auf.
-  list.querySelectorAll('li.item, li.disc').forEach((li) => li.classList.toggle('show-details', showDetails));
-  try { localStorage.setItem(DETAILS_PREF_KEY, showDetails ? '1' : '0'); } catch (e) {}
-};
+// Der Bulk-"Details"-Button ist vorerst ueberall entfernt (Watchlist/Gesehen
+// bzw. Alle Filme/Alle Serien fuellen die Zeile jetzt ganz aus, "Nur Streaming"
+// sitzt an seiner alten Stelle, siehe HTML) -- einzelne Titel bleiben trotzdem
+// per Klick auf die Zeile individuell auf-/zuklappbar (siehe wireRow/
+// poolItemLi weiter unten), showDetails bleibt als Variable fuer eine
+// eventuelle spaetere Wiedereinfuehrung erhalten.
 
 var SORT_MANUAL_KEY = 'top200-sort-v2';
 var SORT_MANUAL_MAX_AGE_MS = 24 * 60 * 60 * 1000;
@@ -2608,7 +2612,6 @@ _ratingModal.addEventListener('click', function(e){ if (e.target === _ratingModa
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _ratingModal.style.display !== 'none') closeRatingModal(); });
 
 try { showDetails = localStorage.getItem(DETAILS_PREF_KEY) === '1'; } catch (e) {}
-detailsBtn.classList.toggle('active', showDetails);
 list.classList.toggle('show-details', showDetails);
 
 /* ---- Login / Registrierung (Login-Gate) ----
