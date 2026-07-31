@@ -15,6 +15,7 @@ function rowToCand(row) {
     r: row.rating != null ? Number(row.rating) : null,
     ov: row.overview,
     rd: row.release_date ? row.release_date.toISOString().slice(0, 10) : null,
+    ord: row.original_release_date ? row.original_release_date.toISOString().slice(0, 10) : null,
   };
 }
 
@@ -60,14 +61,15 @@ router.post('/ingest', async (req, res) => {
       if (!item || !item.tmdbId || !item.title || !item.category) continue;
       await client.query(
         `INSERT INTO cinema_cache
-           (tmdb_id, title, year, genres, director, cast_names, poster_path, rating, overview, release_date, category, fetched_at)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11, clock_timestamp())
+           (tmdb_id, title, year, genres, director, cast_names, poster_path, rating, overview, release_date, category, original_release_date, fetched_at)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12, clock_timestamp())
          ON CONFLICT (tmdb_id) DO UPDATE SET
            title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
            director = EXCLUDED.director, cast_names = EXCLUDED.cast_names,
            poster_path = EXCLUDED.poster_path, rating = EXCLUDED.rating,
            overview = COALESCE(NULLIF(EXCLUDED.overview, ''), cinema_cache.overview),
            release_date = EXCLUDED.release_date, category = EXCLUDED.category,
+           original_release_date = EXCLUDED.original_release_date,
            fetched_at = clock_timestamp()`,
         [
           item.tmdbId,
@@ -81,6 +83,7 @@ router.post('/ingest', async (req, res) => {
           item.overview || null,
           item.releaseDate || null,
           item.category,
+          item.originalReleaseDate || null,
         ]
       );
     }

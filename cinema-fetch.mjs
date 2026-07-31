@@ -61,16 +61,32 @@ async function genreMap() {
 }
 
 const enrichCache = new Map();
+// Holt zusaetzlich zu Cast/Regie alle deutschen Kino-Veroeffentlichungstermine
+// (release_dates, type 2=Limited/3=Theatrical) -- noetig, weil /discover/movie
+// zwar korrekt nur Filme mit einem passenden DE-Kinotermin im jeweiligen
+// Zeitfenster liefert, das zurueckgegebene "release_date"-Feld dabei aber die
+// urspruengliche (globale) Erstveroeffentlichung zeigt statt des tatsaechlich
+// gesuchten (Wieder-)Auffuehrungstermins -- z.B. "Rocky" mit release_date 1977,
+// obwohl der eigentliche Treffer eine Kino-Wiederauffuehrung 2026 ist (siehe
+// discoverRange/main unten, wo aus deDates das passende Datum herausgesucht wird).
 async function enrich(id) {
   if (enrichCache.has(id)) return enrichCache.get(id);
-  const result = { cast: [], dir: '' };
+  const result = { cast: [], dir: '', deDates: [] };
   try {
-    const d = await tmdb(`/movie/${id}`, { language: LANG, append_to_response: 'credits' });
+    const d = await tmdb(`/movie/${id}`, { language: LANG, append_to_response: 'credits,release_dates' });
     const cr = d.credits || {};
     result.cast = (cr.cast || []).slice(0, 4).map((p) => p.name).filter(Boolean);
     const dd = (cr.crew || []).find((p) => p.job === 'Director');
     result.dir = dd ? dd.name : '';
-  } catch (e) { /* Titel ohne Credits: Felder bleiben leer */ }
+    const rdResults = (d.release_dates && d.release_dates.results) || [];
+    const deEntry = rdResults.find((r) => r.iso_3166_1 === 'DE');
+    if (deEntry) {
+      result.deDates = (deEntry.release_dates || [])
+        .filter((rd) => rd.type === 2 || rd.type === 3)
+        .map((rd) => String(rd.release_date).slice(0, 10))
+        .sort();
+    }
+  } catch (e) { /* Titel ohne Credits/Release-Termine: Felder bleiben leer */ }
   enrichCache.set(id, result);
   return result;
 }
@@ -101,8 +117,14 @@ async function discoverRange(gteDate, lteDate, sortDir, gmap, category, out, see
         posterPath: it.poster_path || null,
         rating: it.vote_average != null ? Math.round(it.vote_average * 10) / 10 : null,
         overview: (it.overview || '').trim(),
+        // Vorlaeufig die von /discover gelieferte (oft globale Erst-)
+        // Veroeffentlichung -- wird unten in main() ggf. durch das tatsaechlich
+        // passende deutsche Kinodatum ersetzt (siehe enrich/deDates).
         releaseDate: it.release_date || null,
+        originalReleaseDate: it.release_date || null,
         category,
+        _gte: fmtDate(gteDate),
+        _lte: fmtDate(lteDate),
       });
     }
     page++;
@@ -130,12 +152,29 @@ async function main() {
   await discoverRange(addDays(today, SOON_WINDOW_DAYS + 1), addDays(today, LATER_WINDOW_DAYS), 'asc', gmap, 'later', out, seen);
   console.log(`  ${out.length - beforeLater} Filme.`);
 
-  console.log(`Reichere ${out.length} Titel mit Cast/Regie an...`);
+  console.log(`Reichere ${out.length} Titel mit Cast/Regie/Kinotermin an...`);
   let done = 0;
   for (const item of out) {
     const ex = await enrich(item.tmdbId);
     item.cast = ex.cast;
     item.director = ex.dir;
+    // Das deutsche Kinodatum, das tatsaechlich in dieses Zeitfenster faellt
+    // (deshalb hat /discover den Titel ja geliefert), ersetzt das vorlaeufige
+    // (oft globale Erst-)Veroeffentlichungsdatum von oben. originalReleaseDate
+    // bleibt nur gesetzt, wenn es sich im Jahr unterscheidet -- sonst waeren
+    // beide Datumsfelder ohnehin identisch/uninteressant (kein Wiederaufführungs-
+    // Hinweis fuer ganz normale Neustarts).
+    const deMatch = ex.deDates.find((d) => d >= item._gte && d <= item._lte);
+    if (deMatch) {
+      item.releaseDate = deMatch;
+      if (!item.originalReleaseDate || item.originalReleaseDate.slice(0, 4) === deMatch.slice(0, 4)) {
+        item.originalReleaseDate = null;
+      }
+    } else {
+      item.originalReleaseDate = null;
+    }
+    delete item._gte;
+    delete item._lte;
     done++;
     if (done % 100 === 0) console.log(`  ... ${done}/${out.length}`);
     await sleep(130);

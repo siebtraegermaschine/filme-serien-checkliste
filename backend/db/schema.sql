@@ -173,6 +173,11 @@ CREATE TABLE IF NOT EXISTS cinema_cache (
   fetched_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (tmdb_id)
 );
+-- Nur bei Wiederauffuehrungen gesetzt (z.B. Klassiker-Reihen): das
+-- urspruengliche (globale) Erstveroeffentlichungsdatum, falls es sich vom
+-- eigentlichen (deutschen) Kinotermin in release_date im Jahr unterscheidet --
+-- siehe cinema-fetch.mjs. NULL bei ganz normalen Neustarts.
+ALTER TABLE cinema_cache ADD COLUMN IF NOT EXISTS original_release_date DATE;
 
 -- Protokolliert manuell eingegebene Suchbegriffe (siehe backend/routes/searchLog.js)
 -- fuer spaetere Auswertung, welche Titel/Begriffe Nutzer:innen suchen, aber (noch)

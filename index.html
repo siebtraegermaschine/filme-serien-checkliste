@@ -2210,10 +2210,19 @@ function cinemaRowToItem(row, poolByTmdb){
   const tmdbId = Number(row.id);
   const existing = poolByTmdb.get(tmdbId);
   if (existing) return existing;
+  // row.ord (original_release_date) ist nur bei Wiederauffuehrungen gesetzt
+  // (siehe cinema-fetch.mjs) -- Hinweis + Erstveroeffentlichungsjahr wird der
+  // Inhaltsangabe vorangestellt, damit z.B. bei "Rocky (1977)" sichtbar ist,
+  // dass es sich um eine Kino-Wiederauffuehrung handelt und nicht um einen Fehler.
+  var ov = row.ov || '';
+  if (row.ord) {
+    var origYear = row.ord.slice(0, 4);
+    ov = '🎬 Wiederaufführung im Kino – ursprünglich erschienen ' + origYear + '.' + (ov ? ' ' + ov : '');
+  }
   return {
     realId: null, tmdbId, type: 'movie', t: row.t, ot: null, y: row.y,
     g: row.g || [], d: row.d || '', c: row.c || [], kw: [],
-    p: row.p || null, poster64: null, r: row.r, ov: row.ov || '', providers: [],
+    p: row.p || null, poster64: null, r: row.r, ov: ov, providers: [],
   };
 }
 function renderCinemaSection(key, rows, prof, poolByTmdb){
