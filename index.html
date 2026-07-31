@@ -327,10 +327,23 @@
   /* "Im Kino"-Seite: keine eigene Modal-/Card-Optik, sondern dieselben Zeilen wie
      Discovery/Streaming (poolItemLi in ol.list) -- nur die Abschnitts-Ueberschriften
      (Aktuell/In Kuerze/Bald im Kino) sind hier neu. */
-  .cinema-page-title, .cinema-heading { max-width: 700px; margin-left:auto; margin-right:auto; padding: 0 20px; box-sizing: border-box; }
-  .cinema-page-title { color:var(--accent); font-size:19px; margin-top:22px; margin-bottom:6px; }
+  .cinema-page-header { max-width:700px; margin:22px auto 6px; padding:0 20px; box-sizing:border-box;
+    display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .cinema-page-title { color:var(--accent); font-size:19px; margin:0; }
+  /* Eigenstaendiges Styling fuer den Sortier-Button auf der Kino-Seite noetig,
+     da er (anders als #fSort unter Filme/Serien) nicht in .toolbar steckt und
+     ".toolbar button" ihn deshalb nicht erreicht (gleicher Grund wie bei den
+     Discovery-Filterknoepfen weiter oben). */
+  #cinemaSort {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 9px 14px; color: var(--text-dim); font-size: 13px; cursor: pointer;
+    transition: all 0.15s; white-space: nowrap;
+  }
+  @media (hover: hover) { #cinemaSort:hover { border-color: var(--accent); color: var(--accent); } }
+  #cinemaSort.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   .cinema-section ol.list { margin-top:10px; }
-  .cinema-heading { color:var(--text); font-size:15px; font-weight:700; }
+  .cinema-heading { max-width: 700px; margin-left:auto; margin-right:auto; padding: 0 20px; box-sizing: border-box;
+    color:var(--text); font-size:15px; font-weight:700; }
   .cinema-heading .cinema-count { color:var(--text-dim); font-weight:600; }
   .cinema-empty { color:var(--text-dim); font-size:13px; padding:6px 20px; max-width:700px; margin:0 auto; box-sizing:border-box; }
   /* Im Popup ist die Spalte fuer Titel/Aktionen schmaler als auf Discovery/
@@ -628,7 +641,17 @@
 <ol class="list" id="list"></ol>
 
 <div id="cinemaPage" style="display:none">
-  <h2 class="cinema-page-title">Im Kino</h2>
+  <div class="cinema-page-header">
+    <h2 class="cinema-page-title">Im Kino</h2>
+    <div class="sort-wrap">
+      <button id="cinemaSort" type="button" title="Sortierung">⇅ Sortieren</button>
+      <div id="cinemaSortMenu" class="sort-menu" style="display:none">
+        <button type="button" data-sort="imdb">Sortieren nach IMDb-Bewertung</button>
+        <button type="button" data-sort="taste">nach Taste-Score</button>
+        <button type="button" data-sort="date" class="active">nach Veröffentlichungsdatum</button>
+      </div>
+    </div>
+  </div>
   <div class="cinema-section">
     <h3 class="cinema-heading" id="cinemaNowHeading">Aktuell im Kino</h3>
     <ol class="list" id="cinemaNowList"></ol>
@@ -2129,6 +2152,12 @@ const CINEMA_EMPTY_TEXT = {
   soon: 'In Kürze startet aktuell nichts Neues.',
   later: 'Für die kommenden Monate ist noch nichts hinterlegt.',
 };
+// Jeder der drei Bereiche zeigt anfangs nur CINEMA_SECTION_PREVIEW Titel
+// (sonst scrollt man scheinbar endlos durch nur EINEN Bereich, ohne zu merken,
+// dass es noch zwei weitere gibt) -- "Mehr anzeigen" blendet den Rest ein.
+const CINEMA_SECTION_PREVIEW = 6;
+let cinemaSectionExpanded = { now: false, soon: false, later: false };
+let cinemaSortKey = 'date';
 async function loadCinemaData(){
   if (!CINEMA_DATA) CINEMA_DATA = await apiRequest('GET', '/api/cinema');
   return CINEMA_DATA;
@@ -2158,11 +2187,33 @@ function renderCinemaSection(key, rows, prof, poolByTmdb){
     el.innerHTML = '<li class="cinema-empty">' + esc(CINEMA_EMPTY_TEXT[key]) + '</li>';
     return;
   }
-  rows.forEach(function(row){
-    const item = cinemaRowToItem(row, poolByTmdb);
-    const score = scoreCand(item, prof).score;
-    el.appendChild(poolItemLi(item, score));
+  var entries = rows.map(function(row){
+    var item = cinemaRowToItem(row, poolByTmdb);
+    return { row: row, item: item, score: scoreCand(item, prof).score };
   });
+  entries.sort(function(a, b){
+    if (cinemaSortKey === 'imdb') return (b.item.r || 0) - (a.item.r || 0);
+    if (cinemaSortKey === 'taste') return b.score - a.score;
+    // 'date': nach dem GENAUEN Kinostart-Datum (nicht nur Jahr) -- "now" zeigt
+    // zuerst die zuletzt gestarteten Titel, "soon"/"later" zuerst die naechsten
+    // anstehenden Termine (z.B. um zu sehen, was Mittwoch vs. Donnerstag startet).
+    var da = a.row.rd || '', db = b.row.rd || '';
+    return key === 'now' ? db.localeCompare(da) : da.localeCompare(db);
+  });
+  var expanded = cinemaSectionExpanded[key];
+  var visible = expanded ? entries : entries.slice(0, CINEMA_SECTION_PREVIEW);
+  visible.forEach(function(e){ el.appendChild(poolItemLi(e.item, e.score)); });
+  if (!expanded && entries.length > CINEMA_SECTION_PREVIEW) {
+    var moreBtn = document.createElement('button');
+    moreBtn.type = 'button';
+    moreBtn.className = 'load-more-btn';
+    moreBtn.textContent = 'Mehr anzeigen (' + (entries.length - CINEMA_SECTION_PREVIEW) + ' weitere)';
+    moreBtn.onclick = function(){
+      cinemaSectionExpanded[key] = true;
+      renderCinemaPage();
+    };
+    el.appendChild(moreBtn);
+  }
 }
 async function renderCinemaPage(){
   const data = await loadCinemaData();
@@ -2175,6 +2226,9 @@ async function renderCinemaPage(){
 }
 function openCinemaPage(){
   cinemaMode = true;
+  // Bei jedem frischen Aufruf wieder eingeklappt starten (nicht den Zustand
+  // eines vorherigen Besuchs behalten).
+  cinemaSectionExpanded = { now: false, soon: false, later: false };
   document.querySelector('.tabs').style.display = 'none';
   // Discovery-Button ergibt auf der Kino-Seite keinen Sinn -- Discovery
   // durchsucht den normalen Filme/Serien-Katalog, nicht die Kinostarts. Der
@@ -2223,6 +2277,32 @@ function goHome(){
 }
 document.getElementById('navHomeBtn').onclick = () => { closeNavMenu(); goHome(); };
 document.getElementById('cinemaBtn').onclick = () => { closeNavMenu(); openCinemaPage(); };
+
+// Sortier-Menue auf der Kino-Seite -- dieselben drei Kriterien wie unter Filme/
+// Serien (IMDb-Bewertung/Taste-Score/Veroeffentlichungsdatum), nur "neu im
+// Streaming" entfaellt (ergibt fuer Kinostarts keinen Sinn). Ein Sortierwechsel
+// klappt alle drei Bereiche wieder ein, damit man nicht in einer laaaangen,
+// neu sortierten Liste landet.
+var _cinemaSortBtn = document.getElementById('cinemaSort');
+var _cinemaSortMenu = document.getElementById('cinemaSortMenu');
+if (_cinemaSortBtn && _cinemaSortMenu) {
+  _cinemaSortBtn.onclick = function(e){
+    e.stopPropagation();
+    var open = _cinemaSortMenu.style.display === 'flex';
+    _cinemaSortMenu.style.display = open ? 'none' : 'flex';
+  };
+  _cinemaSortMenu.addEventListener('click', function(e){ e.stopPropagation(); });
+  _cinemaSortMenu.querySelectorAll('button').forEach(function(b){
+    b.onclick = function(){
+      cinemaSortKey = b.dataset.sort;
+      cinemaSectionExpanded = { now: false, soon: false, later: false };
+      _cinemaSortMenu.querySelectorAll('button').forEach(function(bb){ bb.classList.toggle('active', bb === b); });
+      _cinemaSortMenu.style.display = 'none';
+      renderCinemaPage();
+    };
+  });
+  document.addEventListener('click', function(){ _cinemaSortMenu.style.display = 'none'; });
+}
 
 /* ---- "Als App speichern": Android hat mit beforeinstallprompt eine echte
    Browser-API dafuer, iOS nicht -- Apple erlaubt keine programmatische
