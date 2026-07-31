@@ -342,6 +342,16 @@
   }
   @media (hover: hover) { #cinemaDetails:hover, #cinemaSort:hover { border-color: var(--accent); color: var(--accent); } }
   #cinemaDetails.active, #cinemaSort.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  /* Dasselbe gilt fuer die drei Eintraege IM Dropdown (#cinemaSortMenu) -- die
+     bekommen ihr Aussehen sonst ueber ".toolbar button", was hier ausserhalb
+     von .toolbar ebenfalls nicht greift (nur ".sort-menu button" oben setzt
+     bislang lediglich Layout-Eigenschaften, keine Optik). */
+  #cinemaSortMenu button {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 9px 14px; color: var(--text-dim); font-size: 13px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  @media (hover: hover) { #cinemaSortMenu button:hover { border-color: var(--accent); color: var(--accent); } }
   .cinema-section ol.list { margin-top:10px; }
   .cinema-heading { max-width: 700px; margin-left:auto; margin-right:auto; padding: 0 20px; box-sizing: border-box;
     color:var(--text); font-size:15px; font-weight:700; }
@@ -650,8 +660,8 @@
         <button id="cinemaSort" type="button" title="Sortierung">⇅ Sortieren</button>
         <div id="cinemaSortMenu" class="sort-menu" style="display:none">
           <button type="button" data-sort="imdb">Sortieren nach IMDb-Bewertung</button>
-          <button type="button" data-sort="taste">nach Taste-Score</button>
-          <button type="button" data-sort="date" class="active">nach Veröffentlichungsdatum</button>
+          <button type="button" data-sort="date">nach Veröffentlichungsdatum</button>
+          <button type="button" data-sort="taste" class="active">nach Taste-Score</button>
         </div>
       </div>
     </div>
@@ -2177,10 +2187,14 @@ const CINEMA_EMPTY_TEXT = {
 };
 // Jeder der drei Bereiche zeigt anfangs nur CINEMA_SECTION_PREVIEW Titel
 // (sonst scrollt man scheinbar endlos durch nur EINEN Bereich, ohne zu merken,
-// dass es noch zwei weitere gibt) -- "Mehr anzeigen" blendet den Rest ein.
+// dass es noch zwei weitere gibt). "Mehr anzeigen" blendet danach jeweils
+// CINEMA_SECTION_STEP weitere ein (nicht alles auf einmal -- bei bis zu ~300
+// Titeln in "Bald im Kino" waere ein einzelner Klick sonst eine Wand aus
+// hunderten Zeilen); der Button bleibt stehen, bis wirklich alle sichtbar sind.
 const CINEMA_SECTION_PREVIEW = 6;
-let cinemaSectionExpanded = { now: false, soon: false, later: false };
-let cinemaSortKey = 'date';
+const CINEMA_SECTION_STEP = 25;
+let cinemaSectionLimit = { now: CINEMA_SECTION_PREVIEW, soon: CINEMA_SECTION_PREVIEW, later: CINEMA_SECTION_PREVIEW };
+let cinemaSortKey = 'taste';
 async function loadCinemaData(){
   if (!CINEMA_DATA) CINEMA_DATA = await apiRequest('GET', '/api/cinema');
   return CINEMA_DATA;
@@ -2223,16 +2237,17 @@ function renderCinemaSection(key, rows, prof, poolByTmdb){
     var da = a.row.rd || '', db = b.row.rd || '';
     return key === 'now' ? db.localeCompare(da) : da.localeCompare(db);
   });
-  var expanded = cinemaSectionExpanded[key];
-  var visible = expanded ? entries : entries.slice(0, CINEMA_SECTION_PREVIEW);
+  var limit = cinemaSectionLimit[key];
+  var visible = entries.slice(0, limit);
   visible.forEach(function(e){ el.appendChild(poolItemLi(e.item, e.score)); });
-  if (!expanded && entries.length > CINEMA_SECTION_PREVIEW) {
+  if (entries.length > limit) {
+    var remaining = entries.length - limit;
     var moreBtn = document.createElement('button');
     moreBtn.type = 'button';
     moreBtn.className = 'load-more-btn';
-    moreBtn.textContent = 'Mehr anzeigen (' + (entries.length - CINEMA_SECTION_PREVIEW) + ' weitere)';
+    moreBtn.textContent = 'Mehr anzeigen (' + Math.min(CINEMA_SECTION_STEP, remaining) + ' weitere)';
     moreBtn.onclick = function(){
-      cinemaSectionExpanded[key] = true;
+      cinemaSectionLimit[key] = Math.min(entries.length, cinemaSectionLimit[key] + CINEMA_SECTION_STEP);
       renderCinemaPage();
     };
     el.appendChild(moreBtn);
@@ -2251,7 +2266,7 @@ function openCinemaPage(){
   cinemaMode = true;
   // Bei jedem frischen Aufruf wieder eingeklappt starten (nicht den Zustand
   // eines vorherigen Besuchs behalten).
-  cinemaSectionExpanded = { now: false, soon: false, later: false };
+  cinemaSectionLimit = { now: CINEMA_SECTION_PREVIEW, soon: CINEMA_SECTION_PREVIEW, later: CINEMA_SECTION_PREVIEW };
   document.querySelector('.tabs').style.display = 'none';
   // Discovery-Button ergibt auf der Kino-Seite keinen Sinn -- Discovery
   // durchsucht den normalen Filme/Serien-Katalog, nicht die Kinostarts. Der
@@ -2323,7 +2338,7 @@ if (_cinemaSortBtn && _cinemaSortMenu) {
   _cinemaSortMenu.querySelectorAll('button').forEach(function(b){
     b.onclick = function(){
       cinemaSortKey = b.dataset.sort;
-      cinemaSectionExpanded = { now: false, soon: false, later: false };
+      cinemaSectionLimit = { now: CINEMA_SECTION_PREVIEW, soon: CINEMA_SECTION_PREVIEW, later: CINEMA_SECTION_PREVIEW };
       _cinemaSortMenu.querySelectorAll('button').forEach(function(bb){ bb.classList.toggle('active', bb === b); });
       _cinemaSortMenu.style.display = 'none';
       renderCinemaPage();
@@ -2623,6 +2638,13 @@ function closeNavMenu(){
 function toggleNavMenu(){
   const open = navMenu.classList.toggle('open');
   navMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  // Sortier-Dropdowns (Filme/Serien UND Kino) schliessen sich sonst nicht von
+  // selbst: ihr eigener Toggle-Button ruft e.stopPropagation() auf, wodurch
+  // der globale "Klick ausserhalb schliesst"-Listener (siehe weiter unten) den
+  // Klick auf das Menue-Symbol nie sieht -- das Dropdown blieb offen und
+  // ueberlagerte das gerade geoeffnete Nav-Menue.
+  var _sm = document.getElementById('sortMenu'); if (_sm) _sm.style.display = 'none';
+  var _csm = document.getElementById('cinemaSortMenu'); if (_csm) _csm.style.display = 'none';
 }
 navMenuBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleNavMenu(); });
 navMenu.addEventListener('click', (e) => e.stopPropagation());
