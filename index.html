@@ -484,6 +484,11 @@
      (siehe watchRowHtml, opts.nurTrailer) -- ein "auto"-Abstand wuerde ihn
      sonst als einziges Element nach rechts schieben. */
   .watch-row.nur-trailer .trailer-btn { margin-left: 0; }
+  /* Auf schmalen Handys passen vier Buttons sonst nicht nebeneinander und der
+     Trailer rutscht in eine zweite Zeile (bei 420px fehlten genau 7 Pixel). */
+  @media (max-width: 520px) {
+    .watch-btn { padding: 8px 10px; font-size: 12.5px; }
+  }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
   @media (hover: hover) { .watch-btn:hover { border-color: var(--accent); color: var(--accent); } }
