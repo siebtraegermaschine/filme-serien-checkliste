@@ -211,6 +211,25 @@ CREATE TABLE IF NOT EXISTS watch_providers_cache (
   PRIMARY KEY (tmdb_id, type, region)
 );
 
+-- Nachtraeglich per TMDB-Suche (Titel+Jahr+Typ) ermittelte TMDB-IDs fuer die
+-- 600 urspruenglich manuell kuratierten Katalog-Titel, die alle tmdb_id NULL
+-- haben. Ohne diese Zuordnung koennten sie die Ansehen/Leihen/Kaufen-Buttons
+-- nicht nutzen (mehr als die Haelfte aller Titel unter Filme/Serien).
+--
+-- Bewusst eine EIGENE Tabelle, statt titles.tmdb_id zu befuellen: die Suche ist
+-- eine Heuristik und kann danebenliegen. Ein Fehltreffer wuerde in titles einen
+-- kuratierten Katalog-Eintrag dauerhaft mit fremden Daten verknuepfen (und ueber
+-- UNIQUE (tmdb_id, type) auch noch mit einem echten Discovery-Titel kollidieren
+-- koennen). Hier bleibt er folgenlos korrigierbar: Zeile loeschen genuegt.
+--
+-- tmdb_id IS NULL bedeutet "gesucht, aber nichts Passendes gefunden" -- damit
+-- wird nicht bei jedem Oeffnen des Titels erneut erfolglos gesucht.
+CREATE TABLE IF NOT EXISTS title_tmdb_resolution (
+  title_id    BIGINT PRIMARY KEY REFERENCES titles(id) ON DELETE CASCADE,
+  tmdb_id     INTEGER,
+  resolved_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 -- Protokolliert manuell eingegebene Suchbegriffe (siehe backend/routes/searchLog.js)
 -- fuer spaetere Auswertung, welche Titel/Begriffe Nutzer:innen suchen, aber (noch)
 -- nicht finden -- Basis fuer Katalog-Erweiterungen. user_email ist NULL, wenn die

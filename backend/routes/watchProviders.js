@@ -34,6 +34,83 @@ function rowToPayload(row) {
   };
 }
 
+const EMPTY = { flatrate: [], rent: [], buy: [], region: REGION, fetchedAt: null };
+
+// Sucht die TMDB-ID eines Katalog-Titels ueber Titel + Jahr + Typ. Bewusst
+// streng: ohne Jahresuebereinstimmung (±1 Jahr, damit abweichende
+// Kino-/Erstausstrahlungsjahre nicht stoeren) wird KEIN Treffer akzeptiert --
+// lieber keine Buttons als die Verfuegbarkeit eines falschen Films.
+async function searchTmdbId(kind, title, year) {
+  const key = process.env.TMDB_API_KEY;
+  if (!key || !title) return null;
+  const url = new URL(`${API}/search/${kind}`);
+  url.searchParams.set('api_key', key);
+  url.searchParams.set('language', process.env.TMDB_LANG || 'de-DE');
+  url.searchParams.set('query', title);
+  url.searchParams.set('include_adult', 'false');
+  const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+  if (!res.ok) throw new Error(`TMDB ${res.status}`);
+  const data = await res.json();
+  const results = data.results || [];
+  if (!results.length) return null;
+  if (!year) return results[0].id;
+  const dateField = kind === 'movie' ? 'release_date' : 'first_air_date';
+  const match = results.find((r) => {
+    const y = Number.parseInt(String(r[dateField] || '').slice(0, 4), 10);
+    return Number.isInteger(y) && Math.abs(y - year) <= 1;
+  });
+  return match ? match.id : null;
+}
+
+// Liefert die TMDB-ID zu einer internen titles.id -- entweder direkt aus
+// titles.tmdb_id, aus einer frueheren Aufloesung, oder per TMDB-Suche.
+// Gibt {tmdbId, type} zurueck; tmdbId ist null, wenn nichts gefunden wurde.
+async function resolveTmdbId(titleId) {
+  const { rows } = await pool.query(
+    `SELECT t.id, t.tmdb_id, t.type, t.title, t.year, r.tmdb_id AS resolved_id,
+            (r.title_id IS NOT NULL) AS has_resolution
+       FROM titles t
+       LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
+      WHERE t.id = $1`,
+    [titleId]
+  );
+  const row = rows[0];
+  if (!row) return null;
+  if (row.tmdb_id) return { tmdbId: row.tmdb_id, type: row.type };
+  // Schon einmal gesucht? Dann Ergebnis wiederverwenden -- auch ein negatives
+  // (resolved_id IS NULL), damit erfolglose Suchen sich nicht wiederholen.
+  if (row.has_resolution) return { tmdbId: row.resolved_id, type: row.type };
+
+  let found = null;
+  try {
+    found = await searchTmdbId(TMDB_KIND[row.type], row.title, row.year);
+  } catch (err) {
+    // Fehlgeschlagene Suche NICHT als "nichts gefunden" festschreiben --
+    // beim naechsten Mal soll es erneut versucht werden.
+    console.error(`watch-providers: TMDB-Suche fehlgeschlagen (${row.title}):`, err.message);
+    return { tmdbId: null, type: row.type };
+  }
+  await pool.query(
+    `INSERT INTO title_tmdb_resolution (title_id, tmdb_id) VALUES ($1, $2)
+     ON CONFLICT (title_id) DO UPDATE SET tmdb_id = EXCLUDED.tmdb_id, resolved_at = now()`,
+    [titleId, found]
+  );
+  return { tmdbId: found, type: row.type };
+}
+
+// GET /api/watch-providers/by-title/:titleId -- Einstieg fuer Titel, deren
+// TMDB-ID im Frontend nicht bekannt ist (die 600 kuratierten Katalog-Titel
+// haben durchweg tmdb_id NULL). Loest sie bei Bedarf per Suche auf.
+router.get('/by-title/:titleId', async (req, res) => {
+  const titleId = Number.parseInt(req.params.titleId, 10);
+  if (!Number.isInteger(titleId) || titleId <= 0) {
+    return res.status(400).json({ error: 'invalid_params' });
+  }
+  const resolved = await resolveTmdbId(titleId);
+  if (!resolved || !resolved.tmdbId) return res.json(EMPTY);
+  return respondWithProviders(res, resolved.type, resolved.tmdbId);
+});
+
 // GET /api/watch-providers/:type/:tmdbId -- oeffentlich (kein Login noetig,
 // analog /api/streaming und /api/cinema). Liefert IMMER 200 mit leeren Listen,
 // wenn nichts bekannt ist oder TMDB gerade klemmt: die Detailansicht soll
@@ -44,7 +121,10 @@ router.get('/:type/:tmdbId', async (req, res) => {
   if (!TMDB_KIND[type] || !Number.isInteger(tmdbId) || tmdbId <= 0) {
     return res.status(400).json({ error: 'invalid_params' });
   }
+  return respondWithProviders(res, type, tmdbId);
+});
 
+async function respondWithProviders(res, type, tmdbId) {
   const { rows } = await pool.query(
     `SELECT * FROM watch_providers_cache
       WHERE tmdb_id = $1 AND type = $2 AND region = $3`,
@@ -61,7 +141,7 @@ router.get('/:type/:tmdbId', async (req, res) => {
     // Ohne Key kann nicht nachgeladen werden. Ein (abgelaufener) Cache-Eintrag
     // ist immer noch besser als nichts, sonst leere Listen.
     if (cached) return res.json(rowToPayload(cached));
-    return res.json({ flatrate: [], rent: [], buy: [], region: REGION, fetchedAt: null });
+    return res.json(EMPTY);
   }
 
   let data;
@@ -75,7 +155,7 @@ router.get('/:type/:tmdbId', async (req, res) => {
     // Netzwerkfehler/Rate-Limit: lieber veraltete Daten ausliefern als gar keine.
     console.error(`watch-providers: TMDB-Abruf fehlgeschlagen (${type}/${tmdbId}):`, err.message);
     if (cached) return res.json(rowToPayload(cached));
-    return res.json({ flatrate: [], rent: [], buy: [], region: REGION, fetchedAt: null });
+    return res.json(EMPTY);
   }
 
   const regional = (data.results || {})[REGION] || {};
@@ -103,6 +183,6 @@ router.get('/:type/:tmdbId', async (req, res) => {
   );
 
   res.json({ ...payload, region: REGION, fetchedAt: new Date().toISOString() });
-});
+}
 
 export default router;

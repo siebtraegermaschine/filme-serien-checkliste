@@ -475,7 +475,11 @@
      Discovery-Regeln. */
   .watch-row { display: none; clear: both; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); cursor: default; }
   li.item.show-details .watch-row { display: block; }
-  .watch-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  /* "Ansehen" linksbuendig, "Leihen"/"Kaufen" rechts -- dieselbe Aufteilung wie
+     in .det-actions darunter, wo .similar-btn per margin-right:auto nach links
+     rutscht und Watchlist/Gesehen rechts stehen. */
+  .watch-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; justify-content: flex-end; }
+  .watch-btn[data-cat="flatrate"] { margin-right: auto; }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
   @media (hover: hover) { .watch-btn:hover { border-color: var(--accent); color: var(--accent); } }
@@ -920,8 +924,15 @@ function candDetailsHtml(c, kind){
   if (c.c && c.c.length) rows += '<div class="credits"><b>Besetzung:</b> '+nameChips(c.c)+'</div>';
   if (c.d) rows += '<div class="credits"><b>'+dirLabel+':</b> '+nameChips(splitNames(c.d))+'</div>';
   var plotHtml = c.ov ? '<div class="plot">'+esc(c.ov)+'</div>' : '';
-  if (!plotHtml && !tagsHtml && !rows) return '';
-  return '<div class="details">' + plotHtml + (tagsHtml ? '<div class="tags">'+tagsHtml+'</div>' : '') + rows + '</div>';
+  // Grosses Poster wie im Hauptlisten-Pfad (siehe render/detPoster): beim
+  // Aufklappen wird das kleine Vorschaubild ausgeblendet (li.disc.show-details
+  // .dposter), damit die Buttons darunter die volle Breite bekommen und wie
+  // unter Filme/Serien nebeneinander passen -- ohne dieses Poster hier waere
+  // die aufgeklappte Zeile dann ganz ohne Bild.
+  var posterSrc = c.poster64 || (c.p ? (POSTER + c.p) : null);
+  var posterHtml = posterSrc ? '<img class="detposter" src="'+escAttr(posterSrc)+'" alt="" loading="lazy">' : '';
+  if (!plotHtml && !tagsHtml && !rows && !posterHtml) return '';
+  return '<div class="details">' + posterHtml + plotHtml + (tagsHtml ? '<div class="tags">'+tagsHtml+'</div>' : '') + rows + '</div>';
 }
 function providerChipsHtml(providers){
   if (!providers || !providers.length) return '';
@@ -968,25 +979,30 @@ function watchSearchUrl(providerId, title){
   var build = WATCH_SEARCH_URLS[providerId];
   return build ? build(encodeURIComponent(title)) : null;
 }
-// tmdbId+type -> Promise der Anbieterdaten. Haelt bewusst das PROMISE (nicht das
+// API-Pfad -> Promise der Anbieterdaten. Haelt bewusst das PROMISE (nicht das
 // Ergebnis) fest, damit zwei schnelle Klicks auf verschiedene Kategorien
 // desselben Titels sich einen einzigen Request teilen.
 var watchDataCache = new Map();
-function loadWatchData(tmdbId, type){
-  var ck = type + ':' + tmdbId;
-  if (!watchDataCache.has(ck)) {
-    watchDataCache.set(ck, apiRequest('GET', '/api/watch-providers/' + type + '/' + tmdbId)
+function loadWatchData(api){
+  if (!watchDataCache.has(api)) {
+    watchDataCache.set(api, apiRequest('GET', api)
       .catch(function(){ return { flatrate: [], rent: [], buy: [] }; }));
   }
-  return watchDataCache.get(ck);
+  return watchDataCache.get(api);
 }
-function watchRowHtml(tmdbId, type, title){
-  // Reine Katalog-Alttitel ohne TMDB-ID koennen nicht abgefragt werden -- dort
-  // entfaellt die Zeile ganz, statt drei Buttons anzubieten, die nie etwas finden.
-  if (!tmdbId || !type) return '';
+function watchRowHtml(tmdbId, type, title, realId){
+  // Bevorzugt die TMDB-ID (spart dem Backend die Suche). Fehlt sie, laeuft die
+  // Abfrage ueber die interne Titel-ID: die 600 urspruenglich kuratierten
+  // Katalog-Titel haben durchweg tmdb_id NULL, das Backend loest sie dann per
+  // TMDB-Suche auf (siehe routes/watchProviders.js, /by-title). Ohne beides --
+  // reiner Streaming-/Discovery-Kandidat ohne TMDB-ID, den es so nicht geben
+  // sollte -- entfaellt die Zeile ganz.
+  var api = (tmdbId && type) ? ('/api/watch-providers/' + type + '/' + tmdbId)
+          : (realId ? ('/api/watch-providers/by-title/' + realId) : null);
+  if (!api) return '';
   // escAttr statt esc: esc() laesst Anfuehrungszeichen unangetastet -- ein Titel
   // wie 'Good Night, and Good Luck."' wuerde das Attribut sonst vorzeitig beenden.
-  return '<div class="watch-row" data-tmdb="' + escAttr(String(tmdbId)) + '" data-wtype="' + escAttr(type) +
+  return '<div class="watch-row" data-wapi="' + escAttr(api) +
          '" data-wtitle="' + escAttr(title || '') + '">' +
     '<div class="watch-btns">' +
       WATCH_CATS.map(function(c){
@@ -1001,7 +1017,7 @@ function renderWatchPanel(row, cat){
   var title = row.dataset.wtitle || '';
   panel.hidden = false;
   panel.innerHTML = '<div class="watch-note">Lädt …</div>';
-  loadWatchData(row.dataset.tmdb, row.dataset.wtype).then(function(data){
+  loadWatchData(row.dataset.wapi).then(function(data){
     // Zwischenzeitlich weitergeklickt (andere Kategorie/zugeklappt)? Dann ist
     // diese Antwort veraltet und darf das Panel nicht mehr ueberschreiben.
     if (row.dataset.openCat !== cat) return;
@@ -1373,7 +1389,7 @@ function render() {
       '<span class="info"><div class="title">' + '<span class="ttext">' + item[0] + '</span>' + scoreBadge + '</div>' +
       '<div class="meta">' + metaHtml(item[1], activeTab) + '</div>' +
       providerChipsHtml(d.providers) + detailsHtml +
-      watchRowHtml(d.tmdbId, d.type, item[0]) + actionsHtml + '</span>';
+      watchRowHtml(d.tmdbId, d.type, item[0], d.id) + actionsHtml + '</span>';
     wireRow(li, activeTab, i);
     attachSwipeToRemove(li, function(){ removeFromMyTitles(s.det[i].id); });
     list.appendChild(li);
@@ -2877,6 +2893,11 @@ document.head.insertAdjacentHTML('beforeend',
   '<style>'+
   'li.disc.show-details .details{display:block;}'+
   'li.disc.show-details .watch-row{display:block;}'+
+  // Kleines Vorschaubild beim Aufklappen ausblenden (genau wie
+  // li.item.show-details .dposter unter Filme/Serien) -- sonst bleibt .dinfo
+  // um die Posterbreite schmaler und die drei Buttons darunter brechen um.
+  // Das grosse Poster kommt stattdessen aus candDetailsHtml.
+  'li.disc.show-details .dposter{display:none;}'+
   '.dproviders{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px;}'+
   '.provider-chip{display:inline-block;background:var(--card-hover);border:1px solid var(--border);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:var(--text-dim);}'+
   'li.disc .details{width:100%;margin-top:9px;padding-top:9px;}'+
@@ -2940,7 +2961,7 @@ function poolItemLi(item, score, opts){
       '<div class="dmeta">'+esc(candMeta(item))+' · '+typeLabel+'</div>'+
       providerChipsHtml(item.providers) +
       candDetailsHtml(item, item.type) +
-      watchRowHtml(item.tmdbId, item.type, item.t) + actionsHtml + '</div>';
+      watchRowHtml(item.tmdbId, item.type, item.t, item.realId) + actionsHtml + '</div>';
   var seenBtn = li.querySelector('.seen-btn');
   seenBtn.addEventListener('click', function(e){
     e.stopPropagation();
