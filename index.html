@@ -1551,6 +1551,8 @@ function poolToDet(item){
     // ueber die TMDB-ID ab, nicht ueber die interne realId.
     tmdbId: item.tmdbId,
     type: item.type,
+    vc: item.vc,        // Stimmenzahl fuer die gewichtete Note
+
     p: item.ov || '',
     h: item.kw || [],
     c: item.c || [],
@@ -1658,7 +1660,7 @@ const searchEl = document.getElementById('search');
 
 function metaRating(meta){ var m=String(meta).match(/⭐\s*([0-9]+(?:[.,][0-9]+)?)/); return m ? parseFloat(m[1].replace(',', '.')) : 0; }
 function scoreItem(item, d, prof){
-  var cc = { g:[metaGenre(item[1])].filter(Boolean), kw:(d && d.h) || [], c:(d && d.c) || [], d:(d && d.d) || '', y: metaYear(item[1]), r:metaRating(item[1]) };
+  var cc = { g:[metaGenre(item[1])].filter(Boolean), kw:(d && d.h) || [], c:(d && d.c) || [], d:(d && d.d) || '', y: metaYear(item[1]), r:metaRating(item[1]), vc:(d && d.vc) };
   return scoreCand(cc, prof).score;
 }
 function metaYear(meta){
@@ -1735,7 +1737,7 @@ function render() {
     // nach Bewertung sortiert eingebettet waren; die API liefert sie jetzt
     // alphabetisch, deshalb hier explizit nach Bewertung absteigend sortieren.
     const _rt = {};
-    _order.forEach(function (i) { _rt[i] = metaRating(s.data[i][1]); });
+    _order.forEach(function (i) { _rt[i] = gewichteteNote(metaRating(s.data[i][1]), s.pool[i] && s.pool[i].vc); });
     _order.sort(function (a, b) { return (_rt[b] - _rt[a]) || (a - b); });
   }
   _order.forEach(function (i) {
@@ -2541,6 +2543,31 @@ function buildProfile(){
   });
   return { genre, cast, dir, kw, years, n: Math.max(1,n), usedAll };
 }
+/* ---- Gewichtete Bewertung ----
+   Eine glatte 10,0 aus EINER Stimme ist keine 10,0. Das Streaming-Angebot hat
+   bewusst keine Mindest-Stimmenzahl (deutsche Produktionen haben bei TMDB oft
+   nur eine Handvoll, obwohl sie etabliert sind) -- ohne Gegenmassnahme standen
+   solche Titel deshalb ganz oben.
+
+   Statt sie auszublenden zieht die Formel wenig bewertete Titel zum
+   Durchschnitt hin -- dieselbe, die IMDb fuer seine Top 250 verwendet:
+     gewichtet = (v/(v+m)) * Note + (m/(v+m)) * Durchschnitt
+   Ein Titel mit 1 Stimme und 10,0 landet damit bei ~6,8, Interstellar mit
+   40.524 Stimmen bleibt bei 8,48. Niemand verschwindet, die Reihenfolge stimmt.
+
+   Angezeigt wird weiterhin die ECHTE Note samt Stimmenzahl -- die Gewichtung
+   wirkt nur auf Sortierung und Taste-Score. */
+var BEWERTUNG_M = 100;          // Schwelle: ab hier zaehlt die eigene Note voll
+var BEWERTUNG_MITTEL = 6.76;    // Durchschnitt ueber alle Titel im Katalog
+function gewichteteNote(note, stimmen){
+  var r = Number(note) || 0;
+  if (!r) return 0;
+  var v = Number(stimmen);
+  // Ohne bekannte Stimmenzahl NICHT abwerten: die kuratierten Katalog-Titel
+  // haben sie erst nach dem Nachtrag, und die sind durchweg etabliert.
+  if (!Number.isFinite(v) || v <= 0) return r;
+  return (v / (v + BEWERTUNG_M)) * r + (BEWERTUNG_M / (v + BEWERTUNG_M)) * BEWERTUNG_MITTEL;
+}
 function scoreCand(c, prof){
   let sc=0;
   for (const g of (c.g||[])) if (prof.genre[g]) sc += 25*(prof.genre[g]/prof.n);
@@ -2560,7 +2587,7 @@ function scoreCand(c, prof){
     const nearby = prof.years.filter(y => Math.abs(y - c.y) <= 4).length;
     if (nearby) sc += 15*(nearby/prof.n);
   }
-  sc += (c.r||0);
+  sc += gewichteteNote(c.r, c.vc);
   return { score: Math.min(99, Math.round(sc)), shared, dirHit };
 }
 // Mini-Profil aus GENAU einem Titel (statt aus allen Watchlist-/Gesehen-Titeln
@@ -2742,7 +2769,7 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
     return { row: row, item: item, score: scoreMitProfilen(item, profile) };
   }).filter(function(e){ return fskErlaubt(e.item); });
   entries.sort(function(a, b){
-    if (cinemaSortKey === 'imdb') return (b.item.r || 0) - (a.item.r || 0);
+    if (cinemaSortKey === 'imdb') return gewichteteNote(b.item.r, b.item.vc) - gewichteteNote(a.item.r, a.item.vc);
     if (cinemaSortKey === 'taste') return b.score - a.score;
     // 'date': nach dem GENAUEN Kinostart-Datum (nicht nur Jahr) -- "now" zeigt
     // zuerst die zuletzt gestarteten Titel, "soon"/"later" zuerst die naechsten
@@ -3991,7 +4018,7 @@ function renderDiscovery(){
   var sortKey = effectiveSort('discovery');
   var scored = pool.map(function(item){ return { item: item, score: scoreMitProfilen(item, profile) }; });
   scored.sort(function(a,b){
-    if (sortKey === 'imdb') return (b.item.r||0) - (a.item.r||0) || b.score - a.score;
+    if (sortKey === 'imdb') return gewichteteNote(b.item.r, b.item.vc) - gewichteteNote(a.item.r, a.item.vc) || b.score - a.score;
     if (sortKey === 'year') return (b.item.y||0) - (a.item.y||0) || b.score - a.score;
     if (sortKey === 'newstream') {
       var av = a.item.fs ? new Date(a.item.fs).getTime() : -Infinity;
