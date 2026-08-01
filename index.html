@@ -527,6 +527,41 @@
   .trailer-note { color:var(--text-dim); font-size:12px; margin-top:10px; text-align:center; }
   .trailer-note a { color:var(--text-dim); text-decoration:underline; }
 
+  /* "Ich"-Button oben links -- Gegenstueck zum Menue oben rechts. */
+  .profile-btn { position:absolute; top:calc(6px + env(safe-area-inset-top, 0px)); left:16px; height:40px;
+    max-width:45vw; display:flex; align-items:center; gap:6px; padding:0 12px;
+    background:var(--card); border:1px solid var(--border); border-radius:8px;
+    color:var(--text); font-size:14px; font-weight:600; cursor:pointer; z-index:20; }
+  @media (hover: hover) { .profile-btn:hover { border-color:var(--accent); color:var(--accent); } }
+  /* Deutlich sichtbar, sobald gefiltert wird -- sonst wirkt die verkuerzte
+     Liste wie ein Fehler statt wie eine bewusste Einschraenkung. */
+  .profile-btn.filtering { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+  #profileBtnLabel { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .profile-btn-caret { font-size:10px; flex-shrink:0; }
+
+  .profile-modal { max-width:420px; width:100%; }
+  .profile-list { margin:0 -4px; }
+  .profile-item { position:relative; display:flex; align-items:center; gap:10px; padding:11px 8px;
+    border-radius:8px; cursor:pointer; overflow:hidden; }
+  @media (hover: hover) { .profile-item:hover { background:var(--card-hover); } }
+  .profile-item.active { background:var(--accent-soft); }
+  .profile-item .pi-name { flex:1; font-size:14.5px; color:var(--text); }
+  .profile-item.active .pi-name { color:var(--accent); font-weight:600; }
+  .profile-item .pi-check { width:18px; height:18px; accent-color:var(--accent); flex-shrink:0; }
+  /* Sichtbares Kreuz zusaetzlich zur Wischgeste -- am Desktop laesst sich nicht
+     wischen, und viele finden die Geste ohnehin nicht. */
+  .profile-item .pi-del { background:none; border:none; color:var(--text-dim); font-size:15px;
+    cursor:pointer; padding:4px 6px; border-radius:6px; flex-shrink:0; }
+  @media (hover: hover) { .profile-item .pi-del:hover { color:#e2574c; } }
+  .profile-item.self .pi-del { visibility:hidden; }
+  .profile-add { width:100%; margin-top:12px; padding:11px; border-radius:9px; cursor:pointer;
+    background:var(--card); border:1px dashed var(--border); color:var(--text-dim);
+    font-size:14px; font-weight:600; }
+  @media (hover: hover) { .profile-add:hover { border-color:var(--accent); color:var(--accent); } }
+  .profile-empty { color:var(--text-dim); font-size:13px; padding:10px 8px; }
+  /* Hinweis an Titeln, deren Zustand bei der anderen Person abweicht. */
+  .match-note { margin-top:6px; font-size:11.5px; color:var(--accent); }
+
   /* Einstellungen -> Streaminganbieter */
   .prov-intro { color: var(--text-dim); font-size: 13px; line-height: 1.5; margin: 0 0 12px; }
   .prov-list { overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch; margin: 0 -4px; }
@@ -630,6 +665,9 @@
     </button>
     <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)<br>2. Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</div>
   </div>
+  <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-haspopup="true" aria-expanded="false">
+    <span id="profileBtnLabel">Ich</span><span class="profile-btn-caret">▾</span>
+  </button>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
     <button type="button" id="howToBtn" class="nav-menu-item">Anleitung</button>
@@ -747,6 +785,7 @@
     <button class="modal-x" id="authModalX" aria-label="Schließen">✕</button>
     <h3 id="authTitle">Anmelden</h3>
     <form id="authForm" class="auth-form">
+      <label id="authNameRow" style="display:none">Vorname / Profilname<input type="text" id="authDisplayName" autocomplete="given-name" maxlength="40"></label>
       <label>E-Mail<input type="email" id="authEmail" required autocomplete="email"></label>
       <label>Passwort<input type="password" id="authPassword" required autocomplete="current-password" minlength="8"></label>
       <div id="authError" class="auth-error"></div>
@@ -821,6 +860,39 @@
       <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Titel</button>
       <button type="button" id="settingsAccountBtn" class="modal-yes">Zugangsdaten</button>
     </div>
+  </div>
+</div>
+
+<div id="profileModal" class="modal-overlay" style="display:none">
+  <div class="modal profile-modal">
+    <button class="modal-x" id="profileModalX" aria-label="Schließen">✕</button>
+    <h3>Gemeinsam schauen</h3>
+    <p class="prov-intro">Wähle Personen aus, mit denen du etwas sehen möchtest. Angezeigt
+      werden dann nur noch Titel, die auch bei ihnen auf der Liste stehen.</p>
+    <div class="profile-list" id="profileList"></div>
+    <button type="button" id="profileInviteBtn" class="profile-add">＋ Person einladen</button>
+  </div>
+</div>
+
+<div id="inviteModal" class="modal-overlay" style="display:none">
+  <div class="modal auth-modal">
+    <button class="modal-x" id="inviteModalX" aria-label="Schließen">✕</button>
+    <h3 id="inviteTitle">Einladung</h3>
+    <p class="prov-intro" id="inviteText">Lädt …</p>
+    <div class="modal-actions" id="inviteActions"></div>
+  </div>
+</div>
+
+<div id="nameModal" class="modal-overlay" style="display:none">
+  <div class="modal auth-modal">
+    <h3>Wie sollen dich andere sehen?</h3>
+    <p class="prov-intro">Dieser Name wird Personen angezeigt, mit denen du dich verknüpfst.
+      Ein Vorname oder Spitzname genügt.</p>
+    <form id="nameForm" class="auth-form">
+      <label>Vorname / Profilname<input type="text" id="nameInput" required maxlength="40" autocomplete="given-name"></label>
+      <div id="nameError" class="auth-error"></div>
+      <button type="submit" class="modal-yes">Speichern</button>
+    </form>
   </div>
 </div>
 
@@ -1447,8 +1519,14 @@ const state = {
 // hier auftaucht (ueber die Alle/Ungesehen/Gesehen-Filter dieser Seiten findet man
 // dann wieder, was man bereits gesehen hat).
 function rebuild(){
-  const filmeItems  = POOL.filter(function(item){ return item.type === 'movie'  && (getWatchlistFlag(item.realId) || getSeen(item.realId)); });
-  const serienItems = POOL.filter(function(item){ return item.type === 'series' && (getWatchlistFlag(item.realId) || getSeen(item.realId)); });
+  // matchInfo().sichtbar haengt bewusst NUR davon ab, ob der Titel bei allen
+  // ausgewaehlten Personen ueberhaupt auf der Liste steht -- nicht von den
+  // Watchlist-/Gesehen-Schaltern. Die wirken erst beim Rendern (siehe
+  // matchNoteHtml), sonst muesste bei jedem Umschalten neu aufgebaut werden.
+  const eigene = function(item){ return getWatchlistFlag(item.realId) || getSeen(item.realId); };
+  const gemeinsam = function(item){ return matchInfo(item.realId).sichtbar; };
+  const filmeItems  = POOL.filter(function(item){ return item.type === 'movie'  && eigene(item) && gemeinsam(item); });
+  const serienItems = POOL.filter(function(item){ return item.type === 'series' && eigene(item) && gemeinsam(item); });
   FILME  = filmeItems.map(poolToItemTuple);
   SERIEN = serienItems.map(poolToItemTuple);
   DETAILS = { filme: filmeItems.map(poolToDet), serien: serienItems.map(poolToDet) };
@@ -1567,6 +1645,15 @@ function render() {
   list.innerHTML = '';
   updateSortMenuActive();
   if (!s.data.length) {
+    // Bei aktivem Abgleich ist die leere Liste etwas voellig anderes als eine
+    // leere Watchlist -- ohne eigenen Hinweis wirkt sie wie ein Fehler.
+    if (matchAktiv()) {
+      var wer = MATCH_WITH.map(profilName).join(' und ');
+      list.innerHTML = '<li class="watch-empty">Keine gemeinsamen Titel mit ' + esc(wer) +
+        '. Je mehr ihr beide eurer Watchlist hinzufügt, desto mehr Übereinstimmungen gibt es. ' +
+        'Oben links kannst du die Auswahl wieder aufheben.</li>';
+      return;
+    }
     list.innerHTML = '<li class="watch-empty">Dies ist deine Watchlist. Füge Titel über den Bereich „Discovery" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>.</li>';
     return;
   }
@@ -1626,7 +1713,7 @@ function render() {
       '</div>';
     const detailsHtml =
       '<div class="details">' + detPoster +
-        plotDivHtml(s.pool[i]) +
+        plotDivHtml(s.pool[i]) + matchNoteHtml(d.id) +
         (tagsHtml ? '<div class="tags">' + tagsHtml + '</div>' : '') +
         creditRows +
       '</div>';
@@ -2582,7 +2669,7 @@ function cinemaRowToItem(row, poolByTmdb){
     p: row.p || null, poster64: null, r: row.r, ov: ov, providers: [],
   };
 }
-function renderCinemaSection(key, rows, prof, poolByTmdb){
+function renderCinemaSection(key, rows, profile, poolByTmdb){
   const el = cinemaListEls[key];
   cinemaHeadingEls[key].textContent = CINEMA_LABELS[key] + (rows.length ? ' (' + rows.length + ')' : '');
   el.innerHTML = '';
@@ -2592,7 +2679,7 @@ function renderCinemaSection(key, rows, prof, poolByTmdb){
   }
   var entries = rows.map(function(row){
     var item = cinemaRowToItem(row, poolByTmdb);
-    return { row: row, item: item, score: scoreCand(item, prof).score };
+    return { row: row, item: item, score: scoreMitProfilen(item, profile) };
   });
   entries.sort(function(a, b){
     if (cinemaSortKey === 'imdb') return (b.item.r || 0) - (a.item.r || 0);
@@ -2624,12 +2711,14 @@ function renderCinemaSection(key, rows, prof, poolByTmdb){
 }
 async function renderCinemaPage(){
   const data = await loadCinemaData();
-  const prof = buildProfile();
+  // Bei aktivem Abgleich fliessen die Geschmacksprofile aller Ausgewaehlten mit
+  // ein -- die Rangfolge zeigt dann, welcher Kinofilm zu allen passt.
+  const profile = alleProfile(buildProfile());
   const poolByTmdb = new Map();
   POOL.forEach(function(p){ if (p.type === 'movie' && p.tmdbId != null) poolByTmdb.set(p.tmdbId, p); });
-  renderCinemaSection('now', data.now || [], prof, poolByTmdb);
-  renderCinemaSection('soon', data.soon || [], prof, poolByTmdb);
-  renderCinemaSection('later', data.later || [], prof, poolByTmdb);
+  renderCinemaSection('now', data.now || [], profile, poolByTmdb);
+  renderCinemaSection('soon', data.soon || [], profile, poolByTmdb);
+  renderCinemaSection('later', data.later || [], profile, poolByTmdb);
 }
 function openCinemaPage(){
   cinemaMode = true;
@@ -2823,6 +2912,273 @@ document.getElementById('settingsBtn').onclick = () => { closeNavMenu(); openSet
 document.getElementById('settingsModalX').onclick = closeSettingsModal;
 _settingsModal.addEventListener('click', function(e){ if (e.target === _settingsModal) closeSettingsModal(); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _settingsModal.style.display !== 'none') closeSettingsModal(); });
+
+/* ---- Gemeinsam schauen: verknuepfte Profile als Filter ----
+   LINKED_PROFILES sind die verknuepften Personen, LINKED_PROGRESS ihre
+   Titellisten (title_id -> {s,w}), MATCH_WITH die aktuell ausgewaehlten.
+   Ist etwas ausgewaehlt, bleiben nur Titel uebrig, die bei ALLEN Ausgewaehlten
+   auf der Liste stehen. */
+var LINKED_PROFILES = [];
+var LINKED_PROGRESS = {};      // userId -> Map(titleId -> {s,w})
+var MATCH_WITH = [];           // ausgewaehlte userIds
+
+function matchAktiv(){ return MATCH_WITH.length > 0; }
+function profilName(id){
+  var p = LINKED_PROFILES.find(function(x){ return x.id === id; });
+  return p ? p.name : 'Unbekannt';
+}
+// Zustand eines Titels bei einer bestimmten Person -- null, wenn er dort gar
+// nicht auf der Liste steht.
+function fremdZustand(userId, titleId){
+  var m = LINKED_PROGRESS[userId];
+  return (m && titleId != null && m.get(titleId)) || null;
+}
+// Kernregel: Der Titel muss bei ALLEN Ausgewaehlten vorkommen. Weicht deren
+// Zustand von der eigenen Ansicht ab (z.B. ich Watchlist, sie schon gesehen),
+// bleibt er sichtbar -- die Namen landen in "abweichend" und werden als Hinweis
+// an der Zeile angezeigt.
+function matchInfo(titleId){
+  if (!matchAktiv()) return { sichtbar: true, abweichend: [] };
+  if (titleId == null) return { sichtbar: false, abweichend: [] };
+  var abweichend = [];
+  for (var i = 0; i < MATCH_WITH.length; i++) {
+    var z = fremdZustand(MATCH_WITH[i], titleId);
+    if (!z) return { sichtbar: false, abweichend: [] };
+    // Was erwartet die aktuelle Ansicht? Ist weder Watchlist noch Gesehen
+    // aktiv, genuegt "steht ueberhaupt auf der Liste".
+    if (watchlistFilterOn && !seenFilterOn && !z.w) abweichend.push(profilName(MATCH_WITH[i]));
+    else if (seenFilterOn && !watchlistFilterOn && !z.s) abweichend.push(profilName(MATCH_WITH[i]));
+  }
+  return { sichtbar: true, abweichend: abweichend };
+}
+function matchNoteHtml(titleId){
+  var info = matchInfo(titleId);
+  if (!info.abweichend.length) return '';
+  var text = watchlistFilterOn
+    ? info.abweichend.join(', ') + (info.abweichend.length > 1 ? ' haben' : ' hat') + ' das schon gesehen'
+    : info.abweichend.join(', ') + (info.abweichend.length > 1 ? ' wollen' : ' will') + ' das noch sehen';
+  return '<div class="match-note">' + esc(text) + '</div>';
+}
+
+// Geschmacksprofil einer verknuepften Person -- aufgebaut wie buildProfile(),
+// nur aus deren Titelliste. Alle Titel zaehlen gleich: ihre Bewertungen werden
+// bewusst nicht uebertragen (siehe /api/links/progress), also gibt es keine
+// Gewichtung. Nur das erste Genre je Titel, exakt wie in buildProfile.
+function buildProfileForLinked(uid){
+  var m = LINKED_PROGRESS[uid];
+  if (!m) return null;
+  var genre = {}, cast = {}, dir = {}, kw = {}, years = [], n = 0;
+  POOL.forEach(function(item){
+    if (item.realId == null || !m.has(item.realId)) return;
+    var g = (item.g || [])[0]; if (g) genre[g] = (genre[g] || 0) + 1;
+    (item.c || []).forEach(function(a){ if (a) cast[a] = (cast[a] || 0) + 1; });
+    if (item.d) dir[item.d] = (dir[item.d] || 0) + 1;
+    (item.kw || []).forEach(function(k){ if (k) kw[k] = (kw[k] || 0) + 1; });
+    if (item.y) years.push(item.y);
+    n++;
+  });
+  return { genre: genre, cast: cast, dir: dir, kw: kw, years: years, n: Math.max(1, n), usedAll: false };
+}
+// Fuers Kino: Im Kino watchlistet kaum jemand Filme, die erst anlaufen -- ein
+// Listenabgleich waere dort fast immer leer. Stattdessen zaehlt, wie gut ein
+// Film zu ALLEN Beteiligten passt. Gemittelt statt Minimum, weil ein duennes
+// Profil (wenige Titel) sonst die gesamte Rangfolge an sich reisst.
+function alleProfile(meinProf){
+  var liste = [meinProf];
+  MATCH_WITH.forEach(function(uid){
+    var p = buildProfileForLinked(uid);
+    if (p) liste.push(p);
+  });
+  return liste;
+}
+function scoreMitProfilen(item, profile){
+  var summe = 0;
+  profile.forEach(function(p){ summe += scoreCand(item, p).score; });
+  return Math.round(summe / profile.length);
+}
+
+async function loadLinkedProfiles(){
+  LINKED_PROFILES = []; LINKED_PROGRESS = {}; MATCH_WITH = [];
+  if (!CURRENT_USER) return;
+  try {
+    var [profile, fortschritt] = await Promise.all([
+      apiRequest('GET', '/api/links'),
+      apiRequest('GET', '/api/links/progress'),
+    ]);
+    LINKED_PROFILES = profile || [];
+    Object.keys(fortschritt || {}).forEach(function(uid){
+      var m = new Map();
+      (fortschritt[uid] || []).forEach(function(e){ m.set(e.t, { s: e.s, w: e.w }); });
+      LINKED_PROGRESS[Number(uid)] = m;
+    });
+  } catch (e) { /* ohne Verknuepfungen bleibt einfach alles wie bisher */ }
+}
+
+function updateProfileBtn(){
+  var btn = document.getElementById('profileBtn');
+  if (!btn) return;
+  btn.style.display = CURRENT_USER ? 'flex' : 'none';
+  var label = document.getElementById('profileBtnLabel');
+  if (!matchAktiv()) {
+    label.textContent = (CURRENT_USER && CURRENT_USER.displayName) || 'Ich';
+    btn.classList.remove('filtering');
+  } else {
+    label.textContent = MATCH_WITH.length === 1
+      ? ('mit ' + profilName(MATCH_WITH[0]))
+      : ('mit ' + MATCH_WITH.length + ' Personen');
+    btn.classList.add('filtering');
+  }
+}
+
+var _profileModal = document.getElementById('profileModal');
+function renderProfileList(){
+  var el = document.getElementById('profileList');
+  var ich = (CURRENT_USER && CURRENT_USER.displayName) || 'Ich';
+  var html = '<div class="profile-item self"><input type="checkbox" class="pi-check" checked disabled>' +
+             '<span class="pi-name">' + esc(ich) + ' (du)</span><button type="button" class="pi-del">✕</button></div>';
+  html += LINKED_PROFILES.map(function(p){
+    var aktiv = MATCH_WITH.indexOf(p.id) !== -1;
+    return '<div class="profile-item' + (aktiv ? ' active' : '') + '" data-uid="' + escAttr(String(p.id)) + '">' +
+             '<input type="checkbox" class="pi-check"' + (aktiv ? ' checked' : '') + '>' +
+             '<span class="pi-name">' + esc(p.name) + '</span>' +
+             '<button type="button" class="pi-del" aria-label="Verknüpfung lösen">✕</button>' +
+           '</div>';
+  }).join('');
+  if (!LINKED_PROFILES.length) {
+    html += '<div class="profile-empty">Noch niemand verknüpft. Lade jemanden ein, um gemeinsame Titel zu finden.</div>';
+  }
+  el.innerHTML = html;
+  el.querySelectorAll('.profile-item[data-uid]').forEach(function(row){
+    var uid = Number(row.dataset.uid);
+    row.onclick = function(e){
+      if (e.target.closest('.pi-del')) return;
+      var i = MATCH_WITH.indexOf(uid);
+      if (i === -1) MATCH_WITH.push(uid); else MATCH_WITH.splice(i, 1);
+      renderProfileList(); updateProfileBtn(); rebuild(); renderCurrentTab();
+    };
+    row.querySelector('.pi-del').onclick = function(e){
+      e.stopPropagation();
+      if (!confirm('Verknüpfung mit ' + profilName(uid) + ' lösen? Ihr seht dann gegenseitig keine gemeinsamen Titel mehr.')) return;
+      apiRequest('DELETE', '/api/links/' + uid).then(function(){
+        LINKED_PROFILES = LINKED_PROFILES.filter(function(p){ return p.id !== uid; });
+        delete LINKED_PROGRESS[uid];
+        MATCH_WITH = MATCH_WITH.filter(function(x){ return x !== uid; });
+        renderProfileList(); updateProfileBtn(); rebuild(); renderCurrentTab();
+      }).catch(function(){ alert('Konnte nicht gelöst werden. Bitte erneut versuchen.'); });
+    };
+    attachSwipeToRemove(row, function(){ row.querySelector('.pi-del').click(); });
+  });
+}
+function openProfileModal(){ renderProfileList(); _profileModal.style.display = 'flex'; }
+function closeProfileModal(){ _profileModal.style.display = 'none'; }
+document.getElementById('profileBtn').onclick = function(){ requireLogin(openProfileModal); };
+document.getElementById('profileModalX').onclick = closeProfileModal;
+_profileModal.addEventListener('click', function(e){ if (e.target === _profileModal) closeProfileModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _profileModal.style.display !== 'none') closeProfileModal(); });
+
+document.getElementById('profileInviteBtn').onclick = async function(){
+  var btn = this;
+  if (btn.disabled) return;
+  btn.disabled = true;
+  try {
+    var d = await apiRequest('POST', '/api/links/invite');
+    var text = ((CURRENT_USER && CURRENT_USER.displayName) || 'Jemand') +
+               ' möchte auf MovieTaste gemeinsam mit dir Filme finden:';
+    // Native Teilen-Funktion (iPhone/Android) -- sonst in die Zwischenablage.
+    if (navigator.share) {
+      try { await navigator.share({ title: 'MovieTaste', text: text, url: d.url }); }
+      catch (e) { /* abgebrochen -- kein Fehlerfall */ }
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(d.url);
+      alert('Einladungslink kopiert – gültig für ' + d.expiresInDays + ' Tage.\n\n' + d.url);
+    } else {
+      prompt('Einladungslink (gültig für ' + d.expiresInDays + ' Tage):', d.url);
+    }
+  } catch (e) {
+    alert('Einladung konnte nicht erstellt werden.');
+  } finally { btn.disabled = false; }
+};
+
+/* ---- Einladung annehmen (Aufruf ueber ?einladung=<token>) ---- */
+var _inviteModal = document.getElementById('inviteModal');
+function closeInviteModal(){
+  _inviteModal.style.display = 'none';
+  // Token aus der Adresszeile entfernen, damit ein Neuladen ihn nicht erneut anbietet.
+  try { history.replaceState(null, '', location.pathname); } catch (e) {}
+}
+document.getElementById('inviteModalX').onclick = closeInviteModal;
+async function handleInviteToken(token){
+  _inviteModal.style.display = 'flex';
+  var textEl = document.getElementById('inviteText');
+  var actions = document.getElementById('inviteActions');
+  actions.innerHTML = '';
+  if (!CURRENT_USER) {
+    textEl.textContent = 'Melde dich an oder lege ein Konto an, um die Einladung anzunehmen.';
+    actions.innerHTML = '<button type="button" class="modal-yes" id="inviteLoginBtn">Anmelden</button>';
+    document.getElementById('inviteLoginBtn').onclick = function(){
+      // Token bleibt in der Adresszeile -- nach dem Login greift der Aufruf erneut.
+      _inviteModal.style.display = 'none';
+      requireLogin(function(){ handleInviteToken(token); });
+    };
+    return;
+  }
+  try {
+    var d = await apiRequest('GET', '/api/links/invite/' + encodeURIComponent(token));
+    if (d.alreadyLinked) {
+      textEl.textContent = 'Du bist mit ' + d.inviter.name + ' bereits verknüpft.';
+      actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">Alles klar</button>';
+      document.getElementById('inviteOkBtn').onclick = closeInviteModal;
+      return;
+    }
+    textEl.textContent = d.inviter.name + ' möchte sich mit dir verknüpfen. Ihr seht danach ' +
+      'gegenseitig, welche Titel ihr gemeinsam auf der Liste habt. Das lässt sich jederzeit wieder lösen.';
+    actions.innerHTML = '<button type="button" class="modal-no" id="inviteNoBtn">Ablehnen</button>' +
+                        '<button type="button" class="modal-yes" id="inviteYesBtn">Annehmen</button>';
+    document.getElementById('inviteNoBtn').onclick = closeInviteModal;
+    document.getElementById('inviteYesBtn').onclick = async function(){
+      this.disabled = true;
+      try {
+        var r = await apiRequest('POST', '/api/links/invite/' + encodeURIComponent(token) + '/accept');
+        await loadLinkedProfiles();
+        updateProfileBtn();
+        textEl.textContent = 'Verknüpft mit ' + r.linked.name + '. Du findest die Auswahl oben links.';
+        actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">Alles klar</button>';
+        document.getElementById('inviteOkBtn').onclick = closeInviteModal;
+      } catch (err) {
+        textEl.textContent = 'Die Einladung konnte nicht angenommen werden. Möglicherweise ist sie abgelaufen oder bereits eingelöst.';
+        actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">Schließen</button>';
+        document.getElementById('inviteOkBtn').onclick = closeInviteModal;
+      }
+    };
+  } catch (err) {
+    var meldung = err.code === 'invite_expired' ? 'Diese Einladung ist abgelaufen.'
+                : err.code === 'invite_already_used' ? 'Diese Einladung wurde bereits eingelöst.'
+                : err.code === 'invite_own' ? 'Das ist deine eigene Einladung.'
+                : 'Diese Einladung ist ungültig.';
+    textEl.textContent = meldung;
+    actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">Schließen</button>';
+    document.getElementById('inviteOkBtn').onclick = closeInviteModal;
+  }
+}
+
+/* ---- Anzeigename nachtraeglich erfragen (Konten von vor dieser Funktion) ---- */
+function maybeAskDisplayName(){
+  if (!CURRENT_USER || CURRENT_USER.displayName) return;
+  document.getElementById('nameModal').style.display = 'flex';
+}
+document.getElementById('nameForm').onsubmit = async function(e){
+  e.preventDefault();
+  var wert = document.getElementById('nameInput').value.trim();
+  var fehler = document.getElementById('nameError');
+  fehler.textContent = '';
+  if (!wert) { fehler.textContent = 'Bitte einen Namen eintragen.'; return; }
+  try {
+    var u = await apiRequest('PUT', '/api/auth/display-name', { displayName: wert });
+    CURRENT_USER = u;
+    document.getElementById('nameModal').style.display = 'none';
+    updateProfileBtn();
+  } catch (err) { fehler.textContent = 'Konnte nicht gespeichert werden.'; }
+};
 
 /* ---- "Streaminganbieter": eigene Anbieterauswahl (siehe /api/watch-providers/
    selection). Steuert, welche Anbieter unter Ansehen/Leihen/Kaufen, an den
@@ -3116,6 +3472,12 @@ function setAuthMode(m){
   authMode = m;
   authError.textContent = '';
   authError.classList.remove('ok');
+  // Der Anzeigename wird nur beim Registrieren gebraucht -- er ist Pflicht,
+  // damit verknuepfte Profile nicht namenlos in der Liste stehen.
+  var nameRow = document.getElementById('authNameRow');
+  var nameInp = document.getElementById('authDisplayName');
+  nameRow.style.display = m === 'register' ? '' : 'none';
+  nameInp.required = m === 'register';
   authPassword.style.display = m === 'forgot' ? 'none' : '';
   authPassword.required = m !== 'forgot';
   if (m === 'login') {
@@ -3170,7 +3532,9 @@ authForm.addEventListener('submit', async (e) => {
       authError.classList.add('ok');
     } else {
       const path = authMode === 'login' ? '/api/auth/login' : '/api/auth/register';
-      CURRENT_USER = await apiRequest('POST', path, { email: authEmail.value, password: authPassword.value });
+      const nutzlast = { email: authEmail.value, password: authPassword.value };
+      if (authMode === 'register') nutzlast.displayName = document.getElementById('authDisplayName').value;
+      CURRENT_USER = await apiRequest('POST', path, nutzlast);
       hideAuthModal();
       renderAuthBar();
       // Manuelle Sortier-Praeferenzen sind geraete-/browserbasiert (localStorage) und
@@ -3180,6 +3544,9 @@ authForm.addEventListener('submit', async (e) => {
       resetSortManual();
       await loadUserProgressAndRefresh();
       runPendingActions();
+      // Bestandskonten haben noch keinen Anzeigenamen -- direkt nach dem Login
+      // einmalig nachfragen, sonst stehen sie bei anderen namenlos in der Liste.
+      maybeAskDisplayName();
     }
   } catch (err) {
     authError.textContent = err.code === 'invalid_credentials' ? 'E-Mail oder Passwort falsch.'
@@ -3218,10 +3585,13 @@ async function loadUserProgressAndRefresh(){
       // Muss VOR dem Rendern stehen: davon haengt ab, welche Anbieter-Schildchen
       // erscheinen und was der "Nur Streaming"-Filter durchlaesst.
       loadMyProviders(),
+      // Ebenso: der Abgleich greift schon beim ersten Aufbau der Listen.
+      loadLinkedProfiles(),
     ]);
     rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }));
     hidden.forEach((t) => HIDDEN_TITLE_IDS.add(t.id));
   }
+  updateProfileBtn();
   rebuild();
   renderCurrentTab();
 }
@@ -3246,7 +3616,13 @@ renderAuthBar();
 setTab('filme');
 apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() => { CURRENT_USER = null; }).finally(() => {
   renderAuthBar();
+  updateProfileBtn();
   loadCatalogAndRefresh();
+  // Einladungslink hat Vorrang vor der Namensabfrage -- sonst stapeln sich
+  // beim ersten Oeffnen zwei Dialoge uebereinander.
+  var einladung = new URLSearchParams(location.search).get('einladung');
+  if (einladung) handleInviteToken(einladung);
+  else maybeAskDisplayName();
 });
 
 /* ================= DISCOVERY (vereinheitlicht mit dem Titel-Pool) ================= */
