@@ -16,6 +16,7 @@ import hiddenTitlesRouter from './routes/hiddenTitles.js';
 import cinemaRouter from './routes/cinema.js';
 import watchProvidersRouter from './routes/watchProviders.js';
 import trailersRouter from './routes/trailers.js';
+import linksRouter from './routes/links.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PgSession = connectPgSimple(session);
@@ -67,6 +68,7 @@ app.use('/api/hidden-titles', hiddenTitlesRouter);
 app.use('/api/cinema', cinemaRouter);
 app.use('/api/watch-providers', watchProvidersRouter);
 app.use('/api/trailers', trailersRouter);
+app.use('/api/links', linksRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
 const frontendRoot = path.join(__dirname, '..');

@@ -77,6 +77,41 @@ CREATE TABLE IF NOT EXISTS users (
 --   gefuellt      -- genau diese Anbieter
 ALTER TABLE users ADD COLUMN IF NOT EXISTS watch_provider_ids INTEGER[];
 
+-- Anzeigename ("Vorname / Profilname"), sichtbar fuer verknuepfte Profile.
+-- Bewusst nur EIN Feld ohne Nachnamen: fuer die Wiedererkennung unter Bekannten
+-- reicht das, und es gibt nicht mehr preis als noetig. NULL bei Konten, die vor
+-- dieser Funktion angelegt wurden -- die App fragt einmalig nach.
+ALTER TABLE users ADD COLUMN IF NOT EXISTS display_name TEXT;
+
+-- Verknuepfte Profile ("Ich"-Filter): wer darf mit wem seine Titel abgleichen.
+-- Bewusst ZWEI Zeilen je Verknuepfung (A->B und B->A) statt einer mit
+-- Sortierregel: so ist jede Abfrage ein simples WHERE user_id = $1, und beim
+-- Loesen verschwinden schlicht beide Richtungen. Eine Verknuepfung ist immer
+-- gegenseitig -- einseitig gekappt koennte die andere Person weiterhin die
+-- eigenen Titel sehen, was niemand erwarten wuerde.
+CREATE TABLE IF NOT EXISTS user_links (
+  user_id        BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  linked_user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  created_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (user_id, linked_user_id),
+  CHECK (user_id <> linked_user_id)
+);
+CREATE INDEX IF NOT EXISTS idx_user_links_user ON user_links (user_id);
+
+-- Einladungen zum Verknuepfen. Wie bei password_reset_tokens wird NUR der Hash
+-- gespeichert -- wer die Datenbank liest, kann damit keine Einladung einloesen.
+-- Einmalig einloesbar (accepted_by) und mit Ablaufdatum, weil ein weitergeleiteter
+-- Link sonst dauerhaft Zugriff auf die eigene Titelliste eroeffnen wuerde.
+CREATE TABLE IF NOT EXISTS user_link_invites (
+  token_hash  TEXT PRIMARY KEY,
+  inviter_id  BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  expires_at  TIMESTAMPTZ NOT NULL,
+  accepted_by BIGINT REFERENCES users(id) ON DELETE SET NULL,
+  accepted_at TIMESTAMPTZ,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_user_link_invites_inviter ON user_link_invites (inviter_id);
+
 CREATE TABLE IF NOT EXISTS password_reset_tokens (
   id         BIGSERIAL PRIMARY KEY,
   user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,

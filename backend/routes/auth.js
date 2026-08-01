@@ -12,16 +12,21 @@ const BCRYPT_ROUNDS = 12;
 const RESET_TOKEN_TTL_MS = 60 * 60 * 1000; // 1 Stunde
 
 function publicUser(row) {
-  return { id: row.id, email: row.email };
+  return { id: row.id, email: row.email, displayName: row.display_name || null };
 }
 
 router.post('/register', async (req, res) => {
-  const { email, password } = req.body || {};
+  const { email, password, displayName } = req.body || {};
   if (typeof email !== 'string' || !EMAIL_RE.test(email)) {
     return res.status(400).json({ error: 'invalid_email' });
   }
   if (typeof password !== 'string' || password.length < 8) {
     return res.status(400).json({ error: 'weak_password' });
+  }
+  // Pflichtfeld, weil verknuepfte Profile sonst namenlos in der Liste stehen.
+  const name = typeof displayName === 'string' ? displayName.trim() : '';
+  if (!name || name.length > 40) {
+    return res.status(400).json({ error: 'invalid_display_name' });
   }
 
   const normalizedEmail = email.trim().toLowerCase();
@@ -29,9 +34,9 @@ router.post('/register', async (req, res) => {
 
   try {
     const { rows } = await pool.query(
-      `INSERT INTO users (email, password_hash) VALUES ($1, $2)
-       RETURNING id, email`,
-      [normalizedEmail, passwordHash]
+      `INSERT INTO users (email, password_hash, display_name) VALUES ($1, $2, $3)
+       RETURNING id, email, display_name`,
+      [normalizedEmail, passwordHash, name]
     );
     req.session.userId = rows[0].id;
     res.status(201).json(publicUser(rows[0]));
@@ -50,7 +55,7 @@ router.post('/login', async (req, res) => {
   }
 
   const { rows } = await pool.query(
-    `SELECT id, email, password_hash FROM users WHERE email = $1`,
+    `SELECT id, email, display_name, password_hash FROM users WHERE email = $1`,
     [email.trim().toLowerCase()]
   );
   const user = rows[0];
@@ -79,10 +84,24 @@ router.get('/me', async (req, res) => {
   if (!req.session?.userId) {
     return res.status(401).json({ error: 'not_authenticated' });
   }
-  const { rows } = await pool.query(`SELECT id, email FROM users WHERE id = $1`, [req.session.userId]);
+  const { rows } = await pool.query(`SELECT id, email, display_name FROM users WHERE id = $1`, [req.session.userId]);
   if (!rows[0]) {
     return res.status(401).json({ error: 'not_authenticated' });
   }
+  res.json(publicUser(rows[0]));
+});
+
+// Anzeigename setzen oder aendern. Konten aus der Zeit vor dieser Funktion
+// haben keinen -- die App fragt beim naechsten Besuch einmalig nach.
+router.put('/display-name', async (req, res) => {
+  if (!req.session?.userId) return res.status(401).json({ error: 'not_authenticated' });
+  const { displayName } = req.body || {};
+  const name = typeof displayName === 'string' ? displayName.trim() : '';
+  if (!name || name.length > 40) return res.status(400).json({ error: 'invalid_display_name' });
+  const { rows } = await pool.query(
+    'UPDATE users SET display_name = $1 WHERE id = $2 RETURNING id, email, display_name',
+    [name, req.session.userId]
+  );
   res.json(publicUser(rows[0]));
 });
 
@@ -182,7 +201,7 @@ router.put('/email', requireAuth, async (req, res) => {
   const normalizedEmail = newEmail.trim().toLowerCase();
   try {
     const { rows: updated } = await pool.query(
-      `UPDATE users SET email = $1 WHERE id = $2 RETURNING id, email`,
+      `UPDATE users SET email = $1 WHERE id = $2 RETURNING id, email, display_name`,
       [normalizedEmail, req.session.userId]
     );
     res.json(publicUser(updated[0]));
