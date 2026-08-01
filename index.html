@@ -51,10 +51,11 @@
     /* env(safe-area-inset-top) ist 0 ausser bei Geraeten mit Notch/Dynamic-Island/
        Statusleiste (z.B. als installierte PWA auf dem iPhone) -- dort sonst
        ueberdeckt die Statusleiste (Akkustand etc.) das Menue oben rechts. */
-    /* Oben so viel Platz, dass Logo und alles darunter UNTER den beiden
-       Navigations-Buttons beginnen (die sitzen bei 6px und sind 40px hoch).
-       Sie selbst wandern nicht mit, da absolut positioniert. */
-    padding: calc(54px + env(safe-area-inset-top, 0px)) 20px 14px;
+    /* Etwas Luft nach oben, damit Logo und Inhalte nicht direkt an den beiden
+       Navigations-Buttons kleben (die sitzen bei 6px, sind 40px hoch und wandern
+       nicht mit, da absolut positioniert). Bewusst kein voller Abstand bis
+       unter die Buttons -- das riss eine zu grosse Luecke auf. */
+    padding: calc(30px + env(safe-area-inset-top, 0px)) 20px 14px;
     background: linear-gradient(180deg, #131820 0%, var(--bg) 100%);
     border-bottom: 1px solid var(--border);
   }
