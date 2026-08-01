@@ -20,6 +20,7 @@ function rowToCand(row) {
     c: row.cast_names,
     p: row.poster_path,
     r: row.rating != null ? Number(row.rating) : null,
+    vc: row.vote_count,
     // Bewusst OHNE Inhaltsangabe (frueher `ov`): sie machte 6,8 MB der 11,1 MB
     // dieser Auslieferung aus, wird aber nur in der aufgeklappten Detailansicht
     // gebraucht. Das Frontend holt sie fuer die sichtbaren Zeilen ueber
@@ -78,12 +79,13 @@ router.post('/ingest', async (req, res) => {
         for (const item of items || []) {
           await client.query(
             `INSERT INTO streaming_cache
-               (provider_id, provider_name, type, tmdb_id, title, year, genres, director, cast_names, poster_path, rating, overview)
-             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+               (provider_id, provider_name, type, tmdb_id, title, year, genres, director, cast_names, poster_path, rating, vote_count, overview)
+             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
              ON CONFLICT (provider_id, type, tmdb_id) DO UPDATE SET
                title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
                director = EXCLUDED.director, cast_names = EXCLUDED.cast_names,
                poster_path = EXCLUDED.poster_path, rating = EXCLUDED.rating,
+               vote_count = EXCLUDED.vote_count,
                -- Liefert TMDB an einem Tag mal keine Kurzbeschreibung (z.B. fremdsprachige
                -- Titel ohne deutschen Overview-Text), soll eine zuvor vorhandene (ggf. manuell
                -- nachgetragene) Beschreibung nicht durch einen Leerstring geloescht werden.
@@ -101,6 +103,7 @@ router.post('/ingest', async (req, res) => {
               Array.isArray(item.c) ? item.c : [],
               item.p || null,
               item.r != null ? item.r : null,
+              item.vc != null ? item.vc : null,
               item.ov || null,
             ]
           );

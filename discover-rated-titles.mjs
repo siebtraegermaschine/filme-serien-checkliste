@@ -91,6 +91,7 @@ function addItem(it, kind, gmap, out, seen) {
     genres: (it.genre_ids || []).map((id2) => gmap[id2]).filter(Boolean),
     posterPath: it.poster_path || null,
     rating: it.vote_average != null ? Math.round(it.vote_average * 10) / 10 : null,
+    voteCount: it.vote_count != null ? it.vote_count : null,
     overviewRaw: it.overview || '',
   });
 }

@@ -134,6 +134,7 @@ async function discover(kind, providerId, gmap) {
         c: [],                                    // Besetzung – unten via enrich() nachgeladen
         p: it.poster_path || null,
         r: it.vote_average != null ? Math.round(it.vote_average * 10) / 10 : null,
+        vc: it.vote_count != null ? it.vote_count : null,
         ov: (it.overview || '').trim(),            // Kurzbeschreibung/Plot für die Detailansicht
       });
     }

@@ -312,6 +312,14 @@ CREATE TABLE IF NOT EXISTS search_queries (
 );
 CREATE INDEX IF NOT EXISTS idx_search_queries_created_at ON search_queries (created_at);
 
+-- Anzahl der Stimmen hinter der Bewertung ("8,3 (28.300)"). Ohne sie steht eine
+-- glatte 8,0 aus EINER Stimme gleichberechtigt neben einer 8,3 aus 28.000 --
+-- die Zahl macht erst einschaetzbar, wie belastbar die Bewertung ist.
+-- Quelle ist wie die Bewertung selbst TMDB (vote_count), nicht IMDb.
+ALTER TABLE titles          ADD COLUMN IF NOT EXISTS vote_count INTEGER;
+ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS vote_count INTEGER;
+ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS vote_count INTEGER;
+
 -- Von connect-pg-simple genutzte Session-Tabelle (Standard-Schema des Pakets).
 CREATE TABLE IF NOT EXISTS session (
   sid    VARCHAR NOT NULL COLLATE "default" PRIMARY KEY,

@@ -667,7 +667,7 @@
   li.item .title { display: flex; align-items: center; gap: 6px; min-width: 0; }
   li.item .title .ttext { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
   li.item .title .score { flex: none; margin-left: auto; }
-  /* Zweite Zeile: IMDb-Wert, Genre, Jahr; Originaltitel/Rest bei Platzmangel in eigene Zeile darunter */
+  /* Zweite Zeile: TMDB-Wert, Genre, Jahr; Originaltitel/Rest bei Platzmangel in eigene Zeile darunter */
   li.item .meta { display: flex; flex-wrap: wrap; column-gap: 6px; row-gap: 2px; }
   li.item .meta .meta-main { white-space: nowrap; }
   li.item .meta .meta-extra { min-width: 0; }
@@ -685,7 +685,7 @@
       <span class="sub-howto-preview" id="subHowToPreview">1. Entdecke die besten Filme &amp; Serien unter Discovery und füge sie deiner „Watchlist“ hinzu oder markiere sie als „gesehen“.</span>
       <span class="sub-howto-more" id="subHowToMoreLabel">Mehr</span>
     </button>
-    <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)<br>2. Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</div>
+    <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)<br>2. Schaut gemeinsam: Verknüpfe dich oben links mit Freund:innen oder Familie – dann siehst du nur noch Titel, die auch bei ihnen auf der Liste stehen. So findet ihr sofort etwas, das allen gefällt.<br>3. Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming kostenlos laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die TMDB-Bewertung?">TMDB-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>4. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</div>
   </div>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
@@ -751,7 +751,7 @@
       <div class="sort-wrap">
         <button id="fSort" type="button" title="Sortierung">⇅ Sortieren</button>
         <div id="sortMenu" class="sort-menu" style="display:none">
-          <button type="button" data-sort="imdb" class="active">Sortieren nach IMDb-Bewertung</button>
+          <button type="button" data-sort="imdb" class="active">Sortieren nach TMDB-Bewertung</button>
           <button type="button" data-sort="year">nach Veröffentlichungsdatum</button>
           <button type="button" data-sort="newstream" id="sortNewstream">nach Neu im Streaming</button>
           <button type="button" data-sort="taste">nach Taste-Score</button>
@@ -776,7 +776,7 @@
       <div class="sort-wrap">
         <button id="cinemaSort" type="button" title="Sortierung">⇅ Sortieren</button>
         <div id="cinemaSortMenu" class="sort-menu" style="display:none">
-          <button type="button" data-sort="imdb">Sortieren nach IMDb-Bewertung</button>
+          <button type="button" data-sort="imdb">Sortieren nach TMDB-Bewertung</button>
           <button type="button" data-sort="date">nach Veröffentlichungsdatum</button>
           <button type="button" data-sort="taste" class="active">nach Taste-Score</button>
         </div>
@@ -848,7 +848,8 @@
     <h3>Anleitung</h3>
     <ol class="install-steps">
       <li>Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)</li>
-      <li>Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.</li>
+      <li>Schaut gemeinsam: Verknüpfe dich oben links mit Freund:innen oder Familie – dann siehst du nur noch Titel, die auch bei ihnen auf der Liste stehen. So findet ihr sofort etwas, das allen gefällt.</li>
+      <li>Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming kostenlos laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die TMDB-Bewertung?">TMDB-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.</li>
       <li><b>Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</b></li>
     </ol>
   </div>
@@ -1079,7 +1080,12 @@ function requireLogin(action){
 
 const POSTER='https://image.tmdb.org/t/p/w154';
 function fmtR(r){ return r!=null ? String(r).replace('.',',') : ''; }
-function candMeta(c){ return '⭐ '+(fmtR(c.r)||'?')+' · '+((c.g&&c.g[0])||'—')+(c.y?(' · '+c.y):''); }
+// "(28.300)" hinter der Bewertung. Ohne diese Zahl steht eine glatte 8,0 aus
+// EINER Stimme gleichberechtigt neben einer 8,3 aus 28.000 Stimmen.
+function voteSuffix(vc){
+  return (vc != null && Number(vc) > 0) ? (' (' + Number(vc).toLocaleString('de-DE') + ')') : '';
+}
+function candMeta(c){ return '⭐ '+(fmtR(c.r)||'?')+voteSuffix(c.vc)+' · '+((c.g&&c.g[0])||'—')+(c.y?(' · '+c.y):''); }
 function escAttr(str){ return esc(str).replace(/"/g,'&quot;'); }
 function tagChip(t){ return '<span class="tag" data-filter="'+escAttr(t)+'">'+esc(t)+'</span>'; }
 function nameChips(arr){ return (arr||[]).map(function(n){ return '<span class="pill" data-filter="'+escAttr(n)+'">'+esc(n)+'</span>'; }).join(', '); }
@@ -1446,7 +1452,7 @@ function buildPool(combinedRows, streamDoc){
       realId: row.id, tmdbId: row.tmdbId, type: row.type,
       t: row.title, ot: row.originalTitle, y: row.year, g: row.genres || [], d: row.director || '',
       c: row.cast || [], kw: row.keywords || [], p: row.posterPath || null,
-      poster64: row.posterBase64 || null, r: row.rating, ov: row.plot || '',
+      poster64: row.posterBase64 || null, r: row.rating, vc: row.voteCount, ov: row.plot || '',
       source: row.source, providers: [],
     };
     if (row.source === 'catalog') catalogByName.set(row.type + '|' + normTitle(row.title), item);
@@ -1483,7 +1489,7 @@ function buildPool(combinedRows, streamDoc){
           item = {
             realId: null, tmdbId: Number(c.id), type: type,
             t: c.t, ot: null, y: c.y, g: c.g || [], d: c.d || '', c: c.c || [], kw: c.kw || [],
-            p: c.p || null, poster64: null, r: c.r, ov: c.ov || '', fs: c.fs || null,
+            p: c.p || null, poster64: null, r: c.r, vc: c.vc, ov: c.ov || '', fs: c.fs || null,
             source: 'streaming', providers: [],
           };
           byKey.set(k, item);
@@ -1520,7 +1526,7 @@ async function ensurePoolItem(item){
   return item._ensuring;
 }
 function poolToMeta(item){
-  const parts = ['⭐ ' + (item.r != null ? fmtR(item.r) : '?')];
+  const parts = ['⭐ ' + (item.r != null ? fmtR(item.r) : '?') + voteSuffix(item.vc)];
   if (item.g && item.g[0]) parts.push(item.g[0]);
   if (item.ot) parts.push(item.ot);
   if (item.y) parts.push(String(item.y));
@@ -1639,7 +1645,7 @@ function wordExactMatch(blob, q){
 const list = document.getElementById('list');
 const searchEl = document.getElementById('search');
 
-function metaRating(meta){ var m=String(meta).match(/([0-9]+[.,][0-9]+)/); return m ? parseFloat(m[1].replace(',', '.')) : 0; }
+function metaRating(meta){ var m=String(meta).match(/⭐\s*([0-9]+(?:[.,][0-9]+)?)/); return m ? parseFloat(m[1].replace(',', '.')) : 0; }
 function scoreItem(item, d, prof){
   var cc = { g:[metaGenre(item[1])].filter(Boolean), kw:(d && d.h) || [], c:(d && d.c) || [], d:(d && d.d) || '', y: metaYear(item[1]), r:metaRating(item[1]) };
   return scoreCand(cc, prof).score;
@@ -2129,7 +2135,7 @@ function tasteProfileSize(){
   return state.filme.data.length + state.serien.data.length;
 }
 // Auf allen vier Seiten identisch: ohne manuelle Auswahl standardmaessig nach
-// IMDb, ab 10 markierten Titeln (Watchlist + Gesehen zusammen) automatisch nach
+// TMDB, ab 10 markierten Titeln (Watchlist + Gesehen zusammen) automatisch nach
 // Taste-Score, weil dann genug Profildaten fuer eine sinnvolle Sortierung da sind.
 function effectiveSort(cat){
   if (sortManual[cat]) return sortManual[cat];
@@ -2701,7 +2707,7 @@ function cinemaRowToItem(row, poolByTmdb){
   return {
     realId: null, tmdbId, type: 'movie', t: row.t, ot: null, y: row.y,
     g: row.g || [], d: row.d || '', c: row.c || [], kw: [],
-    p: row.p || null, poster64: null, r: row.r, ov: ov, providers: [],
+    p: row.p || null, poster64: null, r: row.r, vc: row.vc, ov: ov, providers: [],
   };
 }
 function renderCinemaSection(key, rows, profile, poolByTmdb){
@@ -2813,7 +2819,7 @@ document.getElementById('navHomeBtn').onclick = () => { closeNavMenu(); goHome()
 document.getElementById('cinemaBtn').onclick = () => { closeNavMenu(); openCinemaPage(); };
 
 // Sortier-Menue auf der Kino-Seite -- dieselben drei Kriterien wie unter Filme/
-// Serien (IMDb-Bewertung/Taste-Score/Veroeffentlichungsdatum), nur "neu im
+// Serien (TMDB-Bewertung/Taste-Score/Veroeffentlichungsdatum), nur "neu im
 // Streaming" entfaellt (ergibt fuer Kinostarts keinen Sinn). Ein Sortierwechsel
 // klappt alle drei Bereiche wieder ein, damit man nicht in einer laaaangen,
 // neu sortierten Liste landet.
@@ -3938,19 +3944,21 @@ function renderDiscovery(){
 }
 
 
-/* Taste-Score- & IMDb-Erklärung (ⓘ-Popup) */
+/* Taste-Score- & TMDB-Erklärung (ⓘ-Popup) */
 (function(){
   var INFO_TEXT = {
     ts: { title:'Taste-Score', body:'Der Taste-Score (0–99) schätzt, wie gut ein Titel zu deinem Geschmack passt. '+
       'Er wird aus Genres, Film- und Serieninhalten, Besetzung, Regie und der Nähe zum Erscheinungsjahr all deiner '+
-      'per Watchlist oder „Gesehen“ markierten Filme und Serien zusammen berechnet. Auch die IMDb-Bewertung des '+
+      'per Watchlist oder „Gesehen“ markierten Filme und Serien zusammen berechnet. Auch die TMDB-Bewertung des '+
       'jeweiligen Titels fließt mit ein. Deine 1-10-Sterne-Bewertung bei „Gesehen“-Titeln zählt zusätzlich mit: '+
       'schlecht bewertete Titel prägen deinen Geschmack kaum noch, gut bewertete deutlich stärker. Je mehr Titel du '+
       'markierst, desto persönlicher und treffsicherer wird er. Ab 10 markierten Titeln wird auf Filme, Serien, '+
-      'Streaming und Discovery standardmäßig nach Taste-Score statt IMDb-Bewertung sortiert, sofern du die '+
+      'Streaming und Discovery standardmäßig nach Taste-Score statt TMDB-Bewertung sortiert, sofern du die '+
       'Sortierung nicht manuell änderst.' },
-    imdb: { title:'IMDb-Bewertung', body:'Die IMDb-Bewertung ist die durchschnittliche Nutzerbewertung (0–10) '+
-      'auf der Filmdatenbank IMDb und zeigt, wie gut ein Titel bei einem breiten Publikum ankommt.' },
+    imdb: { title:'TMDB-Bewertung', body:'Die TMDB-Bewertung ist die durchschnittliche Nutzerbewertung (0–10) '+
+      'auf der Filmdatenbank TMDB (The Movie Database) und zeigt, wie gut ein Titel bei einem breiten '+
+      'Publikum ankommt. Die Zahl in Klammern dahinter ist die Anzahl der abgegebenen Stimmen: Eine 8,0 '+
+      'aus einer einzigen Stimme sagt deutlich weniger aus als eine 8,3 aus 28.000.' },
     discovery: { title:'Discovery', body:'Discovery schlägt dir Filme, Serien und Streaming-Titel vor, die du noch '+
       'nicht gesehen hast – passend zu deinem Taste-Score, also basierend auf Genres, Besetzung, Regie und mehr '+
       'all deiner bisher per Watchlist oder „Gesehen“ markierten Filme und Serien zusammen.' },

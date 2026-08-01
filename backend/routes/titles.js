@@ -23,6 +23,7 @@ export function serializeTitle(row, { withPlot = true } = {}) {
     cast: row.cast_names,
     keywords: row.keywords,
     rating: row.rating != null ? Number(row.rating) : null,
+    voteCount: row.vote_count,
     posterPath: row.poster_path,
     posterBase64: row.poster_base64,
     source: row.source,
@@ -163,6 +164,7 @@ router.post('/ensure', requireAuth, async (req, res) => {
     keywords,
     posterPath,
     rating,
+    voteCount,
     plot,
     source,
   } = req.body || {};
@@ -179,12 +181,12 @@ router.post('/ensure', requireAuth, async (req, res) => {
   // Inhaltsangabe eines laengst bestehenden Titels geloescht, sobald ihn jemand
   // ueber den Streaming-Weg erneut hinzufuegt.
   const { rows } = await pool.query(
-    `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, plot, source)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,
-       COALESCE(NULLIF($11, ''), (SELECT overview FROM streaming_cache
+    `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, plot, source)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,
+       COALESCE(NULLIF($12, ''), (SELECT overview FROM streaming_cache
                                    WHERE tmdb_id = $1 AND type = $2
                                      AND overview IS NOT NULL AND overview <> '' LIMIT 1)),
-       $12)
+       $13)
      ON CONFLICT (tmdb_id, type) DO UPDATE SET
        title = EXCLUDED.title,
        year = EXCLUDED.year,
@@ -194,6 +196,7 @@ router.post('/ensure', requireAuth, async (req, res) => {
        keywords = EXCLUDED.keywords,
        poster_path = EXCLUDED.poster_path,
        rating = EXCLUDED.rating,
+       vote_count = EXCLUDED.vote_count,
        plot = COALESCE(NULLIF(EXCLUDED.plot, ''), titles.plot),
        updated_at = now()
      RETURNING *`,
@@ -208,6 +211,7 @@ router.post('/ensure', requireAuth, async (req, res) => {
       Array.isArray(keywords) ? keywords : [],
       posterPath || null,
       rating != null ? rating : null,
+      voteCount != null ? voteCount : null,
       plot || null,
       source === 'streaming' ? 'streaming' : 'discovery',
     ]
@@ -251,8 +255,8 @@ router.post('/bulk-ingest', async (req, res) => {
     for (const item of items) {
       if (!item || !item.tmdbId || (item.type !== 'movie' && item.type !== 'series') || !item.title) continue;
       const { rowCount } = await client.query(
-        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, plot, source)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,'discovery')
+        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, plot, source)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,$11,'discovery')
          ON CONFLICT (tmdb_id, type) DO UPDATE SET
            year = EXCLUDED.year,
            genres = EXCLUDED.genres,
@@ -260,6 +264,7 @@ router.post('/bulk-ingest', async (req, res) => {
            cast_names = EXCLUDED.cast_names,
            poster_path = EXCLUDED.poster_path,
            rating = EXCLUDED.rating,
+           vote_count = EXCLUDED.vote_count,
            plot = COALESCE(NULLIF(EXCLUDED.plot, ''), titles.plot),
            updated_at = now()
          WHERE titles.source <> 'catalog'`,
@@ -273,6 +278,7 @@ router.post('/bulk-ingest', async (req, res) => {
           Array.isArray(item.cast) ? item.cast : [],
           item.posterPath || null,
           item.rating != null ? item.rating : null,
+          item.voteCount != null ? item.voteCount : null,
           item.plot || null,
         ]
       );

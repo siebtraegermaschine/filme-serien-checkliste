@@ -116,6 +116,7 @@ async function discoverRange(gteDate, lteDate, sortDir, gmap, category, out, see
         genres: (it.genre_ids || []).map((g) => gmap[g]).filter(Boolean),
         posterPath: it.poster_path || null,
         rating: it.vote_average != null ? Math.round(it.vote_average * 10) / 10 : null,
+        voteCount: it.vote_count != null ? it.vote_count : null,
         overview: (it.overview || '').trim(),
         // Vorlaeufig die von /discover gelieferte (oft globale Erst-)
         // Veroeffentlichung -- wird unten in main() ggf. durch das tatsaechlich
