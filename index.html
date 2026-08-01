@@ -527,17 +527,16 @@
   .trailer-note { color:var(--text-dim); font-size:12px; margin-top:10px; text-align:center; }
   .trailer-note a { color:var(--text-dim); text-decoration:underline; }
 
-  /* "Ich"-Button oben links -- Gegenstueck zum Menue oben rechts. */
-  .profile-btn { position:absolute; top:calc(6px + env(safe-area-inset-top, 0px)); left:16px; height:40px;
-    max-width:45vw; display:flex; align-items:center; gap:6px; padding:0 12px;
-    background:var(--card); border:1px solid var(--border); border-radius:8px;
-    color:var(--text); font-size:14px; font-weight:600; cursor:pointer; z-index:20; }
-  @media (hover: hover) { .profile-btn:hover { border-color:var(--accent); color:var(--accent); } }
-  /* Deutlich sichtbar, sobald gefiltert wird -- sonst wirkt die verkuerzte
-     Liste wie ein Fehler statt wie eine bewusste Einschraenkung. */
-  .profile-btn.filtering { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
-  #profileBtnLabel { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .profile-btn-caret { font-size:10px; flex-shrink:0; }
+  /* Erscheint NUR bei aktivem Abgleich. Seit "Zusammen schauen" im Menue steckt,
+     gaebe es sonst kein sichtbares Zeichen mehr, dass die Liste eingeschraenkt
+     ist -- sie saehe schlicht kaputt aus. */
+  .match-bar { max-width:700px; margin:14px auto 0; padding:9px 14px; box-sizing:border-box;
+    display:flex; align-items:center; gap:10px;
+    background:var(--accent-soft); border:1px solid var(--accent); border-radius:9px; }
+  .match-bar span { flex:1; color:var(--accent); font-size:13px; font-weight:600; }
+  .match-bar button { background:none; border:none; color:var(--accent); font-size:13px;
+    font-weight:600; text-decoration:underline; cursor:pointer; padding:0; flex-shrink:0; }
+  @media (max-width:640px) { .match-bar { margin-left:20px; margin-right:20px; width:auto; } }
 
   .profile-modal { max-width:420px; width:100%; }
   .profile-list { margin:0 -4px; }
@@ -665,11 +664,10 @@
     </button>
     <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)<br>2. Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</div>
   </div>
-  <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-haspopup="true" aria-expanded="false">
-    <span id="profileBtnLabel">Ich</span><span class="profile-btn-caret">▾</span>
-  </button>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
+    <button type="button" id="profileBtn" class="nav-menu-item" style="display:none">Zusammen schauen</button>
+    <hr class="nav-menu-sep">
     <button type="button" id="howToBtn" class="nav-menu-item">Anleitung</button>
     <hr class="nav-menu-sep">
     <button type="button" id="navHomeBtn" class="nav-menu-item">Filme &amp; Serien</button>
@@ -733,6 +731,11 @@
   </div>
 </div>
 
+
+<div id="matchBar" class="match-bar" style="display:none">
+  <span id="matchBarText"></span>
+  <button type="button" id="matchBarClear">aufheben</button>
+</div>
 
 <ol class="list" id="list"></ol>
 
@@ -868,7 +871,8 @@
     <button class="modal-x" id="profileModalX" aria-label="Schließen">✕</button>
     <h3>Gemeinsam schauen</h3>
     <p class="prov-intro">Wähle Personen aus, mit denen du etwas sehen möchtest. Angezeigt
-      werden dann nur noch Titel, die auch bei ihnen auf der Liste stehen.</p>
+      werden dann nur noch Titel, die auch bei ihnen auf der Liste stehen.
+      Ohne Auswahl siehst du wie gewohnt deine eigene Ansicht.</p>
     <div class="profile-list" id="profileList"></div>
     <button type="button" id="profileInviteBtn" class="profile-add">＋ Person einladen</button>
   </div>
@@ -3016,28 +3020,27 @@ async function loadLinkedProfiles(){
 
 function updateProfileBtn(){
   var btn = document.getElementById('profileBtn');
-  if (!btn) return;
-  btn.style.display = CURRENT_USER ? 'flex' : 'none';
-  var label = document.getElementById('profileBtnLabel');
-  if (!matchAktiv()) {
-    // Bewusst immer "Ich": der eigene Anzeigename ist nur dafuer da, dass ANDERE
-    // einen nach dem Verknuepfen erkennen -- im eigenen Kopf sagt er nichts aus.
-    label.textContent = 'Ich';
-    btn.classList.remove('filtering');
-  } else {
-    label.textContent = MATCH_WITH.length === 1
-      ? ('mit ' + profilName(MATCH_WITH[0]))
-      : ('mit ' + MATCH_WITH.length + ' Personen');
-    btn.classList.add('filtering');
+  if (btn) {
+    btn.style.display = CURRENT_USER ? '' : 'none';
+    btn.textContent = matchAktiv()
+      ? ('Zusammen schauen (' + MATCH_WITH.length + ')')
+      : 'Zusammen schauen';
+  }
+  var bar = document.getElementById('matchBar');
+  if (!bar) return;
+  bar.style.display = matchAktiv() ? 'flex' : 'none';
+  if (matchAktiv()) {
+    document.getElementById('matchBarText').textContent =
+      'Gemeinsame Titel mit ' + MATCH_WITH.map(profilName).join(' und ');
   }
 }
 
 var _profileModal = document.getElementById('profileModal');
 function renderProfileList(){
   var el = document.getElementById('profileList');
-  var html = '<div class="profile-item self"><input type="checkbox" class="pi-check" checked disabled>' +
-             '<span class="pi-name">Ich</span><button type="button" class="pi-del">✕</button></div>';
-  html += LINKED_PROFILES.map(function(p){
+  // Kein Eintrag fuer einen selbst: Nichts ausgewaehlt IST bereits die eigene
+  // Ansicht. Ein Haken "Ich", der sich nie abwaehlen laesst, waere nur Ballast.
+  var html = LINKED_PROFILES.map(function(p){
     var aktiv = MATCH_WITH.indexOf(p.id) !== -1;
     return '<div class="profile-item' + (aktiv ? ' active' : '') + '" data-uid="' + escAttr(String(p.id)) + '">' +
              '<input type="checkbox" class="pi-check"' + (aktiv ? ' checked' : '') + '>' +
@@ -3072,7 +3075,11 @@ function renderProfileList(){
 }
 function openProfileModal(){ renderProfileList(); _profileModal.style.display = 'flex'; }
 function closeProfileModal(){ _profileModal.style.display = 'none'; }
-document.getElementById('profileBtn').onclick = function(){ requireLogin(openProfileModal); };
+document.getElementById('profileBtn').onclick = function(){ closeNavMenu(); requireLogin(openProfileModal); };
+document.getElementById('matchBarClear').onclick = function(){
+  MATCH_WITH = [];
+  updateProfileBtn(); rebuild(); renderCurrentTab();
+};
 document.getElementById('profileModalX').onclick = closeProfileModal;
 _profileModal.addEventListener('click', function(e){ if (e.target === _profileModal) closeProfileModal(); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _profileModal.style.display !== 'none') closeProfileModal(); });
