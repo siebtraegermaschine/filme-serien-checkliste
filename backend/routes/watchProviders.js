@@ -1,4 +1,5 @@
 import { pool } from '../db/pool.js';
+import { requireAuth } from '../middleware/requireAuth.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 
 const router = createAsyncRouter();
@@ -164,6 +165,95 @@ async function resolveTmdbId(titleId) {
   );
   return { tmdbId: found, type: row.type };
 }
+
+// Die vier Anbieter, die auch der taegliche Streaming-Abgleich (stream-fetch.mjs)
+// kennt -- Vorauswahl fuer alle, die noch nichts eingestellt haben.
+const DEFAULT_PROVIDER_IDS = [8, 9, 337, 350]; // Netflix, Amazon Prime Video, Disney+, Apple TV+
+// So viele Anbieter zeigt die Einstellung direkt; der Rest steckt hinter
+// "Weitere anzeigen". TMDB kennt fuer DE knapp 200 Anbieter, die allermeisten
+// davon Nischenangebote.
+const COMMON_COUNT = 20;
+
+// Anbieterliste ist fuer alle Nutzer:innen identisch und aendert sich selten --
+// daher im Prozessspeicher statt in der Datenbank.
+let providerCatalog = { at: 0, list: [] };
+async function getProviderCatalog() {
+  if (providerCatalog.list.length && Date.now() - providerCatalog.at < 24 * 3_600_000) {
+    return providerCatalog.list;
+  }
+  const key = process.env.TMDB_API_KEY;
+  if (!key) return providerCatalog.list;
+  const byId = new Map();
+  for (const kind of ['movie', 'tv']) {
+    const url = new URL(`${API}/watch/providers/${kind}`);
+    url.searchParams.set('api_key', key);
+    url.searchParams.set('watch_region', REGION);
+    url.searchParams.set('language', process.env.TMDB_LANG || 'de-DE');
+    const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
+    if (!res.ok) throw new Error(`TMDB ${res.status}`);
+    for (const p of (await res.json()).results || []) {
+      const name = baseName(p.provider_name);
+      // Tarif-/Kanalvarianten fallen hier genauso weg wie in mapProviders --
+      // sonst stuenden "Netflix" und "Netflix Standard with Ads" als zwei
+      // getrennte Haken in der Einstellung.
+      if (!name || byId.has(p.provider_id)) continue;
+      if ([...byId.values()].some((e) => e.name === name)) continue;
+      byId.set(p.provider_id, {
+        id: p.provider_id,
+        name,
+        logo: p.logo_path || null,
+        priority: p.display_priority ?? 999,
+      });
+    }
+  }
+  // Rangfolge nach dem, was in DIESEM Katalog tatsaechlich vorkommt -- TMDBs
+  // display_priority allein spuelt Nischenanbieter (GuideDoc, Sun Nxt) nach
+  // oben, waehrend die hier relevanten deutschen Anbieter untergehen.
+  const { rows } = await pool.query(`
+    WITH alle AS (
+      SELECT (jsonb_array_elements(flatrate)->>'id')::int AS id FROM watch_providers_cache
+      UNION ALL SELECT (jsonb_array_elements(rent)->>'id')::int FROM watch_providers_cache
+      UNION ALL SELECT (jsonb_array_elements(buy)->>'id')::int FROM watch_providers_cache)
+    SELECT id, count(*)::int AS n FROM alle GROUP BY id`);
+  const freq = new Map(rows.map((r) => [r.id, r.n]));
+  const list = [...byId.values()].sort((a, b) => {
+    const fa = freq.get(a.id) || 0, fb = freq.get(b.id) || 0;
+    if (fa !== fb) return fb - fa;
+    // Die Standardanbieter immer weit vorn, auch wenn der Cache noch leer ist.
+    const da = DEFAULT_PROVIDER_IDS.includes(a.id) ? 0 : 1;
+    const db = DEFAULT_PROVIDER_IDS.includes(b.id) ? 0 : 1;
+    if (da !== db) return da - db;
+    return a.priority - b.priority || a.name.localeCompare(b.name, 'de');
+  });
+  list.forEach((p, i) => { p.common = i < COMMON_COUNT; delete p.priority; });
+  providerCatalog = { at: Date.now(), list };
+  return list;
+}
+
+// GET /api/watch-providers/catalog -- alle auswaehlbaren Anbieter. Oeffentlich,
+// damit die Einstellung auch beim ersten Oeffnen sofort etwas anzeigen kann.
+router.get('/catalog', async (req, res) => {
+  res.json({ providers: await getProviderCatalog(), defaults: DEFAULT_PROVIDER_IDS });
+});
+
+// GET/PUT /api/watch-providers/selection -- eigene Anbieterauswahl.
+router.get('/selection', requireAuth, async (req, res) => {
+  const { rows } = await pool.query('SELECT watch_provider_ids FROM users WHERE id = $1', [req.session.userId]);
+  const stored = rows[0] ? rows[0].watch_provider_ids : null;
+  res.json({
+    selected: stored === null ? DEFAULT_PROVIDER_IDS : stored,
+    configured: stored !== null,
+    defaults: DEFAULT_PROVIDER_IDS,
+  });
+});
+
+router.put('/selection', requireAuth, async (req, res) => {
+  const { selected } = req.body || {};
+  if (!Array.isArray(selected)) return res.status(400).json({ error: 'invalid_payload' });
+  const ids = [...new Set(selected.map(Number).filter((n) => Number.isInteger(n) && n > 0))];
+  await pool.query('UPDATE users SET watch_provider_ids = $1 WHERE id = $2', [ids, req.session.userId]);
+  res.json({ selected: ids, configured: true, defaults: DEFAULT_PROVIDER_IDS });
+});
 
 // GET /api/watch-providers/by-title/:titleId -- Einstieg fuer Titel, deren
 // TMDB-ID im Frontend nicht bekannt ist (die 600 kuratierten Katalog-Titel

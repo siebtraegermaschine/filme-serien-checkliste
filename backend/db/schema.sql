@@ -59,6 +59,24 @@ CREATE TABLE IF NOT EXISTS users (
   created_at        TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- Selbst gewaehlte Streaminganbieter (TMDB-Provider-IDs, siehe Einstellungen ->
+-- "Streaminganbieter"). Steuert, welche Anbieter unter Ansehen/Leihen/Kaufen,
+-- an den Titelzeilen und im "Nur Streaming"-Filter ueberhaupt auftauchen --
+-- ohne diese Einschraenkung listet TMDB je Titel schnell ein Dutzend Anbieter,
+-- von denen man die meisten gar nicht nutzt.
+--
+-- Drei unterscheidbare Zustaende, bewusst als NULL-faehiges Array statt als
+-- eigener Tabelle (die Auswahl wird immer komplett gelesen und geschrieben,
+-- nie einzeln abgefragt oder gejoint):
+--   NULL          -- noch nie konfiguriert; es gelten die vier Anbieter, die
+--                    auch der taegliche Streaming-Abgleich kennt (Netflix 8,
+--                    Amazon Prime Video 9, Disney+ 337, Apple TV+ 350)
+--   leeres Array  -- bewusst nichts ausgewaehlt: dann wird NICHT gefiltert,
+--                    also alle Anbieter gezeigt (sonst waere die Anzeige leer
+--                    und die Einstellung eine Sackgasse)
+--   gefuellt      -- genau diese Anbieter
+ALTER TABLE users ADD COLUMN IF NOT EXISTS watch_provider_ids INTEGER[];
+
 CREATE TABLE IF NOT EXISTS password_reset_tokens (
   id         BIGSERIAL PRIMARY KEY,
   user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
