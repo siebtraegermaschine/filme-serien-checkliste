@@ -908,8 +908,7 @@
     <button class="modal-x" id="profileModalX" aria-label="Schließen">✕</button>
     <h3>Gemeinsam schauen</h3>
     <p class="prov-intro">Wähle Personen aus, mit denen du etwas sehen möchtest. Angezeigt
-      werden dann nur noch Titel, die auch bei ihnen auf der Liste stehen.
-      Ohne Auswahl siehst du wie gewohnt deine eigene Ansicht.</p>
+      werden dann nur noch Titel, die auch bei ihnen auf der Liste stehen.</p>
     <div class="profile-list" id="profileList"></div>
     <button type="button" id="profileInviteBtn" class="profile-add">＋ Person einladen</button>
     <hr class="account-sep">
@@ -3046,21 +3045,25 @@ function matchNoteHtml(titleId){
 }
 
 // Geschmacksprofil einer verknuepften Person -- aufgebaut wie buildProfile(),
-// nur aus deren Titelliste. Alle Titel zaehlen gleich: ihre Bewertungen werden
-// bewusst nicht uebertragen (siehe /api/links/progress), also gibt es keine
-// Gewichtung. Nur das erste Genre je Titel, exakt wie in buildProfile.
+// nur aus deren Titelliste und mit derselben Gewichtung nach Sternen
+// (RATING_WEIGHT). Ohne diese Gewichtung zaehlte jeder Titel gleich, ein mit
+// 4 Sternen abgestrafter Film praegte das Profil also genauso stark wie der
+// Lieblingsfilm. Nur das erste Genre je Titel, exakt wie in buildProfile.
 function buildProfileForLinked(uid){
   var m = LINKED_PROGRESS[uid];
   if (!m) return null;
   var genre = {}, cast = {}, dir = {}, kw = {}, years = [], n = 0;
   POOL.forEach(function(item){
     if (item.realId == null || !m.has(item.realId)) return;
-    var g = (item.g || [])[0]; if (g) genre[g] = (genre[g] || 0) + 1;
-    (item.c || []).forEach(function(a){ if (a) cast[a] = (cast[a] || 0) + 1; });
-    if (item.d) dir[item.d] = (dir[item.d] || 0) + 1;
-    (item.kw || []).forEach(function(k){ if (k) kw[k] = (kw[k] || 0) + 1; });
+    var eintrag = m.get(item.realId);
+    // Unbewertete Titel zaehlen neutral (Gewicht 1) -- genau wie bei einem selbst.
+    var w = (eintrag && eintrag.r) ? (RATING_WEIGHT[eintrag.r] || 1) : 1;
+    var g = (item.g || [])[0]; if (g) genre[g] = (genre[g] || 0) + w;
+    (item.c || []).forEach(function(a){ if (a) cast[a] = (cast[a] || 0) + w; });
+    if (item.d) dir[item.d] = (dir[item.d] || 0) + w;
+    (item.kw || []).forEach(function(k){ if (k) kw[k] = (kw[k] || 0) + w; });
     if (item.y) years.push(item.y);
-    n++;
+    n += w;
   });
   return { genre: genre, cast: cast, dir: dir, kw: kw, years: years, n: Math.max(1, n), usedAll: false };
 }
@@ -3093,7 +3096,7 @@ async function loadLinkedProfiles(){
     LINKED_PROFILES = profile || [];
     Object.keys(fortschritt || {}).forEach(function(uid){
       var m = new Map();
-      (fortschritt[uid] || []).forEach(function(e){ m.set(e.t, { s: e.s, w: e.w }); });
+      (fortschritt[uid] || []).forEach(function(e){ m.set(e.t, { s: e.s, w: e.w, r: e.r }); });
       LINKED_PROGRESS[Number(uid)] = m;
     });
   } catch (e) { /* ohne Verknuepfungen bleibt einfach alles wie bisher */ }

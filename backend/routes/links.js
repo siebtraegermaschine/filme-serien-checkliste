@@ -37,12 +37,16 @@ router.get('/', async (req, res) => {
 
 // Titellisten aller verknuepften Profile -- Grundlage fuer den Abgleich, den
 // das Frontend dann genauso im Browser rechnet wie den eigenen Taste-Score.
-// Bewusst OHNE die Bewertungen der anderen: fuer Schnittmenge und Geschmacks-
-// profil genuegt "steht auf der Liste" plus Zustand, und wie jemand einen Film
-// benotet hat, geht Dritte schlicht nichts an.
+//
+// Die Sterne-Bewertung (r) ist dabei ausdruecklich mit enthalten: ohne sie
+// zaehlte bei einer verknuepften Person jeder Titel gleich, ein mit 4 Sternen
+// abgestrafter Film praegte ihr Profil also genauso stark wie ihr
+// Lieblingsfilm -- der gemeinsame Taste-Score waere entsprechend ungenau.
+// Siehe datenschutz.html Abschnitt 7, wo diese Uebermittlung beschrieben ist.
+// Nicht uebermittelt werden weiterhin E-Mail-Adresse und Kontodaten.
 router.get('/progress', async (req, res) => {
   const { rows } = await pool.query(
-    `SELECT l.linked_user_id, p.title_id, p.seen, p.watchlist
+    `SELECT l.linked_user_id, p.title_id, p.seen, p.watchlist, p.rating
        FROM user_links l
        JOIN user_progress p ON p.user_id = l.linked_user_id
       WHERE l.user_id = $1 AND (p.seen OR p.watchlist)`,
@@ -50,7 +54,7 @@ router.get('/progress', async (req, res) => {
   );
   const proProfil = {};
   for (const r of rows) {
-    (proProfil[r.linked_user_id] ||= []).push({ t: r.title_id, s: r.seen, w: r.watchlist });
+    (proProfil[r.linked_user_id] ||= []).push({ t: r.title_id, s: r.seen, w: r.watchlist, r: r.rating });
   }
   res.json(proProfil);
 });
