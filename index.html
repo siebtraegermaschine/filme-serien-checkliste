@@ -490,13 +490,11 @@
      Discovery-Regeln. */
   .watch-row { display: none; clear: both; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); cursor: default; }
   li.item.show-details .watch-row { display: block; }
-  /* Ansehen/Leihen/Kaufen zusammen links, "Trailer" rechts abgesetzt. */
+  /* "Trailer" ganz links, Kaufen/Leihen/Ansehen rechts abgesetzt. Der
+     automatische Abstand rechts vom Trailer schiebt alles Nachfolgende ans
+     Ende -- und laesst ihn auf der Kino-Seite, wo er allein steht, ganz links. */
   .watch-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; justify-content: flex-start; }
-  .trailer-btn { margin-left: auto; }
-  /* Kino-Seite: dort gibt es nur den Trailer, der steht dann ganz links
-     (siehe watchRowHtml, opts.nurTrailer) -- ein "auto"-Abstand wuerde ihn
-     sonst als einziges Element nach rechts schieben. */
-  .watch-row.nur-trailer .trailer-btn { margin-left: 0; }
+  .trailer-btn { margin-right: auto; }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
   @media (hover: hover) { .watch-btn:hover { border-color: var(--accent); color: var(--accent); } }
@@ -1357,10 +1355,12 @@ function watchRowHtml(tmdbId, type, title, realId, opts){
   return '<div class="watch-row' + (nurTrailer ? ' nur-trailer' : '') + '" data-wapi="' + escAttr(api || '') +
          '" data-wtitle="' + escAttr(title || '') + '">' +
     '<div class="watch-btns">' +
-      (nurTrailer ? '' : WATCH_CATS.map(function(c){
+      trailerBtnHtml(trailerApi, title) +
+      // Umgekehrte Reihenfolge: rechts aussen soll "Ansehen" stehen, davor
+      // "Leihen", davor "Kaufen" -- WATCH_CATS ist andersherum sortiert.
+      (nurTrailer ? '' : WATCH_CATS.slice().reverse().map(function(c){
         return '<button type="button" class="watch-btn" data-cat="' + c.key + '">' + c.label + '</button>';
       }).join('')) +
-      trailerBtnHtml(trailerApi, title) +
     '</div>' +
     '<div class="watch-panel" hidden></div>' +
   '</div>';
