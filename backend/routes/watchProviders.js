@@ -166,9 +166,21 @@ async function resolveTmdbId(titleId) {
   return { tmdbId: found, type: row.type };
 }
 
-// Die vier Anbieter, die auch der taegliche Streaming-Abgleich (stream-fetch.mjs)
-// kennt -- Vorauswahl fuer alle, die noch nichts eingestellt haben.
-const DEFAULT_PROVIDER_IDS = [8, 9, 337, 350]; // Netflix, Amazon Prime Video, Disney+, Apple TV+
+// Vorauswahl fuer alle, die noch nichts eingestellt haben.
+//
+// Erste Zeile: die vier Abo-Dienste, die auch der taegliche Streaming-Abgleich
+// (stream-fetch.mjs) kennt und die als Schildchen an den Titeln erscheinen.
+//
+// Zweite Zeile: die grossen Shops. Ohne sie waeren "Leihen" und "Kaufen"
+// dauerhaft leer, denn zum Leihen/Kaufen zaehlen ausschliesslich Shops -- und
+// die tragen bei TMDB voellig andere IDs als die gleichnamigen Abo-Dienste
+// (Apple TV Store 2 vs. Apple TV+ 350, Amazon Video 10 vs. Amazon Prime Video
+// 9). Es sind zugleich genau die Anbieter, fuer die WATCH_SEARCH_URLS im
+// Frontend einen funktionierenden Suchlink kennt.
+const DEFAULT_PROVIDER_IDS = [
+  8, 9, 337, 350,   // Netflix, Amazon Prime Video, Disney+, Apple TV+
+  2, 10, 3, 192,    // Apple TV Store, Amazon Video, Google Play Movies, YouTube
+];
 // So viele Anbieter zeigt die Einstellung direkt; der Rest steckt hinter
 // "Weitere anzeigen". TMDB kennt fuer DE knapp 200 Anbieter, die allermeisten
 // davon Nischenangebote.
