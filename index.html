@@ -1962,6 +1962,7 @@ function renderList() {
 // einzelnen "if (activeTab==='discovery') renderDiscovery() ..." Verzweigungen
 // an den verschiedenen Aufrufstellen im Code.
 function renderCurrentTab(){
+  updateProfileBtn();          // Leiste haengt davon ab, ob Discovery aktiv ist
   if (inDiscoveryMode()) { renderDiscovery(); }
   else { renderList(); }
   // Inhaltsangaben der gerade gerenderten Zeilen nachladen (siehe fillPlots).
@@ -3028,8 +3029,12 @@ function updateProfileBtn(){
   }
   var bar = document.getElementById('matchBar');
   if (!bar) return;
-  bar.style.display = matchAktiv() ? 'flex' : 'none';
-  if (matchAktiv()) {
+  // In Discovery greift der Abgleich bewusst nicht -- dort geht es ums Entdecken
+  // neuer Titel, nicht um gemeinsame. Die Leiste wuerde sonst behaupten, die
+  // Liste sei eingeschraenkt, obwohl alles zu sehen ist.
+  var zeigen = matchAktiv() && !inDiscoveryMode();
+  bar.style.display = zeigen ? 'flex' : 'none';
+  if (zeigen) {
     document.getElementById('matchBarText').textContent =
       'Gemeinsame Titel mit ' + MATCH_WITH.map(profilName).join(' und ');
   }
