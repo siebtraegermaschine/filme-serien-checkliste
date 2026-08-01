@@ -24,6 +24,7 @@ export function serializeTitle(row, { withPlot = true } = {}) {
     keywords: row.keywords,
     rating: row.rating != null ? Number(row.rating) : null,
     voteCount: row.vote_count,
+    certification: row.certification,
     posterPath: row.poster_path,
     posterBase64: row.poster_base64,
     source: row.source,
@@ -165,6 +166,7 @@ router.post('/ensure', requireAuth, async (req, res) => {
     posterPath,
     rating,
     voteCount,
+    certification,
     plot,
     source,
   } = req.body || {};
@@ -181,12 +183,18 @@ router.post('/ensure', requireAuth, async (req, res) => {
   // Inhaltsangabe eines laengst bestehenden Titels geloescht, sobald ihn jemand
   // ueber den Streaming-Weg erneut hinzufuegt.
   const { rows } = await pool.query(
-    `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, plot, source)
+    `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, plot, source)
      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,
-       COALESCE(NULLIF($12, ''), (SELECT overview FROM streaming_cache
+       -- Altersfreigabe wie die Inhaltsangabe aus streaming_cache ergaenzen:
+       -- ohne sie wuerde der Titel vom FSK-Filter ausgeblendet, obwohl die
+       -- Angabe vorliegt.
+       COALESCE(NULLIF($12, ''), (SELECT certification FROM streaming_cache
+                                   WHERE tmdb_id = $1 AND type = $2
+                                     AND certification IS NOT NULL AND certification <> '' LIMIT 1)),
+       COALESCE(NULLIF($13, ''), (SELECT overview FROM streaming_cache
                                    WHERE tmdb_id = $1 AND type = $2
                                      AND overview IS NOT NULL AND overview <> '' LIMIT 1)),
-       $13)
+       $14)
      ON CONFLICT (tmdb_id, type) DO UPDATE SET
        title = EXCLUDED.title,
        year = EXCLUDED.year,
@@ -197,6 +205,7 @@ router.post('/ensure', requireAuth, async (req, res) => {
        poster_path = EXCLUDED.poster_path,
        rating = EXCLUDED.rating,
        vote_count = EXCLUDED.vote_count,
+       certification = COALESCE(NULLIF(EXCLUDED.certification, ''), titles.certification),
        plot = COALESCE(NULLIF(EXCLUDED.plot, ''), titles.plot),
        updated_at = now()
      RETURNING *`,
@@ -212,6 +221,7 @@ router.post('/ensure', requireAuth, async (req, res) => {
       posterPath || null,
       rating != null ? rating : null,
       voteCount != null ? voteCount : null,
+      certification || null,
       plot || null,
       source === 'streaming' ? 'streaming' : 'discovery',
     ]
@@ -255,8 +265,8 @@ router.post('/bulk-ingest', async (req, res) => {
     for (const item of items) {
       if (!item || !item.tmdbId || (item.type !== 'movie' && item.type !== 'series') || !item.title) continue;
       const { rowCount } = await client.query(
-        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, plot, source)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,$11,'discovery')
+        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, plot, source)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,$11,$12,'discovery')
          ON CONFLICT (tmdb_id, type) DO UPDATE SET
            year = EXCLUDED.year,
            genres = EXCLUDED.genres,
@@ -265,6 +275,7 @@ router.post('/bulk-ingest', async (req, res) => {
            poster_path = EXCLUDED.poster_path,
            rating = EXCLUDED.rating,
            vote_count = EXCLUDED.vote_count,
+           certification = EXCLUDED.certification,
            plot = COALESCE(NULLIF(EXCLUDED.plot, ''), titles.plot),
            updated_at = now()
          WHERE titles.source <> 'catalog'`,
@@ -279,6 +290,7 @@ router.post('/bulk-ingest', async (req, res) => {
           item.posterPath || null,
           item.rating != null ? item.rating : null,
           item.voteCount != null ? item.voteCount : null,
+          item.certification || null,
           item.plot || null,
         ]
       );

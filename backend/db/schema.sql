@@ -335,6 +335,17 @@ ALTER TABLE titles          ADD COLUMN IF NOT EXISTS vote_count INTEGER;
 ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS vote_count INTEGER;
 ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS vote_count INTEGER;
 
+-- Deutsche Altersfreigabe (FSK): '0', '6', '12', '16', '18' -- NULL, wenn TMDB
+-- keine deutsche Angabe kennt. Das ist bei rund einem Drittel der Titel der
+-- Fall, weshalb der Filter solche Titel bewusst ausblendet statt sie
+-- durchzulassen (siehe Frontend, fskErlaubt).
+--
+-- Quelle je nach Art unterschiedlich: bei Filmen release_dates (DE-Eintrag,
+-- erster nicht leerer certification-Wert), bei Serien content_ratings (rating).
+ALTER TABLE titles          ADD COLUMN IF NOT EXISTS certification TEXT;
+ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS certification TEXT;
+ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS certification TEXT;
+
 -- Von connect-pg-simple genutzte Session-Tabelle (Standard-Schema des Pakets).
 CREATE TABLE IF NOT EXISTS session (
   sid    VARCHAR NOT NULL COLLATE "default" PRIMARY KEY,

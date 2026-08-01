@@ -581,6 +581,13 @@
     font-size:14px; font-weight:600; }
   @media (hover: hover) { .profile-add:hover { border-color:var(--accent); color:var(--accent); } }
   .profile-empty { color:var(--text-dim); font-size:13px; padding:10px 8px; }
+  .fsk-row { display:flex; flex-wrap:wrap; gap:8px; }
+  .fsk-row button { flex:1 1 0; min-width:74px; background:var(--card); border:1px solid var(--border);
+    border-radius:8px; padding:9px 6px; color:var(--text-dim); font-size:13px; font-weight:600;
+    cursor:pointer; transition:all .15s; }
+  @media (hover: hover) { .fsk-row button:hover { border-color:var(--accent); color:var(--accent); } }
+  .fsk-row button.active { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+  .fsk-hinweis { color:var(--text-dim); font-size:11.5px; margin:9px 0 0; }
   /* Hinweis an Titeln, deren Zustand bei der anderen Person abweicht. */
   .match-note { margin-top:6px; font-size:11.5px; color:var(--accent); }
 
@@ -906,6 +913,11 @@
       Ohne Auswahl siehst du wie gewohnt deine eigene Ansicht.</p>
     <div class="profile-list" id="profileList"></div>
     <button type="button" id="profileInviteBtn" class="profile-add">＋ Person einladen</button>
+    <hr class="account-sep">
+    <p class="prov-intro" style="margin-bottom:8px">Schaust du mit Kindern? Dann blende alles aus,
+      was für ihr Alter nicht freigegeben ist.</p>
+    <div class="fsk-row" id="fskRow"></div>
+    <p class="fsk-hinweis">Titel ohne hinterlegte Altersfreigabe werden dabei ausgeblendet.</p>
   </div>
 </div>
 
@@ -1452,7 +1464,7 @@ function buildPool(combinedRows, streamDoc){
       realId: row.id, tmdbId: row.tmdbId, type: row.type,
       t: row.title, ot: row.originalTitle, y: row.year, g: row.genres || [], d: row.director || '',
       c: row.cast || [], kw: row.keywords || [], p: row.posterPath || null,
-      poster64: row.posterBase64 || null, r: row.rating, vc: row.voteCount, ov: row.plot || '',
+      poster64: row.posterBase64 || null, r: row.rating, vc: row.voteCount, fsk: row.certification || null, ov: row.plot || '',
       source: row.source, providers: [],
     };
     if (row.source === 'catalog') catalogByName.set(row.type + '|' + normTitle(row.title), item);
@@ -1489,7 +1501,7 @@ function buildPool(combinedRows, streamDoc){
           item = {
             realId: null, tmdbId: Number(c.id), type: type,
             t: c.t, ot: null, y: c.y, g: c.g || [], d: c.d || '', c: c.c || [], kw: c.kw || [],
-            p: c.p || null, poster64: null, r: c.r, vc: c.vc, ov: c.ov || '', fs: c.fs || null,
+            p: c.p || null, poster64: null, r: c.r, vc: c.vc, fsk: c.fsk || null, ov: c.ov || '', fs: c.fs || null,
             source: 'streaming', providers: [],
           };
           byKey.set(k, item);
@@ -1565,8 +1577,8 @@ function rebuild(){
   // matchNoteHtml), sonst muesste bei jedem Umschalten neu aufgebaut werden.
   const eigene = function(item){ return getWatchlistFlag(item.realId) || getSeen(item.realId); };
   const gemeinsam = function(item){ return matchInfo(item.realId).sichtbar; };
-  const filmeItems  = POOL.filter(function(item){ return item.type === 'movie'  && eigene(item) && gemeinsam(item); });
-  const serienItems = POOL.filter(function(item){ return item.type === 'series' && eigene(item) && gemeinsam(item); });
+  const filmeItems  = POOL.filter(function(item){ return item.type === 'movie'  && eigene(item) && gemeinsam(item) && fskErlaubt(item); });
+  const serienItems = POOL.filter(function(item){ return item.type === 'series' && eigene(item) && gemeinsam(item) && fskErlaubt(item); });
   FILME  = filmeItems.map(poolToItemTuple);
   SERIEN = serienItems.map(poolToItemTuple);
   DETAILS = { filme: filmeItems.map(poolToDet), serien: serienItems.map(poolToDet) };
@@ -2585,6 +2597,7 @@ function renderSimilarList(){
     var typPasst = (simTypeFilter.f && isMovie) || (simTypeFilter.s && isSeries);
     if (!typPasst) return false;
     if (simTypeFilter.stream && !selectedProviders(i.providers).length) return false;
+    if (!fskErlaubt(i)) return false;
     return true;
   });
   var scored = pool.map(function(i){ return { item: i, score: scoreCand(i, _simProf).score }; })
@@ -2707,7 +2720,7 @@ function cinemaRowToItem(row, poolByTmdb){
   return {
     realId: null, tmdbId, type: 'movie', t: row.t, ot: null, y: row.y,
     g: row.g || [], d: row.d || '', c: row.c || [], kw: [],
-    p: row.p || null, poster64: null, r: row.r, vc: row.vc, ov: ov, providers: [],
+    p: row.p || null, poster64: null, r: row.r, vc: row.vc, fsk: row.fsk || null, ov: ov, providers: [],
   };
 }
 function renderCinemaSection(key, rows, profile, poolByTmdb){
@@ -2721,7 +2734,7 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
   var entries = rows.map(function(row){
     var item = cinemaRowToItem(row, poolByTmdb);
     return { row: row, item: item, score: scoreMitProfilen(item, profile) };
-  });
+  }).filter(function(e){ return fskErlaubt(e.item); });
   entries.sort(function(a, b){
     if (cinemaSortKey === 'imdb') return (b.item.r || 0) - (a.item.r || 0);
     if (cinemaSortKey === 'taste') return b.score - a.score;
@@ -2964,6 +2977,33 @@ var LINKED_PROGRESS = {};      // userId -> Map(titleId -> {s,w})
 var MATCH_WITH = [];           // ausgewaehlte userIds
 
 function matchAktiv(){ return MATCH_WITH.length > 0; }
+
+/* ---- Altersfreigabe (FSK) ----
+   Die FSK kennt genau fuenf Stufen: 0, 6, 12, 16, 18 -- dazwischen liegt
+   nichts. Die ersten drei Filter wirken kumulativ ("bis 12" schliesst 0 und 6
+   ein), "ab 18" zeigt umgekehrt ausschliesslich die 18er.
+
+   Titel OHNE hinterlegte Freigabe werden bei aktivem Filter ausgeblendet: Rund
+   ein Drittel des Katalogs hat keine deutsche Angabe, und beim Schauen mit
+   Kindern darf nichts durchrutschen, nur weil TMDB nichts weiss. */
+var FSK_STUFEN = [
+  { key: '6',  label: 'bis 6',  erlaubt: ['0', '6'] },
+  { key: '12', label: 'bis 12', erlaubt: ['0', '6', '12'] },
+  { key: '16', label: 'bis 16', erlaubt: ['0', '6', '12', '16'] },
+  { key: '18', label: 'ab 18',  erlaubt: ['18'] },
+];
+var MY_FSK = null;   // null = kein Filter
+function fskAktiv(){ return MY_FSK !== null; }
+function fskErlaubt(item){
+  if (!fskAktiv()) return true;
+  var stufe = FSK_STUFEN.find(function(s){ return s.key === MY_FSK; });
+  if (!stufe) return true;
+  // Nur die fuenf offiziellen Werte gelten als belegt -- alles andere
+  // ("Not Rated", leer, unbekannte Kuerzel) zaehlt als fehlende Angabe.
+  var f = item && item.fsk != null ? String(item.fsk).trim() : '';
+  if (['0','6','12','16','18'].indexOf(f) === -1) return false;
+  return stufe.erlaubt.indexOf(f) !== -1;
+}
 function profilName(id){
   var p = LINKED_PROFILES.find(function(x){ return x.id === id; });
   return p ? p.name : 'Unbekannt';
@@ -3059,21 +3099,27 @@ function updateProfileBtn(){
   var btn = document.getElementById('profileBtn');
   if (btn) {
     btn.style.display = CURRENT_USER ? 'flex' : 'none';
-    btn.classList.toggle('filtering', matchAktiv());
-    btn.setAttribute('aria-label', matchAktiv()
-      ? ('Zusammen schauen mit ' + MATCH_WITH.map(profilName).join(' und '))
-      : 'Zusammen schauen');
+    btn.classList.toggle('filtering', matchAktiv() || fskAktiv());
+    var teile = [];
+    if (matchAktiv()) teile.push('mit ' + MATCH_WITH.map(profilName).join(' und '));
+    if (fskAktiv()) teile.push('Altersfreigabe ' + (FSK_STUFEN.find(function(x){ return x.key === MY_FSK; })||{}).label);
+    btn.setAttribute('aria-label', teile.length ? ('Zusammen schauen – ' + teile.join(', ')) : 'Zusammen schauen');
   }
   var bar = document.getElementById('matchBar');
   if (!bar) return;
   // In Discovery greift der Abgleich bewusst nicht -- dort geht es ums Entdecken
   // neuer Titel, nicht um gemeinsame. Die Leiste wuerde sonst behaupten, die
   // Liste sei eingeschraenkt, obwohl alles zu sehen ist.
-  var zeigen = matchAktiv() && !inDiscoveryMode();
+  // Der Altersfilter wirkt auch in Discovery, der Personen-Abgleich nicht --
+  // die Leiste erscheint deshalb, sobald mindestens eines davon zutrifft.
+  var zeigtMatch = matchAktiv() && !inDiscoveryMode();
+  var zeigen = zeigtMatch || fskAktiv();
   bar.style.display = zeigen ? 'flex' : 'none';
   if (zeigen) {
-    document.getElementById('matchBarText').textContent =
-      'Gemeinsame Titel mit ' + MATCH_WITH.map(profilName).join(' und ');
+    var text = [];
+    if (zeigtMatch) text.push('Gemeinsame Titel mit ' + MATCH_WITH.map(profilName).join(' und '));
+    if (fskAktiv()) text.push('Altersfreigabe ' + (FSK_STUFEN.find(function(x){ return x.key === MY_FSK; })||{}).label);
+    document.getElementById('matchBarText').textContent = text.join(' · ');
   }
 }
 
@@ -3115,12 +3161,29 @@ function renderProfileList(){
     attachSwipeToRemove(row, function(){ row.querySelector('.pi-del').click(); });
   });
 }
-function openProfileModal(){ renderProfileList(); _profileModal.style.display = 'flex'; }
+function renderFskRow(){
+  var el = document.getElementById('fskRow');
+  el.innerHTML = FSK_STUFEN.map(function(st){
+    return '<button type="button" data-fsk="' + escAttr(st.key) + '"' +
+           (MY_FSK === st.key ? ' class="active"' : '') + '>' + esc(st.label) + '</button>';
+  }).join('');
+  el.querySelectorAll('button').forEach(function(b){
+    b.onclick = function(){
+      // Erneuter Klick auf die aktive Stufe hebt den Filter auf -- sonst gaebe
+      // es keinen Weg zurueck zur ungefilterten Ansicht.
+      MY_FSK = (MY_FSK === b.dataset.fsk) ? null : b.dataset.fsk;
+      renderFskRow(); updateProfileBtn(); rebuild(); renderCurrentTab();
+      if (cinemaMode) renderCinemaPage();
+    };
+  });
+}
+function openProfileModal(){ renderProfileList(); renderFskRow(); _profileModal.style.display = 'flex'; }
 function closeProfileModal(){ _profileModal.style.display = 'none'; }
 document.getElementById('profileBtn').onclick = function(){ requireLogin(openProfileModal); };
 document.getElementById('matchBarClear').onclick = function(){
-  MATCH_WITH = [];
+  MATCH_WITH = []; MY_FSK = null;
   updateProfileBtn(); rebuild(); renderCurrentTab();
+  if (cinemaMode) renderCinemaPage();
 };
 document.getElementById('profileModalX').onclick = closeProfileModal;
 _profileModal.addEventListener('click', function(e){ if (e.target === _profileModal) closeProfileModal(); });
@@ -3897,6 +3960,7 @@ function discFilterPool(){
     var typeMatch = (discTypeFilter.f && isMovie) || (discTypeFilter.s && isSeries);
     if (!typeMatch) return false;
     if (discInStreamFilterOn && !selectedProviders(i.providers).length) return false;
+    if (!fskErlaubt(i)) return false;
     return true;
   });
 }

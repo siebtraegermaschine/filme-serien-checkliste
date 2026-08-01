@@ -49,13 +49,31 @@ async function genreMap(kind) {
   const m = {}; (d.genres || []).forEach((g) => (m[g.id] = g.name)); return m;
 }
 
+
+// Deutsche Altersfreigabe aus dem ohnehin geholten Detail-Datensatz lesen.
+// Filme fuehren sie unter release_dates (je Land mehrere Eintraege, oft mit
+// leerem certification-Feld -- daher der erste nicht leere), Serien unter
+// content_ratings.
+function fskAus(detail, kind) {
+  if (kind === 'movie') {
+    const de = ((detail.release_dates || {}).results || []).find((r) => r.iso_3166_1 === 'DE');
+    if (!de) return null;
+    return (de.release_dates || []).map((r) => r.certification).find((c) => c) || null;
+  }
+  const de = ((detail.content_ratings || {}).results || []).find((r) => r.iso_3166_1 === 'DE');
+  return (de && de.rating) || null;
+}
+
 const enrichCache = new Map();
 async function enrich(kind, id) {
   const ck = kind + ':' + id;
   if (enrichCache.has(ck)) return enrichCache.get(ck);
-  const result = { cast: [], dir: '' };
+  const result = { cast: [], dir: '', fsk: null };
   try {
-    const d = await tmdb(`/${kind}/${id}`, { language: LANG, append_to_response: 'credits' });
+    const d = await tmdb(`/${kind}/${id}`, { language: LANG,
+      // Freigabe haengt sich an den ohnehin noetigen Detailaufruf an -- kein
+      // zusaetzlicher Abruf, die Laufzeit bleibt unveraendert.
+      append_to_response: kind === 'movie' ? 'credits,release_dates' : 'credits,content_ratings' });
     const cr = d.credits || {};
     result.cast = (cr.cast || []).slice(0, 4).map((p) => p.name).filter(Boolean);
     if (kind === 'movie') {
@@ -64,6 +82,7 @@ async function enrich(kind, id) {
     } else {
       result.dir = (d.created_by || []).map((p) => p.name).filter(Boolean).join(', ');
     }
+    result.fsk = fskAus(d, kind);
   } catch (e) { /* Titel ohne Credits: Felder bleiben leer */ }
   enrichCache.set(ck, result);
   return result;
@@ -172,6 +191,7 @@ async function main() {
     const ex = await enrich(kind, item.tmdbId);
     item.cast = ex.cast;
     item.director = ex.dir;
+    item.certification = ex.fsk;
     item.plot = await overviewWithFallback(kind, item.tmdbId, item.overviewRaw);
     delete item.overviewRaw;
     done++;

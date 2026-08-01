@@ -52,6 +52,20 @@ const WANT = [
 if (!KEY) { console.error('FEHLER: TMDB_API_KEY ist nicht gesetzt.'); process.exit(1); }
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+// Deutsche Altersfreigabe aus dem ohnehin geholten Detail-Datensatz lesen.
+// Filme fuehren sie unter release_dates (je Land mehrere Eintraege, oft mit
+// leerem certification-Feld -- daher der erste nicht leere), Serien unter
+// content_ratings.
+function fskAus(detail, kind) {
+  if (kind === 'movie') {
+    const de = ((detail.release_dates || {}).results || []).find((r) => r.iso_3166_1 === 'DE');
+    if (!de) return null;
+    return (de.release_dates || []).map((r) => r.certification).find((c) => c) || null;
+  }
+  const de = ((detail.content_ratings || {}).results || []).find((r) => r.iso_3166_1 === 'DE');
+  return (de && de.rating) || null;
+}
+
 
 async function tmdb(path, params = {}) {
   const u = new URL(API + path);
@@ -72,9 +86,12 @@ const enrichCache = new Map();
 async function enrich(kind, id) {
   const ck = kind + ':' + id;
   if (enrichCache.has(ck)) return enrichCache.get(ck);
-  const result = { cast: [], dir: '' };
+  const result = { cast: [], dir: '', fsk: null };
   try {
-    const d = await tmdb(`/${kind}/${id}`, { language: LANG, append_to_response: 'credits' });
+    const d = await tmdb(`/${kind}/${id}`, { language: LANG,
+      // release_dates/content_ratings haengen sich an den ohnehin noetigen
+      // Detailaufruf an -- kein zusaetzlicher Abruf.
+      append_to_response: kind === 'movie' ? 'credits,release_dates' : 'credits,content_ratings' });
     const cr = d.credits || {};
     result.cast = (cr.cast || []).slice(0, 4).map(p => p.name).filter(Boolean);
     if (kind === 'movie') {
@@ -83,6 +100,7 @@ async function enrich(kind, id) {
     } else {
       result.dir = (d.created_by || []).map(p => p.name).filter(Boolean).join(', ');
     }
+    result.fsk = fskAus(d, kind);
   } catch (e) { /* Titel ohne Credits: Felder bleiben leer */ }
   enrichCache.set(ck, result);
   return result;
@@ -145,6 +163,7 @@ async function discover(kind, providerId, gmap) {
     const ex = await enrich(kind, item.id);
     item.c = ex.cast;
     item.d = ex.dir;
+    item.fsk = ex.fsk;
     await sleep(120);            // sanftes Tempo gegen das Rate-Limit
   }
   return out;

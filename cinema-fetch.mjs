@@ -71,7 +71,7 @@ const enrichCache = new Map();
 // discoverRange/main unten, wo aus deDates das passende Datum herausgesucht wird).
 async function enrich(id) {
   if (enrichCache.has(id)) return enrichCache.get(id);
-  const result = { cast: [], dir: '', deDates: [] };
+  const result = { cast: [], dir: '', deDates: [], fsk: null };
   try {
     const d = await tmdb(`/movie/${id}`, { language: LANG, append_to_response: 'credits,release_dates' });
     const cr = d.credits || {};
@@ -85,6 +85,9 @@ async function enrich(id) {
         .filter((rd) => rd.type === 2 || rd.type === 3)
         .map((rd) => String(rd.release_date).slice(0, 10))
         .sort();
+      // Freigabe steht in derselben Antwort -- oft nur an einem der Eintraege,
+      // daher der erste nicht leere Wert.
+      result.fsk = (deEntry.release_dates || []).map((rd) => rd.certification).find((c) => c) || null;
     }
   } catch (e) { /* Titel ohne Credits/Release-Termine: Felder bleiben leer */ }
   enrichCache.set(id, result);
@@ -159,6 +162,7 @@ async function main() {
     const ex = await enrich(item.tmdbId);
     item.cast = ex.cast;
     item.director = ex.dir;
+    item.certification = ex.fsk;
     // Das deutsche Kinodatum, das tatsaechlich in dieses Zeitfenster faellt
     // (deshalb hat /discover den Titel ja geliefert), ersetzt das vorlaeufige
     // (oft globale Erst-)Veroeffentlichungsdatum von oben. originalReleaseDate
