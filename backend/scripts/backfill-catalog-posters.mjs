@@ -63,15 +63,24 @@ async function sucheTmdbId(kind, title, year) {
   const nameField = kind === 'movie' ? 'title' : 'name';
   const origField = kind === 'movie' ? 'original_title' : 'original_name';
   const dateField = kind === 'movie' ? 'release_date' : 'first_air_date';
-  const gesucht = normTitle(title);
+  // Manche Katalog-Titel tragen die Jahreszahl im Namen ("Dune (2021)"). Die
+  // kennt TMDB nicht -- sie muss sowohl aus der Suchanfrage als auch aus dem
+  // Vergleichstitel raus, sonst scheitert hinterher der Abgleich.
+  const ohneJahr = title.replace(/\s*\((?:19|20)\d{2}\)\s*$/, '').trim() || title;
+  const gesucht = normTitle(ohneJahr);
 
   const suche = async (q) => (await tmdb(`/search/${kind}`, { language: LANG, query: q, include_adult: 'false' })).results || [];
   const primaer = await suche(title);
   const byId = new Map(primaer.map((r) => [r.id, r]));
-  const haupt = title.split(/[:‐-―−-]/)[0].trim();
-  if (haupt && haupt.length >= 3 && haupt !== title) {
+  // Weitere Schreibweisen probieren, falls der Volltitel nichts findet:
+  // ohne Jahreszahl, sowie nur der Haupttitel vor dem Untertitel-Trenner.
+  const varianten = [];
+  if (ohneJahr !== title) varianten.push(ohneJahr);
+  const haupt = ohneJahr.split(/[:‐-―−-]/)[0].trim();
+  if (haupt && haupt.length >= 3 && haupt !== ohneJahr) varianten.push(haupt);
+  for (const v of varianten) {
     await sleep(120);
-    for (const r of await suche(haupt)) if (!byId.has(r.id)) byId.set(r.id, r);
+    for (const r of await suche(v)) if (!byId.has(r.id)) byId.set(r.id, r);
   }
   const kandidaten = [...byId.values()];
   const jahrVon = (r) => Number.parseInt(String(r[dateField] || '').slice(0, 4), 10);
@@ -84,7 +93,33 @@ async function sucheTmdbId(kind, title, year) {
   return primaer.find(jahrPasst) || null;
 }
 
+// Das Leeren von poster_base64 ist nicht umkehrbar -- die Bilddaten stehen
+// nirgends sonst. Deshalb wird jedes Bild vor dem Loeschen weggesichert; im
+// Zweifel laesst sich alles zurueckholen mit:
+//   UPDATE titles t SET poster_base64 = b.poster_base64, poster_path = NULL
+//     FROM titles_poster_base64_backup b WHERE b.title_id = t.id;
+async function sicherungAnlegen() {
+  await pool.query(`CREATE TABLE IF NOT EXISTS titles_poster_base64_backup (
+    title_id      BIGINT PRIMARY KEY REFERENCES titles(id) ON DELETE CASCADE,
+    poster_base64 TEXT NOT NULL,
+    saved_at      TIMESTAMPTZ NOT NULL DEFAULT now())`);
+}
+
+async function posterSetzen(titleId, posterPath) {
+  await pool.query(
+    `INSERT INTO titles_poster_base64_backup (title_id, poster_base64)
+     SELECT id, poster_base64 FROM titles WHERE id = $1 AND poster_base64 IS NOT NULL
+     ON CONFLICT (title_id) DO NOTHING`,
+    [titleId]
+  );
+  await pool.query(
+    'UPDATE titles SET poster_path = $1, poster_base64 = NULL, updated_at = now() WHERE id = $2',
+    [posterPath, titleId]
+  );
+}
+
 async function main() {
+  if (!DRY) await sicherungAnlegen();
   const { rows } = await pool.query(
     `SELECT t.id, t.type, t.title, t.year, t.tmdb_id, r.tmdb_id AS aufgeloest,
             length(t.poster_base64) AS base64_groesse
@@ -113,10 +148,7 @@ async function main() {
           );
         }
         if (treffer && treffer.poster_path) {
-          if (!DRY) {
-            await pool.query('UPDATE titles SET poster_path = $1, poster_base64 = NULL, updated_at = now() WHERE id = $2',
-              [treffer.poster_path, row.id]);
-          }
+          if (!DRY) await posterSetzen(row.id, treffer.poster_path);
           ersetzt++; gespart += row.base64_groesse || 0;
           console.log(`  ✓ ${row.title} (${row.year}) -> ${treffer.poster_path}`);
           await sleep(120);
@@ -131,10 +163,7 @@ async function main() {
       }
       const detail = await tmdb(`/${kind}/${tmdbId}`, { language: LANG });
       if (detail.poster_path) {
-        if (!DRY) {
-          await pool.query('UPDATE titles SET poster_path = $1, poster_base64 = NULL, updated_at = now() WHERE id = $2',
-            [detail.poster_path, row.id]);
-        }
+        if (!DRY) await posterSetzen(row.id, detail.poster_path);
         ersetzt++; gespart += row.base64_groesse || 0;
         console.log(`  ✓ ${row.title} (${row.year}) -> ${detail.poster_path}`);
       } else {

@@ -128,12 +128,18 @@ Servers selbst.
 
 ## Bekannte Einschränkungen / offene Punkte
 
-- **Poster-Bilder der ursprünglichen 600 Katalog-Titel** liegen weiterhin als
-  Base64 in der DB (`titles.poster_base64`), weil für sie keine TMDB-Poster-
-  Pfade bekannt waren. Das funktioniert, ist aber unnötig groß (mehrere MB
-  Traffic pro Katalog-Abruf). Optimierung für später: Titel per TMDB-Suche
-  (Titel+Jahr) nachträglich mit echtem `poster_path` abgleichen und
-  `poster_base64` dann leeren.
+- **Poster-Bilder der ursprünglichen 600 Katalog-Titel** lagen als Base64 in der
+  DB (`titles.poster_base64`), weil für sie keine TMDB-Poster-Pfade bekannt
+  waren -- rund 4,2 MB bei jedem Katalog-Abruf. Dafür gibt es jetzt
+  `backend/scripts/backfill-catalog-posters.mjs`: ermittelt die TMDB-ID (aus
+  `title_tmdb_resolution` oder per Suche über Titel+Jahr), holt den echten
+  `poster_path` und leert `poster_base64` **nur bei Treffer**. Aufruf:
+  ```bash
+  docker compose -f docker-compose.yml exec -T backend \
+    node scripts/backfill-catalog-posters.mjs --dry-run   # erst zur Kontrolle
+  ```
+  Titel ohne Treffer behalten ihr Base64-Bild; das Skript ist beliebig oft
+  wiederholbar und arbeitet nur noch die verbliebenen ab.
 - **Rechtliche Seiten** (`impressum.html`, `datenschutz.html`) enthalten
   TODO-Platzhalter für Name/Anschrift/Kontakt/Hosting-Standort/E-Mail-Anbieter
   -- vor Go-Live ausfüllen.
