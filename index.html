@@ -711,8 +711,11 @@
     <hr class="nav-menu-sep">
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
-    <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
     <hr class="nav-menu-sep">
+    <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
+    <!-- Wird zusammen mit "Einstellungen" ein-/ausgeblendet: abgemeldet gibt es
+         dazwischen nichts, zwei Linien direkt uebereinander saehen kaputt aus. -->
+    <hr class="nav-menu-sep" id="settingsSep" style="display:none">
     <button type="button" id="authBarLogin" class="nav-menu-item">Anmelden</button>
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
     <div id="authBarUser" class="nav-menu-user" style="display:none"></div>
@@ -3585,6 +3588,7 @@ function renderAuthBar(){
   authBarUser.textContent = CURRENT_USER ? CURRENT_USER.email : '';
   authBarUser.style.display = CURRENT_USER ? '' : 'none';
   settingsBtn.style.display = CURRENT_USER ? '' : 'none';
+  document.getElementById('settingsSep').style.display = CURRENT_USER ? '' : 'none';
   authBarLogout.style.display = CURRENT_USER ? '' : 'none';
   authBarLogin.style.display = CURRENT_USER ? 'none' : '';
 }
