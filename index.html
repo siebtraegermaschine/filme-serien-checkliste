@@ -527,6 +527,16 @@
   .trailer-note { color:var(--text-dim); font-size:12px; margin-top:10px; text-align:center; }
   .trailer-note a { color:var(--text-dim); text-decoration:underline; }
 
+  /* Gegenstueck zum Menue rechts: gleiche Groesse und Optik, nur links.
+     Bei aktiver Auswahl in Akzentfarbe, damit auf einen Blick erkennbar ist,
+     dass die Listen eingeschraenkt sind. */
+  .profile-btn { position:absolute; top:calc(6px + env(safe-area-inset-top, 0px)); left:16px;
+    width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    background:var(--card); border:1px solid var(--border); border-radius:8px;
+    color:var(--text); cursor:pointer; z-index:20; padding:0; }
+  @media (hover: hover) { .profile-btn:hover { border-color:var(--accent); color:var(--accent); } }
+  .profile-btn.filtering { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+
   /* Erscheint NUR bei aktivem Abgleich. Seit "Zusammen schauen" im Menue steckt,
      gaebe es sonst kein sichtbares Zeichen mehr, dass die Liste eingeschraenkt
      ist -- sie saehe schlicht kaputt aus. */
@@ -664,10 +674,17 @@
     </button>
     <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)<br>2. Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</div>
   </div>
+  <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="9" cy="8" r="3.2"/>
+      <path d="M2.8 19c0-3 2.8-4.9 6.2-4.9s6.2 1.9 6.2 4.9"/>
+      <path d="M16.4 5.2a3.2 3.2 0 0 1 0 5.6"/>
+      <path d="M18.2 14.5c1.9.7 3 2.2 3 4.5"/>
+    </svg>
+  </button>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
-    <button type="button" id="profileBtn" class="nav-menu-item" style="display:none">Zusammen schauen</button>
-    <hr class="nav-menu-sep">
     <button type="button" id="howToBtn" class="nav-menu-item">Anleitung</button>
     <hr class="nav-menu-sep">
     <button type="button" id="navHomeBtn" class="nav-menu-item">Filme &amp; Serien</button>
@@ -3022,10 +3039,11 @@ async function loadLinkedProfiles(){
 function updateProfileBtn(){
   var btn = document.getElementById('profileBtn');
   if (btn) {
-    btn.style.display = CURRENT_USER ? '' : 'none';
-    btn.textContent = matchAktiv()
-      ? ('Zusammen schauen (' + MATCH_WITH.length + ')')
-      : 'Zusammen schauen';
+    btn.style.display = CURRENT_USER ? 'flex' : 'none';
+    btn.classList.toggle('filtering', matchAktiv());
+    btn.setAttribute('aria-label', matchAktiv()
+      ? ('Zusammen schauen mit ' + MATCH_WITH.map(profilName).join(' und '))
+      : 'Zusammen schauen');
   }
   var bar = document.getElementById('matchBar');
   if (!bar) return;
@@ -3080,7 +3098,7 @@ function renderProfileList(){
 }
 function openProfileModal(){ renderProfileList(); _profileModal.style.display = 'flex'; }
 function closeProfileModal(){ _profileModal.style.display = 'none'; }
-document.getElementById('profileBtn').onclick = function(){ closeNavMenu(); requireLogin(openProfileModal); };
+document.getElementById('profileBtn').onclick = function(){ requireLogin(openProfileModal); };
 document.getElementById('matchBarClear').onclick = function(){
   MATCH_WITH = [];
   updateProfileBtn(); rebuild(); renderCurrentTab();
