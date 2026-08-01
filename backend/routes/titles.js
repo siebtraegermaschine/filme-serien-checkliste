@@ -4,8 +4,14 @@ import { createAsyncRouter } from '../lib/asyncRouter.js';
 
 const router = createAsyncRouter();
 
-export function serializeTitle(row) {
-  return {
+// withPlot=false laesst die Inhaltsangabe weg. Sie ist mit Abstand das groesste
+// Feld (13,3 MB von 27,9 MB der Katalog-Auslieferung), wird aber ausschliesslich
+// in der aufgeklappten Detailansicht angezeigt -- weder die Suche noch der
+// Taste-Score im Frontend werten sie aus. Listen liefern sie deshalb nicht mehr
+// mit; das Frontend holt sie fuer die gerade sichtbaren Zeilen ueber
+// POST /api/titles/plots nach.
+export function serializeTitle(row, { withPlot = true } = {}) {
+  const out = {
     id: row.id,
     tmdbId: row.tmdb_id,
     type: row.type,
@@ -17,11 +23,12 @@ export function serializeTitle(row) {
     cast: row.cast_names,
     keywords: row.keywords,
     rating: row.rating != null ? Number(row.rating) : null,
-    plot: row.plot,
     posterPath: row.poster_path,
     posterBase64: row.poster_base64,
     source: row.source,
   };
+  if (withPlot) out.plot = row.plot;
+  return out;
 }
 
 // Öffentlich, kein Login nötig: der Katalog ist frei durchsuchbar (siehe
@@ -62,7 +69,51 @@ router.get('/', async (req, res) => {
     `SELECT * FROM titles ${where} ORDER BY title ASC`,
     params
   );
-  res.json(rows.map(serializeTitle));
+  // Ohne Inhaltsangaben (siehe serializeTitle) -- das ist die grosse Liste, hier
+  // faellt die Ersparnis an. ?withPlot=1 liefert sie bei Bedarf weiterhin mit.
+  const withPlot = req.query.withPlot === '1';
+  res.json(rows.map((r) => serializeTitle(r, { withPlot })));
+});
+
+// Inhaltsangaben fuer die gerade sichtbaren Zeilen. Zwei Zugaenge, weil das
+// Frontend zweierlei Titel kennt: solche mit interner ID (Katalog/Discovery) und
+// reine Streaming-Kandidaten, die es nur als TMDB-ID gibt und die noch gar nicht
+// in `titles` stehen (siehe streaming_cache).
+router.post('/plots', async (req, res) => {
+  const { ids, tmdb } = req.body || {};
+  const out = { ids: {}, tmdb: {} };
+
+  const numericIds = Array.isArray(ids)
+    ? [...new Set(ids.map(Number).filter((n) => Number.isInteger(n) && n > 0))].slice(0, 1000)
+    : [];
+  if (numericIds.length) {
+    const { rows } = await pool.query(
+      `SELECT id, plot FROM titles WHERE id = ANY($1) AND plot IS NOT NULL AND plot <> ''`,
+      [numericIds]
+    );
+    for (const r of rows) out.ids[r.id] = r.plot;
+  }
+
+  // [[type, tmdbId], ...] -- zwei Parallel-Arrays, damit die Paare als ein
+  // einziges IN-Praedikat abgefragt werden koennen statt in einer Schleife.
+  const paare = Array.isArray(tmdb)
+    ? tmdb.filter((p) => Array.isArray(p) && (p[0] === 'movie' || p[0] === 'series') && Number.isInteger(Number(p[1])))
+        .slice(0, 1000)
+    : [];
+  if (paare.length) {
+    const typen = paare.map((p) => p[0]);
+    const tmdbIds = paare.map((p) => Number(p[1]));
+    const { rows } = await pool.query(
+      `SELECT DISTINCT ON (type, tmdb_id) type, tmdb_id, overview
+         FROM streaming_cache
+        WHERE (type, tmdb_id) IN (SELECT * FROM unnest($1::text[], $2::int[]))
+          AND overview IS NOT NULL AND overview <> ''`,
+      [typen, tmdbIds]
+    );
+    for (const r of rows) out.tmdb[`${r.type}:${r.tmdb_id}`] = r.overview;
+  }
+
+  res.json(out);
 });
 
 // Katalog-Titel (source='catalog', immer sichtbar) plus alle Titel, die die
@@ -120,9 +171,20 @@ router.post('/ensure', requireAuth, async (req, res) => {
     return res.status(400).json({ error: 'invalid_title_payload' });
   }
 
+  // Zur Inhaltsangabe: Das Frontend schickt sie seit der Verkleinerung der
+  // Auslieferung nicht mehr mit (sie steht dort nur noch fuer aufgeklappte
+  // Zeilen zur Verfuegung). Sie wird deshalb serverseitig aus streaming_cache
+  // ergaenzt -- und ein leerer Wert darf einen vorhandenen Text NIEMALS
+  // ueberschreiben: bei ON CONFLICT haette "plot = EXCLUDED.plot" sonst die
+  // Inhaltsangabe eines laengst bestehenden Titels geloescht, sobald ihn jemand
+  // ueber den Streaming-Weg erneut hinzufuegt.
   const { rows } = await pool.query(
     `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, plot, source)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,
+       COALESCE(NULLIF($11, ''), (SELECT overview FROM streaming_cache
+                                   WHERE tmdb_id = $1 AND type = $2
+                                     AND overview IS NOT NULL AND overview <> '' LIMIT 1)),
+       $12)
      ON CONFLICT (tmdb_id, type) DO UPDATE SET
        title = EXCLUDED.title,
        year = EXCLUDED.year,
@@ -132,7 +194,7 @@ router.post('/ensure', requireAuth, async (req, res) => {
        keywords = EXCLUDED.keywords,
        poster_path = EXCLUDED.poster_path,
        rating = EXCLUDED.rating,
-       plot = EXCLUDED.plot,
+       plot = COALESCE(NULLIF(EXCLUDED.plot, ''), titles.plot),
        updated_at = now()
      RETURNING *`,
     [

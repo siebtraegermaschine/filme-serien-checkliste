@@ -20,7 +20,10 @@ function rowToCand(row) {
     c: row.cast_names,
     p: row.poster_path,
     r: row.rating != null ? Number(row.rating) : null,
-    ov: row.overview,
+    // Bewusst OHNE Inhaltsangabe (frueher `ov`): sie machte 6,8 MB der 11,1 MB
+    // dieser Auslieferung aus, wird aber nur in der aufgeklappten Detailansicht
+    // gebraucht. Das Frontend holt sie fuer die sichtbaren Zeilen ueber
+    // POST /api/titles/plots nach (dort ueber type + tmdb_id).
     fs: row.first_seen_at ? row.first_seen_at.toISOString() : null,
   };
 }

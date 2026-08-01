@@ -947,6 +947,70 @@ function nameChips(arr){ return (arr||[]).map(function(n){ return '<span class="
 // anklickbare/filterbare Namen (Suche fand den Titel zwar trotzdem per
 // Wortgrenzen-Match im ganzen Blob, aber die Anzeige war ein Klumpen).
 function splitNames(s){ return s ? String(s).split(',').map(function(n){ return n.trim(); }).filter(Boolean) : []; }
+/* ---- Inhaltsangaben werden nachgeladen ----
+   Sie sind mit Abstand das groesste Datenfeld (13,3 MB der Katalog- und 6,8 MB
+   der Streaming-Auslieferung), erscheinen aber nur in der aufgeklappten
+   Detailansicht -- Suche (mainBlob/exactBlob) und Taste-Score (scoreCand) werten
+   sie nicht aus. Die Listen kommen deshalb ohne sie, und fuer die gerade
+   gerenderten Zeilen wird per POST /api/titles/plots genau einmal nachgeladen.
+
+   Der Platzhalter <div class="plot" data-plotkey="..."> wird IMMER gerendert,
+   auch leer -- sonst gaebe es hinterher kein Element, in das der Text
+   nachtraeglich einsetzbar waere. */
+var PLOT_CACHE = new Map();
+function plotKeyFor(item){
+  if (!item) return '';
+  if (item.realId) return 'id:' + item.realId;
+  if (item.tmdbId && item.type) return 'tmdb:' + item.type + ':' + item.tmdbId;
+  return '';
+}
+function plotFor(item){
+  if (item && item.ov) return item.ov;              // Kino-Titel bringen ihn direkt mit
+  var k = plotKeyFor(item);
+  return (k && PLOT_CACHE.get(k)) || '';
+}
+function plotDivHtml(item){
+  var text = plotFor(item);
+  var key = plotKeyFor(item);
+  if (!text && !key) return '';
+  return '<div class="plot" data-plotkey="' + escAttr(key) + '">' + esc(text) + '</div>';
+}
+// Laedt die Texte aller im Dokument sichtbaren, noch leeren Platzhalter nach und
+// traegt sie ein. Mehrfachaufrufe sind unschaedlich: bereits Bekanntes wird aus
+// PLOT_CACHE bedient, nur wirklich Fehlendes wird angefragt.
+var _plotInFlight = null;
+async function fillPlots(){
+  var leer = [...document.querySelectorAll('.plot[data-plotkey]')].filter(function(el){
+    return !el.textContent && el.dataset.plotkey;
+  });
+  if (!leer.length) return;
+  var fehlend = new Set();
+  leer.forEach(function(el){
+    var k = el.dataset.plotkey;
+    if (PLOT_CACHE.has(k)) { el.textContent = PLOT_CACHE.get(k); return; }
+    fehlend.add(k);
+  });
+  if (!fehlend.size) return;
+  var keys = [...fehlend];
+  var ids = keys.filter(function(k){ return k.startsWith('id:'); }).map(function(k){ return Number(k.slice(3)); });
+  var tmdb = keys.filter(function(k){ return k.startsWith('tmdb:'); })
+    .map(function(k){ var p = k.split(':'); return [p[1], Number(p[2])]; });
+  try {
+    if (_plotInFlight) await _plotInFlight;          // Anfragen nicht ueberlappen lassen
+    _plotInFlight = apiRequest('POST', '/api/titles/plots', { ids: ids, tmdb: tmdb });
+    var d = await _plotInFlight;
+    Object.keys(d.ids || {}).forEach(function(id){ PLOT_CACHE.set('id:' + id, d.ids[id]); });
+    Object.keys(d.tmdb || {}).forEach(function(k){ PLOT_CACHE.set('tmdb:' + k, d.tmdb[k]); });
+    // Nicht gefundene als leer merken, damit sie nicht endlos erneut angefragt werden.
+    keys.forEach(function(k){ if (!PLOT_CACHE.has(k)) PLOT_CACHE.set(k, ''); });
+    document.querySelectorAll('.plot[data-plotkey]').forEach(function(el){
+      if (!el.textContent) el.textContent = PLOT_CACHE.get(el.dataset.plotkey) || '';
+    });
+  } catch (e) {
+    // Ohne Text bleibt die Detailansicht nutzbar -- Besetzung, Regie und
+    // Schlagworte stehen ja weiterhin darunter.
+  } finally { _plotInFlight = null; }
+}
 function candDetailsHtml(c, kind){
   var dirLabel = "Regie";
   var tags = (c.kw && c.kw.length) ? c.kw : (c.g || []);
@@ -954,7 +1018,7 @@ function candDetailsHtml(c, kind){
   var rows = '';
   if (c.c && c.c.length) rows += '<div class="credits"><b>Besetzung:</b> '+nameChips(c.c)+'</div>';
   if (c.d) rows += '<div class="credits"><b>'+dirLabel+':</b> '+nameChips(splitNames(c.d))+'</div>';
-  var plotHtml = c.ov ? '<div class="plot">'+esc(c.ov)+'</div>' : '';
+  var plotHtml = plotDivHtml(c);
   // Grosses Poster wie im Hauptlisten-Pfad (siehe render/detPoster): beim
   // Aufklappen wird das kleine Vorschaubild ausgeblendet (li.disc.show-details
   // .dposter), damit die Buttons darunter die volle Breite bekommen und wie
@@ -1443,7 +1507,7 @@ function render() {
       '</div>';
     const detailsHtml =
       '<div class="details">' + detPoster +
-        (d.p ? '<div class="plot">' + esc(d.p) + '</div>' : '') +
+        plotDivHtml(s.pool[i]) +
         (tagsHtml ? '<div class="tags">' + tagsHtml + '</div>' : '') +
         creditRows +
       '</div>';
@@ -1688,8 +1752,10 @@ function renderList() {
 // einzelnen "if (activeTab==='discovery') renderDiscovery() ..." Verzweigungen
 // an den verschiedenen Aufrufstellen im Code.
 function renderCurrentTab(){
-  if (inDiscoveryMode()) { renderDiscovery(); return; }
-  renderList();
+  if (inDiscoveryMode()) { renderDiscovery(); }
+  else { renderList(); }
+  // Inhaltsangaben der gerade gerenderten Zeilen nachladen (siehe fillPlots).
+  fillPlots();
 }
 // Aktualisiert nur die Button-Zustaende/Sichtbarkeiten der Filterzeile(n) --
 // getrennt von renderCurrentTab(), damit beide unabhaengig voneinander (z.B.
@@ -2271,6 +2337,7 @@ function renderSimilarList(){
     var p = document.createElement('div'); p.className = 'disc-hint'; p.textContent = 'Keine ähnlichen Titel für diese Filterkombination.'; listEl.appendChild(p);
   } else {
     scored.forEach(function(row){ listEl.appendChild(poolItemLi(row.item, row.score, { suppressSimilar: true })); });
+    fillPlots();
   }
 }
 function toggleSimType(k){
@@ -2404,6 +2471,7 @@ function renderCinemaSection(key, rows, prof, poolByTmdb){
   var limit = cinemaSectionLimit[key];
   var visible = entries.slice(0, limit);
   visible.forEach(function(e){ el.appendChild(poolItemLi(e.item, e.score)); });
+  fillPlots();
   if (entries.length > limit) {
     var remaining = entries.length - limit;
     var moreBtn = document.createElement('button');
@@ -3294,6 +3362,7 @@ function renderDiscovery(){
   var total = scored.length;
   scored = scored.slice(0, discoveryLoadLimit);
   scored.forEach(function(row){ list.appendChild(poolItemLi(row.item, row.score)); });
+  fillPlots();
   if(!scored.length){ var p=document.createElement('div'); p.className='disc-hint'; p.textContent='Keine Titel für diese Filterkombination.'; list.appendChild(p); }
   if (total > discoveryLoadLimit){
     var moreBtn = document.createElement('button');
