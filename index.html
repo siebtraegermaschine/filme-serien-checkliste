@@ -1699,6 +1699,13 @@ function render() {
   if (!s.data.length) {
     // Bei aktivem Abgleich ist die leere Liste etwas voellig anderes als eine
     // leere Watchlist -- ohne eigenen Hinweis wirkt sie wie ein Fehler.
+    if (fskAktiv()) {
+      var stufe = (FSK_STUFEN.find(function(x){ return x.key === MY_FSK; }) || {}).label;
+      list.innerHTML = '<li class="watch-empty">Keine Titel mit Altersfreigabe „' + esc(stufe) +
+        '". Titel ohne hinterlegte Freigabe werden dabei ausgeblendet – das betrifft einen Teil ' +
+        'des Katalogs. Den Filter hebst du oben links wieder auf.</li>';
+      return;
+    }
     if (matchAktiv()) {
       var wer = MATCH_WITH.map(profilName).join(' und ');
       list.innerHTML = '<li class="watch-empty">Keine gemeinsamen Titel mit ' + esc(wer) +
@@ -3966,7 +3973,9 @@ function discFilterPool(){
 }
 function renderDiscovery(){
   list.innerHTML='';
-  var prof = buildProfile();
+  // Wie auf der Kino-Seite: bei ausgewaehlten Personen fliessen deren
+  // Geschmacksprofile mit ein, sodass die Rangfolge zeigt, was zu ALLEN passt.
+  var profile = alleProfile(buildProfile());
   var pool = discFilterPool();
   // Bei aktiver Suche zuerst den GESAMTEN Discovery-Pool auf Treffer filtern,
   // bevor sortiert/auf discoveryLoadLimit begrenzt wird -- sonst findet man
@@ -3976,7 +3985,7 @@ function renderDiscovery(){
   var q = searchEl.value.trim().toLowerCase();
   if (q) pool = pool.filter(function(item){ return poolItemMatchesQuery(item, q); });
   var sortKey = effectiveSort('discovery');
-  var scored = pool.map(function(item){ return { item: item, score: scoreCand(item, prof).score }; });
+  var scored = pool.map(function(item){ return { item: item, score: scoreMitProfilen(item, profile) }; });
   scored.sort(function(a,b){
     if (sortKey === 'imdb') return (b.item.r||0) - (a.item.r||0) || b.score - a.score;
     if (sortKey === 'year') return (b.item.y||0) - (a.item.y||0) || b.score - a.score;
