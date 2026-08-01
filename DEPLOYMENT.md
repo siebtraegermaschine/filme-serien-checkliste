@@ -96,17 +96,19 @@ DATABASE_URL=postgres://postgres:postgres@localhost:5432/filme_serien \
    + echtem `RESEND_API_KEY`, `APP_BASE_URL=https://<domain>`.
 4. `Caddyfile` anpassen: `deine-domain.example` durch die echte Domain
    ersetzen, sobald sie feststeht.
-5. Hochfahren:
+5. Hochfahren (explizit **nur** `docker-compose.yml` -- ohne `-f` wird
+   `docker-compose.override.yml` automatisch mitgeladen, das ist nur fuer die
+   lokale Entwicklung gedacht und oeffnet Postgres/Backend-Ports oeffentlich):
    ```bash
-   docker compose --profile prod up -d --build
-   docker compose exec backend npm run migrate
+   docker compose -f docker-compose.yml --profile prod up -d --build
+   docker compose -f docker-compose.yml exec backend npm run migrate
 
    # Nur beim allerersten Deploy: Katalog aus einer Vor-Relaunch-index.html seeden
    # (Commit-Hash siehe Hinweis weiter oben; das Repo-Checkout auf dem Server hat
    # dieselbe Git-Historie).
    git show 4e22a6d:index.html > /tmp/index-original.html
-   docker compose cp /tmp/index-original.html backend:/tmp/index-original.html
-   docker compose exec backend node scripts/seed-from-index-html.mjs /tmp/index-original.html
+   docker compose -f docker-compose.yml cp /tmp/index-original.html backend:/tmp/index-original.html
+   docker compose -f docker-compose.yml exec backend node scripts/seed-from-index-html.mjs /tmp/index-original.html
    ```
    Caddy holt automatisch ein Let's-Encrypt-Zertifikat für die Domain.
 6. DNS: A/AAAA-Record der Domain auf die Server-IP zeigen lassen.

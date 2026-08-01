@@ -1,0 +1,23 @@
+name: Deploy
+
+# Deployt bei jedem Push auf main automatisch auf den Hetzner-Server --
+# unabhaengig davon, ob/welche Chat-Session gerade laeuft (siehe DEPLOYMENT.md).
+# Der SSH-Key ist auf dem Server per "command="-Option in authorized_keys auf
+# genau /opt/movietaste/deploy.sh eingeschraenkt (git fetch/reset + docker
+# compose build/up/migrate) -- kein freier Shell-Zugriff ueber dieses Secret.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: /opt/movietaste/deploy.sh
