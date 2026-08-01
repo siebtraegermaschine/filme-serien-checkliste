@@ -206,6 +206,21 @@ async function getProviderCatalog() {
       });
     }
   }
+  // Reine Haeufigkeit taugt NICHT als Relevanzmass fuer die Vorauswahl: sie
+  // misst, bei wie vielen Titeln ein Anbieter gelistet ist, nicht wie verbreitet
+  // er ist. maxdome verleiht sehr viele Filme, abonniert hat es kaum jemand --
+  // waehrend WOW oder RTL+ seltener auftauchen, aber viele Leute sie nutzen.
+  // Deshalb stehen die gaengigen deutschen Dienste per Namensliste vorne; nach
+  // Namen statt IDs, weil die Namen aus derselben TMDB-Antwort stammen und
+  // stabil sind.
+  const PROMINENT = [
+    'Netflix', 'Amazon Prime Video', 'Disney Plus', 'Apple TV', 'WOW', 'RTL+',
+    'Sky Go', 'Paramount Plus', 'Joyn', 'Crunchyroll', 'MagentaTV', 'HBO Max',
+    'Amazon Video', 'Apple TV Store', 'Google Play Movies', 'YouTube',
+    'Rakuten TV', 'Sky Store', 'maxdome Store', 'ARD Mediathek', 'ZDF Mediathek',
+  ];
+  const rank = new Map(PROMINENT.map((n, i) => [n, i]));
+
   // Rangfolge nach dem, was in DIESEM Katalog tatsaechlich vorkommt -- TMDBs
   // display_priority allein spuelt Nischenanbieter (GuideDoc, Sun Nxt) nach
   // oben, waehrend die hier relevanten deutschen Anbieter untergehen.
@@ -217,12 +232,13 @@ async function getProviderCatalog() {
     SELECT id, count(*)::int AS n FROM alle GROUP BY id`);
   const freq = new Map(rows.map((r) => [r.id, r.n]));
   const list = [...byId.values()].sort((a, b) => {
+    // 1. Bekannte deutsche Dienste in der oben festgelegten Reihenfolge.
+    const ra = rank.has(a.name) ? rank.get(a.name) : Infinity;
+    const rb = rank.has(b.name) ? rank.get(b.name) : Infinity;
+    if (ra !== rb) return ra - rb;
+    // 2. Danach das, was in den eigenen Daten am haeufigsten vorkommt.
     const fa = freq.get(a.id) || 0, fb = freq.get(b.id) || 0;
     if (fa !== fb) return fb - fa;
-    // Die Standardanbieter immer weit vorn, auch wenn der Cache noch leer ist.
-    const da = DEFAULT_PROVIDER_IDS.includes(a.id) ? 0 : 1;
-    const db = DEFAULT_PROVIDER_IDS.includes(b.id) ? 0 : 1;
-    if (da !== db) return da - db;
     return a.priority - b.priority || a.name.localeCompare(b.name, 'de');
   });
   list.forEach((p, i) => { p.common = i < COMMON_COUNT; delete p.priority; });
