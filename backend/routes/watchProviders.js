@@ -36,6 +36,31 @@ function rowToPayload(row) {
 
 const EMPTY = { flatrate: [], rent: [], buy: [], region: REGION, fetchedAt: null };
 
+// Vereinheitlicht Titel fuers Vergleichen: Gross-/Kleinschreibung, die
+// verschiedenen Bindestrich-/Gedankenstrich-Varianten sowie Doppelpunkt vs.
+// Bindestrich als Untertitel-Trenner. Entspricht normTitle() im Frontend --
+// dort aus demselben Grund: Katalog und TMDB schreiben denselben Titel oft
+// unterschiedlich ("Der Herr der Ringe: Die Rueckkehr des Koenigs" vs
+// "Der Herr der Ringe - Die Rueckkehr des Koenigs").
+function normTitle(s) {
+  return String(s || '').trim().toLowerCase()
+    .replace(/[‐-―−]/g, '-')
+    .replace(/:/g, '-')
+    .replace(/\s*-\s*/g, ' - ')
+    .replace(/\s+/g, ' ');
+}
+
+async function tmdbSearch(kind, query) {
+  const url = new URL(`${API}/search/${kind}`);
+  url.searchParams.set('api_key', process.env.TMDB_API_KEY);
+  url.searchParams.set('language', process.env.TMDB_LANG || 'de-DE');
+  url.searchParams.set('query', query);
+  url.searchParams.set('include_adult', 'false');
+  const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+  if (!res.ok) throw new Error(`TMDB ${res.status}`);
+  return (await res.json()).results || [];
+}
+
 // Sucht die TMDB-ID eines Katalog-Titels ueber Titel + Jahr + Typ. Bewusst
 // streng: ohne Jahresuebereinstimmung (±1 Jahr, damit abweichende
 // Kino-/Erstausstrahlungsjahre nicht stoeren) wird KEIN Treffer akzeptiert --
@@ -43,23 +68,40 @@ const EMPTY = { flatrate: [], rent: [], buy: [], region: REGION, fetchedAt: null
 async function searchTmdbId(kind, title, year) {
   const key = process.env.TMDB_API_KEY;
   if (!key || !title) return null;
-  const url = new URL(`${API}/search/${kind}`);
-  url.searchParams.set('api_key', key);
-  url.searchParams.set('language', process.env.TMDB_LANG || 'de-DE');
-  url.searchParams.set('query', title);
-  url.searchParams.set('include_adult', 'false');
-  const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-  if (!res.ok) throw new Error(`TMDB ${res.status}`);
-  const data = await res.json();
-  const results = data.results || [];
-  if (!results.length) return null;
-  if (!year) return results[0].id;
   const dateField = kind === 'movie' ? 'release_date' : 'first_air_date';
-  const match = results.find((r) => {
-    const y = Number.parseInt(String(r[dateField] || '').slice(0, 4), 10);
-    return Number.isInteger(y) && Math.abs(y - year) <= 1;
-  });
-  return match ? match.id : null;
+  const nameField = kind === 'movie' ? 'title' : 'name';
+  const origField = kind === 'movie' ? 'original_title' : 'original_name';
+  const wanted = normTitle(title);
+
+  const primary = await tmdbSearch(kind, title);
+  // Schreibt der Katalog den Untertitel anders als TMDB, findet die Suche mit
+  // dem Volltitel teils GAR NICHTS (z.B. "Der Herr der Ringe: Die Rueckkehr des
+  // Koenigs" -> 0 Treffer). Deshalb zusaetzlich nur mit dem Haupttitel vor dem
+  // Trenner suchen und den richtigen Teil danach ueber den normalisierten
+  // Volltitel herauspicken -- nicht ueber die Trefferreihenfolge, denn bei
+  // Reihen laegen die anderen Teile ebenfalls im ±1-Jahresfenster.
+  const mainPart = title.split(/[:‐-―−-]/)[0].trim();
+  const byId = new Map(primary.map((r) => [r.id, r]));
+  if (mainPart && mainPart.length >= 3 && mainPart !== title) {
+    for (const r of await tmdbSearch(kind, mainPart)) if (!byId.has(r.id)) byId.set(r.id, r);
+  }
+  const candidates = [...byId.values()];
+  if (!candidates.length) return null;
+
+  const yearOf = (r) => Number.parseInt(String(r[dateField] || '').slice(0, 4), 10);
+  const titleMatches = (r) => normTitle(r[nameField]) === wanted || normTitle(r[origField]) === wanted;
+  const yearFits = (r) => { const y = yearOf(r); return Number.isInteger(y) && Math.abs(y - year) <= 1; };
+
+  // 1. Sicherster Fall: normalisierter Titel stimmt exakt und das Jahr passt.
+  const exact = candidates.find((r) => titleMatches(r) && (!year || yearFits(r)));
+  if (exact) return exact.id;
+  // 2. Ohne Jahresangabe im Katalog bleibt nur die Titelgleichheit.
+  if (!year) { const t = candidates.find(titleMatches); return t ? t.id : null; }
+  // 3. Zuletzt das bisherige Verhalten: erster Treffer der Volltitel-Suche im
+  //    Jahresfenster. Bewusst NUR auf primary -- im Haupttitel-Ergebnis staende
+  //    hier sonst womoeglich der falsche Teil einer Reihe.
+  const byYear = primary.find(yearFits);
+  return byYear ? byYear.id : null;
 }
 
 // Liefert die TMDB-ID zu einer internen titles.id -- entweder direkt aus
