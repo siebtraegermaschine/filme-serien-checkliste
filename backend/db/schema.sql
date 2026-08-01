@@ -179,6 +179,38 @@ CREATE TABLE IF NOT EXISTS cinema_cache (
 -- siehe cinema-fetch.mjs. NULL bei ganz normalen Neustarts.
 ALTER TABLE cinema_cache ADD COLUMN IF NOT EXISTS original_release_date DATE;
 
+-- Streamen/Leihen/Kaufen-Verfuegbarkeit je Titel (Quelle: TMDB, Daten von
+-- JustWatch) -- Grundlage fuer die Ansehen/Leihen/Kaufen-Buttons in der
+-- Detailansicht. Bewusst NICHT taeglich fuer den gesamten Katalog vorbefuellt
+-- (das waere ein TMDB-Request pro Titel, also zehntausende pro Lauf), sondern
+-- on demand beim ersten Oeffnen eines Titels; danach gilt der Eintrag als
+-- gueltig, bis er aelter als WATCH_PROVIDERS_TTL_HOURS ist (siehe
+-- backend/routes/watchProviders.js).
+--
+-- Ergaenzt streaming_cache, ersetzt es nicht: streaming_cache beantwortet
+-- "welche Titel laufen bei Anbieter X?" (Basis fuer den Streaming-Filter und
+-- vorab per GitHub Action befuellt), diese Tabelle beantwortet umgekehrt
+-- "wo laeuft Titel Y?" -- inkl. Leihen/Kaufen, die streaming_cache gar nicht
+-- kennt (stream-fetch.mjs fragt nur flatrate ab).
+--
+-- flatrate/rent/buy sind JSONB-Arrays von {id, name, logo} -- bewusst als
+-- JSONB statt eigener Zeilen pro Anbieter: die Daten werden immer komplett
+-- am Stueck geschrieben und gelesen, nie einzeln abgefragt oder gejoint.
+CREATE TABLE IF NOT EXISTS watch_providers_cache (
+  tmdb_id    INTEGER NOT NULL,
+  type       TEXT NOT NULL CHECK (type IN ('movie', 'series')),
+  region     TEXT NOT NULL DEFAULT 'DE',
+  flatrate   JSONB NOT NULL DEFAULT '[]',
+  rent       JSONB NOT NULL DEFAULT '[]',
+  buy        JSONB NOT NULL DEFAULT '[]',
+  -- TMDB-Watch-Seite des Titels. Wird derzeit nicht angezeigt (die App verlinkt
+  -- als Quellenangabe JustWatch), aber mitgespeichert -- ohne erneuten Abruf
+  -- nicht wiederherstellbar.
+  link       TEXT,
+  fetched_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (tmdb_id, type, region)
+);
+
 -- Protokolliert manuell eingegebene Suchbegriffe (siehe backend/routes/searchLog.js)
 -- fuer spaetere Auswertung, welche Titel/Begriffe Nutzer:innen suchen, aber (noch)
 -- nicht finden -- Basis fuer Katalog-Erweiterungen. user_email ist NULL, wenn die

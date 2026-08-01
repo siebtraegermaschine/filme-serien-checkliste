@@ -14,6 +14,7 @@ import feedbackRouter from './routes/feedback.js';
 import searchLogRouter from './routes/searchLog.js';
 import hiddenTitlesRouter from './routes/hiddenTitles.js';
 import cinemaRouter from './routes/cinema.js';
+import watchProvidersRouter from './routes/watchProviders.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PgSession = connectPgSimple(session);
@@ -63,6 +64,7 @@ app.use('/api/feedback', feedbackRouter);
 app.use('/api/search-log', searchLogRouter);
 app.use('/api/hidden-titles', hiddenTitlesRouter);
 app.use('/api/cinema', cinemaRouter);
+app.use('/api/watch-providers', watchProvidersRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
 const frontendRoot = path.join(__dirname, '..');

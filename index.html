@@ -469,6 +469,30 @@
   li.item { align-items: flex-start; }
   li.item.show-details .dposter { display: none; }
   .details .detposter { float: left; width: 120px; max-width: 34%; border-radius: 8px; margin: 2px 14px 10px 0; box-shadow: 0 2px 10px rgba(0,0,0,.45); background: var(--border); display: block; }
+  /* Ansehen/Leihen/Kaufen (siehe watchRowHtml). Wie .details nur sichtbar,
+     solange die Zeile aufgeklappt ist -- die Regel fuer li.disc steht im per JS
+     eingefuegten Style-Block weiter unten, zusammen mit den uebrigen
+     Discovery-Regeln. */
+  .watch-row { display: none; clear: both; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); cursor: default; }
+  li.item.show-details .watch-row { display: block; }
+  .watch-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
+  @media (hover: hover) { .watch-btn:hover { border-color: var(--accent); color: var(--accent); } }
+  .watch-btn.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .watch-panel { margin-top: 10px; }
+  .watch-providers { display: flex; flex-wrap: wrap; gap: 8px; }
+  .watch-provider { display: inline-flex; align-items: center; gap: 7px; text-decoration: none;
+    background: var(--card-hover); border: 1px solid var(--border); border-radius: 20px;
+    padding: 5px 12px 5px 6px; font-size: 12.5px; font-weight: 600; color: var(--text); transition: all .15s; }
+  @media (hover: hover) { .watch-provider:not(.is-plain):hover { border-color: var(--accent); color: var(--accent); } }
+  /* Anbieter ohne bekanntes Such-URL-Muster -- bewusst nicht verlinkt. */
+  .watch-provider.is-plain { color: var(--text-dim); cursor: default; }
+  .watch-logo { width: 22px; height: 22px; border-radius: 5px; display: block; }
+  .watch-note { font-size: 12.5px; color: var(--text-dim); }
+  .watch-source { margin-top: 8px; font-size: 11px; color: var(--text-dim); }
+  .watch-source a { color: var(--text-dim); text-decoration: underline; }
+  @media (hover: hover) { .watch-source a:hover { color: var(--accent); } }
   .det-actions { clear: both; display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); }
   .det-actions .det-left { display: flex; gap: 8px; align-items: center; }
   .det-actions button { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
@@ -909,6 +933,118 @@ function providerLabel(name){
   return (name === 'Amazon Prime Video') ? 'Amazon Prime' : name;
 }
 
+/* ---- Ansehen / Leihen / Kaufen (Detailansicht) ----
+   Daten kommen von TMDB (Quelle: JustWatch) ueber /api/watch-providers und
+   werden ERST beim Klick auf einen der drei Buttons geholt, nicht beim
+   Aufklappen der Details: showDetails kann aus dem localStorage true sein
+   (siehe DETAILS_PREF_KEY), dann waeren sonst schlagartig hunderte Zeilen
+   gleichzeitig am Nachladen.
+
+   Wichtige Einschraenkung: TMDB liefert KEINE Deep-Links pro Anbieter (nur eine
+   Sammel-URL auf die eigene Watch-Seite). Ein echter Link wie
+   netflix.com/title/<id> braeuchte die interne Anbieter-ID, die es dort nicht
+   gibt. Deshalb wird pro Anbieter dessen SUCHE nach dem Titel verlinkt -- auf
+   dem Handy oeffnet das per Universal Link meist direkt die jeweilige App.
+   Anbieter ohne bekanntes Suchmuster werden bewusst nur als Text angezeigt
+   statt auf gut Glueck verlinkt (lieber kein Link als ein toter Link). */
+var WATCH_CATS = [
+  { key: 'flatrate', label: '▶ Ansehen' },
+  { key: 'rent',     label: 'Leihen' },
+  { key: 'buy',      label: 'Kaufen' },
+];
+// Schluessel sind TMDB-Provider-IDs. Bewusst knapp gehalten: nur Anbieter,
+// deren Such-URL verlaesslich bekannt ist (siehe Kommentar oben).
+var WATCH_SEARCH_URLS = {
+  8:   function(q){ return 'https://www.netflix.com/search?q=' + q; },              // Netflix
+  9:   function(q){ return 'https://www.amazon.de/s?i=instant-video&k=' + q; },     // Amazon Prime Video
+  10:  function(q){ return 'https://www.amazon.de/s?i=instant-video&k=' + q; },     // Amazon Video (Leihen/Kaufen)
+  337: function(q){ return 'https://www.disneyplus.com/search?q=' + q; },           // Disney+
+  350: function(q){ return 'https://tv.apple.com/de/search?term=' + q; },           // Apple TV+
+  2:   function(q){ return 'https://tv.apple.com/de/search?term=' + q; },           // Apple TV (Leihen/Kaufen)
+  3:   function(q){ return 'https://play.google.com/store/search?c=movies&q=' + q; },// Google Play
+  192: function(q){ return 'https://www.youtube.com/results?search_query=' + q; },  // YouTube
+};
+function watchSearchUrl(providerId, title){
+  var build = WATCH_SEARCH_URLS[providerId];
+  return build ? build(encodeURIComponent(title)) : null;
+}
+// tmdbId+type -> Promise der Anbieterdaten. Haelt bewusst das PROMISE (nicht das
+// Ergebnis) fest, damit zwei schnelle Klicks auf verschiedene Kategorien
+// desselben Titels sich einen einzigen Request teilen.
+var watchDataCache = new Map();
+function loadWatchData(tmdbId, type){
+  var ck = type + ':' + tmdbId;
+  if (!watchDataCache.has(ck)) {
+    watchDataCache.set(ck, apiRequest('GET', '/api/watch-providers/' + type + '/' + tmdbId)
+      .catch(function(){ return { flatrate: [], rent: [], buy: [] }; }));
+  }
+  return watchDataCache.get(ck);
+}
+function watchRowHtml(tmdbId, type, title){
+  // Reine Katalog-Alttitel ohne TMDB-ID koennen nicht abgefragt werden -- dort
+  // entfaellt die Zeile ganz, statt drei Buttons anzubieten, die nie etwas finden.
+  if (!tmdbId || !type) return '';
+  // escAttr statt esc: esc() laesst Anfuehrungszeichen unangetastet -- ein Titel
+  // wie 'Good Night, and Good Luck."' wuerde das Attribut sonst vorzeitig beenden.
+  return '<div class="watch-row" data-tmdb="' + escAttr(String(tmdbId)) + '" data-wtype="' + escAttr(type) +
+         '" data-wtitle="' + escAttr(title || '') + '">' +
+    '<div class="watch-btns">' +
+      WATCH_CATS.map(function(c){
+        return '<button type="button" class="watch-btn" data-cat="' + c.key + '">' + c.label + '</button>';
+      }).join('') +
+    '</div>' +
+    '<div class="watch-panel" hidden></div>' +
+  '</div>';
+}
+function renderWatchPanel(row, cat){
+  var panel = row.querySelector('.watch-panel');
+  var title = row.dataset.wtitle || '';
+  panel.hidden = false;
+  panel.innerHTML = '<div class="watch-note">Lädt …</div>';
+  loadWatchData(row.dataset.tmdb, row.dataset.wtype).then(function(data){
+    // Zwischenzeitlich weitergeklickt (andere Kategorie/zugeklappt)? Dann ist
+    // diese Antwort veraltet und darf das Panel nicht mehr ueberschreiben.
+    if (row.dataset.openCat !== cat) return;
+    var list = (data && data[cat]) || [];
+    var body = list.length
+      ? '<div class="watch-providers">' + list.map(function(p){
+          var url = watchSearchUrl(p.id, title);
+          var logo = p.logo ? '<img class="watch-logo" src="https://image.tmdb.org/t/p/w45' + escAttr(p.logo) + '" alt="" loading="lazy">' : '';
+          return url
+            ? '<a class="watch-provider" href="' + escAttr(url) + '" target="_blank" rel="noopener noreferrer">' + logo + esc(p.name) + '</a>'
+            : '<span class="watch-provider is-plain">' + logo + esc(p.name) + '</span>';
+        }).join('') + '</div>'
+      : '<div class="watch-note">Zurzeit nicht verfügbar.</div>';
+    panel.innerHTML = body +
+      '<div class="watch-source">Daten von <a href="https://www.justwatch.com/de" target="_blank" rel="noopener noreferrer">JustWatch</a></div>';
+  });
+}
+// Capture-Phase: die Zeilen-Klickhandler (siehe wireRow/poolItemLi) klappen die
+// Details zu, sobald irgendwo in der Zeile geklickt wird. Ein Listener in der
+// Bubble-Phase kaeme dafuer zu spaet -- hier wird der Klick abgefangen, bevor er
+// die Zeile ueberhaupt erreicht. Links im Panel behalten ihr Standardverhalten
+// (kein preventDefault), nur das Zuklappen wird unterbunden.
+document.addEventListener('click', function(e){
+  var row = e.target.closest && e.target.closest('.watch-row');
+  if (!row) return;
+  e.stopPropagation();
+  var btn = e.target.closest('.watch-btn');
+  if (!btn) return;
+  var cat = btn.dataset.cat;
+  var panel = row.querySelector('.watch-panel');
+  if (row.dataset.openCat === cat) {           // nochmal derselbe Button -> zuklappen
+    row.dataset.openCat = '';
+    panel.hidden = true;
+    panel.innerHTML = '';
+  } else {
+    row.dataset.openCat = cat;
+    renderWatchPanel(row, cat);
+  }
+  row.querySelectorAll('.watch-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.cat === row.dataset.openCat);
+  });
+}, true);
+
 /* ---- Einheitlicher Titel-Pool: Katalog + Discovery + aktuelles Streaming-Angebot ----
    Ersetzt die frueher getrennten FILME/SERIEN/CAND/STREAM-Konzepte. Jeder Eintrag hat
    dieselbe Form wie ein CAND-Objekt (t,y,g,d,c,kw,p,r,ov) plus:
@@ -1025,6 +1161,10 @@ function poolToItemTuple(item){ return [item.t, poolToMeta(item)]; }
 function poolToDet(item){
   return {
     id: item.realId,
+    // Fuer die Ansehen/Leihen/Kaufen-Zeile (siehe watchRowHtml) -- die fragt
+    // ueber die TMDB-ID ab, nicht ueber die interne realId.
+    tmdbId: item.tmdbId,
+    type: item.type,
     p: item.ov || '',
     h: item.kw || [],
     c: item.c || [],
@@ -1232,7 +1372,8 @@ function render() {
       posterThumb +
       '<span class="info"><div class="title">' + '<span class="ttext">' + item[0] + '</span>' + scoreBadge + '</div>' +
       '<div class="meta">' + metaHtml(item[1], activeTab) + '</div>' +
-      providerChipsHtml(d.providers) + detailsHtml + actionsHtml + '</span>';
+      providerChipsHtml(d.providers) + detailsHtml +
+      watchRowHtml(d.tmdbId, d.type, item[0]) + actionsHtml + '</span>';
     wireRow(li, activeTab, i);
     attachSwipeToRemove(li, function(){ removeFromMyTitles(s.det[i].id); });
     list.appendChild(li);
@@ -2735,6 +2876,7 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
 document.head.insertAdjacentHTML('beforeend',
   '<style>'+
   'li.disc.show-details .details{display:block;}'+
+  'li.disc.show-details .watch-row{display:block;}'+
   '.dproviders{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px;}'+
   '.provider-chip{display:inline-block;background:var(--card-hover);border:1px solid var(--border);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:var(--text-dim);}'+
   'li.disc .details{width:100%;margin-top:9px;padding-top:9px;}'+
@@ -2780,9 +2922,11 @@ function poolItemLi(item, score, opts){
   var showSimilarBtn = !(opts && opts.suppressSimilar);
   var seenBtnHtml = '<button type="button" class="seen-btn'+(seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> gesehen</button>';
   var wlBtnHtml = '<div class="det-left"><button type="button" class="wl-btn'+(watchlisted?' on':'')+'">'+(watchlisted?'★':'☆')+' Watchlist</button></div>';
-  // Im "Aehnliche Titel"-Popup (suppressSimilar) links Watchlist, rechts Gesehen --
-  // ueberall sonst (Discovery/Streaming-Listen) bleibt die bisherige Reihenfolge.
-  var orderedActionsHtml = (opts && opts.suppressSimilar) ? (wlBtnHtml + seenBtnHtml) : (seenBtnHtml + wlBtnHtml);
+  // Ueberall dieselbe Reihenfolge: links Watchlist, rechts Gesehen -- genau wie
+  // unter Filme/Serien (siehe render()). Discovery/Streaming hatten die beiden
+  // frueher vertauscht, was beim Wechsel zwischen den Bereichen jedes Mal ein
+  // Umgewoehnen war.
+  var orderedActionsHtml = wlBtnHtml + seenBtnHtml;
   var actionsHtml =
     '<div class="det-actions">' +
       (showSimilarBtn ? '<button type="button" class="similar-btn">Ähnliche Titel</button>' : '') +
@@ -2795,7 +2939,8 @@ function poolItemLi(item, score, opts){
         '<span class="score'+(score>=60?' hi':'')+'" title="Taste Score" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">'+score+'</span></div>'+
       '<div class="dmeta">'+esc(candMeta(item))+' · '+typeLabel+'</div>'+
       providerChipsHtml(item.providers) +
-      candDetailsHtml(item, item.type) + actionsHtml + '</div>';
+      candDetailsHtml(item, item.type) +
+      watchRowHtml(item.tmdbId, item.type, item.t) + actionsHtml + '</div>';
   var seenBtn = li.querySelector('.seen-btn');
   seenBtn.addEventListener('click', function(e){
     e.stopPropagation();
