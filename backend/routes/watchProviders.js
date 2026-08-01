@@ -13,15 +13,40 @@ const TTL_HOURS = Number(process.env.WATCH_PROVIDERS_TTL_HOURS || 24);
 // 'series' ist die interne Bezeichnung, TMDB nennt es 'tv'.
 const TMDB_KIND = { movie: 'movie', series: 'tv' };
 
+// TMDB fuehrt Tarifstufen und Wiederverkaeufer als eigenstaendige Anbieter --
+// "Netflix" UND "Netflix Standard with Ads", "HBO Max" UND "HBO Max Amazon
+// Channel". Fuer die Anzeige ist das reines Rauschen (derselbe Dienst, zweimal
+// gelistet), deshalb werden diese Zusaetze abgeschnitten und gleichnamige
+// Eintraege zusammengefasst.
+const VARIANT_SUFFIX = /\s+(?:Amazon Channel|Apple TV Channel|Roku Premium Channel|Standard with Ads|Basic with Ads|with Ads)$/i;
+function baseName(name) {
+  let n = String(name || '').trim();
+  let prev;
+  do { prev = n; n = n.replace(VARIANT_SUFFIX, '').trim(); } while (n !== prev);
+  return n;
+}
+
 // Reduziert die TMDB-Anbieterobjekte auf das, was die App tatsaechlich
 // anzeigt. display_priority ist die von TMDB/JustWatch gelieferte
 // Sortierempfehlung (kleiner = prominenter) und bestimmt hier die Reihenfolge;
 // sie selbst wird nicht mitgespeichert.
 function mapProviders(list) {
-  return (list || [])
-    .slice()
-    .sort((a, b) => (a.display_priority ?? 999) - (b.display_priority ?? 999))
-    .map((p) => ({ id: p.provider_id, name: p.provider_name, logo: p.logo_path || null }));
+  const sorted = (list || []).slice()
+    .sort((a, b) => (a.display_priority ?? 999) - (b.display_priority ?? 999));
+  const byBase = new Map();
+  for (const p of sorted) {
+    const base = baseName(p.provider_name);
+    if (!base) continue;
+    const isCanonical = String(p.provider_name || '').trim() === base;
+    const existing = byBase.get(base);
+    // Der Eintrag OHNE Variantenzusatz gewinnt, auch wenn er weiter hinten
+    // steht: nur zu dessen ID kennen wir ggf. einen Suchlink (die Kanal-/
+    // Tarif-Varianten haben eigene IDs, die in WATCH_SEARCH_URLS fehlen).
+    if (!existing || (isCanonical && !existing.canonical)) {
+      byBase.set(base, { id: p.provider_id, name: base, logo: p.logo_path || null, canonical: isCanonical });
+    }
+  }
+  return [...byBase.values()].map(({ canonical, ...rest }) => rest);
 }
 
 function rowToPayload(row) {

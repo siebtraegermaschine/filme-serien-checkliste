@@ -490,8 +490,10 @@
     background: var(--card-hover); border: 1px solid var(--border); border-radius: 20px;
     padding: 5px 12px 5px 6px; font-size: 12.5px; font-weight: 600; color: var(--text); transition: all .15s; }
   @media (hover: hover) { .watch-provider:not(.is-plain):hover { border-color: var(--accent); color: var(--accent); } }
-  /* Anbieter ohne bekanntes Such-URL-Muster -- bewusst nicht verlinkt. */
-  .watch-provider.is-plain { color: var(--text-dim); cursor: default; }
+  /* Anbieter ohne ansteuerbare Suche (siehe WATCH_SEARCH_URLS) -- bewusst nicht
+     verlinkt. Klar als Information gestaltet statt wie ein anklickbares Element:
+     ohne Fuellung, mit gestricheltem Rand, damit niemand vergeblich draufklickt. */
+  .watch-provider.is-plain { color: var(--text-dim); cursor: default; background: none; border-style: dashed; }
   .watch-logo { width: 22px; height: 22px; border-radius: 5px; display: block; }
   .watch-note { font-size: 12.5px; color: var(--text-dim); }
   .watch-source { margin-top: 8px; font-size: 11px; color: var(--text-dim); }
@@ -974,7 +976,12 @@ var WATCH_SEARCH_URLS = {
   2:   function(q){ return 'https://tv.apple.com/de/search?term=' + q; },           // Apple TV (Leihen/Kaufen)
   3:   function(q){ return 'https://play.google.com/store/search?c=movies&q=' + q; },// Google Play
   192: function(q){ return 'https://www.youtube.com/results?search_query=' + q; },  // YouTube
+  35:  function(q){ return 'https://www.rakuten.tv/de/search?q=' + q; },            // Rakuten TV
 };
+// Bewusst NICHT aufgenommen, weil ihre Suche sich nicht per URL ansteuern laesst
+// (geprueft): MagentaTV (leitet auf eine Werbeseite um), maxdome (Domain tot),
+// WOW und Paramount+ (404), HBO Max (verwirft den Suchbegriff und landet auf der
+// Startseite). Diese Anbieter erscheinen deshalb als reine Information.
 function watchSearchUrl(providerId, title){
   var build = WATCH_SEARCH_URLS[providerId];
   return build ? build(encodeURIComponent(title)) : null;
