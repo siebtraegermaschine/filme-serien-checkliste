@@ -83,6 +83,21 @@ ALTER TABLE users ADD COLUMN IF NOT EXISTS watch_provider_ids INTEGER[];
 -- dieser Funktion angelegt wurden -- die App fragt einmalig nach.
 ALTER TABLE users ADD COLUMN IF NOT EXISTS display_name TEXT;
 
+-- Freiwillige Einwilligung in die kommerzielle Verwertung der eigenen
+-- Sterne-Bewertungen (siehe datenschutz.html, Abschnitt 8).
+--
+-- NULL = keine Einwilligung. Gespeichert wird der ZEITPUNKT, nicht nur ein
+-- Ja/Nein: Art. 7 Abs. 1 DSGVO verlangt, dass sich die Einwilligung nachweisen
+-- laesst, und dazu gehoert wann sie erteilt wurde. Ein Widerruf setzt das Feld
+-- zurueck auf NULL und haelt den Zeitpunkt in data_consent_revoked_at fest.
+--
+-- Bewusst NICHT Voraussetzung fuer die Nutzung: waere die Registrierung daran
+-- gekoppelt, obwohl die Einwilligung fuer den Dienst nicht erforderlich ist,
+-- waere sie nach Art. 7 Abs. 4 DSGVO voraussichtlich unwirksam -- und damit
+-- wertlos.
+ALTER TABLE users ADD COLUMN IF NOT EXISTS data_consent_at TIMESTAMPTZ;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS data_consent_revoked_at TIMESTAMPTZ;
+
 -- Verknuepfte Profile ("Ich"-Filter): wer darf mit wem seine Titel abgleichen.
 -- Bewusst ZWEI Zeilen je Verknuepfung (A->B und B->A) statt einer mit
 -- Sortierregel: so ist jede Abfrage ein simples WHERE user_id = $1, und beim

@@ -12,11 +12,11 @@ const BCRYPT_ROUNDS = 12;
 const RESET_TOKEN_TTL_MS = 60 * 60 * 1000; // 1 Stunde
 
 function publicUser(row) {
-  return { id: row.id, email: row.email, displayName: row.display_name || null };
+  return { id: row.id, email: row.email, displayName: row.display_name || null, dataConsent: !!row.data_consent_at };
 }
 
 router.post('/register', async (req, res) => {
-  const { email, password, displayName } = req.body || {};
+  const { email, password, displayName, dataConsent } = req.body || {};
   if (typeof email !== 'string' || !EMAIL_RE.test(email)) {
     return res.status(400).json({ error: 'invalid_email' });
   }
@@ -34,9 +34,12 @@ router.post('/register', async (req, res) => {
 
   try {
     const { rows } = await pool.query(
-      `INSERT INTO users (email, password_hash, display_name) VALUES ($1, $2, $3)
-       RETURNING id, email, display_name`,
-      [normalizedEmail, passwordHash, name]
+      // Einwilligung nur bei ausdruecklichem true -- ein fehlendes oder
+      // beliebiges anderes Feld gilt als Ablehnung.
+      `INSERT INTO users (email, password_hash, display_name, data_consent_at)
+       VALUES ($1, $2, $3, $4)
+       RETURNING id, email, display_name, data_consent_at`,
+      [normalizedEmail, passwordHash, name, dataConsent === true ? new Date() : null]
     );
     req.session.userId = rows[0].id;
     res.status(201).json(publicUser(rows[0]));
@@ -55,7 +58,7 @@ router.post('/login', async (req, res) => {
   }
 
   const { rows } = await pool.query(
-    `SELECT id, email, display_name, password_hash FROM users WHERE email = $1`,
+    `SELECT id, email, display_name, data_consent_at, password_hash FROM users WHERE email = $1`,
     [email.trim().toLowerCase()]
   );
   const user = rows[0];
@@ -84,7 +87,7 @@ router.get('/me', async (req, res) => {
   if (!req.session?.userId) {
     return res.status(401).json({ error: 'not_authenticated' });
   }
-  const { rows } = await pool.query(`SELECT id, email, display_name FROM users WHERE id = $1`, [req.session.userId]);
+  const { rows } = await pool.query(`SELECT id, email, display_name, data_consent_at FROM users WHERE id = $1`, [req.session.userId]);
   if (!rows[0]) {
     return res.status(401).json({ error: 'not_authenticated' });
   }
@@ -99,8 +102,25 @@ router.put('/display-name', async (req, res) => {
   const name = typeof displayName === 'string' ? displayName.trim() : '';
   if (!name || name.length > 40) return res.status(400).json({ error: 'invalid_display_name' });
   const { rows } = await pool.query(
-    'UPDATE users SET display_name = $1 WHERE id = $2 RETURNING id, email, display_name',
+    'UPDATE users SET display_name = $1 WHERE id = $2 RETURNING id, email, display_name, data_consent_at',
     [name, req.session.userId]
+  );
+  res.json(publicUser(rows[0]));
+});
+
+// Einwilligung nachtraeglich erteilen oder widerrufen. Der Widerruf muss so
+// einfach sein wie die Erteilung (Art. 7 Abs. 3 DSGVO) -- daher derselbe
+// Endpunkt, nur mit false.
+router.put('/data-consent', async (req, res) => {
+  if (!req.session?.userId) return res.status(401).json({ error: 'not_authenticated' });
+  const erteilt = req.body && req.body.dataConsent === true;
+  const { rows } = await pool.query(
+    `UPDATE users SET
+       data_consent_at = $1,
+       data_consent_revoked_at = CASE WHEN $1::timestamptz IS NULL AND data_consent_at IS NOT NULL
+                                      THEN now() ELSE data_consent_revoked_at END
+     WHERE id = $2 RETURNING id, email, display_name, data_consent_at`,
+    [erteilt ? new Date() : null, req.session.userId]
   );
   res.json(publicUser(rows[0]));
 });
@@ -201,7 +221,7 @@ router.put('/email', requireAuth, async (req, res) => {
   const normalizedEmail = newEmail.trim().toLowerCase();
   try {
     const { rows: updated } = await pool.query(
-      `UPDATE users SET email = $1 WHERE id = $2 RETURNING id, email, display_name`,
+      `UPDATE users SET email = $1 WHERE id = $2 RETURNING id, email, display_name, data_consent_at`,
       [normalizedEmail, req.session.userId]
     );
     res.json(publicUser(updated[0]));
