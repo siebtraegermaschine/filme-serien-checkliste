@@ -891,7 +891,7 @@
     <form id="nameForm" class="auth-form">
       <label>Vorname / Profilname<input type="text" id="nameInput" required maxlength="40" autocomplete="given-name"></label>
       <div id="nameError" class="auth-error"></div>
-      <button type="submit" class="modal-yes">Speichern</button>
+      <button type="submit" class="auth-submit">Speichern</button>
     </form>
   </div>
 </div>
@@ -913,7 +913,7 @@
     <div class="prov-list" id="providersList">Lädt …</div>
     <div class="prov-foot">
       <span class="prov-hint" id="providersHint"></span>
-      <button type="button" id="providersSaveBtn" class="modal-yes">Speichern</button>
+      <button type="button" id="providersSaveBtn" class="auth-submit">Speichern</button>
     </div>
   </div>
 </div>
@@ -3020,7 +3020,9 @@ function updateProfileBtn(){
   btn.style.display = CURRENT_USER ? 'flex' : 'none';
   var label = document.getElementById('profileBtnLabel');
   if (!matchAktiv()) {
-    label.textContent = (CURRENT_USER && CURRENT_USER.displayName) || 'Ich';
+    // Bewusst immer "Ich": der eigene Anzeigename ist nur dafuer da, dass ANDERE
+    // einen nach dem Verknuepfen erkennen -- im eigenen Kopf sagt er nichts aus.
+    label.textContent = 'Ich';
     btn.classList.remove('filtering');
   } else {
     label.textContent = MATCH_WITH.length === 1
@@ -3033,9 +3035,8 @@ function updateProfileBtn(){
 var _profileModal = document.getElementById('profileModal');
 function renderProfileList(){
   var el = document.getElementById('profileList');
-  var ich = (CURRENT_USER && CURRENT_USER.displayName) || 'Ich';
   var html = '<div class="profile-item self"><input type="checkbox" class="pi-check" checked disabled>' +
-             '<span class="pi-name">' + esc(ich) + ' (du)</span><button type="button" class="pi-del">✕</button></div>';
+             '<span class="pi-name">Ich</span><button type="button" class="pi-del">✕</button></div>';
   html += LINKED_PROFILES.map(function(p){
     var aktiv = MATCH_WITH.indexOf(p.id) !== -1;
     return '<div class="profile-item' + (aktiv ? ' active' : '') + '" data-uid="' + escAttr(String(p.id)) + '">' +
