@@ -811,6 +811,17 @@
   <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
 </footer>
 
+<div id="removeModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="removeModalX" aria-label="Schließen">✕</button>
+    <div class="modal-q" id="removeModalQ"></div>
+    <div class="modal-actions">
+      <button id="removeModalYes" class="modal-yes">Ja</button>
+      <button id="removeModalNo" class="modal-no">Nein</button>
+    </div>
+  </div>
+</div>
+
 <div id="filterModal" class="modal-overlay" style="display:none">
   <div class="modal">
     <button class="modal-x" id="filterModalX" aria-label="Schließen">✕</button>
@@ -1867,6 +1878,28 @@ async function removeFromMyTitles(id){
   rebuild();
   renderCurrentTab();
 }
+/* Rueckfrage vor dem Entfernen aus Filme/Serien. Liefert ein Promise, das mit
+   true/false aufgeloest wird -- so laesst sich der Klick-Handler linear
+   schreiben, statt in Rueckruf-Verschachtelung zu verfallen. */
+var _removeModal = document.getElementById('removeModal');
+var _removeAntwort = null;
+function schliesseRemove(antwort){
+  _removeModal.style.display = 'none';
+  if (_removeAntwort) { var f = _removeAntwort; _removeAntwort = null; f(antwort); }
+}
+function confirmRemove(frage){
+  document.getElementById('removeModalQ').textContent = frage;
+  _removeModal.style.display = 'flex';
+  return new Promise(function(aufloesen){ _removeAntwort = aufloesen; });
+}
+document.getElementById('removeModalYes').onclick = function(){ schliesseRemove(true); };
+document.getElementById('removeModalNo').onclick  = function(){ schliesseRemove(false); };
+document.getElementById('removeModalX').onclick   = function(){ schliesseRemove(false); };
+_removeModal.addEventListener('click', function(e){ if (e.target === _removeModal) schliesseRemove(false); });
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && _removeModal.style.display !== 'none') schliesseRemove(false);
+});
+
 function wireRow(li, src, i){
   const s = state[src];
   const seenBtn = li.querySelector('.seen-btn');
@@ -1899,10 +1932,17 @@ function wireRow(li, src, i){
   const wlBtn = li.querySelector('.wl-btn');
   if (wlBtn) wlBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    requireLogin(() => {
+    requireLogin(async () => {
+      const id = s.det[i].id;
+      // Abwaehlen laesst die Zeile nur dann verschwinden, wenn der Titel auch
+      // nicht als "gesehen" markiert ist -- die Liste zeigt ja beides. Nur in
+      // diesem Fall lohnt die Rueckfrage; sonst waere sie unnoetige Reibung.
+      const verschwindet = getWatchlistFlag(id) && !getSeen(id);
+      if (verschwindet) {
+        const wort = src === 'serien' ? 'Serie' : 'Film';
+        if (!(await confirmRemove(wort + ' entfernen?'))) { wlBtn.blur(); return; }
+      }
       toggleWatched(src, s.data[i][0]);
-      // Filme/Serien/Streaming (oben) zeigen nur watchlisted/gesehene Titel -- ein
-      // Abwaehlen hier muss die Zeile also aus der aktuellen Ansicht verschwinden lassen.
       suspendHoverUntilMouseMove();
       rebuild();
       renderList();
