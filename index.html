@@ -2599,15 +2599,26 @@ function buildProfile(){
 
    Angezeigt wird weiterhin die ECHTE Note samt Stimmenzahl -- die Gewichtung
    wirkt nur auf Sortierung und Taste-Score. */
-var BEWERTUNG_M = 100;          // Schwelle: ab hier zaehlt die eigene Note voll
+// m = ab wie vielen Stimmen die eigene Note im Wesentlichen fuer sich steht.
+// 100 war deutlich zu niedrig: Titel mit ein paar hundert Stimmen und einer
+// 9,4 standen damit vor Breaking Bad. Mit 1000 fuehren Breaking Bad, Die
+// Verurteilten, Game of Thrones und Chernobyl die Liste an, waehrend gut
+// bewertete Titel mittlerer Bekanntheit (Band of Brothers mit 4.275 Stimmen)
+// oben bleiben -- bei 3000 fielen genau die schon heraus und es blieben nur
+// noch Mega-Blockbuster.
+var BEWERTUNG_M = 1000;
 var BEWERTUNG_MITTEL = 6.76;    // Durchschnitt ueber alle Titel im Katalog
 function gewichteteNote(note, stimmen){
   var r = Number(note) || 0;
   if (!r) return 0;
   var v = Number(stimmen);
-  // Ohne bekannte Stimmenzahl NICHT abwerten: die kuratierten Katalog-Titel
-  // haben sie erst nach dem Nachtrag, und die sind durchweg etabliert.
-  if (!Number.isFinite(v) || v <= 0) return r;
+  // Unbekannte Stimmenzahl zaehlt wie NULL Stimmen, nicht wie volle Sicherheit.
+  // Frueher stand hier eine Ausnahme, die solche Titel ungeschmaelert
+  // durchliess -- gedacht als Schutz fuer die Katalog-Titel, die damals noch
+  // keine Stimmenzahl hatten. Die sind laengst nachgetragen, geschuetzt wurden
+  // zuletzt nur noch 1.152 Titel ohne Daten, die dadurch mit glatter 10,0 ganz
+  // oben standen. Ohne Beleg gilt jetzt der Durchschnitt.
+  if (!Number.isFinite(v) || v < 0) v = 0;
   return (v / (v + BEWERTUNG_M)) * r + (BEWERTUNG_M / (v + BEWERTUNG_M)) * BEWERTUNG_MITTEL;
 }
 function scoreCand(c, prof){
