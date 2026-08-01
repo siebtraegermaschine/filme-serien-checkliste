@@ -248,6 +248,23 @@ CREATE TABLE IF NOT EXISTS title_tmdb_resolution (
   resolved_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- Bester Trailer je Titel (Quelle: TMDB /videos). Wie watch_providers_cache
+-- bewusst erst beim ersten Oeffnen gefuellt statt fuer den ganzen Katalog
+-- vorab -- das waere ein Request je Titel.
+--
+-- video_key ist die YouTube-ID. NULL bedeutet "gesucht, aber nichts Brauchbares
+-- gefunden"; die App oeffnet dann ersatzweise eine YouTube-Suche nach
+-- "Titel + Trailer". Damit wird nicht bei jedem Oeffnen erneut erfolglos
+-- angefragt.
+CREATE TABLE IF NOT EXISTS title_videos_cache (
+  tmdb_id    INTEGER NOT NULL,
+  type       TEXT NOT NULL CHECK (type IN ('movie', 'series')),
+  video_key  TEXT,
+  video_name TEXT,
+  fetched_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (tmdb_id, type)
+);
+
 -- Protokolliert manuell eingegebene Suchbegriffe (siehe backend/routes/searchLog.js)
 -- fuer spaetere Auswertung, welche Titel/Begriffe Nutzer:innen suchen, aber (noch)
 -- nicht finden -- Basis fuer Katalog-Erweiterungen. user_email ist NULL, wenn die

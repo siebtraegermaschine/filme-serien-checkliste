@@ -133,7 +133,7 @@ async function searchTmdbId(kind, title, year) {
 // Liefert die TMDB-ID zu einer internen titles.id -- entweder direkt aus
 // titles.tmdb_id, aus einer frueheren Aufloesung, oder per TMDB-Suche.
 // Gibt {tmdbId, type} zurueck; tmdbId ist null, wenn nichts gefunden wurde.
-async function resolveTmdbId(titleId) {
+export async function resolveTmdbId(titleId) {
   const { rows } = await pool.query(
     `SELECT t.id, t.tmdb_id, t.type, t.title, t.year, r.tmdb_id AS resolved_id,
             (r.title_id IS NOT NULL) AS has_resolution

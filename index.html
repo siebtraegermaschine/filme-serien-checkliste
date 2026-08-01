@@ -477,11 +477,13 @@
      Discovery-Regeln. */
   .watch-row { display: none; clear: both; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); cursor: default; }
   li.item.show-details .watch-row { display: block; }
-  /* "Ansehen" linksbuendig, "Leihen"/"Kaufen" rechts -- dieselbe Aufteilung wie
-     in .det-actions darunter, wo .similar-btn per margin-right:auto nach links
-     rutscht und Watchlist/Gesehen rechts stehen. */
-  .watch-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; justify-content: flex-end; }
-  .watch-btn[data-cat="flatrate"] { margin-right: auto; }
+  /* Ansehen/Leihen/Kaufen zusammen links, "Trailer" rechts abgesetzt. */
+  .watch-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; justify-content: flex-start; }
+  .trailer-btn { margin-left: auto; }
+  /* Kino-Seite: dort gibt es nur den Trailer, der steht dann ganz links
+     (siehe watchRowHtml, opts.nurTrailer) -- ein "auto"-Abstand wuerde ihn
+     sonst als einziges Element nach rechts schieben. */
+  .watch-row.nur-trailer .trailer-btn { margin-left: 0; }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
   @media (hover: hover) { .watch-btn:hover { border-color: var(--accent); color: var(--accent); } }
@@ -500,6 +502,24 @@
   .watch-note { font-size: 12.5px; color: var(--text-dim); }
   .watch-more { margin-top: 7px; font-size: 11.5px; }
   .watch-source { margin-top: 8px; font-size: 11px; color: var(--text-dim); }
+  /* Trailer-Popup. Die Vorschau zeigt bewusst das TMDB-Poster und NICHT das
+     YouTube-Vorschaubild -- letzteres kaeme von Google und wuerde die
+     IP-Adresse schon vor jeder Zustimmung dorthin uebertragen, was die
+     Zwei-Klick-Loesung gerade verhindern soll. */
+  .trailer-modal { max-width:760px; width:100%; }
+  .trailer-box { position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:10px;
+    overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .trailer-box iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .trailer-vorschau { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.45; }
+  .trailer-consent { position:relative; text-align:center; padding:20px; max-width:420px; }
+  .trailer-consent p { color:var(--text); font-size:13px; line-height:1.55; margin:0 0 14px;
+    text-shadow:0 1px 6px rgba(0,0,0,.9); }
+  .trailer-play { background:var(--accent-soft); border:1px solid var(--accent); color:var(--accent);
+    border-radius:10px; padding:12px 22px; font-size:15px; font-weight:700; cursor:pointer; }
+  @media (hover: hover) { .trailer-play:hover { background:var(--accent); color:#12161c; } }
+  .trailer-note { color:var(--text-dim); font-size:12px; margin-top:10px; text-align:center; }
+  .trailer-note a { color:var(--text-dim); text-decoration:underline; }
+
   /* Einstellungen -> Streaminganbieter */
   .prov-intro { color: var(--text-dim); font-size: 13px; line-height: 1.5; margin: 0 0 12px; }
   .prov-list { overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch; margin: 0 -4px; }
@@ -794,6 +814,14 @@
       <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Titel</button>
       <button type="button" id="settingsAccountBtn" class="modal-yes">Zugangsdaten</button>
     </div>
+  </div>
+</div>
+
+<div id="trailerModal" class="modal-overlay" style="display:none">
+  <div class="modal trailer-modal">
+    <button class="modal-x" id="trailerModalX" aria-label="Schließen">✕</button>
+    <h3 id="trailerModalTitle">Trailer</h3>
+    <div class="trailer-box" id="trailerBox"></div>
   </div>
 </div>
 
@@ -1113,24 +1141,96 @@ function loadWatchData(api){
   }
   return watchDataCache.get(api);
 }
-function watchRowHtml(tmdbId, type, title, realId){
+/* ---- Trailer (Zwei-Klick-Loesung) ----
+   Der erste Klick oeffnet nur das Popup und zeigt eine Vorschau aus TMDB-Daten
+   samt Hinweis. Erst der zweite Klick laedt den Player -- und zwar ueber
+   youtube-nocookie.com. Bis dahin geht KEINE Anfrage an Google, auch kein
+   Vorschaubild: youtube.com/vi/... waere bereits eine Verbindung dorthin. */
+var trailerCache = new Map();
+function loadTrailer(api){
+  if (!api) return Promise.resolve({ key: null });
+  if (!trailerCache.has(api)) {
+    trailerCache.set(api, apiRequest('GET', api).catch(function(){ return { key: null }; }));
+  }
+  return trailerCache.get(api);
+}
+var _trailerModal = document.getElementById('trailerModal');
+var _trailerBox = document.getElementById('trailerBox');
+function youtubeSucheUrl(title){
+  return 'https://www.youtube.com/results?search_query=' + encodeURIComponent((title || '') + ' Trailer');
+}
+function closeTrailerModal(){
+  _trailerModal.style.display = 'none';
+  _trailerBox.innerHTML = '';        // stoppt ein laufendes Video zuverlaessig
+}
+function openTrailerModal(api, title, row){
+  document.getElementById('trailerModalTitle').textContent = 'Trailer: ' + (title || '');
+  _trailerBox.innerHTML = '<div class="trailer-consent"><p>Lädt …</p></div>';
+  _trailerModal.style.display = 'flex';
+  // Poster der zugehoerigen Zeile als Vorschau -- schon geladen, also kein
+  // zusaetzlicher Abruf und vor allem keine Verbindung zu Google.
+  var posterEl = row && row.closest('li') && row.closest('li').querySelector('.detposter, .dposter');
+  var posterSrc = (posterEl && posterEl.tagName === 'IMG') ? posterEl.src : '';
+  loadTrailer(api).then(function(d){
+    if (_trailerModal.style.display === 'none') return;
+    var vorschau = posterSrc ? '<img class="trailer-vorschau" src="' + escAttr(posterSrc) + '" alt="">' : '';
+    if (!d || !d.key) {
+      // Kein Trailer bei TMDB -- dann zur YouTube-Suche, dort wird man meist fuendig.
+      _trailerBox.innerHTML = vorschau +
+        '<div class="trailer-consent">' +
+          '<p>Zu diesem Titel ist bei TMDB kein Trailer hinterlegt.</p>' +
+          '<a class="trailer-play" href="' + escAttr(youtubeSucheUrl(title)) + '" target="_blank" rel="noopener noreferrer">Bei YouTube suchen</a>' +
+        '</div>';
+      return;
+    }
+    _trailerBox.innerHTML = vorschau +
+      '<div class="trailer-consent">' +
+        '<p>Beim Abspielen wird der Trailer von YouTube geladen. Dabei werden Daten ' +
+        '(u. a. deine IP-Adresse) an Google übertragen.</p>' +
+        '<button type="button" class="trailer-play" id="trailerPlayBtn">▶ Trailer abspielen</button>' +
+      '</div>';
+    document.getElementById('trailerPlayBtn').onclick = function(){
+      _trailerBox.innerHTML =
+        '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(d.key) +
+        '?autoplay=1&rel=0" title="Trailer" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>';
+    };
+  });
+}
+document.getElementById('trailerModalX').onclick = closeTrailerModal;
+_trailerModal.addEventListener('click', function(e){ if (e.target === _trailerModal) closeTrailerModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _trailerModal.style.display !== 'none') closeTrailerModal(); });
+
+function trailerBtnHtml(api, title){
+  // Steht IMMER zur Verfuegung: kennt TMDB keinen Trailer, oeffnet der Button
+  // ersatzweise eine YouTube-Suche nach "Titel Trailer" (siehe openTrailer).
+  return '<button type="button" class="watch-btn trailer-btn" data-trailer="' + escAttr(api || '') +
+         '" data-ttitle="' + escAttr(title || '') + '">▶ Trailer</button>';
+}
+function watchRowHtml(tmdbId, type, title, realId, opts){
   // Bevorzugt die TMDB-ID (spart dem Backend die Suche). Fehlt sie, laeuft die
   // Abfrage ueber die interne Titel-ID: die 600 urspruenglich kuratierten
   // Katalog-Titel haben durchweg tmdb_id NULL, das Backend loest sie dann per
   // TMDB-Suche auf (siehe routes/watchProviders.js, /by-title). Ohne beides --
   // reiner Streaming-/Discovery-Kandidat ohne TMDB-ID, den es so nicht geben
   // sollte -- entfaellt die Zeile ganz.
-  var api = (tmdbId && type) ? ('/api/watch-providers/' + type + '/' + tmdbId)
-          : (realId ? ('/api/watch-providers/by-title/' + realId) : null);
-  if (!api) return '';
+  var kennung = (tmdbId && type) ? (type + '/' + tmdbId) : (realId ? ('by-title/' + realId) : null);
+  var api = kennung ? ('/api/watch-providers/' + kennung) : null;
+  var trailerApi = kennung ? ('/api/trailers/' + kennung) : null;
+  // Auf der Kino-Seite ergeben Ansehen/Leihen/Kaufen keinen Sinn -- die Filme
+  // laufen ja erst an. Dort bleibt nur der Trailer, linksbuendig.
+  var nurTrailer = !!(opts && opts.nurTrailer);
+  // Ohne jede Kennung liesse sich nichts abfragen; dann bleibt hoechstens die
+  // YouTube-Suche uebrig, die allein keine eigene Zeile rechtfertigt.
+  if (!api && !nurTrailer) return '';
   // escAttr statt esc: esc() laesst Anfuehrungszeichen unangetastet -- ein Titel
   // wie 'Good Night, and Good Luck."' wuerde das Attribut sonst vorzeitig beenden.
-  return '<div class="watch-row" data-wapi="' + escAttr(api) +
+  return '<div class="watch-row' + (nurTrailer ? ' nur-trailer' : '') + '" data-wapi="' + escAttr(api || '') +
          '" data-wtitle="' + escAttr(title || '') + '">' +
     '<div class="watch-btns">' +
-      WATCH_CATS.map(function(c){
+      (nurTrailer ? '' : WATCH_CATS.map(function(c){
         return '<button type="button" class="watch-btn" data-cat="' + c.key + '">' + c.label + '</button>';
-      }).join('') +
+      }).join('')) +
+      trailerBtnHtml(trailerApi, title) +
     '</div>' +
     '<div class="watch-panel" hidden></div>' +
   '</div>';
@@ -1182,6 +1282,10 @@ document.addEventListener('click', function(e){
   e.stopPropagation();
   var btn = e.target.closest('.watch-btn');
   if (!btn) return;
+  if (btn.classList.contains('trailer-btn')) {
+    openTrailerModal(btn.dataset.trailer, btn.dataset.ttitle, row);
+    return;
+  }
   var cat = btn.dataset.cat;
   var panel = row.querySelector('.watch-panel');
   if (row.dataset.openCat === cat) {           // nochmal derselbe Button -> zuklappen
@@ -2494,7 +2598,9 @@ function renderCinemaSection(key, rows, prof, poolByTmdb){
   });
   var limit = cinemaSectionLimit[key];
   var visible = entries.slice(0, limit);
-  visible.forEach(function(e){ el.appendChild(poolItemLi(e.item, e.score)); });
+  // Kino: Ansehen/Leihen/Kaufen entfallen, die Filme laufen ja erst an --
+  // der Trailer ist hier das einzig Sinnvolle (siehe watchRowHtml).
+  visible.forEach(function(e){ el.appendChild(poolItemLi(e.item, e.score, { nurTrailer: true })); });
   fillPlots();
   if (entries.length > limit) {
     var remaining = entries.length - limit;
@@ -3209,7 +3315,8 @@ function poolItemLi(item, score, opts){
       '<div class="dmeta">'+esc(candMeta(item))+' · '+typeLabel+'</div>'+
       providerChipsHtml(item.providers) +
       candDetailsHtml(item, item.type) +
-      watchRowHtml(item.tmdbId, item.type, item.t, item.realId) + actionsHtml + '</div>';
+      watchRowHtml(item.tmdbId, item.type, item.t, item.realId,
+                   { nurTrailer: !!(opts && opts.nurTrailer) }) + actionsHtml + '</div>';
   var seenBtn = li.querySelector('.seen-btn');
   seenBtn.addEventListener('click', function(e){
     e.stopPropagation();
