@@ -83,18 +83,18 @@ ALTER TABLE users ADD COLUMN IF NOT EXISTS watch_provider_ids INTEGER[];
 -- dieser Funktion angelegt wurden -- die App fragt einmalig nach.
 ALTER TABLE users ADD COLUMN IF NOT EXISTS display_name TEXT;
 
--- Freiwillige Einwilligung in die kommerzielle Verwertung der eigenen
--- Sterne-Bewertungen (siehe datenschutz.html, Abschnitt 8).
+-- AKTUELL UNGENUTZT -- bewusst vorgehalten, nicht vergessen.
 --
--- NULL = keine Einwilligung. Gespeichert wird der ZEITPUNKT, nicht nur ein
--- Ja/Nein: Art. 7 Abs. 1 DSGVO verlangt, dass sich die Einwilligung nachweisen
--- laesst, und dazu gehoert wann sie erteilt wurde. Ein Widerruf setzt das Feld
--- zurueck auf NULL und haelt den Zeitpunkt in data_consent_revoked_at fest.
+-- Fuer die anonymen Bewertungsstatistiken (Titel + Anzahl + Verteilung, siehe
+-- datenschutz.html Abschnitt 8) braucht es keine Einwilligung: solche Aggregate
+-- sind keine personenbezogenen Daten mehr. Erst eine personenbezogene
+-- Auswertung (zusammenhaengendes Bewertungsprofil) wuerde eine erfordern --
+-- diese Entscheidung ist vertagt, die Oberflaeche fragt derzeit nichts ab.
 --
--- Bewusst NICHT Voraussetzung fuer die Nutzung: waere die Registrierung daran
--- gekoppelt, obwohl die Einwilligung fuer den Dienst nicht erforderlich ist,
--- waere sie nach Art. 7 Abs. 4 DSGVO voraussichtlich unwirksam -- und damit
--- wertlos.
+-- Bleibt die Frage spaeter aktuell: Gespeichert wuerde der ZEITPUNKT, nicht nur
+-- ein Ja/Nein (Art. 7 Abs. 1 verlangt Nachweisbarkeit), und die Einwilligung
+-- darf keine Voraussetzung fuer die Nutzung sein -- sonst waere sie nach
+-- Art. 7 Abs. 4 voraussichtlich unwirksam und damit wertlos.
 ALTER TABLE users ADD COLUMN IF NOT EXISTS data_consent_at TIMESTAMPTZ;
 ALTER TABLE users ADD COLUMN IF NOT EXISTS data_consent_revoked_at TIMESTAMPTZ;
 

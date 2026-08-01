@@ -376,10 +376,6 @@
     border-radius:8px; padding:10px; font-size:14px; font-weight:700; cursor:pointer; }
   .auth-submit:disabled { opacity:.6; cursor:default; }
   @media (hover: hover) { .auth-submit:hover:not(:disabled) { background:var(--accent); color:#0e1116; } }
-  .auth-consent { display:flex; align-items:flex-start; gap:9px; margin-top:4px;
-    font-size:11.5px; line-height:1.45; color:var(--text-dim); cursor:pointer; }
-  .auth-consent input { width:17px; height:17px; accent-color:var(--accent); flex-shrink:0; margin-top:1px; }
-  .auth-consent a { color:var(--accent); }
   .auth-toggle { text-align:center; font-size:13px; color:var(--text-dim); margin-top:14px; }
   .auth-toggle button { background:none; border:none; color:var(--accent); cursor:pointer; font-size:13px;
     font-weight:600; text-decoration:underline; padding:0; }
@@ -825,12 +821,6 @@
       <label id="authNameRow" style="display:none">Vorname / Profilname<input type="text" id="authDisplayName" autocomplete="given-name" maxlength="40"></label>
       <label>E-Mail<input type="email" id="authEmail" required autocomplete="email"></label>
       <label>Passwort<input type="password" id="authPassword" required autocomplete="current-password" minlength="8"></label>
-      <label id="authConsentRow" class="auth-consent" style="display:none">
-        <input type="checkbox" id="authDataConsent">
-        <span>Meine Bewertungen dürfen auch personenbezogen ausgewertet werden (ohne Name und
-        E-Mail, <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>, Abschnitt 8).
-        Freiwillig – die App funktioniert auch ohne, jederzeit widerrufbar.</span>
-      </label>
       <div id="authError" class="auth-error"></div>
       <button type="submit" id="authSubmit" class="auth-submit">Anmelden</button>
     </form>
@@ -975,14 +965,6 @@
   <div class="modal">
     <button class="modal-x" id="accountModalX" aria-label="Schließen">✕</button>
     <h3>Zugangsdaten</h3>
-    <label class="auth-consent" id="consentToggleRow">
-      <input type="checkbox" id="consentToggle">
-      <span>Meine Bewertungen dürfen auch personenbezogen ausgewertet werden (ohne Name und
-      E-Mail, <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>, Abschnitt 8).
-      Freiwillig und jederzeit änderbar.</span>
-    </label>
-    <div id="consentHint" class="auth-error"></div>
-    <hr class="account-sep">
     <form id="passwordForm" class="auth-form">
       <label>Aktuelles Passwort<input type="password" id="pwCurrentForPw" required autocomplete="current-password"></label>
       <label>Neues Passwort<input type="password" id="pwNew" required minlength="8" autocomplete="new-password"></label>
@@ -3396,26 +3378,9 @@ var _accountModal = document.getElementById('accountModal');
 function openAccountModal(){
   closeSettingsModal();
   ['pwCurrentForPw','pwNew','pwNewConfirm','pwCurrentForEmail','newEmail'].forEach(function(id){ document.getElementById(id).value = ''; });
-  ['pwError','emailError','consentHint'].forEach(function(id){ var el = document.getElementById(id); el.textContent = ''; el.classList.remove('ok'); });
-  document.getElementById('consentToggle').checked = !!(CURRENT_USER && CURRENT_USER.dataConsent);
+  ['pwError','emailError'].forEach(function(id){ var el = document.getElementById(id); el.textContent = ''; el.classList.remove('ok'); });
   _accountModal.style.display = 'flex';
 }
-// Erteilen und Widerrufen ueber dasselbe Kaestchen -- der Widerruf muss so
-// einfach sein wie die Erteilung (Art. 7 Abs. 3 DSGVO).
-document.getElementById('consentToggle').onchange = async function(){
-  var hinweis = document.getElementById('consentHint');
-  var gewuenscht = this.checked;
-  hinweis.textContent = '';
-  try {
-    CURRENT_USER = await apiRequest('PUT', '/api/auth/data-consent', { dataConsent: gewuenscht });
-    hinweis.textContent = gewuenscht ? 'Einwilligung gespeichert.' : 'Einwilligung widerrufen.';
-    hinweis.classList.add('ok');
-  } catch (e) {
-    this.checked = !gewuenscht;
-    hinweis.textContent = 'Konnte nicht gespeichert werden.';
-    hinweis.classList.remove('ok');
-  }
-};
 function closeAccountModal(){ _accountModal.style.display = 'none'; }
 document.getElementById('settingsAccountBtn').onclick = openAccountModal;
 document.getElementById('accountModalX').onclick = closeAccountModal;
@@ -3563,10 +3528,6 @@ function setAuthMode(m){
   var nameInp = document.getElementById('authDisplayName');
   nameRow.style.display = m === 'register' ? '' : 'none';
   nameInp.required = m === 'register';
-  // Nur bei der Registrierung, nie vorausgewaehlt und nie Pflicht -- eine an die
-  // Anmeldung gekoppelte Einwilligung waere nach Art. 7 Abs. 4 DSGVO
-  // voraussichtlich unwirksam.
-  document.getElementById('authConsentRow').style.display = m === 'register' ? 'flex' : 'none';
   authPassword.style.display = m === 'forgot' ? 'none' : '';
   authPassword.required = m !== 'forgot';
   if (m === 'login') {
@@ -3622,10 +3583,7 @@ authForm.addEventListener('submit', async (e) => {
     } else {
       const path = authMode === 'login' ? '/api/auth/login' : '/api/auth/register';
       const nutzlast = { email: authEmail.value, password: authPassword.value };
-      if (authMode === 'register') {
-        nutzlast.displayName = document.getElementById('authDisplayName').value;
-        nutzlast.dataConsent = document.getElementById('authDataConsent').checked;
-      }
+      if (authMode === 'register') nutzlast.displayName = document.getElementById('authDisplayName').value;
       CURRENT_USER = await apiRequest('POST', path, nutzlast);
       hideAuthModal();
       renderAuthBar();
