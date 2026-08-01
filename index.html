@@ -291,7 +291,9 @@
     gap:4px; min-width:190px; background:var(--card); border:1px solid var(--border); border-radius:10px;
     padding:8px; box-shadow:0 10px 30px rgba(0,0,0,.5); }
   .nav-menu.open { display:flex; }
-  .nav-menu-user { color:var(--text-dim); font-size:13px; padding:10px 10px 6px; border-top:1px solid var(--border);
+  /* Kein border-top: die E-Mail-Zeile soll direkt unter "Abmelden" stehen. Die
+     Trennung zur Gruppe darueber uebernimmt bereits die Linie ueber "Abmelden". */
+  .nav-menu-user { color:var(--text-dim); font-size:13px; padding:10px 10px 6px;
     margin-top:4px; word-break:break-all; }
   .nav-menu-item { background:none; border:none; color:var(--text); font-size:14px; font-weight:600;
     text-align:left; padding:9px 10px; border-radius:6px; cursor:pointer; width:100%; }
