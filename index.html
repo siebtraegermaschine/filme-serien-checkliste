@@ -295,7 +295,9 @@
   .nav-menu-sep { border:none; border-top:1px solid var(--border); margin:4px 4px; }
   .auth-modal { max-width:340px; }
   .auth-modal h3 { color:var(--accent); font-size:18px; margin-bottom:16px; text-align:center; }
-  .similar-modal { max-width:600px; width:100%; max-height:82vh; display:flex; flex-direction:column; }
+  /* 700px = dieselbe Breite wie die Hauptliste und die Toolbar darueber, damit
+     die Titelzeilen im Popup nicht enger stehen als ausserhalb. */
+  .similar-modal { max-width:700px; width:100%; max-height:82vh; display:flex; flex-direction:column; }
   .similar-modal h3 { color:var(--accent); font-size:17px; margin-bottom:12px; padding-right:22px; }
   .similar-modal-list { overflow-y:auto; flex:1; margin:0; -webkit-overflow-scrolling:touch; }
   /* "Im Kino"-Seite: keine eigene Modal-/Card-Optik, sondern dieselben Zeilen wie
@@ -603,7 +605,7 @@
   </div>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
-    <button type="button" id="howToBtn" class="nav-menu-item">How to</button>
+    <button type="button" id="howToBtn" class="nav-menu-item">Anleitung</button>
     <hr class="nav-menu-sep">
     <button type="button" id="navHomeBtn" class="nav-menu-item">Filme &amp; Serien</button>
     <button type="button" id="cinemaBtn" class="nav-menu-item">Im Kino</button>
@@ -735,7 +737,7 @@
     <div class="tb-row sim-type-filters" id="simTypeFilters">
       <button type="button" id="simFilme">Filme</button>
       <button type="button" id="simSerien">Serien</button>
-      <button type="button" id="simStream">Streaming</button>
+      <button type="button" id="simStream">Nur Streaming</button>
     </div>
     <ol class="list similar-modal-list" id="similarModalList"></ol>
   </div>
@@ -744,7 +746,7 @@
 <div id="howToModal" class="modal-overlay" style="display:none">
   <div class="modal">
     <button class="modal-x" id="howToModalX" aria-label="Schließen">✕</button>
-    <h3>How to</h3>
+    <h3>Anleitung</h3>
     <ol class="install-steps">
       <li>Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)</li>
       <li>Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.</li>
@@ -1079,17 +1081,23 @@ var WATCH_SEARCH_URLS = {
   8:   function(q){ return 'https://www.netflix.com/search?q=' + q; },              // Netflix
   9:   function(q){ return 'https://www.amazon.de/s?i=instant-video&k=' + q; },     // Amazon Prime Video
   10:  function(q){ return 'https://www.amazon.de/s?i=instant-video&k=' + q; },     // Amazon Video (Leihen/Kaufen)
-  337: function(q){ return 'https://www.disneyplus.com/search?q=' + q; },           // Disney+
-  350: function(q){ return 'https://tv.apple.com/de/search?term=' + q; },           // Apple TV+
-  2:   function(q){ return 'https://tv.apple.com/de/search?term=' + q; },           // Apple TV (Leihen/Kaufen)
   3:   function(q){ return 'https://play.google.com/store/search?c=movies&q=' + q; },// Google Play
   192: function(q){ return 'https://www.youtube.com/results?search_query=' + q; },  // YouTube
   35:  function(q){ return 'https://www.rakuten.tv/de/search?q=' + q; },            // Rakuten TV
 };
 // Bewusst NICHT aufgenommen, weil ihre Suche sich nicht per URL ansteuern laesst
-// (geprueft): MagentaTV (leitet auf eine Werbeseite um), maxdome (Domain tot),
-// WOW und Paramount+ (404), HBO Max (verwirft den Suchbegriff und landet auf der
-// Startseite). Diese Anbieter erscheinen deshalb als reine Information.
+// -- jeweils im echten Browser geprueft, nicht nur per HTTP-Status (der allein
+// taeuscht: mehrere liefern 200 und ignorieren den Suchbegriff trotzdem):
+//   Disney+        echte 404-Seite, alle Pfadvarianten
+//   Apple TV/Store Suchseite laedt, uebernimmt den Begriff beim Direktaufruf
+//                  aber nicht (in der Oberflaeche getippt funktioniert dieselbe
+//                  URL -- ohne /de landet man in der US-Region mit falschen
+//                  Preisen, deshalb auch das keine Option)
+//   MagentaTV      leitet auf eine Werbeseite um
+//   maxdome        Domain antwortet nicht mehr
+//   WOW, Paramount+ 404
+//   HBO Max        verwirft den Suchbegriff und landet auf der Startseite
+// Diese Anbieter erscheinen als reine Information (gestrichelter Rand).
 function watchSearchUrl(providerId, title){
   var build = WATCH_SEARCH_URLS[providerId];
   return build ? build(encodeURIComponent(title)) : null;
@@ -2314,11 +2322,18 @@ function buildProfileFromItem(item){
    aktuell bei mind. einem Anbieter verfuegbare -- jeweils sortiert nach
    Aehnlichkeit zu GENAU diesem einen Titel (nicht zum Gesamtprofil). */
 var _simModal = document.getElementById('similarModal');
-// Filter-Knoepfe im "Aehnliche Titel"-Popup (Filme/Serien/Streaming, siehe
-// simTypeFilter) -- unabhaengig voneinander an-/abwaehlbar wie bei Discovery,
-// mindestens einer muss aktiv bleiben. Ausgangszustand richtet sich beim
-// Oeffnen nach refItem.type (siehe openSimilarModal), damit sich am bisherigen
-// Standardverhalten nichts aendert, solange niemand die Knoepfe anfasst.
+// Filter-Knoepfe im "Aehnliche Titel"-Popup -- dieselbe Aufteilung wie unter
+// Filme/Serien: Filme und Serien waehlen den TYP (mindestens einer muss aktiv
+// bleiben), "Nur Streaming" ist dagegen eine zusaetzliche EINSCHRAENKUNG auf
+// Titel, die gerade streambar sind.
+//
+// Frueher waren alle drei gleichrangig per ODER verknuepft -- "Streaming"
+// holte damit Streaming-Titel unabhaengig vom Typ dazu, statt die Auswahl
+// einzugrenzen. Ein abgewaehltes "Filme" hatte dann keine Wirkung mehr, sobald
+// Streaming aktiv war.
+//
+// Ausgangszustand richtet sich beim Oeffnen nach refItem.type (siehe
+// openSimilarModal).
 var simTypeFilter = { f: true, s: false, stream: false };
 var simBtns = { f: document.getElementById('simFilme'), s: document.getElementById('simSerien'), stream: document.getElementById('simStream') };
 var _simRefItem = null, _simProf = null;
@@ -2327,8 +2342,11 @@ function renderSimilarList(){
   listEl.innerHTML = '';
   var pool = POOL.filter(function(i){
     if (i === _simRefItem) return false;
-    var isMovie = i.type === 'movie', isSeries = i.type === 'series', isStreaming = selectedProviders(i.providers).length > 0;
-    return (simTypeFilter.f && isMovie) || (simTypeFilter.s && isSeries) || (simTypeFilter.stream && isStreaming);
+    var isMovie = i.type === 'movie', isSeries = i.type === 'series';
+    var typPasst = (simTypeFilter.f && isMovie) || (simTypeFilter.s && isSeries);
+    if (!typPasst) return false;
+    if (simTypeFilter.stream && !selectedProviders(i.providers).length) return false;
+    return true;
   });
   var scored = pool.map(function(i){ return { item: i, score: scoreCand(i, _simProf).score }; })
                     .sort(function(a,b){ return b.score - a.score || (b.item.r||0) - (a.item.r||0); })
@@ -2341,8 +2359,13 @@ function renderSimilarList(){
   }
 }
 function toggleSimType(k){
-  var othersActive = Object.keys(simTypeFilter).some(function(o){ return o !== k && simTypeFilter[o]; });
-  if (simTypeFilter[k] && !othersActive) return;
+  if (k === 'f' || k === 's') {
+    // Mindestens ein Typ muss aktiv bleiben, sonst waere die Liste zwangslaeufig
+    // leer. "Nur Streaming" zaehlt hier bewusst NICHT als Ersatz -- es schraenkt
+    // nur ein, statt einen Typ zu ersetzen.
+    var andererTyp = (k === 'f') ? simTypeFilter.s : simTypeFilter.f;
+    if (simTypeFilter[k] && !andererTyp) return;
+  }
   simTypeFilter[k] = !simTypeFilter[k];
   simBtns[k].classList.toggle('active', simTypeFilter[k]);
   renderSimilarList();
@@ -2354,10 +2377,11 @@ function openSimilarModal(refItem){
   document.getElementById('similarModalTitle').textContent = 'Ähnliche Titel zu „' + refItem.t + '“';
   _simRefItem = refItem;
   _simProf = buildProfileFromItem(refItem);
-  // Ausgangszustand: wie frueher (vor den Filterknoepfen) richtet sich der
-  // Typ-Filter nach refItem.type -- ausser im Streaming-Tab, dort weiterhin
-  // alles aktuell verfuegbare (egal ob Film/Serie).
-  if (activeTab === 'stream') simTypeFilter = { f: false, s: false, stream: true };
+  // Ausgangszustand: der Typ-Filter richtet sich nach refItem.type. Im
+  // Streaming-Tab zusaetzlich "Nur Streaming" -- dort aber mit BEIDEN Typen
+  // aktiv, denn seit der Umstellung schraenkt Streaming nur ein und waehlt
+  // keinen Typ mehr aus; ohne Typ bliebe die Liste sonst leer.
+  if (activeTab === 'stream') simTypeFilter = { f: true, s: true, stream: true };
   else simTypeFilter = { f: refItem.type === 'movie', s: refItem.type === 'series', stream: false };
   Object.keys(simBtns).forEach(function(k){ simBtns[k].classList.toggle('active', simTypeFilter[k]); });
   renderSimilarList();
