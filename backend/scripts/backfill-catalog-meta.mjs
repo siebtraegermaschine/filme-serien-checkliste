@@ -13,6 +13,11 @@
  * haben die Katalog-Titel sie durch die frueheren Laeufe bereits stehen).
  * Titel ohne Zuordnung werden uebersprungen -- ohne ID gibt es nichts zu holen.
  *
+ * Bewusst NUR source='catalog': Discovery- und Streaming-Titel holen sich neue
+ * Felder beim naechsten Lauf ihres taeglichen Jobs von selbst. Ohne diese
+ * Einschraenkung wuerde das Skript alle ~27.000 Titel abklappern und rund
+ * anderthalb Stunden laufen, um dieselbe Arbeit doppelt zu machen.
+ *
  * Aufruf (auf dem Server, im Backend-Container):
  *   docker compose -f docker-compose.yml exec -T backend \
  *     node scripts/backfill-catalog-meta.mjs [--dry-run]
@@ -65,7 +70,8 @@ async function main() {
             COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id
        FROM titles t
        LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
-      WHERE (t.vote_count IS NULL OR t.certification IS NULL)
+      WHERE t.source = 'catalog'
+        AND (t.vote_count IS NULL OR t.certification IS NULL)
         AND COALESCE(t.tmdb_id, r.tmdb_id) IS NOT NULL
       ORDER BY t.id`
   );
