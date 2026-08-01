@@ -99,7 +99,7 @@
      Wort an, siehe dort. */
   .sub-howto-row .sub-howto-preview { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; }
   .sub-howto-row .sub-howto-more { flex-shrink: 0; text-decoration: underline; margin-left: auto; }
-  .sub-howto-full { margin-top: 6px; }
+  .sub-howto-full { margin-top: 6px; text-align: justify; }
   .tabs {
     display: flex;
     justify-content: center;
@@ -136,32 +136,6 @@
     padding: 11px 28px; color: var(--text-dim); font-size: 15px; font-weight:600; cursor: pointer; transition: all 0.15s; }
   @media (hover: hover) { .disc-toprow button:hover { border-color: var(--accent); color: var(--accent); } }
   .disc-toprow button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-  .progress-wrap {
-    max-width: 700px;
-    margin: 20px auto 0;
-    padding: 0 20px;
-  }
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: var(--text-dim);
-    margin-bottom: 6px;
-  }
-  .progress-label b { color: var(--accent); font-size: 15px; }
-  .bar {
-    height: 10px;
-    background: #232a35;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .bar-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--accent), #f2cd7e);
-    border-radius: 6px;
-    transition: width 0.35s ease;
-  }
   .toolbar {
     max-width: 700px;
     margin: 18px auto 0;
@@ -352,6 +326,10 @@
     transition: all 0.15s;
   }
   @media (hover: hover) { #cinemaSortMenu button:hover { border-color: var(--accent); color: var(--accent); } }
+  /* ".sort-menu button.active" (s.o.) hat als Klassen-Selektor eine niedrigere
+     Spezifitaet als "#cinemaSortMenu button" oben und wird dadurch ueberschrieben --
+     ohne diese ID-Regel bleibt die aktive Sortierung optisch nicht erkennbar. */
+  #cinemaSortMenu button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   .cinema-section ol.list { margin-top:10px; }
   .cinema-heading { max-width: 700px; margin-left:auto; margin-right:auto; padding: 0 20px; box-sizing: border-box;
     color:var(--text); font-size:15px; font-weight:700; }
@@ -577,7 +555,7 @@
       <span class="sub-howto-preview" id="subHowToPreview">1. Entdecke die besten Filme &amp; Serien unter Discovery und füge sie deiner „Watchlist“ hinzu oder markiere sie als „gesehen“.</span>
       <span class="sub-howto-more" id="subHowToMoreLabel">Mehr</span>
     </button>
-    <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)<br>2. Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. <b>Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</b></div>
+    <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)<br>2. Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die IMDb-Bewertung?">IMDb-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>3. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</div>
   </div>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
@@ -642,14 +620,6 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="progress-wrap">
-  <div class="progress-label">
-    <span id="progName">Fortschritt Filme</span>
-    <span><b id="count">0</b> / <span id="total">300</span> gesehen</span>
-  </div>
-  <div class="bar"><div class="bar-fill" id="barFill"></div></div>
 </div>
 
 
@@ -1195,8 +1165,6 @@ function render() {
   updateSortMenuActive();
   if (!s.data.length) {
     list.innerHTML = '<li class="watch-empty">Dies ist deine Watchlist. Füge Titel über den Bereich „Discovery" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>.</li>';
-    document.getElementById('progName').textContent = s.label;
-    updateProgress();
     return;
   }
   const _order = s.data.map(function (_, i) { return i; });
@@ -1269,8 +1237,6 @@ function render() {
     attachSwipeToRemove(li, function(){ removeFromMyTitles(s.det[i].id); });
     list.appendChild(li);
   });
-  document.getElementById('progName').textContent = s.label;
-  updateProgress();
   applyFilter();
 }
 
@@ -1405,34 +1371,6 @@ function wireRow(li, src, i){
     li.classList.toggle('show-details');
   });
 }
-function updateProgress() {
-  const s = state[activeTab];
-  if (!s) return;
-  // Ist "Im Streaming" aktiv, zaehlt der Fortschrittsbalken nur die aktuell
-  // streamende Teilmenge (nicht die gesamte Watchlist/Gesehen-Liste) -- alle
-  // drei Faelle unten (Watchlist/Gesehen/beide) filtern deshalb zuerst auf
-  // diese Basis-Indexmenge.
-  const base = s.data.map(function (_, i) { return i; }).filter(function (i) {
-    return !inStreamFilterOn || (s.pool[i] && s.pool[i].providers && s.pool[i].providers.length);
-  });
-  let num, den;
-  if (watchlistFilterOn && !seenFilterOn) {
-    const idx = base.filter(function (i) { return isWatched(activeTab, s.data[i][0]); });
-    den = idx.length;
-    num = idx.filter(function (i) { return s.checked[i]; }).length;
-  } else if (seenFilterOn && !watchlistFilterOn) {
-    const idx = base.filter(function (i) { return s.checked[i]; });
-    num = idx.length;
-    den = num;
-  } else {
-    num = base.filter(function (i) { return s.checked[i]; }).length;
-    den = base.length;
-  }
-  document.getElementById('count').textContent = num;
-  const tot = document.getElementById('total'); if (tot) tot.textContent = den;
-  document.getElementById('barFill').style.width = (den ? (num / den * 100) : 0) + '%';
-}
-
 const tabBtns = { filme: document.getElementById('tabFilme'), serien: document.getElementById('tabSerien') };
 tabBtns.filme.onclick = () => setTab('filme');
 tabBtns.serien.onclick = () => setTab('serien');
@@ -1556,8 +1494,6 @@ function updateFilterRowUI(){
   // einer als ausgewaehlt markiert sein.
   tabBtns.filme.classList.toggle('active', !disc && activeTab === 'filme');
   tabBtns.serien.classList.toggle('active', !disc && activeTab === 'serien');
-  var pw = document.querySelector('.progress-wrap');
-  pw.style.display = disc ? 'none' : '';
   syncDetailsSortWidth();
 }
 function setTab(t) {
@@ -1979,7 +1915,6 @@ function applyFilter() {
     const matchQ = !q || mainBlob.includes(q) || wordExactMatch(li.dataset.exactBlob, q);
     li.style.display = matchQ ? 'flex' : 'none';
   });
-  updateProgress();
 }
 
 // Klick auf Namen/Hashtags -> Filter-Popup
@@ -2282,7 +2217,6 @@ function openCinemaPage(){
   // automatisch mit ausgeblendet, wenn .toolbar gleich darunter versteckt wird.
   document.querySelector('.disc-toprow').style.display = 'none';
   document.querySelector('.toolbar').style.display = 'none';
-  document.querySelector('.progress-wrap').style.display = 'none';
   list.style.display = 'none';
   // Nur der erste Satz ("Filme & Serien sortiert nach deinem Geschmack!")
   // bleibt stehen -- die How-to-Kurzfassung darunter bezieht sich auf
@@ -2308,7 +2242,6 @@ function closeCinemaPage(){
   document.querySelector('.disc-toprow').style.display = '';
   document.querySelector('.sub-howto').style.display = '';
   document.querySelector('.toolbar').style.display = '';
-  document.querySelector('.progress-wrap').style.display = '';
   list.style.display = '';
   // Erzwingt einen frischen, korrekten Sync JETZT (wo alles wieder sichtbar
   // ist) -- repariert auch eine evtl. bereits kaputt geschriebene Breite von
@@ -3014,7 +2947,6 @@ function discFilterPool(){
   });
 }
 function renderDiscovery(){
-  document.getElementById('progName').textContent = 'Discovery';
   list.innerHTML='';
   var prof = buildProfile();
   var pool = discFilterPool();
