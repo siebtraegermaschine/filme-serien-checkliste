@@ -72,7 +72,16 @@ router.post('/ingest', async (req, res) => {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
-    const runStartedAt = new Date();
+    // clock_timestamp() statt now(): now() bleibt fuer die GESAMTE Transaktion
+    // auf deren Startzeitpunkt eingefroren. Die gerade eingefuegten Zeilen
+    // haetten damit einen fetched_at-Wert VOR runStartedAt (das JS ein paar
+    // Millisekunden spaeter bildet) -- und der DELETE-Cleanup unten loescht
+    // dann jeden einzelnen gerade uebertragenen Titel. Ob es kippt, haengt
+    // daran, ob beide Zeitstempel in dieselbe Millisekunde fallen: ein
+    // Muenzwurf bei jedem Lauf. Am 2026-08-02 verloren -- der Job meldete
+    // Erfolg und hinterliess 0 von 20.369 Zeilen. Dieselbe Falle war in
+    // cinema.js bereits behoben, hier blieb sie stehen.
+    const { rows: [{ now: runStartedAt }] } = await client.query('SELECT clock_timestamp() AS now');
     for (const provider of providers) {
       const providerId = provider.id;
       const providerName = provider.name || PROVIDER_NAMES[providerId] || providerId;
@@ -80,8 +89,8 @@ router.post('/ingest', async (req, res) => {
         for (const item of items || []) {
           await client.query(
             `INSERT INTO streaming_cache
-               (provider_id, provider_name, type, tmdb_id, title, year, genres, director, cast_names, poster_path, rating, vote_count, certification, overview)
-             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+               (provider_id, provider_name, type, tmdb_id, title, year, genres, director, cast_names, poster_path, rating, vote_count, certification, overview, fetched_at)
+             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14, clock_timestamp())
              ON CONFLICT (provider_id, type, tmdb_id) DO UPDATE SET
                title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
                director = EXCLUDED.director, cast_names = EXCLUDED.cast_names,
@@ -92,7 +101,7 @@ router.post('/ingest', async (req, res) => {
                -- Titel ohne deutschen Overview-Text), soll eine zuvor vorhandene (ggf. manuell
                -- nachgetragene) Beschreibung nicht durch einen Leerstring geloescht werden.
                overview = COALESCE(NULLIF(EXCLUDED.overview, ''), streaming_cache.overview),
-               fetched_at = now()`,
+               fetched_at = clock_timestamp()`,
             [
               providerId,
               providerName,
