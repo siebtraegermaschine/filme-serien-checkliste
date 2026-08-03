@@ -1,161 +1,207 @@
-# Übergabe: MovieTaste (movietaste.de)
+# Übergabe: MovieMatch (movietaste.de)
 
-Stand: 2026-08-02. Diese Datei fasst zusammen, was in der letzten Sitzung entstanden
-ist, was offen ist und welche Fallstricke es gibt. Für Architektur/Deployment siehe
-zusätzlich `DEPLOYMENT.md` und `konzept-relaunch.md`.
+Stand: 2026-08-03. Diese Datei ersetzt die vorherige Übergabe. Für Architektur
+und Deployment siehe zusätzlich `DEPLOYMENT.md` und `konzept-relaunch.md`.
 
----
+**Die App heißt seit dieser Sitzung MovieMatch.** Die Domain bleibt
+`movietaste.de` — überall sonst (Seitentitel, Manifest, Mail-Absender,
+Vorschau-Angaben, Rechtstexte) steht der neue Name.
 
-## 1. SOFORT PRÜFEN: Streaming-Daten wiederherstellen
-
-**Die Tabelle `streaming_cache` ist derzeit leer (0 statt ~20.000 Zeilen).**
-Dadurch fehlen aktuell: Anbieter-Schildchen an den Titeln, der „Nur Streaming"-Filter
-und die Streaming-Kandidaten in Discovery.
-
-Ursache war ein Altfehler in `backend/routes/streaming.js`, der am 2026-08-02 zuschlug:
-`now()` bleibt in Postgres für die gesamte Transaktion auf deren Startzeitpunkt
-eingefroren. Die eingefügten Zeilen bekamen dadurch ein `fetched_at` VOR dem in
-JavaScript gebildeten `runStartedAt`, und der `DELETE`-Cleanup am Ende löschte alles
-gerade Übertragene wieder. Der Job meldete trotzdem Erfolg. Ob es kippte, hing daran,
-ob beide Zeitstempel in dieselbe Millisekunde fielen — ein Münzwurf pro Lauf.
-
-**Behoben** (Commit `9b5468f`, überall `clock_timestamp()`). Dieselbe Falle war in
-`cinema.js` längst behoben, in `streaming.js` stehengeblieben.
-
-**Zu tun:** Den Job „Streaming-Daten aktualisieren" im GitHub-Actions-Tab manuell
-starten („Run workflow"). Läuft ~60–90 Minuten. Danach prüfen:
-
-```sql
-SELECT count(*) FROM streaming_cache;   -- erwartet: ~20.000
-```
+Zahlen zum Stand: 26.825 Titel, 22.357 Streaming-Einträge, 546 Kinostarts,
+98 Titel mit Schlagwort „TrueCrime", 3 Konten.
 
 ---
 
-## 2. Zugang und Deployment
+## 1. Vor der Einreichung im App Store
 
-- Server: `ssh root@movietaste.de` (Key `~/.ssh/id_ed25519`), Projekt unter `/opt/movietaste`
-- **Jeder Push auf `main` deployt automatisch** (GitHub Action `deploy.yml` → `/opt/movietaste/deploy.sh`)
-- Docker-Befehle auf dem Server **immer mit `-f docker-compose.yml`** — ohne das lädt
-  `docker-compose.override.yml` mit und öffnet Postgres/Backend öffentlich (ist einmal passiert)
-- Datenbank: `docker compose -f docker-compose.yml exec -T postgres psql -U postgres -d filme_serien`
+**Erledigt:** „Konto löschen" ist eingebaut (Einstellungen → Konto löschen).
+Apple verlangt das zwingend für jede App mit Registrierung (Richtlinie
+5.1.1(v)) — ohne diese Funktion wird abgelehnt. Ende-zu-Ende mit einem
+Wegwerf-Konto getestet, es bleiben keine verwaisten Daten zurück.
 
-**Warteschleifen auf den Deploy:** Direkt nach dem Push existiert der neue Workflow-Lauf
-noch nicht — eine Abfrage der jeweils neuesten Ausführung meldet dann fälschlich den
-vorherigen als „erfolgreich". Besser gegen den konkreten Commit-Hash prüfen oder einfach
+**Noch offen:**
+
+- **Drei TODO-Platzhalter in `datenschutz.html`.** Der vierte (Selbstbedienungs-
+  Löschung) ist mit der neuen Funktion entfallen.
+- **`impressum.html` rechtlich prüfen.** Ebenso Abschnitt 9 der
+  Datenschutzerklärung (kommerzielle Verwertung) — der ist ausdrücklich als
+  Entwurf gekennzeichnet.
+- **Anonyme Statistiken: Mindestzahl nicht durchgesetzt.** Die
+  Datenschutzerklärung sagt zu, dass Titel erst ab einer Mindestzahl an
+  Bewertungen in Auswertungen einfließen. Im Code gibt es das nicht. Das ist
+  eine Zusage, die das Programm derzeit nicht einhält — vor dem ersten Export
+  nachrüsten. (Stand seit der vorherigen Übergabe unverändert.)
+- **Datenschutz-Angaben („Privacy Nutrition Labels")** und **Altersfreigabe**
+  im App-Store-Formular ausfüllen.
+- **Konten:** Apple Developer 99 $/Jahr, Google Play 25 $ einmalig.
+
+---
+
+## 2. Gedanken zur nativen App
+
+### Empfehlung: einpacken, nicht neu bauen
+
+Die Sorge „jede Änderung dreifach pflegen" trifft genau dann zu, wenn die
+Oberfläche in SwiftUI und Kotlin nachgebaut wird. **Das sollte nicht passieren.**
+Der Weg heißt **Capacitor**: Die bestehende `index.html` läuft unverändert in
+einer nativen Hülle, es bleibt **eine** Codebasis. Dass die Web-App erst bei
+etwa 85 % steht, ist dabei kein Hindernis — es gibt keinen zweiten Code, der
+parallel altert.
+
+### Warum die native App mehr ist als Kosmetik
+
+Apple lehnt reine Webseiten-Verpackungen ab (Richtlinie 4.2, „Minimum
+Functionality"). Die App braucht echte native Fähigkeiten — und ausgerechnet
+die lösen zwei Defekte, die in dieser Sitzung nicht lösbar waren:
+
+| Problem in der Web-App | Löst die native App |
+|---|---|
+| Ein geteilter Link öffnet auf dem iPhone **Safari**, nicht die installierte App. Dort ist man womöglich abgemeldet, weil die Home-Bildschirm-App eine eigene Anmeldung hat. | **Universal Links** öffnen direkt die App, angemeldet. |
+| Das Teilen-Blatt zeigt eine leere Kachel statt eines Vorschaubilds (iOS erzeugt für Web-Dateien keine Miniatur). | Natives Teilen mit echtem Vorschaubild. |
+| Niemand merkt, wenn eine verknüpfte Person etwas auf die Liste setzt. | **Push-Nachrichten.** |
+
+### Zwei Wege bei der Aktualisierung
+
+- **Oberfläche mitliefern** (empfohlen): robust, offlinefähig — dafür braucht
+  jede Änderung an der Oberfläche ein Store-Update. Mit Capacitor Live Updates
+  gehen kleine Text- und Stiländerungen ohne Store-Freigabe durch.
+- **Oberfläche von movietaste.de laden**: jede Web-Änderung sofort in der App,
+  aber höheres Ablehnungsrisiko (näher an „nur eine Webseite") und nichts
+  offline.
+
+### Reihenfolge
+
+1. Apple-Entwicklerkonto anlegen (Freischaltung dauert)
+2. Capacitor-Hülle um die bestehende App
+3. Universal Links (`/t/...` muss die App öffnen) — löst den größten Bruch
+4. Push-Nachrichten
+5. Erst danach Store-Einreichung mit den Punkten aus Abschnitt 1
+
+---
+
+## 3. Funktionsideen, nach Wirkung sortiert
+
+1. **Push-Nachrichten bei gemeinsamen Titeln.** Macht „Gemeinsam schauen" erst
+   lebendig; heute merkt niemand, wenn der andere etwas hinzufügt.
+2. **TMDB-Livesuche**, wenn im eigenen Bestand nichts gefunden wird. Stand
+   schon in der vorherigen Übergabe als wirksamster Hebel gegen abweichende
+   Anbieter-Titel.
+3. **In Discovery markieren, was bei einer verknüpften Person auf der Liste
+   steht** („Jenny will das auch sehen"). Taucht heute nirgends auf.
+4. **Eigener Bewertungsdurchschnitt** neben der TMDB-Bewertung, ab etwa fünf
+   Bewertungen pro Titel.
+5. **Weitere Streaminganbieter** in `stream-fetch.mjs`. Die Ladegröße ist kein
+   Gegenargument mehr, die Laufzeit des Jobs (~60–90 Min.) bleibt begrenzend.
+
+---
+
+## 4. Bewusst offen gelassen
+
+- **Wiederaufführungen im Kino** werden nicht gekennzeichnet. Die Daten sind
+  vollständig da (`cinema_cache.original_release_date`, 38 von 546 Einträgen);
+  geprüft: kein Titel rutscht unerkannt durch. Einzige Lücke:
+  Wiederaufführungen **innerhalb desselben Jahres** werden nicht markiert, weil
+  der Job das Erstdatum verwirft, wenn das Jahr gleich ist. Mögliche Varianten:
+  Schildchen in der Zeile, Filter „Wiederaufführungen ausblenden", eigener
+  vierter Bereich.
+- **Zahlenwiderspruch:** Der Text der leeren Watchlist empfiehlt „mind. 20
+  Titel", die automatische Umstellung auf Taste-Score-Sortierung greift laut
+  Code und Erklärung aber ab **10**. Kein Fehler, aber vielleicht angleichen.
+- **Bild-Teilen:** Der Link steht in der Bildunterschrift statt in einem
+  eigenen Link-Feld (Variante C). Grund: Sobald ein Link-Feld dabei ist, stellt
+  iOS die Kachel als Weblink dar statt als Datei. WhatsApp macht aus der
+  Adresse in der Bildunterschrift trotzdem einen anklickbaren Link.
+- **`UEBERGABE.md`** (die ältere Datei) ist nicht aktualisiert.
+
+---
+
+## 5. Fallstricke, die in dieser Sitzung Zeit gekostet haben
+
+**`bigint` kommt als String an — zweimal zugeschlagen.** `users.id` und
+`titles.id` sind `bigint`; der Postgres-Treiber liefert sie als **String**.
+`POOL.realId` und die Schlüssel von `PROGRESS` sind deshalb Strings.
+- Erster Fall: `/api/links` schickte `id: "9"`, während `MATCH_WITH` Zahlen
+  enthielt. Folge: kein Haken im Popup, „Gemeinsame Titel mit **Unbekannt**",
+  gelöste Verknüpfungen blieben in der Liste stehen.
+- Zweiter Fall: Die Teilen-Schnittstelle gab `id` als Zahl zurück. Ein über
+  einen geteilten Link gespeicherter Titel wäre erst nach einem Neuladen in der
+  Liste aufgetaucht.
+
+**Bei jedem neuen Endpunkt prüfen, in welchem Typ IDs herausgehen.**
+
+**CSS-Spezifität — ebenfalls zweimal.** `header .sub` (Element + Klasse) schlägt
+`.sub-zweit` (nur Klasse); die gesetzte Regel wirkte nicht. Ebenso griff
+`.modal-actions button` nicht, weil das Teilen-Fenster eine eigene
+Container-Klasse benutzte — die Knöpfe hatten dadurch die Browser-Grundform.
+**Jede Stiländerung mit `getComputedStyle` nachmessen, nicht nur im Stylesheet
+nachsehen.**
+
+**`<base href="/">` muss vor allen Elementen mit relativen URLs stehen.** Es
+stand hinter den Icon-Angaben; auf einer geteilten Seite löste
+`apple-touch-icon.png` dadurch zu `/t/movie/apple-touch-icon.png` auf und lief
+in einen 404 — iOS zeigte nur seinen grauen Platzhalter.
+
+**Die lokale Vorschau über `file://` ist seit dem `<base href="/">` wertlos.**
+Dort zeigt „/" auf die Festplattenwurzel, alle Bilder brechen. Zum Ansehen
+einen kleinen Webserver nehmen: `python3 -m http.server 8777` im Projektordner.
+
+**TMDB erlaubt Canvas-Export.** Die Bilder kommen mit
+`Access-Control-Allow-Origin: *`; mit `crossOrigin = 'anonymous'` lässt sich
+daraus ein PNG/JPEG erzeugen, ohne dass die Canvas „vergiftet" wird. Darauf
+beruht das Story-Bild.
+
+**Vorschau-Roboter führen kein JavaScript aus.** Nachträglich gesetzte
+Open-Graph-Angaben bleiben wirkungslos — deshalb rendert der Server unter
+`/t/...` eigene Angaben ins HTML.
+
+**iOS und WhatsApp merken sich Linkvorschauen lange.** Nach Änderungen an den
+Vorschau-Angaben mit einem Titel testen, der noch nie geteilt wurde.
+
+**Deploy-Warteschleife:** Direkt nach dem Push existiert der neue Workflow-Lauf
+noch nicht. Besser gegen einen konkreten Inhalt prüfen (`curl … | grep …`) oder
 `ssh … 'cd /opt/movietaste && git log -1'`.
 
 ---
 
-## 3. Was in dieser Sitzung entstanden ist
+## 6. Was in dieser Sitzung entstanden ist (34 Commits)
 
-**Ansehen / Leihen / Kaufen / Trailer** in der Detailansicht. Daten von TMDB (Quelle
-JustWatch), Zwischenspeicher `watch_providers_cache` (24 h). Reihenfolge: Trailer links,
-dann Kaufen/Leihen/Ansehen rechts. Auf der Kino-Seite nur der Trailer (die Filme laufen
-ja erst an).
+**Titel teilen.** Rechtswisch auf jeder Zeile öffnet ein Fenster mit zwei Wegen:
+als Nachricht (Text + Link) oder als Bild (1080×1920, im Browser auf einer
+Canvas gebaut: Breitbild-Hintergrund, Poster, Titel, QR-Code). Geteilt wird auf
+`/t/id/<titles.id>` bzw. `/t/movie|series/<tmdb_id>` — beide Formen sind nötig,
+weil Katalog-Titel keine `tmdb_id` und Kinostarts keine `titles.id` haben. Der
+Server liefert dort titelspezifische Vorschau-Angaben aus; das Breitbild
+(`backdrop_path`, neue Spalte) wird beim ersten Teilen von TMDB nachgeladen.
+Empfänger bekommen eine Karte mit Watchlist/Gesehen — kein automatisches
+Speichern, „Gesehen" fragt die Sterne ab, beide schließen sich gegenseitig aus.
 
-- TMDB liefert **keine Deep-Links pro Anbieter** — verlinkt wird deren Suche nach dem Titel
-- Funktionierend geprüft (im echten Browser, nicht nur per HTTP-Status): Amazon, Google Play,
-  Rakuten TV, YouTube, Netflix
-- **Nicht verlinkbar** und deshalb nur als Info dargestellt: Disney+ (404), Apple TV/Store
-  (ignoriert den Suchbegriff beim Direktaufruf), MagentaTV, maxdome, WOW, Paramount+, HBO Max
+**Kino:** eigener Tab neben Filme/Serien statt Menüpunkt, Sortierung „Neu im
+Kino" (Kinostart) getrennt von „Veröffentlichungsdatum" (echtes Erstdatum),
+Vorschau 3 statt 6 Titel, Metazeile mit Kinostart statt Erscheinungsjahr.
+Dabei behoben: `/api/cinema` lieferte Stimmenzahl und Freigabe gar nicht aus —
+dadurch war die Sortierung nach TMDB-Bewertung dort wirkungslos und ein aktiver
+FSK-Filter leerte die Seite vollständig.
 
-**Trailer** über TMDB `/videos`, Zwei-Klick-Lösung: erst Vorschau mit Hinweis, dann
-`youtube-nocookie.com`. Als Vorschaubild dient das TMDB-Poster, **nicht** das
-YouTube-Thumbnail — letzteres wäre schon eine Verbindung zu Google. Kennt TMDB keinen
-Trailer, öffnet der Button eine YouTube-Suche.
+**Kopfbereich neu geordnet:** Tabs, Linie, „Alle Filme & Serien entdecken",
+Suche, Linie. Alle drei Zeilen exakt 44 px hoch. Zweite Kopfzeile „Matche deine
+Watchlist mit anderen!".
 
-**Streaminganbieter-Auswahl** (Einstellungen). `users.watch_provider_ids`:
-NULL = nie konfiguriert → 8 Standardanbieter, leeres Array = keine Filterung.
+**True Crime** als Schlagwort nachgetragen (98 Titel), über TMDBs eigenes
+Schlagwort 33722 statt über eine Genre-Heuristik. Schlagwörter sind jetzt
+durchsuchbar, auch getrennt geschrieben („zweiter weltkrieg" findet
+`ZweiterWeltkrieg`).
 
-**„Zusammen schauen"** — Icon-Button oben links, Profile per Einladungslink verknüpfen.
-Tabellen `user_links` (beidseitig), `user_link_invites` (nur Token-Hash, 7 Tage, einmalig).
-Filme/Serien: Schnittmenge der Listen; Kino und Discovery: gemeinsamer Taste-Score.
-
-**FSK-Filter** (bis 6 / bis 12 / bis 16 / ab 18) im selben Popup. Titel **ohne** hinterlegte
-Freigabe werden bei aktivem Filter ausgeblendet.
-
-**Ladegröße von 40,3 MB auf ~15 MB reduziert:** Inhaltsangaben werden nachgeladen
-(`POST /api/titles/plots`), Base64-Poster durch TMDB-Pfade ersetzt (595 von 600).
-
-**Gewichtete Bewertung** für Sortierung und Taste-Score:
-`(v/(v+1000)) × Note + (1000/(v+1000)) × 6,76`. Angezeigt wird die echte Note samt
-Stimmenzahl. Kein Titel wird ausgeblendet — wenig bewertete rutschen nur nach unten.
-
-**Sonstiges:** „IMDb" heißt überall „TMDB" (die Bewertung kam schon immer von dort),
-Rückfrage vor dem Entfernen aus Filme/Serien, Datenschutzerklärung um verknüpfte Profile
-und anonyme Bewertungsstatistiken erweitert.
+**Sonstiges:** „Nach oben"-Knopf, einmalige Rückfrage beim ersten Linkswisch je
+Bereich (vier getrennte Merker), „X" statt „0" bei fehlender Bewertung,
+Kontolöschung, Auffrischen beim Zurückkehren aus dem Hintergrund, neues Logo.
 
 ---
 
-## 4. Offene Punkte
+## 7. Hinweis zu den Testdateien
 
-**Verknüpfung zweier Konten ist ungetestet.** Alle Einzelteile sind geprüft (Einladung
-erzeugen, Token-Validierung, Ablehnungsfälle, Popup, Filterlogik), aber der Weg
-„einladen → annehmen → gegenseitig sichtbar" wurde nie real durchlaufen — dafür braucht
-es zwei Konten, und es existiert nur noch eines (`c.neubauer@digital-wings.com`, Name
-„Christian"). Die beiden Testkonten wurden auf Wunsch gelöscht.
-
-**FSK-Abdeckung ist unvollständig.** Nur ~68 % der Titel haben überhaupt eine deutsche
-Freigabe. Aktueller Stand: Discovery 17.641 von 26.190, Katalog 579 von 600, Kino 180 von
-545, Streaming 0 (siehe Punkt 1). Der Katalog ist auf hochbewertete Titel kuratiert und
-damit überwiegend für Erwachsene — „bis 6" trifft geschätzt ~10 %.
-
-**Anonyme Statistiken: Mindestzahl nicht durchgesetzt.** Die Datenschutzerklärung sagt zu,
-dass Titel erst ab einer Mindestzahl an Bewertungen in Auswertungen einfließen. Im Code
-gibt es das noch nicht — vor dem ersten Export nachrüsten, sonst steht dort etwas anderes
-als das Programm tut.
-
-**Poster-Sicherung kann weg**, wenn nichts auffällt: `titles_poster_base64_backup` (595
-Bilder, 4,1 MB). Rückholung steht im Kopf von `backend/scripts/backfill-catalog-posters.mjs`.
-
-**Ungenutzte Spalten:** `users.data_consent_at` / `data_consent_revoked_at` — die
-Einwilligung wurde bewusst wieder entfernt (für anonyme Aggregate braucht es keine).
-Als vorgehalten dokumentiert.
-
-**Rechtlich zu prüfen** (vor Go-Live): die Formulierungen in `datenschutz.html`, besonders
-Abschnitt 8, sowie die TODO-Platzhalter in `impressum.html` und `datenschutz.html`.
-
----
-
-## 5. Fallstricke, die mich Zeit gekostet haben
-
-**CSS-Spezifität.** Dreimal dieselbe Falle: `.modal-overlay .modal { max-width:360px }`
-schlägt `.similar-modal { max-width:700px }`, weil zwei Selektoren einen schlagen.
-Ebenso verlieren Regeln, die VOR der Grundregel stehen. Bei jeder Stiländerung prüfen,
-ob sie tatsächlich greift (`getComputedStyle`), nicht nur ob sie im Stylesheet steht.
-
-**Trennlinien im Menü** kommen teils aus `border-top` einzelner Einträge, nicht aus
-`<hr>`-Elementen — eine reine Strukturprüfung übersieht sie.
-
-**`esc()` escapt keine Anführungszeichen**, nur `& < >`. Für Attributwerte immer
-`escAttr()` verwenden, sonst zerreißt ein Titel mit `"` das HTML.
-
-**Die Meta-Zeile wird per Textsuche ausgewertet** (`metaRating`, `metaYear`, `metaGenre`).
-Beim Ergänzen von Feldern aufpassen: Die Stimmenzahl steht bewusst IM ersten Segment,
-`metaRating` ist inzwischen am Stern-Symbol verankert.
-
-**`showDetails` kann aus dem localStorage `true` sein** — dann rendern alle Zeilen
-aufgeklappt. Deshalb laden Anbieter und Trailer erst beim Klick, nicht beim Aufklappen.
-
-**Zeilen-Klickhandler klappen die Details zu.** Neue Buttons in der Zeile brauchen einen
-Listener in der **Capture-Phase** mit `stopPropagation()`, sonst schließt sich die Zeile.
-
-**Die 600 Katalog-Titel fasst kein täglicher Job an.** Neue Felder bleiben dort leer, bis
-sie gezielt nachgetragen werden (`backend/scripts/backfill-catalog-meta.mjs`).
-
-**Alternativtitel bringen nichts.** Geprüft: Nur 18 % der Titel haben abweichende deutsche
-Alternativtitel bei TMDB, und die sind meist Untertitel-Varianten, die die Suche ohnehin
-findet. Der Auslöser („Elize Matsunaga" heißt bei Netflix „Schatten einer Frau") wäre nicht
-gelöst worden — TMDB kennt dort gar keine Alternativtitel. Nicht bauen.
-
----
-
-## 6. Ideen, die besprochen, aber nicht umgesetzt wurden
-
-- **TMDB-Livesuche**, wenn die App im eigenen Bestand nichts findet — der wirksamere Hebel
-  gegen abweichende Anbieter-Titel
-- **Eigener Bewertungsdurchschnitt** neben der TMDB-Bewertung, ab ~5 Bewertungen pro Titel
-- **Discovery**: Titel markieren, die bei einer verknüpften Person auf der Watchlist stehen
-  („Max will das auch sehen") — die tauchen heute nirgends auf
-- **Weitere Streaminganbieter** in `stream-fetch.mjs`: Ladegröße ist inzwischen kein
-  Gegenargument mehr, die Laufzeit des Jobs (~60–90 Min.) bleibt aber der begrenzende Faktor
+Für die größeren Änderungen entstanden fünf Testdateien, die den Code **wörtlich
+aus `index.html` ziehen** (Personen-IDs, Auffrischen aus dem Hintergrund, True
+Crime, Kino-Sortierung, Teilen). Sie lagen im Sitzungs-Zwischenspeicher und sind
+mit dieser Sitzung verloren. Falls so etwas dauerhaft nützlich erscheint, wäre
+ein Ordner `tests/` im Projekt der richtige Ort — bewusst nicht ungefragt
+angelegt.
