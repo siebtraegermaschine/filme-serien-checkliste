@@ -15,18 +15,25 @@ const TMDB_KIND = { movie: 'movie', series: 'tv' };
 // Beides ist noetig: Die 600 kuratierten Katalog-Titel haben KEINE tmdb_id in
 // titles (sie werden ueber den Namen zugeordnet), Kino-Titel umgekehrt keine
 // titles.id. Ueber beide Formen zusammen ist jeder Titel teilbar.
-const FELDER = `id, tmdb_id, type, title, year, genres, rating, vote_count,
-                poster_path, backdrop_path, plot, certification`;
+// COALESCE ueber title_tmdb_resolution: Die kuratierten Katalog-Titel haben
+// keine eigene tmdb_id, ihre Zuordnung steht in dieser Tabelle (595 von 600).
+// Ohne sie bekaemen ausgerechnet die prominentesten Titel kein Breitbild und
+// damit auch keine grosse Vorschaukarte in WhatsApp.
+const FELDER = `t.id, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, t.type, t.title, t.year,
+                t.genres, t.rating, t.vote_count, t.poster_path, t.backdrop_path,
+                t.plot, t.certification`;
+const VON = `FROM titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id`;
 
 async function ladeTitel(art, kennung) {
   if (art === 'id') {
     const { rows } = await pool.query(
-      `SELECT ${FELDER}, 'titles' AS quelle FROM titles WHERE id = $1 LIMIT 1`, [kennung]);
+      `SELECT ${FELDER}, 'titles' AS quelle ${VON} WHERE t.id = $1 LIMIT 1`, [kennung]);
     return rows[0] || null;
   }
   const type = art === 'series' ? 'series' : 'movie';
   const { rows } = await pool.query(
-    `SELECT ${FELDER}, 'titles' AS quelle FROM titles WHERE type = $1 AND tmdb_id = $2 LIMIT 1`,
+    `SELECT ${FELDER}, 'titles' AS quelle ${VON}
+      WHERE t.type = $1 AND COALESCE(t.tmdb_id, r.tmdb_id) = $2 LIMIT 1`,
     [type, kennung]
   );
   if (rows[0]) return rows[0];
@@ -54,12 +61,14 @@ async function ergaenzeBackdrop(titel) {
     const d = await res.json();
     const pfad = d.backdrop_path || null;
     if (!pfad) return null;
-    const tabelle = titel.quelle === 'cinema_cache' ? 'cinema_cache' : 'titles';
-    await pool.query(
-      `UPDATE ${tabelle} SET backdrop_path = $1 WHERE tmdb_id = $2` +
-        (tabelle === 'titles' ? ' AND type = $3' : ''),
-      tabelle === 'titles' ? [pfad, titel.tmdb_id, titel.type] : [pfad, titel.tmdb_id]
-    );
+    // Ueber die Zeilen-ID speichern, wo es eine gibt: Bei Katalog-Titeln stammt
+    // die tmdb_id aus title_tmdb_resolution, ein UPDATE ueber titles.tmdb_id
+    // traefe dort gar keine Zeile.
+    if (titel.quelle === 'cinema_cache') {
+      await pool.query(`UPDATE cinema_cache SET backdrop_path = $1 WHERE tmdb_id = $2`, [pfad, titel.tmdb_id]);
+    } else {
+      await pool.query(`UPDATE titles SET backdrop_path = $1 WHERE id = $2`, [pfad, titel.id]);
+    }
     return pfad;
   } catch {
     return null;
