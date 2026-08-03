@@ -4759,7 +4759,7 @@ async function oeffneTeilen(item){
     var mitText = kannDatei && !!(navigator.canShare && navigator.canShare(voll));
     bildBtn.disabled = false;
     document.getElementById('shareHint').textContent = kannDatei
-      ? 'Für Instagram-Story: „Als Bild teilen“ und dort „Story“ wählen.'
+      ? 'Für Instagram-Story: „Als Bild teilen“ → dann „Story“.'
       : 'Dein Browser kann keine Bilder teilen – das Bild wird stattdessen geladen.';
     bildBtn.onclick = function(){
       if (kannDatei) {
