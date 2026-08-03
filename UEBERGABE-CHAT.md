@@ -1,7 +1,8 @@
 # Übergabe: MovieMatch (movietaste.de)
 
 Stand: 2026-08-03. Diese Datei ersetzt die vorherige Übergabe. Für Architektur
-und Deployment siehe zusätzlich `DEPLOYMENT.md` und `konzept-relaunch.md`.
+und Deployment siehe zusätzlich `DEPLOYMENT.md` und `konzept-relaunch.md`, für
+den Weg zu nativen Apps `PLAN-NATIVE-APPS.md`.
 
 **Die App heißt seit dieser Sitzung MovieMatch.** Die Domain bleibt
 `movietaste.de` — überall sonst (Seitentitel, Manifest, Mail-Absender,
@@ -67,6 +68,16 @@ E-Mail vorhanden, Bewertungen in der Summe angekommen, keine verwaisten Daten).
 ---
 
 ## 2. Gedanken zur nativen App
+
+> **Dieser Abschnitt ist inzwischen ausgearbeitet:** `PLAN-NATIVE-APPS.md`
+> enthält den vollständigen Umsetzungsplan in elf Phasen — mit getroffenen
+> Entscheidungen (Capacitor, Vite, Apple-Konto auf digital-wings, iOS zuerst),
+> Tabellenschemata, Aufwandsschätzung und Abhak-Liste. Drei kritische Punkte
+> kamen dabei hinzu, die unten noch fehlen: das Sitzungs-Cookie funktioniert in
+> der nativen Hülle nicht (`sameSite: 'lax'`, cross-site), die Kontolöschung
+> muss zusätzlich Anmelde-Token und Push-Kennungen entfernen, und der ~27 MB
+> große Katalog gehört auf einem schwachen Gerät gemessen, bevor Arbeit in
+> Feinschliff fließt. Das Folgende bleibt als Begründung der Richtung stehen.
 
 ### Empfehlung: einpacken, nicht neu bauen
 
