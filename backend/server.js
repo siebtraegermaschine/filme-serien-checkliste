@@ -161,6 +161,11 @@ app.get('/t/:art/:kennung', async (req, res, next) => {
   res.type('html').send(html.slice(0, a) + block + html.slice(b + OG_ENDE.length));
 });
 
+// Viele Vorschau-Dienste und Browser fragen zuerst /favicon.ico ab, bevor sie
+// die <link rel="icon">-Angaben auswerten. Ohne diese Zeile kam dort ein 404,
+// und manche zeigten daraufhin ihren eigenen Platzhalter statt des Logos.
+app.get('/favicon.ico', (req, res) => res.sendFile(path.join(frontendRoot, 'favicon-32.png')));
+
 app.use(express.static(frontendRoot, { index: 'index.html', extensions: ['html'] }));
 
 app.use((err, req, res, next) => {

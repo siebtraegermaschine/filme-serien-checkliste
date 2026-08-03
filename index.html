@@ -10,19 +10,22 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<!-- MUSS vor allen Elementen mit relativen URLs stehen (Icons, Manifest, Bilder).
+     Die Seite wird auch unter /t/<art>/<kennung> ausgeliefert; ohne diese Basis
+     loeste dort z.B. apple-touch-icon.png zu /t/movie/apple-touch-icon.png auf
+     und lief ins Leere -- iOS zeigte in der Teilen-Vorschau dann statt des
+     Logos nur seinen grauen Platzhalter. -->
+<base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MovieTaste">
 <meta name="theme-color" content="#0e1116">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" href="favicon-32.png" sizes="32x32">
-<!-- Die Seite wird auch unter /t/<art>/<tmdb-id> ausgeliefert (geteilter Titel).
-     Damit relative Pfade wie logo.png dort nicht zu /t/<art>/logo.png werden,
-     steht hier eine feste Basis. -->
-<base href="/">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icon-192.png" sizes="192x192">
 <title>MovieTaste</title>
 <!-- og:start -- Der Block zwischen diesen Marken wird bei geteilten Titeln
      serverseitig ersetzt (siehe backend/server.js). Die Vorschau-Roboter von
@@ -4550,10 +4553,11 @@ async function baueStoryBild(item, url){
 
   ctx.textAlign = 'center';
 
-  var wer = (CURRENT_USER && CURRENT_USER.displayName) ? CURRENT_USER.displayName : null;
-  ctx.fillStyle = '#e6b34c';
-  ctx.font = '600 40px ' + SCHRIFT;
-  ctx.fillText(wer ? (wer + ' empfiehlt dir') : 'Gefunden auf MovieTaste', B / 2, 150);
+  // Bewusst keine Absenderzeile im Bild -- eine Story wird oft weitergereicht,
+  // und der eigene Name soll nicht ungefragt mitwandern. Im Nachrichtentext,
+  // der gezielt an eine Person geht, steht er weiterhin.
+  // Der freie Rand oben ist ausserdem nuetzlich: Instagram legt dort seine
+  // eigene Bedienleiste ueber das Bild.
 
   // Poster
   var posterQuelle = (daten && daten.posterPath) ? daten.posterPath : item.p;
