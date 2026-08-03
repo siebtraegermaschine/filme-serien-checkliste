@@ -153,8 +153,11 @@
      uebereinander stehen. */
   .head-search { max-width: 660px; margin: 10px auto 0; padding: 0; display: flex; }
   /* Die zweite Kopfzeile steht dicht unter der ersten -- zusammen bilden sie
-     einen Gedanken (allein schauen / gemeinsam schauen). */
-  .sub-zweit { margin-top: 4px; }
+     einen Gedanken (allein schauen / gemeinsam schauen). Der Selektor braucht
+     das header davor: "header .sub" oben ist spezifischer als eine blosse
+     Klasse, ohne den Elementteil blieben die 8px von dort stehen. Nachgemessen
+     per getComputedStyle, nicht bloss im Stylesheet nachgesehen. */
+  header .sub-zweit { margin-top: 4px; }
   .head-controls { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
   /* Suche, Discovery und die Tab-Reihe sollen exakt gleich hoch sein. 44px ist
      die natuerliche Hoehe der Tab-Buttons (11px Innenabstand + 15px Schrift);
@@ -756,12 +759,12 @@
 <body>
 <header>
   <h1><img class="logo" src="logo.png" alt="MovieMatch – Watch more. Search less."></h1>
-  <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach deinem Geschmack!</b></p>
+  <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach deinem Geschmack.</b></p>
   <!-- Zweite Zeile: greift den Namen auf (Matche ... Match). Kursiv steht wie in
        der ersten Zeile der Schluesselbegriff -- dort "Filme & Serien", hier
        "Watchlist". Nachgemessen: 235px von 335px verfuegbarer Breite bei 375px,
        bleibt auch bei 320px einzeilig. -->
-  <p class="sub sub-zweit"><b>Matche deine <i>Watchlist</i> mit anderen.</b></p>
+  <p class="sub sub-zweit"><b>Matche deine <i>Watchlist</i> mit anderen!</b></p>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -4759,7 +4762,7 @@ async function oeffneTeilen(item){
     var mitText = kannDatei && !!(navigator.canShare && navigator.canShare(voll));
     bildBtn.disabled = false;
     document.getElementById('shareHint').textContent = kannDatei
-      ? 'Für Instagram-Story: „Als Bild teilen“ → dann „Story“.'
+      ? 'Bsp.: Instagram-Story: „Als Bild teilen“ → dann „Story“.'
       : 'Dein Browser kann keine Bilder teilen – das Bild wird stattdessen geladen.';
     bildBtn.onclick = function(){
       if (kannDatei) {
