@@ -484,6 +484,13 @@
   .modal-yes { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
   @media (hover: hover) { .modal-yes:hover { background:var(--accent); color:#0e1116; } }
   .modal-no { background:var(--card); color:var(--text-dim); }
+  /* "Konto löschen" hebt sich bewusst rot ab -- eine unwiderrufliche Aktion
+     soll sich von den uebrigen Menuepunkten unterscheiden. */
+  .modal-danger { background:var(--card); border-color:#5a2b28; color:#e0655c; }
+  @media (hover: hover) { .modal-danger:hover { border-color:#e0655c; background:rgba(224,101,92,.12); } }
+  .delete-warn { color:var(--text-dim); font-size:13.5px; line-height:1.45; margin-bottom:10px; }
+  .delete-submit { background:rgba(224,101,92,.15); border-color:#e0655c; color:#e0655c; }
+  @media (hover: hover) { .delete-submit:hover { background:#e0655c; color:#0e1116; } }
   @media (hover: hover) { .modal-no:hover { border-color:var(--accent); color:var(--accent); } }
   @media (max-width:640px) {
     li.item { gap:10px; padding:10px 12px; }
@@ -1021,6 +1028,7 @@
       <button type="button" id="settingsProvidersBtn" class="modal-yes">Streaminganbieter</button>
       <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Titel</button>
       <button type="button" id="settingsAccountBtn" class="modal-yes">Zugangsdaten</button>
+      <button type="button" id="settingsDeleteBtn" class="modal-danger">Konto löschen</button>
     </div>
   </div>
 </div>
@@ -1108,6 +1116,23 @@
       <label>Neue E-Mail-Adresse<input type="email" id="newEmail" required autocomplete="email"></label>
       <div id="emailError" class="auth-error"></div>
       <button type="submit" class="auth-submit">E-Mail-Adresse ändern</button>
+    </form>
+  </div>
+</div>
+
+<div id="deleteAccountModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="deleteAccountX" aria-label="Schließen">✕</button>
+    <h3>Konto löschen</h3>
+    <p class="delete-warn">Das lässt sich <b>nicht rückgängig machen</b>. Gelöscht werden dein Konto,
+      deine Watchlist, alle „Gesehen"-Markierungen samt Bewertungen, ausgeblendete Titel,
+      deine Verknüpfungen mit anderen Personen und deine gespeicherten Suchbegriffe.</p>
+    <p class="delete-warn">Verknüpfte Personen sehen dich danach nicht mehr. Ihre eigenen Listen
+      bleiben unberührt.</p>
+    <form id="deleteAccountForm" class="auth-form">
+      <label>Zur Sicherheit dein Passwort<input type="password" id="pwForDelete" required autocomplete="current-password"></label>
+      <div id="deleteError" class="auth-error"></div>
+      <button type="submit" class="auth-submit delete-submit">Konto endgültig löschen</button>
     </form>
   </div>
 </div>
@@ -3800,6 +3825,52 @@ document.getElementById('settingsAccountBtn').onclick = openAccountModal;
 document.getElementById('accountModalX').onclick = closeAccountModal;
 _accountModal.addEventListener('click', function(e){ if (e.target === _accountModal) closeAccountModal(); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _accountModal.style.display !== 'none') closeAccountModal(); });
+
+/* ---- Konto loeschen ----
+   Verlangt das Passwort erneut, genau wie Passwort- und E-Mail-Aenderung: Eine
+   offene Sitzung auf einem fremden Geraet soll das Konto nicht ausloeschen
+   koennen. Was serverseitig alles mitgeht, steht in backend/routes/auth.js. */
+var _deleteModal = document.getElementById('deleteAccountModal');
+function openDeleteModal(){
+  closeSettingsModal();
+  document.getElementById('pwForDelete').value = '';
+  var f = document.getElementById('deleteError'); f.textContent = ''; f.classList.remove('ok');
+  _deleteModal.style.display = 'flex';
+}
+function closeDeleteModal(){ _deleteModal.style.display = 'none'; }
+document.getElementById('settingsDeleteBtn').onclick = openDeleteModal;
+document.getElementById('deleteAccountX').onclick = closeDeleteModal;
+_deleteModal.addEventListener('click', function(e){ if (e.target === _deleteModal) closeDeleteModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _deleteModal.style.display !== 'none') closeDeleteModal(); });
+
+document.getElementById('deleteAccountForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  var fehler = document.getElementById('deleteError');
+  fehler.textContent = ''; fehler.classList.remove('ok');
+  // Letzte Rueckfrage ueber denselben Dialog wie beim Entfernen von Titeln --
+  // ein Passwortfeld allein wird schnell ausgefuellt, ohne die Folge zu lesen.
+  var sicher = await confirmRemove('Konto und alle Daten endgültig löschen? Das lässt sich nicht rückgängig machen.');
+  if (!sicher) return;
+  var knopf = this.querySelector('button[type=submit]');
+  knopf.disabled = true;
+  try {
+    await apiRequest('DELETE', '/api/auth/account', { currentPassword: document.getElementById('pwForDelete').value });
+  } catch (err) {
+    knopf.disabled = false;
+    fehler.textContent = err.code === 'wrong_current_password'
+      ? 'Das Passwort stimmt nicht.'
+      : 'Das hat nicht geklappt. Bitte erneut versuchen.';
+    return;
+  }
+  // Ab hier gibt es das Konto nicht mehr: Wie beim Abmelden auf den
+  // abgemeldeten Zustand zuruecksetzen, damit keine Reste stehenbleiben.
+  CURRENT_USER = null;
+  closeDeleteModal();
+  renderAuthBar();
+  updateProfileBtn();
+  await loadUserProgressAndRefresh();
+  alert('Dein Konto wurde gelöscht. Alle zugehörigen Daten sind entfernt.');
+});
 
 document.getElementById('passwordForm').addEventListener('submit', async function(e){
   e.preventDefault();

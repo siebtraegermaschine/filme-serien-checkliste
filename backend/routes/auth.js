@@ -213,4 +213,51 @@ router.put('/email', requireAuth, async (req, res) => {
   }
 });
 
+// Konto endgueltig loeschen. Verlangt wie Passwort-/E-Mail-Aenderung das
+// aktuelle Passwort erneut -- ein fremdes Geraet mit offener Sitzung soll das
+// Konto nicht ausloeschen koennen.
+//
+// Die meisten Daten haengen per ON DELETE CASCADE am Nutzer (Fortschritt,
+// ausgeblendete Titel, Verknuepfungen, Einladungen, Reset-Token). ZWEI Dinge
+// haengen NICHT daran und werden deshalb ausdruecklich mitgeloescht:
+//   - search_queries: speichert Suchbegriffe zusammen mit der E-Mail-Adresse,
+//     ohne Fremdschluessel. Ohne diese Zeile bliebe eine personenbezogene
+//     Angabe nach der Loeschung zurueck.
+//   - session: die Sitzungstabelle von connect-pg-simple kennt keinen
+//     Fremdschluessel. Mitloeschen meldet zugleich alle anderen Geraete ab.
+router.delete('/account', requireAuth, async (req, res) => {
+  const { currentPassword } = req.body || {};
+  if (typeof currentPassword !== 'string') {
+    return res.status(400).json({ error: 'invalid_request' });
+  }
+
+  const { rows } = await pool.query(`SELECT email, password_hash FROM users WHERE id = $1`, [req.session.userId]);
+  const user = rows[0];
+  const ok = user && (await bcrypt.compare(currentPassword, user.password_hash));
+  if (!ok) {
+    return res.status(401).json({ error: 'wrong_current_password' });
+  }
+
+  const userId = req.session.userId;
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    await client.query(`DELETE FROM search_queries WHERE user_email = $1`, [user.email]);
+    // sess ist JSON; die userId liegt dort als Zeichenkette (bigint aus pg).
+    await client.query(`DELETE FROM session WHERE sess->>'userId' = $1`, [String(userId)]);
+    await client.query(`DELETE FROM users WHERE id = $1`, [userId]);
+    await client.query('COMMIT');
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
+
+  req.session.destroy(() => {
+    res.clearCookie('fs.sid');
+    res.status(204).end();
+  });
+});
+
 export default router;
