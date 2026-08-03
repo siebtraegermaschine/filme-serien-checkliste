@@ -681,11 +681,6 @@
      nur sichtbar, wenn die Details dieser Zeile aufgeklappt sind. */
   .similar-btn { display: none; margin-right: auto; }
   li.item.show-details .similar-btn, li.disc.show-details .similar-btn { display: inline-block; }
-  /* Teilen-Knopf: schmal gehalten, damit die Aktionszeile mit vier Elementen
-     nicht umbricht. Eine Wischgeste allein findet niemand von selbst -- deshalb
-     zusaetzlich sichtbar, sobald die Zeile aufgeklappt ist. */
-  .share-btn { display: none; padding-left: 10px; padding-right: 10px; }
-  li.item.show-details .share-btn, li.disc.show-details .share-btn { display: inline-block; }
   .watch-empty { text-align: center; color: var(--text-dim); font-size: 14px; margin: 26px auto; max-width: 520px; line-height: 1.7; padding: 0 20px; }
   @media (max-width: 640px) { .details .detposter { width: 96px; } }
   /* Sortier-Button rechts neben dem Suchfeld */
@@ -970,7 +965,6 @@
     <div class="tb-row sim-type-filters" id="simTypeFilters">
       <button type="button" id="simFilme">Filme</button>
       <button type="button" id="simSerien">Serien</button>
-      <button type="button" id="simStream">Gratis in deinen Streaming-Abos</button>
     </div>
     <ol class="list similar-modal-list" id="similarModalList"></ol>
   </div>
@@ -2908,8 +2902,8 @@ var _simModal = document.getElementById('similarModal');
 //
 // Ausgangszustand richtet sich beim Oeffnen nach refItem.type (siehe
 // openSimilarModal).
-var simTypeFilter = { f: true, s: false, stream: false };
-var simBtns = { f: document.getElementById('simFilme'), s: document.getElementById('simSerien'), stream: document.getElementById('simStream') };
+var simTypeFilter = { f: true, s: false };
+var simBtns = { f: document.getElementById('simFilme'), s: document.getElementById('simSerien') };
 var _simRefItem = null, _simProf = null;
 function renderSimilarList(){
   var listEl = document.getElementById('similarModalList');
@@ -2919,8 +2913,7 @@ function renderSimilarList(){
     var isMovie = i.type === 'movie', isSeries = i.type === 'series';
     var typPasst = (simTypeFilter.f && isMovie) || (simTypeFilter.s && isSeries);
     if (!typPasst) return false;
-    if (simTypeFilter.stream && !selectedProviders(i.providers).length) return false;
-    if (!fskErlaubt(i)) return false;
+      if (!fskErlaubt(i)) return false;
     return true;
   });
   var scored = pool.map(function(i){ return { item: i, score: scoreCand(i, _simProf).score }; })
@@ -2935,9 +2928,7 @@ function renderSimilarList(){
 }
 function toggleSimType(k){
   if (k === 'f' || k === 's') {
-    // Mindestens ein Typ muss aktiv bleiben, sonst waere die Liste zwangslaeufig
-    // leer. "Nur Streaming" zaehlt hier bewusst NICHT als Ersatz -- es schraenkt
-    // nur ein, statt einen Typ zu ersetzen.
+    // Mindestens ein Typ muss aktiv bleiben, sonst waere die Liste zwangslaeufig leer.
     var andererTyp = (k === 'f') ? simTypeFilter.s : simTypeFilter.f;
     if (simTypeFilter[k] && !andererTyp) return;
   }
@@ -2947,17 +2938,14 @@ function toggleSimType(k){
 }
 simBtns.f.onclick = () => toggleSimType('f');
 simBtns.s.onclick = () => toggleSimType('s');
-simBtns.stream.onclick = () => toggleSimType('stream');
 function openSimilarModal(refItem){
   document.getElementById('similarModalTitle').textContent = 'Ähnliche Titel zu „' + refItem.t + '“';
   _simRefItem = refItem;
   _simProf = buildProfileFromItem(refItem);
-  // Ausgangszustand: der Typ-Filter richtet sich nach refItem.type. Im
-  // Streaming-Tab zusaetzlich "Nur Streaming" -- dort aber mit BEIDEN Typen
-  // aktiv, denn seit der Umstellung schraenkt Streaming nur ein und waehlt
-  // keinen Typ mehr aus; ohne Typ bliebe die Liste sonst leer.
-  if (activeTab === 'stream') simTypeFilter = { f: true, s: true, stream: true };
-  else simTypeFilter = { f: refItem.type === 'movie', s: refItem.type === 'series', stream: false };
+  // Ausgangszustand: der Typ-Filter richtet sich nach refItem.type. Einen
+  // Streaming-Filter gibt es hier bewusst nicht mehr -- in einer kurzen Liste
+  // aehnlicher Titel schnitt er meist alles weg.
+  simTypeFilter = { f: refItem.type === 'movie', s: refItem.type === 'series' };
   Object.keys(simBtns).forEach(function(k){ simBtns[k].classList.toggle('active', simTypeFilter[k]); });
   renderSimilarList();
   _simModal.style.display = 'flex';
@@ -4261,7 +4249,6 @@ function poolItemLi(item, score, opts){
   var actionsHtml =
     '<div class="det-actions">' +
       (showSimilarBtn ? '<button type="button" class="similar-btn">Ähnliche Titel</button>' : '') +
-      '<button type="button" class="share-btn" aria-label="Titel teilen" title="Teilen">↗</button>' +
       orderedActionsHtml +
     '</div>';
   li.innerHTML =
@@ -4394,8 +4381,6 @@ function poolItemLi(item, score, opts){
       if (cinemaMode) renderCinemaPage(); else renderDiscovery();
     });
   } : null, function(){ oeffneTeilen(item); });
-  var shareBtn = li.querySelector('.share-btn');
-  if (shareBtn) shareBtn.addEventListener('click', function(e){ e.stopPropagation(); oeffneTeilen(item); });
   return li;
 }
 
@@ -4763,7 +4748,7 @@ async function oeffneTeilen(item){
     var mitText = kannDatei && !!(navigator.canShare && navigator.canShare(voll));
     bildBtn.disabled = false;
     document.getElementById('shareHint').textContent = kannDatei
-      ? 'Bsp.: Instagram-Story: „Als Bild teilen“ → Instagram-App auswählen (ggf. unter „… mehr“ App erst hinzufügen) → dann „Story“.'
+      ? 'Bsp.: Instagram-Story: „Als Bild teilen“ → Instagram-App auswählen (gegebenenfalls App unter „… Mehr“ hinzufügen) → dann „Story“.'
       : 'Dein Browser kann keine Bilder teilen – das Bild wird stattdessen geladen.';
     bildBtn.onclick = function(){
       if (kannDatei) {
@@ -4855,9 +4840,12 @@ async function zeigeGeteiltenTitel(ziel){
     };
     return;
   }
+  // Beide Knoepfe bewusst neutral (modal-no): Mit einem hervorgehobenen Knopf
+  // sah "Gesehen" aus wie bereits gewaehlt, obwohl noch gar nichts gespeichert
+  // war.
   aktionen.innerHTML =
     '<button type="button" class="modal-no" id="sharedWlBtn">☆ Watchlist</button>' +
-    '<button type="button" class="modal-yes" id="sharedSeenBtn">✓ Gesehen</button>';
+    '<button type="button" class="modal-no" id="sharedSeenBtn">✓ Gesehen</button>';
   async function speichern(patch, text){
     hinweis.textContent = 'Wird gespeichert …';
     try {
@@ -4879,11 +4867,21 @@ async function zeigeGeteiltenTitel(ziel){
       hinweis.textContent = 'Das hat nicht geklappt. Bitte erneut versuchen.';
     }
   }
+  // Watchlist und Gesehen schliessen sich gegenseitig aus -- genau wie in den
+  // Titelzeilen (siehe toggleWatched und den seen-btn-Handler). Vorher setzte
+  // die Karte nur das eine Merkmal; stand der Titel schon auf der Watchlist,
+  // war danach BEIDES markiert, weil das Backend fehlende Felder unveraendert
+  // laesst (COALESCE in PUT /api/progress).
   document.getElementById('sharedWlBtn').onclick = function(){
-    speichern({ watchlist: true }, 'Zur Watchlist hinzugefügt.');
+    speichern({ watchlist: true, seen: false }, 'Zur Watchlist hinzugefügt.');
   };
-  document.getElementById('sharedSeenBtn').onclick = function(){
-    speichern({ seen: true }, 'Als gesehen markiert.');
+  document.getElementById('sharedSeenBtn').onclick = async function(){
+    // "Gesehen" verlangt eine Sterne-Bewertung, ebenfalls wie in den Zeilen:
+    // Sie fliesst gewichtet in den Taste-Score ein. Bricht die Person ab,
+    // passiert nichts.
+    var sterne = await openRatingStars(d.title);
+    if (sterne == null) return;
+    speichern({ seen: true, watchlist: false, rating: sterne }, 'Als gesehen markiert.');
   };
 }
 
