@@ -87,7 +87,12 @@ router.get('/title/:art/:kennung', async (req, res) => {
   if (!titel) return res.status(404).json({ error: 'not_found' });
   const backdrop = await ergaenzeBackdrop(titel);
   res.json({
-    id: titel.id != null ? Number(titel.id) : null,
+    // Als String, NICHT als Zahl: titles.id ist bigint, der Postgres-Treiber
+    // liefert das ueberall sonst als String -- POOL.realId und die Schluessel
+    // von PROGRESS sind entsprechend Strings. Eine Zahl hier haette bedeutet,
+    // dass ein ueber den geteilten Link gespeicherter Titel zwar auf dem Server
+    // landet, in der eigenen Liste aber erst nach einem Neuladen auftaucht.
+    id: titel.id != null ? String(titel.id) : null,
     tmdbId: titel.tmdb_id,
     type: titel.type,
     title: titel.title,
