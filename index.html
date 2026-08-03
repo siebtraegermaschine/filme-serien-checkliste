@@ -798,7 +798,7 @@
        Headers. -->
   <div class="head-controls">
     <div class="disc-toprow">
-      <button id="fDiscovery">🧭 Neue Filme &amp; Serien entdecken</button>
+      <button id="fDiscovery">🧭 Alle Filme &amp; Serien entdecken</button>
     </div>
     <div class="head-search">
       <div class="search-wrap">
@@ -970,7 +970,7 @@
     <button class="modal-x" id="howToModalX" aria-label="Schließen">✕</button>
     <h3>Anleitung</h3>
     <ol class="install-steps">
-      <li>Tippe auf <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was bedeutet „Neue Filme &amp; Serien entdecken“?">Neue Filme &amp; Serien entdecken</i> und füge Titel deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)</li>
+      <li>Tippe auf <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was bedeutet „Alle Filme &amp; Serien entdecken“?">Alle Filme &amp; Serien entdecken</i> und füge Titel deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)</li>
       <li>Schaut gemeinsam: Verknüpfe dich oben links mit Freund:innen oder Familie – dann siehst du nur noch Titel, die bei euch gemeinsam auf der Liste stehen. So findet ihr sofort etwas, das allen gefällt.</li>
       <li>Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming kostenlos laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die TMDB-Bewertung?">TMDB-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.</li>
       <li><b>Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</b></li>
@@ -1901,7 +1901,7 @@ function render() {
         'Oben links kannst du die Auswahl wieder aufheben.</li>';
       return;
     }
-    list.innerHTML = '<li class="watch-empty">Dies ist deine Watchlist. Füge Titel über „Neue Filme &amp; Serien entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>.</li>';
+    list.innerHTML = '<li class="watch-empty">Dies ist deine Watchlist. Füge Titel über „Alle Filme &amp; Serien entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>.</li>';
     return;
   }
   const _order = s.data.map(function (_, i) { return i; });
@@ -2103,19 +2103,19 @@ function confirmRemove(frage){
    zurueckgesetzt (siehe removeFromMyTitles) -- der Titel landet dort NICHT
    unter Einstellungen -> "Geloeschte Titel", die enthaelt ausschliesslich per
    Wisch ausgeblendete Discovery-/Kino-Titel. Deshalb nennen die beiden
-   Listen-Texte "Neue Filme & Serien entdecken" bzw. die Suche als Rueckweg. */
+   Listen-Texte "Alle Filme & Serien entdecken" bzw. die Suche als Rueckweg. */
 var WISCH_HINWEISE = {
   filme: {
     key: 'mt.wischHinweis.filme',
-    text: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Neue Filme & Serien entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
+    text: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Alle Filme & Serien entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
   },
   serien: {
     key: 'mt.wischHinweis.serien',
-    text: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Neue Filme & Serien entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
+    text: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Alle Filme & Serien entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
   },
   discovery: {
     key: 'mt.wischHinweis.discovery',
-    text: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht in „Neue Filme & Serien entdecken“ nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
+    text: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht in „Alle Filme & Serien entdecken“ nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
   },
   kino: {
     key: 'mt.wischHinweis.kino',
@@ -2186,7 +2186,7 @@ function wireRow(li, src, i){
         const wort = src === 'serien' ? 'Serie' : 'Film';
         const pron = src === 'serien' ? 'sie' : 'ihn';
         const frage = wort + ' aus deiner Liste entfernen? Du kannst ' + pron +
-          ' über „Neue Filme & Serien entdecken“ oder die Suche jederzeit wieder hinzufügen.';
+          ' über „Alle Filme & Serien entdecken“ oder die Suche jederzeit wieder hinzufügen.';
         if (!(await confirmRemove(frage))) { wlBtn.blur(); return; }
       }
       toggleWatched(src, s.data[i][0]);
@@ -4485,7 +4485,7 @@ function renderDiscovery(){
       'auf der Filmdatenbank TMDB (The Movie Database) und zeigt, wie gut ein Titel bei einem breiten '+
       'Publikum ankommt. Die Zahl in Klammern dahinter ist die Anzahl der abgegebenen Stimmen: Eine 8,0 '+
       'aus einer einzigen Stimme sagt deutlich weniger aus als eine 8,3 aus 28.000.' },
-    discovery: { title:'Neue Filme & Serien entdecken', body:'Hier werden dir Filme, Serien und Streaming-Titel vorgeschlagen, die du noch '+
+    discovery: { title:'Alle Filme & Serien entdecken', body:'Hier werden dir Filme, Serien und Streaming-Titel vorgeschlagen, die du noch '+
       'nicht gesehen hast – passend zu deinem Taste-Score, also basierend auf Genres, Besetzung, Regie und mehr '+
       'all deiner bisher per Watchlist oder „Gesehen“ markierten Filme und Serien zusammen.' },
     newreleases: { title:'Veröffentlichungsdatum vs. Neu im Streaming', body:'Das sind zwei unterschiedliche Sortierungen: „Veröffentlichungsdatum“ '+
