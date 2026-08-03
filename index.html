@@ -1,6 +1,6 @@
 <!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
 {
-  "name": "MovieTaste",
+  "name": "MovieMatch",
   "schemaVersion": 1,
   "description": "Abhakbare Checkliste „Top 300 Filme & Serien\" (deutsche Titel) mit zwei Tabs (Filme/Serien), eigenem Fortschrittsbalken pro Tab, Suche, Filter und Detailansicht mit Postern.",
   "mcpTools": [],
@@ -20,21 +20,21 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="MovieTaste">
+<meta name="apple-mobile-web-app-title" content="MovieMatch">
 <meta name="theme-color" content="#0e1116">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="icon" href="/icon-192.png" sizes="192x192">
-<title>MovieTaste</title>
+<title>MovieMatch</title>
 <!-- og:start -- Der Block zwischen diesen Marken wird bei geteilten Titeln
      serverseitig ersetzt (siehe backend/server.js). Die Vorschau-Roboter von
      WhatsApp und iMessage fuehren kein JavaScript aus, nachtraeglich gesetzte
      Angaben blieben also wirkungslos. -->
-<meta property="og:site_name" content="MovieTaste">
+<meta property="og:site_name" content="MovieMatch">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://movietaste.de/">
-<meta property="og:title" content="MovieTaste">
+<meta property="og:title" content="MovieMatch">
 <meta property="og:description" content="Filme &amp; Serien sortiert nach deinem Geschmack.">
 <meta property="og:image" content="https://movietaste.de/icon-512.png">
 <meta name="twitter:card" content="summary">
@@ -752,7 +752,7 @@
 </head>
 <body>
 <header>
-  <h1><img class="logo" src="logo.png" alt="MovieTaste – Watch more. Search less."></h1>
+  <h1><img class="logo" src="logo.png" alt="MovieMatch – Watch more. Search less."></h1>
   <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach deinem Geschmack!</b></p>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
@@ -838,8 +838,8 @@
          beide mit derselben Funktion -- deshalb bekommen in .tb-streamrow
          BEIDE flex:1 und nicht nur das erste Kind. -->
     <div class="tb-toprow tb-streamrow">
-      <button id="fInStream"><svg class="funnel-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg> Nur Streaming</button>
-      <button id="discStream" style="display:none"><svg class="funnel-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg> Nur Streaming</button>
+      <button id="fInStream"><svg class="funnel-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg> Gratis in deinen Streaming-Abos</button>
+      <button id="discStream" style="display:none"><svg class="funnel-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg> Gratis in deinen Streaming-Abos</button>
     </div>
   </div>
 </div>
@@ -959,7 +959,7 @@
     <div class="tb-row sim-type-filters" id="simTypeFilters">
       <button type="button" id="simFilme">Filme</button>
       <button type="button" id="simSerien">Serien</button>
-      <button type="button" id="simStream">Nur Streaming</button>
+      <button type="button" id="simStream">Gratis in deinen Streaming-Abos</button>
     </div>
     <ol class="list similar-modal-list" id="similarModalList"></ol>
   </div>
@@ -1901,7 +1901,12 @@ function render() {
         'Oben links kannst du die Auswahl wieder aufheben.</li>';
       return;
     }
-    list.innerHTML = '<li class="watch-empty">Dies ist deine Watchlist. Füge Titel über „Alle Filme &amp; Serien entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>.</li>';
+    list.innerHTML = '<li class="watch-empty">Dies ist deine Watchlist. Füge Titel über „Alle Filme &amp; Serien entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>. ' +
+      'Zukünftig musst du nur noch auswählen, ob du einen Film oder eine Serie schauen möchtest oder ins Kino gehen willst. ' +
+      'Hier siehst du dann deine persönliche Watchlist, sortiert nach deinem Geschmack.<br><br>' +
+      '<u>Du möchtest mit anderen Filme genießen?</u><br>' +
+      'Links oben kannst du Personen zu der App einladen und ihr seht, welche Überschneidungen eure Watchlist hat. ' +
+      'Genießt Filme und Serien, die euch beide interessieren!</li>';
     return;
   }
   const _order = s.data.map(function (_, i) { return i; });
@@ -3233,7 +3238,7 @@ document.getElementById('installAndroid').onclick = function(){
     return;
   }
   showInstallInstructions(
-    '<p>So speicherst du MovieTaste auf deinem Android-Gerät als App:</p>' +
+    '<p>So speicherst du MovieMatch auf deinem Android-Gerät als App:</p>' +
     '<ol class="install-steps">' +
       '<li>Diese Seite in <b>Chrome</b> öffnen.</li>' +
       '<li>Oben rechts auf das Menü <b>⋮</b> tippen.</li>' +
@@ -3538,10 +3543,10 @@ document.getElementById('profileInviteBtn').onclick = async function(){
   try {
     var d = await apiRequest('POST', '/api/links/invite');
     var text = ((CURRENT_USER && CURRENT_USER.displayName) || 'Jemand') +
-               ' möchte auf MovieTaste gemeinsam mit dir Filme finden:';
+               ' möchte auf MovieMatch gemeinsam mit dir Filme finden:';
     // Native Teilen-Funktion (iPhone/Android) -- sonst in die Zwischenablage.
     if (navigator.share) {
-      try { await navigator.share({ title: 'MovieTaste', text: text, url: d.url }); }
+      try { await navigator.share({ title: 'MovieMatch', text: text, url: d.url }); }
       catch (e) { /* abgebrochen -- kein Fehlerfall */ }
     } else if (navigator.clipboard && navigator.clipboard.writeText) {
       await navigator.clipboard.writeText(d.url);
@@ -4537,7 +4542,7 @@ function teilenUrl(item){
 }
 function teilenText(item){
   var wer = (CURRENT_USER && CURRENT_USER.displayName) ? CURRENT_USER.displayName : null;
-  var kopf = wer ? (wer + ' hat einen Titel für dich:') : 'Gefunden auf MovieTaste:';
+  var kopf = wer ? (wer + ' hat einen Titel für dich:') : 'Gefunden auf MovieMatch:';
   var zeile2 = [item.t + (item.y ? ' (' + item.y + ')' : ''),
                 '⭐ ' + sterneText(item.r), (item.g && item.g[0]) || null,
                 item.type === 'series' ? 'Serie' : 'Film'].filter(Boolean).join(' · ');
@@ -4730,7 +4735,7 @@ async function oeffneTeilen(item){
     var vb = new Image(); vb.src = bildUrl; vb.alt = '';
     vb.onload = function(){ URL.revokeObjectURL(bildUrl); };
     vorschau.appendChild(vb);
-    var datei = new File([blob], 'movietaste.jpg', { type: 'image/jpeg' });
+    var datei = new File([blob], 'moviematch.jpg', { type: 'image/jpeg' });
     var kannDatei = !!(navigator.canShare && navigator.canShare({ files: [datei] }));
     bildBtn.disabled = false;
     document.getElementById('shareHint').textContent = kannDatei
@@ -4743,7 +4748,7 @@ async function oeffneTeilen(item){
       } else {
         var a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'movietaste-' + item.t.replace(/[^\w]+/g, '-').toLowerCase() + '.jpg';
+        a.download = 'moviematch-' + item.t.replace(/[^\w]+/g, '-').toLowerCase() + '.jpg';
         a.click();
         setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
       }

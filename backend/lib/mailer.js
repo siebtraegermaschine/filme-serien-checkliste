@@ -38,7 +38,7 @@ export async function sendMail({ to, subject, text, html }) {
 export async function sendPasswordResetMail({ to, resetUrl }) {
   return sendMail({
     to,
-    subject: 'Passwort zurücksetzen – MovieTaste',
+    subject: 'Passwort zurücksetzen – MovieMatch',
     text: `Zum Zurücksetzen deines Passworts, öffne diesen Link (gültig 1 Stunde):\n${resetUrl}\n\nWenn du das nicht angefordert hast, ignoriere diese E-Mail.`,
   });
 }

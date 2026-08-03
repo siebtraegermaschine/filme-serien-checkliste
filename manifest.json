@@ -1,6 +1,6 @@
 {
-  "name": "MovieTaste",
-  "short_name": "MovieTaste",
+  "name": "MovieMatch",
+  "short_name": "MovieMatch",
   "description": "Sortiere die besten Filme & Serien nach IMDb-Bewertung, Taste-Score oder Neuerscheinungen.",
   "start_url": "/",
   "scope": "/",

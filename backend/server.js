@@ -140,10 +140,10 @@ app.get('/t/:art/:kennung', async (req, res, next) => {
     : (titel.poster_path ? 'https://image.tmdb.org/t/p/w500' + titel.poster_path
                          : 'https://movietaste.de/icon-512.png');
   const grossesBild = !!backdrop;
-  const titelZeile = titel.title + (titel.year ? ' (' + titel.year + ')' : '') + ' – MovieTaste';
+  const titelZeile = titel.title + (titel.year ? ' (' + titel.year + ')' : '') + ' – MovieMatch';
 
   const block = [
-    '<meta property="og:site_name" content="MovieTaste">',
+    '<meta property="og:site_name" content="MovieMatch">',
     '<meta property="og:type" content="video.' + (titel.type === 'series' ? 'tv_show' : 'movie') + '">',
     '<meta property="og:url" content="' + attrEsc(url) + '">',
     '<meta property="og:title" content="' + attrEsc(titelZeile) + '">',

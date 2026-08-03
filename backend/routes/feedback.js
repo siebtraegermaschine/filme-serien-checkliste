@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
 
   await sendMail({
     to: FEEDBACK_TO,
-    subject: 'MovieTaste – Feedback',
+    subject: 'MovieMatch – Feedback',
     text: `Von: ${fromLine}\n\n${text}`,
   });
 
