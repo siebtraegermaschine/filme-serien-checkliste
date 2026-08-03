@@ -133,7 +133,12 @@
      und die Tabs darunter. 660px = Inhaltsbreite von .toolbar (700 minus
      deren 2x20px), damit Suche und Filterzeile auf breiten Schirmen exakt
      uebereinander stehen. */
-  .head-search { max-width: 660px; margin: 16px auto 0; padding: 0; display: flex; }
+  .head-search { max-width: 660px; margin: 0 auto; padding: 0; display: flex; }
+  .head-controls { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+  /* Suche, Discovery und die Tab-Reihe sollen exakt gleich hoch sein. 44px ist
+     die natuerliche Hoehe der Tab-Buttons (11px Innenabstand + 15px Schrift);
+     das Eingabefeld kaeme mit seinem kleineren Innenabstand sonst auf 36px. */
+  .head-search input, .disc-toprow button, .tabs .tabs-row button { min-height: 44px; }
   .head-search .search-wrap { flex: 1; }
   /* Das Suchfeld sitzt seit dem Umbau im Header (ueber Discovery und den
      Tabs), nicht mehr in .toolbar -- die Regeln muessen deshalb beide Orte
@@ -451,7 +456,7 @@
     color:var(--text-dim); font-size:18px; cursor:pointer; line-height:1; }
   @media (hover: hover) { .modal-x:hover { color:var(--accent); } }
   /* ===== Redesign: Navigation, Watchlist, Detail-Poster, Aktionszeile ===== */
-  .tabs { flex-direction: column; align-items: stretch; max-width: 430px; margin: 10px auto 0; gap: 10px; }
+  .tabs { flex-direction: column; align-items: stretch; max-width: 430px; margin: 16px auto 0; gap: 10px; }
   .tabs .tabs-row { display: flex; gap: 10px; }
   .tabs .tabs-row button { flex: 1; padding: 11px 10px; }
   /* Seit "Kino" als dritter Tab dazugekommen ist, teilen sich drei statt zwei
@@ -462,6 +467,9 @@
   @media (max-width: 360px) {
     .tabs .tabs-row { gap: 6px; }
     .tabs .tabs-row button { padding: 11px 4px; font-size: 14px; }
+    /* Auch der Discovery-Text braucht hier Platz, sonst bricht er zweizeilig um
+       und die drei Zeilen sind nicht mehr gleich hoch. */
+    .disc-toprow button { padding: 11px 10px; font-size: 14px; }
   }
   /* Ausserhalb von .toolbar (das Popup ist ein eigenstaendiges Modal) --
      dieselbe Optik wie die Discovery-Filterknoepfe (.tb-discfilters) manuell
@@ -716,21 +724,27 @@
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
     <div id="authBarUser" class="nav-menu-user" style="display:none"></div>
   </div>
-  <div class="head-search">
-    <div class="search-wrap">
-      <input type="text" id="search" placeholder="Titel, Genre oder Namen suchen …" autocomplete="off">
-      <button type="button" id="searchClear" class="search-x" aria-label="Suche löschen">×</button>
-      <div id="searchSuggest" class="search-suggest" style="display:none"></div>
-    </div>
-  </div>
-  <div class="disc-toprow">
-    <button id="fDiscovery">🧭 Discovery: Neue Filme &amp; Serien entdecken</button>
-  </div>
   <div class="tabs">
     <div class="tabs-row">
       <button id="tabFilme" class="active">🎬 Filme</button>
       <button id="tabSerien">📺 Serien</button>
       <button id="tabKino">🍿 Kino</button>
+    </div>
+  </div>
+  <!-- Suche und Discovery bilden einen eigenen Block unter den Tabs. Die
+       Trennlinie sitzt an diesem Wrapper (nicht an .head-search), damit sie
+       ueber die volle Kopfbreite laeuft und nicht nur ueber die 660px der
+       Suche. Die zweite Linie darunter ist die border-bottom des Headers. -->
+  <div class="head-controls">
+    <div class="head-search">
+      <div class="search-wrap">
+        <input type="text" id="search" placeholder="Titel, Genre oder Namen suchen …" autocomplete="off">
+        <button type="button" id="searchClear" class="search-x" aria-label="Suche löschen">×</button>
+        <div id="searchSuggest" class="search-suggest" style="display:none"></div>
+      </div>
+    </div>
+    <div class="disc-toprow">
+      <button id="fDiscovery">🧭 Discovery: Neues entdecken</button>
     </div>
   </div>
 </header>
@@ -786,6 +800,7 @@
         <div id="cinemaSortMenu" class="sort-menu" style="display:none">
           <button type="button" data-sort="imdb">Sortieren nach TMDB-Bewertung</button>
           <button type="button" data-sort="date">nach Veröffentlichungsdatum</button>
+          <button type="button" data-sort="cinema">nach Neu im Kino</button>
           <button type="button" data-sort="taste" class="active">nach Taste-Score</button>
         </div>
       </div>
@@ -1040,6 +1055,29 @@ let PENDING_AUTH_ACTIONS = [];
 // ausgeblendet hat (siehe Einstellungen -> "Geloeschte Titel"). Rein lokaler
 // Cache des Server-Stands, gefuellt in loadCatalogAndRefresh().
 let HIDDEN_TITLE_IDS = new Set();
+// Zusaetzlicher Index derselben Titel ueber ihre TMDB-Kennung. Noetig fuer die
+// Kino-Seite: deren Eintraege stammen aus cinema_cache und haben meist gar
+// keine realId (die entsteht erst per ensurePoolItem beim ersten Klick) --
+// ueber HIDDEN_TITLE_IDS allein waeren dort ausgeblendete Titel nach dem
+// naechsten Aufbau wieder da.
+let HIDDEN_TMDB_KEYS = new Set();
+function versteckSchluessel(type, tmdbId){ return type + ':' + tmdbId; }
+function merkeVersteckt(item, id){
+  if (id != null) HIDDEN_TITLE_IDS.add(id);
+  if (item && item.tmdbId != null) HIDDEN_TMDB_KEYS.add(versteckSchluessel(item.type, item.tmdbId));
+}
+function istVersteckt(item){
+  if (item.realId != null && HIDDEN_TITLE_IDS.has(item.realId)) return true;
+  return item.tmdbId != null && HIDDEN_TMDB_KEYS.has(versteckSchluessel(item.type, item.tmdbId));
+}
+function uebernehmeVersteckte(hidden){
+  HIDDEN_TITLE_IDS = new Set();
+  HIDDEN_TMDB_KEYS = new Set();
+  (hidden || []).forEach(function(t){
+    HIDDEN_TITLE_IDS.add(t.id);
+    if (t.tmdbId != null) HIDDEN_TMDB_KEYS.add(versteckSchluessel(t.type, t.tmdbId));
+  });
+}
 
 async function apiRequest(method, path, body) {
   const res = await fetch(path, {
@@ -2801,24 +2839,40 @@ function cinemaRowToItem(row, poolByTmdb){
 }
 function renderCinemaSection(key, rows, profile, poolByTmdb){
   const el = cinemaListEls[key];
-  cinemaHeadingEls[key].textContent = CINEMA_LABELS[key] + (rows.length ? ' (' + rows.length + ')' : '');
   el.innerHTML = '';
-  if (!rows.length) {
-    el.innerHTML = '<li class="cinema-empty">' + esc(CINEMA_EMPTY_TEXT[key]) + '</li>';
-    return;
-  }
   var entries = rows.map(function(row){
     var item = cinemaRowToItem(row, poolByTmdb);
     return { row: row, item: item, score: scoreMitProfilen(item, profile) };
-  }).filter(function(e){ return fskErlaubt(e.item); });
+  }).filter(function(e){ return fskErlaubt(e.item) && !istVersteckt(e.item); });
+  // Zaehler ERST hier, nach Altersfreigabe und ausgeblendeten Titeln -- sonst
+  // stuende in der Ueberschrift eine Zahl, die zu den sichtbaren Zeilen nicht
+  // passt (z.B. weiterhin "(12)", nachdem man einen Titel weggewischt hat).
+  cinemaHeadingEls[key].textContent = CINEMA_LABELS[key] + (entries.length ? ' (' + entries.length + ')' : '');
+  if (!entries.length) {
+    el.innerHTML = '<li class="cinema-empty">' + esc(CINEMA_EMPTY_TEXT[key]) + '</li>';
+    return;
+  }
   entries.sort(function(a, b){
     if (cinemaSortKey === 'imdb') return gewichteteNote(b.item.r, b.item.vc) - gewichteteNote(a.item.r, a.item.vc);
     if (cinemaSortKey === 'taste') return b.score - a.score;
-    // 'date': nach dem GENAUEN Kinostart-Datum (nicht nur Jahr) -- "now" zeigt
-    // zuerst die zuletzt gestarteten Titel, "soon"/"later" zuerst die naechsten
-    // anstehenden Termine (z.B. um zu sehen, was Mittwoch vs. Donnerstag startet).
-    var da = a.row.rd || '', db = b.row.rd || '';
-    return key === 'now' ? db.localeCompare(da) : da.localeCompare(db);
+    // 'cinema' ("Neu im Kino"): nach dem GENAUEN deutschen Kinostart (nicht nur
+    // Jahr). "now" zeigt zuerst die zuletzt gestarteten Titel, "soon"/"later"
+    // zuerst die naechsten anstehenden Termine (z.B. um zu sehen, was Mittwoch
+    // vs. Donnerstag startet). Dasselbe Datum bestimmt auch, in welchem der drei
+    // Bereiche ein Titel landet -- deshalb kann hier durchaus eine
+    // Wiederauffuehrung von 1984 ganz oben stehen.
+    if (cinemaSortKey === 'cinema') {
+      var ka = a.row.rd || '', kb = b.row.rd || '';
+      return key === 'now' ? kb.localeCompare(ka) : ka.localeCompare(kb);
+    }
+    // 'date': das ECHTE Erstveroeffentlichungsdatum, neueste zuerst. row.ord ist
+    // nur bei Wiederauffuehrungen gesetzt (siehe cinema-fetch.mjs: es faellt
+    // weg, wenn es sich im Jahr nicht vom Kinostart unterscheidet) -- fuer
+    // normale Neustarts ist der Kinostart zugleich die Erstveroeffentlichung.
+    // Ohne diese Unterscheidung stand ein 1984 erschienener Film oben, nur weil
+    // er diese Woche wieder anlaeuft.
+    var da = a.row.ord || a.row.rd || '', db = b.row.ord || b.row.rd || '';
+    return db.localeCompare(da);
   });
   var limit = cinemaSectionLimit[key];
   var visible = entries.slice(0, limit);
@@ -2859,17 +2913,15 @@ function openCinemaPage(){
   // zugleich der Weg zurueck zu Filme/Serien. Frueher wurde sie hier versteckt,
   // weil Kino nur ueber das Menue erreichbar war.
   updateFilterRowUI();
-  // Discovery-Button ergibt auf der Kino-Seite keinen Sinn -- Discovery
-  // durchsucht den normalen Filme/Serien-Katalog, nicht die Kinostarts. Der
-  // Filme/Serien/Streaming-Unterfilter steckt in .filter-group und wird damit
-  // automatisch mit ausgeblendet, wenn .toolbar gleich darunter versteckt wird.
-  document.querySelector('.disc-toprow').style.display = 'none';
+  // Suche und Discovery ergeben auf der Kino-Seite beide keinen Sinn: Discovery
+  // durchsucht den normalen Filme/Serien-Katalog, nicht die Kinostarts, und die
+  // Suche filtert ebenfalls nur die Titellisten. Beide stecken in
+  // .head-controls -- mit dem Wrapper verschwindet auch dessen Trennlinie, die
+  // sonst ueber einem leeren Bereich stehenbliebe. Der Filme/Serien/Streaming-
+  // Unterfilter steckt in .filter-group und geht mit .toolbar mit.
+  document.querySelector('.head-controls').style.display = 'none';
   document.querySelector('.toolbar').style.display = 'none';
   list.style.display = 'none';
-  // Die Suche sitzt seit dem Umbau im Header und wird deshalb nicht mehr
-  // zusammen mit .toolbar versteckt -- sie durchsucht Filme/Serien, nicht die
-  // Kinostarts, und muss hier eigens ausgeblendet werden.
-  document.querySelector('.head-search').style.display = 'none';
   document.getElementById('cinemaPage').style.display = '';
   window.scrollTo(0, 0);
   Object.keys(cinemaListEls).forEach(function(key){
@@ -2889,8 +2941,7 @@ function closeCinemaPage(){
   // .tabs wird nicht mehr ein-/ausgeblendet (siehe openCinemaPage), nur die
   // Hervorhebung wandert zurueck auf Filme bzw. Serien.
   updateFilterRowUI();
-  document.querySelector('.disc-toprow').style.display = '';
-  document.querySelector('.head-search').style.display = '';
+  document.querySelector('.head-controls').style.display = '';
   document.querySelector('.toolbar').style.display = '';
   list.style.display = '';
   // Erzwingt einen frischen, korrekten Sync JETZT (wo alles wieder sichtbar
@@ -3478,8 +3529,9 @@ document.getElementById('providersSaveBtn').onclick = async function(){
   } finally { btn.disabled = false; }
 };
 
-/* ---- "Gelöschte Titel": per Swipe aus Discovery ausgeblendete Titel, mit
-   einzigem Button "Wieder zu Discovery hinzufügen" statt Gesehen/Watchlist. ---- */
+/* ---- "Gelöschte Titel": per Swipe ausgeblendete Titel (aus Discovery oder von
+   der Kino-Seite), mit einzigem Button "Wieder hinzufügen" statt Gesehen/
+   Watchlist -- wohin der Titel zurueckkehrt, haengt davon ab, woher er kam. ---- */
 function hiddenTitleLi(t){
   var li = document.createElement('li'); li.className = 'disc stream-item';
   var poster = t.posterBase64 ? '<img class="dposter" loading="lazy" src="'+t.posterBase64+'" alt="">'
@@ -3493,14 +3545,17 @@ function hiddenTitleLi(t){
       '<div class="dtitle">'+esc(t.title)+'</div>'+
       '<div class="dmeta">'+esc(candMeta(pseudoItem))+' · '+typeLabel+'</div>'+
       candDetailsHtml(pseudoItem, t.type) +
-      '<div class="det-actions"><button type="button" class="unhide-btn">Wieder zu Discovery hinzufügen</button></div>' +
+      '<div class="det-actions"><button type="button" class="unhide-btn">Wieder hinzufügen</button></div>' +
     '</div>';
   li.querySelector('.unhide-btn').addEventListener('click', async function(e){
     e.stopPropagation();
     await apiRequest('DELETE', '/api/hidden-titles/' + t.id).catch(function(){});
     HIDDEN_TITLE_IDS.delete(t.id);
+    if (t.tmdbId != null) HIDDEN_TMDB_KEYS.delete(versteckSchluessel(t.type, t.tmdbId));
     li.remove();
-    if (inDiscoveryMode()) renderDiscovery();
+    // Der Titel kann aus Discovery ODER von der Kino-Seite stammen -- deshalb
+    // heisst der Button auch nur noch "Wieder hinzufügen".
+    if (cinemaMode) renderCinemaPage(); else if (inDiscoveryMode()) renderDiscovery();
   });
   li.addEventListener('click', function(e){
     if (e.target.closest('.det-actions')) return;
@@ -3787,7 +3842,7 @@ authBarLogout.onclick = async () => {
 // direkt nach jedem Login/Logout die Seite spuerbar (mehrere Sekunden) haengen.
 async function loadUserProgressAndRefresh(){
   PROGRESS = new Map();
-  HIDDEN_TITLE_IDS = new Set();
+  uebernehmeVersteckte([]);
   MY_PROVIDER_IDS = null;
   if (CURRENT_USER) {
     const [rows, hidden] = await Promise.all([
@@ -3800,7 +3855,7 @@ async function loadUserProgressAndRefresh(){
       loadLinkedProfiles(),
     ]);
     rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }));
-    hidden.forEach((t) => HIDDEN_TITLE_IDS.add(t.id));
+    uebernehmeVersteckte(hidden);
   }
   USER_DATA_SIG = userDataSignature();
   updateProfileBtn();
@@ -3901,7 +3956,7 @@ async function refreshOnResume(){
     var neuerFortschritt = new Map();
     rows.forEach(function(r){ neuerFortschritt.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }); });
     PROGRESS = neuerFortschritt;
-    HIDDEN_TITLE_IDS = new Set(hidden.map(function(t){ return t.id; }));
+    uebernehmeVersteckte(hidden);
   } catch (e) {
     // Kein Netz beim Zurueckkehren -- der bisherige Stand bleibt einfach stehen.
     return;
@@ -4100,17 +4155,23 @@ function poolItemLi(item, score, opts){
     if (e.target.closest('.det-actions')) return;
     li.classList.toggle('show-details');
   });
-  // Wisch-Geste: im Discovery-Modus dauerhaft ausblenden (siehe Einstellungen
-  // -> "Geloeschte Titel"). Im "Aehnliche Titel"-Popup (suppressSimilar) kein
-  // Swipe -- der Status dort ist kontextabhaengig und eine Wisch-Geste haette
-  // keine eindeutige Bedeutung.
-  if (!(opts && opts.suppressSimilar) && inDiscoveryMode()) {
+  // Wisch-Geste: in Discovery UND auf der Kino-Seite dauerhaft ausblenden (siehe
+  // Einstellungen -> "Geloeschte Titel"). Im "Aehnliche Titel"-Popup
+  // (suppressSimilar) kein Swipe -- der Status dort ist kontextabhaengig und
+  // eine Wisch-Geste haette keine eindeutige Bedeutung.
+  //
+  // Die Kino-Seite muss ausdruecklich mitgeprueft werden: Frueher hing der
+  // Swipe allein an inDiscoveryMode(), das beim Wechsel ins Kino aber gar nicht
+  // zurueckgesetzt wird. Kam man aus Discovery, liess sich im Kino zwar wischen,
+  // neu aufgebaut wurde danach jedoch die (dort unsichtbare) Discovery-Liste --
+  // die Kino-Zeile blieb als leere Luecke stehen.
+  if (!(opts && opts.suppressSimilar) && (inDiscoveryMode() || cinemaMode)) {
     attachSwipeToRemove(li, function(){
       requireLogin(async () => {
         var id = await ensurePoolItem(item);
         await apiRequest('POST', '/api/hidden-titles/' + id).catch(function(){});
-        HIDDEN_TITLE_IDS.add(id);
-        renderDiscovery();
+        merkeVersteckt(item, id);
+        if (cinemaMode) renderCinemaPage(); else renderDiscovery();
       });
     });
   }

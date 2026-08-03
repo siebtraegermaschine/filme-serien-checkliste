@@ -13,6 +13,14 @@ function rowToCand(row) {
     c: row.cast_names,
     p: row.poster_path,
     r: row.rating != null ? Number(row.rating) : null,
+    // vc/fsk fehlten hier, obwohl cinema_cache beide Spalten fuehrt (alle 545
+    // Zeilen haben eine Stimmenzahl, 180 eine Freigabe). Die Folgen im Frontend:
+    // gewichteteNote() wertete jeden Kinotitel ohne Stimmenzahl auf glatt 6,760,
+    // "Sortieren nach TMDB-Bewertung" ergab damit eine beliebige Reihenfolge --
+    // und fskErlaubt() zaehlt eine fehlende Freigabe als unbelegt, wodurch ein
+    // aktiver Altersfilter die Kino-Seite vollstaendig leerte.
+    vc: row.vote_count,
+    fsk: row.certification,
     ov: row.overview,
     rd: row.release_date ? row.release_date.toISOString().slice(0, 10) : null,
     ord: row.original_release_date ? row.original_release_date.toISOString().slice(0, 10) : null,
