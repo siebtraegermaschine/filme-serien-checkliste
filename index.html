@@ -4752,13 +4752,14 @@ async function oeffneTeilen(item){
     var sauber = String(item.t).replace(/[\/\\:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40);
     var datei = new File([blob], (sauber || 'MovieMatch') + ' – MovieMatch.jpg', { type: 'image/jpeg' });
     var kannDatei = !!(navigator.canShare && navigator.canShare({ files: [datei] }));
-    // Wenn das Geraet Bild, Text UND Link zusammen annimmt, alles mitschicken.
-    // Zwei Gruende: In WhatsApp wird daraus Bild samt Bildunterschrift und
-    // anklickbarem Link -- und das Teilen-Blatt zeigt oben den Titel mit der
-    // Domain darunter statt nur des Dateinamens. Deshalb steht title bewusst
-    // mit drin, sonst nimmt iOS den Dateinamen als Ueberschrift.
-    // Instagram-Storys ignorieren Text und Link ohnehin, dort schadet es nicht.
-    var voll = { files: [datei], title: item.t, text: teilenText(item), url: url };
+    // Die Adresse steht bewusst IM Text statt in einem eigenen url-Feld: Sobald
+    // ein Link-Feld dabei ist, stellt iOS die Kachel im Teilen-Blatt als Weblink
+    // dar (Titel + Domain, kein Dateihinweis). Ohne das Feld bleibt es bei der
+    // Datei-Kachel -- und WhatsApp macht aus der Adresse in der Bildunterschrift
+    // trotzdem einen anklickbaren Link. So gibt es beides: klare Absender-
+    // Ansicht und beim Empfaenger Bild samt Text und Link.
+    // Instagram-Storys ignorieren den Text ohnehin, dort schadet er nicht.
+    var voll = { files: [datei], title: item.t, text: teilenText(item) + '\n' + url };
     var mitText = kannDatei && !!(navigator.canShare && navigator.canShare(voll));
     bildBtn.disabled = false;
     document.getElementById('shareHint').textContent = kannDatei
