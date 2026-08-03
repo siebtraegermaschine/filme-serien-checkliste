@@ -2366,14 +2366,15 @@ function setTab(t) {
   var _sw = document.querySelector('.sort-wrap'); if (_sw) _sw.style.display = 'flex';
   // Filme, Serien und Discovery sind drei sich gegenseitig ausschliessende
   // Bereiche -- ein Klick auf Filme/Serien beendet einen laufenden Discovery-
-  // Modus (statt ihn nur auf den neuen Typ umzustellen, wie frueher). Danach
-  // ist beim Wechsel zwischen Filme/Serien immer ausschliesslich Watchlist
-  // aktiv (Gesehen/Im Streaming lassen sich danach weiterhin zusaetzlich
-  // dazuschalten).
+  // Modus (statt ihn nur auf den neuen Typ umzustellen, wie frueher).
+  //
+  // Die Filterauswahl (Watchlist/Gesehen/Gratis im Abo) bleibt beim Wechsel
+  // dagegen stehen: Wer sich seine gesehenen Filme ansieht, will beim Sprung
+  // auf Serien in aller Regel auch dort die gesehenen sehen. Frueher fiel es
+  // hier auf "nur Watchlist" zurueck und musste jedes Mal neu gesetzt werden.
+  // Ein ungueltiger Zustand kann dabei nicht entstehen -- die Umschalter selbst
+  // lassen nicht zu, dass Watchlist UND Gesehen gleichzeitig aus sind.
   discoveryMode = false;
-  watchlistFilterOn = true;
-  seenFilterOn = false;
-  inStreamFilterOn = false;
   updateFilterRowUI();
   renderCurrentTab();
 }
