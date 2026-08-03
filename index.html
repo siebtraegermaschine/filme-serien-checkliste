@@ -19,7 +19,23 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="favicon-32.png" sizes="32x32">
+<!-- Die Seite wird auch unter /t/<art>/<tmdb-id> ausgeliefert (geteilter Titel).
+     Damit relative Pfade wie logo.png dort nicht zu /t/<art>/logo.png werden,
+     steht hier eine feste Basis. -->
+<base href="/">
 <title>MovieTaste</title>
+<!-- og:start -- Der Block zwischen diesen Marken wird bei geteilten Titeln
+     serverseitig ersetzt (siehe backend/server.js). Die Vorschau-Roboter von
+     WhatsApp und iMessage fuehren kein JavaScript aus, nachtraeglich gesetzte
+     Angaben blieben also wirkungslos. -->
+<meta property="og:site_name" content="MovieTaste">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://movietaste.de/">
+<meta property="og:title" content="MovieTaste">
+<meta property="og:description" content="Filme &amp; Serien sortiert nach deinem Geschmack.">
+<meta property="og:image" content="https://movietaste.de/icon-512.png">
+<meta name="twitter:card" content="summary">
+<!-- og:end -->
 <style>
   :root {
     --bg: #0e1116;
@@ -288,6 +304,25 @@
      Modals (1000), sonst schwebte er ueber offenen Dialogen. bottom beruecksichtigt
      env(safe-area-inset-bottom) -- auf dem iPhone sitzt sonst die Home-Leiste
      der installierten App darauf. */
+  /* Teilen-Fenster: eigene Auswahl statt direktem Aufruf des System-Blattes.
+     Grund ist eine Eigenheit von iOS -- navigator.share() muss innerhalb der
+     Nutzergeste laufen. Das Story-Bild braucht aber erst zwei Bild-Downloads.
+     Deshalb: Fenster oeffnen, Bild im Hintergrund bauen, und wenn der Knopf
+     gedrueckt wird, liegt es fertig bereit und das Teilen startet sofort. */
+  .share-title { color:var(--text); font-size:14.5px; font-weight:600; text-align:center; margin-bottom:12px; }
+  .share-preview { display:flex; justify-content:center; align-items:center; min-height:200px;
+    background:var(--bg); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:14px; }
+  .share-preview img { max-width:100%; max-height:280px; display:block; }
+  .share-preview-lade { color:var(--text-dim); font-size:13px; padding:20px; text-align:center; }
+  .share-actions { display:flex; gap:10px; }
+  .share-actions button { flex:1; }
+  .share-hint { color:var(--text-dim); font-size:12px; text-align:center; margin-top:10px; min-height:15px; }
+  /* Karte fuer einen geteilten Titel (Aufruf ueber /t/...) */
+  .shared-poster { display:block; width:150px; border-radius:10px; margin:0 auto 12px; }
+  .shared-name { color:var(--accent); font-size:17px; font-weight:700; text-align:center; }
+  .shared-meta { color:var(--text-dim); font-size:13px; text-align:center; margin-top:4px; }
+  .shared-plot { color:var(--text); font-size:13.5px; line-height:1.45; margin:12px 0 4px; text-align:justify; }
+  .shared-von { color:var(--text-dim); font-size:13px; text-align:center; margin-bottom:10px; }
   .to-top { position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px));
     width:44px; height:44px; display:none; align-items:center; justify-content:center;
     background:var(--card); border:1px solid var(--border); border-radius:50%;
@@ -635,6 +670,11 @@
      nur sichtbar, wenn die Details dieser Zeile aufgeklappt sind. */
   .similar-btn { display: none; margin-right: auto; }
   li.item.show-details .similar-btn, li.disc.show-details .similar-btn { display: inline-block; }
+  /* Teilen-Knopf: schmal gehalten, damit die Aktionszeile mit vier Elementen
+     nicht umbricht. Eine Wischgeste allein findet niemand von selbst -- deshalb
+     zusaetzlich sichtbar, sobald die Zeile aufgeklappt ist. */
+  .share-btn { display: none; padding-left: 10px; padding-right: 10px; }
+  li.item.show-details .share-btn, li.disc.show-details .share-btn { display: inline-block; }
   .watch-empty { text-align: center; color: var(--text-dim); font-size: 14px; margin: 26px auto; max-width: 520px; line-height: 1.7; padding: 0 20px; }
   @media (max-width: 640px) { .details .detposter { width: 96px; } }
   /* Sortier-Button rechts neben dem Suchfeld */
@@ -844,6 +884,27 @@
     <path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>
   </svg>
 </button>
+
+<div id="shareModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="shareModalX" aria-label="Schließen">✕</button>
+    <h3>Titel teilen</h3>
+    <div class="share-title" id="shareTitleText"></div>
+    <div class="share-preview" id="sharePreview"><div class="share-preview-lade">Bild wird vorbereitet …</div></div>
+    <div class="share-actions">
+      <button type="button" id="shareTextBtn" class="modal-yes">Als Nachricht</button>
+      <button type="button" id="shareImageBtn" class="modal-yes" disabled>Als Bild teilen</button>
+    </div>
+    <div class="share-hint" id="shareHint"></div>
+  </div>
+</div>
+
+<div id="sharedTitleModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="sharedTitleX" aria-label="Schließen">✕</button>
+    <div id="sharedTitleBody"></div>
+  </div>
+</div>
 
 <div id="removeModal" class="modal-overlay" style="display:none">
   <div class="modal">
@@ -1903,7 +1964,8 @@ function render() {
       providerChipsHtml(d.providers) + detailsHtml +
       watchRowHtml(d.tmdbId, d.type, item[0], d.id) + actionsHtml + '</span>';
     wireRow(li, activeTab, i);
-    attachSwipeToRemove(li, function(){ removeFromMyTitles(s.det[i].id); });
+    attachSwipeToRemove(li, function(){ removeFromMyTitles(s.det[i].id); },
+                        s.pool[i] ? function(){ oeffneTeilen(s.pool[i]); } : null);
     list.appendChild(li);
   });
   applyFilter();
@@ -1928,15 +1990,27 @@ function suspendHoverUntilMouseMove(){
 // Bewegungsrichtung zwischen "will horizontal wischen" und "will die Seite
 // vertikal scrollen" (siehe touch-action:pan-y auf .swipeable), damit ein
 // vertikaler Scroll-Versuch nicht versehentlich als Wisch-Geste startet.
-function attachSwipeToRemove(li, onRemove){
+// Wischgesten auf einer Zeile: nach LINKS entfernen (bzw. ausblenden), nach
+// RECHTS teilen. Beide Richtungen sind einzeln optional -- wird kein onShare
+// uebergeben (z.B. bei den verknuepften Personen), bleibt die rechte Richtung
+// tot und die Zeile laesst sich dorthin gar nicht erst schieben.
+//
+// Beim Entfernen fliegt die Zeile hinaus, beim Teilen federt sie zurueck: Der
+// Titel bleibt ja stehen, nur das Teilen-Fenster kommt darueber.
+function attachSwipeToRemove(li, onRemove, onShare){
   var THRESHOLD = 90;
-  var active = false, mode = null, startX = 0, startY = 0, dx = 0;
+  // Ein Wisch nach rechts, der ganz am linken Rand beginnt, ist auf dem iPhone
+  // die Zurueck-Geste des Systems. In diesem Streifen lassen wir die rechte
+  // Richtung deshalb aus -- sonst kaempfen zwei Gesten um dieselbe Bewegung.
+  var RANDZONE = 28;
+  var active = false, mode = null, startX = 0, startY = 0, dx = 0, rechtsErlaubt = false;
   li.classList.add('swipeable');
   li.addEventListener('pointerdown', function(e){
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     if (e.target.closest('button, a, input, textarea')) return;
     active = true; mode = null; dx = 0;
     startX = e.clientX; startY = e.clientY;
+    rechtsErlaubt = !!onShare && e.clientX > RANDZONE;
     try { li.setPointerCapture(e.pointerId); } catch (err) {}
   });
   li.addEventListener('pointermove', function(e){
@@ -1949,9 +2023,12 @@ function attachSwipeToRemove(li, onRemove){
       if (mode === 'x') li.style.transition = 'none';
     }
     if (mode !== 'x') return;
-    dx = Math.min(0, curDx);
+    dx = curDx;
+    if (dx < 0 && !onRemove) dx = 0;
+    if (dx > 0 && !rechtsErlaubt) dx = 0;
     li.style.transform = 'translateX(' + dx + 'px)';
-    li.style.background = dx < -THRESHOLD ? 'rgba(224,101,92,0.18)' : '';
+    li.style.background = dx < -THRESHOLD ? 'rgba(224,101,92,0.18)'
+                        : dx > THRESHOLD ? 'rgba(230,179,76,0.18)' : '';
     e.preventDefault();
   });
   function end(){
@@ -1959,10 +2036,14 @@ function attachSwipeToRemove(li, onRemove){
     active = false;
     if (mode === 'x') {
       li.style.transition = 'transform .2s ease, opacity .2s ease';
-      if (dx < -THRESHOLD) {
+      if (dx < -THRESHOLD && onRemove) {
         li.style.transform = 'translateX(-110%)';
         li.style.opacity = '0';
         setTimeout(function(){ onRemove(); }, 180);
+      } else if (dx > THRESHOLD && rechtsErlaubt) {
+        li.style.transform = '';
+        li.style.background = '';
+        onShare();
       } else {
         li.style.transform = '';
         li.style.background = '';
@@ -4035,7 +4116,9 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
   // Einladungslink hat Vorrang vor der Namensabfrage -- sonst stapeln sich
   // beim ersten Oeffnen zwei Dialoge uebereinander.
   var einladung = new URLSearchParams(location.search).get('einladung');
+  var geteilt = geteilterTitelAusPfad();
   if (einladung) handleInviteToken(einladung);
+  else if (geteilt) zeigeGeteiltenTitel(geteilt);
   else maybeAskDisplayName();
 });
 
@@ -4102,6 +4185,7 @@ function poolItemLi(item, score, opts){
   var actionsHtml =
     '<div class="det-actions">' +
       (showSimilarBtn ? '<button type="button" class="similar-btn">Ähnliche Titel</button>' : '') +
+      '<button type="button" class="share-btn" aria-label="Titel teilen" title="Teilen">↗</button>' +
       orderedActionsHtml +
     '</div>';
   li.innerHTML =
@@ -4209,26 +4293,28 @@ function poolItemLi(item, score, opts){
     if (e.target.closest('.det-actions')) return;
     li.classList.toggle('show-details');
   });
-  // Wisch-Geste: in Discovery UND auf der Kino-Seite dauerhaft ausblenden (siehe
-  // Einstellungen -> "Geloeschte Titel"). Im "Aehnliche Titel"-Popup
-  // (suppressSimilar) kein Swipe -- der Status dort ist kontextabhaengig und
-  // eine Wisch-Geste haette keine eindeutige Bedeutung.
+  // Wisch-Geste: nach links in Discovery und auf der Kino-Seite dauerhaft
+  // ausblenden (siehe Einstellungen -> "Geloeschte Titel"), nach rechts ueberall
+  // teilen. Im "Aehnliche Titel"-Popup (suppressSimilar) gibt es kein
+  // Ausblenden -- der Status waere dort kontextabhaengig --, geteilt werden darf
+  // aber auch von dort.
   //
-  // Die Kino-Seite muss ausdruecklich mitgeprueft werden: Frueher hing der
-  // Swipe allein an inDiscoveryMode(), das beim Wechsel ins Kino aber gar nicht
-  // zurueckgesetzt wird. Kam man aus Discovery, liess sich im Kino zwar wischen,
-  // neu aufgebaut wurde danach jedoch die (dort unsichtbare) Discovery-Liste --
-  // die Kino-Zeile blieb als leere Luecke stehen.
-  if (!(opts && opts.suppressSimilar) && (inDiscoveryMode() || cinemaMode)) {
-    attachSwipeToRemove(li, function(){
-      requireLogin(async () => {
-        var id = await ensurePoolItem(item);
-        await apiRequest('POST', '/api/hidden-titles/' + id).catch(function(){});
-        merkeVersteckt(item, id);
-        if (cinemaMode) renderCinemaPage(); else renderDiscovery();
-      });
+  // Die Kino-Seite muss beim Ausblenden ausdruecklich mitgeprueft werden:
+  // Frueher hing der Swipe allein an inDiscoveryMode(), das beim Wechsel ins
+  // Kino aber gar nicht zurueckgesetzt wird. Kam man aus Discovery, liess sich
+  // im Kino zwar wischen, neu aufgebaut wurde danach jedoch die (dort
+  // unsichtbare) Discovery-Liste -- die Kino-Zeile blieb als leere Luecke stehen.
+  var darfAusblenden = !(opts && opts.suppressSimilar) && (inDiscoveryMode() || cinemaMode);
+  attachSwipeToRemove(li, darfAusblenden ? function(){
+    requireLogin(async () => {
+      var id = await ensurePoolItem(item);
+      await apiRequest('POST', '/api/hidden-titles/' + id).catch(function(){});
+      merkeVersteckt(item, id);
+      if (cinemaMode) renderCinemaPage(); else renderDiscovery();
     });
-  }
+  } : null, function(){ oeffneTeilen(item); });
+  var shareBtn = li.querySelector('.share-btn');
+  if (shareBtn) shareBtn.addEventListener('click', function(e){ e.stopPropagation(); oeffneTeilen(item); });
   return li;
 }
 
@@ -4360,6 +4446,344 @@ function renderDiscovery(){
   });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') bk.classList.remove('open'); });
 })();
+
+/* ---- Titel teilen ----
+   Rechtswisch auf einer Zeile (oder der Teilen-Knopf in der aufgeklappten
+   Ansicht) oeffnet ein kleines Fenster mit zwei Wegen: als Nachricht (Text +
+   Link, geht an WhatsApp, Mail, SMS ...) oder als Bild (fuer Instagram-Story
+   und Co, dort wird Text ignoriert -- nur eine Bilddatei kommt an).
+
+   Der Link zeigt auf /t/... und liefert serverseitig eigene Vorschau-Angaben,
+   damit in WhatsApp Poster und Titel erscheinen (siehe backend/server.js). */
+var _shareModal = document.getElementById('shareModal');
+var _shareBildBlob = null;      // fertiges Story-Bild, sobald es bereitsteht
+var _shareLaufNr = 0;           // schuetzt vor Ergebnissen eines alten Aufbaus
+
+function teilenZiel(item){
+  // Interne ID bevorzugt: Die 600 Katalog-Titel haben keine TMDB-Kennung, die
+  // Kinostarts umgekehrt (noch) keine Zeile in titles -- zusammen deckt es alles ab.
+  if (item.realId != null) return { art: 'id', kennung: item.realId };
+  if (item.tmdbId != null) return { art: item.type === 'series' ? 'series' : 'movie', kennung: item.tmdbId };
+  return null;
+}
+function teilenUrl(item){
+  var z = teilenZiel(item);
+  return z ? (location.origin + '/t/' + z.art + '/' + z.kennung) : null;
+}
+function teilenText(item){
+  var wer = (CURRENT_USER && CURRENT_USER.displayName) ? CURRENT_USER.displayName : null;
+  var kopf = wer ? (wer + ' hat einen Titel für dich:') : 'Gefunden auf MovieTaste:';
+  var zeile2 = [item.t + (item.y ? ' (' + item.y + ')' : ''),
+                '⭐ ' + sterneText(item.r), (item.g && item.g[0]) || null,
+                item.type === 'series' ? 'Serie' : 'Film'].filter(Boolean).join(' · ');
+  return kopf + '\n' + zeile2;
+}
+
+function ladeBildFuerCanvas(src){
+  return new Promise(function(erfuellt, scheitert){
+    var img = new Image();
+    // TMDB liefert seine Bilder mit Access-Control-Allow-Origin: * -- ohne
+    // crossOrigin wuerde die Canvas "vergiftet" und toBlob() schluege fehl.
+    img.crossOrigin = 'anonymous';
+    img.onload = function(){ erfuellt(img); };
+    img.onerror = function(){ scheitert(new Error('Bild nicht ladbar: ' + src)); };
+    img.src = src;
+  });
+}
+function rundesRechteck(ctx, x, y, b, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + b, y, x + b, y + h, r);
+  ctx.arcTo(x + b, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + b, y, r);
+  ctx.closePath();
+}
+// Bricht den Titel auf hoechstens zwei Zeilen um und verkleinert die Schrift,
+// bis er passt -- lange Titel wie "Der Herr der Ringe - Die Gefährten" sollen
+// nicht abgeschnitten werden.
+function textZeilen(ctx, text, maxBreite, maxZeilen){
+  var woerter = String(text).split(' ');
+  var zeilen = [], aktuell = '';
+  for (var i = 0; i < woerter.length; i++){
+    var versuch = aktuell ? aktuell + ' ' + woerter[i] : woerter[i];
+    if (ctx.measureText(versuch).width <= maxBreite || !aktuell) { aktuell = versuch; }
+    else { zeilen.push(aktuell); aktuell = woerter[i]; }
+    if (zeilen.length === maxZeilen) break;
+  }
+  if (aktuell && zeilen.length < maxZeilen) zeilen.push(aktuell);
+  return zeilen;
+}
+
+async function baueStoryBild(item, url){
+  var B = 1080, H = 1920;
+  var cv = document.createElement('canvas');
+  cv.width = B; cv.height = H;
+  var ctx = cv.getContext('2d');
+  var SCHRIFT = '-apple-system, "Segoe UI", system-ui, sans-serif';
+
+  ctx.fillStyle = '#0e1116';
+  ctx.fillRect(0, 0, B, H);
+
+  // Hintergrund: Breitbild-Motiv, stark abgedunkelt. Fehlt es, bleibt es beim
+  // ruhigen Farbverlauf -- lesbar ist beides.
+  var daten = await apiRequest('GET', '/api/share/title/' + teilenZiel(item).art + '/' + teilenZiel(item).kennung)
+              .catch(function(){ return null; });
+  if (daten && daten.backdropPath) {
+    try {
+      var bg = await ladeBildFuerCanvas('https://image.tmdb.org/t/p/w1280' + daten.backdropPath);
+      var skal = Math.max(B / bg.width, H / bg.height);
+      ctx.globalAlpha = 0.5;
+      ctx.drawImage(bg, (B - bg.width * skal) / 2, (H - bg.height * skal) / 2, bg.width * skal, bg.height * skal);
+      ctx.globalAlpha = 1;
+    } catch (e) { /* Hintergrund ist Zierde, kein Muss */ }
+  }
+  var verlauf = ctx.createLinearGradient(0, 0, 0, H);
+  verlauf.addColorStop(0, 'rgba(14,17,22,0.72)');
+  verlauf.addColorStop(0.45, 'rgba(14,17,22,0.55)');
+  verlauf.addColorStop(1, 'rgba(14,17,22,0.97)');
+  ctx.fillStyle = verlauf;
+  ctx.fillRect(0, 0, B, H);
+
+  ctx.textAlign = 'center';
+
+  var wer = (CURRENT_USER && CURRENT_USER.displayName) ? CURRENT_USER.displayName : null;
+  ctx.fillStyle = '#e6b34c';
+  ctx.font = '600 40px ' + SCHRIFT;
+  ctx.fillText(wer ? (wer + ' empfiehlt dir') : 'Gefunden auf MovieTaste', B / 2, 150);
+
+  // Poster
+  var posterQuelle = (daten && daten.posterPath) ? daten.posterPath : item.p;
+  var pw = 520, ph = 780, px = (B - pw) / 2, py = 210;
+  if (posterQuelle) {
+    try {
+      var pos = await ladeBildFuerCanvas('https://image.tmdb.org/t/p/w500' + posterQuelle);
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,0,0,0.6)'; ctx.shadowBlur = 40; ctx.shadowOffsetY = 14;
+      rundesRechteck(ctx, px, py, pw, ph, 22);
+      ctx.fillStyle = '#171c24'; ctx.fill();
+      ctx.restore();
+      ctx.save();
+      rundesRechteck(ctx, px, py, pw, ph, 22);
+      ctx.clip();
+      ctx.drawImage(pos, px, py, pw, ph);
+      ctx.restore();
+    } catch (e) { /* ohne Poster geht es auch */ }
+  }
+
+  // Titel, hoechstens zwei Zeilen
+  var groesse = 72;
+  var zeilen;
+  do {
+    ctx.font = '700 ' + groesse + 'px ' + SCHRIFT;
+    zeilen = textZeilen(ctx, item.t, B - 140, 2);
+    var passt = zeilen.every(function(z){ return ctx.measureText(z).width <= B - 140; });
+    if (passt) break;
+    groesse -= 6;
+  } while (groesse > 40);
+  ctx.fillStyle = '#e8eaed';
+  var ty = py + ph + 110;
+  zeilen.forEach(function(z, i){ ctx.fillText(z, B / 2, ty + i * (groesse + 12)); });
+
+  // Metazeile
+  ctx.font = '500 38px ' + SCHRIFT;
+  ctx.fillStyle = '#9aa3af';
+  var meta = ['⭐ ' + sterneText(item.r), (item.g && item.g[0]) || null, item.y || null,
+              item.type === 'series' ? 'Serie' : 'Film'].filter(Boolean).join('  ·  ');
+  ctx.fillText(meta, B / 2, ty + zeilen.length * (groesse + 12) + 20);
+
+  // QR-Code auf weisser Flaeche -- Leser erwarten dunkel auf hell, und in der
+  // Story liegt er sonst auf wechselndem Untergrund.
+  try {
+    var qr = await apiRequest('GET', '/api/share/qr?data=' + encodeURIComponent(url));
+    var modul = 7, rand = 4;
+    var qrPx = qr.size * modul;
+    var flaeche = qrPx + rand * 2 * modul;
+    var qx = (B - flaeche) / 2, qy = H - flaeche - 210;
+    ctx.fillStyle = '#ffffff';
+    rundesRechteck(ctx, qx, qy, flaeche, flaeche, 18);
+    ctx.fill();
+    ctx.fillStyle = '#0e1116';
+    for (var r = 0; r < qr.size; r++){
+      for (var c = 0; c < qr.size; c++){
+        if (qr.modules[r][c]) ctx.fillRect(qx + (c + rand) * modul, qy + (r + rand) * modul, modul, modul);
+      }
+    }
+    ctx.fillStyle = '#e8eaed';
+    ctx.font = '600 34px ' + SCHRIFT;
+    ctx.fillText('Code scannen und speichern', B / 2, qy + flaeche + 60);
+    ctx.fillStyle = '#e6b34c';
+    ctx.font = '700 36px ' + SCHRIFT;
+    ctx.fillText('movietaste.de', B / 2, qy + flaeche + 110);
+  } catch (e) { /* ohne QR bleibt das Bild trotzdem brauchbar */ }
+
+  return new Promise(function(erfuellt){ cv.toBlob(function(b){ erfuellt(b); }, 'image/png'); });
+}
+
+function schliesseShare(){ _shareModal.style.display = 'none'; _shareBildBlob = null; }
+async function oeffneTeilen(item){
+  var url = teilenUrl(item);
+  if (!url) { alert('Dieser Titel lässt sich nicht teilen – ihm fehlt eine eindeutige Kennung.'); return; }
+  var lauf = ++_shareLaufNr;
+  _shareBildBlob = null;
+  document.getElementById('shareTitleText').textContent = item.t + (item.y ? ' (' + item.y + ')' : '');
+  var vorschau = document.getElementById('sharePreview');
+  vorschau.innerHTML = '<div class="share-preview-lade">Bild wird vorbereitet …</div>';
+  var bildBtn = document.getElementById('shareImageBtn');
+  bildBtn.disabled = true;
+  document.getElementById('shareHint').textContent = '';
+  _shareModal.style.display = 'flex';
+
+  document.getElementById('shareTextBtn').onclick = function(){
+    var text = teilenText(item);
+    if (navigator.share) {
+      navigator.share({ title: item.t, text: text, url: url }).catch(function(){});
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text + '\n' + url);
+      document.getElementById('shareHint').textContent = 'In die Zwischenablage kopiert.';
+      return;
+    } else {
+      prompt('Link zum Teilen:', url);
+      return;
+    }
+    schliesseShare();
+  };
+
+  // Bild im Hintergrund bauen, damit der spaetere Knopfdruck ohne Wartezeit
+  // teilen kann (siehe Kommentar am CSS-Block).
+  try {
+    var blob = await baueStoryBild(item, url);
+    if (lauf !== _shareLaufNr) return;   // inzwischen ein anderer Titel geoeffnet
+    _shareBildBlob = blob;
+    var bildUrl = URL.createObjectURL(blob);
+    vorschau.innerHTML = '';
+    var vb = new Image(); vb.src = bildUrl; vb.alt = '';
+    vb.onload = function(){ URL.revokeObjectURL(bildUrl); };
+    vorschau.appendChild(vb);
+    var datei = new File([blob], 'movietaste.png', { type: 'image/png' });
+    var kannDatei = !!(navigator.canShare && navigator.canShare({ files: [datei] }));
+    bildBtn.disabled = false;
+    document.getElementById('shareHint').textContent = kannDatei
+      ? 'Für Instagram-Story: „Als Bild teilen“ und dort „Story“ wählen.'
+      : 'Dein Browser kann keine Bilder teilen – das Bild wird stattdessen geladen.';
+    bildBtn.onclick = function(){
+      if (kannDatei) {
+        navigator.share({ files: [datei], title: item.t }).catch(function(){});
+        schliesseShare();
+      } else {
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'movietaste-' + item.t.replace(/[^\w]+/g, '-').toLowerCase() + '.png';
+        a.click();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+      }
+    };
+  } catch (e) {
+    if (lauf !== _shareLaufNr) return;
+    console.error('Story-Bild fehlgeschlagen:', e);
+    vorschau.innerHTML = '<div class="share-preview-lade">Bild konnte nicht erzeugt werden – „Als Nachricht“ funktioniert weiterhin.</div>';
+  }
+}
+document.getElementById('shareModalX').onclick = schliesseShare;
+_shareModal.addEventListener('click', function(e){ if (e.target === _shareModal) schliesseShare(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _shareModal.style.display !== 'none') schliesseShare(); });
+
+/* ---- Geteilten Titel oeffnen (Aufruf ueber /t/<art>/<kennung>) ----
+   Der Server liefert unter diesem Pfad dieselbe App aus, nur mit eigenen
+   Vorschau-Angaben im Kopf. Hier lesen wir den Pfad und zeigen die Karte.
+
+   Bewusst KEIN automatisches Speichern: Was jemand anders geschickt hat,
+   landet erst auf Wunsch in der eigenen Liste. Wer nicht angemeldet ist,
+   bekommt denselben Hinweis wie sonst auch. */
+var _sharedModal = document.getElementById('sharedTitleModal');
+function schliesseGeteilt(){ _sharedModal.style.display = 'none'; }
+document.getElementById('sharedTitleX').onclick = schliesseGeteilt;
+_sharedModal.addEventListener('click', function(e){ if (e.target === _sharedModal) schliesseGeteilt(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _sharedModal.style.display !== 'none') schliesseGeteilt(); });
+
+function geteilterTitelAusPfad(){
+  var m = location.pathname.match(/^\/t\/(id|movie|series)\/(\d+)\/?$/);
+  return m ? { art: m[1], kennung: m[2] } : null;
+}
+
+// Liefert die titles.id des geteilten Titels -- legt ihn notfalls erst an.
+// Kinostarts stehen in cinema_cache und haben noch keine Zeile in titles; ohne
+// diesen Schritt gaebe es nichts, woran Watchlist/Gesehen haengen koennte.
+async function idFuerGeteilten(d){
+  if (d.id != null) return d.id;
+  return ensurePoolItem({
+    realId: null, tmdbId: d.tmdbId, type: d.type, t: d.title, y: d.year,
+    g: d.genres || [], d: '', c: [], kw: [], p: d.posterPath, r: d.rating, ov: d.plot || '',
+  });
+}
+
+async function zeigeGeteiltenTitel(ziel){
+  var koerper = document.getElementById('sharedTitleBody');
+  koerper.innerHTML = '<div class="share-preview-lade">Titel wird geladen …</div>';
+  _sharedModal.style.display = 'flex';
+  var d;
+  try {
+    d = await apiRequest('GET', '/api/share/title/' + ziel.art + '/' + ziel.kennung);
+  } catch (e) {
+    koerper.innerHTML = '<div class="share-preview-lade">Dieser Titel konnte nicht geladen werden.</div>';
+    return;
+  }
+  var poster = d.posterPath ? '<img class="shared-poster" src="' + POSTER + escAttr(d.posterPath) + '" alt="">' : '';
+  var meta = ['⭐ ' + sterneText(d.rating) + voteSuffix(d.voteCount),
+              (d.genres && d.genres[0]) || null, d.year || null,
+              d.type === 'series' ? 'Serie' : 'Film'].filter(Boolean).join(' · ');
+  koerper.innerHTML =
+    '<div class="shared-von">Für dich geteilt</div>' +
+    poster +
+    '<div class="shared-name">' + esc(d.title) + '</div>' +
+    '<div class="shared-meta">' + esc(meta) + '</div>' +
+    (d.plot ? '<div class="shared-plot">' + esc(d.plot) + '</div>' : '') +
+    '<div class="modal-actions" id="sharedActions"></div>' +
+    '<div class="share-hint" id="sharedHint"></div>';
+
+  var aktionen = document.getElementById('sharedActions');
+  var hinweis = document.getElementById('sharedHint');
+  if (!CURRENT_USER) {
+    hinweis.textContent = 'Nur angemeldet lässt sich der Titel dauerhaft speichern.';
+    aktionen.innerHTML = '<button type="button" class="modal-yes" id="sharedLoginBtn">Anmelden</button>';
+    document.getElementById('sharedLoginBtn').onclick = function(){
+      schliesseGeteilt();
+      // Nach dem Anmelden dieselbe Karte erneut -- der Pfad bleibt ja stehen.
+      requireLogin(function(){ zeigeGeteiltenTitel(ziel); });
+    };
+    return;
+  }
+  aktionen.innerHTML =
+    '<button type="button" class="modal-no" id="sharedWlBtn">☆ Watchlist</button>' +
+    '<button type="button" class="modal-yes" id="sharedSeenBtn">✓ Gesehen</button>';
+  async function speichern(patch, text){
+    hinweis.textContent = 'Wird gespeichert …';
+    try {
+      var id = await idFuerGeteilten(d);
+      await updateProgressRemote(id, patch);
+      // Ein geteilter Kinostart steckt noch nicht im Pool -- ohne diesen Schritt
+      // waere er gespeichert, taeuchte unter Filme/Serien aber erst nach einem
+      // Neuladen auf.
+      if (!POOL.some(function(x){ return x.realId === id; })) {
+        POOL.push({ realId: id, tmdbId: d.tmdbId, type: d.type, t: d.title, ot: null, y: d.year,
+                    g: d.genres || [], d: '', c: [], kw: [], p: d.posterPath, poster64: null,
+                    r: d.rating, vc: d.voteCount, fsk: d.certification || null, ov: d.plot || '',
+                    source: 'streaming', providers: [] });
+      }
+      rebuild();
+      renderCurrentTab();
+      hinweis.textContent = text;
+    } catch (e) {
+      hinweis.textContent = 'Das hat nicht geklappt. Bitte erneut versuchen.';
+    }
+  }
+  document.getElementById('sharedWlBtn').onclick = function(){
+    speichern({ watchlist: true }, 'Zur Watchlist hinzugefügt.');
+  };
+  document.getElementById('sharedSeenBtn').onclick = function(){
+    speichern({ seen: true }, 'Als gesehen markiert.');
+  };
+}
 
 /* ---- "Nach oben"-Knopf ---- */
 (function(){

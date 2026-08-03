@@ -346,6 +346,15 @@ ALTER TABLE titles          ADD COLUMN IF NOT EXISTS certification TEXT;
 ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS certification TEXT;
 ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS certification TEXT;
 
+-- Breitbild-Motiv (TMDB backdrop_path) fuer die Link-Vorschau beim Teilen.
+-- Poster sind hochkant und erscheinen in WhatsApp/iMessage nur als kleines,
+-- quadratisch beschnittenes Bildchen -- die Vorschaukarte lebt vom Querformat.
+-- Wird nicht im Voraus fuer alle ~27.000 Titel geholt, sondern beim ersten
+-- Teilen eines Titels nachgeladen und dann dauerhaft gespeichert (siehe
+-- backend/routes/share.js). Neue Zeilen bekommen es ueber die taeglichen Jobs.
+ALTER TABLE titles          ADD COLUMN IF NOT EXISTS backdrop_path TEXT;
+ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS backdrop_path TEXT;
+
 -- Von connect-pg-simple genutzte Session-Tabelle (Standard-Schema des Pakets).
 CREATE TABLE IF NOT EXISTS session (
   sid    VARCHAR NOT NULL COLLATE "default" PRIMARY KEY,

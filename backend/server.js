@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
@@ -17,6 +18,7 @@ import cinemaRouter from './routes/cinema.js';
 import watchProvidersRouter from './routes/watchProviders.js';
 import trailersRouter from './routes/trailers.js';
 import linksRouter from './routes/links.js';
+import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PgSession = connectPgSimple(session);
@@ -69,9 +71,96 @@ app.use('/api/cinema', cinemaRouter);
 app.use('/api/watch-providers', watchProvidersRouter);
 app.use('/api/trailers', trailersRouter);
 app.use('/api/links', linksRouter);
+app.use('/api/share', shareRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
 const frontendRoot = path.join(__dirname, '..');
+
+/* ---- Geteilte Titel: /t/<art>/<tmdb-id> ----
+   Liefert dieselbe index.html aus, nur mit titelspezifischen Open-Graph-Angaben
+   im Kopf. Das ist der einzige Weg zu einer brauchbaren Vorschau in WhatsApp,
+   iMessage & Co: Deren Vorschau-Roboter laden die Seite, fuehren aber kein
+   JavaScript aus -- die Angaben muessen also schon im ausgelieferten HTML
+   stehen. Die App selbst liest den Pfad beim Start und oeffnet die Titelkarte.
+
+   Die Datei wird einmal gelesen und im Speicher gehalten; sie aendert sich nur
+   beim Deploy, der ohnehin den Prozess neu startet. */
+const OG_START = '<!-- og:start';
+const OG_ENDE = '<!-- og:end -->';
+let indexHtmlCache = null;
+function indexHtml() {
+  if (indexHtmlCache == null) {
+    indexHtmlCache = fs.readFileSync(path.join(frontendRoot, 'index.html'), 'utf8');
+  }
+  return indexHtmlCache;
+}
+function attrEsc(wert) {
+  return String(wert == null ? '' : wert)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+// Kurzbeschreibung fuer die Vorschaukarte: Bewertung und Genre vorweg, dann so
+// viel Inhaltsangabe wie hineinpasst. WhatsApp kuerzt nach rund 160 Zeichen --
+// besser wir kuerzen sauber an einer Wortgrenze als mitten im Wort.
+function vorschauText(t) {
+  const kopf = [];
+  if (t.rating != null && Number(t.rating) > 0) kopf.push('⭐ ' + String(t.rating).replace('.', ','));
+  if (t.genres && t.genres[0]) kopf.push(t.genres[0]);
+  if (t.year) kopf.push(String(t.year));
+  const rest = (t.plot || '').trim();
+  let text = kopf.join(' · ');
+  if (rest) {
+    const platz = 160 - text.length - 3;
+    text += ' · ' + (rest.length <= platz ? rest : rest.slice(0, Math.max(0, rest.lastIndexOf(' ', platz))) + ' …');
+  }
+  return text;
+}
+
+app.get('/t/:art/:kennung', async (req, res, next) => {
+  const art = req.params.art;
+  if (['id', 'movie', 'series'].indexOf(art) === -1) return next();
+  const kennung = Number(req.params.kennung);
+  if (!Number.isInteger(kennung) || kennung <= 0) return next();
+  let titel = null;
+  try {
+    titel = await ladeTitel(art, kennung);
+  } catch (err) {
+    console.error('Teilen-Vorschau fehlgeschlagen:', err);
+  }
+  // Unbekannter Titel: einfach die normale App ausliefern statt einer
+  // Fehlerseite -- der Link soll nie ins Leere laufen.
+  if (!titel) return res.type('html').send(indexHtml());
+
+  let backdrop = null;
+  try { backdrop = await ergaenzeBackdrop(titel); } catch { /* Poster reicht auch */ }
+
+  const url = 'https://movietaste.de/t/' + art + '/' + kennung;
+  const bild = backdrop
+    ? 'https://image.tmdb.org/t/p/w1280' + backdrop
+    : (titel.poster_path ? 'https://image.tmdb.org/t/p/w500' + titel.poster_path
+                         : 'https://movietaste.de/icon-512.png');
+  const grossesBild = !!backdrop;
+  const titelZeile = titel.title + (titel.year ? ' (' + titel.year + ')' : '') + ' – MovieTaste';
+
+  const block = [
+    '<meta property="og:site_name" content="MovieTaste">',
+    '<meta property="og:type" content="video.' + (titel.type === 'series' ? 'tv_show' : 'movie') + '">',
+    '<meta property="og:url" content="' + attrEsc(url) + '">',
+    '<meta property="og:title" content="' + attrEsc(titelZeile) + '">',
+    '<meta property="og:description" content="' + attrEsc(vorschauText(titel)) + '">',
+    '<meta property="og:image" content="' + attrEsc(bild) + '">',
+    grossesBild ? '<meta property="og:image:width" content="1280">' : '',
+    grossesBild ? '<meta property="og:image:height" content="720">' : '',
+    '<meta name="twitter:card" content="' + (grossesBild ? 'summary_large_image' : 'summary') + '">',
+  ].filter(Boolean).join('\n');
+
+  const html = indexHtml();
+  const a = html.indexOf(OG_START);
+  const b = html.indexOf(OG_ENDE);
+  if (a < 0 || b < 0) return res.type('html').send(html);
+  res.type('html').send(html.slice(0, a) + block + html.slice(b + OG_ENDE.length));
+});
+
 app.use(express.static(frontendRoot, { index: 'index.html', extensions: ['html'] }));
 
 app.use((err, req, res, next) => {
