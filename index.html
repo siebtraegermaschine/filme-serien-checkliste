@@ -3153,6 +3153,7 @@ function closeCinemaPage(){
 // setzt zusaetzlich die Suche zurueck -- das macht ein Tab-Klick nicht.
 function goHome(){
   closeCinemaPage();
+  pfadAufStartseite();
   searchEl.value = '';
   searchEl.dispatchEvent(new Event('input'));
   setTab('filme');
@@ -4783,7 +4784,21 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _sha
    landet erst auf Wunsch in der eigenen Liste. Wer nicht angemeldet ist,
    bekommt denselben Hinweis wie sonst auch. */
 var _sharedModal = document.getElementById('sharedTitleModal');
-function schliesseGeteilt(){ _sharedModal.style.display = 'none'; }
+// Nach dem Oeffnen eines geteilten Links steht /t/<art>/<kennung> in der
+// Adresszeile. Ist die Karte erledigt, gehoert dort wieder die Startseite hin --
+// sonst landet man beim naechsten Neuladen oder Teilen erneut auf dem fremden
+// Titel. replaceState statt pushState: Der Titel-Pfad soll nicht als eigener
+// Schritt im Verlauf stehenbleiben.
+//
+// Die Pruefung ist wichtig: Ein Einladungslink (?einladung=...) muss stehen
+// bleiben, er wird nach dem Anmelden erneut ausgewertet. Nur ein /t/-Pfad wird
+// zurueckgesetzt.
+function pfadAufStartseite(){
+  if (geteilterTitelAusPfad()) {
+    try { history.replaceState(null, '', '/'); } catch (e) {}
+  }
+}
+function schliesseGeteilt(){ _sharedModal.style.display = 'none'; pfadAufStartseite(); }
 document.getElementById('sharedTitleX').onclick = schliesseGeteilt;
 _sharedModal.addEventListener('click', function(e){ if (e.target === _sharedModal) schliesseGeteilt(); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _sharedModal.style.display !== 'none') schliesseGeteilt(); });
