@@ -1975,7 +1975,7 @@ function render() {
     attachSwipeToRemove(li, async function(){
       // Bei Abbruch neu rendern: Die Zeile ist zu diesem Zeitpunkt schon
       // hinausgeflogen und kommt nur durch einen Neuaufbau zurueck.
-      if (!(await darfWischEntfernen('liste'))) { rebuild(); renderCurrentTab(); return; }
+      if (!(await darfWischEntfernen(activeTab))) { rebuild(); renderCurrentTab(); return; }
       removeFromMyTitles(s.det[i].id);
     }, s.pool[i] ? function(){ oeffneTeilen(s.pool[i]); } : null);
     list.appendChild(li);
@@ -2091,27 +2091,40 @@ function confirmRemove(frage){
   return new Promise(function(aufloesen){ _removeAntwort = aufloesen; });
 }
 /* ---- Einmaliger Hinweis beim ersten Wischen nach links ----
-   Bewusst zwei Merker statt vier: Filme und Serien bedeuten dasselbe (raus aus
-   den eigenen Listen), Discovery und Kino ebenfalls (dauerhaft ausblenden).
-   Nach vier Bereichen zu trennen haette denselben Text zweimal gezeigt -- was
-   zaehlt, ist die Folge der Geste, und die gibt es in genau zwei Varianten.
+   Vier getrennte Merker, einer je Bereich: Wer in "Filme" schon gewischt hat,
+   bekommt den Hinweis unter "Serien", in Discovery und im Kino trotzdem noch
+   einmal. Die Folge der Geste ist zwar nur zweierlei (raus aus den eigenen
+   Listen bzw. dauerhaft ausblenden), der Text nennt aber jeweils den Bereich --
+   sonst waere die Wiederholung blosse Wiedervorlage desselben Satzes.
 
-   Nach der ersten Bestaetigung wischt es sich ohne Rueckfrage. Der Merker liegt
-   im localStorage, gilt also je Geraet und Browser. */
-var WISCH_HINWEIS_KEYS = { liste: 'mt.wischHinweis.liste', ausblenden: 'mt.wischHinweis.ausblenden' };
-function wischHinweisGesehen(art){
-  try { return localStorage.getItem(WISCH_HINWEIS_KEYS[art]) === '1'; } catch (e) { return false; }
-}
-async function darfWischEntfernen(art){
-  if (wischHinweisGesehen(art)) return true;
-  var frage = art === 'liste'
-    ? 'Wischen nach links entfernt den Titel aus deiner Liste. Du kannst ihn jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?'
-    : 'Wischen nach links blendet den Titel dauerhaft aus. Du findest ihn danach unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?';
-  var ja = await confirmRemove(frage);
+   Der Merker liegt im localStorage, gilt also je Geraet und Browser. */
+var WISCH_HINWEISE = {
+  filme: {
+    key: 'mt.wischHinweis.filme',
+    text: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
+  },
+  serien: {
+    key: 'mt.wischHinweis.serien',
+    text: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
+  },
+  discovery: {
+    key: 'mt.wischHinweis.discovery',
+    text: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht in „Neue Filme & Serien entdecken“ nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
+  },
+  kino: {
+    key: 'mt.wischHinweis.kino',
+    text: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht auf der Kino-Seite nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
+  },
+};
+async function darfWischEntfernen(bereich){
+  var h = WISCH_HINWEISE[bereich];
+  if (!h) return true;
+  try { if (localStorage.getItem(h.key) === '1') return true; } catch (e) { return true; }
+  var ja = await confirmRemove(h.text);
   // Nur merken, wenn wirklich bestaetigt wurde -- wer abbricht, hat die
   // Bedeutung der Geste noch nicht bewusst angenommen und soll sie beim
   // naechsten Versuch erneut lesen.
-  if (ja) { try { localStorage.setItem(WISCH_HINWEIS_KEYS[art], '1'); } catch (e) {} }
+  if (ja) { try { localStorage.setItem(h.key, '1'); } catch (e) {} }
   return ja;
 }
 
@@ -4343,7 +4356,7 @@ function poolItemLi(item, score, opts){
   var darfAusblenden = !(opts && opts.suppressSimilar) && (inDiscoveryMode() || cinemaMode);
   attachSwipeToRemove(li, darfAusblenden ? function(){
     requireLogin(async () => {
-      if (!(await darfWischEntfernen('ausblenden'))) {
+      if (!(await darfWischEntfernen(cinemaMode ? 'kino' : 'discovery'))) {
         // Zeile zurueckholen -- sie ist beim Wischen bereits hinausgeflogen.
         if (cinemaMode) renderCinemaPage(); else renderDiscovery();
         return;
