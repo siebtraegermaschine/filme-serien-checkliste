@@ -4749,20 +4749,23 @@ async function oeffneTeilen(item){
     var sauber = String(item.t).replace(/[\/\\:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40);
     var datei = new File([blob], (sauber || 'MovieMatch') + ' – MovieMatch.jpg', { type: 'image/jpeg' });
     var kannDatei = !!(navigator.canShare && navigator.canShare({ files: [datei] }));
-    // Wenn das Geraet Bild UND Text zusammen annimmt, beides mitschicken: In
-    // WhatsApp wird daraus Bild samt Bildunterschrift und anklickbarem Link.
-    // Instagram-Storys ignorieren Text ohnehin, dort schadet es nicht.
-    var mitText = kannDatei && !!(navigator.canShare &&
-      navigator.canShare({ files: [datei], text: teilenText(item), url: url }));
+    // Wenn das Geraet Bild, Text UND Link zusammen annimmt, alles mitschicken.
+    // Zwei Gruende: In WhatsApp wird daraus Bild samt Bildunterschrift und
+    // anklickbarem Link -- und das Teilen-Blatt zeigt oben den Titel mit der
+    // Domain darunter statt nur des Dateinamens. Deshalb steht title bewusst
+    // mit drin, sonst nimmt iOS den Dateinamen als Ueberschrift.
+    // Instagram-Storys ignorieren Text und Link ohnehin, dort schadet es nicht.
+    var voll = { files: [datei], title: item.t, text: teilenText(item), url: url };
+    var mitText = kannDatei && !!(navigator.canShare && navigator.canShare(voll));
     bildBtn.disabled = false;
     document.getElementById('shareHint').textContent = kannDatei
       ? 'Für Instagram-Story: „Als Bild teilen“ und dort „Story“ wählen.'
       : 'Dein Browser kann keine Bilder teilen – das Bild wird stattdessen geladen.';
     bildBtn.onclick = function(){
       if (kannDatei) {
-        var nutzlast = mitText
-          ? { files: [datei], text: teilenText(item), url: url }
-          : { files: [datei] };
+        // Faellt die volle Nutzlast durch, wenigstens Titel und Bild -- damit
+        // oben nicht bloss der Dateiname steht.
+        var nutzlast = mitText ? voll : { files: [datei], title: item.t };
         navigator.share(nutzlast).catch(function(){});
         schliesseShare();
       } else {
