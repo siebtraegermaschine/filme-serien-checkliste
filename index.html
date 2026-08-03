@@ -2490,7 +2490,13 @@ function getSearchSuggestions(query){
   // Zeichenketten kaum aehneln.
   Object.keys(SEARCH_SYNONYMS).forEach(function(key){
     if (key.indexOf(qLower) !== -1 || qLower.indexOf(key) !== -1){
-      results.push({ text: SEARCH_SYNONYMS[key], type: 'Genre', score: 95 });
+      var ziel = SEARCH_SYNONYMS[key];
+      // Die Art nicht fest auf "Genre" setzen: "True Crime" ist bei uns ein
+      // Schlagwort, kein Genre (TMDB kennt dafuer keins). Was es tatsaechlich
+      // ist, steht im Suchindex -- nur wenn der Begriff dort fehlt, bleibt es
+      // beim bisherigen Standard.
+      var treffer = SEARCH_INDEX.find(function(e){ return e.text.toLowerCase() === ziel.toLowerCase(); });
+      results.push({ text: ziel, type: treffer ? treffer.type : 'Genre', score: 95 });
     }
   });
   SEARCH_INDEX.forEach(function(entry){
