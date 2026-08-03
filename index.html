@@ -4846,7 +4846,11 @@ async function zeigeGeteiltenTitel(ziel){
   aktionen.innerHTML =
     '<button type="button" class="modal-no" id="sharedWlBtn">☆ Watchlist</button>' +
     '<button type="button" class="modal-no" id="sharedSeenBtn">✓ Gesehen</button>';
-  async function speichern(patch, text){
+  // Nach erfolgreichem Speichern schliesst sich die Karte selbst -- die Aufgabe
+  // ist damit erledigt, und der Titel steht sichtbar in der Liste dahinter.
+  // Das Sterne-Fenster schliesst sich beim Klick auf einen Stern von allein
+  // (siehe _ratingStarBtns), es bleibt also nichts offen stehen.
+  async function speichern(patch){
     hinweis.textContent = 'Wird gespeichert …';
     try {
       var id = await idFuerGeteilten(d);
@@ -4862,8 +4866,10 @@ async function zeigeGeteiltenTitel(ziel){
       }
       rebuild();
       renderCurrentTab();
-      hinweis.textContent = text;
+      schliesseGeteilt();
     } catch (e) {
+      // Nur im Fehlerfall bleibt die Karte stehen, damit der Versuch
+      // wiederholt werden kann.
       hinweis.textContent = 'Das hat nicht geklappt. Bitte erneut versuchen.';
     }
   }
@@ -4873,7 +4879,7 @@ async function zeigeGeteiltenTitel(ziel){
   // war danach BEIDES markiert, weil das Backend fehlende Felder unveraendert
   // laesst (COALESCE in PUT /api/progress).
   document.getElementById('sharedWlBtn').onclick = function(){
-    speichern({ watchlist: true, seen: false }, 'Zur Watchlist hinzugefügt.');
+    speichern({ watchlist: true, seen: false });
   };
   document.getElementById('sharedSeenBtn').onclick = async function(){
     // "Gesehen" verlangt eine Sterne-Bewertung, ebenfalls wie in den Zeilen:
@@ -4881,7 +4887,7 @@ async function zeigeGeteiltenTitel(ziel){
     // passiert nichts.
     var sterne = await openRatingStars(d.title);
     if (sterne == null) return;
-    speichern({ seen: true, watchlist: false, rating: sterne }, 'Als gesehen markiert.');
+    speichern({ seen: true, watchlist: false, rating: sterne });
   };
 }
 
