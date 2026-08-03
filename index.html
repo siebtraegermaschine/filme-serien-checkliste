@@ -120,12 +120,11 @@
     border-color: var(--accent);
     color: var(--accent);
   }
-  /* Discovery-Button: eigene Zeile zwischen Suche und den Tabs. Die frueher
-     hier sitzende border-top war die Linie UNTER den Tabs -- seit Discovery
-     ueber ihnen steht, haette sie Suche und Discovery getrennt statt einen
-     Abschnitt abzuschliessen. Die header-border-bottom bleibt die Linie vor
-     Watchlist/Gesehen. */
-  .disc-toprow { display:flex; justify-content:center; margin-top:10px; }
+  /* Discovery-Button: erste Zeile im Block unter den Tabs, die Suche steht
+     darunter. Die frueher hier sitzende border-top war die Linie UNTER den
+     Tabs -- seit der Block unter ihnen steht, traegt .head-controls diese
+     Linie. Die header-border-bottom bleibt die Linie vor Watchlist/Gesehen. */
+  .disc-toprow { display:flex; justify-content:center; }
   /* Gleiches Design/Groesse wie die Filme/Serien-Tabs (.tabs button) -- die Breite
      wird zusaetzlich per JS (syncDiscoveryWidth) exakt auf die Breite von
      .tabs .tabs-row gesetzt, damit der Button links buendig mit "Filme" beginnt
@@ -152,7 +151,7 @@
      und die Tabs darunter. 660px = Inhaltsbreite von .toolbar (700 minus
      deren 2x20px), damit Suche und Filterzeile auf breiten Schirmen exakt
      uebereinander stehen. */
-  .head-search { max-width: 660px; margin: 0 auto; padding: 0; display: flex; }
+  .head-search { max-width: 660px; margin: 10px auto 0; padding: 0; display: flex; }
   .head-controls { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
   /* Suche, Discovery und die Tab-Reihe sollen exakt gleich hoch sein. 44px ist
      die natuerliche Hoehe der Tab-Buttons (11px Innenabstand + 15px Schrift);
@@ -792,20 +791,21 @@
       <button id="tabKino">🍿 Kino</button>
     </div>
   </div>
-  <!-- Suche und Discovery bilden einen eigenen Block unter den Tabs. Die
-       Trennlinie sitzt an diesem Wrapper (nicht an .head-search), damit sie
-       ueber die volle Kopfbreite laeuft und nicht nur ueber die 660px der
-       Suche. Die zweite Linie darunter ist die border-bottom des Headers. -->
+  <!-- Discovery und Suche bilden einen eigenen Block unter den Tabs. Die
+       Trennlinie sitzt an diesem Wrapper (nicht an einem der beiden Kinder),
+       damit sie ueber die volle Kopfbreite laeuft und nicht nur ueber die
+       660px der Suche. Die zweite Linie darunter ist die border-bottom des
+       Headers. -->
   <div class="head-controls">
+    <div class="disc-toprow">
+      <button id="fDiscovery">🧭 Neue Filme &amp; Serien entdecken</button>
+    </div>
     <div class="head-search">
       <div class="search-wrap">
         <input type="text" id="search" placeholder="Titel, Genre oder Namen suchen …" autocomplete="off">
         <button type="button" id="searchClear" class="search-x" aria-label="Suche löschen">×</button>
         <div id="searchSuggest" class="search-suggest" style="display:none"></div>
       </div>
-    </div>
-    <div class="disc-toprow">
-      <button id="fDiscovery">🧭 Neue Filme &amp; Serien entdecken</button>
     </div>
   </div>
 </header>
@@ -1972,8 +1972,12 @@ function render() {
       providerChipsHtml(d.providers) + detailsHtml +
       watchRowHtml(d.tmdbId, d.type, item[0], d.id) + actionsHtml + '</span>';
     wireRow(li, activeTab, i);
-    attachSwipeToRemove(li, function(){ removeFromMyTitles(s.det[i].id); },
-                        s.pool[i] ? function(){ oeffneTeilen(s.pool[i]); } : null);
+    attachSwipeToRemove(li, async function(){
+      // Bei Abbruch neu rendern: Die Zeile ist zu diesem Zeitpunkt schon
+      // hinausgeflogen und kommt nur durch einen Neuaufbau zurueck.
+      if (!(await darfWischEntfernen('liste'))) { rebuild(); renderCurrentTab(); return; }
+      removeFromMyTitles(s.det[i].id);
+    }, s.pool[i] ? function(){ oeffneTeilen(s.pool[i]); } : null);
     list.appendChild(li);
   });
   applyFilter();
@@ -2086,6 +2090,31 @@ function confirmRemove(frage){
   _removeModal.style.display = 'flex';
   return new Promise(function(aufloesen){ _removeAntwort = aufloesen; });
 }
+/* ---- Einmaliger Hinweis beim ersten Wischen nach links ----
+   Bewusst zwei Merker statt vier: Filme und Serien bedeuten dasselbe (raus aus
+   den eigenen Listen), Discovery und Kino ebenfalls (dauerhaft ausblenden).
+   Nach vier Bereichen zu trennen haette denselben Text zweimal gezeigt -- was
+   zaehlt, ist die Folge der Geste, und die gibt es in genau zwei Varianten.
+
+   Nach der ersten Bestaetigung wischt es sich ohne Rueckfrage. Der Merker liegt
+   im localStorage, gilt also je Geraet und Browser. */
+var WISCH_HINWEIS_KEYS = { liste: 'mt.wischHinweis.liste', ausblenden: 'mt.wischHinweis.ausblenden' };
+function wischHinweisGesehen(art){
+  try { return localStorage.getItem(WISCH_HINWEIS_KEYS[art]) === '1'; } catch (e) { return false; }
+}
+async function darfWischEntfernen(art){
+  if (wischHinweisGesehen(art)) return true;
+  var frage = art === 'liste'
+    ? 'Wischen nach links entfernt den Titel aus deiner Liste. Du kannst ihn jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?'
+    : 'Wischen nach links blendet den Titel dauerhaft aus. Du findest ihn danach unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?';
+  var ja = await confirmRemove(frage);
+  // Nur merken, wenn wirklich bestaetigt wurde -- wer abbricht, hat die
+  // Bedeutung der Geste noch nicht bewusst angenommen und soll sie beim
+  // naechsten Versuch erneut lesen.
+  if (ja) { try { localStorage.setItem(WISCH_HINWEIS_KEYS[art], '1'); } catch (e) {} }
+  return ja;
+}
+
 document.getElementById('removeModalYes').onclick = function(){ schliesseRemove(true); };
 document.getElementById('removeModalNo').onclick  = function(){ schliesseRemove(false); };
 document.getElementById('removeModalX').onclick   = function(){ schliesseRemove(false); };
@@ -4314,6 +4343,11 @@ function poolItemLi(item, score, opts){
   var darfAusblenden = !(opts && opts.suppressSimilar) && (inDiscoveryMode() || cinemaMode);
   attachSwipeToRemove(li, darfAusblenden ? function(){
     requireLogin(async () => {
+      if (!(await darfWischEntfernen('ausblenden'))) {
+        // Zeile zurueckholen -- sie ist beim Wischen bereits hinausgeflogen.
+        if (cinemaMode) renderCinemaPage(); else renderDiscovery();
+        return;
+      }
       var id = await ensurePoolItem(item);
       await apiRequest('POST', '/api/hidden-titles/' + id).catch(function(){});
       merkeVersteckt(item, id);
