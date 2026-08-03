@@ -4550,7 +4550,7 @@ function teilenUrl(item){
 }
 function teilenText(item){
   var wer = (CURRENT_USER && CURRENT_USER.displayName) ? CURRENT_USER.displayName : null;
-  var kopf = wer ? (wer + ' hat einen Titel für dich:') : 'Gefunden auf MovieMatch:';
+  var kopf = wer ? (wer + ' hat eine Empfehlung für dich:') : 'Gefunden auf MovieMatch:';
   var zeile2 = [item.t + (item.y ? ' (' + item.y + ')' : ''),
                 '⭐ ' + sterneText(item.r), (item.g && item.g[0]) || null,
                 item.type === 'series' ? 'Serie' : 'Film'].filter(Boolean).join(' · ');
