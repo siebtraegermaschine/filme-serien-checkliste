@@ -3795,6 +3795,7 @@ async function loadUserProgressAndRefresh(){
     rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }));
     hidden.forEach((t) => HIDDEN_TITLE_IDS.add(t.id));
   }
+  USER_DATA_SIG = userDataSignature();
   updateProfileBtn();
   rebuild();
   renderCurrentTab();
@@ -3809,12 +3810,107 @@ async function loadCatalogAndRefresh(){
     ]);
     STREAM = streamDoc;
     buildPool(combinedRows, streamDoc);
+    LETZTER_KATALOG_LOAD = Date.now();
     await loadUserProgressAndRefresh();
   } catch (err) {
     console.error('Katalog konnte nicht geladen werden:', err);
     list.innerHTML = '<div class="disc-hint">Katalog konnte nicht geladen werden. Ist das Backend erreichbar?</div>';
   }
 }
+
+/* ---- Auffrischen, wenn die App aus dem Hintergrund zurueckkehrt ----
+   Eine ueber "Zum Home-Bildschirm" gestartete App laeuft auf dem iPhone in
+   einem eigenen Fenster, das beim Verlassen nur eingefroren statt verworfen
+   wird. Ein Antippen des Icons setzt deshalb dieselbe Seite fort -- der beim
+   Start geholte Stand (verknuepfte Profile, Gesehen/Watchlist, Anbieterwahl)
+   bliebe sonst tagelang stehen. Im Safari-Tab faellt das kaum auf, weil der
+   Tab oefter verworfen und die Seite dann echt neu geladen wird.
+
+   Neu gerendert wird nur bei tatsaechlicher Aenderung: sonst wuerde jede
+   Rueckkehr in den Vordergrund aufgeklappte Zeilen zuklappen. */
+let USER_DATA_SIG = '';
+let LETZTER_KATALOG_LOAD = 0;
+let LETZTE_AUFFRISCHUNG = Date.now();
+const AUFFRISCH_ABSTAND_MS = 60 * 1000;      // kurzes Wegtippen loest nichts aus
+const KATALOG_MAX_ALTER_MS = 6 * 60 * 60 * 1000; // Katalog-Jobs laufen taeglich
+
+function userDataSignature(){
+  var eigen = [];
+  PROGRESS.forEach(function(v, k){
+    eigen.push(k + ':' + (v.seen ? 1 : 0) + (v.watchlist ? 1 : 0) + (v.rating || '-'));
+  });
+  var fremd = [];
+  Object.keys(LINKED_PROGRESS).sort().forEach(function(uid){
+    var eintraege = [];
+    LINKED_PROGRESS[uid].forEach(function(v, t){
+      eintraege.push(t + ':' + (v.s ? 1 : 0) + (v.w ? 1 : 0) + (v.r || '-'));
+    });
+    fremd.push(uid + '#' + eintraege.sort().join(','));
+  });
+  return [
+    CURRENT_USER ? CURRENT_USER.id : 0,
+    eigen.sort().join(','),
+    Array.from(HIDDEN_TITLE_IDS).sort().join(','),
+    Array.isArray(MY_PROVIDER_IDS) ? MY_PROVIDER_IDS.slice().sort().join(',') : '-',
+    LINKED_PROFILES.map(function(p){ return p.id + ':' + (p.name || ''); }).join(','),
+    fremd.join('|'),
+  ].join('||');
+}
+
+async function refreshOnResume(){
+  if (document.visibilityState !== 'visible') return;
+  if (Date.now() - LETZTE_AUFFRISCHUNG < AUFFRISCH_ABSTAND_MS) return;
+  LETZTE_AUFFRISCHUNG = Date.now();
+
+  // Katalog/Kino/Streaming werden von taeglichen Jobs gefuellt -- nach langer
+  // Pause lohnt der komplette Neuaufbau, sonst waere es Verschwendung.
+  if (Date.now() - LETZTER_KATALOG_LOAD > KATALOG_MAX_ALTER_MS) {
+    await loadCatalogAndRefresh();
+    return;
+  }
+
+  var vorherigeId = CURRENT_USER ? CURRENT_USER.id : null;
+  try {
+    CURRENT_USER = await apiRequest('GET', '/api/auth/me');
+  } catch (e) {
+    CURRENT_USER = null;
+  }
+  // An- oder Abmeldung in einem anderen Fenster (oder abgelaufene Sitzung):
+  // dann muss ohnehin alles Nutzerbezogene neu aufgebaut werden.
+  if ((CURRENT_USER ? CURRENT_USER.id : null) !== vorherigeId) {
+    renderAuthBar();
+    await loadUserProgressAndRefresh();
+    return;
+  }
+  if (!CURRENT_USER) return;
+
+  try {
+    var [rows, hidden] = await Promise.all([
+      apiRequest('GET', '/api/progress'),
+      apiRequest('GET', '/api/hidden-titles'),
+      loadMyProviders(),
+      loadLinkedProfiles(),
+    ]);
+    var neuerFortschritt = new Map();
+    rows.forEach(function(r){ neuerFortschritt.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }); });
+    PROGRESS = neuerFortschritt;
+    HIDDEN_TITLE_IDS = new Set(hidden.map(function(t){ return t.id; }));
+  } catch (e) {
+    // Kein Netz beim Zurueckkehren -- der bisherige Stand bleibt einfach stehen.
+    return;
+  }
+
+  var neu = userDataSignature();
+  if (neu === USER_DATA_SIG) return;
+  USER_DATA_SIG = neu;
+  updateProfileBtn();
+  rebuild();
+  renderCurrentTab();
+}
+
+document.addEventListener('visibilitychange', function(){ refreshOnResume(); });
+// Zurueck-Navigation aus dem Vor-/Zurueck-Zwischenspeicher laedt ebenfalls nicht neu.
+window.addEventListener('pageshow', function(e){ if (e.persisted) refreshOnResume(); });
 
 renderAuthBar();
 setTab('filme');
