@@ -4617,7 +4617,11 @@ async function baueStoryBild(item, url){
     ctx.fillText('movietaste.de', B / 2, qy + flaeche + 110);
   } catch (e) { /* ohne QR bleibt das Bild trotzdem brauchbar */ }
 
-  return new Promise(function(erfuellt){ cv.toBlob(function(b){ erfuellt(b); }, 'image/png'); });
+  // JPEG statt PNG: Mit Breitbild-Hintergrund wiegt dasselbe Bild als PNG rund
+  // 2,4 MB -- zu viel fuers Verschicken ueber Mobilfunk. Qualitaet 0,92 bringt
+  // es auf einen Bruchteil; der QR-Code bleibt bei 7px je Modul und
+  // Fehlerkorrektur M trotz Kompression sicher lesbar.
+  return new Promise(function(erfuellt){ cv.toBlob(function(b){ erfuellt(b); }, 'image/jpeg', 0.92); });
 }
 
 function schliesseShare(){ _shareModal.style.display = 'none'; _shareBildBlob = null; }
@@ -4660,7 +4664,7 @@ async function oeffneTeilen(item){
     var vb = new Image(); vb.src = bildUrl; vb.alt = '';
     vb.onload = function(){ URL.revokeObjectURL(bildUrl); };
     vorschau.appendChild(vb);
-    var datei = new File([blob], 'movietaste.png', { type: 'image/png' });
+    var datei = new File([blob], 'movietaste.jpg', { type: 'image/jpeg' });
     var kannDatei = !!(navigator.canShare && navigator.canShare({ files: [datei] }));
     bildBtn.disabled = false;
     document.getElementById('shareHint').textContent = kannDatei
@@ -4673,7 +4677,7 @@ async function oeffneTeilen(item){
       } else {
         var a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'movietaste-' + item.t.replace(/[^\w]+/g, '-').toLowerCase() + '.png';
+        a.download = 'movietaste-' + item.t.replace(/[^\w]+/g, '-').toLowerCase() + '.jpg';
         a.click();
         setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
       }
