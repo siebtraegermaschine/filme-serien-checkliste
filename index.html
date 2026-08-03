@@ -1159,12 +1159,23 @@ function requireLogin(action){
 
 const POSTER='https://image.tmdb.org/t/p/w154';
 function fmtR(r){ return r!=null ? String(r).replace('.',',') : ''; }
+// Sternchen-Wert fuer die Metazeile. TMDB liefert fuer unbewertete Titel eine
+// glatte 0 -- die stand vorher als "⭐ 0" in der Zeile und las sich wie eine
+// echte Bewertung von null Punkten statt als "keine Angabe". Fehlender Wert und
+// 0 werden deshalb gleich behandelt und als "X" gezeigt.
+// Hinweis: metaRating() zieht die Zahl per Textsuche aus dieser Zeile -- "X"
+// enthaelt keine Ziffer und liefert dort wie bisher 0, die Sortierung aendert
+// sich dadurch nicht.
+function sterneText(r){
+  var n = Number(r);
+  return (r == null || !Number.isFinite(n) || n <= 0) ? 'X' : fmtR(r);
+}
 // "(28.300)" hinter der Bewertung. Ohne diese Zahl steht eine glatte 8,0 aus
 // EINER Stimme gleichberechtigt neben einer 8,3 aus 28.000 Stimmen.
 function voteSuffix(vc){
   return (vc != null && Number(vc) > 0) ? (' (' + Number(vc).toLocaleString('de-DE') + ')') : '';
 }
-function candMeta(c){ return '⭐ '+(fmtR(c.r)||'?')+voteSuffix(c.vc)+' · '+((c.g&&c.g[0])||'—')+(c.y?(' · '+c.y):''); }
+function candMeta(c){ return '⭐ '+sterneText(c.r)+voteSuffix(c.vc)+' · '+((c.g&&c.g[0])||'—')+(c.y?(' · '+c.y):''); }
 // Metazeile der Kino-Seite. Dort ist das Erscheinungsjahr uninteressant --
 // entscheidend ist, wann der Film laeuft. Reihenfolge deshalb Bewertung, Genre,
 // Film/Serie, Kinostart. Ist ausnahmsweise kein genaues Datum hinterlegt (im
@@ -1181,7 +1192,7 @@ function kinoDatumText(iso, jahr){
   return jahr ? String(jahr).slice(-2) : '';
 }
 function kinoMeta(c, datum, typLabel){
-  var teile = ['⭐ ' + (fmtR(c.r) || '?') + voteSuffix(c.vc), (c.g && c.g[0]) || '—', typLabel];
+  var teile = ['⭐ ' + sterneText(c.r) + voteSuffix(c.vc), (c.g && c.g[0]) || '—', typLabel];
   var d = kinoDatumText(datum, c.y);
   if (d) teile.push(d);
   return teile.join(' · ');
@@ -1628,7 +1639,7 @@ async function ensurePoolItem(item){
   return item._ensuring;
 }
 function poolToMeta(item){
-  const parts = ['⭐ ' + (item.r != null ? fmtR(item.r) : '?') + voteSuffix(item.vc)];
+  const parts = ['⭐ ' + sterneText(item.r) + voteSuffix(item.vc)];
   if (item.g && item.g[0]) parts.push(item.g[0]);
   if (item.ot) parts.push(item.ot);
   if (item.y) parts.push(String(item.y));
