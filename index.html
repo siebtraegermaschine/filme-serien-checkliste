@@ -4762,7 +4762,7 @@ async function oeffneTeilen(item){
     var mitText = kannDatei && !!(navigator.canShare && navigator.canShare(voll));
     bildBtn.disabled = false;
     document.getElementById('shareHint').textContent = kannDatei
-      ? 'Bsp.: Instagram-Story: „Als Bild teilen“ → dann „Story“.'
+      ? 'Bsp.: Instagram-Story: „Als Bild teilen“ → Instagram-App auswählen (ggf. unter „… mehr“ App erst hinzufügen) → dann „Story“.'
       : 'Dein Browser kann keine Bilder teilen – das Bild wird stattdessen geladen.';
     bildBtn.onclick = function(){
       if (kannDatei) {
