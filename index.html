@@ -4735,20 +4735,32 @@ async function oeffneTeilen(item){
     var vb = new Image(); vb.src = bildUrl; vb.alt = '';
     vb.onload = function(){ URL.revokeObjectURL(bildUrl); };
     vorschau.appendChild(vb);
-    var datei = new File([blob], 'moviematch.jpg', { type: 'image/jpeg' });
+    // Dateiname aus dem Titel: iOS zeigt im Teilen-Blatt den Dateinamen als
+    // Ueberschrift. "moviematch" sagte dort nichts -- "1917 – MovieMatch" schon.
+    // Zeichen, die in Dateinamen Aerger machen, fliegen raus.
+    var sauber = String(item.t).replace(/[\/\\:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40);
+    var datei = new File([blob], (sauber || 'MovieMatch') + ' – MovieMatch.jpg', { type: 'image/jpeg' });
     var kannDatei = !!(navigator.canShare && navigator.canShare({ files: [datei] }));
+    // Wenn das Geraet Bild UND Text zusammen annimmt, beides mitschicken: In
+    // WhatsApp wird daraus Bild samt Bildunterschrift und anklickbarem Link.
+    // Instagram-Storys ignorieren Text ohnehin, dort schadet es nicht.
+    var mitText = kannDatei && !!(navigator.canShare &&
+      navigator.canShare({ files: [datei], text: teilenText(item), url: url }));
     bildBtn.disabled = false;
     document.getElementById('shareHint').textContent = kannDatei
       ? 'Für Instagram-Story: „Als Bild teilen“ und dort „Story“ wählen.'
       : 'Dein Browser kann keine Bilder teilen – das Bild wird stattdessen geladen.';
     bildBtn.onclick = function(){
       if (kannDatei) {
-        navigator.share({ files: [datei], title: item.t }).catch(function(){});
+        var nutzlast = mitText
+          ? { files: [datei], text: teilenText(item), url: url }
+          : { files: [datei] };
+        navigator.share(nutzlast).catch(function(){});
         schliesseShare();
       } else {
         var a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'moviematch-' + item.t.replace(/[^\w]+/g, '-').toLowerCase() + '.jpg';
+        a.download = (sauber || 'MovieMatch') + ' – MovieMatch.jpg';
         a.click();
         setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
       }
