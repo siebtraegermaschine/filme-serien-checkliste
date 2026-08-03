@@ -78,32 +78,6 @@
     margin-right: auto;
     line-height: 1.5;
   }
-  /* "How to"-Kurzfassung unter dem ersten Satz: per Default eingeklappt (nur
-     Label + Vorschau-Ausschnitt von Punkt 1 + "Mehr"-Button), klappt beim Klick
-     die vollstaendige 1./2./3.-Anleitung auf. */
-  .sub-howto { margin-top: 8px; }
-  .sub-howto-row {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-    text-align: left;
-  }
-  .sub-howto-row .sub-howto-label { font-weight: 700; flex-shrink: 0; }
-  /* Kein text-overflow:ellipsis -- das wuerde mitten im Wort abschneiden (z.B.
-     "Dis..." von "Discovery"). Stattdessen kuerzt JS (updateHowToPreviewTruncation)
-     wortweise und haengt "…" erst NACH dem letzten noch vollstaendig passenden
-     Wort an, siehe dort. */
-  .sub-howto-row .sub-howto-preview { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; }
-  .sub-howto-row .sub-howto-more { flex-shrink: 0; text-decoration: underline; margin-left: auto; }
-  .sub-howto-full { margin-top: 6px; text-align: justify; }
   .tabs {
     display: flex;
     justify-content: center;
@@ -127,11 +101,12 @@
     border-color: var(--accent);
     color: var(--accent);
   }
-  /* Discovery-Button: eigene Zeile unter Filme/Serien (statt Teil der Watchlist/
-     Gesehen-Gruppe im Toolbar) -- border-top ist die "Linie" direkt unter den
-     Tabs, die bestehende header-border-bottom darunter bleibt die zweite Linie
-     vor Watchlist/Gesehen/Details. */
-  .disc-toprow { display:flex; justify-content:center; border-top:1px solid var(--border); margin-top:18px; padding-top:14px; }
+  /* Discovery-Button: eigene Zeile zwischen Suche und den Tabs. Die frueher
+     hier sitzende border-top war die Linie UNTER den Tabs -- seit Discovery
+     ueber ihnen steht, haette sie Suche und Discovery getrennt statt einen
+     Abschnitt abzuschliessen. Die header-border-bottom bleibt die Linie vor
+     Watchlist/Gesehen. */
+  .disc-toprow { display:flex; justify-content:center; margin-top:10px; }
   /* Gleiches Design/Groesse wie die Filme/Serien-Tabs (.tabs button) -- die Breite
      wird zusaetzlich per JS (syncDiscoveryWidth) exakt auf die Breite von
      .tabs .tabs-row gesetzt, damit der Button links buendig mit "Filme" beginnt
@@ -149,7 +124,21 @@
     gap: 10px;
   }
   .tb-row { display: flex; gap: 10px; align-items: stretch; }
-  .toolbar input {
+  /* Gleiche Breite und Innenabstaende wie .toolbar, damit die Suche exakt
+     ueber der Filterzeile darunter steht. Bewusst eine eigene Klasse statt
+     eines zweiten .toolbar-Elements: mehrere Stellen im JS greifen per
+     querySelector('.toolbar') auf das erste Vorkommen zu. */
+  /* Kein eigener horizontaler Innenabstand: <header> bringt bereits 20px mit,
+     sonst stuende die Suche 40px eingerueckt und damit schmaler als Discovery
+     und die Tabs darunter. 660px = Inhaltsbreite von .toolbar (700 minus
+     deren 2x20px), damit Suche und Filterzeile auf breiten Schirmen exakt
+     uebereinander stehen. */
+  .head-search { max-width: 660px; margin: 16px auto 0; padding: 0; display: flex; }
+  .head-search .search-wrap { flex: 1; }
+  /* Das Suchfeld sitzt seit dem Umbau im Header (ueber Discovery und den
+     Tabs), nicht mehr in .toolbar -- die Regeln muessen deshalb beide Orte
+     treffen, sonst verliert die Suche ausserhalb der Toolbar ihr Aussehen. */
+  .toolbar input, .head-search input {
     flex: 1;
     min-width: 180px;
     background: var(--card);
@@ -160,7 +149,7 @@
     font-size: 14px;
     outline: none;
   }
-  .toolbar input:focus { border-color: var(--accent); }
+  .toolbar input:focus, .head-search input:focus { border-color: var(--accent); }
   .toolbar button {
     background: var(--card);
     border: 1px solid var(--border);
@@ -180,7 +169,7 @@
        Reinzoomen bleibt nach dem Abschicken/Ausblenden der Tastatur bestehen,
        bis man manuell mit zwei Fingern wieder rauszoomt. Ab 16px unterbleibt
        der Auto-Zoom komplett. */
-    .toolbar input { flex-basis: 100%; min-width: 0; font-size: 16px; }
+    .toolbar input, .head-search input { flex-basis: 100%; min-width: 0; font-size: 16px; }
   }
   ol.list {
     list-style: none;
@@ -462,7 +451,7 @@
     color:var(--text-dim); font-size:18px; cursor:pointer; line-height:1; }
   @media (hover: hover) { .modal-x:hover { color:var(--accent); } }
   /* ===== Redesign: Navigation, Watchlist, Detail-Poster, Aktionszeile ===== */
-  .tabs { flex-direction: column; align-items: stretch; max-width: 430px; margin: 22px auto 0; gap: 10px; }
+  .tabs { flex-direction: column; align-items: stretch; max-width: 430px; margin: 10px auto 0; gap: 10px; }
   .tabs .tabs-row { display: flex; gap: 10px; }
   .tabs .tabs-row button { flex: 1; padding: 11px 10px; }
   /* Seit "Kino" als dritter Tab dazugekommen ist, teilen sich drei statt zwei
@@ -646,6 +635,10 @@
   .tb-grid { display: flex; flex-direction: column; gap: 10px; }
   .tb-toprow { display: flex; gap: 10px; align-items: stretch; }
   .tb-toprow > :first-child { flex: 1; min-width: 0; }
+  /* In der Streaming-Zeile steht je nach Discovery-Modus #fInStream ODER
+     #discStream -- die :first-child-Regel oben wuerde nur den ersten treffen,
+     der zweite bliebe schmal. Deshalb hier beide. */
+  .tb-streamrow > button { flex: 1; min-width: 0; }
   .search-wrap { position: relative; display: flex; min-width: 0; }
   .search-wrap #search { flex: 1; width: 100%; min-width: 0; }
   /* padding-right nur reservieren, wenn tatsaechlich Text drinsteht (dann ist
@@ -695,13 +688,6 @@
 <header>
   <h1><img class="logo" src="logo.png" alt="MovieTaste – Watch more. Search less."></h1>
   <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach deinem Geschmack!</b></p>
-  <div class="sub sub-howto">
-    <button type="button" id="subHowToToggle" class="sub-howto-row" aria-expanded="false">
-      <span class="sub-howto-preview" id="subHowToPreview">1. Entdecke die besten Filme &amp; Serien unter Discovery und füge sie deiner „Watchlist“ hinzu oder markiere sie als „gesehen“.</span>
-      <span class="sub-howto-more" id="subHowToMoreLabel">Mehr</span>
-    </button>
-    <div class="sub-howto-full" id="subHowToFull" style="display:none">1. Entdecke die besten Filme &amp; Serien unter <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was ist Discovery?">Discovery</i> und füge sie deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)<br>2. Schaut gemeinsam: Verknüpfe dich oben links mit Freund:innen oder Familie – dann siehst du nur noch Titel, die auch bei ihnen auf der Liste stehen. So findet ihr sofort etwas, das allen gefällt.<br>3. Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming kostenlos laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die TMDB-Bewertung?">TMDB-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.<br>4. Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</div>
-  </div>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -730,15 +716,22 @@
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
     <div id="authBarUser" class="nav-menu-user" style="display:none"></div>
   </div>
+  <div class="head-search">
+    <div class="search-wrap">
+      <input type="text" id="search" placeholder="Titel, Genre oder Namen suchen …" autocomplete="off">
+      <button type="button" id="searchClear" class="search-x" aria-label="Suche löschen">×</button>
+      <div id="searchSuggest" class="search-suggest" style="display:none"></div>
+    </div>
+  </div>
+  <div class="disc-toprow">
+    <button id="fDiscovery">🧭 Discovery: Neue Filme &amp; Serien entdecken</button>
+  </div>
   <div class="tabs">
     <div class="tabs-row">
       <button id="tabFilme" class="active">🎬 Filme</button>
       <button id="tabSerien">📺 Serien</button>
       <button id="tabKino">🍿 Kino</button>
     </div>
-  </div>
-  <div class="disc-toprow">
-    <button id="fDiscovery">🧭 Discovery: Neue Filme &amp; Serien entdecken</button>
   </div>
 </header>
 
@@ -754,20 +747,6 @@
         <button id="discFilme" class="active" style="display:none">Alle Filme</button>
         <button id="discSerien" class="active" style="display:none">Alle Serien</button>
       </div>
-      <!-- "Nur Streaming" sitzt dort, wo frueher der Details-Button war --
-           genau wie links steht hier je nach Discovery-Modus einer von zwei
-           Buttons (fInStream/discStream, siehe updateFilterRowUI), beide mit
-           derselben Funktion: die gerade sichtbare Liste auf aktuell
-           streamende Titel einschraenken. -->
-      <button id="fInStream"><svg class="funnel-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg> Nur Streaming</button>
-      <button id="discStream" style="display:none"><svg class="funnel-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg> Nur Streaming</button>
-    </div>
-    <div class="tb-toprow">
-      <div class="search-wrap">
-        <input type="text" id="search" placeholder="Titel, Genre oder Namen suchen …" autocomplete="off">
-        <button type="button" id="searchClear" class="search-x" aria-label="Suche löschen">×</button>
-        <div id="searchSuggest" class="search-suggest" style="display:none"></div>
-      </div>
       <div class="sort-wrap">
         <button id="fSort" type="button" title="Sortierung">⇅ Sortieren</button>
         <div id="sortMenu" class="sort-menu" style="display:none">
@@ -777,6 +756,15 @@
           <button type="button" data-sort="taste">nach Taste-Score</button>
         </div>
       </div>
+    </div>
+    <!-- "Nur Streaming" steht bewusst allein in einer eigenen Zeile darunter:
+         der Filter soll als naechstes neu gefasst werden. Je nach Discovery-
+         Modus ist einer der beiden Buttons sichtbar (siehe updateFilterRowUI),
+         beide mit derselben Funktion -- deshalb bekommen in .tb-streamrow
+         BEIDE flex:1 und nicht nur das erste Kind. -->
+    <div class="tb-toprow tb-streamrow">
+      <button id="fInStream"><svg class="funnel-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg> Nur Streaming</button>
+      <button id="discStream" style="display:none"><svg class="funnel-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg> Nur Streaming</button>
     </div>
   </div>
 </div>
@@ -2031,40 +2019,8 @@ function toggleDiscInStream(){
 discBtns.stream.onclick = () => toggleDiscInStream();
 let sortManual = { filme: null, serien: null, discovery: null };
 window.addEventListener('resize', function(){
-  syncDetailsSortWidth();
   syncDiscoveryWidth();
 });
-// "Nur Streaming" (obere Zeile -- entweder #fInStream oder #discStream, je
-// nach Discovery-Modus, siehe updateFilterRowUI) und Sortieren (untere Zeile)
-// sollen immer gleich breit sein -- da beide die "rechte Spalte" ihrer
-// jeweiligen .tb-toprow sind und die "linke Spalte" (Watchlist/Gesehen bzw.
-// Suchfeld) dort per flex:1 den jeweils verbleibenden Platz einnimmt, rutscht
-// dadurch automatisch auch die Filterzeile auf dieselbe Breite wie das
-// Suchfeld darunter.
-function activeStreamSlotBtn(){
-  var a = document.getElementById('fInStream');
-  var b = document.getElementById('discStream');
-  return (a && a.offsetParent !== null) ? a : b;
-}
-function syncDetailsSortWidth(){
-  var d = activeStreamSlotBtn();
-  var sw = document.querySelector('.sort-wrap');
-  if (!d || !sw) return;
-  // Auf der Kino-Seite ist .toolbar per display:none versteckt -- ein Resize
-  // (z.B. Handy drehen) WAEHREND man dort ist, wuerde sonst 0px messen (jedes
-  // Element in einem display:none-Elternteil hat eine leere BoundingClientRect)
-  // und diese kaputte Breite dauerhaft festschreiben; sichtbar wurde das dann
-  // erst nach der Rueckkehr zu Filme/Serien ("Nur Streaming"-Button viel zu
-  // schmal, Watchlist/Gesehen-Gruppe und Suche dafuer zu breit). offsetParent
-  // ist nur bei display:none null (nicht bei visibility:hidden o.ae.), reicht hier.
-  if (d.offsetParent === null) return;
-  d.style.width = ''; sw.style.width = '';
-  var w = Math.max(d.getBoundingClientRect().width, sw.getBoundingClientRect().width);
-  if (w < 40) return;
-  d.style.width = w + 'px';
-  sw.style.width = w + 'px';
-}
-syncDetailsSortWidth();
 // Discovery-Button soll links buendig mit "Filme" beginnen und rechts buendig
 // mit "Kino" enden -- da .tabs-row seine Kinder (die drei Tab-Buttons) ohne
 // zusaetzliches Padding eng umschliesst, entspricht dessen gerenderte Breite
@@ -2076,8 +2032,10 @@ function syncDiscoveryWidth(){
   var row = document.querySelector('.tabs .tabs-row');
   var btn = document.getElementById('fDiscovery');
   if (!row || !btn) return;
-  // Siehe Kommentar in syncDetailsSortWidth() -- .tabs ist auf der Kino-Seite
-  // ebenfalls versteckt, ein Resize dort darf die Breite nicht kaputt neu setzen.
+  // Sicherheitsnetz: In einem display:none-Elternteil hat jedes Element eine
+  // leere BoundingClientRect -- ein Resize in so einem Zustand wuerde 0px
+  // messen und diese kaputte Breite dauerhaft festschreiben. offsetParent ist
+  // nur bei display:none null (nicht bei visibility:hidden), reicht hier.
   if (row.offsetParent === null) return;
   btn.style.width = '';
   var w = row.getBoundingClientRect().width;
@@ -2125,7 +2083,6 @@ function updateFilterRowUI(){
   tabBtns.filme.classList.toggle('active', !cinemaMode && !disc && activeTab === 'filme');
   tabBtns.serien.classList.toggle('active', !cinemaMode && !disc && activeTab === 'serien');
   tabBtns.kino.classList.toggle('active', !!cinemaMode);
-  syncDetailsSortWidth();
 }
 function setTab(t) {
   // Filme/Serien und Kino liegen in derselben Knopfreihe: ein Klick auf Filme
@@ -2338,39 +2295,6 @@ if (_logoImg) {
   _logoImg.addEventListener('click', function () { goHome(); });
 }
 
-// "How to"-Kurzfassung unterm ersten Satz: per Default eingeklappt (Vorschau
-// von Punkt 1 + "Mehr"), klappt beim Klick die volle 1./2./3.-Anleitung auf.
-var _subHowToToggle = document.getElementById('subHowToToggle');
-var _subHowToPreview = document.getElementById('subHowToPreview');
-var _subHowToFull = document.getElementById('subHowToFull');
-var _subHowToMoreLabel = document.getElementById('subHowToMoreLabel');
-if (_subHowToToggle) {
-  _subHowToToggle.addEventListener('click', function () {
-    var expanded = _subHowToFull.style.display !== 'none';
-    _subHowToFull.style.display = expanded ? 'none' : 'block';
-    _subHowToPreview.style.display = expanded ? '' : 'none';
-    _subHowToMoreLabel.textContent = expanded ? 'Mehr' : 'Weniger';
-    _subHowToToggle.setAttribute('aria-expanded', String(!expanded));
-  });
-}
-// Vorschautext soll so lang wie moeglich (voller Satz, falls er passt) sein --
-// nur das letzte Wort, das nicht mehr vollstaendig reinpasst, wird durch "…"
-// ersetzt (statt mitten im Wort abzuschneiden wie bei CSS text-overflow:ellipsis,
-// z.B. "Dis..." von "Discovery"). Muss bei jeder Breitenaenderung neu berechnet
-// werden, da die verfuegbare Breite vom Viewport abhaengt.
-var HOWTO_PREVIEW_FULL_TEXT = _subHowToPreview ? _subHowToPreview.textContent : '';
-function updateHowToPreviewTruncation(){
-  if (!_subHowToPreview || !HOWTO_PREVIEW_FULL_TEXT) return;
-  var words = HOWTO_PREVIEW_FULL_TEXT.split(' ');
-  _subHowToPreview.textContent = HOWTO_PREVIEW_FULL_TEXT;
-  if (_subHowToPreview.scrollWidth <= _subHowToPreview.clientWidth) return;
-  for (var n = words.length - 1; n > 0; n--){
-    _subHowToPreview.textContent = words.slice(0, n).join(' ') + ' …';
-    if (_subHowToPreview.scrollWidth <= _subHowToPreview.clientWidth) break;
-  }
-}
-updateHowToPreviewTruncation();
-window.addEventListener('resize', updateHowToPreviewTruncation);
 
 // Footer: "angemeldet" verlinkt auf das Anmelden-Fenster.
 var _footerAuthLink = document.getElementById('footerAuthLink');
@@ -2841,7 +2765,7 @@ const CINEMA_EMPTY_TEXT = {
 // CINEMA_SECTION_STEP weitere ein (nicht alles auf einmal -- bei bis zu ~300
 // Titeln in "Bald im Kino" waere ein einzelner Klick sonst eine Wand aus
 // hunderten Zeilen); der Button bleibt stehen, bis wirklich alle sichtbar sind.
-const CINEMA_SECTION_PREVIEW = 6;
+const CINEMA_SECTION_PREVIEW = 3;
 const CINEMA_SECTION_STEP = 25;
 let cinemaSectionLimit = { now: CINEMA_SECTION_PREVIEW, soon: CINEMA_SECTION_PREVIEW, later: CINEMA_SECTION_PREVIEW };
 let cinemaSortKey = 'taste';
@@ -2942,10 +2866,10 @@ function openCinemaPage(){
   document.querySelector('.disc-toprow').style.display = 'none';
   document.querySelector('.toolbar').style.display = 'none';
   list.style.display = 'none';
-  // Nur der erste Satz ("Filme & Serien sortiert nach deinem Geschmack!")
-  // bleibt stehen -- die How-to-Kurzfassung darunter bezieht sich auf
-  // Discovery/Watchlist/Sortierung, die es auf der Kino-Seite alle nicht gibt.
-  document.querySelector('.sub-howto').style.display = 'none';
+  // Die Suche sitzt seit dem Umbau im Header und wird deshalb nicht mehr
+  // zusammen mit .toolbar versteckt -- sie durchsucht Filme/Serien, nicht die
+  // Kinostarts, und muss hier eigens ausgeblendet werden.
+  document.querySelector('.head-search').style.display = 'none';
   document.getElementById('cinemaPage').style.display = '';
   window.scrollTo(0, 0);
   Object.keys(cinemaListEls).forEach(function(key){
@@ -2966,13 +2890,12 @@ function closeCinemaPage(){
   // Hervorhebung wandert zurueck auf Filme bzw. Serien.
   updateFilterRowUI();
   document.querySelector('.disc-toprow').style.display = '';
-  document.querySelector('.sub-howto').style.display = '';
+  document.querySelector('.head-search').style.display = '';
   document.querySelector('.toolbar').style.display = '';
   list.style.display = '';
   // Erzwingt einen frischen, korrekten Sync JETZT (wo alles wieder sichtbar
   // ist) -- repariert auch eine evtl. bereits kaputt geschriebene Breite von
-  // einem Resize waehrend des Kino-Besuchs (siehe syncDetailsSortWidth).
-  syncDetailsSortWidth();
+  // einem Resize waehrend des Kino-Besuchs (siehe syncDiscoveryWidth).
   syncDiscoveryWidth();
 }
 // Zurueck zu "Filme & Serien" per Logo-Klick (siehe unten). Aus der Kino-Seite
