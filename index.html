@@ -1124,11 +1124,14 @@
   <div class="modal">
     <button class="modal-x" id="deleteAccountX" aria-label="Schließen">✕</button>
     <h3>Konto löschen</h3>
-    <p class="delete-warn">Das lässt sich <b>nicht rückgängig machen</b>. Gelöscht werden dein Konto,
-      deine Watchlist, alle „Gesehen"-Markierungen samt Bewertungen, ausgeblendete Titel,
-      deine Verknüpfungen mit anderen Personen und deine gespeicherten Suchbegriffe.</p>
-    <p class="delete-warn">Verknüpfte Personen sehen dich danach nicht mehr. Ihre eigenen Listen
-      bleiben unberührt.</p>
+    <p class="delete-warn">Dein Konto wird <b>in 14 Tagen</b> endgültig gelöscht. Bis dahin kannst
+      du das rückgängig machen – melde dich einfach wieder an. Danach ist es endgültig.</p>
+    <p class="delete-warn">Gelöscht werden dann dein Konto, deine Watchlist, alle
+      „Gesehen"-Markierungen, ausgeblendete Titel und deine Verknüpfungen mit anderen Personen.
+      Verknüpfte Personen sehen dich danach nicht mehr; ihre eigenen Listen bleiben unberührt.</p>
+    <p class="delete-warn"><b>Ohne Bezug zu dir erhalten</b> bleiben deine Suchbegriffe und die
+      Anzahl deiner Sterne-Bewertungen – beides fließt anonym in die Verbesserung der App ein und
+      lässt sich dir danach nicht mehr zuordnen.</p>
     <form id="deleteAccountForm" class="auth-form">
       <label>Zur Sicherheit dein Passwort<input type="password" id="pwForDelete" required autocomplete="current-password"></label>
       <div id="deleteError" class="auth-error"></div>
@@ -3853,8 +3856,9 @@ document.getElementById('deleteAccountForm').addEventListener('submit', async fu
   if (!sicher) return;
   var knopf = this.querySelector('button[type=submit]');
   knopf.disabled = true;
+  var antwort;
   try {
-    await apiRequest('DELETE', '/api/auth/account', { currentPassword: document.getElementById('pwForDelete').value });
+    antwort = await apiRequest('DELETE', '/api/auth/account', { currentPassword: document.getElementById('pwForDelete').value });
   } catch (err) {
     knopf.disabled = false;
     fehler.textContent = err.code === 'wrong_current_password'
@@ -3869,8 +3873,31 @@ document.getElementById('deleteAccountForm').addEventListener('submit', async fu
   renderAuthBar();
   updateProfileBtn();
   await loadUserProgressAndRefresh();
-  alert('Dein Konto wurde gelöscht. Alle zugehörigen Daten sind entfernt.');
+  var faellig = antwort && antwort.deletionDueAt ? new Date(antwort.deletionDueAt) : null;
+  alert('Dein Konto wird am ' + (faellig ? faellig.toLocaleDateString('de-DE') : 'in 14 Tagen') +
+        ' endgültig gelöscht.\n\nDu wurdest jetzt abgemeldet. Bis dahin kannst du die Löschung ' +
+        'rückgängig machen, indem du dich wieder anmeldest.');
 });
+
+/* ---- Beantragte Loeschung: Hinweis samt Widerruf ----
+   Wird nach dem Anmelden und beim Start geprueft. Ohne diesen Hinweis waere die
+   laufende Frist unsichtbar -- man wuerde die App normal weiterbenutzen und
+   sich wundern, wenn das Konto irgendwann weg ist. */
+async function pruefeLoeschAntrag(){
+  if (!CURRENT_USER || !CURRENT_USER.deletionRequestedAt) return;
+  var tage = CURRENT_USER.deletionDays || 14;
+  var faellig = new Date(new Date(CURRENT_USER.deletionRequestedAt).getTime() + tage * 86400000);
+  var ja = await confirmRemove('Für dein Konto liegt ein Löschauftrag vor. Es wird am ' +
+    faellig.toLocaleDateString('de-DE') + ' endgültig gelöscht.\n\nMöchtest du die Löschung zurücknehmen?');
+  if (!ja) return;
+  try {
+    CURRENT_USER = await apiRequest('POST', '/api/auth/account/restore');
+    renderAuthBar();
+    alert('Die Löschung wurde zurückgenommen. Dein Konto bleibt bestehen.');
+  } catch (e) {
+    alert('Das hat nicht geklappt. Bitte erneut versuchen.');
+  }
+}
 
 document.getElementById('passwordForm').addEventListener('submit', async function(e){
   e.preventDefault();
@@ -4082,6 +4109,7 @@ authForm.addEventListener('submit', async (e) => {
       // Bestandskonten haben noch keinen Anzeigenamen -- direkt nach dem Login
       // einmalig nachfragen, sonst stehen sie bei anderen namenlos in der Liste.
       maybeAskDisplayName();
+      pruefeLoeschAntrag();
     }
   } catch (err) {
     authError.textContent = err.code === 'invalid_credentials' ? 'E-Mail oder Passwort falsch.'
@@ -4255,7 +4283,7 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
   var geteilt = geteilterTitelAusPfad();
   if (einladung) handleInviteToken(einladung);
   else if (geteilt) zeigeGeteiltenTitel(geteilt);
-  else maybeAskDisplayName();
+  else { maybeAskDisplayName(); pruefeLoeschAntrag(); }
 });
 
 /* ================= DISCOVERY (vereinheitlicht mit dem Titel-Pool) ================= */

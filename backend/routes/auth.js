@@ -4,6 +4,7 @@ import { pool } from '../db/pool.js';
 import { sendPasswordResetMail } from '../lib/mailer.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { requireAuth } from '../middleware/requireAuth.js';
+import { WIDERRUFSFRIST_TAGE } from '../lib/kontoAufraeumen.js';
 
 const router = createAsyncRouter();
 
@@ -12,7 +13,15 @@ const BCRYPT_ROUNDS = 12;
 const RESET_TOKEN_TTL_MS = 60 * 60 * 1000; // 1 Stunde
 
 function publicUser(row) {
-  return { id: row.id, email: row.email, displayName: row.display_name || null };
+  return {
+    id: row.id,
+    email: row.email,
+    displayName: row.display_name || null,
+    // Gesetzt, solange eine beantragte Loeschung noch widerrufbar ist. Das
+    // Frontend zeigt daraufhin den Hinweis samt Widerrufs-Knopf.
+    deletionRequestedAt: row.deletion_requested_at ? row.deletion_requested_at.toISOString() : null,
+    deletionDays: WIDERRUFSFRIST_TAGE,
+  };
 }
 
 router.post('/register', async (req, res) => {
@@ -35,7 +44,7 @@ router.post('/register', async (req, res) => {
   try {
     const { rows } = await pool.query(
       `INSERT INTO users (email, password_hash, display_name) VALUES ($1, $2, $3)
-       RETURNING id, email, display_name`,
+       RETURNING id, email, display_name, deletion_requested_at`,
       [normalizedEmail, passwordHash, name]
     );
     req.session.userId = rows[0].id;
@@ -55,7 +64,7 @@ router.post('/login', async (req, res) => {
   }
 
   const { rows } = await pool.query(
-    `SELECT id, email, display_name, password_hash FROM users WHERE email = $1`,
+    `SELECT id, email, display_name, password_hash, deletion_requested_at FROM users WHERE email = $1`,
     [email.trim().toLowerCase()]
   );
   const user = rows[0];
@@ -84,7 +93,7 @@ router.get('/me', async (req, res) => {
   if (!req.session?.userId) {
     return res.status(401).json({ error: 'not_authenticated' });
   }
-  const { rows } = await pool.query(`SELECT id, email, display_name FROM users WHERE id = $1`, [req.session.userId]);
+  const { rows } = await pool.query(`SELECT id, email, display_name, deletion_requested_at FROM users WHERE id = $1`, [req.session.userId]);
   if (!rows[0]) {
     return res.status(401).json({ error: 'not_authenticated' });
   }
@@ -99,7 +108,7 @@ router.put('/display-name', async (req, res) => {
   const name = typeof displayName === 'string' ? displayName.trim() : '';
   if (!name || name.length > 40) return res.status(400).json({ error: 'invalid_display_name' });
   const { rows } = await pool.query(
-    'UPDATE users SET display_name = $1 WHERE id = $2 RETURNING id, email, display_name',
+    'UPDATE users SET display_name = $1 WHERE id = $2 RETURNING id, email, display_name, deletion_requested_at',
     [name, req.session.userId]
   );
   res.json(publicUser(rows[0]));
@@ -201,7 +210,7 @@ router.put('/email', requireAuth, async (req, res) => {
   const normalizedEmail = newEmail.trim().toLowerCase();
   try {
     const { rows: updated } = await pool.query(
-      `UPDATE users SET email = $1 WHERE id = $2 RETURNING id, email, display_name`,
+      `UPDATE users SET email = $1 WHERE id = $2 RETURNING id, email, display_name, deletion_requested_at`,
       [normalizedEmail, req.session.userId]
     );
     res.json(publicUser(updated[0]));
@@ -213,25 +222,22 @@ router.put('/email', requireAuth, async (req, res) => {
   }
 });
 
-// Konto endgueltig loeschen. Verlangt wie Passwort-/E-Mail-Aenderung das
-// aktuelle Passwort erneut -- ein fremdes Geraet mit offener Sitzung soll das
-// Konto nicht ausloeschen koennen.
+// Loeschung des Kontos BEANTRAGEN. Verlangt wie Passwort- und E-Mail-Aenderung
+// das aktuelle Passwort erneut -- ein fremdes Geraet mit offener Sitzung soll
+// das Konto nicht ausloeschen koennen.
 //
-// Die meisten Daten haengen per ON DELETE CASCADE am Nutzer (Fortschritt,
-// ausgeblendete Titel, Verknuepfungen, Einladungen, Reset-Token). ZWEI Dinge
-// haengen NICHT daran und werden deshalb ausdruecklich mitgeloescht:
-//   - search_queries: speichert Suchbegriffe zusammen mit der E-Mail-Adresse,
-//     ohne Fremdschluessel. Ohne diese Zeile bliebe eine personenbezogene
-//     Angabe nach der Loeschung zurueck.
-//   - session: die Sitzungstabelle von connect-pg-simple kennt keinen
-//     Fremdschluessel. Mitloeschen meldet zugleich alle anderen Geraete ab.
+// Bewusst keine sofortige Loeschung: Es bleiben WIDERRUFSFRIST_TAGE Tage, in
+// denen sich der Antrag durch erneutes Anmelden zurueckziehen laesst. Die Daten
+// bleiben so lange unveraendert; erst der Aufraeumlauf entfernt sie endgueltig
+// (siehe lib/kontoAufraeumen.js). Alle Sitzungen werden sofort beendet, damit
+// niemand mit einem offenen Fenster weiterarbeitet, ohne den Antrag zu kennen.
 router.delete('/account', requireAuth, async (req, res) => {
   const { currentPassword } = req.body || {};
   if (typeof currentPassword !== 'string') {
     return res.status(400).json({ error: 'invalid_request' });
   }
 
-  const { rows } = await pool.query(`SELECT email, password_hash FROM users WHERE id = $1`, [req.session.userId]);
+  const { rows } = await pool.query(`SELECT password_hash FROM users WHERE id = $1`, [req.session.userId]);
   const user = rows[0];
   const ok = user && (await bcrypt.compare(currentPassword, user.password_hash));
   if (!ok) {
@@ -239,25 +245,32 @@ router.delete('/account', requireAuth, async (req, res) => {
   }
 
   const userId = req.session.userId;
-  const client = await pool.connect();
-  try {
-    await client.query('BEGIN');
-    await client.query(`DELETE FROM search_queries WHERE user_email = $1`, [user.email]);
-    // sess ist JSON; die userId liegt dort als Zeichenkette (bigint aus pg).
-    await client.query(`DELETE FROM session WHERE sess->>'userId' = $1`, [String(userId)]);
-    await client.query(`DELETE FROM users WHERE id = $1`, [userId]);
-    await client.query('COMMIT');
-  } catch (err) {
-    await client.query('ROLLBACK');
-    throw err;
-  } finally {
-    client.release();
-  }
+  const { rows: [beantragt] } = await pool.query(
+    `UPDATE users SET deletion_requested_at = now() WHERE id = $1 RETURNING deletion_requested_at`,
+    [userId]
+  );
+  await pool.query(`DELETE FROM session WHERE sess->>'userId' = $1`, [String(userId)]);
 
+  const faellig = new Date(beantragt.deletion_requested_at.getTime() + WIDERRUFSFRIST_TAGE * 86400000);
   req.session.destroy(() => {
     res.clearCookie('fs.sid');
-    res.status(204).end();
+    res.json({ deletionRequestedAt: beantragt.deletion_requested_at.toISOString(),
+               deletionDueAt: faellig.toISOString(),
+               deletionDays: WIDERRUFSFRIST_TAGE });
   });
+});
+
+// Beantragte Loeschung zuruecknehmen. Kein Passwort noetig -- wer angemeldet
+// ist, hat es gerade eingegeben, und eine zusaetzliche Huerde beim Widerruf
+// waere die falsche Richtung.
+router.post('/account/restore', requireAuth, async (req, res) => {
+  const { rows } = await pool.query(
+    `UPDATE users SET deletion_requested_at = NULL WHERE id = $1
+     RETURNING id, email, display_name, deletion_requested_at`,
+    [req.session.userId]
+  );
+  if (!rows[0]) return res.status(404).json({ error: 'not_found' });
+  res.json(publicUser(rows[0]));
 });
 
 export default router;

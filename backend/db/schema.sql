@@ -355,6 +355,26 @@ ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS certification TEXT;
 ALTER TABLE titles          ADD COLUMN IF NOT EXISTS backdrop_path TEXT;
 ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS backdrop_path TEXT;
 
+-- Zeitpunkt, zu dem die Loeschung des Kontos beantragt wurde. NULL = kein
+-- Antrag. Das Konto bleibt danach 14 Tage vollstaendig erhalten und laesst sich
+-- durch erneutes Anmelden widerrufen; erst danach raeumt der Aufraeumlauf im
+-- Backend endgueltig ab (siehe backend/lib/kontoAufraeumen.js).
+ALTER TABLE users ADD COLUMN IF NOT EXISTS deletion_requested_at TIMESTAMPTZ;
+
+-- Anonyme Bewertungs-Summe je Titel. Wird beim Loeschen eines Kontos gefuellt:
+-- Die Sterne-Bewertungen dieser Person werden hier aufaddiert, bevor ihre
+-- user_progress-Zeilen verschwinden. Bewusst NUR Anzahl und Summe je Titel --
+-- keine Zeitstempel, keine Kennung, kein Bezug zwischen den Zeilen. Damit
+-- laesst sich nichts einer Person zuordnen, auch nicht durch Gruppieren.
+--
+-- Auswertung: Der Gesamtschnitt eines Titels ergibt sich aus dieser Tabelle
+-- PLUS den Bewertungen der noch bestehenden Konten in user_progress.
+CREATE TABLE IF NOT EXISTS title_rating_stats (
+  title_id     BIGINT PRIMARY KEY REFERENCES titles(id) ON DELETE CASCADE,
+  anzahl       INTEGER NOT NULL DEFAULT 0,
+  summe_sterne INTEGER NOT NULL DEFAULT 0
+);
+
 -- Von connect-pg-simple genutzte Session-Tabelle (Standard-Schema des Pakets).
 CREATE TABLE IF NOT EXISTS session (
   sid    VARCHAR NOT NULL COLLATE "default" PRIMARY KEY,

@@ -19,6 +19,7 @@ import watchProvidersRouter from './routes/watchProviders.js';
 import trailersRouter from './routes/trailers.js';
 import linksRouter from './routes/links.js';
 import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
+import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PgSession = connectPgSimple(session);
@@ -176,4 +177,7 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Backend läuft auf Port ${port} (${process.env.NODE_ENV || 'development'})`);
+  // Loescht Konten, deren Widerrufsfrist abgelaufen ist -- beim Start und
+  // danach einmal taeglich (siehe lib/kontoAufraeumen.js).
+  starteAufraeumen();
 });
