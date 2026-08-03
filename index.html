@@ -465,6 +465,15 @@
   .tabs { flex-direction: column; align-items: stretch; max-width: 430px; margin: 22px auto 0; gap: 10px; }
   .tabs .tabs-row { display: flex; gap: 10px; }
   .tabs .tabs-row button { flex: 1; padding: 11px 10px; }
+  /* Seit "Kino" als dritter Tab dazugekommen ist, teilen sich drei statt zwei
+     Knoepfe dieselbe Breite. Auf sehr schmalen Geraeten (iPhone SE, 320px)
+     bricht sonst "Serien" auf zwei Zeilen um und die ganze Reihe wird hoch.
+     Steht direkt hinter der Grundregel, damit die gleiche Spezifitaet hier
+     gewinnt -- nachgemessen per getComputedStyle, nicht nur angenommen. */
+  @media (max-width: 360px) {
+    .tabs .tabs-row { gap: 6px; }
+    .tabs .tabs-row button { padding: 11px 4px; font-size: 14px; }
+  }
   /* Ausserhalb von .toolbar (das Popup ist ein eigenstaendiges Modal) --
      dieselbe Optik wie die Discovery-Filterknoepfe (.tb-discfilters) manuell
      nachgebildet, da .toolbar button hier nicht greift. */
@@ -706,9 +715,10 @@
   <div id="navMenu" class="nav-menu">
     <button type="button" id="howToBtn" class="nav-menu-item">Anleitung</button>
     <hr class="nav-menu-sep">
-    <button type="button" id="navHomeBtn" class="nav-menu-item">Filme &amp; Serien</button>
-    <button type="button" id="cinemaBtn" class="nav-menu-item">Im Kino</button>
-    <hr class="nav-menu-sep">
+    <!-- "Filme & Serien" und "Im Kino" standen hier, bis Kino ein eigener Tab
+         neben Filme/Serien wurde. Beides ist jetzt direkt auf der Startseite
+         erreichbar, ein Menuepunkt dafuer waere nur ein zweiter Weg zum
+         selben Ziel. Zurueck geht ausserdem weiterhin per Klick aufs Logo. -->
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
     <hr class="nav-menu-sep">
@@ -724,6 +734,7 @@
     <div class="tabs-row">
       <button id="tabFilme" class="active">🎬 Filme</button>
       <button id="tabSerien">📺 Serien</button>
+      <button id="tabKino">🍿 Kino</button>
     </div>
   </div>
   <div class="disc-toprow">
@@ -1661,6 +1672,22 @@ function esc(str) {
 // Wort-Array-Vergleich, damit auch mehrteilige Namen wie "Will Smith" als
 // Ganzes matchen (ein reiner Einzelwort-Vergleich wuerde "Will Smith" nie
 // gegen die einzelnen Tokens "Will"/"Smith" treffen).
+// Schlagwoerter stehen als zusammengeschriebene Hashtags in der Datenbank
+// ("TrueCrime", "ZweiterWeltkrieg"). Gesucht wird aber getrennt ("true crime").
+// Deshalb landet zusaetzlich zur Originalform die aufgetrennte Variante im
+// Suchtext -- wordExactMatch sucht ganze Woerter, ohne diese Zeile bliebe die
+// Eingabe mit Leerzeichen ohne Treffer.
+function kwGetrennt(k){ return String(k).replace(/([a-zäöüß0-9])([A-ZÄÖÜ])/g, '$1 $2'); }
+function kwSuchtexte(kws){
+  var raus = [];
+  (kws || []).forEach(function(k){
+    if (!k) return;
+    raus.push(k);
+    var g = kwGetrennt(k);
+    if (g !== k) raus.push(g);
+  });
+  return raus;
+}
 function wordExactMatch(blob, q){
   if (!blob || !q) return false;
   var lower = blob.toLowerCase();
@@ -1764,7 +1791,7 @@ function render() {
     // -- verhindert z.B. dass "Heat" faelschlich auf "Heath" in "Heath Ledger"
     // oder auf "Theat" in einem Hashtag wie "TheaterVerfilmung" anschlaegt.
     li.dataset.mainBlob = [item[0], item[1], (d.providers||[]).map(function(p){ return p.name; }).join(' ')].filter(Boolean).join(' ');
-    li.dataset.exactBlob = [].concat(d.c||[], d.d ? [d.d] : [], d.h||[]).join(' ');
+    li.dataset.exactBlob = [].concat(d.c||[], d.d ? [d.d] : [], kwSuchtexte(d.h)).join(' ');
     const dirLabel = 'Regie';
     const tagsHtml = ((d.h && d.h.length) ? d.h : [metaGenre(item[1])].filter(Boolean)).map(tagChip).join('');
     const posterThumb = d.poster ? '<img class="dposter" src="' + d.poster + '" alt="" loading="lazy">' : '<div class="dposter"></div>';
@@ -1964,9 +1991,14 @@ function wireRow(li, src, i){
     li.classList.toggle('show-details');
   });
 }
-const tabBtns = { filme: document.getElementById('tabFilme'), serien: document.getElementById('tabSerien') };
+const tabBtns = { filme: document.getElementById('tabFilme'), serien: document.getElementById('tabSerien'), kino: document.getElementById('tabKino') };
 tabBtns.filme.onclick = () => setTab('filme');
 tabBtns.serien.onclick = () => setTab('serien');
+// Kino ist kein Tab im Sinne von activeTab (es hat weder Watchlist noch
+// Sortierung ueber denselben Zustand), sondern eine eigene Vollseite -- der
+// Knopf steht nur deshalb in derselben Reihe, weil er fuer den Nutzer dieselbe
+// Rolle spielt: einer von drei Bereichen, zwischen denen man direkt wechselt.
+tabBtns.kino.onclick = () => { if (!cinemaMode) openCinemaPage(); };
 const discBtns = { f: document.getElementById('discFilme'), s: document.getElementById('discSerien'), stream: document.getElementById('discStream') };
 // Discovery zeigt anfangs 250 Titel, "Mehr laden" haengt jeweils 50 weitere an;
 // ein Wechsel von Filter oder Sortierung gilt als neue Liste und faengt wieder
@@ -2034,9 +2066,9 @@ function syncDetailsSortWidth(){
 }
 syncDetailsSortWidth();
 // Discovery-Button soll links buendig mit "Filme" beginnen und rechts buendig
-// mit "Serien" enden -- da .tabs-row seine Kinder (die beiden Tab-Buttons) ohne
+// mit "Kino" enden -- da .tabs-row seine Kinder (die drei Tab-Buttons) ohne
 // zusaetzliches Padding eng umschliesst, entspricht dessen gerenderte Breite
-// exakt "Filme"-Breite + Abstand + "Serien"-Breite. Diese Breite wird 1:1 auf
+// exakt der Summe der Tab-Breiten samt Abstaenden. Diese Breite wird 1:1 auf
 // den (ebenfalls zentrierten) Discovery-Button uebertragen, wodurch beide
 // Elemente exakt auf gleicher Breite ausgerichtet sind -- ueber alle
 // Breakpoints hinweg, da hier die tatsaechlich gerenderte Breite gemessen wird.
@@ -2088,11 +2120,19 @@ function updateFilterRowUI(){
   // Filme/Serien duerfen waehrend des Discovery-Modus NICHT ebenfalls als aktiv
   // erscheinen -- von den dreien (Filme/Serien/Discovery) darf immer nur genau
   // einer als ausgewaehlt markiert sein.
-  tabBtns.filme.classList.toggle('active', !disc && activeTab === 'filme');
-  tabBtns.serien.classList.toggle('active', !disc && activeTab === 'serien');
+  // Auf der Kino-Seite darf keiner der beiden aktiv wirken -- dort ist "Im Kino"
+  // der ausgewaehlte Bereich (siehe openCinemaPage/closeCinemaPage).
+  tabBtns.filme.classList.toggle('active', !cinemaMode && !disc && activeTab === 'filme');
+  tabBtns.serien.classList.toggle('active', !cinemaMode && !disc && activeTab === 'serien');
+  tabBtns.kino.classList.toggle('active', !!cinemaMode);
   syncDetailsSortWidth();
 }
 function setTab(t) {
+  // Filme/Serien und Kino liegen in derselben Knopfreihe: ein Klick auf Filme
+  // oder Serien verlaesst die Kino-Vollseite. Ohne das blieben Kino-Liste und
+  // Titelliste gleichzeitig sichtbar. Wirkungslos, wenn man gar nicht im Kino
+  // ist (closeCinemaPage kehrt dann sofort zurueck).
+  closeCinemaPage();
   activeTab = t;
   document.querySelector('.toolbar').style.display = '';
   searchEl.style.display = '';
@@ -2357,6 +2397,12 @@ var SEARCH_SYNONYMS = {
   'nachrichten': 'News',
   'krieg': 'War & Politics',
   'kriegsserie': 'War & Politics',
+  // True Crime ist bei uns kein Genre, sondern ein Schlagwort (siehe
+  // backend/scripts/backfill-true-crime.mjs) -- TMDB kennt dafuer kein Genre.
+  // Die Synonyme fangen die ueblichen Schreibweisen ab.
+  'true crime': 'True Crime',
+  'truecrime': 'True Crime',
+  'wahre verbrechen': 'True Crime',
 };
 function levenshteinDistance(a, b){
   if (a === b) return 0;
@@ -2418,6 +2464,19 @@ function buildSearchIndex(){
     (item.g || []).forEach(function(g){ add(g, 'Genre'); });
     (item.c || []).forEach(function(c){ add(c, 'Darsteller'); });
     add(item.d, 'Regie');
+  });
+  // Schlagwoerter erst im zweiten Durchgang: Viele davon heissen genauso wie ein
+  // Genre ("Drama", "Krimi", "Anime"). Ohne diese Pruefung stuende derselbe
+  // Begriff zweimal in der Vorschlagsliste, einmal als Genre und einmal als
+  // Schlagwort. Angezeigt wird die aufgetrennte Form ("True Crime"), die dank
+  // kwSuchtexte() auch als Suchbegriff trifft.
+  POOL.forEach(function(item){
+    (item.kw || []).forEach(function(k){
+      if (!k) return;
+      var text = kwGetrennt(k);
+      if (seen.has('Genre|' + text.toLowerCase())) return;
+      add(text, 'Schlagwort');
+    });
   });
   SEARCH_INDEX = idx;
 }
@@ -2747,7 +2806,8 @@ try {
   }
 } catch (e) {}
 
-/* ---- "Im Kino": eigene Vollseite (kein Popup), nur ueber das Menue erreichbar --
+/* ---- "Im Kino": eigene Vollseite (kein Popup), erreichbar ueber den dritten
+   Knopf in der Tab-Reihe neben Filme/Serien --
    zeigt aktuelle/kommende Kinostarts (oeffentliche /api/cinema-Route, siehe
    backend/routes/cinema.js) mit denselben Zeilen (poolItemLi) wie Filme/Serien/
    Discovery/Streaming, damit Optik und Watchlist-/Gesehen-Funktion identisch sind. ---- */
@@ -2865,7 +2925,10 @@ function openCinemaPage(){
   // Bei jedem frischen Aufruf wieder eingeklappt starten (nicht den Zustand
   // eines vorherigen Besuchs behalten).
   cinemaSectionLimit = { now: CINEMA_SECTION_PREVIEW, soon: CINEMA_SECTION_PREVIEW, later: CINEMA_SECTION_PREVIEW };
-  document.querySelector('.tabs').style.display = 'none';
+  // Die Tab-Reihe bleibt bewusst stehen: "Im Kino" sitzt jetzt darin und ist
+  // zugleich der Weg zurueck zu Filme/Serien. Frueher wurde sie hier versteckt,
+  // weil Kino nur ueber das Menue erreichbar war.
+  updateFilterRowUI();
   // Discovery-Button ergibt auf der Kino-Seite keinen Sinn -- Discovery
   // durchsucht den normalen Filme/Serien-Katalog, nicht die Kinostarts. Der
   // Filme/Serien/Streaming-Unterfilter steckt in .filter-group und wird damit
@@ -2893,7 +2956,9 @@ function closeCinemaPage(){
   if (!cinemaMode) return;
   cinemaMode = false;
   document.getElementById('cinemaPage').style.display = 'none';
-  document.querySelector('.tabs').style.display = '';
+  // .tabs wird nicht mehr ein-/ausgeblendet (siehe openCinemaPage), nur die
+  // Hervorhebung wandert zurueck auf Filme bzw. Serien.
+  updateFilterRowUI();
   document.querySelector('.disc-toprow').style.display = '';
   document.querySelector('.sub-howto').style.display = '';
   document.querySelector('.toolbar').style.display = '';
@@ -2904,18 +2969,16 @@ function closeCinemaPage(){
   syncDetailsSortWidth();
   syncDiscoveryWidth();
 }
-// Zurueck zu "Filme & Serien": per Logo-Klick (siehe unten) UND per gleichnamigem
-// Menuepunkt ganz oben im Nav-Menue -- einziger Weg zurueck aus der Kino-Seite,
-// da diese (anders als Discovery) kein eigener Tab, sondern nur ueber das Menue
-// erreichbar ist.
+// Zurueck zu "Filme & Serien" per Logo-Klick (siehe unten). Aus der Kino-Seite
+// kommt man ausserdem ueber die Tabs "Filme"/"Serien" zurueck; die frueheren
+// Menuepunkte "Filme & Serien" und "Im Kino" sind deshalb entfallen. goHome
+// setzt zusaetzlich die Suche zurueck -- das macht ein Tab-Klick nicht.
 function goHome(){
   closeCinemaPage();
   searchEl.value = '';
   searchEl.dispatchEvent(new Event('input'));
   setTab('filme');
 }
-document.getElementById('navHomeBtn').onclick = () => { closeNavMenu(); goHome(); };
-document.getElementById('cinemaBtn').onclick = () => { closeNavMenu(); openCinemaPage(); };
 
 // Sortier-Menue auf der Kino-Seite -- dieselben drei Kriterien wie unter Filme/
 // Serien (TMDB-Bewertung/Taste-Score/Veroeffentlichungsdatum), nur "neu im
@@ -3094,6 +3157,16 @@ function profilName(id){
   var p = LINKED_PROFILES.find(function(x){ return x.id === id; });
   return p ? p.name : 'Unbekannt';
 }
+// Namen fuer die Leiste ueber der Liste zusammenfassen. Ab vier Personen wird
+// gekuerzt, sonst waechst die Leiste auf dem Handy auf mehrere Zeilen an.
+// Bei genau drei Namen bleiben alle stehen -- "und 1 weiteren" waere laenger
+// als der Name selbst. Der Text steht immer hinter "mit", daher der Dativ.
+function namenListe(ids){
+  var namen = ids.map(profilName);
+  if (namen.length <= 1) return namen[0] || '';
+  if (namen.length <= 3) return namen.slice(0, -1).join(', ') + ' und ' + namen[namen.length - 1];
+  return namen.slice(0, 2).join(', ') + ' und ' + (namen.length - 2) + ' weiteren';
+}
 // Zustand eines Titels bei einer bestimmten Person -- null, wenn er dort gar
 // nicht auf der Liste steht.
 function fremdZustand(userId, titleId){
@@ -3176,7 +3249,12 @@ async function loadLinkedProfiles(){
       apiRequest('GET', '/api/links'),
       apiRequest('GET', '/api/links/progress'),
     ]);
-    LINKED_PROFILES = profile || [];
+    // users.id ist bigint -- der Postgres-Treiber liefert das als String ("9"),
+    // waehrend MATCH_WITH und die Schluessel von LINKED_PROGRESS Zahlen sind.
+    // Ohne diese Umwandlung scheitert jeder strenge Vergleich: der Haken im
+    // Popup bliebe leer, profilName() lieferte "Unbekannt" und eine geloeste
+    // Verknuepfung verschwaende erst nach einem Neuladen aus der Liste.
+    LINKED_PROFILES = (profile || []).map(function(p){ return { id: Number(p.id), name: p.name }; });
     Object.keys(fortschritt || {}).forEach(function(uid){
       var m = new Map();
       (fortschritt[uid] || []).forEach(function(e){ m.set(e.t, { s: e.s, w: e.w, r: e.r }); });
@@ -3207,7 +3285,7 @@ function updateProfileBtn(){
   bar.style.display = zeigen ? 'flex' : 'none';
   if (zeigen) {
     var text = [];
-    if (zeigtMatch) text.push('Gemeinsame Titel mit ' + MATCH_WITH.map(profilName).join(' und '));
+    if (zeigtMatch) text.push('Gemeinsame Titel mit ' + namenListe(MATCH_WITH));
     if (fskAktiv()) text.push('Altersfreigabe ' + (FSK_STUFEN.find(function(x){ return x.key === MY_FSK; })||{}).label);
     document.getElementById('matchBarText').textContent = text.join(' · ');
   }
@@ -3967,7 +4045,7 @@ function poolItemLi(item, score, opts){
   // -- verhindert z.B. dass "Heat" faelschlich auf "Heath" in "Heath Ledger"
   // oder auf "Theat" in einem Hashtag wie "TheaterVerfilmung" anschlaegt.
   li.dataset.mainBlob = [item.t, item.ot, item.y, (item.g||[]).join(' ')].filter(Boolean).join(' ');
-  li.dataset.exactBlob = [].concat(item.c||[], item.d ? [item.d] : [], item.kw||[]).join(' ');
+  li.dataset.exactBlob = [].concat(item.c||[], item.d ? [item.d] : [], kwSuchtexte(item.kw)).join(' ');
   var poster = item.poster64 ? '<img class="dposter" loading="lazy" src="'+item.poster64+'" alt="">'
              : item.p ? '<img class="dposter" loading="lazy" src="'+POSTER+item.p+'" alt="">'
              : '<div class="dposter"></div>';
@@ -4125,7 +4203,7 @@ function poolItemMatchesQuery(item, q){
              (item.providers||[]).map(function(p){ return p.name; }).join(' ')]
     .filter(Boolean).join(' ').toLowerCase();
   if (hay.includes(q)) return true;
-  var exactBlob = [].concat(item.c||[], item.d ? [item.d] : [], item.kw||[]).join(' ');
+  var exactBlob = [].concat(item.c||[], item.d ? [item.d] : [], kwSuchtexte(item.kw)).join(' ');
   return wordExactMatch(exactBlob, q);
 }
 // Discovery: einheitliche Ansicht ueber Katalog + Discovery-Pool + aktuelles
