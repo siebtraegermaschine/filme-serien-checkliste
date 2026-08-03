@@ -16,8 +16,34 @@ Zahlen zum Stand: 26.825 Titel, 22.357 Streaming-Einträge, 546 Kinostarts,
 
 **Erledigt:** „Konto löschen" ist eingebaut (Einstellungen → Konto löschen).
 Apple verlangt das zwingend für jede App mit Registrierung (Richtlinie
-5.1.1(v)) — ohne diese Funktion wird abgelehnt. Ende-zu-Ende mit einem
-Wegwerf-Konto getestet, es bleiben keine verwaisten Daten zurück.
+5.1.1(v)) — ohne diese Funktion wird abgelehnt.
+
+Der Ablauf im Einzelnen, weil daran mehrere Zusagen hängen:
+
+- Die Löschung wird **beantragt**, nicht sofort ausgeführt. `users.
+  deletion_requested_at` wird gesetzt, alle Sitzungen werden beendet, das Konto
+  bleibt **14 Tage** unverändert bestehen.
+- Meldet man sich in dieser Zeit wieder an, erscheint der Hinweis mit
+  Fälligkeitsdatum und ein Widerruf per Klick (`POST /api/auth/account/restore`).
+- Der Aufräumlauf liegt im Backend (`backend/lib/kontoAufraeumen.js`), läuft
+  beim Start und danach einmal täglich. Bewusst **kein** eigener GitHub-Job:
+  Das bräuchte ein weiteres Secret und eine öffentliche Route, während der
+  Container ohnehin durchläuft. Ein verpasster Lauf holt sich beim nächsten
+  Start nach — die Bedingung ist zeitbasiert, nicht ereignisgesteuert.
+- **Zwei Dinge überleben die Löschung, ohne Personenbezug:** Suchbegriffe
+  (nur die E-Mail-Adresse wird entfernt, der Begriff bleibt auswertbar) und die
+  Sterne-Bewertungen, die je Titel in der neuen Tabelle `title_rating_stats`
+  aufsummiert werden — nur Anzahl und Punktsumme, **keine Zeitstempel und keine
+  Kennung**. Das ist Absicht: Mit einem gemeinsamen Löschzeitstempel ließen sich
+  alle Zeilen einer Person wieder zusammenführen, der Bestand wäre dann nicht
+  mehr anonym. Der Gesamtschnitt eines Titels ergibt sich aus dieser Tabelle
+  **plus** den Bewertungen der bestehenden Konten in `user_progress`.
+- Alles in einer Transaktion: Die Bewertungen sind erst gesichert, wenn der
+  Nutzer wirklich weg ist.
+
+Vollständig am Live-System durchgespielt (Antrag → Konto bleibt → Widerruf →
+erneuter Antrag → Frist zurückdatiert → Aufräumlauf löscht → Suchbegriff ohne
+E-Mail vorhanden, Bewertungen in der Summe angekommen, keine verwaisten Daten).
 
 **Noch offen:**
 
@@ -30,7 +56,10 @@ Wegwerf-Konto getestet, es bleiben keine verwaisten Daten zurück.
   Datenschutzerklärung sagt zu, dass Titel erst ab einer Mindestzahl an
   Bewertungen in Auswertungen einfließen. Im Code gibt es das nicht. Das ist
   eine Zusage, die das Programm derzeit nicht einhält — vor dem ersten Export
-  nachrüsten. (Stand seit der vorherigen Übergabe unverändert.)
+  nachrüsten. Die neue Tabelle `title_rating_stats` liefert dafür schon die
+  halbe Grundlage: Eine Auswertung müsste ihre `anzahl` plus die Bewertungen
+  aus `user_progress` zusammenzählen und Titel unterhalb der Schwelle
+  weglassen.
 - **Datenschutz-Angaben („Privacy Nutrition Labels")** und **Altersfreigabe**
   im App-Store-Formular ausfüllen.
 - **Konten:** Apple Developer 99 $/Jahr, Google Play 25 $ einmalig.
@@ -163,7 +192,7 @@ noch nicht. Besser gegen einen konkreten Inhalt prüfen (`curl … | grep …`) 
 
 ---
 
-## 6. Was in dieser Sitzung entstanden ist (34 Commits)
+## 6. Was in dieser Sitzung entstanden ist (37 Commits)
 
 **Titel teilen.** Rechtswisch auf jeder Zeile öffnet ein Fenster mit zwei Wegen:
 als Nachricht (Text + Link) oder als Bild (1080×1920, im Browser auf einer
@@ -193,7 +222,10 @@ durchsuchbar, auch getrennt geschrieben („zweiter weltkrieg" findet
 
 **Sonstiges:** „Nach oben"-Knopf, einmalige Rückfrage beim ersten Linkswisch je
 Bereich (vier getrennte Merker), „X" statt „0" bei fehlender Bewertung,
-Kontolöschung, Auffrischen beim Zurückkehren aus dem Hintergrund, neues Logo.
+Kontolöschung mit 14 Tagen Widerrufsfrist, Auffrischen beim Zurückkehren aus dem
+Hintergrund, neues Logo. Die Filterauswahl (Watchlist/Gesehen/Gratis im Abo)
+bleibt beim Wechsel zwischen Filme und Serien jetzt stehen, statt auf „nur
+Watchlist" zurückzufallen — die Sortierung bleibt bewusst getrennt je Bereich.
 
 ---
 
