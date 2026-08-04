@@ -1137,8 +1137,13 @@
   <div class="modal profile-modal">
     <button class="modal-x" id="profileModalX" aria-label="Schließen">✕</button>
     <h3>Gemeinsam schauen</h3>
-    <p class="prov-intro">Wähle Personen aus, mit denen du etwas sehen möchtest. Angezeigt
-      werden dann nur noch Titel, die bei euch gemeinsam auf der Liste stehen.</p>
+    <!-- Erklaert die drei Knoepfe je Person (siehe renderProfileList). Ohne den
+         Satz war "Watchlist" und "Gesehen" nicht anzusehen, dass sie DEREN
+         Listen oeffnen -- man haette sie fuer Filter der eigenen halten koennen. -->
+    <p class="prov-intro">Bei jeder Person hast du drei Möglichkeiten:
+      <b>Watchlist</b> und <b>Gesehen</b> öffnen deren Liste – Titel daraus kannst du direkt
+      in deine eigene übernehmen. <b>Match</b> zeigt nur noch Titel, die bei euch gemeinsam
+      auf der Liste stehen.</p>
     <div class="profile-list" id="profileList"></div>
     <button type="button" id="profileInviteBtn" class="profile-add">＋ Person einladen</button>
     <hr class="account-sep">
