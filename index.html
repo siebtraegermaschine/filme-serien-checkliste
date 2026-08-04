@@ -769,6 +769,12 @@
     background:var(--card); border:1px dashed var(--border); color:var(--text-dim);
     font-size:14px; font-weight:600; }
   @media (hover: hover) { .profile-add:hover { border-color:var(--accent); color:var(--accent); } }
+  /* Ausgeloggt: sieht gesperrt aus, bleibt aber anklickbar und fuehrt zur
+     Anmeldung (siehe den Handler an #profileInviteBtn). Deshalb kein echtes
+     [disabled] -- das haette gar keinen Klick geliefert und die Person waere vor
+     einem toten Knopf gestanden. */
+  .profile-add.gesperrt { opacity:.5; border-style:dotted; }
+  @media (hover: hover) { .profile-add.gesperrt:hover { border-color:var(--border); color:var(--text-dim); } }
   .profile-empty { color:var(--text-dim); font-size:13px; padding:10px 8px; }
   .fsk-row { display:flex; flex-wrap:wrap; gap:8px; }
   .fsk-row button { flex:1 1 0; min-width:74px; background:var(--card); border:1px solid var(--border);
@@ -1980,6 +1986,7 @@ function genresKanonisch(liste){
   });
   return raus;
 }
+var POOL_OHNE_TMDB = new Map();   // 'movie|der name' -> Pool-Eintrag ohne tmdbId
 function buildPool(combinedRows, streamDoc){
   const byKey = new Map(); // 'movie:123' -> Pool-Eintrag (nur wenn tmdbId bekannt)
   const catalogByName = new Map(); // 'movie|departed - unter feinden' -> Katalog-Pool-Eintrag
@@ -2009,6 +2016,16 @@ function buildPool(combinedRows, streamDoc){
   byKey.clear();
   POOL.forEach(function(item){
     if (item.tmdbId != null) byKey.set(item.type + ':' + item.tmdbId, item);
+  });
+  // Namensindex fuer die Titel OHNE TMDB-Kennung -- die 600 urspruenglich
+  // kuratierten Katalog-Titel. Ueber sie laeuft der Kino-Abgleich, der sonst nur
+  // die tmdb_id kennt und einen solchen Titel deshalb ein zweites Mal anlegen
+  // wuerde (siehe cinemaRowToItem). Bewusst NUR Eintraege ohne Kennung: Wer eine
+  // hat und trotzdem nicht per ID getroffen wird, ist ein anderer Film -- sonst
+  // fielen Neuverfilmungen mit gleichem Namen zusammen.
+  POOL_OHNE_TMDB.clear();
+  POOL.forEach(function(item){
+    if (item.tmdbId == null) POOL_OHNE_TMDB.set(item.type + '|' + normTitle(item.t), item);
   });
   // Aktuelles Streaming-Angebot einmischen: bestehende Pool-Eintraege (Katalog/Discovery,
   // per tmdb_id ODER per normalisiertem Namen erkannt) bekommen ihre Anbieter zugewiesen,
@@ -3847,9 +3864,28 @@ async function loadCinemaData(){
 // "virtuellen" Eintrag mit realId=null anzulegen. Ohne diesen Abgleich wuerde
 // die Kino-Seite bei einem Titel, der laengst gewatchlistet ist, faelschlich
 // "nicht auf der Watchlist" anzeigen (siehe ensurePoolItem/POOL weiter oben).
+//
+// Ausweichweg ueber den Namen fuer die Katalog-Titel ohne tmdb_id (siehe
+// POOL_OHNE_TMDB). Ohne ihn stand z.B. "Avengers: Endgame" als Wiederauffuehrung
+// ein zweites Mal im Kino -- unmarkiert, obwohl er unter Filme laengst als
+// gesehen galt. Denselben Ausweich benutzt buildPool schon fuer Streaming und
+// Discovery (catalogByName), die Kino-Seite hatte ihn nur nie bekommen.
+//
+// Das Jahr muss mitgeprueft werden, sonst faellt jede Neuverfilmung mit dem
+// Original zusammen. Bei Wiederauffuehrungen traegt row.y das Jahr der
+// WIEDERauffuehrung (siehe cinema-fetch.mjs) -- verglichen wird deshalb mit
+// row.ord, sobald es gesetzt ist. Ein Jahr Toleranz, weil Kinostart und das im
+// Katalog notierte Erscheinungsjahr ueber den Jahreswechsel auseinanderfallen.
+function altTitelZuKino(row){
+  var treffer = POOL_OHNE_TMDB.get('movie|' + normTitle(row.t || ''));
+  if (!treffer) return null;
+  var kinoJahr = row.ord ? Number(row.ord.slice(0, 4)) : Number(row.y);
+  if (!Number.isFinite(kinoJahr) || treffer.y == null) return treffer;
+  return Math.abs(Number(treffer.y) - kinoJahr) <= 1 ? treffer : null;
+}
 function cinemaRowToItem(row, poolByTmdb){
   const tmdbId = Number(row.id);
-  const existing = poolByTmdb.get(tmdbId);
+  const existing = poolByTmdb.get(tmdbId) || altTitelZuKino(row);
   if (existing) return existing;
   // row.ord (original_release_date) ist nur bei Wiederauffuehrungen gesetzt
   // (siehe cinema-fetch.mjs) -- Hinweis + Erstveroeffentlichungsjahr wird der
@@ -4323,7 +4359,12 @@ async function loadLinkedProfiles(){
 function updateProfileBtn(){
   var btn = document.getElementById('profileBtn');
   if (btn) {
-    btn.style.display = CURRENT_USER ? 'flex' : 'none';
+    // Auch ausgeloggt sichtbar: Wer nicht angemeldet ist, erfaehrt sonst nirgends,
+    // dass es "Gemeinsam schauen" ueberhaupt gibt -- der Knopf war schlicht nicht
+    // da. Das Popup erklaert die Funktion und sperrt nur das Einladen (siehe
+    // renderProfileList); der FSK-Filter darin wirkt ohne Konto (MY_FSK liegt nur
+    // im Browser).
+    btn.style.display = 'flex';
     btn.classList.toggle('filtering', matchAktiv() || fskAktiv());
     var teile = [];
     if (matchAktiv()) teile.push('mit ' + MATCH_WITH.map(profilName).join(' und '));
@@ -4387,10 +4428,18 @@ function renderProfileList(){
              '<button type="button" class="pi-del" aria-label="Verknüpfung lösen">✕</button>' +
            '</div>';
   }).join('');
-  if (!LINKED_PROFILES.length) {
+  // Ausgeloggt steht hier, warum die Liste leer ist und der Knopf darunter
+  // gesperrt aussieht -- ohne Konto gibt es niemanden, mit dem sich etwas
+  // verknuepfen liesse (die Verknuepfung haengt an beiden Konten).
+  if (!CURRENT_USER) {
+    html += '<div class="profile-empty">Zum Einladen brauchst du ein Konto – die Verknüpfung ' +
+            'gehört zu eurer beider Anmeldung. Der FSK-Filter unten wirkt auch ohne.</div>';
+  } else if (!LINKED_PROFILES.length) {
     html += '<div class="profile-empty">Noch niemand verknüpft. Lade jemanden ein, um gemeinsame Titel zu finden.</div>';
   }
   el.innerHTML = html;
+  var einladen = document.getElementById('profileInviteBtn');
+  if (einladen) einladen.classList.toggle('gesperrt', !CURRENT_USER);
   el.querySelectorAll('.profile-item[data-uid]').forEach(function(row){
     var uid = Number(row.dataset.uid);
     row.querySelectorAll('.pi-btn').forEach(function(b){
@@ -4448,7 +4497,7 @@ function renderFskRow(){
 }
 function openProfileModal(){ renderProfileList(); renderFskRow(); _profileModal.style.display = 'flex'; }
 function closeProfileModal(){ _profileModal.style.display = 'none'; }
-document.getElementById('profileBtn').onclick = function(){ requireLogin(openProfileModal); };
+document.getElementById('profileBtn').onclick = openProfileModal;
 document.getElementById('matchBarClear').onclick = function(){
   if (personenAnsicht()) { personenAnsichtSchliessen(); return; }
   MATCH_WITH = []; MY_FSK = null;
@@ -4462,6 +4511,12 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _pro
 document.getElementById('profileInviteBtn').onclick = async function(){
   var btn = this;
   if (btn.disabled) return;
+  // Ausgeloggt sieht der Knopf gesperrt aus (siehe renderProfileList), bleibt
+  // aber anklickbar: Der Klick fuehrt dann zur Anmeldung, statt ins Leere zu
+  // laufen. Ein echtes disabled haette gar kein Klickereignis geliefert.
+  // requireLogin merkt sich das Popup und oeffnet es nach dem Anmelden wieder --
+  // dann mit freigeschaltetem Knopf.
+  if (!CURRENT_USER) { closeProfileModal(); requireLogin(openProfileModal); return; }
   // Auch die einladende Seite gibt etwas preis -- die Verknuepfung wirkt in
   // beide Richtungen. Wer den Link verschickt, soll das vorher wissen und nicht
   // erst in der Datenschutzerklaerung nachlesen muessen.
