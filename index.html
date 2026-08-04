@@ -1967,11 +1967,13 @@ let seenFilterOn = false;
 // redundant nochmal gezeigt hat) -- dieselbe Einschraenkung gibt es jetzt direkt
 // unter Filme UND unter Serien statt in einem separaten dritten Bereich.
 let inStreamFilterOn = false;
-// Die Kino-Seite fuehrt eine EIGENE Statusauswahl. Unter Filme/Serien ist die
-// eigene Watchlist der sinnvolle Einstieg, im Kino dagegen das gesamte Programm
-// -- mit gemeinsamem Zustand waere die Kino-Seite beim ersten Aufruf leer, weil
-// dort standardmaessig nur die Watchlist an ist. Beide Seiten behalten so ihren
-// jeweils passenden Ausgangspunkt, ohne sich gegenseitig umzustellen.
+// Die Kino-Seite fuehrt eine EIGENE Statusauswahl und merkt sie sich. Sie erbt
+// nichts von Filme/Serien -- dort ist die eigene Watchlist der sinnvolle
+// Einstieg, im Kino das gesamte Programm; mit gemeinsamem Zustand waere die
+// Kino-Seite beim ersten Aufruf so gut wie leer, weil dort standardmaessig nur
+// die Watchlist an ist. Sie setzt sich aber auch nicht bei jedem Aufruf zurueck:
+// Wer hier einschraenkt, findet die Einschraenkung beim naechsten Besuch wieder
+// vor -- "was ich einstelle, bleibt", nur eben je Bereich.
 var kinoStatus = { wl: true, seen: true, disc: true };
 // Ansicht einer fremden Liste: uid der Person und welche ihrer beiden Listen.
 // Die Daten dafuer liegen laengst im Browser (LINKED_PROGRESS, geliefert von
@@ -3625,15 +3627,13 @@ function openCinemaPage(){
   // hier, sonst stuende die Leiste "Watchlist von Anna" ueber dem Kinoprogramm.
   // updateProfileBtn() muss dabei mit: die Leiste wird nur dort neu geschrieben,
   // ohne den Aufruf blieb der alte Text stehen, obwohl die Ansicht schon beendet war.
-  var warAnsicht = ANSICHT_PERSON != null;
   ANSICHT_PERSON = null;
-  if (warAnsicht) updateProfileBtn();
-  // Die Kino-Seite startet IMMER mit allen drei Status -- egal, womit man
-  // hergekommen ist. Mit einem uebernommenen "nur Watchlist" waere sie fast
-  // immer leer: Kaum jemand merkt sich Filme vor, die erst naechste Woche
-  // anlaufen. Einschraenken kann man hier von Hand.
-  kinoStatus = { wl: true, seen: true, disc: true };
   cinemaMode = true;
+  // Die Leiste haengt am Bereich: Im Kino heisst derselbe Abgleich anders (er
+  // filtert dort nicht, siehe unten), und eine gerade beendete Personenansicht
+  // muss verschwinden. Geschrieben wird sie nur in updateProfileBtn -- ohne den
+  // Aufruf blieb der Text des vorherigen Bereichs stehen.
+  updateProfileBtn();
   // Bei jedem frischen Aufruf wieder eingeklappt starten (nicht den Zustand
   // eines vorherigen Besuchs behalten).
   cinemaSectionLimit = { now: CINEMA_SECTION_PREVIEW, soon: CINEMA_SECTION_PREVIEW, later: CINEMA_SECTION_PREVIEW };
@@ -3664,6 +3664,7 @@ function openCinemaPage(){
 function closeCinemaPage(){
   if (!cinemaMode) return;
   cinemaMode = false;
+  updateProfileBtn();          // zurueck auf den Text ausserhalb des Kinos
   document.getElementById('cinemaPage').style.display = 'none';
   // .tabs wird nicht mehr ein-/ausgeblendet (siehe openCinemaPage), nur die
   // Hervorhebung wandert zurueck auf Filme bzw. Serien.
@@ -4000,7 +4001,13 @@ function updateProfileBtn(){
   bar.style.display = zeigen ? 'flex' : 'none';
   if (zeigen) {
     var text = [];
-    if (zeigtMatch) text.push('Gemeinsame Titel mit ' + namenListe(MATCH_WITH));
+    // Auf der Kino-Seite filtert der Abgleich NICHT -- dort fliessen die
+    // Geschmacksprofile aller Ausgewaehlten nur in die Rangfolge ein (siehe
+    // alleProfile/renderCinemaSection). "Gemeinsame Titel" waere dort schlicht
+    // gelogen: Zu sehen ist das vollstaendige Programm.
+    if (zeigtMatch) text.push(cinemaMode
+      ? 'Kino-Vorschläge für dich und ' + namenListe(MATCH_WITH)
+      : 'Gemeinsame Titel mit ' + namenListe(MATCH_WITH));
     if (fskAktiv()) text.push('Altersfreigabe ' + (FSK_STUFEN.find(function(x){ return x.key === MY_FSK; })||{}).label);
     document.getElementById('matchBarText').textContent = text.join(' · ');
   }
