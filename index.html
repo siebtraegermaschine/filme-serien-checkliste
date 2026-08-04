@@ -365,7 +365,16 @@
   .cinema-page-header { max-width:700px; margin:22px auto 6px; padding:0 20px; box-sizing:border-box;
     display:flex; align-items:center; justify-content:space-between; gap:12px; }
   .cinema-page-title { color:var(--accent); font-size:19px; margin:0; }
-  .cinema-page-actions { display:flex; align-items:center; gap:10px; }
+  /* Genauso breit wie "Neue entdecken" in der Statusreihe darueber: Dort teilen
+     sich drei Knoepfe mit 4px Abstand die Zeile, eine Spalte ist also
+     (100% - 8px) / 3. .cinema-page-header hat dieselbe Inhaltsbreite wie
+     .toolbar (max-width 700px, 20px Innenabstand), die Rechnung geht damit
+     direkt auf. justify-content:space-between schiebt den Block nach rechts,
+     wo auch "Neue entdecken" endet. */
+  .cinema-page-actions { display:flex; align-items:center; gap:10px;
+    flex: 0 0 calc((100% - 8px) / 3); min-width: 0; }
+  .cinema-page-actions .sort-wrap { flex: 1; min-width: 0; }
+  #cinemaSort { width: 100%; }
   /* Eigenstaendiges Styling fuer den Sortier-Button auf der Kino-Seite noetig,
      da er (anders als #fSort unter Filme/Serien) nicht in .toolbar steckt und
      ".toolbar button" ihn deshalb nicht erreicht (gleicher Grund wie bei den
