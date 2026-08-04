@@ -5,6 +5,9 @@
 #   ./scripts/backup.sh taeglich
 #   ./scripts/backup.sh monatlich
 #
+# Setzt voraus, dass es im aktuellen Verzeichnis liegt (docker compose braucht
+# die compose-Datei) -- deshalb in den Cron-Zeilen das vorangestellte cd.
+#
 # Bewusst zwei Stufen, weil die Daten unterschiedlich wertvoll sind:
 #
 #   taeglich   Nur das, was sich NICHT wiederbeschaffen laesst -- Konten,
@@ -47,7 +50,10 @@ fi
 
 echo "Sichere ($ART) nach $DATEI ..."
 # -T: kein TTY, sonst landen Steuerzeichen im Dump.
-docker compose exec -T postgres \
+# -f docker-compose.yml ausdruecklich: Ohne die Angabe zieht Compose zusaetzlich
+# docker-compose.override.yml heran, die nur fuer die lokale Entwicklung gedacht
+# ist und Postgres nach aussen oeffnet (siehe DEPLOYMENT.md, Schritt 5).
+docker compose -f docker-compose.yml exec -T postgres \
   pg_dump -U postgres -d filme_serien --no-owner --no-privileges "${ARGS[@]}" \
   | gzip -9 > "$DATEI"
 

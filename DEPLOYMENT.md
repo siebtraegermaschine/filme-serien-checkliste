@@ -149,7 +149,7 @@ crontab -e
 Wiederherstellen:
 
 ```
-gunzip -c backups/moviematch-nutzer-....sql.gz | docker compose exec -T postgres psql -U postgres -d filme_serien
+gunzip -c backups/moviematch-nutzer-....sql.gz | docker compose -f docker-compose.yml exec -T postgres psql -U postgres -d filme_serien
 ```
 
 **Noch offen:** Die Sicherung liegt auf demselben Server. Das schützt gegen
