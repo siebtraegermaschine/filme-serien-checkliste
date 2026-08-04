@@ -1981,13 +1981,12 @@ var kinoStatus = { wl: true, seen: true, disc: true };
 // Geschmacksprofile genutzt, nie angezeigt.
 var ANSICHT_PERSON = null;
 var ANSICHT_ART = 'w';                 // 'w' = Watchlist, 's' = Gesehen
-// Im Kino ist eine fremde Liste ausgesetzt, nicht beendet: Das Kinoprogramm
-// zeigt dort alle Titel (siehe kinoStatus), Jennys Watchlist waere sinnlos
-// darauf angewendet. Beendet wird sie deshalb NICHT -- wer zurueck auf Filme
-// oder Serien wechselt, ist wieder in ihrer Liste. Vorher wurde sie beim Klick
-// auf Kino stillschweigend geloest, was aussah wie ein Fehler.
-function personenAnsicht(){ return ANSICHT_PERSON != null && !cinemaMode; }
-function personenAnsichtAusgesetzt(){ return ANSICHT_PERSON != null && cinemaMode; }
+// Eine fremde Liste gilt in ALLEN drei Bereichen: Filme, Serien und Kino sind
+// darin nur Typfilter. Im Kino heisst das "welche Kinostarts hat Jenny
+// markiert" -- oft nichts, aber das ist eine Antwort und kein Fehler, genau wie
+// unter Serien. Die frueheren Sonderregeln (im Kino ausgesetzt, eigene Leiste)
+// entfallen damit.
+function personenAnsicht(){ return ANSICHT_PERSON != null; }
 // Ein Einstieg ueber die Personenliste setzt einen definierten Startpunkt,
 // statt zu erben, was zuletzt bei den eigenen Titeln eingestellt war: immer
 // Filme, und genau der Status, den man angeklickt hat. Ohne das landete man
@@ -2700,9 +2699,12 @@ function updateFilterRowUI(){
     btns.inStream.classList.toggle('active', inStreamFilterOn);
     var sz = document.querySelector('.tb-streamrow');
     if (sz) sz.style.display = '';
-    tabBtns.filme.classList.toggle('active', activeTab === 'filme');
-    tabBtns.serien.classList.toggle('active', activeTab === 'serien');
-    tabBtns.kino.classList.remove('active');
+    tabBtns.filme.classList.toggle('active', !cinemaMode && activeTab === 'filme');
+    tabBtns.serien.classList.toggle('active', !cinemaMode && activeTab === 'serien');
+    tabBtns.kino.classList.toggle('active', !!cinemaMode);
+    // Der Streaming-Filter ergibt im Kino auch hier keinen Sinn.
+    var szp = document.querySelector('.tb-streamrow');
+    if (szp) szp.style.display = cinemaMode ? 'none' : '';
     return;
   }
   var st = statusLesen();
@@ -3549,12 +3551,23 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
   // einer langen Liste zu verschmelzen.
   var q = searchEl.value.trim().toLowerCase();
   var st = statusLesen();
+  // In einer fremden Liste zaehlen DEREN Markierungen, nicht die eigenen: "Was
+  // von den Kinostarts hat Jenny vorgemerkt bzw. schon gesehen." Meist wenig --
+  // eine leere Antwort ist hier aber eine Antwort, genau wie unter Serien.
+  var fremd = personenAnsicht() ? LINKED_PROGRESS[ANSICHT_PERSON] : null;
   var entries = rows.map(function(row){
     var item = cinemaRowToItem(row, poolByTmdb);
     return { row: row, item: item, score: scoreMitProfilen(item, profile) };
   }).filter(function(e){
     if (!fskErlaubt(e.item) || istVersteckt(e.item)) return false;
     if (q && !poolItemMatchesQuery(e.item, q)) return false;
+    if (fremd) {
+      // Ohne realId kann niemand den Titel markiert haben.
+      if (e.item.realId == null) return false;
+      var fe = fremd.get(e.item.realId);
+      if (!fe) return false;
+      return ANSICHT_ART === 'w' ? !!fe.w : !!fe.s;
+    }
     // Ein Kinotitel, den man schon markiert hat, steckt als echter Pool-Eintrag
     // mit realId im Katalog (siehe cinemaRowToItem); alles andere ist per
     // Definition unmarkiert. Wiederauffuehrungen koennen durchaus "gesehen"
@@ -3571,6 +3584,8 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
   cinemaHeadingEls[key].textContent = CINEMA_LABELS[key] + (entries.length ? ' (' + entries.length + ')' : '');
   if (!entries.length) {
     var text = q ? 'Keine Treffer für „' + searchEl.value.trim() + '".'
+             : fremd ? (profilName(ANSICHT_PERSON) + ' hat hier nichts ' +
+                        (ANSICHT_ART === 'w' ? 'auf der Watchlist' : 'als gesehen markiert') + '.')
              : (st.wl && st.seen && st.disc) ? CINEMA_EMPTY_TEXT[key]
              : 'Keine Titel für diese Auswahl.';
     el.innerHTML = '<li class="cinema-empty">' + esc(text) + '</li>';
@@ -3602,7 +3617,15 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
   var visible = entries.slice(0, limit);
   // Kino: Ansehen/Leihen/Kaufen entfallen, die Filme laufen ja erst an --
   // der Trailer ist hier das einzig Sinnvolle (siehe watchRowHtml).
-  visible.forEach(function(e){ el.appendChild(poolItemLi(e.item, e.score, { nurTrailer: true, kinoDatum: e.row.rd || null })); });
+  visible.forEach(function(e){
+    var opts = { nurTrailer: true, kinoDatum: e.row.rd || null };
+    if (fremd) {
+      var fe = fremd.get(e.item.realId);
+      opts.fremdName = profilName(ANSICHT_PERSON);
+      opts.fremdSterne = fe && fe.r ? fe.r : null;
+    }
+    el.appendChild(poolItemLi(e.item, e.score, opts));
+  });
   fillPlots();
   if (entries.length > limit) {
     var remaining = entries.length - limit;
@@ -4000,16 +4023,7 @@ function updateProfileBtn(){
     document.getElementById('matchBarClear').textContent = 'zurück';
     return;
   }
-  // Im Kino ausgesetzt: sagen, dass sie noch besteht und hier nur nicht gilt --
-  // sonst wirkt das verschwundene "Watchlist von Jenny" wie ein Verlust.
-  if (personenAnsichtAusgesetzt()) {
-    bar.style.display = 'flex';
-    document.getElementById('matchBarText').textContent =
-      (ANSICHT_ART === 'w' ? 'Watchlist von ' : 'Gesehen von ') + profilName(ANSICHT_PERSON) +
-      ' gilt im Kino nicht';
-    document.getElementById('matchBarClear').textContent = 'beenden';
-    return;
-  }
+
   document.getElementById('matchBarClear').textContent = 'aufheben';
   var zeigtMatch = matchAktiv();
   var zeigen = zeigtMatch || fskAktiv();
@@ -4114,7 +4128,6 @@ function closeProfileModal(){ _profileModal.style.display = 'none'; }
 document.getElementById('profileBtn').onclick = function(){ requireLogin(openProfileModal); };
 document.getElementById('matchBarClear').onclick = function(){
   if (personenAnsicht()) { personenAnsichtSchliessen(); return; }
-  if (personenAnsichtAusgesetzt()) { ANSICHT_PERSON = null; updateProfileBtn(); return; }
   MATCH_WITH = []; MY_FSK = null;
   updateProfileBtn(); rebuild(); renderCurrentTab();
   if (cinemaMode) renderCinemaPage();
