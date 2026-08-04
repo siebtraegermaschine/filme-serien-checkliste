@@ -4296,17 +4296,25 @@ document.getElementById('profileInviteBtn').onclick = async function(){
   btn.disabled = true;
   try {
     var d = await apiRequest('POST', '/api/links/invite');
+    // Bewusst ohne "seine"/"ihre": Der Anzeigename sagt nichts ueber das
+    // Geschlecht der einladenden Person aus, "die Watchlist" trifft immer zu.
     var text = ((CURRENT_USER && CURRENT_USER.displayName) || 'Jemand') +
-               ' möchte auf MovieMatch gemeinsam mit dir Filme finden:';
+               ' möchte auf MovieMatch die Watchlist mit dir teilen. ' +
+               'Entdecke neue Filme, Serien und Kinofilme, sortiert nach deinem Geschmack. ' +
+               '„Matcht" eure Watchlisten und findet Titel, die ihr beide als Nächstes ' +
+               'sehen möchtet:';
     // Native Teilen-Funktion (iPhone/Android) -- sonst in die Zwischenablage.
     if (navigator.share) {
       try { await navigator.share({ title: 'MovieMatch', text: text, url: d.url }); }
       catch (e) { /* abgebrochen -- kein Fehlerfall */ }
     } else if (navigator.clipboard && navigator.clipboard.writeText) {
-      await navigator.clipboard.writeText(d.url);
-      alert('Einladungslink kopiert – gültig für ' + d.expiresInDays + ' Tage.\n\n' + d.url);
+      // Text UND Link kopieren: Am Rechner gibt es kein navigator.share, das den
+      // Text mitliefert -- ohne ihn bekaeme die eingeladene Person nur eine nackte
+      // URL und keinen Hinweis, worum es geht.
+      await navigator.clipboard.writeText(text + '\n' + d.url);
+      alert('Einladung kopiert – der Link ist ' + d.expiresInDays + ' Tage gültig.\n\n' + d.url);
     } else {
-      prompt('Einladungslink (gültig für ' + d.expiresInDays + ' Tage):', d.url);
+      prompt('Einladung (Link gültig für ' + d.expiresInDays + ' Tage):', text + ' ' + d.url);
     }
   } catch (e) {
     alert('Einladung konnte nicht erstellt werden.');
