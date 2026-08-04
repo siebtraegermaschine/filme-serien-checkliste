@@ -382,3 +382,21 @@ CREATE TABLE IF NOT EXISTS session (
   expire TIMESTAMP(6) NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_session_expire ON session (expire);
+
+-- Deutsch-Englisch-Paarung der TMDB-Genres. Wird beim Streaming-Import
+-- mitgeliefert (siehe stream-fetch.mjs): TMDB gibt dieselbe Genre-Liste je nach
+-- Sprachparameter einmal deutsch und einmal englisch aus, verbunden ueber die
+-- Genre-ID. Damit kennt die App die englischen Namen, ohne dass jemand sie von
+-- Hand pflegen muss -- und sie bleibt richtig, wenn TMDB umbenennt oder ein
+-- Genre ergaenzt.
+--
+-- Hintergrund: Wer "Comedy" suchte, landete auf einer Handvoll Titel, die den
+-- englischen Begriff zufaellig als Schlagwort trugen. Das gemeinte "Komödie"
+-- (13.162 Titel) fand er nicht.
+CREATE TABLE IF NOT EXISTS genre_alias (
+  tmdb_genre_id INTEGER NOT NULL,
+  art           TEXT    NOT NULL,   -- 'movie' | 'tv'
+  name_de       TEXT    NOT NULL,
+  name_en       TEXT    NOT NULL,
+  PRIMARY KEY (tmdb_genre_id, art)
+);

@@ -1723,13 +1723,57 @@ function normTitle(s){
     .replace(/\s*-\s*/g, ' - ')
     .replace(/\s+/g, ' ');
 }
+// Altbestand aus dem urspruenglich kuratierten Katalog: 37 Genre-Namen, die
+// TMDB gar nicht kennt und die fast alle nur ein- bis zweistellige Trefferzahlen
+// haben -- "Sci-Fi" (58) neben "Science Fiction" (2.454), "Romanze" (3) neben
+// "Liebesfilm" (4.752), "Comedy" (1) neben "Komödie" (13.162). In der
+// Vorschlagsliste konkurrierten sie mit den echten Genres und fuehrten ins
+// Leere, weil an ihnen fast keine Titel haengen.
+//
+// Sie werden deshalb beim Aufbau des Pools auf das jeweils passende TMDB-Genre
+// umgeschrieben -- vor Anzeige, Suchindex und Trefferpruefung, damit alle drei
+// dasselbe sehen. Zusammengesetzte Namen ("Krimikomödie") landen auf ihrem
+// Hauptgenre; die Feinheit geht verloren, betrifft aber je nur eine Handvoll
+// Titel. Was hier nicht steht, bleibt unveraendert -- unbekannte Genres sollen
+// nicht stillschweigend verschwinden.
+var GENRE_KANON = {
+  'sci-fi': 'Science Fiction', 'sci-fi-romanze': 'Science Fiction',
+  'sci-fi-action': 'Science Fiction', 'sci-fi-horror': 'Science Fiction',
+  'dystopie': 'Science Fiction', 'endzeitdrama': 'Science Fiction',
+  'sitcom': 'Komödie', 'comedydrama': 'Komödie', 'comedy': 'Komödie',
+  'tragikomödie': 'Komödie', 'politsatire': 'Komödie',
+  'anime': 'Animation',
+  'historiendrama': 'Historie', 'historienfilm': 'Historie',
+  'historienromanze': 'Historie',
+  'liebesdrama': 'Liebesfilm', 'romanze': 'Liebesfilm',
+  'romantikkomödie': 'Liebesfilm',
+  'superhelden': 'Action', 'actionkomödie': 'Action',
+  'sportdrama': 'Drama', 'anwaltsdrama': 'Drama', 'arztdrama': 'Drama',
+  'politdrama': 'Drama', 'jugenddrama': 'Drama', 'gefängnisdrama': 'Drama',
+  'biografie': 'Drama',
+  'kriegsdrama': 'Kriegsfilm',
+  'krimikomödie': 'Krimi', 'historienkrimi': 'Krimi',
+  'spionagethriller': 'Thriller', 'heist-thriller': 'Thriller',
+  'politthriller': 'Thriller',
+  'musikdrama': 'Musik', 'musical': 'Musik',
+  'horror-komödie': 'Horror',
+  'neo-western': 'Western',
+};
+function genresKanonisch(liste){
+  var raus = [];
+  (liste || []).forEach(function(g){
+    var ziel = GENRE_KANON[String(g).toLowerCase()] || g;
+    if (raus.indexOf(ziel) === -1) raus.push(ziel);
+  });
+  return raus;
+}
 function buildPool(combinedRows, streamDoc){
   const byKey = new Map(); // 'movie:123' -> Pool-Eintrag (nur wenn tmdbId bekannt)
   const catalogByName = new Map(); // 'movie|departed - unter feinden' -> Katalog-Pool-Eintrag
   POOL = combinedRows.map(function(row){
     const item = {
       realId: row.id, tmdbId: row.tmdbId, type: row.type,
-      t: row.title, ot: row.originalTitle, y: row.year, g: row.genres || [], d: row.director || '',
+      t: row.title, ot: row.originalTitle, y: row.year, g: genresKanonisch(row.genres), d: row.director || '',
       c: row.cast || [], kw: row.keywords || [], p: row.posterPath || null,
       poster64: row.posterBase64 || null, r: row.rating, vc: row.voteCount, fsk: row.certification || null, ov: row.plot || '',
       source: row.source, providers: [],
@@ -1767,7 +1811,7 @@ function buildPool(combinedRows, streamDoc){
         if (!item) {
           item = {
             realId: null, tmdbId: Number(c.id), type: type,
-            t: c.t, ot: null, y: c.y, g: c.g || [], d: c.d || '', c: c.c || [], kw: c.kw || [],
+            t: c.t, ot: null, y: c.y, g: genresKanonisch(c.g), d: c.d || '', c: c.c || [], kw: c.kw || [],
             p: c.p || null, poster64: null, r: c.r, vc: c.vc, fsk: c.fsk || null, ov: c.ov || '', fs: c.fs || null,
             source: 'streaming', providers: [],
           };
@@ -2756,25 +2800,14 @@ var SEARCH_SYNONYMS = {
   'nachrichten': 'News',
   'krieg': 'War & Politics',
   'kriegsserie': 'War & Politics',
-  // Englische Genre-Namen: TMDB liefert uns die deutschen ("Komödie", "Krimi",
-  // ...), viele Leute tippen aber die englischen. Ohne diese Zuordnung landete
-  // man auf einer Handvoll Titel, die den englischen Begriff zufaellig als
-  // Schlagwort tragen -- "Comedy" existiert als Genre bei GENAU EINEM Titel,
-  // waehrend "Komödie" 13.162 hat (nachgezaehlt im Katalog).
-  'comedy': 'Komödie',
-  'crime': 'Krimi',
-  'romance': 'Liebesfilm',
-  'documentary': 'Dokumentarfilm',
-  'family': 'Familie',
-  'adventure': 'Abenteuer',
-  'history': 'Historie',
-  'historical': 'Historie',
-  'music': 'Musik',
-  'war movie': 'Kriegsfilm',
-  'tv movie': 'TV-Film',
-  'children': 'Kids',
-  // Umlautfreie und verkuerzte Schreibweisen: Die Freitextsuche vergleicht
-  // Zeichen fuer Zeichen, "komodie" trifft "Komödie" also nicht von selbst.
+  // Die englischen Genre-Namen stehen bewusst NICHT hier: Sie kommen ueber
+  // genreAliasUebernehmen() direkt von TMDB und landen zur Laufzeit in dieser
+  // Tabelle. Eine Liste von Hand waere still veraltet, sobald TMDB umbenennt
+  // oder ein Genre ergaenzt.
+  //
+  // Umlautfreie und verkuerzte Schreibweisen liefert TMDB dagegen nicht -- die
+  // Freitextsuche vergleicht Zeichen fuer Zeichen, "komodie" trifft "Komödie"
+  // also nicht von selbst.
   'komodie': 'Komödie',
   'komoedie': 'Komödie',
   'romantik': 'Liebesfilm',
@@ -2789,6 +2822,33 @@ var SEARCH_SYNONYMS = {
   'truecrime': 'True Crime',
   'wahre verbrechen': 'True Crime',
 };
+// Notnagel, bis der erste Import die Paarung geliefert hat (siehe genre_alias in
+// backend/db/schema.sql): Ohne diese Zeilen faende eine Suche nach "Comedy" bis
+// zum naechsten naechtlichen Lauf wieder nichts. Die Werte vom Server duerfen
+// sie ueberschreiben -- TMDB ist die verlaesslichere Quelle, falls dort mal ein
+// Genre umbenannt wird.
+var GENRE_ALIAS_NOTNAGEL = {
+  'comedy': 'Komödie', 'crime': 'Krimi', 'romance': 'Liebesfilm',
+  'documentary': 'Dokumentarfilm', 'family': 'Familie', 'adventure': 'Abenteuer',
+  'history': 'Historie', 'music': 'Musik', 'war': 'Kriegsfilm',
+  'tv movie': 'TV-Film', 'children': 'Kids',
+};
+Object.keys(GENRE_ALIAS_NOTNAGEL).forEach(function(k){
+  if (!SEARCH_SYNONYMS[k]) SEARCH_SYNONYMS[k] = GENRE_ALIAS_NOTNAGEL[k];
+});
+// Traegt die vom Server gelieferte Genre-Paarung nach (siehe genrePaare() in
+// stream-fetch.mjs). Von Hand gesetzte Eintraege bleiben stehen -- die sind eine
+// bewusste Entscheidung. Nur die Notnagel-Werte oben werden ersetzt, sobald die
+// echte Zuordnung da ist.
+function genreAliasUebernehmen(liste){
+  (liste || []).forEach(function(p){
+    if (!p || !p.de || !p.en) return;
+    var schluessel = String(p.en).toLowerCase();
+    if (schluessel === String(p.de).toLowerCase()) return;   // z.B. "Drama"
+    if (SEARCH_SYNONYMS[schluessel] && !(schluessel in GENRE_ALIAS_NOTNAGEL)) return;
+    SEARCH_SYNONYMS[schluessel] = p.de;
+  });
+}
 function levenshteinDistance(a, b){
   if (a === b) return 0;
   var m = a.length, n = b.length;
@@ -4359,6 +4419,7 @@ async function loadCatalogAndRefresh(){
       apiRequest('GET', '/api/streaming'),
     ]);
     STREAM = streamDoc;
+    genreAliasUebernehmen(streamDoc.genreAlias);
     buildPool(combinedRows, streamDoc);
     LETZTER_KATALOG_LOAD = Date.now();
     await loadUserProgressAndRefresh();

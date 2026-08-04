@@ -47,10 +47,18 @@ router.get('/', async (req, res) => {
     (row.type === 'movie' ? bucket.f : bucket.s).push(rowToCand(row));
   }
 
+  // Genre-Paarung (deutsch/englisch) haengt hier mit dran, statt einen eigenen
+  // Endpunkt zu bekommen: Das Frontend holt diese Antwort ohnehin beim Start,
+  // und die Liste ist mit gut zwei Dutzend Eintraegen winzig.
+  const { rows: aliasRows } = await pool.query(
+    `SELECT DISTINCT name_de, name_en FROM genre_alias WHERE name_de <> name_en`
+  );
+
   res.json({
     generated: latest ? latest.toISOString() : null,
     region: 'DE',
     providers: Array.from(byProvider.values()),
+    genreAlias: aliasRows.map((r) => ({ de: r.name_de, en: r.name_en })),
   });
 });
 
@@ -64,7 +72,7 @@ router.post('/ingest', async (req, res) => {
     return res.status(401).json({ error: 'invalid_ingest_secret' });
   }
 
-  const { providers } = req.body || {};
+  const { providers, genres } = req.body || {};
   if (!Array.isArray(providers)) {
     return res.status(400).json({ error: 'invalid_payload' });
   }
@@ -123,6 +131,23 @@ router.post('/ingest', async (req, res) => {
       }
     }
     await client.query('DELETE FROM streaming_cache WHERE fetched_at < $1', [runStartedAt]);
+    // Genre-Paarung mitschreiben, sofern der Lauf sie geliefert hat. Bewusst nur
+    // aktualisierend und ohne Aufraeumen: Faellt das Feld in einem Lauf mal weg
+    // (aeltere Skriptversion, TMDB-Aussetzer), soll die vorhandene Zuordnung
+    // stehenbleiben statt zu verschwinden -- ohne sie fiele die Suche nach
+    // englischen Genre-Namen wieder aus.
+    if (Array.isArray(genres)) {
+      for (const g of genres) {
+        if (!g || g.id == null || !g.de || !g.en) continue;
+        await client.query(
+          `INSERT INTO genre_alias (tmdb_genre_id, art, name_de, name_en)
+           VALUES ($1,$2,$3,$4)
+           ON CONFLICT (tmdb_genre_id, art) DO UPDATE SET
+             name_de = EXCLUDED.name_de, name_en = EXCLUDED.name_en`,
+          [Number(g.id), g.art === 'tv' ? 'tv' : 'movie', g.de, g.en]
+        );
+      }
+    }
     await client.query('COMMIT');
   } catch (err) {
     await client.query('ROLLBACK');

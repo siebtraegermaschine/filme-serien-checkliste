@@ -135,6 +135,31 @@ async function genreMap(kind) {              // kind: 'movie' | 'tv'
   const m = {}; (d.genres || []).forEach(g => m[g.id] = g.name); return m;
 }
 
+// Deutsch-Englisch-Paarung der Genres, direkt von TMDB: Dieselbe Liste, einmal
+// mit language=de-DE und einmal mit en-US, verbunden ueber die Genre-ID.
+//
+// Damit muss niemand von Hand pflegen, dass "Comedy" auf "Komödie" zeigt -- und
+// die Zuordnung bleibt richtig, wenn TMDB umbenennt oder ein Genre ergaenzt.
+// Vorher fand eine Suche nach "Comedy" nur eine Handvoll Titel, die den
+// englischen Begriff zufaellig als Schlagwort trugen, statt der 13.162 Komoedien.
+async function genrePaare() {
+  const paare = [];
+  for (const kind of ['movie', 'tv']) {
+    const [de, en] = await Promise.all([
+      tmdb(`/genre/${kind}/list`, { language: 'de-DE' }),
+      tmdb(`/genre/${kind}/list`, { language: 'en-US' }),
+    ]);
+    const enNach = {};
+    (en.genres || []).forEach(g => enNach[g.id] = g.name);
+    (de.genres || []).forEach(g => {
+      if (!enNach[g.id]) return;
+      paare.push({ id: g.id, art: kind, de: g.name, en: enNach[g.id] });
+    });
+    await sleep(200);
+  }
+  return paare;
+}
+
 async function resolveProviderIds(kind) {    // Name -> ID über TMDB
   const d = await tmdb(`/watch/providers/${kind}`, { language: LANG, watch_region: REGION });
   const list = d.results || [];
@@ -215,7 +240,10 @@ async function main() {
     await sleep(300);
   }
 
-  const doc = { generated: new Date().toISOString(), region: REGION, providers };
+  const genres = await genrePaare();
+  console.log(`Genre-Paarung: ${genres.length} Eintraege (deutsch/englisch).`);
+
+  const doc = { generated: new Date().toISOString(), region: REGION, providers, genres };
   const { writeFileSync } = await import('node:fs');
   writeFileSync('streaming.json', JSON.stringify(doc));
   const tot = providers.reduce((a, p) => a + p.f.length + p.s.length, 0);
