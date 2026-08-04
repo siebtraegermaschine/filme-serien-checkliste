@@ -21,6 +21,7 @@ import linksRouter from './routes/links.js';
 import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteSicherung } from './lib/sicherung.js';
+import { starteThemen } from './lib/themen.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PgSession = connectPgSimple(session);
@@ -185,4 +186,8 @@ app.listen(port, () => {
   // Vollsicherung (siehe lib/sicherung.js). Laeuft mit dem Container mit,
   // damit dafuer kein Cronjob von Hand eingerichtet werden muss.
   starteSicherung();
+  // Woechentlich die Themen-Schlagwoerter nachtragen (siehe lib/themen.js) --
+  // Trends wie True Crime kennt TMDB nur als Schlagwort, nicht als Genre, und
+  // neu hinzugekommene Titel sollen ihres von selbst bekommen.
+  starteThemen();
 });

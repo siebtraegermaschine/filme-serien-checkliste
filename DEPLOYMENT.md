@@ -83,6 +83,7 @@ DATABASE_URL=postgres://postgres:postgres@localhost:5432/filme_serien \
 | `RESEND_API_KEY` | Nur falls `MAIL_PROVIDER=resend` |
 | `APP_BASE_URL` | Für Links in E-Mails (Passwort-Reset) |
 | `CORS_ORIGIN` | Nur nötig, wenn Frontend von anderer Origin läuft (lokal optional) |
+| `TMDB_API_KEY` | Trailer, Teilen-Vorschauen und der wöchentliche Themen-Nachtrag |
 
 `.env` ist in `.gitignore` -- niemals committen.
 
@@ -169,6 +170,30 @@ gunzip -c backups/moviematch-nutzer-....sql.gz | docker compose -f docker-compos
 **Noch offen:** Die Sicherung liegt auf demselben Server. Das schützt gegen
 kaputte Importläufe und Fehlbedienung, nicht gegen den Ausfall der Maschine.
 Eine Kopie nach außen (Hetzner Storage Box o. ä.) fehlt bewusst noch.
+
+### Themen-Schlagwörter (True Crime & Co.)
+
+Die Genres der App kommen 1:1 von TMDB, und TMDB kennt kein Genre „True Crime".
+Solche Trends pflegt TMDB als **Schlagwort**. `backend/lib/themen.js` trägt sie
+nach: Ein Thema ist eine Zeile in `THEMEN`, entweder mit fester
+TMDB-Keyword-ID oder mit einem Suchbegriff, den der Lauf selbst auflöst
+(übernommen wird nur eine exakte Namensgleichheit).
+
+Das Backend startet den Nachtrag **wöchentlich** mit -- neu hinzugekommene Titel
+bekommen ihr Schlagwort also von selbst. Vorher gab es pro Thema ein eigenes
+Skript, das jemand von Hand starten musste; „TrueCrime" hing deshalb an 94
+Titeln, während TMDB rund 1.500 kennt.
+
+Von Hand anstoßen (z. B. direkt nach dem Hinzufügen eines Themas):
+
+```
+docker compose -f docker-compose.yml exec -T backend node scripts/backfill-themen.mjs --dry-run
+docker compose -f docker-compose.yml exec -T backend node scripts/backfill-themen.mjs
+```
+
+Geschrieben wird ausschließlich additiv -- bestehende Schlagwörter bleiben
+unberührt, und die täglichen Importe überschreiben `keywords` ohnehin nie.
+Abschaltbar per `THEMEN_DISABLED=1`.
 
 ### Schutz gegen unvollständige Importläufe
 
