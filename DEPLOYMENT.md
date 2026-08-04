@@ -83,7 +83,7 @@ DATABASE_URL=postgres://postgres:postgres@localhost:5432/filme_serien \
 | `RESEND_API_KEY` | Nur falls `MAIL_PROVIDER=resend` |
 | `APP_BASE_URL` | Für Links in E-Mails (Passwort-Reset) |
 | `CORS_ORIGIN` | Nur nötig, wenn Frontend von anderer Origin läuft (lokal optional) |
-| `TMDB_API_KEY` | Trailer, Teilen-Vorschauen und der wöchentliche Themen-Nachtrag |
+| `TMDB_API_KEY` | Trailer, Teilen-Vorschauen und der tägliche Themen-Nachtrag |
 
 `.env` ist in `.gitignore` -- niemals committen.
 
@@ -179,10 +179,14 @@ nach: Ein Thema ist eine Zeile in `THEMEN`, entweder mit fester
 TMDB-Keyword-ID oder mit einem Suchbegriff, den der Lauf selbst auflöst
 (übernommen wird nur eine exakte Namensgleichheit).
 
-Das Backend startet den Nachtrag **wöchentlich** mit -- neu hinzugekommene Titel
-bekommen ihr Schlagwort also von selbst. Vorher gab es pro Thema ein eigenes
-Skript, das jemand von Hand starten musste; „TrueCrime" hing deshalb an 94
-Titeln, während TMDB rund 1.500 kennt.
+Das Backend startet den Nachtrag **täglich um 05:15 UTC** -- also nach den
+Importläufen (04:00 und 04:30). Die Titel der Nacht bekommen ihr Schlagwort
+damit noch am selben Morgen. Die feste Uhrzeit ist Absicht: An ein Intervall ab
+Containerstart gekoppelt würde jeder Deploy den Rhythmus verschieben. Beim Start
+selbst läuft nichts, sonst stieße jedes Deploy ein paar hundert TMDB-Abrufe an.
+
+Vorher gab es pro Thema ein eigenes Skript, das jemand von Hand starten musste;
+„TrueCrime" hing deshalb an 94 Titeln, während TMDB rund 1.500 kennt.
 
 Von Hand anstoßen (z. B. direkt nach dem Hinzufügen eines Themas):
 

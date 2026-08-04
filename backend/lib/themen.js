@@ -12,8 +12,8 @@ import { pool } from '../db/pool.js';
  * rund 1.500 kennt.
  *
  * Jetzt ist ein Thema EINE Zeile in THEMEN, und der Lauf wiederholt sich
- * woechentlich (siehe starteThemen). Neu hinzugekommene Titel bekommen ihr
- * Schlagwort damit von selbst.
+ * taeglich nach den Importen (siehe starteThemen). Neu hinzugekommene Titel
+ * bekommen ihr Schlagwort damit noch am selben Morgen.
  *
  * Der Weg ist bewusst umgekehrt zum Naheliegenden: Statt fuer 41.000 Titel
  * einzeln die Schlagwoerter abzufragen, holt der Lauf ueber /discover die
@@ -150,18 +150,34 @@ export async function themenNachtragen({ dryRun = false, log = console.log } = {
   return gesamt;
 }
 
+// Taeglich um 05:15 UTC -- also NACH den Importlaeufen (Streaming 04:00, Kino
+// 04:30, siehe .github/workflows). Die Titel der Nacht bekommen ihr Schlagwort
+// damit noch am selben Morgen.
+//
+// Bewusst an einer Uhrzeit statt an einem Intervall ab Containerstart: Sonst
+// verschoebe jeder Deploy den Rhythmus, und der Lauf landete irgendwann
+// mitten in den Importen. Und bewusst KEIN Lauf beim Start -- sonst stiesse
+// jedes Deploy ein paar hundert TMDB-Abrufe an, ohne dass sich am Bestand
+// etwas geaendert haette. Wer nicht warten will, nimmt scripts/backfill-themen.mjs.
+const THEMEN_STUNDE_UTC = 5;
+const THEMEN_MINUTE_UTC = 15;
+function msBisNaechstemLauf() {
+  const jetzt = new Date();
+  const ziel = new Date(jetzt);
+  ziel.setUTCHours(THEMEN_STUNDE_UTC, THEMEN_MINUTE_UTC, 0, 0);
+  if (ziel <= jetzt) ziel.setUTCDate(ziel.getUTCDate() + 1);
+  return ziel.getTime() - jetzt.getTime();
+}
 export function starteThemen() {
   if (process.env.THEMEN_DISABLED === '1') {
     console.log('[themen] deaktiviert (THEMEN_DISABLED=1)');
     return;
   }
-  const EINE_WOCHE = 7 * 24 * 60 * 60 * 1000;
+  const EIN_TAG = 24 * 60 * 60 * 1000;
   const lauf = () => {
     themenNachtragen().catch((err) => console.error('[themen] Lauf fehlgeschlagen:', err.message));
   };
-  // Deutlich nach dem Start: Ein frisch hochgefahrener Container soll nicht
-  // gleichzeitig Migration, Aufraeumen, Sicherung und ein paar hundert
-  // TMDB-Abrufe stemmen.
-  setTimeout(lauf, 5 * 60 * 1000);
-  setInterval(lauf, EINE_WOCHE);
+  const wartezeit = msBisNaechstemLauf();
+  console.log(`[themen] naechster Lauf in ${Math.round(wartezeit / 60000)} Minuten (taeglich 05:15 UTC).`);
+  setTimeout(function(){ lauf(); setInterval(lauf, EIN_TAG); }, wartezeit);
 }

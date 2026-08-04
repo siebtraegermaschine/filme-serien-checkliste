@@ -186,8 +186,8 @@ app.listen(port, () => {
   // Vollsicherung (siehe lib/sicherung.js). Laeuft mit dem Container mit,
   // damit dafuer kein Cronjob von Hand eingerichtet werden muss.
   starteSicherung();
-  // Woechentlich die Themen-Schlagwoerter nachtragen (siehe lib/themen.js) --
-  // Trends wie True Crime kennt TMDB nur als Schlagwort, nicht als Genre, und
-  // neu hinzugekommene Titel sollen ihres von selbst bekommen.
+  // Taeglich nach den Importen die Themen-Schlagwoerter nachtragen (siehe
+  // lib/themen.js) -- Trends wie True Crime kennt TMDB nur als Schlagwort,
+  // nicht als Genre, und die Titel der Nacht sollen ihres von selbst bekommen.
   starteThemen();
 });
