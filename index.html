@@ -470,6 +470,13 @@
   .disc-hint { text-align:center; color:var(--text-dim); font-size:13px; margin:0 auto 14px; max-width:620px; line-height:1.5; }
   .load-more-btn { display:block; margin:18px auto 6px; padding:11px 26px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--text-dim); transition:all .15s; }
   @media (hover: hover) { .load-more-btn:hover { border-color:var(--accent); color:var(--accent); } }
+  /* Im Kino folgt direkt unter dem Knopf schon die naechste Ueberschrift
+     ("In Kürze im Kino", "Bald im Kino") -- die 6px von oben liessen den Knopf
+     dort an der folgenden Ueberschrift kleben, waehrend darueber 18px Luft
+     standen. Gleicher Abstand auf beiden Seiten. Bewusst nur im Kino: In den
+     uebrigen Listen steht der Knopf am Listenende, dort folgt keine
+     Ueberschrift und die 6px sind richtig. */
+  .cinema-section .load-more-btn { margin-bottom: 18px; }
   /* Der Kino-Hinweis unter den Suchtreffern ist kein "mehr vom Gleichen",
      sondern ein Wegweiser in einen anderen Bereich -- deshalb in Akzentfarbe. */
   .kino-hinweis { border-color:var(--accent); color:var(--accent); }
@@ -549,6 +556,14 @@
   .modal p { color:var(--text); font-size:14px; line-height:1.6; }
   .install-steps { margin:12px 0 0 20px; padding:0; color:var(--text); font-size:14px; line-height:1.7; }
   .install-steps li { margin-bottom:6px; }
+  /* Wie .prov-intro (Farbe/Groesse/Zeilenabstand), nur nummeriert und mit
+     Luft zwischen den Schritten -- der Einstieg in "Gemeinsam schauen"
+     beschreibt drei Schritte nacheinander, als Fliesstext war die Reihenfolge
+     nicht zu sehen. Der linke Einzug haelt die Ziffern im Kasten (das globale
+     * { padding:0 } nimmt der Liste sonst den Platz fuer die Marker). */
+  .prov-steps { margin:0 0 12px 18px; padding:0; color:var(--text-dim); font-size:13px; line-height:1.5; }
+  .prov-steps li { margin-bottom:9px; }
+  .prov-steps li:last-child { margin-bottom:0; }
   #installChoice .modal-actions { margin-top:14px; }
   .modal-x { position:absolute; top:10px; right:12px; background:none; border:none;
     color:var(--text-dim); font-size:18px; cursor:pointer; line-height:1; }
@@ -613,12 +628,19 @@
   .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts .wl-btn { padding-left: 6px; padding-right: 6px; white-space: nowrap; }
   /* Auf schmalen Bildschirmen reichen 62% nicht: Drei gleich breite Knoepfe
      bekommen dort weniger als "▶ Ansehen" braucht (nachgemessen per scrollWidth
-     gegen clientWidth bei 375px). Beide Bloecke ruecken deshalb in eine eigene
-     Zeile unter Trailer bzw. "Ähnliche Titel" und nehmen die volle Breite --
-     gleich breit und linksbuendig bleiben sie dabei, nur eben ueber die ganze
-     Zeile statt rechts daneben. */
+     gegen clientWidth bei 375px).
+     Die Bloecke nehmen deshalb hier nur noch ihre Inhaltsbreite und ruecken
+     rechtsbuendig neben Trailer bzw. "Ähnliche Titel" -- statt wie vorher auf
+     volle Breite zu gehen. Volle Breite erzwang naemlich einen Umbruch: Aus den
+     zwei Zeilen wurden vier, und die Knoepfe wurden dabei viel breiter als ihre
+     Beschriftung (nachgemessen bei 430px: "gesehen" 205px fuer 81px Text).
+     Beide Bloecke sitzen jetzt buendig an der rechten Kante -- die gemeinsame
+     linke Kante von oben ist bei diesen Breiten nicht zu halten, ohne dass
+     wieder umgebrochen wird. Geprueft bei 320/375/430px, auch mit
+     kompakte-aktionen. */
   @media (max-width: 520px) {
-    .watch-rechts, .det-rechts { flex-basis: 100%; }
+    .watch-rechts, .det-rechts { flex: 0 1 auto; margin-left: auto; }
+    .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts > .det-left { flex: 0 1 auto; }
   }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
@@ -748,6 +770,14 @@
   .det-actions .wl-btn.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   .det-actions .seen-btn.on { background: rgba(76,195,138,.15); border-color: var(--done); color: var(--done); }
   .det-actions .seen-glyph { font-size: 1.3em; line-height: 1; vertical-align: -0.06em; }
+  /* Dasselbe engere Mass wie in der Zeile darueber (siehe .watch-btn im selben
+     Bereich). Muss NACH .det-actions button stehen, sonst bleibt es wirkungslos.
+     Ohne das waeren die unteren Knoepfe bei gleichem Text 10px breiter als die
+     oberen -- und genau diese 10px entscheiden bei 320px darueber, ob
+     "Ähnliche Titel" und der rechte Block noch in eine Zeile passen. */
+  @media (max-width: 520px) {
+    .det-actions button { padding: 8px 10px; font-size: 12.5px; }
+  }
   /* Ab der zehnten Nutzung schrumpfen Watchlist und Gesehen auf ihr Zeichen
      (siehe nutzungZaehlen): Wer die App kennt, braucht die Beschriftung nicht
      mehr, und die Zeile wird ruhiger. Ausgeblendet wird nur das Wort -- die
@@ -1165,11 +1195,14 @@
          DEREN Listen oeffnen -- man haette sie fuer Filter der eigenen halten
          koennen. "Match" wird als eigener Satz genannt, weil der Abgleich sonst
          wie eine Unterfunktion des Ansehens wirkt. -->
-    <p class="prov-intro">Lade Freunde und Verwandte zu MovieMatch ein. Sieh dir die
-      <b>Watchliste</b> oder die <b>gesehenen</b> Titel deiner Kontakte an. Füge Titel,
-      die dir gefallen, einfach deinen Listen hinzu. Über <b>„Match"</b> filterst du deine
-      Watchliste mit der deiner Kontakte. So findet ihr schnell und einfach Filme, Serien
-      oder Kinofilme, die ihr alle sehen möchtet.</p>
+    <ol class="prov-steps">
+      <li>Lade Freunde und Verwandte zu MovieMatch ein.</li>
+      <li>Sieh dir die <b>Watchliste</b> oder die <b>gesehenen</b> Titel deiner Kontakte an.
+        Füge Titel, die dir gefallen, einfach deinen Listen hinzu.</li>
+      <li>Über <b>„Match"</b> filterst du deine Watchliste mit der deiner Kontakte.
+        So findet ihr schnell und einfach Filme, Serien oder Kinofilme, die ihr alle
+        sehen möchtet.</li>
+    </ol>
     <div class="profile-list" id="profileList"></div>
     <button type="button" id="profileInviteBtn" class="profile-add">＋ Person einladen</button>
     <hr class="account-sep">
