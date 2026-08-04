@@ -3604,7 +3604,11 @@ async function renderCinemaPage(){
 function openCinemaPage(){
   // Kinostarts haben mit fremden Watchlists nichts zu tun -- die Ansicht endet
   // hier, sonst stuende die Leiste "Watchlist von Anna" ueber dem Kinoprogramm.
+  // updateProfileBtn() muss dabei mit: die Leiste wird nur dort neu geschrieben,
+  // ohne den Aufruf blieb der alte Text stehen, obwohl die Ansicht schon beendet war.
+  var warAnsicht = ANSICHT_PERSON != null;
   ANSICHT_PERSON = null;
+  if (warAnsicht) updateProfileBtn();
   cinemaMode = true;
   // Bei jedem frischen Aufruf wieder eingeklappt starten (nicht den Zustand
   // eines vorherigen Besuchs behalten).
