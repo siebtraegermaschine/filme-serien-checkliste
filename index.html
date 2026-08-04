@@ -2174,7 +2174,7 @@ function metaHtml(meta, kind){
 // Gegenstueck fuer unmarkierte Titel ist poolItemLi() -- seit dem
 // Entdecken-Umbau stehen beide Bauarten in derselben Liste nebeneinander,
 // unterscheidbar an li.item vs. li.disc (siehe applyFilter).
-function eigeneZeileLi(tab, i, prof) {
+function eigeneZeileLi(tab, i, profile) {
   const s = state[tab];
   const item = s.data[i];
   const li = document.createElement('li');
@@ -2195,7 +2195,7 @@ function eigeneZeileLi(tab, i, prof) {
   // Titel getrennte Listen waren, fiel das nicht auf -- in einer gemeinsamen,
   // nach Taste-Score sortierten Liste haetten sonst zwei Skalen nebeneinander
   // gestanden und derselbe Titel je nach Seite eine andere Zahl gezeigt.
-  const rowScore = s.pool[i] ? scoreCand(s.pool[i], prof).score : scoreItem(item, d, prof);
+  const rowScore = s.pool[i] ? punkteFuer(s.pool[i], profile) : scoreItem(item, d, profile[0]);
   const scoreBadge = '<span class="score' + (rowScore >= 60 ? ' hi' : '') + '" title="Taste Score" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">' + rowScore + '</span>';
   var creditRows = '';
   if (d.c && d.c.length) creditRows += '<div class="credits"><b>Besetzung:</b> ' + nameChips(d.c) + '</div>';
@@ -2235,13 +2235,26 @@ function eigeneZeileLi(tab, i, prof) {
   }, s.pool[i] ? function(){ oeffneTeilen(s.pool[i]); } : null);
   return li;
 }
+// Welches Geschmacksprofil zaehlt gerade? Normalerweise das eigene. Zeigt die
+// Liste bei aktivem Abgleich dagegen Vorschlaege (nur "Neue entdecken", siehe
+// enforceDiscoverLock), ist die Frage nicht "passt das zu MIR", sondern "passt
+// das zu UNS" -- dann fliessen die Profile aller Ausgewaehlten mit ein, genau
+// wie auf der Kino-Seite.
+function aktuellesProfil(){
+  var eigen = buildProfile();
+  return (matchAktiv() && discoverFilterOn) ? alleProfile(eigen) : [eigen];
+}
+function punkteFuer(poolItem, profile){
+  return profile.length > 1 ? scoreMitProfilen(poolItem, profile)
+                            : scoreCand(poolItem, profile[0]).score;
+}
 // Sortierwert fuer BEIDE Zeilenarten aus demselben POOL-Eintrag lesen -- nur so
 // ergibt die gemeinsame Sortierung eine ehrliche Rangfolge. Ein eigener Titel
 // soll nicht deshalb weiter oben stehen, weil er auf der Watchlist steht.
-function eintragSortwert(e, sortBy, prof){
+function eintragSortwert(e, sortBy, profile){
   const p = e.pool;
   if (!p) return -Infinity;
-  if (sortBy === 'taste') return scoreCand(p, prof).score;
+  if (sortBy === 'taste') return punkteFuer(p, profile);
   if (sortBy === 'year') return p.y || 0;
   if (sortBy === 'newstream') return p.fs ? new Date(p.fs).getTime() : -Infinity;
   return gewichteteNote(p.r, p.vc);
@@ -2390,7 +2403,7 @@ function renderLeerzustand(q){
     'das allen gefällt.</li>';
 }
 function render() {
-  const prof = buildProfile();
+  const profile = aktuellesProfil();
   list.classList.add('main-list');
   list.innerHTML = '';
   updateSortMenuActive();
@@ -2402,7 +2415,7 @@ function render() {
   const eintraege = sammleEintraege(q);
   const sortBy = effectiveSort(activeTab);
   const werte = new Map();
-  eintraege.forEach(function(e){ werte.set(e, eintragSortwert(e, sortBy, prof)); });
+  eintraege.forEach(function(e){ werte.set(e, eintragSortwert(e, sortBy, profile)); });
   eintraege.sort(function(a, b){ return werte.get(b) - werte.get(a); });
   if (!eintraege.length) { renderLeerzustand(q); kinoHinweisAnhaengen(q); return; }
   // Gekuerzt wird nur, wenn "Neue entdecken" aktiv ist -- die eigenen Listen sind
@@ -2410,8 +2423,8 @@ function render() {
   const sichtbar = discoverFilterOn ? eintraege.slice(0, discoveryLoadLimit) : eintraege;
   sichtbar.forEach(function(e){
     list.appendChild(e.art === 'eigen'
-      ? eigeneZeileLi(e.tab, e.idx, prof)
-      : poolItemLi(e.pool, scoreCand(e.pool, prof).score,
+      ? eigeneZeileLi(e.tab, e.idx, profile)
+      : poolItemLi(e.pool, punkteFuer(e.pool, profile),
                    e.art === 'fremd' ? { fremdSterne: e.sterne, fremdName: profilName(ANSICHT_PERSON) } : undefined));
   });
   if (eintraege.length > sichtbar.length) {
@@ -2746,15 +2759,21 @@ function sucheZustandAnwenden(){
     discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
   }
 }
-// "Neue entdecken" zeigt Titel, die du NICHT markiert hast -- die koennen per
-// Definition nie gemeinsame Titel mit jemandem sein. Solange ein Abgleich
-// laeuft, ist der Knopf deshalb gesperrt statt heimlich wirkungslos. War er
-// beim Auswaehlen der Person an, faellt die Ansicht auf die Watchlist zurueck;
-// ohne das stuende man vor einer leeren Liste ohne erkennbaren Grund.
+// Bei aktivem Abgleich schliessen sich "Neue entdecken" und Watchlist/Gesehen
+// gegenseitig aus. Grund: Die beiden bedeuten dann Verschiedenes.
+// Watchlist/Gesehen sind auf gemeinsame Titel eingeschraenkt (siehe rebuild),
+// "Neue entdecken" dagegen zeigt Titel, die per Definition bei niemandem auf
+// einer Liste stehen -- gefiltert wird dort also nichts, bewertet wird nach dem
+// GEMEINSAMEN Geschmack (siehe aktuellesProfil). Nebeneinander in einer Liste
+// hiesse eine Zeile "das habt ihr beide vorgemerkt" und die naechste "das kennt
+// keiner von euch, wuerde aber passen" -- ohne dass man es ihnen ansieht.
+//
+// Frueher war der Knopf waehrend eines Abgleichs schlicht gesperrt. Das nahm
+// die nuetzliche Ansicht "Vorschlaege fuer uns alle" mit weg.
 function enforceDiscoverLock(){
   if (!matchAktiv() || !discoverFilterOn) return;
+  if (!watchlistFilterOn && !seenFilterOn) return;   // schon eindeutig
   discoverFilterOn = false;
-  if (!watchlistFilterOn && !seenFilterOn) watchlistFilterOn = true;
   discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
 }
 // Aktualisiert nur die Button-Zustaende der Filterzeilen -- getrennt von
@@ -2786,7 +2805,7 @@ function updateFilterRowUI(){
   btns.done.classList.toggle('active', st.seen);
   btns.discover.classList.toggle('active', st.disc);
   btns.inStream.classList.toggle('active', inStreamFilterOn);
-  btns.discover.disabled = matchAktiv();
+  btns.discover.disabled = false;   // nur in fremden Listen gesperrt (Zweig oben)
   // "Deine Streaming-Anbieter" ergibt im Kino keinen Sinn -- die Filme laufen
   // dort ja gerade erst an. Die Sortierung hat die Kino-Seite in eigener Form
   // (#cinemaSort, mit "Neu im Kino" statt "Neu im Streaming"), deshalb geht die
@@ -2864,6 +2883,13 @@ function toggleStatus(feld){
   }
   var st = statusLesen();
   st[feld] = !st[feld];
+  // Waehrend eines Abgleichs sind "Neue entdecken" und Watchlist/Gesehen
+  // gegenseitig ausschliessend (siehe enforceDiscoverLock): Der gerade
+  // angeklickte gewinnt, die andere Seite geht aus.
+  if (matchAktiv() && !cinemaMode) {
+    if (feld === 'disc') { if (st.disc) { st.wl = false; st.seen = false; } }
+    else if (st[feld]) st.disc = false;
+  }
   // Mindestens einer muss aktiv bleiben, sonst waere die Liste ohne
   // erkennbaren Grund leer -- der Klick auf den letzten aktiven laeuft ins Leere.
   if (!st.wl && !st.seen && !st.disc) return;
@@ -2876,10 +2902,11 @@ function toggleStatus(feld){
 btns.open.onclick = () => toggleStatus('wl');
 btns.done.onclick = () => toggleStatus('seen');
 btns.discover.onclick = () => {
-  // Gesperrt waehrend eines Personen-Abgleichs (siehe enforceDiscoverLock) --
-  // der disabled-Zustand des Knopfes faengt den Klick zwar schon ab, die
-  // Pruefung hier haelt die Regel aber auch bei programmatischen Aufrufen.
-  if (matchAktiv()) return;
+  // In einer fremden Liste gibt es keine Entsprechung zu "Neue entdecken" --
+  // was jemand NICHT markiert hat, ist keine Liste von ihm. Beim Abgleich ist
+  // der Knopf dagegen wieder benutzbar: Er bedeutet dort "Vorschlaege fuer uns
+  // alle" und schliesst Watchlist/Gesehen aus (siehe toggleStatus).
+  if (personenAnsicht()) return;
   toggleStatus('disc');
 };
 // "Deine Streaming-Anbieter" liegt auf einer anderen Achse: ein zusaetzlicher
