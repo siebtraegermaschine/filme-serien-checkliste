@@ -1980,15 +1980,34 @@ var kinoStatus = { wl: true, seen: true, disc: true };
 var ANSICHT_PERSON = null;
 var ANSICHT_ART = 'w';                 // 'w' = Watchlist, 's' = Gesehen
 function personenAnsicht(){ return ANSICHT_PERSON != null; }
+// Ein Einstieg ueber die Personenliste setzt einen definierten Startpunkt,
+// statt zu erben, was zuletzt bei den eigenen Titeln eingestellt war: immer
+// Filme, und genau der Status, den man angeklickt hat. Ohne das landete man
+// nach einem Klick auf "Watchlist von Anna" womoeglich in deren Serien mit
+// "Gesehen" -- also vor einer leeren Liste ohne erkennbaren Grund.
+//
+// Der Status wird dabei auch fuer DANACH gesetzt: Verlaesst man die fremde
+// Liste wieder, bleibt er stehen. Erst eine spaetere Aenderung von Hand
+// ueberschreibt ihn -- der Tabwechsel selbst aendert weiterhin nichts daran
+// (siehe setTab).
+function einstiegSetzen(art){
+  closeCinemaPage();
+  activeTab = 'filme';
+  watchlistFilterOn = art === 'w';
+  seenFilterOn = art === 's';
+  discoverFilterOn = false;
+  inStreamFilterOn = false;
+  searchEl.value = '';
+  sucheZustandVorher = null;
+  discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+}
 function personenAnsichtOeffnen(uid, art){
   ANSICHT_PERSON = uid;
   ANSICHT_ART = art;
   // Ein laufender Abgleich und eine fremde Liste widersprechen sich: Der
   // Abgleich zeigt die Schnittmenge, hier geht es um DEREN Liste.
   MATCH_WITH = [];
-  searchEl.value = '';
-  sucheZustandVorher = null;
-  discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+  einstiegSetzen(art);
   closeProfileModal();
   rebuild();
   renderCurrentTab();
@@ -3609,6 +3628,11 @@ function openCinemaPage(){
   var warAnsicht = ANSICHT_PERSON != null;
   ANSICHT_PERSON = null;
   if (warAnsicht) updateProfileBtn();
+  // Die Kino-Seite startet IMMER mit allen drei Status -- egal, womit man
+  // hergekommen ist. Mit einem uebernommenen "nur Watchlist" waere sie fast
+  // immer leer: Kaum jemand merkt sich Filme vor, die erst naechste Woche
+  // anlaufen. Einschraenken kann man hier von Hand.
+  kinoStatus = { wl: true, seen: true, disc: true };
   cinemaMode = true;
   // Bei jedem frischen Aufruf wieder eingeklappt starten (nicht den Zustand
   // eines vorherigen Besuchs behalten).
@@ -4017,9 +4041,14 @@ function renderProfileList(){
         if (tun === 'm') {
           // Abgleich und fremde Liste schliessen sich aus -- der Abgleich zeigt
           // die Schnittmenge, die Listenansicht deren gesamte Liste.
-          personenAnsichtSchliessen();
+          ANSICHT_PERSON = null;
           var i = MATCH_WITH.indexOf(uid);
           if (i === -1) MATCH_WITH.push(uid); else MATCH_WITH.splice(i, 1);
+          // Auch der Abgleich ist ein Einstieg und bekommt denselben definierten
+          // Startpunkt: Filme, nur Watchlist. Nur beim ABwaehlen der letzten
+          // Person nicht -- dann kehrt man in die eigene Ansicht zurueck und
+          // soll dort nicht zusaetzlich umgestellt werden.
+          if (MATCH_WITH.length) einstiegSetzen('w');
           renderProfileList(); updateProfileBtn(); rebuild(); renderCurrentTab();
           return;
         }
