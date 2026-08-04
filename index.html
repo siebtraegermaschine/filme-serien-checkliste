@@ -2994,6 +2994,22 @@ function buildSearchIndex(){
   });
   SEARCH_INDEX = idx;
 }
+// Bekanntheit fliesst in den Trefferwert ein, statt nur bei Gleichstand zu
+// entscheiden. Grund: Ein Name, der mit dem Suchwort BEGINNT, gilt als besserer
+// Treffer (90) als einer, der es nur enthaelt (70) -- deshalb stand "Smith
+// Foreman" (1 Titel) vor Will Smith (37) und "Pittsburgh Pennsylvania" vor Brad
+// Pitt. Der Bonus ueberbrueckt diesen Abstand, aber nur fuer Begriffe mit
+// wirklich vielen Titeln.
+//
+// Logarithmisch und gedeckelt: Der Sprung von 1 auf 20 Titel soll etwas
+// bedeuten, der von 200 auf 2000 kaum noch. 30 Punkte sind die Obergrenze --
+// genug, um 70 ueber einen Anfangstreffer mit 90 zu heben, zu wenig, um einen
+// exakten Treffer (100) zu ueberholen. An echten Katalogdaten abgestimmt.
+var BEKANNTHEIT_FAKTOR = 8;
+var BEKANNTHEIT_MAX = 30;
+function bekanntheitsBonus(n){
+  return n > 1 ? Math.min(BEKANNTHEIT_MAX, BEKANNTHEIT_FAKTOR * Math.log(n)) : 0;
+}
 function getSearchSuggestions(query){
   var q = query.trim();
   if (q.length < 2) return [];
@@ -3015,21 +3031,24 @@ function getSearchSuggestions(query){
       // ist, steht im Suchindex -- nur wenn der Begriff dort fehlt, bleibt es
       // beim bisherigen Standard.
       var treffer = SEARCH_INDEX.find(function(e){ return e.text.toLowerCase() === ziel.toLowerCase(); });
-      results.push({ text: ziel, type: treffer ? treffer.type : 'Genre', n: treffer ? treffer.n : 0, score: 120 });
+      var zielN = treffer ? treffer.n : 0;
+      results.push({ text: ziel, type: treffer ? treffer.type : 'Genre', n: zielN,
+                     score: 120 + bekanntheitsBonus(zielN) });
     }
   });
   SEARCH_INDEX.forEach(function(entry){
     var score = matchScore(q, entry.text);
-    if (score > 0) results.push({ text: entry.text, type: entry.type, n: entry.n, score: score });
+    if (score > 0) results.push({ text: entry.text, type: entry.type, n: entry.n,
+                                  score: score + bekanntheitsBonus(entry.n) });
   });
   var byText = new Map();
   results.forEach(function(r){
     var key = r.text.toLowerCase();
     if (!byText.has(key) || byText.get(key).score < r.score) byText.set(key, r);
   });
-  // Reihenfolge: Trefferguete zuerst, bei Gleichstand der Begriff mit den
-  // meisten Titeln, erst danach der kuerzere Text. Ohne die mittlere Stufe
-  // entschied allein die Namenslaenge -- siehe buildSearchIndex.
+  // Der Wert enthaelt die Bekanntheit bereits (siehe bekanntheitsBonus). Die
+  // Titelzahl bleibt als zweite Stufe fuer den Fall, dass zwei Begriffe auf
+  // denselben Wert kommen; erst danach entscheidet der kuerzere Text.
   return Array.from(byText.values())
     .sort(function(a, b){
       return b.score - a.score || (b.n || 0) - (a.n || 0) || a.text.length - b.text.length;
