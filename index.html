@@ -480,13 +480,16 @@
   /* Der Kino-Hinweis unter den Suchtreffern ist kein "mehr vom Gleichen",
      sondern ein Wegweiser in einen anderen Bereich -- deshalb in Akzentfarbe. */
   .kino-hinweis { border-color:var(--accent); color:var(--accent); }
-  /* "🎬 Ab 14.08. im Kino" (siehe kinoStartChipHtml) sitzt in derselben Reihe
-     wie die Anbieter-Chips, sagt aber etwas anderes: nicht "hier laeuft es",
-     sondern "es laeuft noch nirgends". Akzentfarbe wie beim Kino-Hinweis oben.
-     Doppelter Klassen-Selektor mit Absicht: .provider-chip steht in dem per JS
-     nachgeschobenen Style-Block (siehe Discovery weiter unten) und damit SPAETER
-     als diese Regel -- bei gleicher Spezifitaet bliebe sie sonst wirkungslos. */
-  .provider-chip.kino-chip { border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
+  /* "Ab 14.08. im Kino" (siehe kinoStartMetaHtml) steht hinter "Film"/"Serie"
+     in derselben Metazeile. Akzentfarbe wie beim Kino-Hinweis oben -- das ist
+     der einzige Teil der Zeile, der nicht beschreibt was der Titel IST, sondern
+     dass es ihn noch nicht zu sehen gibt. nowrap haelt Datum und "im Kino"
+     zusammen; umbrechen darf die Angabe nur als Ganzes.
+     Der Abstand ersetzt das " · " der uebrigen Angaben (siehe dort, warum).
+     Unter Filme/Serien ist die Metazeile ein Flex-Container mit column-gap:6px
+     -- dort kommt der Abstand von der Luecke, die Margin wuerde sich addieren. */
+  .kino-start { color: var(--accent); font-weight: 600; white-space: nowrap; margin-left: 6px; }
+  li.item .meta .kino-start { margin-left: 0; }
   li.disc { display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--border);
     border-radius:12px; padding:10px 14px; margin-bottom:10px; }
   li.disc .drank { color:var(--text-dim); font-weight:700; width:26px; text-align:center; flex:none; }
@@ -1587,11 +1590,13 @@ function providerLabel(name){
   return (name === 'Amazon Prime Video') ? 'Amazon Prime' : name;
 }
 
-/* ---- "🎬 Ab 14.08. im Kino" an noch nicht angelaufenen Titeln ----
+/* ---- "· Ab 14.08. im Kino" an noch nicht angelaufenen Titeln ----
    Wer einen Kinofilm auf die Watchlist setzt, sieht ihn danach unter Filme
    zwischen lauter verfuegbaren Titeln stehen -- ohne Hinweis darauf, dass es
-   ihn noch gar nicht zu sehen gibt. Auf der Kino-Seite selbst steht das Datum
-   schon in der Metazeile (siehe kinoMeta), dort entfaellt der Chip.
+   ihn noch gar nicht zu sehen gibt. Der Zusatz haengt sich deshalb hinter
+   "Film"/"Serie" in die Metazeile, in Akzentfarbe (siehe .kino-start). Auf der
+   Kino-Seite selbst steht das Datum dort ohnehin schon (siehe kinoMeta), dort
+   entfaellt er.
 
    KINO_STARTS ist bewusst ein var (kein let wie CINEMA_DATA): Die Zeilen
    werden womoeglich gerendert, bevor der Kino-Abschnitt weiter unten
@@ -1599,7 +1604,7 @@ function providerLabel(name){
    Zugriff ein ReferenceError. Gefuellt wird die Map aus loadCinemaData().
 
    Der Vergleich mit "heute" passiert bei jedem Aufruf und nicht schon beim
-   Aufbau der Map: Sonst zeigte eine ueber Mitternacht offene Seite den Chip
+   Aufbau der Map: Sonst zeigte eine ueber Mitternacht offene Seite den Hinweis
    noch an einem Film, der inzwischen angelaufen ist. */
 var KINO_STARTS = null;          // TMDB-ID (nur Filme) -> ISO-Datum des Kinostarts
 function kinoStartsUebernehmen(data){
@@ -1625,11 +1630,16 @@ function kinoStartKurz(iso){
   var t = iso.split('-');
   return t[2] + '.' + t[1] + '.' + (t[0] === String(new Date().getFullYear()) ? '' : t[0].slice(-2));
 }
-function kinoStartChipHtml(tmdbId, typ){
+// Haengt sich hinter "Film"/"Serie" in dieselbe Metazeile. Bewusst OHNE
+// fuehrendes " · " wie zwischen den uebrigen Angaben: Neben einem Poster passt
+// die Zeile auf dem Handy nicht in eine Zeile, und ein umgebrochenes
+// "· Ab 14.08. im Kino" faengt dann mit einem Punkt an, der wie ein
+// Aufzaehlungszeichen aussieht. Abgesetzt wird ueber Farbe und Abstand
+// (siehe .kino-start).
+function kinoStartMetaHtml(tmdbId, typ){
   var rd = kinoStartFuer(tmdbId, typ);
   if (!rd) return '';
-  return '<div class="dproviders"><span class="provider-chip kino-chip">🎬 Ab ' +
-         kinoStartKurz(rd) + ' im Kino</span></div>';
+  return '<span class="kino-start">Ab ' + kinoStartKurz(rd) + ' im Kino</span>';
 }
 
 /* ---- Ansehen / Leihen / Kaufen (Detailansicht) ----
@@ -2238,7 +2248,10 @@ function metaYear(meta){
   }
   return 0;
 }
-function metaHtml(meta, kind){
+// kinoHtml steht bewusst zwischen main und extra: Es gehoert direkt hinter
+// "Film"/"Serie", waehrend extra (Originaltitel u.ae.) bei Platzmangel ohnehin
+// in die naechste Zeile rutscht.
+function metaHtml(meta, kind, kinoHtml){
   var parts = String(meta).split(' · ');
   var rating = parts.shift() || '';
   var genre = parts.length ? parts.shift() : '';
@@ -2254,7 +2267,7 @@ function metaHtml(meta, kind){
   var typeLabel = isMini ? 'Mini-Serie' : (kind === 'serien' ? 'Serie' : (kind === 'filme' ? 'Film' : ''));
   var main = [rating, genre, year, typeLabel].filter(Boolean).join(' · ');
   var extra = parts.join(' · ');
-  return '<span class="meta-main">' + esc(main) + '</span>' +
+  return '<span class="meta-main">' + esc(main) + '</span>' + (kinoHtml || '') +
          (extra ? '<span class="meta-extra">' + esc(extra) + '</span>' : '');
 }
 // Eine Zeile fuer einen bereits markierten Titel (Watchlist/Gesehen). Das
@@ -2310,8 +2323,8 @@ function eigeneZeileLi(tab, i, profile) {
   li.innerHTML =
     posterThumb +
     '<span class="info"><div class="title">' + '<span class="ttext">' + item[0] + '</span>' + scoreBadge + '</div>' +
-    '<div class="meta">' + metaHtml(item[1], tab) + '</div>' +
-    kinoStartChipHtml(d.tmdbId, d.type) + providerChipsHtml(d.providers) + detailsHtml +
+    '<div class="meta">' + metaHtml(item[1], tab, kinoStartMetaHtml(d.tmdbId, d.type)) + '</div>' +
+    providerChipsHtml(d.providers) + detailsHtml +
     watchRowHtml(d.tmdbId, d.type, item[0], d.id) + actionsHtml + '</span>';
   wireRow(li, tab, i);
   attachSwipeToRemove(li, async function(){
@@ -5009,7 +5022,7 @@ async function loadCatalogAndRefresh(){
     // Begriff auch Kinotreffer gibt (siehe kinoHinweisAnhaengen). Bewusst ohne
     // await: Die Titelliste soll darauf nicht warten.
     // Danach einmal neu zeichnen: Die Liste steht zu diesem Zeitpunkt meist
-    // schon, der "Ab ... im Kino"-Chip (siehe kinoStartChipHtml) kann aber erst
+    // schon, das "Ab ... im Kino" (siehe kinoStartMetaHtml) kann aber erst
     // jetzt gesetzt werden. Ohne das erschiene er erst beim naechsten Klick.
     loadCinemaData().then(function(){ renderCurrentTab(); }).catch(function(){});
     await loadUserProgressAndRefresh();
@@ -5198,9 +5211,13 @@ function poolItemLi(item, score, opts){
     '<div class="dinfo">' +
       '<div class="dtitle">'+esc(item.t)+
         '<span class="score'+(score>=60?' hi':'')+'" title="Taste Score" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">'+score+'</span></div>'+
+      // Auf der Kino-Seite steht der Start schon in der Metazeile selbst (siehe
+      // kinoMeta) -- der Zusatz waere dort eine Wiederholung.
       '<div class="dmeta">' + esc(opts && opts.kinoDatum !== undefined
         ? kinoMeta(item, opts.kinoDatum, typeLabel)
-        : candMeta(item) + ' · ' + typeLabel) + '</div>'+
+        : candMeta(item) + ' · ' + typeLabel) +
+        ((opts && opts.kinoDatum !== undefined) ? '' : kinoStartMetaHtml(item.tmdbId, item.type)) +
+        '</div>'+
       // Beim Durchsehen einer fremden Liste: deren Sterne-Bewertung, sofern
       // vorhanden. Das ist der eigentliche Mehrwert gegenueber der blossen
       // Titelliste -- "Anna fand das 9 von 10" sagt mehr als der Titel allein.
@@ -5209,9 +5226,6 @@ function poolItemLi(item, score, opts){
             ? opts.fremdName + ': ' + opts.fremdSterne + ' von 10 Sternen'
             : opts.fremdName + ' hat das noch nicht bewertet') + '</div>'
         : '') +
-      // Auf der Kino-Seite steht der Kinostart schon in der Metazeile darueber
-      // (kinoDatum, siehe kinoMeta) -- dort waere der Chip eine Wiederholung.
-      ((opts && opts.kinoDatum !== undefined) ? '' : kinoStartChipHtml(item.tmdbId, item.type)) +
       providerChipsHtml(item.providers) +
       candDetailsHtml(item, item.type) +
       watchRowHtml(item.tmdbId, item.type, item.t, item.realId,
