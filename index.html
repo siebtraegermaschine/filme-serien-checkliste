@@ -1981,7 +1981,13 @@ var kinoStatus = { wl: true, seen: true, disc: true };
 // Geschmacksprofile genutzt, nie angezeigt.
 var ANSICHT_PERSON = null;
 var ANSICHT_ART = 'w';                 // 'w' = Watchlist, 's' = Gesehen
-function personenAnsicht(){ return ANSICHT_PERSON != null; }
+// Im Kino ist eine fremde Liste ausgesetzt, nicht beendet: Das Kinoprogramm
+// zeigt dort alle Titel (siehe kinoStatus), Jennys Watchlist waere sinnlos
+// darauf angewendet. Beendet wird sie deshalb NICHT -- wer zurueck auf Filme
+// oder Serien wechselt, ist wieder in ihrer Liste. Vorher wurde sie beim Klick
+// auf Kino stillschweigend geloest, was aussah wie ein Fehler.
+function personenAnsicht(){ return ANSICHT_PERSON != null && !cinemaMode; }
+function personenAnsichtAusgesetzt(){ return ANSICHT_PERSON != null && cinemaMode; }
 // Ein Einstieg ueber die Personenliste setzt einen definierten Startpunkt,
 // statt zu erben, was zuletzt bei den eigenen Titeln eingestellt war: immer
 // Filme, und genau der Status, den man angeklickt hat. Ohne das landete man
@@ -3627,12 +3633,11 @@ function openCinemaPage(){
   // hier, sonst stuende die Leiste "Watchlist von Anna" ueber dem Kinoprogramm.
   // updateProfileBtn() muss dabei mit: die Leiste wird nur dort neu geschrieben,
   // ohne den Aufruf blieb der alte Text stehen, obwohl die Ansicht schon beendet war.
-  ANSICHT_PERSON = null;
   cinemaMode = true;
   // Die Leiste haengt am Bereich: Im Kino heisst derselbe Abgleich anders (er
-  // filtert dort nicht, siehe unten), und eine gerade beendete Personenansicht
-  // muss verschwinden. Geschrieben wird sie nur in updateProfileBtn -- ohne den
-  // Aufruf blieb der Text des vorherigen Bereichs stehen.
+  // filtert dort nicht, siehe unten), und eine fremde Liste ist hier ausgesetzt.
+  // Geschrieben wird sie nur in updateProfileBtn -- ohne den Aufruf blieb der
+  // Text des vorherigen Bereichs stehen.
   updateProfileBtn();
   // Bei jedem frischen Aufruf wieder eingeklappt starten (nicht den Zustand
   // eines vorherigen Besuchs behalten).
@@ -3995,6 +4000,16 @@ function updateProfileBtn(){
     document.getElementById('matchBarClear').textContent = 'zurück';
     return;
   }
+  // Im Kino ausgesetzt: sagen, dass sie noch besteht und hier nur nicht gilt --
+  // sonst wirkt das verschwundene "Watchlist von Jenny" wie ein Verlust.
+  if (personenAnsichtAusgesetzt()) {
+    bar.style.display = 'flex';
+    document.getElementById('matchBarText').textContent =
+      (ANSICHT_ART === 'w' ? 'Watchlist von ' : 'Gesehen von ') + profilName(ANSICHT_PERSON) +
+      ' gilt im Kino nicht';
+    document.getElementById('matchBarClear').textContent = 'beenden';
+    return;
+  }
   document.getElementById('matchBarClear').textContent = 'aufheben';
   var zeigtMatch = matchAktiv();
   var zeigen = zeigtMatch || fskAktiv();
@@ -4099,6 +4114,7 @@ function closeProfileModal(){ _profileModal.style.display = 'none'; }
 document.getElementById('profileBtn').onclick = function(){ requireLogin(openProfileModal); };
 document.getElementById('matchBarClear').onclick = function(){
   if (personenAnsicht()) { personenAnsichtSchliessen(); return; }
+  if (personenAnsichtAusgesetzt()) { ANSICHT_PERSON = null; updateProfileBtn(); return; }
   MATCH_WITH = []; MY_FSK = null;
   updateProfileBtn(); rebuild(); renderCurrentTab();
   if (cinemaMode) renderCinemaPage();
