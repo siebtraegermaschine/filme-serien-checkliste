@@ -18,7 +18,7 @@ WORKDIR /app
 COPY backend/package.json backend/package-lock.json ./backend/
 RUN cd backend && npm ci --omit=dev
 
-COPY index.html impressum.html datenschutz.html reset-password.html moviematch.png manifest.json icon-192.png icon-512.png apple-touch-icon.png favicon-32.png ./
+COPY index.html impressum.html datenschutz.html nutzungsbedingungen.html reset-password.html moviematch.png manifest.json icon-192.png icon-512.png apple-touch-icon.png favicon-32.png ./
 COPY backend/ ./backend/
 
 WORKDIR /app/backend

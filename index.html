@@ -424,6 +424,8 @@
     color:var(--border); cursor:pointer; transition:color .1s; }
   .rating-stars button.active { color:var(--accent); }
   .auth-error { color:#e0655c; font-size:13px; min-height:16px; text-align:center; }
+  .auth-terms { font-size: 12px; color: var(--text-dim); line-height: 1.45; margin: -2px 0 2px; }
+  .auth-terms a { color: var(--accent); }
   .auth-error.ok { color:var(--done); }
   .auth-submit { background:var(--accent-soft); border:1px solid var(--accent); color:var(--accent);
     border-radius:8px; padding:10px; font-size:14px; font-weight:700; cursor:pointer; }
@@ -960,7 +962,7 @@
 
 <footer>
   Dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, „Gesehen"-Status und deine „<i>Watchlist</i>" werden mit deinem Konto gespeichert, sobald du <i class="footer-auth-link" id="footerAuthLink" role="button" tabindex="0" aria-label="Anmelden">angemeldet</i> bist.<br>
-  <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
+  <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a>
 </footer>
 
 <button type="button" id="toTop" class="to-top" aria-label="Nach oben">
@@ -1022,6 +1024,15 @@
       <label>E-Mail<input type="email" id="authEmail" required autocomplete="email"></label>
       <label>Passwort<input type="password" id="authPassword" required autocomplete="current-password" minlength="8"></label>
       <div id="authError" class="auth-error"></div>
+      <!-- Nur beim Registrieren sichtbar (siehe setAuthMode): Nutzungsbedingungen
+           werden nur dann Vertragsbestandteil, wenn beim Anlegen des Kontos
+           ausdruecklich auf sie hingewiesen wird. Ein Link in der Fusszeile
+           allein reicht dafuer nicht. -->
+      <div id="authTerms" class="auth-terms" style="display:none">
+        Mit dem Anlegen eines Kontos akzeptierst du die
+        <a href="nutzungsbedingungen.html" target="_blank" rel="noopener">Nutzungsbedingungen</a>
+        und die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+      </div>
       <button type="submit" id="authSubmit" class="auth-submit">Anmelden</button>
     </form>
     <div id="authToggle" class="auth-toggle"></div>
@@ -4293,6 +4304,8 @@ function setAuthMode(m){
   nameInp.required = m === 'register';
   authPassword.style.display = m === 'forgot' ? 'none' : '';
   authPassword.required = m !== 'forgot';
+  var termsEl = document.getElementById('authTerms');
+  if (termsEl) termsEl.style.display = m === 'register' ? '' : 'none';
   if (m === 'login') {
     authTitle.textContent = 'Anmelden';
     authSubmit.textContent = 'Anmelden';
