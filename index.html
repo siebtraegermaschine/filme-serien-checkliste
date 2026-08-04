@@ -480,16 +480,16 @@
   /* Der Kino-Hinweis unter den Suchtreffern ist kein "mehr vom Gleichen",
      sondern ein Wegweiser in einen anderen Bereich -- deshalb in Akzentfarbe. */
   .kino-hinweis { border-color:var(--accent); color:var(--accent); }
-  /* "Ab 14.08. im Kino" (siehe kinoStartMetaHtml) steht hinter "Film"/"Serie"
-     in derselben Metazeile. Akzentfarbe wie beim Kino-Hinweis oben -- das ist
-     der einzige Teil der Zeile, der nicht beschreibt was der Titel IST, sondern
-     dass es ihn noch nicht zu sehen gibt. nowrap haelt Datum und "im Kino"
-     zusammen; umbrechen darf die Angabe nur als Ganzes.
-     Der Abstand ersetzt das " · " der uebrigen Angaben (siehe dort, warum).
-     Unter Filme/Serien ist die Metazeile ein Flex-Container mit column-gap:6px
-     -- dort kommt der Abstand von der Luecke, die Margin wuerde sich addieren. */
-  .kino-start { color: var(--accent); font-weight: 600; white-space: nowrap; margin-left: 6px; }
-  li.item .meta .kino-start { margin-left: 0; }
+  /* "Ab 14.08. im Kino" (siehe kinoStartMetaHtml) steht IMMER in einer eigenen
+     Zeile unter der Metazeile -- neben Bewertung, Genre, Jahr und Film/Serie
+     passt es auf dem Handy ohnehin nur selten daneben, und ein Hinweis, der mal
+     hinter "Film" und mal darunter steht, springt beim Scrollen.
+     Akzentfarbe wie beim Kino-Hinweis oben: Das ist der einzige Teil, der nicht
+     beschreibt was der Titel IST, sondern dass es ihn noch nicht zu sehen gibt.
+     flex-basis:100% ist die eigene Zeile unter Filme/Serien (dort ist .meta ein
+     Flex-Container), display:block dieselbe unter Discovery/Streaming. */
+  .kino-start { display: block; flex-basis: 100%; margin-top: 1px;
+    color: var(--accent); font-weight: 600; }
   li.disc { display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--border);
     border-radius:12px; padding:10px 14px; margin-bottom:10px; }
   li.disc .drank { color:var(--text-dim); font-weight:700; width:26px; text-align:center; flex:none; }
@@ -646,11 +646,21 @@
      Beschriftung (nachgemessen bei 430px: "gesehen" 205px fuer 81px Text).
      Beide Bloecke sitzen jetzt buendig an der rechten Kante -- die gemeinsame
      linke Kante von oben ist bei diesen Breiten nicht zu halten, ohne dass
-     wieder umgebrochen wird. Geprueft bei 320/375/430px, auch mit
-     kompakte-aktionen. */
+     wieder umgebrochen wird.
+     Die untere Zeile ist die knappere von beiden ("Ähnliche Titel" allein ist
+     breiter als "Trailer" plus Luecke), deshalb dort zusaetzlich engere
+     Abstaende: 8px statt 10px zwischen den Bloecken, 6px statt 8px innerhalb.
+     Das sind die 4px, an denen ein 360px-Geraet sonst scheitert -- gemessen
+     fehlten dort 2,8px. Optisch ist der Unterschied nicht auszumachen.
+     Zwei Zeilen sind damit ab 360px sicher (gemessen bei 360/375/430px, auch
+     mit kompakte-aktionen). Bei 320px reicht es nicht: Die untere Zeile
+     braucht dort 293px und hat 254px -- das liesse sich nur durch eine
+     kuerzere Beschriftung als "Ähnliche Titel" loesen. */
   @media (max-width: 520px) {
     .watch-rechts, .det-rechts { flex: 0 1 auto; margin-left: auto; }
     .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts > .det-left { flex: 0 1 auto; }
+    .det-actions { gap: 8px; }
+    .det-rechts { gap: 6px; }
   }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
@@ -722,8 +732,11 @@
     border-radius:8px; cursor:pointer; overflow:hidden; }
   @media (hover: hover) { .profile-item:hover { background:var(--card-hover); } }
   .profile-item.active { background:var(--accent-soft); }
-  .profile-item .pi-name { flex:1; font-size:14.5px; color:var(--text); }
-  .profile-item.active .pi-name { color:var(--accent); font-weight:600; }
+  /* Fett, weil der Name in der Zeile die eigentliche Auskunft ist -- daneben
+     stehen drei gleich aussehende Knoepfe, die bei jeder Person dieselben sind.
+     Beim aktiven Abgleich kommt die Akzentfarbe dazu, die Staerke bleibt. */
+  .profile-item .pi-name { flex:1; font-size:14.5px; color:var(--text); font-weight:700; }
+  .profile-item.active .pi-name { color:var(--accent); }
   .profile-item .pi-check { width:18px; height:18px; accent-color:var(--accent); flex-shrink:0; }
   /* Drei Knoepfe je Person: DEREN Watchlist, DEREN Gesehen-Liste, Abgleich.
      Umbrechen erlaubt -- auf schmalen Geraeten rutschen sie unter den Namen,
@@ -915,7 +928,7 @@
        Abgleich). Sie ist bewusst laenger als in eine Zeile passt und bricht auf
        schmalen Geraeten um -- die vollstaendige Erklaerung war hier wichtiger
        als die Einzeiligkeit. -->
-  <p class="sub sub-zweit"><b>Sieh dir die Watchlist deiner Kontakte an und filtere nach euren <i>Übereinstimmungen</i>.</b></p>
+  <p class="sub sub-zweit"><b>Sieh dir die Watchliste deiner Kontakte an und filtere nach euren <i>Übereinstimmungen</i>.</b></p>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -984,7 +997,7 @@
          gibt dafuer keine eigenen Knoepfe mehr. -->
     <div class="tb-toprow">
       <div class="filter-group">
-        <button id="fOpen" class="active">Watchlist</button>
+        <button id="fOpen" class="active">Watchliste</button>
         <button id="fDone">Gesehen</button>
         <button id="fDiscover">Neue entdecken</button>
       </div>
@@ -1046,7 +1059,7 @@
 </div>
 
 <footer>
-  Dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, „Gesehen"-Status und deine „<i>Watchlist</i>" werden mit deinem Konto gespeichert, sobald du <i class="footer-auth-link" id="footerAuthLink" role="button" tabindex="0" aria-label="Anmelden">angemeldet</i> bist.<br>
+  Dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, „Gesehen"-Status und deine „<i>Watchliste</i>" werden mit deinem Konto gespeichert, sobald du <i class="footer-auth-link" id="footerAuthLink" role="button" tabindex="0" aria-label="Anmelden">angemeldet</i> bist.<br>
   <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a>
 </footer>
 
@@ -1142,11 +1155,11 @@
     <button class="modal-x" id="howToModalX" aria-label="Schließen">✕</button>
     <h3>Anleitung</h3>
     <ol class="install-steps">
-      <li>Tippe auf <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was bedeutet „Neue entdecken“?">Neue entdecken</i> und füge Titel deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)</li>
+      <li>Tippe auf <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was bedeutet „Neue entdecken“?">Neue entdecken</i> und füge Titel deiner „<i>Watchliste</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)</li>
       <!-- Bewusst ohne "Sieh dir die Watchlisten deiner Kontakte an": Fremde
            Listen durchblaettern gibt es noch nicht, nur den Abgleich. Sobald die
            Ansicht steht, gehoert der Halbsatz hier hinein. -->
-      <li>Schaut gemeinsam: Verknüpfe dich oben links mit Freund:innen oder Familie. Dann kannst du dir deren Watchlist ansehen und Titel daraus übernehmen – oder nach euren Übereinstimmungen filtern, um sofort einen Titel zu finden, den ihr zusammen schauen wollt.</li>
+      <li>Schaut gemeinsam: Verknüpfe dich oben links mit Freund:innen oder Familie. Dann kannst du dir deren Watchliste ansehen und Titel daraus übernehmen – oder nach euren Übereinstimmungen filtern, um sofort einen Titel zu finden, den ihr zusammen schauen wollt.</li>
       <li>Entscheide dich einfach immer nur noch zwischen Filmen, Serien oder ob du ins Kino gehen möchtest, filtere ggf. nur nach Titeln, die aktuell im Streaming kostenlos laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die TMDB-Bewertung?">TMDB-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.</li>
       <li><b>Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</b></li>
     </ol>
@@ -1209,9 +1222,9 @@
       <li>Lade Freunde und Verwandte zu MovieMatch ein.</li>
       <li>Sieh dir die <b>Watchliste</b> oder die <b>gesehenen</b> Titel deiner Kontakte an.
         Füge Titel, die dir auch gefallen, einfach deinen eigenen Listen hinzu.</li>
-      <li>Über <b>„Match"</b> filterst du deine Watchliste mit der deiner Kontakte.
+      <li>Über <b>„Match"</b> filterst du deine Watchliste mit denen deiner Kontakte.
         So findet ihr schnell und einfach Filme, Serien oder Kinofilme, die ihr gemeinsam
-        sehen möchtet.</li>
+        als Nächstes sehen möchtet.</li>
     </ol>
     <div class="profile-list" id="profileList"></div>
     <button type="button" id="profileInviteBtn" class="profile-add">＋ Person einladen</button>
@@ -1300,7 +1313,7 @@
     <h3>Konto löschen</h3>
     <p class="delete-warn">Dein Konto wird <b>in 14 Tagen</b> endgültig gelöscht. Bis dahin kannst
       du das rückgängig machen – melde dich einfach wieder an. Danach ist es endgültig.</p>
-    <p class="delete-warn">Gelöscht werden dann dein Konto, deine Watchlist, alle
+    <p class="delete-warn">Gelöscht werden dann dein Konto, deine Watchliste, alle
       „Gesehen"-Markierungen, ausgeblendete Titel und deine Verknüpfungen mit anderen Personen.
       Verknüpfte Personen sehen dich danach nicht mehr; ihre eigenen Listen bleiben unberührt.</p>
     <p class="delete-warn"><b>Ohne Bezug zu dir erhalten</b> bleiben deine Suchbegriffe und die
@@ -1630,12 +1643,8 @@ function kinoStartKurz(iso){
   var t = iso.split('-');
   return t[2] + '.' + t[1] + '.' + (t[0] === String(new Date().getFullYear()) ? '' : t[0].slice(-2));
 }
-// Haengt sich hinter "Film"/"Serie" in dieselbe Metazeile. Bewusst OHNE
-// fuehrendes " · " wie zwischen den uebrigen Angaben: Neben einem Poster passt
-// die Zeile auf dem Handy nicht in eine Zeile, und ein umgebrochenes
-// "· Ab 14.08. im Kino" faengt dann mit einem Punkt an, der wie ein
-// Aufzaehlungszeichen aussieht. Abgesetzt wird ueber Farbe und Abstand
-// (siehe .kino-start).
+// Kommt als eigene Zeile unter die Metazeile (siehe .kino-start) -- deshalb
+// ohne das trennende " · ", das zwischen den Angaben INNERHALB der Zeile steht.
 function kinoStartMetaHtml(tmdbId, typ){
   var rd = kinoStartFuer(tmdbId, typ);
   if (!rd) return '';
@@ -2248,9 +2257,9 @@ function metaYear(meta){
   }
   return 0;
 }
-// kinoHtml steht bewusst zwischen main und extra: Es gehoert direkt hinter
-// "Film"/"Serie", waehrend extra (Originaltitel u.ae.) bei Platzmangel ohnehin
-// in die naechste Zeile rutscht.
+// kinoHtml steht bewusst zwischen main und extra: Es bekommt eine eigene Zeile
+// direkt unter Bewertung/Genre/Jahr/Typ, waehrend extra (Originaltitel u.ae.)
+// darunter folgt.
 function metaHtml(meta, kind, kinoHtml){
   var parts = String(meta).split(' · ');
   var rating = parts.shift() || '';
@@ -2308,7 +2317,7 @@ function eigeneZeileLi(tab, i, profile) {
       '<button type="button" class="similar-btn">Ähnliche Titel</button>' +
       '<div class="det-rechts">' +
         '<div class="det-left">' +
-          '<button type="button" aria-label="Watchlist" class="wl-btn' + (_watched ? ' on' : '') + '"><span class="wl-glyph">' + (_watched ? '★' : '☆') + '</span> <span class="btn-wort">Watchlist</span></button>' +
+          '<button type="button" aria-label="Watchliste" class="wl-btn' + (_watched ? ' on' : '') + '"><span class="wl-glyph">' + (_watched ? '★' : '☆') + '</span> <span class="btn-wort">Watchliste</span></button>' +
         '</div>' +
         '<button type="button" aria-label="gesehen" class="seen-btn' + (_seen ? ' on' : '') + '">' + '<span class="seen-glyph">✓</span> <span class="btn-wort">gesehen</span>' + '</button>' +
       '</div>' +
@@ -2461,7 +2470,7 @@ function renderLeerzustand(q){
   // gesperrt ist.
   if (personenAnsicht()) {
     var wer = profilName(ANSICHT_PERSON);
-    var was = ANSICHT_ART === 'w' ? 'auf der Watchlist' : 'als gesehen markiert';
+    var was = ANSICHT_ART === 'w' ? 'auf der Watchliste' : 'als gesehen markiert';
     list.innerHTML = '<li class="watch-empty">' +
       (q ? 'Keine Treffer für „' + esc(searchEl.value.trim()) + '" bei ' + esc(wer) + '.'
          : esc(wer) + ' hat hier nichts ' + esc(was) + '.') + '</li>';
@@ -2483,7 +2492,7 @@ function renderLeerzustand(q){
   if (matchAktiv()) {
     var wer = MATCH_WITH.map(profilName).join(' und ');
     list.innerHTML = '<li class="watch-empty">Keine gemeinsamen Titel mit ' + esc(wer) +
-      '. Je mehr ihr beide eurer Watchlist hinzufügt, desto mehr Übereinstimmungen gibt es. ' +
+      '. Je mehr ihr beide eurer Watchliste hinzufügt, desto mehr Übereinstimmungen gibt es. ' +
       'Oben links kannst du die Auswahl wieder aufheben.</li>';
     return;
   }
@@ -2494,11 +2503,11 @@ function renderLeerzustand(q){
     list.innerHTML = '<li class="watch-empty">Keine Titel für diese Auswahl.</li>';
     return;
   }
-  list.innerHTML = '<li class="watch-empty">Dies ist deine Watchlist. Füge mind. 20 Titel über „Neue entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>. ' +
+  list.innerHTML = '<li class="watch-empty">Dies ist deine Watchliste. Füge mind. 20 Titel über „Neue entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>. ' +
     'Zukünftig musst du nur noch auswählen, ob du einen Film oder eine Serie schauen möchtest oder ins Kino gehen willst. ' +
-    'Hier siehst du dann deine persönliche Watchlist, sortiert nach deinem Geschmack.<br><br>' +
+    'Hier siehst du dann deine persönliche Watchliste, sortiert nach deinem Geschmack.<br><br>' +
     '<u>Du möchtest mit anderen Filme genießen?</u><br>' +
-    'Links oben kannst du Personen zu der App einladen. Danach kannst du dir deren Watchlist ansehen und ' +
+    'Links oben kannst du Personen zu der App einladen. Danach kannst du dir deren Watchliste ansehen und ' +
     'Titel daraus übernehmen – oder nach euren Übereinstimmungen filtern und sofort etwas finden, ' +
     'das allen gefällt.</li>';
 }
@@ -2656,9 +2665,9 @@ function confirmRemove(frage){
    aus. Wortlaut identisch mit der Rueckfrage im Teilen-Dialog (siehe dort).
    Liefert true, wenn der Wechsel stattfinden soll. */
 var GESEHEN_ZU_WL_FRAGE = 'Du hast diesen Titel als gesehen markiert. Auf der ' +
-  'Watchlist gilt er nicht mehr als gesehen: Er verschwindet aus „Gesehen“ und ' +
+  'Watchliste gilt er nicht mehr als gesehen: Er verschwindet aus „Gesehen“ und ' +
   'deine Sterne-Bewertung zählt nicht mehr für deinen Taste-Score. Trotzdem auf ' +
-  'die Watchlist setzen?';
+  'die Watchliste setzen?';
 function bestaetigeGesehenZuWatchlist(){ return confirmRemove(GESEHEN_ZU_WL_FRAGE); }
 /* ---- Einmaliger Hinweis beim ersten Wischen nach links ----
    Vier getrennte Merker, einer je Bereich: Wer in "Filme" schon gewischt hat,
@@ -3805,7 +3814,7 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
   if (!entries.length) {
     var text = q ? 'Keine Treffer für „' + searchEl.value.trim() + '".'
              : fremd ? (profilName(ANSICHT_PERSON) + ' hat hier nichts ' +
-                        (ANSICHT_ART === 'w' ? 'auf der Watchlist' : 'als gesehen markiert') + '.')
+                        (ANSICHT_ART === 'w' ? 'auf der Watchliste' : 'als gesehen markiert') + '.')
              : (st.wl && st.seen && st.disc) ? CINEMA_EMPTY_TEXT[key]
              : 'Keine Titel für diese Auswahl.';
     el.innerHTML = '<li class="cinema-empty">' + esc(text) + '</li>';
@@ -4239,7 +4248,7 @@ function updateProfileBtn(){
   if (personenAnsicht()) {
     bar.style.display = 'flex';
     document.getElementById('matchBarText').textContent =
-      (ANSICHT_ART === 'w' ? 'Watchlist von ' : 'Gesehen von ') + profilName(ANSICHT_PERSON);
+      (ANSICHT_ART === 'w' ? 'Watchliste von ' : 'Gesehen von ') + profilName(ANSICHT_PERSON);
     document.getElementById('matchBarClear').textContent = 'zurück';
     return;
   }
@@ -4277,7 +4286,7 @@ function renderProfileList(){
     return '<div class="profile-item' + (aktiv ? ' active' : '') + '" data-uid="' + escAttr(String(p.id)) + '">' +
              '<span class="pi-name">' + esc(p.name) + '</span>' +
              '<div class="pi-aktionen">' +
-               '<button type="button" class="pi-btn' + (inAnsicht && ANSICHT_ART === 'w' ? ' on' : '') + '" data-tun="w">Watchlist</button>' +
+               '<button type="button" class="pi-btn' + (inAnsicht && ANSICHT_ART === 'w' ? ' on' : '') + '" data-tun="w">Watchliste</button>' +
                '<button type="button" class="pi-btn' + (inAnsicht && ANSICHT_ART === 's' ? ' on' : '') + '" data-tun="s">Gesehen</button>' +
                '<button type="button" class="pi-btn' + (aktiv ? ' on' : '') + '" data-tun="m">Match</button>' +
              '</div>' +
@@ -4362,14 +4371,14 @@ document.getElementById('profileInviteBtn').onclick = async function(){
   // Auch die einladende Seite gibt etwas preis -- die Verknuepfung wirkt in
   // beide Richtungen. Wer den Link verschickt, soll das vorher wissen und nicht
   // erst in der Datenschutzerklaerung nachlesen muessen.
-  if (!confirm('Wer die Einladung annimmt, kann danach deine ganze Watchlist und deine „gesehen"-Liste ansehen, einschließlich deiner Sterne-Bewertungen. Umgekehrt gilt dasselbe. Lösen könnt ihr die Verknüpfung jederzeit.\n\nEinladungslink jetzt erstellen?')) return;
+  if (!confirm('Wer die Einladung annimmt, kann danach deine ganze Watchliste und deine „gesehen"-Liste ansehen, einschließlich deiner Sterne-Bewertungen. Umgekehrt gilt dasselbe. Lösen könnt ihr die Verknüpfung jederzeit.\n\nEinladungslink jetzt erstellen?')) return;
   btn.disabled = true;
   try {
     var d = await apiRequest('POST', '/api/links/invite');
     // Bewusst ohne "seine"/"ihre": Der Anzeigename sagt nichts ueber das
     // Geschlecht der einladenden Person aus, "die Watchlist" trifft immer zu.
     var text = ((CURRENT_USER && CURRENT_USER.displayName) || 'Jemand') +
-               ' möchte auf MovieMatch die Watchlist mit dir teilen. ' +
+               ' möchte auf MovieMatch die Watchliste mit dir teilen. ' +
                'Entdecke neue Filme, Serien und Kinofilme, sortiert nach deinem Geschmack. ' +
                '„Matcht" eure Watchlisten und findet Titel, die ihr beide als Nächstes ' +
                'sehen möchtet:';
@@ -4428,7 +4437,7 @@ async function handleInviteToken(token){
     // Sterne-Bewertungen (siehe personenAnsichtOeffnen und Abschnitt 7 der
     // Datenschutzerklaerung).
     textEl.innerHTML = esc(d.inviter.name) + ' möchte sich mit dir verknüpfen.<br><br>' +
-      'Ihr könnt danach <b>gegenseitig eure ganze Watchlist und „gesehen&quot;-Liste ansehen</b> – ' +
+      'Ihr könnt danach <b>gegenseitig eure ganze Watchliste und „gesehen&quot;-Liste ansehen</b> – ' +
       'einschließlich der Sterne-Bewertungen – und nach gemeinsamen Titeln filtern. ' +
       'Nicht sichtbar werden E-Mail-Adresse und Kontodaten.<br><br>' +
       'Die Verknüpfung lässt sich jederzeit von beiden Seiten wieder lösen. ' +
@@ -5195,7 +5204,7 @@ function poolItemLi(item, score, opts){
   // siehe opts.suppressSimilar).
   var showSimilarBtn = !(opts && opts.suppressSimilar);
   var seenBtnHtml = '<button type="button" aria-label="gesehen" class="seen-btn'+(seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> <span class="btn-wort">gesehen</span></button>';
-  var wlBtnHtml = '<div class="det-left"><button type="button" aria-label="Watchlist" class="wl-btn'+(watchlisted?' on':'')+'"><span class="wl-glyph">'+(watchlisted?'★':'☆')+'</span> <span class="btn-wort">Watchlist</span></button></div>';
+  var wlBtnHtml = '<div class="det-left"><button type="button" aria-label="Watchliste" class="wl-btn'+(watchlisted?' on':'')+'"><span class="wl-glyph">'+(watchlisted?'★':'☆')+'</span> <span class="btn-wort">Watchliste</span></button></div>';
   // Ueberall dieselbe Reihenfolge: links Watchlist, rechts Gesehen -- genau wie
   // unter Filme/Serien (siehe render()). Discovery/Streaming hatten die beiden
   // frueher vertauscht, was beim Wechsel zwischen den Bereichen jedes Mal ein
@@ -5213,11 +5222,13 @@ function poolItemLi(item, score, opts){
         '<span class="score'+(score>=60?' hi':'')+'" title="Taste Score" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">'+score+'</span></div>'+
       // Auf der Kino-Seite steht der Start schon in der Metazeile selbst (siehe
       // kinoMeta) -- der Zusatz waere dort eine Wiederholung.
-      '<div class="dmeta">' + esc(opts && opts.kinoDatum !== undefined
-        ? kinoMeta(item, opts.kinoDatum, typeLabel)
-        : candMeta(item) + ' · ' + typeLabel) +
-        ((opts && opts.kinoDatum !== undefined) ? '' : kinoStartMetaHtml(item.tmdbId, item.type)) +
-        '</div>'+
+      (function(){
+        if (opts && opts.kinoDatum !== undefined) {
+          return '<div class="dmeta">' + esc(kinoMeta(item, opts.kinoDatum, typeLabel)) + '</div>';
+        }
+        return '<div class="dmeta">' + esc(candMeta(item) + ' · ' + typeLabel) +
+               kinoStartMetaHtml(item.tmdbId, item.type) + '</div>';
+      })() +
       // Beim Durchsehen einer fremden Liste: deren Sterne-Bewertung, sofern
       // vorhanden. Das ist der eigentliche Mehrwert gegenueber der blossen
       // Titelliste -- "Anna fand das 9 von 10" sagt mehr als der Titel allein.
@@ -5395,7 +5406,7 @@ function discFilterPool(){
   var INFO_TEXT = {
     ts: { title:'Taste-Score', body:'Der Taste-Score (0–99) schätzt, wie gut ein Titel zu deinem Geschmack passt. '+
       'Er wird aus Genres, Film- und Serieninhalten, Besetzung, Regie und der Nähe zum Erscheinungsjahr all deiner '+
-      'per Watchlist oder „Gesehen“ markierten Filme und Serien zusammen berechnet. Auch die TMDB-Bewertung des '+
+      'per Watchliste oder „Gesehen“ markierten Filme und Serien zusammen berechnet. Auch die TMDB-Bewertung des '+
       'jeweiligen Titels fließt mit ein. Deine 1-10-Sterne-Bewertung bei „Gesehen“-Titeln zählt zusätzlich mit: '+
       'schlecht bewertete Titel prägen deinen Geschmack kaum noch, gut bewertete deutlich stärker. Je mehr Titel du '+
       'markierst, desto persönlicher und treffsicherer wird er. Ab 10 markierten Titeln wird auf Filme, Serien, '+
@@ -5405,10 +5416,10 @@ function discFilterPool(){
       'auf der Filmdatenbank TMDB (The Movie Database) und zeigt, wie gut ein Titel bei einem breiten '+
       'Publikum ankommt. Die Zahl in Klammern dahinter ist die Anzahl der abgegebenen Stimmen: Eine 8,0 '+
       'aus einer einzigen Stimme sagt deutlich weniger aus als eine 8,3 aus 28.000.' },
-    discovery: { title:'Neue entdecken', body:'Zeigt alles, was du noch nicht markiert hast – also weder auf der Watchlist '+
+    discovery: { title:'Neue entdecken', body:'Zeigt alles, was du noch nicht markiert hast – also weder auf der Watchliste '+
       'noch als „gesehen“. Unter „Filme“ nur Filme, unter „Serien“ nur Serien. Sortiert wird nach deinem '+
       'Taste-Score, also nach Genres, Besetzung, Regie und mehr aus all deinen bisher markierten Titeln. '+
-      '„Neue entdecken“ lässt sich mit Watchlist und Gesehen kombinieren – dann steht alles in einer gemeinsamen, '+
+      '„Neue entdecken“ lässt sich mit Watchliste und Gesehen kombinieren – dann steht alles in einer gemeinsamen, '+
       'einheitlich sortierten Liste.' },
     newreleases: { title:'Veröffentlichungsdatum vs. Neu im Streaming', body:'Das sind zwei unterschiedliche Sortierungen: „Veröffentlichungsdatum“ '+
       'sortiert danach, wann ein Film oder eine Serie ursprünglich erschienen ist. „Neu im Streaming“ sortiert danach, '+
@@ -5819,9 +5830,9 @@ async function zeigeGeteiltenTitel(ziel){
     var st = status();
     aktionen.innerHTML =
       '<button type="button" class="' + (st.wl ? 'modal-yes' : 'modal-no') + '" id="sharedWlBtn">' +
-        (st.wl ? '★' : '☆') + ' Watchlist</button>' +
+        (st.wl ? '★' : '☆') + ' Watchliste</button>' +
       '<button type="button" class="' + (st.seen ? 'modal-yes' : 'modal-no') + '" id="sharedSeenBtn">✓ Gesehen</button>';
-    hinweis.textContent = st.wl ? 'Steht schon auf deiner Watchlist.'
+    hinweis.textContent = st.wl ? 'Steht schon auf deiner Watchliste.'
                         : st.seen ? 'Hast du schon gesehen.'
                         : '';
     document.getElementById('sharedWlBtn').onclick = function(){
