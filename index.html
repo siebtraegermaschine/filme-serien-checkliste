@@ -435,9 +435,23 @@
   .account-sep { border:none; border-top:1px solid var(--border); margin:20px 0; }
   .unhide-btn { width:100%; }
   .rating-stars { display:flex; flex-wrap:wrap; justify-content:center; gap:4px; margin-top:16px; }
-  .rating-stars button { background:none; border:none; font-size:22px; line-height:1; padding:2px;
-    color:var(--border); cursor:pointer; transition:color .1s; }
+  /* Stern und Zahl bilden EIN Element -- so bleibt die Zahl beim Umbrechen auf
+     schmalen Geraeten immer unter ihrem Stern. Ohne die Zahlen liess sich bei
+     sechs bis neun Sternen kaum erkennen, welchen man getroffen hat. */
+  .rating-stars button { background:none; border:none; font-size:22px; line-height:1; padding:2px 3px;
+    color:var(--border); cursor:pointer; transition:color .1s;
+    display:flex; flex-direction:column; align-items:center; gap:2px; }
   .rating-stars button.active { color:var(--accent); }
+  .rating-stars .rs-zahl { font-size:10px; line-height:1; color:var(--text-dim); font-weight:600; }
+  .rating-stars button.active .rs-zahl { color:var(--accent); }
+  /* Nach der Wahl kurz stehenbleiben, bevor sich das Fenster schliesst: Ohne
+     diese Bestaetigung war nicht zu sehen, ob die getippte Zahl auch die
+     getroffene war (siehe _ratingBestaetigung). Der Hover darf sie dabei nicht
+     mehr veraendern. */
+  .rating-stars.gewaehlt button { pointer-events:none; }
+  .rating-stars.gewaehlt button.active .rs-stern { animation:sternPuls .35s ease-out; }
+  @keyframes sternPuls { 0% { transform:scale(1); } 45% { transform:scale(1.35); } 100% { transform:scale(1); } }
+  #ratingHint.bestaetigt { color:var(--accent); font-weight:600; }
   .auth-error { color:#e0655c; font-size:13px; min-height:16px; text-align:center; }
   .auth-terms { font-size: 12px; color: var(--text-dim); line-height: 1.45; margin: -2px 0 2px; }
   .auth-terms a { color: var(--accent); }
@@ -1259,18 +1273,18 @@
   <div class="modal">
     <button class="modal-x" id="ratingModalX" aria-label="Abbrechen">✕</button>
     <h3>Wie fandest du <span id="ratingModalTitle"></span>?</h3>
-    <p>1 = schlecht, 10 = sehr gut. Fließt in deinen Taste-Score ein.</p>
+    <p id="ratingHint">1 = schlecht, 10 = sehr gut. Fließt in deinen Taste-Score ein.</p>
     <div class="rating-stars" id="ratingStars">
-      <button type="button" data-star="1" aria-label="1 – schlecht">★</button>
-      <button type="button" data-star="2" aria-label="2">★</button>
-      <button type="button" data-star="3" aria-label="3">★</button>
-      <button type="button" data-star="4" aria-label="4">★</button>
-      <button type="button" data-star="5" aria-label="5 – ok">★</button>
-      <button type="button" data-star="6" aria-label="6">★</button>
-      <button type="button" data-star="7" aria-label="7">★</button>
-      <button type="button" data-star="8" aria-label="8">★</button>
-      <button type="button" data-star="9" aria-label="9">★</button>
-      <button type="button" data-star="10" aria-label="10 – sehr gut">★</button>
+      <button type="button" data-star="1" aria-label="1 – schlecht"><span class="rs-stern">★</span><span class="rs-zahl">1</span></button>
+      <button type="button" data-star="2" aria-label="2"><span class="rs-stern">★</span><span class="rs-zahl">2</span></button>
+      <button type="button" data-star="3" aria-label="3"><span class="rs-stern">★</span><span class="rs-zahl">3</span></button>
+      <button type="button" data-star="4" aria-label="4"><span class="rs-stern">★</span><span class="rs-zahl">4</span></button>
+      <button type="button" data-star="5" aria-label="5 – ok"><span class="rs-stern">★</span><span class="rs-zahl">5</span></button>
+      <button type="button" data-star="6" aria-label="6"><span class="rs-stern">★</span><span class="rs-zahl">6</span></button>
+      <button type="button" data-star="7" aria-label="7"><span class="rs-stern">★</span><span class="rs-zahl">7</span></button>
+      <button type="button" data-star="8" aria-label="8"><span class="rs-stern">★</span><span class="rs-zahl">8</span></button>
+      <button type="button" data-star="9" aria-label="9"><span class="rs-stern">★</span><span class="rs-zahl">9</span></button>
+      <button type="button" data-star="10" aria-label="10 – sehr gut"><span class="rs-stern">★</span><span class="rs-zahl">10</span></button>
     </div>
   </div>
 </div>
@@ -4587,27 +4601,56 @@ var _ratingModal = document.getElementById('ratingModal');
 var _ratingStars = document.getElementById('ratingStars');
 var _ratingStarBtns = Array.from(_ratingStars.querySelectorAll('button'));
 var _ratingResolve = null;
+// Laeuft die kurze Bestaetigung nach der Wahl? Solange sie laeuft, ist die
+// Auswahl eingefroren -- weder Hover noch ein zweiter Klick duerfen sie noch
+// veraendern.
+var _ratingBestaetigung = null;
+var _ratingHintText = '';
 function highlightStars(n){
   _ratingStarBtns.forEach(function(btn){
     btn.classList.toggle('active', Number(btn.dataset.star) <= n);
   });
 }
 _ratingStarBtns.forEach(function(btn){
-  btn.addEventListener('mouseenter', function(){ highlightStars(Number(btn.dataset.star)); });
+  btn.addEventListener('mouseenter', function(){
+    if (_ratingBestaetigung) return;
+    highlightStars(Number(btn.dataset.star));
+  });
   btn.addEventListener('click', function(){
+    if (_ratingBestaetigung) return;
     var n = Number(btn.dataset.star);
-    _ratingModal.style.display = 'none';
-    if (_ratingResolve) { _ratingResolve(n); _ratingResolve = null; }
+    // Erst zeigen, dann schliessen: Vorher verschwand das Fenster im selben
+    // Augenblick, in dem man tippte -- ob man 7 oder 8 getroffen hatte, war
+    // nicht mehr zu erkennen.
+    highlightStars(n);
+    _ratingStars.classList.add('gewaehlt');
+    var hint = document.getElementById('ratingHint');
+    if (hint) { hint.textContent = '✓ ' + n + ' von 10'; hint.classList.add('bestaetigt'); }
+    _ratingBestaetigung = setTimeout(function(){
+      _ratingBestaetigung = null;
+      _ratingStars.classList.remove('gewaehlt');
+      if (hint) { hint.textContent = _ratingHintText; hint.classList.remove('bestaetigt'); }
+      _ratingModal.style.display = 'none';
+      if (_ratingResolve) { _ratingResolve(n); _ratingResolve = null; }
+    }, 700);
   });
 });
 _ratingStars.addEventListener('mouseleave', function(){
   // Ohne aktive Bewertung (erster Aufruf) zurueck auf 0 -- ein bereits gesetztes
   // Rating (erneutes Oeffnen fuer denselben Titel gibt es aktuell nicht, aber
   // schadet auch nicht) bliebe sonst irritierend stehen.
+  if (_ratingBestaetigung) return;
   highlightStars(0);
 });
 function openRatingStars(title){
   document.getElementById('ratingModalTitle').textContent = title || 'diesen Titel';
+  var hint = document.getElementById('ratingHint');
+  if (hint) {
+    if (!_ratingHintText) _ratingHintText = hint.textContent;
+    hint.textContent = _ratingHintText;
+    hint.classList.remove('bestaetigt');
+  }
+  _ratingStars.classList.remove('gewaehlt');
   highlightStars(0);
   _ratingModal.style.display = 'flex';
   return new Promise(function(resolve){
@@ -4615,6 +4658,9 @@ function openRatingStars(title){
   });
 }
 function closeRatingModal(){
+  // Abbrechen waehrend der Bestaetigung darf die Wahl nicht mehr einkassieren --
+  // der Timer loest gleich ohnehin mit der gewaehlten Zahl auf.
+  if (_ratingBestaetigung) return;
   _ratingModal.style.display = 'none';
   if (_ratingResolve) { _ratingResolve(null); _ratingResolve = null; }
 }
