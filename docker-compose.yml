@@ -26,6 +26,11 @@ services:
       - backend/.env
     environment:
       NODE_ENV: production
+    volumes:
+      # Datenbank-Sicherungen (siehe backend/lib/sicherung.js). Eigenes Volume,
+      # damit sie ein Neubauen des Images ueberstehen -- ohne das laegen sie im
+      # Container und waeren beim naechsten Deploy weg.
+      - backup_data:/app/backups
 
   caddy:
     image: caddy:2-alpine
@@ -43,5 +48,6 @@ services:
 
 volumes:
   postgres_data:
+  backup_data:
   caddy_data:
   caddy_config:

@@ -121,14 +121,13 @@ DATABASE_URL=postgres://postgres:postgres@localhost:5432/filme_serien \
 
 ## Backups
 
-`scripts/backup.sh` sichert die Datenbank per `pg_dump` aus dem
-Postgres-Container heraus. Zwei Stufen, weil die Daten unterschiedlich
-wertvoll sind:
+Die Datenbank wird per `pg_dump` gesichert. Zwei Stufen, weil die Daten
+unterschiedlich wertvoll sind:
 
 | Aufruf | Inhalt | Warum |
 |---|---|---|
-| `./scripts/backup.sh taeglich` | Konten, Watchlist/Gesehen samt Bewertungen, Verknüpfungen, `titles` | Nicht wiederbeschaffbar |
-| `./scripts/backup.sh monatlich` | Alles, inkl. der aus TMDB abgeleiteten Caches | Für den Fall, dass TMDB nicht mehr liefert |
+| täglich | Konten, Watchlist/Gesehen samt Bewertungen, Verknüpfungen, `titles` | Nicht wiederbeschaffbar |
+| monatlich (am 1.) | Alles, inkl. der aus TMDB abgeleiteten Caches | Für den Fall, dass TMDB nicht mehr liefert |
 
 Die Dateien landen in `./backups` (über `BACKUP_DIR` änderbar), werden
 gezippt und automatisch ausgedünnt: 14 tägliche, 12 monatliche Stände
@@ -136,15 +135,30 @@ gezippt und automatisch ausgedünnt: 14 tägliche, 12 monatliche Stände
 gilt als fehlgeschlagen und wird verworfen, statt eine unbrauchbare Datei
 stehen zu lassen.
 
-Einmalig auf dem Server einzurichten (das kann nur jemand mit Serverzugang):
+**Das läuft automatisch** -- kein Cronjob nötig. Das Backend startet den
+Zeitplan beim Hochfahren mit (`backend/lib/sicherung.js`): täglich die
+Nutzerdaten, am Monatsersten zusätzlich eine Vollsicherung. `pg_dump` steckt
+dafür im Image (`postgresql16-client`) und verbindet sich über `DATABASE_URL`,
+also genauso wie das Backend selbst.
+
+Die Dateien liegen im Volume `backup_data` unter `/app/backups`. Ansehen:
 
 ```
-crontab -e
-# täglich 03:15 UTC -- vor den Importläufen um 04:00/04:30
-15 3 * * * cd /opt/movietaste && ./scripts/backup.sh taeglich >> /var/log/moviematch-backup.log 2>&1
-# monatlich am 1. um 03:45 UTC
-45 3 1 * * cd /opt/movietaste && ./scripts/backup.sh monatlich >> /var/log/moviematch-backup.log 2>&1
+docker compose -f docker-compose.yml exec backend ls -lh /app/backups
+docker compose -f docker-compose.yml logs backend | grep sicherung
 ```
+
+Herunterkopieren:
+
+```
+docker compose -f docker-compose.yml cp backend:/app/backups ./backups
+```
+
+Abschalten (z. B. wenn später ein externer Dienst übernimmt): `BACKUP_DISABLED=1`
+in `backend/.env`.
+
+`scripts/backup.sh` bleibt als Weg für Sicherungen zwischendurch bestehen --
+etwa direkt vor einem größeren Eingriff.
 
 Wiederherstellen:
 

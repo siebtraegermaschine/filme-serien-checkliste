@@ -20,6 +20,7 @@ import trailersRouter from './routes/trailers.js';
 import linksRouter from './routes/links.js';
 import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
+import { starteSicherung } from './lib/sicherung.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PgSession = connectPgSimple(session);
@@ -180,4 +181,8 @@ app.listen(port, () => {
   // Loescht Konten, deren Widerrufsfrist abgelaufen ist -- beim Start und
   // danach einmal taeglich (siehe lib/kontoAufraeumen.js).
   starteAufraeumen();
+  // Taegliche Datenbank-Sicherung, am Monatsersten zusaetzlich eine
+  // Vollsicherung (siehe lib/sicherung.js). Laeuft mit dem Container mit,
+  // damit dafuer kein Cronjob von Hand eingerichtet werden muss.
+  starteSicherung();
 });
