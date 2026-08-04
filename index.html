@@ -785,10 +785,10 @@
        genau eine -- ab drei Beteiligten waere "beide" schlicht falsch. Und
        bewusst "Findet" statt "Schaut zusammen": die Funktion sucht
        Ueberschneidungen, geschaut wird danach.
-       Nachgemessen: bleibt bis hinunter zu 320px einzeilig -- laengere
-       Fassungen wie "Schaut zusammen dieselben Watchlist-Titel." brechen dort
-       bereits um. -->
-  <p class="sub sub-zweit"><b>Findet <i>gemeinsame</i> Watchlist-Titel.</b></p>
+       Diese Fassung ist bewusst laenger als in eine Zeile passt und bricht auf
+       schmalen Geraeten um -- die ausfuehrlichere Erklaerung war hier wichtiger
+       als die Einzeiligkeit. -->
+  <p class="sub sub-zweit"><b>Schaut gemeinsam und lasst euch nur <i>gemeinsame</i> Watchlist-Titel anzeigen.</b></p>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2804,6 +2804,11 @@ function getSearchSuggestions(query){
   // Synonym-Treffer zuerst (hoechste Prioritaet) -- z.B. "Dokumentation" tippen
   // schlaegt direkt "Dokumentarfilm" vor, auch wenn beide Woerter sich als
   // Zeichenketten kaum aehneln.
+  //
+  // Der Wert liegt bewusst UEBER der 100 fuer einen exakten Treffer aus dem
+  // Suchindex: "Comedy" existiert dort als Genre (bei genau einem Titel) und
+  // wuerde sich sonst mit 100 vor das gemeinte "Komödie" (13.162 Titel)
+  // schieben. Genau der Fall, wegen dem es die Zuordnung ueberhaupt gibt.
   Object.keys(SEARCH_SYNONYMS).forEach(function(key){
     if (key.indexOf(qLower) !== -1 || qLower.indexOf(key) !== -1){
       var ziel = SEARCH_SYNONYMS[key];
@@ -2812,7 +2817,7 @@ function getSearchSuggestions(query){
       // ist, steht im Suchindex -- nur wenn der Begriff dort fehlt, bleibt es
       // beim bisherigen Standard.
       var treffer = SEARCH_INDEX.find(function(e){ return e.text.toLowerCase() === ziel.toLowerCase(); });
-      results.push({ text: ziel, type: treffer ? treffer.type : 'Genre', score: 95 });
+      results.push({ text: ziel, type: treffer ? treffer.type : 'Genre', score: 120 });
     }
   });
   SEARCH_INDEX.forEach(function(entry){
