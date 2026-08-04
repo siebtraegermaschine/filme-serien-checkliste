@@ -870,13 +870,12 @@
        -- dort "Filme & Serien", hier "Übereinstimmungen". Bewusst ohne "beide":
        der Abgleich laeuft ueber eine Liste von Personen (MATCH_WITH), nicht
        ueber genau eine -- ab drei Beteiligten waere "beide" schlicht falsch.
-       Und "Watchlisten" im Plural, weil "andere" mehrere sind.
        Die Zeile beschreibt beide Haelften der Funktion: fremde Listen ansehen
        (siehe personenAnsichtOeffnen) und nach Uebereinstimmungen filtern (der
        Abgleich). Sie ist bewusst laenger als in eine Zeile passt und bricht auf
        schmalen Geraeten um -- die vollstaendige Erklaerung war hier wichtiger
        als die Einzeiligkeit. -->
-  <p class="sub sub-zweit"><b>Sieh dir die Watchlisten von anderen an und filtere nach euren <i>Übereinstimmungen</i>.</b></p>
+  <p class="sub sub-zweit"><b>Sieh dir die Watchlist deiner Kontakte an und filtere nach euren <i>Übereinstimmungen</i>.</b></p>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1161,13 +1160,16 @@
   <div class="modal profile-modal">
     <button class="modal-x" id="profileModalX" aria-label="Schließen">✕</button>
     <h3>Gemeinsam schauen</h3>
-    <!-- Erklaert die drei Knoepfe je Person (siehe renderProfileList). Ohne den
-         Satz war "Watchlist" und "Gesehen" nicht anzusehen, dass sie DEREN
-         Listen oeffnen -- man haette sie fuer Filter der eigenen halten koennen. -->
-    <p class="prov-intro">Bei jeder Person hast du drei Möglichkeiten:
-      <b>Watchlist</b> und <b>Gesehen</b> öffnen deren Liste – Titel daraus kannst du direkt
-      in deine eigene übernehmen. <b>Match</b> zeigt nur noch Titel, die bei euch gemeinsam
-      auf der Liste stehen.</p>
+    <!-- Ordnet die drei Knoepfe je Person ein (siehe renderProfileList): Ohne
+         "deiner Kontakte" war "Watchlist" und "Gesehen" nicht anzusehen, dass sie
+         DEREN Listen oeffnen -- man haette sie fuer Filter der eigenen halten
+         koennen. "Match" wird als eigener Satz genannt, weil der Abgleich sonst
+         wie eine Unterfunktion des Ansehens wirkt. -->
+    <p class="prov-intro">Lade Freunde und Verwandte zu MovieMatch ein. Sieh dir die
+      <b>Watchliste</b> oder die <b>gesehenen</b> Titel deiner Kontakte an. Füge Titel,
+      die dir gefallen, einfach deinen Listen hinzu. Über <b>„Match"</b> filterst du deine
+      Watchliste mit der deiner Kontakte. So findet ihr schnell und einfach Filme, Serien
+      oder Kinofilme, die ihr alle sehen möchtet.</p>
     <div class="profile-list" id="profileList"></div>
     <button type="button" id="profileInviteBtn" class="profile-add">＋ Person einladen</button>
     <hr class="account-sep">
@@ -2549,6 +2551,17 @@ function confirmRemove(frage){
   _removeModal.style.display = 'flex';
   return new Promise(function(aufloesen){ _removeAntwort = aufloesen; });
 }
+/* Rueckfrage beim Wechsel "gesehen" -> Watchlist. Beide schliessen sich aus
+   (siehe toggleWatched), der Titel verschwindet also ohne Vorwarnung aus der
+   Gesehen-Ansicht und die Sterne-Bewertung faellt aus dem Taste-Score. Beides
+   war am Knopf nicht abzulesen -- der Klick sah nach "zusaetzlich vormerken"
+   aus. Wortlaut identisch mit der Rueckfrage im Teilen-Dialog (siehe dort).
+   Liefert true, wenn der Wechsel stattfinden soll. */
+var GESEHEN_ZU_WL_FRAGE = 'Du hast diesen Titel als gesehen markiert. Auf der ' +
+  'Watchlist gilt er nicht mehr als gesehen: Er verschwindet aus „Gesehen“ und ' +
+  'deine Sterne-Bewertung zählt nicht mehr für deinen Taste-Score. Trotzdem auf ' +
+  'die Watchlist setzen?';
+function bestaetigeGesehenZuWatchlist(){ return confirmRemove(GESEHEN_ZU_WL_FRAGE); }
 /* ---- Einmaliger Hinweis beim ersten Wischen nach links ----
    Vier getrennte Merker, einer je Bereich: Wer in "Filme" schon gewischt hat,
    bekommt den Hinweis unter "Serien", in Discovery und im Kino trotzdem noch
@@ -2647,6 +2660,9 @@ function wireRow(li, src, i){
         const frage = wort + ' aus deiner Liste entfernen? Du kannst ' + pron +
           ' über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen.';
         if (!(await confirmRemove(frage))) { wlBtn.blur(); return; }
+      } else if (!getWatchlistFlag(id) && getSeen(id)) {
+        // Wechsel "gesehen" -> Watchlist: siehe bestaetigeGesehenZuWatchlist.
+        if (!(await bestaetigeGesehenZuWatchlist())) { wlBtn.blur(); return; }
       }
       toggleWatched(src, s.data[i][0]);
       suspendHoverUntilMouseMove();
@@ -5152,6 +5168,9 @@ function poolItemLi(item, score, opts){
         var id = await ensurePoolItem(item);
         var next = !getWatchlistFlag(id);
         // Watchlist und Gesehen schliessen sich gegenseitig aus (siehe toggleWatched).
+        // Beim Wechsel von "gesehen" deshalb erst nachfragen (siehe
+        // bestaetigeGesehenZuWatchlist).
+        if (next && getSeen(id) && !(await bestaetigeGesehenZuWatchlist())) return;
         var patch = { watchlist: next };
         if (next) patch.seen = false;
         var ok = true;
@@ -5694,7 +5713,10 @@ async function zeigeGeteiltenTitel(ziel){
       // toggleWatched und den seen-btn-Handler). Beim Wechsel von "gesehen"
       // zurueck auf die Watchlist zaehlt die Sterne-Bewertung nicht mehr fuer
       // den Taste-Score -- das ist ein Verlust, der eine Rueckfrage wert ist.
-      if (jetzt.seen && !confirm('Du hast diesen Titel als gesehen markiert. Auf der Watchlist gilt er nicht mehr als gesehen, deine Sterne-Bewertung zählt dann nicht mehr für deinen Taste-Score. Trotzdem auf die Watchlist setzen?')) return;
+      // Bewusst das native confirm(): Dieser Dialog liegt selbst schon in einem
+      // modal-overlay, ein zweites darueber (confirmRemove) waere nicht sicher
+      // sichtbar. Der Wortlaut ist derselbe.
+      if (jetzt.seen && !confirm(GESEHEN_ZU_WL_FRAGE)) return;
       speichern({ watchlist: true, seen: false }, true);
     };
     document.getElementById('sharedSeenBtn').onclick = async function(){
