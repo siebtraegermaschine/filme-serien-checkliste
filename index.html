@@ -2342,7 +2342,10 @@ tabBtns.kino.onclick = () => { if (!cinemaMode) openCinemaPage(); };
 // wieder bei 250 an (siehe die Reset-Stellen: Status-Toggles, Sortier-Menue,
 // Tab-Wechsel). Ohne "Neue entdecken" wird gar nicht gekuerzt (siehe render).
 const DISCOVERY_PAGE_SIZE = 250;
-const DISCOVERY_LOAD_MORE_STEP = 50;
+// Frueher 50. Bei breiten Filtern geht es um fuenfstellige Trefferzahlen --
+// "Komödie" allein hat 13.162 Titel, in 50er-Schritten waeren das ueber 260
+// Klicks. Ein Schritt in Seitengroesse ist dort die realistischere Einheit.
+const DISCOVERY_LOAD_MORE_STEP = 250;
 let discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
 let sortManual = { filme: null, serien: null };
 function renderList() {
@@ -2684,6 +2687,32 @@ var SEARCH_SYNONYMS = {
   'nachrichten': 'News',
   'krieg': 'War & Politics',
   'kriegsserie': 'War & Politics',
+  // Englische Genre-Namen: TMDB liefert uns die deutschen ("Komödie", "Krimi",
+  // ...), viele Leute tippen aber die englischen. Ohne diese Zuordnung landete
+  // man auf einer Handvoll Titel, die den englischen Begriff zufaellig als
+  // Schlagwort tragen -- "Comedy" existiert als Genre bei GENAU EINEM Titel,
+  // waehrend "Komödie" 13.162 hat (nachgezaehlt im Katalog).
+  'comedy': 'Komödie',
+  'crime': 'Krimi',
+  'romance': 'Liebesfilm',
+  'documentary': 'Dokumentarfilm',
+  'family': 'Familie',
+  'adventure': 'Abenteuer',
+  'history': 'Historie',
+  'historical': 'Historie',
+  'music': 'Musik',
+  'war movie': 'Kriegsfilm',
+  'tv movie': 'TV-Film',
+  'children': 'Kids',
+  // Umlautfreie und verkuerzte Schreibweisen: Die Freitextsuche vergleicht
+  // Zeichen fuer Zeichen, "komodie" trifft "Komödie" also nicht von selbst.
+  'komodie': 'Komödie',
+  'komoedie': 'Komödie',
+  'romantik': 'Liebesfilm',
+  'liebesgeschichte': 'Liebesfilm',
+  'scifi': 'Science Fiction',
+  'sci fi': 'Science Fiction',
+  'dokumentarfilme': 'Dokumentarfilm',
   // True Crime ist bei uns kein Genre, sondern ein Schlagwort (siehe
   // backend/scripts/backfill-true-crime.mjs) -- TMDB kennt dafuer kein Genre.
   // Die Synonyme fangen die ueblichen Schreibweisen ab.
