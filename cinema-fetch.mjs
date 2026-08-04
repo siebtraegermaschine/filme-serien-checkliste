@@ -94,6 +94,23 @@ async function enrich(id) {
   return result;
 }
 
+// Siehe stream-fetch.mjs: Bei language=de-DE bleibt overview leer, wenn TMDB
+// keine deutsche Uebersetzung hat -- auch wenn eine englische vorliegt. Gerade
+// Kinostarts sind davon betroffen, weil dort viele Titel neu und noch wenig
+// gepflegt sind (z.B. "Wife and Doc" unter "Bald im Kino"). Der englische Text
+// wird deshalb nur fuer die Luecken nachgeholt.
+const ovFallbackCache = new Map();
+async function overviewFallback(id) {
+  if (ovFallbackCache.has(id)) return ovFallbackCache.get(id);
+  let text = '';
+  try {
+    const d = await tmdb(`/movie/${id}`, { language: 'en-US' });
+    text = (d.overview || '').trim();
+  } catch (e) { /* auch ohne englischen Text bleibt der Titel nutzbar */ }
+  ovFallbackCache.set(id, text);
+  return text;
+}
+
 async function discoverRange(gteDate, lteDate, sortDir, gmap, category, out, seen) {
   let page = 1;
   let totalPages = 1;
@@ -163,6 +180,7 @@ async function main() {
     item.cast = ex.cast;
     item.director = ex.dir;
     item.certification = ex.fsk;
+    if (!item.overview) item.overview = await overviewFallback(item.tmdbId);
     // Das deutsche Kinodatum, das tatsaechlich in dieses Zeitfenster faellt
     // (deshalb hat /discover den Titel ja geliefert), ersetzt das vorlaeufige
     // (oft globale Erst-)Veroeffentlichungsdatum von oben. originalReleaseDate

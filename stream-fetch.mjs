@@ -106,6 +106,30 @@ async function enrich(kind, id) {
   return result;
 }
 
+// TMDB liefert bei language=de-DE ein LEERES overview, wenn es zum Titel keine
+// deutsche Uebersetzung gibt -- auch dann, wenn eine englische existiert. Kleine,
+// neue und internationale Titel trifft das regelmaessig (z.B. "INK"), in der App
+// blieb die Kurzbeschreibung dann komplett leer. Fuer genau diese Luecken wird
+// hier der englische Text nachgeholt.
+//
+// Der Zusatzabruf entsteht nur fuer betroffene Titel, nicht fuer den ganzen
+// Katalog. Ueberschrieben wird dadurch nichts: Taucht spaeter doch eine deutsche
+// Fassung bei TMDB auf, liefert der naechste Lauf sie oben schon mit, und der
+// Ingest bevorzugt jeden nicht-leeren neuen Wert (siehe die COALESCE/NULLIF-
+// Regel in backend/routes/streaming.js).
+const ovFallbackCache = new Map();
+async function overviewFallback(kind, id) {
+  const ck = kind + ':' + id;
+  if (ovFallbackCache.has(ck)) return ovFallbackCache.get(ck);
+  let text = '';
+  try {
+    const d = await tmdb(`/${kind}/${id}`, { language: 'en-US' });
+    text = (d.overview || '').trim();
+  } catch (e) { /* auch ohne englischen Text bleibt der Titel nutzbar */ }
+  ovFallbackCache.set(ck, text);
+  return text;
+}
+
 async function genreMap(kind) {              // kind: 'movie' | 'tv'
   const d = await tmdb(`/genre/${kind}/list`, { language: LANG });
   const m = {}; (d.genres || []).forEach(g => m[g.id] = g.name); return m;
@@ -164,6 +188,10 @@ async function discover(kind, providerId, gmap) {
     item.c = ex.cast;
     item.d = ex.dir;
     item.fsk = ex.fsk;
+    if (!item.ov) {
+      item.ov = await overviewFallback(kind, item.id);
+      await sleep(120);
+    }
     await sleep(120);            // sanftes Tempo gegen das Rate-Limit
   }
   return out;
