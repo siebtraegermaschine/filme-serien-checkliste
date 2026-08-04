@@ -2951,14 +2951,24 @@ function matchScore(query, candidate){
 }
 var SEARCH_INDEX = [];
 function buildSearchIndex(){
-  var seen = new Set();
+  // Neben dem Begriff selbst wird gezaehlt, an wie vielen Titeln er haengt.
+  // Diese Zahl entscheidet spaeter bei Gleichstand die Reihenfolge der
+  // Vorschlaege (siehe getSearchSuggestions): Tippt man einen Nachnamen, den
+  // dreissig Schauspieler teilen, bekommen alle denselben Trefferwert -- vorher
+  // gewann dann schlicht der kuerzeste Name, weshalb der bekannteste Traeger des
+  // Namens irgendwo unten stand oder gar nicht erst in die Liste kam. Die Zahl
+  // der Titel ist zwar kein Bekanntheitsmass, aber ein brauchbarer Ersatz: Wer
+  // in mehr Filmen des Katalogs vorkommt, ist in aller Regel der Gemeinte.
+  var seen = new Map();
   var idx = [];
   function add(text, type){
     if (!text) return;
     var key = type + '|' + text.toLowerCase();
-    if (seen.has(key)) return;
-    seen.add(key);
-    idx.push({ text: text, type: type });
+    var vorhanden = seen.get(key);
+    if (vorhanden) { vorhanden.n++; return; }
+    var eintrag = { text: text, type: type, n: 1 };
+    seen.set(key, eintrag);
+    idx.push(eintrag);
   }
   POOL.forEach(function(item){
     add(item.t, 'Titel');
@@ -3002,20 +3012,25 @@ function getSearchSuggestions(query){
       // ist, steht im Suchindex -- nur wenn der Begriff dort fehlt, bleibt es
       // beim bisherigen Standard.
       var treffer = SEARCH_INDEX.find(function(e){ return e.text.toLowerCase() === ziel.toLowerCase(); });
-      results.push({ text: ziel, type: treffer ? treffer.type : 'Genre', score: 120 });
+      results.push({ text: ziel, type: treffer ? treffer.type : 'Genre', n: treffer ? treffer.n : 0, score: 120 });
     }
   });
   SEARCH_INDEX.forEach(function(entry){
     var score = matchScore(q, entry.text);
-    if (score > 0) results.push({ text: entry.text, type: entry.type, score: score });
+    if (score > 0) results.push({ text: entry.text, type: entry.type, n: entry.n, score: score });
   });
   var byText = new Map();
   results.forEach(function(r){
     var key = r.text.toLowerCase();
     if (!byText.has(key) || byText.get(key).score < r.score) byText.set(key, r);
   });
+  // Reihenfolge: Trefferguete zuerst, bei Gleichstand der Begriff mit den
+  // meisten Titeln, erst danach der kuerzere Text. Ohne die mittlere Stufe
+  // entschied allein die Namenslaenge -- siehe buildSearchIndex.
   return Array.from(byText.values())
-    .sort(function(a, b){ return b.score - a.score || a.text.length - b.text.length; })
+    .sort(function(a, b){
+      return b.score - a.score || (b.n || 0) - (a.n || 0) || a.text.length - b.text.length;
+    })
     .slice(0, 8);
 }
 var _searchSuggestEl = document.getElementById('searchSuggest');
