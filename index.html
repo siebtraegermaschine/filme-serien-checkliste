@@ -480,6 +480,13 @@
   /* Der Kino-Hinweis unter den Suchtreffern ist kein "mehr vom Gleichen",
      sondern ein Wegweiser in einen anderen Bereich -- deshalb in Akzentfarbe. */
   .kino-hinweis { border-color:var(--accent); color:var(--accent); }
+  /* "🎬 Ab 14.08. im Kino" (siehe kinoStartChipHtml) sitzt in derselben Reihe
+     wie die Anbieter-Chips, sagt aber etwas anderes: nicht "hier laeuft es",
+     sondern "es laeuft noch nirgends". Akzentfarbe wie beim Kino-Hinweis oben.
+     Doppelter Klassen-Selektor mit Absicht: .provider-chip steht in dem per JS
+     nachgeschobenen Style-Block (siehe Discovery weiter unten) und damit SPAETER
+     als diese Regel -- bei gleicher Spezifitaet bliebe sie sonst wirkungslos. */
+  .provider-chip.kino-chip { border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
   li.disc { display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--border);
     border-radius:12px; padding:10px 14px; margin-bottom:10px; }
   li.disc .drank { color:var(--text-dim); font-weight:700; width:26px; text-align:center; flex:none; }
@@ -1580,6 +1587,51 @@ function providerLabel(name){
   return (name === 'Amazon Prime Video') ? 'Amazon Prime' : name;
 }
 
+/* ---- "🎬 Ab 14.08. im Kino" an noch nicht angelaufenen Titeln ----
+   Wer einen Kinofilm auf die Watchlist setzt, sieht ihn danach unter Filme
+   zwischen lauter verfuegbaren Titeln stehen -- ohne Hinweis darauf, dass es
+   ihn noch gar nicht zu sehen gibt. Auf der Kino-Seite selbst steht das Datum
+   schon in der Metazeile (siehe kinoMeta), dort entfaellt der Chip.
+
+   KINO_STARTS ist bewusst ein var (kein let wie CINEMA_DATA): Die Zeilen
+   werden womoeglich gerendert, bevor der Kino-Abschnitt weiter unten
+   ausgefuehrt ist -- ein let waere dann noch in der temporalen Totzone und der
+   Zugriff ein ReferenceError. Gefuellt wird die Map aus loadCinemaData().
+
+   Der Vergleich mit "heute" passiert bei jedem Aufruf und nicht schon beim
+   Aufbau der Map: Sonst zeigte eine ueber Mitternacht offene Seite den Chip
+   noch an einem Film, der inzwischen angelaufen ist. */
+var KINO_STARTS = null;          // TMDB-ID (nur Filme) -> ISO-Datum des Kinostarts
+function kinoStartsUebernehmen(data){
+  KINO_STARTS = new Map();
+  if (!data) return;
+  ['now', 'soon', 'later'].forEach(function(key){
+    (data[key] || []).forEach(function(row){
+      if (row && row.rd) KINO_STARTS.set(Number(row.id), row.rd);
+    });
+  });
+}
+function kinoStartFuer(tmdbId, typ){
+  // TMDB fuehrt Film- und Serien-IDs in getrennten Nummernkreisen -- ohne die
+  // Typpruefung bekaeme irgendwann eine Serie den Kinostart eines gleich
+  // nummerierten Films angehaengt.
+  if (!KINO_STARTS || tmdbId == null || typ !== 'movie') return null;
+  var rd = KINO_STARTS.get(Number(tmdbId));
+  return (rd && rd > new Date().toISOString().slice(0, 10)) ? rd : null;
+}
+// "14.08." im laufenden Jahr, "14.02.27" darueber hinaus. Das Jahr steht nur
+// da, wo es etwas aendert -- "Bald im Kino" reicht ueber den Jahreswechsel.
+function kinoStartKurz(iso){
+  var t = iso.split('-');
+  return t[2] + '.' + t[1] + '.' + (t[0] === String(new Date().getFullYear()) ? '' : t[0].slice(-2));
+}
+function kinoStartChipHtml(tmdbId, typ){
+  var rd = kinoStartFuer(tmdbId, typ);
+  if (!rd) return '';
+  return '<div class="dproviders"><span class="provider-chip kino-chip">🎬 Ab ' +
+         kinoStartKurz(rd) + ' im Kino</span></div>';
+}
+
 /* ---- Ansehen / Leihen / Kaufen (Detailansicht) ----
    Daten kommen von TMDB (Quelle: JustWatch) ueber /api/watch-providers und
    werden ERST beim Klick auf einen der drei Buttons geholt, nicht beim
@@ -2259,7 +2311,7 @@ function eigeneZeileLi(tab, i, profile) {
     posterThumb +
     '<span class="info"><div class="title">' + '<span class="ttext">' + item[0] + '</span>' + scoreBadge + '</div>' +
     '<div class="meta">' + metaHtml(item[1], tab) + '</div>' +
-    providerChipsHtml(d.providers) + detailsHtml +
+    kinoStartChipHtml(d.tmdbId, d.type) + providerChipsHtml(d.providers) + detailsHtml +
     watchRowHtml(d.tmdbId, d.type, item[0], d.id) + actionsHtml + '</span>';
   wireRow(li, tab, i);
   attachSwipeToRemove(li, async function(){
@@ -3664,7 +3716,12 @@ const CINEMA_SECTION_STEP = 25;
 let cinemaSectionLimit = { now: CINEMA_SECTION_PREVIEW, soon: CINEMA_SECTION_PREVIEW, later: CINEMA_SECTION_PREVIEW };
 let cinemaSortKey = 'taste';
 async function loadCinemaData(){
-  if (!CINEMA_DATA) CINEMA_DATA = await apiRequest('GET', '/api/cinema');
+  if (!CINEMA_DATA) {
+    CINEMA_DATA = await apiRequest('GET', '/api/cinema');
+    // Einziger Punkt, an dem Kinodaten ankommen -- hier faellt auch die Tabelle
+    // fuer den "Ab ... im Kino"-Chip ab (siehe kinoStartsUebernehmen).
+    kinoStartsUebernehmen(CINEMA_DATA);
+  }
   return CINEMA_DATA;
 }
 // Kinostarts sind eigenstaendig von POOL (siehe backend/db/schema.sql), koennen
@@ -4951,7 +5008,10 @@ async function loadCatalogAndRefresh(){
     // Im Hintergrund, damit die Suche unter Filme/Serien sagen kann, ob es zum
     // Begriff auch Kinotreffer gibt (siehe kinoHinweisAnhaengen). Bewusst ohne
     // await: Die Titelliste soll darauf nicht warten.
-    loadCinemaData().catch(function(){});
+    // Danach einmal neu zeichnen: Die Liste steht zu diesem Zeitpunkt meist
+    // schon, der "Ab ... im Kino"-Chip (siehe kinoStartChipHtml) kann aber erst
+    // jetzt gesetzt werden. Ohne das erschiene er erst beim naechsten Klick.
+    loadCinemaData().then(function(){ renderCurrentTab(); }).catch(function(){});
     await loadUserProgressAndRefresh();
   } catch (err) {
     console.error('Katalog konnte nicht geladen werden:', err);
@@ -5149,6 +5209,9 @@ function poolItemLi(item, score, opts){
             ? opts.fremdName + ': ' + opts.fremdSterne + ' von 10 Sternen'
             : opts.fremdName + ' hat das noch nicht bewertet') + '</div>'
         : '') +
+      // Auf der Kino-Seite steht der Kinostart schon in der Metazeile darueber
+      // (kinoDatum, siehe kinoMeta) -- dort waere der Chip eine Wiederholung.
+      ((opts && opts.kinoDatum !== undefined) ? '' : kinoStartChipHtml(item.tmdbId, item.type)) +
       providerChipsHtml(item.providers) +
       candDetailsHtml(item, item.type) +
       watchRowHtml(item.tmdbId, item.type, item.t, item.realId,
