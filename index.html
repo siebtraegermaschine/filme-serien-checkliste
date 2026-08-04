@@ -2414,10 +2414,7 @@ tabBtns.kino.onclick = () => { if (!cinemaMode) openCinemaPage(); };
 // wieder bei 250 an (siehe die Reset-Stellen: Status-Toggles, Sortier-Menue,
 // Tab-Wechsel). Ohne "Neue entdecken" wird gar nicht gekuerzt (siehe render).
 const DISCOVERY_PAGE_SIZE = 250;
-// Frueher 50. Bei breiten Filtern geht es um fuenfstellige Trefferzahlen --
-// "Komödie" allein hat 13.162 Titel, in 50er-Schritten waeren das ueber 260
-// Klicks. Ein Schritt in Seitengroesse ist dort die realistischere Einheit.
-const DISCOVERY_LOAD_MORE_STEP = 250;
+const DISCOVERY_LOAD_MORE_STEP = 50;
 let discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
 let sortManual = { filme: null, serien: null };
 function renderList() {
@@ -5099,20 +5096,27 @@ async function zeigeGeteiltenTitel(ziel){
     };
     return;
   }
-  // Beide Knoepfe bewusst neutral (modal-no): Mit einem hervorgehobenen Knopf
-  // sah "Gesehen" aus wie bereits gewaehlt, obwohl noch gar nichts gespeichert
-  // war.
-  aktionen.innerHTML =
-    '<button type="button" class="modal-no" id="sharedWlBtn">☆ Watchlist</button>' +
-    '<button type="button" class="modal-no" id="sharedSeenBtn">✓ Gesehen</button>';
-  // Nach erfolgreichem Speichern schliesst sich die Karte selbst -- die Aufgabe
-  // ist damit erledigt, und der Titel steht sichtbar in der Liste dahinter.
+  // Steht der Titel schon in einer deiner Listen? Frueher zeigte die Karte
+  // immer dieselben neutralen Knoepfe -- man sah also nicht, dass man den Titel
+  // laengst hat, und ein Klick auf "Watchlist" nahm einem klaglos die
+  // Gesehen-Markierung weg. d.id ist die interne Titel-ID und kommt vom Server
+  // mit; nur geteilte Kinostarts ohne eigene Zeile haben keine, die koennen
+  // dann aber auch noch nicht markiert sein.
+  function status(){
+    if (d.id == null) return { wl: false, seen: false };
+    return { wl: getWatchlistFlag(d.id), seen: getSeen(d.id) };
+  }
+  // Nach dem HINZUFUEGEN schliesst sich die Karte -- die Aufgabe ist erledigt,
+  // der Titel steht sichtbar in der Liste dahinter. Nach dem ENTFERNEN bleibt
+  // sie stehen und zeichnet sich neu: Sonst verschwaende das Fenster, ohne dass
+  // man die Wirkung gesehen haette.
   // Das Sterne-Fenster schliesst sich beim Klick auf einen Stern von allein
   // (siehe _ratingStarBtns), es bleibt also nichts offen stehen.
-  async function speichern(patch){
+  async function speichern(patch, schliessen){
     hinweis.textContent = 'Wird gespeichert …';
     try {
       var id = await idFuerGeteilten(d);
+      if (d.id == null) d.id = id;         // ab jetzt ist der Status ablesbar
       await updateProgressRemote(id, patch);
       // Ein geteilter Kinostart steckt noch nicht im Pool -- ohne diesen Schritt
       // waere er gespeichert, taeuchte unter Filme/Serien aber erst nach einem
@@ -5125,29 +5129,44 @@ async function zeigeGeteiltenTitel(ziel){
       }
       rebuild();
       renderCurrentTab();
-      schliesseGeteilt();
+      if (schliessen) schliesseGeteilt(); else knoepfeZeichnen();
     } catch (e) {
       // Nur im Fehlerfall bleibt die Karte stehen, damit der Versuch
       // wiederholt werden kann.
       hinweis.textContent = 'Das hat nicht geklappt. Bitte erneut versuchen.';
     }
   }
-  // Watchlist und Gesehen schliessen sich gegenseitig aus -- genau wie in den
-  // Titelzeilen (siehe toggleWatched und den seen-btn-Handler). Vorher setzte
-  // die Karte nur das eine Merkmal; stand der Titel schon auf der Watchlist,
-  // war danach BEIDES markiert, weil das Backend fehlende Felder unveraendert
-  // laesst (COALESCE in PUT /api/progress).
-  document.getElementById('sharedWlBtn').onclick = function(){
-    speichern({ watchlist: true, seen: false });
-  };
-  document.getElementById('sharedSeenBtn').onclick = async function(){
-    // "Gesehen" verlangt eine Sterne-Bewertung, ebenfalls wie in den Zeilen:
-    // Sie fliesst gewichtet in den Taste-Score ein. Bricht die Person ab,
-    // passiert nichts.
-    var sterne = await openRatingStars(d.title);
-    if (sterne == null) return;
-    speichern({ seen: true, watchlist: false, rating: sterne });
-  };
+  function knoepfeZeichnen(){
+    var st = status();
+    aktionen.innerHTML =
+      '<button type="button" class="' + (st.wl ? 'modal-yes' : 'modal-no') + '" id="sharedWlBtn">' +
+        (st.wl ? '★' : '☆') + ' Watchlist</button>' +
+      '<button type="button" class="' + (st.seen ? 'modal-yes' : 'modal-no') + '" id="sharedSeenBtn">✓ Gesehen</button>';
+    hinweis.textContent = st.wl ? 'Steht schon auf deiner Watchlist.'
+                        : st.seen ? 'Hast du schon gesehen.'
+                        : '';
+    document.getElementById('sharedWlBtn').onclick = function(){
+      var jetzt = status();
+      if (jetzt.wl) { speichern({ watchlist: false }, false); return; }
+      // Watchlist und Gesehen schliessen sich gegenseitig aus (siehe
+      // toggleWatched und den seen-btn-Handler). Beim Wechsel von "gesehen"
+      // zurueck auf die Watchlist zaehlt die Sterne-Bewertung nicht mehr fuer
+      // den Taste-Score -- das ist ein Verlust, der eine Rueckfrage wert ist.
+      if (jetzt.seen && !confirm('Du hast diesen Titel als gesehen markiert. Auf der Watchlist gilt er nicht mehr als gesehen, deine Sterne-Bewertung zählt dann nicht mehr für deinen Taste-Score. Trotzdem auf die Watchlist setzen?')) return;
+      speichern({ watchlist: true, seen: false }, true);
+    };
+    document.getElementById('sharedSeenBtn').onclick = async function(){
+      var jetzt = status();
+      if (jetzt.seen) { speichern({ seen: false }, false); return; }
+      // "Gesehen" verlangt eine Sterne-Bewertung, ebenfalls wie in den Zeilen:
+      // Sie fliesst gewichtet in den Taste-Score ein. Bricht die Person ab,
+      // passiert nichts.
+      var sterne = await openRatingStars(d.title);
+      if (sterne == null) return;
+      speichern({ seen: true, watchlist: false, rating: sterne }, true);
+    };
+  }
+  knoepfeZeichnen();
 }
 
 /* ---- "Nach oben"-Knopf ---- */
