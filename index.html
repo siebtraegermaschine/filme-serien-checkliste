@@ -1937,6 +1937,20 @@ let seenFilterOn = false;
 // redundant nochmal gezeigt hat) -- dieselbe Einschraenkung gibt es jetzt direkt
 // unter Filme UND unter Serien statt in einem separaten dritten Bereich.
 let inStreamFilterOn = false;
+// Die Kino-Seite fuehrt eine EIGENE Statusauswahl. Unter Filme/Serien ist die
+// eigene Watchlist der sinnvolle Einstieg, im Kino dagegen das gesamte Programm
+// -- mit gemeinsamem Zustand waere die Kino-Seite beim ersten Aufruf leer, weil
+// dort standardmaessig nur die Watchlist an ist. Beide Seiten behalten so ihren
+// jeweils passenden Ausgangspunkt, ohne sich gegenseitig umzustellen.
+var kinoStatus = { wl: true, seen: true, disc: true };
+function statusLesen(){
+  return cinemaMode ? kinoStatus
+                    : { wl: watchlistFilterOn, seen: seenFilterOn, disc: discoverFilterOn };
+}
+function statusSchreiben(neu){
+  if (cinemaMode) { kinoStatus = { wl: neu.wl, seen: neu.seen, disc: neu.disc }; return; }
+  watchlistFilterOn = neu.wl; seenFilterOn = neu.seen; discoverFilterOn = neu.disc;
+}
 // Dritter Status neben Watchlist/Gesehen: alles, was du noch NICHT markiert
 // hast (siehe discFilterPool). War frueher ein eigener globaler Modus
 // ("Alle Filme & Serien entdecken") mit eigener Buttonleiste, eigenen
@@ -2481,6 +2495,7 @@ function renderList() {
 function renderCurrentTab(){
   updateProfileBtn();
   updateFilterRowUI();         // erzwingt u.a. die Entdecken-Sperre beim Abgleich
+  if (cinemaMode) { renderCinemaPage(); return; }
   renderList();
   // Inhaltsangaben der gerade gerenderten Zeilen nachladen (siehe fillPlots).
   fillPlots();
@@ -2516,7 +2531,12 @@ function sucheZustandAnwenden(){
   var jetzt = sucheAktiv();
   if (jetzt && !sucheZustandVorher) {
     sucheZustandVorher = { wl: watchlistFilterOn, seen: seenFilterOn,
-                           disc: discoverFilterOn, stream: inStreamFilterOn, tab: activeTab };
+                           disc: discoverFilterOn, stream: inStreamFilterOn, tab: activeTab,
+                           kino: { wl: kinoStatus.wl, seen: kinoStatus.seen, disc: kinoStatus.disc } };
+    // Auch im Kino soll eine Suche weiten statt im zuletzt gesetzten Ausschnitt
+    // zu suchen -- sonst faende man dort einen Titel nicht, nur weil man vorher
+    // auf "nur Watchlist" gestellt hatte.
+    kinoStatus = { wl: true, seen: true, disc: true };
     watchlistFilterOn = true;
     seenFilterOn = true;
     // Waehrend eines Personen-Abgleichs bleibt Entdecken gesperrt (siehe
@@ -2533,6 +2553,7 @@ function sucheZustandAnwenden(){
     discoverFilterOn = sucheZustandVorher.disc;
     inStreamFilterOn = sucheZustandVorher.stream;
     activeTab = sucheZustandVorher.tab;
+    if (sucheZustandVorher.kino) kinoStatus = sucheZustandVorher.kino;
     sucheZustandVorher = null;
     sucheTypen = { f: true, s: true };
     discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
@@ -2554,11 +2575,18 @@ function enforceDiscoverLock(){
 // koennen.
 function updateFilterRowUI(){
   enforceDiscoverLock();
-  btns.open.classList.toggle('active', watchlistFilterOn);
-  btns.done.classList.toggle('active', seenFilterOn);
-  btns.discover.classList.toggle('active', discoverFilterOn);
+  var st = statusLesen();
+  btns.open.classList.toggle('active', st.wl);
+  btns.done.classList.toggle('active', st.seen);
+  btns.discover.classList.toggle('active', st.disc);
   btns.inStream.classList.toggle('active', inStreamFilterOn);
   btns.discover.disabled = matchAktiv();
+  // "Deine Streaming-Anbieter" ergibt im Kino keinen Sinn -- die Filme laufen
+  // dort ja gerade erst an. Die Sortierung hat die Kino-Seite in eigener Form
+  // (#cinemaSort, mit "Neu im Kino" statt "Neu im Streaming"), deshalb geht die
+  // ganze Zeile weg statt nur der eine Knopf.
+  var streamZeile = document.querySelector('.tb-streamrow');
+  if (streamZeile) streamZeile.style.display = cinemaMode ? 'none' : '';
   // Auf der Kino-Seite darf keiner der beiden Tabs aktiv wirken -- dort ist
   // "Im Kino" der ausgewaehlte Bereich (siehe openCinemaPage/closeCinemaPage).
   // Waehrend der Suche sind beide zugleich aktiv (siehe sucheTypen); sie werden
@@ -2615,22 +2643,26 @@ const btns = { open: document.getElementById('fOpen'), done: document.getElement
 // Achse (welchen Status ein Titel bei dir hat) -- mindestens einer muss aktiv
 // bleiben, sonst waere die Liste ohne erkennbaren Grund leer. Der Klick auf den
 // bereits einzigen aktiven Knopf laeuft deshalb ins Leere.
-function toggleStatus(setzen){
-  setzen();
-  if (!watchlistFilterOn && !seenFilterOn && !discoverFilterOn) { setzen(); return; }
+function toggleStatus(feld){
+  var st = statusLesen();
+  st[feld] = !st[feld];
+  // Mindestens einer muss aktiv bleiben, sonst waere die Liste ohne
+  // erkennbaren Grund leer -- der Klick auf den letzten aktiven laeuft ins Leere.
+  if (!st.wl && !st.seen && !st.disc) return;
+  statusSchreiben(st);
   // Jede Aenderung ergibt eine neue Liste -- "Mehr laden" faengt wieder bei 250 an.
   discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
   updateFilterRowUI();
   renderCurrentTab();
 }
-btns.open.onclick = () => toggleStatus(function(){ watchlistFilterOn = !watchlistFilterOn; });
-btns.done.onclick = () => toggleStatus(function(){ seenFilterOn = !seenFilterOn; });
+btns.open.onclick = () => toggleStatus('wl');
+btns.done.onclick = () => toggleStatus('seen');
 btns.discover.onclick = () => {
   // Gesperrt waehrend eines Personen-Abgleichs (siehe enforceDiscoverLock) --
   // der disabled-Zustand des Knopfes faengt den Klick zwar schon ab, die
   // Pruefung hier haelt die Regel aber auch bei programmatischen Aufrufen.
   if (matchAktiv()) return;
-  toggleStatus(function(){ discoverFilterOn = !discoverFilterOn; });
+  toggleStatus('disc');
 };
 // "Deine Streaming-Anbieter" liegt auf einer anderen Achse: ein zusaetzlicher
 // UND-Filter ueber allen drei Status (z.B. "gesehene Filme, die aktuell im
@@ -2740,6 +2772,10 @@ if (sortBtn && sortMenu) {
 searchEl.addEventListener('input', function(){
   var warSuche = !!sucheZustandVorher;
   sucheZustandAnwenden();
+  // renderCurrentTab statt renderCinemaPage: Die Suche schaltet auch im Kino
+  // alle Status an (siehe sucheZustandAnwenden), das muss sich in der
+  // Buttonleiste zeigen -- und die aktualisiert nur updateFilterRowUI.
+  if (cinemaMode) { renderCurrentTab(); return; }
   if (sucheAktiv() || warSuche || discoverFilterOn) {
     discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
     renderCurrentTab();
@@ -3332,16 +3368,36 @@ function cinemaRowToItem(row, poolByTmdb){
 function renderCinemaSection(key, rows, profile, poolByTmdb){
   const el = cinemaListEls[key];
   el.innerHTML = '';
+  // Suchbegriff und Statusauswahl wirken INNERHALB jedes Bereichs -- die
+  // Gliederung nach "Aktuell/Bald/Demnaechst" bleibt also erhalten, statt zu
+  // einer langen Liste zu verschmelzen.
+  var q = searchEl.value.trim().toLowerCase();
+  var st = statusLesen();
   var entries = rows.map(function(row){
     var item = cinemaRowToItem(row, poolByTmdb);
     return { row: row, item: item, score: scoreMitProfilen(item, profile) };
-  }).filter(function(e){ return fskErlaubt(e.item) && !istVersteckt(e.item); });
+  }).filter(function(e){
+    if (!fskErlaubt(e.item) || istVersteckt(e.item)) return false;
+    if (q && !poolItemMatchesQuery(e.item, q)) return false;
+    // Ein Kinotitel, den man schon markiert hat, steckt als echter Pool-Eintrag
+    // mit realId im Katalog (siehe cinemaRowToItem); alles andere ist per
+    // Definition unmarkiert. Wiederauffuehrungen koennen durchaus "gesehen"
+    // sein -- deshalb gibt es den Gesehen-Filter auch hier.
+    var wl = e.item.realId != null && getWatchlistFlag(e.item.realId);
+    var se = e.item.realId != null && getSeen(e.item.realId);
+    if (wl) return st.wl;
+    if (se) return st.seen;
+    return st.disc;
+  });
   // Zaehler ERST hier, nach Altersfreigabe und ausgeblendeten Titeln -- sonst
   // stuende in der Ueberschrift eine Zahl, die zu den sichtbaren Zeilen nicht
   // passt (z.B. weiterhin "(12)", nachdem man einen Titel weggewischt hat).
   cinemaHeadingEls[key].textContent = CINEMA_LABELS[key] + (entries.length ? ' (' + entries.length + ')' : '');
   if (!entries.length) {
-    el.innerHTML = '<li class="cinema-empty">' + esc(CINEMA_EMPTY_TEXT[key]) + '</li>';
+    var text = q ? 'Keine Treffer für „' + searchEl.value.trim() + '".'
+             : (st.wl && st.seen && st.disc) ? CINEMA_EMPTY_TEXT[key]
+             : 'Keine Titel für diese Auswahl.';
+    el.innerHTML = '<li class="cinema-empty">' + esc(text) + '</li>';
     return;
   }
   entries.sort(function(a, b){
@@ -3405,14 +3461,13 @@ function openCinemaPage(){
   // zugleich der Weg zurueck zu Filme/Serien. Frueher wurde sie hier versteckt,
   // weil Kino nur ueber das Menue erreichbar war.
   updateFilterRowUI();
-  // Suche und Discovery ergeben auf der Kino-Seite beide keinen Sinn: Discovery
-  // durchsucht den normalen Filme/Serien-Katalog, nicht die Kinostarts, und die
-  // Suche filtert ebenfalls nur die Titellisten. Beide stecken in
-  // .head-controls -- mit dem Wrapper verschwindet auch dessen Trennlinie, die
-  // sonst ueber einem leeren Bereich stehenbliebe. Der Filme/Serien/Streaming-
-  // Unterfilter steckt in .filter-group und geht mit .toolbar mit.
-  document.querySelector('.head-controls').style.display = 'none';
-  document.querySelector('.toolbar').style.display = 'none';
+  // Suche und Statusauswahl gelten hier genauso wie unter Filme/Serien -- die
+  // Kino-Seite filtert damit ihre drei Bereiche (siehe renderCinemaSection).
+  // Frueher war beides ausgeblendet, weil die Suche nur die Titellisten
+  // durchsuchte. Der Streaming-Filter geht in updateFilterRowUI weg, die
+  // Sortierung hat die Kino-Seite in eigener Form.
+  document.querySelector('.head-controls').style.display = '';
+  document.querySelector('.toolbar').style.display = '';
   list.style.display = 'none';
   document.getElementById('cinemaPage').style.display = '';
   window.scrollTo(0, 0);
