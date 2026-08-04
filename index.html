@@ -75,7 +75,13 @@
        nicht mit, da absolut positioniert). Bewusst kein voller Abstand bis
        unter die Buttons -- das riss eine zu grosse Luecke auf. */
     padding: calc(30px + env(safe-area-inset-top, 0px)) 20px 14px;
-    background: linear-gradient(180deg, #131820 0%, var(--bg) 100%);
+    /* Frueher ein Verlauf von #131820 nach var(--bg). Auf dem iPhone gehoert der
+       Streifen unter der Statusleiste (env(safe-area-inset-top), siehe padding
+       oben) mit zum Header -- dort stand also das dunkle Blau des Verlaufsanfangs
+       und hob sich sichtbar vom uebrigen Hintergrund ab. Ein durchgehendes
+       var(--bg) passt ausserdem zu theme-color und zur manifest.json, die beide
+       #0e1116 nennen. */
+    background: var(--bg);
     border-bottom: 1px solid var(--border);
   }
   header .icons { font-size: 36px; }
