@@ -564,6 +564,28 @@
      Ende -- und laesst ihn auf der Kino-Seite, wo er allein steht, ganz links. */
   .watch-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; justify-content: flex-start; }
   .trailer-btn { margin-right: auto; }
+  /* Beide Zeilen der aufgeklappten Ansicht sollen dasselbe Raster zeigen:
+     rechts ein gleich breiter Block (oben Kaufen/Leihen/Ansehen, unten
+     Watchlist/Gesehen), links davon Trailer bzw. "Ähnliche Titel". Ohne das
+     begann die obere Dreiergruppe 14px weiter links als Watchlist darunter --
+     nachgemessen per getBoundingClientRect.
+     Die Knoepfe im Block teilen sich die Breite zu gleichen Teilen, damit die
+     linke Kante beider Bloecke exakt zusammenfaellt. Der geringere seitliche
+     Innenabstand haelt "▶ Ansehen" als laengste Beschriftung lesbar, wenn sich
+     drei statt zwei Knoepfe die Breite teilen. */
+  .watch-rechts, .det-rechts { display: flex; gap: 8px; flex: 0 0 62%; min-width: 0; }
+  .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts > .det-left { flex: 1; min-width: 0; }
+  .det-rechts > .det-left > .wl-btn { width: 100%; }
+  .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts .wl-btn { padding-left: 6px; padding-right: 6px; white-space: nowrap; }
+  /* Auf schmalen Bildschirmen reichen 62% nicht: Drei gleich breite Knoepfe
+     bekommen dort weniger als "▶ Ansehen" braucht (nachgemessen per scrollWidth
+     gegen clientWidth bei 375px). Beide Bloecke ruecken deshalb in eine eigene
+     Zeile unter Trailer bzw. "Ähnliche Titel" und nehmen die volle Breite --
+     gleich breit und linksbuendig bleiben sie dabei, nur eben ueber die ganze
+     Zeile statt rechts daneben. */
+  @media (max-width: 520px) {
+    .watch-rechts, .det-rechts { flex-basis: 100%; }
+  }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
   @media (hover: hover) { .watch-btn:hover { border-color: var(--accent); color: var(--accent); } }
@@ -679,6 +701,24 @@
   .det-actions .wl-btn.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   .det-actions .seen-btn.on { background: rgba(76,195,138,.15); border-color: var(--done); color: var(--done); }
   .det-actions .seen-glyph { font-size: 1.3em; line-height: 1; vertical-align: -0.06em; }
+  /* Ab der zehnten Nutzung schrumpfen Watchlist und Gesehen auf ihr Zeichen
+     (siehe nutzungZaehlen): Wer die App kennt, braucht die Beschriftung nicht
+     mehr, und die Zeile wird ruhiger. Ausgeblendet wird nur das Wort -- die
+     Knoepfe selbst, ihre Zustaende und die Klickflaeche bleiben wie sie sind.
+     Deshalb hier auch kein display:none auf dem Wort allein: ohne den Rand
+     ringsum saehe der Knopf gequetscht aus, das Innenabstands-Paar gleicht das
+     aus. Das aria-label traegt die Bedeutung fuer Screenreader weiter. */
+  body.kompakte-aktionen .det-actions .btn-wort { display: none; }
+  body.kompakte-aktionen .det-actions .wl-btn,
+  body.kompakte-aktionen .det-actions .seen-btn { padding-left: 12px; padding-right: 12px; }
+  /* Ohne Beschriftung sollen die beiden auch wirklich schrumpfen -- sonst
+     blieben sie ueber die halbe Zeile breit und nur der Text waere weg. Sie
+     verlassen dafuer das gemeinsame Raster mit Kaufen/Leihen/Ansehen und ruecken
+     als Paar nach rechts; die rechte Kante bleibt buendig mit "Ansehen". */
+  body.kompakte-aktionen .det-rechts { flex: 0 0 auto; margin-left: auto; }
+  body.kompakte-aktionen .det-rechts > .seen-btn,
+  body.kompakte-aktionen .det-rechts > .det-left { flex: 0 0 auto; }
+  body.kompakte-aktionen .det-rechts > .det-left > .wl-btn { width: auto; }
   /* "Ähnliche Titel" bleibt links (Gesehen/Watchlist weiter rechts gepackt) und ist
      nur sichtbar, wenn die Details dieser Zeile aufgeklappt sind. */
   .similar-btn { display: none; margin-right: auto; }
@@ -778,7 +818,7 @@
 <body>
 <header>
   <h1><img class="logo" src="moviematch.png" alt="MovieMatch – Watch more. Search less."></h1>
-  <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach deinem Geschmack!</b></p>
+  <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach DEINEM Geschmack!</b></p>
   <!-- Zweite Zeile: Kursiv steht wie in der ersten Zeile der Schluesselbegriff
        -- dort "Filme & Serien", hier "gemeinsame". Bewusst ohne "beide": der
        Abgleich laeuft ueber eine Liste von Personen (MATCH_WITH), nicht ueber
@@ -1586,9 +1626,9 @@ function watchRowHtml(tmdbId, type, title, realId, opts){
       trailerBtnHtml(trailerApi, title) +
       // Umgekehrte Reihenfolge: rechts aussen soll "Ansehen" stehen, davor
       // "Leihen", davor "Kaufen" -- WATCH_CATS ist andersherum sortiert.
-      (nurTrailer ? '' : WATCH_CATS.slice().reverse().map(function(c){
+      (nurTrailer ? '' : '<div class="watch-rechts">' + WATCH_CATS.slice().reverse().map(function(c){
         return '<button type="button" class="watch-btn" data-cat="' + c.key + '">' + c.label + '</button>';
-      }).join('')) +
+      }).join('') + '</div>') +
     '</div>' +
     '<div class="watch-panel" hidden></div>' +
   '</div>';
@@ -1852,6 +1892,36 @@ let discoverFilterOn = false;
 let showDetails = false;
 const DETAILS_PREF_KEY = 'top200-show-details-v1';
 
+// Zaehlt, wie oft die App benutzt wurde -- Grundlage fuer die kompakte
+// Darstellung der Watchlist-/Gesehen-Knoepfe ab der zehnten Nutzung (siehe
+// body.kompakte-aktionen im CSS). Eine "Nutzung" ist ein Besuch, kein
+// Seitenaufruf: Neuladen oder Zurueckwechseln innerhalb einer halben Stunde
+// zaehlt weiter als derselbe Besuch -- sonst waere die Schwelle an einem
+// einzigen Nachmittag erreicht, ohne dass jemand die App wirklich zehnmal
+// benutzt haette.
+//
+// Bewusst geraetelokal (localStorage) statt am Konto: Es geht darum, wie
+// vertraut die Bedienung an DIESEM Geraet ist.
+var NUTZUNG_KEY = 'top200-nutzung-v1';
+var NUTZUNG_SCHWELLE = 10;
+var NUTZUNG_PAUSE_MS = 30 * 60 * 1000;
+function nutzungZaehlen(){
+  var stand = { n: 0, ts: 0 };
+  try { stand = Object.assign(stand, JSON.parse(localStorage.getItem(NUTZUNG_KEY) || '{}')); } catch (e) {}
+  var jetzt = Date.now();
+  if (!stand.ts || (jetzt - stand.ts) > NUTZUNG_PAUSE_MS) {
+    stand.n = (stand.n || 0) + 1;
+    stand.ts = jetzt;
+    try { localStorage.setItem(NUTZUNG_KEY, JSON.stringify(stand)); } catch (e) {}
+  }
+  return stand.n;
+}
+// Mehrfach aufrufbar: Innerhalb der halben Stunde zaehlt nutzungZaehlen() nicht
+// erneut hoch, die Funktion liest den Stand dann nur ab.
+function kompakteAktionenSetzen(){
+  document.body.classList.toggle('kompakte-aktionen', nutzungZaehlen() >= NUTZUNG_SCHWELLE);
+}
+
 function esc(str) {
   return String(str)
     .replace(/&/g, '&amp;')
@@ -1961,10 +2031,12 @@ function eigeneZeileLi(tab, i, prof) {
   const actionsHtml =
     '<div class="det-actions">' +
       '<button type="button" class="similar-btn">Ähnliche Titel</button>' +
-      '<div class="det-left">' +
-        '<button type="button" class="wl-btn' + (_watched ? ' on' : '') + '">' + (_watched ? '★' : '☆') + ' Watchlist</button>' +
+      '<div class="det-rechts">' +
+        '<div class="det-left">' +
+          '<button type="button" aria-label="Watchlist" class="wl-btn' + (_watched ? ' on' : '') + '"><span class="wl-glyph">' + (_watched ? '★' : '☆') + '</span> <span class="btn-wort">Watchlist</span></button>' +
+        '</div>' +
+        '<button type="button" aria-label="gesehen" class="seen-btn' + (_seen ? ' on' : '') + '">' + '<span class="seen-glyph">✓</span> <span class="btn-wort">gesehen</span>' + '</button>' +
       '</div>' +
-      '<button type="button" class="seen-btn' + (_seen ? ' on' : '') + '">' + '<span class="seen-glyph">✓</span> gesehen' + '</button>' +
     '</div>';
   const detailsHtml =
     '<div class="details">' + detPoster +
@@ -4461,13 +4533,13 @@ function poolItemLi(item, score, opts){
   // innerhalb des "Ähnliche Titel"-Popups selbst (kein rekursiver Button dort,
   // siehe opts.suppressSimilar).
   var showSimilarBtn = !(opts && opts.suppressSimilar);
-  var seenBtnHtml = '<button type="button" class="seen-btn'+(seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> gesehen</button>';
-  var wlBtnHtml = '<div class="det-left"><button type="button" class="wl-btn'+(watchlisted?' on':'')+'">'+(watchlisted?'★':'☆')+' Watchlist</button></div>';
+  var seenBtnHtml = '<button type="button" aria-label="gesehen" class="seen-btn'+(seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> <span class="btn-wort">gesehen</span></button>';
+  var wlBtnHtml = '<div class="det-left"><button type="button" aria-label="Watchlist" class="wl-btn'+(watchlisted?' on':'')+'"><span class="wl-glyph">'+(watchlisted?'★':'☆')+'</span> <span class="btn-wort">Watchlist</span></button></div>';
   // Ueberall dieselbe Reihenfolge: links Watchlist, rechts Gesehen -- genau wie
   // unter Filme/Serien (siehe render()). Discovery/Streaming hatten die beiden
   // frueher vertauscht, was beim Wechsel zwischen den Bereichen jedes Mal ein
   // Umgewoehnen war.
-  var orderedActionsHtml = wlBtnHtml + seenBtnHtml;
+  var orderedActionsHtml = '<div class="det-rechts">' + wlBtnHtml + seenBtnHtml + '</div>';
   var actionsHtml =
     '<div class="det-actions">' +
       (showSimilarBtn ? '<button type="button" class="similar-btn">Ähnliche Titel</button>' : '') +
@@ -4514,7 +4586,7 @@ function poolItemLi(item, score, opts){
         // sonst zeigt der Button "an", obwohl serverseitig nichts gespeichert wurde.
         if (!ok) return;
         seenBtn.classList.toggle('on', next);
-        if (next) { wlBtn.classList.remove('on'); wlBtn.textContent = '☆ Watchlist'; }
+        if (next) { wlBtn.classList.remove('on'); wlBtn.querySelector('.wl-glyph').textContent = '☆'; }
         // "Gesehen" sorgt (wie Watchlist) dafuer, dass der Titel oben unter Filme/
         // Serien/Streaming auftaucht -- Filme/Serien lesen dafuer aus state.filme/
         // serien.data, das nur per rebuild() aktualisiert wird (Streaming liest
@@ -4552,7 +4624,7 @@ function poolItemLi(item, score, opts){
         // unabhaengige Liste). Ohne das hier passierte in diesem Popup beim Klick
         // auf Watchlist sichtbar gar nichts.
         wlBtn.classList.toggle('on', next);
-        wlBtn.textContent = (next ? '★' : '☆') + ' Watchlist';
+        wlBtn.querySelector('.wl-glyph').textContent = next ? '★' : '☆';
         if (next) seenBtn.classList.remove('on');
         // Watchlist-Aenderung wirkt sich auf Filme/Serien/Streaming (oben) aus --
         // rebuild() liest dafuer direkt aus POOL/PROGRESS (beide sind durch
@@ -5099,6 +5171,9 @@ async function zeigeGeteiltenTitel(ziel){
     window.scrollTo({ top: 0, behavior: sanft ? 'smooth' : 'auto' });
   });
 })();
+
+// Nutzung zaehlen und ggf. auf die kompakte Knopfdarstellung umstellen.
+kompakteAktionenSetzen();
 </script>
 </body>
 </html>
