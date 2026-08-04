@@ -4222,17 +4222,19 @@ function matchAktiv(){ return MATCH_WITH.length > 0; }
 
 /* ---- Altersfreigabe (FSK) ----
    Die FSK kennt genau fuenf Stufen: 0, 6, 12, 16, 18 -- dazwischen liegt
-   nichts. Die ersten drei Filter wirken kumulativ ("bis 12" schliesst 0 und 6
-   ein), "ab 18" zeigt umgekehrt ausschliesslich die 18er.
+   nichts. Die Filter wirken kumulativ: "bis 12" schliesst 0 und 6 mit ein.
 
    Titel OHNE hinterlegte Freigabe werden bei aktivem Filter ausgeblendet: Rund
    ein Drittel des Katalogs hat keine deutsche Angabe, und beim Schauen mit
    Kindern darf nichts durchrutschen, nur weil TMDB nichts weiss. */
+// Nur Obergrenzen: Der Filter beantwortet die Frage "Was koennen wir zusammen
+// mit den Kindern schauen?" (siehe die Zeile darueber im Popup). Eine Stufe
+// "ab 18" gab es hier auch, sie tat aber das Gegenteil -- sie zeigte
+// ausschliesslich das, was fuer Kinder gerade nicht in Frage kommt.
 var FSK_STUFEN = [
   { key: '6',  label: 'bis 6',  erlaubt: ['0', '6'] },
   { key: '12', label: 'bis 12', erlaubt: ['0', '6', '12'] },
   { key: '16', label: 'bis 16', erlaubt: ['0', '6', '12', '16'] },
-  { key: '18', label: 'ab 18',  erlaubt: ['18'] },
 ];
 var MY_FSK = null;   // null = kein Filter
 function fskAktiv(){ return MY_FSK !== null; }
