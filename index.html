@@ -670,6 +670,16 @@
   .profile-item .pi-name { flex:1; font-size:14.5px; color:var(--text); }
   .profile-item.active .pi-name { color:var(--accent); font-weight:600; }
   .profile-item .pi-check { width:18px; height:18px; accent-color:var(--accent); flex-shrink:0; }
+  /* Drei Knoepfe je Person: DEREN Watchlist, DEREN Gesehen-Liste, Abgleich.
+     Umbrechen erlaubt -- auf schmalen Geraeten rutschen sie unter den Namen,
+     statt ihn zu erdruecken. */
+  .profile-item { flex-wrap: wrap; }
+  .profile-item .pi-aktionen { display:flex; gap:4px; margin-left:auto; }
+  .profile-item .pi-btn { background:var(--card); border:1px solid var(--border); border-radius:7px;
+    padding:6px 9px; color:var(--text-dim); font-size:11.5px; cursor:pointer; white-space:nowrap;
+    transition:all .15s; }
+  @media (hover: hover) { .profile-item .pi-btn:hover { border-color:var(--accent); color:var(--accent); } }
+  .profile-item .pi-btn.on { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
   /* Sichtbares Kreuz zusaetzlich zur Wischgeste -- am Desktop laesst sich nicht
      wischen, und viele finden die Geste ohnehin nicht. */
   .profile-item .pi-del { background:none; border:none; color:var(--text-dim); font-size:15px;
@@ -689,6 +699,9 @@
   .fsk-row button.active { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
   /* Hinweis an Titeln, deren Zustand bei der anderen Person abweicht. */
   .match-note { margin-top:6px; font-size:11.5px; color:var(--accent); }
+  /* Bewertung der Person, deren Liste man gerade durchsieht (siehe
+     personenAnsichtOeffnen) -- optisch wie der Abgleich-Hinweis darueber. */
+  .fremd-note { font-size: 12px; color: var(--accent); margin-top: 2px; }
 
   /* Einstellungen -> Streaminganbieter */
   .prov-intro { color: var(--text-dim); font-size: 13px; line-height: 1.5; margin: 0 0 12px; }
@@ -1955,6 +1968,32 @@ let inStreamFilterOn = false;
 // dort standardmaessig nur die Watchlist an ist. Beide Seiten behalten so ihren
 // jeweils passenden Ausgangspunkt, ohne sich gegenseitig umzustellen.
 var kinoStatus = { wl: true, seen: true, disc: true };
+// Ansicht einer fremden Liste: uid der Person und welche ihrer beiden Listen.
+// Die Daten dafuer liegen laengst im Browser (LINKED_PROGRESS, geliefert von
+// /api/links/progress) -- sie wurden bisher nur fuer den Abgleich und die
+// Geschmacksprofile genutzt, nie angezeigt.
+var ANSICHT_PERSON = null;
+var ANSICHT_ART = 'w';                 // 'w' = Watchlist, 's' = Gesehen
+function personenAnsicht(){ return ANSICHT_PERSON != null; }
+function personenAnsichtOeffnen(uid, art){
+  ANSICHT_PERSON = uid;
+  ANSICHT_ART = art;
+  // Ein laufender Abgleich und eine fremde Liste widersprechen sich: Der
+  // Abgleich zeigt die Schnittmenge, hier geht es um DEREN Liste.
+  MATCH_WITH = [];
+  searchEl.value = '';
+  sucheZustandVorher = null;
+  discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+  closeProfileModal();
+  rebuild();
+  renderCurrentTab();
+}
+function personenAnsichtSchliessen(){
+  if (!personenAnsicht()) return;
+  ANSICHT_PERSON = null;
+  rebuild();
+  renderCurrentTab();
+}
 function statusLesen(){
   return cinemaMode ? kinoStatus
                     : { wl: watchlistFilterOn, seen: seenFilterOn, disc: discoverFilterOn };
@@ -2157,6 +2196,25 @@ function eintragSortwert(e, sortBy, prof){
 // Typ (Film oder Serie) kommt in beiden Faellen aus dem aktiven Tab.
 function sammleEintraege(q){
   const eintraege = [];
+  // Fremde Liste: Grundlage ist DEREN Fortschritt, nicht der eigene. Gezeigt
+  // wird jeder Titel des Pools, den diese Person entsprechend markiert hat --
+  // der Typ kommt wie sonst aus dem aktiven Tab.
+  if (personenAnsicht()) {
+    var m = LINKED_PROGRESS[ANSICHT_PERSON];
+    if (!m) return eintraege;
+    var typen = aktiveTypen().map(function(t){ return t === 'serien' ? 'series' : 'movie'; });
+    POOL.forEach(function(p){
+      if (p.realId == null || typen.indexOf(p.type) === -1) return;
+      var e = m.get(p.realId);
+      if (!e) return;
+      if (ANSICHT_ART === 'w' ? !e.w : !e.s) return;
+      if (!fskErlaubt(p)) return;
+      if (inStreamFilterOn && !selectedProviders(p.providers).length) return;
+      if (q && !poolItemMatchesQuery(p, q)) return;
+      eintraege.push({ art: 'fremd', pool: p, sterne: e.r || null });
+    });
+    return eintraege;
+  }
   if (watchlistFilterOn || seenFilterOn) {
     aktiveTypen().forEach(function(tab){
       const s = state[tab];
@@ -2182,6 +2240,17 @@ function sammleEintraege(q){
   return eintraege;
 }
 function renderLeerzustand(q){
+  // In einer fremden Liste sind die Texte darunter alle falsch -- sie sprechen
+  // von der EIGENEN Watchlist und schicken einen zu "Neue entdecken", was dort
+  // gesperrt ist.
+  if (personenAnsicht()) {
+    var wer = profilName(ANSICHT_PERSON);
+    var was = ANSICHT_ART === 'w' ? 'auf der Watchlist' : 'als gesehen markiert';
+    list.innerHTML = '<li class="watch-empty">' +
+      (q ? 'Keine Treffer für „' + esc(searchEl.value.trim()) + '" bei ' + esc(wer) + '.'
+         : esc(wer) + ' hat hier nichts ' + esc(was) + '.') + '</li>';
+    return;
+  }
   if (q) {
     list.innerHTML = '<li class="watch-empty">Keine Treffer für „' + esc(searchEl.value.trim()) + '".</li>';
     return;
@@ -2238,7 +2307,8 @@ function render() {
   sichtbar.forEach(function(e){
     list.appendChild(e.art === 'eigen'
       ? eigeneZeileLi(e.tab, e.idx, prof)
-      : poolItemLi(e.pool, scoreCand(e.pool, prof).score));
+      : poolItemLi(e.pool, scoreCand(e.pool, prof).score,
+                   e.art === 'fremd' ? { fremdSterne: e.sterne, fremdName: profilName(ANSICHT_PERSON) } : undefined));
   });
   if (eintraege.length > sichtbar.length) {
     var moreBtn = document.createElement('button');
@@ -2587,6 +2657,22 @@ function enforceDiscoverLock(){
 // koennen.
 function updateFilterRowUI(){
   enforceDiscoverLock();
+  // In einer fremden Liste stehen Watchlist und Gesehen fuer DEREN beide
+  // Listen, zwischen denen man umschaltet -- "Neue entdecken" hat dort keine
+  // Entsprechung und ist gesperrt.
+  if (personenAnsicht()) {
+    btns.open.classList.toggle('active', ANSICHT_ART === 'w');
+    btns.done.classList.toggle('active', ANSICHT_ART === 's');
+    btns.discover.classList.remove('active');
+    btns.discover.disabled = true;
+    btns.inStream.classList.toggle('active', inStreamFilterOn);
+    var sz = document.querySelector('.tb-streamrow');
+    if (sz) sz.style.display = '';
+    tabBtns.filme.classList.toggle('active', activeTab === 'filme');
+    tabBtns.serien.classList.toggle('active', activeTab === 'serien');
+    tabBtns.kino.classList.remove('active');
+    return;
+  }
   var st = statusLesen();
   btns.open.classList.toggle('active', st.wl);
   btns.done.classList.toggle('active', st.seen);
@@ -2609,6 +2695,10 @@ function updateFilterRowUI(){
   tabBtns.kino.classList.toggle('active', !!cinemaMode);
 }
 function setTab(t) {
+  // Eine fremde Liste gilt fuer Filme UND Serien -- der Tabwechsel filtert
+  // darin nur den Typ und darf sie deshalb NICHT beenden. Verlassen wird sie
+  // ueber "zurueck" in der Leiste oben oder ueber den Knopf in der Personenliste.
+  //
   // Filme/Serien und Kino liegen in derselben Knopfreihe: ein Klick auf Filme
   // oder Serien verlaesst die Kino-Vollseite. Ohne das blieben Kino-Liste und
   // Titelliste gleichzeitig sichtbar. Wirkungslos, wenn man gar nicht im Kino
@@ -2656,6 +2746,14 @@ const btns = { open: document.getElementById('fOpen'), done: document.getElement
 // bleiben, sonst waere die Liste ohne erkennbaren Grund leer. Der Klick auf den
 // bereits einzigen aktiven Knopf laeuft deshalb ins Leere.
 function toggleStatus(feld){
+  if (personenAnsicht()) {
+    if (feld === 'disc') return;
+    ANSICHT_ART = feld === 'wl' ? 'w' : 's';
+    discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+    updateFilterRowUI();
+    renderCurrentTab();
+    return;
+  }
   var st = statusLesen();
   st[feld] = !st[feld];
   // Mindestens einer muss aktiv bleiben, sonst waere die Liste ohne
@@ -3499,6 +3597,9 @@ async function renderCinemaPage(){
   renderCinemaSection('later', data.later || [], profile, poolByTmdb);
 }
 function openCinemaPage(){
+  // Kinostarts haben mit fremden Watchlists nichts zu tun -- die Ansicht endet
+  // hier, sonst stuende die Leiste "Watchlist von Anna" ueber dem Kinoprogramm.
+  ANSICHT_PERSON = null;
   cinemaMode = true;
   // Bei jedem frischen Aufruf wieder eingeklappt starten (nicht den Zustand
   // eines vorherigen Besuchs behalten).
@@ -3543,6 +3644,7 @@ function closeCinemaPage(){
 // Menuepunkte "Filme & Serien" und "Im Kino" sind deshalb entfallen. goHome
 // setzt zusaetzlich die Suche zurueck -- das macht ein Tab-Klick nicht.
 function goHome(){
+  ANSICHT_PERSON = null;
   closeCinemaPage();
   pfadAufStartseite();
   searchEl.value = '';
@@ -3850,6 +3952,16 @@ function updateProfileBtn(){
   // Liste sei eingeschraenkt, obwohl alles zu sehen ist.
   // Der Altersfilter wirkt auch in Discovery, der Personen-Abgleich nicht --
   // die Leiste erscheint deshalb, sobald mindestens eines davon zutrifft.
+  // In einer fremden Liste sagt die Leiste, wessen Liste man sieht -- und der
+  // Knopf daneben fuehrt zurueck in die eigene Ansicht.
+  if (personenAnsicht()) {
+    bar.style.display = 'flex';
+    document.getElementById('matchBarText').textContent =
+      (ANSICHT_ART === 'w' ? 'Watchlist von ' : 'Gesehen von ') + profilName(ANSICHT_PERSON);
+    document.getElementById('matchBarClear').textContent = 'zurück';
+    return;
+  }
+  document.getElementById('matchBarClear').textContent = 'aufheben';
   var zeigtMatch = matchAktiv();
   var zeigen = zeigtMatch || fskAktiv();
   bar.style.display = zeigen ? 'flex' : 'none';
@@ -3868,9 +3980,18 @@ function renderProfileList(){
   // Ansicht. Ein Haken "Ich", der sich nie abwaehlen laesst, waere nur Ballast.
   var html = LINKED_PROFILES.map(function(p){
     var aktiv = MATCH_WITH.indexOf(p.id) !== -1;
+    // Drei getrennte Absichten, drei Knoepfe: DEREN Watchlist ansehen, DEREN
+    // Gesehen-Liste ansehen, oder mit ihnen abgleichen. Frueher lag alles auf
+    // einem Klick auf die Zeile, und die beiden Listen liessen sich gar nicht
+    // ansehen.
+    var inAnsicht = ANSICHT_PERSON === p.id;
     return '<div class="profile-item' + (aktiv ? ' active' : '') + '" data-uid="' + escAttr(String(p.id)) + '">' +
-             '<input type="checkbox" class="pi-check"' + (aktiv ? ' checked' : '') + '>' +
              '<span class="pi-name">' + esc(p.name) + '</span>' +
+             '<div class="pi-aktionen">' +
+               '<button type="button" class="pi-btn' + (inAnsicht && ANSICHT_ART === 'w' ? ' on' : '') + '" data-tun="w">Watchlist</button>' +
+               '<button type="button" class="pi-btn' + (inAnsicht && ANSICHT_ART === 's' ? ' on' : '') + '" data-tun="s">Gesehen</button>' +
+               '<button type="button" class="pi-btn' + (aktiv ? ' on' : '') + '" data-tun="m">Match</button>' +
+             '</div>' +
              '<button type="button" class="pi-del" aria-label="Verknüpfung lösen">✕</button>' +
            '</div>';
   }).join('');
@@ -3880,12 +4001,25 @@ function renderProfileList(){
   el.innerHTML = html;
   el.querySelectorAll('.profile-item[data-uid]').forEach(function(row){
     var uid = Number(row.dataset.uid);
-    row.onclick = function(e){
-      if (e.target.closest('.pi-del')) return;
-      var i = MATCH_WITH.indexOf(uid);
-      if (i === -1) MATCH_WITH.push(uid); else MATCH_WITH.splice(i, 1);
-      renderProfileList(); updateProfileBtn(); rebuild(); renderCurrentTab();
-    };
+    row.querySelectorAll('.pi-btn').forEach(function(b){
+      b.onclick = function(e){
+        e.stopPropagation();
+        var tun = b.dataset.tun;
+        if (tun === 'm') {
+          // Abgleich und fremde Liste schliessen sich aus -- der Abgleich zeigt
+          // die Schnittmenge, die Listenansicht deren gesamte Liste.
+          personenAnsichtSchliessen();
+          var i = MATCH_WITH.indexOf(uid);
+          if (i === -1) MATCH_WITH.push(uid); else MATCH_WITH.splice(i, 1);
+          renderProfileList(); updateProfileBtn(); rebuild(); renderCurrentTab();
+          return;
+        }
+        // Erneuter Klick auf die gerade offene Liste fuehrt zurueck.
+        if (ANSICHT_PERSON === uid && ANSICHT_ART === tun) { personenAnsichtSchliessen(); renderProfileList(); return; }
+        personenAnsichtOeffnen(uid, tun);
+        renderProfileList();
+      };
+    });
     row.querySelector('.pi-del').onclick = function(e){
       e.stopPropagation();
       if (!confirm('Verknüpfung mit ' + profilName(uid) + ' lösen? Ihr seht dann gegenseitig keine gemeinsamen Titel mehr.')) return;
@@ -3919,6 +4053,7 @@ function openProfileModal(){ renderProfileList(); renderFskRow(); _profileModal.
 function closeProfileModal(){ _profileModal.style.display = 'none'; }
 document.getElementById('profileBtn').onclick = function(){ requireLogin(openProfileModal); };
 document.getElementById('matchBarClear').onclick = function(){
+  if (personenAnsicht()) { personenAnsichtSchliessen(); return; }
   MATCH_WITH = []; MY_FSK = null;
   updateProfileBtn(); rebuild(); renderCurrentTab();
   if (cinemaMode) renderCinemaPage();
@@ -4725,6 +4860,14 @@ function poolItemLi(item, score, opts){
       '<div class="dmeta">' + esc(opts && opts.kinoDatum !== undefined
         ? kinoMeta(item, opts.kinoDatum, typeLabel)
         : candMeta(item) + ' · ' + typeLabel) + '</div>'+
+      // Beim Durchsehen einer fremden Liste: deren Sterne-Bewertung, sofern
+      // vorhanden. Das ist der eigentliche Mehrwert gegenueber der blossen
+      // Titelliste -- "Anna fand das 9 von 10" sagt mehr als der Titel allein.
+      ((opts && opts.fremdName)
+        ? '<div class="fremd-note">' + esc(opts.fremdSterne
+            ? opts.fremdName + ': ' + opts.fremdSterne + ' von 10 Sternen'
+            : opts.fremdName + ' hat das noch nicht bewertet') + '</div>'
+        : '') +
       providerChipsHtml(item.providers) +
       candDetailsHtml(item, item.type) +
       watchRowHtml(item.tmdbId, item.type, item.t, item.realId,
