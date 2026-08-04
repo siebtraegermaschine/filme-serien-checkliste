@@ -612,6 +612,17 @@
   li.item { align-items: flex-start; }
   li.item.show-details .dposter { display: none; }
   .details .detposter { float: left; width: 120px; max-width: 34%; border-radius: 8px; margin: 2px 14px 10px 0; box-shadow: 0 2px 10px rgba(0,0,0,.45); background: var(--border); display: block; }
+  /* Nur Poster mit groesserer Fassung sind anklickbar (siehe detPosterHtml) --
+     die Lupe zeigt genau das an. Ein Poster ohne .zoombar sieht deshalb auch
+     nicht so aus, als koenne man es antippen. */
+  .details .detposter.zoombar { cursor: zoom-in; }
+  @media (hover: hover) { .details .detposter.zoombar:hover { box-shadow: 0 2px 10px rgba(0,0,0,.45), 0 0 0 2px var(--accent); } }
+  .details .detposter.zoombar:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  /* Grossansicht: ueber allen anderen Popups, damit sie auch aus dem
+     "Ähnliche Titel"-Fenster heraus obenauf liegt. */
+  #posterModal { z-index: 1020; background: rgba(0,0,0,.85); cursor: zoom-out; }
+  #posterModalImg { max-width: 100%; max-height: 100%; width: auto; height: auto;
+    border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,.6); display: block; }
   /* Ansehen/Leihen/Kaufen (siehe watchRowHtml). Wie .details nur sichtbar,
      solange die Zeile aufgeklappt ist -- die Regel fuer li.disc steht im per JS
      eingefuegten Style-Block weiter unten, zusammen mit den uebrigen
@@ -1138,6 +1149,14 @@
   </div>
 </div>
 
+<!-- Grossansicht des Posters (siehe detPosterHtml). Bewusst ohne .modal-Kasten:
+     Das Bild IST der Inhalt, ein Rahmen drumherum waere nur Beiwerk. Geschlossen
+     wird durch Tippen irgendwo, ueber das ✕ oder mit Escape. -->
+<div id="posterModal" class="modal-overlay" style="display:none">
+  <button class="modal-x" id="posterModalX" aria-label="Schließen">✕</button>
+  <img id="posterModalImg" src="" alt="">
+</div>
+
 <div id="similarModal" class="modal-overlay" style="display:none">
   <div class="modal similar-modal">
     <button class="modal-x" id="similarModalX" aria-label="Schließen">✕</button>
@@ -1447,6 +1466,30 @@ function requireLogin(action){
 }
 
 const POSTER='https://image.tmdb.org/t/p/w154';
+/* ---- Poster in gross ----
+   TMDB liefert dasselbe Bild in mehreren Breiten; die Groesse steckt als
+   Pfadsegment in der URL. Geladen wird ueberall w154 (Vorschaubild wie
+   Detailposter), fuer die Grossansicht wird das Segment gegen w780 getauscht --
+   erst beim Klick, es kostet also nichts, solange niemand hinsieht.
+
+   Die eingebetteten Base64-Poster der urspruenglichen Katalog-Titel (poster64,
+   siehe backfill-catalog-posters.mjs) haben KEINE groessere Fassung. Sie
+   bekommen deshalb kein data-gross und bleiben unangeklickt -- ein aufgeblasenes
+   Vorschaubild waere kein Gewinn, nur unscharf. */
+const POSTER_GROSS='https://image.tmdb.org/t/p/w780';
+function posterGrossUrl(src){
+  return (src && src.indexOf(POSTER) === 0) ? (POSTER_GROSS + src.slice(POSTER.length)) : null;
+}
+// Gemeinsame Quelle fuer das grosse Poster in der aufgeklappten Ansicht --
+// beide Zeilenarten (eigeneZeileLi und candDetailsHtml) bauen es hierueber.
+function detPosterHtml(src){
+  if (!src) return '';
+  var gross = posterGrossUrl(src);
+  return '<img class="detposter' + (gross ? ' zoombar' : '') + '" src="' + escAttr(src) +
+         '" alt="" loading="lazy"' +
+         (gross ? ' data-gross="' + escAttr(gross) + '" role="button" tabindex="0"' +
+                  ' aria-label="Poster größer anzeigen"' : '') + '>';
+}
 function fmtR(r){ return r!=null ? String(r).replace('.',',') : ''; }
 // Sternchen-Wert fuer die Metazeile. TMDB liefert fuer unbewertete Titel eine
 // glatte 0 -- die stand vorher als "⭐ 0" in der Zeile und las sich wie eine
@@ -1573,8 +1616,7 @@ function candDetailsHtml(c, kind){
   // .dposter), damit die Buttons darunter die volle Breite bekommen und wie
   // unter Filme/Serien nebeneinander passen -- ohne dieses Poster hier waere
   // die aufgeklappte Zeile dann ganz ohne Bild.
-  var posterSrc = c.poster64 || (c.p ? (POSTER + c.p) : null);
-  var posterHtml = posterSrc ? '<img class="detposter" src="'+escAttr(posterSrc)+'" alt="" loading="lazy">' : '';
+  var posterHtml = detPosterHtml(c.poster64 || (c.p ? (POSTER + c.p) : null));
   if (!plotHtml && !tagsHtml && !rows && !posterHtml) return '';
   return '<div class="details">' + posterHtml + plotHtml + (tagsHtml ? '<div class="tags">'+tagsHtml+'</div>' : '') + rows + '</div>';
 }
@@ -2309,7 +2351,7 @@ function eigeneZeileLi(tab, i, profile) {
   var creditRows = '';
   if (d.c && d.c.length) creditRows += '<div class="credits"><b>Besetzung:</b> ' + nameChips(d.c) + '</div>';
   if (d.d) creditRows += '<div class="credits"><b>' + dirLabel + ':</b> ' + nameChips(splitNames(d.d)) + '</div>';
-  const detPoster = d.poster ? '<img class="detposter" src="' + d.poster + '" alt="" loading="lazy">' : '';
+  const detPoster = detPosterHtml(d.poster);
   const _watched = isWatched(tab, item[0]);
   const _seen = s.checked[i];
   const actionsHtml =
@@ -2953,6 +2995,7 @@ function setTab(t) {
   // oder Serien verlaesst die Kino-Vollseite. Ohne das blieben Kino-Liste und
   // Titelliste gleichzeitig sichtbar. Wirkungslos, wenn man gar nicht im Kino
   // ist (closeCinemaPage kehrt dann sofort zurueck).
+  var warKino = cinemaMode;
   closeCinemaPage();
   // Waehrend einer Suche wechselt ein Klick auf Filme/Serien nicht die Seite,
   // sondern schraenkt die Ergebnisse auf diesen Typ ein bzw. nimmt ihn wieder
@@ -2961,6 +3004,20 @@ function setTab(t) {
   if (sucheAktiv()) {
     var k = t === 'serien' ? 's' : 'f';
     var anderer = k === 'f' ? 's' : 'f';
+    // Aus dem Kino heraus ist derselbe Klick KEIN Umschalten, sondern der
+    // Wechsel auf diese Seite: Man kommt von einer dritten Ansicht, in der
+    // Filme und Serien gar nicht zu sehen waren. Als Umschalter gelesen nahm er
+    // dagegen den gerade gewaehlten Typ weg -- ein Klick auf "Serien" landete
+    // dann sichtbar bei den Filmen.
+    if (warKino) {
+      sucheTypen.f = (k === 'f');
+      sucheTypen.s = (k === 's');
+      activeTab = t;
+      discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+      updateFilterRowUI();
+      renderCurrentTab();
+      return;
+    }
     if (sucheTypen[k] && !sucheTypen[anderer]) return;
     sucheTypen[k] = !sucheTypen[k];
     // activeTab mitziehen, damit Sortierung und Leerzustand einen definierten
@@ -3686,6 +3743,43 @@ function closeSimilarModal(){ _simModal.style.display = 'none'; }
 document.getElementById('similarModalX').onclick = closeSimilarModal;
 _simModal.addEventListener('click', function(e){ if (e.target === _simModal) closeSimilarModal(); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _simModal.style.display !== 'none') closeSimilarModal(); });
+
+/* ---- Poster in der Grossansicht (siehe detPosterHtml) ----
+   Der Klick wird im CAPTURE-Modus abgefangen und gestoppt: Ein Klick irgendwo
+   in die Zeile klappt sonst die Details wieder zu (siehe die li-Handler in
+   wireRow/poolItemLi) -- das Poster liegt mitten in diesem Bereich. In der
+   Bubble-Phase waere der Zuklapp-Handler nicht mehr aufzuhalten.
+
+   Das grosse Bild haengt an data-gross und wird erst hier geladen. Ein
+   Ladefehler (z.B. offline) darf nicht in einem leeren schwarzen Fenster
+   enden -- dann bleibt das Popup zu und die Zeile unveraendert. ---- */
+var _posterModal = document.getElementById('posterModal');
+var _posterModalImg = document.getElementById('posterModalImg');
+function closePosterModal(){ _posterModal.style.display = 'none'; _posterModalImg.src = ''; }
+function openPosterModal(url){
+  _posterModalImg.onerror = function(){ closePosterModal(); };
+  _posterModalImg.src = url;
+  _posterModal.style.display = 'flex';
+}
+document.addEventListener('click', function(e){
+  var img = e.target.closest && e.target.closest('.detposter[data-gross]');
+  if (!img) return;
+  e.stopPropagation();
+  e.preventDefault();
+  openPosterModal(img.dataset.gross);
+}, true);
+// Tastatur: Das Poster ist per role/tabindex fokussierbar (siehe detPosterHtml).
+document.addEventListener('keydown', function(e){
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  var img = e.target && e.target.closest && e.target.closest('.detposter[data-gross]');
+  if (!img) return;
+  e.preventDefault();
+  openPosterModal(img.dataset.gross);
+});
+_posterModal.addEventListener('click', closePosterModal);
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && _posterModal.style.display !== 'none') closePosterModal();
+});
 
 /* ---- "How to"-Popup: manuell ueber das Menue, zusaetzlich automatisch beim
    allerersten Besuch (siehe HOWTO_SEEN_KEY unten). ---- */
