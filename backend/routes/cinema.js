@@ -99,6 +99,20 @@ router.post('/ingest', async (req, res) => {
         ]
       );
     }
+    // Gleicher Schutz wie beim Streaming-Ingest (siehe routes/streaming.js):
+    // Der DELETE unten raeumt weg, was dieser Lauf nicht angefasst hat. Ein
+    // Lauf, der nur einen Bruchteil liefert, wuerde damit den Kinoplan leeren
+    // und trotzdem Erfolg melden.
+    const { rows: [{ anzahl: bestand }] } = await client.query('SELECT COUNT(*)::int AS anzahl FROM cinema_cache');
+    const MINDESTANTEIL = 0.7;
+    if (bestand > 0 && items.length < bestand * MINDESTANTEIL) {
+      await client.query('ROLLBACK');
+      console.error(`Kino-Ingest abgelehnt: nur ${items.length} Titel geliefert, im Bestand sind ${bestand}.`);
+      return res.status(409).json({
+        error: 'implausible_payload', geliefert: items.length, bestand,
+        hinweis: 'Zu wenige Titel im Vergleich zum Bestand -- nichts uebernommen.',
+      });
+    }
     await client.query('DELETE FROM cinema_cache WHERE fetched_at < $1', [runStartedAt]);
     await client.query('COMMIT');
   } catch (err) {

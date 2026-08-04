@@ -130,6 +130,27 @@ router.post('/ingest', async (req, res) => {
         }
       }
     }
+    // Schutz vor Teilerfolgen: Der DELETE unten raeumt alles weg, was dieser Lauf
+    // nicht angefasst hat. Liefert TMDB nur einen Bruchteil (gedrosselter
+    // Schluessel, Rate-Limit, veraenderte Antwortform), loescht ein "erfolgreicher"
+    // Lauf damit den Grossteil des Bestands. Genau das ist am 2026-08-02 passiert
+    // (siehe Kommentar oben: 0 von 20.369 Zeilen).
+    //
+    // Deshalb: Deutlich weniger Titel als bisher => gar nichts uebernehmen. Die
+    // Transaktion wird zurueckgerollt, der Bestand bleibt unveraendert stehen und
+    // veraltet hoechstens um einen Lauf. Ein wirklich geschrumpftes Angebot faellt
+    // dabei ebenfalls durch -- lieber ein Lauf zu wenig als ein leerer Katalog.
+    const { rows: [{ anzahl: bestand }] } = await client.query('SELECT COUNT(*)::int AS anzahl FROM streaming_cache');
+    const geliefert = providers.reduce((n, pv) => n + (pv.f || []).length + (pv.s || []).length, 0);
+    const MINDESTANTEIL = 0.7;
+    if (bestand > 0 && geliefert < bestand * MINDESTANTEIL) {
+      await client.query('ROLLBACK');
+      console.error(`Streaming-Ingest abgelehnt: nur ${geliefert} Titel geliefert, im Bestand sind ${bestand}.`);
+      return res.status(409).json({
+        error: 'implausible_payload', geliefert, bestand,
+        hinweis: 'Zu wenige Titel im Vergleich zum Bestand -- nichts uebernommen.',
+      });
+    }
     await client.query('DELETE FROM streaming_cache WHERE fetched_at < $1', [runStartedAt]);
     // Genre-Paarung mitschreiben, sofern der Lauf sie geliefert hat. Bewusst nur
     // aktualisierend und ohne Aufraeumen: Faellt das Feld in einem Lauf mal weg

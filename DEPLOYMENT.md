@@ -121,10 +121,50 @@ DATABASE_URL=postgres://postgres:postgres@localhost:5432/filme_serien \
 
 ## Backups
 
-Noch nicht automatisiert (siehe Phasenplan in `konzept-relaunch.md`,
-Abschnitt 7, Punkt 7). Empfehlung: täglicher `pg_dump` per Cronjob auf dem
-Server, Kopie auf eine Hetzner Storage Box/Object Storage außerhalb des
-Servers selbst.
+`scripts/backup.sh` sichert die Datenbank per `pg_dump` aus dem
+Postgres-Container heraus. Zwei Stufen, weil die Daten unterschiedlich
+wertvoll sind:
+
+| Aufruf | Inhalt | Warum |
+|---|---|---|
+| `./scripts/backup.sh taeglich` | Konten, Watchlist/Gesehen samt Bewertungen, Verknüpfungen, `titles` | Nicht wiederbeschaffbar |
+| `./scripts/backup.sh monatlich` | Alles, inkl. der aus TMDB abgeleiteten Caches | Für den Fall, dass TMDB nicht mehr liefert |
+
+Die Dateien landen in `./backups` (über `BACKUP_DIR` änderbar), werden
+gezippt und automatisch ausgedünnt: 14 tägliche, 12 monatliche Stände
+(`BACKUP_KEEP_DAILY` / `BACKUP_KEEP_MONTHLY`). Eine Sicherung unter 1 KB
+gilt als fehlgeschlagen und wird verworfen, statt eine unbrauchbare Datei
+stehen zu lassen.
+
+Einmalig auf dem Server einzurichten (das kann nur jemand mit Serverzugang):
+
+```
+crontab -e
+# täglich 03:15 UTC -- vor den Importläufen um 04:00/04:30
+15 3 * * * cd /opt/movietaste && ./scripts/backup.sh taeglich >> /var/log/moviematch-backup.log 2>&1
+# monatlich am 1. um 03:45 UTC
+45 3 1 * * cd /opt/movietaste && ./scripts/backup.sh monatlich >> /var/log/moviematch-backup.log 2>&1
+```
+
+Wiederherstellen:
+
+```
+gunzip -c backups/moviematch-nutzer-....sql.gz | docker compose exec -T postgres psql -U postgres -d filme_serien
+```
+
+**Noch offen:** Die Sicherung liegt auf demselben Server. Das schützt gegen
+kaputte Importläufe und Fehlbedienung, nicht gegen den Ausfall der Maschine.
+Eine Kopie nach außen (Hetzner Storage Box o. ä.) fehlt bewusst noch.
+
+### Schutz gegen unvollständige Importläufe
+
+Beide Ingest-Routen (`/api/streaming/ingest`, `/api/cinema/ingest`) räumen am
+Ende alles weg, was der Lauf nicht angefasst hat. Liefert TMDB nur einen
+Bruchteil, würde ein „erfolgreicher" Lauf damit den Bestand leeren -- genau das
+ist am 2026-08-02 passiert (0 von 20.369 Zeilen). Beide Routen lehnen deshalb
+Läufe ab, die weniger als 70 % des vorhandenen Bestands liefern: Antwort 409,
+Transaktion zurückgerollt, Bestand unverändert. Die GitHub Action schlägt dabei
+sichtbar fehl, weil die Importskripte bei jedem Nicht-2xx abbrechen.
 
 ## Bekannte Einschränkungen / offene Punkte
 
