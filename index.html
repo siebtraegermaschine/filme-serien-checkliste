@@ -1929,8 +1929,8 @@ function metaHtml(meta, kind){
 // Gegenstueck fuer unmarkierte Titel ist poolItemLi() -- seit dem
 // Entdecken-Umbau stehen beide Bauarten in derselben Liste nebeneinander,
 // unterscheidbar an li.item vs. li.disc (siehe applyFilter).
-function eigeneZeileLi(i, prof) {
-  const s = state[activeTab];
+function eigeneZeileLi(tab, i, prof) {
+  const s = state[tab];
   const item = s.data[i];
   const li = document.createElement('li');
   li.className = 'item' + (s.checked[i] ? ' done' : '') + (showDetails ? ' show-details' : '');
@@ -1956,7 +1956,7 @@ function eigeneZeileLi(i, prof) {
   if (d.c && d.c.length) creditRows += '<div class="credits"><b>Besetzung:</b> ' + nameChips(d.c) + '</div>';
   if (d.d) creditRows += '<div class="credits"><b>' + dirLabel + ':</b> ' + nameChips(splitNames(d.d)) + '</div>';
   const detPoster = d.poster ? '<img class="detposter" src="' + d.poster + '" alt="" loading="lazy">' : '';
-  const _watched = isWatched(activeTab, item[0]);
+  const _watched = isWatched(tab, item[0]);
   const _seen = s.checked[i];
   const actionsHtml =
     '<div class="det-actions">' +
@@ -1972,18 +1972,18 @@ function eigeneZeileLi(i, prof) {
       (tagsHtml ? '<div class="tags">' + tagsHtml + '</div>' : '') +
       creditRows +
     '</div>';
-  li.dataset.src = activeTab;
+  li.dataset.src = tab;
   li.innerHTML =
     posterThumb +
     '<span class="info"><div class="title">' + '<span class="ttext">' + item[0] + '</span>' + scoreBadge + '</div>' +
-    '<div class="meta">' + metaHtml(item[1], activeTab) + '</div>' +
+    '<div class="meta">' + metaHtml(item[1], tab) + '</div>' +
     providerChipsHtml(d.providers) + detailsHtml +
     watchRowHtml(d.tmdbId, d.type, item[0], d.id) + actionsHtml + '</span>';
-  wireRow(li, activeTab, i);
+  wireRow(li, tab, i);
   attachSwipeToRemove(li, async function(){
     // Bei Abbruch neu rendern: Die Zeile ist zu diesem Zeitpunkt schon
     // hinausgeflogen und kommt nur durch einen Neuaufbau zurueck.
-    if (!(await darfWischEntfernen(activeTab))) { rebuild(); renderCurrentTab(); return; }
+    if (!(await darfWischEntfernen(tab))) { rebuild(); renderCurrentTab(); return; }
     removeFromMyTitles(s.det[i].id);
   }, s.pool[i] ? function(){ oeffneTeilen(s.pool[i]); } : null);
   return li;
@@ -2003,19 +2003,21 @@ function eintragSortwert(e, sortBy, prof){
 // aus state[activeTab] (markierte Titel), "Neue entdecken" direkt aus dem POOL. Der
 // Typ (Film oder Serie) kommt in beiden Faellen aus dem aktiven Tab.
 function sammleEintraege(q){
-  const s = state[activeTab];
   const eintraege = [];
   if (watchlistFilterOn || seenFilterOn) {
-    s.data.forEach(function(item, i){
-      const passt = (watchlistFilterOn && isWatched(activeTab, item[0])) || (seenFilterOn && s.checked[i]);
-      if (!passt) return;
-      if (inStreamFilterOn && !(s.pool[i] && selectedProviders(s.pool[i].providers).length)) return;
-      // Mit "Neue entdecken" muss auch die eigene Liste VOR dem Kuerzen auf
-      // discoveryLoadLimit nach dem Suchbegriff gefiltert werden -- sonst faellt
-      // ein gesuchter eigener Titel hinten heraus, nur weil zehntausende
-      // Vorschlaege mit einsortiert wurden.
-      if (q && !(s.pool[i] && poolItemMatchesQuery(s.pool[i], q))) return;
-      eintraege.push({ art: 'eigen', idx: i, pool: s.pool[i] });
+    aktiveTypen().forEach(function(tab){
+      const s = state[tab];
+      s.data.forEach(function(item, i){
+        const passt = (watchlistFilterOn && isWatched(tab, item[0])) || (seenFilterOn && s.checked[i]);
+        if (!passt) return;
+        if (inStreamFilterOn && !(s.pool[i] && selectedProviders(s.pool[i].providers).length)) return;
+        // Waehrend einer Suche und mit "Neue entdecken" muss auch die eigene
+        // Liste VOR dem Kuerzen auf discoveryLoadLimit nach dem Suchbegriff
+        // gefiltert werden -- sonst faellt ein gesuchter eigener Titel hinten
+        // heraus, nur weil zehntausende Vorschlaege mit einsortiert wurden.
+        if (q && !(s.pool[i] && poolItemMatchesQuery(s.pool[i], q))) return;
+        eintraege.push({ art: 'eigen', tab: tab, idx: i, pool: s.pool[i] });
+      });
     });
   }
   if (discoverFilterOn) {
@@ -2070,7 +2072,7 @@ function render() {
   // dann lang genug, dass gekuerzt werden muss). Ohne Entdecken bleibt es beim
   // guenstigeren Ein-/Ausblenden per applyFilter() am Ende -- dort wird bei
   // jedem Tastendruck nichts neu gebaut.
-  const q = discoverFilterOn ? searchEl.value.trim().toLowerCase() : '';
+  const q = (discoverFilterOn || sucheAktiv()) ? searchEl.value.trim().toLowerCase() : '';
   const eintraege = sammleEintraege(q);
   const sortBy = effectiveSort(activeTab);
   const werte = new Map();
@@ -2082,7 +2084,7 @@ function render() {
   const sichtbar = discoverFilterOn ? eintraege.slice(0, discoveryLoadLimit) : eintraege;
   sichtbar.forEach(function(e){
     list.appendChild(e.art === 'eigen'
-      ? eigeneZeileLi(e.idx, prof)
+      ? eigeneZeileLi(e.tab, e.idx, prof)
       : poolItemLi(e.pool, scoreCand(e.pool, prof).score));
   });
   if (eintraege.length > sichtbar.length) {
@@ -2096,7 +2098,7 @@ function render() {
     };
     list.appendChild(moreBtn);
   }
-  if (!discoverFilterOn) applyFilter();
+  if (!discoverFilterOn && !sucheAktiv()) applyFilter();
 }
 
 // Verhindert den "Phantom-Hover" auf dem Nachbar-Titel: wird eine Zeile per
@@ -2356,6 +2358,59 @@ function renderCurrentTab(){
   // Inhaltsangaben der gerade gerenderten Zeilen nachladen (siehe fillPlots).
   fillPlots();
 }
+// Suchen heisst: ueberall suchen. Sobald etwas im Feld steht, werden alle
+// Bereiche eingeschaltet -- Filme UND Serien, Watchlist, Gesehen und Neue
+// entdecken. Sonst sucht man in der Watchlist nach einem Titel, findet nichts
+// und schliesst daraus, dass es ihn nicht gibt, obwohl er unter "Gesehen"
+// steht. Eingeschraenkt wird danach durch ABwaehlen, nicht vorher durch
+// Anwaehlen.
+//
+// Der dafuer gesetzte Zustand ist bewusst fluechtig: Was vor der Suche
+// eingestellt war, wird gemerkt und beim Leeren des Feldes wiederhergestellt.
+// Ohne das landet man nach dem Loeschen der Suche in einer voellig anderen
+// Ansicht als vorher -- und die beim Tab-Wechsel absichtlich stehenbleibende
+// Filterauswahl (siehe setTab) waere still ueberschrieben.
+//
+// Kino bleibt aussen vor: eigene Seite, eigene Daten, weder Watchlist noch
+// Gesehen (siehe openCinemaPage).
+let sucheZustandVorher = null;
+let sucheTypen = { f: true, s: true };
+function sucheAktiv(){ return searchEl.value.trim().length > 0; }
+// Welche Typen gerade in die Liste einfliessen: ausserhalb der Suche genau der
+// aktive Tab, waehrend der Suche beides -- bis man einen der beiden abwaehlt.
+function aktiveTypen(){
+  if (!sucheAktiv()) return [activeTab];
+  var t = [];
+  if (sucheTypen.f) t.push('filme');
+  if (sucheTypen.s) t.push('serien');
+  return t.length ? t : [activeTab];
+}
+function sucheZustandAnwenden(){
+  var jetzt = sucheAktiv();
+  if (jetzt && !sucheZustandVorher) {
+    sucheZustandVorher = { wl: watchlistFilterOn, seen: seenFilterOn,
+                           disc: discoverFilterOn, stream: inStreamFilterOn, tab: activeTab };
+    watchlistFilterOn = true;
+    seenFilterOn = true;
+    // Waehrend eines Personen-Abgleichs bleibt Entdecken gesperrt (siehe
+    // enforceDiscoverLock) -- die Suche darf die Regel nicht aushebeln.
+    discoverFilterOn = !matchAktiv();
+    // Der Streaming-Filter verengt, Suchen soll weiten -- er geht aus, bleibt
+    // aber anklickbar.
+    inStreamFilterOn = false;
+    sucheTypen = { f: true, s: true };
+    discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+  } else if (!jetzt && sucheZustandVorher) {
+    watchlistFilterOn = sucheZustandVorher.wl;
+    seenFilterOn = sucheZustandVorher.seen;
+    discoverFilterOn = sucheZustandVorher.disc;
+    inStreamFilterOn = sucheZustandVorher.stream;
+    activeTab = sucheZustandVorher.tab;
+    sucheZustandVorher = null;
+    sucheTypen = { f: true, s: true };
+    discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+  }
+}
 // "Neue entdecken" zeigt Titel, die du NICHT markiert hast -- die koennen per
 // Definition nie gemeinsame Titel mit jemandem sein. Solange ein Abgleich
 // laeuft, ist der Knopf deshalb gesperrt statt heimlich wirkungslos. War er
@@ -2379,8 +2434,11 @@ function updateFilterRowUI(){
   btns.discover.disabled = matchAktiv();
   // Auf der Kino-Seite darf keiner der beiden Tabs aktiv wirken -- dort ist
   // "Im Kino" der ausgewaehlte Bereich (siehe openCinemaPage/closeCinemaPage).
-  tabBtns.filme.classList.toggle('active', !cinemaMode && activeTab === 'filme');
-  tabBtns.serien.classList.toggle('active', !cinemaMode && activeTab === 'serien');
+  // Waehrend der Suche sind beide zugleich aktiv (siehe sucheTypen); sie werden
+  // dort zur Typ-Auswahl der Ergebnisliste statt zum Seitenwechsel.
+  var sucht = sucheAktiv();
+  tabBtns.filme.classList.toggle('active', !cinemaMode && (sucht ? sucheTypen.f : activeTab === 'filme'));
+  tabBtns.serien.classList.toggle('active', !cinemaMode && (sucht ? sucheTypen.s : activeTab === 'serien'));
   tabBtns.kino.classList.toggle('active', !!cinemaMode);
 }
 function setTab(t) {
@@ -2389,6 +2447,24 @@ function setTab(t) {
   // Titelliste gleichzeitig sichtbar. Wirkungslos, wenn man gar nicht im Kino
   // ist (closeCinemaPage kehrt dann sofort zurueck).
   closeCinemaPage();
+  // Waehrend einer Suche wechselt ein Klick auf Filme/Serien nicht die Seite,
+  // sondern schraenkt die Ergebnisse auf diesen Typ ein bzw. nimmt ihn wieder
+  // dazu. Der letzte verbliebene Typ laesst sich nicht abwaehlen -- die Liste
+  // waere sonst ohne erkennbaren Grund leer.
+  if (sucheAktiv()) {
+    var k = t === 'serien' ? 's' : 'f';
+    var anderer = k === 'f' ? 's' : 'f';
+    if (sucheTypen[k] && !sucheTypen[anderer]) return;
+    sucheTypen[k] = !sucheTypen[k];
+    // activeTab mitziehen, damit Sortierung und Leerzustand einen definierten
+    // Bezug haben, solange nur noch ein Typ aktiv ist.
+    if (sucheTypen[k]) activeTab = t;
+    else activeTab = anderer === 'f' ? 'filme' : 'serien';
+    discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+    updateFilterRowUI();
+    renderCurrentTab();
+    return;
+  }
   activeTab = t;
   document.querySelector('.toolbar').style.display = '';
   searchEl.style.display = '';
@@ -2535,8 +2611,14 @@ if (sortBtn && sortMenu) {
 // discoveryLoadLimit unsichtbar. Ohne "Neue entdecken" ist die Liste kurz und
 // vollstaendig gerendert, dort bleibt es beim guenstigeren Ein-/Ausblenden.
 searchEl.addEventListener('input', function(){
-  if (discoverFilterOn) { discoveryLoadLimit = DISCOVERY_PAGE_SIZE; renderCurrentTab(); }
-  else applyFilter();
+  var warSuche = !!sucheZustandVorher;
+  sucheZustandAnwenden();
+  if (sucheAktiv() || warSuche || discoverFilterOn) {
+    discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+    renderCurrentTab();
+  } else {
+    applyFilter();
+  }
 });
 // Protokolliert manuell eingegebene Suchbegriffe fuer spaetere Auswertung (siehe
 // backend/routes/searchLog.js) -- 800ms nach der letzten Eingabe (nicht bei jedem
@@ -4514,9 +4596,9 @@ function poolItemMatchesQuery(item, q){
 // Discovery-Knoepfen (discTypeFilter), jetzt aus activeTab: unter "Filme" gibt
 // es nur Filme zu entdecken, unter "Serien" nur Serien.
 function discFilterPool(){
-  var typ = activeTab === 'serien' ? 'series' : 'movie';
+  var typen = aktiveTypen().map(function(t){ return t === 'serien' ? 'series' : 'movie'; });
   return POOL.filter(function(i){
-    if (i.type !== typ) return false;
+    if (typen.indexOf(i.type) === -1) return false;
     if (getWatchlistFlag(i.realId) || getSeen(i.realId)) return false;
     if (i.realId != null && HIDDEN_TITLE_IDS.has(i.realId)) return false;
     if (inStreamFilterOn && !selectedProviders(i.providers).length) return false;
