@@ -450,6 +450,9 @@
   .disc-hint { text-align:center; color:var(--text-dim); font-size:13px; margin:0 auto 14px; max-width:620px; line-height:1.5; }
   .load-more-btn { display:block; margin:18px auto 6px; padding:11px 26px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--text-dim); transition:all .15s; }
   @media (hover: hover) { .load-more-btn:hover { border-color:var(--accent); color:var(--accent); } }
+  /* Der Kino-Hinweis unter den Suchtreffern ist kein "mehr vom Gleichen",
+     sondern ein Wegweiser in einen anderen Bereich -- deshalb in Akzentfarbe. */
+  .kino-hinweis { border-color:var(--accent); color:var(--accent); }
   li.disc { display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--border);
     border-radius:12px; padding:10px 14px; margin-bottom:10px; }
   li.disc .drank { color:var(--text-dim); font-weight:700; width:26px; text-align:center; flex:none; }
@@ -2270,6 +2273,54 @@ function sammleEintraege(q){
   }
   return eintraege;
 }
+// Zaehlt, wie viele Kinotitel zum Suchbegriff passen -- nach denselben Regeln,
+// die die Kino-Seite selbst anwendet (Altersfreigabe, ausgeblendete Titel,
+// Statusauswahl bzw. fremde Liste). Grundlage ist CINEMA_DATA; ist es noch
+// nicht geladen, gibt es schlicht keinen Hinweis.
+function kinoTrefferZahl(q){
+  if (!CINEMA_DATA || !q) return 0;
+  var byTmdb = new Map();
+  POOL.forEach(function(p){ if (p.type === 'movie' && p.tmdbId != null) byTmdb.set(p.tmdbId, p); });
+  var fremd = personenAnsicht() ? LINKED_PROGRESS[ANSICHT_PERSON] : null;
+  var st = kinoStatus;
+  var n = 0;
+  ['now', 'soon', 'later'].forEach(function(key){
+    (CINEMA_DATA[key] || []).forEach(function(row){
+      var item = cinemaRowToItem(row, byTmdb);
+      if (!fskErlaubt(item) || istVersteckt(item)) return;
+      if (!poolItemMatchesQuery(item, q)) return;
+      if (fremd) {
+        if (item.realId == null) return;
+        var fe = fremd.get(item.realId);
+        if (!fe) return;
+        if (ANSICHT_ART === 'w' ? !fe.w : !fe.s) return;
+        n++; return;
+      }
+      var wl = item.realId != null && getWatchlistFlag(item.realId);
+      var se = item.realId != null && getSeen(item.realId);
+      if (wl ? st.wl : se ? st.seen : st.disc) n++;
+    });
+  });
+  return n;
+}
+// Die Suche unter Filme/Serien und die auf der Kino-Seite sind getrennt: Ein
+// Kinostart, den noch niemand markiert hat, steckt gar nicht im Katalog und
+// waere von hier aus unsichtbar. Man sucht, findet nichts und schliesst daraus,
+// dass es den Titel nicht gibt -- dieselbe Falle wie frueher bei
+// "Filme + Watchlist". Statt beide Datenwelten zu vermischen (Kinostarts haben
+// Termine statt Verfuegbarkeit und eine eigene Gliederung), weist diese Zeile
+// nur den Weg.
+function kinoHinweisAnhaengen(q){
+  if (!q || cinemaMode) return;
+  var n = kinoTrefferZahl(q);
+  if (!n) return;
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'load-more-btn kino-hinweis';
+  b.textContent = '🍿 Auch im Kino: ' + n + ' Treffer';
+  b.onclick = function(){ openCinemaPage(); };
+  list.appendChild(b);
+}
 function renderLeerzustand(q){
   // In einer fremden Liste sind die Texte darunter alle falsch -- sie sprechen
   // von der EIGENEN Watchlist und schicken einen zu "Neue entdecken", was dort
@@ -2331,7 +2382,7 @@ function render() {
   const werte = new Map();
   eintraege.forEach(function(e){ werte.set(e, eintragSortwert(e, sortBy, prof)); });
   eintraege.sort(function(a, b){ return werte.get(b) - werte.get(a); });
-  if (!eintraege.length) { renderLeerzustand(q); return; }
+  if (!eintraege.length) { renderLeerzustand(q); kinoHinweisAnhaengen(q); return; }
   // Gekuerzt wird nur, wenn "Neue entdecken" aktiv ist -- die eigenen Listen sind
   // kurz genug, um sie immer vollstaendig zu zeigen.
   const sichtbar = discoverFilterOn ? eintraege.slice(0, discoveryLoadLimit) : eintraege;
@@ -2353,6 +2404,7 @@ function render() {
     list.appendChild(moreBtn);
   }
   if (!discoverFilterOn && !sucheAktiv()) applyFilter();
+  kinoHinweisAnhaengen(q);
 }
 
 // Verhindert den "Phantom-Hover" auf dem Nachbar-Titel: wird eine Zeile per
@@ -4745,6 +4797,10 @@ async function loadCatalogAndRefresh(){
     genreAliasUebernehmen(streamDoc.genreAlias);
     buildPool(combinedRows, streamDoc);
     LETZTER_KATALOG_LOAD = Date.now();
+    // Im Hintergrund, damit die Suche unter Filme/Serien sagen kann, ob es zum
+    // Begriff auch Kinotreffer gibt (siehe kinoHinweisAnhaengen). Bewusst ohne
+    // await: Die Titelliste soll darauf nicht warten.
+    loadCinemaData().catch(function(){});
     await loadUserProgressAndRefresh();
   } catch (err) {
     console.error('Katalog konnte nicht geladen werden:', err);
