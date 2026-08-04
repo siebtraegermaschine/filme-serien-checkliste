@@ -121,7 +121,7 @@
     color: var(--accent);
   }
   /* Der frueher hier stehende Discovery-Button ("Alle Filme & Serien
-     entdecken") ist entfallen: "Entdecken" ist jetzt ein dritter Status neben
+     entdecken") ist entfallen: "Neue entdecken" ist jetzt ein dritter Status neben
      Watchlist/Gesehen in .filter-group, der Typ kommt aus dem aktiven Tab.
      .head-controls traegt weiterhin die Linie UNTER den Tabs, die
      header-border-bottom bleibt die Linie vor Watchlist/Gesehen. */
@@ -143,7 +143,13 @@
      und die Tabs darunter. 660px = Inhaltsbreite von .toolbar (700 minus
      deren 2x20px), damit Suche und Filterzeile auf breiten Schirmen exakt
      uebereinander stehen. */
-  .head-search { max-width: 660px; margin: 10px auto 0; padding: 0; display: flex; }
+  /* Kein eigener Abstand nach oben: Die 14px padding-top von .head-controls
+     ergeben zusammen mit dessen Trennlinie exakt dieselben 15px, die unter dem
+     Feld bis zur border-bottom des Headers stehen (dessen padding-bottom ist
+     ebenfalls 14px). Mit den frueheren zusaetzlichen 10px sass das Feld sichtbar
+     tiefer als mittig -- nachgemessen per getBoundingClientRect, 25px oben
+     gegen 15px unten. */
+  .head-search { max-width: 660px; margin: 0 auto; padding: 0; display: flex; }
   /* Die zweite Kopfzeile steht dicht unter der ersten -- zusammen bilden sie
      einen Gedanken (allein schauen / gemeinsam schauen). Der Selektor braucht
      das header davor: "header .sub" oben ist spezifischer als eine blosse
@@ -693,13 +699,30 @@
      "links flexibel, rechts inhaltsbreit". Die zwei Zeilen trennen die beiden
      Achsen: oben der Status (Watchlist/Gesehen/Entdecken), unten der
      zusaetzliche Streaming-Filter samt Sortierung. "Sortieren" stand frueher
-     oben neben Watchlist/Gesehen -- mit "Entdecken" als drittem Status wurde
+     oben neben Watchlist/Gesehen -- mit "Neue entdecken" als drittem Status wurde
      die Zeile bei 375px zu eng, deshalb sitzt es jetzt unten. */
   .tb-grid { display: flex; flex-direction: column; gap: 10px; }
   .tb-toprow { display: flex; gap: 10px; align-items: stretch; }
   .tb-toprow > :first-child { flex: 1; min-width: 0; }
+  /* Beide Zeilen sollen dasselbe Raster aus drei Spalten zeigen: oben je ein
+     Status-Knopf pro Spalte, unten der Streaming-Filter ueber die ersten beiden
+     und "Sortieren" allein in der dritten. Dafuer muss der Abstand hier
+     derselbe sein wie in .filter-group (4px statt der sonstigen 10px), und
+     "Sortieren" bekommt exakt eine Spaltenbreite fest zugewiesen:
+     bei Gesamtbreite T und zwei Luecken ist eine Spalte (T - 8px) / 3.
+     Der Streaming-Knopf fuellt mit flex:1 den Rest und wird damit rechnerisch
+     genau so breit wie die zwei Knoepfe darueber samt ihrer Luecke. */
+  .tb-streamrow { gap: 4px; }
+  .tb-streamrow > .sort-wrap { flex: 0 0 calc((100% - 8px) / 3); min-width: 0; }
   .search-wrap { position: relative; display: flex; min-width: 0; }
-  .search-wrap #search { flex: 1; width: 100%; min-width: 0; }
+  /* Lupe links im Feld, damit auf einen Blick erkennbar ist, dass hier gesucht
+     und nicht etwas eingetragen wird. pointer-events:none, damit ein Tipp auf
+     das Symbol trotzdem im Eingabefeld landet statt ins Leere zu gehen. Das
+     padding-left des Feldes haelt den Platzhaltertext davon frei. */
+  .search-icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+    color: var(--text-dim); pointer-events: none; }
+  #search:focus ~ .search-icon { color: var(--accent); }
+  .search-wrap #search { flex: 1; width: 100%; min-width: 0; padding-left: 38px; }
   /* padding-right nur reservieren, wenn tatsaechlich Text drinsteht (dann ist
      auch das X sichtbar, siehe #search:placeholder-shown + .search-x weiter
      unten) -- leer bleibt der komplette Platz fuer den Platzhaltertext frei,
@@ -727,6 +750,11 @@
      wuerden sie ueberlaufen statt zu schrumpfen); text-overflow:ellipsis bleibt
      als Sicherheitsnetz fuer sehr schmale Bildschirme. */
   .filter-group button { flex: 1; min-width: 0; padding: 9px 2px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
+  /* "Neue entdecken" ist laenger als "Watchlist"/"Gesehen" und wuerde bei 320px
+     sonst als "Neue entde…" abgeschnitten -- nachgemessen per scrollWidth gegen
+     clientWidth. Der Breakpoint muss NACH der Regel darueber stehen: beide haben
+     dieselbe Spezifitaet, also gewinnt die spaetere. */
+  @media (max-width: 360px) { .filter-group button { font-size: 11px; padding: 9px 1px; } }
   /* Gesperrt, solange ein Personen-Abgleich laeuft (siehe enforceDiscoverLock):
      Entdecken zeigt unmarkierte Titel, die per Definition nie gemeinsame Titel
      sein koennen. Sichtbar bleiben statt verschwinden -- ein Knopf, der spurlos
@@ -752,10 +780,12 @@
   <h1><img class="logo" src="moviematch.png" alt="MovieMatch – Watch more. Search less."></h1>
   <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach deinem Geschmack!</b></p>
   <!-- Zweite Zeile: Kursiv steht wie in der ersten Zeile der Schluesselbegriff
-       -- dort "Filme & Serien", hier "Watchlist". Die Zeile ist laenger als die
-       frueheren "Matche deine Watchlist mit anderen!" und darf auf schmalen
-       Geraeten umbrechen. -->
-  <p class="sub sub-zweit"><b>Gleiche deine <i>Watchlist</i> mit denen von anderen ab.</b></p>
+       -- dort "Filme & Serien", hier "Watchlist". Bewusst ohne "beide": der
+       Abgleich laeuft ueber eine Liste von Personen (MATCH_WITH), nicht ueber
+       genau eine -- ab drei Beteiligten waere "beide" schlicht falsch.
+       Nachgemessen: bleibt bis hinunter zu 320px einzeilig, die frueheren
+       "... mit denen von anderen ab." brachen dort bereits um. -->
+  <p class="sub sub-zweit"><b>Gleiche deine <i>Watchlist</i> mit anderen ab.</b></p>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -804,6 +834,11 @@
       <div class="search-wrap">
         <input type="text" id="search" placeholder="Titel, Genre oder Namen suchen …" autocomplete="off">
         <button type="button" id="searchClear" class="search-x" aria-label="Suche löschen">×</button>
+        <!-- Die Lupe steht bewusst NACH dem X im Markup, obwohl sie links sitzt
+             (beide sind absolut positioniert, die Reihenfolge spielt optisch
+             keine Rolle): Die Regel #search:placeholder-shown + .search-x
+             braucht das X als direkten Nachbarn des Feldes. -->
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16 16"/></svg>
         <div id="searchSuggest" class="search-suggest" style="display:none"></div>
       </div>
     </div>
@@ -813,7 +848,7 @@
 <div class="toolbar">
   <div class="tb-grid">
     <!-- Statusreihe: die drei Zustaende, die ein Titel gegenueber DIR haben kann.
-         Watchlist und Gesehen sind markierte Titel, "Entdecken" ist der Rest --
+         Watchlist und Gesehen sind markierte Titel, "Neue entdecken" ist der Rest --
          alles, was du noch nicht markiert hast. Die drei sind frei
          kombinierbar; der Typ (Film oder Serie) kommt aus dem aktiven Tab, es
          gibt dafuer keine eigenen Knoepfe mehr. -->
@@ -821,7 +856,7 @@
       <div class="filter-group">
         <button id="fOpen" class="active">Watchlist</button>
         <button id="fDone">Gesehen</button>
-        <button id="fDiscover">Entdecken</button>
+        <button id="fDiscover">Neue entdecken</button>
       </div>
     </div>
     <!-- Zweite Zeile: der Streaming-Filter ist keine dritte Status-Auswahl,
@@ -968,7 +1003,7 @@
     <button class="modal-x" id="howToModalX" aria-label="Schließen">✕</button>
     <h3>Anleitung</h3>
     <ol class="install-steps">
-      <li>Tippe auf <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was bedeutet „Entdecken“?">Entdecken</i> und füge Titel deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)</li>
+      <li>Tippe auf <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was bedeutet „Neue entdecken“?">Neue entdecken</i> und füge Titel deiner „<i>Watchlist</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)</li>
       <li>Schaut gemeinsam: Verknüpfe dich oben links mit Freund:innen oder Familie – dann siehst du nur noch Titel, die bei euch gemeinsam auf der Liste stehen. So findet ihr sofort etwas, das allen gefällt.</li>
       <li>Entscheide dich einfach immer nur noch zwischen Filmen oder Serien, filtere ggf. nur nach Titeln, die aktuell im Streaming kostenlos laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die TMDB-Bewertung?">TMDB-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.</li>
       <li><b>Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</b></li>
@@ -1787,13 +1822,13 @@ let activeTab = 'filme';
 // Die drei Status, die ein Titel gegenueber DIR haben kann -- frei
 // kombinierbar, mindestens einer muss aktiv bleiben (siehe die drei
 // onclick-Handler weiter unten). Watchlist und Gesehen sind markierte Titel und
-// kommen aus state[activeTab], "Entdecken" ist der unmarkierte Rest und kommt
+// kommen aus state[activeTab], "Neue entdecken" ist der unmarkierte Rest und kommt
 // direkt aus POOL (siehe discFilterPool). Alle drei landen in EINER Liste,
 // gemeinsam sortiert nach dem gewaehlten Kriterium -- eigene Titel werden
 // bewusst nicht nach oben gezogen, sonst stuende bei Taste-Score-Sortierung ein
 // schwacher Watchlist-Titel ueber einem starken Vorschlag.
 // Default beim Laden bzw. bei jedem Tab-Wechsel ist ausschliesslich Watchlist
-// aktiv (siehe setTab): mit "Entdecken" an ist die Liste der halbe Katalog, in
+// aktiv (siehe setTab): mit "Neue entdecken" an ist die Liste der halbe Katalog, in
 // dem die eigenen Titel untergehen -- das soll eine bewusste Entscheidung sein.
 let watchlistFilterOn = true;
 let seenFilterOn = false;
@@ -1962,7 +1997,7 @@ function eintragSortwert(e, sortBy, prof){
   return gewichteteNote(p.r, p.vc);
 }
 // Sammelt die Eintraege aller aktiven Status in EINER Liste: Watchlist/Gesehen
-// aus state[activeTab] (markierte Titel), "Entdecken" direkt aus dem POOL. Der
+// aus state[activeTab] (markierte Titel), "Neue entdecken" direkt aus dem POOL. Der
 // Typ (Film oder Serie) kommt in beiden Faellen aus dem aktiven Tab.
 function sammleEintraege(q){
   const s = state[activeTab];
@@ -1972,7 +2007,7 @@ function sammleEintraege(q){
       const passt = (watchlistFilterOn && isWatched(activeTab, item[0])) || (seenFilterOn && s.checked[i]);
       if (!passt) return;
       if (inStreamFilterOn && !(s.pool[i] && selectedProviders(s.pool[i].providers).length)) return;
-      // Mit "Entdecken" muss auch die eigene Liste VOR dem Kuerzen auf
+      // Mit "Neue entdecken" muss auch die eigene Liste VOR dem Kuerzen auf
       // discoveryLoadLimit nach dem Suchbegriff gefiltert werden -- sonst faellt
       // ein gesuchter eigener Titel hinten heraus, nur weil zehntausende
       // Vorschlaege mit einsortiert wurden.
@@ -2009,14 +2044,14 @@ function renderLeerzustand(q){
       'Oben links kannst du die Auswahl wieder aufheben.</li>';
     return;
   }
-  // Leer trotz "Entdecken" heisst: die Filterkombination passt auf nichts --
+  // Leer trotz "Neue entdecken" heisst: die Filterkombination passt auf nichts --
   // nicht, dass die eigene Liste noch leer ist. Der Einstiegstext waere hier
   // schlicht falsch.
   if (discoverFilterOn || !watchlistFilterOn) {
     list.innerHTML = '<li class="watch-empty">Keine Titel für diese Auswahl.</li>';
     return;
   }
-  list.innerHTML = '<li class="watch-empty">Dies ist deine Watchlist. Füge mind. 20 Titel über „Entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>. ' +
+  list.innerHTML = '<li class="watch-empty">Dies ist deine Watchlist. Füge mind. 20 Titel über „Neue entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>. ' +
     'Zukünftig musst du nur noch auswählen, ob du einen Film oder eine Serie schauen möchtest oder ins Kino gehen willst. ' +
     'Hier siehst du dann deine persönliche Watchlist, sortiert nach deinem Geschmack.<br><br>' +
     '<u>Du möchtest mit anderen Filme genießen?</u><br>' +
@@ -2028,7 +2063,7 @@ function render() {
   list.classList.add('main-list');
   list.innerHTML = '';
   updateSortMenuActive();
-  // Nur mit "Entdecken" wird vorab nach dem Suchbegriff gefiltert (die Liste ist
+  // Nur mit "Neue entdecken" wird vorab nach dem Suchbegriff gefiltert (die Liste ist
   // dann lang genug, dass gekuerzt werden muss). Ohne Entdecken bleibt es beim
   // guenstigeren Ein-/Ausblenden per applyFilter() am Ende -- dort wird bei
   // jedem Tastendruck nichts neu gebaut.
@@ -2039,7 +2074,7 @@ function render() {
   eintraege.forEach(function(e){ werte.set(e, eintragSortwert(e, sortBy, prof)); });
   eintraege.sort(function(a, b){ return werte.get(b) - werte.get(a); });
   if (!eintraege.length) { renderLeerzustand(q); return; }
-  // Gekuerzt wird nur, wenn "Entdecken" aktiv ist -- die eigenen Listen sind
+  // Gekuerzt wird nur, wenn "Neue entdecken" aktiv ist -- die eigenen Listen sind
   // kurz genug, um sie immer vollstaendig zu zeigen.
   const sichtbar = discoverFilterOn ? eintraege.slice(0, discoveryLoadLimit) : eintraege;
   sichtbar.forEach(function(e){
@@ -2181,19 +2216,19 @@ function confirmRemove(frage){
    zurueckgesetzt (siehe removeFromMyTitles) -- der Titel landet dort NICHT
    unter Einstellungen -> "Geloeschte Titel", die enthaelt ausschliesslich per
    Wisch ausgeblendete Discovery-/Kino-Titel. Deshalb nennen die beiden
-   Listen-Texte "Entdecken" bzw. die Suche als Rueckweg. */
+   Listen-Texte "Neue entdecken" bzw. die Suche als Rueckweg. */
 var WISCH_HINWEISE = {
   filme: {
     key: 'mt.wischHinweis.filme',
-    text: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
+    text: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
   },
   serien: {
     key: 'mt.wischHinweis.serien',
-    text: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
+    text: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
   },
   discovery: {
     key: 'mt.wischHinweis.discovery',
-    text: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht unter „Entdecken“ nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
+    text: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht unter „Neue entdecken“ nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
   },
   kino: {
     key: 'mt.wischHinweis.kino',
@@ -2264,7 +2299,7 @@ function wireRow(li, src, i){
         const wort = src === 'serien' ? 'Serie' : 'Film';
         const pron = src === 'serien' ? 'sie' : 'ihn';
         const frage = wort + ' aus deiner Liste entfernen? Du kannst ' + pron +
-          ' über „Entdecken“ oder die Suche jederzeit wieder hinzufügen.';
+          ' über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen.';
         if (!(await confirmRemove(frage))) { wlBtn.blur(); return; }
       }
       toggleWatched(src, s.data[i][0]);
@@ -2297,10 +2332,10 @@ tabBtns.serien.onclick = () => setTab('serien');
 // Knopf steht nur deshalb in derselben Reihe, weil er fuer den Nutzer dieselbe
 // Rolle spielt: einer von drei Bereichen, zwischen denen man direkt wechselt.
 tabBtns.kino.onclick = () => { if (!cinemaMode) openCinemaPage(); };
-// "Entdecken" zeigt anfangs 250 Titel, "Mehr laden" haengt jeweils 50 weitere
+// "Neue entdecken" zeigt anfangs 250 Titel, "Mehr laden" haengt jeweils 50 weitere
 // an; ein Wechsel von Filter oder Sortierung gilt als neue Liste und faengt
 // wieder bei 250 an (siehe die Reset-Stellen: Status-Toggles, Sortier-Menue,
-// Tab-Wechsel). Ohne "Entdecken" wird gar nicht gekuerzt (siehe render).
+// Tab-Wechsel). Ohne "Neue entdecken" wird gar nicht gekuerzt (siehe render).
 const DISCOVERY_PAGE_SIZE = 250;
 const DISCOVERY_LOAD_MORE_STEP = 50;
 let discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
@@ -2308,7 +2343,7 @@ let sortManual = { filme: null, serien: null };
 function renderList() {
   render();
 }
-// Rendert die aktuell sichtbare Seite neu. Seit "Entdecken" ein Status statt
+// Rendert die aktuell sichtbare Seite neu. Seit "Neue entdecken" ein Status statt
 // eines eigenen Modus ist, gibt es nur noch EINEN Render-Weg -- die frueheren
 // "if (inDiscoveryMode()) renderDiscovery() else ..."-Verzweigungen entfallen.
 function renderCurrentTab(){
@@ -2318,7 +2353,7 @@ function renderCurrentTab(){
   // Inhaltsangaben der gerade gerenderten Zeilen nachladen (siehe fillPlots).
   fillPlots();
 }
-// "Entdecken" zeigt Titel, die du NICHT markiert hast -- die koennen per
+// "Neue entdecken" zeigt Titel, die du NICHT markiert hast -- die koennen per
 // Definition nie gemeinsame Titel mit jemandem sein. Solange ein Abgleich
 // laeuft, ist der Knopf deshalb gesperrt statt heimlich wirkungslos. War er
 // beim Auswaehlen der Person an, faellt die Ansicht auf die Watchlist zurueck;
@@ -2491,10 +2526,10 @@ if (sortBtn && sortMenu) {
   document.addEventListener('click', function () { sortMenu.style.display = 'none'; });
 }
 
-// Mit aktivem "Entdecken" muss die Suche den kompletten Pool neu filtern und
+// Mit aktivem "Neue entdecken" muss die Suche den kompletten Pool neu filtern und
 // rendern (siehe render/poolItemMatchesQuery), nicht nur bereits gerenderte
 // Zeilen per CSS aus-/einblenden -- sonst bleiben Treffer jenseits von
-// discoveryLoadLimit unsichtbar. Ohne "Entdecken" ist die Liste kurz und
+// discoveryLoadLimit unsichtbar. Ohne "Neue entdecken" ist die Liste kurz und
 // vollstaendig gerendert, dort bleibt es beim guenstigeren Ein-/Ausblenden.
 searchEl.addEventListener('input', function(){
   if (discoverFilterOn) { discoveryLoadLimit = DISCOVERY_PAGE_SIZE; renderCurrentTab(); }
@@ -2735,7 +2770,7 @@ function applyFilter() {
     li.style.display = (matchQ && matchM) ? 'flex' : 'none';
   });
   // li.disc sind die Entdecken-Zeilen. Sie stehen hier nur vorsorglich: mit
-  // aktivem "Entdecken" wird gar nicht mehr per applyFilter gefiltert, sondern
+  // aktivem "Neue entdecken" wird gar nicht mehr per applyFilter gefiltert, sondern
   // neu gerendert (siehe render) -- der Zweig greift also nur, falls doch einmal
   // eine Entdecken-Zeile ohne Neuaufbau in der Liste steht. discFilterPool hat
   // die Statusauswahl bereits angewendet, hier zaehlt nur noch die Suche.
@@ -4497,16 +4532,16 @@ function discFilterPool(){
       'jeweiligen Titels fließt mit ein. Deine 1-10-Sterne-Bewertung bei „Gesehen“-Titeln zählt zusätzlich mit: '+
       'schlecht bewertete Titel prägen deinen Geschmack kaum noch, gut bewertete deutlich stärker. Je mehr Titel du '+
       'markierst, desto persönlicher und treffsicherer wird er. Ab 10 markierten Titeln wird auf Filme, Serien, '+
-      'Streaming und beim Entdecken standardmäßig nach Taste-Score statt TMDB-Bewertung sortiert, sofern du die '+
+      'Streaming und bei „Neue entdecken“ standardmäßig nach Taste-Score statt TMDB-Bewertung sortiert, sofern du die '+
       'Sortierung nicht manuell änderst.' },
     imdb: { title:'TMDB-Bewertung', body:'Die TMDB-Bewertung ist die durchschnittliche Nutzerbewertung (0–10) '+
       'auf der Filmdatenbank TMDB (The Movie Database) und zeigt, wie gut ein Titel bei einem breiten '+
       'Publikum ankommt. Die Zahl in Klammern dahinter ist die Anzahl der abgegebenen Stimmen: Eine 8,0 '+
       'aus einer einzigen Stimme sagt deutlich weniger aus als eine 8,3 aus 28.000.' },
-    discovery: { title:'Entdecken', body:'Zeigt alles, was du noch nicht markiert hast – also weder auf der Watchlist '+
+    discovery: { title:'Neue entdecken', body:'Zeigt alles, was du noch nicht markiert hast – also weder auf der Watchlist '+
       'noch als „gesehen“. Unter „Filme“ nur Filme, unter „Serien“ nur Serien. Sortiert wird nach deinem '+
       'Taste-Score, also nach Genres, Besetzung, Regie und mehr aus all deinen bisher markierten Titeln. '+
-      '„Entdecken“ lässt sich mit Watchlist und Gesehen kombinieren – dann steht alles in einer gemeinsamen, '+
+      '„Neue entdecken“ lässt sich mit Watchlist und Gesehen kombinieren – dann steht alles in einer gemeinsamen, '+
       'einheitlich sortierten Liste.' },
     newreleases: { title:'Veröffentlichungsdatum vs. Neu im Streaming', body:'Das sind zwei unterschiedliche Sortierungen: „Veröffentlichungsdatum“ '+
       'sortiert danach, wann ein Film oder eine Serie ursprünglich erschienen ist. „Neu im Streaming“ sortiert danach, '+
