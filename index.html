@@ -4199,6 +4199,10 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _pro
 document.getElementById('profileInviteBtn').onclick = async function(){
   var btn = this;
   if (btn.disabled) return;
+  // Auch die einladende Seite gibt etwas preis -- die Verknuepfung wirkt in
+  // beide Richtungen. Wer den Link verschickt, soll das vorher wissen und nicht
+  // erst in der Datenschutzerklaerung nachlesen muessen.
+  if (!confirm('Wer die Einladung annimmt, kann danach deine ganze Watchlist und deine „gesehen"-Liste ansehen, einschließlich deiner Sterne-Bewertungen. Umgekehrt gilt dasselbe. Lösen könnt ihr die Verknüpfung jederzeit.\n\nEinladungslink jetzt erstellen?')) return;
   btn.disabled = true;
   try {
     var d = await apiRequest('POST', '/api/links/invite');
@@ -4250,8 +4254,17 @@ async function handleInviteToken(token){
       document.getElementById('inviteOkBtn').onclick = closeInviteModal;
       return;
     }
-    textEl.textContent = d.inviter.name + ' möchte sich mit dir verknüpfen. Ihr seht danach ' +
-      'gegenseitig, welche Titel ihr gemeinsam auf der Liste habt. Das lässt sich jederzeit wieder lösen.';
+    // Das ist der Moment der Einwilligung -- hier muss stehen, was danach
+    // sichtbar wird, und zwar vollstaendig. "Gemeinsame Titel" allein war zu
+    // eng: Verknuepfte Personen koennen die Listen ganz durchsehen, samt
+    // Sterne-Bewertungen (siehe personenAnsichtOeffnen und Abschnitt 7 der
+    // Datenschutzerklaerung).
+    textEl.innerHTML = esc(d.inviter.name) + ' möchte sich mit dir verknüpfen.<br><br>' +
+      'Ihr könnt danach <b>gegenseitig eure ganze Watchlist und „gesehen&quot;-Liste ansehen</b> – ' +
+      'einschließlich der Sterne-Bewertungen – und nach gemeinsamen Titeln filtern. ' +
+      'Nicht sichtbar werden E-Mail-Adresse und Kontodaten.<br><br>' +
+      'Die Verknüpfung lässt sich jederzeit von beiden Seiten wieder lösen. ' +
+      'Näheres in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.';
     actions.innerHTML = '<button type="button" class="modal-no" id="inviteNoBtn">Ablehnen</button>' +
                         '<button type="button" class="modal-yes" id="inviteYesBtn">Annehmen</button>';
     document.getElementById('inviteNoBtn').onclick = closeInviteModal;
