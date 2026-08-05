@@ -829,9 +829,14 @@
      staendig anschaut, steht dann irgendwo in der Mitte.
      Die Wahl liegt nur im Browser (siehe FAVORITEN_KEY) -- sie geht niemanden
      ausser einem selbst etwas an und braucht dafuer keine Serverrunde. */
-  .profile-item .pi-fav { background:none; border:none; color:var(--text-dim); font-size:15px;
-    line-height:1; padding:4px; cursor:pointer; }
+  /* Herz als SVG statt ♡/♥: Die beiden Schriftzeichen sind unterschiedlich
+     breit und wirken unterschiedlich gross -- das gefuellte sprang beim
+     Anklicken sichtbar an. Ein Pfad, umgeschaltet wird nur die Fuellung. */
+  .profile-item .pi-fav { background:none; border:none; color:var(--text-dim);
+    line-height:0; padding:4px; cursor:pointer; display:inline-flex; align-items:center; }
+  .profile-item .pi-fav svg { display:block; fill:none; }
   .profile-item .pi-fav.on { color:#fff; }
+  .profile-item .pi-fav.on svg { fill:currentColor; }
   @media (hover: hover) { .profile-item .pi-fav:hover { color:#fff; } }
   .profile-add { width:100%; margin-top:12px; padding:11px; border-radius:9px; cursor:pointer;
     background:var(--card); border:1px dashed var(--border); color:var(--text-dim);
@@ -4838,6 +4843,11 @@ var _profileModal = document.getElementById('profileModal');
    viel. Folge: Die Wahl gilt je Geraet -- vertretbar, weil sie in Sekunden
    wiederhergestellt ist. */
 var FAVORITEN_KEY = 'mt.favoriten';
+// Ein einziger Pfad fuer beide Zustaende -- gefuellt wird per CSS (siehe
+// .pi-fav.on svg). So sind ausgewaehlt und nicht ausgewaehlt exakt gleich gross.
+var HERZ_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" ' +
+  'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+  '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>';
 function favoritenLesen(){
   try { return new Set(JSON.parse(localStorage.getItem(FAVORITEN_KEY) || '[]').map(Number)); }
   catch (e) { return new Set(); }
@@ -4877,7 +4887,7 @@ function renderProfileList(){
              '<button type="button" class="pi-del" aria-label="Verknüpfung lösen">✕</button>' +
              '<button type="button" class="pi-fav' + (favorit ? ' on' : '') + '" aria-pressed="' +
                (favorit ? 'true' : 'false') + '" aria-label="Als Favorit oben anzeigen">' +
-               (favorit ? '♥' : '♡') + '</button>' +
+               HERZ_SVG + '</button>' +
            '</div>';
   }).join('');
   // Ausgeloggt steht hier, warum die Liste leer ist und der Knopf darunter
