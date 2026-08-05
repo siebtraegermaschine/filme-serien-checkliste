@@ -3541,9 +3541,10 @@ if (_searchClear) _searchClear.addEventListener('click', function () {
   searchEl.dispatchEvent(new Event('input'));
   searchEl.focus();
 });
-// Logo oben verlinkt zurueck auf die Startseite (Streaming) -- inkl. Zuruecksetzen
-// einer evtl. noch eingetragenen Suche und Schliessen der Kino-Seite (goHome(),
-// siehe weiter unten), damit man wirklich auf der "ersten Seite" landet.
+// Logo oben fuehrt zurueck in die Startansicht: Suche geleert, Kino-Seite und
+// fremde Liste geschlossen, und dieselbe Auswahl wie beim Oeffnen der App --
+// Filme mit der Watchliste, wenn dort etwas steht, sonst der naechste Bereich,
+// in dem etwas ist (siehe goHome/startEinstiegSetzen).
 var _logoImg = document.querySelector('h1 .logo');
 if (_logoImg) {
   _logoImg.style.cursor = 'pointer';
@@ -4543,7 +4544,16 @@ function goHome(){
   pfadAufStartseite();
   searchEl.value = '';
   searchEl.dispatchEvent(new Event('input'));
+  // setTab stellt Werkzeugleiste und Suche wieder her (wichtig, wenn man aus
+  // dem Kino kommt) -- setzt dabei aber den Einstiegsmerker, weil ein Tabklick
+  // sonst eine eigene Wahl waere. Danach also wieder freigeben und den Einstieg
+  // laufen lassen: Das Logo soll dorthin fuehren, wo etwas steht, nicht auf den
+  // Status, der zufaellig zuletzt an war (siehe startEinstiegSetzen).
   setTab('filme');
+  einstiegOffen = true;
+  startEinstiegSetzen();
+  renderCurrentTab();
+  window.scrollTo(0, 0);
 }
 
 // Sortier-Menue auf der Kino-Seite -- dieselben drei Kriterien wie unter Filme/
