@@ -26,10 +26,12 @@ shot() {
   echo "  tour/$1.png"
 }
 mkdir -p tour
-shot 1-entdecken    900 1
-shot 2-taste-score  900 2
-shot 3-gemeinsam    860 3
-shot 4-streaming    900 4
-shot 5-details     1080 5
-shot 6-suche        900 6
+# Ohne Logo und Kopfzeilen (siehe kopfKuerzen in aufbau.js) faengt das Bild bei
+# den Knoepfen Filme/Serien/Kino an -- rund 190px kuerzer als vorher.
+shot 1-entdecken    710 1
+shot 2-taste-score  710 2
+shot 3-gemeinsam    700 3
+shot 4-streaming    710 4
+shot 5-details      890 5
+shot 6-suche        710 6
 echo "fertig"

@@ -611,9 +611,15 @@
   /* Einstieg in Schritten (siehe TOUR_SLIDES). Feste Mindesthoehe fuer den
      Bildbereich waere falsch -- die Bilder sind unterschiedlich hoch, und ein
      leerer Kasten auf Seiten ohne Bild saehe nach Fehler aus. */
-  .modal-overlay .modal.tour-modal { max-width:420px; }
+  /* Hoehe gedeckelt und notfalls scrollbar: Ohne das wuchs das Fenster mit dem
+     Bild ueber den Bildschirm hinaus -- dann war das ✕ oben nicht mehr
+     erreichbar und man kam aus dem Einstieg nicht heraus. */
+  .modal-overlay .modal.tour-modal { max-width:420px; max-height:88vh; overflow-y:auto; }
   .tour-bild { margin:14px 0; }
-  .tour-bild img { display:block; width:100%; height:auto; border-radius:10px;
+  /* max-height statt fester Breite: Das Bild schrumpft bei Bedarf als Ganzes,
+     statt in die Hoehe gezogen zu werden. */
+  .tour-bild img { display:block; margin:0 auto; max-width:100%; max-height:46vh;
+    width:auto; height:auto; border-radius:10px;
     border:1px solid var(--border); background:var(--bg); }
   .tour-text { color:var(--text); font-size:14px; line-height:1.6; margin:0; }
   .tour-punkte { display:flex; gap:6px; justify-content:center; margin:16px 0 14px; }
@@ -4202,7 +4208,8 @@ document.addEventListener('keydown', function(e){
 var TOUR_SLIDES = [
   { titel: 'Filme & Serien entdecken',
     bild: 'tour/1-entdecken.png',
-    text: 'Markiere Titel als gesehen, bewerte sie oder füge sie deiner Watchliste hinzu.' },
+    text: '„Neue entdecken" listet alle Filme und Serien auf bzw. zeigt aktuelle und zukünftige Kinofilme. ' +
+      'Markiere Titel als gesehen, bewerte sie oder füge sie deiner Watchliste hinzu.' },
   { titel: 'Dein Taste-Score',
     bild: 'tour/2-taste-score.png',
     text: 'Ab 10 gespeicherten Titeln werden alle Filme, Serien und Kinofilme nach deinem Geschmack sortiert.' },

@@ -69,6 +69,15 @@
   // Beim ersten Besuch oeffnet sich der Einstieg von selbst -- fuer die
   // Aufnahmen ist er im Weg (Chrome startet jedes Mal mit leerem Profil).
   function tourZu() { try { closeTour(); } catch (e) {} }
+  /* Logo und die beiden Kopfzeilen ausblenden: Fuer die Bilder faengt der
+     interessante Teil bei den Knoepfen Filme/Serien/Kino an. Ohne das waren die
+     Bilder so hoch, dass das Einstiegsfenster darum herum ueber den Bildschirm
+     hinauswuchs. */
+  function kopfKuerzen() {
+    var h1 = document.querySelector('header h1');
+    if (h1) h1.style.display = 'none';
+    document.querySelectorAll('header .sub').forEach(function (e) { e.style.display = 'none'; });
+  }
   function zeilen() { return document.querySelectorAll('#list li'); }
   function katalogDa() { return typeof POOL !== 'undefined' && POOL.length > 100; }
 
@@ -95,6 +104,7 @@
     1: function (fertig) {
       warte(katalogDa, function () {
         tourZu();
+        kopfKuerzen();
         profilVortaeuschen();
         activeTab = 'filme'; watchlistFilterOn = false; seenFilterOn = false; discoverFilterOn = true;
         einstiegOffen = false; updateFilterRowUI(); renderCurrentTab();
@@ -108,6 +118,7 @@
     2: function (fertig) {
       warte(katalogDa, function () {
         tourZu();
+        kopfKuerzen();
         profilVortaeuschen();
         activeTab = 'filme'; watchlistFilterOn = false; seenFilterOn = false; discoverFilterOn = true;
         einstiegOffen = false; updateFilterRowUI(); renderCurrentTab();
@@ -124,6 +135,7 @@
     3: function (fertig) {
       warte(katalogDa, function () {
         tourZu();
+        kopfKuerzen();
         profilVortaeuschen();
         CURRENT_USER = { id: 1, displayName: 'Du' };
         LINKED_LADEN = false;
@@ -153,6 +165,7 @@
     4: function (fertig) {
       warte(katalogDa, function () {
         tourZu();
+        kopfKuerzen();
         profilVortaeuschen();
         activeTab = 'filme'; watchlistFilterOn = false; seenFilterOn = false; discoverFilterOn = true;
         einstiegOffen = false; updateFilterRowUI(); renderCurrentTab();
@@ -169,6 +182,7 @@
     5: function (fertig) {
       warte(katalogDa, function () {
         tourZu();
+        kopfKuerzen();
         profilVortaeuschen();
         activeTab = 'filme'; watchlistFilterOn = false; seenFilterOn = false; discoverFilterOn = true;
         einstiegOffen = false; updateFilterRowUI(); renderCurrentTab();
@@ -192,6 +206,7 @@
     6: function (fertig) {
       warte(katalogDa, function () {
         tourZu();
+        kopfKuerzen();
         profilVortaeuschen();
         activeTab = 'filme'; einstiegOffen = false;
         searchEl.value = 'Action';
