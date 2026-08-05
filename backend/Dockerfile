@@ -18,7 +18,14 @@ WORKDIR /app
 COPY backend/package.json backend/package-lock.json ./backend/
 RUN cd backend && npm ci --omit=dev
 
-COPY index.html impressum.html datenschutz.html nutzungsbedingungen.html reset-password.html moviematch.png manifest.json icon-192.png icon-512.png apple-touch-icon.png favicon-32.png ./
+# Nach Muster statt als Einzelliste: Die Liste war eine Falle -- neue Dateien
+# (og-image.png fuer die Link-Vorschau, tmdb-logo.svg fuer die vorgeschriebene
+# TMDB-Kennzeichnung, die Bilder des Einstiegs) fehlten im Image und liefen
+# live in einen 404, obwohl index.html sie laengst einband. Der Build-Kontext
+# ist ein sauberer Git-Auschecker, es kommt also nichts Fremdes mit; Skripte
+# und Dokumentation passen auf keines der Muster.
+COPY *.html *.png *.svg manifest.json ./
+COPY tour/ ./tour/
 COPY backend/ ./backend/
 
 WORKDIR /app/backend
