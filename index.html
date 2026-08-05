@@ -602,6 +602,13 @@
   .prov-steps { margin:0 0 12px 18px; padding:0; color:var(--text-dim); font-size:13px; line-height:1.5; }
   .prov-steps li { margin-bottom:9px; }
   .prov-steps li:last-child { margin-bottom:0; }
+  /* Credits: Das TMDB-Logo bleibt deutlich kleiner als das MovieMatch-Logo im
+     Kopf -- die TMDB-Bedingungen verlangen ausdruecklich, dass es weniger
+     prominent ist als die Marke der App selbst. Unveraendert in Farbe und
+     Seitenverhaeltnis, deshalb keine Filter oder feste Hoehe. */
+  .credits-logo { display:block; margin:14px 0; }
+  .credits-logo img { width:220px; max-width:100%; height:auto; display:block; }
+  .credits-disclaimer { font-style:italic; }
   /* Ab der zehnten Nutzung faellt die Anleitung weg -- dieselbe Schwelle wie bei
      den Watchliste-/Gesehen-Knoepfen (siehe kompakteAktionenSetzen). Wer die
      drei Schritte kennt, will beim Oeffnen die Personenliste sehen und nicht
@@ -1115,7 +1122,12 @@
 </div>
 
 <footer>
-  Dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, „Gesehen"-Status und deine „<i>Watchliste</i>" werden mit deinem Konto gespeichert, sobald du <i class="footer-auth-link" id="footerAuthLink" role="button" tabindex="0" aria-label="Anmelden">angemeldet</i> bist.<br>
+  Dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, „Gesehen"-Status und deine „<i>Watchliste</i>" werden mit deinem Konto gespeichert, sobald du <i class="footer-auth-link" id="footerAuthLink" role="button" tabindex="0" aria-label="Anmelden">angemeldet</i> bist.
+  <!-- Von TMDB vorgeschriebener Wortlaut, bewusst unuebersetzt: Die
+       Nutzungsbedingungen geben genau diesen Satz vor. Er steht hier statt nur
+       unter Einstellungen -> Credits, weil der Fussbereich auch ohne Konto zu
+       sehen ist -- das Einstellungsmenue nicht. -->
+  This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.<br>
   <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a>
 </footer>
 
@@ -1268,8 +1280,32 @@
       <button type="button" id="settingsProvidersBtn" class="modal-yes">Streaminganbieter</button>
       <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Titel</button>
       <button type="button" id="settingsAccountBtn" class="modal-yes">Zugangsdaten</button>
+      <button type="button" id="settingsCreditsBtn" class="modal-yes">Credits</button>
       <button type="button" id="settingsDeleteBtn" class="modal-danger">Konto löschen</button>
     </div>
+  </div>
+</div>
+
+<!-- Credits. Die TMDB-Nutzungsbedingungen (Abschnitt 3) verlangen zweierlei:
+     das TMDB-Logo als Kennzeichnung der Nutzung und den Hinweis, dass TMDB die
+     App nicht unterstuetzt oder freigegeben hat. Vorgesehener Ort dafuer ist
+     laut TMDB ein "About"- oder "Credits"-Bereich; der Hinweistext steht
+     zusaetzlich im Fussbereich, der auch ohne Konto zu sehen ist.
+     Das Logo ist die unveraenderte Originaldatei (blue_long_2) und bleibt
+     deutlich kleiner als das MovieMatch-Logo im Kopf -- beides so verlangt. -->
+<div id="creditsModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="creditsModalX" aria-label="Schließen">✕</button>
+    <h3>Credits</h3>
+    <p class="prov-intro">Angaben zu Filmen und Serien – Titel, Beschreibungen, Poster, Bewertungen,
+      Verfügbarkeit und Kinostarts – stammen von The Movie Database (TMDB).</p>
+    <a class="credits-logo" href="https://www.themoviedb.org" target="_blank" rel="noopener">
+      <img src="tmdb-logo.svg" alt="The Movie Database (TMDB)" width="220" height="16">
+    </a>
+    <p class="prov-intro credits-disclaimer">This product uses TMDB and the TMDB APIs but is not
+      endorsed, certified, or otherwise approved by TMDB.</p>
+    <p class="prov-intro">Angaben zur Verfügbarkeit bei Streaming-Anbietern stammen über TMDB von
+      JustWatch. Ob ein Titel tatsächlich läuft, entscheidet allein der jeweilige Anbieter.</p>
   </div>
 </div>
 
@@ -5088,6 +5124,16 @@ function openAccountModal(){
 }
 function closeAccountModal(){ _accountModal.style.display = 'none'; }
 document.getElementById('settingsAccountBtn').onclick = openAccountModal;
+/* ---- Credits (TMDB-Attribution, siehe Kommentar am Markup) ---- */
+var _creditsModal = document.getElementById('creditsModal');
+function openCreditsModal(){ closeSettingsModal(); _creditsModal.style.display = 'flex'; }
+function closeCreditsModal(){ _creditsModal.style.display = 'none'; }
+document.getElementById('settingsCreditsBtn').onclick = openCreditsModal;
+document.getElementById('creditsModalX').onclick = closeCreditsModal;
+_creditsModal.addEventListener('click', function(e){ if (e.target === _creditsModal) closeCreditsModal(); });
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && _creditsModal.style.display !== 'none') closeCreditsModal();
+});
 document.getElementById('accountModalX').onclick = closeAccountModal;
 _accountModal.addEventListener('click', function(e){ if (e.target === _accountModal) closeAccountModal(); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _accountModal.style.display !== 'none') closeAccountModal(); });
