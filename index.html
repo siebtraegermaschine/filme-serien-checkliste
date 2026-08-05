@@ -3271,6 +3271,10 @@ function setTab(t) {
   // oder Serien verlaesst die Kino-Vollseite. Ohne das blieben Kino-Liste und
   // Titelliste gleichzeitig sichtbar. Wirkungslos, wenn man gar nicht im Kino
   // ist (closeCinemaPage kehrt dann sofort zurueck).
+  // Auch der Tabwechsel ist eine eigene Wahl -- ohne diese Zeile schob der
+  // automatische Einstieg (startEinstiegSetzen) einen Sekunden spaeter wieder
+  // auf "Filme" zurueck, wenn man waehrend des Ladens auf Serien getippt hat.
+  einstiegOffen = false;
   var warKino = cinemaMode;
   closeCinemaPage();
   // Waehrend einer Suche wechselt ein Klick auf Filme/Serien nicht die Seite,
@@ -3333,6 +3337,14 @@ function toggleStatus(feld){
   // nichts Unmarkiertes. Watchliste und Gesehen dagegen verhalten sich hier
   // genau wie in den eigenen Listen, deshalb kein Sonderfall mehr.
   if (personenAnsicht() && feld === 'disc') return;
+  // GANZ nach vorne, vor jeden Rueckweg: Ab dem ersten Antippen hat die Person
+  // selbst gewaehlt, und der automatische Einstieg (startEinstiegSetzen) hat
+  // sich rauszuhalten. Stand das erst weiter unten, gab es diesen Fall: Beim
+  // Start ist nur "Neue entdecken" an; tippt man genau darauf, waeren alle drei
+  // aus -- die Regel "einer muss bleiben" steigt hier aus, und weil der Merker
+  // dabei nie gesetzt wurde, schob der Einstieg die Ansicht Sekunden spaeter auf
+  // Watchliste. Es sah aus, als reagiere der Knopf nicht oder viel zu spaet.
+  einstiegOffen = false;
   var st = statusLesen();
   st[feld] = !st[feld];
   // Waehrend eines Abgleichs sind "Neue entdecken" und Watchlist/Gesehen
@@ -3345,10 +3357,6 @@ function toggleStatus(feld){
   // Mindestens einer muss aktiv bleiben, sonst waere die Liste ohne
   // erkennbaren Grund leer -- der Klick auf den letzten aktiven laeuft ins Leere.
   if (!st.wl && !st.seen && !st.disc) return;
-  // Ab hier hat die Person selbst gewaehlt -- der automatische Einstieg (siehe
-  // startEinstiegSetzen) haelt sich raus, auch wenn spaeter noch Daten
-  // nachgeladen werden.
-  einstiegOffen = false;
   statusSchreiben(st);
   // Jede Aenderung ergibt eine neue Liste -- "Mehr laden" faengt wieder bei 250 an.
   discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
@@ -3887,21 +3895,11 @@ function jahrDichteMax(years){
   });
   return max / years.length;
 }
-// Ab wie vielen bewerteten Titeln das eigene Bewertungsniveau als belastbar
-// gilt. Darunter bleibt der Teilwert weg, statt aus drei Zufallstiteln ein
-// "Niveau" zu erfinden.
-var NIVEAU_MIN_TITEL = 5;
-function profilAbschluss(prof, noten){
+function profilAbschluss(prof){
   var genreMax = 0;
   Object.keys(prof.genre).forEach(function(g){ if (prof.genre[g] > genreMax) genreMax = prof.genre[g]; });
   prof.genreMax = genreMax;
   prof.jahrMax = jahrDichteMax(prof.years);
-  // Das eigene Bewertungsniveau als MEDIAN, nicht als Mittelwert: Ein einzelner
-  // Ausreisser nach oben ("den einen Blockbuster fand ich auch gut") soll das
-  // Niveau nicht verschieben.
-  prof.niveau = (noten && noten.length >= NIVEAU_MIN_TITEL) ? median(noten) : null;
-  prof.niveauStreu = prof.niveau == null ? null
-    : median(noten.map(function(x){ return Math.abs(x - prof.niveau); }));
   return prof;
 }
 function buildProfile(){
@@ -3915,7 +3913,7 @@ function buildProfile(){
   const usedAll = tasteProfileSize() < 10;
   const cats = ['filme', 'serien'];
   const genre={}, cast={}, dir={}, kw={};
-  const years=[], noten=[];
+  const years=[];
   let n = 0;
   cats.forEach(cat => {
     const s = state[cat];
@@ -3932,14 +3930,10 @@ function buildProfile(){
       if(det.d) dir[det.d]=(dir[det.d]||0)+w;
       (det.h||[]).forEach(k=>{ if(k) kw[k]=(kw[k]||0)+w; });
       const yr = metaYear(s.data[i][1]); if(yr) years.push(yr);
-      // Das Bewertungsniveau deiner Titel -- Grundlage fuer den Teilwert
-      // "Niveau" in scoreCand.
-      const note = gewichteteNote(metaRating(s.data[i][1]), det.vc);
-      if (note > 0) noten.push(note);
       n += w;
     }
   });
-  return profilAbschluss({ genre, cast, dir, kw, years, n: Math.max(1,n), usedAll }, noten);
+  return profilAbschluss({ genre, cast, dir, kw, years, n: Math.max(1,n), usedAll });
 }
 /* ---- Gewichtete Bewertung ----
    Eine glatte 10,0 aus EINER Stimme ist keine 10,0. Das Streaming-Angebot hat
@@ -3990,17 +3984,12 @@ function gewichteteNote(note, stimmen){
    Schlagwoerter, ohne Besetzung und ohne Regie kam auf 96, weil nur noch Genre
    und Jahr uebrig blieben -- waehrend ein Titel, der in JEDER Hinsicht passte,
    bei 85 lag. Weniger Daten ergaben den besseren Score. */
-var TASTE_GEWICHTE = { genre: 25, kw: 20, cast: 15, regie: 15, jahr: 10, niveau: 15 };
+var TASTE_GEWICHTE = { genre: 30, kw: 22, cast: 18, regie: 18, jahr: 12 };
 // Ab welchem aufsummierten Anteil ein Merkmal als weitgehend getroffen gilt.
 // Beide Werte saettigen weich (x/(x+s)) statt hart zu deckeln: Der zweite
 // passende Schlagwortreffer soll noch etwas bringen, der zwoelfte kaum noch.
 var KW_SAETTIGUNG = 0.3;
 var CAST_SAETTIGUNG = 1.0;
-// Mindestspanne rund um das eigene Bewertungsniveau. Bei 0,8 sprang der
-// Teilwert zu abrupt auf null: Zwischen einer 7,2 und einer 8,9 lag dann kein
-// Unterschied mehr, obwohl die eine noch in der Naehe liegt und die andere weit
-// weg ist. 1,5 gibt der Zwischenzone Raum.
-var NIVEAU_MIN_TOLERANZ = 1.5;
 function scoreCand(c, prof){
   var teile = [];   // [Gewicht, Teilwert 0..1]
   var shared = 0;
@@ -4050,19 +4039,10 @@ function scoreCand(c, prof){
     teile.push([TASTE_GEWICHTE.jahr, Math.min(1, (nah / prof.years.length) / prof.jahrMax)]);
   }
 
-  // Niveau: NICHT "je besser bewertet, desto besser". Gefragt ist die Naehe zu
-  // dem Bewertungsniveau, das DU schaust. Wer lauter Titel um 6,3 markiert hat,
-  // mag offenbar solche Filme -- ein 8,9er Blockbuster passt dann eben nicht
-  // besonders gut, und ein 6,4er sehr wohl. Die TMDB-Note als Bonus zu addieren
-  // haette dagegen nur die ohnehin populaersten Titel nach oben gespuelt, und
-  // zwar doppelt: Sie steht ja bereits als eigene Sortierung zur Verfuegung.
-  if (prof.niveau != null) {
-    var note = gewichteteNote(c.r, c.vc);
-    // Die Spanne kommt aus der Streuung des Profils: Wer breit gemischt schaut,
-    // bekommt eine weite Spanne, wer sehr einheitlich schaut, eine enge.
-    var toleranz = Math.max(NIVEAU_MIN_TOLERANZ, 2 * (prof.niveauStreu || 0));
-    teile.push([TASTE_GEWICHTE.niveau, Math.max(0, 1 - Math.abs(note - prof.niveau) / toleranz)]);
-  }
+  // Die Community-Bewertung fliesst NICHT ein. Sie war zuletzt als Naehe zum
+  // eigenen Bewertungsniveau drin und davor als Bonus -- beides wieder
+  // entfernt. Als Bonus spuelte sie ohnehin populaere Titel nach oben, und zwar
+  // doppelt: Sie steht als eigene Sortierung zur Verfuegung.
 
   var summe = 0, gewichte = 0;
   for (var t = 0; t < teile.length; t++) { summe += teile[t][0] * teile[t][1]; gewichte += teile[t][0]; }
@@ -4081,13 +4061,7 @@ function buildProfileFromItem(item){
   (item.c||[]).forEach(function(a){ if (a) cast[a] = 1; });
   if (item.d) dir[item.d] = 1;
   (item.kw||[]).forEach(function(k){ if (k) kw[k] = 1; });
-  // Das "Niveau" ist hier die Note des Bezugstitels selbst: "Ähnliche Titel"
-  // soll auch im Anspruch aehnlich bleiben. Ein einzelner Wert hat keine
-  // Streuung, also gilt die Mindestspanne.
-  var prof = profilAbschluss({ genre, cast, dir, kw, years: item.y ? [item.y] : [], n: 1 }, []);
-  var note = gewichteteNote(item.r, item.vc);
-  if (note > 0) { prof.niveau = note; prof.niveauStreu = 0; }
-  return prof;
+  return profilAbschluss({ genre, cast, dir, kw, years: item.y ? [item.y] : [], n: 1 });
 }
 /* ---- "Ähnliche Titel"-Popup (Filme/Serien/Streaming) ----
    Filme: nur Filme; Serien: nur Serien; Streaming: Filme UND Serien, aber nur
@@ -4711,7 +4685,7 @@ function matchNoteHtml(titleId){
 function buildProfileForLinked(uid){
   var m = LINKED_PROGRESS[uid];
   if (!m) return null;
-  var genre = {}, cast = {}, dir = {}, kw = {}, years = [], noten = [], n = 0;
+  var genre = {}, cast = {}, dir = {}, kw = {}, years = [], n = 0;
   POOL.forEach(function(item){
     if (item.realId == null || !m.has(item.realId)) return;
     var eintrag = m.get(item.realId);
@@ -4723,12 +4697,10 @@ function buildProfileForLinked(uid){
     if (item.d) dir[item.d] = (dir[item.d] || 0) + w;
     (item.kw || []).forEach(function(k){ if (k) kw[k] = (kw[k] || 0) + w; });
     if (item.y) years.push(item.y);
-    var note = gewichteteNote(item.r, item.vc);
-    if (note > 0) noten.push(note);
     n += w;
   });
   return profilAbschluss({ genre: genre, cast: cast, dir: dir, kw: kw, years: years,
-                           n: Math.max(1, n), usedAll: false }, noten);
+                           n: Math.max(1, n), usedAll: false });
 }
 // Fuers Kino: Im Kino watchlistet kaum jemand Filme, die erst anlaufen -- ein
 // Listenabgleich waere dort fast immer leer. Stattdessen zaehlt, wie gut ein
@@ -6171,13 +6143,12 @@ function discFilterPool(){
   var INFO_TEXT = {
     ts: { title:'Taste-Score', body:'Der Taste-Score (0–99) schätzt, wie gut ein Titel zu deinem Geschmack passt. '+
       'Grundlage sind all deine per Watchliste oder „Gesehen“ markierten Filme und Serien.\n\n'+
-      'Verglichen werden sechs Dinge: Genres, Schlagwörter, Besetzung, Regie, die Nähe zum Erscheinungsjahr – '+
-      'und das Bewertungsniveau. Jeder Teil wird an dem gemessen, was für DICH typisch ist: Wer viel Drama schaut, '+
+      'Verglichen werden fünf Dinge: Genres, Schlagwörter, Besetzung, Regie und die Nähe zum Erscheinungsjahr. '+
+      'Jeder Teil wird an dem gemessen, was für DICH typisch ist: Wer viel Drama schaut, '+
       'bekommt für einen Drama-Titel die volle Punktzahl in diesem Teil. 100 hieße „passt in jeder Hinsicht maximal“ '+
       'und kommt praktisch nicht vor – gute Treffer liegen meist zwischen 70 und 90.\n\n'+
-      'Das Bewertungsniveau zählt nicht als „je besser bewertet, desto besser“. Gemessen wird die Nähe zu dem Niveau, '+
-      'das du selbst schaust: Wer lauter Titel um 6,3 markiert hat, mag offenbar genau solche Filme – ein hoch '+
-      'bewerteter Blockbuster passt dann eben nicht besonders gut.\n\n'+
+      'Die Community-Bewertung fließt bewusst nicht ein: Sie sagt, wie ein Titel bei allen ankommt, nicht wie er zu '+
+      'dir passt – und sie steht dir als eigene Sortierung zur Verfügung.\n\n'+
       'Deine 1-10-Sterne-Bewertung bei „Gesehen“-Titeln gewichtet das Ganze: Schlecht bewertete Titel prägen deinen '+
       'Geschmack kaum noch, gut bewertete deutlich stärker. Je mehr Titel du markierst, desto treffsicherer wird er. '+
       'Ab 10 markierten Titeln wird standardmäßig nach Taste-Score sortiert, sofern du die Sortierung nicht selbst änderst.' },
