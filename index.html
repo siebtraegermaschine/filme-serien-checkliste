@@ -1341,6 +1341,12 @@
          Linie ohne etwas darueber. -->
     <hr class="account-sep prov-sep">
     <div class="profile-list" id="profileList"></div>
+    <!-- Zwei Wege, bewusst getrennt: "Watchliste teilen" gibt die eigenen
+         Listen preis und setzt beidseitig ein Konto voraus. "Personen einladen"
+         weist nur auf die App hin -- den Link kann man bedenkenlos in eine
+         grosse Gruppe stellen, ohne dass am Ende dreitausend Leute in der
+         Personenliste stehen. Beide Links gelten fuer beliebig viele Personen. -->
+    <button type="button" id="profileShareBtn" class="profile-add">＋ Watchliste teilen</button>
     <button type="button" id="profileInviteBtn" class="profile-add">＋ Personen einladen</button>
     <hr class="account-sep">
     <p class="prov-intro" style="margin-bottom:8px">Schaust du mit Kindern? Nutze die FSK-Filter.</p>
@@ -4686,9 +4692,17 @@ function scoreMitProfilen(item, profile){
   return Math.round(summe / profile.length);
 }
 
+// Laeuft der Abruf noch? Das Popup "Gemeinsam schauen" sagt dann "wird geladen"
+// statt "Noch niemand verknüpft" -- der Abruf haengt hinter dem Katalog, und wer
+// sofort nach dem Start hineinsah, las dort, seine Verknuepfungen seien weg.
+var LINKED_LADEN = false;
 async function loadLinkedProfiles(){
   LINKED_PROFILES = []; LINKED_PROGRESS = {}; MATCH_WITH = [];
   if (!CURRENT_USER) return;
+  LINKED_LADEN = true;
+  // Ein offenes Popup soll den Ladehinweis sofort zeigen, nicht erst beim
+  // naechsten Oeffnen.
+  if (_profileModal && _profileModal.style.display !== 'none') renderProfileList();
   try {
     var [profile, fortschritt] = await Promise.all([
       apiRequest('GET', '/api/links'),
@@ -4706,6 +4720,12 @@ async function loadLinkedProfiles(){
       LINKED_PROGRESS[Number(uid)] = m;
     });
   } catch (e) { /* ohne Verknuepfungen bleibt einfach alles wie bisher */ }
+  finally {
+    LINKED_LADEN = false;
+    // Nachziehen, falls das Popup waehrend des Ladens offen war -- sonst bliebe
+    // der Ladehinweis stehen, bis man es einmal schliesst und wieder oeffnet.
+    if (_profileModal && _profileModal.style.display !== 'none') renderProfileList();
+  }
 }
 
 function updateProfileBtn(){
@@ -4786,12 +4806,21 @@ function renderProfileList(){
   if (!CURRENT_USER) {
     html += '<div class="profile-empty">Zum Einladen brauchst du ein Konto – die Verknüpfung ' +
             'gehört zu eurer beider Anmeldung. Der FSK-Filter unten wirkt auch ohne.</div>';
+  } else if (LINKED_LADEN) {
+    // Die Profile kommen erst nach dem Katalog (siehe loadUserProgressAndRefresh).
+    // Wer sofort nach dem Start hier hineinsieht, stand vorher vor einer leeren
+    // Liste mit dem Satz "Noch niemand verknüpft" -- also vor der Aussage, seine
+    // Verknuepfungen seien weg. renderProfileList wird nach dem Laden erneut
+    // aufgerufen, die Liste fuellt sich dann von selbst.
+    html += '<div class="profile-empty">Verknüpfte Personen werden geladen …</div>';
   } else if (!LINKED_PROFILES.length) {
     html += '<div class="profile-empty">Noch niemand verknüpft. Lade jemanden ein, um gemeinsame Titel zu finden.</div>';
   }
   el.innerHTML = html;
-  var einladen = document.getElementById('profileInviteBtn');
-  if (einladen) einladen.classList.toggle('gesperrt', !CURRENT_USER);
+  ['profileShareBtn', 'profileInviteBtn'].forEach(function(id){
+    var b = document.getElementById(id);
+    if (b) b.classList.toggle('gesperrt', !CURRENT_USER);
+  });
   el.querySelectorAll('.profile-item[data-uid]').forEach(function(row){
     var uid = Number(row.dataset.uid);
     row.querySelectorAll('.pi-btn').forEach(function(b){
@@ -4860,29 +4889,60 @@ document.getElementById('profileModalX').onclick = closeProfileModal;
 _profileModal.addEventListener('click', function(e){ if (e.target === _profileModal) closeProfileModal(); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _profileModal.style.display !== 'none') closeProfileModal(); });
 
-document.getElementById('profileInviteBtn').onclick = async function(){
-  var btn = this;
+/* ---- Die zwei Einladungsarten ----
+   "share"    gibt die eigenen Listen preis und verknuepft beide Seiten.
+   "referral" weist nur auf die App hin -- kein Konto noetig, nichts preisgegeben,
+              kein Ablaufdatum. Das ist der Link fuer grosse Gruppen.
+   Beide gelten fuer beliebig viele Personen (frueher genau eine: Wer den Link
+   in eine Gruppe stellte, verknuepfte sich nur mit dem Ersten, alle anderen
+   liefen ins Leere). */
+var EINLADUNGSARTEN = {
+  share: {
+    kind: 'share',
+    // Auch die einladende Seite gibt etwas preis -- die Verknuepfung wirkt in
+    // beide Richtungen. Wer den Link verschickt, soll das vorher wissen und
+    // nicht erst in der Datenschutzerklaerung nachlesen muessen. Der Zusatz zur
+    // Mehrfachnutzung ist neu und wichtig: Ein Gruppenlink verknuepft eben nicht
+    // mehr nur eine Person.
+    rueckfrage: 'Wer diesen Link öffnet, kann danach deine ganze Watchliste und deine ' +
+      '„gesehen"-Liste ansehen, einschließlich deiner Sterne-Bewertungen. Umgekehrt gilt ' +
+      'dasselbe. Der Link gilt für beliebig viele Personen – überlege dir also gut, wo du ' +
+      'ihn hinschickst. Lösen könnt ihr die Verknüpfung jederzeit.\n\nLink jetzt erstellen?',
+    text: function(wer){
+      // Bewusst ohne "seine"/"ihre": Der Anzeigename sagt nichts ueber das
+      // Geschlecht der einladenden Person aus.
+      return wer + ' möchte auf MovieMatch die Watchliste mit dir teilen. ' +
+             'Entdecke neue Filme, Serien und Kinofilme, sortiert nach deinem Geschmack. ' +
+             '„Matcht" eure Watchlisten und findet Titel, die ihr beide als Nächstes sehen möchtet:';
+    },
+    fehler: 'Der Link konnte nicht erstellt werden.',
+  },
+  referral: {
+    kind: 'referral',
+    rueckfrage: null,   // gibt nichts preis, also auch nichts zu bestaetigen
+    text: function(wer){
+      return wer + ' empfiehlt dir MovieMatch. Entdecke Filme, Serien und Kinofilme, ' +
+             'sortiert nach deinem Geschmack – und finde mit Freunden Titel, die ihr ' +
+             'gemeinsam sehen möchtet:';
+    },
+    fehler: 'Der Einladungslink konnte nicht erstellt werden.',
+  },
+};
+async function einladungTeilen(btn, artName){
+  var art = EINLADUNGSARTEN[artName];
   if (btn.disabled) return;
-  // Ausgeloggt sieht der Knopf gesperrt aus (siehe renderProfileList), bleibt
+  // Ausgeloggt sehen die Knoepfe gesperrt aus (siehe renderProfileList), bleiben
   // aber anklickbar: Der Klick fuehrt dann zur Anmeldung, statt ins Leere zu
   // laufen. Ein echtes disabled haette gar kein Klickereignis geliefert.
-  // requireLogin merkt sich das Popup und oeffnet es nach dem Anmelden wieder --
-  // dann mit freigeschaltetem Knopf.
+  // requireLogin merkt sich das Popup und oeffnet es nach dem Anmelden wieder.
   if (!CURRENT_USER) { closeProfileModal(); requireLogin(openProfileModal); return; }
-  // Auch die einladende Seite gibt etwas preis -- die Verknuepfung wirkt in
-  // beide Richtungen. Wer den Link verschickt, soll das vorher wissen und nicht
-  // erst in der Datenschutzerklaerung nachlesen muessen.
-  if (!confirm('Wer die Einladung annimmt, kann danach deine ganze Watchliste und deine „gesehen"-Liste ansehen, einschließlich deiner Sterne-Bewertungen. Umgekehrt gilt dasselbe. Lösen könnt ihr die Verknüpfung jederzeit.\n\nEinladungslink jetzt erstellen?')) return;
+  if (art.rueckfrage && !confirm(art.rueckfrage)) return;
   btn.disabled = true;
   try {
-    var d = await apiRequest('POST', '/api/links/invite');
-    // Bewusst ohne "seine"/"ihre": Der Anzeigename sagt nichts ueber das
-    // Geschlecht der einladenden Person aus, "die Watchlist" trifft immer zu.
-    var text = ((CURRENT_USER && CURRENT_USER.displayName) || 'Jemand') +
-               ' möchte auf MovieMatch die Watchliste mit dir teilen. ' +
-               'Entdecke neue Filme, Serien und Kinofilme, sortiert nach deinem Geschmack. ' +
-               '„Matcht" eure Watchlisten und findet Titel, die ihr beide als Nächstes ' +
-               'sehen möchtet:';
+    var d = await apiRequest('POST', '/api/links/invite', { kind: art.kind });
+    var text = art.text((CURRENT_USER && CURRENT_USER.displayName) || 'Jemand');
+    var gueltig = d.expiresInDays ? ('Der Link ist ' + d.expiresInDays + ' Tage gültig.')
+                                  : 'Der Link läuft nicht ab.';
     // Native Teilen-Funktion (iPhone/Android) -- sonst in die Zwischenablage.
     if (navigator.share) {
       try { await navigator.share({ title: 'MovieMatch', text: text, url: d.url }); }
@@ -4892,14 +4952,16 @@ document.getElementById('profileInviteBtn').onclick = async function(){
       // Text mitliefert -- ohne ihn bekaeme die eingeladene Person nur eine nackte
       // URL und keinen Hinweis, worum es geht.
       await navigator.clipboard.writeText(text + '\n' + d.url);
-      alert('Einladung kopiert – der Link ist ' + d.expiresInDays + ' Tage gültig.\n\n' + d.url);
+      alert('Einladung kopiert – ' + gueltig + '\n\n' + d.url);
     } else {
-      prompt('Einladung (Link gültig für ' + d.expiresInDays + ' Tage):', text + ' ' + d.url);
+      prompt('Einladung (' + gueltig + ')', text + ' ' + d.url);
     }
   } catch (e) {
-    alert('Einladung konnte nicht erstellt werden.');
+    alert(art.fehler);
   } finally { btn.disabled = false; }
-};
+}
+document.getElementById('profileShareBtn').onclick = function(){ einladungTeilen(this, 'share'); };
+document.getElementById('profileInviteBtn').onclick = function(){ einladungTeilen(this, 'referral'); };
 
 /* ---- Einladung annehmen (Aufruf ueber ?einladung=<token>) ---- */
 var _inviteModal = document.getElementById('inviteModal');
@@ -5462,8 +5524,15 @@ authForm.addEventListener('submit', async (e) => {
     } else {
       const path = authMode === 'login' ? '/api/auth/login' : '/api/auth/register';
       const nutzlast = { email: authEmail.value, password: authPassword.value };
-      if (authMode === 'register') nutzlast.displayName = document.getElementById('authDisplayName').value;
+      if (authMode === 'register') {
+        nutzlast.displayName = document.getElementById('authDisplayName').value;
+        // Ueber wessen Link die Person hergekommen ist (siehe werberMerken).
+        // Nur bei der Registrierung -- danach steht es fest.
+        const werber = werberToken();
+        if (werber) nutzlast.inviteToken = werber;
+      }
       CURRENT_USER = await apiRequest('POST', path, nutzlast);
+      werberVergessen();
       hideAuthModal();
       renderAuthBar();
       // Manuelle Sortier-Praeferenzen sind geraete-/browserbasiert (localStorage) und
@@ -5657,10 +5726,61 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
   // beim ersten Oeffnen zwei Dialoge uebereinander.
   var einladung = new URLSearchParams(location.search).get('einladung');
   var geteilt = geteilterTitelAusPfad();
+  werberMerken();
+  zeigeLinkHinweise();
   if (einladung) handleInviteToken(einladung);
   else if (geteilt) zeigeGeteiltenTitel(geteilt);
   else { maybeAskDisplayName(); pruefeLoeschAntrag(); }
 });
+
+/* ---- Wer hat wen geworben ----
+   Beide Linkarten bringen einen Token mit: "Personen einladen" als ?ref=,
+   "Watchliste teilen" als ?einladung=. Er wird gemerkt und bei einer spaeteren
+   Registrierung mitgeschickt -- zwischen dem Klick auf den Link und dem Anlegen
+   des Kontos liegt oft ein Umweg (erst stoebern, dann anmelden), und ohne
+   Zwischenspeicher waere der Werber bis dahin verloren.
+
+   Rein statistisch: Eine Verknuepfung der Listen entsteht daraus NICHT, die
+   verlangt weiterhin das ausdrueckliche Annehmen im Popup. Wer schon angemeldet
+   ist, braucht den Merker gar nicht.
+
+   Der ?ref=-Token wird gleich wieder aus der Adresszeile geraeumt, damit ein
+   geteilter Screenshot der URL ihn nicht weitertraegt. */
+var WERBER_KEY = 'mt.werber';
+function werberMerken(){
+  var p = new URLSearchParams(location.search);
+  var token = p.get('ref') || p.get('einladung');
+  if (!token || CURRENT_USER) return;
+  try { localStorage.setItem(WERBER_KEY, token); } catch (e) {}
+  if (p.get('ref')) {
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+  }
+}
+function werberToken(){
+  try { return localStorage.getItem(WERBER_KEY) || null; } catch (e) { return null; }
+}
+function werberVergessen(){
+  try { localStorage.removeItem(WERBER_KEY); } catch (e) {}
+}
+
+/* ---- "X hat deine Einladung angenommen" ----
+   Beim Start abgeholt und sofort quittiert. Ohne diesen Hinweis waechst die
+   Personenliste stillschweigend -- bei einem Link, der in einer Gruppe steht,
+   waere das die Sorte Ueberraschung, die niemand mag. */
+async function zeigeLinkHinweise(){
+  if (!CURRENT_USER) return;
+  try {
+    var neue = await apiRequest('GET', '/api/links/hinweise');
+    if (!neue || !neue.length) return;
+    await apiRequest('POST', '/api/links/hinweise/gelesen').catch(function(){});
+    var namen = neue.map(function(p){ return p.name; });
+    var wer = namen.length === 1 ? namen[0]
+            : namen.slice(0, -1).join(', ') + ' und ' + namen[namen.length - 1];
+    alert(wer + (namen.length === 1 ? ' hat' : ' haben') +
+      ' deine Einladung angenommen.\n\nIhr seht ab jetzt gegenseitig eure Watchliste und ' +
+      '„gesehen"-Liste. Lösen kannst du das links oben unter „Gemeinsam schauen".');
+  } catch (e) { /* Hinweis ist Beiwerk -- ein Fehler darf den Start nicht stoeren */ }
+}
 
 /* ================= DISCOVERY (vereinheitlicht mit dem Titel-Pool) ================= */
 document.head.insertAdjacentHTML('beforeend',

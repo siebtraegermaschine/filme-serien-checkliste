@@ -24,8 +24,24 @@ function publicUser(row) {
   };
 }
 
+/* Wer hat wen geworben? Kommt als Token aus dem Link, ueber den die Person in
+   der App gelandet ist -- "Personen einladen" (?ref=) genauso wie "Watchliste
+   teilen" (?einladung=). Rein statistisch: Die Verknuepfung der Listen
+   entsteht davon NICHT, die verlangt weiterhin das ausdrueckliche Annehmen.
+   Ein unbekannter oder abgelaufener Token ist kein Fehler -- dann bleibt der
+   Vermerk einfach leer, statt die Registrierung scheitern zu lassen. */
+async function werberFinden(token) {
+  if (typeof token !== 'string' || !/^[a-f0-9]{64}$/.test(token)) return null;
+  const hash = crypto.createHash('sha256').update(token).digest('hex');
+  const { rows } = await pool.query(
+    'SELECT inviter_id FROM user_link_invites WHERE token_hash = $1',
+    [hash]
+  );
+  return rows[0] ? rows[0].inviter_id : null;
+}
+
 router.post('/register', async (req, res) => {
-  const { email, password, displayName } = req.body || {};
+  const { email, password, displayName, inviteToken } = req.body || {};
   if (typeof email !== 'string' || !EMAIL_RE.test(email)) {
     return res.status(400).json({ error: 'invalid_email' });
   }
@@ -42,10 +58,11 @@ router.post('/register', async (req, res) => {
   const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
 
   try {
+    const werber = await werberFinden(inviteToken);
     const { rows } = await pool.query(
-      `INSERT INTO users (email, password_hash, display_name) VALUES ($1, $2, $3)
+      `INSERT INTO users (email, password_hash, display_name, invited_by_user_id) VALUES ($1, $2, $3, $4)
        RETURNING id, email, display_name, deletion_requested_at`,
-      [normalizedEmail, passwordHash, name]
+      [normalizedEmail, passwordHash, name, werber]
     );
     req.session.userId = rows[0].id;
     res.status(201).json(publicUser(rows[0]));

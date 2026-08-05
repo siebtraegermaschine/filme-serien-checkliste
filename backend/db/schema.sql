@@ -127,6 +127,46 @@ CREATE TABLE IF NOT EXISTS user_link_invites (
 );
 CREATE INDEX IF NOT EXISTS idx_user_link_invites_inviter ON user_link_invites (inviter_id);
 
+-- Zwei Arten von Einladung, seit es zwei Knoepfe gibt:
+--   'share'    -- "Watchliste teilen": loest beim Annehmen eine Verknuepfung
+--                 aus, setzt also ein Konto voraus. Laeuft ab.
+--   'referral' -- "Personen einladen": weist nur auf die App hin, gibt NICHTS
+--                 preis und braucht kein Konto. Laeuft nicht ab.
+-- Bestehende Zeilen sind 'share' -- das war das bisherige Verhalten.
+ALTER TABLE user_link_invites ADD COLUMN IF NOT EXISTS kind TEXT NOT NULL DEFAULT 'share';
+-- Ohne Ablauf moeglich (referral): expires_at darf NULL sein.
+ALTER TABLE user_link_invites ALTER COLUMN expires_at DROP NOT NULL;
+
+-- Mehrfach einloesbar: Wer den Link in eine Gruppe stellt, will nicht, dass nur
+-- die erste Person durchkommt. Statt der einzelnen Spalte accepted_by zaehlt
+-- jetzt diese Tabelle die Einloesungen. Der Primaerschluessel ueber beide
+-- Spalten macht dabei doppelte Klicks derselben Person folgenlos.
+-- accepted_by/accepted_at bleiben als Altbestand stehen; gelesen werden sie
+-- nicht mehr (die Uebernahme steht direkt darunter).
+CREATE TABLE IF NOT EXISTS user_link_invite_uses (
+  token_hash  TEXT NOT NULL REFERENCES user_link_invites(token_hash) ON DELETE CASCADE,
+  user_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  accepted_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (token_hash, user_id)
+);
+CREATE INDEX IF NOT EXISTS idx_user_link_invite_uses_user ON user_link_invite_uses (user_id);
+-- Einmalige Uebernahme der bereits eingeloesten Einladungen.
+INSERT INTO user_link_invite_uses (token_hash, user_id, accepted_at)
+SELECT token_hash, accepted_by, COALESCE(accepted_at, created_at)
+  FROM user_link_invites WHERE accepted_by IS NOT NULL
+ON CONFLICT DO NOTHING;
+
+-- Wer hat wen geworben? Wird bei der Registrierung gesetzt, wenn ein
+-- Einladungs- oder Teilen-Link im Spiel war. Reine Auswertung -- die
+-- Verknuepfung der Listen haengt NICHT daran (die steht in user_links).
+ALTER TABLE users ADD COLUMN IF NOT EXISTS invited_by_user_id BIGINT REFERENCES users(id) ON DELETE SET NULL;
+CREATE INDEX IF NOT EXISTS idx_users_invited_by ON users (invited_by_user_id);
+
+-- Hinweis fuer die einladende Seite: "X hat deine Einladung angenommen", beim
+-- naechsten Oeffnen der App. Steht auf der Zeile der einladenden Person, wird
+-- dort gesetzt und nach dem Anzeigen wieder geleert.
+ALTER TABLE user_links ADD COLUMN IF NOT EXISTS hinweis_offen BOOLEAN NOT NULL DEFAULT false;
+
 CREATE TABLE IF NOT EXISTS password_reset_tokens (
   id         BIGSERIAL PRIMARY KEY,
   user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,

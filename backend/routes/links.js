@@ -61,18 +61,29 @@ router.get('/progress', async (req, res) => {
 
 // Neue Einladung. Der Rohtoken verlaesst den Server genau einmal -- gespeichert
 // wird nur sein Hash (wie bei password_reset_tokens).
+//
+// Zwei Arten, siehe schema.sql:
+//   share    -- "Watchliste teilen": verknuepft beim Annehmen, laeuft ab.
+//   referral -- "Personen einladen": weist nur auf die App hin, kein Konto
+//               noetig, kein Ablauf. Gibt nichts preis, deshalb auch kein Grund
+//               ihn zu befristen -- so ein Link kann in einer Gruppe stehen
+//               bleiben und noch Monate spaeter jemanden bringen.
+// Beide sind mehrfach einloesbar (siehe user_link_invite_uses).
 router.post('/invite', async (req, res) => {
+  const kind = req.body && req.body.kind === 'referral' ? 'referral' : 'share';
   const token = crypto.randomBytes(32).toString('hex');
   await pool.query(
-    `INSERT INTO user_link_invites (token_hash, inviter_id, expires_at)
-     VALUES ($1, $2, now() + ($3 || ' days')::interval)`,
-    [hashOf(token), req.session.userId, String(INVITE_TTL_TAGE)]
+    `INSERT INTO user_link_invites (token_hash, inviter_id, kind, expires_at)
+     VALUES ($1, $2, $3, CASE WHEN $3 = 'referral' THEN NULL
+                              ELSE now() + ($4 || ' days')::interval END)`,
+    [hashOf(token), req.session.userId, kind, String(INVITE_TTL_TAGE)]
   );
   const basis = (process.env.APP_BASE_URL || '').replace(/\/+$/, '');
   res.status(201).json({
     token,
-    url: `${basis}/?einladung=${token}`,
-    expiresInDays: INVITE_TTL_TAGE,
+    kind,
+    url: kind === 'referral' ? `${basis}/?ref=${token}` : `${basis}/?einladung=${token}`,
+    expiresInDays: kind === 'referral' ? null : INVITE_TTL_TAGE,
   });
 });
 
@@ -87,8 +98,11 @@ router.get('/invite/:token', async (req, res) => {
   );
   const einladung = rows[0];
   if (!einladung) return res.status(404).json({ error: 'invite_not_found' });
-  if (einladung.accepted_by) return res.status(410).json({ error: 'invite_already_used' });
-  if (new Date(einladung.expires_at) < new Date()) return res.status(410).json({ error: 'invite_expired' });
+  // Kein "bereits eingeloest" mehr: Einladungen gelten fuer beliebig viele
+  // Personen. Wer sie zweimal oeffnet, sieht schlicht alreadyLinked.
+  if (einladung.expires_at && new Date(einladung.expires_at) < new Date()) {
+    return res.status(410).json({ error: 'invite_expired' });
+  }
   if (einladung.inviter_id === req.session.userId) return res.status(400).json({ error: 'invite_own' });
 
   const { rows: schon } = await pool.query(
@@ -106,28 +120,44 @@ router.post('/invite/:token/accept', async (req, res) => {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
-    // FOR UPDATE: zwei gleichzeitige Annahmen desselben Links duerfen nicht
-    // beide durchgehen -- die Einladung ist einmalig.
     const { rows } = await client.query(
-      `SELECT inviter_id, expires_at, accepted_by FROM user_link_invites
-        WHERE token_hash = $1 FOR UPDATE`,
+      `SELECT inviter_id, expires_at, kind FROM user_link_invites WHERE token_hash = $1`,
       [tokenHash]
     );
     const einladung = rows[0];
     if (!einladung) { await client.query('ROLLBACK'); return res.status(404).json({ error: 'invite_not_found' }); }
-    if (einladung.accepted_by) { await client.query('ROLLBACK'); return res.status(410).json({ error: 'invite_already_used' }); }
-    if (new Date(einladung.expires_at) < new Date()) { await client.query('ROLLBACK'); return res.status(410).json({ error: 'invite_expired' }); }
+    if (einladung.expires_at && new Date(einladung.expires_at) < new Date()) {
+      await client.query('ROLLBACK'); return res.status(410).json({ error: 'invite_expired' });
+    }
     if (einladung.inviter_id === req.session.userId) { await client.query('ROLLBACK'); return res.status(400).json({ error: 'invite_own' }); }
 
     // Beide Richtungen -- eine Verknuepfung ist immer gegenseitig.
+    // Der Hinweis "X hat deine Einladung angenommen" haengt an der Zeile der
+    // EINLADENDEN Person und nur an einer neuen Verknuepfung: Wer denselben
+    // Link zweimal oeffnet, loest keinen zweiten Hinweis aus.
+    const { rowCount: neu } = await client.query(
+      `INSERT INTO user_links (user_id, linked_user_id) VALUES ($1,$2)
+       ON CONFLICT DO NOTHING`,
+      [einladung.inviter_id, req.session.userId]
+    );
     await client.query(
-      `INSERT INTO user_links (user_id, linked_user_id) VALUES ($1,$2), ($2,$1)
+      `INSERT INTO user_links (user_id, linked_user_id) VALUES ($1,$2)
        ON CONFLICT DO NOTHING`,
       [req.session.userId, einladung.inviter_id]
     );
+    if (neu) {
+      await client.query(
+        'UPDATE user_links SET hinweis_offen = true WHERE user_id = $1 AND linked_user_id = $2',
+        [einladung.inviter_id, req.session.userId]
+      );
+    }
+    // Zaehlt die Einloesung. Ohne FOR UPDATE-Sperre auf der Einladung: Sie ist
+    // nicht mehr kontingentiert, gleichzeitige Annahmen koennen sich also nicht
+    // mehr in die Quere kommen. Doppelte faengt der Primaerschluessel ab.
     await client.query(
-      'UPDATE user_link_invites SET accepted_by = $1, accepted_at = now() WHERE token_hash = $2',
-      [req.session.userId, tokenHash]
+      `INSERT INTO user_link_invite_uses (token_hash, user_id) VALUES ($1,$2)
+       ON CONFLICT DO NOTHING`,
+      [tokenHash, req.session.userId]
     );
     await client.query('COMMIT');
 
@@ -139,6 +169,29 @@ router.post('/invite/:token/accept', async (req, res) => {
   } finally {
     client.release();
   }
+});
+
+// Offene Hinweise: Wer hat seit dem letzten Besuch eine Einladung angenommen?
+// Wird beim Start abgeholt und danach mit dem Aufruf darunter quittiert --
+// eine E-Mail waere fuer diese Kleinigkeit zu viel, und ohne Hinweis waechst
+// die Personenliste stillschweigend.
+router.get('/hinweise', async (req, res) => {
+  const { rows } = await pool.query(
+    `SELECT u.id, u.display_name
+       FROM user_links l JOIN users u ON u.id = l.linked_user_id
+      WHERE l.user_id = $1 AND l.hinweis_offen
+      ORDER BY l.created_at`,
+    [req.session.userId]
+  );
+  res.json(rows.map((r) => ({ id: r.id, name: anzeigename(r) })));
+});
+
+router.post('/hinweise/gelesen', async (req, res) => {
+  await pool.query(
+    'UPDATE user_links SET hinweis_offen = false WHERE user_id = $1 AND hinweis_offen',
+    [req.session.userId]
+  );
+  res.status(204).end();
 });
 
 // Loest die Verknuepfung -- immer beidseitig.
