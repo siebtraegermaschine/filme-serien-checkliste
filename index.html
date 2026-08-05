@@ -2249,8 +2249,62 @@ function personenAnsicht(){ return ANSICHT_PERSON != null; }
 // Liste wieder, bleibt er stehen. Erst eine spaetere Aenderung von Hand
 // ueberschreibt ihn -- der Tabwechsel selbst aendert weiterhin nichts daran
 // (siehe setTab).
+/* ---- Startzustand: die erste Ansicht, in der wirklich etwas steht ----
+   Beim Oeffnen der App soll man dort landen, wo etwas zu sehen ist, statt vor
+   einer leeren Liste zu stehen. Gesucht wird in dieser Reihenfolge, der erste
+   Treffer gewinnt:
+
+     Filme + Watchliste  ->  Filme + Gesehen  ->  Serien + Watchliste
+     ->  Serien + Gesehen  ->  Filme + "Neue entdecken"
+
+   Der letzte Fall ist der Erstkontakt: Wer noch gar nichts markiert hat, sieht
+   den Katalog -- sonst waere die App beim ersten Oeffnen komplett leer.
+
+   Gilt nur, solange niemand selbst an der Statusauswahl war (einstiegOffen).
+   Und der Merker faellt erst, wenn wirklich etwas gefunden wurde: Startet man
+   ausgeloggt, gibt es noch keine markierten Titel -- meldet man sich dann an,
+   soll der Einstieg mit den nachgeladenen Daten noch einmal greifen. */
+var einstiegOffen = true;
+function hatMarkierte(typ, art){
+  for (var i = 0; i < POOL.length; i++) {
+    var p = POOL[i];
+    if (p.type !== typ || p.realId == null) continue;
+    if (art === 'w' ? getWatchlistFlag(p.realId) : getSeen(p.realId)) return true;
+  }
+  return false;
+}
+var EINSTIEGE = [
+  { tab: 'filme',  typ: 'movie',  art: 'w' },
+  { tab: 'filme',  typ: 'movie',  art: 's' },
+  { tab: 'serien', typ: 'series', art: 'w' },
+  { tab: 'serien', typ: 'series', art: 's' },
+];
+function startEinstiegSetzen(){
+  // Wer schon woanders ist (Kino, fremde Liste, laufende Suche), wird nicht
+  // herausgerissen -- der Einstieg gilt fuer den Start, nicht fuer jeden
+  // Nachladevorgang.
+  if (!einstiegOffen || cinemaMode || personenAnsicht() || sucheAktiv()) return;
+  for (var i = 0; i < EINSTIEGE.length; i++) {
+    var e = EINSTIEGE[i];
+    if (!hatMarkierte(e.typ, e.art)) continue;
+    activeTab = e.tab;
+    watchlistFilterOn = (e.art === 'w');
+    seenFilterOn = (e.art === 's');
+    discoverFilterOn = false;
+    einstiegOffen = false;
+    updateFilterRowUI();
+    return;
+  }
+  // Nichts markiert -- beim Katalog bleiben (siehe die Anfangswerte oben).
+  activeTab = 'filme';
+  watchlistFilterOn = false;
+  seenFilterOn = false;
+  discoverFilterOn = true;
+  updateFilterRowUI();
+}
 function einstiegSetzen(art){
   closeCinemaPage();
+  einstiegOffen = false;
   activeTab = 'filme';
   watchlistFilterOn = art === 'w';
   seenFilterOn = art === 's';
@@ -3157,6 +3211,10 @@ function toggleStatus(feld){
   // Mindestens einer muss aktiv bleiben, sonst waere die Liste ohne
   // erkennbaren Grund leer -- der Klick auf den letzten aktiven laeuft ins Leere.
   if (!st.wl && !st.seen && !st.disc) return;
+  // Ab hier hat die Person selbst gewaehlt -- der automatische Einstieg (siehe
+  // startEinstiegSetzen) haelt sich raus, auch wenn spaeter noch Daten
+  // nachgeladen werden.
+  einstiegOffen = false;
   statusSchreiben(st);
   // Jede Aenderung ergibt eine neue Liste -- "Mehr laden" faengt wieder bei 250 an.
   discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
@@ -5231,6 +5289,7 @@ async function loadUserProgressAndRefresh(){
   USER_DATA_SIG = userDataSignature();
   updateProfileBtn();
   rebuild();
+  startEinstiegSetzen();
   renderCurrentTab();
 }
 
