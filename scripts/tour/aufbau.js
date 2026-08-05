@@ -218,6 +218,18 @@
             // dahinter, um die es auf dieser Seite auch geht.
             var vs = document.querySelectorAll('#searchSuggest button');
             for (var i = 3; i < vs.length; i++) vs[i].style.display = 'none';
+            // Nur Zeilen zeigen, in denen "Action" auch WIRKLICH steht. Die
+            // Metazeile fuehrt nur das erste Genre; gesucht wird aber ueber alle.
+            // Ohne diese Auswahl standen unter der Suche nach "Action" Titel mit
+            // "Thriller" und "Abenteuer" in der Zeile -- richtig, aber als Bild
+            // fuer die Suche nicht zu gebrauchen.
+            var sichtbar = 0;
+            document.querySelectorAll('#list li').forEach(function (li) {
+              var zeile = li.querySelector('.meta-main') || li.querySelector('.dmeta');
+              var passt = zeile && zeile.textContent.indexOf('Action') !== -1;
+              if (passt && sichtbar < 3) { li.style.display = ''; sichtbar++; }
+              else li.style.display = 'none';
+            });
           });
           fertig();
         }, 1200);
