@@ -3380,7 +3380,8 @@ function toggleStatus(feld){
   // Jede Aenderung ergibt eine neue Liste -- "Mehr laden" faengt wieder bei 250 an.
   discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
   updateFilterRowUI();
-  renderCurrentTab();
+  // Die Liste danach, damit der Knopf sofort umschlaegt (siehe nachDemZeichnen).
+  nachDemZeichnen(renderCurrentTab);
 }
 btns.open.onclick = () => toggleStatus('wl');
 btns.done.onclick = () => toggleStatus('seen');
@@ -4904,6 +4905,7 @@ var _profileModal = document.getElementById('profileModal');
    etwas an, und eine Serverrunde waere fuer eine reine Anzeigereihenfolge zu
    viel. Folge: Die Wahl gilt je Geraet -- vertretbar, weil sie in Sekunden
    wiederhergestellt ist. */
+var MATCH_HINWEIS_KEY = 'mt.matchHinweis';
 var FAVORITEN_KEY = 'mt.favoriten';
 // Ein einziger Pfad fuer beide Zustaende -- gefuellt wird per CSS (siehe
 // .pi-fav.on svg). So sind ausgewaehlt und nicht ausgewaehlt exakt gleich gross.
@@ -4984,13 +4986,27 @@ function renderProfileList(){
           // die Schnittmenge, die Listenansicht deren gesamte Liste.
           ANSICHT_PERSON = null;
           var i = MATCH_WITH.indexOf(uid);
-          if (i === -1) MATCH_WITH.push(uid); else MATCH_WITH.splice(i, 1);
+          var geradeAktiviert = (i === -1);
+          if (geradeAktiviert) MATCH_WITH.push(uid); else MATCH_WITH.splice(i, 1);
           // Auch der Abgleich ist ein Einstieg und bekommt denselben definierten
           // Startpunkt: Filme, nur Watchlist. Nur beim ABwaehlen der letzten
           // Person nicht -- dann kehrt man in die eigene Ansicht zurueck und
           // soll dort nicht zusaetzlich umgestellt werden.
           if (MATCH_WITH.length) einstiegSetzen();
           renderProfileList(); updateProfileBtn(); rebuild(); renderCurrentTab();
+          // Beim allerersten Mal erklaeren, was jetzt passiert: Der Abgleich
+          // wirkt auf die Liste DAHINTER, das Fenster verdeckt sie aber noch --
+          // ohne Hinweis tippt man ratlos weiter, weil scheinbar nichts geschieht.
+          // Nur beim EINschalten -- beim Abwaehlen einer von mehreren Personen
+          // waere MATCH_WITH weiterhin gefuellt und der Hinweis kaeme erneut.
+          if (geradeAktiviert) {
+            try {
+              if (!localStorage.getItem(MATCH_HINWEIS_KEY)) {
+                localStorage.setItem(MATCH_HINWEIS_KEY, '1');
+                if (window.infoZeigen) window.infoZeigen('matchStart');
+              }
+            } catch (e) {}
+          }
           return;
         }
         // Erneuter Klick auf die gerade offene Liste fuehrt zurueck.
@@ -5017,6 +5033,13 @@ function renderProfileList(){
     attachSwipeToRemove(row, function(){ row.querySelector('.pi-del').click(); });
   });
 }
+/* Fuehrt die Arbeit aus, NACHDEM der Browser gezeichnet hat. requestAnimationFrame
+   allein reicht nicht -- dessen Rueckruf laeuft noch VOR dem Bildaufbau, eine
+   teure Aufgabe darin verzoegert ihn also genauso. Erst das setTimeout darin
+   landet in der naechsten Aufgabe, und dazwischen zeichnet der Browser. */
+function nachDemZeichnen(arbeit){
+  requestAnimationFrame(function(){ setTimeout(arbeit, 0); });
+}
 function renderFskRow(){
   var el = document.getElementById('fskRow');
   el.innerHTML = FSK_STUFEN.map(function(st){
@@ -5028,8 +5051,15 @@ function renderFskRow(){
       // Erneuter Klick auf die aktive Stufe hebt den Filter auf -- sonst gaebe
       // es keinen Weg zurueck zur ungefilterten Ansicht.
       MY_FSK = (MY_FSK === b.dataset.fsk) ? null : b.dataset.fsk;
-      renderFskRow(); updateProfileBtn(); rebuild(); renderCurrentTab();
-      if (cinemaMode) renderCinemaPage();
+      renderFskRow(); updateProfileBtn();
+      // Erst zeichnen lassen, dann rechnen: rebuild() geht ueber zehntausende
+      // Titel und blockiert dabei den Bildaufbau. Stand es in derselben Aufgabe,
+      // erschien die Markierung am Knopf erst, wenn die Liste fertig war -- der
+      // Klick wirkte verschluckt, besonders beim schnellen Hin und Her.
+      nachDemZeichnen(function(){
+        rebuild(); renderCurrentTab();
+        if (cinemaMode) renderCinemaPage();
+      });
     };
   });
 }
@@ -6262,6 +6292,10 @@ function discFilterPool(){
       'Im Kino wirkt der Match anders: Kinostarts merkt sich kaum jemand vorher vor, eine Schnittmenge wäre dort '+
       'fast immer leer. Deshalb bleibt das ganze Programm sichtbar und wird stattdessen danach sortiert, wie gut '+
       'ein Film zum Geschmack aller Beteiligten passt.' },
+    matchStart: { title:'Match ist an', body:'Du kannst hier eine oder mehrere Personen markieren – ' +
+      'je mehr, desto kleiner wird die Schnittmenge.\n\n' +
+      'Schließe dieses Fenster, um die gemeinsamen Titel zu sehen. Unter „Filme“ die Filme, unter ' +
+      '„Serien“ die Serien. Aufheben kannst du es jederzeit über die Leiste oben oder erneut hier.' },
     newreleases: { title:'Veröffentlichungsdatum vs. Neu im Streaming', body:'Das sind zwei unterschiedliche Sortierungen: „Veröffentlichungsdatum“ '+
       'sortiert danach, wann ein Film oder eine Serie ursprünglich erschienen ist. „Neu im Streaming“ sortiert danach, '+
       'seit wann ein Titel bei einem Streaming-Anbieter neu verfügbar ist – unabhängig davon, wie alt er eigentlich ist.' }
@@ -6271,6 +6305,14 @@ function discFilterPool(){
     '<h3 class="info-title"></h3><p class="info-body"></p></div>';
   document.body.appendChild(bk);
   var titleEl=bk.querySelector('.info-title'), bodyEl=bk.querySelector('.info-body');
+  // Von aussen aufrufbar: Nicht jede Erklaerung haengt an einem unterstrichenen
+  // Wort -- der einmalige Hinweis beim ersten "Match" kommt von selbst.
+  window.infoZeigen = function(key){
+    if (!INFO_TEXT[key]) return;
+    titleEl.textContent = INFO_TEXT[key].title;
+    bodyEl.textContent = INFO_TEXT[key].body;
+    bk.classList.add('open');
+  };
   document.addEventListener('click', function(e){
     var icon = e.target.closest && e.target.closest('.info-i, .info-word, .score[data-ts]');
     if(icon){
