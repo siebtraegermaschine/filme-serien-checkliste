@@ -576,6 +576,11 @@
     max-width:430px; width:100%; padding:22px 24px; position:relative; box-shadow:0 10px 40px rgba(0,0,0,.5); }
   .modal h3 { color:var(--accent); font-size:17px; margin-bottom:10px; }
   .modal p { color:var(--text); font-size:14px; line-height:1.6; }
+  /* pre-line, damit die laengeren Erklaerungen Absaetze bekommen koennen: Der
+     Text wird als textContent gesetzt (siehe INFO_TEXT), Zeilenumbrueche darin
+     waeren sonst schlicht Leerzeichen. Texte ohne Umbruch aendern sich nicht.
+     Die Erklaerung zu "Match" bringt zwei Absaetze mit. */
+  .modal-backdrop .info-body { white-space:pre-line; }
   .install-steps { margin:12px 0 0 20px; padding:0; color:var(--text); font-size:14px; line-height:1.7; }
   .install-steps li { margin-bottom:6px; }
   /* Wie .prov-intro (Farbe/Groesse/Zeilenabstand), nur nummeriert und mit
@@ -964,7 +969,9 @@
        Abgleich). Sie ist bewusst laenger als in eine Zeile passt und bricht auf
        schmalen Geraeten um -- die vollstaendige Erklaerung war hier wichtiger
        als die Einzeiligkeit. -->
-  <p class="sub sub-zweit"><b>Sieh dir die Watchliste deiner Kontakte an und filtere nach euren <i>Übereinstimmungen</i>.</b></p>
+  <p class="sub sub-zweit"><b>Sieh dir die Watchliste deiner Kontakte an und <i class="info-word"
+    data-match role="button" tabindex="0" aria-label="Was ist ein Match?">matcht/filtert</i> nach euren
+    <i>Übereinstimmungen</i>.</b></p>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1266,7 +1273,8 @@
       <li>Lade Freunde und Verwandte zu MovieMatch ein.</li>
       <li>Sieh dir die <b>Watchliste</b> oder die <b>gesehenen</b> Titel deiner Kontakte an.
         Füge Titel, die dir auch gefallen, einfach deinen eigenen Listen hinzu.</li>
-      <li>Über <b>„Match"</b> seht ihr Übereinstimmungen eurer Watchlisten.
+      <li>Über <b>„Match"</b> seht ihr <i class="info-word" data-match role="button" tabindex="0"
+        aria-label="Was ist ein Match?">Übereinstimmungen</i> eurer Watchlisten.
         So findet ihr schnell und einfach Filme, Serien oder Kinofilme, die ihr gemeinsam
         als Nächstes sehen möchtet.</li>
     </ol>
@@ -5631,6 +5639,16 @@ function discFilterPool(){
       'Taste-Score, also nach Genres, Besetzung, Regie und mehr aus all deinen bisher markierten Titeln. '+
       '„Neue entdecken“ lässt sich mit Watchliste und Gesehen kombinieren – dann steht alles in einer gemeinsamen, '+
       'einheitlich sortierten Liste.' },
+    match: { title:'Match: eure Übereinstimmungen', body:'Ein Match zeigt die Titel, die bei dir UND bei den '+
+      'ausgewählten Kontakten auf der Liste stehen – die Schnittmenge eurer Watchlisten. So findet ihr sofort etwas, '+
+      'das ihr alle sehen wollt, statt euch gegenseitig Vorschläge zu machen.\n\n'+
+      'So geht es: Links oben unter „Gemeinsam schauen“ auf „Match“ bei einer oder mehreren Personen tippen. '+
+      'Die Liste zeigt dann nur noch Titel, die bei allen Ausgewählten vorgemerkt oder gesehen sind – unter '+
+      '„Filme“ die Filme, unter „Serien“ die Serien. Je mehr Personen du dazunimmst, desto kleiner wird die '+
+      'Schnittmenge.\n\n'+
+      'Im Kino wirkt der Match anders: Kinostarts merkt sich kaum jemand vorher vor, eine Schnittmenge wäre dort '+
+      'fast immer leer. Deshalb bleibt das ganze Programm sichtbar und wird stattdessen danach sortiert, wie gut '+
+      'ein Film zum Geschmack aller Beteiligten passt.' },
     newreleases: { title:'Veröffentlichungsdatum vs. Neu im Streaming', body:'Das sind zwei unterschiedliche Sortierungen: „Veröffentlichungsdatum“ '+
       'sortiert danach, wann ein Film oder eine Serie ursprünglich erschienen ist. „Neu im Streaming“ sortiert danach, '+
       'seit wann ein Titel bei einem Streaming-Anbieter neu verfügbar ist – unabhängig davon, wie alt er eigentlich ist.' }
@@ -5644,7 +5662,11 @@ function discFilterPool(){
     var icon = e.target.closest && e.target.closest('.info-i, .info-word, .score[data-ts]');
     if(icon){
       e.preventDefault(); e.stopPropagation();
-      var key = icon.hasAttribute('data-imdb') ? 'imdb' : (icon.hasAttribute('data-discovery') ? 'discovery' : (icon.hasAttribute('data-newreleases') ? 'newreleases' : 'ts'));
+      var key = icon.hasAttribute('data-imdb') ? 'imdb'
+              : icon.hasAttribute('data-discovery') ? 'discovery'
+              : icon.hasAttribute('data-newreleases') ? 'newreleases'
+              : icon.hasAttribute('data-match') ? 'match'
+              : 'ts';
       titleEl.textContent = INFO_TEXT[key].title;
       bodyEl.textContent = INFO_TEXT[key].body;
       bk.classList.add('open');
