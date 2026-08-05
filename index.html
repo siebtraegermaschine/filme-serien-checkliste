@@ -4198,15 +4198,24 @@ document.addEventListener('keydown', function(e){
    statisch, damit sie sich nicht bei jeder Oberflaechenaenderung mitbewegen.
    Wenn sie irgendwann nicht mehr passen, werden sie einmal neu erzeugt. */
 var TOUR_SLIDES = [
-  { titel: 'Finde, was zu dir passt',
-    bild: null,
-    text: 'Tippe unter „Neue entdecken“ auf Titel, die dich interessieren – Watchliste für später, „gesehen“ für alles, was du kennst. Je mehr du markierst, desto genauer trifft dein Taste-Score.' },
-  { titel: 'Gemeinsam schauen',
-    bild: null,
-    text: 'Verknüpfe dich links oben mit Freunden oder Familie. Dann siehst du ihre Listen – und über „Match“ genau die Titel, die bei euch allen draufstehen.' },
-  { titel: 'Film, Serie oder Kino',
-    bild: null,
-    text: 'Mehr musst du nicht mehr entscheiden. Filtere auf deine Streaming-Anbieter und sortiere nach Taste-Score, Community-Bewertung oder Erscheinungsdatum.' },
+  { titel: 'Filme & Serien entdecken',
+    bild: 'tour/1-entdecken.png',
+    text: 'Markiere Titel als gesehen, bewerte sie oder füge sie deiner Watchliste hinzu.' },
+  { titel: 'Dein Taste-Score',
+    bild: 'tour/2-taste-score.png',
+    text: 'Ab 10 gespeicherten Titeln werden alle Filme, Serien und Kinofilme nach deinem Geschmack sortiert.' },
+  { titel: 'Mit anderen schauen',
+    bild: 'tour/3-gemeinsam.png',
+    text: '„Matche" deine Watchliste mit anderen und filtere nach Titeln, die alle sehen wollen.' },
+  { titel: 'Streaming & Taste-Score',
+    bild: 'tour/4-streaming.png',
+    text: 'Füge die Streaminganbieter hinzu, die du nutzt, und filtere alle Titel danach. Sortiere alles nach deinem Taste-Score.' },
+  { titel: 'Film- & Seriendetails',
+    bild: 'tour/5-details.png',
+    text: 'Klicke einen Titel an und erhalte Kurzbeschreibung, Trailer, ähnliche Titel und vieles mehr.' },
+  { titel: 'Suche & Filter',
+    bild: 'tour/6-suche.png',
+    text: 'Suche und filtere nach Titel, Genre, Schauspielern oder Filminhalten.' },
 ];
 var _tourModal = document.getElementById('tourModal');
 var _tourIndex = 0;
@@ -4214,8 +4223,19 @@ function tourZeichnen(){
   var s = TOUR_SLIDES[_tourIndex];
   document.getElementById('tourTitel').textContent = s.titel;
   var bild = document.getElementById('tourBild');
-  bild.innerHTML = s.bild ? '<img src="' + escAttr(s.bild) + '" alt="">' : '';
-  bild.style.display = s.bild ? '' : 'none';
+  bild.innerHTML = '';
+  bild.style.display = 'none';
+  if (s.bild) {
+    // Fehlt die Datei noch (oder laedt sie nicht), bleibt der Bereich leer statt
+    // ein kaputtes Bild zu zeigen -- die Seite besteht dann aus Ueberschrift und
+    // Satz und ist weiterhin brauchbar.
+    var img = new Image();
+    img.alt = '';
+    img.onload = function(){ bild.style.display = ''; };
+    img.onerror = function(){ bild.style.display = 'none'; };
+    img.src = s.bild;
+    bild.appendChild(img);
+  }
   var text = document.getElementById('tourText');
   text.textContent = s.text || '';
   text.style.display = s.text ? '' : 'none';
