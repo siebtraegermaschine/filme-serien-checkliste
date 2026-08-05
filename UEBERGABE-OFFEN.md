@@ -12,18 +12,12 @@ dieses Tages sind damit live — nachgeprüft an movietaste.de.
 
 ## 1. Noch zu prüfen / zu entscheiden
 
-### Migration: gelaufen, aber nicht gegengeprüft
+### Migration: erledigt und geprüft
 
-Das Schema hat sich geändert (Commit `79841aa`): `user_link_invites.kind`,
-`user_link_invite_uses` (mit Übernahme der bisherigen Einlösungen),
-`users.invited_by_user_id`, `user_links.hinweis_offen`. `deploy.sh` führt
-`migrate` mit aus, es sollte also erledigt sein. Von außen ist das nicht
-sichtbar — einmal bestätigen:
-
-```bash
-docker compose -f docker-compose.yml exec -T postgres psql -U postgres -d filme_serien \
-  -c "\\d user_link_invite_uses"
-```
+Am 05.08. auf dem Server nachgesehen: `user_link_invite_uses` existiert samt
+Schlüsseln und Fremdschlüsseln, ebenso `user_link_invites.kind`,
+`users.invited_by_user_id` und `user_links.hinweis_offen`. `deploy.sh` führt
+`migrate` bei jedem Deploy mit aus.
 
 ### Alte Einladungslinks sind wieder einlösbar — bereits wirksam
 
@@ -42,25 +36,15 @@ docker compose -f docker-compose.yml exec -T postgres psql -U postgres -d filme_
 
 Bestehende Verknüpfungen (`user_links`) bleiben davon unberührt.
 
-### Mailversand kontrollieren
+### Mailversand: geprüft, funktioniert
 
-Feedback geht seit heute an **info@digital-wings.com**. Ob überhaupt etwas
-ankommt, hängt an einer Umgebungsvariable:
+Auf dem Server steht `MAIL_PROVIDER=resend` und
+`MAIL_FROM=MovieMatch <no-reply@movietaste.de>` — Feedback geht also wirklich
+raus, seit dem 05.08. an **info@digital-wings.com**.
 
-```bash
-docker compose -f docker-compose.yml exec backend printenv MAIL_PROVIDER MAIL_FROM
-```
-
-Muss `resend` sein. Bei `console` landet jede Nachricht nur im Container-Log.
-Dann in `backend/.env` umstellen und nachsehen, ob dort ungelesenes Feedback
-liegt:
-
-```bash
-docker compose -f docker-compose.yml logs backend | grep -A5 "MovieMatch – Feedback"
-```
-
-Feedback wird **nicht** in der Datenbank gespeichert — nur als Mail verschickt.
-Eine Speicherung wäre nachzurüsten, falls nichts verlorengehen soll.
+Offen bleibt: Feedback wird **nicht** in der Datenbank gespeichert, nur als Mail
+verschickt. Schlägt der Versand fehl, ist die Nachricht weg. Eine Speicherung
+wäre nachzurüsten.
 
 ---
 
