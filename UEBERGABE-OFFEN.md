@@ -1,35 +1,39 @@
 # Offene Punkte — Stand 2026-08-05
 
 Ergänzt `UEBERGABE-CHAT.md` (Stand 2026-08-03) um alles, was aus der Sitzung
-vom 5. August offen geblieben ist. Alle Änderungen dieses Tages sind committet
-und auf `main` gepusht — **aber noch nicht deployed.**
+vom 5. August offen geblieben ist.
+
+**Deployment läuft automatisch:** Jeder Push auf `main` stößt
+`.github/workflows/deploy.yml` an, das auf dem Server `/opt/movietaste/deploy.sh`
+ausführt (git fetch/reset, docker compose build/up, migrate). Alle Änderungen
+dieses Tages sind damit live — nachgeprüft an movietaste.de.
 
 ---
 
-## 1. Muss beim nächsten Deploy passieren
+## 1. Noch zu prüfen / zu entscheiden
 
-### Migration ausführen (Pflicht)
+### Migration: gelaufen, aber nicht gegengeprüft
 
-Das Schema hat sich geändert (Commit `79841aa`): Einladungen mit zwei Arten und
-Mehrfach-Einlösung, Werbevermerk, Hinweis-Merker.
+Das Schema hat sich geändert (Commit `79841aa`): `user_link_invites.kind`,
+`user_link_invite_uses` (mit Übernahme der bisherigen Einlösungen),
+`users.invited_by_user_id`, `user_links.hinweis_offen`. `deploy.sh` führt
+`migrate` mit aus, es sollte also erledigt sein. Von außen ist das nicht
+sichtbar — einmal bestätigen:
 
 ```bash
-docker compose -f docker-compose.yml exec backend npm run migrate
+docker compose -f docker-compose.yml exec -T postgres psql -U postgres -d filme_serien \
+  -c "\\d user_link_invite_uses"
 ```
 
-Neu: `user_link_invites.kind`, `user_link_invite_uses` (mit Übernahme der
-bisherigen Einlösungen), `users.invited_by_user_id`, `user_links.hinweis_offen`.
-Bestehende Einladungen bleiben gültig.
-
-### Rückwirkende Folge prüfen — vor dem Deploy entscheiden
+### Alte Einladungslinks sind wieder einlösbar — bereits wirksam
 
 Die Prüfung „Einladung bereits eingelöst" ist ersatzlos entfallen. **Alle noch
-nicht abgelaufenen Einladungslinks werden dadurch wieder einlösbar**, auch
-solche, die vor dem Deploy erstellt und schon einmal benutzt wurden. Wer einen
-Link in eine Gruppe gestellt hat, verknüpft sich danach möglicherweise mit
-weiteren Personen.
+nicht abgelaufenen Einladungslinks sind dadurch wieder einlösbar**, auch solche,
+die vorher schon einmal benutzt wurden. Das ist seit dem Deploy so. Wer einen
+Link in einer Gruppe stehen hat, verknüpft sich möglicherweise mit weiteren
+Personen.
 
-Wenn das nicht gewünscht ist, vorher die eigenen offenen Einladungen löschen:
+Wenn das nicht gewünscht ist, die eigenen offenen Einladungen löschen:
 
 ```bash
 docker compose -f docker-compose.yml exec -T postgres psql -U postgres -d filme_serien \
