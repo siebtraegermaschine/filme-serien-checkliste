@@ -1719,6 +1719,11 @@ function candDetailsHtml(c, kind){
   var dirLabel = "Regie";
   var tagsHtml = detailChipsHtml(c.g, c.kw);
   var rows = '';
+  // Wie im Hauptlisten-Pfad (siehe eigeneZeileLi): beschriftet und nur, wenn er
+  // vom angezeigten Titel abweicht.
+  if (c.ot && normTitle(c.ot) !== normTitle(c.t)) {
+    rows += '<div class="credits"><b>Originaltitel:</b> '+esc(c.ot)+'</div>';
+  }
   if (c.c && c.c.length) rows += '<div class="credits"><b>Besetzung:</b> '+nameChips(c.c)+'</div>';
   if (c.d) rows += '<div class="credits"><b>'+dirLabel+':</b> '+nameChips(splitNames(c.d))+'</div>';
   var plotHtml = plotDivHtml(c);
@@ -2183,10 +2188,15 @@ async function ensurePoolItem(item){
   }
   return item._ensuring;
 }
+// Der Originaltitel steht bewusst NICHT mehr hier drin: Er kam ohne
+// Beschriftung daher und stand auf dem Handy in der zweiten Zeile direkt hinter
+// "Film" -- bei "Le Mans 66" las sich das angehaengte "Ford v Ferrari" wie ein
+// Fehler. Er hat nur wenige Titel ueberhaupt, taucht also unvorhersehbar auf.
+// Zu sehen ist er jetzt beschriftet in der aufgeklappten Ansicht; gesucht wird
+// weiterhin ueber ihn (poolItemMatchesQuery liest item.ot direkt).
 function poolToMeta(item){
   const parts = ['⭐ ' + sterneText(item.r) + voteSuffix(item.vc)];
   if (item.g && item.g[0]) parts.push(item.g[0]);
-  if (item.ot) parts.push(item.ot);
   if (item.y) parts.push(String(item.y));
   return parts.join(' · ');
 }
@@ -2198,6 +2208,7 @@ function poolToDet(item){
     // ueber die TMDB-ID ab, nicht ueber die interne realId.
     tmdbId: item.tmdbId,
     type: item.type,
+    ot: item.ot || '',  // Originaltitel, gezeigt in der aufgeklappten Ansicht
     vc: item.vc,        // Stimmenzahl fuer die gewichtete Note
 
     p: item.ov || '',
@@ -2536,6 +2547,11 @@ function eigeneZeileLi(tab, i, profile) {
   const rowScore = s.pool[i] ? punkteFuer(s.pool[i], profile) : scoreItem(item, d, profile[0]);
   const scoreBadge = '<span class="score' + (rowScore >= 60 ? ' hi' : '') + '" title="Taste Score" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">' + rowScore + '</span>';
   var creditRows = '';
+  // Nur wenn er sich vom angezeigten Titel unterscheidet -- sonst stuende
+  // zweimal dasselbe da (bei den meisten Titeln ist er identisch).
+  if (d.ot && normTitle(d.ot) !== normTitle(item[0])) {
+    creditRows += '<div class="credits"><b>Originaltitel:</b> ' + esc(d.ot) + '</div>';
+  }
   if (d.c && d.c.length) creditRows += '<div class="credits"><b>Besetzung:</b> ' + nameChips(d.c) + '</div>';
   if (d.d) creditRows += '<div class="credits"><b>' + dirLabel + ':</b> ' + nameChips(splitNames(d.d)) + '</div>';
   const detPoster = detPosterHtml(d.poster);
