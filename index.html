@@ -608,6 +608,23 @@
      waeren sonst schlicht Leerzeichen. Texte ohne Umbruch aendern sich nicht.
      Die Erklaerung zu "Match" bringt zwei Absaetze mit. */
   .modal-backdrop .info-body { white-space:pre-line; }
+  /* Einstieg in Schritten (siehe TOUR_SLIDES). Feste Mindesthoehe fuer den
+     Bildbereich waere falsch -- die Bilder sind unterschiedlich hoch, und ein
+     leerer Kasten auf Seiten ohne Bild saehe nach Fehler aus. */
+  .modal-overlay .modal.tour-modal { max-width:420px; }
+  .tour-bild { margin:14px 0; }
+  .tour-bild img { display:block; width:100%; height:auto; border-radius:10px;
+    border:1px solid var(--border); background:var(--bg); }
+  .tour-text { color:var(--text); font-size:14px; line-height:1.6; margin:0; }
+  .tour-punkte { display:flex; gap:6px; justify-content:center; margin:16px 0 14px; }
+  .tour-punkt { width:7px; height:7px; border-radius:50%; background:var(--border); }
+  .tour-punkt.on { background:var(--accent); }
+  /* Zurueck links, Weiter rechts -- space-between haelt beide an ihrem Platz,
+     auch wenn "Zurueck" auf der ersten Seite unsichtbar ist (visibility, nicht
+     display: sonst wanderte "Weiter" beim Blaettern hin und her). */
+  .tour-nav { display:flex; justify-content:space-between; gap:10px; }
+  .tour-nav button { border-radius:8px; padding:9px 20px; font-size:14px; font-weight:600;
+    cursor:pointer; border:1px solid var(--border); transition:all .15s; }
   .install-steps { margin:12px 0 0 20px; padding:0; color:var(--text); font-size:14px; line-height:1.7; }
   .install-steps li { margin-bottom:6px; }
   /* Wie .prov-intro (Farbe/Groesse/Zeilenabstand), nur nummeriert und mit
@@ -1279,19 +1296,21 @@
   </div>
 </div>
 
-<div id="howToModal" class="modal-overlay" style="display:none">
-  <div class="modal">
-    <button class="modal-x" id="howToModalX" aria-label="Schließen">✕</button>
-    <h3>Anleitung</h3>
-    <ol class="install-steps">
-      <li>Tippe auf <i class="info-word" data-discovery role="button" tabindex="0" aria-label="Was bedeutet „Neue entdecken“?">Neue entdecken</i> und füge Titel deiner „<i>Watchliste</i>" hinzu oder markiere sie als „gesehen". (Je mehr, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>)</li>
-      <!-- Bewusst ohne "Sieh dir die Watchlisten deiner Kontakte an": Fremde
-           Listen durchblaettern gibt es noch nicht, nur den Abgleich. Sobald die
-           Ansicht steht, gehoert der Halbsatz hier hinein. -->
-      <li>Schaut gemeinsam: Verknüpfe dich oben links mit Freund:innen oder Familie. Dann kannst du dir deren Watchliste ansehen und Titel daraus übernehmen – oder nach euren <i class="info-word" data-match role="button" tabindex="0" aria-label="Was ist ein Match?">Übereinstimmungen</i> filtern, um sofort einen Titel zu finden, den ihr zusammen schauen wollt.</li>
-      <li>Entscheide dich einfach immer nur noch zwischen Filmen, Serien oder ob du ins Kino gehen möchtest, filtere ggf. nur nach Titeln, die aktuell im Streaming kostenlos laufen, und sortiere alles nach <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, <i class="info-word" data-imdb role="button" tabindex="0" aria-label="Was ist die Community-Bewertung?">Community-Bewertung</i>, <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">Veröffentlichungsdatum</i> oder nach <i class="info-word" data-newreleases role="button" tabindex="0" aria-label="Unterschied Veröffentlichungsdatum / Neu im Streaming">neu im Streaming</i>.</li>
-      <li><b>Nie wieder lästiges Suchen! Aktuelle Streaming-Angebote, Filme &amp; Serien genau nach deinem Geschmack!</b></li>
-    </ol>
+<!-- Einstieg in Schritten statt als Textblock. Vier Punkte untereinander liest
+     niemand zu Ende -- ein Gedanke je Bildschirm, mit Bild, schon. Kein
+     "Überspringen": Wer nicht will, schliesst oben rechts. Erreichbar bleibt es
+     jederzeit ueber das Menue und "(How to)" in der Kopfzeile. -->
+<div id="tourModal" class="modal-overlay" style="display:none">
+  <div class="modal tour-modal">
+    <button class="modal-x" id="tourX" aria-label="Schließen">✕</button>
+    <h3 id="tourTitel"></h3>
+    <div class="tour-bild" id="tourBild"></div>
+    <p class="tour-text" id="tourText"></p>
+    <div class="tour-punkte" id="tourPunkte"></div>
+    <div class="tour-nav">
+      <button type="button" id="tourZurueck" class="modal-no">Zurück</button>
+      <button type="button" id="tourWeiter" class="modal-yes">Weiter</button>
+    </div>
   </div>
 </div>
 
@@ -4170,27 +4189,78 @@ document.addEventListener('keydown', function(e){
   if (e.key === 'Escape' && _posterModal.style.display !== 'none') closePosterModal();
 });
 
-/* ---- "How to"-Popup: manuell ueber das Menue, zusaetzlich automatisch beim
-   allerersten Besuch (siehe HOWTO_SEEN_KEY unten). ---- */
-var _howToModal = document.getElementById('howToModal');
-function openHowToModal(){ _howToModal.style.display = 'flex'; }
-function closeHowToModal(){ _howToModal.style.display = 'none'; }
-document.getElementById('howToBtn').onclick = () => { closeNavMenu(); openHowToModal(); };
-// Zweiter Weg in die Anleitung: "(How to)" in der Kopfzeile. Das Menue findet
-// nicht jeder, die Kopfzeile steht ohnehin vor einem.
+/* ---- Einstieg in Schritten ("How to") ----
+   Manuell ueber das Menue und "(How to)" in der Kopfzeile, zusaetzlich einmal
+   automatisch beim ersten Besuch (siehe HOWTO_SEEN_KEY unten).
+
+   Inhalt steht in TOUR_SLIDES: Ueberschrift, optional ein Bild, optional ein
+   Satz dazu. Bilder liegen als feste Dateien im Verzeichnis tour/ -- bewusst
+   statisch, damit sie sich nicht bei jeder Oberflaechenaenderung mitbewegen.
+   Wenn sie irgendwann nicht mehr passen, werden sie einmal neu erzeugt. */
+var TOUR_SLIDES = [
+  { titel: 'Finde, was zu dir passt',
+    bild: null,
+    text: 'Tippe unter „Neue entdecken“ auf Titel, die dich interessieren – Watchliste für später, „gesehen“ für alles, was du kennst. Je mehr du markierst, desto genauer trifft dein Taste-Score.' },
+  { titel: 'Gemeinsam schauen',
+    bild: null,
+    text: 'Verknüpfe dich links oben mit Freunden oder Familie. Dann siehst du ihre Listen – und über „Match“ genau die Titel, die bei euch allen draufstehen.' },
+  { titel: 'Film, Serie oder Kino',
+    bild: null,
+    text: 'Mehr musst du nicht mehr entscheiden. Filtere auf deine Streaming-Anbieter und sortiere nach Taste-Score, Community-Bewertung oder Erscheinungsdatum.' },
+];
+var _tourModal = document.getElementById('tourModal');
+var _tourIndex = 0;
+function tourZeichnen(){
+  var s = TOUR_SLIDES[_tourIndex];
+  document.getElementById('tourTitel').textContent = s.titel;
+  var bild = document.getElementById('tourBild');
+  bild.innerHTML = s.bild ? '<img src="' + escAttr(s.bild) + '" alt="">' : '';
+  bild.style.display = s.bild ? '' : 'none';
+  var text = document.getElementById('tourText');
+  text.textContent = s.text || '';
+  text.style.display = s.text ? '' : 'none';
+  // Zurueck erst ab der zweiten Seite -- auf der ersten waere er wirkungslos.
+  // visibility statt display, damit "Weiter" nicht seine Position wechselt.
+  document.getElementById('tourZurueck').style.visibility = _tourIndex > 0 ? '' : 'hidden';
+  document.getElementById('tourWeiter').textContent =
+    _tourIndex === TOUR_SLIDES.length - 1 ? 'Los geht’s' : 'Weiter';
+  document.getElementById('tourPunkte').innerHTML = TOUR_SLIDES.map(function(_, i){
+    return '<span class="tour-punkt' + (i === _tourIndex ? ' on' : '') + '"></span>';
+  }).join('');
+}
+function openTour(){ _tourIndex = 0; tourZeichnen(); _tourModal.style.display = 'flex'; }
+function closeTour(){ _tourModal.style.display = 'none'; }
+document.getElementById('tourWeiter').onclick = function(){
+  if (_tourIndex < TOUR_SLIDES.length - 1) { _tourIndex++; tourZeichnen(); }
+  else closeTour();
+};
+document.getElementById('tourZurueck').onclick = function(){
+  if (_tourIndex > 0) { _tourIndex--; tourZeichnen(); }
+};
+document.getElementById('tourX').onclick = closeTour;
+// Bewusst KEIN Schliessen per Klick auf den Rand: Beim Durchtippen liegt der
+// Finger schnell daneben, und der Einstieg waere weg, ohne dass man es wollte.
+document.addEventListener('keydown', function(e){
+  if (_tourModal.style.display === 'none') return;
+  if (e.key === 'Escape') closeTour();
+  else if (e.key === 'ArrowRight') document.getElementById('tourWeiter').click();
+  else if (e.key === 'ArrowLeft') document.getElementById('tourZurueck').click();
+});
+document.getElementById('howToBtn').onclick = () => { closeNavMenu(); openTour(); };
+// Zweiter Weg hinein: "(How to)" in der Kopfzeile. Das Menue findet nicht jeder,
+// die Kopfzeile steht ohnehin vor einem.
 (function(){
   var el = document.getElementById('subHowTo');
   if (!el) return;
-  el.onclick = openHowToModal;
-  el.onkeydown = function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openHowToModal(); } };
+  el.onclick = openTour;
+  el.onkeydown = function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openTour(); } };
 })();
-document.getElementById('howToModalX').onclick = closeHowToModal;
-_howToModal.addEventListener('click', function(e){ if (e.target === _howToModal) closeHowToModal(); });
-document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _howToModal.style.display !== 'none') closeHowToModal(); });
-var HOWTO_SEEN_KEY = 'top200-howto-seen-v1';
+// v2, weil aus dem Textblock Schritte geworden sind -- auch wer die alte
+// Anleitung schon gesehen hat, soll den neuen Einstieg einmal bekommen.
+var HOWTO_SEEN_KEY = 'top200-howto-seen-v2';
 try {
   if (!localStorage.getItem(HOWTO_SEEN_KEY)) {
-    openHowToModal();
+    openTour();
     localStorage.setItem(HOWTO_SEEN_KEY, '1');
   }
 } catch (e) {}
