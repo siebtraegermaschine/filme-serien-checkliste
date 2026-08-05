@@ -565,7 +565,11 @@
   @media (hover: hover) { .info-i:hover { opacity:1; color:var(--accent); } }
   .info-word { text-decoration:underline; cursor:pointer; }
   .footer-auth-link { text-decoration:underline; cursor:pointer; }
-  @media (hover: hover) { .info-word:hover { color:var(--accent); } }
+  /* Sieht aus wie .info-word, fuehrt aber nicht ins Begriffs-Popup (INFO_TEXT),
+     sondern in die Anleitung -- deshalb eine eigene Klasse: Der Sammel-Handler
+     fuer .info-word wuerde sonst danebengreifen. */
+  .howto-link { text-decoration:underline; cursor:pointer; }
+  @media (hover: hover) { .info-word:hover, .howto-link:hover { color:var(--accent); } }
   .modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);
     /* Hoeher als .modal-overlay (z-index 1000): ein info-word kann auch INNERHALB
        eines .modal-overlay (z.B. dem How-to-Popup) angeklickt werden, die
@@ -969,9 +973,9 @@
        Abgleich). Sie ist bewusst laenger als in eine Zeile passt und bricht auf
        schmalen Geraeten um -- die vollstaendige Erklaerung war hier wichtiger
        als die Einzeiligkeit. -->
-  <p class="sub sub-zweit"><b>Sieh dir die Watchliste deiner Kontakte an und <i class="info-word"
-    data-match role="button" tabindex="0" aria-label="Was ist ein Match?">matcht/filtert</i> nach euren
-    <i>Übereinstimmungen</i>.</b></p>
+  <p class="sub sub-zweit"><b>Sieh dir die Watchliste deiner Kontakte an und filtert nach euren
+    <i>Übereinstimmungen</i>. <span class="howto-link" id="subHowTo" role="button" tabindex="0"
+    aria-label="Anleitung öffnen">(How to)</span></b></p>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -3930,6 +3934,14 @@ var _howToModal = document.getElementById('howToModal');
 function openHowToModal(){ _howToModal.style.display = 'flex'; }
 function closeHowToModal(){ _howToModal.style.display = 'none'; }
 document.getElementById('howToBtn').onclick = () => { closeNavMenu(); openHowToModal(); };
+// Zweiter Weg in die Anleitung: "(How to)" in der Kopfzeile. Das Menue findet
+// nicht jeder, die Kopfzeile steht ohnehin vor einem.
+(function(){
+  var el = document.getElementById('subHowTo');
+  if (!el) return;
+  el.onclick = openHowToModal;
+  el.onkeydown = function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openHowToModal(); } };
+})();
 document.getElementById('howToModalX').onclick = closeHowToModal;
 _howToModal.addEventListener('click', function(e){ if (e.target === _howToModal) closeHowToModal(); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _howToModal.style.display !== 'none') closeHowToModal(); });
