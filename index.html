@@ -301,6 +301,11 @@
     border-radius: 20px;
     white-space: nowrap;
   }
+  /* Genres stehen vor den Schlagwoertern (siehe detailChipsHtml) und bleiben
+     zurueckhaltend: Sie ordnen den Titel ein, die Schlagwoerter sagen, was ihn
+     ausmacht -- in derselben Akzentfarbe waere beides gleich laut und die Reihe
+     eine Wand aus Gelb. */
+  .details .tag.genre-tag { color: var(--text-dim); background: var(--card-hover); border-color: var(--border); }
   .details .credits { margin-top: 8px; font-size: 12px; color: var(--text-dim); line-height: 1.5; }
   .details .credits b { color: var(--text); font-weight: 600; }
   li.item.done .details .plot { color: var(--text-dim); }
@@ -1360,9 +1365,11 @@
     <p class="delete-warn">Gelöscht werden dann dein Konto, deine Watchliste, alle
       „Gesehen"-Markierungen, ausgeblendete Titel und deine Verknüpfungen mit anderen Personen.
       Verknüpfte Personen sehen dich danach nicht mehr; ihre eigenen Listen bleiben unberührt.</p>
-    <p class="delete-warn"><b>Ohne Bezug zu dir erhalten</b> bleiben deine Suchbegriffe und die
-      Anzahl deiner Sterne-Bewertungen – beides fließt anonym in die Verbesserung der App ein und
-      lässt sich dir danach nicht mehr zuordnen.</p>
+    <!-- Was ohne Personenbezug erhalten bleibt (Suchbegriffe, Anzahl der
+         Bewertungen), stand hier frueher als dritter Absatz. Es steht weiterhin
+         in der Datenschutzerklaerung, Abschnitt "Was ohne Personenbezug erhalten
+         bleibt" -- im Loeschdialog lenkte es vom Wesentlichen ab: was
+         verschwindet und dass 14 Tage Zeit bleiben. -->
     <form id="deleteAccountForm" class="auth-form">
       <label>Zur Sicherheit dein Passwort<input type="password" id="pwForDelete" required autocomplete="current-password"></label>
       <div id="deleteError" class="auth-error"></div>
@@ -1556,6 +1563,29 @@ function kinoMeta(c, datum, typLabel){
 }
 function escAttr(str){ return esc(str).replace(/"/g,'&quot;'); }
 function tagChip(t){ return '<span class="tag" data-filter="'+escAttr(t)+'">'+esc(t)+'</span>'; }
+/* Chips der aufgeklappten Ansicht: erst ALLE Genres, dann die Schlagwoerter.
+   Vorher stand dort entweder nur das erste Genre oder -- sobald es Schlagwoerter
+   gab -- gar keins. Die Suche prueft dagegen saemtliche Genres (siehe
+   poolItemMatchesQuery), ein Treffer ueber das Zweitgenre war deshalb nicht zu
+   erklaeren: "Alles Geld der Welt" ist Krimi UND Drama, zu sehen war nur Krimi.
+
+   Doppelte fallen raus -- manche Schlagwoerter heissen wie ein Genre. Genres
+   sind unaufdringlicher gehalten als die Schlagwoerter (siehe .genre-tag): Sie
+   sind Einordnung, die Schlagwoerter das Besondere am Titel. Klickbar sind
+   beide, sie fuellen die Suche (siehe openFilterModal). */
+function detailChipsHtml(genres, keywords){
+  var raus = [], gesehen = {};
+  function anhaengen(wert, klasse){
+    var text = String(wert == null ? '' : wert).trim();
+    var schluessel = text.toLowerCase();
+    if (!text || gesehen[schluessel]) return;
+    gesehen[schluessel] = true;
+    raus.push('<span class="' + klasse + '" data-filter="' + escAttr(text) + '">' + esc(text) + '</span>');
+  }
+  (genres || []).forEach(function(g){ anhaengen(g, 'tag genre-tag'); });
+  (keywords || []).forEach(function(k){ anhaengen(k, 'tag'); });
+  return raus.join('');
+}
 function nameChips(arr){ return (arr||[]).map(function(n){ return '<span class="pill" data-filter="'+escAttr(n)+'">'+esc(n)+'</span>'; }).join(', '); }
 // Manche (aeltere) Katalog-Eintraege speichern mehrere Regisseur:innen als einen
 // einzigen, kommagetrennten String (z.B. "Niels Arden Oplev, Daniel Alfredson,
@@ -1630,8 +1660,7 @@ async function fillPlots(){
 }
 function candDetailsHtml(c, kind){
   var dirLabel = "Regie";
-  var tags = (c.kw && c.kw.length) ? c.kw : (c.g || []);
-  var tagsHtml = tags.map(tagChip).join('');
+  var tagsHtml = detailChipsHtml(c.g, c.kw);
   var rows = '';
   if (c.c && c.c.length) rows += '<div class="credits"><b>Besetzung:</b> '+nameChips(c.c)+'</div>';
   if (c.d) rows += '<div class="credits"><b>'+dirLabel+':</b> '+nameChips(splitNames(c.d))+'</div>';
@@ -2375,7 +2404,10 @@ function eigeneZeileLi(tab, i, profile) {
   li.dataset.mainBlob = [item[0], item[1], (d.providers||[]).map(function(p){ return p.name; }).join(' ')].filter(Boolean).join(' ');
   li.dataset.exactBlob = [].concat(d.c||[], d.d ? [d.d] : [], kwSuchtexte(d.h)).join(' ');
   const dirLabel = 'Regie';
-  const tagsHtml = ((d.h && d.h.length) ? d.h : [metaGenre(item[1])].filter(Boolean)).map(tagChip).join('');
+  // Genres aus dem POOL-Eintrag, der fuehrt alle. Ohne ihn bleibt nur das eine
+  // aus dem Meta-Text -- derselbe Rueckfall wie beim Sortierwert weiter unten.
+  const rowGenres = s.pool[i] ? (s.pool[i].g || []) : [metaGenre(item[1])].filter(Boolean);
+  const tagsHtml = detailChipsHtml(rowGenres, d.h);
   const posterThumb = d.poster ? '<img class="dposter" src="' + d.poster + '" alt="" loading="lazy">' : '<div class="dposter"></div>';
   // Bewusst aus dem POOL-Eintrag statt aus dem verkuerzten Meta-Text: Der Text
   // fuehrt nur das erste Genre, der POOL alle. Solange markierte und unmarkierte
