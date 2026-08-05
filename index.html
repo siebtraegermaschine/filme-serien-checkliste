@@ -162,6 +162,13 @@
      Klasse, ohne den Elementteil blieben die 8px von dort stehen. Nachgemessen
      per getComputedStyle, nicht bloss im Stylesheet nachgesehen. */
   header .sub-zweit { margin-top: 4px; }
+  /* Ab der zehnten Nutzung faellt die zweite Zeile weg -- dieselbe Schwelle wie
+     bei den Watchliste-/Gesehen-Knoepfen und der Anleitung im Personen-Popup
+     (siehe kompakteAktionenSetzen). Sie erklaert eine Funktion; wer sie kennt,
+     scrollt bei jedem Start daran vorbei. Der Weg in die Anleitung bleibt ueber
+     das Menue. Die erste Zeile ist keine Erklaerung, sondern das Versprechen
+     der App -- die bleibt. */
+  body.kompakte-aktionen header .sub-zweit { display: none; }
   .head-controls { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
   /* Suche und Tab-Reihe sollen exakt gleich hoch sein. 44px ist die
      natuerliche Hoehe der Tab-Buttons (11px Innenabstand + 15px Schrift);
@@ -973,9 +980,11 @@
        Abgleich). Sie ist bewusst laenger als in eine Zeile passt und bricht auf
        schmalen Geraeten um -- die vollstaendige Erklaerung war hier wichtiger
        als die Einzeiligkeit. -->
+  <!-- "(How to)" steht ausserhalb des <b>: Es ist ein Verweis neben der Aussage,
+       nicht Teil davon -- fett gesetzt haette es dieselbe Stimme wie der Satz. -->
   <p class="sub sub-zweit"><b>Sieh dir die Watchliste deiner Kontakte an und filtert nach euren
-    <i>Übereinstimmungen</i>. <span class="howto-link" id="subHowTo" role="button" tabindex="0"
-    aria-label="Anleitung öffnen">(How to)</span></b></p>
+    <i>Übereinstimmungen</i>.</b> <span class="howto-link" id="subHowTo" role="button" tabindex="0"
+    aria-label="Anleitung öffnen">(How to)</span></p>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8"
          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
