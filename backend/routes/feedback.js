@@ -4,7 +4,9 @@ import { createAsyncRouter } from '../lib/asyncRouter.js';
 
 const router = createAsyncRouter();
 
-const FEEDBACK_TO = 'info@movietaste.de';
+// Empfaenger bewusst hier und nicht in .env: Er gehoert zur Anwendung, nicht
+// zur Umgebung -- lokal wie in Produktion soll dieselbe Adresse gelten.
+const FEEDBACK_TO = 'info@digital-wings.com';
 const MAX_LENGTH = 5000;
 
 // Oeffentlich, kein Login noetig -- das Feedback-Formular im Nav-Menue ist
