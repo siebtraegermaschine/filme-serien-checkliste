@@ -544,6 +544,14 @@
   /* Filter-Bestaetigung kann auch UEBER dem "Ähnliche Titel"-Popup geoeffnet werden
      (Tag-/Namensklick innerhalb dessen Liste) -- muss daher garantiert obenauf liegen. */
   #filterModal { z-index:1010; }
+  /* Beide werden AUS dem Personen-Popup heraus geoeffnet und muessen darueber
+     liegen. Im Markup stehen sie davor, ohne z-index lagen sie dahinter. */
+  #inviteShareModal, #removeModal { z-index:1010; }
+  .invite-url { font-size:12px; color:var(--text-dim); background:var(--bg); border:1px solid var(--border);
+    border-radius:8px; padding:8px 10px; margin:10px 0; word-break:break-all; line-height:1.4; }
+  /* Die Rueckfragen tragen inzwischen Absaetze (siehe EINLADUNGSARTEN) -- als
+     textContent gesetzt waeren die Umbrueche sonst blosse Leerzeichen. */
+  .modal-q { white-space:pre-line; }
   .modal-overlay .modal { position:relative; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px 20px 18px; max-width:360px; width:100%; box-shadow:0 10px 40px rgba(0,0,0,.5); }
   /* Diese Popups brauchen mehr Platz als die 360px der Grundform. Die Breite
      MUSS hier mit derselben Selektortiefe stehen wie ".modal-overlay .modal",
@@ -815,6 +823,16 @@
     cursor:pointer; padding:4px 6px; border-radius:6px; flex-shrink:0; }
   @media (hover: hover) { .profile-item .pi-del:hover { color:#e2574c; } }
   .profile-item.self .pi-del { visibility:hidden; }
+  /* Favoriten. Leeres Herz, gefuellt-weiss sobald gesetzt -- die Person rutscht
+     dann nach oben. Bei drei Kontakten braucht das niemand, ab einem Dutzend
+     schon: Die Liste ist sonst nach Verknuepfungsdatum sortiert, und wen man
+     staendig anschaut, steht dann irgendwo in der Mitte.
+     Die Wahl liegt nur im Browser (siehe FAVORITEN_KEY) -- sie geht niemanden
+     ausser einem selbst etwas an und braucht dafuer keine Serverrunde. */
+  .profile-item .pi-fav { background:none; border:none; color:var(--text-dim); font-size:15px;
+    line-height:1; padding:4px; cursor:pointer; }
+  .profile-item .pi-fav.on { color:#fff; }
+  @media (hover: hover) { .profile-item .pi-fav:hover { color:#fff; } }
   .profile-add { width:100%; margin-top:12px; padding:11px; border-radius:9px; cursor:pointer;
     background:var(--card); border:1px dashed var(--border); color:var(--text-dim);
     font-size:14px; font-weight:600; }
@@ -1145,6 +1163,28 @@
     <path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>
   </svg>
 </button>
+
+<!-- Fertige Einladung. Eigenes Fenster, weil navigator.share auf iOS NUR aus
+     einer frischen Nutzergeste heraus oeffnet: Vorher lief der Aufruf nach dem
+     Server-Abruf (await) und nach einem nativen confirm() -- die Geste war da
+     laengst abgelaufen, das Teilen-Blatt kam nicht, und der Fehler wurde still
+     verschluckt. Hier haengt er an einem Knopf, der Aufruf ist damit wieder die
+     unmittelbare Folge des Tippens. Dasselbe Muster wie beim Titel-Teilen.
+     z-index ueber der Personenliste, aus der heraus es geoeffnet wird. -->
+<div id="inviteShareModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="inviteShareX" aria-label="Schließen">✕</button>
+    <h3 id="inviteShareTitel">Einladung</h3>
+    <p class="prov-intro" id="inviteShareText"></p>
+    <div class="invite-url" id="inviteShareUrl"></div>
+    <p class="prov-intro" id="inviteShareGueltig"></p>
+    <div class="modal-actions">
+      <button type="button" id="inviteShareTeilen" class="modal-yes">Teilen</button>
+      <button type="button" id="inviteShareKopieren" class="modal-yes">Kopieren</button>
+    </div>
+    <div class="share-hint" id="inviteShareHinweis"></div>
+  </div>
+</div>
 
 <div id="shareModal" class="modal-overlay" style="display:none">
   <div class="modal">
@@ -2730,6 +2770,12 @@ function kinoHinweisAnhaengen(q){
   list.appendChild(b);
 }
 function renderLeerzustand(q){
+  // Solange der Katalog laeuft, ist "leer" keine Aussage ueber den Inhalt --
+  // es ist schlicht noch nichts da.
+  if (!KATALOG_DA) {
+    list.innerHTML = '<li class="watch-empty">Titel werden geladen …</li>';
+    return;
+  }
   // In einer fremden Liste sind die Texte darunter alle falsch -- sie sprechen
   // von der EIGENEN Watchlist und schicken einen zu "Neue entdecken", was dort
   // gesperrt ist.
@@ -4297,7 +4343,8 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
   // passt (z.B. weiterhin "(12)", nachdem man einen Titel weggewischt hat).
   cinemaHeadingEls[key].textContent = CINEMA_LABELS[key] + (entries.length ? ' (' + entries.length + ')' : '');
   if (!entries.length) {
-    var text = q ? 'Keine Treffer für „' + searchEl.value.trim() + '".'
+    var text = !KATALOG_DA ? 'Titel werden geladen …'
+             : q ? 'Keine Treffer für „' + searchEl.value.trim() + '".'
              : fremd ? (profilName(ANSICHT_PERSON) + ' hat hier nichts ' +
                         ((st.wl && st.seen) ? 'markiert'
                          : st.wl ? 'auf der Watchliste' : 'als gesehen markiert') + '.')
@@ -4785,12 +4832,35 @@ function updateProfileBtn(){
 }
 
 var _profileModal = document.getElementById('profileModal');
+/* ---- Favoriten in der Personenliste ----
+   Nur im Browser gespeichert: Wen man oben haben will, geht niemanden sonst
+   etwas an, und eine Serverrunde waere fuer eine reine Anzeigereihenfolge zu
+   viel. Folge: Die Wahl gilt je Geraet -- vertretbar, weil sie in Sekunden
+   wiederhergestellt ist. */
+var FAVORITEN_KEY = 'mt.favoriten';
+function favoritenLesen(){
+  try { return new Set(JSON.parse(localStorage.getItem(FAVORITEN_KEY) || '[]').map(Number)); }
+  catch (e) { return new Set(); }
+}
+function favoritSchalten(uid){
+  var s = favoritenLesen();
+  if (s.has(uid)) s.delete(uid); else s.add(uid);
+  try { localStorage.setItem(FAVORITEN_KEY, JSON.stringify(Array.from(s))); } catch (e) {}
+}
 function renderProfileList(){
   var el = document.getElementById('profileList');
+  var favoriten = favoritenLesen();
+  // Favoriten nach oben, innerhalb beider Gruppen die bisherige Reihenfolge
+  // (der Server liefert nach Verknuepfungsdatum). slice(), damit LINKED_PROFILES
+  // selbst unberuehrt bleibt -- daran haengen MATCH_WITH und die Profile.
+  var reihenfolge = LINKED_PROFILES.slice().sort(function(a, b){
+    return (favoriten.has(b.id) ? 1 : 0) - (favoriten.has(a.id) ? 1 : 0);
+  });
   // Kein Eintrag fuer einen selbst: Nichts ausgewaehlt IST bereits die eigene
   // Ansicht. Ein Haken "Ich", der sich nie abwaehlen laesst, waere nur Ballast.
-  var html = LINKED_PROFILES.map(function(p){
+  var html = reihenfolge.map(function(p){
     var aktiv = MATCH_WITH.indexOf(p.id) !== -1;
+    var favorit = favoriten.has(p.id);
     // Zwei Absichten, zwei Knoepfe: DEREN Titel ansehen oder mit ihnen
     // abgleichen. Vorher waren es drei -- Watchliste und Gesehen getrennt, und
     // zwar sich gegenseitig ausschliessend. Man musste sich also entscheiden,
@@ -4805,6 +4875,9 @@ function renderProfileList(){
                '<button type="button" class="pi-btn' + (aktiv ? ' on' : '') + '" data-tun="m">Match</button>' +
              '</div>' +
              '<button type="button" class="pi-del" aria-label="Verknüpfung lösen">✕</button>' +
+             '<button type="button" class="pi-fav' + (favorit ? ' on' : '') + '" aria-pressed="' +
+               (favorit ? 'true' : 'false') + '" aria-label="Als Favorit oben anzeigen">' +
+               (favorit ? '♥' : '♡') + '</button>' +
            '</div>';
   }).join('');
   // Ausgeloggt steht hier, warum die Liste leer ist und der Knopf darunter
@@ -4854,6 +4927,11 @@ function renderProfileList(){
         renderProfileList();
       };
     });
+    row.querySelector('.pi-fav').onclick = function(e){
+      e.stopPropagation();
+      favoritSchalten(uid);
+      renderProfileList();
+    };
     row.querySelector('.pi-del').onclick = function(e){
       e.stopPropagation();
       if (!confirm('Verknüpfung mit ' + profilName(uid) + ' lösen? Ihr seht dann gegenseitig keine gemeinsamen Titel mehr.')) return;
@@ -4906,6 +4984,7 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _pro
 var EINLADUNGSARTEN = {
   share: {
     kind: 'share',
+    titel: 'Watchliste teilen',
     // Auch die einladende Seite gibt etwas preis -- die Verknuepfung wirkt in
     // beide Richtungen. Wer den Link verschickt, soll das vorher wissen und
     // nicht erst in der Datenschutzerklaerung nachlesen muessen.
@@ -4923,6 +5002,7 @@ var EINLADUNGSARTEN = {
   },
   referral: {
     kind: 'referral',
+    titel: 'Personen einladen',
     rueckfrage: null,   // gibt nichts preis, also auch nichts zu bestaetigen
     text: function(wer){
       return wer + ' empfiehlt dir MovieMatch. Entdecke Filme, Serien und Kinofilme, ' +
@@ -4932,6 +5012,46 @@ var EINLADUNGSARTEN = {
     fehler: 'Der Einladungslink konnte nicht erstellt werden.',
   },
 };
+/* Zeigt die fertige Einladung. Das eigentliche Teilen haengt an den Knoepfen
+   darin und NICHT am Ende dieser Kette: navigator.share oeffnet auf iOS nur
+   innerhalb einer frischen Nutzergeste. Nach Rueckfrage und Server-Abruf war
+   die Geste abgelaufen -- das Teilen-Blatt kam nicht, der Fehler landete im
+   leeren catch, und es sah aus, als passiere nichts. Beim zweiten Versuch ging
+   es dann, weil die Geste dabei zufaellig noch frisch war. */
+var _inviteShareModal = document.getElementById('inviteShareModal');
+function schliesseInviteShare(){ _inviteShareModal.style.display = 'none'; }
+document.getElementById('inviteShareX').onclick = schliesseInviteShare;
+_inviteShareModal.addEventListener('click', function(e){ if (e.target === _inviteShareModal) schliesseInviteShare(); });
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && _inviteShareModal.style.display !== 'none') schliesseInviteShare();
+});
+function zeigeEinladung(titel, text, url, gueltig){
+  document.getElementById('inviteShareTitel').textContent = titel;
+  document.getElementById('inviteShareText').textContent = text;
+  document.getElementById('inviteShareUrl').textContent = url;
+  document.getElementById('inviteShareGueltig').textContent = gueltig;
+  var hinweis = document.getElementById('inviteShareHinweis');
+  hinweis.textContent = '';
+  var teilen = document.getElementById('inviteShareTeilen');
+  // Ohne native Teilen-Funktion (typisch am Rechner) bleibt nur Kopieren --
+  // ein Knopf, der nichts tun kann, waere schlimmer als keiner.
+  teilen.style.display = navigator.share ? '' : 'none';
+  teilen.onclick = function(){
+    navigator.share({ title: 'MovieMatch', text: text, url: url })
+      .then(schliesseInviteShare)
+      .catch(function(){ /* abgebrochen -- kein Fehlerfall */ });
+  };
+  document.getElementById('inviteShareKopieren').onclick = function(){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text + '\n' + url)
+        .then(function(){ hinweis.textContent = 'In die Zwischenablage kopiert.'; })
+        .catch(function(){ hinweis.textContent = 'Kopieren hat nicht geklappt – Link oben von Hand markieren.'; });
+    } else {
+      hinweis.textContent = 'Kopieren hat nicht geklappt – Link oben von Hand markieren.';
+    }
+  };
+  _inviteShareModal.style.display = 'flex';
+}
 async function einladungTeilen(btn, artName){
   var art = EINLADUNGSARTEN[artName];
   if (btn.disabled) return;
@@ -4940,26 +5060,19 @@ async function einladungTeilen(btn, artName){
   // laufen. Ein echtes disabled haette gar kein Klickereignis geliefert.
   // requireLogin merkt sich das Popup und oeffnet es nach dem Anmelden wieder.
   if (!CURRENT_USER) { closeProfileModal(); requireLogin(openProfileModal); return; }
-  if (art.rueckfrage && !confirm(art.rueckfrage)) return;
+  // Eigene Rueckfrage statt confirm(): Auf dem iPhone konnte der Tipp auf "OK"
+  // durch den geschlossenen Systemdialog hindurch auf das Popup dahinter
+  // durchschlagen -- das ging dann mit zu.
+  if (art.rueckfrage && !(await confirmRemove(art.rueckfrage))) return;
   btn.disabled = true;
   try {
     var d = await apiRequest('POST', '/api/links/invite', { kind: art.kind });
-    var text = art.text((CURRENT_USER && CURRENT_USER.displayName) || 'Jemand');
-    var gueltig = d.expiresInDays ? ('Der Link ist ' + d.expiresInDays + ' Tage gültig.')
-                                  : 'Der Link läuft nicht ab.';
-    // Native Teilen-Funktion (iPhone/Android) -- sonst in die Zwischenablage.
-    if (navigator.share) {
-      try { await navigator.share({ title: 'MovieMatch', text: text, url: d.url }); }
-      catch (e) { /* abgebrochen -- kein Fehlerfall */ }
-    } else if (navigator.clipboard && navigator.clipboard.writeText) {
-      // Text UND Link kopieren: Am Rechner gibt es kein navigator.share, das den
-      // Text mitliefert -- ohne ihn bekaeme die eingeladene Person nur eine nackte
-      // URL und keinen Hinweis, worum es geht.
-      await navigator.clipboard.writeText(text + '\n' + d.url);
-      alert('Einladung kopiert – ' + gueltig + '\n\n' + d.url);
-    } else {
-      prompt('Einladung (' + gueltig + ')', text + ' ' + d.url);
-    }
+    zeigeEinladung(
+      art.titel,
+      art.text((CURRENT_USER && CURRENT_USER.displayName) || 'Jemand'),
+      d.url,
+      d.expiresInDays ? ('Der Link ist ' + d.expiresInDays + ' Tage gültig.') : 'Der Link läuft nicht ab.'
+    );
   } catch (e) {
     alert(art.fehler);
   } finally { btn.disabled = false; }
@@ -5612,6 +5725,7 @@ async function loadCatalogAndRefresh(){
     genreAliasUebernehmen(streamDoc.genreAlias);
     buildPool(combinedRows, streamDoc);
     LETZTER_KATALOG_LOAD = Date.now();
+    KATALOG_DA = true;
     // Im Hintergrund, damit die Suche unter Filme/Serien sagen kann, ob es zum
     // Begriff auch Kinotreffer gibt (siehe kinoHinweisAnhaengen). Bewusst ohne
     // await: Die Titelliste soll darauf nicht warten.
@@ -5638,6 +5752,11 @@ async function loadCatalogAndRefresh(){
    Rueckkehr in den Vordergrund aufgeklappte Zeilen zuklappen. */
 let USER_DATA_SIG = '';
 let LETZTER_KATALOG_LOAD = 0;
+/* Steht der Katalog schon? Bis dahin sagen ALLE Leerzustaende "Titel werden
+   geladen …" statt "Keine Titel für diese Auswahl" -- vor dem ersten Abruf ist
+   jede Liste leer, und die Meldungen behaupteten dann, es gaebe nichts. Beim
+   Start las man also erst eine falsche Aussage und sah dann Titel erscheinen. */
+var KATALOG_DA = false;
 let LETZTE_AUFFRISCHUNG = Date.now();
 const AUFFRISCH_ABSTAND_MS = 60 * 1000;      // kurzes Wegtippen loest nichts aus
 const KATALOG_MAX_ALTER_MS = 6 * 60 * 60 * 1000; // Katalog-Jobs laufen taeglich
