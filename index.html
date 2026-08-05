@@ -1328,8 +1328,8 @@
          wie eine Unterfunktion des Ansehens wirkt. -->
     <ol class="prov-steps">
       <li>Lade Freunde und Verwandte zu MovieMatch ein.</li>
-      <li>Sieh dir die <b>Watchliste</b> oder die <b>gesehenen</b> Titel deiner Kontakte an.
-        Füge Titel, die dir auch gefallen, einfach deinen eigenen Listen hinzu.</li>
+      <li>Über <b>Watchliste</b> siehst du, was deine Kontakte vorgemerkt und was sie schon
+        gesehen haben. Füge Titel, die dir auch gefallen, einfach deinen eigenen Listen hinzu.</li>
       <li>Über <b>„Match"</b> seht ihr <i class="info-word" data-match role="button" tabindex="0"
         aria-label="Was ist ein Match?">Übereinstimmungen</i> eurer Watchlisten.
         So findet ihr schnell und einfach Filme, Serien oder Kinofilme, die ihr gemeinsam
@@ -2306,7 +2306,12 @@ var kinoStatus = { wl: true, seen: true, disc: true };
 // /api/links/progress) -- sie wurden bisher nur fuer den Abgleich und die
 // Geschmacksprofile genutzt, nie angezeigt.
 var ANSICHT_PERSON = null;
-var ANSICHT_ART = 'w';                 // 'w' = Watchlist, 's' = Gesehen
+// ANSICHT_ART gab es hier frueher ('w' oder 's'): In einer fremden Liste
+// schlossen sich Watchliste und Gesehen gegenseitig aus, ein Klick auf
+// "Gesehen" ERSETZTE die Watchliste. Man konnte also nie sehen, was jemand
+// insgesamt hat -- ausgerechnet die Frage, mit der man in eine fremde Liste
+// geht. Jetzt gelten dieselben Schalter wie fuer die eigenen Listen
+// (watchlistFilterOn/seenFilterOn), beide zusammen sind der Normalfall.
 // Eine fremde Liste gilt in ALLEN drei Bereichen: Filme, Serien und Kino sind
 // darin nur Typfilter. Im Kino heisst das "welche Kinostarts hat Jenny
 // markiert" -- oft nichts, aber das ist eine Antwort und kein Fehler, genau wie
@@ -2376,25 +2381,26 @@ function startEinstiegSetzen(){
   discoverFilterOn = true;
   updateFilterRowUI();
 }
-function einstiegSetzen(art){
+function einstiegSetzen(){
   closeCinemaPage();
   einstiegOffen = false;
   activeTab = 'filme';
-  watchlistFilterOn = art === 'w';
-  seenFilterOn = art === 's';
+  // Beides an: Erst zeigen, was die Person hat, dann filtern. Vorher musste man
+  // sich vorher entscheiden -- ohne zu wissen, wo bei ihr mehr steht.
+  watchlistFilterOn = true;
+  seenFilterOn = true;
   discoverFilterOn = false;
   inStreamFilterOn = false;
   searchEl.value = '';
   sucheZustandVorher = null;
   discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
 }
-function personenAnsichtOeffnen(uid, art){
+function personenAnsichtOeffnen(uid){
   ANSICHT_PERSON = uid;
-  ANSICHT_ART = art;
   // Ein laufender Abgleich und eine fremde Liste widersprechen sich: Der
   // Abgleich zeigt die Schnittmenge, hier geht es um DEREN Liste.
   MATCH_WITH = [];
-  einstiegSetzen(art);
+  einstiegSetzen();
   closeProfileModal();
   rebuild();
   renderCurrentTab();
@@ -2643,7 +2649,7 @@ function sammleEintraege(q){
       if (p.realId == null || typen.indexOf(p.type) === -1) return;
       var e = m.get(p.realId);
       if (!e) return;
-      if (ANSICHT_ART === 'w' ? !e.w : !e.s) return;
+      if (!((watchlistFilterOn && e.w) || (seenFilterOn && e.s))) return;
       if (!fskErlaubt(p)) return;
       if (inStreamFilterOn && !selectedProviders(p.providers).length) return;
       if (q && !poolItemMatchesQuery(p, q)) return;
@@ -2695,7 +2701,7 @@ function kinoTrefferZahl(q){
         if (item.realId == null) return;
         var fe = fremd.get(item.realId);
         if (!fe) return;
-        if (ANSICHT_ART === 'w' ? !fe.w : !fe.s) return;
+        if (!((kinoStatus.wl && fe.w) || (kinoStatus.seen && fe.s))) return;
         n++; return;
       }
       var wl = item.realId != null && getWatchlistFlag(item.realId);
@@ -2729,7 +2735,8 @@ function renderLeerzustand(q){
   // gesperrt ist.
   if (personenAnsicht()) {
     var wer = profilName(ANSICHT_PERSON);
-    var was = ANSICHT_ART === 'w' ? 'auf der Watchliste' : 'als gesehen markiert';
+    var was = (watchlistFilterOn && seenFilterOn) ? 'markiert'
+            : watchlistFilterOn ? 'auf der Watchliste' : 'als gesehen markiert';
     list.innerHTML = '<li class="watch-empty">' +
       (q ? 'Keine Treffer für „' + esc(searchEl.value.trim()) + '" bei ' + esc(wer) + '.'
          : esc(wer) + ' hat hier nichts ' + esc(was) + '.') + '</li>';
@@ -3168,8 +3175,8 @@ function updateFilterRowUI(){
   // Listen, zwischen denen man umschaltet -- "Neue entdecken" hat dort keine
   // Entsprechung und ist gesperrt.
   if (personenAnsicht()) {
-    btns.open.classList.toggle('active', ANSICHT_ART === 'w');
-    btns.done.classList.toggle('active', ANSICHT_ART === 's');
+    btns.open.classList.toggle('active', watchlistFilterOn);
+    btns.done.classList.toggle('active', seenFilterOn);
     btns.discover.classList.remove('active');
     btns.discover.disabled = true;
     btns.inStream.classList.toggle('active', inStreamFilterOn);
@@ -3271,14 +3278,10 @@ const btns = { open: document.getElementById('fOpen'), done: document.getElement
 // bleiben, sonst waere die Liste ohne erkennbaren Grund leer. Der Klick auf den
 // bereits einzigen aktiven Knopf laeuft deshalb ins Leere.
 function toggleStatus(feld){
-  if (personenAnsicht()) {
-    if (feld === 'disc') return;
-    ANSICHT_ART = feld === 'wl' ? 'w' : 's';
-    discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
-    updateFilterRowUI();
-    renderCurrentTab();
-    return;
-  }
+  // In einer fremden Liste gibt es kein "Neue entdecken" -- die Person hat
+  // nichts Unmarkiertes. Watchliste und Gesehen dagegen verhalten sich hier
+  // genau wie in den eigenen Listen, deshalb kein Sonderfall mehr.
+  if (personenAnsicht() && feld === 'disc') return;
   var st = statusLesen();
   st[feld] = !st[feld];
   // Waehrend eines Abgleichs sind "Neue entdecken" und Watchlist/Gesehen
@@ -4277,7 +4280,7 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
       if (e.item.realId == null) return false;
       var fe = fremd.get(e.item.realId);
       if (!fe) return false;
-      return ANSICHT_ART === 'w' ? !!fe.w : !!fe.s;
+      return !!((st.wl && fe.w) || (st.seen && fe.s));
     }
     // Ein Kinotitel, den man schon markiert hat, steckt als echter Pool-Eintrag
     // mit realId im Katalog (siehe cinemaRowToItem); alles andere ist per
@@ -4296,7 +4299,8 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
   if (!entries.length) {
     var text = q ? 'Keine Treffer für „' + searchEl.value.trim() + '".'
              : fremd ? (profilName(ANSICHT_PERSON) + ' hat hier nichts ' +
-                        (ANSICHT_ART === 'w' ? 'auf der Watchliste' : 'als gesehen markiert') + '.')
+                        ((st.wl && st.seen) ? 'markiert'
+                         : st.wl ? 'auf der Watchliste' : 'als gesehen markiert') + '.')
              : (st.wl && st.seen && st.disc) ? CINEMA_EMPTY_TEXT[key]
              : 'Keine Titel für diese Auswahl.';
     el.innerHTML = '<li class="cinema-empty">' + esc(text) + '</li>';
@@ -4754,8 +4758,10 @@ function updateProfileBtn(){
   // Knopf daneben fuehrt zurueck in die eigene Ansicht.
   if (personenAnsicht()) {
     bar.style.display = 'flex';
-    document.getElementById('matchBarText').textContent =
-      (ANSICHT_ART === 'w' ? 'Watchliste von ' : 'Gesehen von ') + profilName(ANSICHT_PERSON);
+    // "Liste von Anna", nicht mehr "Watchliste von" oder "Gesehen von": Zu
+    // sehen sind jetzt beide zusammen, und welcher Teil gerade an ist, steht
+    // ohnehin an den Schaltern darunter.
+    document.getElementById('matchBarText').textContent = 'Liste von ' + profilName(ANSICHT_PERSON);
     document.getElementById('matchBarClear').textContent = 'zurück';
     return;
   }
@@ -4785,16 +4791,17 @@ function renderProfileList(){
   // Ansicht. Ein Haken "Ich", der sich nie abwaehlen laesst, waere nur Ballast.
   var html = LINKED_PROFILES.map(function(p){
     var aktiv = MATCH_WITH.indexOf(p.id) !== -1;
-    // Drei getrennte Absichten, drei Knoepfe: DEREN Watchlist ansehen, DEREN
-    // Gesehen-Liste ansehen, oder mit ihnen abgleichen. Frueher lag alles auf
-    // einem Klick auf die Zeile, und die beiden Listen liessen sich gar nicht
-    // ansehen.
+    // Zwei Absichten, zwei Knoepfe: DEREN Titel ansehen oder mit ihnen
+    // abgleichen. Vorher waren es drei -- Watchliste und Gesehen getrennt, und
+    // zwar sich gegenseitig ausschliessend. Man musste sich also entscheiden,
+    // bevor man wusste, wo bei der Person ueberhaupt etwas steht. "Watchliste"
+    // oeffnet jetzt beides zusammen; wegfiltern kann man es danach mit den
+    // Schaltern, die dafuer ohnehin da sind.
     var inAnsicht = ANSICHT_PERSON === p.id;
     return '<div class="profile-item' + (aktiv ? ' active' : '') + '" data-uid="' + escAttr(String(p.id)) + '">' +
              '<span class="pi-name">' + esc(p.name) + '</span>' +
              '<div class="pi-aktionen">' +
-               '<button type="button" class="pi-btn' + (inAnsicht && ANSICHT_ART === 'w' ? ' on' : '') + '" data-tun="w">Watchliste</button>' +
-               '<button type="button" class="pi-btn' + (inAnsicht && ANSICHT_ART === 's' ? ' on' : '') + '" data-tun="s">Gesehen</button>' +
+               '<button type="button" class="pi-btn' + (inAnsicht ? ' on' : '') + '" data-tun="w">Watchliste</button>' +
                '<button type="button" class="pi-btn' + (aktiv ? ' on' : '') + '" data-tun="m">Match</button>' +
              '</div>' +
              '<button type="button" class="pi-del" aria-label="Verknüpfung lösen">✕</button>' +
@@ -4837,13 +4844,13 @@ function renderProfileList(){
           // Startpunkt: Filme, nur Watchlist. Nur beim ABwaehlen der letzten
           // Person nicht -- dann kehrt man in die eigene Ansicht zurueck und
           // soll dort nicht zusaetzlich umgestellt werden.
-          if (MATCH_WITH.length) einstiegSetzen('w');
+          if (MATCH_WITH.length) einstiegSetzen();
           renderProfileList(); updateProfileBtn(); rebuild(); renderCurrentTab();
           return;
         }
         // Erneuter Klick auf die gerade offene Liste fuehrt zurueck.
-        if (ANSICHT_PERSON === uid && ANSICHT_ART === tun) { personenAnsichtSchliessen(); renderProfileList(); return; }
-        personenAnsichtOeffnen(uid, tun);
+        if (ANSICHT_PERSON === uid) { personenAnsichtSchliessen(); renderProfileList(); return; }
+        personenAnsichtOeffnen(uid);
         renderProfileList();
       };
     });
