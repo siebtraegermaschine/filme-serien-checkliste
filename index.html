@@ -368,8 +368,15 @@
   /* "Im Kino"-Seite: keine eigene Modal-/Card-Optik, sondern dieselben Zeilen wie
      Discovery/Streaming (poolItemLi in ol.list) -- nur die Abschnitts-Ueberschriften
      (Aktuell/In Kuerze/Bald im Kino) sind hier neu. */
-  .cinema-page-header { max-width:700px; margin:22px auto 6px; padding:0 20px; box-sizing:border-box;
-    display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  /* 10px oben: Genau der Abstand, mit dem unter Filme/Serien die Sortier-Reihe
+     unter der Statusreihe sitzt (nachgemessen). Vorher standen hier 22px -- der
+     Knopf sass sichtbar tiefer als derselbe Knopf im anderen Bereich, obwohl er
+     an derselben Stelle steht.
+     align-items:flex-end statt center: "Im Kino" schliesst damit unten buendig
+     mit dem Sortier-Knopf ab. Mittig zentriert stand die Ueberschrift 8,5px
+     hoeher als dessen Unterkante. */
+  .cinema-page-header { max-width:700px; margin:10px auto 6px; padding:0 20px; box-sizing:border-box;
+    display:flex; align-items:flex-end; justify-content:space-between; gap:12px; }
   .cinema-page-title { color:var(--accent); font-size:19px; margin:0; }
   /* Genauso breit wie "Neue entdecken" in der Statusreihe darueber: Dort teilen
      sich drei Knoepfe mit 4px Abstand die Zeile, eine Spalte ist also
