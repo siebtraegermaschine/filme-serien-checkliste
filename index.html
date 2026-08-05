@@ -36,8 +36,16 @@
 <meta property="og:url" content="https://movietaste.de/">
 <meta property="og:title" content="MovieMatch">
 <meta property="og:description" content="Filme &amp; Serien sortiert nach deinem Geschmack.">
-<meta property="og:image" content="https://movietaste.de/icon-512.png">
-<meta name="twitter:card" content="summary">
+<!-- Querformat 1200x630 statt des quadratischen 512er-Symbols: WhatsApp zeigte
+     den Popcorn-Eimer als fast bildschirmbreiten Klotz ueber dem Einladungstext.
+     Ein 1,91:1-Banner ist das uebliche Mass fuer Vorschauen und laeuft dort als
+     flacher Streifen mit dem Schriftzug, statt als Bildblock. og:image:width/height
+     mitgeben, damit die Vorschau nicht erst das Bild laden muss, um das
+     Seitenverhaeltnis zu kennen. -->
+<meta property="og:image" content="https://movietaste.de/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <!-- og:end -->
 <style>
   :root {

@@ -140,8 +140,10 @@ app.get('/t/:art/:kennung', async (req, res, next) => {
   const url = 'https://movietaste.de/t/' + art + '/' + kennung;
   const bild = backdrop
     ? 'https://image.tmdb.org/t/p/w1280' + backdrop
+    // Letzter Rueckfall (weder Szenenbild noch Poster): dasselbe Querformat-
+    // Banner wie auf der Startseite, nicht mehr das quadratische App-Symbol.
     : (titel.poster_path ? 'https://image.tmdb.org/t/p/w500' + titel.poster_path
-                         : 'https://movietaste.de/icon-512.png');
+                         : 'https://movietaste.de/og-image.png');
   const grossesBild = !!backdrop;
   const titelZeile = titel.title + (titel.year ? ' (' + titel.year + ')' : '') + ' – MovieMatch';
 
