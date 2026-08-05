@@ -2192,10 +2192,17 @@ let activeTab = 'filme';
 // gemeinsam sortiert nach dem gewaehlten Kriterium -- eigene Titel werden
 // bewusst nicht nach oben gezogen, sonst stuende bei Taste-Score-Sortierung ein
 // schwacher Watchlist-Titel ueber einem starken Vorschlag.
-// Default beim Laden bzw. bei jedem Tab-Wechsel ist ausschliesslich Watchlist
-// aktiv (siehe setTab): mit "Neue entdecken" an ist die Liste der halbe Katalog, in
-// dem die eigenen Titel untergehen -- das soll eine bewusste Entscheidung sein.
-let watchlistFilterOn = true;
+// Startzustand: "Neue entdecken" unter Filme, NICHT die Watchliste. Wer die App
+// zum ersten Mal oeffnet, hat noch nichts markiert -- mit Watchliste als
+// Einstieg stand da eine leere Liste, und damit auch kein Hinweis darauf, dass
+// hier ueberhaupt zehntausende Filme und Serien liegen. Der Erstkontakt zeigt
+// deshalb den Katalog.
+//
+// Bewusst nicht BEIDE an: Neben dem halben Katalog gehen die eigenen Titel
+// unter, gerade bei Sortierung nach Taste-Score. Watchliste und Gesehen sind
+// einen Klick entfernt und bleiben dann stehen (siehe setTab -- der Tabwechsel
+// aendert an der Statusauswahl nichts mehr).
+let watchlistFilterOn = false;
 let seenFilterOn = false;
 // Dritter, unabhaengiger Haken neben Watchlist/Gesehen (siehe applyFilter/
 // updateProgress): schraenkt Filme/Serien auf Titel ein, die AKTUELL bei
@@ -2276,7 +2283,8 @@ function statusSchreiben(neu){
 // Typ-Filtern (discTypeFilter) und einem eigenen Streaming-Filter -- all das
 // entfaellt, weil der Typ jetzt aus dem aktiven Tab kommt und der
 // Streaming-Filter fuer alle drei Status derselbe ist.
-let discoverFilterOn = false;
+// An beim Start -- siehe die Begruendung bei watchlistFilterOn weiter oben.
+let discoverFilterOn = true;
 let showDetails = false;
 const DETAILS_PREF_KEY = 'top200-show-details-v1';
 
