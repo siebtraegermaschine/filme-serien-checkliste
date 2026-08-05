@@ -3733,6 +3733,57 @@ function profileWeightFor(id){
   var r = getRating(id);
   return r ? RATING_WEIGHT[r] : 1;
 }
+/* ---- Bezugsgroessen eines Geschmacksprofils ----
+   Der Taste-Score ist ein gewichteter Mittelwert aus Teilwerten zwischen 0 und
+   1 (siehe scoreCand) -- 100 hiesse "passt in jeder Hinsicht maximal". Damit
+   das ueberhaupt erreichbar ist, misst sich jeder Teilwert am staerksten
+   Merkmal DEINES Profils: Wer 30% Drama guckt, bekommt fuer Drama die volle
+   Genre-Punktzahl, auch wenn 30% absolut gesehen wenig klingt.
+
+   Frueher war der Score eine offene Punktesumme, die bei 99 abgeschnitten
+   wurde. Vier bekannte Gesichter plus ein vertrauter Regisseur reichten, um die
+   Decke zu erreichen -- ab da sahen voellig unterschiedlich passende Titel
+   gleich aus. */
+function median(werte){
+  if (!werte.length) return null;
+  var s = werte.slice().sort(function(a, b){ return a - b; });
+  var m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+var JAHR_FENSTER = 5;
+// Dichteste Jahresspanne des Profils: Woran misst sich "zeitlich maximal nah"?
+// Ohne diesen Bezug bekaeme niemand die volle Punktzahl, weil sich kaum jemandes
+// Titel auf ein einziges Jahrzehnt draengen.
+function jahrDichteMax(years){
+  if (!years.length) return 0;
+  var zaehler = {};
+  years.forEach(function(y){ zaehler[y] = (zaehler[y] || 0) + 1; });
+  var jahre = Object.keys(zaehler).map(Number);
+  var max = 0;
+  jahre.forEach(function(y){
+    var s = 0;
+    jahre.forEach(function(y2){ if (Math.abs(y2 - y) <= JAHR_FENSTER) s += zaehler[y2]; });
+    if (s > max) max = s;
+  });
+  return max / years.length;
+}
+// Ab wie vielen bewerteten Titeln das eigene Bewertungsniveau als belastbar
+// gilt. Darunter bleibt der Teilwert weg, statt aus drei Zufallstiteln ein
+// "Niveau" zu erfinden.
+var NIVEAU_MIN_TITEL = 5;
+function profilAbschluss(prof, noten){
+  var genreMax = 0;
+  Object.keys(prof.genre).forEach(function(g){ if (prof.genre[g] > genreMax) genreMax = prof.genre[g]; });
+  prof.genreMax = genreMax;
+  prof.jahrMax = jahrDichteMax(prof.years);
+  // Das eigene Bewertungsniveau als MEDIAN, nicht als Mittelwert: Ein einzelner
+  // Ausreisser nach oben ("den einen Blockbuster fand ich auch gut") soll das
+  // Niveau nicht verschieben.
+  prof.niveau = (noten && noten.length >= NIVEAU_MIN_TITEL) ? median(noten) : null;
+  prof.niveauStreu = prof.niveau == null ? null
+    : median(noten.map(function(x){ return Math.abs(x - prof.niveau); }));
+  return prof;
+}
 function buildProfile(){
   // Ein gemeinsames Geschmacksprofil aus Filmen UND Serien zusammen (Taste-Score,
   // Discovery und die Streaming-Sortierung nutzen alle dieselbe Basis). Es fliesst
@@ -3744,22 +3795,31 @@ function buildProfile(){
   const usedAll = tasteProfileSize() < 10;
   const cats = ['filme', 'serien'];
   const genre={}, cast={}, dir={}, kw={};
-  const years=[];
+  const years=[], noten=[];
   let n = 0;
   cats.forEach(cat => {
     const s = state[cat];
     for (let i = 0; i < s.data.length; i++){
       const det=s.det[i]||{};
       const w = det.id != null ? profileWeightFor(det.id) : 1;
-      const g=metaGenre(s.data[i][1]); if(g) genre[g]=(genre[g]||0)+w;
+      // Alle Genres, nicht nur das erste: Der Kandidat wird ueber saemtliche
+      // seiner Genres geprueft, das Profil zaehlte bisher nur eines -- die
+      // beiden Seiten haben sich damit auf unterschiedliche Mengen bezogen.
+      const gs = (s.pool[i] && s.pool[i].g && s.pool[i].g.length)
+        ? s.pool[i].g : [metaGenre(s.data[i][1])].filter(Boolean);
+      gs.forEach(g => { if (g) genre[g]=(genre[g]||0)+w; });
       (det.c||[]).forEach(a=>{ if(a) cast[a]=(cast[a]||0)+w; });
       if(det.d) dir[det.d]=(dir[det.d]||0)+w;
       (det.h||[]).forEach(k=>{ if(k) kw[k]=(kw[k]||0)+w; });
       const yr = metaYear(s.data[i][1]); if(yr) years.push(yr);
+      // Das Bewertungsniveau deiner Titel -- Grundlage fuer den Teilwert
+      // "Niveau" in scoreCand.
+      const note = gewichteteNote(metaRating(s.data[i][1]), det.vc);
+      if (note > 0) noten.push(note);
       n += w;
     }
   });
-  return { genre, cast, dir, kw, years, n: Math.max(1,n), usedAll };
+  return profilAbschluss({ genre, cast, dir, kw, years, n: Math.max(1,n), usedAll }, noten);
 }
 /* ---- Gewichtete Bewertung ----
    Eine glatte 10,0 aus EINER Stimme ist keine 10,0. Das Streaming-Angebot hat
@@ -3797,27 +3857,100 @@ function gewichteteNote(note, stimmen){
   if (!Number.isFinite(v) || v < 0) v = 0;
   return (v / (v + BEWERTUNG_M)) * r + (BEWERTUNG_M / (v + BEWERTUNG_M)) * BEWERTUNG_MITTEL;
 }
+/* ---- Taste-Score ----
+   Sechs Teilwerte, jeder zwischen 0 und 1, gewichtet gemittelt und mal 100.
+
+   Ein Teilwert zaehlt genau dann mit, wenn DEIN PROFIL ihn beurteilen kann --
+   wer noch nie eine Regie doppelt gesehen hat, bei dem sagt der Regie-Anteil
+   nichts, also faellt er samt Gewicht weg. Fehlt die Angabe dagegen beim
+   KANDIDATEN (keine gemeinsamen Schauspieler, kein Jahr), ist das ein echtes
+   Nicht-Passen und zaehlt als 0.
+
+   Das war im ersten Entwurf andersherum, mit absurdem Ergebnis: Ein Titel ohne
+   Schlagwoerter, ohne Besetzung und ohne Regie kam auf 96, weil nur noch Genre
+   und Jahr uebrig blieben -- waehrend ein Titel, der in JEDER Hinsicht passte,
+   bei 85 lag. Weniger Daten ergaben den besseren Score. */
+var TASTE_GEWICHTE = { genre: 25, kw: 20, cast: 15, regie: 15, jahr: 10, niveau: 15 };
+// Ab welchem aufsummierten Anteil ein Merkmal als weitgehend getroffen gilt.
+// Beide Werte saettigen weich (x/(x+s)) statt hart zu deckeln: Der zweite
+// passende Schlagwortreffer soll noch etwas bringen, der zwoelfte kaum noch.
+var KW_SAETTIGUNG = 0.3;
+var CAST_SAETTIGUNG = 1.0;
+// Mindestspanne rund um das eigene Bewertungsniveau. Bei 0,8 sprang der
+// Teilwert zu abrupt auf null: Zwischen einer 7,2 und einer 8,9 lag dann kein
+// Unterschied mehr, obwohl die eine noch in der Naehe liegt und die andere weit
+// weg ist. 1,5 gibt der Zwischenzone Raum.
+var NIVEAU_MIN_TOLERANZ = 1.5;
 function scoreCand(c, prof){
-  let sc=0;
-  for (const g of (c.g||[])) if (prof.genre[g]) sc += 25*(prof.genre[g]/prof.n);
-  // Hashtags/Keywords: gleiche Gewichtungslogik wie Genre, aber niedriger je Treffer
-  // gewichtet, da ein Titel deutlich mehr Keywords als Genres tragen kann.
-  for (const k of (c.kw||[])) if (prof.kw && prof.kw[k]) sc += 12*(prof.kw[k]/prof.n);
-  // Cast/Regie gestaffelt statt binär: eine Person, die in mehreren deiner gesehenen
-  // Titel vorkommt, zaehlt staerker als eine, die nur einmal vorkam (Deckelung bei
-  // 3+ Treffern, damit ein einzelner Vielspieler den Score nicht sprengt).
-  let shared=0;
-  for (const a of (c.c||[])) if (prof.cast[a]) { shared++; sc += 15*Math.min(1, prof.cast[a]/3); }
-  const dirHit = !!(c.d && prof.dir[c.d]);
-  if (dirHit) sc += 35*Math.min(1, prof.dir[c.d]/3);
-  // Erscheinungsjahr nahe an Jahren deiner gesehenen Titel (±4 Jahre) gibt einen Bonus,
-  // proportional dazu wie viele deiner gesehenen Titel in dieses Fenster fallen.
-  if (c.y && prof.years && prof.years.length){
-    const nearby = prof.years.filter(y => Math.abs(y - c.y) <= 4).length;
-    if (nearby) sc += 15*(nearby/prof.n);
+  var teile = [];   // [Gewicht, Teilwert 0..1]
+  var shared = 0;
+
+  // Genres: wie stark deckt sich der Kandidat mit dem, was du am haeufigsten
+  // schaust? Drei Viertel zaehlt sein bester Treffer (gemessen an deinem
+  // staerksten Genre), ein Viertel, wie viele seiner Genres ueberhaupt
+  // vorkommen -- so gewinnt ein Volltreffer gegen einen Titel, der mit fuenf
+  // Genres breit streut.
+  var gs = c.g || [];
+  if (prof.genreMax > 0) {
+    var best = 0, treffer = 0;
+    for (var i = 0; i < gs.length; i++) {
+      var v = prof.genre[gs[i]] || 0;
+      if (v > 0) treffer++;
+      if (v > best) best = v;
+    }
+    teile.push([TASTE_GEWICHTE.genre, gs.length
+      ? 0.75 * Math.min(1, best / prof.genreMax) + 0.25 * (treffer / gs.length) : 0]);
   }
-  sc += gewichteteNote(c.r, c.vc);
-  return { score: Math.min(99, Math.round(sc)), shared, dirHit };
+
+  // Schlagwoerter: aufsummierter Anteil aller Treffer, weich gesaettigt.
+  var kws = c.kw || [];
+  if (prof.kw && Object.keys(prof.kw).length) {
+    var kwRoh = 0;
+    for (var j = 0; j < kws.length; j++) if (prof.kw[kws[j]]) kwRoh += prof.kw[kws[j]] / prof.n;
+    teile.push([TASTE_GEWICHTE.kw, kwRoh / (kwRoh + KW_SAETTIGUNG)]);
+  }
+
+  // Besetzung: Wer in mehreren deiner Titel vorkam, zaehlt staerker (gedeckelt
+  // bei drei). Insgesamt gesaettigt -- vier bekannte Gesichter machen einen
+  // Titel nicht viermal so passend.
+  var cs = c.c || [];
+  var castRoh = 0;
+  for (var m = 0; m < cs.length; m++) if (prof.cast[cs[m]]) { shared++; castRoh += Math.min(1, prof.cast[cs[m]] / 3); }
+  if (Object.keys(prof.cast).length) teile.push([TASTE_GEWICHTE.cast, castRoh / (castRoh + CAST_SAETTIGUNG)]);
+
+  var dirHit = !!(c.d && prof.dir[c.d]);
+  if (Object.keys(prof.dir).length) {
+    teile.push([TASTE_GEWICHTE.regie, dirHit ? Math.min(1, prof.dir[c.d] / 3) : 0]);
+  }
+
+  // Jahresnaehe, gemessen an der dichtesten Spanne deines Profils.
+  if (prof.jahrMax > 0 && prof.years.length) {
+    var nah = 0;
+    if (c.y) for (var y = 0; y < prof.years.length; y++) if (Math.abs(prof.years[y] - c.y) <= JAHR_FENSTER) nah++;
+    teile.push([TASTE_GEWICHTE.jahr, Math.min(1, (nah / prof.years.length) / prof.jahrMax)]);
+  }
+
+  // Niveau: NICHT "je besser bewertet, desto besser". Gefragt ist die Naehe zu
+  // dem Bewertungsniveau, das DU schaust. Wer lauter Titel um 6,3 markiert hat,
+  // mag offenbar solche Filme -- ein 8,9er Blockbuster passt dann eben nicht
+  // besonders gut, und ein 6,4er sehr wohl. Die TMDB-Note als Bonus zu addieren
+  // haette dagegen nur die ohnehin populaersten Titel nach oben gespuelt, und
+  // zwar doppelt: Sie steht ja bereits als eigene Sortierung zur Verfuegung.
+  if (prof.niveau != null) {
+    var note = gewichteteNote(c.r, c.vc);
+    // Die Spanne kommt aus der Streuung des Profils: Wer breit gemischt schaut,
+    // bekommt eine weite Spanne, wer sehr einheitlich schaut, eine enge.
+    var toleranz = Math.max(NIVEAU_MIN_TOLERANZ, 2 * (prof.niveauStreu || 0));
+    teile.push([TASTE_GEWICHTE.niveau, Math.max(0, 1 - Math.abs(note - prof.niveau) / toleranz)]);
+  }
+
+  var summe = 0, gewichte = 0;
+  for (var t = 0; t < teile.length; t++) { summe += teile[t][0] * teile[t][1]; gewichte += teile[t][0]; }
+  // Gedeckelt bei 99, damit das Schildchen zweistellig bleibt. Anders als
+  // frueher ist das keine Decke, gegen die reihenweise Titel laufen -- 100
+  // hiesse "passt in jeder Hinsicht maximal".
+  var score = gewichte ? Math.min(99, Math.round(100 * summe / gewichte)) : 0;
+  return { score: score, shared: shared, dirHit: dirHit };
 }
 // Mini-Profil aus GENAU einem Titel (statt aus allen Watchlist-/Gesehen-Titeln
 // zusammen wie buildProfile()) -- Grundlage fuer den "Ähnliche Titel"-Button:
@@ -3828,7 +3961,13 @@ function buildProfileFromItem(item){
   (item.c||[]).forEach(function(a){ if (a) cast[a] = 1; });
   if (item.d) dir[item.d] = 1;
   (item.kw||[]).forEach(function(k){ if (k) kw[k] = 1; });
-  return { genre, cast, dir, kw, years: item.y ? [item.y] : [], n: 1 };
+  // Das "Niveau" ist hier die Note des Bezugstitels selbst: "Ähnliche Titel"
+  // soll auch im Anspruch aehnlich bleiben. Ein einzelner Wert hat keine
+  // Streuung, also gilt die Mindestspanne.
+  var prof = profilAbschluss({ genre, cast, dir, kw, years: item.y ? [item.y] : [], n: 1 }, []);
+  var note = gewichteteNote(item.r, item.vc);
+  if (note > 0) { prof.niveau = note; prof.niveauStreu = 0; }
+  return prof;
 }
 /* ---- "Ähnliche Titel"-Popup (Filme/Serien/Streaming) ----
    Filme: nur Filme; Serien: nur Serien; Streaming: Filme UND Serien, aber nur
@@ -4450,20 +4589,24 @@ function matchNoteHtml(titleId){
 function buildProfileForLinked(uid){
   var m = LINKED_PROGRESS[uid];
   if (!m) return null;
-  var genre = {}, cast = {}, dir = {}, kw = {}, years = [], n = 0;
+  var genre = {}, cast = {}, dir = {}, kw = {}, years = [], noten = [], n = 0;
   POOL.forEach(function(item){
     if (item.realId == null || !m.has(item.realId)) return;
     var eintrag = m.get(item.realId);
     // Unbewertete Titel zaehlen neutral (Gewicht 1) -- genau wie bei einem selbst.
     var w = (eintrag && eintrag.r) ? (RATING_WEIGHT[eintrag.r] || 1) : 1;
-    var g = (item.g || [])[0]; if (g) genre[g] = (genre[g] || 0) + w;
+    // Alle Genres, genau wie in buildProfile.
+    (item.g || []).forEach(function(g){ if (g) genre[g] = (genre[g] || 0) + w; });
     (item.c || []).forEach(function(a){ if (a) cast[a] = (cast[a] || 0) + w; });
     if (item.d) dir[item.d] = (dir[item.d] || 0) + w;
     (item.kw || []).forEach(function(k){ if (k) kw[k] = (kw[k] || 0) + w; });
     if (item.y) years.push(item.y);
+    var note = gewichteteNote(item.r, item.vc);
+    if (note > 0) noten.push(note);
     n += w;
   });
-  return { genre: genre, cast: cast, dir: dir, kw: kw, years: years, n: Math.max(1, n), usedAll: false };
+  return profilAbschluss({ genre: genre, cast: cast, dir: dir, kw: kw, years: years,
+                           n: Math.max(1, n), usedAll: false }, noten);
 }
 // Fuers Kino: Im Kino watchlistet kaum jemand Filme, die erst anlaufen -- ein
 // Listenabgleich waere dort fast immer leer. Stattdessen zaehlt, wie gut ein
