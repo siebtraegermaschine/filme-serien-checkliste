@@ -574,6 +574,13 @@
   .prov-steps { margin:0 0 12px 18px; padding:0; color:var(--text-dim); font-size:13px; line-height:1.5; }
   .prov-steps li { margin-bottom:9px; }
   .prov-steps li:last-child { margin-bottom:0; }
+  /* Ab der zehnten Nutzung faellt die Anleitung weg -- dieselbe Schwelle wie bei
+     den Watchliste-/Gesehen-Knoepfen (siehe kompakteAktionenSetzen). Wer die
+     drei Schritte kennt, will beim Oeffnen die Personenliste sehen und nicht
+     jedes Mal daran vorbeiscrollen. Nachlesbar bleibt es im Menue unter
+     "Anleitung", Punkt "Schaut gemeinsam". */
+  body.kompakte-aktionen .prov-steps,
+  body.kompakte-aktionen .prov-sep { display:none; }
   #installChoice .modal-actions { margin-top:14px; }
   .modal-x { position:absolute; top:10px; right:12px; background:none; border:none;
     color:var(--text-dim); font-size:18px; cursor:pointer; line-height:1; }
@@ -1251,6 +1258,11 @@
         So findet ihr schnell und einfach Filme, Serien oder Kinofilme, die ihr gemeinsam
         als Nächstes sehen möchtet.</li>
     </ol>
+    <!-- Trennt die Anleitung von der Personenliste, wie die Linie weiter unten
+         den FSK-Teil abtrennt. Faellt mit der Anleitung zusammen weg (siehe
+         body.kompakte-aktionen), sonst stuende ab der zehnten Nutzung eine
+         Linie ohne etwas darueber. -->
+    <hr class="account-sep prov-sep">
     <div class="profile-list" id="profileList"></div>
     <button type="button" id="profileInviteBtn" class="profile-add">＋ Personen einladen</button>
     <hr class="account-sep">
