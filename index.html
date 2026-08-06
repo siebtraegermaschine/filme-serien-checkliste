@@ -5152,11 +5152,11 @@ function renderProfileList(){
           var i = MATCH_WITH.indexOf(uid);
           var geradeAktiviert = (i === -1);
           if (geradeAktiviert) MATCH_WITH.push(uid); else MATCH_WITH.splice(i, 1);
-          // Auch der Abgleich ist ein Einstieg und bekommt denselben definierten
-          // Startpunkt: Filme, nur Watchlist. Nur beim ABwaehlen der letzten
-          // Person nicht -- dann kehrt man in die eigene Ansicht zurueck und
-          // soll dort nicht zusaetzlich umgestellt werden.
-          if (MATCH_WITH.length) einstiegSetzen();
+          // Der definierte Startpunkt wird erst beim SCHLIESSEN gesetzt (siehe
+          // closeProfileModal/matchEinstiegSetzen). Vorher stand er hier und lief
+          // bei jedem Antippen erneut -- er kann aber gar nicht stimmen, solange
+          // die Auswahl noch waechst: Ob es gemeinsame Vormerkungen gibt, haengt
+          // an ALLEN Ausgewaehlten, und das steht erst am Ende fest.
           renderProfileList(); updateProfileBtn(); rebuild(); renderCurrentTab();
           // Beim allerersten Mal erklaeren, was jetzt passiert: Der Abgleich
           // wirkt auf die Liste DAHINTER, das Fenster verdeckt sie aber noch --
@@ -5227,8 +5227,56 @@ function renderFskRow(){
     };
   });
 }
-function openProfileModal(){ renderProfileList(); renderFskRow(); _profileModal.style.display = 'flex'; }
-function closeProfileModal(){ _profileModal.style.display = 'none'; }
+/* ---- Einstieg in die gemeinsamen Titel ----
+   Wer den Abgleich einschaltet, will EINE Sache wissen: Was koennen wir zusammen
+   schauen. Beim Schliessen des Fensters wird deshalb genau darauf gestellt --
+   Filme, nur Watchliste. Vorher stand hier immer "Watchliste UND Gesehen"
+   (einstiegSetzen); die schon gesehenen Titel standen damit gleichberechtigt
+   zwischen den offenen, obwohl sie die Frage gerade nicht beantworten.
+
+   Gibt es unter Filme keine einzige gemeinsame Vormerkung, kommt Gesehen dazu:
+   Dann sieht man wenigstens, was ihr beide schon kennt, statt vor einer leeren
+   Liste zu stehen. Bleibt auch das leer, ist genau DAS die Antwort -- der
+   Leerzustand sagt es dann in Worten (siehe renderLeerzustand).
+
+   Gezaehlt wird erst NACH rebuild(): state.filme enthaelt dann nur noch Titel,
+   die bei allen Ausgewaehlten auf der Liste stehen (siehe rebuild/matchInfo). */
+function gemeinsameFilmeAufWatchliste(){
+  var s = state.filme;
+  for (var i = 0; i < s.data.length; i++) {
+    if (isWatched('filme', s.data[i][0])) return true;
+  }
+  return false;
+}
+function matchEinstiegSetzen(){
+  // Setzt Filme, Watchliste + Gesehen, beendet Kino/Suche/fremde Liste.
+  einstiegSetzen();
+  rebuild();
+  seenFilterOn = !gemeinsameFilmeAufWatchliste();
+  titelLimit = TITEL_PRO_SEITE;
+}
+// Merkt sich die Auswahl beim Oeffnen, damit das Schliessen nur dann etwas
+// umstellt, wenn wirklich jemand an-/abgewaehlt wurde. Wer das Fenster nur
+// aufmacht, um die Altersfreigabe zu setzen oder jemanden einzuladen, findet
+// seine Ansicht danach unveraendert vor.
+var _matchBeimOeffnen = '';
+function matchStand(){ return MATCH_WITH.slice().sort().join(','); }
+function openProfileModal(){
+  _matchBeimOeffnen = matchStand();
+  renderProfileList(); renderFskRow(); _profileModal.style.display = 'flex';
+}
+function closeProfileModal(){
+  _profileModal.style.display = 'none';
+  var geaendert = matchStand() !== _matchBeimOeffnen;
+  _matchBeimOeffnen = matchStand();
+  // Beim Abwaehlen der LETZTEN Person nicht: Dann kehrt man in die eigene
+  // Ansicht zurueck und soll dort nicht zusaetzlich umgestellt werden.
+  if (!geaendert || !matchAktiv()) return;
+  matchEinstiegSetzen();
+  updateProfileBtn();
+  renderCurrentTab();
+  window.scrollTo(0, 0);
+}
 document.getElementById('profileBtn').onclick = openProfileModal;
 document.getElementById('matchBarClear').onclick = function(){
   if (personenAnsicht()) { personenAnsichtSchliessen(); return; }
