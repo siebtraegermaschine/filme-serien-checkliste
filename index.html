@@ -3251,8 +3251,15 @@ function updateFilterRowUI(){
   // Listen, zwischen denen man umschaltet -- "Neue entdecken" hat dort keine
   // Entsprechung und ist gesperrt.
   if (personenAnsicht()) {
-    btns.open.classList.toggle('active', watchlistFilterOn);
-    btns.done.classList.toggle('active', seenFilterOn);
+    // statusLesen() statt der globalen Schalter: Auf der Kino-Seite liegt die
+    // Statuswahl in kinoStatus, nicht in watchlistFilterOn/seenFilterOn --
+    // toggleStatus schreibt dorthin (ueber statusSchreiben). Wer hier die
+    // globalen Schalter ablas, zeigte in einer fremden Liste im Kino zwei
+    // dauerhaft gelbe Knoepfe: Die Titel dahinter wechselten beim Klick, die
+    // Knoepfe nicht.
+    var pst = statusLesen();
+    btns.open.classList.toggle('active', pst.wl);
+    btns.done.classList.toggle('active', pst.seen);
     btns.discover.classList.remove('active');
     btns.discover.disabled = true;
     btns.inStream.classList.toggle('active', inStreamFilterOn);
