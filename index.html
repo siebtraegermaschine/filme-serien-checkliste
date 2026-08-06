@@ -5968,6 +5968,13 @@ window.addEventListener('pageshow', function(e){ if (e.persisted) refreshOnResum
 
 renderAuthBar();
 setTab('filme');
+// setTab wertet jeden Aufruf als eigene Wahl und setzt dabei einstiegOffen auf
+// false (damit ein Tipp auf "Serien" waehrend des Ladens nicht Sekunden spaeter
+// ueberschrieben wird). Dieser eine Aufruf hier ist aber kein Tipp, sondern der
+// Seitenaufbau -- ohne die Zeile darunter stieg startEinstiegSetzen() nach dem
+// Laden IMMER sofort wieder aus, und die App startete fuer alle im Katalog
+// ("Neue entdecken") statt in der eigenen Watchliste. Wie in goHome.
+einstiegOffen = true;
 apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() => { CURRENT_USER = null; }).finally(() => {
   renderAuthBar();
   updateProfileBtn();
