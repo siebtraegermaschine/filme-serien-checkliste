@@ -307,6 +307,10 @@
   li.item.show-details .details { display: block; }
   .details .plot { font-size: 13px; color: var(--text); line-height: 1.55; }
   .details .tags { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 6px; }
+  /* Genres und Schlagwoerter sind zwei getrennte Reihen (siehe
+     detailChipsHtml). Zwischen ihnen reicht der Zeilenabstand der Reihe selbst
+     -- die vollen 9px sind der Abstand zur Inhaltsangabe darueber. */
+  .details .tags + .tags { margin-top: 6px; }
   .details .tag {
     font-size: 11px;
     color: var(--accent);
@@ -1711,28 +1715,52 @@ function kinoMeta(c, datum, typLabel){
 }
 function escAttr(str){ return esc(str).replace(/"/g,'&quot;'); }
 function tagChip(t){ return '<span class="tag" data-filter="'+escAttr(t)+'">'+esc(t)+'</span>'; }
-/* Chips der aufgeklappten Ansicht: erst ALLE Genres, dann die Schlagwoerter.
-   Vorher stand dort entweder nur das erste Genre oder -- sobald es Schlagwoerter
-   gab -- gar keins. Die Suche prueft dagegen saemtliche Genres (siehe
-   poolItemMatchesQuery), ein Treffer ueber das Zweitgenre war deshalb nicht zu
-   erklaeren: "Alles Geld der Welt" ist Krimi UND Drama, zu sehen war nur Krimi.
+/* Chips der aufgeklappten Ansicht: die Genres in einer eigenen Reihe, darunter
+   die Schlagwoerter. Zwei Reihen statt einer, weil es zwei verschiedene Dinge
+   sind -- Genres ordnen den Titel ein, Schlagwoerter sagen, was ihn ausmacht.
+   Genres sind deshalb auch unaufdringlicher gehalten (siehe .genre-tag).
+   Klickbar sind beide, sie fuellen die Suche (siehe openFilterModal).
 
-   Doppelte fallen raus -- manche Schlagwoerter heissen wie ein Genre. Genres
-   sind unaufdringlicher gehalten als die Schlagwoerter (siehe .genre-tag): Sie
-   sind Einordnung, die Schlagwoerter das Besondere am Titel. Klickbar sind
-   beide, sie fuellen die Suche (siehe openFilterModal). */
+   Die Genre-Reihe erscheint erst ab ZWEI Genres. Das erste steht schon in der
+   Metazeile oben neben der Bewertung (siehe poolToMeta/candMeta/kinoMeta) -- bei
+   "Le Mans 66" stand "Drama" dadurch zweimal auf demselben Bildschirm, einmal
+   oben und einmal als Schaltflaeche unten. Ab zwei Genres sagt die Reihe etwas
+   Neues ("Drama UND Historie"), dann stehen alle da, das erste eingeschlossen.
+
+   Die Suche prueft ohnehin saemtliche Genres (siehe poolItemMatchesQuery) --
+   deshalb muessen ab zwei auch alle sichtbar sein, sonst waere ein Treffer ueber
+   das Zweitgenre nicht zu erklaeren: "Alles Geld der Welt" ist Krimi UND Drama.
+
+   Doppelte fallen raus -- manche Schlagwoerter heissen wie ein Genre. Das gilt
+   auch dann, wenn die Genre-Reihe gar nicht erscheint: Ein Schlagwort "Drama"
+   stuende sonst als gelbe Schaltflaeche da und wiederholte genau die Angabe von
+   oben, also wieder das, was hier weggehen soll. */
 function detailChipsHtml(genres, keywords){
-  var raus = [], gesehen = {};
-  function anhaengen(wert, klasse){
-    var text = String(wert == null ? '' : wert).trim();
-    var schluessel = text.toLowerCase();
-    if (!text || gesehen[schluessel]) return;
-    gesehen[schluessel] = true;
-    raus.push('<span class="' + klasse + '" data-filter="' + escAttr(text) + '">' + esc(text) + '</span>');
+  var gesehen = {};
+  // Sammelt die Texte einer Sorte und merkt sie zugleich fuer die naechste vor.
+  // Die Genres muessen deshalb IMMER durchlaufen, auch wenn sie nicht gezeigt
+  // werden -- sonst greift die Entdopplung der Schlagwoerter nicht.
+  function texte(werte){
+    var raus = [];
+    (werte || []).forEach(function(wert){
+      var text = String(wert == null ? '' : wert).trim();
+      var schluessel = text.toLowerCase();
+      if (!text || gesehen[schluessel]) return;
+      gesehen[schluessel] = true;
+      raus.push(text);
+    });
+    return raus;
   }
-  (genres || []).forEach(function(g){ anhaengen(g, 'tag genre-tag'); });
-  (keywords || []).forEach(function(k){ anhaengen(k, 'tag'); });
-  return raus.join('');
+  function reihe(werte, klasse, reihenKlasse){
+    if (!werte.length) return '';
+    return '<div class="' + reihenKlasse + '">' + werte.map(function(text){
+      return '<span class="' + klasse + '" data-filter="' + escAttr(text) + '">' + esc(text) + '</span>';
+    }).join('') + '</div>';
+  }
+  var g = texte(genres);
+  var k = texte(keywords);
+  return (g.length > 1 ? reihe(g, 'tag genre-tag', 'tags tags-genres') : '') +
+         reihe(k, 'tag', 'tags');
 }
 function nameChips(arr){ return (arr||[]).map(function(n){ return '<span class="pill" data-filter="'+escAttr(n)+'">'+esc(n)+'</span>'; }).join(', '); }
 // Manche (aeltere) Katalog-Eintraege speichern mehrere Regisseur:innen als einen
@@ -1825,7 +1853,9 @@ function candDetailsHtml(c, kind){
   // die aufgeklappte Zeile dann ganz ohne Bild.
   var posterHtml = detPosterHtml(c.poster64 || (c.p ? (POSTER + c.p) : null));
   if (!plotHtml && !tagsHtml && !rows && !posterHtml) return '';
-  return '<div class="details">' + posterHtml + plotHtml + (tagsHtml ? '<div class="tags">'+tagsHtml+'</div>' : '') + rows + '</div>';
+  // tagsHtml bringt seine Reihen-Container selbst mit (Genres und Schlagwoerter
+  // sind zwei getrennte Reihen, siehe detailChipsHtml).
+  return '<div class="details">' + posterHtml + plotHtml + tagsHtml + rows + '</div>';
 }
 // Der taegliche Streaming-Abgleich (stream-fetch.mjs) fuehrt seine vier
 // Plattformen unter eigenen Kuerzeln, die Anbieterauswahl arbeitet dagegen mit
@@ -2683,7 +2713,7 @@ function eigeneZeileLi(tab, i, profile) {
   const detailsHtml =
     '<div class="details">' + detPoster +
       plotDivHtml(s.pool[i]) + matchNoteHtml(d.id) +
-      (tagsHtml ? '<div class="tags">' + tagsHtml + '</div>' : '') +
+      tagsHtml +
       creditRows +
     '</div>';
   li.dataset.src = tab;
