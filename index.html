@@ -2388,6 +2388,22 @@ var ANSICHT_PERSON = null;
 // unter Serien. Die frueheren Sonderregeln (im Kino ausgesetzt, eigene Leiste)
 // entfallen damit.
 function personenAnsicht(){ return ANSICHT_PERSON != null; }
+// Der Fortschritt der Person, deren Liste gerade offen ist -- null, wenn es
+// keine fremde Liste ist, sonst IMMER eine Map, nie undefined.
+//
+// Genau daran lag es: Wer noch gar nichts markiert hat, kommt in der Antwort von
+// /api/links/progress ueberhaupt nicht vor (die Abfrage dort verbindet mit
+// user_progress, siehe backend/routes/links.js). LINKED_PROGRESS[id] war dann
+// undefined -- und wer das als "sind wir in einer fremden Liste?" ablas, bekam
+// "nein" und fiel auf den EIGENEN Fortschritt zurueck. Auf der Kino-Seite
+// standen so alle Kinostarts unter der Watchliste einer Person, die nichts
+// vorgemerkt hat; unter Filme/Serien blieb es korrekt leer, weil dort ein
+// eigener Riegel davor lag (siehe sammleEintraege).
+var LEERER_FREMD_FORTSCHRITT = new Map();
+function fremderFortschritt(){
+  if (!personenAnsicht()) return null;
+  return LINKED_PROGRESS[ANSICHT_PERSON] || LEERER_FREMD_FORTSCHRITT;
+}
 // Ein Einstieg ueber die Personenliste setzt einen definierten Startpunkt,
 // statt zu erben, was zuletzt bei den eigenen Titeln eingestellt war: immer
 // Filme, und genau der Status, den man angeklickt hat. Ohne das landete man
@@ -2759,7 +2775,7 @@ function kinoTrefferZahl(q){
   if (!CINEMA_DATA || !q) return 0;
   var byTmdb = new Map();
   POOL.forEach(function(p){ if (p.type === 'movie' && p.tmdbId != null) byTmdb.set(p.tmdbId, p); });
-  var fremd = personenAnsicht() ? LINKED_PROGRESS[ANSICHT_PERSON] : null;
+  var fremd = fremderFortschritt();
   var st = kinoStatus;
   var n = 0;
   ['now', 'soon', 'later'].forEach(function(key){
@@ -4413,7 +4429,9 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
   // In einer fremden Liste zaehlen DEREN Markierungen, nicht die eigenen: "Was
   // von den Kinostarts hat Jenny vorgemerkt bzw. schon gesehen." Meist wenig --
   // eine leere Antwort ist hier aber eine Antwort, genau wie unter Serien.
-  var fremd = personenAnsicht() ? LINKED_PROGRESS[ANSICHT_PERSON] : null;
+  // Ueber fremderFortschritt(), nicht direkt aus LINKED_PROGRESS: sonst gilt
+  // "Person hat nichts markiert" als "keine fremde Liste" (siehe dort).
+  var fremd = fremderFortschritt();
   var entries = rows.map(function(row){
     var item = cinemaRowToItem(row, poolByTmdb);
     return { row: row, item: item, score: scoreMitProfilen(item, profile) };
@@ -4875,6 +4893,13 @@ async function loadLinkedProfiles(){
       var m = new Map();
       (fortschritt[uid] || []).forEach(function(e){ m.set(e.t, { s: e.s, w: e.w, r: e.r }); });
       LINKED_PROGRESS[Number(uid)] = m;
+    });
+    // Wer nichts markiert hat, fehlt in der Antwort ganz (die Abfrage dort
+    // verbindet mit user_progress, siehe backend/routes/links.js). Ohne diese
+    // Zeile bliebe sein Eintrag undefined statt leer -- die Unterscheidung
+    // "keine Verknuepfung" gegen "Verknuepfung ohne Titel" ginge verloren.
+    LINKED_PROFILES.forEach(function(p){
+      if (!LINKED_PROGRESS[p.id]) LINKED_PROGRESS[p.id] = new Map();
     });
   } catch (e) { /* ohne Verknuepfungen bleibt einfach alles wie bisher */ }
   finally {
