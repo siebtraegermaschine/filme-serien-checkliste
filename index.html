@@ -2857,8 +2857,7 @@ function renderLeerzustand(q){
   if (matchAktiv()) {
     var wer = MATCH_WITH.map(profilName).join(' und ');
     list.innerHTML = '<li class="watch-empty">Keine gemeinsamen Titel mit ' + esc(wer) +
-      '. Je mehr ihr beide eurer Watchliste hinzufügt, desto mehr Übereinstimmungen gibt es. ' +
-      'Oben links kannst du die Auswahl wieder aufheben.</li>';
+      '. Je mehr ihr beide eurer Watchliste hinzufügt, desto mehr Übereinstimmungen gibt es.</li>';
     return;
   }
   // Leer trotz "Neue entdecken" heisst: die Filterkombination passt auf nichts --
