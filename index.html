@@ -4251,8 +4251,9 @@ document.addEventListener('keydown', function(e){
 var TOUR_SLIDES = [
   { titel: 'Filme & Serien entdecken',
     bild: 'tour/1-entdecken.png',
-    text: '„Neue entdecken" listet alle Filme und Serien auf bzw. zeigt aktuelle und zukünftige Kinofilme. ' +
-      'Markiere Titel als gesehen, bewerte sie oder füge sie deiner Watchliste hinzu.' },
+    text: '„Neue entdecken" listet alle Filme und Serien auf sowie aktuelle und zukünftige Kinofilme. ' +
+      'Markiere Titel als gesehen oder füge sie deiner Watchliste hinzu. ' +
+      'Dadurch bildet sich dein persönlicher Taste-Score.' },
   { titel: 'Dein Taste-Score',
     bild: 'tour/2-taste-score.png',
     text: 'Ab 10 gespeicherten Titeln werden alle Filme, Serien und Kinofilme nach deinem Geschmack sortiert.' },
@@ -6138,7 +6139,8 @@ async function zeigeLinkHinweise(){
             : namen.slice(0, -1).join(', ') + ' und ' + namen[namen.length - 1];
     alert(wer + (namen.length === 1 ? ' hat' : ' haben') +
       ' deine Einladung angenommen.\n\nIhr seht ab jetzt gegenseitig eure Watchliste und ' +
-      '„gesehen"-Liste. Lösen kannst du das links oben unter „Gemeinsam schauen".');
+      '„gesehen"-Liste. Unter „Match" seht ihr eure Übereinstimmungen. ' +
+      'Lösen kannst du das links oben unter „Gemeinsam schauen".');
   } catch (e) { /* Hinweis ist Beiwerk -- ein Fehler darf den Start nicht stoeren */ }
 }
 
