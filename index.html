@@ -624,6 +624,11 @@
      user-select:none, weil sonst jeder Wisch ueber den Satz Text markiert. */
   .modal-overlay .modal.tour-modal { max-width:420px; max-height:88vh; overflow-y:auto;
     touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+  /* Schneidet die gleitende Seite am Rand ab, damit sie beim Wischen nicht
+     ueber die Karte hinauslaeuft (siehe tourWischen). Punkte und die beiden
+     Knoepfe stehen bewusst AUSSERHALB und bleiben deshalb stehen -- sie
+     gehoeren zum Fenster, nicht zur Seite. */
+  .tour-fenster { overflow:hidden; }
   .tour-bild { margin:14px 0; }
   /* max-height statt fester Breite: Das Bild schrumpft bei Bedarf als Ganzes,
      statt in die Hoehe gezogen zu werden. -webkit-user-drag verhindert, dass am
@@ -1320,9 +1325,16 @@
 <div id="tourModal" class="modal-overlay" style="display:none">
   <div class="modal tour-modal">
     <button class="modal-x" id="tourX" aria-label="Schließen">✕</button>
-    <h3 id="tourTitel"></h3>
-    <div class="tour-bild" id="tourBild"></div>
-    <p class="tour-text" id="tourText"></p>
+    <!-- Nur der Inhalt gleitet beim Wischen, das Fenster selbst steht still
+         (siehe tourWischen). .tour-fenster schneidet dabei ab, damit die
+         gleitende Seite nicht ueber den Rand der Karte hinauslaeuft. -->
+    <div class="tour-fenster">
+      <div class="tour-inhalt" id="tourInhalt">
+        <h3 id="tourTitel"></h3>
+        <div class="tour-bild" id="tourBild"></div>
+        <p class="tour-text" id="tourText"></p>
+      </div>
+    </div>
     <div class="tour-punkte" id="tourPunkte"></div>
     <div class="tour-nav">
       <button type="button" id="tourZurueck" class="modal-no">Zurück</button>
@@ -4356,13 +4368,16 @@ document.getElementById('tourX').onclick = closeTour;
    Weg gehen (siehe attachSwipeToRemove), und mit derselben Richtungserkennung:
    Wer senkrecht zieht, will die Karte scrollen, nicht blaettern.
 
-   An beiden Enden federt die Karte nur zurueck. Ein Wisch nach links auf der
+   An beiden Enden federt der Inhalt nur zurueck. Ein Wisch nach links auf der
    letzten Seite schliesst den Einstieg also NICHT -- aus demselben Grund, aus
    dem ein Klick auf den Rand ihn nicht schliesst (siehe unten): Beim
    Durchblaettern liegt der Finger schnell daneben. */
 (function tourWischen(){
   var karte = _tourModal.querySelector('.tour-modal');
-  if (!karte) return;
+  // Gewischt wird ueberall auf der Karte, bewegt wird aber NUR der Inhalt: Eine
+  // mitwandernde Karte sieht aus, als haette man das Fenster selbst angefasst.
+  var inhalt = document.getElementById('tourInhalt');
+  if (!karte || !inhalt) return;
   var SCHWELLE = 60;          // kuerzer als bei den Zeilen: die Karte ist schmaler
   var aktiv = false, achse = null, startX = 0, startY = 0, dx = 0;
   function amEnde(d){
@@ -4382,21 +4397,21 @@ document.getElementById('tourX').onclick = closeTour;
     if (achse === null) {
       if (Math.abs(cdx) < 8 && Math.abs(cdy) < 8) return;
       achse = Math.abs(cdx) > Math.abs(cdy) ? 'x' : 'y';
-      if (achse === 'x') karte.style.transition = 'none';
+      if (achse === 'x') inhalt.style.transition = 'none';
     }
     if (achse !== 'x') return;
     dx = cdx;
-    // Am Anfang und am Ende geht die Karte nur ein Drittel mit: Man sieht, dass
+    // Am Anfang und am Ende geht der Inhalt nur ein Drittel mit: Man sieht, dass
     // die Geste ankommt, und zugleich, dass in diese Richtung nichts mehr kommt.
-    karte.style.transform = 'translateX(' + (amEnde(dx) ? dx / 3 : dx) + 'px)';
+    inhalt.style.transform = 'translateX(' + (amEnde(dx) ? dx / 3 : dx) + 'px)';
     e.preventDefault();
   });
   function ende(){
     if (!aktiv) return;
     aktiv = false;
     if (achse === 'x') {
-      karte.style.transition = 'transform .2s ease';
-      karte.style.transform = '';
+      inhalt.style.transition = 'transform .2s ease';
+      inhalt.style.transform = '';
       if (dx < -SCHWELLE && _tourIndex < TOUR_SLIDES.length - 1) { _tourIndex++; tourZeichnen(); }
       else if (dx > SCHWELLE && _tourIndex > 0) { _tourIndex--; tourZeichnen(); }
     }
