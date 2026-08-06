@@ -2516,7 +2516,7 @@ function einstiegSetzen(){
   inStreamFilterOn = false;
   searchEl.value = '';
   sucheZustandVorher = null;
-  discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+  titelLimit = TITEL_PRO_SEITE;
 }
 function personenAnsichtOeffnen(uid){
   ANSICHT_PERSON = uid;
@@ -2787,10 +2787,9 @@ function sammleEintraege(q){
         const passt = (watchlistFilterOn && isWatched(tab, item[0])) || (seenFilterOn && s.checked[i]);
         if (!passt) return;
         if (inStreamFilterOn && !(s.pool[i] && selectedProviders(s.pool[i].providers).length)) return;
-        // Waehrend einer Suche und mit "Neue entdecken" muss auch die eigene
-        // Liste VOR dem Kuerzen auf discoveryLoadLimit nach dem Suchbegriff
-        // gefiltert werden -- sonst faellt ein gesuchter eigener Titel hinten
-        // heraus, nur weil zehntausende Vorschlaege mit einsortiert wurden.
+        // Der Suchbegriff muss auch auf die eigene Liste VOR dem Kuerzen auf
+        // titelLimit wirken -- sonst faellt ein gesuchter eigener Titel hinten
+        // heraus, nur weil er nicht unter die ersten 25 kommt.
         if (q && !(s.pool[i] && poolItemMatchesQuery(s.pool[i], q))) return;
         eintraege.push({ art: 'eigen', tab: tab, idx: i, pool: s.pool[i] });
       });
@@ -2911,10 +2910,9 @@ function render() {
   list.classList.add('main-list');
   list.innerHTML = '';
   updateSortMenuActive();
-  // Nur mit "Neue entdecken" wird vorab nach dem Suchbegriff gefiltert (die Liste ist
-  // dann lang genug, dass gekuerzt werden muss). Ohne Entdecken bleibt es beim
-  // guenstigeren Ein-/Ausblenden per applyFilter() am Ende -- dort wird bei
-  // jedem Tastendruck nichts neu gebaut.
+  // Der Suchbegriff muss VOR dem Kuerzen greifen, sonst blieben Treffer jenseits
+  // von titelLimit unsichtbar. Steht nichts im Feld, gibt es auch nichts zu
+  // filtern -- dann bleibt q leer und sammleEintraege spart sich die Arbeit.
   const q = (discoverFilterOn || sucheAktiv()) ? searchEl.value.trim().toLowerCase() : '';
   const eintraege = sammleEintraege(q);
   const sortBy = effectiveSort(activeTab);
@@ -2922,9 +2920,10 @@ function render() {
   eintraege.forEach(function(e){ werte.set(e, eintragSortwert(e, sortBy, profile)); });
   eintraege.sort(function(a, b){ return werte.get(b) - werte.get(a); });
   if (!eintraege.length) { renderLeerzustand(q); kinoHinweisAnhaengen(q); return; }
-  // Gekuerzt wird nur, wenn "Neue entdecken" aktiv ist -- die eigenen Listen sind
-  // kurz genug, um sie immer vollstaendig zu zeigen.
-  const sichtbar = discoverFilterOn ? eintraege.slice(0, discoveryLoadLimit) : eintraege;
+  // Gekuerzt wird in JEDER Liste, auch in Watchliste und Gesehen (siehe
+  // TITEL_PRO_SEITE): Erst sortieren, dann die ersten 25 zeichnen, den Rest
+  // holt "Mehr laden" nach.
+  const sichtbar = eintraege.slice(0, titelLimit);
   sichtbar.forEach(function(e){
     list.appendChild(e.art === 'eigen'
       ? eigeneZeileLi(e.tab, e.idx, profile)
@@ -2937,7 +2936,7 @@ function render() {
     moreBtn.className = 'load-more-btn';
     moreBtn.textContent = 'Mehr laden';
     moreBtn.onclick = function(){
-      discoveryLoadLimit += DISCOVERY_LOAD_MORE_STEP;
+      titelLimit += NACHLADE_SCHRITT;
       renderCurrentTab();
     };
     list.appendChild(moreBtn);
@@ -3196,13 +3195,23 @@ tabBtns.serien.onclick = () => setTab('serien');
 // Knopf steht nur deshalb in derselben Reihe, weil er fuer den Nutzer dieselbe
 // Rolle spielt: einer von drei Bereichen, zwischen denen man direkt wechselt.
 tabBtns.kino.onclick = () => { if (!cinemaMode) openCinemaPage(); };
-// "Neue entdecken" zeigt anfangs 250 Titel, "Mehr laden" haengt jeweils 50 weitere
-// an; ein Wechsel von Filter oder Sortierung gilt als neue Liste und faengt
-// wieder bei 250 an (siehe die Reset-Stellen: Status-Toggles, Sortier-Menue,
-// Tab-Wechsel). Ohne "Neue entdecken" wird gar nicht gekuerzt (siehe render).
-const DISCOVERY_PAGE_SIZE = 250;
-const DISCOVERY_LOAD_MORE_STEP = 50;
-let discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+// Jede Liste unter Filme und Serien zeigt anfangs 25 Titel, "Mehr laden" haengt
+// jeweils 25 weitere an; ein Wechsel von Filter oder Sortierung gilt als neue
+// Liste und faengt wieder bei 25 an (siehe die Reset-Stellen: Status-Toggles,
+// Sortier-Menue, Tab-Wechsel, Suche).
+//
+// Gilt fuer ALLE drei Status, nicht nur fuer "Neue entdecken": Frueher wurden
+// Watchliste und Gesehen ungekuerzt gerendert ("die sind ja kurz") -- bei ein
+// paar hundert markierten Titeln baut das jedes Mal mehrere hundert Zeilen samt
+// Postern auf, bevor ueberhaupt etwas zu sehen ist. Eine Seite soll nie lang
+// genug werden, dass der Aufbau spuerbar wird.
+//
+// Gekuerzt wird erst NACH dem Sortieren und nach dem Suchbegriff (siehe render/
+// sammleEintraege) -- die 25 sind also immer die 25 besten Treffer, nicht die
+// ersten 25, die zufaellig im Pool standen.
+const TITEL_PRO_SEITE = 25;
+const NACHLADE_SCHRITT = 25;
+let titelLimit = TITEL_PRO_SEITE;
 let sortManual = { filme: null, serien: null };
 function renderList() {
   render();
@@ -3264,7 +3273,7 @@ function sucheZustandAnwenden(){
     // aber anklickbar.
     inStreamFilterOn = false;
     sucheTypen = { f: true, s: true };
-    discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+    titelLimit = TITEL_PRO_SEITE;
   } else if (!jetzt && sucheZustandVorher) {
     watchlistFilterOn = sucheZustandVorher.wl;
     seenFilterOn = sucheZustandVorher.seen;
@@ -3274,14 +3283,14 @@ function sucheZustandAnwenden(){
     if (sucheZustandVorher.kino) kinoStatus = sucheZustandVorher.kino;
     sucheZustandVorher = null;
     sucheTypen = { f: true, s: true };
-    discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+    titelLimit = TITEL_PRO_SEITE;
   }
 }
 // "Neue entdecken" und Watchlist/Gesehen schliessen sich gegenseitig aus.
 //
 // Der Grund gilt ueberall: Entdecken sind zehntausende unmarkierte Titel, die
 // eigenen Listen ein paar Dutzend. Beides landet in EINER gemeinsam sortierten
-// Liste, die bei discoveryLoadLimit abgeschnitten wird (siehe render) -- die
+// Liste, die bei titelLimit abgeschnitten wird (siehe render) -- die
 // eigenen Titel gehen darin unter. Ein Tipp auf "Gesehen" liess deshalb den
 // Knopf aufleuchten, ohne dass sich an der Liste sichtbar etwas aenderte; es
 // sah aus, als reagiere er nicht. Dieselbe Begruendung stand bisher schon beim
@@ -3303,7 +3312,7 @@ function enforceDiscoverLock(){
   if (!watchlistFilterOn && !seenFilterOn) return;   // schon eindeutig
   if (sucheAktiv() && !matchAktiv()) return;
   discoverFilterOn = false;
-  discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+  titelLimit = TITEL_PRO_SEITE;
 }
 // Aktualisiert nur die Button-Zustaende der Filterzeilen -- getrennt von
 // renderCurrentTab(), damit beide unabhaengig voneinander aufgerufen werden
@@ -3388,7 +3397,7 @@ function setTab(t) {
       sucheTypen.f = (k === 'f');
       sucheTypen.s = (k === 's');
       activeTab = t;
-      discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+      titelLimit = TITEL_PRO_SEITE;
       updateFilterRowUI();
       renderCurrentTab();
       return;
@@ -3399,7 +3408,7 @@ function setTab(t) {
     // Bezug haben, solange nur noch ein Typ aktiv ist.
     if (sucheTypen[k]) activeTab = t;
     else activeTab = anderer === 'f' ? 'filme' : 'serien';
-    discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+    titelLimit = TITEL_PRO_SEITE;
     updateFilterRowUI();
     renderCurrentTab();
     return;
@@ -3417,7 +3426,7 @@ function setTab(t) {
   //
   // Der Typ kommt jetzt aus dem Tab, also ist die Entdecken-Liste nach dem
   // Wechsel eine andere -- deshalb wieder von vorne zaehlen.
-  discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+  titelLimit = TITEL_PRO_SEITE;
   updateFilterRowUI();
   renderCurrentTab();
 }
@@ -3456,7 +3465,7 @@ function toggleStatus(feld){
   if (!st.wl && !st.seen && !st.disc) return;
   statusSchreiben(st);
   // Jede Aenderung ergibt eine neue Liste -- "Mehr laden" faengt wieder bei 250 an.
-  discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+  titelLimit = TITEL_PRO_SEITE;
   updateFilterRowUI();
   // Die Liste danach, damit der Knopf sofort umschlaegt (siehe nachDemZeichnen).
   nachDemZeichnen(renderCurrentTab);
@@ -3476,7 +3485,7 @@ btns.discover.onclick = () => {
 // Streaming sind") -- daher kein Mindest-Aktiv-Zwang, nur ein einfacher Toggle.
 btns.inStream.onclick = () => {
   inStreamFilterOn = !inStreamFilterOn;
-  discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+  titelLimit = TITEL_PRO_SEITE;
   updateFilterRowUI();
   renderCurrentTab();
 };
@@ -3562,7 +3571,7 @@ if (sortBtn && sortMenu) {
       var cat = effectiveCat();
       sortManual[cat] = b.dataset.sort;
       saveSortManual();
-      discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
+      titelLimit = TITEL_PRO_SEITE;
       renderCurrentTab();
       updateSortMenuActive();
       sortMenu.style.display = 'none';
@@ -3571,24 +3580,21 @@ if (sortBtn && sortMenu) {
   document.addEventListener('click', function () { sortMenu.style.display = 'none'; });
 }
 
-// Mit aktivem "Neue entdecken" muss die Suche den kompletten Pool neu filtern und
-// rendern (siehe render/poolItemMatchesQuery), nicht nur bereits gerenderte
-// Zeilen per CSS aus-/einblenden -- sonst bleiben Treffer jenseits von
-// discoveryLoadLimit unsichtbar. Ohne "Neue entdecken" ist die Liste kurz und
-// vollstaendig gerendert, dort bleibt es beim guenstigeren Ein-/Ausblenden.
+// Die Suche muss den kompletten Pool neu filtern und rendern (siehe render/
+// poolItemMatchesQuery), nicht nur bereits gerenderte Zeilen per CSS aus- und
+// einblenden -- sonst bleiben Treffer jenseits von titelLimit unsichtbar.
+//
+// Das galt frueher nur mit aktivem "Neue entdecken"; Watchliste und Gesehen
+// wurden ungekuerzt gerendert und deshalb per applyFilter() ein-/ausgeblendet.
+// Seit jede Liste bei TITEL_PRO_SEITE endet, gibt es diesen Sonderfall nicht
+// mehr: Immer neu rendern, immer wieder bei der ersten Seite anfangen.
 searchEl.addEventListener('input', function(){
-  var warSuche = !!sucheZustandVorher;
   sucheZustandAnwenden();
+  titelLimit = TITEL_PRO_SEITE;
   // renderCurrentTab statt renderCinemaPage: Die Suche schaltet auch im Kino
   // alle Status an (siehe sucheZustandAnwenden), das muss sich in der
   // Buttonleiste zeigen -- und die aktualisiert nur updateFilterRowUI.
-  if (cinemaMode) { renderCurrentTab(); return; }
-  if (sucheAktiv() || warSuche || discoverFilterOn) {
-    discoveryLoadLimit = DISCOVERY_PAGE_SIZE;
-    renderCurrentTab();
-  } else {
-    applyFilter();
-  }
+  renderCurrentTab();
 });
 // Protokolliert manuell eingegebene Suchbegriffe fuer spaetere Auswertung (siehe
 // backend/routes/searchLog.js) -- 800ms nach der letzten Eingabe (nicht bei jedem
@@ -6391,7 +6397,7 @@ function poolItemLi(item, score, opts){
 // Prueft, ob ein Pool-Eintrag zu einem Suchbegriff passt -- dieselben Felder,
 // die auch sichtbar in der Zeile stehen (Titel, Originaltitel, Genres, Anbieter,
 // Besetzung, Regie, Hashtags). Wird in sammleEintraege() VOR dem Sortieren/
-// Einschraenken auf discoveryLoadLimit angewendet, damit eine Suche den
+// Einschraenken auf titelLimit angewendet, damit eine Suche den
 // kompletten Pool durchsucht statt nur die aktuell geladene Seite. Besetzung/Regie/Hashtags matchen nur per vollstaendigem Wort
 // (siehe wordExactMatch) -- sonst wuerde z.B. "Heat" faelschlich auf "Heath" in
 // "Heath Ledger" oder auf "Theat" in "TheaterVerfilmung" anschlagen; Titel/
