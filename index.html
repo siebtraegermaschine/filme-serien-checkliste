@@ -614,13 +614,20 @@
   /* Hoehe gedeckelt und notfalls scrollbar: Ohne das wuchs das Fenster mit dem
      Bild ueber den Bildschirm hinaus -- dann war das ✕ oben nicht mehr
      erreichbar und man kam aus dem Einstieg nicht heraus. */
-  .modal-overlay .modal.tour-modal { max-width:420px; max-height:88vh; overflow-y:auto; }
+  /* touch-action:pan-y gibt die senkrechte Richtung an den Browser (die Karte
+     kann hoeher sein als der Schirm, siehe max-height/overflow-y) und behaelt
+     die waagerechte fuer die Blaetter-Geste (siehe tourWischen).
+     user-select:none, weil sonst jeder Wisch ueber den Satz Text markiert. */
+  .modal-overlay .modal.tour-modal { max-width:420px; max-height:88vh; overflow-y:auto;
+    touch-action:pan-y; user-select:none; -webkit-user-select:none; }
   .tour-bild { margin:14px 0; }
   /* max-height statt fester Breite: Das Bild schrumpft bei Bedarf als Ganzes,
-     statt in die Hoehe gezogen zu werden. */
+     statt in die Hoehe gezogen zu werden. -webkit-user-drag verhindert, dass am
+     Rechner statt der Wisch-Geste das Bild selbst aufgenommen wird. */
   .tour-bild img { display:block; margin:0 auto; max-width:100%; max-height:46vh;
     width:auto; height:auto; border-radius:10px;
-    border:1px solid var(--border); background:var(--bg); }
+    border:1px solid var(--border); background:var(--bg);
+    -webkit-user-drag:none; }
   .tour-text { color:var(--text); font-size:14px; line-height:1.6; margin:0; }
   .tour-punkte { display:flex; gap:6px; justify-content:center; margin:16px 0 14px; }
   .tour-punkt { width:7px; height:7px; border-radius:50%; background:var(--border); }
@@ -4304,6 +4311,64 @@ document.getElementById('tourZurueck').onclick = function(){
   if (_tourIndex > 0) { _tourIndex--; tourZeichnen(); }
 };
 document.getElementById('tourX').onclick = closeTour;
+/* Blaettern per Wischgeste -- am Telefon der naheliegende Weg durch eine
+   Bilderfolge, und die beiden Knoepfe unten sind schmal. Nach LINKS wischen
+   heisst vorwaerts (die naechste Seite kommt von rechts herein), nach RECHTS
+   zurueck: dieselbe Richtung wie in jeder Bildergalerie.
+
+   Wie bei den Titelzeilen ueber Pointer Events, damit Finger und Maus denselben
+   Weg gehen (siehe attachSwipeToRemove), und mit derselben Richtungserkennung:
+   Wer senkrecht zieht, will die Karte scrollen, nicht blaettern.
+
+   An beiden Enden federt die Karte nur zurueck. Ein Wisch nach links auf der
+   letzten Seite schliesst den Einstieg also NICHT -- aus demselben Grund, aus
+   dem ein Klick auf den Rand ihn nicht schliesst (siehe unten): Beim
+   Durchblaettern liegt der Finger schnell daneben. */
+(function tourWischen(){
+  var karte = _tourModal.querySelector('.tour-modal');
+  if (!karte) return;
+  var SCHWELLE = 60;          // kuerzer als bei den Zeilen: die Karte ist schmaler
+  var aktiv = false, achse = null, startX = 0, startY = 0, dx = 0;
+  function amEnde(d){
+    return (d < 0 && _tourIndex === TOUR_SLIDES.length - 1) || (d > 0 && _tourIndex === 0);
+  }
+  karte.addEventListener('pointerdown', function(e){
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    // Ueber den Knoepfen nicht -- "Weiter", "Zurueck" und ✕ bleiben normal klickbar.
+    if (e.target.closest('button, a')) return;
+    aktiv = true; achse = null; dx = 0;
+    startX = e.clientX; startY = e.clientY;
+    try { karte.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  karte.addEventListener('pointermove', function(e){
+    if (!aktiv) return;
+    var cdx = e.clientX - startX, cdy = e.clientY - startY;
+    if (achse === null) {
+      if (Math.abs(cdx) < 8 && Math.abs(cdy) < 8) return;
+      achse = Math.abs(cdx) > Math.abs(cdy) ? 'x' : 'y';
+      if (achse === 'x') karte.style.transition = 'none';
+    }
+    if (achse !== 'x') return;
+    dx = cdx;
+    // Am Anfang und am Ende geht die Karte nur ein Drittel mit: Man sieht, dass
+    // die Geste ankommt, und zugleich, dass in diese Richtung nichts mehr kommt.
+    karte.style.transform = 'translateX(' + (amEnde(dx) ? dx / 3 : dx) + 'px)';
+    e.preventDefault();
+  });
+  function ende(){
+    if (!aktiv) return;
+    aktiv = false;
+    if (achse === 'x') {
+      karte.style.transition = 'transform .2s ease';
+      karte.style.transform = '';
+      if (dx < -SCHWELLE && _tourIndex < TOUR_SLIDES.length - 1) { _tourIndex++; tourZeichnen(); }
+      else if (dx > SCHWELLE && _tourIndex > 0) { _tourIndex--; tourZeichnen(); }
+    }
+    achse = null; dx = 0;
+  }
+  karte.addEventListener('pointerup', ende);
+  karte.addEventListener('pointercancel', ende);
+})();
 // Bewusst KEIN Schliessen per Klick auf den Rand: Beim Durchtippen liegt der
 // Finger schnell daneben, und der Einstieg waere weg, ohne dass man es wollte.
 document.addEventListener('keydown', function(e){
