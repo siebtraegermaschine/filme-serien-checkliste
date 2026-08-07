@@ -2248,6 +2248,56 @@ var POOL_OHNE_TMDB = new Map();   // 'movie|der name' -> Pool-Eintrag ohne tmdbI
    Bei Gleichstand gewinnt der mit echter Kennung: Er bringt Schlagwoerter,
    einen Poster-Pfad und den Kino-Abgleich mit. */
 var DUBLETTEN = new Map();   // ausgeblendete title_id -> beibehaltene title_id
+/* Die Zuordnungstabelle ist per TMDB-Suche entstanden und trifft nicht immer:
+   "Your Name." (Makoto Shinkai) zeigt dort auf "Call Me by Your Name" (Luca
+   Guadagnino), "Der letzte Samurai" auf einen japanischen Film gleichen
+   Zeitraums. Blind uebernommen wuerden diese Filme aus der App verschwinden --
+   der schlimmste denkbare Ausgang beim Entdoppeln.
+   Zwei von 591 sind falsch, aber welche zwei, weiss man vorher nicht.
+
+   Deshalb muss ein Paar zusaetzlich zusammenpassen: gemeinsame Regie ODER
+   aehnlicher Titel. Das eine deckt die Faelle ab, in denen die Namen voellig
+   auseinandergehen ("Baby Reindeer"/"Rentierbaby"), das andere die, in denen
+   die Regie unterschiedlich geschrieben oder gar nicht gefuellt ist
+   ("Joel Coen und Ethan Coen" gegen "Joel Coen", "Squid Game" gegen 황동혁).
+
+   Im Zweifel bleibt ein Titel lieber doppelt stehen als zu verschwinden. Auf dem
+   aktuellen Bestand trifft das vier Paare -- darunter die beiden falschen. */
+function namensMenge(s){
+  return String(s || '').split(/\s*(?:,|\/|&|\bund\b)\s*/)
+    .map(function(x){ return x.trim().toLowerCase(); })
+    .filter(Boolean);
+}
+function titelWorte(s){
+  return String(s || '').toLowerCase()
+    .replace(/[^0-9a-zäöüßáàéèíìóòúùâêîôûçñ]+/g, ' ')
+    .split(' ').filter(Boolean);
+}
+function titelAehnlich(a, b){
+  var wa = titelWorte(a), wb = titelWorte(b);
+  if (!wa.length || !wb.length) return false;
+  // Einer ist der Anfang des anderen -- wortweise, nicht zeichenweise:
+  // "Kill Bill Volume 1" darf nicht als Anfang von "... Volume 2" gelten.
+  var n = Math.min(wa.length, wb.length);
+  var gleich = true;
+  for (var i = 0; i < n; i++) if (wa[i] !== wb[i]) { gleich = false; break; }
+  if (gleich) return true;
+  // Ueberschneidung nur auf den VERSCHIEDENEN Woertern. Ohne das Entdoppeln
+  // zaehlte ein zweites "der" ein zweites Mal als Treffer -- "The Last Sword -
+  // Der letzte Feldzug der Samurai" kam so gegen "Der letzte Samurai" auf 4/7
+  // statt 3/7 und rutschte knapp ueber die Schwelle. Genau der Fall, den die
+  // Absicherung abfangen soll.
+  var ohneWdh = function(l){ return l.filter(function(w, i){ return l.indexOf(w) === i; }); };
+  var ua = ohneWdh(wa), ub = ohneWdh(wb);
+  var gemeinsam = ua.filter(function(w){ return ub.indexOf(w) !== -1; }).length;
+  var vereint = ua.length + ub.length - gemeinsam;
+  return vereint > 0 && gemeinsam / vereint >= 0.5;
+}
+function passtZusammen(a, b){
+  var ra = namensMenge(a.d), rb = namensMenge(b.d);
+  if (ra.length && rb.length && ra.some(function(n){ return rb.indexOf(n) !== -1; })) return true;
+  return titelAehnlich(a.t, b.t);
+}
 function ohneDubletten(liste){
   var gruppen = new Map();
   liste.forEach(function(item){
@@ -2261,6 +2311,9 @@ function ohneDubletten(liste){
   var raus = new Set();
   gruppen.forEach(function(g){
     if (g.length < 2) return;
+    // Der meistbewertete Eintrag ist der Bezugspunkt und zugleich der, der
+    // bleibt. Bei Gleichstand der mit echter Kennung: Er bringt Schlagwoerter,
+    // einen Poster-Pfad und den Kino-Abgleich mit.
     var sieger = g.reduce(function(a, b){
       var va = a.vc || 0, vb = b.vc || 0;
       if (vb !== va) return vb > va ? b : a;
@@ -2268,9 +2321,13 @@ function ohneDubletten(liste){
     });
     g.forEach(function(x){
       if (x === sieger) return;
+      // Nur zusammenlegen, was auch zusammengehoert (siehe passtZusammen) --
+      // sonst verschwindet ein Titel wegen einer falschen Zuordnung.
+      if (!passtZusammen(sieger, x)) return;
       raus.add(x);
       if (x.realId != null && sieger.realId != null) DUBLETTEN.set(x.realId, sieger.realId);
       luecken(sieger, x);
+      aliasAufnehmen(sieger, x);
     });
   });
   return raus.size ? liste.filter(function(i){ return !raus.has(i); }) : liste;
@@ -2279,6 +2336,26 @@ function ohneDubletten(liste){
    bei 27 Titeln steht die Regie nur dort. Beim Ausblenden wandern solche
    Angaben auf den beibehaltenen Eintrag, statt verloren zu gehen. Nur Luecken
    werden gefuellt, vorhandene Werte bleiben unangetastet. */
+/* Der Name des ausgeblendeten Eintrags bleibt als Suchbegriff erhalten.
+   Viele Titel laufen unter zwei Namen -- deutsch und original ("Baby Reindeer"
+   / "Rentierbaby", "Eternal Sunshine of the Spotless Mind" / "Vergiss mein
+   nicht!") --, und welcher davon in `titles.title` steht, ist Zufall. Ohne
+   diesen Schritt waere die eine Haelfte davon ab jetzt gar nicht mehr zu finden:
+   original_title ist nur bei 165 von 26.849 Titeln ueberhaupt gefuellt, bei
+   keinem der genannten Beispiele.
+
+   Nur fuer die Suche, nicht fuer die Anzeige -- in der Zeile und in den Details
+   steht weiterhin genau ein Titel. */
+function aliasAufnehmen(ziel, quelle){
+  [quelle.t, quelle.ot].forEach(function(name){
+    if (!name) return;
+    if (normTitle(name) === normTitle(ziel.t)) return;
+    if (ziel.ot && normTitle(name) === normTitle(ziel.ot)) return;
+    if (!ziel.alias) ziel.alias = [];
+    if (ziel.alias.some(function(a){ return normTitle(a) === normTitle(name); })) return;
+    ziel.alias.push(name);
+  });
+}
 function luecken(ziel, quelle){
   ['ot', 'd', 'fsk', 'ov'].forEach(function(f){
     if (!ziel[f] && quelle[f]) ziel[f] = quelle[f];
@@ -3881,6 +3958,11 @@ function buildSearchIndex(){
   }
   POOL.forEach(function(item){
     add(item.t, 'Titel');
+    // Zweitnamen ausgeblendeter Dubletten (siehe aliasAufnehmen) als eigene
+    // Vorschlagsart: Wer "Baby Reindeer" tippt, soll den Vorschlag sehen und
+    // danach "Rentierbaby" in der Liste finden. Als "Titel" gefuehrt waere es
+    // eine Behauptung -- unter diesem Namen steht der Titel ja nirgends.
+    (item.alias || []).forEach(function(a){ add(a, 'Alternativtitel'); });
     (item.g || []).forEach(function(g){ add(g, 'Genre'); });
     (item.c || []).forEach(function(c){ add(c, 'Darsteller'); });
     add(item.d, 'Regie');
@@ -6385,7 +6467,7 @@ function poolItemLi(item, score, opts){
   // exactBlob (Besetzung, Regie, Hashtags/Keywords) nur per vollstaendigem Wort
   // -- verhindert z.B. dass "Heat" faelschlich auf "Heath" in "Heath Ledger"
   // oder auf "Theat" in einem Hashtag wie "TheaterVerfilmung" anschlaegt.
-  li.dataset.mainBlob = [item.t, item.ot, item.y, (item.g||[]).join(' ')].filter(Boolean).join(' ');
+  li.dataset.mainBlob = [item.t, item.ot, (item.alias||[]).join(' '), item.y, (item.g||[]).join(' ')].filter(Boolean).join(' ');
   li.dataset.exactBlob = [].concat(item.c||[], item.d ? [item.d] : [], kwSuchtexte(item.kw)).join(' ');
   var poster = item.poster64 ? '<img class="dposter" loading="lazy" src="'+item.poster64+'" alt="">'
              : item.p ? '<img class="dposter" loading="lazy" src="'+POSTER+item.p+'" alt="">'
@@ -6586,7 +6668,9 @@ function poolItemLi(item, score, opts){
 // Genres duerfen weiterhin per Teilstring matchen.
 function poolItemMatchesQuery(item, q){
   if (!q) return true;
-  var hay = [item.t, item.ot, item.y, (item.g||[]).join(' '),
+  // item.alias: die Namen ausgeblendeter Dubletten (siehe aliasAufnehmen) --
+  // damit "Baby Reindeer" auch dann trifft, wenn der Titel "Rentierbaby" heisst.
+  var hay = [item.t, item.ot, (item.alias||[]).join(' '), item.y, (item.g||[]).join(' '),
              (item.providers||[]).map(function(p){ return p.name; }).join(' ')]
     .filter(Boolean).join(' ').toLowerCase();
   if (hay.includes(q)) return true;
