@@ -3527,9 +3527,14 @@ try {
 function saveSortManual(){
   try { localStorage.setItem(SORT_MANUAL_KEY, JSON.stringify(Object.assign({}, sortManual, { _ts: Date.now() }))); } catch (e) {}
 }
-function resetSortManual(){
+// Nur den Merker leeren, ohne zu zeichnen -- fuer Aufrufer, die ohnehin gleich
+// neu rendern (siehe goHome). render() ruft updateSortMenuActive() selbst auf.
+function sortManualLeeren(){
   sortManual.filme = null; sortManual.serien = null;
   try { localStorage.removeItem(SORT_MANUAL_KEY); } catch (e) {}
+}
+function resetSortManual(){
+  sortManualLeeren();
   updateSortMenuActive();
   renderCurrentTab();
 }
@@ -4714,6 +4719,12 @@ function goHome(){
   setTab('filme');
   einstiegOffen = true;
   startEinstiegSetzen();
+  // Auch die Sortierung faengt hier von vorne an: Das Logo ist der Weg zurueck
+  // auf Anfang, und dazu gehoert die automatische Wahl (ab 10 markierten Titeln
+  // Taste-Score, sonst Community-Bewertung -- siehe effectiveSort). Eine einmal
+  // von Hand gesetzte Sortierung ueberdeckte sie sonst bis zu 24 Stunden lang,
+  // ohne dass man noch wuesste, dass man sie gesetzt hat.
+  sortManualLeeren();
   renderCurrentTab();
   window.scrollTo(0, 0);
 }
