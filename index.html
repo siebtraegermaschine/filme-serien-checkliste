@@ -2230,23 +2230,110 @@ function genresKanonisch(liste){
   return raus;
 }
 var POOL_OHNE_TMDB = new Map();   // 'movie|der name' -> Pool-Eintrag ohne tmdbId
+/* ---- Dubletten: derselbe Titel steckt zweimal im Bestand ----
+   Die 600 urspruenglich kuratierten Katalog-Titel kamen beim Relaunch ohne
+   TMDB-Kennung herein. Denselben Film gibt es meist ein zweites Mal aus dem
+   TMDB-Abzug -- 591 der 600, nachgezaehlt. Wer einen davon markierte, bekam den
+   Zwilling weiter unter "Neue entdecken" vorgeschlagen.
+
+   Erkannt wird ueber die nachtraeglich ermittelte Kennung (tmdbIdAufgeloest,
+   siehe backend/routes/titles.js), nicht ueber den Namen. Der Name taugt dafuer
+   nicht: "Baby Reindeer" heisst im Abzug "Rentierbaby", "Eternal Sunshine of the
+   Spotless Mind" heisst "Vergiss mein nicht!" -- und umgekehrt sind
+   "Gabriel's Inferno Part II" und "Part III" trotz fast gleichen Namens
+   verschiedene Filme. Ueber die Kennung ist beides eindeutig.
+
+   Es bleibt der Eintrag mit den meisten Bewertungen; die anderen werden
+   ausgeblendet, nicht geloescht -- in der Datenbank steht weiterhin alles.
+   Bei Gleichstand gewinnt der mit echter Kennung: Er bringt Schlagwoerter,
+   einen Poster-Pfad und den Kino-Abgleich mit. */
+var DUBLETTEN = new Map();   // ausgeblendete title_id -> beibehaltene title_id
+function ohneDubletten(liste){
+  var gruppen = new Map();
+  liste.forEach(function(item){
+    if (item.tmdbRef == null) return;
+    var k = item.type + ':' + item.tmdbRef;
+    var g = gruppen.get(k);
+    if (!g) { g = []; gruppen.set(k, g); }
+    g.push(item);
+  });
+  DUBLETTEN.clear();
+  var raus = new Set();
+  gruppen.forEach(function(g){
+    if (g.length < 2) return;
+    var sieger = g.reduce(function(a, b){
+      var va = a.vc || 0, vb = b.vc || 0;
+      if (vb !== va) return vb > va ? b : a;
+      return (b.tmdbId != null && a.tmdbId == null) ? b : a;
+    });
+    g.forEach(function(x){
+      if (x === sieger) return;
+      raus.add(x);
+      if (x.realId != null && sieger.realId != null) DUBLETTEN.set(x.realId, sieger.realId);
+      luecken(sieger, x);
+    });
+  });
+  return raus.size ? liste.filter(function(i){ return !raus.has(i); }) : liste;
+}
+/* Der kuratierte Katalog-Eintrag weiss stellenweise mehr als der TMDB-Abzug --
+   bei 27 Titeln steht die Regie nur dort. Beim Ausblenden wandern solche
+   Angaben auf den beibehaltenen Eintrag, statt verloren zu gehen. Nur Luecken
+   werden gefuellt, vorhandene Werte bleiben unangetastet. */
+function luecken(ziel, quelle){
+  ['ot', 'd', 'fsk', 'ov'].forEach(function(f){
+    if (!ziel[f] && quelle[f]) ziel[f] = quelle[f];
+  });
+  ['c', 'kw', 'g'].forEach(function(f){
+    if ((!ziel[f] || !ziel[f].length) && quelle[f] && quelle[f].length) ziel[f] = quelle[f];
+  });
+  if (ziel.y == null && quelle.y != null) ziel.y = quelle.y;
+  // Das Poster gesondert und nur, wenn gar keines da ist: poster64 hat beim
+  // Zeichnen Vorrang vor dem TMDB-Pfad (siehe detPosterHtml). Blind uebernommen
+  // haette der beibehaltene Titel wieder das alte eingebettete Bild gezeigt --
+  // samt der Megabytes, die mit dem Ausblenden gerade wegfallen.
+  if (!ziel.p && !ziel.poster64) {
+    ziel.p = quelle.p || null;
+    ziel.poster64 = quelle.poster64 || null;
+  }
+}
+/* Legt Markierungen und ausgeblendete Titel von einem verdeckten Eintrag auf den
+   beibehaltenen um. Ohne das verschwaende die Watchliste von jemandem, der
+   seinerzeit den Katalog-Eintrag markiert hat -- der steckt jetzt womoeglich
+   nicht mehr im POOL. Ein bereits vorhandener Eintrag am Sieger gewinnt; die
+   Datenbank bleibt unberuehrt, umgelegt wird nur der Stand im Browser. */
+function dublettenUmlegen(){
+  if (!DUBLETTEN.size) return;
+  DUBLETTEN.forEach(function(sieger, verdeckt){
+    var e = PROGRESS.get(verdeckt);
+    if (e && !PROGRESS.has(sieger)) PROGRESS.set(sieger, e);
+    if (HIDDEN_TITLE_IDS.has(verdeckt)) HIDDEN_TITLE_IDS.add(sieger);
+  });
+}
 function buildPool(combinedRows, streamDoc){
   const byKey = new Map(); // 'movie:123' -> Pool-Eintrag (nur wenn tmdbId bekannt)
   const catalogByName = new Map(); // 'movie|departed - unter feinden' -> Katalog-Pool-Eintrag
   POOL = combinedRows.map(function(row){
-    const item = {
+    return {
       realId: row.id, tmdbId: row.tmdbId, type: row.type,
+      // Kennung fuer den Dublettenabgleich: die eigene, sonst die nachtraeglich
+      // ermittelte. Bewusst getrennt von tmdbId -- der Katalog-Titel ist
+      // weiterhin nicht regulaer mit TMDB verknuepft (siehe serializeTitle).
+      tmdbRef: row.tmdbId != null ? row.tmdbId : (row.tmdbIdAufgeloest != null ? row.tmdbIdAufgeloest : null),
       t: row.title, ot: row.originalTitle, y: row.year, g: genresKanonisch(row.genres), d: row.director || '',
       c: row.cast || [], kw: row.keywords || [], p: row.posterPath || null,
       poster64: row.posterBase64 || null, r: row.rating, vc: row.voteCount, fsk: row.certification || null, ov: row.plot || '',
       source: row.source, providers: [],
     };
-    if (row.source === 'catalog') catalogByName.set(row.type + '|' + normTitle(row.title), item);
-    if (row.tmdbId != null) byKey.set(row.type + ':' + row.tmdbId, item);
-    return item;
   });
-  // Duplikate entfernen: Discovery-/Streaming-Titel, die es unter demselben Namen
-  // schon im (unabhaengig davon gepflegten) Katalog gibt -- Katalog-Version gewinnt.
+  POOL = ohneDubletten(POOL);
+  // Namensregel als Rueckfall fuer die Handvoll Titel, zu denen es keine
+  // aufgeloeste Kennung gibt (9 von 600): Discovery-/Streaming-Titel, die es
+  // unter demselben Namen schon im Katalog gibt -- Katalog-Version gewinnt.
+  // Erst JETZT gebaut, aus dem bereits entdoppelten POOL: sonst zeigte
+  // catalogByName auf Eintraege, die gar nicht mehr drin sind.
+  POOL.forEach(function(item){
+    if (item.source === 'catalog') catalogByName.set(item.type + '|' + normTitle(item.t), item);
+  });
   POOL = POOL.filter(function(item){
     return item.source === 'catalog' || !catalogByName.has(item.type + '|' + normTitle(item.t));
   });
@@ -6046,6 +6133,9 @@ async function loadUserProgressAndRefresh(){
     ]);
     rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }));
     uebernehmeVersteckte(hidden);
+    // Wer seinerzeit den Katalog-Eintrag markiert hat, dessen Markierung haengt
+    // an einer id, die jetzt womoeglich verdeckt ist (siehe ohneDubletten).
+    dublettenUmlegen();
   }
   USER_DATA_SIG = userDataSignature();
   updateProfileBtn();
@@ -6162,6 +6252,7 @@ async function refreshOnResume(){
     rows.forEach(function(r){ neuerFortschritt.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }); });
     PROGRESS = neuerFortschritt;
     uebernehmeVersteckte(hidden);
+    dublettenUmlegen();   // siehe loadUserProgressAndRefresh
   } catch (e) {
     // Kein Netz beim Zurueckkehren -- der bisherige Stand bleibt einfach stehen.
     return;

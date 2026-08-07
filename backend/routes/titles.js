@@ -29,6 +29,19 @@ export function serializeTitle(row, { withPlot = true } = {}) {
     posterBase64: row.poster_base64,
     source: row.source,
   };
+  // Nachtraeglich ermittelte TMDB-Kennung der 600 urspruenglich kuratierten
+  // Katalog-Titel (title_tmdb_resolution, gefuellt von backfill-catalog-*.mjs).
+  // Sie steht bewusst NICHT in tmdbId: Dort wuerde sie so aussehen, als sei der
+  // Titel regulaer mit TMDB verknuepft -- er ist es nicht, in `titles` ist die
+  // Spalte weiterhin leer, und der Upsert in /ensure haengt daran.
+  //
+  // Wozu: Derselbe Film steckt oft zweimal im Bestand -- einmal als kuratierter
+  // Katalog-Titel ohne Kennung, einmal aus dem TMDB-Abzug. Ueber den Namen ist
+  // das nicht zuverlaessig zu erkennen ("Baby Reindeer" heisst dort
+  // "Rentierbaby"), ueber diese Kennung dagegen exakt (siehe buildPool).
+  if (row.tmdb_id == null && row.aufgeloeste_tmdb_id != null) {
+    out.tmdbIdAufgeloest = row.aufgeloeste_tmdb_id;
+  }
   if (withPlot) out.plot = row.plot;
   return out;
 }
@@ -44,20 +57,22 @@ router.get('/', async (req, res) => {
   const conditions = [];
   const params = [];
 
+  // Spalten durchgehend mit "t." qualifiziert -- die Abfrage unten verbindet mit
+  // title_tmdb_resolution, ohne Praefix waere z.B. tmdb_id mehrdeutig.
   if (type === 'movie' || type === 'series') {
     params.push(type);
-    conditions.push(`type = $${params.length}`);
+    conditions.push(`t.type = $${params.length}`);
   }
   if (typeof source === 'string' && source.trim()) {
     const sources = source.split(',').map((s) => s.trim()).filter(Boolean);
     if (sources.length) {
       params.push(sources);
-      conditions.push(`source = ANY($${params.length})`);
+      conditions.push(`t.source = ANY($${params.length})`);
     }
   }
   if (typeof search === 'string' && search.trim()) {
     params.push(`%${search.trim()}%`);
-    conditions.push(`title ILIKE $${params.length}`);
+    conditions.push(`t.title ILIKE $${params.length}`);
   }
 
   // Kein LIMIT: der Client baut aus dieser Antwort seinen kompletten Titel-Pool
@@ -67,8 +82,15 @@ router.get('/', async (req, res) => {
   // dazu fuehrte, dass Titel wie "Unfamiliar" nie eine echte title_id vom Client
   // bekamen und ihr Watchlist-/Gesehen-Status nie dauerhaft gespeichert wurde.
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
+  // title_tmdb_resolution nur fuer die Titel ohne eigene Kennung -- siehe
+  // serializeTitle. LEFT JOIN, damit ein fehlender Eintrag den Titel nicht
+  // verschluckt.
   const { rows } = await pool.query(
-    `SELECT * FROM titles ${where} ORDER BY title ASC`,
+    `SELECT t.*, r.tmdb_id AS aufgeloeste_tmdb_id
+       FROM titles t
+       LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id AND t.tmdb_id IS NULL
+       ${where}
+      ORDER BY t.title ASC`,
     params
   );
   // Ohne Inhaltsangaben (siehe serializeTitle) -- das ist die grosse Liste, hier
