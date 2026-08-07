@@ -6355,23 +6355,29 @@ function poolItemLi(item, score, opts){
     requireLogin(async () => {
       seenBtn.disabled = true;
       try {
-        var id = await ensurePoolItem(item);
+        // Siehe Watchlist-Handler weiter unten: nur warten, wenn der Titel noch
+        // gar keine Kennung hat.
+        var id = item.realId != null ? item.realId : await ensurePoolItem(item);
         var next = !getSeen(id);
-        var ok = true;
         // Watchlist und Gesehen schliessen sich gegenseitig aus (siehe toggleWatched).
+        var patch;
         if (next) {
           // Neu als "gesehen" markiert -- vorher Sterne-Bewertung abfragen (fliesst
           // gewichtet in den Taste-Score ein, siehe buildProfile). Bricht die Person
           // ab, bleibt "gesehen" unveraendert.
           var stars = await openRatingStars(item.t);
           if (stars == null) { return; }
-          try { await updateProgressRemote(id, { seen: true, watchlist: false, rating: stars }); } catch (err) { ok = false; }
+          patch = { seen: true, watchlist: false, rating: stars };
         } else {
-          try { await updateProgressRemote(id, { seen: false }); } catch (err) { ok = false; }
+          patch = { seen: false };
         }
-        // Ohne erfolgreichen Server-Update keine optimistische UI-Aenderung --
-        // sonst zeigt der Button "an", obwohl serverseitig nichts gespeichert wurde.
-        if (!ok) return;
+        // Erst zeigen, dann senden -- Begruendung beim Watchlist-Handler unten.
+        var senden = updateProgressRemote(id, patch);
+        senden.catch(function(){
+          rebuild();
+          renderCurrentTab();
+          alert('Konnte nicht gespeichert werden. Bitte erneut versuchen.');
+        });
         seenBtn.classList.toggle('on', next);
         if (next) { wlBtn.classList.remove('on'); wlBtn.querySelector('.wl-glyph').textContent = '☆'; }
         // "Gesehen" sorgt (wie Watchlist) dafuer, dass der Titel oben unter Filme/
@@ -6397,7 +6403,11 @@ function poolItemLi(item, score, opts){
     requireLogin(async () => {
       wlBtn.disabled = true;
       try {
-        var id = await ensurePoolItem(item);
+        // Nur warten, wenn es wirklich noetig ist: Ein Titel, der bloss aus dem
+        // Streaming-Angebot bekannt ist (realId null), muss erst serverseitig
+        // angelegt werden. Alle anderen -- also praktisch die ganze
+        // Entdecken-Liste -- haben ihre Kennung laengst.
+        var id = item.realId != null ? item.realId : await ensurePoolItem(item);
         var next = !getWatchlistFlag(id);
         // Watchlist und Gesehen schliessen sich gegenseitig aus (siehe toggleWatched).
         // Beim Wechsel von "gesehen" deshalb erst nachfragen (siehe
@@ -6405,25 +6415,32 @@ function poolItemLi(item, score, opts){
         if (next && getSeen(id) && !(await bestaetigeGesehenZuWatchlist())) return;
         var patch = { watchlist: next };
         if (next) patch.seen = false;
-        var ok = true;
-        try { await updateProgressRemote(id, patch); } catch (err) { ok = false; }
-        if (!ok) return;
-        // Direktes Update des eigenen Buttons (analog zum Gesehen-Handler oben) --
-        // noetig, weil loadCatalogAndRefresh() unten zwar #list neu rendert, aber
-        // NICHT ein ggf. gerade offenes "Aehnliche Titel"-Popup (eigene, davon
-        // unabhaengige Liste). Ohne das hier passierte in diesem Popup beim Klick
-        // auf Watchlist sichtbar gar nichts.
+        // Erst zeigen, dann senden. updateProgressRemote schreibt PROGRESS noch
+        // synchron, bevor es die Anfrage abschickt, und nimmt es bei einem Fehler
+        // selbst wieder zurueck -- der oertliche Stand stimmt also sofort.
+        //
+        // Vorher wurde die Antwort abgewartet, bevor ueberhaupt etwas passierte:
+        // Zwischen Tipp und Verschwinden der Zeile lagen dadurch zwei bis drei
+        // Sekunden, in denen nichts zu sehen war. Es sah aus, als sei der Klick
+        // nicht angekommen -- also tippte man noch einmal.
+        var senden = updateProgressRemote(id, patch);
+        // Direktes Update des eigenen Buttons: noetig, weil das Neuzeichnen unten
+        // zwar #list erfasst, aber NICHT ein ggf. offenes "Aehnliche Titel"-Popup
+        // (eigene, davon unabhaengige Liste).
         wlBtn.classList.toggle('on', next);
         wlBtn.querySelector('.wl-glyph').textContent = next ? '★' : '☆';
         if (next) seenBtn.classList.remove('on');
-        // Watchlist-Aenderung wirkt sich auf Filme/Serien/Streaming (oben) aus --
-        // rebuild() liest dafuer direkt aus POOL/PROGRESS (beide sind durch
-        // ensurePoolItem/updateProgressRemote oben schon aktuell), ein kompletter
-        // Katalog-Refetch (loadCatalogAndRefresh) ist dafuer nicht noetig und
-        // sorgte vorher fuer eine spuerbare Verzoegerung (mehrere Sekunden bei
-        // ~26.000 Titeln) bis der Titel aus der Discovery-Liste verschwand.
+        // Watchlist-Aenderung wirkt sich auf Filme/Serien/Streaming aus --
+        // rebuild() liest dafuer direkt aus POOL/PROGRESS.
         rebuild();
         if (discoverFilterOn) renderCurrentTab();
+        senden.catch(function(){
+          // PROGRESS hat updateProgressRemote bereits zurueckgesetzt; hier fehlt
+          // nur noch die Anzeige dazu.
+          rebuild();
+          renderCurrentTab();
+          alert('Konnte nicht gespeichert werden. Bitte erneut versuchen.');
+        });
       } finally {
         wlBtn.blur();
         wlBtn.disabled = false;
