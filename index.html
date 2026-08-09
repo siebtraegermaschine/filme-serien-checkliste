@@ -134,6 +134,25 @@
     border-color: var(--accent);
     color: var(--accent);
   }
+  /* Kino tut etwas anderes als die beiden davor: Filme und Serien sind Filter,
+     die sich frei kombinieren lassen (beide koennen gleichzeitig leuchten),
+     Kino wechselt auf eine eigene Seite. Zwei Bedeutungen in einer Reihe sind
+     genau die Sorte Uneinheitlichkeit, die hier abgebaut werden soll -- also
+     wird der Unterschied wenigstens sichtbar gemacht: ein Abstand und eine
+     senkrechte Linie davor, runde Form statt eckiger. */
+  .tabs .kino-tab {
+    margin-left: 6px;
+    border-radius: 999px;
+    position: relative;
+  }
+  .tabs .kino-tab::before {
+    content: '';
+    position: absolute;
+    left: -9px; top: 50%;
+    transform: translateY(-50%);
+    width: 1px; height: 22px;
+    background: var(--border);
+  }
   /* Der frueher hier stehende Discovery-Button ("Alle Filme & Serien
      entdecken") ist entfallen: "Neue entdecken" ist jetzt ein dritter Status neben
      Watchlist/Gesehen in .filter-group, der Typ kommt aus dem aktiven Tab.
@@ -1094,9 +1113,12 @@
   </div>
   <div class="tabs">
     <div class="tabs-row">
+      <!-- Filme und Serien sind Filter (frei kombinierbar, siehe setTab), Kino
+           wechselt die Seite. Zwei verschiedene Dinge in einer Reihe -- deshalb
+           steht Kino abgesetzt (siehe .tabs .kino-tab). -->
       <button id="tabFilme" class="active">🎬 Filme</button>
-      <button id="tabSerien">📺 Serien</button>
-      <button id="tabKino">🍿 Kino</button>
+      <button id="tabSerien" class="active">📺 Serien</button>
+      <button id="tabKino" class="kino-tab">🍿 Kino</button>
     </div>
   </div>
   <!-- Die Suche bildet einen eigenen Block unter den Tabs. Die Trennlinie sitzt
@@ -2548,7 +2570,23 @@ function rebuild(){
   state.serien.checked = state.serien.det.map(d => getSeen(d.id));
 }
 rebuild();
+/* Welche Typen in der Liste stehen. Frei kombinierbar wie die drei Status,
+   mindestens einer muss aktiv bleiben (siehe typUmschalten). Beim Start beides.
+
+   Vorher war das ein einzelner Wert (activeTab) und die Reihe ein
+   Seitenwechsel: genau ein Typ, ein Klick ersetzte den anderen. Eine Suche
+   schaltete dann doch beide an -- ueber einen ZWEITEN Zustand (sucheTypen),
+   weil der erste nur eines konnte. Beides ist jetzt derselbe Zustand.
+
+   activeTab bleibt als abgeleiteter Bezugstyp: Sortierung und Leertexte
+   brauchen einen definierten Bezug, solange man beide Typen sehen kann. */
+var TYPEN = { filme: true, serien: true };
 let activeTab = 'filme';
+function typenAngleichen(){
+  // Bezugstyp ist der erste aktive -- so hat effectiveSort/Leerzustand immer
+  // einen gueltigen Wert, auch wenn beide oder nur einer an sind.
+  activeTab = TYPEN.filme ? 'filme' : 'serien';
+}
 /* Die drei Status, die ein Titel gegenueber DIR haben kann. Frei kombinierbar,
    mindestens einer muss aktiv bleiben (siehe toggleStatus). Watchlist und
    Gesehen sind markierte Titel und kommen aus state[activeTab], "Neue entdecken"
@@ -2566,6 +2604,9 @@ let activeTab = 'filme';
 let watchlistFilterOn = true;
 let seenFilterOn = true;
 function alleFilterAn(){
+  TYPEN.filme = true;
+  TYPEN.serien = true;
+  typenAngleichen();
   watchlistFilterOn = true;
   seenFilterOn = true;
   discoverFilterOn = true;
@@ -2645,9 +2686,14 @@ function fremderFortschritt(){
    entscheiden und damit auch nichts, was dazwischenfunken kann. */
 function einstiegSetzen(){
   closeCinemaPage();
-  activeTab = 'filme';
-  // Beides an: Erst zeigen, was die Person hat, dann filtern. Vorher musste man
-  // sich vorher entscheiden -- ohne zu wissen, wo bei ihr mehr steht.
+  // Beide Typen: Eine fremde Liste enthaelt Filme UND Serien, und was davon
+  // mehr hergibt, weiss man vorher nicht.
+  TYPEN.filme = true;
+  TYPEN.serien = true;
+  typenAngleichen();
+  // Watchliste und Gesehen zusammen: Erst zeigen, was die Person hat, dann
+  // filtern. "Neue entdecken" gibt es in einer fremden Liste nicht -- was jemand
+  // NICHT markiert hat, ist keine Liste von ihm (siehe updateFilterRowUI).
   watchlistFilterOn = true;
   seenFilterOn = true;
   discoverFilterOn = false;
@@ -3055,7 +3101,7 @@ function render() {
   // filtern -- dann bleibt q leer und sammleEintraege spart sich die Arbeit.
   const q = (discoverFilterOn || sucheAktiv()) ? searchEl.value.trim().toLowerCase() : '';
   const eintraege = sammleEintraege(q);
-  const sortBy = effectiveSort(activeTab);
+  const sortBy = effectiveSort();
   const werte = new Map();
   eintraege.forEach(function(e){ werte.set(e, eintragSortwert(e, sortBy, profile)); });
   eintraege.sort(function(a, b){ return werte.get(b) - werte.get(a); });
@@ -3081,7 +3127,6 @@ function render() {
     };
     list.appendChild(moreBtn);
   }
-  if (!discoverFilterOn && !sucheAktiv()) applyFilter();
   kinoHinweisAnhaengen(q);
 }
 
@@ -3352,7 +3397,12 @@ tabBtns.kino.onclick = () => { if (!cinemaMode) openCinemaPage(); };
 const TITEL_PRO_SEITE = 25;
 const NACHLADE_SCHRITT = 25;
 let titelLimit = TITEL_PRO_SEITE;
-let sortManual = { filme: null, serien: null };
+// EINE Sortierung fuer die Liste. Vorher eine je Tab (filme/serien) -- das war
+// stimmig, solange es zwei getrennte Listen gab. Jetzt gibt es eine Liste, in
+// der beide Typen stehen koennen; zwei Erinnerungen waeren nicht mehr
+// zuzuordnen. Die Auswahl bleibt also stehen, wenn man einen Typ ab- oder
+// wieder anwaehlt.
+let sortManual = null;
 function renderList() {
   render();
 }
@@ -3383,40 +3433,44 @@ function renderCurrentTab(){
 // Kino bleibt aussen vor: eigene Seite, eigene Daten, weder Watchlist noch
 // Gesehen (siehe openCinemaPage).
 let sucheZustandVorher = null;
-let sucheTypen = { f: true, s: true };
 function sucheAktiv(){ return searchEl.value.trim().length > 0; }
-// Welche Typen gerade in die Liste einfliessen: ausserhalb der Suche genau der
-// aktive Tab, waehrend der Suche beides -- bis man einen der beiden abwaehlt.
+// Welche Typen gerade in die Liste einfliessen -- die einzige Wahrheit dazu.
+// Der Rueckfall auf activeTab ist nur ein Sicherheitsnetz: typUmschalten laesst
+// gar nicht zu, dass beide aus sind.
 function aktiveTypen(){
-  if (!sucheAktiv()) return [activeTab];
   var t = [];
-  if (sucheTypen.f) t.push('filme');
-  if (sucheTypen.s) t.push('serien');
+  if (TYPEN.filme) t.push('filme');
+  if (TYPEN.serien) t.push('serien');
   return t.length ? t : [activeTab];
 }
 function sucheZustandAnwenden(){
   var jetzt = sucheAktiv();
   if (jetzt && !sucheZustandVorher) {
     sucheZustandVorher = { wl: watchlistFilterOn, seen: seenFilterOn,
-                           disc: discoverFilterOn, stream: inStreamFilterOn, tab: activeTab };
+                           disc: discoverFilterOn, stream: inStreamFilterOn,
+                           typen: { filme: TYPEN.filme, serien: TYPEN.serien } };
     // Eine Suche soll weiten statt im zuletzt gesetzten Ausschnitt zu suchen --
-    // sonst faende man einen Titel nicht, nur weil vorher "nur Watchliste" stand.
+    // sonst faende man einen Titel nicht, nur weil vorher "nur Watchliste" oder
+    // "nur Serien" eingestellt war.
     watchlistFilterOn = true;
     seenFilterOn = true;
     discoverFilterOn = true;
+    TYPEN.filme = true;
+    TYPEN.serien = true;
+    typenAngleichen();
     // Der Streaming-Filter verengt, Suchen soll weiten -- er geht aus, bleibt
     // aber anklickbar.
     inStreamFilterOn = false;
-    sucheTypen = { f: true, s: true };
     titelLimit = TITEL_PRO_SEITE;
   } else if (!jetzt && sucheZustandVorher) {
     watchlistFilterOn = sucheZustandVorher.wl;
     seenFilterOn = sucheZustandVorher.seen;
     discoverFilterOn = sucheZustandVorher.disc;
     inStreamFilterOn = sucheZustandVorher.stream;
-    activeTab = sucheZustandVorher.tab;
+    TYPEN.filme = sucheZustandVorher.typen.filme;
+    TYPEN.serien = sucheZustandVorher.typen.serien;
+    typenAngleichen();
     sucheZustandVorher = null;
-    sucheTypen = { f: true, s: true };
     titelLimit = TITEL_PRO_SEITE;
   }
 }
@@ -3436,8 +3490,8 @@ function updateFilterRowUI(){
     btns.inStream.classList.toggle('active', inStreamFilterOn);
     var sz = document.querySelector('.tb-streamrow');
     if (sz) sz.style.display = '';
-    tabBtns.filme.classList.toggle('active', !cinemaMode && activeTab === 'filme');
-    tabBtns.serien.classList.toggle('active', !cinemaMode && activeTab === 'serien');
+    tabBtns.filme.classList.toggle('active', !cinemaMode && TYPEN.filme);
+    tabBtns.serien.classList.toggle('active', !cinemaMode && TYPEN.serien);
     tabBtns.kino.classList.toggle('active', !!cinemaMode);
     // Der Streaming-Filter ergibt im Kino auch hier keinen Sinn.
     var szp = document.querySelector('.tb-streamrow');
@@ -3456,71 +3510,50 @@ function updateFilterRowUI(){
   // ganze Zeile weg statt nur der eine Knopf.
   var streamZeile = document.querySelector('.tb-streamrow');
   if (streamZeile) streamZeile.style.display = cinemaMode ? 'none' : '';
-  // Auf der Kino-Seite darf keiner der beiden Tabs aktiv wirken -- dort ist
+  // Beide Typen koennen gleichzeitig leuchten -- sie sind Filter, kein
+  // Seitenwechsel. Auf der Kino-Seite leuchtet keiner von beiden: dort ist
   // "Im Kino" der ausgewaehlte Bereich (siehe openCinemaPage/closeCinemaPage).
-  // Waehrend der Suche sind beide zugleich aktiv (siehe sucheTypen); sie werden
-  // dort zur Typ-Auswahl der Ergebnisliste statt zum Seitenwechsel.
-  var sucht = sucheAktiv();
-  tabBtns.filme.classList.toggle('active', !cinemaMode && (sucht ? sucheTypen.f : activeTab === 'filme'));
-  tabBtns.serien.classList.toggle('active', !cinemaMode && (sucht ? sucheTypen.s : activeTab === 'serien'));
+  tabBtns.filme.classList.toggle('active', !cinemaMode && TYPEN.filme);
+  tabBtns.serien.classList.toggle('active', !cinemaMode && TYPEN.serien);
   tabBtns.kino.classList.toggle('active', !!cinemaMode);
 }
-function setTab(t) {
-  // Eine fremde Liste gilt fuer Filme UND Serien -- der Tabwechsel filtert
-  // darin nur den Typ und darf sie deshalb NICHT beenden. Verlassen wird sie
-  // ueber "zurueck" in der Leiste oben oder ueber den Knopf in der Personenliste.
-  //
-  // Filme/Serien und Kino liegen in derselben Knopfreihe: ein Klick auf Filme
-  // oder Serien verlaesst die Kino-Vollseite. Ohne das blieben Kino-Liste und
-  // Titelliste gleichzeitig sichtbar. Wirkungslos, wenn man gar nicht im Kino
-  // ist (closeCinemaPage kehrt dann sofort zurueck).
-  var warKino = cinemaMode;
+/* Filme und Serien an-/abwaehlen. Kein Seitenwechsel mehr, sondern ein Filter
+   wie die drei Status darunter -- beide zugleich sind der Normalfall, und die
+   Zeile sagt an "· Film" bzw. "· Serie", welcher Typ eine Zeile ist.
+
+   Der letzte aktive Typ laesst sich nicht abwaehlen: Die Liste waere sonst ohne
+   erkennbaren Grund leer.
+
+   Eine fremde Liste gilt fuer Filme UND Serien -- der Typfilter schraenkt darin
+   nur ein und darf sie NICHT beenden. Verlassen wird sie ueber "zurueck" in der
+   Leiste oben oder ueber den Knopf in der Personenliste.
+
+   Aus dem Kino heraus ist derselbe Klick etwas anderes: Man kommt von einer
+   dritten Ansicht, in der weder Filme noch Serien zu sehen waren. Dort waere
+   "abwaehlen" unverstaendlich -- der Klick stellt deshalb genau auf diesen Typ
+   um und verlaesst die Kino-Seite. */
+// Stellt die Titelliste als sichtbare Ansicht her, ohne an der Auswahl zu
+// drehen -- fuer den Seitenaufbau und den Logo-Klick. Getrennt von setTab, weil
+// setTab jetzt UMSCHALTET: "setTab('filme')" haette dort Filme abgewaehlt.
+function listenAnsichtHerstellen(){
   closeCinemaPage();
-  // Waehrend einer Suche wechselt ein Klick auf Filme/Serien nicht die Seite,
-  // sondern schraenkt die Ergebnisse auf diesen Typ ein bzw. nimmt ihn wieder
-  // dazu. Der letzte verbliebene Typ laesst sich nicht abwaehlen -- die Liste
-  // waere sonst ohne erkennbaren Grund leer.
-  if (sucheAktiv()) {
-    var k = t === 'serien' ? 's' : 'f';
-    var anderer = k === 'f' ? 's' : 'f';
-    // Aus dem Kino heraus ist derselbe Klick KEIN Umschalten, sondern der
-    // Wechsel auf diese Seite: Man kommt von einer dritten Ansicht, in der
-    // Filme und Serien gar nicht zu sehen waren. Als Umschalter gelesen nahm er
-    // dagegen den gerade gewaehlten Typ weg -- ein Klick auf "Serien" landete
-    // dann sichtbar bei den Filmen.
-    if (warKino) {
-      sucheTypen.f = (k === 'f');
-      sucheTypen.s = (k === 's');
-      activeTab = t;
-      titelLimit = TITEL_PRO_SEITE;
-      updateFilterRowUI();
-      renderCurrentTab();
-      return;
-    }
-    if (sucheTypen[k] && !sucheTypen[anderer]) return;
-    sucheTypen[k] = !sucheTypen[k];
-    // activeTab mitziehen, damit Sortierung und Leerzustand einen definierten
-    // Bezug haben, solange nur noch ein Typ aktiv ist.
-    if (sucheTypen[k]) activeTab = t;
-    else activeTab = anderer === 'f' ? 'filme' : 'serien';
-    titelLimit = TITEL_PRO_SEITE;
-    updateFilterRowUI();
-    renderCurrentTab();
-    return;
-  }
-  activeTab = t;
   document.querySelector('.toolbar').style.display = '';
   searchEl.style.display = '';
-  var _sw = document.querySelector('.sort-wrap'); if (_sw) _sw.style.display = 'flex';
-  // Die Statusauswahl (Watchlist/Gesehen/Entdecken) bleibt beim Wechsel stehen:
-  // Wer sich seine gesehenen Filme ansieht, will beim Sprung auf Serien in aller
-  // Regel auch dort die gesehenen sehen. Frueher fiel es hier auf "nur
-  // Watchlist" zurueck und musste jedes Mal neu gesetzt werden. Ein ungueltiger
-  // Zustand kann dabei nicht entstehen -- die Umschalter selbst lassen nicht zu,
-  // dass alle drei gleichzeitig aus sind.
-  //
-  // Der Typ kommt jetzt aus dem Tab, also ist die Entdecken-Liste nach dem
-  // Wechsel eine andere -- deshalb wieder von vorne zaehlen.
+  var sw = document.querySelector('.sort-wrap'); if (sw) sw.style.display = 'flex';
+}
+function setTab(t) {
+  var warKino = cinemaMode;
+  listenAnsichtHerstellen();
+  if (warKino) {
+    TYPEN.filme = (t === 'filme');
+    TYPEN.serien = (t === 'serien');
+  } else {
+    var anderer = t === 'filme' ? 'serien' : 'filme';
+    if (TYPEN[t] && !TYPEN[anderer]) return;   // letzter aktiver -- laeuft ins Leere
+    TYPEN[t] = !TYPEN[t];
+  }
+  typenAngleichen();
+  // Andere Typauswahl heisst andere Liste -- "Mehr laden" faengt wieder vorn an.
   titelLimit = TITEL_PRO_SEITE;
   updateFilterRowUI();
   renderCurrentTab();
@@ -3582,7 +3615,11 @@ btns.inStream.onclick = () => {
 // poolItemLi weiter unten), showDetails bleibt als Variable fuer eine
 // eventuelle spaetere Wiedereinfuehrung erhalten.
 
-var SORT_MANUAL_KEY = 'top200-sort-v2';
+// v3, weil aus zwei Sortier-Erinnerungen (je Tab) eine geworden ist -- der
+// gespeicherte Wert hat eine andere Form. Ein alter Eintrag wuerde nicht
+// schaden (das Feld "sort" fehlt dort, es bliebe bei der Automatik), aber ein
+// eigener Schluessel macht es eindeutig.
+var SORT_MANUAL_KEY = 'top200-sort-v3';
 var SORT_MANUAL_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 // Manuelle Sortier-Praeferenzen verfallen nach 24h automatisch (und werden bei
 // Login/Logout zurueckgesetzt, siehe resetSortManual()), damit eine einmal
@@ -3592,18 +3629,18 @@ var SORT_MANUAL_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 try {
   var _sm = JSON.parse(localStorage.getItem(SORT_MANUAL_KEY) || '{}');
   if (_sm && _sm._ts && (Date.now() - _sm._ts) < SORT_MANUAL_MAX_AGE_MS) {
-    ['filme', 'serien'].forEach(function (k) { if (['imdb', 'taste', 'year', 'newstream'].indexOf(_sm[k]) >= 0) sortManual[k] = _sm[k]; });
+    if (['imdb', 'taste', 'year', 'newstream'].indexOf(_sm.sort) >= 0) sortManual = _sm.sort;
   } else {
     localStorage.removeItem(SORT_MANUAL_KEY);
   }
 } catch (e) {}
 function saveSortManual(){
-  try { localStorage.setItem(SORT_MANUAL_KEY, JSON.stringify(Object.assign({}, sortManual, { _ts: Date.now() }))); } catch (e) {}
+  try { localStorage.setItem(SORT_MANUAL_KEY, JSON.stringify({ sort: sortManual, _ts: Date.now() })); } catch (e) {}
 }
 // Nur den Merker leeren, ohne zu zeichnen -- fuer Aufrufer, die ohnehin gleich
 // neu rendern (siehe goHome). render() ruft updateSortMenuActive() selbst auf.
 function sortManualLeeren(){
-  sortManual.filme = null; sortManual.serien = null;
+  sortManual = null;
   try { localStorage.removeItem(SORT_MANUAL_KEY); } catch (e) {}
 }
 function resetSortManual(){
@@ -3620,15 +3657,10 @@ function tasteProfileSize(){
 // Auf allen vier Seiten identisch: ohne manuelle Auswahl standardmaessig nach
 // TMDB, ab 10 markierten Titeln (Watchlist + Gesehen zusammen) automatisch nach
 // Taste-Score, weil dann genug Profildaten fuer eine sinnvolle Sortierung da sind.
-function effectiveSort(cat){
-  if (sortManual[cat]) return sortManual[cat];
-  if (['filme', 'serien'].indexOf(cat) === -1) return 'imdb';
+function effectiveSort(){
+  if (sortManual) return sortManual;
   return tasteProfileSize() >= 10 ? 'taste' : 'imdb';
 }
-// Die Sortierung gehoert zum Tab, nicht zum Status: Watchlist, Gesehen und
-// Entdecken stehen in EINER gemeinsam sortierten Liste, es gibt also nichts
-// mehr, was einen eigenen "discovery"-Schluessel rechtfertigen wuerde.
-function effectiveCat(){ return activeTab; }
 // "Neu im Streaming" ergibt nur Sinn, solange ueberhaupt auf Streaming-Angebote
 // eingeschraenkt ist. Ist sie dabei gerade manuell gewaehlt und wird die Option
 // ausgeblendet, faellt die Anzeige automatisch auf die uebliche Automatik
@@ -3642,7 +3674,7 @@ function updateSortMenuActive(){
   var applicable = newstreamSortApplicable();
   var newstreamBtn = document.getElementById('sortNewstream');
   if (newstreamBtn) newstreamBtn.style.display = applicable ? '' : 'none';
-  var eff = effectiveSort(effectiveCat());
+  var eff = effectiveSort();
   if (eff === 'newstream' && !applicable) eff = tasteProfileSize() >= 10 ? 'taste' : 'imdb';
   m.querySelectorAll('button').forEach(function (b) { b.classList.toggle('active', b.dataset.sort === eff); });
 }
@@ -3658,8 +3690,7 @@ if (sortBtn && sortMenu) {
   sortMenu.addEventListener('click', function (e) { e.stopPropagation(); });
   sortMenu.querySelectorAll('button').forEach(function (b) {
     b.onclick = function () {
-      var cat = effectiveCat();
-      sortManual[cat] = b.dataset.sort;
+      sortManual = b.dataset.sort;
       saveSortManual();
       titelLimit = TITEL_PRO_SEITE;
       renderCurrentTab();
@@ -3995,28 +4026,21 @@ searchEl.addEventListener('keydown', function(e){
   if (e.key === 'Escape') _searchSuggestEl.style.display = 'none';
 });
 
-function applyFilter() {
-  const s = state[activeTab];
-  const q = searchEl.value.toLowerCase();
-  list.querySelectorAll('li.item').forEach(li => {
-    const i = +li.dataset.idx;
-    const mainBlob = (li.dataset.mainBlob || li.textContent).toLowerCase();
-    const matchQ = !q || mainBlob.includes(q) || wordExactMatch(li.dataset.exactBlob, q);
-    const matchM = ((watchlistFilterOn && isWatched(activeTab, s.data[i][0])) || (seenFilterOn && s.checked[i]))
-      && (!inStreamFilterOn || (s.pool[i] && selectedProviders(s.pool[i].providers).length));
-    li.style.display = (matchQ && matchM) ? 'flex' : 'none';
-  });
-  // li.disc sind die Entdecken-Zeilen. Sie stehen hier nur vorsorglich: mit
-  // aktivem "Neue entdecken" wird gar nicht mehr per applyFilter gefiltert, sondern
-  // neu gerendert (siehe render) -- der Zweig greift also nur, falls doch einmal
-  // eine Entdecken-Zeile ohne Neuaufbau in der Liste steht. discFilterPool hat
-  // die Statusauswahl bereits angewendet, hier zaehlt nur noch die Suche.
-  list.querySelectorAll('li.disc').forEach(li => {
-    const mainBlob = (li.dataset.mainBlob || li.textContent).toLowerCase() + ' ' + (li.dataset.providerBlob || '').toLowerCase();
-    const matchQ = !q || mainBlob.includes(q) || wordExactMatch(li.dataset.exactBlob, q);
-    li.style.display = matchQ ? 'flex' : 'none';
-  });
-}
+/* applyFilter() stand hier: Es blendete bereits gezeichnete Zeilen per CSS aus,
+   statt die Liste neu aufzubauen -- guenstig, solange die eigenen Listen
+   vollstaendig gerendert wurden.
+
+   Entfallen aus zwei Gruenden. Seit jede Liste bei TITEL_PRO_SEITE endet, muss
+   eine Suche ohnehin neu rendern (Treffer koennen jenseits der 25 liegen), die
+   Funktion war also nur noch fuer den leeren Suchbegriff erreichbar und dort
+   wirkungslos: sammleEintraege hat Status- und Streaming-Filter da laengst
+   angewendet. Und mit gemischten Typen waere sie sogar falsch geworden -- sie
+   las state[activeTab], waehrend li.dataset.idx sich auf die Liste des
+   jeweiligen Typs bezieht. Bei Filmen UND Serien haette sie Zeilen anhand
+   fremder Indizes ausgeblendet.
+
+   Die dataset-Felder (mainBlob/exactBlob/providerBlob) bleiben an den Zeilen:
+   Sie dokumentieren, was an einer Zeile durchsuchbar ist, und kosten nichts. */
 
 // Klick auf Namen/Hashtags -> Filter-Popup
 var _pendingFilter = null;
@@ -4788,10 +4812,10 @@ function goHome(){
   pfadAufStartseite();
   searchEl.value = '';
   searchEl.dispatchEvent(new Event('input'));
-  // setTab stellt Werkzeugleiste und Suche wieder her (wichtig, wenn man aus dem
-  // Kino kommt). Das Logo ist der Weg zurueck auf Anfang -- und der Anfang ist
-  // "alles an", genau wie beim Start (siehe alleFilterAn).
-  setTab('filme');
+  // Werkzeugleiste und Suche wieder herstellen (wichtig, wenn man aus dem Kino
+  // kommt), dann alles anschalten. Das Logo ist der Weg zurueck auf Anfang --
+  // und der Anfang ist "alles an", genau wie beim Start.
+  listenAnsichtHerstellen();
   alleFilterAn();
   // Auch die Sortierung faengt hier von vorne an: Das Logo ist der Weg zurueck
   // auf Anfang, und dazu gehoert die automatische Wahl (ab 10 markierten Titeln
@@ -6257,7 +6281,11 @@ document.addEventListener('visibilitychange', function(){ refreshOnResume(); });
 window.addEventListener('pageshow', function(e){ if (e.persisted) refreshOnResume(); });
 
 renderAuthBar();
-setTab('filme');
+// Kein setTab hier: Das wuerde umschalten (und damit "Filme" abwaehlen). Beim
+// Seitenaufbau ist ohnehin alles an.
+listenAnsichtHerstellen();
+alleFilterAn();
+renderCurrentTab();
 apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() => { CURRENT_USER = null; }).finally(() => {
   renderAuthBar();
   updateProfileBtn();
