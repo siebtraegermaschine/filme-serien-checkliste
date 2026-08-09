@@ -3091,6 +3091,28 @@ function renderLeerzustand(q){
     'aria-label="Was ist ein Match?">Übereinstimmungen</i> filtern und sofort etwas finden, ' +
     'das allen gefällt.</li>';
 }
+/* "Mehr laden" darf den Knopf nicht unter dem Finger wegziehen.
+
+   Die nachgeladenen Zeilen werden VOR dem Knopf eingefuegt, der Knopf rutscht
+   also um deren Gesamthoehe nach unten -- gemessen 3733px bei 25 Kino-Zeilen.
+   Er verschwindet damit aus dem Bild, und an seiner Stelle steht danach eine
+   Titelzeile. Der Klick hat gewirkt (in 5ms), es sieht nur nicht so aus: Man
+   tippt auf dieselbe Stelle und trifft jetzt einen Titel. Genau das war als
+   "der erste Klick wird nicht erkannt" gemeldet.
+
+   Deshalb wird nach dem Nachladen um die Differenz mitgescrollt: Der Knopf
+   bleibt dort stehen, wo er war, und die neuen Zeilen wachsen darueber herein.
+   So laesst sich mehrfach hintereinander an derselben Stelle nachladen. */
+async function nachladenOhneSprung(knopfSuchen, nachladen){
+  var alt = knopfSuchen();
+  var vorher = alt ? alt.getBoundingClientRect().top : null;
+  await nachladen();
+  if (vorher == null) return;
+  var neu = knopfSuchen();
+  if (!neu) return;                       // alles geladen, kein Knopf mehr
+  var versatz = neu.getBoundingClientRect().top - vorher;
+  if (versatz) window.scrollBy(0, versatz);
+}
 function render() {
   const profile = aktuellesProfil();
   list.classList.add('main-list');
@@ -3122,8 +3144,9 @@ function render() {
     moreBtn.className = 'load-more-btn';
     moreBtn.textContent = 'Mehr laden';
     moreBtn.onclick = function(){
-      titelLimit += NACHLADE_SCHRITT;
-      renderCurrentTab();
+      nachladenOhneSprung(
+        function(){ return list.querySelector('.load-more-btn'); },
+        function(){ titelLimit += NACHLADE_SCHRITT; renderCurrentTab(); });
     };
     list.appendChild(moreBtn);
   }
@@ -3557,6 +3580,13 @@ function setTab(t) {
   titelLimit = TITEL_PRO_SEITE;
   updateFilterRowUI();
   renderCurrentTab();
+  // Und zwar von oben. Ohne das bleibt die Bildlaufposition stehen: Wer im Kino
+  // weit unten stoebert und dann auf "Filme" tippt, landet mitten in der
+  // Filmliste -- die Tab-Reihe ist gar nicht mehr im Bild, man sieht also nicht
+  // einmal, dass der Klick angekommen ist. Gemessen: scrollY 3000 vor und nach
+  // dem Wechsel, oben am Bildschirm stand ein beliebiger Titel. Das war als
+  // "der erste Klick klappt nicht" gemeldet.
+  window.scrollTo(0, 0);
 }
 
 const btns = { open: document.getElementById('fOpen'), done: document.getElementById('fDone'), discover: document.getElementById('fDiscover'), inStream: document.getElementById('fInStream') };
@@ -4735,8 +4765,12 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
     moreBtn.className = 'load-more-btn';
     moreBtn.textContent = 'Mehr anzeigen (' + Math.min(CINEMA_SECTION_STEP, remaining) + ' weitere)';
     moreBtn.onclick = function(){
-      cinemaSectionLimit[key] = Math.min(entries.length, cinemaSectionLimit[key] + CINEMA_SECTION_STEP);
-      renderCinemaPage();
+      nachladenOhneSprung(
+        function(){ return cinemaListEls[key].querySelector('.load-more-btn'); },
+        function(){
+          cinemaSectionLimit[key] = Math.min(entries.length, cinemaSectionLimit[key] + CINEMA_SECTION_STEP);
+          return renderCinemaPage();
+        });
     };
     el.appendChild(moreBtn);
   }
