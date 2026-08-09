@@ -1024,10 +1024,10 @@
      clientWidth. Der Breakpoint muss NACH der Regel darueber stehen: beide haben
      dieselbe Spezifitaet, also gewinnt die spaetere. */
   @media (max-width: 360px) { .filter-group button { font-size: 11px; padding: 9px 1px; } }
-  /* Gesperrt, solange ein Personen-Abgleich laeuft (siehe enforceDiscoverLock):
-     Entdecken zeigt unmarkierte Titel, die per Definition nie gemeinsame Titel
-     sein koennen. Sichtbar bleiben statt verschwinden -- ein Knopf, der spurlos
-     weg ist, wirft mehr Fragen auf als einer, der erklaert, warum er nicht geht. */
+  /* Gesperrt in einer fremden Liste (siehe updateFilterRowUI): Was jemand NICHT
+     markiert hat, ist keine Liste von ihm. Sichtbar bleiben statt verschwinden --
+     ein Knopf, der spurlos weg ist, wirft mehr Fragen auf als einer, der
+     erklaert, warum er nicht geht. */
   .filter-group button[disabled] { opacity: .45; cursor: not-allowed; }
   #fInStream { white-space: nowrap; }
   .funnel-icon { vertical-align: -2px; margin-right: 2px; }
@@ -2549,26 +2549,29 @@ function rebuild(){
 }
 rebuild();
 let activeTab = 'filme';
-// Die drei Status, die ein Titel gegenueber DIR haben kann -- frei
-// kombinierbar, mindestens einer muss aktiv bleiben (siehe die drei
-// onclick-Handler weiter unten). Watchlist und Gesehen sind markierte Titel und
-// kommen aus state[activeTab], "Neue entdecken" ist der unmarkierte Rest und kommt
-// direkt aus POOL (siehe discFilterPool). Alle drei landen in EINER Liste,
-// gemeinsam sortiert nach dem gewaehlten Kriterium -- eigene Titel werden
-// bewusst nicht nach oben gezogen, sonst stuende bei Taste-Score-Sortierung ein
-// schwacher Watchlist-Titel ueber einem starken Vorschlag.
-// Startzustand: "Neue entdecken" unter Filme, NICHT die Watchliste. Wer die App
-// zum ersten Mal oeffnet, hat noch nichts markiert -- mit Watchliste als
-// Einstieg stand da eine leere Liste, und damit auch kein Hinweis darauf, dass
-// hier ueberhaupt zehntausende Filme und Serien liegen. Der Erstkontakt zeigt
-// deshalb den Katalog.
-//
-// Bewusst nicht BEIDE an: Neben dem halben Katalog gehen die eigenen Titel
-// unter, gerade bei Sortierung nach Taste-Score. Watchliste und Gesehen sind
-// einen Klick entfernt und bleiben dann stehen (siehe setTab -- der Tabwechsel
-// aendert an der Statusauswahl nichts mehr).
-let watchlistFilterOn = false;
-let seenFilterOn = false;
+/* Die drei Status, die ein Titel gegenueber DIR haben kann. Frei kombinierbar,
+   mindestens einer muss aktiv bleiben (siehe toggleStatus). Watchlist und
+   Gesehen sind markierte Titel und kommen aus state[activeTab], "Neue entdecken"
+   ist der unmarkierte Rest und kommt direkt aus POOL (siehe discFilterPool).
+   Alle drei landen in EINER Liste, gemeinsam sortiert nach dem gewaehlten
+   Kriterium -- eigene Titel werden bewusst nicht nach oben gezogen, sonst
+   stuende bei Taste-Score-Sortierung ein schwacher Watchlist-Titel ueber einem
+   starken Vorschlag. Wer nur die eigenen sehen will, schaltet "Neue entdecken"
+   ab; das ist eine Entscheidung der Person, nicht des Programms.
+
+   Beim Start ist alles an -- die Liste zeigt erst einmal alles, und wer etwas
+   nicht sehen will, nimmt es heraus. Dieselben drei Schalter gelten auch im
+   Kino: EIN Zustand, nicht zwei. Vorher fuehrte die Kino-Seite eine eigene
+   Auswahl, die beim Tabwechsel still von der hier gesetzten abwich. */
+let watchlistFilterOn = true;
+let seenFilterOn = true;
+function alleFilterAn(){
+  watchlistFilterOn = true;
+  seenFilterOn = true;
+  discoverFilterOn = true;
+  titelLimit = TITEL_PRO_SEITE;
+  updateFilterRowUI();
+}
 // Dritter, unabhaengiger Haken neben Watchlist/Gesehen (siehe applyFilter/
 // updateProgress): schraenkt Filme/Serien auf Titel ein, die AKTUELL bei
 // mindestens einem Streaming-Anbieter verfuegbar sind (item.providers.length).
@@ -2576,14 +2579,16 @@ let seenFilterOn = false;
 // redundant nochmal gezeigt hat) -- dieselbe Einschraenkung gibt es jetzt direkt
 // unter Filme UND unter Serien statt in einem separaten dritten Bereich.
 let inStreamFilterOn = false;
-// Die Kino-Seite fuehrt eine EIGENE Statusauswahl und merkt sie sich. Sie erbt
-// nichts von Filme/Serien -- dort ist die eigene Watchlist der sinnvolle
-// Einstieg, im Kino das gesamte Programm; mit gemeinsamem Zustand waere die
-// Kino-Seite beim ersten Aufruf so gut wie leer, weil dort standardmaessig nur
-// die Watchlist an ist. Sie setzt sich aber auch nicht bei jedem Aufruf zurueck:
-// Wer hier einschraenkt, findet die Einschraenkung beim naechsten Besuch wieder
-// vor -- "was ich einstelle, bleibt", nur eben je Bereich.
-var kinoStatus = { wl: true, seen: true, disc: true };
+// Die Kino-Seite hatte hier frueher eine EIGENE Statusauswahl (kinoStatus).
+// Begruendung damals: Unter Filme/Serien ist die eigene Watchliste der sinnvolle
+// Einstieg, im Kino das gesamte Programm -- mit gemeinsamem Zustand waere die
+// Kino-Seite beim ersten Aufruf so gut wie leer gewesen.
+//
+// Der Grund ist mit "beim Start ist alles an" entfallen, der Preis war hoch: Man
+// stellte unter Filme "Watchliste" ein, wechselte ins Kino und fand dort
+// "Watchliste + Gesehen + Neue entdecken" vor -- eine Kombination, die es unter
+// Filme gar nicht mehr geben konnte. Der erste Tipp im Kino wirkte deshalb
+// falsch. Es gibt jetzt EINEN Zustand fuer alle Bereiche.
 // Ansicht einer fremden Liste: uid der Person und welche ihrer beiden Listen.
 // Die Daten dafuer liegen laengst im Browser (LINKED_PROGRESS, geliefert von
 // /api/links/progress) -- sie wurden bisher nur fuer den Abgleich und die
@@ -2627,62 +2632,19 @@ function fremderFortschritt(){
 // Liste wieder, bleibt er stehen. Erst eine spaetere Aenderung von Hand
 // ueberschreibt ihn -- der Tabwechsel selbst aendert weiterhin nichts daran
 // (siehe setTab).
-/* ---- Startzustand: die erste Ansicht, in der wirklich etwas steht ----
-   Beim Oeffnen der App soll man dort landen, wo etwas zu sehen ist, statt vor
-   einer leeren Liste zu stehen. Gesucht wird in dieser Reihenfolge, der erste
-   Treffer gewinnt:
+/* ---- Startzustand: alles an ----
+   Beim Oeffnen sind alle Filter aktiv, und wer etwas nicht sehen will, schaltet
+   es ab. Gemerkt wird die Auswahl nicht -- jeder Start sieht gleich aus.
 
-     Filme + Watchliste  ->  Filme + Gesehen  ->  Serien + Watchliste
-     ->  Serien + Gesehen  ->  Filme + "Neue entdecken"
-
-   Der letzte Fall ist der Erstkontakt: Wer noch gar nichts markiert hat, sieht
-   den Katalog -- sonst waere die App beim ersten Oeffnen komplett leer.
-
-   Gilt nur, solange niemand selbst an der Statusauswahl war (einstiegOffen).
-   Und der Merker faellt erst, wenn wirklich etwas gefunden wurde: Startet man
-   ausgeloggt, gibt es noch keine markierten Titel -- meldet man sich dann an,
-   soll der Einstieg mit den nachgeladenen Daten noch einmal greifen. */
-var einstiegOffen = true;
-function hatMarkierte(typ, art){
-  for (var i = 0; i < POOL.length; i++) {
-    var p = POOL[i];
-    if (p.type !== typ || p.realId == null) continue;
-    if (art === 'w' ? getWatchlistFlag(p.realId) : getSeen(p.realId)) return true;
-  }
-  return false;
-}
-var EINSTIEGE = [
-  { tab: 'filme',  typ: 'movie',  art: 'w' },
-  { tab: 'filme',  typ: 'movie',  art: 's' },
-  { tab: 'serien', typ: 'series', art: 'w' },
-  { tab: 'serien', typ: 'series', art: 's' },
-];
-function startEinstiegSetzen(){
-  // Wer schon woanders ist (Kino, fremde Liste, laufende Suche), wird nicht
-  // herausgerissen -- der Einstieg gilt fuer den Start, nicht fuer jeden
-  // Nachladevorgang.
-  if (!einstiegOffen || cinemaMode || personenAnsicht() || sucheAktiv()) return;
-  for (var i = 0; i < EINSTIEGE.length; i++) {
-    var e = EINSTIEGE[i];
-    if (!hatMarkierte(e.typ, e.art)) continue;
-    activeTab = e.tab;
-    watchlistFilterOn = (e.art === 'w');
-    seenFilterOn = (e.art === 's');
-    discoverFilterOn = false;
-    einstiegOffen = false;
-    updateFilterRowUI();
-    return;
-  }
-  // Nichts markiert -- beim Katalog bleiben (siehe die Anfangswerte oben).
-  activeTab = 'filme';
-  watchlistFilterOn = false;
-  seenFilterOn = false;
-  discoverFilterOn = true;
-  updateFilterRowUI();
-}
+   Vorher suchte die App beim Start die erste Ansicht, in der etwas steht
+   (Filme+Watchliste -> Filme+Gesehen -> Serien+... -> Katalog) und stellte
+   genau darauf. Das war gut gemeint, aber es griff in eine Auswahl ein, die
+   niemand getroffen hatte -- und es war zweimal die Ursache dafuer, dass Knoepfe
+   "nicht reagierten": Der automatische Einstieg schob die Ansicht Sekunden nach
+   dem eigenen Tipp wieder um. Mit "alles an" gibt es beim Start nichts mehr zu
+   entscheiden und damit auch nichts, was dazwischenfunken kann. */
 function einstiegSetzen(){
   closeCinemaPage();
-  einstiegOffen = false;
   activeTab = 'filme';
   // Beides an: Erst zeigen, was die Person hat, dann filtern. Vorher musste man
   // sich vorher entscheiden -- ohne zu wissen, wo bei ihr mehr steht.
@@ -2710,12 +2672,13 @@ function personenAnsichtSchliessen(){
   rebuild();
   renderCurrentTab();
 }
+// Ein Zustand fuer alle Bereiche -- die beiden Funktionen bleiben als einzige
+// Lese-/Schreibstelle bestehen, damit sich die Statusauswahl an genau einem Ort
+// aendern laesst.
 function statusLesen(){
-  return cinemaMode ? kinoStatus
-                    : { wl: watchlistFilterOn, seen: seenFilterOn, disc: discoverFilterOn };
+  return { wl: watchlistFilterOn, seen: seenFilterOn, disc: discoverFilterOn };
 }
 function statusSchreiben(neu){
-  if (cinemaMode) { kinoStatus = { wl: neu.wl, seen: neu.seen, disc: neu.disc }; return; }
   watchlistFilterOn = neu.wl; seenFilterOn = neu.seen; discoverFilterOn = neu.disc;
 }
 // Dritter Status neben Watchlist/Gesehen: alles, was du noch NICHT markiert
@@ -2908,11 +2871,12 @@ function eigeneZeileLi(tab, i, profile) {
   }, s.pool[i] ? function(){ oeffneTeilen(s.pool[i]); } : null);
   return li;
 }
-// Welches Geschmacksprofil zaehlt gerade? Normalerweise das eigene. Zeigt die
-// Liste bei aktivem Abgleich dagegen Vorschlaege (nur "Neue entdecken", siehe
-// enforceDiscoverLock), ist die Frage nicht "passt das zu MIR", sondern "passt
-// das zu UNS" -- dann fliessen die Profile aller Ausgewaehlten mit ein, genau
-// wie auf der Kino-Seite.
+// Welches Geschmacksprofil zaehlt gerade? Normalerweise das eigene. Enthaelt
+// die Liste bei aktivem Abgleich dagegen Vorschlaege ("Neue entdecken" an), ist
+// die Frage nicht "passt das zu MIR", sondern "passt das zu UNS" -- dann
+// fliessen die Profile aller Ausgewaehlten mit ein, genau wie auf der
+// Kino-Seite. Es gilt EIN Profil fuer die ganze Liste: Zwei Massstaebe
+// nebeneinander waeren an den Zahlen nicht zu unterscheiden.
 function aktuellesProfil(){
   var eigen = buildProfile();
   return (matchAktiv() && discoverFilterOn) ? alleProfile(eigen) : [eigen];
@@ -2988,7 +2952,7 @@ function kinoTrefferZahl(q){
   var byTmdb = new Map();
   POOL.forEach(function(p){ if (p.type === 'movie' && p.tmdbId != null) byTmdb.set(p.tmdbId, p); });
   var fremd = fremderFortschritt();
-  var st = kinoStatus;
+  var st = statusLesen();
   var n = 0;
   ['now', 'soon', 'later'].forEach(function(key){
     (CINEMA_DATA[key] || []).forEach(function(row){
@@ -2999,7 +2963,7 @@ function kinoTrefferZahl(q){
         if (item.realId == null) return;
         var fe = fremd.get(item.realId);
         if (!fe) return;
-        if (!((kinoStatus.wl && fe.w) || (kinoStatus.seen && fe.s))) return;
+        if (!((st.wl && fe.w) || (st.seen && fe.s))) return;
         n++; return;
       }
       var wl = item.realId != null && getWatchlistFlag(item.realId);
@@ -3434,17 +3398,12 @@ function sucheZustandAnwenden(){
   var jetzt = sucheAktiv();
   if (jetzt && !sucheZustandVorher) {
     sucheZustandVorher = { wl: watchlistFilterOn, seen: seenFilterOn,
-                           disc: discoverFilterOn, stream: inStreamFilterOn, tab: activeTab,
-                           kino: { wl: kinoStatus.wl, seen: kinoStatus.seen, disc: kinoStatus.disc } };
-    // Auch im Kino soll eine Suche weiten statt im zuletzt gesetzten Ausschnitt
-    // zu suchen -- sonst faende man dort einen Titel nicht, nur weil man vorher
-    // auf "nur Watchlist" gestellt hatte.
-    kinoStatus = { wl: true, seen: true, disc: true };
+                           disc: discoverFilterOn, stream: inStreamFilterOn, tab: activeTab };
+    // Eine Suche soll weiten statt im zuletzt gesetzten Ausschnitt zu suchen --
+    // sonst faende man einen Titel nicht, nur weil vorher "nur Watchliste" stand.
     watchlistFilterOn = true;
     seenFilterOn = true;
-    // Waehrend eines Personen-Abgleichs bleibt Entdecken gesperrt (siehe
-    // enforceDiscoverLock) -- die Suche darf die Regel nicht aushebeln.
-    discoverFilterOn = !matchAktiv();
+    discoverFilterOn = true;
     // Der Streaming-Filter verengt, Suchen soll weiten -- er geht aus, bleibt
     // aber anklickbar.
     inStreamFilterOn = false;
@@ -3456,55 +3415,19 @@ function sucheZustandAnwenden(){
     discoverFilterOn = sucheZustandVorher.disc;
     inStreamFilterOn = sucheZustandVorher.stream;
     activeTab = sucheZustandVorher.tab;
-    if (sucheZustandVorher.kino) kinoStatus = sucheZustandVorher.kino;
     sucheZustandVorher = null;
     sucheTypen = { f: true, s: true };
     titelLimit = TITEL_PRO_SEITE;
   }
 }
-// "Neue entdecken" und Watchlist/Gesehen schliessen sich gegenseitig aus.
-//
-// Der Grund gilt ueberall: Entdecken sind zehntausende unmarkierte Titel, die
-// eigenen Listen ein paar Dutzend. Beides landet in EINER gemeinsam sortierten
-// Liste, die bei titelLimit abgeschnitten wird (siehe render) -- die
-// eigenen Titel gehen darin unter. Ein Tipp auf "Gesehen" liess deshalb den
-// Knopf aufleuchten, ohne dass sich an der Liste sichtbar etwas aenderte; es
-// sah aus, als reagiere er nicht. Dieselbe Begruendung stand bisher schon beim
-// Startzustand ("bewusst nicht BEIDE an", siehe watchlistFilterOn), nur galt
-// sie fuer die Knoepfe nicht.
-//
-// Beim Personen-Abgleich kommt ein zweiter Grund dazu: Watchlist/Gesehen sind
-// dort auf gemeinsame Titel eingeschraenkt (siehe rebuild), "Neue entdecken"
-// zeigt Titel, die per Definition bei niemandem auf einer Liste stehen.
-// Nebeneinander hiesse eine Zeile "das habt ihr beide vorgemerkt" und die
-// naechste "das kennt keiner von euch" -- ohne dass man es ihnen ansieht.
-//
-// Ausnahme Suche: Dort sind bewusst alle drei an, damit ueberall gesucht wird
-// (siehe sucheZustandAnwenden). Beim Abgleich bleibt es auch dann bei der
-// Trennung -- dort ist die Mischung nicht nur unuebersichtlich, sondern
-// mehrdeutig.
-function enforceDiscoverLock(){
-  if (!discoverFilterOn) return;
-  if (!watchlistFilterOn && !seenFilterOn) return;   // schon eindeutig
-  if (sucheAktiv() && !matchAktiv()) return;
-  discoverFilterOn = false;
-  titelLimit = TITEL_PRO_SEITE;
-}
 // Aktualisiert nur die Button-Zustaende der Filterzeilen -- getrennt von
 // renderCurrentTab(), damit beide unabhaengig voneinander aufgerufen werden
 // koennen.
 function updateFilterRowUI(){
-  enforceDiscoverLock();
   // In einer fremden Liste stehen Watchlist und Gesehen fuer DEREN beide
   // Listen, zwischen denen man umschaltet -- "Neue entdecken" hat dort keine
   // Entsprechung und ist gesperrt.
   if (personenAnsicht()) {
-    // statusLesen() statt der globalen Schalter: Auf der Kino-Seite liegt die
-    // Statuswahl in kinoStatus, nicht in watchlistFilterOn/seenFilterOn --
-    // toggleStatus schreibt dorthin (ueber statusSchreiben). Wer hier die
-    // globalen Schalter ablas, zeigte in einer fremden Liste im Kino zwei
-    // dauerhaft gelbe Knoepfe: Die Titel dahinter wechselten beim Klick, die
-    // Knoepfe nicht.
     var pst = statusLesen();
     btns.open.classList.toggle('active', pst.wl);
     btns.done.classList.toggle('active', pst.seen);
@@ -3551,10 +3474,6 @@ function setTab(t) {
   // oder Serien verlaesst die Kino-Vollseite. Ohne das blieben Kino-Liste und
   // Titelliste gleichzeitig sichtbar. Wirkungslos, wenn man gar nicht im Kino
   // ist (closeCinemaPage kehrt dann sofort zurueck).
-  // Auch der Tabwechsel ist eine eigene Wahl -- ohne diese Zeile schob der
-  // automatische Einstieg (startEinstiegSetzen) einen Sekunden spaeter wieder
-  // auf "Filme" zurueck, wenn man waehrend des Ladens auf Serien getippt hat.
-  einstiegOffen = false;
   var warKino = cinemaMode;
   closeCinemaPage();
   // Waehrend einer Suche wechselt ein Klick auf Filme/Serien nicht die Seite,
@@ -3617,27 +3536,17 @@ function toggleStatus(feld){
   // nichts Unmarkiertes. Watchliste und Gesehen dagegen verhalten sich hier
   // genau wie in den eigenen Listen, deshalb kein Sonderfall mehr.
   if (personenAnsicht() && feld === 'disc') return;
-  // GANZ nach vorne, vor jeden Rueckweg: Ab dem ersten Antippen hat die Person
-  // selbst gewaehlt, und der automatische Einstieg (startEinstiegSetzen) hat
-  // sich rauszuhalten. Stand das erst weiter unten, gab es diesen Fall: Beim
-  // Start ist nur "Neue entdecken" an; tippt man genau darauf, waeren alle drei
-  // aus -- die Regel "einer muss bleiben" steigt hier aus, und weil der Merker
-  // dabei nie gesetzt wurde, schob der Einstieg die Ansicht Sekunden spaeter auf
-  // Watchliste. Es sah aus, als reagiere der Knopf nicht oder viel zu spaet.
-  einstiegOffen = false;
   var st = statusLesen();
   st[feld] = !st[feld];
-  // "Neue entdecken" und Watchlist/Gesehen schliessen sich aus (Begruendung bei
-  // enforceDiscoverLock): Der gerade angetippte gewinnt, die andere Seite geht
-  // aus. Nur waehrend einer Suche nicht -- dort sollen alle drei zugleich gelten
-  // koennen, sonst schaltet ein Nachjustieren des Filters die Suche ueber den
-  // Katalog ab.
-  if (!sucheAktiv()) {
-    if (feld === 'disc') { if (st.disc) { st.wl = false; st.seen = false; } }
-    else if (st[feld]) st.disc = false;
-  }
-  // Mindestens einer muss aktiv bleiben, sonst waere die Liste ohne
-  // erkennbaren Grund leer -- der Klick auf den letzten aktiven laeuft ins Leere.
+  // Die drei sind frei kombinierbar: Es gibt EINE Liste, und die Knoepfe nehmen
+  // etwas heraus. Frueher schloss "Neue entdecken" die anderen beiden aus --
+  // weil in einer nach Bewertung sortierten Liste die paar Dutzend eigenen Titel
+  // zwischen zehntausenden Vorschlaegen untergingen. Das ist jetzt kein Fall
+  // mehr fuers Programm, sondern fuer die Person: Wer nur seine Titel sehen
+  // will, schaltet "Neue entdecken" ab.
+  //
+  // Mindestens einer muss aktiv bleiben, sonst waere die Liste ohne erkennbaren
+  // Grund leer -- der Klick auf den letzten aktiven laeuft ins Leere.
   if (!st.wl && !st.seen && !st.disc) return;
   statusSchreiben(st);
   // Jede Aenderung ergibt eine neue Liste -- "Mehr laden" faengt wieder bei 250 an.
@@ -3807,9 +3716,8 @@ if (_searchClear) _searchClear.addEventListener('click', function () {
   searchEl.focus();
 });
 // Logo oben fuehrt zurueck in die Startansicht: Suche geleert, Kino-Seite und
-// fremde Liste geschlossen, und dieselbe Auswahl wie beim Oeffnen der App --
-// Filme mit der Watchliste, wenn dort etwas steht, sonst der naechste Bereich,
-// in dem etwas ist (siehe goHome/startEinstiegSetzen).
+// fremde Liste geschlossen, Sortierung auf die Automatik und alle Filter wieder
+// an -- derselbe Zustand wie beim Oeffnen der App (siehe goHome/alleFilterAn).
 var _logoImg = document.querySelector('h1 .logo');
 if (_logoImg) {
   _logoImg.style.cursor = 'pointer';
@@ -4880,14 +4788,11 @@ function goHome(){
   pfadAufStartseite();
   searchEl.value = '';
   searchEl.dispatchEvent(new Event('input'));
-  // setTab stellt Werkzeugleiste und Suche wieder her (wichtig, wenn man aus
-  // dem Kino kommt) -- setzt dabei aber den Einstiegsmerker, weil ein Tabklick
-  // sonst eine eigene Wahl waere. Danach also wieder freigeben und den Einstieg
-  // laufen lassen: Das Logo soll dorthin fuehren, wo etwas steht, nicht auf den
-  // Status, der zufaellig zuletzt an war (siehe startEinstiegSetzen).
+  // setTab stellt Werkzeugleiste und Suche wieder her (wichtig, wenn man aus dem
+  // Kino kommt). Das Logo ist der Weg zurueck auf Anfang -- und der Anfang ist
+  // "alles an", genau wie beim Start (siehe alleFilterAn).
   setTab('filme');
-  einstiegOffen = true;
-  startEinstiegSetzen();
+  alleFilterAn();
   // Auch die Sortierung faengt hier von vorne an: Das Logo ist der Weg zurueck
   // auf Anfang, und dazu gehoert die automatische Wahl (ab 10 markierten Titeln
   // Taste-Score, sonst Community-Bewertung -- siehe effectiveSort). Eine einmal
@@ -6222,7 +6127,6 @@ async function loadUserProgressAndRefresh(){
   USER_DATA_SIG = userDataSignature();
   updateProfileBtn();
   rebuild();
-  startEinstiegSetzen();
   renderCurrentTab();
 }
 
@@ -6354,13 +6258,6 @@ window.addEventListener('pageshow', function(e){ if (e.persisted) refreshOnResum
 
 renderAuthBar();
 setTab('filme');
-// setTab wertet jeden Aufruf als eigene Wahl und setzt dabei einstiegOffen auf
-// false (damit ein Tipp auf "Serien" waehrend des Ladens nicht Sekunden spaeter
-// ueberschrieben wird). Dieser eine Aufruf hier ist aber kein Tipp, sondern der
-// Seitenaufbau -- ohne die Zeile darunter stieg startEinstiegSetzen() nach dem
-// Laden IMMER sofort wieder aus, und die App startete fuer alle im Katalog
-// ("Neue entdecken") statt in der eigenen Watchliste. Wie in goHome.
-einstiegOffen = true;
 apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() => { CURRENT_USER = null; }).finally(() => {
   renderAuthBar();
   updateProfileBtn();
