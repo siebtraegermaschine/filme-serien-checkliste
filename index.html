@@ -3774,13 +3774,27 @@ if (sortBtn && sortMenu) {
 // wurden ungekuerzt gerendert und deshalb per applyFilter() ein-/ausgeblendet.
 // Seit jede Liste bei TITEL_PRO_SEITE endet, gibt es diesen Sonderfall nicht
 // mehr: Immer neu rendern, immer wieder bei der ersten Seite anfangen.
+/* Getippt wird schneller, als die Liste neu entstehen kann: Ein einzelner
+   Tastendruck kostete gemessen 76 ms -- synchron, das Zeichen erschien also erst
+   danach im Feld. Bei "matrix" sechsmal hintereinander.
+
+   Aufgeteilt in zwei Teile. Sofort passiert nur das Billige: der Zustand, den
+   eine Suche herstellt (alle Filter an, siehe sucheZustandAnwenden), und die
+   Knopfleiste dazu -- zusammen unter 1 ms. Die Liste folgt, sobald 120 ms lang
+   nichts mehr getippt wurde. Dieselbe Wartezeit wie bei der Vorschlagsliste
+   darunter, beide erscheinen damit gemeinsam statt versetzt. */
+var SUCHE_RENDER_VERZOEGERUNG = 120;
+var _sucheRenderTimer = null;
 searchEl.addEventListener('input', function(){
   sucheZustandAnwenden();
   titelLimit = TITEL_PRO_SEITE;
-  // renderCurrentTab statt renderCinemaPage: Die Suche schaltet auch im Kino
-  // alle Status an (siehe sucheZustandAnwenden), das muss sich in der
-  // Buttonleiste zeigen -- und die aktualisiert nur updateFilterRowUI.
-  renderCurrentTab();
+  // Die Suche schaltet auch im Kino alle Status an (siehe sucheZustandAnwenden),
+  // das muss sich sofort in der Buttonleiste zeigen -- und die aktualisiert nur
+  // updateFilterRowUI.
+  updateFilterRowUI();
+  clearTimeout(_sucheRenderTimer);
+  // renderCurrentTab statt renderList: im Kino wird eine andere Seite gezeichnet.
+  _sucheRenderTimer = setTimeout(renderCurrentTab, SUCHE_RENDER_VERZOEGERUNG);
 });
 // Protokolliert manuell eingegebene Suchbegriffe fuer spaetere Auswertung (siehe
 // backend/routes/searchLog.js) -- 800ms nach der letzten Eingabe (nicht bei jedem
@@ -4892,6 +4906,10 @@ function goHome(){
   // von Hand gesetzte Sortierung ueberdeckte sie sonst bis zu 24 Stunden lang,
   // ohne dass man noch wuesste, dass man sie gesetzt hat.
   sortManualLeeren();
+  // Das Leeren des Feldes oben hat einen verzoegerten Render angestossen (siehe
+  // SUCHE_RENDER_VERZOEGERUNG). Der wuerde 120 ms spaeter dasselbe noch einmal
+  // zeichnen -- hier wird ohnehin sofort gezeichnet, also weg damit.
+  clearTimeout(_sucheRenderTimer);
   renderCurrentTab();
   window.scrollTo(0, 0);
 }
