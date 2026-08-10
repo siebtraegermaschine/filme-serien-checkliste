@@ -1,8 +1,16 @@
 # Plan: „Deine Kinos" — Kinos in der Nähe wählen und danach filtern
 
-> **Noch nicht umgesetzt.** Dieses Dokument beantwortet zuerst die beiden
-> Datenfragen, weil an ihnen hängt, ob die Funktion überhaupt so gebaut werden
-> kann. Stand: 10. August 2026.
+> **Teilweise umgesetzt am 10. August 2026** (`b3e4abb`, `5f6226e`, `53a484d`).
+> Live sind die Teile, die von keinem Anbieter abhängen: Tabellen, die beiden
+> Importe, die API und **Einstellungen → „Deine Kinos"** mit Ortssuche, Umkreis
+> und Auswahl.
+>
+> **Der Filterknopf auf der Kino-Seite fehlt weiterhin** — bewusst, siehe
+> Abschnitt 2: Ohne die Angabe, welche Filme in einem Kino laufen, hätte er
+> nichts zu filtern. Dafür ist eine der Quellen aus Abschnitt 1.2 nötig, und
+> das ist eine Geldentscheidung.
+>
+> Im Bestand: **1.985 Kinos** und **23.297 Postleitzahlen**.
 
 ## Ziel
 
@@ -286,14 +294,14 @@ gerechnet. Für Entfernungen bis 100 km reicht das ohne PostGIS.
 
 ## 6. Phasen
 
-| | Inhalt | Aufwand |
+| | Inhalt | Stand |
 |---|---|---|
-| 0 | Angebot MovieGlu einholen, Free Trial bei Cinepass, an echten Daten messen | 1 Tag + Wartezeit |
-| 1 | Tabellen, GeoNames-Import, OSM-Import als Skript | 1–2 Tage |
-| 2 | Einstellungen „Deine Kinos" mit Suche und Umkreis | 2 Tage |
-| 3 | Knopf auf der Kino-Seite (bei Weg A: Verweise statt Filter) | 1 Tag |
-| 4 | *(nur Weg B)* Täglicher Abgleich „läuft/läuft nicht", Filter, Kino-Namen am Titel | 1–2 Tage |
-| 4b | *(optional, später)* Uhrzeiten und Buchungs-Links — braucht den 299-€-Tarif | 2–3 Tage |
+| 0 | Angebote einholen (Cinepass Trial, MovieGlu, Kinoheld), an echten Daten messen | **offen** |
+| 1 | Tabellen, GeoNames-Import, OSM-Import als Skript | **erledigt** |
+| 2 | Einstellungen „Deine Kinos" mit Suche und Umkreis | **erledigt** |
+| 3 | Knopf auf der Kino-Seite | **wartet auf Phase 0** |
+| 4 | *(nur Weg B)* Täglicher Abgleich „läuft/läuft nicht", Filter, Kino-Namen am Titel | offen, 1–2 Tage |
+| 4b | *(optional, später)* Uhrzeiten und Buchungs-Links — braucht den 299-€-Tarif | offen, 2–3 Tage |
 
 ---
 
@@ -331,3 +339,33 @@ gerechnet. Für Entfernungen bis 100 km reicht das ohne PostGIS.
 | Spielzeiten nicht für jedes Haus | kleine Kinos ohne Daten | vor dem Kauf im Trial genau dafür messen |
 | Knopf ohne Wirkung (Weg A) | wirkt wie ein Fehler | dann kein Filter, sondern sichtbar Verweise |
 | Zuordnung über `tmdb_id` scheitert | Titel ohne Spielzeiten | im Trial die Trefferquote gegen `cinema_cache` messen |
+
+
+---
+
+## 9. Was beim Bauen dazukam
+
+**Overpass antwortet unzuverlässig, aber nicht größenabhängig.** Gemessen: 4×4
+Grad lief in 15 s durch (376 Kinos), während 0,5×0,5 Grad im selben Zeitraum mit
+504 abbrach. Der Import fragt deshalb in **wenigen großen** Kacheln, mit
+wachsender Wartezeit und einem zweiten Server — das ist zugleich freundlicher
+und verlässlicher als viele kleine Abfragen.
+
+**Der GeoNames-Abzug ist im Streaming-Verfahren gepackt.** Größe und Prüfsumme
+stehen im lokalen Kopf auf null und folgen erst hinter den Daten. Wer sich am
+Dateianfang entlanghangelt, kommt nach dem ersten Eintrag nicht weiter. Gelesen
+wird deshalb das Inhaltsverzeichnis am Dateiende.
+
+**Erotikkinos tragen in OSM kein Merkmal.** Am Beispiel „Pleasure Shop Gaykino"
+in Trier nachgesehen: `cinema`, `adult`, `shop` und `cinema:genre` sind alle
+leer. Gefiltert wird deshalb über den Namen — zweitbeste Lösung, knapp gehalten,
+im Zweifel bleibt etwas stehen. Drei Zeilen betraf es im Bestand.
+
+**Kinos im Grenzgebiet bleiben drin.** Wer in Trier sucht, bekommt Echternach
+(Luxemburg) mit angeboten. Das ist Absicht: Eine Umkreissuche, die an der
+Landesgrenze endet, wäre für Menschen in Grenznähe schlicht falsch.
+
+**Beim Prüfen nach einem Deploy nicht auf den Commit-Hash warten.** `deploy.sh`
+setzt ihn im ersten Schritt, die Migration läuft erst danach — die Tabellen
+waren deshalb scheinbar nicht da. Auf das eigentliche Ergebnis prüfen, nicht auf
+den Hash.
