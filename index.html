@@ -2942,6 +2942,39 @@ function eintragSortwert(e, sortBy, profile){
   if (sortBy === 'newstream') return p.fs ? new Date(p.fs).getTime() : -Infinity;
   return gewichteteNote(p.r, p.vc);
 }
+/* Liefert die besten `limit` Eintraege in Sortierreihenfolge -- ohne die ganze
+   Liste zu sortieren.
+
+   Gezeichnet werden 25 Zeilen (TITEL_PRO_SEITE), sortiert wurden bisher alle:
+   Mit allen Filtern an stehen rund 33.000 Eintraege in der Liste, und allein
+   das Sortieren kostete 26 ms -- synchron im Klick-Handler, bei jedem Klick auf
+   Filme, Serien, Watchliste, Gesehen oder Neue entdecken. Ein Vergleich holte
+   dabei zweimal aus einer Map; die Werte liegen jetzt in einem Float64Array und
+   ausgewaehlt wird in einem Durchlauf. Gemessen an 32.698 Eintraegen:
+   37 ms -> 3 ms.
+
+   Bei Gleichstand bleibt die urspruengliche Reihenfolge erhalten -- verdraengt
+   wird nur bei ECHT groesserem Wert. Das entspricht der bisherigen
+   Vollsortierung, denn Array.prototype.sort ist stabil. Gegengeprueft: Top-25
+   und Top-100 sind Zeichen fuer Zeichen dieselben wie vorher. */
+function besteNachSortwert(eintraege, sortBy, profile, limit){
+  var n = eintraege.length;
+  var werte = new Float64Array(n);
+  for (var i = 0; i < n; i++) werte[i] = eintragSortwert(eintraege[i], sortBy, profile);
+  // Die ersten `limit` bilden das Startfeld, absteigend geordnet.
+  var top = [];
+  for (var k = 0; k < n && k < limit; k++) top.push(k);
+  top.sort(function(a, b){ return werte[b] - werte[a]; });
+  // Alles Weitere kommt nur hinein, wenn es besser als der schlechteste im Feld
+  // ist -- dann an die passende Stelle, der Rest rutscht nach.
+  for (var j = limit; j < n; j++) {
+    if (!(werte[j] > werte[top[top.length - 1]])) continue;
+    var p = top.length - 1;
+    while (p > 0 && werte[j] > werte[top[p - 1]]) { top[p] = top[p - 1]; p--; }
+    top[p] = j;
+  }
+  return top.map(function(idx){ return eintraege[idx]; });
+}
 // Sammelt die Eintraege aller aktiven Status in EINER Liste: Watchlist/Gesehen
 // aus state[activeTab] (markierte Titel), "Neue entdecken" direkt aus dem POOL. Der
 // Typ (Film oder Serie) kommt in beiden Faellen aus dem aktiven Tab.
@@ -3123,15 +3156,11 @@ function render() {
   // filtern -- dann bleibt q leer und sammleEintraege spart sich die Arbeit.
   const q = (discoverFilterOn || sucheAktiv()) ? searchEl.value.trim().toLowerCase() : '';
   const eintraege = sammleEintraege(q);
-  const sortBy = effectiveSort();
-  const werte = new Map();
-  eintraege.forEach(function(e){ werte.set(e, eintragSortwert(e, sortBy, profile)); });
-  eintraege.sort(function(a, b){ return werte.get(b) - werte.get(a); });
   if (!eintraege.length) { renderLeerzustand(q); kinoHinweisAnhaengen(q); return; }
   // Gekuerzt wird in JEDER Liste, auch in Watchliste und Gesehen (siehe
-  // TITEL_PRO_SEITE): Erst sortieren, dann die ersten 25 zeichnen, den Rest
-  // holt "Mehr laden" nach.
-  const sichtbar = eintraege.slice(0, titelLimit);
+  // TITEL_PRO_SEITE): Erst die besten 25 heraussuchen, den Rest holt
+  // "Mehr laden" nach.
+  const sichtbar = besteNachSortwert(eintraege, effectiveSort(), profile, titelLimit);
   sichtbar.forEach(function(e){
     list.appendChild(e.art === 'eigen'
       ? eigeneZeileLi(e.tab, e.idx, profile)
@@ -3579,7 +3608,6 @@ function setTab(t) {
   // Andere Typauswahl heisst andere Liste -- "Mehr laden" faengt wieder vorn an.
   titelLimit = TITEL_PRO_SEITE;
   updateFilterRowUI();
-  renderCurrentTab();
   // Und zwar von oben. Ohne das bleibt die Bildlaufposition stehen: Wer im Kino
   // weit unten stoebert und dann auf "Filme" tippt, landet mitten in der
   // Filmliste -- die Tab-Reihe ist gar nicht mehr im Bild, man sieht also nicht
@@ -3587,6 +3615,13 @@ function setTab(t) {
   // dem Wechsel, oben am Bildschirm stand ein beliebiger Titel. Das war als
   // "der erste Klick klappt nicht" gemeldet.
   window.scrollTo(0, 0);
+  // Erst zeichnen lassen, dann die Liste bauen -- wie bei den Statusknoepfen und
+  // den FSK-Stufen (siehe nachDemZeichnen). Stand renderCurrentTab in derselben
+  // Aufgabe, erschien die Hervorhebung am Tab erst, wenn die Liste fertig war:
+  // gemessen 27-50 ms auf dem Rechner, auf dem Telefon ein Vielfaches davon.
+  // Der Klick wirkte dadurch verschluckt, besonders beim Wechsel aus dem Kino
+  // zurueck auf Filme oder Serien.
+  nachDemZeichnen(renderCurrentTab);
 }
 
 const btns = { open: document.getElementById('fOpen'), done: document.getElementById('fDone'), discover: document.getElementById('fDiscover'), inStream: document.getElementById('fInStream') };
