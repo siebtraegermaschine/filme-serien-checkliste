@@ -8,7 +8,7 @@
 > Deutschland). Das ist eine geprüfte Tatsache und keine Abwägung.
 
 Stand: 10. August 2026. Gehört zu den offenen Punkten aus `UEBERGABE-OFFEN.md`,
-Abschnitt 2.1.
+Abschnitt 3.1.
 
 ---
 
@@ -151,7 +151,7 @@ wirkt dort, wo die Entscheidung fällt. Das ist eine Änderung in `index.html`,
 kein Rechtstext.
 
 **Feedback speichern oder bewusst nicht.** Heute ist die Nachricht weg, wenn
-Resend den Versand nicht schafft (steht so in `UEBERGABE-OFFEN.md`, Abschnitt 3).
+Resend den Versand nicht schafft (steht so in `UEBERGABE-OFFEN.md`, Abschnitt 4).
 Falls ihr sie künftig in der Datenbank ablegt, stimmt der Satz „wird nicht in
 unserer Datenbank gespeichert" nicht mehr — die beiden Punkte gehören zusammen
 entschieden.

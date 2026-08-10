@@ -2,10 +2,12 @@
 
 Ergänzt `UEBERGABE-CHAT.md` (Stand 2026-08-03). Für Architektur und Auslieferung
 siehe `DEPLOYMENT.md`, für den Weg zu nativen Apps `PLAN-NATIVE-APPS.md`,
-für den bereits umgesetzten Filter-Umbau `PLAN-FILTER.md`.
+für den bereits umgesetzten Filter-Umbau `PLAN-FILTER.md`, für den offenen
+Rechtstext zum Mailversand `ENTWURF-DATENSCHUTZ-MAIL.md`.
 
-**Diese Datei ist der Einstiegspunkt.** Abschnitt 2 sagt, was noch zu tun ist;
-Abschnitt 1 und 5, was man vorher wissen sollte.
+**Diese Datei ist der Einstiegspunkt.** Abschnitt 3 sagt, was noch zu tun ist;
+Abschnitt 1, 2 und 6, was man vorher wissen sollte. Die Abschnitte 0 bis 2 stehen
+nach Datum, das Neueste zuerst.
 
 **Deployment läuft automatisch:** Jeder Push auf `main` stößt
 `.github/workflows/deploy.yml` an, das auf dem Server `/opt/movietaste/deploy.sh`
@@ -24,7 +26,85 @@ ssh -i ~/.ssh/id_ed25519 root@movietaste.de \
 
 ---
 
-## 0. Was am 9. August dazukam (5 Commits)
+## 0. Was am 10. August dazukam (3 Commits)
+
+| Commit | Inhalt |
+|---|---|
+| `e4f2057` | Filme, Serien und die Statusknöpfe schlagen sofort um statt nach der Liste |
+| `b8e825d` | Suche: das getippte Zeichen wartet nicht mehr auf die Liste |
+| `2dd9f2c` | Datenschutz: Serverstandort eingetragen, Entwurf für den Mailversand daneben |
+
+### 0.1 „Die Klicks sind nicht flüssig" — zwei Ursachen, beide gemessen
+
+Gemeldet als „dauert immer etwas oder man muss ein zweites Mal klicken", für
+Filme/Serien/Kino **und** für Watchliste/Gesehen/Neue entdecken.
+
+**`setTab` zeichnete die Liste in derselben Aufgabe.** Die Hervorhebung am Tab
+erschien deshalb erst, wenn die Liste fertig war — 27–50 ms auf dem Rechner, auf
+dem Telefon ein Vielfaches. Genau das Muster aus 1.2, für das es
+`nachDemZeichnen()` längst gibt: Die Statusknöpfe und die FSK-Stufen benutzten es
+schon, **bei den Tabs war es übersehen worden.** Jetzt auch dort.
+
+**Die Liste selbst war zu teuer.** `render()` legte für jeden der 33.000–41.000
+Einträge einen Sortwert in eine `Map` und sortierte alles durch, um 25 Zeilen zu
+zeigen. Der Vergleich holte dabei zweimal aus der Map: **26 ms allein fürs
+Sortieren**, bei jedem Klick auf einen der fünf Knöpfe. `besteNachSortwert()`
+sucht die besten `limit` Einträge stattdessen in einem Durchlauf über ein
+`Float64Array` heraus.
+
+| gemessen an 32.698 Einträgen | vorher | nachher |
+|---|---|---|
+| Tab-Klick, bis der Knopf umschlägt | 27–50 ms | **0,1 ms** |
+| Liste bauen (Community-Bewertung) | 37 ms | **5 ms** |
+| Liste bauen (Taste-Score) | 57 ms | **20 ms** |
+
+Beim Taste-Score bleiben 17 ms fürs Ausrechnen der Punktwerte übrig — das ist
+jetzt der Rest, und er blockiert den Knopf nicht mehr. Wer ihn auch noch loswerden
+will, müsste `punkteFuer()` zwischenspeichern; der Preis dafür wäre, jede Stelle
+zu kennen, die den Wert ungültig macht.
+
+**Gegengeprüft, dass sich die Reihenfolge nirgends verschiebt:** vier Sortierungen
+× fünf Statuskombinationen × drei Typkombinationen ergeben Zeichen für Zeichen
+dieselben Top-25 wie vorher, ebenso Top-100, Top-500 und die vollständige Liste —
+auch über die „Mehr laden"-Grenze hinweg. Möglich ist das, weil bei Gleichstand
+nur bei **echt** größerem Wert verdrängt wird; das entspricht der bisherigen
+Vollsortierung, denn `Array.prototype.sort` ist stabil.
+
+### 0.2 Die Suche blockierte das eigene Tippen
+
+Jeder Tastendruck baute die Trefferliste synchron neu auf: **76 ms**, bevor das
+Zeichen überhaupt im Feld erschien. Aufgeteilt — sofort passiert nur das Billige
+(der Zustand, den eine Suche herstellt, und die Knopfleiste dazu, zusammen unter
+1 ms), die Liste folgt nach `SUCHE_RENDER_VERZOEGERUNG` = 120 ms Tippruhe.
+Dieselbe Wartezeit wie die Vorschlagsliste darunter, beide erscheinen damit
+gemeinsam statt versetzt. Gemessen: **76 ms → 0,1 ms** je Tastendruck.
+
+`goHome()` bricht den wartenden Render ab — es leert das Feld und zeichnet selbst,
+sonst käme 120 ms später dasselbe noch einmal.
+
+### 0.3 Bewusst nicht geändert: das Wechseln zwischen Filme und Serien
+
+Zur Sprache gekommen, mit „so lassen" entschieden. Der Vollständigkeit halber,
+was dabei bekannt war:
+
+```
+Kino → „Filme"   ⇒ nur Filme
+      → „Serien" ⇒ Filme UND Serien   ← kein Wechsel, Serien kommen dazu
+      → „Serien" ⇒ wieder nur Filme   ← der zweite Klick nimmt sie zurück
+```
+
+Von „nur Filme" zu „nur Serien" braucht es zwei Klicks auf **verschiedene**
+Knöpfe. Dazu ist der Klick auf den bereits alleinigen Typ **komplett tot**
+(`setTab`, „letzter aktiver — läuft ins Leere") — er verhindert, dass beide Typen
+ausgehen, sieht aber aus wie ein nicht erkannter Klick.
+
+Die verworfene Alternative, falls es doch wieder aufkommt: *Klick auf einen Typ
+zeigt nur diesen; ist er schon der einzige, kommt der andere dazu.* Eine Regel
+statt zweier Sonderfälle, der Kino-Zweig in `setTab` fiele ersatzlos weg, und
+kein Klick liefe mehr ins Leere. Preis: „beide" ist dann nicht mehr auf den ersten
+Blick erreichbar.
+
+## 1. Was am 9. August dazukam (5 Commits)
 
 Die Sitzung ging über den 7. hinaus weiter. Das Wichtigste zuerst, weil es die
 Bedienung grundlegend geändert hat.
@@ -37,7 +117,7 @@ Bedienung grundlegend geändert hat.
 | `4a7d4eb` | Datenschutz: Hinweisboxen entfernt |
 | `52f5496` | Nachladen und Bereichswechsel springen nicht mehr aus dem Bild |
 
-### 0.1 Der Filter-Umbau — alles frei kombinierbar
+### 1.1 Der Filter-Umbau — alles frei kombinierbar
 
 Aus vier Listen, zwischen denen man umschaltete, ist **eine Liste mit Filtern**
 geworden. Alle fünf Knöpfe verhalten sich gleich: an- und abwählbar, nichts
@@ -72,7 +152,7 @@ Zwei Dinge, die man beim Weiterbauen wissen muss:
 Eine Ausnahme ist geblieben: **In einer fremden Liste ist „Neue entdecken"
 gesperrt** — was jemand nicht markiert hat, ist keine Liste von ihm.
 
-### 0.2 Drei Meldungen „der erste Klick wird nicht erkannt" — eine Ursache
+### 1.2 Drei Meldungen „der erste Klick wird nicht erkannt" — eine Ursache
 
 Dreimal gemeldet, dreimal dasselbe Muster: **Der Klick wirkte sofort, aber an der
 Stelle, auf die getippt wurde, stand danach nicht das Erwartete.** Nie ein
@@ -87,11 +167,11 @@ Klick- oder Geschwindigkeitsproblem.
 **Merksatz für die nächste solche Meldung:** Erst messen, ob der Klick ankommt
 (er kam jedes Mal an), dann messen, was sich unter dem Finger bewegt.
 
-### 0.3 Rechtstexte
+### 1.3 Rechtstexte
 
 Die vier gelben Hinweisboxen in `datenschutz.html` sind entfernt — sie waren für
 die interne Arbeit gedacht, nicht für Besucher. **Zwei Angaben fehlen dadurch
-still**, siehe 2.1.
+still**, siehe 3.1.
 
 Alle drei Rechtstexte setzten nur `color: #1a1a1a` und keine Hintergrundfarbe;
 im Dunkelmodus stand fast schwarzer Text auf dunklem Grund. Sie haben jetzt
@@ -99,7 +179,7 @@ im Dunkelmodus stand fast schwarzer Text auf dunklem Grund. Sie haben jetzt
 
 ---
 
-## 1. Was am 6./7. August entstanden ist (14 Commits)
+## 2. Was am 6./7. August entstanden ist (14 Commits)
 
 Der Reihe nach, weil mehrere davon aufeinander aufbauen:
 
@@ -121,13 +201,13 @@ Der Reihe nach, weil mehrere davon aufeinander aufbauen:
 | `843b3bc` | Zweitnamen bleiben durchsuchbar, Fehlzuordnungen legen nichts mehr zusammen |
 
 Dazu Änderungen an den Produktivdaten, die **nicht** im Git stehen (siehe
-Abschnitt 1.3).
+Abschnitt 2.3).
 
-### 1.1 Die drei Fehler, die Nutzer gemeldet hatten
+### 2.1 Die drei Fehler, die Nutzer gemeldet hatten
 
 > Dieser Abschnitt ist **Vorgeschichte**. Mehrere hier genannte Bezeichner
 > (`einstiegOffen`, `startEinstiegSetzen`, `kinoStatus`) gibt es seit dem
-> 9. August nicht mehr — sie sind mit dem Filter-Umbau entfallen, siehe 0.1. Wer
+> 9. August nicht mehr — sie sind mit dem Filter-Umbau entfallen, siehe 1.1. Wer
 > wissen will, wie es heute funktioniert, liest 0.1 statt hier.
 
 **„Der Knopf reagiert erst beim dritten Klick."** Zwei unabhängige Ursachen, die
@@ -161,7 +241,7 @@ zurück. Gemessen mit künstlich um 3 s verzögertem Server: **27 ms** statt 2�
 Die eigenen Listen waren davon nie betroffen (`toggleWatched` hat schon immer
 nicht gewartet).
 
-### 1.2 Dubletten — der größte Eingriff
+### 2.2 Dubletten — der größte Eingriff
 
 Die 600 ursprünglich kuratierten Katalog-Titel kamen ohne TMDB-Kennung herein;
 denselben Film gibt es meist ein zweites Mal aus dem TMDB-Abzug. **591 von 600.**
@@ -198,7 +278,7 @@ zusammengelegt, wenn zusätzlich die Regie übereinstimmt **oder** die Titel
 verschwunden (siehe unten). Vier Paare lehnt sie derzeit ab — sie stehen doppelt
 da, was die richtige Richtung zu irren ist.
 
-### 1.3 Vier falsche Zuordnungen gefunden und korrigiert (Datenänderung)
+### 2.3 Vier falsche Zuordnungen gefunden und korrigiert (Datenänderung)
 
 `title_tmdb_resolution` ist per TMDB-Suche entstanden und trifft nicht immer.
 Alle 600 Katalog-Titel wurden gegen vier Größen geprüft, die kein Backfill
@@ -237,29 +317,44 @@ noch mit ihrem Originalbild.
 
 ---
 
-## 2. Was jetzt noch offen ist
+## 3. Was jetzt noch offen ist
 
 Die Liste vom 7. August („Uneinheitliches in der Bedienung") ist durch den
 Filter-Umbau vom 9. August weitgehend erledigt. Was davon übrig blieb, steht
 unten mit dabei.
 
-### 2.1 Zwei Angaben in der Datenschutzerklärung fehlen — vor Go-Live
+### 3.1 Abschnitt 6 der Datenschutzerklärung — vor Go-Live
 
-Die Hinweisboxen sind auf Wunsch entfernt worden, die Lücken bestehen weiter und
-sind jetzt **nicht mehr sichtbar**:
+**Der Serverstandort ist am 10. August erledigt** (`2dd9f2c`). Ermittelt statt
+geschätzt: IP `167.233.54.20`, RIPE-Netz `CLOUD-FSN1` (country `DE`), Hostname
+`ubuntu-2gb-fsn1-1`, Rechenzentrum `fsn1-dc14` — **Falkenstein, Sachsen**, nicht
+Finnland. Abschnitt 5 nennt jetzt Standort und Anschrift und stellt fest, dass die
+Verarbeitung die EU nicht verlässt.
 
-- **Abschnitt 5 (Hosting):** Der Serverstandort fehlt (Deutschland/Finnland).
-  Der Absatz liest sich vollständig, nennt aber nur „Hetzner Online GmbH".
-- **Abschnitt 6 (E-Mail-Versand):** Es steht „einen externen
-  Versanddienstleister" statt eines Namens. Der Anbieter ist **Resend** (laut
-  `MAIL_PROVIDER` auf dem Server). Bewusst nicht eingetragen: Wer in einer
-  Datenschutzerklärung als Auftragsverarbeiter genannt wird, ist eine rechtliche
-  Angabe — das gehört von Hand entschieden.
+Offen bleibt **Abschnitt 6 (E-Mail-Versand)**, und zwar in drei Punkten. Der
+fertige Text dafür liegt in `ENTWURF-DATENSCHUTZ-MAIL.md`, samt der Ergänzungen
+für die Abschnitte 2, 3 und 10 — bewusst **neben** dem Rechtstext, nicht darin.
+
+- **Der Anbieter ist nicht genannt.** Es steht „einen externen
+  Versanddienstleister". Bestätigt auf dem Server: `MAIL_PROVIDER=resend`,
+  Versand über `api.resend.com`. Wer den Namen einträgt, muss zugleich die
+  Übermittlung in die USA und den AV-Vertrag beschreiben — Aussagen über
+  Verträge, die von Hand entschieden gehören. Deshalb Platzhalter im Entwurf.
+- **Genannt, existiert aber nicht:** „Registrierungs-E-Mails". Im Code gibt es
+  nur `sendPasswordResetMail` — bei der Registrierung geht keine Mail raus.
+- **Existiert, ist aber nirgends genannt: die Feedback-Mails.** Sie laufen
+  ebenfalls über Resend und enthalten bis zu **5.000 Zeichen Freitext** plus,
+  bei angemeldeten Personen, die **E-Mail-Adresse des Kontos**; Empfänger ist
+  `info@digital-wings.com`. Das Wort „Feedback" kommt in `datenschutz.html`
+  **überhaupt nicht** vor — auch nicht in Abschnitt 2, 3 oder 10. Das wiegt
+  schwerer als die fehlende Anbieternennung: Hier ist eine ganze Verarbeitung
+  nicht beschrieben.
 
 Ebenfalls weiter offen: `impressum.html` rechtlich prüfen, dazu Abschnitt 9 der
 Datenschutzerklärung (kommerzielle Verwertung), der als Entwurf entstanden ist.
+Sinnvollerweise in **einem** Durchgang mit Abschnitt 6, statt zweimal zu fragen.
 
-### 2.2 Englische Titel durchsuchbar machen — entschieden, aber nicht gebaut
+### 3.2 Englische Titel durchsuchbar machen — entschieden, aber nicht gebaut
 
 **Der Nutzen ist gemessen, die Umsetzung steht aus.** Wer einen Film unter
 seinem englischen Namen kennt, findet ihn heute nicht.
@@ -297,7 +392,7 @@ stünden zwei Vorschläge für denselben Film).
 Abgespeckte Variante, falls 27.000 Abrufe zu viel sind: nur die ~5.000
 meistbewerteten Titel (~15 Min.), später aufstocken.
 
-### 2.3 Match filtert im Kino nicht — ausdrücklich so gewollt
+### 3.3 Match filtert im Kino nicht — ausdrücklich so gewollt
 
 | | Watchliste/Gesehen | Neue entdecken |
 |---|---|---|
@@ -308,7 +403,7 @@ Am 7. August bestätigt („ok so lassen"). Einziger Hinweis darauf ist der
 Leistentext: „Kino-Vorschläge für dich und X" statt „Gemeinsame Titel mit X".
 **Nicht ändern, ohne das erneut zu besprechen.**
 
-### 2.4 Eigene Titel verschwinden bei den anderen Sortierungen
+### 3.4 Eigene Titel verschwinden bei den anderen Sortierungen
 
 Mit allen Filtern an hängt es an der Sortierung, ob man seine eigenen Titel noch
 sieht. Gemessen, eigene Titel unter den ersten 25:
@@ -328,7 +423,7 @@ des Programms. Hier notiert, falls es sich in der Praxis doch als störend
 erweist; die Abhilfe wäre, eigene Titel bei den anderen Sortierungen vorzuziehen
 oder beim Umschalten darauf hinzuweisen.
 
-### 2.5 Kleineres aus der Durchsicht vom 7. August
+### 3.5 Kleineres aus der Durchsicht vom 7. August
 
 Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 
@@ -349,7 +444,7 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 - **„Neue entdecken" ist in fremden Listen ausgegraut** — richtig so, aber es
   steht nirgends warum.
 
-### 2.6 Erledigt (nicht erneut aufmachen)
+### 3.6 Erledigt (nicht erneut aufmachen)
 
 - Kino führte eine eigene Statusauswahl → **behoben** (`kinoStatus` entfernt).
 - Die drei Status schlossen sich aus → **behoben** (frei kombinierbar).
@@ -358,13 +453,19 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 - Sortierung war je Bereich getrennt → **behoben** (eine Sortierung).
 - Die Tab-Reihe sah aus wie ein Filter, war aber ein Seitenwechsel → **behoben**
   (Filme/Serien filtern jetzt wirklich, Kino ist abgesetzt).
+- Tab- und Statusknöpfe reagierten träge → **behoben** am 10. August (siehe 0.1).
+  Die Liste wird nicht mehr vollständig sortiert, und `setTab` zeichnet sie erst
+  nach dem Bildaufbau.
+- Tippen in der Suche hakte → **behoben** am 10. August (siehe 0.2).
+- Serverstandort fehlte in der Datenschutzerklärung → **eingetragen** (siehe 3.1).
 
-## 3. Offen aus früheren Sitzungen
+## 4. Offen aus früheren Sitzungen
 
 ### Rechtliches, vor Go-Live bzw. App Store
 
-- Serverstandort und Mailanbieter in `datenschutz.html`, `impressum.html`
-  prüfen lassen — siehe 2.1, dort ausführlich.
+- Abschnitt 6 von `datenschutz.html` und `impressum.html` prüfen lassen — siehe
+  3.1, dort ausführlich; fertiger Textentwurf in `ENTWURF-DATENSCHUTZ-MAIL.md`.
+  Der Serverstandort ist seit dem 10. August eingetragen.
 - **Mindestzahl bei anonymen Statistiken nicht durchgesetzt.** Die
   Datenschutzerklärung sagt zu, dass Titel erst ab einer Mindestzahl an
   Bewertungen in Auswertungen einfließen. Im Code gibt es das nicht. **Das ist
@@ -382,7 +483,9 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
   verdeckten Zeilen serverseitig wegzulassen; dann braucht das Frontend die
   Umleitungstabelle vom Server statt aus eigener Rechnung.
 - **Feedback wird nicht gespeichert**, nur per Mail verschickt. Schlägt Resend
-  fehl, ist die Nachricht weg.
+  fehl, ist die Nachricht weg. Hängt mit 3.1 zusammen: Der Entwurf sagt zu, dass
+  die Nachricht nicht in der Datenbank landet — wer das ändert, muss den Satz
+  mitändern.
 - **Tour-Screenshots in `tour/` sind veraltet.** Sie zeigen die alte Tab-Reihe
   (genau ein Bereich aktiv) und die alte Statusreihe. Seit dem Filter-Umbau
   leuchten Filme und Serien gleichzeitig, Kino ist abgesetzt, und alle drei
@@ -401,8 +504,8 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 ### Bewusst nicht gemacht
 
 Rückseiten von DVD/Blu-ray (TMDB kennt sie nicht) · Wiederaufführungen im Kino
-kennzeichnen · Match filtert im Kino nicht (siehe 2.3) · eigene Titel bei den
-anderen Sortierungen vorziehen (siehe 2.4).
+kennzeichnen · Match filtert im Kino nicht (siehe 3.3) · eigene Titel bei den
+anderen Sortierungen vorziehen (siehe 3.4).
 
 „Filme und Serien gemeinsam anzeigen" stand hier jahrelang als bewusst
 abgelehnt. **Das ist seit dem 9. August umgesetzt** — der Typ ist keine
@@ -410,7 +513,18 @@ Tab-Achse mehr, sondern ein Filter.
 
 ---
 
-## 4. Fallstricke, die in dieser Sitzung Zeit gekostet haben
+## 5. Fallstricke aus den bisherigen Sitzungen
+
+**Ein einmal eingeführtes Muster gehört überall hin, wo es passt.**
+`nachDemZeichnen()` existiert seit dem 7. August und stand danach an den
+Statusknöpfen und den FSK-Stufen — bei `setTab` fehlte es, und genau dort kam
+einen Tag später dieselbe Meldung („reagiert träge") wieder herein. Nach so einer
+Einführung einmal danach suchen, wer sonst noch synchron rendert.
+
+**Teuer ist selten das Zeichnen, sondern das Rechnen davor.** Die Liste zeigt 25
+Zeilen; die Zeit ging für das Sortieren von 33.000 Einträgen drauf, die nie
+jemand sieht (siehe 0.1). Vor dem Optimieren messen, welcher Teil es ist — hier
+waren es 26 der 37 ms, und das Zeichnen selbst nur 2,5 ms.
 
 **„Reagiert nicht" hiess dreimal „bewegt sich unter dem Finger weg".** Bei jeder
 der drei Meldungen kam der Klick an — messbar, sofort. Verwirrend war jedes Mal,
@@ -463,10 +577,10 @@ Man ist dabei abgemeldet — angemeldete Fälle lassen sich nachstellen, indem m
 
 ---
 
-## 5. Bekannte Einschränkungen
+## 6. Bekannte Einschränkungen
 
 - **Favoriten in der Personenliste** liegen nur im Browser, gelten also je Gerät.
-- **Match im Kino** filtert nicht, sondern sortiert um (siehe 2.3).
+- **Match im Kino** filtert nicht, sondern sortiert um (siehe 3.3).
 - **Manuelle Sortierung verfällt nach 24 Stunden** (`SORT_MANUAL_MAX_AGE_MS`) und
   wird bei Login/Logout sowie beim Logo-Klick zurückgesetzt. Seit dem 9. August
   gibt es nur noch **eine** Sortierung für die Liste (Schlüssel `top200-sort-v3`).

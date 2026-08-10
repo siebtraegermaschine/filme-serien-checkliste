@@ -3,7 +3,7 @@
 > **Erledigt am 9. August 2026.** Alle fünf Phasen sind umgesetzt und live
 > (`4641de6`, `e9f1820`). Dieses Dokument bleibt als Begründung stehen — warum
 > der Umbau so geschnitten wurde und was dabei bewusst entfernt worden ist.
-> Der aktuelle Stand steht in `UEBERGABE-OFFEN.md`, Abschnitt 0.1.
+> Der aktuelle Stand steht in `UEBERGABE-OFFEN.md`, Abschnitt 1.1.
 >
 > Zwei Abweichungen vom Plan beim Umsetzen:
 > - Der automatische Einstieg (`startEinstiegSetzen`) fiel schon in Phase 1 weg
