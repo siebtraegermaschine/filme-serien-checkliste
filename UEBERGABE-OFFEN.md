@@ -26,13 +26,16 @@ ssh -i ~/.ssh/id_ed25519 root@movietaste.de \
 
 ---
 
-## 0. Was am 10. August dazukam (3 Commits)
+## 0. Was am 10. August dazukam (6 Commits)
 
 | Commit | Inhalt |
 |---|---|
 | `e4f2057` | Filme, Serien und die Statusknöpfe schlagen sofort um statt nach der Liste |
 | `b8e825d` | Suche: das getippte Zeichen wartet nicht mehr auf die Liste |
 | `2dd9f2c` | Datenschutz: Serverstandort eingetragen, Entwurf für den Mailversand daneben |
+| `f0a3c5e` | Anonyme Statistiken: Titel unter der Mindestzahl kommen gar nicht erst vor |
+| `2d04e92` | Startlisten kommen aus dem Zwischenspeicher statt jedes Mal aus der Datenbank |
+| `26350ca` | Taste-Score wird nur noch gerechnet, wenn sich die Markierungen geändert haben |
 
 ### 0.1 „Die Klicks sind nicht flüssig" — zwei Ursachen, beide gemessen
 
@@ -137,6 +140,70 @@ Eine Grenze bleibt offen benannt: Gezählt wird je `title_id`, und 591 Titel
 stehen doppelt im Bestand (siehe 2.2). Ein solcher Titel erschiene zweimal mit
 geteilter Zahl — was die Mindestzahl eher zu streng macht, also in die
 unschädliche Richtung irrt.
+
+### 0.5 Kaltstart und Klicks — zwei Stellen, an denen zu oft gerechnet wurde
+
+Gemeldet als „die Hülle ist sofort da, die Titel erst nach drei Sekunden" und
+„der Klick auf Filme und die Wechsel bei Watchliste/Gesehen/Neue entdecken sind
+langsamer als alles andere". Zwei getrennte Ursachen, beide dasselbe Muster:
+Etwas wurde bei jedem Aufruf neu gerechnet, was sich zwischen den Aufrufen gar
+nicht ändert.
+
+**Der Kaltstart lag am Server, nicht an der Leitung.** Beide Startlisten sind
+für jeden Besucher identisch und ändern sich nur beim nächtlichen Import —
+gebaut wurden sie trotzdem bei jedem Seitenaufruf, gleichzeitig, auf einem
+2-GB-Server.
+
+| | vorher | nachher |
+|---|---|---|
+| `/api/titles` bis zum ersten Byte | 1.583 ms | **41 ms** |
+| `/api/streaming` bis zum ersten Byte | 1.649 ms | **193 ms** |
+| beide Startlisten vollständig | ~2.460 ms | **942 ms** |
+| zweiter Besuch (mit ETag) | — | **304, 0 Byte, 83 ms** |
+
+`backend/lib/listenCache.js` hält die fertige Zeichenkette **und** die gepackte
+Fassung — Caddy packt nicht noch einmal, wenn schon ein `Content-Encoding`
+gesetzt ist. Beim Start werden beide Listen vorgewärmt, geleert wird an den drei
+schreibenden Stellen (`bulk-ingest`, `streaming/ingest`, `/ensure`). Dazu holt
+die Abfrage `plot` nicht mehr aus der Datenbank, wenn die Liste sie ohnehin
+nicht mitschickt: 13 MB, die bisher bei jedem Aufruf von Postgres nach Node
+gingen und dort weggeworfen wurden.
+
+**Die Klicks lagen am Taste-Score.** Er hängt an den Markierungen, nicht an den
+Filtern — gerechnet wurde er trotzdem bei jedem Klick für alle 41.271 Einträge.
+Nachgestellt mit 600 markierten Titeln:
+
+| Render mit Taste-Score | Zeit |
+|---|---|
+| vorher | **1.372 ms** |
+| nur `scoreCand` entschlackt | 62 ms |
+| dazu der Zwischenspeicher | **4 ms** |
+
+Zwei Dinge zusammen. Erstens rechnete `scoreCand` teurer als nötig: Drei
+`Object.keys`-Aufrufe legten je Kandidat ein Feld über das ganze Profil an (bei
+600 Titeln gut 2.000 Namen), nur um zu fragen, ob überhaupt etwas drinsteht —
+41.000 Mal. Und die Jahresnähe lief je Kandidat einmal komplett durch die
+Jahresliste. Beides einmal in `profilAbschluss` vorbereitet.
+
+Zweitens hält `punkteFuer` den Wert jetzt am POOL-Eintrag fest, mit einer
+Kennung aus `PROFIL_STAND`, den beim Abgleich gewählten Personen und dem Zustand
+von „Neue entdecken". `profilStandErhoehen()` zählt hoch, wo sich Markierungen
+ändern — zusätzlich in `rebuild()` als Sicherheitsnetz. Ein eigenes Profil ohne
+Kennung („Ähnliche Titel") wird bewusst nicht zwischengespeichert.
+
+**Gegengeprüft:** 13.757 Kandidaten mit alter und neuer Rechnung im selben Lauf
+und mit demselben Profil verglichen — keine einzige Abweichung, auch nicht in
+den Rohbestandteilen. Und nach einer neuen Markierung liefert `punkteFuer`
+wieder den frisch gerechneten Wert.
+
+Was offen bleibt: Der **erste** Render nach einer Markierung kostet weiterhin
+~47 ms, weil dann alle Werte neu entstehen. Das ist der Preis dafür, dass der
+Score global von den Markierungen abhängt.
+
+**Fallstrick beim Nachmessen:** Ein nachgestelltes Profil muss die richtigen
+Feldnamen benutzen (`{seen, watchlist, rating}`, nicht `{s, w, r}`). Mit den
+falschen Namen wirkt gar nichts markiert, das Profil bleibt leer — und die
+Messung zeigt 40 ms, wo in Wirklichkeit 1.372 ms stehen.
 
 ## 1. Was am 9. August dazukam (5 Commits)
 
@@ -508,12 +575,12 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 
 ### Technisch
 
-- **4,2 MB Base64-Poster gehen weiterhin über die Leitung.** Die 591 verdeckten
-  Zeilen werden unverändert ausgeliefert, ausgeblendet wird erst im Browser. In
-  der Anzeige stecken nur noch 5 statt 600 eingebettete Bilder — die
-  Übertragungsgröße sinkt dadurch **nicht**. Nächster Schritt wäre, die
-  verdeckten Zeilen serverseitig wegzulassen; dann braucht das Frontend die
-  Umleitungstabelle vom Server statt aus eigener Rechnung.
+- ~~4,2 MB Base64-Poster gehen weiterhin über die Leitung.~~ **Stimmt nicht
+  mehr** (nachgemessen am 10. August): In `/api/titles` stecken noch **5**
+  eingebettete Bilder mit zusammen **31 kB**. Die Auslieferung besteht heute aus
+  Besetzung (21 %), Poster-Pfaden (13 %) und Genres (11 %). Was bleibt: Die 591
+  verdeckten Dubletten-Zeilen werden weiterhin mitgeschickt und erst im Browser
+  ausgeblendet — sie kosten aber Zeilen, keine Megabyte.
 - **Feedback wird nicht gespeichert**, nur per Mail verschickt. Schlägt Resend
   fehl, ist die Nachricht weg. Hängt mit 3.1 zusammen: Der Entwurf sagt zu, dass
   die Nachricht nicht in der Datenbank landet — wer das ändert, muss den Satz
