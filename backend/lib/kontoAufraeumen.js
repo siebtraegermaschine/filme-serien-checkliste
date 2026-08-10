@@ -12,10 +12,11 @@ export const WIDERRUFSFRIST_TAGE = 14;
 //   - Suchbegriffe: Sie sagen etwas darueber, wonach Leute suchen, und sollen
 //     auswertbar bleiben. Statt sie zu loeschen, wird nur die E-Mail-Adresse
 //     entfernt -- der Begriff selbst haengt danach an niemandem mehr.
-//   - Sterne-Bewertungen: Sie werden je Titel in title_rating_stats
-//     aufaddiert, BEVOR die user_progress-Zeilen kaskadierend verschwinden.
-//     Dort landen nur Anzahl und Summe, keine Zeitstempel und keine Kennung --
-//     es gibt also nichts, worueber sich Zeilen einer Person zuordnen liessen.
+//   - Sterne-Bewertungen: Sie werden je Titel in title_rating_stats und
+//     title_rating_stufen aufaddiert, BEVOR die user_progress-Zeilen
+//     kaskadierend verschwinden. Dort landen nur Anzahl, Summe und Stufe --
+//     keine Zeitstempel und keine Kennung, es gibt also nichts, worueber sich
+//     Zeilen einer Person zuordnen liessen.
 //
 // Eines haengt technisch nicht am Nutzer und muss daher von Hand weg:
 //   - die Sitzungstabelle von connect-pg-simple kennt keinen Fremdschluessel.
@@ -36,6 +37,21 @@ export async function loescheKonto(userId, email) {
        ON CONFLICT (title_id) DO UPDATE
           SET anzahl = title_rating_stats.anzahl + EXCLUDED.anzahl,
               summe_sterne = title_rating_stats.summe_sterne + EXCLUDED.summe_sterne`,
+      [userId]
+    );
+
+    // Dieselben Bewertungen ein zweites Mal, nach Sterne-Stufe getrennt. Aus
+    // Anzahl und Summe laesst sich keine Verteilung zurueckrechnen -- ohne
+    // diesen Schritt fehlten geloeschte Konten still in der Verteilung, die
+    // Abschnitt 9 der Datenschutzerklaerung zusagt.
+    await client.query(
+      `INSERT INTO title_rating_stufen (title_id, sterne, anzahl)
+       SELECT title_id, rating::smallint, count(*)::int
+         FROM user_progress
+        WHERE user_id = $1 AND rating IS NOT NULL
+        GROUP BY title_id, rating
+       ON CONFLICT (title_id, sterne) DO UPDATE
+          SET anzahl = title_rating_stufen.anzahl + EXCLUDED.anzahl`,
       [userId]
     );
 

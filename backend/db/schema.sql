@@ -415,6 +415,22 @@ CREATE TABLE IF NOT EXISTS title_rating_stats (
   summe_sterne INTEGER NOT NULL DEFAULT 0
 );
 
+-- Dieselben Bewertungen geloeschter Konten, aber nach Sterne-Stufe getrennt.
+-- Noetig, weil die Datenschutzerklaerung (Abschnitt 9) die VERTEILUNG auf die
+-- Stufen zusagt ("1.240 Bewertungen, davon 200 mit zehn Sternen") --
+-- title_rating_stats kennt nur Anzahl und Summe, daraus laesst sich keine
+-- Verteilung zurueckrechnen. Ohne diese Tabelle fehlten die Bewertungen
+-- geloeschter Konten in der Verteilung still.
+--
+-- Auch hier bewusst KEINE Kennung und KEIN Zeitstempel: eine Zeile sagt nur
+-- "Titel X hat n Bewertungen mit s Sternen", nicht von wem.
+CREATE TABLE IF NOT EXISTS title_rating_stufen (
+  title_id BIGINT NOT NULL REFERENCES titles(id) ON DELETE CASCADE,
+  sterne   SMALLINT NOT NULL CHECK (sterne BETWEEN 1 AND 10),
+  anzahl   INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (title_id, sterne)
+);
+
 -- Von connect-pg-simple genutzte Session-Tabelle (Standard-Schema des Pakets).
 CREATE TABLE IF NOT EXISTS session (
   sid    VARCHAR NOT NULL COLLATE "default" PRIMARY KEY,

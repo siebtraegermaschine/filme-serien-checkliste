@@ -113,21 +113,19 @@ bis zwei Wochen, gelegentlich länger. Danach folgt Apples eigene Prüfung.
 **Das ist der einzige Punkt im ganzen Plan, der nicht durch Arbeit zu
 beschleunigen ist.** Deshalb Phase 0, Tag 1, parallel zu allem anderen.
 
-### 3.4 Die Zusage zur Mindestzahl ist weiterhin nicht eingelöst
+### 3.4 Die Zusage zur Mindestzahl ist eingelöst — die Rechtstexte noch nicht
 
-Aus `UEBERGABE-CHAT.md`, Abschnitt 1: Die Datenschutzerklärung sagt zu, dass
-Titel erst ab einer Mindestzahl an Bewertungen in Auswertungen einfließen. Im
-Code gibt es das nicht.
+> **Erledigt am 10. August 2026.** Die Mindestzahl steckt jetzt in
+> `backend/lib/bewertungsstatistik.js` (`MINDESTZAHL_BEWERTUNGEN = 20`), der
+> einzigen Stelle, an der eine solche Auswertung entsteht. Für das Formular der
+> Datenschutz-Hinweise („Privacy Nutrition Labels") ist die Angabe damit
+> belegbar. Einzelheiten in `UEBERGABE-OFFEN.md`, Abschnitt 0.4.
 
-Solange die App nur im Browser läuft, ist das ein offener Punkt. Mit der
-Einreichung im Store wird daraus eine Angabe im Formular für die
-Datenschutz-Hinweise („Privacy Nutrition Labels"), die dann nicht stimmt.
-**Vor Phase 8 einlösen**, nicht danach. Der Weg steht schon in der Übergabe:
-`title_rating_stats.anzahl` plus die Bewertungen aus `user_progress`
-zusammenzählen, Titel unterhalb der Schwelle weglassen.
-
-Gleiches gilt für die drei TODO-Platzhalter in `datenschutz.html` und die
-rechtliche Prüfung von `impressum.html` samt Abschnitt 9.
+Offen bleibt der rechtliche Teil: Abschnitt 6 von `datenschutz.html` (Anbieter
+des Mailversands, Übermittlung in die USA, die bisher nicht erwähnten
+Feedback-Mails — fertiger Entwurf in `ENTWURF-DATENSCHUTZ-MAIL.md`) und die
+Prüfung von `impressum.html` samt Abschnitt 9. **Vor Phase 8 erledigen**, nicht
+danach.
 
 ### 3.5 Der Katalog ist groß — auf dem Gerät messen, nicht schätzen
 

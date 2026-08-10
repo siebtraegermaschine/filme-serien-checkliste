@@ -104,6 +104,40 @@ statt zweier Sonderfälle, der Kino-Zweig in `setTab` fiele ersatzlos weg, und
 kein Klick liefe mehr ins Leere. Preis: „beide" ist dann nicht mehr auf den ersten
 Blick erreichbar.
 
+### 0.4 Die Mindestzahl bei den anonymen Statistiken wird jetzt eingehalten
+
+Abschnitt 9 der Datenschutzerklärung sagt zu, dass Titel „erst ab einer
+Mindestzahl von Bewertungen einbezogen" werden. Im Code gab es das nicht —
+allerdings auch gar keine Auswertung, in der es hätte greifen können. Es fehlte
+also nicht eine Prüfung, sondern **die Stelle, an der so etwas entsteht.**
+
+Die gibt es jetzt: `backend/lib/bewertungsstatistik.js`, ausgeleitet über
+`npm run statistik` (`--csv` für die Datei). Bewusst **keine HTTP-Route** — was
+an Dritte geht, soll ein Schritt von Hand sein und keine URL, die irgendwann
+offen im Netz steht.
+
+- **`MINDESTZAHL_BEWERTUNGEN = 20`**, durchgesetzt als `HAVING` auf der
+  zusammengefassten Zahl. Hoch angesetzt, weil die Verteilung feiner ist als die
+  Gesamtzahl: Sie zerfällt in zehn Stufen, und bei wenigen Bewertungen steht in
+  einer Stufe schnell eine einzelne Person.
+- **Neue Tabelle `title_rating_stufen`.** Zugesagt ist die *Verteilung* auf die
+  Sterne-Stufen; `title_rating_stats` kennt nur Anzahl und Summe, daraus lässt
+  sie sich nicht zurückrechnen. Ohne die Tabelle hätten die Bewertungen
+  gelöschter Konten in der Verteilung still gefehlt. `kontoAufraeumen()` schreibt
+  sie in derselben Transaktion mit, ebenfalls ohne Kennung und Zeitstempel.
+- **Heute kommt damit kein einziger Titel in die Auswertung.** Gemessen auf dem
+  Server: 247 Bewertungen auf 217 Titel, der meistbewertete hat drei; 218 Titel
+  zurückgehalten, 0 aufgenommen. Das ist der Zweck, nicht ein Fehler.
+
+Die Zahl 20 steht bewusst **nicht** in der Datenschutzerklärung — dort ist von
+„einer Mindestzahl" die Rede. Sie lässt sich also ändern, ohne eine Zusage zu
+ändern; nach unten sollte sie trotzdem niemand ohne Not schieben.
+
+Eine Grenze bleibt offen benannt: Gezählt wird je `title_id`, und 591 Titel
+stehen doppelt im Bestand (siehe 2.2). Ein solcher Titel erschiene zweimal mit
+geteilter Zahl — was die Mindestzahl eher zu streng macht, also in die
+unschädliche Richtung irrt.
+
 ## 1. Was am 9. August dazukam (5 Commits)
 
 Die Sitzung ging über den 7. hinaus weiter. Das Wichtigste zuerst, weil es die
@@ -458,6 +492,9 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
   nach dem Bildaufbau.
 - Tippen in der Suche hakte → **behoben** am 10. August (siehe 0.2).
 - Serverstandort fehlte in der Datenschutzerklärung → **eingetragen** (siehe 3.1).
+- **Mindestzahl bei den anonymen Statistiken nicht durchgesetzt** →
+  **behoben** am 10. August (siehe 0.4). Es gibt jetzt genau eine Stelle, an der
+  eine solche Auswertung entsteht, und die Mindestzahl steckt darin.
 
 ## 4. Offen aus früheren Sitzungen
 
@@ -466,11 +503,6 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 - Abschnitt 6 von `datenschutz.html` und `impressum.html` prüfen lassen — siehe
   3.1, dort ausführlich; fertiger Textentwurf in `ENTWURF-DATENSCHUTZ-MAIL.md`.
   Der Serverstandort ist seit dem 10. August eingetragen.
-- **Mindestzahl bei anonymen Statistiken nicht durchgesetzt.** Die
-  Datenschutzerklärung sagt zu, dass Titel erst ab einer Mindestzahl an
-  Bewertungen in Auswertungen einfließen. Im Code gibt es das nicht. **Das ist
-  eine Zusage, die das Programm nicht einhält** — vor dem ersten Export
-  nachrüsten. `title_rating_stats` liefert die halbe Grundlage.
 - Privacy Nutrition Labels und Altersfreigabe im Store-Formular; Konten
   (Apple 99 $/Jahr, Google 25 $ einmalig).
 

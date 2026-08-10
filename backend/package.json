@@ -10,7 +10,8 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "migrate": "node db/migrate.js",
-    "seed": "node scripts/seed-from-index-html.mjs"
+    "seed": "node scripts/seed-from-index-html.mjs",
+    "statistik": "node scripts/bewertungsstatistik.mjs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

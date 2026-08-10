@@ -33,7 +33,7 @@ BEHALTEN_MONATLICH="${BACKUP_KEEP_MONTHLY:-12}"
 # anmelden.
 NUTZERTABELLEN=(
   titles users user_links user_link_invites
-  user_progress user_hidden_titles title_rating_stats
+  user_progress user_hidden_titles title_rating_stats title_rating_stufen
 )
 
 STEMPEL="$(date -u +%Y-%m-%dT%H%M%SZ)"

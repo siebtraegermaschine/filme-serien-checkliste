@@ -29,7 +29,7 @@ const BEHALTEN = {
 // Wiederherstellung meldet man sich eben neu an.
 const NUTZERTABELLEN = [
   'titles', 'users', 'user_links', 'user_link_invites',
-  'user_progress', 'user_hidden_titles', 'title_rating_stats',
+  'user_progress', 'user_hidden_titles', 'title_rating_stats', 'title_rating_stufen',
 ];
 
 // Eine leere oder winzige Datei heisst: pg_dump ist gescheitert und hat den
