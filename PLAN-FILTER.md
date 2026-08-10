@@ -1,5 +1,17 @@
 # Plan: Filme, Serien und die drei Status frei kombinierbar
 
+> **Erledigt am 9. August 2026.** Alle fünf Phasen sind umgesetzt und live
+> (`4641de6`, `e9f1820`). Dieses Dokument bleibt als Begründung stehen — warum
+> der Umbau so geschnitten wurde und was dabei bewusst entfernt worden ist.
+> Der aktuelle Stand steht in `UEBERGABE-OFFEN.md`, Abschnitt 0.1.
+>
+> Zwei Abweichungen vom Plan beim Umsetzen:
+> - Der automatische Einstieg (`startEinstiegSetzen`) fiel schon in Phase 1 weg
+>   statt in Phase 3 — er gehört zur Statusachse, nicht zur Typachse.
+> - `listenAnsichtHerstellen()` kam ungeplant dazu: `setTab` schaltet jetzt um,
+>   die beiden bestehenden Aufrufe (Seitenaufbau, Logo) hätten damit „Filme"
+>   abgewählt.
+
 ## Ziel
 
 Aus vier getrennten Listen, zwischen denen man umschaltet, wird **eine Liste mit

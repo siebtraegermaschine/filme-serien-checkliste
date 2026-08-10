@@ -1,8 +1,11 @@
-# Offene Punkte — Stand 2026-08-07
+# Offene Punkte — Stand 2026-08-10
 
-Ergänzt `UEBERGABE-CHAT.md` (Stand 2026-08-03) und ersetzt die Fassung vom
-5. August. Für Architektur und Auslieferung siehe `DEPLOYMENT.md`, für den Weg
-zu nativen Apps `PLAN-NATIVE-APPS.md`.
+Ergänzt `UEBERGABE-CHAT.md` (Stand 2026-08-03). Für Architektur und Auslieferung
+siehe `DEPLOYMENT.md`, für den Weg zu nativen Apps `PLAN-NATIVE-APPS.md`,
+für den bereits umgesetzten Filter-Umbau `PLAN-FILTER.md`.
+
+**Diese Datei ist der Einstiegspunkt.** Abschnitt 2 sagt, was noch zu tun ist;
+Abschnitt 1 und 5, was man vorher wissen sollte.
 
 **Deployment läuft automatisch:** Jeder Push auf `main` stößt
 `.github/workflows/deploy.yml` an, das auf dem Server `/opt/movietaste/deploy.sh`
@@ -18,6 +21,81 @@ eingeschränkt). SQL-Abfragen:
 ssh -i ~/.ssh/id_ed25519 root@movietaste.de \
   "cd /opt/movietaste && docker compose exec -T postgres psql -U postgres -d filme_serien -c 'SELECT …'"
 ```
+
+---
+
+## 0. Was am 9. August dazukam (5 Commits)
+
+Die Sitzung ging über den 7. hinaus weiter. Das Wichtigste zuerst, weil es die
+Bedienung grundlegend geändert hat.
+
+| Commit | Inhalt |
+|---|---|
+| `a762d66` | Plan für den Filter-Umbau (`PLAN-FILTER.md`) |
+| `4641de6` | Watchliste, Gesehen und Neue entdecken frei kombinierbar — auch im Kino |
+| `e9f1820` | Filme und Serien sind Filter statt Tabs — eine Liste, eine Sortierung |
+| `4a7d4eb` | Datenschutz: Hinweisboxen entfernt |
+| `52f5496` | Nachladen und Bereichswechsel springen nicht mehr aus dem Bild |
+
+### 0.1 Der Filter-Umbau — alles frei kombinierbar
+
+Aus vier Listen, zwischen denen man umschaltete, ist **eine Liste mit Filtern**
+geworden. Alle fünf Knöpfe verhalten sich gleich: an- und abwählbar, nichts
+schaltet sich von selbst ab. **Beim Start ist alles an**, die Auswahl wird nicht
+gemerkt — jeder Start sieht gleich aus.
+
+```
+[ Filme ✓ ] [ Serien ✓ ]  ‖  ( 🍿 Kino )
+[ Watchliste ✓ ] [ Gesehen ✓ ] [ Neue entdecken ✓ ]
+```
+
+Kino bleibt eine eigene Seite (drei Zeitabschnitte), benutzt aber **dieselbe**
+Statusauswahl und ist in der Reihe sichtbar abgesetzt (Trennlinie, runde Form) —
+weil es als einziges dort die Seite wechselt statt zu filtern.
+
+**Der Umbau hat mehr Code entfernt als hinzugefügt.** Weg sind: die
+Ausschlussregel (`enforceDiscoverLock`), der eigene Kino-Zustand (`kinoStatus`),
+der automatische Einstieg (`startEinstiegSetzen`/`EINSTIEGE`/`einstiegOffen`),
+der zweite Typzustand der Suche (`sucheTypen`), die zweite Sortier-Erinnerung
+und `applyFilter()`. Neu sind `TYPEN`, `typenAngleichen()`, `alleFilterAn()` und
+`listenAnsichtHerstellen()`.
+
+Zwei Dinge, die man beim Weiterbauen wissen muss:
+
+- **`setTab(t)` schaltet UM.** Wer die Listenansicht nur herstellen will (Start,
+  Logo), nimmt `listenAnsichtHerstellen()` + `alleFilterAn()`. Ein `setTab('filme')`
+  beim Seitenaufbau würde Filme **abwählen**.
+- **`aktiveTypen()` ist die einzige Wahrheit** dazu, welche Typen in der Liste
+  stehen. `activeTab` gibt es noch, aber nur als abgeleiteten Bezugstyp für
+  Leertexte — nie als Auswahl lesen.
+
+Eine Ausnahme ist geblieben: **In einer fremden Liste ist „Neue entdecken"
+gesperrt** — was jemand nicht markiert hat, ist keine Liste von ihm.
+
+### 0.2 Drei Meldungen „der erste Klick wird nicht erkannt" — eine Ursache
+
+Dreimal gemeldet, dreimal dasselbe Muster: **Der Klick wirkte sofort, aber an der
+Stelle, auf die getippt wurde, stand danach nicht das Erwartete.** Nie ein
+Klick- oder Geschwindigkeitsproblem.
+
+| Fall | gemessen | behoben durch |
+|---|---|---|
+| Watchliste in „Neue entdecken" | Handler wartete auf die Server-Antwort (2–3 s) | erst zeichnen, dann senden — 27 ms |
+| „Mehr anzeigen" im Kino | Knopf sprang 3733 px nach unten aus dem Bild, Neuaufbau dauerte 5 ms | `nachladenOhneSprung()` scrollt um die Differenz mit |
+| Kino → Filme | `scrollY` blieb bei 3000, Tab-Reihe außerhalb des Bildes | `setTab` scrollt nach oben |
+
+**Merksatz für die nächste solche Meldung:** Erst messen, ob der Klick ankommt
+(er kam jedes Mal an), dann messen, was sich unter dem Finger bewegt.
+
+### 0.3 Rechtstexte
+
+Die vier gelben Hinweisboxen in `datenschutz.html` sind entfernt — sie waren für
+die interne Arbeit gedacht, nicht für Besucher. **Zwei Angaben fehlen dadurch
+still**, siehe 2.1.
+
+Alle drei Rechtstexte setzten nur `color: #1a1a1a` und keine Hintergrundfarbe;
+im Dunkelmodus stand fast schwarzer Text auf dunklem Grund. Sie haben jetzt
+`color-scheme: light` und weißen Hintergrund.
 
 ---
 
@@ -46,6 +124,11 @@ Dazu Änderungen an den Produktivdaten, die **nicht** im Git stehen (siehe
 Abschnitt 1.3).
 
 ### 1.1 Die drei Fehler, die Nutzer gemeldet hatten
+
+> Dieser Abschnitt ist **Vorgeschichte**. Mehrere hier genannte Bezeichner
+> (`einstiegOffen`, `startEinstiegSetzen`, `kinoStatus`) gibt es seit dem
+> 9. August nicht mehr — sie sind mit dem Filter-Umbau entfallen, siehe 0.1. Wer
+> wissen will, wie es heute funktioniert, liest 0.1 statt hier.
 
 **„Der Knopf reagiert erst beim dritten Klick."** Zwei unabhängige Ursachen, die
 zusammen genau dieses Bild ergaben:
@@ -154,93 +237,134 @@ noch mit ihrem Originalbild.
 
 ---
 
-## 2. Offen: Uneinheitliches in der Bedienung
+## 2. Was jetzt noch offen ist
 
-Diese Liste entstand aus einer Durchsicht aller drei Nutzungsarten (allein,
-fremde Liste, Abgleich) und ist **im laufenden Build nachgemessen**, nicht aus
-dem Code geschlossen. Punkt 2.1 war zur Umsetzung vorgesehen, wurde aber
-zurückgestellt („kläre ich später mit den anderen").
+Die Liste vom 7. August („Uneinheitliches in der Bedienung") ist durch den
+Filter-Umbau vom 9. August weitgehend erledigt. Was davon übrig blieb, steht
+unten mit dabei.
 
-### 2.1 Die Statusauswahl springt beim Wechsel ins Kino — größter Punkt
+### 2.1 Zwei Angaben in der Datenschutzerklärung fehlen — vor Go-Live
 
-Filme/Serien und Kino führen **zwei getrennte Auswahlen**
-(`watchlistFilterOn`/`seenFilterOn`/`discoverFilterOn` gegen `kinoStatus`).
-Gemessen:
+Die Hinweisboxen sind auf Wunsch entfernt worden, die Lücken bestehen weiter und
+sind jetzt **nicht mehr sichtbar**:
 
-| | Filme | nach Klick auf Kino |
+- **Abschnitt 5 (Hosting):** Der Serverstandort fehlt (Deutschland/Finnland).
+  Der Absatz liest sich vollständig, nennt aber nur „Hetzner Online GmbH".
+- **Abschnitt 6 (E-Mail-Versand):** Es steht „einen externen
+  Versanddienstleister" statt eines Namens. Der Anbieter ist **Resend** (laut
+  `MAIL_PROVIDER` auf dem Server). Bewusst nicht eingetragen: Wer in einer
+  Datenschutzerklärung als Auftragsverarbeiter genannt wird, ist eine rechtliche
+  Angabe — das gehört von Hand entschieden.
+
+Ebenfalls weiter offen: `impressum.html` rechtlich prüfen, dazu Abschnitt 9 der
+Datenschutzerklärung (kommerzielle Verwertung), der als Entwurf entstanden ist.
+
+### 2.2 Englische Titel durchsuchbar machen — entschieden, aber nicht gebaut
+
+**Der Nutzen ist gemessen, die Umsetzung steht aus.** Wer einen Film unter
+seinem englischen Namen kennt, findet ihn heute nicht.
+
+- **57 %** der Titel heißen auf Englisch anders (an 150 und an 2.000 zufälligen
+  Titeln gemessen) — rund **15.000 Titel**.
+- Die 188 echten Suchbegriffe aus `search_queries` sind **überwiegend englisch**
+  (`unfamiliar`, `heat`, `will smith`, `hangover`, `rush hour`, `avengers`).
+- Einige Serien stehen mit koreanischem oder japanischem Titel im Bestand
+  (`로맨스는 별책부록`) und sind derzeit praktisch unauffindbar.
+
+In der Datenbank steht es **nicht**: `original_title` ist nur bei **165 von
+26.869** Titeln gefüllt und enthält obendrein den Originaltitel (`아가씨`), nicht
+den englischen. TMDB liefert ihn unter `language=en-US`.
+
+**Empfohlene Umsetzung (gemessen, nicht geschätzt):** Spalte `title_en`,
+Backfill über ~27.000 TMDB-Abrufe (**~77 Minuten**), Anbindung an die Suche,
+und der tägliche Job muss es für neue Titel mitschreiben (sonst wächst die Lücke
+wieder).
+
+Entscheidend ist **wie** gesucht wird — das war gemessen worden:
+
+| englischer Titel … | Begriffe mit Zusatztreffern | Zusatztreffer je 2.000 Titel |
 |---|---|---|
-| allein | `Watchliste` | `Watchliste + Gesehen + Neue entdecken` |
-| mit Abgleich | `Watchliste` | `Watchliste + Gesehen + Neue entdecken` |
+| als Teilstring (wie der Titel heute) | 30 von 188 | **230** |
+| **wortgenau** (wie Besetzung/Regie heute) | 10 von 188 | **13** |
 
-`W+G+E` ist seit dem 5. August eine Kombination, die es unter Filme/Serien gar
-nicht mehr geben kann. Der erste Tipp im Kino wirkt dadurch falsch:
+Wortgenau, denn die 13 sind fast alle berechtigt (`crime` → „True Crime",
+`rush` → „The Gold Rush"). Als Teilstring entsteht Unsinn: `mil` träfe „In the
+**Fam**i**l**y", `ar` allein 82 Zusatztreffer. Der Preis: Beim Tippen greift es
+erst bei fertigem Wort — das fängt die Vorschlagsliste ab (dort als eigene Art
+„Englischer Titel", nur wenn er sich deutlich vom deutschen unterscheidet, sonst
+stünden zwei Vorschläge für denselben Film).
 
-```
-Kino-Start:  W G E
-1x Gesehen:  W - E     ← "Gesehen" aus, Entdecken bleibt
-2x Gesehen:  W G -     ← erst jetzt ein Zustand wie unter Filme
-```
+Abgespeckte Variante, falls 27.000 Abrufe zu viel sind: nur die ~5.000
+meistbewerteten Titel (~15 Min.), später aufstocken.
 
-Das ist derselbe Fehlertyp, der als „reagiert erst beim dritten Klick" gemeldet
-wurde — nur im Kino noch drin. **Empfehlung: Kino soll dieselbe Auswahl
-benutzen, ein Zustand statt zwei.** `enforceDiscoverLock()` fasst `kinoStatus`
-ebenfalls nicht an.
-
-### 2.2 Match filtert im Kino nicht — bewusst so entschieden
+### 2.3 Match filtert im Kino nicht — ausdrücklich so gewollt
 
 | | Watchliste/Gesehen | Neue entdecken |
 |---|---|---|
 | Filme/Serien | Schnittmenge mit allen Ausgewählten | ungefiltert, gemeinsame Sortierung |
 | Kino | **eigene** Markierungen, kein Filter | ungefiltert, gemeinsame Sortierung |
 
-Am 7. August ausdrücklich bestätigt („ok so lassen"). Einziger Hinweis darauf
-ist der Leistentext: „Kino-Vorschläge für dich und X" statt „Gemeinsame Titel
-mit X". Nicht ändern, ohne das erneut zu besprechen.
+Am 7. August bestätigt („ok so lassen"). Einziger Hinweis darauf ist der
+Leistentext: „Kino-Vorschläge für dich und X" statt „Gemeinsame Titel mit X".
+**Nicht ändern, ohne das erneut zu besprechen.**
 
-### 2.3 Der Taste-Score bedeutet drei Dinge, ohne dass es dransteht
+### 2.4 Eigene Titel verschwinden bei den anderen Sortierungen
 
-Derselbe Titel, gemessen: **allein 37 · Match + Entdecken 44 · in einer fremden
-Liste 37.** Die 44 ist der gemeinsame Geschmack. Nichts an der Zahl sagt, welche
-man gerade sieht. Vorschlag: bei gemeinsamer Rechnung an der Erklärung ergänzen
-(„für dich und Pete"), die Zahl selbst muss nicht anders aussehen.
+Mit allen Filtern an hängt es an der Sortierung, ob man seine eigenen Titel noch
+sieht. Gemessen, eigene Titel unter den ersten 25:
 
-### 2.4 Ein Leerzustand behauptet etwas Falsches
+| Sortierung | 561 markiert | 50 markiert | 12 markiert |
+|---|---|---|---|
+| **Taste-Score** (Standard ab 10 Titeln) | 18 von 25 | 18 von 25 | 8 von 25 |
+| Community-Bewertung | **0 von 25** | 0 von 25 | 0 von 25 |
+| Veröffentlichungsdatum | 2 von 25 | 0 von 25 | 0 von 25 |
 
-Gemessen: fremde Liste + eigener Streaming-Filter, kein Treffer → **„Pete hat
-hier nichts markiert."** Falsch — Pete hat fünf Titel, der Anbieterfilter hat sie
-weggenommen. Wenn Streaming- oder Altersfilter die Liste geleert haben, sollte
-das dort stehen, statt es der Person zuzuschreiben. Kleiner Aufwand.
+Der Taste-Score wird aus den markierten Titeln gebaut, deshalb stehen sie dort
+oben. Bei den anderen beiden nicht.
 
-### 2.5 Wischen in einer fremden Kino-Liste blendet den Titel für einen selbst aus
+**Bewusst so belassen** (Entscheidung vom 9. August): Wer nur die eigenen sehen
+will, schaltet „Neue entdecken" ab — das ist eine Entscheidung der Person, nicht
+des Programms. Hier notiert, falls es sich in der Praxis doch als störend
+erweist; die Abhilfe wäre, eigene Titel bei den anderen Sortierungen vorzuziehen
+oder beim Umschalten darauf hinzuweisen.
 
-`darfAusblenden` in `poolItemLi` prüft `discoverFilterOn || cinemaMode`. In einer
-fremden Liste ist Entdecken aus — im Kino greift aber `cinemaMode`. Man sieht
-Petes Liste, wischt, und der Titel verschwindet aus der **eigenen**
-Entdecken-Liste. Unter Filme/Serien ist das dort schon gesperrt.
+### 2.5 Kleineres aus der Durchsicht vom 7. August
 
-### 2.6 Kleineres
+Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 
-- **Suche + Abgleich:** Filme/Serien schalten „Neue entdecken" aus, Kino lässt es
-  an (`sucheZustandAnwenden` setzt `kinoStatus` auf alle drei,
-  `enforceDiscoverLock` fasst es nicht an).
-- **Sortierung:** Kino hat eine eigene (`cinemaSortKey`), getrennt von
-  `sortManual`. Nach einem Wechsel steht dort wieder die Standardsortierung.
+- **Der Taste-Score bedeutet drei Dinge, ohne dass es dransteht.** Derselbe
+  Titel: allein **37**, mit Abgleich + Entdecken **44**, in einer fremden Liste
+  **37**. Vorschlag: bei gemeinsamer Rechnung an der Erklärung ergänzen („für
+  dich und Pete"), die Zahl selbst muss nicht anders aussehen.
+- **Ein Leerzustand behauptet etwas Falsches.** Fremde Liste + eigener
+  Streaming-Filter ohne Treffer → „Pete hat hier nichts markiert." Falsch — Pete
+  hat fünf Titel, der Anbieterfilter hat sie weggenommen.
+- **Wischen in einer fremden Kino-Liste blendet den Titel für einen selbst aus.**
+  `darfAusblenden` in `poolItemLi` prüft `discoverFilterOn || cinemaMode`; in
+  einer fremden Liste greift `cinemaMode`. Unter Filme/Serien ist es dort schon
+  gesperrt.
 - **Zwei Zahlen für dasselbe:** Die leere Watchliste sagt „mind. **20** Titel",
   der Einstieg sagt „ab **10** gespeicherten Titeln", `effectiveSort` schaltet
-  bei **10** um. Drei Stellen, zwei Zahlen.
+  bei **10** um.
 - **„Neue entdecken" ist in fremden Listen ausgegraut** — richtig so, aber es
   steht nirgends warum.
 
----
+### 2.6 Erledigt (nicht erneut aufmachen)
+
+- Kino führte eine eigene Statusauswahl → **behoben** (`kinoStatus` entfernt).
+- Die drei Status schlossen sich aus → **behoben** (frei kombinierbar).
+- Suche + Abgleich verhielten sich im Kino anders → **entfällt** mit dem
+  gemeinsamen Zustand.
+- Sortierung war je Bereich getrennt → **behoben** (eine Sortierung).
+- Die Tab-Reihe sah aus wie ein Filter, war aber ein Seitenwechsel → **behoben**
+  (Filme/Serien filtern jetzt wirklich, Kino ist abgesetzt).
 
 ## 3. Offen aus früheren Sitzungen
 
 ### Rechtliches, vor Go-Live bzw. App Store
 
-- **Drei TODO-Platzhalter in `datenschutz.html`** (Zeilen 21, 64, 72:
-  Vorlagenhinweis, Serverstandort, Mailanbieter).
-- **`impressum.html` rechtlich prüfen**, ebenso Abschnitt 9 der
-  Datenschutzerklärung (kommerzielle Verwertung, als Entwurf gekennzeichnet).
+- Serverstandort und Mailanbieter in `datenschutz.html`, `impressum.html`
+  prüfen lassen — siehe 2.1, dort ausführlich.
 - **Mindestzahl bei anonymen Statistiken nicht durchgesetzt.** Die
   Datenschutzerklärung sagt zu, dass Titel erst ab einer Mindestzahl an
   Bewertungen in Auswertungen einfließen. Im Code gibt es das nicht. **Das ist
@@ -259,10 +383,12 @@ Entdecken-Liste. Unter Filme/Serien ist das dort schon gesperrt.
   Umleitungstabelle vom Server statt aus eigener Rechnung.
 - **Feedback wird nicht gespeichert**, nur per Mail verschickt. Schlägt Resend
   fehl, ist die Nachricht weg.
-- **Tour-Screenshots in `tour/`** sind statisch und veralten bei
-  Oberflächenänderungen. Neu erzeugen: `bash scripts/tour/aufnehmen.sh` (braucht
-  Chrome und Netz). Nach den Änderungen vom 6./7. August sind sie nicht mehr
-  aktuell — die Statusreihe und die Listenlänge sehen inzwischen anders aus.
+- **Tour-Screenshots in `tour/` sind veraltet.** Sie zeigen die alte Tab-Reihe
+  (genau ein Bereich aktiv) und die alte Statusreihe. Seit dem Filter-Umbau
+  leuchten Filme und Serien gleichzeitig, Kino ist abgesetzt, und alle drei
+  Status sind an. Neu erzeugen: `bash scripts/tour/aufnehmen.sh` (braucht Chrome
+  und Netz). **Das ist die sichtbarste Altlast** — die Bilder widersprechen
+  inzwischen dem, was man beim Öffnen sieht.
 - **Einladungen lassen sich nicht zurückziehen**, und Links gelten für beliebig
   viele Personen. Eine Liste der offenen Einladungen mit Schließen-Knopf wäre der
   nächste Schritt.
@@ -274,13 +400,31 @@ Entdecken-Liste. Unter Filme/Serien ist das dort schon gesperrt.
 
 ### Bewusst nicht gemacht
 
-Filme und Serien gemeinsam anzeigen (der Typ ist die Tab-Achse) · Rückseiten von
-DVD/Blu-ray (TMDB kennt sie nicht) · Wiederaufführungen im Kino kennzeichnen ·
-Match filtert im Kino nicht (siehe 2.2).
+Rückseiten von DVD/Blu-ray (TMDB kennt sie nicht) · Wiederaufführungen im Kino
+kennzeichnen · Match filtert im Kino nicht (siehe 2.3) · eigene Titel bei den
+anderen Sortierungen vorziehen (siehe 2.4).
+
+„Filme und Serien gemeinsam anzeigen" stand hier jahrelang als bewusst
+abgelehnt. **Das ist seit dem 9. August umgesetzt** — der Typ ist keine
+Tab-Achse mehr, sondern ein Filter.
 
 ---
 
 ## 4. Fallstricke, die in dieser Sitzung Zeit gekostet haben
+
+**„Reagiert nicht" hiess dreimal „bewegt sich unter dem Finger weg".** Bei jeder
+der drei Meldungen kam der Klick an — messbar, sofort. Verwirrend war jedes Mal,
+dass an der getippten Stelle danach etwas anderes stand. Vorgehen, das jedes Mal
+funktioniert hat: erst per `elementFromPoint` prüfen, ob der Knopf ueberhaupt
+getroffen wird, dann die Dauer des Handlers messen, dann die Position des
+Elements VOR und NACH dem Klick vergleichen. Die Position war zweimal die
+Antwort, die Dauer einmal.
+
+**Nach einem Umbau der Auswahl-Logik zuerst die Aufrufer prüfen, nicht die
+Funktion.** `setTab` schaltet seit dem 9. August um statt zu wechseln — die
+beiden bestehenden Aufrufe (Seitenaufbau, Logo) hätten damit „Filme"
+**abgewählt**. Das fiel nur auf, weil ich die Aufrufliste durchgegangen bin,
+nicht weil ein Test fehlschlug.
 
 **Die Vorschau ist zwischen zwei Werkzeugaufrufen unsichtbar.** `document.hidden`
 ist dort `true`, und damit feuert **`requestAnimationFrame` nicht**. Alles, was
@@ -322,7 +466,14 @@ Man ist dabei abgemeldet — angemeldete Fälle lassen sich nachstellen, indem m
 ## 5. Bekannte Einschränkungen
 
 - **Favoriten in der Personenliste** liegen nur im Browser, gelten also je Gerät.
-- **Match im Kino** filtert nicht, sondern sortiert um (siehe 2.2).
+- **Match im Kino** filtert nicht, sondern sortiert um (siehe 2.3).
 - **Manuelle Sortierung verfällt nach 24 Stunden** (`SORT_MANUAL_MAX_AGE_MS`) und
-  wird bei Login/Logout sowie beim Logo-Klick zurückgesetzt.
+  wird bei Login/Logout sowie beim Logo-Klick zurückgesetzt. Seit dem 9. August
+  gibt es nur noch **eine** Sortierung für die Liste (Schlüssel `top200-sort-v3`).
+- **Die Filterauswahl wird nicht gemerkt.** Jeder Start beginnt mit allem an;
+  das ist so entschieden, nicht vergessen worden.
 - **Alte Einladungslinks sind einlösbar**, auch mehrfach benutzte.
+- **Vier von 591 Dubletten bleiben doppelt stehen** — die Absicherung lehnt sie
+  ab, weil weder Regie noch Titel übereinstimmen („Komm und sieh"/„Come and
+  See", „Engel in Amerika"/„Angels in America"). Das ist die richtige Richtung
+  zu irren.
