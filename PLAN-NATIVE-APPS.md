@@ -572,7 +572,7 @@ Stilregeln greifen nicht wegen Spezifität. Beide haben je zweimal zugeschlagen.
 ## 11. Abhak-Liste vor der Einreichung
 
 **Recht und Daten**
-- [ ] Mindestzahl bei anonymen Auswertungen durchgesetzt (3.4)
+- [x] Mindestzahl bei anonymen Auswertungen durchgesetzt (3.4) — 10.08.2026
 - [ ] Drei TODO-Platzhalter in `datenschutz.html` ersetzt
 - [ ] `impressum.html` rechtlich geprüft
 - [ ] Abschnitt 9 der Datenschutzerklärung geprüft oder entfernt
