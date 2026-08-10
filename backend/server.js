@@ -22,6 +22,9 @@ import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteSicherung } from './lib/sicherung.js';
 import { starteThemen } from './lib/themen.js';
+import { vorwaermen } from './lib/listenCache.js';
+import { ladeListe, listenSchluessel } from './routes/titles.js';
+import { ladeStreaming, STREAMING_SCHLUESSEL } from './routes/streaming.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PgSession = connectPgSimple(session);
@@ -192,4 +195,13 @@ app.listen(port, () => {
   // lib/themen.js) -- Trends wie True Crime kennt TMDB nur als Schlagwort,
   // nicht als Genre, und die Titel der Nacht sollen ihres von selbst bekommen.
   starteThemen();
+  /* Die beiden grossen Startlisten gleich bauen, statt den ersten Besucher nach
+     einem Deploy warten zu lassen. Der Aufruf entspricht genau dem, den die App
+     beim Start macht -- steht dort ein anderer Parameter, waermt das hier ins
+     Leere und die Liste wird beim ersten Aufruf gebaut (siehe listenCache.js). */
+  vorwaermen([
+    { schluessel: listenSchluessel({ source: 'catalog,discovery,streaming' }),
+      ermitteln: () => ladeListe({ source: 'catalog,discovery,streaming' }) },
+    { schluessel: STREAMING_SCHLUESSEL, ermitteln: ladeStreaming },
+  ]);
 });

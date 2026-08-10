@@ -1,5 +1,6 @@
 import { pool } from '../db/pool.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
+import { ausListe, leeren } from '../lib/listenCache.js';
 
 const router = createAsyncRouter();
 
@@ -33,7 +34,12 @@ function rowToCand(row) {
 // Öffentlich, kein Login nötig -- ersetzt den bisherigen `fetch('streaming.json')`
 // Aufruf im Frontend. Gibt exakt die bisherige Form {generated,region,providers}
 // zurück, damit der bestehende Rendering-Code im Frontend kompatibel bleibt.
-router.get('/', async (req, res) => {
+// Fuer jeden Besucher identisch und nur einmal taeglich neu (siehe /ingest) --
+// deshalb aus dem Zwischenspeicher. Gemessen wurde hier eine Wartezeit von
+// 1.649 ms bis zum ersten Byte, parallel zur ebenso grossen Titel-Liste.
+export const STREAMING_SCHLUESSEL = 'streaming';
+
+export async function ladeStreaming() {
   const { rows } = await pool.query(`SELECT * FROM streaming_cache ORDER BY provider_id, type, title`);
 
   const byProvider = new Map();
@@ -54,12 +60,16 @@ router.get('/', async (req, res) => {
     `SELECT DISTINCT name_de, name_en FROM genre_alias WHERE name_de <> name_en`
   );
 
-  res.json({
+  return {
     generated: latest ? latest.toISOString() : null,
     region: 'DE',
     providers: Array.from(byProvider.values()),
     genreAlias: aliasRows.map((r) => ({ de: r.name_de, en: r.name_en })),
-  });
+  };
+}
+
+router.get('/', async (req, res) => {
+  await ausListe(req, res, STREAMING_SCHLUESSEL, ladeStreaming);
 });
 
 // Wird ausschließlich von der GitHub Action (stream-fetch.mjs) mit dem
@@ -177,6 +187,7 @@ router.post('/ingest', async (req, res) => {
     client.release();
   }
 
+  leeren('Streaming-Import (ingest)');
   res.status(204).end();
 });
 

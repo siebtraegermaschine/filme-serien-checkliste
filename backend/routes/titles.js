@@ -1,6 +1,7 @@
 import { pool } from '../db/pool.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
+import { ausListe, leeren } from '../lib/listenCache.js';
 
 const router = createAsyncRouter();
 
@@ -52,8 +53,17 @@ export function serializeTitle(row, { withPlot = true } = {}) {
 // (Discovery-Pool) -- der Aufrufer entscheidet explizit, welcher Titel-Pool
 // gemeint ist, damit der große Discovery-Pool nicht ungewollt im normalen
 // Filme/Serien-Tab landet.
-router.get('/', async (req, res) => {
-  const { type, search, source } = req.query;
+/* Die Spalten einzeln statt t.*: `plot` faellt bei withPlot=false damit schon in
+   der Datenbank weg. Es sind 13 MB ueber alle Titel -- die wurden bisher bei
+   JEDEM Seitenaufruf aus Postgres nach Node uebertragen und dort weggeworfen,
+   weil serializeTitle sie ohnehin nicht mitschickt.
+   `poster_base64` bleibt drin: nur noch 5 Titel haben eines (31 kB gesamt), die
+   App zeichnet es aber bevorzugt (siehe UEBERGABE-OFFEN.md, Abschnitt 2.2). */
+const LISTEN_SPALTEN = `t.id, t.tmdb_id, t.type, t.title, t.original_title, t.year,
+  t.genres, t.director, t.cast_names, t.keywords, t.rating, t.vote_count,
+  t.certification, t.poster_path, t.poster_base64, t.source`;
+
+export async function ladeListe({ type, source, search, withPlot }) {
   const conditions = [];
   const params = [];
 
@@ -86,17 +96,34 @@ router.get('/', async (req, res) => {
   // serializeTitle. LEFT JOIN, damit ein fehlender Eintrag den Titel nicht
   // verschluckt.
   const { rows } = await pool.query(
-    `SELECT t.*, r.tmdb_id AS aufgeloeste_tmdb_id
+    `SELECT ${LISTEN_SPALTEN}${withPlot ? ', t.plot' : ''}, r.tmdb_id AS aufgeloeste_tmdb_id
        FROM titles t
        LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id AND t.tmdb_id IS NULL
        ${where}
       ORDER BY t.title ASC`,
     params
   );
+  return rows.map((r) => serializeTitle(r, { withPlot }));
+}
+
+// Schluessel fuer den Zwischenspeicher. Nur die Spielarten OHNE Suchbegriff
+// kommen hinein -- eine Suche liefert je Begriff eine andere Liste und wuerde
+// den Speicher mit Einmalantworten fuellen.
+export function listenSchluessel({ type, source, withPlot }) {
+  return `titles:${type || ''}|${source || ''}|${withPlot ? 'plot' : 'ohne'}`;
+}
+
+router.get('/', async (req, res) => {
+  const { type, search, source } = req.query;
   // Ohne Inhaltsangaben (siehe serializeTitle) -- das ist die grosse Liste, hier
   // faellt die Ersparnis an. ?withPlot=1 liefert sie bei Bedarf weiterhin mit.
   const withPlot = req.query.withPlot === '1';
-  res.json(rows.map((r) => serializeTitle(r, { withPlot })));
+
+  if (typeof search === 'string' && search.trim()) {
+    return res.json(await ladeListe({ type, source, search, withPlot }));
+  }
+  await ausListe(req, res, listenSchluessel({ type, source, withPlot }),
+    () => ladeListe({ type, source, withPlot }));
 });
 
 // Inhaltsangaben fuer die gerade sichtbaren Zeilen. Zwei Zugaenge, weil das
@@ -249,6 +276,9 @@ router.post('/ensure', requireAuth, async (req, res) => {
     ]
   );
 
+  // Ein neuer Titel gehoert sofort in die Liste -- der Zwischenspeicher haelt
+  // sonst bis zu zwei Minuten die alte Fassung fest.
+  leeren('Titel ueber /ensure angelegt oder aktualisiert');
   res.status(201).json(serializeTitle(rows[0]));
 });
 
@@ -326,6 +356,9 @@ router.post('/bulk-ingest', async (req, res) => {
     client.release();
   }
 
+  // Der naechtliche Import ist der eigentliche Grund, warum der
+  // Zwischenspeicher ueberhaupt eine Ungueltigkeitsmachung braucht.
+  leeren('Katalog-Import (bulk-ingest)');
   res.json({ processed: items.length, written: inserted });
 });
 
