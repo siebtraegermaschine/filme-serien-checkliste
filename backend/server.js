@@ -18,6 +18,7 @@ import cinemaRouter from './routes/cinema.js';
 import watchProvidersRouter from './routes/watchProviders.js';
 import trailersRouter from './routes/trailers.js';
 import linksRouter from './routes/links.js';
+import kinosRouter from './routes/kinos.js';
 import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteSicherung } from './lib/sicherung.js';
@@ -77,6 +78,7 @@ app.use('/api/cinema', cinemaRouter);
 app.use('/api/watch-providers', watchProvidersRouter);
 app.use('/api/trailers', trailersRouter);
 app.use('/api/links', linksRouter);
+app.use('/api/kinos', kinosRouter);
 app.use('/api/share', shareRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).

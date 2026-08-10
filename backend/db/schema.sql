@@ -456,3 +456,59 @@ CREATE TABLE IF NOT EXISTS genre_alias (
   name_en       TEXT    NOT NULL,
   PRIMARY KEY (tmdb_genre_id, art)
 );
+
+-- ---------------------------------------------------------------------------
+-- "Deine Kinos" (siehe PLAN-KINOS.md)
+--
+-- Drei Tabellen, alle drei unabhaengig davon, woher spaeter einmal die Angabe
+-- kommt, WELCHE Filme in einem Kino laufen. Genau das ist der Punkt: Auswahl
+-- und Umkreissuche stehen fuer sich, die Spielplan-Quelle kommt daneben.
+-- ---------------------------------------------------------------------------
+
+-- Kinos mit Koordinate. Gefuellt aus OpenStreetMap (amenity=cinema) ueber
+-- backend/scripts/import-kinos.mjs. `quelle`/`quelle_id` bleiben stehen, damit
+-- ein zweiter Bestand (etwa von einem Spielplan-Anbieter) danebengelegt werden
+-- kann, ohne die Auswahl der Leute zu verlieren.
+CREATE TABLE IF NOT EXISTS kinos (
+  id         BIGSERIAL PRIMARY KEY,
+  quelle     TEXT NOT NULL,
+  quelle_id  TEXT NOT NULL,
+  name       TEXT NOT NULL,
+  strasse    TEXT,
+  plz        TEXT,
+  ort        TEXT,
+  lat        DOUBLE PRECISION NOT NULL,
+  lon        DOUBLE PRECISION NOT NULL,
+  website    TEXT,
+  gesehen_am DATE NOT NULL DEFAULT CURRENT_DATE,  -- letzter Import, der es fand
+  UNIQUE (quelle, quelle_id)
+);
+-- Die Umkreissuche grenzt zuerst ueber ein Rechteck ein und rechnet danach
+-- genau -- fuer Entfernungen bis 100 km reicht das ohne PostGIS.
+CREATE INDEX IF NOT EXISTS idx_kinos_lat_lon ON kinos (lat, lon);
+
+-- Die Auswahl einer Person. Gehoert ans Konto, nicht ins Geraet: Die Favoriten
+-- in der Personenliste liegen nur lokal und gelten deshalb je Geraet -- genau
+-- das soll sich hier nicht wiederholen.
+CREATE TABLE IF NOT EXISTS user_kinos (
+  user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  kino_id BIGINT NOT NULL REFERENCES kinos(id) ON DELETE CASCADE,
+  PRIMARY KEY (user_id, kino_id)
+);
+
+-- Postleitzahlen mit Koordinate, einmalig aus dem GeoNames-Abzug (CC-BY 4.0,
+-- siehe backend/scripts/import-plz.mjs). Damit braucht die Vervollstaendigung
+-- im Betrieb keinen fremden Dienst, und die Umkreissuche hat den Mittelpunkt
+-- sofort.
+CREATE TABLE IF NOT EXISTS plz (
+  id   BIGSERIAL PRIMARY KEY,
+  plz  TEXT NOT NULL,
+  ort  TEXT NOT NULL,
+  land TEXT,
+  lat  DOUBLE PRECISION NOT NULL,
+  lon  DOUBLE PRECISION NOT NULL,
+  UNIQUE (plz, ort)
+);
+CREATE INDEX IF NOT EXISTS idx_plz_plz ON plz (plz text_pattern_ops);
+-- Ortssuche unabhaengig von Gross-/Kleinschreibung, nach Wortanfang.
+CREATE INDEX IF NOT EXISTS idx_plz_ort ON plz (lower(ort) text_pattern_ops);

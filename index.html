@@ -932,6 +932,26 @@
   .prov-foot { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding-top: 12px;
     border-top: 1px solid var(--border); }
   .prov-hint { font-size: 12px; color: var(--text-dim); flex: 1; }
+
+  /* Einstellungen -> Deine Kinos */
+  .kino-suche { position: relative; margin-bottom: 10px; }
+  .kino-suche input { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 10px;
+    border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 15px; }
+  .kino-suche input:focus { outline: none; border-color: var(--accent); }
+  /* Ueber der Liste, nicht daneben: Auf 320px ist kein Platz fuer zwei Spalten. */
+  .kino-vorschlaege { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 5;
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,.35); max-height: 240px; overflow-y: auto; }
+  .kino-vorschlaege button { display: block; width: 100%; text-align: left; background: none; border: none;
+    color: var(--text); font-size: 14px; padding: 10px 12px; cursor: pointer; }
+  @media (hover: hover) { .kino-vorschlaege button:hover { background: var(--card-hover); } }
+  .kino-umkreis { display: flex; gap: 6px; margin-bottom: 12px; }
+  .kino-umkreis button { flex: 1; padding: 7px 0; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--card); color: var(--text-dim); font-size: 13px; font-weight: 600; cursor: pointer; }
+  .kino-umkreis button.active { border-color: var(--accent); color: var(--accent); }
+  .kino-item-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+  .kino-item-text b { font-size: 14px; font-weight: 600; color: var(--text); }
+  .kino-item-text small { font-size: 12px; color: var(--text-dim); }
   .watch-source a { color: var(--text-dim); text-decoration: underline; }
   @media (hover: hover) { .watch-source a:hover { color: var(--accent); } }
   .det-actions { clear: both; display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); }
@@ -1401,6 +1421,7 @@
     <h3>Einstellungen</h3>
     <div class="modal-actions settings-menu">
       <button type="button" id="settingsProvidersBtn" class="modal-yes">Streaminganbieter</button>
+      <button type="button" id="settingsKinosBtn" class="modal-yes">Deine Kinos</button>
       <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Titel</button>
       <button type="button" id="settingsAccountBtn" class="modal-yes">Zugangsdaten</button>
       <button type="button" id="settingsCreditsBtn" class="modal-yes">Credits</button>
@@ -1509,6 +1530,31 @@
     <div class="prov-foot">
       <span class="prov-hint" id="providersHint"></span>
       <button type="button" id="providersSaveBtn" class="auth-submit">Speichern</button>
+    </div>
+  </div>
+</div>
+
+<!-- "Deine Kinos": Ort suchen, Umkreis waehlen, Kinos anhaken. Das Suchfeld
+     nimmt Postleitzahl UND Ortsname -- zwei Felder waeren eine Entscheidung,
+     die niemand treffen will, bevor er getippt hat. Siehe PLAN-KINOS.md. -->
+<div id="kinosModal" class="modal-overlay" style="display:none">
+  <div class="modal similar-modal">
+    <button class="modal-x" id="kinosModalX" aria-label="Schließen">✕</button>
+    <h3>Deine Kinos</h3>
+    <p class="prov-intro">Suche deinen Ort und wähle die Kinos, in die du gehst.</p>
+    <div class="kino-suche">
+      <input type="text" id="kinoOrtInput" placeholder="Postleitzahl oder Ort …" autocomplete="off">
+      <div class="kino-vorschlaege" id="kinoVorschlaege" style="display:none"></div>
+    </div>
+    <div class="kino-umkreis" id="kinoUmkreis">
+      <button type="button" data-km="10">10 km</button>
+      <button type="button" data-km="25" class="active">25 km</button>
+      <button type="button" data-km="50">50 km</button>
+    </div>
+    <div class="prov-list" id="kinosList">Suche zuerst deinen Ort.</div>
+    <div class="prov-foot">
+      <span class="prov-hint" id="kinosHint"></span>
+      <button type="button" id="kinosSaveBtn" class="auth-submit">Speichern</button>
     </div>
   </div>
 </div>
@@ -5843,6 +5889,158 @@ document.getElementById('providersSaveBtn').onclick = async function(){
     watchDataCache.clear();
     closeProvidersModal();
     renderCurrentTab();
+  } catch (e) {
+    alert('Speichern fehlgeschlagen. Bitte erneut versuchen.');
+  } finally { btn.disabled = false; }
+};
+
+/* ---- Einstellungen -> "Deine Kinos" ----
+   Ort suchen, Umkreis waehlen, Kinos anhaken. Die Kinos kommen aus
+   OpenStreetMap, die Orte aus dem GeoNames-Abzug -- beides in der eigenen
+   Datenbank (siehe PLAN-KINOS.md und backend/scripts/import-*.mjs).
+
+   Noch OHNE Wirkung auf die Kino-Seite: Dafuer muesste bekannt sein, WELCHE
+   Filme in einem Kino laufen, und das ist eine andere, kostenpflichtige Quelle.
+   Ein Filterknopf, der nichts filtert, waere schlimmer als keiner -- deshalb
+   steht hier vorerst nur die Auswahl. */
+var _kinoModal = document.getElementById('kinosModal');
+var _kinoListe = document.getElementById('kinosList');
+var _kinoOrtInput = document.getElementById('kinoOrtInput');
+var _kinoVorschlaege = document.getElementById('kinoVorschlaege');
+// Die Auswahl ueberlebt Suche und Umkreiswechsel: Wer ein Kino in Koblenz
+// angehakt hat und danach nach Trier sucht, soll es nicht verlieren. Deshalb
+// eine Menge von Kennungen plus die zugehoerigen Angaben zum Anzeigen.
+var _kinoGewaehlt = new Map();
+var _kinoGefunden = [];
+var _kinoUmkreisKm = 25;
+var _kinoOrtTimer = null;
+var KINO_ORT_VERZOEGERUNG = 200;
+
+function kinoZeile(k, angehakt){
+  var zusatz = [k.strasse, [k.plz, k.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  if (k.entfernung != null) zusatz = (zusatz ? zusatz + ' · ' : '') + String(k.entfernung).replace('.', ',') + ' km';
+  return '<label class="prov-item"><input type="checkbox" value="' + escAttr(String(k.id)) + '"' +
+         (angehakt ? ' checked' : '') + '>' +
+         '<span class="kino-item-text"><b>' + esc(k.name) + '</b>' +
+         (zusatz ? '<small>' + esc(zusatz) + '</small>' : '') + '</span></label>';
+}
+
+function renderKinoListe(){
+  // Die eigene Auswahl steht immer oben -- auch die Kinos, die im gerade
+  // gesuchten Umkreis gar nicht vorkommen. Sonst waere sie unsichtbar und beim
+  // Speichern still verloren.
+  var gefundenIds = new Set(_kinoGefunden.map(function(k){ return k.id; }));
+  var oben = [..._kinoGewaehlt.values()].filter(function(k){ return !gefundenIds.has(k.id); });
+  var html = '';
+  if (oben.length) {
+    html += oben.map(function(k){ return kinoZeile(k, true); }).join('');
+    if (_kinoGefunden.length) html += '<div class="prov-more" style="text-decoration:none;cursor:default">In der Nähe</div>';
+  }
+  html += _kinoGefunden.map(function(k){ return kinoZeile(k, _kinoGewaehlt.has(k.id)); }).join('');
+  if (!html) html = _kinoOrtInput.value.trim()
+    ? 'Keine Kinos im gewählten Umkreis.'
+    : 'Suche zuerst deinen Ort.';
+  _kinoListe.innerHTML = html;
+  kinoHinweis();
+}
+function kinoHinweis(){
+  var n = _kinoGewaehlt.size;
+  document.getElementById('kinosHint').textContent =
+    n ? (n === 1 ? '1 Kino ausgewählt' : n + ' Kinos ausgewählt') : 'Noch kein Kino ausgewählt.';
+}
+// Ein Haken aendert sofort die Menge -- nicht erst beim Speichern. Sonst ginge
+// er beim naechsten Suchlauf verloren.
+_kinoListe.addEventListener('change', function(e){
+  var box = e.target;
+  if (!box || box.type !== 'checkbox') return;
+  var id = Number(box.value);
+  if (box.checked) {
+    var k = _kinoGefunden.find(function(x){ return x.id === id; }) || _kinoGewaehlt.get(id);
+    if (k) _kinoGewaehlt.set(id, k);
+  } else {
+    _kinoGewaehlt.delete(id);
+  }
+  kinoHinweis();
+});
+
+async function kinosLaden(lat, lon){
+  _kinoListe.textContent = 'Lädt …';
+  try {
+    var d = await apiRequest('GET', '/api/kinos?lat=' + encodeURIComponent(lat) +
+      '&lon=' + encodeURIComponent(lon) + '&umkreis=' + _kinoUmkreisKm);
+    _kinoGefunden = d.kinos || [];
+  } catch (e) {
+    _kinoGefunden = [];
+    _kinoListe.textContent = 'Kinos konnten nicht geladen werden.';
+    return;
+  }
+  renderKinoListe();
+}
+
+var _kinoOrt = null;
+function ortWaehlen(ort){
+  _kinoOrt = ort;
+  _kinoOrtInput.value = ort.anzeige;
+  _kinoVorschlaege.style.display = 'none';
+  kinosLaden(ort.lat, ort.lon);
+}
+
+// Wie bei der Titelsuche: erst nach kurzer Tippruhe fragen, nicht bei jedem
+// Zeichen (siehe SUCHE_RENDER_VERZOEGERUNG).
+_kinoOrtInput.addEventListener('input', function(){
+  clearTimeout(_kinoOrtTimer);
+  var q = _kinoOrtInput.value.trim();
+  if (q.length < 2) { _kinoVorschlaege.style.display = 'none'; return; }
+  _kinoOrtTimer = setTimeout(async function(){
+    try {
+      var d = await apiRequest('GET', '/api/kinos/orte?q=' + encodeURIComponent(q));
+      var orte = d.orte || [];
+      if (!orte.length) { _kinoVorschlaege.style.display = 'none'; return; }
+      _kinoVorschlaege.innerHTML = orte.map(function(o, i){
+        return '<button type="button" data-i="' + i + '">' + esc(o.anzeige) + '</button>';
+      }).join('');
+      _kinoVorschlaege.style.display = '';
+      _kinoVorschlaege.onclick = function(e){
+        var b = e.target.closest('button');
+        if (b) ortWaehlen(orte[Number(b.dataset.i)]);
+      };
+    } catch (e) { _kinoVorschlaege.style.display = 'none'; }
+  }, KINO_ORT_VERZOEGERUNG);
+});
+document.getElementById('kinoUmkreis').onclick = function(e){
+  var b = e.target.closest('button');
+  if (!b) return;
+  [...this.querySelectorAll('button')].forEach(function(x){ x.classList.remove('active'); });
+  b.classList.add('active');
+  _kinoUmkreisKm = Number(b.dataset.km);
+  if (_kinoOrt) kinosLaden(_kinoOrt.lat, _kinoOrt.lon);
+};
+
+async function openKinosModal(){
+  _kinoModal.style.display = 'flex';
+  _kinoVorschlaege.style.display = 'none';
+  _kinoGefunden = [];
+  _kinoOrt = null;
+  _kinoOrtInput.value = '';
+  _kinoListe.textContent = 'Lädt …';
+  try {
+    var d = await apiRequest('GET', '/api/kinos/meine');
+    _kinoGewaehlt = new Map((d.kinos || []).map(function(k){ return [k.id, k]; }));
+  } catch (e) { _kinoGewaehlt = new Map(); }
+  renderKinoListe();
+}
+function closeKinosModal(){ _kinoModal.style.display = 'none'; }
+document.getElementById('settingsKinosBtn').onclick = function(){ closeSettingsModal(); openKinosModal(); };
+document.getElementById('kinosModalX').onclick = closeKinosModal;
+_kinoModal.addEventListener('click', function(e){ if (e.target === _kinoModal) closeKinosModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _kinoModal.style.display !== 'none') closeKinosModal(); });
+document.getElementById('kinosSaveBtn').onclick = async function(){
+  var btn = this;
+  if (btn.disabled) return;
+  btn.disabled = true;
+  try {
+    await apiRequest('PUT', '/api/kinos/meine', { ids: [..._kinoGewaehlt.keys()] });
+    closeKinosModal();
   } catch (e) {
     alert('Speichern fehlgeschlagen. Bitte erneut versuchen.');
   } finally { btn.disabled = false; }
