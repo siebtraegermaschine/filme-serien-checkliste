@@ -117,6 +117,80 @@ ausgeblendet werden.
 
 ---
 
+## 2a. Nachtrag: Es reicht „läuft dort" statt genauer Spielzeiten
+
+Nachgefragt und geprüft — **die Vereinfachung lohnt sich, in vier Punkten.**
+
+**Sie ändert nicht, woher die Daten kommen.** Einen billigeren „läuft
+gerade"-Feed gibt es nicht; diese Angabe *ist* zusammengefasste Spielzeit. Wer
+sie hat, hat auch die Uhrzeiten. Aber sie ändert, **welchen Tarif** man braucht,
+**wie viel** man abruft und **wie viel** zu bauen ist.
+
+### Ein billigerer Tarif kommt in Frage
+
+Der Basic-Tarif (149 €) enthält laut Preisseite **Kinolisten und „Published
+Showtimes"**. Nicht enthalten sind: Websites & Geodaten, Genre/Cast/Laufzeit,
+Poster/Trailer/Altersfreigabe, Sprache/Untertitel, Formate, Ticketing-Links.
+
+Der Punkt ist: **Das meiste davon brauchen wir gar nicht.** Genre, Besetzung,
+Laufzeit, Poster, Trailer und Altersfreigabe liefert TMDB längst — sie stehen
+schon in `cinema_cache`. Buchungs-Links und Formate braucht man nur mit
+Spielzeiten. Übrig bleibt als echte Lücke: **die Geodaten** — und die kommen aus
+OpenStreetMap.
+
+| | Business | Basic + OSM |
+|---|---|---|
+| je Monat | 299 € | **149 €** |
+| je Jahr | 3.600 € | **1.800 €** |
+| Kinos im Umkreis | vom Anbieter | aus OSM |
+| „läuft in Kino X" | ✓ | ✓ |
+| Uhrzeiten, Buchung, OV/3D | ✓ | — |
+
+**Offen und im Trial zu klären:** Ob die Kinos im Basic-Tarif noch genug Adresse
+tragen (Name, Ort), um sie mit den OSM-Einträgen zu verheiraten. Streicht
+„Geo-locations" den ganzen `location`-Block samt Anschrift, wird das Zuordnen
+mühsam. Der Filter `city_ids` deutet darauf hin, dass Orte weiter da sind.
+
+### Deutlich weniger Abrufe
+
+Statt Spielzeiten je Tag, Kino und Film genügt **ein Lauf am Tag**, der zu einem
+Ja/Nein je Paar (Kino, Film) zusammengefasst wird. Bei MovieGlu, das nach
+Abrufzahl staffelt, senkt das den Preis unmittelbar — und bei uns bleibt die
+Tabelle klein.
+
+### Deutlich weniger zu bauen
+
+Weg: Tagesauswahl, Zeitplan je Titel, Zeitzonen, „Vorstellung schon vorbei",
+Buchungs-Links. Phase 4 schrumpft von 3–4 Tagen auf **rund einen**.
+
+### Robuster — und ehrlicher
+
+Eine falsche Uhrzeit ist ein sichtbarer Fehler („18:30 gibt es gar nicht").
+„Läuft derzeit im Apollo" verträgt Lücken und veraltet nicht innerhalb von
+Stunden. Bei einem täglichen Abgleich stimmt die Aussage praktisch immer.
+
+### Was dadurch neu ins Spiel kommt: Kinoheld
+
+[Kinoheld](https://www.kinoheld.de) (Ticketing für viele deutsche Häuser, gehört
+zu CTS Eventim) hat eine GraphQL-Schnittstelle, die laut
+[Client-Bibliothek](https://github.com/janniksam/Kinoheld.Api.Client) genau das
+kann, was hier gebraucht wird: Ort oder PLZ suchen, Kinos im Umkreis, und die
+Filme, die **in einem bestimmten Kino laufen**. Nur Deutschland — also genau
+unser Markt.
+
+Geprüft: `graph.kinoheld.de` antwortet (HTTP 200), der Dienst besteht. Der
+GraphQL-Pfad selbst ließ sich nicht auf Anhieb finden; er steht in der
+Client-Bibliothek.
+
+**Aber:** Das ist eine **undokumentierte interne Schnittstelle** ohne
+veröffentlichte Nutzungsbedingungen für Dritte. Sie ohne Erlaubnis zur Grundlage
+einer Funktion zu machen, wäre dasselbe Risiko wie das Auslesen der Kinoseiten —
+nur bequemer. **Der richtige Weg ist eine Anfrage bei Kinoheld.** Kommt eine
+Erlaubnis, ist es die naheliegendste Quelle für Deutschland; kommt keine, bleibt
+es beim bezahlten Anbieter.
+
+---
+
 ## 3. Drei Wege
 
 ### Weg A — nur Standorte, ohne Spielzeiten (kostenlos)
@@ -129,12 +203,14 @@ Filter**, sondern eine Zeile „Deine Kinos" mit Verweisen auf deren Spielpläne
   vor, wenn später Spielzeiten dazukommen.
 - **Was es nicht bringt:** die eigentlich gewünschte Funktion
 
-### Weg B — mit Spielzeiten (299 €/Monat)
+### Weg B — „läuft in deinen Kinos" (ab 149 €/Monat)
 
 Der Knopf filtert wirklich: „Aktuell im Kino" zeigt nur noch Titel, die in einem
-deiner Kinos laufen; je Titel die nächsten Vorstellungen und ein Buchungs-Link.
+deiner Kinos laufen. **Ohne Uhrzeiten** (siehe 2a) — je Titel steht nur, in
+welchen deiner Kinos er läuft, dazu der Verweis auf deren Spielplan.
 
-- **Kosten:** ab 299 €/Monat, plus Angebot von MovieGlu abwarten
+- **Kosten:** ab 149 €/Monat (Basic + OSM), Angebote von MovieGlu und Kinoheld
+  abwarten. Mit Uhrzeiten und Buchungs-Links wären es 299 €.
 - **Nebenwirkung, positiv:** Der Bereich „Aktuell im Kino" wäre danach
   **inhaltlich richtiger als heute**. Er zeigt derzeit alles, was in den letzten
   60 Tagen angelaufen ist — auch Filme, die längst aus den Sälen sind.
@@ -182,14 +258,15 @@ CREATE TABLE plz (
   lon   DOUBLE PRECISION NOT NULL
 );
 
--- Nur bei Weg B
-CREATE TABLE spielzeiten (
+-- Nur bei Weg B. Bewusst KEINE Einzelvorstellungen, sondern das Ergebnis des
+-- taeglichen Abgleichs: laeuft dieser Film derzeit in diesem Kino? Genau das
+-- ist gefragt, und es haelt die Tabelle klein (siehe 2a). Uhrzeiten liessen
+-- sich spaeter danebenlegen, ohne diese Tabelle zu aendern.
+CREATE TABLE kino_laeuft (
   kino_id     BIGINT REFERENCES kinos(id) ON DELETE CASCADE,
   tmdb_id     INTEGER NOT NULL,
-  beginn      TIMESTAMPTZ NOT NULL,
-  format      TEXT,                    -- OV, OmU, 3D, IMAX
-  buchung_url TEXT,
-  PRIMARY KEY (kino_id, tmdb_id, beginn)
+  zuletzt_am  DATE NOT NULL,           -- letzter Lauf, der ihn dort gesehen hat
+  PRIMARY KEY (kino_id, tmdb_id)
 );
 ```
 
@@ -215,17 +292,19 @@ gerechnet. Für Entfernungen bis 100 km reicht das ohne PostGIS.
 | 1 | Tabellen, GeoNames-Import, OSM-Import als Skript | 1–2 Tage |
 | 2 | Einstellungen „Deine Kinos" mit Suche und Umkreis | 2 Tage |
 | 3 | Knopf auf der Kino-Seite (bei Weg A: Verweise statt Filter) | 1 Tag |
-| 4 | *(nur Weg B)* Spielzeiten holen, Filter, Vorstellungen je Titel | 3–4 Tage |
+| 4 | *(nur Weg B)* Täglicher Abgleich „läuft/läuft nicht", Filter, Kino-Namen am Titel | 1–2 Tage |
+| 4b | *(optional, später)* Uhrzeiten und Buchungs-Links — braucht den 299-€-Tarif | 2–3 Tage |
 
 ---
 
 ## 7. Offen — vor der Umsetzung zu klären
 
-1. **Weg A oder B?** Also: Sind ~3.600 €/Jahr für Spielzeiten vertretbar,
-   solange acht Konten bestehen? Das ist die eine Frage, an der alles hängt.
-2. **Zweites Angebot abwarten?** MovieGlu nennt keine Preise, wirbt aber mit
-   Staffelung nach Abrufzahl. Bei unserer Größe könnte das deutlich unter 299 €
-   liegen. Kostet nur eine E-Mail.
+1. **Weg A oder B?** Also: Sind ~1.800 €/Jahr vertretbar, solange acht Konten
+   bestehen? Das ist die eine Frage, an der alles hängt.
+2. **Drei Angebote einholen, nicht eines.** MovieGlu staffelt nach Abrufzahl —
+   bei einem Abruf am Tag könnte das deutlich unter 149 € liegen. Und Kinoheld
+   um Erlaubnis fragen (siehe 2a): Deutschland-only, aber die passendste Quelle.
+   Kostet je eine E-Mail.
 3. **Was tut der Knopf bei „In Kürze" und „Bald im Kino"?** Vorschlag: ausgrauen
    mit demselben Muster wie „Neue entdecken" in fremden Listen — und diesmal mit
    einem Grund daneben, denn dass dort nichts läuft, ist nicht selbsterklärend.
@@ -246,7 +325,8 @@ gerechnet. Für Entfernungen bis 100 km reicht das ohne PostGIS.
 
 | Risiko | Wirkung | Gegenmaßnahme |
 |---|---|---|
-| Laufende Kosten ohne Nutzung | 3.600 €/Jahr für acht Konten | Free Trial zuerst, monatlich kündbar prüfen |
+| Laufende Kosten ohne Nutzung | 1.800 €/Jahr für acht Konten | Free Trial zuerst, monatlich kündbar prüfen |
+| Basic-Tarif trägt zu wenig Adresse | Kinos nicht mit OSM zu verheiraten | genau das im Trial zuerst prüfen (siehe 2a) |
 | OSM lückenhaft | ein Kino fehlt in der Auswahl | „Kino fehlt?"-Hinweis mit Rückmeldeweg |
 | Spielzeiten nicht für jedes Haus | kleine Kinos ohne Daten | vor dem Kauf im Trial genau dafür messen |
 | Knopf ohne Wirkung (Weg A) | wirkt wie ein Fehler | dann kein Filter, sondern sichtbar Verweise |
