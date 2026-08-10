@@ -16,6 +16,11 @@ backend/                Node/Express-API + Postgres-Schema
   db/schema.sql          Postgres-Schema (idempotent)
   db/migrate.js          Wendet schema.sql an
   scripts/seed-from-index-html.mjs   Einmalige Erstbefüllung des Katalogs
+  scripts/backfill-*.mjs   Nachträge am Bestand (Poster, Metadaten, Themen);
+                           jedes Skript erklärt im Kopf, was es tut und wie sich
+                           der Lauf zurücknehmen lässt
+  scripts/bewertungsstatistik.mjs   Anonyme Auswertung, `npm run statistik`
+  lib/bewertungsstatistik.js        Mindestzahl je Titel (Datenschutz, Abschnitt 9)
   routes/                auth, titles, progress, streaming
 docker-compose.yml       Postgres + Backend (+ Caddy im "prod"-Profil)
 Caddyfile                Reverse Proxy/TLS für Produktion
@@ -211,22 +216,13 @@ sichtbar fehl, weil die Importskripte bei jedem Nicht-2xx abbrechen.
 
 ## Bekannte Einschränkungen / offene Punkte
 
-- **Poster-Bilder der ursprünglichen 600 Katalog-Titel** lagen als Base64 in der
-  DB (`titles.poster_base64`), weil für sie keine TMDB-Poster-Pfade bekannt
-  waren -- rund 4,2 MB bei jedem Katalog-Abruf. Dafür gibt es jetzt
-  `backend/scripts/backfill-catalog-posters.mjs`: ermittelt die TMDB-ID (aus
-  `title_tmdb_resolution` oder per Suche über Titel+Jahr), holt den echten
-  `poster_path` und leert `poster_base64` **nur bei Treffer**. Aufruf:
-  ```bash
-  docker compose -f docker-compose.yml exec -T backend \
-    node scripts/backfill-catalog-posters.mjs --dry-run   # erst zur Kontrolle
-  ```
-  Titel ohne Treffer behalten ihr Base64-Bild; das Skript ist beliebig oft
-  wiederholbar und arbeitet nur noch die verbliebenen ab.
-- **Rechtliche Seiten** (`impressum.html`, `datenschutz.html`) enthalten
-  TODO-Platzhalter für Name/Anschrift/Kontakt/Hosting-Standort/E-Mail-Anbieter
-  -- vor Go-Live ausfüllen.
-- **Backups/Monitoring** sind noch nicht eingerichtet (siehe oben).
+- **Rechtliche Seiten:** In `datenschutz.html` fehlt noch der Name des
+  Mailversenders in Abschnitt 6 -- fertiger Textentwurf samt der beiden offenen
+  Entscheidungen in `ENTWURF-DATENSCHUTZ-MAIL.md`. Name, Anschrift, Kontakt und
+  Serverstandort stehen inzwischen drin. `impressum.html` ist rechtlich noch
+  nicht geprüft.
+- **Monitoring** ist noch nicht eingerichtet. Die Sicherungen laufen dagegen
+  täglich aus dem Backend heraus (siehe oben, `lib/sicherung.js`).
 - Migrationsskript `seed-from-index-html.mjs` ist für eine **einmalige**
   Erstbefüllung gedacht (bricht ohne `--force` ab, falls `titles` schon
   Zeilen enthält) -- die Datenbank ist danach die Quelle der Wahrheit, nicht

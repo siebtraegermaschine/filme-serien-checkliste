@@ -562,6 +562,15 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 - **Mindestzahl bei den anonymen Statistiken nicht durchgesetzt** →
   **behoben** am 10. August (siehe 0.4). Es gibt jetzt genau eine Stelle, an der
   eine solche Auswertung entsteht, und die Mindestzahl steckt darin.
+- **„4,2 MB Base64-Poster gehen über die Leitung"** → **erledigt, nicht wieder
+  aufnehmen.** Am 10. August in der Produktionsdatenbank nachgezählt: Von den
+  600 eingebetteten Bildern sind noch **5** übrig, zusammen **31 kB**. Die
+  anderen **595** hat `backfill-catalog-posters.mjs` durch echte TMDB-Pfade
+  ersetzt; die Originale liegen in `titles_poster_base64_backup` (595 Zeilen),
+  der Rückweg steht im Kopf des Skripts. Die Auslieferung besteht heute aus
+  Besetzung (21 %), Poster-Pfaden (13 %) und Genres (11 %) — Base64 kommt darin
+  nicht mehr vor. Wer die Auslieferung kleiner machen will, fängt bei der
+  Besetzung an, nicht bei den Bildern.
 
 ## 4. Offen aus früheren Sitzungen
 
@@ -575,12 +584,6 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 
 ### Technisch
 
-- ~~4,2 MB Base64-Poster gehen weiterhin über die Leitung.~~ **Stimmt nicht
-  mehr** (nachgemessen am 10. August): In `/api/titles` stecken noch **5**
-  eingebettete Bilder mit zusammen **31 kB**. Die Auslieferung besteht heute aus
-  Besetzung (21 %), Poster-Pfaden (13 %) und Genres (11 %). Was bleibt: Die 591
-  verdeckten Dubletten-Zeilen werden weiterhin mitgeschickt und erst im Browser
-  ausgeblendet — sie kosten aber Zeilen, keine Megabyte.
 - **Feedback wird nicht gespeichert**, nur per Mail verschickt. Schlägt Resend
   fehl, ist die Nachricht weg. Hängt mit 3.1 zusammen: Der Entwurf sagt zu, dass
   die Nachricht nicht in der Datenbank landet — wer das ändert, muss den Satz
