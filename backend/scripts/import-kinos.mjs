@@ -96,6 +96,21 @@ function* kacheln([sued, west, nord, ost]) {
   }
 }
 
+/* Erotikkinos gehoeren nicht in diese Liste -- nicht aus Sittsamkeit, sondern
+   weil dort die Filme, um die es in dieser App geht, gar nicht laufen. Wer
+   "Deine Kinos" einstellt, sucht das Haus, in dem der naechste Kinostart zu
+   sehen ist.
+
+   Gefiltert wird ueber den NAMEN, und das ist bewusst die zweitbeste Loesung:
+   OpenStreetMap hat dafuer kein verlaessliches Merkmal. Nachgesehen am Beispiel
+   "Pleasure Shop Gaykino" in Trier -- `cinema`, `adult`, `shop` und
+   `cinema:genre` sind dort alle leer, es unterscheidet sich in den Angaben also
+   in nichts von einem gewoehnlichen Kino.
+
+   Die Liste ist knapp gehalten: Sie faengt die eindeutigen Faelle und laesst im
+   Zweifel etwas stehen, statt ein echtes Kino zu verschlucken. */
+const NICHT_KINO = /(erotik|sexkino|pornokino|gaykino|sex-?shop|pleasure shop|filmpalast\s*eros)/i;
+
 function zuKino(el) {
   const t = el.tags || {};
   const lat = el.lat != null ? el.lat : (el.center && el.center.lat);
@@ -105,6 +120,7 @@ function zuKino(el) {
   // nicht wiedererkennen.
   const name = (t.name || t['name:de'] || '').trim();
   if (!name) return null;
+  if (NICHT_KINO.test(name)) return null;
   // Autokinos und Freilichtbuehnen bleiben drin, sie sind echte Kinos.
   // Ausgeschlossen wird, was nur beilaeufig einen Saal hat.
   if (t.disused === 'yes' || t['disused:amenity']) return null;
