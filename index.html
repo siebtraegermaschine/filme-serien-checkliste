@@ -1596,6 +1596,11 @@ const INFO_ICON = '<span class="info-i" data-ts role="button" tabindex="0" aria-
    (siehe requireLogin weiter unten und den Login-/Registrieren-Dialog). */
 let CURRENT_USER = null;
 let PROGRESS = new Map(); // title_id -> {seen, watchlist}
+// Stand der Markierungen und das daraus gebaute Profil -- Grundlage des
+// Taste-Score-Zwischenspeichers (siehe punkteFuer weiter unten). Stehen hier
+// oben, weil rebuild() sie schon beim Seitenaufbau hochzaehlt.
+var PROFIL_STAND = 0;
+var PROFIL_CACHE = null;
 let PENDING_AUTH_ACTIONS = [];
 // Titel-IDs, die diese Person per Swipe aus ihrer eigenen Discovery-Ansicht
 // ausgeblendet hat (siehe Einstellungen -> "Geloeschte Titel"). Rein lokaler
@@ -1652,6 +1657,7 @@ function idFor(src, title) {
 async function updateProgressRemote(id, patch) {
   const prev = progressFor(id);
   PROGRESS.set(id, { ...prev, ...patch });
+  profilStandErhoehen();
   try {
     return await apiRequest('PUT', '/api/progress/' + id, patch);
   } catch (e) {
@@ -1660,6 +1666,7 @@ async function updateProgressRemote(id, patch) {
     // wirklich gespeichert wurde (z.B. Watchlist-Stern bleibt "an", obwohl der
     // PUT nie durchkam).
     PROGRESS.set(id, prev);
+    profilStandErhoehen();
     throw e;
   }
 }
@@ -1675,6 +1682,7 @@ function toggleWatched(src, title){
   if (next) patch.seen = false;
   updateProgressRemote(id, patch).catch(() => {
     PROGRESS.set(id, { ...progressFor(id), watchlist: !next });
+    profilStandErhoehen();
   });
 }
 function requireLogin(action){
@@ -2404,7 +2412,7 @@ function dublettenUmlegen(){
   if (!DUBLETTEN.size) return;
   DUBLETTEN.forEach(function(sieger, verdeckt){
     var e = PROGRESS.get(verdeckt);
-    if (e && !PROGRESS.has(sieger)) PROGRESS.set(sieger, e);
+    if (e && !PROGRESS.has(sieger)) { PROGRESS.set(sieger, e); profilStandErhoehen(); }
     if (HIDDEN_TITLE_IDS.has(verdeckt)) HIDDEN_TITLE_IDS.add(sieger);
   });
 }
@@ -2549,6 +2557,11 @@ const state = {
 // hier auftaucht (ueber die Alle/Ungesehen/Gesehen-Filter dieser Seiten findet man
 // dann wieder, was man bereits gesehen hat).
 function rebuild(){
+  // Sicherheitsnetz fuer den Taste-Score-Zwischenspeicher (siehe punkteFuer):
+  // rebuild() laeuft nach jeder Aenderung an den Daten, aus denen das Profil
+  // entsteht. Lieber einmal zu viel neu rechnen als einen veralteten Wert
+  // zeigen.
+  profilStandErhoehen();
   // matchInfo().sichtbar haengt bewusst NUR davon ab, ob der Titel bei allen
   // ausgewaehlten Personen ueberhaupt auf der Liste steht -- nicht von den
   // Watchlist-/Gesehen-Schaltern. Die wirken erst beim Rendern (siehe
@@ -2923,13 +2936,42 @@ function eigeneZeileLi(tab, i, profile) {
 // fliessen die Profile aller Ausgewaehlten mit ein, genau wie auf der
 // Kino-Seite. Es gilt EIN Profil fuer die ganze Liste: Zwei Massstaebe
 // nebeneinander waeren an den Zahlen nicht zu unterscheiden.
+/* Der Taste-Score haengt an den Markierungen, nicht an den Filtern. Zwischen
+   zwei Klicks auf Filme/Serien/Watchliste/Gesehen/Neue entdecken aendert er sich
+   also nicht -- ausgerechnet wurde er trotzdem jedes Mal, und zwar fuer ALLE
+   41.271 Eintraege, um 25 Zeilen zu zeigen. Gemessen an movietaste.de mit 600
+   markierten Titeln: 39,9 ms je Klick gegenueber 5,6 ms mit einer der anderen
+   Sortierungen. Auf dem Telefon ein Vielfaches davon.
+
+   PROFIL_STAND zaehlt jede Aenderung an den Markierungen (siehe
+   profilStandErhoehen). Daraus und aus den beiden Dingen, die das Profil sonst
+   noch umstellen -- welche Personen beim Abgleich ausgewaehlt sind und ob
+   "Neue entdecken" an ist --, entsteht eine Kennung. Solange die gleich bleibt,
+   gilt ein einmal gerechneter Wert weiter.
+
+   Wichtig: Die Kennung haengt am Profil-Array, nicht an einer globalen
+   Variablen. Wer mit einem selbst gebauten Profil rechnet (buildProfileFromItem
+   fuer "Aehnliche Titel"), hat keine -- und bekommt dann auch keinen
+   zwischengespeicherten Wert, sondern rechnet frisch. */
+function profilStandErhoehen(){ PROFIL_STAND++; PROFIL_CACHE = null; }
+
 function aktuellesProfil(){
+  var mitAnderen = matchAktiv() && discoverFilterOn;
+  var kennung = PROFIL_STAND + '|' + (mitAnderen ? MATCH_WITH.join(',') : '');
+  if (PROFIL_CACHE && PROFIL_CACHE.kennung === kennung) return PROFIL_CACHE.profil;
   var eigen = buildProfile();
-  return (matchAktiv() && discoverFilterOn) ? alleProfile(eigen) : [eigen];
+  var profil = mitAnderen ? alleProfile(eigen) : [eigen];
+  profil.kennung = kennung;
+  PROFIL_CACHE = { kennung: kennung, profil: profil };
+  return profil;
 }
 function punkteFuer(poolItem, profile){
-  return profile.length > 1 ? scoreMitProfilen(poolItem, profile)
-                            : scoreCand(poolItem, profile[0]).score;
+  var k = profile.kennung;
+  if (k !== undefined && poolItem.tsKennung === k) return poolItem.tsWert;
+  var wert = profile.length > 1 ? scoreMitProfilen(poolItem, profile)
+                                : scoreCand(poolItem, profile[0]).score;
+  if (k !== undefined) { poolItem.tsKennung = k; poolItem.tsWert = wert; }
+  return wert;
 }
 // Sortierwert fuer BEIDE Zeilenarten aus demselben POOL-Eintrag lesen -- nur so
 // ergibt die gemeinsame Sortierung eine ehrliche Rangfolge. Ein eigener Titel
@@ -4202,6 +4244,23 @@ function profilAbschluss(prof){
   Object.keys(prof.genre).forEach(function(g){ if (prof.genre[g] > genreMax) genreMax = prof.genre[g]; });
   prof.genreMax = genreMax;
   prof.jahrMax = jahrDichteMax(prof.years);
+  /* Alles, was scoreCand sonst bei JEDEM Aufruf neu ermitteln wuerde, einmal
+     hier ablegen. Der Score wird fuer 41.000 Kandidaten gerechnet -- was dort
+     pro Aufruf steht, steht 41.000 Mal.
+
+     Die drei Anzahlen: `Object.keys(prof.cast).length` legt bei 600 markierten
+     Titeln ein Feld mit gut 2.000 Namen an, nur um zu fragen, ob ueberhaupt
+     etwas drinsteht. Dasselbe fuer Schlagwoerter und Regie.
+
+     Die Jahres-Verteilung: Die Schleife ueber prof.years lief je Kandidat
+     einmal komplett durch (600 Vergleiche mal 41.000 Kandidaten). Als Zaehlung
+     je Jahr braucht es stattdessen 2*JAHR_FENSTER+1 Nachschlagungen. */
+  prof.castAnzahl = Object.keys(prof.cast).length;
+  prof.kwAnzahl = Object.keys(prof.kw || {}).length;
+  prof.dirAnzahl = Object.keys(prof.dir).length;
+  var jahre = {};
+  for (var i = 0; i < prof.years.length; i++) jahre[prof.years[i]] = (jahre[prof.years[i]] || 0) + 1;
+  prof.jahreZaehlung = jahre;
   return prof;
 }
 function buildProfile(){
@@ -4315,7 +4374,7 @@ function scoreCand(c, prof){
 
   // Schlagwoerter: aufsummierter Anteil aller Treffer, weich gesaettigt.
   var kws = c.kw || [];
-  if (prof.kw && Object.keys(prof.kw).length) {
+  if (prof.kw && prof.kwAnzahl) {
     var kwRoh = 0;
     for (var j = 0; j < kws.length; j++) if (prof.kw[kws[j]]) kwRoh += prof.kw[kws[j]] / prof.n;
     teile.push([TASTE_GEWICHTE.kw, kwRoh / (kwRoh + KW_SAETTIGUNG)]);
@@ -4327,17 +4386,19 @@ function scoreCand(c, prof){
   var cs = c.c || [];
   var castRoh = 0;
   for (var m = 0; m < cs.length; m++) if (prof.cast[cs[m]]) { shared++; castRoh += Math.min(1, prof.cast[cs[m]] / 3); }
-  if (Object.keys(prof.cast).length) teile.push([TASTE_GEWICHTE.cast, castRoh / (castRoh + CAST_SAETTIGUNG)]);
+  if (prof.castAnzahl) teile.push([TASTE_GEWICHTE.cast, castRoh / (castRoh + CAST_SAETTIGUNG)]);
 
   var dirHit = !!(c.d && prof.dir[c.d]);
-  if (Object.keys(prof.dir).length) {
+  if (prof.dirAnzahl) {
     teile.push([TASTE_GEWICHTE.regie, dirHit ? Math.min(1, prof.dir[c.d] / 3) : 0]);
   }
 
-  // Jahresnaehe, gemessen an der dichtesten Spanne deines Profils.
+  // Jahresnaehe, gemessen an der dichtesten Spanne deines Profils. Gezaehlt wird
+  // ueber die Jahres-Zaehlung aus profilAbschluss statt ueber die ganze Liste --
+  // dasselbe Ergebnis, aber elf Nachschlagungen statt eines Durchlaufs.
   if (prof.jahrMax > 0 && prof.years.length) {
     var nah = 0;
-    if (c.y) for (var y = 0; y < prof.years.length; y++) if (Math.abs(prof.years[y] - c.y) <= JAHR_FENSTER) nah++;
+    if (c.y) for (var y = c.y - JAHR_FENSTER; y <= c.y + JAHR_FENSTER; y++) nah += prof.jahreZaehlung[y] || 0;
     teile.push([TASTE_GEWICHTE.jahr, Math.min(1, (nah / prof.years.length) / prof.jahrMax)]);
   }
 
@@ -5185,6 +5246,7 @@ function scoreMitProfilen(item, profile){
 var LINKED_LADEN = false;
 async function loadLinkedProfiles(){
   LINKED_PROFILES = []; LINKED_PROGRESS = {}; MATCH_WITH = [];
+  profilStandErhoehen();
   if (!CURRENT_USER) return;
   LINKED_LADEN = true;
   // Ein offenes Popup soll den Ladehinweis sofort zeigen, nicht erst beim
@@ -5213,6 +5275,9 @@ async function loadLinkedProfiles(){
     LINKED_PROFILES.forEach(function(p){
       if (!LINKED_PROGRESS[p.id]) LINKED_PROGRESS[p.id] = new Map();
     });
+    // Fremde Fortschritte sind da -- das gemeinsame Profil beim Abgleich
+    // baut darauf auf (siehe alleProfile).
+    profilStandErhoehen();
   } catch (e) { /* ohne Verknuepfungen bleibt einfach alles wie bisher */ }
   finally {
     LINKED_LADEN = false;
@@ -6217,6 +6282,7 @@ authBarLogout.onclick = async () => {
 // direkt nach jedem Login/Logout die Seite spuerbar (mehrere Sekunden) haengen.
 async function loadUserProgressAndRefresh(){
   PROGRESS = new Map();
+  profilStandErhoehen();
   uebernehmeVersteckte([]);
   MY_PROVIDER_IDS = null;
   if (CURRENT_USER) {
@@ -6230,6 +6296,7 @@ async function loadUserProgressAndRefresh(){
       loadLinkedProfiles(),
     ]);
     rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }));
+    profilStandErhoehen();
     uebernehmeVersteckte(hidden);
     // Wer seinerzeit den Katalog-Eintrag markiert hat, dessen Markierung haengt
     // an einer id, die jetzt womoeglich verdeckt ist (siehe ohneDubletten).
@@ -6348,6 +6415,7 @@ async function refreshOnResume(){
     var neuerFortschritt = new Map();
     rows.forEach(function(r){ neuerFortschritt.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }); });
     PROGRESS = neuerFortschritt;
+    profilStandErhoehen();
     uebernehmeVersteckte(hidden);
     dublettenUmlegen();   // siehe loadUserProgressAndRefresh
   } catch (e) {
