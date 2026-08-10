@@ -30,25 +30,47 @@ import zlib from 'node:zlib';
 const LAENDER = process.argv.slice(2).filter((a) => /^[A-Z]{2}$/.test(a));
 const ZIELE = LAENDER.length ? LAENDER : ['DE'];
 
-/* Die Datei ist ein ZIP mit genau zwei Eintraegen (<Land>.txt und readme.txt).
-   Statt eine ZIP-Bibliothek dafuer aufzunehmen, wird der eine Eintrag von Hand
-   herausgeschnitten: lokaler Datei-Kopf, dann roh entpacken. Das Format ist
-   seit Jahrzehnten stabil und hier vollstaendig unter Kontrolle. */
-function ausZipHolen(buf, endungPasst) {
-  let pos = 0;
-  while (pos + 30 <= buf.length) {
-    if (buf.readUInt32LE(pos) !== 0x04034b50) break;      // kein lokaler Kopf mehr
-    const methode = buf.readUInt16LE(pos + 8);
-    const gepackt = buf.readUInt32LE(pos + 18);
-    const nameLaenge = buf.readUInt16LE(pos + 26);
-    const extraLaenge = buf.readUInt16LE(pos + 28);
-    const name = buf.subarray(pos + 30, pos + 30 + nameLaenge).toString('utf8');
-    const datenStart = pos + 30 + nameLaenge + extraLaenge;
-    if (endungPasst(name)) {
-      const daten = buf.subarray(datenStart, datenStart + gepackt);
+/* Die Datei ist ein ZIP mit genau zwei Eintraegen (readme.txt und <Land>.txt).
+   Statt eine ZIP-Bibliothek dafuer aufzunehmen, wird der gesuchte Eintrag von
+   Hand herausgeschnitten -- das Format ist seit Jahrzehnten stabil.
+
+   Gelesen wird das INHALTSVERZEICHNIS am Dateiende, nicht die Koepfe am Anfang.
+   Grund: GeoNames packt im Streaming-Verfahren (Flag-Bit 3), und dann stehen
+   Groesse und Pruefsumme im lokalen Kopf auf null -- sie folgen erst hinter den
+   Daten. Wer sich am Anfang entlanghangelt, kommt schon nach dem ersten Eintrag
+   nicht weiter und findet die Landesdatei nie. Im Inhaltsverzeichnis stehen die
+   Groessen dagegen immer. */
+function ausZipHolen(buf, nameGesucht) {
+  // Das Ende-Kennzeichen von hinten suchen (dahinter darf ein Kommentar stehen).
+  let eocd = -1;
+  for (let i = buf.length - 22; i >= 0 && i > buf.length - 22 - 65536; i--) {
+    if (buf.readUInt32LE(i) === 0x06054b50) { eocd = i; break; }
+  }
+  if (eocd < 0) throw new Error('Kein ZIP-Inhaltsverzeichnis gefunden.');
+
+  const anzahl = buf.readUInt16LE(eocd + 10);
+  let pos = buf.readUInt32LE(eocd + 16);
+
+  for (let i = 0; i < anzahl; i++) {
+    if (buf.readUInt32LE(pos) !== 0x02014b50) break;
+    const methode = buf.readUInt16LE(pos + 10);
+    const gepackt = buf.readUInt32LE(pos + 20);
+    const nameLaenge = buf.readUInt16LE(pos + 28);
+    const extraLaenge = buf.readUInt16LE(pos + 30);
+    const kommentarLaenge = buf.readUInt16LE(pos + 32);
+    const lokal = buf.readUInt32LE(pos + 42);
+    const name = buf.subarray(pos + 46, pos + 46 + nameLaenge).toString('utf8');
+
+    if (nameGesucht(name)) {
+      // Im lokalen Kopf stehen Name und Zusatzfeld ggf. anders lang als im
+      // Inhaltsverzeichnis -- die Datenposition muss von dort kommen.
+      const lokalName = buf.readUInt16LE(lokal + 26);
+      const lokalExtra = buf.readUInt16LE(lokal + 28);
+      const start = lokal + 30 + lokalName + lokalExtra;
+      const daten = buf.subarray(start, start + gepackt);
       return methode === 0 ? daten : zlib.inflateRawSync(daten);
     }
-    pos = datenStart + gepackt;
+    pos += 46 + nameLaenge + extraLaenge + kommentarLaenge;
   }
   throw new Error('Im ZIP wurde keine passende Datei gefunden.');
 }
