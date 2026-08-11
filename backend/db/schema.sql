@@ -367,6 +367,30 @@ CREATE TABLE IF NOT EXISTS search_queries (
 );
 CREATE INDEX IF NOT EXISTS idx_search_queries_created_at ON search_queries (created_at);
 
+-- Rueckmeldungen aus dem Feedback-Formular (siehe backend/routes/feedback.js).
+-- Bis hierher gingen sie ausschliesslich per Mail raus -- scheiterte der Versand,
+-- war die Nachricht weg. Beim oeffentlichen Test ist Feedback aber genau das
+-- Ergebnis, das man haben will, deshalb wird zuerst hier gespeichert und erst
+-- danach gemailt.
+--
+-- user_id ist NULL bei nicht angemeldeten Personen -- das Formular ist bewusst
+-- ohne Konto benutzbar. ON DELETE SET NULL statt CASCADE: Eine Kontoloeschung
+-- darf die Rueckmeldung nicht mitreissen, sie gehoert zum Betrieb und nicht zum
+-- Konto. Die Verbindung zur Person faellt dabei weg, der Text bleibt.
+--
+-- email ist die KOPIE zum Zeitpunkt der Absendung, nicht der Verweis auf das
+-- Konto: Ohne sie zeigte die Zuordnung nach einer Kontoloeschung (oder nach
+-- einem Adresswechsel) ins Leere. Auslesen ueber `npm run feedback`, bewusst
+-- ohne HTTP-Route -- dieselbe Ueberlegung wie bei der Bewertungsstatistik.
+CREATE TABLE IF NOT EXISTS feedback (
+  id         BIGSERIAL PRIMARY KEY,
+  nachricht  TEXT NOT NULL,
+  user_id    BIGINT REFERENCES users(id) ON DELETE SET NULL,
+  email      CITEXT,
+  erstellt_am TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_feedback_erstellt_am ON feedback (erstellt_am);
+
 -- Anzahl der Stimmen hinter der Bewertung ("8,3 (28.300)"). Ohne sie steht eine
 -- glatte 8,0 aus EINER Stimme gleichberechtigt neben einer 8,3 aus 28.000 --
 -- die Zahl macht erst einschaetzbar, wie belastbar die Bewertung ist.

@@ -30,6 +30,10 @@ const BEHALTEN = {
 const NUTZERTABELLEN = [
   'titles', 'users', 'user_links', 'user_link_invites',
   'user_progress', 'user_hidden_titles', 'title_rating_stats', 'title_rating_stufen',
+  // Rueckmeldungen aus dem Feedback-Formular: von Hand geschriebener Text, der
+  // sich nirgendwo wiederbeschaffen laesst -- genau der Fall, fuer den die
+  // taegliche Sicherung da ist.
+  'feedback',
 ];
 
 // Eine leere oder winzige Datei heisst: pg_dump ist gescheitert und hat den
