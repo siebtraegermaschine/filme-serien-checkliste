@@ -1,4 +1,4 @@
-# Offene Punkte — Stand 2026-08-10
+# Offene Punkte — Stand 2026-08-11
 
 Ergänzt `UEBERGABE-CHAT.md` (Stand 2026-08-03). Für Architektur und Auslieferung
 siehe `DEPLOYMENT.md`, für den Weg zu nativen Apps `PLAN-NATIVE-APPS.md`,
@@ -6,8 +6,9 @@ für den bereits umgesetzten Filter-Umbau `PLAN-FILTER.md`, für den offenen
 Rechtstext zum Mailversand `ENTWURF-DATENSCHUTZ-MAIL.md`, für „Deine Kinos"
 `PLAN-KINOS.md`.
 
-**Nächster Arbeitsauftrag: `PLAN-OEFFENTLICHER-TEST.md`** — was vor dem
-öffentlichen Test mit Fremden zu tun ist, mit allen Entscheidungen dazu.
+**`PLAN-OEFFENTLICHER-TEST.md` ist am 11. August abgearbeitet** — alle sieben
+Punkte umgesetzt (siehe Abschnitt 0.0). Der Plan bleibt als Beleg stehen, ist
+aber kein Arbeitsauftrag mehr.
 
 **Diese Datei ist der Einstiegspunkt.** Abschnitt 3 sagt, was noch zu tun ist;
 Abschnitt 1, 2 und 6, was man vorher wissen sollte. Die Abschnitte 0 bis 2 stehen
@@ -27,6 +28,73 @@ eingeschränkt). SQL-Abfragen:
 ssh -i ~/.ssh/id_ed25519 root@movietaste.de \
   "cd /opt/movietaste && docker compose exec -T postgres psql -U postgres -d filme_serien -c 'SELECT …'"
 ```
+
+---
+
+## 0.0 Was am 11. August dazukam (11 Commits)
+
+**Der Plan für den öffentlichen Test ist vollständig abgearbeitet.** Dazu drei
+Dinge, die nicht darin standen.
+
+### 0.0.1 Der Serverquelltext lag offen — beim Anlegen der robots.txt gefunden
+
+Der wichtigste Fund des Tages. `express.static(frontendRoot)` liefert im Image
+`/app` aus, und dort liegt laut Dockerfile auch `backend/`. Live gemessen:
+`/backend/server.js`, `/backend/routes/auth.js`, `/backend/lib/mailer.js` und
+`/backend/db/schema.sql` kamen mit **HTTP 200**.
+
+**Zugangsdaten waren nicht betroffen:** `/backend/.env` gab 404, die Datei steht
+in `.dockerignore` und kommt über `env_file` in den Container. Ebenfalls 404:
+Caddyfile, docker-compose.yml und die gesamte Dokumentation — die kopiert das
+Dockerfile gar nicht erst ins Image.
+
+Behoben durch eine Sperre **vor** `express.static`: Das Backend muss im Image
+liegen, es soll nur nicht ausgeliefert werden.
+
+### 0.0.2 Die sieben Punkte des Plans
+
+| Punkt | Ergebnis |
+|---|---|
+| Feedback speichern | Tabelle `feedback`, **erst speichern, dann mailen**. Lesen mit `npm run feedback` (`--alle`, `--tage N`, `--csv`). Aufbewahrung 12 Monate, täglich abgeräumt. |
+| Datenschutz Abschnitt 6 (+2, 3, 10) | Resend namentlich genannt, USA-Übermittlung belegt, Feedback vollständig beschrieben. |
+| Namensnennung | OpenStreetMap (ODbL) und GeoNames (CC BY 4.0) stehen in den Credits, nicht mehr nur im Code-Kommentar. |
+| Missbrauchsschutz | Eigene Mengenbegrenzung je IP auf fünf Endpunkten, ohne neue Abhängigkeit. 429 mit Wartezeit im Klartext. |
+| Indexierung | `robots.txt`: nur die Startseite, Bilder ausdrücklich erlaubt (sonst leere Vorschaukacheln). |
+| Monitoring | `backend/lib/wache.js` — Mail nur im Fehlerfall, eine je Art und Tag. |
+| Tour-Screenshots | Alle sechs neu, zeigen wieder die tatsächliche Bedienung. |
+
+**Zur USA-Übermittlung:** Am 11.08.2026 auf der offiziellen DPF-Liste
+nachgesehen (Eintrag 8907, LegalName „PLUS FIVE FIVE", Anzeigename „Resend").
+Status der EU-US-Zertifizierung: **„Active — Re-certification under Review"**,
+Nicht-HR-Daten erfasst, Prüfverfahren Selbstauskunft. Damit greift der
+Angemessenheitsbeschluss vom 10.07.2023 (Art. 45 Abs. 1 DSGVO); die
+Standardvertragsklauseln stehen zusätzlich im DPA und sind als Rückfall
+genannt. **Wer das später prüfen lässt, fängt bei diesem Status an** — fällt
+die Zertifizierung weg, muss Abschnitt 6 umgeschrieben werden.
+
+### 0.0.3 Zwei kleine Oberflächen-Änderungen
+
+- **Teilen-Fenster:** nur noch ein Knopf („Mit anderen teilen"). Der gestrichene
+  war zugleich der Rückfall, wenn das Story-Bild nicht gebaut werden kann —
+  deshalb springt der verbliebene in dem Fall auf Text und Adresse um.
+- **Bewertungsfenster:** Der Taste-Score-Satz steht in eigener Zeile und in
+  Klammern. Der Zwischenspeicher musste dafür von `textContent` auf `innerHTML`
+  umgestellt werden, sonst wäre der Umbruch nach der ersten Bewertung weg.
+
+### 0.0.4 Was dabei NICHT geprüft werden konnte
+
+Hier läuft weder Docker noch Postgres. **Alles Datenbanknahe ist erst live
+belegt** — die `feedback`-Tabelle entsteht beim Deploy über `migrate`.
+
+Zwei Dinge stehen ausdrücklich noch aus:
+
+- **Dass Caddy `X-Forwarded-For` wirklich setzt.** Lokal ist bewiesen, dass
+  `req.ip` bei `trust proxy: 1` daraus liest. Steht im Protokoll beim Abweisen
+  eine `172.x`/`10.x`-Adresse, teilen sich **alle Leute einen Topf** — deshalb
+  schreibt der Zähler die erkannte Adresse mit.
+- **Dass eine gemerkte Wache-Meldung beim nächsten erfolgreichen Versand
+  mitfährt.** `mailer.js` liest den Anbieter beim Laden einmal, Fehlschlag und
+  Erfolg sind im selben Lauf nicht zu erzeugen.
 
 ---
 
@@ -580,24 +648,21 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 
 ### Rechtliches, vor Go-Live bzw. App Store
 
-- Abschnitt 6 von `datenschutz.html` und `impressum.html` prüfen lassen — siehe
-  3.1, dort ausführlich; fertiger Textentwurf in `ENTWURF-DATENSCHUTZ-MAIL.md`.
-  Der Serverstandort ist seit dem 10. August eingetragen.
+- ~~Abschnitt 6 von `datenschutz.html`~~ — **am 11. August geschrieben**
+  (siehe 0.0.2). Offen bleibt allein die **Prüfung durch eine Anwältin oder
+  einen Anwalt**, ausdrücklich vertagt (Entscheidung 4 des Plans); das gilt auch
+  für `impressum.html` und Abschnitt 9.
 - Privacy Nutrition Labels und Altersfreigabe im Store-Formular; Konten
   (Apple 99 $/Jahr, Google 25 $ einmalig).
 
 ### Technisch
 
-- **Feedback wird nicht gespeichert**, nur per Mail verschickt. Schlägt Resend
-  fehl, ist die Nachricht weg. Hängt mit 3.1 zusammen: Der Entwurf sagt zu, dass
-  die Nachricht nicht in der Datenbank landet — wer das ändert, muss den Satz
-  mitändern.
-- **Tour-Screenshots in `tour/` sind veraltet.** Sie zeigen die alte Tab-Reihe
-  (genau ein Bereich aktiv) und die alte Statusreihe. Seit dem Filter-Umbau
-  leuchten Filme und Serien gleichzeitig, Kino ist abgesetzt, und alle drei
-  Status sind an. Neu erzeugen: `bash scripts/tour/aufnehmen.sh` (braucht Chrome
-  und Netz). **Das ist die sichtbarste Altlast** — die Bilder widersprechen
-  inzwischen dem, was man beim Öffnen sieht.
+- ~~**Feedback wird nicht gespeichert**~~ — **am 11. August erledigt.** Es geht
+  jetzt zuerst in die Datenbank und danach als Mail hinaus; `npm run feedback`
+  liest es aus.
+- ~~**Tour-Screenshots in `tour/` sind veraltet.**~~ — **am 11. August neu
+  erzeugt** und gegen die Beschriftungen gehalten (siehe 0.0.2).
+
 - **Einladungen lassen sich nicht zurückziehen**, und Links gelten für beliebig
   viele Personen. Eine Liste der offenen Einladungen mit Schließen-Knopf wäre der
   nächste Schritt.
@@ -606,6 +671,10 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
   in anderer Form zurück soll (Idee: Dämpfung nur am unteren Ende).
 - **Aktionszeile bei 320px** bricht auf vier Zeilen um; nur über eine kürzere
   Beschriftung als „Ähnliche Titel" lösbar.
+- **Prüfung von außen fehlt.** Die Wache meldet Störungen per Mail, aber ein
+  stehender Server meldet nichts — wer nicht läuft, schreibt auch keine Mail.
+  Bewusst vertagt (Entscheidung 4 des Plans). Wer es nachrüstet, braucht einen
+  Dienst außerhalb des Servers, der movietaste.de regelmäßig abruft.
 
 ### Bewusst nicht gemacht
 
