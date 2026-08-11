@@ -6866,11 +6866,18 @@ function poolItemLi(item, score, opts){
         // serien.data, das nur per rebuild() aktualisiert wird (Streaming liest
         // direkt aus POOL/PROGRESS und ist daher immer aktuell).
         rebuild();
-        // Discovery blendet bereits markierte Titel aus -- die Zeile muss also
-        // sofort verschwinden (bzw. bei Streaming neu einsortiert werden). Kein
-        // Re-Render, wenn dieses poolItemLi nur im "Aehnliche Titel"-Popup auf
-        // Filme/Serien steht (das ist keine der beiden Live-Ansichten hier).
-        if (discoverFilterOn) renderCurrentTab();
+        /* Immer neu zeichnen, nicht nur unter "Neue entdecken".
+
+           Frueher stand hier `if (discoverFilterOn)`. Damit verschwand eine
+           Zeile nur dort zuverlaessig -- wer im Kino mit ausschliesslich
+           "Watchliste" einen Titel auf "gesehen" setzte, sah ihn weiter stehen,
+           obwohl er nicht mehr in die Auswahl passte. Gemeldet am 11. August.
+
+           Die eigenen Zeilen unter Filme/Serien (eigeneZeileLi) haben immer
+           schon bedingungslos neu gezeichnet. Es waren also zwei Verhalten fuer
+           dieselbe Handlung, je nachdem welche Art Zeile man vor sich hatte. */
+        suspendHoverUntilMouseMove();
+        renderCurrentTab();
       } finally {
         seenBtn.blur();
         seenBtn.disabled = false;
@@ -6914,7 +6921,9 @@ function poolItemLi(item, score, opts){
         // Watchlist-Aenderung wirkt sich auf Filme/Serien/Streaming aus --
         // rebuild() liest dafuer direkt aus POOL/PROGRESS.
         rebuild();
-        if (discoverFilterOn) renderCurrentTab();
+        // Immer neu zeichnen -- Begruendung beim Gesehen-Knopf oben.
+        suspendHoverUntilMouseMove();
+        renderCurrentTab();
         senden.catch(function(){
           // PROGRESS hat updateProgressRemote bereits zurueckgesetzt; hier fehlt
           // nur noch die Anzeige dazu.
