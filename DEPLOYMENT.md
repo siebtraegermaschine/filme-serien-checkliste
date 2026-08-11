@@ -125,6 +125,43 @@ DATABASE_URL=postgres://postgres:postgres@localhost:5432/filme_serien \
    TMDB-Job (04:00 UTC, siehe `.github/workflows/streaming.yml`) direkt in
    die Datenbank statt `streaming.json` zu committen.
 
+## Automatischer Deploy (Push auf `main`)
+
+Jeder Push auf `main` stößt `.github/workflows/deploy.yml` an. Der Workflow
+verbindet sich per SSH und ruft **genau ein** Skript auf dem Server auf:
+`/opt/movietaste/deploy.sh`. Der dafür hinterlegte SSH-Schlüssel ist in
+`authorized_keys` über `command="…"` auf dieses eine Skript eingeschränkt --
+über dieses Secret gibt es also keinen freien Shell-Zugriff.
+
+**Das Skript liegt nur auf dem Server, nicht im Repo.** Damit es beim nächsten
+Serverumzug nicht verlorengeht, hier sein vollständiger Inhalt:
+
+```bash
+#!/bin/bash
+set -euo pipefail
+cd /opt/movietaste
+git fetch origin main
+git reset --hard origin/main
+docker compose -f docker-compose.yml --profile prod up -d --build
+docker compose -f docker-compose.yml --profile prod exec -T backend npm run migrate
+# Caddy neu erzeugen: Die Caddyfile ist als einzelne Datei gemountet, und
+# git reset --hard ersetzt sie per Rename (neuer Inode) -- der laufende
+# Container zeigt sonst weiter auf die alte Version, jede Caddyfile-Aenderung
+# griffe still nicht. --force-recreate bindet den aktuellen Stand neu ein.
+docker compose -f docker-compose.yml --profile prod up -d --force-recreate caddy
+```
+
+Die letzte Zeile wurde am 11.08.2026 ergänzt. Vorher übernahm der Deploy
+Caddyfile-Änderungen **nicht**: Der Caddy-Container lief mit der alten
+Konfiguration im Speicher weiter (der Single-File-Mount zeigte nach dem
+`git reset --hard`-Rename auf den alten Inode). Wer die `deploy.sh` neu anlegt,
+darf diese Zeile nicht vergessen -- sonst greift kein Header- oder
+Routing-Fix an der Auslieferung, obwohl der Commit live ist.
+
+Migration (`npm run migrate`) läuft bei jedem Deploy mit und ist idempotent
+(`CREATE … IF NOT EXISTS`), legt also neue Tabellen an, ohne bestehende zu
+berühren.
+
 ## Backups
 
 Die Datenbank wird per `pg_dump` gesichert. Zwei Stufen, weil die Daten
