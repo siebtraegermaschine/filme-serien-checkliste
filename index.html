@@ -480,6 +480,7 @@
   .feedback-textarea { width:100%; background:var(--bg); color:var(--text); border:1px solid var(--border);
     border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; resize:vertical; box-sizing:border-box; }
   .feedback-textarea:focus { outline:none; border-color:var(--accent); }
+  .feedback-hinweis { margin:8px 0 0; }
   .settings-menu { flex-direction:column; }
   .settings-menu button { width:100%; }
   .account-sep { border:none; border-top:1px solid var(--border); margin:20px 0; }
@@ -1414,6 +1415,12 @@
     <h3>Feedback senden</h3>
     <div id="feedbackForm">
       <textarea id="feedbackText" class="feedback-textarea" rows="5" maxlength="5000" placeholder="Was möchtest du uns mitteilen?"></textarea>
+      <!-- Der Hinweis steht bewusst HIER und nicht nur in der
+           Datenschutzerklaerung: Wer Freitext in ein Feld tippt, liest vorher
+           keinen Rechtstext. Der Wortlaut haengt am Anmeldestand (siehe
+           openFeedbackModal) -- "wir schicken deine Adresse mit" waere fuer
+           Abgemeldete schlicht falsch. -->
+      <p class="prov-intro feedback-hinweis" id="feedbackHinweis"></p>
       <div id="feedbackError" class="auth-error"></div>
       <div class="modal-actions">
         <button type="button" id="feedbackSubmit" class="modal-yes">Absenden</button>
@@ -5155,8 +5162,9 @@ document.getElementById('installAndroid').onclick = function(){
   );
 };
 
-/* ---- "Feedback senden": einfaches Formular (nur Text + Absenden), landet per
-   E-Mail bei info@digital-wings.com (siehe backend/routes/feedback.js). Oeffentlich,
+/* ---- "Feedback senden": einfaches Formular (nur Text + Absenden). Das Backend
+   speichert die Nachricht und schickt sie zusaetzlich per E-Mail an
+   info@digital-wings.com (siehe backend/routes/feedback.js). Oeffentlich,
    kein Login noetig -- ist die Person eingeloggt, ergaenzt das Backend ihre
    E-Mail automatisch, ohne dass das Formular dafuer ein Feld braucht. ---- */
 var _feedbackModal = document.getElementById('feedbackModal');
@@ -5165,11 +5173,17 @@ var _feedbackSuccess = document.getElementById('feedbackSuccess');
 var _feedbackText = document.getElementById('feedbackText');
 var _feedbackError = document.getElementById('feedbackError');
 var _feedbackSubmit = document.getElementById('feedbackSubmit');
+var _feedbackHinweis = document.getElementById('feedbackHinweis');
 function openFeedbackModal(){
   _feedbackForm.style.display = '';
   _feedbackSuccess.style.display = 'none';
   _feedbackText.value = '';
   _feedbackError.textContent = '';
+  // Erst beim Oeffnen setzen, nicht einmalig beim Start: Wer sich zwischendurch
+  // an- oder abmeldet, bekaeme sonst den Satz von vorhin zu lesen.
+  _feedbackHinweis.textContent = CURRENT_USER
+    ? 'Da du angemeldet bist, schicken wir die E-Mail-Adresse deines Kontos mit, damit wir dir antworten können. Deine Nachricht wird gespeichert.'
+    : 'Ohne Anmeldung erreicht uns deine Nachricht ohne Absenderangabe – wir können dann nicht antworten. Deine Nachricht wird gespeichert.';
   _feedbackModal.style.display = 'flex';
 }
 function closeFeedbackModal(){ _feedbackModal.style.display = 'none'; }
