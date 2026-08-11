@@ -681,6 +681,10 @@
      Kopf -- die TMDB-Bedingungen verlangen ausdruecklich, dass es weniger
      prominent ist als die Marke der App selbst. Unveraendert in Farbe und
      Seitenverhaeltnis, deshalb keine Filter oder feste Hoehe. */
+  /* Das Browser-Blau steht im dunklen Dialog fast unlesbar auf dem Grund. Im
+     Fussbereich faellt das nicht auf (heller Streifen), in den Credits schon --
+     dort sind es die ersten Links ueberhaupt. */
+  .prov-intro a { color: var(--accent); }
   .credits-logo { display:block; margin:14px 0; }
   .credits-logo img { width:220px; max-width:100%; height:auto; display:block; }
   .credits-disclaimer { font-style:italic; }
@@ -1465,6 +1469,17 @@
       endorsed, certified, or otherwise approved by TMDB.</p>
     <p class="prov-intro">Angaben zur Verfügbarkeit bei Streaming-Anbietern stammen über TMDB von
       JustWatch. Ob ein Titel tatsächlich läuft, entscheidet allein der jeweilige Anbieter.</p>
+    <!-- Namensnennung ist bei beiden Lizenzbedingung, nicht Kuer: ODbL bei
+         OpenStreetMap, CC-BY 4.0 bei GeoNames (siehe backend/scripts/
+         import-kinos.mjs und import-plz.mjs). Sie steht hier, obwohl "Deine
+         Kinos" noch keine Spielplaene zeigt -- die Daten sind eingespielt und
+         die Auswahl ist benutzbar, damit gilt die Bedingung ab jetzt. -->
+    <p class="prov-intro">Angaben zu Kinos stammen von OpenStreetMap:
+      <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">©
+      OpenStreetMap-Mitwirkende</a>, veröffentlicht unter der Open Database License (ODbL).</p>
+    <p class="prov-intro">Postleitzahlen und Orte für die Umkreissuche stammen von
+      <a href="https://www.geonames.org" target="_blank" rel="noopener">GeoNames</a>,
+      veröffentlicht unter der Lizenz Creative Commons Attribution 4.0 (CC BY 4.0).</p>
   </div>
 </div>
 
