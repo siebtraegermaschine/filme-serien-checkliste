@@ -22,6 +22,7 @@ import kinosRouter from './routes/kinos.js';
 import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedback.js';
+import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';
 import { starteSicherung } from './lib/sicherung.js';
 import { starteThemen } from './lib/themen.js';
 import { vorwaermen } from './lib/listenCache.js';
@@ -34,6 +35,10 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const app = express();
 app.set('trust proxy', 1); // hinter Caddy/Traefik als Reverse Proxy
+
+// So frueh wie moeglich: Faengt unbehandelte Fehler ab, die vor oder neben
+// jeder Route auftreten koennen (siehe lib/wache.js).
+ueberwacheProzess();
 
 if (process.env.CORS_ORIGIN) {
   app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
@@ -198,6 +203,12 @@ app.use(express.static(frontendRoot, { index: 'index.html', extensions: ['html']
 
 app.use((err, req, res, next) => {
   console.error(err);
+  // Der Fehlerbehandler ist die letzte Stelle, an der ein Fehler ueberhaupt
+  // noch auffaellt -- ohne Meldung stuende er nur im Container-Protokoll, das
+  // niemand liest. Methode und Pfad reichen zum Wiederfinden; Nutzlast und
+  // Zugangsdaten gehoeren ausdruecklich nicht in eine Mail.
+  melde('server-fehler', 'Unbehandelter Fehler im Backend',
+    `${req.method} ${req.path}\n\n${err && err.stack ? err.stack : String(err)}`).catch(() => {});
   res.status(500).json({ error: 'internal_error' });
 });
 
@@ -218,6 +229,9 @@ app.listen(port, () => {
   // lib/themen.js) -- Trends wie True Crime kennt TMDB nur als Schlagwort,
   // nicht als Genre, und die Titel der Nacht sollen ihres von selbst bekommen.
   starteThemen();
+  // Meldet Stoerungen per Mail -- nur im Fehlerfall, nie "alles in Ordnung"
+  // (siehe lib/wache.js). Prueft taeglich, ob die Importe ausgeblieben sind.
+  starteWache();
   /* Die beiden grossen Startlisten gleich bauen, statt den ersten Besucher nach
      einem Deploy warten zu lassen. Der Aufruf entspricht genau dem, den die App
      beim Start macht -- steht dort ein anderer Parameter, waermt das hier ins
