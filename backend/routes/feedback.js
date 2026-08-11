@@ -2,6 +2,7 @@ import { pool } from '../db/pool.js';
 import { sendMail } from '../lib/mailer.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { limit } from '../middleware/limit.js';
+import { melde } from '../lib/wache.js';
 
 const router = createAsyncRouter();
 
@@ -58,6 +59,13 @@ router.post('/', GRENZE_FEEDBACK, async (req, res) => {
     });
   } catch (err) {
     console.error(`[feedback] Versand fuer Nr. ${zeile.id} fehlgeschlagen:`, err.message);
+    // Der Wache melden -- die kann das jetzt naturgemaess nicht per Mail
+    // hinausbringen und reicht es beim naechsten gelungenen Versand nach
+    // (siehe lib/wache.js). Wichtig ist die Nummer: Danach laesst sich die
+    // Nachricht mit `npm run feedback` wiederfinden.
+    melde('mailversand', 'Mailversand fehlgeschlagen',
+      `Feedback Nr. ${zeile.id} liegt in der Datenbank, die Mail ging nicht raus:\n${err.message}\n\n` +
+      'Auslesen mit: npm run feedback').catch(() => {});
   }
 
   res.status(204).end();

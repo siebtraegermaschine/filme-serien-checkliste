@@ -3,6 +3,7 @@ import { createWriteStream } from 'node:fs';
 import { mkdir, readdir, stat, unlink } from 'node:fs/promises';
 import { createGzip } from 'node:zlib';
 import path from 'node:path';
+import { melde } from './wache.js';
 
 // Automatische Datenbank-Sicherung aus dem Backend-Container heraus.
 //
@@ -106,7 +107,12 @@ export function starteSicherung() {
     // trotzdem schon.
     sichere('nutzer')
       .then(() => (new Date().getUTCDate() === 1 ? sichere('voll') : null))
-      .catch((err) => console.error('[sicherung] Lauf fehlgeschlagen:', err.message));
+      .catch((err) => {
+        // Eine ausgefallene Sicherung faellt sonst erst auf, wenn man sie
+        // braucht -- und dann ist es zu spaet (siehe lib/wache.js).
+        melde('sicherung', 'Sicherung fehlgeschlagen',
+          `Der taegliche Sicherungslauf schlug fehl:\n${err.message}`).catch(() => {});
+      });
   };
   // Erst zwei Minuten nach dem Start: Ein frisch hochgefahrener Container soll
   // nicht gleichzeitig Migration, Aufraeumen und einen Dump stemmen.

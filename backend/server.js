@@ -24,6 +24,7 @@ import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedbackAufraeumen.js';
 import { starteSicherung } from './lib/sicherung.js';
 import { starteThemen } from './lib/themen.js';
+import { starteWache, melde } from './lib/wache.js';
 import { vorwaermen } from './lib/listenCache.js';
 import { ladeListe, listenSchluessel } from './routes/titles.js';
 import { ladeStreaming, STREAMING_SCHLUESSEL } from './routes/streaming.js';
@@ -191,6 +192,14 @@ app.use(express.static(frontendRoot, { index: 'index.html', extensions: ['html']
 
 app.use((err, req, res, next) => {
   console.error(err);
+  // Der Wache melden, aber die Antwort nicht davon abhaengig machen: Wer gerade
+  // einen Fehler bekommt, soll nicht zusaetzlich auf einen Mailversand warten.
+  // Methode und Pfad kommen mit -- ohne sie ist ein Stapelauszug im Postfach
+  // schwer einzuordnen. Die Nutzlast bewusst NICHT: dort steht bei /api/auth
+  // ein Passwort drin.
+  melde('serverfehler', 'Fehler im Backend',
+    `${req.method} ${req.originalUrl}\n\n${err && err.stack ? err.stack : String(err)}`)
+    .catch(() => {});
   res.status(500).json({ error: 'internal_error' });
 });
 
@@ -212,6 +221,10 @@ app.listen(port, () => {
   // lib/themen.js) -- Trends wie True Crime kennt TMDB nur als Schlagwort,
   // nicht als Genre, und die Titel der Nacht sollen ihres von selbst bekommen.
   starteThemen();
+  // Meldet per Mail, wenn etwas nicht stimmt -- und sonst gar nicht (siehe
+  // lib/wache.js). Zuletzt gestartet, damit die Fehlerbehandler fuer
+  // uncaughtException/unhandledRejection stehen, sobald alles Uebrige laeuft.
+  starteWache();
   /* Die beiden grossen Startlisten gleich bauen, statt den ersten Besucher nach
      einem Deploy warten zu lassen. Der Aufruf entspricht genau dem, den die App
      beim Start macht -- steht dort ein anderer Parameter, waermt das hier ins

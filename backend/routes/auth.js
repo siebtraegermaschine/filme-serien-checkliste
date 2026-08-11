@@ -5,6 +5,7 @@ import { sendPasswordResetMail } from '../lib/mailer.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { limit } from '../middleware/limit.js';
+import { melde } from '../lib/wache.js';
 import { WIDERRUFSFRIST_TAGE } from '../lib/kontoAufraeumen.js';
 
 const router = createAsyncRouter();
@@ -164,7 +165,19 @@ router.post('/request-password-reset', GRENZE_PASSWORT_VERGESSEN, async (req, re
         [user.id, tokenHash, expiresAt]
       );
       const resetUrl = `${process.env.APP_BASE_URL || ''}/reset-password?token=${rawToken}`;
-      await sendPasswordResetMail({ to: user.email, resetUrl });
+      // Ein Fehler beim Versand darf NICHT nach aussen dringen: Sonst kaeme
+      // fuer eine bekannte Adresse ein 500 und fuer eine unbekannte ein 202 --
+      // damit waere die Zusage direkt darunter hinfaellig, und der Endpunkt
+      // beantwortete genau die Frage, die er nicht beantworten soll. Also
+      // protokollieren, der Wache melden und weiter wie sonst.
+      try {
+        await sendPasswordResetMail({ to: user.email, resetUrl });
+      } catch (err) {
+        console.error('[auth] Passwort-Reset-Mail fehlgeschlagen:', err.message);
+        melde('mailversand', 'Mailversand fehlgeschlagen',
+          `Eine Passwort-Reset-Mail ging nicht raus:\n${err.message}\n\n` +
+          'Die betroffene Person kann sich derzeit kein neues Passwort setzen.').catch(() => {});
+      }
     }
   }
   // Immer identische Antwort, unabhängig davon ob die E-Mail existiert

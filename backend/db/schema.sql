@@ -391,6 +391,25 @@ CREATE TABLE IF NOT EXISTS feedback (
 );
 CREATE INDEX IF NOT EXISTS idx_feedback_erstellt_am ON feedback (erstellt_am);
 
+-- Sperre fuer die Wache (siehe backend/lib/wache.js): je Art von Meldung
+-- hoechstens eine Mail am Tag.
+--
+-- Bewusst in der Datenbank und nicht nur im Speicher: Ein Absturz im
+-- Sekundentakt startet den Container immer wieder neu, und eine Sperre im
+-- Speicher waere danach jedes Mal wieder leer -- also genau in dem Fall
+-- wirkungslos, fuer den sie da ist. Faellt die Datenbank selbst aus, greift
+-- ersatzweise die Sperre im Speicher; dann ist es ohnehin ein Prozess ohne
+-- Neustart, sonst kaeme man gar nicht bis hierher.
+--
+-- unterdrueckt zaehlt, wie oft dieselbe Meldung seit dem letzten Versand
+-- zurueckgehalten wurde. Die Zahl steht in der naechsten Mail -- sonst laese
+-- sich "einmal danebengegangen" nicht von "seit gestern 4.000-mal" trennen.
+CREATE TABLE IF NOT EXISTS wache_meldungen (
+  art          TEXT PRIMARY KEY,
+  zuletzt_am   DATE NOT NULL,
+  unterdrueckt INTEGER NOT NULL DEFAULT 0
+);
+
 -- Anzahl der Stimmen hinter der Bewertung ("8,3 (28.300)"). Ohne sie steht eine
 -- glatte 8,0 aus EINER Stimme gleichberechtigt neben einer 8,3 aus 28.000 --
 -- die Zahl macht erst einschaetzbar, wie belastbar die Bewertung ist.
