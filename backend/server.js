@@ -154,6 +154,16 @@ app.get('/t/:art/:kennung', async (req, res, next) => {
   const titelZeile = titel.title + (titel.year ? ' (' + titel.year + ')' : '') + ' – MovieMatch';
 
   const block = [
+    /* Geteilte Titel gehoeren nicht in Suchmaschinen: Jeder Titel ergibt eine
+       eigene Adresse mit fast gleichem Inhalt, es waeren zehntausende. Der
+       eigentliche Riegel ist "Disallow: /t/" in der robots.txt -- der spart
+       auch die Abfragen, die jeder dieser Abrufe ausloest.
+
+       Diese Zeile ist der zweite Riegel, fuer Roboter, die die robots.txt gar
+       nicht erst lesen. Wer sich daran haelt, sieht sie nie -- und genau
+       deshalb steht sie hier zusaetzlich und nicht anstelle des Eintrags in
+       der robots.txt. */
+    '<meta name="robots" content="noindex">',
     '<meta property="og:site_name" content="MovieMatch">',
     '<meta property="og:type" content="video.' + (titel.type === 'series' ? 'tv_show' : 'movie') + '">',
     '<meta property="og:url" content="' + attrEsc(url) + '">',

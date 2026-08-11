@@ -1,0 +1,35 @@
+# Nur die Startseite gehoert in Suchmaschinen. Alles andere bleibt vorerst
+# draussen -- die Rechtstexte tragen dafuer zusaetzlich ein noindex im Kopf,
+# denn robots.txt haelt eine Seite nur vom ABRUFEN ab, nicht zwingend aus dem
+# Verzeichnis: Eine anderswo verlinkte Adresse kann trotzdem als blosser Eintrag
+# ohne Beschreibung erscheinen. Beides zusammen deckt beide Faelle ab.
+User-agent: *
+
+# Die Startseite, und nur sie. "Allow" gewinnt hier ueber "Disallow", weil die
+# laengere und genauere Regel den Ausschlag gibt; das "$" bindet sie an genau
+# diese eine Adresse.
+Allow: /$
+
+# Die Bilder und das Manifest der Startseite bleiben abrufbar. Sie sind keine
+# eigenen Seiten, aber ohne sie bekaeme ein Suchdienst die eine Seite, die er
+# sehen soll, nur unvollstaendig zu sehen -- und das Vorschaubild fehlte.
+Allow: /og-image.png
+Allow: /moviematch.png
+Allow: /tmdb-logo.svg
+Allow: /favicon-32.png
+Allow: /apple-touch-icon.png
+Allow: /icon-192.png
+Allow: /icon-512.png
+Allow: /manifest.json
+
+# Geteilte Titel. Jeder Titel ergibt eine eigene Adresse mit fast gleichem
+# Inhalt -- zehntausende davon, alle mit derselben App dahinter. Steht bewusst
+# hier, obwohl "Disallow: /" es schon abdeckt: Wer die Datei liest, soll sehen,
+# dass daran gedacht wurde.
+Disallow: /t/
+
+# Die Schnittstelle hat in einem Suchergebnis nichts verloren.
+Disallow: /api/
+
+# Alles Uebrige.
+Disallow: /
