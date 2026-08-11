@@ -381,6 +381,13 @@
   .shared-meta { color:var(--text-dim); font-size:13px; text-align:center; margin-top:4px; }
   .shared-plot { color:var(--text); font-size:13.5px; line-height:1.45; margin:12px 0 4px; text-align:justify; }
   .shared-von { color:var(--text-dim); font-size:13px; text-align:center; margin-bottom:10px; }
+  /* Trailer ueber die volle Breite, ueber den Watchliste/Gesehen-Knoepfen. Im
+     Stil des Trailer-Play-Knopfs (Akzent), damit er als eigene Handlung lesbar
+     ist und nicht mit der Watchliste/Gesehen-Reihe verschwimmt. */
+  .shared-trailer-btn { display:block; width:100%; margin:16px 0 10px; padding:11px 20px;
+    border-radius:8px; background:var(--accent-soft); border:1px solid var(--accent);
+    color:var(--accent); font-size:14px; font-weight:600; cursor:pointer; }
+  @media (hover:hover) { .shared-trailer-btn:hover { background:var(--accent); color:#12161c; } }
   .to-top { position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px));
     width:44px; height:44px; display:none; align-items:center; justify-content:center;
     background:var(--card); border:1px solid var(--border); border-radius:50%;
@@ -1666,6 +1673,10 @@ const INFO_ICON = '<span class="info-i" data-ts role="button" tabindex="0" aria-
    (siehe requireLogin weiter unten und den Login-/Registrieren-Dialog). */
 let CURRENT_USER = null;
 let PROGRESS = new Map(); // title_id -> {seen, watchlist}
+// Promise des ersten Katalog-/Fortschritt-Ladens beim Start. Das "geteilter
+// Titel"-Popup wartet darauf, bevor es seine Knoepfe zeichnet -- siehe
+// STARTLADUNG-Zuweisung in der /api/auth/me-Kette und zeigeGeteiltenTitel.
+var STARTLADUNG = null;
 // Stand der Markierungen und das daraus gebaute Profil -- Grundlage des
 // Taste-Score-Zwischenspeichers (siehe punkteFuer weiter unten). Stehen hier
 // oben, weil rebuild() sie schon beim Seitenaufbau hochzaehlt.
@@ -6755,7 +6766,10 @@ renderCurrentTab();
 apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() => { CURRENT_USER = null; }).finally(() => {
   renderAuthBar();
   updateProfileBtn();
-  loadCatalogAndRefresh();
+  // Gemerkt, damit das "geteilter Titel"-Popup darauf warten kann: Es zeichnet
+  // sonst seine Watchliste/Gesehen-Knoepfe, bevor PROGRESS geladen ist, und
+  // zeigt dann einen veralteten (leeren) Stand (siehe zeigeGeteiltenTitel).
+  STARTLADUNG = loadCatalogAndRefresh();
   // Einladungslink hat Vorrang vor der Namensabfrage -- sonst stapeln sich
   // beim ersten Oeffnen zwei Dialoge uebereinander.
   var einladung = new URLSearchParams(location.search).get('einladung');
@@ -7521,14 +7535,30 @@ async function zeigeGeteiltenTitel(ziel){
   var meta = ['⭐ ' + sterneText(d.rating) + voteSuffix(d.voteCount),
               (d.genres && d.genres[0]) || null, d.year || null,
               d.type === 'series' ? 'Serie' : 'Film'].filter(Boolean).join(' · ');
+  // Trailer-Abruf wie in den Zeilen: bevorzugt TMDB-ID + Typ, sonst ueber die
+  // interne Titel-ID (by-title). So kann man den Trailer ansehen und direkt
+  // entscheiden, ob der Titel passt -- auch ohne Anmeldung.
+  var trailerKennung = (d.tmdbId && d.type) ? (d.type + '/' + d.tmdbId)
+                     : (d.id != null ? ('by-title/' + d.id) : null);
+  var trailerApi = trailerKennung ? ('/api/trailers/' + trailerKennung) : null;
   koerper.innerHTML =
     '<div class="shared-von">Für dich geteilt</div>' +
     poster +
     '<div class="shared-name">' + esc(d.title) + '</div>' +
     '<div class="shared-meta">' + esc(meta) + '</div>' +
     (d.plot ? '<div class="shared-plot">' + esc(d.plot) + '</div>' : '') +
+    (trailerApi ? '<button type="button" class="shared-trailer-btn" id="sharedTrailerBtn">▶ Trailer ansehen</button>' : '') +
     '<div class="modal-actions" id="sharedActions"></div>' +
     '<div class="share-hint" id="sharedHint"></div>';
+
+  // Der Trailer stapelt sich als eigenes Popup ueber diesem -- danach ist man
+  // wieder hier und kann sich entscheiden. Steht ausserhalb des Anmelde-Zweigs,
+  // damit auch nicht angemeldete Personen den Trailer sehen koennen.
+  if (trailerApi) {
+    document.getElementById('sharedTrailerBtn').onclick = function(){
+      openTrailerModal(trailerApi, d.title, null);
+    };
+  }
 
   var aktionen = document.getElementById('sharedActions');
   var hinweis = document.getElementById('sharedHint');
@@ -7614,6 +7644,16 @@ async function zeigeGeteiltenTitel(ziel){
       if (sterne == null) return;
       speichern({ seen: true, watchlist: false, rating: sterne }, true);
     };
+  }
+  // Erst warten, bis der eigene Fortschritt geladen ist -- sonst zeichnet
+  // knoepfeZeichnen einen veralteten (leeren) Stand: Ein laengst gemerkter Titel
+  // saehe ungemerkt aus, und der erste Klick taete das Gegenteil des Angezeigten
+  // (er las beim Klick das inzwischen geladene PROGRESS). Beim erneuten Aufruf
+  // nach dem Anmelden ist STARTLADUNG laengst erledigt -- das Warten ist dann
+  // sofort vorbei.
+  if (STARTLADUNG) {
+    hinweis.textContent = 'Deine Markierungen werden geprüft …';
+    try { await STARTLADUNG; } catch (e) { /* ohne Fortschritt bleibt der neutrale Stand */ }
   }
   knoepfeZeichnen();
 }
