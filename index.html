@@ -480,6 +480,7 @@
   .feedback-textarea { width:100%; background:var(--bg); color:var(--text); border:1px solid var(--border);
     border-radius:8px; padding:9px 12px; font-size:14px; font-family:inherit; resize:vertical; box-sizing:border-box; }
   .feedback-textarea:focus { outline:none; border-color:var(--accent); }
+  .feedback-hinweis { color:var(--text-dim); font-size:12px; line-height:1.4; margin-top:8px; }
   .settings-menu { flex-direction:column; }
   .settings-menu button { width:100%; }
   .account-sep { border:none; border-top:1px solid var(--border); margin:20px 0; }
@@ -1413,6 +1414,10 @@
     <h3>Feedback senden</h3>
     <div id="feedbackForm">
       <textarea id="feedbackText" class="feedback-textarea" rows="5" maxlength="5000" placeholder="Was möchtest du uns mitteilen?"></textarea>
+      <!-- Steht hier und nicht nur in der Datenschutzerklaerung: Wer Freitext
+           tippt, liest vorher keinen Rechtstext. Der Wortlaut haengt davon ab,
+           ob jemand angemeldet ist -- siehe openFeedbackModal. -->
+      <div id="feedbackHinweis" class="feedback-hinweis"></div>
       <div id="feedbackError" class="auth-error"></div>
       <div class="modal-actions">
         <button type="button" id="feedbackSubmit" class="modal-yes">Absenden</button>
@@ -5164,11 +5169,17 @@ var _feedbackSuccess = document.getElementById('feedbackSuccess');
 var _feedbackText = document.getElementById('feedbackText');
 var _feedbackError = document.getElementById('feedbackError');
 var _feedbackSubmit = document.getElementById('feedbackSubmit');
+var _feedbackHinweis = document.getElementById('feedbackHinweis');
 function openFeedbackModal(){
   _feedbackForm.style.display = '';
   _feedbackSuccess.style.display = 'none';
   _feedbackText.value = '';
   _feedbackError.textContent = '';
+  // Angemeldet geht die Adresse mit -- das gehoert vor das Tippen gesagt, nicht
+  // in einen Rechtstext, den an dieser Stelle niemand aufschlaegt.
+  _feedbackHinweis.textContent = CURRENT_USER
+    ? 'Wir speichern deine Nachricht und schicken deine E-Mail-Adresse mit, damit wir antworten können.'
+    : 'Wir speichern deine Nachricht. Ohne Anmeldung erreicht sie uns ohne Absender – wir können dann nicht antworten.';
   _feedbackModal.style.display = 'flex';
 }
 function closeFeedbackModal(){ _feedbackModal.style.display = 'none'; }
