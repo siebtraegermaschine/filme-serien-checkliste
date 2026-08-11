@@ -388,6 +388,10 @@
     border-radius:8px; background:var(--accent-soft); border:1px solid var(--accent);
     color:var(--accent); font-size:14px; font-weight:600; cursor:pointer; }
   @media (hover:hover) { .shared-trailer-btn:hover { background:var(--accent); color:#12161c; } }
+  /* Watchliste/Gesehen fuellen die Reihe je zur Haelfte, damit der
+     Trailer-Knopf darueber buendig mit ihnen abschliesst (links Watchliste,
+     rechts Gesehen) und nicht breiter wirkt. */
+  #sharedActions button { flex:1; }
   .to-top { position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px));
     width:44px; height:44px; display:none; align-items:center; justify-content:center;
     background:var(--card); border:1px solid var(--border); border-radius:50%;
