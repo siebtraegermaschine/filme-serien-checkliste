@@ -5726,6 +5726,12 @@ var EINLADUNGSARTEN = {
              'sortiert nach deinem Geschmack – teile deine Watchliste mit anderen und ' +
              'seht, welche Titel ihr gemeinsam sehen möchtet:';
     },
+    // Ausgeloggt gibt es keinen Namen und keinen Token, also ein neutraler Text
+    // ohne "X empfiehlt dir". Der Doppelpunkt am Ende leitet zum Link ueber, der
+    // wie sonst getrennt angehaengt wird (siehe zeigeEinladung).
+    textAusgeloggt: 'Entdecke MovieMatch. Filme, Serien und Kinofilme, sortiert nach deinem ' +
+             'Geschmack. Teilt eure Watchlisten und seht, welche Titel ihr gemeinsam sehen ' +
+             'möchtet. Die Verknüpfung gehört zu eurer beider Anmeldungen:',
     fehler: 'Der Einladungslink konnte nicht erstellt werden.',
   },
 };
@@ -5779,7 +5785,19 @@ async function einladungTeilen(btn, artName, weiter){
   // Nach dem Anmelden dorthin zurueck, wo der Klick herkam: aus dem Popup ins
   // Popup, aus dem Menue direkt in die Einladung. Ohne `weiter` stuende nach dem
   // Anmelden die Personenliste offen, obwohl man sie gar nicht geoeffnet hatte.
-  if (!CURRENT_USER) { closeProfileModal(); requireLogin(weiter || openProfileModal); return; }
+  if (!CURRENT_USER) {
+    // "Personen einladen" gibt nichts preis und braucht kein Konto: ausgeloggt
+    // einfach den blanken App-Link empfehlen, ohne ?ref=-Token und ohne
+    // Login-Zwang. Der Token diente nur der (bislang ungenutzten) Zuordnung
+    // "wer warb wen" -- ohne Anmeldung gibt es niemanden, dem man das zuordnen
+    // koennte. "Watchliste teilen" bleibt gesperrt, dabei werden zwei Konten
+    // verknuepft und eine Liste offengelegt.
+    if (artName === 'referral') {
+      zeigeEinladung(art.titel, art.textAusgeloggt, location.origin, 'Der Link läuft nicht ab.');
+      return;
+    }
+    closeProfileModal(); requireLogin(weiter || openProfileModal); return;
+  }
   // Eigene Rueckfrage statt confirm(): Auf dem iPhone konnte der Tipp auf "OK"
   // durch den geschlossenen Systemdialog hindurch auf das Popup dahinter
   // durchschlagen -- das ging dann mit zu.
