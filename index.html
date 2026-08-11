@@ -4620,7 +4620,12 @@ var TOUR_SLIDES = [
       'Dadurch bildet sich dein persönlicher Taste-Score.' },
   { titel: 'Dein Taste-Score',
     bild: 'tour/2-taste-score.png',
-    text: 'Ab 10 gespeicherten Titeln werden alle Filme, Serien und Kinofilme nach deinem Geschmack sortiert.' },
+    // Bewusst 20 und nicht 10: Die Automatik schaltet zwar schon bei 10 um
+    // (siehe effectiveSort), aber so wenige Titel ergeben noch kein tragfaehiges
+    // Profil. Die Zahl hier ist eine Empfehlung, keine Beschreibung der
+    // Schaltschwelle -- und sie stimmt damit mit dem Leertext der Watchliste
+    // ueberein ("mind. 20 Titel"), der vorher als Einziger 20 nannte.
+    text: 'Ab 20 gespeicherten Titeln werden alle Filme, Serien und Kinofilme nach deinem Geschmack sortiert.' },
   { titel: 'Mit anderen schauen',
     bild: 'tour/3-gemeinsam.png',
     text: '„Matche" deine Watchliste mit anderen und filtere nach Titeln, die ihr gemeinsam sehen wollt.' },
