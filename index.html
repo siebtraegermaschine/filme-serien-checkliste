@@ -3259,15 +3259,25 @@ function renderLeerzustand(q){
    Deshalb wird nach dem Nachladen um die Differenz mitgescrollt: Der Knopf
    bleibt dort stehen, wo er war, und die neuen Zeilen wachsen darueber herein.
    So laesst sich mehrfach hintereinander an derselben Stelle nachladen. */
-async function nachladenOhneSprung(knopfSuchen, nachladen){
-  var alt = knopfSuchen();
-  var vorher = alt ? alt.getBoundingClientRect().top : null;
+/* Nachladen, ohne dass die Seite unter einem wegspringt.
+
+   Haelt die LESESTELLE fest, nicht den Knopf. Der Unterschied ist der ganze
+   Punkt: Frueher wurde so weit mitgescrollt, dass "Mehr laden" wieder an
+   derselben Stelle stand -- damit lagen die 25 neuen Titel allesamt OBERHALB
+   des Bildes. Wer weiterlesen wollte, musste erst zurueckscrollen und wusste
+   nicht mehr, wo er stehengeblieben war. Genau so gemeldet am 11. August.
+
+   Jetzt bleibt die Ansicht, wo sie war. Die neuen Titel schliessen unten an,
+   man scrollt hinein, und der Knopf taucht erst hinter ihnen wieder auf.
+
+   Gemerkt und wiederhergestellt werden muss die Position trotzdem: render()
+   leert die Liste, bevor es sie neu fuellt. In dem Moment ist die Seite kurz
+   zu kurz fuer die aktuelle Bildlaufposition, und der Browser zieht sie nach
+   oben. Ohne das Zuruecksetzen landet man wieder ganz woanders. */
+async function nachladenOhneSprung(nachladen){
+  var vorher = window.scrollY;
   await nachladen();
-  if (vorher == null) return;
-  var neu = knopfSuchen();
-  if (!neu) return;                       // alles geladen, kein Knopf mehr
-  var versatz = neu.getBoundingClientRect().top - vorher;
-  if (versatz) window.scrollBy(0, versatz);
+  if (window.scrollY !== vorher) window.scrollTo(0, vorher);
 }
 function render() {
   const profile = aktuellesProfil();
@@ -3296,9 +3306,7 @@ function render() {
     moreBtn.className = 'load-more-btn';
     moreBtn.textContent = 'Mehr laden';
     moreBtn.onclick = function(){
-      nachladenOhneSprung(
-        function(){ return list.querySelector('.load-more-btn'); },
-        function(){ titelLimit += NACHLADE_SCHRITT; renderCurrentTab(); });
+      nachladenOhneSprung(function(){ titelLimit += NACHLADE_SCHRITT; renderCurrentTab(); });
     };
     list.appendChild(moreBtn);
   }
@@ -4961,12 +4969,10 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
     moreBtn.className = 'load-more-btn';
     moreBtn.textContent = 'Mehr anzeigen (' + Math.min(CINEMA_SECTION_STEP, remaining) + ' weitere)';
     moreBtn.onclick = function(){
-      nachladenOhneSprung(
-        function(){ return cinemaListEls[key].querySelector('.load-more-btn'); },
-        function(){
-          cinemaSectionLimit[key] = Math.min(entries.length, cinemaSectionLimit[key] + CINEMA_SECTION_STEP);
-          return renderCinemaPage();
-        });
+      nachladenOhneSprung(function(){
+        cinemaSectionLimit[key] = Math.min(entries.length, cinemaSectionLimit[key] + CINEMA_SECTION_STEP);
+        return renderCinemaPage();
+      });
     };
     el.appendChild(moreBtn);
   }
