@@ -3,7 +3,11 @@
 Ergänzt `UEBERGABE-CHAT.md` (Stand 2026-08-03). Für Architektur und Auslieferung
 siehe `DEPLOYMENT.md`, für den Weg zu nativen Apps `PLAN-NATIVE-APPS.md`,
 für den bereits umgesetzten Filter-Umbau `PLAN-FILTER.md`, für den offenen
-Rechtstext zum Mailversand `ENTWURF-DATENSCHUTZ-MAIL.md`.
+Rechtstext zum Mailversand `ENTWURF-DATENSCHUTZ-MAIL.md`, für „Deine Kinos"
+`PLAN-KINOS.md`.
+
+**Nächster Arbeitsauftrag: `PLAN-OEFFENTLICHER-TEST.md`** — was vor dem
+öffentlichen Test mit Fremden zu tun ist, mit allen Entscheidungen dazu.
 
 **Diese Datei ist der Einstiegspunkt.** Abschnitt 3 sagt, was noch zu tun ist;
 Abschnitt 1, 2 und 6, was man vorher wissen sollte. Die Abschnitte 0 bis 2 stehen
