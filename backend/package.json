@@ -12,6 +12,7 @@
     "migrate": "node db/migrate.js",
     "seed": "node scripts/seed-from-index-html.mjs",
     "statistik": "node scripts/bewertungsstatistik.mjs",
+    "feedback": "node scripts/feedback-lesen.mjs",
     "import-plz": "node scripts/import-plz.mjs",
     "import-kinos": "node scripts/import-kinos.mjs"
   },

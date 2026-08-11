@@ -512,3 +512,33 @@ CREATE TABLE IF NOT EXISTS plz (
 CREATE INDEX IF NOT EXISTS idx_plz_plz ON plz (plz text_pattern_ops);
 -- Ortssuche unabhaengig von Gross-/Kleinschreibung, nach Wortanfang.
 CREATE INDEX IF NOT EXISTS idx_plz_ort ON plz (lower(ort) text_pattern_ops);
+
+-- ---------------------------------------------------------------------------
+-- Rueckmeldungen aus dem Feedback-Formular
+--
+-- Bis zum oeffentlichen Test ging Feedback ausschliesslich per Mail raus.
+-- Schlug der Versand fehl, war die Nachricht weg -- beim Test von Fremden ist
+-- sie aber genau das Ergebnis, das man haben will. Deshalb steht sie jetzt
+-- zuerst hier und geht erst danach als Mail hinaus.
+--
+-- `email` ist eine Kopie zum Zeitpunkt des Absendens, kein Verweis: Loescht
+-- jemand spaeter sein Konto, soll die Rueckmeldung nicht ins Leere zeigen.
+-- Aus demselben Grund SET NULL statt CASCADE -- eine Kontoloeschung darf die
+-- Rueckmeldung nicht mitreissen. Sie gehoert zum Betrieb, nicht zum Konto;
+-- der Bezug zur Person faellt weg, der Text bleibt.
+--
+-- Auslesen ueber `npm run feedback` (backend/scripts/feedback-lesen.mjs),
+-- bewusst ohne HTTP-Route -- dieselbe Ueberlegung wie bei der
+-- Bewertungsstatistik. Aufbewahrung: 12 Monate (Datenschutzerklaerung
+-- Abschnitt 10), abgeraeumt vom taeglichen Aufraeumlauf.
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS feedback (
+  id          BIGSERIAL PRIMARY KEY,
+  nachricht   TEXT   NOT NULL,
+  user_id     BIGINT REFERENCES users(id) ON DELETE SET NULL,
+  email       TEXT,
+  erstellt_am TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+-- Gelesen wird immer das Neueste zuerst, und der Aufraeumlauf sucht das
+-- Aelteste -- beides bedient derselbe Index.
+CREATE INDEX IF NOT EXISTS idx_feedback_erstellt_am ON feedback (erstellt_am DESC);

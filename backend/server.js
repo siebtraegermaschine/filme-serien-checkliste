@@ -21,6 +21,7 @@ import linksRouter from './routes/links.js';
 import kinosRouter from './routes/kinos.js';
 import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
+import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteSicherung } from './lib/sicherung.js';
 import { starteThemen } from './lib/themen.js';
 import { vorwaermen } from './lib/listenCache.js';
@@ -189,6 +190,9 @@ app.listen(port, () => {
   // Loescht Konten, deren Widerrufsfrist abgelaufen ist -- beim Start und
   // danach einmal taeglich (siehe lib/kontoAufraeumen.js).
   starteAufraeumen();
+  // Loescht Rueckmeldungen nach Ablauf der Aufbewahrung -- die Frist steht in
+  // lib/feedback.js und ist in der Datenschutzerklaerung zugesagt.
+  starteFeedbackAufraeumen();
   // Taegliche Datenbank-Sicherung, am Monatsersten zusaetzlich eine
   // Vollsicherung (siehe lib/sicherung.js). Laeuft mit dem Container mit,
   // damit dafuer kein Cronjob von Hand eingerichtet werden muss.
