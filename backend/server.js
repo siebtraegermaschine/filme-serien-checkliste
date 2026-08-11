@@ -177,6 +177,23 @@ app.get('/t/:art/:kennung', async (req, res, next) => {
 // und manche zeigten daraufhin ihren eigenen Platzhalter statt des Logos.
 app.get('/favicon.ico', (req, res) => res.sendFile(path.join(frontendRoot, 'favicon-32.png')));
 
+/* frontendRoot ist /app im Image, und dort liegt neben den Frontend-Dateien
+   auch das Backend selbst (siehe backend/Dockerfile: COPY backend/ ./backend/).
+   Ohne diese Sperre liefert express.static den kompletten Serverquelltext aus --
+   am 11.08.2026 nachgewiesen: /backend/server.js, /backend/routes/auth.js und
+   /backend/db/schema.sql kamen mit HTTP 200 zurueck.
+
+   Zugangsdaten waren nie betroffen (backend/.env steht in .dockerignore und
+   kommt ueber env_file in den Container), aber Quelltext und Datenbankschema
+   gehoeren nicht ins Netz -- sie zeigen jedem, wo er ansetzen kann.
+
+   Bewusst vor express.static und nicht als Aenderung am Dockerfile: Das Backend
+   MUSS im Image liegen, es soll nur nicht ausgeliefert werden. */
+app.use((req, res, next) => {
+  if (/^\/backend(\/|$)/i.test(req.path)) return res.status(404).type('txt').send('Not found');
+  next();
+});
+
 app.use(express.static(frontendRoot, { index: 'index.html', extensions: ['html'] }));
 
 app.use((err, req, res, next) => {
