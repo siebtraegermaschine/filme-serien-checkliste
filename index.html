@@ -7345,9 +7345,17 @@ async function baueStoryBild(item, url){
     ctx.fillStyle = '#e8eaed';
     ctx.font = '600 34px ' + SCHRIFT;
     ctx.fillText('Code öffnen und Titel speichern', B / 2, qy + flaeche + 60);
-    ctx.fillStyle = '#e6b34c';
+    // Zweite Zeile zweifarbig: "unter:" in Weiss, die Domain in Gold. Dafuer
+    // linksbuendig zeichnen und die Gesamtbreite selbst zentrieren -- mit
+    // textAlign 'center' liesse sich kein Farbwechsel innerhalb der Zeile setzen.
     ctx.font = '700 36px ' + SCHRIFT;
-    ctx.fillText('unter movietaste.de', B / 2, qy + flaeche + 110);
+    var vorText = 'unter: ', domText = 'movietaste.de';
+    var wVor = ctx.measureText(vorText).width, wDom = ctx.measureText(domText).width;
+    var startX = (B - (wVor + wDom)) / 2, yQrZeile = qy + flaeche + 110;
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#e8eaed'; ctx.fillText(vorText, startX, yQrZeile);
+    ctx.fillStyle = '#e6b34c'; ctx.fillText(domText, startX + wVor, yQrZeile);
+    ctx.textAlign = 'center';
   } catch (e) { /* ohne QR bleibt das Bild trotzdem brauchbar */ }
 
   // JPEG statt PNG: Mit Breitbild-Hintergrund wiegt dasselbe Bild als PNG rund
