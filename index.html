@@ -1623,7 +1623,7 @@
   <div class="modal">
     <button class="modal-x" id="ratingModalX" aria-label="Abbrechen">✕</button>
     <h3>Wie fandest du <span id="ratingModalTitle"></span>?</h3>
-    <p id="ratingHint">1 = schlecht, 10 = sehr gut. Fließt in deinen Taste-Score ein.</p>
+    <p id="ratingHint">1 = schlecht, 10 = sehr gut.<br>(Fließt in deinen Taste-Score ein.)</p>
     <div class="rating-stars" id="ratingStars">
       <button type="button" data-star="1" aria-label="1 – schlecht"><span class="rs-stern">★</span><span class="rs-zahl">1</span></button>
       <button type="button" data-star="2" aria-label="2"><span class="rs-stern">★</span><span class="rs-zahl">2</span></button>
@@ -6299,7 +6299,10 @@ var _ratingResolve = null;
 // Auswahl eingefroren -- weder Hover noch ein zweiter Klick duerfen sie noch
 // veraendern.
 var _ratingBestaetigung = null;
-var _ratingHintText = '';
+// Als HTML gemerkt, nicht als Text: Der Hinweis steht auf zwei Zeilen (<br>).
+// Ueber textContent zurueckgeschrieben faende der zweite Aufruf nur noch eine
+// Zeile vor -- der Umbruch waere nach der ersten Bewertung weg.
+var _ratingHintHtml = '';
 function highlightStars(n){
   _ratingStarBtns.forEach(function(btn){
     btn.classList.toggle('active', Number(btn.dataset.star) <= n);
@@ -6323,7 +6326,7 @@ _ratingStarBtns.forEach(function(btn){
     _ratingBestaetigung = setTimeout(function(){
       _ratingBestaetigung = null;
       _ratingStars.classList.remove('gewaehlt');
-      if (hint) { hint.textContent = _ratingHintText; hint.classList.remove('bestaetigt'); }
+      if (hint) { hint.innerHTML = _ratingHintHtml; hint.classList.remove('bestaetigt'); }
       _ratingModal.style.display = 'none';
       if (_ratingResolve) { _ratingResolve(n); _ratingResolve = null; }
     }, 700);
@@ -6340,8 +6343,8 @@ function openRatingStars(title){
   document.getElementById('ratingModalTitle').textContent = title || 'diesen Titel';
   var hint = document.getElementById('ratingHint');
   if (hint) {
-    if (!_ratingHintText) _ratingHintText = hint.textContent;
-    hint.textContent = _ratingHintText;
+    if (!_ratingHintHtml) _ratingHintHtml = hint.innerHTML;
+    hint.innerHTML = _ratingHintHtml;
     hint.classList.remove('bestaetigt');
   }
   _ratingStars.classList.remove('gewaehlt');
