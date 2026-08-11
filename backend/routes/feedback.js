@@ -2,6 +2,7 @@ import { pool } from '../db/pool.js';
 import { sendMail } from '../lib/mailer.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { speichereFeedback, MAX_LENGTH } from '../lib/feedback.js';
+import { mengenGrenze } from '../middleware/rateLimit.js';
 
 const router = createAsyncRouter();
 
@@ -13,7 +14,7 @@ const FEEDBACK_TO = 'info@digital-wings.com';
 // bewusst niedrigschwellig (nur Textfeld + Absenden). Ist die Person eingeloggt,
 // wird ihre E-Mail zur besseren Zuordnung automatisch mitgeschickt, ohne dass
 // dafuer ein zusaetzliches Formularfeld noetig ist.
-router.post('/', async (req, res) => {
+router.post('/', mengenGrenze({ name: 'feedback', anzahl: 5, minuten: 60 }), async (req, res) => {
   const { message } = req.body || {};
   if (typeof message !== 'string' || !message.trim()) {
     return res.status(400).json({ error: 'invalid_message' });

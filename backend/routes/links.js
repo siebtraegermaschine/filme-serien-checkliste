@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import { pool } from '../db/pool.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
+import { mengenGrenze } from '../middleware/rateLimit.js';
 
 const router = createAsyncRouter();
 
@@ -69,7 +70,7 @@ router.get('/progress', async (req, res) => {
 //               ihn zu befristen -- so ein Link kann in einer Gruppe stehen
 //               bleiben und noch Monate spaeter jemanden bringen.
 // Beide sind mehrfach einloesbar (siehe user_link_invite_uses).
-router.post('/invite', async (req, res) => {
+router.post('/invite', mengenGrenze({ name: 'invite', anzahl: 20, minuten: 60 }), async (req, res) => {
   const kind = req.body && req.body.kind === 'referral' ? 'referral' : 'share';
   const token = crypto.randomBytes(32).toString('hex');
   await pool.query(

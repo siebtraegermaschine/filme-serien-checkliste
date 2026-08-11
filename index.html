@@ -1709,10 +1709,27 @@ async function apiRequest(method, path, body) {
   });
   if (!res.ok) {
     let err; try { err = await res.json(); } catch (e) { err = {}; }
-    throw Object.assign(new Error(err.error || ('HTTP ' + res.status)), { status: res.status, code: err.error });
+    throw Object.assign(new Error(err.error || ('HTTP ' + res.status)), {
+      status: res.status, code: err.error, retryAfter: err.retryAfter,
+    });
   }
   if (res.status === 204) return null;
   return res.json();
+}
+
+/* Meldung, wenn der Server wegen zu vieler Anfragen abgewiesen hat (429, siehe
+   backend/middleware/rateLimit.js). Gibt null zurueck, wenn es ein anderer
+   Fehler war -- damit laesst sie sich jeder bestehenden Fehlerbehandlung
+   voranstellen, ohne deren Faelle anzufassen.
+
+   Die Wartezeit kommt vom Server mit, weil sie vom laufenden Fenster abhaengt:
+   "in 47 Minuten" ist eine Auskunft, "zu viele Anfragen" nur ein Vorwurf. */
+function grenzeMeldung(e) {
+  if (!e || e.status !== 429) return null;
+  var sek = Number(e.retryAfter);
+  if (!Number.isFinite(sek) || sek <= 0) return 'Zu viele Versuche. Bitte später erneut versuchen.';
+  var min = Math.ceil(sek / 60);
+  return 'Zu viele Versuche. Bitte in ' + (min <= 1 ? 'einer Minute' : min + ' Minuten') + ' erneut versuchen.';
 }
 
 function progressFor(id) { return (id != null && PROGRESS.get(id)) || { seen: false, watchlist: false, viaStream: false, rating: null }; }
@@ -5206,8 +5223,8 @@ _feedbackSubmit.onclick = function(){
   apiRequest('POST', '/api/feedback', { message: text }).then(function(){
     _feedbackForm.style.display = 'none';
     _feedbackSuccess.style.display = '';
-  }).catch(function(){
-    _feedbackError.textContent = 'Senden fehlgeschlagen, bitte später erneut versuchen.';
+  }).catch(function(e){
+    _feedbackError.textContent = grenzeMeldung(e) || 'Senden fehlgeschlagen, bitte später erneut versuchen.';
   }).finally(function(){
     _feedbackSubmit.disabled = false;
     _feedbackSubmit.textContent = 'Absenden';
@@ -5777,7 +5794,7 @@ async function einladungTeilen(btn, artName, weiter){
       d.expiresInDays ? ('Der Link ist ' + d.expiresInDays + ' Tage gültig.') : 'Der Link läuft nicht ab.'
     );
   } catch (e) {
-    alert(art.fehler);
+    alert(grenzeMeldung(e) || art.fehler);
   } finally { btn.disabled = false; }
 }
 document.getElementById('profileShareBtn').onclick = function(){ einladungTeilen(this, 'share'); };
@@ -6530,10 +6547,11 @@ authForm.addEventListener('submit', async (e) => {
       pruefeLoeschAntrag();
     }
   } catch (err) {
-    authError.textContent = err.code === 'invalid_credentials' ? 'E-Mail oder Passwort falsch.'
+    authError.textContent = grenzeMeldung(err)
+      || (err.code === 'invalid_credentials' ? 'E-Mail oder Passwort falsch.'
       : err.code === 'email_taken' ? 'Für diese E-Mail existiert bereits ein Konto.'
       : err.code === 'weak_password' ? 'Passwort muss mindestens 8 Zeichen haben.'
-      : 'Das hat nicht geklappt. Bitte erneut versuchen.';
+      : 'Das hat nicht geklappt. Bitte erneut versuchen.');
   } finally {
     authSubmit.disabled = false;
   }

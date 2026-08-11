@@ -5,12 +5,22 @@ import { sendPasswordResetMail } from '../lib/mailer.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { WIDERRUFSFRIST_TAGE } from '../lib/kontoAufraeumen.js';
+import { mengenGrenze } from '../middleware/rateLimit.js';
 
 const router = createAsyncRouter();
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const BCRYPT_ROUNDS = 12;
 const RESET_TOKEN_TTL_MS = 60 * 60 * 1000; // 1 Stunde
+
+// Mengenbegrenzung je IP. Die Zahlen stehen hier zusammen, damit man sie
+// nebeneinander sieht statt verstreut ueber die Routen. Sie sind so gewaehlt,
+// dass die eigene Nutzung im Alltag nie anschlaegt: Wer sich vertippt, hat beim
+// Login zehn Versuche in einer Viertelstunde -- wer 5.000 Konten anlegen will,
+// kommt nicht weit.
+const GRENZE_REGISTER = mengenGrenze({ name: 'register', anzahl: 5, minuten: 60 });
+const GRENZE_LOGIN = mengenGrenze({ name: 'login', anzahl: 10, minuten: 15 });
+const GRENZE_RESET = mengenGrenze({ name: 'reset', anzahl: 3, minuten: 60 });
 
 function publicUser(row) {
   return {
@@ -40,7 +50,7 @@ async function werberFinden(token) {
   return rows[0] ? rows[0].inviter_id : null;
 }
 
-router.post('/register', async (req, res) => {
+router.post('/register', GRENZE_REGISTER, async (req, res) => {
   const { email, password, displayName, inviteToken } = req.body || {};
   if (typeof email !== 'string' || !EMAIL_RE.test(email)) {
     return res.status(400).json({ error: 'invalid_email' });
@@ -74,7 +84,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', GRENZE_LOGIN, async (req, res) => {
   const { email, password } = req.body || {};
   if (typeof email !== 'string' || typeof password !== 'string') {
     return res.status(400).json({ error: 'invalid_credentials' });
@@ -131,7 +141,7 @@ router.put('/display-name', async (req, res) => {
   res.json(publicUser(rows[0]));
 });
 
-router.post('/request-password-reset', async (req, res) => {
+router.post('/request-password-reset', GRENZE_RESET, async (req, res) => {
   const { email } = req.body || {};
   if (typeof email === 'string' && EMAIL_RE.test(email)) {
     const normalizedEmail = email.trim().toLowerCase();
