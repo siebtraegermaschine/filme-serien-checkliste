@@ -6677,11 +6677,21 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
   // beim ersten Oeffnen zwei Dialoge uebereinander.
   var einladung = new URLSearchParams(location.search).get('einladung');
   var geteilt = geteilterTitelAusPfad();
+  /* Aus dem Impressum: Statt einer Rufnummer steht dort "(auf Anfrage)" und
+     fuehrt hierher. Das Impressum ist eine eigene, schlichte HTML-Datei und
+     kann dieses Fenster nicht selbst oeffnen -- deshalb der Umweg ueber die
+     Adresszeile. Der Parameter wird gleich wieder entfernt, damit ein
+     Neuladen das Fenster nicht erneut aufmacht. */
+  var feedbackGewuenscht = new URLSearchParams(location.search).get('feedback') === '1';
   werberMerken();
   zeigeLinkHinweise();
+  if (feedbackGewuenscht) {
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+    openFeedbackModal();
+  }
   if (einladung) handleInviteToken(einladung);
   else if (geteilt) zeigeGeteiltenTitel(geteilt);
-  else { maybeAskDisplayName(); pruefeLoeschAntrag(); }
+  else if (!feedbackGewuenscht) { maybeAskDisplayName(); pruefeLoeschAntrag(); }
 });
 
 /* ---- Wer hat wen geworben ----
