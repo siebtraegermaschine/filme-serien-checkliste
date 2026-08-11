@@ -184,21 +184,22 @@ Nur die Startseite soll in Suchmaschinen. Heute gibt es **keine `robots.txt`**
 (HTTP 404); `impressum.html` und `datenschutz.html` tragen bereits `noindex`.
 
 - `robots.txt` anlegen: Startseite erlauben, alles andere ausschließen.
-- `nutzungsbedingungen.html` bekommt `noindex` wie die anderen beiden.
+- ~~`nutzungsbedingungen.html` bekommt `noindex`~~ — **steht schon drin**
+  (am 11. August nachgesehen, Zeile 7, wie bei den anderen beiden).
 - Geteilte Titel (`/t/…`) ausschließen — sie erzeugen sonst beliebig viele
   Adressen mit fast gleichem Inhalt.
 
 ---
 
-## 8. Was noch zu entscheiden ist
+## 8. Entschieden am 11. August
 
-Jeder Punkt hat eine Vorgabe. Kommt keine andere Ansage, gilt sie.
+Alle vier Vorgaben sind bestätigt. Nichts davon ist mehr offen.
 
-1. **Speicherdauer für Feedback** → Vorgabe: 12 Monate.
-2. **Grenzen beim Missbrauchsschutz** → Vorgabe: die Tabelle in Abschnitt 4.
-3. **Empfänger der Monitoring-Mails** → Vorgabe: `info@digital-wings.com`.
-4. **Prüfung von außen** (meldet, wenn der Server ganz steht) → Vorgabe:
-   vorerst nicht, als offener Punkt vermerken.
+1. **Speicherdauer für Feedback** → **12 Monate.**
+2. **Grenzen beim Missbrauchsschutz** → **die Tabelle in Abschnitt 4.**
+3. **Empfänger der Monitoring-Mails** → **`info@digital-wings.com`.**
+4. **Prüfung von außen** (meldet, wenn der Server ganz steht) → **vorerst
+   nicht.** Bleibt als offener Punkt vermerkt, siehe Abschnitt 6.
 
 ---
 
