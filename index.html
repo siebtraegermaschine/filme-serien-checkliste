@@ -7051,7 +7051,14 @@ function poolItemLi(item, score, opts){
   // zusaetzliche Pruefung liesse sich im Kino zwar wischen, neu aufgebaut wuerde
   // danach jedoch die (dort unsichtbare) Titelliste -- die Kino-Zeile bliebe als
   // leere Luecke stehen.
-  var darfAusblenden = !(opts && opts.suppressSimilar) && (discoverFilterOn || cinemaMode);
+  //
+  // In einer FREMDEN Liste (personenAnsicht) ist Ausblenden gesperrt: Man sieht
+  // dort die Markierungen einer anderen Person, das Ausblenden gehoert in die
+  // eigene Entdecken-/Kino-Ansicht. Unter Filme/Serien war das bereits so (dort
+  // ist discoverFilterOn in fremden Listen aus), im Kino aber nicht -- weil
+  // cinemaMode auch in einer fremden Kino-Liste an ist. Die Pruefung schliesst
+  // diese Luecke und macht die Absicht zugleich unabhaengig von den Filtern.
+  var darfAusblenden = !(opts && opts.suppressSimilar) && !personenAnsicht() && (discoverFilterOn || cinemaMode);
   attachSwipeToRemove(li, darfAusblenden ? function(){
     requireLogin(async () => {
       if (!(await darfWischEntfernen(cinemaMode ? 'kino' : 'discovery'))) {
