@@ -1,6 +1,7 @@
 import { pool } from '../db/pool.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { ausListe, leeren } from '../lib/listenCache.js';
+import { geheimnisStimmt } from '../lib/vergleich.js';
 
 const router = createAsyncRouter();
 
@@ -76,9 +77,8 @@ router.get('/', async (req, res) => {
 // Secret STREAMING_INGEST_SECRET aufgerufen -- kein Nutzer-Login, sondern
 // Server-zu-Server-Authentifizierung per Bearer-Token.
 router.post('/ingest', async (req, res) => {
-  const expected = process.env.STREAMING_INGEST_SECRET;
   const provided = (req.get('authorization') || '').replace(/^Bearer\s+/i, '');
-  if (!expected || provided !== expected) {
+  if (!geheimnisStimmt(provided, process.env.STREAMING_INGEST_SECRET)) {
     return res.status(401).json({ error: 'invalid_ingest_secret' });
   }
 

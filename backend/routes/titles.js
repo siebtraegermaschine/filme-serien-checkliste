@@ -2,6 +2,7 @@ import { pool } from '../db/pool.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { ausListe, leeren } from '../lib/listenCache.js';
+import { geheimnisStimmt } from '../lib/vergleich.js';
 
 const router = createAsyncRouter();
 
@@ -299,9 +300,8 @@ router.post('/ensure', requireAuth, async (req, res) => {
 // - `plot` wird nur ueberschrieben, wenn der neue Wert nicht leer ist (schuetzt
 //   von Hand recherchierte Kurzbeschreibungen, siehe backfill-overviews.mjs).
 router.post('/bulk-ingest', async (req, res) => {
-  const expected = process.env.TITLES_INGEST_SECRET;
   const provided = (req.get('authorization') || '').replace(/^Bearer\s+/i, '');
-  if (!expected || provided !== expected) {
+  if (!geheimnisStimmt(provided, process.env.TITLES_INGEST_SECRET)) {
     return res.status(401).json({ error: 'invalid_ingest_secret' });
   }
 
