@@ -4,5 +4,32 @@ movietaste.de, www.movietaste.de {
 	# unkomprimiert) -- ohne diese Zeile schickt Caddy alles unkomprimiert
 	# raus, obwohl der Browser per Accept-Encoding gzip anbietet.
 	encode zstd gzip
+
+	# Sicherheits-Header fuer JEDE Antwort. Bewusst hier in Caddy und nicht im
+	# Backend: Sie gehoeren an die aeusserste Schicht, damit sie auch vor
+	# statischen Dateien und Fehlerseiten stehen.
+	header {
+		# Zwingt den Browser fuer ein Jahr auf HTTPS -- schuetzt vor dem
+		# Herabstufen auf HTTP (SSL-Stripping) im offenen WLAN. Kein "preload",
+		# das ist eine schwer ruecknehmbare Selbstverpflichtung.
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		# Verhindert das Einbetten in einen fremden iframe (Clickjacking). Die
+		# App wird nie in einem Rahmen geoeffnet, geteilte Titel laufen direkt.
+		# X-Frame-Options fuer aeltere, frame-ancestors fuer neuere Browser --
+		# der CSP-Header enthaelt NUR diese eine Regel und beruehrt deshalb das
+		# Inline-Skript der Seite nicht.
+		X-Frame-Options "DENY"
+		Content-Security-Policy "frame-ancestors 'none'"
+		# Unterbindet MIME-Sniffing: eine Antwort wird als das behandelt, was ihr
+		# Content-Type sagt, nicht als das, wonach sie "aussieht".
+		X-Content-Type-Options "nosniff"
+		# Cross-Origin geht nur die Herkunft mit, nie der Pfad -- so kann der
+		# Reset-Token aus /reset-password?token=... nicht ueber den Referer an
+		# fremde Server (z.B. TMDB-Bild-CDN) lecken.
+		Referrer-Policy "strict-origin-when-cross-origin"
+		# Verrät die Caddy-Version nicht.
+		-Server
+	}
+
 	reverse_proxy backend:3000
 }
