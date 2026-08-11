@@ -901,7 +901,7 @@
     font-size:14px; font-weight:600; }
   @media (hover: hover) { .profile-add:hover { border-color:var(--accent); color:var(--accent); } }
   /* Ausgeloggt: sieht gesperrt aus, bleibt aber anklickbar und fuehrt zur
-     Anmeldung (siehe den Handler an #profileInviteBtn). Deshalb kein echtes
+     Anmeldung (siehe den Handler an #profileShareBtn). Deshalb kein echtes
      [disabled] -- das haette gar keinen Klick geliefert und die Person waere vor
      einem toten Knopf gestanden. */
   .profile-add.gesperrt { opacity:.5; border-style:dotted; }
@@ -1126,6 +1126,14 @@
     <hr class="nav-menu-sep">
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
+    <!-- Stand frueher im Popup "Gemeinsam schauen" neben "Watchliste teilen".
+         Dorthin gehoert es nicht: Der Link gibt nichts preis und legt keine
+         Verknuepfung an, sondern weist nur auf die App hin -- man kann ihn
+         bedenkenlos in eine grosse Gruppe stellen. Neben "Watchliste teilen"
+         sahen die beiden dagegen aus wie zwei Spielarten derselben Sache.
+         Wer einlaedt, braucht ein Konto (der Link haengt am eigenen); wer den
+         Link OEFFNET, braucht keines. -->
+    <button type="button" id="inviteMenuBtn" class="nav-menu-item">Personen einladen</button>
     <hr class="nav-menu-sep">
     <button type="button" id="authBarLogin" class="nav-menu-item">Anmelden</button>
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
@@ -1477,13 +1485,15 @@
          Linie ohne etwas darueber. -->
     <hr class="account-sep prov-sep">
     <div class="profile-list" id="profileList"></div>
-    <!-- Zwei Wege, bewusst getrennt: "Watchliste teilen" gibt die eigenen
-         Listen preis und setzt beidseitig ein Konto voraus. "Personen einladen"
-         weist nur auf die App hin -- den Link kann man bedenkenlos in eine
-         grosse Gruppe stellen, ohne dass am Ende dreitausend Leute in der
-         Personenliste stehen. Beide Links gelten fuer beliebig viele Personen. -->
+    <!-- Hier steht nur noch "Watchliste teilen": Der Link gibt die eigenen
+         Listen preis und setzt beidseitig ein Konto voraus -- er gehoert also
+         genau dorthin, wo die verknuepften Personen stehen.
+
+         "Personen einladen" ist ins Menue rechts oben gewandert. Es weist nur
+         auf die App hin, gibt nichts preis und hat mit der Personenliste
+         darueber nichts zu tun; nebeneinander sahen die beiden Knoepfe aus wie
+         zwei Spielarten derselben Sache. -->
     <button type="button" id="profileShareBtn" class="profile-add">＋ Watchliste teilen</button>
-    <button type="button" id="profileInviteBtn" class="profile-add">＋ Personen einladen</button>
     <hr class="account-sep">
     <p class="prov-intro" style="margin-bottom:8px">Schaust du mit Kindern? Nutze die FSK-Filter.</p>
     <div class="fsk-row" id="fskRow"></div>
@@ -5487,10 +5497,8 @@ function renderProfileList(){
     html += '<div class="profile-empty">Noch niemand verknüpft. Lade jemanden ein, um gemeinsame Titel zu finden.</div>';
   }
   el.innerHTML = html;
-  ['profileShareBtn', 'profileInviteBtn'].forEach(function(id){
-    var b = document.getElementById(id);
-    if (b) b.classList.toggle('gesperrt', !CURRENT_USER);
-  });
+  var teilenBtn = document.getElementById('profileShareBtn');
+  if (teilenBtn) teilenBtn.classList.toggle('gesperrt', !CURRENT_USER);
   el.querySelectorAll('.profile-item[data-uid]').forEach(function(row){
     var uid = Number(row.dataset.uid);
     row.querySelectorAll('.pi-btn').forEach(function(b){
@@ -5718,14 +5726,17 @@ function zeigeEinladung(titel, text, url, gueltig){
   };
   _inviteShareModal.style.display = 'flex';
 }
-async function einladungTeilen(btn, artName){
+async function einladungTeilen(btn, artName, weiter){
   var art = EINLADUNGSARTEN[artName];
   if (btn.disabled) return;
   // Ausgeloggt sehen die Knoepfe gesperrt aus (siehe renderProfileList), bleiben
   // aber anklickbar: Der Klick fuehrt dann zur Anmeldung, statt ins Leere zu
   // laufen. Ein echtes disabled haette gar kein Klickereignis geliefert.
   // requireLogin merkt sich das Popup und oeffnet es nach dem Anmelden wieder.
-  if (!CURRENT_USER) { closeProfileModal(); requireLogin(openProfileModal); return; }
+  // Nach dem Anmelden dorthin zurueck, wo der Klick herkam: aus dem Popup ins
+  // Popup, aus dem Menue direkt in die Einladung. Ohne `weiter` stuende nach dem
+  // Anmelden die Personenliste offen, obwohl man sie gar nicht geoeffnet hatte.
+  if (!CURRENT_USER) { closeProfileModal(); requireLogin(weiter || openProfileModal); return; }
   // Eigene Rueckfrage statt confirm(): Auf dem iPhone konnte der Tipp auf "OK"
   // durch den geschlossenen Systemdialog hindurch auf das Popup dahinter
   // durchschlagen -- das ging dann mit zu.
@@ -5744,7 +5755,14 @@ async function einladungTeilen(btn, artName){
   } finally { btn.disabled = false; }
 }
 document.getElementById('profileShareBtn').onclick = function(){ einladungTeilen(this, 'share'); };
-document.getElementById('profileInviteBtn').onclick = function(){ einladungTeilen(this, 'referral'); };
+// Aus dem Menue rechts oben. Das Menue muss dabei zugehen, sonst stuende es
+// offen ueber der fertigen Einladung -- so machen es die anderen Punkte dort
+// auch (siehe feedbackBtn).
+document.getElementById('inviteMenuBtn').onclick = function(){
+  var btn = this;
+  closeNavMenu();
+  einladungTeilen(btn, 'referral', function(){ einladungTeilen(btn, 'referral'); });
+};
 
 /* ---- Einladung annehmen (Aufruf ueber ?einladung=<token>) ---- */
 var _inviteModal = document.getElementById('inviteModal');
