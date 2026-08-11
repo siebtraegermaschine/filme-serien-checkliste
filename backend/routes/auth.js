@@ -4,9 +4,23 @@ import { pool } from '../db/pool.js';
 import { sendPasswordResetMail } from '../lib/mailer.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { requireAuth } from '../middleware/requireAuth.js';
+import { limit } from '../middleware/limit.js';
 import { WIDERRUFSFRIST_TAGE } from '../lib/kontoAufraeumen.js';
 
 const router = createAsyncRouter();
+
+/* Grenzen je Absender-Adresse (siehe middleware/limit.js). Sie sitzen an den
+   drei Endpunkten, die ohne Anmeldung erreichbar sind -- zwei davon verschicken
+   E-Mails ueber Resend und stehen damit auf fremde Kosten offen.
+
+   Die Zahlen sind so gewaehlt, dass die eigene Nutzung im Alltag nie
+   anschlaegt: Wer sich einmal registriert, ein paar Mal vertippt oder einmal
+   sein Passwort vergisst, bleibt weit darunter. Ein gemeinsamer Anschluss
+   (Firma, Uni, Mobilfunk) teilt sich allerdings eine Adresse -- deshalb bei
+   der Anmeldung 10 und nicht 3. */
+const GRENZE_REGISTRIEREN = limit('auth:register', 5, 60);
+const GRENZE_ANMELDEN = limit('auth:login', 10, 15);
+const GRENZE_PASSWORT_VERGESSEN = limit('auth:reset', 3, 60);
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const BCRYPT_ROUNDS = 12;
@@ -40,7 +54,7 @@ async function werberFinden(token) {
   return rows[0] ? rows[0].inviter_id : null;
 }
 
-router.post('/register', async (req, res) => {
+router.post('/register', GRENZE_REGISTRIEREN, async (req, res) => {
   const { email, password, displayName, inviteToken } = req.body || {};
   if (typeof email !== 'string' || !EMAIL_RE.test(email)) {
     return res.status(400).json({ error: 'invalid_email' });
@@ -74,7 +88,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', GRENZE_ANMELDEN, async (req, res) => {
   const { email, password } = req.body || {};
   if (typeof email !== 'string' || typeof password !== 'string') {
     return res.status(400).json({ error: 'invalid_credentials' });
@@ -131,7 +145,11 @@ router.put('/display-name', async (req, res) => {
   res.json(publicUser(rows[0]));
 });
 
-router.post('/request-password-reset', async (req, res) => {
+// Das Limit haengt allein an der Adresse, nicht an der eingegebenen
+// E-Mail-Adresse -- sonst liesse sich am unterschiedlichen Verhalten ablesen,
+// welche Adressen es gibt. Die Antwort bleibt bis zur Grenze fuer jede Eingabe
+// dieselbe (202), und darueber fuer jede Eingabe 429.
+router.post('/request-password-reset', GRENZE_PASSWORT_VERGESSEN, async (req, res) => {
   const { email } = req.body || {};
   if (typeof email === 'string' && EMAIL_RE.test(email)) {
     const normalizedEmail = email.trim().toLowerCase();

@@ -1,9 +1,16 @@
 import crypto from 'node:crypto';
 import { pool } from '../db/pool.js';
 import { requireAuth } from '../middleware/requireAuth.js';
+import { limit } from '../middleware/limit.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 
 const router = createAsyncRouter();
+
+// Einladungen erzeugen Datenbankzeilen, keine Mails -- der Endpunkt verlangt
+// ausserdem eine Anmeldung. Die Grenze faellt darum grosszuegiger aus und soll
+// nur verhindern, dass jemand die Tabelle in die Hoehe treibt (siehe
+// middleware/limit.js).
+const GRENZE_EINLADEN = limit('links:invite', 20, 60);
 
 // Wie lange eine Einladung einloesbar bleibt. Bewusst begrenzt: ein
 // weitergeleiteter Link wuerde sonst dauerhaft Zugriff auf die eigene
@@ -69,7 +76,7 @@ router.get('/progress', async (req, res) => {
 //               ihn zu befristen -- so ein Link kann in einer Gruppe stehen
 //               bleiben und noch Monate spaeter jemanden bringen.
 // Beide sind mehrfach einloesbar (siehe user_link_invite_uses).
-router.post('/invite', async (req, res) => {
+router.post('/invite', GRENZE_EINLADEN, async (req, res) => {
   const kind = req.body && req.body.kind === 'referral' ? 'referral' : 'share';
   const token = crypto.randomBytes(32).toString('hex');
   await pool.query(

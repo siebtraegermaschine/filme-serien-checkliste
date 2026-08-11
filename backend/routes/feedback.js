@@ -1,8 +1,14 @@
 import { pool } from '../db/pool.js';
 import { sendMail } from '../lib/mailer.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
+import { limit } from '../middleware/limit.js';
 
 const router = createAsyncRouter();
+
+// Ohne Anmeldung erreichbar und verschickt eine Mail -- also begrenzt (siehe
+// middleware/limit.js). Fuenf Rueckmeldungen je Stunde und Adresse: Wer
+// wirklich etwas zu sagen hat, kommt damit hin.
+const GRENZE_FEEDBACK = limit('feedback', 5, 60);
 
 // Empfaenger bewusst hier und nicht in .env: Er gehoert zur Anwendung, nicht
 // zur Umgebung -- lokal wie in Produktion soll dieselbe Adresse gelten.
@@ -21,7 +27,7 @@ const MAX_LENGTH = 5000;
 // Ein 500 an dieser Stelle waere schlechter: Die Nachricht liegt ja bereits
 // sicher in der Datenbank, und wer einen Fehler sieht, schickt sie ein zweites
 // Mal.
-router.post('/', async (req, res) => {
+router.post('/', GRENZE_FEEDBACK, async (req, res) => {
   const { message } = req.body || {};
   if (typeof message !== 'string' || !message.trim()) {
     return res.status(400).json({ error: 'invalid_message' });
