@@ -1,0 +1,21 @@
+# Nur die Startseite gehoert vorerst in Suchmaschinen.
+#
+# Alles andere bleibt draussen: Die Rechtstexte tragen ohnehin noindex, und die
+# geteilten Titel unter /t/... wuerden beliebig viele Adressen mit fast
+# gleichem Inhalt erzeugen -- 27.000 Seiten, die sich nur im Titel
+# unterscheiden, sind fuer eine Suchmaschine Dubletten und fuer uns kein
+# Gewinn.
+#
+# Die Bilder sind ausdruecklich erlaubt: Vorschaukarten in WhatsApp, iMessage
+# und sozialen Netzen holen og-image.png, und ein gesperrtes Bild bedeutet dort
+# eine leere Kachel statt eines Logos.
+
+User-agent: *
+Allow: /$
+Allow: /og-image.png
+Allow: /icon-192.png
+Allow: /icon-512.png
+Allow: /apple-touch-icon.png
+Allow: /favicon-32.png
+Allow: /manifest.json
+Disallow: /

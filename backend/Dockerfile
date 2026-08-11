@@ -24,7 +24,7 @@ RUN cd backend && npm ci --omit=dev
 # live in einen 404, obwohl index.html sie laengst einband. Der Build-Kontext
 # ist ein sauberer Git-Auschecker, es kommt also nichts Fremdes mit; Skripte
 # und Dokumentation passen auf keines der Muster.
-COPY *.html *.png *.svg manifest.json ./
+COPY *.html *.png *.svg manifest.json robots.txt ./
 COPY tour/ ./tour/
 COPY backend/ ./backend/
 
