@@ -3,6 +3,12 @@ import { requireAuth } from '../middleware/requireAuth.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { ausListe, leeren } from '../lib/listenCache.js';
 import { geheimnisStimmt } from '../lib/vergleich.js';
+import { mengenGrenze } from '../middleware/rateLimit.js';
+
+// Grenze je IP fuer die Inhaltsangaben der sichtbaren Zeilen. Der haeufigste
+// der oeffentlichen DB-Endpunkte -- laeuft bei jedem Nachladen einer Liste --,
+// deshalb besonders hoch angesetzt. Real nie erreicht; deckelt nur das Haemmern.
+const GRENZE_PLOTS = mengenGrenze({ name: 'titles-plots', anzahl: 240, minuten: 1 });
 
 const router = createAsyncRouter();
 
@@ -131,7 +137,7 @@ router.get('/', async (req, res) => {
 // Frontend zweierlei Titel kennt: solche mit interner ID (Katalog/Discovery) und
 // reine Streaming-Kandidaten, die es nur als TMDB-ID gibt und die noch gar nicht
 // in `titles` stehen (siehe streaming_cache).
-router.post('/plots', async (req, res) => {
+router.post('/plots', GRENZE_PLOTS, async (req, res) => {
   const { ids, tmdb } = req.body || {};
   const out = { ids: {}, tmdb: {} };
 

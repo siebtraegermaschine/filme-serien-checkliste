@@ -23,6 +23,7 @@ import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';
+import { mengenGrenze } from './middleware/rateLimit.js';
 import { starteSicherung } from './lib/sicherung.js';
 import { starteThemen } from './lib/themen.js';
 import { vorwaermen } from './lib/listenCache.js';
@@ -130,7 +131,10 @@ function vorschauText(t) {
   return text;
 }
 
-app.get('/t/:art/:kennung', async (req, res, next) => {
+// Dieselbe Arbeit wie /api/share/title (ladeTitel + moeglicher TMDB-Abruf),
+// deshalb dieselbe Deckelung je IP. Ein Mensch oder ein Vorschau-Roboter oeffnet
+// so einen Link selten; das Limit trifft nur das Haemmern ueber viele Kennungen.
+app.get('/t/:art/:kennung', mengenGrenze({ name: 'share-page', anzahl: 120, minuten: 1 }), async (req, res, next) => {
   const art = req.params.art;
   if (['id', 'movie', 'series'].indexOf(art) === -1) return next();
   const kennung = Number(req.params.kennung);

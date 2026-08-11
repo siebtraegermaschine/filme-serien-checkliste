@@ -1,8 +1,17 @@
 import qrcode from 'qrcode-generator';
 import { pool } from '../db/pool.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
+import { mengenGrenze } from '../middleware/rateLimit.js';
 
 const router = createAsyncRouter();
+
+// Grenzen je IP. Der Titel-Abruf kann beim ersten Teilen eines Titels einen
+// ausgehenden TMDB-Aufruf ausloesen (danach gecacht) -- deshalb gedeckelt,
+// damit niemand ueber viele Kennungen die TMDB-Abrufe in die Hoehe treibt. Der
+// QR-Bau ist reine Rechenzeit. Beide grosszuegig; ein normaler Teilen-Vorgang
+// loest je einen Aufruf aus.
+const GRENZE_TITEL = mengenGrenze({ name: 'share-title', anzahl: 120, minuten: 1 });
+const GRENZE_QR = mengenGrenze({ name: 'share-qr', anzahl: 120, minuten: 1 });
 
 const TMDB = 'https://api.themoviedb.org/3';
 const TMDB_KIND = { movie: 'movie', series: 'tv' };
@@ -78,7 +87,7 @@ async function ergaenzeBackdrop(titel) {
 // Oeffentlich: Datensatz fuer die Karte, die der Empfaenger eines geteilten
 // Links zu sehen bekommt. Ohne Login erreichbar -- wer den Link bekommt, soll
 // den Titel sehen koennen, bevor er sich entscheidet.
-router.get('/title/:art/:kennung', async (req, res) => {
+router.get('/title/:art/:kennung', GRENZE_TITEL, async (req, res) => {
   const art = req.params.art;
   if (['id', 'movie', 'series'].indexOf(art) === -1) return res.status(400).json({ error: 'invalid_kind' });
   const kennung = Number(req.params.kennung);
@@ -110,7 +119,7 @@ router.get('/title/:art/:kennung', async (req, res) => {
 // QR-Code als Matrix statt als Bild: Das Story-Bild wird im Browser auf einer
 // Canvas zusammengesetzt, dort lassen sich Quadrate direkt zeichnen. Ein PNG
 // muesste erst geladen und dekodiert werden und braechte nichts dazu.
-router.get('/qr', async (req, res) => {
+router.get('/qr', GRENZE_QR, async (req, res) => {
   const daten = typeof req.query.data === 'string' ? req.query.data : '';
   if (!daten || daten.length > 512) return res.status(400).json({ error: 'invalid_data' });
   // Fehlerkorrektur M: haelt auch dann, wenn das Bild in der Story teilweise

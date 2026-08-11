@@ -1,8 +1,16 @@
 import { pool } from '../db/pool.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
+import { mengenGrenze } from '../middleware/rateLimit.js';
 
 const router = createAsyncRouter();
+
+// Grenzen je IP fuer die oeffentlichen, datenbank-nahen Leseabfragen. Bewusst
+// grosszuegig -- die Vervollstaendigung feuert beim Tippen (entprellt), die
+// Umkreissuche seltener. Ein Mensch schlaegt hier nie an; sie deckeln nur das
+// Haemmern, mit dem man die Datenbank fuer alle verlangsamen koennte.
+const GRENZE_ORTE = mengenGrenze({ name: 'kinos-orte', anzahl: 120, minuten: 1 });
+const GRENZE_UMKREIS = mengenGrenze({ name: 'kinos-umkreis', anzahl: 120, minuten: 1 });
 
 /* "Deine Kinos" -- Ortssuche, Kinos im Umkreis, eigene Auswahl.
    Siehe PLAN-KINOS.md. Bewusst OHNE Spielplaene: welche Filme wo laufen, ist
@@ -33,7 +41,7 @@ function entfernungSql(feldLat, feldLon) {
 
    Oeffentlich: Die Einstellung soll auch beim ersten Oeffnen sofort etwas
    anzeigen koennen, und Ortsnamen sind keine Nutzerdaten. */
-router.get('/orte', async (req, res) => {
+router.get('/orte', GRENZE_ORTE, async (req, res) => {
   const q = String(req.query.q || '').trim();
   if (q.length < 2) return res.json({ orte: [] });
 
@@ -76,7 +84,7 @@ router.get('/orte', async (req, res) => {
 /* GET /api/kinos?lat=&lon=&umkreis=
    Kinos im Umkreis, nach Entfernung sortiert. Ebenfalls oeffentlich -- die
    Liste der Kinos in einer Gegend ist keine persoenliche Angabe. */
-router.get('/', async (req, res) => {
+router.get('/', GRENZE_UMKREIS, async (req, res) => {
   const lat = Number(req.query.lat);
   const lon = Number(req.query.lon);
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
