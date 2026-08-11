@@ -2556,6 +2556,31 @@ async function ensurePoolItem(item){
         posterPath: item.p, rating: item.r, plot: item.ov, source: 'streaming',
       });
       item.realId = created.id;
+      /* Den frisch angelegten Titel auch in den POOL aufnehmen.
+
+         Ohne das bleibt die Markierung auf der Kino-Seite unsichtbar: Dort wird
+         jede Zeile bei JEDEM Zeichnen neu aus dem POOL aufgebaut
+         (cinemaRowToItem ueber poolByTmdb). Das hier gesetzte item.realId lebt
+         nur an diesem einen Objekt -- beim naechsten Zeichnen entsteht ein
+         neues mit realId null, und getWatchlistFlag(null) ist false. Der Knopf
+         wurde also gold und sofort wieder blass.
+
+         Schlimmer als die Anzeige war die Folge: Wer daraufhin ein zweites Mal
+         tippte, hob die gerade gesetzte Markierung wieder auf -- der zweite
+         Klick fand ueber ensure dieselbe Kennung, las den Fortschritt als
+         "steht schon drauf" und schaltete ihn ab. Genau so gemeldet am
+         11. August fuer "The End of Oak Street"; in der Datenbank stand danach
+         eine Zeile mit watchlist = false.
+
+         Verglichen wird ueber tmdbId und Art, nicht ueber die Objektgleichheit:
+         Denselben Titel kann es als Kino-Zeile und als Streaming-Kandidaten
+         geben, und zweimal im POOL waere er einmal zu oft. */
+      if (item.tmdbRef === undefined) item.tmdbRef = item.tmdbId != null ? item.tmdbId : null;
+      if (item.source === undefined) item.source = 'streaming';
+      var schonImPool = POOL.some(function(p){
+        return p.type === item.type && p.tmdbId != null && p.tmdbId === item.tmdbId;
+      });
+      if (!schonImPool) POOL.push(item);
       return item.realId;
     })().finally(() => { delete item._ensuring; });
   }
