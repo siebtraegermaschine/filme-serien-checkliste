@@ -5527,8 +5527,8 @@ function renderProfileList(){
   // gesperrt aussieht -- ohne Konto gibt es niemanden, mit dem sich etwas
   // verknuepfen liesse (die Verknuepfung haengt an beiden Konten).
   if (!CURRENT_USER) {
-    html += '<div class="profile-empty">Zum Einladen brauchst du ein Konto – die Verknüpfung ' +
-            'gehört zu eurer beider Anmeldung. Der FSK-Filter unten wirkt auch ohne.</div>';
+    html += '<div class="profile-empty">Zum Einladen brauchst du ein Konto. ' +
+            'Der FSK-Filter unten wirkt auch ohne.</div>';
   } else if (LINKED_LADEN) {
     // Die Profile kommen erst nach dem Katalog (siehe loadUserProgressAndRefresh).
     // Wer sofort nach dem Start hier hineinsieht, stand vorher vor einer leeren
@@ -5731,7 +5731,7 @@ var EINLADUNGSARTEN = {
     // wie sonst getrennt angehaengt wird (siehe zeigeEinladung).
     textAusgeloggt: 'Entdecke MovieMatch. Filme, Serien und Kinofilme, sortiert nach deinem ' +
              'Geschmack. Teilt eure Watchlisten und seht, welche Titel ihr gemeinsam sehen ' +
-             'möchtet. Die Verknüpfung gehört zu eurer beider Anmeldungen:',
+             'möchtet:',
     fehler: 'Der Einladungslink konnte nicht erstellt werden.',
   },
 };
