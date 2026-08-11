@@ -22,6 +22,16 @@ const GRENZE_REGISTER = mengenGrenze({ name: 'register', anzahl: 5, minuten: 60 
 const GRENZE_LOGIN = mengenGrenze({ name: 'login', anzahl: 10, minuten: 15 });
 const GRENZE_RESET = mengenGrenze({ name: 'reset', anzahl: 3, minuten: 60 });
 
+// Neue Session-ID beim Anmelden. Schutz vor Session-Fixation: Wurde vor dem
+// Login schon eine Session-ID vergeben (etwa auf einem geteilten Geraet, an dem
+// jemand die ID kennt), gilt sie danach nicht weiter -- regenerate ersetzt die
+// Session durch eine frische, leere. Die userId wird erst danach gesetzt.
+function sessionErneuern(req) {
+  return new Promise((resolve, reject) => {
+    req.session.regenerate((err) => (err ? reject(err) : resolve()));
+  });
+}
+
 function publicUser(row) {
   return {
     id: row.id,
@@ -74,6 +84,7 @@ router.post('/register', GRENZE_REGISTER, async (req, res) => {
        RETURNING id, email, display_name, deletion_requested_at`,
       [normalizedEmail, passwordHash, name, werber]
     );
+    await sessionErneuern(req);
     req.session.userId = rows[0].id;
     res.status(201).json(publicUser(rows[0]));
   } catch (err) {
@@ -105,6 +116,7 @@ router.post('/login', GRENZE_LOGIN, async (req, res) => {
     return res.status(401).json({ error: 'invalid_credentials' });
   }
 
+  await sessionErneuern(req);
   req.session.userId = user.id;
   res.json(publicUser(user));
 });
