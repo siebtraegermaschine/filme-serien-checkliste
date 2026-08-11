@@ -1,11 +1,22 @@
 # Entwurf: E-Mail-Versand und Feedback in der Datenschutzerklärung
 
-> **Zum Prüfen, nicht zum Übernehmen.** Der Text unten steht bewusst **nicht** in
-> `datenschutz.html`. Er enthält Aussagen über Verträge und Übermittlungsgrundlagen,
-> die nur ihr beantworten könnt — siehe „Zwei offene Entscheidungen".
+> **ERLEDIGT am 11. August 2026 (`4d50536`). Diese Datei ist nur noch Beleg,
+> wie der Text zustande kam — nicht mehr Vorlage.**
 >
-> Was schon eingetragen ist: der Serverstandort in Abschnitt 5 (Falkenstein,
-> Deutschland). Das ist eine geprüfte Tatsache und keine Abwägung.
+> Der Text steht jetzt in `datenschutz.html`, in zwei Punkten aber **anders**
+> als hier unten:
+>
+> - **„wird nicht in unserer Datenbank gespeichert" gilt nicht mehr.** Feedback
+>   wird seit `f455ef4` gespeichert (erst speichern, dann mailen). Wer hier
+>   abschreibt, trägt eine falsche Zusage in den Rechtstext. Siehe Abschnitt 4
+>   dieser Datei — genau dieser Zusammenhang stand dort schon.
+> - **Die Platzhalter sind gefüllt:** Plus Five Five, Inc. als Firmierung hinter
+>   Resend, Übermittlung auf Grundlage des DPF-Angemessenheitsbeschlusses mit
+>   ergänzenden Standardvertragsklauseln. Beide Angaben sind noch gegen die
+>   Primärquellen zu halten — siehe `UEBERGABE-OFFEN.md`, Abschnitt 3.1.
+>
+> Was schon vorher eingetragen war: der Serverstandort in Abschnitt 5
+> (Falkenstein, Deutschland). Das ist eine geprüfte Tatsache und keine Abwägung.
 
 Stand: 10. August 2026. Gehört zu den offenen Punkten aus `UEBERGABE-OFFEN.md`,
 Abschnitt 3.1.

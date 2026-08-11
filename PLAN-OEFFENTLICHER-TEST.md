@@ -1,5 +1,16 @@
 # Plan: Vor dem öffentlichen Test
 
+> **ABGEARBEITET am 11. August 2026 — bis auf Abschnitt 5 (Tour-Screenshots).**
+> Die sechs Bilder brauchen `movietaste.de` und `image.tmdb.org`; beide waren
+> aus der Arbeitsumgebung gesperrt, und Bilder ohne Titel und Poster wären
+> schlechter als die vorhandenen. Das Aufnahmeskript ist repariert und bricht
+> jetzt ab, statt die alten Bilder zu überschreiben — nachzuholen von einer
+> Maschine mit Netz. Stand und alles Weitere in `UEBERGABE-OFFEN.md`.
+>
+> Zusätzlich offen geblieben: die zwei Angaben zu Resend in Abschnitt 2 sind
+> nach bestem Wissen eingetragen, aber nicht gegen die Primärquellen bestätigt
+> (dieselbe Sperre). Siehe `UEBERGABE-OFFEN.md`, Abschnitt 3.1.
+
 > **Arbeitsauftrag für die nächste Sitzung.** Stand: 11. August 2026.
 > Ziel: MovieMatch an Fremde geben — kostenlos, ohne Werbung, nicht kommerziell.
 >

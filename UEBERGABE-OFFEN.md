@@ -1,13 +1,14 @@
-# Offene Punkte — Stand 2026-08-10
+# Offene Punkte — Stand 2026-08-11
 
 Ergänzt `UEBERGABE-CHAT.md` (Stand 2026-08-03). Für Architektur und Auslieferung
 siehe `DEPLOYMENT.md`, für den Weg zu nativen Apps `PLAN-NATIVE-APPS.md`,
-für den bereits umgesetzten Filter-Umbau `PLAN-FILTER.md`, für den offenen
-Rechtstext zum Mailversand `ENTWURF-DATENSCHUTZ-MAIL.md`, für „Deine Kinos"
-`PLAN-KINOS.md`.
+für den bereits umgesetzten Filter-Umbau `PLAN-FILTER.md`, für „Deine Kinos"
+`PLAN-KINOS.md`. `ENTWURF-DATENSCHUTZ-MAIL.md` ist **abgearbeitet** und nur noch
+als Beleg interessant, wie der Text zustande kam.
 
-**Nächster Arbeitsauftrag: `PLAN-OEFFENTLICHER-TEST.md`** — was vor dem
-öffentlichen Test mit Fremden zu tun ist, mit allen Entscheidungen dazu.
+**`PLAN-OEFFENTLICHER-TEST.md` ist abgearbeitet** — bis auf die
+Tour-Screenshots, siehe „Neu am 11. August" gleich unten. Was danach noch offen
+ist, steht in Abschnitt 3 und 4.
 
 **Diese Datei ist der Einstiegspunkt.** Abschnitt 3 sagt, was noch zu tun ist;
 Abschnitt 1, 2 und 6, was man vorher wissen sollte. Die Abschnitte 0 bis 2 stehen
@@ -29,6 +30,53 @@ ssh -i ~/.ssh/id_ed25519 root@movietaste.de \
 ```
 
 ---
+
+## Neu am 11. August: `PLAN-OEFFENTLICHER-TEST.md` abgearbeitet
+
+Bewusst ohne Nummer, damit die Verweise „siehe 0.1", „siehe 3.1" usw. weiter
+stimmen. Sieben Commits, jeder einzeln gegen den laufenden Stand geprüft.
+
+| Commit | Inhalt |
+|---|---|
+| `f455ef4` | Feedback landet in der Datenbank, bevor die Mail rausgeht |
+| `4d50536` | Datenschutz: E-Mail-Versand und Feedback (Abschnitte 2, 3, 6, 10, 11) |
+| `4a03c91` | Namensnennung für OpenStreetMap und GeoNames in den Credits |
+| `a9ce655` | Missbrauchsschutz: Grenzen je Absender-Adresse |
+| `579f541` | `robots.txt`, `noindex` für geteilte Titel |
+| `4538777` | Die Wache: meldet Fehler per Mail — und sonst gar nichts |
+| `5dee5fc` | Tour-Aufnahme: Browser suchen statt raten, nicht ins Leere aufnehmen |
+
+**Feedback wird jetzt gespeichert** (Tabelle `feedback`). Die Reihenfolge ist
+umgedreht: erst speichern, dann mailen. Scheitert der Versand, steht die
+Nachricht trotzdem da; die Person bekommt ihr „Danke", denn ein Fehler an dieser
+Stelle führte nur zu einer zweiten, gleichen Nachricht. Auslesen mit
+`npm run feedback` in `backend/` — bewusst **keine HTTP-Route**, dieselbe
+Überlegung wie bei `bewertungsstatistik.mjs`. `user_id` steht auf
+`ON DELETE SET NULL`, die E-Mail-Adresse bleibt als Kopie stehen. Die Tabelle
+ist in der täglichen Sicherung; nach 12 Monaten räumt
+`lib/feedbackAufraeumen.js` ab — die Frist in Abschnitt 10 der
+Datenschutzerklärung ist damit keine Zusage ohne Deckung.
+
+**Der Missbrauchsschutz sitzt in `backend/middleware/limit.js`**, eigener
+Zähler je Endpunkt und Adresse, im Speicher. Vor dem Bauen nachgemessen, wie im
+Plan verlangt: `trust proxy: 1` liefert hinter Caddy die echte Adresse, auch
+wenn der Client selbst ein `X-Forwarded-For` mitschickt (Caddy hängt an, statt
+zu ersetzen; Express zählt einen Sprung von hinten ab). Die Messung steht als
+Kommentar in der Datei — **nicht wegkürzen**, sie ist der Grund, warum hier
+`req.ip` benutzt wird.
+
+**Die Wache (`backend/lib/wache.js`) meldet nur im Fehlerfall.** Sie erkennt
+ausgebliebene Importe daran, wie alt die Daten sind, die ein Lauf hinterlassen
+hätte — nicht daran, ob sich ein Lauf gemeldet hat. Deshalb deckt eine Prüfung
+„fehlgeschlagen" und „gar nicht gestartet" zugleich ab. Gegen Mailfluten gibt es
+eine Sperre je Art und Tag in `wache_meldungen`; sie steht in der Datenbank,
+weil ein Absturz im Sekundentakt den Container neu startet und eine Sperre im
+Speicher dann jedes Mal leer wäre. Vermerkt wird erst **nach** erfolgreichem
+Versand.
+
+**Dabei nebenbei behoben:** Der Passwort-Reset lieferte bei einem Mailfehler
+einen 500, während eine unbekannte Adresse einen 202 bekam — damit beantwortete
+er genau die Frage, die er laut Zusage direkt darunter nicht beantworten soll.
 
 ## 0. Was am 10. August dazukam (6 Commits)
 
@@ -428,36 +476,51 @@ Die Liste vom 7. August („Uneinheitliches in der Bedienung") ist durch den
 Filter-Umbau vom 9. August weitgehend erledigt. Was davon übrig blieb, steht
 unten mit dabei.
 
-### 3.1 Abschnitt 6 der Datenschutzerklärung — vor Go-Live
+### 3.1 Datenschutzerklärung — geschrieben, zwei Angaben noch zu bestätigen
 
-**Der Serverstandort ist am 10. August erledigt** (`2dd9f2c`). Ermittelt statt
-geschätzt: IP `167.233.54.20`, RIPE-Netz `CLOUD-FSN1` (country `DE`), Hostname
-`ubuntu-2gb-fsn1-1`, Rechenzentrum `fsn1-dc14` — **Falkenstein, Sachsen**, nicht
-Finnland. Abschnitt 5 nennt jetzt Standort und Anschrift und stellt fest, dass die
-Verarbeitung die EU nicht verlässt.
+**Abschnitt 6 ist am 11. August geschrieben** (`4d50536`), zusammen mit den
+Ergänzungen in 2, 3, 10 und 11. Damit ist auch der Serverstandort-Punkt vom
+10. August (`2dd9f2c`) vollständig: IP `167.233.54.20`, RIPE-Netz `CLOUD-FSN1`,
+Rechenzentrum `fsn1-dc14` — **Falkenstein, Sachsen**. „Registrierungs-E-Mails"
+sind gestrichen (die gibt es im Code nicht), Feedback ist beschrieben, der
+Anbieter genannt.
 
-Offen bleibt **Abschnitt 6 (E-Mail-Versand)**, und zwar in drei Punkten. Der
-fertige Text dafür liegt in `ENTWURF-DATENSCHUTZ-MAIL.md`, samt der Ergänzungen
-für die Abschnitte 2, 3 und 10 — bewusst **neben** dem Rechtstext, nicht darin.
+**Was noch zu bestätigen ist — zwei Angaben, beide in Abschnitt 6:**
 
-- **Der Anbieter ist nicht genannt.** Es steht „einen externen
-  Versanddienstleister". Bestätigt auf dem Server: `MAIL_PROVIDER=resend`,
-  Versand über `api.resend.com`. Wer den Namen einträgt, muss zugleich die
-  Übermittlung in die USA und den AV-Vertrag beschreiben — Aussagen über
-  Verträge, die von Hand entschieden gehören. Deshalb Platzhalter im Entwurf.
-- **Genannt, existiert aber nicht:** „Registrierungs-E-Mails". Im Code gibt es
-  nur `sendPasswordResetMail` — bei der Registrierung geht keine Mail raus.
-- **Existiert, ist aber nirgends genannt: die Feedback-Mails.** Sie laufen
-  ebenfalls über Resend und enthalten bis zu **5.000 Zeichen Freitext** plus,
-  bei angemeldeten Personen, die **E-Mail-Adresse des Kontos**; Empfänger ist
-  `info@digital-wings.com`. Das Wort „Feedback" kommt in `datenschutz.html`
-  **überhaupt nicht** vor — auch nicht in Abschnitt 2, 3 oder 10. Das wiegt
-  schwerer als die fehlende Anbieternennung: Hier ist eine ganze Verarbeitung
-  nicht beschrieben.
+Die Primärquellen ließen sich aus der Arbeitsumgebung nicht öffnen:
+`resend.com` und `dataprivacyframework.gov` sind dort vom Netzwerk gesperrt
+(`CONNECT tunnel failed, 403`). Belegt ist Folgendes über mehrfach
+übereinstimmende Suchtreffer, **nicht** aus den Rechtstexten selbst:
+
+- **Firmierung:** Vertragspartner ist **Plus Five Five, Inc.** — die Firmierung
+  hinter der Marke Resend, nicht „Resend, Inc.". Anschrift 2261 Market Street,
+  San Francisco, CA 94114. Die Postfachnummer wich zwischen den Treffern ab
+  (`#5039` / `#5451` / `#4382`) und ist deshalb **bewusst weggelassen statt
+  geraten**.
+- **Grundlage der USA-Übermittlung:** Resend ist unter dem EU-US Data Privacy
+  Framework zertifiziert (Teilnehmer-Eintrag 8907, samt UK Extension);
+  zusätzlich enthält das DPA Standardvertragsklauseln. Der Text nennt deshalb
+  den Angemessenheitsbeschluss **und** die SCCs ergänzend — diese Formulierung
+  trägt auch dann noch, wenn die Zertifizierung ausläuft.
+
+**Zu tun:** beides einmal gegen `resend.com/legal/dpa` und die DPF-Liste halten,
+von einer Maschine ohne diese Sperre. Wenn dort etwas anderes steht, ist es eine
+Zeile in `datenschutz.html`.
+
+**Neu gefunden, noch nicht angefasst: Abschnitt 7 stimmt nicht mehr.** Dort
+steht „Einladungslinks sind einmalig einlösbar und verfallen nach sieben Tagen".
+Beides trifft heute nicht mehr zu: `user_link_invite_uses` lässt **mehrfaches**
+Einlösen zu (Absicht — wer den Link in eine Gruppe stellt, will nicht, dass nur
+die erste Person durchkommt), und `referral`-Links haben `expires_at IS NULL`,
+laufen also **gar nicht** ab. Nur `share`-Links verfallen nach sieben Tagen.
+Bewusst nicht mitgeändert, weil Abschnitt 7 nicht im Auftrag stand — aber es ist
+derselbe Rechtstext und gehört in denselben Durchgang.
 
 Ebenfalls weiter offen: `impressum.html` rechtlich prüfen, dazu Abschnitt 9 der
 Datenschutzerklärung (kommerzielle Verwertung), der als Entwurf entstanden ist.
-Sinnvollerweise in **einem** Durchgang mit Abschnitt 6, statt zweimal zu fragen.
+Die Anwaltsprüfung ist laut Plan **vorerst zurückgestellt** (Entscheidung 4) und
+später erneut aufzugreifen; sinnvollerweise in **einem** Durchgang mit
+Abschnitt 6 und 7, statt dreimal zu fragen.
 
 ### 3.2 Englische Titel durchsuchbar machen — entschieden, aber nicht gebaut
 
@@ -551,6 +614,23 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 
 ### 3.6 Erledigt (nicht erneut aufmachen)
 
+- **Feedback ging verloren, wenn Resend versagte** → **behoben** am 11. August.
+  Erst speichern, dann mailen. Der Satz „wird nicht in unserer Datenbank
+  gespeichert" aus `ENTWURF-DATENSCHUTZ-MAIL.md` ist damit **überholt** — im
+  ausgelieferten Text steht das Gegenteil, und das ist so richtig.
+- **Es gab nirgends ein Limit** → **behoben** am 11. August
+  (`middleware/limit.js`). Nicht durch ein Paket ersetzen: acht Abhängigkeiten
+  sind Absicht, und ein Prozess auf einem Server braucht keinen gemeinsamen
+  Zähler. Erst wenn daraus mehr als ein Prozess wird, ist die Datei die Stelle,
+  die getauscht wird.
+- **Keine `robots.txt`** → angelegt am 11. August. Nur die Startseite ist
+  freigegeben; ihre Bilder und das Manifest bleiben abrufbar, damit die eine
+  Seite, die indexiert werden soll, auch vollständig zu sehen ist.
+- **Namensnennung für OpenStreetMap und GeoNames stand nur als Kommentar im
+  Code** → steht seit dem 11. August in den Credits. Das ist Lizenzbedingung,
+  nicht Kür — beim nächsten Umbau der Credits nicht wegfallen lassen.
+- **Kein Monitoring** → `backend/lib/wache.js` seit dem 11. August. Deckt
+  ausdrücklich **nicht** ab, dass der Server ganz steht (siehe Abschnitt 4).
 - Kino führte eine eigene Statusauswahl → **behoben** (`kinoStatus` entfernt).
 - Die drei Status schlossen sich aus → **behoben** (frei kombinierbar).
 - Suche + Abgleich verhielten sich im Kino anders → **entfällt** mit dem
@@ -580,24 +660,34 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 
 ### Rechtliches, vor Go-Live bzw. App Store
 
-- Abschnitt 6 von `datenschutz.html` und `impressum.html` prüfen lassen — siehe
-  3.1, dort ausführlich; fertiger Textentwurf in `ENTWURF-DATENSCHUTZ-MAIL.md`.
-  Der Serverstandort ist seit dem 10. August eingetragen.
+- `datenschutz.html` und `impressum.html` prüfen lassen — siehe 3.1, dort
+  ausführlich. Abschnitt 6 ist seit dem 11. August geschrieben; offen sind die
+  zwei Angaben zu Resend, Abschnitt 7 (Einladungslinks) und die zurückgestellte
+  Anwaltsprüfung.
 - Privacy Nutrition Labels und Altersfreigabe im Store-Formular; Konten
   (Apple 99 $/Jahr, Google 25 $ einmalig).
 
 ### Technisch
 
-- **Feedback wird nicht gespeichert**, nur per Mail verschickt. Schlägt Resend
-  fehl, ist die Nachricht weg. Hängt mit 3.1 zusammen: Der Entwurf sagt zu, dass
-  die Nachricht nicht in der Datenbank landet — wer das ändert, muss den Satz
-  mitändern.
-- **Tour-Screenshots in `tour/` sind veraltet.** Sie zeigen die alte Tab-Reihe
-  (genau ein Bereich aktiv) und die alte Statusreihe. Seit dem Filter-Umbau
-  leuchten Filme und Serien gleichzeitig, Kino ist abgesetzt, und alle drei
-  Status sind an. Neu erzeugen: `bash scripts/tour/aufnehmen.sh` (braucht Chrome
-  und Netz). **Das ist die sichtbarste Altlast** — die Bilder widersprechen
-  inzwischen dem, was man beim Öffnen sieht.
+- **Tour-Screenshots in `tour/` sind veraltet — der einzige Punkt aus
+  `PLAN-OEFFENTLICHER-TEST.md`, der offen blieb.** Sie zeigen die alte Tab-Reihe
+  (genau ein Bereich aktiv) und die alte Statusreihe. Am 11. August im Browser
+  gegengeprüft: Heute leuchten Filme und Serien gleichzeitig, Kino ist durch
+  einen Trenner abgesetzt. Der Befund stimmt also, die Bilder widersprechen dem,
+  was man beim Öffnen sieht — **die sichtbarste Altlast**.
+  Neu erzeugen: `bash scripts/tour/aufnehmen.sh`. Das Skript wurde am
+  11. August zweimal repariert (`5dee5fc`): Es sucht Chrome/Chromium jetzt,
+  statt einen festen macOS-Pfad zu erwarten, und **bricht ab**, wenn
+  `movietaste.de` oder `image.tmdb.org` nicht erreichbar sind — sonst entstünden
+  sechs Bilder mit leeren Listen und Platzhaltern statt Postern, die die
+  brauchbaren alten überschreiben. Genau daran scheiterte der Lauf am
+  11. August: Beide Adressen sind aus der Arbeitsumgebung gesperrt. **Von einer
+  Maschine mit Netz nachholen.**
+- **Prüfung von außen fehlt.** Die Wache läuft im Backend mit — steht der Server
+  ganz, kann er nichts melden. Laut Plan (Abschnitt 8, Punkt 4) vorerst
+  **bewusst nicht gebaut** und hier zu vermerken; das ist hiermit geschehen.
+  Wer es nachholt, braucht einen Dienst außerhalb, der die Startseite in kurzen
+  Abständen abruft — nicht noch eine Prüfung innerhalb desselben Prozesses.
 - **Einladungen lassen sich nicht zurückziehen**, und Links gelten für beliebig
   viele Personen. Eine Liste der offenen Einladungen mit Schließen-Knopf wäre der
   nächste Schritt.
