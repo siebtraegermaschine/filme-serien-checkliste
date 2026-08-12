@@ -942,11 +942,8 @@
   .nacht-zeile img { width:32px; border-radius:4px; flex:none; }
   .nacht-zeile .nacht-titel { flex:1; font-size:14px; line-height:1.4; }
   .nacht-wahl { display:flex; gap:6px; flex:none; }
-  .nacht-wahl button { background:var(--card); border:1px solid var(--border);
-    color:var(--text); border-radius:10px; padding:6px 12px; font:inherit;
-    font-size:13px; cursor:pointer; }
-  .nacht-wahl button.active { background:var(--accent-soft);
-    border-color:var(--accent); color:var(--accent); }
+  .nacht-wahl input[type="checkbox"] { width:22px; height:22px;
+    accent-color:var(--accent); cursor:pointer; }
   /* Vorauswahl-Leiste: erscheint nach dem Movie-Night-Klick ueber der Liste,
      solange die Person ihre Auswahl wie gewohnt einstellt. */
   .nacht-leiste { max-width:700px; margin:14px auto 0; padding:10px 14px;
@@ -8264,10 +8261,10 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
           (t.p ? '<img src="' + escAttr(POSTER + t.p) + '" alt="">' : '<span style="width:32px;flex:none"></span>') +
           '<span class="nacht-titel" data-details="' + escAttr(t.id) + '" role="button" tabindex="0">' + esc(t.t) + (t.y ? ' (' + t.y + ')' : '') + sterne + '</span>' +
           '<span class="nacht-wahl">' +
-          // EIN Ja-Knopf statt Ja/Nein: Abstimmen ist keine Pflicht je Titel --
-          // was einem nichts sagt, laesst man einfach aus. Erneutes Tippen
-          // nimmt die Stimme zurueck.
-          '<button type="button" data-ja="' + escAttr(t.id) + '"' + (wahl === true ? ' class="active"' : '') + '>' + esc(TXT.nachtJa) + '</button>' +
+          // EINE Checkbox je Titel: Abstimmen ist keine Pflicht -- was einem
+          // nichts sagt, laesst man einfach aus. Abwaehlen nimmt die Stimme
+          // zurueck.
+          '<input type="checkbox" data-ja="' + escAttr(t.id) + '"' + (wahl === true ? ' checked' : '') + ' aria-label="' + escAttr(TXT.nachtJa) + '">' +
           '</span></div>';
         // Aufgeklappte Details unter der Zeile: dieselbe Zeile wie in der
         // Gesamtansicht (poolToMeta: Sterne+Stimmen, Genre, Jahr), Kurztext
@@ -8340,11 +8337,10 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
       if (hinweis) hinweis.textContent = TXT.nachtFehler;
     }
     inhalt.querySelectorAll('[data-ja]').forEach(function(b){
-      b.onclick = function(){
+      b.onchange = function(){
         var id = b.dataset.ja;
-        var neu = stimmen[id] !== true;   // erneutes Tippen nimmt die Stimme zurueck
-        stimmen[id] = neu; zeichneAusCache();
-        var teil = {}; teil[id] = neu; stimmeSenden(teil);
+        stimmen[id] = b.checked;
+        var teil = {}; teil[id] = b.checked; stimmeSenden(teil);
       };
     });
 
