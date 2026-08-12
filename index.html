@@ -893,21 +893,6 @@
     cursor:pointer; padding:4px 6px; border-radius:6px; flex-shrink:0; }
   @media (hover: hover) { .profile-item .pi-del:hover { color:#e2574c; } }
   .profile-item.self .pi-del { visibility:hidden; }
-  /* Favoriten. Leeres Herz, gefuellt-weiss sobald gesetzt -- die Person rutscht
-     dann nach oben. Bei drei Kontakten braucht das niemand, ab einem Dutzend
-     schon: Die Liste ist sonst nach Verknuepfungsdatum sortiert, und wen man
-     staendig anschaut, steht dann irgendwo in der Mitte.
-     Die Wahl liegt nur im Browser (siehe FAVORITEN_KEY) -- sie geht niemanden
-     ausser einem selbst etwas an und braucht dafuer keine Serverrunde. */
-  /* Herz als SVG statt ♡/♥: Die beiden Schriftzeichen sind unterschiedlich
-     breit und wirken unterschiedlich gross -- das gefuellte sprang beim
-     Anklicken sichtbar an. Ein Pfad, umgeschaltet wird nur die Fuellung. */
-  .profile-item .pi-fav { background:none; border:none; color:var(--text-dim);
-    line-height:0; padding:4px; cursor:pointer; display:inline-flex; align-items:center; }
-  .profile-item .pi-fav svg { display:block; fill:none; }
-  .profile-item .pi-fav.on { color:#fff; }
-  .profile-item .pi-fav.on svg { fill:currentColor; }
-  @media (hover: hover) { .profile-item .pi-fav:hover { color:#fff; } }
   .profile-add { width:100%; margin-top:12px; padding:11px; border-radius:9px; cursor:pointer;
     background:var(--card); border:1px dashed var(--border); color:var(--text-dim);
     font-size:14px; font-weight:600; }
@@ -1930,7 +1915,6 @@ var UI_TEXTE = {
     gemeinsameTitelMit: function(namen){ return 'Gemeinsame Titel mit ' + namen; },
     matchWort: 'Match',
     verknuepfungLoesen: 'Verknüpfung lösen',
-    favoritOben: 'Als Favorit oben anzeigen',
     profilOhneKonto: 'Zum Einladen brauchst du ein Konto. Der FSK-Filter unten wirkt auch ohne.',
     profilLaedt: 'Verknüpfte Personen werden geladen …',
     profilLeer: 'Noch niemand verknüpft. Lade jemanden ein, um gemeinsame Titel zu finden.',
@@ -2171,7 +2155,6 @@ var UI_TEXTE = {
     gemeinsameTitelMit: function(namen){ return 'Shared titles with ' + namen; },
     matchWort: 'Match',
     verknuepfungLoesen: 'Remove connection',
-    favoritOben: 'Show as favourite at the top',
     profilOhneKonto: 'You need an account to invite people. The age filter below works without one.',
     profilLaedt: 'Loading connected people …',
     profilLeer: 'Nobody connected yet. Invite someone to find shared titles.',
@@ -2412,7 +2395,6 @@ var UI_TEXTE = {
     gemeinsameTitelMit: function(namen){ return 'Titres en commun avec ' + namen; },
     matchWort: 'Match',
     verknuepfungLoesen: 'Supprimer la connexion',
-    favoritOben: 'Afficher comme favori en haut',
     profilOhneKonto: 'Il te faut un compte pour inviter des personnes. Le filtre d’âge ci-dessous fonctionne sans compte.',
     profilLaedt: 'Chargement des personnes connectées …',
     profilLeer: 'Personne n’est encore connecté. Invite quelqu’un pour trouver des titres en commun.',
@@ -2653,7 +2635,6 @@ var UI_TEXTE = {
     gemeinsameTitelMit: function(namen){ return 'Títulos en común con ' + namen; },
     matchWort: 'Match',
     verknuepfungLoesen: 'Eliminar conexión',
-    favoritOben: 'Mostrar como favorito arriba',
     profilOhneKonto: 'Necesitas una cuenta para invitar a gente. El filtro de edad de abajo funciona sin cuenta.',
     profilLaedt: 'Cargando personas conectadas …',
     profilLeer: 'Aún no hay nadie conectado. Invita a alguien para encontrar títulos en común.',
@@ -2894,7 +2875,6 @@ var UI_TEXTE = {
     gemeinsameTitelMit: function(namen){ return 'Titoli in comune con ' + namen; },
     matchWort: 'Match',
     verknuepfungLoesen: 'Rimuovi collegamento',
-    favoritOben: 'Mostra come preferito in alto',
     profilOhneKonto: 'Per invitare persone ti serve un account. Il filtro per età qui sotto funziona anche senza.',
     profilLaedt: 'Caricamento delle persone collegate …',
     profilLeer: 'Nessuna persona collegata. Invita qualcuno per trovare titoli in comune.',
@@ -3135,7 +3115,6 @@ var UI_TEXTE = {
     gemeinsameTitelMit: function(namen){ return 'Gedeelde titels met ' + namen; },
     matchWort: 'Match',
     verknuepfungLoesen: 'Verbinding verwijderen',
-    favoritOben: 'Als favoriet bovenaan tonen',
     profilOhneKonto: 'Je hebt een account nodig om mensen uit te nodigen. Het leeftijdsfilter hieronder werkt ook zonder.',
     profilLaedt: 'Verbonden personen laden …',
     profilLeer: 'Nog niemand verbonden. Nodig iemand uit om gedeelde titels te vinden.',
@@ -3376,7 +3355,6 @@ var UI_TEXTE = {
     gemeinsameTitelMit: function(namen){ return 'Títulos em comum com ' + namen; },
     matchWort: 'Match',
     verknuepfungLoesen: 'Remover conexão',
-    favoritOben: 'Mostrar como favorito no topo',
     profilOhneKonto: 'Você precisa de uma conta para convidar pessoas. O filtro etário abaixo funciona sem conta.',
     profilLaedt: 'Carregando pessoas conectadas …',
     profilLeer: 'Ninguém conectado ainda. Convide alguém para encontrar títulos em comum.',
@@ -8952,35 +8930,17 @@ var _profileModal = document.getElementById('profileModal');
    viel. Folge: Die Wahl gilt je Geraet -- vertretbar, weil sie in Sekunden
    wiederhergestellt ist. */
 var MATCH_HINWEIS_KEY = 'mt.matchHinweis';
-var FAVORITEN_KEY = 'mt.favoriten';
-// Ein einziger Pfad fuer beide Zustaende -- gefuellt wird per CSS (siehe
-// .pi-fav.on svg). So sind ausgewaehlt und nicht ausgewaehlt exakt gleich gross.
-var HERZ_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" ' +
-  'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-  '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>';
-function favoritenLesen(){
-  try { return new Set(JSON.parse(localStorage.getItem(FAVORITEN_KEY) || '[]').map(Number)); }
-  catch (e) { return new Set(); }
-}
-function favoritSchalten(uid){
-  var s = favoritenLesen();
-  if (s.has(uid)) s.delete(uid); else s.add(uid);
-  try { localStorage.setItem(FAVORITEN_KEY, JSON.stringify(Array.from(s))); } catch (e) {}
-}
+// Die Favoriten-Sortierung (Herz je Person, mt.favoriten im localStorage)
+// wurde am 12. August 2026 entfernt -- bei einer Handvoll Verknuepfungen
+// brauchte sie niemand. Die Liste steht in Server-Reihenfolge
+// (Verknuepfungsdatum).
 function renderProfileList(){
   var el = document.getElementById('profileList');
-  var favoriten = favoritenLesen();
-  // Favoriten nach oben, innerhalb beider Gruppen die bisherige Reihenfolge
-  // (der Server liefert nach Verknuepfungsdatum). slice(), damit LINKED_PROFILES
-  // selbst unberuehrt bleibt -- daran haengen MATCH_WITH und die Profile.
-  var reihenfolge = LINKED_PROFILES.slice().sort(function(a, b){
-    return (favoriten.has(b.id) ? 1 : 0) - (favoriten.has(a.id) ? 1 : 0);
-  });
+  var reihenfolge = LINKED_PROFILES.slice();
   // Kein Eintrag fuer einen selbst: Nichts ausgewaehlt IST bereits die eigene
   // Ansicht. Ein Haken "Ich", der sich nie abwaehlen laesst, waere nur Ballast.
   var html = reihenfolge.map(function(p){
     var aktiv = MATCH_WITH.indexOf(p.id) !== -1;
-    var favorit = favoriten.has(p.id);
     // Zwei Absichten, zwei Knoepfe: DEREN Titel ansehen oder mit ihnen
     // abgleichen. Vorher waren es drei -- Watchlist und Gesehen getrennt, und
     // zwar sich gegenseitig ausschliessend. Man musste sich also entscheiden,
@@ -8995,9 +8955,6 @@ function renderProfileList(){
                '<button type="button" class="pi-btn' + (aktiv ? ' on' : '') + '" data-tun="m">' + TXT.matchWort + '</button>' +
              '</div>' +
              '<button type="button" class="pi-del" aria-label="' + TXT.verknuepfungLoesen + '">✕</button>' +
-             '<button type="button" class="pi-fav' + (favorit ? ' on' : '') + '" aria-pressed="' +
-               (favorit ? 'true' : 'false') + '" aria-label="' + TXT.favoritOben + '">' +
-               HERZ_SVG + '</button>' +
            '</div>';
   }).join('');
   // Ausgeloggt steht hier, warum die Liste leer ist und der Knopf darunter
@@ -9058,11 +9015,6 @@ function renderProfileList(){
         renderProfileList();
       };
     });
-    row.querySelector('.pi-fav').onclick = function(e){
-      e.stopPropagation();
-      favoritSchalten(uid);
-      renderProfileList();
-    };
     row.querySelector('.pi-del').onclick = function(e){
       e.stopPropagation();
       if (!confirm(TXT.loesenFrage(profilName(uid)))) return;
