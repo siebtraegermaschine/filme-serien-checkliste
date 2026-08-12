@@ -53,6 +53,13 @@
 - **Weitere Länder** nach dem 40er-Muster: Balkan, Türkei, Asien — jeweils
   erst mit passender Sprache sinnvoll.
 
+## Rechtstext-Nachträge (bei der Anwaltsprüfung mitgeben)
+
+- **Benachrichtigungs-Mails** (12. August 2026 gebaut): Opt-in am Konto
+  (`users.benachrichtigung`), täglicher Abgleich der Watchlist gegen
+  Streaming-/Kinodaten, Versandvermerk in `benachrichtigt`. Braucht einen
+  Satz in der Datenschutzerklärung (Zweck, Abbestellbarkeit, Speicherung).
+
 ## Bewusst NICHT verfolgt
 
 - **Affiliate-Links** (Amazon & Co.): brächte Einnahmen, machte die App aber

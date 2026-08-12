@@ -1454,6 +1454,9 @@
     <div class="modal-actions settings-menu">
       <button type="button" id="settingsProvidersBtn" class="modal-yes">Streaminganbieter</button>
       <button type="button" id="settingsKinosBtn" class="modal-yes">Deine Kinos</button>
+      <!-- Nur angemeldet sichtbar; Beschriftung samt An/Aus-Zustand kommt aus
+           dem JS (benachrichtigungKnopfAktualisieren). -->
+      <button type="button" id="settingsNotifyBtn" class="modal-yes" style="display:none">E-Mail-Benachrichtigung</button>
       <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Titel</button>
       <button type="button" id="settingsAccountBtn" class="modal-yes">Zugangsdaten</button>
       <button type="button" id="settingsCreditsBtn" class="modal-yes">Credits</button>
@@ -1977,6 +1980,7 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' hat das noch nicht bewertet'; },
     tasteScoreAria: 'Was ist der Taste-Score?',
     tasteScoreGemeinsam: function(namen){ return 'Der Abgleich ist an: Der Taste-Score gilt hier für dich und ' + namen + ' gemeinsam — er sagt, wie gut ein Titel zu eurem gemeinsamen Geschmack passt.'; },
+    benachrichtigungKnopf: function(an){ return 'E-Mail bei neuen Watchlist-Treffern: ' + (an ? 'An' : 'Aus'); },
     matchAria: 'Was ist ein Match?',
     posterGroesser: 'Poster größer anzeigen',
     sprachName: 'Deutsch',
@@ -2196,6 +2200,7 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' has not rated this yet'; },
     tasteScoreAria: 'What is the Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Match is on: the Taste Score here applies to you and ' + namen + ' together — it says how well a title fits your combined taste.'; },
+    benachrichtigungKnopf: function(an){ return 'Email for new watchlist matches: ' + (an ? 'On' : 'Off'); },
     matchAria: 'What is a match?',
     posterGroesser: 'Show larger poster',
     sprachName: 'English',
@@ -2415,6 +2420,7 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' n’a pas encore noté ce titre'; },
     tasteScoreAria: 'Qu’est-ce que le Taste Score ?',
     tasteScoreGemeinsam: function(namen){ return 'Le match est activé\u202f: le Taste Score s’applique ici à toi et ' + namen + ' ensemble — il indique à quel point un titre correspond à vos goûts combinés.'; },
+    benachrichtigungKnopf: function(an){ return 'E-mail pour les nouveautés de ta watchlist\u202f: ' + (an ? 'activé' : 'désactivé'); },
     matchAria: 'Qu’est-ce qu’un match ?',
     posterGroesser: 'Afficher l’affiche en grand',
     sprachName: 'Français',
@@ -2634,6 +2640,7 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' aún no lo ha valorado'; },
     tasteScoreAria: '¿Qué es el Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'El match está activado: aquí el Taste Score se aplica a ti y a ' + namen + ' juntos — indica lo bien que un título encaja con vuestros gustos combinados.'; },
+    benachrichtigungKnopf: function(an){ return 'Correo con novedades de tu watchlist: ' + (an ? 'activado' : 'desactivado'); },
     matchAria: '¿Qué es un match?',
     posterGroesser: 'Mostrar póster más grande',
     sprachName: 'Español',
@@ -2853,6 +2860,7 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' non l’ha ancora valutato'; },
     tasteScoreAria: 'Cos’è il Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Il match è attivo: qui il Taste Score vale per te e ' + namen + ' insieme — indica quanto un titolo corrisponde ai vostri gusti combinati.'; },
+    benachrichtigungKnopf: function(an){ return 'E-mail per le novità della tua watchlist: ' + (an ? 'attiva' : 'disattivata'); },
     matchAria: 'Cos’è un match?',
     posterGroesser: 'Mostra il poster ingrandito',
     sprachName: 'Italiano',
@@ -3072,6 +3080,7 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' heeft dit nog niet beoordeeld'; },
     tasteScoreAria: 'Wat is de Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Match staat aan: de Taste Score geldt hier voor jou en ' + namen + ' samen — hij geeft aan hoe goed een titel bij jullie gezamenlijke smaak past.'; },
+    benachrichtigungKnopf: function(an){ return 'E-mail bij nieuwe watchlist-treffers: ' + (an ? 'aan' : 'uit'); },
     matchAria: 'Wat is een match?',
     posterGroesser: 'Grotere poster tonen',
     sprachName: 'Nederlands',
@@ -7591,7 +7600,28 @@ _feedbackSubmit.onclick = function(){
 
 /* ---- "Einstellungen": Zwischenmenue (Gelöschte Titel / Zugangsdaten). ---- */
 var _settingsModal = document.getElementById('settingsModal');
-function openSettingsModal(){ _settingsModal.style.display = 'flex'; }
+/* E-Mail-Benachrichtigung (Opt-in, users.benachrichtigung): ein Schalter-
+   Knopf in den Einstellungen, nur angemeldet sichtbar. Der Klick schaltet
+   sofort um (optimistisch) und speichert am Konto; schlaegt das Speichern
+   fehl, springt der Knopf zurueck. Verschickt wird taeglich gesammelt vom
+   Backend (backend/lib/benachrichtigung.js). */
+function benachrichtigungKnopfAktualisieren(){
+  var knopf = document.getElementById('settingsNotifyBtn');
+  if (!knopf) return;
+  if (!CURRENT_USER) { knopf.style.display = 'none'; return; }
+  knopf.style.display = '';
+  knopf.textContent = TXT.benachrichtigungKnopf(!!CURRENT_USER.benachrichtigung);
+}
+document.getElementById('settingsNotifyBtn').onclick = function(){
+  if (!CURRENT_USER) return;
+  var neu = !CURRENT_USER.benachrichtigung;
+  CURRENT_USER.benachrichtigung = neu;
+  benachrichtigungKnopfAktualisieren();
+  apiRequest('PUT', '/api/auth/settings', { benachrichtigung: neu })
+    .then(function(u){ CURRENT_USER = u; benachrichtigungKnopfAktualisieren(); })
+    .catch(function(){ CURRENT_USER.benachrichtigung = !neu; benachrichtigungKnopfAktualisieren(); });
+};
+function openSettingsModal(){ benachrichtigungKnopfAktualisieren(); _settingsModal.style.display = 'flex'; }
 function closeSettingsModal(){ _settingsModal.style.display = 'none'; }
 document.getElementById('settingsBtn').onclick = () => { closeNavMenu(); openSettingsModal(); };
 document.getElementById('settingsModalX').onclick = closeSettingsModal;

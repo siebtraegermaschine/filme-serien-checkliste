@@ -45,6 +45,8 @@ function publicUser(row) {
     // nie gewaehlt; dann entscheidet das Geraet (siehe index.html, i18n-Block).
     sprache: row.sprache || null,
     region: row.region || null,
+    // Opt-in fuer den taeglichen E-Mail-Sammelversand (lib/benachrichtigung.js).
+    benachrichtigung: !!row.benachrichtigung,
   };
 }
 
@@ -85,7 +87,7 @@ router.post('/register', GRENZE_REGISTER, async (req, res) => {
     const werber = await werberFinden(inviteToken);
     const { rows } = await pool.query(
       `INSERT INTO users (email, password_hash, display_name, invited_by_user_id) VALUES ($1, $2, $3, $4)
-       RETURNING id, email, display_name, deletion_requested_at, sprache, region`,
+       RETURNING id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung`,
       [normalizedEmail, passwordHash, name, werber]
     );
     await sessionErneuern(req);
@@ -106,7 +108,7 @@ router.post('/login', GRENZE_LOGIN, async (req, res) => {
   }
 
   const { rows } = await pool.query(
-    `SELECT id, email, display_name, password_hash, deletion_requested_at, sprache, region FROM users WHERE email = $1`,
+    `SELECT id, email, display_name, password_hash, deletion_requested_at, sprache, region, benachrichtigung FROM users WHERE email = $1`,
     [email.trim().toLowerCase()]
   );
   const user = rows[0];
@@ -136,7 +138,7 @@ router.get('/me', async (req, res) => {
   if (!req.session?.userId) {
     return res.status(401).json({ error: 'not_authenticated' });
   }
-  const { rows } = await pool.query(`SELECT id, email, display_name, deletion_requested_at, sprache, region FROM users WHERE id = $1`, [req.session.userId]);
+  const { rows } = await pool.query(`SELECT id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung FROM users WHERE id = $1`, [req.session.userId]);
   if (!rows[0]) {
     return res.status(401).json({ error: 'not_authenticated' });
   }
@@ -151,7 +153,7 @@ router.put('/display-name', async (req, res) => {
   const name = typeof displayName === 'string' ? displayName.trim() : '';
   if (!name || name.length > 40) return res.status(400).json({ error: 'invalid_display_name' });
   const { rows } = await pool.query(
-    'UPDATE users SET display_name = $1 WHERE id = $2 RETURNING id, email, display_name, deletion_requested_at, sprache, region',
+    'UPDATE users SET display_name = $1 WHERE id = $2 RETURNING id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung',
     [name, req.session.userId]
   );
   res.json(publicUser(rows[0]));
@@ -162,20 +164,22 @@ router.put('/display-name', async (req, res) => {
 // optional -- es wird nur geschrieben, was mitgeschickt wurde.
 router.put('/settings', async (req, res) => {
   if (!req.session?.userId) return res.status(401).json({ error: 'not_authenticated' });
-  const { sprache, region } = req.body || {};
+  const { sprache, region, benachrichtigung } = req.body || {};
   // Oberflaechensprachen -- muss zur Frontend-Liste SPRACHEN_VERFUEGBAR passen.
   const neueSprache = ['de', 'en', 'fr', 'es', 'it', 'nl'].includes(sprache) ? sprache : undefined;
   const neueRegion = typeof region === 'string' && /^[A-Z]{2}$/.test(region) ? region : undefined;
-  if (neueSprache === undefined && neueRegion === undefined) {
+  const neueBenachrichtigung = typeof benachrichtigung === 'boolean' ? benachrichtigung : undefined;
+  if (neueSprache === undefined && neueRegion === undefined && neueBenachrichtigung === undefined) {
     return res.status(400).json({ error: 'invalid_payload' });
   }
   const { rows } = await pool.query(
     `UPDATE users SET
        sprache = COALESCE($1, sprache),
-       region  = COALESCE($2, region)
+       region  = COALESCE($2, region),
+       benachrichtigung = COALESCE($4, benachrichtigung)
      WHERE id = $3
-     RETURNING id, email, display_name, deletion_requested_at, sprache, region`,
-    [neueSprache ?? null, neueRegion ?? null, req.session.userId]
+     RETURNING id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung`,
+    [neueSprache ?? null, neueRegion ?? null, req.session.userId, neueBenachrichtigung ?? null]
   );
   res.json(publicUser(rows[0]));
 });
@@ -276,7 +280,7 @@ router.put('/email', requireAuth, async (req, res) => {
   const normalizedEmail = newEmail.trim().toLowerCase();
   try {
     const { rows: updated } = await pool.query(
-      `UPDATE users SET email = $1 WHERE id = $2 RETURNING id, email, display_name, deletion_requested_at, sprache, region`,
+      `UPDATE users SET email = $1 WHERE id = $2 RETURNING id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung`,
       [normalizedEmail, req.session.userId]
     );
     res.json(publicUser(updated[0]));
@@ -332,7 +336,7 @@ router.delete('/account', requireAuth, async (req, res) => {
 router.post('/account/restore', requireAuth, async (req, res) => {
   const { rows } = await pool.query(
     `UPDATE users SET deletion_requested_at = NULL WHERE id = $1
-     RETURNING id, email, display_name, deletion_requested_at, sprache, region`,
+     RETURNING id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung`,
     [req.session.userId]
   );
   if (!rows[0]) return res.status(404).json({ error: 'not_found' });

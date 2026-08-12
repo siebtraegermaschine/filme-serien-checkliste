@@ -618,3 +618,18 @@ CREATE INDEX IF NOT EXISTS idx_cinema_cache_region ON cinema_cache (region);
 -- Geraet (localStorage bzw. Browsersprache).
 ALTER TABLE users ADD COLUMN IF NOT EXISTS sprache TEXT CHECK (sprache IS NULL OR sprache IN ('de', 'en'));
 ALTER TABLE users ADD COLUMN IF NOT EXISTS region  TEXT CHECK (region IS NULL OR region ~ '^[A-Z]{2}$');
+
+-- ---------------------------------------------------------------------------
+-- Benachrichtigungen: Opt-in am Konto (Einstellungen), taeglicher
+-- Sammelversand per E-Mail (lib/benachrichtigung.js) -- "ein Titel deiner
+-- Watchlist ist jetzt bei deinen Streaming-Anbietern" bzw. "laeuft im Kino
+-- an". `benachrichtigt` merkt Verschicktes je Person/Titel/Art, damit
+-- derselbe Treffer nie zweimal kommt.
+ALTER TABLE users ADD COLUMN IF NOT EXISTS benachrichtigung BOOLEAN NOT NULL DEFAULT FALSE;
+CREATE TABLE IF NOT EXISTS benachrichtigt (
+  user_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  title_id    BIGINT NOT NULL REFERENCES titles(id) ON DELETE CASCADE,
+  art         TEXT   NOT NULL CHECK (art IN ('stream', 'kino')),
+  gesendet_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (user_id, title_id, art)
+);

@@ -23,6 +23,7 @@ import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';
+import { starteBenachrichtigung } from './lib/benachrichtigung.js';
 import { mengenGrenze } from './middleware/rateLimit.js';
 import { starteSicherung } from './lib/sicherung.js';
 import { starteThemen } from './lib/themen.js';
@@ -236,6 +237,9 @@ app.listen(port, () => {
   // Meldet Stoerungen per Mail -- nur im Fehlerfall, nie "alles in Ordnung"
   // (siehe lib/wache.js). Prueft taeglich, ob die Importe ausgeblieben sind.
   starteWache();
+  // Taeglicher Opt-in-Sammelversand "Watchlist-Titel jetzt verfuegbar"
+  // (siehe lib/benachrichtigung.js) -- nach den Import-Ketten des Tages.
+  starteBenachrichtigung();
   /* Die beiden grossen Startlisten gleich bauen, statt den ersten Besucher nach
      einem Deploy warten zu lassen. Der Aufruf entspricht genau dem, den die App
      beim Start macht -- steht dort ein anderer Parameter, waermt das hier ins
