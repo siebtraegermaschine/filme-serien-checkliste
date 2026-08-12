@@ -2,16 +2,16 @@ name: Kino-Daten aktualisieren
 
 on:
   schedule:
-    # Vier Laeufe je Tag, je acht Regionen -- gleiches Muster wie
-    # streaming.yml (Job "plan"), jeweils 30 Minuten nach dem Streaming-Cron.
-    - cron: "30 4 * * *"
-    - cron: "30 10 * * *"
-    - cron: "30 16 * * *"
-    - cron: "30 22 * * *"
+    # Kino-Laeufe sind schnell (gemessen ~5 min je Region) -- deshalb
+    # TAEGLICH ALLE Regionen in einer Kette (~3-4 h), anders als beim
+    # Streaming (streaming.yml, dort rotieren die Gruppen B-E). 05:00 UTC:
+    # versetzt zum 02:00-Streaming-Start, damit sich die beiden Ketten das
+    # TMDB-Kontingent nicht in der Spitze teilen muessen.
+    - cron: "0 5 * * *"
   workflow_dispatch:            # erlaubt manuelles Ausloesen im Actions-Tab
     inputs:
       regionen:
-        description: "Kommagetrennte Regionen (leer = alle 31)"
+        description: "Kommagetrennte Regionen (leer = alle 40)"
         required: false
         default: ""
 
@@ -20,8 +20,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Siehe streaming.yml: die vier Cron-Zeitpunkte arbeiten die Gruppen A-D
-  # ab, manuell wahlweise eigene Liste oder alle 31.
+  # Ohne Eingabe alle Regionen (Cron wie Hand-Ausloesung); mit Eingabe die
+  # angegebene Liste. Muss zu REGIONEN in backend/lib/i18n.js passen.
   plan:
     runs-on: ubuntu-latest
     outputs:
@@ -32,22 +32,10 @@ jobs:
         env:
           EINGABE: ${{ github.event.inputs.regionen }}
         run: |
-          A='["DE","AT","CH","GB","FR","IT","ES","NL"]'
-          B='["PT","PL","DK","SE","NO","FI","BE","IE"]'
-          C='["CZ","GR","HU","RO","BG","HR","SI","SK"]'
-          D='["LT","LV","EE","LU","MT","CY","US"]'
-          ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE","CZ","GR","HU","RO","BG","HR","SI","SK","LT","LV","EE","LU","MT","CY","US"]'
+          ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE","CZ","GR","HU","RO","BG","HR","SI","SK","LT","LV","EE","LU","MT","CY","US","IS","LI","CA","AU","NZ","MX","AR","CL","CO"]'
           if [ -n "$EINGABE" ]; then
             LISTE=$(echo "$EINGABE" | tr '[:lower:]' '[:upper:]' | tr -d ' ' | \
               awk -F, '{printf "["; for(i=1;i<=NF;i++){printf "%s\"%s\"", (i>1?",":""), $i}; print "]"}')
-          elif [ "${{ github.event.schedule }}" = "30 10 * * *" ]; then
-            LISTE="$B"
-          elif [ "${{ github.event.schedule }}" = "30 16 * * *" ]; then
-            LISTE="$C"
-          elif [ "${{ github.event.schedule }}" = "30 22 * * *" ]; then
-            LISTE="$D"
-          elif [ -n "${{ github.event.schedule }}" ]; then
-            LISTE="$A"
           else
             LISTE="$ALLE"
           fi

@@ -290,14 +290,28 @@ mitkommen; die französischen Übersee-Gebiete bewusst nicht).
 DK, SE, NO, FI, BE und IE nach demselben Muster.
 
 **EU-Vollausbau, dritte und vierte Gruppe (ebenfalls 12. August 2026):**
-CZ, GR, HU, RO, BG, HR, SI, SK, LT, LV, EE, LU, MT und CY — damit sind
-**30 Regionen** angebunden: die komplette EU plus CH, GB und NO. Die
-Workflows laufen in **vier Tagesgruppen** (`streaming.yml`/`cinema.yml`,
-Job `plan`): 04:00, 10:00, 16:00 und 22:00 UTC (Kino jeweils +30 min) je
-acht Regionen — eine Kette aller 30 würde länger als ein Tag dauern.
-Manuelles Auslösen nimmt wahlweise eine eigene Regionsliste entgegen (Feld
-`regionen`) oder arbeitet ohne Eingabe alle 30 ab. Die Sprach-/Regionswahl
-im Menü ist ein Aufklappmenü (alphabetisch in der jeweiligen Sprache).
+CZ, GR, HU, RO, BG, HR, SI, SK, LT, LV, EE, LU, MT und CY — die komplette
+EU plus CH, GB und NO.
+
+**Übersee und EWR-Rest, fünfte Gruppe (ebenfalls 12. August 2026):**
+IS und LI (damit ist der EWR restlos abgedeckt — beides DSGVO-Raum, kein
+neues Rechtsthema) sowie CA, AU, NZ (englischsprachig; Québec nutzt die
+französische Oberfläche) und MX, AR, CL, CO (spanischsprachig) — zusammen
+**40 Regionen**. Für alle Länder außerhalb des EWR gilt derselbe Vermerk
+wie für die USA: rechtliche Klärung steht aus, siehe Abschnitt 4.
+
+**Workflow-Zeitplan (nach Laufzeitmessung am 12. August 2026):** Ein
+Streaming-Regionen-Job dauert real 1–1,5 Stunden (DE: 87 min) — vier
+Achtergruppen pro Tag passen also NICHT. Deshalb (`streaming.yml`, Job
+`plan`): **Gruppe A (Kernmärkte DE…NL) täglich 02:00 UTC; die Gruppen B–E
+rotieren um 14:00 UTC** (Tag-im-Jahr modulo 4, jede Gruppe alle vier
+Tage). Kino-Läufe sind schnell (~5 min/Region) und laufen **täglich für
+alle 40 Regionen** in einer Kette (05:00 UTC). Der eigentliche Ausweg wäre,
+den Streaming-Lauf je Region zu beschleunigen (Titel-Details nicht je
+Region erneut holen) — als Folgeaufgabe vermerkt. Manuelles Auslösen nimmt
+in beiden Workflows wahlweise eine eigene Regionsliste entgegen (Feld
+`regionen`). Die Sprach-/Regionswahl im Menü ist ein Aufklappmenü
+(alphabetisch in der jeweiligen Sprache).
 Genres erscheinen in fr/es/it/nl mit den offiziellen TMDB-Namen
 (`GENRE_NAMEN` in `index.html`, von Hand gepflegt, EN-Rückfall); Suche und
 Genre-Klick verstehen die übersetzten Namen über `SEARCH_SYNONYMS`.
@@ -308,8 +322,10 @@ Besonderheiten:
   ES APTA/TP/A, NL AL, PT T/M/x, DK A/F, SE Btl, NO A, FI S/K-x, BE
   AL/KT/KNT, IE G/GA/PG/12A/15A/MA, CZ/SK U, GR/CY K, HU KN, RO
   A.G./AP-12/N-15/IM-18, BG A–X, LT V/N-x, LV U/x+, EE PERE/L/MS-x/K-x,
-  LU EA, MT U/PG/12A. Reine Erwachsenen-Sonderstufen (GB R18, ES X) gelten
-  bewusst als fehlende Angabe. Fällt ein Titel mangels Landeswert auf die
+  LU EA, MT U/PG/12A, US MPAA+TV-x, IS L, CA G/PG/14A/18A + C/C8/x+,
+  AU E/G/PG/M/MA15+/R18+, NZ G/PG/M/Rx/RPx, MX AA/A/B/B-15/C,
+  AR ATP/+x, CL TE, CO T. Reine Erwachsenen-Sonderstufen (GB R18, ES X,
+  AU X18+, MX D) gelten bewusst als fehlende Angabe. Fällt ein Titel mangels Landeswert auf die
   DE-Freigabe zurück und passt die nicht ins Landessystem, gilt sie als
   fehlende Angabe — der Familienfilter bleibt so auf der sicheren Seite,
   bis der Freigaben-Backfill (unten) gelaufen ist.
@@ -341,13 +357,14 @@ Abschnitt 5 bleibt bestehen).
    schon; sie mussten nur nie laufen).
 4. **Workflows:** Nächster planmäßiger Lauf von `streaming.yml`/`cinema.yml`
    befüllt alle Regionen der Matrix automatisch. Nichts zu tun.
-5. **Kino-Orte der 28 neuen Länder** (auf dem Server, im
+5. **Kino-Orte der 38 neuen Länder** (auf dem Server, im
    Backend-Verzeichnis):
-   `node scripts/import-plz.mjs CH GB FR IT ES NL PT PL DK SE NO FI BE IE CZ GR HU RO BG HR SI SK LT LV EE LU MT CY`
+   `node scripts/import-plz.mjs CH GB FR IT ES NL PT PL DK SE NO FI BE IE CZ GR HU RO BG HR SI SK LT LV EE LU MT CY US IS LI CA AU NZ MX AR CL CO`
    und danach
-   `node scripts/import-kinos.mjs --laender=CH,GB,FR,IT,ES,NL,PT,PL,DK,SE,NO,FI,BE,IE,CZ,GR,HU,RO,BG,HR,SI,SK,LT,LV,EE,LU,MT,CY`
-   (Overpass-Läufe dauern je Land einige Minuten; GeoNames deckt alle ab,
-   GB allerdings nur mit den „outward codes" der Postleitzahlen).
+   `node scripts/import-kinos.mjs --laender=CH,GB,FR,IT,ES,NL,PT,PL,DK,SE,NO,FI,BE,IE,CZ,GR,HU,RO,BG,HR,SI,SK,LT,LV,EE,LU,MT,CY,US,IS,LI,CA,AU,NZ,MX,AR,CL,CO`
+   (Overpass-Läufe dauern je Land einige Minuten, bei den Flächenländern
+   US/CA/AU deutlich länger; GeoNames deckt alle ab, GB/CA/IE allerdings
+   nur mit verkürzten Postleitzahlen).
 6. **Freigaben-Backfill für den Bestand** (~27.000 TMDB-Abrufe, mehrere
    Stunden, abbrechbar/fortsetzbar — erst mit `--limit=500` probelaufen):
    `cd backend && TMDB_API_KEY=... node scripts/backfill-english.mjs --nur-freigaben`
@@ -371,7 +388,11 @@ Abschnitt 5 bleibt bestehen).
   Oberfläche + US-Region, Amazon `.com`, JustWatch `us`; `import-plz.mjs US`
   liefert ZIPs, `import-kinos.mjs` kennt Kernland/Alaska/Hawaii). Offen:
   anwaltliche Klärung CCPA/CPRA/COPPA (Abschnitt 4) und ggf. CDN wegen
-  US-Latenz.
+  US-Latenz. **Dieselbe Rechtsklärung braucht der übrige Nicht-EWR-Bestand**
+  (CA: PIPEDA, AU/NZ: Privacy Acts, MX: LFPDPPP, AR/CL/CO: nationale
+  Datenschutzgesetze) — am besten als Sammelauftrag an dieselbe Kanzlei;
+  bis dahin kein aktives Marketing in diesen Ländern. Die CDN-/Latenzfrage
+  verschärft sich mit Ozeanien/Lateinamerika.
 - ~~Weitere EU-Länder~~ — **erledigt (12. August 2026):** Mit den Gruppen
   C/D ist die EU vollständig. Künftige Nicht-EU-Länder (z. B. Balkan,
   IS) folgen demselben Muster: `REGIONEN` in `backend/lib/i18n.js`,

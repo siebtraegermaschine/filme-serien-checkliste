@@ -88,6 +88,16 @@ const RECHTECKE = {
   US: [[24.4, -125.0, 49.5, -66.8],             // Kernland
        [51.0, -170.0, 71.5, -129.9],            // Alaska
        [18.9, -160.3, 22.3, -154.7]],           // Hawaii
+  IS: [[63.2, -24.6, 66.6, -13.4]],
+  LI: [[47.0, 9.4, 47.3, 9.6]],
+  CA: [[41.6, -141.0, 64.0, -52.5]],            // Sueden bis Yellowknife --
+                                                // noerdlicher gibt es keine Kinos
+  AU: [[-43.7, 112.9, -10.6, 153.7]],           // inkl. Tasmanien
+  NZ: [[-47.4, 166.3, -34.3, 178.6]],
+  MX: [[14.5, -117.2, 32.8, -86.7]],
+  AR: [[-55.2, -73.6, -21.7, -53.6]],
+  CL: [[-56.0, -75.8, -17.5, -66.4]],
+  CO: [[-4.3, -79.1, 12.6, -66.8]],
 };
 
 /* Kantenlaenge einer Abfrage. Gross gewaehlt, und zwar aus Messung: Die

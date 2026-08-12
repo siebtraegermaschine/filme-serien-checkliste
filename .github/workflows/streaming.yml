@@ -2,19 +2,20 @@ name: Streaming-Daten aktualisieren
 
 on:
   schedule:
-    # Vier Laeufe je Tag, je acht Regionen (siehe Job "plan"): Eine Kette
-    # aller 30 Regionen nacheinander wuerde laenger als ein Tag dauern.
-    # 04:00 UTC (~5/6 Uhr DE -- GitHub-Cron kennt keine Zeitzonen, daher die
-    # uebliche 1-Stunde-Drift zwischen Winter-/Sommerzeit): Gruppe A.
-    - cron: "0 4 * * *"
-    # Danach alle sechs Stunden die naechste Gruppe (B, C, D).
-    - cron: "0 10 * * *"
-    - cron: "0 16 * * *"
-    - cron: "0 22 * * *"
+    # Gemessen am 12. August 2026: EIN Regionen-Job dauert rund 1-1,5 Stunden
+    # (DE 87 min) -- eine Achtergruppe also 8-12 Stunden. Deshalb passen keine
+    # vier Gruppen mehr in einen Tag (siehe Job "plan"):
+    # 02:00 UTC: Gruppe A (Kernmaerkte DE...NL) -- TAEGLICH.
+    - cron: "0 2 * * *"
+    # 14:00 UTC: die Gruppen B-E im Wechsel, eine je Tag (Tag-im-Jahr modulo
+    # 4) -- jede Gruppe laeuft damit alle vier Tage. Der eigentliche Ausweg
+    # waere, den Lauf je Region zu beschleunigen (Titel-Details nicht je
+    # Region erneut zu holen) -- bis dahin ist die Rotation der Kompromiss.
+    - cron: "0 14 * * *"
   workflow_dispatch:            # erlaubt manuelles Auslösen im Actions-Tab
     inputs:
       regionen:
-        description: "Kommagetrennte Regionen (leer = alle 31)"
+        description: "Kommagetrennte Regionen (leer = alle 40; Vorsicht: sehr lang)"
         required: false
         default: ""
 
@@ -26,10 +27,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Bestimmt, welche Regionen DIESER Lauf abarbeitet: die vier Cron-Zeitpunkte
-  # arbeiten die Gruppen A-D ab, manuelles Ausloesen wahlweise eine
-  # eigene Liste oder (ohne Eingabe) alle 31. Die Liste muss zu REGIONEN in
-  # backend/lib/i18n.js passen.
+  # Bestimmt, welche Regionen DIESER Lauf abarbeitet. Die Gruppen muessen zu
+  # REGIONEN in backend/lib/i18n.js passen.
   plan:
     runs-on: ubuntu-latest
     outputs:
@@ -43,17 +42,21 @@ jobs:
           A='["DE","AT","CH","GB","FR","IT","ES","NL"]'
           B='["PT","PL","DK","SE","NO","FI","BE","IE"]'
           C='["CZ","GR","HU","RO","BG","HR","SI","SK"]'
-          D='["LT","LV","EE","LU","MT","CY","US"]'
-          ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE","CZ","GR","HU","RO","BG","HR","SI","SK","LT","LV","EE","LU","MT","CY","US"]'
+          D='["LT","LV","EE","LU","MT","CY","US","IS"]'
+          E='["LI","CA","AU","NZ","MX","AR","CL","CO"]'
+          ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE","CZ","GR","HU","RO","BG","HR","SI","SK","LT","LV","EE","LU","MT","CY","US","IS","LI","CA","AU","NZ","MX","AR","CL","CO"]'
           if [ -n "$EINGABE" ]; then
             LISTE=$(echo "$EINGABE" | tr '[:lower:]' '[:upper:]' | tr -d ' ' | \
               awk -F, '{printf "["; for(i=1;i<=NF;i++){printf "%s\"%s\"", (i>1?",":""), $i}; print "]"}')
-          elif [ "${{ github.event.schedule }}" = "0 10 * * *" ]; then
-            LISTE="$B"
-          elif [ "${{ github.event.schedule }}" = "0 16 * * *" ]; then
-            LISTE="$C"
-          elif [ "${{ github.event.schedule }}" = "0 22 * * *" ]; then
-            LISTE="$D"
+          elif [ "${{ github.event.schedule }}" = "0 14 * * *" ]; then
+            # 10#: %j liefert fuehrende Nullen (etwa "059"), ohne Basisangabe
+            # laese die Shell das als Oktalzahl.
+            case $(( 10#$(date -u +%j) % 4 )) in
+              0) LISTE="$B";;
+              1) LISTE="$C";;
+              2) LISTE="$D";;
+              3) LISTE="$E";;
+            esac
           elif [ -n "${{ github.event.schedule }}" ]; then
             LISTE="$A"
           else
