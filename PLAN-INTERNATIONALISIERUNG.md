@@ -125,6 +125,15 @@ die Latenz passt. Der reale Aufwand steckt in **Sprache** und **Daten je Land**.
 
 ## 4. USA — danach
 
+> **Stand 12. August 2026: Die TECHNISCHE Anbindung ist umgesetzt** (Region
+> US wählbar, MPAA/TV-Ratings im Altersfilter, Streaming/Kino-Läufe in
+> Workflow-Gruppe D, US-Datumsformat bei englischer Oberfläche, ZIP/Kino-
+> Import vorbereitet — Details in Abschnitt 9). **Die rechtliche Klärung
+> (CCPA/CPRA, COPPA) steht weiterhin AUS** — bewusste Entscheidung, sie
+> nachzuziehen; bis dahin gilt: kein aktives US-Marketing, und die
+> Rechtstexte decken US-Nutzer noch nicht ab. Die Infrastruktur-Frage
+> (CDN/zweite Region wegen Latenz) bleibt ebenfalls offen.
+
 Technisch wie EU, aber mit **einer harten Hürde** und ein paar Zusätzen:
 
 | Baustein | Aufwand | Was konkret |
@@ -356,7 +365,13 @@ Abschnitt 5 bleibt bestehen).
   übersetzt die deutschen Hashtags bei `?lang=en` über die rückwärts gelesene
   Übersetzungstabelle (`backend/lib/schlagworte.js`); Hashtags ohne Eintrag
   bleiben deutsch (derselbe Rückfall wie bei Titeln/Plots).
-- **USA** (Abschnitt 4): unverändert offen, zuerst die Rechtsfrage.
+- **USA — nur noch die Rechts- und Betriebsfragen** (12. August 2026):
+  Technisch ist US die 31. Region (Workflow-Gruppe D, MPAA G/PG/PG-13/R/
+  NC-17 und TV-Y…TV-MA im Altersfilter, `en-US`-Datumsformat bei englischer
+  Oberfläche + US-Region, Amazon `.com`, JustWatch `us`; `import-plz.mjs US`
+  liefert ZIPs, `import-kinos.mjs` kennt Kernland/Alaska/Hawaii). Offen:
+  anwaltliche Klärung CCPA/CPRA/COPPA (Abschnitt 4) und ggf. CDN wegen
+  US-Latenz.
 - ~~Weitere EU-Länder~~ — **erledigt (12. August 2026):** Mit den Gruppen
   C/D ist die EU vollständig. Künftige Nicht-EU-Länder (z. B. Balkan,
   IS) folgen demselben Muster: `REGIONEN` in `backend/lib/i18n.js`,

@@ -85,6 +85,9 @@ const RECHTECKE = {
   LU: [[49.4, 5.7, 50.2, 6.6]],
   MT: [[35.7, 14.1, 36.2, 14.6]],
   CY: [[34.5, 32.2, 35.8, 34.7]],
+  US: [[24.4, -125.0, 49.5, -66.8],             // Kernland
+       [51.0, -170.0, 71.5, -129.9],            // Alaska
+       [18.9, -160.3, 22.3, -154.7]],           // Hawaii
 };
 
 /* Kantenlaenge einer Abfrage. Gross gewaehlt, und zwar aus Messung: Die

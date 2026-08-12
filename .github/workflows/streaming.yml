@@ -14,7 +14,7 @@ on:
   workflow_dispatch:            # erlaubt manuelles Auslösen im Actions-Tab
     inputs:
       regionen:
-        description: "Kommagetrennte Regionen (leer = alle 30)"
+        description: "Kommagetrennte Regionen (leer = alle 31)"
         required: false
         default: ""
 
@@ -28,7 +28,7 @@ concurrency:
 jobs:
   # Bestimmt, welche Regionen DIESER Lauf abarbeitet: die vier Cron-Zeitpunkte
   # arbeiten die Gruppen A-D ab, manuelles Ausloesen wahlweise eine
-  # eigene Liste oder (ohne Eingabe) alle 30. Die Liste muss zu REGIONEN in
+  # eigene Liste oder (ohne Eingabe) alle 31. Die Liste muss zu REGIONEN in
   # backend/lib/i18n.js passen.
   plan:
     runs-on: ubuntu-latest
@@ -43,8 +43,8 @@ jobs:
           A='["DE","AT","CH","GB","FR","IT","ES","NL"]'
           B='["PT","PL","DK","SE","NO","FI","BE","IE"]'
           C='["CZ","GR","HU","RO","BG","HR","SI","SK"]'
-          D='["LT","LV","EE","LU","MT","CY"]'
-          ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE","CZ","GR","HU","RO","BG","HR","SI","SK","LT","LV","EE","LU","MT","CY"]'
+          D='["LT","LV","EE","LU","MT","CY","US"]'
+          ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE","CZ","GR","HU","RO","BG","HR","SI","SK","LT","LV","EE","LU","MT","CY","US"]'
           if [ -n "$EINGABE" ]; then
             LISTE=$(echo "$EINGABE" | tr '[:lower:]' '[:upper:]' | tr -d ' ' | \
               awk -F, '{printf "["; for(i=1;i<=NF;i++){printf "%s\"%s\"", (i>1?",":""), $i}; print "]"}')

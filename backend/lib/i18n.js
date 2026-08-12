@@ -15,12 +15,14 @@
 // (Workflow-Matrix, TMDB_CERT_REGIONS, Frontend-Regionsauswahl, PLZ/Kino-
 // Importe -- siehe PLAN-INTERNATIONALISIERUNG.md Abschnitt 9). Die
 // Workflows laufen in vier Tagesgruppen (streaming.yml/cinema.yml, Job
-// "plan") -- je acht Regionen alle sechs Stunden.
+// "plan") -- je acht Regionen alle sechs Stunden. US ist technisch
+// angebunden; die rechtliche Klaerung (CCPA/COPPA) steht noch aus, siehe
+// PLAN-INTERNATIONALISIERUNG.md Abschnitt 4.
 export const REGIONEN = [
   'DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL',
   'PT', 'PL', 'DK', 'SE', 'NO', 'FI', 'BE', 'IE',
   'CZ', 'GR', 'HU', 'RO', 'BG', 'HR', 'SI', 'SK',
-  'LT', 'LV', 'EE', 'LU', 'MT', 'CY',
+  'LT', 'LV', 'EE', 'LU', 'MT', 'CY', 'US',
 ];
 
 export function sprachWahl(wert) {

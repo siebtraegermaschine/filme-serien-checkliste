@@ -1722,11 +1722,12 @@ var REGION_KEY = 'mt.region';
 // Inhalte, siehe INHALTS_SPRACHE unten.
 var SPRACHEN_VERFUEGBAR = ['de', 'en', 'fr', 'es', 'it', 'nl'];
 // Regionen mit eingespielten Daten -- muss zu REGIONEN in backend/lib/i18n.js
-// passen (30 Laender: EU komplett plus CH/GB/NO).
+// passen (EU komplett plus CH/GB/NO und US; fuer US steht die rechtliche
+// Klaerung noch aus, siehe PLAN-INTERNATIONALISIERUNG.md Abschnitt 4).
 var REGIONEN_VERFUEGBAR = ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL',
                            'PT', 'PL', 'DK', 'SE', 'NO', 'FI', 'BE', 'IE',
                            'CZ', 'GR', 'HU', 'RO', 'BG', 'HR', 'SI', 'SK',
-                           'LT', 'LV', 'EE', 'LU', 'MT', 'CY'];
+                           'LT', 'LV', 'EE', 'LU', 'MT', 'CY', 'US'];
 function sprachErmittlung(){
   try {
     var s = localStorage.getItem(SPRACHE_KEY);
@@ -1752,6 +1753,9 @@ var REGION_WAHL = regionErmittlung();
 // Datums-/Zahlenformate haengen an der Sprache: en-GB (Tag vor Monat) passt
 // zur EU-Ausrichtung besser als en-US.
 var LOCALE = ({ de: 'de-DE', en: 'en-GB', fr: 'fr-FR', es: 'es-ES', it: 'it-IT', nl: 'nl-NL' })[SPRACHE] || 'en-GB';
+// US-Region mit englischer Oberflaeche: amerikanische Datums-Schreibweise
+// (Monat vor Tag) statt der britischen.
+if (SPRACHE === 'en' && REGION_WAHL === 'US') LOCALE = 'en-US';
 document.documentElement.lang = SPRACHE;
 // Inhaltsdaten (Titel/Plots/Schlagwoerter) gibt es nur deutsch und englisch --
 // fr/es/it/nl bekommen die englischen Inhalte zur uebersetzten Oberflaeche
@@ -1981,7 +1985,7 @@ var UI_TEXTE = {
                    CZ: 'Tschechien', GR: 'Griechenland', HU: 'Ungarn', RO: 'Rumänien',
                    BG: 'Bulgarien', HR: 'Kroatien', SI: 'Slowenien', SK: 'Slowakei',
                    LT: 'Litauen', LV: 'Lettland', EE: 'Estland', LU: 'Luxemburg',
-                   MT: 'Malta', CY: 'Zypern' },
+                   MT: 'Malta', CY: 'Zypern', US: 'USA' },
   },
   en: {
     film: 'Movie', serie: 'Series', miniSerie: 'Mini-series',
@@ -2196,7 +2200,7 @@ var UI_TEXTE = {
                    CZ: 'Czechia', GR: 'Greece', HU: 'Hungary', RO: 'Romania',
                    BG: 'Bulgaria', HR: 'Croatia', SI: 'Slovenia', SK: 'Slovakia',
                    LT: 'Lithuania', LV: 'Latvia', EE: 'Estonia', LU: 'Luxembourg',
-                   MT: 'Malta', CY: 'Cyprus' },
+                   MT: 'Malta', CY: 'Cyprus', US: 'United States' },
   },
   fr: {
     film: 'Film', serie: 'Série', miniSerie: 'Mini-série',
@@ -2411,7 +2415,7 @@ var UI_TEXTE = {
                    CZ: 'Tchéquie', GR: 'Grèce', HU: 'Hongrie', RO: 'Roumanie',
                    BG: 'Bulgarie', HR: 'Croatie', SI: 'Slovénie', SK: 'Slovaquie',
                    LT: 'Lituanie', LV: 'Lettonie', EE: 'Estonie', LU: 'Luxembourg',
-                   MT: 'Malte', CY: 'Chypre' },
+                   MT: 'Malte', CY: 'Chypre', US: 'États-Unis' },
   },
   es: {
     film: 'Película', serie: 'Serie', miniSerie: 'Miniserie',
@@ -2626,7 +2630,7 @@ var UI_TEXTE = {
                    CZ: 'Chequia', GR: 'Grecia', HU: 'Hungría', RO: 'Rumanía',
                    BG: 'Bulgaria', HR: 'Croacia', SI: 'Eslovenia', SK: 'Eslovaquia',
                    LT: 'Lituania', LV: 'Letonia', EE: 'Estonia', LU: 'Luxemburgo',
-                   MT: 'Malta', CY: 'Chipre' },
+                   MT: 'Malta', CY: 'Chipre', US: 'Estados Unidos' },
   },
   it: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
@@ -2841,7 +2845,7 @@ var UI_TEXTE = {
                    CZ: 'Cechia', GR: 'Grecia', HU: 'Ungheria', RO: 'Romania',
                    BG: 'Bulgaria', HR: 'Croazia', SI: 'Slovenia', SK: 'Slovacchia',
                    LT: 'Lituania', LV: 'Lettonia', EE: 'Estonia', LU: 'Lussemburgo',
-                   MT: 'Malta', CY: 'Cipro' },
+                   MT: 'Malta', CY: 'Cipro', US: 'Stati Uniti' },
   },
   nl: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
@@ -3056,7 +3060,7 @@ var UI_TEXTE = {
                    CZ: 'Tsjechië', GR: 'Griekenland', HU: 'Hongarije', RO: 'Roemenië',
                    BG: 'Bulgarije', HR: 'Kroatië', SI: 'Slovenië', SK: 'Slowakije',
                    LT: 'Litouwen', LV: 'Letland', EE: 'Estland', LU: 'Luxemburg',
-                   MT: 'Malta', CY: 'Cyprus' },
+                   MT: 'Malta', CY: 'Cyprus', US: 'Verenigde Staten' },
   },
 };
 var TXT = UI_TEXTE[SPRACHE] || UI_TEXTE.en;
@@ -3236,6 +3240,14 @@ var FSK_SYSTEME = {
   // K = katallilo (fuer alle geeignet), wie Griechenland.
   CY: { werte: ['K', '12', '15', '18'],
         zahlen: { 'K': 0 } },
+  // MPAA (Kino) und TV Parental Guidelines (Fernsehen). PG/TV-PG zaehlen
+  // wie das britische PG als 8; PG-13 = 13, R und TV-MA = 17, NC-17 = 18.
+  // "NR"/"Unrated" bleibt bewusst draussen (fehlende Angabe).
+  US: { werte: ['G', 'PG', 'PG-13', 'R', 'NC-17',
+                'TV-Y', 'TV-Y7', 'TV-Y7-FV', 'TV-G', 'TV-PG', 'TV-14', 'TV-MA'],
+        zahlen: { 'G': 0, 'PG': 8, 'PG-13': 13, 'R': 17, 'NC-17': 18,
+                  'TV-Y': 0, 'TV-Y7': 7, 'TV-Y7-FV': 7, 'TV-G': 0,
+                  'TV-PG': 8, 'TV-14': 14, 'TV-MA': 17 } },
 };
 function fskSystem(){ return FSK_SYSTEME[REGION_WAHL] || FSK_SYSTEME.DE; }
 function freigabenGueltig(){ return fskSystem().werte; }
@@ -4357,7 +4369,7 @@ var WATCH_CATS = [
 var AMAZON_DOMAIN = ({ DE: 'de', AT: 'de', CH: 'de', GB: 'co.uk',
                        FR: 'fr', IT: 'it', ES: 'es', NL: 'nl',
                        PT: 'es', PL: 'pl', DK: 'se', SE: 'se',
-                       NO: 'se', FI: 'se', BE: 'com.be', IE: 'ie',
+                       NO: 'se', FI: 'se', BE: 'com.be', IE: 'ie', US: 'com',
                        CZ: 'de', GR: 'de', HU: 'de', RO: 'de',
                        BG: 'de', HR: 'de', SI: 'de', SK: 'de',
                        LT: 'de', LV: 'de', EE: 'de', LU: 'fr',
@@ -4365,7 +4377,7 @@ var AMAZON_DOMAIN = ({ DE: 'de', AT: 'de', CH: 'de', GB: 'co.uk',
 var RAKUTEN_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
                       FR: 'fr', IT: 'it', ES: 'es', NL: 'nl',
                       PT: 'pt', PL: 'pl', DK: 'dk', SE: 'se',
-                      NO: 'no', FI: 'fi', BE: 'be', IE: 'ie',
+                      NO: 'no', FI: 'fi', BE: 'be', IE: 'ie', US: 'us',
                       CZ: 'cz', GR: 'gr', HU: 'hu', RO: 'ro',
                       BG: 'bg', HR: 'hr', SI: 'si', SK: 'sk',
                       LT: 'lt', LV: 'lv', EE: 'ee', LU: 'lu',
@@ -4375,7 +4387,7 @@ var RAKUTEN_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
 var JUSTWATCH_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
                         FR: 'fr', IT: 'it', ES: 'es', NL: 'nl',
                         PT: 'pt', PL: 'pl', DK: 'dk', SE: 'se',
-                        NO: 'no', FI: 'fi', BE: 'be', IE: 'ie',
+                        NO: 'no', FI: 'fi', BE: 'be', IE: 'ie', US: 'us',
                         CZ: 'cz', GR: 'gr', HU: 'hu', RO: 'ro',
                         BG: 'bg', HR: 'hr', SI: 'si', SK: 'sk',
                         LT: 'lt', LV: 'lv', EE: 'ee', LU: 'lu',
