@@ -1,10 +1,14 @@
-# Offene Punkte — Stand 2026-08-11
+# Offene Punkte — Stand 2026-08-12
 
 Ergänzt `UEBERGABE-CHAT.md` (Stand 2026-08-03). Für Architektur und Auslieferung
-siehe `DEPLOYMENT.md`, für den Weg zu nativen Apps `PLAN-NATIVE-APPS.md`,
-für den bereits umgesetzten Filter-Umbau `PLAN-FILTER.md`, für den offenen
-Rechtstext zum Mailversand `ENTWURF-DATENSCHUTZ-MAIL.md`, für „Deine Kinos"
-`PLAN-KINOS.md`.
+siehe `DEPLOYMENT.md` (enthält seit dem 11. August auch den server-seitigen
+`deploy.sh` im Wortlaut), für den Weg zu nativen Apps `PLAN-NATIVE-APPS.md`,
+für den bereits umgesetzten Filter-Umbau `PLAN-FILTER.md`, für den am
+11. August übernommenen Rechtstext zum Mailversand `ENTWURF-DATENSCHUTZ-MAIL.md`,
+für „Deine Kinos" `PLAN-KINOS.md`, für die Internationalisierung (41 Regionen,
+sieben Sprachen) `PLAN-INTERNATIONALISIERUNG.md` — dessen **Abschnitt 9** ist
+der Umsetzungsstand samt der noch offenen Betriebsschritte —, und für bewusst
+zurückgestellte Ideen `IDEEN.md`.
 
 **`PLAN-OEFFENTLICHER-TEST.md` ist am 11. August abgearbeitet** — alle sieben
 Punkte umgesetzt (siehe Abschnitt 0.0). Der Plan bleibt als Beleg stehen, ist
@@ -31,7 +35,94 @@ ssh -i ~/.ssh/id_ed25519 root@movietaste.de \
 
 ---
 
-## 0.0 Was am 11. August dazukam (11 Commits)
+## 0.0.0 Was am 12. August dazukam (41 Commits)
+
+Der bisher umfangreichste Tag. Vier Blöcke: die Internationalisierung (morgens
+bis früher Nachmittag), zwei neue Funktionen (Watchlist-Import und
+Benachrichtigungs-Mails), Movie Night (Nachmittag bis Abend — gebaut und
+wieder ausgeblendet) und Umbauten an „Gemeinsam schauen".
+
+### 0.0.0.1 Internationalisierung: 41 Regionen, sieben Sprachen
+
+**Vollständig dokumentiert in `PLAN-INTERNATIONALISIERUNG.md`, Abschnitt 9** —
+das wird hier nicht wiederholt. Kurzfassung: Sprach- und Regionswahl im Menü
+(je Gerät und am Konto), Oberfläche in de/en/fr/es/it/nl/pt, Titel und
+Inhaltsangaben je Sprache aus denselben TMDB-Antworten
+(`append_to_response=translations`, keine Zusatzabrufe), Streaming- und
+Kinodaten je Region (EWR komplett plus GB/CH, dazu US/CA/AU/NZ/MX/AR/CL/CO/BR),
+Altersfreigaben je Landessystem, Workflows als Regionsgruppen (Kernmärkte
+täglich, der Rest in 4-Tage-Rotation).
+
+Was daraus als **offene Arbeit** bleibt (Details in 3.7 und 3.1):
+
+- Die einmaligen **Betriebsschritte auf dem Server** (Englisch- und
+  Freigaben-Backfill, PLZ-/Kino-Importe der neuen Länder) — ihre Erledigung
+  ist nirgends vermerkt, der Stand ist ungeprüft.
+- **Muttersprachler-Review** der maschinellen Übersetzungen (Review-Dateien
+  je Sprache liegen bei Christian).
+- **Rechtsklärung für Nicht-EWR-Länder** vor aktivem Marketing dort.
+
+Eine Nachwirkung erst am Abend gefunden (`ad3835d`): `cinema/ingest` fiel auf
+das 1-MB-Default-Limit und brach seit dem Sprachausbau mit
+`PayloadTooLargeError` ab — die Payloads tragen jetzt Übersetzungen in bis zu
+sieben Sprachen je Titel. Kino hat nun ein eigenes 20-MB-Limit, Streaming
+wuchs auf 60 MB, Discovery-Bulk auf 30 MB.
+
+### 0.0.0.2 Watchlist-Import aus Letterboxd, IMDb und Trakt (`ad8bd7b`)
+
+Neuer Einstellungen-Punkt (nur angemeldet): Exportdateien einlesen
+(Letterboxd-CSV, IMDb-Listen-CSV, Trakt-JSON), **im Browser** gegen den
+Katalog abgleichen (Titel+Jahr, auch Original- und Alias-Titel), Vorschau mit
+Fehlliste, Übernahme über die vorhandene Progress-API inklusive Bewertungen
+(Letterboxd 0,5–5 verdoppelt, IMDb/Trakt 1–10 direkt). Bewusst **ohne eigenen
+Backend-Endpunkt** — was nicht im Katalog ist, wird benannt, aber nicht
+angelegt. Parser mit Beispieldateien aller drei Formate getestet.
+
+### 0.0.0.3 Benachrichtigungen: „Watchlist-Titel jetzt verfügbar" (`766b69e`)
+
+Opt-in am Konto (`users.benachrichtigung`, Default **aus**, Schalter in den
+Einstellungen). `backend/lib/benachrichtigung.js` verschickt täglich um
+18:00 UTC eine Sammelmail je Person: Watchlist-Titel, die bei den gewählten
+Anbietern neu verfügbar sind (`first_seen_at`, Region der Person), und
+Kinostarts der Region. Die Tabelle `benachrichtigt` (je Person/Titel/Art)
+verhindert Wiederholungen; der Vermerk wird erst **nach** erfolgreichem
+Versand geschrieben. **Der Rechtstext-Nachtrag dafür steht in `IDEEN.md`**
+und gehört in die Anwaltsprüfung (siehe 3.1).
+
+### 0.0.0.4 Movie Night — gebaut, dann ausgeblendet
+
+In rund 20 Commits entstanden und iteriert. Endzustand: Ein Knopf unter
+„Gemeinsam schauen" erstellt aus den ersten 20 Titeln der **aktuellen**
+Ansicht (Filter + Sortierung) eine Abstimmungsrunde
+(`backend/routes/movieNight.js`, Tabellen `movie_night_runden` /
+`movie_night_stimmen`, bis 30 Kandidaten, 48 h Verfall) und teilt einen Link
+(`?nacht=TOKEN`). Abstimmen geht **ohne Konto** und **anonym** (das Namensfeld
+wurde wieder entfernt), per Checkbox je Titel, jeder Tipp zählt sofort,
+Zwischenstand alle 7 Sekunden, Kandidaten nach Sternen sortiert, Doppelstimmen
+per Upsert je Teilnehmer-Kennung abgefangen, Stimmabgabe mengenbegrenzt.
+
+**Derzeit ist die Funktion ausgeblendet** (`ed9a240`): `movieNightBtn` steht
+auf `display:none`, Frontend und Backend bleiben komplett verdrahtet. Zum
+Reaktivieren genügt es, das style-Attribut zu entfernen (siehe 3.8).
+
+### 0.0.0.5 „Gemeinsam schauen" und Navigation — Endzustand nach mehreren Anläufen
+
+- Ein Versuch, Herz und Verknüpfung-lösen hinter ein „…"-Menü zu legen, wurde
+  noch am selben Abend zurückgenommen (`45292de` → Revert `65eb910`). Danach
+  standen beide wieder in der Zeile hinter Match (`31c2a05`) — und zuletzt
+  fiel das **Herz komplett weg** (`da0e399`): Die Favoriten-Sortierung
+  sortierte bei einer Handvoll Verknüpfungen nichts Spürbares. Die
+  Personenliste steht jetzt in Server-Reihenfolge (Verknüpfungsdatum); die
+  alte Einschränkung „Favoriten liegen nur im Browser" ist gegenstandslos
+  (Abschnitt 6 angepasst).
+- **„Personen einladen" im Menü rechts oben ist ausgeblendet** (`0077535`,
+  `display:none`, Handler und Übersetzungen bleiben stehen). Der Knopf
+  „Watchlist teilen" unter „Gemeinsam schauen" heißt jetzt in allen sieben
+  Sprachen „Personen einladen" — gleiche Funktion wie zuvor.
+
+---
+
+## 0.0 Was am 11. August dazukam (11 + 14 Commits, siehe 0.0.5)
 
 **Der Plan für den öffentlichen Test ist vollständig abgearbeitet.** Dazu drei
 Dinge, die nicht darin standen.
@@ -95,6 +186,54 @@ Zwei Dinge stehen ausdrücklich noch aus:
 - **Dass eine gemerkte Wache-Meldung beim nächsten erfolgreichen Versand
   mitfährt.** `mailer.js` liest den Anbieter beim Laden einmal, Fehlschlag und
   Erfolg sind im selben Lauf nicht zu erzeugen.
+
+### 0.0.5 Nach dem Nachziehen der Übergabe: 14 weitere Commits am Abend
+
+Die Abschnitte 0.0.1 bis 0.0.4 beschreiben den Stand von Commit `dfd9778`.
+Danach lief am 11. August noch eine Sicherheits-Durchsicht (Opus) plus
+Korrekturen — hier nachgetragen am 12. August.
+
+**Härtung (fünf Commits):**
+
+- **Session-ID wird beim Anmelden erneuert** (`d5c373d`) — Schutz vor
+  Session-Fixation: `regenerate()` vor dem Setzen der `userId`, die alte
+  Vor-Login-Cookie ist danach ausdrücklich nicht mehr eingeloggt.
+- **Ingest-Secrets konstant-zeitig verglichen** (`71663db`, neuer Helfer
+  `backend/lib/vergleich.js`): SHA-256 beider Seiten, dann
+  `crypto.timingSafeEqual` — das Hashen gleicht zugleich die Pufferlängen an.
+- **Caddy setzt Sicherheits-Header für jede Antwort** (`ff9af39`): HSTS ein
+  Jahr (bewusst ohne `preload`), `X-Frame-Options: DENY` plus CSP
+  `frame-ancestors 'none'` (der CSP-Header enthält **nur** diese Regel und
+  berührt das Inline-Skript nicht), `nosniff`, `Referrer-Policy` (der
+  Reset-Token leckt nicht über den Referer), Server-Header entfernt.
+- **Rate-Limit auch für die öffentlichen Lese-Endpunkte** (`b856238`):
+  `plots` 240/min, `kinos/orte`, `kinos`, `share/title`, `/t/…`, `share/qr`
+  je 120/min je IP. `/api/titles` und `/api/streaming` bleiben bewusst
+  ungedeckelt — sie laufen über den `listenCache` und treffen im Normalfall
+  die Datenbank gar nicht.
+- **`/api/search-log` bekommt ein IP-Limit** (`c5fb671`): 60 je Stunde — der
+  anonyme Schreibpfad ließ sich vorher unbegrenzt vollschreiben.
+
+**Korrekturen:**
+
+- **Fremde Kino-Liste: Wischen blendet nicht mehr aus** (`df15578`).
+  `darfAusblenden` prüft jetzt zusätzlich `!personenAnsicht()` — damit ist
+  die dritte Ungereimtheit aus 3.5 erledigt. In sechs Zuständen gegengeprüft:
+  nur die eigenen Ansichten erlauben weiterhin das Ausblenden.
+- **Geteilter Titel zeigte den falschen Status** (`9dcad2b`): Das Popup
+  zeichnete Watchlist/Gesehen, bevor `PROGRESS` geladen war — der erste Klick
+  tat deshalb das Gegenteil des Angezeigten. Jetzt wartet
+  `zeigeGeteiltenTitel` auf `STARTLADUNG`. Dazu ein neuer Knopf „Trailer
+  ansehen" über die volle Breite, der auch ohne Konto funktioniert.
+- **„Personen einladen" funktioniert ausgeloggt** (`859be0b`) — teilt dann
+  den blanken App-Link ohne `?ref=`-Token. „Watchlist teilen" bleibt
+  ausgeloggt bewusst gesperrt (dabei werden zwei Konten verknüpft).
+
+**Dokumentation:** `DEPLOYMENT.md` enthält jetzt den server-seitigen
+`deploy.sh` im Wortlaut (`eaeb143`) — der lag vorher nur auf dem Server und
+hatte über einen veralteten Single-File-Mount schon einen stillen
+Caddy-Fehler verursacht. Außerdem entstand `PLAN-INTERNATIONALISIERUNG.md`
+(`3dfaac8`), der Arbeitsauftrag für den 12. August.
 
 ---
 
@@ -496,74 +635,42 @@ Die Liste vom 7. August („Uneinheitliches in der Bedienung") ist durch den
 Filter-Umbau vom 9. August weitgehend erledigt. Was davon übrig blieb, steht
 unten mit dabei.
 
-### 3.1 Abschnitt 6 der Datenschutzerklärung — vor Go-Live
+### 3.1 Rechtstexte — nur noch die anwaltliche Prüfung
 
-**Der Serverstandort ist am 10. August erledigt** (`2dd9f2c`). Ermittelt statt
-geschätzt: IP `167.233.54.20`, RIPE-Netz `CLOUD-FSN1` (country `DE`), Hostname
-`ubuntu-2gb-fsn1-1`, Rechenzentrum `fsn1-dc14` — **Falkenstein, Sachsen**, nicht
-Finnland. Abschnitt 5 nennt jetzt Standort und Anschrift und stellt fest, dass die
-Verarbeitung die EU nicht verlässt.
+**Abschnitt 6 (E-Mail-Versand) ist seit dem 11. August geschrieben**
+(`682ab97`, nach dem Entwurf aus `ENTWURF-DATENSCHUTZ-MAIL.md`): Resend
+namentlich genannt, USA-Übermittlung mit DPF-Status belegt (siehe 0.0.2),
+Feedback vollständig beschrieben. Der Serverstandort steht seit dem 10. August
+in Abschnitt 5 (Falkenstein, ermittelt statt geschätzt).
 
-Offen bleibt **Abschnitt 6 (E-Mail-Versand)**, und zwar in drei Punkten. Der
-fertige Text dafür liegt in `ENTWURF-DATENSCHUTZ-MAIL.md`, samt der Ergänzungen
-für die Abschnitte 2, 3 und 10 — bewusst **neben** dem Rechtstext, nicht darin.
+Offen ist allein die **Prüfung durch eine Anwältin oder einen Anwalt**,
+ausdrücklich vertagt (Entscheidung 4 des Test-Plans). Sinnvollerweise als
+**ein** Sammelauftrag, denn die Liste ist seit dem 12. August gewachsen:
 
-- **Der Anbieter ist nicht genannt.** Es steht „einen externen
-  Versanddienstleister". Bestätigt auf dem Server: `MAIL_PROVIDER=resend`,
-  Versand über `api.resend.com`. Wer den Namen einträgt, muss zugleich die
-  Übermittlung in die USA und den AV-Vertrag beschreiben — Aussagen über
-  Verträge, die von Hand entschieden gehören. Deshalb Platzhalter im Entwurf.
-- **Genannt, existiert aber nicht:** „Registrierungs-E-Mails". Im Code gibt es
-  nur `sendPasswordResetMail` — bei der Registrierung geht keine Mail raus.
-- **Existiert, ist aber nirgends genannt: die Feedback-Mails.** Sie laufen
-  ebenfalls über Resend und enthalten bis zu **5.000 Zeichen Freitext** plus,
-  bei angemeldeten Personen, die **E-Mail-Adresse des Kontos**; Empfänger ist
-  `info@digital-wings.com`. Das Wort „Feedback" kommt in `datenschutz.html`
-  **überhaupt nicht** vor — auch nicht in Abschnitt 2, 3 oder 10. Das wiegt
-  schwerer als die fehlende Anbieternennung: Hier ist eine ganze Verarbeitung
-  nicht beschrieben.
+- `datenschutz.html` komplett — inklusive Abschnitt 6 und des als Entwurf
+  entstandenen Abschnitts 9 (kommerzielle Verwertung) — und `impressum.html`.
+- Die **englischen Arbeitsfassungen** `imprint.html`/`terms.html`/
+  `privacy.html` (seit dem 12. August bei Sprache EN verlinkt; jede trägt den
+  Hinweis, dass die deutsche Fassung maßgeblich ist).
+- Der **Nachtrag zu den Benachrichtigungs-Mails** (siehe 0.0.0.3, Text in
+  `IDEEN.md`).
+- Die **Nicht-EWR-Frage**: USA (CCPA/CPRA/COPPA), dazu CA/AU/NZ/MX/AR/CL/CO/BR
+  mit ihren nationalen Gesetzen — bis zur Klärung kein aktives Marketing
+  außerhalb des EWR (`PLAN-INTERNATIONALISIERUNG.md`, Abschnitt 4).
 
-Ebenfalls weiter offen: `impressum.html` rechtlich prüfen, dazu Abschnitt 9 der
-Datenschutzerklärung (kommerzielle Verwertung), der als Entwurf entstanden ist.
-Sinnvollerweise in **einem** Durchgang mit Abschnitt 6, statt zweimal zu fragen.
+### 3.2 Englische Titel durchsuchbar — am 12. August umgesetzt, anders als geplant
 
-### 3.2 Englische Titel durchsuchbar machen — entschieden, aber nicht gebaut
+Der hier zuvor beschriebene Einzelplan (Spalte `title_en`, wortgenaue Suche)
+ist in der Internationalisierung aufgegangen: `title_en` kommt seither aus den
+Fetch-Skripten über `append_to_response=translations` (keine Zusatzabrufe),
+und die Suche findet anderssprachige Titel über `titleAlt` (`63e5933`) — der
+englische Titel für die deutsche Oberfläche und umgekehrt, nur wenn
+abweichend, in den Suchvorschlägen als „Alternativtitel".
 
-**Der Nutzen ist gemessen, die Umsetzung steht aus.** Wer einen Film unter
-seinem englischen Namen kennt, findet ihn heute nicht.
-
-- **57 %** der Titel heißen auf Englisch anders (an 150 und an 2.000 zufälligen
-  Titeln gemessen) — rund **15.000 Titel**.
-- Die 188 echten Suchbegriffe aus `search_queries` sind **überwiegend englisch**
-  (`unfamiliar`, `heat`, `will smith`, `hangover`, `rush hour`, `avengers`).
-- Einige Serien stehen mit koreanischem oder japanischem Titel im Bestand
-  (`로맨스는 별책부록`) und sind derzeit praktisch unauffindbar.
-
-In der Datenbank steht es **nicht**: `original_title` ist nur bei **165 von
-26.869** Titeln gefüllt und enthält obendrein den Originaltitel (`아가씨`), nicht
-den englischen. TMDB liefert ihn unter `language=en-US`.
-
-**Empfohlene Umsetzung (gemessen, nicht geschätzt):** Spalte `title_en`,
-Backfill über ~27.000 TMDB-Abrufe (**~77 Minuten**), Anbindung an die Suche,
-und der tägliche Job muss es für neue Titel mitschreiben (sonst wächst die Lücke
-wieder).
-
-Entscheidend ist **wie** gesucht wird — das war gemessen worden:
-
-| englischer Titel … | Begriffe mit Zusatztreffern | Zusatztreffer je 2.000 Titel |
-|---|---|---|
-| als Teilstring (wie der Titel heute) | 30 von 188 | **230** |
-| **wortgenau** (wie Besetzung/Regie heute) | 10 von 188 | **13** |
-
-Wortgenau, denn die 13 sind fast alle berechtigt (`crime` → „True Crime",
-`rush` → „The Gold Rush"). Als Teilstring entsteht Unsinn: `mil` träfe „In the
-**Fam**i**l**y", `ar` allein 82 Zusatztreffer. Der Preis: Beim Tippen greift es
-erst bei fertigem Wort — das fängt die Vorschlagsliste ab (dort als eigene Art
-„Englischer Titel", nur wenn er sich deutlich vom deutschen unterscheidet, sonst
-stünden zwei Vorschläge für denselben Film).
-
-Abgespeckte Variante, falls 27.000 Abrufe zu viel sind: nur die ~5.000
-meistbewerteten Titel (~15 Min.), später aufstocken.
+**Für den Bestand greift das erst nach dem Englisch-Backfill** — dessen
+Erledigung ist ungeprüft, siehe 3.7. Die Messwerte des alten Plans (57 % der
+Titel heißen englisch anders, wortgenau statt Teilstring) stehen in der
+Git-Historie dieser Datei, falls sie wieder gebraucht werden.
 
 ### 3.3 Match filtert im Kino nicht — ausdrücklich so gewollt
 
@@ -607,13 +714,11 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 - **Ein Leerzustand behauptet etwas Falsches.** Fremde Liste + eigener
   Streaming-Filter ohne Treffer → „Pete hat hier nichts markiert." Falsch — Pete
   hat fünf Titel, der Anbieterfilter hat sie weggenommen.
-- **Wischen in einer fremden Kino-Liste blendet den Titel für einen selbst aus.**
-  `darfAusblenden` in `poolItemLi` prüft `discoverFilterOn || cinemaMode`; in
-  einer fremden Liste greift `cinemaMode`. Unter Filme/Serien ist es dort schon
-  gesperrt.
-- **Zwei Zahlen für dasselbe:** Die leere Watchliste sagt „mind. **20** Titel",
-  der Einstieg sagt „ab **10** gespeicherten Titeln", `effectiveSort` schaltet
-  bei **10** um.
+- **Zwei Schwellen für dasselbe:** Die Texte nennen inzwischen einheitlich
+  **20** Titel (`4621a26` hat die Anleitung angepasst), aber `effectiveSort`
+  schaltet weiterhin bei **10** markierten Titeln auf den Taste-Score um. Kein
+  Widerspruch mehr im Wortlaut, doch die Zahl im Text und die Schwelle im Code
+  sind verschiedene Werte.
 - **„Neue entdecken" ist in fremden Listen ausgegraut** — richtig so, aber es
   steht nirgends warum.
 
@@ -643,15 +748,70 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
   Besetzung (21 %), Poster-Pfaden (13 %) und Genres (11 %) — Base64 kommt darin
   nicht mehr vor. Wer die Auslieferung kleiner machen will, fängt bei der
   Besetzung an, nicht bei den Bildern.
+- **Wischen in einer fremden Kino-Liste blendete den Titel für einen selbst
+  aus** → **behoben** am 11. August (`df15578`, siehe 0.0.5).
+- **Geteilter Titel zeigte den falschen Status** (erster Klick tat das
+  Gegenteil) → **behoben** am 11. August (`9dcad2b`, siehe 0.0.5).
+- **Englische Titel waren nicht durchsuchbar** → **umgesetzt** am 12. August
+  über die Internationalisierung (siehe 3.2); für den Bestand hängt es noch
+  am Backfill (3.7).
+
+### 3.7 Betriebsschritte der Internationalisierung — Stand ungeprüft
+
+`PLAN-INTERNATIONALISIERUNG.md`, Abschnitt 9, listet einmalige Schritte, die
+**auf dem Server** laufen müssen. Ob sie schon gelaufen sind, ist nirgends
+vermerkt — **vor dem Abarbeiten also erst auf dem Server nachsehen** (etwa:
+wie viele `titles` haben `title_en`? Gibt es PLZ-/Kino-Zeilen für AT und die
+neuen Länder?). Die Schritte:
+
+1. **Englisch-Backfill für den Bestand**: `backend/scripts/backfill-english.mjs`
+   (~27.000 TMDB-Abrufe, mehrere Stunden, abbrechbar/fortsetzbar — erst mit
+   `--limit=500` probelaufen). Bis dahin fällt die App bei EN und den anderen
+   Sprachen auf deutsche Titel/Plots zurück; nichts bricht.
+2. **Freigaben-Backfill**: dasselbe Skript mit `--nur-freigaben` — ergänzt die
+   Altersfreigaben der neuen Länder auf dem ganzen Bestand. Bis dahin blendet
+   der Familienfilter dort im Zweifel aus statt ein.
+3. **PLZ- und Kino-Importe** für AT und die 38 weiteren Länder
+   (`import-plz.mjs`, `import-kinos.mjs` — die vollständigen Befehlszeilen
+   stehen im Plan). Overpass braucht bei US/CA/AU deutlich länger; GR hat
+   keinen GeoNames-Abzug und wird übersprungen (`63e5933`).
+4. Die **Workflows** befüllen die Regionen von selbst — dort ist nichts zu tun.
+
+### 3.8 Zwei ausgeblendete Funktionen warten auf eine Entscheidung
+
+Beide sind fertig gebaut und nur per `display:none` unsichtbar; Handler,
+Routen und Übersetzungen stehen bereit:
+
+- **Movie Night** (`ed9a240`, siehe 0.0.0.4) — inklusive Backend-Routen und
+  Tabellen. Die Tabellen entstehen beim Deploy mit; es sammelt sich dort
+  nichts an, solange der Knopf unsichtbar ist.
+- **„Personen einladen" im Menü rechts oben** (`0077535`, siehe 0.0.0.5) —
+  der Referral-Weg mit `?ref=`-Token. Solange er unsichtbar ist, wird
+  `users.invited_by_user_id` bei Neuregistrierungen kaum noch gefüllt.
+
+Wer eine der beiden reaktiviert, sollte danach die Tour-Screenshots prüfen
+(3.9).
+
+### 3.9 Übersetzungen und Tour-Screenshots
+
+- **Muttersprachler-Review**: Die Oberflächentexte in fr/es/it/nl/pt sind
+  maschinell erstellt und nicht muttersprachlich geprüft. Je Sprache liegt
+  eine Review-Datei (alle Texte mit englischer Referenz nebeneinander) bei
+  Christian für die Durchsicht.
+- **Die Tour-Screenshots (`tour/*.png`) sind wieder veraltet.** Sie wurden am
+  11. August neu erzeugt — seither kamen das Sprach-/Regionsmenü, neue
+  Einstellungen-Punkte (Import, Benachrichtigungen), der Umbau bei „Gemeinsam
+  schauen" und die Umbenennung „Watchlist teilen" → „Personen einladen" dazu.
+  Entschieden ist, sie erst zu aktualisieren, **wenn die Oberflächen-Änderungen
+  durch sind** — dieser Punkt hält fest, dass es dann wirklich passieren muss.
 
 ## 4. Offen aus früheren Sitzungen
 
 ### Rechtliches, vor Go-Live bzw. App Store
 
 - ~~Abschnitt 6 von `datenschutz.html`~~ — **am 11. August geschrieben**
-  (siehe 0.0.2). Offen bleibt allein die **Prüfung durch eine Anwältin oder
-  einen Anwalt**, ausdrücklich vertagt (Entscheidung 4 des Plans); das gilt auch
-  für `impressum.html` und Abschnitt 9.
+  (siehe 0.0.2). Offen bleibt allein die **anwaltliche Prüfung** — deren
+  Umfang ist seit dem 12. August gewachsen und steht vollständig in 3.1.
 - Privacy Nutrition Labels und Altersfreigabe im Store-Formular; Konten
   (Apple 99 $/Jahr, Google 25 $ einmalig).
 
@@ -666,7 +826,10 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
 - **Einladungen lassen sich nicht zurückziehen**, und Links gelten für beliebig
   viele Personen. Eine Liste der offenen Einladungen mit Schließen-Knopf wäre der
   nächste Schritt.
-- **`users.invited_by_user_id`** wird gefüllt, aber nirgends angezeigt.
+- **`users.invited_by_user_id`** wird gefüllt, aber nirgends gelesen oder
+  angezeigt. Seit dem 11. August teilt der ausgeloggte Einladungsweg ohnehin
+  ohne `?ref=`-Token (`859be0b`), und der Navi-Einstieg ist seit dem
+  12. August ausgeblendet (siehe 3.8) — die Spalte wächst also kaum noch.
 - **Community-Bewertung fließt gar nicht in den Taste-Score** ein. Offen, ob sie
   in anderer Form zurück soll (Idee: Dämpfung nur am unteren Ende).
 - **Aktionszeile bei 320px** bricht auf vier Zeilen um; nur über eine kürzere
@@ -754,7 +917,9 @@ Man ist dabei abgemeldet — angemeldete Fälle lassen sich nachstellen, indem m
 
 ## 6. Bekannte Einschränkungen
 
-- **Favoriten in der Personenliste** liegen nur im Browser, gelten also je Gerät.
+- ~~Favoriten in der Personenliste liegen nur im Browser~~ — **gegenstandslos**
+  seit dem 12. August: Das Herz ist komplett entfernt (`da0e399`), die
+  Personenliste steht in Server-Reihenfolge (Verknüpfungsdatum).
 - **Match im Kino** filtert nicht, sondern sortiert um (siehe 3.3).
 - **Manuelle Sortierung verfällt nach 24 Stunden** (`SORT_MANUAL_MAX_AGE_MS`) und
   wird bei Login/Logout sowie beim Logo-Klick zurückgesetzt. Seit dem 9. August
