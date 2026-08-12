@@ -2,26 +2,60 @@ name: Kino-Daten aktualisieren
 
 on:
   schedule:
-    # Taeglich um 04:30 UTC, kurz nach dem Streaming-Import (0 4 * * *) --
-    # Kinostarts aendern sich taeglich, daher taeglicher statt zweitaeglicher Lauf.
+    # Zwei Laeufe je Tag, je acht Regionen -- gleiches Muster wie
+    # streaming.yml (Job "plan"), jeweils 30 Minuten nach dem Streaming-Cron.
     - cron: "30 4 * * *"
+    - cron: "30 16 * * *"
   workflow_dispatch:            # erlaubt manuelles Ausloesen im Actions-Tab
+    inputs:
+      regionen:
+        description: "Kommagetrennte Regionen (leer = alle 16)"
+        required: false
+        default: ""
 
 concurrency:
   group: cinema-update
   cancel-in-progress: false
 
 jobs:
+  # Siehe streaming.yml: 04:30-Cron -> Gruppe A, 16:30-Cron -> Gruppe B,
+  # manuell wahlweise eigene Liste oder alle 16.
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      regionen: ${{ steps.wahl.outputs.regionen }}
+    steps:
+      - name: Regionen dieses Laufs bestimmen
+        id: wahl
+        env:
+          EINGABE: ${{ github.event.inputs.regionen }}
+        run: |
+          A='["DE","AT","CH","GB","FR","IT","ES","NL"]'
+          B='["PT","PL","DK","SE","NO","FI","BE","IE"]'
+          ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE"]'
+          if [ -n "$EINGABE" ]; then
+            LISTE=$(echo "$EINGABE" | tr '[:lower:]' '[:upper:]' | tr -d ' ' | \
+              awk -F, '{printf "["; for(i=1;i<=NF;i++){printf "%s\"%s\"", (i>1?",":""), $i}; print "]"}')
+          elif [ "${{ github.event.schedule }}" = "30 16 * * *" ]; then
+            LISTE="$B"
+          elif [ -n "${{ github.event.schedule }}" ]; then
+            LISTE="$A"
+          else
+            LISTE="$ALLE"
+          fi
+          echo "regionen=$LISTE" >> "$GITHUB_OUTPUT"
+          echo "Dieser Lauf: $LISTE"
+
   update:
+    needs: plan
     runs-on: ubuntu-latest
     timeout-minutes: 240
     # Ein Lauf je Region -- nacheinander, wegen des TMDB-Rate-Limits (siehe
-    # streaming.yml, dort auch der Hinweis zur Gesamtlaufzeit bei acht
-    # Regionen).
+    # streaming.yml).
     strategy:
       max-parallel: 1
       matrix:
-        region: ["DE", "AT", "CH", "GB", "FR", "IT", "ES", "NL"]
+        region: ${{ fromJSON(needs.plan.outputs.regionen) }}
     steps:
       - name: Repo auschecken
         uses: actions/checkout@v4

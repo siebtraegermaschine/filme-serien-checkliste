@@ -271,20 +271,28 @@ Workflows; Freigabensystem AT (0/6/8/10/12/14/16) im Frontend-Filter;
 
 **Sechs weitere Länder nach der Blaupause (12. August 2026):** CH, GB, FR,
 IT, ES und NL sind an allen Blaupausen-Stellen angebunden — `REGIONEN` in
-`backend/lib/i18n.js`, Workflow-Matrix in `streaming.yml`/`cinema.yml`
-(acht Regionen nacheinander; wird die Gesamtlaufzeit zum Problem, die
-Regionen auf mehrere Cron-Zeitpunkte verteilen), `TMDB_CERT_REGIONS`-Default
-in den vier Fetch-/Backfill-Skripten, Regionsauswahl und
-`regionErmittlung()` im Frontend sowie Bounding-Boxen in `import-kinos.mjs`
-(Spanien mit zwei Rechtecken, damit die Kanaren mitkommen; die französischen
-Übersee-Gebiete bewusst nicht). Die Oberfläche bleibt Deutsch/Englisch —
-Sprache und Region sind getrennt wählbar, weitere Sprachen folgen
-schrittweise. Zwei Besonderheiten:
+`backend/lib/i18n.js`, Workflow-Matrix in `streaming.yml`/`cinema.yml`,
+`TMDB_CERT_REGIONS`-Default in den vier Fetch-/Backfill-Skripten,
+Regionsauswahl und `regionErmittlung()` im Frontend sowie Bounding-Boxen in
+`import-kinos.mjs` (Spanien mit zwei Rechtecken, damit die Kanaren
+mitkommen; die französischen Übersee-Gebiete bewusst nicht).
+
+**Acht weitere Länder, zweite Gruppe (ebenfalls 12. August 2026):** PT, PL,
+DK, SE, NO, FI, BE und IE nach demselben Muster — damit sind 16 Regionen
+angebunden und West-/Nordeuropa ist abgedeckt. Die Workflows laufen deshalb
+in **zwei Tagesgruppen** (`streaming.yml`/`cinema.yml`, Job `plan`):
+04:00/04:30 UTC die erste Acht (DE…NL), 16:00/16:30 UTC die zweite
+(PT…IE) — eine Kette aller 16 könnte sonst länger als ein Tag dauern.
+Manuelles Auslösen nimmt wahlweise eine eigene Regionsliste entgegen (Feld
+`regionen`) oder arbeitet ohne Eingabe alle 16 ab. Die Sprach-/Regionswahl
+im Menü ist wegen der 16 Einträge ein Aufklappmenü (alphabetisch in der
+jeweiligen Sprache) statt einer Knopfleiste. Besonderheiten:
 - **Altersfilter:** `FSK_SYSTEME` führt je Land die belegten Stufen und für
   Buchstaben-Systeme ein Mapping auf das Mindestalter (`freigabeZahl()`):
   GB U/PG/12A (PG zählt als 8, also „bis 12"), FR U/TP, IT T/6+/VM14/VM18,
-  ES APTA/TP/A, NL AL. Reine Erwachsenen-Sonderstufen (GB R18, ES X) gelten
-  bewusst als fehlende Angabe. Fällt ein Titel mangels Landeswert auf die
+  ES APTA/TP/A, NL AL, PT T/M/x, DK A/F, SE Btl, NO A, FI S/K-x, BE
+  AL/KT/KNT, IE G/GA/PG/12A/15A/MA. Reine Erwachsenen-Sonderstufen (GB R18,
+  ES X) gelten bewusst als fehlende Angabe. Fällt ein Titel mangels Landeswert auf die
   DE-Freigabe zurück und passt die nicht ins Landessystem, gilt sie als
   fehlende Angabe — der Familienfilter bleibt so auf der sicheren Seite,
   bis der Freigaben-Backfill (unten) gelaufen ist.
@@ -316,20 +324,23 @@ Abschnitt 5 bleibt bestehen).
    schon; sie mussten nur nie laufen).
 4. **Workflows:** Nächster planmäßiger Lauf von `streaming.yml`/`cinema.yml`
    befüllt alle Regionen der Matrix automatisch. Nichts zu tun.
-5. **Kino-Orte der sechs neuen Länder** (auf dem Server, im
+5. **Kino-Orte der 14 neuen Länder** (auf dem Server, im
    Backend-Verzeichnis):
-   `node scripts/import-plz.mjs CH GB FR IT ES NL` und danach
-   `node scripts/import-kinos.mjs --laender=CH,GB,FR,IT,ES,NL`
-   (Overpass-Läufe dauern je Land einige Minuten; GeoNames deckt alle sechs
-   ab, GB allerdings nur mit den „outward codes" der Postleitzahlen).
+   `node scripts/import-plz.mjs CH GB FR IT ES NL PT PL DK SE NO FI BE IE`
+   und danach
+   `node scripts/import-kinos.mjs --laender=CH,GB,FR,IT,ES,NL,PT,PL,DK,SE,NO,FI,BE,IE`
+   (Overpass-Läufe dauern je Land einige Minuten; GeoNames deckt alle ab,
+   GB allerdings nur mit den „outward codes" der Postleitzahlen).
 6. **Freigaben-Backfill für den Bestand** (~27.000 TMDB-Abrufe, mehrere
    Stunden, abbrechbar/fortsetzbar — erst mit `--limit=500` probelaufen):
    `cd backend && TMDB_API_KEY=... node scripts/backfill-english.mjs --nur-freigaben`
    Der normale Lauf überspringt Zeilen, die schon `title_en` haben — dieser
    Modus ergänzt deshalb gezielt die Freigaben der neuen Länder auf dem
-   ganzen Bestand. Bis dahin fallen Bestandstitel auf den DE-Wert zurück
-   (siehe `freigabeFuer`); der Familienfilter blendet im Zweifel aus statt
-   ein.
+   ganzen Bestand; er fasst alle Zeilen an, denen noch mindestens eines der
+   16 Länder im `certifications`-JSONB fehlt (ein früherer Lauf mit weniger
+   Ländern wird also automatisch nachgezogen). Bis dahin fallen
+   Bestandstitel auf den DE-Wert zurück (siehe `freigabeFuer`); der
+   Familienfilter blendet im Zweifel aus statt ein.
 
 ### Was bewusst offen bleibt
 
@@ -338,12 +349,14 @@ Abschnitt 5 bleibt bestehen).
   Übersetzungstabelle (`backend/lib/schlagworte.js`); Hashtags ohne Eintrag
   bleiben deutsch (derselbe Rückfall wie bei Titeln/Plots).
 - **USA** (Abschnitt 4): unverändert offen, zuerst die Rechtsfrage.
-- **Weitere EU-Länder** (PT, PL, Skandinavien …): je Land nur noch
-  `REGIONEN` in `backend/lib/i18n.js`, Workflow-Matrix,
-  `FSK_SYSTEME`/Regionsauswahl im Frontend, `TMDB_CERT_REGIONS`-Defaults,
-  Bounding-Box in `import-kinos.mjs` und die beiden Importe (PLZ/Kinos)
-  ergänzen — Muster siehe CH/GB/FR/IT/ES/NL oben. Für Buchstaben-Freigaben
-  (PT: M/x) das `zahlen`-Mapping in `FSK_SYSTEME` mitliefern.
+- **Weitere EU-Länder** (CZ, GR, HU, RO, Baltikum …): je Land nur noch
+  `REGIONEN` in `backend/lib/i18n.js`, Regionsgruppe im `plan`-Job der
+  Workflows, `FSK_SYSTEME`/Regionsauswahl/Domain-Zuordnungen im Frontend,
+  `TMDB_CERT_REGIONS`-Defaults, Bounding-Box in `import-kinos.mjs` und die
+  beiden Importe (PLZ/Kinos) ergänzen — Muster siehe die 16 angebundenen
+  Länder oben. Für Buchstaben-Freigaben das `zahlen`-Mapping in
+  `FSK_SYSTEME` mitliefern. Ab der dritten Regionsgruppe braucht es einen
+  weiteren Cron-Zeitpunkt.
 - ~~Weitere UI-Sprachen~~ — **erledigt (12. August 2026):** Französisch,
   Spanisch, Italienisch und Niederländisch als Oberflächensprachen
   (`UI_TEXTE`, `MARKUP_TEXTE`, `INFO_TEXT_*` je Sprache; Sprachmodal mit

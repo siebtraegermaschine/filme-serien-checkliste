@@ -11,10 +11,15 @@
  */
 
 // Regionen, fuer die tatsaechlich Daten eingespielt werden. AT war die
-// EU-Blaupause; CH/GB/FR/IT/ES/NL sind nach demselben Muster angebunden
+// EU-Blaupause; alle weiteren sind nach demselben Muster angebunden
 // (Workflow-Matrix, TMDB_CERT_REGIONS, Frontend-Regionsauswahl, PLZ/Kino-
-// Importe -- siehe PLAN-INTERNATIONALISIERUNG.md Abschnitt 9).
-export const REGIONEN = ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL'];
+// Importe -- siehe PLAN-INTERNATIONALISIERUNG.md Abschnitt 9). Die
+// Workflows laufen in zwei Gruppen (streaming.yml/cinema.yml): erst die
+// erste Haelfte, zwoelf Stunden spaeter die zweite.
+export const REGIONEN = [
+  'DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL',
+  'PT', 'PL', 'DK', 'SE', 'NO', 'FI', 'BE', 'IE',
+];
 
 export function sprachWahl(wert) {
   return wert === 'en' ? 'en' : 'de';

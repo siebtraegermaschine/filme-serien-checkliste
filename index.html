@@ -920,6 +920,11 @@
   @media (hover: hover) { .profile-add.gesperrt:hover { border-color:var(--border); color:var(--text-dim); } }
   .profile-empty { color:var(--text-dim); font-size:13px; padding:10px 8px; }
   .fsk-row { display:flex; flex-wrap:wrap; gap:8px; }
+  /* Sprach-/Regionswahl: Aufklappmenues statt Knopfreihen -- bei sechs
+     Sprachen und sechzehn Regionen wuerde eine Knopfleiste zu lang. */
+  .lang-select { width:100%; background:var(--card); color:var(--text); border:1px solid var(--border);
+    border-radius:10px; padding:10px 12px; font:inherit; font-size:15px; cursor:pointer; }
+  .lang-select:focus { outline:none; border-color:var(--accent); }
   .fsk-row button { flex:1 1 0; min-width:74px; background:var(--card); border:1px solid var(--border);
     border-radius:8px; padding:9px 6px; color:var(--text-dim); font-size:13px; font-weight:600;
     cursor:pointer; transition:all .15s; }
@@ -1529,18 +1534,18 @@
   </div>
 </div>
 
-<!-- Sprache & Region. Zwei Reihen aus Knoepfen (wie die FSK-Stufen), Wechsel
-     speichert und laedt neu -- siehe sprachWahlSpeichern. Die Beschriftungen
-     stehen zweisprachig fest im JS (sprachModalEinrichten), damit das Fenster
-     in jeder Ausgangssprache verstaendlich ist. -->
+<!-- Sprache & Region. Zwei Aufklappmenues (bei sechs Sprachen und sechzehn
+     Regionen wuerden Knopfreihen zu lang), Wechsel speichert und laedt neu --
+     siehe sprachWahlSpeichern. Gefuellt im JS (sprachModalEinrichten): die
+     Sprachen mit ihren eigenen Namen, die Regionen in der aktuellen Sprache. -->
 <div id="langModal" class="modal-overlay" style="display:none">
   <div class="modal">
     <button class="modal-x" id="langModalX" aria-label="Schließen">✕</button>
     <h3 id="langModalTitel">Sprache &amp; Region</h3>
     <p class="prov-intro" id="langSpracheLabel">Sprache / Language</p>
-    <div class="fsk-row" id="langSpracheRow"></div>
+    <select class="lang-select" id="langSpracheSelect" aria-labelledby="langSpracheLabel"></select>
     <p class="prov-intro" style="margin-top:14px" id="langRegionLabel">Region</p>
-    <div class="fsk-row" id="langRegionRow"></div>
+    <select class="lang-select" id="langRegionSelect" aria-labelledby="langRegionLabel"></select>
     <p class="feedback-hinweis" id="langHinweis"></p>
   </div>
 </div>
@@ -1735,7 +1740,8 @@ function regionErmittlung(){
   // Daten eingespielt werden.
   var m = String(navigator.language || '').match(/-([A-Za-z]{2})$/);
   var r2 = m ? m[1].toUpperCase() : 'DE';
-  return ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL'].indexOf(r2) !== -1 ? r2 : 'DE';
+  return ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL',
+          'PT', 'PL', 'DK', 'SE', 'NO', 'FI', 'BE', 'IE'].indexOf(r2) !== -1 ? r2 : 'DE';
 }
 var SPRACHE = sprachErmittlung();
 var REGION_WAHL = regionErmittlung();
@@ -1966,7 +1972,9 @@ var UI_TEXTE = {
     sprachMenue: 'Sprache & Region',
     sprachHinweis: 'Änderungen gelten sofort; die Seite lädt dabei neu.',
     regionNamen: { DE: 'Deutschland', AT: 'Österreich', CH: 'Schweiz', GB: 'Großbritannien',
-                   FR: 'Frankreich', IT: 'Italien', ES: 'Spanien', NL: 'Niederlande' },
+                   FR: 'Frankreich', IT: 'Italien', ES: 'Spanien', NL: 'Niederlande',
+                   PT: 'Portugal', PL: 'Polen', DK: 'Dänemark', SE: 'Schweden',
+                   NO: 'Norwegen', FI: 'Finnland', BE: 'Belgien', IE: 'Irland' },
   },
   en: {
     film: 'Movie', serie: 'Series', miniSerie: 'Mini-series',
@@ -2176,7 +2184,9 @@ var UI_TEXTE = {
     sprachMenue: 'Language & region',
     sprachHinweis: 'Changes are applied immediately; the page reloads.',
     regionNamen: { DE: 'Germany', AT: 'Austria', CH: 'Switzerland', GB: 'United Kingdom',
-                   FR: 'France', IT: 'Italy', ES: 'Spain', NL: 'Netherlands' },
+                   FR: 'France', IT: 'Italy', ES: 'Spain', NL: 'Netherlands',
+                   PT: 'Portugal', PL: 'Poland', DK: 'Denmark', SE: 'Sweden',
+                   NO: 'Norway', FI: 'Finland', BE: 'Belgium', IE: 'Ireland' },
   },
   fr: {
     film: 'Film', serie: 'Série', miniSerie: 'Mini-série',
@@ -2386,7 +2396,9 @@ var UI_TEXTE = {
     sprachMenue: 'Langue et région',
     sprachHinweis: 'Les changements s’appliquent immédiatement ; la page se recharge.',
     regionNamen: { DE: 'Allemagne', AT: 'Autriche', CH: 'Suisse', GB: 'Royaume-Uni',
-                   FR: 'France', IT: 'Italie', ES: 'Espagne', NL: 'Pays-Bas' },
+                   FR: 'France', IT: 'Italie', ES: 'Espagne', NL: 'Pays-Bas',
+                   PT: 'Portugal', PL: 'Pologne', DK: 'Danemark', SE: 'Suède',
+                   NO: 'Norvège', FI: 'Finlande', BE: 'Belgique', IE: 'Irlande' },
   },
   es: {
     film: 'Película', serie: 'Serie', miniSerie: 'Miniserie',
@@ -2596,7 +2608,9 @@ var UI_TEXTE = {
     sprachMenue: 'Idioma y región',
     sprachHinweis: 'Los cambios se aplican al instante; la página se recarga.',
     regionNamen: { DE: 'Alemania', AT: 'Austria', CH: 'Suiza', GB: 'Reino Unido',
-                   FR: 'Francia', IT: 'Italia', ES: 'España', NL: 'Países Bajos' },
+                   FR: 'Francia', IT: 'Italia', ES: 'España', NL: 'Países Bajos',
+                   PT: 'Portugal', PL: 'Polonia', DK: 'Dinamarca', SE: 'Suecia',
+                   NO: 'Noruega', FI: 'Finlandia', BE: 'Bélgica', IE: 'Irlanda' },
   },
   it: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
@@ -2806,7 +2820,9 @@ var UI_TEXTE = {
     sprachMenue: 'Lingua e regione',
     sprachHinweis: 'Le modifiche vengono applicate subito; la pagina si ricarica.',
     regionNamen: { DE: 'Germania', AT: 'Austria', CH: 'Svizzera', GB: 'Regno Unito',
-                   FR: 'Francia', IT: 'Italia', ES: 'Spagna', NL: 'Paesi Bassi' },
+                   FR: 'Francia', IT: 'Italia', ES: 'Spagna', NL: 'Paesi Bassi',
+                   PT: 'Portogallo', PL: 'Polonia', DK: 'Danimarca', SE: 'Svezia',
+                   NO: 'Norvegia', FI: 'Finlandia', BE: 'Belgio', IE: 'Irlanda' },
   },
   nl: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
@@ -3016,7 +3032,9 @@ var UI_TEXTE = {
     sprachMenue: 'Taal en regio',
     sprachHinweis: 'Wijzigingen worden direct toegepast; de pagina wordt opnieuw geladen.',
     regionNamen: { DE: 'Duitsland', AT: 'Oostenrijk', CH: 'Zwitserland', GB: 'Verenigd Koninkrijk',
-                   FR: 'Frankrijk', IT: 'Italië', ES: 'Spanje', NL: 'Nederland' },
+                   FR: 'Frankrijk', IT: 'Italië', ES: 'Spanje', NL: 'Nederland',
+                   PT: 'Portugal', PL: 'Polen', DK: 'Denemarken', SE: 'Zweden',
+                   NO: 'Noorwegen', FI: 'Finland', BE: 'België', IE: 'Ierland' },
   },
 };
 var TXT = UI_TEXTE[SPRACHE] || UI_TEXTE.en;
@@ -3068,6 +3086,39 @@ var FSK_SYSTEME = {
   // AL = "alle leeftijden" (Kijkwijzer).
   NL: { werte: ['AL', '6', '9', '12', '14', '16', '18'],
         zahlen: { 'AL': 0 } },
+  // "M/3" heisst "para maiores de 3" -- die Zahl dahinter ist das
+  // Mindestalter; T/Públicos = fuer alle (Fernsehen).
+  PT: { werte: ['Públicos', 'T', 'M/3', 'M/4', 'M/6', 'M/12', 'M/14', 'M/16', 'M/18',
+                '10', '12', '16', '18'],
+        zahlen: { 'Públicos': 0, 'T': 0, 'M/3': 3, 'M/4': 4, 'M/6': 6,
+                  'M/12': 12, 'M/14': 14, 'M/16': 16, 'M/18': 18 } },
+  // Polen kennt keine verbindliche Kino-Freigabe; TMDB fuehrt numerische
+  // Werte aus der TV-Selbstkontrolle.
+  PL: { werte: ['0', '6', '7', '12', '13', '15', '16', '18'] },
+  // A = "tilladt for alle"; F = fritaget (von der Pruefung befreit).
+  DK: { werte: ['A', 'F', '7', '11', '15', '18'],
+        zahlen: { 'A': 0, 'F': 0 } },
+  // Btl = "barntillåten" (fuer Kinder erlaubt).
+  SE: { werte: ['Btl', 'BTL', 'Barntillåten', '7', '11', '15', '18'],
+        zahlen: { 'Btl': 0, 'BTL': 0, 'Barntillåten': 0 } },
+  // A = "tillatt for alle".
+  NO: { werte: ['A', '6', '9', '12', '15', '18'],
+        zahlen: { 'A': 0 } },
+  // S = "sallittu" (fuer alle); daneben die aeltere K-Schreibweise
+  // ("kielletty alle ..."), mit und ohne Bindestrich.
+  FI: { werte: ['S', 'T', '7', '12', '16', '18',
+                'K-7', 'K-12', 'K-16', 'K-18', 'K7', 'K12', 'K16', 'K18'],
+        zahlen: { 'S': 0, 'T': 0, 'K-7': 7, 'K-12': 12, 'K-16': 16, 'K-18': 18,
+                  'K7': 7, 'K12': 12, 'K16': 16, 'K18': 18 } },
+  // Kijkwijzer wie NL; dazu die aelteren flaemischen Stufen KT (alle) und
+  // KNT ("kinderen niet toegelaten" = ab 16).
+  BE: { werte: ['AL', 'KT', '6', '9', '12', '14', '16', '18', 'KNT'],
+        zahlen: { 'AL': 0, 'KT': 0, 'KNT': 16 } },
+  // IFCO; GA = General Audience (Fernsehen), MA = Mature Audience,
+  // 12A/15A = in Begleitung auch juenger, zaehlen als 12/15.
+  IE: { werte: ['G', 'GA', 'PG', '12', '12A', '12PG', '15', '15A', '15PG', '16', '18', 'MA'],
+        zahlen: { 'G': 0, 'GA': 0, 'PG': 8, '12A': 12, '12PG': 12,
+                  '15A': 15, '15PG': 15, 'MA': 18 } },
 };
 function fskSystem(){ return FSK_SYSTEME[REGION_WAHL] || FSK_SYSTEME.DE; }
 function freigabenGueltig(){ return fskSystem().werte; }
@@ -4182,14 +4233,22 @@ var WATCH_CATS = [
 // Amazon-Shop und kaufen ueber amazon.de ein. Ob ein Anbieter ueberhaupt
 // erscheint, entscheiden ohnehin die TMDB-Daten der Region -- die Zuordnung
 // hier muss also nur fuer Laender stimmen, in denen der Anbieter existiert.
+// Laender ohne eigenen Amazon-Shop kaufen beim naechstgelegenen ein:
+// AT/CH ueber amazon.de, PT ueber amazon.es, DK/NO/FI ueber amazon.se.
 var AMAZON_DOMAIN = ({ DE: 'de', AT: 'de', CH: 'de', GB: 'co.uk',
-                       FR: 'fr', IT: 'it', ES: 'es', NL: 'nl' })[REGION_WAHL] || 'de';
+                       FR: 'fr', IT: 'it', ES: 'es', NL: 'nl',
+                       PT: 'es', PL: 'pl', DK: 'se', SE: 'se',
+                       NO: 'se', FI: 'se', BE: 'com.be', IE: 'ie' })[REGION_WAHL] || 'de';
 var RAKUTEN_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
-                      FR: 'fr', IT: 'it', ES: 'es', NL: 'nl' })[REGION_WAHL] || 'de';
+                      FR: 'fr', IT: 'it', ES: 'es', NL: 'nl',
+                      PT: 'pt', PL: 'pl', DK: 'dk', SE: 'se',
+                      NO: 'no', FI: 'fi', BE: 'be', IE: 'ie' })[REGION_WAHL] || 'de';
 // JustWatch-Quellenlink (Pflicht-Attribution) ebenfalls je Region -- die
 // Verfuegbarkeitsdaten, die er belegt, sind ja die der gewaehlten Region.
 var JUSTWATCH_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
-                        FR: 'fr', IT: 'it', ES: 'es', NL: 'nl' })[REGION_WAHL] || 'de';
+                        FR: 'fr', IT: 'it', ES: 'es', NL: 'nl',
+                        PT: 'pt', PL: 'pl', DK: 'dk', SE: 'se',
+                        NO: 'no', FI: 'fi', BE: 'be', IE: 'ie' })[REGION_WAHL] || 'de';
 var WATCH_SEARCH_URLS = {
   8:   function(q){ return 'https://www.netflix.com/search?q=' + q; },              // Netflix
   9:   function(q){ return 'https://www.amazon.' + AMAZON_DOMAIN + '/s?i=instant-video&k=' + q; }, // Amazon Prime Video
@@ -7315,38 +7374,38 @@ _settingsModal.addEventListener('click', function(e){ if (e.target === _settings
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _settingsModal.style.display !== 'none') closeSettingsModal(); });
 
 /* ---- Sprache & Region (siehe i18n-Block oben) ----
-   Beide Reihen sind zweisprachig beschriftet, damit das Fenster auch dann
-   verstaendlich ist, wenn die aktuelle Sprache die falsche ist. Ein Klick auf
-   einen anderen Wert speichert sofort und laedt neu (sprachWahlSpeichern). */
+   Zwei Aufklappmenues: Bei sechs Sprachen und sechzehn Regionen waeren
+   Knopfreihen zu lang und unuebersichtlich. Eine andere Auswahl speichert
+   sofort und laedt neu (sprachWahlSpeichern). */
 (function sprachModalEinrichten(){
   var modal = document.getElementById('langModal');
   var btn = document.getElementById('langBtn');
   if (!modal || !btn) return;
   // Sprachen tragen ihren EIGENEN Namen (Deutsch, English, Français ...) --
   // so findet jede Person ihre Sprache, egal welche gerade eingestellt ist.
-  // Die Regionsnamen stehen in der aktuellen Sprache (TXT.regionNamen).
+  // Die Regionsnamen stehen in der aktuellen Sprache (TXT.regionNamen) und
+  // werden alphabetisch nach dieser Sprache sortiert.
   var SPRACH_NAMEN = { de: 'Deutsch', en: 'English', fr: 'Français', es: 'Español', it: 'Italiano', nl: 'Nederlands' };
   var SPRACHEN = SPRACHEN_VERFUEGBAR.map(function(k){ return { key: k, label: SPRACH_NAMEN[k] }; });
-  var REGIONEN = ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL'].map(function(k){
+  var REGIONEN = ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL',
+                  'PT', 'PL', 'DK', 'SE', 'NO', 'FI', 'BE', 'IE'].map(function(k){
     return { key: k, label: TXT.regionNamen[k] || k };
-  });
+  }).sort(function(a, b){ return a.label.localeCompare(b.label, LOCALE); });
   btn.textContent = TXT.sprachMenue;
   document.getElementById('langModalTitel').textContent = TXT.sprachMenue;
   document.getElementById('langHinweis').textContent = TXT.sprachHinweis;
-  function reihe(el, eintraege, aktiv, waehlen){
+  function fuellen(el, eintraege, aktiv, waehlen){
     el.innerHTML = eintraege.map(function(e){
-      return '<button type="button" data-wert="' + escAttr(e.key) + '"' +
-             (e.key === aktiv ? ' class="active"' : '') + '>' + esc(e.label) + '</button>';
+      return '<option value="' + escAttr(e.key) + '"' +
+             (e.key === aktiv ? ' selected' : '') + '>' + esc(e.label) + '</option>';
     }).join('');
-    el.querySelectorAll('button').forEach(function(b){
-      b.onclick = function(){ waehlen(b.dataset.wert); };
-    });
+    el.onchange = function(){ waehlen(el.value); };
   }
   function zeichnen(){
-    reihe(document.getElementById('langSpracheRow'), SPRACHEN, SPRACHE, function(wert){
+    fuellen(document.getElementById('langSpracheSelect'), SPRACHEN, SPRACHE, function(wert){
       if (wert !== SPRACHE) sprachWahlSpeichern(wert, REGION_WAHL);
     });
-    reihe(document.getElementById('langRegionRow'), REGIONEN, REGION_WAHL, function(wert){
+    fuellen(document.getElementById('langRegionSelect'), REGIONEN, REGION_WAHL, function(wert){
       if (wert !== REGION_WAHL) sprachWahlSpeichern(SPRACHE, wert);
     });
   }
