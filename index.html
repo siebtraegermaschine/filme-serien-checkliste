@@ -8261,8 +8261,7 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
         }
         return zeile;
       }).join('') +
-      '<button type="button" id="nachtSenden" class="auth-submit" style="width:100%;margin-top:12px">' + esc(TXT.nachtAbstimmen) + '</button>' +
-      '<p class="feedback-hinweis">' + esc(TXT.nachtStand(daten.teilnehmer.length)) +
+      '<p class="feedback-hinweis" style="margin-top:12px">' + esc(TXT.nachtStand(daten.teilnehmer.length)) +
         (daten.teilnehmer.length ? ' — ' + esc(daten.teilnehmer.join(', ')) : '') + '</p>';
     inhalt.innerHTML = html;
     bk.querySelector('.modal').scrollTop = scrollVorher;
@@ -8302,20 +8301,44 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
         if (kennung) openTrailerModal('/api/trailers/' + kennung, item.t, null);
       };
     });
+    // Jeder Tipp zaehlt SOFORT -- ein eigener Abstimmen-Schritt verwirrte
+    // nur ("unten steht noch 0 Personen"). Der Name kommt aus dem Feld
+    // (vorbelegt mit dem Kontonamen); wer ihn spaeter aendert, dessen
+    // naechste Stimme traegt ihn nach (der Upsert schreibt den Namen mit).
+    function aktuellerName(){
+      var feld = inhalt.querySelector('#nachtName');
+      var name = feld ? feld.value.trim() : '';
+      try { if (name) localStorage.setItem(NAME_KEY, name); } catch (e) {}
+      return name;
+    }
+    function stimmeSenden(teil){
+      apiRequest('POST', '/api/movie-night/' + aktuellerToken + '/stimmen',
+        { teilnehmer: kennung(), name: aktuellerName(), stimmen: teil })
+        .then(function(){ return laden(true); })
+        .catch(function(){ vorschlagFehler(); });
+    }
+    function vorschlagFehler(){
+      var hinweis = inhalt.querySelector('.feedback-hinweis');
+      if (hinweis) hinweis.textContent = TXT.nachtFehler;
+    }
     inhalt.querySelectorAll('[data-ja]').forEach(function(b){
-      b.onclick = function(){ stimmen[b.dataset.ja] = true; laden(); };
+      b.onclick = function(){
+        var id = b.dataset.ja;
+        stimmen[id] = true; zeichneAusCache();
+        var teil = {}; teil[id] = true; stimmeSenden(teil);
+      };
     });
     inhalt.querySelectorAll('[data-nein]').forEach(function(b){
-      b.onclick = function(){ stimmen[b.dataset.nein] = false; laden(); };
+      b.onclick = function(){
+        var id = b.dataset.nein;
+        stimmen[id] = false; zeichneAusCache();
+        var teil = {}; teil[id] = false; stimmeSenden(teil);
+      };
     });
-    inhalt.querySelector('#nachtSenden').onclick = function(){
-      var name = inhalt.querySelector('#nachtName').value.trim();
-      try { localStorage.setItem(NAME_KEY, name); } catch (e) {}
-      if (!Object.keys(stimmen).length) return;
-      apiRequest('POST', '/api/movie-night/' + aktuellerToken + '/stimmen',
-        { teilnehmer: kennung(), name: name, stimmen: stimmen })
-        .then(function(){ return laden(true); })
-        .catch(function(){ inhalt.querySelector('#nachtSenden').textContent = TXT.nachtFehler; });
+    var nameFeld = inhalt.querySelector('#nachtName');
+    if (nameFeld) nameFeld.onchange = function(){
+      // Geaenderter Name: an den schon abgegebenen Stimmen nachtragen.
+      if (Object.keys(stimmen).length) stimmeSenden(stimmen);
     };
   }
 
