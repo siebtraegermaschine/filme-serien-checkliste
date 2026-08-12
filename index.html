@@ -2050,7 +2050,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' Titel übernommen. Die Seite lädt gleich neu.'; },
     importFehler: function(name){ return '„' + name + '“ hat kein bekanntes Format (Letterboxd-/IMDb-CSV oder Trakt-JSON).'; },
     nachtTitel: 'Movie Night',
-    nachtErklaerung: 'Stimmt ab: Ja oder Nein je Titel — vorn liegt, was die meisten sehen wollen.',
+    nachtErklaerung: 'Stimmt ab: Ja oder Nein je Titel (Ergebnis unten).',
     nachtName: 'Dein Name',
     nachtJa: 'Ja', nachtNein: 'Nein',
     nachtAbstimmen: 'Abstimmen',
@@ -2291,7 +2291,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' titles applied. The page will reload.'; },
     importFehler: function(name){ return '“' + name + '” is not a known format (Letterboxd/IMDb CSV or Trakt JSON).'; },
     nachtTitel: 'Movie Night',
-    nachtErklaerung: 'Vote yes or no per title — whatever most people want to watch moves to the front.',
+    nachtErklaerung: 'Vote yes or no per title (result below).',
     nachtName: 'Your name',
     nachtJa: 'Yes', nachtNein: 'No',
     nachtAbstimmen: 'Vote',
@@ -2532,7 +2532,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' titres appliqués. La page va se recharger.'; },
     importFehler: function(name){ return '«\u202f' + name + '\u202f» n’a pas un format connu (CSV Letterboxd/IMDb ou JSON Trakt).'; },
     nachtTitel: 'Movie Night',
-    nachtErklaerung: 'Votez oui ou non pour chaque titre — ce que la plupart veulent voir passe devant.',
+    nachtErklaerung: 'Votez oui ou non pour chaque titre (résultat en bas).',
     nachtName: 'Ton nom',
     nachtJa: 'Oui', nachtNein: 'Non',
     nachtAbstimmen: 'Voter',
@@ -2773,7 +2773,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' títulos aplicados. La página se recargará.'; },
     importFehler: function(name){ return '«' + name + '» no tiene un formato conocido (CSV de Letterboxd/IMDb o JSON de Trakt).'; },
     nachtTitel: 'Movie Night',
-    nachtErklaerung: 'Votad sí o no por cada título — lo que más gente quiera ver pasa adelante.',
+    nachtErklaerung: 'Votad sí o no por cada título (resultado abajo).',
     nachtName: 'Tu nombre',
     nachtJa: 'Sí', nachtNein: 'No',
     nachtAbstimmen: 'Votar',
@@ -3014,7 +3014,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' titoli applicati. La pagina si ricaricherà.'; },
     importFehler: function(name){ return '“' + name + '” non ha un formato conosciuto (CSV Letterboxd/IMDb o JSON Trakt).'; },
     nachtTitel: 'Movie Night',
-    nachtErklaerung: 'Votate sì o no per ogni titolo — davanti va ciò che i più vogliono vedere.',
+    nachtErklaerung: 'Votate sì o no per ogni titolo (risultato in basso).',
     nachtName: 'Il tuo nome',
     nachtJa: 'Sì', nachtNein: 'No',
     nachtAbstimmen: 'Vota',
@@ -3255,7 +3255,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' titels toegepast. De pagina wordt opnieuw geladen.'; },
     importFehler: function(name){ return '“' + name + '” heeft geen bekend formaat (Letterboxd/IMDb-CSV of Trakt-JSON).'; },
     nachtTitel: 'Movie Night',
-    nachtErklaerung: 'Stem ja of nee per titel — wat de meesten willen zien komt vooraan.',
+    nachtErklaerung: 'Stem ja of nee per titel (resultaat onderaan).',
     nachtName: 'Je naam',
     nachtJa: 'Ja', nachtNein: 'Nee',
     nachtAbstimmen: 'Stemmen',
@@ -3496,7 +3496,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' títulos aplicados. A página será recarregada.'; },
     importFehler: function(name){ return '“' + name + '” não tem um formato conhecido (CSV do Letterboxd/IMDb ou JSON do Trakt).'; },
     nachtTitel: 'Movie Night',
-    nachtErklaerung: 'Votem sim ou não por título — o que a maioria quiser ver vai para a frente.',
+    nachtErklaerung: 'Votem sim ou não por título (resultado abaixo).',
     nachtName: 'Seu nome',
     nachtJa: 'Sim', nachtNein: 'Não',
     nachtAbstimmen: 'Votar',
@@ -8288,7 +8288,17 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
         return zeile;
       }).join('') +
       '<p class="feedback-hinweis" style="margin-top:12px">' + esc(TXT.nachtStand(daten.teilnehmer.length)) +
-        (daten.teilnehmer.length ? ' — ' + esc(daten.teilnehmer.join(', ')) : '') + '</p>';
+        (daten.teilnehmer.length ? ' — ' + esc(daten.teilnehmer.join(', ')) : '') + '</p>' +
+      // Das Ergebnis, auf das der Hinweis oben zeigt: die drei Titel mit den
+      // meisten Ja-Stimmen (erst sichtbar, sobald jemand Ja gestimmt hat).
+      (function(){
+        var top = daten.titel.filter(function(t){ return t.ja > 0; })
+          .sort(function(a, b){ return b.ja - a.ja; }).slice(0, 3);
+        if (!top.length) return '';
+        return '<p class="feedback-hinweis">🏆 ' + top.map(function(t, i){
+          return (i + 1) + '. ' + esc(t.t) + ' (+' + t.ja + ')';
+        }).join('<br>\u2002\u2002\u2002') + '</p>';
+      })();
     inhalt.innerHTML = html;
     bk.querySelector('.modal').scrollTop = scrollVorher;
     inhalt.querySelector('#nachtTeilen').onclick = function(){
