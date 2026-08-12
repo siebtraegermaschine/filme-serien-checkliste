@@ -10,9 +10,10 @@ on:
     # Uebersetzungen) sind sprachneutral und werden nur noch geholt, wenn die
     # Anreicherung in der Datenbank aelter als 7 Tage ist -- sonst schickt der
     # Lauf nur die regionsspezifische Verfuegbarkeit. Ein Regionen-Lauf ohne
-    # Detail-Abrufe braucht damit im Wesentlichen nur noch das discover-Paging,
-    # erwartet ~5-10 Minuten statt gemessener 57-87 Minuten (DE 87 min, AT
-    # 58 min am 12. August 2026, vor der Skip-Liste). Laeuft die Anreicherung
+    # Detail-Abrufe braucht damit im Wesentlichen nur noch das discover-Paging:
+    # gemessen 7 min 50 s (AT, 21.986 Titel, alle uebersprungen, 12. August
+    # 2026) statt vorher 57-87 Minuten (DE 87 min, AT 58 min, gleicher Tag,
+    # vor der Skip-Liste). Laeuft die Anreicherung
     # ab (alle ~7 Tage), holt sie der ERSTE Lauf der Kette (DE) einmal neu und
     # dauert dann wieder ~1-1,5 h; die uebrigen 40 Regionen desselben Tages
     # sehen die frischen Zeitstempel und bleiben schnell. Erwartete Kettenzeit:
@@ -70,7 +71,7 @@ jobs:
       max-parallel: 1
       matrix:
         region: ${{ fromJSON(needs.plan.outputs.regionen) }}
-    # Normalfall dank Skip-Liste ~5-10 min je Region; der Spielraum deckt den
+    # Normalfall dank Skip-Liste ~8 min je Region; der Spielraum deckt den
     # Auffrisch-Fall ab, wenn ein Lauf die ~22.000 Titel-Details neu holt
     # (gemessen bis 87 min) -- deutlich unter dem GitHub-Actions-Default von
     # 360 Minuten, aber weit weg vom Normalfall.

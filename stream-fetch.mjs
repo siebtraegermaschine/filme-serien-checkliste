@@ -18,7 +18,8 @@
  * (Default: 7 Tage) angereichert in der Datenbank liegen, und überspringt für
  * die den Detail-Abruf komplett (Markierung "ohneDetails" im Payload; der
  * Ingest lässt die Anreicherungsfelder dann unangetastet). Das drückt einen
- * Nicht-Erst-Regionen-Lauf von 57–87 Minuten auf wenige Minuten.
+ * Nicht-Erst-Regionen-Lauf von 57–87 Minuten auf gemessene ~8 Minuten
+ * (AT, 21.986 Titel, 12. August 2026).
  *
  * Läuft NUR in der GitHub Action (oder lokal) – der API-Key kommt aus der
  * Umgebungsvariable TMDB_API_KEY (GitHub Secret) und landet NIE im Client-Code.

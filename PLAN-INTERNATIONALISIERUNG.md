@@ -316,7 +316,8 @@ unangetastet lässt und für in einer Region neu aufgetauchte magere Zeilen
 die Anreicherung aus Geschwisterzeilen kopiert. Damit laufen **alle 41
 Regionen täglich** in einer Kette (`streaming.yml`, 20:00 UTC, DE zuerst,
 nacheinander wegen TMDB-Rate-Limit): Ein Lauf ohne Detail-Abrufe braucht
-erwartet ~5–10 Minuten (vorher gemessen 57–87 min: DE 87, AT 58); läuft
+gemessen ~8 Minuten (AT: 7 min 50 s, 21.986 Titel, alle übersprungen;
+vorher gemessen 57–87 min: DE 87, AT 58); läuft
 die Anreicherung ab (~wöchentlich), holt der erste Lauf der Kette sie neu
 und dauert einmalig wieder ~1–1,5 h. Die frühere Gruppen-Rotation (A
 täglich, B–E im Vier-Tage-Wechsel) ist damit hinfällig. Kino-Läufe sind

@@ -97,7 +97,7 @@ function ingestBerechtigt(req) {
 // sprachneutral bzw. decken ueber TMDB_CERT_REGIONS/translations ohnehin alle
 // Laender ab, nur die VERFUEGBARKEIT je Anbieter ist regionsspezifisch. Ohne
 // diesen Endpunkt holte jeder Regionen-Lauf dieselben ~22.000 Detail-
-// Datensaetze erneut (57-87 Minuten je Region statt ~5-10).
+// Datensaetze erneut (57-87 Minuten je Region statt gemessener ~8).
 //
 // Frisch = enriched_at juenger als max_age_days (Default 7 Tage), egal in
 // welcher Region: Fehlt der Titel in der anfragenden Region noch, kopiert der
