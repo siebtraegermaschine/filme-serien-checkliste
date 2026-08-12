@@ -296,9 +296,11 @@ EU plus CH, GB und NO.
 **Übersee und EWR-Rest, fünfte Gruppe (ebenfalls 12. August 2026):**
 IS und LI (damit ist der EWR restlos abgedeckt — beides DSGVO-Raum, kein
 neues Rechtsthema) sowie CA, AU, NZ (englischsprachig; Québec nutzt die
-französische Oberfläche) und MX, AR, CL, CO (spanischsprachig) — zusammen
-**40 Regionen**. Für alle Länder außerhalb des EWR gilt derselbe Vermerk
-wie für die USA: rechtliche Klärung steht aus, siehe Abschnitt 4.
+französische Oberfläche), MX, AR, CL, CO (spanischsprachig) und BR
+(portugiesische Oberfläche, ClassInd-Freigaben L/10–18, `amazon.com.br`) —
+zusammen **41 Regionen**. Für alle Länder außerhalb des EWR gilt derselbe
+Vermerk wie für die USA: rechtliche Klärung steht aus (BR: LGPD), siehe
+Abschnitt 4.
 
 **Workflow-Zeitplan (nach Laufzeitmessung am 12. August 2026):** Ein
 Streaming-Regionen-Job dauert real ~1–1,5 Stunden (DE: 87 min, AT:
@@ -406,7 +408,8 @@ Abschnitt 5 bleibt bestehen).
   beiden Importe (PLZ/Kinos). Für eine fünfte Regionsgruppe braucht es
   einen weiteren Cron-Zeitpunkt.
 - ~~Weitere UI-Sprachen~~ — **erledigt (12. August 2026):** Französisch,
-  Spanisch, Italienisch und Niederländisch als Oberflächensprachen
+  Spanisch, Italienisch, Niederländisch und (mit der Brasilien-Anbindung)
+  Portugiesisch als Oberflächensprachen
   (`UI_TEXTE`, `MARKUP_TEXTE`, `INFO_TEXT_*` je Sprache; Sprachmodal mit
   nativen Sprachnamen, `LOCALE` je Sprache). **Inhaltssprachen (zweite
   Weg-A-Stufe, ebenfalls 12. August 2026):** Titel/Inhaltsangaben liegen

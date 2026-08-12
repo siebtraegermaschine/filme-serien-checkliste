@@ -98,6 +98,7 @@ const RECHTECKE = {
   AR: [[-55.2, -73.6, -21.7, -53.6]],
   CL: [[-56.0, -75.8, -17.5, -66.4]],
   CO: [[-4.3, -79.1, 12.6, -66.8]],
+  BR: [[-33.8, -73.9, 5.3, -34.7]],
 };
 
 /* Kantenlaenge einer Abfrage. Gross gewaehlt, und zwar aus Messung: Die

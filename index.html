@@ -1723,7 +1723,7 @@ var REGION_KEY = 'mt.region';
 // Verfuegbare Oberflaechensprachen. Inhaltsdaten (Titel/Plots) gibt es nur
 // deutsch und englisch (Weg A) -- alle weiteren Sprachen bekommen englische
 // Inhalte, siehe INHALTS_SPRACHE unten.
-var SPRACHEN_VERFUEGBAR = ['de', 'en', 'fr', 'es', 'it', 'nl'];
+var SPRACHEN_VERFUEGBAR = ['de', 'en', 'fr', 'es', 'it', 'nl', 'pt'];
 // Regionen mit eingespielten Daten -- muss zu REGIONEN in backend/lib/i18n.js
 // passen (EU/EWR komplett, dazu GB und die englisch- bzw. spanischsprachige
 // Welt; fuer die Laender ausserhalb des EWR steht die rechtliche Klaerung
@@ -1732,7 +1732,7 @@ var REGIONEN_VERFUEGBAR = ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL',
                            'PT', 'PL', 'DK', 'SE', 'NO', 'FI', 'BE', 'IE',
                            'CZ', 'GR', 'HU', 'RO', 'BG', 'HR', 'SI', 'SK',
                            'LT', 'LV', 'EE', 'LU', 'MT', 'CY', 'US', 'IS',
-                           'LI', 'CA', 'AU', 'NZ', 'MX', 'AR', 'CL', 'CO'];
+                           'LI', 'CA', 'AU', 'NZ', 'MX', 'AR', 'CL', 'CO', 'BR'];
 function sprachErmittlung(){
   try {
     var s = localStorage.getItem(SPRACHE_KEY);
@@ -1757,7 +1757,7 @@ var SPRACHE = sprachErmittlung();
 var REGION_WAHL = regionErmittlung();
 // Datums-/Zahlenformate haengen an der Sprache: en-GB (Tag vor Monat) passt
 // zur EU-Ausrichtung besser als en-US.
-var LOCALE = ({ de: 'de-DE', en: 'en-GB', fr: 'fr-FR', es: 'es-ES', it: 'it-IT', nl: 'nl-NL' })[SPRACHE] || 'en-GB';
+var LOCALE = ({ de: 'de-DE', en: 'en-GB', fr: 'fr-FR', es: 'es-ES', it: 'it-IT', nl: 'nl-NL', pt: 'pt-BR' })[SPRACHE] || 'en-GB';
 // US-Region mit englischer Oberflaeche: amerikanische Datums-Schreibweise
 // (Monat vor Tag) statt der britischen.
 if (SPRACHE === 'en' && REGION_WAHL === 'US') LOCALE = 'en-US';
@@ -1996,7 +1996,7 @@ var UI_TEXTE = {
                    MT: 'Malta', CY: 'Zypern', US: 'USA',
                    IS: 'Island', LI: 'Liechtenstein', CA: 'Kanada', AU: 'Australien',
                    NZ: 'Neuseeland', MX: 'Mexiko', AR: 'Argentinien', CL: 'Chile',
-                   CO: 'Kolumbien' },
+                   CO: 'Kolumbien', BR: 'Brasilien' },
   },
   en: {
     film: 'Movie', serie: 'Series', miniSerie: 'Mini-series',
@@ -2216,7 +2216,7 @@ var UI_TEXTE = {
                    MT: 'Malta', CY: 'Cyprus', US: 'United States',
                    IS: 'Iceland', LI: 'Liechtenstein', CA: 'Canada', AU: 'Australia',
                    NZ: 'New Zealand', MX: 'Mexico', AR: 'Argentina', CL: 'Chile',
-                   CO: 'Colombia' },
+                   CO: 'Colombia', BR: 'Brazil' },
   },
   fr: {
     film: 'Film', serie: 'Série', miniSerie: 'Mini-série',
@@ -2436,7 +2436,7 @@ var UI_TEXTE = {
                    MT: 'Malte', CY: 'Chypre', US: 'États-Unis',
                    IS: 'Islande', LI: 'Liechtenstein', CA: 'Canada', AU: 'Australie',
                    NZ: 'Nouvelle-Zélande', MX: 'Mexique', AR: 'Argentine', CL: 'Chili',
-                   CO: 'Colombie' },
+                   CO: 'Colombie', BR: 'Brésil' },
   },
   es: {
     film: 'Película', serie: 'Serie', miniSerie: 'Miniserie',
@@ -2656,7 +2656,7 @@ var UI_TEXTE = {
                    MT: 'Malta', CY: 'Chipre', US: 'Estados Unidos',
                    IS: 'Islandia', LI: 'Liechtenstein', CA: 'Canadá', AU: 'Australia',
                    NZ: 'Nueva Zelanda', MX: 'México', AR: 'Argentina', CL: 'Chile',
-                   CO: 'Colombia' },
+                   CO: 'Colombia', BR: 'Brasil' },
   },
   it: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
@@ -2876,7 +2876,7 @@ var UI_TEXTE = {
                    MT: 'Malta', CY: 'Cipro', US: 'Stati Uniti',
                    IS: 'Islanda', LI: 'Liechtenstein', CA: 'Canada', AU: 'Australia',
                    NZ: 'Nuova Zelanda', MX: 'Messico', AR: 'Argentina', CL: 'Cile',
-                   CO: 'Colombia' },
+                   CO: 'Colombia', BR: 'Brasile' },
   },
   nl: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
@@ -3096,7 +3096,227 @@ var UI_TEXTE = {
                    MT: 'Malta', CY: 'Cyprus', US: 'Verenigde Staten',
                    IS: 'IJsland', LI: 'Liechtenstein', CA: 'Canada', AU: 'Australië',
                    NZ: 'Nieuw-Zeeland', MX: 'Mexico', AR: 'Argentinië', CL: 'Chili',
-                   CO: 'Colombia' },
+                   CO: 'Colombia', BR: 'Brazilië' },
+  },
+  pt: {
+    film: 'Filme', serie: 'Série', miniSerie: 'Minissérie',
+    watchliste: 'Watchlist', gesehenKlein: 'assistido', gesehenGross: 'Assistidos',
+    aehnlicheTitel: 'Títulos semelhantes',
+    aehnlicheTitelZu: function(t){ return 'Títulos semelhantes a “' + t + '”'; },
+    keineAehnlichen: 'Nenhum título semelhante para essa combinação de filtros.',
+    mehrLaden: 'Carregar mais',
+    mehrAnzeigen: function(n){ return 'Mostrar mais (+' + n + ')'; },
+    laedt: 'Carregando …',
+    regie: 'Direção', originaltitel: 'Título original:', besetzung: 'Elenco:',
+    ansehen: '▶ Stream', leihen: 'Alugar', kaufen: 'Comprar',
+    trailer: '▶ Trailer',
+    trailerTitel: function(t){ return 'Trailer: ' + t; },
+    trailerFehlt: 'O TMDB não tem trailer registrado para este título.',
+    trailerYoutube: 'Buscar no YouTube',
+    trailerHinweis: 'Ao reproduzir o trailer, ele é carregado do YouTube. Isso transfere dados (incluindo seu endereço IP) para o Google.',
+    trailerAbspielen: '▶ Reproduzir trailer',
+    nurBeiAnbietern: function(n){ return 'Disponível apenas em ' + n + ' ' + (n === 1 ? 'serviço não selecionado' : 'serviços não selecionados') + '.'; },
+    nichtVerfuegbar: 'No momento não está disponível.',
+    weitereAnbieter: function(n){ return '+ ' + n + ' ' + (n === 1 ? 'outro serviço não selecionado' : 'outros serviços não selecionados'); },
+    datenVon: 'Dados de',
+    abImKino: function(d){ return 'Nos cinemas a partir de ' + d; },
+    wiederauffuehrung: function(jahr){ return '🎬 Reestreia nos cinemas – lançado originalmente em ' + jahr + '.'; },
+    zuVieleVersuche: 'Tentativas demais. Tente novamente mais tarde.',
+    zuVieleVersucheIn: function(min){ return 'Tentativas demais. Tente novamente em ' + (min <= 1 ? 'um minuto' : min + ' minutos') + '.'; },
+    titelWerdenGeladen: 'Carregando títulos …',
+    keineTrefferFuer: function(q){ return 'Nenhum resultado para “' + q + '”.'; },
+    keineTrefferBei: function(q, wer){ return 'Nenhum resultado para “' + q + '” na lista de ' + wer + '.'; },
+    hatNichts: function(wer, was){ return wer + ' não tem nada ' + was + ' aqui.'; },
+    markiert: 'salvo', aufDerWatchlist: 'na watchlist', alsGesehenMarkiert: 'marcado como assistido',
+    keineFreigabe: function(stufe){ return 'Nenhum título com classificação etária “' + stufe + '”. Títulos sem classificação registrada ficam ocultos – isso afeta parte do catálogo. Remova o filtro no canto superior esquerdo.'; },
+    keineGemeinsamen: function(wer){ return 'Nenhum título em comum com ' + wer + '. Quanto mais vocês adicionarem às suas watchlists, mais matches vocês terão.'; },
+    keineTitelAuswahl: 'Nenhum título para esta seleção.',
+    watchlisteLeer: 'Esta é a sua watchlist. Adicione pelo menos 20 títulos em “Descobrir novos”. Quanto mais títulos você adicionar, mais preciso fica o seu <i class="info-word" data-ts role="button" tabindex="0" aria-label="O que é o Taste Score?">Taste Score</i>. ' +
+      'A partir daí, você só escolhe se quer ver um filme, uma série ou ir ao cinema. ' +
+      'Aqui você verá sua watchlist pessoal, ordenada pelo seu gosto.<br><br>' +
+      '<u>Quer curtir filmes com outras pessoas?</u><br>' +
+      'Convide pessoas para o app no canto superior esquerdo. Depois navegue pelas watchlists delas e adicione os títulos que gostar – ou filtre pelos seus ' +
+      '<i class="info-word" data-match role="button" tabindex="0" aria-label="O que é um match?">matches</i> e encontre na hora algo que todos querem assistir.',
+    auchImKino: function(n){ return '🍿 Também nos cinemas: ' + n + ' ' + (n === 1 ? 'resultado' : 'resultados'); },
+    katalogFehler: 'Não foi possível carregar o catálogo. O backend está acessível?',
+    kinoLabels: { now: 'Em cartaz', soon: 'Em breve', later: 'Mais adiante' },
+    kinoLeer: { now: 'Nenhum título registrado no momento.', soon: 'Nada novo estreando em breve.', later: 'Ainda nada registrado para os próximos meses.' },
+    kinoFehler: 'Não foi possível carregar os dados de cinema.',
+    gesehenZuWl: 'Você marcou este título como assistido. Na watchlist ele deixa de contar como assistido: ele some de “Assistidos” e sua avaliação em estrelas deixa de contar para o seu Taste Score. Adicionar à watchlist mesmo assim?',
+    wischFilme: 'Deslizar para a esquerda remove o título da sua lista de filmes. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
+    wischSerien: 'Deslizar para a esquerda remove o título da sua lista de séries. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
+    wischDiscovery: 'Deslizar para a esquerda oculta o título permanentemente. Ele deixa de aparecer em “Descobrir novos”. Você pode trazê-lo de volta em Configurações → “Títulos removidos”. Esta pergunta aparece só uma vez. Ocultar agora?',
+    wischKino: 'Deslizar para a esquerda oculta o título permanentemente. Ele deixa de aparecer na página de cinema. Você pode trazê-lo de volta em Configurações → “Títulos removidos”. Esta pergunta aparece só uma vez. Ocultar agora?',
+    ausListeEntfernen: function(wort){ return 'Remover ' + wort.toLowerCase() + ' da sua lista? Você pode adicionar de novo a qualquer momento em “Descobrir novos” ou pela busca.'; },
+    pronFilm: 'ele', pronSerie: 'ela',
+    sucheTitel: 'Título', sucheAlternativtitel: 'Título alternativo', sucheGenre: 'Gênero',
+    sucheDarsteller: 'Ator', sucheRegie: 'Direção', sucheSchlagwort: 'Palavra-chave',
+    filternNach: function(v){ return 'Filtrar por “' + v + '”?'; },
+    tourSlides: [
+      { titel: 'Descubra filmes e séries', text: '“Descobrir novos” lista todos os filmes e séries, além dos lançamentos de cinema atuais e futuros. Marque títulos como assistidos ou adicione-os à sua watchlist. Assim você constrói o seu Taste Score pessoal.' },
+      { titel: 'Seu Taste Score', text: 'Depois de você salvar 20 títulos, todos os filmes, séries e lançamentos de cinema são ordenados pelo seu gosto.' },
+      { titel: 'Assista com outras pessoas', text: 'Faça “Match” da sua watchlist com outras pessoas e filtre os títulos que vocês querem assistir juntos.' },
+      { titel: 'Streaming e Taste Score', text: 'Selecione nas Configurações os serviços de streaming que você usa. Filtre todos os filmes e séries incluídos atualmente nos seus serviços – ordenados pelo seu Taste Score.' },
+      { titel: 'Detalhes de filmes e séries', text: 'Toque em um título para ver sinopse, trailer, títulos semelhantes e muito mais.' },
+      { titel: 'Buscar e filtrar', text: 'Busque e filtre por título, gênero, elenco ou palavras-chave do enredo.' },
+    ],
+    weiter: 'Avançar', losGehts: 'Vamos lá',
+    installIOS: '<p>O iOS não permite que sites iniciem a instalação diretamente – veja como fazer em poucos passos:</p>' +
+      '<ol class="install-steps">' +
+      '<li>Abra esta página no <b>Safari</b> (não no Chrome nem em outro app).</li>' +
+      '<li>Toque no ícone de compartilhar <b>⬆️</b> na parte de baixo.</li>' +
+      '<li>Escolha <b>“Adicionar à Tela de Início”</b> (talvez seja preciso rolar para baixo).</li>' +
+      '<li>Toque em <b>“Adicionar”</b> no canto superior direito.</li></ol>',
+    installAndroid: '<p>Veja como salvar o MovieMatch como app no seu dispositivo Android:</p>' +
+      '<ol class="install-steps">' +
+      '<li>Abra esta página no <b>Chrome</b>.</li>' +
+      '<li>Toque no menu <b>⋮</b> no canto superior direito.</li>' +
+      '<li>Escolha <b>“Instalar app”</b> ou <b>“Adicionar à tela inicial”</b>.</li></ol>',
+    feedbackAngemeldet: 'Guardamos a sua mensagem e incluímos seu endereço de e-mail para podermos responder.',
+    feedbackAbgemeldet: 'Guardamos a sua mensagem. Sem uma conta, ela chega até nós sem remetente – não podemos responder.',
+    feedbackLeer: 'Digite uma mensagem, por favor.',
+    sende: 'Enviando …', absenden: 'Enviar',
+    sendenFehler: 'O envio falhou, tente novamente mais tarde.',
+    bisStufe: function(n){ return 'até ' + n; },
+    unbekannt: 'Desconhecido',
+    undWort: ' e ',
+    weiteren: function(n){ return ' e mais ' + n; },
+    schonGesehenNote: function(namen, mehrere){ return namen + (mehrere ? ' já assistiram' : ' já assistiu') + ' este título'; },
+    nochSehenNote: function(namen, mehrere){ return namen + (mehrere ? ' querem' : ' quer') + ' assistir este título'; },
+    zusammenSchauen: 'Assistir juntos',
+    mitWem: function(namen){ return 'com ' + namen; },
+    altersfreigabe: function(label){ return 'Classificação etária ' + label; },
+    listeVon: function(name){ return 'Lista de ' + name; },
+    zurueck: 'voltar', aufheben: 'limpar',
+    kinoVorschlaegeFuer: function(namen){ return 'Sugestões de cinema para você e ' + namen; },
+    gemeinsameTitelMit: function(namen){ return 'Títulos em comum com ' + namen; },
+    matchWort: 'Match',
+    verknuepfungLoesen: 'Remover conexão',
+    favoritOben: 'Mostrar como favorito no topo',
+    profilOhneKonto: 'Você precisa de uma conta para convidar pessoas. O filtro etário abaixo funciona sem conta.',
+    profilLaedt: 'Carregando pessoas conectadas …',
+    profilLeer: 'Ninguém conectado ainda. Convide alguém para encontrar títulos em comum.',
+    loesenFrage: function(name){ return 'Remover a conexão com ' + name + '? Vocês deixarão de ver os títulos um do outro.'; },
+    loesenFehler: 'Não foi possível remover. Tente novamente.',
+    einladungShareTitel: 'Compartilhar watchlist',
+    einladungShareFrage: 'Quem abrir este link poderá ver toda a sua watchlist e a sua lista de “assistidos”, incluindo suas avaliações em estrelas. O mesmo vale no sentido contrário. Você pode remover a conexão a qualquer momento.\n\nCriar o link agora?',
+    einladungShareText: function(wer){ return wer + ' quer compartilhar uma watchlist com você no MovieMatch. Descubra novos filmes, séries e lançamentos de cinema, ordenados pelo seu gosto. Faça “Match” das suas watchlists e encontrem os títulos que vocês dois querem assistir a seguir:'; },
+    einladungShareFehler: 'Não foi possível criar o link.',
+    einladungRefTitel: 'Convidar pessoas',
+    einladungRefText: function(wer){ return wer + ' recomenda o MovieMatch. Descubra filmes, séries e lançamentos de cinema ordenados pelo seu gosto – compartilhe sua watchlist com outras pessoas e vejam quais títulos vocês querem assistir juntos:'; },
+    einladungRefAusgeloggt: 'Descubra o MovieMatch. Filmes, séries e lançamentos de cinema, ordenados pelo seu gosto. Compartilhe suas watchlists e vejam quais títulos vocês querem assistir juntos:',
+    einladungRefFehler: 'Não foi possível criar o link de convite.',
+    jemand: 'Alguém',
+    linkGueltig: function(tage){ return 'O link é válido por ' + tage + ' dias.'; },
+    linkLaeuftNichtAb: 'O link não expira.',
+    kopiert: 'Copiado para a área de transferência.',
+    kopierenFehler: 'A cópia falhou – selecione o link acima manualmente.',
+    einladungAnmelden: 'Entre ou crie uma conta para aceitar o convite.',
+    anmelden: 'Entrar',
+    bereitsVerknuepft: function(name){ return 'Você já está conectado com ' + name + '.'; },
+    allesKlar: 'Entendi',
+    einladungFrage: function(name){ return name + ' quer se conectar com você.<br><br>' +
+      'Vocês poderão então <b>ver toda a watchlist e a lista de “assistidos” um do outro</b> – ' +
+      'incluindo as avaliações em estrelas – e filtrar por títulos em comum. ' +
+      'Endereços de e-mail e dados da conta permanecem privados.<br><br>' +
+      'Qualquer um dos dois pode remover a conexão a qualquer momento. ' +
+      'Detalhes na <a href="privacy.html" target="_blank" rel="noopener">política de privacidade</a>.'; },
+    ablehnen: 'Recusar', annehmen: 'Aceitar',
+    verknuepftMit: function(name){ return 'Conectado com ' + name + '. Você encontra a seleção no canto superior esquerdo.'; },
+    einladungFehlgeschlagen: 'Não foi possível aceitar o convite. Ele pode ter expirado ou já ter sido usado.',
+    schliessen: 'Fechar',
+    einladungAbgelaufen: 'Este convite expirou.',
+    einladungEingeloest: 'Este convite já foi usado.',
+    einladungEigene: 'Este é o seu próprio convite.',
+    einladungUngueltig: 'Este convite é inválido.',
+    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' aceitaram' : ' aceitou') +
+      ' o seu convite.\n\nAgora vocês podem ver a watchlist e a lista de ' +
+      '“assistidos” um do outro. Em “Match” você vê os títulos em comum. ' +
+      'Você pode remover isso no canto superior esquerdo, em “Assistir juntos”.'; },
+    nameFehlt: 'Digite um nome, por favor.',
+    speichernFehler: 'Não foi possível salvar.',
+    speichernFehlerNochmal: 'Não foi possível salvar. Tente novamente.',
+    speichernFehlgeschlagen: 'Falha ao salvar. Tente novamente.',
+    anbieterFehler: 'Não foi possível carregar os serviços.',
+    keineAnbieter: 'Nenhum serviço disponível.',
+    weitereAnbieterZeigen: function(n){ return 'Mostrar mais ' + n + ' serviços'; },
+    nAusgewaehlt: function(n){ return n + ' selecionados'; },
+    nichtsAusgewaehlt: 'Nada selecionado – todos os serviços são mostrados.',
+    keineKinosUmkreis: 'Nenhum cinema no raio escolhido.',
+    ortZuerst: 'Primeiro busque a sua cidade.',
+    kinosFehler: 'Não foi possível carregar os cinemas.',
+    inDerNaehe: 'Por perto',
+    kinoAusgewaehlt: function(n){ return n === 0 ? 'Nenhum cinema selecionado ainda.' : n === 1 ? '1 cinema selecionado' : n + ' cinemas selecionados'; },
+    wiederHinzufuegen: 'Adicionar de volta',
+    keineAusgeblendeten: 'Nenhum título oculto.',
+    ladenFehler: 'Não foi possível carregar.',
+    pwZuKurz: 'Pelo menos 8 caracteres.',
+    pwUngleich: 'As duas senhas não coincidem.',
+    pwGeaendert: 'Senha alterada.',
+    pwFalsch: 'A senha atual está errada.',
+    aenderungFehler: 'A alteração falhou.',
+    emailGeaendert: 'Endereço de e-mail alterado.',
+    emailVergeben: 'Este e-mail já está em uso.',
+    kontoLoeschenFrage: 'Excluir permanentemente a conta e todos os dados? Isso não pode ser desfeito.',
+    pwStimmtNicht: 'A senha está errada.',
+    nichtGeklappt: 'Não deu certo. Tente novamente.',
+    kontoWirdGeloescht: function(datum){ return 'Sua conta será excluída permanentemente em ' + datum + '.\n\nVocê foi desconectado. Até lá, você pode desfazer a exclusão entrando novamente.'; },
+    in14Tagen: 'em 14 dias',
+    loeschAntrag: function(datum){ return 'Existe um pedido de exclusão para a sua conta. Ela será excluída permanentemente em ' + datum + '.\n\nQuer cancelar a exclusão?'; },
+    loeschungZurueck: 'A exclusão foi cancelada. Sua conta permanece.',
+    diesenTitel: 'este título',
+    vonZehn: function(n){ return '✓ ' + n + ' de 10'; },
+    registrieren: 'Cadastrar-se',
+    kontoErstellen: 'Criar conta',
+    nochKeinKonto: 'Ainda não tem conta? <button type="button" id="authToggleBtn">Cadastre-se</button>',
+    schonKonto: 'Já tem uma conta? <button type="button" id="authToggleBtn">Entrar</button>',
+    pwZuruecksetzen: 'Redefinir senha',
+    linkAnfordern: 'Solicitar link',
+    zurueckZumLogin: '<button type="button" id="authToggleBtn">Voltar ao login</button>',
+    resetVerschickt: 'Se este e-mail estiver cadastrado, um link de redefinição foi enviado.',
+    loginFalsch: 'E-mail ou senha errados.',
+    emailKontoExistiert: 'Já existe uma conta para este e-mail.',
+    pwMindestens: 'A senha precisa ter pelo menos 8 caracteres.',
+    empfehlungVon: function(wer){ return wer + ' tem uma recomendação para você:'; },
+    gefundenAuf: 'Encontrado no MovieMatch:',
+    codeOeffnen: 'Escaneie o código e salve o título',
+    unterWort: 'em: ',
+    bildWirdVorbereitet: 'Preparando a imagem …',
+    nichtTeilbar: 'Este título não pode ser compartilhado – ele não tem identificador único.',
+    teilenHinweis: 'Compartilhe este título com outras pessoas como mensagem ou nas redes sociais.',
+    teilenKeineBilder: 'Seu navegador não consegue compartilhar imagens – em vez disso, a imagem será baixada.',
+    bildFehler: 'Não foi possível criar a imagem – o compartilhamento continua funcionando, só que sem a imagem.',
+    ohneBild: 'Sem a imagem, apenas o texto e o link são enviados.',
+    linkZumTeilen: 'Link para compartilhar:',
+    titelWirdGeladen: 'Carregando título …',
+    titelLadenFehler: 'Não foi possível carregar este título.',
+    fuerDichGeteilt: 'Compartilhado com você',
+    trailerAnsehen: '▶ Ver trailer',
+    nurAngemeldet: 'Você precisa fazer login para salvar o título permanentemente.',
+    stehtAufWatchlist: 'Já está na sua watchlist.',
+    schonGesehenHint: 'Você já assistiu este título.',
+    wirdGespeichert: 'Salvando …',
+    markierungenPruefen: 'Verificando seus títulos salvos …',
+    fremdSterne: function(name, n){ return name + ': ' + n + ' de 10 estrelas'; },
+    fremdUnbewertet: function(name){ return name + ' ainda não avaliou este título'; },
+    tasteScoreAria: 'O que é o Taste Score?',
+    tasteScoreGemeinsam: function(namen){ return 'O Match está ativo: o Taste Score aqui vale para você e ' + namen + ' juntos — ele indica o quanto um título combina com o gosto de vocês.'; },
+    benachrichtigungKnopf: function(an){ return 'E-mail para novos matches na watchlist: ' + (an ? 'Ativado' : 'Desativado'); },
+    matchAria: 'O que é um match?',
+    posterGroesser: 'Mostrar pôster maior',
+    sprachName: 'Português',
+    sprachMenue: 'Idioma e região',
+    regionNamen: { DE: 'Alemanha', AT: 'Áustria', CH: 'Suíça', GB: 'Reino Unido',
+                   FR: 'França', IT: 'Itália', ES: 'Espanha', NL: 'Países Baixos',
+                   PT: 'Portugal', PL: 'Polônia', DK: 'Dinamarca', SE: 'Suécia',
+                   NO: 'Noruega', FI: 'Finlândia', BE: 'Bélgica', IE: 'Irlanda',
+                   CZ: 'Tchéquia', GR: 'Grécia', HU: 'Hungria', RO: 'Romênia',
+                   BG: 'Bulgária', HR: 'Croácia', SI: 'Eslovênia', SK: 'Eslováquia',
+                   LT: 'Lituânia', LV: 'Letônia', EE: 'Estônia', LU: 'Luxemburgo',
+                   MT: 'Malta', CY: 'Chipre', US: 'Estados Unidos',
+                   IS: 'Islândia', LI: 'Liechtenstein', CA: 'Canadá', AU: 'Austrália',
+                   NZ: 'Nova Zelândia', MX: 'México', AR: 'Argentina', CL: 'Chile',
+                   CO: 'Colômbia', BR: 'Brasil' },
   },
 };
 var TXT = UI_TEXTE[SPRACHE] || UI_TEXTE.en;
@@ -3148,6 +3368,16 @@ var GENRE_NAMEN = {
         'Soap': 'Soap', 'News': 'News',
         'Action & Adventure': 'Azione & Avventura', 'Sci-Fi & Fantasy': 'Fantascienza & Fantasy',
         'War & Politics': 'Guerra & Politica' },
+  pt: { 'Action': 'Ação', 'Abenteuer': 'Aventura', 'Animation': 'Animação',
+        'Komödie': 'Comédia', 'Krimi': 'Crime', 'Dokumentarfilm': 'Documentário',
+        'Drama': 'Drama', 'Familie': 'Família', 'Fantasy': 'Fantasia',
+        'Historie': 'História', 'Horror': 'Terror', 'Musik': 'Música',
+        'Mystery': 'Mistério', 'Liebesfilm': 'Romance', 'Science Fiction': 'Ficção científica',
+        'TV-Film': 'Cinema TV', 'Thriller': 'Thriller', 'Kriegsfilm': 'Guerra',
+        'Western': 'Faroeste', 'Kids': 'Infantil', 'Reality': 'Reality',
+        'Soap': 'Novela', 'News': 'Notícias',
+        'Action & Adventure': 'Ação & Aventura', 'Sci-Fi & Fantasy': 'Ficção científica & Fantasia',
+        'War & Politics': 'Guerra & Política' },
   nl: { 'Action': 'Actie', 'Abenteuer': 'Avontuur', 'Animation': 'Animatie',
         'Komödie': 'Komedie', 'Krimi': 'Misdaad', 'Dokumentarfilm': 'Documentaire',
         'Drama': 'Drama', 'Familie': 'Familie', 'Fantasy': 'Fantasy',
@@ -3317,6 +3547,9 @@ var FSK_SYSTEME = {
   // T = todos.
   CO: { werte: ['T', '7', '12', '15', '18'],
         zahlen: { 'T': 0 } },
+  // ClassInd; L = livre (fuer alle).
+  BR: { werte: ['L', '10', '12', '14', '16', '18'],
+        zahlen: { 'L': 0 } },
 };
 function fskSystem(){ return FSK_SYSTEME[REGION_WAHL] || FSK_SYSTEME.DE; }
 function freigabenGueltig(){ return fskSystem().werte; }
@@ -3937,6 +4170,125 @@ var MARKUP_TEXTE = {
       'Dit product gebruikt TMDB en de TMDB-API’s, maar is niet door TMDB goedgekeurd, gecertificeerd of anderszins erkend.<br>' +
       '<a href="imprint.html">Colofon</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Gebruiksvoorwaarden</a>',
   },
+  pt: {
+    'header .sub': { h: '<b><i>Filmes &amp; séries</i> ordenados pelo SEU gosto!</b>' },
+    'header .sub-zweit': { h: '<b>Explore as watchlists dos seus contatos e filtre pelos seus <i>matches</i>.</b> <span class="howto-link" id="subHowTo" role="button" tabindex="0" aria-label="Abrir o guia">(Como funciona)</span>' },
+    '#howToBtn': { t: 'Guia' },
+    '#settingsBtn': { t: 'Configurações' },
+    '#feedbackBtn': { t: 'Enviar feedback' },
+    '#installAppBtn': { t: 'Salvar como app' },
+    '#inviteMenuBtn': { t: 'Convidar pessoas' },
+    '#authBarLogin': { t: 'Entrar' },
+    '#authBarLogout': { t: 'Sair' },
+    '#tabFilme': { t: '🎬 Filmes' },
+    '#tabSerien': { t: '📺 Séries' },
+    '#tabKino': { t: '🍿 Cinema' },
+    '#search': { p: 'Busque por título, gênero ou nome …' },
+    '#fOpen': { t: 'Watchlist' },
+    '#fDone': { t: 'Assistidos' },
+    '#fDiscover': { t: 'Descobrir novos' },
+    '#fSort': { t: '⇅ Ordenar' },
+    '#sortMenu [data-sort="imdb"]': { t: 'Ordenar por avaliação ★★★★' },
+    '#sortMenu [data-sort="year"]': { t: 'por data de lançamento' },
+    '#sortMenu [data-sort="newstream"]': { t: 'por novidades no streaming' },
+    '#sortMenu [data-sort="taste"]': { t: 'por Taste Score' },
+    '#matchBarClear': { t: 'limpar' },
+    '.cinema-page-title': { t: 'Nos cinemas' },
+    '#cinemaSort': { t: '⇅ Ordenar' },
+    '#cinemaSortMenu [data-sort="imdb"]': { t: 'Ordenar por avaliação ★★★★' },
+    '#cinemaSortMenu [data-sort="date"]': { t: 'por data de lançamento' },
+    '#cinemaSortMenu [data-sort="cinema"]': { t: 'por novidades nos cinemas' },
+    '#cinemaSortMenu [data-sort="taste"]': { t: 'por Taste Score' },
+    '#cinemaNowHeading': { t: 'Em cartaz' },
+    '#cinemaSoonHeading': { t: 'Em breve' },
+    '#cinemaLaterHeading': { t: 'Mais adiante' },
+    '#inviteShareTitel': { t: 'Convite' },
+    '#inviteShareTeilen': { t: 'Compartilhar' },
+    '#inviteShareKopieren': { t: 'Copiar' },
+    '#shareModal h3': { t: 'Compartilhar título' },
+    '#sharePreview .share-preview-lade': { t: 'Preparando a imagem …' },
+    '#shareImageBtn': { t: 'Compartilhar com outras pessoas' },
+    '#removeModalYes': { t: 'Sim' },
+    '#removeModalNo': { t: 'Não' },
+    '#filterModalYes': { t: 'Sim' },
+    '#filterModalNo': { t: 'Cancelar' },
+    '#authTitle': { t: 'Entrar' },
+    '#authNameRow': { firstText: 'Nome / nome de perfil' },
+    '#authForm label:nth-of-type(2)': { firstText: 'E-mail' },
+    '#authForm label:nth-of-type(3)': { firstText: 'Senha' },
+    '#authTerms': { h: 'Ao criar uma conta, você aceita os <a href="terms.html" target="_blank" rel="noopener">termos de uso</a> e a <a href="privacy.html" target="_blank" rel="noopener">política de privacidade</a>.' },
+    '#authSubmit': { t: 'Entrar' },
+    '#authForgot': { t: 'Esqueceu a senha?' },
+    '#similarModalTitle': { t: 'Títulos semelhantes' },
+    '#simFilme': { t: 'Filmes' },
+    '#simSerien': { t: 'Séries' },
+    '#tourZurueck': { t: 'Voltar' },
+    '#tourWeiter': { t: 'Avançar' },
+    '#installModal h3': { t: 'Salvar como app' },
+    '#installChoice p': { t: 'Qual dispositivo?' },
+    '#feedbackModal h3': { t: 'Enviar feedback' },
+    '#feedbackText': { p: 'O que você gostaria de nos dizer?' },
+    '#feedbackSubmit': { t: 'Enviar' },
+    '#feedbackSuccess p': { t: 'Obrigado pelo seu feedback!' },
+    '#settingsModal h3': { t: 'Configurações' },
+    '#settingsProvidersBtn': { t: 'Serviços de streaming' },
+    '#settingsKinosBtn': { t: 'Seus cinemas' },
+    '#settingsHiddenBtn': { t: 'Títulos removidos' },
+    '#settingsAccountBtn': { t: 'Dados da conta' },
+    '#settingsCreditsBtn': { t: 'Créditos' },
+    '#settingsDeleteBtn': { t: 'Excluir conta' },
+    '#creditsModal .prov-intro:nth-of-type(1)': { t: 'As informações sobre filmes e séries – títulos, descrições, pôsteres, avaliações, disponibilidade e lançamentos de cinema – vêm do The Movie Database (TMDB).' },
+    '#creditsModal .prov-intro:nth-of-type(3)': { t: 'As informações de disponibilidade em streaming vêm do JustWatch via TMDB. Se um título está realmente disponível, quem decide é exclusivamente o respectivo serviço.' },
+    '#creditsModal .prov-intro:nth-of-type(4)': { h: 'Os cinemas em “Seus cinemas” vêm do <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>, © OpenStreetMap contributors, publicados sob a Open Database License (ODbL).' },
+    '#creditsModal .prov-intro:nth-of-type(5)': { h: 'Os códigos postais e as cidades da busca por raio vêm do <a href="https://www.geonames.org" target="_blank" rel="noopener">GeoNames</a>, publicados sob a licença Creative Commons Attribution 4.0 (CC BY 4.0).' },
+    '#profileModal h3': { t: 'Assistir juntos' },
+    '#profileModal .prov-steps li:nth-child(1)': { t: 'Convide amigos e família para o MovieMatch.' },
+    '#profileModal .prov-steps li:nth-child(2)': { h: 'Em <b>Watchlist</b> você vê o que seus contatos salvaram e já assistiram. Basta adicionar às suas próprias listas os títulos que gostar.' },
+    '#profileModal .prov-steps li:nth-child(3)': { h: 'Em <b>“Match”</b> você vê os <i class="info-word" data-match role="button" tabindex="0" aria-label="O que é um match?">matches</i> das suas watchlists. Assim vocês encontram rapidamente filmes, séries ou lançamentos de cinema para assistir juntos.' },
+    '#profileShareBtn': { t: '＋ Compartilhar watchlist' },
+    '#profileModal .prov-intro': { t: 'Assistindo com crianças? Use os filtros de classificação etária.' },
+    '#inviteTitle': { t: 'Convite' },
+    '#inviteText': { t: 'Carregando …' },
+    '#nameModal h3': { t: 'Como os outros devem ver você?' },
+    '#nameModal .prov-intro': { t: 'Este nome é mostrado às pessoas com quem você se conecta. Um primeiro nome ou apelido basta.' },
+    '#nameForm label': { firstText: 'Nome / nome de perfil' },
+    '#nameForm .auth-submit': { t: 'Salvar' },
+    '#trailerModalTitle': { t: 'Trailer' },
+    '#providersModal h3': { t: 'Serviços de streaming' },
+    '#providersModal .prov-intro': { t: 'Escolha os serviços que você usa. Só eles aparecem em “Stream / Alugar / Comprar” e nas linhas de título.' },
+    '#providersList': { t: 'Carregando …' },
+    '#providersSaveBtn': { t: 'Salvar' },
+    '#kinosModal h3': { t: 'Seus cinemas' },
+    '#kinosModal .prov-intro': { t: 'Busque a sua cidade e escolha os cinemas que você frequenta.' },
+    '#kinoOrtInput': { p: 'Código postal ou cidade …' },
+    '#kinosList': { t: 'Primeiro busque a sua cidade.' },
+    '#kinosSaveBtn': { t: 'Salvar' },
+    '#hiddenTitlesModal h3': { t: 'Títulos removidos' },
+    '#accountModal h3': { t: 'Dados da conta' },
+    '#passwordForm label:nth-of-type(1)': { firstText: 'Senha atual' },
+    '#passwordForm label:nth-of-type(2)': { firstText: 'Nova senha' },
+    '#passwordForm label:nth-of-type(3)': { firstText: 'Confirmar a nova senha' },
+    '#passwordForm .auth-submit': { t: 'Alterar senha' },
+    '#emailForm label:nth-of-type(1)': { firstText: 'Senha atual' },
+    '#emailForm label:nth-of-type(2)': { firstText: 'Novo endereço de e-mail' },
+    '#emailForm .auth-submit': { t: 'Alterar endereço de e-mail' },
+    '#deleteAccountModal h3': { t: 'Excluir conta' },
+    '#deleteAccountModal .delete-warn:nth-of-type(1)': { h: 'Sua conta será excluída permanentemente <b>em 14 dias</b>. Até lá você pode desfazer isso – basta entrar novamente. Depois disso, é definitivo.' },
+    '#deleteAccountModal .delete-warn:nth-of-type(2)': { t: 'Isso exclui sua conta, sua watchlist, todas as marcações de “assistido”, os títulos ocultos e suas conexões com outras pessoas. As pessoas conectadas deixarão de ver você; as listas delas permanecem intactas.' },
+    '#deleteAccountForm label': { firstText: 'Sua senha, por segurança' },
+    '#deleteAccountForm .auth-submit': { t: 'Excluir conta permanentemente' },
+    '#ratingModal h3': { firstText: 'O que você achou de ' },
+    '#ratingHint': { h: '1 = ruim, 10 = excelente.<br>(Entra no seu Taste Score.)' },
+    '#toTop': { a: 'Voltar ao topo' },
+    '#navMenuBtn': { a: 'Menu' },
+    '#profileBtn': { a: 'Assistir juntos' },
+    '#searchClear': { a: 'Limpar busca' },
+    '@streamKnopf': ' Seus serviços de streaming',
+    '@modalX': 'Fechar',
+    '@fussZeile': 'Seu <i class="info-word" data-ts role="button" tabindex="0" aria-label="O que é o Taste Score?">Taste Score</i>, o status de “assistido” e a sua “<i>watchlist</i>” ficam guardados na sua conta quando você está <i class="footer-auth-link" id="footerAuthLink" role="button" tabindex="0" aria-label="Entrar">conectado</i>. ' +
+      'Este produto usa o TMDB e as APIs do TMDB, mas não é endossado, certificado nem aprovado de qualquer outra forma pelo TMDB.<br>' +
+      '<a href="imprint.html">Aviso legal</a> · <a href="privacy.html">Privacidade</a> · <a href="terms.html">Termos de uso</a>',
+  },
 };
 function uebersetzeStatischesMarkup(){
   var tabelle = MARKUP_TEXTE[SPRACHE];
@@ -4444,7 +4796,7 @@ var AMAZON_DOMAIN = ({ DE: 'de', AT: 'de', CH: 'de', GB: 'co.uk',
                        LT: 'de', LV: 'de', EE: 'de', LU: 'fr',
                        MT: 'co.uk', CY: 'co.uk', IS: 'co.uk', LI: 'de',
                        CA: 'ca', AU: 'com.au', NZ: 'com.au', MX: 'com.mx',
-                       AR: 'com', CL: 'com', CO: 'com' })[REGION_WAHL] || 'de';
+                       AR: 'com', CL: 'com', CO: 'com', BR: 'com.br' })[REGION_WAHL] || 'de';
 var RAKUTEN_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
                       FR: 'fr', IT: 'it', ES: 'es', NL: 'nl',
                       PT: 'pt', PL: 'pl', DK: 'dk', SE: 'se',
@@ -4454,7 +4806,7 @@ var RAKUTEN_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
                       LT: 'lt', LV: 'lv', EE: 'ee', LU: 'lu',
                       MT: 'mt', CY: 'cy', IS: 'is', LI: 'ch',
                       CA: 'ca', AU: 'au', NZ: 'nz', MX: 'mx',
-                      AR: 'ar', CL: 'cl', CO: 'co' })[REGION_WAHL] || 'de';
+                      AR: 'ar', CL: 'cl', CO: 'co', BR: 'br' })[REGION_WAHL] || 'de';
 // JustWatch-Quellenlink (Pflicht-Attribution) ebenfalls je Region -- die
 // Verfuegbarkeitsdaten, die er belegt, sind ja die der gewaehlten Region.
 var JUSTWATCH_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
@@ -4466,7 +4818,7 @@ var JUSTWATCH_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
                         LT: 'lt', LV: 'lv', EE: 'ee', LU: 'lu',
                         MT: 'mt', CY: 'cy', IS: 'is', LI: 'ch',
                         CA: 'ca', AU: 'au', NZ: 'nz', MX: 'mx',
-                        AR: 'ar', CL: 'cl', CO: 'co' })[REGION_WAHL] || 'de';
+                        AR: 'ar', CL: 'cl', CO: 'co', BR: 'br' })[REGION_WAHL] || 'de';
 var WATCH_SEARCH_URLS = {
   8:   function(q){ return 'https://www.netflix.com/search?q=' + q; },              // Netflix
   9:   function(q){ return 'https://www.amazon.' + AMAZON_DOMAIN + '/s?i=instant-video&k=' + q; }, // Amazon Prime Video
@@ -7641,7 +7993,7 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _set
   // so findet jede Person ihre Sprache, egal welche gerade eingestellt ist.
   // Die Regionsnamen stehen in der aktuellen Sprache (TXT.regionNamen) und
   // werden alphabetisch nach dieser Sprache sortiert.
-  var SPRACH_NAMEN = { de: 'Deutsch', en: 'English', fr: 'Français', es: 'Español', it: 'Italiano', nl: 'Nederlands' };
+  var SPRACH_NAMEN = { de: 'Deutsch', en: 'English', fr: 'Français', es: 'Español', it: 'Italiano', nl: 'Nederlands', pt: 'Português' };
   var SPRACHEN = SPRACHEN_VERFUEGBAR.map(function(k){ return { key: k, label: SPRACH_NAMEN[k] }; });
   var REGIONEN = REGIONEN_VERFUEGBAR.map(function(k){
     return { key: k, label: TXT.regionNamen[k] || k };
@@ -9787,8 +10139,48 @@ function discFilterPool(){
       'sorteert op wanneer een film of serie oorspronkelijk is uitgebracht. “Nieuw bij streaming” sorteert op hoe recent '+
       'een titel bij een streamingdienst beschikbaar kwam – ongeacht hoe oud hij eigenlijk is.' }
   };
+  var INFO_TEXT_PT = {
+    ts: { title:'Taste Score', body:'O Taste Score (0–99) estima o quanto um título combina com o seu gosto. '+
+      'Ele se baseia em todos os filmes e séries que você salvou via watchlist ou “assistidos”.\n\n'+
+      'Cinco aspectos são comparados: gêneros, palavras-chave, elenco, direção e a proximidade do ano de lançamento. '+
+      'Cada parte é medida em relação ao que é típico para VOCÊ: se você assiste muito drama, '+
+      'um título de drama recebe pontuação máxima nessa parte. 100 significaria “combinação perfeita em todos os aspectos” '+
+      'e praticamente nunca acontece – boas combinações costumam ficar entre 70 e 90.\n\n'+
+      'A avaliação da comunidade propositalmente não entra no cálculo: ela diz como um título agrada a todo mundo, não como ele combina com '+
+      'você – e está disponível como ordenação própria.\n\n'+
+      'Sua avaliação de 1–10 estrelas nos títulos “assistidos” pondera tudo: títulos que você avaliou mal quase não moldam mais o seu '+
+      'gosto, os bem avaliados pesam muito mais. Quanto mais títulos você salvar, mais preciso ele fica. '+
+      'A partir de 10 títulos salvos, a lista é ordenada por Taste Score por padrão, a menos que você mesmo mude a ordenação.' },
+    imdb: { title:'Avaliação da comunidade', body:'A avaliação da comunidade é a média das notas dos usuários (0–10) '+
+      'no banco de dados de filmes TMDB (The Movie Database) e mostra como um título agrada a um público '+
+      'amplo – não há uma equipe editorial por trás, apenas os votos de muitos espectadores. '+
+      'O número entre parênteses é a quantidade de votos: um 8,0 '+
+      'de um único voto diz muito menos do que um 8,3 de 28.000.' },
+    discovery: { title:'Descobrir novos', body:'Mostra tudo o que você ainda não salvou – nem na watchlist '+
+      'nem marcado como “assistido”. Em “Filmes” só filmes, em “Séries” só séries. Ordenado pelo seu '+
+      'Taste Score, ou seja, por gêneros, elenco, direção e mais, a partir de todos os títulos que você já salvou. '+
+      '“Descobrir novos” pode ser combinado com Watchlist e Assistidos – tudo aparece então em uma única lista '+
+      'compartilhada, ordenada de forma uniforme.' },
+    match: { title:'Match: seus títulos em comum', body:'Um match mostra os títulos que estão na SUA lista E nas '+
+      'listas dos contatos selecionados – a interseção das suas watchlists. Assim vocês encontram na hora algo '+
+      'que todos querem assistir, em vez de ficar trocando sugestões.\n\n'+
+      'Como funciona: no canto superior esquerdo, em “Assistir juntos”, toque em “Match” em uma ou mais pessoas. '+
+      'A lista passa a mostrar apenas títulos que todas as pessoas selecionadas salvaram ou assistiram – em '+
+      '“Filmes” os filmes, em “Séries” as séries. Quanto mais pessoas você adicionar, menor fica a '+
+      'interseção.\n\n'+
+      'Na área de cinema o match funciona diferente: quase ninguém salva lançamentos de cinema com antecedência, então uma '+
+      'interseção quase sempre ficaria vazia. A programação completa continua visível e é ordenada pelo quanto '+
+      'um filme combina com o gosto de todos.' },
+    matchStart: { title:'O Match está ativo', body:'Aqui você pode selecionar uma ou mais pessoas – ' +
+      'quanto mais você adicionar, menor fica a interseção.\n\n' +
+      'Feche esta janela para ver os títulos em comum.' },
+    newreleases: { title:'Data de lançamento vs. novidades no streaming', body:'São duas ordenações diferentes: “Data de lançamento” '+
+      'ordena por quando um filme ou uma série foi lançado originalmente. “Novidades no streaming” ordena por quão recentemente '+
+      'um título ficou disponível em um serviço de streaming – independentemente da idade real dele.' }
+  };
   var INFO_TEXT = ({ de: INFO_TEXT_DE, en: INFO_TEXT_EN, fr: INFO_TEXT_FR,
-                     es: INFO_TEXT_ES, it: INFO_TEXT_IT, nl: INFO_TEXT_NL })[SPRACHE] || INFO_TEXT_EN;
+                     es: INFO_TEXT_ES, it: INFO_TEXT_IT, nl: INFO_TEXT_NL,
+                     pt: INFO_TEXT_PT })[SPRACHE] || INFO_TEXT_EN;
   var bk=document.createElement('div'); bk.className='modal-backdrop'; bk.id='tsModal';
   bk.innerHTML='<div class="modal"><button class="modal-x" aria-label="' + TXT.schliessen + '">&times;</button>'+
     '<h3 class="info-title"></h3><p class="info-body"></p></div>';

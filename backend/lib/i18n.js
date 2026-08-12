@@ -24,7 +24,7 @@ export const REGIONEN = [
   'PT', 'PL', 'DK', 'SE', 'NO', 'FI', 'BE', 'IE',
   'CZ', 'GR', 'HU', 'RO', 'BG', 'HR', 'SI', 'SK',
   'LT', 'LV', 'EE', 'LU', 'MT', 'CY', 'US', 'IS',
-  'LI', 'CA', 'AU', 'NZ', 'MX', 'AR', 'CL', 'CO',
+  'LI', 'CA', 'AU', 'NZ', 'MX', 'AR', 'CL', 'CO', 'BR',
 ];
 
 // Sprachen, in denen Inhaltsdaten (Titel/Inhaltsangaben) vorliegen koennen:

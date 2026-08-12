@@ -11,7 +11,7 @@ on:
   workflow_dispatch:            # erlaubt manuelles Ausloesen im Actions-Tab
     inputs:
       regionen:
-        description: "Kommagetrennte Regionen (leer = alle 40)"
+        description: "Kommagetrennte Regionen (leer = alle 41)"
         required: false
         default: ""
 
@@ -32,7 +32,7 @@ jobs:
         env:
           EINGABE: ${{ github.event.inputs.regionen }}
         run: |
-          ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE","CZ","GR","HU","RO","BG","HR","SI","SK","LT","LV","EE","LU","MT","CY","US","IS","LI","CA","AU","NZ","MX","AR","CL","CO"]'
+          ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE","CZ","GR","HU","RO","BG","HR","SI","SK","LT","LV","EE","LU","MT","CY","US","IS","LI","CA","AU","NZ","MX","AR","CL","CO","BR"]'
           if [ -n "$EINGABE" ]; then
             LISTE=$(echo "$EINGABE" | tr '[:lower:]' '[:upper:]' | tr -d ' ' | \
               awk -F, '{printf "["; for(i=1;i<=NF;i++){printf "%s\"%s\"", (i>1?",":""), $i}; print "]"}')

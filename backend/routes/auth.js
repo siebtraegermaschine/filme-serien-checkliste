@@ -166,7 +166,7 @@ router.put('/settings', async (req, res) => {
   if (!req.session?.userId) return res.status(401).json({ error: 'not_authenticated' });
   const { sprache, region, benachrichtigung } = req.body || {};
   // Oberflaechensprachen -- muss zur Frontend-Liste SPRACHEN_VERFUEGBAR passen.
-  const neueSprache = ['de', 'en', 'fr', 'es', 'it', 'nl'].includes(sprache) ? sprache : undefined;
+  const neueSprache = ['de', 'en', 'fr', 'es', 'it', 'nl', 'pt'].includes(sprache) ? sprache : undefined;
   const neueRegion = typeof region === 'string' && /^[A-Z]{2}$/.test(region) ? region : undefined;
   const neueBenachrichtigung = typeof benachrichtigung === 'boolean' ? benachrichtigung : undefined;
   if (neueSprache === undefined && neueRegion === undefined && neueBenachrichtigung === undefined) {
