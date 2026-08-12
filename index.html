@@ -925,6 +925,21 @@
   .lang-select { width:100%; background:var(--card); color:var(--text); border:1px solid var(--border);
     border-radius:10px; padding:10px 12px; font:inherit; font-size:15px; cursor:pointer; }
   .lang-select:focus { outline:none; border-color:var(--accent); }
+  /* Movie Night: Liste kann laenger als der Schirm sein -- gedeckelt und
+     scrollbar (Muster wie .tour-modal), sonst verschwinden Knoepfe und ✕
+     unerreichbar unterhalb. Ja/Nein im Stil der FSK-Knoepfe. */
+  .modal-backdrop .modal.nacht-modal { max-width:520px; max-height:85vh;
+    overflow-y:auto; -webkit-overflow-scrolling:touch; }
+  .nacht-zeile { display:flex; align-items:center; gap:10px; padding:7px 0;
+    border-bottom:1px solid var(--border); }
+  .nacht-zeile img { width:32px; border-radius:4px; flex:none; }
+  .nacht-zeile .nacht-titel { flex:1; font-size:14px; line-height:1.4; }
+  .nacht-wahl { display:flex; gap:6px; flex:none; }
+  .nacht-wahl button { background:var(--card); border:1px solid var(--border);
+    color:var(--text); border-radius:10px; padding:6px 12px; font:inherit;
+    font-size:13px; cursor:pointer; }
+  .nacht-wahl button.active { background:var(--accent-soft);
+    border-color:var(--accent); color:var(--accent); }
   .fsk-row button { flex:1 1 0; min-width:74px; background:var(--card); border:1px solid var(--border);
     border-radius:8px; padding:9px 6px; color:var(--text-dim); font-size:13px; font-weight:600;
     cursor:pointer; transition:all .15s; }
@@ -2017,6 +2032,7 @@ var UI_TEXTE = {
     nachtAbstimmen: 'Abstimmen',
     nachtStand: function(n){ return n === 1 ? 'Bisher hat 1 Person abgestimmt' : 'Bisher haben ' + n + ' Personen abgestimmt'; },
     nachtShareText: 'Movie Night! Stimm ab, was wir schauen:',
+    nachtTeilen: 'Link teilen',
     nachtFehler: 'Das hat nicht geklappt. Bitte noch einmal versuchen.',
     nachtWeg: 'Diese Runde gibt es nicht mehr — Runden verfallen nach 48 Stunden.',
     matchAria: 'Was ist ein Match?',
@@ -2254,6 +2270,7 @@ var UI_TEXTE = {
     nachtAbstimmen: 'Vote',
     nachtStand: function(n){ return n === 1 ? '1 person has voted so far' : n + ' people have voted so far'; },
     nachtShareText: 'Movie night! Vote on what we watch:',
+    nachtTeilen: 'Share link',
     nachtFehler: 'That did not work. Please try again.',
     nachtWeg: 'This round no longer exists — rounds expire after 48 hours.',
     matchAria: 'What is a match?',
@@ -2491,6 +2508,7 @@ var UI_TEXTE = {
     nachtAbstimmen: 'Voter',
     nachtStand: function(n){ return n === 1 ? '1 personne a voté pour l’instant' : n + ' personnes ont voté pour l’instant'; },
     nachtShareText: 'Movie night ! Vote pour ce qu’on regarde :',
+    nachtTeilen: 'Partager le lien',
     nachtFehler: 'Ça n’a pas fonctionné. Réessaie.',
     nachtWeg: 'Cette session n’existe plus — les sessions expirent après 48 heures.',
     matchAria: 'Qu’est-ce qu’un match ?',
@@ -2728,6 +2746,7 @@ var UI_TEXTE = {
     nachtAbstimmen: 'Votar',
     nachtStand: function(n){ return n === 1 ? 'Hasta ahora ha votado 1 persona' : 'Hasta ahora han votado ' + n + ' personas'; },
     nachtShareText: '¡Movie night! Vota qué vemos:',
+    nachtTeilen: 'Compartir enlace',
     nachtFehler: 'No ha funcionado. Inténtalo de nuevo.',
     nachtWeg: 'Esta ronda ya no existe — las rondas caducan a las 48 horas.',
     matchAria: '¿Qué es un match?',
@@ -2965,6 +2984,7 @@ var UI_TEXTE = {
     nachtAbstimmen: 'Vota',
     nachtStand: function(n){ return n === 1 ? 'Finora ha votato 1 persona' : 'Finora hanno votato ' + n + ' persone'; },
     nachtShareText: 'Movie night! Vota cosa guardiamo:',
+    nachtTeilen: 'Condividi il link',
     nachtFehler: 'Non ha funzionato. Riprova.',
     nachtWeg: 'Questa sessione non esiste più — le sessioni scadono dopo 48 ore.',
     matchAria: 'Cos’è un match?',
@@ -3202,6 +3222,7 @@ var UI_TEXTE = {
     nachtAbstimmen: 'Stemmen',
     nachtStand: function(n){ return n === 1 ? 'Tot nu toe heeft 1 persoon gestemd' : 'Tot nu toe hebben ' + n + ' personen gestemd'; },
     nachtShareText: 'Movie night! Stem wat we kijken:',
+    nachtTeilen: 'Link delen',
     nachtFehler: 'Dat is niet gelukt. Probeer het opnieuw.',
     nachtWeg: 'Deze ronde bestaat niet meer — rondes vervallen na 48 uur.',
     matchAria: 'Wat is een match?',
@@ -3439,6 +3460,7 @@ var UI_TEXTE = {
     nachtAbstimmen: 'Votar',
     nachtStand: function(n){ return n === 1 ? 'Até agora 1 pessoa votou' : 'Até agora ' + n + ' pessoas votaram'; },
     nachtShareText: 'Movie night! Vote no que vamos assistir:',
+    nachtTeilen: 'Compartilhar link',
     nachtFehler: 'Não funcionou. Tente novamente.',
     nachtWeg: 'Esta rodada não existe mais — rodadas expiram após 48 horas.',
     matchAria: 'O que é um match?',
@@ -8141,7 +8163,7 @@ var MOVIE_NIGHT_SICHTBAR = [];
 
   var bk = document.createElement('div');
   bk.className = 'modal-backdrop'; bk.id = 'nachtModal';
-  bk.innerHTML = '<div class="modal" style="max-width:520px">' +
+  bk.innerHTML = '<div class="modal nacht-modal">' +
     '<button class="modal-x" aria-label="' + escAttr(TXT.schliessen) + '">&times;</button>' +
     '<h3 id="nachtTitel"></h3><div id="nachtInhalt"></div></div>';
   document.body.appendChild(bk);
@@ -8159,24 +8181,38 @@ var MOVIE_NIGHT_SICHTBAR = [];
   function link(token){ return location.origin + location.pathname + '?nacht=' + token; }
 
   function zeichneRunde(daten){
+    // Nicht mitten ins Tippen oder Scrollen zeichnen: Waehrend das Namensfeld
+    // den Fokus hat, wuerde ein Poll-Neuaufbau die Eingabe verschlucken.
+    if (document.activeElement && inhalt.contains(document.activeElement)
+        && document.activeElement.id === 'nachtName') return;
+    var scrollVorher = bk.querySelector('.modal').scrollTop;
     var maxJa = Math.max.apply(null, [0].concat(daten.titel.map(function(t){ return t.ja; })));
     var html = '<p class="prov-intro">' + esc(TXT.nachtErklaerung) + '</p>' +
+      '<button type="button" id="nachtTeilen" class="modal-yes" style="margin-bottom:10px">' + esc(TXT.nachtTeilen) + '</button>' +
       '<input type="text" id="nachtName" class="lang-select" style="margin-bottom:10px" maxlength="40" placeholder="' + escAttr(TXT.nachtName) + '">' +
       daten.titel.map(function(t){
         var wahl = stimmen[t.id];
-        return '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border)">' +
-          (t.p ? '<img src="' + escAttr(POSTER + t.p) + '" alt="" style="width:32px;border-radius:4px">' : '<span style="width:32px"></span>') +
-          '<span style="flex:1">' + esc(t.t) + (t.y ? ' (' + t.y + ')' : '') +
+        return '<div class="nacht-zeile">' +
+          (t.p ? '<img src="' + escAttr(POSTER + t.p) + '" alt="">' : '<span style="width:32px;flex:none"></span>') +
+          '<span class="nacht-titel">' + esc(t.t) + (t.y ? ' (' + t.y + ')' : '') +
             (t.ja ? ' <b' + (t.ja === maxJa && maxJa > 0 ? ' style="color:var(--accent)"' : '') + '>+' + t.ja + '</b>' : '') + '</span>' +
-          '<button type="button" data-ja="' + escAttr(t.id) + '" class="modal-yes" style="padding:4px 10px' + (wahl === true ? ';border-color:var(--accent);color:var(--accent)' : '') + '">' + esc(TXT.nachtJa) + '</button>' +
-          '<button type="button" data-nein="' + escAttr(t.id) + '" class="modal-yes" style="padding:4px 10px' + (wahl === false ? ';border-color:var(--accent);color:var(--accent)' : '') + '">' + esc(TXT.nachtNein) + '</button>' +
-        '</div>';
+          '<span class="nacht-wahl">' +
+          '<button type="button" data-ja="' + escAttr(t.id) + '"' + (wahl === true ? ' class="active"' : '') + '>' + esc(TXT.nachtJa) + '</button>' +
+          '<button type="button" data-nein="' + escAttr(t.id) + '"' + (wahl === false ? ' class="active"' : '') + '>' + esc(TXT.nachtNein) + '</button>' +
+          '</span></div>';
       }).join('') +
       '<button type="button" id="nachtSenden" class="modal-yes" style="margin-top:12px">' + esc(TXT.nachtAbstimmen) + '</button>' +
       '<p class="feedback-hinweis">' + esc(TXT.nachtStand(daten.teilnehmer.length)) +
-        (daten.teilnehmer.length ? ' — ' + esc(daten.teilnehmer.join(', ')) : '') + '</p>' +
-      '<p class="feedback-hinweis" style="user-select:all">' + esc(link(aktuellerToken)) + '</p>';
+        (daten.teilnehmer.length ? ' — ' + esc(daten.teilnehmer.join(', ')) : '') + '</p>';
     inhalt.innerHTML = html;
+    bk.querySelector('.modal').scrollTop = scrollVorher;
+    inhalt.querySelector('#nachtTeilen').onclick = function(){
+      var url = link(aktuellerToken);
+      if (navigator.share) { navigator.share({ url: url, text: TXT.nachtShareText }).catch(function(){}); return; }
+      (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject())
+        .then(function(){ inhalt.querySelector('#nachtTeilen').textContent = TXT.kopiert; })
+        .catch(function(){ prompt('', url); });
+    };
     try { inhalt.querySelector('#nachtName').value = localStorage.getItem(NAME_KEY) || ''; } catch (e) {}
     inhalt.querySelectorAll('[data-ja]').forEach(function(b){
       b.onclick = function(){ stimmen[b.dataset.ja] = true; laden(); };
@@ -8228,9 +8264,9 @@ var MOVIE_NIGHT_SICHTBAR = [];
       if (ids.length < 2) { alert(TXT.keineTitelAuswahl); return; }
       apiRequest('POST', '/api/movie-night', { titleIds: ids })
         .then(function(r){
-          // Link auch gleich in die Adresszeile, damit er teilbar ist.
+          // Link in die Adresszeile -- geteilt wird ueber den Knopf im
+          // Fenster, nicht ungefragt beim Oeffnen.
           history.replaceState(null, '', link(r.token));
-          if (navigator.share) navigator.share({ url: link(r.token), text: TXT.nachtShareText }).catch(function(){});
           oeffnen(r.token);
         })
         .catch(function(){ alert(TXT.nachtFehler); });
