@@ -1,5 +1,10 @@
 # Plan: Internationalisierung (EU zuerst, dann USA)
 
+> **UMSETZUNGSSTAND 12. August 2026: Die EU-Stufe ist gebaut** (Abschnitte 1–3
+> und 5). Was genau umgesetzt wurde und welche Betriebsschritte noch anstehen,
+> steht im neuen Abschnitt 9 am Ende. Die USA-Stufe (Abschnitt 4) ist weiterhin
+> offen.
+
 > **Arbeitsauftrag für einen neuen Chat.** Stand: 11. August 2026.
 > Ziel: MovieMatch über Deutschland hinaus nutzbar machen — **zuerst Europa,
 > danach USA**, später ggf. weltweit.
@@ -218,3 +223,84 @@ Zahlung (entfällt, solange kostenlos).
 
 > **Kurzfassung:** Erst das Sprach-Gerüst bauen — danach ist EU günstig, USA vor
 > allem eine Rechts- und Betriebsfrage, weltweit „mehr vom Gleichen".
+
+---
+
+## 9. Umsetzungsstand (12. August 2026) und Betriebsschritte
+
+### Was gebaut ist
+
+**i18n-Fundament (Abschnitt 1):**
+- `index.html`: Sprach-/Regionsblock am Skriptanfang (`SPRACHE`, `REGION_WAHL`,
+  `LOCALE`, Wörterbuch `UI_TEXTE` de/en, statische Markup-Übersetzung
+  `uebersetzeStatischesMarkup()`). Alle sichtbaren JS-Texte laufen über
+  `TXT.*`; `<html lang>` wird gesetzt, `toLocaleDateString`/`toLocaleString`
+  nutzen `LOCALE`, `fmtR()` den passenden Dezimaltrenner.
+- Sprach-/Regionswahl im Menü rechts oben („Sprache & Region"), gemerkt je
+  Gerät (`mt.sprache`/`mt.region`) und am Konto (`users.sprache`/`users.region`,
+  `PUT /api/auth/settings`). Ein Wechsel lädt die Seite neu; beim Anmelden auf
+  einem neuen Gerät wird die Kontowahl übernommen.
+- Genres werden über die TMDB-Paarung (`genre_alias`) übersetzt
+  (`genreAnzeige()`); die Suche versteht beide Sprachfassungen.
+  **Bekannte Lücke:** Schlagwörter (Hashtags) bleiben vorerst deutsch.
+
+**Weg A — Inhaltsdaten je Sprache:**
+- Schema: `title_en`/`overview_en` in `titles`, `streaming_cache`,
+  `cinema_cache`; Freigaben je Land als JSONB `certifications` (DE-Bestand
+  wurde beim Deploy einmalig übernommen).
+- Alle Fetch-Skripte holen die englische Fassung **ohne zusätzliche
+  TMDB-Abrufe** über `append_to_response=translations` mit; Freigaben für die
+  Länder aus `TMDB_CERT_REGIONS` (Default `DE,AT`) fallen aus derselben
+  Antwort ab.
+- Backend liefert je `?lang=`/`?region=`: `/api/titles`, `/api/titles/plots`,
+  `/api/streaming`, `/api/cinema`, `/api/share/title`,
+  `/api/watch-providers/...` (Region), Cache-Schlüssel je Kombination.
+
+**Region-Dimension (Abschnitt 2):**
+- `streaming_cache`: Spalte `region`, PK `(provider_id, type, tmdb_id, region)`.
+- `cinema_cache`: Spalte `region`, PK `(tmdb_id, region)`.
+- Beide Ingests verwalten je Lauf nur ihre Region (Plausibilitätsprüfung und
+  Aufräum-DELETE je Region); die Region kommt aus dem Payload
+  (`TMDB_REGION` je Lauf).
+- GitHub-Workflows `streaming.yml`/`cinema.yml` laufen als Matrix über
+  `DE` und `AT` (nacheinander, wegen TMDB-Rate-Limit).
+
+**Österreich-Blaupause (Abschnitt 3):** Streaming/Kino-Starts über die
+Workflows; Freigabensystem AT (0/6/8/10/12/14/16) im Frontend-Filter;
+`import-plz.mjs`/`import-kinos.mjs` konnten AT schon vorher (siehe unten).
+
+**Rechtstexte (Abschnitt 5):** `imprint.html`, `terms.html`, `privacy.html`
+als englische **Arbeitsfassungen** (Kopf-Kommentar kennzeichnet sie als
+Entwurf). Bei Sprache EN verlinken Fußzeile, Registrier-Hinweis und
+Einladungs-Popup auf diese Fassungen; jede trägt den Hinweis, dass die
+deutsche Fassung maßgeblich ist. **Vor einem echten Start außerhalb des
+deutschsprachigen Raums anwaltlich prüfen lassen** (Entscheidung aus
+Abschnitt 5 bleibt bestehen).
+
+### Betriebsschritte (einmalig, nach dem Deploy)
+
+1. **Schema einspielen** — läuft wie üblich mit dem Deploy (`schema.sql` ist
+   idempotent; die PK-Umbauten und die DE-Übernahme der Freigaben laufen genau
+   einmal).
+2. **Englisch-Backfill für den Bestand** (~27.000 TMDB-Abrufe, mehrere
+   Stunden, abbrechbar/fortsetzbar):
+   `cd backend && TMDB_API_KEY=... node scripts/backfill-english.mjs`
+   (erst mit `--limit=500` probelaufen). Bis dahin fällt die App bei EN auf
+   deutsche Titel/Plots zurück — nichts bricht.
+3. **Österreich-Kino-Orte:**
+   `cd backend && node scripts/import-plz.mjs AT` und
+   `node scripts/import-kinos.mjs --laender=AT` (beide Skripte konnten AT
+   schon; sie mussten nur nie laufen).
+4. **Workflows:** Nächster planmäßiger Lauf von `streaming.yml`/`cinema.yml`
+   befüllt die AT-Region automatisch (Matrix). Nichts zu tun.
+
+### Was bewusst offen bleibt
+
+- **Schlagwörter auf Englisch** (Hashtags sind deutsche Übersetzungen, siehe
+  `apply-keyword-translation.mjs`) — für EN-Nutzer erscheinen sie deutsch.
+- **USA** (Abschnitt 4): unverändert offen, zuerst die Rechtsfrage.
+- **Weitere EU-Länder:** je Land nur noch `REGIONEN` in `backend/lib/i18n.js`,
+  Workflow-Matrix, `FSK_SYSTEME`/Regionsauswahl im Frontend und die beiden
+  Importe (PLZ/Kinos) ergänzen — die Blaupause ist Österreich.
+- **Anleitungs-Screenshots** (tour/*.png) zeigen die deutsche Oberfläche —
+  werden aktualisiert, wenn alle Oberflächen-Änderungen durch sind.

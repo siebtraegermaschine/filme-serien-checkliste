@@ -2,6 +2,7 @@ import { pool } from '../db/pool.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { ausListe, leeren } from '../lib/listenCache.js';
 import { geheimnisStimmt } from '../lib/vergleich.js';
+import { sprachWahl, regionWahl, sprachFeld, freigabeFuer } from '../lib/i18n.js';
 
 const router = createAsyncRouter();
 
@@ -12,10 +13,10 @@ const PROVIDER_NAMES = {
   apple: 'Apple TV+',
 };
 
-function rowToCand(row) {
+function rowToCand(row, lang = 'de', region = 'DE') {
   return {
     id: String(row.tmdb_id),
-    t: row.title,
+    t: sprachFeld(lang, row.title, row.title_en),
     y: row.year,
     g: row.genres,
     d: row.director,
@@ -23,7 +24,7 @@ function rowToCand(row) {
     p: row.poster_path,
     r: row.rating != null ? Number(row.rating) : null,
     vc: row.vote_count,
-    fsk: row.certification,
+    fsk: freigabeFuer(region, row.certifications, row.certification),
     // Bewusst OHNE Inhaltsangabe (frueher `ov`): sie machte 6,8 MB der 11,1 MB
     // dieser Auslieferung aus, wird aber nur in der aufgeklappten Detailansicht
     // gebraucht. Das Frontend holt sie fuer die sichtbaren Zeilen ueber
@@ -40,8 +41,15 @@ function rowToCand(row) {
 // 1.649 ms bis zum ersten Byte, parallel zur ebenso grossen Titel-Liste.
 export const STREAMING_SCHLUESSEL = 'streaming';
 
-export async function ladeStreaming() {
-  const { rows } = await pool.query(`SELECT * FROM streaming_cache ORDER BY provider_id, type, title`);
+export function streamingSchluessel(lang = 'de', region = 'DE') {
+  return `${STREAMING_SCHLUESSEL}:${lang}:${region}`;
+}
+
+export async function ladeStreaming(lang = 'de', region = 'DE') {
+  const { rows } = await pool.query(
+    `SELECT * FROM streaming_cache WHERE region = $1 ORDER BY provider_id, type, title`,
+    [region]
+  );
 
   const byProvider = new Map();
   let latest = null;
@@ -51,7 +59,7 @@ export async function ladeStreaming() {
       byProvider.set(row.provider_id, { id: row.provider_id, name: PROVIDER_NAMES[row.provider_id] || row.provider_id, f: [], s: [] });
     }
     const bucket = byProvider.get(row.provider_id);
-    (row.type === 'movie' ? bucket.f : bucket.s).push(rowToCand(row));
+    (row.type === 'movie' ? bucket.f : bucket.s).push(rowToCand(row, lang, region));
   }
 
   // Genre-Paarung (deutsch/englisch) haengt hier mit dran, statt einen eigenen
@@ -63,14 +71,16 @@ export async function ladeStreaming() {
 
   return {
     generated: latest ? latest.toISOString() : null,
-    region: 'DE',
+    region,
     providers: Array.from(byProvider.values()),
     genreAlias: aliasRows.map((r) => ({ de: r.name_de, en: r.name_en })),
   };
 }
 
 router.get('/', async (req, res) => {
-  await ausListe(req, res, STREAMING_SCHLUESSEL, ladeStreaming);
+  const lang = sprachWahl(req.query.lang);
+  const region = regionWahl(req.query.region);
+  await ausListe(req, res, streamingSchluessel(lang, region), () => ladeStreaming(lang, region));
 });
 
 // Wird ausschließlich von der GitHub Action (stream-fetch.mjs) mit dem
@@ -86,6 +96,11 @@ router.post('/ingest', async (req, res) => {
   if (!Array.isArray(providers)) {
     return res.status(400).json({ error: 'invalid_payload' });
   }
+  // Region des Laufs: stream-fetch.mjs schickt sie im Dokument mit (TMDB_REGION
+  // je Lauf). Jeder Lauf verwaltet ausschliesslich SEINE Region -- geschrieben,
+  // geprueft und aufgeraeumt wird nur innerhalb dieser Region, damit der
+  // AT-Lauf niemals den DE-Bestand anfasst (und umgekehrt).
+  const region = regionWahl((req.body || {}).region);
 
   const client = await pool.connect();
   try {
@@ -107,25 +122,30 @@ router.post('/ingest', async (req, res) => {
         for (const item of items || []) {
           await client.query(
             `INSERT INTO streaming_cache
-               (provider_id, provider_name, type, tmdb_id, title, year, genres, director, cast_names, poster_path, rating, vote_count, certification, overview, fetched_at)
-             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14, clock_timestamp())
-             ON CONFLICT (provider_id, type, tmdb_id) DO UPDATE SET
+               (provider_id, provider_name, type, tmdb_id, region, title, title_en, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, fetched_at)
+             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18, clock_timestamp())
+             ON CONFLICT (provider_id, type, tmdb_id, region) DO UPDATE SET
                title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
                director = EXCLUDED.director, cast_names = EXCLUDED.cast_names,
                poster_path = EXCLUDED.poster_path, rating = EXCLUDED.rating,
                vote_count = EXCLUDED.vote_count,
                certification = EXCLUDED.certification,
+               certifications = streaming_cache.certifications || EXCLUDED.certifications,
                -- Liefert TMDB an einem Tag mal keine Kurzbeschreibung (z.B. fremdsprachige
                -- Titel ohne deutschen Overview-Text), soll eine zuvor vorhandene (ggf. manuell
                -- nachgetragene) Beschreibung nicht durch einen Leerstring geloescht werden.
                overview = COALESCE(NULLIF(EXCLUDED.overview, ''), streaming_cache.overview),
+               title_en = COALESCE(NULLIF(EXCLUDED.title_en, ''), streaming_cache.title_en),
+               overview_en = COALESCE(NULLIF(EXCLUDED.overview_en, ''), streaming_cache.overview_en),
                fetched_at = clock_timestamp()`,
             [
               providerId,
               providerName,
               type,
               Number(item.id),
+              region,
               item.t,
+              item.tEn || null,
               item.y || null,
               Array.isArray(item.g) ? item.g : [],
               item.d || null,
@@ -134,7 +154,9 @@ router.post('/ingest', async (req, res) => {
               item.r != null ? item.r : null,
               item.vc != null ? item.vc : null,
               item.fsk || null,
+              item.certs && typeof item.certs === 'object' ? item.certs : {},
               item.ov || null,
+              item.ovEn || null,
             ]
           );
         }
@@ -150,18 +172,19 @@ router.post('/ingest', async (req, res) => {
     // Transaktion wird zurueckgerollt, der Bestand bleibt unveraendert stehen und
     // veraltet hoechstens um einen Lauf. Ein wirklich geschrumpftes Angebot faellt
     // dabei ebenfalls durch -- lieber ein Lauf zu wenig als ein leerer Katalog.
-    const { rows: [{ anzahl: bestand }] } = await client.query('SELECT COUNT(*)::int AS anzahl FROM streaming_cache');
+    const { rows: [{ anzahl: bestand }] } = await client.query(
+      'SELECT COUNT(*)::int AS anzahl FROM streaming_cache WHERE region = $1', [region]);
     const geliefert = providers.reduce((n, pv) => n + (pv.f || []).length + (pv.s || []).length, 0);
     const MINDESTANTEIL = 0.7;
     if (bestand > 0 && geliefert < bestand * MINDESTANTEIL) {
       await client.query('ROLLBACK');
-      console.error(`Streaming-Ingest abgelehnt: nur ${geliefert} Titel geliefert, im Bestand sind ${bestand}.`);
+      console.error(`Streaming-Ingest (${region}) abgelehnt: nur ${geliefert} Titel geliefert, im Bestand sind ${bestand}.`);
       return res.status(409).json({
-        error: 'implausible_payload', geliefert, bestand,
+        error: 'implausible_payload', geliefert, bestand, region,
         hinweis: 'Zu wenige Titel im Vergleich zum Bestand -- nichts uebernommen.',
       });
     }
-    await client.query('DELETE FROM streaming_cache WHERE fetched_at < $1', [runStartedAt]);
+    await client.query('DELETE FROM streaming_cache WHERE region = $1 AND fetched_at < $2', [region, runStartedAt]);
     // Genre-Paarung mitschreiben, sofern der Lauf sie geliefert hat. Bewusst nur
     // aktualisierend und ohne Aufraeumen: Faellt das Feld in einem Lauf mal weg
     // (aeltere Skriptversion, TMDB-Aussetzer), soll die vorhandene Zuordnung

@@ -64,7 +64,7 @@ router.get('/progress', async (req, res) => {
 // wird nur sein Hash (wie bei password_reset_tokens).
 //
 // Zwei Arten, siehe schema.sql:
-//   share    -- "Watchliste teilen": verknuepft beim Annehmen, laeuft ab.
+//   share    -- "Watchlist teilen": verknuepft beim Annehmen, laeuft ab.
 //   referral -- "Personen einladen": weist nur auf die App hin, kein Konto
 //               noetig, kein Ablauf. Gibt nichts preis, deshalb auch kein Grund
 //               ihn zu befristen -- so ein Link kann in einer Gruppe stehen

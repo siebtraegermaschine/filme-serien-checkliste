@@ -190,7 +190,7 @@
      per getComputedStyle, nicht bloss im Stylesheet nachgesehen. */
   header .sub-zweit { margin-top: 4px; }
   /* Ab der zehnten Nutzung faellt die zweite Zeile weg -- dieselbe Schwelle wie
-     bei den Watchliste-/Gesehen-Knoepfen und der Anleitung im Personen-Popup
+     bei den Watchlist-/Gesehen-Knoepfen und der Anleitung im Personen-Popup
      (siehe kompakteAktionenSetzen). Sie erklaert eine Funktion; wer sie kennt,
      scrollt bei jedem Start daran vorbei. Der Weg in die Anleitung bleibt ueber
      das Menue. Die erste Zeile ist keine Erklaerung, sondern das Versprechen
@@ -381,15 +381,15 @@
   .shared-meta { color:var(--text-dim); font-size:13px; text-align:center; margin-top:4px; }
   .shared-plot { color:var(--text); font-size:13.5px; line-height:1.45; margin:12px 0 4px; text-align:justify; }
   .shared-von { color:var(--text-dim); font-size:13px; text-align:center; margin-bottom:10px; }
-  /* Trailer ueber die volle Breite, ueber den Watchliste/Gesehen-Knoepfen. Im
+  /* Trailer ueber die volle Breite, ueber den Watchlist/Gesehen-Knoepfen. Im
      Stil des Trailer-Play-Knopfs (Akzent), damit er als eigene Handlung lesbar
-     ist und nicht mit der Watchliste/Gesehen-Reihe verschwimmt. */
+     ist und nicht mit der Watchlist/Gesehen-Reihe verschwimmt. */
   .shared-trailer-btn { display:block; width:100%; margin:16px 0 10px; padding:11px 20px;
     border-radius:8px; background:var(--accent-soft); border:1px solid var(--accent);
     color:var(--accent); font-size:14px; font-weight:600; cursor:pointer; }
   @media (hover:hover) { .shared-trailer-btn:hover { background:var(--accent); color:#12161c; } }
-  /* Watchliste/Gesehen fuellen die Reihe je zur Haelfte, damit der
-     Trailer-Knopf darueber buendig mit ihnen abschliesst (links Watchliste,
+  /* Watchlist/Gesehen fuellen die Reihe je zur Haelfte, damit der
+     Trailer-Knopf darueber buendig mit ihnen abschliesst (links Watchlist,
      rechts Gesehen) und nicht breiter wirkt. */
   #sharedActions button { flex:1; }
   .to-top { position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px));
@@ -696,7 +696,7 @@
   .credits-logo img { width:220px; max-width:100%; height:auto; display:block; }
   .credits-disclaimer { font-style:italic; }
   /* Ab der zehnten Nutzung faellt die Anleitung weg -- dieselbe Schwelle wie bei
-     den Watchliste-/Gesehen-Knoepfen (siehe kompakteAktionenSetzen). Wer die
+     den Watchlist-/Gesehen-Knoepfen (siehe kompakteAktionenSetzen). Wer die
      drei Schritte kennt, will beim Oeffnen die Personenliste sehen und nicht
      jedes Mal daran vorbeiscrollen. Nachlesbar bleibt es im Menue unter
      "Anleitung", Punkt "Schaut gemeinsam". */
@@ -1110,7 +1110,7 @@
        als die Einzeiligkeit. -->
   <!-- "(How to)" steht ausserhalb des <b>: Es ist ein Verweis neben der Aussage,
        nicht Teil davon -- fett gesetzt haette es dieselbe Stimme wie der Satz. -->
-  <p class="sub sub-zweit"><b>Sieh dir die Watchliste deiner Kontakte an und filtert nach euren
+  <p class="sub sub-zweit"><b>Sieh dir die Watchlist deiner Kontakte an und filtere nach euren
     <i>Übereinstimmungen</i>.</b> <span class="howto-link" id="subHowTo" role="button" tabindex="0"
     aria-label="Anleitung öffnen">(How to)</span></p>
   <button type="button" id="profileBtn" class="profile-btn" style="display:none" aria-label="Zusammen schauen" aria-haspopup="true" aria-expanded="false">
@@ -1135,13 +1135,17 @@
          zum selben Ziel. Zurueck geht weiterhin per Klick aufs Logo. -->
     <button type="button" id="howToBtn" class="nav-menu-item">Anleitung</button>
     <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
+    <!-- Sprache & Region: bewusst auch abgemeldet sichtbar -- die Wahl liegt im
+         Geraet (localStorage) und zusaetzlich am Konto, sobald jemand
+         angemeldet ist. Beschriftung setzt das JS (aktuelle Sprache). -->
+    <button type="button" id="langBtn" class="nav-menu-item">Sprache &amp; Region</button>
     <hr class="nav-menu-sep">
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
-    <!-- Stand frueher im Popup "Gemeinsam schauen" neben "Watchliste teilen".
+    <!-- Stand frueher im Popup "Gemeinsam schauen" neben "Watchlist teilen".
          Dorthin gehoert es nicht: Der Link gibt nichts preis und legt keine
          Verknuepfung an, sondern weist nur auf die App hin -- man kann ihn
-         bedenkenlos in eine grosse Gruppe stellen. Neben "Watchliste teilen"
+         bedenkenlos in eine grosse Gruppe stellen. Neben "Watchlist teilen"
          sahen die beiden dagegen aus wie zwei Spielarten derselben Sache.
          Wer einlaedt, braucht ein Konto (der Link haengt am eigenen); wer den
          Link OEFFNET, braucht keines. -->
@@ -1192,7 +1196,7 @@
          gibt dafuer keine eigenen Knoepfe mehr. -->
     <div class="tb-toprow">
       <div class="filter-group">
-        <button id="fOpen" class="active">Watchliste</button>
+        <button id="fOpen" class="active">Watchlist</button>
         <button id="fDone">Gesehen</button>
         <button id="fDiscover">Neue entdecken</button>
       </div>
@@ -1254,7 +1258,7 @@
 </div>
 
 <footer>
-  Dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, „Gesehen"-Status und deine „<i>Watchliste</i>" werden mit deinem Konto gespeichert, sobald du <i class="footer-auth-link" id="footerAuthLink" role="button" tabindex="0" aria-label="Anmelden">angemeldet</i> bist.
+  Dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>, „Gesehen"-Status und deine „<i>Watchlist</i>" werden mit deinem Konto gespeichert, sobald du <i class="footer-auth-link" id="footerAuthLink" role="button" tabindex="0" aria-label="Anmelden">angemeldet</i> bist.
   <!-- Von TMDB vorgeschriebener Wortlaut, bewusst unuebersetzt: Die
        Nutzungsbedingungen geben genau diesen Satz vor. Er steht hier statt nur
        unter Einstellungen -> Credits, weil der Fussbereich auch ohne Konto zu
@@ -1497,10 +1501,10 @@
          wie eine Unterfunktion des Ansehens wirkt. -->
     <ol class="prov-steps">
       <li>Lade Freunde und Verwandte zu MovieMatch ein.</li>
-      <li>Über <b>Watchliste</b> siehst du, was deine Kontakte vorgemerkt und was sie schon
+      <li>Über <b>Watchlist</b> siehst du, was deine Kontakte vorgemerkt und was sie schon
         gesehen haben. Füge Titel, die dir auch gefallen, einfach deinen eigenen Listen hinzu.</li>
       <li>Über <b>„Match"</b> seht ihr <i class="info-word" data-match role="button" tabindex="0"
-        aria-label="Was ist ein Match?">Übereinstimmungen</i> eurer Watchlisten.
+        aria-label="Was ist ein Match?">Übereinstimmungen</i> eurer Watchlists.
         So findet ihr schnell und einfach Filme, Serien oder Kinofilme, die ihr gemeinsam
         als Nächstes sehen möchtet.</li>
     </ol>
@@ -1510,7 +1514,7 @@
          Linie ohne etwas darueber. -->
     <hr class="account-sep prov-sep">
     <div class="profile-list" id="profileList"></div>
-    <!-- Hier steht nur noch "Watchliste teilen": Der Link gibt die eigenen
+    <!-- Hier steht nur noch "Watchlist teilen": Der Link gibt die eigenen
          Listen preis und setzt beidseitig ein Konto voraus -- er gehoert also
          genau dorthin, wo die verknuepften Personen stehen.
 
@@ -1518,10 +1522,26 @@
          auf die App hin, gibt nichts preis und hat mit der Personenliste
          darueber nichts zu tun; nebeneinander sahen die beiden Knoepfe aus wie
          zwei Spielarten derselben Sache. -->
-    <button type="button" id="profileShareBtn" class="profile-add">＋ Watchliste teilen</button>
+    <button type="button" id="profileShareBtn" class="profile-add">＋ Watchlist teilen</button>
     <hr class="account-sep">
     <p class="prov-intro" style="margin-bottom:8px">Schaust du mit Kindern? Nutze die FSK-Filter.</p>
     <div class="fsk-row" id="fskRow"></div>
+  </div>
+</div>
+
+<!-- Sprache & Region. Zwei Reihen aus Knoepfen (wie die FSK-Stufen), Wechsel
+     speichert und laedt neu -- siehe sprachWahlSpeichern. Die Beschriftungen
+     stehen zweisprachig fest im JS (sprachModalEinrichten), damit das Fenster
+     in jeder Ausgangssprache verstaendlich ist. -->
+<div id="langModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="langModalX" aria-label="Schließen">✕</button>
+    <h3 id="langModalTitel">Sprache &amp; Region</h3>
+    <p class="prov-intro" id="langSpracheLabel">Sprache / Language</p>
+    <div class="fsk-row" id="langSpracheRow"></div>
+    <p class="prov-intro" style="margin-top:14px" id="langRegionLabel">Region</p>
+    <div class="fsk-row" id="langRegionRow"></div>
+    <p class="feedback-hinweis" id="langHinweis"></p>
   </div>
 </div>
 
@@ -1629,7 +1649,7 @@
     <h3>Konto löschen</h3>
     <p class="delete-warn">Dein Konto wird <b>in 14 Tagen</b> endgültig gelöscht. Bis dahin kannst
       du das rückgängig machen – melde dich einfach wieder an. Danach ist es endgültig.</p>
-    <p class="delete-warn">Gelöscht werden dann dein Konto, deine Watchliste, alle
+    <p class="delete-warn">Gelöscht werden dann dein Konto, deine Watchlist, alle
       „Gesehen"-Markierungen, ausgeblendete Titel und deine Verknüpfungen mit anderen Personen.
       Verknüpfte Personen sehen dich danach nicht mehr; ihre eigenen Listen bleiben unberührt.</p>
     <!-- Was ohne Personenbezug erhalten bleibt (Suchbegriffe, Anzahl der
@@ -1669,7 +1689,683 @@
 let FILME = [], SERIEN = [];
 let DETAILS = { filme: [], serien: [] };
 
-const INFO_ICON = '<span class="info-i" data-ts role="button" tabindex="0" aria-label="Was ist der Taste Score?">i</span>';
+/* =====================================================================
+   Internationalisierung (siehe PLAN-INTERNATIONALISIERUNG.md, Abschnitt 1)
+
+   SPRACHE ('de'|'en') und REGION_WAHL (ISO 3166-1, z.B. 'DE'/'AT') werden je
+   Geraet gemerkt (localStorage) und, sobald jemand angemeldet ist, am Konto
+   (users.sprache/region, siehe PUT /api/auth/settings). Beim allerersten
+   Besuch entscheidet die Browsersprache.
+
+   Alle sichtbaren JS-Texte kommen aus UI_TEXTE[SPRACHE] (unten als TXT).
+   Die statischen Texte im Markup stehen weiterhin deutsch im HTML -- bei
+   Englisch tauscht sie uebersetzeStatischesMarkup() nach dem Laden aus. Ein
+   Sprachwechsel speichert die Wahl und laedt die Seite neu: einfacher und
+   verlaesslicher, als hunderte bereits gezeichnete Stellen live umzubauen.
+
+   Inhaltsdaten (Titel/Plots) kommen bereits in der gewaehlten Sprache vom
+   Server (?lang=..., Weg A); Genres uebersetzt genreAnzeige() ueber die
+   TMDB-Genre-Paarung (genre_alias), Schlagwoerter bleiben vorerst deutsch.
+   ===================================================================== */
+var SPRACHE_KEY = 'mt.sprache';
+var REGION_KEY = 'mt.region';
+function sprachErmittlung(){
+  try {
+    var s = localStorage.getItem(SPRACHE_KEY);
+    if (s === 'de' || s === 'en') return s;
+  } catch (e) {}
+  return String(navigator.language || 'de').toLowerCase().indexOf('de') === 0 ? 'de' : 'en';
+}
+function regionErmittlung(){
+  try {
+    var r = localStorage.getItem(REGION_KEY);
+    if (r && /^[A-Z]{2}$/.test(r)) return r;
+  } catch (e) {}
+  // Browser-Region (z.B. "de-AT" -> AT), sonst DE.
+  var m = String(navigator.language || '').match(/-([A-Za-z]{2})$/);
+  var r2 = m ? m[1].toUpperCase() : 'DE';
+  return ['DE', 'AT'].indexOf(r2) !== -1 ? r2 : 'DE';
+}
+var SPRACHE = sprachErmittlung();
+var REGION_WAHL = regionErmittlung();
+// Datums-/Zahlenformate haengen an der Sprache: en-GB (Tag vor Monat) passt
+// zur EU-Ausrichtung besser als en-US.
+var LOCALE = SPRACHE === 'de' ? 'de-DE' : 'en-GB';
+document.documentElement.lang = SPRACHE;
+// Haengt Sprache und Region an einen API-Pfad an -- '?' oder '&' je nachdem,
+// ob der Pfad schon Parameter traegt.
+function mitSpracheRegion(pfad){
+  return pfad + (pfad.indexOf('?') === -1 ? '?' : '&') + 'lang=' + SPRACHE + '&region=' + REGION_WAHL;
+}
+
+/* Alle sichtbaren Texte, die das JavaScript erzeugt. Deutsch ist die
+   Referenz (Wortlaut identisch mit dem bisherigen Stand), Englisch die
+   Uebersetzung. Funktionen fuer Texte mit Einschueben. */
+var UI_TEXTE = {
+  de: {
+    film: 'Film', serie: 'Serie', miniSerie: 'Mini-Serie',
+    watchliste: 'Watchlist', gesehenKlein: 'gesehen', gesehenGross: 'Gesehen',
+    aehnlicheTitel: 'Ähnliche Titel',
+    aehnlicheTitelZu: function(t){ return 'Ähnliche Titel zu „' + t + '“'; },
+    keineAehnlichen: 'Keine ähnlichen Titel für diese Filterkombination.',
+    mehrLaden: 'Mehr laden',
+    mehrAnzeigen: function(n){ return 'Mehr anzeigen (' + n + ' weitere)'; },
+    laedt: 'Lädt …',
+    regie: 'Regie', originaltitel: 'Originaltitel:', besetzung: 'Besetzung:',
+    ansehen: '▶ Ansehen', leihen: 'Leihen', kaufen: 'Kaufen',
+    trailer: '▶ Trailer',
+    trailerTitel: function(t){ return 'Trailer: ' + t; },
+    trailerFehlt: 'Zu diesem Titel ist bei TMDB kein Trailer hinterlegt.',
+    trailerYoutube: 'Bei YouTube suchen',
+    trailerHinweis: 'Beim Abspielen wird der Trailer von YouTube geladen. Dabei werden Daten (u. a. deine IP-Adresse) an Google übertragen.',
+    trailerAbspielen: '▶ Trailer abspielen',
+    nurBeiAnbietern: function(n){ return 'Nur bei ' + n + ' nicht ausgewählten ' + (n === 1 ? 'Anbieter' : 'Anbietern') + ' verfügbar.'; },
+    nichtVerfuegbar: 'Zurzeit nicht verfügbar.',
+    weitereAnbieter: function(n){ return '+ ' + n + ' weitere nicht ausgewählte Anbieter'; },
+    datenVon: 'Daten von',
+    abImKino: function(d){ return 'Ab ' + d + ' im Kino'; },
+    wiederauffuehrung: function(jahr){ return '🎬 Wiederaufführung im Kino – ursprünglich erschienen ' + jahr + '.'; },
+    zuVieleVersuche: 'Zu viele Versuche. Bitte später erneut versuchen.',
+    zuVieleVersucheIn: function(min){ return 'Zu viele Versuche. Bitte in ' + (min <= 1 ? 'einer Minute' : min + ' Minuten') + ' erneut versuchen.'; },
+    titelWerdenGeladen: 'Titel werden geladen …',
+    keineTrefferFuer: function(q){ return 'Keine Treffer für „' + q + '".'; },
+    keineTrefferBei: function(q, wer){ return 'Keine Treffer für „' + q + '" bei ' + wer + '.'; },
+    hatNichts: function(wer, was){ return wer + ' hat hier nichts ' + was + '.'; },
+    markiert: 'markiert', aufDerWatchlist: 'auf der Watchlist', alsGesehenMarkiert: 'als gesehen markiert',
+    keineFreigabe: function(stufe){ return 'Keine Titel mit Altersfreigabe „' + stufe + '". Titel ohne hinterlegte Freigabe werden dabei ausgeblendet – das betrifft einen Teil des Katalogs. Den Filter hebst du oben links wieder auf.'; },
+    keineGemeinsamen: function(wer){ return 'Keine gemeinsamen Titel mit ' + wer + '. Je mehr ihr beide eurer Watchlist hinzufügt, desto mehr Übereinstimmungen gibt es.'; },
+    keineTitelAuswahl: 'Keine Titel für diese Auswahl.',
+    watchlisteLeer: 'Dies ist deine Watchlist. Füge mind. 20 Titel über „Neue entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>. ' +
+      'Zukünftig musst du nur noch auswählen, ob du einen Film oder eine Serie schauen möchtest oder ins Kino gehen willst. ' +
+      'Hier siehst du dann deine persönliche Watchlist, sortiert nach deinem Geschmack.<br><br>' +
+      '<u>Du möchtest mit anderen Filme genießen?</u><br>' +
+      'Links oben kannst du Personen zu der App einladen. Danach kannst du dir deren Watchlist ansehen und ' +
+      'Titel daraus übernehmen – oder nach euren <i class="info-word" data-match role="button" tabindex="0" ' +
+      'aria-label="Was ist ein Match?">Übereinstimmungen</i> filtern und sofort etwas finden, das allen gefällt.',
+    auchImKino: function(n){ return '🍿 Auch im Kino: ' + n + ' Treffer'; },
+    katalogFehler: 'Katalog konnte nicht geladen werden. Ist das Backend erreichbar?',
+    kinoLabels: { now: 'Aktuell im Kino', soon: 'In Kürze im Kino', later: 'Bald im Kino' },
+    kinoLeer: { now: 'Aktuell sind keine Titel hinterlegt.', soon: 'In Kürze startet aktuell nichts Neues.', later: 'Für die kommenden Monate ist noch nichts hinterlegt.' },
+    kinoFehler: 'Kino-Daten konnten nicht geladen werden.',
+    gesehenZuWl: 'Du hast diesen Titel als gesehen markiert. Auf der Watchlist gilt er nicht mehr als gesehen: Er verschwindet aus „Gesehen“ und deine Sterne-Bewertung zählt nicht mehr für deinen Taste-Score. Trotzdem auf die Watchlist setzen?',
+    wischFilme: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
+    wischSerien: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
+    wischDiscovery: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht unter „Neue entdecken“ nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
+    wischKino: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht auf der Kino-Seite nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
+    ausListeEntfernen: function(wort, pron){ return wort + ' aus deiner Liste entfernen? Du kannst ' + pron + ' über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen.'; },
+    pronFilm: 'ihn', pronSerie: 'sie',
+    sucheTitel: 'Titel', sucheAlternativtitel: 'Alternativtitel', sucheGenre: 'Genre',
+    sucheDarsteller: 'Darsteller', sucheRegie: 'Regie', sucheSchlagwort: 'Schlagwort',
+    filternNach: function(v){ return 'Möchtest du nach „' + v + '“ filtern?'; },
+    tourSlides: [
+      { titel: 'Filme & Serien entdecken', text: '„Neue entdecken" listet alle Filme und Serien auf sowie aktuelle und zukünftige Kinofilme. Markiere Titel als gesehen oder füge sie deiner Watchlist hinzu. Dadurch bildet sich dein persönlicher Taste-Score.' },
+      { titel: 'Dein Taste-Score', text: 'Ab 20 gespeicherten Titeln werden alle Filme, Serien und Kinofilme nach deinem Geschmack sortiert.' },
+      { titel: 'Mit anderen schauen', text: '„Matche" deine Watchlist mit anderen und filtere nach Titeln, die ihr gemeinsam sehen wollt.' },
+      { titel: 'Streaming & Taste-Score', text: 'Markiere unter Einstellungen die Streaminganbieter, die du nutzt. Filtere alle Filme und Serien, die bei deinen Anbietern aktuell kostenlos laufen. Diese werden nach deinem Taste-Score sortiert.' },
+      { titel: 'Film- & Seriendetails', text: 'Klicke einen Titel an und erhalte Kurzbeschreibung, Trailer, ähnliche Titel und vieles mehr.' },
+      { titel: 'Suche & Filter', text: 'Suche und filtere nach Titel, Genre, Schauspielern oder Filminhalten.' },
+    ],
+    weiter: 'Weiter', losGehts: 'Los geht’s',
+    installIOS: '<p>iOS erlaubt Webseiten leider nicht, die Installation direkt auszulösen – so geht es in wenigen Schritten von Hand:</p>' +
+      '<ol class="install-steps">' +
+      '<li>Diese Seite in <b>Safari</b> öffnen (nicht in Chrome oder einer anderen App).</li>' +
+      '<li>Unten auf das Teilen-Symbol <b>⬆️</b> tippen.</li>' +
+      '<li><b>„Zum Home-Bildschirm"</b> auswählen (ggf. in der Liste nach unten scrollen).</li>' +
+      '<li>Oben rechts auf <b>„Hinzufügen"</b> tippen.</li></ol>',
+    installAndroid: '<p>So speicherst du MovieMatch auf deinem Android-Gerät als App:</p>' +
+      '<ol class="install-steps">' +
+      '<li>Diese Seite in <b>Chrome</b> öffnen.</li>' +
+      '<li>Oben rechts auf das Menü <b>⋮</b> tippen.</li>' +
+      '<li><b>„App installieren"</b> bzw. <b>„Zum Startbildschirm hinzufügen"</b> auswählen.</li></ol>',
+    feedbackAngemeldet: 'Wir speichern deine Nachricht und schicken deine E-Mail-Adresse mit, damit wir antworten können.',
+    feedbackAbgemeldet: 'Wir speichern deine Nachricht. Ohne Anmeldung erreicht sie uns ohne Absender – wir können dann nicht antworten.',
+    feedbackLeer: 'Bitte einen Text eingeben.',
+    sende: 'Sende …', absenden: 'Absenden',
+    sendenFehler: 'Senden fehlgeschlagen, bitte später erneut versuchen.',
+    bisStufe: function(n){ return 'bis ' + n; },
+    unbekannt: 'Unbekannt',
+    undWort: ' und ',
+    weiteren: function(n){ return ' und ' + n + ' weiteren'; },
+    schonGesehenNote: function(namen, mehrere){ return namen + (mehrere ? ' haben' : ' hat') + ' das schon gesehen'; },
+    nochSehenNote: function(namen, mehrere){ return namen + (mehrere ? ' wollen' : ' will') + ' das noch sehen'; },
+    zusammenSchauen: 'Zusammen schauen',
+    mitWem: function(namen){ return 'mit ' + namen; },
+    altersfreigabe: function(label){ return 'Altersfreigabe ' + label; },
+    listeVon: function(name){ return 'Liste von ' + name; },
+    zurueck: 'zurück', aufheben: 'aufheben',
+    kinoVorschlaegeFuer: function(namen){ return 'Kino-Vorschläge für dich und ' + namen; },
+    gemeinsameTitelMit: function(namen){ return 'Gemeinsame Titel mit ' + namen; },
+    matchWort: 'Match',
+    verknuepfungLoesen: 'Verknüpfung lösen',
+    favoritOben: 'Als Favorit oben anzeigen',
+    profilOhneKonto: 'Zum Einladen brauchst du ein Konto. Der FSK-Filter unten wirkt auch ohne.',
+    profilLaedt: 'Verknüpfte Personen werden geladen …',
+    profilLeer: 'Noch niemand verknüpft. Lade jemanden ein, um gemeinsame Titel zu finden.',
+    loesenFrage: function(name){ return 'Verknüpfung mit ' + name + ' lösen? Ihr seht dann gegenseitig keine gemeinsamen Titel mehr.'; },
+    loesenFehler: 'Konnte nicht gelöst werden. Bitte erneut versuchen.',
+    einladungShareTitel: 'Watchlist teilen',
+    einladungShareFrage: 'Wer diesen Link öffnet, kann danach deine ganze Watchlist und deine „gesehen"-Liste ansehen, einschließlich deiner Sterne-Bewertungen. Umgekehrt gilt dasselbe. Lösen könnt ihr die Verknüpfung jederzeit.\n\nLink jetzt erstellen?',
+    einladungShareText: function(wer){ return wer + ' möchte auf MovieMatch die Watchlist mit dir teilen. Entdecke neue Filme, Serien und Kinofilme, sortiert nach deinem Geschmack. „Matcht" eure Watchlists und findet Titel, die ihr beide als Nächstes sehen möchtet:'; },
+    einladungShareFehler: 'Der Link konnte nicht erstellt werden.',
+    einladungRefTitel: 'Personen einladen',
+    einladungRefText: function(wer){ return wer + ' empfiehlt dir MovieMatch. Entdecke Filme, Serien und Kinofilme, sortiert nach deinem Geschmack – teile deine Watchlist mit anderen und seht, welche Titel ihr gemeinsam sehen möchtet:'; },
+    einladungRefAusgeloggt: 'Entdecke MovieMatch. Filme, Serien und Kinofilme, sortiert nach deinem Geschmack. Teilt eure Watchlists und seht, welche Titel ihr gemeinsam sehen möchtet:',
+    einladungRefFehler: 'Der Einladungslink konnte nicht erstellt werden.',
+    jemand: 'Jemand',
+    linkGueltig: function(tage){ return 'Der Link ist ' + tage + ' Tage gültig.'; },
+    linkLaeuftNichtAb: 'Der Link läuft nicht ab.',
+    kopiert: 'In die Zwischenablage kopiert.',
+    kopierenFehler: 'Kopieren hat nicht geklappt – Link oben von Hand markieren.',
+    einladungAnmelden: 'Melde dich an oder lege ein Konto an, um die Einladung anzunehmen.',
+    anmelden: 'Anmelden',
+    bereitsVerknuepft: function(name){ return 'Du bist mit ' + name + ' bereits verknüpft.'; },
+    allesKlar: 'Alles klar',
+    einladungFrage: function(name){ return name + ' möchte sich mit dir verknüpfen.<br><br>' +
+      'Ihr könnt danach <b>gegenseitig eure ganze Watchlist und „gesehen&quot;-Liste ansehen</b> – ' +
+      'einschließlich der Sterne-Bewertungen – und nach gemeinsamen Titeln filtern. ' +
+      'Nicht sichtbar werden E-Mail-Adresse und Kontodaten.<br><br>' +
+      'Die Verknüpfung lässt sich jederzeit von beiden Seiten wieder lösen. ' +
+      'Näheres in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.'; },
+    ablehnen: 'Ablehnen', annehmen: 'Annehmen',
+    verknuepftMit: function(name){ return 'Verknüpft mit ' + name + '. Du findest die Auswahl oben links.'; },
+    einladungFehlgeschlagen: 'Die Einladung konnte nicht angenommen werden. Möglicherweise ist sie abgelaufen oder bereits eingelöst.',
+    schliessen: 'Schließen',
+    einladungAbgelaufen: 'Diese Einladung ist abgelaufen.',
+    einladungEingeloest: 'Diese Einladung wurde bereits eingelöst.',
+    einladungEigene: 'Das ist deine eigene Einladung.',
+    einladungUngueltig: 'Diese Einladung ist ungültig.',
+    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' haben' : ' hat') +
+      ' deine Einladung angenommen.\n\nIhr seht ab jetzt gegenseitig eure Watchlist und ' +
+      '„gesehen"-Liste. Unter „Match" seht ihr eure Übereinstimmungen. ' +
+      'Lösen kannst du das links oben unter „Gemeinsam schauen".'; },
+    nameFehlt: 'Bitte einen Namen eintragen.',
+    speichernFehler: 'Konnte nicht gespeichert werden.',
+    speichernFehlerNochmal: 'Konnte nicht gespeichert werden. Bitte erneut versuchen.',
+    speichernFehlgeschlagen: 'Speichern fehlgeschlagen. Bitte erneut versuchen.',
+    anbieterFehler: 'Anbieter konnten nicht geladen werden.',
+    keineAnbieter: 'Keine Anbieter verfügbar.',
+    weitereAnbieterZeigen: function(n){ return 'Weitere ' + n + ' Anbieter anzeigen'; },
+    nAusgewaehlt: function(n){ return n + ' ausgewählt'; },
+    nichtsAusgewaehlt: 'Nichts ausgewählt – es werden alle Anbieter angezeigt.',
+    keineKinosUmkreis: 'Keine Kinos im gewählten Umkreis.',
+    ortZuerst: 'Suche zuerst deinen Ort.',
+    kinosFehler: 'Kinos konnten nicht geladen werden.',
+    inDerNaehe: 'In der Nähe',
+    kinoAusgewaehlt: function(n){ return n === 0 ? 'Noch kein Kino ausgewählt.' : n === 1 ? '1 Kino ausgewählt' : n + ' Kinos ausgewählt'; },
+    wiederHinzufuegen: 'Wieder hinzufügen',
+    keineAusgeblendeten: 'Keine ausgeblendeten Titel.',
+    ladenFehler: 'Konnte nicht geladen werden.',
+    pwZuKurz: 'Mindestens 8 Zeichen.',
+    pwUngleich: 'Die beiden Passwörter stimmen nicht überein.',
+    pwGeaendert: 'Passwort geändert.',
+    pwFalsch: 'Aktuelles Passwort ist falsch.',
+    aenderungFehler: 'Änderung fehlgeschlagen.',
+    emailGeaendert: 'E-Mail-Adresse geändert.',
+    emailVergeben: 'Diese E-Mail wird bereits verwendet.',
+    kontoLoeschenFrage: 'Konto und alle Daten endgültig löschen? Das lässt sich nicht rückgängig machen.',
+    pwStimmtNicht: 'Das Passwort stimmt nicht.',
+    nichtGeklappt: 'Das hat nicht geklappt. Bitte erneut versuchen.',
+    kontoWirdGeloescht: function(datum){ return 'Dein Konto wird am ' + datum + ' endgültig gelöscht.\n\nDu wurdest jetzt abgemeldet. Bis dahin kannst du die Löschung rückgängig machen, indem du dich wieder anmeldest.'; },
+    in14Tagen: 'in 14 Tagen',
+    loeschAntrag: function(datum){ return 'Für dein Konto liegt ein Löschauftrag vor. Es wird am ' + datum + ' endgültig gelöscht.\n\nMöchtest du die Löschung zurücknehmen?'; },
+    loeschungZurueck: 'Die Löschung wurde zurückgenommen. Dein Konto bleibt bestehen.',
+    diesenTitel: 'diesen Titel',
+    vonZehn: function(n){ return '✓ ' + n + ' von 10'; },
+    registrieren: 'Registrieren',
+    kontoErstellen: 'Konto erstellen',
+    nochKeinKonto: 'Noch kein Konto? <button type="button" id="authToggleBtn">Registrieren</button>',
+    schonKonto: 'Schon ein Konto? <button type="button" id="authToggleBtn">Anmelden</button>',
+    pwZuruecksetzen: 'Passwort zurücksetzen',
+    linkAnfordern: 'Link anfordern',
+    zurueckZumLogin: '<button type="button" id="authToggleBtn">Zurück zum Login</button>',
+    resetVerschickt: 'Falls diese E-Mail registriert ist, wurde ein Link zum Zuruecksetzen verschickt.',
+    loginFalsch: 'E-Mail oder Passwort falsch.',
+    emailKontoExistiert: 'Für diese E-Mail existiert bereits ein Konto.',
+    pwMindestens: 'Passwort muss mindestens 8 Zeichen haben.',
+    empfehlungVon: function(wer){ return wer + ' hat eine Empfehlung für dich:'; },
+    gefundenAuf: 'Gefunden auf MovieMatch:',
+    codeOeffnen: 'Code öffnen und Titel speichern',
+    unterWort: 'unter: ',
+    bildWirdVorbereitet: 'Bild wird vorbereitet …',
+    nichtTeilbar: 'Dieser Titel lässt sich nicht teilen – ihm fehlt eine eindeutige Kennung.',
+    teilenHinweis: 'Teile diesen Titel mit anderen als Nachricht oder teile ihn auf Social Media.',
+    teilenKeineBilder: 'Dein Browser kann keine Bilder teilen – das Bild wird stattdessen geladen.',
+    bildFehler: 'Bild konnte nicht erzeugt werden – Teilen geht trotzdem, dann ohne Bild.',
+    ohneBild: 'Ohne Bild werden nur Text und Adresse verschickt.',
+    linkZumTeilen: 'Link zum Teilen:',
+    titelWirdGeladen: 'Titel wird geladen …',
+    titelLadenFehler: 'Dieser Titel konnte nicht geladen werden.',
+    fuerDichGeteilt: 'Für dich geteilt',
+    trailerAnsehen: '▶ Trailer ansehen',
+    nurAngemeldet: 'Nur angemeldet lässt sich der Titel dauerhaft speichern.',
+    stehtAufWatchlist: 'Steht schon auf deiner Watchlist.',
+    schonGesehenHint: 'Hast du schon gesehen.',
+    wirdGespeichert: 'Wird gespeichert …',
+    markierungenPruefen: 'Deine Markierungen werden geprüft …',
+    fremdSterne: function(name, n){ return name + ': ' + n + ' von 10 Sternen'; },
+    fremdUnbewertet: function(name){ return name + ' hat das noch nicht bewertet'; },
+    tasteScoreAria: 'Was ist der Taste-Score?',
+    matchAria: 'Was ist ein Match?',
+    posterGroesser: 'Poster größer anzeigen',
+    sprachName: 'Deutsch',
+    sprachMenue: 'Sprache & Region',
+  },
+  en: {
+    film: 'Movie', serie: 'Series', miniSerie: 'Mini-series',
+    watchliste: 'Watchlist', gesehenKlein: 'watched', gesehenGross: 'Watched',
+    aehnlicheTitel: 'Similar titles',
+    aehnlicheTitelZu: function(t){ return 'Titles similar to “' + t + '”'; },
+    keineAehnlichen: 'No similar titles for this filter combination.',
+    mehrLaden: 'Load more',
+    mehrAnzeigen: function(n){ return 'Show more (' + n + ' more)'; },
+    laedt: 'Loading …',
+    regie: 'Director', originaltitel: 'Original title:', besetzung: 'Cast:',
+    ansehen: '▶ Stream', leihen: 'Rent', kaufen: 'Buy',
+    trailer: '▶ Trailer',
+    trailerTitel: function(t){ return 'Trailer: ' + t; },
+    trailerFehlt: 'TMDB has no trailer on file for this title.',
+    trailerYoutube: 'Search on YouTube',
+    trailerHinweis: 'Playing the trailer loads it from YouTube. This transfers data (including your IP address) to Google.',
+    trailerAbspielen: '▶ Play trailer',
+    nurBeiAnbietern: function(n){ return 'Only available on ' + n + ' unselected ' + (n === 1 ? 'service' : 'services') + '.'; },
+    nichtVerfuegbar: 'Currently not available.',
+    weitereAnbieter: function(n){ return '+ ' + n + ' more unselected ' + (n === 1 ? 'service' : 'services'); },
+    datenVon: 'Data from',
+    abImKino: function(d){ return 'In cinemas from ' + d; },
+    wiederauffuehrung: function(jahr){ return '🎬 Cinema re-release – originally released ' + jahr + '.'; },
+    zuVieleVersuche: 'Too many attempts. Please try again later.',
+    zuVieleVersucheIn: function(min){ return 'Too many attempts. Please try again in ' + (min <= 1 ? 'a minute' : min + ' minutes') + '.'; },
+    titelWerdenGeladen: 'Loading titles …',
+    keineTrefferFuer: function(q){ return 'No results for “' + q + '”.'; },
+    keineTrefferBei: function(q, wer){ return 'No results for “' + q + '” in ' + wer + '’s list.'; },
+    hatNichts: function(wer, was){ return wer + ' has nothing ' + was + ' here.'; },
+    markiert: 'saved', aufDerWatchlist: 'on the watchlist', alsGesehenMarkiert: 'marked as watched',
+    keineFreigabe: function(stufe){ return 'No titles with age rating “' + stufe + '”. Titles without a rating on file are hidden – that affects part of the catalogue. Remove the filter at the top left.'; },
+    keineGemeinsamen: function(wer){ return 'No shared titles with ' + wer + '. The more you both add to your watchlists, the more matches you get.'; },
+    keineTitelAuswahl: 'No titles for this selection.',
+    watchlisteLeer: 'This is your watchlist. Add at least 20 titles via “Discover new”. The more titles you add, the more accurate your <i class="info-word" data-ts role="button" tabindex="0" aria-label="What is the Taste Score?">Taste Score</i> becomes. ' +
+      'From then on you only choose whether you want to watch a movie, a series, or go to the cinema. ' +
+      'You will see your personal watchlist here, sorted by your taste.<br><br>' +
+      '<u>Want to enjoy movies with others?</u><br>' +
+      'Invite people to the app at the top left. Then browse their watchlists and add titles you like – or filter by your ' +
+      '<i class="info-word" data-match role="button" tabindex="0" aria-label="What is a match?">matches</i> and instantly find something everyone wants to watch.',
+    auchImKino: function(n){ return '🍿 Also in cinemas: ' + n + ' ' + (n === 1 ? 'result' : 'results'); },
+    katalogFehler: 'The catalogue could not be loaded. Is the backend reachable?',
+    kinoLabels: { now: 'Now playing', soon: 'Coming soon', later: 'Coming later' },
+    kinoLeer: { now: 'No titles on file right now.', soon: 'Nothing new starting soon.', later: 'Nothing on file for the coming months yet.' },
+    kinoFehler: 'Cinema data could not be loaded.',
+    gesehenZuWl: 'You marked this title as watched. On the watchlist it no longer counts as watched: it disappears from “Watched” and your star rating no longer counts towards your Taste Score. Add it to the watchlist anyway?',
+    wischFilme: 'Swiping left removes the title from your movies list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
+    wischSerien: 'Swiping left removes the title from your series list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
+    wischDiscovery: 'Swiping left hides the title permanently. It no longer appears under “Discover new”. You can bring it back under Settings → “Removed titles”. You will only be asked this once. Hide now?',
+    wischKino: 'Swiping left hides the title permanently. It no longer appears on the cinema page. You can bring it back under Settings → “Removed titles”. You will only be asked this once. Hide now?',
+    ausListeEntfernen: function(wort){ return 'Remove this ' + wort.toLowerCase() + ' from your list? You can add it again anytime via “Discover new” or the search.'; },
+    pronFilm: 'it', pronSerie: 'it',
+    sucheTitel: 'Title', sucheAlternativtitel: 'Alternative title', sucheGenre: 'Genre',
+    sucheDarsteller: 'Actor', sucheRegie: 'Director', sucheSchlagwort: 'Keyword',
+    filternNach: function(v){ return 'Filter by “' + v + '”?'; },
+    tourSlides: [
+      { titel: 'Discover movies & series', text: '“Discover new” lists all movies and series as well as current and upcoming cinema releases. Mark titles as watched or add them to your watchlist. This builds your personal Taste Score.' },
+      { titel: 'Your Taste Score', text: 'Once you have saved 20 titles, all movies, series and cinema releases are sorted by your taste.' },
+      { titel: 'Watch with others', text: '“Match” your watchlist with others and filter for titles you want to watch together.' },
+      { titel: 'Streaming & Taste Score', text: 'Select the streaming services you use under Settings. Filter all movies and series currently included with your services – sorted by your Taste Score.' },
+      { titel: 'Movie & series details', text: 'Tap a title to get a synopsis, trailer, similar titles and more.' },
+      { titel: 'Search & filter', text: 'Search and filter by title, genre, actors or plot keywords.' },
+    ],
+    weiter: 'Next', losGehts: 'Let’s go',
+    installIOS: '<p>iOS does not let websites trigger the installation directly – here is how to do it in a few steps:</p>' +
+      '<ol class="install-steps">' +
+      '<li>Open this page in <b>Safari</b> (not in Chrome or another app).</li>' +
+      '<li>Tap the share icon <b>⬆️</b> at the bottom.</li>' +
+      '<li>Choose <b>“Add to Home Screen”</b> (you may need to scroll down).</li>' +
+      '<li>Tap <b>“Add”</b> at the top right.</li></ol>',
+    installAndroid: '<p>How to save MovieMatch as an app on your Android device:</p>' +
+      '<ol class="install-steps">' +
+      '<li>Open this page in <b>Chrome</b>.</li>' +
+      '<li>Tap the menu <b>⋮</b> at the top right.</li>' +
+      '<li>Choose <b>“Install app”</b> or <b>“Add to home screen”</b>.</li></ol>',
+    feedbackAngemeldet: 'We store your message and include your email address so we can reply.',
+    feedbackAbgemeldet: 'We store your message. Without an account it reaches us without a sender – we cannot reply.',
+    feedbackLeer: 'Please enter a message.',
+    sende: 'Sending …', absenden: 'Send',
+    sendenFehler: 'Sending failed, please try again later.',
+    bisStufe: function(n){ return 'up to ' + n; },
+    unbekannt: 'Unknown',
+    undWort: ' and ',
+    weiteren: function(n){ return ' and ' + n + ' more'; },
+    schonGesehenNote: function(namen, mehrere){ return namen + (mehrere ? ' have' : ' has') + ' already watched this'; },
+    nochSehenNote: function(namen, mehrere){ return namen + (mehrere ? ' want' : ' wants') + ' to watch this'; },
+    zusammenSchauen: 'Watch together',
+    mitWem: function(namen){ return 'with ' + namen; },
+    altersfreigabe: function(label){ return 'Age rating ' + label; },
+    listeVon: function(name){ return name + '’s list'; },
+    zurueck: 'back', aufheben: 'clear',
+    kinoVorschlaegeFuer: function(namen){ return 'Cinema picks for you and ' + namen; },
+    gemeinsameTitelMit: function(namen){ return 'Shared titles with ' + namen; },
+    matchWort: 'Match',
+    verknuepfungLoesen: 'Remove connection',
+    favoritOben: 'Show as favourite at the top',
+    profilOhneKonto: 'You need an account to invite people. The age filter below works without one.',
+    profilLaedt: 'Loading connected people …',
+    profilLeer: 'Nobody connected yet. Invite someone to find shared titles.',
+    loesenFrage: function(name){ return 'Remove the connection with ' + name + '? You will no longer see each other’s titles.'; },
+    loesenFehler: 'Could not be removed. Please try again.',
+    einladungShareTitel: 'Share watchlist',
+    einladungShareFrage: 'Anyone opening this link can then see your entire watchlist and your “watched” list, including your star ratings. The same applies the other way round. You can remove the connection at any time.\n\nCreate the link now?',
+    einladungShareText: function(wer){ return wer + ' wants to share a watchlist with you on MovieMatch. Discover new movies, series and cinema releases, sorted by your taste. “Match” your watchlists and find titles you both want to watch next:'; },
+    einladungShareFehler: 'The link could not be created.',
+    einladungRefTitel: 'Invite people',
+    einladungRefText: function(wer){ return wer + ' recommends MovieMatch. Discover movies, series and cinema releases sorted by your taste – share your watchlist with others and see which titles you want to watch together:'; },
+    einladungRefAusgeloggt: 'Discover MovieMatch. Movies, series and cinema releases, sorted by your taste. Share your watchlists and see which titles you want to watch together:',
+    einladungRefFehler: 'The invite link could not be created.',
+    jemand: 'Someone',
+    linkGueltig: function(tage){ return 'The link is valid for ' + tage + ' days.'; },
+    linkLaeuftNichtAb: 'The link does not expire.',
+    kopiert: 'Copied to clipboard.',
+    kopierenFehler: 'Copying failed – select the link above by hand.',
+    einladungAnmelden: 'Sign in or create an account to accept the invitation.',
+    anmelden: 'Sign in',
+    bereitsVerknuepft: function(name){ return 'You are already connected with ' + name + '.'; },
+    allesKlar: 'Got it',
+    einladungFrage: function(name){ return name + ' wants to connect with you.<br><br>' +
+      'You will then be able to <b>see each other’s entire watchlist and “watched” list</b> – ' +
+      'including star ratings – and filter for shared titles. ' +
+      'Email addresses and account details stay private.<br><br>' +
+      'Either side can remove the connection at any time. ' +
+      'Details in the <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.'; },
+    ablehnen: 'Decline', annehmen: 'Accept',
+    verknuepftMit: function(name){ return 'Connected with ' + name + '. You can find the selection at the top left.'; },
+    einladungFehlgeschlagen: 'The invitation could not be accepted. It may have expired or already been used.',
+    schliessen: 'Close',
+    einladungAbgelaufen: 'This invitation has expired.',
+    einladungEingeloest: 'This invitation has already been used.',
+    einladungEigene: 'This is your own invitation.',
+    einladungUngueltig: 'This invitation is invalid.',
+    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' have' : ' has') +
+      ' accepted your invitation.\n\nYou can now see each other’s watchlist and ' +
+      '“watched” list. Under “Match” you see your shared titles. ' +
+      'You can remove this at the top left under “Watch together”.'; },
+    nameFehlt: 'Please enter a name.',
+    speichernFehler: 'Could not be saved.',
+    speichernFehlerNochmal: 'Could not be saved. Please try again.',
+    speichernFehlgeschlagen: 'Saving failed. Please try again.',
+    anbieterFehler: 'Providers could not be loaded.',
+    keineAnbieter: 'No providers available.',
+    weitereAnbieterZeigen: function(n){ return 'Show ' + n + ' more providers'; },
+    nAusgewaehlt: function(n){ return n + ' selected'; },
+    nichtsAusgewaehlt: 'Nothing selected – all providers are shown.',
+    keineKinosUmkreis: 'No cinemas within the chosen radius.',
+    ortZuerst: 'Search for your town first.',
+    kinosFehler: 'Cinemas could not be loaded.',
+    inDerNaehe: 'Nearby',
+    kinoAusgewaehlt: function(n){ return n === 0 ? 'No cinema selected yet.' : n === 1 ? '1 cinema selected' : n + ' cinemas selected'; },
+    wiederHinzufuegen: 'Add back',
+    keineAusgeblendeten: 'No hidden titles.',
+    ladenFehler: 'Could not be loaded.',
+    pwZuKurz: 'At least 8 characters.',
+    pwUngleich: 'The two passwords do not match.',
+    pwGeaendert: 'Password changed.',
+    pwFalsch: 'Current password is wrong.',
+    aenderungFehler: 'Change failed.',
+    emailGeaendert: 'Email address changed.',
+    emailVergeben: 'This email is already in use.',
+    kontoLoeschenFrage: 'Permanently delete the account and all data? This cannot be undone.',
+    pwStimmtNicht: 'The password is wrong.',
+    nichtGeklappt: 'That did not work. Please try again.',
+    kontoWirdGeloescht: function(datum){ return 'Your account will be permanently deleted on ' + datum + '.\n\nYou have been signed out. Until then you can undo the deletion by signing in again.'; },
+    in14Tagen: 'in 14 days',
+    loeschAntrag: function(datum){ return 'A deletion request exists for your account. It will be permanently deleted on ' + datum + '.\n\nDo you want to cancel the deletion?'; },
+    loeschungZurueck: 'The deletion has been cancelled. Your account remains.',
+    diesenTitel: 'this title',
+    vonZehn: function(n){ return '✓ ' + n + ' of 10'; },
+    registrieren: 'Sign up',
+    kontoErstellen: 'Create account',
+    nochKeinKonto: 'No account yet? <button type="button" id="authToggleBtn">Sign up</button>',
+    schonKonto: 'Already have an account? <button type="button" id="authToggleBtn">Sign in</button>',
+    pwZuruecksetzen: 'Reset password',
+    linkAnfordern: 'Request link',
+    zurueckZumLogin: '<button type="button" id="authToggleBtn">Back to sign-in</button>',
+    resetVerschickt: 'If this email is registered, a reset link has been sent.',
+    loginFalsch: 'Email or password wrong.',
+    emailKontoExistiert: 'An account already exists for this email.',
+    pwMindestens: 'Password must have at least 8 characters.',
+    empfehlungVon: function(wer){ return wer + ' has a recommendation for you:'; },
+    gefundenAuf: 'Found on MovieMatch:',
+    codeOeffnen: 'Scan the code and save the title',
+    unterWort: 'at: ',
+    bildWirdVorbereitet: 'Preparing image …',
+    nichtTeilbar: 'This title cannot be shared – it has no unique identifier.',
+    teilenHinweis: 'Share this title with others as a message or on social media.',
+    teilenKeineBilder: 'Your browser cannot share images – the image will be downloaded instead.',
+    bildFehler: 'The image could not be created – sharing still works, just without the image.',
+    ohneBild: 'Without the image only text and link are sent.',
+    linkZumTeilen: 'Link to share:',
+    titelWirdGeladen: 'Loading title …',
+    titelLadenFehler: 'This title could not be loaded.',
+    fuerDichGeteilt: 'Shared with you',
+    trailerAnsehen: '▶ Watch trailer',
+    nurAngemeldet: 'You need to be signed in to save the title permanently.',
+    stehtAufWatchlist: 'Already on your watchlist.',
+    schonGesehenHint: 'You have already watched this.',
+    wirdGespeichert: 'Saving …',
+    markierungenPruefen: 'Checking your saved titles …',
+    fremdSterne: function(name, n){ return name + ': ' + n + ' of 10 stars'; },
+    fremdUnbewertet: function(name){ return name + ' has not rated this yet'; },
+    tasteScoreAria: 'What is the Taste Score?',
+    matchAria: 'What is a match?',
+    posterGroesser: 'Show larger poster',
+    sprachName: 'English',
+    sprachMenue: 'Language & region',
+  },
+};
+var TXT = UI_TEXTE[SPRACHE];
+
+/* Genre-Anzeige: Die Datenbank fuehrt Genres deutsch; die Deutsch-Englisch-
+   Paarung kommt von TMDB ueber /api/streaming (genreAlias) und fuellt
+   GENRE_EN. Bis sie geladen ist, greift der Notnagel unten -- dieselben
+   Paare, die auch GENRE_ALIAS_NOTNAGEL kennt (nur umgekehrt). */
+var GENRE_EN = {
+  'Komödie': 'Comedy', 'Krimi': 'Crime', 'Liebesfilm': 'Romance',
+  'Dokumentarfilm': 'Documentary', 'Familie': 'Family', 'Abenteuer': 'Adventure',
+  'Historie': 'History', 'Musik': 'Music', 'Kriegsfilm': 'War',
+  'TV-Film': 'TV Movie', 'Kids': 'Children',
+};
+function genreAnzeige(g){
+  if (SPRACHE !== 'en' || !g) return g;
+  return GENRE_EN[g] || g;
+}
+
+/* Altersfreigaben je Land: beide Systeme (FSK und die oesterreichische
+   Jugendmedienkommission) sind numerisch -- der Filter vergleicht Zahlen.
+   Nur die dort gelisteten Werte gelten als belegt, alles andere ("Not
+   Rated", leer) zaehlt wie bisher als fehlende Angabe. */
+var FSK_SYSTEME = {
+  DE: ['0', '6', '12', '16', '18'],
+  AT: ['0', '6', '8', '10', '12', '14', '16'],
+};
+function freigabenGueltig(){ return FSK_SYSTEME[REGION_WAHL] || FSK_SYSTEME.DE; }
+
+/* Statische Texte im Markup: deutsch im HTML, bei Englisch hier getauscht.
+   Selektor -> Text (t), HTML (h), Platzhalter (p) oder aria-label (a). */
+function uebersetzeStatischesMarkup(){
+  if (SPRACHE !== 'en') return;
+  var setz = [
+    ['header .sub', { h: '<b><i>Movies &amp; series</i> sorted by YOUR taste!</b>' }],
+    ['header .sub-zweit', { h: '<b>Browse your contacts’ watchlists and filter by your <i>matches</i>.</b> <span class="howto-link" id="subHowTo" role="button" tabindex="0" aria-label="Open the guide">(How to)</span>' }],
+    ['#howToBtn', { t: 'Guide' }],
+    ['#settingsBtn', { t: 'Settings' }],
+    ['#feedbackBtn', { t: 'Send feedback' }],
+    ['#installAppBtn', { t: 'Save as app' }],
+    ['#inviteMenuBtn', { t: 'Invite people' }],
+    ['#authBarLogin', { t: 'Sign in' }],
+    ['#authBarLogout', { t: 'Sign out' }],
+    ['#tabFilme', { t: '🎬 Movies' }],
+    ['#tabSerien', { t: '📺 Series' }],
+    ['#tabKino', { t: '🍿 Cinema' }],
+    ['#search', { p: 'Search title, genre or name …' }],
+    ['#fOpen', { t: 'Watchlist' }],
+    ['#fDone', { t: 'Watched' }],
+    ['#fDiscover', { t: 'Discover new' }],
+    ['#fSort', { t: '⇅ Sort' }],
+    ['#sortMenu [data-sort="imdb"]', { t: 'Sort by ★★★★ rating' }],
+    ['#sortMenu [data-sort="year"]', { t: 'by release date' }],
+    ['#sortMenu [data-sort="newstream"]', { t: 'by new on streaming' }],
+    ['#sortMenu [data-sort="taste"]', { t: 'by Taste Score' }],
+    ['#matchBarClear', { t: 'clear' }],
+    ['.cinema-page-title', { t: 'In cinemas' }],
+    ['#cinemaSort', { t: '⇅ Sort' }],
+    ['#cinemaSortMenu [data-sort="imdb"]', { t: 'Sort by ★★★★ rating' }],
+    ['#cinemaSortMenu [data-sort="date"]', { t: 'by release date' }],
+    ['#cinemaSortMenu [data-sort="cinema"]', { t: 'by new in cinemas' }],
+    ['#cinemaSortMenu [data-sort="taste"]', { t: 'by Taste Score' }],
+    ['#cinemaNowHeading', { t: 'Now playing' }],
+    ['#cinemaSoonHeading', { t: 'Coming soon' }],
+    ['#cinemaLaterHeading', { t: 'Coming later' }],
+    ['#inviteShareTitel', { t: 'Invitation' }],
+    ['#inviteShareTeilen', { t: 'Share' }],
+    ['#inviteShareKopieren', { t: 'Copy' }],
+    ['#shareModal h3', { t: 'Share title' }],
+    ['#sharePreview .share-preview-lade', { t: 'Preparing image …' }],
+    ['#shareImageBtn', { t: 'Share with others' }],
+    ['#removeModalYes', { t: 'Yes' }],
+    ['#removeModalNo', { t: 'No' }],
+    ['#filterModalYes', { t: 'Yes' }],
+    ['#filterModalNo', { t: 'Cancel' }],
+    ['#authTitle', { t: 'Sign in' }],
+    ['#authNameRow', { firstText: 'First name / profile name' }],
+    ['#authForm label:nth-of-type(2)', { firstText: 'Email' }],
+    ['#authForm label:nth-of-type(3)', { firstText: 'Password' }],
+    ['#authTerms', { h: 'By creating an account you accept the <a href="terms.html" target="_blank" rel="noopener">terms of use</a> and the <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.' }],
+    ['#authSubmit', { t: 'Sign in' }],
+    ['#authForgot', { t: 'Forgot password?' }],
+    ['#similarModalTitle', { t: 'Similar titles' }],
+    ['#simFilme', { t: 'Movies' }],
+    ['#simSerien', { t: 'Series' }],
+    ['#tourZurueck', { t: 'Back' }],
+    ['#tourWeiter', { t: 'Next' }],
+    ['#installModal h3', { t: 'Save as app' }],
+    ['#installChoice p', { t: 'Which device?' }],
+    ['#feedbackModal h3', { t: 'Send feedback' }],
+    ['#feedbackText', { p: 'What would you like to tell us?' }],
+    ['#feedbackSubmit', { t: 'Send' }],
+    ['#feedbackSuccess p', { t: 'Thanks for your feedback!' }],
+    ['#settingsModal h3', { t: 'Settings' }],
+    ['#settingsProvidersBtn', { t: 'Streaming services' }],
+    ['#settingsKinosBtn', { t: 'Your cinemas' }],
+    ['#settingsHiddenBtn', { t: 'Removed titles' }],
+    ['#settingsAccountBtn', { t: 'Account details' }],
+    ['#settingsCreditsBtn', { t: 'Credits' }],
+    ['#settingsDeleteBtn', { t: 'Delete account' }],
+    ['#creditsModal .prov-intro:nth-of-type(1)', { t: 'Information about movies and series – titles, descriptions, posters, ratings, availability and cinema releases – comes from The Movie Database (TMDB).' }],
+    ['#creditsModal .prov-intro:nth-of-type(3)', { t: 'Streaming availability information comes from JustWatch via TMDB. Whether a title is actually available is decided solely by the respective service.' }],
+    ['#creditsModal .prov-intro:nth-of-type(4)', { h: 'The cinemas under “Your cinemas” come from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>, © OpenStreetMap contributors, published under the Open Database License (ODbL).' }],
+    ['#creditsModal .prov-intro:nth-of-type(5)', { h: 'Postal codes and towns for the radius search come from <a href="https://www.geonames.org" target="_blank" rel="noopener">GeoNames</a>, published under the Creative Commons Attribution 4.0 licence (CC BY 4.0).' }],
+    ['#profileModal h3', { t: 'Watch together' }],
+    ['#profileModal .prov-steps li:nth-child(1)', { t: 'Invite friends and family to MovieMatch.' }],
+    ['#profileModal .prov-steps li:nth-child(2)', { h: 'Via <b>Watchlist</b> you can see what your contacts have saved and already watched. Simply add titles you like to your own lists.' }],
+    ['#profileModal .prov-steps li:nth-child(3)', { h: 'Via <b>“Match”</b> you see the <i class="info-word" data-match role="button" tabindex="0" aria-label="What is a match?">matches</i> of your watchlists. That way you quickly find movies, series or cinema releases you want to watch together next.' }],
+    ['#profileShareBtn', { t: '＋ Share watchlist' }],
+    ['#profileModal .prov-intro', { t: 'Watching with kids? Use the age rating filters.' }],
+    ['#inviteTitle', { t: 'Invitation' }],
+    ['#inviteText', { t: 'Loading …' }],
+    ['#nameModal h3', { t: 'How should others see you?' }],
+    ['#nameModal .prov-intro', { t: 'This name is shown to people you connect with. A first name or nickname is enough.' }],
+    ['#nameForm label', { firstText: 'First name / profile name' }],
+    ['#nameForm .auth-submit', { t: 'Save' }],
+    ['#trailerModalTitle', { t: 'Trailer' }],
+    ['#providersModal h3', { t: 'Streaming services' }],
+    ['#providersModal .prov-intro', { t: 'Choose the services you use. Only these are shown under “Stream / Rent / Buy” and on the title rows.' }],
+    ['#providersList', { t: 'Loading …' }],
+    ['#providersSaveBtn', { t: 'Save' }],
+    ['#kinosModal h3', { t: 'Your cinemas' }],
+    ['#kinosModal .prov-intro', { t: 'Search for your town and choose the cinemas you go to.' }],
+    ['#kinoOrtInput', { p: 'Postal code or town …' }],
+    ['#kinosList', { t: 'Search for your town first.' }],
+    ['#kinosSaveBtn', { t: 'Save' }],
+    ['#hiddenTitlesModal h3', { t: 'Removed titles' }],
+    ['#accountModal h3', { t: 'Account details' }],
+    ['#passwordForm label:nth-of-type(1)', { firstText: 'Current password' }],
+    ['#passwordForm label:nth-of-type(2)', { firstText: 'New password' }],
+    ['#passwordForm label:nth-of-type(3)', { firstText: 'Confirm new password' }],
+    ['#passwordForm .auth-submit', { t: 'Change password' }],
+    ['#emailForm label:nth-of-type(1)', { firstText: 'Current password' }],
+    ['#emailForm label:nth-of-type(2)', { firstText: 'New email address' }],
+    ['#emailForm .auth-submit', { t: 'Change email address' }],
+    ['#deleteAccountModal h3', { t: 'Delete account' }],
+    ['#deleteAccountModal .delete-warn:nth-of-type(1)', { h: 'Your account will be permanently deleted <b>in 14 days</b>. Until then you can undo this – simply sign in again. After that it is final.' }],
+    ['#deleteAccountModal .delete-warn:nth-of-type(2)', { t: 'This deletes your account, your watchlist, all “watched” marks, hidden titles and your connections with other people. Connected people will no longer see you; their own lists remain untouched.' }],
+    ['#deleteAccountForm label', { firstText: 'Your password, to be safe' }],
+    ['#deleteAccountForm .auth-submit', { t: 'Permanently delete account' }],
+    ['#ratingModal h3', { firstText: 'How did you like ' }],
+    ['#ratingHint', { h: '1 = bad, 10 = excellent.<br>(Feeds into your Taste Score.)' }],
+  ];
+  setz.forEach(function(eintrag){
+    var el = document.querySelector(eintrag[0]);
+    if (!el) return;
+    var was = eintrag[1];
+    if (was.t !== undefined) el.textContent = was.t;
+    else if (was.h !== undefined) el.innerHTML = was.h;
+    else if (was.p !== undefined) el.setAttribute('placeholder', was.p);
+    else if (was.firstText !== undefined && el.firstChild && el.firstChild.nodeType === 3) {
+      el.firstChild.textContent = was.firstText;
+    }
+  });
+  // Der Streaming-Filter-Knopf traegt ein SVG plus Text -- nur den Textknoten tauschen.
+  var streamBtn = document.getElementById('fInStream');
+  if (streamBtn && streamBtn.lastChild && streamBtn.lastChild.nodeType === 3) {
+    streamBtn.lastChild.textContent = ' Your streaming services';
+  }
+  // Fusszeile: erster Textabschnitt vor dem TMDB-Pflichtsatz.
+  var fuss = document.querySelector('footer');
+  if (fuss) {
+    var fussNeu = 'Your <i class="info-word" data-ts role="button" tabindex="0" aria-label="What is the Taste Score?">Taste Score</i>, “watched” status and your “<i>watchlist</i>” are stored with your account once you are <i class="footer-auth-link" id="footerAuthLink" role="button" tabindex="0" aria-label="Sign in">signed in</i>. ' +
+      'This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.<br>' +
+      '<a href="imprint.html">Imprint</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms of use</a>';
+    fuss.innerHTML = fussNeu;
+  }
+  // Rechtstext-Verweise im Registrier-Hinweis zeigen auf die englischen
+  // Entwuerfe (siehe privacy.html/imprint.html/terms.html).
+  // Sammel-Labels: alle Schliessen-Kreuze und wiederkehrende aria-labels.
+  document.querySelectorAll('.modal-x').forEach(function(x){
+    if (x.getAttribute('aria-label')) x.setAttribute('aria-label', 'Close');
+  });
+  var toTop = document.getElementById('toTop');
+  if (toTop) toTop.setAttribute('aria-label', 'Back to top');
+  var navBtn = document.getElementById('navMenuBtn');
+  if (navBtn) navBtn.setAttribute('aria-label', 'Menu');
+  var profBtn = document.getElementById('profileBtn');
+  if (profBtn) profBtn.setAttribute('aria-label', 'Watch together');
+  var sClear = document.getElementById('searchClear');
+  if (sClear) sClear.setAttribute('aria-label', 'Clear search');
+}
+uebersetzeStatischesMarkup();
+
+/* Sprach-/Regionswahl: Eintrag im Menue rechts oben, kleines Fenster mit zwei
+   Reihen. Ein Wechsel speichert die Wahl (Geraet + ggf. Konto) und laedt die
+   Seite neu -- danach greifen Markup-Uebersetzung, TXT und die ?lang/&region-
+   Parameter der Datenabrufe von selbst. Verkabelt wird weiter unten, sobald
+   die Modal-Elemente existieren (siehe sprachModalEinrichten). */
+function sprachWahlSpeichern(sprache, region){
+  try {
+    localStorage.setItem(SPRACHE_KEY, sprache);
+    localStorage.setItem(REGION_KEY, region);
+  } catch (e) {}
+  // Am Konto merken, sofern angemeldet -- Fehler sind egal, die Geraetewahl
+  // steht ja schon. Danach neu laden.
+  var fertig = function(){ location.reload(); };
+  if (window.CURRENT_USER || (typeof CURRENT_USER !== 'undefined' && CURRENT_USER)) {
+    fetch('/api/auth/settings', {
+      method: 'PUT', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sprache: sprache, region: region }),
+    }).catch(function(){}).finally(fertig);
+  } else {
+    fertig();
+  }
+}
+/* ===================== Ende i18n-Fundament ===================== */
+
+const INFO_ICON = '<span class="info-i" data-ts role="button" tabindex="0" aria-label="' + TXT.tasteScoreAria + '">i</span>';
 
 /* ---- Server-Zustand: Login, Fortschritt (gesehen/Watchlist), Katalog ----
    Ersetzt den bisherigen localStorage-Stand. Ohne Login bleibt die App rein
@@ -1742,9 +2438,9 @@ async function apiRequest(method, path, body) {
 function grenzeMeldung(e) {
   if (!e || e.status !== 429) return null;
   var sek = Number(e.retryAfter);
-  if (!Number.isFinite(sek) || sek <= 0) return 'Zu viele Versuche. Bitte später erneut versuchen.';
+  if (!Number.isFinite(sek) || sek <= 0) return TXT.zuVieleVersuche;
   var min = Math.ceil(sek / 60);
-  return 'Zu viele Versuche. Bitte in ' + (min <= 1 ? 'einer Minute' : min + ' Minuten') + ' erneut versuchen.';
+  return TXT.zuVieleVersucheIn(min);
 }
 
 function progressFor(id) { return (id != null && PROGRESS.get(id)) || { seen: false, watchlist: false, viaStream: false, rating: null }; }
@@ -1816,9 +2512,13 @@ function detPosterHtml(src){
   return '<img class="detposter' + (gross ? ' zoombar' : '') + '" src="' + escAttr(src) +
          '" alt="" loading="lazy"' +
          (gross ? ' data-gross="' + escAttr(gross) + '" role="button" tabindex="0"' +
-                  ' aria-label="Poster größer anzeigen"' : '') + '>';
+                  ' aria-label="' + TXT.posterGroesser + '"' : '') + '>';
 }
-function fmtR(r){ return r!=null ? String(r).replace('.',',') : ''; }
+// Dezimaltrenner je Sprache: 8,3 (deutsch) vs. 8.3 (englisch).
+function fmtR(r){
+  if (r == null) return '';
+  return SPRACHE === 'de' ? String(r).replace('.', ',') : String(r);
+}
 // Sternchen-Wert fuer die Metazeile. TMDB liefert fuer unbewertete Titel eine
 // glatte 0 -- die stand vorher als "⭐ 0" in der Zeile und las sich wie eine
 // echte Bewertung von null Punkten statt als "keine Angabe". Fehlender Wert und
@@ -1833,9 +2533,9 @@ function sterneText(r){
 // "(28.300)" hinter der Bewertung. Ohne diese Zahl steht eine glatte 8,0 aus
 // EINER Stimme gleichberechtigt neben einer 8,3 aus 28.000 Stimmen.
 function voteSuffix(vc){
-  return (vc != null && Number(vc) > 0) ? (' (' + Number(vc).toLocaleString('de-DE') + ')') : '';
+  return (vc != null && Number(vc) > 0) ? (' (' + Number(vc).toLocaleString(LOCALE) + ')') : '';
 }
-function candMeta(c){ return '⭐ '+sterneText(c.r)+voteSuffix(c.vc)+' · '+((c.g&&c.g[0])||'—')+(c.y?(' · '+c.y):''); }
+function candMeta(c){ return '⭐ '+sterneText(c.r)+voteSuffix(c.vc)+' · '+(genreAnzeige(c.g&&c.g[0])||'—')+(c.y?(' · '+c.y):''); }
 // Metazeile der Kino-Seite. Dort ist das Erscheinungsjahr uninteressant --
 // entscheidend ist, wann der Film laeuft. Reihenfolge deshalb Bewertung, Genre,
 // Film/Serie, Kinostart. Ist ausnahmsweise kein genaues Datum hinterlegt (im
@@ -1852,7 +2552,7 @@ function kinoDatumText(iso, jahr){
   return jahr ? String(jahr).slice(-2) : '';
 }
 function kinoMeta(c, datum, typLabel){
-  var teile = ['⭐ ' + sterneText(c.r) + voteSuffix(c.vc), (c.g && c.g[0]) || '—', typLabel];
+  var teile = ['⭐ ' + sterneText(c.r) + voteSuffix(c.vc), genreAnzeige(c.g && c.g[0]) || '—', typLabel];
   var d = kinoDatumText(datum, c.y);
   if (d) teile.push(d);
   return teile.join(' · ');
@@ -1901,7 +2601,7 @@ function detailChipsHtml(genres, keywords){
       return '<span class="' + klasse + '" data-filter="' + escAttr(text) + '">' + esc(text) + '</span>';
     }).join('') + '</div>';
   }
-  var g = texte(genres);
+  var g = texte((genres || []).map(genreAnzeige));
   var k = texte(keywords);
   return (g.length > 1 ? reihe(g, 'tag genre-tag', 'tags tags-genres') : '') +
          reihe(k, 'tag', 'tags');
@@ -1964,7 +2664,7 @@ async function fillPlots(){
     .map(function(k){ var p = k.split(':'); return [p[1], Number(p[2])]; });
   try {
     if (_plotInFlight) await _plotInFlight;          // Anfragen nicht ueberlappen lassen
-    _plotInFlight = apiRequest('POST', '/api/titles/plots', { ids: ids, tmdb: tmdb });
+    _plotInFlight = apiRequest('POST', '/api/titles/plots', { ids: ids, tmdb: tmdb, lang: SPRACHE });
     var d = await _plotInFlight;
     Object.keys(d.ids || {}).forEach(function(id){ PLOT_CACHE.set('id:' + id, d.ids[id]); });
     Object.keys(d.tmdb || {}).forEach(function(k){ PLOT_CACHE.set('tmdb:' + k, d.tmdb[k]); });
@@ -1979,15 +2679,15 @@ async function fillPlots(){
   } finally { _plotInFlight = null; }
 }
 function candDetailsHtml(c, kind){
-  var dirLabel = "Regie";
+  var dirLabel = TXT.regie;
   var tagsHtml = detailChipsHtml(c.g, c.kw);
   var rows = '';
   // Wie im Hauptlisten-Pfad (siehe eigeneZeileLi): beschriftet und nur, wenn er
   // vom angezeigten Titel abweicht.
   if (c.ot && normTitle(c.ot) !== normTitle(c.t)) {
-    rows += '<div class="credits"><b>Originaltitel:</b> '+esc(c.ot)+'</div>';
+    rows += '<div class="credits"><b>' + TXT.originaltitel + '</b> '+esc(c.ot)+'</div>';
   }
-  if (c.c && c.c.length) rows += '<div class="credits"><b>Besetzung:</b> '+nameChips(c.c)+'</div>';
+  if (c.c && c.c.length) rows += '<div class="credits"><b>' + TXT.besetzung + '</b> '+nameChips(c.c)+'</div>';
   if (c.d) rows += '<div class="credits"><b>'+dirLabel+':</b> '+nameChips(splitNames(c.d))+'</div>';
   var plotHtml = plotDivHtml(c);
   // Grosses Poster wie im Hauptlisten-Pfad (siehe render/detPoster): beim
@@ -2071,7 +2771,7 @@ function kinoStartKurz(iso){
 function kinoStartMetaHtml(tmdbId, typ){
   var rd = kinoStartFuer(tmdbId, typ);
   if (!rd) return '';
-  return '<span class="kino-start">Ab ' + kinoStartKurz(rd) + ' im Kino</span>';
+  return '<span class="kino-start">' + TXT.abImKino(kinoStartKurz(rd)) + '</span>';
 }
 
 /* ---- Ansehen / Leihen / Kaufen (Detailansicht) ----
@@ -2089,9 +2789,9 @@ function kinoStartMetaHtml(tmdbId, typ){
    Anbieter ohne bekanntes Suchmuster werden bewusst nur als Text angezeigt
    statt auf gut Glueck verlinkt (lieber kein Link als ein toter Link). */
 var WATCH_CATS = [
-  { key: 'flatrate', label: '▶ Ansehen' },
-  { key: 'rent',     label: 'Leihen' },
-  { key: 'buy',      label: 'Kaufen' },
+  { key: 'flatrate', label: TXT.ansehen },
+  { key: 'rent',     label: TXT.leihen },
+  { key: 'buy',      label: TXT.kaufen },
 ];
 // Schluessel sind TMDB-Provider-IDs. Bewusst knapp gehalten: nur Anbieter,
 // deren Such-URL verlaesslich bekannt ist (siehe Kommentar oben).
@@ -2154,8 +2854,8 @@ function closeTrailerModal(){
   _trailerBox.innerHTML = '';        // stoppt ein laufendes Video zuverlaessig
 }
 function openTrailerModal(api, title, row){
-  document.getElementById('trailerModalTitle').textContent = 'Trailer: ' + (title || '');
-  _trailerBox.innerHTML = '<div class="trailer-consent"><p>Lädt …</p></div>';
+  document.getElementById('trailerModalTitle').textContent = TXT.trailerTitel(title || '');
+  _trailerBox.innerHTML = '<div class="trailer-consent"><p>' + TXT.laedt + '</p></div>';
   _trailerModal.style.display = 'flex';
   // Poster der zugehoerigen Zeile als Vorschau -- schon geladen, also kein
   // zusaetzlicher Abruf und vor allem keine Verbindung zu Google.
@@ -2168,16 +2868,15 @@ function openTrailerModal(api, title, row){
       // Kein Trailer bei TMDB -- dann zur YouTube-Suche, dort wird man meist fuendig.
       _trailerBox.innerHTML = vorschau +
         '<div class="trailer-consent">' +
-          '<p>Zu diesem Titel ist bei TMDB kein Trailer hinterlegt.</p>' +
-          '<a class="trailer-play" href="' + escAttr(youtubeSucheUrl(title)) + '" target="_blank" rel="noopener noreferrer">Bei YouTube suchen</a>' +
+          '<p>' + TXT.trailerFehlt + '</p>' +
+          '<a class="trailer-play" href="' + escAttr(youtubeSucheUrl(title)) + '" target="_blank" rel="noopener noreferrer">' + TXT.trailerYoutube + '</a>' +
         '</div>';
       return;
     }
     _trailerBox.innerHTML = vorschau +
       '<div class="trailer-consent">' +
-        '<p>Beim Abspielen wird der Trailer von YouTube geladen. Dabei werden Daten ' +
-        '(u. a. deine IP-Adresse) an Google übertragen.</p>' +
-        '<button type="button" class="trailer-play" id="trailerPlayBtn">▶ Trailer abspielen</button>' +
+        '<p>' + TXT.trailerHinweis + '</p>' +
+        '<button type="button" class="trailer-play" id="trailerPlayBtn">' + TXT.trailerAbspielen + '</button>' +
       '</div>';
     document.getElementById('trailerPlayBtn').onclick = function(){
       _trailerBox.innerHTML =
@@ -2194,7 +2893,7 @@ function trailerBtnHtml(api, title){
   // Steht IMMER zur Verfuegung: kennt TMDB keinen Trailer, oeffnet der Button
   // ersatzweise eine YouTube-Suche nach "Titel Trailer" (siehe openTrailer).
   return '<button type="button" class="watch-btn trailer-btn" data-trailer="' + escAttr(api || '') +
-         '" data-ttitle="' + escAttr(title || '') + '">▶ Trailer</button>';
+         '" data-ttitle="' + escAttr(title || '') + '">' + TXT.trailer + '</button>';
 }
 function watchRowHtml(tmdbId, type, title, realId, opts){
   // Bevorzugt die TMDB-ID (spart dem Backend die Suche). Fehlt sie, laeuft die
@@ -2204,7 +2903,8 @@ function watchRowHtml(tmdbId, type, title, realId, opts){
   // reiner Streaming-/Discovery-Kandidat ohne TMDB-ID, den es so nicht geben
   // sollte -- entfaellt die Zeile ganz.
   var kennung = (tmdbId && type) ? (type + '/' + tmdbId) : (realId ? ('by-title/' + realId) : null);
-  var api = kennung ? ('/api/watch-providers/' + kennung) : null;
+  // Region mitgeben: Ansehen/Leihen/Kaufen ist je Land verschieden.
+  var api = kennung ? ('/api/watch-providers/' + kennung + '?region=' + REGION_WAHL) : null;
   var trailerApi = kennung ? ('/api/trailers/' + kennung) : null;
   // Auf der Kino-Seite ergeben Ansehen/Leihen/Kaufen keinen Sinn -- die Filme
   // laufen ja erst an. Dort bleibt nur der Trailer, linksbuendig.
@@ -2231,7 +2931,7 @@ function renderWatchPanel(row, cat){
   var panel = row.querySelector('.watch-panel');
   var title = row.dataset.wtitle || '';
   panel.hidden = false;
-  panel.innerHTML = '<div class="watch-note">Lädt …</div>';
+  panel.innerHTML = '<div class="watch-note">' + TXT.laedt + '</div>';
   loadWatchData(row.dataset.wapi).then(function(data){
     // Zwischenzeitlich weitergeklickt (andere Kategorie/zugeklappt)? Dann ist
     // diese Antwort veraltet und darf das Panel nicht mehr ueberschreiben.
@@ -2252,15 +2952,13 @@ function renderWatchPanel(row, cat){
       // verfuegbar, die man selbst abgewaehlt hat. Ohne diesen Hinweis haelte
       // man den Titel faelschlich fuer nicht streambar.
       : (verborgen
-          ? '<div class="watch-note">Nur bei ' + verborgen + ' nicht ausgewählten ' +
-            (verborgen === 1 ? 'Anbieter' : 'Anbietern') + ' verfügbar.</div>'
-          : '<div class="watch-note">Zurzeit nicht verfügbar.</div>');
+          ? '<div class="watch-note">' + TXT.nurBeiAnbietern(verborgen) + '</div>'
+          : '<div class="watch-note">' + TXT.nichtVerfuegbar + '</div>');
     var rest = (list.length && verborgen)
-      ? '<div class="watch-note watch-more">+ ' + verborgen + ' weitere nicht ausgewählte ' +
-        (verborgen === 1 ? 'Anbieter' : 'Anbieter') + '</div>'
+      ? '<div class="watch-note watch-more">' + TXT.weitereAnbieter(verborgen) + '</div>'
       : '';
     panel.innerHTML = body + rest +
-      '<div class="watch-source">Daten von <a href="https://www.justwatch.com/de" target="_blank" rel="noopener noreferrer">JustWatch</a></div>';
+      '<div class="watch-source">' + TXT.datenVon + ' <a href="https://www.justwatch.com/' + (SPRACHE === 'de' ? 'de' : 'us') + '" target="_blank" rel="noopener noreferrer">JustWatch</a></div>';
   });
 }
 // Capture-Phase: die Zeilen-Klickhandler (siehe wireRow/poolItemLi) klappen die
@@ -2506,7 +3204,7 @@ function luecken(ziel, quelle){
   }
 }
 /* Legt Markierungen und ausgeblendete Titel von einem verdeckten Eintrag auf den
-   beibehaltenen um. Ohne das verschwaende die Watchliste von jemandem, der
+   beibehaltenen um. Ohne das verschwaende die Watchlist von jemandem, der
    seinerzeit den Katalog-Eintrag markiert hat -- der steckt jetzt womoeglich
    nicht mehr im POOL. Ein bereits vorhandener Eintrag am Sieger gewinnt; die
    Datenbank bleibt unberuehrt, umgelegt wird nur der Stand im Browser. */
@@ -2610,6 +3308,9 @@ async function ensurePoolItem(item){
         tmdbId: item.tmdbId, type: item.type, title: item.t,
         year: item.y, genres: item.g, director: item.d, cast: item.c, keywords: item.kw,
         posterPath: item.p, rating: item.r, plot: item.ov, source: 'streaming',
+        // Sprache des Clients: Titel/Plot koennen die englische Fassung sein --
+        // das Backend sortiert sie dann ins richtige Feld (siehe /ensure).
+        lang: SPRACHE, region: REGION_WAHL,
       });
       item.realId = created.id;
       /* Den frisch angelegten Titel auch in den POOL aufnehmen.
@@ -2650,7 +3351,7 @@ async function ensurePoolItem(item){
 // weiterhin ueber ihn (poolItemMatchesQuery liest item.ot direkt).
 function poolToMeta(item){
   const parts = ['⭐ ' + sterneText(item.r) + voteSuffix(item.vc)];
-  if (item.g && item.g[0]) parts.push(item.g[0]);
+  if (item.g && item.g[0]) parts.push(genreAnzeige(item.g[0]));
   if (item.y) parts.push(String(item.y));
   return parts.join(' · ');
 }
@@ -2761,13 +3462,13 @@ function alleFilterAn(){
 // unter Filme UND unter Serien statt in einem separaten dritten Bereich.
 let inStreamFilterOn = false;
 // Die Kino-Seite hatte hier frueher eine EIGENE Statusauswahl (kinoStatus).
-// Begruendung damals: Unter Filme/Serien ist die eigene Watchliste der sinnvolle
+// Begruendung damals: Unter Filme/Serien ist die eigene Watchlist der sinnvolle
 // Einstieg, im Kino das gesamte Programm -- mit gemeinsamem Zustand waere die
 // Kino-Seite beim ersten Aufruf so gut wie leer gewesen.
 //
 // Der Grund ist mit "beim Start ist alles an" entfallen, der Preis war hoch: Man
-// stellte unter Filme "Watchliste" ein, wechselte ins Kino und fand dort
-// "Watchliste + Gesehen + Neue entdecken" vor -- eine Kombination, die es unter
+// stellte unter Filme "Watchlist" ein, wechselte ins Kino und fand dort
+// "Watchlist + Gesehen + Neue entdecken" vor -- eine Kombination, die es unter
 // Filme gar nicht mehr geben konnte. Der erste Tipp im Kino wirkte deshalb
 // falsch. Es gibt jetzt EINEN Zustand fuer alle Bereiche.
 // Ansicht einer fremden Liste: uid der Person und welche ihrer beiden Listen.
@@ -2776,8 +3477,8 @@ let inStreamFilterOn = false;
 // Geschmacksprofile genutzt, nie angezeigt.
 var ANSICHT_PERSON = null;
 // ANSICHT_ART gab es hier frueher ('w' oder 's'): In einer fremden Liste
-// schlossen sich Watchliste und Gesehen gegenseitig aus, ein Klick auf
-// "Gesehen" ERSETZTE die Watchliste. Man konnte also nie sehen, was jemand
+// schlossen sich Watchlist und Gesehen gegenseitig aus, ein Klick auf
+// "Gesehen" ERSETZTE die Watchlist. Man konnte also nie sehen, was jemand
 // insgesamt hat -- ausgerechnet die Frage, mit der man in eine fremde Liste
 // geht. Jetzt gelten dieselben Schalter wie fuer die eigenen Listen
 // (watchlistFilterOn/seenFilterOn), beide zusammen sind der Normalfall.
@@ -2795,7 +3496,7 @@ function personenAnsicht(){ return ANSICHT_PERSON != null; }
 // user_progress, siehe backend/routes/links.js). LINKED_PROGRESS[id] war dann
 // undefined -- und wer das als "sind wir in einer fremden Liste?" ablas, bekam
 // "nein" und fiel auf den EIGENEN Fortschritt zurueck. Auf der Kino-Seite
-// standen so alle Kinostarts unter der Watchliste einer Person, die nichts
+// standen so alle Kinostarts unter der Watchlist einer Person, die nichts
 // vorgemerkt hat; unter Filme/Serien blieb es korrekt leer, weil dort ein
 // eigener Riegel davor lag (siehe sammleEintraege).
 var LEERER_FREMD_FORTSCHRITT = new Map();
@@ -2818,7 +3519,7 @@ function fremderFortschritt(){
    es ab. Gemerkt wird die Auswahl nicht -- jeder Start sieht gleich aus.
 
    Vorher suchte die App beim Start die erste Ansicht, in der etwas steht
-   (Filme+Watchliste -> Filme+Gesehen -> Serien+... -> Katalog) und stellte
+   (Filme+Watchlist -> Filme+Gesehen -> Serien+... -> Katalog) und stellte
    genau darauf. Das war gut gemeint, aber es griff in eine Auswahl ein, die
    niemand getroffen hatte -- und es war zweimal die Ursache dafuer, dass Knoepfe
    "nicht reagierten": Der automatische Einstieg schob die Ansicht Sekunden nach
@@ -2831,7 +3532,7 @@ function einstiegSetzen(){
   TYPEN.filme = true;
   TYPEN.serien = true;
   typenAngleichen();
-  // Watchliste und Gesehen zusammen: Erst zeigen, was die Person hat, dann
+  // Watchlist und Gesehen zusammen: Erst zeigen, was die Person hat, dann
   // filtern. "Neue entdecken" gibt es in einer fremden Liste nicht -- was jemand
   // NICHT markiert hat, ist keine Liste von ihm (siehe updateFilterRowUI).
   watchlistFilterOn = true;
@@ -2978,7 +3679,7 @@ function metaHtml(meta, kind, kinoHtml){
   for (var j = 0; j < parts.length; j++) {
     if (/mini[\s-]?serie/i.test(parts[j].trim())) { isMini = true; parts.splice(j, 1); break; }
   }
-  var typeLabel = isMini ? 'Mini-Serie' : (kind === 'serien' ? 'Serie' : (kind === 'filme' ? 'Film' : ''));
+  var typeLabel = isMini ? TXT.miniSerie : (kind === 'serien' ? TXT.serie : (kind === 'filme' ? TXT.film : ''));
   var main = [rating, genre, year, typeLabel].filter(Boolean).join(' · ');
   var extra = parts.join(' · ');
   return '<span class="meta-main">' + esc(main) + '</span>' + (kinoHtml || '') +
@@ -3001,7 +3702,7 @@ function eigeneZeileLi(tab, i, profile) {
   // oder auf "Theat" in einem Hashtag wie "TheaterVerfilmung" anschlaegt.
   li.dataset.mainBlob = [item[0], item[1], (d.providers||[]).map(function(p){ return p.name; }).join(' ')].filter(Boolean).join(' ');
   li.dataset.exactBlob = [].concat(d.c||[], d.d ? [d.d] : [], kwSuchtexte(d.h)).join(' ');
-  const dirLabel = 'Regie';
+  const dirLabel = TXT.regie;
   // Genres aus dem POOL-Eintrag, der fuehrt alle. Ohne ihn bleibt nur das eine
   // aus dem Meta-Text -- derselbe Rueckfall wie beim Sortierwert weiter unten.
   const rowGenres = s.pool[i] ? (s.pool[i].g || []) : [metaGenre(item[1])].filter(Boolean);
@@ -3013,26 +3714,26 @@ function eigeneZeileLi(tab, i, profile) {
   // nach Taste-Score sortierten Liste haetten sonst zwei Skalen nebeneinander
   // gestanden und derselbe Titel je nach Seite eine andere Zahl gezeigt.
   const rowScore = s.pool[i] ? punkteFuer(s.pool[i], profile) : scoreItem(item, d, profile[0]);
-  const scoreBadge = '<span class="score' + (rowScore >= 60 ? ' hi' : '') + '" title="Taste Score" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">' + rowScore + '</span>';
+  const scoreBadge = '<span class="score' + (rowScore >= 60 ? ' hi' : '') + '" title="Taste Score" data-ts role="button" tabindex="0" aria-label="' + TXT.tasteScoreAria + '">' + rowScore + '</span>';
   var creditRows = '';
   // Nur wenn er sich vom angezeigten Titel unterscheidet -- sonst stuende
   // zweimal dasselbe da (bei den meisten Titeln ist er identisch).
   if (d.ot && normTitle(d.ot) !== normTitle(item[0])) {
-    creditRows += '<div class="credits"><b>Originaltitel:</b> ' + esc(d.ot) + '</div>';
+    creditRows += '<div class="credits"><b>' + TXT.originaltitel + '</b> ' + esc(d.ot) + '</div>';
   }
-  if (d.c && d.c.length) creditRows += '<div class="credits"><b>Besetzung:</b> ' + nameChips(d.c) + '</div>';
+  if (d.c && d.c.length) creditRows += '<div class="credits"><b>' + TXT.besetzung + '</b> ' + nameChips(d.c) + '</div>';
   if (d.d) creditRows += '<div class="credits"><b>' + dirLabel + ':</b> ' + nameChips(splitNames(d.d)) + '</div>';
   const detPoster = detPosterHtml(d.poster);
   const _watched = isWatched(tab, item[0]);
   const _seen = s.checked[i];
   const actionsHtml =
     '<div class="det-actions">' +
-      '<button type="button" class="similar-btn">Ähnliche Titel</button>' +
+      '<button type="button" class="similar-btn">' + TXT.aehnlicheTitel + '</button>' +
       '<div class="det-rechts">' +
         '<div class="det-left">' +
-          '<button type="button" aria-label="Watchliste" class="wl-btn' + (_watched ? ' on' : '') + '"><span class="wl-glyph">' + (_watched ? '★' : '☆') + '</span> <span class="btn-wort">Watchliste</span></button>' +
+          '<button type="button" aria-label="' + TXT.watchliste + '" class="wl-btn' + (_watched ? ' on' : '') + '"><span class="wl-glyph">' + (_watched ? '★' : '☆') + '</span> <span class="btn-wort">' + TXT.watchliste + '</span></button>' +
         '</div>' +
-        '<button type="button" aria-label="gesehen" class="seen-btn' + (_seen ? ' on' : '') + '">' + '<span class="seen-glyph">✓</span> <span class="btn-wort">gesehen</span>' + '</button>' +
+        '<button type="button" aria-label="' + TXT.gesehenKlein + '" class="seen-btn' + (_seen ? ' on' : '') + '">' + '<span class="seen-glyph">✓</span> <span class="btn-wort">' + TXT.gesehenKlein + '</span>' + '</button>' +
       '</div>' +
     '</div>';
   const detailsHtml =
@@ -3064,7 +3765,7 @@ function eigeneZeileLi(tab, i, profile) {
 // Kino-Seite. Es gilt EIN Profil fuer die ganze Liste: Zwei Massstaebe
 // nebeneinander waeren an den Zahlen nicht zu unterscheiden.
 /* Der Taste-Score haengt an den Markierungen, nicht an den Filtern. Zwischen
-   zwei Klicks auf Filme/Serien/Watchliste/Gesehen/Neue entdecken aendert er sich
+   zwei Klicks auf Filme/Serien/Watchlist/Gesehen/Neue entdecken aendert er sich
    also nicht -- ausgerechnet wurde er trotzdem jedes Mal, und zwar fuer ALLE
    41.271 Eintraege, um 25 Zeilen zu zeigen. Gemessen an movietaste.de mit 600
    markierten Titeln: 39,9 ms je Klick gegenueber 5,6 ms mit einer der anderen
@@ -3117,7 +3818,7 @@ function eintragSortwert(e, sortBy, profile){
    Gezeichnet werden 25 Zeilen (TITEL_PRO_SEITE), sortiert wurden bisher alle:
    Mit allen Filtern an stehen rund 33.000 Eintraege in der Liste, und allein
    das Sortieren kostete 26 ms -- synchron im Klick-Handler, bei jedem Klick auf
-   Filme, Serien, Watchliste, Gesehen oder Neue entdecken. Ein Vergleich holte
+   Filme, Serien, Watchlist, Gesehen oder Neue entdecken. Ein Vergleich holte
    dabei zweimal aus einer Map; die Werte liegen jetzt in einem Float64Array und
    ausgewaehlt wird in einem Durchlauf. Gemessen an 32.698 Eintraegen:
    37 ms -> 3 ms.
@@ -3235,7 +3936,7 @@ function kinoHinweisAnhaengen(q){
   var b = document.createElement('button');
   b.type = 'button';
   b.className = 'load-more-btn kino-hinweis';
-  b.textContent = '🍿 Auch im Kino: ' + n + ' Treffer';
+  b.textContent = TXT.auchImKino(n);
   b.onclick = function(){ openCinemaPage(); };
   list.appendChild(b);
 }
@@ -3243,7 +3944,7 @@ function renderLeerzustand(q){
   // Solange der Katalog laeuft, ist "leer" keine Aussage ueber den Inhalt --
   // es ist schlicht noch nichts da.
   if (!KATALOG_DA) {
-    list.innerHTML = '<li class="watch-empty">Titel werden geladen …</li>';
+    list.innerHTML = '<li class="watch-empty">' + TXT.titelWerdenGeladen + '</li>';
     return;
   }
   // In einer fremden Liste sind die Texte darunter alle falsch -- sie sprechen
@@ -3251,47 +3952,37 @@ function renderLeerzustand(q){
   // gesperrt ist.
   if (personenAnsicht()) {
     var wer = profilName(ANSICHT_PERSON);
-    var was = (watchlistFilterOn && seenFilterOn) ? 'markiert'
-            : watchlistFilterOn ? 'auf der Watchliste' : 'als gesehen markiert';
+    var was = (watchlistFilterOn && seenFilterOn) ? TXT.markiert
+            : watchlistFilterOn ? TXT.aufDerWatchlist : TXT.alsGesehenMarkiert;
     list.innerHTML = '<li class="watch-empty">' +
-      (q ? 'Keine Treffer für „' + esc(searchEl.value.trim()) + '" bei ' + esc(wer) + '.'
-         : esc(wer) + ' hat hier nichts ' + esc(was) + '.') + '</li>';
+      (q ? TXT.keineTrefferBei(esc(searchEl.value.trim()), esc(wer))
+         : TXT.hatNichts(esc(wer), esc(was))) + '</li>';
     return;
   }
   if (q) {
-    list.innerHTML = '<li class="watch-empty">Keine Treffer für „' + esc(searchEl.value.trim()) + '".</li>';
+    list.innerHTML = '<li class="watch-empty">' + TXT.keineTrefferFuer(esc(searchEl.value.trim())) + '</li>';
     return;
   }
   // Bei aktivem Abgleich/Altersfilter ist die leere Liste etwas voellig anderes
   // als eine leere Watchlist -- ohne eigenen Hinweis wirkt sie wie ein Fehler.
   if (fskAktiv()) {
     var stufe = (FSK_STUFEN.find(function(x){ return x.key === MY_FSK; }) || {}).label;
-    list.innerHTML = '<li class="watch-empty">Keine Titel mit Altersfreigabe „' + esc(stufe) +
-      '". Titel ohne hinterlegte Freigabe werden dabei ausgeblendet – das betrifft einen Teil ' +
-      'des Katalogs. Den Filter hebst du oben links wieder auf.</li>';
+    list.innerHTML = '<li class="watch-empty">' + TXT.keineFreigabe(esc(stufe)) + '</li>';
     return;
   }
   if (matchAktiv()) {
-    var wer = MATCH_WITH.map(profilName).join(' und ');
-    list.innerHTML = '<li class="watch-empty">Keine gemeinsamen Titel mit ' + esc(wer) +
-      '. Je mehr ihr beide eurer Watchliste hinzufügt, desto mehr Übereinstimmungen gibt es.</li>';
+    var wer = MATCH_WITH.map(profilName).join(TXT.undWort);
+    list.innerHTML = '<li class="watch-empty">' + TXT.keineGemeinsamen(esc(wer)) + '</li>';
     return;
   }
   // Leer trotz "Neue entdecken" heisst: die Filterkombination passt auf nichts --
   // nicht, dass die eigene Liste noch leer ist. Der Einstiegstext waere hier
   // schlicht falsch.
   if (discoverFilterOn || !watchlistFilterOn) {
-    list.innerHTML = '<li class="watch-empty">Keine Titel für diese Auswahl.</li>';
+    list.innerHTML = '<li class="watch-empty">' + TXT.keineTitelAuswahl + '</li>';
     return;
   }
-  list.innerHTML = '<li class="watch-empty">Dies ist deine Watchliste. Füge mind. 20 Titel über „Neue entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>. ' +
-    'Zukünftig musst du nur noch auswählen, ob du einen Film oder eine Serie schauen möchtest oder ins Kino gehen willst. ' +
-    'Hier siehst du dann deine persönliche Watchliste, sortiert nach deinem Geschmack.<br><br>' +
-    '<u>Du möchtest mit anderen Filme genießen?</u><br>' +
-    'Links oben kannst du Personen zu der App einladen. Danach kannst du dir deren Watchliste ansehen und ' +
-    'Titel daraus übernehmen – oder nach euren <i class="info-word" data-match role="button" tabindex="0" ' +
-    'aria-label="Was ist ein Match?">Übereinstimmungen</i> filtern und sofort etwas finden, ' +
-    'das allen gefällt.</li>';
+  list.innerHTML = '<li class="watch-empty">' + TXT.watchlisteLeer + '</li>';
 }
 /* "Mehr laden" darf den Knopf nicht unter dem Finger wegziehen.
 
@@ -3336,7 +4027,7 @@ function render() {
   const q = (discoverFilterOn || sucheAktiv()) ? searchEl.value.trim().toLowerCase() : '';
   const eintraege = sammleEintraege(q);
   if (!eintraege.length) { renderLeerzustand(q); kinoHinweisAnhaengen(q); return; }
-  // Gekuerzt wird in JEDER Liste, auch in Watchliste und Gesehen (siehe
+  // Gekuerzt wird in JEDER Liste, auch in Watchlist und Gesehen (siehe
   // TITEL_PRO_SEITE): Erst die besten 25 heraussuchen, den Rest holt
   // "Mehr laden" nach.
   const sichtbar = besteNachSortwert(eintraege, effectiveSort(), profile, titelLimit);
@@ -3350,7 +4041,7 @@ function render() {
     var moreBtn = document.createElement('button');
     moreBtn.type = 'button';
     moreBtn.className = 'load-more-btn';
-    moreBtn.textContent = 'Mehr laden';
+    moreBtn.textContent = TXT.mehrLaden;
     moreBtn.onclick = function(){
       nachladenOhneSprung(function(){ titelLimit += NACHLADE_SCHRITT; renderCurrentTab(); });
     };
@@ -3472,10 +4163,7 @@ function confirmRemove(frage){
    war am Knopf nicht abzulesen -- der Klick sah nach "zusaetzlich vormerken"
    aus. Wortlaut identisch mit der Rueckfrage im Teilen-Dialog (siehe dort).
    Liefert true, wenn der Wechsel stattfinden soll. */
-var GESEHEN_ZU_WL_FRAGE = 'Du hast diesen Titel als gesehen markiert. Auf der ' +
-  'Watchliste gilt er nicht mehr als gesehen: Er verschwindet aus „Gesehen“ und ' +
-  'deine Sterne-Bewertung zählt nicht mehr für deinen Taste-Score. Trotzdem auf ' +
-  'die Watchliste setzen?';
+var GESEHEN_ZU_WL_FRAGE = TXT.gesehenZuWl;
 function bestaetigeGesehenZuWatchlist(){ return confirmRemove(GESEHEN_ZU_WL_FRAGE); }
 /* ---- Einmaliger Hinweis beim ersten Wischen nach links ----
    Vier getrennte Merker, einer je Bereich: Wer in "Filme" schon gewischt hat,
@@ -3492,22 +4180,10 @@ function bestaetigeGesehenZuWatchlist(){ return confirmRemove(GESEHEN_ZU_WL_FRAG
    Wisch ausgeblendete Discovery-/Kino-Titel. Deshalb nennen die beiden
    Listen-Texte "Neue entdecken" bzw. die Suche als Rueckweg. */
 var WISCH_HINWEISE = {
-  filme: {
-    key: 'mt.wischHinweis.filme',
-    text: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
-  },
-  serien: {
-    key: 'mt.wischHinweis.serien',
-    text: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
-  },
-  discovery: {
-    key: 'mt.wischHinweis.discovery',
-    text: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht unter „Neue entdecken“ nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
-  },
-  kino: {
-    key: 'mt.wischHinweis.kino',
-    text: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht auf der Kino-Seite nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
-  },
+  filme:     { key: 'mt.wischHinweis.filme',     text: TXT.wischFilme },
+  serien:    { key: 'mt.wischHinweis.serien',    text: TXT.wischSerien },
+  discovery: { key: 'mt.wischHinweis.discovery', text: TXT.wischDiscovery },
+  kino:      { key: 'mt.wischHinweis.kino',      text: TXT.wischKino },
 };
 async function darfWischEntfernen(bereich){
   var h = WISCH_HINWEISE[bereich];
@@ -3570,10 +4246,9 @@ function wireRow(li, src, i){
       if (verschwindet) {
         // Gleiche Aussage wie beim Wischen (siehe WISCH_HINWEISE), nur ohne den
         // Zusatz "nur dieses eine Mal" -- diese Rueckfrage kommt jedes Mal.
-        const wort = src === 'serien' ? 'Serie' : 'Film';
-        const pron = src === 'serien' ? 'sie' : 'ihn';
-        const frage = wort + ' aus deiner Liste entfernen? Du kannst ' + pron +
-          ' über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen.';
+        const wort = src === 'serien' ? TXT.serie : TXT.film;
+        const pron = src === 'serien' ? TXT.pronSerie : TXT.pronFilm;
+        const frage = TXT.ausListeEntfernen(wort, pron);
         if (!(await confirmRemove(frage))) { wlBtn.blur(); return; }
       } else if (!getWatchlistFlag(id) && getSeen(id)) {
         // Wechsel "gesehen" -> Watchlist: siehe bestaetigeGesehenZuWatchlist.
@@ -3615,7 +4290,7 @@ tabBtns.kino.onclick = () => { if (!cinemaMode) openCinemaPage(); };
 // Sortier-Menue, Tab-Wechsel, Suche).
 //
 // Gilt fuer ALLE drei Status, nicht nur fuer "Neue entdecken": Frueher wurden
-// Watchliste und Gesehen ungekuerzt gerendert ("die sind ja kurz") -- bei ein
+// Watchlist und Gesehen ungekuerzt gerendert ("die sind ja kurz") -- bei ein
 // paar hundert markierten Titeln baut das jedes Mal mehrere hundert Zeilen samt
 // Postern auf, bevor ueberhaupt etwas zu sehen ist. Eine Seite soll nie lang
 // genug werden, dass der Aufbau spuerbar wird.
@@ -3679,7 +4354,7 @@ function sucheZustandAnwenden(){
                            disc: discoverFilterOn, stream: inStreamFilterOn,
                            typen: { filme: TYPEN.filme, serien: TYPEN.serien } };
     // Eine Suche soll weiten statt im zuletzt gesetzten Ausschnitt zu suchen --
-    // sonst faende man einen Titel nicht, nur weil vorher "nur Watchliste" oder
+    // sonst faende man einen Titel nicht, nur weil vorher "nur Watchlist" oder
     // "nur Serien" eingestellt war.
     watchlistFilterOn = true;
     seenFilterOn = true;
@@ -3808,7 +4483,7 @@ const btns = { open: document.getElementById('fOpen'), done: document.getElement
 // bereits einzigen aktiven Knopf laeuft deshalb ins Leere.
 function toggleStatus(feld){
   // In einer fremden Liste gibt es kein "Neue entdecken" -- die Person hat
-  // nichts Unmarkiertes. Watchliste und Gesehen dagegen verhalten sich hier
+  // nichts Unmarkiertes. Watchlist und Gesehen dagegen verhalten sich hier
   // genau wie in den eigenen Listen, deshalb kein Sonderfall mehr.
   if (personenAnsicht() && feld === 'disc') return;
   var st = statusLesen();
@@ -3947,7 +4622,7 @@ if (sortBtn && sortMenu) {
 // poolItemMatchesQuery), nicht nur bereits gerenderte Zeilen per CSS aus- und
 // einblenden -- sonst bleiben Treffer jenseits von titelLimit unsichtbar.
 //
-// Das galt frueher nur mit aktivem "Neue entdecken"; Watchliste und Gesehen
+// Das galt frueher nur mit aktivem "Neue entdecken"; Watchlist und Gesehen
 // wurden ungekuerzt gerendert und deshalb per applyFilter() ein-/ausgeblendet.
 // Seit jede Liste bei TITEL_PRO_SEITE endet, gibt es diesen Sonderfall nicht
 // mehr: Immer neu rendern, immer wieder bei der ersten Seite anfangen.
@@ -4158,7 +4833,9 @@ function buildSearchIndex(){
     // danach "Rentierbaby" in der Liste finden. Als "Titel" gefuehrt waere es
     // eine Behauptung -- unter diesem Namen steht der Titel ja nirgends.
     (item.alias || []).forEach(function(a){ add(a, 'Alternativtitel'); });
-    (item.g || []).forEach(function(g){ add(g, 'Genre'); });
+    // In der Anzeige-Sprache: Der Vorschlag ist zugleich der Suchbegriff, und
+    // poolItemMatchesQuery prueft die englischen Genre-Namen mit.
+    (item.g || []).forEach(function(g){ add(genreAnzeige(g), 'Genre'); });
     (item.c || []).forEach(function(c){ add(c, 'Darsteller'); });
     add(item.d, 'Regie');
   });
@@ -4239,12 +4916,19 @@ function getSearchSuggestions(query){
     .slice(0, 8);
 }
 var _searchSuggestEl = document.getElementById('searchSuggest');
+// Die Vorschlagsarten laufen intern weiterhin unter ihren deutschen Namen
+// (Schluessel im Index, Entdopplung) -- uebersetzt wird nur die Anzeige.
+var SUCHE_TYP_ANZEIGE = {
+  'Titel': TXT.sucheTitel, 'Alternativtitel': TXT.sucheAlternativtitel,
+  'Genre': TXT.sucheGenre, 'Darsteller': TXT.sucheDarsteller,
+  'Regie': TXT.sucheRegie, 'Schlagwort': TXT.sucheSchlagwort,
+};
 function renderSearchSuggestions(){
   var suggestions = getSearchSuggestions(searchEl.value);
   if (!suggestions.length){ _searchSuggestEl.style.display = 'none'; return; }
   _searchSuggestEl.innerHTML = suggestions.map(function(s){
     return '<button type="button" data-text="' + escAttr(s.text) + '">' +
-      '<span>' + esc(s.text) + '</span><span class="suggest-type">' + esc(s.type) + '</span></button>';
+      '<span>' + esc(s.text) + '</span><span class="suggest-type">' + esc(SUCHE_TYP_ANZEIGE[s.type] || s.type) + '</span></button>';
   }).join('');
   _searchSuggestEl.style.display = 'block';
 }
@@ -4303,7 +4987,7 @@ var _pendingFilter = null;
 var _fm = document.getElementById('filterModal');
 function openFilterModal(v){
   _pendingFilter = v;
-  document.getElementById('filterModalQ').innerHTML = 'Möchtest du nach \u201e' + esc(v) + '\u201c filtern?';
+  document.getElementById('filterModalQ').innerHTML = TXT.filternNach(esc(v));
   _fm.style.display = 'flex';
 }
 function closeFilterModal(){ _fm.style.display = 'none'; _pendingFilter = null; }
@@ -4596,7 +5280,7 @@ function renderSimilarList(){
                     .sort(function(a,b){ return b.score - a.score || (b.item.r||0) - (a.item.r||0); })
                     .slice(0, 20);
   if (!scored.length){
-    var p = document.createElement('div'); p.className = 'disc-hint'; p.textContent = 'Keine ähnlichen Titel für diese Filterkombination.'; listEl.appendChild(p);
+    var p = document.createElement('div'); p.className = 'disc-hint'; p.textContent = TXT.keineAehnlichen; listEl.appendChild(p);
   } else {
     scored.forEach(function(row){ listEl.appendChild(poolItemLi(row.item, row.score, { suppressSimilar: true })); });
     fillPlots();
@@ -4615,7 +5299,7 @@ function toggleSimType(k){
 simBtns.f.onclick = () => toggleSimType('f');
 simBtns.s.onclick = () => toggleSimType('s');
 function openSimilarModal(refItem){
-  document.getElementById('similarModalTitle').textContent = 'Ähnliche Titel zu „' + refItem.t + '“';
+  document.getElementById('similarModalTitle').textContent = TXT.aehnlicheTitelZu(refItem.t);
   _simRefItem = refItem;
   _simProf = buildProfileFromItem(refItem);
   // Ausgangszustand: der Typ-Filter richtet sich nach refItem.type. Einen
@@ -4676,34 +5360,17 @@ document.addEventListener('keydown', function(e){
    Satz dazu. Bilder liegen als feste Dateien im Verzeichnis tour/ -- bewusst
    statisch, damit sie sich nicht bei jeder Oberflaechenaenderung mitbewegen.
    Wenn sie irgendwann nicht mehr passen, werden sie einmal neu erzeugt. */
-var TOUR_SLIDES = [
-  { titel: 'Filme & Serien entdecken',
-    bild: 'tour/1-entdecken.png',
-    text: '„Neue entdecken" listet alle Filme und Serien auf sowie aktuelle und zukünftige Kinofilme. ' +
-      'Markiere Titel als gesehen oder füge sie deiner Watchliste hinzu. ' +
-      'Dadurch bildet sich dein persönlicher Taste-Score.' },
-  { titel: 'Dein Taste-Score',
-    bild: 'tour/2-taste-score.png',
-    // Bewusst 20 und nicht 10: Die Automatik schaltet zwar schon bei 10 um
-    // (siehe effectiveSort), aber so wenige Titel ergeben noch kein tragfaehiges
-    // Profil. Die Zahl hier ist eine Empfehlung, keine Beschreibung der
-    // Schaltschwelle -- und sie stimmt damit mit dem Leertext der Watchliste
-    // ueberein ("mind. 20 Titel"), der vorher als Einziger 20 nannte.
-    text: 'Ab 20 gespeicherten Titeln werden alle Filme, Serien und Kinofilme nach deinem Geschmack sortiert.' },
-  { titel: 'Mit anderen schauen',
-    bild: 'tour/3-gemeinsam.png',
-    text: '„Matche" deine Watchliste mit anderen und filtere nach Titeln, die ihr gemeinsam sehen wollt.' },
-  { titel: 'Streaming & Taste-Score',
-    bild: 'tour/4-streaming.png',
-    text: 'Markiere unter Einstellungen die Streaminganbieter, die du nutzt. Filtere alle Filme und Serien, ' +
-      'die bei deinen Anbietern aktuell kostenlos laufen. Diese werden nach deinem Taste-Score sortiert.' },
-  { titel: 'Film- & Seriendetails',
-    bild: 'tour/5-details.png',
-    text: 'Klicke einen Titel an und erhalte Kurzbeschreibung, Trailer, ähnliche Titel und vieles mehr.' },
-  { titel: 'Suche & Filter',
-    bild: 'tour/6-suche.png',
-    text: 'Suche und filtere nach Titel, Genre, Schauspielern oder Filminhalten.' },
-];
+/* Texte der sechs Seiten kommen aus TXT.tourSlides (je Sprache), die Bilder
+   bleiben dieselben -- sie zeigen die Oberflaeche, nicht ihren Wortlaut.
+   Zur 20er-Schwelle auf Seite 2: Die Automatik schaltet zwar schon bei 10 um
+   (siehe effectiveSort), aber so wenige Titel ergeben noch kein tragfaehiges
+   Profil -- die 20 ist eine Empfehlung und deckt sich mit dem Leertext der
+   Watchlist ("mind. 20 Titel"). */
+var TOUR_BILDER = ['tour/1-entdecken.png', 'tour/2-taste-score.png', 'tour/3-gemeinsam.png',
+                   'tour/4-streaming.png', 'tour/5-details.png', 'tour/6-suche.png'];
+var TOUR_SLIDES = TXT.tourSlides.map(function(s, i){
+  return { titel: s.titel, bild: TOUR_BILDER[i], text: s.text };
+});
 var _tourModal = document.getElementById('tourModal');
 var _tourIndex = 0;
 function tourZeichnen(){
@@ -4730,7 +5397,7 @@ function tourZeichnen(){
   // visibility statt display, damit "Weiter" nicht seine Position wechselt.
   document.getElementById('tourZurueck').style.visibility = _tourIndex > 0 ? '' : 'hidden';
   document.getElementById('tourWeiter').textContent =
-    _tourIndex === TOUR_SLIDES.length - 1 ? 'Los geht’s' : 'Weiter';
+    _tourIndex === TOUR_SLIDES.length - 1 ? TXT.losGehts : TXT.weiter;
   document.getElementById('tourPunkte').innerHTML = TOUR_SLIDES.map(function(_, i){
     return '<span class="tour-punkt' + (i === _tourIndex ? ' on' : '') + '"></span>';
   }).join('');
@@ -4850,12 +5517,8 @@ const cinemaHeadingEls = {
   soon: document.getElementById('cinemaSoonHeading'),
   later: document.getElementById('cinemaLaterHeading'),
 };
-const CINEMA_LABELS = { now: 'Aktuell im Kino', soon: 'In Kürze im Kino', later: 'Bald im Kino' };
-const CINEMA_EMPTY_TEXT = {
-  now: 'Aktuell sind keine Titel hinterlegt.',
-  soon: 'In Kürze startet aktuell nichts Neues.',
-  later: 'Für die kommenden Monate ist noch nichts hinterlegt.',
-};
+const CINEMA_LABELS = TXT.kinoLabels;
+const CINEMA_EMPTY_TEXT = TXT.kinoLeer;
 // Jeder der drei Bereiche zeigt anfangs nur CINEMA_SECTION_PREVIEW Titel
 // (sonst scrollt man scheinbar endlos durch nur EINEN Bereich, ohne zu merken,
 // dass es noch zwei weitere gibt). "Mehr anzeigen" blendet danach jeweils
@@ -4868,7 +5531,7 @@ let cinemaSectionLimit = { now: CINEMA_SECTION_PREVIEW, soon: CINEMA_SECTION_PRE
 let cinemaSortKey = 'taste';
 async function loadCinemaData(){
   if (!CINEMA_DATA) {
-    CINEMA_DATA = await apiRequest('GET', '/api/cinema');
+    CINEMA_DATA = await apiRequest('GET', mitSpracheRegion('/api/cinema'));
     // Einziger Punkt, an dem Kinodaten ankommen -- hier faellt auch die Tabelle
     // fuer den "Ab ... im Kino"-Chip ab (siehe kinoStartsUebernehmen).
     kinoStartsUebernehmen(CINEMA_DATA);
@@ -4912,7 +5575,7 @@ function cinemaRowToItem(row, poolByTmdb){
   var ov = row.ov || '';
   if (row.ord) {
     var origYear = row.ord.slice(0, 4);
-    ov = '🎬 Wiederaufführung im Kino – ursprünglich erschienen ' + origYear + '.' + (ov ? ' ' + ov : '');
+    ov = TXT.wiederauffuehrung(origYear) + (ov ? ' ' + ov : '');
   }
   return {
     realId: null, tmdbId, type: 'movie', t: row.t, ot: null, y: row.y,
@@ -4962,13 +5625,13 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
   // passt (z.B. weiterhin "(12)", nachdem man einen Titel weggewischt hat).
   cinemaHeadingEls[key].textContent = CINEMA_LABELS[key] + (entries.length ? ' (' + entries.length + ')' : '');
   if (!entries.length) {
-    var text = !KATALOG_DA ? 'Titel werden geladen …'
-             : q ? 'Keine Treffer für „' + searchEl.value.trim() + '".'
-             : fremd ? (profilName(ANSICHT_PERSON) + ' hat hier nichts ' +
-                        ((st.wl && st.seen) ? 'markiert'
-                         : st.wl ? 'auf der Watchliste' : 'als gesehen markiert') + '.')
+    var text = !KATALOG_DA ? TXT.titelWerdenGeladen
+             : q ? TXT.keineTrefferFuer(searchEl.value.trim())
+             : fremd ? TXT.hatNichts(profilName(ANSICHT_PERSON),
+                        ((st.wl && st.seen) ? TXT.markiert
+                         : st.wl ? TXT.aufDerWatchlist : TXT.alsGesehenMarkiert))
              : (st.wl && st.seen && st.disc) ? CINEMA_EMPTY_TEXT[key]
-             : 'Keine Titel für diese Auswahl.';
+             : TXT.keineTitelAuswahl;
     el.innerHTML = '<li class="cinema-empty">' + esc(text) + '</li>';
     return;
   }
@@ -5013,7 +5676,7 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
     var moreBtn = document.createElement('button');
     moreBtn.type = 'button';
     moreBtn.className = 'load-more-btn';
-    moreBtn.textContent = 'Mehr anzeigen (' + Math.min(CINEMA_SECTION_STEP, remaining) + ' weitere)';
+    moreBtn.textContent = TXT.mehrAnzeigen(Math.min(CINEMA_SECTION_STEP, remaining));
     moreBtn.onclick = function(){
       nachladenOhneSprung(function(){
         cinemaSectionLimit[key] = Math.min(entries.length, cinemaSectionLimit[key] + CINEMA_SECTION_STEP);
@@ -5063,12 +5726,12 @@ function openCinemaPage(){
   document.getElementById('cinemaPage').style.display = '';
   window.scrollTo(0, 0);
   Object.keys(cinemaListEls).forEach(function(key){
-    cinemaListEls[key].innerHTML = '<li class="cinema-empty">Lädt …</li>';
+    cinemaListEls[key].innerHTML = '<li class="cinema-empty">' + TXT.laedt + '</li>';
   });
   renderCinemaPage().catch(function(err){
     console.error('Kino-Daten konnten nicht geladen werden:', err);
     Object.keys(cinemaListEls).forEach(function(key){
-      cinemaListEls[key].innerHTML = '<li class="cinema-empty">Kino-Daten konnten nicht geladen werden.</li>';
+      cinemaListEls[key].innerHTML = '<li class="cinema-empty">' + TXT.kinoFehler + '</li>';
     });
   });
 }
@@ -5173,15 +5836,7 @@ window.addEventListener('beforeinstallprompt', function(e){
   deferredInstallPrompt = e;
 });
 document.getElementById('installIOS').onclick = function(){
-  showInstallInstructions(
-    '<p>iOS erlaubt Webseiten leider nicht, die Installation direkt auszulösen – so geht es in wenigen Schritten von Hand:</p>' +
-    '<ol class="install-steps">' +
-      '<li>Diese Seite in <b>Safari</b> öffnen (nicht in Chrome oder einer anderen App).</li>' +
-      '<li>Unten auf das Teilen-Symbol <b>⬆️</b> tippen.</li>' +
-      '<li><b>„Zum Home-Bildschirm"</b> auswählen (ggf. in der Liste nach unten scrollen).</li>' +
-      '<li>Oben rechts auf <b>„Hinzufügen"</b> tippen.</li>' +
-    '</ol>'
-  );
+  showInstallInstructions(TXT.installIOS);
 };
 document.getElementById('installAndroid').onclick = function(){
   if (deferredInstallPrompt) {
@@ -5191,14 +5846,7 @@ document.getElementById('installAndroid').onclick = function(){
     evt.userChoice.finally(function(){ closeInstallModal(); });
     return;
   }
-  showInstallInstructions(
-    '<p>So speicherst du MovieMatch auf deinem Android-Gerät als App:</p>' +
-    '<ol class="install-steps">' +
-      '<li>Diese Seite in <b>Chrome</b> öffnen.</li>' +
-      '<li>Oben rechts auf das Menü <b>⋮</b> tippen.</li>' +
-      '<li><b>„App installieren"</b> bzw. <b>„Zum Startbildschirm hinzufügen"</b> auswählen.</li>' +
-    '</ol>'
-  );
+  showInstallInstructions(TXT.installAndroid);
 };
 
 /* ---- "Feedback senden": einfaches Formular (nur Text + Absenden), landet per
@@ -5219,9 +5867,7 @@ function openFeedbackModal(){
   _feedbackError.textContent = '';
   // Angemeldet geht die Adresse mit -- das gehoert vor das Tippen gesagt, nicht
   // in einen Rechtstext, den an dieser Stelle niemand aufschlaegt.
-  _feedbackHinweis.textContent = CURRENT_USER
-    ? 'Wir speichern deine Nachricht und schicken deine E-Mail-Adresse mit, damit wir antworten können.'
-    : 'Wir speichern deine Nachricht. Ohne Anmeldung erreicht sie uns ohne Absender – wir können dann nicht antworten.';
+  _feedbackHinweis.textContent = CURRENT_USER ? TXT.feedbackAngemeldet : TXT.feedbackAbgemeldet;
   _feedbackModal.style.display = 'flex';
 }
 function closeFeedbackModal(){ _feedbackModal.style.display = 'none'; }
@@ -5231,18 +5877,18 @@ _feedbackModal.addEventListener('click', function(e){ if (e.target === _feedback
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _feedbackModal.style.display !== 'none') closeFeedbackModal(); });
 _feedbackSubmit.onclick = function(){
   var text = _feedbackText.value.trim();
-  if (!text) { _feedbackError.textContent = 'Bitte einen Text eingeben.'; return; }
+  if (!text) { _feedbackError.textContent = TXT.feedbackLeer; return; }
   _feedbackError.textContent = '';
   _feedbackSubmit.disabled = true;
-  _feedbackSubmit.textContent = 'Sende …';
+  _feedbackSubmit.textContent = TXT.sende;
   apiRequest('POST', '/api/feedback', { message: text }).then(function(){
     _feedbackForm.style.display = 'none';
     _feedbackSuccess.style.display = '';
   }).catch(function(e){
-    _feedbackError.textContent = grenzeMeldung(e) || 'Senden fehlgeschlagen, bitte später erneut versuchen.';
+    _feedbackError.textContent = grenzeMeldung(e) || TXT.sendenFehler;
   }).finally(function(){
     _feedbackSubmit.disabled = false;
-    _feedbackSubmit.textContent = 'Absenden';
+    _feedbackSubmit.textContent = TXT.absenden;
   });
 };
 
@@ -5254,6 +5900,70 @@ document.getElementById('settingsBtn').onclick = () => { closeNavMenu(); openSet
 document.getElementById('settingsModalX').onclick = closeSettingsModal;
 _settingsModal.addEventListener('click', function(e){ if (e.target === _settingsModal) closeSettingsModal(); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _settingsModal.style.display !== 'none') closeSettingsModal(); });
+
+/* ---- Sprache & Region (siehe i18n-Block oben) ----
+   Beide Reihen sind zweisprachig beschriftet, damit das Fenster auch dann
+   verstaendlich ist, wenn die aktuelle Sprache die falsche ist. Ein Klick auf
+   einen anderen Wert speichert sofort und laedt neu (sprachWahlSpeichern). */
+(function sprachModalEinrichten(){
+  var modal = document.getElementById('langModal');
+  var btn = document.getElementById('langBtn');
+  if (!modal || !btn) return;
+  var SPRACHEN = [ { key: 'de', label: 'Deutsch' }, { key: 'en', label: 'English' } ];
+  var REGIONEN = [
+    { key: 'DE', label: SPRACHE === 'en' ? 'Germany' : 'Deutschland' },
+    { key: 'AT', label: SPRACHE === 'en' ? 'Austria' : 'Österreich' },
+  ];
+  btn.textContent = TXT.sprachMenue;
+  document.getElementById('langModalTitel').textContent = TXT.sprachMenue;
+  document.getElementById('langHinweis').textContent = SPRACHE === 'en'
+    ? 'Changes are applied immediately; the page reloads.'
+    : 'Änderungen gelten sofort; die Seite lädt dabei neu.';
+  function reihe(el, eintraege, aktiv, waehlen){
+    el.innerHTML = eintraege.map(function(e){
+      return '<button type="button" data-wert="' + escAttr(e.key) + '"' +
+             (e.key === aktiv ? ' class="active"' : '') + '>' + esc(e.label) + '</button>';
+    }).join('');
+    el.querySelectorAll('button').forEach(function(b){
+      b.onclick = function(){ waehlen(b.dataset.wert); };
+    });
+  }
+  function zeichnen(){
+    reihe(document.getElementById('langSpracheRow'), SPRACHEN, SPRACHE, function(wert){
+      if (wert !== SPRACHE) sprachWahlSpeichern(wert, REGION_WAHL);
+    });
+    reihe(document.getElementById('langRegionRow'), REGIONEN, REGION_WAHL, function(wert){
+      if (wert !== REGION_WAHL) sprachWahlSpeichern(SPRACHE, wert);
+    });
+  }
+  function oeffnen(){ closeNavMenu(); zeichnen(); modal.style.display = 'flex'; }
+  function schliessen(){ modal.style.display = 'none'; }
+  btn.onclick = oeffnen;
+  document.getElementById('langModalX').onclick = schliessen;
+  modal.addEventListener('click', function(e){ if (e.target === modal) schliessen(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modal.style.display !== 'none') schliessen(); });
+})();
+
+/* Sprache/Region vom Konto uebernehmen: Wer sich auf einem neuen Geraet
+   anmeldet, bekommt seine gespeicherte Wahl -- einmalig, danach stimmen
+   Geraet und Konto ueberein und nichts laedt mehr neu. */
+function kontoSpracheAnwenden(u){
+  if (!u) return;
+  // Konto ohne gespeicherte Wahl: die Wahl dieses Geraets dorthin uebertragen,
+  // damit sie beim naechsten Geraet mitkommt. Fire-and-forget.
+  if (!u.sprache && !u.region) {
+    apiRequest('PUT', '/api/auth/settings', { sprache: SPRACHE, region: REGION_WAHL }).catch(function(){});
+    return;
+  }
+  var zielSprache = (u.sprache === 'de' || u.sprache === 'en') ? u.sprache : SPRACHE;
+  var zielRegion = (u.region && /^[A-Z]{2}$/.test(u.region)) ? u.region : REGION_WAHL;
+  if (zielSprache === SPRACHE && zielRegion === REGION_WAHL) return;
+  try {
+    localStorage.setItem(SPRACHE_KEY, zielSprache);
+    localStorage.setItem(REGION_KEY, zielRegion);
+  } catch (e) {}
+  location.reload();
+}
 
 /* ---- Gemeinsam schauen: verknuepfte Profile als Filter ----
    LINKED_PROFILES sind die verknuepften Personen, LINKED_PROGRESS ihre
@@ -5277,26 +5987,34 @@ function matchAktiv(){ return MATCH_WITH.length > 0; }
 // mit den Kindern schauen?" (siehe die Zeile darueber im Popup). Eine Stufe
 // "ab 18" gab es hier auch, sie tat aber das Gegenteil -- sie zeigte
 // ausschliesslich das, was fuer Kinder gerade nicht in Frage kommt.
-var FSK_STUFEN = [
-  { key: '6',  label: 'bis 6',  erlaubt: ['0', '6'] },
-  { key: '12', label: 'bis 12', erlaubt: ['0', '6', '12'] },
-  { key: '16', label: 'bis 16', erlaubt: ['0', '6', '12', '16'] },
-];
+/* Die Stufen entstehen aus dem Freigabesystem der gewaehlten Region (siehe
+   FSK_SYSTEME oben): Deutschland kennt 0/6/12/16/18 (FSK), Oesterreich
+   0/6/8/10/12/14/16. Beide sind numerisch -- "bis 12" heisst also schlicht
+   "alle belegten Werte bis einschliesslich 12". Die Knopfleiste bleibt in
+   beiden Laendern dieselbe (bis 6 / bis 12 / bis 16). */
+var FSK_STUFEN = ['6', '12', '16'].map(function(max){
+  return {
+    key: max,
+    label: TXT.bisStufe(max),
+    erlaubt: freigabenGueltig().filter(function(v){ return Number(v) <= Number(max); }),
+  };
+});
 var MY_FSK = null;   // null = kein Filter
 function fskAktiv(){ return MY_FSK !== null; }
 function fskErlaubt(item){
   if (!fskAktiv()) return true;
   var stufe = FSK_STUFEN.find(function(s){ return s.key === MY_FSK; });
   if (!stufe) return true;
-  // Nur die fuenf offiziellen Werte gelten als belegt -- alles andere
-  // ("Not Rated", leer, unbekannte Kuerzel) zaehlt als fehlende Angabe.
+  // Nur die offiziellen Werte des jeweiligen Systems gelten als belegt --
+  // alles andere ("Not Rated", leer, unbekannte Kuerzel) zaehlt als fehlende
+  // Angabe und wird bei aktivem Filter ausgeblendet.
   var f = item && item.fsk != null ? String(item.fsk).trim() : '';
-  if (['0','6','12','16','18'].indexOf(f) === -1) return false;
+  if (freigabenGueltig().indexOf(f) === -1) return false;
   return stufe.erlaubt.indexOf(f) !== -1;
 }
 function profilName(id){
   var p = LINKED_PROFILES.find(function(x){ return x.id === id; });
-  return p ? p.name : 'Unbekannt';
+  return p ? p.name : TXT.unbekannt;
 }
 // Namen fuer die Leiste ueber der Liste zusammenfassen. Ab vier Personen wird
 // gekuerzt, sonst waechst die Leiste auf dem Handy auf mehrere Zeilen an.
@@ -5305,8 +6023,8 @@ function profilName(id){
 function namenListe(ids){
   var namen = ids.map(profilName);
   if (namen.length <= 1) return namen[0] || '';
-  if (namen.length <= 3) return namen.slice(0, -1).join(', ') + ' und ' + namen[namen.length - 1];
-  return namen.slice(0, 2).join(', ') + ' und ' + (namen.length - 2) + ' weiteren';
+  if (namen.length <= 3) return namen.slice(0, -1).join(', ') + TXT.undWort + namen[namen.length - 1];
+  return namen.slice(0, 2).join(', ') + TXT.weiteren(namen.length - 2);
 }
 // Zustand eines Titels bei einer bestimmten Person -- null, wenn er dort gar
 // nicht auf der Liste steht.
@@ -5336,8 +6054,8 @@ function matchNoteHtml(titleId){
   var info = matchInfo(titleId);
   if (!info.abweichend.length) return '';
   var text = watchlistFilterOn
-    ? info.abweichend.join(', ') + (info.abweichend.length > 1 ? ' haben' : ' hat') + ' das schon gesehen'
-    : info.abweichend.join(', ') + (info.abweichend.length > 1 ? ' wollen' : ' will') + ' das noch sehen';
+    ? TXT.schonGesehenNote(info.abweichend.join(', '), info.abweichend.length > 1)
+    : TXT.nochSehenNote(info.abweichend.join(', '), info.abweichend.length > 1);
   return '<div class="match-note">' + esc(text) + '</div>';
 }
 
@@ -5442,9 +6160,9 @@ function updateProfileBtn(){
     btn.style.display = 'flex';
     btn.classList.toggle('filtering', matchAktiv() || fskAktiv());
     var teile = [];
-    if (matchAktiv()) teile.push('mit ' + MATCH_WITH.map(profilName).join(' und '));
-    if (fskAktiv()) teile.push('Altersfreigabe ' + (FSK_STUFEN.find(function(x){ return x.key === MY_FSK; })||{}).label);
-    btn.setAttribute('aria-label', teile.length ? ('Zusammen schauen – ' + teile.join(', ')) : 'Zusammen schauen');
+    if (matchAktiv()) teile.push(TXT.mitWem(MATCH_WITH.map(profilName).join(TXT.undWort)));
+    if (fskAktiv()) teile.push(TXT.altersfreigabe((FSK_STUFEN.find(function(x){ return x.key === MY_FSK; })||{}).label));
+    btn.setAttribute('aria-label', teile.length ? (TXT.zusammenSchauen + ' – ' + teile.join(', ')) : TXT.zusammenSchauen);
   }
   var bar = document.getElementById('matchBar');
   if (!bar) return;
@@ -5457,15 +6175,15 @@ function updateProfileBtn(){
   // Knopf daneben fuehrt zurueck in die eigene Ansicht.
   if (personenAnsicht()) {
     bar.style.display = 'flex';
-    // "Liste von Anna", nicht mehr "Watchliste von" oder "Gesehen von": Zu
+    // "Liste von Anna", nicht mehr "Watchlist von" oder "Gesehen von": Zu
     // sehen sind jetzt beide zusammen, und welcher Teil gerade an ist, steht
     // ohnehin an den Schaltern darunter.
-    document.getElementById('matchBarText').textContent = 'Liste von ' + profilName(ANSICHT_PERSON);
-    document.getElementById('matchBarClear').textContent = 'zurück';
+    document.getElementById('matchBarText').textContent = TXT.listeVon(profilName(ANSICHT_PERSON));
+    document.getElementById('matchBarClear').textContent = TXT.zurueck;
     return;
   }
 
-  document.getElementById('matchBarClear').textContent = 'aufheben';
+  document.getElementById('matchBarClear').textContent = TXT.aufheben;
   var zeigtMatch = matchAktiv();
   var zeigen = zeigtMatch || fskAktiv();
   bar.style.display = zeigen ? 'flex' : 'none';
@@ -5476,9 +6194,9 @@ function updateProfileBtn(){
     // alleProfile/renderCinemaSection). "Gemeinsame Titel" waere dort schlicht
     // gelogen: Zu sehen ist das vollstaendige Programm.
     if (zeigtMatch) text.push(cinemaMode
-      ? 'Kino-Vorschläge für dich und ' + namenListe(MATCH_WITH)
-      : 'Gemeinsame Titel mit ' + namenListe(MATCH_WITH));
-    if (fskAktiv()) text.push('Altersfreigabe ' + (FSK_STUFEN.find(function(x){ return x.key === MY_FSK; })||{}).label);
+      ? TXT.kinoVorschlaegeFuer(namenListe(MATCH_WITH))
+      : TXT.gemeinsameTitelMit(namenListe(MATCH_WITH)));
+    if (fskAktiv()) text.push(TXT.altersfreigabe((FSK_STUFEN.find(function(x){ return x.key === MY_FSK; })||{}).label));
     document.getElementById('matchBarText').textContent = text.join(' · ');
   }
 }
@@ -5520,21 +6238,21 @@ function renderProfileList(){
     var aktiv = MATCH_WITH.indexOf(p.id) !== -1;
     var favorit = favoriten.has(p.id);
     // Zwei Absichten, zwei Knoepfe: DEREN Titel ansehen oder mit ihnen
-    // abgleichen. Vorher waren es drei -- Watchliste und Gesehen getrennt, und
+    // abgleichen. Vorher waren es drei -- Watchlist und Gesehen getrennt, und
     // zwar sich gegenseitig ausschliessend. Man musste sich also entscheiden,
-    // bevor man wusste, wo bei der Person ueberhaupt etwas steht. "Watchliste"
+    // bevor man wusste, wo bei der Person ueberhaupt etwas steht. "Watchlist"
     // oeffnet jetzt beides zusammen; wegfiltern kann man es danach mit den
     // Schaltern, die dafuer ohnehin da sind.
     var inAnsicht = ANSICHT_PERSON === p.id;
     return '<div class="profile-item' + (aktiv ? ' active' : '') + '" data-uid="' + escAttr(String(p.id)) + '">' +
              '<span class="pi-name">' + esc(p.name) + '</span>' +
              '<div class="pi-aktionen">' +
-               '<button type="button" class="pi-btn' + (inAnsicht ? ' on' : '') + '" data-tun="w">Watchliste</button>' +
-               '<button type="button" class="pi-btn' + (aktiv ? ' on' : '') + '" data-tun="m">Match</button>' +
+               '<button type="button" class="pi-btn' + (inAnsicht ? ' on' : '') + '" data-tun="w">' + TXT.watchliste + '</button>' +
+               '<button type="button" class="pi-btn' + (aktiv ? ' on' : '') + '" data-tun="m">' + TXT.matchWort + '</button>' +
              '</div>' +
-             '<button type="button" class="pi-del" aria-label="Verknüpfung lösen">✕</button>' +
+             '<button type="button" class="pi-del" aria-label="' + TXT.verknuepfungLoesen + '">✕</button>' +
              '<button type="button" class="pi-fav' + (favorit ? ' on' : '') + '" aria-pressed="' +
-               (favorit ? 'true' : 'false') + '" aria-label="Als Favorit oben anzeigen">' +
+               (favorit ? 'true' : 'false') + '" aria-label="' + TXT.favoritOben + '">' +
                HERZ_SVG + '</button>' +
            '</div>';
   }).join('');
@@ -5542,17 +6260,16 @@ function renderProfileList(){
   // gesperrt aussieht -- ohne Konto gibt es niemanden, mit dem sich etwas
   // verknuepfen liesse (die Verknuepfung haengt an beiden Konten).
   if (!CURRENT_USER) {
-    html += '<div class="profile-empty">Zum Einladen brauchst du ein Konto. ' +
-            'Der FSK-Filter unten wirkt auch ohne.</div>';
+    html += '<div class="profile-empty">' + TXT.profilOhneKonto + '</div>';
   } else if (LINKED_LADEN) {
     // Die Profile kommen erst nach dem Katalog (siehe loadUserProgressAndRefresh).
     // Wer sofort nach dem Start hier hineinsieht, stand vorher vor einer leeren
     // Liste mit dem Satz "Noch niemand verknüpft" -- also vor der Aussage, seine
     // Verknuepfungen seien weg. renderProfileList wird nach dem Laden erneut
     // aufgerufen, die Liste fuellt sich dann von selbst.
-    html += '<div class="profile-empty">Verknüpfte Personen werden geladen …</div>';
+    html += '<div class="profile-empty">' + TXT.profilLaedt + '</div>';
   } else if (!LINKED_PROFILES.length) {
-    html += '<div class="profile-empty">Noch niemand verknüpft. Lade jemanden ein, um gemeinsame Titel zu finden.</div>';
+    html += '<div class="profile-empty">' + TXT.profilLeer + '</div>';
   }
   el.innerHTML = html;
   var teilenBtn = document.getElementById('profileShareBtn');
@@ -5604,13 +6321,13 @@ function renderProfileList(){
     };
     row.querySelector('.pi-del').onclick = function(e){
       e.stopPropagation();
-      if (!confirm('Verknüpfung mit ' + profilName(uid) + ' lösen? Ihr seht dann gegenseitig keine gemeinsamen Titel mehr.')) return;
+      if (!confirm(TXT.loesenFrage(profilName(uid)))) return;
       apiRequest('DELETE', '/api/links/' + uid).then(function(){
         LINKED_PROFILES = LINKED_PROFILES.filter(function(p){ return p.id !== uid; });
         delete LINKED_PROGRESS[uid];
         MATCH_WITH = MATCH_WITH.filter(function(x){ return x !== uid; });
         renderProfileList(); updateProfileBtn(); rebuild(); renderCurrentTab();
-      }).catch(function(){ alert('Konnte nicht gelöst werden. Bitte erneut versuchen.'); });
+      }).catch(function(){ alert(TXT.loesenFehler); });
     };
     attachSwipeToRemove(row, function(){ row.querySelector('.pi-del').click(); });
   });
@@ -5648,7 +6365,7 @@ function renderFskRow(){
 /* ---- Einstieg in die gemeinsamen Titel ----
    Wer den Abgleich einschaltet, will EINE Sache wissen: Was koennen wir zusammen
    schauen. Beim Schliessen des Fensters wird deshalb genau darauf gestellt --
-   Filme, nur Watchliste. Vorher stand hier immer "Watchliste UND Gesehen"
+   Filme, nur Watchlist. Vorher stand hier immer "Watchlist UND Gesehen"
    (einstiegSetzen); die schon gesehenen Titel standen damit gleichberechtigt
    zwischen den offenen, obwohl sie die Frage gerade nicht beantworten.
 
@@ -5659,7 +6376,7 @@ function renderFskRow(){
 
    Gezaehlt wird erst NACH rebuild(): state.filme enthaelt dann nur noch Titel,
    die bei allen Ausgewaehlten auf der Liste stehen (siehe rebuild/matchInfo). */
-function gemeinsameFilmeAufWatchliste(){
+function gemeinsameFilmeAufWatchlist(){
   var s = state.filme;
   for (var i = 0; i < s.data.length; i++) {
     if (isWatched('filme', s.data[i][0])) return true;
@@ -5667,10 +6384,10 @@ function gemeinsameFilmeAufWatchliste(){
   return false;
 }
 function matchEinstiegSetzen(){
-  // Setzt Filme, Watchliste + Gesehen, beendet Kino/Suche/fremde Liste.
+  // Setzt Filme, Watchlist + Gesehen, beendet Kino/Suche/fremde Liste.
   einstiegSetzen();
   rebuild();
-  seenFilterOn = !gemeinsameFilmeAufWatchliste();
+  seenFilterOn = !gemeinsameFilmeAufWatchlist();
   titelLimit = TITEL_PRO_SEITE;
 }
 // Merkt sich die Auswahl beim Oeffnen, damit das Schliessen nur dann etwas
@@ -5713,41 +6430,26 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _pro
    Beide gelten fuer beliebig viele Personen (frueher genau eine: Wer den Link
    in eine Gruppe stellte, verknuepfte sich nur mit dem Ersten, alle anderen
    liefen ins Leere). */
+/* Wortlaute in TXT (je Sprache); die Anmerkungen von frueher gelten weiter:
+   Die share-Rueckfrage nennt ausdruecklich, was preisgegeben wird (beide
+   Richtungen!), die Texte kommen ohne "seine/ihre" aus (der Anzeigename sagt
+   nichts ueber das Geschlecht), und der ausgeloggte referral-Text ist neutral
+   ohne "X empfiehlt dir". */
 var EINLADUNGSARTEN = {
   share: {
     kind: 'share',
-    titel: 'Watchliste teilen',
-    // Auch die einladende Seite gibt etwas preis -- die Verknuepfung wirkt in
-    // beide Richtungen. Wer den Link verschickt, soll das vorher wissen und
-    // nicht erst in der Datenschutzerklaerung nachlesen muessen.
-    rueckfrage: 'Wer diesen Link öffnet, kann danach deine ganze Watchliste und deine ' +
-      '„gesehen"-Liste ansehen, einschließlich deiner Sterne-Bewertungen. Umgekehrt gilt ' +
-      'dasselbe. Lösen könnt ihr die Verknüpfung jederzeit.\n\nLink jetzt erstellen?',
-    text: function(wer){
-      // Bewusst ohne "seine"/"ihre": Der Anzeigename sagt nichts ueber das
-      // Geschlecht der einladenden Person aus.
-      return wer + ' möchte auf MovieMatch die Watchliste mit dir teilen. ' +
-             'Entdecke neue Filme, Serien und Kinofilme, sortiert nach deinem Geschmack. ' +
-             '„Matcht" eure Watchlisten und findet Titel, die ihr beide als Nächstes sehen möchtet:';
-    },
-    fehler: 'Der Link konnte nicht erstellt werden.',
+    titel: TXT.einladungShareTitel,
+    rueckfrage: TXT.einladungShareFrage,
+    text: TXT.einladungShareText,
+    fehler: TXT.einladungShareFehler,
   },
   referral: {
     kind: 'referral',
-    titel: 'Personen einladen',
+    titel: TXT.einladungRefTitel,
     rueckfrage: null,   // gibt nichts preis, also auch nichts zu bestaetigen
-    text: function(wer){
-      return wer + ' empfiehlt dir MovieMatch. Entdecke Filme, Serien und Kinofilme, ' +
-             'sortiert nach deinem Geschmack – teile deine Watchliste mit anderen und ' +
-             'seht, welche Titel ihr gemeinsam sehen möchtet:';
-    },
-    // Ausgeloggt gibt es keinen Namen und keinen Token, also ein neutraler Text
-    // ohne "X empfiehlt dir". Der Doppelpunkt am Ende leitet zum Link ueber, der
-    // wie sonst getrennt angehaengt wird (siehe zeigeEinladung).
-    textAusgeloggt: 'Entdecke MovieMatch. Filme, Serien und Kinofilme, sortiert nach deinem ' +
-             'Geschmack. Teilt eure Watchlisten und seht, welche Titel ihr gemeinsam sehen ' +
-             'möchtet:',
-    fehler: 'Der Einladungslink konnte nicht erstellt werden.',
+    text: TXT.einladungRefText,
+    textAusgeloggt: TXT.einladungRefAusgeloggt,
+    fehler: TXT.einladungRefFehler,
   },
 };
 /* Zeigt die fertige Einladung. Das eigentliche Teilen haengt an den Knoepfen
@@ -5782,10 +6484,10 @@ function zeigeEinladung(titel, text, url, gueltig){
   document.getElementById('inviteShareKopieren').onclick = function(){
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text + '\n' + url)
-        .then(function(){ hinweis.textContent = 'In die Zwischenablage kopiert.'; })
-        .catch(function(){ hinweis.textContent = 'Kopieren hat nicht geklappt – Link oben von Hand markieren.'; });
+        .then(function(){ hinweis.textContent = TXT.kopiert; })
+        .catch(function(){ hinweis.textContent = TXT.kopierenFehler; });
     } else {
-      hinweis.textContent = 'Kopieren hat nicht geklappt – Link oben von Hand markieren.';
+      hinweis.textContent = TXT.kopierenFehler;
     }
   };
   _inviteShareModal.style.display = 'flex';
@@ -5805,10 +6507,10 @@ async function einladungTeilen(btn, artName, weiter){
     // einfach den blanken App-Link empfehlen, ohne ?ref=-Token und ohne
     // Login-Zwang. Der Token diente nur der (bislang ungenutzten) Zuordnung
     // "wer warb wen" -- ohne Anmeldung gibt es niemanden, dem man das zuordnen
-    // koennte. "Watchliste teilen" bleibt gesperrt, dabei werden zwei Konten
+    // koennte. "Watchlist teilen" bleibt gesperrt, dabei werden zwei Konten
     // verknuepft und eine Liste offengelegt.
     if (artName === 'referral') {
-      zeigeEinladung(art.titel, art.textAusgeloggt, location.origin, 'Der Link läuft nicht ab.');
+      zeigeEinladung(art.titel, art.textAusgeloggt, location.origin, TXT.linkLaeuftNichtAb);
       return;
     }
     closeProfileModal(); requireLogin(weiter || openProfileModal); return;
@@ -5822,9 +6524,9 @@ async function einladungTeilen(btn, artName, weiter){
     var d = await apiRequest('POST', '/api/links/invite', { kind: art.kind });
     zeigeEinladung(
       art.titel,
-      art.text((CURRENT_USER && CURRENT_USER.displayName) || 'Jemand'),
+      art.text((CURRENT_USER && CURRENT_USER.displayName) || TXT.jemand),
       d.url,
-      d.expiresInDays ? ('Der Link ist ' + d.expiresInDays + ' Tage gültig.') : 'Der Link läuft nicht ab.'
+      d.expiresInDays ? TXT.linkGueltig(d.expiresInDays) : TXT.linkLaeuftNichtAb
     );
   } catch (e) {
     alert(grenzeMeldung(e) || art.fehler);
@@ -5854,8 +6556,8 @@ async function handleInviteToken(token){
   var actions = document.getElementById('inviteActions');
   actions.innerHTML = '';
   if (!CURRENT_USER) {
-    textEl.textContent = 'Melde dich an oder lege ein Konto an, um die Einladung anzunehmen.';
-    actions.innerHTML = '<button type="button" class="modal-yes" id="inviteLoginBtn">Anmelden</button>';
+    textEl.textContent = TXT.einladungAnmelden;
+    actions.innerHTML = '<button type="button" class="modal-yes" id="inviteLoginBtn">' + TXT.anmelden + '</button>';
     document.getElementById('inviteLoginBtn').onclick = function(){
       // Token bleibt in der Adresszeile -- nach dem Login greift der Aufruf erneut.
       _inviteModal.style.display = 'none';
@@ -5866,8 +6568,8 @@ async function handleInviteToken(token){
   try {
     var d = await apiRequest('GET', '/api/links/invite/' + encodeURIComponent(token));
     if (d.alreadyLinked) {
-      textEl.textContent = 'Du bist mit ' + d.inviter.name + ' bereits verknüpft.';
-      actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">Alles klar</button>';
+      textEl.textContent = TXT.bereitsVerknuepft(d.inviter.name);
+      actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">' + TXT.allesKlar + '</button>';
       document.getElementById('inviteOkBtn').onclick = closeInviteModal;
       return;
     }
@@ -5876,14 +6578,9 @@ async function handleInviteToken(token){
     // eng: Verknuepfte Personen koennen die Listen ganz durchsehen, samt
     // Sterne-Bewertungen (siehe personenAnsichtOeffnen und Abschnitt 7 der
     // Datenschutzerklaerung).
-    textEl.innerHTML = esc(d.inviter.name) + ' möchte sich mit dir verknüpfen.<br><br>' +
-      'Ihr könnt danach <b>gegenseitig eure ganze Watchliste und „gesehen&quot;-Liste ansehen</b> – ' +
-      'einschließlich der Sterne-Bewertungen – und nach gemeinsamen Titeln filtern. ' +
-      'Nicht sichtbar werden E-Mail-Adresse und Kontodaten.<br><br>' +
-      'Die Verknüpfung lässt sich jederzeit von beiden Seiten wieder lösen. ' +
-      'Näheres in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.';
-    actions.innerHTML = '<button type="button" class="modal-no" id="inviteNoBtn">Ablehnen</button>' +
-                        '<button type="button" class="modal-yes" id="inviteYesBtn">Annehmen</button>';
+    textEl.innerHTML = TXT.einladungFrage(esc(d.inviter.name));
+    actions.innerHTML = '<button type="button" class="modal-no" id="inviteNoBtn">' + TXT.ablehnen + '</button>' +
+                        '<button type="button" class="modal-yes" id="inviteYesBtn">' + TXT.annehmen + '</button>';
     document.getElementById('inviteNoBtn').onclick = closeInviteModal;
     document.getElementById('inviteYesBtn').onclick = async function(){
       this.disabled = true;
@@ -5891,22 +6588,22 @@ async function handleInviteToken(token){
         var r = await apiRequest('POST', '/api/links/invite/' + encodeURIComponent(token) + '/accept');
         await loadLinkedProfiles();
         updateProfileBtn();
-        textEl.textContent = 'Verknüpft mit ' + r.linked.name + '. Du findest die Auswahl oben links.';
-        actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">Alles klar</button>';
+        textEl.textContent = TXT.verknuepftMit(r.linked.name);
+        actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">' + TXT.allesKlar + '</button>';
         document.getElementById('inviteOkBtn').onclick = closeInviteModal;
       } catch (err) {
-        textEl.textContent = 'Die Einladung konnte nicht angenommen werden. Möglicherweise ist sie abgelaufen oder bereits eingelöst.';
-        actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">Schließen</button>';
+        textEl.textContent = TXT.einladungFehlgeschlagen;
+        actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">' + TXT.schliessen + '</button>';
         document.getElementById('inviteOkBtn').onclick = closeInviteModal;
       }
     };
   } catch (err) {
-    var meldung = err.code === 'invite_expired' ? 'Diese Einladung ist abgelaufen.'
-                : err.code === 'invite_already_used' ? 'Diese Einladung wurde bereits eingelöst.'
-                : err.code === 'invite_own' ? 'Das ist deine eigene Einladung.'
-                : 'Diese Einladung ist ungültig.';
+    var meldung = err.code === 'invite_expired' ? TXT.einladungAbgelaufen
+                : err.code === 'invite_already_used' ? TXT.einladungEingeloest
+                : err.code === 'invite_own' ? TXT.einladungEigene
+                : TXT.einladungUngueltig;
     textEl.textContent = meldung;
-    actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">Schließen</button>';
+    actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">' + TXT.schliessen + '</button>';
     document.getElementById('inviteOkBtn').onclick = closeInviteModal;
   }
 }
@@ -5921,13 +6618,13 @@ document.getElementById('nameForm').onsubmit = async function(e){
   var wert = document.getElementById('nameInput').value.trim();
   var fehler = document.getElementById('nameError');
   fehler.textContent = '';
-  if (!wert) { fehler.textContent = 'Bitte einen Namen eintragen.'; return; }
+  if (!wert) { fehler.textContent = TXT.nameFehlt; return; }
   try {
     var u = await apiRequest('PUT', '/api/auth/display-name', { displayName: wert });
     CURRENT_USER = u;
     document.getElementById('nameModal').style.display = 'none';
     updateProfileBtn();
-  } catch (err) { fehler.textContent = 'Konnte nicht gespeichert werden.'; }
+  } catch (err) { fehler.textContent = TXT.speichernFehler; }
 };
 
 /* ---- "Streaminganbieter": eigene Anbieterauswahl (siehe /api/watch-providers/
@@ -5962,10 +6659,10 @@ function renderProvidersList(){
            (chosen.has(p.id) ? ' checked' : '') + '>' + logo + '<span>' + esc(p.name) + '</span></label>';
   }).join('');
   if (!_provShowAll && PROVIDER_CATALOG.length > sichtbar.length) {
-    html += '<button type="button" class="prov-more" id="provMoreBtn">Weitere ' +
-            (PROVIDER_CATALOG.length - sichtbar.length) + ' Anbieter anzeigen</button>';
+    html += '<button type="button" class="prov-more" id="provMoreBtn">' +
+            TXT.weitereAnbieterZeigen(PROVIDER_CATALOG.length - sichtbar.length) + '</button>';
   }
-  _provList.innerHTML = html || 'Keine Anbieter verfügbar.';
+  _provList.innerHTML = html || TXT.keineAnbieter;
   var more = document.getElementById('provMoreBtn');
   if (more) more.onclick = function(){ _provShowAll = true; renderProvidersList(); };
   updateProvidersHint();
@@ -5973,21 +6670,21 @@ function renderProvidersList(){
 function updateProvidersHint(){
   var n = _provList.querySelectorAll('input:checked').length;
   document.getElementById('providersHint').textContent =
-    n ? (n + ' ausgewählt') : 'Nichts ausgewählt – es werden alle Anbieter angezeigt.';
+    n ? TXT.nAusgewaehlt(n) : TXT.nichtsAusgewaehlt;
 }
 _provList.addEventListener('change', updateProvidersHint);
 
 async function openProvidersModal(){
   _provShowAll = false;
   _provModal.style.display = 'flex';
-  _provList.textContent = 'Lädt …';
+  _provList.textContent = TXT.laedt;
   try {
     var cat = await apiRequest('GET', '/api/watch-providers/catalog');
     PROVIDER_CATALOG = cat.providers || [];
     if (!Array.isArray(MY_PROVIDER_IDS)) await loadMyProviders();
     renderProvidersList();
   } catch (e) {
-    _provList.textContent = 'Anbieter konnten nicht geladen werden.';
+    _provList.textContent = TXT.anbieterFehler;
   }
 }
 function closeProvidersModal(){ _provModal.style.display = 'none'; }
@@ -6014,7 +6711,7 @@ document.getElementById('providersSaveBtn').onclick = async function(){
     closeProvidersModal();
     renderCurrentTab();
   } catch (e) {
-    alert('Speichern fehlgeschlagen. Bitte erneut versuchen.');
+    alert(TXT.speichernFehlgeschlagen);
   } finally { btn.disabled = false; }
 };
 
@@ -6058,19 +6755,17 @@ function renderKinoListe(){
   var html = '';
   if (oben.length) {
     html += oben.map(function(k){ return kinoZeile(k, true); }).join('');
-    if (_kinoGefunden.length) html += '<div class="prov-more" style="text-decoration:none;cursor:default">In der Nähe</div>';
+    if (_kinoGefunden.length) html += '<div class="prov-more" style="text-decoration:none;cursor:default">' + TXT.inDerNaehe + '</div>';
   }
   html += _kinoGefunden.map(function(k){ return kinoZeile(k, _kinoGewaehlt.has(k.id)); }).join('');
   if (!html) html = _kinoOrtInput.value.trim()
-    ? 'Keine Kinos im gewählten Umkreis.'
-    : 'Suche zuerst deinen Ort.';
+    ? TXT.keineKinosUmkreis
+    : TXT.ortZuerst;
   _kinoListe.innerHTML = html;
   kinoHinweis();
 }
 function kinoHinweis(){
-  var n = _kinoGewaehlt.size;
-  document.getElementById('kinosHint').textContent =
-    n ? (n === 1 ? '1 Kino ausgewählt' : n + ' Kinos ausgewählt') : 'Noch kein Kino ausgewählt.';
+  document.getElementById('kinosHint').textContent = TXT.kinoAusgewaehlt(_kinoGewaehlt.size);
 }
 // Ein Haken aendert sofort die Menge -- nicht erst beim Speichern. Sonst ginge
 // er beim naechsten Suchlauf verloren.
@@ -6088,14 +6783,14 @@ _kinoListe.addEventListener('change', function(e){
 });
 
 async function kinosLaden(lat, lon){
-  _kinoListe.textContent = 'Lädt …';
+  _kinoListe.textContent = TXT.laedt;
   try {
     var d = await apiRequest('GET', '/api/kinos?lat=' + encodeURIComponent(lat) +
       '&lon=' + encodeURIComponent(lon) + '&umkreis=' + _kinoUmkreisKm);
     _kinoGefunden = d.kinos || [];
   } catch (e) {
     _kinoGefunden = [];
-    _kinoListe.textContent = 'Kinos konnten nicht geladen werden.';
+    _kinoListe.textContent = TXT.kinosFehler;
     return;
   }
   renderKinoListe();
@@ -6146,7 +6841,7 @@ async function openKinosModal(){
   _kinoGefunden = [];
   _kinoOrt = null;
   _kinoOrtInput.value = '';
-  _kinoListe.textContent = 'Lädt …';
+  _kinoListe.textContent = TXT.laedt;
   try {
     var d = await apiRequest('GET', '/api/kinos/meine');
     _kinoGewaehlt = new Map((d.kinos || []).map(function(k){ return [k.id, k]; }));
@@ -6166,7 +6861,7 @@ document.getElementById('kinosSaveBtn').onclick = async function(){
     await apiRequest('PUT', '/api/kinos/meine', { ids: [..._kinoGewaehlt.keys()] });
     closeKinosModal();
   } catch (e) {
-    alert('Speichern fehlgeschlagen. Bitte erneut versuchen.');
+    alert(TXT.speichernFehlgeschlagen);
   } finally { btn.disabled = false; }
 };
 
@@ -6179,14 +6874,14 @@ function hiddenTitleLi(t){
              : t.posterPath ? '<img class="dposter" loading="lazy" src="'+POSTER+t.posterPath+'" alt="">'
              : '<div class="dposter"></div>';
   var pseudoItem = { t: t.title, y: t.year, g: t.genres||[], d: t.director||'', c: t.cast||[], kw: t.keywords||[], p: t.posterPath, r: t.rating, ov: t.plot||'' };
-  var typeLabel = t.type === 'series' ? 'Serie' : 'Film';
+  var typeLabel = t.type === 'series' ? TXT.serie : TXT.film;
   li.innerHTML =
     poster +
     '<div class="dinfo">' +
       '<div class="dtitle">'+esc(t.title)+'</div>'+
       '<div class="dmeta">'+esc(candMeta(pseudoItem))+' · '+typeLabel+'</div>'+
       candDetailsHtml(pseudoItem, t.type) +
-      '<div class="det-actions"><button type="button" class="unhide-btn">Wieder hinzufügen</button></div>' +
+      '<div class="det-actions"><button type="button" class="unhide-btn">' + TXT.wiederHinzufuegen + '</button></div>' +
     '</div>';
   li.querySelector('.unhide-btn').addEventListener('click', async function(e){
     e.stopPropagation();
@@ -6208,18 +6903,18 @@ var _hiddenModal = document.getElementById('hiddenTitlesModal');
 var _hiddenList = document.getElementById('hiddenTitlesList');
 async function openHiddenTitlesModal(){
   closeSettingsModal();
-  _hiddenList.innerHTML = '<div class="disc-hint">Lädt …</div>';
+  _hiddenList.innerHTML = '<div class="disc-hint">' + TXT.laedt + '</div>';
   _hiddenModal.style.display = 'flex';
   try {
     var titles = await apiRequest('GET', '/api/hidden-titles');
     _hiddenList.innerHTML = '';
     if (!titles.length) {
-      var p = document.createElement('div'); p.className = 'disc-hint'; p.textContent = 'Keine ausgeblendeten Titel.'; _hiddenList.appendChild(p);
+      var p = document.createElement('div'); p.className = 'disc-hint'; p.textContent = TXT.keineAusgeblendeten; _hiddenList.appendChild(p);
     } else {
       titles.forEach(function(t){ _hiddenList.appendChild(hiddenTitleLi(t)); });
     }
   } catch (e) {
-    _hiddenList.innerHTML = '<div class="disc-hint">Konnte nicht geladen werden.</div>';
+    _hiddenList.innerHTML = '<div class="disc-hint">' + TXT.ladenFehler + '</div>';
   }
 }
 function closeHiddenTitlesModal(){ _hiddenModal.style.display = 'none'; }
@@ -6276,7 +6971,7 @@ document.getElementById('deleteAccountForm').addEventListener('submit', async fu
   fehler.textContent = ''; fehler.classList.remove('ok');
   // Letzte Rueckfrage ueber denselben Dialog wie beim Entfernen von Titeln --
   // ein Passwortfeld allein wird schnell ausgefuellt, ohne die Folge zu lesen.
-  var sicher = await confirmRemove('Konto und alle Daten endgültig löschen? Das lässt sich nicht rückgängig machen.');
+  var sicher = await confirmRemove(TXT.kontoLoeschenFrage);
   if (!sicher) return;
   var knopf = this.querySelector('button[type=submit]');
   knopf.disabled = true;
@@ -6286,8 +6981,8 @@ document.getElementById('deleteAccountForm').addEventListener('submit', async fu
   } catch (err) {
     knopf.disabled = false;
     fehler.textContent = err.code === 'wrong_current_password'
-      ? 'Das Passwort stimmt nicht.'
-      : 'Das hat nicht geklappt. Bitte erneut versuchen.';
+      ? TXT.pwStimmtNicht
+      : TXT.nichtGeklappt;
     return;
   }
   // Ab hier gibt es das Konto nicht mehr: Wie beim Abmelden auf den
@@ -6298,9 +6993,7 @@ document.getElementById('deleteAccountForm').addEventListener('submit', async fu
   updateProfileBtn();
   await loadUserProgressAndRefresh();
   var faellig = antwort && antwort.deletionDueAt ? new Date(antwort.deletionDueAt) : null;
-  alert('Dein Konto wird am ' + (faellig ? faellig.toLocaleDateString('de-DE') : 'in 14 Tagen') +
-        ' endgültig gelöscht.\n\nDu wurdest jetzt abgemeldet. Bis dahin kannst du die Löschung ' +
-        'rückgängig machen, indem du dich wieder anmeldest.');
+  alert(TXT.kontoWirdGeloescht(faellig ? faellig.toLocaleDateString(LOCALE) : TXT.in14Tagen));
 });
 
 /* ---- Beantragte Loeschung: Hinweis samt Widerruf ----
@@ -6311,15 +7004,14 @@ async function pruefeLoeschAntrag(){
   if (!CURRENT_USER || !CURRENT_USER.deletionRequestedAt) return;
   var tage = CURRENT_USER.deletionDays || 14;
   var faellig = new Date(new Date(CURRENT_USER.deletionRequestedAt).getTime() + tage * 86400000);
-  var ja = await confirmRemove('Für dein Konto liegt ein Löschauftrag vor. Es wird am ' +
-    faellig.toLocaleDateString('de-DE') + ' endgültig gelöscht.\n\nMöchtest du die Löschung zurücknehmen?');
+  var ja = await confirmRemove(TXT.loeschAntrag(faellig.toLocaleDateString(LOCALE)));
   if (!ja) return;
   try {
     CURRENT_USER = await apiRequest('POST', '/api/auth/account/restore');
     renderAuthBar();
-    alert('Die Löschung wurde zurückgenommen. Dein Konto bleibt bestehen.');
+    alert(TXT.loeschungZurueck);
   } catch (e) {
-    alert('Das hat nicht geklappt. Bitte erneut versuchen.');
+    alert(TXT.nichtGeklappt);
   }
 }
 
@@ -6330,14 +7022,14 @@ document.getElementById('passwordForm').addEventListener('submit', async functio
   var current = document.getElementById('pwCurrentForPw').value;
   var next = document.getElementById('pwNew').value;
   var confirmVal = document.getElementById('pwNewConfirm').value;
-  if (next.length < 8) { errEl.textContent = 'Mindestens 8 Zeichen.'; return; }
-  if (next !== confirmVal) { errEl.textContent = 'Die beiden Passwörter stimmen nicht überein.'; return; }
+  if (next.length < 8) { errEl.textContent = TXT.pwZuKurz; return; }
+  if (next !== confirmVal) { errEl.textContent = TXT.pwUngleich; return; }
   try {
     await apiRequest('PUT', '/api/auth/password', { currentPassword: current, newPassword: next });
-    errEl.textContent = 'Passwort geändert.'; errEl.classList.add('ok');
+    errEl.textContent = TXT.pwGeaendert; errEl.classList.add('ok');
     document.getElementById('passwordForm').reset();
   } catch (err) {
-    errEl.textContent = err.code === 'wrong_current_password' ? 'Aktuelles Passwort ist falsch.' : 'Änderung fehlgeschlagen.';
+    errEl.textContent = err.code === 'wrong_current_password' ? TXT.pwFalsch : TXT.aenderungFehler;
   }
 });
 
@@ -6351,10 +7043,10 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
     var user = await apiRequest('PUT', '/api/auth/email', { currentPassword: current, newEmail: email });
     CURRENT_USER = user;
     renderAuthBar();
-    errEl.textContent = 'E-Mail-Adresse geändert.'; errEl.classList.add('ok');
+    errEl.textContent = TXT.emailGeaendert; errEl.classList.add('ok');
     document.getElementById('emailForm').reset();
   } catch (err) {
-    errEl.textContent = err.code === 'wrong_current_password' ? 'Aktuelles Passwort ist falsch.' : (err.code === 'email_taken' ? 'Diese E-Mail wird bereits verwendet.' : 'Änderung fehlgeschlagen.');
+    errEl.textContent = err.code === 'wrong_current_password' ? TXT.pwFalsch : (err.code === 'email_taken' ? TXT.emailVergeben : TXT.aenderungFehler);
   }
 });
 
@@ -6393,7 +7085,7 @@ _ratingStarBtns.forEach(function(btn){
     highlightStars(n);
     _ratingStars.classList.add('gewaehlt');
     var hint = document.getElementById('ratingHint');
-    if (hint) { hint.textContent = '✓ ' + n + ' von 10'; hint.classList.add('bestaetigt'); }
+    if (hint) { hint.textContent = TXT.vonZehn(n); hint.classList.add('bestaetigt'); }
     _ratingBestaetigung = setTimeout(function(){
       _ratingBestaetigung = null;
       _ratingStars.classList.remove('gewaehlt');
@@ -6411,7 +7103,7 @@ _ratingStars.addEventListener('mouseleave', function(){
   highlightStars(0);
 });
 function openRatingStars(title){
-  document.getElementById('ratingModalTitle').textContent = title || 'diesen Titel';
+  document.getElementById('ratingModalTitle').textContent = title || TXT.diesenTitel;
   var hint = document.getElementById('ratingHint');
   if (hint) {
     if (!_ratingHintHtml) _ratingHintHtml = hint.innerHTML;
@@ -6504,19 +7196,19 @@ function setAuthMode(m){
   var termsEl = document.getElementById('authTerms');
   if (termsEl) termsEl.style.display = m === 'register' ? '' : 'none';
   if (m === 'login') {
-    authTitle.textContent = 'Anmelden';
-    authSubmit.textContent = 'Anmelden';
-    authToggle.innerHTML = 'Noch kein Konto? <button type="button" id="authToggleBtn">Registrieren</button>';
+    authTitle.textContent = TXT.anmelden;
+    authSubmit.textContent = TXT.anmelden;
+    authToggle.innerHTML = TXT.nochKeinKonto;
     authForgot.style.display = '';
   } else if (m === 'register') {
-    authTitle.textContent = 'Registrieren';
-    authSubmit.textContent = 'Konto erstellen';
-    authToggle.innerHTML = 'Schon ein Konto? <button type="button" id="authToggleBtn">Anmelden</button>';
+    authTitle.textContent = TXT.registrieren;
+    authSubmit.textContent = TXT.kontoErstellen;
+    authToggle.innerHTML = TXT.schonKonto;
     authForgot.style.display = 'none';
   } else {
-    authTitle.textContent = 'Passwort zurücksetzen';
-    authSubmit.textContent = 'Link anfordern';
-    authToggle.innerHTML = '<button type="button" id="authToggleBtn">Zurück zum Login</button>';
+    authTitle.textContent = TXT.pwZuruecksetzen;
+    authSubmit.textContent = TXT.linkAnfordern;
+    authToggle.innerHTML = TXT.zurueckZumLogin;
     authForgot.style.display = 'none';
   }
   document.getElementById('authToggleBtn').onclick = () => setAuthMode(m === 'login' ? 'register' : 'login');
@@ -6551,7 +7243,7 @@ authForm.addEventListener('submit', async (e) => {
   try {
     if (authMode === 'forgot') {
       await apiRequest('POST', '/api/auth/request-password-reset', { email: authEmail.value });
-      authError.textContent = 'Falls diese E-Mail registriert ist, wurde ein Link zum Zuruecksetzen verschickt.';
+      authError.textContent = TXT.resetVerschickt;
       authError.classList.add('ok');
     } else {
       const path = authMode === 'login' ? '/api/auth/login' : '/api/auth/register';
@@ -6567,6 +7259,9 @@ authForm.addEventListener('submit', async (e) => {
       werberVergessen();
       hideAuthModal();
       renderAuthBar();
+      // Am Konto gespeicherte Sprache/Region uebernehmen (laedt ggf. neu);
+      // hat das Konto noch keine, bekommt es die Wahl dieses Geraets.
+      kontoSpracheAnwenden(CURRENT_USER);
       // Manuelle Sortier-Praeferenzen sind geraete-/browserbasiert (localStorage) und
       // nicht an den Account gebunden -- bei jedem Login zuruecksetzen, damit ein
       // geteiltes Geraet oder ein Accountwechsel nicht die Sortierung des vorherigen
@@ -6581,10 +7276,10 @@ authForm.addEventListener('submit', async (e) => {
     }
   } catch (err) {
     authError.textContent = grenzeMeldung(err)
-      || (err.code === 'invalid_credentials' ? 'E-Mail oder Passwort falsch.'
-      : err.code === 'email_taken' ? 'Für diese E-Mail existiert bereits ein Konto.'
-      : err.code === 'weak_password' ? 'Passwort muss mindestens 8 Zeichen haben.'
-      : 'Das hat nicht geklappt. Bitte erneut versuchen.');
+      || (err.code === 'invalid_credentials' ? TXT.loginFalsch
+      : err.code === 'email_taken' ? TXT.emailKontoExistiert
+      : err.code === 'weak_password' ? TXT.pwMindestens
+      : TXT.nichtGeklappt);
   } finally {
     authSubmit.disabled = false;
   }
@@ -6638,8 +7333,8 @@ async function loadUserProgressAndRefresh(){
 async function loadCatalogAndRefresh(){
   try {
     const [combinedRows, streamDoc] = await Promise.all([
-      apiRequest('GET', '/api/titles?source=catalog,discovery,streaming'),
-      apiRequest('GET', '/api/streaming'),
+      apiRequest('GET', mitSpracheRegion('/api/titles?source=catalog,discovery,streaming')),
+      apiRequest('GET', mitSpracheRegion('/api/streaming')),
     ]);
     STREAM = streamDoc;
     genreAliasUebernehmen(streamDoc.genreAlias);
@@ -6656,7 +7351,7 @@ async function loadCatalogAndRefresh(){
     await loadUserProgressAndRefresh();
   } catch (err) {
     console.error('Katalog konnte nicht geladen werden:', err);
-    list.innerHTML = '<div class="disc-hint">Katalog konnte nicht geladen werden. Ist das Backend erreichbar?</div>';
+    list.innerHTML = '<div class="disc-hint">' + TXT.katalogFehler + '</div>';
   }
 }
 
@@ -6771,7 +7466,7 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
   renderAuthBar();
   updateProfileBtn();
   // Gemerkt, damit das "geteilter Titel"-Popup darauf warten kann: Es zeichnet
-  // sonst seine Watchliste/Gesehen-Knoepfe, bevor PROGRESS geladen ist, und
+  // sonst seine Watchlist/Gesehen-Knoepfe, bevor PROGRESS geladen ist, und
   // zeigt dann einen veralteten (leeren) Stand (siehe zeigeGeteiltenTitel).
   STARTLADUNG = loadCatalogAndRefresh();
   // Einladungslink hat Vorrang vor der Namensabfrage -- sonst stapeln sich
@@ -6797,7 +7492,7 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
 
 /* ---- Wer hat wen geworben ----
    Beide Linkarten bringen einen Token mit: "Personen einladen" als ?ref=,
-   "Watchliste teilen" als ?einladung=. Er wird gemerkt und bei einer spaeteren
+   "Watchlist teilen" als ?einladung=. Er wird gemerkt und bei einer spaeteren
    Registrierung mitgeschickt -- zwischen dem Klick auf den Link und dem Anlegen
    des Kontos liegt oft ein Umweg (erst stoebern, dann anmelden), und ohne
    Zwischenspeicher waere der Werber bis dahin verloren.
@@ -6837,11 +7532,8 @@ async function zeigeLinkHinweise(){
     await apiRequest('POST', '/api/links/hinweise/gelesen').catch(function(){});
     var namen = neue.map(function(p){ return p.name; });
     var wer = namen.length === 1 ? namen[0]
-            : namen.slice(0, -1).join(', ') + ' und ' + namen[namen.length - 1];
-    alert(wer + (namen.length === 1 ? ' hat' : ' haben') +
-      ' deine Einladung angenommen.\n\nIhr seht ab jetzt gegenseitig eure Watchliste und ' +
-      '„gesehen"-Liste. Unter „Match" seht ihr eure Übereinstimmungen. ' +
-      'Lösen kannst du das links oben unter „Gemeinsam schauen".');
+            : namen.slice(0, -1).join(', ') + TXT.undWort + namen[namen.length - 1];
+    alert(TXT.einladungAngenommen(wer, namen.length > 1));
   } catch (e) { /* Hinweis ist Beiwerk -- ein Fehler darf den Start nicht stoeren */ }
 }
 
@@ -6866,7 +7558,7 @@ document.head.insertAdjacentHTML('beforeend',
 // den eigenstaendigen Streaming-Tab (mit eigenem Anbieter-Dropdown) -- der ist
 // entfallen (siehe "Im Streaming"-Filter unter Filme/Serien), STREAM selbst wird
 // aber weiterhin gebraucht.
-let STREAM = { generated: null, region: 'DE', providers: [] };
+let STREAM = { generated: null, region: REGION_WAHL, providers: [] };
 // Suchfeld erkennt Anbieter-Namen weiterhin ueber Aliase (siehe .disc-Behandlung in applyFilter).
 const PROVIDER_ALIASES = {
   amazon:  'amazon prime video amazon prime prime video',
@@ -6891,15 +7583,15 @@ function poolItemLi(item, score, opts){
   var poster = item.poster64 ? '<img class="dposter" loading="lazy" src="'+item.poster64+'" alt="">'
              : item.p ? '<img class="dposter" loading="lazy" src="'+POSTER+item.p+'" alt="">'
              : '<div class="dposter"></div>';
-  var typeLabel = item.type === 'series' ? 'Serie' : 'Film';
+  var typeLabel = item.type === 'series' ? TXT.serie : TXT.film;
   var seen = getSeen(item.realId);
   var watchlisted = getWatchlistFlag(item.realId);
   // "Ähnliche Titel" gibt es ueberall (Filme/Serien/Streaming/Discovery), nur nicht
   // innerhalb des "Ähnliche Titel"-Popups selbst (kein rekursiver Button dort,
   // siehe opts.suppressSimilar).
   var showSimilarBtn = !(opts && opts.suppressSimilar);
-  var seenBtnHtml = '<button type="button" aria-label="gesehen" class="seen-btn'+(seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> <span class="btn-wort">gesehen</span></button>';
-  var wlBtnHtml = '<div class="det-left"><button type="button" aria-label="Watchliste" class="wl-btn'+(watchlisted?' on':'')+'"><span class="wl-glyph">'+(watchlisted?'★':'☆')+'</span> <span class="btn-wort">Watchliste</span></button></div>';
+  var seenBtnHtml = '<button type="button" aria-label="'+TXT.gesehenKlein+'" class="seen-btn'+(seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> <span class="btn-wort">'+TXT.gesehenKlein+'</span></button>';
+  var wlBtnHtml = '<div class="det-left"><button type="button" aria-label="'+TXT.watchliste+'" class="wl-btn'+(watchlisted?' on':'')+'"><span class="wl-glyph">'+(watchlisted?'★':'☆')+'</span> <span class="btn-wort">'+TXT.watchliste+'</span></button></div>';
   // Ueberall dieselbe Reihenfolge: links Watchlist, rechts Gesehen -- genau wie
   // unter Filme/Serien (siehe render()). Discovery/Streaming hatten die beiden
   // frueher vertauscht, was beim Wechsel zwischen den Bereichen jedes Mal ein
@@ -6907,14 +7599,14 @@ function poolItemLi(item, score, opts){
   var orderedActionsHtml = '<div class="det-rechts">' + wlBtnHtml + seenBtnHtml + '</div>';
   var actionsHtml =
     '<div class="det-actions">' +
-      (showSimilarBtn ? '<button type="button" class="similar-btn">Ähnliche Titel</button>' : '') +
+      (showSimilarBtn ? '<button type="button" class="similar-btn">' + TXT.aehnlicheTitel + '</button>' : '') +
       orderedActionsHtml +
     '</div>';
   li.innerHTML =
     poster +
     '<div class="dinfo">' +
       '<div class="dtitle">'+esc(item.t)+
-        '<span class="score'+(score>=60?' hi':'')+'" title="Taste Score" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">'+score+'</span></div>'+
+        '<span class="score'+(score>=60?' hi':'')+'" title="Taste Score" data-ts role="button" tabindex="0" aria-label="' + TXT.tasteScoreAria + '">'+score+'</span></div>'+
       // Auf der Kino-Seite steht der Start schon in der Metazeile selbst (siehe
       // kinoMeta) -- der Zusatz waere dort eine Wiederholung.
       (function(){
@@ -6929,8 +7621,8 @@ function poolItemLi(item, score, opts){
       // Titelliste -- "Anna fand das 9 von 10" sagt mehr als der Titel allein.
       ((opts && opts.fremdName)
         ? '<div class="fremd-note">' + esc(opts.fremdSterne
-            ? opts.fremdName + ': ' + opts.fremdSterne + ' von 10 Sternen'
-            : opts.fremdName + ' hat das noch nicht bewertet') + '</div>'
+            ? TXT.fremdSterne(opts.fremdName, opts.fremdSterne)
+            : TXT.fremdUnbewertet(opts.fremdName)) + '</div>'
         : '') +
       providerChipsHtml(item.providers) +
       candDetailsHtml(item, item.type) +
@@ -6968,7 +7660,7 @@ function poolItemLi(item, score, opts){
         senden.catch(function(){
           rebuild();
           renderCurrentTab();
-          alert('Konnte nicht gespeichert werden. Bitte erneut versuchen.');
+          alert(TXT.speichernFehlerNochmal);
         });
         seenBtn.classList.toggle('on', next);
         if (next) { wlBtn.classList.remove('on'); wlBtn.querySelector('.wl-glyph').textContent = '☆'; }
@@ -6981,7 +7673,7 @@ function poolItemLi(item, score, opts){
 
            Frueher stand hier `if (discoverFilterOn)`. Damit verschwand eine
            Zeile nur dort zuverlaessig -- wer im Kino mit ausschliesslich
-           "Watchliste" einen Titel auf "gesehen" setzte, sah ihn weiter stehen,
+           "Watchlist" einen Titel auf "gesehen" setzte, sah ihn weiter stehen,
            obwohl er nicht mehr in die Auswahl passte. Gemeldet am 11. August.
 
            Die eigenen Zeilen unter Filme/Serien (eigeneZeileLi) haben immer
@@ -7040,7 +7732,7 @@ function poolItemLi(item, score, opts){
           // nur noch die Anzeige dazu.
           rebuild();
           renderCurrentTab();
-          alert('Konnte nicht gespeichert werden. Bitte erneut versuchen.');
+          alert(TXT.speichernFehlerNochmal);
         });
       } finally {
         wlBtn.blur();
@@ -7133,9 +7825,48 @@ function discFilterPool(){
 
 /* Taste-Score- & TMDB-Erklärung (ⓘ-Popup) */
 (function(){
-  var INFO_TEXT = {
+  var INFO_TEXT_EN = {
+    ts: { title:'Taste Score', body:'The Taste Score (0–99) estimates how well a title matches your taste. '+
+      'It is based on all movies and series you have saved via watchlist or “watched”.\n\n'+
+      'Five things are compared: genres, keywords, cast, director and how close the release year is. '+
+      'Each part is measured against what is typical for YOU: if you watch a lot of drama, '+
+      'a drama title gets full points in that part. 100 would mean “a perfect match in every respect” '+
+      'and practically never occurs – good matches usually score between 70 and 90.\n\n'+
+      'The community rating deliberately does not feed in: it says how a title lands with everyone, not how it fits '+
+      'you – and it is available as its own sort order.\n\n'+
+      'Your 1–10 star rating on “watched” titles weights everything: titles you rated poorly barely shape your '+
+      'taste anymore, highly rated ones much more. The more titles you save, the more accurate it gets. '+
+      'From 10 saved titles the list is sorted by Taste Score by default, unless you change the sorting yourself.' },
+    imdb: { title:'Community rating', body:'The community rating is the average user rating (0–10) '+
+      'on the movie database TMDB (The Movie Database) and shows how well a title lands with a broad '+
+      'audience – there is no editorial team behind it, just the votes of many viewers. '+
+      'The number in brackets is the vote count: an 8.0 '+
+      'from a single vote says far less than an 8.3 from 28,000.' },
+    discovery: { title:'Discover new', body:'Shows everything you have not saved yet – neither on the watchlist '+
+      'nor marked as “watched”. Under “Movies” only movies, under “Series” only series. Sorted by your '+
+      'Taste Score, i.e. by genres, cast, director and more from all the titles you have saved so far. '+
+      '“Discover new” can be combined with Watchlist and Watched – everything then appears in one shared, '+
+      'uniformly sorted list.' },
+    match: { title:'Match: your shared titles', body:'A match shows the titles that are on YOUR list AND on the '+
+      'lists of the selected contacts – the intersection of your watchlists. That way you instantly find something '+
+      'you all want to watch, instead of trading suggestions.\n\n'+
+      'How it works: at the top left under “Watch together”, tap “Match” on one or more people. '+
+      'The list then only shows titles that everyone selected has saved or watched – under '+
+      '“Movies” the movies, under “Series” the series. The more people you add, the smaller the '+
+      'intersection.\n\n'+
+      'In the cinema section the match works differently: hardly anyone saves cinema releases in advance, so an '+
+      'intersection would almost always be empty. The full programme stays visible and is instead sorted by how well '+
+      'a movie fits everyone’s taste.' },
+    matchStart: { title:'Match is on', body:'You can select one or more people here – ' +
+      'the more you add, the smaller the intersection.\n\n' +
+      'Close this window to see your shared titles.' },
+    newreleases: { title:'Release date vs. new on streaming', body:'These are two different sort orders: “Release date” '+
+      'sorts by when a movie or series was originally released. “New on streaming” sorts by how recently '+
+      'a title became available at a streaming service – regardless of how old it actually is.' }
+  };
+  var INFO_TEXT_DE = {
     ts: { title:'Taste-Score', body:'Der Taste-Score (0–99) schätzt, wie gut ein Titel zu deinem Geschmack passt. '+
-      'Grundlage sind all deine per Watchliste oder „Gesehen“ markierten Filme und Serien.\n\n'+
+      'Grundlage sind all deine per Watchlist oder „Gesehen“ markierten Filme und Serien.\n\n'+
       'Verglichen werden fünf Dinge: Genres, Schlagwörter, Besetzung, Regie und die Nähe zum Erscheinungsjahr. '+
       'Jeder Teil wird an dem gemessen, was für DICH typisch ist: Wer viel Drama schaut, '+
       'bekommt für einen Drama-Titel die volle Punktzahl in diesem Teil. 100 hieße „passt in jeder Hinsicht maximal“ '+
@@ -7150,13 +7881,13 @@ function discFilterPool(){
       'Publikum ankommt – es steckt also keine Redaktion dahinter, sondern die Stimmen vieler Zuschauer. '+
       'Die Zahl in Klammern dahinter ist die Anzahl der abgegebenen Stimmen: Eine 8,0 '+
       'aus einer einzigen Stimme sagt deutlich weniger aus als eine 8,3 aus 28.000.' },
-    discovery: { title:'Neue entdecken', body:'Zeigt alles, was du noch nicht markiert hast – also weder auf der Watchliste '+
+    discovery: { title:'Neue entdecken', body:'Zeigt alles, was du noch nicht markiert hast – also weder auf der Watchlist '+
       'noch als „gesehen“. Unter „Filme“ nur Filme, unter „Serien“ nur Serien. Sortiert wird nach deinem '+
       'Taste-Score, also nach Genres, Besetzung, Regie und mehr aus all deinen bisher markierten Titeln. '+
-      '„Neue entdecken“ lässt sich mit Watchliste und Gesehen kombinieren – dann steht alles in einer gemeinsamen, '+
+      '„Neue entdecken“ lässt sich mit Watchlist und Gesehen kombinieren – dann steht alles in einer gemeinsamen, '+
       'einheitlich sortierten Liste.' },
     match: { title:'Match: eure Übereinstimmungen', body:'Ein Match zeigt die Titel, die bei dir UND bei den '+
-      'ausgewählten Kontakten auf der Liste stehen – die Schnittmenge eurer Watchlisten. So findet ihr sofort etwas, '+
+      'ausgewählten Kontakten auf der Liste stehen – die Schnittmenge eurer Watchlists. So findet ihr sofort etwas, '+
       'das ihr alle sehen wollt, statt euch gegenseitig Vorschläge zu machen.\n\n'+
       'So geht es: Links oben unter „Gemeinsam schauen“ auf „Match“ bei einer oder mehreren Personen tippen. '+
       'Die Liste zeigt dann nur noch Titel, die bei allen Ausgewählten vorgemerkt oder gesehen sind – unter '+
@@ -7172,8 +7903,9 @@ function discFilterPool(){
       'sortiert danach, wann ein Film oder eine Serie ursprünglich erschienen ist. „Neu im Streaming“ sortiert danach, '+
       'seit wann ein Titel bei einem Streaming-Anbieter neu verfügbar ist – unabhängig davon, wie alt er eigentlich ist.' }
   };
+  var INFO_TEXT = SPRACHE === 'en' ? INFO_TEXT_EN : INFO_TEXT_DE;
   var bk=document.createElement('div'); bk.className='modal-backdrop'; bk.id='tsModal';
-  bk.innerHTML='<div class="modal"><button class="modal-x" aria-label="Schließen">&times;</button>'+
+  bk.innerHTML='<div class="modal"><button class="modal-x" aria-label="' + TXT.schliessen + '">&times;</button>'+
     '<h3 class="info-title"></h3><p class="info-body"></p></div>';
   document.body.appendChild(bk);
   var titleEl=bk.querySelector('.info-title'), bodyEl=bk.querySelector('.info-body');
@@ -7229,10 +7961,10 @@ function teilenUrl(item){
 }
 function teilenText(item){
   var wer = (CURRENT_USER && CURRENT_USER.displayName) ? CURRENT_USER.displayName : null;
-  var kopf = wer ? (wer + ' hat eine Empfehlung für dich:') : 'Gefunden auf MovieMatch:';
+  var kopf = wer ? TXT.empfehlungVon(wer) : TXT.gefundenAuf;
   var zeile2 = [item.t + (item.y ? ' (' + item.y + ')' : ''),
-                '⭐ ' + sterneText(item.r), (item.g && item.g[0]) || null,
-                item.type === 'series' ? 'Serie' : 'Film'].filter(Boolean).join(' · ');
+                '⭐ ' + sterneText(item.r), genreAnzeige(item.g && item.g[0]) || null,
+                item.type === 'series' ? TXT.serie : TXT.film].filter(Boolean).join(' · ');
   return kopf + '\n' + zeile2;
 }
 
@@ -7284,7 +8016,7 @@ async function baueStoryBild(item, url){
 
   // Hintergrund: Breitbild-Motiv, stark abgedunkelt. Fehlt es, bleibt es beim
   // ruhigen Farbverlauf -- lesbar ist beides.
-  var daten = await apiRequest('GET', '/api/share/title/' + teilenZiel(item).art + '/' + teilenZiel(item).kennung)
+  var daten = await apiRequest('GET', mitSpracheRegion('/api/share/title/' + teilenZiel(item).art + '/' + teilenZiel(item).kennung))
               .catch(function(){ return null; });
   if (daten && daten.backdropPath) {
     try {
@@ -7346,8 +8078,8 @@ async function baueStoryBild(item, url){
   // Metazeile
   ctx.font = '500 38px ' + SCHRIFT;
   ctx.fillStyle = '#9aa3af';
-  var meta = ['⭐ ' + sterneText(item.r), (item.g && item.g[0]) || null, item.y || null,
-              item.type === 'series' ? 'Serie' : 'Film'].filter(Boolean).join('  ·  ');
+  var meta = ['⭐ ' + sterneText(item.r), genreAnzeige(item.g && item.g[0]) || null, item.y || null,
+              item.type === 'series' ? TXT.serie : TXT.film].filter(Boolean).join('  ·  ');
   ctx.fillText(meta, B / 2, ty + zeilen.length * (groesse + 12) + 20);
 
   // QR-Code auf weisser Flaeche -- Leser erwarten dunkel auf hell, und in der
@@ -7369,12 +8101,12 @@ async function baueStoryBild(item, url){
     }
     ctx.fillStyle = '#e8eaed';
     ctx.font = '600 34px ' + SCHRIFT;
-    ctx.fillText('Code öffnen und Titel speichern', B / 2, qy + flaeche + 60);
+    ctx.fillText(TXT.codeOeffnen, B / 2, qy + flaeche + 60);
     // Zweite Zeile zweifarbig: "unter:" in Weiss, die Domain in Gold. Dafuer
     // linksbuendig zeichnen und die Gesamtbreite selbst zentrieren -- mit
     // textAlign 'center' liesse sich kein Farbwechsel innerhalb der Zeile setzen.
     ctx.font = '700 36px ' + SCHRIFT;
-    var vorText = 'unter: ', domText = 'movietaste.de';
+    var vorText = TXT.unterWort, domText = 'movietaste.de';
     var wVor = ctx.measureText(vorText).width, wDom = ctx.measureText(domText).width;
     var startX = (B - (wVor + wDom)) / 2, yQrZeile = qy + flaeche + 110;
     ctx.textAlign = 'left';
@@ -7402,22 +8134,22 @@ function teileAlsText(item, url){
     navigator.share({ title: item.t, text: text, url: url }).catch(function(){});
   } else if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text + '\n' + url);
-    document.getElementById('shareHint').textContent = 'In die Zwischenablage kopiert.';
+    document.getElementById('shareHint').textContent = TXT.kopiert;
     return;
   } else {
-    prompt('Link zum Teilen:', url);
+    prompt(TXT.linkZumTeilen, url);
     return;
   }
   schliesseShare();
 }
 async function oeffneTeilen(item){
   var url = teilenUrl(item);
-  if (!url) { alert('Dieser Titel lässt sich nicht teilen – ihm fehlt eine eindeutige Kennung.'); return; }
+  if (!url) { alert(TXT.nichtTeilbar); return; }
   var lauf = ++_shareLaufNr;
   _shareBildBlob = null;
   document.getElementById('shareTitleText').textContent = item.t + (item.y ? ' (' + item.y + ')' : '');
   var vorschau = document.getElementById('sharePreview');
-  vorschau.innerHTML = '<div class="share-preview-lade">Bild wird vorbereitet …</div>';
+  vorschau.innerHTML = '<div class="share-preview-lade">' + TXT.bildWirdVorbereitet + '</div>';
   var bildBtn = document.getElementById('shareImageBtn');
   bildBtn.disabled = true;
   document.getElementById('shareHint').textContent = '';
@@ -7451,8 +8183,8 @@ async function oeffneTeilen(item){
     var mitText = kannDatei && !!(navigator.canShare && navigator.canShare(voll));
     bildBtn.disabled = false;
     document.getElementById('shareHint').textContent = kannDatei
-      ? 'Teile diesen Titel mit anderen als Nachricht oder teile ihn auf Social Media.'
-      : 'Dein Browser kann keine Bilder teilen – das Bild wird stattdessen geladen.';
+      ? TXT.teilenHinweis
+      : TXT.teilenKeineBilder;
     bildBtn.onclick = function(){
       if (kannDatei) {
         // Faellt die volle Nutzlast durch, wenigstens Titel und Bild -- damit
@@ -7471,10 +8203,10 @@ async function oeffneTeilen(item){
   } catch (e) {
     if (lauf !== _shareLaufNr) return;
     console.error('Story-Bild fehlgeschlagen:', e);
-    vorschau.innerHTML = '<div class="share-preview-lade">Bild konnte nicht erzeugt werden – Teilen geht trotzdem, dann ohne Bild.</div>';
+    vorschau.innerHTML = '<div class="share-preview-lade">' + TXT.bildFehler + '</div>';
     bildBtn.disabled = false;
     bildBtn.onclick = function(){ teileAlsText(item, url); };
-    document.getElementById('shareHint').textContent = 'Ohne Bild werden nur Text und Adresse verschickt.';
+    document.getElementById('shareHint').textContent = TXT.ohneBild;
   }
 }
 document.getElementById('shareModalX').onclick = schliesseShare;
@@ -7526,19 +8258,19 @@ async function idFuerGeteilten(d){
 
 async function zeigeGeteiltenTitel(ziel){
   var koerper = document.getElementById('sharedTitleBody');
-  koerper.innerHTML = '<div class="share-preview-lade">Titel wird geladen …</div>';
+  koerper.innerHTML = '<div class="share-preview-lade">' + TXT.titelWirdGeladen + '</div>';
   _sharedModal.style.display = 'flex';
   var d;
   try {
-    d = await apiRequest('GET', '/api/share/title/' + ziel.art + '/' + ziel.kennung);
+    d = await apiRequest('GET', mitSpracheRegion('/api/share/title/' + ziel.art + '/' + ziel.kennung));
   } catch (e) {
-    koerper.innerHTML = '<div class="share-preview-lade">Dieser Titel konnte nicht geladen werden.</div>';
+    koerper.innerHTML = '<div class="share-preview-lade">' + TXT.titelLadenFehler + '</div>';
     return;
   }
   var poster = d.posterPath ? '<img class="shared-poster" src="' + POSTER + escAttr(d.posterPath) + '" alt="">' : '';
   var meta = ['⭐ ' + sterneText(d.rating) + voteSuffix(d.voteCount),
-              (d.genres && d.genres[0]) || null, d.year || null,
-              d.type === 'series' ? 'Serie' : 'Film'].filter(Boolean).join(' · ');
+              genreAnzeige(d.genres && d.genres[0]) || null, d.year || null,
+              d.type === 'series' ? TXT.serie : TXT.film].filter(Boolean).join(' · ');
   // Trailer-Abruf wie in den Zeilen: bevorzugt TMDB-ID + Typ, sonst ueber die
   // interne Titel-ID (by-title). So kann man den Trailer ansehen und direkt
   // entscheiden, ob der Titel passt -- auch ohne Anmeldung.
@@ -7546,12 +8278,12 @@ async function zeigeGeteiltenTitel(ziel){
                      : (d.id != null ? ('by-title/' + d.id) : null);
   var trailerApi = trailerKennung ? ('/api/trailers/' + trailerKennung) : null;
   koerper.innerHTML =
-    '<div class="shared-von">Für dich geteilt</div>' +
+    '<div class="shared-von">' + TXT.fuerDichGeteilt + '</div>' +
     poster +
     '<div class="shared-name">' + esc(d.title) + '</div>' +
     '<div class="shared-meta">' + esc(meta) + '</div>' +
     (d.plot ? '<div class="shared-plot">' + esc(d.plot) + '</div>' : '') +
-    (trailerApi ? '<button type="button" class="shared-trailer-btn" id="sharedTrailerBtn">▶ Trailer ansehen</button>' : '') +
+    (trailerApi ? '<button type="button" class="shared-trailer-btn" id="sharedTrailerBtn">' + TXT.trailerAnsehen + '</button>' : '') +
     '<div class="modal-actions" id="sharedActions"></div>' +
     '<div class="share-hint" id="sharedHint"></div>';
 
@@ -7567,8 +8299,8 @@ async function zeigeGeteiltenTitel(ziel){
   var aktionen = document.getElementById('sharedActions');
   var hinweis = document.getElementById('sharedHint');
   if (!CURRENT_USER) {
-    hinweis.textContent = 'Nur angemeldet lässt sich der Titel dauerhaft speichern.';
-    aktionen.innerHTML = '<button type="button" class="modal-yes" id="sharedLoginBtn">Anmelden</button>';
+    hinweis.textContent = TXT.nurAngemeldet;
+    aktionen.innerHTML = '<button type="button" class="modal-yes" id="sharedLoginBtn">' + TXT.anmelden + '</button>';
     document.getElementById('sharedLoginBtn').onclick = function(){
       schliesseGeteilt();
       // Nach dem Anmelden dieselbe Karte erneut -- der Pfad bleibt ja stehen.
@@ -7593,7 +8325,7 @@ async function zeigeGeteiltenTitel(ziel){
   // Das Sterne-Fenster schliesst sich beim Klick auf einen Stern von allein
   // (siehe _ratingStarBtns), es bleibt also nichts offen stehen.
   async function speichern(patch, schliessen){
-    hinweis.textContent = 'Wird gespeichert …';
+    hinweis.textContent = TXT.wirdGespeichert;
     try {
       var id = await idFuerGeteilten(d);
       if (d.id == null) d.id = id;         // ab jetzt ist der Status ablesbar
@@ -7613,17 +8345,17 @@ async function zeigeGeteiltenTitel(ziel){
     } catch (e) {
       // Nur im Fehlerfall bleibt die Karte stehen, damit der Versuch
       // wiederholt werden kann.
-      hinweis.textContent = 'Das hat nicht geklappt. Bitte erneut versuchen.';
+      hinweis.textContent = TXT.nichtGeklappt;
     }
   }
   function knoepfeZeichnen(){
     var st = status();
     aktionen.innerHTML =
       '<button type="button" class="' + (st.wl ? 'modal-yes' : 'modal-no') + '" id="sharedWlBtn">' +
-        (st.wl ? '★' : '☆') + ' Watchliste</button>' +
-      '<button type="button" class="' + (st.seen ? 'modal-yes' : 'modal-no') + '" id="sharedSeenBtn">✓ Gesehen</button>';
-    hinweis.textContent = st.wl ? 'Steht schon auf deiner Watchliste.'
-                        : st.seen ? 'Hast du schon gesehen.'
+        (st.wl ? '★' : '☆') + ' ' + TXT.watchliste + '</button>' +
+      '<button type="button" class="' + (st.seen ? 'modal-yes' : 'modal-no') + '" id="sharedSeenBtn">✓ ' + TXT.gesehenGross + '</button>';
+    hinweis.textContent = st.wl ? TXT.stehtAufWatchlist
+                        : st.seen ? TXT.schonGesehenHint
                         : '';
     document.getElementById('sharedWlBtn').onclick = function(){
       var jetzt = status();
@@ -7656,7 +8388,7 @@ async function zeigeGeteiltenTitel(ziel){
   // nach dem Anmelden ist STARTLADUNG laengst erledigt -- das Warten ist dann
   // sofort vorbei.
   if (STARTLADUNG) {
-    hinweis.textContent = 'Deine Markierungen werden geprüft …';
+    hinweis.textContent = TXT.markierungenPruefen;
     try { await STARTLADUNG; } catch (e) { /* ohne Fortschritt bleibt der neutrale Stand */ }
   }
   knoepfeZeichnen();

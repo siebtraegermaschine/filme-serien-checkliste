@@ -18,6 +18,14 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    # Ein Lauf je Region (siehe PLAN-INTERNATIONALISIERUNG.md): der Ingest im
+    # Backend verwaltet jede Region getrennt. Nacheinander statt parallel
+    # (max-parallel), damit sich die beiden Laeufe nicht gegenseitig ins
+    # TMDB-Rate-Limit treiben.
+    strategy:
+      max-parallel: 1
+      matrix:
+        region: ["DE", "AT"]
     # Seit Wegfall des STREAM_COUNT-Deckels (vorher 60 Titel je Anbieter & Typ)
     # werden pro Anbieter alle aktuell verfuegbaren Titel geholt (insgesamt
     # geschaetzt bis zu ca. 22.000/Tag) -- expliziter Sicherheitsspielraum
@@ -44,6 +52,7 @@ jobs:
           # und wie bisher committet.
           STREAMING_API_URL: ${{ vars.STREAMING_API_URL }}
           STREAMING_INGEST_SECRET: ${{ secrets.STREAMING_INGEST_SECRET }}
+          TMDB_REGION: ${{ matrix.region }}
           # Optional konfigurierbar (kein Titel-Deckel mehr -- ohne diese
           # Variablen werden alle aktuell verfuegbaren Titel je Anbieter geholt):
           # STREAM_MIN_VOTES: "300"
@@ -51,7 +60,9 @@ jobs:
         run: node stream-fetch.mjs
 
       - name: Änderungen committen (nur solange kein Backend angebunden ist)
-        if: ${{ !vars.STREAMING_API_URL }}
+        # streaming.json traegt nur EINE Region -- committet wird deshalb nur
+        # der DE-Lauf, wie bisher.
+        if: ${{ !vars.STREAMING_API_URL && matrix.region == 'DE' }}
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

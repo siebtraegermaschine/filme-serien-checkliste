@@ -1,6 +1,7 @@
 import { pool } from '../db/pool.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
+import { regionWahl } from '../lib/i18n.js';
 
 const router = createAsyncRouter();
 
@@ -293,7 +294,7 @@ router.get('/by-title/:titleId', async (req, res) => {
   }
   const resolved = await resolveTmdbId(titleId);
   if (!resolved || !resolved.tmdbId) return res.json(EMPTY);
-  return respondWithProviders(res, resolved.type, resolved.tmdbId);
+  return respondWithProviders(res, resolved.type, resolved.tmdbId, regionWahl(req.query.region || REGION));
 });
 
 // GET /api/watch-providers/:type/:tmdbId -- oeffentlich (kein Login noetig,
@@ -306,14 +307,16 @@ router.get('/:type/:tmdbId', async (req, res) => {
   if (!TMDB_KIND[type] || !Number.isInteger(tmdbId) || tmdbId <= 0) {
     return res.status(400).json({ error: 'invalid_params' });
   }
-  return respondWithProviders(res, type, tmdbId);
+  return respondWithProviders(res, type, tmdbId, regionWahl(req.query.region || REGION));
 });
 
-async function respondWithProviders(res, type, tmdbId) {
+// region kommt vom Client (dessen Landeswahl) -- die TMDB-Antwort enthaelt
+// ohnehin alle Laender, der Cache ist bereits je Region geschluesselt.
+async function respondWithProviders(res, type, tmdbId, region = REGION) {
   const { rows } = await pool.query(
     `SELECT * FROM watch_providers_cache
       WHERE tmdb_id = $1 AND type = $2 AND region = $3`,
-    [tmdbId, type, REGION]
+    [tmdbId, type, region]
   );
   const cached = rows[0];
   if (cached) {
@@ -343,7 +346,7 @@ async function respondWithProviders(res, type, tmdbId) {
     return res.json(EMPTY);
   }
 
-  const regional = (data.results || {})[REGION] || {};
+  const regional = (data.results || {})[region] || {};
   const payload = {
     flatrate: mapProviders(regional.flatrate),
     rent: mapProviders(regional.rent),
@@ -359,7 +362,7 @@ async function respondWithProviders(res, type, tmdbId) {
     [
       tmdbId,
       type,
-      REGION,
+      region,
       JSON.stringify(payload.flatrate),
       JSON.stringify(payload.rent),
       JSON.stringify(payload.buy),
@@ -367,7 +370,7 @@ async function respondWithProviders(res, type, tmdbId) {
     ]
   );
 
-  res.json({ ...payload, region: REGION, fetchedAt: new Date().toISOString() });
+  res.json({ ...payload, region, fetchedAt: new Date().toISOString() });
 }
 
 export default router;

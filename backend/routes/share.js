@@ -2,6 +2,7 @@ import qrcode from 'qrcode-generator';
 import { pool } from '../db/pool.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { mengenGrenze } from '../middleware/rateLimit.js';
+import { sprachWahl, regionWahl, sprachFeld, freigabeFuer } from '../lib/i18n.js';
 
 const router = createAsyncRouter();
 
@@ -28,9 +29,9 @@ const TMDB_KIND = { movie: 'movie', series: 'tv' };
 // keine eigene tmdb_id, ihre Zuordnung steht in dieser Tabelle (595 von 600).
 // Ohne sie bekaemen ausgerechnet die prominentesten Titel kein Breitbild und
 // damit auch keine grosse Vorschaukarte in WhatsApp.
-const FELDER = `t.id, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, t.type, t.title, t.year,
+const FELDER = `t.id, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, t.type, t.title, t.title_en, t.year,
                 t.genres, t.rating, t.vote_count, t.poster_path, t.backdrop_path,
-                t.plot, t.certification`;
+                t.plot, t.overview_en, t.certification, t.certifications`;
 const VON = `FROM titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id`;
 
 async function ladeTitel(art, kennung) {
@@ -48,8 +49,8 @@ async function ladeTitel(art, kennung) {
   if (rows[0]) return rows[0];
   if (type !== 'movie') return null;
   const { rows: kino } = await pool.query(
-    `SELECT NULL::bigint AS id, tmdb_id, 'movie' AS type, title, year, genres, rating, vote_count,
-            poster_path, backdrop_path, overview AS plot, certification, 'cinema_cache' AS quelle
+    `SELECT NULL::bigint AS id, tmdb_id, 'movie' AS type, title, title_en, year, genres, rating, vote_count,
+            poster_path, backdrop_path, overview AS plot, overview_en, certification, certifications, 'cinema_cache' AS quelle
        FROM cinema_cache WHERE tmdb_id = $1 LIMIT 1`,
     [kennung]
   );
@@ -94,6 +95,8 @@ router.get('/title/:art/:kennung', GRENZE_TITEL, async (req, res) => {
   if (!Number.isInteger(kennung) || kennung <= 0) return res.status(400).json({ error: 'invalid_id' });
   const titel = await ladeTitel(art, kennung);
   if (!titel) return res.status(404).json({ error: 'not_found' });
+  const lang = sprachWahl(req.query.lang);
+  const region = regionWahl(req.query.region);
   const backdrop = await ergaenzeBackdrop(titel);
   res.json({
     // Als String, NICHT als Zahl: titles.id ist bigint, der Postgres-Treiber
@@ -104,15 +107,15 @@ router.get('/title/:art/:kennung', GRENZE_TITEL, async (req, res) => {
     id: titel.id != null ? String(titel.id) : null,
     tmdbId: titel.tmdb_id,
     type: titel.type,
-    title: titel.title,
+    title: sprachFeld(lang, titel.title, titel.title_en),
     year: titel.year,
     genres: titel.genres || [],
     rating: titel.rating != null ? Number(titel.rating) : null,
     voteCount: titel.vote_count,
     posterPath: titel.poster_path,
     backdropPath: backdrop,
-    plot: titel.plot,
-    certification: titel.certification,
+    plot: sprachFeld(lang, titel.plot, titel.overview_en),
+    certification: freigabeFuer(region, titel.certifications, titel.certification),
   });
 });
 

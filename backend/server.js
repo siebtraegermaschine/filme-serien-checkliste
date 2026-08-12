@@ -28,7 +28,7 @@ import { starteSicherung } from './lib/sicherung.js';
 import { starteThemen } from './lib/themen.js';
 import { vorwaermen } from './lib/listenCache.js';
 import { ladeListe, listenSchluessel } from './routes/titles.js';
-import { ladeStreaming, STREAMING_SCHLUESSEL } from './routes/streaming.js';
+import { ladeStreaming, streamingSchluessel } from './routes/streaming.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PgSession = connectPgSimple(session);
@@ -243,6 +243,6 @@ app.listen(port, () => {
   vorwaermen([
     { schluessel: listenSchluessel({ source: 'catalog,discovery,streaming' }),
       ermitteln: () => ladeListe({ source: 'catalog,discovery,streaming' }) },
-    { schluessel: STREAMING_SCHLUESSEL, ermitteln: ladeStreaming },
+    { schluessel: streamingSchluessel('de', 'DE'), ermitteln: () => ladeStreaming('de', 'DE') },
   ]);
 });

@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 /*
- * cinema-fetch.mjs – aktuelle und kommende Kinostarts (Deutschland) fuer den
- * "Kino"-Bereich der App.
+ * cinema-fetch.mjs – aktuelle und kommende Kinostarts fuer den "Kino"-Bereich
+ * der App. Ein Lauf gilt fuer EINE Region (TMDB_REGION, Default DE) -- fuer
+ * mehrere Laender laeuft das Skript je Region einmal.
  *
- * Holt von TMDB per /discover/movie (region=DE, with_release_type=2|3 fuer
+ * Holt von TMDB per /discover/movie (region=TMDB_REGION, with_release_type=2|3 fuer
  * "Limited"/"Theatrical") drei sich nicht ueberschneidende Zeitfenster:
  *   - "now":   Kinostart in den letzten NOW_LOOKBACK_DAYS Tagen (inkl. heute)
  *              -- deckt sowohl ganz neu gestartete als auch laenger laufende
@@ -60,35 +61,59 @@ async function genreMap() {
   const m = {}; (d.genres || []).forEach((g) => (m[g.id] = g.name)); return m;
 }
 
+// Laender fuer die Altersfreigaben -- die TMDB-Antwort enthaelt ohnehin alle,
+// weitere Regionen kosten hier keinen zusaetzlichen Abruf.
+const CERT_REGIONS = (process.env.TMDB_CERT_REGIONS || 'DE,AT')
+  .split(',').map((s) => s.trim().toUpperCase()).filter(Boolean);
+
+// Englische Fassung aus den mitgelieferten Uebersetzungen (siehe stream-fetch.mjs).
+function englischAus(detail) {
+  const alle = ((detail.translations || {}).translations || [])
+    .filter((t) => t.iso_639_1 === 'en' && t.data);
+  const beste = alle.find((t) => t.iso_3166_1 === 'US' && (t.data.overview || t.data.title))
+    || alle.find((t) => t.data.overview || t.data.title);
+  if (!beste) return { titel: '', ov: '' };
+  return { titel: (beste.data.title || '').trim(), ov: (beste.data.overview || '').trim() };
+}
+
 const enrichCache = new Map();
-// Holt zusaetzlich zu Cast/Regie alle deutschen Kino-Veroeffentlichungstermine
-// (release_dates, type 2=Limited/3=Theatrical) -- noetig, weil /discover/movie
-// zwar korrekt nur Filme mit einem passenden DE-Kinotermin im jeweiligen
-// Zeitfenster liefert, das zurueckgegebene "release_date"-Feld dabei aber die
-// urspruengliche (globale) Erstveroeffentlichung zeigt statt des tatsaechlich
-// gesuchten (Wieder-)Auffuehrungstermins -- z.B. "Rocky" mit release_date 1977,
-// obwohl der eigentliche Treffer eine Kino-Wiederauffuehrung 2026 ist (siehe
-// discoverRange/main unten, wo aus deDates das passende Datum herausgesucht wird).
+// Holt zusaetzlich zu Cast/Regie alle Kino-Veroeffentlichungstermine der
+// Ziel-Region (release_dates, type 2=Limited/3=Theatrical) -- noetig, weil
+// /discover/movie zwar korrekt nur Filme mit einem passenden Kinotermin im
+// jeweiligen Zeitfenster liefert, das zurueckgegebene "release_date"-Feld dabei
+// aber die urspruengliche (globale) Erstveroeffentlichung zeigt statt des
+// tatsaechlich gesuchten (Wieder-)Auffuehrungstermins -- z.B. "Rocky" mit
+// release_date 1977, obwohl der eigentliche Treffer eine Kino-Wiederauffuehrung
+// 2026 ist (siehe discoverRange/main unten, wo aus regionDates das passende
+// Datum herausgesucht wird).
 async function enrich(id) {
   if (enrichCache.has(id)) return enrichCache.get(id);
-  const result = { cast: [], dir: '', deDates: [], fsk: null };
+  const result = { cast: [], dir: '', regionDates: [], fsk: null, certs: {}, tEn: '', ovEn: '' };
   try {
-    const d = await tmdb(`/movie/${id}`, { language: LANG, append_to_response: 'credits,release_dates' });
+    const d = await tmdb(`/movie/${id}`, { language: LANG, append_to_response: 'credits,release_dates,translations' });
     const cr = d.credits || {};
     result.cast = (cr.cast || []).slice(0, 4).map((p) => p.name).filter(Boolean);
     const dd = (cr.crew || []).find((p) => p.job === 'Director');
     result.dir = dd ? dd.name : '';
     const rdResults = (d.release_dates && d.release_dates.results) || [];
-    const deEntry = rdResults.find((r) => r.iso_3166_1 === 'DE');
-    if (deEntry) {
-      result.deDates = (deEntry.release_dates || [])
+    const regionEntry = rdResults.find((r) => r.iso_3166_1 === REGION);
+    if (regionEntry) {
+      result.regionDates = (regionEntry.release_dates || [])
         .filter((rd) => rd.type === 2 || rd.type === 3)
         .map((rd) => String(rd.release_date).slice(0, 10))
         .sort();
-      // Freigabe steht in derselben Antwort -- oft nur an einem der Eintraege,
-      // daher der erste nicht leere Wert.
-      result.fsk = (deEntry.release_dates || []).map((rd) => rd.certification).find((c) => c) || null;
     }
+    // Freigaben je Land -- oft nur an einem der Eintraege, daher der erste
+    // nicht leere Wert je Land.
+    for (const region of CERT_REGIONS) {
+      const eintrag = rdResults.find((r) => r.iso_3166_1 === region);
+      const wert = eintrag && (eintrag.release_dates || []).map((rd) => rd.certification).find((c) => c);
+      if (wert) result.certs[region] = wert;
+    }
+    result.fsk = result.certs.DE || null;
+    const en = englischAus(d);
+    result.tEn = en.titel || ((d.original_language === 'en' && d.original_title) || '');
+    result.ovEn = en.ov;
   } catch (e) { /* Titel ohne Credits/Release-Termine: Felder bleiben leer */ }
   enrichCache.set(id, result);
   return result;
@@ -180,17 +205,20 @@ async function main() {
     item.cast = ex.cast;
     item.director = ex.dir;
     item.certification = ex.fsk;
-    if (!item.overview) item.overview = await overviewFallback(item.tmdbId);
-    // Das deutsche Kinodatum, das tatsaechlich in dieses Zeitfenster faellt
-    // (deshalb hat /discover den Titel ja geliefert), ersetzt das vorlaeufige
-    // (oft globale Erst-)Veroeffentlichungsdatum von oben. originalReleaseDate
-    // bleibt nur gesetzt, wenn es sich im Jahr unterscheidet -- sonst waeren
-    // beide Datumsfelder ohnehin identisch/uninteressant (kein Wiederaufführungs-
-    // Hinweis fuer ganz normale Neustarts).
-    const deMatch = ex.deDates.find((d) => d >= item._gte && d <= item._lte);
-    if (deMatch) {
-      item.releaseDate = deMatch;
-      if (!item.originalReleaseDate || item.originalReleaseDate.slice(0, 4) === deMatch.slice(0, 4)) {
+    item.certifications = ex.certs;
+    item.titleEn = ex.tEn;
+    item.overviewEn = ex.ovEn;
+    if (!item.overview) item.overview = ex.ovEn || await overviewFallback(item.tmdbId);
+    // Das Kinodatum der Ziel-Region, das tatsaechlich in dieses Zeitfenster
+    // faellt (deshalb hat /discover den Titel ja geliefert), ersetzt das
+    // vorlaeufige (oft globale Erst-)Veroeffentlichungsdatum von oben.
+    // originalReleaseDate bleibt nur gesetzt, wenn es sich im Jahr
+    // unterscheidet -- sonst waeren beide Datumsfelder ohnehin identisch/
+    // uninteressant (kein Wiederaufführungs-Hinweis fuer normale Neustarts).
+    const regionMatch = ex.regionDates.find((d) => d >= item._gte && d <= item._lte);
+    if (regionMatch) {
+      item.releaseDate = regionMatch;
+      if (!item.originalReleaseDate || item.originalReleaseDate.slice(0, 4) === regionMatch.slice(0, 4)) {
         item.originalReleaseDate = null;
       }
     } else {
@@ -209,10 +237,11 @@ async function main() {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${CINEMA_INGEST_SECRET}`,
     },
-    body: JSON.stringify({ items: out }),
+    // region: der Ingest verwaltet jede Region getrennt (siehe routes/cinema.js).
+    body: JSON.stringify({ region: REGION, items: out }),
   });
   if (!res.ok) throw new Error(`Ingest-API ${res.status}: ${await res.text()}`);
-  console.log(`An Backend übertragen: ${out.length} Titel.`);
+  console.log(`An Backend übertragen: ${out.length} Titel (Region ${REGION}).`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

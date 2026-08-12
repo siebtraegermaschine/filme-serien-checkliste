@@ -4,6 +4,7 @@ import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { ausListe, leeren } from '../lib/listenCache.js';
 import { geheimnisStimmt } from '../lib/vergleich.js';
 import { mengenGrenze } from '../middleware/rateLimit.js';
+import { sprachWahl, regionWahl, sprachFeld, freigabeFuer } from '../lib/i18n.js';
 
 // Grenze je IP fuer die Inhaltsangaben der sichtbaren Zeilen. Der haeufigste
 // der oeffentlichen DB-Endpunkte -- laeuft bei jedem Nachladen einer Liste --,
@@ -18,12 +19,16 @@ const router = createAsyncRouter();
 // Taste-Score im Frontend werten sie aus. Listen liefern sie deshalb nicht mehr
 // mit; das Frontend holt sie fuer die gerade sichtbaren Zeilen ueber
 // POST /api/titles/plots nach.
-export function serializeTitle(row, { withPlot = true } = {}) {
+// lang ('de'|'en') tauscht Titel und Inhaltsangabe gegen die englische Fassung
+// (mit deutschem Rueckfall, siehe lib/i18n.js); region bestimmt, welche
+// Altersfreigabe im Feld `certification` steht. Beide optional -- ohne Angabe
+// verhaelt sich alles wie bisher (deutsch, DE).
+export function serializeTitle(row, { withPlot = true, lang = 'de', region = 'DE' } = {}) {
   const out = {
     id: row.id,
     tmdbId: row.tmdb_id,
     type: row.type,
-    title: row.title,
+    title: sprachFeld(lang, row.title, row.title_en),
     originalTitle: row.original_title,
     year: row.year,
     genres: row.genres,
@@ -32,7 +37,7 @@ export function serializeTitle(row, { withPlot = true } = {}) {
     keywords: row.keywords,
     rating: row.rating != null ? Number(row.rating) : null,
     voteCount: row.vote_count,
-    certification: row.certification,
+    certification: freigabeFuer(region, row.certifications, row.certification),
     posterPath: row.poster_path,
     posterBase64: row.poster_base64,
     source: row.source,
@@ -50,7 +55,7 @@ export function serializeTitle(row, { withPlot = true } = {}) {
   if (row.tmdb_id == null && row.aufgeloeste_tmdb_id != null) {
     out.tmdbIdAufgeloest = row.aufgeloeste_tmdb_id;
   }
-  if (withPlot) out.plot = row.plot;
+  if (withPlot) out.plot = sprachFeld(lang, row.plot, row.overview_en);
   return out;
 }
 
@@ -66,11 +71,11 @@ export function serializeTitle(row, { withPlot = true } = {}) {
    weil serializeTitle sie ohnehin nicht mitschickt.
    `poster_base64` bleibt drin: nur noch 5 Titel haben eines (31 kB gesamt), die
    App zeichnet es aber bevorzugt (siehe UEBERGABE-OFFEN.md, Abschnitt 2.2). */
-const LISTEN_SPALTEN = `t.id, t.tmdb_id, t.type, t.title, t.original_title, t.year,
+const LISTEN_SPALTEN = `t.id, t.tmdb_id, t.type, t.title, t.title_en, t.original_title, t.year,
   t.genres, t.director, t.cast_names, t.keywords, t.rating, t.vote_count,
-  t.certification, t.poster_path, t.poster_base64, t.source`;
+  t.certification, t.certifications, t.poster_path, t.poster_base64, t.source`;
 
-export async function ladeListe({ type, source, search, withPlot }) {
+export async function ladeListe({ type, source, search, withPlot, lang = 'de', region = 'DE' }) {
   const conditions = [];
   const params = [];
 
@@ -103,21 +108,22 @@ export async function ladeListe({ type, source, search, withPlot }) {
   // serializeTitle. LEFT JOIN, damit ein fehlender Eintrag den Titel nicht
   // verschluckt.
   const { rows } = await pool.query(
-    `SELECT ${LISTEN_SPALTEN}${withPlot ? ', t.plot' : ''}, r.tmdb_id AS aufgeloeste_tmdb_id
+    `SELECT ${LISTEN_SPALTEN}${withPlot ? ', t.plot, t.overview_en' : ''}, r.tmdb_id AS aufgeloeste_tmdb_id
        FROM titles t
        LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id AND t.tmdb_id IS NULL
        ${where}
       ORDER BY t.title ASC`,
     params
   );
-  return rows.map((r) => serializeTitle(r, { withPlot }));
+  return rows.map((r) => serializeTitle(r, { withPlot, lang, region }));
 }
 
 // Schluessel fuer den Zwischenspeicher. Nur die Spielarten OHNE Suchbegriff
 // kommen hinein -- eine Suche liefert je Begriff eine andere Liste und wuerde
-// den Speicher mit Einmalantworten fuellen.
-export function listenSchluessel({ type, source, withPlot }) {
-  return `titles:${type || ''}|${source || ''}|${withPlot ? 'plot' : 'ohne'}`;
+// den Speicher mit Einmalantworten fuellen. Sprache und Region gehoeren in den
+// Schluessel: je Kombination ist die Antwort eine andere.
+export function listenSchluessel({ type, source, withPlot, lang = 'de', region = 'DE' }) {
+  return `titles:${type || ''}|${source || ''}|${withPlot ? 'plot' : 'ohne'}|${lang}|${region}`;
 }
 
 router.get('/', async (req, res) => {
@@ -125,12 +131,14 @@ router.get('/', async (req, res) => {
   // Ohne Inhaltsangaben (siehe serializeTitle) -- das ist die grosse Liste, hier
   // faellt die Ersparnis an. ?withPlot=1 liefert sie bei Bedarf weiterhin mit.
   const withPlot = req.query.withPlot === '1';
+  const lang = sprachWahl(req.query.lang);
+  const region = regionWahl(req.query.region);
 
   if (typeof search === 'string' && search.trim()) {
-    return res.json(await ladeListe({ type, source, search, withPlot }));
+    return res.json(await ladeListe({ type, source, search, withPlot, lang, region }));
   }
-  await ausListe(req, res, listenSchluessel({ type, source, withPlot }),
-    () => ladeListe({ type, source, withPlot }));
+  await ausListe(req, res, listenSchluessel({ type, source, withPlot, lang, region }),
+    () => ladeListe({ type, source, withPlot, lang, region }));
 });
 
 // Inhaltsangaben fuer die gerade sichtbaren Zeilen. Zwei Zugaenge, weil das
@@ -139,6 +147,7 @@ router.get('/', async (req, res) => {
 // in `titles` stehen (siehe streaming_cache).
 router.post('/plots', GRENZE_PLOTS, async (req, res) => {
   const { ids, tmdb } = req.body || {};
+  const lang = sprachWahl((req.body || {}).lang);
   const out = { ids: {}, tmdb: {} };
 
   const numericIds = Array.isArray(ids)
@@ -146,10 +155,11 @@ router.post('/plots', GRENZE_PLOTS, async (req, res) => {
     : [];
   if (numericIds.length) {
     const { rows } = await pool.query(
-      `SELECT id, plot FROM titles WHERE id = ANY($1) AND plot IS NOT NULL AND plot <> ''`,
+      `SELECT id, plot, overview_en FROM titles WHERE id = ANY($1)
+        AND (plot IS NOT NULL AND plot <> '' OR overview_en IS NOT NULL AND overview_en <> '')`,
       [numericIds]
     );
-    for (const r of rows) out.ids[r.id] = r.plot;
+    for (const r of rows) out.ids[r.id] = sprachFeld(lang, r.plot || '', r.overview_en);
   }
 
   // [[type, tmdbId], ...] -- zwei Parallel-Arrays, damit die Paare als ein
@@ -162,13 +172,13 @@ router.post('/plots', GRENZE_PLOTS, async (req, res) => {
     const typen = paare.map((p) => p[0]);
     const tmdbIds = paare.map((p) => Number(p[1]));
     const { rows } = await pool.query(
-      `SELECT DISTINCT ON (type, tmdb_id) type, tmdb_id, overview
+      `SELECT DISTINCT ON (type, tmdb_id) type, tmdb_id, overview, overview_en
          FROM streaming_cache
         WHERE (type, tmdb_id) IN (SELECT * FROM unnest($1::text[], $2::int[]))
-          AND overview IS NOT NULL AND overview <> ''`,
+          AND (overview IS NOT NULL AND overview <> '' OR overview_en IS NOT NULL AND overview_en <> '')`,
       [typen, tmdbIds]
     );
-    for (const r of rows) out.tmdb[`${r.type}:${r.tmdb_id}`] = r.overview;
+    for (const r of rows) out.tmdb[`${r.type}:${r.tmdb_id}`] = sprachFeld(lang, r.overview || '', r.overview_en);
   }
 
   res.json(out);
@@ -225,34 +235,44 @@ router.post('/ensure', requireAuth, async (req, res) => {
     certification,
     plot,
     source,
+    lang,
   } = req.body || {};
 
   if (!tmdbId || (type !== 'movie' && type !== 'series') || typeof title !== 'string' || !title.trim()) {
     return res.status(400).json({ error: 'invalid_title_payload' });
   }
 
-  // Zur Inhaltsangabe: Das Frontend schickt sie seit der Verkleinerung der
-  // Auslieferung nicht mehr mit (sie steht dort nur noch fuer aufgeklappte
-  // Zeilen zur Verfuegung). Sie wird deshalb serverseitig aus streaming_cache
-  // ergaenzt -- und ein leerer Wert darf einen vorhandenen Text NIEMALS
-  // ueberschreiben: bei ON CONFLICT haette "plot = EXCLUDED.plot" sonst die
-  // Inhaltsangabe eines laengst bestehenden Titels geloescht, sobald ihn jemand
-  // ueber den Streaming-Weg erneut hinzufuegt.
+  // Sprache des Clients: Ein englischsprachiger Client kennt den Titel/Plot nur
+  // in seiner englischen Fassung -- die gehoert in title_en/overview_en, NICHT
+  // in die deutschen Felder. Die jeweils fehlende Fassung (samt Freigabe und
+  // Inhaltsangabe, die das Frontend seit der Auslieferungs-Verkleinerung nicht
+  // mehr mitschickt) kommt aus streaming_cache.
+  const reqLang = sprachWahl(lang);
+  const { rows: scRows } = await pool.query(
+    `SELECT title, title_en, overview, overview_en, certification, certifications
+       FROM streaming_cache
+      WHERE tmdb_id = $1 AND type = $2
+      ORDER BY (title_en IS NOT NULL) DESC, fetched_at DESC LIMIT 1`,
+    [tmdbId, type]
+  );
+  const sc = scRows[0] || {};
+  const titleDe = reqLang === 'en' ? (sc.title || title.trim()) : title.trim();
+  const titleEn = reqLang === 'en' ? title.trim() : (sc.title_en || null);
+  const plotDe = reqLang === 'en' ? (sc.overview || null) : (plot || sc.overview || null);
+  const plotEn = reqLang === 'en' ? (plot || sc.overview_en || null) : (sc.overview_en || null);
+  const cert = certification || sc.certification || null;
+  const certs = sc.certifications && typeof sc.certifications === 'object' ? sc.certifications : {};
+
+  // Ein leerer Wert darf einen vorhandenen Text NIEMALS ueberschreiben: bei
+  // ON CONFLICT haette "plot = EXCLUDED.plot" sonst die Inhaltsangabe eines
+  // laengst bestehenden Titels geloescht, sobald ihn jemand ueber den
+  // Streaming-Weg erneut hinzufuegt.
   const { rows } = await pool.query(
-    `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, plot, source)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,
-       -- Altersfreigabe wie die Inhaltsangabe aus streaming_cache ergaenzen:
-       -- ohne sie wuerde der Titel vom FSK-Filter ausgeblendet, obwohl die
-       -- Angabe vorliegt.
-       COALESCE(NULLIF($12, ''), (SELECT certification FROM streaming_cache
-                                   WHERE tmdb_id = $1 AND type = $2
-                                     AND certification IS NOT NULL AND certification <> '' LIMIT 1)),
-       COALESCE(NULLIF($13, ''), (SELECT overview FROM streaming_cache
-                                   WHERE tmdb_id = $1 AND type = $2
-                                     AND overview IS NOT NULL AND overview <> '' LIMIT 1)),
-       $14)
+    `INSERT INTO titles (tmdb_id, type, title, title_en, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, certifications, plot, overview_en, source)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
      ON CONFLICT (tmdb_id, type) DO UPDATE SET
        title = EXCLUDED.title,
+       title_en = COALESCE(NULLIF(EXCLUDED.title_en, ''), titles.title_en),
        year = EXCLUDED.year,
        genres = EXCLUDED.genres,
        director = EXCLUDED.director,
@@ -262,13 +282,16 @@ router.post('/ensure', requireAuth, async (req, res) => {
        rating = EXCLUDED.rating,
        vote_count = EXCLUDED.vote_count,
        certification = COALESCE(NULLIF(EXCLUDED.certification, ''), titles.certification),
+       certifications = titles.certifications || EXCLUDED.certifications,
        plot = COALESCE(NULLIF(EXCLUDED.plot, ''), titles.plot),
+       overview_en = COALESCE(NULLIF(EXCLUDED.overview_en, ''), titles.overview_en),
        updated_at = now()
      RETURNING *`,
     [
       tmdbId,
       type,
-      title.trim(),
+      titleDe,
+      titleEn,
       year || null,
       Array.isArray(genres) ? genres : [],
       director || null,
@@ -277,8 +300,10 @@ router.post('/ensure', requireAuth, async (req, res) => {
       posterPath || null,
       rating != null ? rating : null,
       voteCount != null ? voteCount : null,
-      certification || null,
-      plot || null,
+      cert,
+      certs,
+      plotDe,
+      plotEn,
       source === 'streaming' ? 'streaming' : 'discovery',
     ]
   );
@@ -286,7 +311,7 @@ router.post('/ensure', requireAuth, async (req, res) => {
   // Ein neuer Titel gehoert sofort in die Liste -- der Zwischenspeicher haelt
   // sonst bis zu zwei Minuten die alte Fassung fest.
   leeren('Titel ueber /ensure angelegt oder aktualisiert');
-  res.status(201).json(serializeTitle(rows[0]));
+  res.status(201).json(serializeTitle(rows[0], { lang: reqLang, region: regionWahl(req.body && req.body.region) }));
 });
 
 // Wird ausschließlich von der GitHub Action (discover-rated-titles.mjs) mit dem
@@ -323,8 +348,8 @@ router.post('/bulk-ingest', async (req, res) => {
     for (const item of items) {
       if (!item || !item.tmdbId || (item.type !== 'movie' && item.type !== 'series') || !item.title) continue;
       const { rowCount } = await client.query(
-        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, plot, source)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,$11,$12,'discovery')
+        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, certifications, plot, title_en, overview_en, source)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,$11,$12,$13,$14,$15,'discovery')
          ON CONFLICT (tmdb_id, type) DO UPDATE SET
            year = EXCLUDED.year,
            genres = EXCLUDED.genres,
@@ -334,7 +359,12 @@ router.post('/bulk-ingest', async (req, res) => {
            rating = EXCLUDED.rating,
            vote_count = EXCLUDED.vote_count,
            certification = EXCLUDED.certification,
+           -- Freigaben je Land werden zusammengefuehrt statt ersetzt: Ein Lauf,
+           -- der nur DE/AT liefert, darf spaeter ergaenzte Laender nicht loeschen.
+           certifications = titles.certifications || EXCLUDED.certifications,
            plot = COALESCE(NULLIF(EXCLUDED.plot, ''), titles.plot),
+           title_en = COALESCE(NULLIF(EXCLUDED.title_en, ''), titles.title_en),
+           overview_en = COALESCE(NULLIF(EXCLUDED.overview_en, ''), titles.overview_en),
            updated_at = now()
          WHERE titles.source <> 'catalog'`,
         [
@@ -349,7 +379,10 @@ router.post('/bulk-ingest', async (req, res) => {
           item.rating != null ? item.rating : null,
           item.voteCount != null ? item.voteCount : null,
           item.certification || null,
+          item.certifications && typeof item.certifications === 'object' ? item.certifications : {},
           item.plot || null,
+          item.titleEn || null,
+          item.overviewEn || null,
         ]
       );
       inserted += rowCount;

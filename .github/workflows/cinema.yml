@@ -14,7 +14,13 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 240
+    # Ein Lauf je Region -- nacheinander, wegen des TMDB-Rate-Limits (siehe
+    # streaming.yml).
+    strategy:
+      max-parallel: 1
+      matrix:
+        region: ["DE", "AT"]
     steps:
       - name: Repo auschecken
         uses: actions/checkout@v4
@@ -29,4 +35,5 @@ jobs:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
           STREAMING_API_URL: ${{ vars.STREAMING_API_URL }}
           CINEMA_INGEST_SECRET: ${{ secrets.CINEMA_INGEST_SECRET }}
+          TMDB_REGION: ${{ matrix.region }}
         run: node cinema-fetch.mjs

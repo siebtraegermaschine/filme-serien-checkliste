@@ -542,3 +542,79 @@ CREATE TABLE IF NOT EXISTS feedback (
 -- Gelesen wird immer das Neueste zuerst, und der Aufraeumlauf sucht das
 -- Aelteste -- beides bedient derselbe Index.
 CREATE INDEX IF NOT EXISTS idx_feedback_erstellt_am ON feedback (erstellt_am DESC);
+
+-- ---------------------------------------------------------------------------
+-- Internationalisierung (EU) -- siehe PLAN-INTERNATIONALISIERUNG.md
+--
+-- Drei Bausteine:
+--   1. Englische Inhaltsdaten (Weg A): title_en/overview_en neben den
+--      deutschen Feldern. Gefuellt von den Fetch-Skripten (TMDB liefert die
+--      Uebersetzungen im selben Detailaufruf mit, append_to_response=
+--      translations) und fuer den Bestand von backfill-english.mjs.
+--   2. Altersfreigaben je Land als JSONB ({"DE":"12","AT":"14"}) -- die
+--      bisherige Spalte certification bleibt als DE-Wert und Rueckfall
+--      bestehen, damit nichts Bestehendes bricht.
+--   3. Region-Dimension in streaming_cache und cinema_cache: die
+--      Verfuegbarkeit ist je Land verschieden, der Ingest laeuft je Region
+--      einmal (TMDB_REGION je Lauf) und schreibt seine Region mit.
+-- ---------------------------------------------------------------------------
+
+-- 1. Englische Inhaltsdaten
+ALTER TABLE titles          ADD COLUMN IF NOT EXISTS title_en    TEXT;
+ALTER TABLE titles          ADD COLUMN IF NOT EXISTS overview_en TEXT;
+ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS title_en    TEXT;
+ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS overview_en TEXT;
+ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS title_en    TEXT;
+ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS overview_en TEXT;
+
+-- 2. Altersfreigaben je Land. Einmalige Uebernahme des vorhandenen DE-Werts,
+--    damit der Filter fuer Bestandsdaten sofort funktioniert.
+ALTER TABLE titles          ADD COLUMN IF NOT EXISTS certifications JSONB NOT NULL DEFAULT '{}';
+ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS certifications JSONB NOT NULL DEFAULT '{}';
+ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS certifications JSONB NOT NULL DEFAULT '{}';
+UPDATE titles          SET certifications = jsonb_build_object('DE', certification)
+  WHERE certification IS NOT NULL AND certification <> '' AND NOT certifications ? 'DE';
+UPDATE streaming_cache SET certifications = jsonb_build_object('DE', certification)
+  WHERE certification IS NOT NULL AND certification <> '' AND NOT certifications ? 'DE';
+UPDATE cinema_cache    SET certifications = jsonb_build_object('DE', certification)
+  WHERE certification IS NOT NULL AND certification <> '' AND NOT certifications ? 'DE';
+
+-- 3a. Region-Dimension in streaming_cache: Bestandszeilen sind DE. Der
+--     Primaerschluessel waechst von (provider_id, type, tmdb_id) auf
+--     (provider_id, type, tmdb_id, region) -- erkannt am fehlenden "region"
+--     in der bestehenden Definition, laeuft also nur einmal.
+ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS region TEXT NOT NULL DEFAULT 'DE';
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM pg_constraint
+     WHERE conrelid = 'streaming_cache'::regclass AND contype = 'p'
+       AND pg_get_constraintdef(oid) NOT LIKE '%region%'
+  ) THEN
+    ALTER TABLE streaming_cache DROP CONSTRAINT streaming_cache_pkey;
+    ALTER TABLE streaming_cache ADD PRIMARY KEY (provider_id, type, tmdb_id, region);
+  END IF;
+END $$;
+CREATE INDEX IF NOT EXISTS idx_streaming_cache_region ON streaming_cache (region);
+
+-- 3b. Region-Dimension in cinema_cache: analog, PK von (tmdb_id) auf
+--     (tmdb_id, region).
+ALTER TABLE cinema_cache ADD COLUMN IF NOT EXISTS region TEXT NOT NULL DEFAULT 'DE';
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM pg_constraint
+     WHERE conrelid = 'cinema_cache'::regclass AND contype = 'p'
+       AND pg_get_constraintdef(oid) NOT LIKE '%region%'
+  ) THEN
+    ALTER TABLE cinema_cache DROP CONSTRAINT cinema_cache_pkey;
+    ALTER TABLE cinema_cache ADD PRIMARY KEY (tmdb_id, region);
+  END IF;
+END $$;
+CREATE INDEX IF NOT EXISTS idx_cinema_cache_region ON cinema_cache (region);
+
+-- Sprache und Region am Konto: geraeteuebergreifend, gesetzt ueber
+-- PUT /api/auth/settings. NULL = noch nie gewaehlt, dann entscheidet das
+-- Geraet (localStorage bzw. Browsersprache).
+ALTER TABLE users ADD COLUMN IF NOT EXISTS sprache TEXT CHECK (sprache IS NULL OR sprache IN ('de', 'en'));
+ALTER TABLE users ADD COLUMN IF NOT EXISTS region  TEXT CHECK (region IS NULL OR region ~ '^[A-Z]{2}$');

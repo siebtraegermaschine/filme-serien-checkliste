@@ -3,9 +3,14 @@
  * stream-fetch.mjs – erzeugt streaming.json für die "Streaming"-Ansicht der App.
  *
  * Holt von TMDB (Daten via JustWatch) die aktuell im Abo (Flatrate) verfügbaren
- * Filme & Serien der konfigurierten Plattformen für die Region DE und schreibt
- * sie in ./streaming.json – im gleichen Feld-Format wie die Discovery-Kandidaten
- * ({id,t,y,g,d,c,p,r}), plus "ov" (Kurzbeschreibung/Plot) für die Detailansicht.
+ * Filme & Serien der konfigurierten Plattformen für EINE Region (TMDB_REGION,
+ * Default DE) und schreibt sie in ./streaming.json – im gleichen Feld-Format wie
+ * die Discovery-Kandidaten ({id,t,y,g,d,c,p,r}), plus "ov" (Kurzbeschreibung)
+ * für die Detailansicht sowie "tEn"/"ovEn" (englische Fassung) und "certs"
+ * (Altersfreigaben je Land, siehe TMDB_CERT_REGIONS).
+ *
+ * Für mehrere Länder läuft das Skript je Region einmal (TMDB_REGION=DE,
+ * TMDB_REGION=AT, ...) – der Ingest im Backend verwaltet jede Region getrennt.
  *
  * Läuft NUR in der GitHub Action (oder lokal) – der API-Key kommt aus der
  * Umgebungsvariable TMDB_API_KEY (GitHub Secret) und landet NIE im Client-Code.
@@ -52,18 +57,44 @@ const WANT = [
 if (!KEY) { console.error('FEHLER: TMDB_API_KEY ist nicht gesetzt.'); process.exit(1); }
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-// Deutsche Altersfreigabe aus dem ohnehin geholten Detail-Datensatz lesen.
+// Laender, fuer die Altersfreigaben mitgenommen werden. Die TMDB-Antwort
+// enthaelt ohnehin ALLE Laender -- weitere Regionen kosten hier also keinen
+// einzigen zusaetzlichen Abruf (siehe PLAN-INTERNATIONALISIERUNG.md).
+const CERT_REGIONS = (process.env.TMDB_CERT_REGIONS || 'DE,AT')
+  .split(',').map((s) => s.trim().toUpperCase()).filter(Boolean);
+
+// Altersfreigaben je Land aus dem ohnehin geholten Detail-Datensatz lesen.
 // Filme fuehren sie unter release_dates (je Land mehrere Eintraege, oft mit
 // leerem certification-Feld -- daher der erste nicht leere), Serien unter
-// content_ratings.
-function fskAus(detail, kind) {
-  if (kind === 'movie') {
-    const de = ((detail.release_dates || {}).results || []).find((r) => r.iso_3166_1 === 'DE');
-    if (!de) return null;
-    return (de.release_dates || []).map((r) => r.certification).find((c) => c) || null;
+// content_ratings. Ergebnis z.B. { DE: '12', AT: '14' }.
+function zertifikate(detail, kind) {
+  const certs = {};
+  for (const region of CERT_REGIONS) {
+    if (kind === 'movie') {
+      const eintrag = ((detail.release_dates || {}).results || []).find((r) => r.iso_3166_1 === region);
+      const wert = eintrag && (eintrag.release_dates || []).map((r) => r.certification).find((c) => c);
+      if (wert) certs[region] = wert;
+    } else {
+      const eintrag = ((detail.content_ratings || {}).results || []).find((r) => r.iso_3166_1 === region);
+      if (eintrag && eintrag.rating) certs[region] = eintrag.rating;
+    }
   }
-  const de = ((detail.content_ratings || {}).results || []).find((r) => r.iso_3166_1 === 'DE');
-  return (de && de.rating) || null;
+  return certs;
+}
+
+// Englischen Titel und englische Inhaltsangabe aus den mitgelieferten
+// Uebersetzungen ziehen (append_to_response=translations). Bevorzugt en-US,
+// sonst die erste englische Fassung mit Text.
+function englischAus(detail, kind) {
+  const alle = ((detail.translations || {}).translations || [])
+    .filter((t) => t.iso_639_1 === 'en' && t.data);
+  const beste = alle.find((t) => t.iso_3166_1 === 'US' && (t.data.overview || t.data.title || t.data.name))
+    || alle.find((t) => t.data.overview || t.data.title || t.data.name);
+  if (!beste) return { titel: '', ov: '' };
+  return {
+    titel: ((kind === 'movie' ? beste.data.title : beste.data.name) || '').trim(),
+    ov: (beste.data.overview || '').trim(),
+  };
 }
 
 
@@ -86,12 +117,12 @@ const enrichCache = new Map();
 async function enrich(kind, id) {
   const ck = kind + ':' + id;
   if (enrichCache.has(ck)) return enrichCache.get(ck);
-  const result = { cast: [], dir: '', fsk: null };
+  const result = { cast: [], dir: '', fsk: null, certs: {}, tEn: '', ovEn: '' };
   try {
     const d = await tmdb(`/${kind}/${id}`, { language: LANG,
-      // release_dates/content_ratings haengen sich an den ohnehin noetigen
-      // Detailaufruf an -- kein zusaetzlicher Abruf.
-      append_to_response: kind === 'movie' ? 'credits,release_dates' : 'credits,content_ratings' });
+      // release_dates/content_ratings und translations haengen sich an den
+      // ohnehin noetigen Detailaufruf an -- kein zusaetzlicher Abruf.
+      append_to_response: kind === 'movie' ? 'credits,release_dates,translations' : 'credits,content_ratings,translations' });
     const cr = d.credits || {};
     result.cast = (cr.cast || []).slice(0, 4).map(p => p.name).filter(Boolean);
     if (kind === 'movie') {
@@ -100,7 +131,13 @@ async function enrich(kind, id) {
     } else {
       result.dir = (d.created_by || []).map(p => p.name).filter(Boolean).join(', ');
     }
-    result.fsk = fskAus(d, kind);
+    result.certs = zertifikate(d, kind);
+    result.fsk = result.certs.DE || null;
+    const en = englischAus(d, kind);
+    // Der Originaltitel ist bei englischsprachigen Produktionen bereits die
+    // englische Fassung -- die Uebersetzungstabelle laesst title dort oft leer.
+    result.tEn = en.titel || ((d.original_language === 'en' && (kind === 'movie' ? d.original_title : d.original_name)) || '');
+    result.ovEn = en.ov;
   } catch (e) { /* Titel ohne Credits: Felder bleiben leer */ }
   enrichCache.set(ck, result);
   return result;
@@ -213,9 +250,14 @@ async function discover(kind, providerId, gmap) {
     item.c = ex.cast;
     item.d = ex.dir;
     item.fsk = ex.fsk;
+    item.certs = ex.certs;
+    item.tEn = ex.tEn;
+    item.ovEn = ex.ovEn;
     if (!item.ov) {
-      item.ov = await overviewFallback(kind, item.id);
-      await sleep(120);
+      // Der englische Text steckt meist schon in den Uebersetzungen von
+      // enrich() -- nur wenn auch der fehlt, lohnt der Extra-Abruf.
+      item.ov = ex.ovEn || await overviewFallback(kind, item.id);
+      if (!ex.ovEn) await sleep(120);
     }
     await sleep(120);            // sanftes Tempo gegen das Rate-Limit
   }
