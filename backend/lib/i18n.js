@@ -14,11 +14,13 @@
 // EU-Blaupause; alle weiteren sind nach demselben Muster angebunden
 // (Workflow-Matrix, TMDB_CERT_REGIONS, Frontend-Regionsauswahl, PLZ/Kino-
 // Importe -- siehe PLAN-INTERNATIONALISIERUNG.md Abschnitt 9). Die
-// Workflows laufen in zwei Gruppen (streaming.yml/cinema.yml): erst die
-// erste Haelfte, zwoelf Stunden spaeter die zweite.
+// Workflows laufen in vier Tagesgruppen (streaming.yml/cinema.yml, Job
+// "plan") -- je acht Regionen alle sechs Stunden.
 export const REGIONEN = [
   'DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL',
   'PT', 'PL', 'DK', 'SE', 'NO', 'FI', 'BE', 'IE',
+  'CZ', 'GR', 'HU', 'RO', 'BG', 'HR', 'SI', 'SK',
+  'LT', 'LV', 'EE', 'LU', 'MT', 'CY',
 ];
 
 export function sprachWahl(wert) {

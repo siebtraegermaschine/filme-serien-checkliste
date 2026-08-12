@@ -278,21 +278,29 @@ Regionsauswahl und `regionErmittlung()` im Frontend sowie Bounding-Boxen in
 mitkommen; die französischen Übersee-Gebiete bewusst nicht).
 
 **Acht weitere Länder, zweite Gruppe (ebenfalls 12. August 2026):** PT, PL,
-DK, SE, NO, FI, BE und IE nach demselben Muster — damit sind 16 Regionen
-angebunden und West-/Nordeuropa ist abgedeckt. Die Workflows laufen deshalb
-in **zwei Tagesgruppen** (`streaming.yml`/`cinema.yml`, Job `plan`):
-04:00/04:30 UTC die erste Acht (DE…NL), 16:00/16:30 UTC die zweite
-(PT…IE) — eine Kette aller 16 könnte sonst länger als ein Tag dauern.
+DK, SE, NO, FI, BE und IE nach demselben Muster.
+
+**EU-Vollausbau, dritte und vierte Gruppe (ebenfalls 12. August 2026):**
+CZ, GR, HU, RO, BG, HR, SI, SK, LT, LV, EE, LU, MT und CY — damit sind
+**30 Regionen** angebunden: die komplette EU plus CH, GB und NO. Die
+Workflows laufen in **vier Tagesgruppen** (`streaming.yml`/`cinema.yml`,
+Job `plan`): 04:00, 10:00, 16:00 und 22:00 UTC (Kino jeweils +30 min) je
+acht Regionen — eine Kette aller 30 würde länger als ein Tag dauern.
 Manuelles Auslösen nimmt wahlweise eine eigene Regionsliste entgegen (Feld
-`regionen`) oder arbeitet ohne Eingabe alle 16 ab. Die Sprach-/Regionswahl
-im Menü ist wegen der 16 Einträge ein Aufklappmenü (alphabetisch in der
-jeweiligen Sprache) statt einer Knopfleiste. Besonderheiten:
+`regionen`) oder arbeitet ohne Eingabe alle 30 ab. Die Sprach-/Regionswahl
+im Menü ist ein Aufklappmenü (alphabetisch in der jeweiligen Sprache).
+Genres erscheinen in fr/es/it/nl mit den offiziellen TMDB-Namen
+(`GENRE_NAMEN` in `index.html`, von Hand gepflegt, EN-Rückfall); Suche und
+Genre-Klick verstehen die übersetzten Namen über `SEARCH_SYNONYMS`.
+Besonderheiten:
 - **Altersfilter:** `FSK_SYSTEME` führt je Land die belegten Stufen und für
   Buchstaben-Systeme ein Mapping auf das Mindestalter (`freigabeZahl()`):
   GB U/PG/12A (PG zählt als 8, also „bis 12"), FR U/TP, IT T/6+/VM14/VM18,
   ES APTA/TP/A, NL AL, PT T/M/x, DK A/F, SE Btl, NO A, FI S/K-x, BE
-  AL/KT/KNT, IE G/GA/PG/12A/15A/MA. Reine Erwachsenen-Sonderstufen (GB R18,
-  ES X) gelten bewusst als fehlende Angabe. Fällt ein Titel mangels Landeswert auf die
+  AL/KT/KNT, IE G/GA/PG/12A/15A/MA, CZ/SK U, GR/CY K, HU KN, RO
+  A.G./AP-12/N-15/IM-18, BG A–X, LT V/N-x, LV U/x+, EE PERE/L/MS-x/K-x,
+  LU EA, MT U/PG/12A. Reine Erwachsenen-Sonderstufen (GB R18, ES X) gelten
+  bewusst als fehlende Angabe. Fällt ein Titel mangels Landeswert auf die
   DE-Freigabe zurück und passt die nicht ins Landessystem, gilt sie als
   fehlende Angabe — der Familienfilter bleibt so auf der sicheren Seite,
   bis der Freigaben-Backfill (unten) gelaufen ist.
@@ -324,11 +332,11 @@ Abschnitt 5 bleibt bestehen).
    schon; sie mussten nur nie laufen).
 4. **Workflows:** Nächster planmäßiger Lauf von `streaming.yml`/`cinema.yml`
    befüllt alle Regionen der Matrix automatisch. Nichts zu tun.
-5. **Kino-Orte der 14 neuen Länder** (auf dem Server, im
+5. **Kino-Orte der 28 neuen Länder** (auf dem Server, im
    Backend-Verzeichnis):
-   `node scripts/import-plz.mjs CH GB FR IT ES NL PT PL DK SE NO FI BE IE`
+   `node scripts/import-plz.mjs CH GB FR IT ES NL PT PL DK SE NO FI BE IE CZ GR HU RO BG HR SI SK LT LV EE LU MT CY`
    und danach
-   `node scripts/import-kinos.mjs --laender=CH,GB,FR,IT,ES,NL,PT,PL,DK,SE,NO,FI,BE,IE`
+   `node scripts/import-kinos.mjs --laender=CH,GB,FR,IT,ES,NL,PT,PL,DK,SE,NO,FI,BE,IE,CZ,GR,HU,RO,BG,HR,SI,SK,LT,LV,EE,LU,MT,CY`
    (Overpass-Läufe dauern je Land einige Minuten; GeoNames deckt alle ab,
    GB allerdings nur mit den „outward codes" der Postleitzahlen).
 6. **Freigaben-Backfill für den Bestand** (~27.000 TMDB-Abrufe, mehrere
@@ -337,7 +345,7 @@ Abschnitt 5 bleibt bestehen).
    Der normale Lauf überspringt Zeilen, die schon `title_en` haben — dieser
    Modus ergänzt deshalb gezielt die Freigaben der neuen Länder auf dem
    ganzen Bestand; er fasst alle Zeilen an, denen noch mindestens eines der
-   16 Länder im `certifications`-JSONB fehlt (ein früherer Lauf mit weniger
+   30 Länder im `certifications`-JSONB fehlt (ein früherer Lauf mit weniger
    Ländern wird also automatisch nachgezogen). Bis dahin fallen
    Bestandstitel auf den DE-Wert zurück (siehe `freigabeFuer`); der
    Familienfilter blendet im Zweifel aus statt ein.
@@ -349,14 +357,14 @@ Abschnitt 5 bleibt bestehen).
   Übersetzungstabelle (`backend/lib/schlagworte.js`); Hashtags ohne Eintrag
   bleiben deutsch (derselbe Rückfall wie bei Titeln/Plots).
 - **USA** (Abschnitt 4): unverändert offen, zuerst die Rechtsfrage.
-- **Weitere EU-Länder** (CZ, GR, HU, RO, Baltikum …): je Land nur noch
-  `REGIONEN` in `backend/lib/i18n.js`, Regionsgruppe im `plan`-Job der
-  Workflows, `FSK_SYSTEME`/Regionsauswahl/Domain-Zuordnungen im Frontend,
+- ~~Weitere EU-Länder~~ — **erledigt (12. August 2026):** Mit den Gruppen
+  C/D ist die EU vollständig. Künftige Nicht-EU-Länder (z. B. Balkan,
+  IS) folgen demselben Muster: `REGIONEN` in `backend/lib/i18n.js`,
+  Regionsgruppe im `plan`-Job der Workflows, `FSK_SYSTEME`/
+  `REGIONEN_VERFUEGBAR`/Domain-Zuordnungen im Frontend,
   `TMDB_CERT_REGIONS`-Defaults, Bounding-Box in `import-kinos.mjs` und die
-  beiden Importe (PLZ/Kinos) ergänzen — Muster siehe die 16 angebundenen
-  Länder oben. Für Buchstaben-Freigaben das `zahlen`-Mapping in
-  `FSK_SYSTEME` mitliefern. Ab der dritten Regionsgruppe braucht es einen
-  weiteren Cron-Zeitpunkt.
+  beiden Importe (PLZ/Kinos). Für eine fünfte Regionsgruppe braucht es
+  einen weiteren Cron-Zeitpunkt.
 - ~~Weitere UI-Sprachen~~ — **erledigt (12. August 2026):** Französisch,
   Spanisch, Italienisch und Niederländisch als Oberflächensprachen
   (`UI_TEXTE`, `MARKUP_TEXTE`, `INFO_TEXT_*` je Sprache; Sprachmodal mit
@@ -366,6 +374,8 @@ Abschnitt 5 bleibt bestehen).
   wären ein weiterer Weg-A-Ausbau. Rechtstexte bleiben bewusst nur
   Deutsch/Englisch; alle Nicht-DE-Sprachen verlinken die englischen
   Entwürfe. Die Übersetzungen sind maschinell erstellt und nicht
-  muttersprachlich geprüft.
+  muttersprachlich geprüft; je Sprache liegt eine Review-Datei (alle Texte
+  mit englischer Referenz nebeneinander) bei Christian für die Durchsicht
+  durch Muttersprachler.
 - **Anleitungs-Screenshots** (tour/*.png) zeigen die deutsche Oberfläche —
   werden aktualisiert, wenn alle Oberflächen-Änderungen durch sind.

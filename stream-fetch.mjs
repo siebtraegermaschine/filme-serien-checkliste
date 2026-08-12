@@ -60,7 +60,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 // Laender, fuer die Altersfreigaben mitgenommen werden. Die TMDB-Antwort
 // enthaelt ohnehin ALLE Laender -- weitere Regionen kosten hier also keinen
 // einzigen zusaetzlichen Abruf (siehe PLAN-INTERNATIONALISIERUNG.md).
-const CERT_REGIONS = (process.env.TMDB_CERT_REGIONS || 'DE,AT,CH,GB,FR,IT,ES,NL,PT,PL,DK,SE,NO,FI,BE,IE')
+const CERT_REGIONS = (process.env.TMDB_CERT_REGIONS || 'DE,AT,CH,GB,FR,IT,ES,NL,PT,PL,DK,SE,NO,FI,BE,IE,CZ,GR,HU,RO,BG,HR,SI,SK,LT,LV,EE,LU,MT,CY')
   .split(',').map((s) => s.trim().toUpperCase()).filter(Boolean);
 
 // Altersfreigaben je Land aus dem ohnehin geholten Detail-Datensatz lesen.

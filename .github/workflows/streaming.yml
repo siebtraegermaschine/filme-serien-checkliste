@@ -2,17 +2,19 @@ name: Streaming-Daten aktualisieren
 
 on:
   schedule:
-    # Zwei Laeufe je Tag, je acht Regionen (siehe Job "plan"): Eine Kette
-    # aller 16 Regionen nacheinander koennte laenger als ein Tag dauern.
+    # Vier Laeufe je Tag, je acht Regionen (siehe Job "plan"): Eine Kette
+    # aller 30 Regionen nacheinander wuerde laenger als ein Tag dauern.
     # 04:00 UTC (~5/6 Uhr DE -- GitHub-Cron kennt keine Zeitzonen, daher die
     # uebliche 1-Stunde-Drift zwischen Winter-/Sommerzeit): Gruppe A.
     - cron: "0 4 * * *"
-    # 16:00 UTC: Gruppe B (die spaeter angebundenen Laender).
+    # Danach alle sechs Stunden die naechste Gruppe (B, C, D).
+    - cron: "0 10 * * *"
     - cron: "0 16 * * *"
+    - cron: "0 22 * * *"
   workflow_dispatch:            # erlaubt manuelles Auslösen im Actions-Tab
     inputs:
       regionen:
-        description: "Kommagetrennte Regionen (leer = alle 16)"
+        description: "Kommagetrennte Regionen (leer = alle 30)"
         required: false
         default: ""
 
@@ -24,9 +26,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Bestimmt, welche Regionen DIESER Lauf abarbeitet: der 04:00-Cron die
-  # Gruppe A, der 16:00-Cron die Gruppe B, manuelles Ausloesen wahlweise eine
-  # eigene Liste oder (ohne Eingabe) alle 16. Die Liste muss zu REGIONEN in
+  # Bestimmt, welche Regionen DIESER Lauf abarbeitet: die vier Cron-Zeitpunkte
+  # arbeiten die Gruppen A-D ab, manuelles Ausloesen wahlweise eine
+  # eigene Liste oder (ohne Eingabe) alle 30. Die Liste muss zu REGIONEN in
   # backend/lib/i18n.js passen.
   plan:
     runs-on: ubuntu-latest
@@ -40,12 +42,18 @@ jobs:
         run: |
           A='["DE","AT","CH","GB","FR","IT","ES","NL"]'
           B='["PT","PL","DK","SE","NO","FI","BE","IE"]'
-          ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE"]'
+          C='["CZ","GR","HU","RO","BG","HR","SI","SK"]'
+          D='["LT","LV","EE","LU","MT","CY"]'
+          ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE","CZ","GR","HU","RO","BG","HR","SI","SK","LT","LV","EE","LU","MT","CY"]'
           if [ -n "$EINGABE" ]; then
             LISTE=$(echo "$EINGABE" | tr '[:lower:]' '[:upper:]' | tr -d ' ' | \
               awk -F, '{printf "["; for(i=1;i<=NF;i++){printf "%s\"%s\"", (i>1?",":""), $i}; print "]"}')
-          elif [ "${{ github.event.schedule }}" = "0 16 * * *" ]; then
+          elif [ "${{ github.event.schedule }}" = "0 10 * * *" ]; then
             LISTE="$B"
+          elif [ "${{ github.event.schedule }}" = "0 16 * * *" ]; then
+            LISTE="$C"
+          elif [ "${{ github.event.schedule }}" = "0 22 * * *" ]; then
+            LISTE="$D"
           elif [ -n "${{ github.event.schedule }}" ]; then
             LISTE="$A"
           else

@@ -36,7 +36,7 @@ import { pool } from '../db/pool.js';
 
 const API = 'https://api.themoviedb.org/3';
 const KEY = process.env.TMDB_API_KEY;
-const CERT_REGIONS = (process.env.TMDB_CERT_REGIONS || 'DE,AT,CH,GB,FR,IT,ES,NL,PT,PL,DK,SE,NO,FI,BE,IE')
+const CERT_REGIONS = (process.env.TMDB_CERT_REGIONS || 'DE,AT,CH,GB,FR,IT,ES,NL,PT,PL,DK,SE,NO,FI,BE,IE,CZ,GR,HU,RO,BG,HR,SI,SK,LT,LV,EE,LU,MT,CY')
   .split(',').map((s) => s.trim().toUpperCase()).filter(Boolean);
 const LIMIT_ARG = (process.argv.find((a) => a.startsWith('--limit=')) || '').split('=')[1];
 const LIMIT = LIMIT_ARG ? parseInt(LIMIT_ARG, 10) : null;

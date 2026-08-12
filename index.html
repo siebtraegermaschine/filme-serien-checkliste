@@ -1721,6 +1721,12 @@ var REGION_KEY = 'mt.region';
 // deutsch und englisch (Weg A) -- alle weiteren Sprachen bekommen englische
 // Inhalte, siehe INHALTS_SPRACHE unten.
 var SPRACHEN_VERFUEGBAR = ['de', 'en', 'fr', 'es', 'it', 'nl'];
+// Regionen mit eingespielten Daten -- muss zu REGIONEN in backend/lib/i18n.js
+// passen (30 Laender: EU komplett plus CH/GB/NO).
+var REGIONEN_VERFUEGBAR = ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL',
+                           'PT', 'PL', 'DK', 'SE', 'NO', 'FI', 'BE', 'IE',
+                           'CZ', 'GR', 'HU', 'RO', 'BG', 'HR', 'SI', 'SK',
+                           'LT', 'LV', 'EE', 'LU', 'MT', 'CY'];
 function sprachErmittlung(){
   try {
     var s = localStorage.getItem(SPRACHE_KEY);
@@ -1739,8 +1745,7 @@ function regionErmittlung(){
   // Daten eingespielt werden.
   var m = String(navigator.language || '').match(/-([A-Za-z]{2})$/);
   var r2 = m ? m[1].toUpperCase() : 'DE';
-  return ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL',
-          'PT', 'PL', 'DK', 'SE', 'NO', 'FI', 'BE', 'IE'].indexOf(r2) !== -1 ? r2 : 'DE';
+  return REGIONEN_VERFUEGBAR.indexOf(r2) !== -1 ? r2 : 'DE';
 }
 var SPRACHE = sprachErmittlung();
 var REGION_WAHL = regionErmittlung();
@@ -1972,7 +1977,11 @@ var UI_TEXTE = {
     regionNamen: { DE: 'Deutschland', AT: 'Österreich', CH: 'Schweiz', GB: 'Großbritannien',
                    FR: 'Frankreich', IT: 'Italien', ES: 'Spanien', NL: 'Niederlande',
                    PT: 'Portugal', PL: 'Polen', DK: 'Dänemark', SE: 'Schweden',
-                   NO: 'Norwegen', FI: 'Finnland', BE: 'Belgien', IE: 'Irland' },
+                   NO: 'Norwegen', FI: 'Finnland', BE: 'Belgien', IE: 'Irland',
+                   CZ: 'Tschechien', GR: 'Griechenland', HU: 'Ungarn', RO: 'Rumänien',
+                   BG: 'Bulgarien', HR: 'Kroatien', SI: 'Slowenien', SK: 'Slowakei',
+                   LT: 'Litauen', LV: 'Lettland', EE: 'Estland', LU: 'Luxemburg',
+                   MT: 'Malta', CY: 'Zypern' },
   },
   en: {
     film: 'Movie', serie: 'Series', miniSerie: 'Mini-series',
@@ -2183,7 +2192,11 @@ var UI_TEXTE = {
     regionNamen: { DE: 'Germany', AT: 'Austria', CH: 'Switzerland', GB: 'United Kingdom',
                    FR: 'France', IT: 'Italy', ES: 'Spain', NL: 'Netherlands',
                    PT: 'Portugal', PL: 'Poland', DK: 'Denmark', SE: 'Sweden',
-                   NO: 'Norway', FI: 'Finland', BE: 'Belgium', IE: 'Ireland' },
+                   NO: 'Norway', FI: 'Finland', BE: 'Belgium', IE: 'Ireland',
+                   CZ: 'Czechia', GR: 'Greece', HU: 'Hungary', RO: 'Romania',
+                   BG: 'Bulgaria', HR: 'Croatia', SI: 'Slovenia', SK: 'Slovakia',
+                   LT: 'Lithuania', LV: 'Latvia', EE: 'Estonia', LU: 'Luxembourg',
+                   MT: 'Malta', CY: 'Cyprus' },
   },
   fr: {
     film: 'Film', serie: 'Série', miniSerie: 'Mini-série',
@@ -2394,7 +2407,11 @@ var UI_TEXTE = {
     regionNamen: { DE: 'Allemagne', AT: 'Autriche', CH: 'Suisse', GB: 'Royaume-Uni',
                    FR: 'France', IT: 'Italie', ES: 'Espagne', NL: 'Pays-Bas',
                    PT: 'Portugal', PL: 'Pologne', DK: 'Danemark', SE: 'Suède',
-                   NO: 'Norvège', FI: 'Finlande', BE: 'Belgique', IE: 'Irlande' },
+                   NO: 'Norvège', FI: 'Finlande', BE: 'Belgique', IE: 'Irlande',
+                   CZ: 'Tchéquie', GR: 'Grèce', HU: 'Hongrie', RO: 'Roumanie',
+                   BG: 'Bulgarie', HR: 'Croatie', SI: 'Slovénie', SK: 'Slovaquie',
+                   LT: 'Lituanie', LV: 'Lettonie', EE: 'Estonie', LU: 'Luxembourg',
+                   MT: 'Malte', CY: 'Chypre' },
   },
   es: {
     film: 'Película', serie: 'Serie', miniSerie: 'Miniserie',
@@ -2605,7 +2622,11 @@ var UI_TEXTE = {
     regionNamen: { DE: 'Alemania', AT: 'Austria', CH: 'Suiza', GB: 'Reino Unido',
                    FR: 'Francia', IT: 'Italia', ES: 'España', NL: 'Países Bajos',
                    PT: 'Portugal', PL: 'Polonia', DK: 'Dinamarca', SE: 'Suecia',
-                   NO: 'Noruega', FI: 'Finlandia', BE: 'Bélgica', IE: 'Irlanda' },
+                   NO: 'Noruega', FI: 'Finlandia', BE: 'Bélgica', IE: 'Irlanda',
+                   CZ: 'Chequia', GR: 'Grecia', HU: 'Hungría', RO: 'Rumanía',
+                   BG: 'Bulgaria', HR: 'Croacia', SI: 'Eslovenia', SK: 'Eslovaquia',
+                   LT: 'Lituania', LV: 'Letonia', EE: 'Estonia', LU: 'Luxemburgo',
+                   MT: 'Malta', CY: 'Chipre' },
   },
   it: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
@@ -2816,7 +2837,11 @@ var UI_TEXTE = {
     regionNamen: { DE: 'Germania', AT: 'Austria', CH: 'Svizzera', GB: 'Regno Unito',
                    FR: 'Francia', IT: 'Italia', ES: 'Spagna', NL: 'Paesi Bassi',
                    PT: 'Portogallo', PL: 'Polonia', DK: 'Danimarca', SE: 'Svezia',
-                   NO: 'Norvegia', FI: 'Finlandia', BE: 'Belgio', IE: 'Irlanda' },
+                   NO: 'Norvegia', FI: 'Finlandia', BE: 'Belgio', IE: 'Irlanda',
+                   CZ: 'Cechia', GR: 'Grecia', HU: 'Ungheria', RO: 'Romania',
+                   BG: 'Bulgaria', HR: 'Croazia', SI: 'Slovenia', SK: 'Slovacchia',
+                   LT: 'Lituania', LV: 'Lettonia', EE: 'Estonia', LU: 'Lussemburgo',
+                   MT: 'Malta', CY: 'Cipro' },
   },
   nl: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
@@ -3027,7 +3052,11 @@ var UI_TEXTE = {
     regionNamen: { DE: 'Duitsland', AT: 'Oostenrijk', CH: 'Zwitserland', GB: 'Verenigd Koninkrijk',
                    FR: 'Frankrijk', IT: 'Italië', ES: 'Spanje', NL: 'Nederland',
                    PT: 'Portugal', PL: 'Polen', DK: 'Denemarken', SE: 'Zweden',
-                   NO: 'Noorwegen', FI: 'Finland', BE: 'België', IE: 'Ierland' },
+                   NO: 'Noorwegen', FI: 'Finland', BE: 'België', IE: 'Ierland',
+                   CZ: 'Tsjechië', GR: 'Griekenland', HU: 'Hongarije', RO: 'Roemenië',
+                   BG: 'Bulgarije', HR: 'Kroatië', SI: 'Slovenië', SK: 'Slowakije',
+                   LT: 'Litouwen', LV: 'Letland', EE: 'Estland', LU: 'Luxemburg',
+                   MT: 'Malta', CY: 'Cyprus' },
   },
 };
 var TXT = UI_TEXTE[SPRACHE] || UI_TEXTE.en;
@@ -3042,10 +3071,58 @@ var GENRE_EN = {
   'Historie': 'History', 'Musik': 'Music', 'Kriegsfilm': 'War',
   'TV-Film': 'TV Movie', 'Kids': 'Children',
 };
+/* Genrenamen fuer fr/es/it/nl: die offiziellen TMDB-Fassungen (Stand August
+   2026), von Hand gepflegt -- anders als GENRE_EN kommen sie NICHT zur
+   Laufzeit vom Server (genre_alias kennt nur de/en). Schluessel ist der
+   deutsche Datenbankwert; was hier fehlt, faellt auf den englischen Namen
+   zurueck (genreAnzeige). Die Namen der aktiven Sprache werden unten bei
+   SEARCH_SYNONYMS registriert, damit Suche und Genre-Klick sie verstehen. */
+var GENRE_NAMEN = {
+  fr: { 'Action': 'Action', 'Abenteuer': 'Aventure', 'Animation': 'Animation',
+        'Komödie': 'Comédie', 'Krimi': 'Crime', 'Dokumentarfilm': 'Documentaire',
+        'Drama': 'Drame', 'Familie': 'Familial', 'Fantasy': 'Fantastique',
+        'Historie': 'Histoire', 'Horror': 'Horreur', 'Musik': 'Musique',
+        'Mystery': 'Mystère', 'Liebesfilm': 'Romance', 'Science Fiction': 'Science-Fiction',
+        'TV-Film': 'Téléfilm', 'Thriller': 'Thriller', 'Kriegsfilm': 'Guerre',
+        'Western': 'Western', 'Kids': 'Enfants', 'Reality': 'Réalité',
+        'Soap': 'Feuilleton', 'News': 'Actualités',
+        'Action & Adventure': 'Action & Aventure', 'Sci-Fi & Fantasy': 'Science-Fiction & Fantastique',
+        'War & Politics': 'Guerre & Politique' },
+  es: { 'Action': 'Acción', 'Abenteuer': 'Aventura', 'Animation': 'Animación',
+        'Komödie': 'Comedia', 'Krimi': 'Crimen', 'Dokumentarfilm': 'Documental',
+        'Drama': 'Drama', 'Familie': 'Familia', 'Fantasy': 'Fantasía',
+        'Historie': 'Historia', 'Horror': 'Terror', 'Musik': 'Música',
+        'Mystery': 'Misterio', 'Liebesfilm': 'Romance', 'Science Fiction': 'Ciencia ficción',
+        'TV-Film': 'Película de TV', 'Thriller': 'Suspense', 'Kriegsfilm': 'Bélica',
+        'Western': 'Western', 'Kids': 'Infantil', 'Reality': 'Telerrealidad',
+        'Soap': 'Telenovela', 'News': 'Noticias',
+        'Action & Adventure': 'Acción & Aventura', 'Sci-Fi & Fantasy': 'Ciencia ficción & Fantasía',
+        'War & Politics': 'Guerra & Política' },
+  it: { 'Action': 'Azione', 'Abenteuer': 'Avventura', 'Animation': 'Animazione',
+        'Komödie': 'Commedia', 'Krimi': 'Crime', 'Dokumentarfilm': 'Documentario',
+        'Drama': 'Dramma', 'Familie': 'Famiglia', 'Fantasy': 'Fantasy',
+        'Historie': 'Storia', 'Horror': 'Horror', 'Musik': 'Musica',
+        'Mystery': 'Mistero', 'Liebesfilm': 'Romance', 'Science Fiction': 'Fantascienza',
+        'TV-Film': 'Film TV', 'Thriller': 'Thriller', 'Kriegsfilm': 'Guerra',
+        'Western': 'Western', 'Kids': 'Ragazzi', 'Reality': 'Reality',
+        'Soap': 'Soap', 'News': 'News',
+        'Action & Adventure': 'Azione & Avventura', 'Sci-Fi & Fantasy': 'Fantascienza & Fantasy',
+        'War & Politics': 'Guerra & Politica' },
+  nl: { 'Action': 'Actie', 'Abenteuer': 'Avontuur', 'Animation': 'Animatie',
+        'Komödie': 'Komedie', 'Krimi': 'Misdaad', 'Dokumentarfilm': 'Documentaire',
+        'Drama': 'Drama', 'Familie': 'Familie', 'Fantasy': 'Fantasy',
+        'Historie': 'Geschiedenis', 'Horror': 'Horror', 'Musik': 'Muziek',
+        'Mystery': 'Mysterie', 'Liebesfilm': 'Romantiek', 'Science Fiction': 'Sciencefiction',
+        'TV-Film': 'TV-film', 'Thriller': 'Thriller', 'Kriegsfilm': 'Oorlog',
+        'Western': 'Western', 'Kids': 'Kinderen', 'Reality': 'Reality',
+        'Soap': 'Soap', 'News': 'Nieuws',
+        'Action & Adventure': 'Actie & Avontuur', 'Sci-Fi & Fantasy': 'Sciencefiction & Fantasy',
+        'War & Politics': 'Oorlog & Politiek' },
+};
 function genreAnzeige(g){
-  // Nicht-deutsche Oberflaechen zeigen die englischen Genre-Namen -- eigene
-  // Genre-Uebersetzungen je Sprache gibt es (noch) nicht.
   if (SPRACHE === 'de' || !g) return g;
+  var namen = GENRE_NAMEN[SPRACHE];
+  if (namen && namen[g]) return namen[g];
   return GENRE_EN[g] || g;
 }
 
@@ -3112,6 +3189,53 @@ var FSK_SYSTEME = {
   IE: { werte: ['G', 'GA', 'PG', '12', '12A', '12PG', '15', '15A', '15PG', '16', '18', 'MA'],
         zahlen: { 'G': 0, 'GA': 0, 'PG': 8, '12A': 12, '12PG': 12,
                   '15A': 15, '15PG': 15, 'MA': 18 } },
+  // U = bez omezeni (ohne Beschraenkung).
+  CZ: { werte: ['U', '0', '12', '15', '18'],
+        zahlen: { 'U': 0 } },
+  // K = katallilo (fuer alle geeignet).
+  GR: { werte: ['K', '8', '12', '13', '16', '17', '18'],
+        zahlen: { 'K': 0 } },
+  // KN = korhatar nelkuel (ohne Altersgrenze).
+  HU: { werte: ['KN', '0', '6', '12', '16', '18'],
+        zahlen: { 'KN': 0 } },
+  // A.G. = audienta generala; AP-12 = mit Eltern ab 12; N-15/IM-18 =
+  // verboten unter 15/18. Beide Schreibweisen (mit/ohne Trennzeichen).
+  RO: { werte: ['A.G.', 'AG', 'AP-12', 'AP12', 'N-15', 'N15', 'IM-18', 'IM18', '12', '15', '18'],
+        zahlen: { 'A.G.': 0, 'AG': 0, 'AP-12': 12, 'AP12': 12,
+                  'N-15': 15, 'N15': 15, 'IM-18': 18, 'IM18': 18 } },
+  // A/B = fuer Kinder empfohlen/ohne Beschraenkung, C = unter 12 nur mit
+  // Eltern, D = unter 16 verboten, X = unter 18 verboten (hier ist X eine
+  // regulaere Stufe, anders als das spanische X).
+  BG: { werte: ['A', 'B', 'C', 'D', 'X', '12', '14', '16', '18'],
+        zahlen: { 'A': 0, 'B': 0, 'C': 12, 'D': 16, 'X': 18 } },
+  // Kroatien/Slowenien fuehren keine verbindliche Kino-Freigabe; TMDB traegt
+  // numerische Werte.
+  HR: { werte: ['0', '6', '12', '15', '16', '18'] },
+  SI: { werte: ['0', '6', '12', '15', '18'] },
+  // U = bez obmedzenia (ohne Beschraenkung).
+  SK: { werte: ['U', '7', '12', '15', '18'],
+        zahlen: { 'U': 0 } },
+  // V = visiems (fuer alle); N-x = nuo x metu (ab x Jahren).
+  LT: { werte: ['V', 'N-7', 'N7', 'N-13', 'N13', 'N-16', 'N16', 'N-18', 'N18', '7', '13', '16', '18'],
+        zahlen: { 'V': 0, 'N-7': 7, 'N7': 7, 'N-13': 13, 'N13': 13,
+                  'N-16': 16, 'N16': 16, 'N-18': 18, 'N18': 18 } },
+  // U = universals (fuer alle); x+ = ab x Jahren.
+  LV: { werte: ['U', '7+', '12+', '16+', '18+', '7', '12', '16', '18'],
+        zahlen: { 'U': 0, '7+': 7, '12+': 12, '16+': 16, '18+': 18 } },
+  // PERE = Familienfilm, L = lubatud (erlaubt fuer alle); MS-x = nicht
+  // empfohlen unter x, K-x = verboten unter x.
+  EE: { werte: ['PERE', 'L', 'MS-6', 'MS-12', 'K-12', 'K-14', 'K-16', '6', '12', '14', '16', '18'],
+        zahlen: { 'PERE': 0, 'L': 0, 'MS-6': 6, 'MS-12': 12,
+                  'K-12': 12, 'K-14': 14, 'K-16': 16 } },
+  // EA = enfants admis (Kinder zugelassen); daneben das belgische AL.
+  LU: { werte: ['EA', 'AL', '6', '12', '16', '18'],
+        zahlen: { 'EA': 0, 'AL': 0 } },
+  // Malta klassifiziert nach britischem Muster (U/PG/12A).
+  MT: { werte: ['U', 'PG', '12', '12A', '15', '18'],
+        zahlen: { 'U': 0, 'PG': 8, '12A': 12 } },
+  // K = katallilo (fuer alle geeignet), wie Griechenland.
+  CY: { werte: ['K', '12', '15', '18'],
+        zahlen: { 'K': 0 } },
 };
 function fskSystem(){ return FSK_SYSTEME[REGION_WAHL] || FSK_SYSTEME.DE; }
 function freigabenGueltig(){ return fskSystem().werte; }
@@ -4227,21 +4351,35 @@ var WATCH_CATS = [
 // erscheint, entscheiden ohnehin die TMDB-Daten der Region -- die Zuordnung
 // hier muss also nur fuer Laender stimmen, in denen der Anbieter existiert.
 // Laender ohne eigenen Amazon-Shop kaufen beim naechstgelegenen ein:
-// AT/CH ueber amazon.de, PT ueber amazon.es, DK/NO/FI ueber amazon.se.
+// AT/CH und die meisten oestlichen EU-Laender ueber amazon.de, PT ueber
+// amazon.es, DK/NO/FI ueber amazon.se, LU ueber amazon.fr, MT/CY ueber
+// amazon.co.uk (englischsprachig).
 var AMAZON_DOMAIN = ({ DE: 'de', AT: 'de', CH: 'de', GB: 'co.uk',
                        FR: 'fr', IT: 'it', ES: 'es', NL: 'nl',
                        PT: 'es', PL: 'pl', DK: 'se', SE: 'se',
-                       NO: 'se', FI: 'se', BE: 'com.be', IE: 'ie' })[REGION_WAHL] || 'de';
+                       NO: 'se', FI: 'se', BE: 'com.be', IE: 'ie',
+                       CZ: 'de', GR: 'de', HU: 'de', RO: 'de',
+                       BG: 'de', HR: 'de', SI: 'de', SK: 'de',
+                       LT: 'de', LV: 'de', EE: 'de', LU: 'fr',
+                       MT: 'co.uk', CY: 'co.uk' })[REGION_WAHL] || 'de';
 var RAKUTEN_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
                       FR: 'fr', IT: 'it', ES: 'es', NL: 'nl',
                       PT: 'pt', PL: 'pl', DK: 'dk', SE: 'se',
-                      NO: 'no', FI: 'fi', BE: 'be', IE: 'ie' })[REGION_WAHL] || 'de';
+                      NO: 'no', FI: 'fi', BE: 'be', IE: 'ie',
+                      CZ: 'cz', GR: 'gr', HU: 'hu', RO: 'ro',
+                      BG: 'bg', HR: 'hr', SI: 'si', SK: 'sk',
+                      LT: 'lt', LV: 'lv', EE: 'ee', LU: 'lu',
+                      MT: 'mt', CY: 'cy' })[REGION_WAHL] || 'de';
 // JustWatch-Quellenlink (Pflicht-Attribution) ebenfalls je Region -- die
 // Verfuegbarkeitsdaten, die er belegt, sind ja die der gewaehlten Region.
 var JUSTWATCH_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
                         FR: 'fr', IT: 'it', ES: 'es', NL: 'nl',
                         PT: 'pt', PL: 'pl', DK: 'dk', SE: 'se',
-                        NO: 'no', FI: 'fi', BE: 'be', IE: 'ie' })[REGION_WAHL] || 'de';
+                        NO: 'no', FI: 'fi', BE: 'be', IE: 'ie',
+                        CZ: 'cz', GR: 'gr', HU: 'hu', RO: 'ro',
+                        BG: 'bg', HR: 'hr', SI: 'si', SK: 'sk',
+                        LT: 'lt', LV: 'lv', EE: 'ee', LU: 'lu',
+                        MT: 'mt', CY: 'cy' })[REGION_WAHL] || 'de';
 var WATCH_SEARCH_URLS = {
   8:   function(q){ return 'https://www.netflix.com/search?q=' + q; },              // Netflix
   9:   function(q){ return 'https://www.amazon.' + AMAZON_DOMAIN + '/s?i=instant-video&k=' + q; }, // Amazon Prime Video
@@ -6209,6 +6347,16 @@ var GENRE_ALIAS_NOTNAGEL = {
 Object.keys(GENRE_ALIAS_NOTNAGEL).forEach(function(k){
   if (!SEARCH_SYNONYMS[k]) SEARCH_SYNONYMS[k] = GENRE_ALIAS_NOTNAGEL[k];
 });
+// Genrenamen der aktiven Sprache (fr/es/it/nl, siehe GENRE_NAMEN): Wer in
+// der franzoesischen Oberflaeche "Comédie" tippt oder auf den Genre-Chip
+// klickt, soll die deutsch gespeicherten "Komödie"-Titel finden. Nur die
+// aktive Sprache -- die anderen braucht in dieser Sitzung niemand.
+if (GENRE_NAMEN[SPRACHE]) {
+  Object.keys(GENRE_NAMEN[SPRACHE]).forEach(function(de){
+    var fremd = GENRE_NAMEN[SPRACHE][de].toLowerCase();
+    if (fremd !== de.toLowerCase() && !SEARCH_SYNONYMS[fremd]) SEARCH_SYNONYMS[fremd] = de;
+  });
+}
 // Traegt die vom Server gelieferte Genre-Paarung nach (siehe genrePaare() in
 // stream-fetch.mjs). Von Hand gesetzte Eintraege bleiben stehen -- die sind eine
 // bewusste Entscheidung. Nur die Notnagel-Werte oben werden ersetzt, sobald die
@@ -7380,8 +7528,7 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _set
   // werden alphabetisch nach dieser Sprache sortiert.
   var SPRACH_NAMEN = { de: 'Deutsch', en: 'English', fr: 'Français', es: 'Español', it: 'Italiano', nl: 'Nederlands' };
   var SPRACHEN = SPRACHEN_VERFUEGBAR.map(function(k){ return { key: k, label: SPRACH_NAMEN[k] }; });
-  var REGIONEN = ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL',
-                  'PT', 'PL', 'DK', 'SE', 'NO', 'FI', 'BE', 'IE'].map(function(k){
+  var REGIONEN = REGIONEN_VERFUEGBAR.map(function(k){
     return { key: k, label: TXT.regionNamen[k] || k };
   }).sort(function(a, b){ return a.label.localeCompare(b.label, LOCALE); });
   btn.textContent = TXT.sprachMenue;
