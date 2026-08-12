@@ -408,10 +408,15 @@ Abschnitt 5 bleibt bestehen).
 - ~~Weitere UI-Sprachen~~ — **erledigt (12. August 2026):** Französisch,
   Spanisch, Italienisch und Niederländisch als Oberflächensprachen
   (`UI_TEXTE`, `MARKUP_TEXTE`, `INFO_TEXT_*` je Sprache; Sprachmodal mit
-  nativen Sprachnamen, `LOCALE` je Sprache). Inhaltsdaten (Titel/Plots/
-  Schlagwörter) gibt es weiterhin nur deutsch/englisch — fr/es/it/nl
-  bekommen englische Inhalte (`INHALTS_SPRACHE`), eigene Inhaltssprachen
-  wären ein weiterer Weg-A-Ausbau. Rechtstexte bleiben bewusst nur
+  nativen Sprachnamen, `LOCALE` je Sprache). **Inhaltssprachen (zweite
+  Weg-A-Stufe, ebenfalls 12. August 2026):** Titel/Inhaltsangaben liegen
+  jetzt auch in fr/es/it/nl/pt vor — als JSONB `uebersetzungen` an
+  `titles`/`streaming_cache`/`cinema_cache`, gefüllt aus denselben
+  TMDB-Antworten (`append_to_response=translations`, keine zusätzlichen
+  Abrufe) durch die Fetch-Skripte und `backfill-english.mjs`;
+  Rückfallkette je Feld Wunschsprache → Englisch → Deutsch
+  (`sprachFeld` in `backend/lib/i18n.js`). Schlagwörter bleiben de/en.
+  Rechtstexte bleiben bewusst nur
   Deutsch/Englisch; alle Nicht-DE-Sprachen verlinken die englischen
   Entwürfe. Die Übersetzungen sind maschinell erstellt und nicht
   muttersprachlich geprüft; je Sprache liegt eine Review-Datei (alle Texte

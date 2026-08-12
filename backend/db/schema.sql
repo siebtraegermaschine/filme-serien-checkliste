@@ -633,3 +633,13 @@ CREATE TABLE IF NOT EXISTS benachrichtigt (
   gesendet_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (user_id, title_id, art)
 );
+
+-- Inhaltssprachen ueber Englisch hinaus (Weg A, zweite Stufe): Titel und
+-- Inhaltsangabe je Sprache als JSONB {"fr":{"t":"...","ov":"..."},...} --
+-- gefuellt von den Fetch-Skripten (append_to_response=translations liefert
+-- alle Sprachen ohnehin mit) und backfill-english.mjs. Englisch bleibt in
+-- den bestehenden Spalten title_en/overview_en (Rueckfallkette: Wunschsprache
+-- -> Englisch -> Deutsch, siehe lib/i18n.js sprachFeld).
+ALTER TABLE titles          ADD COLUMN IF NOT EXISTS uebersetzungen JSONB NOT NULL DEFAULT '{}';
+ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS uebersetzungen JSONB NOT NULL DEFAULT '{}';
+ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS uebersetzungen JSONB NOT NULL DEFAULT '{}';

@@ -67,6 +67,29 @@ const CERT_REGIONS = (process.env.TMDB_CERT_REGIONS || 'DE,AT,CH,GB,FR,IT,ES,NL,
   .split(',').map((s) => s.trim().toUpperCase()).filter(Boolean);
 
 // Englische Fassung aus den mitgelieferten Uebersetzungen (siehe stream-fetch.mjs).
+// Weitere Inhaltssprachen aus denselben mitgelieferten Uebersetzungen
+// (append_to_response=translations): je Sprache Titel + Inhaltsangabe,
+// bevorzugt die Fassung des Hauptlandes (pt: Brasilien). Was TMDB nicht
+// hat, fehlt einfach im Ergebnis -- leere Fassungen entstehen nicht.
+const INHALTS_SPRACHEN = [['fr', 'FR'], ['es', 'ES'], ['it', 'IT'], ['nl', 'NL'], ['pt', 'BR']];
+function uebersetzungenAus(detail) {
+  const alle = ((detail.translations || {}).translations || []);
+  const aus = {};
+  for (const [sprache, hauptland] of INHALTS_SPRACHEN) {
+    const kandidaten = alle.filter((u) => u.iso_639_1 === sprache && u.data
+      && (u.data.overview || u.data.title || u.data.name));
+    const beste = kandidaten.find((u) => u.iso_3166_1 === hauptland) || kandidaten[0];
+    if (!beste) continue;
+    const t = ((beste.data.title) || '').trim();
+    const ov = (beste.data.overview || '').trim();
+    if (!t && !ov) continue;
+    aus[sprache] = {};
+    if (t) aus[sprache].t = t;
+    if (ov) aus[sprache].ov = ov;
+  }
+  return aus;
+}
+
 function englischAus(detail) {
   const alle = ((detail.translations || {}).translations || [])
     .filter((t) => t.iso_639_1 === 'en' && t.data);
@@ -113,6 +136,7 @@ async function enrich(id) {
     result.fsk = result.certs.DE || null;
     const en = englischAus(d);
     result.tEn = en.titel || ((d.original_language === 'en' && d.original_title) || '');
+    result.uebers = uebersetzungenAus(d);
     result.ovEn = en.ov;
   } catch (e) { /* Titel ohne Credits/Release-Termine: Felder bleiben leer */ }
   enrichCache.set(id, result);
@@ -207,6 +231,7 @@ async function main() {
     item.certification = ex.fsk;
     item.certifications = ex.certs;
     item.titleEn = ex.tEn;
+    item.uebers = ex.uebers || {};
     item.overviewEn = ex.ovEn;
     if (!item.overview) item.overview = ex.ovEn || await overviewFallback(item.tmdbId);
     // Das Kinodatum der Ziel-Region, das tatsaechlich in dieses Zeitfenster

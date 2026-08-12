@@ -7,7 +7,7 @@ const router = createAsyncRouter();
 function rowToCand(row, lang = 'de', region = 'DE') {
   return {
     id: String(row.tmdb_id),
-    t: sprachFeld(lang, row.title, row.title_en),
+    t: sprachFeld(lang, row.title, row.title_en, row.uebersetzungen, 't'),
     y: row.year,
     g: row.genres,
     d: row.director,
@@ -22,7 +22,7 @@ function rowToCand(row, lang = 'de', region = 'DE') {
     // aktiver Altersfilter die Kino-Seite vollstaendig leerte.
     vc: row.vote_count,
     fsk: freigabeFuer(region, row.certifications, row.certification),
-    ov: sprachFeld(lang, row.overview, row.overview_en),
+    ov: sprachFeld(lang, row.overview, row.overview_en, row.uebersetzungen, 'ov'),
     rd: row.release_date ? row.release_date.toISOString().slice(0, 10) : null,
     ord: row.original_release_date ? row.original_release_date.toISOString().slice(0, 10) : null,
   };
@@ -78,8 +78,8 @@ router.post('/ingest', async (req, res) => {
       if (!item || !item.tmdbId || !item.title || !item.category) continue;
       await client.query(
         `INSERT INTO cinema_cache
-           (tmdb_id, region, title, title_en, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, release_date, category, original_release_date, fetched_at)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18, clock_timestamp())
+           (tmdb_id, region, title, title_en, uebersetzungen, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, release_date, category, original_release_date, fetched_at)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19, clock_timestamp())
          ON CONFLICT (tmdb_id, region) DO UPDATE SET
            title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
            director = EXCLUDED.director, cast_names = EXCLUDED.cast_names,
@@ -89,6 +89,7 @@ router.post('/ingest', async (req, res) => {
            certifications = cinema_cache.certifications || EXCLUDED.certifications,
            overview = COALESCE(NULLIF(EXCLUDED.overview, ''), cinema_cache.overview),
            title_en = COALESCE(NULLIF(EXCLUDED.title_en, ''), cinema_cache.title_en),
+           uebersetzungen = cinema_cache.uebersetzungen || EXCLUDED.uebersetzungen,
            overview_en = COALESCE(NULLIF(EXCLUDED.overview_en, ''), cinema_cache.overview_en),
            release_date = EXCLUDED.release_date, category = EXCLUDED.category,
            original_release_date = EXCLUDED.original_release_date,
@@ -98,6 +99,7 @@ router.post('/ingest', async (req, res) => {
           region,
           item.title,
           item.titleEn || null,
+          item.uebers && typeof item.uebers === 'object' ? item.uebers : {},
           item.year || null,
           Array.isArray(item.genres) ? item.genres : [],
           item.director || null,

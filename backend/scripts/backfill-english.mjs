@@ -72,6 +72,29 @@ function englischAus(detail, kind) {
   };
 }
 
+// Weitere Inhaltssprachen aus denselben mitgelieferten Uebersetzungen
+// (append_to_response=translations): je Sprache Titel + Inhaltsangabe,
+// bevorzugt die Fassung des Hauptlandes (pt: Brasilien). Was TMDB nicht
+// hat, fehlt einfach im Ergebnis -- leere Fassungen entstehen nicht.
+const INHALTS_SPRACHEN = [['fr', 'FR'], ['es', 'ES'], ['it', 'IT'], ['nl', 'NL'], ['pt', 'BR']];
+function uebersetzungenAus(detail, kind) {
+  const alle = ((detail.translations || {}).translations || []);
+  const aus = {};
+  for (const [sprache, hauptland] of INHALTS_SPRACHEN) {
+    const kandidaten = alle.filter((u) => u.iso_639_1 === sprache && u.data
+      && (u.data.overview || u.data.title || u.data.name));
+    const beste = kandidaten.find((u) => u.iso_3166_1 === hauptland) || kandidaten[0];
+    if (!beste) continue;
+    const t = ((kind === 'movie' ? beste.data.title : beste.data.name) || '').trim();
+    const ov = (beste.data.overview || '').trim();
+    if (!t && !ov) continue;
+    aus[sprache] = {};
+    if (t) aus[sprache].t = t;
+    if (ov) aus[sprache].ov = ov;
+  }
+  return aus;
+}
+
 function zertifikate(detail, kind) {
   const certs = {};
   for (const region of CERT_REGIONS) {
@@ -109,7 +132,7 @@ async function main() {
         `SELECT t.id, t.type, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id
            FROM titles t
            LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
-          WHERE (t.title_en IS NULL OR t.overview_en IS NULL)
+          WHERE (t.title_en IS NULL OR t.overview_en IS NULL OR t.uebersetzungen = '{}'::jsonb)
           ORDER BY t.id
           ${LIMIT ? `LIMIT ${LIMIT}` : ''}`
       );
@@ -150,13 +173,19 @@ async function main() {
       const tEn = en.titel || ((d.original_language === 'en' && (kind === 'movie' ? d.original_title : d.original_name)) || '');
       // Leerstrings statt NULL fuer "gesucht, nichts gefunden": sonst fragte
       // jeder weitere Lauf dieselben Titel erneut erfolglos an.
+      // Auch die weiteren Inhaltssprachen aus derselben Antwort mitnehmen.
+      // Ein leeres Ergebnis wird als {"_": 1}-freier Leerstand NICHT erneut
+      // angefragt -- dafuer sorgt der '{}'-Vergleich in der WHERE-Klausel
+      // zusammen mit dem Marker unten.
+      const uebers = uebersetzungenAus(d, kind);
       await pool.query(
         `UPDATE titles SET
            title_en    = COALESCE(NULLIF($1, ''), title_en, ''),
            overview_en = COALESCE(NULLIF($2, ''), overview_en, ''),
-           certifications = certifications || $3
+           certifications = certifications || $3,
+           uebersetzungen = uebersetzungen || $5
          WHERE id = $4`,
-        [tEn, en.ov, certs, row.id]
+        [tEn, en.ov, certs, row.id, Object.keys(uebers).length ? uebers : { _keine: 1 }]
       );
       if (tEn || en.ov) geschrieben++; else leer++;
     }

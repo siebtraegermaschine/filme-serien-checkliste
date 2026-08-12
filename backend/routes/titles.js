@@ -29,7 +29,7 @@ export function serializeTitle(row, { withPlot = true, lang = 'de', region = 'DE
     id: row.id,
     tmdbId: row.tmdb_id,
     type: row.type,
-    title: sprachFeld(lang, row.title, row.title_en),
+    title: sprachFeld(lang, row.title, row.title_en, row.uebersetzungen, 't'),
     originalTitle: row.original_title,
     year: row.year,
     genres: row.genres,
@@ -65,7 +65,7 @@ export function serializeTitle(row, { withPlot = true, lang = 'de', region = 'DE
   // Suchvorschlaege auf (buildPool -> alias).
   const andereFassung = lang === 'en' ? row.title : row.title_en;
   if (andereFassung && andereFassung !== out.title) out.titleAlt = andereFassung;
-  if (withPlot) out.plot = sprachFeld(lang, row.plot, row.overview_en);
+  if (withPlot) out.plot = sprachFeld(lang, row.plot, row.overview_en, row.uebersetzungen, 'ov');
   return out;
 }
 
@@ -83,7 +83,7 @@ export function serializeTitle(row, { withPlot = true, lang = 'de', region = 'DE
    App zeichnet es aber bevorzugt (siehe UEBERGABE-OFFEN.md, Abschnitt 2.2). */
 const LISTEN_SPALTEN = `t.id, t.tmdb_id, t.type, t.title, t.title_en, t.original_title, t.year,
   t.genres, t.director, t.cast_names, t.keywords, t.rating, t.vote_count,
-  t.certification, t.certifications, t.poster_path, t.poster_base64, t.source`;
+  t.certification, t.certifications, t.poster_path, t.poster_base64, t.source, t.uebersetzungen`;
 
 export async function ladeListe({ type, source, search, withPlot, lang = 'de', region = 'DE' }) {
   const conditions = [];
@@ -165,11 +165,11 @@ router.post('/plots', GRENZE_PLOTS, async (req, res) => {
     : [];
   if (numericIds.length) {
     const { rows } = await pool.query(
-      `SELECT id, plot, overview_en FROM titles WHERE id = ANY($1)
+      `SELECT id, plot, overview_en, uebersetzungen FROM titles WHERE id = ANY($1)
         AND (plot IS NOT NULL AND plot <> '' OR overview_en IS NOT NULL AND overview_en <> '')`,
       [numericIds]
     );
-    for (const r of rows) out.ids[r.id] = sprachFeld(lang, r.plot || '', r.overview_en);
+    for (const r of rows) out.ids[r.id] = sprachFeld(lang, r.plot || '', r.overview_en, r.uebersetzungen, 'ov');
   }
 
   // [[type, tmdbId], ...] -- zwei Parallel-Arrays, damit die Paare als ein
@@ -182,13 +182,13 @@ router.post('/plots', GRENZE_PLOTS, async (req, res) => {
     const typen = paare.map((p) => p[0]);
     const tmdbIds = paare.map((p) => Number(p[1]));
     const { rows } = await pool.query(
-      `SELECT DISTINCT ON (type, tmdb_id) type, tmdb_id, overview, overview_en
+      `SELECT DISTINCT ON (type, tmdb_id) type, tmdb_id, overview, overview_en, uebersetzungen
          FROM streaming_cache
         WHERE (type, tmdb_id) IN (SELECT * FROM unnest($1::text[], $2::int[]))
           AND (overview IS NOT NULL AND overview <> '' OR overview_en IS NOT NULL AND overview_en <> '')`,
       [typen, tmdbIds]
     );
-    for (const r of rows) out.tmdb[`${r.type}:${r.tmdb_id}`] = sprachFeld(lang, r.overview || '', r.overview_en);
+    for (const r of rows) out.tmdb[`${r.type}:${r.tmdb_id}`] = sprachFeld(lang, r.overview || '', r.overview_en, r.uebersetzungen, 'ov');
   }
 
   res.json(out);
@@ -358,8 +358,8 @@ router.post('/bulk-ingest', async (req, res) => {
     for (const item of items) {
       if (!item || !item.tmdbId || (item.type !== 'movie' && item.type !== 'series') || !item.title) continue;
       const { rowCount } = await client.query(
-        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, certifications, plot, title_en, overview_en, source)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,$11,$12,$13,$14,$15,'discovery')
+        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, certifications, plot, title_en, overview_en, uebersetzungen, source)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,$11,$12,$13,$14,$15,$16,'discovery')
          ON CONFLICT (tmdb_id, type) DO UPDATE SET
            year = EXCLUDED.year,
            genres = EXCLUDED.genres,
@@ -375,6 +375,8 @@ router.post('/bulk-ingest', async (req, res) => {
            plot = COALESCE(NULLIF(EXCLUDED.plot, ''), titles.plot),
            title_en = COALESCE(NULLIF(EXCLUDED.title_en, ''), titles.title_en),
            overview_en = COALESCE(NULLIF(EXCLUDED.overview_en, ''), titles.overview_en),
+           -- Wie certifications: zusammenfuehren, neue Sprachen gewinnen je Schluessel.
+           uebersetzungen = titles.uebersetzungen || EXCLUDED.uebersetzungen,
            updated_at = now()
          WHERE titles.source <> 'catalog'`,
         [
@@ -393,6 +395,7 @@ router.post('/bulk-ingest', async (req, res) => {
           item.plot || null,
           item.titleEn || null,
           item.overviewEn || null,
+          item.uebers && typeof item.uebers === 'object' ? item.uebers : {},
         ]
       );
       inserted += rowCount;

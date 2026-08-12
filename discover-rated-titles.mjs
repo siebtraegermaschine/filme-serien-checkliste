@@ -75,6 +75,29 @@ function zertifikate(detail, kind) {
 }
 
 // Englische Fassung aus den mitgelieferten Uebersetzungen (siehe stream-fetch.mjs).
+// Weitere Inhaltssprachen aus denselben mitgelieferten Uebersetzungen
+// (append_to_response=translations): je Sprache Titel + Inhaltsangabe,
+// bevorzugt die Fassung des Hauptlandes (pt: Brasilien). Was TMDB nicht
+// hat, fehlt einfach im Ergebnis -- leere Fassungen entstehen nicht.
+const INHALTS_SPRACHEN = [['fr', 'FR'], ['es', 'ES'], ['it', 'IT'], ['nl', 'NL'], ['pt', 'BR']];
+function uebersetzungenAus(detail, kind) {
+  const alle = ((detail.translations || {}).translations || []);
+  const aus = {};
+  for (const [sprache, hauptland] of INHALTS_SPRACHEN) {
+    const kandidaten = alle.filter((u) => u.iso_639_1 === sprache && u.data
+      && (u.data.overview || u.data.title || u.data.name));
+    const beste = kandidaten.find((u) => u.iso_3166_1 === hauptland) || kandidaten[0];
+    if (!beste) continue;
+    const t = ((kind === 'movie' ? beste.data.title : beste.data.name) || '').trim();
+    const ov = (beste.data.overview || '').trim();
+    if (!t && !ov) continue;
+    aus[sprache] = {};
+    if (t) aus[sprache].t = t;
+    if (ov) aus[sprache].ov = ov;
+  }
+  return aus;
+}
+
 function englischAus(detail, kind) {
   const alle = ((detail.translations || {}).translations || [])
     .filter((t) => t.iso_639_1 === 'en' && t.data);
@@ -110,6 +133,7 @@ async function enrich(kind, id) {
     const en = englischAus(d, kind);
     result.tEn = en.titel || ((d.original_language === 'en' && (kind === 'movie' ? d.original_title : d.original_name)) || '');
     result.ovEn = en.ov;
+    result.uebers = uebersetzungenAus(d, kind);
   } catch (e) { /* Titel ohne Credits: Felder bleiben leer */ }
   enrichCache.set(ck, result);
   return result;
@@ -222,6 +246,7 @@ async function main() {
     item.certifications = ex.certs;
     item.titleEn = ex.tEn;
     item.overviewEn = ex.ovEn;
+    item.uebers = ex.uebers || {};
     item.plot = (item.overviewRaw || '').trim() || ex.ovEn || await overviewWithFallback(kind, item.tmdbId, item.overviewRaw);
     delete item.overviewRaw;
     done++;

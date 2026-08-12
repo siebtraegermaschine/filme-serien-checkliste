@@ -16,7 +16,7 @@ const PROVIDER_NAMES = {
 function rowToCand(row, lang = 'de', region = 'DE') {
   return {
     id: String(row.tmdb_id),
-    t: sprachFeld(lang, row.title, row.title_en),
+    t: sprachFeld(lang, row.title, row.title_en, row.uebersetzungen, 't'),
     y: row.year,
     g: row.genres,
     d: row.director,
@@ -122,8 +122,8 @@ router.post('/ingest', async (req, res) => {
         for (const item of items || []) {
           await client.query(
             `INSERT INTO streaming_cache
-               (provider_id, provider_name, type, tmdb_id, region, title, title_en, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, fetched_at)
-             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18, clock_timestamp())
+               (provider_id, provider_name, type, tmdb_id, region, title, title_en, uebersetzungen, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, fetched_at)
+             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19, clock_timestamp())
              ON CONFLICT (provider_id, type, tmdb_id, region) DO UPDATE SET
                title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
                director = EXCLUDED.director, cast_names = EXCLUDED.cast_names,
@@ -136,6 +136,7 @@ router.post('/ingest', async (req, res) => {
                -- nachgetragene) Beschreibung nicht durch einen Leerstring geloescht werden.
                overview = COALESCE(NULLIF(EXCLUDED.overview, ''), streaming_cache.overview),
                title_en = COALESCE(NULLIF(EXCLUDED.title_en, ''), streaming_cache.title_en),
+               uebersetzungen = streaming_cache.uebersetzungen || EXCLUDED.uebersetzungen,
                overview_en = COALESCE(NULLIF(EXCLUDED.overview_en, ''), streaming_cache.overview_en),
                fetched_at = clock_timestamp()`,
             [
@@ -146,6 +147,7 @@ router.post('/ingest', async (req, res) => {
               region,
               item.t,
               item.tEn || null,
+              item.uebers && typeof item.uebers === 'object' ? item.uebers : {},
               item.y || null,
               Array.isArray(item.g) ? item.g : [],
               item.d || null,

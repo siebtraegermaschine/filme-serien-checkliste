@@ -27,8 +27,14 @@ export const REGIONEN = [
   'LI', 'CA', 'AU', 'NZ', 'MX', 'AR', 'CL', 'CO',
 ];
 
+// Sprachen, in denen Inhaltsdaten (Titel/Inhaltsangaben) vorliegen koennen:
+// Deutsch in den Stammspalten, Englisch in title_en/overview_en, der Rest im
+// JSONB `uebersetzungen`. Muss zu INHALTS_SPRACHEN in den Fetch-Skripten
+// passen (pt liegt schon in den Daten, die Oberflaeche folgt).
+export const INHALTS_SPRACHEN = ['de', 'en', 'fr', 'es', 'it', 'nl', 'pt'];
+
 export function sprachWahl(wert) {
-  return wert === 'en' ? 'en' : 'de';
+  return INHALTS_SPRACHEN.includes(wert) ? wert : 'de';
 }
 
 export function regionWahl(wert) {
@@ -36,9 +42,16 @@ export function regionWahl(wert) {
   return REGIONEN.includes(r) ? r : 'DE';
 }
 
-// Titel/Text in der gewuenschten Sprache, mit deutschem Rueckfall.
-export function sprachFeld(sprache, deWert, enWert) {
-  return sprache === 'en' && enWert ? enWert : deWert;
+// Titel/Text in der gewuenschten Sprache. Rueckfallkette fuer alle
+// Nicht-de-Sprachen: Wunschsprache (aus dem JSONB `uebersetzungen`,
+// feld 't' oder 'ov') -> Englisch -> Deutsch. Die beiden letzten Parameter
+// sind optional -- Aufrufer ohne JSONB-Spalte verhalten sich wie bisher
+// (Englisch oder Deutsch).
+export function sprachFeld(sprache, deWert, enWert, uebersetzungen, feld) {
+  if (sprache === 'de') return deWert;
+  const u = uebersetzungen && uebersetzungen[sprache];
+  if (sprache !== 'en' && u && feld && u[feld]) return u[feld];
+  return enWert || deWert;
 }
 
 // Altersfreigabe fuer die Region aus der JSONB-Spalte `certifications`;

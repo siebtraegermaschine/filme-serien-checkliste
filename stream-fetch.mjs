@@ -85,6 +85,29 @@ function zertifikate(detail, kind) {
 // Englischen Titel und englische Inhaltsangabe aus den mitgelieferten
 // Uebersetzungen ziehen (append_to_response=translations). Bevorzugt en-US,
 // sonst die erste englische Fassung mit Text.
+// Weitere Inhaltssprachen aus denselben mitgelieferten Uebersetzungen
+// (append_to_response=translations): je Sprache Titel + Inhaltsangabe,
+// bevorzugt die Fassung des Hauptlandes (pt: Brasilien). Was TMDB nicht
+// hat, fehlt einfach im Ergebnis -- leere Fassungen entstehen nicht.
+const INHALTS_SPRACHEN = [['fr', 'FR'], ['es', 'ES'], ['it', 'IT'], ['nl', 'NL'], ['pt', 'BR']];
+function uebersetzungenAus(detail, kind) {
+  const alle = ((detail.translations || {}).translations || []);
+  const aus = {};
+  for (const [sprache, hauptland] of INHALTS_SPRACHEN) {
+    const kandidaten = alle.filter((u) => u.iso_639_1 === sprache && u.data
+      && (u.data.overview || u.data.title || u.data.name));
+    const beste = kandidaten.find((u) => u.iso_3166_1 === hauptland) || kandidaten[0];
+    if (!beste) continue;
+    const t = ((kind === 'movie' ? beste.data.title : beste.data.name) || '').trim();
+    const ov = (beste.data.overview || '').trim();
+    if (!t && !ov) continue;
+    aus[sprache] = {};
+    if (t) aus[sprache].t = t;
+    if (ov) aus[sprache].ov = ov;
+  }
+  return aus;
+}
+
 function englischAus(detail, kind) {
   const alle = ((detail.translations || {}).translations || [])
     .filter((t) => t.iso_639_1 === 'en' && t.data);
@@ -138,6 +161,7 @@ async function enrich(kind, id) {
     // englische Fassung -- die Uebersetzungstabelle laesst title dort oft leer.
     result.tEn = en.titel || ((d.original_language === 'en' && (kind === 'movie' ? d.original_title : d.original_name)) || '');
     result.ovEn = en.ov;
+    result.uebers = uebersetzungenAus(d, kind);
   } catch (e) { /* Titel ohne Credits: Felder bleiben leer */ }
   enrichCache.set(ck, result);
   return result;
@@ -253,6 +277,7 @@ async function discover(kind, providerId, gmap) {
     item.certs = ex.certs;
     item.tEn = ex.tEn;
     item.ovEn = ex.ovEn;
+    item.uebers = ex.uebers || {};
     if (!item.ov) {
       // Der englische Text steckt meist schon in den Uebersetzungen von
       // enrich() -- nur wenn auch der fehlt, lohnt der Extra-Abruf.

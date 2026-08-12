@@ -31,7 +31,7 @@ const TMDB_KIND = { movie: 'movie', series: 'tv' };
 // damit auch keine grosse Vorschaukarte in WhatsApp.
 const FELDER = `t.id, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, t.type, t.title, t.title_en, t.year,
                 t.genres, t.rating, t.vote_count, t.poster_path, t.backdrop_path,
-                t.plot, t.overview_en, t.certification, t.certifications`;
+                t.plot, t.overview_en, t.certification, t.certifications, t.uebersetzungen`;
 const VON = `FROM titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id`;
 
 async function ladeTitel(art, kennung) {
@@ -50,7 +50,7 @@ async function ladeTitel(art, kennung) {
   if (type !== 'movie') return null;
   const { rows: kino } = await pool.query(
     `SELECT NULL::bigint AS id, tmdb_id, 'movie' AS type, title, title_en, year, genres, rating, vote_count,
-            poster_path, backdrop_path, overview AS plot, overview_en, certification, certifications, 'cinema_cache' AS quelle
+            poster_path, backdrop_path, overview AS plot, overview_en, certification, certifications, uebersetzungen, 'cinema_cache' AS quelle
        FROM cinema_cache WHERE tmdb_id = $1 LIMIT 1`,
     [kennung]
   );
@@ -107,14 +107,14 @@ router.get('/title/:art/:kennung', GRENZE_TITEL, async (req, res) => {
     id: titel.id != null ? String(titel.id) : null,
     tmdbId: titel.tmdb_id,
     type: titel.type,
-    title: sprachFeld(lang, titel.title, titel.title_en),
+    title: sprachFeld(lang, titel.title, titel.title_en, titel.uebersetzungen, 't'),
     year: titel.year,
     genres: titel.genres || [],
     rating: titel.rating != null ? Number(titel.rating) : null,
     voteCount: titel.vote_count,
     posterPath: titel.poster_path,
     backdropPath: backdrop,
-    plot: sprachFeld(lang, titel.plot, titel.overview_en),
+    plot: sprachFeld(lang, titel.plot, titel.overview_en, titel.uebersetzungen, 'ov'),
     certification: freigabeFuer(region, titel.certifications, titel.certification),
   });
 });

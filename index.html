@@ -1762,10 +1762,11 @@ var LOCALE = ({ de: 'de-DE', en: 'en-GB', fr: 'fr-FR', es: 'es-ES', it: 'it-IT',
 // (Monat vor Tag) statt der britischen.
 if (SPRACHE === 'en' && REGION_WAHL === 'US') LOCALE = 'en-US';
 document.documentElement.lang = SPRACHE;
-// Inhaltsdaten (Titel/Plots/Schlagwoerter) gibt es nur deutsch und englisch --
-// fr/es/it/nl bekommen die englischen Inhalte zur uebersetzten Oberflaeche
-// (bewusster Zwischenschritt, siehe PLAN-INTERNATIONALISIERUNG.md).
-var INHALTS_SPRACHE = SPRACHE === 'de' ? 'de' : 'en';
+// Inhaltsdaten (Titel/Plots) gibt es inzwischen in allen Oberflaechen-
+// sprachen (JSONB `uebersetzungen`, siehe PLAN-INTERNATIONALISIERUNG.md);
+// wo eine Fassung fehlt, faellt der Server auf Englisch und dann Deutsch
+// zurueck. Schlagwoerter bleiben de/en.
+var INHALTS_SPRACHE = SPRACHE;
 // Haengt Sprache und Region an einen API-Pfad an -- '?' oder '&' je nachdem,
 // ob der Pfad schon Parameter traegt.
 function mitSpracheRegion(pfad){
