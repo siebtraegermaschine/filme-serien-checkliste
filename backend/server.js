@@ -53,10 +53,16 @@ if (process.env.CORS_ORIGIN) {
 // zehntausende Titel inkl. Cast/Kurzbeschreibung in einem Request (geschaetzt
 // 10-20 MB). Alle anderen (oeffentlich erreichbaren) Routen bleiben bewusst
 // beim kleinen 1mb-Default als Schutz vor ueberdimensionierten Requests.
-app.use('/api/titles/bulk-ingest', express.json({ limit: '10mb' }));
-app.use('/api/streaming/ingest', express.json({ limit: '30mb' }));
+// Seit dem Sprachausbau (uebersetzungen-JSONB, 12. August 2026) tragen die
+// Ingest-Payloads Titel und Inhaltsangaben in bis zu sieben Sprachen --
+// die Limits sind entsprechend gewachsen. cinema/ingest fiel vorher aufs
+// 1mb-Default und brach mit PayloadTooLargeError ab.
+app.use('/api/titles/bulk-ingest', express.json({ limit: '30mb' }));
+app.use('/api/streaming/ingest', express.json({ limit: '60mb' }));
+app.use('/api/cinema/ingest', express.json({ limit: '20mb' }));
 app.use((req, res, next) => {
-  if (req.path === '/api/titles/bulk-ingest' || req.path === '/api/streaming/ingest') return next(); // oben schon geparst
+  if (req.path === '/api/titles/bulk-ingest' || req.path === '/api/streaming/ingest'
+      || req.path === '/api/cinema/ingest') return next(); // oben schon geparst
   express.json({ limit: '1mb' })(req, res, next);
 });
 
