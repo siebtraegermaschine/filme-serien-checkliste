@@ -882,6 +882,10 @@
      statt ihn zu erdruecken. */
   .profile-item { flex-wrap: wrap; }
   .profile-item .pi-aktionen { display:flex; gap:4px; margin-left:auto; }
+  /* Eigene Reihe unter den Knoepfen fuer Herz und ✕ -- rechtsbuendig,
+     bewusst kleiner als die Hauptaktionen. */
+  .profile-item .pi-neben { flex-basis:100%; display:flex; gap:10px;
+    justify-content:flex-end; align-items:center; margin-top:2px; }
   .profile-item .pi-btn { background:var(--card); border:1px solid var(--border); border-radius:7px;
     padding:6px 9px; color:var(--text-dim); font-size:11.5px; cursor:pointer; white-space:nowrap;
     transition:all .15s; }
@@ -1570,8 +1574,10 @@
          darueber nichts zu tun; nebeneinander sahen die beiden Knoepfe aus wie
          zwei Spielarten derselben Sache. -->
     <button type="button" id="profileShareBtn" class="profile-add">＋ Personen einladen</button>
-    <!-- Beschriftung kommt aus TXT (movieNightEinrichten), nur angemeldet nutzbar. -->
-    <button type="button" id="movieNightBtn" class="profile-add">🍿 Movie Night</button>
+    <!-- Ausgeblendet auf Wunsch (12. August 2026): Funktion bleibt komplett
+         verdrahtet (movieNightEinrichten, backend/routes/movieNight.js) --
+         zum Reaktivieren nur das style-Attribut entfernen. -->
+    <button type="button" id="movieNightBtn" class="profile-add" style="display:none">🍿 Movie Night</button>
     <hr class="account-sep">
     <p class="prov-intro" style="margin-bottom:8px">Schaust du mit Kindern? Nutze die FSK-Filter.</p>
     <div class="fsk-row" id="fskRow"></div>
@@ -8992,10 +8998,15 @@ function renderProfileList(){
                '<button type="button" class="pi-btn' + (inAnsicht ? ' on' : '') + '" data-tun="w">' + TXT.watchliste + '</button>' +
                '<button type="button" class="pi-btn' + (aktiv ? ' on' : '') + '" data-tun="m">' + TXT.matchWort + '</button>' +
              '</div>' +
-             '<button type="button" class="pi-del" aria-label="' + TXT.verknuepfungLoesen + '">✕</button>' +
+             // Nebensaechliches unter die Knoepfe statt neben den Namen:
+             // Favorit (kosmetisch) und Verknuepfung loesen (selten) druecken
+             // sonst die Hauptaktionen zusammen.
+             '<div class="pi-neben">' +
              '<button type="button" class="pi-fav' + (favorit ? ' on' : '') + '" aria-pressed="' +
                (favorit ? 'true' : 'false') + '" aria-label="' + TXT.favoritOben + '">' +
                HERZ_SVG + '</button>' +
+             '<button type="button" class="pi-del" aria-label="' + TXT.verknuepfungLoesen + '">✕</button>' +
+             '</div>' +
            '</div>';
   }).join('');
   // Ausgeloggt steht hier, warum die Liste leer ist und der Knopf darunter
