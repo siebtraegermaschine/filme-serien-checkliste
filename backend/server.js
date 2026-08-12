@@ -89,6 +89,7 @@ app.use('/api/trailers', trailersRouter);
 app.use('/api/links', linksRouter);
 app.use('/api/kinos', kinosRouter);
 app.use('/api/share', shareRouter);
+app.use('/api/movie-night', movieNightRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
 const frontendRoot = path.join(__dirname, '..');
