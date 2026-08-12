@@ -8257,30 +8257,30 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
     if (document.activeElement && inhalt.contains(document.activeElement)
         && document.activeElement.id === 'nachtName') return;
     var scrollVorher = bk.querySelector('.modal').scrollTop;
-    var maxJa = Math.max.apply(null, [0].concat(daten.titel.map(function(t){ return t.ja; })));
     var html = '<p class="prov-intro">' + esc(TXT.nachtErklaerung) + '</p>' +
       '<button type="button" id="nachtTeilen" class="auth-submit" style="width:100%;margin-bottom:10px">' + esc(TXT.nachtTeilen) + '</button>' +
       '<input type="text" id="nachtName" class="lang-select" style="margin-bottom:10px" maxlength="40" placeholder="' + escAttr(TXT.nachtName) + '">' +
       daten.titel.map(function(t){
         var wahl = stimmen[t.id];
+        // Hinter dem Titel steht die Sterne-Bewertung (wie in den Listen) --
+        // die Stimmenzahl erscheint bewusst NUR unten in der Top-3-Auswertung.
+        var sterne = t.r != null ? ' <span style="color:var(--text-dim);font-size:12px">⭐ ' + esc(sterneText(t.r)) + '</span>' : '';
         var zeile = '<div class="nacht-zeile">' +
           (t.p ? '<img src="' + escAttr(POSTER + t.p) + '" alt="">' : '<span style="width:32px;flex:none"></span>') +
-          '<span class="nacht-titel" data-details="' + escAttr(t.id) + '" role="button" tabindex="0">' + esc(t.t) + (t.y ? ' (' + t.y + ')' : '') +
-            (t.ja ? ' <b' + (t.ja === maxJa && maxJa > 0 ? ' style="color:var(--accent)"' : '') + '>+' + t.ja + '</b>' : '') + '</span>' +
+          '<span class="nacht-titel" data-details="' + escAttr(t.id) + '" role="button" tabindex="0">' + esc(t.t) + (t.y ? ' (' + t.y + ')' : '') + sterne + '</span>' +
           '<span class="nacht-wahl">' +
+          // EIN Ja-Knopf statt Ja/Nein: Abstimmen ist keine Pflicht je Titel --
+          // was einem nichts sagt, laesst man einfach aus. Erneutes Tippen
+          // nimmt die Stimme zurueck.
           '<button type="button" data-ja="' + escAttr(t.id) + '"' + (wahl === true ? ' class="active"' : '') + '>' + esc(TXT.nachtJa) + '</button>' +
-          '<button type="button" data-nein="' + escAttr(t.id) + '"' + (wahl === false ? ' class="active"' : '') + '>' + esc(TXT.nachtNein) + '</button>' +
           '</span></div>';
-        // Aufgeklappte Details unter der Zeile: Genres und Bewertung aus dem
-        // POOL (der Katalog laedt fuer jeden Besucher), Kurztext nachgeladen,
-        // Trailer ueber den normalen Trailer-Dialog.
+        // Aufgeklappte Details unter der Zeile: dieselbe Zeile wie in der
+        // Gesamtansicht (poolToMeta: Sterne+Stimmen, Genre, Jahr), Kurztext
+        // nachgeladen, Trailer ueber den normalen Trailer-Dialog.
         if (detailsOffen[t.id]) {
           var item = poolItem(t.id);
-          var meta = [];
-          if (item && item.g && item.g.length) meta.push(item.g.slice(0, 2).map(genreAnzeige).join(', '));
-          if (item && item.r != null) meta.push('⭐ ' + sterneText(item.r));
           zeile += '<div class="nacht-details">' +
-            (meta.length ? '<div>' + esc(meta.join(' · ')) + '</div>' : '') +
+            (item ? '<div>' + esc(poolToMeta(item)) + '</div>' : '') +
             '<p>' + esc(plotCache[t.id] != null ? plotCache[t.id] : TXT.laedt) + '</p>' +
             (item ? '<button type="button" data-nacht-trailer="' + escAttr(t.id) + '">' + esc(TXT.trailer) + '</button>' : '') +
             '</div>';
@@ -8360,15 +8360,9 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
     inhalt.querySelectorAll('[data-ja]').forEach(function(b){
       b.onclick = function(){
         var id = b.dataset.ja;
-        stimmen[id] = true; zeichneAusCache();
-        var teil = {}; teil[id] = true; stimmeSenden(teil);
-      };
-    });
-    inhalt.querySelectorAll('[data-nein]').forEach(function(b){
-      b.onclick = function(){
-        var id = b.dataset.nein;
-        stimmen[id] = false; zeichneAusCache();
-        var teil = {}; teil[id] = false; stimmeSenden(teil);
+        var neu = stimmen[id] !== true;   // erneutes Tippen nimmt die Stimme zurueck
+        stimmen[id] = neu; zeichneAusCache();
+        var teil = {}; teil[id] = neu; stimmeSenden(teil);
       };
     });
     var nameFeld = inhalt.querySelector('#nachtName');
