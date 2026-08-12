@@ -20,6 +20,7 @@ import trailersRouter from './routes/trailers.js';
 import linksRouter from './routes/links.js';
 import kinosRouter from './routes/kinos.js';
 import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
+import movieNightRouter from './routes/movieNight.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';

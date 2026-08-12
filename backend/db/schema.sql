@@ -643,3 +643,24 @@ CREATE TABLE IF NOT EXISTS benachrichtigt (
 ALTER TABLE titles          ADD COLUMN IF NOT EXISTS uebersetzungen JSONB NOT NULL DEFAULT '{}';
 ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS uebersetzungen JSONB NOT NULL DEFAULT '{}';
 ALTER TABLE cinema_cache    ADD COLUMN IF NOT EXISTS uebersetzungen JSONB NOT NULL DEFAULT '{}';
+
+-- Movie Night: Abstimmungsrunden (siehe routes/movieNight.js). Eine Person
+-- startet eine Runde aus ihrer aktuellen Liste (bis 30 Kandidaten), teilt
+-- den Link, alle stimmen je Titel mit Ja/Nein ab. Runden verfallen nach
+-- 48 Stunden (Aufraeumen im Route-Modul beim Anlegen neuer Runden).
+CREATE TABLE IF NOT EXISTS movie_night_runden (
+  id          BIGSERIAL PRIMARY KEY,
+  token       TEXT UNIQUE NOT NULL,
+  ersteller_user_id BIGINT REFERENCES users(id) ON DELETE CASCADE,
+  titel_ids   BIGINT[] NOT NULL,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS movie_night_stimmen (
+  runde_id   BIGINT NOT NULL REFERENCES movie_night_runden(id) ON DELETE CASCADE,
+  teilnehmer TEXT NOT NULL,
+  name       TEXT NOT NULL DEFAULT '',
+  title_id   BIGINT NOT NULL,
+  stimme     BOOLEAN NOT NULL,
+  abgegeben_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (runde_id, teilnehmer, title_id)
+);

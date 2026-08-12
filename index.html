@@ -1534,6 +1534,8 @@
          darueber nichts zu tun; nebeneinander sahen die beiden Knoepfe aus wie
          zwei Spielarten derselben Sache. -->
     <button type="button" id="profileShareBtn" class="profile-add">＋ Watchlist teilen</button>
+    <!-- Beschriftung kommt aus TXT (movieNightEinrichten), nur angemeldet nutzbar. -->
+    <button type="button" id="movieNightBtn" class="profile-add">🍿 Movie Night</button>
     <hr class="account-sep">
     <p class="prov-intro" style="margin-bottom:8px">Schaust du mit Kindern? Nutze die FSK-Filter.</p>
     <div class="fsk-row" id="fskRow"></div>
@@ -2008,6 +2010,15 @@ var UI_TEXTE = {
     importLaeuft: function(n, gesamt){ return n + ' von ' + gesamt + ' übernommen …'; },
     importFertig: function(n){ return n + ' Titel übernommen. Die Seite lädt gleich neu.'; },
     importFehler: function(name){ return '„' + name + '“ hat kein bekanntes Format (Letterboxd-/IMDb-CSV oder Trakt-JSON).'; },
+    nachtTitel: 'Movie Night',
+    nachtErklaerung: 'Stimmt ab: Ja oder Nein je Titel — vorn liegt, was die meisten sehen wollen.',
+    nachtName: 'Dein Name',
+    nachtJa: 'Ja', nachtNein: 'Nein',
+    nachtAbstimmen: 'Abstimmen',
+    nachtStand: function(n){ return n === 1 ? 'Bisher hat 1 Person abgestimmt' : 'Bisher haben ' + n + ' Personen abgestimmt'; },
+    nachtShareText: 'Movie Night! Stimm ab, was wir schauen:',
+    nachtFehler: 'Das hat nicht geklappt. Bitte noch einmal versuchen.',
+    nachtWeg: 'Diese Runde gibt es nicht mehr — Runden verfallen nach 48 Stunden.',
     matchAria: 'Was ist ein Match?',
     posterGroesser: 'Poster größer anzeigen',
     sprachName: 'Deutsch',
@@ -2236,6 +2247,15 @@ var UI_TEXTE = {
     importLaeuft: function(n, gesamt){ return n + ' of ' + gesamt + ' applied …'; },
     importFertig: function(n){ return n + ' titles applied. The page will reload.'; },
     importFehler: function(name){ return '“' + name + '” is not a known format (Letterboxd/IMDb CSV or Trakt JSON).'; },
+    nachtTitel: 'Movie Night',
+    nachtErklaerung: 'Vote yes or no per title — whatever most people want to watch moves to the front.',
+    nachtName: 'Your name',
+    nachtJa: 'Yes', nachtNein: 'No',
+    nachtAbstimmen: 'Vote',
+    nachtStand: function(n){ return n === 1 ? '1 person has voted so far' : n + ' people have voted so far'; },
+    nachtShareText: 'Movie night! Vote on what we watch:',
+    nachtFehler: 'That did not work. Please try again.',
+    nachtWeg: 'This round no longer exists — rounds expire after 48 hours.',
     matchAria: 'What is a match?',
     posterGroesser: 'Show larger poster',
     sprachName: 'English',
@@ -2464,6 +2484,15 @@ var UI_TEXTE = {
     importLaeuft: function(n, gesamt){ return n + ' sur ' + gesamt + ' appliqués …'; },
     importFertig: function(n){ return n + ' titres appliqués. La page va se recharger.'; },
     importFehler: function(name){ return '«\u202f' + name + '\u202f» n’a pas un format connu (CSV Letterboxd/IMDb ou JSON Trakt).'; },
+    nachtTitel: 'Movie Night',
+    nachtErklaerung: 'Votez oui ou non pour chaque titre — ce que la plupart veulent voir passe devant.',
+    nachtName: 'Ton nom',
+    nachtJa: 'Oui', nachtNein: 'Non',
+    nachtAbstimmen: 'Voter',
+    nachtStand: function(n){ return n === 1 ? '1 personne a voté pour l’instant' : n + ' personnes ont voté pour l’instant'; },
+    nachtShareText: 'Movie night ! Vote pour ce qu’on regarde :',
+    nachtFehler: 'Ça n’a pas fonctionné. Réessaie.',
+    nachtWeg: 'Cette session n’existe plus — les sessions expirent après 48 heures.',
     matchAria: 'Qu’est-ce qu’un match ?',
     posterGroesser: 'Afficher l’affiche en grand',
     sprachName: 'Français',
@@ -2692,6 +2721,15 @@ var UI_TEXTE = {
     importLaeuft: function(n, gesamt){ return n + ' de ' + gesamt + ' aplicados …'; },
     importFertig: function(n){ return n + ' títulos aplicados. La página se recargará.'; },
     importFehler: function(name){ return '«' + name + '» no tiene un formato conocido (CSV de Letterboxd/IMDb o JSON de Trakt).'; },
+    nachtTitel: 'Movie Night',
+    nachtErklaerung: 'Votad sí o no por cada título — lo que más gente quiera ver pasa adelante.',
+    nachtName: 'Tu nombre',
+    nachtJa: 'Sí', nachtNein: 'No',
+    nachtAbstimmen: 'Votar',
+    nachtStand: function(n){ return n === 1 ? 'Hasta ahora ha votado 1 persona' : 'Hasta ahora han votado ' + n + ' personas'; },
+    nachtShareText: '¡Movie night! Vota qué vemos:',
+    nachtFehler: 'No ha funcionado. Inténtalo de nuevo.',
+    nachtWeg: 'Esta ronda ya no existe — las rondas caducan a las 48 horas.',
     matchAria: '¿Qué es un match?',
     posterGroesser: 'Mostrar póster más grande',
     sprachName: 'Español',
@@ -2920,6 +2958,15 @@ var UI_TEXTE = {
     importLaeuft: function(n, gesamt){ return n + ' di ' + gesamt + ' applicati …'; },
     importFertig: function(n){ return n + ' titoli applicati. La pagina si ricaricherà.'; },
     importFehler: function(name){ return '“' + name + '” non ha un formato conosciuto (CSV Letterboxd/IMDb o JSON Trakt).'; },
+    nachtTitel: 'Movie Night',
+    nachtErklaerung: 'Votate sì o no per ogni titolo — davanti va ciò che i più vogliono vedere.',
+    nachtName: 'Il tuo nome',
+    nachtJa: 'Sì', nachtNein: 'No',
+    nachtAbstimmen: 'Vota',
+    nachtStand: function(n){ return n === 1 ? 'Finora ha votato 1 persona' : 'Finora hanno votato ' + n + ' persone'; },
+    nachtShareText: 'Movie night! Vota cosa guardiamo:',
+    nachtFehler: 'Non ha funzionato. Riprova.',
+    nachtWeg: 'Questa sessione non esiste più — le sessioni scadono dopo 48 ore.',
     matchAria: 'Cos’è un match?',
     posterGroesser: 'Mostra il poster ingrandito',
     sprachName: 'Italiano',
@@ -3148,6 +3195,15 @@ var UI_TEXTE = {
     importLaeuft: function(n, gesamt){ return n + ' van ' + gesamt + ' toegepast …'; },
     importFertig: function(n){ return n + ' titels toegepast. De pagina wordt opnieuw geladen.'; },
     importFehler: function(name){ return '“' + name + '” heeft geen bekend formaat (Letterboxd/IMDb-CSV of Trakt-JSON).'; },
+    nachtTitel: 'Movie Night',
+    nachtErklaerung: 'Stem ja of nee per titel — wat de meesten willen zien komt vooraan.',
+    nachtName: 'Je naam',
+    nachtJa: 'Ja', nachtNein: 'Nee',
+    nachtAbstimmen: 'Stemmen',
+    nachtStand: function(n){ return n === 1 ? 'Tot nu toe heeft 1 persoon gestemd' : 'Tot nu toe hebben ' + n + ' personen gestemd'; },
+    nachtShareText: 'Movie night! Stem wat we kijken:',
+    nachtFehler: 'Dat is niet gelukt. Probeer het opnieuw.',
+    nachtWeg: 'Deze ronde bestaat niet meer — rondes vervallen na 48 uur.',
     matchAria: 'Wat is een match?',
     posterGroesser: 'Grotere poster tonen',
     sprachName: 'Nederlands',
@@ -3376,6 +3432,15 @@ var UI_TEXTE = {
     importLaeuft: function(n, gesamt){ return n + ' de ' + gesamt + ' aplicados …'; },
     importFertig: function(n){ return n + ' títulos aplicados. A página será recarregada.'; },
     importFehler: function(name){ return '“' + name + '” não tem um formato conhecido (CSV do Letterboxd/IMDb ou JSON do Trakt).'; },
+    nachtTitel: 'Movie Night',
+    nachtErklaerung: 'Votem sim ou não por título — o que a maioria quiser ver vai para a frente.',
+    nachtName: 'Seu nome',
+    nachtJa: 'Sim', nachtNein: 'Não',
+    nachtAbstimmen: 'Votar',
+    nachtStand: function(n){ return n === 1 ? 'Até agora 1 pessoa votou' : 'Até agora ' + n + ' pessoas votaram'; },
+    nachtShareText: 'Movie night! Vote no que vamos assistir:',
+    nachtFehler: 'Não funcionou. Tente novamente.',
+    nachtWeg: 'Esta rodada não existe mais — rodadas expiram após 48 horas.',
     matchAria: 'O que é um match?',
     posterGroesser: 'Mostrar pôster maior',
     sprachName: 'Português',
@@ -6142,6 +6207,10 @@ function render() {
   // TITEL_PRO_SEITE): Erst die besten 25 heraussuchen, den Rest holt
   // "Mehr laden" nach.
   const sichtbar = besteNachSortwert(eintraege, effectiveSort(), profile, titelLimit);
+  // Fuer Movie Night (siehe movieNightEinrichten): die Kandidaten einer
+  // Runde sind die ersten Titel GENAU DIESER Ansicht -- Filter und
+  // Sortierung der Person eingeschlossen.
+  MOVIE_NIGHT_SICHTBAR = sichtbar;
   sichtbar.forEach(function(e){
     list.appendChild(e.art === 'eigen'
       ? eigeneZeileLi(e.tab, e.idx, profile)
@@ -8048,6 +8117,131 @@ document.getElementById('settingsNotifyBtn').onclick = function(){
     .then(function(u){ CURRENT_USER = u; benachrichtigungKnopfAktualisieren(); })
     .catch(function(){ CURRENT_USER.benachrichtigung = !neu; benachrichtigungKnopfAktualisieren(); });
 };
+/* ---- Movie Night: gemeinsame Abstimmung ----
+   Eine angemeldete Person erstellt aus den ersten 20 Titeln ihrer AKTUELLEN
+   Ansicht (Filter + Sortierung, siehe MOVIE_NIGHT_SICHTBAR in render) eine
+   Runde und teilt den Link (?nacht=TOKEN). Wer ihn oeffnet, stimmt je Titel
+   mit Ja/Nein ab -- ohne Konto, nur mit Namen. Der Zwischenstand laedt alle
+   sieben Sekunden nach; vorn liegt der Titel mit den meisten Ja-Stimmen.
+   Die ganze Oberflaeche entsteht hier im JS (wie das Info-Popup) -- so
+   braucht es keine Markup-Uebersetzungstabellen fuer sieben Sprachen. */
+var MOVIE_NIGHT_SICHTBAR = [];
+(function movieNightEinrichten(){
+  var KENNUNG_KEY = 'mt.nachtKennung', NAME_KEY = 'mt.nachtName';
+  function kennung(){
+    try {
+      var k = localStorage.getItem(KENNUNG_KEY);
+      if (k && /^[a-f0-9]{32}$/.test(k)) return k;
+      k = Array.from(crypto.getRandomValues(new Uint8Array(16)))
+        .map(function(b){ return b.toString(16).padStart(2, '0'); }).join('');
+      localStorage.setItem(KENNUNG_KEY, k);
+      return k;
+    } catch (e) { return '0000feste0kennung0000000000000ff'; }
+  }
+
+  var bk = document.createElement('div');
+  bk.className = 'modal-backdrop'; bk.id = 'nachtModal';
+  bk.innerHTML = '<div class="modal" style="max-width:520px">' +
+    '<button class="modal-x" aria-label="' + escAttr(TXT.schliessen) + '">&times;</button>' +
+    '<h3 id="nachtTitel"></h3><div id="nachtInhalt"></div></div>';
+  document.body.appendChild(bk);
+  bk.addEventListener('click', function(e){
+    if (e.target === bk || (e.target.closest && e.target.closest('.modal-x'))) {
+      bk.classList.remove('open');
+      if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+    }
+  });
+  var inhalt = bk.querySelector('#nachtInhalt');
+  var pollTimer = null;
+  var stimmen = {};          // titleId -> true/false (eigene Wahl dieser Sitzung)
+  var aktuellerToken = null;
+
+  function link(token){ return location.origin + location.pathname + '?nacht=' + token; }
+
+  function zeichneRunde(daten){
+    var maxJa = Math.max.apply(null, [0].concat(daten.titel.map(function(t){ return t.ja; })));
+    var html = '<p class="prov-intro">' + esc(TXT.nachtErklaerung) + '</p>' +
+      '<input type="text" id="nachtName" class="lang-select" style="margin-bottom:10px" maxlength="40" placeholder="' + escAttr(TXT.nachtName) + '">' +
+      daten.titel.map(function(t){
+        var wahl = stimmen[t.id];
+        return '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border)">' +
+          (t.p ? '<img src="' + escAttr(POSTER + t.p) + '" alt="" style="width:32px;border-radius:4px">' : '<span style="width:32px"></span>') +
+          '<span style="flex:1">' + esc(t.t) + (t.y ? ' (' + t.y + ')' : '') +
+            (t.ja ? ' <b' + (t.ja === maxJa && maxJa > 0 ? ' style="color:var(--accent)"' : '') + '>+' + t.ja + '</b>' : '') + '</span>' +
+          '<button type="button" data-ja="' + escAttr(t.id) + '" class="modal-yes" style="padding:4px 10px' + (wahl === true ? ';border-color:var(--accent);color:var(--accent)' : '') + '">' + esc(TXT.nachtJa) + '</button>' +
+          '<button type="button" data-nein="' + escAttr(t.id) + '" class="modal-yes" style="padding:4px 10px' + (wahl === false ? ';border-color:var(--accent);color:var(--accent)' : '') + '">' + esc(TXT.nachtNein) + '</button>' +
+        '</div>';
+      }).join('') +
+      '<button type="button" id="nachtSenden" class="modal-yes" style="margin-top:12px">' + esc(TXT.nachtAbstimmen) + '</button>' +
+      '<p class="feedback-hinweis">' + esc(TXT.nachtStand(daten.teilnehmer.length)) +
+        (daten.teilnehmer.length ? ' — ' + esc(daten.teilnehmer.join(', ')) : '') + '</p>' +
+      '<p class="feedback-hinweis" style="user-select:all">' + esc(link(aktuellerToken)) + '</p>';
+    inhalt.innerHTML = html;
+    try { inhalt.querySelector('#nachtName').value = localStorage.getItem(NAME_KEY) || ''; } catch (e) {}
+    inhalt.querySelectorAll('[data-ja]').forEach(function(b){
+      b.onclick = function(){ stimmen[b.dataset.ja] = true; laden(); };
+    });
+    inhalt.querySelectorAll('[data-nein]').forEach(function(b){
+      b.onclick = function(){ stimmen[b.dataset.nein] = false; laden(); };
+    });
+    inhalt.querySelector('#nachtSenden').onclick = function(){
+      var name = inhalt.querySelector('#nachtName').value.trim();
+      try { localStorage.setItem(NAME_KEY, name); } catch (e) {}
+      if (!Object.keys(stimmen).length) return;
+      apiRequest('POST', '/api/movie-night/' + aktuellerToken + '/stimmen',
+        { teilnehmer: kennung(), name: name, stimmen: stimmen })
+        .then(function(){ return laden(true); })
+        .catch(function(){ inhalt.querySelector('#nachtSenden').textContent = TXT.nachtFehler; });
+    };
+  }
+
+  function laden(frisch){
+    if (!aktuellerToken) return Promise.resolve();
+    if (!frisch) { zeichneAusCache(); return Promise.resolve(); }
+    return apiRequest('GET', mitSpracheRegion('/api/movie-night/' + aktuellerToken))
+      .then(function(daten){ letzteDaten = daten; zeichneRunde(daten); })
+      .catch(function(){ inhalt.innerHTML = '<p class="prov-intro">' + esc(TXT.nachtWeg) + '</p>'; });
+  }
+  var letzteDaten = null;
+  function zeichneAusCache(){ if (letzteDaten) zeichneRunde(letzteDaten); }
+
+  function oeffnen(token){
+    aktuellerToken = token;
+    stimmen = {};
+    letzteDaten = null;
+    bk.querySelector('#nachtTitel').textContent = TXT.nachtTitel;
+    inhalt.innerHTML = '<p class="prov-intro">' + esc(TXT.laedt) + '</p>';
+    bk.classList.add('open');
+    laden(true);
+    if (pollTimer) clearInterval(pollTimer);
+    pollTimer = setInterval(function(){ laden(true); }, 7000);
+  }
+
+  var knopf = document.getElementById('movieNightBtn');
+  if (knopf) {
+    knopf.textContent = '🍿 ' + TXT.nachtTitel;
+    knopf.onclick = function(){
+      if (!CURRENT_USER) { alert(TXT.nurAngemeldet); return; }
+      var ids = MOVIE_NIGHT_SICHTBAR
+        .map(function(e){ return e.pool && e.pool.realId; })
+        .filter(Boolean).slice(0, 20).map(Number);
+      if (ids.length < 2) { alert(TXT.keineTitelAuswahl); return; }
+      apiRequest('POST', '/api/movie-night', { titleIds: ids })
+        .then(function(r){
+          // Link auch gleich in die Adresszeile, damit er teilbar ist.
+          history.replaceState(null, '', link(r.token));
+          if (navigator.share) navigator.share({ url: link(r.token), text: TXT.nachtShareText }).catch(function(){});
+          oeffnen(r.token);
+        })
+        .catch(function(){ alert(TXT.nachtFehler); });
+    };
+  }
+
+  // Geoeffneter Einladungslink: ?nacht=TOKEN
+  var m = location.search.match(/[?&]nacht=([a-f0-9]{32})/);
+  if (m) window.addEventListener('load', function(){ oeffnen(m[1]); });
+})();
+
 /* ---- Watchlist-Import (Letterboxd / IMDb / Trakt) ----
    Laeuft komplett im Browser: Exportdateien einlesen, gegen den POOL
    abgleichen (Titel+Jahr, auch Original- und Alias-Titel), Vorschau zeigen,
