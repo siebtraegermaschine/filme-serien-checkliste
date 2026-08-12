@@ -98,7 +98,21 @@ async function landImportieren(land) {
     if (!plz || !ort || !Number.isFinite(lat) || !Number.isFinite(lon)) continue;
     zeilen.push([plz, ort, land, lat, lon]);
   }
-  console.log(`${land}: ${zeilen.length} Zeilen gelesen, schreibe …`);
+  /* GeoNames fuehrt dieselbe PLZ+Ort-Kombination oft mehrfach -- je
+     Verwaltungseinheit eine Zeile (in CH etwa je Gemeindeteil, in GB je
+     Distrikt). Der ON-CONFLICT-Update unten vertraegt aber keine Dublette
+     IM SELBEN Stapel ("cannot affect row a second time") -- daran brach der
+     CH-Import ab. Es gewinnt die erste Zeile; die Koordinaten der Varianten
+     liegen ohnehin im selben Ort. */
+  const gesehen = new Set();
+  const eindeutig = [];
+  for (const z of zeilen) {
+    const schluessel = z[0] + '\t' + z[1];
+    if (gesehen.has(schluessel)) continue;
+    gesehen.add(schluessel);
+    eindeutig.push(z);
+  }
+  console.log(`${land}: ${zeilen.length} Zeilen gelesen (${eindeutig.length} eindeutig), schreibe …`);
 
   const client = await pool.connect();
   let geschrieben = 0;
@@ -106,8 +120,8 @@ async function landImportieren(land) {
     await client.query('BEGIN');
     // In Haeppchen, damit ein einzelner Fehler nicht 16.000 Zeilen mitreisst
     // und der Fortschritt sichtbar bleibt.
-    for (let i = 0; i < zeilen.length; i += 500) {
-      const teil = zeilen.slice(i, i + 500);
+    for (let i = 0; i < eindeutig.length; i += 500) {
+      const teil = eindeutig.slice(i, i + 500);
       const werte = [];
       const platzhalter = teil.map((z, k) => {
         werte.push(...z);
