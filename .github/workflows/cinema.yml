@@ -16,11 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 240
     # Ein Lauf je Region -- nacheinander, wegen des TMDB-Rate-Limits (siehe
-    # streaming.yml).
+    # streaming.yml, dort auch der Hinweis zur Gesamtlaufzeit bei acht
+    # Regionen).
     strategy:
       max-parallel: 1
       matrix:
-        region: ["DE", "AT"]
+        region: ["DE", "AT", "CH", "GB", "FR", "IT", "ES", "NL"]
     steps:
       - name: Repo auschecken
         uses: actions/checkout@v4

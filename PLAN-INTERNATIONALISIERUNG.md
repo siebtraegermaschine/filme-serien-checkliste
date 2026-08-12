@@ -269,6 +269,29 @@ Zahlung (entfällt, solange kostenlos).
 Workflows; Freigabensystem AT (0/6/8/10/12/14/16) im Frontend-Filter;
 `import-plz.mjs`/`import-kinos.mjs` konnten AT schon vorher (siehe unten).
 
+**Sechs weitere Länder nach der Blaupause (12. August 2026):** CH, GB, FR,
+IT, ES und NL sind an allen Blaupausen-Stellen angebunden — `REGIONEN` in
+`backend/lib/i18n.js`, Workflow-Matrix in `streaming.yml`/`cinema.yml`
+(acht Regionen nacheinander; wird die Gesamtlaufzeit zum Problem, die
+Regionen auf mehrere Cron-Zeitpunkte verteilen), `TMDB_CERT_REGIONS`-Default
+in den vier Fetch-/Backfill-Skripten, Regionsauswahl und
+`regionErmittlung()` im Frontend sowie Bounding-Boxen in `import-kinos.mjs`
+(Spanien mit zwei Rechtecken, damit die Kanaren mitkommen; die französischen
+Übersee-Gebiete bewusst nicht). Die Oberfläche bleibt Deutsch/Englisch —
+Sprache und Region sind getrennt wählbar, weitere Sprachen folgen
+schrittweise. Zwei Besonderheiten:
+- **Altersfilter:** `FSK_SYSTEME` führt je Land die belegten Stufen und für
+  Buchstaben-Systeme ein Mapping auf das Mindestalter (`freigabeZahl()`):
+  GB U/PG/12A (PG zählt als 8, also „bis 12"), FR U/TP, IT T/6+/VM14/VM18,
+  ES APTA/TP/A, NL AL. Reine Erwachsenen-Sonderstufen (GB R18, ES X) gelten
+  bewusst als fehlende Angabe. Fällt ein Titel mangels Landeswert auf die
+  DE-Freigabe zurück und passt die nicht ins Landessystem, gilt sie als
+  fehlende Angabe — der Familienfilter bleibt so auf der sicheren Seite,
+  bis der Freigaben-Backfill (unten) gelaufen ist.
+- **Anbieter-Suchlinks:** Amazon/Rakuten-Links hängen jetzt an der Region
+  (`AMAZON_DOMAIN`/`RAKUTEN_LAND` in `index.html`); AT/CH kaufen bewusst
+  über amazon.de ein (kein eigener Shop).
+
 **Rechtstexte (Abschnitt 5):** `imprint.html`, `terms.html`, `privacy.html`
 als englische **Arbeitsfassungen** (Kopf-Kommentar kennzeichnet sie als
 Entwurf). Bei Sprache EN verlinken Fußzeile, Registrier-Hinweis und
@@ -292,15 +315,36 @@ Abschnitt 5 bleibt bestehen).
    `node scripts/import-kinos.mjs --laender=AT` (beide Skripte konnten AT
    schon; sie mussten nur nie laufen).
 4. **Workflows:** Nächster planmäßiger Lauf von `streaming.yml`/`cinema.yml`
-   befüllt die AT-Region automatisch (Matrix). Nichts zu tun.
+   befüllt alle Regionen der Matrix automatisch. Nichts zu tun.
+5. **Kino-Orte der sechs neuen Länder** (auf dem Server, im
+   Backend-Verzeichnis):
+   `node scripts/import-plz.mjs CH GB FR IT ES NL` und danach
+   `node scripts/import-kinos.mjs --laender=CH,GB,FR,IT,ES,NL`
+   (Overpass-Läufe dauern je Land einige Minuten; GeoNames deckt alle sechs
+   ab, GB allerdings nur mit den „outward codes" der Postleitzahlen).
+6. **Freigaben-Backfill für den Bestand** (~27.000 TMDB-Abrufe, mehrere
+   Stunden, abbrechbar/fortsetzbar — erst mit `--limit=500` probelaufen):
+   `cd backend && TMDB_API_KEY=... node scripts/backfill-english.mjs --nur-freigaben`
+   Der normale Lauf überspringt Zeilen, die schon `title_en` haben — dieser
+   Modus ergänzt deshalb gezielt die Freigaben der neuen Länder auf dem
+   ganzen Bestand. Bis dahin fallen Bestandstitel auf den DE-Wert zurück
+   (siehe `freigabeFuer`); der Familienfilter blendet im Zweifel aus statt
+   ein.
 
 ### Was bewusst offen bleibt
 
 - **Schlagwörter auf Englisch** (Hashtags sind deutsche Übersetzungen, siehe
   `apply-keyword-translation.mjs`) — für EN-Nutzer erscheinen sie deutsch.
 - **USA** (Abschnitt 4): unverändert offen, zuerst die Rechtsfrage.
-- **Weitere EU-Länder:** je Land nur noch `REGIONEN` in `backend/lib/i18n.js`,
-  Workflow-Matrix, `FSK_SYSTEME`/Regionsauswahl im Frontend und die beiden
-  Importe (PLZ/Kinos) ergänzen — die Blaupause ist Österreich.
+- **Weitere EU-Länder** (PT, PL, Skandinavien …): je Land nur noch
+  `REGIONEN` in `backend/lib/i18n.js`, Workflow-Matrix,
+  `FSK_SYSTEME`/Regionsauswahl im Frontend, `TMDB_CERT_REGIONS`-Defaults,
+  Bounding-Box in `import-kinos.mjs` und die beiden Importe (PLZ/Kinos)
+  ergänzen — Muster siehe CH/GB/FR/IT/ES/NL oben. Für Buchstaben-Freigaben
+  (PT: M/x) das `zahlen`-Mapping in `FSK_SYSTEME` mitliefern.
+- **Weitere UI-Sprachen** (fr/es/it/nl …): je Sprache `UI_TEXTE`,
+  `uebersetzeStatischesMarkup()`, `INFO_TEXT_*`, TOUR-Texte und eine
+  Rechtstext-Fassung — bewusst zurückgestellt, die neuen Länder starten mit
+  englischer Oberfläche.
 - **Anleitungs-Screenshots** (tour/*.png) zeigen die deutsche Oberfläche —
   werden aktualisiert, wenn alle Oberflächen-Änderungen durch sind.

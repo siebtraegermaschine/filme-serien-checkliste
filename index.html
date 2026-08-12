@@ -1721,10 +1721,12 @@ function regionErmittlung(){
     var r = localStorage.getItem(REGION_KEY);
     if (r && /^[A-Z]{2}$/.test(r)) return r;
   } catch (e) {}
-  // Browser-Region (z.B. "de-AT" -> AT), sonst DE.
+  // Browser-Region (z.B. "de-AT" -> AT), sonst DE. Die Liste entspricht
+  // REGIONEN in backend/lib/i18n.js -- nur Laender, fuer die tatsaechlich
+  // Daten eingespielt werden.
   var m = String(navigator.language || '').match(/-([A-Za-z]{2})$/);
   var r2 = m ? m[1].toUpperCase() : 'DE';
-  return ['DE', 'AT'].indexOf(r2) !== -1 ? r2 : 'DE';
+  return ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL'].indexOf(r2) !== -1 ? r2 : 'DE';
 }
 var SPRACHE = sprachErmittlung();
 var REGION_WAHL = regionErmittlung();
@@ -2175,15 +2177,47 @@ function genreAnzeige(g){
   return GENRE_EN[g] || g;
 }
 
-/* Altersfreigaben je Land: beide Systeme (FSK und die oesterreichische
-   Jugendmedienkommission) sind numerisch -- der Filter vergleicht Zahlen.
-   Nur die dort gelisteten Werte gelten als belegt, alles andere ("Not
-   Rated", leer) zaehlt wie bisher als fehlende Angabe. */
+/* Altersfreigaben je Land: `werte` sind die Stufen, die als belegt gelten --
+   alles andere ("Not Rated", leer, unbekannte Kuerzel) zaehlt wie bisher als
+   fehlende Angabe. Der Filter vergleicht Zahlen; Systeme mit Buchstaben-
+   Stufen (GB: U/PG/12A, FR: U/TP, IT: T/6+, ES: APTA/TP, NL: AL) bekommen
+   dafuer unter `zahlen` ein Mapping auf das gemeinte Mindestalter
+   (freigabeZahl unten). Absichtlich NICHT gelistet sind reine
+   Erwachsenen-Sonderstufen (GB R18, ES X): sie zaehlen als fehlende Angabe
+   und bleiben beim Familienfilter damit ohnehin draussen. */
 var FSK_SYSTEME = {
-  DE: ['0', '6', '12', '16', '18'],
-  AT: ['0', '6', '8', '10', '12', '14', '16'],
+  DE: { werte: ['0', '6', '12', '16', '18'] },
+  AT: { werte: ['0', '6', '8', '10', '12', '14', '16'] },
+  CH: { werte: ['0', '6', '12', '16', '18'] },
+  // PG heisst "elterliche Begleitung" und meint laut BBFC "im Allgemeinen ab
+  // 8 geeignet" -- daher die 8: faellt unter "bis 12", nicht unter "bis 6".
+  GB: { werte: ['U', 'PG', '12', '12A', '15', '18'],
+        zahlen: { 'U': 0, 'PG': 8, '12A': 12 } },
+  // U (Kino) und TP (Fernsehen) heissen beide "tous publics" = ohne Grenze.
+  FR: { werte: ['U', 'TP', '10', '12', '16', '18'],
+        zahlen: { 'U': 0, 'TP': 0 } },
+  // T = "per tutti"; daneben das aeltere System VM14/VM18 ("vietato ai
+  // minori di ...") und das neue 6+/14+/18+ -- TMDB fuehrt beide.
+  IT: { werte: ['T', '6+', '14+', '18+', 'VM14', 'VM18'],
+        zahlen: { 'T': 0, '6+': 6, '14+': 14, '18+': 18, 'VM14': 14, 'VM18': 18 } },
+  // APTA (Kino) / TP (Fernsehen) / A (alt) = fuer alle; 13 ist die
+  // Vorgaenger-Stufe der heutigen 12 und steht noch an Bestandstiteln.
+  ES: { werte: ['APTA', 'TP', 'A', '7', '10', '12', '13', '16', '18'],
+        zahlen: { 'APTA': 0, 'TP': 0, 'A': 0 } },
+  // AL = "alle leeftijden" (Kijkwijzer).
+  NL: { werte: ['AL', '6', '9', '12', '14', '16', '18'],
+        zahlen: { 'AL': 0 } },
 };
-function freigabenGueltig(){ return FSK_SYSTEME[REGION_WAHL] || FSK_SYSTEME.DE; }
+function fskSystem(){ return FSK_SYSTEME[REGION_WAHL] || FSK_SYSTEME.DE; }
+function freigabenGueltig(){ return fskSystem().werte; }
+// Mindestalter einer Freigabestufe als Zahl -- ueber das Mapping des Systems
+// oder, wenn dort nichts steht, direkt aus dem Wert ("12" -> 12). Unbekannte
+// Kuerzel ergeben NaN, und NaN faellt bei jedem Vergleich durch.
+function freigabeZahl(wert){
+  var z = fskSystem().zahlen;
+  if (z && Object.prototype.hasOwnProperty.call(z, wert)) return z[wert];
+  return Number(wert);
+}
 
 /* Statische Texte im Markup: deutsch im HTML, bei Englisch hier getauscht.
    Selektor -> Text (t), HTML (h), Platzhalter (p) oder aria-label (a). */
@@ -2795,13 +2829,22 @@ var WATCH_CATS = [
 ];
 // Schluessel sind TMDB-Provider-IDs. Bewusst knapp gehalten: nur Anbieter,
 // deren Such-URL verlaesslich bekannt ist (siehe Kommentar oben).
+// Amazon und Rakuten haben je Land eigene Domains/Pfade -- die haengen an
+// REGION_WAHL, nicht an der Sprache. AT und CH haben keinen eigenen
+// Amazon-Shop und kaufen ueber amazon.de ein. Ob ein Anbieter ueberhaupt
+// erscheint, entscheiden ohnehin die TMDB-Daten der Region -- die Zuordnung
+// hier muss also nur fuer Laender stimmen, in denen der Anbieter existiert.
+var AMAZON_DOMAIN = ({ DE: 'de', AT: 'de', CH: 'de', GB: 'co.uk',
+                       FR: 'fr', IT: 'it', ES: 'es', NL: 'nl' })[REGION_WAHL] || 'de';
+var RAKUTEN_LAND = ({ DE: 'de', AT: 'at', CH: 'ch', GB: 'uk',
+                      FR: 'fr', IT: 'it', ES: 'es', NL: 'nl' })[REGION_WAHL] || 'de';
 var WATCH_SEARCH_URLS = {
   8:   function(q){ return 'https://www.netflix.com/search?q=' + q; },              // Netflix
-  9:   function(q){ return 'https://www.amazon.de/s?i=instant-video&k=' + q; },     // Amazon Prime Video
-  10:  function(q){ return 'https://www.amazon.de/s?i=instant-video&k=' + q; },     // Amazon Video (Leihen/Kaufen)
+  9:   function(q){ return 'https://www.amazon.' + AMAZON_DOMAIN + '/s?i=instant-video&k=' + q; }, // Amazon Prime Video
+  10:  function(q){ return 'https://www.amazon.' + AMAZON_DOMAIN + '/s?i=instant-video&k=' + q; }, // Amazon Video (Leihen/Kaufen)
   3:   function(q){ return 'https://play.google.com/store/search?c=movies&q=' + q; },// Google Play
   192: function(q){ return 'https://www.youtube.com/results?search_query=' + q; },  // YouTube
-  35:  function(q){ return 'https://www.rakuten.tv/de/search?q=' + q; },            // Rakuten TV
+  35:  function(q){ return 'https://www.rakuten.tv/' + RAKUTEN_LAND + '/search?q=' + q; }, // Rakuten TV
 };
 // Bewusst NICHT aufgenommen, weil ihre Suche sich nicht per URL ansteuern laesst
 // -- jeweils im echten Browser geprueft, nicht nur per HTTP-Status (der allein
@@ -5913,6 +5956,12 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _set
   var REGIONEN = [
     { key: 'DE', label: SPRACHE === 'en' ? 'Germany' : 'Deutschland' },
     { key: 'AT', label: SPRACHE === 'en' ? 'Austria' : 'Österreich' },
+    { key: 'CH', label: SPRACHE === 'en' ? 'Switzerland' : 'Schweiz' },
+    { key: 'GB', label: SPRACHE === 'en' ? 'United Kingdom' : 'Großbritannien' },
+    { key: 'FR', label: SPRACHE === 'en' ? 'France' : 'Frankreich' },
+    { key: 'IT', label: SPRACHE === 'en' ? 'Italy' : 'Italien' },
+    { key: 'ES', label: SPRACHE === 'en' ? 'Spain' : 'Spanien' },
+    { key: 'NL', label: SPRACHE === 'en' ? 'Netherlands' : 'Niederlande' },
   ];
   btn.textContent = TXT.sprachMenue;
   document.getElementById('langModalTitel').textContent = TXT.sprachMenue;
@@ -5988,15 +6037,16 @@ function matchAktiv(){ return MATCH_WITH.length > 0; }
 // "ab 18" gab es hier auch, sie tat aber das Gegenteil -- sie zeigte
 // ausschliesslich das, was fuer Kinder gerade nicht in Frage kommt.
 /* Die Stufen entstehen aus dem Freigabesystem der gewaehlten Region (siehe
-   FSK_SYSTEME oben): Deutschland kennt 0/6/12/16/18 (FSK), Oesterreich
-   0/6/8/10/12/14/16. Beide sind numerisch -- "bis 12" heisst also schlicht
-   "alle belegten Werte bis einschliesslich 12". Die Knopfleiste bleibt in
-   beiden Laendern dieselbe (bis 6 / bis 12 / bis 16). */
+   FSK_SYSTEME oben): "bis 12" heisst "alle belegten Werte, deren
+   Mindestalter hoechstens 12 ist". Buchstaben-Stufen (GB U/PG/12A, FR TP,
+   IT T, ES APTA, NL AL) gehen ueber freigabeZahl() in denselben Vergleich
+   ein. Die Knopfleiste bleibt in allen Laendern dieselbe
+   (bis 6 / bis 12 / bis 16). */
 var FSK_STUFEN = ['6', '12', '16'].map(function(max){
   return {
     key: max,
     label: TXT.bisStufe(max),
-    erlaubt: freigabenGueltig().filter(function(v){ return Number(v) <= Number(max); }),
+    erlaubt: freigabenGueltig().filter(function(v){ return freigabeZahl(v) <= Number(max); }),
   };
 });
 var MY_FSK = null;   // null = kein Filter

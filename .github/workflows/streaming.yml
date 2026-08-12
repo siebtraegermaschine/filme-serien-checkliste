@@ -20,12 +20,15 @@ jobs:
     runs-on: ubuntu-latest
     # Ein Lauf je Region (siehe PLAN-INTERNATIONALISIERUNG.md): der Ingest im
     # Backend verwaltet jede Region getrennt. Nacheinander statt parallel
-    # (max-parallel), damit sich die beiden Laeufe nicht gegenseitig ins
-    # TMDB-Rate-Limit treiben.
+    # (max-parallel), damit sich die Laeufe nicht gegenseitig ins
+    # TMDB-Rate-Limit treiben. DE zuerst (der Commit-Schritt unten haengt am
+    # DE-Lauf). Laufzeit im Blick behalten: acht Regionen nacheinander -- wird
+    # die Gesamtdauer zum Problem, waere der naechste Schritt, die Regionen
+    # auf mehrere Cron-Zeitpunkte zu verteilen.
     strategy:
       max-parallel: 1
       matrix:
-        region: ["DE", "AT"]
+        region: ["DE", "AT", "CH", "GB", "FR", "IT", "ES", "NL"]
     # Seit Wegfall des STREAM_COUNT-Deckels (vorher 60 Titel je Anbieter & Typ)
     # werden pro Anbieter alle aktuell verfuegbaren Titel geholt (insgesamt
     # geschaetzt bis zu ca. 22.000/Tag) -- expliziter Sicherheitsspielraum

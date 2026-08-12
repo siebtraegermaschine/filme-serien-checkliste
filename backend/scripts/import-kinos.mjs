@@ -17,7 +17,7 @@
  * Aufruf im Backend-Verzeichnis:
  *   node scripts/import-kinos.mjs --dry-run     # nur zeigen, nichts schreiben
  *   node scripts/import-kinos.mjs               # Deutschland
- *   node scripts/import-kinos.mjs --laender=DE,AT,CH
+ *   node scripts/import-kinos.mjs --laender=DE,AT,CH   # oder GB,FR,IT,ES,NL
  *
  * Die Overpass-API ist ein Gemeinschaftsdienst mit begrenzter Kapazitaet: Eine
  * Abfrage ueber ganz Deutschland lief in der Erprobung mehrfach in ein 504.
@@ -43,11 +43,24 @@ const SERVER = [
    wohnt, hat das naechste Kino womoeglich jenseits der Grenze, und eine
    Umkreissuche, die an einer Landesgrenze endet, waere fuer genau diese Leute
    falsch. Ein Filter auf `addr:country` waere ohnehin unzuverlaessig, weil das
-   Feld in OSM meist fehlt. */
+   Feld in OSM meist fehlt.
+
+   Je Land EINE Liste von Rechtecken [Sued, West, Nord, Ost]: meist eines,
+   mehrere dort, wo Landesteile weit auseinanderliegen (Spanien: Festland +
+   Balearen und, als eigenes Rechteck, die Kanaren -- ein gemeinsames
+   Rechteck bestuende sonst zum Grossteil aus Atlantik). Bewusst NICHT dabei:
+   die franzoesischen Uebersee-Gebiete -- ein anderer Kontinent ist kein
+   "Grenzgebiet" mehr; falls je gewuenscht, hier weitere Rechtecke ergaenzen. */
 const RECHTECKE = {
-  DE: [47.2, 5.8, 55.1, 15.1],
-  AT: [46.3, 9.5, 49.1, 17.2],
-  CH: [45.8, 5.9, 47.9, 10.6],
+  DE: [[47.2, 5.8, 55.1, 15.1]],
+  AT: [[46.3, 9.5, 49.1, 17.2]],
+  CH: [[45.8, 5.9, 47.9, 10.6]],
+  GB: [[49.8, -8.7, 61.0, 2.0]],                // inkl. Nordirland und Shetland
+  FR: [[41.2, -5.5, 51.4, 9.8]],                // inkl. Korsika
+  IT: [[35.4, 6.5, 47.3, 18.8]],                // inkl. Sizilien und Sardinien
+  ES: [[35.7, -9.8, 44.0, 4.5],                 // Festland + Balearen
+       [27.5, -18.3, 29.5, -13.3]],             // Kanaren
+  NL: [[50.6, 3.2, 53.8, 7.3]],
 };
 
 /* Kantenlaenge einer Abfrage. Gross gewaehlt, und zwar aus Messung: Die
@@ -141,9 +154,9 @@ async function main() {
   const gefunden = new Map();
 
   for (const land of LAENDER) {
-    const rechteck = RECHTECKE[land];
-    if (!rechteck) { console.warn(`Kein Rechteck fuer ${land} hinterlegt -- uebersprungen.`); continue; }
-    const alle = [...kacheln(rechteck)];
+    const rechtecke = RECHTECKE[land];
+    if (!rechtecke) { console.warn(`Kein Rechteck fuer ${land} hinterlegt -- uebersprungen.`); continue; }
+    const alle = rechtecke.flatMap((r) => [...kacheln(r)]);
     console.log(`${land}: ${alle.length} Kacheln`);
     let i = 0;
     for (const [s, w, n, o] of alle) {

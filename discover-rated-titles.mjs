@@ -52,7 +52,7 @@ async function genreMap(kind) {
 
 // Laender fuer die Altersfreigaben -- die TMDB-Antwort enthaelt ohnehin alle,
 // weitere Regionen kosten hier keinen zusaetzlichen Abruf.
-const CERT_REGIONS = (process.env.TMDB_CERT_REGIONS || 'DE,AT')
+const CERT_REGIONS = (process.env.TMDB_CERT_REGIONS || 'DE,AT,CH,GB,FR,IT,ES,NL')
   .split(',').map((s) => s.trim().toUpperCase()).filter(Boolean);
 
 // Altersfreigaben je Land aus dem ohnehin geholten Detail-Datensatz lesen.
