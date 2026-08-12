@@ -8250,9 +8250,12 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
 
   function zeichneRunde(daten){
     var scrollVorher = bk.querySelector('.modal').scrollTop;
+    // Anzeige-Reihenfolge: beste Sterne-Bewertung zuerst -- fuer alle
+    // Teilnehmer gleich, unabhaengig von der Ansicht der erstellenden Person.
+    var titelSortiert = daten.titel.slice().sort(function(a, b){ return (b.r || 0) - (a.r || 0); });
     var html = '<p class="prov-intro">' + esc(TXT.nachtErklaerung) + '</p>' +
       '<button type="button" id="nachtTeilen" class="auth-submit" style="width:100%;margin-bottom:10px">' + esc(TXT.nachtTeilen) + '</button>' +
-      daten.titel.map(function(t){
+      titelSortiert.map(function(t){
         var wahl = stimmen[t.id];
         // Hinter dem Titel steht die Sterne-Bewertung (wie in den Listen) --
         // die Stimmenzahl erscheint bewusst NUR unten in der Top-3-Auswertung.
@@ -8272,7 +8275,7 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
         if (detailsOffen[t.id]) {
           var item = poolItem(t.id);
           zeile += '<div class="nacht-details">' +
-            (item ? '<div>' + esc(poolToMeta(item)) + '</div>' : '') +
+            (item ? '<div>' + esc(poolToMeta(item) + ' · ' + (item.type === 'series' ? TXT.serie : TXT.film)) + '</div>' : '') +
             '<p>' + esc(plotCache[t.id] != null ? plotCache[t.id] : TXT.laedt) + '</p>' +
             (item ? '<button type="button" data-nacht-trailer="' + escAttr(t.id) + '">' + esc(TXT.trailer) + '</button>' : '') +
             '</div>';
