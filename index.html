@@ -1546,7 +1546,6 @@
     <select class="lang-select" id="langSpracheSelect" aria-labelledby="langSpracheLabel"></select>
     <p class="prov-intro" style="margin-top:14px" id="langRegionLabel">Region</p>
     <select class="lang-select" id="langRegionSelect" aria-labelledby="langRegionLabel"></select>
-    <p class="feedback-hinweis" id="langHinweis"></p>
   </div>
 </div>
 
@@ -1970,7 +1969,6 @@ var UI_TEXTE = {
     posterGroesser: 'Poster größer anzeigen',
     sprachName: 'Deutsch',
     sprachMenue: 'Sprache & Region',
-    sprachHinweis: 'Änderungen gelten sofort; die Seite lädt dabei neu.',
     regionNamen: { DE: 'Deutschland', AT: 'Österreich', CH: 'Schweiz', GB: 'Großbritannien',
                    FR: 'Frankreich', IT: 'Italien', ES: 'Spanien', NL: 'Niederlande',
                    PT: 'Portugal', PL: 'Polen', DK: 'Dänemark', SE: 'Schweden',
@@ -2182,7 +2180,6 @@ var UI_TEXTE = {
     posterGroesser: 'Show larger poster',
     sprachName: 'English',
     sprachMenue: 'Language & region',
-    sprachHinweis: 'Changes are applied immediately; the page reloads.',
     regionNamen: { DE: 'Germany', AT: 'Austria', CH: 'Switzerland', GB: 'United Kingdom',
                    FR: 'France', IT: 'Italy', ES: 'Spain', NL: 'Netherlands',
                    PT: 'Portugal', PL: 'Poland', DK: 'Denmark', SE: 'Sweden',
@@ -2394,7 +2391,6 @@ var UI_TEXTE = {
     posterGroesser: 'Afficher l’affiche en grand',
     sprachName: 'Français',
     sprachMenue: 'Langue et région',
-    sprachHinweis: 'Les changements s’appliquent immédiatement ; la page se recharge.',
     regionNamen: { DE: 'Allemagne', AT: 'Autriche', CH: 'Suisse', GB: 'Royaume-Uni',
                    FR: 'France', IT: 'Italie', ES: 'Espagne', NL: 'Pays-Bas',
                    PT: 'Portugal', PL: 'Pologne', DK: 'Danemark', SE: 'Suède',
@@ -2606,7 +2602,6 @@ var UI_TEXTE = {
     posterGroesser: 'Mostrar póster más grande',
     sprachName: 'Español',
     sprachMenue: 'Idioma y región',
-    sprachHinweis: 'Los cambios se aplican al instante; la página se recarga.',
     regionNamen: { DE: 'Alemania', AT: 'Austria', CH: 'Suiza', GB: 'Reino Unido',
                    FR: 'Francia', IT: 'Italia', ES: 'España', NL: 'Países Bajos',
                    PT: 'Portugal', PL: 'Polonia', DK: 'Dinamarca', SE: 'Suecia',
@@ -2818,7 +2813,6 @@ var UI_TEXTE = {
     posterGroesser: 'Mostra il poster ingrandito',
     sprachName: 'Italiano',
     sprachMenue: 'Lingua e regione',
-    sprachHinweis: 'Le modifiche vengono applicate subito; la pagina si ricarica.',
     regionNamen: { DE: 'Germania', AT: 'Austria', CH: 'Svizzera', GB: 'Regno Unito',
                    FR: 'Francia', IT: 'Italia', ES: 'Spagna', NL: 'Paesi Bassi',
                    PT: 'Portogallo', PL: 'Polonia', DK: 'Danimarca', SE: 'Svezia',
@@ -3030,7 +3024,6 @@ var UI_TEXTE = {
     posterGroesser: 'Grotere poster tonen',
     sprachName: 'Nederlands',
     sprachMenue: 'Taal en regio',
-    sprachHinweis: 'Wijzigingen worden direct toegepast; de pagina wordt opnieuw geladen.',
     regionNamen: { DE: 'Duitsland', AT: 'Oostenrijk', CH: 'Zwitserland', GB: 'Verenigd Koninkrijk',
                    FR: 'Frankrijk', IT: 'Italië', ES: 'Spanje', NL: 'Nederland',
                    PT: 'Portugal', PL: 'Polen', DK: 'Denemarken', SE: 'Zweden',
@@ -7393,7 +7386,6 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _set
   }).sort(function(a, b){ return a.label.localeCompare(b.label, LOCALE); });
   btn.textContent = TXT.sprachMenue;
   document.getElementById('langModalTitel').textContent = TXT.sprachMenue;
-  document.getElementById('langHinweis').textContent = TXT.sprachHinweis;
   function fuellen(el, eintraege, aktiv, waehlen){
     el.innerHTML = eintraege.map(function(e){
       return '<option value="' + escAttr(e.key) + '"' +
