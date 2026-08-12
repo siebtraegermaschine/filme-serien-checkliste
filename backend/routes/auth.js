@@ -163,7 +163,8 @@ router.put('/display-name', async (req, res) => {
 router.put('/settings', async (req, res) => {
   if (!req.session?.userId) return res.status(401).json({ error: 'not_authenticated' });
   const { sprache, region } = req.body || {};
-  const neueSprache = sprache === 'de' || sprache === 'en' ? sprache : undefined;
+  // Oberflaechensprachen -- muss zur Frontend-Liste SPRACHEN_VERFUEGBAR passen.
+  const neueSprache = ['de', 'en', 'fr', 'es', 'it', 'nl'].includes(sprache) ? sprache : undefined;
   const neueRegion = typeof region === 'string' && /^[A-Z]{2}$/.test(region) ? region : undefined;
   if (neueSprache === undefined && neueRegion === undefined) {
     return res.status(400).json({ error: 'invalid_payload' });

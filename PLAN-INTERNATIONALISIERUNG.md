@@ -344,9 +344,15 @@ Abschnitt 5 bleibt bestehen).
   Bounding-Box in `import-kinos.mjs` und die beiden Importe (PLZ/Kinos)
   ergänzen — Muster siehe CH/GB/FR/IT/ES/NL oben. Für Buchstaben-Freigaben
   (PT: M/x) das `zahlen`-Mapping in `FSK_SYSTEME` mitliefern.
-- **Weitere UI-Sprachen** (fr/es/it/nl …): je Sprache `UI_TEXTE`,
-  `uebersetzeStatischesMarkup()`, `INFO_TEXT_*`, TOUR-Texte und eine
-  Rechtstext-Fassung — bewusst zurückgestellt, die neuen Länder starten mit
-  englischer Oberfläche.
+- ~~Weitere UI-Sprachen~~ — **erledigt (12. August 2026):** Französisch,
+  Spanisch, Italienisch und Niederländisch als Oberflächensprachen
+  (`UI_TEXTE`, `MARKUP_TEXTE`, `INFO_TEXT_*` je Sprache; Sprachmodal mit
+  nativen Sprachnamen, `LOCALE` je Sprache). Inhaltsdaten (Titel/Plots/
+  Schlagwörter) gibt es weiterhin nur deutsch/englisch — fr/es/it/nl
+  bekommen englische Inhalte (`INHALTS_SPRACHE`), eigene Inhaltssprachen
+  wären ein weiterer Weg-A-Ausbau. Rechtstexte bleiben bewusst nur
+  Deutsch/Englisch; alle Nicht-DE-Sprachen verlinken die englischen
+  Entwürfe. Die Übersetzungen sind maschinell erstellt und nicht
+  muttersprachlich geprüft.
 - **Anleitungs-Screenshots** (tour/*.png) zeigen die deutsche Oberfläche —
   werden aktualisiert, wenn alle Oberflächen-Änderungen durch sind.
