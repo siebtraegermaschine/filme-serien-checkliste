@@ -147,7 +147,21 @@ async function landImportieren(land) {
 }
 
 async function main() {
-  for (const land of ZIELE) await landImportieren(land);
+  // Ein Land darf die anderen nicht mitreissen: GeoNames fuehrt nicht fuer
+  // jedes Land einen PLZ-Abzug (GR etwa fehlt, HTTP 404). Solche Laender
+  // werden gemeldet und uebersprungen -- die Kino-Ortssuche kennt dort dann
+  // keine Orte, bis eine andere Quelle gefunden ist (in IDEEN.md vermerken,
+  // falls es Nutzer-Meldungen gibt).
+  const uebersprungen = [];
+  for (const land of ZIELE) {
+    try {
+      await landImportieren(land);
+    } catch (err) {
+      uebersprungen.push(land);
+      console.warn(`${land}: uebersprungen (${err.message})`);
+    }
+  }
+  if (uebersprungen.length) console.warn(`\nOhne PLZ-Daten geblieben: ${uebersprungen.join(', ')}`);
   const { rows } = await pool.query('SELECT count(*)::int AS n FROM plz');
   console.log(`\nBestand jetzt: ${rows[0].n} Postleitzahlen.`);
   console.log('Quelle: GeoNames (CC-BY 4.0) -- Namensnennung in den Credits nicht vergessen.');

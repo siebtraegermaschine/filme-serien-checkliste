@@ -1976,6 +1976,7 @@ var UI_TEXTE = {
     fremdSterne: function(name, n){ return name + ': ' + n + ' von 10 Sternen'; },
     fremdUnbewertet: function(name){ return name + ' hat das noch nicht bewertet'; },
     tasteScoreAria: 'Was ist der Taste-Score?',
+    tasteScoreGemeinsam: function(namen){ return 'Der Abgleich ist an: Der Taste-Score gilt hier für dich und ' + namen + ' gemeinsam — er sagt, wie gut ein Titel zu eurem gemeinsamen Geschmack passt.'; },
     matchAria: 'Was ist ein Match?',
     posterGroesser: 'Poster größer anzeigen',
     sprachName: 'Deutsch',
@@ -2194,6 +2195,7 @@ var UI_TEXTE = {
     fremdSterne: function(name, n){ return name + ': ' + n + ' of 10 stars'; },
     fremdUnbewertet: function(name){ return name + ' has not rated this yet'; },
     tasteScoreAria: 'What is the Taste Score?',
+    tasteScoreGemeinsam: function(namen){ return 'Match is on: the Taste Score here applies to you and ' + namen + ' together — it says how well a title fits your combined taste.'; },
     matchAria: 'What is a match?',
     posterGroesser: 'Show larger poster',
     sprachName: 'English',
@@ -2412,6 +2414,7 @@ var UI_TEXTE = {
     fremdSterne: function(name, n){ return name + ' : ' + n + ' étoiles sur 10'; },
     fremdUnbewertet: function(name){ return name + ' n’a pas encore noté ce titre'; },
     tasteScoreAria: 'Qu’est-ce que le Taste Score ?',
+    tasteScoreGemeinsam: function(namen){ return 'Le match est activé\u202f: le Taste Score s’applique ici à toi et ' + namen + ' ensemble — il indique à quel point un titre correspond à vos goûts combinés.'; },
     matchAria: 'Qu’est-ce qu’un match ?',
     posterGroesser: 'Afficher l’affiche en grand',
     sprachName: 'Français',
@@ -2630,6 +2633,7 @@ var UI_TEXTE = {
     fremdSterne: function(name, n){ return name + ': ' + n + ' de 10 estrellas'; },
     fremdUnbewertet: function(name){ return name + ' aún no lo ha valorado'; },
     tasteScoreAria: '¿Qué es el Taste Score?',
+    tasteScoreGemeinsam: function(namen){ return 'El match está activado: aquí el Taste Score se aplica a ti y a ' + namen + ' juntos — indica lo bien que un título encaja con vuestros gustos combinados.'; },
     matchAria: '¿Qué es un match?',
     posterGroesser: 'Mostrar póster más grande',
     sprachName: 'Español',
@@ -2848,6 +2852,7 @@ var UI_TEXTE = {
     fremdSterne: function(name, n){ return name + ': ' + n + ' su 10 stelle'; },
     fremdUnbewertet: function(name){ return name + ' non l’ha ancora valutato'; },
     tasteScoreAria: 'Cos’è il Taste Score?',
+    tasteScoreGemeinsam: function(namen){ return 'Il match è attivo: qui il Taste Score vale per te e ' + namen + ' insieme — indica quanto un titolo corrisponde ai vostri gusti combinati.'; },
     matchAria: 'Cos’è un match?',
     posterGroesser: 'Mostra il poster ingrandito',
     sprachName: 'Italiano',
@@ -3066,6 +3071,7 @@ var UI_TEXTE = {
     fremdSterne: function(name, n){ return name + ': ' + n + ' van 10 sterren'; },
     fremdUnbewertet: function(name){ return name + ' heeft dit nog niet beoordeeld'; },
     tasteScoreAria: 'Wat is de Taste Score?',
+    tasteScoreGemeinsam: function(namen){ return 'Match staat aan: de Taste Score geldt hier voor jou en ' + namen + ' samen — hij geeft aan hoe goed een titel bij jullie gezamenlijke smaak past.'; },
     matchAria: 'Wat is een match?',
     posterGroesser: 'Grotere poster tonen',
     sprachName: 'Nederlands',
@@ -4886,6 +4892,13 @@ function buildPool(combinedRows, streamDoc){
       c: row.cast || [], kw: row.keywords || [], p: row.posterPath || null,
       poster64: row.posterBase64 || null, r: row.rating, vc: row.voteCount, fsk: row.certification || null, ov: row.plot || '',
       source: row.source, providers: [],
+      // Anderssprachige Titelfassung (titleAlt, siehe serializeTitle) als
+      // Alias: damit trifft "Hangover" auch in der deutschen Oberflaeche.
+      // Entfaellt, wenn sie dem Originaltitel entspricht -- der steht schon
+      // im Suchtext (item.ot). alias wird sonst von aliasAufnehmen
+      // (Dubletten) gefuellt; beide Quellen teilen sich dieselbe Liste.
+      alias: row.titleAlt && normTitle(row.titleAlt) !== normTitle(row.originalTitle || '')
+        ? [row.titleAlt] : undefined,
     };
   });
   POOL = ohneDubletten(POOL);
@@ -9750,12 +9763,21 @@ function discFilterPool(){
     '<h3 class="info-title"></h3><p class="info-body"></p></div>';
   document.body.appendChild(bk);
   var titleEl=bk.querySelector('.info-title'), bodyEl=bk.querySelector('.info-body');
+  // Bei aktivem Abgleich rechnet der Taste-Score fuer alle Ausgewaehlten
+  // GEMEINSAM -- dieselbe Zahl bedeutet dann etwas anderes (siehe
+  // UEBERGABE-OFFEN.md 3.5). Die Erklaerung sagt das dazu; die Zahl selbst
+  // bleibt unveraendert.
+  function infoBody(key){
+    var body = INFO_TEXT[key].body;
+    if (key === 'ts' && matchAktiv()) body += '\n\n' + TXT.tasteScoreGemeinsam(namenListe(MATCH_WITH));
+    return body;
+  }
   // Von aussen aufrufbar: Nicht jede Erklaerung haengt an einem unterstrichenen
   // Wort -- der einmalige Hinweis beim ersten "Match" kommt von selbst.
   window.infoZeigen = function(key){
     if (!INFO_TEXT[key]) return;
     titleEl.textContent = INFO_TEXT[key].title;
-    bodyEl.textContent = INFO_TEXT[key].body;
+    bodyEl.textContent = infoBody(key);
     bk.classList.add('open');
   };
   document.addEventListener('click', function(e){
@@ -9768,7 +9790,7 @@ function discFilterPool(){
               : icon.hasAttribute('data-match') ? 'match'
               : 'ts';
       titleEl.textContent = INFO_TEXT[key].title;
-      bodyEl.textContent = INFO_TEXT[key].body;
+      bodyEl.textContent = infoBody(key);
       bk.classList.add('open');
       return;
     }

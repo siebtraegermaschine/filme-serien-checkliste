@@ -56,6 +56,15 @@ export function serializeTitle(row, { withPlot = true, lang = 'de', region = 'DE
   if (row.tmdb_id == null && row.aufgeloeste_tmdb_id != null) {
     out.tmdbIdAufgeloest = row.aufgeloeste_tmdb_id;
   }
+  // Anderssprachige Titelfassung fuer die Suche: 57% der Titel heissen
+  // englisch anders (~15.000, UEBERGABE-OFFEN.md 3.2), und die echten
+  // Suchanfragen sind ueberwiegend englisch. Die deutsche Oberflaeche
+  // bekommt deshalb den englischen Titel als Alias mitgeliefert, die
+  // englische den deutschen -- nur wenn sie sich unterscheiden, sonst
+  // wuechse die Antwort umsonst. Das Frontend nimmt ihn in Suchtext und
+  // Suchvorschlaege auf (buildPool -> alias).
+  const andereFassung = lang === 'en' ? row.title : row.title_en;
+  if (andereFassung && andereFassung !== out.title) out.titleAlt = andereFassung;
   if (withPlot) out.plot = sprachFeld(lang, row.plot, row.overview_en);
   return out;
 }
