@@ -929,7 +929,14 @@
      scrollbar (Muster wie .tour-modal), sonst verschwinden Knoepfe und ✕
      unerreichbar unterhalb. Ja/Nein im Stil der FSK-Knoepfe. */
   .modal-backdrop .modal.nacht-modal { max-width:520px; max-height:85vh;
-    overflow-y:auto; -webkit-overflow-scrolling:touch; }
+    overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
+  .nacht-titel { cursor:pointer; }
+  .nacht-details { padding:4px 0 10px 42px; border-bottom:1px solid var(--border);
+    font-size:13px; color:var(--text-dim); }
+  .nacht-details p { font-size:13px; line-height:1.5; margin:4px 0 8px; }
+  .nacht-details button { background:var(--card); border:1px solid var(--border);
+    color:var(--text); border-radius:10px; padding:6px 12px; font:inherit;
+    font-size:13px; cursor:pointer; }
   .nacht-zeile { display:flex; align-items:center; gap:10px; padding:7px 0;
     border-bottom:1px solid var(--border); }
   .nacht-zeile img { width:32px; border-radius:4px; flex:none; }
@@ -940,6 +947,20 @@
     font-size:13px; cursor:pointer; }
   .nacht-wahl button.active { background:var(--accent-soft);
     border-color:var(--accent); color:var(--accent); }
+  /* Vorauswahl-Leiste: erscheint nach dem Movie-Night-Klick ueber der Liste,
+     solange die Person ihre Auswahl wie gewohnt einstellt. */
+  .nacht-leiste { max-width:700px; margin:14px auto 0; padding:10px 14px;
+    box-sizing:border-box; display:flex; gap:10px; align-items:center;
+    flex-wrap:wrap; background:var(--card); border:1px solid var(--accent);
+    border-radius:12px; }
+  .nacht-leiste span { flex:1 1 200px; color:var(--accent); font-size:13px;
+    font-weight:600; line-height:1.4; }
+  .nacht-leiste button { background:var(--accent-soft); border:1px solid var(--accent);
+    color:var(--accent); border-radius:10px; padding:7px 12px; font:inherit;
+    font-size:13px; cursor:pointer; }
+  .nacht-leiste button.nacht-abbrechen { background:none; border-color:var(--border);
+    color:var(--text); }
+  @media (max-width:640px) { .nacht-leiste { margin-left:20px; margin-right:20px; width:auto; } }
   .fsk-row button { flex:1 1 0; min-width:74px; background:var(--card); border:1px solid var(--border);
     border-radius:8px; padding:9px 6px; color:var(--text-dim); font-size:13px; font-weight:600;
     cursor:pointer; transition:all .15s; }
@@ -1581,9 +1602,9 @@
     <h3 id="importTitelEl">Watchlist importieren</h3>
     <p class="prov-intro" id="importIntroEl"></p>
     <input type="file" id="importDatei" accept=".csv,.json" multiple style="display:none">
-    <button type="button" class="modal-yes" id="importWaehlenBtn"></button>
+    <button type="button" class="auth-submit" id="importWaehlenBtn" style="width:100%"></button>
     <p class="feedback-hinweis" id="importVorschau" style="white-space:pre-line"></p>
-    <button type="button" class="modal-yes" id="importStartBtn" style="display:none"></button>
+    <button type="button" class="auth-submit" id="importStartBtn" style="display:none;width:100%"></button>
   </div>
 </div>
 
@@ -6231,8 +6252,10 @@ function render() {
   const sichtbar = besteNachSortwert(eintraege, effectiveSort(), profile, titelLimit);
   // Fuer Movie Night (siehe movieNightEinrichten): die Kandidaten einer
   // Runde sind die ersten Titel GENAU DIESER Ansicht -- Filter und
-  // Sortierung der Person eingeschlossen.
+  // Sortierung der Person eingeschlossen. Die Vorauswahl-Leiste zeigt die
+  // aktuelle Anzahl live an.
   MOVIE_NIGHT_SICHTBAR = sichtbar;
+  if (window.movieNightLeisteAktualisieren) window.movieNightLeisteAktualisieren();
   sichtbar.forEach(function(e){
     list.appendChild(e.art === 'eigen'
       ? eigeneZeileLi(e.tab, e.idx, profile)
@@ -7881,6 +7904,9 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
     var da = a.row.ord || a.row.rd || '', db = b.row.ord || b.row.rd || '';
     return db.localeCompare(da);
   });
+  // Fuer Movie Night: die sortierte Reihenfolge JE BEREICH festhalten --
+  // eine Runde von der Kino-Seite nimmt now, dann soon, dann later.
+  MOVIE_NIGHT_KINO[key] = entries;
   var limit = cinemaSectionLimit[key];
   var visible = entries.slice(0, limit);
   // Kino: Ansehen/Leihen/Kaufen entfallen, die Filme laufen ja erst an --
@@ -8148,6 +8174,7 @@ document.getElementById('settingsNotifyBtn').onclick = function(){
    Die ganze Oberflaeche entsteht hier im JS (wie das Info-Popup) -- so
    braucht es keine Markup-Uebersetzungstabellen fuer sieben Sprachen. */
 var MOVIE_NIGHT_SICHTBAR = [];
+var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
 (function movieNightEinrichten(){
   var KENNUNG_KEY = 'mt.nachtKennung', NAME_KEY = 'mt.nachtName';
   function kennung(){
@@ -8163,13 +8190,20 @@ var MOVIE_NIGHT_SICHTBAR = [];
 
   var bk = document.createElement('div');
   bk.className = 'modal-backdrop'; bk.id = 'nachtModal';
+  // Unter den .modal-overlay-Dialogen (z-index 1000): Der Trailer soll aus
+  // den Details heraus VOR diesem Fenster aufgehen koennen.
+  bk.style.zIndex = '990';
   bk.innerHTML = '<div class="modal nacht-modal">' +
     '<button class="modal-x" aria-label="' + escAttr(TXT.schliessen) + '">&times;</button>' +
     '<h3 id="nachtTitel"></h3><div id="nachtInhalt"></div></div>';
   document.body.appendChild(bk);
+  // Der Hintergrund darf nicht mitscrollen: Auf dem iPhone uebernahm sonst
+  // die Seite dahinter das Wischen, sobald die Liste am Rand ankam -- danach
+  // wirkte das Fenster eingefroren.
   bk.addEventListener('click', function(e){
     if (e.target === bk || (e.target.closest && e.target.closest('.modal-x'))) {
       bk.classList.remove('open');
+      document.body.style.overflow = '';
       if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
     }
   });
@@ -8177,6 +8211,17 @@ var MOVIE_NIGHT_SICHTBAR = [];
   var pollTimer = null;
   var stimmen = {};          // titleId -> true/false (eigene Wahl dieser Sitzung)
   var aktuellerToken = null;
+  var detailsOffen = {};     // titleId -> aufgeklappt (ueberlebt den Poll-Neuaufbau)
+  var plotCache = {};        // titleId -> Kurztext ('' = keiner vorhanden)
+  var poolJeId = null;
+  function poolItem(id){
+    // Lazy und je Oeffnung neu (siehe oeffnen) -- der Katalog laedt asynchron.
+    if (!poolJeId || poolJeId.size !== POOL.length) {
+      poolJeId = new Map();
+      POOL.forEach(function(x){ if (x.realId != null) poolJeId.set(String(x.realId), x); });
+    }
+    return poolJeId.get(String(id)) || null;
+  }
 
   function link(token){ return location.origin + location.pathname + '?nacht=' + token; }
 
@@ -8188,20 +8233,35 @@ var MOVIE_NIGHT_SICHTBAR = [];
     var scrollVorher = bk.querySelector('.modal').scrollTop;
     var maxJa = Math.max.apply(null, [0].concat(daten.titel.map(function(t){ return t.ja; })));
     var html = '<p class="prov-intro">' + esc(TXT.nachtErklaerung) + '</p>' +
-      '<button type="button" id="nachtTeilen" class="modal-yes" style="margin-bottom:10px">' + esc(TXT.nachtTeilen) + '</button>' +
+      '<button type="button" id="nachtTeilen" class="auth-submit" style="width:100%;margin-bottom:10px">' + esc(TXT.nachtTeilen) + '</button>' +
       '<input type="text" id="nachtName" class="lang-select" style="margin-bottom:10px" maxlength="40" placeholder="' + escAttr(TXT.nachtName) + '">' +
       daten.titel.map(function(t){
         var wahl = stimmen[t.id];
-        return '<div class="nacht-zeile">' +
+        var zeile = '<div class="nacht-zeile">' +
           (t.p ? '<img src="' + escAttr(POSTER + t.p) + '" alt="">' : '<span style="width:32px;flex:none"></span>') +
-          '<span class="nacht-titel">' + esc(t.t) + (t.y ? ' (' + t.y + ')' : '') +
+          '<span class="nacht-titel" data-details="' + escAttr(t.id) + '" role="button" tabindex="0">' + esc(t.t) + (t.y ? ' (' + t.y + ')' : '') +
             (t.ja ? ' <b' + (t.ja === maxJa && maxJa > 0 ? ' style="color:var(--accent)"' : '') + '>+' + t.ja + '</b>' : '') + '</span>' +
           '<span class="nacht-wahl">' +
           '<button type="button" data-ja="' + escAttr(t.id) + '"' + (wahl === true ? ' class="active"' : '') + '>' + esc(TXT.nachtJa) + '</button>' +
           '<button type="button" data-nein="' + escAttr(t.id) + '"' + (wahl === false ? ' class="active"' : '') + '>' + esc(TXT.nachtNein) + '</button>' +
           '</span></div>';
+        // Aufgeklappte Details unter der Zeile: Genres und Bewertung aus dem
+        // POOL (der Katalog laedt fuer jeden Besucher), Kurztext nachgeladen,
+        // Trailer ueber den normalen Trailer-Dialog.
+        if (detailsOffen[t.id]) {
+          var item = poolItem(t.id);
+          var meta = [];
+          if (item && item.g && item.g.length) meta.push(item.g.slice(0, 2).map(genreAnzeige).join(', '));
+          if (item && item.r != null) meta.push('⭐ ' + sterneText(item.r));
+          zeile += '<div class="nacht-details">' +
+            (meta.length ? '<div>' + esc(meta.join(' · ')) + '</div>' : '') +
+            '<p>' + esc(plotCache[t.id] != null ? plotCache[t.id] : TXT.laedt) + '</p>' +
+            (item ? '<button type="button" data-nacht-trailer="' + escAttr(t.id) + '">' + esc(TXT.trailer) + '</button>' : '') +
+            '</div>';
+        }
+        return zeile;
       }).join('') +
-      '<button type="button" id="nachtSenden" class="modal-yes" style="margin-top:12px">' + esc(TXT.nachtAbstimmen) + '</button>' +
+      '<button type="button" id="nachtSenden" class="auth-submit" style="width:100%;margin-top:12px">' + esc(TXT.nachtAbstimmen) + '</button>' +
       '<p class="feedback-hinweis">' + esc(TXT.nachtStand(daten.teilnehmer.length)) +
         (daten.teilnehmer.length ? ' — ' + esc(daten.teilnehmer.join(', ')) : '') + '</p>';
     inhalt.innerHTML = html;
@@ -8213,7 +8273,35 @@ var MOVIE_NIGHT_SICHTBAR = [];
         .then(function(){ inhalt.querySelector('#nachtTeilen').textContent = TXT.kopiert; })
         .catch(function(){ prompt('', url); });
     };
-    try { inhalt.querySelector('#nachtName').value = localStorage.getItem(NAME_KEY) || ''; } catch (e) {}
+    // Name vorbelegen: zuletzt benutzter Name, sonst der Anzeigename des
+    // Kontos (aenderbar -- es ist nur eine Vorbelegung).
+    try {
+      inhalt.querySelector('#nachtName').value = localStorage.getItem(NAME_KEY)
+        || (CURRENT_USER && CURRENT_USER.displayName) || '';
+    } catch (e) {}
+    inhalt.querySelectorAll('[data-details]').forEach(function(el){
+      var oeffneDetails = function(){
+        var id = el.dataset.details;
+        detailsOffen[id] = !detailsOffen[id];
+        if (detailsOffen[id] && plotCache[id] == null) {
+          apiRequest('POST', '/api/titles/plots', { ids: [Number(id)], lang: INHALTS_SPRACHE })
+            .then(function(r){ plotCache[id] = (r.ids && r.ids[id]) || ''; zeichneAusCache(); })
+            .catch(function(){ plotCache[id] = ''; zeichneAusCache(); });
+        }
+        zeichneAusCache();
+      };
+      el.onclick = oeffneDetails;
+      el.onkeydown = function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); oeffneDetails(); } };
+    });
+    inhalt.querySelectorAll('[data-nacht-trailer]').forEach(function(b){
+      b.onclick = function(){
+        var item = poolItem(b.dataset.nachtTrailer);
+        if (!item) return;
+        var kennung = (item.tmdbId && item.type) ? (item.type + '/' + item.tmdbId)
+                    : (item.realId ? ('by-title/' + item.realId) : null);
+        if (kennung) openTrailerModal('/api/trailers/' + kennung, item.t, null);
+      };
+    });
     inhalt.querySelectorAll('[data-ja]').forEach(function(b){
       b.onclick = function(){ stimmen[b.dataset.ja] = true; laden(); };
     });
@@ -8247,29 +8335,70 @@ var MOVIE_NIGHT_SICHTBAR = [];
     letzteDaten = null;
     bk.querySelector('#nachtTitel').textContent = TXT.nachtTitel;
     inhalt.innerHTML = '<p class="prov-intro">' + esc(TXT.laedt) + '</p>';
+    detailsOffen = {}; plotCache = {}; poolJeId = null;
+    document.body.style.overflow = 'hidden';
     bk.classList.add('open');
     laden(true);
     if (pollTimer) clearInterval(pollTimer);
     pollTimer = setInterval(function(){ laden(true); }, 7000);
   }
 
-  var knopf = document.getElementById('movieNightBtn');
-  if (knopf) {
-    knopf.textContent = '🍿 ' + TXT.nachtTitel;
-    knopf.onclick = function(){
-      if (!CURRENT_USER) { alert(TXT.nurAngemeldet); return; }
-      var ids = MOVIE_NIGHT_SICHTBAR
-        .map(function(e){ return e.pool && e.pool.realId; })
-        .filter(Boolean).slice(0, 20).map(Number);
+  /* Vorauswahl-Modus: Der Movie-Night-Klick erstellt NICHT sofort eine
+     Runde (die Abhaengigkeit von der gerade zufaellig eingestellten Ansicht
+     verstand niemand). Stattdessen erscheint eine Leiste ueber der Liste,
+     die App bleibt normal bedienbar -- Filter, Suche, Sortierung, auch der
+     Wechsel zu Serien oder Kino. Erst "Runde erstellen" nimmt die ersten
+     20 Titel der DANN sichtbaren Reihenfolge. */
+  var leiste = null;
+  function kandidatenIds(){
+    var quelle;
+    if (cinemaMode) {
+      quelle = [].concat(MOVIE_NIGHT_KINO.now || [], MOVIE_NIGHT_KINO.soon || [], MOVIE_NIGHT_KINO.later || [])
+        .map(function(e){ return e.item; });
+    } else {
+      quelle = MOVIE_NIGHT_SICHTBAR.map(function(e){ return e.pool; });
+    }
+    return quelle.map(function(p){ return p && p.realId; }).filter(Boolean).slice(0, 20).map(Number);
+  }
+  function leisteWeg(){ if (leiste) { leiste.remove(); leiste = null; } }
+  function leisteAktualisieren(){
+    if (!leiste) return;
+    leiste.querySelector('.nacht-erstellen').textContent = TXT.nachtErstellen(kandidatenIds().length);
+  }
+  window.movieNightLeisteAktualisieren = leisteAktualisieren;
+  function vorauswahlStarten(){
+    if (leiste) return;
+    leiste = document.createElement('div');
+    leiste.className = 'nacht-leiste';
+    leiste.innerHTML = '<span>🍿 ' + esc(TXT.nachtVorauswahl) + '</span>' +
+      '<button type="button" class="nacht-erstellen"></button>' +
+      '<button type="button" class="nacht-abbrechen">' + esc(TXT.nachtAbbrechen) + '</button>';
+    var listeEl = document.getElementById('list');
+    listeEl.parentNode.insertBefore(leiste, listeEl);
+    leiste.querySelector('.nacht-abbrechen').onclick = leisteWeg;
+    leiste.querySelector('.nacht-erstellen').onclick = function(){
+      var ids = kandidatenIds();
       if (ids.length < 2) { alert(TXT.keineTitelAuswahl); return; }
       apiRequest('POST', '/api/movie-night', { titleIds: ids })
         .then(function(r){
+          leisteWeg();
           // Link in die Adresszeile -- geteilt wird ueber den Knopf im
           // Fenster, nicht ungefragt beim Oeffnen.
           history.replaceState(null, '', link(r.token));
           oeffnen(r.token);
         })
         .catch(function(){ alert(TXT.nachtFehler); });
+    };
+    leisteAktualisieren();
+    window.scrollTo(0, 0);
+  }
+  var knopf = document.getElementById('movieNightBtn');
+  if (knopf) {
+    knopf.textContent = '🍿 ' + TXT.nachtTitel;
+    knopf.onclick = function(){
+      if (!CURRENT_USER) { alert(TXT.nurAngemeldet); return; }
+      closeProfileModal();
+      vorauswahlStarten();
     };
   }
 
