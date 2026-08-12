@@ -1190,7 +1190,9 @@
          sahen die beiden dagegen aus wie zwei Spielarten derselben Sache.
          Wer einlaedt, braucht ein Konto (der Link haengt am eigenen); wer den
          Link OEFFNET, braucht keines. -->
-    <button type="button" id="inviteMenuBtn" class="nav-menu-item">Personen einladen</button>
+    <!-- Ausgeblendet auf Wunsch (12. August 2026), Funktion bleibt fuer eine
+         spaetere Reaktivierung verdrahtet -- nur style entfernen. -->
+    <button type="button" id="inviteMenuBtn" class="nav-menu-item" style="display:none">Personen einladen</button>
     <hr class="nav-menu-sep">
     <button type="button" id="authBarLogin" class="nav-menu-item">Anmelden</button>
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
@@ -1569,7 +1571,7 @@
          auf die App hin, gibt nichts preis und hat mit der Personenliste
          darueber nichts zu tun; nebeneinander sahen die beiden Knoepfe aus wie
          zwei Spielarten derselben Sache. -->
-    <button type="button" id="profileShareBtn" class="profile-add">＋ Watchlist teilen</button>
+    <button type="button" id="profileShareBtn" class="profile-add">＋ Personen einladen</button>
     <!-- Beschriftung kommt aus TXT (movieNightEinrichten), nur angemeldet nutzbar. -->
     <button type="button" id="movieNightBtn" class="profile-add">🍿 Movie Night</button>
     <hr class="account-sep">
@@ -3853,7 +3855,7 @@ var MARKUP_TEXTE = {
     '#profileModal .prov-steps li:nth-child(1)': { t: 'Invite friends and family to MovieMatch.' },
     '#profileModal .prov-steps li:nth-child(2)': { h: 'Via <b>Watchlist</b> you can see what your contacts have saved and already watched. Simply add titles you like to your own lists.' },
     '#profileModal .prov-steps li:nth-child(3)': { h: 'Via <b>“Match”</b> you see the <i class="info-word" data-match role="button" tabindex="0" aria-label="What is a match?">matches</i> of your watchlists. That way you quickly find movies, series or cinema releases you want to watch together next.' },
-    '#profileShareBtn': { t: '＋ Share watchlist' },
+    '#profileShareBtn': { t: '＋ Invite people' },
     '#profileModal .prov-intro': { t: 'Watching with kids? Use the age rating filters.' },
     '#inviteTitle': { t: 'Invitation' },
     '#inviteText': { t: 'Loading …' },
@@ -3972,7 +3974,7 @@ var MARKUP_TEXTE = {
     '#profileModal .prov-steps li:nth-child(1)': { t: 'Invite tes amis et ta famille sur MovieMatch.' },
     '#profileModal .prov-steps li:nth-child(2)': { h: 'Via <b>Watchlist</b>, tu vois ce que tes contacts ont enregistré et déjà vu. Ajoute simplement les titres qui te plaisent à tes propres listes.' },
     '#profileModal .prov-steps li:nth-child(3)': { h: 'Via <b>« Match »</b>, tu vois les <i class="info-word" data-match role="button" tabindex="0" aria-label="Qu’est-ce qu’un match ?">matchs</i> de vos watchlists. Tu trouves ainsi rapidement les films, séries ou sorties cinéma que vous voulez regarder ensemble.' },
-    '#profileShareBtn': { t: '＋ Partager la watchlist' },
+    '#profileShareBtn': { t: '＋ Inviter des personnes' },
     '#profileModal .prov-intro': { t: 'Tu regardes avec des enfants ? Utilise les filtres de classification d’âge.' },
     '#inviteTitle': { t: 'Invitation' },
     '#inviteText': { t: 'Chargement …' },
@@ -4091,7 +4093,7 @@ var MARKUP_TEXTE = {
     '#profileModal .prov-steps li:nth-child(1)': { t: 'Invita a amigos y familiares a MovieMatch.' },
     '#profileModal .prov-steps li:nth-child(2)': { h: 'En <b>Watchlist</b> ves lo que tus contactos han guardado y ya han visto. Añade simplemente a tus propias listas los títulos que te gusten.' },
     '#profileModal .prov-steps li:nth-child(3)': { h: 'Con <b>«Match»</b> ves los <i class="info-word" data-match role="button" tabindex="0" aria-label="¿Qué es un match?">matches</i> de vuestras watchlists. Así encontráis rápidamente películas, series o estrenos de cine que queréis ver juntos próximamente.' },
-    '#profileShareBtn': { t: '＋ Compartir watchlist' },
+    '#profileShareBtn': { t: '＋ Invitar a personas' },
     '#profileModal .prov-intro': { t: '¿Veis películas con niños? Usa los filtros de clasificación por edad.' },
     '#inviteTitle': { t: 'Invitación' },
     '#inviteText': { t: 'Cargando …' },
@@ -4210,7 +4212,7 @@ var MARKUP_TEXTE = {
     '#profileModal .prov-steps li:nth-child(1)': { t: 'Invita amici e familiari su MovieMatch.' },
     '#profileModal .prov-steps li:nth-child(2)': { h: 'Tramite <b>Watchlist</b> vedi cosa hanno salvato e già visto i tuoi contatti. Aggiungi semplicemente alle tue liste i titoli che ti piacciono.' },
     '#profileModal .prov-steps li:nth-child(3)': { h: 'Tramite <b>“Match”</b> vedi i <i class="info-word" data-match role="button" tabindex="0" aria-label="Cos’è un match?">match</i> delle vostre watchlist. Così trovi in fretta film, serie o uscite al cinema che volete guardare insieme.' },
-    '#profileShareBtn': { t: '＋ Condividi la watchlist' },
+    '#profileShareBtn': { t: '＋ Invita persone' },
     '#profileModal .prov-intro': { t: 'Guardi qualcosa con i bambini? Usa i filtri di classificazione per età.' },
     '#inviteTitle': { t: 'Invito' },
     '#inviteText': { t: 'Caricamento …' },
@@ -4329,7 +4331,7 @@ var MARKUP_TEXTE = {
     '#profileModal .prov-steps li:nth-child(1)': { t: 'Nodig vrienden en familie uit voor MovieMatch.' },
     '#profileModal .prov-steps li:nth-child(2)': { h: 'Via <b>Watchlist</b> zie je wat je contacten hebben opgeslagen en al hebben gezien. Voeg titels die je aanspreken gewoon toe aan je eigen lijsten.' },
     '#profileModal .prov-steps li:nth-child(3)': { h: 'Via <b>“Match”</b> zie je de <i class="info-word" data-match role="button" tabindex="0" aria-label="Wat is een match?">matches</i> van jullie watchlists. Zo vind je snel films, series of bioscoopfilms die jullie als volgende samen willen kijken.' },
-    '#profileShareBtn': { t: '＋ Watchlist delen' },
+    '#profileShareBtn': { t: '＋ Mensen uitnodigen' },
     '#profileModal .prov-intro': { t: 'Kijk je met kinderen? Gebruik de leeftijdsfilters.' },
     '#inviteTitle': { t: 'Uitnodiging' },
     '#inviteText': { t: 'Laden …' },
@@ -4448,7 +4450,7 @@ var MARKUP_TEXTE = {
     '#profileModal .prov-steps li:nth-child(1)': { t: 'Convide amigos e família para o MovieMatch.' },
     '#profileModal .prov-steps li:nth-child(2)': { h: 'Em <b>Watchlist</b> você vê o que seus contatos salvaram e já assistiram. Basta adicionar às suas próprias listas os títulos que gostar.' },
     '#profileModal .prov-steps li:nth-child(3)': { h: 'Em <b>“Match”</b> você vê os <i class="info-word" data-match role="button" tabindex="0" aria-label="O que é um match?">matches</i> das suas watchlists. Assim vocês encontram rapidamente filmes, séries ou lançamentos de cinema para assistir juntos.' },
-    '#profileShareBtn': { t: '＋ Compartilhar watchlist' },
+    '#profileShareBtn': { t: '＋ Convidar pessoas' },
     '#profileModal .prov-intro': { t: 'Assistindo com crianças? Use os filtros de classificação etária.' },
     '#inviteTitle': { t: 'Convite' },
     '#inviteText': { t: 'Carregando …' },
