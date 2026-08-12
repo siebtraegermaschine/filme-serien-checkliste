@@ -3,15 +3,19 @@ name: Streaming-Daten aktualisieren
 on:
   schedule:
     # Gemessen am 12. August 2026: EIN Regionen-Job dauert rund 1-1,5 Stunden
-    # (DE 87 min) -- eine Achtergruppe also 8-12 Stunden. Deshalb passen keine
-    # vier Gruppen mehr in einen Tag (siehe Job "plan"):
-    # 02:00 UTC: Gruppe A (Kernmaerkte DE...NL) -- TAEGLICH.
-    - cron: "0 2 * * *"
-    # 14:00 UTC: die Gruppen B-E im Wechsel, eine je Tag (Tag-im-Jahr modulo
-    # 4) -- jede Gruppe laeuft damit alle vier Tage. Der eigentliche Ausweg
-    # waere, den Lauf je Region zu beschleunigen (Titel-Details nicht je
-    # Region erneut zu holen) -- bis dahin ist die Rotation der Kompromiss.
-    - cron: "0 14 * * *"
+    # (DE 87 min, AT 58 min) -- eine Achtergruppe also ~8 Stunden. Deshalb
+    # passen keine vier Gruppen in einen Tag (siehe Job "plan"), und die
+    # Kerngruppe startet ABENDS, damit Europa zum Morgen frisch ist:
+    # 20:00 UTC (22 Uhr MESZ): Gruppe A (Kernmaerkte DE...NL) -- TAEGLICH,
+    # fertig gegen 04:30 UTC.
+    - cron: "0 20 * * *"
+    # 05:00 UTC: die Gruppen B-E im Wechsel, eine je Tag (Tag-im-Jahr modulo
+    # 4) -- jede Gruppe laeuft damit alle vier Tage, fertig gegen 13:00 UTC.
+    # Bei 40 Laendern ueber alle Zeitzonen gibt es keine global "richtige"
+    # Nachtzeit -- optimiert wird auf Europa. Der eigentliche Ausweg waere,
+    # den Lauf je Region zu beschleunigen (Titel-Details nicht je Region
+    # erneut zu holen) -- bis dahin ist die Rotation der Kompromiss.
+    - cron: "0 5 * * *"
   workflow_dispatch:            # erlaubt manuelles Auslösen im Actions-Tab
     inputs:
       regionen:
@@ -48,7 +52,7 @@ jobs:
           if [ -n "$EINGABE" ]; then
             LISTE=$(echo "$EINGABE" | tr '[:lower:]' '[:upper:]' | tr -d ' ' | \
               awk -F, '{printf "["; for(i=1;i<=NF;i++){printf "%s\"%s\"", (i>1?",":""), $i}; print "]"}')
-          elif [ "${{ github.event.schedule }}" = "0 14 * * *" ]; then
+          elif [ "${{ github.event.schedule }}" = "0 5 * * *" ]; then
             # 10#: %j liefert fuehrende Nullen (etwa "059"), ohne Basisangabe
             # laese die Shell das als Oktalzahl.
             case $(( 10#$(date -u +%j) % 4 )) in

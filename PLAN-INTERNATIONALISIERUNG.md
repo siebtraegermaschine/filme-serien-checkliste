@@ -301,12 +301,16 @@ französische Oberfläche) und MX, AR, CL, CO (spanischsprachig) — zusammen
 wie für die USA: rechtliche Klärung steht aus, siehe Abschnitt 4.
 
 **Workflow-Zeitplan (nach Laufzeitmessung am 12. August 2026):** Ein
-Streaming-Regionen-Job dauert real 1–1,5 Stunden (DE: 87 min) — vier
-Achtergruppen pro Tag passen also NICHT. Deshalb (`streaming.yml`, Job
-`plan`): **Gruppe A (Kernmärkte DE…NL) täglich 02:00 UTC; die Gruppen B–E
-rotieren um 14:00 UTC** (Tag-im-Jahr modulo 4, jede Gruppe alle vier
-Tage). Kino-Läufe sind schnell (~5 min/Region) und laufen **täglich für
-alle 40 Regionen** in einer Kette (05:00 UTC). Der eigentliche Ausweg wäre,
+Streaming-Regionen-Job dauert real ~1–1,5 Stunden (DE: 87 min, AT:
+58 min) — vier Achtergruppen pro Tag passen also NICHT. Deshalb
+(`streaming.yml`, Job `plan`): **Gruppe A (Kernmärkte DE…NL) täglich
+abends 20:00 UTC** (fertig gegen 04:30 UTC — Europa ist damit zum Morgen
+frisch); **die Gruppen B–E rotieren um 05:00 UTC** (Tag-im-Jahr modulo 4,
+jede Gruppe alle vier Tage, fertig gegen 13:00 UTC). Bei 40 Ländern über
+alle Zeitzonen gibt es keine global „richtige" Nachtzeit — optimiert wird
+auf Europa. Kino-Läufe sind schnell (~5 min/Region) und laufen **täglich
+für alle 40 Regionen** in einer Kette (13:30 UTC, nach der
+Streaming-Rotation). Der eigentliche Ausweg wäre,
 den Streaming-Lauf je Region zu beschleunigen (Titel-Details nicht je
 Region erneut holen) — als Folgeaufgabe vermerkt. Manuelles Auslösen nimmt
 in beiden Workflows wahlweise eine eigene Regionsliste entgegen (Feld
