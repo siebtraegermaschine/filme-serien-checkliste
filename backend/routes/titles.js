@@ -5,6 +5,7 @@ import { ausListe, leeren } from '../lib/listenCache.js';
 import { geheimnisStimmt } from '../lib/vergleich.js';
 import { mengenGrenze } from '../middleware/rateLimit.js';
 import { sprachWahl, regionWahl, sprachFeld, freigabeFuer } from '../lib/i18n.js';
+import { schlagworteFuer } from '../lib/schlagworte.js';
 
 // Grenze je IP fuer die Inhaltsangaben der sichtbaren Zeilen. Der haeufigste
 // der oeffentlichen DB-Endpunkte -- laeuft bei jedem Nachladen einer Liste --,
@@ -34,7 +35,7 @@ export function serializeTitle(row, { withPlot = true, lang = 'de', region = 'DE
     genres: row.genres,
     director: row.director,
     cast: row.cast_names,
-    keywords: row.keywords,
+    keywords: schlagworteFuer(lang, row.keywords),
     rating: row.rating != null ? Number(row.rating) : null,
     voteCount: row.vote_count,
     certification: freigabeFuer(region, row.certifications, row.certification),

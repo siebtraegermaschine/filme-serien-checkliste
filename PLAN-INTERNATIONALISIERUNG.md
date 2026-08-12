@@ -333,8 +333,10 @@ Abschnitt 5 bleibt bestehen).
 
 ### Was bewusst offen bleibt
 
-- **Schlagwörter auf Englisch** (Hashtags sind deutsche Übersetzungen, siehe
-  `apply-keyword-translation.mjs`) — für EN-Nutzer erscheinen sie deutsch.
+- ~~Schlagwörter auf Englisch~~ — **erledigt (12. August 2026):** Das Backend
+  übersetzt die deutschen Hashtags bei `?lang=en` über die rückwärts gelesene
+  Übersetzungstabelle (`backend/lib/schlagworte.js`); Hashtags ohne Eintrag
+  bleiben deutsch (derselbe Rückfall wie bei Titeln/Plots).
 - **USA** (Abschnitt 4): unverändert offen, zuerst die Rechtsfrage.
 - **Weitere EU-Länder** (PT, PL, Skandinavien …): je Land nur noch
   `REGIONEN` in `backend/lib/i18n.js`, Workflow-Matrix,

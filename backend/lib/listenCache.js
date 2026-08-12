@@ -31,10 +31,14 @@ const gzip = promisify(zlib.gzip);
 const EINTRAEGE = new Map();
 const IM_BAU = new Map();
 
-// Mehr Spielarten als diese gibt es im laufenden Betrieb nicht (der Start holt
-// genau eine). Die Grenze ist eine Sicherung gegen Aufrufe mit ausgedachten
-// Parametern, die den Speicher volllaufen liessen.
-const MAX_EINTRAEGE = 6;
+// Die Grenze ist eine Sicherung gegen Speicher-Volllaufen; verdraengt wird
+// FIFO (siehe bauen). Seit der Region-Erweiterung gibt es mehr legitime
+// Spielarten (2 Sprachen x 8 Regionen je Endpunkt) -- die meisten davon
+// werden selten angefragt und duerfen ruhig neu gebaut werden, aber die
+// Grenze muss gross genug sein, dass eine Handvoll seltener Kombinationen
+// nicht die heissen DE-Eintraege verdraengt. 12 Eintraege sind bei ~13 MB je
+// Titel-Liste (JSON + gzip) ein vertretbares Speicher-Maximum.
+const MAX_EINTRAEGE = 12;
 
 /* Wie lange ein Browser die Antwort ohne Rueckfrage verwenden darf. Zwei
    Minuten sind ein Kompromiss: Der Katalog aendert sich nur nachts, aber ein

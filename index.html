@@ -1705,7 +1705,10 @@ let DETAILS = { filme: [], serien: [] };
 
    Inhaltsdaten (Titel/Plots) kommen bereits in der gewaehlten Sprache vom
    Server (?lang=..., Weg A); Genres uebersetzt genreAnzeige() ueber die
-   TMDB-Genre-Paarung (genre_alias), Schlagwoerter bleiben vorerst deutsch.
+   TMDB-Genre-Paarung (genre_alias), Schlagwoerter uebersetzt der Server bei
+   ?lang=en gleich mit (backend/lib/schlagworte.js) -- sie kommen dann als
+   englische CamelCase-Hashtags an und laufen durch dieselbe Auftrenn- und
+   Such-Logik wie die deutschen.
    ===================================================================== */
 var SPRACHE_KEY = 'mt.sprache';
 var REGION_KEY = 'mt.region';
