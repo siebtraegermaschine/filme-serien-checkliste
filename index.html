@@ -882,15 +882,10 @@
      statt ihn zu erdruecken. */
   .profile-item { flex-wrap: wrap; }
   .profile-item .pi-aktionen { display:flex; gap:4px; margin-left:auto; }
-  /* ⋯ oeffnet die Nebenaktionen als eigene Reihe mit Beschriftung. */
-  .profile-item .pi-mehr { background:none; border:none; color:var(--text-dim);
-    font-size:18px; padding:2px 6px; cursor:pointer; line-height:1; }
-  .profile-item .pi-neben { flex-basis:100%; display:flex; gap:8px;
-    flex-wrap:wrap; align-items:center; margin-top:4px; }
-  .profile-item .pi-neben button { display:flex; align-items:center; gap:6px;
-    background:var(--card); border:1px solid var(--border); color:var(--text-dim);
-    border-radius:8px; padding:5px 10px; font:inherit; font-size:12.5px;
-    cursor:pointer; }
+  /* Eigene Reihe unter den Knoepfen fuer Herz und ✕ -- rechtsbuendig,
+     bewusst kleiner als die Hauptaktionen. */
+  .profile-item .pi-neben { flex-basis:100%; display:flex; gap:10px;
+    justify-content:flex-end; align-items:center; margin-top:2px; }
   .profile-item .pi-btn { background:var(--card); border:1px solid var(--border); border-radius:7px;
     padding:6px 9px; color:var(--text-dim); font-size:11.5px; cursor:pointer; white-space:nowrap;
     transition:all .15s; }
@@ -8976,7 +8971,6 @@ function favoritSchalten(uid){
   if (s.has(uid)) s.delete(uid); else s.add(uid);
   try { localStorage.setItem(FAVORITEN_KEY, JSON.stringify(Array.from(s))); } catch (e) {}
 }
-var PI_MENUE_OFFEN = new Set();
 function renderProfileList(){
   var el = document.getElementById('profileList');
   var favoriten = favoritenLesen();
@@ -9004,17 +8998,15 @@ function renderProfileList(){
                '<button type="button" class="pi-btn' + (inAnsicht ? ' on' : '') + '" data-tun="w">' + TXT.watchliste + '</button>' +
                '<button type="button" class="pi-btn' + (aktiv ? ' on' : '') + '" data-tun="m">' + TXT.matchWort + '</button>' +
              '</div>' +
-             // Nebensaechliches hinter einem ⋯-Menue: Favorit (kosmetisch)
-             // und Verknuepfung loesen (selten, zerstoererisch) gehoeren
-             // nicht dauerhaft neben die Hauptaktionen.
-             '<button type="button" class="pi-mehr" aria-expanded="' + (PI_MENUE_OFFEN.has(p.id) ? 'true' : 'false') + '" aria-label="⋯">⋯</button>' +
-             (PI_MENUE_OFFEN.has(p.id)
-               ? '<div class="pi-neben">' +
-                 '<button type="button" class="pi-fav' + (favorit ? ' on' : '') + '" aria-pressed="' +
-                   (favorit ? 'true' : 'false') + '">' + HERZ_SVG + ' ' + esc(TXT.favoritOben) + '</button>' +
-                 '<button type="button" class="pi-del">✕ ' + esc(TXT.verknuepfungLoesen) + '</button>' +
-                 '</div>'
-               : '') +
+             // Nebensaechliches unter die Knoepfe statt neben den Namen:
+             // Favorit (kosmetisch) und Verknuepfung loesen (selten) druecken
+             // sonst die Hauptaktionen zusammen.
+             '<div class="pi-neben">' +
+             '<button type="button" class="pi-fav' + (favorit ? ' on' : '') + '" aria-pressed="' +
+               (favorit ? 'true' : 'false') + '" aria-label="' + TXT.favoritOben + '">' +
+               HERZ_SVG + '</button>' +
+             '<button type="button" class="pi-del" aria-label="' + TXT.verknuepfungLoesen + '">✕</button>' +
+             '</div>' +
            '</div>';
   }).join('');
   // Ausgeloggt steht hier, warum die Liste leer ist und der Knopf darunter
@@ -9075,20 +9067,12 @@ function renderProfileList(){
         renderProfileList();
       };
     });
-    var mehrBtn = row.querySelector('.pi-mehr');
-    if (mehrBtn) mehrBtn.onclick = function(e){
-      e.stopPropagation();
-      if (PI_MENUE_OFFEN.has(uid)) PI_MENUE_OFFEN.delete(uid); else PI_MENUE_OFFEN.add(uid);
-      renderProfileList();
-    };
-    var favBtn = row.querySelector('.pi-fav');
-    if (favBtn) favBtn.onclick = function(e){
+    row.querySelector('.pi-fav').onclick = function(e){
       e.stopPropagation();
       favoritSchalten(uid);
       renderProfileList();
     };
-    var delBtn = row.querySelector('.pi-del');
-    if (delBtn) delBtn.onclick = function(e){
+    row.querySelector('.pi-del').onclick = function(e){
       e.stopPropagation();
       if (!confirm(TXT.loesenFrage(profilName(uid)))) return;
       apiRequest('DELETE', '/api/links/' + uid).then(function(){
