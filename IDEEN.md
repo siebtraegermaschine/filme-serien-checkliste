@@ -1,5 +1,9 @@
 # Ideen-Speicher — für später vermerkt
 
+> Wachstums- und Bindungs-Vorschläge (Analyse der Mechanismen erfolgreicher
+> Tech-Produkte, priorisierte Reihenfolge) stehen gesondert in
+> `IDEEN-WACHSTUM.md` — mehrere Ideen von hier sind dort eingeordnet.
+
 > Stand 12. August 2026. Gesammelt aus der Internationalisierungs-Session;
 > Christian hat entschieden, was sofort gebaut wird (siehe Commits) und was
 > hier für später liegt. Bewusst zurückgestellte RECHTSTHEMEN stehen nicht
