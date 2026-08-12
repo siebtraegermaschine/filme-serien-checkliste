@@ -1457,6 +1457,9 @@
       <!-- Nur angemeldet sichtbar; Beschriftung samt An/Aus-Zustand kommt aus
            dem JS (benachrichtigungKnopfAktualisieren). -->
       <button type="button" id="settingsNotifyBtn" class="modal-yes" style="display:none">E-Mail-Benachrichtigung</button>
+      <!-- Watchlist-Import aus Letterboxd/IMDb/Trakt -- nur angemeldet,
+           Beschriftung aus dem JS (importKnopfAktualisieren). -->
+      <button type="button" id="settingsImportBtn" class="modal-yes" style="display:none">Import</button>
       <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Titel</button>
       <button type="button" id="settingsAccountBtn" class="modal-yes">Zugangsdaten</button>
       <button type="button" id="settingsCreditsBtn" class="modal-yes">Credits</button>
@@ -1549,6 +1552,21 @@
     <select class="lang-select" id="langSpracheSelect" aria-labelledby="langSpracheLabel"></select>
     <p class="prov-intro" style="margin-top:14px" id="langRegionLabel">Region</p>
     <select class="lang-select" id="langRegionSelect" aria-labelledby="langRegionLabel"></select>
+  </div>
+</div>
+
+<!-- Watchlist-Import (Letterboxd/IMDb/Trakt). Nur die Huelle -- alle Texte
+     setzt das JS aus TXT (importEinrichten), damit alle sieben Sprachen ohne
+     Markup-Tabelle auskommen. -->
+<div id="importModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="importModalX" aria-label="Schließen">✕</button>
+    <h3 id="importTitelEl">Watchlist importieren</h3>
+    <p class="prov-intro" id="importIntroEl"></p>
+    <input type="file" id="importDatei" accept=".csv,.json" multiple style="display:none">
+    <button type="button" class="modal-yes" id="importWaehlenBtn"></button>
+    <p class="feedback-hinweis" id="importVorschau" style="white-space:pre-line"></p>
+    <button type="button" class="modal-yes" id="importStartBtn" style="display:none"></button>
   </div>
 </div>
 
@@ -1982,6 +2000,14 @@ var UI_TEXTE = {
     tasteScoreAria: 'Was ist der Taste-Score?',
     tasteScoreGemeinsam: function(namen){ return 'Der Abgleich ist an: Der Taste-Score gilt hier für dich und ' + namen + ' gemeinsam — er sagt, wie gut ein Titel zu eurem gemeinsamen Geschmack passt.'; },
     benachrichtigungKnopf: function(an){ return 'E-Mail bei neuen Watchlist-Treffern: ' + (an ? 'An' : 'Aus'); },
+    importKnopf: 'Watchlist importieren',
+    importIntro: 'Exportdateien von Letterboxd (watchlist/watched/ratings.csv), IMDb (Listen-Export) oder Trakt (JSON) auswählen. Abgeglichen wird gegen den Katalog — übernommen wird erst nach der Vorschau.',
+    importWaehlen: 'Dateien auswählen',
+    importVorschau: function(wl, ges, fehlt){ return wl + ' für die Watchlist, ' + ges + ' als gesehen' + (fehlt ? ' — ' + fehlt + ' nicht im Katalog gefunden:' : '.'); },
+    importStarten: 'Übernehmen',
+    importLaeuft: function(n, gesamt){ return n + ' von ' + gesamt + ' übernommen …'; },
+    importFertig: function(n){ return n + ' Titel übernommen. Die Seite lädt gleich neu.'; },
+    importFehler: function(name){ return '„' + name + '“ hat kein bekanntes Format (Letterboxd-/IMDb-CSV oder Trakt-JSON).'; },
     matchAria: 'Was ist ein Match?',
     posterGroesser: 'Poster größer anzeigen',
     sprachName: 'Deutsch',
@@ -2202,6 +2228,14 @@ var UI_TEXTE = {
     tasteScoreAria: 'What is the Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Match is on: the Taste Score here applies to you and ' + namen + ' together — it says how well a title fits your combined taste.'; },
     benachrichtigungKnopf: function(an){ return 'Email for new watchlist matches: ' + (an ? 'On' : 'Off'); },
+    importKnopf: 'Import watchlist',
+    importIntro: 'Choose export files from Letterboxd (watchlist/watched/ratings.csv), IMDb (list export) or Trakt (JSON). Entries are matched against the catalogue — nothing is applied until you confirm the preview.',
+    importWaehlen: 'Choose files',
+    importVorschau: function(wl, ges, fehlt){ return wl + ' for the watchlist, ' + ges + ' as watched' + (fehlt ? ' — ' + fehlt + ' not found in the catalogue:' : '.'); },
+    importStarten: 'Apply',
+    importLaeuft: function(n, gesamt){ return n + ' of ' + gesamt + ' applied …'; },
+    importFertig: function(n){ return n + ' titles applied. The page will reload.'; },
+    importFehler: function(name){ return '“' + name + '” is not a known format (Letterboxd/IMDb CSV or Trakt JSON).'; },
     matchAria: 'What is a match?',
     posterGroesser: 'Show larger poster',
     sprachName: 'English',
@@ -2422,6 +2456,14 @@ var UI_TEXTE = {
     tasteScoreAria: 'Qu’est-ce que le Taste Score ?',
     tasteScoreGemeinsam: function(namen){ return 'Le match est activé\u202f: le Taste Score s’applique ici à toi et ' + namen + ' ensemble — il indique à quel point un titre correspond à vos goûts combinés.'; },
     benachrichtigungKnopf: function(an){ return 'E-mail pour les nouveautés de ta watchlist\u202f: ' + (an ? 'activé' : 'désactivé'); },
+    importKnopf: 'Importer ta watchlist',
+    importIntro: 'Choisis des fichiers d’export de Letterboxd (watchlist/watched/ratings.csv), IMDb (export de liste) ou Trakt (JSON). Les entrées sont comparées au catalogue — rien n’est appliqué avant la confirmation de l’aperçu.',
+    importWaehlen: 'Choisir des fichiers',
+    importVorschau: function(wl, ges, fehlt){ return wl + ' pour la watchlist, ' + ges + ' comme vus' + (fehlt ? ' — ' + fehlt + ' introuvables dans le catalogue\u202f:' : '.'); },
+    importStarten: 'Appliquer',
+    importLaeuft: function(n, gesamt){ return n + ' sur ' + gesamt + ' appliqués …'; },
+    importFertig: function(n){ return n + ' titres appliqués. La page va se recharger.'; },
+    importFehler: function(name){ return '«\u202f' + name + '\u202f» n’a pas un format connu (CSV Letterboxd/IMDb ou JSON Trakt).'; },
     matchAria: 'Qu’est-ce qu’un match ?',
     posterGroesser: 'Afficher l’affiche en grand',
     sprachName: 'Français',
@@ -2642,6 +2684,14 @@ var UI_TEXTE = {
     tasteScoreAria: '¿Qué es el Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'El match está activado: aquí el Taste Score se aplica a ti y a ' + namen + ' juntos — indica lo bien que un título encaja con vuestros gustos combinados.'; },
     benachrichtigungKnopf: function(an){ return 'Correo con novedades de tu watchlist: ' + (an ? 'activado' : 'desactivado'); },
+    importKnopf: 'Importar tu watchlist',
+    importIntro: 'Elige archivos de exportación de Letterboxd (watchlist/watched/ratings.csv), IMDb (exportación de listas) o Trakt (JSON). Las entradas se comparan con el catálogo — nada se aplica hasta confirmar la vista previa.',
+    importWaehlen: 'Elegir archivos',
+    importVorschau: function(wl, ges, fehlt){ return wl + ' para la watchlist, ' + ges + ' como vistos' + (fehlt ? ' — ' + fehlt + ' no encontrados en el catálogo:' : '.'); },
+    importStarten: 'Aplicar',
+    importLaeuft: function(n, gesamt){ return n + ' de ' + gesamt + ' aplicados …'; },
+    importFertig: function(n){ return n + ' títulos aplicados. La página se recargará.'; },
+    importFehler: function(name){ return '«' + name + '» no tiene un formato conocido (CSV de Letterboxd/IMDb o JSON de Trakt).'; },
     matchAria: '¿Qué es un match?',
     posterGroesser: 'Mostrar póster más grande',
     sprachName: 'Español',
@@ -2862,6 +2912,14 @@ var UI_TEXTE = {
     tasteScoreAria: 'Cos’è il Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Il match è attivo: qui il Taste Score vale per te e ' + namen + ' insieme — indica quanto un titolo corrisponde ai vostri gusti combinati.'; },
     benachrichtigungKnopf: function(an){ return 'E-mail per le novità della tua watchlist: ' + (an ? 'attiva' : 'disattivata'); },
+    importKnopf: 'Importa la tua watchlist',
+    importIntro: 'Scegli i file di esportazione di Letterboxd (watchlist/watched/ratings.csv), IMDb (esportazione liste) o Trakt (JSON). Le voci vengono confrontate con il catalogo — nulla viene applicato prima della conferma dell’anteprima.',
+    importWaehlen: 'Scegli i file',
+    importVorschau: function(wl, ges, fehlt){ return wl + ' per la watchlist, ' + ges + ' come visti' + (fehlt ? ' — ' + fehlt + ' non trovati nel catalogo:' : '.'); },
+    importStarten: 'Applica',
+    importLaeuft: function(n, gesamt){ return n + ' di ' + gesamt + ' applicati …'; },
+    importFertig: function(n){ return n + ' titoli applicati. La pagina si ricaricherà.'; },
+    importFehler: function(name){ return '“' + name + '” non ha un formato conosciuto (CSV Letterboxd/IMDb o JSON Trakt).'; },
     matchAria: 'Cos’è un match?',
     posterGroesser: 'Mostra il poster ingrandito',
     sprachName: 'Italiano',
@@ -3082,6 +3140,14 @@ var UI_TEXTE = {
     tasteScoreAria: 'Wat is de Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Match staat aan: de Taste Score geldt hier voor jou en ' + namen + ' samen — hij geeft aan hoe goed een titel bij jullie gezamenlijke smaak past.'; },
     benachrichtigungKnopf: function(an){ return 'E-mail bij nieuwe watchlist-treffers: ' + (an ? 'aan' : 'uit'); },
+    importKnopf: 'Watchlist importeren',
+    importIntro: 'Kies exportbestanden van Letterboxd (watchlist/watched/ratings.csv), IMDb (lijst-export) of Trakt (JSON). De items worden vergeleken met de catalogus — er wordt pas iets toegepast na de voorvertoning.',
+    importWaehlen: 'Bestanden kiezen',
+    importVorschau: function(wl, ges, fehlt){ return wl + ' voor de watchlist, ' + ges + ' als gezien' + (fehlt ? ' — ' + fehlt + ' niet gevonden in de catalogus:' : '.'); },
+    importStarten: 'Toepassen',
+    importLaeuft: function(n, gesamt){ return n + ' van ' + gesamt + ' toegepast …'; },
+    importFertig: function(n){ return n + ' titels toegepast. De pagina wordt opnieuw geladen.'; },
+    importFehler: function(name){ return '“' + name + '” heeft geen bekend formaat (Letterboxd/IMDb-CSV of Trakt-JSON).'; },
     matchAria: 'Wat is een match?',
     posterGroesser: 'Grotere poster tonen',
     sprachName: 'Nederlands',
@@ -3302,6 +3368,14 @@ var UI_TEXTE = {
     tasteScoreAria: 'O que é o Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'O Match está ativo: o Taste Score aqui vale para você e ' + namen + ' juntos — ele indica o quanto um título combina com o gosto de vocês.'; },
     benachrichtigungKnopf: function(an){ return 'E-mail para novos matches na watchlist: ' + (an ? 'Ativado' : 'Desativado'); },
+    importKnopf: 'Importar sua watchlist',
+    importIntro: 'Escolha arquivos de exportação do Letterboxd (watchlist/watched/ratings.csv), IMDb (exportação de listas) ou Trakt (JSON). As entradas são comparadas com o catálogo — nada é aplicado antes de você confirmar a prévia.',
+    importWaehlen: 'Escolher arquivos',
+    importVorschau: function(wl, ges, fehlt){ return wl + ' para a watchlist, ' + ges + ' como vistos' + (fehlt ? ' — ' + fehlt + ' não encontrados no catálogo:' : '.'); },
+    importStarten: 'Aplicar',
+    importLaeuft: function(n, gesamt){ return n + ' de ' + gesamt + ' aplicados …'; },
+    importFertig: function(n){ return n + ' títulos aplicados. A página será recarregada.'; },
+    importFehler: function(name){ return '“' + name + '” não tem um formato conhecido (CSV do Letterboxd/IMDb ou JSON do Trakt).'; },
     matchAria: 'O que é um match?',
     posterGroesser: 'Mostrar pôster maior',
     sprachName: 'Português',
@@ -7974,7 +8048,204 @@ document.getElementById('settingsNotifyBtn').onclick = function(){
     .then(function(u){ CURRENT_USER = u; benachrichtigungKnopfAktualisieren(); })
     .catch(function(){ CURRENT_USER.benachrichtigung = !neu; benachrichtigungKnopfAktualisieren(); });
 };
-function openSettingsModal(){ benachrichtigungKnopfAktualisieren(); _settingsModal.style.display = 'flex'; }
+/* ---- Watchlist-Import (Letterboxd / IMDb / Trakt) ----
+   Laeuft komplett im Browser: Exportdateien einlesen, gegen den POOL
+   abgleichen (Titel+Jahr, auch Original- und Alias-Titel), Vorschau zeigen,
+   dann ueber die normale Progress-API uebernehmen. Bewusst KEIN eigener
+   Backend-Endpunkt: Was nicht im Katalog ist, wird gezaehlt und benannt,
+   aber nicht angelegt -- der Katalog soll kuratiert bleiben. */
+function importKnopfAktualisieren(){
+  var knopf = document.getElementById('settingsImportBtn');
+  if (!knopf) return;
+  if (!CURRENT_USER) { knopf.style.display = 'none'; return; }
+  knopf.style.display = '';
+  knopf.textContent = TXT.importKnopf;
+}
+(function importEinrichten(){
+  var modal = document.getElementById('importModal');
+  if (!modal) return;
+  var dateiEl = document.getElementById('importDatei');
+  var vorschauEl = document.getElementById('importVorschau');
+  var startBtn = document.getElementById('importStartBtn');
+  var geplant = null;
+
+  // Kleiner CSV-Leser mit Anfuehrungszeichen-Regeln (Titel enthalten Kommas).
+  function csvZeilen(text){
+    var zeilen = [], zeile = [], feld = '', inQuote = false;
+    for (var i = 0; i < text.length; i++) {
+      var z = text[i];
+      if (inQuote) {
+        if (z === '"' && text[i + 1] === '"') { feld += '"'; i++; }
+        else if (z === '"') inQuote = false;
+        else feld += z;
+      } else if (z === '"') inQuote = true;
+      else if (z === ',') { zeile.push(feld); feld = ''; }
+      else if (z === '\n' || z === '\r') {
+        if (z === '\r' && text[i + 1] === '\n') i++;
+        zeile.push(feld); feld = '';
+        if (zeile.length > 1 || zeile[0] !== '') zeilen.push(zeile);
+        zeile = [];
+      } else feld += z;
+    }
+    if (feld !== '' || zeile.length) { zeile.push(feld); zeilen.push(zeile); }
+    return zeilen;
+  }
+  function normJahr(x){ var n = Number(x); return Number.isFinite(n) && n > 1880 ? n : null; }
+
+  /* Erkennt das Format und liefert Eintraege
+     { name, jahr, typ ('movie'|'series'|null), gesehen, sterne (1-10|null) }.
+     - Letterboxd-CSV: Spalte "Letterboxd URI"; watchlist/watched sind an den
+       SPALTEN nicht zu unterscheiden, deshalb entscheidet der Dateiname.
+       Ratings (0,5-5 Sterne) werden auf 1-10 verdoppelt.
+     - IMDb-CSV: Spalten "Const"/"Title Type"; "Date Rated" heisst gesehen.
+     - Trakt-JSON: Objekte mit movie/show; watched/history heisst gesehen,
+       ratings.json bringt 1-10 direkt. */
+  function eintraegeAus(dateiname, text){
+    var name = String(dateiname || '').toLowerCase();
+    var raus = [];
+    if (name.endsWith('.json') || text.trim().charAt(0) === '[') {
+      var daten = JSON.parse(text);
+      if (!Array.isArray(daten)) throw new Error('kein Listen-JSON');
+      var gesehenDatei = /watched|history/.test(name);
+      daten.forEach(function(e){
+        var werk = e && (e.movie || e.show);
+        if (!werk || !werk.title) return;
+        raus.push({ name: werk.title, jahr: normJahr(werk.year), typ: e.movie ? 'movie' : 'series',
+                    gesehen: gesehenDatei || e.plays != null || e.last_watched_at != null || e.rating != null,
+                    sterne: e.rating != null ? Math.max(1, Math.min(10, Math.round(e.rating))) : null });
+      });
+      return raus;
+    }
+    var zeilen = csvZeilen(text);
+    if (zeilen.length < 2) return raus;
+    var kopf = zeilen[0].map(function(s){ return s.trim(); });
+    function spalte(n){ return kopf.indexOf(n); }
+    if (spalte('Letterboxd URI') !== -1) {
+      var sName = spalte('Name'), sJahr = spalte('Year'), sWert = spalte('Rating');
+      var gesehenLb = /watched|diary|ratings/.test(name);
+      zeilen.slice(1).forEach(function(z){
+        if (!z[sName]) return;
+        var wert = sWert !== -1 ? Number(z[sWert]) : NaN;
+        raus.push({ name: z[sName], jahr: normJahr(z[sJahr]), typ: null, gesehen: gesehenLb,
+                    sterne: Number.isFinite(wert) && wert > 0 ? Math.max(1, Math.min(10, Math.round(wert * 2))) : null });
+      });
+      return raus;
+    }
+    if (spalte('Const') !== -1 || spalte('Title Type') !== -1) {
+      var iName = spalte('Title'), iJahr = spalte('Year'), iTyp = spalte('Title Type'),
+          iWert = spalte('Your Rating');
+      var gesehenImdb = spalte('Date Rated') !== -1 || /rating/.test(name);
+      zeilen.slice(1).forEach(function(z){
+        if (!z[iName]) return;
+        var typ = iTyp !== -1 && /tv(Mini)?Series/i.test(z[iTyp] || '') ? 'series'
+                : iTyp !== -1 && /movie/i.test(z[iTyp] || '') ? 'movie' : null;
+        var wert = iWert !== -1 ? Number(z[iWert]) : NaN;
+        raus.push({ name: z[iName], jahr: normJahr(z[iJahr]), typ: typ,
+                    gesehen: gesehenImdb && Number.isFinite(wert) && wert > 0,
+                    sterne: Number.isFinite(wert) && wert > 0 ? Math.max(1, Math.min(10, Math.round(wert))) : null });
+      });
+      return raus;
+    }
+    throw new Error('unbekanntes Format');
+  }
+
+  // Nachschlagewerk je Import-Vorgang: normalisierter Name -> Pool-Eintraege.
+  function poolIndex(){
+    var idx = new Map();
+    POOL.forEach(function(p){
+      if (p.realId == null) return;
+      [p.t, p.ot].concat(p.alias || []).forEach(function(n){
+        if (!n) return;
+        var k = normTitle(n);
+        if (!idx.has(k)) idx.set(k, []);
+        if (idx.get(k).indexOf(p) === -1) idx.get(k).push(p);
+      });
+    });
+    return idx;
+  }
+  function findePool(idx, n, jahr, typ){
+    var kandidaten = idx.get(normTitle(String(n || ''))) || [];
+    if (typ) kandidaten = kandidaten.filter(function(p){ return p.type === typ; });
+    if (jahr) {
+      var genau = kandidaten.filter(function(p){ return p.y && Math.abs(p.y - jahr) <= 1; });
+      if (genau.length) kandidaten = genau;
+    }
+    return kandidaten[0] || null;
+  }
+
+  function vorschauZeigen(){
+    if (!geplant) return;
+    var text = TXT.importVorschau(geplant.watchlist.length, geplant.gesehen.length, geplant.fehlend.length);
+    if (geplant.fehlend.length) text += '\n' + geplant.fehlend.slice(0, 15).join(' · ')
+      + (geplant.fehlend.length > 15 ? ' …' : '');
+    vorschauEl.textContent = text;
+    var hatWas = geplant.watchlist.length || geplant.gesehen.length;
+    startBtn.style.display = hatWas ? '' : 'none';
+    startBtn.textContent = TXT.importStarten;
+    startBtn.disabled = false;
+  }
+
+  dateiEl.onchange = async function(){
+    var idx = poolIndex();
+    geplant = { watchlist: [], gesehen: [], fehlend: [] };
+    var gesehenIds = new Set(), wlIds = new Set();
+    for (const f of dateiEl.files) {
+      var eintraege;
+      try { eintraege = eintraegeAus(f.name, await f.text()); }
+      catch (e) { vorschauEl.textContent = TXT.importFehler(f.name); geplant = null; startBtn.style.display = 'none'; return; }
+      eintraege.forEach(function(e){
+        var p = findePool(idx, e.name, e.jahr, e.typ);
+        if (!p) { geplant.fehlend.push(e.name + (e.jahr ? ' (' + e.jahr + ')' : '')); return; }
+        if (e.gesehen) {
+          if (getSeen(p.realId) || gesehenIds.has(p.realId)) return;
+          gesehenIds.add(p.realId);
+          geplant.gesehen.push({ item: p, sterne: e.sterne });
+        } else {
+          if (getWatchlistFlag(p.realId) || getSeen(p.realId) || wlIds.has(p.realId)) return;
+          wlIds.add(p.realId);
+          geplant.watchlist.push(p);
+        }
+      });
+    }
+    vorschauZeigen();
+  };
+
+  startBtn.onclick = async function(){
+    if (!geplant) return;
+    startBtn.disabled = true;
+    var gesamt = geplant.watchlist.length + geplant.gesehen.length, getan = 0;
+    async function schreiben(id, patch){
+      // Ein einzelner Fehltritt (z.B. kurzer Netzwerkaussetzer) bricht den
+      // Import nicht ab -- der Titel laesst sich jederzeit von Hand markieren.
+      try { await apiRequest('PUT', '/api/progress/' + id, patch); } catch (e) {}
+      getan++;
+      if (getan % 10 === 0 || getan === gesamt) vorschauEl.textContent = TXT.importLaeuft(getan, gesamt);
+    }
+    for (const p of geplant.watchlist) await schreiben(p.realId, { watchlist: true });
+    for (const g of geplant.gesehen) await schreiben(g.item.realId, g.sterne ? { seen: true, rating: g.sterne } : { seen: true });
+    vorschauEl.textContent = TXT.importFertig(gesamt);
+    // Der lokale Zustand kennt die neuen Markierungen nicht -- neu laden ist
+    // der verlaessliche Weg (wie beim Sprachwechsel).
+    setTimeout(function(){ location.reload(); }, 1500);
+  };
+
+  function oeffnen(){
+    closeSettingsModal();
+    document.getElementById('importTitelEl').textContent = TXT.importKnopf;
+    document.getElementById('importIntroEl').textContent = TXT.importIntro;
+    document.getElementById('importWaehlenBtn').textContent = TXT.importWaehlen;
+    vorschauEl.textContent = '';
+    startBtn.style.display = 'none';
+    geplant = null;
+    dateiEl.value = '';
+    modal.style.display = 'flex';
+  }
+  document.getElementById('settingsImportBtn').onclick = oeffnen;
+  document.getElementById('importWaehlenBtn').onclick = function(){ dateiEl.click(); };
+  document.getElementById('importModalX').onclick = function(){ modal.style.display = 'none'; };
+  modal.addEventListener('click', function(e){ if (e.target === modal) modal.style.display = 'none'; });
+})();
+function openSettingsModal(){ benachrichtigungKnopfAktualisieren(); importKnopfAktualisieren(); _settingsModal.style.display = 'flex'; }
 function closeSettingsModal(){ _settingsModal.style.display = 'none'; }
 document.getElementById('settingsBtn').onclick = () => { closeNavMenu(); openSettingsModal(); };
 document.getElementById('settingsModalX').onclick = closeSettingsModal;
