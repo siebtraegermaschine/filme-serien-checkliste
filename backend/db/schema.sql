@@ -664,3 +664,23 @@ CREATE TABLE IF NOT EXISTS movie_night_stimmen (
   abgegeben_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (runde_id, teilnehmer, title_id)
 );
+
+-- Wann wurden die TMDB-Details dieser Zeile (Besetzung, Regie, Freigaben,
+-- Uebersetzungen) zuletzt WIRKLICH von TMDB geholt? fetched_at taugt dafuer
+-- nicht: Auch magere Laeufe (nur Verfuegbarkeit, siehe Skip-Liste in
+-- stream-fetch.mjs und GET /api/streaming/enriched) erneuern fetched_at,
+-- lassen die Anreicherung aber unangetastet. NULL = noch nie angereichert
+-- (magere Neu-Zeile; wird beim Ingest aus Geschwisterzeilen anderer Regionen
+-- befuellt, siehe routes/streaming.js). Beim erstmaligen Anlegen der Spalte
+-- erben Bestandszeilen fetched_at -- bis dahin war jeder Lauf ein Voll-Lauf.
+-- Der DO-Block erkennt das an der fehlenden Spalte, laeuft also nur einmal.
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+     WHERE table_name = 'streaming_cache' AND column_name = 'enriched_at'
+  ) THEN
+    ALTER TABLE streaming_cache ADD COLUMN enriched_at TIMESTAMPTZ;
+    UPDATE streaming_cache SET enriched_at = fetched_at;
+  END IF;
+END $$;

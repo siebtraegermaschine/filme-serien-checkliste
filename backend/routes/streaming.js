@@ -83,12 +83,40 @@ router.get('/', async (req, res) => {
   await ausListe(req, res, streamingSchluessel(lang, region), () => ladeStreaming(lang, region));
 });
 
-// Wird ausschließlich von der GitHub Action (stream-fetch.mjs) mit dem
-// Secret STREAMING_INGEST_SECRET aufgerufen -- kein Nutzer-Login, sondern
-// Server-zu-Server-Authentifizierung per Bearer-Token.
-router.post('/ingest', async (req, res) => {
+// Server-zu-Server-Authentifizierung fuer /ingest und /enriched: beide werden
+// ausschliesslich von der GitHub Action (stream-fetch.mjs) mit dem Secret
+// STREAMING_INGEST_SECRET aufgerufen -- kein Nutzer-Login, sondern Bearer-Token.
+function ingestBerechtigt(req) {
   const provided = (req.get('authorization') || '').replace(/^Bearer\s+/i, '');
-  if (!geheimnisStimmt(provided, process.env.STREAMING_INGEST_SECRET)) {
+  return geheimnisStimmt(provided, process.env.STREAMING_INGEST_SECRET);
+}
+
+// Welche Titel sind bereits frisch angereichert? stream-fetch.mjs fragt das
+// VOR seinem Lauf ab und ueberspringt fuer diese tmdb_ids den TMDB-Detail-
+// Abruf (Besetzung, Regie, Freigaben, Uebersetzungen) -- die Details sind
+// sprachneutral bzw. decken ueber TMDB_CERT_REGIONS/translations ohnehin alle
+// Laender ab, nur die VERFUEGBARKEIT je Anbieter ist regionsspezifisch. Ohne
+// diesen Endpunkt holte jeder Regionen-Lauf dieselben ~22.000 Detail-
+// Datensaetze erneut (57-87 Minuten je Region statt ~5-10).
+//
+// Frisch = enriched_at juenger als max_age_days (Default 7 Tage), egal in
+// welcher Region: Fehlt der Titel in der anfragenden Region noch, kopiert der
+// Ingest die Anreicherung aus einer Geschwisterzeile (siehe unten).
+router.get('/enriched', async (req, res) => {
+  if (!ingestBerechtigt(req)) {
+    return res.status(401).json({ error: 'invalid_ingest_secret' });
+  }
+  const tage = Math.min(30, Math.max(1, parseInt(req.query.max_age_days, 10) || 7));
+  const { rows } = await pool.query(
+    `SELECT DISTINCT type, tmdb_id FROM streaming_cache
+      WHERE enriched_at >= now() - make_interval(days => $1)`, [tage]);
+  const out = { maxAgeDays: tage, movie: [], series: [] };
+  for (const r of rows) (r.type === 'movie' ? out.movie : out.series).push(r.tmdb_id);
+  res.json(out);
+});
+
+router.post('/ingest', async (req, res) => {
+  if (!ingestBerechtigt(req)) {
     return res.status(401).json({ error: 'invalid_ingest_secret' });
   }
 
@@ -120,16 +148,24 @@ router.post('/ingest', async (req, res) => {
       const providerName = provider.name || PROVIDER_NAMES[providerId] || providerId;
       for (const [type, items] of [['movie', provider.f], ['series', provider.s]]) {
         for (const item of items || []) {
+          // Magere Zeile (item.ohneDetails, siehe Skip-Liste in stream-fetch.mjs):
+          // Der Lauf hat fuer diesen Titel nur die Verfuegbarkeit ermittelt und
+          // die TMDB-Details bewusst NICHT geholt. Dann bleiben Anreicherungs-
+          // felder (Regie, Besetzung, Freigaben) und enriched_at unangetastet --
+          // sonst wuerde die vorhandene Anreicherung mit Leerwerten ueberschrieben.
+          const voll = !item.ohneDetails;
           await client.query(
             `INSERT INTO streaming_cache
-               (provider_id, provider_name, type, tmdb_id, region, title, title_en, uebersetzungen, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, fetched_at)
-             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19, clock_timestamp())
+               (provider_id, provider_name, type, tmdb_id, region, title, title_en, uebersetzungen, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, fetched_at, enriched_at)
+             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19, clock_timestamp(),
+               CASE WHEN $20::boolean THEN clock_timestamp() END)
              ON CONFLICT (provider_id, type, tmdb_id, region) DO UPDATE SET
                title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
-               director = EXCLUDED.director, cast_names = EXCLUDED.cast_names,
+               director = CASE WHEN $20::boolean THEN EXCLUDED.director ELSE streaming_cache.director END,
+               cast_names = CASE WHEN $20::boolean THEN EXCLUDED.cast_names ELSE streaming_cache.cast_names END,
                poster_path = EXCLUDED.poster_path, rating = EXCLUDED.rating,
                vote_count = EXCLUDED.vote_count,
-               certification = EXCLUDED.certification,
+               certification = CASE WHEN $20::boolean THEN EXCLUDED.certification ELSE streaming_cache.certification END,
                certifications = streaming_cache.certifications || EXCLUDED.certifications,
                -- Liefert TMDB an einem Tag mal keine Kurzbeschreibung (z.B. fremdsprachige
                -- Titel ohne deutschen Overview-Text), soll eine zuvor vorhandene (ggf. manuell
@@ -138,7 +174,8 @@ router.post('/ingest', async (req, res) => {
                title_en = COALESCE(NULLIF(EXCLUDED.title_en, ''), streaming_cache.title_en),
                uebersetzungen = streaming_cache.uebersetzungen || EXCLUDED.uebersetzungen,
                overview_en = COALESCE(NULLIF(EXCLUDED.overview_en, ''), streaming_cache.overview_en),
-               fetched_at = clock_timestamp()`,
+               fetched_at = clock_timestamp(),
+               enriched_at = CASE WHEN $20::boolean THEN clock_timestamp() ELSE streaming_cache.enriched_at END`,
             [
               providerId,
               providerName,
@@ -159,6 +196,7 @@ router.post('/ingest', async (req, res) => {
               item.certs && typeof item.certs === 'object' ? item.certs : {},
               item.ov || null,
               item.ovEn || null,
+              voll,
             ]
           );
         }
@@ -187,6 +225,37 @@ router.post('/ingest', async (req, res) => {
       });
     }
     await client.query('DELETE FROM streaming_cache WHERE region = $1 AND fetched_at < $2', [region, runStartedAt]);
+    // Magere NEU-Zeilen reparieren: Stand der Titel bisher nicht in DIESER
+    // Region (etwa weil ein Anbieter ihn hier neu aufgenommen hat), hat der
+    // magere Lauf gerade eine Zeile OHNE Anreicherung eingefuegt (enriched_at
+    // NULL). Die Details liegen aber laengst in einer Geschwisterzeile --
+    // gleicher Titel, anderer Anbieter oder andere Region -- denn die
+    // Skip-Liste (/enriched) nennt nur Titel, die IRGENDWO frisch angereichert
+    // sind. Von dort werden sie kopiert, inklusive enriched_at, damit die
+    // Frische-Rechnung stimmt. Titel ganz ohne angereicherte Geschwisterzeile
+    // bleiben auf NULL und werden vom naechsten Lauf voll geholt.
+    await client.query(
+      `UPDATE streaming_cache sc SET
+         director       = COALESCE(sc.director, q.director),
+         cast_names     = CASE WHEN cardinality(sc.cast_names) = 0 THEN q.cast_names ELSE sc.cast_names END,
+         certification  = COALESCE(sc.certification, q.certification),
+         certifications = q.certifications || sc.certifications,
+         uebersetzungen = q.uebersetzungen || sc.uebersetzungen,
+         title_en       = COALESCE(sc.title_en, q.title_en),
+         overview       = COALESCE(sc.overview, q.overview),
+         overview_en    = COALESCE(sc.overview_en, q.overview_en),
+         enriched_at    = q.enriched_at
+       FROM (
+         SELECT DISTINCT ON (type, tmdb_id) type, tmdb_id, director, cast_names,
+                certification, certifications, uebersetzungen, title_en,
+                overview, overview_en, enriched_at
+           FROM streaming_cache
+          WHERE enriched_at IS NOT NULL
+          ORDER BY type, tmdb_id, enriched_at DESC
+       ) q
+       WHERE sc.region = $1 AND sc.enriched_at IS NULL
+         AND q.type = sc.type AND q.tmdb_id = sc.tmdb_id`,
+      [region]);
     // Genre-Paarung mitschreiben, sofern der Lauf sie geliefert hat. Bewusst nur
     // aktualisierend und ohne Aufraeumen: Faellt das Feld in einem Lauf mal weg
     // (aeltere Skriptversion, TMDB-Aussetzer), soll die vorhandene Zuordnung

@@ -2,11 +2,11 @@ name: Kino-Daten aktualisieren
 
 on:
   schedule:
-    # Kino-Laeufe sind schnell (gemessen ~5 min je Region) -- deshalb
-    # TAEGLICH ALLE Regionen in einer Kette (~3-4 h), anders als beim
-    # Streaming (streaming.yml, dort rotieren die Gruppen B-E). 13:30 UTC:
-    # nach dem Ende der Streaming-Rotationsgruppe (~13:00 UTC), damit sich
-    # die beiden Ketten das TMDB-Kontingent nicht teilen muessen.
+    # Kino-Laeufe sind schnell (gemessen ~5 min je Region) -- TAEGLICH ALLE
+    # Regionen in einer Kette (~3-4 h). 13:30 UTC liegt weit weg von der
+    # abendlichen Streaming-Kette (streaming.yml, 20:00 UTC bis in den
+    # fruehen Morgen), damit sich die beiden Ketten das TMDB-Kontingent
+    # nicht teilen muessen.
     - cron: "30 13 * * *"
   workflow_dispatch:            # erlaubt manuelles Ausloesen im Actions-Tab
     inputs:

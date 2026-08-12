@@ -13,10 +13,10 @@
 // Regionen, fuer die tatsaechlich Daten eingespielt werden. AT war die
 // EU-Blaupause; alle weiteren sind nach demselben Muster angebunden
 // (Workflow-Matrix, TMDB_CERT_REGIONS, Frontend-Regionsauswahl, PLZ/Kino-
-// Importe -- siehe PLAN-INTERNATIONALISIERUNG.md Abschnitt 9). Die
-// Streaming laeuft in fuenf Gruppen (streaming.yml, Job "plan"): Gruppe A
-// (Kernmaerkte) taeglich, B-E rotierend alle vier Tage; die schnellen
-// Kino-Laeufe (cinema.yml) taeglich fuer alle Regionen. Fuer die Laender
+// Importe -- siehe PLAN-INTERNATIONALISIERUNG.md Abschnitt 9). Streaming
+// (streaming.yml) und Kino (cinema.yml) laufen TAEGLICH fuer alle Regionen
+// in je einer Kette -- moeglich, seit stream-fetch.mjs bereits frisch
+// angereicherte Titel per Skip-Liste ueberspringt. Fuer die Laender
 // ausserhalb des EWR (US/CA/AU/NZ/MX/AR/CL/CO) steht die rechtliche
 // Klaerung noch aus, siehe PLAN-INTERNATIONALISIERUNG.md Abschnitt 4.
 export const REGIONEN = [

@@ -2,24 +2,28 @@ name: Streaming-Daten aktualisieren
 
 on:
   schedule:
-    # Gemessen am 12. August 2026: EIN Regionen-Job dauert rund 1-1,5 Stunden
-    # (DE 87 min, AT 58 min) -- eine Achtergruppe also ~8 Stunden. Deshalb
-    # passen keine vier Gruppen in einen Tag (siehe Job "plan"), und die
-    # Kerngruppe startet ABENDS, damit Europa zum Morgen frisch ist:
-    # 20:00 UTC (22 Uhr MESZ): Gruppe A (Kernmaerkte DE...NL) -- TAEGLICH,
-    # fertig gegen 04:30 UTC.
+    # ALLE 41 Regionen TAEGLICH in einer Kette, Start 20:00 UTC (22 Uhr MESZ),
+    # DE zuerst -- Europa ist damit zum Morgen frisch.
+    #
+    # Das geht seit der Skip-Liste (GET /api/streaming/enriched, siehe
+    # stream-fetch.mjs): Titel-Details (Besetzung, Regie, Freigaben,
+    # Uebersetzungen) sind sprachneutral und werden nur noch geholt, wenn die
+    # Anreicherung in der Datenbank aelter als 7 Tage ist -- sonst schickt der
+    # Lauf nur die regionsspezifische Verfuegbarkeit. Ein Regionen-Lauf ohne
+    # Detail-Abrufe braucht damit im Wesentlichen nur noch das discover-Paging,
+    # erwartet ~5-10 Minuten statt gemessener 57-87 Minuten (DE 87 min, AT
+    # 58 min am 12. August 2026, vor der Skip-Liste). Laeuft die Anreicherung
+    # ab (alle ~7 Tage), holt sie der ERSTE Lauf der Kette (DE) einmal neu und
+    # dauert dann wieder ~1-1,5 h; die uebrigen 40 Regionen desselben Tages
+    # sehen die frischen Zeitstempel und bleiben schnell. Erwartete Kettenzeit:
+    # ~4-7 h an normalen Tagen, am woechentlichen Auffrisch-Tag entsprechend
+    # laenger. Die fruehere Gruppen-Rotation (B-E im Vier-Tage-Wechsel) ist
+    # damit hinfaellig.
     - cron: "0 20 * * *"
-    # 05:00 UTC: die Gruppen B-E im Wechsel, eine je Tag (Tag-im-Jahr modulo
-    # 4) -- jede Gruppe laeuft damit alle vier Tage, fertig gegen 13:00 UTC.
-    # Bei 40 Laendern ueber alle Zeitzonen gibt es keine global "richtige"
-    # Nachtzeit -- optimiert wird auf Europa. Der eigentliche Ausweg waere,
-    # den Lauf je Region zu beschleunigen (Titel-Details nicht je Region
-    # erneut zu holen) -- bis dahin ist die Rotation der Kompromiss.
-    - cron: "0 5 * * *"
   workflow_dispatch:            # erlaubt manuelles Auslösen im Actions-Tab
     inputs:
       regionen:
-        description: "Kommagetrennte Regionen (leer = alle 41; Vorsicht: sehr lang)"
+        description: "Kommagetrennte Regionen (leer = alle 41)"
         required: false
         default: ""
 
@@ -31,8 +35,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Bestimmt, welche Regionen DIESER Lauf abarbeitet. Die Gruppen muessen zu
-  # REGIONEN in backend/lib/i18n.js passen.
+  # Bestimmt, welche Regionen DIESER Lauf abarbeitet: alle 41 (Reihenfolge und
+  # Umfang muessen zu REGIONEN in backend/lib/i18n.js passen, DE zuerst) --
+  # oder die von Hand eingegebene Liste beim manuellen Ausloesen.
   plan:
     runs-on: ubuntu-latest
     outputs:
@@ -43,26 +48,10 @@ jobs:
         env:
           EINGABE: ${{ github.event.inputs.regionen }}
         run: |
-          A='["DE","AT","CH","GB","FR","IT","ES","NL"]'
-          B='["PT","PL","DK","SE","NO","FI","BE","IE"]'
-          C='["CZ","GR","HU","RO","BG","HR","SI","SK"]'
-          D='["LT","LV","EE","LU","MT","CY","US","IS"]'
-          E='["LI","CA","AU","NZ","MX","AR","CL","CO","BR"]'
           ALLE='["DE","AT","CH","GB","FR","IT","ES","NL","PT","PL","DK","SE","NO","FI","BE","IE","CZ","GR","HU","RO","BG","HR","SI","SK","LT","LV","EE","LU","MT","CY","US","IS","LI","CA","AU","NZ","MX","AR","CL","CO","BR"]'
           if [ -n "$EINGABE" ]; then
             LISTE=$(echo "$EINGABE" | tr '[:lower:]' '[:upper:]' | tr -d ' ' | \
               awk -F, '{printf "["; for(i=1;i<=NF;i++){printf "%s\"%s\"", (i>1?",":""), $i}; print "]"}')
-          elif [ "${{ github.event.schedule }}" = "0 5 * * *" ]; then
-            # 10#: %j liefert fuehrende Nullen (etwa "059"), ohne Basisangabe
-            # laese die Shell das als Oktalzahl.
-            case $(( 10#$(date -u +%j) % 4 )) in
-              0) LISTE="$B";;
-              1) LISTE="$C";;
-              2) LISTE="$D";;
-              3) LISTE="$E";;
-            esac
-          elif [ -n "${{ github.event.schedule }}" ]; then
-            LISTE="$A"
           else
             LISTE="$ALLE"
           fi
@@ -81,10 +70,10 @@ jobs:
       max-parallel: 1
       matrix:
         region: ${{ fromJSON(needs.plan.outputs.regionen) }}
-    # Seit Wegfall des STREAM_COUNT-Deckels (vorher 60 Titel je Anbieter & Typ)
-    # werden pro Anbieter alle aktuell verfuegbaren Titel geholt (insgesamt
-    # geschaetzt bis zu ca. 22.000/Tag) -- expliziter Sicherheitsspielraum
-    # gegenueber dem GitHub-Actions-Default von 360 Minuten.
+    # Normalfall dank Skip-Liste ~5-10 min je Region; der Spielraum deckt den
+    # Auffrisch-Fall ab, wenn ein Lauf die ~22.000 Titel-Details neu holt
+    # (gemessen bis 87 min) -- deutlich unter dem GitHub-Actions-Default von
+    # 360 Minuten, aber weit weg vom Normalfall.
     timeout-minutes: 240
     steps:
       - name: Repo auschecken

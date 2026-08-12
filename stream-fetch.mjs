@@ -11,6 +11,14 @@
  *
  * Für mehrere Länder läuft das Skript je Region einmal (TMDB_REGION=DE,
  * TMDB_REGION=AT, ...) – der Ingest im Backend verwaltet jede Region getrennt.
+ * Die Titel-DETAILS (Besetzung, Regie, Freigaben, Übersetzungen) sind dabei
+ * sprachneutral bzw. decken ohnehin alle Länder ab – nur die VERFÜGBARKEIT
+ * (discover je Anbieter) ist regionsspezifisch. Deshalb fragt das Skript vor
+ * dem Lauf per GET /api/streaming/enriched ab, welche tmdb_ids bereits frisch
+ * (Default: 7 Tage) angereichert in der Datenbank liegen, und überspringt für
+ * die den Detail-Abruf komplett (Markierung "ohneDetails" im Payload; der
+ * Ingest lässt die Anreicherungsfelder dann unangetastet). Das drückt einen
+ * Nicht-Erst-Regionen-Lauf von 57–87 Minuten auf wenige Minuten.
  *
  * Läuft NUR in der GitHub Action (oder lokal) – der API-Key kommt aus der
  * Umgebungsvariable TMDB_API_KEY (GitHub Secret) und landet NIE im Client-Code.
@@ -43,6 +51,29 @@ const MIN_VOTES = process.env.STREAM_MIN_VOTES ? parseInt(process.env.STREAM_MIN
 const MIN_YEAR = process.env.STREAM_MIN_YEAR ? parseInt(process.env.STREAM_MIN_YEAR, 10) : null;
 const STREAMING_API_URL = process.env.STREAMING_API_URL || '';
 const STREAMING_INGEST_SECRET = process.env.STREAMING_INGEST_SECRET || '';
+
+// Skip-Liste: tmdb_ids, deren Details bereits frisch in der Datenbank liegen
+// (siehe Kopf-Kommentar). Schluessel wie in discover(): 'movie' | 'tv' --
+// das Backend nennt Serien 'series', hier heissen sie TMDB-konform 'tv'.
+const frischAngereichert = { movie: new Set(), tv: new Set() };
+
+async function ladeSkipListe() {
+  if (!STREAMING_API_URL || !STREAMING_INGEST_SECRET) return;
+  try {
+    const res = await fetch(new URL('/api/streaming/enriched', STREAMING_API_URL), {
+      headers: { Authorization: `Bearer ${STREAMING_INGEST_SECRET}` },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const d = await res.json();
+    for (const id of d.movie || []) frischAngereichert.movie.add(String(id));
+    for (const id of d.series || []) frischAngereichert.tv.add(String(id));
+    console.log(`Skip-Liste: ${frischAngereichert.movie.size} Filme und ${frischAngereichert.tv.size} Serien sind bereits frisch angereichert – für sie entfällt der Detail-Abruf.`);
+  } catch (e) {
+    // Fail-open: Ohne Skip-Liste wird einfach alles voll geholt -- langsamer,
+    // aber korrekt (so lief es vor Einführung der Liste immer).
+    console.warn(`WARN: Skip-Liste nicht abrufbar (${e.message}) – hole alle Details.`);
+  }
+}
 
 // Gewünschte Plattformen – per Name gematcht (robuster als feste IDs).
 const WANT = [
@@ -269,7 +300,18 @@ async function discover(kind, providerId, gmap) {
     page++;
     await sleep(250);
   } while (page <= totalPages);
+  let uebersprungen = 0;
   for (const item of out) {
+    if (frischAngereichert[kind].has(item.id)) {
+      // Details liegen frisch in der DB: nur die Verfuegbarkeits-Zeile
+      // schicken. Der Ingest laesst die Anreicherungsfelder dieser Titel
+      // unangetastet (und kopiert sie fuer hier neu aufgetauchte Zeilen aus
+      // Geschwisterzeilen anderer Regionen/Anbieter). Kein sleep: es gab ja
+      // auch keinen TMDB-Abruf.
+      item.ohneDetails = true;
+      uebersprungen++;
+      continue;
+    }
     const ex = await enrich(kind, item.id);
     item.c = ex.cast;
     item.d = ex.dir;
@@ -286,10 +328,14 @@ async function discover(kind, providerId, gmap) {
     }
     await sleep(120);            // sanftes Tempo gegen das Rate-Limit
   }
+  if (uebersprungen) {
+    console.log(`   ${uebersprungen} von ${out.length} Titeln ohne Detail-Abruf (bereits frisch angereichert).`);
+  }
   return out;
 }
 
 async function main() {
+  await ladeSkipListe();
   const [movieGenres, tvGenres, movieProv, tvProv] = await Promise.all([
     genreMap('movie'), genreMap('tv'),
     resolveProviderIds('movie'), resolveProviderIds('tv'),

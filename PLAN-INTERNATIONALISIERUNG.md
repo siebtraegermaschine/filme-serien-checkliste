@@ -302,19 +302,26 @@ zusammen **41 Regionen**. Für alle Länder außerhalb des EWR gilt derselbe
 Vermerk wie für die USA: rechtliche Klärung steht aus (BR: LGPD), siehe
 Abschnitt 4.
 
-**Workflow-Zeitplan (nach Laufzeitmessung am 12. August 2026):** Ein
-Streaming-Regionen-Job dauert real ~1–1,5 Stunden (DE: 87 min, AT:
-58 min) — vier Achtergruppen pro Tag passen also NICHT. Deshalb
-(`streaming.yml`, Job `plan`): **Gruppe A (Kernmärkte DE…NL) täglich
-abends 20:00 UTC** (fertig gegen 04:30 UTC — Europa ist damit zum Morgen
-frisch); **die Gruppen B–E rotieren um 05:00 UTC** (Tag-im-Jahr modulo 4,
-jede Gruppe alle vier Tage, fertig gegen 13:00 UTC). Bei 40 Ländern über
-alle Zeitzonen gibt es keine global „richtige" Nachtzeit — optimiert wird
-auf Europa. Kino-Läufe sind schnell (~5 min/Region) und laufen **täglich
-für alle 40 Regionen** in einer Kette (13:30 UTC, nach der
-Streaming-Rotation). Der eigentliche Ausweg wäre,
-den Streaming-Lauf je Region zu beschleunigen (Titel-Details nicht je
-Region erneut holen) — als Folgeaufgabe vermerkt. Manuelles Auslösen nimmt
+**Workflow-Zeitplan (Stand 12. August 2026, mit Skip-Liste):** Die
+Titel-Details (Besetzung, Regie, Freigaben, Übersetzungen) sind
+sprachneutral bzw. decken über `TMDB_CERT_REGIONS`/`translations` ohnehin
+alle Länder ab — nur die Verfügbarkeit je Anbieter ist regionsspezifisch.
+Deshalb fragt `stream-fetch.mjs` vor jedem Lauf `GET
+/api/streaming/enriched` (Auth: Ingest-Secret) ab, welche tmdb_ids in der
+Datenbank bereits frisch angereichert sind (`streaming_cache.enriched_at`,
+Standard: 7 Tage, egal in welcher Region), und überspringt für die den
+Detail-Abruf komplett; solche Titel gehen als magere Zeilen
+(`ohneDetails`) an den Ingest, der die Anreicherungsfelder dann
+unangetastet lässt und für in einer Region neu aufgetauchte magere Zeilen
+die Anreicherung aus Geschwisterzeilen kopiert. Damit laufen **alle 41
+Regionen täglich** in einer Kette (`streaming.yml`, 20:00 UTC, DE zuerst,
+nacheinander wegen TMDB-Rate-Limit): Ein Lauf ohne Detail-Abrufe braucht
+erwartet ~5–10 Minuten (vorher gemessen 57–87 min: DE 87, AT 58); läuft
+die Anreicherung ab (~wöchentlich), holt der erste Lauf der Kette sie neu
+und dauert einmalig wieder ~1–1,5 h. Die frühere Gruppen-Rotation (A
+täglich, B–E im Vier-Tage-Wechsel) ist damit hinfällig. Kino-Läufe sind
+schnell (~5 min/Region) und laufen wie gehabt **täglich für alle 40
+Regionen** in einer Kette (13:30 UTC). Manuelles Auslösen nimmt
 in beiden Workflows wahlweise eine eigene Regionsliste entgegen (Feld
 `regionen`). Die Sprach-/Regionswahl im Menü ist ein Aufklappmenü
 (alphabetisch in der jeweiligen Sprache).

@@ -32,9 +32,6 @@
   ab Falkenstein spürbar) — steht auch im Plan als Betriebsfrage.
 - **Externe Erreichbarkeits-Prüfung** (steht der Server, kann er sich nicht
   selbst melden) — PLAN-OEFFENTLICHER-TEST.md Abschnitt 6, bewusst vertagt.
-- **Streaming-Lauf je Region beschleunigen** (Titel-Details nicht je Region
-  erneut von TMDB holen) — würde die Gruppen-Rotation der Workflows
-  überflüssig machen; tägliche Frische für alle 40 Regionen.
 - **Listen-Cache klüger schneiden**: /api/titles unterscheidet sich je Region
   nur im Freigabe-Feld — statt 80 vollständiger Cache-Varianten (40 Regionen
   × 2 Inhaltssprachen) ließe sich die Freigabe-Zuordnung getrennt liefern.

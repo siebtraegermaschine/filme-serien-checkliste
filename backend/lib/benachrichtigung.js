@@ -11,9 +11,9 @@
  *
  * `benachrichtigt` merkt jeden verschickten Treffer je Person/Titel/Art --
  * wer die Mail bekommt, bekommt denselben Titel nie zweimal gemeldet, auch
- * wenn er im Zeitfenster bleibt. Das Zeitfenster (FENSTER_TAGE) faengt den
- * Rotations-Rhythmus der Importe ab: kleinere Regionen werden nur alle paar
- * Tage aktualisiert, ihre Neuzugaenge sollen trotzdem gemeldet werden.
+ * wenn er im Zeitfenster bleibt. Das Zeitfenster (FENSTER_TAGE) faengt
+ * verpasste oder verspaetete Import-Laeufe ab: Auch wenn eine Region mal
+ * einen Tag aussetzt, sollen ihre Neuzugaenge trotzdem gemeldet werden.
  *
  * Versand einmal taeglich am fruehen Abend (nach den Import-Ketten, siehe
  * streaming.yml/cinema.yml). Fehler je Person brechen den Lauf nicht ab.
@@ -23,8 +23,8 @@ import { sendMail } from './mailer.js';
 import { sprachWahl, regionWahl, sprachFeld } from './i18n.js';
 
 const EIN_TAG = 24 * 60 * 60 * 1000;
-const VERSAND_STUNDE_UTC = 18;   // nach Streaming-Rotation (~13 Uhr) und Kino-Kette (~17 Uhr)
-const FENSTER_TAGE = 4;          // Rotationsgruppen laufen alle vier Tage
+const VERSAND_STUNDE_UTC = 18;   // nach der Kino-Kette (~17 Uhr); die Streaming-Kette endet schon am fruehen Morgen
+const FENSTER_TAGE = 4;          // Puffer fuer verpasste/verspaetete Import-Laeufe (Importe selbst laufen taeglich)
 const BASIS_URL = process.env.PUBLIC_BASE_URL || 'https://movietaste.de';
 
 /* Mailtexte je Oberflaechensprache der Person. Bewusst schlicht: Betreff,
