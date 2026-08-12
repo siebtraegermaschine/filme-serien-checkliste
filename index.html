@@ -8252,14 +8252,9 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
   function link(token){ return location.origin + location.pathname + '?nacht=' + token; }
 
   function zeichneRunde(daten){
-    // Nicht mitten ins Tippen oder Scrollen zeichnen: Waehrend das Namensfeld
-    // den Fokus hat, wuerde ein Poll-Neuaufbau die Eingabe verschlucken.
-    if (document.activeElement && inhalt.contains(document.activeElement)
-        && document.activeElement.id === 'nachtName') return;
     var scrollVorher = bk.querySelector('.modal').scrollTop;
     var html = '<p class="prov-intro">' + esc(TXT.nachtErklaerung) + '</p>' +
       '<button type="button" id="nachtTeilen" class="auth-submit" style="width:100%;margin-bottom:10px">' + esc(TXT.nachtTeilen) + '</button>' +
-      '<input type="text" id="nachtName" class="lang-select" style="margin-bottom:10px" maxlength="40" placeholder="' + escAttr(TXT.nachtName) + '">' +
       daten.titel.map(function(t){
         var wahl = stimmen[t.id];
         // Hinter dem Titel steht die Sterne-Bewertung (wie in den Listen) --
@@ -8287,8 +8282,7 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
         }
         return zeile;
       }).join('') +
-      '<p class="feedback-hinweis" style="margin-top:12px">' + esc(TXT.nachtStand(daten.teilnehmer.length)) +
-        (daten.teilnehmer.length ? ' — ' + esc(daten.teilnehmer.join(', ')) : '') + '</p>' +
+      '<p class="feedback-hinweis" style="margin-top:12px">' + esc(TXT.nachtStand(daten.teilnehmer.length)) + '</p>' +
       // Das Ergebnis, auf das der Hinweis oben zeigt: die drei Titel mit den
       // meisten Ja-Stimmen (erst sichtbar, sobald jemand Ja gestimmt hat).
       (function(){
@@ -8308,12 +8302,7 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
         .then(function(){ inhalt.querySelector('#nachtTeilen').textContent = TXT.kopiert; })
         .catch(function(){ prompt('', url); });
     };
-    // Name vorbelegen: zuletzt benutzter Name, sonst der Anzeigename des
-    // Kontos (aenderbar -- es ist nur eine Vorbelegung).
-    try {
-      inhalt.querySelector('#nachtName').value = localStorage.getItem(NAME_KEY)
-        || (CURRENT_USER && CURRENT_USER.displayName) || '';
-    } catch (e) {}
+
     inhalt.querySelectorAll('[data-details]').forEach(function(el){
       var oeffneDetails = function(){
         var id = el.dataset.details;
@@ -8337,19 +8326,12 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
         if (kennung) openTrailerModal('/api/trailers/' + kennung, item.t, null);
       };
     });
-    // Jeder Tipp zaehlt SOFORT -- ein eigener Abstimmen-Schritt verwirrte
-    // nur ("unten steht noch 0 Personen"). Der Name kommt aus dem Feld
-    // (vorbelegt mit dem Kontonamen); wer ihn spaeter aendert, dessen
-    // naechste Stimme traegt ihn nach (der Upsert schreibt den Namen mit).
-    function aktuellerName(){
-      var feld = inhalt.querySelector('#nachtName');
-      var name = feld ? feld.value.trim() : '';
-      try { if (name) localStorage.setItem(NAME_KEY, name); } catch (e) {}
-      return name;
-    }
+    // Jeder Tipp zaehlt SOFORT und ANONYM -- gezaehlt wird je Geraet
+    // (kennung), einen Namen gibt es auf Wunsch nicht mehr: Nur die Stimmen
+    // sind wichtig.
     function stimmeSenden(teil){
       apiRequest('POST', '/api/movie-night/' + aktuellerToken + '/stimmen',
-        { teilnehmer: kennung(), name: aktuellerName(), stimmen: teil })
+        { teilnehmer: kennung(), name: '', stimmen: teil })
         .then(function(){ return laden(true); })
         .catch(function(){ vorschlagFehler(); });
     }
@@ -8365,11 +8347,7 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
         var teil = {}; teil[id] = neu; stimmeSenden(teil);
       };
     });
-    var nameFeld = inhalt.querySelector('#nachtName');
-    if (nameFeld) nameFeld.onchange = function(){
-      // Geaenderter Name: an den schon abgegebenen Stimmen nachtragen.
-      if (Object.keys(stimmen).length) stimmeSenden(stimmen);
-    };
+
   }
 
   function laden(frisch){
