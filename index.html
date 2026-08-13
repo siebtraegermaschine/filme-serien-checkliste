@@ -90,7 +90,11 @@
        var(--bg) passt ausserdem zu theme-color und zur manifest.json, die beide
        #0e1116 nennen. */
     background: var(--bg);
-    border-bottom: 1px solid var(--border);
+    /* Keine border-bottom mehr: Seit dem Kopf-Umbau (13. August) bilden die
+       Tabs am Header-Ende und die Filterzeilen der Toolbar darunter EINE
+       Gruppe -- eine Linie dazwischen wuerde zusammengehoerige Filter trennen.
+       Die Linien sitzen jetzt unter der Suche (.head-controls) und vor der
+       Titelliste (.inhalt-sep). */
   }
   header .icons { font-size: 36px; }
   h1 {
@@ -115,7 +119,9 @@
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-top: 22px;
+    /* 14px statt frueher 22px: Der Abstand haengt seit dem Kopf-Umbau an der
+       Trennlinie unter der Suche, nicht mehr an den Untertiteln. */
+    margin-top: 14px;
   }
   .tabs button {
     background: var(--card);
@@ -155,12 +161,13 @@
   }
   /* Der frueher hier stehende Discovery-Button ("Alle Filme & Serien
      entdecken") ist entfallen: "Neue entdecken" ist jetzt ein dritter Status neben
-     Watchlist/Gesehen in .filter-group, der Typ kommt aus dem aktiven Tab.
-     .head-controls traegt weiterhin die Linie UNTER den Tabs, die
-     header-border-bottom bleibt die Linie vor Watchlist/Gesehen. */
+     Watchlist/Gesehen in .filter-group, der Typ kommt aus dem aktiven Tab. */
+  /* Kein margin-top: Der Header bringt 14px padding-bottom mit, und die
+     Statusreihe soll dicht unter den Tabs stehen -- beides ist seit dem
+     Kopf-Umbau (13. August) eine Gruppe ohne Trennlinie. */
   .toolbar {
     max-width: 700px;
-    margin: 18px auto 0;
+    margin: 0 auto;
     padding: 0 20px;
     display: flex;
     flex-direction: column;
@@ -176,12 +183,6 @@
      und die Tabs darunter. 660px = Inhaltsbreite von .toolbar (700 minus
      deren 2x20px), damit Suche und Filterzeile auf breiten Schirmen exakt
      uebereinander stehen. */
-  /* Kein eigener Abstand nach oben: Die 14px padding-top von .head-controls
-     ergeben zusammen mit dessen Trennlinie exakt dieselben 15px, die unter dem
-     Feld bis zur border-bottom des Headers stehen (dessen padding-bottom ist
-     ebenfalls 14px). Mit den frueheren zusaetzlichen 10px sass das Feld sichtbar
-     tiefer als mittig -- nachgemessen per getBoundingClientRect, 25px oben
-     gegen 15px unten. */
   .head-search { max-width: 660px; margin: 0 auto; padding: 0; display: flex; }
   /* Die zweite Kopfzeile steht dicht unter der ersten -- zusammen bilden sie
      einen Gedanken (allein schauen / gemeinsam schauen). Der Selektor braucht
@@ -196,15 +197,18 @@
      das Menue. Die erste Zeile ist keine Erklaerung, sondern das Versprechen
      der App -- die bleibt. */
   body.kompakte-aktionen header .sub-zweit { display: none; }
-  .head-controls { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+  /* Die Suche steht ZUERST im Kopf (Umbau 13. August); die Linie sitzt als
+     border-bottom an diesem Wrapper und laeuft damit ueber die volle
+     Kopfbreite, nicht nur ueber die 660px der Suche. */
+  .head-controls { margin-top: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
   /* Suche und Tab-Reihe sollen exakt gleich hoch sein. 44px ist die
      natuerliche Hoehe der Tab-Buttons (11px Innenabstand + 15px Schrift);
      das Eingabefeld kaeme mit seinem kleineren Innenabstand sonst auf 36px. */
   .head-search input, .tabs .tabs-row button { min-height: 44px; }
   .head-search .search-wrap { flex: 1; }
-  /* Das Suchfeld sitzt seit dem Umbau im Header (ueber Discovery und den
-     Tabs), nicht mehr in .toolbar -- die Regeln muessen deshalb beide Orte
-     treffen, sonst verliert die Suche ausserhalb der Toolbar ihr Aussehen. */
+  /* Das Suchfeld sitzt im Header (ueber den Tabs), nicht in .toolbar -- die
+     Regeln muessen deshalb beide Orte treffen, sonst verliert die Suche
+     ausserhalb der Toolbar ihr Aussehen. */
   .toolbar input, .head-search input {
     flex: 1;
     min-width: 180px;
@@ -238,6 +242,7 @@
        der Auto-Zoom komplett. */
     .toolbar input, .head-search input { flex-basis: 100%; min-width: 0; font-size: 16px; }
   }
+  .inhalt-sep { border: none; border-top: 1px solid var(--border); margin: 16px 0 0; }
   ol.list {
     list-style: none;
     max-width: 700px;
@@ -494,6 +499,11 @@
   .feedback-hinweis { color:var(--text-dim); font-size:12px; line-height:1.4; margin-top:8px; }
   .settings-menu { flex-direction:column; }
   .settings-menu button { width:100%; }
+  /* Gruppenueberschrift im Einstellungen-Menue (z.B. "E-Mail-Einstellungen"):
+     kein Knopf, sondern eine Zwischenzeile; die zugehoerigen Unterpunkte
+     ruecken ein, damit die Zugehoerigkeit sichtbar ist. */
+  .settings-gruppe { margin:6px 0 -2px; font-size:13px; font-weight:600; color:var(--text-dim); text-align:left; }
+  .settings-menu button.settings-unterpunkt { width:calc(100% - 14px); margin-left:14px; }
   .account-sep { border:none; border-top:1px solid var(--border); margin:20px 0; }
   .unhide-btn { width:100%; }
   .rating-stars { display:flex; flex-wrap:wrap; justify-content:center; gap:4px; margin-top:16px; }
@@ -881,7 +891,12 @@
      Umbrechen erlaubt -- auf schmalen Geraeten rutschen sie unter den Namen,
      statt ihn zu erdruecken. */
   .profile-item { flex-wrap: wrap; }
-  .profile-item .pi-aktionen { display:flex; gap:4px; margin-left:auto; }
+  /* Grid statt flex, beide Spalten 1fr: "Match" ist ein kuerzeres Wort als
+     "Watchlist" -- als flex waeren die Knoepfe verschieden breit. Unter
+     max-content-Sizing bekommen gleiche fr-Spalten die Breite der breitesten,
+     beide Knoepfe sind also so breit wie der laengere Text (gilt in jeder
+     Sprache, ohne feste Pixelbreite). */
+  .profile-item .pi-aktionen { display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:4px; margin-left:auto; }
   .profile-item .pi-btn { background:var(--card); border:1px solid var(--border); border-radius:7px;
     padding:6px 9px; color:var(--text-dim); font-size:11.5px; cursor:pointer; white-space:nowrap;
     transition:all .15s; }
@@ -1181,22 +1196,13 @@
     <button type="button" id="authBarLogout" class="nav-menu-item" style="display:none">Abmelden</button>
     <div id="authBarUser" class="nav-menu-user" style="display:none"></div>
   </div>
-  <div class="tabs">
-    <div class="tabs-row">
-      <!-- Filme und Serien sind Filter (frei kombinierbar, siehe setTab), Kino
-           wechselt die Seite. Zwei verschiedene Dinge in einer Reihe -- deshalb
-           steht Kino abgesetzt (siehe .tabs .kino-tab). -->
-      <button id="tabFilme" class="active">🎬 Filme</button>
-      <button id="tabSerien" class="active">📺 Serien</button>
-      <button id="tabKino" class="kino-tab">🍿 Kino</button>
-    </div>
-  </div>
-  <!-- Die Suche bildet einen eigenen Block unter den Tabs. Die Trennlinie sitzt
-       an diesem Wrapper (nicht an der Suche selbst), damit sie ueber die volle
-       Kopfbreite laeuft und nicht nur ueber die 660px der Suche. Die zweite
-       Linie darunter ist die border-bottom des Headers. Der frueher hier
-       stehende Knopf "Alle Filme & Serien entdecken" ist entfallen -- siehe
-       #fDiscover in der Statusreihe der Toolbar. -->
+  <!-- Die Suche steht seit dem 13. August ZUERST (Umbau der Kopf-Reihenfolge):
+       Suche, darunter die Trennlinie (border-bottom dieses Wrappers, ueber die
+       volle Kopfbreite, nicht nur ueber die 660px der Suche), darunter die
+       Tabs. Tabs und die Filterzeilen der Toolbar bilden EINE Gruppe ohne
+       Linie dazwischen -- die naechste Linie ist erst .inhalt-sep vor der
+       Titelliste. Der frueher hier stehende Knopf "Alle Filme & Serien
+       entdecken" ist entfallen -- siehe #fDiscover in der Statusreihe. -->
   <div class="head-controls">
     <div class="head-search">
       <div class="search-wrap">
@@ -1209,6 +1215,16 @@
         <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16 16"/></svg>
         <div id="searchSuggest" class="search-suggest" style="display:none"></div>
       </div>
+    </div>
+  </div>
+  <div class="tabs">
+    <div class="tabs-row">
+      <!-- Filme und Serien sind Filter (frei kombinierbar, siehe setTab), Kino
+           wechselt die Seite. Zwei verschiedene Dinge in einer Reihe -- deshalb
+           steht Kino abgesetzt (siehe .tabs .kino-tab). -->
+      <button id="tabFilme" class="active">🎬 Filme</button>
+      <button id="tabSerien" class="active">📺 Serien</button>
+      <button id="tabKino" class="kino-tab">🍿 Kino</button>
     </div>
   </div>
 </header>
@@ -1246,6 +1262,11 @@
   </div>
 </div>
 
+<!-- Die Linie vor der Titelliste, ueber die GESAMTE Seitenbreite (bewusst kein
+     max-width wie .toolbar): Sie schliesst die Kopf-Gruppe aus Suche, Tabs und
+     Filtern ab. Sichtbar auf der Titelliste wie auf der Kino-Seite -- die
+     Toolbar darueber bleibt in beiden Ansichten stehen. -->
+<hr class="inhalt-sep">
 
 <div id="matchBar" class="match-bar" style="display:none">
   <span id="matchBarText"></span>
@@ -1475,9 +1496,13 @@
     <div class="modal-actions settings-menu">
       <button type="button" id="settingsProvidersBtn" class="modal-yes">Streaminganbieter</button>
       <button type="button" id="settingsKinosBtn" class="modal-yes">Deine Kinos</button>
-      <!-- Nur angemeldet sichtbar; Beschriftung samt An/Aus-Zustand kommt aus
-           dem JS (benachrichtigungKnopfAktualisieren). -->
-      <button type="button" id="settingsNotifyBtn" class="modal-yes" style="display:none">E-Mail-Benachrichtigung</button>
+      <!-- Gruppe "E-Mail-Einstellungen": Ueberschrift plus (bislang ein)
+           eingerueckter Unterpunkt -- weitere E-Mail-Punkte kommen spaeter
+           darunter. Nur angemeldet sichtbar; Beschriftungen samt An/Aus-
+           Zustand kommen aus dem JS (benachrichtigungKnopfAktualisieren),
+           die Ueberschrift wird dort mit ein-/ausgeblendet. -->
+      <p class="settings-gruppe" id="settingsMailGruppe" style="display:none">E-Mail-Einstellungen</p>
+      <button type="button" id="settingsNotifyBtn" class="modal-yes settings-unterpunkt" style="display:none">E-Mail-Benachrichtigung</button>
       <!-- Watchlist-Import aus Letterboxd/IMDb/Trakt -- nur angemeldet,
            Beschriftung aus dem JS (importKnopfAktualisieren). -->
       <button type="button" id="settingsImportBtn" class="modal-yes" style="display:none">Import</button>
@@ -1586,7 +1611,7 @@
 <div id="importModal" class="modal-overlay" style="display:none">
   <div class="modal">
     <button class="modal-x" id="importModalX" aria-label="Schließen">✕</button>
-    <h3 id="importTitelEl">Watchlist importieren</h3>
+    <h3 id="importTitelEl">IMDb, Letterboxd etc. importieren</h3>
     <p class="prov-intro" id="importIntroEl"></p>
     <input type="file" id="importDatei" accept=".csv,.json" multiple style="display:none">
     <button type="button" class="auth-submit" id="importWaehlenBtn" style="width:100%"></button>
@@ -2023,8 +2048,9 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' hat das noch nicht bewertet'; },
     tasteScoreAria: 'Was ist der Taste-Score?',
     tasteScoreGemeinsam: function(namen){ return 'Der Abgleich ist an: Der Taste-Score gilt hier für dich und ' + namen + ' gemeinsam — er sagt, wie gut ein Titel zu eurem gemeinsamen Geschmack passt.'; },
+    mailEinstellungen: 'E-Mail-Einstellungen',
     benachrichtigungKnopf: function(an){ return 'E-Mail bei neuen Watchlist-Treffern: ' + (an ? 'An' : 'Aus'); },
-    importKnopf: 'Watchlist importieren',
+    importKnopf: 'IMDb, Letterboxd etc. importieren',
     importIntro: 'Exportdateien von Letterboxd (watchlist/watched/ratings.csv), IMDb (Listen-Export) oder Trakt (JSON) auswählen. Abgeglichen wird gegen den Katalog — übernommen wird erst nach der Vorschau.',
     importWaehlen: 'Dateien auswählen',
     importVorschau: function(wl, ges, fehlt){ return wl + ' für die Watchlist, ' + ges + ' als gesehen' + (fehlt ? ' — ' + fehlt + ' nicht im Katalog gefunden:' : '.'); },
@@ -2263,8 +2289,9 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' has not rated this yet'; },
     tasteScoreAria: 'What is the Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Match is on: the Taste Score here applies to you and ' + namen + ' together — it says how well a title fits your combined taste.'; },
+    mailEinstellungen: 'Email settings',
     benachrichtigungKnopf: function(an){ return 'Email for new watchlist matches: ' + (an ? 'On' : 'Off'); },
-    importKnopf: 'Import watchlist',
+    importKnopf: 'Import from IMDb, Letterboxd etc.',
     importIntro: 'Choose export files from Letterboxd (watchlist/watched/ratings.csv), IMDb (list export) or Trakt (JSON). Entries are matched against the catalogue — nothing is applied until you confirm the preview.',
     importWaehlen: 'Choose files',
     importVorschau: function(wl, ges, fehlt){ return wl + ' for the watchlist, ' + ges + ' as watched' + (fehlt ? ' — ' + fehlt + ' not found in the catalogue:' : '.'); },
@@ -2503,8 +2530,9 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' n’a pas encore noté ce titre'; },
     tasteScoreAria: 'Qu’est-ce que le Taste Score ?',
     tasteScoreGemeinsam: function(namen){ return 'Le match est activé\u202f: le Taste Score s’applique ici à toi et ' + namen + ' ensemble — il indique à quel point un titre correspond à vos goûts combinés.'; },
+    mailEinstellungen: 'Réglages e-mail',
     benachrichtigungKnopf: function(an){ return 'E-mail pour les nouveautés de ta watchlist\u202f: ' + (an ? 'activé' : 'désactivé'); },
-    importKnopf: 'Importer ta watchlist',
+    importKnopf: 'Importer depuis IMDb, Letterboxd, etc.',
     importIntro: 'Choisis des fichiers d’export de Letterboxd (watchlist/watched/ratings.csv), IMDb (export de liste) ou Trakt (JSON). Les entrées sont comparées au catalogue — rien n’est appliqué avant la confirmation de l’aperçu.',
     importWaehlen: 'Choisir des fichiers',
     importVorschau: function(wl, ges, fehlt){ return wl + ' pour la watchlist, ' + ges + ' comme vus' + (fehlt ? ' — ' + fehlt + ' introuvables dans le catalogue\u202f:' : '.'); },
@@ -2743,8 +2771,9 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' aún no lo ha valorado'; },
     tasteScoreAria: '¿Qué es el Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'El match está activado: aquí el Taste Score se aplica a ti y a ' + namen + ' juntos — indica lo bien que un título encaja con vuestros gustos combinados.'; },
+    mailEinstellungen: 'Ajustes de correo',
     benachrichtigungKnopf: function(an){ return 'Correo con novedades de tu watchlist: ' + (an ? 'activado' : 'desactivado'); },
-    importKnopf: 'Importar tu watchlist',
+    importKnopf: 'Importar de IMDb, Letterboxd, etc.',
     importIntro: 'Elige archivos de exportación de Letterboxd (watchlist/watched/ratings.csv), IMDb (exportación de listas) o Trakt (JSON). Las entradas se comparan con el catálogo — nada se aplica hasta confirmar la vista previa.',
     importWaehlen: 'Elegir archivos',
     importVorschau: function(wl, ges, fehlt){ return wl + ' para la watchlist, ' + ges + ' como vistos' + (fehlt ? ' — ' + fehlt + ' no encontrados en el catálogo:' : '.'); },
@@ -2983,8 +3012,9 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' non l’ha ancora valutato'; },
     tasteScoreAria: 'Cos’è il Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Il match è attivo: qui il Taste Score vale per te e ' + namen + ' insieme — indica quanto un titolo corrisponde ai vostri gusti combinati.'; },
+    mailEinstellungen: 'Impostazioni e-mail',
     benachrichtigungKnopf: function(an){ return 'E-mail per le novità della tua watchlist: ' + (an ? 'attiva' : 'disattivata'); },
-    importKnopf: 'Importa la tua watchlist',
+    importKnopf: 'Importa da IMDb, Letterboxd ecc.',
     importIntro: 'Scegli i file di esportazione di Letterboxd (watchlist/watched/ratings.csv), IMDb (esportazione liste) o Trakt (JSON). Le voci vengono confrontate con il catalogo — nulla viene applicato prima della conferma dell’anteprima.',
     importWaehlen: 'Scegli i file',
     importVorschau: function(wl, ges, fehlt){ return wl + ' per la watchlist, ' + ges + ' come visti' + (fehlt ? ' — ' + fehlt + ' non trovati nel catalogo:' : '.'); },
@@ -3223,8 +3253,9 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' heeft dit nog niet beoordeeld'; },
     tasteScoreAria: 'Wat is de Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Match staat aan: de Taste Score geldt hier voor jou en ' + namen + ' samen — hij geeft aan hoe goed een titel bij jullie gezamenlijke smaak past.'; },
+    mailEinstellungen: 'E-mailinstellingen',
     benachrichtigungKnopf: function(an){ return 'E-mail bij nieuwe watchlist-treffers: ' + (an ? 'aan' : 'uit'); },
-    importKnopf: 'Watchlist importeren',
+    importKnopf: 'Importeren uit IMDb, Letterboxd enz.',
     importIntro: 'Kies exportbestanden van Letterboxd (watchlist/watched/ratings.csv), IMDb (lijst-export) of Trakt (JSON). De items worden vergeleken met de catalogus — er wordt pas iets toegepast na de voorvertoning.',
     importWaehlen: 'Bestanden kiezen',
     importVorschau: function(wl, ges, fehlt){ return wl + ' voor de watchlist, ' + ges + ' als gezien' + (fehlt ? ' — ' + fehlt + ' niet gevonden in de catalogus:' : '.'); },
@@ -3463,8 +3494,9 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' ainda não avaliou este título'; },
     tasteScoreAria: 'O que é o Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'O Match está ativo: o Taste Score aqui vale para você e ' + namen + ' juntos — ele indica o quanto um título combina com o gosto de vocês.'; },
+    mailEinstellungen: 'Configurações de e-mail',
     benachrichtigungKnopf: function(an){ return 'E-mail para novos matches na watchlist: ' + (an ? 'Ativado' : 'Desativado'); },
-    importKnopf: 'Importar sua watchlist',
+    importKnopf: 'Importar do IMDb, Letterboxd etc.',
     importIntro: 'Escolha arquivos de exportação do Letterboxd (watchlist/watched/ratings.csv), IMDb (exportação de listas) ou Trakt (JSON). As entradas são comparadas com o catálogo — nada é aplicado antes de você confirmar a prévia.',
     importWaehlen: 'Escolher arquivos',
     importVorschau: function(wl, ges, fehlt){ return wl + ' para a watchlist, ' + ges + ' como vistos' + (fehlt ? ' — ' + fehlt + ' não encontrados no catálogo:' : '.'); },
@@ -8154,10 +8186,15 @@ var _settingsModal = document.getElementById('settingsModal');
    Backend (backend/lib/benachrichtigung.js). */
 function benachrichtigungKnopfAktualisieren(){
   var knopf = document.getElementById('settingsNotifyBtn');
+  var gruppe = document.getElementById('settingsMailGruppe');
   if (!knopf) return;
-  if (!CURRENT_USER) { knopf.style.display = 'none'; return; }
+  // Die Gruppenueberschrift haengt am selben Sichtbarkeits-Zustand wie ihr
+  // (bislang einziger) Unterpunkt -- eine Ueberschrift ohne Punkte darunter
+  // waere nur Raetselraten.
+  if (!CURRENT_USER) { knopf.style.display = 'none'; if (gruppe) gruppe.style.display = 'none'; return; }
   knopf.style.display = '';
   knopf.textContent = TXT.benachrichtigungKnopf(!!CURRENT_USER.benachrichtigung);
+  if (gruppe) { gruppe.style.display = ''; gruppe.textContent = TXT.mailEinstellungen; }
 }
 document.getElementById('settingsNotifyBtn').onclick = function(){
   if (!CURRENT_USER) return;
