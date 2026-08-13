@@ -489,10 +489,11 @@
   .feedback-hinweis { color:var(--text-dim); font-size:12px; line-height:1.4; margin-top:8px; }
   .settings-menu { flex-direction:column; }
   .settings-menu button { width:100%; }
-  /* Gruppenueberschrift im Einstellungen-Menue (z.B. "E-Mail-Einstellungen"):
-     kein Knopf, sondern eine Zwischenzeile; die zugehoerigen Unterpunkte
-     ruecken ein, damit die Zugehoerigkeit sichtbar ist. */
-  .settings-gruppe { margin:6px 0 -2px; font-size:13px; font-weight:600; color:var(--text-dim); text-align:left; }
+  /* Trennlinie im Einstellungen-Menue: setzt die beiden Inhaltsfilter
+     (Streaminganbieter, Deine Kinos) vom Rest ab. */
+  .settings-sep { border:none; border-top:1px solid var(--border); width:100%; margin:4px 0; }
+  /* Aufgeklappte Unterpunkte (z.B. unter "E-Mail-Einstellungen") ruecken ein,
+     damit die Zugehoerigkeit sichtbar ist. */
   .settings-menu button.settings-unterpunkt { width:calc(100% - 14px); margin-left:14px; }
   .account-sep { border:none; border-top:1px solid var(--border); margin:20px 0; }
   .unhide-btn { width:100%; }
@@ -1192,11 +1193,13 @@
          neben Filme/Serien wurde -- ein Menuepunkt waere nur ein zweiter Weg
          zum selben Ziel. Zurueck geht weiterhin per Klick aufs Logo. -->
     <button type="button" id="howToBtn" class="nav-menu-item">Anleitung</button>
+    <!-- "Einstellungen" ist seit dem 13. August auch ABGEMELDET sichtbar
+         (renderAuthBar setzt kein display:none mehr): "Sprache & Region" ist
+         dorthin gewandert und muss ohne Konto erreichbar bleiben -- die Wahl
+         liegt im Geraet (localStorage) und zusaetzlich am Konto. Abgemeldet
+         zeigt das Einstellungen-Fenster nur die kontofreien Punkte
+         (einstellungenSichtbarkeit). -->
     <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
-    <!-- Sprache & Region: bewusst auch abgemeldet sichtbar -- die Wahl liegt im
-         Geraet (localStorage) und zusaetzlich am Konto, sobald jemand
-         angemeldet ist. Beschriftung setzt das JS (aktuelle Sprache). -->
-    <button type="button" id="langBtn" class="nav-menu-item">Sprache &amp; Region</button>
     <hr class="nav-menu-sep">
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
@@ -1514,22 +1517,30 @@
     <button class="modal-x" id="settingsModalX" aria-label="Schließen">✕</button>
     <h3>Einstellungen</h3>
     <div class="modal-actions settings-menu">
+      <!-- Die beiden Inhaltsfilter zuerst, durch eine Linie vom Rest
+           abgesetzt (auf Wunsch vom 13. August hervorgehoben). -->
       <button type="button" id="settingsProvidersBtn" class="modal-yes">Streaminganbieter</button>
       <button type="button" id="settingsKinosBtn" class="modal-yes">Deine Kinos</button>
-      <!-- Gruppe "E-Mail-Einstellungen": Ueberschrift plus (bislang ein)
-           eingerueckter Unterpunkt -- weitere E-Mail-Punkte kommen spaeter
-           darunter. Nur angemeldet sichtbar; Beschriftungen samt An/Aus-
-           Zustand kommen aus dem JS (benachrichtigungKnopfAktualisieren),
-           die Ueberschrift wird dort mit ein-/ausgeblendet. -->
-      <p class="settings-gruppe" id="settingsMailGruppe" style="display:none">E-Mail-Einstellungen</p>
+      <hr class="settings-sep" id="settingsSep">
+      <!-- "E-Mail-Einstellungen" ist ein aufklappbarer Punkt wie die anderen
+           Knoepfe: Der Klick zeigt die eingerueckten Unterpunkte (bislang
+           einen); weitere E-Mail-Punkte kommen spaeter darunter. Nur
+           angemeldet sichtbar; Beschriftungen samt An/Aus-Zustand kommen aus
+           dem JS (benachrichtigungKnopfAktualisieren). -->
+      <button type="button" id="settingsMailGruppe" class="modal-yes" style="display:none">E-Mail-Einstellungen</button>
       <button type="button" id="settingsNotifyBtn" class="modal-yes settings-unterpunkt" style="display:none">E-Mail-Benachrichtigung</button>
       <!-- Watchlist-Import aus Letterboxd/IMDb/Trakt -- nur angemeldet,
            Beschriftung aus dem JS (importKnopfAktualisieren). -->
       <button type="button" id="settingsImportBtn" class="modal-yes" style="display:none">Import</button>
       <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Titel</button>
+      <!-- Aus dem Menue rechts oben hierher gewandert (13. August).
+           Beschriftung setzt das JS (sprachModalEinrichten). -->
+      <button type="button" id="langBtn" class="modal-yes">Sprache &amp; Region</button>
       <button type="button" id="settingsAccountBtn" class="modal-yes">Zugangsdaten</button>
       <button type="button" id="settingsCreditsBtn" class="modal-yes">Credits</button>
-      <button type="button" id="settingsDeleteBtn" class="modal-danger">Konto löschen</button>
+      <!-- "Konto loeschen" steht seit dem 13. August NICHT mehr hier,
+           sondern unten im Zugangsdaten-Fenster -- eine destruktive Aktion
+           gehoert nicht auf dieselbe Ebene wie die Alltagspunkte. -->
     </div>
   </div>
 </div>
@@ -1749,6 +1760,12 @@
       <div id="emailError" class="auth-error"></div>
       <button type="submit" class="auth-submit">E-Mail-Adresse ändern</button>
     </form>
+    <hr class="account-sep">
+    <!-- Hierher gewandert aus dem Einstellungen-Menue (13. August): Die
+         destruktive Aktion steht bei den uebrigen Konto-Angelegenheiten,
+         nicht neben den Alltagspunkten. Die id bleibt, damit Handler
+         (openDeleteModal) und Uebersetzungen weiter greifen. -->
+    <button type="button" id="settingsDeleteBtn" class="modal-danger" style="width:100%; border-radius:8px; padding:9px 20px; font-size:14px; font-weight:600; cursor:pointer; border:1px solid #5a2b28;">Konto löschen</button>
   </div>
 </div>
 
@@ -8348,18 +8365,26 @@ var _settingsModal = document.getElementById('settingsModal');
    sofort um (optimistisch) und speichert am Konto; schlaegt das Speichern
    fehl, springt der Knopf zurueck. Verschickt wird taeglich gesammelt vom
    Backend (backend/lib/benachrichtigung.js). */
+// "E-Mail-Einstellungen" ist ein Aufklapp-Knopf: zu beim Oeffnen des
+// Einstellungen-Fensters, der Klick zeigt bzw. versteckt die Unterpunkte.
+// Der Pfeil am Knopf sagt den Zustand an.
+var MAIL_GRUPPE_OFFEN = false;
 function benachrichtigungKnopfAktualisieren(){
   var knopf = document.getElementById('settingsNotifyBtn');
   var gruppe = document.getElementById('settingsMailGruppe');
   if (!knopf) return;
-  // Die Gruppenueberschrift haengt am selben Sichtbarkeits-Zustand wie ihr
-  // (bislang einziger) Unterpunkt -- eine Ueberschrift ohne Punkte darunter
-  // waere nur Raetselraten.
   if (!CURRENT_USER) { knopf.style.display = 'none'; if (gruppe) gruppe.style.display = 'none'; return; }
-  knopf.style.display = '';
+  if (gruppe) {
+    gruppe.style.display = '';
+    gruppe.textContent = TXT.mailEinstellungen + (MAIL_GRUPPE_OFFEN ? ' ▾' : ' ▸');
+  }
+  knopf.style.display = MAIL_GRUPPE_OFFEN ? '' : 'none';
   knopf.textContent = TXT.benachrichtigungKnopf(!!CURRENT_USER.benachrichtigung);
-  if (gruppe) { gruppe.style.display = ''; gruppe.textContent = TXT.mailEinstellungen; }
 }
+document.getElementById('settingsMailGruppe').onclick = function(){
+  MAIL_GRUPPE_OFFEN = !MAIL_GRUPPE_OFFEN;
+  benachrichtigungKnopfAktualisieren();
+};
 document.getElementById('settingsNotifyBtn').onclick = function(){
   if (!CURRENT_USER) return;
   var neu = !CURRENT_USER.benachrichtigung;
@@ -8933,7 +8958,25 @@ async function onboardingMarkenUebernehmen(){
     modal.style.display = 'flex';
   };
 })();
-function openSettingsModal(){ benachrichtigungKnopfAktualisieren(); importKnopfAktualisieren(); _settingsModal.style.display = 'flex'; }
+// Abgemeldet zeigt das Fenster nur die kontofreien Punkte (Sprache & Region,
+// Credits) -- alles Kontogebundene braeuchte ohnehin eine Anmeldung und
+// wuerde nur ins Leere fuehren. Die Trennlinie haengt an den beiden
+// Filter-Punkten darueber.
+function einstellungenSichtbarkeit(){
+  var an = !!CURRENT_USER;
+  ['settingsProvidersBtn', 'settingsKinosBtn', 'settingsSep', 'settingsHiddenBtn', 'settingsAccountBtn']
+    .forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.style.display = an ? '' : 'none';
+    });
+}
+function openSettingsModal(){
+  MAIL_GRUPPE_OFFEN = false;   // Aufklapp-Gruppe startet zu
+  einstellungenSichtbarkeit();
+  benachrichtigungKnopfAktualisieren();
+  importKnopfAktualisieren();
+  _settingsModal.style.display = 'flex';
+}
 function closeSettingsModal(){ _settingsModal.style.display = 'none'; }
 document.getElementById('settingsBtn').onclick = () => { closeNavMenu(); openSettingsModal(); };
 document.getElementById('settingsModalX').onclick = closeSettingsModal;
@@ -8974,7 +9017,9 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _set
       if (wert !== REGION_WAHL) sprachWahlSpeichern(SPRACHE, wert);
     });
   }
-  function oeffnen(){ closeNavMenu(); zeichnen(); modal.style.display = 'flex'; }
+  // Der Knopf sitzt seit dem 13. August im Einstellungen-Fenster, nicht mehr
+  // im Menue rechts oben -- geschlossen wird deshalb das Einstellungen-Fenster.
+  function oeffnen(){ closeSettingsModal(); zeichnen(); modal.style.display = 'flex'; }
   function schliessen(){ modal.style.display = 'none'; }
   btn.onclick = oeffnen;
   document.getElementById('langModalX').onclick = schliessen;
@@ -10000,6 +10045,9 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _acc
 var _deleteModal = document.getElementById('deleteAccountModal');
 function openDeleteModal(){
   closeSettingsModal();
+  // Der Knopf sitzt seit dem 13. August im Zugangsdaten-Fenster -- das muss
+  // dabei zugehen, sonst laege es offen unter dem Loeschdialog.
+  closeAccountModal();
   document.getElementById('pwForDelete').value = '';
   var f = document.getElementById('deleteError'); f.textContent = ''; f.classList.remove('ok');
   _deleteModal.style.display = 'flex';
@@ -10222,7 +10270,10 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNavMe
 function renderAuthBar(){
   authBarUser.textContent = CURRENT_USER ? CURRENT_USER.email : '';
   authBarUser.style.display = CURRENT_USER ? '' : 'none';
-  settingsBtn.style.display = CURRENT_USER ? '' : 'none';
+  // Immer sichtbar (13. August): "Sprache & Region" wohnt jetzt in den
+  // Einstellungen und muss ohne Konto erreichbar sein. Was ein Konto
+  // braucht, blendet einstellungenSichtbarkeit im Fenster selbst aus.
+  settingsBtn.style.display = '';
   authBarLogout.style.display = CURRENT_USER ? '' : 'none';
   authBarLogin.style.display = CURRENT_USER ? 'none' : '';
 }
