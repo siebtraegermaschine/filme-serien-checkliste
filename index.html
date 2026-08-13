@@ -10357,7 +10357,7 @@ _kinoOrtInput.addEventListener('input', function(){
   if (q.length < 2) { _kinoVorschlaege.style.display = 'none'; return; }
   _kinoOrtTimer = setTimeout(async function(){
     try {
-      var d = await apiRequest('GET', '/api/kinos/orte?q=' + encodeURIComponent(q));
+      var d = await apiRequest('GET', '/api/kinos/orte?q=' + encodeURIComponent(q) + '&region=' + REGION_WAHL);
       var orte = d.orte || [];
       if (!orte.length) { _kinoVorschlaege.style.display = 'none'; return; }
       _kinoVorschlaege.innerHTML = orte.map(function(o, i){

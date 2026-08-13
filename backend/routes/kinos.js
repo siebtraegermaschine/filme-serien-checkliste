@@ -46,17 +46,22 @@ router.get('/orte', GRENZE_ORTE, async (req, res) => {
   if (q.length < 2) return res.json({ orte: [] });
 
   const istZahl = /^\d+$/.test(q);
+  // Seit alle Laender importiert sind, teilen sich 39 Laender einen PLZ-Raum:
+  // "1010" gibt es in Auckland, Kopenhagen UND Wien. Treffer aus der gewaehlten
+  // Region stehen deshalb zuerst -- eine unbekannte Region sortiert einfach
+  // nichts um, statt Treffer wegzufiltern.
+  const region = /^[A-Z]{2}$/.test(String(req.query.region || '')) ? req.query.region : '';
   // Bei Ziffern nach Postleitzahl suchen, sonst nach Ortsname -- beides von
   // vorn, damit "56" die 56er-Gegend zeigt und nicht jede PLZ mit einer 56
   // in der Mitte.
   const { rows } = await pool.query(
     istZahl
       ? `SELECT plz, ort, lat, lon FROM plz
-          WHERE plz LIKE $1 ORDER BY plz, ort LIMIT 12`
+          WHERE plz LIKE $1 ORDER BY (land = $2) DESC NULLS LAST, plz, ort LIMIT 12`
       : `SELECT plz, ort, lat, lon FROM plz
           WHERE lower(ort) LIKE lower($1)
-          ORDER BY length(ort), ort, plz LIMIT 12`,
-    [q + '%']
+          ORDER BY (land = $2) DESC NULLS LAST, length(ort), ort, plz LIMIT 12`,
+    [q + '%', region]
   );
 
   /* Grosse Staedte stehen mit Dutzenden Postleitzahlen im Bestand ("Koblenz"
