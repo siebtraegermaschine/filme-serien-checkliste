@@ -93,8 +93,9 @@
     /* Keine border-bottom mehr: Seit dem Kopf-Umbau (13. August) bilden die
        Tabs am Header-Ende und die Filterzeilen der Toolbar darunter EINE
        Gruppe -- eine Linie dazwischen wuerde zusammengehoerige Filter trennen.
-       Die Linien sitzen jetzt unter der Suche (.head-controls) und vor der
-       Titelliste (.inhalt-sep). */
+       Die einzige Linie im Kopf sitzt unter der Suche (.head-controls);
+       eine Linie vor der Titelliste gab es kurz und ist auf Wunsch wieder
+       entfallen. */
   }
   header .icons { font-size: 36px; }
   h1 {
@@ -142,22 +143,12 @@
   }
   /* Kino tut etwas anderes als die beiden davor: Filme und Serien sind Filter,
      die sich frei kombinieren lassen (beide koennen gleichzeitig leuchten),
-     Kino wechselt auf eine eigene Seite. Zwei Bedeutungen in einer Reihe sind
-     genau die Sorte Uneinheitlichkeit, die hier abgebaut werden soll -- also
-     wird der Unterschied wenigstens sichtbar gemacht: ein Abstand und eine
-     senkrechte Linie davor, runde Form statt eckiger. */
+     Kino wechselt auf eine eigene Seite. Sichtbar gemacht wird das allein
+     durch die runde Form statt der eckigen -- der fruehere Abstand samt
+     senkrechter Trennlinie ist am 13. August entfallen, damit die drei
+     Knoepfe buendig ueber den Statusknoepfen stehen. */
   .tabs .kino-tab {
-    margin-left: 6px;
     border-radius: 999px;
-    position: relative;
-  }
-  .tabs .kino-tab::before {
-    content: '';
-    position: absolute;
-    left: -9px; top: 50%;
-    transform: translateY(-50%);
-    width: 1px; height: 22px;
-    background: var(--border);
   }
   /* Der frueher hier stehende Discovery-Button ("Alle Filme & Serien
      entdecken") ist entfallen: "Neue entdecken" ist jetzt ein dritter Status neben
@@ -242,7 +233,6 @@
        der Auto-Zoom komplett. */
     .toolbar input, .head-search input { flex-basis: 100%; min-width: 0; font-size: 16px; }
   }
-  .inhalt-sep { border: none; border-top: 1px solid var(--border); margin: 16px 0 0; }
   ol.list {
     list-style: none;
     max-width: 700px;
@@ -717,16 +707,19 @@
     color:var(--text-dim); font-size:18px; cursor:pointer; line-height:1; }
   @media (hover: hover) { .modal-x:hover { color:var(--accent); } }
   /* ===== Redesign: Navigation, Watchlist, Detail-Poster, Aktionszeile ===== */
-  .tabs { flex-direction: column; align-items: stretch; max-width: 430px; margin: 16px auto 0; gap: 10px; }
-  .tabs .tabs-row { display: flex; gap: 10px; }
-  .tabs .tabs-row button { flex: 1; padding: 11px 10px; }
+  /* 660px = Inhaltsbreite der Toolbar (700 minus 2x20px) und der Suche: Die
+     drei Tab-Knoepfe sind damit genauso breit wie die drei Statusknoepfe
+     darunter -- eine Spalte, gleiche Kanten. Der Reihen-Abstand 4px ist
+     derselbe wie in .filter-group, sonst versetzen sich die Fugen. */
+  .tabs { flex-direction: column; align-items: stretch; max-width: 660px; margin: 14px auto 0; gap: 10px; }
+  .tabs .tabs-row { display: flex; gap: 4px; }
+  .tabs .tabs-row button { flex: 1; min-width: 0; padding: 11px 10px; }
   /* Seit "Kino" als dritter Tab dazugekommen ist, teilen sich drei statt zwei
      Knoepfe dieselbe Breite. Auf sehr schmalen Geraeten (iPhone SE, 320px)
      bricht sonst "Serien" auf zwei Zeilen um und die ganze Reihe wird hoch.
      Steht direkt hinter der Grundregel, damit die gleiche Spezifitaet hier
      gewinnt -- nachgemessen per getComputedStyle, nicht nur angenommen. */
   @media (max-width: 360px) {
-    .tabs .tabs-row { gap: 6px; }
     .tabs .tabs-row button { padding: 11px 4px; font-size: 14px; }
   }
   /* Ausserhalb von .toolbar (das Popup ist ein eigenstaendiges Modal) --
@@ -1200,9 +1193,9 @@
        Suche, darunter die Trennlinie (border-bottom dieses Wrappers, ueber die
        volle Kopfbreite, nicht nur ueber die 660px der Suche), darunter die
        Tabs. Tabs und die Filterzeilen der Toolbar bilden EINE Gruppe ohne
-       Linie dazwischen -- die naechste Linie ist erst .inhalt-sep vor der
-       Titelliste. Der frueher hier stehende Knopf "Alle Filme & Serien
-       entdecken" ist entfallen -- siehe #fDiscover in der Statusreihe. -->
+       Linie dazwischen; zur Titelliste hin gibt es ebenfalls keine Linie.
+       Der frueher hier stehende Knopf "Alle Filme & Serien entdecken" ist
+       entfallen -- siehe #fDiscover in der Statusreihe. -->
   <div class="head-controls">
     <div class="head-search">
       <div class="search-wrap">
@@ -1262,12 +1255,6 @@
   </div>
 </div>
 
-<!-- Die Linie vor der Titelliste, ueber die GESAMTE Seitenbreite (bewusst kein
-     max-width wie .toolbar): Sie schliesst die Kopf-Gruppe aus Suche, Tabs und
-     Filtern ab. Sichtbar auf der Titelliste wie auf der Kino-Seite -- die
-     Toolbar darueber bleibt in beiden Ansichten stehen. -->
-<hr class="inhalt-sep">
-
 <div id="matchBar" class="match-bar" style="display:none">
   <span id="matchBarText"></span>
   <button type="button" id="matchBarClear">aufheben</button>
@@ -1321,12 +1308,13 @@
   </svg>
 </button>
 
-<!-- Fertige Einladung. Eigenes Fenster, weil navigator.share auf iOS NUR aus
-     einer frischen Nutzergeste heraus oeffnet: Vorher lief der Aufruf nach dem
-     Server-Abruf (await) und nach einem nativen confirm() -- die Geste war da
-     laengst abgelaufen, das Teilen-Blatt kam nicht, und der Fehler wurde still
-     verschluckt. Hier haengt er an einem Knopf, der Aufruf ist damit wieder die
-     unmittelbare Folge des Tippens. Dasselbe Muster wie beim Titel-Teilen.
+<!-- Fertige Einladung. Seit dem 13. August nur noch der RUECKFALL: Der Link
+     wird schon waehrend der Rueckfrage erstellt, beim "Ja" geht direkt das
+     native Teilen-Blatt auf (siehe einladungTeilen). Dieses Fenster erscheint,
+     wenn navigator.share fehlt (typisch am Rechner), der Link beim "Ja" noch
+     nicht da war oder share() doch fehlschlaegt. Hintergrund bleibt: iOS
+     oeffnet share() NUR aus einer frischen Nutzergeste -- deshalb haengt das
+     Teilen hier an einem eigenen Knopf statt am Ende einer await-Kette.
      z-index ueber der Personenliste, aus der heraus es geoeffnet wird. -->
 <div id="inviteShareModal" class="modal-overlay" style="display:none">
   <div class="modal">
@@ -9251,13 +9239,45 @@ async function einladungTeilen(btn, artName, weiter){
   // Eigene Rueckfrage statt confirm(): Auf dem iPhone konnte der Tipp auf "OK"
   // durch den geschlossenen Systemdialog hindurch auf das Popup dahinter
   // durchschlagen -- das ging dann mit zu.
-  if (art.rueckfrage && !(await confirmRemove(art.rueckfrage))) return;
+  //
+  // Der Link wird schon WAEHREND der Rueckfrage erstellt, nicht erst nach dem
+  // "Ja": Ist er beim "Ja" fertig (waehrend des Lesens praktisch immer), kann
+  // direkt das native Teilen-Blatt aufgehen -- der "Ja"-Tipp ist eine frische
+  // Geste, und ohne await dazwischen bleibt sie es (iOS oeffnet share() nur
+  // innerhalb einer Nutzergeste, siehe zeigeEinladung). Bricht jemand die
+  // Rueckfrage ab, verfaellt der erstellte Link ungenutzt nach Ablauffrist --
+  // der bewusste Preis fuer den gesparten Zwischenschritt.
+  var versprechen = null, fertig = null;
+  if (art.rueckfrage) {
+    versprechen = apiRequest('POST', '/api/links/invite', { kind: art.kind });
+    // Fehler NICHT hier melden: Wer abbricht, soll keinen Fehler einer
+    // Einladung sehen, die er gar nicht wollte. Nach dem "Ja" faellt derselbe
+    // Fehler unten beim await auf und wird dort behandelt.
+    versprechen.then(function(d){ fertig = d; }, function(){});
+    if (!(await confirmRemove(art.rueckfrage))) return;
+  }
   btn.disabled = true;
   try {
-    var d = await apiRequest('POST', '/api/links/invite', { kind: art.kind });
+    var text = art.text((CURRENT_USER && CURRENT_USER.displayName) || TXT.jemand);
+    if (fertig && navigator.share) {
+      var d0 = fertig;
+      navigator.share({ title: 'MovieMatch', text: text, url: d0.url })
+        .catch(function(err){
+          // Abbruch im Teilen-Blatt ist kein Fehlerfall. Alles andere (etwa
+          // eine doch verbrauchte Geste) faellt aufs bewaehrte Fenster zurueck.
+          if (!err || err.name !== 'AbortError') {
+            zeigeEinladung(art.titel, text, d0.url,
+              d0.expiresInDays ? TXT.linkGueltig(d0.expiresInDays) : TXT.linkLaeuftNichtAb);
+          }
+        });
+      return;
+    }
+    // Rueckfall: kein natives Teilen (typisch am Rechner) oder der Link war
+    // beim "Ja" noch nicht da -- dann wie bisher das Fenster mit Kopieren.
+    var d = versprechen ? await versprechen : await apiRequest('POST', '/api/links/invite', { kind: art.kind });
     zeigeEinladung(
       art.titel,
-      art.text((CURRENT_USER && CURRENT_USER.displayName) || TXT.jemand),
+      text,
       d.url,
       d.expiresInDays ? TXT.linkGueltig(d.expiresInDays) : TXT.linkLaeuftNichtAb
     );
