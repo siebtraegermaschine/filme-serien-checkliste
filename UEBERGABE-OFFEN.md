@@ -128,6 +128,18 @@ Match nur noch der Match-Knopf, nicht mehr die ganze Personenzeile.
 (`e85d952`, vor dieser Sitzung entstanden) und `npm run metrik` bekam
 saubere Spaltenbreiten (`0929901`).
 
+**Nachträge vom selben Tag (nach dem ersten Übergabe-Stand):**
+- Der Teilen-Knopf ist **weiß** (`1af2fc0`, erst blau — `--teilen`/`--teilen-soft`).
+- **Kino-Rückweg** (`617ed45`): Wer auf der Kino-Seite sucht, sieht am Ende
+  „🎬 Auch unter Filme & Serien: X Treffer" (`listenHinweisAktualisieren`) —
+  das Gegenstück zum „Auch im Kino"-Knopf; der Klick führt in die Titelliste,
+  die Suche bleibt stehen.
+- Teilen-Blatt: „Mein Profil teilen" heißt **„Gesamte Watchlist teilen"**
+  (`fd36d18`), und **„Einen Titel teilen" steht zuerst** (`ce19aee`).
+- Suche: Vorschlags-Klick wird **direkt zum Chip**, Enter klappt nur die
+  Vorschläge ein (`ceb66a7`) — Chips entstehen ausschließlich über
+  Vorschlags-Klick und „+".
+
 ---
 
 ## 0.0.0 Was am 12. August dazukam (41 Commits)

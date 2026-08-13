@@ -12,6 +12,19 @@
 
 ## Bedienung / Produkt
 
+- **Inhaltssuche über die Kurzbeschreibungen** (13. August besprochen,
+  Vorschlag liegt vor): Die Plots sind bewusst NICHT im Browser (13 MB,
+  siehe UEBERGABE-OFFEN 3.6) — eine thematische Suche bräuchte einen
+  Server-Endpunkt (`/api/suche`, Postgres-Textindex über `plot`/
+  `overview_en`/`uebersetzungen` je Sprache, Rate-Limit) und würde die
+  Treffer gekennzeichnet ANS ENDE der Liste mischen („aus der
+  Beschreibung"), damit sie die präzisen Titeltreffer nicht verwässern.
+  Aufwand ~ein Abend. Teilweise decken das heute die Schlagwörter ab.
+- **„Diese Titel teilen" (Momentaufnahme)**: Ansicht-Links übertragen
+  Einstellungen, keine Inhalte — eine vierte Teilen-Option könnte die
+  konkret angezeigten Titel per Kennungen mitgeben (unabhängig von den
+  Markierungen des Empfängers). Vorgeschlagen, nicht entschieden.
+
 - **Eigene Titel verschwinden bei Community-Sortierung** (UEBERGABE-OFFEN.md
   3.4, gemessen: 0 von 25 sichtbar). Christian am 12. August: ignorieren.
   Bleibt hier vermerkt, falls es Nutzer-Meldungen dazu gibt.
