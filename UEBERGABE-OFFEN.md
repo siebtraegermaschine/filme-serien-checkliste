@@ -828,12 +828,13 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
   sind verschiedene Werte.
 - **„Neue entdecken" ist in fremden Listen ausgegraut** — richtig so, aber es
   steht nirgends warum.
-- **Die Orte-Suche (`/api/kinos/orte`) filtert nicht nach Region** — beim
-  Prüfen der Importe am 13. August aufgefallen: „1010" zeigt Auckland,
-  Kopenhagen, Lausanne, Lefkosia und Sydney VOR Wien (sortiert nach PLZ und
-  Ort, Limit 12). Seit alle Länder importiert sind, teilen sich 39 Länder
-  einen PLZ-Raum. Naheliegende Abhilfe: Treffer aus der gewählten Region
-  zuerst.
+- ~~Die Orte-Suche (`/api/kinos/orte`) filtert nicht nach Region~~ —
+  **behoben** am 13. August (`10d6f00`): Der Client schickt `REGION_WAHL`
+  mit, der Server sortiert Treffer dieses Landes nach vorn (`ORDER BY
+  (land = $2) DESC NULLS LAST, …`). Gefiltert wird bewusst nichts — wer im
+  Ausland sucht, findet weiterhin alles, und eine unbekannte Region ändert
+  die Reihenfolge nicht. Live geprüft: „1010" mit Region AT zeigt Wien
+  zuerst, mit DK Kopenhagen, ohne Region wie bisher.
 
 ### 3.6 Erledigt (nicht erneut aufmachen)
 
