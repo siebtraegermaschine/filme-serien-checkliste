@@ -684,3 +684,18 @@ BEGIN
     UPDATE streaming_cache SET enriched_at = fetched_at;
   END IF;
 END $$;
+
+-- Anonyme Trichter-Zaehler (IDEEN-WACHSTUM.md, Abschnitt 3): je Tag und
+-- Schritt EINE Zahl. Bewusst keine Kennungen, keine IP-Adressen, keine
+-- Zeitstempel unterhalb des Tages -- aus diesen Zeilen laesst sich keine
+-- Person rekonstruieren. Geschrieben von lib/metrik.js, gelesen nur von
+-- npm run metrik (keine Lese-Route, wie bei der Bewertungsstatistik).
+CREATE TABLE IF NOT EXISTS metrik_tage (
+  tag     DATE NOT NULL,
+  schritt TEXT NOT NULL,
+  anzahl  BIGINT NOT NULL DEFAULT 0,
+  PRIMARY KEY (tag, schritt)
+);
+-- Merker je Konto: Der Trichter-Schritt "zehn Titel erreicht" soll genau
+-- einmal zaehlen, auch wenn jemand Markierungen entfernt und neu setzt.
+ALTER TABLE users ADD COLUMN IF NOT EXISTS metrik_zehn BOOLEAN NOT NULL DEFAULT FALSE;

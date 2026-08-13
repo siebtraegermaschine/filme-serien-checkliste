@@ -21,6 +21,7 @@ import linksRouter from './routes/links.js';
 import kinosRouter from './routes/kinos.js';
 import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 import movieNightRouter from './routes/movieNight.js';
+import metrikRouter from './routes/metrik.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';
@@ -96,6 +97,7 @@ app.use('/api/links', linksRouter);
 app.use('/api/kinos', kinosRouter);
 app.use('/api/share', shareRouter);
 app.use('/api/movie-night', movieNightRouter);
+app.use('/api/metrik', metrikRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
 const frontendRoot = path.join(__dirname, '..');

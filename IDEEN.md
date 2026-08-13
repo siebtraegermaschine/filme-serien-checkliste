@@ -60,6 +60,11 @@
   (`users.benachrichtigung`), täglicher Abgleich der Watchlist gegen
   Streaming-/Kinodaten, Versandvermerk in `benachrichtigt`. Braucht einen
   Satz in der Datenschutzerklärung (Zweck, Abbestellbarkeit, Speicherung).
+- **Anonyme Trichter-Zähler** (13. August 2026 gebaut, `metrik_tage`): je Tag
+  und Schritt eine blanke Zahl (Besuch, erste Markierung, Konto, zehn Titel),
+  ohne Kennungen, IPs oder Zeitstempel unterhalb des Tages. Nach eigener
+  Einschätzung keine personenbezogene Verarbeitung — bei der Anwaltsprüfung
+  bestätigen lassen und ggf. einen Satz ergänzen.
 
 ## Bewusst NICHT verfolgt
 

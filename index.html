@@ -525,6 +525,32 @@
   .auth-toggle { text-align:center; font-size:13px; color:var(--text-dim); margin-top:14px; }
   .auth-toggle button { background:none; border:none; color:var(--accent); cursor:pointer; font-size:13px;
     font-weight:600; text-decoration:underline; padding:0; }
+  /* Umsteiger-Hinweis (Import aus Letterboxd/IMDb/Trakt): gestrichelter Kasten
+     wie .profile-add, damit er als Angebot liest und nicht als Pflichtschritt.
+     Steht im Anmelde-Popup und im Leerzustand der Watchlist. */
+  .import-hinweis { display:block; width:100%; margin:14px auto 0; background:none;
+    border:1px dashed var(--border); border-radius:8px; padding:9px 14px;
+    color:var(--text-dim); font-size:13px; line-height:1.45; cursor:pointer; transition:all .15s; }
+  @media (hover: hover) { .import-hinweis:hover { border-color:var(--accent); color:var(--accent); } }
+  .import-hinweis.ok { border-style:solid; border-color:var(--accent); color:var(--accent); cursor:default; }
+  /* Kennenlern-Strecke: ein Titel gross in der Mitte, drei Antworten darunter.
+     Feste Posterhoehe, damit das Fenster beim Titelwechsel nicht springt --
+     die Knoepfe sollen unter dem Finger stehen bleiben (siehe die Lehre aus
+     "bewegt sich unter dem Finger weg", UEBERGABE-OFFEN Abschnitt 5). */
+  .kennen-modal { text-align:center; }
+  .kennen-poster { width:154px; height:231px; object-fit:cover; border-radius:10px;
+    margin:8px auto 8px; display:block; background:var(--card); border:1px solid var(--border); }
+  .kennen-name { font-weight:700; font-size:17px; min-height:44px; display:flex;
+    align-items:center; justify-content:center; }
+  .kennen-meta { color:var(--text-dim); font-size:13px; margin-top:1px; }
+  .kennen-knoepfe { display:flex; gap:8px; margin-top:14px; }
+  .kennen-knoepfe button { flex:1; background:var(--card); border:1px solid var(--border);
+    border-radius:8px; padding:11px 6px; color:var(--text); font-size:14px; font-weight:600;
+    cursor:pointer; transition:all .15s; min-height:44px; }
+  @media (hover: hover) { .kennen-knoepfe button:hover { border-color:var(--accent); color:var(--accent); } }
+  .kennen-weiss { display:block; margin:10px auto 0; background:none; border:none;
+    color:var(--text-dim); font-size:13px; cursor:pointer; text-decoration:underline; }
+  .kennen-stand { color:var(--text-dim); font-size:12px; margin-top:12px; }
   .auth-forgot { display:block; margin:8px auto 0; background:none; border:none; color:var(--text-dim);
     font-size:12px; cursor:pointer; text-decoration:underline; }
 
@@ -1395,6 +1421,12 @@
     </form>
     <div id="authToggle" class="auth-toggle"></div>
     <button type="button" id="authForgot" class="auth-forgot">Passwort vergessen?</button>
+    <!-- Umsteiger-Hinweis (IDEEN-WACHSTUM.md, Vorschlag B): Wer schon bei
+         Letterboxd/IMDb/Trakt ist, soll den Import dort finden, wo er ankommt --
+         nicht erst in den Einstellungen suchen muessen. Ein Klick merkt den
+         Import als Nach-Anmelde-Aktion vor (PENDING_AUTH_ACTIONS, dasselbe
+         Nachhol-Muster wie bei den Schreibaktionen). Text setzt setAuthMode. -->
+    <button type="button" id="authImportHinweis" class="import-hinweis" style="display:none"></button>
   </div>
 </div>
 
@@ -1605,6 +1637,20 @@
     <button type="button" class="auth-submit" id="importWaehlenBtn" style="width:100%"></button>
     <p class="feedback-hinweis" id="importVorschau" style="white-space:pre-line"></p>
     <button type="button" class="auth-submit" id="importStartBtn" style="display:none;width:100%"></button>
+  </div>
+</div>
+
+<!-- Kennenlern-Strecke (IDEEN-WACHSTUM.md, Vorschlag A): beim ersten Besuch
+     statt der Anleitung. Ein bekannter Titel nach dem anderen, drei Antworten;
+     der Taste-Score entsteht LOKAL und ohne Konto (PROGRESS + localStorage,
+     siehe kennenlernEinrichten). Nur die Huelle -- alle Texte setzt das JS
+     aus TXT, wie beim Import-Fenster. -->
+<div id="kennenModal" class="modal-overlay" style="display:none">
+  <div class="modal kennen-modal">
+    <button class="modal-x" id="kennenModalX" aria-label="Schließen">✕</button>
+    <h3 id="kennenTitelEl"></h3>
+    <p class="prov-intro" id="kennenIntroEl"></p>
+    <div id="kennenInhalt"></div>
   </div>
 </div>
 
@@ -2038,6 +2084,17 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'Der Abgleich ist an: Der Taste-Score gilt hier für dich und ' + namen + ' gemeinsam — er sagt, wie gut ein Titel zu eurem gemeinsamen Geschmack passt.'; },
     mailEinstellungen: 'E-Mail-Einstellungen',
     benachrichtigungKnopf: function(an){ return 'E-Mail bei neuen Watchlist-Treffern: ' + (an ? 'An' : 'Aus'); },
+    kennenTitel: 'Finde deinen Taste-Score',
+    kennenIntro: 'Sag zu ein paar bekannten Titeln kurz deine Meinung — daraus entsteht deine persönliche Sortierung. Ganz ohne Konto.',
+    kennenMag: '👍 Mochte ich',
+    kennenMagNicht: '👎 Nicht meins',
+    kennenWeiss: 'Kenn ich nicht',
+    kennenFertigTitel: 'Dein Taste-Score ist da!',
+    kennenFertigText: 'Filme und Serien sind jetzt nach deinem Geschmack sortiert. Mit einem Konto bleibt das gespeichert — auf jedem Gerät.',
+    kennenListe: 'Liste ansehen',
+    kennenSpeichern: 'Konto erstellen und speichern',
+    importEinstieg: 'Schon bei Letterboxd, IMDb oder Trakt? Übernimm deine Watchlist in einer Minute.',
+    importNachAnmeldung: '✓ Der Import öffnet sich nach der Anmeldung.',
     importKnopf: 'IMDb, Letterboxd etc. importieren',
     importIntro: 'Exportdateien von Letterboxd (watchlist/watched/ratings.csv), IMDb (Listen-Export) oder Trakt (JSON) auswählen. Abgeglichen wird gegen den Katalog — übernommen wird erst nach der Vorschau.',
     importWaehlen: 'Dateien auswählen',
@@ -2279,6 +2336,17 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'Match is on: the Taste Score here applies to you and ' + namen + ' together — it says how well a title fits your combined taste.'; },
     mailEinstellungen: 'Email settings',
     benachrichtigungKnopf: function(an){ return 'Email for new watchlist matches: ' + (an ? 'On' : 'Off'); },
+    kennenTitel: 'Find your Taste Score',
+    kennenIntro: 'Give a quick take on a few well-known titles — that builds your personal ranking. No account needed.',
+    kennenMag: '👍 Liked it',
+    kennenMagNicht: '👎 Not for me',
+    kennenWeiss: 'Don’t know it',
+    kennenFertigTitel: 'Your Taste Score is ready!',
+    kennenFertigText: 'Movies and series are now sorted to your taste. With an account it stays saved — on every device.',
+    kennenListe: 'See the list',
+    kennenSpeichern: 'Create an account and save',
+    importEinstieg: 'Already on Letterboxd, IMDb or Trakt? Bring your watchlist over in a minute.',
+    importNachAnmeldung: '✓ The import will open after you sign in.',
     importKnopf: 'Import from IMDb, Letterboxd etc.',
     importIntro: 'Choose export files from Letterboxd (watchlist/watched/ratings.csv), IMDb (list export) or Trakt (JSON). Entries are matched against the catalogue — nothing is applied until you confirm the preview.',
     importWaehlen: 'Choose files',
@@ -2520,6 +2588,17 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'Le match est activé\u202f: le Taste Score s’applique ici à toi et ' + namen + ' ensemble — il indique à quel point un titre correspond à vos goûts combinés.'; },
     mailEinstellungen: 'Réglages e-mail',
     benachrichtigungKnopf: function(an){ return 'E-mail pour les nouveautés de ta watchlist\u202f: ' + (an ? 'activé' : 'désactivé'); },
+    kennenTitel: 'Trouve ton Taste Score',
+    kennenIntro: 'Donne vite ton avis sur quelques titres connus — ta liste personnelle en découle. Sans compte.',
+    kennenMag: '👍 J’ai aimé',
+    kennenMagNicht: '👎 Pas pour moi',
+    kennenWeiss: 'Je ne connais pas',
+    kennenFertigTitel: 'Ton Taste Score est prêt !',
+    kennenFertigText: 'Films et séries sont maintenant triés selon tes goûts. Avec un compte, tout reste enregistré — sur chaque appareil.',
+    kennenListe: 'Voir la liste',
+    kennenSpeichern: 'Créer un compte et enregistrer',
+    importEinstieg: 'Déjà sur Letterboxd, IMDb ou Trakt ? Récupère ta watchlist en une minute.',
+    importNachAnmeldung: '✓ L’import s’ouvrira après la connexion.',
     importKnopf: 'Importer depuis IMDb, Letterboxd, etc.',
     importIntro: 'Choisis des fichiers d’export de Letterboxd (watchlist/watched/ratings.csv), IMDb (export de liste) ou Trakt (JSON). Les entrées sont comparées au catalogue — rien n’est appliqué avant la confirmation de l’aperçu.',
     importWaehlen: 'Choisir des fichiers',
@@ -2761,6 +2840,17 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'El match está activado: aquí el Taste Score se aplica a ti y a ' + namen + ' juntos — indica lo bien que un título encaja con vuestros gustos combinados.'; },
     mailEinstellungen: 'Ajustes de correo',
     benachrichtigungKnopf: function(an){ return 'Correo con novedades de tu watchlist: ' + (an ? 'activado' : 'desactivado'); },
+    kennenTitel: 'Encuentra tu Taste Score',
+    kennenIntro: 'Opina rápido sobre algunos títulos conocidos: así nace tu orden personal. Sin cuenta.',
+    kennenMag: '👍 Me gustó',
+    kennenMagNicht: '👎 No es lo mío',
+    kennenWeiss: 'No lo conozco',
+    kennenFertigTitel: '¡Tu Taste Score está listo!',
+    kennenFertigText: 'Películas y series ahora están ordenadas a tu gusto. Con una cuenta queda guardado, en cualquier dispositivo.',
+    kennenListe: 'Ver la lista',
+    kennenSpeichern: 'Crear cuenta y guardar',
+    importEinstieg: '¿Ya usas Letterboxd, IMDb o Trakt? Trae tu watchlist en un minuto.',
+    importNachAnmeldung: '✓ La importación se abrirá tras iniciar sesión.',
     importKnopf: 'Importar de IMDb, Letterboxd, etc.',
     importIntro: 'Elige archivos de exportación de Letterboxd (watchlist/watched/ratings.csv), IMDb (exportación de listas) o Trakt (JSON). Las entradas se comparan con el catálogo — nada se aplica hasta confirmar la vista previa.',
     importWaehlen: 'Elegir archivos',
@@ -3002,6 +3092,17 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'Il match è attivo: qui il Taste Score vale per te e ' + namen + ' insieme — indica quanto un titolo corrisponde ai vostri gusti combinati.'; },
     mailEinstellungen: 'Impostazioni e-mail',
     benachrichtigungKnopf: function(an){ return 'E-mail per le novità della tua watchlist: ' + (an ? 'attiva' : 'disattivata'); },
+    kennenTitel: 'Trova il tuo Taste Score',
+    kennenIntro: 'Di’ al volo la tua su alcuni titoli famosi: ne nasce il tuo ordinamento personale. Senza account.',
+    kennenMag: '👍 Mi è piaciuto',
+    kennenMagNicht: '👎 Non fa per me',
+    kennenWeiss: 'Non lo conosco',
+    kennenFertigTitel: 'Il tuo Taste Score è pronto!',
+    kennenFertigText: 'Film e serie ora sono ordinati secondo i tuoi gusti. Con un account resta salvato, su ogni dispositivo.',
+    kennenListe: 'Vedi la lista',
+    kennenSpeichern: 'Crea un account e salva',
+    importEinstieg: 'Sei già su Letterboxd, IMDb o Trakt? Porta qui la tua watchlist in un minuto.',
+    importNachAnmeldung: '✓ L’importazione si aprirà dopo l’accesso.',
     importKnopf: 'Importa da IMDb, Letterboxd ecc.',
     importIntro: 'Scegli i file di esportazione di Letterboxd (watchlist/watched/ratings.csv), IMDb (esportazione liste) o Trakt (JSON). Le voci vengono confrontate con il catalogo — nulla viene applicato prima della conferma dell’anteprima.',
     importWaehlen: 'Scegli i file',
@@ -3243,6 +3344,17 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'Match staat aan: de Taste Score geldt hier voor jou en ' + namen + ' samen — hij geeft aan hoe goed een titel bij jullie gezamenlijke smaak past.'; },
     mailEinstellungen: 'E-mailinstellingen',
     benachrichtigungKnopf: function(an){ return 'E-mail bij nieuwe watchlist-treffers: ' + (an ? 'aan' : 'uit'); },
+    kennenTitel: 'Vind je Taste Score',
+    kennenIntro: 'Geef kort je mening over een paar bekende titels — daaruit ontstaat jouw persoonlijke volgorde. Zonder account.',
+    kennenMag: '👍 Vond ik goed',
+    kennenMagNicht: '👎 Niets voor mij',
+    kennenWeiss: 'Ken ik niet',
+    kennenFertigTitel: 'Je Taste Score is er!',
+    kennenFertigText: 'Films en series zijn nu op jouw smaak gesorteerd. Met een account blijft dat bewaard — op elk apparaat.',
+    kennenListe: 'Bekijk de lijst',
+    kennenSpeichern: 'Account aanmaken en opslaan',
+    importEinstieg: 'Al op Letterboxd, IMDb of Trakt? Haal je watchlist in een minuut over.',
+    importNachAnmeldung: '✓ De import opent na het aanmelden.',
     importKnopf: 'Importeren uit IMDb, Letterboxd enz.',
     importIntro: 'Kies exportbestanden van Letterboxd (watchlist/watched/ratings.csv), IMDb (lijst-export) of Trakt (JSON). De items worden vergeleken met de catalogus — er wordt pas iets toegepast na de voorvertoning.',
     importWaehlen: 'Bestanden kiezen',
@@ -3484,6 +3596,17 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'O Match está ativo: o Taste Score aqui vale para você e ' + namen + ' juntos — ele indica o quanto um título combina com o gosto de vocês.'; },
     mailEinstellungen: 'Configurações de e-mail',
     benachrichtigungKnopf: function(an){ return 'E-mail para novos matches na watchlist: ' + (an ? 'Ativado' : 'Desativado'); },
+    kennenTitel: 'Descubra seu Taste Score',
+    kennenIntro: 'Dê rapidinho sua opinião sobre alguns títulos conhecidos — daí nasce sua ordem pessoal. Sem conta.',
+    kennenMag: '👍 Gostei',
+    kennenMagNicht: '👎 Não é para mim',
+    kennenWeiss: 'Não conheço',
+    kennenFertigTitel: 'Seu Taste Score está pronto!',
+    kennenFertigText: 'Filmes e séries agora estão ordenados ao seu gosto. Com uma conta, fica salvo — em qualquer dispositivo.',
+    kennenListe: 'Ver a lista',
+    kennenSpeichern: 'Criar conta e salvar',
+    importEinstieg: 'Já usa Letterboxd, IMDb ou Trakt? Traga sua watchlist em um minuto.',
+    importNachAnmeldung: '✓ A importação abrirá após o login.',
     importKnopf: 'Importar do IMDb, Letterboxd etc.',
     importIntro: 'Escolha arquivos de exportação do Letterboxd (watchlist/watched/ratings.csv), IMDb (exportação de listas) ou Trakt (JSON). As entradas são comparadas com o catálogo — nada é aplicado antes de você confirmar a prévia.',
     importWaehlen: 'Escolher arquivos',
@@ -4627,6 +4750,37 @@ function grenzeMeldung(e) {
   return TXT.zuVieleVersucheIn(min);
 }
 
+/* ---- Anonyme Trichter-Meldungen (IDEEN-WACHSTUM.md, Abschnitt 3) ----
+   Zwei Schritte meldet der Client: "besuch" (je Geraet hoechstens einmal am
+   Tag) und "erste-markierung" (je Geraet einmal ueberhaupt, auch fuer lokale
+   Onboarding-Marken). Es geht NUR der Schrittname ueber die Leitung -- keine
+   Kennung, kein Titel, nichts zum Wiedererkennen; der Server zaehlt je Tag
+   eine Zahl hoch (backend/lib/metrik.js). Der localStorage-Merker sorgt
+   dafuer, dass ein Geraet nicht mehrfach zaehlt. Fehler sind egal: Eine
+   verlorene Zaehlung ist kein Schaden, eine Stoerung der App schon. */
+function metrikMelden(schritt){
+  try {
+    fetch('/api/metrik', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schritt: schritt }), keepalive: true }).catch(function(){});
+  } catch (e) {}
+}
+function metrikBesuchMelden(){
+  try {
+    var heute = new Date().toISOString().slice(0, 10);
+    if (localStorage.getItem('mt.metrikBesuch') === heute) return;
+    localStorage.setItem('mt.metrikBesuch', heute);
+    metrikMelden('besuch');
+  } catch (e) {}
+}
+function metrikMarkierungMelden(){
+  try {
+    if (localStorage.getItem('mt.metrikMarkierung')) return;
+    localStorage.setItem('mt.metrikMarkierung', '1');
+    metrikMelden('erste-markierung');
+  } catch (e) {}
+}
+metrikBesuchMelden();
+
 function progressFor(id) { return (id != null && PROGRESS.get(id)) || { seen: false, watchlist: false, viaStream: false, rating: null }; }
 function getViaStream(id) { return !!progressFor(id).viaStream; }
 function getSeen(id) { return !!progressFor(id).seen; }
@@ -4640,6 +4794,7 @@ async function updateProgressRemote(id, patch) {
   const prev = progressFor(id);
   PROGRESS.set(id, { ...prev, ...patch });
   profilStandErhoehen();
+  metrikMarkierungMelden();
   try {
     return await apiRequest('PUT', '/api/progress/' + id, patch);
   } catch (e) {
@@ -4671,6 +4826,14 @@ function requireLogin(action){
   if (CURRENT_USER) { action(); return; }
   PENDING_AUTH_ACTIONS.push(action);
   openAuthModal();
+}
+/* Oeffnet das Import-Fenster (Letterboxd/IMDb/Trakt) von ausserhalb der
+   Einstellungen -- der eigentliche Oeffner haengt am Einstellungen-Knopf
+   (siehe importEinrichten) und wird hier nur ausgeloest. Genutzt vom
+   Umsteiger-Hinweis im Anmelde-Popup und im Watchlist-Leerzustand. */
+function importOeffnen(){
+  var b = document.getElementById('settingsImportBtn');
+  if (b && typeof b.onclick === 'function') b.onclick();
 }
 
 const POSTER='https://image.tmdb.org/t/p/w154';
@@ -6222,7 +6385,13 @@ function renderLeerzustand(q){
     list.innerHTML = '<li class="watch-empty">' + TXT.keineTitelAuswahl + '</li>';
     return;
   }
-  list.innerHTML = '<li class="watch-empty">' + TXT.watchlisteLeer + '</li>';
+  list.innerHTML = '<li class="watch-empty">' + TXT.watchlisteLeer +
+    '<button type="button" class="import-hinweis" id="watchImportBtn">' + TXT.importEinstieg + '</button></li>';
+  // Umsteiger-Weg aus dem Leerzustand heraus: angemeldet direkt ins
+  // Import-Fenster, abgemeldet erst zur Anmeldung (requireLogin holt den
+  // Import danach nach -- dasselbe Muster wie bei den Schreibaktionen).
+  var wib = document.getElementById('watchImportBtn');
+  if (wib) wib.onclick = function(){ requireLogin(importOeffnen); };
 }
 /* "Mehr laden" darf den Knopf nicht unter dem Finger wegziehen.
 
@@ -7758,10 +7927,17 @@ document.getElementById('howToBtn').onclick = () => { closeNavMenu(); openTour()
 })();
 // v2, weil aus dem Textblock Schritte geworden sind -- auch wer die alte
 // Anleitung schon gesehen hat, soll den neuen Einstieg einmal bekommen.
+// Seit dem 13. August oeffnet der erste Besuch NICHT mehr die Anleitung,
+// sondern die Kennenlern-Strecke (siehe kennenlernEinrichten) -- die braucht
+// den Katalog und startet deshalb erst nach STARTLADUNG (siehe die
+// /api/auth/me-Kette unten). Die Anleitung bleibt ueber das Menue und
+// "(How to)" erreichbar; derselbe Merker verhindert, dass Bestandsbesucher
+// die Strecke aufgedraengt bekommen.
 var HOWTO_SEEN_KEY = 'top200-howto-seen-v2';
+var KENNENLERN_NEU = false;
 try {
   if (!localStorage.getItem(HOWTO_SEEN_KEY)) {
-    openTour();
+    KENNENLERN_NEU = true;
     localStorage.setItem(HOWTO_SEEN_KEY, '1');
   }
 } catch (e) {}
@@ -8640,6 +8816,122 @@ function importKnopfAktualisieren(){
   document.getElementById('importWaehlenBtn').onclick = function(){ dateiEl.click(); };
   document.getElementById('importModalX').onclick = function(){ modal.style.display = 'none'; };
   modal.addEventListener('click', function(e){ if (e.target === modal) modal.style.display = 'none'; });
+})();
+
+/* ---- Kennenlern-Strecke (IDEEN-WACHSTUM.md, Vorschlag A) ----
+   Beim ersten Besuch statt der Anleitung: bekannte Titel nacheinander,
+   drei Antworten, und der Taste-Score entsteht LOKAL -- PROGRESS wird direkt
+   befuellt, punkteFuer rechnet ohnehin im Browser. Ohne Konto ueberleben die
+   Marken in localStorage (mt.kennenlernMarken) und werden bei der naechsten
+   Anmeldung auf das Konto geschrieben (onboardingMarkenUebernehmen).
+
+   Wertung: "Mochte ich" = gesehen mit 8/10 (vier Sterne), "Nicht meins" =
+   gesehen mit 4/10 (zwei Sterne) -- beides fliesst mit Vorzeichen in den
+   Score ein. "Kenn ich nicht" markiert nichts. */
+var KENNEN_ZIEL = 15;
+var ONBOARDING_KEY = 'mt.kennenlernMarken';
+function onboardingMarkenLesen(){
+  try { return JSON.parse(localStorage.getItem(ONBOARDING_KEY) || '{}'); } catch (e) { return {}; }
+}
+function onboardingMarkeSichern(id, patch){
+  try {
+    var m = onboardingMarkenLesen(); m[id] = patch;
+    localStorage.setItem(ONBOARDING_KEY, JSON.stringify(m));
+  } catch (e) {}
+}
+// Abgemeldet nach einem Neuladen: die lokalen Marken zurueck in PROGRESS.
+// Die Schluessel bleiben STRINGS: realId kommt als Zeichenkette aus der API
+// (BIGINT ueber JSON), und PROGRESS wird ueberall mit item.realId gelesen --
+// ein Number() hier wuerde Schluessel erzeugen, die nie wieder getroffen
+// werden (still leeres Profil nach dem Neuladen).
+function onboardingMarkenAnwenden(){
+  var m = onboardingMarkenLesen(); var ids = Object.keys(m);
+  ids.forEach(function(id){ PROGRESS.set(id, m[id]); });
+  if (ids.length) profilStandErhoehen();
+}
+// Nach der Anmeldung: Marken auf das Konto schreiben, dann den lokalen
+// Speicher raeumen. Ein einzelner Fehltritt verwirft nur diese eine Marke --
+// wie beim Import (siehe dort).
+async function onboardingMarkenUebernehmen(){
+  var m = onboardingMarkenLesen(); var ids = Object.keys(m);
+  if (!ids.length) return;
+  for (const id of ids) {
+    try { await apiRequest('PUT', '/api/progress/' + id, m[id]); } catch (e) {}
+  }
+  try { localStorage.removeItem(ONBOARDING_KEY); } catch (e) {}
+}
+(function kennenlernEinrichten(){
+  var modal = document.getElementById('kennenModal');
+  if (!modal) return;
+  var inhalt = document.getElementById('kennenInhalt');
+  var reihe = [], stelle = 0, marken = 0;
+  function schliessen(){
+    modal.style.display = 'none';
+    // Auch ein frueher Abbruch behaelt die bis dahin gesetzten Marken --
+    // die Liste soll sie sofort zeigen.
+    if (marken) { rebuild(); renderCurrentTab(); }
+  }
+  document.getElementById('kennenModalX').onclick = schliessen;
+  modal.addEventListener('click', function(e){ if (e.target === modal) schliessen(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && modal.style.display !== 'none') schliessen();
+  });
+  function markieren(item, patch){
+    metrikMarkierungMelden();
+    if (CURRENT_USER) {
+      updateProgressRemote(item.realId, patch).catch(function(){});
+    } else {
+      PROGRESS.set(item.realId, { seen: true, watchlist: false, rating: patch.rating });
+      profilStandErhoehen();
+      onboardingMarkeSichern(item.realId, patch);
+    }
+    marken++;
+  }
+  function fertigZeigen(){
+    document.getElementById('kennenTitelEl').textContent = TXT.kennenFertigTitel;
+    document.getElementById('kennenIntroEl').textContent = TXT.kennenFertigText;
+    inhalt.innerHTML =
+      '<button type="button" class="auth-submit" id="kennenSpeichernBtn" style="width:100%">' + esc(TXT.kennenSpeichern) + '</button>' +
+      '<button type="button" class="kennen-weiss" id="kennenListeBtn">' + esc(TXT.kennenListe) + '</button>';
+    document.getElementById('kennenSpeichernBtn').onclick = function(){
+      schliessen();
+      openAuthModal();
+      setAuthMode('register');
+    };
+    document.getElementById('kennenListeBtn').onclick = schliessen;
+  }
+  function zeigen(){
+    if (marken >= KENNEN_ZIEL || stelle >= reihe.length) { fertigZeigen(); return; }
+    var it = reihe[stelle];
+    var poster = it.poster64 || (it.p ? (POSTER + it.p) : '');
+    inhalt.innerHTML =
+      (poster ? '<img class="kennen-poster" alt="" src="' + escAttr(poster) + '">' : '') +
+      '<div class="kennen-name">' + esc(it.t) + '</div>' +
+      '<div class="kennen-meta">' + esc(String(it.y || '')) + ' · ' + esc(it.type === 'series' ? TXT.serie : TXT.film) + '</div>' +
+      '<div class="kennen-knoepfe">' +
+        '<button type="button" id="kennenJa">' + esc(TXT.kennenMag) + '</button>' +
+        '<button type="button" id="kennenNein">' + esc(TXT.kennenMagNicht) + '</button>' +
+      '</div>' +
+      '<button type="button" class="kennen-weiss" id="kennenWeissBtn">' + esc(TXT.kennenWeiss) + '</button>' +
+      '<div class="kennen-stand">' + marken + ' / ' + KENNEN_ZIEL + '</div>';
+    document.getElementById('kennenJa').onclick = function(){ markieren(it, { seen: true, rating: 8 }); stelle++; zeigen(); };
+    document.getElementById('kennenNein').onclick = function(){ markieren(it, { seen: true, rating: 4 }); stelle++; zeigen(); };
+    document.getElementById('kennenWeissBtn').onclick = function(){ stelle++; zeigen(); };
+  }
+  window.kennenlernStarten = function(){
+    // Die bekanntesten Titel zuerst (Stimmenzahl) -- gefragt wird nur, was
+    // ein Poster hat und noch nicht markiert ist. 60 Kandidaten reichen fuer
+    // 15 Marken auch dann, wenn jemand vieles nicht kennt.
+    reihe = POOL.filter(function(it){
+      return it.realId != null && (it.p || it.poster64) && it.y && !PROGRESS.get(it.realId);
+    }).sort(function(a, b){ return (b.vc || 0) - (a.vc || 0); }).slice(0, 60);
+    if (reihe.length < 10) return;
+    stelle = 0; marken = 0;
+    document.getElementById('kennenTitelEl').textContent = TXT.kennenTitel;
+    document.getElementById('kennenIntroEl').textContent = TXT.kennenIntro;
+    zeigen();
+    modal.style.display = 'flex';
+  };
 })();
 function openSettingsModal(){ benachrichtigungKnopfAktualisieren(); importKnopfAktualisieren(); _settingsModal.style.display = 'flex'; }
 function closeSettingsModal(){ _settingsModal.style.display = 'none'; }
@@ -9965,6 +10257,22 @@ function setAuthMode(m){
     authForgot.style.display = 'none';
   }
   document.getElementById('authToggleBtn').onclick = () => setAuthMode(m === 'login' ? 'register' : 'login');
+  // Umsteiger-Hinweis: beim Anmelden UND Registrieren sichtbar (nur nicht beim
+  // Passwort-Zuruecksetzen). Der Klick merkt den Import einmalig als
+  // Nach-Anmelde-Aktion vor; wird das Popup ohne Anmeldung geschlossen,
+  // verwirft closeAuthModal die Vormerkung mit allen anderen.
+  var importHinweis = document.getElementById('authImportHinweis');
+  if (importHinweis) {
+    importHinweis.style.display = m === 'forgot' ? 'none' : '';
+    importHinweis.textContent = TXT.importEinstieg;
+    importHinweis.classList.remove('ok');
+    importHinweis.onclick = function(){
+      if (importHinweis.classList.contains('ok')) return;
+      PENDING_AUTH_ACTIONS.push(importOeffnen);
+      importHinweis.classList.add('ok');
+      importHinweis.textContent = TXT.importNachAnmeldung;
+    };
+  }
 }
 function openAuthModal(){
   setAuthMode('login');
@@ -10010,6 +10318,10 @@ authForm.addEventListener('submit', async (e) => {
       }
       CURRENT_USER = await apiRequest('POST', path, nutzlast);
       werberVergessen();
+      // Lokale Kennenlern-Marken JETZT auf das Konto schreiben -- vor
+      // loadUserProgressAndRefresh, damit der frisch geladene Fortschritt
+      // sie schon enthaelt.
+      await onboardingMarkenUebernehmen();
       hideAuthModal();
       renderAuthBar();
       // Am Konto gespeicherte Sprache/Region uebernehmen (laedt ggf. neu);
@@ -10059,6 +10371,9 @@ async function loadUserProgressAndRefresh(){
   profilStandErhoehen();
   uebernehmeVersteckte([]);
   MY_PROVIDER_IDS = null;
+  // Abgemeldet: die lokalen Marken der Kennenlern-Strecke wieder anwenden --
+  // der Taste-Score soll ein Neuladen ueberleben, auch ohne Konto.
+  if (!CURRENT_USER) onboardingMarkenAnwenden();
   if (CURRENT_USER) {
     const [rows, hidden] = await Promise.all([
       apiRequest('GET', '/api/progress'),
@@ -10240,7 +10555,19 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
   }
   if (einladung) handleInviteToken(einladung);
   else if (geteilt) zeigeGeteiltenTitel(geteilt);
-  else if (!feedbackGewuenscht) { maybeAskDisplayName(); pruefeLoeschAntrag(); }
+  else if (!feedbackGewuenscht) {
+    maybeAskDisplayName(); pruefeLoeschAntrag();
+    // Erster Besuch: Kennenlern-Strecke, sobald der Katalog da ist. Nur
+    // abgemeldet und nur ohne bestehendes Profil -- wer schon markiert hat
+    // (etwa auf einem anderen Weg hierher kam), braucht sie nicht. Bewusst
+    // NICHT bei Einladungs- und geteilten Links: Dort stuenden sonst zwei
+    // Fenster uebereinander.
+    if (KENNENLERN_NEU) {
+      STARTLADUNG.then(function(){
+        if (!CURRENT_USER && tasteProfileSize() === 0 && window.kennenlernStarten) window.kennenlernStarten();
+      }).catch(function(){});
+    }
+  }
 });
 
 /* ---- Wer hat wen geworben ----

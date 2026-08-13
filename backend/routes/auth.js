@@ -6,6 +6,7 @@ import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { WIDERRUFSFRIST_TAGE } from '../lib/kontoAufraeumen.js';
 import { mengenGrenze } from '../middleware/rateLimit.js';
+import { metrikZaehlen } from '../lib/metrik.js';
 
 const router = createAsyncRouter();
 
@@ -92,6 +93,9 @@ router.post('/register', GRENZE_REGISTER, async (req, res) => {
     );
     await sessionErneuern(req);
     req.session.userId = rows[0].id;
+    // Anonymer Trichter-Zaehler (siehe lib/metrik.js) -- bewusst ohne await:
+    // Das Zaehlen darf die Registrierung weder verzoegern noch scheitern lassen.
+    metrikZaehlen('konto');
     res.status(201).json(publicUser(rows[0]));
   } catch (err) {
     if (err.code === '23505') {

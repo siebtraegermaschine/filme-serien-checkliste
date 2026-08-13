@@ -1,6 +1,7 @@
 import { pool } from '../db/pool.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
+import { zehnTitelPruefen } from '../lib/metrik.js';
 
 const router = createAsyncRouter();
 router.use(requireAuth);
@@ -62,6 +63,10 @@ router.put('/:titleId', async (req, res) => {
      RETURNING title_id, seen, watchlist, via_stream, rating`,
     [req.session.userId, titleId, seen ?? null, watchlist ?? null, viaStream ?? null, rating ?? null]
   );
+
+  // Anonymer Trichter-Schritt "zehn Titel erreicht" -- ohne await, das
+  // Zaehlen darf das Speichern nicht verzoegern (siehe lib/metrik.js).
+  zehnTitelPruefen(req.session.userId);
 
   res.json({ titleId: rows[0].title_id, seen: rows[0].seen, watchlist: rows[0].watchlist, viaStream: rows[0].via_stream, rating: rows[0].rating });
 });
