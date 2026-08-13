@@ -58,11 +58,12 @@
     --text-dim: #9aa3af;
     --done: #4cc38a;
     --border: #2a323e;
-    /* Blau NUR fuer den Teilen-Knopf unten: Er soll sich abheben, aber nicht
-       im Akzent-Gold (sonst Ton in Ton mit den aktiven Filtern), nicht im
-       Gruen von "gesehen" und nicht im Rot der Loesch-Aktionen. */
-    --teilen: #5aa7e6;
-    --teilen-soft: rgba(90, 167, 230, 0.16);
+    /* Eigene Farbe NUR fuer den Teilen-Knopf unten: Er soll sich abheben,
+       aber nicht im Akzent-Gold (sonst Ton in Ton mit den aktiven Filtern).
+       Erst Blau, auf Wunsch (13. August) Weiss -- hell genug, um zwischen
+       den goldenen Filtern und den Listenzeilen herauszustechen. */
+    --teilen: #e8eaed;
+    --teilen-soft: rgba(232, 234, 237, 0.12);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   /* Verhindert das Doppeltipp-Reinzoomen von Mobile-Safari auf Buttons (z.B.
