@@ -1366,6 +1366,13 @@
     <h3 class="cinema-heading" id="cinemaLaterHeading">Bald im Kino</h3>
     <ol class="list" id="cinemaLaterList"></ol>
   </div>
+  <!-- Gegenstueck zum "Auch im Kino"-Hinweis der Titelliste: Trifft der
+       Suchbegriff auch unter Filme & Serien, weist dieser Knopf den Weg
+       zurueck (siehe listenHinweisAktualisieren). In einem eigenen ol.list,
+       damit der Knopf dieselbe Breite und Mitte hat wie die Listen darueber. -->
+  <ol class="list" id="cinemaListenHinweisWrap" style="display:none">
+    <button type="button" id="cinemaListenHinweis" class="load-more-btn kino-hinweis"></button>
+  </ol>
 </div>
 
 <footer>
@@ -2004,6 +2011,7 @@ var UI_TEXTE = {
       'Titel daraus übernehmen – oder nach euren <i class="info-word" data-match role="button" tabindex="0" ' +
       'aria-label="Was ist ein Match?">Übereinstimmungen</i> filtern und sofort etwas finden, das allen gefällt.',
     auchImKino: function(n){ return '🍿 Auch im Kino: ' + n + ' Treffer'; },
+    auchInListe: function(n){ return '🎬 Auch unter Filme & Serien: ' + n + ' Treffer'; },
     katalogFehler: 'Katalog konnte nicht geladen werden. Ist das Backend erreichbar?',
     kinoLabels: { now: 'Aktuell im Kino', soon: 'In Kürze im Kino', later: 'Bald im Kino' },
     kinoLeer: { now: 'Aktuell sind keine Titel hinterlegt.', soon: 'In Kürze startet aktuell nichts Neues.', later: 'Für die kommenden Monate ist noch nichts hinterlegt.' },
@@ -2265,6 +2273,7 @@ var UI_TEXTE = {
       'Invite people to the app at the top left. Then browse their watchlists and add titles you like – or filter by your ' +
       '<i class="info-word" data-match role="button" tabindex="0" aria-label="What is a match?">matches</i> and instantly find something everyone wants to watch.',
     auchImKino: function(n){ return '🍿 Also in cinemas: ' + n + ' ' + (n === 1 ? 'result' : 'results'); },
+    auchInListe: function(n){ return '🎬 Also under Movies & Series: ' + n + ' ' + (n === 1 ? 'result' : 'results'); },
     katalogFehler: 'The catalogue could not be loaded. Is the backend reachable?',
     kinoLabels: { now: 'Now playing', soon: 'Coming soon', later: 'Coming later' },
     kinoLeer: { now: 'No titles on file right now.', soon: 'Nothing new starting soon.', later: 'Nothing on file for the coming months yet.' },
@@ -2526,6 +2535,7 @@ var UI_TEXTE = {
       'Invite des personnes dans l’app en haut à gauche. Parcours ensuite leurs watchlists et ajoute les titres qui te plaisent – ou filtre selon tes ' +
       '<i class="info-word" data-match role="button" tabindex="0" aria-label="Qu’est-ce qu’un match ?">matchs</i> et trouve aussitôt quelque chose que tout le monde veut regarder.',
     auchImKino: function(n){ return '🍿 Aussi au cinéma : ' + n + ' ' + (n === 1 ? 'résultat' : 'résultats'); },
+    auchInListe: function(n){ return '🎬 Aussi sous Films & Séries : ' + n + ' ' + (n === 1 ? 'résultat' : 'résultats'); },
     katalogFehler: 'Le catalogue n’a pas pu être chargé. Le backend est-il accessible ?',
     kinoLabels: { now: 'À l’affiche', soon: 'Prochainement', later: 'Plus tard' },
     kinoLeer: { now: 'Aucun titre référencé pour le moment.', soon: 'Rien de nouveau ne démarre prochainement.', later: 'Rien de référencé pour les mois à venir pour l’instant.' },
@@ -2787,6 +2797,7 @@ var UI_TEXTE = {
       'Invita a gente a la app arriba a la izquierda. Después explora sus watchlists y añade los títulos que te gusten – o filtra por tus ' +
       '<i class="info-word" data-match role="button" tabindex="0" aria-label="¿Qué es un match?">matches</i> y encuentra al instante algo que todos queráis ver.',
     auchImKino: function(n){ return '🍿 También en cines: ' + n + ' ' + (n === 1 ? 'resultado' : 'resultados'); },
+    auchInListe: function(n){ return '🎬 También en Películas y Series: ' + n + ' ' + (n === 1 ? 'resultado' : 'resultados'); },
     katalogFehler: 'No se pudo cargar el catálogo. ¿Está accesible el backend?',
     kinoLabels: { now: 'En cartelera', soon: 'Próximamente', later: 'Más adelante' },
     kinoLeer: { now: 'Ahora mismo no hay títulos registrados.', soon: 'No hay estrenos próximos.', later: 'Aún no hay nada registrado para los próximos meses.' },
@@ -3048,6 +3059,7 @@ var UI_TEXTE = {
       'Invita altre persone all’app in alto a sinistra. Poi sfoglia le loro watchlist e aggiungi i titoli che ti piacciono – oppure filtra per i tuoi ' +
       '<i class="info-word" data-match role="button" tabindex="0" aria-label="Cos’è un match?">match</i> e trova subito qualcosa che tutti vogliono guardare.',
     auchImKino: function(n){ return '🍿 Anche al cinema: ' + n + ' ' + (n === 1 ? 'risultato' : 'risultati'); },
+    auchInListe: function(n){ return '🎬 Anche in Film e Serie: ' + n + ' ' + (n === 1 ? 'risultato' : 'risultati'); },
     katalogFehler: 'Impossibile caricare il catalogo. Il backend è raggiungibile?',
     kinoLabels: { now: 'Ora al cinema', soon: 'Prossimamente', later: 'In arrivo più avanti' },
     kinoLeer: { now: 'Nessun titolo registrato al momento.', soon: 'Nessuna novità in arrivo a breve.', later: 'Ancora niente in programma per i prossimi mesi.' },
@@ -3309,6 +3321,7 @@ var UI_TEXTE = {
       'Nodig linksboven mensen uit voor de app. Blader daarna door hun watchlists en voeg titels toe die je aanspreken – of filter op je ' +
       '<i class="info-word" data-match role="button" tabindex="0" aria-label="Wat is een match?">matches</i> en vind meteen iets dat iedereen wil kijken.',
     auchImKino: function(n){ return '🍿 Ook in de bioscoop: ' + n + ' ' + (n === 1 ? 'resultaat' : 'resultaten'); },
+    auchInListe: function(n){ return '🎬 Ook onder Films & Series: ' + n + ' ' + (n === 1 ? 'resultaat' : 'resultaten'); },
     katalogFehler: 'De catalogus kon niet worden geladen. Is de backend bereikbaar?',
     kinoLabels: { now: 'Nu in de bioscoop', soon: 'Binnenkort', later: 'Later te zien' },
     kinoLeer: { now: 'Op dit moment geen titels bekend.', soon: 'Binnenkort start er niets nieuws.', later: 'Voor de komende maanden is nog niets bekend.' },
@@ -3570,6 +3583,7 @@ var UI_TEXTE = {
       'Convide pessoas para o app no canto superior esquerdo. Depois navegue pelas watchlists delas e adicione os títulos que gostar – ou filtre pelos seus ' +
       '<i class="info-word" data-match role="button" tabindex="0" aria-label="O que é um match?">matches</i> e encontre na hora algo que todos querem assistir.',
     auchImKino: function(n){ return '🍿 Também nos cinemas: ' + n + ' ' + (n === 1 ? 'resultado' : 'resultados'); },
+    auchInListe: function(n){ return '🎬 Também em Filmes e Séries: ' + n + ' ' + (n === 1 ? 'resultado' : 'resultados'); },
     katalogFehler: 'Não foi possível carregar o catálogo. O backend está acessível?',
     kinoLabels: { now: 'Em cartaz', soon: 'Em breve', later: 'Mais adiante' },
     kinoLeer: { now: 'Nenhum título registrado no momento.', soon: 'Nada novo estreando em breve.', later: 'Ainda nada registrado para os próximos meses.' },
@@ -8379,6 +8393,37 @@ async function renderCinemaPage(){
   renderCinemaSection('now', data.now || [], profile, poolByTmdb);
   renderCinemaSection('soon', data.soon || [], profile, poolByTmdb);
   renderCinemaSection('later', data.later || [], profile, poolByTmdb);
+  listenHinweisAktualisieren();
+}
+/* Gegenstueck zu kinoHinweisAnhaengen: Wer auf der KINO-Seite sucht, sieht am
+   Ende, ob der Begriff auch unter Filme & Serien trifft -- vorher gab es den
+   Wegweiser nur in eine Richtung, und wer im Kino nichts fand, schloss
+   daraus, dass es den Titel gar nicht gibt. Der Klick fuehrt zurueck in die
+   Titelliste, die Suche bleibt dabei stehen. */
+function listenTrefferZahl(q){
+  if (!q || !q.length) return 0;
+  var n = 0;
+  POOL.forEach(function(item){
+    if (istVersteckt(item)) return;
+    if (!fskErlaubt(item)) return;
+    if (poolItemMatchesQuery(item, q)) n++;
+  });
+  return n;
+}
+function listenHinweisAktualisieren(){
+  var wrap = document.getElementById('cinemaListenHinweisWrap');
+  var b = document.getElementById('cinemaListenHinweis');
+  if (!wrap || !b) return;
+  var q = sucheAktiv() ? aktiveSuchbegriffe() : [];
+  var n = q.length ? listenTrefferZahl(q) : 0;
+  if (!n) { wrap.style.display = 'none'; return; }
+  b.textContent = TXT.auchInListe(n);
+  wrap.style.display = '';
+  b.onclick = function(){
+    closeCinemaPage();
+    window.scrollTo(0, 0);
+    renderCurrentTab();
+  };
 }
 function openCinemaPage(){
   // Kinostarts haben mit fremden Watchlists nichts zu tun -- die Ansicht endet
