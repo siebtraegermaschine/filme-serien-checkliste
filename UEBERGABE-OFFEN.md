@@ -1,4 +1,4 @@
-# Offene Punkte — Stand 2026-08-12
+# Offene Punkte — Stand 2026-08-13
 
 Ergänzt `UEBERGABE-CHAT.md` (Stand 2026-08-03). Für Architektur und Auslieferung
 siehe `DEPLOYMENT.md` (enthält seit dem 11. August auch den server-seitigen
@@ -7,8 +7,10 @@ für den bereits umgesetzten Filter-Umbau `PLAN-FILTER.md`, für den am
 11. August übernommenen Rechtstext zum Mailversand `ENTWURF-DATENSCHUTZ-MAIL.md`,
 für „Deine Kinos" `PLAN-KINOS.md`, für die Internationalisierung (41 Regionen,
 sieben Sprachen) `PLAN-INTERNATIONALISIERUNG.md` — dessen **Abschnitt 9** ist
-der Umsetzungsstand samt der noch offenen Betriebsschritte —, und für bewusst
-zurückgestellte Ideen `IDEEN.md`.
+der Umsetzungsstand samt der noch offenen Betriebsschritte —, für bewusst
+zurückgestellte Ideen `IDEEN.md`, und für die Wachstums-Analyse mit
+priorisierten Vorschlägen `IDEEN-WACHSTUM.md` (Stand der Umsetzung steht
+dort im Kopf).
 
 **`PLAN-OEFFENTLICHER-TEST.md` ist am 11. August abgearbeitet** — alle sieben
 Punkte umgesetzt (siehe Abschnitt 0.0). Der Plan bleibt als Beleg stehen, ist
@@ -32,6 +34,96 @@ eingeschränkt). SQL-Abfragen:
 ssh -i ~/.ssh/id_ed25519 root@movietaste.de \
   "cd /opt/movietaste && docker compose exec -T postgres psql -U postgres -d filme_serien -c 'SELECT …'"
 ```
+
+---
+
+## 0.0.0.0 Was am 13. August dazukam (11 Commits)
+
+Sechs Blöcke, chronologisch. Alles live verifiziert (Deploy je 15–60 s nach
+dem Push, gegen den ausgelieferten Inhalt geprüft).
+
+**Kopf-Umbau (`1f02988`, `bdb13f3`).** Neue Reihenfolge: Suchfeld zuerst,
+darunter die einzige Linie im Kopf (border-bottom von `.head-controls`, volle
+Breite), dann Filme/Serien/Kino und die Filterzeilen als EINE Gruppe ohne
+Linien — auch zur Titelliste hin. Die drei Tab-Knöpfe stehen auf 660 px
+spaltenbündig über den Statusknöpfen (Reihen-Abstand 4 px wie
+`.filter-group`); der senkrechte Trennstrich vor Kino ist weg, die runde Form
+trägt den Unterschied allein. Achtung: Die wirksamen `.tabs`-Regeln stehen im
+späteren „Redesign"-Block (~Zeile 720), nicht bei den frühen Definitionen.
+Außerdem: Match-Knopf so breit wie Watchlist (`.pi-aktionen` als Grid mit
+1fr-Spalten), und **„Personen einladen" teilt direkt nativ** — der Link
+entsteht schon während der Rückfrage, das „Ja" öffnet `navigator.share` aus
+frischer Geste; das Einladungs-Fenster ist nur noch Rückfall, ein Abbruch
+lässt den erstellten Link ungenutzt verfallen.
+
+**Wachstums-Paket (`801d71f`) — Vorschläge A, B und „Messen" aus
+`IDEEN-WACHSTUM.md`.**
+- *Kennenlern-Strecke:* Beim ersten Besuch statt der Anleitung (gleicher
+  Merker `top200-howto-seen-v2`; Bestandsbesucher bekommen sie nicht).
+  Bekannteste Titel nacheinander, „Mochte ich" (gesehen, 8/10) / „Nicht
+  meins" (gesehen, 4/10) / „Kenn ich nicht", Ziel 15 Marken. Der Taste-Score
+  entsteht LOKAL ohne Konto; Marken liegen in `mt.kennenlernMarken` und
+  werden bei der nächsten Anmeldung aufs Konto geschrieben
+  (`onboardingMarkenUebernehmen`, vor `loadUserProgressAndRefresh`).
+  Startet nicht über Einladungs-, geteilten oder Ansicht-Links.
+- *Import im Einstieg:* „Schon bei Letterboxd, IMDb oder Trakt?" im
+  Anmelde-Popup (Klick merkt den Import als Nach-Anmelde-Aktion vor) und im
+  Watchlist-Leerzustand (`requireLogin(importOeffnen)`).
+- *Messen ohne Tracking:* Tabelle `metrik_tage` (je Tag/Schritt EINE Zahl,
+  keine Kennungen). Client meldet `besuch` (1×/Tag/Gerät) und
+  `erste-markierung` (1× je Gerät) über `/api/metrik` (mengenbegrenzt);
+  der Server zählt `konto` (Registrierung) und `zehn-titel`
+  (`users.metrik_zehn`, je Konto genau einmal). Auslesen NUR per
+  `npm run metrik` — erste echte Zahlen: 9 Konten, 5 über Einladungen
+  geworben (alle von Christian), 5 Konten mit Markierungen in 7 Tagen,
+  8 in 30 Tagen. Rechtstext-Vermerk in `IDEEN.md`.
+
+**Einstellungen-Umbau (`886e037`).** „E-Mail-Einstellungen" ist ein
+Aufklapp-Knopf (Pfeil ▸/▾, startet zu), der Benachrichtigungs-Schalter steht
+eingerückt darunter; Streaminganbieter und Deine Kinos sind durch eine
+Trennlinie abgesetzt. **„Sprache & Region" wohnt jetzt in den Einstellungen**
+— dafür ist der Menüpunkt „Einstellungen" auch abgemeldet sichtbar
+(`einstellungenSichtbarkeit` zeigt dann nur Sprache & Region und Credits).
+**„Konto löschen" steht nur noch unten im Zugangsdaten-Fenster** (gleiche id
+`settingsDeleteBtn`, Handler und Übersetzungen greifen weiter).
+
+**Taste-Match (`f0915ca`).** Hinter jedem Namen in „Gemeinsam schauen" steht
+in Klammern ein symmetrischer Kreuz-Score (0–99): deren positiv markierte
+Titel gegen das eigene Profil, die eigenen gegen deren, Mittel beider
+Richtungen — beide sehen dieselbe Zahl. „Positiv" = Watchlist oder Gesehen
+ohne schlechte Bewertung (Rating < 6 zählt nicht). Erscheint erst, wenn
+BEIDE Seiten mindestens 10 Titel markiert haben; bewusst kein
+Schnittmengen-Ansatz (die Profile tragen über Filme/Serien/Kino hinweg, auch
+ohne einen gemeinsamen Titel). Antippbar → neues Info-Popup `tastematch`.
+Zwischengespeichert je Person am `PROFIL_STAND`.
+
+**Teilen-Knopf und kombinierbare Suche (`6d96da0`, `298fe8d`, `ceb66a7`).**
+- Neuer Knopf unten mittig (Höhe des Nach-oben-Knopfs), in **Blau**
+  (`--teilen`, einzige Stelle mit dieser Farbe — bewusst nicht das
+  Akzent-Gold). Auswahlblatt direkt darüber mit drei Wegen: *Aktuelle
+  Ansicht teilen* (Link `?ansicht=…&sortierung=…&suche=A|B|C`, entsteht
+  lokal → natives Teilen direkt aus der Geste), *Einen Titel teilen* (nur
+  Hinweis: mobil nach rechts wischen, am Rechner über die Detailansicht)
+  und *Mein Profil teilen* (= „Personen einladen"). In fremder Liste oder
+  mit aktivem Match: Fenster „Teilen nicht möglich".
+- **Der Ansicht-Link überträgt EINSTELLUNGEN, keine Inhalte** — der
+  Empfänger sieht seine eigenen Markierungen mit den Filtern des Absenders.
+  Nur Such-Chips wirken inhaltlich (Titelnamen treffen dieselben Titel im
+  Katalog). Beim Wiederherstellen gilt: erst die Suche anwenden, DANN die
+  Filter aus dem Link — sonst überschreibt `sucheZustandAnwenden` („Suchen
+  heißt überall suchen") die Link-Filter.
+- *Kombinierte Suche:* „+" neben dem X friert die Suche als Chip ein (bis
+  10, ODER-verknüpft, je Chip einzeln entfernbar; X und Logo räumen alles).
+  **Ein angeklickter Vorschlag wird direkt zum Chip** (Feld leer, Liste zu);
+  Enter ohne Auswahl klappt nur die Vorschläge ein und lässt den Begriff im
+  Feld — Chips erzeugen ausschließlich Vorschlags-Klick und „+".
+- Offen als Produktidee (vorgeschlagen, nicht entschieden): „Diese Titel
+  teilen" — eine Momentaufnahme der konkret angezeigten Titel per
+  Kennungen, unabhängig von den Markierungen des Empfängers.
+
+**Nebenbei:** `import-kinos.mjs` überspringt Länderfehler statt abzubrechen
+(`e85d952`, vor dieser Sitzung entstanden) und `npm run metrik` bekam
+saubere Spaltenbreiten (`0929901`).
 
 ---
 

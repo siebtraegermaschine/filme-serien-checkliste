@@ -4,6 +4,14 @@
 > Tech-Produkte, übertragen auf MovieMatch. Ergänzt `IDEEN.md` (dort stehen
 > bereits einzelne der genannten Ideen); nichts hiervon ist entschieden.
 >
+> **Umsetzungsstand 13. August 2026:** Vorschlag **A** (Onboarding als
+> Spiel/Kennenlern-Strecke), **B** (Import im Einstieg) und **Abschnitt 3**
+> (Messen ohne Tracking, `npm run metrik`) sind gebaut und live — Details in
+> `UEBERGABE-OFFEN.md`, Abschnitt „13. August". **C** (Fortschrittsbalken zum
+> Score), **D** (Movie Night reaktivieren), **E–M** stehen weiter aus.
+> Zusätzlich entstanden (hier nicht geplant): der Taste-Match hinter den
+> Namen, der Teilen-Knopf mit Ansicht-Links und die kombinierbare Suche.
+>
 > Ausgangslage, ehrlich benannt: **3 Konten** (Stand 3. August). Die Reihenfolge
 > unten folgt deshalb der Trichter-Logik: erst muss der erste Besuch begeistern
 > (Aktivierung), dann lohnt sich Verbreitung (Loops), dann Wiederkehr
