@@ -14,13 +14,15 @@ const argIdx = process.argv.indexOf('--tage');
 const TAGE = argIdx !== -1 ? Math.max(1, Number(process.argv[argIdx + 1]) || 14) : 14;
 const SCHRITTE = ['besuch', 'erste-markierung', 'konto', 'zehn-titel'];
 
-function pad(s, n) { return String(s).padStart(n); }
+// 17 statt 16: "erste-markierung" ist genau 16 Zeichen lang -- ohne das
+// zusaetzliche Zeichen klebten die Spaltenueberschriften aneinander.
+function pad(s, n) { return String(s).padStart(n || 17); }
 
 async function main() {
   const zeilen = await trichter(TAGE);
 
   console.log(`Trichter der letzten ${TAGE} Tage (anonyme Tageszaehler):\n`);
-  console.log(['tag        ', ...SCHRITTE.map((s) => pad(s, 16))].join(''));
+  console.log(['tag        ', ...SCHRITTE.map((s) => pad(s))].join(''));
   const jeTag = new Map();
   for (const z of zeilen) {
     const tag = z.tag.toISOString().slice(0, 10);
@@ -29,10 +31,10 @@ async function main() {
   }
   const summen = {};
   for (const [tag, werte] of jeTag) {
-    console.log([tag, ' ', ...SCHRITTE.map((s) => pad(werte[s] || 0, 16))].join(''));
+    console.log([tag, ' ', ...SCHRITTE.map((s) => pad(werte[s] || 0))].join(''));
     for (const s of SCHRITTE) summen[s] = (summen[s] || 0) + (werte[s] || 0);
   }
-  console.log(['summe      ', ...SCHRITTE.map((s) => pad(summen[s] || 0, 16))].join(''));
+  console.log(['summe      ', ...SCHRITTE.map((s) => pad(summen[s] || 0))].join(''));
   if (!jeTag.size) console.log('(noch keine Eintraege)');
 
   const e = await einladungen();
