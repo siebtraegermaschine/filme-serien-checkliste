@@ -58,6 +58,11 @@
     --text-dim: #9aa3af;
     --done: #4cc38a;
     --border: #2a323e;
+    /* Blau NUR fuer den Teilen-Knopf unten: Er soll sich abheben, aber nicht
+       im Akzent-Gold (sonst Ton in Ton mit den aktiven Filtern), nicht im
+       Gruen von "gesehen" und nicht im Rot der Loesch-Aktionen. */
+    --teilen: #5aa7e6;
+    --teilen-soft: rgba(90, 167, 230, 0.16);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   /* Verhindert das Doppeltipp-Reinzoomen von Mobile-Safari auf Buttons (z.B.
@@ -398,11 +403,11 @@
      Modal-Overlays, damit offene Fenster ihn ueberdecken. */
   .teilen-fab { position:fixed; left:50%; transform:translateX(-50%);
     bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:900;
-    display:flex; align-items:center; gap:7px; background:var(--card);
-    border:1px solid var(--border); border-radius:999px; padding:10px 18px;
-    color:var(--text); font-size:14px; font-weight:600; cursor:pointer;
+    display:flex; align-items:center; gap:7px; background:var(--teilen-soft);
+    border:1px solid var(--teilen); border-radius:999px; padding:10px 18px;
+    color:var(--teilen); font-size:14px; font-weight:700; cursor:pointer;
     box-shadow:0 2px 10px rgba(0,0,0,.45); transition:all .15s; }
-  @media (hover: hover) { .teilen-fab:hover { border-color:var(--accent); color:var(--accent); } }
+  @media (hover: hover) { .teilen-fab:hover { background:var(--teilen); color:#0e1116; } }
   /* Das Auswahlblatt sitzt DIREKT UEBER dem Knopf (ausdrueckliche Vorgabe),
      nicht mittig im Bild wie die Modals. */
   .teilen-sheet { position:fixed; left:50%; transform:translateX(-50%);
