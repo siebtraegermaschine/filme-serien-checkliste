@@ -162,9 +162,9 @@ täglich, der Rest in 4-Tage-Rotation).
 
 Was daraus als **offene Arbeit** bleibt (Details in 3.7 und 3.1):
 
-- Die einmaligen **Betriebsschritte auf dem Server** (Englisch- und
-  Freigaben-Backfill, PLZ-/Kino-Importe der neuen Länder) — ihre Erledigung
-  ist nirgends vermerkt, der Stand ist ungeprüft.
+- ~~Die einmaligen **Betriebsschritte auf dem Server**~~ — **am 13. August
+  geprüft und abgeschlossen** (AT-PLZ nachgeholt; einzig BR/CO im
+  Streaming-Cache stehen noch aus, siehe 3.7 Punkt 4).
 - **Muttersprachler-Review** der maschinellen Übersetzungen (Review-Dateien
   je Sprache liegen bei Christian).
 - **Rechtsklärung für Nicht-EWR-Länder** vor aktivem Marketing dort.
@@ -774,8 +774,8 @@ und die Suche findet anderssprachige Titel über `titleAlt` (`63e5933`) — der
 englische Titel für die deutsche Oberfläche und umgekehrt, nur wenn
 abweichend, in den Suchvorschlägen als „Alternativtitel".
 
-**Für den Bestand greift das erst nach dem Englisch-Backfill** — dessen
-Erledigung ist ungeprüft, siehe 3.7. Die Messwerte des alten Plans (57 % der
+**Für den Bestand greift das seit dem Englisch-Backfill** — am 13. August
+auf dem Server als gelaufen bestätigt, siehe 3.7. Die Messwerte des alten Plans (57 % der
 Titel heißen englisch anders, wortgenau statt Teilstring) stehen in der
 Git-Historie dieser Datei, falls sie wieder gebraucht werden.
 
@@ -828,6 +828,12 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
   sind verschiedene Werte.
 - **„Neue entdecken" ist in fremden Listen ausgegraut** — richtig so, aber es
   steht nirgends warum.
+- **Die Orte-Suche (`/api/kinos/orte`) filtert nicht nach Region** — beim
+  Prüfen der Importe am 13. August aufgefallen: „1010" zeigt Auckland,
+  Kopenhagen, Lausanne, Lefkosia und Sydney VOR Wien (sortiert nach PLZ und
+  Ort, Limit 12). Seit alle Länder importiert sind, teilen sich 39 Länder
+  einen PLZ-Raum. Naheliegende Abhilfe: Treffer aus der gewählten Region
+  zuerst.
 
 ### 3.6 Erledigt (nicht erneut aufmachen)
 
@@ -863,26 +869,33 @@ Alles im laufenden Build gemessen, nicht aus dem Code geschlossen.
   über die Internationalisierung (siehe 3.2); für den Bestand hängt es noch
   am Backfill (3.7).
 
-### 3.7 Betriebsschritte der Internationalisierung — Stand ungeprüft
+### 3.7 Betriebsschritte der Internationalisierung — am 13. August geprüft
 
-`PLAN-INTERNATIONALISIERUNG.md`, Abschnitt 9, listet einmalige Schritte, die
-**auf dem Server** laufen müssen. Ob sie schon gelaufen sind, ist nirgends
-vermerkt — **vor dem Abarbeiten also erst auf dem Server nachsehen** (etwa:
-wie viele `titles` haben `title_en`? Gibt es PLZ-/Kino-Zeilen für AT und die
-neuen Länder?). Die Schritte:
+Am Abend des 13. August auf dem Server nachgesehen (SQL gegen die
+Produktionsdatenbank) — **fast alles war schon gelaufen**, eine Lücke wurde
+gefunden und sofort geschlossen:
 
-1. **Englisch-Backfill für den Bestand**: `backend/scripts/backfill-english.mjs`
-   (~27.000 TMDB-Abrufe, mehrere Stunden, abbrechbar/fortsetzbar — erst mit
-   `--limit=500` probelaufen). Bis dahin fällt die App bei EN und den anderen
-   Sprachen auf deutsche Titel/Plots zurück; nichts bricht.
-2. **Freigaben-Backfill**: dasselbe Skript mit `--nur-freigaben` — ergänzt die
-   Altersfreigaben der neuen Länder auf dem ganzen Bestand. Bis dahin blendet
-   der Familienfilter dort im Zweifel aus statt ein.
-3. **PLZ- und Kino-Importe** für AT und die 38 weiteren Länder
-   (`import-plz.mjs`, `import-kinos.mjs` — die vollständigen Befehlszeilen
-   stehen im Plan). Overpass braucht bei US/CA/AU deutlich länger; GR hat
-   keinen GeoNames-Abzug und wird übersprungen (`63e5933`).
-4. Die **Workflows** befüllen die Regionen von selbst — dort ist nichts zu tun.
+1. **Englisch-Backfill: gelaufen.** 25.445 von 26.976 Titeln haben `title_en`,
+   26.915 ein `overview_en` — der Rest hat bei TMDB vermutlich keine
+   (abweichende) englische Fassung.
+2. **Freigaben-Backfill: gelaufen.** 26.963 von 26.976 Titeln tragen
+   Freigaben-Schlüssel der neuen Länder (US/GB/FR/BR stichprobengeprüft).
+3. **PLZ-Importe: 38 Länder waren da — AT fehlte.** Am 13. August nachgeholt
+   (`import-plz.mjs AT`, 19.001 Zeilen; live geprüft: „Innsbruck" liefert
+   Treffer über `/api/kinos/orte`). GR wird planmäßig übersprungen (kein
+   GeoNames-Abzug, `63e5933`). Bestand danach: 844.314 Postleitzahlen.
+   **Kino-Importe: gelaufen** — 12.053 Kinos, davon 11.247 mit
+   `gesehen_am` = 13. August (Stichproben: Wien 37, Griechenland 296,
+   USA 787, Brasilien 173). Der US-Wert wirkt niedrig für ein Flächenland;
+   mögliche Ursache sind Overpass-Abbrüche, die `import-kinos.mjs` seit
+   `e85d952` überspringt statt abzubrechen — bei Bedarf den US-Lauf einzeln
+   wiederholen.
+4. **Workflows:** `cinema_cache` hat alle 40 Regionen. `streaming_cache` hat
+   **39 von 41 — BR und CO fehlen noch**, sehr wahrscheinlich Opfer des
+   fail-fast-Fehlers, der erst am 13. August um 21:50 Uhr behoben wurde
+   (`616a5fa`, zehn Minuten vor dem planmäßigen 20:00-UTC-Lauf). **Nach dem
+   nächsten Streaming-Lauf nachsehen**, ob BR/CO auftauchen:
+   `SELECT region, count(*) FROM streaming_cache GROUP BY region;`
 
 ### 3.8 Ausgeblendete Funktionen warten auf eine Entscheidung
 
