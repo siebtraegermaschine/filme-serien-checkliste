@@ -927,7 +927,10 @@
   .profile-item { position:relative; display:flex; align-items:center; gap:10px; padding:11px 8px;
     border-radius:8px; cursor:pointer; overflow:hidden; }
   @media (hover: hover) { .profile-item:hover { background:var(--card-hover); } }
-  .profile-item.active { background:var(--accent-soft); }
+  /* Bei aktivem Match faerbt sich NUR der Match-Knopf (.pi-btn.on), nicht
+     mehr die ganze Zeile -- auf Wunsch vom 13. August. Die active-Klasse
+     bleibt am Markup (renderProfileList), traegt aber keine Optik mehr;
+     frueher stand hier background:var(--accent-soft) plus goldener Name. */
   /* Fett, weil der Name in der Zeile die eigentliche Auskunft ist -- daneben
      stehen drei gleich aussehende Knoepfe, die bei jeder Person dieselben sind.
      Beim aktiven Abgleich kommt die Akzentfarbe dazu, die Staerke bleibt. */
@@ -936,7 +939,6 @@
      Unterstreichung) -- die Zahl soll den Namen nicht ueberstrahlen. Der Tipp
      darauf oeffnet trotzdem die Erklaerung. */
   .profile-item .pi-score { color:var(--text-dim); font-weight:600; font-size:13px; cursor:pointer; }
-  .profile-item.active .pi-name { color:var(--accent); }
   .profile-item .pi-check { width:18px; height:18px; accent-color:var(--accent); flex-shrink:0; }
   /* Drei Knoepfe je Person: DEREN Watchlist, DEREN Gesehen-Liste, Abgleich.
      Umbrechen erlaubt -- auf schmalen Geraeten rutschen sie unter den Namen,
@@ -9400,6 +9402,8 @@ function buildProfileForLinked(uid){
    Erscheint erst, wenn BEIDE Seiten mindestens 10 Titel markiert haben
    (Watchlist + Gesehen zusammen, dieselbe Schwelle wie effectiveSort);
    darunter liefert tasteMatchWert null und hinter dem Namen steht nichts. */
+// Vorerst aus (13. August 2026) -- siehe renderProfileList.
+var TASTE_MATCH_SICHTBAR = false;
 var TASTE_MATCH_MIN = 10;
 function tasteMatchPositiv(seen, watchlist, rating){
   return !!watchlist || (!!seen && (!rating || rating >= 6));
@@ -9585,10 +9589,13 @@ function renderProfileList(){
     // Taste-Match hinter dem Namen (siehe tasteMatchRechnen): null = eine der
     // beiden Seiten liegt unter der 10er-Schwelle, dann steht dort nichts.
     // Der Wert ist antippbar und oeffnet die Erklaerung (data-tastematch).
-    var tm = tasteMatchWert(p.id);
-    // Bewusst OHNE die info-word-Klasse (kein Gold, keine Unterstreichung --
-    // Wunsch vom 13. August); anklickbar bleibt die Zahl trotzdem, der
-    // Delegations-Selektor des Info-Popups kennt .pi-score ausdruecklich.
+    // Vorerst ausgeblendet auf Wunsch (13. August 2026): Berechnung
+    // (tasteMatchWert), Stil (.pi-score) und Info-Popup (tastematch) bleiben
+    // komplett verdrahtet -- zum Reaktivieren TASTE_MATCH_SICHTBAR auf true.
+    // Bewusst OHNE die info-word-Klasse (kein Gold, keine Unterstreichung);
+    // anklickbar bleibt die Zahl trotzdem, der Delegations-Selektor des
+    // Info-Popups kennt .pi-score ausdruecklich.
+    var tm = TASTE_MATCH_SICHTBAR ? tasteMatchWert(p.id) : null;
     var tmHtml = tm == null ? ''
       : ' <span class="pi-score" data-tastematch role="button" tabindex="0" aria-label="' +
         escAttr(TXT.tasteMatchAria) + '">(' + tm + ')</span>';

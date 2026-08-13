@@ -95,7 +95,10 @@ ohne schlechte Bewertung (Rating < 6 zählt nicht). Erscheint erst, wenn
 BEIDE Seiten mindestens 10 Titel markiert haben; bewusst kein
 Schnittmengen-Ansatz (die Profile tragen über Filme/Serien/Kino hinweg, auch
 ohne einen gemeinsamen Titel). Antippbar → neues Info-Popup `tastematch`.
-Zwischengespeichert je Person am `PROFIL_STAND`.
+Zwischengespeichert je Person am `PROFIL_STAND`. **Noch am selben Tag vorerst
+ausgeblendet** (`TASTE_MATCH_SICHTBAR = false`) — Berechnung, Stil und
+Erklärung bleiben komplett verdrahtet, siehe 3.8. Außerdem färbt bei aktivem
+Match nur noch der Match-Knopf, nicht mehr die ganze Personenzeile.
 
 **Teilen-Knopf und kombinierbare Suche (`6d96da0`, `298fe8d`, `ceb66a7`).**
 - Neuer Knopf unten mittig (Höhe des Nach-oben-Knopfs), in **Blau**
@@ -869,10 +872,10 @@ neuen Länder?). Die Schritte:
    keinen GeoNames-Abzug und wird übersprungen (`63e5933`).
 4. Die **Workflows** befüllen die Regionen von selbst — dort ist nichts zu tun.
 
-### 3.8 Zwei ausgeblendete Funktionen warten auf eine Entscheidung
+### 3.8 Ausgeblendete Funktionen warten auf eine Entscheidung
 
-Beide sind fertig gebaut und nur per `display:none` unsichtbar; Handler,
-Routen und Übersetzungen stehen bereit:
+Alle fertig gebaut und nur abgeschaltet; Handler, Routen und Übersetzungen
+stehen bereit:
 
 - **Movie Night** (`ed9a240`, siehe 0.0.0.4) — inklusive Backend-Routen und
   Tabellen. Die Tabellen entstehen beim Deploy mit; es sammelt sich dort
@@ -880,8 +883,12 @@ Routen und Übersetzungen stehen bereit:
 - **„Personen einladen" im Menü rechts oben** (`0077535`, siehe 0.0.0.5) —
   der Referral-Weg mit `?ref=`-Token. Solange er unsichtbar ist, wird
   `users.invited_by_user_id` bei Neuregistrierungen kaum noch gefüllt.
+- **Taste-Match hinter den Namen** (13. August, siehe 0.0.0.0) — die Zahl in
+  Klammern unter „Gemeinsam schauen". Zum Reaktivieren
+  `TASTE_MATCH_SICHTBAR = true`; Berechnung, neutraler Stil und das
+  Info-Popup `tastematch` (sieben Sprachen) sind fertig.
 
-Wer eine der beiden reaktiviert, sollte danach die Tour-Screenshots prüfen
+Wer davon etwas reaktiviert, sollte danach die Tour-Screenshots prüfen
 (3.9).
 
 ### 3.9 Übersetzungen und Tour-Screenshots
