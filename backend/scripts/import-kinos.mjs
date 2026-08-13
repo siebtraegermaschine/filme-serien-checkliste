@@ -190,31 +190,42 @@ function zuKino(el) {
 
 async function main() {
   const gefunden = new Map();
+  // Ein Land darf die anderen nicht mitreissen: Wenn Overpass ein Land trotz
+  // aller Wiederholungen verweigert (z.B. 429-Dauerlast), wird es gemeldet
+  // und uebersprungen -- der Lauf ist wiederholbar (Upsert je quelle_id),
+  // ein spaeterer Durchgang holt das Fehlende nach.
+  const uebersprungen = [];
 
   for (const land of LAENDER) {
     const rechtecke = RECHTECKE[land];
     if (!rechtecke) { console.warn(`Kein Rechteck fuer ${land} hinterlegt -- uebersprungen.`); continue; }
     const alle = rechtecke.flatMap((r) => [...kacheln(r)]);
     console.log(`${land}: ${alle.length} Kacheln`);
-    let i = 0;
-    for (const [s, w, n, o] of alle) {
-      i++;
-      const abfrage = `[out:json][timeout:90];
+    try {
+      let i = 0;
+      for (const [s, w, n, o] of alle) {
+        i++;
+        const abfrage = `[out:json][timeout:90];
 (
   node["amenity"="cinema"](${s},${w},${n},${o});
   way["amenity"="cinema"](${s},${w},${n},${o});
 );
 out tags center;`;
-      const daten = await overpass(abfrage);
-      let neu = 0;
-      for (const el of daten.elements || []) {
-        const k = zuKino(el);
-        if (k && !gefunden.has(k.quelle_id)) { gefunden.set(k.quelle_id, k); neu++; }
+        const daten = await overpass(abfrage);
+        let neu = 0;
+        for (const el of daten.elements || []) {
+          const k = zuKino(el);
+          if (k && !gefunden.has(k.quelle_id)) { gefunden.set(k.quelle_id, k); neu++; }
+        }
+        process.stdout.write(`  Kachel ${i}/${alle.length}: +${neu} (gesamt ${gefunden.size})\n`);
+        await schlafen(PAUSE_MS);
       }
-      process.stdout.write(`  Kachel ${i}/${alle.length}: +${neu} (gesamt ${gefunden.size})\n`);
-      await schlafen(PAUSE_MS);
+    } catch (err) {
+      uebersprungen.push(land);
+      console.warn(`${land}: abgebrochen (${err.message}) -- bereits gefundene Kinos bleiben im Lauf.`);
     }
   }
+  if (uebersprungen.length) console.warn(`\nUnvollstaendig geblieben: ${uebersprungen.join(', ')} -- Lauf spaeter wiederholen.`);
 
   console.log(`\n${gefunden.size} Kinos mit Namen und Koordinate gefunden.`);
   const mitPlz = [...gefunden.values()].filter((k) => k.plz).length;
