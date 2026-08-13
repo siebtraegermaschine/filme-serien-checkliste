@@ -7576,9 +7576,22 @@ function renderSearchSuggestions(){
   _searchSuggestEl.style.display = 'block';
 }
 var _suppressSuggestOnFocus = false;
+/* Ein angeklickter Vorschlag wird DIREKT zum Chip (13. August) -- nicht mehr
+   in das Feld uebernommen: So sieht man sofort, dass sich weitere Suchen
+   kombinieren lassen, und entfernt die Suche ueber das X am Chip. Getippte
+   Suchen ohne Vorschlags-Klick bleiben dagegen im Feld und werden erst durch
+   das "+" zum Chip. Nur wenn die Chips voll sind (10), faellt der Klick auf
+   das alte Verhalten zurueck, damit die Auswahl nicht stillschweigend
+   verpufft. */
 function chooseSearchSuggestion(text){
   clearTimeout(_searchSuggestTimer);
-  searchEl.value = text;
+  if (SUCH_CHIPS.length < SUCH_CHIPS_MAX) {
+    if (SUCH_CHIPS.indexOf(text) === -1) SUCH_CHIPS.push(text);
+    suchChipsZeichnen();
+    searchEl.value = '';
+  } else {
+    searchEl.value = text;
+  }
   searchEl.dispatchEvent(new Event('input'));
   clearTimeout(_searchSuggestTimer);
   _searchSuggestEl.style.display = 'none';
@@ -7607,6 +7620,15 @@ document.addEventListener('click', function(e){
 });
 searchEl.addEventListener('keydown', function(e){
   if (e.key === 'Escape') _searchSuggestEl.style.display = 'none';
+  // Enter heisst "so suchen, wie es dasteht": Vorschlaege einklappen, das Feld
+  // verlassen (auf dem Handy geht damit auch die Tastatur zu) -- die Liste ist
+  // laengst nach dem getippten Begriff gefiltert, ein Chip entsteht dabei
+  // bewusst NICHT (den erzeugen nur Vorschlags-Klick und das "+").
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    _searchSuggestEl.style.display = 'none';
+    searchEl.blur();
+  }
 });
 
 /* applyFilter() stand hier: Es blendete bereits gezeichnete Zeilen per CSS aus,
