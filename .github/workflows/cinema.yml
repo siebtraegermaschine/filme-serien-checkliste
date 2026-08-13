@@ -50,6 +50,9 @@ jobs:
     # streaming.yml).
     strategy:
       max-parallel: 1
+      # Ein Regionsfehler darf die uebrigen nicht abbrechen (am 13. August
+      # riss ein MX-Fehlschlag AR/CL/CO per fail-fast-Default mit).
+      fail-fast: false
       matrix:
         region: ${{ fromJSON(needs.plan.outputs.regionen) }}
     steps:
