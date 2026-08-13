@@ -905,6 +905,9 @@
      stehen drei gleich aussehende Knoepfe, die bei jeder Person dieselben sind.
      Beim aktiven Abgleich kommt die Akzentfarbe dazu, die Staerke bleibt. */
   .profile-item .pi-name { flex:1; font-size:14.5px; color:var(--text); font-weight:700; }
+  /* Taste-Match hinter dem Namen: gold wie die Score-Zahlen in der Liste,
+     gepunktet unterstrichen wie jedes erklaerbare Wort (.info-word). */
+  .profile-item .pi-score { color:var(--accent); font-weight:600; font-size:13px; cursor:pointer; }
   .profile-item.active .pi-name { color:var(--accent); }
   .profile-item .pi-check { width:18px; height:18px; accent-color:var(--accent); flex-shrink:0; }
   /* Drei Knoepfe je Person: DEREN Watchlist, DEREN Gesehen-Liste, Abgleich.
@@ -2100,6 +2103,7 @@ var UI_TEXTE = {
     tasteScoreAria: 'Was ist der Taste-Score?',
     tasteScoreGemeinsam: function(namen){ return 'Der Abgleich ist an: Der Taste-Score gilt hier für dich und ' + namen + ' gemeinsam — er sagt, wie gut ein Titel zu eurem gemeinsamen Geschmack passt.'; },
     mailEinstellungen: 'E-Mail-Einstellungen',
+    tasteMatchAria: 'Was ist der Taste-Match?',
     benachrichtigungKnopf: function(an){ return 'E-Mail bei neuen Watchlist-Treffern: ' + (an ? 'An' : 'Aus'); },
     kennenTitel: 'Finde deinen Taste-Score',
     kennenIntro: 'Sag zu ein paar bekannten Titeln kurz deine Meinung — daraus entsteht deine persönliche Sortierung. Ganz ohne Konto.',
@@ -2352,6 +2356,7 @@ var UI_TEXTE = {
     tasteScoreAria: 'What is the Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Match is on: the Taste Score here applies to you and ' + namen + ' together — it says how well a title fits your combined taste.'; },
     mailEinstellungen: 'Email settings',
+    tasteMatchAria: 'What is the Taste Match?',
     benachrichtigungKnopf: function(an){ return 'Email for new watchlist matches: ' + (an ? 'On' : 'Off'); },
     kennenTitel: 'Find your Taste Score',
     kennenIntro: 'Give a quick take on a few well-known titles — that builds your personal ranking. No account needed.',
@@ -2604,6 +2609,7 @@ var UI_TEXTE = {
     tasteScoreAria: 'Qu’est-ce que le Taste Score ?',
     tasteScoreGemeinsam: function(namen){ return 'Le match est activé\u202f: le Taste Score s’applique ici à toi et ' + namen + ' ensemble — il indique à quel point un titre correspond à vos goûts combinés.'; },
     mailEinstellungen: 'Réglages e-mail',
+    tasteMatchAria: 'Qu’est-ce que le Taste Match ?',
     benachrichtigungKnopf: function(an){ return 'E-mail pour les nouveautés de ta watchlist\u202f: ' + (an ? 'activé' : 'désactivé'); },
     kennenTitel: 'Trouve ton Taste Score',
     kennenIntro: 'Donne vite ton avis sur quelques titres connus — ta liste personnelle en découle. Sans compte.',
@@ -2856,6 +2862,7 @@ var UI_TEXTE = {
     tasteScoreAria: '¿Qué es el Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'El match está activado: aquí el Taste Score se aplica a ti y a ' + namen + ' juntos — indica lo bien que un título encaja con vuestros gustos combinados.'; },
     mailEinstellungen: 'Ajustes de correo',
+    tasteMatchAria: '¿Qué es el Taste Match?',
     benachrichtigungKnopf: function(an){ return 'Correo con novedades de tu watchlist: ' + (an ? 'activado' : 'desactivado'); },
     kennenTitel: 'Encuentra tu Taste Score',
     kennenIntro: 'Opina rápido sobre algunos títulos conocidos: así nace tu orden personal. Sin cuenta.',
@@ -3108,6 +3115,7 @@ var UI_TEXTE = {
     tasteScoreAria: 'Cos’è il Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Il match è attivo: qui il Taste Score vale per te e ' + namen + ' insieme — indica quanto un titolo corrisponde ai vostri gusti combinati.'; },
     mailEinstellungen: 'Impostazioni e-mail',
+    tasteMatchAria: 'Che cos’è il Taste Match?',
     benachrichtigungKnopf: function(an){ return 'E-mail per le novità della tua watchlist: ' + (an ? 'attiva' : 'disattivata'); },
     kennenTitel: 'Trova il tuo Taste Score',
     kennenIntro: 'Di’ al volo la tua su alcuni titoli famosi: ne nasce il tuo ordinamento personale. Senza account.',
@@ -3360,6 +3368,7 @@ var UI_TEXTE = {
     tasteScoreAria: 'Wat is de Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Match staat aan: de Taste Score geldt hier voor jou en ' + namen + ' samen — hij geeft aan hoe goed een titel bij jullie gezamenlijke smaak past.'; },
     mailEinstellungen: 'E-mailinstellingen',
+    tasteMatchAria: 'Wat is de Taste Match?',
     benachrichtigungKnopf: function(an){ return 'E-mail bij nieuwe watchlist-treffers: ' + (an ? 'aan' : 'uit'); },
     kennenTitel: 'Vind je Taste Score',
     kennenIntro: 'Geef kort je mening over een paar bekende titels — daaruit ontstaat jouw persoonlijke volgorde. Zonder account.',
@@ -3612,6 +3621,7 @@ var UI_TEXTE = {
     tasteScoreAria: 'O que é o Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'O Match está ativo: o Taste Score aqui vale para você e ' + namen + ' juntos — ele indica o quanto um título combina com o gosto de vocês.'; },
     mailEinstellungen: 'Configurações de e-mail',
+    tasteMatchAria: 'O que é o Taste Match?',
     benachrichtigungKnopf: function(an){ return 'E-mail para novos matches na watchlist: ' + (an ? 'Ativado' : 'Desativado'); },
     kennenTitel: 'Descubra seu Taste Score',
     kennenIntro: 'Dê rapidinho sua opinião sobre alguns títulos conhecidos — daí nasce sua ordem pessoal. Sem conta.',
@@ -9168,6 +9178,62 @@ function buildProfileForLinked(uid){
   return profilAbschluss({ genre: genre, cast: cast, dir: dir, kw: kw, years: years,
                            n: Math.max(1, n), usedAll: false });
 }
+/* ---- Taste-Match: die Zahl hinter dem Namen in "Gemeinsam schauen" ----
+   Symmetrischer Kreuz-Score: Wie gut passen die positiv markierten Titel der
+   anderen Person zu MEINEM Profil (Richtung A), und meine zu IHREM (B)?
+   Angezeigt wird das gerundete Mittel beider Richtungen -- beide Seiten sehen
+   dieselbe Zahl. Bewusst KEIN Schnittmengen-Ansatz: Wer nur Filme schaut und
+   jemand, der nur Serien markiert, haetten null gemeinsame Titel und koennten
+   trotzdem denselben Geschmack haben -- die Profile (Genres, Schlagwoerter,
+   Jahrzehnte, Regie) tragen ueber die Typen hinweg.
+
+   "Positiv markiert" heisst: Watchlist, oder Gesehen ohne schlechte Bewertung
+   (unter 3 Sternen = Rating < 6) -- was jemandem NICHT gefallen hat, ist kein
+   Geschmack, zu dem man passen kann.
+
+   Erscheint erst, wenn BEIDE Seiten mindestens 10 Titel markiert haben
+   (Watchlist + Gesehen zusammen, dieselbe Schwelle wie effectiveSort);
+   darunter liefert tasteMatchWert null und hinter dem Namen steht nichts. */
+var TASTE_MATCH_MIN = 10;
+function tasteMatchPositiv(seen, watchlist, rating){
+  return !!watchlist || (!!seen && (!rating || rating >= 6));
+}
+var TASTE_MATCH_CACHE = {};   // uid -> { kennung, wert }
+function tasteMatchWert(uid){
+  var c = TASTE_MATCH_CACHE[uid];
+  if (c && c.kennung === PROFIL_STAND) return c.wert;
+  var wert = tasteMatchRechnen(uid);
+  TASTE_MATCH_CACHE[uid] = { kennung: PROFIL_STAND, wert: wert };
+  return wert;
+}
+function tasteMatchRechnen(uid){
+  var m = LINKED_PROGRESS[uid];
+  if (!m || m.size < TASTE_MATCH_MIN || tasteProfileSize() < TASTE_MATCH_MIN) return null;
+  var ihrProfil = buildProfileForLinked(uid);
+  if (!ihrProfil) return null;
+  var meinProfil = buildProfile();
+  // Richtung A: deren positive Titel gegen mein Profil.
+  var summeA = 0, zaehlA = 0;
+  POOL.forEach(function(item){
+    if (item.realId == null || !m.has(item.realId)) return;
+    var e = m.get(item.realId);
+    if (!tasteMatchPositiv(e.s, e.w, e.r)) return;
+    summeA += scoreCand(item, meinProfil).score; zaehlA++;
+  });
+  // Richtung B: meine positiven Titel (die eigenen Listen) gegen deren Profil.
+  var summeB = 0, zaehlB = 0;
+  ['filme', 'serien'].forEach(function(cat){
+    var s = state[cat];
+    for (var i = 0; i < s.pool.length; i++) {
+      var id = (s.det[i] || {}).id;
+      if (id == null || !tasteMatchPositiv(getSeen(id), getWatchlistFlag(id), getRating(id))) continue;
+      summeB += scoreCand(s.pool[i], ihrProfil).score; zaehlB++;
+    }
+  });
+  // Nur negativ Markiertes auf einer Seite: keine Aussage moeglich.
+  if (!zaehlA || !zaehlB) return null;
+  return Math.round((summeA / zaehlA + summeB / zaehlB) / 2);
+}
 // Fuers Kino: Im Kino watchlistet kaum jemand Filme, die erst anlaufen -- ein
 // Listenabgleich waere dort fast immer leer. Stattdessen zaehlt, wie gut ein
 // Film zu ALLEN Beteiligten passt. Gemittelt statt Minimum, weil ein duennes
@@ -9310,8 +9376,15 @@ function renderProfileList(){
     // oeffnet jetzt beides zusammen; wegfiltern kann man es danach mit den
     // Schaltern, die dafuer ohnehin da sind.
     var inAnsicht = ANSICHT_PERSON === p.id;
+    // Taste-Match hinter dem Namen (siehe tasteMatchRechnen): null = eine der
+    // beiden Seiten liegt unter der 10er-Schwelle, dann steht dort nichts.
+    // Der Wert ist antippbar und oeffnet die Erklaerung (data-tastematch).
+    var tm = tasteMatchWert(p.id);
+    var tmHtml = tm == null ? ''
+      : ' <span class="pi-score info-word" data-tastematch role="button" tabindex="0" aria-label="' +
+        escAttr(TXT.tasteMatchAria) + '">(' + tm + ')</span>';
     return '<div class="profile-item' + (aktiv ? ' active' : '') + '" data-uid="' + escAttr(String(p.id)) + '">' +
-             '<span class="pi-name">' + esc(p.name) + '</span>' +
+             '<span class="pi-name">' + esc(p.name) + tmHtml + '</span>' +
              '<div class="pi-aktionen">' +
                '<button type="button" class="pi-btn' + (inAnsicht ? ' on' : '') + '" data-tun="w">' + TXT.watchliste + '</button>' +
                '<button type="button" class="pi-btn' + (aktiv ? ' on' : '') + '" data-tun="m">' + TXT.matchWort + '</button>' +
@@ -10991,6 +11064,7 @@ function discFilterPool(){
     matchStart: { title:'Match is on', body:'You can select one or more people here – ' +
       'the more you add, the smaller the intersection.\n\n' +
       'Close this window to see your shared titles.' },
+    tastematch: { title:'Taste Match', body:'The number after a name (0–99) estimates how well your tastes match.\n\nIt is calculated in both directions: how well the other person’s titles fit your taste profile – and yours fit theirs. The bracket shows the average of both directions; you both see the same number.\n\nPoorly rated “watched” titles don’t count as taste. The number appears once both of you have marked at least 10 titles, and it gets more accurate with every mark. You don’t need any titles in common – a movie-only person can still match someone who only marks series.' },
     newreleases: { title:'Release date vs. new on streaming', body:'These are two different sort orders: “Release date” '+
       'sorts by when a movie or series was originally released. “New on streaming” sorts by how recently '+
       'a title became available at a streaming service – regardless of how old it actually is.' }
@@ -11030,6 +11104,7 @@ function discFilterPool(){
     matchStart: { title:'Match ist an', body:'Du kannst hier eine oder mehrere Personen markieren – ' +
       'je mehr, desto kleiner wird die Schnittmenge.\n\n' +
       'Schließe dieses Fenster, um die gemeinsamen Titel zu sehen.' },
+    tastematch: { title:'Taste-Match', body:'Die Zahl hinter dem Namen (0–99) schätzt, wie gut eure Geschmäcker zusammenpassen.\n\nGerechnet wird in beide Richtungen: Wie gut passen die Titel der anderen Person zu deinem Geschmacksprofil – und deine zu ihrem? In der Klammer steht der Mittelwert beider Richtungen; ihr seht beide dieselbe Zahl.\n\nSchlecht bewertete „Gesehen“-Titel zählen nicht als Geschmack. Die Zahl erscheint erst, wenn beide mindestens 10 Titel markiert haben, und wird mit jeder Markierung genauer. Gemeinsame Titel braucht es nicht – wer nur Filme schaut, kann zu jemandem passen, der nur Serien markiert.' },
     newreleases: { title:'Veröffentlichungsdatum vs. Neu im Streaming', body:'Das sind zwei unterschiedliche Sortierungen: „Veröffentlichungsdatum“ '+
       'sortiert danach, wann ein Film oder eine Serie ursprünglich erschienen ist. „Neu im Streaming“ sortiert danach, '+
       'seit wann ein Titel bei einem Streaming-Anbieter neu verfügbar ist – unabhängig davon, wie alt er eigentlich ist.' }
@@ -11069,6 +11144,7 @@ function discFilterPool(){
     matchStart: { title:'Match activé', body:'Tu peux sélectionner ici une ou plusieurs personnes – ' +
       'plus tu en ajoutes, plus l’intersection est petite.\n\n' +
       'Ferme cette fenêtre pour voir vos titres en commun.' },
+    tastematch: { title:'Taste Match', body:'Le nombre derrière un nom (0–99) estime à quel point vos goûts concordent.\n\nLe calcul se fait dans les deux sens : dans quelle mesure les titres de l’autre correspondent à ton profil – et les tiens au sien ? La parenthèse montre la moyenne des deux directions ; vous voyez tous les deux le même nombre.\n\nLes titres « vus » mal notés ne comptent pas comme goût. Le nombre apparaît quand chacun a enregistré au moins 10 titres et gagne en précision à chaque ajout. Aucun titre en commun n’est nécessaire.' },
     newreleases: { title:'Date de sortie vs nouveautés en streaming', body:'Ce sont deux ordres de tri différents : « Date de sortie » '+
       'trie selon la date de sortie initiale d’un film ou d’une série. « Nouveautés en streaming » trie selon la date à laquelle '+
       'un titre est devenu disponible chez un service de streaming – peu importe son âge réel.' }
@@ -11108,6 +11184,7 @@ function discFilterPool(){
     matchStart: { title:'El match está activo', body:'Aquí puedes seleccionar a una o varias personas – ' +
       'cuantas más añadas, más pequeña será la intersección.\n\n' +
       'Cierra esta ventana para ver vuestros títulos en común.' },
+    tastematch: { title:'Taste Match', body:'El número tras un nombre (0–99) estima lo bien que encajan vuestros gustos.\n\nSe calcula en ambas direcciones: ¿qué tal encajan los títulos de la otra persona con tu perfil – y los tuyos con el suyo? El paréntesis muestra la media de ambas direcciones; los dos veis el mismo número.\n\nLos títulos «vistos» con mala nota no cuentan como gusto. El número aparece cuando ambos habéis marcado al menos 10 títulos y se afina con cada marca. No hacen falta títulos en común.' },
     newreleases: { title:'Fecha de estreno vs. novedades en streaming', body:'Son dos criterios de orden distintos: «Fecha de estreno» '+
       'ordena según cuándo se estrenó originalmente una película o serie. «Novedades en streaming» ordena según lo reciente '+
       'que es la llegada de un título a un servicio de streaming – da igual la antigüedad que tenga en realidad.' }
@@ -11147,6 +11224,7 @@ function discFilterPool(){
     matchStart: { title:'Match attivo', body:'Qui puoi selezionare una o più persone – ' +
       'più ne aggiungi, più piccola diventa l’intersezione.\n\n' +
       'Chiudi questa finestra per vedere i vostri titoli in comune.' },
+    tastematch: { title:'Taste Match', body:'Il numero dopo un nome (0–99) stima quanto i vostri gusti coincidano.\n\nSi calcola in entrambe le direzioni: quanto i titoli dell’altra persona corrispondono al tuo profilo – e i tuoi al suo? Tra parentesi c’è la media delle due direzioni; vedete entrambi lo stesso numero.\n\nI titoli «visti» con voto basso non contano come gusto. Il numero appare quando entrambi avete segnato almeno 10 titoli e diventa più preciso a ogni aggiunta. Non servono titoli in comune.' },
     newreleases: { title:'Data di uscita vs. novità in streaming', body:'Sono due ordinamenti diversi: “Data di uscita” '+
       'ordina in base a quando un film o una serie è uscito originariamente. “Novità in streaming” ordina in base a quanto di recente '+
       'un titolo è diventato disponibile su un servizio di streaming – indipendentemente da quanto sia vecchio in realtà.' }
@@ -11186,6 +11264,7 @@ function discFilterPool(){
     matchStart: { title:'Match staat aan', body:'Je kunt hier een of meer personen selecteren – ' +
       'hoe meer je er toevoegt, hoe kleiner de doorsnede.\n\n' +
       'Sluit dit venster om jullie gedeelde titels te zien.' },
+    tastematch: { title:'Taste Match', body:'Het getal achter een naam (0–99) schat hoe goed jullie smaken bij elkaar passen.\n\nEr wordt in beide richtingen gerekend: hoe goed passen de titels van de ander bij jouw profiel – en die van jou bij het hunne? Tussen haakjes staat het gemiddelde van beide richtingen; jullie zien allebei hetzelfde getal.\n\nSlecht beoordeelde “gezien”-titels tellen niet als smaak. Het getal verschijnt zodra beiden minstens 10 titels hebben gemarkeerd en wordt met elke markering nauwkeuriger. Gemeenschappelijke titels zijn niet nodig.' },
     newreleases: { title:'Verschijningsdatum vs. nieuw bij streaming', body:'Dit zijn twee verschillende sorteervolgordes: “Verschijningsdatum” '+
       'sorteert op wanneer een film of serie oorspronkelijk is uitgebracht. “Nieuw bij streaming” sorteert op hoe recent '+
       'een titel bij een streamingdienst beschikbaar kwam – ongeacht hoe oud hij eigenlijk is.' }
@@ -11225,6 +11304,7 @@ function discFilterPool(){
     matchStart: { title:'O Match está ativo', body:'Aqui você pode selecionar uma ou mais pessoas – ' +
       'quanto mais você adicionar, menor fica a interseção.\n\n' +
       'Feche esta janela para ver os títulos em comum.' },
+    tastematch: { title:'Taste Match', body:'O número após um nome (0–99) estima o quanto os gostos de vocês combinam.\n\nO cálculo é feito nos dois sentidos: quão bem os títulos da outra pessoa combinam com o seu perfil – e os seus com o dela? Entre parênteses está a média das duas direções; ambos veem o mesmo número.\n\nTítulos “vistos” com nota baixa não contam como gosto. O número aparece quando ambos marcaram pelo menos 10 títulos e fica mais preciso a cada marcação. Não são necessários títulos em comum.' },
     newreleases: { title:'Data de lançamento vs. novidades no streaming', body:'São duas ordenações diferentes: “Data de lançamento” '+
       'ordena por quando um filme ou uma série foi lançado originalmente. “Novidades no streaming” ordena por quão recentemente '+
       'um título ficou disponível em um serviço de streaming – independentemente da idade real dele.' }
@@ -11262,6 +11342,7 @@ function discFilterPool(){
               : icon.hasAttribute('data-discovery') ? 'discovery'
               : icon.hasAttribute('data-newreleases') ? 'newreleases'
               : icon.hasAttribute('data-match') ? 'match'
+              : icon.hasAttribute('data-tastematch') ? 'tastematch'
               : 'ts';
       titleEl.textContent = INFO_TEXT[key].title;
       bodyEl.textContent = infoBody(key);
