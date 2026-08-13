@@ -393,6 +393,27 @@
     color:var(--text); cursor:pointer; z-index:40; box-shadow:0 6px 18px rgba(0,0,0,.45); }
   .to-top.show { display:flex; }
   @media (hover: hover) { .to-top:hover { border-color:var(--accent); color:var(--accent); } }
+  /* Teilen-Knopf unten mittig, dieselbe Hoehe wie .to-top rechts. Immer
+     sichtbar (Teilen soll keinen Scroll voraussetzen); z-index unter den
+     Modal-Overlays, damit offene Fenster ihn ueberdecken. */
+  .teilen-fab { position:fixed; left:50%; transform:translateX(-50%);
+    bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:900;
+    display:flex; align-items:center; gap:7px; background:var(--card);
+    border:1px solid var(--border); border-radius:999px; padding:10px 18px;
+    color:var(--text); font-size:14px; font-weight:600; cursor:pointer;
+    box-shadow:0 2px 10px rgba(0,0,0,.45); transition:all .15s; }
+  @media (hover: hover) { .teilen-fab:hover { border-color:var(--accent); color:var(--accent); } }
+  /* Das Auswahlblatt sitzt DIREKT UEBER dem Knopf (ausdrueckliche Vorgabe),
+     nicht mittig im Bild wie die Modals. */
+  .teilen-sheet { position:fixed; left:50%; transform:translateX(-50%);
+    bottom:calc(66px + env(safe-area-inset-bottom, 0px)); z-index:901;
+    display:flex; flex-direction:column; gap:8px; background:var(--bg);
+    border:1px solid var(--border); border-radius:12px; padding:12px;
+    width:min(320px, calc(100vw - 32px)); box-shadow:0 4px 24px rgba(0,0,0,.5); }
+  .teilen-sheet button { width:100%; background:var(--card); border:1px solid var(--border);
+    border-radius:8px; padding:10px 14px; color:var(--text-dim); font-size:14px;
+    font-weight:600; cursor:pointer; transition:all .15s; }
+  @media (hover: hover) { .teilen-sheet button:hover { border-color:var(--accent); color:var(--accent); } }
   .nav-menu { position:absolute; top:calc(54px + env(safe-area-inset-top, 0px)); right:16px; z-index:20; display:none; flex-direction:column;
     gap:4px; min-width:190px; background:var(--card); border:1px solid var(--border); border-radius:10px;
     padding:8px; box-shadow:0 10px 30px rgba(0,0,0,.5); }
@@ -1109,10 +1130,18 @@
      auch das X sichtbar, siehe #search:placeholder-shown + .search-x weiter
      unten) -- leer bleibt der komplette Platz fuer den Platzhaltertext frei,
      der sonst auf schmalen Bildschirmen unnoetig eng/abgeschnitten wirkte. */
-  #search:not(:placeholder-shown) { padding-right: 34px; border-color: var(--accent); }
+  /* 62px statt 34: rechts stehen jetzt ZWEI Zeichen -- das + (Suche
+     kombinieren) und das X (loeschen). */
+  #search:not(:placeholder-shown) { padding-right: 62px; border-color: var(--accent); }
   .search-x { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: none; background: transparent; color: var(--text-dim); font-size: 20px; line-height: 1; cursor: pointer; padding: 0 6px; }
   @media (hover: hover) { .search-x:hover { color: var(--accent); } }
   #search:placeholder-shown + .search-x { display: none; }
+  .search-plus { position: absolute; right: 34px; top: 50%; transform: translateY(-50%); border: none; background: transparent; color: var(--text-dim); font-size: 20px; line-height: 1; cursor: pointer; padding: 0 6px; }
+  @media (hover: hover) { .search-plus:hover { color: var(--accent); } }
+  #search:placeholder-shown ~ .search-plus { display: none; }
+  .such-chips { max-width: 660px; margin: 8px auto 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .such-chips .chip { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-soft); border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: 4px 11px; font-size: 13px; }
+  .such-chips .chip button { background: none; border: none; color: inherit; cursor: pointer; font-size: 15px; line-height: 1; padding: 0; }
   .search-suggest { position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 30;
     background: var(--card); border: 1px solid var(--border); border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,.5); overflow: hidden; }
@@ -1238,9 +1267,16 @@
              keine Rolle): Die Regel #search:placeholder-shown + .search-x
              braucht das X als direkten Nachbarn des Feldes. -->
         <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16 16"/></svg>
+        <!-- "+" friert die aktuelle Suche als Chip ein und macht das Feld fuer
+             die naechste frei -- bis zu 10 Suchen, ODER-verknuepft (siehe
+             suchChipHinzufuegen). Steht im Markup NACH dem X, damit die Regel
+             #search:placeholder-shown + .search-x unberuehrt bleibt. -->
+        <button type="button" id="searchPlus" class="search-plus" aria-label="Suche kombinieren">+</button>
         <div id="searchSuggest" class="search-suggest" style="display:none"></div>
       </div>
     </div>
+    <!-- Die eingefrorenen Suchen als Chips, jede einzeln entfernbar. -->
+    <div id="suchChips" class="such-chips" style="display:none"></div>
   </div>
   <div class="tabs">
     <div class="tabs-row">
@@ -1339,6 +1375,25 @@
     <path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>
   </svg>
 </button>
+
+<!-- Teilen-Knopf unten mittig, auf derselben Hoehe wie der Nach-oben-Knopf
+     rechts. Oeffnet das kleine Auswahlblatt DARUEBER (teilenSheet) mit drei
+     Wegen: aktuelle Ansicht als Link, Hinweis zum Titel-Teilen, eigenes
+     Profil (= "Personen einladen" aus Gemeinsam schauen). Alle Beschriftungen
+     setzt das JS aus TXT (teilenFabEinrichten). -->
+<button type="button" id="teilenFab" class="teilen-fab">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+    <path d="M8.6 13.5l6.8 3.9M15.4 6.6L8.6 10.5"/>
+  </svg>
+  <span id="teilenFabText">Teilen</span>
+</button>
+<div id="teilenSheet" class="teilen-sheet" style="display:none">
+  <button type="button" id="teilenAnsichtBtn">Aktuelle Ansicht teilen</button>
+  <button type="button" id="teilenTitelBtn">Einen Titel teilen</button>
+  <button type="button" id="teilenProfilBtn">Mein Profil teilen</button>
+</div>
 
 <!-- Fertige Einladung. Seit dem 13. August nur noch der RUECKFALL: Der Link
      wird schon waehrend der Rueckfrage erstellt, beim "Ja" geht direkt das
@@ -2104,6 +2159,14 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'Der Abgleich ist an: Der Taste-Score gilt hier für dich und ' + namen + ' gemeinsam — er sagt, wie gut ein Titel zu eurem gemeinsamen Geschmack passt.'; },
     mailEinstellungen: 'E-Mail-Einstellungen',
     tasteMatchAria: 'Was ist der Taste-Match?',
+    teilen: 'Teilen',
+    teilenAnsicht: 'Aktuelle Ansicht teilen',
+    teilenTitel: 'Einen Titel teilen',
+    teilenProfil: 'Mein Profil teilen',
+    teilenAnsichtTitel: 'Ansicht teilen',
+    teilenAnsichtText: 'Schau mal — meine aktuelle Ansicht bei MovieMatch:',
+    sucheKombinieren: 'Weitere Suche hinzufügen',
+    sucheEntfernen: 'Diese Suche entfernen',
     benachrichtigungKnopf: function(an){ return 'E-Mail bei neuen Watchlist-Treffern: ' + (an ? 'An' : 'Aus'); },
     kennenTitel: 'Finde deinen Taste-Score',
     kennenIntro: 'Sag zu ein paar bekannten Titeln kurz deine Meinung — daraus entsteht deine persönliche Sortierung. Ganz ohne Konto.',
@@ -2357,6 +2420,14 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'Match is on: the Taste Score here applies to you and ' + namen + ' together — it says how well a title fits your combined taste.'; },
     mailEinstellungen: 'Email settings',
     tasteMatchAria: 'What is the Taste Match?',
+    teilen: 'Share',
+    teilenAnsicht: 'Share current view',
+    teilenTitel: 'Share a title',
+    teilenProfil: 'Share my profile',
+    teilenAnsichtTitel: 'Share view',
+    teilenAnsichtText: 'Have a look — my current view on MovieMatch:',
+    sucheKombinieren: 'Add another search',
+    sucheEntfernen: 'Remove this search',
     benachrichtigungKnopf: function(an){ return 'Email for new watchlist matches: ' + (an ? 'On' : 'Off'); },
     kennenTitel: 'Find your Taste Score',
     kennenIntro: 'Give a quick take on a few well-known titles — that builds your personal ranking. No account needed.',
@@ -2610,6 +2681,14 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'Le match est activé\u202f: le Taste Score s’applique ici à toi et ' + namen + ' ensemble — il indique à quel point un titre correspond à vos goûts combinés.'; },
     mailEinstellungen: 'Réglages e-mail',
     tasteMatchAria: 'Qu’est-ce que le Taste Match ?',
+    teilen: 'Partager',
+    teilenAnsicht: 'Partager la vue actuelle',
+    teilenTitel: 'Partager un titre',
+    teilenProfil: 'Partager mon profil',
+    teilenAnsichtTitel: 'Partager la vue',
+    teilenAnsichtText: 'Regarde — ma vue actuelle sur MovieMatch :',
+    sucheKombinieren: 'Ajouter une autre recherche',
+    sucheEntfernen: 'Retirer cette recherche',
     benachrichtigungKnopf: function(an){ return 'E-mail pour les nouveautés de ta watchlist\u202f: ' + (an ? 'activé' : 'désactivé'); },
     kennenTitel: 'Trouve ton Taste Score',
     kennenIntro: 'Donne vite ton avis sur quelques titres connus — ta liste personnelle en découle. Sans compte.',
@@ -2863,6 +2942,14 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'El match está activado: aquí el Taste Score se aplica a ti y a ' + namen + ' juntos — indica lo bien que un título encaja con vuestros gustos combinados.'; },
     mailEinstellungen: 'Ajustes de correo',
     tasteMatchAria: '¿Qué es el Taste Match?',
+    teilen: 'Compartir',
+    teilenAnsicht: 'Compartir la vista actual',
+    teilenTitel: 'Compartir un título',
+    teilenProfil: 'Compartir mi perfil',
+    teilenAnsichtTitel: 'Compartir vista',
+    teilenAnsichtText: 'Mira — mi vista actual en MovieMatch:',
+    sucheKombinieren: 'Añadir otra búsqueda',
+    sucheEntfernen: 'Quitar esta búsqueda',
     benachrichtigungKnopf: function(an){ return 'Correo con novedades de tu watchlist: ' + (an ? 'activado' : 'desactivado'); },
     kennenTitel: 'Encuentra tu Taste Score',
     kennenIntro: 'Opina rápido sobre algunos títulos conocidos: así nace tu orden personal. Sin cuenta.',
@@ -3116,6 +3203,14 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'Il match è attivo: qui il Taste Score vale per te e ' + namen + ' insieme — indica quanto un titolo corrisponde ai vostri gusti combinati.'; },
     mailEinstellungen: 'Impostazioni e-mail',
     tasteMatchAria: 'Che cos’è il Taste Match?',
+    teilen: 'Condividi',
+    teilenAnsicht: 'Condividi la vista attuale',
+    teilenTitel: 'Condividi un titolo',
+    teilenProfil: 'Condividi il mio profilo',
+    teilenAnsichtTitel: 'Condividi vista',
+    teilenAnsichtText: 'Guarda — la mia vista attuale su MovieMatch:',
+    sucheKombinieren: 'Aggiungi un’altra ricerca',
+    sucheEntfernen: 'Rimuovi questa ricerca',
     benachrichtigungKnopf: function(an){ return 'E-mail per le novità della tua watchlist: ' + (an ? 'attiva' : 'disattivata'); },
     kennenTitel: 'Trova il tuo Taste Score',
     kennenIntro: 'Di’ al volo la tua su alcuni titoli famosi: ne nasce il tuo ordinamento personale. Senza account.',
@@ -3369,6 +3464,14 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'Match staat aan: de Taste Score geldt hier voor jou en ' + namen + ' samen — hij geeft aan hoe goed een titel bij jullie gezamenlijke smaak past.'; },
     mailEinstellungen: 'E-mailinstellingen',
     tasteMatchAria: 'Wat is de Taste Match?',
+    teilen: 'Delen',
+    teilenAnsicht: 'Huidige weergave delen',
+    teilenTitel: 'Een titel delen',
+    teilenProfil: 'Mijn profiel delen',
+    teilenAnsichtTitel: 'Weergave delen',
+    teilenAnsichtText: 'Kijk — mijn huidige weergave op MovieMatch:',
+    sucheKombinieren: 'Nog een zoekopdracht toevoegen',
+    sucheEntfernen: 'Deze zoekopdracht verwijderen',
     benachrichtigungKnopf: function(an){ return 'E-mail bij nieuwe watchlist-treffers: ' + (an ? 'aan' : 'uit'); },
     kennenTitel: 'Vind je Taste Score',
     kennenIntro: 'Geef kort je mening over een paar bekende titels — daaruit ontstaat jouw persoonlijke volgorde. Zonder account.',
@@ -3622,6 +3725,14 @@ var UI_TEXTE = {
     tasteScoreGemeinsam: function(namen){ return 'O Match está ativo: o Taste Score aqui vale para você e ' + namen + ' juntos — ele indica o quanto um título combina com o gosto de vocês.'; },
     mailEinstellungen: 'Configurações de e-mail',
     tasteMatchAria: 'O que é o Taste Match?',
+    teilen: 'Compartilhar',
+    teilenAnsicht: 'Compartilhar a visão atual',
+    teilenTitel: 'Compartilhar um título',
+    teilenProfil: 'Compartilhar meu perfil',
+    teilenAnsichtTitel: 'Compartilhar visão',
+    teilenAnsichtText: 'Olha — minha visão atual no MovieMatch:',
+    sucheKombinieren: 'Adicionar outra busca',
+    sucheEntfernen: 'Remover esta busca',
     benachrichtigungKnopf: function(an){ return 'E-mail para novos matches na watchlist: ' + (an ? 'Ativado' : 'Desativado'); },
     kennenTitel: 'Descubra seu Taste Score',
     kennenIntro: 'Dê rapidinho sua opinião sobre alguns títulos conhecidos — daí nasce sua ordem pessoal. Sem conta.',
@@ -5963,6 +6074,7 @@ function einstiegSetzen(){
   seenFilterOn = true;
   discoverFilterOn = false;
   inStreamFilterOn = false;
+  suchChipsLeeren();
   searchEl.value = '';
   sucheZustandVorher = null;
   titelLimit = TITEL_PRO_SEITE;
@@ -6385,12 +6497,12 @@ function renderLeerzustand(q){
     var was = (watchlistFilterOn && seenFilterOn) ? TXT.markiert
             : watchlistFilterOn ? TXT.aufDerWatchlist : TXT.alsGesehenMarkiert;
     list.innerHTML = '<li class="watch-empty">' +
-      (q ? TXT.keineTrefferBei(esc(searchEl.value.trim()), esc(wer))
+      (q ? TXT.keineTrefferBei(esc(sucheAnzeige()), esc(wer))
          : TXT.hatNichts(esc(wer), esc(was))) + '</li>';
     return;
   }
   if (q) {
-    list.innerHTML = '<li class="watch-empty">' + TXT.keineTrefferFuer(esc(searchEl.value.trim())) + '</li>';
+    list.innerHTML = '<li class="watch-empty">' + TXT.keineTrefferFuer(esc(sucheAnzeige())) + '</li>';
     return;
   }
   // Bei aktivem Abgleich/Altersfilter ist die leere Liste etwas voellig anderes
@@ -6460,7 +6572,7 @@ function render() {
   // Der Suchbegriff muss VOR dem Kuerzen greifen, sonst blieben Treffer jenseits
   // von titelLimit unsichtbar. Steht nichts im Feld, gibt es auch nichts zu
   // filtern -- dann bleibt q leer und sammleEintraege spart sich die Arbeit.
-  const q = (discoverFilterOn || sucheAktiv()) ? searchEl.value.trim().toLowerCase() : '';
+  const q = (discoverFilterOn || sucheAktiv()) ? aktiveSuchbegriffe() : '';
   const eintraege = sammleEintraege(q);
   if (!eintraege.length) { renderLeerzustand(q); kinoHinweisAnhaengen(q); return; }
   // Gekuerzt wird in JEDER Liste, auch in Watchlist und Gesehen (siehe
@@ -6790,7 +6902,68 @@ function renderCurrentTab(){
 // Kino bleibt aussen vor: eigene Seite, eigene Daten, weder Watchlist noch
 // Gesehen (siehe openCinemaPage).
 let sucheZustandVorher = null;
-function sucheAktiv(){ return searchEl.value.trim().length > 0; }
+/* ---- Kombinierte Suche (Chips) ----
+   Das "+" neben dem X friert die aktuelle Suche ein; die Liste zeigt dann
+   alles, was auf MINDESTENS EINE der Suchen passt (ODER). Bis zu 10 Chips,
+   jeder einzeln entfernbar; das X im Feld und der Logo-Klick raeumen alles.
+   Die Chips gehen auch in den Ansicht-Link (siehe ansichtLink) -- so laesst
+   sich z.B. eine Handvoll Titel fuer einen Blog-Artikel verlinken. */
+var SUCH_CHIPS = [];
+var SUCH_CHIPS_MAX = 10;
+function aktiveSuchbegriffe(){
+  var alle = SUCH_CHIPS.map(function(c){ return c.toLowerCase(); });
+  var v = searchEl.value.trim().toLowerCase();
+  if (v) alle.push(v);
+  return alle;
+}
+// Fuer Leertexte: alle aktiven Suchen als lesbare Aufzaehlung.
+function sucheAnzeige(){
+  var alle = SUCH_CHIPS.slice();
+  var v = searchEl.value.trim();
+  if (v) alle.push(v);
+  return alle.join(' | ');
+}
+function suchChipsZeichnen(){
+  var el = document.getElementById('suchChips');
+  if (!el) return;
+  el.style.display = SUCH_CHIPS.length ? 'flex' : 'none';
+  el.innerHTML = SUCH_CHIPS.map(function(c, i){
+    return '<span class="chip">' + esc(c) +
+      '<button type="button" data-i="' + i + '" aria-label="' + escAttr(TXT.sucheEntfernen) + '">×</button></span>';
+  }).join('');
+  el.querySelectorAll('button').forEach(function(b){
+    b.onclick = function(){
+      SUCH_CHIPS.splice(Number(b.dataset.i), 1);
+      suchChipsZeichnen();
+      titelLimit = TITEL_PRO_SEITE;
+      renderCurrentTab();
+    };
+  });
+}
+function suchChipHinzufuegen(){
+  var v = searchEl.value.trim();
+  if (!v || SUCH_CHIPS.length >= SUCH_CHIPS_MAX) return;
+  if (SUCH_CHIPS.indexOf(v) === -1) SUCH_CHIPS.push(v);
+  // Das Leeren laeuft ueber dasselbe input-Ereignis wie das X -- so bleiben
+  // Suchzustand, Knopfleiste und verzoegerter Render an einer Stelle.
+  searchEl.value = '';
+  searchEl.dispatchEvent(new Event('input'));
+  suchChipsZeichnen();
+  searchEl.focus();
+}
+function suchChipsLeeren(){
+  if (!SUCH_CHIPS.length) return;
+  SUCH_CHIPS = [];
+  suchChipsZeichnen();
+}
+(function(){
+  var plus = document.getElementById('searchPlus');
+  if (!plus) return;
+  plus.onclick = suchChipHinzufuegen;
+  plus.setAttribute('aria-label', TXT.sucheKombinieren);
+  plus.title = TXT.sucheKombinieren;
+})();
+function sucheAktiv(){ return searchEl.value.trim().length > 0 || SUCH_CHIPS.length > 0; }
 // Welche Typen gerade in die Liste einfliessen -- die einzige Wahrheit dazu.
 // Beide abgewaehlt ist erlaubt und heisst: leere Liste (mit Hinweistext, siehe
 // renderLeerzustand) -- frueher erzwang setTab hier mindestens einen.
@@ -7125,6 +7298,9 @@ searchEl.addEventListener('blur', function(){
 });
 var _searchClear = document.getElementById('searchClear');
 if (_searchClear) _searchClear.addEventListener('click', function () {
+  // Das X raeumt ALLES: auch die eingefrorenen Chips -- ein grosses Loeschen,
+  // das einzelne Entfernen sitzt an jedem Chip selbst.
+  suchChipsLeeren();
   searchEl.value = '';
   searchEl.dispatchEvent(new Event('input'));
   searchEl.focus();
@@ -8058,7 +8234,7 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
   // Suchbegriff und Statusauswahl wirken INNERHALB jedes Bereichs -- die
   // Gliederung nach "Aktuell/Bald/Demnaechst" bleibt also erhalten, statt zu
   // einer langen Liste zu verschmelzen.
-  var q = searchEl.value.trim().toLowerCase();
+  var q = aktiveSuchbegriffe();
   var st = statusLesen();
   // In einer fremden Liste zaehlen DEREN Markierungen, nicht die eigenen: "Was
   // von den Kinostarts hat Jenny vorgemerkt bzw. schon gesehen." Meist wenig --
@@ -8231,6 +8407,7 @@ function goHome(){
   ANSICHT_PERSON = null;
   closeCinemaPage();
   pfadAufStartseite();
+  suchChipsLeeren();
   searchEl.value = '';
   searchEl.dispatchEvent(new Event('input'));
   // Werkzeugleiste und Suche wieder herstellen (wichtig, wenn man aus dem Kino
@@ -9696,6 +9873,126 @@ async function einladungTeilen(btn, artName, weiter){
   } finally { btn.disabled = false; }
 }
 document.getElementById('profileShareBtn').onclick = function(){ einladungTeilen(this, 'share'); };
+
+/* ---- Teilen-Knopf unten mittig ----
+   Drei Wege in einem Auswahlblatt ueber dem Knopf:
+   1. "Aktuelle Ansicht teilen": Link mit den gerade gewaehlten Typen,
+      Statusfiltern, Streaming-Filter, Sortierung und Suchbegriff -- der Link
+      stellt beim Empfaenger dieselbe ANSICHT her, gezeigt werden dessen
+      eigene Daten (siehe ansichtAusLink). Kein Server noetig, der Link
+      entsteht lokal -- navigator.share kann deshalb direkt aus der Geste
+      heraus oeffnen, das Einladungs-Fenster bleibt Rueckfall.
+   2. "Einen Titel teilen": nur ein Hinweis, WIE das geht (Wisch nach rechts,
+      am Rechner ueber die aufgeklappte Titelansicht).
+   3. "Mein Profil teilen": derselbe Weg wie "Personen einladen" unter
+      Gemeinsam schauen (einladungTeilen 'share').
+   1 und 3 funktionieren nur in der EIGENEN Ansicht: In einer fremden Liste
+   oder mit aktivem Match kaeme ein Link heraus, der etwas anderes zeigt als
+   gedacht -- dann erklaert ein Fenster, warum es gerade nicht geht. */
+function ansichtLink(){
+  var teile = [];
+  if (cinemaMode) teile.push('k');
+  else {
+    if (TYPEN.filme) teile.push('f');
+    if (TYPEN.serien) teile.push('s');
+  }
+  if (watchlistFilterOn) teile.push('w');
+  if (seenFilterOn) teile.push('g');
+  if (discoverFilterOn) teile.push('n');
+  if (inStreamFilterOn) teile.push('st');
+  var p = new URLSearchParams();
+  p.set('ansicht', teile.join('.'));
+  if (sortManual) p.set('sortierung', sortManual);
+  // Alle aktiven Suchen, Chips UND Feld, mit | getrennt -- so laesst sich eine
+  // Handvoll per Chips gesammelter Titel als EIN Link weitergeben.
+  var q = SUCH_CHIPS.slice();
+  var v = searchEl.value.trim();
+  if (v) q.push(v);
+  if (q.length) p.set('suche', q.join('|'));
+  return location.origin + '/?' + p.toString();
+}
+// Beim Laden: einen geteilten Ansicht-Link anwenden. Liefert true, wenn einer
+// da war -- die Kennenlern-Strecke bleibt dann weg (zwei Fenster uebereinander,
+// und wer einem Ansicht-Link folgt, will genau diese Liste sehen).
+function ansichtAusLink(){
+  var p = new URLSearchParams(location.search);
+  var a = p.get('ansicht');
+  if (a == null) return false;
+  var teile = a.split('.');
+  // ERST die Suche, DANN die Filter: Das input-Ereignis laeuft durch
+  // sucheZustandAnwenden ("Suchen heisst ueberall suchen") und schaltet alle
+  // Bereiche an -- die ausdruecklich im Link stehenden Filter sollen das
+  // Letzte Wort haben, sonst zeigte der Link mehr als der Absender meinte.
+  var q = p.get('suche');
+  if (q) {
+    var begriffe = q.split('|').map(function(t){ return t.trim(); }).filter(Boolean).slice(0, SUCH_CHIPS_MAX);
+    if (begriffe.length > 1) {
+      // Mehrere Suchen kommen als Chips an -- so sieht man sofort, WAS der
+      // Link kombiniert, und kann einzelne davon entfernen.
+      SUCH_CHIPS = begriffe;
+      suchChipsZeichnen();
+    } else if (begriffe.length === 1) {
+      searchEl.value = begriffe[0];
+    }
+    searchEl.dispatchEvent(new Event('input'));
+  }
+  TYPEN.filme = teile.indexOf('f') !== -1;
+  TYPEN.serien = teile.indexOf('s') !== -1;
+  // Kaputter Link ohne Typ: alles an statt einer leeren Liste.
+  if (!TYPEN.filme && !TYPEN.serien) { TYPEN.filme = true; TYPEN.serien = true; }
+  typenAngleichen();
+  statusSchreiben({ wl: teile.indexOf('w') !== -1, seen: teile.indexOf('g') !== -1, disc: teile.indexOf('n') !== -1 });
+  if (!watchlistFilterOn && !seenFilterOn && !discoverFilterOn) statusSchreiben({ wl: true, seen: true, disc: true });
+  inStreamFilterOn = teile.indexOf('st') !== -1;
+  var sort = p.get('sortierung');
+  if (['imdb', 'taste', 'year', 'newstream'].indexOf(sort) !== -1) { sortManual = sort; saveSortManual(); updateSortMenuActive(); }
+  // Wie bei ?ref=: Der Parameter soll ein Neuladen nicht erneut anwenden.
+  try { history.replaceState(null, '', location.pathname); } catch (e) {}
+  if (teile.indexOf('k') !== -1) openCinemaPage();
+  else { updateFilterRowUI(); renderCurrentTab(); }
+  return true;
+}
+(function teilenFabEinrichten(){
+  var fab = document.getElementById('teilenFab');
+  var sheet = document.getElementById('teilenSheet');
+  if (!fab || !sheet) return;
+  document.getElementById('teilenFabText').textContent = TXT.teilen;
+  var ansichtBtn = document.getElementById('teilenAnsichtBtn');
+  var titelBtn = document.getElementById('teilenTitelBtn');
+  var profilBtn = document.getElementById('teilenProfilBtn');
+  ansichtBtn.textContent = TXT.teilenAnsicht;
+  titelBtn.textContent = TXT.teilenTitel;
+  profilBtn.textContent = TXT.teilenProfil;
+  function schliessen(){ sheet.style.display = 'none'; }
+  fab.onclick = function(e){
+    e.stopPropagation();
+    sheet.style.display = sheet.style.display === 'none' ? 'flex' : 'none';
+  };
+  sheet.addEventListener('click', function(e){ e.stopPropagation(); });
+  document.addEventListener('click', schliessen);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') schliessen(); });
+  function eigeneAnsicht(){ return !personenAnsicht() && !matchAktiv(); }
+  ansichtBtn.onclick = function(){
+    schliessen();
+    if (!eigeneAnsicht()) { infoZeigen('teilenNurEigene'); return; }
+    var url = ansichtLink();
+    var text = TXT.teilenAnsichtText;
+    if (navigator.share) {
+      navigator.share({ title: 'MovieMatch', text: text, url: url })
+        .catch(function(err){
+          if (!err || err.name !== 'AbortError') zeigeEinladung(TXT.teilenAnsichtTitel, text, url, TXT.linkLaeuftNichtAb);
+        });
+    } else {
+      zeigeEinladung(TXT.teilenAnsichtTitel, text, url, TXT.linkLaeuftNichtAb);
+    }
+  };
+  titelBtn.onclick = function(){ schliessen(); infoZeigen('teilenTitelHinweis'); };
+  profilBtn.onclick = function(){
+    schliessen();
+    if (!eigeneAnsicht()) { infoZeigen('teilenNurEigene'); return; }
+    einladungTeilen(profilBtn, 'share', function(){ einladungTeilen(profilBtn, 'share'); });
+  };
+})();
 // Aus dem Menue rechts oben. Das Menue muss dabei zugehen, sonst stuende es
 // offen ueber der fertigen Einladung -- so machen es die anderen Punkte dort
 // auch (siehe feedbackBtn).
@@ -10673,6 +10970,9 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
   var feedbackGewuenscht = new URLSearchParams(location.search).get('feedback') === '1';
   werberMerken();
   zeigeLinkHinweise();
+  // Geteilter Ansicht-Link (?ansicht=...): Filter, Sortierung und Suche des
+  // Absenders herstellen -- gezeigt werden die EIGENEN Daten des Empfaengers.
+  var ansichtLinkDa = ansichtAusLink();
   if (feedbackGewuenscht) {
     try { history.replaceState(null, '', location.pathname); } catch (e) {}
     openFeedbackModal();
@@ -10684,9 +10984,10 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
     // Erster Besuch: Kennenlern-Strecke, sobald der Katalog da ist. Nur
     // abgemeldet und nur ohne bestehendes Profil -- wer schon markiert hat
     // (etwa auf einem anderen Weg hierher kam), braucht sie nicht. Bewusst
-    // NICHT bei Einladungs- und geteilten Links: Dort stuenden sonst zwei
-    // Fenster uebereinander.
-    if (KENNENLERN_NEU) {
+    // NICHT bei Einladungs-, geteilten und Ansicht-Links: Dort stuenden sonst
+    // zwei Fenster uebereinander bzw. verdeckte die Strecke genau die Liste,
+    // fuer die jemand dem Link gefolgt ist.
+    if (KENNENLERN_NEU && !ansichtLinkDa) {
       STARTLADUNG.then(function(){
         if (!CURRENT_USER && tasteProfileSize() === 0 && window.kennenlernStarten) window.kennenlernStarten();
       }).catch(function(){});
@@ -10998,7 +11299,11 @@ function poolItemLi(item, score, opts){
 // "Heath Ledger" oder auf "Theat" in "TheaterVerfilmung" anschlagen; Titel/
 // Genres duerfen weiterhin per Teilstring matchen.
 function poolItemMatchesQuery(item, q){
-  if (!q) return true;
+  if (!q || !q.length) return true;
+  // Mehrere Suchen (Chips): ein Treffer bei IRGENDEINER genuegt (ODER).
+  if (Array.isArray(q)) {
+    return q.some(function(einzel){ return poolItemMatchesQuery(item, einzel); });
+  }
   // item.alias: die Namen ausgeblendeter Dubletten (siehe aliasAufnehmen) --
   // damit "Baby Reindeer" auch dann trifft, wenn der Titel "Rentierbaby" heisst.
   var hay = [item.t, item.ot, (item.alias||[]).join(' '), item.y, (item.g||[]).join(' '),
@@ -11064,6 +11369,8 @@ function discFilterPool(){
     matchStart: { title:'Match is on', body:'You can select one or more people here – ' +
       'the more you add, the smaller the intersection.\n\n' +
       'Close this window to see your shared titles.' },
+    teilenNurEigene: { title:'Sharing not possible', body:'You are currently looking at someone else’s list or an active match. Only your OWN view can be shared — first end the selection under “Watch together” (or tap “clear” at the top).' },
+    teilenTitelHinweis: { title:'Share a title', body:'Simply swipe the title you want to share to the RIGHT in the list.\n\nOn a computer: click the title to open its details — you’ll find the “Share” button there.' },
     tastematch: { title:'Taste Match', body:'The number after a name (0–99) estimates how well your tastes match.\n\nIt is calculated in both directions: how well the other person’s titles fit your taste profile – and yours fit theirs. The bracket shows the average of both directions; you both see the same number.\n\nPoorly rated “watched” titles don’t count as taste. The number appears once both of you have marked at least 10 titles, and it gets more accurate with every mark. You don’t need any titles in common – a movie-only person can still match someone who only marks series.' },
     newreleases: { title:'Release date vs. new on streaming', body:'These are two different sort orders: “Release date” '+
       'sorts by when a movie or series was originally released. “New on streaming” sorts by how recently '+
@@ -11104,6 +11411,8 @@ function discFilterPool(){
     matchStart: { title:'Match ist an', body:'Du kannst hier eine oder mehrere Personen markieren – ' +
       'je mehr, desto kleiner wird die Schnittmenge.\n\n' +
       'Schließe dieses Fenster, um die gemeinsamen Titel zu sehen.' },
+    teilenNurEigene: { title:'Teilen nicht möglich', body:'Du siehst gerade eine fremde Liste oder einen aktiven Match. Geteilt werden kann nur die EIGENE Ansicht — beende zuerst die Auswahl unter „Gemeinsam schauen“ (oder tippe oben auf „aufheben“).' },
+    teilenTitelHinweis: { title:'Einen Titel teilen', body:'Wische den Titel, den du teilen möchtest, in der Liste einfach nach RECHTS.\n\nAm Rechner: Titel anklicken, um die Details zu öffnen — dort findest du den „Teilen“-Knopf.' },
     tastematch: { title:'Taste-Match', body:'Die Zahl hinter dem Namen (0–99) schätzt, wie gut eure Geschmäcker zusammenpassen.\n\nGerechnet wird in beide Richtungen: Wie gut passen die Titel der anderen Person zu deinem Geschmacksprofil – und deine zu ihrem? In der Klammer steht der Mittelwert beider Richtungen; ihr seht beide dieselbe Zahl.\n\nSchlecht bewertete „Gesehen“-Titel zählen nicht als Geschmack. Die Zahl erscheint erst, wenn beide mindestens 10 Titel markiert haben, und wird mit jeder Markierung genauer. Gemeinsame Titel braucht es nicht – wer nur Filme schaut, kann zu jemandem passen, der nur Serien markiert.' },
     newreleases: { title:'Veröffentlichungsdatum vs. Neu im Streaming', body:'Das sind zwei unterschiedliche Sortierungen: „Veröffentlichungsdatum“ '+
       'sortiert danach, wann ein Film oder eine Serie ursprünglich erschienen ist. „Neu im Streaming“ sortiert danach, '+
@@ -11144,6 +11453,8 @@ function discFilterPool(){
     matchStart: { title:'Match activé', body:'Tu peux sélectionner ici une ou plusieurs personnes – ' +
       'plus tu en ajoutes, plus l’intersection est petite.\n\n' +
       'Ferme cette fenêtre pour voir vos titres en commun.' },
+    teilenNurEigene: { title:'Partage impossible', body:'Tu regardes la liste de quelqu’un d’autre ou un match actif. Seule ta PROPRE vue peut être partagée — termine d’abord la sélection sous « Regarder ensemble ».' },
+    teilenTitelHinweis: { title:'Partager un titre', body:'Fais simplement glisser le titre à partager vers la DROITE dans la liste.\n\nSur ordinateur : clique sur le titre pour ouvrir les détails — tu y trouveras le bouton « Partager ».' },
     tastematch: { title:'Taste Match', body:'Le nombre derrière un nom (0–99) estime à quel point vos goûts concordent.\n\nLe calcul se fait dans les deux sens : dans quelle mesure les titres de l’autre correspondent à ton profil – et les tiens au sien ? La parenthèse montre la moyenne des deux directions ; vous voyez tous les deux le même nombre.\n\nLes titres « vus » mal notés ne comptent pas comme goût. Le nombre apparaît quand chacun a enregistré au moins 10 titres et gagne en précision à chaque ajout. Aucun titre en commun n’est nécessaire.' },
     newreleases: { title:'Date de sortie vs nouveautés en streaming', body:'Ce sont deux ordres de tri différents : « Date de sortie » '+
       'trie selon la date de sortie initiale d’un film ou d’une série. « Nouveautés en streaming » trie selon la date à laquelle '+
@@ -11184,6 +11495,8 @@ function discFilterPool(){
     matchStart: { title:'El match está activo', body:'Aquí puedes seleccionar a una o varias personas – ' +
       'cuantas más añadas, más pequeña será la intersección.\n\n' +
       'Cierra esta ventana para ver vuestros títulos en común.' },
+    teilenNurEigene: { title:'No se puede compartir', body:'Estás viendo la lista de otra persona o un match activo. Solo se puede compartir tu PROPIA vista — termina primero la selección en «Ver juntos».' },
+    teilenTitelHinweis: { title:'Compartir un título', body:'Desliza el título que quieras compartir hacia la DERECHA en la lista.\n\nEn el ordenador: haz clic en el título para abrir los detalles — allí está el botón «Compartir».' },
     tastematch: { title:'Taste Match', body:'El número tras un nombre (0–99) estima lo bien que encajan vuestros gustos.\n\nSe calcula en ambas direcciones: ¿qué tal encajan los títulos de la otra persona con tu perfil – y los tuyos con el suyo? El paréntesis muestra la media de ambas direcciones; los dos veis el mismo número.\n\nLos títulos «vistos» con mala nota no cuentan como gusto. El número aparece cuando ambos habéis marcado al menos 10 títulos y se afina con cada marca. No hacen falta títulos en común.' },
     newreleases: { title:'Fecha de estreno vs. novedades en streaming', body:'Son dos criterios de orden distintos: «Fecha de estreno» '+
       'ordena según cuándo se estrenó originalmente una película o serie. «Novedades en streaming» ordena según lo reciente '+
@@ -11224,6 +11537,8 @@ function discFilterPool(){
     matchStart: { title:'Match attivo', body:'Qui puoi selezionare una o più persone – ' +
       'più ne aggiungi, più piccola diventa l’intersezione.\n\n' +
       'Chiudi questa finestra per vedere i vostri titoli in comune.' },
+    teilenNurEigene: { title:'Condivisione non possibile', body:'Stai guardando la lista di qualcun altro o un match attivo. Si può condividere solo la PROPRIA vista — termina prima la selezione in «Guarda in compagnia».' },
+    teilenTitelHinweis: { title:'Condividi un titolo', body:'Scorri il titolo che vuoi condividere verso DESTRA nella lista.\n\nAl computer: clicca sul titolo per aprire i dettagli — lì trovi il pulsante «Condividi».' },
     tastematch: { title:'Taste Match', body:'Il numero dopo un nome (0–99) stima quanto i vostri gusti coincidano.\n\nSi calcola in entrambe le direzioni: quanto i titoli dell’altra persona corrispondono al tuo profilo – e i tuoi al suo? Tra parentesi c’è la media delle due direzioni; vedete entrambi lo stesso numero.\n\nI titoli «visti» con voto basso non contano come gusto. Il numero appare quando entrambi avete segnato almeno 10 titoli e diventa più preciso a ogni aggiunta. Non servono titoli in comune.' },
     newreleases: { title:'Data di uscita vs. novità in streaming', body:'Sono due ordinamenti diversi: “Data di uscita” '+
       'ordina in base a quando un film o una serie è uscito originariamente. “Novità in streaming” ordina in base a quanto di recente '+
@@ -11264,6 +11579,8 @@ function discFilterPool(){
     matchStart: { title:'Match staat aan', body:'Je kunt hier een of meer personen selecteren – ' +
       'hoe meer je er toevoegt, hoe kleiner de doorsnede.\n\n' +
       'Sluit dit venster om jullie gedeelde titels te zien.' },
+    teilenNurEigene: { title:'Delen niet mogelijk', body:'Je bekijkt nu de lijst van iemand anders of een actieve match. Alleen je EIGEN weergave kan worden gedeeld — beëindig eerst de selectie onder “Samen kijken”.' },
+    teilenTitelHinweis: { title:'Een titel delen', body:'Veeg de titel die je wilt delen in de lijst gewoon naar RECHTS.\n\nOp de computer: klik op de titel om de details te openen — daar vind je de “Delen”-knop.' },
     tastematch: { title:'Taste Match', body:'Het getal achter een naam (0–99) schat hoe goed jullie smaken bij elkaar passen.\n\nEr wordt in beide richtingen gerekend: hoe goed passen de titels van de ander bij jouw profiel – en die van jou bij het hunne? Tussen haakjes staat het gemiddelde van beide richtingen; jullie zien allebei hetzelfde getal.\n\nSlecht beoordeelde “gezien”-titels tellen niet als smaak. Het getal verschijnt zodra beiden minstens 10 titels hebben gemarkeerd en wordt met elke markering nauwkeuriger. Gemeenschappelijke titels zijn niet nodig.' },
     newreleases: { title:'Verschijningsdatum vs. nieuw bij streaming', body:'Dit zijn twee verschillende sorteervolgordes: “Verschijningsdatum” '+
       'sorteert op wanneer een film of serie oorspronkelijk is uitgebracht. “Nieuw bij streaming” sorteert op hoe recent '+
@@ -11304,6 +11621,8 @@ function discFilterPool(){
     matchStart: { title:'O Match está ativo', body:'Aqui você pode selecionar uma ou mais pessoas – ' +
       'quanto mais você adicionar, menor fica a interseção.\n\n' +
       'Feche esta janela para ver os títulos em comum.' },
+    teilenNurEigene: { title:'Não é possível compartilhar', body:'Você está vendo a lista de outra pessoa ou um match ativo. Só a SUA visão pode ser compartilhada — primeiro encerre a seleção em “Assistir juntos”.' },
+    teilenTitelHinweis: { title:'Compartilhar um título', body:'Deslize o título que você quer compartilhar para a DIREITA na lista.\n\nNo computador: clique no título para abrir os detalhes — lá está o botão “Compartilhar”.' },
     tastematch: { title:'Taste Match', body:'O número após um nome (0–99) estima o quanto os gostos de vocês combinam.\n\nO cálculo é feito nos dois sentidos: quão bem os títulos da outra pessoa combinam com o seu perfil – e os seus com o dela? Entre parênteses está a média das duas direções; ambos veem o mesmo número.\n\nTítulos “vistos” com nota baixa não contam como gosto. O número aparece quando ambos marcaram pelo menos 10 títulos e fica mais preciso a cada marcação. Não são necessários títulos em comum.' },
     newreleases: { title:'Data de lançamento vs. novidades no streaming', body:'São duas ordenações diferentes: “Data de lançamento” '+
       'ordena por quando um filme ou uma série foi lançado originalmente. “Novidades no streaming” ordena por quão recentemente '+
