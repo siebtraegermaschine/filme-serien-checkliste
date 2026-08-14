@@ -3,6 +3,7 @@ import { pool } from '../db/pool.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { mengenGrenze } from '../middleware/rateLimit.js';
+import { track } from '../lib/track.js';
 
 const router = createAsyncRouter();
 
@@ -79,6 +80,13 @@ router.post('/invite', mengenGrenze({ name: 'invite', anzahl: 20, minuten: 60 })
                               ELSE now() + ($4 || ' days')::interval END)`,
     [hashOf(token), req.session.userId, kind, String(INVITE_TTL_TAGE)]
   );
+  // KPI-Ereignis (docs/kpi.md) -- ohne await, wie ueberall: invite_id ist der
+  // Hash, nie der einloesbare Rohtoken.
+  track('invite_sent', {
+    userId: req.session.userId,
+    anonId: req.anonId,
+    props: { invite_id: hashOf(token), channel: kind },
+  });
   const basis = (process.env.APP_BASE_URL || '').replace(/\/+$/, '');
   res.status(201).json({
     token,
@@ -161,6 +169,14 @@ router.post('/invite/:token/accept', async (req, res) => {
       [tokenHash, req.session.userId]
     );
     await client.query('COMMIT');
+
+    // KPI-Ereignis: Annehmen mit Konto. Die Gast-Teilnahme (guest: true)
+    // kommt vom Client ueber POST /api/events (siehe routes/events.js).
+    track('invite_accepted', {
+      userId: req.session.userId,
+      anonId: req.anonId,
+      props: { invite_id: tokenHash, guest: false },
+    });
 
     const { rows: partner } = await pool.query('SELECT id, display_name FROM users WHERE id = $1', [einladung.inviter_id]);
     res.json({ linked: { id: partner[0].id, name: anzeigename(partner[0]) } });

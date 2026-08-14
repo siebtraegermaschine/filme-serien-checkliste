@@ -5010,6 +5010,9 @@ function metrikBesuchMelden(){
   } catch (e) {}
 }
 function metrikMarkierungMelden(){
+  // Eine Markierung ist echte Teilnahme -- zaehlt fuer Gaeste, die ueber
+  // einen Einladungslink kamen, als invite_accepted (siehe kpiGastTeilnahme).
+  kpiGastTeilnahme();
   try {
     if (localStorage.getItem('mt.metrikMarkierung')) return;
     localStorage.setItem('mt.metrikMarkierung', '1');
@@ -5017,6 +5020,65 @@ function metrikMarkierungMelden(){
   } catch (e) {}
 }
 metrikBesuchMelden();
+
+/* ---- KPI-Ereignisse (docs/kpi.md, backend/routes/events.js) ----
+   Gleiche Haltung wie metrikMelden: Fehler sind egal, eine verlorene Zaehlung
+   ist kein Schaden. Die anonyme Geraetekennung haengt der Server selbst an
+   (httpOnly-Cookie mt_anon) -- hier gehen nur Ereignisname und streng
+   gepruefte props ueber die Leitung, nie Freitext. */
+function kpiEvent(name, props){
+  try {
+    fetch('/api/events', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ name: name, props: props || {} }), keepalive: true }).catch(function(){});
+  } catch (e) {}
+}
+function kpiPlattform(){
+  var ua = navigator.userAgent || '';
+  if (/iPhone|iPad|iPod/i.test(ua)) return 'ios';
+  if (/Android/i.test(ua)) return 'android';
+  return 'desktop';
+}
+// app_opened: erste Interaktion je Tag und Geraet (localStorage-Merker wie
+// beim Besuchs-Trichter).
+function kpiAppOpenedMelden(){
+  try {
+    var heute = new Date().toISOString().slice(0, 10);
+    if (localStorage.getItem('mt.kpiAppTag') === heute) return;
+    localStorage.setItem('mt.kpiAppTag', heute);
+    kpiEvent('app_opened', { platform: kpiPlattform() });
+  } catch (e) {}
+}
+// invite_opened: dieses Geraet hat einen Einladungslink (?ref= oder
+// ?einladung=) geoeffnet -- einmal je Token, BEVOR werberMerken den Token aus
+// der Adresszeile raeumt. Der Server speichert nur den Hash des Tokens.
+function kpiInviteOpenedMelden(){
+  try {
+    var p = new URLSearchParams(location.search);
+    var token = p.get('ref') || p.get('einladung');
+    if (!token) return;
+    var schluessel = 'mt.kpiInvAuf.' + token.slice(0, 16);
+    if (localStorage.getItem(schluessel)) return;
+    localStorage.setItem(schluessel, '1');
+    kpiEvent('invite_opened', { token: token });
+  } catch (e) {}
+}
+/* invite_accepted als GAST: Wer ueber einen Einladungslink kam (werberToken)
+   und ohne Konto wirklich mitmacht -- erste Markierung oder Movie-Night-
+   Stimme -- nimmt teil, auch ohne Registrierung. Einmal je Geraet; der Server
+   verknuepft anon_id und Token-Hash, damit ein spaeteres Konto demselben
+   Einladungspfad zugeordnet werden kann. Das Annehmen MIT Konto trackt das
+   Backend selbst (routes/links.js). */
+function kpiGastTeilnahme(){
+  try {
+    if (typeof CURRENT_USER !== 'undefined' && CURRENT_USER) return;
+    var token = werberToken();
+    if (!token || localStorage.getItem('mt.kpiGast')) return;
+    localStorage.setItem('mt.kpiGast', '1');
+    kpiEvent('invite_accepted', { token: token });
+  } catch (e) {}
+}
+kpiAppOpenedMelden();
 
 function progressFor(id) { return (id != null && PROGRESS.get(id)) || { seen: false, watchlist: false, viaStream: false, rating: null }; }
 function getViaStream(id) { return !!progressFor(id).viaStream; }
@@ -5542,6 +5604,9 @@ function watchRowHtml(tmdbId, type, title, realId, opts){
   // escAttr statt esc: esc() laesst Anfuehrungszeichen unangetastet -- ein Titel
   // wie 'Good Night, and Good Luck."' wuerde das Attribut sonst vorzeitig beenden.
   return '<div class="watch-row' + (nurTrailer ? ' nur-trailer' : '') + '" data-wapi="' + escAttr(api || '') +
+         // Interne Titel-ID fuers KPI-Ereignis affiliate_click -- leer bei
+         // reinen Streaming-Kandidaten ohne titles-Zeile (dann kein Tracking).
+         '" data-wtid="' + escAttr(realId || '') +
          '" data-wtitle="' + escAttr(title || '') + '">' +
     '<div class="watch-btns">' +
       trailerBtnHtml(trailerApi, title) +
@@ -5572,7 +5637,7 @@ function renderWatchPanel(row, cat){
           var url = watchSearchUrl(p.id, title);
           var logo = p.logo ? '<img class="watch-logo" src="https://image.tmdb.org/t/p/w45' + escAttr(p.logo) + '" alt="" loading="lazy">' : '';
           return url
-            ? '<a class="watch-provider" href="' + escAttr(url) + '" target="_blank" rel="noopener noreferrer">' + logo + esc(p.name) + '</a>'
+            ? '<a class="watch-provider" data-prov="' + escAttr(p.id) + '" href="' + escAttr(url) + '" target="_blank" rel="noopener noreferrer">' + logo + esc(p.name) + '</a>'
             : '<span class="watch-provider is-plain">' + logo + esc(p.name) + '</span>';
         }).join('') + '</div>'
       // Wichtig zu unterscheiden: gar nicht verfuegbar vs. nur bei Anbietern
@@ -5597,6 +5662,13 @@ document.addEventListener('click', function(e){
   var row = e.target.closest && e.target.closest('.watch-row');
   if (!row) return;
   e.stopPropagation();
+  // KPI affiliate_click: Klick auf einen Anbieter-Link (Ansehen/Leihen/
+  // Kaufen). Der Link behaelt sein Standardverhalten; ohne interne Titel-ID
+  // (reine Streaming-Kandidaten) wird nicht gezaehlt.
+  var prov = e.target.closest && e.target.closest('a.watch-provider');
+  if (prov && prov.dataset.prov && row.dataset.wtid) {
+    kpiEvent('affiliate_click', { provider: Number(prov.dataset.prov), title_id: Number(row.dataset.wtid) });
+  }
   var btn = e.target.closest('.watch-btn');
   if (!btn) return;
   if (btn.classList.contains('trailer-btn')) {
@@ -8949,6 +9021,9 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
     // (kennung), einen Namen gibt es auf Wunsch nicht mehr: Nur die Stimmen
     // sind wichtig.
     function stimmeSenden(teil){
+      // Abstimmen ist Teilnahme -- fuer Gaeste von Einladungslinks zaehlt das
+      // als invite_accepted (siehe kpiGastTeilnahme).
+      kpiGastTeilnahme();
       apiRequest('POST', '/api/movie-night/' + aktuellerToken + '/stimmen',
         { teilnehmer: kennung(), name: '', stimmen: teil })
         .then(function(){ return laden(true); })
@@ -11304,6 +11379,9 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
      Adresszeile. Der Parameter wird gleich wieder entfernt, damit ein
      Neuladen das Fenster nicht erneut aufmacht. */
   var feedbackGewuenscht = new URLSearchParams(location.search).get('feedback') === '1';
+  // KPI invite_opened VOR werberMerken -- das raeumt ?ref= gleich aus der
+  // Adresszeile, danach waere der Token hier nicht mehr lesbar.
+  kpiInviteOpenedMelden();
   werberMerken();
   zeigeLinkHinweise();
   // Geteilter Ansicht-Link (?ansicht=...): Filter, Sortierung und Suche des

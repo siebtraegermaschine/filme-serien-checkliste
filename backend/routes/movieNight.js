@@ -19,6 +19,7 @@ import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { mengenGrenze } from '../middleware/rateLimit.js';
 import { sprachWahl, sprachFeld } from '../lib/i18n.js';
+import { track } from '../lib/track.js';
 
 const router = createAsyncRouter();
 
@@ -41,10 +42,19 @@ router.post('/', requireAuth, GRENZE_ANLEGEN, async (req, res) => {
   await pool.query(`DELETE FROM movie_night_runden WHERE created_at < now() - interval '${VERFALL_STUNDEN} hours'`);
 
   const token = crypto.randomBytes(16).toString('hex');
-  await pool.query(
-    'INSERT INTO movie_night_runden (token, ersteller_user_id, titel_ids) VALUES ($1, $2, $3)',
+  const { rows: [neu] } = await pool.query(
+    'INSERT INTO movie_night_runden (token, ersteller_user_id, titel_ids) VALUES ($1, $2, $3) RETURNING id',
     [token, req.session.userId, geprueft]
   );
+  // KPI: Eine Movie-Night-Runde IST die Match-Session (docs/kpi.md). Beim
+  // Start ist nur die erstellende Person dabei; den tatsaechlichen Stand
+  // tragen die Stimmen-Ereignisse nach (participant_count je Stimme).
+  track('session_started', {
+    userId: req.session.userId,
+    anonId: req.anonId,
+    sessionId: String(neu.id),
+    props: { participant_count: 1 },
+  });
   res.status(201).json({ token });
 });
 
@@ -128,7 +138,51 @@ router.post('/:token/stimmen', GRENZE_STIMMEN, async (req, res) => {
        DO UPDATE SET stimme = EXCLUDED.stimme, name = EXCLUDED.name, abgegeben_at = now()`,
     werte
   );
+  // KPI-Ereignisse -- ohne await, das Abstimmen wartet darauf nicht.
+  stimmenTracken(runde, paare, req);
   res.status(204).end();
 });
+
+/* KPI (docs/kpi.md): jede abgegebene Stimme als title_rated (verdict yes/no),
+   danach EINMAL je Runde match_completed, sobald mindestens zwei Personen
+   teilnehmen und mindestens ein Titel von allen Teilnehmenden ein Ja hat.
+   participant_count in den props ist der Stand zum Zeitpunkt der Stimme --
+   buildSnapshot nimmt je Session das Maximum. Runden verfallen nach 48
+   Stunden; die Ereignisse bleiben, deshalb passiert die Match-Pruefung hier
+   und nicht erst in der Auswertung. */
+async function stimmenTracken(runde, paare, req) {
+  try {
+    const sessionId = String(runde.id);
+    const basis = { userId: req.session?.userId ?? null, anonId: req.anonId, sessionId };
+    const { rows: [z] } = await pool.query(
+      'SELECT COUNT(DISTINCT teilnehmer)::int AS n FROM movie_night_stimmen WHERE runde_id = $1',
+      [runde.id]
+    );
+    const anzahl = z.n;
+    for (const [titleId, wert] of paare) {
+      await track('title_rated', { ...basis,
+        props: { title_id: titleId, verdict: wert ? 'yes' : 'no', participant_count: anzahl } });
+    }
+    if (anzahl < 2) return;
+    const { rows: schon } = await pool.query(
+      `SELECT 1 FROM analytics_events WHERE name = 'match_completed' AND session_id = $1 LIMIT 1`,
+      [sessionId]
+    );
+    if (schon.length) return;
+    const { rows: gemeinsame } = await pool.query(
+      `SELECT title_id FROM movie_night_stimmen
+        WHERE runde_id = $1 AND stimme
+        GROUP BY title_id
+        HAVING COUNT(DISTINCT teilnehmer) = $2
+        ORDER BY title_id LIMIT 1`,
+      [runde.id, anzahl]
+    );
+    if (!gemeinsame.length) return;
+    await track('match_completed', { ...basis,
+      props: { participant_count: anzahl, title_id: Number(gemeinsame[0].title_id) } });
+  } catch (err) {
+    console.error('stimmenTracken fehlgeschlagen:', err.message);
+  }
+}
 
 export default router;

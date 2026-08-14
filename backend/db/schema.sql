@@ -729,3 +729,59 @@ CREATE TABLE IF NOT EXISTS titel_momentaufnahmen (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS idx_momentaufnahmen_user ON titel_momentaufnahmen (user_id);
+
+-- ============================================================================
+-- KPI-Erfassung (siehe docs/kpi.md). Feldnamen und Definitionen sind durch das
+-- externe KPI-Cockpit vorgegeben und duerfen nicht umbenannt werden.
+-- ============================================================================
+
+-- Append-only Ereignistabelle. Es schreibt AUSSCHLIESSLICH lib/track.js --
+-- kein direktes INSERT an anderer Stelle, damit Namens- und props-Disziplin
+-- an genau einem Ort durchgesetzt wird.
+--
+-- DSGVO: keine Klarnamen, keine E-Mail-Adressen, keine IP-Adressen, kein
+-- Freitext aus Nutzereingaben in props. anon_id ist ein zufaelliger
+-- Geraetewert (Cookie mt_anon) ohne Personenbezug; user_id die interne
+-- Kontonummer als Text.
+CREATE TABLE IF NOT EXISTS analytics_events (
+  id         BIGSERIAL PRIMARY KEY,
+  ts         TIMESTAMPTZ NOT NULL DEFAULT now(), -- Serverzeit, nie Clientzeit
+  name       TEXT NOT NULL,
+  user_id    TEXT,                               -- NULL bei Gaesten
+  anon_id    TEXT NOT NULL,                      -- Cookie-/Geraete-ID, immer gesetzt
+  group_id   TEXT,                               -- Gruppen existieren (noch) nicht -- bleibt NULL
+  session_id TEXT,                               -- Match-Session (Movie-Night-Runde), nicht Web-Session
+  props      JSONB NOT NULL DEFAULT '{}'::jsonb
+);
+CREATE INDEX IF NOT EXISTS idx_analytics_events_name_ts ON analytics_events (name, ts);
+CREATE INDEX IF NOT EXISTS idx_analytics_events_user_ts ON analytics_events (user_id, ts);
+CREATE INDEX IF NOT EXISTS idx_analytics_events_session ON analytics_events (session_id);
+CREATE INDEX IF NOT EXISTS idx_analytics_events_group_ts ON analytics_events (group_id, ts);
+
+-- Woechentliche Snapshots (lib/kpi.js, buildSnapshot). Nie ueberschrieben,
+-- sondern versioniert -- deshalb (week_start, version) als Schluessel statt
+-- week_start allein: ein erneuter Lauf legt eine neue Version daneben, die
+-- alte bleibt nachlesbar.
+CREATE TABLE IF NOT EXISTS kpi_snapshots (
+  week_start DATE NOT NULL,
+  version    INTEGER NOT NULL DEFAULT 1,
+  payload    JSONB NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (week_start, version)
+);
+
+-- Bezahlter Media-Spend je Woche (Montag als week), von Hand gepflegt.
+-- Grundlage fuer cac -- ohne Zeile fuer die Woche liefert cac NULL.
+CREATE TABLE IF NOT EXISTS marketing_spend (
+  week       DATE PRIMARY KEY,
+  amount_eur NUMERIC(12,2) NOT NULL
+);
+
+-- B2B-Geschaefte, von Hand gepflegt. pipeline = Summe 'offen',
+-- arr = Summe 'gewonnen' (siehe buildSnapshot).
+CREATE TABLE IF NOT EXISTS b2b_deals (
+  id         BIGSERIAL PRIMARY KEY,
+  status     TEXT NOT NULL CHECK (status IN ('offen', 'gewonnen', 'verloren')),
+  value_eur  NUMERIC(12,2) NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);

@@ -2,6 +2,7 @@ import { pool } from '../db/pool.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { zehnTitelPruefen } from '../lib/metrik.js';
+import { track } from '../lib/track.js';
 
 const router = createAsyncRouter();
 router.use(requireAuth);
@@ -67,6 +68,22 @@ router.put('/:titleId', async (req, res) => {
   // Anonymer Trichter-Schritt "zehn Titel erreicht" -- ohne await, das
   // Zaehlen darf das Speichern nicht verzoegern (siehe lib/metrik.js).
   zehnTitelPruefen(req.session.userId);
+
+  // KPI title_rated (docs/kpi.md): nur ausdrueckliche POSITIV-Markierungen im
+  // Body zaehlen (gesehen, Watchlist, Sterne) -- das blosse Anlegen der Zeile
+  // ("+ Liste") und das Entfernen von Marken sind keine Bewertung. Eine
+  // Meldung je Aufruf, sonst zaehlte "gesehen + Sterne" doppelt.
+  const verdict = seen === true ? 'seen'
+    : watchlist === true ? 'watchlist'
+    : Number.isInteger(rating) ? 'stars'
+    : null;
+  if (verdict) {
+    track('title_rated', {
+      userId: req.session.userId,
+      anonId: req.anonId,
+      props: { title_id: titleId, verdict },
+    });
+  }
 
   res.json({ titleId: rows[0].title_id, seen: rows[0].seen, watchlist: rows[0].watchlist, viaStream: rows[0].via_stream, rating: rows[0].rating });
 });
