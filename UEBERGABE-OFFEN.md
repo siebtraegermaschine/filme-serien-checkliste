@@ -163,8 +163,8 @@ täglich, der Rest in 4-Tage-Rotation).
 Was daraus als **offene Arbeit** bleibt (Details in 3.7 und 3.1):
 
 - ~~Die einmaligen **Betriebsschritte auf dem Server**~~ — **am 13. August
-  geprüft und abgeschlossen** (AT-PLZ nachgeholt; einzig BR/CO im
-  Streaming-Cache stehen noch aus, siehe 3.7 Punkt 4).
+  geprüft und abgeschlossen** (AT-PLZ nachgeholt; BR/CO im Streaming-Cache
+  am 14. August als befüllt bestätigt, siehe 3.7 Punkt 4).
 - **Muttersprachler-Review** der maschinellen Übersetzungen (Review-Dateien
   je Sprache liegen bei Christian).
 - **Rechtsklärung für Nicht-EWR-Länder** vor aktivem Marketing dort.
@@ -891,12 +891,12 @@ gefunden und sofort geschlossen:
    mögliche Ursache sind Overpass-Abbrüche, die `import-kinos.mjs` seit
    `e85d952` überspringt statt abzubrechen — bei Bedarf den US-Lauf einzeln
    wiederholen.
-4. **Workflows:** `cinema_cache` hat alle 40 Regionen. `streaming_cache` hat
-   **39 von 41 — BR und CO fehlen noch**, sehr wahrscheinlich Opfer des
-   fail-fast-Fehlers, der erst am 13. August um 21:50 Uhr behoben wurde
-   (`616a5fa`, zehn Minuten vor dem planmäßigen 20:00-UTC-Lauf). **Nach dem
-   nächsten Streaming-Lauf nachsehen**, ob BR/CO auftauchen:
-   `SELECT region, count(*) FROM streaming_cache GROUP BY region;`
+4. **Workflows:** `cinema_cache` hat alle 40 Regionen. `streaming_cache`
+   hatte am 13. August nur 39 von 41 — BR und CO fehlten als Opfer des
+   fail-fast-Fehlers, der erst um 21:50 Uhr behoben wurde (`616a5fa`, zehn
+   Minuten vor dem planmäßigen 20:00-UTC-Lauf). **Am 14. August geprüft:
+   beide da** (BR 17.406, CO 19.807 Zeilen) — damit sind alle 41 Regionen
+   befüllt und die Betriebsschritte restlos abgeschlossen.
 
 ### 3.8 Ausgeblendete Funktionen warten auf eine Entscheidung
 

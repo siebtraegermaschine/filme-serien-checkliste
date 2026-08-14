@@ -7,8 +7,12 @@
 > **Umsetzungsstand 13. August 2026:** Vorschlag **A** (Onboarding als
 > Spiel/Kennenlern-Strecke), **B** (Import im Einstieg) und **Abschnitt 3**
 > (Messen ohne Tracking, `npm run metrik`) sind gebaut und live — Details in
-> `UEBERGABE-OFFEN.md`, Abschnitt „13. August". **C** (Fortschrittsbalken zum
-> Score), **D** (Movie Night reaktivieren), **E–M** stehen weiter aus.
+> `UEBERGABE-OFFEN.md`, Abschnitt „13. August". Auch **F** (Referral messbar
+> machen) ist damit erledigt: `npm run metrik` zeigt Konten gesamt, davon
+> über Einladung geworben, und die Top-Werber mit Namen (`einladungen()` in
+> `backend/lib/metrik.js`) — am 14. August geprüft: 9 Konten, 5 geworben,
+> alle von Christian. **C** (Fortschrittsbalken zum Score), **D** (Movie
+> Night reaktivieren), **E** und **G–M** stehen weiter aus.
 > Zusätzlich entstanden (hier nicht geplant): der Taste-Match hinter den
 > Namen, der Teilen-Knopf mit Ansicht-Links und die kombinierbare Suche.
 >
@@ -92,7 +96,10 @@ Nach einem Abgleich: „Unser Match: 87 % — Top-Titel: …" als Bild/Text zum
 Teilen, ohne dass der Empfänger etwas braucht. Der Name der App ist
 MovieMatch — das Match-Ergebnis ist das natürliche Artefakt der Marke.
 
-**F. Referral messbar machen, bevor man ihn bewirbt.**
+**F. Referral messbar machen, bevor man ihn bewirbt.** *(Umgesetzt — mit dem
+Messen-Block vom 13. August: `npm run metrik` zeigt geworbene Konten und
+Top-Werber. Offen bleibt nur die Belohnungs-Diskussion, falls der Kanal
+trägt.)*
 `invited_by_user_id` wird geschrieben und nie gelesen. Eine einfache
 Auswertung (wie viele Konten kamen über Einladungen, von wem) kostet einen
 Abend und beantwortet, ob der Kanal überhaupt trägt — vor jeder Belohnungs-
