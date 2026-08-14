@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0e1116">
+<title>KPI – MovieMatch</title>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<!--
+  Kennzahlen-Ansicht fuers Handy (siehe docs/kpi.md).
+
+  Bewusst eine eigene, schlichte Seite statt docs/KpiCockpit.jsx: Das Cockpit
+  ist React und erwartet zusaetzlich /history, /targets und /plan sowie
+  Session-Auth -- beides gibt es hier (noch) nicht, und die App hat keinen
+  Build-Schritt. Diese Seite kommt mit dem einen vorhandenen Endpunkt aus.
+
+  Der Token wird einmal eingegeben und im localStorage des Geraets behalten;
+  er geht als Kopfzeile x-kpi-token mit, nie ueber die Adresszeile (dort
+  landete er in Verlauf und Server-Protokollen). Die Seite ist oeffentlich
+  erreichbar, aber ohne Token wertlos -- die Sperre sitzt im Backend.
+-->
+<style>
+  :root {
+    --bg: #0e1116; --card: #171c24; --accent: #e6b34c;
+    --text: #e8eaed; --text-dim: #9aa3af; --border: #2a323e;
+    --ok: #4cc38a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    padding: max(16px, env(safe-area-inset-top)) 14px calc(28px + env(safe-area-inset-bottom));
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 620px; margin: 0 auto; }
+  header { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+  h1 { font-size: 1.25rem; letter-spacing: .2px; }
+  h1 span { color: var(--accent); }
+  .stand { color: var(--text-dim); font-size: .78rem; }
+
+  /* Wochenwahl */
+  .woche {
+    display: flex; align-items: center; gap: 8px;
+    margin: 14px 0 18px;
+  }
+  .woche button {
+    background: var(--card); color: var(--text); border: 1px solid var(--border);
+    border-radius: 10px; width: 42px; height: 38px; font-size: 1.05rem;
+    cursor: pointer; touch-action: manipulation;
+  }
+  .woche button:disabled { opacity: .35; cursor: default; }
+  .woche .spanne {
+    flex: 1; text-align: center; font-size: .92rem; font-weight: 600;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 9px 6px;
+  }
+
+  .gruppe { margin-bottom: 16px; }
+  .gruppe > h2 {
+    font-size: .74rem; text-transform: uppercase; letter-spacing: 1.2px;
+    color: var(--accent); margin: 0 0 7px 3px; font-weight: 700;
+  }
+  .karte { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .zeile {
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 11px 13px; border-top: 1px solid var(--border);
+  }
+  .zeile:first-child { border-top: none; }
+  .zeile .name { flex: 1; font-size: .89rem; line-height: 1.35; }
+  .zeile .wert { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 1rem; white-space: nowrap; }
+  .zeile.leer .name, .zeile.leer .wert { color: var(--text-dim); }
+  .zeile .hinweis {
+    display: block; color: var(--text-dim); font-size: .74rem;
+    margin-top: 3px; line-height: 1.4;
+  }
+
+  /* Token-Abfrage und Meldungen */
+  .box {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 16px; margin-top: 10px;
+  }
+  .box p { font-size: .88rem; line-height: 1.5; color: var(--text-dim); margin-bottom: 12px; }
+  .box input {
+    width: 100%; padding: 12px; font-size: 16px; /* 16px: sonst zoomt iOS beim Fokus */
+    background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 9px; margin-bottom: 10px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .box button, .fuss button {
+    background: var(--accent); color: #14181f; border: none;
+    border-radius: 9px; padding: 12px 18px; font-size: .92rem; font-weight: 700;
+    cursor: pointer; touch-action: manipulation;
+  }
+  .fehler { color: #f0a08f; font-size: .85rem; margin-bottom: 10px; }
+  .fuss { margin-top: 20px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .fuss button { background: transparent; color: var(--text-dim); border: 1px solid var(--border); font-weight: 500; }
+  .fuss .legende { color: var(--text-dim); font-size: .76rem; flex: 1; min-width: 160px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Movie<span>Match</span> · Kennzahlen</h1>
+  </header>
+  <div id="inhalt"></div>
+</div>
+
+<script>
+/* Kennzahlen-Definition -- Bezeichnungen, Gruppen, Einheiten und Hinweise
+   wortgleich aus docs/KpiCockpit.jsx, damit Handy und Cockpit dasselbe sagen. */
+var GRUPPEN = [
+  ['Nordstern', [
+    ['matched_sessions_week', 'Abgeschlossene Match-Sessions / Woche', 'n']]],
+  ['Akquise', [
+    ['new_users_week', 'Neue Nutzer / Woche', 'n'],
+    ['invited_share', 'Anteil Neuanmeldungen über Einladung', 'pct',
+      'Der Loop-Anteil. Alles darunter musst du bezahlen oder redaktionell erarbeiten.'],
+    ['cac', 'CAC (bezahlte Nutzer)', 'eur']]],
+  ['Aktivierung', [
+    ['activation_rate', 'Aktivierung: Match in Session 1', 'pct',
+      'Erstnutzer, die in der ersten Sitzung ein Match mit einer zweiten Person abschließen.'],
+    ['time_to_first_match', 'Zeit bis zum ersten Match (Median)', 'min'],
+    ['guest_signup_rate', 'Gast → Account', 'pct']]],
+  ['Engagement', [
+    ['dau', 'DAU', 'n'], ['wau', 'WAU', 'n'], ['mau', 'MAU', 'n'],
+    ['sessions_per_group_month', 'Sessions je aktiver Gruppe / Monat', 'x'],
+    ['swipes_per_session', 'Bewertungen je Session', 'x']]],
+  ['Viralität', [
+    ['invites_per_user', 'Einladungen je Nutzer', 'x'],
+    ['invite_accept_rate', 'Annahmequote Einladung', 'pct'],
+    ['cycle_time_days', 'Zykluszeit Einladung', 'd',
+      'Anmeldung bis erste versendete Einladung. Kurze Zyklen wirken wie ein höherer K-Faktor.']]],
+  ['Retention', [
+    ['d1', 'Retention D1', 'pct'], ['d7', 'Retention D7', 'pct'], ['d30', 'Retention D30', 'pct'],
+    ['group_retention_m1', 'Gruppen-Retention M1', 'pct',
+      'Wichtiger als Nutzer-Retention — die Gruppe erzeugt die Wechselkosten.'],
+    ['active_groups', 'Aktive Gruppen', 'n'],
+    ['avg_group_size', 'Ø Gruppengröße', 'x']]],
+  ['Erlös', [
+    ['paying_users', 'Zahlende Nutzer', 'n'],
+    ['mrr', 'MRR Abo', 'eur'],
+    ['affiliate_revenue_month', 'Affiliate-Erlös / Monat', 'eur'],
+    ['ad_revenue_month', 'Werbeerlös / Monat', 'eur']]],
+  ['B2B', [
+    ['profiled_users', 'Nutzer mit ≥20 Bewertungen', 'n',
+      'Die verwertbare Segmentbasis. Ohne Geschmacksprofil kein B2B-Produkt.'],
+    ['b2b_pipeline', 'B2B-Pipeline', 'eur'],
+    ['b2b_arr', 'B2B-ARR', 'eur']]]
+];
+
+var TOKEN_KEY = 'mt.kpiToken';
+var inhalt = document.getElementById('inhalt');
+var verschiebung = 0;   // 0 = letzte abgeschlossene Woche, 1 = eine davor ...
+
+function esc(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function token(){ try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; } }
+
+function zahl(wert, einheit){
+  if (wert === null || wert === undefined) return '—';
+  if (einheit === 'pct') return (wert * 100).toFixed(1).replace('.', ',') + ' %';
+  if (einheit === 'eur') return wert.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+  if (einheit === 'min') return wert.toFixed(1).replace('.', ',') + ' Min';
+  if (einheit === 'd') return wert.toFixed(1).replace('.', ',') + ' Tage';
+  if (einheit === 'x') return wert.toFixed(2).replace('.', ',');
+  return wert.toLocaleString('de-DE');
+}
+function kurzDatum(iso){ var t = iso.split('-'); return t[2] + '.' + t[1] + '.'; }
+
+/* Montag der Woche, die `zurueck` abgeschlossene Wochen zurueckliegt.
+   zurueck = 0 ist die letzte abgeschlossene Woche (also nicht die laufende). */
+function wochenFenster(zurueck){
+  var heute = new Date();
+  var tag = (heute.getDay() + 6) % 7;                    // Mo=0 ... So=6
+  var montagDieserWoche = new Date(heute.getFullYear(), heute.getMonth(), heute.getDate() - tag);
+  var von = new Date(montagDieserWoche);
+  von.setDate(von.getDate() - 7 * (zurueck + 1));
+  var bis = new Date(von);
+  bis.setDate(bis.getDate() + 6);
+  var f = function(d){
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  };
+  return { from: f(von), to: f(bis) };
+}
+
+function zeigeTokenAbfrage(meldung){
+  inhalt.innerHTML =
+    '<div class="box">' +
+      (meldung ? '<div class="fehler">' + esc(meldung) + '</div>' : '') +
+      '<p>Einmalig den KPI-Token eingeben. Er bleibt auf diesem Gerät gespeichert und ' +
+      'wird nur als Kopfzeile an den eigenen Server geschickt.</p>' +
+      '<input id="tokenFeld" type="password" inputmode="latin" autocomplete="off" ' +
+        'autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Token">' +
+      '<button id="tokenKnopf">Speichern</button>' +
+    '</div>';
+  var feld = document.getElementById('tokenFeld');
+  document.getElementById('tokenKnopf').onclick = function(){
+    var wert = feld.value.trim();
+    if (!wert) { feld.focus(); return; }
+    try { localStorage.setItem(TOKEN_KEY, wert); } catch (e) {}
+    laden();
+  };
+  feld.addEventListener('keydown', function(e){ if (e.key === 'Enter') document.getElementById('tokenKnopf').click(); });
+}
+
+function zeichne(d){
+  var teile = ['<div class="woche">' +
+    '<button id="zurueck" aria-label="Woche davor">‹</button>' +
+    '<div class="spanne">' + kurzDatum(d.period.from) + ' – ' + kurzDatum(d.period.to) + d.period.to.slice(0, 4) + '</div>' +
+    '<button id="vor" aria-label="Woche danach"' + (verschiebung === 0 ? ' disabled' : '') + '>›</button>' +
+    '</div>'];
+
+  for (var i = 0; i < GRUPPEN.length; i++) {
+    var name = GRUPPEN[i][0], felder = GRUPPEN[i][1];
+    var zeilen = '';
+    for (var j = 0; j < felder.length; j++) {
+      var f = felder[j], wert = d.metrics[f[0]];
+      var fehlt = (wert === null || wert === undefined);
+      zeilen += '<div class="zeile' + (fehlt ? ' leer' : '') + '">' +
+        '<div class="name">' + esc(f[1]) +
+          (f[3] ? '<span class="hinweis">' + esc(f[3]) + '</span>' : '') +
+        '</div>' +
+        '<div class="wert">' + zahl(wert, f[2]) + '</div>' +
+      '</div>';
+    }
+    teile.push('<div class="gruppe"><h2>' + esc(name) + '</h2><div class="karte">' + zeilen + '</div></div>');
+  }
+
+  var stand = new Date(d.generated_at).toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' });
+  teile.push('<div class="fuss">' +
+    '<div class="legende">„—" heißt: dafür gibt es noch keine Datengrundlage.<br>Stand: ' + esc(stand) + '</div>' +
+    '<button id="neu">Aktualisieren</button>' +
+    '<button id="raus">Token löschen</button>' +
+  '</div>');
+
+  inhalt.innerHTML = teile.join('');
+  document.getElementById('zurueck').onclick = function(){ verschiebung++; laden(); };
+  document.getElementById('vor').onclick = function(){ if (verschiebung > 0) { verschiebung--; laden(); } };
+  document.getElementById('neu').onclick = function(){ laden(); };
+  document.getElementById('raus').onclick = function(){
+    try { localStorage.removeItem(TOKEN_KEY); } catch (e) {}
+    zeigeTokenAbfrage('');
+  };
+}
+
+function laden(){
+  var t = token();
+  if (!t) { zeigeTokenAbfrage(''); return; }
+  inhalt.innerHTML = '<div class="box"><p>Lädt …</p></div>';
+  var pfad = '/api/kpi/snapshot';
+  if (verschiebung > 0) {
+    var w = wochenFenster(verschiebung);
+    pfad += '?from=' + w.from + '&to=' + w.to;
+  }
+  fetch(pfad, { headers: { 'x-kpi-token': t } })
+    .then(function(r){
+      if (r.status === 401) { throw new Error('Token stimmt nicht.'); }
+      if (!r.ok) { throw new Error('Server antwortet mit ' + r.status + '.'); }
+      return r.json();
+    })
+    .then(zeichne)
+    .catch(function(err){
+      if (String(err.message).indexOf('Token') === 0) { zeigeTokenAbfrage(err.message); return; }
+      inhalt.innerHTML = '<div class="box"><div class="fehler">' + esc(err.message || 'Abruf fehlgeschlagen.') +
+        '</div><button id="nochmal">Noch einmal</button></div>';
+      document.getElementById('nochmal').onclick = laden;
+    });
+}
+
+laden();
+</script>
+</body>
+</html>
