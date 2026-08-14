@@ -17,7 +17,7 @@
     "feedback": "node scripts/feedback-lesen.mjs",
     "import-plz": "node scripts/import-plz.mjs",
     "import-kinos": "node scripts/import-kinos.mjs",
-    "test": "node --test test/",
+    "test": "node --test",
     "kpi:verify": "node scripts/kpi-verify.mjs",
     "kpi:backfill": "node scripts/kpi-backfill.mjs"
   },

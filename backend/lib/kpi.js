@@ -32,6 +32,10 @@ const FE = `(($2::date + 1)::timestamp AT TIME ZONE '${TZ}')`;
 // guest_signup_rate, d1/d7): Montag..Sonntag vor `from`.
 const VS = `(($1::date - 7)::timestamp AT TIME ZONE '${TZ}')`;
 const VE = FS;
+// Fensterende als $1 (uebergeben wird dann [to]) -- fuer Abfragen, die NUR
+// das Ende brauchen: Postgres verlangt, dass jede uebergebene Parameter-
+// nummer auch vorkommt.
+const FE1 = `(($1::date + 1)::timestamp AT TIME ZONE '${TZ}')`;
 
 function rund(x) {
   if (x == null || Number.isNaN(Number(x))) return null;
@@ -121,7 +125,7 @@ export async function buildSnapshot(from, to) {
                  AND EXISTS (SELECT 1 FROM analytics_events b
                               WHERE b.session_id = m.session_id AND b.user_id = k.user_id)
             )) AS aktiviert
-       FROM kohorte k`, p
+       FROM kohorte k`, [from] // nur $1: Vorwochenfenster haengt allein an `from`
   );
   if (!basisDa('session_started')) {
     metrics.activation_rate = ohneBasis('activation_rate', 'session_started');
@@ -149,7 +153,7 @@ export async function buildSnapshot(from, to) {
      SELECT COUNT(*) AS n,
             percentile_cont(0.5) WITHIN GROUP (
               ORDER BY EXTRACT(EPOCH FROM (match_ts - signup_ts)) / 60.0) AS median_min
-       FROM erreicht`, p
+       FROM erreicht`, [from]
   );
   metrics.time_to_first_match = Number(ttfm.n) > 0 ? rund(ttfm.median_min) : null;
   if (metrics.time_to_first_match == null) {
@@ -170,7 +174,7 @@ export async function buildSnapshot(from, to) {
                WHERE s.name = 'user_signed_up' AND s.anon_id = g.anon_id
                  AND s.ts >= g.ts AND s.ts < g.ts + interval '14 days'
             )) AS konvertiert
-       FROM gaeste g`, p
+       FROM gaeste g`, [from]
   );
   metrics.guest_signup_rate = quote(gast.konvertiert, gast.gesamt);
   if (metrics.guest_signup_rate == null) gruende.guest_signup_rate = 'keine Gast-Teilnahmen in der Vorwoche';
@@ -212,14 +216,14 @@ export async function buildSnapshot(from, to) {
     `WITH sess AS (
        SELECT DISTINCT session_id FROM analytics_events
         WHERE name = 'session_started' AND session_id IS NOT NULL
-          AND ts >= ${FE} - interval '30 days' AND ts < ${FE}
+          AND ts >= ${FE1} - interval '30 days' AND ts < ${FE1}
      ), groesse AS (
        SELECT s.session_id, MAX((e.props->>'participant_count')::int) AS n
          FROM sess s JOIN analytics_events e ON e.session_id = s.session_id
         WHERE e.props ? 'participant_count'
         GROUP BY s.session_id
      )
-     SELECT COUNT(*) AS anzahl, AVG(n) AS mittel FROM groesse`, p
+     SELECT COUNT(*) AS anzahl, AVG(n) AS mittel FROM groesse`, [to]
   );
   metrics.avg_group_size = Number(gr.anzahl) > 0 ? rund(gr.mittel) : null;
   if (metrics.avg_group_size == null) gruende.avg_group_size = 'keine Sessions in den letzten 30 Tagen';
@@ -227,7 +231,9 @@ export async function buildSnapshot(from, to) {
   metrics.swipes_per_session = quote(z.bewertungen, z.sessions);
   if (metrics.swipes_per_session == null) gruende.swipes_per_session = 'keine Sessions im Zeitraum';
   metrics.invites_per_user = quote(z.einladungen, metrics.wau);
-  if (metrics.invites_per_user == null && !gruende.wau) gruende.invites_per_user = 'WAU ist null oder 0';
+  if (metrics.invites_per_user == null) {
+    gruende.invites_per_user = gruende.wau ? 'WAU fehlt (siehe wau)' : 'WAU ist 0';
+  }
 
   /* ---- Annahmequote: Einladungen, die IM FENSTER versendet wurden;
      Annahmen zaehlen bis 14 Tage nach dem Versand ---- */
@@ -312,7 +318,7 @@ export async function buildSnapshot(from, to) {
                               WHEN name = 'subscription_cancelled' THEN -(props->>'mrr_eur')::numeric
                          END), 0) AS mrr
        FROM analytics_events
-      WHERE name IN ('subscription_started', 'subscription_cancelled') AND ts < ${FE}`, p
+      WHERE name IN ('subscription_started', 'subscription_cancelled') AND ts < ${FE1}`, [to]
   );
   metrics.paying_users = Math.max(0, ganz(abo.aktive));
   metrics.mrr = Math.max(0, rund(abo.mrr));
@@ -321,7 +327,7 @@ export async function buildSnapshot(from, to) {
     `SELECT COALESCE(SUM((props->>'revenue_eur')::numeric), 0) AS summe
        FROM analytics_events
       WHERE name = 'affiliate_conversion'
-        AND ts >= ${FE} - interval '30 days' AND ts < ${FE}`, p
+        AND ts >= ${FE1} - interval '30 days' AND ts < ${FE1}`, [to]
   );
   metrics.affiliate_revenue_month = rund(aff.summe);
   metrics.ad_revenue_month = 0; // keine Werbe-Anbindung -- laut Definition 0
@@ -333,8 +339,8 @@ export async function buildSnapshot(from, to) {
     const { rows: [prof] } = await pool.query(
       `SELECT COUNT(*) AS n FROM (
          SELECT user_id FROM analytics_events
-          WHERE name = 'title_rated' AND user_id IS NOT NULL AND ts < ${FE}
-          GROUP BY user_id HAVING COUNT(*) >= 20) t`, p
+          WHERE name = 'title_rated' AND user_id IS NOT NULL AND ts < ${FE1}
+          GROUP BY user_id HAVING COUNT(*) >= 20) t`, [to]
     );
     metrics.profiled_users = ganz(prof.n);
   }
