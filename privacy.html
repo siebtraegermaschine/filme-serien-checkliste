@@ -39,7 +39,7 @@
   <li><strong>Profile name:</strong> a freely chosen first name or nickname you provide when signing up. It is only visible to people you connect with yourself (see section 7).</li>
   <li><strong>Usage data:</strong> your personal “watched” and watchlist status for movies/series, your star ratings (1–10) and your selection of streaming services – each linked to your account.</li>
   <li><strong>Connected profiles:</strong> which other accounts you have connected for the “Watch together” feature (see section 7).</li>
-  <li><strong>Technical data:</strong> a session cookie (see section 4) that recognises you after signing in.</li>
+  <li><strong>Technical data:</strong> a session cookie (see section 4) that recognises you after signing in, plus a random device identifier for our own audience measurement (also section 4).</li>
   <li><strong>Feedback:</strong> the text you send us via the feedback form. It is stored – for signed-in users together with the account’s email address, so we can reply. If you are not signed in, the text is sent without sender information.</li>
 </ul>
 <p>The movie/series catalogue itself (titles, posters, ratings) can be browsed freely without an account and does not require any personal data.</p>
@@ -52,13 +52,41 @@
   <li><strong>Connected profiles:</strong> matching your titles and ratings with people you invite yourself or whose invitation you accept – Art. 6 (1)(a) GDPR (consent given by accepting the invitation), revocable at any time by removing the connection.</li>
   <li><strong>Service improvement:</strong> analysing ratings in aggregated form to improve recommendations and catalogue maintenance – Art. 6 (1)(f) GDPR.</li>
   <li><strong>Anonymous rating statistics</strong> (including sharing with third parties): Art. 6 (1)(f) in conjunction with Art. 5 (1)(b) GDPR – see section 9.</li>
+  <li><strong>Audience measurement:</strong> aggregated analysis of usage (app opens, returning devices, accepted invitations, joint votes) in order to understand whether and how the app is used, and to improve it – Art. 6 (1)(f) GDPR (legitimate interest). No profiling, no sharing, no third-party services – see section 4.</li>
 </ul>
 
-<h2>4. Cookies</h2>
+<h2>4. Cookies and audience measurement</h2>
 <p>
   We use one technically necessary session cookie (<code>fs.sid</code>) to recognise signed-in
   users. It is HTTP-only, is not used for tracking or advertising purposes and therefore does not
-  require a cookie consent banner (Art. 6 (1)(b)/(f) GDPR and § 25 (2) TTDSG).
+  require a cookie consent banner (Art. 6 (1)(b)/(f) GDPR and § 25 (2) TDDDG, formerly TTDSG).
+</p>
+<p>
+  For our own audience measurement we additionally set a cookie <code>mt_anon</code> containing a
+  randomly generated device identifier. It is a pure random number: it contains neither your name
+  nor your email address, neither your IP address nor anything that could be derived from your
+  account. All it tells us is that two requests come from the same device – nothing more. Without
+  it we could not tell whether a hundred people opened the app once on a given day or one person
+  opened it a hundred times.
+</p>
+<p>
+  With it we count in aggregated form only: how many devices open the app daily, weekly and
+  monthly, how many return after a week, how many invitations are accepted, and how often people
+  vote on titles together. For each event we store only <em>what</em> happened, <em>when</em> it
+  happened and this identifier – never free text from your input.
+</p>
+<p>
+  What explicitly does <strong>not</strong> happen: we do not build advertising or interest
+  profiles, do not track you across other websites, do not share the identifier with anyone and do
+  not embed any third-party analytics services (no Google Analytics or similar). The analysis runs
+  exclusively on our own server in Germany.
+</p>
+<p>
+  The cookie is HTTP-only and expires after <strong>six months</strong>. You can delete it at any
+  time in your browser settings – the app continues to work unchanged, it will simply count you as
+  a new device the next time you open it. The legal basis is Art. 6 (1)(f) GDPR: our legitimate
+  interest in understanding whether and how the app is used. You may object to this processing at
+  any time (section 11).
 </p>
 
 <h2>5. Hosting</h2>
@@ -176,6 +204,12 @@
   Account data and usage status are stored for as long as your account exists. After account
   deletion (see section 11) they are removed without delay, unless statutory retention
   obligations require otherwise.
+</p>
+<p>
+  We delete the individual audience-measurement events (section 4) no later than
+  <strong>14 months</strong> after they occur – long enough to compare with the same month of the
+  previous year, of no use afterwards. The weekly summaries derived from them contain only totals
+  and averages without any identifier; they are no longer personal data and are retained.
 </p>
 <p>
   We delete feedback messages no later than <strong>12 months</strong> after receipt. If you

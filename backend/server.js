@@ -25,7 +25,7 @@ import metrikRouter from './routes/metrik.js';
 import eventsRouter from './routes/events.js';
 import kpiRouter from './routes/kpi.js';
 import { anonId } from './middleware/anonId.js';
-import { starteKpiSnapshot } from './lib/kpi.js';
+import { starteKpiSnapshot, starteKpiAufraeumen } from './lib/kpi.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';
@@ -268,6 +268,9 @@ app.listen(port, () => {
   // Woechentlicher KPI-Snapshot der Vorwoche, montags ab 06:00 Europe/Berlin
   // (siehe lib/kpi.js). Holt verpasste Wochen beim naechsten Start nach.
   starteKpiSnapshot();
+  // Loescht Einzelereignisse der Reichweitenmessung nach der in der
+  // Datenschutzerklaerung zugesagten Frist (siehe lib/kpi.js).
+  starteKpiAufraeumen();
   /* Die beiden grossen Startlisten gleich bauen, statt den ersten Besucher nach
      einem Deploy warten zu lassen. Der Aufruf entspricht genau dem, den die App
      beim Start macht -- steht dort ein anderer Parameter, waermt das hier ins

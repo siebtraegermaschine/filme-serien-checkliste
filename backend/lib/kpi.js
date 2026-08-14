@@ -421,3 +421,30 @@ export function starteKpiSnapshot() {
   setTimeout(lauf, 60 * 1000);
   setInterval(lauf, PRUEF_INTERVALL_MS);
 }
+
+/* ---- Aufbewahrung der Einzelereignisse ----
+   Die Datenschutzerklaerung (Abschnitt 10) sagt zu, dass Einzelereignisse
+   nach 14 Monaten verschwinden -- lang genug fuer den Vergleich mit dem
+   Vorjahresmonat, danach ohne Nutzen. Die Wochen-Snapshots bleiben: Sie
+   enthalten nur noch Summen und Durchschnitte ohne jede Kennung.
+
+   Taeglich wie die anderen Aufraeumlaeufe, nur zeitversetzt gestartet, damit
+   beim Hochfahren nicht mehrere gleichzeitig auf der Datenbank liegen. */
+export const EREIGNIS_AUFBEWAHRUNG_MONATE = 14;
+
+export function starteKpiAufraeumen() {
+  const EIN_TAG = 24 * 60 * 60 * 1000;
+  const lauf = () => {
+    pool.query(
+      `DELETE FROM analytics_events
+        WHERE ts < now() - ($1 || ' months')::interval`,
+      [String(EREIGNIS_AUFBEWAHRUNG_MONATE)]
+    )
+      .then(({ rowCount }) => {
+        if (rowCount) console.log(`[kpi] ${rowCount} Ereignis(se) nach ${EREIGNIS_AUFBEWAHRUNG_MONATE} Monaten geloescht.`);
+      })
+      .catch((err) => console.error('[kpi] Aufraeumen fehlgeschlagen:', err.message));
+  };
+  setTimeout(lauf, 90_000);
+  setInterval(lauf, EIN_TAG);
+}

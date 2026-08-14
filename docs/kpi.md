@@ -106,6 +106,24 @@ curl -H "x-kpi-token: $KPI_TOKEN" https://movietaste.de/api/kpi/snapshot
 
 Keine Klarnamen, E-Mail-Adressen oder IPs in `analytics_events`; `props`
 enthält nie Freitext aus Nutzereingaben. Keine externen Analytics-SDKs —
-alles bleibt in der eigenen Datenbank. Offen: ein Satz zur anonymen
-Gerätekennung (Cookie `mt_anon`) in der Datenschutzerklärung — bewusst nicht
-in diesem Branch angefasst, Formulierung gehört Christian.
+alles bleibt in der eigenen Datenbank.
+
+Beschrieben in **Abschnitt 4** der Datenschutzerklärung
+([datenschutz.html](../datenschutz.html) / [privacy.html](../privacy.html)),
+Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO. Zwei Zusagen daraus hängen direkt
+am Code — wer sie ändert, muss den Text mitändern:
+
+- **Cookie-Laufzeit sechs Monate** (`MAX_AGE_MS` in `middleware/anonId.js`).
+  Reicht für jede Kennzahl: die weiteste Rückschau ist `d30` (Kohorte plus 30
+  Tage Beobachtung, gut fünf Wochen).
+- **Einzelereignisse werden nach 14 Monaten gelöscht**
+  (`starteKpiAufraeumen()` in `lib/kpi.js`, täglicher Lauf). Die
+  Wochen-Snapshots in `kpi_snapshots` bleiben — sie enthalten nur noch Summen
+  ohne jede Kennung.
+
+Bewusst in Kauf genommen: § 25 TDDDG verlangt für nicht zwingend erforderliche
+Speicherung auf dem Endgerät grundsätzlich eine Einwilligung, und
+Reichweitenmessung fällt nach Auffassung der Aufsichtsbehörden meist nicht
+unter die Ausnahme. Entscheidung vom 14.08.2026: ohne Banner, dafür knappe
+Speicherfristen, klare Beschreibung und Widerspruchsmöglichkeit. Vor einer
+größeren Reichweite anwaltlich prüfen lassen.

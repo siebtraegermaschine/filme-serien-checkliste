@@ -37,7 +37,7 @@
   <li><strong>Profilname:</strong> ein frei gewählter Vorname oder Spitzname, den du bei der Registrierung angibst. Er ist ausschließlich für Personen sichtbar, mit denen du dich selbst verknüpfst (siehe Abschnitt 7).</li>
   <li><strong>Nutzungsdaten:</strong> dein persönlicher „Gesehen"- und Watchlists-Status zu Filmen/Serien, deine Sterne-Bewertungen (1–10) sowie deine Auswahl genutzter Streaminganbieter – jeweils verknüpft mit deinem Account.</li>
   <li><strong>Verknüpfte Profile:</strong> welche anderen Konten du für die Funktion „Zusammen schauen" verknüpft hast (siehe Abschnitt 7).</li>
-  <li><strong>Technische Daten:</strong> ein Session-Cookie (siehe Abschnitt 4), das dich nach dem Login wiedererkennt.</li>
+  <li><strong>Technische Daten:</strong> ein Session-Cookie (siehe Abschnitt 4), das dich nach dem Login wiedererkennt, sowie eine zufällige Gerätekennung für unsere eigene Reichweitenmessung (ebenfalls Abschnitt 4).</li>
   <li><strong>Feedback:</strong> der Text, den du uns über das Feedback-Formular schickst. Er wird gespeichert – bei angemeldeten Personen zusammen mit der E-Mail-Adresse des Kontos, damit wir antworten können. Wer nicht angemeldet ist, schickt den Text ohne Absenderangabe.</li>
 </ul>
 <p>Der Filme-/Serien-Katalog selbst (Titel, Poster, Bewertungen) ist frei ohne Account durchsuchbar und erfordert keine personenbezogenen Daten.</p>
@@ -50,13 +50,43 @@
   <li><strong>Verknüpfte Profile:</strong> Abgleich deiner Titel und Bewertungen mit Personen, die du selbst einlädst bzw. deren Einladung du annimmst – Art. 6 Abs. 1 lit. a DSGVO (Einwilligung durch die Annahme der Einladung), jederzeit widerruflich durch Lösen der Verknüpfung.</li>
   <li><strong>Verbesserung des Dienstes:</strong> Auswertung von Bewertungen in zusammengefasster Form, um Empfehlungen und Katalogpflege zu verbessern – Art. 6 Abs. 1 lit. f DSGVO.</li>
   <li><strong>Anonyme Bewertungsstatistiken</strong> (auch zur Weitergabe an Dritte): Art. 6 Abs. 1 lit. f i. V. m. Art. 5 Abs. 1 lit. b DSGVO – siehe Abschnitt 9.</li>
+  <li><strong>Reichweitenmessung:</strong> zusammengefasste Auswertung der Nutzung (Aufrufe, Wiederkehr, angenommene Einladungen, gemeinsame Abstimmungen), um zu verstehen, ob und wie die App genutzt wird, und sie zu verbessern – Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse). Keine Profilbildung, keine Weitergabe, keine Dienste Dritter – siehe Abschnitt 4.</li>
 </ul>
 
-<h2>4. Cookies</h2>
+<h2>4. Cookies und Reichweitenmessung</h2>
 <p>
   Wir setzen ein technisch notwendiges Session-Cookie (<code>fs.sid</code>) ein, um eingeloggte
   Nutzer:innen zu erkennen. Es ist HTTP-only, wird nicht zu Tracking-/Werbezwecken genutzt und
-  benötigt daher kein Cookie-Consent-Banner (Art. 6 Abs. 1 lit. b/f DSGVO bzw. § 25 Abs. 2 TTDSG).
+  benötigt daher kein Cookie-Consent-Banner (Art. 6 Abs. 1 lit. b/f DSGVO bzw. § 25 Abs. 2 TDDDG,
+  vormals TTDSG).
+</p>
+<p>
+  Für unsere eigene Reichweitenmessung setzen wir außerdem ein Cookie <code>mt_anon</code> mit
+  einer zufällig erzeugten Gerätekennung. Sie ist eine reine Zufallszahl: Sie enthält weder deinen
+  Namen noch deine E-Mail-Adresse, weder deine IP-Adresse noch irgendetwas, das sich aus deinem
+  Konto ableiten ließe. Sie sagt uns nur, dass zwei Aufrufe vom selben Gerät kommen – mehr nicht.
+  Ohne sie ließe sich nicht unterscheiden, ob an einem Tag hundert Menschen die App einmal
+  geöffnet haben oder eine Person hundertmal.
+</p>
+<p>
+  Damit zählen wir ausschließlich zusammengefasst: wie viele Geräte die App täglich, wöchentlich
+  und monatlich öffnen, wie viele nach einer Woche wiederkommen, wie viele Einladungen angenommen
+  werden und wie oft gemeinsam über Titel abgestimmt wird. Zu jedem Ereignis speichern wir nur,
+  <em>was</em> passiert ist, <em>wann</em> es passiert ist und diese Kennung – niemals freien Text
+  aus deinen Eingaben.
+</p>
+<p>
+  Was ausdrücklich <strong>nicht</strong> passiert: Wir bilden keine Werbe- oder Interessenprofile,
+  verfolgen dich nicht über andere Websites hinweg, geben die Kennung an niemanden weiter und
+  binden keine Analysedienste Dritter ein (kein Google Analytics o. Ä.). Die Auswertung läuft
+  ausschließlich auf unserem eigenen Server in Deutschland.
+</p>
+<p>
+  Das Cookie ist HTTP-only und läuft nach <strong>sechs Monaten</strong> ab. Du kannst es jederzeit
+  in den Einstellungen deines Browsers löschen – die App funktioniert danach unverändert weiter,
+  sie zählt dich beim nächsten Öffnen nur als neues Gerät. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f
+  DSGVO: unser berechtigtes Interesse, zu verstehen, ob und wie die App genutzt wird. Du kannst
+  dieser Verarbeitung jederzeit widersprechen (Abschnitt 11).
 </p>
 
 <h2>5. Hosting</h2>
@@ -183,6 +213,13 @@
   Kontodaten und Nutzungsstatus werden gespeichert, solange dein Account besteht. Nach Löschung
   des Accounts (siehe Abschnitt 11) werden sie unverzüglich entfernt, soweit keine gesetzlichen
   Aufbewahrungspflichten entgegenstehen.
+</p>
+<p>
+  Die einzelnen Ereignisse der Reichweitenmessung (Abschnitt 4) löschen wir spätestens nach
+  <strong>14 Monaten</strong> – lang genug für den Vergleich mit dem Vorjahresmonat, danach
+  ohne Nutzen. Die daraus gebildeten Wochen-Zusammenfassungen enthalten nur noch Summen und
+  Durchschnitte ohne jede Kennung; sie sind keine personenbezogenen Daten mehr und bleiben
+  erhalten.
 </p>
 <p>
   Rückmeldungen aus dem Feedback-Formular löschen wir spätestens
