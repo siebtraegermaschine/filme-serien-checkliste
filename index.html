@@ -1686,10 +1686,10 @@
          darueber nichts zu tun; nebeneinander sahen die beiden Knoepfe aus wie
          zwei Spielarten derselben Sache. -->
     <button type="button" id="profileShareBtn" class="profile-add">＋ Personen einladen</button>
-    <!-- Ausgeblendet auf Wunsch (12. August 2026): Funktion bleibt komplett
-         verdrahtet (movieNightEinrichten, backend/routes/movieNight.js) --
-         zum Reaktivieren nur das style-Attribut entfernen. -->
-    <button type="button" id="movieNightBtn" class="profile-add" style="display:none">🍿 Movie Night</button>
+    <!-- Am 12. August 2026 ausgeblendet, am 14. August reaktiviert -- die
+         Beschriftung kommt aus TXT.nachtKnopf (movieNightEinrichten,
+         backend/routes/movieNight.js). -->
+    <button type="button" id="movieNightBtn" class="profile-add">🍿 Movie Night Abstimmung</button>
     <hr class="account-sep">
     <p class="prov-intro" style="margin-bottom:8px">Schaust du mit Kindern? Nutze die FSK-Filter.</p>
     <div class="fsk-row" id="fskRow"></div>
@@ -2206,6 +2206,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' Titel übernommen. Die Seite lädt gleich neu.'; },
     importFehler: function(name){ return '„' + name + '“ hat kein bekanntes Format (Letterboxd-/IMDb-CSV oder Trakt-JSON).'; },
     nachtTitel: 'Movie Night',
+    nachtKnopf: 'Movie Night Abstimmung',
     nachtErklaerung: 'Wähle deine Favoriten. (Ergebnis siehe unten)',
     nachtName: 'Dein Name',
     nachtJa: 'Ja', nachtNein: 'Nein',
@@ -2468,6 +2469,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' titles applied. The page will reload.'; },
     importFehler: function(name){ return '“' + name + '” is not a known format (Letterboxd/IMDb CSV or Trakt JSON).'; },
     nachtTitel: 'Movie Night',
+    nachtKnopf: 'Movie Night Vote',
     nachtErklaerung: 'Pick your favourites. (See the result below)',
     nachtName: 'Your name',
     nachtJa: 'Yes', nachtNein: 'No',
@@ -2730,6 +2732,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' titres appliqués. La page va se recharger.'; },
     importFehler: function(name){ return '«\u202f' + name + '\u202f» n’a pas un format connu (CSV Letterboxd/IMDb ou JSON Trakt).'; },
     nachtTitel: 'Movie Night',
+    nachtKnopf: 'Vote Movie Night',
     nachtErklaerung: 'Choisis tes favoris. (Résultat ci-dessous)',
     nachtName: 'Ton nom',
     nachtJa: 'Oui', nachtNein: 'Non',
@@ -2992,6 +2995,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' títulos aplicados. La página se recargará.'; },
     importFehler: function(name){ return '«' + name + '» no tiene un formato conocido (CSV de Letterboxd/IMDb o JSON de Trakt).'; },
     nachtTitel: 'Movie Night',
+    nachtKnopf: 'Votación Movie Night',
     nachtErklaerung: 'Elige tus favoritos. (Resultado abajo)',
     nachtName: 'Tu nombre',
     nachtJa: 'Sí', nachtNein: 'No',
@@ -3254,6 +3258,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' titoli applicati. La pagina si ricaricherà.'; },
     importFehler: function(name){ return '“' + name + '” non ha un formato conosciuto (CSV Letterboxd/IMDb o JSON Trakt).'; },
     nachtTitel: 'Movie Night',
+    nachtKnopf: 'Votazione Movie Night',
     nachtErklaerung: 'Scegli i tuoi preferiti. (Risultato in basso)',
     nachtName: 'Il tuo nome',
     nachtJa: 'Sì', nachtNein: 'No',
@@ -3516,6 +3521,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' titels toegepast. De pagina wordt opnieuw geladen.'; },
     importFehler: function(name){ return '“' + name + '” heeft geen bekend formaat (Letterboxd/IMDb-CSV of Trakt-JSON).'; },
     nachtTitel: 'Movie Night',
+    nachtKnopf: 'Movie Night-stemming',
     nachtErklaerung: 'Kies je favorieten. (Resultaat hieronder)',
     nachtName: 'Je naam',
     nachtJa: 'Ja', nachtNein: 'Nee',
@@ -3778,6 +3784,7 @@ var UI_TEXTE = {
     importFertig: function(n){ return n + ' títulos aplicados. A página será recarregada.'; },
     importFehler: function(name){ return '“' + name + '” não tem um formato conhecido (CSV do Letterboxd/IMDb ou JSON do Trakt).'; },
     nachtTitel: 'Movie Night',
+    nachtKnopf: 'Votação Movie Night',
     nachtErklaerung: 'Escolha seus favoritos. (Resultado abaixo)',
     nachtName: 'Seu nome',
     nachtJa: 'Sim', nachtNein: 'Não',
@@ -8896,7 +8903,7 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
   }
   var knopf = document.getElementById('movieNightBtn');
   if (knopf) {
-    knopf.textContent = '🍿 ' + TXT.nachtTitel;
+    knopf.textContent = '🍿 ' + TXT.nachtKnopf;
     knopf.onclick = function(){
       if (!CURRENT_USER) { alert(TXT.nurAngemeldet); return; }
       closeProfileModal();

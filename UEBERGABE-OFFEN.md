@@ -208,9 +208,12 @@ wurde wieder entfernt), per Checkbox je Titel, jeder Tipp zählt sofort,
 Zwischenstand alle 7 Sekunden, Kandidaten nach Sternen sortiert, Doppelstimmen
 per Upsert je Teilnehmer-Kennung abgefangen, Stimmabgabe mengenbegrenzt.
 
-**Derzeit ist die Funktion ausgeblendet** (`ed9a240`): `movieNightBtn` steht
-auf `display:none`, Frontend und Backend bleiben komplett verdrahtet. Zum
-Reaktivieren genügt es, das style-Attribut zu entfernen (siehe 3.8).
+**Am 12. August ausgeblendet (`ed9a240`), am 14. August reaktiviert:** Der
+Knopf ist wieder sichtbar und heißt jetzt in allen sieben Sprachen
+„Movie Night Abstimmung" (neuer Schlüssel `TXT.nachtKnopf`; die
+Popup-Überschrift bleibt `nachtTitel` = „Movie Night"). Die
+Loop-Ergänzungen aus `IDEEN-WACHSTUM.md` Vorschlag D (Konto-Abbinder für
+Teilnehmer, Ergebnis als teilbares Bild) stehen weiter aus.
 
 ### 0.0.0.5 „Gemeinsam schauen" und Navigation — Endzustand nach mehreren Anläufen
 
@@ -903,9 +906,8 @@ gefunden und sofort geschlossen:
 Alle fertig gebaut und nur abgeschaltet; Handler, Routen und Übersetzungen
 stehen bereit:
 
-- **Movie Night** (`ed9a240`, siehe 0.0.0.4) — inklusive Backend-Routen und
-  Tabellen. Die Tabellen entstehen beim Deploy mit; es sammelt sich dort
-  nichts an, solange der Knopf unsichtbar ist.
+- ~~Movie Night~~ — **am 14. August reaktiviert** (siehe 0.0.0.4): Knopf
+  sichtbar, Beschriftung „Movie Night Abstimmung" in sieben Sprachen.
 - **„Personen einladen" im Menü rechts oben** (`0077535`, siehe 0.0.0.5) —
   der Referral-Weg mit `?ref=`-Token. Solange er unsichtbar ist, wird
   `users.invited_by_user_id` bei Neuregistrierungen kaum noch gefüllt.
