@@ -7,6 +7,7 @@ import { requireAuth } from '../middleware/requireAuth.js';
 import { WIDERRUFSFRIST_TAGE } from '../lib/kontoAufraeumen.js';
 import { mengenGrenze } from '../middleware/rateLimit.js';
 import { metrikZaehlen } from '../lib/metrik.js';
+import { track } from '../lib/track.js';
 
 const router = createAsyncRouter();
 
@@ -61,10 +62,41 @@ async function werberFinden(token) {
   if (typeof token !== 'string' || !/^[a-f0-9]{64}$/.test(token)) return null;
   const hash = crypto.createHash('sha256').update(token).digest('hex');
   const { rows } = await pool.query(
-    'SELECT inviter_id FROM user_link_invites WHERE token_hash = $1',
+    'SELECT inviter_id, kind FROM user_link_invites WHERE token_hash = $1',
     [hash]
   );
-  return rows[0] ? rows[0].inviter_id : null;
+  if (!rows[0]) return null;
+  // kind und Hash zusaetzlich zum Werber: braucht das KPI-Ereignis
+  // user_signed_up (source und invite_id, siehe docs/kpi.md).
+  return { inviterId: rows[0].inviter_id, tokenHash: hash, kind: rows[0].kind };
+}
+
+/* KPI-Ereignis user_signed_up (docs/kpi.md). was_guest: hat dieses Geraet
+   zuvor als Gast an einer Einladung teilgenommen (invite_accepted mit
+   guest=true, gleiche anon_id) -- so laesst sich ein spaeteres Konto demselben
+   Einladungspfad zuordnen. Wie track() selbst: darf nie die Registrierung
+   stoeren, deshalb eigener try/catch und Aufruf ohne await. */
+async function signupTracken(userId, anonId, werber) {
+  try {
+    const { rows } = await pool.query(
+      `SELECT 1 FROM analytics_events
+        WHERE name = 'invite_accepted' AND anon_id = $1
+          AND (props->>'guest')::boolean
+        LIMIT 1`,
+      [anonId]
+    );
+    await track('user_signed_up', {
+      userId,
+      anonId,
+      props: {
+        source: werber ? werber.kind : 'organic',
+        invite_id: werber ? werber.tokenHash : null,
+        was_guest: rows.length > 0,
+      },
+    });
+  } catch (err) {
+    console.error('signupTracken fehlgeschlagen:', err.message);
+  }
 }
 
 router.post('/register', GRENZE_REGISTER, async (req, res) => {
@@ -89,13 +121,15 @@ router.post('/register', GRENZE_REGISTER, async (req, res) => {
     const { rows } = await pool.query(
       `INSERT INTO users (email, password_hash, display_name, invited_by_user_id) VALUES ($1, $2, $3, $4)
        RETURNING id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung`,
-      [normalizedEmail, passwordHash, name, werber]
+      [normalizedEmail, passwordHash, name, werber ? werber.inviterId : null]
     );
     await sessionErneuern(req);
     req.session.userId = rows[0].id;
     // Anonymer Trichter-Zaehler (siehe lib/metrik.js) -- bewusst ohne await:
     // Das Zaehlen darf die Registrierung weder verzoegern noch scheitern lassen.
     metrikZaehlen('konto');
+    // KPI-Ereignis user_signed_up, ebenfalls ohne await.
+    signupTracken(rows[0].id, req.anonId, werber);
     res.status(201).json(publicUser(rows[0]));
   } catch (err) {
     if (err.code === '23505') {
