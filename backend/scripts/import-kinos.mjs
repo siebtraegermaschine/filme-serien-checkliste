@@ -107,7 +107,11 @@ const RECHTECKE = {
    durch, waehrend 0,5x0,5 Grad im selben Zeitraum mit 504 abbrach. Weniger,
    groessere Abfragen sind also sowohl freundlicher als auch verlaesslicher. */
 const KACHEL_GRAD = 4;
-const PAUSE_MS = 4000;      // Ruecksicht auf einen Gemeinschaftsdienst
+// Ruecksicht auf einen Gemeinschaftsdienst. Ueber OVERPASS_PAUSE_MS laesst
+// sich die Gangart je Lauf drosseln: Nach der Dauerlast der Erstimporte
+// (12.-14. August) kappte Overpass unsere Laeufe wiederholt -- die grossen
+// Laender brauchen Nacht-Laeufe mit z.B. 20000-30000 ms je Kachel.
+const PAUSE_MS = Math.max(1000, parseInt(process.env.OVERPASS_PAUSE_MS, 10) || 4000);
 
 const schlafen = (ms) => new Promise((r) => setTimeout(r, ms));
 
