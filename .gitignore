@@ -2,3 +2,4 @@ node_modules/
 backend/.env
 .DS_Store
 rated-titles-last-run.json
+.claude/
