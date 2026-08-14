@@ -16,7 +16,10 @@
     "wochenendmail": "node scripts/wochenendmail.mjs",
     "feedback": "node scripts/feedback-lesen.mjs",
     "import-plz": "node scripts/import-plz.mjs",
-    "import-kinos": "node scripts/import-kinos.mjs"
+    "import-kinos": "node scripts/import-kinos.mjs",
+    "test": "node --test test/",
+    "kpi:verify": "node scripts/kpi-verify.mjs",
+    "kpi:backfill": "node scripts/kpi-backfill.mjs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
