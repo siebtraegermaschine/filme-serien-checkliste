@@ -90,6 +90,35 @@ Session-Auth, damit curl und Cockpit direkt zugreifen können. CORS
 curl -H "x-kpi-token: $KPI_TOKEN" https://movietaste.de/api/kpi/snapshot
 ```
 
+## Ansehen
+
+- **Handy/Browser:** [movietaste.de/kpi.html](../kpi.html) — fragt den Token
+  einmal ab, behält ihn im `localStorage` des Geräts und blättert per Pfeil
+  durch die Wochen. Die Seite trägt `noindex`, und robots.txt sperrt ohnehin
+  alles außer der Startseite; ohne Token ist sie wertlos, die Sperre sitzt im
+  Backend.
+- **Terminal:** `kpi` (persönliches Skript, nicht im Repo — liegt unter
+  `~/.local/bin/kpi`, Token in `~/.movietaste-kpi-token`). `kpi VON BIS` für
+  eine bestimmte Woche, `kpi --json` für die Rohdaten.
+
+### Was `KpiCockpit.jsx` zusätzlich erwartet
+
+Die mitgelieferte Cockpit-Datei ist **noch nicht lauffähig**. Sie ist React
+(die App hat keinen Build-Schritt) und erwartet laut ihrem Kopfkommentar vier
+Endpunkte mehr, dazu **Session-Auth statt Token** („Der KPI_TOKEN gehört
+ausschließlich in Cron und curl, niemals in diesen Client"):
+
+| Endpunkt | Zweck | Status |
+|---|---|---|
+| `GET /api/kpi/snapshot` | Wochenwerte | **vorhanden** |
+| `GET /api/kpi/history?weeks=26` | Verlauf `[{t, north, mau}]` für die Kurven | fehlt |
+| `GET/PUT /api/kpi/targets` | Zielwerte je Kennzahl (Ampelfarben) | fehlt |
+| `GET/PUT /api/kpi/plan` | Planungsrechner (targetMau, months, retention, k) | fehlt |
+
+Für die Session-Auth bräuchte es außerdem einen Admin-Begriff — den gibt es
+im Datenmodell nicht (keine Rolle, kein Flag an `users`). Solange das offen
+ist, ist `kpi.html` der Weg; die Werte sind dieselben.
+
 ## Betrieb
 
 - `npm run kpi:verify` — Snapshot der letzten Woche plus Begründung für jedes
