@@ -22,6 +22,10 @@ import kinosRouter from './routes/kinos.js';
 import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 import movieNightRouter from './routes/movieNight.js';
 import metrikRouter from './routes/metrik.js';
+import eventsRouter from './routes/events.js';
+import kpiRouter from './routes/kpi.js';
+import { anonId } from './middleware/anonId.js';
+import { starteKpiSnapshot } from './lib/kpi.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';
@@ -84,6 +88,10 @@ app.use(
   })
 );
 
+// Anonyme Geraetekennung (Cookie mt_anon) fuer die KPI-Erfassung -- vor den
+// Routen, damit jede davon req.anonId hat (siehe middleware/anonId.js).
+app.use('/api', anonId);
+
 app.use('/api/auth', authRouter);
 app.use('/api/titles', titlesRouter);
 app.use('/api/progress', progressRouter);
@@ -99,6 +107,8 @@ app.use('/api/kinos', kinosRouter);
 app.use('/api/share', shareRouter);
 app.use('/api/movie-night', movieNightRouter);
 app.use('/api/metrik', metrikRouter);
+app.use('/api/events', eventsRouter);
+app.use('/api/kpi', kpiRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
 const frontendRoot = path.join(__dirname, '..');
@@ -255,6 +265,9 @@ app.listen(port, () => {
   // automatische Versand wartet auf WOCHENEND_MAIL_AKTIV=1 (Entscheidung
   // von Christian steht aus; bis dahin nur npm run wochenendmail von Hand).
   starteWochenendmail();
+  // Woechentlicher KPI-Snapshot der Vorwoche, montags ab 06:00 Europe/Berlin
+  // (siehe lib/kpi.js). Holt verpasste Wochen beim naechsten Start nach.
+  starteKpiSnapshot();
   /* Die beiden grossen Startlisten gleich bauen, statt den ersten Besucher nach
      einem Deploy warten zu lassen. Der Aufruf entspricht genau dem, den die App
      beim Start macht -- steht dort ein anderer Parameter, waermt das hier ins
