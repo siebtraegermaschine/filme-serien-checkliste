@@ -1,6 +1,8 @@
+import crypto from 'node:crypto';
 import qrcode from 'qrcode-generator';
 import { pool } from '../db/pool.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
+import { requireAuth } from '../middleware/requireAuth.js';
 import { mengenGrenze } from '../middleware/rateLimit.js';
 import { sprachWahl, regionWahl, sprachFeld, freigabeFuer } from '../lib/i18n.js';
 
@@ -139,6 +141,59 @@ router.get('/qr', GRENZE_QR, async (req, res) => {
   }
   res.set('Cache-Control', 'public, max-age=86400');
   res.json({ size: n, modules: module });
+});
+
+/* ---- "Diese Titel teilen": Momentaufnahmen ----
+   Eine feste Liste von Titel-Kennungen in Anzeige-Reihenfolge, geteilt per
+   Token-Link (?titel=TOKEN). Ohne Zeitverfall -- der Link stirbt nur mit dem
+   Konto (CASCADE, siehe schema.sql). Erstellen nur angemeldet; der Deckel je
+   Konto verhindert, dass jemand die Tabelle als Datenablage missbraucht. Die
+   Kennungen werden bewusst nicht gegen `titles` geprueft: Der Client schickt
+   sie aus seinem Katalog, und eine unbekannte Kennung faellt beim Anzeigen
+   schlicht weg. */
+const GRENZE_MOMENT_NEU = mengenGrenze({ name: 'share-moment-neu', anzahl: 30, minuten: 1 });
+const GRENZE_MOMENT = mengenGrenze({ name: 'share-moment', anzahl: 120, minuten: 1 });
+const MOMENT_MAX_TITEL = 500;      // je Momentaufnahme (die aktuelle Liste, gekappt)
+const MOMENT_MAX_JE_KONTO = 500;
+
+router.post('/titel-liste', GRENZE_MOMENT_NEU, requireAuth, async (req, res) => {
+  const roh = Array.isArray(req.body && req.body.ids) ? req.body.ids : [];
+  const ids = [];
+  const gesehen = new Set();
+  for (const wert of roh) {
+    const id = Number(wert);
+    if (!Number.isInteger(id) || id <= 0 || gesehen.has(id)) continue;
+    gesehen.add(id);
+    ids.push(id);
+    if (ids.length >= MOMENT_MAX_TITEL) break;
+  }
+  if (!ids.length) return res.status(400).json({ error: 'keine_titel' });
+  const { rows: anzahl } = await pool.query(
+    `SELECT COUNT(*)::int AS n FROM titel_momentaufnahmen WHERE user_id = $1`,
+    [req.session.userId]
+  );
+  if (anzahl[0].n >= MOMENT_MAX_JE_KONTO) {
+    return res.status(409).json({ error: 'zu_viele_momentaufnahmen' });
+  }
+  const token = crypto.randomBytes(16).toString('hex');
+  await pool.query(
+    `INSERT INTO titel_momentaufnahmen (token, user_id, title_ids) VALUES ($1, $2, $3)`,
+    [token, req.session.userId, ids]
+  );
+  res.status(201).json({ token });
+});
+
+router.get('/titel-liste/:token', GRENZE_MOMENT, async (req, res) => {
+  const token = String(req.params.token || '');
+  if (!/^[a-f0-9]{32}$/.test(token)) return res.status(404).json({ error: 'unbekannt' });
+  const { rows } = await pool.query(
+    `SELECT m.title_ids, u.display_name FROM titel_momentaufnahmen m
+       JOIN users u ON u.id = m.user_id
+      WHERE m.token = $1`,
+    [token]
+  );
+  if (!rows.length) return res.status(404).json({ error: 'unbekannt' });
+  res.json({ ids: rows[0].title_ids.map(Number), von: rows[0].display_name || null });
 });
 
 export { ladeTitel, ergaenzeBackdrop };

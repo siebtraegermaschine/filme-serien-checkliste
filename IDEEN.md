@@ -20,10 +20,15 @@
   Treffer gekennzeichnet ANS ENDE der Liste mischen („aus der
   Beschreibung"), damit sie die präzisen Titeltreffer nicht verwässern.
   Aufwand ~ein Abend. Teilweise decken das heute die Schlagwörter ab.
-- **„Diese Titel teilen" (Momentaufnahme)**: Ansicht-Links übertragen
-  Einstellungen, keine Inhalte — eine vierte Teilen-Option könnte die
-  konkret angezeigten Titel per Kennungen mitgeben (unabhängig von den
-  Markierungen des Empfängers). Vorgeschlagen, nicht entschieden.
+- ~~„Diese Titel teilen" (Momentaufnahme)~~ — **umgesetzt am 14. August 2026**
+  und ERSETZT im Teilen-Blatt den Ansicht-Link (Entscheidung Christian: das
+  „Empfänger sieht seine eigenen Markierungen"-Problem wog schwerer als die
+  Kappung langer Listen). Eingefroren wird die komplette aktuelle Liste bis
+  500 Titel; ohne Zeitverfall, Link stirbt nur mit dem Konto (CASCADE), kein
+  Widerruf (Widerrufsliste später zusammen mit „Einladungen zurückziehen"
+  nachrüstbar), nur angemeldet, höchstens 500 Momentaufnahmen je Konto. Auf
+  der Kino-Seite teilt der Knopf weiter den Ansicht-Link. Alte
+  `?ansicht=`-Links bleiben lesbar.
 
 - **Eigene Titel verschwinden bei Community-Sortierung** (UEBERGABE-OFFEN.md
   3.4, gemessen: 0 von 25 sichtbar). Christian am 12. August: ignorieren.
@@ -80,6 +85,21 @@
   ohne Kennungen, IPs oder Zeitstempel unterhalb des Tages. Nach eigener
   Einschätzung keine personenbezogene Verarbeitung — bei der Anwaltsprüfung
   bestätigen lassen und ggf. einen Satz ergänzen.
+- **Geteilte Momentaufnahmen** (14. August 2026 gebaut, „Diese Titel
+  teilen"): Wer teilt, veröffentlicht eine feste Titelliste samt seinem
+  Anzeigenamen unter einem zufälligen Token-Link — abrufbar für jeden, der
+  den Link kennt, OHNE Zeitverfall und (vorerst) ohne Widerruf; gelöscht
+  wird mit dem Konto. Für die Datenschutzerklärung: Zweck, Empfängerkreis
+  („wer den Link hat"), Speicherdauer („bis zur Kontolöschung") und der
+  Umstand, dass die Titelauswahl Rückschlüsse auf Vorlieben zulässt, gehören
+  benannt; prüfen lassen, ob ein Löschweg auf Zuruf (Support-Mail) als
+  Widerrufsersatz reicht.
+- **Wochenend-Mail „Drei für dein Wochenende"** (14. August 2026 gebaut,
+  Versand noch deaktiviert): erweitert die Benachrichtigungs-Mails um einen
+  wöchentlichen Anlass inkl. eines Empfehlungs-Vorschlags aus den
+  Genre-Daten der markierten Titel. Beim selben Opt-in mitgeprüft werden —
+  ob EIN Opt-in für beide Mail-Arten trägt oder es getrennte braucht, ist
+  ausdrücklich Anwaltsfrage.
 
 ## Bewusst NICHT verfolgt
 

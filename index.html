@@ -585,6 +585,11 @@
   .disc-sub { display:flex; gap:8px; justify-content:center; margin:4px 0 16px; }
   .disc-hint { text-align:center; color:var(--text-dim); font-size:13px; margin:0 auto 14px; max-width:620px; line-height:1.5; }
   .load-more-btn { display:block; margin:18px auto 6px; padding:11px 26px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--text-dim); transition:all .15s; }
+  /* Kopfzeile einer geteilten Momentaufnahme ("Diese Titel teilen"). */
+  .moment-bar { display:flex; align-items:center; justify-content:space-between; gap:8px;
+    margin:0 0 10px; padding:9px 12px; border:1px solid var(--border); border-radius:10px;
+    background:var(--card); color:var(--text-dim); font-size:13px; }
+  .moment-bar button { background:none; border:none; color:var(--text-dim); font-size:15px; cursor:pointer; padding:2px 6px; }
   @media (hover: hover) { .load-more-btn:hover { border-color:var(--accent); color:var(--accent); } }
   /* Im Kino folgt direkt unter dem Knopf schon die naechste Ueberschrift
      ("In Kürze im Kino", "Bald im Kino") -- die 6px von oben liessen den Knopf
@@ -1408,7 +1413,7 @@
 <div id="teilenSheet" class="teilen-sheet" style="display:none">
   <!-- Titel teilen zuerst (Wunsch vom 13. August) -- der haeufigste Fall. -->
   <button type="button" id="teilenTitelBtn">Einen Titel teilen</button>
-  <button type="button" id="teilenAnsichtBtn">Aktuelle Ansicht teilen</button>
+  <button type="button" id="teilenAnsichtBtn">Diese Titel teilen</button>
   <button type="button" id="teilenProfilBtn">Gesamte Watchlist teilen</button>
 </div>
 
@@ -2185,6 +2190,13 @@ var UI_TEXTE = {
     teilenProfil: 'Gesamte Watchlist teilen',
     teilenAnsichtTitel: 'Ansicht teilen',
     teilenAnsichtText: 'Schau mal — meine aktuelle Ansicht bei MovieMatch:',
+    teilenMoment: 'Diese Titel teilen',
+    teilenMomentText: 'Schau mal — diese Titel bei MovieMatch:',
+    momentVon: function(n, name){ return name ? n + ' Titel, geteilt von ' + name : n + ' geteilte Titel'; },
+    momentKeineTitel: 'Keine teilbaren Titel in dieser Liste.',
+    momentFehler: 'Teilen hat nicht geklappt. Bitte später erneut versuchen.',
+    momentWeg: 'Diese geteilte Liste gibt es nicht mehr.',
+    momentSchliessen: 'Geteilte Liste schließen',
     sucheKombinieren: 'Weitere Suche hinzufügen',
     sucheEntfernen: 'Diese Suche entfernen',
     benachrichtigungKnopf: function(an){ return 'E-Mail bei neuen Watchlist-Treffern: ' + (an ? 'An' : 'Aus'); },
@@ -2450,6 +2462,13 @@ var UI_TEXTE = {
     teilenProfil: 'Share entire watchlist',
     teilenAnsichtTitel: 'Share view',
     teilenAnsichtText: 'Have a look — my current view on MovieMatch:',
+    teilenMoment: 'Share these titles',
+    teilenMomentText: 'Have a look — these titles on MovieMatch:',
+    momentVon: function(n, name){ return name ? n + ' titles shared by ' + name : n + ' shared titles'; },
+    momentKeineTitel: 'No shareable titles in this list.',
+    momentFehler: 'Sharing failed. Please try again later.',
+    momentWeg: 'This shared list no longer exists.',
+    momentSchliessen: 'Close shared list',
     sucheKombinieren: 'Add another search',
     sucheEntfernen: 'Remove this search',
     benachrichtigungKnopf: function(an){ return 'Email for new watchlist matches: ' + (an ? 'On' : 'Off'); },
@@ -2715,6 +2734,13 @@ var UI_TEXTE = {
     teilenProfil: 'Partager toute la watchlist',
     teilenAnsichtTitel: 'Partager la vue',
     teilenAnsichtText: 'Regarde — ma vue actuelle sur MovieMatch :',
+    teilenMoment: 'Partager ces titres',
+    teilenMomentText: 'Regarde — ces titres sur MovieMatch :',
+    momentVon: function(n, name){ return name ? n + ' titres partagés par ' + name : n + ' titres partagés'; },
+    momentKeineTitel: 'Aucun titre partageable dans cette liste.',
+    momentFehler: 'Le partage a échoué. Réessaie plus tard.',
+    momentWeg: 'Cette liste partagée n’existe plus.',
+    momentSchliessen: 'Fermer la liste partagée',
     sucheKombinieren: 'Ajouter une autre recherche',
     sucheEntfernen: 'Retirer cette recherche',
     benachrichtigungKnopf: function(an){ return 'E-mail pour les nouveautés de ta watchlist\u202f: ' + (an ? 'activé' : 'désactivé'); },
@@ -2980,6 +3006,13 @@ var UI_TEXTE = {
     teilenProfil: 'Compartir toda la watchlist',
     teilenAnsichtTitel: 'Compartir vista',
     teilenAnsichtText: 'Mira — mi vista actual en MovieMatch:',
+    teilenMoment: 'Compartir estos títulos',
+    teilenMomentText: 'Mira — estos títulos en MovieMatch:',
+    momentVon: function(n, name){ return name ? n + ' títulos compartidos por ' + name : n + ' títulos compartidos'; },
+    momentKeineTitel: 'No hay títulos para compartir en esta lista.',
+    momentFehler: 'No se pudo compartir. Inténtalo más tarde.',
+    momentWeg: 'Esta lista compartida ya no existe.',
+    momentSchliessen: 'Cerrar lista compartida',
     sucheKombinieren: 'Añadir otra búsqueda',
     sucheEntfernen: 'Quitar esta búsqueda',
     benachrichtigungKnopf: function(an){ return 'Correo con novedades de tu watchlist: ' + (an ? 'activado' : 'desactivado'); },
@@ -3245,6 +3278,13 @@ var UI_TEXTE = {
     teilenProfil: 'Condividi l’intera watchlist',
     teilenAnsichtTitel: 'Condividi vista',
     teilenAnsichtText: 'Guarda — la mia vista attuale su MovieMatch:',
+    teilenMoment: 'Condividi questi titoli',
+    teilenMomentText: 'Guarda — questi titoli su MovieMatch:',
+    momentVon: function(n, name){ return name ? n + ' titoli condivisi da ' + name : n + ' titoli condivisi'; },
+    momentKeineTitel: 'Nessun titolo condivisibile in questa lista.',
+    momentFehler: 'Condivisione non riuscita. Riprova più tardi.',
+    momentWeg: 'Questa lista condivisa non esiste più.',
+    momentSchliessen: 'Chiudi lista condivisa',
     sucheKombinieren: 'Aggiungi un’altra ricerca',
     sucheEntfernen: 'Rimuovi questa ricerca',
     benachrichtigungKnopf: function(an){ return 'E-mail per le novità della tua watchlist: ' + (an ? 'attiva' : 'disattivata'); },
@@ -3510,6 +3550,13 @@ var UI_TEXTE = {
     teilenProfil: 'Volledige watchlist delen',
     teilenAnsichtTitel: 'Weergave delen',
     teilenAnsichtText: 'Kijk — mijn huidige weergave op MovieMatch:',
+    teilenMoment: 'Deze titels delen',
+    teilenMomentText: 'Kijk — deze titels op MovieMatch:',
+    momentVon: function(n, name){ return name ? n + ' titels gedeeld door ' + name : n + ' gedeelde titels'; },
+    momentKeineTitel: 'Geen deelbare titels in deze lijst.',
+    momentFehler: 'Delen is niet gelukt. Probeer het later opnieuw.',
+    momentWeg: 'Deze gedeelde lijst bestaat niet meer.',
+    momentSchliessen: 'Gedeelde lijst sluiten',
     sucheKombinieren: 'Nog een zoekopdracht toevoegen',
     sucheEntfernen: 'Deze zoekopdracht verwijderen',
     benachrichtigungKnopf: function(an){ return 'E-mail bij nieuwe watchlist-treffers: ' + (an ? 'aan' : 'uit'); },
@@ -3775,6 +3822,13 @@ var UI_TEXTE = {
     teilenProfil: 'Compartilhar toda a watchlist',
     teilenAnsichtTitel: 'Compartilhar visão',
     teilenAnsichtText: 'Olha — minha visão atual no MovieMatch:',
+    teilenMoment: 'Compartilhar estes títulos',
+    teilenMomentText: 'Olha — estes títulos no MovieMatch:',
+    momentVon: function(n, name){ return name ? n + ' títulos compartilhados por ' + name : n + ' títulos compartilhados'; },
+    momentKeineTitel: 'Nenhum título compartilhável nesta lista.',
+    momentFehler: 'Não foi possível compartilhar. Tente novamente mais tarde.',
+    momentWeg: 'Esta lista compartilhada não existe mais.',
+    momentSchliessen: 'Fechar lista compartilhada',
     sucheKombinieren: 'Adicionar outra busca',
     sucheEntfernen: 'Remover esta busca',
     benachrichtigungKnopf: function(an){ return 'E-mail para novos matches na watchlist: ' + (an ? 'Ativado' : 'Desativado'); },
@@ -6617,6 +6671,9 @@ function render() {
   list.classList.add('main-list');
   list.innerHTML = '';
   updateSortMenuActive();
+  // Geteilte Momentaufnahme (?titel=...): feste Liste in fester Reihenfolge,
+  // Filter und Sortierung bleiben aussen vor (siehe renderMoment).
+  if (MOMENT) { renderMoment(profile); return; }
   // Der Suchbegriff muss VOR dem Kuerzen greifen, sonst blieben Treffer jenseits
   // von titelLimit unsichtbar. Steht nichts im Feld, gibt es auch nichts zu
   // filtern -- dann bleibt q leer und sammleEintraege spart sich die Arbeit.
@@ -7022,6 +7079,9 @@ function aktiveTypen(){
   return t;
 }
 function sucheZustandAnwenden(){
+  // Tippen in der Suche verlaesst eine geteilte Momentaufnahme -- gesucht wird
+  // im ganzen Katalog, nicht in der eingefrorenen Liste.
+  momentVerlassen();
   var jetzt = sucheAktiv();
   if (jetzt && !sucheZustandVorher) {
     sucheZustandVorher = { wl: watchlistFilterOn, seen: seenFilterOn,
@@ -7123,6 +7183,9 @@ function listenAnsichtHerstellen(){
   var sw = document.querySelector('.sort-wrap'); if (sw) sw.style.display = 'flex';
 }
 function setTab(t) {
+  // Ein Klick auf die Typ-Knoepfe verlaesst eine geteilte Momentaufnahme --
+  // sonst saehen die Knoepfe tot aus (renderMoment ignoriert die Filter).
+  momentVerlassen();
   var warKino = cinemaMode;
   listenAnsichtHerstellen();
   if (warKino) {
@@ -7159,6 +7222,8 @@ const btns = { open: document.getElementById('fOpen'), done: document.getElement
 // letzten aktiven ins Leere, und wer von "nur Watchlist" zu "nur Gesehen"
 // wollte, musste erst Gesehen AN- und dann Watchlist ABschalten.
 function toggleStatus(feld){
+  // Wie bei setTab: Statusklicks verlassen eine geteilte Momentaufnahme.
+  momentVerlassen();
   // In einer fremden Liste gibt es kein "Neue entdecken" -- die Person hat
   // nichts Unmarkiertes. Watchlist und Gesehen dagegen verhalten sich hier
   // genau wie in den eigenen Listen, deshalb kein Sonderfall mehr.
@@ -8565,6 +8630,7 @@ function closeCinemaPage(){
 // setzt zusaetzlich die Suche zurueck -- das macht ein Tab-Klick nicht.
 function goHome(){
   ANSICHT_PERSON = null;
+  momentVerlassen();
   closeCinemaPage();
   pfadAufStartseite();
   suchChipsLeeren();
@@ -10120,6 +10186,99 @@ function ansichtAusLink(){
   else { updateFilterRowUI(); renderCurrentTab(); }
   return true;
 }
+/* ---- "Diese Titel teilen": Momentaufnahmen ----
+   Ersetzt im Teilen-Blatt den Ansicht-Link (Entscheidung vom 14. August):
+   Der Ansicht-Link uebertrug nur EINSTELLUNGEN -- der Empfaenger sah seine
+   eigenen Markierungen durch fremde Filter, also meist etwas anderes (oder
+   nichts). Die Momentaufnahme friert stattdessen die KONKRETEN Titel der
+   aktuellen Liste ein (komplette Liste, gekappt bei 500 -- nicht nur die
+   sichtbaren 25) und teilt sie per Token-Link (?titel=...). Ohne Zeitverfall;
+   der Link stirbt nur mit dem Konto. Erstellen nur angemeldet (siehe
+   routes/share.js). Alte ?ansicht=-Links bleiben lesbar (ansichtAusLink). */
+var MOMENT = null;             // { ids: [...], von: Name } -- aktive geteilte Liste
+var MOMENT_MAX_TITEL = 500;    // muss zu MOMENT_MAX_TITEL in routes/share.js passen
+function momentVerlassen(){ MOMENT = null; }
+// Die komplette aktuelle Liste in Anzeige-Reihenfolge. Nur Titel mit realId:
+// Kino-Eintraege ohne titles-Zeile lassen sich nicht einfrieren.
+function momentaufnahmeIds(){
+  var q = (discoverFilterOn || sucheAktiv()) ? aktiveSuchbegriffe() : '';
+  var sortiert = besteNachSortwert(sammleEintraege(q), effectiveSort(), aktuellesProfil(), MOMENT_MAX_TITEL);
+  var ids = [];
+  for (var i = 0; i < sortiert.length; i++) {
+    var p = sortiert[i].pool;
+    if (p && p.realId != null) ids.push(p.realId);
+  }
+  return ids;
+}
+async function momentTeilen(){
+  var ids = momentaufnahmeIds();
+  if (!ids.length) { alert(TXT.momentKeineTitel); return; }
+  var url;
+  try {
+    var d = await apiRequest('POST', '/api/share/titel-liste', { ids: ids });
+    url = location.origin + '/?titel=' + d.token;
+  } catch (e) { alert(grenzeMeldung(e) || TXT.momentFehler); return; }
+  var text = TXT.teilenMomentText;
+  if (navigator.share) {
+    navigator.share({ title: 'MovieMatch', text: text, url: url })
+      .catch(function(err){
+        if (!err || err.name !== 'AbortError') zeigeEinladung(TXT.teilenMoment, text, url, TXT.linkLaeuftNichtAb);
+      });
+  } else {
+    zeigeEinladung(TXT.teilenMoment, text, url, TXT.linkLaeuftNichtAb);
+  }
+}
+async function momentAusLink(token){
+  try {
+    var d = await apiRequest('GET', '/api/share/titel-liste/' + token);
+    MOMENT = { ids: d.ids || [], von: d.von || null };
+  } catch (e) { momentVerlassen(); alert(TXT.momentWeg); return; }
+  einstiegSetzen();
+  renderCurrentTab();
+}
+function momentSchliessen(){
+  if (!MOMENT) return;
+  momentVerlassen();
+  listenAnsichtHerstellen();
+  alleFilterAn();
+  renderCurrentTab();
+}
+// Zeichnet die Momentaufnahme: feste Reihenfolge, keine Filter, eigene
+// Kopfzeile. Die Markierungen (Watchlist/Gesehen) an den Zeilen sind die des
+// EMPFAENGERS -- genau der Witz gegenueber dem alten Ansicht-Link.
+function renderMoment(profile){
+  var nachId = {};
+  for (var i = 0; i < POOL.length; i++) if (POOL[i].realId != null) nachId[POOL[i].realId] = POOL[i];
+  var items = [];
+  for (var j = 0; j < MOMENT.ids.length; j++) {
+    var p = nachId[MOMENT.ids[j]];
+    if (p) items.push(p);
+  }
+  var bar = document.createElement('div');
+  bar.className = 'moment-bar';
+  var text = document.createElement('span');
+  text.textContent = TXT.momentVon(items.length, MOMENT.von);
+  var x = document.createElement('button');
+  x.type = 'button';
+  x.textContent = '✕';
+  x.setAttribute('aria-label', TXT.momentSchliessen);
+  x.onclick = momentSchliessen;
+  bar.appendChild(text); bar.appendChild(x);
+  list.appendChild(bar);
+  var sichtbar = items.slice(0, titelLimit);
+  sichtbar.forEach(function(p){ list.appendChild(poolItemLi(p, punkteFuer(p, profile))); });
+  if (items.length > sichtbar.length) {
+    var moreBtn = document.createElement('button');
+    moreBtn.type = 'button';
+    moreBtn.className = 'load-more-btn';
+    moreBtn.textContent = TXT.mehrLaden;
+    moreBtn.onclick = function(){
+      nachladenOhneSprung(function(){ titelLimit += NACHLADE_SCHRITT; renderCurrentTab(); });
+    };
+    list.appendChild(moreBtn);
+  }
+}
+
 (function teilenFabEinrichten(){
   var fab = document.getElementById('teilenFab');
   var sheet = document.getElementById('teilenSheet');
@@ -10128,21 +10287,23 @@ function ansichtAusLink(){
   var ansichtBtn = document.getElementById('teilenAnsichtBtn');
   var titelBtn = document.getElementById('teilenTitelBtn');
   var profilBtn = document.getElementById('teilenProfilBtn');
-  ansichtBtn.textContent = TXT.teilenAnsicht;
   titelBtn.textContent = TXT.teilenTitel;
   profilBtn.textContent = TXT.teilenProfil;
   function schliessen(){ sheet.style.display = 'none'; }
   fab.onclick = function(e){
     e.stopPropagation();
+    // Auf der Kino-Seite bleibt der Ansicht-Link (das Programm ist fuer alle
+    // in der Region gleich, und viele Kino-Eintraege haben keine titles-Zeile,
+    // die sich einfrieren liesse) -- in der Titelliste teilt der Knopf die
+    // Momentaufnahme. Die Beschriftung sagt jeweils, was passiert.
+    ansichtBtn.textContent = cinemaMode ? TXT.teilenAnsicht : TXT.teilenMoment;
     sheet.style.display = sheet.style.display === 'none' ? 'flex' : 'none';
   };
   sheet.addEventListener('click', function(e){ e.stopPropagation(); });
   document.addEventListener('click', schliessen);
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') schliessen(); });
-  function eigeneAnsicht(){ return !personenAnsicht() && !matchAktiv(); }
-  ansichtBtn.onclick = function(){
-    schliessen();
-    if (!eigeneAnsicht()) { infoZeigen('teilenNurEigene'); return; }
+  function eigeneAnsicht(){ return !personenAnsicht() && !matchAktiv() && !MOMENT; }
+  function ansichtTeilen(){
     var url = ansichtLink();
     var text = TXT.teilenAnsichtText;
     if (navigator.share) {
@@ -10153,6 +10314,13 @@ function ansichtAusLink(){
     } else {
       zeigeEinladung(TXT.teilenAnsichtTitel, text, url, TXT.linkLaeuftNichtAb);
     }
+  }
+  ansichtBtn.onclick = function(){
+    schliessen();
+    if (!eigeneAnsicht()) { infoZeigen('teilenNurEigene'); return; }
+    if (cinemaMode) { ansichtTeilen(); return; }
+    if (!CURRENT_USER) { requireLogin(momentTeilen); return; }
+    momentTeilen();
   };
   titelBtn.onclick = function(){ schliessen(); infoZeigen('teilenTitelHinweis'); };
   profilBtn.onclick = function(){
@@ -11141,6 +11309,14 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
   // Geteilter Ansicht-Link (?ansicht=...): Filter, Sortierung und Suche des
   // Absenders herstellen -- gezeigt werden die EIGENEN Daten des Empfaengers.
   var ansichtLinkDa = ansichtAusLink();
+  // Geteilte Momentaufnahme (?titel=TOKEN): die eingefrorene Titelliste des
+  // Absenders zeigen. Erst nach der Startladung -- vorher ist der Katalog
+  // leer und die Liste saehe kurz falsch aus.
+  var momentToken = (location.search.match(/[?&]titel=([a-f0-9]{32})/) || [])[1] || null;
+  if (momentToken) {
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+    STARTLADUNG.then(function(){ momentAusLink(momentToken); }).catch(function(){});
+  }
   if (feedbackGewuenscht) {
     try { history.replaceState(null, '', location.pathname); } catch (e) {}
     openFeedbackModal();
@@ -11155,7 +11331,7 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
     // NICHT bei Einladungs-, geteilten und Ansicht-Links: Dort stuenden sonst
     // zwei Fenster uebereinander bzw. verdeckte die Strecke genau die Liste,
     // fuer die jemand dem Link gefolgt ist.
-    if (KENNENLERN_NEU && !ansichtLinkDa) {
+    if (KENNENLERN_NEU && !ansichtLinkDa && !momentToken) {
       STARTLADUNG.then(function(){
         if (!CURRENT_USER && tasteProfileSize() === 0 && window.kennenlernStarten) window.kennenlernStarten();
       }).catch(function(){});

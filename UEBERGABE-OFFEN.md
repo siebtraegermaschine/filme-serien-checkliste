@@ -53,6 +53,20 @@ ssh -i ~/.ssh/id_ed25519 root@movietaste.de \
   (donnerstags 16:00 UTC) hängt an `WOCHENEND_MAIL_AKTIV=1` und ist AUS** —
   Freigabe ist eine offene Entscheidung von Christian; bis dahin nur
   Testversand von Hand (`npm run wochenendmail -- --test adresse`).
+- **„Diese Titel teilen" (Momentaufnahme) ersetzt den Ansicht-Link im
+  Teilen-Blatt.** Die komplette aktuelle Liste (Filter + Sortierung, gekappt
+  bei 500 Titeln, nur Einträge mit `titles`-Zeile) wird als feste
+  Kennungsliste gespeichert (`titel_momentaufnahmen`) und per `?titel=TOKEN`
+  geteilt; der Empfänger sieht exakt diese Titel mit SEINEN Markierungen.
+  Ohne Zeitverfall (Entscheidung Christian) — der Link stirbt nur mit dem
+  Konto (CASCADE); kein Widerruf (Widerrufsliste später zusammen mit
+  „Einladungen zurückziehen" nachrüstbar); Erstellen nur angemeldet,
+  höchstens 500 Momentaufnahmen je Konto (`routes/share.js`). Auf der
+  Kino-Seite teilt der Knopf weiterhin den Ansicht-Link (Programm ist je
+  Region für alle gleich, Kino-Einträge ohne `titles`-Zeile ließen sich
+  nicht einfrieren); alte `?ansicht=`-Links bleiben lesbar. Tab-, Status-
+  und Such-Interaktionen sowie Logo/X verlassen die Momentaufnahme. Der
+  Rechtstext-Nachtrag steht in `IDEEN.md`.
 - **Taste-Score erklärt sich jetzt selbst** (IDEEN-WACHSTUM I): Ein Klick
   aufs Score-Schildchen zeigt zuerst die konkreten Gründe für diesen Titel
   („Dieser Titel passt zu dir wegen: …" — Genres, Schlagwörter, Besetzung,

@@ -713,3 +713,19 @@ BEGIN
       CHECK (art IN ('stream', 'kino', 'we-stream', 'we-kino', 'we-tipp'));
   END IF;
 END $$;
+
+-- "Diese Titel teilen" -- Momentaufnahmen (14. August 2026, ersetzt im
+-- Teilen-Blatt den Ansicht-Link): eine feste Liste von Titel-Kennungen in
+-- Anzeige-Reihenfolge, geteilt per Token-Link (?titel=TOKEN). BEWUSST ohne
+-- Zeitverfall (Entscheidung vom 14. August): Ein einmal geteilter Link soll
+-- nicht faulen; er stirbt nur mit dem Konto (CASCADE). Kein Widerruf --
+-- eine Widerrufsliste waere spaeter zusammen mit "Einladungen zurueckziehen"
+-- nachruestbar, die Tabelle gibt das her. Erstellen nur angemeldet und
+-- hoechstens MOMENT_MAX_JE_KONTO je Konto (siehe routes/share.js).
+CREATE TABLE IF NOT EXISTS titel_momentaufnahmen (
+  token      TEXT PRIMARY KEY,
+  user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  title_ids  BIGINT[] NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_momentaufnahmen_user ON titel_momentaufnahmen (user_id);
