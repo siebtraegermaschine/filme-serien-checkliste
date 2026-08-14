@@ -108,7 +108,10 @@ nicht zwingend; sozialer Anlass (Movie Night, Match) schlägt hier Rabatt.
 
 ### Stufe 3 — Wiederkehr: Anlässe statt Erinnerungen (Wochen)
 
-**G. Der Freitags-Anlass.**
+**G. Der Freitags-Anlass.** *(Gebaut am 14. August 2026 — als
+DONNERSTAGS-Mail mit Kino-Abschnitt Donnerstag bis Sonntag, siehe
+`backend/lib/wochenendmail.js`. Der automatische Versand wartet auf
+`WOCHENEND_MAIL_AKTIV=1` — Freigabe durch Christian steht aus.)*
 Die Benachrichtigungs-Infrastruktur (0.0.0.3) kann mehr als „Titel verfügbar":
 eine wöchentliche Opt-in-Mail „Drei für dein Wochenende" — zwei aus der
 eigenen Watchlist (jetzt streambar / im Kino), einer als Taste-Score-Vorschlag.

@@ -21,6 +21,7 @@
 import { pool } from '../db/pool.js';
 import { sendMail } from './mailer.js';
 import { sprachWahl, regionWahl, sprachFeld } from './i18n.js';
+import { anbieterSlugs } from './wochenendmail.js';
 
 const EIN_TAG = 24 * 60 * 60 * 1000;
 const VERSAND_STUNDE_UTC = 18;   // nach der Kino-Kette (~17 Uhr); die Streaming-Kette endet schon am fruehen Morgen
@@ -56,20 +57,24 @@ const TEXTE = {
 async function personBenachrichtigen(person) {
   const region = regionWahl(person.region);
   const sprache = sprachWahl(person.sprache);
-  const anbieter = Array.isArray(person.watch_provider_ids) && person.watch_provider_ids.length
-    ? person.watch_provider_ids : null;
+  // TMDB-Nummern -> Feed-Slugs (siehe anbieterSlugs): streaming_cache traegt
+  // 'netflix'/'amazon'/..., nicht die Nummern aus users.watch_provider_ids.
+  // Der fruehere Direktvergleich ($4::int[] gegen provider_id TEXT) warf bei
+  // jeder Anbieter-Auswahl einen Typfehler -- aufgefallen beim Bau der
+  // Wochenend-Mail am 14. August 2026.
+  const anbieter = anbieterSlugs(person.watch_provider_ids);
 
   // Watchlist-Titel, die in der Region der Person neu bei einem (gewaehlten)
   // Anbieter aufgetaucht sind. DISTINCT: derselbe Titel kann bei mehreren
   // Anbietern gleichzeitig neu sein.
-  const { rows: stream } = await pool.query(
+  const { rows: stream } = anbieter && !anbieter.length ? { rows: [] } : await pool.query(
     `SELECT DISTINCT t.id, t.title, t.title_en
        FROM user_progress up
        JOIN titles t ON t.id = up.title_id AND t.tmdb_id IS NOT NULL
        JOIN streaming_cache s ON s.tmdb_id = t.tmdb_id AND s.type = t.type AND s.region = $2
       WHERE up.user_id = $1 AND up.watchlist AND NOT up.seen
         AND s.first_seen_at > now() - make_interval(days => $3)
-        AND ($4::int[] IS NULL OR s.provider_id = ANY($4))
+        AND ($4::text[] IS NULL OR s.provider_id = ANY($4))
         AND NOT EXISTS (SELECT 1 FROM benachrichtigt b
                          WHERE b.user_id = up.user_id AND b.title_id = t.id AND b.art = 'stream')`,
     [person.id, region, FENSTER_TAGE, anbieter]

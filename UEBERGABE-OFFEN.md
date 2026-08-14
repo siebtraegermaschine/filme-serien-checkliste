@@ -37,6 +37,31 @@ ssh -i ~/.ssh/id_ed25519 root@movietaste.de \
 
 ---
 
+## 0.0.0.0.0 Was am 14. August dazukam
+
+- **i18n-Betriebsschritte geprüft und abgeschlossen** (siehe 3.7): Backfills
+  waren gelaufen, AT-PLZ nachgeholt, BR/CO im Streaming-Cache bestätigt.
+- **Orte-Suche bevorzugt die gewählte Region** (`10d6f00`, siehe 3.5).
+- **Movie Night reaktiviert**, Knopf heißt „Movie Night Abstimmung"
+  (`32f39c8`, siehe 0.0.0.4 und 3.8).
+- **Donnerstags-Mail „Drei für dein Wochenende"** (IDEEN-WACHSTUM G):
+  `backend/lib/wochenendmail.js` + `npm run wochenendmail`. Drei Abschnitte
+  je Person (Watchlist jetzt streambar, ein Genre-Vorschlag mit Begründung,
+  Kino Donnerstag–Sonntag der Region), Wiederholungs-Schutz über
+  `benachrichtigt` mit eigenen Arten (`we-stream`/`we-kino`/`we-tipp`,
+  Schema-Migration ersetzt den CHECK). **Der automatische Versand
+  (donnerstags 16:00 UTC) hängt an `WOCHENEND_MAIL_AKTIV=1` und ist AUS** —
+  Freigabe ist eine offene Entscheidung von Christian; bis dahin nur
+  Testversand von Hand (`npm run wochenendmail -- --test adresse`).
+- **Fehler in der täglichen Benachrichtigungs-Mail gefunden und behoben:**
+  Der Anbieter-Filter verglich `users.watch_provider_ids` (TMDB-Nummern,
+  int) direkt mit `streaming_cache.provider_id` (Feed-Slugs, Text) — bei
+  jedem Opt-in-Konto MIT Anbieterauswahl warf die Streaming-Abfrage einen
+  Typfehler und die Person bekam nie eine Streaming-Meldung. Nie
+  aufgefallen, weil bisher niemand das Opt-in gesetzt hat. Jetzt übersetzt
+  `anbieterSlugs()` (in `wochenendmail.js`) die Nummern in die vier Slugs;
+  eine Auswahl ohne eine der vier Flatrates meldet ehrlicherweise nichts.
+
 ## 0.0.0.0 Was am 13. August dazukam (11 Commits)
 
 Sechs Blöcke, chronologisch. Alles live verifiziert (Deploy je 15–60 s nach

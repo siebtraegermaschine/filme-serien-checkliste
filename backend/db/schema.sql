@@ -699,3 +699,17 @@ CREATE TABLE IF NOT EXISTS metrik_tage (
 -- Merker je Konto: Der Trichter-Schritt "zehn Titel erreicht" soll genau
 -- einmal zaehlen, auch wenn jemand Markierungen entfernt und neu setzt.
 ALTER TABLE users ADD COLUMN IF NOT EXISTS metrik_zehn BOOLEAN NOT NULL DEFAULT FALSE;
+
+-- Wochenend-Mail "Drei fuer dein Wochenende" (lib/wochenendmail.js): eigene
+-- Art-Werte im Wiederholungs-Schutz, damit sich Wochenend-Empfehlungen und
+-- Verfuegbarkeits-Benachrichtigungen nicht gegenseitig unterdruecken. Der
+-- DO-Block ersetzt den urspruenglichen CHECK genau einmal (erkennbar am
+-- neuen Constraint-Namen).
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'benachrichtigt_art_check_v2') THEN
+    ALTER TABLE benachrichtigt DROP CONSTRAINT IF EXISTS benachrichtigt_art_check;
+    ALTER TABLE benachrichtigt ADD CONSTRAINT benachrichtigt_art_check_v2
+      CHECK (art IN ('stream', 'kino', 'we-stream', 'we-kino', 'we-tipp'));
+  END IF;
+END $$;

@@ -26,6 +26,7 @@ import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';
 import { starteBenachrichtigung } from './lib/benachrichtigung.js';
+import { starteWochenendmail } from './lib/wochenendmail.js';
 import { mengenGrenze } from './middleware/rateLimit.js';
 import { starteSicherung } from './lib/sicherung.js';
 import { starteThemen } from './lib/themen.js';
@@ -250,6 +251,10 @@ app.listen(port, () => {
   // Taeglicher Opt-in-Sammelversand "Watchlist-Titel jetzt verfuegbar"
   // (siehe lib/benachrichtigung.js) -- nach den Import-Ketten des Tages.
   starteBenachrichtigung();
+  // Donnerstags-Mail "Drei fuer dein Wochenende" -- gebaut, aber der
+  // automatische Versand wartet auf WOCHENEND_MAIL_AKTIV=1 (Entscheidung
+  // von Christian steht aus; bis dahin nur npm run wochenendmail von Hand).
+  starteWochenendmail();
   /* Die beiden grossen Startlisten gleich bauen, statt den ersten Besucher nach
      einem Deploy warten zu lassen. Der Aufruf entspricht genau dem, den die App
      beim Start macht -- steht dort ein anderer Parameter, waermt das hier ins
