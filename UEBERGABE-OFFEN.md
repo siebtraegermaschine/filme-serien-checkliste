@@ -53,6 +53,14 @@ ssh -i ~/.ssh/id_ed25519 root@movietaste.de \
   (donnerstags 16:00 UTC) hängt an `WOCHENEND_MAIL_AKTIV=1` und ist AUS** —
   Freigabe ist eine offene Entscheidung von Christian; bis dahin nur
   Testversand von Hand (`npm run wochenendmail -- --test adresse`).
+- **Taste-Score erklärt sich jetzt selbst** (IDEEN-WACHSTUM I): Ein Klick
+  aufs Score-Schildchen zeigt zuerst die konkreten Gründe für diesen Titel
+  („Dieser Titel passt zu dir wegen: …" — Genres, Schlagwörter, Besetzung,
+  Regie, Jahresnähe), darunter die allgemeine Erklärung. `scoreGruende()`
+  läuft nur je Klick — die heiße 41.000er-Schleife (`scoreCand`) ist
+  unangetastet. Nur fürs eigene Einzel-Profil; bei aktivem Abgleich und in
+  fremden Listen (anderes bzw. zusammengesetztes Profil) bewusst nur die
+  allgemeine Erklärung.
 - **Fehler in der täglichen Benachrichtigungs-Mail gefunden und behoben:**
   Der Anbieter-Filter verglich `users.watch_provider_ids` (TMDB-Nummern,
   int) direkt mit `streaming_cache.provider_id` (Feed-Slugs, Text) — bei

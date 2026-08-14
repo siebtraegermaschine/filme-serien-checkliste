@@ -30,8 +30,10 @@
   Bleibt hier vermerkt, falls es Nutzer-Meldungen dazu gibt.
 - **Gruppen statt 1:1-Verknüpfungen** („Familien-Watchlist", Match über feste
   Gruppen statt Personenauswahl je Sitzung).
-- **Taste-Score erklärbarer machen** („passt wegen: Krimi, Regie X, 2010er")
-  und optional Freundes-Bewertungen einfließen lassen.
+- ~~Taste-Score erklärbarer machen~~ — **umgesetzt am 14. August 2026**
+  (Info-Popup am Score-Schildchen nennt die konkreten Gründe je Titel).
+  Offen bleibt nur der zweite Teil der Idee: optional Freundes-Bewertungen
+  einfließen lassen.
 - **Jahresrückblick / Statistiken** („dein Filmjahr": gesehene Titel, Genres,
   Sterne-Verteilung) — auch als Teilen-Anlass.
 - **Merkzettel-Kategorien/Tags** auf der eigenen Watchlist.

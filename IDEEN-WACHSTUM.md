@@ -125,7 +125,11 @@ Reichweiten-Spike im Dezember, und ein Grund, übers Jahr zu markieren
 („sonst ist dein Rückblick leer"). Vorlauf: braucht saubere Zeitstempel der
 Markierungen ab jetzt.
 
-**I. Taste-Score erklärbar machen (steht in `IDEEN.md`).**
+**I. Taste-Score erklärbar machen (steht in `IDEEN.md`).** *(Umgesetzt am
+14. August 2026: Das Info-Popup hinter dem Score-Schildchen nennt zuerst die
+konkreten Gründe für DIESEN Titel — Genres, Schlagwörter, Besetzung, Regie,
+Jahresnähe, `scoreGruende()` in `index.html`. Nur fürs eigene Einzel-Profil;
+bei Abgleich und in fremden Listen bleibt die allgemeine Erklärung.)*
 „Passt zu dir wegen: Krimi, den 2010ern, Regie X" — Erklärungen erhöhen
 Vertrauen in die Zahl, und Vertrauen in die Empfehlung ist der Kern der
 täglichen Nützlichkeit. Zugleich Differenzierung: TikTok/Netflix erklären

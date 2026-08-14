@@ -2175,6 +2175,8 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' hat das noch nicht bewertet'; },
     tasteScoreAria: 'Was ist der Taste-Score?',
     tasteScoreGemeinsam: function(namen){ return 'Der Abgleich ist an: Der Taste-Score gilt hier für dich und ' + namen + ' gemeinsam — er sagt, wie gut ein Titel zu eurem gemeinsamen Geschmack passt.'; },
+    tasteWegen: 'Dieser Titel passt zu dir wegen:',
+    tasteJahreUm: function(y){ return 'Titel aus den Jahren um ' + y; },
     mailEinstellungen: 'E-Mail-Einstellungen',
     tasteMatchAria: 'Was ist der Taste-Match?',
     teilen: 'Teilen',
@@ -2438,6 +2440,8 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' has not rated this yet'; },
     tasteScoreAria: 'What is the Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Match is on: the Taste Score here applies to you and ' + namen + ' together — it says how well a title fits your combined taste.'; },
+    tasteWegen: 'This title matches you because of:',
+    tasteJahreUm: function(y){ return 'titles from around ' + y; },
     mailEinstellungen: 'Email settings',
     tasteMatchAria: 'What is the Taste Match?',
     teilen: 'Share',
@@ -2701,6 +2705,8 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' n’a pas encore noté ce titre'; },
     tasteScoreAria: 'Qu’est-ce que le Taste Score ?',
     tasteScoreGemeinsam: function(namen){ return 'Le match est activé\u202f: le Taste Score s’applique ici à toi et ' + namen + ' ensemble — il indique à quel point un titre correspond à vos goûts combinés.'; },
+    tasteWegen: 'Ce titre te correspond grâce à\u202f:',
+    tasteJahreUm: function(y){ return 'des titres des années autour de ' + y; },
     mailEinstellungen: 'Réglages e-mail',
     tasteMatchAria: 'Qu’est-ce que le Taste Match ?',
     teilen: 'Partager',
@@ -2964,6 +2970,8 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' aún no lo ha valorado'; },
     tasteScoreAria: '¿Qué es el Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'El match está activado: aquí el Taste Score se aplica a ti y a ' + namen + ' juntos — indica lo bien que un título encaja con vuestros gustos combinados.'; },
+    tasteWegen: 'Este título encaja contigo por:',
+    tasteJahreUm: function(y){ return 'títulos de los años alrededor de ' + y; },
     mailEinstellungen: 'Ajustes de correo',
     tasteMatchAria: '¿Qué es el Taste Match?',
     teilen: 'Compartir',
@@ -3227,6 +3235,8 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' non l’ha ancora valutato'; },
     tasteScoreAria: 'Cos’è il Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Il match è attivo: qui il Taste Score vale per te e ' + namen + ' insieme — indica quanto un titolo corrisponde ai vostri gusti combinati.'; },
+    tasteWegen: 'Questo titolo fa per te grazie a:',
+    tasteJahreUm: function(y){ return 'titoli degli anni intorno al ' + y; },
     mailEinstellungen: 'Impostazioni e-mail',
     tasteMatchAria: 'Che cos’è il Taste Match?',
     teilen: 'Condividi',
@@ -3490,6 +3500,8 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' heeft dit nog niet beoordeeld'; },
     tasteScoreAria: 'Wat is de Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'Match staat aan: de Taste Score geldt hier voor jou en ' + namen + ' samen — hij geeft aan hoe goed een titel bij jullie gezamenlijke smaak past.'; },
+    tasteWegen: 'Deze titel past bij je vanwege:',
+    tasteJahreUm: function(y){ return 'titels uit de jaren rond ' + y; },
     mailEinstellungen: 'E-mailinstellingen',
     tasteMatchAria: 'Wat is de Taste Match?',
     teilen: 'Delen',
@@ -3753,6 +3765,8 @@ var UI_TEXTE = {
     fremdUnbewertet: function(name){ return name + ' ainda não avaliou este título'; },
     tasteScoreAria: 'O que é o Taste Score?',
     tasteScoreGemeinsam: function(namen){ return 'O Match está ativo: o Taste Score aqui vale para você e ' + namen + ' juntos — ele indica o quanto um título combina com o gosto de vocês.'; },
+    tasteWegen: 'Este título combina com você por causa de:',
+    tasteJahreUm: function(y){ return 'títulos dos anos por volta de ' + y; },
     mailEinstellungen: 'Configurações de e-mail',
     tasteMatchAria: 'O que é o Taste Match?',
     teilen: 'Compartilhar',
@@ -6310,6 +6324,9 @@ function eigeneZeileLi(tab, i, profile) {
       creditRows +
     '</div>';
   li.dataset.src = tab;
+  // Fuer die Score-Erklaerung im Info-Popup (scoreGruende): der POOL-Eintrag
+  // direkt am Element, ohne Umweg ueber Indizes.
+  li._poolItem = s.pool[i] || null;
   li.innerHTML =
     posterThumb +
     '<span class="info"><div class="title">' + '<span class="ttext">' + item[0] + '</span>' + scoreBadge + '</div>' +
@@ -7924,6 +7941,65 @@ function scoreCand(c, prof){
   // hiesse "passt in jeder Hinsicht maximal".
   var score = gewichte ? Math.min(99, Math.round(100 * summe / gewichte)) : 0;
   return { score: score, shared: shared, dirHit: dirHit };
+}
+/* ---- Den Taste-Score erklaeren (IDEEN-WACHSTUM.md, Vorschlag I) ----
+   Liefert die konkreten Gruende, warum DIESER Titel zum eigenen Profil passt
+   -- angezeigt im Info-Popup hinter dem Score-Schildchen. Bewusst eine eigene
+   Funktion, die nur je Klick laeuft, statt eines Umbaus von scoreCand: die
+   heisse Schleife (41.000 Aufrufe je Render) bleibt unangetastet. Die
+   Schwellen entsprechen den Teilwerten von scoreCand -- genannt wird ein
+   Merkmal erst, wenn es spuerbar zum Score beitraegt.
+
+   Nur fuers EIGENE, einzelne Profil: In fremden Listen und beim gemeinsamen
+   Score (Abgleich an) waere "passt zu DIR wegen" schlicht falsch -- dort
+   bleibt das Popup bei der allgemeinen Erklaerung. */
+function scoreGruende(c){
+  if (!c || personenAnsicht()) return null;
+  var profile = aktuellesProfil();
+  if (profile.length > 1) return null;
+  var prof = profile[0];
+  var zeilen = [];
+
+  // Genres: die getroffenen, nach ihrem Gewicht im Profil, hoechstens zwei.
+  if (prof.genreMax > 0) {
+    var gs = (c.g || []).filter(function(g){ return prof.genre[g] > 0; })
+      .sort(function(a, b){ return prof.genre[b] - prof.genre[a]; });
+    if (gs.length && prof.genre[gs[0]] / prof.genreMax >= 0.35) {
+      zeilen.push(gs.slice(0, 2).map(genreAnzeige).join(', '));
+    }
+  }
+
+  // Schlagwoerter: getroffene, staerkste zuerst -- erst ab spuerbarem Anteil.
+  if (prof.kw && prof.kwAnzahl) {
+    var kws = (c.kw || []).filter(function(k){ return prof.kw[k]; })
+      .sort(function(a, b){ return prof.kw[b] - prof.kw[a]; });
+    var kwRoh = 0;
+    for (var j = 0; j < kws.length; j++) kwRoh += prof.kw[kws[j]] / prof.n;
+    if (kwRoh / (kwRoh + KW_SAETTIGUNG) >= 0.25) {
+      zeilen.push(kws.slice(0, 2).map(function(k){ return '#' + k; }).join(' '));
+    }
+  }
+
+  // Besetzung: bekannte Gesichter, die staerksten zwei.
+  if (prof.castAnzahl) {
+    var cs = (c.c || []).filter(function(a){ return prof.cast[a]; })
+      .sort(function(a, b){ return prof.cast[b] - prof.cast[a]; });
+    var castRoh = 0;
+    for (var m = 0; m < cs.length; m++) castRoh += Math.min(1, prof.cast[cs[m]] / 3);
+    if (castRoh / (castRoh + CAST_SAETTIGUNG) >= 0.2) zeilen.push(cs.slice(0, 2).join(', '));
+  }
+
+  if (c.d && prof.dir[c.d]) zeilen.push(TXT.regie + ': ' + c.d);
+
+  // Jahresnaehe wie in scoreCand, genannt erst ab halber Staerke.
+  if (prof.jahrMax > 0 && prof.years.length && c.y) {
+    var nah = 0;
+    for (var y = c.y - JAHR_FENSTER; y <= c.y + JAHR_FENSTER; y++) nah += prof.jahreZaehlung[y] || 0;
+    if ((nah / prof.years.length) / prof.jahrMax >= 0.5) zeilen.push(TXT.tasteJahreUm(c.y));
+  }
+
+  if (!zeilen.length) return null;
+  return TXT.tasteWegen + '\n' + zeilen.map(function(z){ return '• ' + z; }).join('\n');
 }
 // Mini-Profil aus GENAU einem Titel (statt aus allen Watchlist-/Gesehen-Titeln
 // zusammen wie buildProfile()) -- Grundlage fuer den "Ähnliche Titel"-Button:
@@ -11169,6 +11245,8 @@ function poolItemLi(item, score, opts){
   var li=document.createElement('li'); li.className='disc stream-item' + (showDetails ? ' show-details' : '');
   var key = item.type === 'series' ? 's' : 'f';
   li.dataset.kind = key; li.dataset.title = item.t;
+  // Fuer die Score-Erklaerung im Info-Popup (scoreGruende).
+  li._poolItem = item;
   li.dataset.providerBlob = item.providers.map(function(p){ return PROVIDER_ALIASES[p.id] || p.id; }).join(' ');
   // Getrennt fuers Suchfilter (siehe applyFilter/poolItemMatchesQuery): mainBlob
   // (Titel/Genres/Jahr, ohne Besetzung/Regie/Hashtags) matcht per Teilstring,
@@ -11756,7 +11834,15 @@ function discFilterPool(){
               : icon.hasAttribute('data-tastematch') ? 'tastematch'
               : 'ts';
       titleEl.textContent = INFO_TEXT[key].title;
-      bodyEl.textContent = infoBody(key);
+      var rumpf = infoBody(key);
+      // Am Score-Schildchen einer konkreten Zeile: zuerst die konkreten
+      // Gruende fuer DIESEN Titel, darunter die allgemeine Erklaerung.
+      if (key === 'ts') {
+        var zeile = icon.closest('li');
+        var gruende = zeile && zeile._poolItem ? scoreGruende(zeile._poolItem) : null;
+        if (gruende) rumpf = gruende + '\n\n' + rumpf;
+      }
+      bodyEl.textContent = rumpf;
       bk.classList.add('open');
       return;
     }
