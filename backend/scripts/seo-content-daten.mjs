@@ -20823,4 +20823,227 @@ Nach Erhebungen von Nielsen sahen den Film in der ersten Woche bei Apple TV+ run
 Die Kritik blieb zurückhaltend: 48 Prozent von 99 Besprechungen bei Rotten Tomatoes und 48 von 100 bei Metacritic, mit dem Befund, er sei als Beschäftigung für Kinder unbedenklich, biete aber wenig Eigenes.
 
 Er steht damit für den Versuch mehrerer Anbieter jener Jahre, mit hohem Aufwand eigene Animationsfilme aufzubauen — und für die Schwierigkeit, gegen etablierte Studios eine eigene Handschrift zu behaupten.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:10774', locale: 'de-de',
+    text: `### Worum es geht
+
+Howard Beale moderiert seit Jahren die Abendnachrichten eines amerikanischen Senders und wird wegen sinkender Quoten entlassen. In seiner vorletzten Sendung kündigt er an, sich in der letzten vor laufender Kamera zu erschießen.
+
+Statt ihn abzusetzen, entdeckt der Sender die Einschaltquote. Beale bekommt eine eigene Sendung, in der er tobt, predigt und das Publikum auffordert, ans Fenster zu treten und zu schreien, es sei stinkwütend. Die Programmchefin Diana Christensen baut daraus ein Format, während der alte Nachrichtenchef Max Schumacher zusieht, wie sein Bereich zur Unterhaltungssparte wird. Der Film handelt davon, was passiert, wenn der Zusammenbruch eines Menschen zur Ware wird.
+
+### Entstehungsgeschichte
+
+Das Drehbuch schrieb Paddy Chayefsky, Regie führte Sidney Lumet. Es spielen Peter Finch als Beale, Faye Dunaway als Diana, William Holden als Max und Robert Duvall als Sendermanager.
+
+Das Budget lag bei 3,8 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film wurde 1976 als Satire verstanden, also als Übertreibung. Was er beschreibt — Nachrichten nach Einschaltquote, Wut als Format, private Not als Programminhalt —, war zu diesem Zeitpunkt im amerikanischen Fernsehen noch nicht üblich.
+
+Peter Finch starb im Januar 1977, wenige Wochen vor der Oscar-Verleihung. Er erhielt die Auszeichnung als erster Darsteller überhaupt posthum.
+
+### Einordnung & Wirkung
+
+Der Film spielte 23,7 Millionen Dollar ein. Von zehn Oscar-Nominierungen wurden vier umgesetzt: bester Hauptdarsteller für Finch, beste Hauptdarstellerin für Dunaway, beste Nebendarstellerin für Beatrice Straight und bestes Originaldrehbuch für Chayefsky.
+
+Bei Rotten Tomatoes steht er bei 91 Prozent, mit dem wiederkehrenden Befund, er sei mehr als vier Jahrzehnte später bedauerlicherweise aktuell.
+
+Roger Ebert sprach von einer Prophezeiung und fragte, ob Chayefsky sich Jerry Springer, Howard Stern und den Wrestling-Verband habe vorstellen können. Aaron Sorkin urteilte, kein Zukunftsdeuter — nicht einmal Orwell — habe je so recht behalten wie Chayefsky mit diesem Film.` },
+  {
+    bereich: 'titel', schluessel: 'movie:351211', locale: 'de-de',
+    text: `### Worum es geht
+
+James Donahue war vier, als seine Schwester Heather 1994 im Wald bei Burkittsville verschwand. Zwanzig Jahre später taucht im Internet ein Video auf, in dem er kurz eine Gestalt zu erkennen glaubt, die sie sein könnte.
+
+Er zieht mit vier Begleitern los, ausgerüstet mit Ohrkameras, einer Drohne und GPS. Die Technik hilft nicht: Das GPS zeigt Unsinn an, die Nacht dauert länger als eine Nacht, und der Wald bringt die Gruppe immer wieder an dieselbe Stelle zurück. Was im ersten Film nur zu hören war, wird hier gezeigt — was manche als Gewinn und andere als Verlust bewerten.
+
+### Entstehungsgeschichte
+
+Das Vorhaben lief unter dem Titel "The Woods" und wurde als eigenständiger Waldhorrorfilm beworben. Lionsgate hatte Adam Wingard und Simon Barrett bereits 2013 dafür gewonnen.
+
+Barrett hat den Ansatz beschrieben: mehr Figuren als im Original, um mehr Schreckmomente zu ermöglichen, dazu die Idee, Einheimische aus Burkittsville in die Gruppe aufzunehmen.
+
+Die Geheimhaltung war Absicht — man wollte vermeiden, dass sich im Vorfeld Ablehnung im Netz aufbaut. Erst bei der Premiere auf der Comic-Con in San Diego am 22. Juli 2016 erfuhr das Publikum, dass es sich um eine Fortsetzung von "Blair Witch Project" handelte.
+
+### Hinter den Kulissen
+
+Das Budget lag bei 5 Millionen Dollar, für die Werbung kamen rund 20 Millionen hinzu — also das Vierfache der Herstellungskosten.
+
+Der Film lief am 11. September 2016 beim Festival in Toronto und ab dem 16. September regulär.
+
+### Einordnung & Wirkung
+
+Weltweit spielte er 45,2 Millionen Dollar ein, davon 20,8 Millionen in den USA und 24,4 Millionen international.
+
+Die Kritik blieb geteilt (38 Prozent bei Rotten Tomatoes, 47 von 100 bei Metacritic). Auffällig ist das Publikumsurteil: ein D plus bei CinemaScore — ein für einen Kinostart ungewöhnlich schlechter Wert.
+
+Der Fall gilt als Beispiel dafür, dass die Geheimhaltung eines Titels zwar Aufmerksamkeit erzeugt, die geweckte Erwartung aber auch gegen den Film arbeiten kann.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11362', locale: 'de-de',
+    text: `### Worum es geht
+
+Edmond Dantès steht kurz vor der Beförderung zum Kapitän und vor der Hochzeit mit Mercédès. Sein Freund Fernand Mondego, der dieselbe Frau will, und der ehrgeizige Staatsanwalt Villefort sorgen dafür, dass er ohne Verfahren im Kerker der Insel If landet.
+
+Dort trifft er den Abbé Faria, der ihn dreizehn Jahre lang unterrichtet — Lesen, Sprachen, Fechten — und ihm von einem Schatz auf Monte Christo erzählt. Nach der Flucht kehrt Dantès als reicher Graf zurück und arbeitet sich in das Leben derer hinein, die ihn verraten haben.
+
+### Entstehungsgeschichte
+
+Grundlage ist Alexandre Dumas' Roman von 1844. Regie führte Kevin Reynolds, Jim Caviezel spielt Dantès, Guy Pearce den Verräter Fernand.
+
+Der Film weicht in einem wesentlichen Punkt von der Vorlage ab: Albert, der Sohn von Mercédès und Fernand, ist hier in Wahrheit Dantès' leiblicher Sohn — eine Änderung, die auch das Ende umbaut und deutlich versöhnlicher ausfallen lässt als im Roman.
+
+### Hinter den Kulissen
+
+Gedreht wurde überwiegend auf Malta: Valletta stellt Marseille dar, dazu kamen die Uferzone von Vittoriosa und Fort St Elmo. Der Saint Mary's Tower auf Comino diente als Außenansicht des Château d'If. In Irland entstanden Aufnahmen auf dem Powerscourt Estate und in Kilruddery House.
+
+Das Budget lag bei 35 Millionen Dollar. Der Film erschien am 25. Januar 2002.
+
+### Einordnung & Wirkung
+
+Weltweit spielte er 75,4 Millionen Dollar ein.
+
+Die Kritik reagierte gut: 74 Prozent von 142 Besprechungen bei Rotten Tomatoes. Roger Ebert vergab drei von vier Sternen und hob hervor, wie viel der Film unterbringe — Piraterie, Napoleon im Exil, Verrat, Einzelhaft, geheime Botschaften, Fluchttunnel, Fechtszenen, komische Entlastung und eine Schatzkarte. Das Publikum vergab bei CinemaScore ein A.
+
+Er gilt als eine der zugänglichsten Verfilmungen des Stoffs — und als das Gegenstück zur französischen Fassung von 2024, die dem Roman deutlich näher bleibt und dessen Härte nicht abmildert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9620', locale: 'de-de',
+    text: `### Worum es geht
+
+Michael Jennings arbeitet als Nachbauingenieur: Er zerlegt fremde Technik, verbessert sie und verkauft das Ergebnis. Damit die Auftraggeber nicht in Erklärungsnot geraten, lässt er sich nach jedem Auftrag die Erinnerung an die Arbeitszeit löschen — bezahlt wird entsprechend gut.
+
+Nach einem Dreijahresvertrag für die Firma Allcom wacht er auf und stellt fest, dass er auf seine Aktien im Wert von 92 Millionen Dollar verzichtet hat. Stattdessen liegt ein Umschlag mit neunzehn Alltagsgegenständen bereit — eine Büroklammer, eine Sonnenbrille, ein Feuerzeug. Jeder davon rettet ihn im weiteren Verlauf. Sein früheres Ich hat ihm eine Nachricht hinterlassen, weil es die Maschine gebaut hat, die in die Zukunft sieht, und wusste, was daraus wird.
+
+### Entstehungsgeschichte
+
+Grundlage ist Philip K. Dicks Kurzgeschichte von 1953. Die Entwicklung begann 1996; vor John Woo waren Brett Ratner und Kathryn Bigelow im Gespräch.
+
+Matt Damon lehnte die Hauptrolle ab, weil er nicht schon wieder einen Film über Gedächtnisverlust drehen wollte. Besetzt wurden Ben Affleck, Uma Thurman und Aaron Eckhart.
+
+### Hinter den Kulissen
+
+Das Budget lag bei 60 Millionen Dollar.
+
+Woo bringt seine gewohnten Mittel ein — Verfolgungsjagden, Schusswechsel, Tauben —, was in einem Stoff, dessen Reiz in der Konstruktion liegt, umstritten ist: Der Kern der Vorlage ist ein Rätsel, das sich rückwärts auflöst, nicht eine Actionhandlung.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 117,2 Millionen Dollar ein und war damit trotz schlechter Kritiken wirtschaftlich erfolgreich.
+
+Die Kritik lehnte ihn deutlich ab: 27 Prozent bei Rotten Tomatoes, mit dem Vorwurf, Woo reduziere den Stoff auf belanglose Verfolgungen, Schießereien und Explosionen. Das Publikum vergab bei CinemaScore ein B minus.
+
+Ben Affleck erhielt die Goldene Himbeere als schlechtester Hauptdarsteller — allerdings gemeinsam für diesen Film, "Gigli" und "Daredevil", die alle im selben Zeitraum erschienen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9564', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein kleines Dorf in Gallien leistet den Römern weiterhin Widerstand, weil der Druide Miraculix einen Zaubertrank braut, der übermenschliche Kräfte verleiht. Der Zenturio Lucius Detritus will das Rezept, um selbst Kaiser zu werden — und lässt den Druiden entführen.
+
+Asterix und Obelix ziehen los, um ihn zu befreien. Der Film führt dabei mehrere Handlungsstränge der Comicreihe zusammen: die Gladiatorenkämpfe in Rom, die Legionärsausbildung, den Wahrsager und die Auseinandersetzung mit Caesar selbst.
+
+### Entstehungsgeschichte
+
+Grundlage sind die Comics von René Goscinny und Albert Uderzo; das Drehbuch schrieb Gérard Lauzier und verwendete Motive aus "Asterix der Gallier", "Der Seher", "Asterix und die Goten", "Asterix als Legionär" und "Asterix als Gladiator".
+
+Regie führte Claude Zidi. Mit einem Budget von 275 Millionen Franc — rund 48,5 Millionen Dollar — war es zum Zeitpunkt seines Erscheinens die teuerste französische Produktion aller Zeiten.
+
+### Hinter den Kulissen
+
+Christian Clavier spielt Asterix, Gérard Depardieu Obelix, der italienische Komiker Roberto Benigni den Gegenspieler Detritus.
+
+Die Besetzung Depardieus als Obelix gilt bis heute als eine der treffendsten Verkörperungen einer Comicfigur im europäischen Kino — er behielt die Rolle über mehrere Fortsetzungen hinweg, während Asterix mehrfach neu besetzt wurde.
+
+Der Aufwand steckt vor allem in den Bauten: Das gallische Dorf und Teile Roms wurden als begehbare Kulissen errichtet statt digital ergänzt.
+
+### Einordnung & Wirkung
+
+Der Film war ein großer Erfolg: Am Starttag in Frankreich kamen 446.724 Zuschauer auf 780 Leinwänden, weltweit spielte er 101,6 Millionen Dollar ein.
+
+Daraus wurde eine Reihe. 2002 folgte "Asterix und Obelix: Mission Kleopatra", das noch erfolgreicher war, danach weitere Teile.
+
+Er markiert damit den Beginn einer Phase, in der das französische Kino gezielt mit großen Budgets gegen amerikanische Produktionen antrat — und dabei auf den eigenen Bestand an Comicfiguren zurückgriff.` },
+  {
+    bereich: 'titel', schluessel: 'movie:7303', locale: 'de-de',
+    text: `### Worum es geht
+
+Marisa Ventura arbeitet als Zimmermädchen in einem New Yorker Luxushotel und zieht allein ihren Sohn Ty groß. Als sie in einer Suite das Kleid einer Gästin anprobiert, hält der Senatskandidat Christopher Marshall sie für die Hotelgästin selbst.
+
+Sie widerspricht nicht. Was folgt, ist eine Beziehung auf falscher Grundlage, ein Sohn, der klüger ist als beide Erwachsene, und ein Kollegium, das mitspielt. Als die Sache auffliegt, verliert Marisa ihre Stelle — und der Film muss beide Hälften wieder zusammenbringen, die er zuvor getrennt hat.
+
+### Entstehungsgeschichte
+
+Die Grundidee stammt von John Hughes, der sie unter dem Pseudonym "Edmond Dantès" einreichte — dem Namen der Hauptfigur aus "Der Graf von Monte Christo", also einer Figur unter falschem Namen. Das Drehbuch schrieb Kevin Wade, Regie führte Wayne Wang.
+
+Jennifer Lopez spielt Marisa, Ralph Fiennes den Politiker, Natasha Richardson die Gästin, deren Kleid den Anstoß gibt. Das Budget lag bei 55 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde in New York, unter anderem im Roosevelt Hotel und im Waldorf-Astoria sowie in der Bronx.
+
+Der Film gehört zu einer Reihe von Aschenputtel-Verfilmungen jener Jahre und macht seine Herkunft nicht zum Geheimnis: die Verwechslung durch ein Kleid, der Verlust der Stelle um Mitternacht, die Rückkehr am Ende. Der Zusatz ist die Frage der Klasse — Marisa will nicht in erster Linie den Mann, sondern eine Beförderung, die ihr niemand zutraut.
+
+### Einordnung & Wirkung
+
+Der Film startete am 13. Dezember 2002 mit 18,7 Millionen Dollar auf Platz eins und spielte weltweit 154,9 Millionen ein.
+
+Die Kritik blieb geteilt bis ablehnend: 37 Prozent von 141 Besprechungen bei Rotten Tomatoes mit dem Befund, er sei belanglos gewöhnlich, dazu 45 von 100 bei Metacritic. Roger Ebert nannte ihn geschickt gemacht und formelhaft. Das Publikum vergab bei CinemaScore ein B plus.
+
+Die Zeitschrift Time führte ihn später unter den schwächsten Filmen seines Genres, während andere Stimmen gerade den Märchencharakter als Stärke bewerteten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11186', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei Jahre nach den Ereignissen des ersten Films will die Spielzeugfirma Play Pals ihren Ruf wiederherstellen und setzt die zerstörte Chucky-Puppe wieder zusammen — als Beweis, dass an den Vorwürfen nichts dran ist. Beim Zusammenbau schlägt ein Stromstoß ein, und die Seele des Serienmörders Charles Lee Ray ist zurück.
+
+Andy Barclay, inzwischen acht, lebt in einer Pflegefamilie, weil seiner Mutter niemand geglaubt hat. Chucky sucht ihn auf, denn nur durch dessen Körper kann er die Puppe verlassen. Das Finale spielt in der Fabrik selbst, zwischen Fließbändern voller identischer Puppen.
+
+### Entstehungsgeschichte
+
+Das Drehbuch schrieb erneut Don Mancini, der Schöpfer der Reihe. Regie führte John Lafia. Der Film erschien am 9. November 1990 bei Universal, das Budget lag bei 13 Millionen Dollar, die Laufzeit beträgt 84 Minuten.
+
+Ursprünglich waren Szenen mit Figuren aus dem ersten Teil vorgesehen; sie entfielen aus Kostengründen.
+
+### Hinter den Kulissen
+
+Gedreht wurde überwiegend auf dem Universal-Studiogelände in Kalifornien.
+
+Die Puppe stammt von Kevin Yagher, der auch für die Effekte verantwortlich war. Chucky wird durchgehend mechanisch dargestellt — mit Puppenspielern, Stangen und mehreren Ausführungen für unterschiedliche Bewegungen. Brad Dourif spricht die Figur wie schon im ersten Teil.
+
+Alex Vincent spielt erneut Andy, Christine Elise die ältere Pflegetochter Kyle; in Nebenrollen sind Jenny Agutter, Gerrit Graham und Grace Zabriskie zu sehen. Die Musik schrieb Graeme Revell.
+
+### Einordnung & Wirkung
+
+Der Film startete mit 10,7 Millionen Dollar auf Platz eins und spielte weltweit 35,8 Millionen ein.
+
+Die Kritik fiel gemischt aus: 53 Prozent bei Rotten Tomatoes, 37 von 100 bei Metacritic. Gene Siskel vergab null Sterne, während andere ihn als wirkungsvollen Vertreter seines Genres bewerteten.
+
+Bemerkenswert an der Reihe ist ihre Beständigkeit: Don Mancini hat sämtliche Teile geschrieben und später auch die Fernsehserie verantwortet — über mehr als drei Jahrzehnte hinweg mit derselben Sprechstimme.` },
+  {
+    bereich: 'titel', schluessel: 'movie:106747', locale: 'de-de',
+    text: `### Worum es geht
+
+Der ehemalige mexikanische Polizist Machete wird vom Präsidenten der Vereinigten Staaten angeworben. Ein Revolutionär namens Mendez hat eine Rakete auf Washington gerichtet und sie an sein eigenes Herz gekoppelt: Stirbt er, startet sie.
+
+Machete soll ihn lebend über die Grenze bringen. Dabei gerät er an eine Bordellchefin mit Maschinengewehr, eine Auftragsmörderin mit wechselnden Gesichtern und schließlich an einen Waffenhändler, der ein Raumschiff besitzt. Der Film treibt seine eigene Machart bewusst über jede Grenze und endet mit einem Trailer für einen dritten Teil, der im Weltall spielen soll.
+
+### Entstehungsgeschichte
+
+Robert Rodriguez führte Regie, Danny Trejo spielt erneut Machete. Die Figur stammt ursprünglich aus einem falschen Trailer, den Rodriguez 2007 für das Doppelprogramm "Grindhouse" gedreht hatte — aus dem Scherz wurde 2010 ein Film und daraus diese Fortsetzung.
+
+Das Budget lag bei 20 Millionen Dollar, gedreht wurde 2012 in nur 29 Tagen.
+
+### Hinter den Kulissen
+
+Die Besetzung ist der eigentliche Aufwand: Michelle Rodriguez, Sofía Vergara, Amber Heard, Mel Gibson, Lady Gaga und Charlie Sheen, der hier unter seinem bürgerlichen Namen Carlos Estévez auftritt und den amerikanischen Präsidenten spielt.
+
+Der eingebaute Trailer für "Machete Kills Again… In Space" ist kein Nachspann, sondern steht am Anfang des Films — eine Umkehrung, die das Prinzip der Reihe fortsetzt, in der der Werbefilm vor dem Film da war.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 19. September 2013 beim Fantastic Fest in Austin statt, der reguläre Start folgte am 11. Oktober. In den USA spielte der Film nur 17,5 Millionen Dollar ein und blieb damit unter seinem Budget.
+
+Die Kritik lehnte ihn ab: 29 Prozent bei Rotten Tomatoes mit dem Befund, der Funke des ersten Teils fehle, dazu 41 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein B minus.
+
+Der angekündigte dritte Teil wurde nie gedreht. Rodriguez erklärte noch 2023, er halte daran fest — bislang ohne Produktion.` },
 ];
