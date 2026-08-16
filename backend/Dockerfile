@@ -24,7 +24,11 @@ RUN cd backend && npm ci --omit=dev
 # live in einen 404, obwohl index.html sie laengst einband. Der Build-Kontext
 # ist ein sauberer Git-Auschecker, es kommt also nichts Fremdes mit; Skripte
 # und Dokumentation passen auf keines der Muster.
-COPY *.html *.png *.svg manifest.json robots.txt ./
+# *.css kam am 16.08.2026 dazu: seo.css fehlte im Image, seit die SEO-Seiten
+# live sind -- sie binden /seo.css ein, das lieferte einen 404, und die Seiten
+# erschienen komplett ungestylt. Genau derselbe Fehler wie oben beschrieben,
+# nur ein Muster weiter.
+COPY *.html *.css *.png *.svg manifest.json robots.txt ./
 COPY tour/ ./tour/
 COPY backend/ ./backend/
 
