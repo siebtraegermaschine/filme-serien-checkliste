@@ -21267,4 +21267,221 @@ Der Start brachte 12,7 Millionen Dollar und Platz drei; weltweit spielte der Fil
 Die Kritik lehnte ihn scharf ab: 17 Prozent bei Rotten Tomatoes mit dem Befund, er sei noch abwegiger und unglaubwürdiger als der erste Teil, dazu 37 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein B plus.
 
 Es war der letzte Teil der Reihe bei Columbia Pictures; für die Fortsetzung von 2017 übernahm Paramount — dann wieder mit Vin Diesel.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:10559', locale: 'de-de',
+    text: `### Worum es geht
+
+John Sullivan ist Polizist in New York und trauert seit dreißig Jahren um seinen Vater, einen Feuerwehrmann, der 1969 bei einem Einsatz starb. Auf dem Dachboden findet er dessen alten Amateurfunkgerät und schaltet es ein.
+
+Am anderen Ende meldet sich sein Vater — nicht als Erinnerung, sondern in Echtzeit, im Oktober 1969. Über die Funkverbindung warnt John ihn vor dem Brand, und Frank überlebt. Damit ändert sich die Gegenwart: Ein Serienmörder, den es nie gegeben hätte, tötet nun auch Johns Mutter. Vater und Sohn müssen den Fall gemeinsam lösen, über drei Jahrzehnte hinweg und ohne sich je gegenüberzustehen.
+
+### Entstehungsgeschichte
+
+Regie führte Gregory Hoblit, das Drehbuch schrieb Toby Emmerich. Das Vorhaben wurde am 21. Januar 1999 bewilligt.
+
+Für die Hauptrolle war zunächst Sylvester Stallone im Gespräch; er stieg wegen der Gage aus. Besetzt wurden Dennis Quaid als Frank und Jim Caviezel als John.
+
+### Hinter den Kulissen
+
+Gedreht wurde überwiegend in Toronto, mit Außenaufnahmen in New York. Das Budget lag bei 31 Millionen Dollar.
+
+In Nebenrollen sind Andre Braugher, Elizabeth Mitchell und Noah Emmerich zu sehen; Michael Cera gibt hier sein Filmdebüt.
+
+Die Verbindung beider Zeitebenen läuft über die World Series von 1969 — Frank hört das Spiel im Radio, John kennt das Ergebnis. Der Film verwendet dieses Motiv wiederholt, um Gleichzeitigkeit herzustellen, ohne die Ebenen visuell zu vermischen.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 68,1 Millionen Dollar ein, davon 45 Millionen in den USA.
+
+Die Kritik reagierte überwiegend positiv: 70 Prozent von 127 Besprechungen bei Rotten Tomatoes, 67 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein A minus. Roger Ebert nannte die Handlung konstruiert und urteilte dennoch wohlwollend.
+
+Es gab eine Nominierung für den Hugo Award und eine für den Golden Globe für das Abspannlied. 2016 entwickelte NBC eine Serienfassung, die The CW übernahm und 2017 nach einer Staffel einstellte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2655', locale: 'de-de',
+    text: `### Worum es geht
+
+Claire Spencer lebt mit ihrem Mann Norman, einem Genforscher, in einem Haus am See in Vermont. Die Tochter ist gerade zum Studium ausgezogen, und Claire ist zum ersten Mal seit Jahren allein im Haus.
+
+Türen öffnen sich, das Badewasser läuft von selbst ein, im Spiegel erscheint ein Gesicht, das nicht ihres ist. Claire hält es zunächst für die Nachbarin, die verschwunden ist. Was sie tatsächlich findet, betrifft ihren Mann — und ihre eigene Erinnerung an ein Jahr, das sie nach einem Unfall nur bruchstückhaft rekonstruieren kann.
+
+### Entstehungsgeschichte
+
+Robert Zemeckis drehte den Film während einer Unterbrechung von "Cast Away": Tom Hanks brauchte Zeit, um abzunehmen und sich einen Bart wachsen zu lassen. Zemeckis nutzte dieselbe Mannschaft für beide Filme und drehte zwischen August und Dezember 1999.
+
+Es spielen Harrison Ford und Michelle Pfeiffer. Für Ford war es ein bewusster Bruch mit seinem Bild als aufrechter Durchschnittsmann.
+
+### Hinter den Kulissen
+
+Der Film ist durchsetzt mit Bezügen auf Alfred Hitchcock, besonders auf "Psycho" und "Vertigo" — vom Badezimmer über die Wasserbilder bis zum Verhältnis zwischen Erinnerung und Täuschung. Roger Ebert hielt dem entgegen, Hitchcock hätte nie übernatürliche Elemente eingebaut.
+
+Das Budget lag bei 100 Millionen Dollar. Umstritten war die Werbung: Der Kinotrailer verriet eine zentrale Wendung des Films, was seinerzeit breit kritisiert wurde und bis heute als Beispiel für verunglückte Vermarktung gilt.
+
+### Einordnung & Wirkung
+
+Der Film startete auf Platz eins — vor "X-Men" — und spielte weltweit 291,4 Millionen Dollar ein, davon 155,5 Millionen in den USA. Damit war er der zehnterfolgreichste Film des Jahres 2000.
+
+Die Kritik blieb geteilt: 48 Prozent bei Rotten Tomatoes, mit Lob für Michelle Pfeiffer und Vorbehalten gegen das Drehbuch. Ebert vergab zwei von vier Sternen und fand gute Momente durch ein lächerliches Ende entwertet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10634', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Freitag in South Central Los Angeles. Craig ist gerade entlassen worden — an seinem freien Tag, was ihn besonders ärgert — und sitzt mit seinem Freund Smokey auf der Veranda.
+
+Smokey hat ein Problem: Er sollte Marihuana im Wert von 200 Dollar verkaufen und hat es stattdessen geraucht. Der Händler Big Worm will das Geld bis 22 Uhr, sonst gibt es Ärger. Der Rest des Films besteht darin, dass die beiden auf der Veranda sitzen, während die Nachbarschaft an ihnen vorbeizieht: der Vater, der Hundefänger ist, der Prediger mit Hintergedanken, der Schläger Deebo und die Nachbarin Felisha, deren Abfuhr zu einer der meistzitierten Zeilen des amerikanischen Kinos wurde.
+
+### Entstehungsgeschichte
+
+Das Drehbuch schrieben Ice Cube und DJ Pooh, Regie führte F. Gary Gray; es war dessen erster Kinofilm.
+
+Der Ansatz war eine bewusste Gegenbewegung: Nach Filmen wie "Boyz n the Hood" — in dem Ice Cube selbst mitgespielt hatte — wollten die beiden zeigen, dass dieselbe Gegend auch Alltag und Komik enthält. Ice Cube hat das so beschrieben: Man habe im Viertel auch Spaß gehabt und sich über die Nachbarschaft amüsiert. Vieles im Drehbuch stammt aus eigenen Erlebnissen.
+
+### Hinter den Kulissen
+
+New Line Cinema finanzierte den Film mit 3,5 Millionen Dollar und bestand darauf, dass ein etablierter Komiker eine der Hauptrollen übernimmt. Chris Tucker bekam sie nach anfänglicher Ablehnung; die Darstellerin Angela Means half ihm bei der Vorbereitung. Für Tucker wurde es der Durchbruch.
+
+Daneben spielen Nia Long, Regina King, Bernie Mac und John Witherspoon.
+
+### Einordnung & Wirkung
+
+Der Film startete am 26. April 1995 und spielte weltweit 27,4 Millionen Dollar ein.
+
+Die Kritik lobte den lebhaften Humor und die Darsteller; Metacritic verzeichnete gemischte Urteile.
+
+Seine eigentliche Wirkung entfaltete er danach: zwei Fortsetzungen, ein fester Platz in der Popkultur und Redewendungen, die als Internet-Bilder bis heute in Gebrauch sind. Quentin Tarantino zählte ihn zu seinen zwanzig Lieblingsfilmen der Jahre 1992 bis 2009.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10647', locale: 'de-de',
+    text: `### Worum es geht
+
+Der zwölfjährige Trevor McKinney bekommt in Las Vegas eine Hausaufgabe im Sozialkundeunterricht: Denke dir etwas aus, das die Welt verändert, und setze es um.
+
+Sein Einfall: Man hilft drei Menschen mit etwas, das sie allein nicht schaffen — und diese revanchieren sich nicht, sondern helfen ihrerseits drei anderen. Trevor beginnt bei einem Obdachlosen, bei seiner alkoholkranken Mutter und bei seinem entstellten Lehrer Eugene Simonet. Parallel dazu verfolgt ein Journalist in Los Angeles eine Kette von Gefälligkeiten rückwärts, ohne zu wissen, wo sie begann.
+
+### Entstehungsgeschichte
+
+Grundlage ist Catherine Ryan Hydes Roman. Drehbuchautorin Leslie Dixon tat sich mit den vielen Erzählperspektiven der Vorlage schwer und baute die Geschichte um: Sie beginnt beim Reporter und arbeitet sich rückwärts vor — eine Änderung, die die Autorin mittrug.
+
+Die Rolle des Lehrers war ursprünglich als afroamerikanischer Vietnamveteran namens Reuben St. Clair angelegt. Denzel Washington lehnte ab; besetzt wurde Kevin Spacey als Eugene Simonet. Regie führte Mimi Leder.
+
+### Hinter den Kulissen
+
+Neben Spacey spielen Haley Joel Osment als Trevor und Helen Hunt als seine Mutter. Osment war zu diesem Zeitpunkt durch "The Sixth Sense" bekannt.
+
+Das Ende weicht deutlich vom Buch ab und war schon bei Erscheinen umstritten: Trevor wird beim Versuch, einem gehänselten Mitschüler beizustehen, erstochen. Kritiker warfen dem Film vor, den Tod des Kindes einzusetzen, um dem Gedanken Gewicht zu verleihen.
+
+### Einordnung & Wirkung
+
+Der Film startete am 20. Oktober 2000 auf Platz vier mit 9,6 Millionen Dollar und spielte weltweit 55,7 Millionen ein, bei 40 Millionen Produktionskosten.
+
+Die Kritik lehnte ihn mehrheitlich ab: 39 Prozent bei Rotten Tomatoes, mit Lob für die Darsteller und dem Vorwurf, die Erzählung sei zu stark auf Rührung angelegt. Das Publikum vergab bei CinemaScore ein A.
+
+Der Titelgedanke hat sich verselbstständigt: "Pay it forward" ist im englischen Sprachgebrauch als Bezeichnung für weitergegebene Hilfe geblieben, und es gibt eine gleichnamige Stiftung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:5689', locale: 'de-de',
+    text: `### Worum es geht
+
+Nach einem Schiffbrand im 19. Jahrhundert stranden zwei Kinder und der Schiffskoch Paddy auf einer unbewohnten Insel im Südpazifik. Als Paddy stirbt, sind Emmeline und Richard allein.
+
+Sie wachsen dort auf, ohne Erwachsene, ohne Erklärungen und ohne Begriffe für das, was mit ihren Körpern geschieht. Der Film erzählt das Erwachsenwerden zweier Menschen, die nichts von dem gelernt haben, was ihre Herkunftsgesellschaft ihnen mitgegeben hätte — einschließlich der Vorstellung, dass zwischen ihnen ein Verhältnis besteht, das anderswo verboten wäre.
+
+### Entstehungsgeschichte
+
+Grundlage ist Henry De Vere Stacpooles Roman von 1908. Regie führte Randal Kleiser, der zuvor "Grease" gedreht hatte.
+
+Die Dreharbeiten begannen am 18. Juni 1979 auf der Insel Nanuya Levu in Fidschi; das Budget lag bei 4,5 Millionen Dollar. Die Kamera führte Néstor Almendros.
+
+### Hinter den Kulissen
+
+Brooke Shields war während der Dreharbeiten 14 Jahre alt, Christopher Atkins 18. Der Umgang damit war schon damals ein Thema und ist es bis heute: Sämtliche Nacktszenen übernahm die 32-jährige Stuntkoordinatorin Kathy Troutt als Double. Für Aufnahmen von Shields' Oberkörper wurden ihre Haare mit Klebstoff an der Brust befestigt.
+
+Die Kameraarbeit von Almendros wurde von der Kritik durchgehend gelobt und für einen Oscar nominiert — sie ist der Teil des Films, der unbestritten blieb.
+
+### Einordnung & Wirkung
+
+Allein in den USA spielte der Film 58,8 Millionen Dollar ein und war damit wirtschaftlich sehr erfolgreich.
+
+Die Kritik lehnte ihn scharf ab: 12 Prozent von 26 Besprechungen bei Rotten Tomatoes; Roger Ebert vergab anderthalb Sterne. Brooke Shields erhielt die allererste Goldene Himbeere als schlechteste Hauptdarstellerin.
+
+Geblieben ist der Film weniger wegen seiner Qualität als wegen der Diskussion, die er ausgelöst hat — über den Umgang mit minderjährigen Darstellerinnen, die seither erheblich strenger geregelt ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:616820', locale: 'de-de',
+    text: `### Worum es geht
+
+Vier Jahre nach der Mordnacht von "Halloween Kills" hat Haddonfield weitergemacht. Michael Myers ist seither verschwunden, Laurie Strode hat ein Haus, eine Enkelin und schreibt an ihren Erinnerungen.
+
+Im Mittelpunkt steht jedoch nicht sie, sondern Corey Cunningham: ein junger Mann, der bei einem Babysitter-Unfall ein Kind getötet hat und seither von der ganzen Stadt als Mörder behandelt wird. Was mit ihm geschieht, nachdem er Michael begegnet, ist der eigentliche Gegenstand des Films — die Frage, ob das Böse eine Person ist oder etwas, das ein Ort weitergibt.
+
+### Entstehungsgeschichte
+
+Der Film schließt die Trilogie von David Gordon Green ab, die 2018 begann.
+
+Die Entscheidung, die Erzählung um eine neue Figur zu bauen statt um Michael Myers, war die umstrittenste der ganzen Reihe. Ein wiederkehrender Befund der Kritik lautete, der Film sei häufig verwirrend und werde von einer Reihe verpasster Gelegenheiten beschädigt.
+
+### Hinter den Kulissen
+
+Die Premiere fand am 11. Oktober 2022 beim Beyond Fest statt, der Kinostart folgte am 14. Oktober. Das Budget lag bei 33 Millionen Dollar.
+
+Gleichzeitig erschien der Film bei Peacock im kostenpflichtigen Abo. Diese Doppelauswertung schlug unmittelbar durch: Vom Start- zum zweiten Wochenende brach das Ergebnis um 88 Prozent ein.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 105,4 Millionen Dollar ein, davon 64,1 Millionen in den USA — der schwächste Wert der drei Teile.
+
+Die Kritik blieb geteilt (40 Prozent bei Rotten Tomatoes), das Publikum vergab bei CinemaScore ein C plus und damit den schlechtesten Wert der Trilogie.
+
+Einzelne Stimmen verteidigten den Film ausdrücklich: Er wende sich einer kleineren, persönlicheren Erzählweise zu, die an Greens frühere unabhängige Arbeiten erinnere. Damit steht er stellvertretend für die Frage, wie viel Abweichung eine über Jahrzehnte gewachsene Reihe verträgt.` },
+  {
+    bereich: 'titel', schluessel: 'series:62126', locale: 'de-de',
+    text: `### Worum es geht
+
+Luke Cage arbeitet in Harlem in einem Friseursalon und wäscht abends Geschirr in einem Nachtclub. Er hält sich bedeckt, denn er ist aus dem Gefängnis geflohen — und was ihm dort bei einem sabotierten Experiment widerfuhr, hat ihn unverwundbar und außergewöhnlich stark gemacht.
+
+Als eine Explosion sein Zuhause trifft, tritt er hervor. Sein Gegenspieler ist Cornell "Cottonmouth" Stokes, Clubbesitzer und Waffenhändler, gedeckt von seiner Cousine, der Ratsfrau Mariah Dillard. Die Serie erzählt weniger eine Superheldengeschichte als ein Porträt eines Stadtteils: wer dort Einfluss hat, wer ihn verliert und was aus einem schwarzen Mann in kugelsicherer Haut in einem Kapuzenpullover politisch wird.
+
+### Entstehungsgeschichte
+
+Cheo Hodari Coker entwickelte die Serie und leitete sie. Seinen Vorschlag an Netflix hat er so beschrieben: eine Auseinandersetzung mit Harlem, wie sie "The Wire" für Baltimore geleistet habe.
+
+Die Serie gehört zum Verbund der Marvel-Produktionen bei Netflix, gemeinsam mit "Daredevil", "Jessica Jones" und "Iron Fist", und teilt die Handlungswelt der Marvel-Kinofilme.
+
+### Hinter den Kulissen
+
+Gedreht wurde überwiegend in Harlem selbst.
+
+Die Musik ist ein eigener Teil der Serie: Adrian Younge und Ali Shaheed Muhammad schrieben einen Soundtrack zwischen Hip-Hop der neunziger Jahre und Soul, und in jeder Folge tritt im Club eine reale Band auf. Die Folgentitel der ersten Staffel sind Stücke von Gang Starr, die der zweiten Staffel Stücke von Pete Rock & CL Smooth.
+
+### Einordnung & Wirkung
+
+Die erste Staffel erschien am 30. September 2016, die zweite am 22. Juni 2018. Netflix stellte die Serie am 19. Oktober 2018 wegen künstlerischer Differenzen über eine geplante dritte Staffel ein.
+
+Die Kritik reagierte sehr gut: 90 Prozent für die erste, 86 Prozent für die zweite Staffel bei Rotten Tomatoes, mit Lob für die gesellschaftliche Grundierung und die Darsteller.
+
+Am 1. März 2022 wurden sämtliche Marvel-Serien bei Netflix entfernt und wechselten am 16. März 2022 zu Disney+.` },
+  {
+    bereich: 'titel', schluessel: 'movie:82990', locale: 'de-de',
+    text: `### Worum es geht
+
+Henderson, Nevada, im Jahr 2011. Die fünfzehnjährige Alex und ihre Familie bekommen neue Nachbarn: eine Frau und ihr Sohn Robbie. Als die Mutter ins Krankenhaus muss, zieht Robbie vorübergehend bei ihnen ein.
+
+Alex und ihr Freund Ben beginnen, das Haus zu filmen — über Laptop-Kameras, über Skype-Verbindungen und über die Infrarotpunkte einer Spielkonsole, die den Raum nachts mit einem sichtbaren Punktmuster überzieht. Was sie aufnehmen, führt zurück zu Katie aus den früheren Filmen und zu einem Kind, das damals verschwand.
+
+### Entstehungsgeschichte
+
+Regie führten Henry Joost und Ariel Schulman, die bereits den dritten Teil verantwortet hatten. Das Budget lag bei 5 Millionen Dollar.
+
+Der erzählerische Anschluss liegt bei Teil zwei: Katie hat den Jungen Hunter entführt, und der Film löst auf, was aus ihm geworden ist.
+
+### Hinter den Kulissen
+
+Die Reihe lebt davon, jedes Mal eine neue Aufnahmetechnik einzuführen — hier sind es Laptop-Kameras, Videotelefonate und vor allem die Infrarot-Sensorik einer Spielkonsole. Deren Punktmuster ist im Bild sichtbar und macht Bewegungen im Dunkeln erkennbar, ohne dass jemand die Kamera halten müsste.
+
+Kathryn Newton spielt Alex, Katie Featherston kehrt als Katie zurück. Stephen Dunham, der Alex' Vater spielt, starb kurz nach Abschluss der Dreharbeiten an einem Herzinfarkt.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 19. Oktober 2012 und spielte weltweit 142,8 Millionen Dollar ein. Der Start in den USA blieb mit 29 Millionen Dollar jedoch weit hinter dem dritten Teil zurück, der 54 Millionen erreicht hatte.
+
+Die Kritik lehnte ihn ab: 23 Prozent bei Rotten Tomatoes mit dem Befund abnehmenden Ertrags; das Publikum vergab bei CinemaScore ein C.
+
+Er markiert damit den Punkt, an dem die Reihe ihren Zenit überschritten hatte — kein Verlustgeschäft, aber der erste deutliche Rückgang nach drei Erfolgen.` },
 ];

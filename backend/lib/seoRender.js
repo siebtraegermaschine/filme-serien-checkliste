@@ -17,9 +17,24 @@ export function attrEsc(wert) {
 
 const BILD_FALLBACK = SITE + '/og-image.png';
 
+// GESAMTSPERRE bis zur Freigabe (Christian, 16.08.2026): Solange dies false
+// ist, tragen ALLE SEO-Seiten "noindex" -- unabhaengig davon, ob fuer den
+// jeweiligen Titel schon ein eigener Text vorliegt. Die Seiten bleiben
+// erreichbar und pruefbar, nur eben nicht indexierbar.
+//
+// "follow" bleibt bewusst stehen und robots.txt sperrt /de-de/ NICHT: Ein
+// Crawler muss die Seite abrufen duerfen, um das noindex ueberhaupt zu lesen.
+// Wer beides gleichzeitig macht (Disallow + noindex), erreicht das Gegenteil --
+// bereits indexierte Seiten blieben dann im Index stehen.
+//
+// Zum Freischalten: auf true setzen, committen, deployen. Sonst nichts noetig,
+// die Seiten kennen ihre eigene Indexierbarkeit bereits (seoData.js:
+// indexierbar = es existiert eine seo_content-Zeile).
+const SEO_FREIGEGEBEN = false;
+
 function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates }) {
   const url = SITE + pfad;
-  const robots = indexierbar ? 'index,follow' : 'noindex,follow';
+  const robots = (SEO_FREIGEGEBEN && indexierbar) ? 'index,follow' : 'noindex,follow';
   const hreflangs = (alternates && alternates.length ? alternates : [{ locale, pfad }])
     .map((a) => `<link rel="alternate" hreflang="${attrEsc(hreflangCode(a.locale))}" href="${attrEsc(SITE + a.pfad)}">`)
     .join('\n  ');

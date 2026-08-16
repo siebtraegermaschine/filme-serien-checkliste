@@ -13,6 +13,14 @@
 # "Diese Titel teilen"-Momentaufnahmen (?titel=TOKEN) bleiben noindex: feste,
 # personenbezogene Listen, keine eigenstaendigen Inhaltsseiten.
 
+# STAND 16.08.2026 -- SEO-Seiten noch nicht freigegeben:
+# Die Seiten unter /de-de/ tragen derzeit alle "noindex" (Gesamtsperre in
+# backend/lib/seoRender.js: SEO_FREIGEGEBEN). Der Allow-Eintrag bleibt trotzdem
+# stehen, denn ein Crawler muss die Seite abrufen duerfen, um das noindex
+# ueberhaupt zu lesen -- ein Disallow wuerde das Gegenteil bewirken.
+# Nur die Sitemap-Zeile am Ende ist bis zur Freigabe auskommentiert, damit
+# niemand aktiv auf die noch gesperrten Seiten hingewiesen wird.
+
 User-agent: *
 Allow: /$
 Allow: /de-de/
@@ -25,4 +33,7 @@ Allow: /manifest.json
 Disallow: /*?titel=
 Disallow: /
 
-Sitemap: https://movietaste.de/sitemap-index.xml
+# Bis zur Freigabe der SEO-Seiten auskommentiert (siehe Hinweis oben).
+# Die Sitemap selbst bleibt unter /sitemap-index.xml erreichbar und pruefbar.
+# Zum Freischalten: diese Zeile wieder aktivieren.
+# Sitemap: https://movietaste.de/sitemap-index.xml
