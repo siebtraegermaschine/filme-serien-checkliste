@@ -5349,15 +5349,18 @@ function candDetailsHtml(c, kind){
   // sind zwei getrennte Reihen, siehe detailChipsHtml).
   return '<div class="details">' + posterHtml + plotHtml + tagsHtml + rows + '</div>';
 }
-// Der taegliche Streaming-Abgleich (stream-fetch.mjs) fuehrt seine vier
-// Plattformen unter eigenen Kuerzeln, die Anbieterauswahl arbeitet dagegen mit
-// TMDB-Provider-IDs -- diese Zuordnung verbindet beide. Nur diese vier koennen
-// als Schildchen an den Titeln erscheinen; waehlt man weitere Anbieter aus,
-// wirkt das ausschliesslich im Ansehen/Leihen/Kaufen-Panel, weil es fuer sie
-// schlicht keine Feed-Daten gibt.
+// Der Streaming-Abgleich fuehrt seine Anbieter unter Slugs ('netflix',
+// 'amazon', ... -- daran haengen auch die SEO-Seiten), die Anbieterauswahl
+// arbeitet dagegen mit TMDB-Nummern. Seit stream-fetch.mjs seinen
+// Anbieterumfang je Region aus dem TMDB-Katalog ableitet, bringt jeder
+// Feed-Anbieter seine Nummer selbst mit (p.tmdbId) -- inklusive der
+// Landesunterschiede (Amazon Prime Video ist 9 in DE, 119 in BR/PL).
+//
+// Die feste Vierer-Tabelle bleibt als Rueckfall fuer Antworten aus der Zeit
+// davor stehen (Browser-Zwischenspeicher, Region noch ohne neuen Import-Lauf).
 var STREAM_FEED_TMDB_IDS = { netflix: 8, amazon: 9, disney: 337, apple: 350 };
 function feedProviderSelected(p){
-  var tmdbId = STREAM_FEED_TMDB_IDS[p && p.id];
+  var tmdbId = (p && p.tmdbId != null) ? p.tmdbId : STREAM_FEED_TMDB_IDS[p && p.id];
   return tmdbId ? providerSelected(tmdbId) : true;
 }
 function selectedProviders(providers){
@@ -5370,8 +5373,19 @@ function providerChipsHtml(providers){
     return '<span class="provider-chip">'+esc(p.name)+'</span>';
   }).join('') + '</div>';
 }
+// Kuerzere bzw. gebraeuchlichere Schreibweise fuers Schildchen. TMDB schreibt
+// die Plus-Dienste seit einiger Zeit aus ("Disney Plus" statt "Disney+");
+// alles nicht Aufgefuehrte erscheint unveraendert so, wie TMDB es nennt.
+var PROVIDER_LABELS = {
+  'Amazon Prime Video': 'Amazon Prime',
+  'Disney Plus': 'Disney+',
+  'Apple TV Plus': 'Apple TV+',
+  'Paramount Plus': 'Paramount+',
+  'Paramount Plus Premium': 'Paramount+',
+  'Star Plus': 'Star+',
+};
 function providerLabel(name){
-  return (name === 'Amazon Prime Video') ? 'Amazon Prime' : name;
+  return PROVIDER_LABELS[name] || name;
 }
 
 /* ---- "· Ab 14.08. im Kino" an noch nicht angelaufenen Titeln ----
@@ -5975,28 +5989,62 @@ function buildPool(combinedRows, streamDoc){
   // komplett neue (noch nicht in `titles`) werden als "virtuelle" Eintraege (realId=null)
   // ergaenzt -- die werden erst bei Gesehen/Watchlist-Klick per POST /api/titles/ensure
   // wirklich angelegt (siehe ensurePoolItem).
-  (streamDoc.providers || []).forEach(function(pv){
-    ['f', 's'].forEach(function(key){
-      const type = key === 's' ? 'series' : 'movie';
-      (pv[key] || []).forEach(function(c){
-        const k = type + ':' + c.id;
-        let item = byKey.get(k) || catalogByName.get(type + '|' + normTitle(c.t));
-        if (!item) {
-          item = {
-            realId: null, tmdbId: Number(c.id), type: type,
-            t: c.t, ot: null, y: c.y, g: genresKanonisch(c.g), d: c.d || '', c: c.c || [], kw: c.kw || [],
-            p: c.p || null, poster64: null, r: c.r, vc: c.vc, fsk: c.fsk || null, ov: c.ov || '', fs: c.fs || null,
-            source: 'streaming', providers: [],
-          };
-          byKey.set(k, item);
-          POOL.push(item);
-        }
-        item.fs = c.fs || null;
-        item.providers.push({ id: pv.id, name: providerLabel(pv.name) || pv.id });
+  var doc = streamDokumentNormalisieren(streamDoc);
+  var anbieter = doc.anbieter || [];
+  [['movie', doc.filme], ['series', doc.serien]].forEach(function(paar){
+    var type = paar[0];
+    (paar[1] || []).forEach(function(c){
+      const k = type + ':' + c.id;
+      let item = byKey.get(k) || catalogByName.get(type + '|' + normTitle(c.t));
+      if (!item) {
+        item = {
+          realId: null, tmdbId: Number(c.id), type: type,
+          t: c.t, ot: null, y: c.y, g: genresKanonisch(c.g), d: c.d || '', c: c.c || [], kw: c.kw || [],
+          p: c.p || null, poster64: null, r: c.r, vc: c.vc, fsk: c.fsk || null, ov: c.ov || '', fs: c.fs || null,
+          source: 'streaming', providers: [],
+        };
+        byKey.set(k, item);
+        POOL.push(item);
+      }
+      item.fs = c.fs || null;
+      (c.pv || []).forEach(function(i){
+        var a = anbieter[i];
+        if (a) item.providers.push({ id: a.id, tmdbId: a.tmdbId != null ? a.tmdbId : null, name: providerLabel(a.name) || a.id });
       });
     });
   });
   buildSearchIndex();
+}
+/* Vereinheitlicht die beiden Auslieferungsformen von /api/streaming.
+
+   Heute: {anbieter:[{id,tmdbId,name}], filme:[...], serien:[...]} -- jeder
+   Titel EINMAL, seine Anbieter als Indexliste `pv`. Frueher: {providers:
+   [{id,name,f,s}]} -- da lag ein Titel, den es bei drei Anbietern gibt,
+   dreimal vollstaendig im Payload.
+
+   Die alte Form kann noch aus dem Browser-Zwischenspeicher kommen, solange
+   ein Tab ueber den Deploy hinweg offen war (Cache-Control: max-age=120,
+   stale-while-revalidate). Ohne diesen Zweig staende die Liste dann leer da. */
+function streamDokumentNormalisieren(doc){
+  if (doc && Array.isArray(doc.anbieter)) return doc;
+  var anbieter = [], filme = [], serien = [], jeSchluessel = {};
+  ((doc && doc.providers) || []).forEach(function(pv, i){
+    anbieter.push({ id: pv.id, tmdbId: null, name: pv.name });
+    ['f', 's'].forEach(function(key){
+      (pv[key] || []).forEach(function(c){
+        var k = key + ':' + c.id;
+        var da = jeSchluessel[k];
+        if (!da) {
+          da = Object.assign({}, c, { pv: [] });
+          jeSchluessel[k] = da;
+          (key === 'f' ? filme : serien).push(da);
+        }
+        da.pv.push(i);
+      });
+    });
+  });
+  return { generated: doc && doc.generated, region: doc && doc.region,
+           anbieter: anbieter, filme: filme, serien: serien };
 }
 // Legt einen noch "virtuellen" Pool-Eintrag (nur aus dem Streaming-Angebot bekannt,
 // noch keine title_id) bei Bedarf serverseitig an und liefert seine interne ID.
@@ -11482,14 +11530,17 @@ document.head.insertAdjacentHTML('beforeend',
   'li.disc .details{width:100%;margin-top:9px;padding-top:9px;}'+
   '</style>');
 
-// STREAM haelt das aktuelle Streaming-Angebot (Anbieter + Titel je Anbieter,
-// siehe /api/streaming) -- wird in buildPool() genutzt, um POOL-Eintraegen ihre
-// aktuellen Anbieter (item.providers) zuzuweisen. Frueher zusaetzlich Basis fuer
-// den eigenstaendigen Streaming-Tab (mit eigenem Anbieter-Dropdown) -- der ist
-// entfallen (siehe "Im Streaming"-Filter unter Filme/Serien), STREAM selbst wird
-// aber weiterhin gebraucht.
-let STREAM = { generated: null, region: REGION_WAHL, providers: [] };
+// STREAM haelt die zuletzt geladene Antwort von /api/streaming (Anbieterliste
+// der Region + je Titel deren Indizes, siehe streamDokumentNormalisieren).
+// Ausgewertet wird sie in buildPool(), das den POOL-Eintraegen ihre aktuellen
+// Anbieter (item.providers) zuweist; hier steht sie nur zum Nachschlagen beim
+// Fehlersuchen. Frueher zusaetzlich Basis fuer den eigenstaendigen
+// Streaming-Tab -- der ist entfallen (siehe "Im Streaming"-Filter unter
+// Filme/Serien).
+let STREAM = { generated: null, region: REGION_WAHL, anbieter: [], filme: [], serien: [] };
 // Suchfeld erkennt Anbieter-Namen weiterhin ueber Aliase (siehe .disc-Behandlung in applyFilter).
+// Neue Anbieter brauchen hier nichts: poolItemMatchesQuery durchsucht ohnehin
+// item.providers[].name, und den liefert der Feed je Region selbst mit.
 const PROVIDER_ALIASES = {
   amazon:  'amazon prime video amazon prime prime video',
   netflix: 'netflix',

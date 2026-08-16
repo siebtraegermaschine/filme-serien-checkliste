@@ -685,6 +685,33 @@ BEGIN
   END IF;
 END $$;
 
+-- TMDB-Anbieternummer je Feed-Zeile. provider_id ist und bleibt der Slug
+-- ('netflix', 'amazon', ...) -- daran haengen die oeffentlichen SEO-Seiten
+-- /<locale>/streaming/<slug> und die Eintraege in seo_content. Die Auswahl in
+-- der App arbeitet dagegen mit TMDB-Nummern (users.watch_provider_ids), und
+-- die sind je Land verschieden (Amazon Prime Video ist 9 in DE, aber 119 in
+-- BR/PL). Frueher lag diese Zuordnung als feste Vierer-Tabelle im Frontend
+-- (STREAM_FEED_TMDB_IDS) und in wochenendmail.js; mit einem je Region
+-- dynamisch bestimmten Anbieterumfang traegt sie jetzt die Zeile selbst.
+-- Bestandszeilen bleiben NULL, bis der naechste Import-Lauf sie ueberschreibt.
+ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS tmdb_provider_id INTEGER;
+
+-- Einmalige Uebernahme fuer den Bestand der vier Anbieter der ersten
+-- Ausbaustufe, damit Anbieter-Schildchen, Filter und Wochenend-Mail nicht bis
+-- zum ersten neuen Import-Lauf jeder Region blind sind. Netflix/Disney+/Apple
+-- TV+ tragen weltweit dieselbe Nummer; Amazon Prime Video laeuft nur in
+-- DE, AT, GB und US unter 9 und ueberall sonst unter 119 (am 16. August 2026
+-- fuer alle 41 Regionen bei TMDB nachgesehen). Durch `tmdb_provider_id IS
+-- NULL` laeuft dieses UPDATE genau einmal.
+UPDATE streaming_cache SET tmdb_provider_id = CASE provider_id
+    WHEN 'netflix' THEN 8
+    WHEN 'disney'  THEN 337
+    WHEN 'apple'   THEN 350
+    WHEN 'amazon'  THEN CASE WHEN region IN ('DE','AT','GB','US') THEN 9 ELSE 119 END
+  END
+ WHERE tmdb_provider_id IS NULL
+   AND provider_id IN ('netflix', 'disney', 'apple', 'amazon');
+
 -- Anonyme Trichter-Zaehler (IDEEN-WACHSTUM.md, Abschnitt 3): je Tag und
 -- Schritt EINE Zahl. Bewusst keine Kennungen, keine IP-Adressen, keine
 -- Zeitstempel unterhalb des Tages -- aus diesen Zeilen laesst sich keine

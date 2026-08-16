@@ -6,6 +6,10 @@ import { sprachWahl, regionWahl, sprachFeld, freigabeFuer } from '../lib/i18n.js
 
 const router = createAsyncRouter();
 
+// Anzeigenamen der vier Anbieter der ersten Ausbaustufe. Seit der Import seine
+// Anbieter je Region aus dem TMDB-Katalog ableitet, schickt stream-fetch.mjs
+// Name UND TMDB-Nummer je Anbieter mit -- diese Tabelle ist nur noch der
+// Rueckfall fuer Zeilen aus der Zeit davor.
 const PROVIDER_NAMES = {
   amazon: 'Amazon Prime',
   netflix: 'Netflix',
@@ -45,21 +49,63 @@ export function streamingSchluessel(lang = 'de', region = 'DE') {
   return `${STREAMING_SCHLUESSEL}:${lang}:${region}`;
 }
 
+/* Form der Antwort: JEDER TITEL EINMAL, mit den Anbietern als Indexliste `pv`
+   in die Anbieterliste `anbieter` -- nicht mehr je Anbieter eine eigene
+   Titelliste.
+
+   Der Grund ist Groesse. Ein Titel, den es bei drei Anbietern gibt, lag vorher
+   dreimal vollstaendig im Payload (Titel, Genres, Besetzung, Regie,
+   Freigaben). Mit vier Anbietern war das zu verschmerzen (DE: 5,9 MB); mit den
+   zehn bis fuenfzehn relevanten Anbietern je Region waere es das nicht mehr --
+   die Ueberschneidung waechst mit jedem Anbieter, und diese Antwort holt der
+   Client bei JEDEM Start. `pv` kostet dagegen ein bis zwei Ziffern je Anbieter.
+
+   Die Reihenfolge der Anbieterliste ist deterministisch (groesster zuerst,
+   dann nach Slug), damit ETag und Zwischenspeicher zwischen zwei Bauten
+   derselben Daten stabil bleiben. */
 export async function ladeStreaming(lang = 'de', region = 'DE') {
   const { rows } = await pool.query(
-    `SELECT * FROM streaming_cache WHERE region = $1 ORDER BY provider_id, type, title`,
+    `SELECT * FROM streaming_cache WHERE region = $1 ORDER BY type, title`,
     [region]
   );
 
-  const byProvider = new Map();
+  const jeSlug = new Map();
   let latest = null;
   for (const row of rows) {
     if (!latest || row.fetched_at > latest) latest = row.fetched_at;
-    if (!byProvider.has(row.provider_id)) {
-      byProvider.set(row.provider_id, { id: row.provider_id, name: PROVIDER_NAMES[row.provider_id] || row.provider_id, f: [], s: [] });
+    const da = jeSlug.get(row.provider_id);
+    if (!da) {
+      jeSlug.set(row.provider_id, {
+        id: row.provider_id,
+        tmdbId: row.tmdb_provider_id != null ? row.tmdb_provider_id : null,
+        name: row.provider_name || PROVIDER_NAMES[row.provider_id] || row.provider_id,
+        anzahl: 1,
+      });
+    } else {
+      da.anzahl++;
+      if (da.tmdbId == null && row.tmdb_provider_id != null) da.tmdbId = row.tmdb_provider_id;
     }
-    const bucket = byProvider.get(row.provider_id);
-    (row.type === 'movie' ? bucket.f : bucket.s).push(rowToCand(row, lang, region));
+  }
+  const anbieter = [...jeSlug.values()]
+    .sort((a, b) => b.anzahl - a.anzahl || a.id.localeCompare(b.id));
+  const indexJeSlug = new Map(anbieter.map((a, i) => [a.id, i]));
+
+  const filme = new Map();
+  const serien = new Map();
+  for (const row of rows) {
+    const eimer = row.type === 'movie' ? filme : serien;
+    let eintrag = eimer.get(row.tmdb_id);
+    if (!eintrag) {
+      eintrag = rowToCand(row, lang, region);
+      eintrag.pv = [];
+      eimer.set(row.tmdb_id, eintrag);
+    }
+    eintrag.pv.push(indexJeSlug.get(row.provider_id));
+    // "Neu im Streaming" meint den ERSTEN Auftritt ueberhaupt, nicht den beim
+    // zuletzt eingelesenen Anbieter -- deshalb das Minimum ueber alle Zeilen
+    // des Titels.
+    const fs = row.first_seen_at ? row.first_seen_at.toISOString() : null;
+    if (fs && (!eintrag.fs || fs < eintrag.fs)) eintrag.fs = fs;
   }
 
   // Genre-Paarung (deutsch/englisch) haengt hier mit dran, statt einen eigenen
@@ -72,7 +118,9 @@ export async function ladeStreaming(lang = 'de', region = 'DE') {
   return {
     generated: latest ? latest.toISOString() : null,
     region,
-    providers: Array.from(byProvider.values()),
+    anbieter: anbieter.map(({ anzahl, ...rest }) => rest),
+    filme: [...filme.values()],
+    serien: [...serien.values()],
     genreAlias: aliasRows.map((r) => ({ de: r.name_de, en: r.name_en })),
   };
 }
@@ -146,6 +194,11 @@ router.post('/ingest', async (req, res) => {
     for (const provider of providers) {
       const providerId = provider.id;
       const providerName = provider.name || PROVIDER_NAMES[providerId] || providerId;
+      // TMDB-Nummer des Anbieters IN DIESER REGION (Amazon Prime Video ist 9
+      // in DE, 119 in BR/PL). Kommt seit dem dynamischen Anbieterumfang aus
+      // dem Payload; aeltere Laeufe schicken sie nicht, dann bleibt der
+      // vorhandene Wert stehen.
+      const providerTmdbId = Number.isInteger(provider.tmdbId) ? provider.tmdbId : null;
       for (const [type, items] of [['movie', provider.f], ['series', provider.s]]) {
         for (const item of items || []) {
           // Magere Zeile (item.ohneDetails, siehe Skip-Liste in stream-fetch.mjs):
@@ -156,10 +209,12 @@ router.post('/ingest', async (req, res) => {
           const voll = !item.ohneDetails;
           await client.query(
             `INSERT INTO streaming_cache
-               (provider_id, provider_name, type, tmdb_id, region, title, title_en, uebersetzungen, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, fetched_at, enriched_at)
-             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19, clock_timestamp(),
+               (provider_id, provider_name, tmdb_provider_id, type, tmdb_id, region, title, title_en, uebersetzungen, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, fetched_at, enriched_at)
+             VALUES ($1,$2,$21,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19, clock_timestamp(),
                CASE WHEN $20::boolean THEN clock_timestamp() END)
              ON CONFLICT (provider_id, type, tmdb_id, region) DO UPDATE SET
+               provider_name = EXCLUDED.provider_name,
+               tmdb_provider_id = COALESCE(EXCLUDED.tmdb_provider_id, streaming_cache.tmdb_provider_id),
                title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
                director = CASE WHEN $20::boolean THEN EXCLUDED.director ELSE streaming_cache.director END,
                cast_names = CASE WHEN $20::boolean THEN EXCLUDED.cast_names ELSE streaming_cache.cast_names END,
@@ -197,6 +252,7 @@ router.post('/ingest', async (req, res) => {
               item.ov || null,
               item.ovEn || null,
               voll,
+              providerTmdbId,
             ]
           );
         }

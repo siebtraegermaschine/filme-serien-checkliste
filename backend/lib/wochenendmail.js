@@ -41,18 +41,19 @@ const BASIS_URL = process.env.PUBLIC_BASE_URL || 'https://movietaste.de';
 
 const LOCALES = { de: 'de-DE', en: 'en-GB', fr: 'fr-FR', es: 'es-ES', it: 'it-IT', nl: 'nl-NL', pt: 'pt-BR' };
 
-// users.watch_provider_ids traegt TMDB-Nummern, streaming_cache.provider_id
-// aber die Feed-Slugs -- dieselbe Zuordnung wie STREAM_FEED_TMDB_IDS im
-// Frontend. Andere gewaehlte Anbieter (Shops wie Apple TV Store 2 oder
-// Amazon Video 10) haben keinen Feed und koennen hier nichts liefern.
-const SLUG_JE_TMDB_ID = { 8: 'netflix', 9: 'amazon', 337: 'disney', 350: 'apple' };
+/* users.watch_provider_ids traegt TMDB-Nummern; streaming_cache traegt sie seit
+   dem regionalen Anbieterausbau je Zeile mit (tmdb_provider_id), sodass hier
+   direkt verglichen werden kann. Frueher stand an dieser Stelle eine feste
+   Zuordnung der vier Feed-Slugs -- die haette mit einem je Region dynamisch
+   bestimmten Anbieterumfang alles Neue verschluckt, und sie war fuer Amazon in
+   36 der 41 Regionen ohnehin falsch (dort ist Amazon Prime Video 119, nicht 9).
 
-/* null = nicht filtern (keine/leere Auswahl: jeder Anbieter zaehlt, wie im
-   Frontend-Filter); leeres Array = Auswahl ohne eine der vier Flatrates,
-   dann gibt es "bei deinen Anbietern" ehrlicherweise nichts zu melden. */
-export function anbieterSlugs(watchProviderIds) {
+   null = nicht filtern (keine/leere Auswahl: jeder Anbieter zaehlt, wie im
+   Frontend-Filter). Shops ohne Feed (Apple TV Store 2, Amazon Video 10) stehen
+   ggf. mit in der Liste und treffen dort schlicht nichts. */
+export function anbieterNummern(watchProviderIds) {
   if (!Array.isArray(watchProviderIds) || !watchProviderIds.length) return null;
-  return watchProviderIds.map((id) => SLUG_JE_TMDB_ID[id]).filter(Boolean);
+  return watchProviderIds.map(Number).filter((n) => Number.isInteger(n));
 }
 
 /* Mailtexte je Oberflaechensprache. Hinweis: Die Genre-Namen im Vorschlags-
@@ -130,7 +131,7 @@ const TEXTE = {
 export async function wochenendMailBauen(person) {
   const region = regionWahl(person.region);
   const sprache = sprachWahl(person.sprache);
-  const anbieter = anbieterSlugs(person.watch_provider_ids);
+  const anbieter = anbieterNummern(person.watch_provider_ids);
 
   // 1. Watchlist-Titel, die gerade streambar sind -- die besten zwei.
   const { rows: stream } = anbieter && !anbieter.length ? { rows: [] } : await pool.query(
@@ -140,7 +141,7 @@ export async function wochenendMailBauen(person) {
        JOIN titles t ON t.id = up.title_id AND t.tmdb_id IS NOT NULL
        JOIN streaming_cache s ON s.tmdb_id = t.tmdb_id AND s.type = t.type AND s.region = $2
       WHERE up.user_id = $1 AND up.watchlist AND NOT up.seen
-        AND ($3::text[] IS NULL OR s.provider_id = ANY($3))
+        AND ($3::int[] IS NULL OR s.tmdb_provider_id = ANY($3))
         AND NOT EXISTS (SELECT 1 FROM benachrichtigt b
                          WHERE b.user_id = up.user_id AND b.title_id = t.id AND b.art = 'we-stream')
       GROUP BY t.id, t.title, t.title_en, t.uebersetzungen, t.rating
