@@ -20,6 +20,10 @@ import trailersRouter from './routes/trailers.js';
 import linksRouter from './routes/links.js';
 import kinosRouter from './routes/kinos.js';
 import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
+import seoRouter from './routes/seo.js';
+import { attrEsc } from './lib/seoRender.js';
+import { slugify } from './lib/slug.js';
+import { ladeSeoText } from './lib/seoData.js';
 import movieNightRouter from './routes/movieNight.js';
 import metrikRouter from './routes/metrik.js';
 import eventsRouter from './routes/events.js';
@@ -131,11 +135,6 @@ function indexHtml() {
   }
   return indexHtmlCache;
 }
-function attrEsc(wert) {
-  return String(wert == null ? '' : wert)
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
 // Kurzbeschreibung fuer die Vorschaukarte: Bewertung und Genre vorweg, dann so
 // viel Inhaltsangabe wie hineinpasst. WhatsApp kuerzt nach rund 160 Zeichen --
 // besser wir kuerzen sauber an einer Wortgrenze als mitten im Wort.
@@ -184,7 +183,24 @@ app.get('/t/:art/:kennung', mengenGrenze({ name: 'share-page', anzahl: 120, minu
   const grossesBild = !!backdrop;
   const titelZeile = titel.title + (titel.year ? ' (' + titel.year + ')' : '') + ' – MovieMatch';
 
+  // Canonical auf die volle SEO-Seite (siehe backend/routes/seo.js), falls es
+  // fuer diesen Titel schon eine gibt -- verhindert, dass Google diese
+  // Vorschauseite und /de-de/film|serie/... als zwei Versionen desselben
+  // Inhalts wertet. Nur moeglich, wenn der Titel eine echte titles-Zeile hat
+  // (titel.quelle !== 'cinema_cache', siehe ladeTitel in share.js) UND schon
+  // eigener SEO-Text existiert (seoData.js: indexierbar erst dann).
+  let canonicalTag = '';
+  if (titel.quelle !== 'cinema_cache' && titel.tmdb_id) {
+    let text = null;
+    try { text = await ladeSeoText('titel', `${titel.type}:${titel.tmdb_id}`, 'de-de'); } catch { /* egal, bleibt ohne Canonical */ }
+    if (text) {
+      const artWort = titel.type === 'series' ? 'serie' : 'film';
+      canonicalTag = '<link rel="canonical" href="https://movietaste.de/de-de/' + artWort + '/' + slugify(titel.title) + '-' + titel.tmdb_id + '">';
+    }
+  }
+
   const block = [
+    canonicalTag,
     '<meta property="og:site_name" content="MovieMatch">',
     '<meta property="og:type" content="video.' + (titel.type === 'series' ? 'tv_show' : 'movie') + '">',
     '<meta property="og:url" content="' + attrEsc(url) + '">',
@@ -207,6 +223,12 @@ app.get('/t/:art/:kennung', mengenGrenze({ name: 'share-page', anzahl: 120, minu
 // die <link rel="icon">-Angaben auswerten. Ohne diese Zeile kam dort ein 404,
 // und manche zeigten daraufhin ihren eigenen Platzhalter statt des Logos.
 app.get('/favicon.ico', (req, res) => res.sendFile(path.join(frontendRoot, 'favicon-32.png')));
+
+// SEO-Seiten (/<locale>/film|serie|filme|... und /sitemap-*.xml) -- eigene,
+// von der App getrennte Dokumente (siehe PLAN-SEO-UMSETZUNG). Muss vor
+// express.static stehen, sonst faengt dessen SPA-Fallback (index.html mit
+// extensions:['html']) diese Pfade zuerst ab.
+app.use(seoRouter);
 
 /* frontendRoot ist /app im Image, und dort liegt neben den Frontend-Dateien
    auch das Backend selbst (siehe backend/Dockerfile: COPY backend/ ./backend/).

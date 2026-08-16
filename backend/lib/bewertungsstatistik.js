@@ -94,6 +94,35 @@ export async function bewertungsstatistik() {
   }));
 }
 
+/* Bewertung EINES Titels fuer die SEO-Titeldetailseite (siehe
+   PLAN-SEO.md/seoData.js) -- dieselbe Mindestzahl-Regel wie
+   bewertungsstatistik(), nur auf einen title_id eingeschraenkt statt auf
+   alle. Liefert null, wenn der Titel die Mindestzahl nicht erreicht: eine
+   Seite darf nie eine Bewertung zeigen, die die Zusage aus Abschnitt 9 der
+   Datenschutzerklaerung unterlaeuft. */
+export async function bewertungFuerTitel(titleId) {
+  const { rows } = await pool.query(
+    `WITH alle AS (
+       SELECT rating::smallint AS sterne, count(*)::int AS anzahl
+         FROM user_progress
+        WHERE title_id = $1 AND rating IS NOT NULL
+        GROUP BY rating
+       UNION ALL
+       SELECT sterne, anzahl FROM title_rating_stufen WHERE title_id = $1
+     )
+     SELECT sum(anzahl)::int AS gesamt,
+            (SELECT jsonb_object_agg(s.sterne, s.summe)
+               FROM (SELECT sterne, sum(anzahl)::int AS summe FROM alle GROUP BY sterne) s) AS verteilung
+       FROM alle`,
+    [titleId]
+  );
+  const gesamt = Number(rows[0] && rows[0].gesamt || 0);
+  if (gesamt < MINDESTZAHL_BEWERTUNGEN) return null;
+  const verteilung = Array.from({ length: 10 }, (_, i) => Number((rows[0].verteilung || {})[i + 1] || 0));
+  const summe = verteilung.reduce((s, anzahl, i) => s + anzahl * (i + 1), 0);
+  return { gesamt, durchschnitt: Math.round((summe / gesamt) * 10) / 10, verteilung };
+}
+
 /* Wie viele Titel die Mindestzahl NICHT erreichen -- nur zur Einordnung beim
    Ausleiten ("3 von 217 Titeln aufgenommen"). Gibt selbst nichts preis. */
 export async function zurueckgehalteneTitel() {

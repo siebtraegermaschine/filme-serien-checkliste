@@ -785,3 +785,75 @@ CREATE TABLE IF NOT EXISTS b2b_deals (
   value_eur  NUMERIC(12,2) NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- ============================================================================
+-- SEO-Seiten (siehe PLAN-SEO.md, Plan "SEO-Seiten: technische Umsetzung").
+-- Eigenstaendige, von der App getrennte Seiten unter /<locale>/... .
+-- ============================================================================
+
+-- Eigener, ausfuehrlicher Redaktionstext je Seite -- NICHT von TMDB
+-- abgeleitet (Dubletten-Risiko), sondern eigens verfasst. schluessel ist je
+-- bereich unterschiedlich aufgebaut: 'movie:<tmdb_id>'/'series:<tmdb_id>'
+-- fuer Titel, ein Genre-Slug fuer 'genre', provider_id fuer 'anbieter',
+-- 'jahr:<jahr>'/'genre:<slug>' fuer 'bestenliste', ein Stadt-Slug fuer
+-- 'kino_stadt'. Ohne passende Zeile bleibt eine Seite ausgeliefert, aber
+-- nicht indexierbar (siehe seoData.js) -- das haelt unfertige Seiten mit
+-- TMDB-Rohtext automatisch aus dem Sitemap-/Crawler-Pfad heraus.
+-- Name (aus titles.director/cast_names, reiner Text ohne ID) -> TMDB-
+-- Personen-ID. Wie title_tmdb_resolution: NULL bedeutet "gesucht, nichts
+-- gefunden", damit eine erfolglose Suche sich nicht bei jedem Aufruf
+-- wiederholt. Namensgleichheit ist eine Heuristik (siehe PLAN-SEO.md 0. --
+-- Kollisionsrisiko bei haeufigen Namen), deshalb bewusst NICHT die einzige
+-- Kennung fuer eine Person-Seite -- die URL traegt zusaetzlich die TMDB-ID.
+CREATE TABLE IF NOT EXISTS personen_resolution (
+  name           TEXT PRIMARY KEY,
+  tmdb_person_id INTEGER,
+  resolved_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Biografie/Foto je TMDB-Personen-ID. Wie watch_providers_cache/
+-- title_videos_cache erst beim ersten Seitenaufruf gefuellt statt fuer den
+-- ganzen Katalog vorab. biografie ist TMDBs eigener redaktioneller Text
+-- (haeufig aus Wikipedia) -- bewusst UNVERAENDERT uebernommen statt neu
+-- verfasst: anders als bei Titeltexten (siehe seo_content) waere ein
+-- erfundener Lebenslauf einer echten Person ein Falschbehauptungs-Risiko,
+-- waehrend Duplicate Content hier das kleinere Problem ist.
+-- Zusatzdaten fuer die SEO-Titeldetailseite, die titles/streaming_cache
+-- nicht fuehren: Laufzeit, genaues Erscheinungsdatum, Budget/Einspiel-
+-- ergebnis, Besetzung MIT Rollennamen (cast_names ist nur eine Namensliste),
+-- Bildergalerie. Wie personen_cache/title_videos_cache erst beim ersten
+-- Seitenaufruf gefuellt statt fuer den ganzen Katalog vorab (siehe
+-- backend/lib/titeldetails.js). Alle Felder aus TMDBs eigenen, oeffentlichen
+-- Endpunkten -- keine selbst verfassten oder recherchierten Angaben.
+CREATE TABLE IF NOT EXISTS titel_details_cache (
+  tmdb_id           INTEGER NOT NULL,
+  type              TEXT NOT NULL CHECK (type IN ('movie', 'series')),
+  laufzeit_minuten  INTEGER,
+  erscheinungsdatum DATE,
+  budget            BIGINT,
+  einspielergebnis  BIGINT,
+  besetzung_rollen  JSONB NOT NULL DEFAULT '[]',
+  bilder            JSONB NOT NULL DEFAULT '[]',
+  fetched_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (tmdb_id, type)
+);
+
+CREATE TABLE IF NOT EXISTS personen_cache (
+  tmdb_person_id INTEGER PRIMARY KEY,
+  name           TEXT NOT NULL,
+  biografie      TEXT,
+  foto_pfad      TEXT,
+  geburtstag     DATE,
+  fetched_at     TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS seo_content (
+  id              BIGSERIAL PRIMARY KEY,
+  bereich         TEXT NOT NULL CHECK (bereich IN ('titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub')),
+  schluessel      TEXT NOT NULL,
+  locale          TEXT NOT NULL DEFAULT 'de-de',
+  text            TEXT NOT NULL,
+  erstellt_am     TIMESTAMPTZ NOT NULL DEFAULT now(),
+  aktualisiert_am TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (bereich, schluessel, locale)
+);

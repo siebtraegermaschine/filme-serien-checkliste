@@ -1,21 +1,28 @@
-# Nur die Startseite gehoert vorerst in Suchmaschinen.
-#
-# Alles andere bleibt draussen: Die Rechtstexte tragen ohnehin noindex, und die
-# geteilten Titel unter /t/... wuerden beliebig viele Adressen mit fast
-# gleichem Inhalt erzeugen -- 27.000 Seiten, die sich nur im Titel
-# unterscheiden, sind fuer eine Suchmaschine Dubletten und fuer uns kein
-# Gewinn.
+# Die Startseite UND die eigenstaendigen SEO-Seiten unter /de-de/... gehoeren
+# in Suchmaschinen (siehe PLAN-SEO.md, Plan "SEO-Seiten: technische
+# Umsetzung"). Alles andere bleibt draussen -- insbesondere die App selbst
+# (index.html/SPA) und die Vorschauseiten unter /t/...: die Rechtstexte
+# tragen ohnehin noindex, und /t/... wuerde beliebig viele Adressen mit fast
+# gleichem Inhalt erzeugen (Dublette zur jeweiligen /de-de/film|serie/...-
+# Seite, die per canonical ohnehin bevorzugt wird).
 #
 # Die Bilder sind ausdruecklich erlaubt: Vorschaukarten in WhatsApp, iMessage
 # und sozialen Netzen holen og-image.png, und ein gesperrtes Bild bedeutet dort
 # eine leere Kachel statt eines Logos.
+#
+# "Diese Titel teilen"-Momentaufnahmen (?titel=TOKEN) bleiben noindex: feste,
+# personenbezogene Listen, keine eigenstaendigen Inhaltsseiten.
 
 User-agent: *
 Allow: /$
+Allow: /de-de/
 Allow: /og-image.png
 Allow: /icon-192.png
 Allow: /icon-512.png
 Allow: /apple-touch-icon.png
 Allow: /favicon-32.png
 Allow: /manifest.json
+Disallow: /*?titel=
 Disallow: /
+
+Sitemap: https://movietaste.de/sitemap-index.xml
