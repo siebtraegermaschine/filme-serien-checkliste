@@ -358,6 +358,14 @@ async function filmeOderSerienHub(art, locale) {
   return { type, titel, genres, text, indexierbar: !!text };
 }
 
+// Einstiegsseite unter /<locale>/ -- verlinkt die sechs Bereichs-Hubs.
+// robots.txt gibt /de-de/ ausdruecklich frei; ohne diese Route lief der Pfad
+// bis 16.08.2026 in einen 404, Crawler landeten also auf einer Fehlerseite.
+export async function ladeStartHub(locale) {
+  const text = await ladeSeoText('hub', 'start', locale);
+  return { text, indexierbar: !!text };
+}
+
 export async function ladeFilmeHub(locale) {
   return filmeOderSerienHub('filme', locale);
 }

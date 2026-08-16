@@ -99,3 +99,10 @@ h3 { font-size: 16px; margin: 20px 0 10px; color: var(--text-dim); }
 .besetzung-liste { list-style: none; padding: 0; margin: 12px 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 20px; font-size: 14.5px; }
 .besetzung-liste li { color: var(--text-dim); }
 .besetzung-liste b { color: var(--text); }
+
+/* Einstiegsseite /<locale>/ -- Kacheln zu den sechs Bereichs-Hubs. */
+.start-bereiche { list-style: none; padding: 0; margin: 20px 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.start-bereiche li { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.start-bereiche a { text-decoration: none; }
+.start-bereiche strong { display: block; font-size: 17px; margin-bottom: 4px; }
+.start-bereiche span { display: block; font-size: 14px; color: var(--text-dim); }

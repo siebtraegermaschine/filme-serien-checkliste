@@ -307,6 +307,14 @@
     line-height: 1.6;
   }
 
+  /* Links auf die SEO-Uebersichtsseiten -- bewusst zurueckhaltend, sie sind
+     fuer Suchmaschinen da und sollen die Rechtstexte darueber nicht
+     ueberlagern. */
+  .footer-seo {
+    margin-top: 8px;
+    opacity: .75;
+  }
+
   .details {
     display: none;
     margin-top: 11px;
@@ -1388,6 +1396,19 @@
        sehen ist -- das Einstellungsmenue nicht. -->
   This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.<br>
   <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a>
+  <!-- Verweise auf die eigenstaendigen SEO-Seiten unter /de-de/ (siehe
+       backend/routes/seo.js). Bis 16.08.2026 verlinkten die SEO-Seiten zwar
+       hierher ("Zur App"), aber nicht zurueck -- einziger Entdeckungsweg fuer
+       Suchmaschinen war die Sitemap. Echte Links, kein JS: Sie sollen auch
+       ohne laufendes Skript crawlbar sein. -->
+  <nav class="footer-seo" aria-label="Übersichtsseiten">
+    <a href="/de-de/filme">Filme</a> ·
+    <a href="/de-de/serien">Serien</a> ·
+    <a href="/de-de/beste-filme">Beste Filme</a> ·
+    <a href="/de-de/beste-serien">Beste Serien</a> ·
+    <a href="/de-de/streaming">Streaming</a> ·
+    <a href="/de-de/kino">Kino</a>
+  </nav>
 </footer>
 
 <button type="button" id="toTop" class="to-top" aria-label="Nach oben">

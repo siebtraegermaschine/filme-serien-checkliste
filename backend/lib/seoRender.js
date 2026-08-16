@@ -531,6 +531,40 @@ export function seiteBestenlisteHub(daten, locale) {
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
+// Bereiche der Einstiegsseite. Reihenfolge = Anzeigereihenfolge; der Pfad ist
+// zugleich der hub-Schluessel in seo_content (siehe seoSitemap.js).
+const START_BEREICHE = [
+  { pfad: 'filme', titel: 'Filme', text: 'Alle Filme nach Genre, mit Bewertungen und Verfügbarkeit.' },
+  { pfad: 'serien', titel: 'Serien', text: 'Serien nach Genre, von der laufenden Staffel bis zum Abschluss.' },
+  { pfad: 'beste-filme', titel: 'Beste Filme', text: 'Bestenlisten nach Jahr und Genre.' },
+  { pfad: 'beste-serien', titel: 'Beste Serien', text: 'Die höchstbewerteten Serien nach Jahr und Genre.' },
+  { pfad: 'streaming', titel: 'Streaming', text: 'Was bei welchem Anbieter läuft.' },
+  { pfad: 'kino', titel: 'Kino', text: 'Aktuelle Kinostarts und Kinos nach Stadt.' },
+];
+
+export function seiteStart(daten, locale) {
+  const pfad = `/${locale}/`;
+  const titelZeile = 'Filme & Serien im Überblick | MovieMatch';
+  const beschreibung = kurzfassung(daten.text)
+    || 'Filme und Serien nach Genre, Bestenlisten, Streaming-Anbieter und Kinostarts im Überblick.';
+  // Kein Breadcrumb: Diese Seite IST die Wurzel des SEO-Baums, eine Kette mit
+  // einem einzigen Glied waere weder fuer Nutzer noch fuer Google von Nutzen.
+  const jsonLd = [{
+    '@context': 'https://schema.org', '@type': 'CollectionPage', name: titelZeile,
+    hasPart: START_BEREICHE.map((b) => ({ '@type': 'WebPage', name: b.titel, url: `${SITE}/${locale}/${b.pfad}` })),
+  }];
+  const kachelnHtml = START_BEREICHE.map((b) => `<li>
+      <a href="/${locale}/${b.pfad}"><strong>${attrEsc(b.titel)}</strong></a>
+      <span>${attrEsc(b.text)}</span>
+    </li>`).join('');
+  const bodyHtml = `
+    <h1>Filme &amp; Serien im Überblick</h1>
+    <p class="einleitung">${textBlock(daten.text)}</p>
+    <ul class="start-bereiche">${kachelnHtml}</ul>
+  `;
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
+}
+
 export function seitePerson(daten, locale) {
   const rolleWort = daten.rolle === 'regisseur' ? 'Regisseur' : 'Schauspieler';
   const pfad = `/${locale}/${daten.rolle}/${daten.slug}-${daten.tmdbPersonId}`;

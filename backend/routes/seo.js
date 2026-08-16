@@ -7,10 +7,11 @@ import { SEO_LOCALES, localeGueltig } from '../lib/seoLocale.js';
 import {
   ladeTitelSeite, ladeGenreSeite, ladeAnbieterSeite, ladeBestenliste, ladeKinoStadt,
   ladeFilmeHub, ladeSerienHub, ladeKinoHub, ladeStreamingHub, ladeBestenlisteHub, ladePersonSeite,
+  ladeStartHub,
 } from '../lib/seoData.js';
 import {
   seiteTitelDetail, seiteGenre, seiteAnbieter, seiteBestenliste, seiteKinoStadt, seite404, SITE,
-  seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson,
+  seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart,
 } from '../lib/seoRender.js';
 import { sitemapIndex, sitemapBereich, BEREICHE } from '../lib/seoSitemap.js';
 
@@ -148,6 +149,21 @@ router.get('/sitemap-:locale-:bereich.xml', GRENZE, async (req, res) => {
   const { locale, bereich } = req.params;
   if (!SEO_LOCALES.includes(locale) || !BEREICHE.includes(bereich)) return res.status(404).end();
   res.type('application/xml').send(await sitemapBereich(locale, bereich));
+});
+
+// Einstiegsseite /<locale>/ -- ZULETZT registriert, denn '/:locale' passt auf
+// JEDEN einsegmentigen Pfad. Zwei Regeln daraus:
+//  1. Sie muss hinter allen spezifischeren Routen stehen (auch hinter der
+//     Sitemap, sonst schluckt sie /sitemap-index.xml).
+//  2. Bei ungueltigem Locale MUSS next() folgen, kein 404: Sonst faengt sie
+//     /seo.css, /robots.txt, /impressum.html und jede andere statische Datei
+//     ab, bevor express.static sie ausliefern kann.
+// Hintergrund: robots.txt gibt /de-de/ ausdruecklich frei, der Pfad lief aber
+// bis 16.08.2026 in einen 404 -- Crawler landeten auf einer Fehlerseite.
+router.get('/:locale', GRENZE, async (req, res, next) => {
+  const { locale } = req.params;
+  if (!localeGueltig(locale)) return next();
+  res.type('html').send(seiteStart(await ladeStartHub(locale), locale));
 });
 
 export default router;

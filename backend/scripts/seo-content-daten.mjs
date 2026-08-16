@@ -348,6 +348,12 @@ Der Erfolg kam über die Videothek und über jahrelange Wiederholungen im US-Fer
   },
 
   // ---- Block 2: Hub-, Anbieter- und Genre-Einleitungstexte (Freigabe 15.08.2026) ----
+  // 'start' ist die Einstiegsseite unter /<locale>/ selbst (siehe seoRender.js:
+  // seiteStart, seoSitemap.js: Sonderfall im hub-Zweig).
+  { bereich: 'hub', schluessel: 'start', locale: 'de-de',
+    text: `Rund 27.000 Filme und Serien, sortiert nach Genre, Jahr und Bewertung — und bei jedem Titel der Hinweis, wo er gerade im Abo läuft oder im Kino gezeigt wird. Die Bewertungen kommen aus der MovieMatch-Community, nicht aus anonymen Massenaggregaten.
+
+Die sechs Bereiche unten führen in die jeweiligen Übersichten: Filme und Serien nach Genre, Bestenlisten nach Jahr und Genre, die Streaming-Anbieter im Vergleich und die aktuellen Kinostarts samt Kinos nach Stadt. Wer lieber gemeinsam entscheidet, statt allein zu suchen, findet in der App das eigentliche Werkzeug dafür — dort legen mehrere Leute ihre Watchlists übereinander und sehen, worauf sie sich einigen können.` },
   { bereich: 'hub', schluessel: 'filme', locale: 'de-de',
     text: `Von aktuellen Kinostarts bis zu Klassikern, die seit Jahrzehnten auf jeder Bestenliste stehen: Hier findest du Filme nach Genre sortiert, mit echter Community-Bewertung statt anonymer Sternchen-Durchschnitte. MovieMatch zeigt dazu, wo ein Film gerade im Abo läuft — Streaming und Kino an einem Ort, ohne zwischen fünf Apps hin- und herzuwechseln.` },
   { bereich: 'hub', schluessel: 'serien', locale: 'de-de',

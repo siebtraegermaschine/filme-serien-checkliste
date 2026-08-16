@@ -105,8 +105,12 @@ async function urlsFuerBereich(locale, bereich) {
 
   if (bereich === 'hub') {
     // schluessel ist direkt das URL-Segment ('filme'|'serien'|'kino'|
-    // 'streaming'|'beste-filme'|'beste-serien').
-    return rows.map((r) => ({ loc: `${SITE}/${locale}/${r.schluessel}`, lastmod: r.aktualisiert_am.toISOString().slice(0, 10) }));
+    // 'streaming'|'beste-filme'|'beste-serien'). Ausnahme 'start': das ist die
+    // Einstiegsseite unter /<locale>/ selbst, nicht /<locale>/start.
+    return rows.map((r) => ({
+      loc: r.schluessel === 'start' ? `${SITE}/${locale}/` : `${SITE}/${locale}/${r.schluessel}`,
+      lastmod: r.aktualisiert_am.toISOString().slice(0, 10),
+    }));
   }
 
   return [];
