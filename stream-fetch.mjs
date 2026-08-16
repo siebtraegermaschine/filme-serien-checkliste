@@ -129,6 +129,27 @@ async function ladeSkipListe() {
  * ausgeschlossen -- sie sind derselbe Dienst unter fremder Abrechnung.
  */
 const MAX_ANBIETER   = Number(process.env.STREAM_MAX_PROVIDER || 12);
+/* Obergrenze fuer die Anbieter-Zeilen EINER Region. Anbieterzahl allein
+ * begrenzt nichts Brauchbares: Die Kataloge gehen weit auseinander -- Amazon
+ * Prime Video hat in den USA 28.476 Titel, Apple TV+ ueberall rund 320.
+ * Ungebremst kaeme die groesste Region auf 76.975 Zeilen (US, vorab
+ * durchgerechnet) gegenueber 27.755 fuer AT, und /api/streaming laege dort bei
+ * geschaetzten 17 MB JSON -- eine Antwort, die jeder Besuch beim Start holt.
+ *
+ * Weil der Umfang jedes Kandidaten VOR dem Einlesen bekannt ist (die
+ * Abo-Pruefung liefert ihn ohnehin mit), laesst sich das sauber deckeln:
+ * Anbieter, die das Budget sprengen wuerden, bleiben draussen; kleinere
+ * dahinter kommen weiterhin zum Zug. Die Reihenfolge sorgt dafuer, dass die
+ * grossen Namen des Landes zuerst hineinpassen.
+ *
+ * 60.000 ist so gewaehlt, dass GB (52.400) und ES (51.776) vollstaendig
+ * hineinpassen -- ohne das Budget waeren dort ausgerechnet Sky Go und
+ * Paramount+ herausgefallen, also genau die Dienste, wegen derer der Ausbau
+ * gemacht wurde. Gebremst wird damit nur die USA (59.619 statt 76.975); dort
+ * bleiben die beiden Live-TV-Pakete fuboTV und Philo draussen, deren Kataloge
+ * zusammen 26.000 Zeilen ausmachen. Groesste zu erwartende Auslieferung damit
+ * rund 14 MB JSON / 5 MB gzip (gemessen: AT 27.755 Zeilen = 6,81 MB / 2,35 MB). */
+const MAX_ZEILEN     = Number(process.env.STREAM_MAX_ZEILEN || 60000);
 // Unter so vielen Abo-Titeln lohnt ein Anbieter die Laufzeit nicht.
 const MIN_TITEL      = Number(process.env.STREAM_MIN_TITEL || 50);
 // Ab diesem Abo-Anteil gilt ein Anbieter als Abo-Anbieter (siehe oben).
@@ -424,6 +445,7 @@ async function anbieterDerRegion() {
   const verworfen = [];
   const staemme = new Set();
   const slugs = new Set();
+  let zeilen = 0;
   for (const p of kandidaten) {
     if (gewaehlt.length >= MAX_ANBIETER) break;
     const stamm = stammName(p.name);
@@ -435,6 +457,13 @@ async function anbieterDerRegion() {
     const pruefung = await aboAngebotPruefen(p);
     await sleep(SEITEN_PAUSE);
     if (!pruefung.ok) { verworfen.push(`${p.name} (${pruefung.grund})`); continue; }
+    const umfang = pruefung.filme + pruefung.serien;
+    if (zeilen + umfang > MAX_ZEILEN) {
+      // Kein break: kleinere Anbieter dahinter passen womoeglich noch.
+      verworfen.push(`${p.name} (${umfang} Zeilen sprengen das Budget von ${MAX_ZEILEN})`);
+      continue;
+    }
+    zeilen += umfang;
     staemme.add(stamm);
     slugs.add(p.slug);
     gewaehlt.push({
@@ -455,7 +484,8 @@ async function anbieterDerRegion() {
   for (const a of gewaehlt) {
     console.log(`   ${a.name} [${a.id}] TMDB ${a.tmdbId} -- ${a.filme} Filme, ${a.serien} Serien im Abo (Gegenprobe ${a.gegenprobe})`);
   }
-  if (verworfen.length) console.log(`   kein Abo-Anbieter: ${verworfen.join(', ')}`);
+  console.log(`   zusammen ${zeilen} Anbieter-Zeilen (Budget ${MAX_ZEILEN}).`);
+  if (verworfen.length) console.log(`   nicht aufgenommen: ${verworfen.join(', ')}`);
   return gewaehlt;
 }
 

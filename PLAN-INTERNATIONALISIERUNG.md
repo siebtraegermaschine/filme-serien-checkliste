@@ -425,6 +425,32 @@ erschienen — oben in der Sortierung und, schlimmer, als Benachrichtigungs-Mail
 für jeden passenden Watchlist-Titel. Auf WOW oder Sky laufen diese Titel
 längst; neu ist nur unser Blick darauf.
 
+*Gemessen (AT als Probelauf, 16. August 2026).* 12 statt 4 Anbieter, 27.755
+statt 22.509 Anbieter-Zeilen, 25.642 verschiedene Titel; Auslieferung 6,81 MB
+JSON / 2,35 MB gzip statt 5,89 / 2,04 (+15 % bei dreifacher Anbieterzahl — das
+zahlt die Entdopplung). Laufzeit 25 min 46 s im ersten Lauf (rund 4.700 Titel
+brauchten noch einen Detail-Abruf), 15 min 36 s im zweiten, 0
+Rate-Limit-Bremsungen. Vorab für alle 41 Regionen durchgerechnet: 1.057.089
+Anbieter-Zeilen gegenüber 744.685; Datenbank vorher 1.005 MB Tabelle / 1.387 MB
+gesamt.
+
+Weil die Kataloge weit auseinandergehen (Amazon Prime Video hat in den USA
+28.476 Titel, Apple TV+ überall rund 320), begrenzt nicht die Anbieterzahl,
+sondern ein **Zeilen-Budget je Region** (`STREAM_MAX_ZEILEN`, Standard 60.000).
+GB (52.400) und ES (51.776) passen vollständig hinein — ohne Budget wären dort
+ausgerechnet Sky Go und Paramount+ herausgefallen; die USA werden von 76.975
+auf 59.619 gebremst, draußen bleiben die Live-TV-Pakete fuboTV und Philo.
+Größte zu erwartende Auslieferung damit ~14 MB JSON / ~5 MB gzip.
+
+*Ingest.* Die Zeilen gehen in Bündeln zu 500 in die Datenbank statt einzeln —
+28.000 Einzelabfragen je Region (77.000 für die USA) liefen in den
+300-Sekunden-Timeout der Gegenstelle. Der UPDATE, der die Anreicherung einer
+neu aufgetauchten Zeile aus einer Geschwisterzeile kopiert, sortierte zudem die
+komplette Tabelle und stand nach neun Minuten noch aktiv in `pg_stat_activity`;
+er ist jetzt auf die bedürftigen Titel eingeschränkt und läuft über den neuen
+Index `idx_streaming_cache_titel (type, tmdb_id)` — denselben Weg brauchen auch
+die Benachrichtigungs- und die Wochenend-Mail.
+
 *Bekannte Eigenart.* In kleineren Märkten (CZ, GR, HU, LT, LV, EE, PT) sind
 nach den großen Vier fast nur noch Nischen-Dokumentardienste übrig
 (Curiosity Stream, DOCSVILLE, Magellan TV, GuideDoc, BroadwayHD). Das ist die

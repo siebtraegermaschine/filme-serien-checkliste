@@ -36,9 +36,16 @@ on:
     # 0 Rate-Limit-Bremsungen. Ueber die ganze Kette einmalig etwa +2-3 h;
     # danach greift die Skip-Liste auch fuer diese Titel.
     #
-    # Wird die Kette zu lang, sind STREAM_MAX_PROVIDER (Anbieter je Region)
-    # und TMDB_PAUSE_MS (Seitenpause) die Stellschrauben -- beide unten als
-    # Repository-Variablen setzbar, ohne den Code anzufassen.
+    # Ein Zeilen-Budget je Region (STREAM_MAX_ZEILEN, Standard 60.000) haelt
+    # die groessten Maerkte in Schach: GB (52.400) und ES (51.776) passen
+    # vollstaendig hinein, die USA werden von 76.975 auf 59.619 gebremst
+    # (draussen bleiben die Live-TV-Pakete fuboTV und Philo). Damit liegt die
+    # Summe bei rund einer Million Zeilen statt 1.057.089.
+    #
+    # Wird die Kette zu lang, sind STREAM_MAX_ZEILEN, STREAM_MAX_PROVIDER
+    # (Anbieter je Region) und TMDB_PAUSE_MS (Seitenpause) die Stellschrauben
+    # -- alle drei unten als Repository-Variablen setzbar, ohne den Code
+    # anzufassen.
     - cron: "0 20 * * *"
   workflow_dispatch:            # erlaubt manuelles Auslösen im Actions-Tab
     inputs:
@@ -131,6 +138,11 @@ jobs:
           # streaming_cache. Als Repository-Variablen setzbar, ohne den Code
           # anzufassen -- gedacht fuer den Fall, dass die Kette zu lang wird.
           STREAM_MAX_PROVIDER: ${{ vars.STREAM_MAX_PROVIDER }}
+          # Deckel fuer die Anbieter-Zeilen EINER Region -- die wirksamere
+          # Bremse, weil die Kataloge weit auseinandergehen (Amazon Prime Video
+          # US: 28.476 Titel, Apple TV+ ueberall ~320). Ohne ihn kaeme die USA
+          # auf 76.975 Zeilen und ~19 MB JSON je Seitenaufruf.
+          STREAM_MAX_ZEILEN: ${{ vars.STREAM_MAX_ZEILEN }}
           TMDB_PAUSE_MS: ${{ vars.TMDB_PAUSE_MS }}
         run: node stream-fetch.mjs
 
