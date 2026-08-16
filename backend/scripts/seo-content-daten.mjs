@@ -19921,4 +19921,229 @@ Der Film startete am 21. Dezember 2005 und spielte weltweit 135 Millionen Dollar
 Die Kritik lehnte ihn nahezu geschlossen ab: 8 Prozent bei Rotten Tomatoes aus 93 Besprechungen, 34 von 100 bei Metacritic, dazu zwei Nominierungen für die Goldenen Himbeeren.
 
 Das Publikum sah es völlig anders und vergab bei CinemaScore ein A minus. Auch Roger Ebert widersprach der Mehrheit und gab drei von vier Sternen — der Film erreiche mehr Wärme und Humor als vergleichbare Veröffentlichungen; besonders hob er die junge Alyson Stoner hervor.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:9946', locale: 'de-de',
+    text: `### Worum es geht
+
+New York, in den letzten Tagen des Jahres 1999. Der frühere Polizist Jericho Cane arbeitet als Personenschützer, trinkt und hat nach dem Mord an Frau und Tochter mit dem Glauben abgeschlossen.
+
+Bei einem Auftrag stößt er auf eine Verschwörung, die ihm zunächst wie ein Anschlag erscheint: Eine junge Frau namens Christine York soll in der Silvesternacht zwischen elf und Mitternacht ein Kind empfangen — den Antichrist. Der Mann, der sie sucht, ist der Teufel selbst, der in den Körper eines Wall-Street-Bankers gefahren ist. Cane, der an nichts glaubt, ist der Einzige, der zwischen beiden steht.
+
+### Entstehungsgeschichte
+
+Das Drehbuch schrieb Andrew W. Marlowe. Der Film gehört zu jener Reihe von Produktionen, die den bevorstehenden Jahrtausendwechsel als Vorlage nutzten — ein Ablaufdatum, das die Handlung von sich aus mit einer Frist versieht.
+
+Die Besetzung kam über Umwege zustande. Tom Cruise war zunächst für die Hauptrolle vorgesehen, entschied sich aber für "Magnolia". Sam Raimi und Guillermo del Toro lehnten die Regie ab. Marcus Nispel war eine Zeit lang verpflichtet und stieg wegen Budget- und Drehbuchfragen aus, bevor Peter Hyams übernahm.
+
+### Hinter den Kulissen
+
+Arnold Schwarzenegger spielt Cane, Gabriel Byrne den Teufel, Robin Tunney die Frau. Für Schwarzenegger war es die Rückkehr nach einer Herzoperation und zugleich eine ungewohnte Rolle: kein unverwundbarer Held, sondern ein gebrochener Mann, der über weite Strecken verliert.
+
+Schwarzenegger hat sich später kritisch über die Regieentscheidung geäußert und gesagt, Hyams habe nicht das Zeug gehabt, wirklich etwas aus dem Film zu machen.
+
+2022 erhob die Darstellerin Miriam Margolyes Vorwürfe gegen Schwarzenegger wegen seines Verhaltens am Set; er äußerte sich dazu öffentlich nicht.
+
+### Einordnung & Wirkung
+
+Der Film startete am 24. November 1999 und spielte weltweit 212 Millionen Dollar ein, bei einem Budget zwischen 83 und 100 Millionen. Durch das internationale Geschäft und den Verkauf für zu Hause war er profitabel, blieb aber hinter den Erwartungen von Universal zurück.
+
+Die Kritik lehnte ihn nahezu geschlossen ab: 11 Prozent bei Rotten Tomatoes, 34 von 100 bei Metacritic, mit den wiederkehrenden Vorwürfen, er sei aufgeblasen und schematisch. Das Publikum vergab bei CinemaScore ein B minus.` },
+  {
+    bereich: 'titel', schluessel: 'movie:245706', locale: 'de-de',
+    text: `### Worum es geht
+
+Michael Finkel schreibt für das Magazin der New York Times und wird entlassen, weil er für eine Reportage mehrere reale Personen zu einer einzigen Figur zusammengezogen hat. Wenige Tage später erfährt er, dass in Mexiko ein Mann festgenommen wurde, der sich unter seinem Namen ausgegeben hat.
+
+Der Mann ist Christian Longo, angeklagt, seine Frau und drei Kinder getötet zu haben. Finkel besucht ihn im Gefängnis und wittert das Buch, das ihn rehabilitieren könnte. Longo verspricht ihm seine Fassung der Geschichte — im Tausch gegen Schreibunterricht. Was sich zwischen beiden entwickelt, ist kein Interview, sondern ein Verhältnis, in dem lange unklar bleibt, wer wen benutzt.
+
+### Entstehungsgeschichte
+
+Grundlage ist Finkels eigenes Buch über den Fall. Es ist die erste Kinoarbeit von Rupert Goold, der aus dem britischen Theater kommt.
+
+Produziert wurde der Film von Brad Pitt, Dede Gardner und Jeremy Kleiner; verliehen hat ihn Fox Searchlight.
+
+### Hinter den Kulissen
+
+Die Besetzung geht bewusst gegen die Erwartung: Jonah Hill und James Franco waren zu diesem Zeitpunkt vor allem aus Komödien bekannt und spielen hier beide vollkommen ernst.
+
+Die Kamera führte Masanobu Takayanagi, die Musik schrieb Marco Beltrami. Der Film besteht in großen Teilen aus Gesprächen an einem Tisch in einem Besuchsraum — die Spannung liegt darin, dass jede Aussage Longos zugleich als Wahrheit und als Manipulation funktioniert.
+
+Der reale Christian Longo wurde zum Tode verurteilt. Der Film verzichtet darauf, seine Schuldfrage neu aufzurollen, und behandelt stattdessen die Frage, warum ein Journalist ihm zuhören will.
+
+### Einordnung & Wirkung
+
+Der Film wurde am 23. Januar 2015 beim Sundance-Festival gezeigt und kam am 17. April 2015 ins Kino. Er spielte 5,3 Millionen Dollar ein.
+
+Die Kritik blieb geteilt (45 Prozent bei Rotten Tomatoes): Die beiden Hauptdarsteller ergäben ein sehenswertes Gespann, während die Erzählung selbst zu wenig daraus mache. Franco und Hill wurden für Teen Choice Awards in der Sparte Drama nominiert.
+
+Bemerkenswert bleibt der Ausgangspunkt: ein Journalist, der wegen Erfindungen gefeuert wurde, und ein Mörder, der sich als dieser Journalist ausgab — beides tatsächlich geschehen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:81836', locale: 'de-de',
+    text: `### Worum es geht
+
+Vier Geschichten in Rom, die nichts miteinander zu tun haben und nebeneinander herlaufen.
+
+Ein amerikanisches Elternpaar besucht die Tochter und ihren italienischen Verlobten; der Vater, ein pensionierter Opernregisseur, entdeckt, dass der zukünftige Schwiegervater hervorragend singt — allerdings nur unter der Dusche. Ein Angestellter wird über Nacht ohne Anlass berühmt und ebenso grundlos wieder vergessen. Ein frisch verheiratetes Paar aus der Provinz verliert sich in der Stadt und gerät in Verwechslungen. Und ein Architekt kehrt in sein früheres Viertel zurück, wo er als halb wirkliche Gestalt einen jüngeren Mann kommentiert, der gerade dieselben Fehler macht wie er selbst.
+
+### Entstehungsgeschichte
+
+Der Film gehört zu Woody Allens europäischer Reihe, die mit "Match Point" in London begann und über "Vicky Cristina Barcelona" und "Midnight in Paris" führte — jeweils ein Film, eine Stadt.
+
+Für Allen war es der erste eigene Auftritt als Darsteller seit 2006. Das Budget lag bei 17 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Rom, mit italienischen Darstellern in den italienischen Handlungssträngen — Teile des Films laufen auf Italienisch.
+
+Die vier Geschichten sind bewusst nicht verbunden und spielen zudem über unterschiedlich lange Zeiträume: Der eine Strang umfasst Wochen, der andere einen einzigen Tag, ohne dass der Schnitt das kenntlich macht.
+
+Sowohl Elliot Page als auch Greta Gerwig haben sich später kritisch über ihre Mitwirkung geäußert und ihre Beteiligung bedauert.
+
+### Einordnung & Wirkung
+
+Der Film lief ab dem 20. April 2012 in Italien und ab dem 22. Juni in den USA. Weltweit spielte er 73,2 Millionen Dollar ein.
+
+Die Kritik fiel gemischt aus: 47 Prozent bei Rotten Tomatoes, 54 von 100 bei Metacritic. Der wiederkehrende Befund lautete, Allen erzeuge das ihm eigene Vergnügen beinahe auf Abruf, einzelne Teile wirkten aber hastig und lose zusammengesetzt.
+
+Er markiert damit das schwächere Ende einer Werkphase, deren Höhepunkt der unmittelbare Vorgänger "Midnight in Paris" war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:212716', locale: 'de-de',
+    text: `### Worum es geht
+
+Wallace hat sein Medizinstudium abgebrochen und wohnt bei seiner Schwester auf dem Dachboden. Auf einer Party lernt er Chantry kennen, mit der er sich auf Anhieb versteht — bis sie beiläufig erwähnt, dass sie seit fünf Jahren mit jemandem zusammenlebt.
+
+Die beiden werden Freunde, und der Film bleibt konsequent bei dieser Ausgangslage: Er handelt nicht davon, ob sie zusammenkommen, sondern davon, wie zwei Menschen sich verhalten, wenn beide wissen, was los ist, und keiner es aussprechen will. Chantrys Freund reist beruflich nach Dublin, die Gelegenheiten häufen sich, und die Frage wird zunehmend, wer wem gegenüber unehrlich ist.
+
+### Entstehungsgeschichte
+
+Grundlage ist das Theaterstück "Toothpaste and Cigars"; das Drehbuch schrieb Elan Mastai, Regie führte Michael Dowse.
+
+Der Titel wurde je nach Land verschieden gehandhabt: In den USA machte CBS Films daraus "What If", nachdem die Prüfstelle MPAA an der im Originaltitel mitschwingenden Anspielung Anstoß genommen hatte.
+
+Ursprünglich war Casey Affleck für die Hauptrolle vorgesehen; besetzt wurde schließlich Daniel Radcliffe, für den es eine der ersten Rollen nach der "Harry Potter"-Reihe war. Zoe Kazan spielt Chantry.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen Mitte August 2012 in Toronto und dauerten sechs Wochen in Ontario, dazu kamen drei Tage in Dublin. Das Budget lag bei 11 Millionen Dollar.
+
+Im November 2013 wurde nachgedreht, weil Testvorführungen ergeben hatten, dass das Publikum einen deutlicheren Abschluss wollte — der Schluss des Films ist also nicht der ursprünglich gedrehte.
+
+### Einordnung & Wirkung
+
+Der Film wurde am 7. September 2013 beim Filmfestival in Toronto gezeigt und kam im August 2014 in Irland und Kanada ins Kino. Weltweit spielte er 8,5 Millionen Dollar ein.
+
+Die Kritik reagierte überwiegend wohlwollend: 74 Prozent bei Rotten Tomatoes, 59 von 100 bei Metacritic. Bei den Canadian Screen Awards gab es mehrere Nominierungen und einen Sieg für das beste adaptierte Drehbuch.
+
+Für Daniel Radcliffe war es einer der Filme, mit denen er sich bewusst von seiner bekanntesten Rolle entfernte — hier in einem Genre, das mit Zauberei nichts zu tun hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:23202', locale: 'de-de',
+    text: `### Worum es geht
+
+Halloween in der erfundenen Kleinstadt Warren Valley in Ohio. Vier Geschichten laufen in derselben Nacht ab und greifen ineinander: ein Schuldirektor mit einem Nebengewerbe, eine Gruppe Jugendlicher an einem Steinbruch, eine junge Frau auf dem Weg zu einem Fest, und ein alter Mann, der Halloween hasst und Besuch bekommt.
+
+Verbunden sind sie durch Sam — eine kleine Gestalt in orangefarbenem Schlafanzug mit Sackmaske, die überall auftaucht, wo jemand gegen die Regeln des Festes verstößt: die Kerze im Kürbis zu früh löschen, Süßigkeiten verweigern, das Kostüm vor Mitternacht ablegen. Sam bestraft nicht Bosheit, sondern Regelbruch.
+
+### Entstehungsgeschichte
+
+Es ist die erste Regiearbeit von Michael Dougherty, der zuvor an den Drehbüchern zu "X-Men 2" und "Superman Returns" beteiligt war. Das Budget lag bei 12 Millionen Dollar.
+
+Der Film war für einen Kinostart im Oktober 2007 vorgesehen. Warner Bros. zog ihn zurück und veröffentlichte ihn erst im Oktober 2009 direkt auf DVD und Blu-ray — ohne dass ein sachlicher Grund je öffentlich benannt worden wäre.
+
+### Hinter den Kulissen
+
+Gezeigt wurde er in der Zwischenzeit nur auf Festivals; die erste Vorführung fand am 9. Dezember 2007 beim Butt-Numb-A-Thon statt. Über diese Vorführungen und die Berichte darüber entstand ein Ruf, bevor überhaupt jemand den Film kaufen konnte.
+
+Die vier Geschichten sind nicht chronologisch montiert: Ereignisse aus dem einen Strang tauchen im Hintergrund eines anderen auf, bevor man sie einordnen kann. Wer den Film ein zweites Mal sieht, erkennt in fast jeder Szene Vorgriffe.
+
+### Einordnung & Wirkung
+
+Die Kritik reagierte deutlich besser als die Veröffentlichungsgeschichte vermuten ließ: 82 Prozent bei Rotten Tomatoes, mit dem Befund, der Film treffe alle Genremerkmale mit Schwung und altmodischer Spannung.
+
+Über die Jahre hat er eine feste Anhängerschaft gewonnen und wird regelmäßig neben John Carpenters "Halloween" als Pflichtprogramm für den Oktober geführt. Die Figur Sam ist zu einem verbreiteten Kostümmotiv geworden.
+
+Dougherty bestätigte im Oktober 2023, dass mehrere Drehbuchfassungen für eine Fortsetzung vorliegen; die Produktion mit Legendary Pictures ist weiterhin in Vorbereitung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1084736', locale: 'de-de',
+    text: `### Worum es geht
+
+Marseille, 1815. Der junge Seemann Edmond Dantès steht vor der Beförderung zum Kapitän und vor der Hochzeit mit Mercédès. Drei Männer, die jeder aus eigenem Antrieb handeln, sorgen dafür, dass er stattdessen ohne Verfahren im Kerker der Insel If verschwindet.
+
+Vierzehn Jahre später kommt er frei, verfügt über ein Vermögen und über einen neuen Namen. Was folgt, ist kein Rachefeldzug mit dem Degen, sondern eine über Jahre angelegte Konstruktion: Dantès nähert sich seinen früheren Freunden als Fremder, arbeitet sich in ihre Familien hinein und lässt sie das Werk selbst besorgen. Der Preis dafür ist, dass er dabei auch Unbeteiligte verbraucht.
+
+### Entstehungsgeschichte
+
+Grundlage ist Alexandre Dumas' Roman von 1844. Regie führten Matthieu Delaporte und Alexandre de La Patellière, die zuvor die Drehbücher zu den französischen "Drei Musketiere"-Filmen geschrieben hatten.
+
+Die Hauptrolle spielt Pierre Niney. Mit einem geschätzten Budget von 42,9 Millionen Euro war es die teuerste französische Produktion des Jahres 2024.
+
+### Hinter den Kulissen
+
+Der Film wurde am 22. Mai 2024 bei den Filmfestspielen in Cannes gezeigt und dort mit fast elf Minuten stehendem Applaus aufgenommen.
+
+Auffällig ist die Entscheidung für die Länge: Der Film läuft rund drei Stunden und nimmt sich damit Raum für die Verwandlung der Hauptfigur, die kürzere Verfilmungen überspringen mussten. Gedreht wurde weitgehend an realen Orten statt vor grüner Leinwand.
+
+### Einordnung & Wirkung
+
+In Frankreich verkaufte der Film über 9 Millionen Kinokarten und war der zweiterfolgreichste französische Film des Jahres 2024; weltweit spielte er 100 Millionen Dollar ein. Für den Verleih Pathé war es der größte Erfolg seit "Willkommen bei den Sch'tis" von 2008.
+
+Die Kritik reagierte außergewöhnlich gut: 96 Prozent von 67 Besprechungen bei Rotten Tomatoes, 75 von 100 bei Metacritic. Auf dem französischen Portal AlloCiné erreichte er die höchste Publikumsbewertung, die je ein französischsprachiger Film dort erhalten hat.
+
+Es gab 14 Nominierungen für die Césars, und Frankreich zog den Film für die Oscar-Auswahl in der Sparte internationaler Film in die engere Wahl.` },
+  {
+    bereich: 'titel', schluessel: 'movie:45772', locale: 'de-de',
+    text: `### Worum es geht
+
+In zwei benachbarten englischen Reihenhausgärten stehen Gartenzwerge — rote im einen, blaue im anderen. Sobald keine Menschen zusehen, bewegen sie sich, und zwischen beiden Gärten herrscht seit Langem Krieg: Rasenmäherrennen, Sabotage, gestohlene Blumen.
+
+Gnomeo ist ein blauer Zwerg, Julia eine rote. Sie begegnen sich nachts in einem fremden Garten, jeder verkleidet, und merken erst später, wohin der andere gehört. Der Film folgt Shakespeares Vorlage in den Grundzügen, biegt sie aber bewusst um — was er offen ausstellt, indem eine Statue von Shakespeare selbst auftritt und den Ausgang kommentiert.
+
+### Entstehungsgeschichte
+
+Das Drehbuch begann als Angebot von Rob Sprackling und John Smith an Disney, eingebracht über Rocket Pictures. Disney bewilligte den Film 2006 unter Miramax und zog die Entscheidung anschließend zurück.
+
+Kelly Asbury kam 2006 als Regisseur dazu — nach eigener Aussage vor allem wegen der Aussicht, mit Elton John zu arbeiten. Gemeinsam mit Hamilton Shaw schrieb er das Drehbuch erheblich um.
+
+Ursprünglich sollten Ewan McGregor und Kate Winslet die Hauptfiguren sprechen; besetzt wurden schließlich James McAvoy und Emily Blunt.
+
+### Hinter den Kulissen
+
+Elton John war ausführender Produzent und steuerte eigene Lieder bei; daneben verwendet der Film Stücke aus seinem älteren Werk. Das Duett "Hello Hello" mit Lady Gaga wurde für den Golden Globe, den Satellite Award und den Critics' Choice Award als bestes Lied nominiert.
+
+Das Budget lag bei 36 Millionen Dollar — für einen Animationsfilm dieser Reichweite wenig, was die Produktion an der Gestaltung sichtbar knapp hält und in wenige, sehr durchgearbeitete Schauplätze investiert.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 194 Millionen Dollar ein, davon 100 Millionen in den USA. Damit übertraf er "Milo und Mars", eine deutlich teurere Disney-Produktion desselben Jahres.
+
+Die Kritik blieb geteilt (55 Prozent bei Rotten Tomatoes), das Publikum vergab bei CinemaScore ein B plus, dazu kamen vier Nominierungen für die Annie Awards.
+
+2018 folgte die Fortsetzung "Sherlock Gnomes" mit Johnny Depp in der Titelrolle.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9100', locale: 'de-de',
+    text: `### Worum es geht
+
+Sarah Bailey zieht nach Los Angeles und kommt an eine katholische Schule, an der drei Außenseiterinnen als Hexen verschrien sind. Nancy, Bonnie und Rochelle nehmen sie auf, weil ihnen für ihre Rituale die vierte Himmelsrichtung fehlt — und weil Sarah tatsächlich etwas kann.
+
+Die vier beginnen zu zaubern, und zwar für das, was sie gerade brauchen: Liebe, Rache an einem Mitschüler, das Verschwinden von Narben, Geld. Es funktioniert, aber jeder Wunsch bringt etwas mit, das niemand bestellt hat. Am stärksten trifft es Nancy, die als Einzige nichts hat, wohin sie zurückkann, und die die Macht deshalb nicht mehr abgibt.
+
+### Entstehungsgeschichte
+
+Regie führte Andrew Fleming; der Film kam am 3. Mai 1996 ins Kino, das Budget lag bei 15 Millionen Dollar.
+
+Für die Rollen sprachen 85 Darstellerinnen vor, darunter Angelina Jolie und Scarlett Johansson. Besetzt wurden Robin Tunney als Sarah, Fairuza Balk als Nancy, Neve Campbell als Bonnie und Rachel True als Rochelle.
+
+### Hinter den Kulissen
+
+Gedreht wurde vom 1. Mai bis 19. Juli 1995 an Schauplätzen in Los Angeles.
+
+Bemerkenswert ist die Vorbereitung: Die Produktion holte mit Pat Devin eine praktizierende Wicca-Anhängerin als Beraterin ans Set, um den Stoff sachlich und respektvoll zu behandeln. Die Rituale im Film folgen dadurch erkennbaren Regeln statt frei erfundener Formeln — ungewöhnlich für einen Jugendhorrorfilm jener Zeit.
+
+### Einordnung & Wirkung
+
+Der Start brachte 6,7 Millionen Dollar und Platz eins; weltweit kamen 55,6 Millionen zusammen.
+
+Die Kritik blieb geteilt; ein wiederkehrender Einwand lautete, die überdrehte Machart überlagere das, was der Film über Ausgrenzung und weibliche Selbstermächtigung erzähle. Es gab einen MTV Movie Award für den besten Kampf und Nominierungen für die Saturn Awards.
+
+Über die Jahre hat der Film eine feste Anhängerschaft gewonnen, besonders bei jungen Frauen, und gilt heute als prägend für eine ganze Reihe späterer Hexenstoffe. 2020 erschien mit "The Craft: Legacy" eine Fortsetzung.` },
 ];
