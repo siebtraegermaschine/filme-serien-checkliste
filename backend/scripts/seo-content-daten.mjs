@@ -20604,4 +20604,223 @@ Der Film startete am 11. Januar 2013 und spielte weltweit 60,1 Millionen Dollar 
 Die Kritik lehnte ihn scharf ab: 10 Prozent bei Rotten Tomatoes mit dem Befund, die größte Verfehlung des Films sei, nicht komisch zu sein, dazu 20 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein B minus.
 
 Wegen des wirtschaftlichen Erfolgs entstand unmittelbar eine Fortsetzung, die am 18. April 2014 erschien.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:3989', locale: 'de-de',
+    text: `### Worum es geht
+
+Team America ist eine amerikanische Antiterroreinheit, die mit Kampfjets und Raketen überall auf der Welt eingreift und dabei zuverlässig mehr zerstört als die Terroristen selbst — der Eiffelturm, die Pyramiden und der Panamakanal gehören zu den Kollateralschäden.
+
+Für einen Einsatz wird der Broadway-Darsteller Gary angeworben: Er soll sich als Terrorist ausgeben. Im Hintergrund arbeitet der nordkoreanische Machthaber Kim Jong-il an einem weltweiten Anschlag, unterstützt von einer Schauspielervereinigung, die für den Weltfrieden eintritt. Der Film nimmt dabei beide Seiten aufs Korn: den amerikanischen Weltpolizisten ebenso wie die Prominenten, die ihm widersprechen.
+
+### Entstehungsgeschichte
+
+Trey Parker und Matt Stone, die Schöpfer von "South Park", schrieben und inszenierten den Film. Statt Zeichentrick wählten sie Marionetten — bewusst in der Machart der britischen Fernsehserie "Thunderbirds" aus den sechziger Jahren, samt sichtbarer Fäden und steifer Bewegungen.
+
+Das Budget lag bei 32 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde von Mai bis September 2004 mit rund 200 Beteiligten. Für eine einzige Puppe waren teils vier Bediener nötig. Die Chiodo Brothers fertigten 270 Marionetten.
+
+Matt Stone hat die Produktion später als die schlimmste Zeit seines Lebens bezeichnet: Zwanzigstundentage, gehalten mit Kaffee und Schlaftabletten, um den Starttermin im Oktober einzuhalten.
+
+Mit der amerikanischen Prüfstelle gab es einen längeren Streit über eine Sexszene zwischen zwei Puppen. Die ursprünglich 90 Sekunden lange Passage brachte zunächst die Einstufung NC-17, die einen regulären Start praktisch ausschließt; nach etwa neun Schnitten und einer Kürzung auf 50 Sekunden gab es ein R. Parker hat den Widerspruch benannt: Zur drastischen Gewalt habe die Prüfstelle kein Wort verloren.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 50,9 Millionen Dollar ein — 32,9 Millionen in den USA, 18,2 Millionen international.
+
+Die Kritik reagierte überwiegend positiv (77 Prozent bei Rotten Tomatoes, 64 von 100 bei Metacritic), das Publikum vergab bei CinemaScore ein B. Die Urteile gingen weit auseinander: Roger Ebert vergab einen Stern und warf dem Film Nihilismus vor, während Peter Travers ihn ein rücksichtslos kluges Musical nannte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9421', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Runde wohlhabender Pariser trifft sich wöchentlich zum "Dinner für Idioten": Jeder bringt einen Gast mit, über den sich der Rest lustig macht, ohne dass dieser es merkt. Wer den besten mitbringt, gewinnt.
+
+Der Verleger Pierre Brochant hat für den kommenden Mittwoch François Pignon gefunden, einen Finanzbeamten, der Bauwerke aus Streichhölzern nachbaut. Dann verrenkt sich Brochant den Rücken und muss zu Hause bleiben. Pignon erscheint trotzdem — und will helfen. In den folgenden Stunden zerstört er Brochants Ehe, bringt ihm eine Steuerprüfung ins Haus und richtet mit jedem gut gemeinten Anruf mehr an.
+
+### Entstehungsgeschichte
+
+Francis Veber schrieb und inszenierte den Film nach seinem eigenen Bühnenstück. Die Herkunft ist dem Film anzusehen: Er spielt fast vollständig in einer einzigen Wohnung, und was außerhalb geschieht, kommt nur per Telefon herein.
+
+Die Figur François Pignon zieht sich durch Vebers gesamtes Werk — sie taucht unter demselben Namen in mehreren seiner Filme auf, jeweils von einem anderen Darsteller gespielt.
+
+### Hinter den Kulissen
+
+Jacques Villeret spielt Pignon. Sein Auftritt wurde von der Kritik durchgehend hervorgehoben, besonders die körperliche Komik und der Tonfall, mit dem er die Figur nie als dumm, sondern als aufrichtig anlegt — daraus entsteht das Unbehagen, das den Film trägt.
+
+Der Film läuft ohne Ortswechsel, ohne Musikeinsatz zur Zuspitzung und ohne Rückblenden. Die gesamte Handlung ergibt sich aus Missverständnissen zwischen Anwesenden und aus Telefonaten.
+
+### Einordnung & Wirkung
+
+Der Film startete am 15. April 1998 und war der zweiterfolgreichste französische Film des Jahres; weltweit spielte er 65,4 Millionen Dollar ein, in Frankreich wurden über 9 Millionen Kinokarten verkauft.
+
+Bei den Césars 1999 gab es drei Auszeichnungen: bester Hauptdarsteller für Jacques Villeret, bester Nebendarsteller für Daniel Prévost und bestes Drehbuch für Veber. Die Kritik lag bei 74 Prozent auf Rotten Tomatoes.
+
+2010 entstand mit "Dinner für Spinner" eine amerikanische Neuverfilmung mit Steve Carell und Paul Rudd, die den deutschen Titel des Originals übernahm und dessen Kammerspielform aufgab.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11687', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Jahr 1123 will der Ritter Godefroy de Montmirail heiraten. Ein Zaubertrank soll ihn in der Zeit zurückversetzen, um einen Fehler zu berichtigen — der Zauberer verwechselt jedoch die Zutaten, und Godefroy landet gemeinsam mit seinem Knappen Jacquouille im Jahr 1992.
+
+Dort steht sein Schloss noch, wird aber als Hotel betrieben, und seine Nachfahrin Béatrice hält ihn für einen verwirrten Verwandten. Der Film lebt davon, dass die beiden Mittelalterlichen jede Erscheinung der Gegenwart nach ihren eigenen Maßstäben deuten: Autos sind Ungeheuer, der Briefträger ein Bote des Königs, und die Vorstellung, dass ein Knappe wählen darf, ist eine Ungeheuerlichkeit.
+
+### Entstehungsgeschichte
+
+Regie führte Jean-Marie Poiré, der das Drehbuch gemeinsam mit Christian Clavier schrieb. Clavier spielt zugleich den Knappen Jacquouille, Jean Reno den Ritter.
+
+Das Budget lag bei 9,5 Millionen Dollar, die Laufzeit beträgt 107 Minuten. Produziert wurde der Film von Gaumont und France 3 Cinéma.
+
+### Hinter den Kulissen
+
+Ein wesentlicher Teil des Humors liegt in der Sprache: Die beiden Zeitreisenden sprechen ein erfundenes Alt-Französisch mit eigenen Ausrufen und Wortbildungen, das im Original einen guten Teil der Wirkung ausmacht — und in Übersetzungen naturgemäß schwer zu erhalten ist.
+
+Der Film erschien am 27. Januar 1993.
+
+### Einordnung & Wirkung
+
+Mit 13,7 Millionen verkauften Kinokarten war es der erfolgreichste Film des Jahres 1993 in Frankreich; weltweit kamen 98,8 Millionen Dollar zusammen. Er gehört bis heute zu den erfolgreichsten französischen Produktionen überhaupt.
+
+Bei den Césars gab es acht Nominierungen, darunter bester Film und beste Regie; Valérie Lemercier gewann als beste Nebendarstellerin. Die Kritik blieb dagegen zurückhaltend — Rotten Tomatoes weist 31 Prozent aus.
+
+Es folgten zwei Fortsetzungen (1998 und 2016) sowie 2001 eine amerikanische Neuverfilmung unter dem Titel "Just Visiting", ebenfalls mit Clavier und Reno.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10072', locale: 'de-de',
+    text: `### Worum es geht
+
+In einer psychiatrischen Klinik liegen sechs Jugendliche, die von demselben Mann träumen und deren Selbstverletzungen als Selbstmordversuche gedeutet werden. Niemand glaubt ihnen — bis die neue Praktikantin ihren Dienst antritt: Nancy Thompson, die Freddy Krueger als Einzige überlebt hat.
+
+Nancy bringt den Jugendlichen bei, dass sie im Traum über Fähigkeiten verfügen, die sie im Wachzustand nicht haben: Kraft, Geschwindigkeit, Zauberei. Statt wegzulaufen, gehen sie gemeinsam hinein. Der Film verschiebt die Reihe damit von der Verfolgungsgeschichte zur Auseinandersetzung — und liefert nebenbei die Erklärung, woher Krueger stammt.
+
+### Entstehungsgeschichte
+
+Wes Craven kehrte als Mitautor zurück, nachdem er den zweiten Teil ausgelassen hatte, der schlecht aufgenommen worden war. Mit ihm schrieben Bruce Wagner und Frank Darabont.
+
+Regie führte Chuck Russell; es war seine erste Kinoarbeit. Das Budget lag zwischen 4,3 und 4,6 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Heather Langenkamp spielt erneut Nancy, Robert Englund erneut Freddy Krueger. Patricia Arquette gibt hier als Kristen Parker ihr Filmdebüt, ebenfalls dabei ist Laurence Fishburne. In kurzen Auftritten sind Dick Cavett und Zsa Zsa Gabor zu sehen.
+
+Die Effekte sind der eigentliche Aufwand: Das Team um Peter Chesney mit Kevin Yagher und Mark Shostrom baute für jede Traumszene eine eigene Mechanik — vom Puppenspieler mit Sehnen bis zur Schlange, die einen Körper verschlingt. Die Kamera führte Roy H. Wagner, die Musik schrieb Angelo Badalamenti.
+
+### Einordnung & Wirkung
+
+Der Start am 27. Februar 1987 aus 1.343 Kinos brachte 8,9 Millionen Dollar — damals ein Rekord für einen unabhängig produzierten Film. In den USA kamen 44,8 Millionen zusammen; für New Line Cinema war es der erfolgreichste Film des Jahres.
+
+Die Kritik sah darin die Erholung der Reihe: 68 Prozent bei Rotten Tomatoes, dazu Saturn-Award-Nominierungen für den besten Horrorfilm und die beste Maske. Roger Ebert urteilte gemischt.
+
+Unter den Fortsetzungen gilt dieser Teil vielen als der beste — auch, weil er als einziger die Idee der Reihe konsequent weiterdenkt, statt sie zu wiederholen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:47931', locale: 'de-de',
+    text: `### Worum es geht
+
+Dreizehn Jahre nach den Ereignissen des ersten Films ist Oberstleutnant Nascimento nicht mehr im Einsatz, sondern Unterstaatssekretär für öffentliche Sicherheit in Rio de Janeiro. Von dort aus lässt er die Sondereinheit BOPE massiv gegen die Drogenbanden in den Favelas vorgehen.
+
+Der Erfolg schafft ein Problem: Wo die Händler verschwinden, treten korrupte Polizisten an ihre Stelle und übernehmen ganze Viertel als Milizen — mit Schutzgeld, Gasverkauf, Kabelanschlüssen und Stimmenkauf bei Wahlen. Der Film verlagert damit den Blick von der Straße auf die Verbindung zwischen Polizei und Politik: Der Gegner ist nicht mehr die Bande, sondern der Apparat.
+
+### Entstehungsgeschichte
+
+Es ist die Fortsetzung von "Tropa de Elite" aus dem Jahr 2007. Regie führte erneut José Padilha, der wenige Jahre später in Hollywood die Neuverfilmung von "RoboCop" drehte.
+
+Padilha hat einen dritten Teil abgelehnt mit der Begründung, er habe zu diesem Thema gesagt, was er sagen wollte.
+
+### Hinter den Kulissen
+
+Auffällig ist die Konstruktion: Der Film erzählt aus der Sicht Nascimentos, der aus dem Off kommentiert und dabei erkennbar unzuverlässig bleibt — er rechtfertigt sich, während die Bilder etwas anderes zeigen.
+
+Die Milizen, um die es geht, sind kein erfundenes Motiv, sondern ein reales und zur Entstehungszeit breit diskutiertes Phänomen in Rio de Janeiro.
+
+### Einordnung & Wirkung
+
+Der Film wurde zum bis dahin meistgesehenen Film der brasilianischen Kinogeschichte — er übertraf sowohl "Avatar" als auch "Dona Flor und ihre zwei Ehemänner".
+
+Die Kritik reagierte sehr gut: 91 Prozent von 46 Besprechungen bei Rotten Tomatoes, 71 von 100 bei Metacritic.
+
+Brasilien schickte ihn als Beitrag für den Oscar in der Sparte bester fremdsprachiger Film ins Rennen für die Verleihung 2012; in die engere Auswahl kam er nicht. Zusammen mit dem ersten Teil gilt er als der Film, der die Diskussion über Polizeigewalt und Korruption in Brasilien einer breiten Öffentlichkeit zugänglich gemacht hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:533642', locale: 'de-de',
+    text: `### Worum es geht
+
+Karen Barclay schenkt ihrem Sohn Andy eine Buddi-Puppe — ein sprachgesteuertes Spielzeug, das sich mit allen Geräten des Herstellers verbindet: Fernseher, Thermostat, Auto, Drohne. Die Puppe lernt aus dem, was sie sieht.
+
+Was Andy ihr vorlebt, ist nicht durchweg geeignet. Und weil ein entlassener Fabrikarbeiter bei genau diesem Exemplar sämtliche Sicherheitssperren gelöscht hat, zieht Chucky aus jeder Beobachtung Schlüsse, die niemand vorgesehen hat. Die Bedrohung ist damit nicht Besessenheit, sondern ein System, das zu viel kann und niemandem gehört.
+
+### Entstehungsgeschichte
+
+Der Film ist eine Neuverfilmung des Originals von 1988, entstand jedoch ohne Don Mancini, den Schöpfer der Reihe, der die übrigen Teile bis heute verantwortet. Mancini äußerte, er sei verletzt gewesen, dass das Vorhaben ohne ihn weiterlief.
+
+Die grundlegende Änderung betrifft die Erklärung: Statt eines Serienmörders, der sich per Voodoo in eine Puppe überträgt, steht hier ein fehlerhaftes lernendes Spielzeug.
+
+Regie führte Lars Klevberg, das Drehbuch schrieb Tyler Burton Smith. Das Budget lag bei 10 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Es spielen Aubrey Plaza als Karen, Gabriel Bateman als Andy und Brian Tyree Henry als Detective Mike Norris.
+
+Die Stimme von Chucky übernahm Mark Hamill und ersetzte damit Brad Dourif, der die Figur seit 1988 sprach und es in der parallel weiterlaufenden Reihe weiterhin tut. Hamill legt sie deutlich anders an: zunächst freundlich und kindlich, mit einer Verschiebung, die sich über den Film hinzieht.
+
+### Einordnung & Wirkung
+
+Der Film startete mit 14,1 Millionen Dollar auf Platz zwei hinter "Toy Story 4" — eine Terminwahl, über die die Werbung offen scherzte. Weltweit kamen 44,9 Millionen Dollar zusammen.
+
+Die Kritik blieb geteilt: 64 Prozent von 208 Besprechungen bei Rotten Tomatoes, 48 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein C plus — gleichauf mit dem schwächsten Wert der Reihe.
+
+Ungewöhnlich ist die Lage danach: Die ursprüngliche Reihe lief unter Mancini mit eigener Fernsehserie weiter, sodass zwei Fassungen derselben Figur nebeneinander bestehen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:47327', locale: 'de-de',
+    text: `### Worum es geht
+
+John Milton ist aus der Hölle ausgebrochen. Seine Tochter wurde von einem Sektenführer namens Jonah King getötet, und dessen Anhänger haben ihr Kind entführt, um es bei Vollmond zu opfern.
+
+Milton hat drei Tage. Unterwegs schließt sich ihm die Kellnerin Piper an, deren Wagen er braucht. Hinter ihm her ist der Buchhalter — ein Abgesandter der Hölle, der ihn zurückholen soll und dabei ausgesprochen höflich bleibt. Der Film macht aus seiner Ausgangslage keinen Hehl: Er ist als Grindhouse-Film angelegt, mit Muscle Cars, Schusswechseln und einer Waffe, die Seelen tötet.
+
+### Entstehungsgeschichte
+
+Regie führte Patrick Lussier, die Hauptrolle spielt Nicolas Cage. Das Budget lag zwischen 45 und 50 Millionen Dollar.
+
+Cage hat seine Zusage begründet: Der Film enthält eine Szene, in der seiner Figur die Augen weggeschossen werden — ein Einfall, den man bei seiner vorherigen Arbeit "Der letzte Tempelritter" abgelehnt hatte.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Louisiana, unter anderem in Minden, Plain Dealing und Shreveport.
+
+Der Film entstand mit echten 3-D-Kameras statt durch nachträgliche Umrechnung — zu einer Zeit, in der die meisten Produktionen den billigeren Weg gingen. Drei Fahrzeuge tragen einen erheblichen Teil der Gestaltung: ein Buick Riviera von 1964, ein Dodge Charger R/T von 1969 und ein Chevrolet Chevelle SS 454 von 1971.
+
+### Einordnung & Wirkung
+
+Der Start brachte 5 Millionen Dollar und Platz neun — der schwächste Start eines 3-D-Films, der in mehr als 2.000 amerikanischen Kinos anlief. Weltweit kamen 40,9 Millionen Dollar zusammen, davon 10,6 Millionen in den USA und 30,3 Millionen international. Damit blieb der Film unter seinen Produktionskosten.
+
+Die Kritik fiel gemischt bis ablehnend aus: 46 Prozent bei Rotten Tomatoes, 44 von 100 bei Metacritic; das Publikum vergab bei CinemaScore ein C plus.
+
+Er gehört damit zu jener kurzen Phase Anfang der zehner Jahre, in der 3-D auch für kleinere Genrefilme eingesetzt wurde — ein Ansatz, der sich wirtschaftlich nicht gehalten hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:585511', locale: 'de-de',
+    text: `### Worum es geht
+
+Sam Greenfield ist achtzehn und hat das Waisenhaus verlassen, ohne je adoptiert worden zu sein. Ihr Problem ist Pech: Toastbrot fällt auf die bestrichene Seite, Schlüssel verschwinden, Schnürsenkel reißen — und zwar täglich.
+
+Als sie einer schwarzen Katze ein Brötchen abgibt, findet sie einen Glückspfennig. Zum ersten Mal läuft alles glatt. Sie verliert ihn, jagt der Katze hinterher und landet im Land des Glücks: einer Fabrik, in der Glück und Pech hergestellt und über die Welt verteilt werden. Sam will genug Glück beschaffen, damit ihre jüngere Freundin Hazel doch noch eine Familie findet.
+
+### Entstehungsgeschichte
+
+Es ist der erste abendfüllende Film von Skydance Animation, das 2017 gegründet worden war. Regie führte Peggy Holmes. Das Budget lag bei über 140 Millionen Dollar.
+
+Als Leiter der Animationssparte war John Lasseter verpflichtet worden, zuvor Kreativchef von Pixar und Disney. Die Personalie war umstritten; Emma Thompson verließ das Projekt 2019 wegen dieser Besetzung.
+
+### Hinter den Kulissen
+
+Ursprünglich war ein Kinostart über Paramount für März 2021 vorgesehen. Im Dezember 2020 erwarb Apple TV+ die Auswertungsrechte, sodass der Film am 5. August 2022 dort und in ausgewählten Kinos erschien.
+
+Die Welt des Films ist als Betrieb angelegt: Glück und Pech werden in getrennten Bereichen produziert, über Leitungen verteilt und von Kobolden, Einhörnern und Drachen verwaltet. Diese Anlage erlaubt es, ein abstraktes Thema in Räume und Abläufe zu übersetzen — das gestalterische Hauptargument des Films.
+
+### Einordnung & Wirkung
+
+Nach Erhebungen von Nielsen sahen den Film in der ersten Woche bei Apple TV+ rund 2,2 Millionen Zuschauer in den USA.
+
+Die Kritik blieb zurückhaltend: 48 Prozent von 99 Besprechungen bei Rotten Tomatoes und 48 von 100 bei Metacritic, mit dem Befund, er sei als Beschäftigung für Kinder unbedenklich, biete aber wenig Eigenes.
+
+Er steht damit für den Versuch mehrerer Anbieter jener Jahre, mit hohem Aufwand eigene Animationsfilme aufzubauen — und für die Schwierigkeit, gegen etablierte Studios eine eigene Handschrift zu behaupten.` },
 ];
