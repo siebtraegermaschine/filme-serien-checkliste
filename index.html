@@ -10516,7 +10516,10 @@ function providerSelected(id){ return !providerFilterActive() || MY_PROVIDER_IDS
 async function loadMyProviders(){
   if (!CURRENT_USER) { MY_PROVIDER_IDS = null; return; }
   try {
-    var d = await apiRequest('GET', '/api/watch-providers/selection');
+    // Region mitgeben: Katalog UND Vorauswahl kennt TMDB je Land (siehe
+    // backend/lib/anbieter.js) -- ohne sie bekaeme jemand aus Brasilien die
+    // deutsche Vorauswahl.
+    var d = await apiRequest('GET', mitSpracheRegion('/api/watch-providers/selection'));
     MY_PROVIDER_IDS = d.selected || [];
   } catch (e) { MY_PROVIDER_IDS = null; }
 }
@@ -10550,7 +10553,7 @@ async function openProvidersModal(){
   _provModal.style.display = 'flex';
   _provList.textContent = TXT.laedt;
   try {
-    var cat = await apiRequest('GET', '/api/watch-providers/catalog');
+    var cat = await apiRequest('GET', mitSpracheRegion('/api/watch-providers/catalog'));
     PROVIDER_CATALOG = cat.providers || [];
     if (!Array.isArray(MY_PROVIDER_IDS)) await loadMyProviders();
     renderProvidersList();
@@ -10575,7 +10578,7 @@ document.getElementById('providersSaveBtn').onclick = async function(){
     MY_PROVIDER_IDS.forEach(function(id){ if (!sichtbareIds.has(id) && ids.indexOf(id) === -1) ids.push(id); });
   }
   try {
-    var d = await apiRequest('PUT', '/api/watch-providers/selection', { selected: ids });
+    var d = await apiRequest('PUT', mitSpracheRegion('/api/watch-providers/selection'), { selected: ids });
     MY_PROVIDER_IDS = d.selected || [];
     // Anbieter-Schildchen und "Nur Streaming" haengen ebenfalls daran.
     watchDataCache.clear();

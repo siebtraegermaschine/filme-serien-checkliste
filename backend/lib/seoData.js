@@ -5,6 +5,7 @@
 // der Canonical-Ergaenzung an /t/ gemeinsam genutzt.
 import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
+import { anbieterSlug } from './anbieter.js';
 import { regionFuerLocale } from './seoLocale.js';
 import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatistik.js';
 import { ladePersonDaten, resolvePersonIdCachedOnly } from './personen.js';
@@ -22,13 +23,30 @@ const SEITENGROESSE = 40;
 // waere zu duenner Inhalt (Thin-Content-Vermeidung, siehe PLAN-SEO.md 3.9).
 const MIN_KINOS_STADT = 3;
 
-// Nur die vier Abo-Dienste, die auch der taegliche Streaming-Abgleich kennt
-// (PROVIDER_NAMES in streaming.js), haben eine eigene Anbieter-Seite -- der
-// Name in watch_providers_cache.flatrate (TMDB-Anbieter-IDs) muss deshalb auf
-// den provider_id-Slug aus streaming_cache zurueckgefuehrt werden, um von der
-// Titelseite dorthin verlinken zu koennen. Unbekannte Anbieter bleiben ohne
-// Link (reiner Text) statt zu raten.
-const ANBIETER_SLUG_VON_NAME = { 'Netflix': 'netflix', 'Amazon Prime Video': 'amazon', 'Disney+': 'disney', 'Apple TV+': 'apple' };
+// Eine eigene Anbieter-Seite hat nur, wer im Streaming-Abgleich vorkommt --
+// der Name aus watch_providers_cache.flatrate muss dafuer auf den
+// provider_id-Slug aus streaming_cache zurueckgefuehrt werden (anbieterSlug,
+// dieselbe Regel wie beim Ingest). Verlinkt wird erst, wenn es die Seite in
+// dieser Region wirklich gibt: seit der Import mehr als die vier Anbieter der
+// ersten Ausbaustufe kennt, waere ein blindes Mapping sonst eine Quelle toter
+// Links. Unbekannte Anbieter bleiben reiner Text.
+//
+// Die frueher hier stehende Namensliste fuehrte 'Disney+'/'Apple TV+' -- TMDB
+// nennt sie inzwischen 'Disney Plus'/'Apple TV', die beiden Links entstanden
+// deshalb gar nicht mehr.
+const ANBIETER_SEITEN_TTL_MS = 60 * 60 * 1000;
+const anbieterSeitenCache = new Map();   // region -> { at, slugs:Set }
+
+async function anbieterMitSeite(region) {
+  const gecacht = anbieterSeitenCache.get(region);
+  if (gecacht && Date.now() - gecacht.at < ANBIETER_SEITEN_TTL_MS) return gecacht.slugs;
+  const { rows } = await pool.query(
+    `SELECT DISTINCT provider_id FROM streaming_cache WHERE region = $1`, [region]
+  );
+  const slugs = new Set(rows.map((r) => r.provider_id));
+  anbieterSeitenCache.set(region, { at: Date.now(), slugs });
+  return slugs;
+}
 
 export async function ladeSeoText(bereich, schluessel, locale) {
   const { rows } = await pool.query(
@@ -96,7 +114,11 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
 
   const zuKarte = (r) => ({ id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year, posterPath: r.poster_path });
   const streaming = streamingRows.rows[0] || { flatrate: [], rent: [], buy: [] };
-  const flatrateMitSlug = (streaming.flatrate || []).map((p) => ({ ...p, anbieterSlug: ANBIETER_SLUG_VON_NAME[p.name] || null }));
+  const seiten = await anbieterMitSeite(region);
+  const flatrateMitSlug = (streaming.flatrate || []).map((p) => {
+    const slug = anbieterSlug(p.name);
+    return { ...p, anbieterSlug: seiten.has(slug) ? slug : null };
+  });
 
   return {
     id: String(titel.id),
