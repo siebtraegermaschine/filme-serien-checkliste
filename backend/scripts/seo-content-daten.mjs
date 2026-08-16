@@ -20152,4 +20152,229 @@ Der Start brachte 6,7 Millionen Dollar und Platz eins; weltweit kamen 55,6 Milli
 Die Kritik blieb geteilt; ein wiederkehrender Einwand lautete, die überdrehte Machart überlagere das, was der Film über Ausgrenzung und weibliche Selbstermächtigung erzähle. Es gab einen MTV Movie Award für den besten Kampf und Nominierungen für die Saturn Awards.
 
 Über die Jahre hat der Film eine feste Anhängerschaft gewonnen, besonders bei jungen Frauen, und gilt heute als prägend für eine ganze Reihe späterer Hexenstoffe. 2020 erschien mit "The Craft: Legacy" eine Fortsetzung.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'series:35610', locale: 'de-de',
+    text: `### Worum es geht
+
+Kagome Higurashi ist Schülerin in Tokio und wohnt auf einem Tempelgelände. An ihrem fünfzehnten Geburtstag zieht sie etwas in einen alten Brunnen — und sie kommt in der Sengoku-Zeit wieder heraus, im Japan des 16. Jahrhunderts.
+
+Dort befreit sie den Halbdämon Inuyasha, der seit fünfzig Jahren an einen Baum gebannt war. Kagome trägt das Shikon-Juwel in sich, einen Gegenstand, der Dämonen Macht verleiht; als es zerspringt, verteilen sich die Splitter über das ganze Land. Von da an reisen die beiden gemeinsam, um sie einzusammeln, bevor jemand anderes sie findet. Dazu stoßen der Mönch Miroku, die Dämonenjägerin Sango und der Fuchsdämon Shippō. Ihr Gegenspieler ist Naraku, der beide Hauptfiguren schon vor ihrer Begegnung gegeneinander ausgespielt hat.
+
+### Entstehungsgeschichte
+
+Vorlage ist der Manga von Rumiko Takahashi, der von November 1996 bis Juni 2008 im "Weekly Shōnen Sunday" erschien und 56 Bände mit 558 Kapiteln umfasst.
+
+Takahashi war zuvor vor allem für Komödien wie "Ranma ½" bekannt. Diese Reihe geht deutlich weiter: dunklere Stoffe, ernstere Themen, dabei aber weiterhin komische Passagen — die historische Kulisse erlaubt es, Gewalt darzustellen, ohne sie zu verharmlosen.
+
+### Hinter den Kulissen
+
+Die erste Anime-Serie produzierte das Studio Sunrise und lief von 2000 bis 2004 mit 167 Folgen. Sie endete, bevor der Manga abgeschlossen war — ein häufiges Problem bei parallel laufenden Verfilmungen.
+
+Erst 2009/2010 wurde die Geschichte mit "The Final Act" in 26 Folgen zu Ende erzählt. 2020 bis 2022 folgte mit "Yashahime: Princess Half-Demon" ein Ableger über die nächste Generation.
+
+### Einordnung & Wirkung
+
+2002 erhielt die Reihe den 47. Shogakukan-Manga-Preis. Bis September 2020 waren über 50 Millionen Exemplare des Mangas im Umlauf, womit er zu den meistverkauften gehört.
+
+Kritiker hoben das hohe Erzähltempo, die Figurenzeichnung und die Fantasiewelt hervor, ebenso die Mischung aus Humor und Ernst.
+
+Für viele westliche Zuschauer der zweitausender Jahre gehörte die Serie zu den ersten Anime überhaupt — gemeinsam mit "Naruto" und "Dragon Ball" steht sie für die Phase, in der japanische Serien im deutschsprachigen Fernsehen zum festen Bestandteil wurden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2043', locale: 'de-de',
+    text: `### Worum es geht
+
+Der forensische Psychologe und Polizist Alex Cross hat sich nach dem Tod seiner Partnerin bei einem missglückten Einsatz zurückgezogen. Zurück in den Dienst holt ihn eine Entführung: An einer Privatschule in Washington verschwindet die Tochter eines Senators.
+
+Der Täter meldet sich bei Cross persönlich. Gary Soneji will nicht in erster Linie Geld, sondern einen Platz in der Kriminalgeschichte — er ahmt den Lindbergh-Fall von 1932 nach. Cross ermittelt gemeinsam mit der Personenschützerin Jezzie Flannigan, die für den Schutz des Mädchens verantwortlich war, und stößt auf eine Beteiligung, die weiter reicht als der eine Entführer.
+
+### Entstehungsgeschichte
+
+Grundlage ist James Pattersons Roman von 1993, das Drehbuch schrieb Marc Moss.
+
+Es ist der zweite Film um die Figur Alex Cross nach "Im Netz der Spinne"-Vorgänger "Denn zum Küssen sind sie da" von 1997. Morgan Freeman spielt Cross erneut, ebenso kehrt Jay O. Sanders als FBI-Mann Kyle Craig zurück. Die Reihenfolge weicht dabei von der Vorlage ab: Im Buchwerk ist dies der erste Cross-Roman, verfilmt wurde er als zweiter.
+
+### Hinter den Kulissen
+
+Regie führte Lee Tamahori, das Budget lag bei 60 Millionen Dollar; verliehen wurde der Film von Paramount. Monica Potter spielt Flannigan, Michael Wincott den Entführer Soneji.
+
+Die Musik schrieb Jerry Goldsmith, der dafür einen BMI Film & TV Award erhielt.
+
+Tragend ist die Figur des Alex Cross: ein Ermittler, der Täterprofile nicht über Beweise erstellt, sondern über Bücher, Gespräche und Geduld — Freeman spielt ihn durchgehend leise, was den Film von der üblichen Machart des Genres unterscheidet.
+
+### Einordnung & Wirkung
+
+Der Film startete am 6. April 2001 und spielte weltweit 105,2 Millionen Dollar ein, davon 74,1 Millionen in den USA — deutlich über den Produktionskosten.
+
+Die Kritik lehnte ihn überwiegend ab: 32 Prozent bei Rotten Tomatoes, mit dem Vorwurf, er sei abgeleitet und enthalte zu viele unglaubwürdige Wendungen. Roger Ebert vergab zwei von vier Sternen und sprach von einer Handlung voller Lücken. Freemans Auftritt wurde dabei fast durchgehend gelobt und für einen NAACP Image Award nominiert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:370755', locale: 'de-de',
+    text: `### Worum es geht
+
+Paterson fährt Linienbus in Paterson, New Jersey. Er steht jeden Morgen kurz nach sechs auf, geht zur Arbeit, hört den Gesprächen der Fahrgäste zu, isst mittags allein und geht abends mit dem Hund zu derselben Bar.
+
+Nebenbei schreibt er Gedichte in ein Heft. Er veröffentlicht sie nicht und zeigt sie kaum jemandem. Seine Frau Laura hat jeden Tag eine neue Idee — Vorhänge bemalen, Cupcakes verkaufen, Countrysängerin werden. Der Film erzählt eine Woche, Montag bis Montag, und besteht aus den kleinen Abweichungen, die diese Woche von der vorigen unterscheiden.
+
+### Entstehungsgeschichte
+
+Jim Jarmusch fasste das Vorhaben im April 2014: ein Film über einen Dichter, der in Paterson, New Jersey, lebt.
+
+Der Ort ist nicht beliebig. William Carlos Williams, einer der wichtigsten amerikanischen Dichter des 20. Jahrhunderts, schrieb ein langes Gedicht mit dem Titel "Paterson" über genau diese Stadt; es taucht im Film als Bezugspunkt auf.
+
+Die Gedichte der Hauptfigur schrieb Ron Padgett. Vier davon gab es bereits, drei entstanden eigens für den Film.
+
+### Hinter den Kulissen
+
+Gedreht wurde an dreißig Tagen im Herbst 2015 in Paterson und in New York, bei einem Budget von 5 Millionen Dollar.
+
+Adam Driver machte für die Rolle den Führerschein zum gewerblichen Busfahren — die Fahrszenen sind also echt. Golshifteh Farahani spielt Laura.
+
+Der Film verzichtet auf jede Krise: keine Krankheit, keine Affäre, kein Durchbruch. Was ihn trägt, sind Wiederholung und minimale Verschiebung, und die Frage, ob jemand etwas machen darf, ohne es verwerten zu wollen.
+
+### Einordnung & Wirkung
+
+Der Film lief 2016 in Cannes im Wettbewerb um die Goldene Palme und gewann dort den Palm Dog Award für die Hündin Nellie, die die Auszeichnung posthum erhielt.
+
+Bei 5 Millionen Dollar Budget spielte er weltweit 10,8 Millionen ein. Die Kritik reagierte begeistert: 96 Prozent bei Rotten Tomatoes, 90 von 100 bei Metacritic.
+
+Adam Driver wurde mehrfach nominiert und von den Filmkritikervereinigungen in Los Angeles und Toronto als bester Hauptdarsteller ausgezeichnet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1911', locale: 'de-de',
+    text: `### Worum es geht
+
+Der arabische Gesandte Ahmad ibn Fadlan wird im 10. Jahrhundert aus Bagdad an die Wolga geschickt — offiziell als Botschafter, tatsächlich als Verbannter nach einer Affäre. Dort trifft er auf eine Gruppe Nordmänner.
+
+Eine Weissagung verlangt dreizehn Krieger für einen Hilfszug in den Norden, und der dreizehnte darf kein Nordmann sein. So kommt der Schriftgelehrte, der weder kämpfen noch die Sprache sprechen kann, in eine Truppe, die gegen etwas ziehen soll, das die Bewohner nicht beim Namen nennen. Was sie erwartet, ist kein Ungeheuer, sondern etwas Erklärbareres — und deshalb Beunruhigenderes.
+
+### Entstehungsgeschichte
+
+Grundlage ist Michael Crichtons Roman "Schwarze Nebel" von 1976, der seinerseits das mittelalterliche Epos "Beowulf" aus der Sicht eines realen arabischen Reisenden neu erzählt.
+
+Gedreht wurde ab Sommer 1997 unter dem Titel "Eaters of the Dead", Regie führte John McTiernan.
+
+### Hinter den Kulissen
+
+Die Produktion geriet aus dem Ruder. Nach schlecht aufgenommenen Testvorführungen wurde der Film mehrfach neu geschnitten, und Autor Crichton übernahm schließlich selbst die Regie für Nachdrehs — was über ein Jahr Verzögerung bedeutete. Die Musik wurde ausgetauscht: Jerry Goldsmith ersetzte Graeme Revell. Auch der Titel wurde geändert.
+
+Das Budget stieg von 85 Millionen Dollar auf rund 160 Millionen einschließlich Nachdrehs und Werbung.
+
+Eine Szene ist trotz allem viel zitiert: Ibn Fadlan lernt die Sprache der Nordmänner, indem er über mehrere Abends am Feuer zuhört — die Dialoge wechseln dabei allmählich von Altnordisch zu Englisch, ohne Erklärung.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 61,7 Millionen Dollar ein und war damit der größte Verlust des Kinojahres 1999; die Einbuße wird auf bis zu 129 Millionen Dollar geschätzt.
+
+Die Kritik war gespalten. Rotten Tomatoes weist 33 Prozent aus, Roger Ebert vergab anderthalb Sterne. Lisa Schwarzbaum von Entertainment Weekly widersprach deutlich und nannte ihn den unerwartet kühnsten und einfallsreichsten Abenteuerfilm seit Langem.
+
+Über die Jahre hat er eine feste Anhängerschaft gewonnen — auch, weil ein muslimischer Erzähler als Hauptfigur eines Hollywood-Großfilms damals ohne Vorbild war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:100241', locale: 'de-de',
+    text: `### Worum es geht
+
+Das Wesen, das Victor Frankenstein zusammengesetzt hat, überlebt seinen Schöpfer. Wasserspeier — Steinfiguren, die im Auftrag des Erzengels Michael über die Erde wachen — nehmen es auf, geben ihm den Namen Adam und stellen fest, dass es keine Seele besitzt.
+
+Zweihundert Jahre später wird Adam in einen Krieg hineingezogen, den er nicht gesucht hat. Der Dämonenfürst Naberius, der als Milliardär und Firmenchef auftritt, will Frankensteins Verfahren nachbauen, um seelenlose Körper mit Dämonen zu besetzen. Das einzige noch existierende Exemplar von Frankensteins Aufzeichnungen ist Adam selbst.
+
+### Entstehungsgeschichte
+
+Vorlage ist ein digitaler Comic von Kevin Grevioux, der zuvor an der "Underworld"-Reihe beteiligt war. Die Machart ist erkennbar davon abgeleitet: zwei uralte Fraktionen, ein ewiger Krieg im Verborgenen, eine Hauptfigur zwischen den Lagern.
+
+Regie führte Stuart Beattie, das Budget lag bei 65 Millionen Dollar. Es ist eine Gemeinschaftsproduktion aus den USA und Australien.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab dem 27. Februar 2012 über zehn Wochen in Melbourne. Für die visuellen Effekte standen 6 Millionen Dollar zur Verfügung.
+
+Es spielen Aaron Eckhart als Adam, Bill Nighy als Naberius, Yvonne Strahovski als Wissenschaftlerin Terra Wade und Miranda Otto als Königin der Wasserspeier.
+
+Bemerkenswert ist der Umgang mit der Vorlage: Von Mary Shelleys Roman bleibt kaum mehr als der Name. Die Frage nach Verantwortung des Schöpfers, die das Buch trägt, ist durch eine Actionhandlung ersetzt.
+
+### Einordnung & Wirkung
+
+Der Film startete am 24. Januar 2014 und spielte weltweit 76,8 Millionen Dollar ein — bei 65 Millionen Produktionskosten rechnerisch knapp darüber, gemessen an Werbeaufwand und Erwartung jedoch ein Fehlschlag.
+
+Die Kritik lehnte ihn nahezu vollständig ab: 5 Prozent bei Rotten Tomatoes mit dem Befund, er sei laut, zusammenhanglos und dramatisch leblos, dazu 30 von 100 bei Metacritic.
+
+Er steht damit für eine Reihe von Filmen jener Jahre, die klassische Schauerliteratur in Actionreihen umbauen wollten — ein Vorhaben, das in den seltensten Fällen aufging.` },
+  {
+    bereich: 'titel', schluessel: 'movie:13515', locale: 'de-de',
+    text: `### Worum es geht
+
+Ben Carson war Polizist in New York und ist nach einem tödlichen Schuss im Dienst suspendiert. Er trinkt, wohnt bei seiner Schwester und nimmt eine Stelle als Nachtwächter an: in der Ruine eines abgebrannten Kaufhauses, in dem noch die Spiegel hängen.
+
+Bei seinen Rundgängen bemerkt er Bewegungen, die nicht zu seinen eigenen passen. Was in den Spiegeln geschieht, geschieht kurz darauf am echten Körper — und es trifft nicht nur ihn, sondern auch seine Familie. Die Spur führt zu einer Patientin namens Anna Esseker und zu dem, was in dem Gebäude war, bevor dort ein Kaufhaus stand.
+
+### Entstehungsgeschichte
+
+Grundlage ist der südkoreanische Film "Into the Mirror" von 2003. Alexandre Aja und Grégory Levasseur schrieben das Drehbuch und wichen dabei stark ab: Übernommen wurde die Grundidee mit den Spiegeln, der Rest ist neu.
+
+Aja war zuvor mit "High Tension" und der Neuverfilmung von "The Hills Have Eyes" bekannt geworden. Das Budget lag bei 35 Millionen Dollar; es handelt sich um eine Gemeinschaftsproduktion der USA, Rumäniens und Deutschlands.
+
+### Hinter den Kulissen
+
+Gedreht wurde überwiegend in Bukarest, unter anderem im Gebäude der Rumänischen Akademie der Wissenschaften. Das amerikanische Kaufhaus des Films ist damit ein rumänischer Prachtbau — was der Kulisse eine Anmutung gibt, die für einen New Yorker Schauplatz ungewöhnlich ist.
+
+Kiefer Sutherland spielt Ben Carson, daneben Paula Patton und Amy Smart. Sutherland drehte den Film parallel zur laufenden Serie "24", was die Wahrnehmung der Rolle prägte.
+
+### Einordnung & Wirkung
+
+Der Film startete am 15. August 2008 und spielte weltweit 78,1 Millionen Dollar ein — 30 Millionen in den USA, 41,7 Millionen international, dazu 10,6 Millionen aus der Heimauswertung.
+
+Die Kritik lehnte ihn überwiegend ab: 15 Prozent von 88 Besprechungen bei Rotten Tomatoes. Das Publikum vergab bei CinemaScore ein C.
+
+Er gehört damit zu jener Welle amerikanischer Neuverfilmungen asiatischer Horrorfilme, die nach "The Ring" einsetzte und deren Ergebnisse fast durchgehend hinter den Vorlagen zurückblieben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:614696', locale: 'de-de',
+    text: `### Worum es geht
+
+Oh Joon-woo wacht in der Wohnung seiner Eltern in einem Hochhaus in Seoul auf und ist allein. Im Fernsehen laufen Meldungen über Menschen, die andere angreifen und beißen; auf dem Innenhof unter ihm bricht die Ordnung binnen Minuten zusammen.
+
+Er verbarrikadiert die Tür. Was folgt, ist kein Kampf, sondern Warten: Das Essen geht aus, das Wasser wird abgestellt, das Handynetz bricht zusammen, und die eigentliche Bedrohung ist irgendwann nicht mehr das Draußen, sondern die Vereinzelung. Erst spät entdeckt er in einem Fenster gegenüber ein Licht — Kim Yoo-bin, die es ebenso lange ausgehalten hat.
+
+### Entstehungsgeschichte
+
+Regie führte Cho Il-hyung. Grundlage ist ein Drehbuch des Amerikaners Matt Naylor von 2019, das für die koreanische Fassung überarbeitet wurde.
+
+Die Hauptrollen spielen Yoo Ah-in und Park Shin-hye.
+
+### Hinter den Kulissen
+
+Der Film startete am 24. Juni 2020 in Südkorea — mitten in der Pandemie — und erreichte die höchsten Besucherzahlen an einem Starttag seit Februar 2020, also seit Beginn der Beschränkungen.
+
+Der zeitliche Zufall prägt die Wirkung erheblich: Ein Film über einen jungen Mann, der monatelang seine Wohnung nicht verlässt, den Kontakt zur Außenwelt nur über Bildschirme hält und an der Isolation stärker leidet als an der Gefahr, traf 2020 auf ein Publikum, das genau das erlebte.
+
+Netflix erwarb die internationalen Rechte und veröffentlichte den Film am 8. September 2020 weltweit.
+
+### Einordnung & Wirkung
+
+Der Film spielte 14,7 Millionen Dollar ein und war der erste koreanische Film überhaupt, der die weltweite Filmliste von Netflix anführte; in 90 Ländern erschien er unter den zehn meistgesehenen.
+
+Die Kritik reagierte gut: 88 Prozent bei Rotten Tomatoes. Wiederholt hervorgehoben wurde, wie genau er Panik, Ungewissheit, Einsamkeit und Abgeschnittenheit der ersten Pandemiemonate trifft.
+
+Yoo Ah-in wurde bei den Cine-21-Awards 2020 als bester Hauptdarsteller ausgezeichnet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10431', locale: 'de-de',
+    text: `### Worum es geht
+
+Der FBI-Agent John Crawford verliert seinen Partner und dessen Familie bei einem Anschlag. Verantwortlich ist ein Auftragsmörder, den niemand je gesehen hat und der nur Rogue genannt wird.
+
+Drei Jahre später taucht Rogue wieder auf und arbeitet abwechselnd für zwei verfeindete Verbrecherorganisationen in San Francisco — die japanische Yakuza und eine chinesische Triade —, die er systematisch gegeneinander aufbringt. Crawford nimmt die Jagd wieder auf. Wer Rogue tatsächlich ist und warum er so vorgeht, klärt sich erst ganz am Schluss, und die Auflösung stellt alles Vorherige auf den Kopf.
+
+### Entstehungsgeschichte
+
+Es ist die erste Kinoarbeit von Philip G. Atwell, der zuvor Musikvideos gedreht hatte.
+
+Jet Li und Jason Statham standen hier zum zweiten Mal gemeinsam vor der Kamera, nach "The One" von 2001 — damals als Gegner, hier erneut. Das Budget lag bei 25 Millionen Dollar, verliehen wurde der Film von Lionsgate.
+
+### Hinter den Kulissen
+
+Die Laufzeit beträgt 103 Minuten. Auffällig ist, wie wenig die beiden Hauptdarsteller tatsächlich miteinander zu tun haben: Der Film hält sie über weite Strecken getrennt und läuft auf ein einziges Aufeinandertreffen zu — eine Entscheidung, die dem Aufbau dient und den Erwartungen an eine Paarung dieser beiden Namen widerspricht.
+
+### Einordnung & Wirkung
+
+Der Film startete am 24. August 2007 und spielte weltweit 40,7 Millionen Dollar ein — 22,5 Millionen in den USA, 18,2 Millionen international. Zusammen mit 28 Millionen aus dem Verkauf für zu Hause war er profitabel.
+
+Die Kritik lehnte ihn ab: 14 Prozent von 59 Besprechungen bei Rotten Tomatoes, 36 von 100 bei Metacritic, mit dem Befund, er sei voller Klischees und arm an Actionszenen. Das Publikum vergab bei CinemaScore ein B.
+
+Bemerkenswert ist eine spätere Neubewertung: Die Zeitschrift Time Out führte den Film 2014 in einer Rückschau auf Platz 93 der besten Actionfilme aller Zeiten — ein Urteil, das dem Erstbefund der Kritik deutlich widerspricht.` },
 ];
