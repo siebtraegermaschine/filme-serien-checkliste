@@ -20377,4 +20377,231 @@ Der Film startete am 24. August 2007 und spielte weltweit 40,7 Millionen Dollar 
 Die Kritik lehnte ihn ab: 14 Prozent von 59 Besprechungen bei Rotten Tomatoes, 36 von 100 bei Metacritic, mit dem Befund, er sei voller Klischees und arm an Actionszenen. Das Publikum vergab bei CinemaScore ein B.
 
 Bemerkenswert ist eine spätere Neubewertung: Die Zeitschrift Time Out führte den Film 2014 in einer Rückschau auf Platz 93 der besten Actionfilme aller Zeiten — ein Urteil, das dem Erstbefund der Kritik deutlich widerspricht.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:401', locale: 'de-de',
+    text: `### Worum es geht
+
+Andrew Largeman spielt in Los Angeles kleine Fernsehrollen, bedient nebenbei in einem Restaurant und nimmt seit seiner Kindheit Medikamente, die sein Vater — Psychiater — ihm verschrieben hat. Als seine Mutter stirbt, fährt er zum ersten Mal seit neun Jahren nach New Jersey zurück.
+
+Die Tabletten lässt er zu Hause. Was folgt, sind vier Tage zwischen alten Schulfreunden, die nirgendwo hingekommen sind, einer Beerdigung und einer jungen Frau namens Sam, die Epilepsie hat und pausenlos redet. Der Film handelt davon, wie es sich anfühlt, nach Jahren zum ersten Mal wieder etwas zu spüren — und davon, warum das nicht nur angenehm ist.
+
+### Entstehungsgeschichte
+
+Zach Braff schrieb das Drehbuch, führte Regie und spielte die Hauptrolle. Es war seine erste Kinoarbeit; bekannt war er zu diesem Zeitpunkt aus der Serie "Scrubs".
+
+Gedreht wurde in 25 Tagen im April und Mai 2003, überwiegend in South Orange, New Jersey — Braffs eigenem Heimatort. Das Budget lag bei 2,5 Millionen Dollar.
+
+Nach der Premiere beim Sundance-Festival am 16. Januar 2004 kauften Fox Searchlight und Miramax die weltweiten Rechte für 5 Millionen Dollar — also das Doppelte der Herstellungskosten.
+
+### Hinter den Kulissen
+
+Neben Braff spielen Natalie Portman als Sam, dazu Peter Sarsgaard, Ian Holm und Jean Smart.
+
+Die Musik ist ein eigener Teil des Films: Braff stellte die Auswahl selbst zusammen, und die Zusammenstellung gewann 2005 einen Grammy als bestes Soundtrack-Album. Sie gilt als einer der Gründe, warum Indie-Pop in jenen Jahren im breiten Kino ankam.
+
+Die Figur der Sam hat eine eigene Nachgeschichte: An ihr wurde später der Begriff "Manic Pixie Dream Girl" festgemacht — die schrullige junge Frau, deren Aufgabe darin besteht, einen niedergeschlagenen Mann ins Leben zurückzuholen. Der Begriff entstand 2007 in einer Kritik zu einem anderen Film, wird aber regelmäßig auf diese Rolle bezogen.
+
+### Einordnung & Wirkung
+
+Der Film kam am 28. Juli 2004 in den breiten Verleih und spielte weltweit 35,8 Millionen Dollar ein.
+
+Die Kritik reagierte gut: 86 Prozent bei Rotten Tomatoes; Roger Ebert vergab drei von vier Sternen und nannte ihn klug und unkonventionell. Braff erhielt von mehreren Kritikervereinigungen Auszeichnungen für das beste Regiedebüt. Das Magazin Empire führte den Film später auf Platz 393 seiner 500 besten Filme.
+
+Er steht damit zugleich für eine Zeit und für deren spätere Neubewertung — kaum ein anderer Film der zweitausender Jahre wird so oft als Musterbeispiel für beides herangezogen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:645886', locale: 'de-de',
+    text: `### Worum es geht
+
+Ruth Slater kommt nach zwanzig Jahren aus dem Gefängnis. Sie hat einen Polizisten getötet, sitzt die Strafe vollständig ab und findet draußen eine Welt vor, in der jede Bewerbung an der Frage nach Vorstrafen endet.
+
+Sie sucht ihre jüngere Schwester Katie, die zum Tatzeitpunkt fünf war, adoptiert wurde und nichts mehr weiß. Der Kontakt ist ihr gerichtlich untersagt. Gleichzeitig suchen die erwachsenen Söhne des Getöteten nach ihr. Was tatsächlich geschehen ist, klärt der Film erst spät — und die Auflösung verschiebt die Schuldfrage, ohne sie aufzuheben.
+
+### Entstehungsgeschichte
+
+Grundlage ist die britische Fernsehserie "Unforgiven" von Sally Wainwright aus dem Jahr 2009.
+
+Regie führte die deutsche Regisseurin Nora Fingscheidt, die zuvor mit "Systemsprenger" international aufgefallen war. Es ist ihre erste englischsprachige Arbeit. Sandra Bullock spielt Ruth Slater und war zugleich als Produzentin beteiligt.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab Februar 2020 in Vancouver. Im März wurde die Produktion wegen der Pandemie unterbrochen, im September fortgesetzt und im Oktober 2020 abgeschlossen.
+
+Bullock spielt die Rolle betont unspektakulär: keine Erklärungen, kaum Dialog über das Vergangene, ein Gesicht, das über weite Strecken nichts preisgibt. Fingscheidt hält die Kamera dabei nah und ruhig — eine Machart, die aus dem europäischen Autorenkino kommt und in einer amerikanischen Streaming-Produktion dieser Größe ungewöhnlich ist.
+
+### Einordnung & Wirkung
+
+Der Film lief ab dem 24. November 2021 in wenigen Kinos und ab dem 10. Dezember 2021 bei Netflix.
+
+Der Zuspruch war erheblich: In der ersten Woche war er mit 85,86 Millionen gesehenen Stunden der meistgestreamte englischsprachige Film auf der Plattform, nach 28 Tagen standen 214,7 Millionen Stunden zu Buche — Platz fünf der meistgesehenen Filme überhaupt bei Netflix.
+
+Die Kritik blieb dagegen deutlich zurück: 38 Prozent bei Rotten Tomatoes, 41 von 100 bei Metacritic, mit dem wiederkehrenden Befund, Bullocks Leistung sei an eine konstruierte und unablässig freudlose Geschichte verschwendet. Ihr Auftritt selbst wurde fast durchgehend gelobt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:99', locale: 'de-de',
+    text: `### Worum es geht
+
+Manuela arbeitet als Krankenschwester in Madrid und leitet dort Schulungen zur Organspende — sie spielt die Angehörige, der man den Tod eines Menschen mitteilen muss. An seinem siebzehnten Geburtstag wird ihr Sohn Esteban von einem Auto erfasst, als er einer Schauspielerin nach einer Aufführung von "Endstation Sehnsucht" ein Autogramm abringen will. Manuela sitzt kurz darauf auf der anderen Seite des Gesprächs, das sie sonst spielt.
+
+Sie fährt nach Barcelona, um Estebans Vater zu suchen, von dem der Junge nie erfahren hat. Dort trifft sie auf eine Reihe von Frauen: die Schauspielerin von damals, eine schwangere Nonne, eine transsexuelle Prostituierte. Der Film handelt davon, wie Menschen füreinander einspringen, wenn die vorgesehenen Verbindungen fehlen.
+
+### Entstehungsgeschichte
+
+Pedro Almodóvar schrieb und inszenierte den Film. Angeregt wurde er von seiner eigenen früheren Arbeit "Mein blühendes Geheimnis" von 1995, in der eine ähnliche Szene bereits angelegt war.
+
+Der Film ist durchsetzt mit Bezügen: auf Tennessee Williams' "Endstation Sehnsucht", auf "Alles über Eva" von 1950 — worauf schon der Titel verweist — und auf John Cassavetes' "Opening Night" von 1977, dessen Unfallszene nachgestellt wird.
+
+### Hinter den Kulissen
+
+Gedreht wurde überwiegend in Barcelona. Die Musik schrieb Alberto Iglesias.
+
+Behandelt werden Aids, Geschlechtsidentität, Homosexualität, Glaube und die Frage, was ein Leben trägt — Themen, die der Film ohne Erklärstellen und ohne Wertung nebeneinanderstellt. Fast alle tragenden Rollen sind mit Frauen besetzt; Männer kommen vor, sind aber selten anwesend.
+
+### Einordnung & Wirkung
+
+Almodóvar gewann 1999 in Cannes den Preis für die beste Regie, dazu erhielt der Film den Preis der Ökumenischen Jury.
+
+Es folgten der Oscar und der Golden Globe als bester fremdsprachiger Film sowie zwei BAFTAs. In Spanien gab es 14 Nominierungen für den Goya und sieben Auszeichnungen, darunter bester Film und beste Regie. Weltweit spielte der Film 68 Millionen Dollar ein.
+
+Er gilt als der Punkt, an dem Almodóvar vom Regisseur eines Kulturkreises zum international anerkannten Autor wurde — und als eine der frühesten Arbeiten, die transsexuelle Figuren selbstverständlich statt als Randerscheinung zeigen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9326', locale: 'de-de',
+    text: `### Worum es geht
+
+Joan Wilder schreibt Liebesromane, die in fernen Ländern spielen, und traut sich selbst kaum aus ihrer New Yorker Wohnung. Als ihre Schwester in Kolumbien entführt wird, muss sie eine Schatzkarte persönlich überbringen.
+
+Am Flughafen in Bogotá gerät sie an den falschen Bus, landet im Dschungel und trifft dort auf Jack Colton, einen Amerikaner, der Vögel fängt und verkauft. Gegen Bezahlung bringt er sie in Richtung Zivilisation. Was dann folgt, ist ziemlich genau das, was in Joans eigenen Büchern steht — nur mit Schlamm, Blutegeln und einem Drogenhändler, der die Karte ebenfalls will.
+
+### Entstehungsgeschichte
+
+Das Drehbuch schrieb Diane Thomas 1979, während sie als Kellnerin in Malibu arbeitete. Es blieb ihr einziges verfilmtes Buch: Sie starb rund achtzehn Monate nach dem Kinostart bei einem Autounfall.
+
+Robert Zemeckis führte Regie. Sein Stand war zu diesem Zeitpunkt schlecht — nachdem Produzenten eine Rohfassung gesehen hatten, entzogen sie ihm die Regie zu "Cocoon". Der Erfolg des Films drehte das vollständig um: Zemeckis hat später gesagt, er habe ihm "Zurück in die Zukunft" ermöglicht.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen am 11. Juli 1983 in Mexiko und in den Vereinigten Staaten; das Budget lag bei 10 Millionen Dollar. Die Musik schrieb Alan Silvestri — die erste von vielen gemeinsamen Arbeiten mit Zemeckis.
+
+Es spielen Michael Douglas, der zugleich produzierte, Kathleen Turner und Danny DeVito. Turner war zuvor vor allem aus "Heißblütig" bekannt und spielt hier gegen dieses Bild: eine Frau, die erst im Verlauf des Films zu der Figur wird, die sie sonst gleich am Anfang wäre.
+
+### Einordnung & Wirkung
+
+Der Film wurde ein unerwarteter Erfolg und der einzige große Treffer von 20th Century Fox im Jahr 1984. Weltweit spielte er über 115 Millionen Dollar ein und war der sechsterfolgreichste Film des Jahres.
+
+Die Kritik reagierte gut (86 Prozent bei Rotten Tomatoes). Bei den Golden Globes gewann er als beste Komödie oder Musical, Kathleen Turner als beste Hauptdarstellerin derselben Sparte.
+
+Ein Jahr später folgte die Fortsetzung "Auf der Jagd nach dem Juwel vom Nil" — allerdings ohne Zemeckis, der zu diesem Zeitpunkt bereits "Zurück in die Zukunft" drehte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9268', locale: 'de-de',
+    text: `### Worum es geht
+
+John Kruger ist Marshal im Zeugenschutzprogramm. Sein Verfahren ist gründlich: Er löscht die Identität der Schutzperson vollständig aus, inszeniert einen Tod und lässt nichts zurück — daher der Spitzname "Eraser".
+
+Sein neuer Fall ist Lee Cullen, eine Angestellte eines Rüstungskonzerns, die Beweise für den illegalen Verkauf einer neuartigen Waffe gesichert hat: eines elektromagnetischen Gewehrs, das Geschosse mit Lichtgeschwindigkeit abfeuert und durch Wände sieht. Kurz nach Beginn des Schutzes stellt Kruger fest, dass die Gegenseite Zugriff auf interne Daten hat — der Verrat sitzt in der eigenen Behörde, und zwar bei seinem früheren Ausbilder.
+
+### Entstehungsgeschichte
+
+Am Drehbuch arbeiteten mehrere Autoren: Tony Puryear und Walon Green sind genannt, ungenannt beteiligt waren Frank Darabont und William Wisher Jr.
+
+Regie führte Chuck Russell. Das Budget lag bei 100 Millionen Dollar — für einen Actionfilm der neunziger Jahre eine der höheren Summen.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen am 13. September 1995 in New York und Washington, D.C.
+
+Neben Arnold Schwarzenegger spielen Vanessa Williams als Lee Cullen, James Caan als sein früherer Ausbilder Robert DeGuerin und James Coburn.
+
+Die erfundenen Gewehre sind das gestalterische Zentrum des Films und der Grund für einen erheblichen Teil des Aufwands: Ihre Wirkung — Durchschlag, Rückstoß, das Sichtgerät — musste vollständig erfunden und in Effekten umgesetzt werden.
+
+### Einordnung & Wirkung
+
+Der Film startete am 21. Juni 1996 mit 24,5 Millionen Dollar in den USA und spielte weltweit 242 Millionen ein.
+
+Die Kritik blieb geteilt (46 Prozent bei Rotten Tomatoes), lobte aber durchgehend Actionszenen und Effekte; Roger Ebert vergab drei von vier Sternen.
+
+Es gab eine Oscar-Nominierung für den Tonschnitt, die an "Der Geist und die Dunkelheit" ging. Der Film gehört zur späten Phase von Schwarzeneggers Actionjahren — nach "Terminator 2" und "True Lies" und vor der langen Pause, die seine Herzoperation und später die Politik mit sich brachten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11357', locale: 'de-de',
+    text: `### Worum es geht
+
+Michael Myers liegt seit zehn Jahren im Koma in einer Anstalt. Bei einer Verlegung wacht er auf, tötet die Begleitmannschaft und macht sich auf den Weg zurück nach Haddonfield.
+
+Dort lebt Jamie Lloyd, sieben Jahre alt, die Tochter von Laurie Strode. Ihre Eltern sind bei einem Unfall gestorben, sie wächst bei einer Pflegefamilie auf und wird in der Schule wegen ihres Onkels gehänselt. Dr. Loomis, der Myers seit dem ersten Film verfolgt, nimmt die Jagd erneut auf. Der Schluss gibt dem Ganzen eine Wendung, die für eine Fortsetzung dieser Art bemerkenswert konsequent ist.
+
+### Entstehungsgeschichte
+
+Der dritte Teil der Reihe, "Halloween III", hatte 1982 den Versuch unternommen, aus dem Namen eine Anthologie zu machen — mit einer völlig eigenen Geschichte und ohne Michael Myers. Das Publikum lehnte das ab. Dieser Film ist die Rückkehr zur ursprünglichen Figur, was der Titel ausdrücklich benennt.
+
+Das Drehbuch von Alan B. McElroy entstand unter Zeitdruck: Es musste vor Beginn des Autorenstreiks von 1988 fertig sein. Regie führte Dwight H. Little.
+
+### Hinter den Kulissen
+
+Gedreht wurde im Frühjahr 1988 in Salt Lake City statt in Kalifornien — aus Kostengründen. Das Budget lag bei 5 Millionen Dollar.
+
+Donald Pleasence spielt erneut Dr. Loomis. Danielle Harris gab hier als Jamie Lloyd ihr Filmdebüt; sie war zum Zeitpunkt der Dreharbeiten selbst noch ein Kind und wurde durch die Rolle über Jahre mit der Reihe verbunden.
+
+Mit diesem Film beginnt zugleich der Handlungsbogen, der später als "Thorn-Trilogie" bezeichnet wurde und über "Halloween 5" (1989) bis "Halloween: Der Fluch des Michael Myers" (1995) führt.
+
+### Einordnung & Wirkung
+
+Der Start am 21. Oktober 1988 in 1.679 Kinos brachte 6,8 Millionen Dollar und Platz eins; insgesamt kamen 17,8 Millionen zusammen — bei 5 Millionen Produktionskosten ein klarer Erfolg.
+
+Die Kritik lehnte ihn seinerzeit weitgehend ab: 43 Prozent bei Rotten Tomatoes, 34 von 100 bei Metacritic.
+
+Im Rückblick wird er deutlich besser bewertet. Gelobt werden vor allem die Herbstatmosphäre und der Verzicht auf die Überzeichnung, die das Genre in jenen Jahren sonst prägte — unter den Fortsetzungen der Reihe gilt er heute vielen als die gelungenste.` },
+  {
+    bereich: 'titel', schluessel: 'movie:614409', locale: 'de-de',
+    text: `### Worum es geht
+
+Lara Jean Covey ist im letzten Schuljahr. Der Plan steht: Sie und Peter Kavinsky gehen gemeinsam nach Stanford, er mit einem Sportstipendium, sie über die reguläre Bewerbung.
+
+Dann kommt die Absage. Auf einer Klassenfahrt nach New York verliebt sie sich in die Stadt und in die Universität dort, und plötzlich stehen zwei Leben zur Wahl, von denen nur eines Peter enthält. Der Film handelt weniger von einer Liebesgeschichte als von der Frage, wie viel man von den eigenen Plänen aufgibt, damit ein gemeinsamer daraus wird.
+
+### Entstehungsgeschichte
+
+Es ist der dritte und abschließende Teil der Reihe nach Jenny Hans Romanen, produziert für Netflix. Regie führte Michael Fimognari, der zuvor als Kameramann der ersten beiden Teile gearbeitet und beim zweiten die Regie übernommen hatte.
+
+Lana Condor und Noah Centineo spielen erneut die Hauptrollen; daneben sind John Corbett, Janel Parrish und Anna Cathcart zu sehen.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen im Juli 2019 in Vancouver, dazu kamen Aufnahmen in Seoul und in New York.
+
+Der Abstecher nach Seoul ist inhaltlich begründet: Lara Jeans Mutter war Koreanerin, und die Reise dorthin gehört zu den wenigen Passagen der Reihe, die die Herkunft der Familie ausdrücklich behandeln. Der zweite und dritte Teil wurden weitgehend hintereinander gedreht, was den einheitlichen Ton der beiden erklärt.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 12. Februar 2021 bei Netflix und war der meistgesehene Titel seines Startwochenendes; im ersten Quartal auf der Plattform erreichte er 51 Millionen Haushalte.
+
+Die Kritik reagierte überwiegend positiv: 79 Prozent von 61 Besprechungen bei Rotten Tomatoes, mit dem Befund, er behalte genug vom Charme des ersten Teils, um einen würdigen Abschluss abzugeben.
+
+Die Reihe gilt als eines der deutlichsten Beispiele dafür, wie Netflix jugendliche Liebesfilme wiederbelebte, nachdem das Genre im Kino weitgehend verschwunden war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:139038', locale: 'de-de',
+    text: `### Worum es geht
+
+Malcolm und Kisha ziehen zusammen. Zur Feier des Tages filmt Malcolm alles mit — den Einzug, den Alltag, die Nächte. Auf den Aufnahmen tauchen bald Dinge auf, die niemand erklären kann: Türen, die sich bewegen, Gegenstände, die verschwinden, Geräusche im Dunkeln.
+
+Es stellt sich heraus, dass Kisha einen Dämon mitgebracht hat. Malcolm holt Hilfe: einen Geisterjäger, einen Priester mit zweifelhaftem Ruf, einen Nachbarn. Der Film parodiert dabei Szene für Szene die Found-Footage-Horrorfilme jener Jahre, allen voran "Paranormal Activity" und "The Devil Inside".
+
+### Entstehungsgeschichte
+
+Marlon Wayans schrieb den Film gemeinsam mit Rick Alvarez, produzierte ihn und spielt die Hauptrolle. Regie führte Michael Tiddes.
+
+Wayans hatte zuvor an der "Scary Movie"-Reihe mitgewirkt, die Anfang der zweitausender Jahre nach demselben Prinzip arbeitete. Diesem Film liegt dieselbe Methode zugrunde, nur auf eine engere Zielgruppe von Vorlagen bezogen.
+
+### Hinter den Kulissen
+
+Das Budget lag bei 2,5 Millionen Dollar, die Laufzeit beträgt 86 Minuten; verliehen wurde der Film von Open Road Films.
+
+Neben Wayans spielen Essence Atkins, Cedric the Entertainer, Nick Swardson und David Koechner.
+
+Die Machart der Vorlage wird konsequent übernommen: fest montierte Kameras, Zeitangaben im Bild, lange ereignislose Nachtaufnahmen. Gerade dass der Film diese Form ernst nimmt, macht die Abweichungen davon zur Pointe.
+
+### Einordnung & Wirkung
+
+Der Film startete am 11. Januar 2013 und spielte weltweit 60,1 Millionen Dollar ein — 40,4 Millionen in den USA und 20,1 Millionen international. Gemessen an 2,5 Millionen Produktionskosten ist das etwa das Vierundzwanzigfache des Einsatzes.
+
+Die Kritik lehnte ihn scharf ab: 10 Prozent bei Rotten Tomatoes mit dem Befund, die größte Verfehlung des Films sei, nicht komisch zu sein, dazu 20 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein B minus.
+
+Wegen des wirtschaftlichen Erfolgs entstand unmittelbar eine Fortsetzung, die am 18. April 2014 erschien.` },
 ];
