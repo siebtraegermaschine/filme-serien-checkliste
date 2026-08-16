@@ -21484,4 +21484,456 @@ Der Film erschien am 19. Oktober 2012 und spielte weltweit 142,8 Millionen Dolla
 Die Kritik lehnte ihn ab: 23 Prozent bei Rotten Tomatoes mit dem Befund abnehmenden Ertrags; das Publikum vergab bei CinemaScore ein C.
 
 Er markiert damit den Punkt, an dem die Reihe ihren Zenit überschritten hatte — kein Verlustgeschäft, aber der erste deutliche Rückgang nach drei Erfolgen.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:11918', locale: 'de-de',
+    text: `### Worum es geht
+
+Rick Riker ist unbeliebt, ungeschickt und in seine Nachbarin Jill verliebt. Bei einem Schulausflug in ein Genlabor beißt ihn eine radioaktive Libelle — sie stirbt daran, er nicht.
+
+Von da an kann Rick an Wänden hochlaufen, Dinge heben, die er nicht heben sollte, und mit einer klebrigen Substanz durch die Stadt schwingen. Als "Dragonfly" tritt er gegen Hourglass an, einen todkranken Milliardär, der Lebenskraft aus anderen Menschen zieht. Der Film folgt dabei Szene für Szene dem Ablauf von "Spider-Man" aus dem Jahr 2002.
+
+### Entstehungsgeschichte
+
+Craig Mazin schrieb und inszenierte den Film. Er hatte zuvor an "Scary Movie 3" und "Scary Movie 4" mitgeschrieben und wurde Jahre später vor allem als Autor der Serien "Chernobyl" und "The Last of Us" bekannt.
+
+Zielscheiben der Parodie sind neben "Spider-Man" auch "Batman Begins" von 2005 sowie weitere Superheldenfilme und der Betrieb um Prominenz.
+
+### Hinter den Kulissen
+
+Es spielen Drake Bell als Rick, Sara Paxton als Jill und Leslie Nielsen als Onkel Albert. Das Budget lag bei 35 Millionen Dollar.
+
+Nielsens Besetzung ist eine Verbeugung: Der Film hieß zunächst "Superhero!" — mit Ausrufezeichen, in Anlehnung an "Airplane!", also "Die unglaubliche Reise in einem verrückten Flugzeug", mit dem Nielsen 1980 zum Komiker wurde.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 28. März 2008 und spielte weltweit 73 Millionen Dollar ein.
+
+Die Kritik lehnte ihn ab: 17 Prozent von 48 Besprechungen bei Rotten Tomatoes. Das Publikum vergab bei CinemaScore ein C plus.
+
+Über die Jahre hat er innerhalb des Parodiegenres eine treue Anhängerschaft gewonnen — auch, weil er im Gegensatz zu vielen zeitgleichen Nachahmern eine durchgehende Handlung erzählt, statt nur Anspielungen aneinanderzureihen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:475210', locale: 'de-de',
+    text: `### Worum es geht
+
+Will Younger will in Seattle bei den Eltern seiner schwangeren Freundin Sam um deren Hand anhalten. Das Gespräch mit ihrem Vater Tom, einem ehemaligen Marineoffizier, verläuft frostig.
+
+Am nächsten Morgen bricht die Verbindung ab: Ein Ereignis unbekannter Art legt Stromnetz, Funk und Flugverkehr lahm, am Himmel steht ein seltsames Leuchten. Will und Tom fahren gemeinsam quer durch die Vereinigten Staaten nach Seattle, um Sam zu erreichen. Was das Ereignis ausgelöst hat, erklärt der Film bis zum Schluss nicht.
+
+### Entstehungsgeschichte
+
+Regie führte David M. Rosenthal, das Drehbuch schrieb Brooks McLaren. Netflix erwarb im Januar 2017 die weltweiten Rechte und veröffentlichte den Film am 13. Juli 2018.
+
+Es spielen Theo James als Will, Forest Whitaker als Tom und Kat Graham als Sam; daneben sind Nicole Ari Parker, Grace Dove und Mark O'Brien zu sehen.
+
+### Hinter den Kulissen
+
+Gedreht wurde im August 2017 in Winnipeg in Kanada.
+
+Der Verzicht auf jede Erklärung ist die auffälligste Entscheidung. Der Film zeigt ausschließlich, was zwei Menschen im Auto mitbekommen — Gerüchte an Tankstellen, ein Militärkonvoi, ein brennender Horizont —, und behält diese Perspektive bis zum Ausbruch eines Vulkans am Ende bei. Das ist konsequent und war zugleich der Hauptkritikpunkt.
+
+### Einordnung & Wirkung
+
+Die Kritik lehnte den Film weitgehend ab: 17 Prozent von 18 Besprechungen bei Rotten Tomatoes, 36 von 100 bei Metacritic.
+
+Er steht damit für eine ganze Reihe von Netflix-Produktionen jener Jahre, die auf bekannte Namen im Vorspann setzten und bei der Kritik durchfielen, während sie in den hauseigenen Listen weit oben standen.
+
+Bemerkenswert bleibt die Grundidee: eine Katastrophe, die niemand einordnen kann, erzählt aus der Windschutzscheibe eines Autos — ein Ansatz, den Filme wie "Cloverfield Lane 10" oder "Bird Box" in denselben Jahren ähnlich verfolgten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:41210', locale: 'de-de',
+    text: `### Worum es geht
+
+Kassie Larson ist Anfang vierzig, allein und will ein Kind. Weil ihr die Sache mit dem Partner zu lange dauert, sucht sie einen Samenspender und findet ihn in Roland, einem verheirateten Kollegen.
+
+Ihr bester Freund Wally, seit Jahren heimlich in sie verliebt, betrinkt sich auf der Empfängnisfeier, kippt die Probe versehentlich weg und ersetzt sie durch seine eigene — woran er sich am nächsten Tag nicht erinnert. Sieben Jahre später kehrt Kassie mit ihrem Sohn Sebastian nach New York zurück, und Wally erkennt sich in dem Jungen wieder: dieselbe Grüblerei, dieselbe Neigung zur Hypochondrie.
+
+### Entstehungsgeschichte
+
+Grundlage ist Jeffrey Eugenides' Kurzgeschichte "Baster", 1996 im "New Yorker" erschienen. Das Drehbuch schrieb Allan Loeb; das Vorhaben hieß zunächst "The Baster".
+
+Regie führten Will Speck und Josh Gordon. Das Budget lag bei 19 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Jennifer Aniston spielt Kassie, Jason Bateman Wally; daneben sind Patrick Wilson, Jeff Goldblum und Juliette Lewis zu sehen. Thomas Robinson spielt den Jungen Sebastian.
+
+Getragen wird der Film von den Szenen zwischen Bateman und dem Kind — zwei Figuren, die einander ähneln, ohne dass eine von beiden weiß, warum. Bateman wurde dafür von der Kritik durchgehend hervorgehoben.
+
+Es war der letzte Film, den Miramax unter der Eigentümerschaft von Disney herausbrachte; im Dezember 2010 wurde das Studio verkauft.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 20. August 2010 und spielte weltweit 49,9 Millionen Dollar ein — bei 19 Millionen Produktionskosten ein mäßiger, aber tragfähiger Erfolg.
+
+Die Kritik blieb geteilt: 53 Prozent bei Rotten Tomatoes, mit dem Befund, eine interessante Ausgangslage und eine sympathische Besetzung stünden gegen ein abgegriffenes Drehbuch.
+
+Er gehört damit zu jener Reihe amerikanischer Beziehungskomödien um 2010, deren Prämisse spitzer ist als ihre Ausführung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:303857', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Reste von Frieza's Armee sammeln die Dragon Balls und wünschen sich ihren Anführer zurück — den Goku Jahre zuvor besiegt hat und der seither in Stücken in der Hölle liegt.
+
+Frieza kehrt zurück und tut etwas, das er nie für nötig gehalten hat: Er trainiert. Vier Monate genügen ihm für eine neue Verwandlungsstufe. Auf der Erde muss Goku, der inzwischen selbst eine neue Form erreicht hat, gegen einen Gegner antreten, der zum ersten Mal ebenso hart gearbeitet hat wie er.
+
+### Entstehungsgeschichte
+
+Akira Toriyama, der Schöpfer von "Dragon Ball", schrieb das Drehbuch selbst — zum ersten Mal in der Geschichte der Reihe.
+
+Nach Angaben eines Produzenten kam ihm die Idee bei einem Konzert der Metal-Band Maximum the Hormone, angeregt von deren Stück "F".
+
+Regie führte Tadayoshi Yamamuro. Die Premiere in Japan war am 18. April 2015.
+
+### Hinter den Kulissen
+
+Es war der erste japanische Film, der in IMAX 3D gezeigt wurde, und lief zudem in 4DX-Kinos mit Bewegungssitzen und Effekten.
+
+Die Wahl des Gegners ist kein Zufall: Frieza gehört zu den bekanntesten Figuren der Reihe, und seine Rückkehr nach Jahrzehnten war das Argument, mit dem der Film beworben wurde.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 61,7 Millionen Dollar ein; in Japan lag er zum Start über seinem Vorgänger "Battle of Gods".
+
+Die Kritik reagierte überwiegend gut: 83 Prozent bei Rotten Tomatoes, mit Lob für Animation und Kampfszenen. Bemängelt wurden die dünne Handlung und der Umstand, dass dem entscheidenden Kampf die erzählerische Spannung fehle.
+
+Die Ereignisse des Films wurden später als zweiter Handlungsbogen in die Serie "Dragon Ball Super" übernommen, dort mit zusätzlichen Szenen und Nebensträngen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:455', locale: 'de-de',
+    text: `### Worum es geht
+
+Jess Bhamra ist achtzehn, lebt in London und spielt Fußball — im Park, mit Jungs, heimlich. Ihre Eltern, Sikhs aus dem Punjab, haben andere Pläne: Studium, Heirat, und vorher die Hochzeit der älteren Schwester.
+
+Auf dem Bolzplatz spricht Jules sie an und holt sie in ihre Frauenmannschaft. Von da an lügt Jess systematisch, um zum Training zu kommen. Der Film erzählt zwei Konflikte parallel: den zwischen Tochter und Familie und den zwischen dem, was Mädchen sollen, und dem, was sie können — wobei auch Jules' englische Mutter überzeugt ist, ihre Tochter müsse endlich einen BH kaufen statt Tore zu schießen.
+
+### Entstehungsgeschichte
+
+Gurinder Chadha führte Regie und schrieb das Drehbuch gemeinsam mit Guljit Bindra und Paul Mayeda Berges.
+
+Gedreht wurde von Juni bis September 2001 in London, in den Shepperton Studios und in Hamburg. Das Budget lag bei 5,6 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Parminder Nagra spielt Jess, Keira Knightley spielt Jules — für Knightley war es die Rolle, mit der ihre Laufbahn begann; "Fluch der Karibik" folgte ein Jahr später.
+
+Der Titel bezieht sich auf David Beckhams Freistoßtechnik. Beckham selbst kommt im Film nicht vor, ist aber über Poster und Erwähnungen durchgehend präsent — für Jess ist er das einzige Vorbild, das ihre Eltern immerhin dem Namen nach kennen.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 92,2 Millionen Dollar ein, davon 32,5 Millionen in den USA und über 11 Millionen Pfund in Großbritannien. Er gehört zu den erfolgreichsten britischen Filmen mit schwarzen oder asiatischen Hauptfiguren und ist in den USA bis heute der erfolgreichste Fußballfilm überhaupt.
+
+Die Kritik reagierte gut: 85 Prozent von 157 Besprechungen bei Rotten Tomatoes, 66 von 100 bei Metacritic.
+
+2003 gab es einen ESPY Award als bester Sportfilm, 2004 einen GLAAD Media Award. 2015 entstand ein Musical im Londoner West End; 2025 kündigte Chadha eine Fortsetzung für 2027 an.` },
+  {
+    bereich: 'titel', schluessel: 'movie:74308', locale: 'de-de',
+    text: `### Worum es geht
+
+Henry Barthes arbeitet als Vertretungslehrer und bleibt nie länger als nötig — Bindung ist genau das, was er vermeidet. Ein Monat an einer heruntergewirtschafteten Schule bringt ihn mit Kollegen zusammen, die aufgegeben haben, und mit Eltern, die nicht erscheinen.
+
+Nebenher pflegt er seinen dementen Großvater, nimmt eine minderjährige Prostituierte namens Erica bei sich auf und wird zur einzigen Bezugsperson für Meredith, eine übergewichtige Schülerin, die fotografiert und von allen gedemütigt wird. Der Film bietet keine Lösung an; er endet mit Merediths Selbsttötung.
+
+### Entstehungsgeschichte
+
+Regie führte Tony Kaye, der zuvor "American History X" gedreht hatte. Das Drehbuch schrieb Carl Lund.
+
+Ursprünglich war der Stoff als Ensemblefilm über ein Kollegium angelegt. Nachdem Adrien Brody zugesagt hatte, baute Kaye dessen Figur erheblich aus und machte daraus ein Porträt eines einzelnen Mannes.
+
+### Hinter den Kulissen
+
+Gedreht wurde an Schulen auf Long Island im Bundesstaat New York.
+
+Neben Brody spielen Marcia Gay Harden, Christina Hendricks, Bryan Cranston, Lucy Liu und James Caan — ein Ensemble, das für eine Produktion dieser Größe ungewöhnlich stark besetzt ist und dessen Mitglieder jeweils nur wenige Szenen haben.
+
+Kaye mischt Spielszenen mit Kreidezeichnungen, Interviewpassagen und körnigem Schmalfilmmaterial. Die Machart ist erkennbar die eines Dokumentarfilmers, der Spielfilme dreht.
+
+### Einordnung & Wirkung
+
+Der Film lief am 25. April 2011 beim Tribeca-Festival und kam am 16. März 2012 in die amerikanischen Kinos.
+
+Die Kritik blieb geteilt: 57 Prozent von 72 Besprechungen bei Rotten Tomatoes, 52 von 100 bei Metacritic. Peter Travers lobte die Darsteller und schrieb, der Film treffe hart; wiederkehrender Einwand war, er biete keinerlei Lösung an.
+
+Auf Festivals wurde er mehrfach ausgezeichnet, unter anderem in Deauville, Valenciennes und Tokio.` },
+  {
+    bereich: 'titel', schluessel: 'movie:439', locale: 'de-de',
+    text: `### Worum es geht
+
+Marcello Rubini schreibt für Boulevardblätter in Rom und wollte einmal Schriftsteller werden. Über sieben Episoden, verteilt auf etwa neun Tage, begleitet ihn der Film durch Nächte, in denen er einer Erfüllung nachjagt, die es nicht gibt.
+
+Er trifft die schwedische Schauspielerin Sylvia, mit der er in den Trevi-Brunnen steigt; er berichtet über zwei Kinder, die angeblich die Madonna gesehen haben, und beobachtet, wie sich eine Menschenmenge im Regen versammelt; er besucht seinen Freund Steiner, der alles hat, was Marcello für Glück hält. Am Ende steht ein Morgen am Strand, an dem Fischer etwas an Land ziehen und Marcello ein Mädchen nicht mehr versteht, das ihm etwas zuruft.
+
+### Entstehungsgeschichte
+
+Federico Fellini inszenierte den Film als Folge von Episoden mit Prolog, sieben Hauptteilen, einem Zwischenspiel und einem Epilog — eine Form, die mit dem geschlossenen Erzählen der Zeit bricht.
+
+Marcello Mastroianni spielt die Hauptrolle, Anita Ekberg die Schauspielerin Sylvia.
+
+### Hinter den Kulissen
+
+Die Szene im Trevi-Brunnen entstand über eine Woche im Winter. Mastroianni soll Wodka gebraucht haben, um die Aufnahmen im kalten Wasser durchzustehen.
+
+Aus dem Film stammt ein Wort, das seither in vielen Sprachen gebraucht wird: Der Pressefotograf Paparazzo, gespielt von Walter Santesso, gab den "Paparazzi" ihren Namen. Der Name geht vermutlich auf eine Figur in George Gissings Reisebuch "By the Ionian Sea" von 1901 zurück.
+
+Die vatikanische Zeitung "L'Osservatore Romano" verurteilte den Film 1960; Anstoß erregte vor allem die Eröffnung, in der ein Hubschrauber eine Christusfigur über Rom transportiert. In Spanien und Portugal wurde er zensiert.
+
+### Einordnung & Wirkung
+
+Der Film gewann 1960 in Cannes die Goldene Palme. Von vier Oscar-Nominierungen wurde eine umgesetzt, für die Kostüme.
+
+Er gilt als Wendepunkt des italienischen und europäischen Kinos und steht bis heute auf den Bestenlisten der Filmgeschichte.
+
+Seine Wirkung reicht über den Film hinaus: Der Titel selbst ist zur Redewendung geworden, und die Verbindung von Rom, Nachtleben und Boulevardpresse prägt bis heute das Bild der Stadt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:3683', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Februar 1945 landen amerikanische Truppen auf Iwo Jima. Vier Tage später wird auf dem Berg Suribachi eine Fahne gehisst — zum zweiten Mal an diesem Tag, weil die erste jemand als Andenken haben wollte. Der Fotograf Joe Rosenthal drückt zufällig ab.
+
+Das Bild wird binnen Tagen zum bekanntesten Foto des Krieges. Drei Überlebende der Gruppe werden in die Vereinigten Staaten zurückgeholt und auf eine Tournee geschickt, um Kriegsanleihen zu verkaufen — als Helden, die sie nicht sein wollen, für eine Handlung, die keine besondere war. Der Film springt zwischen der Schlacht, der Tournee und den Jahrzehnten danach.
+
+### Entstehungsgeschichte
+
+Grundlage ist das Buch von James Bradley, dessen Vater einer der Beteiligten war. Das Drehbuch schrieben William Broyles Jr. und Paul Haggis.
+
+Clint Eastwood führte Regie, produzierte mit und schrieb die Musik; Steven Spielberg war ebenfalls als Produzent beteiligt.
+
+Eastwood drehte zeitgleich einen zweiten Film über dieselbe Schlacht aus japanischer Sicht: "Letters from Iwo Jima". Beide sind als Paar angelegt.
+
+### Hinter den Kulissen
+
+Der Film erzählt nicht linear, sondern verschränkt drei Zeitebenen. Die Farbgebung ist stark entsättigt, sodass Kampf- und Tourneeszenen kaum zu unterscheiden sind — was die Behauptung des Films stützt, dass beides derselbe Krieg ist.
+
+Das Budget lag bei 90 Millionen Dollar.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 65,9 Millionen Dollar ein und blieb damit deutlich unter seinen Kosten. Das Gegenstück "Letters from Iwo Jima" kam bei einem Budget von 19 Millionen auf 71 Millionen.
+
+Die Kritik reagierte gut: 76 Prozent bei Rotten Tomatoes, 79 von 100 bei Metacritic, vier Sterne von Roger Ebert und Platzierungen auf mehreren Jahresbestenlisten. Ein wiederkehrendes Urteil war jedoch, der japanische Gegenfilm sei der stärkere von beiden.
+
+Bemerkenswert bleibt das Vorhaben als solches: zwei Filme über dieselbe Schlacht, gedreht von demselben Regisseur, die einander widersprechen sollen statt sich zu ergänzen.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:16523', locale: 'de-de',
+    text: `### Worum es geht
+
+Max ist neun, wütend und allein. Seine Schwester hat keine Zeit mehr für ihn, seine Mutter hat einen neuen Freund, und als Max sie im Wolfskostüm beißt, läuft er von zu Hause weg.
+
+Über ein Meer gelangt er auf eine Insel, auf der große, zottelige Wesen leben. Sie wollen ihn zuerst fressen; er behauptet, ein König zu sein, und sie glauben es. Was folgt, ist keine Abenteuergeschichte, sondern die Beobachtung, dass die Wesen dieselben Probleme haben wie Max' Familie — Eifersucht, Einsamkeit, gekränkte Gefühle — und dass ein neunjähriger König sie ebenso wenig lösen kann.
+
+### Entstehungsgeschichte
+
+Grundlage ist Maurice Sendaks Bilderbuch von 1963, das aus dreizehn Sätzen besteht. Dave Eggers machte daraus gemeinsam mit Spike Jonze ein Drehbuch von 111 Seiten.
+
+Sendak setzte sich selbst für Jonze als Regisseur ein: Er sei jung, interessant und habe einen Funken gehabt, den keiner der anderen hatte.
+
+### Hinter den Kulissen
+
+Die Wilden Kerle sind keine Computerfiguren, sondern begehbare Kostüme mit ferngesteuerten Gesichtern, gefertigt von Jim Henson's Creature Shop. Nur die Mimik wurde nachträglich digital ergänzt.
+
+Mit dem Studio gab es erheblichen Streit. Warner Bros. hielt den Film für zu wenig familientauglich, Jonze weigerte sich nachzugeben. Nachdem 2008 Testmaterial durchgesickert war und gemischte Reaktionen ausgelöst hatte, verschob das Studio den Start um ein Jahr und erhöhte das Budget von 75 auf 100 Millionen Dollar für Nacharbeiten bei Framestore in London.
+
+Sendak verteidigte die düstere Fassung ausdrücklich: Er habe nie einen Film gesehen, der so aussieht und sich so anfühlt; Jonze sei ein echter Künstler, dem man das in der Arbeit anmerke.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 100,1 Millionen Dollar ein und deckte damit knapp seine Kosten.
+
+Die Kritik reagierte gut: 73 Prozent bei Rotten Tomatoes. Die Vermarktung ging einen ungewöhnlichen Weg — rund 70 Prozent der Werbung richteten sich an ein breites und erwachsenes Publikum statt an Kinder.
+
+Geblieben ist der Film als eine der wenigen Kinderbuchverfilmungen, die dem Kind im Publikum nichts erspart: Er handelt von Wut und davon, dass sie nicht verschwindet, wenn man wegläuft.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2112', locale: 'de-de',
+    text: `### Worum es geht
+
+Porter wird von seiner Frau und seinem Partner Val angeschossen und für tot liegen gelassen. Er überlebt und kommt fünf Monate später nach Chicago zurück.
+
+Er will nicht Rache und nicht das ganze Geld, sondern exakt seinen Anteil: 70.000 Dollar. Genau diese Beharrlichkeit macht ihn unberechenbar, denn niemand versteht, warum jemand für so wenig so weit geht. Porter arbeitet sich die Hierarchie einer Organisation hinauf, die sich "der Konzern" nennt, und jeder, den er ausschaltet, verweist ihn an den Nächsthöheren.
+
+### Entstehungsgeschichte
+
+Grundlage ist Richard Starks Roman "The Hunter" von 1962, dessen Hauptfigur Parker heißt und der bereits 1967 als "Point Blank" verfilmt worden war.
+
+Brian Helgeland, frisch mit einem Oscar für "L.A. Confidential" ausgezeichnet, führte Regie. Sein Schnitt unterschied sich erheblich von dem, was ins Kino kam: Mel Gibson hat später eingeräumt, maßgeblich daran beteiligt gewesen zu sein, Helgeland vor der Veröffentlichung abzusetzen.
+
+Paul Abascal drehte daraufhin rund 30 Prozent des Films neu, nach Änderungen von Terry Hayes — mit einem anderen dritten Akt und einem neuen Gegenspieler, gespielt von Kris Kristofferson.
+
+### Hinter den Kulissen
+
+Das Budget lag bei 50 Millionen Dollar.
+
+Auffällig ist die Farbgebung: Die Kinofassung ist stark ins Blaugraue gezogen, sodass die Stadt wie ausgewaschen wirkt.
+
+2006 veröffentlichte Helgeland seine eigene Fassung als "Payback: Straight Up". Sie unterscheidet sich deutlich — die Figur Bronson ist dort eine Frau, das Ende ein anderes, die Musik eine andere. Der A.V. Club nannte sie eine merkliche Verbesserung gegenüber dem unruhigeren Original.
+
+### Einordnung & Wirkung
+
+Der Start in Nordamerika brachte 21,2 Millionen Dollar; weltweit spielte der Film 161,6 Millionen ein.
+
+Die Kritik blieb geteilt: 56 Prozent bei Rotten Tomatoes, 46 von 100 bei Metacritic. Roger Ebert urteilte wohlwollender mit drei von vier Sternen und hielt fest, Mel Gibson sei der entscheidende Faktor.
+
+Der Fall gehört zu den bekanntesten Beispielen dafür, dass zwei Fassungen desselben Films nebeneinander existieren können — und dass die nachträglich veröffentlichte die besseren Kritiken bekam.` },
+  {
+    bereich: 'titel', schluessel: 'movie:614911', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Jahr 2049 ist die Erde nach einer nicht näher erklärten Katastrophe unbewohnbar geworden. Der schwerkranke Wissenschaftler Augustine Lofthouse bleibt allein in einer arktischen Forschungsstation zurück, weil eine Evakuierung für ihn keinen Sinn mehr hätte.
+
+Er entdeckt, dass ein Raumschiff auf dem Rückweg ist: Die Aether kehrt von einem Jupitermond zurück, den Augustine selbst als bewohnbar vorgeschlagen hatte. Die Besatzung weiß nichts. Um sie zu warnen, muss er mit einem Kind, das er in der Station findet, zu einer stärkeren Antenne aufbrechen — durch die Arktis, zu Fuß.
+
+### Entstehungsgeschichte
+
+Grundlage ist Lily Brooks-Daltons Roman "Good Morning, Midnight" von 2016. Das Drehbuch schrieb Mark L. Smith.
+
+George Clooney führte Regie und spielt die Hauptrolle. Das Budget lag bei 100 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde von Oktober 2019 bis Februar 2020 in England und in Island.
+
+Clooney nahm für die Rolle rund elf Kilogramm ab. Die arktischen Szenen entstanden unter harten Bedingungen bei Temperaturen um minus 40 Grad.
+
+Der Film läuft auf zwei Ebenen, die einander lange nicht berühren: die Einsamkeit in der Station und der Alltag an Bord der Aether. Erst gegen Ende wird deutlich, warum diese beiden Geschichten dieselbe sind.
+
+### Einordnung & Wirkung
+
+Der Film lief ab dem 11. Dezember 2020 in wenigen Kinos und ab dem 23. Dezember bei Netflix. In der ersten Woche sahen ihn 72 Millionen Haushalte.
+
+Die Kritik fiel gemischt aus. Das National Board of Review zählte ihn dennoch zu den zehn besten Filmen des Jahres 2020.
+
+Bei der Oscar-Verleihung 2021 gab es eine Nominierung für die visuellen Effekte; ausgezeichnet wurde der Film bei den Visual Effects Society Awards und mit einem Satellite Award für die Musik.` },
+  {
+    bereich: 'titel', schluessel: 'movie:12620', locale: 'de-de',
+    text: `### Worum es geht
+
+Shelley Darlingson lebt in der Playboy-Villa und wird an ihrem 27. Geburtstag hinausgeworfen — angeblich zu alt. Ohne Wohnung, ohne Ausbildung und ohne Vorstellung davon, wie man Miete zahlt, landet sie an einer Universität.
+
+Dort findet sie die Zeta-Verbindung: sieben junge Frauen, die niemand haben will und denen das Haus entzogen wird, wenn sie nicht dreißig neue Mitglieder gewinnen. Shelley wird ihre Hausmutter und bringt ihnen bei, wie man auffällt. Der Film dreht die Sache in der zweiten Hälfte um — die Zetas werden beliebt und unglücklich, und Shelley merkt, dass sie selbst nichts kann, wofür man sie behalten würde.
+
+### Entstehungsgeschichte
+
+Regie führte Fred Wolf, produziert wurde der Film von Adam Sandlers Firma Happy Madison — als deren erste Produktion mit einer weiblichen Hauptfigur. Das Budget lag bei 25 Millionen Dollar.
+
+Anna Faris spielt Shelley. Sie war zuvor durch die "Scary Movie"-Reihe bekannt geworden.
+
+### Hinter den Kulissen
+
+In den Nebenrollen sind Emma Stone und Colin Hanks zu sehen — für Stone war es eine ihrer ersten Kinorollen, zwei Jahre vor "Zombieland" und vier vor "The Amazing Spider-Man".
+
+Die Anlage lebt vollständig von Faris' körperlicher Komik. Variety schrieb, der Film solle sie in eine eigene Art von Stardom katapultieren.
+
+### Einordnung & Wirkung
+
+Der Film startete am 22. August 2008 auf Platz zwei hinter "Tropic Thunder" und spielte weltweit 70,4 Millionen Dollar ein.
+
+Die Kritik blieb geteilt: 44 Prozent bei Rotten Tomatoes, mit dem Befund, Anna Faris gebe sich alle Mühe, könne eine mittelmäßige und schematische Komödie aber nicht retten. Das Publikum vergab bei CinemaScore ein B plus.
+
+Der Film und sein Soundtrack haben über die Jahre eine feste Anhängerschaft gewonnen; ein Jahrzehnt später erschienen mehrfach Rückschauen, die ihn als unterschätzt einordneten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:324670', locale: 'de-de',
+    text: `### Worum es geht
+
+In der moldawischen Hauptstadt sterben amerikanische Soldaten an etwas, das die Wärmebildkameras nicht erfassen. Auf den Aufnahmen der Spezialoptik sind Gestalten zu sehen, die durch Wände gehen und Menschen bei Berührung töten.
+
+Der DARPA-Wissenschaftler Mark Clyne, der die Kameras entwickelt hat, wird eingeflogen. Was er findet, ist weder Geist noch Waffe im üblichen Sinn: Die Wesen bestehen aus einem Bose-Einstein-Kondensat, können Eisen und Keramik nicht durchdringen und wurden in einem Kraftwerk in Serie hergestellt.
+
+### Entstehungsgeschichte
+
+Es ist der erste Kinofilm von Nic Mathieu. Das Budget lag bei rund 70 Millionen Dollar.
+
+Ursprünglich hatte Universal Pictures einen Kinostart für August 2016 vorgesehen und nahm den Film im Juni 2016 wieder aus dem Programm. Netflix erwarb daraufhin die Rechte und veröffentlichte ihn am 9. Dezember 2016 weltweit.
+
+### Hinter den Kulissen
+
+Gedreht wurde von August 2014 bis August 2015 in Budapest. Die Effekte stammen von Peter Jacksons Weta Workshop, die Musik von Junkie XL.
+
+Es spielen James Badge Dale als Clyne, dazu Emily Mortimer, Max Martini und Bruce Greenwood.
+
+Bemerkenswert ist die Konsequenz der Erklärung: Der Film führt seine Wesen physikalisch ein und leitet daraus jede Gegenmaßnahme ab — Eisenspäne, Keramikplatten, ein umgebautes Gewehr. Das ist für einen Militärfilm mit Gespenstern ein ungewöhnlicher Weg.
+
+### Einordnung & Wirkung
+
+Bei Rotten Tomatoes steht der Film bei 78 Prozent, allerdings auf Grundlage von nur neun Besprechungen — ein Hinweis darauf, wie wenig Aufmerksamkeit er ohne Kinostart bekam. Ein wiederkehrender Befund lautete, er wirke wie etwas, das ohnehin für das nebenbei laufende Streaming gedacht gewesen sei.
+
+Der Fall steht damit für eine Praxis, die sich in jenen Jahren einbürgerte: Studios verkauften Filme, an die sie nicht glaubten, an Streamingdienste — womit diese ihren Bestand füllten, ohne die Filme selbst entwickelt zu haben.` },
+  {
+    bereich: 'titel', schluessel: 'series:47', locale: 'de-de',
+    text: `### Worum es geht
+
+El Chavo ist ein Waisenjunge, der in einem Fass im Hof einer Mietskaserne wohnt und nie satt wird. Seine Welt ist dieser eine Innenhof: ein paar Wohnungstüren, eine Treppe, ein Waschbecken.
+
+Um ihn herum leben die Nachbarn — der reiche Señor Barriga, der die Miete eintreibt und stets von einem Ball getroffen wird, der verwöhnte Quico, das Mädchen La Chilindrina, der Lehrer Professor Jirafales und Doña Florinda, die ihn liebt und es nicht zugibt. Es gibt keine Handlungsbögen, sondern Wiederholung: dieselben Konflikte, dieselben Sätze, dieselben Missverständnisse, jede Woche neu angeordnet.
+
+### Entstehungsgeschichte
+
+Erdacht und gespielt wurde die Serie von Roberto Gómez Bolaños, bekannt als Chespirito, der die Titelrolle als Erwachsener übernahm.
+
+Sie lief von Februar 1973 bis Januar 1980 über sieben Staffeln mit 312 Folgen und wurde in den San-Ángel-Studios von Televisa in Mexiko-Stadt aufgezeichnet.
+
+### Hinter den Kulissen
+
+Der Aufbau ist bewusst einfach gehalten: eine einzige Kulisse mit einem Hof und den umliegenden Wohnungen, in der nahezu alle Folgen spielen. Diese Beschränkung ist einer der Gründe für die Reichweite — die Serie braucht keine örtliche oder kulturelle Vorkenntnis.
+
+Ein brasilianischer Autor hat das so beschrieben: Man sehe ein Kind, das brasilianisch, argentinisch oder chinesisch sein könnte.
+
+### Einordnung & Wirkung
+
+Zwischen Mitte der siebziger Jahre und 1980 erreichte die Serie im Schnitt 350 Millionen Zuschauer je Folge in Lateinamerika. Wiederholungen kommen bis heute auf durchschnittlich 91 Millionen tägliche Zuschauer auf dem amerikanischen Doppelkontinent.
+
+Sie wurde in über 50 Sprachen übersetzt und ist damit die meistübersetzte lateinamerikanische Fernsehproduktion überhaupt. Seit dem Produktionsende 1992 hat sie schätzungsweise 1,7 Milliarden Dollar an Lizenzeinnahmen erbracht.
+
+In Brasilien, wo sie als "Chaves" läuft, ist sie seit Jahrzehnten fester Bestandteil des Fernsehalltags — im deutschsprachigen Raum dagegen praktisch unbekannt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8277', locale: 'de-de',
+    text: `### Worum es geht
+
+Erik Stifler beginnt sein Studium und tritt gemeinsam mit seinen Freunden dem Beta-House bei, einer Studentenverbindung, die sein Cousin Dwight anführt.
+
+Die Aufnahme verlangt fünfzig Aufgaben, von denen keine jugendfrei ist. Parallel dazu läuft ein Streit mit dem benachbarten Geek House, das den Betas das Haus streitig macht. Entschieden wird die Sache bei der "Griechischen Olympiade" — einem Wettkampf aus Disziplinen, die sich beide Seiten selbst ausgedacht haben.
+
+### Entstehungsgeschichte
+
+Es ist der dritte Teil der Ableger-Reihe "American Pie präsentiert", die parallel zu den Kinofilmen direkt für den Heimmarkt produziert wurde.
+
+Regie führte Andrew Waller, das Drehbuch schrieb Erik Lindsay. Gedreht wurde ab dem 4. Juni 2007 über sieben bis acht Wochen in Toronto, bei einem Budget unter 10 Millionen Dollar.
+
+### Hinter den Kulissen
+
+John White spielt Erik Stifler, Steve Talley dessen Cousin Dwight. Eugene Levy kehrt als Noah Levenstein zurück — sein sechster Auftritt in der Reihe und die einzige durchgehende Verbindung zwischen den Kinofilmen und den Ablegern. Auch Christopher McDonald ist aus dem Vorgänger wieder dabei.
+
+Die Reihe verfolgt ein anderes Geschäftsmodell als das Kino: geringes Budget, kurze Drehzeit, Auswertung über DVD-Verkauf statt über Kinokarten.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 10. Dezember 2007 international und am 26. Dezember in den USA. Über den DVD-Verkauf kamen in den USA 18,8 Millionen Dollar zusammen.
+
+Die Kritik lehnte ihn überwiegend ab; ein Rezensent schrieb, was einmal eine frische Jugendkomödie gewesen sei, sei zu einem Block abgestandener Derbheit geworden. Andere Stimmen sahen ihn schlicht als das, was er sein wollte.
+
+Er steht damit für eine Praxis, die in den zweitausender Jahren verbreitet war: bekannte Kinomarken über billig produzierte Ableger weiterzuverwerten, ohne sie je wieder ins Kino zu bringen.` },
+  {
+    bereich: 'titel', schluessel: 'series:45950', locale: 'de-de',
+    text: `### Worum es geht
+
+Issei Hyodo ist Schüler an der Kuoh-Akademie, aufdringlich und erfolglos bei Frauen. Seine erste Verabredung endet damit, dass sein Gegenüber sich als gefallener Engel zu erkennen gibt und ihn tötet.
+
+Wiederbelebt wird er von Rias Gremory, einer rothaarigen Teufelsfürstin, die ihn als Teufel in ihren Dienst nimmt. Von da an gehört Issei zu einer Gruppe, die zwischen Teufeln, Engeln und gefallenen Engeln steht. Die Serie verbindet Kampfhandlung mit einer erheblichen Menge sogenannten Fanservice — also Szenen, die allein der Zurschaustellung der weiblichen Figuren dienen.
+
+### Entstehungsgeschichte
+
+Grundlage sind die Light Novels von Ichiei Ishibumi mit Illustrationen von Miyama-Zero, erschienen von September 2008 bis März 2018 in 25 Bänden.
+
+Die erste Anime-Staffel lief Anfang 2012 beim Studio TNK. Es folgten "High School DxD New" (2013), "High School DxD BorN" (2015) und "High School DxD Hero" (2018), letztere vom Studio Passione statt von TNK.
+
+### Hinter den Kulissen
+
+Der Wechsel des Studios nach drei Staffeln ist im Ergebnis sichtbar: Figurendesign und Farbgebung unterscheiden sich in der vierten Staffel merklich von den vorherigen, was in der Anhängerschaft ausführlich diskutiert wurde.
+
+Die Reihe gehört zum Genre des Harem-Anime, in dem eine männliche Hauptfigur von mehreren weiblichen umgeben ist — ein Muster mit fester Erwartungshaltung, das die Serie erfüllt und zugleich mit einem durchgehenden Handlungsbogen unterlegt.
+
+### Einordnung & Wirkung
+
+Bis Mai 2024 wurden weltweit über 7,8 Millionen gedruckte Exemplare verkauft. Allein 2012 lag die Reihe auf Platz sechs der meistverkauften Light Novels Japans.
+
+Die Kritik hob Animationsqualität und Musik hervor. Ein wiederkehrendes Urteil lautete, die Serie sei als allgemeine Veröffentlichung etwas besser als der Durchschnitt und als Fanservice-Titel klar überdurchschnittlich.
+
+Sie steht damit für ein Genre, das kommerziell verlässlich funktioniert und außerhalb seiner Zielgruppe kaum besprochen wird.` },
 ];
