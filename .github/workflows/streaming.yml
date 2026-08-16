@@ -16,10 +16,29 @@ on:
     # vor der Skip-Liste). Laeuft die Anreicherung
     # ab (alle ~7 Tage), holt sie der ERSTE Lauf der Kette (DE) einmal neu und
     # dauert dann wieder ~1-1,5 h; die uebrigen 40 Regionen desselben Tages
-    # sehen die frischen Zeitstempel und bleiben schnell. Erwartete Kettenzeit:
-    # ~4-7 h an normalen Tagen, am woechentlichen Auffrisch-Tag entsprechend
-    # laenger. Die fruehere Gruppen-Rotation (B-E im Vier-Tage-Wechsel) ist
-    # damit hinfaellig.
+    # sehen die frischen Zeitstempel und bleiben schnell. Die fruehere
+    # Gruppen-Rotation (B-E im Vier-Tage-Wechsel) ist damit hinfaellig.
+    #
+    # Seit dem Anbieterausbau (16. August 2026) liest jeder Lauf nicht mehr
+    # vier feste Plattformen ein, sondern die zwoelf prominentesten
+    # ABO-Anbieter seines Landes (Ableitung und Messwerte: Kopf von
+    # stream-fetch.mjs, PLAN-INTERNATIONALISIERUNG.md Abschnitt 9). Das
+    # verschiebt die Zahlen:
+    #   Anbieter-Zeilen ueber alle 41 Regionen: 1.057.089 statt 744.685 (+42 %,
+    #     Ableitung vorab fuer alle Regionen durchgerechnet)
+    #   Ableitung der Anbieterliste: 13-26 s je Region (obendrauf)
+    #   Paging: rund 0,42 s je discover-Seite (20 Titel) bei TMDB_PAUSE_MS=250
+    #   => Regulaerer Lauf AT: ~10 min statt 7 min 50 s; USA als groesste
+    #      Region (76.975 Zeilen) ~27 min. Erwartete Kettenzeit ~6-7 h.
+    # Der ERSTE Lauf einer Region mit erweitertem Umfang dauert laenger, weil
+    # die Titel der neuen Anbieter noch nirgends angereichert sind: AT
+    # gemessen 25 min 46 s (27.755 Zeilen, davon rund 4.700 mit Detail-Abruf),
+    # 0 Rate-Limit-Bremsungen. Ueber die ganze Kette einmalig etwa +2-3 h;
+    # danach greift die Skip-Liste auch fuer diese Titel.
+    #
+    # Wird die Kette zu lang, sind STREAM_MAX_PROVIDER (Anbieter je Region)
+    # und TMDB_PAUSE_MS (Seitenpause) die Stellschrauben -- beide unten als
+    # Repository-Variablen setzbar, ohne den Code anzufassen.
     - cron: "0 20 * * *"
   workflow_dispatch:            # erlaubt manuelles Auslösen im Actions-Tab
     inputs:
