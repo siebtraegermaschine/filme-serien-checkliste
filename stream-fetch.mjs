@@ -3,8 +3,10 @@
  * stream-fetch.mjs – erzeugt streaming.json für die "Streaming"-Ansicht der App.
  *
  * Holt von TMDB (Daten via JustWatch) die aktuell im Abo (Flatrate) verfügbaren
- * Filme & Serien der konfigurierten Plattformen für EINE Region (TMDB_REGION,
- * Default DE) und schreibt sie in ./streaming.json – im gleichen Feld-Format wie
+ * Filme & Serien für EINE Region (TMDB_REGION, Default DE). WELCHE Anbieter das
+ * sind, leitet der Lauf selbst aus dem Anbieterkatalog des Landes ab (siehe
+ * anbieterDerRegion weiter unten) – früher waren es vier fest verdrahtete.
+ * Geschrieben wird nach ./streaming.json – im gleichen Feld-Format wie
  * die Discovery-Kandidaten ({id,t,y,g,d,c,p,r}), plus "ov" (Kurzbeschreibung)
  * für die Detailansicht sowie "tEn"/"ovEn" (englische Fassung) und "certs"
  * (Altersfreigaben je Land, siehe TMDB_CERT_REGIONS).
@@ -34,6 +36,8 @@
  * Aufruf:  TMDB_API_KEY=xxxx node stream-fetch.mjs
  * Node >= 18 (globales fetch).
  */
+
+import { anbieterKatalog, anbieterSlug } from './backend/lib/anbieter.js';
 
 const API = 'https://api.themoviedb.org/3';
 const KEY = process.env.TMDB_API_KEY;
@@ -76,19 +80,123 @@ async function ladeSkipListe() {
   }
 }
 
-// Gewünschte Plattformen – per Name gematcht (robuster als feste IDs).
-const WANT = [
-  // fbid = feste TMDB-Provider-ID als Fallback, falls die Namens-Erkennung scheitert
-  // (z. B. wurde "Apple TV+" bei JustWatch/TMDB in "Apple TV" umbenannt).
-  { id: 'amazon',  name: 'Amazon Prime',       fbid: 9,   match: ['Amazon Prime Video'] },
-  { id: 'netflix', name: 'Netflix',            fbid: 8,   match: ['Netflix'] },
-  { id: 'disney',  name: 'Disney+',            fbid: 337, match: ['Disney Plus', 'Disney+'] },
-  { id: 'apple',   name: 'Apple TV+',          fbid: 350, match: ['Apple TV Plus', 'Apple TV+', 'Apple TV'] },
-];
+/* Welche Anbieter dieser Lauf einliest -- je Region aus dem TMDB-Katalog
+ * abgeleitet, nicht mehr fest verdrahtet.
+ *
+ * Bis zum 16. August 2026 standen hier vier feste Plattformen (Amazon,
+ * Netflix, Disney+, Apple TV+). Nur die speisten streaming_cache -- und damit
+ * den Listenfilter "Deine Streaming-Anbieter" und die Sortierung "Neu im
+ * Streaming". Waehlbar waren in der Einstellung aber alle rund 200 Anbieter:
+ * Wer WOW, RTL+ oder Globoplay anhakte, bekam dort schlicht nichts. Genau
+ * diese Erwartungsluecke schliesst die Ableitung unten.
+ *
+ * Ausgewaehlt werden die prominentesten Anbieter DES LANDES (Reihenfolge aus
+ * display_priorities[REGION], siehe backend/lib/anbieter.js) -- aber nur die,
+ * die dort wirklich ein ABO fuehren. Diese Unterscheidung ist der heikle Teil:
+ *
+ *   `with_watch_monetization_types=flatrate` in /discover filtert NICHT
+ *   anbietergenau. Es heisst "dieser Titel laeuft bei diesem Anbieter UND ist
+ *   irgendwo im Abo zu haben" -- nicht "dieser Anbieter hat ihn im Abo". Am
+ *   16. August 2026 nachgemessen: /discover/movie mit
+ *   with_watch_providers=2 (Apple TV Store) und flatrate meldet 12.930
+ *   Filme; von zehn Stichproben stand Apple TV Store bei ZEHN nur unter
+ *   Leihen/Kaufen. Dasselbe bei Amazon Video, Rakuten TV, Sky Store und
+ *   MagentaTV. Ungeprueft uebernommen behauptete die App also "im Abo bei
+ *   Apple TV Store".
+ *
+ * Deshalb zwei Pruefungen je Kandidat, beide gemessen statt geraten:
+ *
+ *   1. Abo-Anteil: total_results MIT flatrate-Filter geteilt durch
+ *      total_results OHNE. Ein echter Abo-Dienst liegt bei 1,00 (Netflix
+ *      8.840/8.840, RTL+ 1.564/1.564, WOW, Sky Go, Crunchyroll, HBO Max,
+ *      Globoplay ...), ein Shop bei 0,54-0,66 (Apple TV Store 0,542, Amazon
+ *      Video 0,575, Google Play 0,579, YouTube 0,577, Sky Store 0,664),
+ *      Werbe-/Gratisangebote noch tiefer (JustWatch TV 0,285, ARD Mediathek
+ *      0,264). Die Luecke ist gross genug fuer eine Schwelle bei 0,95.
+ *   2. Gegenprobe an echten Titeln: fuer eine Stichprobe wird
+ *      /<art>/<id>/watch/providers geholt und geprueft, ob der Anbieter dort
+ *      tatsaechlich unter `flatrate` steht. Erst das macht aus der Faustregel
+ *      eine belegte Aussage -- und faellt auf, falls TMDB die Zaehlweise
+ *      aendert.
+ *
+ * Mischformen (Joyn 0,63, MagentaTV 0,56, Claro video 0,46) fallen damit
+ * heraus, obwohl es sie im Abo gibt: Bei ihnen laesst sich aus discover nicht
+ * ablesen, WELCHE ihrer Titel zum Abo gehoeren und welche einzeln kosten.
+ * Lieber ein Anbieter zu wenig als ein Schildchen, das nicht stimmt.
+ *
+ * Kanal-/Tarifvarianten ("HBO Max Amazon Channel", "Netflix Standard with
+ * Ads") sind schon aus dem Katalog gefallen bzw. hier per `kanonisch`
+ * ausgeschlossen -- sie sind derselbe Dienst unter fremder Abrechnung.
+ */
+const MAX_ANBIETER   = Number(process.env.STREAM_MAX_PROVIDER || 12);
+// Unter so vielen Abo-Titeln lohnt ein Anbieter die Laufzeit nicht.
+const MIN_TITEL      = Number(process.env.STREAM_MIN_TITEL || 50);
+// Ab diesem Abo-Anteil gilt ein Anbieter als Abo-Anbieter (siehe oben).
+const MIN_ABO_ANTEIL = Number(process.env.STREAM_ABO_ANTEIL || 0.95);
+// So viele Titel je Kandidat gehen in die Gegenprobe.
+const STICHPROBE     = Number(process.env.STREAM_STICHPROBE || 6);
+
+/* Zusatzpakete und Tarifstufen mit EIGENEM Namen, die deshalb weder aus dem
+ * Katalog fallen noch als Variante erkannt werden: die ueber Amazon/Apple/Roku
+ * gebuchten Themenkanaele ("Amazon Arthaus Channel") und Kinderprofile
+ * ("Netflix Kids"). Beide fuehren einen Ausschnitt eines Katalogs, den die App
+ * ohnehin schon einliest -- sie wuerden einen der wenigen Plaetze belegen,
+ * ohne einen einzigen neuen Titel zu zeigen. Im AT-Probelauf am 16. August
+ * 2026 standen genau diese zwei auf Platz 7 und 12 und verdraengten damit
+ * echte Dienste.
+ *
+ * Bewusst an den Markennamen gebunden und nicht an "Channel" allein: Es gibt
+ * eigenstaendige Dienste, die so heissen (etwa "Hallmark Channel"). */
+const KEIN_EIGENES_ABO = /^(?:Amazon|Apple TV|Roku)\b.*\bChannel$|\bKids$/i;
+
+/* Tarifstufen desselben Dienstes: In den USA fuehrt TMDB "Paramount Plus
+ * Premium" UND "Paramount Plus Essential" als eigene Anbieter mit eigener ID
+ * -- zwei Plaetze fuer einen Dienst, dessen Katalog sich fast deckt.
+ * stammName() schneidet EIN abschliessendes Stufenwort ab; zwei Kandidaten mit
+ * gleichem Stamm gelten als derselbe Dienst, und der prominentere gewinnt.
+ *
+ * Bewusst nur EIN Wort und nur am Ende: "WOW Presents Plus" (ein voellig
+ * anderer Dienst als "WOW") wird so zu "WOW Presents" und bleibt erhalten,
+ * "YouTube Premium" zu "YouTube" -- und weil der Shop YouTube die
+ * Abo-Pruefung ohnehin nicht besteht, bleibt auch der erhalten. */
+const TARIFSTUFE = /\s+(?:Premium|Essential|Basic|Standard|Lite|Plus|Max)$/i;
+function stammName(name) {
+  return String(name).replace(TARIFSTUFE, '').trim().toLowerCase();
+}
+
+/* Fuer einzelne Regionen liefert TMDB ueberhaupt keinen Anbieterkatalog -- am
+ * 16. August 2026 gilt das fuer Bulgarien (0 Eintraege bei /watch/providers,
+ * sowohl movie als auch tv). Die Verfuegbarkeitsabfrage /discover funktioniert
+ * dort aber sehr wohl (Netflix BG: 6.731 Filme). Bis zum regionalen Ausbau fiel
+ * das nicht auf, weil die vier Plattformen samt Nummern fest verdrahtet waren.
+ *
+ * Damit solche Regionen nicht leer ausgehen, greift dann diese Liste --
+ * dieselben vier Dienste wie zuvor, nur jetzt als Rueckfall statt als Regel.
+ * Amazon steht mit beiden Nummern drin (je nach Land 9 oder 119); geprueft
+ * wird ohnehin jede einzeln, und der Slug-Schutz weiter unten laesst nur eine
+ * davon durch. */
+const RUECKFALL_ANBIETER = [
+  { id: 8,   name: 'Netflix' },
+  { id: 9,   name: 'Amazon Prime Video' },
+  { id: 119, name: 'Amazon Prime Video' },
+  { id: 337, name: 'Disney Plus' },
+  { id: 350, name: 'Apple TV' },
+].map((p) => ({ ...p, slug: anbieterSlug(p.name), kanonisch: true, arten: ['movie', 'tv'] }));
+// So viele Katalogplaetze werden dafuer ueberhaupt geprueft. Weiter hinten
+// kommen nur noch Nischenangebote, und jede Pruefung kostet zwei Abrufe.
+const KANDIDATEN     = Number(process.env.STREAM_KANDIDATEN || 40);
+// Pause zwischen zwei discover-Seiten. Der Lauf besteht seit der Skip-Liste im
+// Wesentlichen aus diesem Paging -- mit mehr Anbietern entscheidet dieser Wert
+// ueber die Laufzeit. tmdb() faengt ein 429 ohnehin mit Wiederholung ab.
+const SEITEN_PAUSE   = Number(process.env.TMDB_PAUSE_MS || 250);
 
 if (!KEY) { console.error('FEHLER: TMDB_API_KEY ist nicht gesetzt.'); process.exit(1); }
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+// Zaehlt, wie oft TMDB gebremst hat -- am Ende eine Zeile im Log. Ohne die
+// Zahl liesse sich nach einer Aenderung an SEITEN_PAUSE nicht beurteilen, ob
+// das Tempo noch tragbar ist.
+let rateLimitTreffer = 0;
 // Laender, fuer die Altersfreigaben mitgenommen werden. Die TMDB-Antwort
 // enthaelt ohnehin ALLE Laender -- weitere Regionen kosten hier also keinen
 // einzigen zusaetzlichen Abruf (siehe PLAN-INTERNATIONALISIERUNG.md).
@@ -159,7 +267,7 @@ async function tmdb(path, params = {}) {
   for (const [k, v] of Object.entries(params)) u.searchParams.set(k, v);
   for (let attempt = 0; attempt < 4; attempt++) {
     const res = await fetch(u);
-    if (res.status === 429) { await sleep(2000 + attempt * 1000); continue; }
+    if (res.status === 429) { rateLimitTreffer++; await sleep(2000 + attempt * 1000); continue; }
     if (!res.ok) throw new Error(`TMDB ${res.status} für ${path}`);
     return res.json();
   }
@@ -253,12 +361,102 @@ async function genrePaare() {
   return paare;
 }
 
-async function resolveProviderIds(kind) {    // Name -> ID über TMDB
-  const d = await tmdb(`/watch/providers/${kind}`, { language: LANG, watch_region: REGION });
-  const list = d.results || [];
-  const byName = {};
-  for (const p of list) byName[p.provider_name] = p.provider_id;
-  return byName;
+/* Fuehrt dieser Anbieter in DIESER Region ein Abo -- und wie gross ist es?
+   Die beiden Pruefungen sind im Kopf-Kommentar bei MAX_ANBIETER begruendet.
+   Liefert {ok, filme, serien, anteil, gegenprobe} zurueck. */
+async function aboAngebotPruefen(p) {
+  const umfang = { movie: 0, tv: 0 };
+  let flat = 0, gesamt = 0;
+  const proben = [];
+  for (const kind of ['movie', 'tv']) {
+    if (!p.arten.includes(kind)) continue;
+    const basis = {
+      language: LANG, watch_region: REGION,
+      with_watch_providers: p.id, include_adult: 'false', page: 1,
+    };
+    const mitAbo = await tmdb(`/discover/${kind}`, { ...basis, with_watch_monetization_types: 'flatrate' });
+    const ohne   = await tmdb(`/discover/${kind}`, basis);
+    umfang[kind] = mitAbo.total_results || 0;
+    flat   += mitAbo.total_results || 0;
+    gesamt += ohne.total_results || 0;
+    for (const t of (mitAbo.results || []).slice(0, STICHPROBE)) proben.push([kind, t.id]);
+  }
+  const anteil = gesamt ? flat / gesamt : 0;
+  const ergebnis = { filme: umfang.movie, serien: umfang.tv, anteil, gegenprobe: null };
+  if (flat < MIN_TITEL) return { ...ergebnis, ok: false, grund: `nur ${flat} Abo-Titel` };
+  if (anteil < MIN_ABO_ANTEIL) {
+    return { ...ergebnis, ok: false, grund: `Abo-Anteil ${(anteil * 100).toFixed(0)} %` };
+  }
+
+  // Gegenprobe: steht der Anbieter bei echten Titeln wirklich unter `flatrate`?
+  // Bewusst durchmischt (je Art die vordersten), damit nicht eine einzelne
+  // Sortierlaune der Discover-Antwort das Ergebnis traegt.
+  const stichprobe = proben.slice(0, STICHPROBE);
+  let treffer = 0;
+  for (const [kind, id] of stichprobe) {
+    try {
+      const w = await tmdb(`/${kind}/${id}/watch/providers`);
+      const r = (w.results || {})[REGION] || {};
+      if ((r.flatrate || []).some((x) => x.provider_id === p.id)) treffer++;
+    } catch (e) { /* einzelner Ausfall soll den Kandidaten nicht kippen */ }
+  }
+  ergebnis.gegenprobe = `${treffer}/${stichprobe.length}`;
+  if (treffer * 2 < stichprobe.length) {
+    return { ...ergebnis, ok: false, grund: `Gegenprobe ${ergebnis.gegenprobe} im Abo` };
+  }
+  return { ...ergebnis, ok: true };
+}
+
+// Siehe Kopf-Kommentar bei MAX_ANBIETER: die prominentesten Abo-Anbieter des
+// Landes, gemessen statt geraten.
+async function anbieterDerRegion() {
+  const katalog = await anbieterKatalog(REGION);
+  if (!katalog.length) {
+    console.warn(`WARN: TMDB kennt fuer ${REGION} keinen Anbieterkatalog -- Rueckfall auf die vier grossen Dienste.`);
+  }
+  // `kanonisch` haelt Kanal-Varianten draussen, deren Basisname sonst nirgends
+  // vorkommt ("RTL+ Max Amazon Channel" -> Basis "RTL+ Max").
+  const kandidaten = (katalog.length ? katalog : RUECKFALL_ANBIETER)
+    .filter((p) => p.kanonisch && !KEIN_EIGENES_ABO.test(p.name))
+    .slice(0, KANDIDATEN);
+
+  const gewaehlt = [];
+  const verworfen = [];
+  const staemme = new Set();
+  const slugs = new Set();
+  for (const p of kandidaten) {
+    if (gewaehlt.length >= MAX_ANBIETER) break;
+    const stamm = stammName(p.name);
+    // Zwei Eintraege mit demselben Slug wuerden im Ingest auf dieselben Zeilen
+    // schreiben (provider_id ist Teil des Primaerschluessels) -- der zweite
+    // ueberschriebe den ersten zur Haelfte.
+    if (slugs.has(p.slug)) { verworfen.push(`${p.name} (Slug ${p.slug} schon vergeben)`); continue; }
+    if (staemme.has(stamm)) { verworfen.push(`${p.name} (Tarifstufe)`); continue; }
+    const pruefung = await aboAngebotPruefen(p);
+    await sleep(SEITEN_PAUSE);
+    if (!pruefung.ok) { verworfen.push(`${p.name} (${pruefung.grund})`); continue; }
+    staemme.add(stamm);
+    slugs.add(p.slug);
+    gewaehlt.push({
+      id: p.slug, name: p.name, tmdbId: p.id,
+      filme: pruefung.filme, serien: pruefung.serien, gegenprobe: pruefung.gegenprobe,
+    });
+  }
+
+  // Ein plausibler Lauf findet mindestens die grossen Vier. Weniger heisst:
+  // TMDB hat gerade eine kaputte Antwort geliefert. Dann lieber hier
+  // abbrechen, als dem Ingest eine duenne Lieferung zu schicken -- der wuerde
+  // sie zwar zurueckweisen (Mindestanteil), aber die Ursache staende nirgends.
+  if (gewaehlt.length < 3) {
+    throw new Error(`Nur ${gewaehlt.length} Abo-Anbieter fuer ${REGION} ermittelt -- Abbruch.`);
+  }
+
+  console.log(`Anbieter fuer ${REGION} (${gewaehlt.length} von ${kandidaten.length} geprueften):`);
+  for (const a of gewaehlt) {
+    console.log(`   ${a.name} [${a.id}] TMDB ${a.tmdbId} -- ${a.filme} Filme, ${a.serien} Serien im Abo (Gegenprobe ${a.gegenprobe})`);
+  }
+  if (verworfen.length) console.log(`   kein Abo-Anbieter: ${verworfen.join(', ')}`);
+  return gewaehlt;
 }
 
 async function discover(kind, providerId, gmap) {
@@ -299,7 +497,7 @@ async function discover(kind, providerId, gmap) {
       });
     }
     page++;
-    await sleep(250);
+    await sleep(SEITEN_PAUSE);
   } while (page <= totalPages);
   let uebersprungen = 0;
   for (const item of out) {
@@ -336,21 +534,21 @@ async function discover(kind, providerId, gmap) {
 }
 
 async function main() {
+  const begonnen = Date.now();
   await ladeSkipListe();
-  const [movieGenres, tvGenres, movieProv, tvProv] = await Promise.all([
-    genreMap('movie'), genreMap('tv'),
-    resolveProviderIds('movie'), resolveProviderIds('tv'),
+  const [movieGenres, tvGenres, gewaehlt] = await Promise.all([
+    genreMap('movie'), genreMap('tv'), anbieterDerRegion(),
   ]);
 
   const providers = [];
-  for (const w of WANT) {
-    const mId = w.match.map(n => movieProv[n]).find(Boolean) || w.fbid;
-    const tId = w.match.map(n => tvProv[n]).find(Boolean) || w.fbid;
-    if (!mId && !tId) { console.warn(`WARN: keine Provider-ID für ${w.name} gefunden – übersprungen.`); continue; }
-    console.log(`→ ${w.name}  (Film-ID ${mId ?? '—'}, Serien-ID ${tId ?? '—'})`);
-    const f = mId ? await discover('movie', mId, movieGenres) : [];
-    const s = tId ? await discover('tv', tId, tvGenres) : [];
-    providers.push({ id: w.id, name: w.name, f, s });
+  for (const w of gewaehlt) {
+    console.log(`→ ${w.name}  (TMDB ${w.tmdbId})`);
+    const f = w.filme  ? await discover('movie', w.tmdbId, movieGenres) : [];
+    const s = w.serien ? await discover('tv', w.tmdbId, tvGenres) : [];
+    // id ist der Slug -- an ihm haengen streaming_cache.provider_id und die
+    // SEO-Seiten. tmdbId daneben, weil dieselbe Marke je Land verschiedene
+    // TMDB-Nummern hat (Amazon Prime Video: 9 in DE/AT/GB/US, sonst 119).
+    providers.push({ id: w.id, name: w.name, tmdbId: w.tmdbId, f, s });
     await sleep(300);
   }
 
@@ -361,7 +559,10 @@ async function main() {
   const { writeFileSync } = await import('node:fs');
   writeFileSync('streaming.json', JSON.stringify(doc));
   const tot = providers.reduce((a, p) => a + p.f.length + p.s.length, 0);
-  console.log(`streaming.json geschrieben: ${providers.length} Plattformen, ${tot} Titel.`);
+  const eindeutig = new Set(providers.flatMap((p) =>
+    [...p.f.map((c) => 'm' + c.id), ...p.s.map((c) => 's' + c.id)])).size;
+  console.log(`streaming.json geschrieben: ${providers.length} Plattformen, ${tot} Anbieter-Zeilen, ${eindeutig} verschiedene Titel.`);
+  console.log(`Laufzeit ${Math.round((Date.now() - begonnen) / 1000)} s, ${rateLimitTreffer} Rate-Limit-Bremsungen (Seitenpause ${SEITEN_PAUSE} ms).`);
 
   if (STREAMING_API_URL) {
     if (!STREAMING_INGEST_SECRET) {
@@ -383,4 +584,15 @@ async function main() {
   }
 }
 
-main().catch(e => { console.error(e); process.exit(1); });
+// Nur beim direkten Aufruf loslaufen. So laesst sich die Anbieter-Ableitung
+// (der einzige Teil mit einer echten Entscheidung darin) einzeln nachrechnen,
+// ohne einen kompletten Import auszuloesen -- genau das wurde vor der
+// Umstellung fuer alle 41 Regionen gemacht.
+import { argv } from 'node:process';
+import { fileURLToPath } from 'node:url';
+
+if (argv[1] && fileURLToPath(import.meta.url) === argv[1]) {
+  main().catch(e => { console.error(e); process.exit(1); });
+}
+
+export { anbieterDerRegion };

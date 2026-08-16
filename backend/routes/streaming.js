@@ -191,6 +191,24 @@ router.post('/ingest', async (req, res) => {
     // Erfolg und hinterliess 0 von 20.369 Zeilen. Dieselbe Falle war in
     // cinema.js bereits behoben, hier blieb sie stehen.
     const { rows: [{ now: runStartedAt }] } = await client.query('SELECT clock_timestamp() AS now');
+
+    /* Welche Anbieter kennt diese Region schon? Nimmt ein Lauf einen Anbieter
+       ERSTMALS auf (der Umfang wird seit dem regionalen Ausbau je Region aus
+       dem TMDB-Katalog abgeleitet, kann sich also aendern), sind dessen Titel
+       nicht "neu im Streaming" -- neu ist nur UNSER Blick darauf. Ohne diese
+       Unterscheidung waeren beim ersten Lauf mit erweitertem Anbieterumfang
+       auf einen Schlag mehrere tausend Titel je Region als Neuzugang
+       erschienen: ganz oben in der Sortierung "Neu im Streaming" und, weit
+       schlimmer, als Benachrichtigungs-Mail ("Neu bei deinen Streaming-
+       Anbietern") fuer jeden passenden Watchlist-Titel.
+
+       Solche Zeilen bekommen deshalb ein zurueckdatiertes first_seen_at. Das
+       ist auch die ehrlichere Angabe: Auf WOW oder RTL+ laufen diese Titel
+       laengst, nur eingelesen hat sie vorher niemand. */
+    const { rows: bekannteZeilen } = await client.query(
+      'SELECT DISTINCT provider_id FROM streaming_cache WHERE region = $1', [region]);
+    const bekannteAnbieter = new Set(bekannteZeilen.map((r) => r.provider_id));
+
     for (const provider of providers) {
       const providerId = provider.id;
       const providerName = provider.name || PROVIDER_NAMES[providerId] || providerId;
@@ -199,6 +217,10 @@ router.post('/ingest', async (req, res) => {
       // dem Payload; aeltere Laeufe schicken sie nicht, dann bleibt der
       // vorhandene Wert stehen.
       const providerTmdbId = Number.isInteger(provider.tmdbId) ? provider.tmdbId : null;
+      const neuerAnbieter = !bekannteAnbieter.has(providerId);
+      if (neuerAnbieter) {
+        console.log(`Streaming-Ingest (${region}): ${providerName} ist neu in dieser Region -- Titel gelten nicht als Neuzugang.`);
+      }
       for (const [type, items] of [['movie', provider.f], ['series', provider.s]]) {
         for (const item of items || []) {
           // Magere Zeile (item.ohneDetails, siehe Skip-Liste in stream-fetch.mjs):
@@ -209,9 +231,10 @@ router.post('/ingest', async (req, res) => {
           const voll = !item.ohneDetails;
           await client.query(
             `INSERT INTO streaming_cache
-               (provider_id, provider_name, tmdb_provider_id, type, tmdb_id, region, title, title_en, uebersetzungen, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, fetched_at, enriched_at)
+               (provider_id, provider_name, tmdb_provider_id, type, tmdb_id, region, title, title_en, uebersetzungen, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, fetched_at, enriched_at, first_seen_at)
              VALUES ($1,$2,$21,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19, clock_timestamp(),
-               CASE WHEN $20::boolean THEN clock_timestamp() END)
+               CASE WHEN $20::boolean THEN clock_timestamp() END,
+               CASE WHEN $22::boolean THEN clock_timestamp() - interval '1 year' ELSE clock_timestamp() END)
              ON CONFLICT (provider_id, type, tmdb_id, region) DO UPDATE SET
                provider_name = EXCLUDED.provider_name,
                tmdb_provider_id = COALESCE(EXCLUDED.tmdb_provider_id, streaming_cache.tmdb_provider_id),
@@ -253,6 +276,7 @@ router.post('/ingest', async (req, res) => {
               item.ovEn || null,
               voll,
               providerTmdbId,
+              neuerAnbieter,
             ]
           );
         }

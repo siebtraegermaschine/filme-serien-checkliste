@@ -105,6 +105,14 @@ jobs:
           # Variablen werden alle aktuell verfuegbaren Titel je Anbieter geholt):
           # STREAM_MIN_VOTES: "300"
           # STREAM_MIN_YEAR: "1980"
+          #
+          # Stellschrauben des Anbieterumfangs (siehe Kopf von stream-fetch.mjs).
+          # STREAM_MAX_PROVIDER steuert unmittelbar Laufzeit UND Datenmenge:
+          # jeder zusaetzliche Anbieter kostet discover-Seiten und Zeilen in
+          # streaming_cache. Als Repository-Variablen setzbar, ohne den Code
+          # anzufassen -- gedacht fuer den Fall, dass die Kette zu lang wird.
+          STREAM_MAX_PROVIDER: ${{ vars.STREAM_MAX_PROVIDER }}
+          TMDB_PAUSE_MS: ${{ vars.TMDB_PAUSE_MS }}
         run: node stream-fetch.mjs
 
       - name: Änderungen committen (nur solange kein Backend angebunden ist)
