@@ -163,6 +163,75 @@ router.get('/enriched', async (req, res) => {
   res.json(out);
 });
 
+/* Die Zeilen des Laufs gehen gebuendelt in die Datenbank statt eine nach der
+   anderen. Grund: Bei vier Anbietern waren es rund 22.000 Einzelabfragen je
+   Region, seit dem Anbieterausbau sind es 28.000 (AT) bis 77.000 (US) -- und
+   jede kostet einen Hin- und Rueckweg. Der erste AT-Lauf mit erweitertem
+   Umfang lief damit in den 300-Sekunden-Timeout der Gegenstelle (Node/undici),
+   waehrend die Transaktion serverseitig noch arbeitete.
+
+   Die Spalten in der Reihenfolge der Parameter je Zeile; fetched_at,
+   enriched_at und first_seen_at werden im SQL gebildet. */
+const ZEILEN_SPALTEN =
+  'provider_id, provider_name, tmdb_provider_id, type, tmdb_id, region, title, title_en, ' +
+  'uebersetzungen, year, genres, director, cast_names, poster_path, rating, vote_count, ' +
+  'certification, certifications, overview, overview_en, fetched_at, enriched_at, first_seen_at';
+// Typen zu den 22 Parametern je Zeile. Bei mehrzeiligen VALUES kann Postgres
+// die Typen nicht mehr aus der Zielspalte ableiten -- ohne die Casts scheitert
+// schon der erste Array-/JSONB-Wert.
+const ZEILEN_TYPEN = ['text', 'text', 'int', 'text', 'int', 'text', 'text', 'text',
+  'jsonb', 'int', 'text[]', 'text', 'text[]', 'text', 'numeric', 'int',
+  'text', 'jsonb', 'text', 'text'];
+const PARAMETER_JE_ZEILE = 22;   // die 20 oben plus `voll` und `neuerAnbieter`
+// 500 Zeilen sind 11.000 Parameter -- weit unter Postgres' Grenze von 65.535
+// und gross genug, dass der Hin- und Rueckweg nicht mehr ins Gewicht faellt.
+const BUENDEL = 500;
+
+async function buendelSchreiben(client, puffer) {
+  if (!puffer.length) return;
+  const werte = [];
+  const tupel = puffer.map((zeile, i) => {
+    const b = i * PARAMETER_JE_ZEILE;
+    werte.push(...zeile);
+    const felder = ZEILEN_TYPEN.map((typ, n) => `$${b + n + 1}::${typ}`);
+    return `(${felder.join(',')}, clock_timestamp(),` +
+      // enriched_at nur bei vollen Zeilen -- und weil EXCLUDED.enriched_at
+      // unten genau das wieder ablesbar macht, braucht die Konfliktbehandlung
+      // keinen eigenen Parameter mehr.
+      ` CASE WHEN $${b + 21}::boolean THEN clock_timestamp() END,` +
+      ` CASE WHEN $${b + 22}::boolean THEN clock_timestamp() - interval '1 year' ELSE clock_timestamp() END)`;
+  });
+
+  await client.query(
+    `INSERT INTO streaming_cache (${ZEILEN_SPALTEN})
+     VALUES ${tupel.join(',')}
+     ON CONFLICT (provider_id, type, tmdb_id, region) DO UPDATE SET
+       provider_name = EXCLUDED.provider_name,
+       tmdb_provider_id = COALESCE(EXCLUDED.tmdb_provider_id, streaming_cache.tmdb_provider_id),
+       title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
+       -- "EXCLUDED.enriched_at IS NOT NULL" heisst: der Lauf hat fuer diesen
+       -- Titel wirklich Details geholt. Nur dann duerfen die Anreicherungs-
+       -- felder ueberschrieben werden, sonst stuenden nach einer mageren Zeile
+       -- Leerwerte drin.
+       director = CASE WHEN EXCLUDED.enriched_at IS NOT NULL THEN EXCLUDED.director ELSE streaming_cache.director END,
+       cast_names = CASE WHEN EXCLUDED.enriched_at IS NOT NULL THEN EXCLUDED.cast_names ELSE streaming_cache.cast_names END,
+       poster_path = EXCLUDED.poster_path, rating = EXCLUDED.rating,
+       vote_count = EXCLUDED.vote_count,
+       certification = CASE WHEN EXCLUDED.enriched_at IS NOT NULL THEN EXCLUDED.certification ELSE streaming_cache.certification END,
+       certifications = streaming_cache.certifications || EXCLUDED.certifications,
+       -- Liefert TMDB an einem Tag mal keine Kurzbeschreibung (z.B. fremdsprachige
+       -- Titel ohne deutschen Overview-Text), soll eine zuvor vorhandene (ggf. manuell
+       -- nachgetragene) Beschreibung nicht durch einen Leerstring geloescht werden.
+       overview = COALESCE(NULLIF(EXCLUDED.overview, ''), streaming_cache.overview),
+       title_en = COALESCE(NULLIF(EXCLUDED.title_en, ''), streaming_cache.title_en),
+       uebersetzungen = streaming_cache.uebersetzungen || EXCLUDED.uebersetzungen,
+       overview_en = COALESCE(NULLIF(EXCLUDED.overview_en, ''), streaming_cache.overview_en),
+       fetched_at = clock_timestamp(),
+       enriched_at = COALESCE(EXCLUDED.enriched_at, streaming_cache.enriched_at)`,
+    werte
+  );
+}
+
 router.post('/ingest', async (req, res) => {
   if (!ingestBerechtigt(req)) {
     return res.status(401).json({ error: 'invalid_ingest_secret' });
@@ -209,6 +278,7 @@ router.post('/ingest', async (req, res) => {
       'SELECT DISTINCT provider_id FROM streaming_cache WHERE region = $1', [region]);
     const bekannteAnbieter = new Set(bekannteZeilen.map((r) => r.provider_id));
 
+    const puffer = [];
     for (const provider of providers) {
       const providerId = provider.id;
       const providerName = provider.name || PROVIDER_NAMES[providerId] || providerId;
@@ -229,59 +299,36 @@ router.post('/ingest', async (req, res) => {
           // felder (Regie, Besetzung, Freigaben) und enriched_at unangetastet --
           // sonst wuerde die vorhandene Anreicherung mit Leerwerten ueberschrieben.
           const voll = !item.ohneDetails;
-          await client.query(
-            `INSERT INTO streaming_cache
-               (provider_id, provider_name, tmdb_provider_id, type, tmdb_id, region, title, title_en, uebersetzungen, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, fetched_at, enriched_at, first_seen_at)
-             VALUES ($1,$2,$21,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19, clock_timestamp(),
-               CASE WHEN $20::boolean THEN clock_timestamp() END,
-               CASE WHEN $22::boolean THEN clock_timestamp() - interval '1 year' ELSE clock_timestamp() END)
-             ON CONFLICT (provider_id, type, tmdb_id, region) DO UPDATE SET
-               provider_name = EXCLUDED.provider_name,
-               tmdb_provider_id = COALESCE(EXCLUDED.tmdb_provider_id, streaming_cache.tmdb_provider_id),
-               title = EXCLUDED.title, year = EXCLUDED.year, genres = EXCLUDED.genres,
-               director = CASE WHEN $20::boolean THEN EXCLUDED.director ELSE streaming_cache.director END,
-               cast_names = CASE WHEN $20::boolean THEN EXCLUDED.cast_names ELSE streaming_cache.cast_names END,
-               poster_path = EXCLUDED.poster_path, rating = EXCLUDED.rating,
-               vote_count = EXCLUDED.vote_count,
-               certification = CASE WHEN $20::boolean THEN EXCLUDED.certification ELSE streaming_cache.certification END,
-               certifications = streaming_cache.certifications || EXCLUDED.certifications,
-               -- Liefert TMDB an einem Tag mal keine Kurzbeschreibung (z.B. fremdsprachige
-               -- Titel ohne deutschen Overview-Text), soll eine zuvor vorhandene (ggf. manuell
-               -- nachgetragene) Beschreibung nicht durch einen Leerstring geloescht werden.
-               overview = COALESCE(NULLIF(EXCLUDED.overview, ''), streaming_cache.overview),
-               title_en = COALESCE(NULLIF(EXCLUDED.title_en, ''), streaming_cache.title_en),
-               uebersetzungen = streaming_cache.uebersetzungen || EXCLUDED.uebersetzungen,
-               overview_en = COALESCE(NULLIF(EXCLUDED.overview_en, ''), streaming_cache.overview_en),
-               fetched_at = clock_timestamp(),
-               enriched_at = CASE WHEN $20::boolean THEN clock_timestamp() ELSE streaming_cache.enriched_at END`,
-            [
-              providerId,
-              providerName,
-              type,
-              Number(item.id),
-              region,
-              item.t,
-              item.tEn || null,
-              item.uebers && typeof item.uebers === 'object' ? item.uebers : {},
-              item.y || null,
-              Array.isArray(item.g) ? item.g : [],
-              item.d || null,
-              Array.isArray(item.c) ? item.c : [],
-              item.p || null,
-              item.r != null ? item.r : null,
-              item.vc != null ? item.vc : null,
-              item.fsk || null,
-              item.certs && typeof item.certs === 'object' ? item.certs : {},
-              item.ov || null,
-              item.ovEn || null,
-              voll,
-              providerTmdbId,
-              neuerAnbieter,
-            ]
-          );
+          puffer.push([
+            providerId,
+            providerName,
+            providerTmdbId,
+            type,
+            Number(item.id),
+            region,
+            item.t,
+            item.tEn || null,
+            item.uebers && typeof item.uebers === 'object' ? item.uebers : {},
+            item.y || null,
+            Array.isArray(item.g) ? item.g : [],
+            item.d || null,
+            Array.isArray(item.c) ? item.c : [],
+            item.p || null,
+            item.r != null ? item.r : null,
+            item.vc != null ? item.vc : null,
+            item.fsk || null,
+            item.certs && typeof item.certs === 'object' ? item.certs : {},
+            item.ov || null,
+            item.ovEn || null,
+            voll,
+            neuerAnbieter,
+          ]);
+          if (puffer.length >= BUENDEL) { await buendelSchreiben(client, puffer); puffer.length = 0; }
         }
       }
     }
+    await buendelSchreiben(client, puffer);
+    puffer.length = 0;
     // Schutz vor Teilerfolgen: Der DELETE unten raeumt alles weg, was dieser Lauf
     // nicht angefasst hat. Liefert TMDB nur einen Bruchteil (gedrosselter
     // Schluessel, Rate-Limit, veraenderte Antwortform), loescht ein "erfolgreicher"
@@ -314,8 +361,21 @@ router.post('/ingest', async (req, res) => {
     // sind. Von dort werden sie kopiert, inklusive enriched_at, damit die
     // Frische-Rechnung stimmt. Titel ganz ohne angereicherte Geschwisterzeile
     // bleiben auf NULL und werden vom naechsten Lauf voll geholt.
+    //
+    // Die Unterabfrage ist bewusst auf die BEDUERFTIGEN Titel eingeschraenkt.
+    // Vorher sortierte sie die komplette Tabelle (DISTINCT ON ueber inzwischen
+    // 745.000 Zeilen mit Inhaltsangaben und Uebersetzungen -- ein Sortierlauf
+    // von einigen hundert MB, der auf die Platte auslagert). Beim ersten
+    // AT-Lauf mit erweitertem Anbieterumfang stand genau dieses UPDATE nach
+    // sieben Minuten noch immer aktiv in pg_stat_activity. Mit der
+    // Einschraenkung greift der Index idx_streaming_cache_titel
+    // (type, tmdb_id).
     await client.query(
-      `UPDATE streaming_cache sc SET
+      `WITH beduerftig AS (
+         SELECT DISTINCT type, tmdb_id FROM streaming_cache
+          WHERE region = $1 AND enriched_at IS NULL
+       )
+       UPDATE streaming_cache sc SET
          director       = COALESCE(sc.director, q.director),
          cast_names     = CASE WHEN cardinality(sc.cast_names) = 0 THEN q.cast_names ELSE sc.cast_names END,
          certification  = COALESCE(sc.certification, q.certification),
@@ -326,12 +386,13 @@ router.post('/ingest', async (req, res) => {
          overview_en    = COALESCE(sc.overview_en, q.overview_en),
          enriched_at    = q.enriched_at
        FROM (
-         SELECT DISTINCT ON (type, tmdb_id) type, tmdb_id, director, cast_names,
-                certification, certifications, uebersetzungen, title_en,
-                overview, overview_en, enriched_at
-           FROM streaming_cache
-          WHERE enriched_at IS NOT NULL
-          ORDER BY type, tmdb_id, enriched_at DESC
+         SELECT DISTINCT ON (s.type, s.tmdb_id) s.type, s.tmdb_id, s.director, s.cast_names,
+                s.certification, s.certifications, s.uebersetzungen, s.title_en,
+                s.overview, s.overview_en, s.enriched_at
+           FROM streaming_cache s
+           JOIN beduerftig b ON b.type = s.type AND b.tmdb_id = s.tmdb_id
+          WHERE s.enriched_at IS NOT NULL
+          ORDER BY s.type, s.tmdb_id, s.enriched_at DESC
        ) q
        WHERE sc.region = $1 AND sc.enriched_at IS NULL
          AND q.type = sc.type AND q.tmdb_id = sc.tmdb_id`,

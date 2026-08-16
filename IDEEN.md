@@ -64,6 +64,24 @@
   inhaltlich korrekt (heute: alles der letzten 60 Tage).
 - **Spielzeiten + Ticket-Links** (299 €-Stufe) — nur falls Weg B überzeugt.
 
+- **Mischanbieter im Streaming-Abgleich** (16. August 2026 bewusst
+  ausgelassen): Der Import nimmt je Region die zwölf prominentesten
+  ABO-Anbieter. Dienste, die Abo UND Einzelkauf mischen — Joyn, MagentaTV,
+  Sky Store, Rakuten TV, Claro video —, fallen dabei heraus, weil TMDBs
+  `with_watch_monetization_types=flatrate` in `/discover` nicht
+  anbietergenau filtert (Begründung und Messwerte in
+  PLAN-INTERNATIONALISIERUNG.md Abschnitt 9). Nachrüstbar wäre es nur über
+  `/<art>/<id>/watch/providers` je Titel — bei ~30.000 Titeln pro Region
+  eine eigene Größenordnung an Abrufen. Denkbar als Zusatzlauf für ein, zwei
+  große Mischanbieter je Land, falls jemand sie vermisst.
+- **Suchlinks für die neuen Anbieter** (`WATCH_SEARCH_URLS` in `index.html`):
+  Seit dem Anbieterausbau erscheinen zwölf statt vier Anbieter je Region, für
+  die allermeisten kennt die App keine ansteuerbare Suche — sie stehen als
+  reine Information da (gestrichelter Rand). Das ist so gewollt (der
+  Kommentar dort nennt die im Browser geprüften Fehlschläge), lohnt aber eine
+  gelegentliche Nachprüfung: WOW, Paramount+ und HBO Max könnten ihre
+  Suche irgendwann per URL öffnen.
+
 ## Plattform
 
 - **Native Apps** (PLAN-NATIVE-APPS.md): Token-Auth, Vite-Modularisierung,

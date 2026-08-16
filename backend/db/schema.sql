@@ -712,6 +712,16 @@ UPDATE streaming_cache SET tmdb_provider_id = CASE provider_id
  WHERE tmdb_provider_id IS NULL
    AND provider_id IN ('netflix', 'disney', 'apple', 'amazon');
 
+-- Zugriff ueber (type, tmdb_id) -- also "wo laeuft dieser Titel ueberall?".
+-- Der Primaerschluessel beginnt mit provider_id und hilft dafuer nicht. Drei
+-- Stellen brauchen genau diesen Weg: der Ingest, wenn er die Anreicherung
+-- einer neu aufgetauchten Zeile aus einer Geschwisterzeile kopiert, sowie die
+-- Benachrichtigungs- und die Wochenend-Mail, die Watchlist-Titel gegen den
+-- Streaming-Bestand halten. Ohne den Index lief das auf einen Sortierlauf
+-- ueber die ganze Tabelle hinaus (Stand 16. August 2026: 745.000 Zeilen, mit
+-- dem Anbieterausbau ueber eine Million).
+CREATE INDEX IF NOT EXISTS idx_streaming_cache_titel ON streaming_cache (type, tmdb_id);
+
 -- Anonyme Trichter-Zaehler (IDEEN-WACHSTUM.md, Abschnitt 3): je Tag und
 -- Schritt EINE Zahl. Bewusst keine Kennungen, keine IP-Adressen, keine
 -- Zeitstempel unterhalb des Tages -- aus diesen Zeilen laesst sich keine

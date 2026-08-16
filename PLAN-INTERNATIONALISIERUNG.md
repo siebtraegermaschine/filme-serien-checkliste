@@ -347,6 +347,91 @@ Besonderheiten:
   (`AMAZON_DOMAIN`/`RAKUTEN_LAND` in `index.html`); AT/CH kaufen bewusst
   über amazon.de ein (kein eigener Shop).
 
+**Streaming-Anbieter je Region (16. August 2026).** Bis dahin war der
+Anbieter-Teil an zwei Stellen noch global:
+
+*Auswahlkatalog.* `GET /api/watch-providers/catalog` fragte TMDB fest mit
+`watch_region=DE` und lieferte allen dieselben ~196 Anbieter — wer aus
+Brasilien kam, bekam RTL+ und WOW zur Auswahl. Sortiert wurde nach
+`display_priority`, dem GLOBALEN Feld; weil das Nischenanbieter nach vorne
+spült, musste eine handgepflegte Liste deutscher Dienste gegensteuern. Neu:
+`backend/lib/anbieter.js` lädt den Katalog je Region und sortiert nach
+`display_priorities[REGION]`, der Sortierempfehlung DES LANDES. Die deutsche
+Namensliste ist damit weg, und die Reihenfolge stimmt in allen 41 Regionen
+(BR: … Claro video, Looke, HBO Max, Globoplay; US: … Hulu, fuboTV). Auch die
+**Vorauswahl** kommt jetzt von dort (die zehn prominentesten Dienste des
+Landes plus die Shops, ohne die „Leihen"/„Kaufen" leer bliebe); gespeicherte
+Auswahlen (`users.watch_provider_ids`) bleiben unangetastet. Katalog- und
+Auswahl-Aufrufe im Frontend hängen `lang`/`region` an.
+
+*Import.* `stream-fetch.mjs` holte NUR vier fest verdrahtete Plattformen
+(Amazon, Netflix, Disney+, Apple TV+). Nur die speisten `streaming_cache` und
+damit den Listenfilter „Deine Streaming-Anbieter" und die Sortierung „Neu im
+Streaming" — wählbar waren aber alle ~200 Anbieter, und die anderen waren dort
+schlicht leer (Erwartungslücke). Jetzt leitet jeder Lauf seine Anbieter aus dem
+Katalog des Landes ab (`STREAM_MAX_PROVIDER`, Standard 12).
+
+Der heikle Teil ist die Trennung **Abo vs. Shop**:
+`with_watch_monetization_types=flatrate` in `/discover` filtert **nicht**
+anbietergenau — es heißt „Titel läuft bei diesem Anbieter UND ist irgendwo im
+Abo zu haben". Nachgemessen: `/discover/movie` für Apple TV Store (2) mit
+`flatrate` meldet für DE 12.930 Filme; von zehn Stichproben stand Apple TV
+Store bei **zehn** nur unter Leihen/Kaufen. Deshalb zwei gemessene Prüfungen je
+Kandidat:
+
+1. **Abo-Anteil** = Treffer mit `flatrate`-Filter ÷ Treffer ohne. Echte
+   Abo-Dienste liegen bei 1,00 (Netflix 8.840/8.840, RTL+, WOW, Sky Go,
+   Crunchyroll, HBO Max, Globoplay), Shops bei 0,54–0,66 (Apple TV Store
+   0,542, Amazon Video 0,575, Google Play 0,579, YouTube 0,577, Sky Store
+   0,664), Werbe-/Gratisangebote darunter (JustWatch TV 0,285, ARD Mediathek
+   0,264). Schwelle: 0,95.
+2. **Gegenprobe** an sechs echten Titeln über `/<art>/<id>/watch/providers` —
+   steht der Anbieter dort wirklich unter `flatrate`? Sie hat sich sofort
+   bezahlt gemacht: NetMovies (BR) kam mit 0,979 durch Prüfung 1 und stand in
+   6 von 6 Stichproben nicht im Abo.
+
+**Mischformen fallen bewusst heraus** (Joyn 0,63, MagentaTV 0,56, Claro video
+0,46): Es gibt sie im Abo, aber aus `discover` lässt sich nicht ablesen, WELCHE
+ihrer Titel dazugehören. Lieber ein Anbieter zu wenig als ein Schildchen, das
+nicht stimmt. Ebenfalls aussortiert: Kanal-/Tarifpakete mit eigenem Namen
+(„Amazon Arthaus Channel", „Netflix Kids" — standen im AT-Probelauf auf Platz 7
+und 12) und doppelte Tarifstufen („Paramount Plus Premium"/„… Essential", US).
+Für Regionen **ohne** TMDB-Anbieterkatalog bleiben die vier großen Dienste als
+Rückfall — das betrifft aktuell Bulgarien (0 Einträge bei `/watch/providers`,
+während `/discover` dort normal antwortet); ohne den Rückfall wäre BG mit
+dieser Änderung leer geworden.
+
+*Was daran hängt.* `streaming_cache.provider_id` bleibt der Slug — an ihm
+hängen die SEO-Seiten `/<locale>/streaming/<slug>` und `seo_content`. Daneben
+steht neu `tmdb_provider_id`, die TMDB-Nummer **in dieser Region**: Sie ist je
+Land verschieden (Amazon Prime Video ist 9 in DE/AT/GB/US, 119 in den übrigen
+37 Regionen). Damit fallen drei feste Vierer-Tabellen weg, die genau das falsch
+abbildeten (`STREAM_FEED_TMDB_IDS` im Frontend — bleibt als Rückfall — sowie
+die Slug-Zuordnung in `wochenendmail.js`/`benachrichtigung.js`, die Amazon in
+36 von 41 Regionen auf die falsche Nummer schickte).
+
+*Auslieferung.* `/api/streaming` liefert nicht mehr je Anbieter eine
+Titelliste, sondern **jeden Titel einmal** mit seinen Anbietern als Indexliste
+`pv` (`{anbieter, filme, serien}`). Vorher lag ein Titel, den es bei drei
+Anbietern gibt, dreimal vollständig im Payload; mit zwölf Anbietern wäre das
+nicht tragbar. Das Frontend versteht beide Formen
+(`streamDokumentNormalisieren`), damit ein über den Deploy hinweg offener Tab
+nicht leer dasteht.
+
+*„Neu im Streaming".* Nimmt eine Region einen Anbieter ERSTMALS auf, bekommen
+dessen Zeilen im Ingest ein zurückdatiertes `first_seen_at`. Ohne das wären
+beim ersten erweiterten Lauf je Region mehrere tausend Titel als Neuzugang
+erschienen — oben in der Sortierung und, schlimmer, als Benachrichtigungs-Mail
+für jeden passenden Watchlist-Titel. Auf WOW oder Sky laufen diese Titel
+längst; neu ist nur unser Blick darauf.
+
+*Bekannte Eigenart.* In kleineren Märkten (CZ, GR, HU, LT, LV, EE, PT) sind
+nach den großen Vier fast nur noch Nischen-Dokumentardienste übrig
+(Curiosity Stream, DOCSVILLE, Magellan TV, GuideDoc, BroadwayHD). Das ist die
+ehrliche Auskunft von TMDB für diese Länder, kostet aber Zeilen für Anbieter,
+die kaum jemand hat. Falls das stört, ist `STREAM_MAX_PROVIDER` (auch als
+Repository-Variable im Workflow setzbar) die Stellschraube.
+
 **Rechtstexte (Abschnitt 5):** `imprint.html`, `terms.html`, `privacy.html`
 als englische **Arbeitsfassungen** (Kopf-Kommentar kennzeichnet sie als
 Entwurf). Bei Sprache EN verlinken Fußzeile, Registrier-Hinweis und
