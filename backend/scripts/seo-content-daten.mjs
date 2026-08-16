@@ -21046,4 +21046,225 @@ Die Premiere fand am 19. September 2013 beim Fantastic Fest in Austin statt, der
 Die Kritik lehnte ihn ab: 29 Prozent bei Rotten Tomatoes mit dem Befund, der Funke des ersten Teils fehle, dazu 41 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein B minus.
 
 Der angekündigte dritte Teil wurde nie gedreht. Rodriguez erklärte noch 2023, er halte daran fest — bislang ohne Produktion.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:269', locale: 'de-de',
+    text: `### Worum es geht
+
+Michel Poiccard stiehlt in Marseille ein Auto, wird auf der Landstraße von einem Polizisten angehalten und erschießt ihn. In Paris taucht er unter, treibt ausstehende Schulden ein und sucht Patricia — eine amerikanische Studentin, die auf der Champs-Élysées die "New York Herald Tribune" verkauft.
+
+Er will mit ihr nach Italien, sie weiß nicht, ob sie ihn liebt. Der Film besteht über weite Strecken aus ihrem Gespräch in einem Hotelzimmer, während draußen die Fahndung läuft. Michel ahmt dabei Humphrey Bogart nach — er wischt sich mit dem Daumen über die Lippe, trägt Hut und Zigarette und lebt eine Rolle, die er aus Filmen kennt.
+
+### Entstehungsgeschichte
+
+Es ist Jean-Luc Godards erster abendfüllender Film, erschienen am 16. März 1960.
+
+Die Vorlage stammt von François Truffaut, der sie auf einen Zeitungsbericht von 1952 über Michel Portail stützte, der einen Motorradpolizisten getötet hatte. Truffaut und Claude Chabrol arbeiteten zunächst gemeinsam am Stoff, wurden sich über den Aufbau aber nicht einig.
+
+### Hinter den Kulissen
+
+Gedreht wurde in 23 Tagen im August und September 1959, aus der Hand und fast ohne künstliches Licht. Kameramann Raoul Coutard verwendete umgebautes Filmmaterial und entwickelte es auf 800 ASA hoch, um bei Tageslicht auskommen zu können. Godard schrieb Dialoge während der Dreharbeiten, die die Darsteller vorher nicht kannten.
+
+Berühmt wurde der Film für seine Sprungschnitte — Bilder, aus denen mitten in der Bewegung Stücke fehlen. Sie waren nicht geplant: Nach Aussage von Pierre Rissient entstanden sie erst in der Montage, durch Cutterin Cécile Decugis und Coutard. Kritiker haben sie später als Ausdruck der Bedeutungslosigkeit des Zeitraums zwischen moralischen Entscheidungen gedeutet.
+
+### Einordnung & Wirkung
+
+Über 2 Millionen Franzosen sahen den Film. Er gewann den Prix Jean Vigo und in Berlin den Silbernen Bären für die beste Regie.
+
+Roger Ebert urteilte, seit "Citizen Kane" sei kein Erstlingswerk so einflussreich gewesen.
+
+Gemeinsam mit Truffauts "Sie küssten und sie schlugen ihn" gilt er als Ausgangspunkt der Nouvelle Vague — jener Bewegung, die das Kino aus dem Studio auf die Straße holte und deren Mittel bis heute in Gebrauch sind.` },
+  {
+    bereich: 'titel', schluessel: 'movie:708', locale: 'de-de',
+    text: `### Worum es geht
+
+Bond soll einen sowjetischen General bei seiner Flucht in den Westen decken. Beim Einsatz in Bratislava fällt ihm auf, dass die Scharfschützin, die den Überläufer stoppen soll, ihre Waffe unsicher hält — er schießt ihr das Gewehr aus der Hand, statt sie zu töten.
+
+Die Cellistin Kara Milovy ist keine Killerin, sondern Teil einer Inszenierung: Der Überlauf war gestellt. Was folgt, führt über Wien und Tanger bis nach Afghanistan, wo Bond an der Seite der Mudschaheddin gegen die sowjetische Armee kämpft — und zu einem Waffenhändler, der Opium gegen westliche Rüstungsgüter tauscht.
+
+### Entstehungsgeschichte
+
+Es ist der fünfzehnte Bond-Film und der erste mit Timothy Dalton. Für die Nachfolge von Roger Moore waren mehrere Namen im Gespräch; Pierce Brosnan war vorgesehen, konnte aber wegen seines Vertrags zur Serie "Remington Steele" nicht, auch Sam Neill wurde erwogen.
+
+Dalton entschied sich bewusst gegen Moores ironischen Ton. Er hat das begründet: Er habe das Wesen und die Färbung der Romane zurückholen und die Figur weniger leichtfertig anlegen wollen.
+
+Regie führte John Glen, produziert haben Albert R. Broccoli und Michael G. Wilson.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Gibraltar, Wien, Bratislava und Marokko; die afghanischen Szenen entstanden ebenfalls in Marokko.
+
+Bond fährt wieder einen Aston Martin — einen V8 — nach Jahren mit dem Lotus Esprit. Es war zugleich die letzte Bond-Musik von John Barry, der die Reihe seit 1963 geprägt hatte.
+
+### Einordnung & Wirkung
+
+Der Film erschien Ende Juni 1987 und spielte weltweit 191,2 Millionen Dollar ein, bei einem Budget von 40 Millionen.
+
+Die Kritik reagierte zunächst zwiespältig; Roger Ebert vergab zwei Sterne und vermisste den Humor.
+
+Im Rückblick wird der Film deutlich besser bewertet — der britische "Independent" führte ihn später auf Platz vier aller Bond-Filme. Dalton nahm die Härte vorweg, die die Reihe erst zwei Jahrzehnte später mit Daniel Craig dauerhaft übernahm.` },
+  {
+    bereich: 'titel', schluessel: 'movie:996', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Versicherungsvertreter Walter Neff kommt zu einem Routinebesuch ins Haus der Familie Dietrichson und trifft dort nur die Ehefrau Phyllis an. Sie erkundigt sich, ob man eine Unfallversicherung auch ohne Wissen des Versicherten abschließen könne.
+
+Neff weiß sofort, worauf das hinausläuft, und macht trotzdem mit. Gemeinsam planen sie einen Mord, der wie ein Unfall im Zug aussehen soll — was die doppelte Versicherungssumme auslöst. Dagegen steht Neffs Kollege Barton Keyes, ein Schadensprüfer mit untrüglichem Gespür. Erzählt wird alles rückwärts: Der Film beginnt damit, dass Neff angeschossen ins Büro kommt und sein Geständnis auf Band spricht.
+
+### Entstehungsgeschichte
+
+Grundlage ist James M. Cains Kurzroman von 1943, angeregt vom Mordfall Ruth Snyder aus dem Jahr 1927. Nach dem Vorabdruck 1936 stritten mehrere Studios um die Rechte, doch die Zensurbehörde Hays Office lehnte den Stoff zunächst als sittlich bedenklich ab.
+
+Billy Wilder schrieb das Drehbuch mit Raymond Chandler. Die Zusammenarbeit war schwierig: Chandler war neu in Hollywood, verstand die Bezahlung zunächst falsch und tat sich mit den Regeln des Fachs schwer.
+
+### Hinter den Kulissen
+
+Gedreht wurde von September bis November 1943.
+
+Mehrere große Namen lehnten die Hauptrolle ab, darunter Alan Ladd, James Cagney und Spencer Tracy; George Raft sagte ab, als er erfuhr, dass seine Figur kein Ermittler ist. Fred MacMurray, bis dahin vor allem aus Komödien bekannt, sträubte sich zunächst und nannte den Film später den besten, den er gemacht habe.
+
+Wilder drehte über fünf Tage eine Hinrichtungsszene in der Gaskammer für 150.000 Dollar und schnitt sie wieder heraus, um stattdessen das Verhältnis zwischen Neff und Keyes zu betonen. Das Hays Office hatte die Szene als unangemessen grausam beanstandet — mit ihrer Streichung fiel der letzte Einwand weg.
+
+### Einordnung & Wirkung
+
+Sieben Oscar-Nominierungen brachten keine Auszeichnung; gewonnen hat "Der Weg zum Glück".
+
+1992 wurde der Film in das National Film Registry aufgenommen. Er gilt als eines der Gründungswerke des Film noir — die Rückblendenstruktur, die Erzählstimme aus dem Off und die Figur der berechnenden Frau wurden über Jahrzehnte übernommen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1725', locale: 'de-de',
+    text: `### Worum es geht
+
+Auf der Upper West Side von Manhattan streiten zwei Jugendbanden um dieselben Straßenzüge: die Jets, Söhne europäischer Einwanderer, und die Sharks, deren Familien aus Puerto Rico stammen.
+
+Tony, Mitgründer der Jets und inzwischen ausgestiegen, begegnet auf einem Tanzabend Maria — der Schwester des Anführers der Sharks. Von da an läuft die Geschichte auf das zu, was Shakespeares "Romeo und Julia" vorgibt, aus dem der Stoff stammt: eine Schlägerei, die eskaliert, ein Toter auf jeder Seite und eine Nachricht, die zu spät kommt.
+
+### Entstehungsgeschichte
+
+Grundlage ist das Broadway-Musical von 1957 mit Musik von Leonard Bernstein, Liedtexten von Stephen Sondheim, Buch von Arthur Laurents und Choreographie von Jerome Robbins.
+
+Robbins führte gemeinsam mit Robert Wise Regie und verantwortete die Tanzszenen. Er hatte keine Filmerfahrung, und weil die Kosten aus dem Ruder liefen, wurde er während der Dreharbeiten entlassen. Wise brachte den Film zu Ende und trat später dafür ein, dass Robbins die Nennung als Co-Regisseur behielt.
+
+### Hinter den Kulissen
+
+Die Gesangsstimme von Natalie Wood wurde von Marni Nixon nachsynchronisiert — ohne dass Wood davon wusste, obwohl sie die Lieder selbst eingesungen hatte. Auch Richard Beymer wurde nachvertont, von Jimmy Bryant. Nixons Arbeit wurde zum Vorbild für alle späteren "Ghost Singer".
+
+Kritisiert wurde von Anfang an die Besetzung der puerto-ricanischen Rollen: Sie wurden überwiegend mit nicht-puerto-ricanischen Darstellern besetzt und dunkler geschminkt. Rita Moreno, selbst aus Puerto Rico, hat diese Praxis später mehrfach öffentlich beanstandet.
+
+### Einordnung & Wirkung
+
+Der Film gewann zehn Oscars bei elf Nominierungen — bis heute die meisten für ein Filmmusical.
+
+Er war der erfolgreichste Film des Jahres 1961 mit weltweit 44,1 Millionen Dollar und blieb das erfolgreichste Musical, bis "Meine Lieder — meine Träume" ihn 1965 ablöste.
+
+Steven Spielberg drehte 2021 eine Neuverfilmung, die die Besetzungsfrage bewusst anders löste und puerto-ricanische Rollen mit entsprechenden Darstellern besetzte.` },
+  {
+    bereich: 'titel', schluessel: 'series:67198', locale: 'de-de',
+    text: `### Worum es geht
+
+Michael Burnham ist erste Offizierin der USS Shenzhou, als es an einem Sternenhaufen zum ersten Kontakt mit den Klingonen seit Jahrzehnten kommt. Ihr Versuch, einen Krieg zu verhindern, löst genau diesen aus — und sie wird als erste Meuterin der Sternenflotte verurteilt.
+
+Aus der Haft holt sie der Kapitän der USS Discovery, eines Forschungsschiffs mit einem Antrieb, der auf einem Pilzgeflecht beruht und Sprünge an jeden Punkt des Universums erlaubt. Nach zwei Staffeln springt die Besatzung über 900 Jahre in die Zukunft, ins 32. Jahrhundert — in eine Föderation, die es fast nicht mehr gibt.
+
+### Entstehungsgeschichte
+
+Erdacht wurde die Serie von Bryan Fuller und Alex Kurtzman für den Streamingdienst CBS All Access, der später in Paramount+ aufging. Sie lief von 2017 bis 2024 über fünf Staffeln mit 65 Folgen.
+
+Die Leitung wechselte mehrfach. Fuller stieg wegen künstlerischer Differenzen mit CBS und terminlicher Verpflichtungen aus. Gretchen J. Berg und Aaron Harberts übernahmen und wurden während der zweiten Staffel entlassen. Danach führte Kurtzman die Serie, ab der dritten Staffel gemeinsam mit Michelle Paradise.
+
+### Hinter den Kulissen
+
+Es ist die erste Star-Trek-Serie seit "Enterprise" von 2005 und war zugleich der Titel, mit dem CBS seinen eigenen Streamingdienst aufbaute.
+
+Sonequa Martin-Green spielt Michael Burnham, die im Verlauf zur Kapitänin wird — die erste Star-Trek-Serie, deren Hauptfigur nicht von Beginn an das Kommando führt. Zum Ensemble gehören Doug Jones, Anthony Rapp, Mary Wiseman und Jason Isaacs.
+
+Der Zeitsprung ins 32. Jahrhundert war eine bewusste Lösung: Als Vorgeschichte zur Originalserie angelegt, geriet die Serie zunehmend in Widerspruch zu deren Technikstand.
+
+### Einordnung & Wirkung
+
+Die Serie brachte CBS All Access die bis dahin höchsten Abonnentenzahlen und wurde dessen meistgesehene Eigenproduktion. Sie gewann mehrere Emmys.
+
+Ihre eigentliche Wirkung liegt anderswo: Nach zwölf Jahren ohne neue Star-Trek-Serie stieß sie eine ganze Reihe an — "Picard", "Lower Decks", "Strange New Worlds" und weitere entstanden in ihrem Gefolge.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10663', locale: 'de-de',
+    text: `### Worum es geht
+
+Bobby Boucher ist 31, lebt bei seiner Mutter in den Sümpfen Louisianas und arbeitet als Wasserträger für ein College-Footballteam, das ihn schikaniert. Trinkwasser ist sein Fachgebiet; er hat dazu Ansichten, die niemand hören will.
+
+Nach seinem Rauswurf heuert er bei den Mud Dogs an, der schlechtesten Mannschaft der Liga. Als ihn ein Spieler beleidigt, rennt Trainer Klein ihn um — und stellt fest, dass Bobbys aufgestaute Wut aus ihm einen außergewöhnlichen Verteidiger macht. Dagegen stehen zwei Hindernisse: seine Mutter, die Football für Teufelszeug hält, und der Umstand, dass er nie die Schule beendet hat.
+
+### Entstehungsgeschichte
+
+Das Drehbuch schrieben Adam Sandler und Tim Herlihy, Regie führte Frank Coraci. Produziert wurde der Film von Touchstone Pictures mit einem Budget von 23 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Neben Sandler spielen Kathy Bates als Mutter, Henry Winkler als Trainer Klein sowie Fairuza Balk und Jerry Reed. In kurzen Auftritten sind Größen des American Football zu sehen, darunter Lawrence Taylor und Jimmy Johnson.
+
+Kathy Bates hatte zu diesem Zeitpunkt bereits einen Oscar für "Misery" — ihre Besetzung in einer Sandler-Komödie war eine Entscheidung gegen die Erwartung und trägt einen erheblichen Teil des Films.
+
+Bobbys Sprechweise, ein stark überzeichneter Cajun-Akzent, ist das auffälligste Mittel der Rolle und zugleich der Grund, warum der Film in Louisiana selbst zwiespältig aufgenommen wurde.
+
+### Einordnung & Wirkung
+
+Der Start am 6. November 1998 brachte 39,4 Millionen Dollar — damals Rekord für ein Novemberwochenende. Weltweit spielte der Film 190,2 Millionen Dollar ein.
+
+Die Kritik lehnte ihn überwiegend ab: 33 Prozent bei Rotten Tomatoes, Roger Ebert urteilte negativ. Janet Maslin von der New York Times widersprach und nannte ihn so fröhlich absurd, dass man sich ihm schwer entziehen könne.
+
+Bis 2020 blieb er die erfolgreichste Sportkomödie überhaupt. Sandler äußerte sich 2022 offen gegenüber einer Fortsetzung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:736526', locale: 'de-de',
+    text: `### Worum es geht
+
+Beim Bau eines Eisenbahntunnels durch die Dovre-Berge sprengt ein Bautrupp etwas frei, das dort seit Jahrhunderten lag. Was sich aus dem Berg erhebt, ist rund fünfzig Meter groß und geht nach Süden.
+
+Die Paläontologin Nora Tidemann wird nach Oslo geholt, weil niemand die Spuren einordnen kann. Ihr Vater, ein von der Fachwelt verlachter Folkloreforscher, hat vor Jahrzehnten genau davor gewarnt. Was das Wesen sucht, ist keine Zerstörung, sondern der Weg nach Hause — und was ihm zugestoßen ist, haben christliche Siedler zu verantworten, die seinesgleichen ausgerottet haben.
+
+### Entstehungsgeschichte
+
+Regie führte Roar Uthaug, der zuvor mit "The Wave" und der "Tomb Raider"-Verfilmung von 2018 bekannt geworden war. Er hatte die Idee, norwegische Sagengestalten in einem Monsterfilm zu verwenden, über zwei Jahrzehnte mit sich getragen.
+
+Der Film erschien am 1. Dezember 2022 bei Netflix und läuft 101 Minuten.
+
+### Hinter den Kulissen
+
+Gedreht wurde von August bis November 2021 an mehreren Orten in Norwegen, unter anderem in Askim, Dovre und Lom.
+
+Die Hauptrollen spielen Ine Marie Wilmann als Nora, Kim Falck und Mads Sjøgård Pettersen. Zusätzlich entstand eine englische Sprachfassung.
+
+Die Gestalt des Trolls folgt der norwegischen Überlieferung genau: Moos und Bäume wachsen auf ihm, weil er lange stillgelegen hat, und er verträgt kein direktes Sonnenlicht — was im Film zur entscheidenden Schwachstelle wird.
+
+### Einordnung & Wirkung
+
+Der Film gehört zu den meistgesehenen nicht-englischsprachigen Produktionen in der Geschichte von Netflix.
+
+Die Kritik reagierte gut: 87 Prozent bei Rotten Tomatoes, mit dem Befund, er schreibe die Regeln des Monsterfilms nicht neu, liefere aber solide Actionszenen und eine tragfähige Mythologie.
+
+Netflix bewilligte eine Fortsetzung, die am 1. Dezember 2025 erschien — mit demselben Regisseur und demselben Autor.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11679', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Geheimdienstabteilung, die das xXx-Programm betreibt, wird von innen angegriffen: Verteidigungsminister Deckert plant einen Staatsstreich gegen den amerikanischen Präsidenten. Agent Gibbons überlebt und braucht einen neuen Mann.
+
+Er holt Darius Stone aus dem Militärgefängnis, wo dieser wegen Befehlsverweigerung sitzt. Stone hat Gibbons Jahre zuvor gedeckt und verlangt dafür seine Freiheit. Was folgt, sind Autoverfolgungen durch Washington, ein gekaperter Zug und ein Angriff auf das Kapitol.
+
+### Entstehungsgeschichte
+
+Vin Diesel, der die Reihe 2002 begründet hatte, stieg gemeinsam mit Regisseur Rob Cohen wegen Meinungsverschiedenheiten über das Drehbuch aus — noch vor der Veröffentlichung des ersten Teils. Ice Cube übernahm die Hauptrolle als anderer Agent desselben Programms.
+
+Regie führte Lee Tamahori, der zuvor den Bond-Film "Stirb an einem anderen Tag" gedreht hatte. Simon Kinberg schrieb das Drehbuch aus zwei konkurrierenden Entwürfen zusammen; der verworfene enthielt eine grundlegend andere Handlung.
+
+### Hinter den Kulissen
+
+Das Budget lag bei 60 Millionen Dollar, die tatsächlichen Gesamtausgaben werden mit 113,1 Millionen angegeben.
+
+Die Reihe war ursprünglich als Gegenentwurf zu James Bond angelegt — ein Extremsportler statt eines Agenten im Anzug. Dass ausgerechnet ein Bond-Regisseur den zweiten Teil übernahm, hebt diesen Gegensatz weitgehend auf.
+
+### Einordnung & Wirkung
+
+Der Start brachte 12,7 Millionen Dollar und Platz drei; weltweit spielte der Film 71,1 Millionen ein und blieb damit deutlich unter den Gesamtkosten.
+
+Die Kritik lehnte ihn scharf ab: 17 Prozent bei Rotten Tomatoes mit dem Befund, er sei noch abwegiger und unglaubwürdiger als der erste Teil, dazu 37 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein B plus.
+
+Es war der letzte Teil der Reihe bei Columbia Pictures; für die Fortsetzung von 2017 übernahm Paramount — dann wieder mit Vin Diesel.` },
 ];
