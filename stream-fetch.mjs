@@ -142,14 +142,19 @@ const MAX_ANBIETER   = Number(process.env.STREAM_MAX_PROVIDER || 12);
  * dahinter kommen weiterhin zum Zug. Die Reihenfolge sorgt dafuer, dass die
  * grossen Namen des Landes zuerst hineinpassen.
  *
- * 60.000 ist so gewaehlt, dass GB (52.400) und ES (51.776) vollstaendig
- * hineinpassen -- ohne das Budget waeren dort ausgerechnet Sky Go und
- * Paramount+ herausgefallen, also genau die Dienste, wegen derer der Ausbau
- * gemacht wurde. Gebremst wird damit nur die USA (59.619 statt 76.975); dort
- * bleiben die beiden Live-TV-Pakete fuboTV und Philo draussen, deren Kataloge
- * zusammen 26.000 Zeilen ausmachen. Groesste zu erwartende Auslieferung damit
- * rund 14 MB JSON / 5 MB gzip (gemessen: AT 27.755 Zeilen = 6,81 MB / 2,35 MB). */
-const MAX_ZEILEN     = Number(process.env.STREAM_MAX_ZEILEN || 60000);
+ * 90.000 liegt ueber der groessten vorab durchgerechneten Region (US, 76.975
+ * Zeilen). Bei diesem Wert wird also aktuell KEINE Region beschnitten -- das
+ * Budget ist ein Sicherheitsnetz gegen kuenftiges Wachstum, keine laufende
+ * Bremse. Bewusst so entschieden: Ein niedrigeres Budget haette in GB und ES
+ * ausgerechnet Sky Go und Paramount+ gekostet, also genau die Dienste, wegen
+ * derer der Ausbau gemacht wurde.
+ *
+ * Der Preis steht damit in den USA: 76.975 Zeilen bedeuten grob 19 MB JSON /
+ * 6,5 MB gzip je Seitenaufruf (gemessen: AT 27.755 Zeilen = 6,81 MB /
+ * 2,35 MB). Wird das zum Problem, ist STREAM_MAX_ZEILEN die Stellschraube --
+ * bei 60.000 fielen dort die beiden Live-TV-Pakete fuboTV und Philo heraus
+ * (zusammen 26.000 Zeilen), ohne eine andere Region anzutasten. */
+const MAX_ZEILEN     = Number(process.env.STREAM_MAX_ZEILEN || 90000);
 // Unter so vielen Abo-Titeln lohnt ein Anbieter die Laufzeit nicht.
 const MIN_TITEL      = Number(process.env.STREAM_MIN_TITEL || 50);
 // Ab diesem Abo-Anteil gilt ein Anbieter als Abo-Anbieter (siehe oben).

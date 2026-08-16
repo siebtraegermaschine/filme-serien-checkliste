@@ -436,11 +436,18 @@ gesamt.
 
 Weil die Kataloge weit auseinandergehen (Amazon Prime Video hat in den USA
 28.476 Titel, Apple TV+ überall rund 320), begrenzt nicht die Anbieterzahl,
-sondern ein **Zeilen-Budget je Region** (`STREAM_MAX_ZEILEN`, Standard 60.000).
-GB (52.400) und ES (51.776) passen vollständig hinein — ohne Budget wären dort
-ausgerechnet Sky Go und Paramount+ herausgefallen; die USA werden von 76.975
-auf 59.619 gebremst, draußen bleiben die Live-TV-Pakete fuboTV und Philo.
-Größte zu erwartende Auslieferung damit ~14 MB JSON / ~5 MB gzip.
+sondern ein **Zeilen-Budget je Region** (`STREAM_MAX_ZEILEN`, Standard 90.000).
+Der Wert liegt bewusst über der größten Region (US, 76.975): Aktuell wird
+**keine** Region beschnitten, das Budget ist ein Sicherheitsnetz gegen
+künftiges Wachstum. Ein knapperer Wert hätte in GB und ES ausgerechnet Sky Go
+und Paramount+ gekostet — genau die Dienste, wegen derer der Ausbau gemacht
+wurde.
+
+Der Preis steht damit in den USA: 76.975 Zeilen bedeuten grob **19 MB JSON /
+6,5 MB gzip** je Seitenaufruf, gegenüber heute 6,9 MB. Falls das stört, ist
+`STREAM_MAX_ZEILEN` die Stellschraube (auch als Repository-Variable im
+Workflow setzbar): Bei 60.000 fielen dort die Live-TV-Pakete fuboTV und Philo
+heraus — zusammen 26.000 Zeilen —, ohne eine andere Region anzutasten.
 
 *Ingest.* Die Zeilen gehen in Bündeln zu 500 in die Datenbank statt einzeln —
 28.000 Einzelabfragen je Region (77.000 für die USA) liefen in den

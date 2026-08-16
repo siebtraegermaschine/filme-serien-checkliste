@@ -36,11 +36,13 @@ on:
     # 0 Rate-Limit-Bremsungen. Ueber die ganze Kette einmalig etwa +2-3 h;
     # danach greift die Skip-Liste auch fuer diese Titel.
     #
-    # Ein Zeilen-Budget je Region (STREAM_MAX_ZEILEN, Standard 60.000) haelt
-    # die groessten Maerkte in Schach: GB (52.400) und ES (51.776) passen
-    # vollstaendig hinein, die USA werden von 76.975 auf 59.619 gebremst
-    # (draussen bleiben die Live-TV-Pakete fuboTV und Philo). Damit liegt die
-    # Summe bei rund einer Million Zeilen statt 1.057.089.
+    # Ein Zeilen-Budget je Region (STREAM_MAX_ZEILEN, Standard 90.000) deckelt
+    # die groessten Maerkte. Es liegt bewusst UEBER der groessten Region (US,
+    # 76.975) -- aktuell wird also nichts beschnitten, es ist ein
+    # Sicherheitsnetz gegen kuenftiges Wachstum. Der Preis dafuer steht in den
+    # USA: rund 19 MB JSON / 6,5 MB gzip je Seitenaufruf. Bei 60.000 fielen
+    # dort die Live-TV-Pakete fuboTV und Philo heraus (zusammen 26.000
+    # Zeilen), ohne eine andere Region anzutasten.
     #
     # Wird die Kette zu lang, sind STREAM_MAX_ZEILEN, STREAM_MAX_PROVIDER
     # (Anbieter je Region) und TMDB_PAUSE_MS (Seitenpause) die Stellschrauben
