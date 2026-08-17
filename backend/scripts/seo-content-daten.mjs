@@ -28009,4 +28009,739 @@ Die Aufnahme war deutlich negativ: 10 Prozent bei Rotten Tomatoes.
 Der Vorwurf zielte weniger auf die Ausgangslage als auf die Ausführung: Statt der Atmosphäre, die der Schauplatz hergibt, setze der Film auf plötzliche Schreckmomente mit untoten Gestalten.
 
 Natalie Dormers Doppelrolle wurde dabei überwiegend positiv hervorgehoben — sie trägt einen Film, dem seine Kritiker fast alles andere absprachen.` },
+  // ---- Block 39 ----
+  {
+    bereich: 'titel', schluessel: 'series:126308', locale: 'de-de',
+    text: `### Worum es geht
+
+Japan um 1600. Der englische Seemann John Blackthorne strandet mit seinem Schiff an der japanischen Küste — in einem Land, in dem bis dahin die Portugiesen die einzigen Europäer waren.
+
+Er trifft auf Yoshii Toranaga, einen mächtigen Fürsten, der sich gegen die übrigen Regenten des Landes behaupten muss. Blackthornes Wissen über Europa, über Schiffe und über die Rivalitäten der Christenheit wird darin zum Faustpfand. Zwischen beiden steht Toda Mariko, die als Dolmetscherin eingesetzt wird und zwischen Pflicht und Loyalität zerrieben wird.
+
+### Entstehungsgeschichte
+
+Rachel Kondo und Justin Marks entwickelten die Serie nach James Clavells Roman von 1975. Eine erste Verfilmung als Mehrteiler gab es bereits 1980.
+
+Hiroyuki Sanada spielt Toranaga, Cosmo Jarvis den Blackthorne, Anna Sawai die Mariko, Tadanobu Asano den Yabushige, Takehiro Hira den Ishido, Tommy Bastow den Pater Alvito und Fumi Nikaido die Ochiba.
+
+Die Musik stammt von Atticus Ross, Leopold Ross und Nick Chuba.
+
+### Hinter den Kulissen
+
+Gedreht wurde von September 2021 bis Juni 2022 in Vancouver.
+
+Der wesentliche Unterschied zur Fassung von 1980 liegt in der Sprache. Die Serie ist zweisprachig angelegt und überwiegend japanisch; hinzu kommen Niederländisch und Portugiesisch. Die japanischen Figuren sind damit nicht länger das Fremde, das dem englischen Helden erklärt werden muss — sie führen die Handlung, und Blackthorne ist derjenige, der nichts versteht.
+
+Das verschiebt auch das Erzähltempo: Vieles wird über Andeutung und Etikette verhandelt statt über offene Rede.
+
+### Einordnung & Wirkung
+
+Die zehn Folgen liefen wöchentlich vom 27. Februar bis zum 23. April 2024 bei FX und FX on Hulu.
+
+Die Bewertungen sind außergewöhnlich: 99 Prozent bei Rotten Tomatoes mit einem Schnitt von 8,7 von 10, 85 von 100 bei Metacritic. Wiederkehrendes Urteil war, die Serie sei nicht nur prachtvoll ausgestattet, sondern übertreffe die Fassung von 1980.
+
+Bei den Emmys gewann sie 18 Auszeichnungen und war die erste japanischsprachige Serie überhaupt, die als bestes Drama ausgezeichnet wurde. Hiroyuki Sanada und Anna Sawai waren die ersten japanischen Darsteller, die in ihren jeweiligen Schauspielkategorien gewannen.
+
+Eine zweite und eine dritte Staffel gingen in Entwicklung; die Dreharbeiten zur zweiten begannen im Januar 2026.` },
+  {
+    bereich: 'titel', schluessel: 'movie:614', locale: 'de-de',
+    text: `### Worum es geht
+
+Der 78-jährige Medizinprofessor Isak Borg fährt mit dem Auto zur Feier seines fünfzigjährigen Promotionsjubiläums.
+
+Die Reise wird zur Abrechnung. Träume und Erinnerungen holen ihn ein und führen ihm vor, was er über ein langes Leben hinweg vermieden hat: Nähe. Was ihm als Sachlichkeit galt, erscheint von außen als Kälte — gegenüber seiner Familie und gegenüber allen, die etwas von ihm wollten.
+
+### Entstehungsgeschichte
+
+Ingmar Bergman schrieb das Drehbuch und führte Regie. Der Film entstand unter dem unmittelbaren Eindruck seiner gescheiterten dritten Ehe und familiärer Zerwürfnisse.
+
+Victor Sjöström spielt Isak Borg. Es war seine letzte Filmrolle.
+
+Daneben sind Ingrid Thulin, Bibi Andersson und Gunnar Björnstrand zu sehen — drei Namen, die zum festen Ensemble Bergmans gehörten.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Schwarzweiß zwischen Juli und August 1957; der Film lief am 26. Dezember 1957 an.
+
+Für den betagten Hauptdarsteller waren die Dreharbeiten körperlich belastend.
+
+Formal ist der Aufbau ungewöhnlich: Eine Autofahrt in der Gegenwart wird immer wieder von Traumbildern unterbrochen, die ohne Ankündigung einsetzen und ohne Erklärung enden. Der Zuschauer muss selbst entscheiden, was erinnert, was geträumt und was gefürchtet ist.
+
+Dass ein alter Mann von einem alten Mann gespielt wird, der selbst zur Geschichte des Kinos gehört, gibt dem Film eine zusätzliche Ebene, die Bergman bewusst gesucht hat.
+
+### Einordnung & Wirkung
+
+Der Film gewann 1958 den Goldenen Bären der Berlinale. Hinzu kamen ein Golden Globe und eine Oscar-Nominierung für das beste Originaldrehbuch.
+
+Die Kritik urteilte überwiegend positiv und hat ihr Urteil seither bestätigt: In der Umfrage der Zeitschrift Sight & Sound von 2012 stand er unter den hundert besten Filmen aller Zeiten.
+
+Er gilt als eine der zugänglichsten Arbeiten Bergmans und zugleich als eine der schonungslosesten — weil er keine Wendung anbietet, die das versäumte Leben nachträglich in Ordnung bringt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:404', locale: 'de-de',
+    text: `### Worum es geht
+
+Alvin Straight ist 73 und lebt in Iowa. Als er erfährt, dass sein Bruder, mit dem er seit Jahren zerstritten ist, einen Schlaganfall hatte, will er ihn sehen.
+
+Autofahren darf er nicht mehr, seine Augen und seine Hüften machen das nicht mit. Also fährt er mit dem Aufsitzrasenmäher — knapp 400 Kilometer von Iowa nach Wisconsin. Freunde halten ihn für verrückt, seine Tochter Rose kann ihn nicht aufhalten. Unterwegs trifft er Menschen, die ihm zuhören, und erzählt ihnen Dinge, die er zu Hause nie ausgesprochen hat.
+
+### Entstehungsgeschichte
+
+Regie führte David Lynch. Es ist der einzige seiner Kinofilme, für den er das Drehbuch nicht selbst schrieb; es stammt von Mary Sweeney und John E. Roach. Das Budget lag bei etwa zehn Millionen Dollar, gedreht wurde im Spätsommer und Herbst 1998.
+
+Richard Farnsworth spielt Alvin Straight, Sissy Spacek die Tochter Rose. Die Kamera führte Freddie Francis.
+
+Angelo Badalamenti komponierte die Musik — ausnahmsweise mit Country-Klängen statt mit den Klangflächen, für die er bei Lynch bekannt war.
+
+### Hinter den Kulissen
+
+Die Geschichte ist wahr. Alvin Straight, geboren 1920 und gestorben 1996, lebte in Laurens in Iowa und legte die 470 Kilometer im Sommer 1994 tatsächlich mit einem Rasenmäher zurück, um seinen Bruder Henry zu besuchen. Seine Höchstgeschwindigkeit betrug acht Kilometer in der Stunde.
+
+Ungewöhnlich ist der Verleih: Disney brachte den Film heraus — eine Zusammenarbeit, die zu diesem Regisseur nicht offensichtlich passt. Es ist zudem Lynchs einziger Kinofilm mit der amerikanischen Freigabe ohne jede Altersbeschränkung.
+
+### Einordnung & Wirkung
+
+Die Kritik reagierte außergewöhnlich gut: 95 Prozent bei Rotten Tomatoes.
+
+Richard Farnsworth wurde als bester Hauptdarsteller für den Oscar nominiert. Hinzu kamen Nominierungen bei den Golden Globes und den Independent Spirit Awards.
+
+Der Film steht quer in Lynchs Werk und wird gerade deshalb oft als Einstieg empfohlen: keine Doppelbödigkeit, keine Rätsel, keine Gewalt. Was bleibt, ist sein Blick auf das amerikanische Land — und ein alter Mann, der eine Sache zu Ende bringen will, solange noch Zeit ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:3035', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein ehrgeiziger Wissenschaftler setzt aus Leichenteilen einen Körper zusammen und erweckt ihn mit elektrischem Strom zum Leben. Versehentlich erhält das Geschöpf dabei das Gehirn eines Mörders.
+
+Was folgt, macht der Film nicht zur Frage von Bosheit. Das Wesen kommt sprachlos und ohne Namen zur Welt, wird eingesperrt und geschlagen, flieht und tötet mehrere Menschen, ohne zu begreifen, was es tut. Am Ende steht es in einer brennenden Windmühle.
+
+### Entstehungsgeschichte
+
+Regie führte James Whale. Das Drehbuch schrieben John L. Balderston und Francis Edward Faragoh nach Peggy Weblings Bühnenstück von 1927, das seinerseits auf Mary Shelleys Roman zurückgeht.
+
+Produziert wurde der Film von Universal Pictures mit einem Budget von 291.000 Dollar. Die Weltpremiere fand am 21. November 1931 statt, die deutsche Erstaufführung am 18. Mai 1932.
+
+Boris Karloff spielt das Geschöpf — die Rolle, mit der ihm der Durchbruch gelang.
+
+### Hinter den Kulissen
+
+Das Aussehen stammt von Maskenbildner Jack P. Pierce: der kantige Schädel und die übrigen Merkmale, die bis heute das Bild von Frankensteins Geschöpf bestimmen — obwohl sie mit Mary Shelleys Beschreibung wenig zu tun haben.
+
+Karloff trug herabhängende Lider und ließ sich eine Zahnbrücke entfernen, damit die Wange einfiel.
+
+Zwei Szenen wurden zensiert: Frankensteins Vergleich seiner selbst mit Gott und die Szene mit dem kleinen Mädchen, die tragisch endet. Dem Film wurde außerdem ein Vorspann vorangestellt, der das Publikum vor den kommenden Bildern warnte.
+
+### Einordnung & Wirkung
+
+Die zeitgenössische Kritik urteilte ablehnend. Heutige Würdigungen nennen ihn einen absoluten Klassiker seines Genres.
+
+Der Film prägte die Formensprache des Horrorkinos dauerhaft — das Labor, die Erweckung, der Mob mit Fackeln — und stellte zugleich eine Frage, an der das Genre bis heute arbeitet: wer in dieser Geschichte eigentlich das Ungeheuer ist.
+
+1991 wurde er in das National Film Registry aufgenommen, 1998 in die AFI-Liste der hundert besten amerikanischen Filme.` },
+  {
+    bereich: 'titel', schluessel: 'movie:475', locale: 'de-de',
+    text: `### Worum es geht
+
+Texas in den dreißiger Jahren, mitten in der Wirtschaftskrise. Bonnie Parker und Clyde Barrow tun sich zusammen und beginnen, Banken auszurauben.
+
+Sie holen Verstärkung — Clydes Bruder Buck und den jungen C. W. Moss — und werden als Barrow-Bande berühmt. Die Zeitungen machen sie zu Helden der kleinen Leute, die Polizei setzt sich an ihre Fersen. Der Film führt beides zusammen: den Rausch der Berühmtheit und das Wissen, dass diese Geschichte in einem Hinterhalt endet.
+
+### Entstehungsgeschichte
+
+Regie führte Arthur Penn. Das Originaldrehbuch schrieben die Esquire-Journalisten David Newman und Robert Benton, die Einflüsse der französischen Nouvelle Vague einarbeiteten. Robert Towne überarbeitete es erheblich — unter anderem ersetzte er Clydes ursprünglich angelegte Bisexualität durch Impotenz.
+
+Warren Beatty spielt Clyde und trat zugleich als Produzent auf, was für einen Hauptdarsteller jener Zeit ungewöhnlich war. Faye Dunaway spielt Bonnie, Gene Hackman den Buck, Michael J. Pollard den C. W. Moss.
+
+United Artists und Columbia Pictures lehnten den Stoff ab; finanziert wurde er schließlich von Warner Bros.
+
+### Hinter den Kulissen
+
+Die Gewaltdarstellung war für ihre Zeit beispiellos intensiv. Daran entzündete sich die Auseinandersetzung um den Film — und zwar weniger an der Frage, ob so etwas geschehen ist, als daran, ob man es so zeigen darf.
+
+Erzählerisch bricht der Film mit dem klassischen Hollywood: Er wechselt übergangslos zwischen Komik und Tod, verweigert eine moralische Instanz und lässt seine Figuren attraktiv bleiben, auch wenn sie morden.
+
+### Einordnung & Wirkung
+
+Bei der Premiere fielen die Kritiken überwiegend negativ aus. Bosley Crowther nannte den Film lächerlich und warf ihm Gewaltverherrlichung vor.
+
+Pauline Kael schrieb daraufhin eine ausführliche Gegenkritik, die zu einem der einflussreichsten Texte der amerikanischen Filmkritik wurde. Ihr Einwand: Zu viele wollten, dass das Gesetz die Aufgabe der Filmkritik übernehme; Filme seien kein unmittelbares Vorbild für Verhalten. Roger Ebert nannte den Film später einen Meilenstein der amerikanischen Filmgeschichte.
+
+Bei den Oscars 1968 gab es acht Nominierungen, darunter für den besten Film und die Regie, und zwei Auszeichnungen: Estelle Parsons als beste Nebendarstellerin und Burnett Guffey für die Kamera.
+
+Gemeinsam mit "Die Reifeprüfung", das im selben Jahr erschien, markiert der Film den Beginn des New Hollywood. 1992 kam er in das National Film Registry; das American Film Institute führt ihn auf Rang 27 seiner hundert besten Filme.` },
+  {
+    bereich: 'titel', schluessel: 'movie:654', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Hafen von Hoboken bestimmt eine korrupte Gewerkschaft, wer arbeiten darf. Ihr Vorsitzender Johnny Friendly regiert mit Gewalt; wer redet, wird beseitigt.
+
+Terry Malloy war Boxer und ist heute Handlanger. Als er Zeuge wird, wie die Bande einen Mann tötet, gerät er zwischen sein Gewissen und die Loyalität, die er dem Milieu schuldet. Als auch sein Bruder ermordet wird, sagt er gegen die Gewerkschaft aus — und bringt damit die Hafenarbeiter dazu, sich ihre Unabhängigkeit zurückzuholen.
+
+### Entstehungsgeschichte
+
+Regie führte Elia Kazan, das Drehbuch schrieb Budd Schulberg nach der Reportagereihe des Journalisten Malcolm Johnson über das Verbrechen am Hafen, die 1948 erschienen war.
+
+Marlon Brando spielt Terry Malloy. Eva Marie Saint gibt hier ihr Filmdebüt; daneben sind Karl Malden und Lee J. Cobb als Johnny Friendly zu sehen.
+
+Produzent Sam Spiegel finanzierte den Film mit 800.000 Dollar. Gedreht wurde in 35 Tagen an Originalschauplätzen in Hoboken in New Jersey, was dem Milieu seine Glaubwürdigkeit gibt.
+
+### Hinter den Kulissen
+
+Der Film verbindet den italienischen Neorealismus mit dem Method Acting — eine Kombination, die das amerikanische Kino nachhaltig verändert hat.
+
+Am bekanntesten ist die Szene im Taxi, in der Terry seinen Bruder auf die Korruption anspricht. Es ist ein Gespräch über Verrat und faule Kompromisse, geführt auf engstem Raum und ohne erhobene Stimme — und es gilt als Lehrstück des Method Acting.
+
+Nicht zu trennen ist der Film von seinem Entstehungsumfeld: Kazan und Schulberg hatten beide vor dem Ausschuss für unamerikanische Umtriebe ausgesagt und frühere kommunistische Weggefährten benannt. Terrys Aussage wurde vielfach als Rechtfertigung dieser Entscheidung gelesen. Schulberg hat dieser Deutung widersprochen.
+
+### Einordnung & Wirkung
+
+Der Film gewann acht Oscars, darunter als bester Film und für Marlon Brando als besten Hauptdarsteller.
+
+Die zeitgenössische Kritik lobte den Realismus. Zugleich gab es den Vorwurf, die wohlwollende Zeichnung eines Denunzianten sei Propaganda im Sinne der McCarthy-Ära — ein Einwand, der bis heute erhoben wird.
+
+Das American Film Institute führt den Film auf Rang 19 seiner hundert besten Filme. Er gilt als Meilenstein eines neuen Realismus im amerikanischen Kino.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9665', locale: 'de-de',
+    text: `### Worum es geht
+
+Der junge Bostoner Offizier Robert Gould Shaw erhält den Auftrag, die 54th Massachusetts Infantry aufzubauen — die erste historisch belegte Kampfeinheit aus Schwarzen Soldaten im Amerikanischen Bürgerkrieg.
+
+Der Film zeigt die Ausbildung dieser Männer, die Konflikte zwischen ihnen und mit ihren Offizieren und schließlich den Angriff auf Fort Wagner im Jahr 1863. Militärisch scheiterte dieser Angriff. Seine Bedeutung lag anderswo.
+
+### Entstehungsgeschichte
+
+Regie führte Edward Zwick, das Drehbuch schrieb Kevin Jarre auf Grundlage eines Buches von Lincoln Kirstein. Produziert wurde der Film von Freddie Fields, die Musik komponierte James Horner, die Kamera führte Freddie Francis, den Schnitt besorgte Steven Rosenblum.
+
+Matthew Broderick spielt Colonel Shaw, Denzel Washington den Soldaten Trip, Morgan Freeman den Sergeant Major John Rawlins. In weiteren Rollen sind Cary Elwes und Andre Braugher zu sehen.
+
+### Hinter den Kulissen
+
+Der historische Hintergrund ist belegt: Die 54th Massachusetts Volunteer Infantry war die erste Schwarze Infanterieeinheit der Union. Im Verlauf des Krieges kämpften rund 180.000 Schwarze Soldaten für die Nordstaaten.
+
+Der Film erzählt über weite Strecken aus der Sicht des weißen Offiziers, der die Einheit befehligt — ein Punkt, der ihm bis heute vorgehalten wird, obwohl die Soldatenfiguren erheblichen Raum bekommen und der Film ihre Auseinandersetzungen untereinander ernst nimmt.
+
+James Horners Musik, geschrieben für Chor und Orchester, hat wesentlichen Anteil an der Wirkung und wurde in den Jahren danach vielfach nachgeahmt.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte sehr positiv: 95 Prozent bei Rotten Tomatoes, 78 von 100 bei Metacritic.
+
+Der Film gewann drei Oscars — für den Ton, für die Kamera und für Denzel Washington als besten Nebendarsteller. Für Washington war es die erste dieser Auszeichnungen.
+
+2025 wurde der Film in das National Film Registry aufgenommen.
+
+Seine anhaltende Bedeutung liegt darin, dass er einen Teil der amerikanischen Kriegsgeschichte einem großen Publikum überhaupt erst bekannt gemacht hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10669', locale: 'de-de',
+    text: `### Worum es geht
+
+Vier Geschäftsleute aus Atlanta fahren in die Berge von Georgia, um einen abgelegenen Fluss mit dem Kanu hinabzufahren — bevor er aufgestaut wird und das Tal verschwindet.
+
+Unterwegs geraten sie an Männer aus der Gegend, und es kommt zu Gewalt. Zwei der Angreifer sterben. Danach steht die Gruppe vor der Frage, ob sie die Behörden verständigt oder die Sache verschweigt. Sie entscheidet sich für eine Version, die alle vier mittragen müssen: Sie sagen später aus, einer der Männer sei ertrunken.
+
+### Entstehungsgeschichte
+
+Regie führte John Boorman. Das Drehbuch schrieb James Dickey nach seinem eigenen Debütroman von 1970; Dickey tritt im Film zudem als Sheriff Bullard auf.
+
+Jon Voight, Burt Reynolds, Ned Beatty und Ronny Cox spielen die vier Männer. In Nebenrollen sind Bill McKinney und Billy Redden zu sehen, der Junge mit dem Banjo.
+
+Das Budget betrug zwei Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde am Chattooga River in Georgia, mit Szenen in Rabun County.
+
+Das bekannteste Überbleibsel des Films ist ein Musikstück: "Dueling Banjos" gewann 1974 einen Grammy als beste Country-Instrumentalaufnahme. Die Szene, in der es entsteht — ein Wettstreit zwischen Gitarre und Banjo, gespielt von einem Jungen aus der Gegend — ist die letzte freundliche Begegnung des Films.
+
+Danach kehrt sich alles um: Was als Ausflug in eine unberührte Natur beginnt, wird zu einer Erfahrung, gegen die die Männer nichts in der Hand haben — weder ihre Ausrüstung noch ihre Herkunft.
+
+### Einordnung & Wirkung
+
+Der Film spielte rund 60 Millionen Dollar ein und war damit ein sehr großer wirtschaftlicher Erfolg.
+
+Er war für drei Oscars nominiert — bester Film, Regie und Schnitt — gewann aber keinen.
+
+2008 wurde er in das National Film Registry aufgenommen, als kulturell, historisch oder ästhetisch bedeutend.
+
+Seine Wirkung reicht über den Film hinaus: Er hat ein Bild vom armen ländlichen Süden der Vereinigten Staaten geprägt, das über Jahrzehnte in Filmen und Fernsehserien wiederkehrte.` },
+  // ---- Block 40 ----
+  {
+    bereich: 'titel', schluessel: 'movie:121986', locale: 'de-de',
+    text: `### Worum es geht
+
+Frances Halladay ist 27, stammt aus Sacramento und lebt in Brooklyn. Sie tanzt in einer Kompanie, ohne fest engagiert zu sein, und teilt sich eine Wohnung mit ihrer besten Freundin Sophie.
+
+Dann zieht Sophie aus, und alles, was Frances für gesichert hielt, löst sich auf: die Wohnung, die Freundschaft, die Aussicht auf ein Engagement. Sie zieht von Untermiete zu Untermiete, und beruflich geht es rückwärts statt vorwärts. Am Ende nimmt sie eine Stelle an ihrer alten Hochschule an — und findet von dort aus zu einer eigenen Choreografie, mit der sie Erfolg hat.
+
+### Entstehungsgeschichte
+
+Regie führte Noah Baumbach, das Drehbuch schrieb er gemeinsam mit Greta Gerwig, die zugleich die Hauptrolle spielt.
+
+Neben Gerwig als Frances sind Mickey Sumner als Sophie, Adam Driver als Lev, Michael Zegen als Benji und Patrick Heusinger als Patch zu sehen.
+
+Produziert wurde der Film von Baumbach, Scott Rudin, Lila Yacoub und Rodrigo Teixeira. Die Kamera führte Sam Levy, den Schnitt besorgte Jennifer Lame, die Musik stammt von George Drakoulias.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Schwarzweiß — eine Entscheidung, die den Film unmittelbar in die Nähe des klassischen Kinos rückt und zugleich verhindert, dass New York als hübsche Kulisse erscheint.
+
+Erzählt wird in kurzen Abschnitten, die sich an Frances' wechselnden Wohnadressen entlanghangeln. Die Struktur führt das Thema vor: Der Film misst ein Leben daran, wo jemand gerade unterkommt.
+
+Für Greta Gerwig, die das Drehbuch mitgeschrieben hat und die Hauptrolle spielt, war es die Arbeit, mit der sie vom reinen Darstellerinnenfach in die Wahrnehmung als Autorin wechselte.
+
+### Einordnung & Wirkung
+
+Die Kritik reagierte begeistert. Eine Stimme nannte ihn die schönste Komödie des Sommers, eine andere hob hervor, wie echt Frances wirke, und sagte Gerwig den endgültigen Durchbruch voraus.
+
+Der Film gilt seither als einer der maßgeblichen amerikanischen Independentfilme seines Jahrzehnts — auch weil er eine Figur ernst nimmt, die von außen betrachtet scheitert, und ihr Scheitern weder ironisiert noch dramatisiert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:437586', locale: 'de-de',
+    text: `### Worum es geht
+
+Stevie ist dreizehn und lebt Mitte der neunziger Jahre in Los Angeles bei seiner Mutter und seinem älteren Bruder Ian, der ihn schlägt.
+
+Er entdeckt das Skateboardfahren und schließt sich einer Gruppe älterer Jungen an. Er lernt zu fahren, bekommt zum ersten Mal Anerkennung und wird Teil einer Clique, die ihm Halt gibt und ihn zugleich schneller erwachsen macht, als ihm guttut. Als die Spannungen innerhalb der Gruppe wachsen, endet eine Nacht mit einem betrunkenen Autofahrer und einem schweren Unfall.
+
+### Entstehungsgeschichte
+
+Der Schauspieler Jonah Hill gab mit diesem Film sein Regiedebüt und schrieb auch das Drehbuch. Er selbst tritt nicht auf. Hill war zuvor zweimal für den Oscar nominiert gewesen, für "Die Kunst zu gewinnen" und "The Wolf of Wall Street".
+
+Sunny Suljic spielt den Stevie, Lucas Hedges den Bruder Ian, Katherine Waterston die Mutter. Na-kel Smith spielt den Ray und trägt einen wesentlichen Teil des Films.
+
+Produziert wurde er von A24 und Waypoint Entertainment.
+
+### Hinter den Kulissen
+
+Gedreht wurde auf 16-Millimeter-Film im Bildformat 4:3 — also im nahezu quadratischen Format des damaligen Fernsehens. Beides zusammen erzeugt den Eindruck einer Aufnahme aus der erzählten Zeit statt eines Rückblicks darauf.
+
+Die Kamera führte Christopher Blauvelt, den Schnitt besorgte Nick Houy. Die Musik stammt von Trent Reznor und Atticus Ross.
+
+Mit Na-kel Smith steht ein Skateboardfahrer in einer der Hauptrollen, der über diesen Film zum Schauspiel kam — eine Besetzung, die der Sprache und dem Umgang der Gruppe ihre Beiläufigkeit gibt.
+
+### Einordnung & Wirkung
+
+Die Premiere fand im September 2018 beim Filmfestival in Toronto statt, der deutsche Kinostart folgte am 7. März 2019.
+
+Bei Rotten Tomatoes steht der Film bei 81 Prozent. Gelobt wurde vor allem, dass Hill die Jugendkultur ohne Verklärung und ohne Warnung zeigt.
+
+Sunny Suljic wurde bei den Critics' Choice Awards als bester Nachwuchsdarsteller nominiert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:403', locale: 'de-de',
+    text: `### Worum es geht
+
+Atlanta, 1948. Die wohlhabende jüdische Witwe Daisy Werthan bekommt von ihrem Sohn Boolie einen Fahrer gestellt: Hoke Colburn, einen Schwarzen Mann.
+
+Daisy will keinen Chauffeur und lässt ihn das zunächst spüren. Über fünfundzwanzig Jahre hinweg — bis 1973 — ändert sich das langsam. Beide erleben in dieser Zeit die Rassentrennung und den Antisemitismus des amerikanischen Südens, und beide erkennen allmählich, was sie darin gemeinsam haben.
+
+### Entstehungsgeschichte
+
+Regie führte der australische Regisseur Bruce Beresford. Das Drehbuch schrieb Alfred Uhry nach seinem eigenen Theaterstück von 1987, für das er den Pulitzer-Preis erhalten hatte.
+
+Jessica Tandy spielt Miss Daisy, Morgan Freeman den Hoke Colburn, Dan Aykroyd den Sohn Boolie.
+
+Produziert wurde der Film von Majestic Films International und The Zanuck Company mit einem Budget von rund 7,5 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film erzählt fast ausschließlich in kurzen Szenen über einen Zeitraum von fünfundzwanzig Jahren. Die großen Ereignisse jener Jahre erscheinen nur am Rand — in Nachrichten, in Bemerkungen, in dem, was am Straßenrand zu sehen ist.
+
+Diese Zurückhaltung ist zugleich seine Stärke und der Punkt, an dem er heute angegriffen wird.
+
+### Einordnung & Wirkung
+
+Bei 7,5 Millionen Dollar Herstellungskosten spielte der Film weltweit über 145 Millionen ein, davon 106 Millionen in den Vereinigten Staaten; hinzu kamen 50,5 Millionen aus der Videoauswertung.
+
+1990 gewann er vier Oscars: bester Film, bestes adaptiertes Drehbuch, beste Maske und Jessica Tandy als beste Hauptdarstellerin. Sie war 80 Jahre alt und damit die älteste Preisträgerin in einer regulären Schauspielkategorie.
+
+Die zeitgenössische Kritik lobte vor allem die Darstellungen. Heute wird dem Film überwiegend eine unterkomplexe Behandlung des amerikanischen Rassismus vorgeworfen sowie eine klischeehafte Zeichnung seiner Schwarzen Figuren — ein Urteil, das den Erfolg von 1990 im Rückblick eher erklärt als entschuldigt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2142', locale: 'de-de',
+    text: `### Worum es geht
+
+Garrison in New Jersey ist eine Stadt, in der auffällig viele New Yorker Polizisten wohnen. Sheriff Freddy Heflin ist dort zuständig, wird von den Beamten aus der Großstadt aber nicht ernst genommen.
+
+Als ein Beamter zwei Schwarze Jugendliche erschießt, decken ihn seine Kollegen und täuschen seinen Tod vor. Heflin kommt der Sache auf die Spur — und muss sich entscheiden, ob er gegen Männer vorgeht, die seine Nachbarn sind. Am Ende arbeitet er mit dem Ermittler Moe Tilden gegen die korrupten Beamten zusammen.
+
+### Entstehungsgeschichte
+
+James Mangold führte Regie und schrieb das Drehbuch.
+
+Sylvester Stallone spielt den Sheriff Heflin, Robert De Niro den Lieutenant Moe Tilden, Harvey Keitel den Ray Donlan und Ray Liotta den Gary Figgis.
+
+Gedreht wurde von Juli bis Oktober 1996 in New Jersey — in Edgewater und Fort Lee — sowie in Manhattan. Das Budget lag zwischen 10 und 15 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Für Stallone war der Film ein bewusster Bruch. Er nahm 15 Kilogramm zu und verzichtete auf seine übliche Millionengage, um endlich ernsthafte Charakterrollen angeboten zu bekommen.
+
+Die Wirkung beruht genau darauf: Heflin ist schwerfällig und unsicher — das Gegenteil der Figuren, für die Stallone bekannt war. Neben De Niro, Keitel und Liotta steht er in einem Ensemble, das ihn nicht schont.
+
+### Einordnung & Wirkung
+
+In den Vereinigten Staaten spielte der Film 44,8 Millionen Dollar ein, international 18,8 Millionen. In Deutschland kamen 443.000 Zuschauer.
+
+Die Kritik ging auseinander. James Berardinelli lobte Stallones glaubwürdige Darstellung, die Zeitschrift Cinema nannte den Film einen spannenden Thriller mit großartigem Stallone. Roger Ebert dagegen kritisierte die Umsetzung scharf.
+
+Der Film gilt bis heute als der ernsthafteste Versuch, Stallone als Charakterdarsteller zu besetzen — und als Beleg dafür, dass es funktioniert hätte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9386', locale: 'de-de',
+    text: `### Worum es geht
+
+Frank Horrigan ist der letzte noch aktive Leibwächter des Secret Service, der 1963 in Dallas dabei war, als Präsident Kennedy erschossen wurde. Dass er nicht schnell genug reagiert hat, lässt ihn seit dreißig Jahren nicht los.
+
+Dann meldet sich ein Mann am Telefon, der sich Booth nennt und ankündigt, den amtierenden Präsidenten zu töten. Den Namen Booth trug auch der Mörder Abraham Lincolns. Horrigan nimmt die Sache persönlich — und steht am Ende vor einer Entscheidung, die sein Gegner ihm aufzwingt: ob er dessen Leben rettet.
+
+### Entstehungsgeschichte
+
+Regie führte Wolfgang Petersen; es war sein Durchbruch in Hollywood. Das Drehbuch schrieb Jeff Maguire, der dafür für den Oscar nominiert wurde.
+
+Clint Eastwood spielt Frank Horrigan, John Malkovich den Attentäter Mitch Leary, Rene Russo die Kollegin Lilly Raines. In weiteren Rollen sind Dylan McDermott und Fred Dalton Thompson zu sehen.
+
+Produziert wurde der Film von Castle Rock Entertainment und Columbia Pictures. Gedreht wurde ab September 1992 in den Sony Studios in Los Angeles sowie in Washington und Chicago.
+
+### Hinter den Kulissen
+
+Es war das erste Mal, dass der Secret Service offiziell an einem Hollywoodfilm mitarbeitete.
+
+Technisch war der Film ein früher Fall für digitale Bildbearbeitung — allerdings unauffällig eingesetzt und aus Kostengründen: Die Darsteller wurden in echtes Material von Wahlkampfauftritten hineinkopiert.
+
+Getragen wird der Film von der Gegenüberstellung seiner beiden Hauptfiguren: einem alternden Beamten, der seit dreißig Jahren mit einem Versagen lebt, und einem Gegner, der genau das gegen ihn verwendet.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte einhellig positiv: 96 Prozent bei Rotten Tomatoes.
+
+Der Film erhielt drei Oscar-Nominierungen, darunter für John Malkovich als besten Nebendarsteller und für das beste Originaldrehbuch.
+
+Komponist Ennio Morricone gewann für die Musik den ASCAP Film and Television Music Award.
+
+Für Wolfgang Petersen war es die Arbeit, mit der er sich in den Vereinigten Staaten als Regisseur großer Studioproduktionen etablierte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:716612', locale: 'de-de',
+    text: `### Worum es geht
+
+Weihnachten 1991 in Sandringham House, dem Landsitz der königlichen Familie. Diana, Princess of Wales, verbringt dort die Feiertage.
+
+Der Film zeigt eine Frau, die mit ihrer Rolle als Princess of Wales nicht mehr zurechtkommt. Sie leidet unter einer Essstörung und gerät zunehmend in seelische Not. Ein Höhepunkt ist der Besuch ihres verfallenen Elternhauses. Am Schluss fährt sie mit ihren Söhnen in einem Cabrio nach London zurück.
+
+### Entstehungsgeschichte
+
+Regie führte der chilenische Regisseur Pablo Larraín, der zuvor mit "Jackie" bereits eine ähnlich angelegte Arbeit über eine tragische historische Frauenfigur vorgelegt hatte. Das Drehbuch schrieb Steven Knight.
+
+Kristen Stewart spielt Diana, Jack Farthing den Prinzen Charles, Stella Gonet die Königin Elisabeth II. und Richard Sammel den Prinzen Philip. Die Söhne William und Harry spielen Jack Nielen und Freddie Spry.
+
+### Hinter den Kulissen
+
+Gedreht wurde zum großen Teil in Deutschland: im Schlosshotel Kronberg im Taunus, auf Schloss Nordkirchen im Münsterland und auf Schloss Marquardt bei Potsdam. Der Film erhielt deutsche Produktionsförderung von etwa 4,7 Millionen Euro.
+
+Die Musik komponierte Jonny Greenwood; das Album mit vierzehn Stücken erschien im November 2021.
+
+Der Film erhebt keinen dokumentarischen Anspruch. Er nimmt ein reales Wochenende als Rahmen und erfindet, was darin geschieht — eine Vorgehensweise, die Larraín schon bei "Jackie" gewählt hatte.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 3. September 2021 bei den Filmfestspielen von Venedig statt. In Großbritannien lief der Film am 5. November 2021 an, in Deutschland am 13. Januar 2022.
+
+Bei Rotten Tomatoes steht er bei 83 Prozent. Der Filmdienst hob die präzise Gestik und Mimik von Kristen Stewart hervor.
+
+Stewart erhielt zahlreiche Nominierungen, darunter die für den Oscar als beste Hauptdarstellerin. Der Film gewann den Hessischen Filmpreis und war für den Deutschen Filmpreis nominiert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9427', locale: 'de-de',
+    text: `### Worum es geht
+
+In Sheffield haben die Stahlwerke geschlossen. Gaz ist arbeitslos und braucht Geld für den Unterhalt seines Sohnes.
+
+Er kommt auf die Idee, mit anderen arbeitslosen Männern eine Strip-Show auf die Beine zu stellen. Keiner von ihnen kann tanzen, und jeder schleppt eigene Sorgen mit sich. Unter Anleitung eines Choreografen üben sie — und kündigen an, weiter zu gehen als die Profis: ganz oder gar nicht.
+
+### Entstehungsgeschichte
+
+Regie führte Peter Cattaneo, das Drehbuch schrieb Simon Beaufoy, produziert wurde der britische Independentfilm von Uberto Pasolini. Die Musik stammt von Anne Dudley.
+
+Robert Carlyle spielt den Gaz. In wesentlichen Rollen sind Tom Wilkinson und Mark Addy zu sehen.
+
+Gedreht wurde 1997 in nur 40 Drehtagen in Sheffield, bei einem Budget von 3,5 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film ist als Komödie angelegt, sein Gegenstand ist es nicht: Er handelt von Männern, denen mit der Arbeit auch die Rolle abhandengekommen ist, die sie für selbstverständlich hielten.
+
+Was die Gruppe am Ende auf der Bühne tut, ist deshalb weniger ein Gag als eine Umkehrung — die Männer setzen sich derselben Betrachtung aus, der Frauen üblicherweise ausgesetzt sind, und stellen sich dabei ihren eigenen Körpern.
+
+Gedreht wurde in einer Stadt, die den Niedergang der Stahlindustrie real durchlaufen hatte.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films nannte ihn eine warmherzige, nuancenreiche Komödie voller Witz.
+
+Der Film gewann den Europäischen Filmpreis und erhielt vier Oscar-Nominierungen; ausgezeichnet wurde Anne Dudley für die beste Filmmusik.
+
+Drei Jahre später folgte eine Bühnenfassung als Musical, die auch im deutschsprachigen Raum aufgeführt wurde.
+
+Aus einem sehr kleinen britischen Film wurde damit einer der internationalen Erfolge seines Jahrzehnts — und ein Vorbild für eine ganze Reihe späterer Komödien über Arbeitslosigkeit im Norden Englands.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9550', locale: 'de-de',
+    text: `### Worum es geht
+
+China im Jahr 859, in den letzten Jahren der Tang-Dynastie. Das Reich zerfällt, und eine Rebellengruppe namens Haus der fliegenden Dolche gewinnt Zulauf.
+
+Die beiden Polizeioffiziere Jin und Leo sollen deren Anführer beseitigen. Ihre Spur führt zu Mei, einer blinden Tänzerin, die sie verdächtigen, dazuzugehören. Jin verhilft ihr zum Schein zur Flucht, um sie zu ihren Leuten zu führen — und verliebt sich in sie, während Leo den beiden heimlich folgt. Kaum eine der drei Figuren ist am Ende das, wofür sie sich ausgibt.
+
+### Entstehungsgeschichte
+
+Regie führte Zhang Yimou, das Drehbuch schrieb er gemeinsam mit Li Feng und Wang Bin. Die Kamera führte Zhao Xiaoding.
+
+Takeshi Kaneshiro spielt den Jin, Andy Lau den Leo, Zhang Ziyi die Mei, Song Dandan die Yee.
+
+Produziert wurde der Film von William Kong und Zhang Weiping mit einem Budget von zwölf Millionen Dollar. Die Musik stammt von Shigeru Umebayashi; das Stück "Lovers" singt Kathleen Battle.
+
+### Hinter den Kulissen
+
+Der Film gehört zum Wuxia — dem chinesischen Kampfkunstkino — und behandelt es als Anlass für Bildkompositionen: Die Farbgebung folgt der klassischen chinesischen Malerei, die Bewegungen und Kostüme sind der Pekingoper entlehnt.
+
+Das Schlussbild im Schnee entstand in der Ukraine. Dort fiel im Oktober unerwartet Schnee, was der Produktion genau die Bedingungen verschaffte, die sie gesucht hatte.
+
+Auch die Kampfszenen sind entsprechend angelegt: Sie sind weniger als Auseinandersetzung gebaut denn als Choreografie, in der Farbe, Bewegung und Klang zusammengehen.
+
+### Einordnung & Wirkung
+
+Die Kritik lobte vor allem Kamera und Farbdramaturgie. Bemängelt wurden dagegen absehbare Wendungen und die Länge des Schlusskampfes.
+
+Bei IMDb steht der Film bei 7,5 von 10. Die deutsche Filmbewertungsstelle vergab das Prädikat wertvoll.
+
+Er gehört zu den Arbeiten, mit denen Zhang Yimou das Wuxia-Kino einem Publikum außerhalb Asiens nahegebracht hat — auf Kosten der Handlung und zugunsten der Bilder, wie seine Kritiker anmerkten.` },
+  // ---- Block 41 ----
+  {
+    bereich: 'titel', schluessel: 'movie:614560', locale: 'de-de',
+    text: `### Worum es geht
+
+Hollywood, 1940. Der Drehbuchautor Herman J. Mankiewicz liegt mit gebrochenem Bein in einem abgelegenen Haus und diktiert das Buch zu "Citizen Kane".
+
+Zwischen die Arbeitstage schiebt der Film Rückblenden in die dreißiger Jahre: auf Mankiewicz' Verkehr mit William Randolph Hearst, dem Zeitungsverleger, der zur Vorlage der Titelfigur wurde, mit dessen Lebensgefährtin Marion Davies und mit dem Studioleiter Louis B. Mayer. Am Ende steht der Streit darüber, wer für das Drehbuch genannt wird — Mankiewicz oder Orson Welles.
+
+### Entstehungsgeschichte
+
+Regie führte David Fincher. Das Drehbuch stammt von seinem Vater Jack Fincher, der zum Zeitpunkt der Verfilmung bereits gestorben war.
+
+Der Plan ist alt: Fincher wollte den Stoff schon als Nachfolger von "The Game" von 1997 verfilmen. Angekündigt wurde das Vorhaben schließlich im Juli 2019.
+
+Gary Oldman spielt Mankiewicz, Amanda Seyfried die Marion Davies, Lily Collins die Sekretärin Rita Alexander, Charles Dance den Hearst, Tom Burke den Orson Welles und Arliss Howard den Louis B. Mayer.
+
+### Hinter den Kulissen
+
+Netflix produzierte den Film für 25 Millionen Dollar. Gedreht wurde durchgehend in Schwarzweiß mit RED-Kameras, um die Anmutung des Kinos der dreißiger Jahre zu erreichen.
+
+Trent Reznor und Atticus Ross, die sonst mit Synthesizern arbeiten, schrieben die Musik für ein Orchester in der Besetzung jener Zeit.
+
+Der Stoff beruht auf einem umstrittenen Aufsatz: Pauline Kael hatte 1971 im New Yorker behauptet, das Drehbuch zu "Citizen Kane" stamme allein von Mankiewicz. Filmwissenschaftler wie Peter Bogdanovich und Robert L. Carringer haben diese These gründlich widerlegt. Fincher hat dazu erklärt, ihn interessiere ein Mann, der zunächst zugesagt habe, auf jede Nennung zu verzichten — und der es sich dann anders überlegte.
+
+### Einordnung & Wirkung
+
+Die Kritik lobte Bildgestaltung und Darstellungen: 83 Prozent bei Rotten Tomatoes mit einem Schnitt von 7,7 von 10, 79 von 100 bei Metacritic.
+
+Bei der Oscar-Verleihung 2021 führte der Film mit zehn Nominierungen das Feld an und gewann zwei — für die Kamera und das Szenenbild. Hinzu kamen je sechs Nominierungen bei den Golden Globes und den BAFTA Awards.` },
+  {
+    bereich: 'titel', schluessel: 'movie:511809', locale: 'de-de',
+    text: `### Worum es geht
+
+New York im Jahr 1958. Zwei Banden beanspruchen dieselben Straßen: die weißen Jets und die puerto-ricanischen Sharks. Der Streit um dieses Gebiet bestimmt den Alltag beider Gruppen.
+
+Tony, ein früheres Mitglied der Jets, begegnet Maria, der Schwester des Anführers der Sharks. Die beiden verlieben sich — und ihre Beziehung verschärft genau den Konflikt, aus dem sie beide heraus wollen. Die Sache läuft auf Gewalt und Tod zu.
+
+### Entstehungsgeschichte
+
+Regie führte Steven Spielberg, das Drehbuch schrieb Tony Kushner. Beide legten den Schwerpunkt auf eine kulturell glaubwürdige Darstellung beider Gruppen.
+
+Die Vorlage ist das Musical von 1957 mit der Musik von Leonard Bernstein, den Liedtexten von Stephen Sondheim und dem Buch von Arthur Laurents — seinerseits eine Übertragung von "Romeo und Julia" in die Gegenwart. Es ist die zweite Verfilmung nach der von 1961.
+
+Rachel Zegler spielt in ihrer ersten Filmrolle die Maria, Ansel Elgort den Tony. Rita Moreno, die 1961 als Anita einen Oscar gewann, spielt die Valentina und war zugleich als ausführende Produzentin beteiligt.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab Juni 2019 in New York und New Jersey. Die Kamera führte Janusz Kamiński, die Choreografie stammt von Justin Peck.
+
+Eine bewusste Entscheidung betrifft die Sprache: Die spanischen Dialoge bleiben — bis auf den Schluss — ohne Untertitel. Wer kein Spanisch versteht, muss aushalten, nicht alles zu verstehen. Das ist genau die Erfahrung, die der Film seinen puerto-ricanischen Figuren zuschreibt.
+
+### Einordnung & Wirkung
+
+Bei Herstellungskosten von rund 100 Millionen Dollar spielte der Film weltweit nur 72,5 Millionen ein und blieb damit deutlich hinter den Erwartungen zurück.
+
+Die Kritik urteilte dagegen sehr gut: 91 Prozent bei Rotten Tomatoes, 85 von 100 bei Metacritic. Hervorgehoben wurden die Darstellungen und die emotionale Wucht.
+
+Der Film erhielt sieben Oscar-Nominierungen, darunter als bester Film und für die Regie. Ariana DeBose gewann als beste Nebendarstellerin — in derselben Rolle, für die Rita Moreno sechzig Jahre zuvor ausgezeichnet worden war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11075', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Witwer Aoyama soll nach Jahren wieder heiraten, findet aber keinen Zugang zu Frauen. Er findet einen Ausweg, der keiner ist: Für ein Filmprojekt, das es nicht gibt, wird ein Vorsprechen ausgeschrieben, und Aoyama sucht sich unter den Bewerberinnen eine Frau aus.
+
+Er entscheidet sich für Asami, eine junge, sehr zurückhaltende Frau. Die beiden kommen sich näher. Nach einer gemeinsamen Nacht verschwindet sie spurlos. Was Aoyama danach erlebt, lässt sich nicht mehr sicher als Traum oder als Wirklichkeit einordnen.
+
+### Entstehungsgeschichte
+
+Regie führte Takashi Miike nach dem gleichnamigen Roman von Ryū Murakami. Das Drehbuch schrieb Daisuke Tengan, die Musik komponierte Kōji Endō.
+
+Ryō Ishibashi spielt den Aoyama, Eihi Shiina die Asami. Daneben sind Jun Kunimura und Tetsu Sawaki zu sehen.
+
+### Hinter den Kulissen
+
+Die Bauweise des Films ist sein eigentliches Mittel: Über weite Strecken sieht er aus wie ein ruhiges, beinahe altmodisches Drama über einen einsamen Mann. Er nimmt sich sehr viel Zeit, bevor er die Richtung wechselt — und dieser Wechsel ist so vollständig, dass viele Zuschauer ihn als Bruch erleben.
+
+Auf Festivals hat der Film erhebliches Aufsehen erregt — und dabei sowohl Preise als auch heftige Ablehnung auf sich gezogen.
+
+### Einordnung & Wirkung
+
+Die Kritik lobte überwiegend das albtraumhafte Ende.
+
+2000 gewann der Film beim International Film Festival Rotterdam den FIPRESCI-Preis, beim Fantasporto erhielt er eine besondere Erwähnung. Das Museum of Modern Art führte ihn 2022 als Beispiel für Body-Horror.
+
+Er gilt als Klassiker des japanischen Horrorkinos und als das Werk, mit dem Takashi Miike international bekannt wurde. Seine Verbindung von Alltagsschilderung, Traum und Grausamkeit hat eine ganze Generation von Regisseuren beeinflusst — und ihm zugleich den Ruf eingebracht, einen der schwer erträglichsten Filme seines Jahrzehnts gedreht zu haben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:7459', locale: 'de-de',
+    text: `### Worum es geht
+
+Speed Racer stammt aus einer Familie von Rennfahrern und fährt für den kleinen Rennstall seines Vaters. Als der Industrielle Royalton ihm einen sehr lukrativen Vertrag anbietet, lehnt er ab — er will nicht für einen Konzern fahren.
+
+Royalton lässt daraufhin den Rennstall der Familie sabotieren. Ein verdeckt arbeitender Fahrer namens Racer X gewinnt Speed für den Kampf gegen die Manipulation der Rennen und holt ihn für das berüchtigte Cross-Country-Rennen Casa Cristo an Bord.
+
+### Entstehungsgeschichte
+
+Die Geschwister Wachowski führten Regie und schrieben das Drehbuch. Vorlage ist die japanische Anime-Serie gleichen Namens aus den sechziger Jahren.
+
+Emile Hirsch spielt den Speed Racer, Christina Ricci die Trixie. Daneben sind John Goodman, Susan Sarandon und Matthew Fox zu sehen.
+
+Gedreht wurde von Juni bis November 2007 im Filmstudio Babelsberg in Potsdam.
+
+### Hinter den Kulissen
+
+Der Bildstil will bewusst nicht wie Realität aussehen: Farben in einer Sättigung, die es in der Natur nicht gibt, Bildebenen, die wie Schnittbögen nebeneinandergelegt werden, und Rennszenen, die sich um physikalische Gesetze nicht kümmern.
+
+Genau daran schieden sich die Geister. Was viele Kritiker 2008 für misslungen hielten, gilt heute vielen als konsequente Übertragung der Bildsprache des Zeichentricks in den Realfilm.
+
+### Einordnung & Wirkung
+
+Bei geschätzten Produktionskosten von 120 Millionen Dollar spielte der Film in den Vereinigten Staaten rund 43,9 Millionen ein.
+
+Die zeitgenössische Kritik lehnte ihn überwiegend ab: 41 Prozent aus 217 Besprechungen bei Rotten Tomatoes. Bemängelt wurden der cartoonhafte Stil und die Missachtung physikalischer Gesetze; anerkannt wurde der gestalterische Ehrgeiz.
+
+In den Jahren danach hat sich das Urteil verschoben. Der Film gilt inzwischen als eines der bekanntesten Beispiele dafür, dass ein Werk seiner Zeit voraus sein kann — und dabei wirtschaftlich untergeht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:12783', locale: 'de-de',
+    text: `### Worum es geht
+
+England im späten 18. Jahrhundert. Georgiana Spencer wird mit siebzehn Jahren an den Herzog von Devonshire verheiratet. Von ihr wird ein Sohn erwartet; sie bekommt zunächst zwei Töchter.
+
+Georgiana interessiert sich für Politik und wird zu einer öffentlichen Stimme für die Whigs — eine Rolle, die ihr Mann nicht vorgesehen hat. Als ihre Freundin Elizabeth Foster zur Geliebten des Herzogs wird und im Haus bleibt, entsteht ein Dreiecksverhältnis, das alle Beteiligten aushalten müssen. Georgianas eigene Affäre mit dem Politiker Charles Grey hat für sie ungleich härtere Folgen.
+
+### Entstehungsgeschichte
+
+Regie führte Saul Dibb, das Drehbuch schrieben Jeffrey Hatcher, Anders Thomas Jensen und Dibb selbst.
+
+Grundlage ist die Biografie von Amanda Foreman über die historische Georgiana Cavendish, Herzogin von Devonshire.
+
+Keira Knightley spielt Georgiana, Ralph Fiennes den Herzog.
+
+Finanziert wurde der Film von der BBC und Pathé; gedreht wurde von September bis Dezember 2007.
+
+### Hinter den Kulissen
+
+Als Schauplätze dienten englische Herrenhäuser, darunter Chatsworth House, Holkham Hall und Somerset House.
+
+Der Film erzählt eine Geschichte über Rechtsverhältnisse: Georgiana ist als Ehefrau rechtlos, ihr Mann darf offen halten, was ihr verboten ist, und über das uneheliche Kind entscheidet nicht sie. Die politische Öffentlichkeit, in der sie Einfluss hat, endet an der eigenen Haustür.
+
+### Einordnung & Wirkung
+
+Bei den Oscars 2009 gewann der Film die Auszeichnung für die besten Kostüme und war zudem für das beste Szenenbild nominiert.
+
+Die Ausstattung ist damit auch offiziell das, was am Film am meisten anerkannt wurde — was ihm den wiederkehrenden Vorwurf eingetragen hat, seinen Gegenstand vor allem schön zu finden.
+
+Was der Film darüber hinaus leistet, ist die Erinnerung an eine Frau, die als politische Figur ihrer Zeit erheblichen Einfluss hatte und im öffentlichen Gedächtnis vor allem als Ehefrau blieb.` },
+  {
+    bereich: 'titel', schluessel: 'movie:395458', locale: 'de-de',
+    text: `### Worum es geht
+
+Suburbicon ist eine amerikanische Vorstadt der fünfziger Jahre: gepflegte Rasen, gleichförmige Häuser, Nachbarn, die einander grüßen.
+
+Der Film erzählt zwei Geschichten nebeneinander. In der einen wird bei der Familie Lodge nachts eingebrochen; danach verstricken sich der Vater Gardner und seine Schwägerin Margaret in ein Komplott um eine Versicherungssumme, das der Sohn Nicky nach und nach durchschaut. In der anderen zieht mit den Myers die erste Schwarze Familie in den Ort — und wird von der Nachbarschaft mit offenem Hass empfangen.
+
+### Entstehungsgeschichte
+
+Regie führte George Clooney. Das ursprüngliche Drehbuch schrieben Joel und Ethan Coen bereits 1986; Clooney und Grant Heslov überarbeiteten es und fügten den zweiten Handlungsstrang über den Rassismus hinzu.
+
+Matt Damon spielt Gardner Lodge, Julianne Moore in einer Doppelrolle dessen Frau Rose und deren Schwester Margaret. Noah Jupe spielt den Sohn Nicky, Oscar Isaac den Versicherungsvertreter Bud Cooper.
+
+### Hinter den Kulissen
+
+Die Geschichte der Myers ist wahr. 1957 zog in Levittown in Pennsylvania — einer nach dem Bauunternehmer William Levitt benannten Reihenhaussiedlung — die Schwarze Familie William und Daisy Myers ein und war wochenlang massiven Anfeindungen ausgesetzt.
+
+Der Aufbau ist die eigentliche Absicht: Während die Nachbarschaft sich über die Schwarze Familie empört, geschieht der tatsächliche Mord nebenan, in einem weißen Haushalt, und niemand bemerkt es.
+
+Ob diese Gegenüberstellung aufgeht, ist der Hauptstreitpunkt um den Film: Die Myers bleiben weitgehend stumm und dienen als Kontrast zu einer Handlung, an der sie keinen Anteil haben.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 2. September 2017 im Wettbewerb der Filmfestspiele von Venedig statt. Julianne Moore erhielt dort den Franca Sozzani Award.
+
+Der Film verbindet damit zwei Erzählweisen, die schwer zueinander finden: eine schwarze Komödie nach einem alten Coen-Drehbuch und die Schilderung eines realen rassistischen Übergriffs.
+
+Dass das Drehbuch der Coens von 1986 stammt und der zweite Handlungsstrang erst dreißig Jahre später hinzukam, ist dem Ergebnis anzumerken — die beiden Teile berühren einander kaum, obwohl sie in derselben Straße spielen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9994', locale: 'de-de',
+    text: `### Worum es geht
+
+London im Jahr 1897, allerdings nicht bei den Menschen, sondern bei den Mäusen, die unter ihnen leben. Ein Spielzeugmacher wird entführt; seine Tochter Olivia sucht Hilfe.
+
+Sie findet sie bei Basil, dem großen Mäusedetektiv, der in der Baker Street wohnt. Basil erkennt in dem Entführer den Gehilfen seines Erzfeindes Professor Rattenzahn — und begreift, dass dieser die Mäusekönigin durch eine mechanische Nachbildung ersetzen und so die Macht übernehmen will. Die Auseinandersetzung endet im Uhrwerk des Big Ben.
+
+### Entstehungsgeschichte
+
+Regie führten John Musker, Ron Clements, Burny Mattinson und David Michener. Es war der 26. abendfüllende Zeichentrickfilm der Walt-Disney-Studios und erschien 1986.
+
+Die Vorlage ist die Kinderbuchreihe "Basil of Baker Street" von Eve Titus, die Sherlock-Holmes-Abenteuer in die Welt der Nagetiere verlegt.
+
+Das Budget lag bei etwa 14 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Kampf im Uhrwerk des Big Ben ist technikgeschichtlich bedeutsam: Für ihn wurde erstmals in diesem Film Computeranimation eingesetzt — der zweite Einsatz dieser Technik bei Disney überhaupt, nach "Taran und der Zauberkessel".
+
+Der Film entstand in einer schwierigen Phase des Studios. Nach mehreren wirtschaftlich enttäuschenden Zeichentrickfilmen stand die Abteilung unter Druck.
+
+Vier Regisseure teilten sich die Arbeit — ein Hinweis darauf, unter welchem Zeit- und Kostendruck der Film entstand.
+
+### Einordnung & Wirkung
+
+Der Film spielte rund 38,6 Millionen Dollar ein.
+
+Die Kritik bescheinigte ihm handwerkliches Geschick und eine erfrischend geradlinige Erzählweise, sah aber auch Abstriche gegenüber den klassischen Disney-Filmen.
+
+Seine Bedeutung liegt darin, dass er den Weg zurück markiert: Er steht am Anfang der Entwicklung, die als Disney-Renaissance bezeichnet wird und die dem Studio ab Ende der achtziger Jahre seine künstlerische Geltung zurückgab.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11683', locale: 'de-de',
+    text: `### Worum es geht
+
+Jahre nach dem Ausbruch der Seuche haben sich die Überlebenden in einer befestigten Stadt eingerichtet. Wer Geld hat, wohnt im Hochhaus Fiddler's Green mit Geschäften und Restaurants; alle anderen leben in den Straßen darunter.
+
+Riley und seine Leute fahren mit dem gepanzerten Fahrzeug Dead Reckoning ins Umland und holen Vorräte. Um die Untoten abzulenken, schießen sie Feuerwerk in den Himmel — das funktioniert immer schlechter. Denn draußen beginnt einer von ihnen, den sie Big Daddy nennen, die anderen zu führen — und er nimmt Kurs auf die Stadt.
+
+### Entstehungsgeschichte
+
+George A. Romero schrieb das Drehbuch und führte Regie. Er selbst hat den Film ausdrücklich als eigenständige Arbeit bezeichnet und nicht als unmittelbare Fortsetzung seiner ursprünglichen Trilogie.
+
+Simon Baker spielt den Riley, John Leguizamo den Cholo, Dennis Hopper den korrupten Stadtherrn Kaufman und Asia Argento die Slack.
+
+Innerhalb der Reihe folgt der Film auf "Day of the Dead" von 1985; "Diary of the Dead" erschien 2007.
+
+### Hinter den Kulissen
+
+Romero hat seine Zombiefilme stets als Gesellschaftskommentar angelegt, und dieser ist der unverblümteste: Es geht um Klassenverhältnisse, um eine Elite in einem Turm und um die Frage, wer eigentlich als Mensch gilt.
+
+Neu ist die Anlage der Untoten. Sie sind hier nicht mehr nur Naturgewalt, sondern lernen — und der Film stellt sie zunehmend als die Beraubten dar, die sich holen, was ihnen genommen wurde.
+
+Das Budget lag bei etwa 15 Millionen Dollar.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 46,8 Millionen Dollar ein, hinzu kamen elf Millionen aus dem DVD-Verkauf.
+
+Die TV Spielfilm nannte ihn Splatterhorror mit bissiger politischer Botschaft — eine Beschreibung, die den Film gut trifft.
+
+Bemerkenswert bleibt, dass Romero als Erfinder dieser Erzählform der Einzige war, der die Untoten über Jahrzehnte hinweg konsequent als politische Figur behandelt hat — und nicht als bloßes Bedrohungsmittel.` },
 ];
