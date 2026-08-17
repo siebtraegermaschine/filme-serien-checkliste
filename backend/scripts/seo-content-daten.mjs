@@ -25251,4 +25251,225 @@ Weltweit spielte der Film 75,7 Millionen Dollar ein, davon nur 33,7 Millionen in
 Die Kritik lehnte ihn deutlich ab: 28 Prozent von 180 Besprechungen bei Rotten Tomatoes, 35 von 100 bei Metacritic. Roger Ebert vergab anderthalb Sterne und schrieb, der Film beginne als reizvolle Geschichte über Freunde mit telepathischer Gabe und ende als Monsterfilm von verblüffender Grässlichkeit.
 
 Stephen King selbst lobte die Verfilmung und nannte sie eine der sehr, sehr guten Umsetzungen seiner Arbeit. Kasdan hat später eingeräumt, dass der Misserfolg seiner Laufbahn erheblich geschadet hat.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:11660', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein arbeitsloser Schriftsteller in London folgt fremden Menschen durch die Stadt — nach eigener Aussage, um Stoff zu sammeln. Er hat sich Regeln gegeben: nie dieselbe Person zweimal, nie zu lange, nie persönlich werden.
+
+Dann bricht er sie. Der Mann, dem er folgt, spricht ihn an: Cobb, ein Einbrecher, der nicht wegen des Geldes einsteigt, sondern um Menschen etwas über sich selbst beizubringen. Der Schriftsteller macht mit. Was er dabei nicht bemerkt, ist, dass er selbst seit Beginn Teil eines Plans ist — und am Ende für einen Mord dasteht, den er nicht begangen hat.
+
+### Entstehungsgeschichte
+
+Christopher Nolan schrieb, inszenierte, fotografierte und schnitt den Film selbst; es war seine erste abendfüllende Arbeit.
+
+Das Budget betrug rund 6.000 Dollar, aufgebracht aus seinem eigenen Gehalt für Firmenvideos — die Hälfte davon ging für Filmmaterial und Entwicklung drauf.
+
+### Hinter den Kulissen
+
+Gedreht wurde ausschließlich an Wochenenden, über ein Jahr verteilt, insgesamt vierzehn Wochenenden. Die Mannschaft bestand aus Freunden Nolans, die unter der Woche ihren regulären Berufen nachgingen.
+
+Aufgenommen wurde in Schwarzweiß auf 16-Millimeter-Film, aus der Hand. Nolan hat beide Gründe genannt: Anschluss an den Film noir — und das Verbergen der knappen Mittel.
+
+Der Aufbau ist bereits die spätere Handschrift: Die Handlung läuft nicht chronologisch, und Nolan hat beschrieben, dass gerade das unvollständige Verständnis jeder neuen Szene den Kern des Erzählens ausmache.
+
+### Einordnung & Wirkung
+
+Die Kritik reagierte gut: 87 Prozent bei Rotten Tomatoes. Der Film gewann den Tiger Award beim Filmfestival Rotterdam und den Preis für den besten Erstlingsfilm beim Festival in San Francisco.
+
+Er ist der Ausgangspunkt einer Laufbahn, die zwei Jahre später mit "Memento" dieselbe Erzählform mit deutlich größeren Mitteln fortsetzte — und dabei nichts hinzufügte, was hier nicht bereits angelegt war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9675', locale: 'de-de',
+    text: `### Worum es geht
+
+Miles ist Englischlehrer, geschiedener Mann und Verfasser eines Romans, den niemand drucken will. Eine Woche vor der Hochzeit seines Freundes Jack fahren die beiden in die Weinregion von Santa Barbara: Miles will Wein verkosten und Ruhe, Jack will noch einmal fremdgehen.
+
+Sie treffen auf Maya, die in einem Restaurant arbeitet, und Stephanie, die in einem Weingut ausschenkt. Was folgt, sind sieben Tage, in denen Jack seine Hochzeit gefährdet und Miles begreift, dass sein Roman nicht erscheinen wird — und dass die Frage, was er dann noch ist, sich nicht mit Wein beantworten lässt.
+
+### Entstehungsgeschichte
+
+Grundlage ist Rex Picketts Roman. Alexander Payne führte Regie und schrieb das Drehbuch gemeinsam mit Jim Taylor.
+
+Der Film lief am 13. September 2004 beim Festival in Toronto und kam am 22. Oktober in die amerikanischen Kinos. Das Budget lag bei 16 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Paul Giamatti spielt Miles, Thomas Haden Church spielt Jack, Virginia Madsen spielt Maya, Sandra Oh spielt Stephanie.
+
+Der Film hatte eine messbare Wirkung auf den amerikanischen Weinmarkt: Miles' Verachtung für Merlot und seine Begeisterung für Spätburgunder schlugen unmittelbar durch. Im Westen der USA fiel der Absatz von Merlot um 2 Prozent, der von Pinot noir stieg um 16 Prozent. Eine Untersuchung von 2022 stellte fest, dass kalifornische Winzer daraufhin Spätburgunder auch in Lagen anbauten, die dafür nicht geeignet sind.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 109,7 Millionen Dollar ein.
+
+Es gab fünf Oscar-Nominierungen, darunter als bester Film; ausgezeichnet wurde das adaptierte Drehbuch.
+
+Die Kritik reagierte einhellig: 97 Prozent bei Rotten Tomatoes, mit dem wiederkehrenden Befund, der Film sei klug, komisch und bewegend zugleich.` },
+  {
+    bereich: 'titel', schluessel: 'series:105248', locale: 'de-de',
+    text: `### Worum es geht
+
+Night City im Jahr 2076. David Martinez besucht eine Eliteschule, die seine Mutter kaum bezahlen kann. Als sie bei einem Anschlag stirbt, lässt er sich ein militärisches Wirbelsäulenimplantat einsetzen, das eigentlich niemand überlebt.
+
+Damit wird er zum Edgerunner — einem Söldner mit maschinellen Erweiterungen. Er schließt sich einer Truppe um die Netrunnerin Lucy an, die davon träumt, den Mond zu sehen. Je mehr Technik David sich einsetzen lässt, desto näher kommt er dem Zustand, den die Stadt Cyberpsychose nennt: dem Punkt, an dem vom Menschen nichts mehr übrig ist.
+
+### Entstehungsgeschichte
+
+Die Serie entstand als Gemeinschaftsarbeit von CD Projekt Red und Studio Trigger. Sie spielt in der Welt des Videospiels "Cyberpunk 2077", erzählt aber eine eigenständige Geschichte, die dessen Handlung nicht fortsetzt.
+
+Regie führte Hiroyuki Imaishi, die Figuren entwarf Yoh Yoshinari, die Musik schrieb Akira Yamaoka. Das Vorspannlied stammt von Franz Ferdinand, das Abspannlied von Dawid Podsiadło.
+
+### Hinter den Kulissen
+
+Die zehnteilige Serie erschien am 13. September 2022 bei Netflix und stand in der ersten Woche in den Top Ten.
+
+Ihre wirtschaftliche Wirkung ist ungewöhnlich gut belegt: Das Spiel "Cyberpunk 2077" war bei Erscheinen 2020 wegen technischer Mängel ein Skandal gewesen. Nach der Serie stieg das Interesse so stark, dass die Verkaufszahlen des Spiels 20 Millionen Einheiten erreichten.
+
+### Einordnung & Wirkung
+
+Die Kritik reagierte einhellig: 100 Prozent bei Rotten Tomatoes bei einem Durchschnitt von 8,8 von 10.
+
+Ausgezeichnet wurde die Serie unter anderem als bester Anime bei den Crunchyroll Anime Awards und bei den IGN Awards; gelobt wurden Drehbuch, Figuren, Actionszenen, Animation, Musik und Weltentwurf.
+
+Sie gilt als eines der wenigen Beispiele dafür, dass eine Verfilmung ihre Vorlage nachträglich rettet.` },
+  {
+    bereich: 'titel', schluessel: 'series:85949', locale: 'de-de',
+    text: `### Worum es geht
+
+Jean-Luc Picard lebt zurückgezogen auf dem Weingut seiner Familie in Frankreich. Er hat die Sternenflotte im Streit verlassen, nachdem sie die Rettung der romulanischen Bevölkerung abgebrochen hatte — nach einem Anschlag durch Androiden, der zu deren Verbot führte.
+
+Eine junge Frau namens Dahj sucht ihn auf und wird vor seinen Augen getötet. Picard erkennt in ihr etwas von Data, seinem früheren Kollegen. Er stellt eine Mannschaft zusammen und bricht auf — mit über neunzig Jahren, ohne Rang und ohne Schiff.
+
+### Entstehungsgeschichte
+
+Erdacht wurde die Serie von Akiva Goldsman, Michael Chabon, Kirsten Beyer und Alex Kurtzman. Sie lief von 2020 bis 2023 über drei Staffeln bei CBS All Access beziehungsweise Paramount+, mit einem Budget von 8 bis 9 Millionen Dollar je Folge und wechselnder Leitung in jeder Staffel.
+
+Patrick Stewart spielt Picard erneut — achtzehn Jahre nach seinem letzten Auftritt in "Star Trek: Nemesis" von 2002. Er hatte die Rolle für abgeschlossen gehalten und wurde nach eigener Aussage von Zuschauerberichten darüber umgestimmt, was die Figur für Menschen bedeutet hat.
+
+### Hinter den Kulissen
+
+Angelegt war die Serie ausdrücklich anders als frühere Star-Trek-Produktionen: langsamer, sanfter, lyrischer — als Studie über einen Mann in seinen letzten Jahren.
+
+Die drei Staffeln unterscheiden sich stark. Die erste handelt von Picards Schuld gegenüber der Sternenflotte und von künstlichen Lebensformen. Die zweite behandelt seine Vergangenheit, einschließlich des Suizids seiner Mutter. Die dritte ist als Abschied angelegt und führt die Besetzung von "Das nächste Jahrhundert" wieder zusammen.
+
+### Einordnung & Wirkung
+
+Die Bewertungen bei Rotten Tomatoes lagen bei 86, 85 und schließlich 97 Prozent — die dritte Staffel wurde deutlich am besten aufgenommen.
+
+Die Serie gewann einen Primetime Emmy bei zehn Nominierungen sowie fünf Saturn Awards.
+
+Bemerkenswert bleibt die Anlage: eine Serie, die ihre Hauptfigur nicht verjüngt, sondern ihr Alter zum Gegenstand macht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:22825', locale: 'de-de',
+    text: `### Worum es geht
+
+Norma und Arthur Lewis leben 1976 in Virginia. Sie ist Lehrerin und hat nach einer fehlgeschlagenen Operation einen fehlenden Teil des Fußes, er arbeitet bei der NASA und ist gerade als Astronaut abgelehnt worden. Beide brauchen Geld.
+
+Vor der Tür steht eines Morgens ein Kasten mit einem Knopf unter einer Glashaube. Ein entstellter Mann namens Arlington Steward erklärt die Bedingungen: Drücken sie den Knopf, erhalten sie eine Million Dollar — und ein Mensch, den sie nicht kennen, stirbt. Sie haben 24 Stunden.
+
+### Entstehungsgeschichte
+
+Grundlage ist Richard Mathesons Kurzgeschichte "Button, Button" von 1970, die zuvor bereits als Folge der Serie "Twilight Zone" verfilmt worden war.
+
+Regie führte Richard Kelly, der zuvor "Donnie Darko" gedreht hatte. Das Budget lag bei 30 Millionen Dollar; der Film erschien am 6. November 2009 bei Warner Bros.
+
+### Hinter den Kulissen
+
+Gedreht wurde überwiegend im Großraum Boston und in Virginia, digital mit Panavision-Genesis-Kameras.
+
+Die Musik schrieben Win Butler und Régine Chassagne von Arcade Fire gemeinsam mit Owen Pallett — der Soundtrack ist bis heute nicht veröffentlicht.
+
+Kelly weitet die kurze Vorlage erheblich aus: Aus der moralischen Versuchsanordnung wird eine Verschwörungsgeschichte mit NASA, Geheimdienst NSA und außerirdischen Beobachtern, die die Menschheit prüfen.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 33,3 Millionen Dollar ein.
+
+Die Kritik urteilte gemischt: 42 Prozent bei Rotten Tomatoes. Das Publikum vergab bei CinemaScore ein F — die schlechteste mögliche Note, die nur wenige Filme überhaupt erhalten.
+
+Über die Jahre hat der Film dennoch eine Anhängerschaft gefunden. Er steht damit für Kellys gesamte Laufbahn nach "Donnie Darko": Filme, die beim Erscheinen abgelehnt und später neu bewertet werden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11820', locale: 'de-de',
+    text: `### Worum es geht
+
+1953 tritt die Kunsthistorikerin Katherine Watson eine Stelle am Wellesley College an, einer Eliteuniversität für Frauen in Massachusetts. Sie kommt aus Kalifornien und erwartet die klügsten Studentinnen des Landes.
+
+Sie findet sie auch — nur haben die meisten ihr Ziel bereits: heiraten und einen Haushalt führen. Der Lehrplan ist auswendig gelernt, und eine Studentin hält Katherine vor, sie wolle sie nur zu Abbildern ihrer selbst machen. Der Film handelt davon, wie weit eine Lehrerin gehen darf, wenn sie überzeugt ist, dass ihre Schülerinnen sich unter Wert verkaufen.
+
+### Entstehungsgeschichte
+
+Regie führte Mike Newell, das Drehbuch schrieben Lawrence Konner und Mark Rosenthal. Der Film erschien am 19. Dezember 2003 bei Sony.
+
+Julia Roberts erhielt für die Hauptrolle 25 Millionen Dollar — die zu diesem Zeitpunkt höchste Gage, die je eine Darstellerin bekommen hatte. Das Gesamtbudget lag bei 72,3 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Neben Roberts spielen Kirsten Dunst, Julia Stiles und Maggie Gyllenhaal die Studentinnen.
+
+Ehemalige Studentinnen des Wellesley College aus den fünfziger Jahren hielten die Darstellung ihrer Hochschule für unzutreffend; die Präsidentin des Colleges äußerte anschließend Bedauern über einzelne Reaktionen.
+
+Der Vergleich mit "Der Club der toten Dichter" begleitete den Film von Anfang an — eine Besprechung nannte ihn genau das, nur als Frauenfilm und ohne dessen Dramatik.
+
+### Einordnung & Wirkung
+
+Der Film startete auf Platz zwei mit 11,5 Millionen Dollar und spielte weltweit 141,3 Millionen ein. In den USA blieben die Einnahmen mit 63,9 Millionen jedoch unter dem dortigen Anteil des Budgets.
+
+Die Kritik lehnte ihn überwiegend ab: 33 Prozent von 150 Besprechungen bei Rotten Tomatoes, 45 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein B.` },
+  {
+    bereich: 'titel', schluessel: 'movie:299054', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Söldner namens Suarto Rahmat stiehlt in Libyen nukleare Sprengköpfe im Auftrag eines Mannes, der nur als Ocelot bekannt ist. Die Expendables sollen das verhindern und scheitern.
+
+Nach schweren Verlusten sammelt sich der Rest der Truppe und verfolgt die Spur quer durch Asien und schließlich auf ein Schiff. Wer Ocelot ist, bleibt bis zum Schluss offen — und die Auflösung greift auf die Vorgeschichte der Gruppe zurück.
+
+### Entstehungsgeschichte
+
+Es ist der vierte Teil der Reihe, die 2010 begann. Regie führte Scott Waugh; das Budget lag bei 100 Millionen Dollar.
+
+Die Verteilung der Rollen hat sich verschoben: Jason Statham übernimmt die Hauptlast und bestreitet nach Angaben der Produktion rund 80 Prozent der Actionszenen, während Sylvester Stallone nur noch begrenzt auftritt — es ist sein letzter Auftritt in der Reihe.
+
+Daneben sind Megan Fox, 50 Cent, Dolph Lundgren und Tony Jaa zu sehen.
+
+### Hinter den Kulissen
+
+Gedreht wurde in London, Bulgarien und Griechenland.
+
+Der schärfste Vorwurf betraf die Effekte: Kritiker verglichen die Computergrafik mit der eines Handyspiels statt eines Kinofilms — bei einer Reihe, deren ursprüngliches Verkaufsargument handgemachte Action mit Darstellern der achtziger Jahre war.
+
+### Einordnung & Wirkung
+
+Der Film spielte weltweit nur 51 Millionen Dollar ein — bei 100 Millionen Produktionskosten ein schwerer Fehlschlag. Der Start in den USA brachte 8 Millionen und Platz zwei hinter "The Nun II".
+
+Die Kritik lehnte ihn nahezu geschlossen ab: 14 Prozent bei Rotten Tomatoes, mit Vorwürfen gegen die Effekte und die hölzernen Dialoge.
+
+Bei den Goldenen Himbeeren gab es sieben Nominierungen und zwei Auszeichnungen: schlechtester Nebendarsteller für Stallone und schlechteste Nebendarstellerin für Fox. Damit endete die Reihe nach vier Teilen.` },
+  {
+    bereich: 'titel', schluessel: 'series:76121', locale: 'de-de',
+    text: `### Worum es geht
+
+In einer Zukunft, in der die Menschheit in befestigten Städten lebt, werden Kinder eigens für den Kampf herangezogen. Sie heißen Parasiten und steuern riesige Maschinen namens Franxx — immer paarweise, ein Junge und ein Mädchen, die vorne Stamen und Pistill genannt werden, nach der botanischen Bezeichnung für Staubblatt und Stempel.
+
+Hiro gilt als gescheitert, weil er mit keiner Partnerin einen Franxx bewegen kann. Dann trifft er auf Zero Two, ein Mädchen mit Hörnern, dessen bisherige Partner nach drei Einsätzen gestorben sind. Mit ihr funktioniert es.
+
+### Entstehungsgeschichte
+
+Die Serie entstand als Gemeinschaftsproduktion von A-1 Pictures und Trigger; animiert wurde von Trigger und CloverWorks.
+
+Sie startete im Januar 2018 und umfasst 24 Folgen.
+
+### Hinter den Kulissen
+
+Die botanische Begrifflichkeit ist kein Beiwerk: Die Serie behandelt durchgehend Fortpflanzung, Geschlechterrollen und Körperlichkeit — bei Figuren, denen genau darüber nichts gesagt wurde.
+
+Die Kombination der Studios ist ungewöhnlich: Trigger steht für überdrehte, stark stilisierte Arbeiten, A-1 Pictures für gefälligere Produktionen. Beides ist der Serie anzumerken und trägt zu ihrem uneinheitlichen Eindruck bei.
+
+### Einordnung & Wirkung
+
+Die Aufnahme fiel geteilt aus. Anerkannt wurden Momente von großer Qualität; kritisiert wurde vor allem die zweite Hälfte.
+
+Der Bruch wird meist bei Folge 15 verortet: Ab dort ändert die Serie ihre Ausrichtung, das Erzähltempo zieht an, und mehrere Rezensenten warfen ihr vor, alles aufzugeben, was sie zuvor ausgemacht habe, und den einfachen Weg zu wählen. Andere hielten dagegen, sie werde über Jahre in Erinnerung bleiben.
+
+Bei den Newtype Anime Awards 2018 wurde sie für das beste maschinelle Design ausgezeichnet; Zero Two war als beste weibliche Figur nominiert, die Serie selbst als beste Fernsehproduktion.` },
 ];
