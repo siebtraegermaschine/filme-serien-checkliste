@@ -38540,4 +38540,297 @@ Eine Minderheit bemängelte, die Handlung sei weniger einprägsam als bei andere
 Diese Einordnung als Zeitkapsel trifft einen Punkt, der über den Film hinausgeht. Anime-Kinofilme dieser Machart — kurz, an eine laufende Reihe angeschlossen, für ein Publikum gemacht, das die Figuren bereits kennt — waren in jenen Jahren ein eigenes Format.
 
 Dass der Film heute vor allem als Momentaufnahme seiner Entstehungszeit gelesen wird, ist deshalb weniger ein Urteil über seine Qualität als eine Beschreibung dessen, wofür er steht.` },
+  // ---- Block 080 ----
+  {
+    bereich: 'titel', schluessel: 'movie:451', locale: 'de-de',
+    text: `### Worum es geht
+
+Ben Sanderson war Drehbuchautor. Er ist alkoholkrank und kommt nach Las Vegas mit einem Vorsatz, den er niemandem verheimlicht: Er will sich zu Tode trinken.
+
+Dort lernt er Sera kennen, die als Prostituierte arbeitet. Zwischen beiden entsteht eine Nähe unter ausdrücklichen Bedingungen: Sera darf nicht versuchen, ihn von seinem Vorhaben abzubringen; ihr Beruf soll kein Thema sein. Was daraus wird, ist eine Liebe ohne Aussicht — und ohne Beschönigung.
+
+### Entstehungsgeschichte
+
+Vorlage ist der Roman von John O'Brien. Der Autor nahm sich zwei Wochen vor Drehbeginn das Leben.
+
+Mike Figgis führte Regie, schrieb das Drehbuch und komponierte die Musik.
+
+Nicolas Cage spielt Ben Sanderson, Elisabeth Shue die Sera, Julian Sands den Yuri, Richard Lewis den Peter, Steven Weber den Marc Nussbaum, Valeria Golino die Terri, Laurie Metcalf die Mrs. Van Houten und Emily Procter die Debbie; auch R. Lee Ermey, Mariska Hargitay und Xander Berkeley sind zu sehen.
+
+Produziert wurde der Film von Lila Cazès und Annie Stewart. Die Kamera führte Declan Quinn, den Schnitt besorgte John Smith. Gedreht wurde auf Super-16-mm-Film. Der Film dauert 107 Minuten und ist ab 16 Jahren freigegeben.
+
+Sting steuerte Jazz-Klavierstücke zum Soundtrack bei, Nicolas Cage sang „Ridiculous" gemeinsam mit Phil Roy. Kurzauftritte haben unter anderem die Regisseure Bob Rafelson und Vincent Ward, Julian Lennon, Lou Rawls und Mike Figgis selbst. Elisabeth Shue trägt Kleidung von Vivienne Westwood.
+
+### Hinter den Kulissen
+
+Der Tod des Autors zwei Wochen vor Drehbeginn liegt über der gesamten Produktion. Der Roman ist die Vorlage; was in ihm steht, hat der Verfasser nicht überlebt.
+
+Formal ist die Abmachung zwischen den beiden Hauptfiguren der Kern. Beide verzichten darauf, den anderen ändern zu wollen — Sera akzeptiert Bens Vorhaben, Ben fragt nicht nach ihrer Arbeit. Das ist keine Gleichgültigkeit, sondern die einzige Form von Zuwendung, die zwischen ihnen möglich ist.
+
+Der Dreh auf Super-16-mm ist dazu die passende Wahl. Das Format erlaubte kleine Teams und schnelles Arbeiten an realen Orten; die Körnigkeit des Bildes hält den Film von jeder Glättung fern.
+
+### Einordnung & Wirkung
+
+1996 erhielt Nicolas Cage den Oscar als bester Hauptdarsteller. Nominiert war der Film außerdem für die beste Hauptdarstellerin (Elisabeth Shue), die beste Regie und das beste adaptierte Drehbuch. Cage gewann zudem den Golden Globe als bester Hauptdarsteller in einem Drama.
+
+Bei den Independent Spirit Awards wurden Elisabeth Shue als beste Hauptdarstellerin sowie Film, Regie und Kamera ausgezeichnet; bei den BAFTA-Awards gab es mehrere Nominierungen.
+
+Rotten Tomatoes weist 91 Prozent aus, Metacritic 82 von 100; die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Gelobt wurde die beklemmend realistische Darstellung eines Alkoholkranken; der Film wurde als unbeschönigte Bestandsaufnahme menschlicher Leidens- und Liebesfähigkeit beschrieben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:34653', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film spielt an einem einzigen Tag: dem 30. November 1962.
+
+George Falconer ist britischer Literaturprofessor in Los Angeles. Acht Monate zuvor ist sein Lebenspartner Jim bei einem Autounfall gestorben. An diesem Tag hat George beschlossen, sich das Leben zu nehmen — und begegnet dabei Menschen, die ihn ins Zweifeln bringen: seiner Freundin Charley, seinem Studenten Kenny und anderen.
+
+### Entstehungsgeschichte
+
+Vorlage ist Christopher Isherwoods Roman „Der Einzelgänger" von 1964.
+
+Tom Ford führte Regie — sein Debüt als Regisseur — und schrieb das Drehbuch gemeinsam mit David Scearce.
+
+Colin Firth spielt George Falconer, Julianne Moore die Charley, Nicholas Hoult den Kenny, Matthew Goode den Jim, Jon Kortajarena den Carlos, Lee Pace den Grant Lefanu und Ginnifer Goodwin die Mrs. Strunk; Jon Hamm ist als Telefonstimme von Jims Cousin zu hören.
+
+Produziert wurde der Film von Tom Ford, Andrew Miano, Robert Salerno und Chris Weitz. Die Kamera führte Eduard Grau, den Schnitt besorgte Joan Sobel, die Musik stammt von Shigeru Umebayashi und Abel Korzeniowski.
+
+Gedreht wurde vom 3. November bis zum 5. Dezember 2008 in Los Angeles und Pasadena. Georges Haus ist das J. W. Schaffer House in Glendale, 1949 von John Lautner entworfen. Der Film dauert 99 Minuten; der deutsche Kinostart war der 8. April 2010.
+
+### Hinter den Kulissen
+
+Die Konzentration auf einen Tag ist die zentrale Entscheidung. Sie zwingt den Film, alles über Begegnungen zu erzählen — es gibt keine Entwicklung über Wochen, nur Gespräche und Blicke innerhalb weniger Stunden.
+
+Dass ein Modedesigner Regie führt, prägt jede Einstellung. Räume, Kleidung, Farben sind durchkomponiert; das Haus von John Lautner ist nicht Kulisse, sondern Aussage über eine Figur, die ihr Leben eingerichtet hat.
+
+Genau daran scheiden sich die Urteile. Was die einen als Genauigkeit sehen, empfinden andere als Berechnung — eine Trauergeschichte, die makellos aussieht, steht unter dem Verdacht, ihren Gegenstand zu ästhetisieren.
+
+### Einordnung & Wirkung
+
+Colin Firth gewann in Venedig 2009 die Coppa Volpi als bester Darsteller; der Film erhielt dort den Queer Lion. 2010 folgte der BAFTA für Firth als bester Hauptdarsteller, 2009 ein Satellite Award für das Szenenbild.
+
+Nominiert war Firth zudem für den Oscar und den Golden Globe; weitere Nominierungen gab es für die beste Nebendarstellerin, die beste Filmmusik sowie bei den Critics' Choice Awards und den SAG Awards.
+
+Rotten Tomatoes weist 86 Prozent aus, Metacritic 77 von 100.
+
+Rolling Stone nannte den Film atemberaubend visualisiert und sprach von trauriger Schönheit. Die FAZ hob die Genauigkeit des Regisseurs in jedem Detail hervor. OutNow-CH empfand ihn als minutiös durchgeplant und stellenweise platt, würdigte aber Firths Leistung.
+
+Dass sämtliche Auszeichnungen entweder an Firth oder an die Gestaltung gingen, beschreibt den Film genau: Er lebt von einer Hauptrolle und von der Form, in die sie gestellt wird.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9314', locale: 'de-de',
+    text: `### Worum es geht
+
+Winston Smith gehört zur Äußeren Partei und arbeitet im Ministerium für Wahrheit in Ozeanien. Seine Aufgabe ist es, Vergangenes an die jeweils gültige Gegenwart anzupassen.
+
+Er beginnt zu zweifeln. Er führt ein Tagebuch — verboten — und trifft sich heimlich mit Julia. Der Parteifunktionär O'Brien gibt ihm ein verbotenes Buch. Was danach kommt, ist Verhaftung, Verhör und der Raum 101, in dem jeder mit dem konfrontiert wird, wovor er sich am meisten fürchtet.
+
+### Entstehungsgeschichte
+
+Vorlage ist George Orwells Roman.
+
+Michael Radford führte Regie und schrieb das Drehbuch.
+
+John Hurt spielt Winston Smith, Richard Burton den O'Brien, Suzanna Hamilton die Julia, Cyril Cusack den Charrington und Gregor Fisher den Parsons.
+
+Produziert wurde der Film von Simon Perry. Die Kamera führte Roger Deakins, den Schnitt besorgte Tom Priestley. Die Musik stammt von Dominic Muldowney und den Eurythmics.
+
+Gedreht wurde von April bis Juli 1984 in London und Umgebung. Der Film dauert 106 Minuten und ist ab 16 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Der Dreh fand im Jahr 1984 statt, an den Orten und in den Monaten, in denen der Roman spielt. Diese Übereinstimmung ist der auffälligste Zug dieser Verfilmung — sie stellt den Stoff nicht in eine Zukunft, sondern in seinen eigenen Titel.
+
+Um die Musik gab es Streit. Ursprünglich sollten die Eurythmics die Filmmusik liefern; Michael Radford beauftragte zusätzlich Dominic Muldowney mit einer klassisch angelegten Partitur. Bei der Premiere überwog Muldowneys Musik, Virgin Films brachte den Film später in einer Fassung heraus, in der überwiegend die Eurythmics zu hören sind. Aus dem Streit gingen zwei Versionen hervor: die Kinofassung und ein Director's Cut.
+
+Mit Roger Deakins an der Kamera arbeitete der Film an einem Bild, das Ozeanien nicht futuristisch, sondern heruntergekommen zeigt — die Zukunft als abgenutzte Gegenwart.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 75 Prozent aus, Metacritic 67 von 100. Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
+
+Beim Evening Standard British Film Award wurde der Film als bester Film ausgezeichnet, John Hurt als bester Hauptdarsteller. Beim Festival von Fantasporto erhielt Hurt den Darstellerpreis, in Valladolid 1984 wurden Hurt und Burton für ihre Leistungen und Radford für die Regie ausgezeichnet; beim Istanbul Film Festival gab es die Goldene Tulpe.
+
+Roger Ebert beschrieb die Filmwelt als etwas, das wie ein Jahr durch einen Zeittunnel ankomme, und hob den visuellen Realismus von Orwells Vision hervor.
+
+Dass der Film in Valladolid sowohl Hurt als auch Burton für ihre Leistungen auszeichnete, trifft den Kern der Konstruktion. Winston und O'Brien sind kein Held und kein Bösewicht, sondern zwei Positionen in einem Verhältnis, das erst gegen Ende sichtbar wird — und beide Rollen hängen voneinander ab.` },
+  {
+    bereich: 'titel', schluessel: 'movie:16307', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein tiefgläubiger Polizeisergeant erhält einen anonymen Brief: Auf einer abgelegenen schottischen Insel werde ein Mädchen vermisst.
+
+Vor Ort bestreiten die Bewohner, dass es das Kind überhaupt gibt. Der Sergeant stößt auf eine Gemeinschaft, die einen alten heidnischen Fruchtbarkeitskult pflegt — und findet in den Schulunterlagen doch einen Namen. Man erklärt ihm, das Mädchen sei tot. Er glaubt das nicht. Auf das bevorstehende Maifest läuft alles zu.
+
+### Entstehungsgeschichte
+
+Regie führte Robin Hardy, das Drehbuch schrieb Anthony Shaffer.
+
+Edward Woodward spielt Sergeant Neil Howie, Christopher Lee den Lord Summerisle, Britt Ekland die Willow MacGreagor, Ingrid Pitt die Bibliothekarin, Diane Cilento die Miss Rose und Lindsay Kemp den Alder MacGreagor.
+
+Produziert wurde der Film von Peter Snell. Die Kamera führte Harry Waxman, den Schnitt besorgte Eric Boyd-Perkins, die Musik stammt von Paul Giovanni.
+
+Gedreht wurde im Oktober und November 1972 in Dumfries and Galloway im Südwesten Schottlands. Britt Ekland nannte den Ort später den finstersten der Erde.
+
+Es existieren mehrere Fassungen: eine Kinofassung von 84 Minuten, ein Final Cut von 92 Minuten und ein ursprünglich für die britische Auswertung vorgesehener Director's Cut von 99 Minuten, der als verschollen gilt.
+
+### Hinter den Kulissen
+
+Die Jahreszeit war das größte praktische Problem. Der Film spielt im Frühling, gedreht wurde im Spätherbst. Für die Bäume wurden künstliche Apfelblüten hergestellt und angebracht; die Darsteller lutschten zwischen den Aufnahmen Eisstücke, damit ihr Atem im Bild nicht sichtbar wurde.
+
+Erzählerisch arbeitet der Film gegen die Erwartung des Genres. Es gibt kein Monster und keine Gewaltdarstellung im üblichen Sinn — die Bedrohung besteht darin, dass eine ganze Gemeinschaft freundlich, offen und vollständig einig ist.
+
+Die Musik trägt das mit. Paul Giovannis Arbeit griff auf altes Liedgut zurück; das mittelalterliche englische Lied „Mirie it is while sumer ilast" wurde durch den Film zu einem der international meistgespielten Stücke Alter Musik. Ein Horrorfilm, dessen nachhaltigste Wirkung in der Verbreitung eines mittelalterlichen Liedes besteht, ist ein Sonderfall.
+
+### Einordnung & Wirkung
+
+Cinefantastique nannte den Film den „Citizen Kane des Horrorfilms". Das Lexikon des internationalen Films beschrieb ihn als ungewöhnlich intensiven Horrorfilm ohne grobe Schockeffekte.
+
+1999 führte das British Film Institute ihn auf Platz 96 der besten britischen Filme aller Zeiten.
+
+Christopher Lee nannte den Lord Summerisle zeit seines Lebens eine seiner liebsten Rollen — bemerkenswert bei einem Darsteller, dessen Laufbahn vor allem mit anderen Figuren verbunden wird.
+
+Die Nachwirkung reicht bis in die Popmusik. Iron Maiden widmeten dem Film 2000 ein Stück, Radiohead bezogen sich 2016 im Videoclip zu „Burn the Witch" darauf.
+
+Dass drei Schnittfassungen existieren und die längste als verschollen gilt, gehört zur Geschichte dieses Films dazu — was heute zu sehen ist, ist nicht das, was ursprünglich gezeigt werden sollte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:245168', locale: 'de-de',
+    text: `### Worum es geht
+
+London, 1912. Maud Watts ist 24 und arbeitet in einer Wäscherei. Über Umwege gerät sie in die Bewegung der Suffragetten.
+
+Nachdem sie vor einem Parlamentsausschuss zum Frauenwahlrecht ausgesagt hat, wird sie verhaftet; Polizeifotos gehen um, sie verliert ihre Arbeit. Ihr Mann verstößt sie und gibt den gemeinsamen Sohn zur Adoption frei. Die Bewegung geht unterdessen zu Anschlägen über — auf Briefkästen und auf das Haus von Lloyd George. In Haft treten die Frauen in den Hungerstreik; die Behörden antworten mit Zwangsernährung.
+
+### Entstehungsgeschichte
+
+Regie führte Sarah Gavron, das Drehbuch schrieb Abi Morgan.
+
+Carey Mulligan spielt Maud Watts, Helena Bonham Carter die Edith Ellyn, Natalie Press die Emily Davison, Meryl Streep die Emmeline Pankhurst, Ben Whishaw den Sonny Watts und Brendan Gleeson den Steed.
+
+Produziert wurde der Film von Alison Owen und Faye Ward. Die Kamera führte Edu Grau, den Schnitt besorgte Barney Pilling, die Musik stammt von Alexandre Desplat.
+
+Es handelt sich um eine britische Produktion von 106 Minuten Länge. Der deutsche Kinostart war der 4. Februar 2016.
+
+### Hinter den Kulissen
+
+Die Hauptfigur ist erfunden, der Rahmen nicht. Maud Watts steht für die Arbeiterinnen in der Bewegung — der Film erzählt das Frauenwahlrecht nicht von den bekannten Namen her, sondern von einer Wäscherin.
+
+Emmeline Pankhurst und Emily Davison sind dagegen historische Personen. Davison lief beim Epsom Derby mit einem Banner auf die Rennbahn und wurde vom Pferd des Königs tödlich getroffen. Der Film zeigt diesen Vorgang; für die Bewegung wurde sie danach zur Märtyrerin.
+
+Die Darstellung der Zwangsernährung gehört zu den härtesten Teilen des Films. Sie ist keine Zuspitzung, sondern die Wiedergabe einer Praxis, mit der der Staat auf die Hungerstreiks reagierte.
+
+Meryl Streep tritt als Emmeline Pankhurst nur kurz auf. Diese Gewichtung ist Absicht: Die Anführerin bleibt Randfigur, damit die Erzählung bei denen bleibt, die die Folgen tragen.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 73 Prozent positive Rezensionen aus, Metacritic 64 von 100.
+
+Der Filmdienst hielt fest, das politische Engagement bilde den Kern dieses überzeugend gespielten Dramas.
+
+Bei den British Independent Film Awards 2015 wurde Brendan Gleeson als bester Nebendarsteller ausgezeichnet, bei den Hollywood Film Awards Carey Mulligan als Schauspielerin des Jahres. Bei den European Film Awards 2016 erhielt Alice Normington den Jurypreis für das beste Szenenbild.
+
+Die Entscheidung, eine erfundene Arbeiterin ins Zentrum zu stellen, ist dabei der eigentliche Zugriff des Films. Sie verschiebt die Frage vom Wahlrecht als Verfassungsthema hin zu dem, was der Kampf darum einzelne Frauen gekostet hat — Arbeit, Ehe, das eigene Kind.` },
+  {
+    bereich: 'titel', schluessel: 'movie:489925', locale: 'de-de',
+    text: `### Worum es geht
+
+Kayla Day geht in die achte Klasse. Auf YouTube veröffentlicht sie Videos über Selbstvertrauen und darüber, wie man auf andere zugeht.
+
+Im Alltag ist sie fast unsichtbar. Der Film begleitet ihre letzte Woche vor dem Wechsel auf die High School — und den Abstand zwischen dem, was sie in die Kamera sagt, und dem, was sie tatsächlich schafft.
+
+### Entstehungsgeschichte
+
+Bo Burnham schrieb das Drehbuch und führte Regie; es war sein Debüt als Spielfilmregisseur.
+
+Elsie Fisher spielt Kayla Day, Josh Hamilton ihren Vater Mark, Emily Robinson die Olivia, Catherine Oliviere die Kennedy Graves, Jake Ryan den Gabe, Luke Prael den Aiden Wilson, Daniel Zolghadri den Riley und Fred Hechinger den Trevor.
+
+Produziert wurde der Film von Scott Rudin, Eli Bush, Lila Yacoub und Christopher Storer. Die Kamera führte Andrew Wehde, den Schnitt besorgte Jennifer Lilly, die Musik stammt von Anna Meredith.
+
+Der Film dauert 94 Minuten. Die Uraufführung war am 19. Januar 2018 beim Sundance Film Festival; in Deutschland erschien er am 5. Juli 2019 im Streaming.
+
+### Hinter den Kulissen
+
+Die Konstruktion beruht auf einem Widerspruch, den der Film nie auflöst. Kayla gibt Ratschläge, die sie selbst nicht befolgen kann — nicht aus Heuchelei, sondern weil das Aussprechen leichter ist als das Tun.
+
+Damit ist der Film weniger eine Geschichte über soziale Medien als eine über die Lücke zwischen Vorsatz und Vollzug. Die Videos sind kein Kommentar zur Plattform, sondern die Form, in der ein Kind zu sich selbst spricht.
+
+Die Besetzung trägt das. Elsie Fisher spielt Kayla ohne die Souveränität, die Kinderrollen im Kino sonst mitbekommen — die Unsicherheit ist nicht angedeutet, sondern die Grundhaltung der Figur.
+
+Die Musik von Anna Meredith setzt dem etwas entgegen. Sie ist laut und drängend, wo das Bild zögert — der innere Zustand wird hörbar, bevor er sichtbar wird.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 99 Prozent aus (307 Rezensionen), Metacritic 90 von 100 und damit universelle Anerkennung. Für ein Regiedebüt sind das außergewöhnliche Werte.
+
+Bo Burnham erhielt 2019 den Award der Writers Guild of America für das beste Originaldrehbuch und den Independent Spirit Award für das beste Drehbuchdebüt. Elsie Fisher wurde für den Golden Globe nominiert; bei den Gotham Awards gab es Breakthrough Awards für Fisher und Burnham.
+
+Bemerkenswert ist die deutsche Auswertung. Nach der Premiere in Sundance im Januar 2018 dauerte es bis Juli 2019, bis der Film hierzulande erschien — und dann im Streaming, nicht im Kino. Ein Film über eine Vierzehnjährige, ohne bekannte Namen und ohne Genrezuordnung, findet auf diesem Weg leichter sein Publikum als über die Leinwand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:168', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine unbekannte Sonde nähert sich der Erde und richtet dabei Verwüstung an. Ihre Signale ergeben keinen Sinn — bis Spock erkennt, dass es sich um Walgesänge handelt.
+
+Das Problem: Buckelwale sind im 23. Jahrhundert ausgestorben. Also fasst Kirk einen Entschluss, der so absurd ist wie zwingend — die Crew reist ins Jahr 1986, um zwei Tiere zu holen.
+
+### Entstehungsgeschichte
+
+Regie führte Leonard Nimoy. Am Drehbuch schrieben Nimoy, Nicholas Meyer, Steve Meerson, Peter Krikes und Harve Bennett, der zugleich produzierte.
+
+William Shatner spielt James T. Kirk, Leonard Nimoy den Spock, DeForest Kelley den Dr. Leonard McCoy, James Doohan den Montgomery Scott, George Takei den Hikaru Sulu, Walter Koenig den Pavel Chekov, Nichelle Nichols die Uhura und Catherine Hicks die Dr. Gillian Taylor.
+
+Die Kamera führte Don Peterman, den Schnitt besorgte Peter E. Berger, die Musik stammt von Leonard Rosenman.
+
+Die Aquariumsszenen entstanden im Monterey Bay Aquarium in Kalifornien. Der Flugzeugträger im Film ist tatsächlich die USS Ranger — die echte Enterprise war während der Dreharbeiten auf See. Der Film dauert 122 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Der Wechsel des Genres ist die Entscheidung, die diesen Film prägt. Statt Raumschlacht gibt es San Francisco im Jahr 1986 — und eine Crew, die mit Telefonzellen, Bargeld und Verkehrsregeln nicht zurechtkommt. Aus Science-Fiction wird Komödie, ohne dass der Ausgangspunkt aufgegeben wird.
+
+Die Bedrohung ist dabei ungewöhnlich konstruiert. Die Sonde ist nicht feindselig; sie ruft nach jemandem, den es nicht mehr gibt. Der Konflikt entsteht aus einem Aussterben, das die Menschheit selbst verursacht hat.
+
+Dass ausgerechnet der Hauptdarsteller des Spock Regie führte, passt zur Anlage. Der Film räumt seinen Figuren Zeit für Beiläufiges ein — und genau daraus zieht er seine Wirkung.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 81 Prozent positive Bewertungen aus, Metacritic 71 von 100. Beim Publikum ergab CinemaScore ein „A+".
+
+James Berardinelli nannte den Film ein vergnügliches Stück Unterhaltung, das so vertraute Figuren einsetze. TV Movie sprach vom witzigsten Ausflug der Enterprise, der in die achtziger Jahre führe.
+
+Bis 2009 war es der erfolgreichste Star-Trek-Kinofilm.
+
+Diese Bilanz erklärt sich aus der Öffnung. Ein Film, der seine Figuren in die Gegenwart des Publikums versetzt, braucht keine Vorkenntnisse — wer die Serie nie gesehen hatte, konnte hier einsteigen. Die Note „A+" beim Publikum ist für einen vierten Teil einer Reihe außergewöhnlich.` },
+  {
+    bereich: 'titel', schluessel: 'movie:646097', locale: 'de-de',
+    text: `### Worum es geht
+
+Terry Richmond, ehemaliger Marine, kommt nach Shelby Springs in Louisiana. Er will die Kaution für seinen Cousin zahlen.
+
+Die örtliche Polizei nimmt ihm die 36.000 Dollar ab — über die zivilrechtliche Vermögenseinziehung, ein Verfahren, das kein Strafurteil voraussetzt. Beim Versuch, das Geld zurückzubekommen, stößt Terry auf ein System: Verdächtige werden 90 Tage ohne Rechtsbeistand festgehalten, bis die Aufzeichnungen der Dashcams gelöscht sind.
+
+### Entstehungsgeschichte
+
+Jeremy Saulnier schrieb das Drehbuch, produzierte, führte Regie und übernahm den Schnitt.
+
+Aaron Pierre spielt Terry Richmond, Don Johnson den Chief Sandy Burnne, AnnaSophia Robb die Summer McBride, David Denman den Officer Evan Marston, Emory Cohen den Officer Steve Lann, Steve Zissis den Elliot, Zsané Jhé die Officer Jessica Sims, Dana Lee den Mr. Liu und James Cromwell einen Richter.
+
+Produziert wurde der Film von Filmscience und Bonneville Pictures. Die Kamera führte David Gallego, die Musik stammt von Brooke und Will Blair. Gedreht wurde in Louisiana; der Film dauert 131 Minuten.
+
+Am 6. September 2024 erschien er bei Netflix und kam in den ersten drei Tagen auf 31,2 Millionen Aufrufe.
+
+### Hinter den Kulissen
+
+Der Ausgangspunkt ist kein erfundener Missstand. Die zivilrechtliche Vermögenseinziehung erlaubt es Behörden, Geld einzuziehen, ohne dass jemand verurteilt wurde — der Film baut seine gesamte Handlung auf diesem Verfahren auf.
+
+Daraus folgt eine ungewöhnliche Form der Auseinandersetzung. Terry ist ausgebildeter Soldat, aber sein Ziel ist nicht Vergeltung, sondern die Rückgabe eines Betrags. Der Film hält ihn deshalb konsequent unterhalb der Eskalation, zu der sein Können ihn befähigen würde.
+
+Dass Jeremy Saulnier vier Funktionen übernimmt — Buch, Regie, Produktion, Schnitt —, erklärt die Geschlossenheit des Films. 131 Minuten für einen Thriller sind viel; die Länge geht an das Verfahren, nicht an die Action.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 96 Prozent positive Bewertungen aus (Schnitt 7,9 von 10), Metacritic 76 von 100. Beschrieben wurde der Film als intelligentes und spannendes Vehikel für Aaron Pierres Darbietung, die ihn zum Star mache.
+
+31,2 Millionen Aufrufe in drei Tagen sind für einen Film ohne bekannte Hauptrolle ein bemerkenswerter Wert. Er zeigt, was eine Plattform leisten kann, wenn ein Stoff trägt: Der Film brauchte keinen Verleihstart und keine Werbekampagne über Monate.
+
+Bemerkenswert ist, worauf sich das Lob konzentriert. Anerkannt wird nicht der Aufwand — der ist überschaubar —, sondern die Genauigkeit: ein Thriller, der aus einer realen Rechtspraxis heraus gebaut ist und seine Spannung aus Verfahrensfragen zieht statt aus Verfolgungsjagden.` },
 ];
