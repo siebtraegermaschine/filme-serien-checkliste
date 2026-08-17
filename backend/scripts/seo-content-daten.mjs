@@ -42670,4 +42670,303 @@ Rotten Tomatoes weist 88 Prozent aus (161 Bewertungen). The Guardian vergab fün
 Dieses Urteil zielt auf das, was den Film heraushebt. Nicht die Handlung ist neu, sondern wer sie erlebt — und wie selbstverständlich der Film seinen Figuren Interessen zugesteht, die man ihnen sonst nicht zuschreibt.
 
 Für ein Debüt in dieser Besetzung ist ASAP Rockys Auftritt bemerkenswert, ebenso die Zahl der später bekannten Namen: Shameik Moore, Kiersey Clemons, LaKeith Stanfield und Tony Revolori standen hier gemeinsam vor der Kamera.` },
+  // ---- Block 094 ----
+  {
+    bereich: 'titel', schluessel: 'movie:179', locale: 'de-de',
+    text: `### Worum es geht
+
+Silvia Broome arbeitet als Dolmetscherin bei den Vereinten Nationen in New York. Eines Abends hört sie im Saal etwas, was sie nicht hören sollte: die Ankündigung eines Attentats auf den Staatschef von Matobo, Dr. Edmond Zuwanie.
+
+Sie meldet es dem Secret Service. Agent Tobin Keller glaubt ihr nicht — Broome stammt selbst aus Matobo, und ihre Familie kam unter Zuwanies Regime ums Leben. Erst nach Bombenanschlägen ändert sich sein Blick auf sie.
+
+### Entstehungsgeschichte
+
+Regie führte Sydney Pollack. Am Drehbuch schrieben Martin Stellman, Brian Ward, Charles Randolph, Scott Frank und Steven Zaillian.
+
+Nicole Kidman spielt Silvia Broome, Sean Penn den Tobin Keller, Catherine Keener die Dot Woods, Clyde Kusatsu den Lee Wu, Jesper Christensen den Nils Lud, Yvan Attal den Philippe, Earl Cameron den Edmond Zuwanie und George Harris den Kuman Kuman.
+
+Produziert wurde der Film von Tim Bevan, Eric Fellner, Michael F. Steele und Kevin Misher. Die Kamera führte Darius Khondji, die Musik stammt von James Newton Howard.
+
+Gedreht wurde im Hauptsitz der Vereinten Nationen in New York — es waren die ersten Filmaufnahmen, die im Gebäude genehmigt wurden.
+
+### Hinter den Kulissen
+
+Die Drehgenehmigung für das UN-Hauptquartier ist der bemerkenswerteste Produktionsbefund. Ein Ort, der bis dahin für Spielfilme verschlossen war, wurde für diesen Film geöffnet — und der Film macht daraus mehr als eine Kulisse: Die Architektur, die Kabinen, die Kopfhörer sind der Handlungsraum.
+
+Der Beruf der Hauptfigur ist dabei genau gewählt. Eine Dolmetscherin hört alles und darf nichts weitergeben; ihre Berufsauffassung steht gegen das, was sie erfahren hat.
+
+Fünf Autoren am Drehbuch sind ein Hinweis darauf, wie oft der Stoff umgearbeitet wurde. Das Lexikon des internationalen Films bemängelte genau das: Die Handlung sei gewollt verwickelt und löse sich dann banal auf.
+
+Matobo ist ein erfundenes Land. Der Film vermeidet damit die Zuordnung zu einem realen Staat — und nimmt in Kauf, dass sein politischer Gegenstand allgemein bleibt.
+
+### Einordnung & Wirkung
+
+In Deutschland sahen rund 1,2 Millionen Zuschauer den Film.
+
+Das Lexikon des internationalen Films nannte ihn einen Polit-Thriller mit herausragenden Darstellern, der inszenatorisch aber hinter früheren Filmen Sydney Pollacks zurückbleibe.
+
+Dieses Urteil trennt Besetzung und Regie. Nicole Kidman und Sean Penn tragen den Film; die Konstruktion um sie herum überzeugte weniger.
+
+Für Sydney Pollack, dessen Name mit dem politischen Thriller der siebziger Jahre verbunden ist, war das eine Rückkehr in ein Feld, an dem er selbst den Maßstab gesetzt hatte — und an dem er gemessen wurde.` },
+  {
+    bereich: 'titel', schluessel: 'series:4327', locale: 'de-de',
+    text: `### Worum es geht
+
+Mr. Bean löst alltägliche Aufgaben auf Wegen, die niemand sonst wählen würde. Was dabei herauskommt, ist meist Chaos.
+
+Die Figur ist kindlich angelegt: Sie meint es nicht böse, versteht aber die Regeln nicht, nach denen andere Menschen zusammenleben.
+
+### Entstehungsgeschichte
+
+Entwickelt wurde die Serie von Rowan Atkinson und Richard Curtis. Atkinson hatte die Figur bereits während seines Elektrotechnikstudiums in Oxford entworfen.
+
+Rowan Atkinson spielt Mr. Bean. Matilda Ziegler spielt in drei Folgen seine Freundin Irma Gobb.
+
+Insgesamt entstanden 15 Folgen. Ausgestrahlt wurden sie von 1990 bis 1995 bei ITV; die Pilotfolge lief am 1. Januar 1990.
+
+### Hinter den Kulissen
+
+Die Machart ist die eigentliche Entscheidung. Die Serie besteht zum größten Teil aus körperlicher Komödie mit minimalem verständlichem Dialog — es gibt kaum etwas zu übersetzen.
+
+Genau daraus folgt ihre weltweite Verbreitung. Eine Serie ohne Sprache braucht keine Synchronisation und keine Untertitel; sie funktioniert überall gleich.
+
+Für einen Darsteller ist das die schwierigste Form. Wer ohne Worte auskommen muss, hat nur Bewegung, Gesicht und Timing — jede Pointe muss sichtbar sein.
+
+15 Folgen über sechs Jahre sind zugleich ein sehr knapper Bestand. Die Serie wurde nie in Menge produziert; jede Folge ist einzeln gebaut.
+
+### Einordnung & Wirkung
+
+Die erste Folge gewann 1991 beim Rose d'Or Light Entertainment Festival in Montreux die Goldene Rose sowie zwei weitere Preise. Rowan Atkinson erhielt mehrere BAFTA-Nominierungen.
+
+Die Auszeichnung in Montreux ist bezeichnend. Ein Festival für leichte Unterhaltung erkannte sofort, was diese Serie leistet — und der Preis fiel auf die allererste Folge.
+
+Der Verzicht auf Sprache hat die Figur über die Serie hinaus getragen. Aus 15 Folgen wurden eine Zeichentrickserie und zwei Kinofilme; Mr. Bean gehört seither zu den wenigen Fernsehfiguren, die international ohne Erklärung erkannt werden.
+
+Dass die Idee aus einem Elektrotechnikstudium stammt, gehört zu den unwahrscheinlicheren Ursprungsgeschichten des britischen Fernsehens.` },
+  {
+    bereich: 'titel', schluessel: 'movie:20126', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Jazzpianist Marcus Daly wird Zeuge eines Mordes: Eine Hellseherin wird von einer Person mit schwarzen Handschuhen getötet.
+
+Daly beginnt auf eigene Faust zu ermitteln. Die Spur führt ihn zu einem verlassenen Haus mit einer verstörenden Wandmalerei — und weiter zurück zu einem alten Fall, der nie aufgeklärt wurde.
+
+### Entstehungsgeschichte
+
+Regie führte Dario Argento, das Drehbuch schrieb er gemeinsam mit Bernardino Zapponi. Produziert wurde der Film von Salvatore Argento für Rizzoli Film und Seda Spettacoli; den Verleih übernahm Cineriz.
+
+David Hemmings spielt Marcus Daly, Daria Nicolodi die Gianna Brezzi, Gabriele Lavia den Carlo Manganiello, Macha Méril die Helga Ulmann, Clara Calamai die Martha Manganiello und Glauco Mauri den Professor Giordani.
+
+Die Kamera führte Luigi Kuveiller, den Schnitt besorgte Franco Fraticelli. Die Musik stammt von Giorgio Gaslini und der Band Goblin — der Beginn einer langjährigen Zusammenarbeit zwischen Argento und Goblin.
+
+Gedreht wurde über 16 Wochen in Turin, dazu in Rom und Perugia; zu den Schauplätzen gehören die Piazza C.L.N., die Kirche Santa Costanza, das Teatro Carignano und die Villa Scott.
+
+### Hinter den Kulissen
+
+Die Musik von Goblin ist mehr als Untermalung. Sie setzt den Rhythmus, in dem der Film sich bewegt, und wurde stilbildend für ein ganzes Genre.
+
+Erzählerisch beruht der Film auf einem Zeugen, der zu wenig gesehen hat. Marcus Daly war dabei, kann aber nicht sagen, was ihm aufgefallen ist — die Ermittlung richtet sich damit ebenso gegen seine eigene Erinnerung wie gegen den Täter.
+
+Sechzehn Wochen Dreh sind für eine italienische Produktion dieser Zeit ausgesprochen lang. Turin liefert dabei mehr als eine Kulisse; die Stadt mit ihren Arkaden und Plätzen prägt das Bild.
+
+Es existieren mehrere Fassungen. Die Originalversion dauert 126 Minuten, die US-Fassung wurde um 22 Minuten gekürzt. Spätere Veröffentlichungen stellten die fehlenden Szenen wieder her, teils mit italienischem Ton.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 94 Prozent aus; der Konsens hebt die kinematografische Gewandtheit und die brutale Ästhetik hervor. Metacritic kommt auf 89 von 100 und damit auf einhelliges Lob.
+
+Quentin Tarantino bezeichnete sich als beeindruckt von dem Film.
+
+Die Zusammenarbeit mit Goblin, die hier begann, wurde zum Kennzeichen von Argentos Arbeiten — und die Verbindung aus Musik, Farbe und Kamerabewegung zum Muster, an dem sich das Genre orientierte.
+
+Dass die amerikanische Fassung 22 Minuten kürzer war, gehört zur Rezeptionsgeschichte. Wer den Film in dieser Form sah, sah einen anderen — die Wiederherstellung kam erst Jahrzehnte später.` },
+  {
+    bereich: 'titel', schluessel: 'movie:399121', locale: 'de-de',
+    text: `### Worum es geht
+
+1894 wird Hauptmann Alfred Dreyfus wegen Hochverrats verurteilt und auf die Teufelsinsel gebracht.
+
+Ein Jahr später übernimmt Georges Picquart die Leitung des französischen Geheimdienstes und stößt auf Ungereimtheiten im Verfahren. Er stellt fest, dass nicht Dreyfus das belastende Dokument verfasst hat, sondern Major Ferdinand Walsin Esterhazy. Seine Vorgesetzten blockieren eine Wiederaufnahme; Picquart wird verhaftet. Émile Zola veröffentlicht daraufhin seinen Brief „J'accuse" in der Zeitung L'Aurore — und wird selbst verurteilt.
+
+### Entstehungsgeschichte
+
+Vorlage ist Robert Harris' Roman „An Officer and a Spy" von 2013. Harris schrieb das Drehbuch gemeinsam mit Roman Polanski, der Regie führte.
+
+Jean Dujardin spielt Oberst Georges Picquart, Louis Garrel den Hauptmann Alfred Dreyfus, Emmanuelle Seigner die Pauline Monnier, Grégory Gadebois den Hubert-Joseph Henry, Mathieu Amalric den Alphonse Bertillon und André Marcon den Émile Zola.
+
+Die Produktion verzögerte sich mehrfach: Zunächst waren Dreharbeiten 2014 in Warschau geplant, dann 2016 in Paris. Gedreht wurde schließlich vom 26. November 2018 bis zum 28. April 2019 im Großraum Paris — unter anderem im Palais de Justice, in der Kirche Saint-Germain-l'Auxerrois und in der École Militaire; die Szenen auf der Teufelsinsel entstanden in Plougasnou in der Bretagne.
+
+Die Kamera führte Paweł Edelman, die Musik stammt von Alexandre Desplat. Das Budget betrug 24 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film erzählt die Dreyfus-Affäre nicht aus Sicht des Verurteilten, sondern aus der seines Aufklärers. Picquart ist kein Sympathisant von Dreyfus; er handelt, weil die Akten nicht stimmen — und wird dafür selbst verhaftet.
+
+Damit verschiebt sich der Gegenstand. Nicht das Unrecht steht im Mittelpunkt, sondern der Apparat, der es verteidigt, nachdem es aufgefallen ist.
+
+Der Antisemitismus, der dem Fall zugrunde liegt, ist dabei nicht Kulisse. Ein jüdischer Offizier wurde zum Opfer eines Justizirrtums, den man aufrechterhielt, obwohl der wahre Verfasser bekannt war.
+
+Zolas „J'accuse" — im Französischen zugleich der Originaltitel des Films — ist der Wendepunkt: der Moment, in dem der Fall die Militärjustiz verlässt und Öffentlichkeit wird.
+
+### Einordnung & Wirkung
+
+In Venedig 2019 erhielt der Film den Großen Preis der Jury und wurde mit stehenden Ovationen aufgenommen. Bei den Césars 2020 gewann er in drei Kategorien — Regie, Adaption und Kostümbild — bei zwölf Nominierungen; hinzu kamen vier Nominierungen bei den Europäischen Filmpreisen.
+
+Rotten Tomatoes weist 78 Prozent aus, Metacritic 56 von 100. David Sexton nannte den Film im Evening Standard eine Meisterklasse darin, wie man einen historischen Film macht.
+
+Die Auszeichnungen lösten Proteste aus. Im November 2019 wurden gegen Roman Polanski Vergewaltigungsvorwürfe erhoben; Feministinnen blockierten französische Kinos, und bei der César-Verleihung verließen mehrere Anwesende den Saal, darunter die Schauspielerin Adèle Haenel.
+
+In den USA, Großbritannien, Australien und Neuseeland erschien der Film erst 2025. Bei 24 Millionen Dollar Budget standen 18,9 Millionen Einspielergebnis — wirtschaftlich ein Misserfolg.` },
+  {
+    bereich: 'titel', schluessel: 'movie:49020', locale: 'de-de',
+    text: `### Worum es geht
+
+Oliver Tate ist fünfzehn und lebt in Swansea in Wales. Er verliebt sich in Jordana, die genauso alt ist.
+
+Zwei Dinge beschäftigen ihn: die Beziehung am Laufen zu halten und die Ehe seiner Eltern zu retten, seit seine Mutter Jill ihren früheren Freund Graham wiedergetroffen hat. Bei Jordana zu Hause steht es schlechter — ihre Mutter hat einen Hirntumor. Oliver greift ein, mit Mitteln, die ein Fünfzehnjähriger für klug hält.
+
+### Entstehungsgeschichte
+
+Vorlage ist Joe Dunthornes Roman „Submarine" von 2008.
+
+Richard Ayoade führte Regie und schrieb das Drehbuch; es war sein Debüt als Regisseur.
+
+Craig Roberts spielt Oliver Tate, Yasmin Paige die Jordana Bevan, Sally Hawkins die Mutter Jill, Noah Taylor den Vater Lloyd, Paddy Considine den Graham Purvis und Gemma Chan die Kim-Lin.
+
+Produziert wurde der Film von Warp Films und Film4 Productions; als Produzenten sind Mary Burke, Mark Herbert und Andy Stebbing genannt. Die Kamera führte Erik Wilson.
+
+Die Musik stammt von Andrew Hewitt und Alex Turner von den Arctic Monkeys; Turner schrieb fünf Originalstücke eigens für den Film — es war seine erste Veröffentlichung als Solokünstler.
+
+Gedreht wurde vom 26. Oktober bis Dezember 2009 in Swansea. Die Weltpremiere lief im September 2010 in Toronto, der britische Kinostart folgte am 18. März 2011, der amerikanische am 3. Juni 2011.
+
+### Hinter den Kulissen
+
+Der Film erzählt aus Olivers Perspektive — und die ist unzuverlässig. Er hält sich für den heimlichen Regisseur seines eigenen Lebens; der Film zeigt, wie weit er danebenliegt.
+
+Daraus ergibt sich der Ton. Was Oliver für Strategie hält, ist Einmischung; was er für Liebe hält, muss er erst noch lernen. Der Film nimmt ihn ernst, ohne ihm recht zu geben.
+
+Alex Turners fünf Originalstücke geben dem Ganzen eine eigene Klangfarbe. Dass ein Musiker seine erste Soloarbeit für einen Film über einen Fünfzehnjährigen schreibt, passt zur Anlage: gedämpft, hellhörig, ohne Ironie.
+
+Swansea ist dabei kein austauschbarer Ort. Der Film bleibt in einer walisischen Küstenstadt, mit allem, was das an Enge und Weite zugleich bedeutet.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 88 Prozent positive Bewertungen aus — 137 von 156 Kritiken; das Publikum kam auf 82 Prozent. Die IMDb-Bewertung liegt bei 7,3 von 10.
+
+Eine Kritikerin der Frankfurter Rundschau schrieb, vielleicht wirke „Submarine" wie sein Protagonist ein wenig zu schlau — seinem Charme schade das nicht.
+
+Dieses Urteil trifft genau die Gratwanderung des Films. Eine Erzählung über einen Jungen, der sich für klüger hält als alle anderen, läuft Gefahr, selbst so zu wirken.
+
+Der Weg über drei Festivals — Toronto, London, Sundance — bis zum regulären Start ein halbes Jahr später zeigt, wie ein Regiedebüt dieser Art damals sein Publikum fand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:39781', locale: 'de-de',
+    text: `### Worum es geht
+
+Jules und Nic sind verheiratet, leben in Kalifornien und haben zwei Kinder, Joni und Laser. Beide stammen vom selben Samenspender.
+
+Die Kinder wollen ihn kennenlernen. Paul taucht auf — und was als Begegnung beginnt, greift in die Familie ein: Zwischen Jules und Paul entwickelt sich eine Beziehung.
+
+### Entstehungsgeschichte
+
+Regie führte Lisa Cholodenko, das Drehbuch schrieb sie gemeinsam mit Stuart Blumberg.
+
+Julianne Moore spielt Jules, Annette Bening die Nic, Mark Ruffalo den Paul, Mia Wasikowska die Joni und Josh Hutcherson den Laser.
+
+Produziert wurde der Film von Gary Gilbert, Jordan Horowitz, Jeffrey Levy-Hinte, Celine Rattray und Daniela Taplin Lundberg. Die Kamera führte Igor Jadue-Lillo, den Schnitt besorgte Jeffrey M. Werner, die Musik stammt von Nathan Larson und Craig Wedren.
+
+Der Film erschien 2010, dauert 106 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Konstruktion nimmt eine Familienform, die im Kino selten im Mittelpunkt stand, und behandelt sie ohne Sonderbehandlung. Jules und Nic sind ein Paar mit den Problemen eines langjährigen Paares; der Film erklärt ihre Ehe nicht, er zeigt sie.
+
+Der Spender ist dabei die Störung, nicht der Skandal. Paul bringt nichts mit, was die Familie nicht schon hätte — er macht nur sichtbar, was zwischen Jules und Nic ohnehin nicht stimmt.
+
+Daraus ergibt sich der bemerkenswerteste Zug des Films: Er verhandelt eine Affäre, ohne eine Schuldige zu benennen, und lässt seine Figuren mit dem weitermachen, was übrig bleibt.
+
+Die Kinder sind dabei keine Nebenfiguren. Der Titel bezieht sich auf sie — und der Film gibt ihnen recht.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 92 Prozent positive Bewertungen aus. Deutsche Kritiker hoben die wunderbaren Schauspieler und die durchweg gelungenen Dialoge hervor.
+
+Bei den Golden Globes gewann der Film als bester Film in der Kategorie Komödie oder Musical, Annette Bening als beste Hauptdarstellerin. Bei den Oscars folgten vier Nominierungen: bester Film, beste Hauptdarstellerin für Bening, bester Nebendarsteller für Mark Ruffalo und bestes Originaldrehbuch. Auf der Berlinale erhielt der Film den Teddy Award.
+
+Diese Kombination ist aussagekräftig. Der Teddy Award zeichnet Filme mit queeren Themen aus; die Oscar-Nominierung als bester Film ordnet ihn zugleich in den Hauptwettbewerb ein. Beides zusammen beschreibt, was dem Film gelang — ein Stoff, der nicht als Sonderfall verhandelt wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:110416', locale: 'de-de',
+    text: `### Worum es geht
+
+Ben lebt mit seiner Familie im Haus eines Leuchtturmwärters. Nachdem seine Mutter verschwunden ist, kümmert sich der Vater Conor allein um ihn und die kleine Schwester Saoirse.
+
+Die Großmutter will die Kinder nach Dublin holen. Auf dem Weg zeigt sich, dass Saoirse eine Selkie ist — ein Robbenmädchen, das durch Gesang magische Wesen befreien kann. Ben muss seine Angst vor Wasser überwinden.
+
+### Entstehungsgeschichte
+
+Regie führte Tomm Moore, das Drehbuch schrieb Will Collins.
+
+Im Original sprechen David Rawle den Ben, Brendan Gleeson den Vater Conor, Fionnula Flanagan die Eulenhexe Macha, Lisa Hannigan die Mutter Bronagh und Lucy O'Connell die Saoirse.
+
+Die Musik stammt von Bruno Coulais; Lisa Hannigan und Nolwenn Leroy singen die Hauptthemen. Den Schnitt besorgte Darragh Byrne, produziert wurde der Film unter anderem von Claus Toksvig Kjaer, Tomm Moore und Ross Murray.
+
+Es handelt sich um eine Koproduktion aus Belgien, Dänemark, Frankreich, Irland und Luxemburg aus dem Jahr 2014; gesprochen wird Englisch und Irisch. Der Film gehört zur irischen Trilogie des Studios Cartoon Saloon.
+
+### Hinter den Kulissen
+
+Die Vorlage ist keine literarische, sondern eine mythologische. Selkies gehören zur irischen und schottischen Überlieferung — Wesen, die zwischen Robbe und Mensch wechseln. Der Film erzählt einen Familienverlust in dieser Bildsprache.
+
+Daraus ergibt sich die doppelte Lesbarkeit. Was als Märchen erzählt wird, lässt sich zugleich als Trauergeschichte lesen: Eine Mutter ist fort, und die Kinder erklären sich das mit den Mitteln, die sie haben.
+
+Die Zweisprachigkeit — Englisch und Irisch — verankert den Film in seiner Herkunft. Er ist Teil einer Reihe, mit der Cartoon Saloon irische Stoffe erzählt.
+
+Bruno Coulais' Musik trägt dabei mehr als üblich, weil das Singen selbst zur Handlung gehört: Saoirse befreit durch Gesang.
+
+### Einordnung & Wirkung
+
+Der Film gewann 2015 den Europäischen Filmpreis als bester Animationsfilm. Nominiert war er für den Oscar und für den César; die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
+
+Mark Kermode vergab im Guardian fünf von fünf Sternen, nannte den Film hervorragend und die Animation prachtvoll; er verwies auf Einflüsse von Studio Ghibli und Sylvain Chomet. Leslie Felperin gab vier von fünf Sternen.
+
+Der Verweis auf Ghibli und Chomet trifft die Machart. Es ist gezeichnete, flächige Animation — eine bewusste Entscheidung gegen den vorherrschenden Computerstil.
+
+Dass ein Film aus fünf Ländern mit irischsprachigen Anteilen für den Oscar nominiert wurde, ist die Ausnahme. Für Cartoon Saloon war es die Bestätigung eines Weges, den das Studio seit Jahren verfolgt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:152737', locale: 'de-de',
+    text: `### Worum es geht
+
+Beverly Weston, ein pensionierter Lehrer, verschwindet und wird ertrunken aufgefunden. Zur Beerdigung kommt die Familie im Haus in Oklahoma zusammen.
+
+Dort wartet Violet, seine Frau — krebskrank, medikamentenabhängig und ohne jede Zurückhaltung. Beim Essen nach der Beerdigung bricht auf, was jahrzehntelang unausgesprochen blieb.
+
+### Entstehungsgeschichte
+
+Vorlage ist Tracy Letts' Bühnenstück, das mit dem Pulitzer-Preis ausgezeichnet wurde; Letts schrieb auch das Drehbuch.
+
+Regie führte John Wells.
+
+Meryl Streep spielt Violet Weston, Julia Roberts die Tochter Barbara, Ewan McGregor deren Mann Bill Fordham, Sam Shepard den Vater Beverly, Julianne Nicholson die Tochter Ivy, Juliette Lewis die Tochter Karen, Benedict Cumberbatch den Charles Aiken und Abigail Breslin die Jean Fordham.
+
+Produziert wurde der Film von George Clooney, Jean Doumanian, Grant Heslov, Steve Traxler und Harvey Weinstein. Die Kamera führte Adriano Goldman, den Schnitt besorgte Stephen Mirrione, die Musik stammt von Gustavo Santaolalla.
+
+Gedreht wurde vom 15. Oktober bis zum 8. Dezember 2012 in Oklahoma und Los Angeles. Der Film dauert 121 Minuten, das Budget betrug rund 25 Millionen Dollar. Weltpremiere war am 9. September 2013 in Toronto, der US-Start am 10. Januar 2014, der deutsche am 6. März 2014.
+
+### Hinter den Kulissen
+
+Die Herkunft vom Theater ist unübersehbar und beabsichtigt. Ein Haus, eine Familie, ein Esstisch — der Film verlässt diesen Raum selten und lebt von dem, was dort gesagt wird.
+
+Das stellt Anforderungen an die Besetzung, die dieser Film mit ungewöhnlicher Dichte erfüllt. Acht tragende Rollen, die im selben Raum gegeneinander arbeiten müssen.
+
+Die zentrale Szene ist das Essen nach der Beerdigung. Sie ist der Punkt, an dem der Film sein ganzes Material auf einmal ausspielt — und alles Weitere ist die Folge davon.
+
+Genau daran setzte die Kritik an. Kai Mihm bemängelte im epd Film mangelnden Mut bei den Konflikten und inhaltliche Unstimmigkeiten, trotz guter Besetzung und Kameraarbeit.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 67 Prozent positive Bewertungen aus.
+
+Meryl Streep war 2014 für den Oscar als beste Hauptdarstellerin nominiert, Julia Roberts als beste Nebendarstellerin; dieselbe Konstellation wiederholte sich bei den Golden Globes und den SAG Awards, bei den BAFTA-Awards war Roberts nominiert.
+
+Die Zeit hielt fest, hier tobten sich die Stars aus — Streep, Roberts und Cumberbatch lieferten sich einen hochkarätigen Schlagabtausch.
+
+Dass sämtliche Nominierungen auf Darstellerinnen entfielen und keine auf Regie oder Drehbuch, beschreibt den Film genau. Er ist eine Bühne für seine Besetzung; was ihn trägt, ist gesprochener Text, und der stammt aus einem preisgekrönten Theaterstück.` },
 ];
