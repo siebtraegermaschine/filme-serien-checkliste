@@ -22382,4 +22382,450 @@ Der Film erschien am 28. März 2025 über Amazon MGM Studios und in Großbritann
 Die Kritik blieb geteilt: 46 Prozent bei Rotten Tomatoes, 52 von 100 bei Metacritic. Der wiederkehrende Befund lautete, der Film liefere solide ab, was man von einem Statham-Film erwarte, entwickle darüber hinaus aber kein eigenes Gesicht.
 
 Er steht damit für den handgemachten Actionfilm mittlerer Größe, der seinen Platz behalten hat — auch nachdem das Kino ihn weitgehend an die Streamingdienste abgegeben hatte.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'series:95', locale: 'de-de',
+    text: `### Worum es geht
+
+Buffy Summers zieht nach Sunnydale in Kalifornien, weil sie an ihrer alten Schule die Turnhalle abgefackelt hat — dort waren Vampire drin. Sie ist die Jägerin: In jeder Generation wird ein Mädchen auserwählt, das gegen Dämonen kämpft, ohne gefragt zu werden.
+
+Sunnydale steht auf einem Höllenschlund, und die Schule liegt genau darüber. Gemeinsam mit ihren Freunden Willow und Xander und ihrem Wächter, dem Bibliothekar Giles, hält Buffy die Sache in Grenzen. Die Serie führt das durch: Was Jugendlichen tatsächlich zusetzt — Untreue, Ausgrenzung, Verlust, das erste Mal —, taucht als Ungeheuer auf und muss trotzdem real bewältigt werden.
+
+### Entstehungsgeschichte
+
+Joss Whedon entwickelte die Serie aus seinem eigenen Drehbuch zum Kinofilm von 1992, mit dem er unzufrieden war: Der Film habe den Stoff als Komödie behandelt statt ernst zu nehmen.
+
+Sein Ausgangspunkt war eine Umkehrung: das kleine blonde Mädchen, das in der dunklen Gasse verschwindet, sollte diejenige sein, die zurückkommt. Whedon hat das so beschrieben — es gehe um die Freude an weiblicher Kraft: sie zu haben, sie einzusetzen, sie zu teilen.
+
+### Hinter den Kulissen
+
+Die Serie lief von 1997 bis 2003 über sieben Staffeln mit 144 Folgen; nach der fünften Staffel wechselte sie von The WB zu UPN. Sarah Michelle Gellar spielt Buffy.
+
+Bekannt wurde sie auch für einzelne Folgen, die mit der Form brechen: eine Episode fast ohne Dialog, in der den Bewohnern die Stimme genommen wird, und eine als vollständiges Musical mit eigens geschriebenen Liedern.
+
+Whedons Rolle wird heute anders bewertet: Mehrere Beteiligte haben ihm später Machtmissbrauch am Set vorgeworfen — was die Einordnung seines Werks verändert hat, ohne die Wirkung der Serie aufzuheben.
+
+### Einordnung & Wirkung
+
+Die Serie erreichte vier bis sechs Millionen Zuschauer je Folge — für The WB ein starker Wert, gemessen an den großen Sendern wenig.
+
+Sie gilt bis heute als eine der einflussreichsten Serien überhaupt und hat das Bild weiblicher Hauptfiguren im Fernsehen verändert. An Universitäten entstand mit den "Buffy studies" ein eigenes Forschungsfeld.
+
+Dazu kamen Comics, Romane und der Ableger "Angel", der fünf Staffeln lief.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8963', locale: 'de-de',
+    text: `### Worum es geht
+
+In Russland hat ein Nationalist eine Raketenbasis besetzt und droht mit einem Atomschlag. Das amerikanische U-Boot USS Alabama läuft mit Nuklearraketen an Bord aus.
+
+An Bord treffen zwei Haltungen aufeinander: Kommandant Ramsey, der Befehle ausführt, und sein neuer Erster Offizier Hunter, der sie versteht. Als ein Funkspruch mit dem Startbefehl eintrifft und ein zweiter, unvollständiger unmittelbar folgt, streiten beide über die Auslegung. Ramsey will schießen, Hunter will den zweiten Spruch abwarten. Aus dem Streit wird eine Meuterei — auf einem Boot, das die Welt auslöschen kann.
+
+### Entstehungsgeschichte
+
+Die Geschichte stammt von Michael Schiffer und Richard P. Henrick. Quentin Tarantino schrieb unbenannt an den Dialogen mit, nachdem er zuvor das Drehbuch zu Tony Scotts "True Romance" verfasst hatte — von ihm stammen die Passagen mit Bezügen auf Comics und Popkultur.
+
+Regie führte Tony Scott, produziert haben Don Simpson und Jerry Bruckheimer. Das Budget lag bei 53 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die US-Marine ließ zunächst Recherchen an Bord der USS Florida zu, verweigerte nach Kenntnis der Meuterei-Handlung aber jede weitere Unterstützung. Die Produktion filmte daraufhin das Abtauchen der echten USS Alabama ohne Genehmigung.
+
+Denzel Washington spielt Hunter, Gene Hackman Ramsey; in Nebenrollen sind James Gandolfini und Viggo Mortensen zu sehen. Die Musik schrieb Hans Zimmer und erhielt dafür einen Grammy.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 157,4 Millionen Dollar ein.
+
+Die Kritik reagierte sehr gut: 89 Prozent bei Rotten Tomatoes, beim Publikum ein A bei CinemaScore.
+
+Getragen wird er von der Auseinandersetzung zweier Männer, die beide recht haben könnten — der Film entscheidet die Frage erst ganz zum Schluss und nimmt beiden Seiten bis dahin nichts weg. 2025 kündigte Bruckheimer eine Fortsetzung an.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10045', locale: 'de-de',
+    text: `### Worum es geht
+
+Paris im Jahr 2010. Das Viertel B13 ist so verwahrlost, dass der Staat es nicht mehr verwaltet, sondern einmauert: Betonwälle, Kontrollpunkte, keine Polizei, keine Schule, keine Post. Drinnen herrscht der Bandenchef Taha.
+
+Leïto lebt dort und wehrt sich; seine Schwester wird von Taha entführt. Draußen bekommt der verdeckte Ermittler Damien den Auftrag, eine Atombombe zu bergen, die bei einem Transport in das Viertel geraten ist. Die beiden Männer müssen zusammenarbeiten — und stellen dabei fest, dass die Bombe nicht zufällig dort gelandet ist.
+
+### Entstehungsgeschichte
+
+Luc Besson produzierte den Film und schrieb das Drehbuch gemeinsam mit Bibi Naceri. Pierre Morel führte Regie; es war sein erster Film. Vier Jahre später drehte er "96 Hours".
+
+Das Budget lag bei 13 Millionen Euro.
+
+### Hinter den Kulissen
+
+David Belle spielt Leïto und ist zugleich einer der Begründer des Parkour — jener Fortbewegungsart über Mauern, Dächer und Geländer, die aus den Pariser Vorstädten stammt. Sämtliche Sprünge im Film entstanden ohne Drahtseile und ohne Computergrafik. Cyril Raffaelli spielt Damien.
+
+Der Film ist damit einer der ersten, die Parkour einem größeren Publikum zeigten — die lange Verfolgungsjagd zu Beginn wurde vielfach nachgeahmt, unter anderem in "James Bond 007: Casino Royale".
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film zwischen 9,6 und 11,6 Millionen Dollar ein.
+
+Die Kritik reagierte gut: 81 Prozent bei Rotten Tomatoes mit dem Befund, die schwindelerregenden Actionszenen glichen die Schwächen der Handlung aus; 70 von 100 bei Metacritic.
+
+2009 folgte die Fortsetzung "Ghettogangz 2 — Ultimatum" mit denselben Hauptdarstellern. 2014 entstand mit "Brick Mansions" eine amerikanische Neuverfilmung mit Paul Walker und erneut David Belle — es war einer von Walkers letzten Filmen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:326', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein junger Mann wird Zeuge eines Mordes durch einen Verbrecherboss und soll als Kronzeuge von Hawaii nach Los Angeles gebracht werden. FBI-Agent Neville Flynn begleitet ihn im Nachtflug.
+
+Weil ein Attentat an Bord auffallen würde, wählt der Boss einen anderen Weg: Hunderte Giftschlangen werden in der Frachtluke versteckt, dazu ein Duftstoff, der sie aggressiv macht. Auf halber Strecke öffnet sich die Kiste. Was folgt, ist genau das, was der Titel ankündigt — nicht mehr und nicht weniger.
+
+### Entstehungsgeschichte
+
+Samuel L. Jackson sagte allein wegen des Titels zu. Er hat das begründet: Es sei die Art Film, die er sich als Kind angesehen hätte. Regie führte David R. Ellis, das Budget lag bei 33 Millionen Dollar.
+
+Vor dem Start entstand im Internet ein Eigenleben, das es so vorher nicht gegeben hatte: Fans schrieben Lieder, Drehbuchszenen und Dialoge für einen Film, den niemand gesehen hatte.
+
+### Hinter den Kulissen
+
+New Line Cinema reagierte darauf und ordnete im März 2006 fünf Tage Nachdreh an, um den Film von einer Freigabe ab 13 auf eine ab 17 Jahren anzuheben — ausdrücklich, um die Erwartungen der Netzgemeinde zu erfüllen.
+
+Dabei entstand auch Jacksons bekanntester Satz, in dem er sich unter Verwendung eines derben Kraftausdrucks darüber beschwert, diese Schlangen in diesem Flugzeug endgültig satt zu haben. Die Zeile stammt ursprünglich aus einem von Fans erfundenen Beitrag und wurde nachträglich in den Film aufgenommen.
+
+### Einordnung & Wirkung
+
+Trotz der Aufmerksamkeit blieb das Ergebnis weit hinter den Erwartungen: 15,25 Millionen Dollar am Startwochenende gegenüber Prognosen von 20 bis 30 Millionen, weltweit 62 Millionen.
+
+Die Kritik lag bei 69 Prozent auf Rotten Tomatoes, das Publikum vergab bei CinemaScore ein B minus. Mehrfach wurde vermerkt, der Film gewinne erheblich, wenn das Publikum mitgeht und mitjohlt.
+
+Die Branche zog daraus einen bleibenden Schluss: Wenn große Netzaufmerksamkeit sich nicht in verkaufte Karten übersetzt, spricht man seither vom "Snakes on a Plane"-Effekt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:41233', locale: 'de-de',
+    text: `### Worum es geht
+
+Moose beginnt sein Studium an der New York University und hat seinem Vater versprochen, mit dem Tanzen aufzuhören und Elektrotechnik zu studieren. Am ersten Tag gerät er in eine Straßenbattle und wird von Luke angeworben.
+
+Luke betreibt in einem Lagerhaus die "House of Pirates" — eine Wohngemeinschaft von Tänzern, die kurz vor der Zwangsräumung steht. Das Preisgeld der World Jam Championships wäre die Rettung. Gegner ist die "House of Samurai", angeführt von einem ehemaligen Mitglied der Pirates.
+
+### Entstehungsgeschichte
+
+Es ist der dritte Teil der "Step Up"-Reihe. Regie führte Jon M. Chu, der bereits Teil zwei inszeniert hatte und später "Crazy Rich" und "Wicked" drehte.
+
+Das Drehbuch schrieben Amy Andelson und Emily Meyer nach Figuren von Duane Adler; die Musik stammt von Bear McCreary. Das Budget lag bei 30 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film wurde in 3D gedreht — und zwar nicht nachträglich umgerechnet, sondern mit entsprechenden Kameras. Die Entscheidung ergibt für ein Tanzfilm mehr Sinn als für die meisten anderen Genres: Räumliche Tiefe macht Bewegungen im Raum lesbar, die im flachen Bild verlorengehen.
+
+Es spielen Rick Malambri als Luke, Adam G. Sevani als Moose, Sharni Vinson als Natalie und Alyson Stoner als Camille; mehrere Darsteller kehren aus den Vorgängerteilen zurück.
+
+### Einordnung & Wirkung
+
+Der Film startete am 6. August 2010 und spielte weltweit 159,2 Millionen Dollar ein — der erfolgreichste Teil der Reihe.
+
+Die Kritik blieb geteilt: 47 Prozent bei Rotten Tomatoes, mit dem Befund, Choreographie und Bildgestaltung seien solide, die Handlung dagegen dünn. Das Publikum vergab bei CinemaScore ein B plus.
+
+Die Reihe steht damit für ein Genre, das von der Kritik durchgehend geringgeschätzt und vom Publikum verlässlich getragen wird — und das mit jedem Teil neue Tanzstile in den Mehrheitsgeschmack getragen hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:529216', locale: 'de-de',
+    text: `### Worum es geht
+
+Im November 1989, in den Tagen des Mauerfalls, beobachtet der zwölfjährige Nico durch ein Fenster einen Mord und stirbt bei dem Versuch, Hilfe zu holen.
+
+Fünfundzwanzig Jahre später zieht Vera mit ihrer Familie in dasselbe Haus. Während eines Gewitters, das wie damals 72 Stunden andauert, funktioniert ein alter Fernseher aus dem Keller — und sie spricht mit Nico. Sie warnt ihn, er überlebt. Am nächsten Morgen ist Vera in einer Welt aufgewacht, in der sie ihren Mann nie kennengelernt hat und ihre Tochter nie geboren wurde.
+
+### Entstehungsgeschichte
+
+Regie und Drehbuch stammen von Oriol Paulo, der zuvor "Der unsichtbare Gast" gedreht hatte und für verschachtelte Kriminalgeschichten bekannt ist.
+
+Der Film erschien am 30. November 2018 in Spanien und kam am 22. März 2019 zu Netflix.
+
+### Hinter den Kulissen
+
+Es spielen Adriana Ugarte als Vera und Chino Darín; daneben sind Álvaro Morte, Javier Gutiérrez und Nora Navas zu sehen. Morte war zu diesem Zeitpunkt durch "Haus des Geldes" international bekannt.
+
+Der Film verlangt seinem Publikum viel Mitarbeit ab: Er baut zwei vollständige Lebensläufe derselben Figur nebeneinander auf und lässt sie erst spät zusammenlaufen. Die eigentliche Frage ist dabei nicht, wie die Zeitreise funktioniert, sondern was jemand aufzugeben bereit ist, um einen Fremden zu retten.
+
+### Einordnung & Wirkung
+
+Die Kritik lag bei 71 Prozent auf Rotten Tomatoes. Jonathan Holland vom Hollywood Reporter bescheinigte dem Film befriedigende Verschachtelung bei geringer Tiefe und nannte ihn eine vergnügliche Fahrt auf einer genau berechneten Achterbahn; Javier Ocaña hielt ihm entgegen, er sei von zeitgenössischen Vorbildern abgeleitet.
+
+2019 gab es zwei Nominierungen für den Gaudí-Preis.
+
+Zwei Neuverfilmungen folgten: 2022 der Hindi-Film "Dobaaraa" von Anurag Kashyap und 2025 die indonesische Fassung "Andaikan Kau Datang Kembali".` },
+  {
+    bereich: 'titel', schluessel: 'movie:44363', locale: 'de-de',
+    text: `### Worum es geht
+
+Drei Freunde bestechen einen Liftwart, um am Sonntagabend noch eine letzte Abfahrt zu bekommen. Während sie im Sessellift hängen, endet die Schicht: Der Wart verwechselt sie mit anderen Skifahrern, schaltet die Anlage ab und geht.
+
+Der Skiort öffnet erst in fünf Tagen wieder. Die drei hängen zwanzig Meter über dem Boden, bei zweistelligen Minusgraden, ohne Handyempfang. Unter ihnen sammeln sich Wölfe. Der Film besteht fast vollständig aus dieser Ausgangslage und aus den Entscheidungen, die sie erzwingt — springen, hängenbleiben, oder am Kabel entlangklettern.
+
+### Entstehungsgeschichte
+
+Adam Green schrieb und inszenierte den Film. Es spielen Shawn Ashmore, Kevin Zegers und Emma Bell, für die es das Filmdebüt war.
+
+Gedreht wurde im Februar 2009 im Skigebiet Snowbasin bei Ogden in Utah.
+
+### Hinter den Kulissen
+
+Die Kälte im Film ist echt: Green drehte an einem realen Sessellift unter winterlichen Bedingungen, statt die Szenen im Studio nachzustellen. Das begrenzt die Möglichkeiten erheblich — und ist der Grund, warum die Darsteller so aussehen, wie sie aussehen.
+
+Bei den Vorführungen auf dem Sundance-Festival wurde mehrfach berichtet, dass Zuschauer ohnmächtig wurden.
+
+### Einordnung & Wirkung
+
+Der Film lief am 24. Januar 2010 in Sundance und startete am 5. Februar 2010 in maximal 106 Kinos. Das Startwochenende brachte 131.395 Dollar, insgesamt kamen rund 2,7 Millionen Dollar in den USA und über 2,4 Millionen international zusammen.
+
+Die Kritik reagierte überwiegend wohlwollend: 64 Prozent bei Rotten Tomatoes, 43 von 100 bei Metacritic. Es gab eine Nominierung für den Saturn Award als bester Horrorfilm.
+
+Er gehört zu jener Gruppe von Filmen, die aus einer einzigen, sehr einfachen Zwangslage einen ganzen Film bauen — vergleichbar mit "Open Water" oder "Buried".` },
+  {
+    bereich: 'titel', schluessel: 'movie:19585', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine geheime Abteilung des FBI setzt Tiere als Agenten ein. Das Team G-Force besteht aus den Meerschweinchen Darwin, Blaster und Juarez, dem Maulwurf Speckles und der Fliege Mooch — alle mit Spezialausrüstung, Ohrhörern und Kampfausbildung.
+
+Nach einem misslungenen Einsatz wird die Abteilung aufgelöst und die Tiere sollen eingeschläfert werden. Sie fliehen in eine Zoohandlung und von dort weiter, um den Milliardär Leonard Saber aufzuhalten: Dessen Haushaltsgeräte sollen sich zu einer Waffe zusammenschalten, ein Vorhaben mit dem Namen "Clusterstorm".
+
+### Entstehungsgeschichte
+
+Die Idee stammt vom fünfjährigen Sohn des Regisseurs. Hoyt Yeatman drehte hier seinen ersten Film; zuvor war er Effektfachmann und Mitgründer von Dream Quest Images.
+
+Produziert hat Jerry Bruckheimer, verliehen wurde der Film von Walt Disney Pictures. Das Budget lag bei 150 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film erschien am 24. Juli 2009 in Disney Digital 3D.
+
+Gesprochen werden die Tiere von Sam Rockwell, Tracy Morgan, Penélope Cruz, Jon Favreau, Nicolas Cage und Steve Buscemi. In den Realrollen sind Zach Galifianakis, Bill Nighy und Will Arnett zu sehen.
+
+Die Mischung ist der eigentliche Aufwand: computeranimierte Tiere in realen Räumen, mit Darstellern, die auf nichts reagieren müssen. Für Yeatman war das ein Heimspiel — und für einen Erstlingsfilm eine ungewöhnlich technische Aufgabe.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 292,8 Millionen Dollar ein, davon 119,4 Millionen in den USA und 173,4 Millionen international.
+
+Die Kritik lehnte ihn überwiegend ab: 21 Prozent bei Rotten Tomatoes. Roger Ebert urteilte milder mit zweieinhalb von vier Sternen und nannte ihn eine angenehme, harmlose 3D-Farce. Das Publikum vergab bei CinemaScore ein B plus.
+
+Der Abstand zwischen Kritik und Kasse ist beträchtlich — und typisch für die Familienfilme, mit denen Disney in jener Zeit die Sommerferien bespielte.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'series:66573', locale: 'de-de',
+    text: `### Worum es geht
+
+Eleanor Shellstrop wacht in einem Wartezimmer auf. An der Wand steht: "Willkommen! Alles ist in Ordnung." Sie ist tot und im Guten Ort gelandet — einem Viertel für die anständigsten Menschen der Geschichte, entworfen vom Architekten Michael.
+
+Das Problem: Eleanor war nicht anständig. Sie hat gelogen, betrogen und niemandem geholfen. Offenbar liegt eine Verwechslung vor, und wenn sie auffliegt, muss sie an den Schlechten Ort. Also bittet sie ihren Nachbarn Chidi, einen Moralphilosophen, ihr beizubringen, ein guter Mensch zu werden — rückwirkend.
+
+### Entstehungsgeschichte
+
+Michael Schur entwickelte die Serie für NBC. Er hatte zuvor "Parks and Recreation" verantwortet und an "The Office" mitgearbeitet.
+
+Am Ende der ersten Staffel steht eine Wendung, die die gesamte Anlage umdreht: Der Gute Ort ist der Schlechte Ort, und die vier Hauptfiguren wurden ausgewählt, weil sie einander auf unabsehbare Zeit quälen würden. Die Idee geht auf Jean-Paul Sartres Stück "Geschlossene Gesellschaft" zurück — die Hölle, das sind die anderen.
+
+### Hinter den Kulissen
+
+Die Serie zog echte Fachleute hinzu: Pamela Hieronymi von der UCLA und Todd May von der Clemson University berieten sie in Moralphilosophie. Beide haben in der letzten Folge einen kurzen Auftritt.
+
+Das ist kein Beiwerk — die behandelten Denkrichtungen von Aristoteles über Kant bis zu Thomas Scanlon werden korrekt wiedergegeben und tragen die Handlung.
+
+Es spielen Kristen Bell als Eleanor, William Jackson Harper als Chidi, Jameela Jamil als Tahani, Manny Jacinto als Jason, D'Arcy Carden als Janet und Ted Danson als Michael.
+
+### Einordnung & Wirkung
+
+Die Serie lief von September 2016 bis Januar 2020 über vier Staffeln mit 53 Folgen.
+
+Die Kritik reagierte begeistert. Es gab vier Hugo Awards, einen Peabody Award und 14 Emmy-Nominierungen, darunter zweimal als beste Comedyserie.
+
+Bemerkenswert ist, dass sie freiwillig endete: Schur beendete sie nach vier Staffeln, weil die Geschichte auserzählt war — im amerikanischen Fernsehen, wo erfolgreiche Serien üblicherweise bis zum Quotenverfall laufen, eine Ausnahme.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4566', locale: 'de-de',
+    text: `### Worum es geht
+
+Michael Clayton arbeitet für eine große New Yorker Kanzlei, aber nicht als Anwalt im üblichen Sinn. Er ist der Mann, den man ruft, wenn ein Mandant nachts jemanden angefahren hat — ein Aufräumer, der Probleme verschwinden lässt, bevor sie welche werden.
+
+Sein Freund Arthur Edens, leitender Anwalt in einem Sammelklageverfahren gegen den Agrarkonzern U-North, erleidet mitten in einer Zeugenvernehmung einen Zusammenbruch. Tatsächlich hat Arthur ein internes Papier gefunden: Der Konzern wusste, dass sein Unkrautvernichter tödlich ist, und hat ihn trotzdem verkauft. Als Arthur stirbt und es wie Selbstmord aussieht, begreift Clayton, worin sein eigener Anteil besteht.
+
+### Entstehungsgeschichte
+
+Tony Gilroy schrieb das Drehbuch und führte Regie; es war sein erster Film als Regisseur. Zuvor hatte er die Drehbücher der "Bourne"-Filme verfasst.
+
+Das Budget lag bei 21,5 Millionen Dollar, gedreht wurde vom 30. Januar bis 7. April 2006.
+
+### Hinter den Kulissen
+
+George Clooney spielt Clayton, Tom Wilkinson den zusammenbrechenden Anwalt Arthur, Tilda Swinton die Justiziarin des Konzerns und Sydney Pollack den Kanzleichef.
+
+Swintons Figur ist die eigentliche Entdeckung des Films: keine kalte Strategin, sondern eine Frau, die vor jedem Auftritt ihre Sätze im Hotelzimmer übt, schwitzt und sich übergibt — und genau deshalb tut, was sie tut.
+
+Für Sydney Pollack war es einer der letzten Auftritte; er starb im Mai 2008, gut ein halbes Jahr nach dem Kinostart. Der Titel des Films ist dabei bewusst schmucklos gewählt: Er nennt nur den Namen eines Mannes, dessen Beruf keine Bezeichnung hat und der in keinem Organigramm auftaucht.
+
+### Einordnung & Wirkung
+
+Der Film startete am 5. Oktober 2007 und spielte weltweit 93 Millionen Dollar ein.
+
+Die Kritik reagierte hervorragend: 90 Prozent von 205 Besprechungen bei Rotten Tomatoes. Es gab sieben Oscar-Nominierungen, darunter bester Film und beste Regie; Tilda Swinton gewann als beste Nebendarstellerin.
+
+Die amerikanische Drehbuchgewerkschaft führte das Buch später auf Platz 20 der besten Drehbücher des 21. Jahrhunderts.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1850', locale: 'de-de',
+    text: `### Worum es geht
+
+Andy Kaufman war kein Komiker im üblichen Sinn. Er trat auf, um das Publikum zu verunsichern: Er las im Ganzen aus "Der große Gatsby" vor, bis der Saal leer war. Er erfand die widerwärtige Bühnenfigur Tony Clifton und behauptete, das sei jemand anderes. Er forderte Frauen zum Ringkampf heraus und ließ sich dafür hassen.
+
+Der Film folgt ihm vom Kinderzimmer über die Serie "Taxi", in der er den Automechaniker Latka spielte und die er verachtete, bis zu seiner Krebserkrankung — und dazu, dass ein Teil seines Publikums auch dann noch glaubte, das sei ein weiterer Streich.
+
+### Entstehungsgeschichte
+
+Regie führte Miloš Forman, das Drehbuch schrieben Scott Alexander und Larry Karaszewski. Der Film erschien am 22. Dezember 1999.
+
+Jim Carrey spielt Kaufman, Tony Clifton und Latka in einer Person. Danny DeVito spielt Kaufmans Manager George Shapiro und produzierte mit; Courtney Love spielt Kaufmans Lebensgefährtin, Paul Giamatti seinen Mitarbeiter Bob Zmuda.
+
+Der Titel stammt vom gleichnamigen Lied von R.E.M. aus dem Jahr 1992; die Band schrieb auch die Filmmusik. "The Great Beyond" wurde ihre am höchsten platzierte Single in Großbritannien.
+
+### Hinter den Kulissen
+
+Gedreht wurde im Winter 1998 in Los Angeles.
+
+Carrey blieb während der gesamten Produktion in der Rolle — auch außerhalb der Aufnahmen, auch gegenüber dem Team. Bei den Dreharbeiten mit dem Ringer Jerry Lawler kam es zu einer tatsächlichen Auseinandersetzung, bei der Carrey mit gestauchten Wirbeln ins Krankenhaus musste.
+
+### Einordnung & Wirkung
+
+Bei einem Budget zwischen 52 und 82 Millionen Dollar spielte der Film nur 47 Millionen ein und war damit ein wirtschaftlicher Fehlschlag.
+
+Die Kritik urteilte gemischt: 64 Prozent von 122 Besprechungen bei Rotten Tomatoes, 58 von 100 bei Metacritic.
+
+Jim Carrey gewann den Golden Globe als bester Hauptdarsteller in einer Komödie — seinen zweiten in Folge nach "Die Truman Show". Eine Oscar-Nominierung blieb ihm versagt, was seither regelmäßig als Übergehung angeführt wird.` },
+  {
+    bereich: 'titel', schluessel: 'movie:337674', locale: 'de-de',
+    text: `### Worum es geht
+
+Michèle Leblanc leitet eine Videospielfirma in Paris. Der Film beginnt mit einem Geräusch: Sie wird in ihrem eigenen Haus von einem Maskierten vergewaltigt.
+
+Was danach nicht geschieht, ist der Gegenstand des Films. Michèle ruft nicht die Polizei, sondern räumt auf, bestellt Essen und geht am nächsten Tag ins Büro. Sie beginnt, die Männer in ihrem Umfeld zu prüfen, kauft sich eine Waffe und Pfefferspray — und als sie herausfindet, wer es war, wählt sie einen Weg, den weder das Publikum noch die Figuren um sie herum nachvollziehen können.
+
+### Entstehungsgeschichte
+
+Grundlage ist Philippe Djians Roman "Oh…" von 2012.
+
+Paul Verhoeven führte Regie — seine Rückkehr nach zehn Jahren Pause und sein erster französischsprachiger Film. Zunächst waren amerikanische Darstellerinnen im Gespräch, darunter Nicole Kidman, Charlize Theron und Julianne Moore. Verhoeven hat den Wechsel nach Frankreich begründet: Es gebe nicht viele Frauenrollen, im amerikanischen Kino jedenfalls nicht.
+
+Isabelle Huppert sagte im September 2014 zu und nannte Verhoeven einen der besten Regisseure der Welt.
+
+### Hinter den Kulissen
+
+Der Film ist bewusst schwer einzuordnen: Er behandelt eine Vergewaltigung, ohne sie zum Thema einer Aufarbeitung zu machen, und enthält zugleich Passagen, die als Komödie funktionieren — etwa das Weihnachtsessen, bei dem sämtliche Figuren am Tisch etwas voreinander verbergen.
+
+Getragen wird das vollständig von Huppert, die ihrer Figur jede Erklärung verweigert.
+
+### Einordnung & Wirkung
+
+Der Film wurde 2016 in Cannes gezeigt und von der Kritik gefeiert. Isabelle Huppert gewann den Golden Globe als beste Hauptdarstellerin in einem Drama und wurde für den Oscar nominiert; bei den Césars gewann der Film als bester Film.
+
+Frankreich schickte ihn als Beitrag für den Oscar in der Sparte bester fremdsprachiger Film ins Rennen — er kam nicht einmal in die Vorauswahl von neun Filmen. Mehrere Medien führten das später als eine der auffälligsten Übergehungen in der Geschichte dieser Kategorie.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9896', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Kasinobesitzer Donald Sinclair langweilt sich und legt für die reichsten seiner Gäste eine Wette auf: Sechs zufällig ausgewählte Menschen bekommen einen Schlüssel und die Nachricht, dass in einem Schließfach in Silver City, New Mexico, zwei Millionen Dollar liegen. Wer zuerst dort ist, behält sie.
+
+Von Las Vegas bis Silver City sind es rund 900 Kilometer. Es gibt keine Regeln. Was folgt, ist eine Kette von Umwegen — ein gestohlener Rettungswagen, ein Heißluftballon, ein Bus voller Lucille-Ball-Doubles und ein Nazi-Museum, das versehentlich in Brand gerät.
+
+### Entstehungsgeschichte
+
+Regie führte Jerry Zucker, das Drehbuch schrieb Andy Breckman. Der Film erschien am 17. August 2001, das Budget lag bei 48 Millionen Dollar.
+
+Vorbild ist Stanley Kramers "Eine total, total verrückte Welt" von 1963, das dieselbe Anlage hat: eine große Zahl bekannter Darsteller, ein Wettrennen um verstecktes Geld und eine Handlung, die sich in Nebenstränge auffächert.
+
+### Hinter den Kulissen
+
+Zum Ensemble gehören Rowan Atkinson, John Cleese, Whoopi Goldberg, Cuba Gooding Jr., Seth Green, Jon Lovitz, Breckin Meyer, Kathy Najimy und Amy Smart.
+
+Die Konstruktion verlangt, dass sämtliche Handlungsstränge parallel laufen und sich nur an wenigen Punkten kreuzen — was die Montage zur eigentlichen Arbeit macht: Jeder Strang muss für sich funktionieren und zugleich im Verhältnis zu den anderen an Tempo gewinnen.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 85,5 Millionen Dollar ein, davon 56,6 Millionen in den USA und 28,8 Millionen international.
+
+Die Kritik blieb geteilt: 44 Prozent bei Rotten Tomatoes mit dem Befund, nur eine Handvoll der Einfälle sei wirklich komisch. Das Publikum vergab bei CinemaScore ein B plus.
+
+Über die Jahre ist er zu einem verlässlichen Fernsehfilm geworden — einer jener Filme, die kaum jemand gezielt aufsucht und die trotzdem fast jeder gesehen hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:463684', locale: 'de-de',
+    text: `### Worum es geht
+
+In der Kunstszene von Los Angeles findet die Galerieassistentin Josephina im Treppenhaus ihres Hauses einen toten Nachbarn — und in dessen Wohnung Hunderte Bilder, die niemand je gesehen hat. Der Verstorbene hatte verfügt, dass alles zu vernichten sei.
+
+Stattdessen kommen die Bilder auf den Markt. Der Kritiker Morf Vandewalt schreibt sie hoch, die Galeristin Rhodora Haze treibt die Preise, und alle verdienen. Dann beginnen die Beteiligten zu sterben — und zwar jeweils durch das Kunstwerk, mit dem sie sich am meisten befasst haben.
+
+### Entstehungsgeschichte
+
+Dan Gilroy schrieb und inszenierte den Film. Er hatte zuvor mit "Nightcrawler" einen Film über einen anderen Betrieb gedreht, der von Bildern lebt.
+
+Jake Gyllenhaal spielt den Kritiker Morf, Rene Russo die Galeristin — beide arbeiteten damit erneut mit Gilroy zusammen. Zum Ensemble gehören außerdem Toni Collette, Zawe Ashton, John Malkovich, Daveed Diggs und Natalia Dyer.
+
+Das Budget lag bei 21,2 Millionen Dollar; die Kamera führte Robert Elswit, die Musik schrieben Marco Beltrami und Buck Sanders.
+
+### Hinter den Kulissen
+
+Gilroy legte die Hauptfigur ausdrücklich als sexuell nicht festgelegt an — mit der Begründung, Sexualität sei weit fließender, als die Gesellschaft es einräume.
+
+Die eigentliche Zielscheibe ist nicht die Kunst, sondern ihr Betrieb: Menschen, die über Wert entscheiden, ohne je etwas herzustellen. Dass die Todesarten aus den Werken selbst kommen, ist die Zuspitzung dieses Gedankens.
+
+### Einordnung & Wirkung
+
+Der Film lief am 27. Januar 2019 beim Sundance-Festival und erschien am 1. Februar 2019 bei Netflix.
+
+Die Kritik urteilte gemischt bis wohlwollend: 61 Prozent bei Rotten Tomatoes, 61 von 100 bei Metacritic. Gelobt wurden die Bildideen und das Ensemble, bemängelt wurde, dass der Film zwischen Satire und Horror schwanke, ohne sich zu entscheiden.
+
+Er gehört damit zu jener Gruppe von Netflix-Produktionen, die mit Namen aus dem Autorenkino besetzt sind und im Kino vermutlich anders wahrgenommen worden wären.` },
+  {
+    bereich: 'titel', schluessel: 'movie:617', locale: 'de-de',
+    text: `### Worum es geht
+
+Sam Lombardo unterrichtet an einer Schule im wohlhabenden Blue Bay in Florida. Kelly Van Ryan, Tochter der reichsten Frau des Orts, wirft ihm Vergewaltigung vor. Kurz darauf erhebt Suzie Toller aus dem Wohnwagenpark denselben Vorwurf.
+
+Vor Gericht bricht Suzie zusammen und gibt zu, dass alles erfunden war. Lombardo bekommt Schadensersatz in Millionenhöhe — und damit beginnt der Film erst. Was er anschließend aufdeckt, wird bis in den Abspann hinein weiter umgedeutet: Über die gesamte Endtitelsequenz laufen Szenen, die noch einmal alles verschieben.
+
+### Entstehungsgeschichte
+
+Regie führte John McNaughton, das Drehbuch schrieb Stephen Peters. McNaughton hat seine Beweggründe offen genannt: Er sei an einem Punkt seiner Laufbahn gewesen, an dem er einen kommerziellen Film brauchte, und das Drehbuch habe Sex und Gewalt geboten.
+
+Gedreht wurde von April bis Juli 1997, das Budget lag bei 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Es spielen Matt Dillon, Kevin Bacon, Neve Campbell, Denise Richards, Theresa Russell, Robert Wagner und Bill Murray, der als schmieriger Winkeladvokat einen der besten Auftritte des Films hat.
+
+Die Wendungen im Abspann sind eine Besonderheit: Der Film erzählt dort weiter, statt nur nachzureichen — wer den Saal beim ersten Titel verlässt, hat einen anderen Film gesehen als wer sitzen bleibt.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 67,2 Millionen Dollar ein, davon 30,1 Millionen in den USA.
+
+Die Kritik urteilte geteilt: 64 Prozent bei Rotten Tomatoes, 51 von 100 bei Metacritic; das Publikum vergab bei CinemaScore ein C plus. Roger Ebert gab drei Sterne und nannte ihn reißerischen Schund, den er gemocht habe.
+
+Seither ist er zum Kultfilm geworden, hat drei Fortsetzungen zwischen 2004 und 2010 hervorgebracht und wird gelegentlich sogar auf Euripides' "Medea" bezogen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:82', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Undercover-Ermittler Sonny Crockett und Rico Tubbs sollen herausfinden, wie ein Informant der Bundespolizei aufgeflogen ist. Dafür schleusen sie sich als Transporteure in ein südamerikanisches Drogenkartell ein.
+
+Der Film verzichtet auf nahezu alles, was die Fernsehserie ausgemacht hat: keine Pastellfarben, keine Popmusik über Zeitlupen, kaum Rückblenden auf die Figuren. Was bleibt, ist die Arbeit selbst — Absprachen in Hotelzimmern, Bootsfahrten über Nacht nach Havanna, Übergaben, bei denen jeder Beteiligte weiß, dass eine falsche Bewegung genügt.
+
+### Entstehungsgeschichte
+
+Michael Mann verfilmte hier seine eigene Serie aus den achtziger Jahren, die er selbst geschaffen hatte. Er schrieb, produzierte und inszenierte.
+
+Den Anstoß gab Jamie Foxx, der Mann die Idee auf einer Feier zu "Ali" vortrug. Colin Farrell spielt Crockett, Foxx spielt Tubbs; daneben sind Gong Li, Naomie Harris, Ciarán Hinds und Justin Theroux zu sehen.
+
+### Hinter den Kulissen
+
+Gedreht wurde wie zuvor "Collateral" überwiegend digital mit der Thomson Viper FilmStream, Kamera Dion Beebe; für Hochgeschwindigkeits- und Unterwasseraufnahmen kam Super 35 zum Einsatz. Die Nachtaufnahmen zeigen dadurch Details, die auf Film nicht sichtbar gewesen wären.
+
+Die Produktion verlief schwierig: Die Hurrikane Katrina, Rita und Wilma kosteten sieben Drehtage. Dazu kamen kurzfristige Drehbuchänderungen, gefährliche Aufnahmen bei schlechtem Wetter und Spannungen in der Besetzung. Farrell hat sich später kritisch über den Ablauf geäußert. Das Budget lag zwischen 135 und 150 Millionen Dollar.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 164,2 Millionen Dollar ein, davon 63,5 Millionen in den USA.
+
+Die Kritik war zunächst gespalten: 47 Prozent bei Rotten Tomatoes.
+
+Das hat sich deutlich gedreht. Spätestens seit 2016 wird der Film als Kultfilm geführt und vor allem von jüngeren Filmemachern für seine Bildgestaltung geschätzt — eine der klarsten Neubewertungen im amerikanischen Kino der zweitausender Jahre.` },
 ];
