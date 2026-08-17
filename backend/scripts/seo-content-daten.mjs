@@ -40882,4 +40882,299 @@ Das Lexikon des internationalen Films nannte ihn eine Neuverfilmung, die über w
 Im Rückblick fallen die Urteile auseinander. 2012 setzten ihn die Leser des 007 Magazine auf Platz 22 von 24; Rolling Stone führte ihn auf Platz 13 von 24. Der Stern vergab drei von fünf Sternen.
 
 Diese Spanne hat mit dem Sonderstatus zu tun. Wer den Film als Teil der Reihe misst, bewertet ihn anders als jemand, der ihn als eigenständige Produktion nimmt — und beide Lesarten sind hier gleichermaßen begründbar.` },
+  // ---- Block 088 ----
+  {
+    bereich: 'titel', schluessel: 'movie:4478', locale: 'de-de',
+    text: `### Worum es geht
+
+David und Diana Murphy sind ein wohlhabendes Ehepaar — bis sie in finanzielle Schwierigkeiten geraten.
+
+Dann macht ihnen der Milliardär John Gage ein Angebot: eine Million Dollar für eine Nacht mit Diana. Die beiden nehmen an. Was danach zwischen ihnen geschieht, hat mit der Nacht selbst wenig zu tun und alles mit dem, was sie über sich erfahren haben.
+
+### Entstehungsgeschichte
+
+Vorlage ist der Roman von Jack Engelhard.
+
+Regie führte Adrian Lyne, das Drehbuch schrieb Amy Holden Jones. Produziert wurde der Film von Alex Gartner und Tom Schulman.
+
+Robert Redford spielt John Gage, Demi Moore die Diana Murphy und Woody Harrelson den David Murphy. In weiteren Rollen sind Seymour Cassel, Oliver Platt, Billy Bob Thornton und Rip Taylor zu sehen.
+
+Die Kamera führte Howard Atherton, den Schnitt besorgte Joe Hutshing, die Musik stammt von John Barry und Roy Orbison.
+
+Der Film erschien 1993, dauert 112 Minuten und ist ab 12 Jahren freigegeben. Das Budget betrug 38 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Konstruktion stellt eine Frage und beantwortet sie nicht. Was eine Million Dollar wert ist, hängt davon ab, wofür man sie hält — für einen Handel oder für einen Verrat. Der Film lässt beide Lesarten zu und macht daraus den Konflikt zwischen den Eheleuten.
+
+Bemerkenswert ist die Rollenverteilung. Der Milliardär ist kein Ungeheuer, sondern höflich und geduldig; er verlässt sich darauf, dass die Ehe die Belastung selbst nicht aushält. Genau das tritt ein.
+
+Dass Diana in der Handlung überwiegend Objekt der Verhandlung ist und dennoch die Entscheidung trifft, ist der Punkt, an dem der Film je nach Lesart überzeugt oder scheitert.
+
+### Einordnung & Wirkung
+
+Bei 38 Millionen Dollar Herstellungskosten spielte der Film weltweit 267 Millionen ein, davon 107 Millionen in Nordamerika. Zwei Drittel des Ergebnisses kamen von außerhalb.
+
+Die Aufnahme war gespalten. Roger Ebert vergab drei von vier Sternen und beschrieb den Film als Fantasie über Figuren, die amoralisches Handeln ausprobieren dürfen. Das Lexikon des internationalen Films nannte ihn klischeehaft.
+
+Bei den Goldenen Himbeeren 1994 gab es drei Auszeichnungen: schlechtester Film, schlechtestes Drehbuch und Woody Harrelson als schlechtester Nebendarsteller. Im selben Jahr gewannen Demi Moore und Harrelson den MTV Movie Award für den besten Filmkuss, John Barry den BMI Film Music Award.
+
+Diese Bilanz — dreifach verhimbeert und zugleich einer der erfolgreichsten Filme seines Jahres — beschreibt die Wirkung genauer als jede einzelne Rezension.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9411', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Serienmörder wird hingerichtet. Kurz darauf geschehen weitere Morde — mit derselben Handschrift.
+
+Detective John Hobbes ermittelt und stößt auf etwas, das sich mit polizeilichen Mitteln nicht fassen lässt: einen Dämon namens Azazel, der durch Berührung von einem Menschen in den nächsten wechselt. Wer der Täter ist, ändert sich damit ständig.
+
+### Entstehungsgeschichte
+
+Regie führte Gregory Hoblit, das Drehbuch schrieb Nicholas Kazan. Produziert wurde der Film von Charles Roven und Dawn Steel.
+
+Denzel Washington spielt Det. John Hobbes, John Goodman den Det. Jonesy, Donald Sutherland den Lt. Stanton, Embeth Davidtz die Gretta Milano, James Gandolfini den Lou und Elias Koteas den Edgar Reese.
+
+Die Kamera führte Newton Thomas Sigel, den Schnitt besorgte Lawrence Jordan, die Musik stammt von Tan Dun.
+
+Der Film erschien 1998, dauert 123 Minuten und ist ab 16 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Grundidee löst das klassische Problem des Ermittlungsfilms auf. Wenn der Täter den Körper wechseln kann, hilft keine Fahndung — jeder Passant kann im nächsten Moment der Gesuchte sein.
+
+Daraus ergibt sich eine ungewöhnliche Form von Bedrohung. Sie ist nicht sichtbar und nicht lokalisierbar; sie ist überall dort, wo Menschen einander berühren. Der Film macht aus einer alltäglichen Geste den Übertragungsweg.
+
+Das stellt auch die Hauptfigur vor ein Problem, das sie mit niemandem teilen kann. Wer Hobbes glaubt, ist entweder eingeweiht oder verdächtig.
+
+Tan Duns Musik ist für einen amerikanischen Thriller dieser Jahre eine ungewöhnliche Wahl und trägt zur Fremdheit bei, die der Film erzeugen will.
+
+### Einordnung & Wirkung
+
+1999 gab es eine Nominierung für den International Horror Guild Award und eine für den Bram Stoker Award in der Kategorie Drehbuch. Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Dass beide Nominierungen aus dem Bereich des phantastischen Genres kommen, ordnet den Film ein. Er wurde dort ernst genommen, wo man Wert auf eine durchdachte Prämisse legt.
+
+Die Besetzung ist im Rückblick bemerkenswert. Denzel Washington, John Goodman, Donald Sutherland und James Gandolfini in einem Film, dessen Konstruktion darauf beruht, dass man keinem von ihnen trauen kann.
+
+Genau darin liegt der Reiz — und die Schwierigkeit. Ein Film, in dem jede Figur der Gegner sein könnte, muss seine Auflösung sehr genau bauen, sonst wirkt sie beliebig.` },
+  {
+    bereich: 'titel', schluessel: 'movie:7520', locale: 'de-de',
+    text: `### Worum es geht
+
+Brian Flanagan kommt aus der Armee nach New York und will nach oben. Was er findet, ist eine Stelle hinter dem Tresen.
+
+Von Doug Coughlin lernt er das Jonglieren mit Flaschen und Gläsern; gemeinsam träumen sie von einer eigenen Kette. Dazwischen stehen Beziehungen, die nicht halten — bis Brian in Jamaika die wohlhabende Jordan Mooney kennenlernt.
+
+### Entstehungsgeschichte
+
+Vorlage ist Heywood Goulds halb autobiografischer Roman von 1984; er schrieb auch das Drehbuch. Gould hatte selbst zwischen 1969 und 1981 in New York als Barkeeper gearbeitet.
+
+Regie führte Roger Donaldson. Produziert wurde der Film von Ted Field und Robert W. Cort für Touchstone Pictures, Silver Screen Partners III und Interscope Communications; den Verleih übernahm Buena Vista.
+
+Tom Cruise spielt Brian Flanagan, Bryan Brown den Doug Coughlin, Elisabeth Shue die Jordan Mooney, Lisa Banes die Bonnie, Laurence Luckinbill den Richard Mooney, Kelly Lynch die Kerry Coughlin und Gina Gershon die Coral.
+
+Die Kamera führte Dean Semler, die Musik stammt von J. Peter Robinson; das Soundtrack-Album erschien am 2. August 1988.
+
+Gedreht wurde an der Nordküste Jamaikas — im Jamaica Inn, an den Dunn's River Falls, am Dragon Bay Beach und in der Sandals Royal Plantation. Das Budget betrug 20 Millionen Dollar, der US-Start war am 29. Juli 1988.
+
+### Hinter den Kulissen
+
+Die Vorlage stammt von jemandem, der den Beruf zwölf Jahre lang ausgeübt hat. Der Film übernimmt daraus vor allem das Handwerk — das akrobatische Zubereiten von Getränken, das dem Beruf zu neuer Sichtbarkeit verhalf.
+
+Erzählerisch beruht alles auf einer Lehrer-Schüler-Beziehung. Doug Coughlin bringt Brian nicht nur das Handwerk bei, sondern auch eine Haltung dazu — und genau diese Beziehung hielt Gene Siskel für den interessanteren Teil des Films.
+
+Der Wechsel nach Jamaika verschiebt den Ton. Aus einer Geschichte über Arbeit wird eine über Aufstieg durch Heirat.
+
+### Einordnung & Wirkung
+
+Bei 20 Millionen Dollar Herstellungskosten spielte der Film weltweit 171,5 Millionen ein — 78,2 Millionen in den USA und Kanada, 93,3 Millionen im übrigen Ausland. Damit war er der achterfolgreichste Film des Jahres 1988.
+
+Die Kritik war vernichtend. Rotten Tomatoes weist elf Prozent aus (46 Kritiker, Schnitt 4,4 von 10), Metacritic 12 von 100.
+
+Vincent Canby nannte ihn in der New York Times eine charakterlose, hirnlose Variation alter B-Movie-Formeln. Roger Ebert schrieb, je mehr man über das nachdenke, was in „Cocktail" tatsächlich geschehe, desto deutlicher erkenne man, wie leer und konstruiert er sei. Gene Siskel hielt die Liebesgeschichte für völlig lächerlich.
+
+Bei den Goldenen Himbeeren gewann der Film als schlechtester Film und für das schlechteste Drehbuch. Beim Publikum ergab CinemaScore dagegen ein „B+".
+
+Zwischen 12 von 100 bei Metacritic und Platz acht der Jahresliste liegt eine der größten Diskrepanzen, die sich in Filmbilanzen finden lassen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:6068', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Journalistin Robin Monroe ist mit ihrem Verlobten Frank im Urlaub, als sie zu einem Fototermin nach Tahiti muss.
+
+Der Pilot Quinn Harris fliegt sie mit seiner alten Maschine. Ein Gewitter zwingt zur Notlandung auf einer unbewohnten Insel. Während die beiden dort festsitzen, kommen sich Frank und Harris' Freundin Angelica näher — und auf der Insel wird es gefährlicher, als es zunächst aussah.
+
+### Entstehungsgeschichte
+
+Regie führte Ivan Reitman, das Drehbuch schrieb Michael Browning. Produziert wurde der Film von Roger Birnbaum, Wallis Nicita und Reitman selbst.
+
+Harrison Ford spielt Quinn Harris, Anne Heche die Robin Monroe, David Schwimmer den Frank Martin, Jacqueline Obradors die Angelica sowie Temuera Morrison und Danny Trejo die Piraten Jager und Pierce.
+
+Die Kamera führte Michael Chapman, den Schnitt besorgten Wendy Greene Bricmont und Sheldon Kahn, die Musik stammt von Randy Edelman.
+
+Gedreht wurde überwiegend auf der Hawaii-Insel Kauaʻi. Der Film erschien 1998, dauert 98 Minuten und ist ab 6 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Anlage ist die einer Zwangsgemeinschaft. Zwei Menschen, die einander nicht ausgesucht haben, sind aufeinander angewiesen — und die Umgebung erlaubt keinen Rückzug.
+
+Der zweite Handlungsstrang läuft parallel und ist der eigentliche Kunstgriff. Während Robin und Quinn ums Überleben kämpfen, werden ihre Partner untreu; der Film klärt damit im Hintergrund weg, was der Annäherung im Weg stünde.
+
+Bemerkenswert ist die Wendung im letzten Drittel. Aus einer Robinsonade wird ein Abenteuerfilm mit Piraten und einem Flugzeugwrack aus dem Zweiten Weltkrieg, das wieder flugfähig gemacht wird.
+
+Die Freigabe ab sechs Jahren zeigt, wie weit der Film seine Bedrohung im Harmlosen hält.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 40 Prozent aus, Metacritic 51 von 100. Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Das Lexikon des internationalen Films nannte den Film filmische Konfektionsware, weitgehend routiniert. Prisma lobte dagegen einige spaßige Gags und das Darstellergespann, das für angenehme Unterhaltung sorge.
+
+Harrison Ford gewann den Blockbuster Entertainment Award; Anne Heche und David Schwimmer waren nominiert, Randy Edelman erhielt den BMI Film Music Award.
+
+Der Begriff Konfektionsware trifft die Sache. Der Film erfindet nichts, führt aber ein bekanntes Muster sauber aus — und lebt dabei fast vollständig vom Zusammenspiel seiner beiden Hauptdarsteller.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9604', locale: 'de-de',
+    text: `### Worum es geht
+
+Der sowjetische Milizhauptmann Ivan Danko wird nach Chicago geschickt. Er soll einen georgischen Drogenhändler festnehmen, der seinen Partner getötet hat.
+
+Vor Ort wird ihm Detective Sergeant Art Ridzik zur Seite gestellt — widerwillig auf beiden Seiten. Während die beiden ermitteln, versucht der Gesuchte, Kokain in die Sowjetunion zu bringen.
+
+### Entstehungsgeschichte
+
+Regie führte Walter Hill; von ihm stammt auch die Geschichte. Das Drehbuch schrieb er gemeinsam mit Harry Kleiner und Troy Kennedy Martin.
+
+Arnold Schwarzenegger spielt Captain Ivan Danko, Jim Belushi den Detective Sergeant Art Ridzik, Peter Boyle den Commander Lou Donnelly, Ed O'Ross den Viktor Rostavili, Laurence Fishburne den Lieutenant Charlie Stobbs und Gina Gershon die Catherine „Cat" Manzetti.
+
+Produziert wurde der Film von Walter Hill, Gordon Carroll und Mario Kassar für Carolco Pictures; den Verleih übernahm TriStar. Die Kamera führte Matthew F. Leonetti, die Musik stammt von James Horner; für Vor- und Abspann wurde „Die Philosophen" aus Prokofjews Kantate zum 20. Jahrestag der Oktoberrevolution verwendet.
+
+Der Dreh begann am 26. August 1987. Die sowjetischen Szenen entstanden überwiegend in Budapest — die Eröffnung im Rudas-Bad, die Buda-Burg als Innenministerium —, obwohl eine Drehgenehmigung für Moskau vorlag; dort wurde vier Tage gedreht, vor allem auf dem Roten Platz. Wegen fehlenden Schnees in Budapest kam Österreich hinzu, außerdem Chicago. Schwarzeneggers Gage betrug acht Millionen Dollar.
+
+### Hinter den Kulissen
+
+Walter Hill entwickelte die Idee, um mit Schwarzenegger arbeiten zu können. Der Darsteller sagte auf Grundlage einer groben Prämisse und einer einzelnen Szene zu. Hill beschrieb seinen Ansatz mit den Worten, er habe nicht gewollt, dass Schwarzenegger einfach einen VW über ein Gebäude wirft.
+
+Die Drehgenehmigung für Moskau war zu diesem Zeitpunkt bemerkenswert — genutzt wurde sie allerdings nur für vier Tage; den Hauptteil der sowjetischen Szenen lieferte Budapest.
+
+Erzählerisch beruht der Film auf dem Gegensatz zweier Polizeikulturen. Der eine ist wortkarg und regeltreu, der andere redselig und improvisierend; die Komik entsteht aus der Reibung, nicht aus Gags.
+
+Prokofjew im Vorspann setzt dazu einen Ton, der ernster ist als das, was folgt.
+
+### Einordnung & Wirkung
+
+In den USA spielte der Film 34,9 Millionen Dollar ein. Er startete an der Spitze der Kinocharts, wurde aber von Schwarzeneggers gleichzeitig laufendem Film „Twins" übertroffen.
+
+Rotten Tomatoes weist 68 Prozent Zustimmung aus (28 Kritiker), Metacritic 61 Prozent (13 Kritiken). Beim Publikum ergab CinemaScore ein „B".
+
+Roger Ebert vergab drei von vier Sternen und lobte Hills Umgang mit Gewalt. Hal Hinson kritisierte den Film in der Washington Post als schlecht oder gleichgültig gemacht. Leonard Maltin nannte ihn freudlos und voller Flüche.
+
+Die Spanne dieser Urteile hängt an der Machart. Ein Actionfilm, der bewusst auf Übertreibung verzichtet, wirkt auf die einen ernsthaft und auf die anderen humorlos.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10061', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Jahr 2013 ist Los Angeles eine Deportationszone. Wer als unerwünscht gilt, wird dorthin gebracht.
+
+Snake Plissken bekommt eine Wahl gestellt, die keine ist: einen Auftrag übernehmen oder an einem Virus sterben, das man ihm gespritzt hat. Er soll die Fernsteuerung einer Satellitenwaffe zurückholen, die die Präsidententochter Utopia dem Terroristen Cuervo Jones übergeben hat.
+
+### Entstehungsgeschichte
+
+Regie führte John Carpenter. Das Drehbuch schrieb er gemeinsam mit Debra Hill und Kurt Russell; Hill und Russell produzierten den Film auch.
+
+Kurt Russell spielt Snake Plissken, Stacy Keach den Commander Malloy, Steve Buscemi den Eddie, Peter Fonda den Pipeline, Georges Corraface den Cuervo Jones, A. J. Langer die Utopia, Cliff Robertson den Präsidenten und Pam Grier die Hershe.
+
+Die Musik stammt von Shirley Walker und John Carpenter, die Kamera von Gary B. Kibbe, den Schnitt besorgte Edward A. Warschilka.
+
+Der Film erschien 1996, dauert 101 Minuten und ist ab 16 Jahren freigegeben. Der deutsche Kinostart war der 31. Oktober 1996.
+
+### Hinter den Kulissen
+
+Dass der Hauptdarsteller am Drehbuch mitschrieb und den Film mitproduzierte, ist die auffälligste Konstellation. Kurt Russell verantwortete die Figur in drei Funktionen.
+
+Erzählerisch arbeitet der Film mit einer Zeitangabe, die aus heutiger Sicht Vergangenheit ist: 2013. Was 1996 als Zukunft entworfen wurde, ist inzwischen überholt — der Film erzählt eine Zukunft, die nicht eingetreten ist.
+
+Die Ausgangslage ist eine Erpressung. Plissken handelt nicht aus Überzeugung, sondern weil man ihm ein Virus gespritzt hat — der Film verweigert seiner Hauptfigur von Beginn an jedes Motiv außer dem eigenen Überleben. Wofür er sich am Ende entscheidet, folgt daraus konsequent.
+
+Die parodistischen Elemente, die die Kritik bemerkte, gehören zu dieser Haltung — der Film nimmt sein Genre nicht durchgehend ernst.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 56 Prozent aus, Metacritic 54 von 100. Beim Publikum ergab CinemaScore ein „B−".
+
+Das Lexikon des internationalen Films kritisierte, unübersehbare parodistische Elemente würden zwischen kostspieligen Äußerlichkeiten und stereotypen Actionmustern erstickt. Die Deutsche Film- und Medienbewertung würdigte dagegen die Inszenierung der Massenszenen und die digitale Technik als überzeugende Aspekte eines furiosen Endzeitfilms.
+
+Der Widerspruch zwischen beiden Urteilen betrifft dieselbe Eigenschaft. Was die eine Seite als erstickte Parodie liest, sieht die andere als gelungene Umsetzung — die Frage ist, ob man dem Film seine Doppelbödigkeit abnimmt oder sie für Unentschiedenheit hält.` },
+  {
+    bereich: 'titel', schluessel: 'movie:48034', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Gruppe befreundeter Pariser fährt wie jedes Jahr gemeinsam in den Sommerurlaub nach Cap Ferret.
+
+Diesmal fehlt einer: Ludo liegt nach einem Motorradunfall im Krankenhaus. Die Freunde fahren trotzdem. Vor Ort kommt hoch, was seit Jahren unausgesprochen geblieben ist — Beziehungsprobleme, Untreue, persönliche Krisen. Die Lage eskaliert, als Max eine verletzende Bemerkung über Vincents Homosexualität macht.
+
+### Entstehungsgeschichte
+
+Guillaume Canet führte Regie und schrieb das Drehbuch; es war sein dritter Spielfilm.
+
+François Cluzet spielt Max Cantara, Marion Cotillard die Marie und Benoît Magimel den Vincent Ribaud. Zum Ensemble gehören außerdem Gilles Lellouche, Jean Dujardin und Laurent Lafitte.
+
+Produziert wurde der Film von Alain Attal. Die Kamera führte Christophe Offenstein, den Schnitt besorgte Hervé de Luze.
+
+Gedreht wurde von August bis Oktober 2009 in Paris und in Lège-Cap-Ferret an der Atlantikküste. Der Film dauert 154 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Ausgangslage ist eine moralische Zumutung, die der Film nicht auflöst. Ein Freund liegt schwer verletzt im Krankenhaus, und die Gruppe fährt trotzdem in den Urlaub — von dieser Entscheidung her ist alles Weitere zu lesen.
+
+154 Minuten sind für eine Tragikomödie viel. Der Film nutzt die Länge, um seinem Ensemble Raum zu geben; jede Figur bekommt ihre eigene Krise, und keine wird zugunsten des Tempos gekürzt.
+
+Genau daran setzte die Kritik an. Gelobt wurden Ensemble und Regie, bemängelt wurde die Länge — was bei einem Film, dessen Verfahren das Ausbreiten ist, zwei Seiten derselben Entscheidung sind.
+
+Der Schauplatz trägt mit. Cap Ferret ist ein Urlaubsort, an dem man nicht arbeiten kann und dem Gespräch nicht ausweicht.
+
+### Einordnung & Wirkung
+
+Der Film wurde mit über 5,3 Millionen Zuschauern zur erfolgreichsten französischen Produktion des Jahres 2010.
+
+Beim César 2011 waren Valérie Bonneton als beste Nebendarstellerin und Gilles Lellouche als bester Nebendarsteller nominiert. 2011 wurde der Film zudem für die Europäischen Filmpreise ausgewählt.
+
+Eine Besprechung fasste zusammen, die Tragikomödie empfehle sich trotz kleinerer Schwächen als der Sommerfilm schlechthin.
+
+Diese Einordnung erklärt den Erfolg. Ein Film über Freundschaft, Untreue und Verdrängung, der in Ferienstimmung spielt, trifft ein Publikum, das sich in beidem wiedererkennt — und 5,3 Millionen Zuschauer in Frankreich sind dafür der Beleg.` },
+  {
+    bereich: 'titel', schluessel: 'movie:614930', locale: 'de-de',
+    text: `### Worum es geht
+
+Vier Schildkröten wurden als Jungtiere durch mutagenen Schlamm in der Kanalisation von New York verändert. Die Ratte Splinter hat sie großgezogen.
+
+Fünfzehn Jahre später wollen sie nur eines: ein normales Leben unter Menschen. Dann treffen sie auf den Mutanten Superfly, der einen anderen Plan hat — alle Tiere der Erde zu mutieren und eine Welt zu schaffen, in der Mutanten über Menschen herrschen. Zunächst fasziniert das die Turtles.
+
+### Entstehungsgeschichte
+
+Regie führte Jeff Rowe, Co-Regie Kyler Spears. Das Drehbuch schrieben Seth Rogen, Evan Goldberg, Jeff Rowe, Dan Hernandez und Benji Samit.
+
+Rowe wollte nach eigenen Worten den ultimativen Coming-of-Age-Film für Jugendliche schaffen und verglich das Vorhaben mit „Stand by Me" und „Lady Bird".
+
+Im Original sprechen Nicolas Cantu den Leonardo, Micah Abbey den Donatello, Shamon Brown Jr. den Michelangelo, Brady Noon den Raphael, Jackie Chan den Splinter, Ayo Edebiri die April O'Neil, Ice Cube den Superfly und Maya Rudolph die Cynthia Utrom. In der deutschen Fassung sprechen David Kunze, Ben Hadad, Jerome Weinert, Nando Schmitz, Stefan Gossler, Gabrielle Pietermann, Malick Bauer und Nilam Farooq.
+
+Produziert wurde der Film von Seth Rogen, Evan Goldberg und James Weaver für Nickelodeon Movies und Point Grey Pictures. Animiert wurde bei Mikros Animation in Montréal und Paris sowie bei Cinesite in Vancouver. Die Musik stammt von Trent Reznor und Atticus Ross; das Album erschien am 28. Juli 2023. Das Budget betrug 70 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Bildstil ist die auffälligste Entscheidung. Rowe wollte, dass der Film anders aussieht als übliche Animationsfilme — stilisierte Computeranimation mit zweidimensionalen Elementen, angelehnt an Konzeptzeichnungen, mit einer Anmutung wie aus einem Skizzenbuch. Die Künstler wurden angehalten, Unvollkommenheiten zuzulassen, so wie Jugendliche zeichnen.
+
+Als Anregungen nennt die Produktion die Fernsehserie von 1987, Spielzeugreihen — und „Chungking Express". Der letzte Verweis ist der ungewöhnlichste an einem Film für ein junges Publikum.
+
+Die Musik von Trent Reznor und Atticus Ross tritt neben Hip-Hop mit Schwerpunkt auf klassischem Eastcoast-Sound, passend zum Schauplatz New York.
+
+Die Besetzung der Turtles mit tatsächlich jugendlichen Sprechern ist der letzte Baustein: Der Film klingt so alt, wie seine Figuren sind.
+
+### Einordnung & Wirkung
+
+Bei 70 Millionen Dollar Herstellungskosten spielte der Film weltweit 180,5 Millionen ein — 118,6 Millionen in den USA und Kanada, 61,9 Millionen international. Am Startwochenende kamen 28 Millionen zusammen, was für Platz vier hinter „Barbie", „Meg 2" und „Oppenheimer" reichte.
+
+Die Aufnahme war überwiegend positiv. Justin Chang sprach in der LA Times von einer unerwartet reizvollen Herausforderung. Tom Jorgensen vergab bei IGN acht von zehn Punkten und lobte Selbstvertrauen, Energie und Herz. Charlotte O'Sullivan gab im Evening Standard vier von fünf Sternen. Rafael Motomayor nannte den Film bei SlashFilm einen der schönsten des Jahres. Brian Tallerico vergab auf RogerEbert.com 2,5 von 5 Sternen und kritisierte die Geschichte als zu oberflächlich.
+
+Mehrere Kritiker hielten ihn für den besten Film der Reihe.` },
 ];
