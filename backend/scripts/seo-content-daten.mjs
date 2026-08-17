@@ -30201,4 +30201,490 @@ Die Serie gilt als bedeutsam für die Darstellung queerer Figuren im Kinderferns
 Das ist der Punkt, an dem sich die Auseinandersetzung um die Kürzung entzündete. Die offizielle Begründung — die Serie passe nicht zur Marke — wurde von Teilen des Publikums und der Fachpresse anders gelesen.
 
 Was bleibt, ist eine Serie, deren Ende erzwungen wurde und die gerade deshalb ein außergewöhnlich beständiges Publikum behalten hat.` },
+  // ---- Block 48 ----
+  {
+    bereich: 'titel', schluessel: 'series:1972', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Zwölf Kolonien der Menschheit werden von den Zylonen angegriffen, künstlichen Wesen aus menschlicher Herstellung. Nach dem Angriff sind rund 50.000 Menschen übrig.
+
+Sie fliehen in einem Zug ziviler Schiffe, geschützt von einem einzigen veralteten Kampfstern: der Galactica. Geführt werden sie von Präsidentin Laura Roslin und Commander William Adama. Ihr Ziel ist ein Planet, von dem sie nur aus alten Überlieferungen wissen: die Erde. Ihre Verfolger haben inzwischen menschliche Gestalt angenommen.
+
+### Entstehungsgeschichte
+
+Ronald D. Moore entwickelte die Serie als Neudeutung der Serie von Glen A. Larson aus dem Jahr 1978. Aus einem betont bunten Original wurde eine dunkle, politisch angelegte Erzählung mit durchgehend uneindeutigen Figuren.
+
+Edward James Olmos spielt Adama, Mary McDonnell die Präsidentin Roslin, Katee Sackhoff die Pilotin Starbuck, Jamie Bamber den Lee Adama, James Callis den Wissenschaftler Gaius Baltar. Tricia Helfer und Grace Park spielen menschenähnliche Zylonen.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Vancouver. Den Auftakt bildete ein dreistündiger Zweiteiler im Dezember 2003, danach folgten vier Staffeln mit insgesamt 76 Folgen sowie zwei Fernsehfilme. Die Serie lief von 2003 bis 2009 auf dem Sci-Fi Channel.
+
+Der Gegenstand ist erkennbar die Zeit nach dem 11. September 2001. Es geht um Terrorismus, Folter, Bürgerrechte und Aufstandsbekämpfung — am deutlichsten im umstrittenen Besatzungs-Handlungsstrang der dritten Staffel.
+
+### Einordnung & Wirkung
+
+Die Serie wurde von Time, der New York Times und Entertainment Weekly gelobt und stand auf zahlreichen Bestenlisten. Sie erhielt einen Peabody Award und 19 Emmy-Nominierungen, von denen drei zu Auszeichnungen wurden.
+
+Kritisiert wurden die späteren Staffeln, deren Qualität nach verbreiteter Auffassung nachließ, sowie die umstrittene Schlussfolge.
+
+Was bleibt, ist eine der wenigen Science-Fiction-Serien, die als politische Allegorie ernst genommen wurde — und die ihre Fragen nach Folter und Sicherheit stellte, während sie in der Wirklichkeit gerade verhandelt wurden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:916224', locale: 'de-de',
+    text: `### Worum es geht
+
+Die siebzehnjährige Suzume hat ihre Mutter beim Tōhoku-Erdbeben und dem Tsunami von 2011 verloren. Eines Tages entdeckt sie eine geheimnisvolle Tür — eine von vielen, hinter denen Wesen lauern, die Erdbeben auslösen.
+
+Suzume schließt sich Sōta an, dessen Aufgabe es ist, diese Türen zu bewachen und zu verschließen. Gemeinsam reisen sie quer durch Japan. Der Weg führt zuletzt in die Gegend, aus der Suzume stammt.
+
+### Entstehungsgeschichte
+
+Makoto Shinkai schrieb das Drehbuch und führte Regie. Produziert wurde der Film von CoMix Wave Films.
+
+Die Arbeit begann im Januar 2020, die Animation im April 2021.
+
+Die japanischen Stimmen sprechen Nanoka Hara als Suzume und Hokuto Matsumura als Sōta; in der deutschen Fassung sind es Emilia Raschewski und Oscar Räuker.
+
+Die Musik stammt von Kazuma Jinnouchi und der Band Radwimps, die bereits an Shinkais früheren Filmen mitgewirkt hatte; das Album umfasst 29 Stücke.
+
+### Hinter den Kulissen
+
+Der Bezug zur Katastrophe von 2011 ist der Kern des Films. Suzumes Mutter starb dabei, und der Film führt seine Hauptfigur über ein ganzes Land hinweg an einen Ort, den sie verdrängt hat.
+
+Damit ist der Film ein ungewöhnlicher Fall: Ein Publikumsfilm für ein junges Publikum behandelt ein nationales Trauma unmittelbar — und stellt dabei nicht die Zerstörung in den Mittelpunkt, sondern die Orte, die danach leer geblieben sind.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 11. November 2022 in Japan. Bis April 2023 spielte er weltweit 221 Millionen Dollar ein — Shinkais erfolgreichster Kinostart und der bis dahin erfolgreichste japanische Film in China.
+
+Die Kritik lobte die Bildgestaltung und die emotionale Tiefe. Behandelt werden Trauer, Verlust und die Frage, wie man weitermacht.
+
+Bei der Berlinale war der Film für den Goldenen Bären nominiert — für einen Anime eine seltene Auszeichnung. Bei den japanischen Filmpreisen gewann er für die beste Musik.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9359', locale: 'de-de',
+    text: `### Worum es geht
+
+Bret Maverick ist Falschspieler und braucht 25.000 Dollar, um beim größten Pokerturnier des Westens antreten zu dürfen, das auf dem Raddampfer "Lauren Belle" stattfindet.
+
+Auf der Suche nach dem Geld gerät er an zwei Weggefährten, die ebenso wenig zu trauen sind wie er: die Trickbetrügerin Annabelle Bransford und den Marshal Zane Cooper. Zusammen ziehen sie eine Reihe von Betrügereien durch, um das Startgeld zusammenzubekommen. Am Ende sitzen alle am selben Tisch, und es geht um eine halbe Million Dollar.
+
+### Entstehungsgeschichte
+
+Regie führte Richard Donner, das Drehbuch schrieb William Goldman.
+
+Die Vorlage ist die Fernsehserie von Roy Huggins, die von 1957 bis 1962 lief. Ihre Hauptrolle spielte damals James Garner — der hier den Marshal Zane Cooper gibt.
+
+Mel Gibson spielt Bret Maverick, Jodie Foster die Annabelle Bransford. In weiteren Rollen sind Graham Greene, James Coburn und Alfred Molina zu sehen, dazu zahlreiche Kurzauftritte von Westerndarstellern und Country-Musikern.
+
+### Hinter den Kulissen
+
+Gedreht wurde von August bis Dezember 1993 in Utah, Arizona, Kalifornien und Oregon. Für den Raddampfer diente die "Portland", ein historischer Heckraddampfer, der für den Film zum Mississippi-Spielschiff umgebaut wurde.
+
+Das Budget lag bei 75 Millionen Dollar.
+
+Die Besetzung von James Garner ist die eigentliche Pointe der Produktion: Der Darsteller der ursprünglichen Hauptfigur steht hier neben seinem Nachfolger, und der Film spielt mit dieser Konstellation, ohne sie auszubuchstabieren.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 183 Millionen Dollar ein. In Nordamerika war er der zwölfterfolgreichste Film des Jahres 1994, weltweit der fünfzehnterfolgreichste.
+
+Die Kritik urteilte freundlich: 67 Prozent bei Rotten Tomatoes aus 55 Besprechungen, 62 Prozent bei Metacritic aus 28. Das Publikum vergab bei CinemaScore ein A minus.
+
+Roger Ebert vergab drei von vier Sternen und nannte ihn den ersten unbeschwerten, auf Lacher angelegten Familienwestern seit langer Zeit.
+
+Nominiert war der Film für den Oscar in der Kategorie bestes Kostümbild.` },
+  {
+    bereich: 'titel', schluessel: 'movie:103332', locale: 'de-de',
+    text: `### Worum es geht
+
+Calvin Weir-Fields ist Schriftsteller und kommt seit Langem nicht weiter. Er lebt allein und sitzt an einer Schreibmaschine, an der nichts vorangeht.
+
+Dann träumt er von einer Frau, die er nicht kennt, und beginnt über sie zu schreiben. Eines Morgens steht sie in seiner Küche: Ruby Sparks, genau so, wie er sie erfunden hat. Und alles, was er über sie tippt, wird wahr. Zunächst ist das ein Glück. Dann beginnt Calvin, Änderungen vorzunehmen.
+
+### Entstehungsgeschichte
+
+Regie führten Jonathan Dayton und Valerie Faris. Das Drehbuch schrieb Zoe Kazan, die zugleich die Ruby spielt.
+
+Paul Dano spielt den Calvin. Daneben sind Annette Bening als seine Mutter, Chris Messina als sein Bruder und Antonio Banderas in einer weiteren Rolle zu sehen.
+
+Die Kamera führte Matthew Libatique, die Musik stammt von Nick Urata.
+
+### Hinter den Kulissen
+
+Der Film greift den Pygmalion-Stoff auf: einen Mann, der eine Frau erschafft und sich in sein eigenes Werk verliebt.
+
+Die Zuspitzung liegt darin, dass Calvins Eingriffe zunächst harmlos wirken und dann immer weiter gehen. Was der Film dabei vorführt, ist die Gegenprobe zu einer im Kino verbreiteten Frauenfigur — der unbeschwerten, leicht wunderlichen jungen Frau, die es nur gibt, damit ein Mann sich weiterentwickelt. Ruby ist genau das, weil ein Mann sie so geschrieben hat, und der Film macht daraus die Frage, was daran eigentlich zumutbar ist.
+
+Dass die Drehbuchautorin ihre eigene Figur spielt, verschiebt diese Frage noch einmal.
+
+### Einordnung & Wirkung
+
+Die Kritik lobte die Behandlung des Verhältnisses zwischen Liebe, Macht und Abhängigkeit; eine Besprechung sprach von den Widersprüchen menschlicher Beziehungen.
+
+Der Film gewann zwei Saturn Awards — als bester Fantasyfilm und für Zoe Kazan als beste Hauptdarstellerin — sowie den Independent Spirit Award für das beste Drehbuch.
+
+Bemerkenswert bleibt, dass ein Film mit dieser Ausgangslage — ein Mann bekommt buchstäbliche Verfügungsgewalt über eine Frau — als leichte Komödie beginnt und als etwas ganz anderes endet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:112198', locale: 'de-de',
+    text: `### Worum es geht
+
+Fünf Menschen treffen sich zum Abendessen: Vincent, seine Angehörigen und der Familienfreund Claude. Es soll ein gewöhnlicher Abend werden.
+
+Dann verrät Vincent, wie sein ungeborenes Kind heißen soll: Adolphe. Ob das ein Scherz ist, lässt er offen — und der Abend kippt. Aus der Frage nach dem Namen wird ein Streit über politische Haltungen, dann über alte Kränkungen, dann über Dinge, die seit Jahrzehnten niemand ausgesprochen hat. Am Ende steht eine Enthüllung, die alle Beteiligten trifft.
+
+### Entstehungsgeschichte
+
+Regie führten Alexandre de La Patellière und Matthieu Delaporte. Sie verfilmten damit ihr eigenes Theaterstück, das 2010 am Théâtre Édouard VII in Paris uraufgeführt worden war.
+
+Die Besetzung des Films ist mit der Uraufführungsbesetzung des Stücks identisch: Patrick Bruel, Valérie Benguigui, Charles Berling, Guillaume de Tonquédec und Françoise Fabian.
+
+Es handelt sich um eine französische Produktion von 109 Minuten. In Deutschland lief der Film am 2. August 2012 an; gedreht wurde in Paris.
+
+### Hinter den Kulissen
+
+Die Herkunft vom Theater ist dem Film anzumerken und wird nicht kaschiert: eine Wohnung, ein Abend, fünf Figuren, fast durchgehend Dialog.
+
+Genau darin liegt seine Wirkung. Der Streit eskaliert in Stufen, und jede Figur bringt eine Empörung vor, die zugleich etwas über sie selbst verrät. Der Name ist dabei nur der Auslöser — verhandelt wird, wer in dieser Familie welche Rolle zugewiesen bekommen hat und wer sich damit nie abgefunden hat.
+
+### Einordnung & Wirkung
+
+Bei den Césars 2013 gewannen Valérie Benguigui und Guillaume de Tonquédec jeweils als beste Nebendarstellerin und bester Nebendarsteller.
+
+Der Stoff hat sich als außerordentlich übertragbar erwiesen. 2018 entstand unter der Regie von Sönke Wortmann eine deutsche Neuverfilmung mit Christoph Maria Herbst und Florian David Fitz.
+
+Damit gehört der Film zu jenen Kammerspielen, deren Anlage so tragfähig ist, dass sie in mehreren Ländern jeweils neu funktioniert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10679', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Jahr 2018 landen amerikanische Astronauten auf der erdabgewandten Seite des Mondes. Was sie dort finden, ist eine Basis: 1945 geflohene Nationalsozialisten haben sich dort eingerichtet und über Jahrzehnte eine Streitmacht aufgebaut.
+
+Ein Offizier reist zur Erde, um Technik zu beschaffen, und gerät dabei ausgerechnet in einen Präsidentschaftswahlkampf, dem seine Auftritte nützen. Anschließend beginnt die Invasion. Die Staaten der Erde schlagen sie zurück — und geraten danach untereinander in einen Atomkrieg.
+
+### Entstehungsgeschichte
+
+Regie führte der finnische Regisseur Timo Vuorensola. Das Drehbuch schrieb er gemeinsam mit Michael Kalesniko, nach einer Geschichte von Johanna Sinisalo und einer Idee von Jarmo Puskala.
+
+Julia Dietze spielt die Renate Richter, daneben sind Götz Otto, Christopher Kirby und Peta Sergeant zu sehen. Die Präsidentin ist als Parodie auf Sarah Palin angelegt.
+
+Es handelt sich um eine Gemeinschaftsproduktion Finnlands, Deutschlands und Australiens.
+
+### Hinter den Kulissen
+
+Die Entwicklung begann 2006. Gedreht wurde im November 2010 in Frankfurt und im Januar 2011 in Australien, aufgenommen mit Red-Kameras.
+
+Das Besondere ist die Finanzierung. Der Film kostete 7,5 Millionen Euro und wurde zu einem erheblichen Teil von Unterstützern mitfinanziert. Über die Plattform Wreck-a-Movie beteiligten sich zudem Freiwillige an der inhaltlichen Arbeit — ein Verfahren, das damals als partizipatorisches Kino bezeichnet wurde.
+
+Damit gehört er zu den teuersten finnischen Filmen überhaupt.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 11. Februar 2012 bei der Berlinale statt, der europäische Kinostart folgte im April 2012. Weltweit spielte der Film 10,1 Millionen Dollar ein.
+
+Die Kritik urteilte hart: 41 Prozent bei Rotten Tomatoes. Der wiederkehrende Befund lautete, es handle sich um eine großartige Idee bei schwacher Ausführung; bemängelt wurde außerdem ein Humor, der bereits bei Erscheinen veraltet gewirkt habe.
+
+2019 folgte mit "Iron Sky: The Coming Race" eine Fortsetzung, ebenfalls über Indiegogo finanziert. Sie wurde noch schlechter aufgenommen und floppte so deutlich, dass die beteiligten Firmen Blind Spot Pictures und Iron Sky Universe Insolvenz anmelden mussten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9833', locale: 'de-de',
+    text: `### Worum es geht
+
+Paris, 1919. In der Oper findet eine Versteigerung statt. Von dort springt der Film zurück ins Jahr 1870.
+
+Die Chorsängerin Christine Daaé wird heimlich unterrichtet — von einer Stimme, die sie für einen Engel hält und die in Wahrheit einem entstellten Mann gehört, der in den Katakomben unter dem Haus lebt. Als Christines Jugendfreund Raoul auftaucht und die beiden einander näherkommen, duldet das Phantom das nicht.
+
+### Entstehungsgeschichte
+
+Regie führte Joel Schumacher. Die Vorlage ist das Musical von Andrew Lloyd Webber, das seinerseits auf Gaston Leroux' Roman zurückgeht.
+
+Gerard Butler spielt das Phantom, Emmy Rossum die Christine Daaé — sie war zu Drehbeginn 17 Jahre alt —, Patrick Wilson den Raoul.
+
+Das Budget lag bei etwa 70 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Schwierigkeit jeder Musicalverfilmung liegt in der Besetzung: Man braucht Darsteller, die singen können, oder Sänger, die spielen können. Genau daran setzte die Kritik an diesem Film an.
+
+Hinzu kommt eine zweite Schwierigkeit. Auf der Bühne bleibt das Phantom über weite Strecken eine Erscheinung, die man mehr hört als sieht. Der Film muss zeigen, was die Bühne der Vorstellung überlässt — und nimmt damit einen Teil dessen weg, was die Figur ausmacht.
+
+Formal folgt er dem Musical eng, einschließlich der Rahmenhandlung von 1919, aus der heraus die eigentliche Geschichte erzählt wird.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film über 154 Millionen Dollar ein; in Deutschland kamen 702.103 Zuschauer.
+
+Die Kritik fiel überwiegend ablehnend aus. Das Lexikon des internationalen Films urteilte, die Inszenierung sei einfallslos und die Hauptdarsteller seien schauspielerisch wie gesanglich überfordert.
+
+Bei den Oscars war der Film dennoch dreifach nominiert: für die beste Ausstattung, die beste Kamera und den besten Originalsong.
+
+Der Abstand zwischen Kassenergebnis und Kritikerurteil ist damit bemerkenswert — und er erklärt sich weniger aus dem Film als aus der Vorlage, deren Publikum ohnehin feststand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:43933', locale: 'de-de',
+    text: `### Worum es geht
+
+Nachdem eine NASA-Sonde über Mexiko abgestürzt ist, hat sich dort außerirdisches Leben ausgebreitet. Ein breiter Streifen entlang der Grenze zu den Vereinigten Staaten ist Sperrgebiet.
+
+Der Fotojournalist Andrew Kaulder soll die Tochter seines Auftraggebers aus dem Land bringen. Als der letzte reguläre Weg wegfällt, bleibt nur die Route durch die Sperrzone. Was auf der Fahrt geschieht, ist weniger Bedrohung als Beobachtung: zwei Menschen, die einander näherkommen, während um sie herum ein Land mit Wesen lebt, die es nicht loswird.
+
+### Entstehungsgeschichte
+
+Gareth Edwards gab mit diesem Film sein Regiedebüt — und schrieb zugleich das Drehbuch und führte die Kamera selbst. Die Idee kam ihm über das Bild eines Ungeheuers im Netz eines Fischers.
+
+Scoot McNairy und Whitney Able spielen die beiden Hauptrollen. Edwards besetzte sie bewusst mit einem Paar, das auch privat zusammen war, um die Vertrautheit zwischen den Figuren echt wirken zu lassen.
+
+### Hinter den Kulissen
+
+Die Herstellung ist der eigentlich bemerkenswerte Teil. Gedreht wurde mit einem Team von sieben Personen, die in einem einzigen Kleinbus durch fünf Länder fuhren — Belize, Mexiko, Guatemala, Costa Rica und die Vereinigten Staaten — und zwar in drei Wochen.
+
+Die 250 Effektaufnahmen erstellte Edwards anschließend selbst, in seinem Schlafzimmer, mit handelsüblicher Software. Die Wesen bezeichnete er dabei als das Schwierigste.
+
+Die meisten Nebendarsteller waren keine Schauspieler, sondern Menschen, die vor Ort angesprochen wurden und ihre Sätze improvisierten.
+
+### Einordnung & Wirkung
+
+Der Film kostete weniger als 500.000 Dollar — die Ausrüstung allein etwa 15.000 — und spielte weltweit 4,2 Millionen ein.
+
+Die Kritik urteilte gut: 73 Prozent bei Rotten Tomatoes mit einem Schnitt von 6,61 von 10, 63 von 100 bei Metacritic. Roger Ebert vergab dreieinhalb Sterne und lobte, dass der Film Figuren, Beziehungen und Angst über das Spektakel stelle. Peter Bradshaw nannte ihn ungeheuer spannende Science Fiction.
+
+Für Gareth Edwards war der Film der Einstieg in große Studioproduktionen: Es folgten "Godzilla" 2014 und "Rogue One" 2016.` },
+  // ---- Block 49 ----
+  {
+    bereich: 'titel', schluessel: 'movie:565028', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Künstler Anthony McCoy zieht mit seiner Partnerin Brianna nach Cabrini-Green in Chicago — in ein Viertel, das inzwischen aufgewertet und umgebaut ist und von dem, was es einmal war, kaum noch etwas erkennen lässt.
+
+Auf der Suche nach einem Motiv stößt Anthony auf die dort umlaufende Sage vom Candyman. Er macht sie zum Gegenstand seiner Arbeit — und gerät dabei selbst hinein. Seine Hand verändert sich, sein Werk gewinnt an Aufmerksamkeit, und beides hat denselben Grund.
+
+### Entstehungsgeschichte
+
+Regie führte Nia DaCosta; es war ihre zweite abendfüllende Arbeit nach "Little Woods". Das Drehbuch schrieb sie gemeinsam mit Jordan Peele und Win Rosenfeld.
+
+Der Film gilt als geistige Fortsetzung des Films von 1992 und geht wie dieser auf Clive Barkers Erzählung "The Forbidden" zurück.
+
+Yahya Abdul-Mateen II spielt Anthony McCoy, Teyonah Parris die Brianna, Colman Domingo den William Burke. Tony Todd tritt erneut als Candyman auf, hier unter dem Namen Daniel Robitaille.
+
+### Hinter den Kulissen
+
+Gedreht wurde im Sommer und Herbst 2019 in Chicago. Die Musik stammt von Robert A. A. Lowe.
+
+Das auffälligste Gestaltungsmittel sind die Schattenspielsequenzen des Chicagoer Kollektivs Manual Cinema. Mit ihnen erzählt der Film historische Gewalt gegen Schwarze Menschen — in Scherenschnitten statt in nachgestellten Szenen, wodurch er die Bilder verweigert, die er zugleich aufruft.
+
+Der Schauplatz ist derselbe wie 1992, hat sich aber verändert: Cabrini-Green ist abgerissen und neu bebaut. Der Film macht daraus seinen Gegenstand — Gentrifizierung als eine Form der Auslöschung.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 77,4 Millionen Dollar ein.
+
+Die Kritik urteilte gut: 84 Prozent bei Rotten Tomatoes, 72 von 100 bei Metacritic. Gelobt wurde, dass er die Regeln des Horrorkinos bedient und zugleich Gentrifizierung, Polizeigewalt und strukturellen Rassismus verhandelt, ohne das eine gegen das andere auszuspielen.
+
+Damit gehört er zu einer Reihe amerikanischer Horrorfilme jener Jahre, in denen das Genre ausdrücklich als politische Form genutzt wird.` },
+  {
+    bereich: 'titel', schluessel: 'movie:271969', locale: 'de-de',
+    text: `### Worum es geht
+
+Judah Ben-Hur ist ein jüdischer Adliger in Jerusalem und wächst gemeinsam mit seinem Adoptivbruder Messala auf. Messala geht zu den Römern und kehrt Jahre später als Offizier zurück.
+
+Ein Missverständnis genügt, um alles zu zerstören: Judah wird als Galeerensklave verkauft, seine Familie verschleppt. Nach Jahren kehrt er zurück, um sich zu rächen — und begegnet unterwegs mehrfach einem Mann, dessen Botschaft dem entgegensteht, was er vorhat.
+
+### Entstehungsgeschichte
+
+Regie führte der russische Regisseur Timur Bekmambetov. Das Drehbuch schrieben Keith R. Clarke und John Ridley; sie legten mehr Gewicht auf Familienbeziehungen, die Kraft des Glaubens und vor allem auf Versöhnung, als es das Vorbild getan hatte.
+
+Die Vorlage ist Lew Wallaces Roman aus dem 19. Jahrhundert, der als einflussreichster Roman der Christenheit bezeichnet wird und bereits 1959 verfilmt wurde.
+
+Jack Huston spielt Judah Ben-Hur, Toby Kebbell den Messala, Morgan Freeman den Scheich Ilderim und Rodrigo Santoro den Jesus.
+
+### Hinter den Kulissen
+
+Gedreht wurde 2015 ausschließlich in Italien. Matera diente als Jerusalem, die Innenaufnahmen entstanden in den römischen Cinecittà-Studios — denselben, in denen bereits die Fassung von 1959 hergestellt worden war.
+
+Der Vergleich mit jenem Film war damit von Anfang an unvermeidlich. Er betrifft vor allem das Wagenrennen, das in dieser Fassung stark mit digitalen Mitteln umgesetzt wurde.
+
+### Einordnung & Wirkung
+
+Bei einem Budget von 100 Millionen Dollar startete der Film in den Vereinigten Staaten mit 11,2 Millionen — ein desaströses Eröffnungswochenende. Weltweit kamen rund 94 Millionen zusammen, also deutlich weniger als die Herstellungskosten.
+
+Die Kritik lehnte ihn ab: 25 Prozent bei Rotten Tomatoes. Bemängelt wurden fehlende Eigenständigkeit und ein Übermaß an digitalen Effekten. Einzelne Stimmen hoben das Wagenrennen als Schauwert hervor.
+
+Der Film gehört damit zu den bekanntesten Fehlschlägen seines Jahrgangs — und zu den deutlichsten Belegen dafür, wie schwer sich eine Neuverfilmung tut, deren Vorgänger zu den meistausgezeichneten Filmen der Geschichte zählt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2662', locale: 'de-de',
+    text: `### Worum es geht
+
+Vier junge Leute sind auf einer Reise durch die amerikanische Provinz und bleiben an einer Tankstelle liegen, an der ein Kuriositätenmuseum betrieben wird. Der Betreiber nennt sich Captain Spaulding.
+
+Von ihm hören sie von einem örtlichen Serienmörder namens Dr. Satan und von dem Baum, an dem er aufgehängt worden sein soll. Sie beschließen, ihn zu suchen — und landen in der Nacht zu Halloween beim Haus der Familie Firefly.
+
+### Entstehungsgeschichte
+
+Es war das Regiedebüt des Musikers Rob Zombie. Er schrieb auch das Drehbuch und komponierte die vollständige Filmmusik.
+
+Sid Haig spielt den Captain Spaulding, Bill Moseley den Otis B. Driftwood, Sheri Moon Zombie die Baby, Karen Black die Mutter Firefly und Chris Hardwick den Jerry Goldsmith.
+
+Produzent war Andy Gould, die Kamera führte Tom Richmond. Gedreht wurde 2002, erschienen ist der Film 2003.
+
+### Hinter den Kulissen
+
+Zwischen Fertigstellung und Veröffentlichung lag ein Jahr.
+
+Erzählerisch bedient er sich offen bei den Vorbildern des amerikanischen Horrorkinos der siebziger Jahre. Genau daran setzte auch die Kritik an: Der Film lebe vom Geist, aber nicht von der Qualität seiner Vorbilder.
+
+In Deutschland erhielt er eine Freigabe ab 18 Jahren. Im Kino lief er ungekürzt, im Handel erschien er zunächst in stark bearbeiteten Fassungen. Die Indizierung wurde im Herbst 2018 aufgehoben.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war gemischt. Gelobt wurde die Bildsprache, bemängelt wurde, dass dem Film echte Horrorelemente fehlten und er über seine Vorbilder hinaus wenig Eigenes entwickle.
+
+Rob Zombie hat daraus dennoch eine Reihe gemacht: 2005 folgte "The Devil's Rejects", 2019 schloss "3 from Hell" die Trilogie ab.
+
+Bemerkenswert bleibt, dass aus einem Regiedebüt, das ein Jahr lang auf seine Veröffentlichung wartete, eine über sechzehn Jahre fortgeführte Trilogie wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1022796', locale: 'de-de',
+    text: `### Worum es geht
+
+Die siebzehnjährige Asha lebt im Königreich Rosas, das von dem Zauberer König Magnifico regiert wird. Magnifico sammelt die Wünsche seiner Untertanen ein und behält sie für sich.
+
+Als Asha das durchschaut, wünscht sie sich in ihrer Verzweiflung etwas von einem Stern. Der Stern kommt tatsächlich — als lebendiges Wesen. Gemeinsam stellen die beiden sich gegen den König.
+
+### Entstehungsgeschichte
+
+Regie führten Chris Buck und Fawn Veerasunthorn, für die es die erste abendfüllende Regiearbeit war. Das Drehbuch schrieben Jennifer Lee und Allison Moore nach einer Geschichte von Lee, Buck, Veerasunthorn und Moore.
+
+Ariana DeBose spricht die Asha, Chris Pine den König Magnifico, Alan Tudyk die Ziege Valentino. Daneben sind Victor Garber, Angelique Cabral und Natasha Rothwell zu hören; die Nebenfiguren sind an die sieben Zwerge aus "Schneewittchen" angelehnt.
+
+Die Lieder schrieben Julia Michaels und Benjamin Rice, an "This Wish" wirkte JP Saxe mit. Die Filmmusik stammt von Dave Metzger und verwendet mediterrane Instrumente sowie Motive aus "When You Wish Upon a Star".
+
+### Hinter den Kulissen
+
+Der Film war als Jubiläumswerk zum hundertjährigen Bestehen von Disney angelegt und sollte die Herkunft des Wunschsterns erzählen, der im Zeichen des Studios steht.
+
+Für die Bildgestaltung wurde Computeranimation mit einer Aquarellanmutung verbunden. Ursprünglich war eine vollständig zweidimensionale Umsetzung erwogen worden; man entschied sich für die Mischform, um mehr Kamerabewegung zu ermöglichen.
+
+### Einordnung & Wirkung
+
+Bei einem Budget zwischen 175 und 200 Millionen Dollar spielte der Film weltweit 255 Millionen ein. Unter Berücksichtigung aller Kosten ergab sich ein Verlust von etwa 131 Millionen Dollar.
+
+Bei Disney+ wurde er dennoch zur drittmeistgesehenen Erstveröffentlichung eines Films der Walt Disney Animation Studios.
+
+Die Kritik urteilte zurückhaltend: 48 Prozent bei Rotten Tomatoes mit einem Schnitt von 5,6 von 10, 47 von 100 bei Metacritic — der niedrigste Wert, den ein Film der Walt Disney Animation Studios dort erreicht hat. Gelobt wurden Bildgestaltung und Sprecher, bemängelt eine abgeleitete Handlung, die sich zu sehr auf Wiedererkennung stütze. Das Publikum vergab bei CinemaScore ein A minus.` },
+  {
+    bereich: 'titel', schluessel: 'movie:33217', locale: 'de-de',
+    text: `### Worum es geht
+
+Greg Heffley kommt mit elf Jahren auf die weiterführende Schule und hat einen Plan: Er will beliebt werden, und zwar möglichst schnell.
+
+Im Weg steht ihm vor allem sein bester Freund Rupert, der sich um Ansehen nicht kümmert und Greg dadurch fortlaufend blamiert. Dazu kommt ein Stück Käse, das seit Jahren auf dem Schulhof liegt und über das die Schüler eine Art Fluchgeschichte erzählen. Greg bricht Rupert den Arm und schiebt ihm später einen Streich in die Schuhe — und muss danach entscheiden, was ihm wichtiger ist.
+
+### Entstehungsgeschichte
+
+Regie führte Thor Freudenthal. Das Drehbuch schrieben Jackie Filgo, Jeff Filgo, Gabe Sachs und Jeff Judah nach der Buchreihe von Jeff Kinney.
+
+Zachary Gordon spielt Greg, Robert Capron seinen besten Freund, Steve Zahn und Rachael Harris die Eltern.
+
+Produzenten waren Nina Jacobson und Brad Simpson. Gedreht wurde in der Nähe von Vancouver in Kanada.
+
+### Hinter den Kulissen
+
+Die Vorlage ist eine Reihe illustrierter Kinderbücher, die als Tagebuch angelegt sind. Der Film musste daraus einen Realfilm machen, ohne den Blickwinkel zu verlieren, der die Bücher ausmacht: Alles wird von Greg erzählt, und Greg ist kein zuverlässiger Erzähler.
+
+Die eigentliche Eigenheit der Reihe liegt in der Hauptfigur: Greg ist kein liebenswerter Held, sondern eitel, feige und bereit, seine Freunde zu opfern. Der Film hält daran fest.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 75,7 Millionen Dollar ein.
+
+Die Kritik urteilte geteilt. Ein Teil bemängelte, dem Film fehle der Witz der Vorlage; ein anderer lobte die glaubwürdige Schilderung dessen, was in diesem Alter tatsächlich zählt.
+
+Das junge Ensemble gewann 2011 einen Young Artist Award.
+
+Es folgten drei weitere Kinofilme in den Jahren 2011, 2012 und 2017 sowie 2021 eine computeranimierte Neufassung bei Disney+.` },
+  {
+    bereich: 'titel', schluessel: 'movie:578701', locale: 'de-de',
+    text: `### Worum es geht
+
+Hannah Faber ist Feuerwehrfrau in Montana. Bei einem Waldbrand kamen drei Menschen ums Leben, die sie nicht retten konnte — seither wird sie die Schuld daran nicht los.
+
+Dann trifft sie auf den Jungen Connor, der auf der Flucht ist: Auftragsmörder sind hinter ihm her, geschickt von einem Verbrecherboss. Während die beiden sich verstecken, breitet sich im Wald ein Feuer aus.
+
+### Entstehungsgeschichte
+
+Taylor Sheridan führte Regie und schrieb das Drehbuch mit. Die Vorlage ist Michael Korytas gleichnamiger Roman von 2014.
+
+Angelina Jolie spielt Hannah Faber, der Nachwuchsdarsteller Finn Little den Connor. In weiteren Rollen sind Nicholas Hoult, Jon Bernthal und Aidan Gillen zu sehen.
+
+### Hinter den Kulissen
+
+Der Film verbindet zwei Gattungen, die selten zusammenkommen: den Thriller mit zwei Auftragsmördern und den Katastrophenfilm mit dem Waldbrand. Beide Bedrohungen laufen parallel, ohne dass die eine die andere aufhebt.
+
+Genau daran hat sich die Kritik gerieben — die Frage, ob dieser Zusammenschluss aufgeht, ist der Hauptstreitpunkt um den Film.
+
+Taylor Sheridan ist vor allem als Autor von Filmen bekannt, die im ländlichen Westen der Vereinigten Staaten spielen. Auch hier ist der Schauplatz Montana, und die Landschaft ist mehr als Kulisse: Sie ist die dritte Gefahr.
+
+### Einordnung & Wirkung
+
+Der Film startete am 14. Mai 2021 in amerikanischen Kinos und war zugleich einen Monat lang ohne Aufpreis bei HBO Max verfügbar — eine für die damalige Zeit ungewöhnliche Doppelauswertung.
+
+In Deutschland erschien er am 3. Juni 2021 zum Abruf gegen Gebühr.
+
+Bei Rotten Tomatoes steht er bei 62 Prozent. Das Lexikon des internationalen Films vergab zwei von fünf Sternen und beanstandete, der Film führe Thriller und Katastrophenfilm nicht zusammen.` },
+  {
+    bereich: 'titel', schluessel: 'series:79696', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Passagiere von Flug 828 landen in New York — und erfahren, dass seit ihrem Start mehr als fünfeinhalb Jahre vergangen sind. Sie galten als verschollen und waren für tot erklärt worden.
+
+Sie kehren in eine Welt zurück, die ohne sie weitergegangen ist. Und sie hören seither Stimmen und sehen Bilder, die niemand sonst wahrnimmt und die ihr Leben von Grund auf durcheinanderbringen.
+
+### Entstehungsgeschichte
+
+Jeff Rake entwickelte die Serie und war ihr Showrunner.
+
+Melissa Roxburgh, Josh Dallas, Luna Blaise und J. R. Ramirez spielen die Hauptrollen. In der deutschen Fassung sprechen Berenice Weichert und Tobias Nath.
+
+Produziert wurde die Serie von Universal Television und Warner Bros. Television in den Silvercup Studios in New York.
+
+### Hinter den Kulissen
+
+Der Verlauf der Serie ist bemerkenswerter als ihre Handlung. Im Juni 2021 stellte NBC sie nach der dritten Staffel ein.
+
+Danach nahm Netflix sie ins Angebot, wo sie in kurzer Zeit Spitzenplätze in den Abrufcharts erreichte. Daraufhin bestellte Netflix eine vierte und abschließende Staffel.
+
+Damit gehört sie zu den bekanntesten Fällen einer Serie, die von einem Streamingdienst nach der Absetzung durch einen klassischen Sender fortgeführt wurde — weil sich dort ein Publikum fand, das sie in der Erstausstrahlung nicht hatte.
+
+### Einordnung & Wirkung
+
+Insgesamt entstanden 62 Folgen: 16 in der ersten Staffel, je 13 in der zweiten und dritten, 20 in der vierten. Die Premiere war am 24. September 2018 auf NBC, im deutschsprachigen Raum lief die Serie ab dem 1. November 2019. Sie endete 2023.
+
+Bei Rotten Tomatoes steht sie bei 57 Prozent. Kritisiert wurden seifige Melodramatik und flach gezeichnete Figuren.
+
+Beim Publikum kam sie deutlich besser an: Bei IMDb steht sie bei 7,2 von 10 — ein Abstand, der ihre Rettung durch Netflix gut erklärt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:151960', locale: 'de-de',
+    text: `### Worum es geht
+
+Dusty ist ein Sprühflugzeug und besprüht Felder. Eigentlich will er etwas anderes: an dem weltweit bekannten Luftrennen "Wings around the Globe" teilnehmen.
+
+Zwei Dinge sprechen dagegen. Er ist nicht dafür gebaut, und er hat Höhenangst. Trotzdem tritt er an und fliegt sieben Etappen um die Welt — gegen Gegner, die schneller sind, und gegen den amtierenden Meister Ripslinger, der nicht bereit ist, sich von einem Sprühflugzeug schlagen zu lassen.
+
+### Entstehungsgeschichte
+
+Regie führte Klay Hall. Produziert wurde der computeranimierte Film von den DisneyToon Studios und verliehen von Walt Disney Studios Motion Pictures.
+
+Der Film spielt in derselben Welt wie die "Cars"-Filme. Betreut wurde er von John Lasseter als ausführendem Produzenten, der auch für jene Reihe verantwortlich war.
+
+In der deutschen Fassung sprechen Martin Halm den Dusty und Alexander Duda den Skipper Riley.
+
+### Hinter den Kulissen
+
+Ursprünglich war überhaupt keine Kinoauswertung vorgesehen: Geplant war eine Veröffentlichung nur auf DVD und Blu-ray. Erst im Verlauf der Produktion wurde daraus ein Kinofilm.
+
+Das erklärt einiges an der Machart. Hergestellt wurde der Film nicht von Pixar, sondern von den DisneyToon Studios — und der Abstand zu den "Cars"-Filmen, in deren Welt er spielt, ist entsprechend deutlich.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte ablehnend. Der wiederkehrende Vorwurf: ein einfallsloses, vorhersehbares Nebenprodukt, das zudem mit nationalen Klischees arbeite — die Gegner im Rennen sind weitgehend über ihre Herkunftsländer charakterisiert.
+
+Wirtschaftlich reichte es dennoch für eine Fortsetzung: "Planes 2 — Immer im Einsatz" startete am 14. August 2014 in den deutschen Kinos.
+
+Der Fall steht damit für ein Verfahren, das in jenen Jahren häufiger vorkam: Eine erfolgreiche Filmwelt wird in einem Nebenstrang weiterverwertet, der mit deutlich geringerem Aufwand entsteht und trotzdem im Kino ausgewertet wird.` },
 ];
