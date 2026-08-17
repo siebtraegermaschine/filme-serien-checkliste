@@ -30687,4 +30687,501 @@ Die Kritik urteilte ablehnend. Der wiederkehrende Vorwurf: ein einfallsloses, vo
 Wirtschaftlich reichte es dennoch für eine Fortsetzung: "Planes 2 — Immer im Einsatz" startete am 14. August 2014 in den deutschen Kinos.
 
 Der Fall steht damit für ein Verfahren, das in jenen Jahren häufiger vorkam: Eine erfolgreiche Filmwelt wird in einem Nebenstrang weiterverwertet, der mit deutlich geringerem Aufwand entsteht und trotzdem im Kino ausgewertet wird.` },
+  // ---- Block 50 ----
+  {
+    bereich: 'titel', schluessel: 'series:111110', locale: 'de-de',
+    text: `### Worum es geht
+
+Monkey D. Luffy will Piratenkönig werden. Dafür muss er den größten Schatz der Welt finden — das One Piece, das der letzte Piratenkönig irgendwo hinterlassen hat.
+
+Unterwegs stellt er eine Mannschaft zusammen — die Strohhut-Piraten: Zoro, Nami, Usopp und Sanji. Jeder von ihnen hat einen eigenen Grund, aufs Meer zu gehen. Verfolgt werden sie von der Marine, für die Vizeadmiral Garp steht.
+
+### Entstehungsgeschichte
+
+Die Vorlage ist der Manga von Eiichirō Oda, der seit 1997 erscheint. Oda war als schöpferischer Berater beteiligt.
+
+Netflix entwickelte die Serie mit Matt Owens und Steven Maeda als leitenden Produzenten.
+
+Iñaki Godoy spielt Luffy, Emily Rudd die Nami, Mackenyu den Zoro, Jacob Romero Gibson den Usopp und Taz Skylar den Sanji. Vincent Regan spielt Garp, Jeff Ward den Buggy. In der zweiten Staffel kamen Charithra Chandran als Vivi und Mikaela Hoover als Stimme von Chopper hinzu.
+
+### Hinter den Kulissen
+
+Gedreht wurde in den Cape Town Film Studios in Südafrika — für die erste Staffel von Januar bis August 2022, für die zweite von Juni bis Dezember 2024.
+
+Odas Beteiligung ging weit über eine Beratung hinaus. Er ließ Szenen neu drehen, mit denen er nicht einverstanden war, und stimmte strukturellen Änderungen zu: Arlong wird früher eingeführt als in der Vorlage, Garp bekommt deutlich mehr Raum.
+
+Damit unterscheidet sich die Produktion von vielen Realverfilmungen japanischer Vorlagen: Der Urheber hatte die Möglichkeit, Ergebnisse abzulehnen und Änderungen durchzusetzen.
+
+### Einordnung & Wirkung
+
+Die erste Staffel erschien am 31. August 2023 mit acht Folgen, die zweite am 10. März 2026, ebenfalls mit acht. Eine dritte ist für 2027 vorgesehen.
+
+Die erste Staffel steht bei 86 Prozent auf Rotten Tomatoes, die zweite bei 100 Prozent.
+
+Ende 2023 führte die Serie die Abrufcharts von Netflix an, mit 541,9 Millionen gesehenen Stunden.` },
+  {
+    bereich: 'titel', schluessel: 'series:2098', locale: 'de-de',
+    text: `### Worum es geht
+
+Bruce Wayne hat als Kind mit ansehen müssen, wie seine Eltern erschossen wurden. Als Erwachsener bekämpft er das Verbrechen in Gotham City — bei Nacht, als Batman.
+
+Die Serie erzählt das nicht als bunte Abenteuerreihe, sondern in ernstem Ton — und interessiert sich dabei mindestens ebenso sehr für die Vorgeschichten seiner Gegner wie für ihn selbst. Aus Mr. Freeze, bis dahin eine Witzfigur, wurde in der Folge "Heart of Ice" eine tragische Gestalt.
+
+### Entstehungsgeschichte
+
+Bruce Timm und Eric Radomski entwickelten die Serie. Produzenten waren Alan Burnett und Paul Dini.
+
+Kevin Conroy sprach den Batman, Mark Hamill den Joker — zwei Besetzungen, die für Jahrzehnte maßgeblich blieben. Efrem Zimbalist Jr. sprach den Alfred, Arleen Sorkin die Harley Quinn.
+
+Den Titelsong schrieb Danny Elfman, die Serienmusik stammt von Shirley Walker.
+
+### Hinter den Kulissen
+
+Der Bildstil trägt den Namen Dark Deco und verbindet das Art déco der vierziger Jahre mit den Mitteln des Film noir. Zugrunde liegt eine technische Entscheidung: Die Hintergründe wurden auf schwarzem statt auf weißem Papier gemalt — was den Bildern ihre dunkle, nächtliche Anmutung gibt.
+
+Die Figuren wurden bewusst vereinfacht gezeichnet, damit sich mit einem Fernsehbudget saubere Bewegungen herstellen ließen. Animiert wurde in Studios in Japan, Südkorea, Hongkong, Spanien und Kanada.
+
+Die wichtigste Erfindung der Serie ist eine Figur: Harley Quinn, zuerst zu sehen in der Folge "Jokers Favor", wurde später in die Comics übernommen.
+
+### Einordnung & Wirkung
+
+Insgesamt entstanden 109 Folgen in drei Staffeln. Ausgestrahlt wurde von 1992 bis 1995 und von 1997 bis 1999.
+
+Die Serie wurde zum Ausgangspunkt eines zusammenhängenden Zeichentrickuniversums, das von 1995 bis 2006 fortgeführt wurde — mit Serien über Superman, mit "Batman of the Future" und mit der "Justice League".
+
+Sie gewann mehrere Daytime Emmys, darunter als herausragendes Animationsprogramm, sowie einen Primetime Emmy.
+
+Sie genießt bis heute Kultstatus und hat das Batman-Verständnis einer ganzen Generation geprägt — durch ihre Erzählweise ebenso wie durch ihre Animation.` },
+  {
+    bereich: 'titel', schluessel: 'movie:604079', locale: 'de-de',
+    text: `### Worum es geht
+
+In einem anderen, autoritär regierten Amerika der siebziger Jahre gibt es einmal im Jahr den Langen Marsch: Fünfzig Jugendliche gehen los und dürfen nicht stehen bleiben. Wer das vorgeschriebene Tempo von knapp fünf Kilometern pro Stunde unterschreitet, bekommt eine Verwarnung. Nach der dritten wird er erschossen.
+
+Wer als Letzter geht, bekommt Geld und einen freien Wunsch. Ray Garraty aus Maine ist einer der Teilnehmer und freundet sich unterwegs mit Pete McVries an. Der Marsch dauert Tage, und je weniger übrig sind, desto klarer wird, dass Freundschaft hier keine Hilfe ist, sondern eine zusätzliche Härte.
+
+### Entstehungsgeschichte
+
+Regie führte Francis Lawrence, das Drehbuch schrieb JT Mollner nach Stephen Kings Roman von 1979.
+
+Cooper Hoffman spielt Ray Garraty, David Jonsson den Pete McVries. Im Ensemble stehen zudem Garrett Wareing, Tut Nyuot, Charlie Plummer, Ben Wang und Roman Griffin Davis. Mark Hamill spielt den Major, der die Veranstaltung leitet.
+
+Die Musik stammt von Jeremiah Fraites, das Budget lag bei 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab dem 24. Juli 2024 in Winnipeg; am 12. September war Drehschluss.
+
+Aufgenommen wurde in chronologischer Reihenfolge — für einen Film, dessen Figuren über Tage hinweg körperlich verfallen, eine naheliegende, aber teure Entscheidung.
+
+Erzählerisch ist der Stoff eine Zumutung für jede Verfilmung: Er besteht über weite Strecken aus Gehen und Reden, ohne Ortswechsel und ohne Handlungswendungen im üblichen Sinn.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 12. September 2025 und spielte weltweit 63,1 Millionen Dollar ein — bei 20 Millionen Herstellungskosten ein deutlicher Erfolg.
+
+Die Kritik urteilte gut: 88 Prozent bei Rotten Tomatoes, 71 von 100 bei Metacritic. Gelobt wurden die Darstellungen und die Bildgestaltung; bemängelt wurde von einzelnen Stimmen, die Prämisse bleibe dünn und der Schluss rätselhaft.
+
+Das Publikum vergab bei CinemaScore ein B — ein Wert, der bei einem Film mit diesem Ausgang wenig überrascht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1035259', locale: 'de-de',
+    text: `### Worum es geht
+
+Lieutenant Frank Drebin Jr. ist der Sohn jenes Polizisten, der in den achtziger Jahren mit unerschütterlichem Ernst durch Los Angeles stolperte. Er ist ihm in allem ähnlich, vor allem in der Fähigkeit, jede Lage schlimmer zu machen.
+
+Ein Autounfall erweist sich als Mord. Drebin ermittelt und stößt auf den Unternehmer Richard Cane, der mit einem Gerät namens PLOT arbeitet — und damit vorhat, die Menschheit in einen barbarischen Zustand zurückzuversetzen.
+
+### Entstehungsgeschichte
+
+Regie führte Akiva Schaffer, das Drehbuch schrieb er gemeinsam mit Dan Gregor und Doug Mand. Produziert wurde der Film von Seth MacFarlane und Erica Huggins für Fuzzy Door Productions.
+
+Liam Neeson spielt Frank Drebin Jr., Pamela Anderson die Beth Davenport, Paul Walter Hauser den Captain Ed Hocken Jr.
+
+Gedreht wurde ab Mai 2024 in Atlanta; der erste Trailer erschien im April 2025.
+
+### Hinter den Kulissen
+
+Der Film ist eine Fortsetzung der Reihe von 1988 mit Leslie Nielsen. Da dieser inzwischen verstorben ist, führt der Film einen Sohn ein — ein Verfahren, das es erlaubt, sämtliche Rollen neu zu besetzen, ohne den Vorgänger für ungeschehen zu erklären.
+
+Die Besetzung von Liam Neeson ist dabei der eigentliche Einfall: Die Reihe verlangt von ihrer Hauptfigur einen unerschütterlichen Ernst inmitten des Unsinns — und genau dafür bringt Neeson die passende Bühnenerscheinung mit.
+
+### Einordnung & Wirkung
+
+Die Aufnahme fiel gemischt bis gut aus: 88 Prozent bei Rotten Tomatoes, 75 von 100 bei Metacritic.
+
+Gelobt wurden einzelne originelle Einfälle und Neesons körperliche Komik. Bemängelt wurde von einem Teil der Kritik das geringere Tempo im Vergleich zu den Filmen der achtziger und neunziger Jahre — die Vorlage arbeitete mit einer Dichte an Gags, die kaum zu erreichen ist.
+
+Bemerkenswert bleibt, dass die Wiederbelebung einer Parodiereihe nach mehr als drei Jahrzehnten überhaupt funktioniert hat — obwohl sich das Genre, das sie einst verspottete, seither erheblich verändert hat.` },
+  {
+    bereich: 'titel', schluessel: 'series:73375', locale: 'de-de',
+    text: `### Worum es geht
+
+Jack Ryan ist Analyst bei der CIA und arbeitet am Schreibtisch. Was er dort findet, bringt ihn regelmäßig ins Feld.
+
+Ryan ist kein ausgebildeter Agent, sondern jemand, der recht hat und deshalb mitgenommen wird — und der sich anschließend in Lagen wiederfindet, denen er nicht gewachsen sein sollte. Die Einsätze führen ihn gegen internationale Bedrohungen quer über mehrere Kontinente.
+
+### Entstehungsgeschichte
+
+Carlton Cuse und Graham Roland entwickelten die Serie. Ihr erklärtes Ziel war es, aktuelle Ereignisse aufzunehmen, insbesondere den Terrorismus im Nahen Osten.
+
+Die Vorlage ist Tom Clancys Romanfigur, die zuvor bereits mehrfach im Kino verfilmt worden war.
+
+John Krasinski spielt Jack Ryan, Wendell Pierce den James Greer. In weiteren Hauptrollen sind Abbie Cornish und Ali Suliman zu sehen.
+
+Produziert wurde die Serie von Amazon Studios für Prime Video, die Musik stammt von Ramin Djawadi.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Los Angeles, in Montreal sowie in mehreren europäischen und afrikanischen Ländern.
+
+Ein wiederkehrender Punkt in den Besprechungen betrifft die Zeichnung der Gegenspieler. Die Serie bemüht sich, ihre Terroristenfiguren mit eigener Vorgeschichte und eigenen Beweggründen auszustatten, statt sie als bloße Bedrohung zu führen — für ein Format dieser Gattung nicht selbstverständlich.
+
+Auch die Musik trägt dazu bei: Sie stammt von Ramin Djawadi, der zur selben Zeit für mehrere der größten Serienproduktionen arbeitete.
+
+### Einordnung & Wirkung
+
+Es entstanden vier Staffeln mit insgesamt 30 Folgen zwischen 2018 und 2023, mit Laufzeiten zwischen 43 und 65 Minuten. Die Premiere war am 31. August 2018, die letzte Staffel erschien im Juni und Juli 2023.
+
+Die Kritik urteilte überwiegend positiv und hob die differenzierte Figurenzeichnung sowie die Vermeidung von Klischees hervor.
+
+Es gab Nominierungen bei den Emmy Awards, den Saturn Awards und den NAACP Image Awards; 2019 gewann die Serie bei den Visual Effects Society Awards.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2018', locale: 'de-de',
+    text: `### Worum es geht
+
+Mary Fiore ist Hochzeitsplanerin in San Francisco und außerordentlich gut in ihrem Beruf. Ihr eigenes Privatleben findet nicht statt.
+
+Bei einem Unfall auf offener Straße wird sie von dem Arzt Steve Edison gerettet. Es folgt ein Abend, an dem beide etwas empfinden. Am nächsten Tag stellt sich heraus, wer Steve ist: der Bräutigam ihrer neuen Kundin Francine. Mary muss also die Hochzeit des Mannes ausrichten, in den sie sich gerade verliebt hat — und gleichzeitig eine Verlobung abwehren, die ihr Vater für sie mit Massimo arrangiert hat.
+
+### Entstehungsgeschichte
+
+Regie führte Adam Shankman, das Drehbuch schrieben Michael Ellis und Pamela Falk.
+
+Jennifer Lopez spielt Mary Fiore, Matthew McConaughey den Steve Edison, Bridgette Wilson die Braut Francine Donolly, Justin Chambers den Massimo und Judy Greer die Penny.
+
+Produzenten waren Peter Abrams und Gigi Pritzker, die Kamera führte Julio Macat, den Schnitt besorgte Lisa Zeno Churgin.
+
+### Hinter den Kulissen
+
+Der Film gehört zu einer Gattung, die um die Jahrtausendwende verlässlich funktionierte: die romantische Komödie mit einer beruflich erfolgreichen Frau, deren Fach ausgerechnet das ist, was ihr selbst fehlt.
+
+Erzählerisch beruht alles auf einem einzigen Einfall: Die Frau, deren Beruf das Herstellen fremden Glücks ist, muss ausgerechnet die Hochzeit des Mannes ausrichten, den sie selbst will.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte gemischt. James Berardinelli nannte das Drehbuch schlecht geschrieben und unbeholfen und meinte, der einzige Grund für den Film seien seine beiden Hauptdarsteller. Roger Ebert hielt die Begegnungsszene zu Beginn für absurd.
+
+Im deutschsprachigen Raum fielen die Urteile milder aus; eine Stimme sprach von guter, altmodischer Hollywood-Unterhaltung.
+
+Jennifer Lopez und Matthew McConaughey waren 2001 für Teen Choice Awards nominiert. Lopez gewann 2002 einen Kids' Choice Award und war zugleich für eine Goldene Himbeere nominiert — eine Kombination, die den Film gut zusammenfasst.` },
+  {
+    bereich: 'titel', schluessel: 'series:1606', locale: 'de-de',
+    text: `### Worum es geht
+
+Melinda Gordon kann die Geister Verstorbener sehen und mit ihnen sprechen. Es sind Menschen, die nicht weitergehen können, weil etwas offen geblieben ist.
+
+Melindas Aufgabe besteht darin, ihnen dabei zu helfen — was bedeutet, dass sie Fremden erklären muss, dass sie deren Angehörige sieht. Daneben führt sie ein gewöhnliches Leben: verheiratet mit Jim Clancy, mit einem Antiquitätengeschäft in der Kleinstadt Grandview im Staat New York.
+
+### Entstehungsgeschichte
+
+John Gray entwickelte die Serie.
+
+Jennifer Love Hewitt spielt Melinda Gordon, David Conrad ihren Ehemann Jim Clancy. Aisha Tyler spielt in den ersten beiden Staffeln die Freundin Andrea Marino, Camryn Manheim ab der zweiten Staffel die Delia Banks. In weiteren Rollen sind Jay Mohr und Jamie Kennedy zu sehen.
+
+Produziert wurde sie von Sander/Moses Productions in Zusammenarbeit mit den ABC Studios und den CBS Studios für den Sender CBS.
+
+Als Autor beteiligt war James Van Praagh, der selbst als Medium bekannt ist — eine Verbindung, die dem Format seinen Anspruch gab, aus tatsächlichen Erfahrungen zu schöpfen.
+
+### Hinter den Kulissen
+
+Die Serie steht in einer Reihe amerikanischer Formate jener Jahre, die übersinnliche Erfahrungen nicht als Rätsel behandeln, sondern als gegeben — die Frage ist nie, ob es Geister gibt, sondern nur, was sie wollen.
+
+### Einordnung & Wirkung
+
+Insgesamt entstanden fünf Staffeln mit 107 Folgen zwischen 2005 und 2010, jede etwa 42 Minuten lang.
+
+Die vierte Staffel war die erfolgreichste und erreichte 10,62 Millionen Zuschauer. Die fünfte kam im Schnitt auf 7,78 Millionen. Am 18. Mai 2010 stellte CBS die Serie ein und begründete das mit steigenden Kosten und sinkenden Zuschauerzahlen; ABC lehnte eine Übernahme ab.
+
+Im deutschsprachigen Raum begann die Erstausstrahlung 2006 auf kabel eins.
+
+Jennifer Love Hewitt gewann 2007 und 2008 den Saturn Award. Die Serie erhielt zudem Emmy-Nominierungen für visuelle Effekte und Musik.
+
+In einer Umfrage von 2010 landete "Ghost Whisperer" auf Platz zwei der Serien, deren Absetzung am meisten bedauert wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:265208', locale: 'de-de',
+    text: `### Worum es geht
+
+Nick Wild arbeitet in Las Vegas als Leibwächter auf Zuruf — für Touristen, die Ärger befürchten, und für Leute, die ihn besser nicht bekommen sollten. Sein eigentliches Problem ist das Spielen: Er ist trockener Spieler und bleibt es nur mit Mühe.
+
+Als eine Prostituierte namens Holly schwer misshandelt wird, holt Nick sich 50.000 Dollar von dem Mann, der es getan hat. Damit macht er den Falschen auf sich aufmerksam. Parallel begleitet er einen jungen Millionär namens Cyrus durch die Stadt — ein Auftrag, der harmlos beginnt.
+
+### Entstehungsgeschichte
+
+Regie führte Simon West. Das Drehbuch schrieb William Goldman nach seinem eigenen Roman "Heat" von 1985 — verfasst hatte er es bereits rund dreißig Jahre zuvor.
+
+Es handelt sich um eine Neuverfilmung des Films von 1986, in dem Burt Reynolds die Hauptrolle spielte.
+
+Jason Statham spielt Nick Wild. Daneben sind Michael Angarano, Milo Ventimiglia, Anne Heche, Sofia Vergara und Stanley Tucci zu sehen.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab Februar 2013 in New Orleans, das Budget lag bei 30 Millionen Dollar.
+
+Simon West hat betont, die Actionszenen seien aus den Figuren heraus entwickelt: Jeder Kampf ergebe sich aus dem, was die Person an dieser Stelle ist, nicht aus dem Bedarf an einer Actionszene.
+
+Zwischen diesem Anspruch — Action, die aus Figuren entsteht — und der Erwartung an einen Jason-Statham-Film liegt der Grundkonflikt dieser Produktion.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 6,7 Millionen Dollar ein — bei 30 Millionen Herstellungskosten ein schwerer Fehlschlag.
+
+Die Kritik lehnte ihn ab: 30 Prozent bei Rotten Tomatoes, 40 von 100 bei Metacritic. Der wiederkehrende Vorwurf lautete, der Film sei vorhersehbar; die Los Angeles Times formulierte, er bleibe hinter jedem brauchbaren Pokerblatt zurück.
+
+Bemerkenswert bleibt die Vorgeschichte: Ein Drehbuch von William Goldman, geschrieben in den achtziger Jahren, wurde zweimal verfilmt — 1986 mit Burt Reynolds und knapp drei Jahrzehnte später mit Jason Statham.` },
+  // ---- Block 51 ----
+  {
+    bereich: 'titel', schluessel: 'movie:1029575', locale: 'de-de',
+    text: `### Worum es geht
+
+Dan Morgan verkauft Autos in einem Vorort, ist verheiratet, hat Kinder und führt ein so unauffälliges Leben, dass niemand danach fragt. Genau darauf kommt es an: Er hieß früher Sean McCaffrey und war Auftragsmörder.
+
+Ein Foto in einem sozialen Netzwerk beendet die Tarnung. Von einem Tag auf den anderen muss Dan mit seiner Familie fliehen — die weiterhin nicht weiß, wovor. Was für die Kinder wie eine spontane Reise aussieht, ist eine Flucht quer durchs Land.
+
+### Entstehungsgeschichte
+
+Regie führte Simon Cellan Jones, das Drehbuch schrieb David Coggeshall.
+
+Mark Wahlberg spielt Dan Morgan, Michelle Monaghan seine Frau Jessica, Zoe Colletti die Tochter Nina und Van Crosby den Sohn Kyle. Daneben sind Saïd Taghmaoui, Maggie Q und Ciarán Hinds zu sehen.
+
+Produziert wurde der Film von Apple Studios und Skydance Media.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab Oktober 2022 in Atlanta unter dem Arbeitstitel "Holiday Road". Im Februar 2023 endeten die Dreharbeiten mit Aufnahmen im Casino The Strat in Las Vegas.
+
+Die Ausgangslage ist ein bewährtes Muster: der Mann mit gefährlicher Vergangenheit, dessen Familie nichts davon weiß. Der Film verbindet das mit einer Reisekomödie — und muss dabei zwei Tonlagen zusammenhalten, die einander im Weg stehen.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 15. Dezember 2023 bei Apple TV+ und war zunächst der meistgesehene Film des Dienstes; 2024 wurde er von "Wolfs" abgelöst.
+
+Die Kritik lehnte ihn überwiegend ab: 27 Prozent bei Rotten Tomatoes aus 37 Besprechungen mit einem Schnitt von 4,6 von 10, 39 von 100 bei Metacritic. Der Befund lautete, der Film sei schwer an Standardaction und leicht an Lachern. Einzelne Stimmen lobten Wahlbergs Ausstrahlung und den Umgang des Regisseurs mit dem Tonfall.
+
+Der Abstand zwischen Abrufzahlen und Kritikerurteil ist damit erheblich — ein Muster, das bei Eigenproduktionen der Streamingdienste regelmäßig auftritt. Am 21. November 2025 erschien mit "The Family Plan 2" eine Fortsetzung, bei der Kit Harington zur zurückkehrenden Besetzung stieß.` },
+  {
+    bereich: 'titel', schluessel: 'movie:61012', locale: 'de-de',
+    text: `### Worum es geht
+
+Heather Mason lebt mit ihrem Vater zurückgezogen. Was sie nicht weiß: Sie ist das Kind, das im ersten Film Sharon hieß, und ihre Herkunft hängt mit der Stadt Silent Hill zusammen — und mit einem Kult, der dort auf sie wartet.
+
+Als ihr Vater verschwindet, muss sie ihm dorthin folgen: in eine Parallelwelt, in der andere Regeln gelten und in der Wesen auf sie warten.
+
+### Entstehungsgeschichte
+
+Der britische Regisseur M. J. Bassett führte Regie und schrieb das Drehbuch.
+
+Die Vorlage ist das Videospiel "Silent Hill 3"; der Film übernimmt dessen Handlung, statt eine eigene zu erfinden. Zugleich ist er die unmittelbare Fortsetzung des Films von 2006.
+
+Adelaide Clemens spielt Heather Mason, Kit Harington den Vincent, Sean Bean den Vater Harry Mason. Daneben sind Carrie-Anne Moss, Malcolm McDowell und Radha Mitchell zu sehen.
+
+### Hinter den Kulissen
+
+Es handelt sich um eine kanadisch-französische Gemeinschaftsproduktion von 94 Minuten. In deutschen Kinos lief der Film am 29. November 2012 an.
+
+Die Schwierigkeit jeder Verfilmung dieser Spielreihe liegt in ihrem Wesen: Die Spiele wirken über die Ohnmacht des Spielers, über schlechte Sicht und über Geräusche, deren Ursache er nicht sieht. Ein Film nimmt dem Zuschauer die Steuerung ab — und damit genau das, was den Schrecken erzeugt.
+
+### Einordnung & Wirkung
+
+Die Kritik lehnte den Film fast einhellig ab: zehn Prozent bei Rotten Tomatoes aus 60 Besprechungen, 16 von 100 bei Metacritic.
+
+Damit fiel das Urteil deutlich härter aus als beim ersten Film von 2006.
+
+Der Fall steht stellvertretend für eine ganze Reihe von Fortsetzungen, die eine Vorlage weiterverwerten, ohne den Grund zu treffen, aus dem die erste Verfilmung funktioniert hatte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:213681', locale: 'de-de',
+    text: `### Worum es geht
+
+David Ghantt fährt einen Geldtransporter in North Carolina. Seine frühere Kollegin Kelly Campbell und der Kopf der Sache, Steve Chambers, gewinnen ihn für einen Plan: Ghantt soll den Transporter ausräumen.
+
+Er tut es und bringt rund 20 Millionen Dollar beiseite. Danach zerfällt die Gruppe an Misstrauen und gegenseitiger Beeinflussung — bis das FBI eingreift und es zu Festnahmen kommt.
+
+### Entstehungsgeschichte
+
+Regie führte Jared Hess, das Drehbuch schrieben Chris Bowman, Hubbel Palmer und Emily Spivey.
+
+Zach Galifianakis spielt David Ghantt, Owen Wilson den Steve Chambers, Kristen Wiig die Kelly Campbell. Daneben sind Kate McKinnon, Leslie Jones und Jason Sudeikis zu sehen.
+
+Gedreht wurde ab Juli 2014 in Asheville in North Carolina.
+
+### Hinter den Kulissen
+
+Der Fall ist real: der Loomis-Fargo-Überfall vom Oktober 1997.
+
+Bemerkenswert ist, wer beteiligt war. David Ghantt selbst arbeitete als fachlicher Berater am Film mit — bezahlt wurde er dafür nicht, weil offene Rückzahlungsforderungen gegen ihn bestehen.
+
+Der Start war ursprünglich für August 2015 vorgesehen. Relativity Studios verschob ihn wegen der eigenen finanziellen Schieflage mehrfach; erschienen ist der Film erst am 30. September 2016.
+
+### Einordnung & Wirkung
+
+Bei 25 Millionen Dollar Herstellungskosten und über 20 Millionen Werbeausgaben spielte der Film weltweit 29,7 Millionen ein — wirtschaftlich ein Fehlschlag.
+
+Die Kritik urteilte gemischt: 34 Prozent bei Rotten Tomatoes mit dem Befund, ein großartiges Ensemble werde an eine sprunghafte Komödie verschwendet; 47 von 100 bei Metacritic. Peter Travers vergab anderthalb von vier Sternen, Matt Zoller Seitz dagegen drei von vier und lobte die klug gebaute Dummheit.
+
+Der eigentliche Reiz liegt im Stoff: Der Überfall gelang, und was danach schiefging, hatte mit dem Verbrechen selbst nichts zu tun.` },
+  {
+    bereich: 'titel', schluessel: 'movie:870028', locale: 'de-de',
+    text: `### Worum es geht
+
+Christian Wolff ist Buchhalter und Autist — und er tötet Menschen. Sein Fach ist das Aufdecken von Zahlen, die nicht stimmen; sein zweites Fach ist das, was er mit den Verantwortlichen macht.
+
+Neun Jahre nach den Ereignissen des ersten Films muss er mit seinem Bruder Braxton zusammenarbeiten, zu dem er kein Verhältnis mehr hat. Gesucht wird eine Familie aus El Salvador. Die Mutter, Anaïs, erweist sich als Auftragsmörderin, die ihr Gedächtnis verloren hat. Ihr Sohn ist in die Hände eines Menschenhändlerrings geraten.
+
+### Entstehungsgeschichte
+
+Regie führte erneut Gavin O'Connor, das Drehbuch schrieb wieder Bill Dubuque.
+
+Ben Affleck spielt Christian Wolff, Jon Bernthal den Bruder Braxton, Cynthia Addai-Robinson die stellvertretende FinCEN-Direktorin Marybeth Medina, Daniella Pineda die Anaïs und J. K. Simmons den früheren FinCEN-Direktor Raymond King.
+
+Es ist die unmittelbare Fortsetzung des Films von 2016; der größte Teil der Besetzung kehrte zurück.
+
+### Hinter den Kulissen
+
+Gedreht wurde von März bis August 2024 in Kalifornien. Die Kamera führte Seamus McGarvey, die Musik stammt von Bryce Dessner.
+
+Neun Jahre zwischen zwei Teilen sind ungewöhnlich viel. Der Film macht daraus einen Vorteil: Das Verhältnis der beiden Brüder ist in der Zwischenzeit nicht besser geworden, und darauf lässt sich eine Handlung aufbauen.
+
+Der Umgang mit der Hauptfigur bleibt der heikelste Punkt der Reihe: Autismus dient hier — wie im Kino häufig — als Erklärung für außergewöhnliche Fähigkeiten. Die Fortsetzung baut das noch aus, indem sie eine zweite Figur mit erworbenem Savant-Syndrom einführt.
+
+### Einordnung & Wirkung
+
+Bei 80 Millionen Dollar Herstellungskosten spielte der Film weltweit 103,3 Millionen ein — 65,5 Millionen in den Vereinigten Staaten, 37,8 Millionen international.
+
+Die Kritik urteilte freundlich: 75 Prozent bei Rotten Tomatoes, 58 von 100 bei Metacritic.
+
+Das Publikum war zufriedener und vergab bei CinemaScore ein A minus — ein Wert, der erklärt, warum aus einem Film von 2016 nach fast einem Jahrzehnt noch eine Reihe werden konnte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11172', locale: 'de-de',
+    text: `### Worum es geht
+
+Alex Fletcher war in den achtziger Jahren die eine Hälfte eines erfolgreichen Popduos. Heute lebt er von seiner Vergangenheit.
+
+Dann kommt ein Angebot: Der Popstar Cora Corman will ein Lied von ihm — in drei Tagen. Alex kann Melodien, aber keine Texte. Die Rettung kommt durch Sophie Fisher, die begabte Texte schreibt und sich selbst nichts zutraut — seit ihr früherer Freund einen wenig schmeichelhaften Roman über sie veröffentlicht hat.
+
+### Entstehungsgeschichte
+
+Marc Lawrence schrieb das Drehbuch und führte Regie. Er hatte zuvor bereits eine ähnlich angelegte Komödie mit Hugh Grant und Sandra Bullock gedreht.
+
+Hugh Grant spielt Alex Fletcher, Drew Barrymore die Sophie Fisher, Haley Bennett den Popstar Cora Corman und Brad Garrett den Manager.
+
+Produzenten waren Liz Glotzer und Martin Shafer, die Musik komponierte Adam Schlesinger.
+
+### Hinter den Kulissen
+
+Es war das erste Mal, dass Hugh Grant in einem Film selbst gesungen hat; ausgebildet wurde er dafür von Martin Fry.
+
+Die Lieder sind dabei mehr als Beiwerk — sie tragen die Handlung und wurden für den Film eigens geschrieben.
+
+Der Gegenstand ist das Musikgeschäft: das Verhältnis zwischen dem, was verkauft wird, und dem, was jemand kann.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte wohlwollend. Gelobt wurden die glaubwürdigen Figuren und das Zusammenspiel der beiden Hauptdarsteller. Eine Stimme nannte den Film eine bittersüße Satire auf die Musikbranche.
+
+Die deutsche Filmbewertungsstelle vergab das Prädikat wertvoll.
+
+Der Film gehört damit zu den wenigen romantischen Komödien jener Jahre, die von der Kritik nicht bloß geduldet wurden — was vor allem daran liegt, dass er über seinen Schauplatz tatsächlich etwas zu sagen hat.` },
+  {
+    bereich: 'titel', schluessel: 'series:2038', locale: 'de-de',
+    text: `### Worum es geht
+
+Drake Parker und Josh Nichols werden Stiefbrüder, als ihre Eltern heiraten. Gegensätzlicher könnten zwei Jungen kaum sein: Drake ist unbekümmert, musikbegeistert und kommt mit allem durch; Josh ist gewissenhaft, ehrgeizig und kommt mit gar nichts durch.
+
+Sie teilen sich fortan ein Zimmer und geraten von einer Verlegenheit in die nächste. Verschärft wird das durch die kleine Schwester Megan, die beiden unablässig Streiche spielt — und der niemand etwas nachweisen kann.
+
+### Entstehungsgeschichte
+
+Dan Schneider entwickelte und produzierte die Serie für Nickelodeon.
+
+Drake Bell spielt Drake Parker, Josh Peck den Josh Nichols, Miranda Cosgrove die Schwester Megan.
+
+Die deutsche Synchronfassung entstand in München unter der Regie von Hubertus von Lerchenfeld.
+
+### Hinter den Kulissen
+
+Die Serie umfasst vier Staffeln mit insgesamt 60 Folgen zu je 24 Minuten, einschließlich zweier Fernsehfilme.
+
+Ihr Aufbau folgt einem sehr alten Muster der Komödie: zwei Figuren mit entgegengesetzten Eigenschaften, die einander nicht ausweichen können, weil sie unter einem Dach leben.
+
+Dazu kommt die dritte Position, die das Gefüge zusammenhält: eine kleine Schwester, die beiden überlegen ist und von den Erwachsenen für harmlos gehalten wird.
+
+### Einordnung & Wirkung
+
+Die Serie lief von 2004 bis 2007 auf Nickelodeon; im deutschsprachigen Raum begann die Ausstrahlung im September 2005.
+
+Hinzu kamen zwei Fernsehfilme: "Drake & Josh unterwegs nach Hollywood" von 2006 und "Fröhliche Weihnachten, Drake & Josh" von 2008.
+
+Sie war bei Kindern, Jugendlichen und Erwachsenen gleichermaßen beliebt und wurde mehrfach für Kids' Choice Awards nominiert.
+
+Innerhalb der Nickelodeon-Serien jener Jahre gehört sie zu den bekanntesten — getragen von einem Ensemble, das sowohl das jüngere als auch das mitschauende erwachsene Publikum erreichte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:283350', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Straßenmusiker trifft in New York auf eine Frau, die gestrandet ist: Sie muss nach Boston und kommt nicht weg.
+
+Er bietet ihr an zu helfen. Was folgt, ist eine gemeinsame Nacht in der Stadt — der Versuch, eine Lösung zu finden, und dazwischen zwei Menschen, zwischen denen etwas entsteht, obwohl beide wissen, dass es am Morgen vorbei ist.
+
+### Entstehungsgeschichte
+
+Chris Evans gab mit diesem Film sein Regiedebüt und spielt zugleich die männliche Hauptrolle, den Nick Vaughan.
+
+Das Drehbuch schrieben Ronald Bass, Jen Smolka, Chris Shafer und Paul Vicknair.
+
+Alice Eve spielt die weibliche Hauptrolle Brooke Dalton. In Nebenrollen sind John Cullum, Mark Kassen und Emma Fitzpatrick zu sehen; Chris Evans' Bruder Scott tritt als Concierge auf.
+
+Zu den Produzenten gehörten Howard Baldwin und McG.
+
+### Hinter den Kulissen
+
+Der Film spielt überwiegend in New York und läuft 95 Minuten; er ist ab 12 Jahren freigegeben.
+
+Die Form ist die eines Kammerspiels im Freien: zwei Figuren, eine Nacht, fortlaufende Bewegung. Alles hängt davon ab, ob das Gespräch trägt — es gibt keine Nebenhandlung, in die der Film ausweichen könnte.
+
+Für Chris Evans war es ein bewusster Gegenentwurf zu dem, wofür er zu diesem Zeitpunkt bekannt war: ein kleiner Film ohne Effekte, ohne Handlung im üblichen Sinn und ohne Aussicht auf ein großes Publikum.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 12. September 2014 beim Toronto International Film Festival statt.
+
+Der Film reiht sich in eine bekannte Tradition ein: zwei Fremde, eine begrenzte Zeit, eine Stadt — eine Form, an der sich jeder Beitrag an seinen Vorgängern messen lassen muss.
+
+Bemerkenswert bleibt die Entscheidung selbst. Für seine erste Regiearbeit wählte Chris Evans einen Stoff, der ohne Effekte, ohne Nebenhandlung und fast ausschließlich aus Gesprächen besteht — das Gegenteil dessen, wofür er als Darsteller bekannt war.` },
+  // ---- Block 51b ----
+  {
+    bereich: 'titel', schluessel: 'series:114868', locale: 'de-de',
+    text: `### Worum es geht
+
+Alle tausend Jahre tritt der Rat der Götter zusammen und entscheidet über den Fortbestand der Menschheit. Diesmal fällt das Urteil eindeutig aus: Der Mensch soll ausgelöscht werden.
+
+Dagegen erhebt Einspruch die Walküre Brünhild. Sie beruft sich auf eine Regel, die niemand mehr angewandt hat: Ragnarök, ein Turnier. Dreizehn Kämpfe, jeweils ein Gott gegen einen Menschen. Gewinnt die Menschheit sieben davon, darf sie bleiben. Die Götter stimmen zu, weil sie es für ausgeschlossen halten — und die menschliche Seite tritt mit Kämpfern aus der gesamten Geschichte an.
+
+### Entstehungsgeschichte
+
+Die Vorlage ist ein Manga von Shinya Umemura und Takumi Fukui mit Zeichnungen von Azychika. Er erscheint seit November 2017 im Magazin Monthly Comic Zenon; bis Mitte 2026 sind 28 Bände veröffentlicht. Die englische Ausgabe erscheint seit 2021 bei Viz Media.
+
+Die ersten beiden Staffeln der Anime-Fassung animierte das Studio Graphinica; Regie führte Masao Ōkubo. Für die dritte Staffel übernahmen Yumeta Company und Maru Animation, Regie führte Koichi Hatsumi.
+
+### Hinter den Kulissen
+
+Der Aufbau ist streng: ein Kampf pro Handlungsbogen, dazwischen die Vorgeschichte des jeweiligen Kämpfers. Damit steht die Serie in der Tradition der Turnier-Erzählung, die im japanischen Comic seit Jahrzehnten geläufig ist — aber mit einem ungewöhnlichen Personal, das Gottheiten aus verschiedenen Mythologien und historische Persönlichkeiten gegeneinander antreten lässt.
+
+Genau daraus ergab sich ein handfester Konflikt: Netflix nahm die Serie in Indien aus dem Angebot, nachdem es religiöse Einwände gegen die Darstellung hinduistischer Gottheiten gegeben hatte, insbesondere gegen die Figur Shiva.
+
+### Einordnung & Wirkung
+
+Die erste Staffel erschien im Juni 2021 bei Netflix mit 13 Folgen. Die zweite kam zwischen Januar und Juli 2023 auf 15 Folgen, die dritte startete am 10. Dezember 2025. Eine vierte Staffel ist für 2026 angekündigt.
+
+Bis Dezember 2021 waren weltweit über neun Millionen Bände des Mangas im Umlauf.
+
+In Japan schnitt die Reihe bei Preisen und Buchhandelsempfehlungen gut ab. Zugleich zog sie kulturelle Kritik auf sich — der Umstand, dass sie lebendige Glaubensvorstellungen als Turnierstoff verwendet, ist der Kern der Auseinandersetzung um sie.` },
 ];
