@@ -24158,4 +24158,225 @@ Der Film lief am 15. November 2018 beim AFI Fest und kam am 7. Dezember 2018 in 
 Die Kritik urteilte gemischt: 62 Prozent bei Rotten Tomatoes, 60 von 100 bei Metacritic — Lob für Darstellerinnen und Kostüme, Kritik an Drehbuch und historischer Genauigkeit.
 
 Es gab drei BAFTA-Nominierungen und zwei Oscar-Nominierungen für Kostüme und Maske; Margot Robbie wurde für den Preis der Screen Actors Guild und einen BAFTA nominiert.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:2654', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Versicherungsermittler John Trent soll herausfinden, wo der Horrorschriftsteller Sutter Cane abgeblieben ist — der meistgelesene Autor der Welt, dessen Verleger auf ein Manuskript wartet. Trent hält die Sache für einen Werbetrick.
+
+Aus den Umschlägen der Bücher legt er eine Karte und findet darauf einen Ort: Hobb's End in New Hampshire, den es angeblich nicht gibt. Er fährt hin, und es gibt ihn. Was dort geschieht, steht bereits in Canes Büchern — und je mehr Menschen sie lesen, desto weniger lässt sich die erfundene Welt von der wirklichen trennen.
+
+### Entstehungsgeschichte
+
+John Carpenter sagte im Dezember 1992 als Regisseur zu; gedreht wurde von August bis Oktober 1993. Das Budget lag bei 8 Millionen Dollar. Sam Neill spielt Trent.
+
+Der Film ist eine Verbeugung vor H. P. Lovecraft: Der Titel spielt auf dessen "Berge des Wahnsinns" an, eine Figur trägt den Namen der Lovecraft'schen Familie Pickman, und der Einstieg aus der geschlossenen Anstalt heraus entspricht Lovecrafts Erzählweise.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Kanada: die Ortsszenen in Markham in Ontario, weitere Aufnahmen in Toronto.
+
+Carpenter zählt den Film informell zum Abschluss seiner "Apokalypse-Trilogie", nach "Das Ding aus einer anderen Welt" (1982) und "Die Fürsten der Dunkelheit" (1987). Verbunden sind die drei nicht durch Figuren, sondern durch dieselbe Frage: was geschieht, wenn die Wirklichkeit selbst nicht mehr verlässlich ist.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 3. Februar 1995 und spielte in den USA 8,9 Millionen Dollar ein — gemessen an seinem Budget ein Fehlschlag.
+
+Die Kritik urteilte gemischt; Roger Ebert vergab zwei Sterne, andere hoben den Ehrgeiz hervor.
+
+Über die Jahre hat er eine feste Anhängerschaft gewonnen und wird heute regelmäßig als einer der besten Lovecraft-Filme geführt — obwohl er auf keiner konkreten Vorlage beruht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:14359', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine katholische Schule in der Bronx, 1964. Schwester Aloysius leitet sie mit eiserner Hand und hält von Veränderung nichts. Pater Flynn predigt über Zweifel, geht auf die Schüler zu und will die Kirche öffnen.
+
+Die junge Schwester James berichtet Aloysius eine Beobachtung: Flynn habe den einzigen schwarzen Schüler der Schule allein ins Pfarrhaus gerufen, und der Junge sei danach verstört gewesen. Aloysius ist überzeugt, dass etwas geschehen ist — Beweise hat sie keine. Der Film liefert sie ebenfalls nicht: Bis zum Schluss bleibt offen, ob Flynn schuldig ist.
+
+### Entstehungsgeschichte
+
+John Patrick Shanley schrieb und inszenierte den Film nach seinem eigenen Bühnenstück von 1994, für das er den Pulitzer-Preis und einen Tony erhalten hatte.
+
+Meryl Streep spielt Schwester Aloysius, Philip Seymour Hoffman Pater Flynn, Amy Adams die junge Schwester James und Viola Davis die Mutter des Jungen. Das Budget lag bei 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Uneindeutigkeit ist keine Unentschiedenheit, sondern der Gegenstand: Der Film handelt nicht davon, was geschehen ist, sondern davon, was Menschen tun, wenn sie sich sicher sind, ohne es sein zu können.
+
+Viola Davis hat nur eine einzige Szene — ein Gespräch mit Streep auf offener Straße —, die ihr eine Oscar-Nominierung einbrachte und bis heute als Beispiel dafür gilt, wie viel in wenigen Minuten möglich ist.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 51,7 Millionen Dollar ein.
+
+Die Kritik reagierte sehr gut: 79 Prozent bei Rotten Tomatoes; Roger Ebert vergab vier von vier Sternen.
+
+Bei der Oscar-Verleihung gab es fünf Nominierungen — alle vier Hauptdarsteller sowie das adaptierte Drehbuch —, aber keine für den besten Film. Damit ist er erst der vierte Film überhaupt, dem vier Darstellernominierungen ohne Nominierung als bester Film gelangen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1647', locale: 'de-de',
+    text: `### Worum es geht
+
+James Clayton hat am MIT eine Überwachungssoftware namens Spartacus entwickelt und will damit Geld verdienen. Stattdessen spricht ihn Walter Burke an, Ausbilder bei der CIA, der seinen verschollenen Vater gekannt haben will.
+
+Clayton geht zur Ausbildung auf "die Farm" in Virginia. Dort lernt er, dass nichts stimmt, was man ihm sagt — auch nicht seine Entlassung. Als Undercover-Agent soll er die Mitschülerin Layla Moore überwachen, die einen Computervirus namens ICE-9 gestohlen haben soll. Wer wen führt, dreht sich mehrfach um.
+
+### Entstehungsgeschichte
+
+Regie führte Roger Donaldson; zunächst war James Foley vorgesehen. Die Dreharbeiten begannen im Dezember 2001 in Toronto und in Washington, D.C. Das Budget lag bei 46 Millionen Dollar.
+
+Al Pacino spielt Burke, Colin Farrell den Rekruten Clayton, Bridget Moynahan die Mitschülerin Layla.
+
+### Hinter den Kulissen
+
+Der Reiz des ersten Teils liegt im Ausbildungsbetrieb: Prüfungen, die keine sind, Verhöre zur Übung, ein Lügendetektor, an dem man scheitern soll. Burkes wiederkehrender Satz — nichts sei, wie es scheine — ist zugleich die Bauanleitung des Films.
+
+Für Colin Farrell war es eine der Rollen, mit denen er in Hollywood ankam; im selben Jahr erschien "Daredevil".
+
+Al Pacino spielt den Ausbilder mit derselben Lautstärke, die seine Auftritte jener Jahre kennzeichnet — eine Manier, die den Film trägt und ihn zugleich vorhersehbar macht: Wer Pacino kennt, ahnt früh, wohin die Figur führt.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 31. Januar 2003, startete auf Platz eins und hielt sich drei Wochen in den Top Ten. Weltweit spielte er 101,2 Millionen Dollar ein, davon 52,8 Millionen in den USA.
+
+Die Kritik urteilte gemischt: 43 Prozent bei Rotten Tomatoes, 56 von 100 bei Metacritic. Der wiederkehrende Befund lautete, die frühen Passagen seien fesselnd, der Film habe aber eine Wendung zu viel und werde dadurch vorhersehbar.` },
+  {
+    bereich: 'titel', schluessel: 'movie:382322', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Joker bricht aus Arkham aus und verfolgt einen Plan, der nicht auf Geld oder Macht zielt: Er will beweisen, dass ein einziger schlechter Tag genügt, um einen vernünftigen Menschen in den Wahnsinn zu treiben. Sein Versuchsobjekt ist Commissioner Gordon.
+
+Was er dafür tut, beginnt damit, dass er Gordons Tochter Barbara anschießt. Parallel dazu erzählen Rückblenden, wer der Joker vorher war: ein erfolgloser Komiker mit schwangerer Frau, der sich auf einen Einbruch einlässt, weil ihm nichts anderes einfällt — an einem Tag, an dem alles zusammenkommt.
+
+### Entstehungsgeschichte
+
+Grundlage ist Alan Moores Comic von 1988, gezeichnet von Brian Bolland — eine der bekanntesten Batman-Geschichten überhaupt und zugleich eine, von der Moore sich später distanziert hat.
+
+Der Film ergänzt einen längeren Vorspann über Batgirl, weil die Vorlage für Spielfilmlänge zu kurz ist.
+
+### Hinter den Kulissen
+
+Genau dieser Vorspann wurde zum Hauptstreitpunkt. Er zeigt eine sexuelle Beziehung zwischen Batman und Batgirl und endet damit, dass Barbara das Kostüm ablegt — womit ihre spätere Verletzung durch den Joker vorbereitet wird. Kritiker warfen dem Film vor, die Figur auf eine Comic-Schablone zu reduzieren: eine Frau, die Vielschichtigkeit vorgibt und bei erweiterter Rolle doch nur sexuell betrachtet wird.
+
+Kevin Conroy spricht Batman und Mark Hamill den Joker — beide seit der Zeichentrickserie von 1992. Hamills Beteiligung geht auf eine Zuschauerkampagne von 2011 zurück, zu der er auf der Comic-Con selbst aufgerufen hatte.
+
+Es ist der erste Batman- und der erste Zeichentrickfilm von Warner Bros. Animation mit einer Freigabe ab 17 Jahren.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte überwiegend ablehnend: 35 Prozent bei Rotten Tomatoes.
+
+Auffällig ist die Aufteilung: Die zweite Hälfte, die der Vorlage folgt, wurde deutlich besser bewertet als die erste. Gelobt wurden durchgehend die Sprecher.
+
+Der Fall gilt als Beispiel dafür, wie schwierig es ist, eine kurze, sehr geschlossene Vorlage auf Spielfilmlänge zu bringen, ohne ihr zu schaden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:38778', locale: 'de-de',
+    text: `### Worum es geht
+
+Tim Conrad arbeitet bei einer Investmentgesellschaft und steht vor der Beförderung. Die Bedingung: Er soll an einem monatlichen Abendessen seines Chefs teilnehmen, bei dem jeder Gast einen möglichst absonderlichen Menschen mitbringt. Wer den besten hat, gewinnt.
+
+Am selben Tag fährt Tim mit dem Auto Barry Speck an, einen Finanzbeamten, der tote Mäuse präpariert und daraus Dioramen berühmter Gemälde baut. Tim erkennt seine Chance. Barry hält die Einladung für den Beginn einer Freundschaft und beginnt umgehend, Tims Leben zu zerlegen.
+
+### Entstehungsgeschichte
+
+Grundlage ist der französische Film "Le Dîner de Cons" von 1998, hierzulande ebenfalls als "Dinner für Spinner" bekannt. Regie führte Jay Roach, das Drehbuch schrieben David Guion und Michael Handelman.
+
+Der wichtigste Unterschied zur Vorlage: Das französische Original spielt fast vollständig in einer Wohnung und zeigt das Abendessen nie. Diese Fassung zeigt es — und macht daraus die längste Sequenz des Films.
+
+### Hinter den Kulissen
+
+Steve Carell spielt Barry, Paul Rudd spielt Tim; daneben sind Zach Galifianakis und Jemaine Clement zu sehen.
+
+Die Mäuse-Dioramen wurden eigens angefertigt und sind über den Abspann hinaus zu sehen. Sie liefern zugleich den einzigen Zugang zur Figur Barry: Der Film zeigt, dass er sie aus Einsamkeit baut.
+
+Das Budget lag bei 69 Millionen Dollar, nach Steuergutschriften bei 62,7 Millionen.
+
+### Einordnung & Wirkung
+
+Der Film startete am 30. Juli 2010 mit 23,5 Millionen Dollar auf Platz zwei hinter "Inception" und spielte weltweit 86,9 Millionen ein.
+
+Die Kritik urteilte gemischt: 42 Prozent von 191 Besprechungen bei Rotten Tomatoes; das Publikum vergab bei CinemaScore ein B. Roger Ebert hob Steve Carell hervor und schrieb, das Gelingen dieser Fassung hänge vollständig an dessen Darstellung.
+
+Der Vergleich mit dem Original fiel in fast jeder Besprechung zuungunsten der Neuverfilmung aus.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1729', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Jugendliche Jason Tripitikas sammelt in Boston Kung-Fu-Filme und wird von einer Straßengang schikaniert. In einem Pfandhaus in Chinatown findet er einen Stab, der ihn ins alte China versetzt.
+
+Dort erfährt er, dass der Stab dem Affenkönig Sun Wukong gehört, den der Jadekrieger vor fünfhundert Jahren zu Stein erstarren ließ. Jason soll ihn zurückbringen. Begleitet wird er von einem betrunkenen Unsterblichen und einem schweigsamen Mönch — gespielt von Jackie Chan und Jet Li, die hier zum ersten Mal gemeinsam vor der Kamera standen.
+
+### Entstehungsgeschichte
+
+Die Vorlage ist der chinesische Roman "Die Reise nach Westen" aus dem 16. Jahrhundert, allerdings sehr frei verwendet.
+
+Regie führte Rob Minkoff, das Drehbuch schrieb John Fusco; die Kampfchoreographie stammt von Yuen Woo-ping, der zuvor "Matrix" und "Tiger and Dragon" eingerichtet hatte. Das Budget lag bei 55 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Paarung von Chan und Li war das eigentliche Verkaufsargument. Beide waren jahrzehntelang die bekanntesten Kampfkunstdarsteller Asiens, ohne je zusammen aufgetreten zu sein; ihr Zweikampf in der Mitte des Films gilt als dessen Höhepunkt.
+
+Neben Michael Angarano als Jason spielen Liu Yifei, Collin Chou und Li Bingbing.
+
+### Einordnung & Wirkung
+
+Der Film startete am 18. April 2008 in den USA und am 24. April in China. Er führte sein Startwochenende mit 21,4 Millionen Dollar aus 3.151 Kinos an und spielte weltweit 128 Millionen ein.
+
+Die Kritik urteilte gemischt bis wohlwollend: 63 Prozent von 131 Besprechungen bei Rotten Tomatoes mit dem Befund, die Kampfszenen seien überwältigend, dazwischen stehe aber zu viel Füllmaterial; 57 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein A minus.
+
+Auf DVD und Blu-ray verkaufte sich der Film rund 1,2 Millionen Mal und brachte weitere 22,9 Millionen Dollar ein.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10982', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Haus der Großmutter treffen vier Beteiligte aufeinander: Rotkäppchen, der Wolf, der Holzfäller und die Großmutter selbst. Die Polizei rückt an, und ein Frosch als Ermittler nimmt die Aussagen auf.
+
+Jede der vier Fassungen ergibt für sich Sinn und widerspricht den anderen. Der Wolf ist Journalist und recherchiert über einen Rezeptdieb; der Holzfäller ist Schauspieler auf dem Weg zu einem Vorsprechen; die Großmutter betreibt Extremsport. Erst alle Aussagen zusammen ergeben, wer der Täter ist.
+
+### Entstehungsgeschichte
+
+Der Film überträgt die Erzählform von Akira Kurosawas "Rashomon" auf ein Märchen: dasselbe Ereignis, mehrfach erzählt, jedes Mal anders.
+
+Er entstand unabhängig von den großen Studios. Regisseur Cory Edwards hat das tatsächliche Budget mit unter 8 Millionen Dollar angegeben — ein Bruchteil dessen, was Computeranimation damals kostete.
+
+### Hinter den Kulissen
+
+Animiert wurde in Manila auf den Philippinen bei einem Studio namens Digital Eye Candy, um die Kosten niedrig zu halten.
+
+Die Gestaltung ist eine bewusste Entscheidung gegen den Wettbewerb: Statt Fotorealismus anzustreben, den man ohnehin nicht hätte erreichen können, orientierte sich das Team an Stop-Motion. Edwards hat es so beschrieben — man habe abgefilmte Miniaturen nachahmen wollen.
+
+### Einordnung & Wirkung
+
+Bei rund 8 Millionen Dollar Herstellungskosten spielte der Film weltweit 110 Millionen ein — eines der besseren Verhältnisse von Einsatz zu Ertrag im Animationsfilm überhaupt.
+
+Die Kritik lag bei 46 Prozent auf Rotten Tomatoes: Lob für Drehbuch und Sprecher, Kritik an der Animationsqualität; mehrfach fiel der Vergleich mit "Shrek" zuungunsten des Films aus. Im Rückblick fielen einzelne Urteile freundlicher aus — Richard Brody nannte ihn kühn und komisch.
+
+2011 folgte "Hoodwinked Too! Hood vs. Evil", der wirtschaftlich enttäuschte und mit 11 Prozent noch deutlich schlechter bewertet wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:775996', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Jahr 2036 herrscht in der Ukraine Bürgerkrieg; amerikanische Truppen sind mit Kampfrobotern im Einsatz. Der Drohnenpilot Thomas Harp verstößt gegen einen Befehl und tötet dabei zwei Marines, um dreißig zu retten.
+
+Zur Strafe wird er nicht entlassen, sondern an die Front geschickt — zu Captain Leo, der sich als Prototyp herausstellt: ein Androide in Offiziersrang, dessen Existenz geheim ist. Gemeinsam sollen sie verhindern, dass ein Aufständischer an Atomraketen aus der Zeit des Kalten Kriegs gelangt. Was Leo tatsächlich vorhat, ist etwas anderes.
+
+### Entstehungsgeschichte
+
+Regie führte der Schwede Mikael Håfström. Anthony Mackie spielt Leo und war zugleich als Produzent beteiligt; Damson Idris spielt den Drohnenpiloten Harp.
+
+Der Film erschien am 15. Januar 2021 bei Netflix.
+
+### Hinter den Kulissen
+
+Die Ausgangsfrage ist die nach der Verantwortung im automatisierten Krieg: Harp trifft seine Entscheidungen aus einem Container in Nevada, tausende Kilometer entfernt, und der Film schickt ihn genau deshalb dorthin, wo die Folgen sichtbar werden.
+
+Bemerkenswert ist die Wendung: Der Androide argumentiert am Ende nicht wie eine außer Kontrolle geratene Maschine, sondern wie jemand, der die Rechnung des Menschen konsequent zu Ende geführt hat.
+
+### Einordnung & Wirkung
+
+Der Film war am Startwochenende der meistgesehene Titel bei Netflix; im ersten Quartal nach der Veröffentlichung sahen ihn nach Angaben des Anbieters 66 Millionen Haushalte.
+
+Die Kritik urteilte überwiegend ablehnend: 37 Prozent bei Rotten Tomatoes, 45 von 100 bei Metacritic. Ein wiederkehrender Befund lautete, es handle sich um Science-Fiction von der Stange, die sich immerhin an großen Fragen über die Zukunft der Kriegsführung versuche.
+
+Der Abstand zwischen Zuschauerzahl und Bewertung ist für Netflix-Produktionen jener Jahre kennzeichnend — Reichweite ersetzt dort das, was im Kino das Einspielergebnis wäre.` },
 ];
