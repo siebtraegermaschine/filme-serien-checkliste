@@ -33395,4 +33395,747 @@ In den Vereinigten Staaten spielte der Film 83,36 Millionen Dollar ein, weltweit
 Die Urteile gingen weit auseinander. Das Lexikon des internationalen Films nannte ihn menschenverachtend; die Zeitschrift Cinema hielt fest, die Regie hebe die Actionszenen über den Durchschnitt.
 
 1995 folgte eine Fortsetzung mit Seagal in derselben Rolle. 2021 gab HBO Max eine Neuverfilmung unter der Regie von Timo Tjahjanto in Auftrag.` },
+  // ---- Block 61 ----
+  {
+    bereich: 'titel', schluessel: 'movie:705', locale: 'de-de',
+    text: `### Worum es geht
+
+Eve Harrington verschafft sich Zugang zum Kreis um die etablierte Schauspielerin Margo Channing — mit einer erfundenen, tragischen Lebensgeschichte, die alle rührt.
+
+Von dort arbeitet sie sich vor. Nicht mit Gewalt, sondern mit Aufmerksamkeit, Bescheidenheit und der genauen Kenntnis dessen, was ihr Gegenüber hören will. Sie verdrängt Margo aus deren Rollen und wird selbst zur gefeierten Bühnengröße — bis ihr dasselbe widerfährt, durch eine ebenso ehrgeizige Verehrerin.
+
+### Entstehungsgeschichte
+
+Joseph L. Mankiewicz führte Regie und schrieb das Drehbuch. Produziert wurde der Schwarzweißfilm von Darryl F. Zanuck für 20th Century Fox.
+
+Bette Davis spielt die alternde Margo Channing, Anne Baxter die Eve Harrington. George Sanders gibt den zynischen Theaterkritiker.
+
+### Hinter den Kulissen
+
+Der Film ist eine Abrechnung mit dem Betrieb, aus dem er selbst kommt — und die Bosheit richtet sich nach allen Seiten: gegen die Eitelkeit der Stars ebenso wie gegen die Macht der Kritik und gegen den Ehrgeiz derer, die nachrücken.
+
+Getragen wird das von den Dialogen. Sie sind der eigentliche Gegenstand des Films — das Lexikon des internationalen Films hebt ihre Präzision ausdrücklich hervor.
+
+Die Kreisform ist dabei das Klügste an der Anlage: Was Eve mit Margo gemacht hat, wird man mit Eve machen — und der Film sagt nicht, dass das ungerecht ist, sondern nur, dass es so läuft.
+
+### Einordnung & Wirkung
+
+Bei der Oscar-Verleihung 1951 erhielt der Film 14 Nominierungen und gewann sechs Auszeichnungen.
+
+Das Lexikon des internationalen Films nannte ihn eine bitter-witzige Tragikomödie mit präzisen Dialogen.
+
+1998 führte das American Film Institute ihn auf Rang 16 seiner Liste der besten amerikanischen Filme.
+
+Er gehört damit zu den wenigen Filmen, die ihren eigenen Berufsstand so genau beschreiben, dass sie darin selbst zum Maßstab wurden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:37257', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Londoner Anwalt Sir Wilfrid Robarts kommt nach schwerer Krankheit aus dem Krankenhaus und soll sich schonen. Stattdessen übernimmt er die Verteidigung von Leonard Vole, einem arbeitslosen Handelsvertreter, der eine wohlhabende Witwe ermordet haben soll.
+
+Voles einziges Alibi ist seine Frau Christine. Dann tritt sie im Prozess auf — als Zeugin der Anklage. Was danach geschieht, wendet sich mehrfach, und Robarts ist bis zuletzt nicht sicher, ob er einen Unschuldigen verteidigt.
+
+### Entstehungsgeschichte
+
+Regie führte Billy Wilder, das Drehbuch schrieb er gemeinsam mit Larry Marcus und Harry Kurnitz. Die Vorlage ist Agatha Christies gleichnamiges Theaterstück von 1953.
+
+Charles Laughton spielt Sir Wilfrid Robarts, Marlene Dietrich die Christine Vole, Tyrone Power den Angeklagten Leonard Stephen Vole.
+
+Produziert wurde der Film von Arthur Hornblow Jr. und Edward Small für United Artists. Gedreht wurde in Hollywood, obwohl das Stück in London spielt.
+
+### Hinter den Kulissen
+
+Der Film verlegt ein Bühnenstück ins Kino, ohne seine Herkunft zu verbergen: Der Gerichtssaal bleibt der Hauptschauplatz, und die Wirkung entsteht aus Rede und Gegenrede.
+
+Auffällig ist die Verlagerung der Herstellung: Das Stück spielt in London, gedreht wurde in Hollywood.
+
+Bemerkenswert ist die Bitte am Schluss. Im Abspann fordert ein Sprecher das Publikum ausdrücklich auf, den Ausgang des Films niemandem zu verraten, der ihn noch nicht kennt.
+
+### Einordnung & Wirkung
+
+Bei der Oscar-Verleihung 1958 erhielt der Film sechs Nominierungen.
+
+2008 führte das American Film Institute ihn auf Rang sechs der besten Gerichtsdramen aller Zeiten.
+
+Er gehört zu den Filmen, deren Ruf ganz wesentlich auf ihrer Schlusswendung beruht — und die deshalb bis heute weitergegeben werden mit dem Zusatz, nichts darüber zu sagen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11878', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein herrenloser Samurai kommt in ein Dorf, das von zwei rivalisierenden Glücksspielbanden beherrscht wird. Beide Seiten würden ihn gern anwerben.
+
+Er bietet sich beiden an — und wechselt die Seite, sobald es ihm nützt. Sein Ziel ist nicht Geld und nicht Gerechtigkeit, sondern dass sich die beiden Banden gegenseitig aufreiben. Der Plan geht auf, bis der Sohn eines Anführers mit einem Revolver zurückkehrt: einer Waffe, gegen die ein Schwert nichts ausrichtet.
+
+### Entstehungsgeschichte
+
+Akira Kurosawa führte Regie und produzierte den Film; er schrieb das Drehbuch gemeinsam mit Ryūzō Kikushima und übernahm auch den Schnitt. Die Kamera führte Kazuo Miyagawa. Der Film läuft 106 Minuten und ist in Deutschland ab 12 Jahren freigegeben.
+
+Toshirō Mifune spielt den Rōnin, der sich Sanjuro Kuwabatake nennt, Tatsuya Nakadai den Gegenspieler Unosuke. Im Ensemble stehen zudem Isuzu Yamada und Takashi Shimura.
+
+### Hinter den Kulissen
+
+Kurosawa hat erklärt, die Handlung sei seiner Vorstellung entsprungen. Kritiker haben dagegen auf Dashiell Hammetts Roman "Rote Ernte" hingewiesen, in dem ein Ermittler nach demselben Verfahren zwei Banden gegeneinander ausspielt.
+
+Sergio Leone drehte 1964 mit "Für eine Handvoll Dollar" dieselbe Geschichte als Western. Später entstand mit "Last Man Standing" eine weitere Bearbeitung.
+
+Der Film war damit maßgeblich für die Entstehung des Italowesterns — und für ein Heldenbild, das dem klassischen Kino widerspricht: Die Hauptfigur handelt aus Eigennutz und findet die Sache nebenbei komisch.
+
+### Einordnung & Wirkung
+
+Die Kritik lobte die vielschichtige Erzählweise und die Verbindung von moralischer Uneindeutigkeit mit stilisierter Gewalt.
+
+Der Film arbeitet dabei mit grotesken Zügen und barocken Übertreibungen — und legte damit die Form für ein zynisches Actionkino fest, das die überlieferten Heldenerzählungen infrage stellt.
+
+Sein Einfluss reicht weit über Japan hinaus: Mit "Für eine Handvoll Dollar" und "Last Man Standing" wurde die Handlung zweimal in anderen Ländern und anderen Genres neu erzählt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:21575', locale: 'de-de',
+    text: `### Worum es geht
+
+Malik El Djebena ist neunzehn, maghrebinischer Herkunft und kommt für sechs Jahre ins Gefängnis. Er kann weder lesen noch schreiben und hat draußen niemanden.
+
+Drinnen wird er sofort unter Druck gesetzt: Die korsische Gruppe um den Paten Luciani verlangt von ihm, einen anderen Häftling zu töten. Malik tut es. Von da an gehört er dazu — als Bediensteter, den niemand ernst nimmt. Er nutzt das: Er lernt lesen, schreiben und Korsisch, hört zu und baut über Jahre eigene Geschäfte auf, von denen Luciani nichts weiß.
+
+### Entstehungsgeschichte
+
+Jacques Audiard führte Regie; es war sein fünfter Spielfilm. Grundlage war eine Geschichte von Abdel Raouf Dafri.
+
+Tahar Rahim spielt Malik. Audiard besetzte den damals 27-jährigen und weitgehend unbekannten Darsteller nach einem spontanen Eindruck. Niels Arestrup spielt den korsischen Paten Luciani.
+
+### Hinter den Kulissen
+
+Audiard hat seine Absicht deutlich benannt: Das Gefängnis sei eine Metapher der Gesellschaft — drinnen, draußen; nach einer bestimmten Zeit laufe das auf dasselbe hinaus.
+
+Der Film ist damit weniger Gefängnisdrama als Bildungsroman. Malik durchläuft eine Ausbildung, nur eben in einem Fach, das man nicht wählt. Was er lernt, ist auch außerhalb brauchbar: Sprachen, Menschenkenntnis, Geduld.
+
+Die Sprache trägt das mit. Malik spricht anfangs kaum; im Verlauf des Films wechselt er zwischen Arabisch, Französisch und Korsisch — und jede dieser Sprachen bedeutet einen Zugang zu einer anderen Gruppe.
+
+### Einordnung & Wirkung
+
+2009 gewann der Film in Cannes den Großen Preis der Jury.
+
+Bei den Césars errang er neun Preise aus 13 Nominierungen, darunter als bester Film und für die beste Regie.
+
+2010 war er als bester fremdsprachiger Film für den Oscar nominiert und unterlag dem argentinischen Beitrag.
+
+Die Kritik urteilte durchweg positiv und hob Tahar Rahims Leistung als atemberaubend hervor; wiederkehrend war die Einordnung als komplexer Erziehungsroman mit politischer Tiefe.` },
+  {
+    bereich: 'titel', schluessel: 'movie:549509', locale: 'de-de',
+    text: `### Worum es geht
+
+László Tóth ist ungarischer Jude, am Bauhaus ausgebildeter Architekt und hat den Holocaust überlebt. 1947 kommt er in die Vereinigten Staaten, ohne Geld, ohne Sprache und zunächst ohne seine Frau Erzsébet.
+
+Die ersten Jahre sind hart. Dann bekommt er von dem wohlhabenden Harrison Lee Van Buren den Auftrag, ein ehrgeiziges Kulturzentrum zu bauen. Das verändert sein Leben — und macht ihn zugleich abhängig von einem Mann, dessen Interesse an ihm nicht das ist, was es zu sein scheint.
+
+### Entstehungsgeschichte
+
+Regie führte Brady Corbet; es ist sein dritter Spielfilm und sein bislang größtes Vorhaben. Das Drehbuch schrieb er gemeinsam mit seiner Partnerin Mona Fastvold.
+
+Adrien Brody spielt László Tóth, Felicity Jones seine Frau Erzsébet, Guy Pearce den Auftraggeber Harrison Lee Van Buren.
+
+Das Budget lag unter zehn Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde in VistaVision — einem Verfahren aus den fünfziger Jahren, das hier bewusst gewählt wurde, um die Bildwirkung jener Zeit wiederherzustellen.
+
+Der Film läuft 215 Minuten und hat eine eingebaute Pause — im gegenwärtigen Kinobetrieb eine Seltenheit.
+
+Für Aufsehen sorgte der Einsatz künstlicher Intelligenz: Die ungarischen Dialoge wurden mit der Software Respeecher nachbearbeitet, um die Aussprache zu verbessern. Vor der Oscar-Verleihung führte das zu einer Debatte darüber, wie offen solche Eingriffe genannt werden müssen.
+
+### Einordnung & Wirkung
+
+Die Premiere fand bei den Filmfestspielen von Venedig statt; Brady Corbet gewann dort den Silbernen Löwen für die beste Regie.
+
+Bei den Oscars gewann der Film drei Auszeichnungen — für den Hauptdarsteller, die Kamera und die Filmmusik.
+
+Bei Rotten Tomatoes steht er bei 93 Prozent; die Kritik lobte die meisterhafte Umsetzung und den monumentalen Anspruch.
+
+Bemerkenswert bleibt das Verhältnis von Aufwand und Mitteln: ein Film von dreieinhalb Stunden über vierzig Jahre amerikanischer Geschichte, hergestellt für weniger als zehn Millionen Dollar.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1430', locale: 'de-de',
+    text: `### Worum es geht
+
+Am 20. April 1999 erschossen zwei Schüler an der Columbine High School in Colorado zwölf Mitschüler und einen Lehrer. Michael Moore nimmt das zum Ausgangspunkt für eine Frage, die er im ganzen Film verfolgt: Warum sterben in den Vereinigten Staaten so viel mehr Menschen durch Schusswaffen als in vergleichbaren Demokratien?
+
+Er vergleicht Zahlen, sucht nach Erklärungen und verwirft der Reihe nach die üblichen: Musik, Videospiele, Bowling. Was übrig bleibt, führt er auf Angst, auf die Zuspitzung durch Medien und auf wirtschaftliche Ungleichheit zurück.
+
+### Entstehungsgeschichte
+
+Michael Moore führte Regie, war Mitautor und Produzent.
+
+Die Finanzierung kam aus Kanada und Deutschland und belief sich auf vier Millionen Dollar — amerikanische Produzenten waren nicht bereit, den Film zu finanzieren. Beteiligt waren Dog Eat Dog Films und Alliance Atlantis.
+
+### Hinter den Kulissen
+
+Moores Verfahren ist zugleich seine Stärke und der Kern der Kritik an ihm. Er tritt selbst auf, konfrontiert Beteiligte und montiert Material so, dass es seine These stützt.
+
+Genau das wurde ihm im Einzelnen vorgeworfen: eine gestellte Szene in einer Bank, irreführende Angaben darüber, was die Täter am Morgen der Tat getan hatten, und ein Gespräch mit Charlton Heston, das nach Auffassung vieler die Grenze zur Überrumpelung überschritt. Moore bezeichnete Heston später als Rassisten — obwohl dieser sich in den sechziger Jahren für die Bürgerrechte eingesetzt hatte.
+
+### Einordnung & Wirkung
+
+Der Film gewann bei den 55. Filmfestspielen von Cannes den Jubiläumspreis und 2003 den Oscar als bester Dokumentarfilm.
+
+Weltweit spielte er 58 Millionen Dollar ein und war damit zu diesem Zeitpunkt der dritterfolgreichste Dokumentarfilm überhaupt — übertroffen später nur von Moores eigenem "Fahrenheit 9/11" und von "Die Reise der Pinguine".
+
+Er bleibt damit ein Werk mit zwei Seiten: außerordentlich wirksam in der öffentlichen Debatte und methodisch angreifbar.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11644', locale: 'de-de',
+    text: `### Worum es geht
+
+Jack Terry arbeitet in Philadelphia als Tontechniker für billige Horrorfilme. Nachts nimmt er draußen Geräusche auf, die er später braucht.
+
+Dabei wird er Zeuge, wie ein Wagen von einer Brücke stürzt. Er zieht die Beifahrerin aus dem Wasser; der Fahrer, ein Präsidentschaftskandidat, stirbt. Offiziell war es ein Reifenplatzer. Beim Abhören seiner eigenen Aufnahme hört Jack etwas anderes: vor dem Platzen einen Schuss.
+
+### Entstehungsgeschichte
+
+Brian De Palma schrieb das Drehbuch und führte Regie. Die Kamera führte Vilmos Zsigmond, den Schnitt Paul Hirsch, die Musik komponierte Pino Donaggio. Produzenten waren George Litto und Fred Caruso.
+
+John Travolta spielt den Tontechniker Jack Terry, Nancy Allen die Sally, John Lithgow den Burke, der die Zeugen beseitigen soll.
+
+Der Titel verweist auf Michelangelo Antonionis "Blow Up" von 1966, in dem ein Fotograf auf einem Bild einen Mord entdeckt.
+
+### Hinter den Kulissen
+
+Der Gegenstand des Films ist sein eigenes Handwerk. Jack rekonstruiert den Hergang, indem er Ton und Bild zusammenbringt — er schneidet, synchronisiert und montiert, bis der Beweis vorliegt. Der Film handelt also davon, wie Filme gemacht werden, und benutzt das als Mittel der Spannung.
+
+Das Budget lag bei 18 Millionen Dollar.
+
+### Einordnung & Wirkung
+
+Eingespielt wurden nur zwölf Millionen Dollar — wirtschaftlich ein Fehlschlag.
+
+Die zeitgenössische Kritik lobte die brillante Bildgestaltung, stellte aber die Logik der Handlung in Frage.
+
+Sein Ruf ist seither erheblich gestiegen. Quentin Tarantino zählt ihn zu seinen Lieblingsfilmen und hat John Travoltas Leistung hier als Grund genannt, ihn später für "Pulp Fiction" zu besetzen.
+
+Damit gehört der Film zu jenen Arbeiten, deren Bedeutung sich erst in der Wirkung auf spätere Regisseure erschlossen hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:247', locale: 'de-de',
+    text: `### Worum es geht
+
+Johnny Clay kommt aus dem Gefängnis und hat einen Plan: den Überfall auf die Kasse einer Pferderennbahn während des wichtigsten Rennens des Tages.
+
+Er stellt eine Gruppe zusammen, die aus Gelegenheitsverbrechern besteht — dazu ein Kassierer und ein Barkeeper von der Rennbahn selbst. Jeder hat eine genau festgelegte Aufgabe und einen genau festgelegten Zeitpunkt. Der Überfall gelingt. Was ihn scheitern lässt, hat mit dem Plan nichts zu tun: Einer der Beteiligten hat seiner untreuen Frau davon erzählt.
+
+### Entstehungsgeschichte
+
+Stanley Kubrick führte Regie; es war sein erster Film mit voller Verfügungsgewalt. Das Drehbuch schrieb er gemeinsam mit dem Kriminalschriftsteller Jim Thompson.
+
+Die Vorlage ist Lionel Whites Roman "Clean Break". Kubrick und der Produzent James B. Harris erwarben die Rechte für 10.000 Dollar.
+
+Sterling Hayden spielt Johnny Clay; Kubrick nannte ihn einen großartigen Schauspieler mit bemerkenswertem Charakter. Daneben sind Marie Windsor und Elisha Cook zu sehen.
+
+Gedreht wurde mit einem Budget von etwa 330.000 Dollar in nur 24 Tagen auf der Rennbahn Bay Meadows in San Mateo, Kalifornien.
+
+### Hinter den Kulissen
+
+Die Erzählweise ist das Bemerkenswerteste. Der Film bricht die zeitliche Abfolge und zeigt dieselben Minuten mehrfach — jedes Mal aus der Sicht eines anderen Beteiligten. Ein Sprecher aus dem Off nennt dabei laufend die genaue Uhrzeit und wirkt wie eine akustische Stechuhr.
+
+Das Verfahren stammt bereits aus der Romanvorlage. Kubrick hat es übernommen und daraus ein Bauprinzip gemacht: Der Ablauf setzt sich für den Zuschauer wie ein Puzzle zusammen.
+
+### Einordnung & Wirkung
+
+Der Film erhielt gute Kritiken. Ein großer Kassenerfolg war er nicht, spielte aber seine Kosten ein — und finanzierte damit Kubricks nächsten Film, "Wege zum Ruhm".
+
+Die Erzählstruktur hat spätere Regisseure beeinflusst, unter ihnen Quentin Tarantino.
+
+Er gilt heute als Klassiker des Genres und als der Film, mit dem Kubrick als Regisseur ernst genommen wurde.` },
+  // ---- Block 62 ----
+  {
+    bereich: 'titel', schluessel: 'series:76331', locale: 'de-de',
+    text: `### Worum es geht
+
+Logan Roy hat eines der größten Medienunternehmen der Welt aufgebaut und denkt nicht daran, es abzugeben. Seine Kinder warten seit Jahren darauf, dass er einen Nachfolger benennt.
+
+Er benennt keinen. Stattdessen spielt er sie gegeneinander aus. Die Geschwister wechseln dabei ständig die Bündnisse, ohne dass einer von ihnen je stark genug wird. Was die Serie über vier Staffeln erzählt, ist im Kern immer dieselbe Bewegung: Jemand kommt dem Thron nahe und wird zurückgestoßen.
+
+### Entstehungsgeschichte
+
+Jesse Armstrong entwickelte die Serie. Als Vorbilder dienten ihm Rupert Murdoch und Robert Maxwell; entstanden ist daraus eine moderne Fassung von Shakespeares "König Lear".
+
+Brian Cox spielt den Patriarchen Logan Roy, Jeremy Strong, Sarah Snook und Kieran Culkin seine Kinder. Ergänzt wird das Ensemble unter anderem durch Alan Ruck und Nicholas Braun.
+
+Produziert wurde die Serie von HBO.
+
+### Hinter den Kulissen
+
+Die Serie lief von Juni 2018 bis Mai 2023 über vier Staffeln mit insgesamt 39 Folgen. Im deutschsprachigen Raum war sie auf Sky Atlantic zu sehen.
+
+Der Ton ist der einer Komödie, die sich als Drama gibt: Die Figuren sagen unentwegt Sätze, über die man lachen müsste, wenn nicht gerade jemand vernichtet würde.
+
+Bemerkenswert ist, dass die Serie keine Sympathieträger anbietet. Niemand hier verdient den Sieg, und der Zuschauer wird gezwungen, sich trotzdem für jemanden zu entscheiden.
+
+### Einordnung & Wirkung
+
+Der Empfang war anfangs verhalten. Über die Staffeln hinweg wurde die Serie zur höchstgelobten und meistausgezeichneten ihrer Zeit — bei Rotten Tomatoes zwischen 89 und 100 Prozent, bei Metacritic durchgehend im Bereich der einhelligen Anerkennung.
+
+Bei den Emmys gewann sie 13 Auszeichnungen bei 75 Nominierungen, darunter als beste Dramaserie.
+
+Kritiker haben in ihrem Ende zugleich das Ende einer Ära gesehen — jener Jahre, in denen Streamingdienste sehr teure Serien für ein sehr anspruchsvolles Publikum herstellten.` },
+  {
+    bereich: 'titel', schluessel: 'series:115004', locale: 'de-de',
+    text: `### Worum es geht
+
+Mare Sheehan ist Ermittlerin in Easttown, einer Kleinstadt in Pennsylvania, in der sie aufgewachsen ist. Sie kennt jeden, und jeder kennt sie — auch als die Frau, deren Sohn gestorben ist.
+
+Ein Mordfall bringt alles zusammen. Während Mare ermittelt, zerfällt ihr Privatleben — und der Ort, in dem sie aufgewachsen ist, macht es ihr nicht leichter.
+
+### Entstehungsgeschichte
+
+Brad Ingelsby entwickelte die siebenteilige Miniserie und schrieb die Drehbücher.
+
+Kate Winslet spielt Detective Mare Sheehan. Daneben sind Julianne Nicholson, Jean Smart, Guy Pearce und Evan Peters zu sehen.
+
+Produziert und ausgestrahlt wurde die Serie von HBO. Sie umfasst sieben Folgen in einer Staffel und ist als abgeschlossene Miniserie angelegt.
+
+### Hinter den Kulissen
+
+Der Schauplatz ist der eigentliche Gegenstand. Easttown ist eine erfundene Kleinstadt im Bundesstaat Pennsylvania — und die Serie nimmt sich für dieses Milieu ungewöhnlich viel Zeit.
+
+Kate Winslets Darstellung folgt derselben Linie: Die Figur ist erschöpft und uneitel angelegt, und die Serie widersteht der Versuchung, daraus eine Wandlungsgeschichte zu machen. Gelobt wurde die Serie ausdrücklich für ihre Frauenfiguren.
+
+### Einordnung & Wirkung
+
+Die Premiere war am 18. April 2021 auf HBO; in Deutschland startete die Serie am 21. Mai 2021 auf Sky Atlantic.
+
+Die Kritik urteilte sehr wohlwollend — gelobt wurden Handlung, Darsteller und insbesondere die Zeichnung der Frauenfiguren.
+
+Bei den 73. Emmy Awards erhielt die Serie 16 Nominierungen und gewann vier Auszeichnungen, darunter Kate Winslet als beste Hauptdarstellerin.
+
+Sie gehört damit zu den Kriminalgeschichten, deren Aufklärung fast nebensächlich ist — was zählt, ist der Ort und was der Fall dort anrichtet.
+
+Bemerkenswert bleibt das Verhältnis von Umfang und Wirkung: sieben Folgen, ein Fall, ein Ort — und 16 Emmy-Nominierungen.` },
+  {
+    bereich: 'titel', schluessel: 'series:66292', locale: 'de-de',
+    text: `### Worum es geht
+
+In Monterey in Kalifornien treffen sich die Mütter einer Grundschulklasse. Sie sind wohlhabend, die Häuser stehen am Meer, und das Verhältnis untereinander ist von Anfang an angespannt.
+
+Bei einer Spendengala der Schule stirbt jemand. Die Serie erzählt rückwärts darauf zu: Von Beginn an ist bekannt, dass es einen Toten geben wird — nicht aber, wer stirbt und wer dafür verantwortlich ist. Dazwischen liegt, was in diesen Familien tatsächlich vorgeht.
+
+### Entstehungsgeschichte
+
+David E. Kelley entwickelte die Serie für HBO nach Liane Moriartys Roman, der auf Deutsch unter dem Titel "Tausend kleine Lügen" erschien.
+
+Reese Witherspoon spielt die Madeline, Nicole Kidman die Celeste, Shailene Woodley die Jane Chapman. Für die zweite Staffel kam Meryl Streep als Mary-Louise Wright hinzu.
+
+Bei der ersten Staffel führte Jean-Marc Vallée Regie, bei der zweiten Andrea Arnold. Insgesamt entstanden 14 Folgen in zwei Staffeln zwischen 2017 und 2019.
+
+### Hinter den Kulissen
+
+Die Anlage ist die eines klassischen Rätselkrimis, verlegt in ein Milieu, in dem alle etwas zu verlieren haben. Der Mordfall dient dabei als Rahmen für etwas anderes: häusliche Gewalt, die von außen nicht zu sehen ist.
+
+Bemerkenswert ist der Regiewechsel: Die erste Staffel inszenierte Jean-Marc Vallée, die zweite Andrea Arnold — für eine Serie mit durchgehender Handschrift ein ungewöhnlicher Schritt.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte überwiegend gut bis sehr gut: 92 Prozent bei Rotten Tomatoes.
+
+Die Serie erhielt 16 Emmy-Nominierungen und gewann sechs Auszeichnungen, darunter als beste Miniserie, dazu mehrere Golden Globes.
+
+Bemerkenswert bleibt die Besetzung: Mit Witherspoon, Kidman, Woodley und ab der zweiten Staffel Meryl Streep versammelt die Serie vier Darstellerinnen in Rollen, wie sie im Kino für Frauen dieses Alters selten geschrieben werden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:583406', locale: 'de-de',
+    text: `### Worum es geht
+
+Chicago, Ende der sechziger Jahre. William O'Neal schleust sich im Auftrag des FBI in die Black Panther Party ein und berichtet über deren Vorsitzenden im Bundesstaat Illinois: Fred Hampton.
+
+O'Neal kommt Hampton nahe und berichtet zugleich seinem Führungsbeamten Roy Mitchell. Am Ende steht Hamptons Ermordung, für die O'Neal ihm zuvor ein Betäubungsmittel verabreicht hat — auf Anweisung von FBI-Direktor J. Edgar Hoover.
+
+### Entstehungsgeschichte
+
+Regie führte Shaka King, das Drehbuch schrieb er gemeinsam mit Will Berson nach einer Geschichte von Kenny und Keith Lucas.
+
+Daniel Kaluuya spielt Fred Hampton, LaKeith Stanfield den William O'Neal. Daneben sind Martin Sheen als J. Edgar Hoover, Dominique Fishback als Deborah Johnson und Jesse Plemons als FBI-Beamter Roy Mitchell zu sehen.
+
+Gedreht wurde von Oktober bis Dezember 2019 in Cleveland und Mansfield in Ohio. Der Arbeitstitel lautete "Jesus Was My Homeboy"; die Nachbearbeitung fand pandemiebedingt aus der Ferne statt.
+
+### Hinter den Kulissen
+
+Der Film endet mit Einblendungen, die den weiteren Verlauf festhalten: O'Neal blieb Informant und nahm sich 1989 das Leben; eine Klage gegen das FBI wurde 1982 mit einer Zahlung von 1,85 Millionen Dollar verglichen.
+
+Die Erzählperspektive ist die eigentliche Entscheidung. Der Titel nennt den Verräter zuerst — und der Film hält sich daran: Er wird aus O'Neals Sicht erzählt, nicht aus Hamptons.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte einhellig positiv: 96 Prozent bei Rotten Tomatoes, 86 von 100 bei Metacritic.
+
+Bei der Oscar-Verleihung 2021 gewann Daniel Kaluuya als bester Nebendarsteller; hinzu kam die Auszeichnung für den besten Filmsong mit "Fight For You" sowie vier weitere Nominierungen.
+
+Bemerkenswert bleibt die Kategorie: Kaluuya spielt die Titelfigur und gewann als Nebendarsteller — ein Umstand, der bei der Verleihung mehrfach angemerkt wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:630240', locale: 'de-de',
+    text: `### Worum es geht
+
+Alexia ist eine Serienmörderin mit einem Verlangen nach körperlicher Verbindung zu Fahrzeugen.
+
+Auf der Flucht nimmt sie die Identität des seit Jahren vermissten Sohnes eines Feuerwehrmanns an. Der Mann nimmt sie auf und stellt keine Fragen — und aus dieser Lüge entsteht ein Verhältnis, das keiner der beiden erwartet hat.
+
+### Entstehungsgeschichte
+
+Julia Ducournau schrieb das Drehbuch und führte Regie; die Arbeit daran dauerte fünf Jahre.
+
+Agathe Rousselle spielt Alexia — es war ihre erste Filmrolle. Vincent Lindon spielt den Feuerwehrmann Vincent und bereitete sich anderthalb Jahre lang körperlich auf die Rolle vor.
+
+Es handelt sich um eine französisch-belgische Gemeinschaftsproduktion von Kazak Productions und Frakas, unterstützt von Arte France und Canal+.
+
+### Hinter den Kulissen
+
+Ducournau arbeitet ausdrücklich mit dem Körperhorror als künstlerischer Form — mit Verwandlung, Verletzung und der Frage, wo ein Mensch aufhört.
+
+Der Film ist dabei über weite Strecken kaum zu ertragen, und das ist beabsichtigt. Zugleich handelt seine zweite Hälfte von etwas ganz anderem: von einem Mann, der ein Kind annimmt, das nicht seines ist, und einer Person, die zum ersten Mal angenommen wird.
+
+In Deutschland ist der Film ab 16 Jahren freigegeben.
+
+### Einordnung & Wirkung
+
+2021 gewann der Film die Goldene Palme in Cannes. Es war Julia Ducournaus erste Teilnahme am Hauptwettbewerb.
+
+Die deutschsprachige Kritik urteilte überwiegend zustimmend; der Tagesspiegel nannte ihn ein radikales Werk. International fielen die Reaktionen gemischter aus.
+
+Er gehört damit zu den wenigen Filmen, die mit der höchsten Auszeichnung des europäischen Kinos ausgezeichnet wurden und zugleich einen erheblichen Teil ihres Publikums vertreiben — was die Entscheidung der Jury eher unterstreicht als infrage stellt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:284303', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei zehnjährige Zwillingsbrüder leben mit ihrer Mutter in einem abgelegenen Haus. Die Mutter kehrt nach einer Gesichtsoperation zurück — stark bandagiert, kaum erkennbar und verändert im Verhalten.
+
+Sie ist streng, wo sie es nicht war, und sie ignoriert einen der beiden Jungen vollständig. Die Zwillinge beginnen zu zweifeln, ob unter den Verbänden tatsächlich ihre Mutter steckt. Schließlich fesseln sie die Frau ans Bett, um es herauszufinden.
+
+### Entstehungsgeschichte
+
+Veronika Franz und Severin Fiala schrieben das Drehbuch und führten gemeinsam Regie. Für Veronika Franz war es der erste abendfüllende Spielfilm nach ihrer Arbeit mit dem Produzenten Ulrich Seidl.
+
+Susanne Wuest spielt die Mutter, die Brüder Elias und Lukas Schwarz die Zwillinge.
+
+Die österreichische Produktion entstand 2013 im niederösterreichischen Waldviertel. Die Kamera führte Martin Gschlacht.
+
+### Hinter den Kulissen
+
+Der Film hält die entscheidende Frage bis weit hinein offen: Er zeigt alles aus der Sicht der Kinder — und der Zuschauer weiß deshalb ebenso wenig wie sie, ob ihr Verdacht berechtigt ist oder ob hier etwas anderes vorliegt.
+
+Der Schauplatz tut ein Übriges: ein abgelegenes Haus, in dem außer den dreien niemand ist und in dem niemand nachfragt.
+
+Bemerkenswert ist auch die Besetzung der Kinder. Elias und Lukas Schwarz sind Brüder und tragen den Film über weite Strecken allein — mit einer Ernsthaftigkeit, die dem Zuschauer die Entscheidung überlässt, wem er glauben soll.
+
+### Einordnung & Wirkung
+
+Die Premiere fand 2014 bei den Filmfestspielen von Venedig statt.
+
+Österreich reichte den Film 2016 als Beitrag für den Oscar als bester fremdsprachiger Film ein; eine Nominierung kam nicht zustande.
+
+Martin Gschlacht erhielt für die Kameraarbeit den Europäischen Filmpreis.
+
+Er gehört zu jenen Werken, die man besser ohne Vorkenntnis sieht — und zu den wenigen österreichischen Genrefilmen, die international wahrgenommen wurden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:7972', locale: 'de-de',
+    text: `### Worum es geht
+
+Andy Hanson leitet die Finanzen eines Unternehmens, lebt über seine Verhältnisse und ist drogenabhängig. Um seinen Lebensstil mit seiner Frau Gina zu halten, hat er Firmengeld unterschlagen. Nun steht eine Steuerprüfung an.
+
+Er überredet seinen jüngeren Bruder Hank, der ebenfalls in Geldnot steckt, zu einem Überfall — auf den Juwelierladen ihrer eigenen Eltern. Der Laden ist versichert, sagt Andy, und niemand kommt zu Schaden. Hank engagiert heimlich einen Dritten. Der erschießt die Mutter.
+
+### Entstehungsgeschichte
+
+Sidney Lumet führte mit 84 Jahren Regie; es blieb sein letzter Film nach einer über fünfzigjährigen Laufbahn. Das Drehbuch schrieb Kelly Masterson, die Musik komponierte Carter Burwell.
+
+Philip Seymour Hoffman spielt Andy Hanson, Ethan Hawke den Hank, Albert Finney den Vater Charles, Marisa Tomei die Gina.
+
+Gedreht wurde in New York. Die Premiere fand am 6. September 2007 in Deauville statt; in den Vereinigten Staaten spielte der Film etwa 2,2 Millionen Dollar ein.
+
+### Hinter den Kulissen
+
+Erzählt wird teilweise in Rückblenden: Dieselben Stunden werden mehrfach durchlaufen, jedes Mal aus der Sicht einer anderen Figur. Aus einer verhältnismäßig schlichten Geschichte über einen missglückten Überfall wird dadurch ein vielschichtiges Werk, das zugleich Charakterstudie, Kriminalfilm und Thriller ist.
+
+Der Gegenstand ist die Familie. Der Film führt vor, wie eine dem Anschein nach funktionierende amerikanische Familie sich selbst zerstört — und wie weit ein Vater dabei zu gehen bereit ist.
+
+### Einordnung & Wirkung
+
+Die Kritik feierte den Film als Rückkehr Lumets zu alter Form und als sein Meisterwerk zum Abschluss.
+
+Beschrieben wurde er als abgründiges, spannendes und zugleich schockierendes Familiendrama.
+
+Bemerkenswert bleibt der Abstand zwischen Wirkung und Ergebnis: ein Film, den die Kritik als Meisterwerk führt, mit einem Einspielergebnis von 2,2 Millionen Dollar.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1266', locale: 'de-de',
+    text: `### Worum es geht
+
+Tom Ludlow ist Detective beim Los Angeles Police Department und arbeitet in einer Einheit, die sich um Vorschriften nicht kümmert. Er trinkt, er schlägt zu, er legt Beweise — und seine Vorgesetzten decken das, solange die Ergebnisse stimmen.
+
+Als sein früherer Partner erschossen wird und die Spuren auf Ludlow selbst zu weisen scheinen, beginnt er nachzuforschen. Was er findet, führt zu Captain Jack Wander und einem Netz aus Bestechung und Erpressung innerhalb der eigenen Behörde.
+
+### Entstehungsgeschichte
+
+Regie führte David Ayer. Das Drehbuch schrieb James Ellroy gemeinsam mit Kurt Wimmer und Jamie Moss; Ellroy hatte die erste Fassung bereits in den neunziger Jahren verfasst, angeregt durch den Prozess gegen O. J. Simpson.
+
+Keanu Reeves spielt Detective Tom Ludlow, Forest Whitaker den Captain Jack Wander. Daneben sind Hugh Laurie, Chris Evans und Naomie Harris zu sehen.
+
+Die Dreharbeiten begannen am 21. Mai 2007 in Los Angeles; die Premiere fand am 3. April 2008 in Hollywood statt. Das Budget lag bei etwa 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+James Ellroys Handschrift ist unverkennbar: eine Polizei, die vom Verbrechen nicht zu trennen ist, eine Stadt, die dafür den Rahmen bietet, und eine Hauptfigur, die zu spät begreift, wofür sie benutzt wurde.
+
+David Ayer stammt selbst aus Los Angeles und hat mehrere Filme über die dortige Polizei gedreht. Der Zugriff ist entsprechend: keine Ermittlungsarbeit, sondern Milieuschilderung.
+
+Keanu Reeves ist dabei in einer Rolle zu sehen, die von seinen bekannteren deutlich abweicht: ein Mann, der nicht durchblickt und die meiste Zeit im Unrecht ist.
+
+### Einordnung & Wirkung
+
+Bei etwa 20 Millionen Dollar Herstellungskosten spielte der Film weltweit über 58 Millionen ein, davon rund 26,4 Millionen in den Vereinigten Staaten.
+
+Die Kritik beschrieb ihn als ehrgeizigen Actionthriller mit gesellschaftskritischen Anteilen, bemängelte aber dramaturgische Schwächen und mangelnde Glaubwürdigkeit.
+
+Bemerkenswert bleibt die Vorgeschichte: ein Drehbuch aus den neunziger Jahren, angeregt vom Prozess gegen O. J. Simpson, das erst über ein Jahrzehnt später verfilmt wurde.` },
+  // ---- Block 63 ----
+  {
+    bereich: 'titel', schluessel: 'movie:205220', locale: 'de-de',
+    text: `### Worum es geht
+
+Philomena Lee ist pensionierte Krankenschwester und erzählt ihrer Tochter zum ersten Mal, was sie fünfzig Jahre lang verschwiegen hat: Als junges Mädchen bekam sie ein uneheliches Kind. Der Sohn wurde ihr in einem katholischen Heim weggenommen und zur Adoption freigegeben.
+
+Der Journalist Martin Sixsmith nimmt sich der Sache an. Gemeinsam suchen die beiden nach dem Sohn — und finden heraus, dass er unter dem Namen Michael A. Hess im Weißen Haus Karriere gemacht hat und bereits 1995 gestorben ist.
+
+### Entstehungsgeschichte
+
+Regie führte Stephen Frears. Das Drehbuch schrieben Steve Coogan und Jeff Pope nach Martin Sixsmiths Buch "The Lost Child of Philomena Lee".
+
+Judi Dench spielt Philomena Lee, Steve Coogan den Journalisten Martin Sixsmith. Daneben sind Michelle Fairley und Sophie Kennedy Clark zu sehen.
+
+### Hinter den Kulissen
+
+Der Film lebt vom Gegensatz seiner beiden Hauptfiguren: eine gläubige Frau, die der Kirche trotz allem nicht abschwört, und ein zynischer Journalist, der genau das nicht versteht.
+
+Genau darin liegt die Zurückhaltung des Films. Er hätte eine Anklage werden können; stattdessen überlässt er das Urteil der Figur, der das Unrecht geschehen ist — und die anders entscheidet, als der Zuschauer es erwartet.
+
+Steve Coogan spielt nicht nur den Journalisten, sondern hat den Film auch mitgeschrieben — Grundlage war Sixsmiths eigenes Buch über den Fall.
+
+### Einordnung & Wirkung
+
+Bei den Filmfestspielen von Venedig 2013 gewann der Film mehrere Preise, darunter für das beste Drehbuch.
+
+Er wurde für vier Oscars nominiert: bester Film, beste Hauptdarstellerin für Judi Dench, beste Filmmusik und bestes adaptiertes Drehbuch.
+
+Die Kritik lobte die Balance zwischen Komik und Tragik sowie die Darstellungen.
+
+Bemerkenswert bleibt der Gegenstand: die Praxis katholischer Magdalenenheime, unehelich geborene Kinder ihren Müttern wegzunehmen und zur Adoption freizugeben — hier erzählt an einem einzigen belegten Fall.` },
+  {
+    bereich: 'titel', schluessel: 'movie:294016', locale: 'de-de',
+    text: `### Worum es geht
+
+Dalton Trumbo ist einer der bestbezahlten Drehbuchautoren Hollywoods — und Mitglied der Kommunistischen Partei. Als er sich weigert, vor dem Kongressausschuss auszusagen, kommt er ins Gefängnis und danach auf die schwarze Liste: Kein Studio darf ihn mehr beschäftigen.
+
+Trumbo schreibt trotzdem weiter. Er arbeitet unter falschen Namen für Billigproduktionen und schreibt Drehbücher, die anderen zugeschrieben werden. Zwei davon gewinnen einen Oscar, den er nicht entgegennehmen kann. Erst als Kirk Douglas und Otto Preminger bereit sind, ihn bei "Spartacus" und "Exodus" im Vorspann zu nennen, bricht die Liste auf.
+
+### Entstehungsgeschichte
+
+Regie führte Jay Roach, das Drehbuch schrieb John McNamara nach der Biografie von Bruce Alexander Cook. Das Budget lag bei 15 Millionen Dollar.
+
+Bryan Cranston spielt Dalton Trumbo, Helen Mirren die Klatschkolumnistin Hedda Hopper. Daneben sind Diane Lane, John Goodman, Elle Fanning und Michael Stuhlbarg als Edward G. Robinson zu sehen.
+
+Gedreht wurde von September bis November 2014. Die Premiere fand im September 2015 in Toronto statt; der amerikanische Start folgte am 6. November 2015, der deutsche am 10. März 2016.
+
+### Hinter den Kulissen
+
+Die Auseinandersetzung um den Film betrifft seinen Umgang mit der Geschichte. Kritiker haben festgehalten, dass historische Ereignisse und Personen verzerrt dargestellt werden — insbesondere die Rolle von Edward G. Robinson.
+
+Ein zweiter Einwand betrifft das, was der Film auslässt: Trumbos eigene stalinistische Überzeugungen kommen kaum vor. Der Film erzählt ihn als Verteidiger der Meinungsfreiheit, ohne zu fragen, welche Meinungen er selbst verteidigte.
+
+### Einordnung & Wirkung
+
+Bei Rotten Tomatoes steht der Film bei 72 Prozent.
+
+Bryan Cranston erhielt Nominierungen für den Oscar, den Golden Globe, den BAFTA Award und den Preis der Screen Actors Guild.
+
+Der Film gehört damit zu jenen Arbeiten, die eine unbequeme Epoche der amerikanischen Filmgeschichte für ein großes Publikum erschließen — und die dabei genau die Vereinfachungen vornehmen, die man ihnen anschließend vorwirft.` },
+  {
+    bereich: 'titel', schluessel: 'movie:30018', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine alleinerziehende Mutter lebt mit ihrem erwachsenen Sohn Do-jun zusammen, der geistig beeinträchtigt ist. Ihr ganzes Leben besteht aus diesem Sohn.
+
+Als ein Schulmädchen tot aufgefunden und Do-jun verhaftet wird, glaubt sie keine Sekunde an seine Schuld — und beginnt, selbst zu ermitteln. Was sie dabei findet, hätte sie besser nicht gefunden.
+
+### Entstehungsgeschichte
+
+Bong Joon-ho führte Regie und schrieb das Drehbuch gemeinsam mit Park Eun-kyo.
+
+Kim Hye-ja spielt die Mutter Yun Hye-ja, Won Bin ihren Sohn Do-jun.
+
+Es handelt sich um eine südkoreanische Produktion aus dem Jahr 2009.
+
+Die Anlage ist die eines Psychodramas, nicht die eines Kriminalfilms: Die Frage, wer die Tat begangen hat, ist zweitrangig gegenüber der Frage, wozu diese Mutter fähig ist.
+
+### Hinter den Kulissen
+
+Die Besetzung der Hauptrolle ist der wesentliche Einfall. Kim Hye-ja war in Südkorea über Jahrzehnte als Verkörperung der guten, aufopferungsvollen Mutter bekannt — aus Fernsehserien, aus Werbung. Der Film nutzt genau dieses Bild und führt es an einen Ort, an den es nicht gehört.
+
+Was daraus entsteht, hat die Kritik als vielschichtige Charakterstudie beschrieben: Mütterlicher Beschützerinstinkt schlägt in besessene Selbstzerstörung um — und der Film fragt nicht, ob das verwerflich ist, sondern wie weit es geht.
+
+### Einordnung & Wirkung
+
+2009 lief der Film in Cannes in der Reihe "Un Certain Regard".
+
+Innerhalb von Bong Joon-hos Werk steht er zwischen "The Host" von 2006 und "Snowpiercer" von 2013 und gilt als einer seiner Höhepunkte — die Arbeit, mit der er als eigenständiger Autorenfilmer anerkannt wurde.
+
+Er gehört zu den Filmen, die eine Kriminalgeschichte benutzen, um etwas anderes zu verhandeln: hier die Frage, wie viel Liebe verträgt, bevor sie zur Gefahr wird.
+
+Bemerkenswert bleibt der Schluss, der der Hauptfigur keine Entlastung anbietet und ihr zugleich nichts vorwirft — der Zuschauer bleibt mit dem Urteil allein.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1694', locale: 'de-de',
+    text: `### Worum es geht
+
+Herbert West ist Medizinstudent und hat in der Schweiz an einem Serum gearbeitet, das totes Gewebe wiederbelebt. Nach einem Vorfall verlässt er das Land und schreibt sich an der Miskatonic University ein, wo er bei seinem Kommilitonen Dan Cain einzieht.
+
+Im Keller setzt er seine Versuche fort. Zunächst an Tieren, dann an Menschen. Sein Professor Dr. Hill wird darauf aufmerksam — nicht aus wissenschaftlicher Sorge, sondern weil er die Arbeit für sich haben will. Von da an gerät die Sache vollständig außer Kontrolle.
+
+### Entstehungsgeschichte
+
+Regie führte Stuart Gordon, das Drehbuch schrieb er gemeinsam mit Dennis Paoli und William J. Norris. Produzent war Brian Yuzna.
+
+Die Vorlage ist H. P. Lovecrafts Erzählung "Herbert West — Der Wiedererwecker" von 1922.
+
+Jeffrey Combs spielt Herbert West, Bruce Abbott den Dan Cain, David Gale den Dr. Carl Hill, Barbara Crampton die Megan Halsey.
+
+### Hinter den Kulissen
+
+Der Ton ist der eigentliche Einfall. Lovecrafts Erzählung ist ernst gemeint; der Film behandelt denselben Stoff als Komödie, ohne die Gewalt abzuschwächen. Er ist gleichzeitig ausgesprochen brutal und ausgesprochen lustig — eine Verbindung, die im Horrorkino selten gelingt.
+
+Jeffrey Combs' Darstellung trägt das: Herbert West ist kein Wahnsinniger, sondern ein Mann, der seine Arbeit für vollkommen vernünftig hält und sich über die Einwände anderer ernsthaft ärgert.
+
+In Deutschland kam der Film nie ins Kino. Ab dem 31. Oktober 1988 wurde er auf Videokassette vertrieben; von 1989 bis Juli 2013 war er indiziert.
+
+### Einordnung & Wirkung
+
+1986 erhielt der Film zwei Nominierungen für den Saturn Award.
+
+Roger Ebert lobte Rhythmus und Stil. Die Kritik hob durchgehend die Verbindung von Splattereffekten mit schwarzem Humor hervor.
+
+Er gilt seither als Kultfilm und als eine der Arbeiten, die dem Horrorgenre in den achtziger Jahren neuen Schwung gaben — und als bis heute maßgebliche Lovecraft-Verfilmung, obwohl sie mit dem Ton der Vorlage bricht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:150', locale: 'de-de',
+    text: `### Worum es geht
+
+In San Francisco ist ein Häftling ausgebrochen und begeht mit einem Komplizen eine Reihe von Verbrechen. Polizist Jack Cates hat dabei zwei Kollegen verloren und kommt nicht weiter.
+
+Also holt er sich Hilfe von jemandem, der die beiden kennt: Reggie Hammond, der selbst im Gefängnis sitzt. Cates setzt durch, dass Hammond für 48 Stunden freikommt. Die beiden können einander nicht ausstehen — und müssen es trotzdem miteinander aushalten.
+
+### Entstehungsgeschichte
+
+Regie führte Walter Hill; er war einer von vier Drehbuchautoren, gemeinsam mit Larry Gross, Steven E. de Souza und Roger Spottiswoode.
+
+Nick Nolte spielt den Polizisten Jack Cates, Eddie Murphy den Häftling Reggie Hammond — es war Murphys erste Filmrolle. James Remar spielt den Gegenspieler Albert Ganz.
+
+Produziert wurde der Film von Lawrence Gordon und Joel Silver. Die Produktionskosten betrugen etwa zwölf Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film hat eine Form begründet, die das Actionkino der folgenden Jahrzehnte bestimmen sollte: zwei Männer, die einander nicht ausgesucht haben, aufeinander angewiesen sind und sich unentwegt streiten.
+
+Die von der Kritik am häufigsten hervorgehobene Szene ist die, in der sich Eddie Murphys Figur als Polizist ausgibt und einen ganzen Raum allein durch Auftreten unter Kontrolle bringt.
+
+### Einordnung & Wirkung
+
+Bei zwölf Millionen Dollar Herstellungskosten spielte der Film über 78 Millionen ein.
+
+Das Lexikon des internationalen Films nannte ihn einen handwerklich perfekt umgesetzten Actionthriller.
+
+1990 folgte mit "Und wieder 48 Stunden" eine Fortsetzung, erneut unter Walter Hills Regie und mit denselben Hauptdarstellern.
+
+Seine eigentliche Bedeutung liegt in dem, was danach kam: Das Muster des ungleichen Polizistenpaars wurde in den achtziger und neunziger Jahren so oft wiederholt, dass es als eigenes Genre gilt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:341006', locale: 'de-de',
+    text: `### Worum es geht
+
+In einem Bürogebäude von Belko Industries in Bogotá arbeiten 80 Beschäftigte, die meisten aus den Vereinigten Staaten entsandt. Eines Morgens fahren die Stahlläden herunter, und eine Stimme aus den Lautsprechern erklärt die Regeln.
+
+Innerhalb von zwei Stunden sollen zwei Mitarbeiter getötet werden. Geschieht das nicht, sterben doppelt so viele — über Sprengkörper, die allen Beschäftigten unter dem Vorwand einer Ortungsmaßnahme in den Kopf eingesetzt wurden. Die Belegschaft teilt sich sofort: Die einen halten es für einen Scherz, die anderen fangen an zu rechnen.
+
+### Entstehungsgeschichte
+
+Regie führte Greg McLean, bekannt für "Wolf Creek". Das Drehbuch schrieb James Gunn, der den Film auch produzierte. Die Musik stammt von Tyler Bates, die Kamera von Luis David Sansans, den Schnitt besorgte Julia Wong.
+
+John Gallagher Jr. spielt Mike Milch, Tony Goldwyn den Vorgesetzten Barry Norris. Daneben sind Adria Arjona, John C. McGinley, Melonie Diaz und Michael Rooker zu sehen.
+
+Das Drehbuch entstand bereits 2007 — nach eigener Auskunft aus einem Traum von James Gunn.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab Juni 2015 an 30 Tagen in Kolumbien, in Bogotá, Cota und Madrid. Das Budget lag bei fünf Millionen Dollar.
+
+Die Anlage ist ein Gedankenexperiment: Was tun Menschen, wenn Töten die rechnerisch bessere Lösung ist? Der Film beantwortet das entlang der Betriebshierarchie — die Führungsebene entscheidet sich zuerst und am schnellsten.
+
+### Einordnung & Wirkung
+
+In den Vereinigten Staaten spielte der Film 10,2 Millionen Dollar ein.
+
+Die Kritik urteilte gemischt: 54 Prozent bei Rotten Tomatoes. Die New York Times warf dem Film Sadismus vor, der Guardian lobte die fachkundig choreografierte Gewalt. Das Lexikon des internationalen Films bemängelte das grausame Gemetzel.
+
+Die letzte Szene deutet an, dass solche Versuche weltweit stattfinden — womit der Film seine Ausgangsfrage über den einzelnen Fall hinaushebt.` },
+  {
+    bereich: 'titel', schluessel: 'series:37606', locale: 'de-de',
+    text: `### Worum es geht
+
+Gumball Watterson ist ein zwölfjähriger blauer Kater und lebt in der Kleinstadt Elmore. Er hat unentwegt Einfälle und setzt sie sofort um, meist mit erheblichen Folgen.
+
+Seine Familie besteht aus einem Goldfisch, der auf Beinen läuft, einer Mutter, die die Familie zusammenhält, und einem Vater, der nichts tut. Die Nachbarschaft ist entsprechend gemischt — jede Figur in Elmore hat ihre eigene Machart, vom Zeichentrick über Puppen bis zur Fotografie.
+
+### Entstehungsgeschichte
+
+Ben Bocquelet entwickelte die Serie, indem er Figuren zusammenbrachte, die aus früheren Entwürfen übrig geblieben waren.
+
+Produziert wurde sie von Cartoon Network in Zusammenarbeit mit Studios in Großbritannien, den Vereinigten Staaten, Deutschland und Irland; die Arbeit begann 2007.
+
+Die deutsche Fassung entstand bei TV+Synchron Berlin; Leonhard Rosemann spricht den Gumball, Sarah Kunze die Anais.
+
+Die internationale Aufstellung ist dabei ungewöhnlich: An einer einzelnen Serie arbeiteten Studios in vier Ländern gleichzeitig.
+
+### Hinter den Kulissen
+
+Die Serie verbindet unterschiedliche Animationstechniken — gezeichnete Figuren vor fotografierten Hintergründen, dazu Puppen, Computeranimation und Bildmaterial aus anderen Quellen.
+
+Daraus ergibt sich ihr Erkennungszeichen: Jede Figur ist in einer anderen Technik ausgeführt, und keine wirkt in diesem Nebeneinander fehl am Platz. Das ist nicht nur ein optischer Einfall, sondern erlaubt eine Erzählweise, die ständig die Ebene wechseln kann.
+
+### Einordnung & Wirkung
+
+Es entstanden 240 Folgen in sechs Hauptstaffeln zwischen 2011 und 2019, ergänzt durch Ableger wie "Darwins Jahrbuch" und "Die Gumball-Chroniken".
+
+Die Serie gewann zahlreiche Preise, darunter beim Animationsfestival von Annecy, einen BAFTA Children's Award und Annie Awards.
+
+Sie gehört damit zu den formal ehrgeizigsten Kinderserien ihrer Zeit — und zu den wenigen, die technische Vielfalt nicht als Spielerei einsetzen, sondern als Erzählmittel.
+
+Bemerkenswert bleibt die Entstehung: eine Serie, die aus übrig gebliebenen Figurenentwürfen zusammengesetzt wurde und gerade daraus ihr Erkennungszeichen gewann.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2119', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Autohändler will im NASCAR-Rennsport Fuß fassen und stellt dafür einen jungen Fahrer ein: Cole Trickle, außerordentlich talentiert und vollkommen undiszipliniert.
+
+Als Trainer holt er einen erfahrenen Mann, der ihm beibringt, was Trickle nicht kann — mitdenken, das Auto schonen, Rennen über die Distanz fahren. Dazu kommen die Auseinandersetzung mit einem Konkurrenten und eine Beziehung zur Neurochirurgin Claire Lewicki.
+
+### Entstehungsgeschichte
+
+Regie führte Tony Scott. Das Drehbuch schrieb Robert Towne gemeinsam mit Tom Cruise. Produziert wurde der Film von Jerry Bruckheimer und Don Simpson, die Musik stammt von Hans Zimmer.
+
+Tom Cruise spielt Cole Trickle, Nicole Kidman die Ärztin Claire Lewicki, Robert Duvall den Trainer Harry Hogge.
+
+Das Budget lag bei etwa 60 Millionen Dollar.
+
+Robert Duvall spielt den Trainer als eine Figur, die dem Film seinen Halt gibt: der erfahrene Mann, der weiß, dass Talent allein nicht reicht.
+
+### Hinter den Kulissen
+
+Gedreht wurde an tatsächlichen Austragungsorten des NASCAR-Rennzirkus.
+
+Die Aufstellung ist bemerkenswert: Regisseur, Produzenten und Hauptdarsteller kamen unmittelbar von einem außergewöhnlich erfolgreichen Film über Kampfpiloten — und wendeten dieselbe Machart auf den Motorsport an. Genau darauf zielte auch die Kritik.
+
+Robert Towne, der das Drehbuch gemeinsam mit Tom Cruise schrieb, gehörte zu den angesehensten Autoren Hollywoods — was den Anspruch erklärt, mit dem der Film antrat.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 165,9 Millionen Dollar ein.
+
+Die Kritik urteilte gemischt. Der wiederkehrende Vorwurf lautete, es handle sich um dieselbe Geschichte wie zuvor, nur auf Rädern; einzelne Darstellungen wurden dagegen gelobt.
+
+Bemerkenswert bleibt der Gegenstand: NASCAR ist ein Sport mit eigenen Regeln, eigener Kultur und einem festen Publikum — und der Film gehört zu den wenigen Großproduktionen, die ihn ernsthaft behandeln, statt ihn nur als Kulisse zu benutzen.` },
 ];
