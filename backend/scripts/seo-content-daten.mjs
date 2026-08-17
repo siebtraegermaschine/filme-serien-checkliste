@@ -23047,4 +23047,448 @@ Bei Rotten Tomatoes steht der Film bei 100 Prozent, allerdings auf Grundlage von
 Über den Verkauf für zu Hause kamen in den USA 5.263.980 Dollar zusammen.
 
 Die Szene nach dem Abspann leitet zum nächsten Teil "Justice League: War" über und begründet damit die durchgehende Erzählung der Reihe. Derselbe Comicstoff wurde 2023 als Realfilm "The Flash" verfilmt.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:1632', locale: 'de-de',
+    text: `### Worum es geht
+
+Mississippi, 1964. Drei Bürgerrechtler verschwinden nach einer Verkehrskontrolle. Zwei FBI-Beamte werden geschickt: Ward, jung und nach Vorschrift, und Anderson, ein früherer Sheriff aus der Gegend, der weiß, wie man dort redet.
+
+Sie treffen auf eine geschlossene Front. Die örtliche Polizei gehört selbst zum Ku-Klux-Klan, Zeugen schweigen, und je länger die Ermittlung dauert, desto mehr trifft es die schwarze Bevölkerung: Häuser brennen, Menschen werden verprügelt. Anderson beginnt schließlich, mit Mitteln zu arbeiten, die mit Recht nichts mehr zu tun haben.
+
+### Entstehungsgeschichte
+
+Der Fall ist real: James Chaney, Andrew Goodman und Michael Schwerner wurden am 21. Juni 1964 im Neshoba County getötet; ihre Leichen fanden sich am 4. August unter einem Erddamm. In einem Bundesverfahren wurden 1967 sieben Personen verurteilt, zu Strafen zwischen drei und zehn Jahren.
+
+Regie führte Alan Parker, es spielen Gene Hackman als Anderson und Willem Dafoe als Ward. Das Budget lag bei 15 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Kritik am Film kam nicht von der Filmkritik, sondern von Beteiligten der Bürgerrechtsbewegung. Der Vorwurf: Der Film macht weiße FBI-Beamte zu Helden einer Geschichte, in der schwarze Aktivisten die Arbeit und das Risiko trugen — und erfindet dazu erheblich hinzu.
+
+Coretta Scott King formulierte es so: Wie lange man noch warten müsse, bis Hollywood den Mut und die Redlichkeit aufbringe, die Geschichten der vielen Tausend schwarzen Männer, Frauen und Kinder zu erzählen, die für Gleichheit ihr Leben eingesetzt haben. Auch die Familien der Ermordeten und Julian Bond widersprachen der Darstellung.
+
+### Einordnung & Wirkung
+
+In den USA spielte der Film 34,6 Millionen Dollar ein.
+
+Es gab sieben Oscar-Nominierungen, darunter bester Film; ausgezeichnet wurde die Kamera. Roger Ebert setzte ihn auf Platz eins seiner Jahresliste 1988. Bei Rotten Tomatoes steht er bei 79 Prozent.
+
+Er gilt heute als Musterbeispiel für das, was später "White Saviour"-Erzählung genannt wurde — handwerklich stark und in seiner Perspektive genau deshalb umstritten.` },
+  {
+    bereich: 'titel', schluessel: 'series:30991', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Jahr 2071 ist die Erde nach einem Unfall mit einem Hyperraumtor weitgehend unbewohnbar; die Menschheit lebt auf Mars, Venus und den Monden. Wer Geld braucht, jagt Kopfgelder.
+
+An Bord des Raumschiffs Bebop tun das Spike Spiegel, ein ehemaliges Mitglied des Roten Drachen, der Ex-Polizist Jet Black, die spielsüchtige Faye Valentine, das Kind Ed und der Corgi Ein. Jede Folge ist ein eigener kleiner Film — mal Western, mal Kriminalfilm, mal Komödie —, und darunter läuft Spikes Vergangenheit weiter, die ihn irgendwann einholt.
+
+### Entstehungsgeschichte
+
+Regie führte Shinichirō Watanabe beim Studio Sunrise. Hinter dem Sammelnamen "Hajime Yatate" standen unter anderem die Autorin Keiko Nobumoto, der Figurenzeichner Toshihiro Kawamoto und der Technikgestalter Kimitoshi Yamane.
+
+Watanabe hat die Mischung beziffert: 80 Prozent ernste Geschichte, 20 Prozent Humor. Jede der 26 Folgen — im Vorspann "Session" genannt — sollte für sich als kleiner Film funktionieren.
+
+### Hinter den Kulissen
+
+Die Musik von Yōko Kanno ist gleichberechtigter Teil der Serie: Jazz, Blues, Western und Oper, gespielt von der eigens dafür zusammengestellten Band Seatbelts. Watanabe hat ihre Arbeitsweise beschrieben — sie lasse sich inspirieren und komponiere vollkommen eigenständig.
+
+In Japan lief die Serie zunächst ab April 1998 bei TV Tokyo, danach von Oktober 1998 bis April 1999 vollständig bei Wowow. In den USA startete sie am 2. September 2001 bei Adult Swim; die Folgen 6, 8 und 22 wurden zunächst ausgelassen, weil ihr Inhalt kurz nach dem 11. September als unpassend galt.
+
+### Einordnung & Wirkung
+
+Die Serie wurde nahezu einhellig gefeiert und gilt bis heute als eine der besten Anime-Produktionen überhaupt.
+
+Ihre größte Wirkung liegt darin, dass sie für viele westliche Zuschauer der frühen zweitausender Jahre der erste Anime war — die Serie, über die man zum Genre kam.
+
+Netflix produzierte 2021 eine Realverfilmung, die nach einer Staffel eingestellt wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:60243', locale: 'de-de',
+    text: `### Worum es geht
+
+Simin will mit Mann und Tochter aus dem Iran ausreisen. Nader will bleiben, weil sein Vater an Alzheimer erkrankt ist und Pflege braucht. Beide bestehen darauf, und vor Gericht wird die Trennung eingereicht.
+
+Nader stellt daraufhin Razieh als Pflegekraft ein — eine tief gläubige Frau aus einfachen Verhältnissen, die die Arbeit vor ihrem Mann verheimlicht und schwanger ist. Als Nader sie eines Tages aus der Wohnung drängt und sie kurz darauf ihr Kind verliert, steht die Frage im Raum, ob er von der Schwangerschaft wusste. Der Film hat keinen Schuldigen, sondern lauter Menschen, die aus je eigenen Gründen nicht die ganze Wahrheit sagen.
+
+### Entstehungsgeschichte
+
+Asghar Farhadi schrieb, produzierte und inszenierte den Film. Das Budget lag bei rund 800.000 Dollar.
+
+Angelegt ist er als doppelte Trennung: die der Eheleute und die zwischen zwei Gesellschaftsschichten, die im selben Land leben und einander nicht verstehen — die gebildete Mittelschicht Teherans und die religiös geprägte Unterschicht.
+
+### Hinter den Kulissen
+
+Der Film kommt fast ohne Musik aus und spielt überwiegend in Wohnungen, Treppenhäusern und Amtsstuben. Was auf dem Spiel steht, wird nie ausgesprochen, sondern in Verfahren verhandelt: Aussagen, Gegenaussagen, Eide auf den Koran.
+
+Bemerkenswert ist der Umgang mit dem Publikum: Der Film hält Informationen nicht zurück, um zu überraschen, sondern gibt sie so, wie die Figuren sie haben — jeder weiß etwas anderes, und niemand weiß alles.
+
+### Einordnung & Wirkung
+
+Bei den Filmfestspielen in Berlin gewann er 2011 den Goldenen Bären, dazu Silberne Bären für die beiden Darstellerensembles.
+
+2012 gewann er den Oscar als bester fremdsprachiger Film — der erste Oscar für den Iran überhaupt. Hinzu kamen der Golden Globe und ein César.
+
+Die Kritik reagierte einhellig: 99 Prozent bei Rotten Tomatoes, 95 von 100 bei Metacritic. Bei 800.000 Dollar Herstellungskosten spielte er weltweit 24,4 Millionen ein.` },
+  {
+    bereich: 'titel', schluessel: 'movie:3509', locale: 'de-de',
+    text: `### Worum es geht
+
+In einer nahen Zukunft ist der überwiegende Teil der Bevölkerung von der Droge Substanz T abhängig. Bob Arctor arbeitet verdeckt für die Polizei und soll seinen eigenen Bekanntenkreis ausspähen — auch sich selbst, denn seine Vorgesetzten kennen seine Identität nicht.
+
+Im Dienst trägt er einen Anzug, der ständig fremde Gesichter und Körper über ihn blendet, sodass niemand ihn erkennt. Gleichzeitig zerstört die Droge die Verbindung zwischen seinen Gehirnhälften: Die eine beobachtet, was die andere tut, ohne zu begreifen, dass es dieselbe Person ist.
+
+### Entstehungsgeschichte
+
+Grundlage ist Philip K. Dicks Roman von 1977, der auf dessen eigenen Erfahrungen im Drogenmilieu beruht. Richard Linklater schrieb das Drehbuch und führte Regie.
+
+Es spielen Keanu Reeves als Arctor, Robert Downey Jr. als Barris, Woody Harrelson als Luckman und Winona Ryder als Donna.
+
+### Hinter den Kulissen
+
+Der Film wurde regulär digital gedreht und anschließend rotoskopiert: Zeichner zeichneten Bild für Bild über die Aufnahmen. Das Ergebnis behält die Darstellerleistungen und macht zugleich die schwankende Wahrnehmung sichtbar — Konturen zittern, Farben verschieben sich.
+
+Die Dreharbeiten dauerten sechs Wochen ab Mai 2004. Die Nachbearbeitung zog sich über achtzehn Monate: Die Abstimmung zwischen den Zeichnern erwies sich als schwierig, es kam zu Verzögerungen, und das Budget stieg von 6,7 auf 8,7 Millionen Dollar.
+
+### Einordnung & Wirkung
+
+Der Film spielte 7,7 Millionen Dollar ein und blieb damit unter seinen Kosten.
+
+Die Kritik reagierte überwiegend positiv: 68 Prozent bei Rotten Tomatoes, mit besonderem Lob für Robert Downey Jr. und für die Treue zur Vorlage.
+
+Er gilt als eine der werkgetreuesten Dick-Verfilmungen überhaupt — gerade weil er auf die Actionhandlung verzichtet, die "Blade Runner", "Total Recall" und "Minority Report" ihren Vorlagen hinzugefügt haben.` },
+  {
+    bereich: 'titel', schluessel: 'series:60573', locale: 'de-de',
+    text: `### Worum es geht
+
+Richard Hendricks programmiert bei einem Großkonzern und bastelt nebenbei an einer Musiksuchmaschine. Deren eigentlicher Wert liegt woanders: im Kompressionsverfahren, das er dafür geschrieben hat und das alles Bestehende schlägt.
+
+Von da an gehört ihm eine Firma, die er nicht führen kann. Gemeinsam mit vier ähnlich unbeholfenen Programmierern arbeitet Richard in einer Gründer-Wohngemeinschaft an Pied Piper — gegen Wagniskapitalgeber, Patentklagen, feindliche Übernahmen und einen Konzernchef, der buddhistische Weisheiten zitiert, während er Leute ruiniert.
+
+### Entstehungsgeschichte
+
+Erdacht wurde die Serie von Mike Judge, John Altschuler und Dave Krinsky für HBO. Sie lief vom 6. April 2014 bis zum 8. Dezember 2019 über sechs Staffeln mit 53 Folgen.
+
+Judge schöpfte aus eigener Erfahrung: 1987 arbeitete er als Programmierer bei Parallax Graphics, einem Start-up mit vierzig Leuten. Die dortige Firmenkultur befremdete ihn so sehr, dass er nach weniger als drei Monaten ging.
+
+### Hinter den Kulissen
+
+Die Serie legte Wert auf fachliche Genauigkeit. Vorbild für Pied Piper war MaidSafe, eine reale Firma für dezentrale Netztechnik; mehrere ihrer Leute berieten die Produktion. Der Stanford-Professor Tsachy Weissman entwickelte auf Bitten der Macher eigens eine Maßzahl für Kompressionsgüte — den "Weissman-Score", der seither auch außerhalb der Serie zitiert wird.
+
+Christopher Evan Welch, der den Investor Peter Gregory spielte, starb im Dezember 2013 an Lungenkrebs, nachdem er Szenen für die ersten fünf Folgen abgedreht hatte. Die Rolle wurde nicht neu besetzt; Judge nannte sie unersetzlich.
+
+T. J. Miller verließ die Serie nach der vierten Staffel im Mai 2017. Der Abschied wurde als einvernehmlich dargestellt; Miller gab an, ihm sei eine auf drei von zehn Folgen reduzierte Rolle angeboten worden, die er abgelehnt habe.
+
+### Einordnung & Wirkung
+
+Die Serie erhielt fünf Emmy-Nominierungen in Folge als beste Comedyserie und durchgehend starke Kritiken.
+
+Ihre Wirkung reicht in die Branche hinein, die sie beschreibt: Sie gilt in Teilen des Silicon Valley selbst als treffendste Darstellung des dortigen Betriebs — was von Beteiligten regelmäßig bestätigt und zugleich beklagt wird.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4550', locale: 'de-de',
+    text: `### Worum es geht
+
+Lee Geum-ja kommt nach dreizehn Jahren aus dem Gefängnis. Sie saß für die Entführung und Ermordung eines fünfjährigen Jungen — eine Tat, die sie gestanden hat, aber nicht begangen.
+
+Der wahre Täter ist ihr früherer Lehrer, Herr Baek, der ihre eigene neugeborene Tochter in seine Gewalt gebracht hatte, um das Geständnis zu erzwingen. Im Gefängnis galt Geum-ja als engelsgleich und hat sich systematisch Gefälligkeiten erarbeitet. Draußen ruft sie diese ab. Was sie mit Baek vorhat, ändert sich, als sie erfährt, dass er nicht nur ein Kind getötet hat.
+
+### Entstehungsgeschichte
+
+Der Film ist der dritte Teil von Park Chan-wooks Rache-Trilogie nach "Sympathy for Mr. Vengeance" (2002) und "Oldboy" (2003). Die drei Filme teilen keine Figuren, sondern nur das Thema.
+
+Lee Young-ae spielt Geum-ja. Sie war in Südkorea vor allem aus einer beliebten Fernsehserie bekannt und spielt hier bewusst gegen dieses Bild.
+
+### Hinter den Kulissen
+
+Es existieren zwei Fassungen. In der sogenannten "Fade to Black and White"-Version verlieren die Bilder im Verlauf des Films allmählich ihre Farbe, bis der Schluss vollständig schwarzweiß ist — ein Verfahren, das die Aushöhlung der Hauptfigur durch ihre eigene Rache sichtbar macht.
+
+Der Aufbau ist ungewöhnlich: Der Film erzählt zunächst über Rückblenden aus der Sicht mehrerer Mitgefangener, sodass Geum-ja lange von außen beschrieben wird, bevor man ihr näherkommt.
+
+### Einordnung & Wirkung
+
+Der Film startete am 29. Juli 2005 in Südkorea und spielte weltweit 23,8 Millionen Dollar ein.
+
+Bei den Blue Dragon Film Awards gewann er als bester Film. Die Kritik lag bei 76 Prozent auf Rotten Tomatoes, mit dem Befund, er sei stilistisch auffällig und äußerst gewalttätig.
+
+Gemeinsam mit den beiden anderen Teilen hat er wesentlich dazu beigetragen, dass das südkoreanische Kino ab Mitte der zweitausender Jahre international beachtet wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1498', locale: 'de-de',
+    text: `### Worum es geht
+
+In der Kanalisation von New York leben vier Schildkröten, die durch eine radioaktive Substanz zu menschengroßen Wesen mutiert sind, dazu die Ratte Splinter, die ihnen Ninjutsu beibringt und sie nach Renaissancemalern benannt hat.
+
+Über der Erde häufen sich Einbrüche, begangen von Jugendlichen. Dahinter steht der Foot-Clan unter Führung des Shredder, der entlaufene Jungen aufnimmt, ihnen ein Zuhause bietet und sie zu Dieben ausbildet. Gemeinsam mit der Reporterin April O'Neil und dem Eishockeyspieler Casey Jones stellen sich die Schildkröten dagegen.
+
+### Entstehungsgeschichte
+
+Vorlage sind die Comics von Kevin Eastman und Peter Laird, die ursprünglich als Parodie auf düstere Superheldenhefte entstanden waren.
+
+Die großen Studios lehnten ab: Sie hielten es trotz des Erfolgs der Zeichentrickserie und der Spielzeugreihe für zu riskant. Der Film entstand deshalb unabhängig, mit einem Budget von 13,5 Millionen Dollar. Regie führte Steve Barron.
+
+### Hinter den Kulissen
+
+Die Schildkröten sind Kostüme von Jim Henson's Creature Shop, mit damals neuartiger Animatronik in den Masken: Techniker steuerten die Mimik über Joysticks, während Darsteller darin agierten.
+
+Für Jim Henson war es eines der letzten Vorhaben — er starb kurz nach der Premiere.
+
+Der Ton ist deutlich härter als der der Zeichentrickserie und näher an den Comics: Es wird gekämpft, jemand stirbt, und der Film behandelt Jugendliche, die von zu Hause weglaufen, als ernstes Thema.
+
+### Einordnung & Wirkung
+
+Der Film startete am 30. März 1990 und spielte weltweit 202 Millionen Dollar ein — der bis dahin erfolgreichste unabhängig produzierte Film überhaupt und der neunterfolgreichste des Jahres.
+
+Die Kritik urteilte gemischt. Roger Ebert vergab zweieinhalb von vier Sternen und nannte ihn den bestmöglichen Film über die Turtles. Kritisiert wurde die Darstellung der Gegenspieler, in der einzelne Rezensenten rassistische Untertöne sahen.
+
+1991 und 1993 folgten zwei Fortsetzungen, beide schwächer aufgenommen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:251516', locale: 'de-de',
+    text: `### Worum es geht
+
+Miami in den achtziger Jahren. Der Polizist Kung Fury wird vom Blitz getroffen und im selben Moment von einer Kobra gebissen — womit er zum auserwählten Kung-Fu-Meister wird.
+
+Als sein Partner stirbt, will er den Verantwortlichen zur Rechenschaft ziehen: Adolf Hitler, in diesem Film "Kung Führer" genannt, der über ein Telefon aus der Vergangenheit heraus in die Gegenwart schießt. Kung Fury lässt sich per Computerhacker in die Zeit zurückschicken, landet allerdings in der Wikingerzeit und muss von dort aus weiter. Der Film ist eine durchgehende Parodie auf Actionfilme, Videospielgrafik und abgenutzte VHS-Kassetten.
+
+### Entstehungsgeschichte
+
+David Sandberg — der schwedische, nicht der Regisseur von "Lights Out" — schrieb, inszenierte und spielt die Hauptrolle.
+
+Finanziert wurde der Film Anfang 2014 über Kickstarter: 630.019 Dollar von 17.713 Unterstützern. Das Ziel von 200.000 Dollar wurde damit weit übertroffen, die Marke von einer Million für einen abendfüllenden Film jedoch verfehlt.
+
+### Hinter den Kulissen
+
+Herausgekommen ist deshalb ein Mittellangfilm von 31 Minuten. Nahezu alles außer den Darstellern ist am Rechner entstanden.
+
+Die Machart ahmt Videokassetten der achtziger Jahre nach: Bildfehler, Farbstiche, Aussetzer im Ton. Das ist kein Beiwerk, sondern die eigentliche Pointe — der Film gibt vor, ein wiedergefundenes Fundstück zu sein.
+
+### Einordnung & Wirkung
+
+Die Premiere fand 2015 bei den Filmfestspielen in Cannes statt. Zeitgleich erschien der Film am 28. Mai 2015 kostenlos auf YouTube, bei Steam und im Fernsehen — binnen weniger Tage kamen über 10 Millionen Abrufe zusammen.
+
+Die Kritik reagierte begeistert; ein Rezensent sprach von einem dreißigminütigen, pausenlosen Ansturm einiger der erstaunlichsten Sichtwitze, die je zusammengetragen wurden. Ausgezeichnet wurde er unter anderem als bester Film beim Filmfestival von Mexiko-Stadt und als bester Kurzfilm bei den Guldbagge Awards.
+
+Eine abendfüllende Fortsetzung wurde angekündigt, verzögerte sich durch Streit mit Geldgebern und ist bis heute nicht erschienen.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:109410', locale: 'de-de',
+    text: `### Worum es geht
+
+1945 sucht Branch Rickey, Geschäftsführer der Brooklyn Dodgers, einen schwarzen Spieler für sein Team — zu einer Zeit, in der die amerikanische Baseballliga strikt getrennt ist. Er entscheidet sich für Jackie Robinson und stellt eine Bedingung: Robinson darf sich nicht wehren.
+
+Was folgt, ist die Saison 1947. Robinson wird von gegnerischen Spielern, Trainern und Zuschauern beschimpft, mit dem Ball beworfen und von eigenen Mannschaftskameraden gemieden, die eine Unterschriftenliste gegen ihn aufsetzen. Der Film handelt weniger vom Sport als von der Zumutung, unter permanenter Demütigung ruhig bleiben zu müssen, damit sich etwas ändert.
+
+### Entstehungsgeschichte
+
+Brian Helgeland schrieb das Drehbuch und führte Regie. Produziert wurde der Film von Thomas Tull für Legendary Pictures, verliehen von Warner Bros. Das Budget lag zwischen 31 und 40 Millionen Dollar.
+
+Chadwick Boseman spielt Robinson — es war seine erste große Kinorolle, sieben Jahre vor seinem Tod. Harrison Ford spielt Branch Rickey, Nicole Beharie Robinsons Frau Rachel, Christopher Meloni den Trainer Leo Durocher.
+
+### Hinter den Kulissen
+
+Der Titel ist Robinsons Rückennummer. Sie ist die einzige Nummer, die in der gesamten Major League Baseball gesperrt ist — kein Spieler in keinem Team trägt sie noch.
+
+Der Film kam drei Tage vor dem Jackie Robinson Day am 15. April in die Kinos, an dem alle Spieler sämtlicher Teams die 42 tragen.
+
+### Einordnung & Wirkung
+
+Der Start brachte rund 27,3 Millionen Dollar — ein Rekord für einen Baseballfilm. Weltweit kamen 97,5 Millionen zusammen, davon 95 Millionen in den USA.
+
+Das Publikum vergab bei CinemaScore ein A plus, die Kritik lag bei 81 Prozent auf Rotten Tomatoes. Gelobt wurden Bosemans überzeugende Darstellung des Sportlers und Fords stilisierter Auftritt; einzelne Stimmen fanden den Umgang mit der Geschichte zu vorsichtig.
+
+Für Chadwick Boseman war es der Durchbruch — es folgten Rollen als James Brown, als Thurgood Marshall und schließlich als Black Panther.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10040', locale: 'de-de',
+    text: `### Worum es geht
+
+Gracie Hart ist nach ihrem Einsatz bei der Schönheitskonkurrenz aus dem letzten Film eine Berühmtheit — und damit als verdeckte Ermittlerin unbrauchbar. Das FBI macht sie zum Aushängeschild: Sie gibt Interviews, signiert Bücher und tritt in Fernsehsendungen auf.
+
+Als in Las Vegas die Siegerin Cheryl Fraser und der Moderator Stan Fields entführt werden, will Gracie selbst ermitteln. Zugeteilt bekommt sie Sam Fuller, eine Kollegin, die von ihr ebenso wenig hält wie umgekehrt. Der Film verlegt damit die Anlage des ersten Teils von der Bühne in die Unterhaltungsindustrie selbst.
+
+### Entstehungsgeschichte
+
+Sandra Bullock spielt erneut Gracie Hart und trat diesmal zusätzlich als Produzentin auf. Regie führte John Pasquin, das Drehbuch schrieb Marc Lawrence, der bereits den ersten Teil verfasst hatte.
+
+Das Budget lag bei 45 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab dem 12. April 2004 über fünf Wochen in Nevada, dazu in Los Angeles und New York. Wichtige Schauplätze waren die Hotels Treasure Island und The Venetian.
+
+Benjamin Bratt, der im ersten Teil den Partner und Liebhaber spielte, kehrte nicht zurück — die Figur wird zu Beginn abgeschrieben, was den Film seiner wichtigsten Nebenhandlung beraubt.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 24. März 2005 und spielte weltweit 101,3 Millionen Dollar ein.
+
+Die Kritik lehnte ihn scharf ab: 15 Prozent bei Rotten Tomatoes mit dem Befund, Sandra Bullock sei so gewinnend wie eh und je, der Film selbst aber nicht preisverdächtig; 34 von 100 bei Metacritic. Roger Ebert nannte ihn doppelt überflüssig. Das Publikum vergab bei CinemaScore ein B.
+
+Er steht damit für ein wiederkehrendes Muster: eine Fortsetzung, die die Ausgangslage ihres Vorgängers auflöst, statt sie fortzuführen — und damit genau das verliert, was funktioniert hatte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:111969', locale: 'de-de',
+    text: `### Worum es geht
+
+William Borgens ist ein erfolgreicher Schriftsteller, der seit drei Jahren nichts mehr geschrieben hat. Seine Frau hat ihn für einen anderen verlassen; er beobachtet nachts ihr Haus und deckt an Thanksgiving weiterhin einen Platz für sie.
+
+Seine Tochter Samantha veröffentlicht mit neunzehn ihren ersten Roman und hält Liebe für eine Krankheit. Sein Sohn Rusty schreibt Horrorgeschichten und verliebt sich in eine Mitschülerin mit Drogenproblem. Der Vater hat beiden beigebracht, Tagebuch zu führen und alles zu verarbeiten — und der Film handelt davon, wie schlecht das funktioniert, wenn man selbst betroffen ist.
+
+### Entstehungsgeschichte
+
+Josh Boone schrieb und inszenierte den Film; es war seine erste Kinoarbeit. Zwei Jahre später drehte er "Das Schicksal ist ein mieser Verräter".
+
+Das Vorhaben hieß zunächst "Writers".
+
+### Hinter den Kulissen
+
+Gedreht wurde von März bis April 2012 in Wilmington, North Carolina, überwiegend in der Gegend von Wrightsville Beach.
+
+Es spielen Greg Kinnear als Vater, Jennifer Connelly als seine Frau, Lily Collins und Nat Wolff als die Kinder sowie Logan Lerman.
+
+Stephen King ist mit einem kurzen Sprechauftritt zu hören — er telefoniert mit dem jungen Rusty, dessen Vorbild er ist. Boone hatte King als Jugendlicher angeschrieben und stand später mit ihm in Kontakt.
+
+### Einordnung & Wirkung
+
+Der Film kam am 5. Juli 2013 in die Kinos und spielte 977.671 Dollar ein.
+
+Die Kritik urteilte gemischt: 57 Prozent bei Rotten Tomatoes, 49 von 100 bei Metacritic.
+
+Beim Publikum hat er über die Jahre deutlich zugelegt — er gehört zu jenen kleinen Filmen, die im Kino kaum wahrgenommen wurden und über Streaming und Empfehlungen ein Publikum fanden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:429415', locale: 'de-de',
+    text: `### Worum es geht
+
+Peter arbeitet als Ingenieur in einer Fabrik und träumt jede Nacht dasselbe: Über der Stadt stehen Schiffe, Menschen sterben, seine Familie kommt um. Die Träume kosten ihn den Schlaf, die Arbeit und beinahe die Ehe.
+
+Dann treffen die Schiffe tatsächlich ein. Peter bringt Frau und Töchter in den Keller der Fabrik — und stellt dabei fest, dass er Dinge kann, die er nicht können sollte. Was die Angreifer wollen und wer eigentlich wen überfallen hat, dreht der Film in der zweiten Hälfte vollständig um.
+
+### Entstehungsgeschichte
+
+Regie führte Ben Young. Der Film war ursprünglich als Kinofilm bei Universal Pictures vorgesehen, wurde aus dem Programm genommen und erschien am 27. Juli 2018 bei Netflix.
+
+Michael Peña spielt Peter, Lizzy Caplan seine Frau Alice; daneben sind Mike Colter und Israel Broussard zu sehen. Das Budget lag bei 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde über vierzig Tage in Belgrad.
+
+Die Wendung ist der Kern des Films: Was wie eine außerirdische Invasion aussieht, ist ein Angriff von Menschen. Peter und seine Familie sind künstliche Wesen, die ihre Erinnerungen gelöscht haben, um ein menschliches Leben führen zu können — nach einem Krieg, den die Synthetischen gewonnen hatten. Die Menschen leben seit fünfzig Jahren auf dem Mars und kommen nun zurück.
+
+Erzählerisch ist das riskant: Die erste Hälfte funktioniert nur, wenn man die Auflösung nicht kennt, und die zweite muss das Vorherige neu begründen.
+
+### Einordnung & Wirkung
+
+Die Kritik lehnte den Film überwiegend ab: 32 Prozent bei Rotten Tomatoes mit dem Befund, es gebe reizvolle Ideen, aber eine unklare Handlung und ein ermüdendes Erzähltempo; 40 von 100 bei Metacritic.
+
+Bemerkenswert bleibt die Umkehrung selbst — die Frage, wer in einem Invasionsfilm eigentlich die Eindringlinge sind, wird selten so wörtlich gestellt.
+
+Der Fall steht zudem für eine Praxis jener Jahre: Ein Studio verkauft einen fertigen Film, an den es nicht glaubt, an einen Streamingdienst.` },
+  {
+    bereich: 'titel', schluessel: 'movie:243683', locale: 'de-de',
+    text: `### Worum es geht
+
+Sean Asa ist mit seiner Truppe von Miami nach Los Angeles gezogen, um dort vom Tanzen leben zu können. Nach Monaten aus Absagen und Werbeaufträgen, die niemand will, gibt die Gruppe auf und fährt nach Hause — nur Sean bleibt.
+
+Er baut eine neue Truppe auf und holt dafür Tänzer aus den früheren Filmen zusammen. Ziel ist "The Vortex", ein Wettbewerb in Las Vegas, dessen Sieger einen Dreijahresvertrag bekommt. Gegner ist ausgerechnet seine alte Truppe unter neuer Führung.
+
+### Entstehungsgeschichte
+
+Es ist der fünfte Teil der "Step Up"-Reihe nach "Step Up Revolution" von 2012. Trish Sie führte Regie; es war ihre erste Kinoarbeit. Das Budget lag bei 35 Millionen Dollar, verliehen wurde der Film von Summit Entertainment.
+
+Ryan Guzman spielt Sean; aus früheren Teilen kehren Briana Evigan, Adam Sevani und Alyson Stoner zurück.
+
+### Hinter den Kulissen
+
+Der Film ist als Zusammenführung angelegt: Er holt Figuren aus mehreren Vorgängern in eine gemeinsame Handlung, was ihn für Neueinsteiger schwerer zugänglich macht und für die Anhängerschaft der Reihe zum eigentlichen Angebot.
+
+Die Choreographien nutzen den Schauplatz Las Vegas ausgiebig — die Abschlussnummer spielt in einer Kulisse aus beweglichen Elementen, die während des Tanzes umgebaut wird.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 8. August 2014 und spielte weltweit 86,1 Millionen Dollar ein — der schwächste Wert der Reihe.
+
+Die Kritik urteilte gemischt: 43 Prozent bei Rotten Tomatoes, mit dem spöttischen Befund, die Choreographie sei geschliffen, werde aber zu oft von schwachen Handlungsversuchen unterbrochen; der Film wäre unterhaltsamer, wenn man sämtliche Dialoge herausschneiden würde.
+
+Er markiert das Ende der Reihe im Kino; fortgesetzt wurde sie danach nur noch als Fernsehserie.` },
+  {
+    bereich: 'titel', schluessel: 'movie:447362', locale: 'de-de',
+    text: `### Worum es geht
+
+Daryn ist Schüler und hat einen Plan: Harvard, Wirtschaft, die Firma des Vaters. Auf einem Konzert lernt er Isabelle kennen, die ganz anders lebt — und die ihm bald eröffnet, dass sie unheilbar an Krebs erkrankt ist und noch etwa ein Jahr hat.
+
+Daryn beschließt, dieses Jahr so zu gestalten, dass es ein ganzes Leben enthält: erstes Date, Studienabschluss, Hochzeit, alles im Zeitraffer. Sein Vater Xavier ist dagegen und sieht die Zukunft seines Sohnes zerrinnen. Nach Isabelles Tod versöhnen sich beide, und Daryn geht nach New York, um Musik zu machen.
+
+### Entstehungsgeschichte
+
+Regie führte der polnische Regisseur Mitja Okorn. Jaden Smith spielt Daryn, Cara Delevingne spielt Isabelle; Cuba Gooding Jr. und Nia Long spielen die Eltern.
+
+Will Smith und Jada Pinkett Smith waren über ihre Firma Overbrook Entertainment als ausführende Produzenten beteiligt. Das Budget lag bei 10 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab April 2017 in Toronto. Zwischen Drehende und Veröffentlichung lagen mehr als drei Jahre — ein deutliches Zeichen dafür, dass der Film keinen Verleih fand.
+
+Er erschien schließlich am 27. November 2020 ausschließlich bei Amazon Prime Video.
+
+Die Anlage folgt einem Muster, das mit "Ein ganzes halbes Jahr" und "Das Schicksal ist ein mieser Verräter" in jenen Jahren verbreitet war: eine junge Liebe mit festgelegtem Ablaufdatum.
+
+### Einordnung & Wirkung
+
+Wirtschaftlich blieb der Film weit hinter allem zurück: Bei 10 Millionen Dollar Herstellungskosten kamen 43.862 Dollar zusammen.
+
+Er ist damit vor allem ein Beispiel dafür, was mit Produktionen geschieht, die zwischen Kino und Streaming keinen Platz finden — abgedreht, dann jahrelang liegengeblieben und schließlich ohne Werbung veröffentlicht.
+
+Für Jaden Smith blieb es einer der wenigen Hauptrollen in einem Spielfilm; er verlegte sich anschließend stärker auf Musik.` },
+  {
+    bereich: 'titel', schluessel: 'movie:262551', locale: 'de-de',
+    text: `### Worum es geht
+
+Franck übernimmt einen Babysitter-Auftrag — an einem Abend, an dem er eigentlich seinen Geburtstag feiern wollte. Seine Freunde lassen ihn nicht in Ruhe, und aus dem Abend wird etwas anderes.
+
+Was in dieser Nacht geschehen ist, erschließt sich nur über eine Kamera, die mitlief. Genau darin liegt die Machart des Films: Alles, was gezeigt wird, stammt aus dieser Aufnahme. Das Verfahren, im Kino als "Found Footage" bekannt und aus dem Horrorfilm stammend, wird hier auf die Komödie übertragen.
+
+### Entstehungsgeschichte
+
+Regie führten Nicolas Benamou und Philippe Lacheau gemeinsam; es war Lacheaus erste Kinoarbeit. Das Drehbuch schrieben beide zusammen mit Julien Arruti und Pierre Lacheau.
+
+Philippe Lacheau spielt zugleich die Hauptrolle Franck, Alice David spielt Sonia, Vincent Desagnat spielt Ernest. Der Film erschien am 16. April 2014.
+
+### Hinter den Kulissen
+
+Das Budget lag bei 3,4 Millionen Dollar — für eine Kinoproduktion sehr wenig, was die gewählte Machart teilweise erklärt: Wer aus der Hand filmt, braucht keine aufwendige Ausleuchtung und keine Kamerafahrten.
+
+Zugleich ist der Kunstgriff eine Beschränkung. Weil die Kamera immer von einer Figur gehalten werden muss, verlangt jede Szene eine Begründung dafür, warum überhaupt gefilmt wird.
+
+### Einordnung & Wirkung
+
+Bei 3,4 Millionen Dollar Herstellungskosten spielte der Film 20,3 Millionen Dollar ein — für eine französische Komödie ein deutlicher Erfolg, der Lacheau als Regisseur etablierte.
+
+Im Dezember 2015 folgte die Fortsetzung "Babysitting 2". 2016 entstand mit "I babysitter" zudem eine italienische Neuverfilmung, die am 19. Oktober jenes Jahres erschien.
+
+Der Film steht damit für eine Eigenheit des französischen Kinos: eine Komödientradition, die im eigenen Land große Zuschauerzahlen erreicht und außerhalb kaum wahrgenommen wird — anders als das französische Autorenkino, das international läuft.` },
+  {
+    bereich: 'titel', schluessel: 'series:89641', locale: 'de-de',
+    text: `### Worum es geht
+
+In Südkorea ist eine Anwendung allgegenwärtig: Love Alarm meldet, wenn sich jemand im Umkreis von zehn Metern in einen verliebt hat. Wer sie installiert, weiß, ob er begehrt wird — und wer keine Meldung bekommt, weiß das auch.
+
+Im Mittelpunkt steht die Schülerin Kim Jo-jo, um die sich eine Dreiecksbeziehung entwickelt: Hwang Sun-oh und dessen Freund Lee Hye-yeong interessieren sich beide für sie. Die Anwendung macht daraus keine Erleichterung, sondern ein Problem — denn was sie anzeigt, lässt sich nicht zurücknehmen, und was sie nicht anzeigt, ebenso wenig.
+
+### Entstehungsgeschichte
+
+Grundlage ist ein Webtoon von Chon Kye-young, ursprünglich beim Anbieter Daum erschienen. Verantwortlich für die Serie war Yu Bo-ra.
+
+Es ist die erste koreanische Serie, deren Übernahme durch Netflix bestätigt wurde — der Beginn jener gezielten Produktion in Südkorea, die wenige Jahre später mit "Squid Game" ihren bekanntesten Ausdruck fand.
+
+### Hinter den Kulissen
+
+Kim So-hyun spielt Jo-jo, Song Kang spielt Hwang Sun-oh und Jung Ga-ram spielt Lee Hye-yeong.
+
+Die erste Staffel erschien am 22. August 2019 mit acht Folgen, die zweite am 12. März 2021 mit sechs — insgesamt also nur vierzehn Episoden.
+
+Der Reiz der Ausgangslage liegt darin, dass sie eine reale Entwicklung zuspitzt: eine Anwendung, die Gefühle messbar macht und damit beseitigt, was Zuneigung sonst ausmacht — Andeutung, Unsicherheit, die Möglichkeit, nichts zu sagen.
+
+### Einordnung & Wirkung
+
+Die erste Staffel lag 2019 auf Platz acht der in Südkorea beliebtesten Netflix-Serien; 2021 war die Serie weltweit die sechstmeistgesehene koreanische Produktion des Anbieters.
+
+Die zweite Staffel wurde deutlich schlechter aufgenommen — bemängelt wurde vor allem, dass sie gegenüber der ersten an erzählerischer Tiefe verliere.
+
+Ihre Bedeutung liegt damit weniger im Ergebnis als im Zeitpunkt: Sie gehört zu den Produktionen, mit denen koreanische Serien für ein weltweites Publikum verfügbar wurden — ein Vorgang, der das Fernsehen der folgenden Jahre erheblich verändert hat.` },
 ];
