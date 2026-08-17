@@ -26133,4 +26133,225 @@ Weltweit spielte der Film 152,8 Millionen Dollar ein, davon 41,7 Millionen in de
 Die Kritik reagierte deutlich besser als beim Vorgänger: 72 Prozent bei Rotten Tomatoes — zum Erscheinungszeitpunkt die beste dort verzeichnete Bewertung einer Videospielverfilmung überhaupt. Metacritic vergab 60 von 100, das Publikum bei CinemaScore ein B plus.
 
 Der Fall ist damit ungewöhnlich: bessere Kritiken, weniger Zuschauer.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'series:67070', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine junge Frau in London betreibt ein Café, das kaum Gäste hat, schläft mit Männern, die sie nicht mag, und wendet sich mitten im Gespräch der Kamera zu, um zu kommentieren, was gerade geschieht. Einen Namen bekommt sie im ganzen Verlauf nicht.
+
+Ihre Freundin und Geschäftspartnerin Boo ist tot; wie es dazu kam, wird erst spät ausgesprochen. Die Schwester Claire ist erfolgreich und unglücklich, der Vater sagt nichts, die Stiefmutter lächelt. In der zweiten Staffel verliebt sie sich in einen katholischen Priester — den einzigen Menschen, der bemerkt, dass sie mit jemandem spricht, den er nicht sehen kann.
+
+### Entstehungsgeschichte
+
+Phoebe Waller-Bridge entwickelte die Serie aus ihrem eigenen Bühnenstück, einem Ein-Personen-Abend, den sie 2013 beim Edinburgh Festival Fringe aufführte.
+
+Zwei Staffeln mit je sechs Folgen erschienen zwischen 2016 und 2019. Die erste lief bei BBC Three, die zweite bei BBC One; Amazon Studios war an beiden als Koproduzent beteiligt.
+
+### Hinter den Kulissen
+
+Das Durchbrechen der vierten Wand ist aus dem Bühnenstück übernommen und wird in der zweiten Staffel zum Gegenstand: Der Priester merkt, dass sie kurz weg ist, und fragt nach — womit die Serie ihre eigene Erzählweise zum Handlungselement macht.
+
+Waller-Bridge spielt die Hauptrolle selbst, Sian Clifford die Schwester Claire, Andrew Scott ab der zweiten Staffel den Priester; daneben sind Olivia Colman und Bill Paterson zu sehen.
+
+### Einordnung & Wirkung
+
+Beide Staffeln stehen bei 100 Prozent auf Rotten Tomatoes.
+
+Die zweite Staffel gewann 2019 die Primetime Emmys als beste Comedyserie, für die beste Hauptdarstellerin und für das beste Comedy-Drehbuch, dazu Golden Globes als beste Serie und beste Hauptdarstellerin.
+
+Metacritic führte sie in seiner Jahrzehntbilanz als zweitbestbewertete Serie der zehner Jahre. Waller-Bridge schrieb anschließend an "Killing Eve" und am Bond-Film "Keine Zeit zu sterben" mit.` },
+  {
+    bereich: 'titel', schluessel: 'movie:283587', locale: 'de-de',
+    text: `### Worum es geht
+
+Agu lebt mit seiner Familie in einem westafrikanischen Land, das der Film nicht benennt. Die Gegend gilt als Pufferzone; Vater und Bruder werden vor seinen Augen von Regierungssoldaten erschossen, die Mutter ist zuvor mit den Jüngsten geflohen.
+
+Agu läuft in den Wald und wird von einer Rebellengruppe aufgegriffen. Ihr Anführer, der nur Commandant heißt, nimmt ihn auf, gibt ihm Essen, ein Gewehr und eine Aufgabe. Was folgt, ist Agus Ausbildung zum Kindersoldaten — erzählt aus seiner Sicht, mit seiner Stimme aus dem Off, die sich an Gott wendet.
+
+### Entstehungsgeschichte
+
+Grundlage ist Uzodinma Iwealas Roman von 2005. Cary Joji Fukunaga entwickelte den Film über sieben Jahre und recherchierte dafür zum Bürgerkrieg in Sierra Leone. Er schrieb das Drehbuch, führte Regie und übernahm zusätzlich die Kamera.
+
+Zu seinem Antrieb hat er gesagt, er habe die klare und knappe Art geliebt, in der Iweala die Geschichte erzählt.
+
+### Hinter den Kulissen
+
+Gedreht wurde 2014 in der Eastern Region in Ghana, bei einem Budget von rund 6 Millionen Dollar. Idris Elba spielt den Commandant, Abraham Attah den Jungen Agu — er stand hier zum ersten Mal vor einer Kamera.
+
+Netflix erwarb die weltweiten Rechte für rund 12 Millionen Dollar und veröffentlichte den Film im Oktober 2015 gleichzeitig im Kino und im Abo. Das verstieß gegen die übliche Schutzfrist für Kinos: AMC, Cinemark, Regal und Carmike weigerten sich daraufhin, ihn zu zeigen, sodass nur unabhängige Häuser blieben.
+
+### Einordnung & Wirkung
+
+Die Kritik reagierte sehr gut: 91 Prozent bei Rotten Tomatoes.
+
+Abraham Attah gewann in Venedig den Marcello-Mastroianni-Preis für Nachwuchsdarsteller. Idris Elba wurde für Golden Globe, BAFTA und den Preis der Screen Actors Guild nominiert und gewann die beiden letzteren.
+
+Der Fall gilt als erster großer Zusammenstoß zwischen Streamingdienst und Kinoketten — ein Streit, der die folgenden Jahre bestimmte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:6844', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Pharao lässt alle neugeborenen hebräischen Jungen töten. Eine Mutter setzt ihren Sohn in einem Korb auf dem Nil aus; die Tochter des Pharaos findet ihn und zieht ihn als Prinzen auf.
+
+Moses wächst neben Ramses auf, gilt als möglicher Thronfolger und erfährt erst als Erwachsener seine Herkunft. Er wird verbannt, kehrt Jahre später zurück und fordert die Freilassung der Hebräer. Es folgen die Plagen, der Auszug, die Teilung des Roten Meeres und die Gesetzestafeln am Sinai — sowie das goldene Kalb, das währenddessen unten aufgestellt wird.
+
+### Entstehungsgeschichte
+
+Cecil B. DeMille verfilmte damit seinen eigenen Stummfilm von 1923 neu; dort war der biblische Teil nur ein Vorspann gewesen, hier trägt er den ganzen Film.
+
+Charlton Heston bekam die Hauptrolle, nachdem er DeMille mit Kenntnissen über das alte Ägypten beeindruckt hatte — und weil er Michelangelos Mosesstatue ähnelt. Yul Brynner wurde besetzt, nachdem DeMille ihn am Broadway in "Der König und ich" gesehen hatte.
+
+### Hinter den Kulissen
+
+Der Aufwand war für seine Zeit beispiellos: Bei Kairo entstand auf 24 Hektar die Stadt Per-Ramses, mit einem Pylon von 33 Metern Höhe und 99 Metern Länge. Es wurden 70.000 Requisiten verwendet und 25.000 Kostüme von 125 Schneiderinnen und Schneidern gefertigt.
+
+Gedreht wurde 1954 in Ägypten und am Sinai, die Studioarbeiten folgten 1955 in Hollywood. Neben Heston und Brynner spielen Anne Baxter, Edward G. Robinson, Yvonne De Carlo, Debra Paget und John Derek.
+
+### Einordnung & Wirkung
+
+Bei 13 Millionen Dollar Herstellungskosten spielte der Film rund 122,7 Millionen ein — der erfolgreichste Film des Jahres 1956 und der zweiterfolgreichste des Jahrzehnts.
+
+Von sieben Oscar-Nominierungen wurde eine umgesetzt, für die visuellen Effekte.
+
+Seit 1973 läuft er in den USA jedes Jahr zur Zeit von Passah und Ostern zur besten Sendezeit im Fernsehen — eine Wiederholungspraxis, die keinem anderen Film in dieser Beständigkeit zuteilwurde.` },
+  {
+    bereich: 'titel', schluessel: 'series:61664', locale: 'de-de',
+    text: `### Worum es geht
+
+Acht Menschen auf vier Kontinenten erleiden im selben Moment dieselbe Vision. Danach sind sie verbunden: Sie sehen, was die anderen sehen, sprechen deren Sprachen, können deren Fähigkeiten abrufen und einander an jedem Ort erscheinen.
+
+Zu ihnen gehören eine Transfrau und Programmiererin in San Francisco, ein Polizist in Chicago, eine Geschäftsfrau in Seoul, ein Busfahrer in Nairobi, ein Schauspieler in Mexiko-Stadt, eine Pharmazeutin in Mumbai, ein Schlüsselknacker in Berlin und eine Isländerin in London. Eine Organisation macht Jagd auf sie, weil solche Verbindungen ein Sicherheitsproblem darstellen.
+
+### Entstehungsgeschichte
+
+Erdacht wurde die Serie von Lana und Lilly Wachowski gemeinsam mit J. Michael Straczynski, dem Schöpfer von "Babylon 5".
+
+Ihr erklärtes Thema ist Einfühlung über Unterschiede hinweg; sie behandelt Identität, Sexualität, Geschlecht und Politik durchgehend als zusammengehörig.
+
+### Hinter den Kulissen
+
+Gedreht wurde nahezu vollständig an Originalschauplätzen. Allein die erste Staffel entstand in neun Städten in acht Ländern — Berlin, Chicago, London, Mexiko-Stadt, Mumbai, Nairobi, Reykjavík, San Francisco und Seoul — was rund 160.000 Kilometer Flugstrecke bedeutete, also viermal um die Erde.
+
+Die Kosten stiegen entsprechend: von 4,5 Millionen Dollar je Folge in der ersten Staffel auf 9 Millionen in der zweiten.
+
+### Einordnung & Wirkung
+
+Netflix stellte die Serie im Juni 2017 nach zwei Staffeln ein. Der Programmchef begründete das damit, dass das Publikum zwar sehr leidenschaftlich, aber nicht groß genug für die hohen Produktionskosten sei.
+
+Daraufhin setzte eine der wirkungsvollsten Zuschauerkampagnen der Streaming-Geschichte ein. Netflix gab ein zweieinhalbstündiges Abschlussstück in Auftrag, das im Juni 2018 erschien.
+
+Die Serie wurde überwiegend wohlwollend aufgenommen und gewann den GLAAD Media Award als beste Dramaserie.` },
+  {
+    bereich: 'titel', schluessel: 'movie:445629', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Familie Knight in Norwich lebt vom Wrestling: Die Eltern betreiben eine kleine Halle, in der sie selbst kämpfen und Jugendliche unterrichten. Die Kinder Saraya und Zak treten seit ihrer Kindheit auf.
+
+Beide bewerben sich bei der WWE. Zum Probetraining wird nur Saraya eingeladen, die sich Paige nennt. Sie fliegt nach Florida, wo sie unter Frauen landet, die aus dem Modeln und Cheerleading kommen und sie für seltsam halten — während zu Hause ihr Bruder zurückbleibt, der es mehr gewollt hätte.
+
+### Entstehungsgeschichte
+
+Grundlage ist ein britischer Dokumentarfilm von 2012 über die Familie Knight. Dwayne Johnson sah ihn zufällig im Fernsehen und erwarb die Rechte; er produzierte den Film und tritt darin als er selbst auf.
+
+Stephen Merchant schrieb das Drehbuch und führte Regie. Das Budget lag bei 11 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Florence Pugh spielt Paige, Jack Lowden ihren Bruder Zak, Lena Headey und Nick Frost die Eltern, Vince Vaughn den Trainer Hutch Morgan.
+
+Der Film nimmt sich Freiheiten: Die Figur des Trainers ist erfunden, und Paiges Weg wird gerafft — ihre Zeit bei Florida Championship Wrestling und ihre Zeit als NXT-Champion fehlen.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 41,5 Millionen Dollar ein und war damit klar erfolgreich.
+
+Die Kritik reagierte sehr gut: 93 Prozent von 242 Besprechungen bei Rotten Tomatoes bei einem Durchschnitt von 7,2 von 10; das Publikum vergab bei CinemaScore ein A minus.
+
+Für Florence Pugh war es einer der Filme, mit denen sie international bekannt wurde — im selben Jahr erschien "Midsommar". Eine Musicalfassung ist in Vorbereitung und soll 2027 erscheinen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:491480', locale: 'de-de',
+    text: `### Worum es geht
+
+William Kamkwamba ist Schüler in Kasungu in Malawi und repariert für die Nachbarn Radios. Als die Ernte ausfällt und die Familie das Schulgeld nicht mehr aufbringt, wird er von der Schule verwiesen.
+
+Über einen Umweg verschafft er sich Zugang zur Schulbibliothek und findet dort ein Physikbuch. Aus Fahrradteilen, einem Dynamo und Holz baut er ein Windrad, das eine Pumpe antreiben soll — gegen den Widerstand seines Vaters, der dafür sein Fahrrad hergeben müsste, das letzte verwertbare Stück der Familie.
+
+### Entstehungsgeschichte
+
+Grundlage ist das Erinnerungsbuch von William Kamkwamba und Bryan Mealer. Die Vorgänge sind real und trugen sich Mitte der zweitausender Jahre während einer schweren Dürre zu.
+
+Chiwetel Ejiofor schrieb das Drehbuch und führte Regie; es war seine erste Regiearbeit. Er spielt zugleich den Vater Trywell, Maxwell Simba spielt William.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Malawi, überwiegend auf Chichewa — der Film verzichtet darauf, die Handlung für ein englischsprachiges Publikum zu übersetzen.
+
+Die Kamera führte Dick Pope, die Musik schrieb Antônio Pinto. Produziert wurde der Film von Netflix, BBC Films, Participant Media und dem British Film Institute.
+
+Netflix erwarb im November 2018 die weltweiten Rechte.
+
+Ejiofor hatte das Buch bereits 2009 gelesen und brauchte danach ein Jahrzehnt, um die Verfilmung zustande zu bringen — auch weil er darauf bestand, in Malawi und in der dortigen Sprache zu drehen.
+
+### Einordnung & Wirkung
+
+Der Film lief am 25. Januar 2019 beim Sundance-Festival und erschien am 1. März 2019 bei Netflix.
+
+Die Kritik reagierte gut: 86 Prozent bei Rotten Tomatoes, 68 von 100 bei Metacritic, mit Lob für Ejiofors Regiearbeit und die Darsteller.
+
+Bemerkenswert ist die Anlage: ein Film über Erfindergeist, der die Hungersnot, aus der er hervorgeht, nicht als Hintergrund behandelt, sondern als eigentlichen Gegenstand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9348', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Forschungsprogramm sendet seit Jahren Informationen über die Erde ins All. Eine Antwort trifft ein: eine DNA-Sequenz mit der Anleitung, sie mit menschlichem Erbgut zu verbinden.
+
+Das Ergebnis ist Sil — ein Mädchen, das binnen Wochen zur erwachsenen Frau heranwächst und aus dem Labor entkommt. Sie hat einen einzigen Antrieb: sich fortzupflanzen. Ein Team aus Wissenschaftlern, einem Empathen und einem Killer soll sie in Los Angeles finden, bevor sie einen Partner gefunden hat.
+
+### Entstehungsgeschichte
+
+Autor Dennis Feldman entwickelte die Idee 1987, zunächst als Kriminalfilm mit dem Titel "The Message", und schrieb sie später zu diesem Stoff um.
+
+Regie führte Roger Donaldson, das Budget lag bei 35 Millionen Dollar; der Film erschien am 7. Juli 1995.
+
+### Hinter den Kulissen
+
+Die Gestalt von Sil entwarf H. R. Giger, der zuvor die Kreatur für "Alien" geschaffen hatte. Umgesetzt wurde sie als Mischung aus Modellen der Firma XFX von Steve Johnson und Computergrafik der Boss Film Studios von Richard Edlund, unter frühem Einsatz von Bewegungsaufzeichnung.
+
+Natasha Henstridge gab hier ihr Kinodebüt. Daneben spielen Ben Kingsley, Michael Madsen, Alfred Molina, Forest Whitaker und Marg Helgenberger.
+
+### Einordnung & Wirkung
+
+Der Start brachte 17,1 Millionen Dollar und Platz zwei hinter "Apollo 13". Weltweit spielte der Film 113,3 Millionen Dollar ein — inflationsbereinigt rund 239 Millionen in heutiger Rechnung.
+
+Die Kritik urteilte gemischt. Was durchgehend hervorgehoben wurde, war die Gestaltung der Kreatur — und der Umstand, dass der Film seine Bedrohung nicht als Ungeheuer anlegt, sondern als etwas, das sich vollkommen folgerichtig verhält.
+
+Es folgten drei Fortsetzungen: "Species II" kam 1998 ins Kino, "Species III" (2004) und "Species — Das Erwachen" (2007) erschienen direkt fürs Fernsehen. Gigers Entwurf blieb dabei das Einzige, was durchgehend hervorgehoben wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:28211', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Ärztin Catherine Stewart vermutet, dass ihr Mann David, Musikprofessor, sie betrügt. Statt ihn zur Rede zu stellen, engagiert sie die junge Prostituierte Chloe: Sie soll ihn ansprechen und berichten, ob er darauf eingeht.
+
+Chloe kommt wieder und erzählt. Was sie schildert, wird von Treffen zu Treffen ausführlicher, und Catherine hört zu, obwohl es sie verletzt. Dass die Berichte etwas anderes sind als eine Auskunft, merkt sie erst, als Chloe längst Teil der Familie geworden ist.
+
+### Entstehungsgeschichte
+
+Der Film ist eine Neufassung des französischen "Nathalie…" von 2003 unter der Regie von Anne Fontaine. Das Drehbuch schrieb Erin Cressida Wilson, die zuvor "Secretary" verfasst hatte.
+
+Atom Egoyan führte Regie — es war sein erster abendfüllender Film, dessen Drehbuch nicht von ihm selbst stammte.
+
+### Hinter den Kulissen
+
+Julianne Moore spielt Catherine, Liam Neeson ihren Mann, Amanda Seyfried die Titelfigur. Gedreht wurde auf 35-Millimeter-Film in Toronto, in nur 35 Tagen, bei einem Budget zwischen 12 und 14 Millionen Dollar; die Kamera führte Paul Sarossy.
+
+Während der Dreharbeiten verunglückte Liam Neesons Frau Natasha Richardson beim Skifahren tödlich. Neeson verließ das Set und kehrte später zurück, um seine Szenen in zwei Tagen abzuschließen.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 13,6 Millionen Dollar ein, davon nur 3 Millionen im begrenzten amerikanischen Kinostart.
+
+Bemerkenswert ist die Auswertung danach: Der Film lief im Verleihgeschäft außergewöhnlich gut und stand drei Wochen in Folge in den Top Ten der Automaten von Redbox. Egoyan hat später festgehalten, dass er damit mehr eingebracht habe als jeder seiner früheren Filme.
+
+Die Kritik urteilte gemischt: 52 Prozent bei Rotten Tomatoes, 49 von 100 bei Metacritic. Roger Ebert vergab dreieinhalb Sterne, andere warfen dem Film vor, ins Alberne abzugleiten.` },
 ];
