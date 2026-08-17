@@ -41480,4 +41480,299 @@ Ein Kritiker hielt fest, es gebe zwar ein paar Lacher, mehrheitlich bewege sich 
 Dieses Urteil steht in einem schwer erträglichen Verhältnis zu den Namen, die an dem Film beteiligt waren. Terry Jones auf dem Regiestuhl, vier weitere Pythons als Sprecher, Simon Pegg in der Hauptrolle und Robin Williams als Hund — die Erwartung war eine andere.
 
 Genau darin liegt die Schwierigkeit solcher Projekte. Eine Versammlung bekannter Namen ersetzt kein Drehbuch, und die Fallhöhe steigt mit jedem zusätzlichen.` },
+  // ---- Block 090 ----
+  {
+    bereich: 'titel', schluessel: 'movie:9504', locale: 'de-de',
+    text: `### Worum es geht
+
+Vier Immobilienmakler, zwei Tage. Aus der Zentrale kommt ein Motivationstrainer und verkündet die neue Regel: Nur die beiden besten Verkäufer behalten ihre Stellen.
+
+Was danach geschieht, ist der Versuch jedes Einzelnen, dazuzugehören. Die Mittel werden schnell fragwürdig — und als in das Büro eingebrochen wird, steht die Frage im Raum, wie weit hier schon jemand gegangen ist.
+
+### Entstehungsgeschichte
+
+Vorlage ist David Mamets Theaterstück von 1984; er schrieb auch das Drehbuch.
+
+Regie führte James Foley.
+
+Al Pacino spielt den Spitzenverkäufer Richard Roma, Jack Lemmon den Shelley „The Machine" Levene, Alec Baldwin den Motivationstrainer Blake, Ed Harris den Dave Moss, Alan Arkin den George Aaronow, Kevin Spacey den Büroleiter John Williamson und Jonathan Pryce den Kunden James Lingk.
+
+Die Kamera führte Juan Ruiz Anchía, den Schnitt besorgte Howard Smith, die Musik stammt von James Newton Howard.
+
+Gedreht wurde von August bis September 1991 in den Kaufman Astoria Studios in Queens und in Sheepshead Bay in Brooklyn, an 39 Drehtagen. Das Budget betrug 12,5 Millionen Dollar. Der Start war am 2. Oktober 1992 in 416 Kinos.
+
+### Hinter den Kulissen
+
+Die Darsteller nahmen Gagenkürzungen in Kauf, um den Film möglich zu machen. Al Pacino senkte seine Forderung von sechs auf 1,5 Millionen Dollar.
+
+Das erklärt, wie eine Besetzung dieser Dichte in einem Film mit 12,5 Millionen Dollar Budget zustande kam — und es sagt etwas über den Stoff: Was hier lockte, war das Material, nicht das Honorar.
+
+Erzählerisch bleibt der Film beim Theaterstück. Wenige Schauplätze, viel Sprache, ein Druck, der ausschließlich über Dialog entsteht. Roger Ebert hob genau das hervor: Mamets Dialog habe eine eigene Logik und Kadenz.
+
+Der Auftritt des Motivationstrainers steht dabei am Anfang und liefert die Vorgabe, unter der alles Weitere abläuft: Zwei von vieren bleiben. Alec Baldwin ist damit in einer der kürzesten Rollen des Films die Figur, von der alle anderen abhängen.
+
+### Einordnung & Wirkung
+
+Bei 12,5 Millionen Dollar Herstellungskosten spielte der Film 10,7 Millionen ein und blieb damit unter seinen Kosten.
+
+Die Kritik urteilte deutlich anders. Rotten Tomatoes weist 95 Prozent aus, Metacritic 82 von 100; gelobt wurden vor allem Darstellerleistungen und Drehbuch.
+
+Jack Lemmon gewann in Venedig die Coppa Volpi und beim National Board of Review den Preis als bester Hauptdarsteller. Al Pacino war für den Oscar als bester Nebendarsteller nominiert, David Mamet für den Writers Guild Award.
+
+Der Abstand zwischen Kassenergebnis und Kritikerurteil beschreibt einen Film, der nie für ein großes Publikum gemacht war. Was ihn trägt, ist Sprache — und dafür haben sieben Darsteller auf einen Teil ihrer Gage verzichtet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:535', locale: 'de-de',
+    text: `### Worum es geht
+
+Alex Owens ist achtzehn und arbeitet tagsüber als Schweißerin. Abends tanzt sie in einer Bar namens Mawby's.
+
+Was sie eigentlich will, ist eine Aufnahme am Pittsburgh Conservatory of Dance — ohne Ausbildung, ohne Fürsprecher. Ihr Chef Nick Hurley verschafft ihr ein Vortanzen.
+
+### Entstehungsgeschichte
+
+Regie führte Adrian Lyne. Das Drehbuch schrieben Thomas Hedley und Joe Eszterhas, produziert wurde der Film von Jerry Bruckheimer und Don Simpson.
+
+Jennifer Beals spielt Alex Owens, Michael Nouri den Nick Hurley, Cynthia Rhodes die Tina Tech, Lilia Skala die Hanna Long, Sunny Johnson die Jeanie Szabo, Kyle T. Heffner den Richie und Lee Ving den Johnny C.
+
+Die Tanzszenen führte Marine Jahan aus; sie wird im Abspann nicht genannt. An der Schlusssequenz waren zudem der Breakdancer Richard Colón und die Turnerin Sharon Shapiro beteiligt.
+
+Die Musik stammt von Giorgio Moroder, die Kamera von Donald Peterman, den Schnitt besorgten Walt Mulconery und Bud S. Smith.
+
+Der Film erschien 1983, dauert 95 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die ungenannte Tanzdoublette ist der bemerkenswerteste Produktionsbefund. Marine Jahan tanzt in einem Film, dessen Wirkung fast vollständig auf dem Tanzen beruht — und steht nicht im Abspann.
+
+Für die Schlusssequenz kamen zwei weitere Spezialisten hinzu: ein Breakdancer und eine Turnerin. Die berühmteste Szene des Films ist damit die Arbeit von mindestens drei Personen, von denen keine die Hauptrolle spielt.
+
+Erzählerisch ist die Anlage denkbar knapp. Eine junge Frau, ein Traum, ein Vortanzen — dazwischen Musiknummern. Das Lexikon des internationalen Films sprach entsprechend von einem in Choreografie und Schnitt perfekten Musikfilm mit einem Nichts an Story.
+
+Die Verbindung von Schweißen und Tanzen liefert dem Film seine Bildsprache: Funkenflug und Bewegung, Arbeit und Kunst in derselben Person.
+
+### Einordnung & Wirkung
+
+Der Titelsong „Flashdance … What a Feeling" von Irene Cara, Giorgio Moroder und Keith Forsey gewann 1984 den Oscar als bester Song, dazu einen Golden Globe und einen Grammy für die beste weibliche Gesangsdarbietung im Bereich Pop. Der Film erhielt drei weitere Oscar-Nominierungen — für Schnitt, Kamera und den Song „Maniac".
+
+Die Kritik urteilte hart. Rotten Tomatoes weist 37 Prozent aus, Metacritic 39 von 100. Der Spiegel nannte ihn 1983 einen eineinhalbstündigen Werbefilm, der für sich selbst Reklame mache und für nichts sonst.
+
+Genau in diesem Widerspruch liegt die Bedeutung des Films. Er wurde als leer verworfen und prägte zugleich Musik, Mode und die Bildsprache des Musikvideos — die Auszeichnungen gingen an die Bestandteile, nicht an das Ganze.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10537', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film folgt Jim Morrison von der Kindheit bis zu seinem Tod 1971 in Paris.
+
+Dazwischen liegen die Studienjahre an der UCLA, die Gründung der Band, der Aufstieg im Whisky a Go Go — und ein zunehmender Absturz in Alkohol und Drogen. Ein Wendepunkt ist der Zwischenfall in Miami, bei dem Morrison sich nach verspätetem Auftritt vor dem Publikum entblößt.
+
+### Entstehungsgeschichte
+
+Regie führte Oliver Stone, das Drehbuch schrieb er gemeinsam mit Randall Jahnson. Produziert wurde der Film von Bill Graham, Sasha Harari und A. Kitman Ho.
+
+Val Kilmer spielt Jim Morrison, Meg Ryan die Pam Courson, Kyle MacLachlan den Ray Manzarek, Kevin Dillon den John Densmore, Frank Whaley den Robby Krieger und Kathleen Quinlan die Patricia Kennealy. In weiteren Rollen sind Michael Wincott als Paul Rothchild, Crispin Glover als Andy Warhol und Billy Idol als Cat zu sehen; auch echte Bandmitglieder haben Kurzauftritte.
+
+Die Kamera führte Robert Richardson, den Schnitt besorgten David Brenner und Joe Hutshing. Der Soundtrack enthält zahlreiche Stücke der Doors; Val Kilmers Gesang wurde über die instrumentalen Originalaufnahmen der Band gelegt.
+
+Der Film erschien 1991, dauert 140 Minuten und ist ab 16 Jahren freigegeben. Die deutsche Fassung entstand bei der Ronda Film GmbH in Berlin unter Arne Elsholtz; Torsten Sense sprach Morrison.
+
+### Hinter den Kulissen
+
+Kilmers Gesang über den Originalaufnahmen ist die technisch heikelste Entscheidung. Der Darsteller singt, die Band spielt — was zu hören ist, hat es so nie gegeben.
+
+Die Beteiligung echter Bandmitglieder in Kurzauftritten steht dazu in einem eigentümlichen Verhältnis. Menschen, die dabei waren, treten in einer Nacherzählung auf, die andere Beteiligte ausdrücklich ablehnen.
+
+Denn der Widerspruch kam von innen. Ray Manzarek verwarf den Film kategorisch: Oliver Stone solle sich schämen, das Ganze sei zu sensationsgierig; er kritisierte die einseitige Zuspitzung auf Morrisons Alkoholismus. Robby Krieger urteilte abgewogener — Val Kilmer sei großartig gewesen, manches übertrieben, vieles aber sehr gut gemacht.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films nannte den Film ein subjektiv überzeichnetes Porträt mit zweifelsohne hervorragender Gestaltung, das Morrison jedoch nicht gerecht werde. TV Spielfilm lobte Stones Annäherung an den Mythos und Kilmers Darstellung.
+
+Die Kontroverse ist damit Teil der Einordnung. Weggefährten Morrisons kritisierten die fehlende Authentizität und die Konzentration auf die zerstörerischen Anteile seiner Person.
+
+Dieser Streit ist bei Filmbiografien über real existierende Menschen der Regelfall — hier wiegt er besonders, weil die Widersprechenden dieselben Jahre erlebt haben, die der Film zeigt, und weil einer von ihnen im Film dargestellt wird.
+
+Was bleibt, ist ein Film, dessen handwerkliche Qualität kaum bestritten wurde und dessen Deutung von Anfang an umstritten war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:323677', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film folgt Jesse Owens von der Ohio State University bis zu den Olympischen Spielen 1936 in Berlin, wo er vier Goldmedaillen gewann.
+
+Dazwischen steht der Rassismus, dem er in den Vereinigten Staaten begegnet, und die politische Lage rund um Spiele, die das nationalsozialistische Deutschland für seine Zwecke nutzte.
+
+### Entstehungsgeschichte
+
+Regie führte Stephen Hopkins. Das Drehbuch schrieben Joe Shrapnel und Anna Waterhouse.
+
+Stephan James spielt Jesse Owens, Jason Sudeikis den Trainer Larry Snyder, Jeremy Irons den Avery Brundage, William Hurt den Jeremiah Mahoney, Carice van Houten die Leni Riefenstahl und David Kross den Luz Long.
+
+Produziert wurde der Film von Forecast Pictures, Solofilms und Trinity Race; unterstützt wurde die Produktion von der Familie Owens und der Jesse Owens Foundation. Die Kamera führte Peter Levy, den Schnitt besorgte John Smith, die Musik stammt von Rachel Portman.
+
+Der Dreh begann am 24. Juli 2014 in Montreal; weitere Aufnahmen entstanden im Berliner Olympiastadion. Das Budget betrug fünf Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Titel arbeitet mit einer Doppeldeutigkeit, die im Deutschen verlorengeht. „Race" heißt Rennen und Rasse zugleich — beides ist der Gegenstand des Films.
+
+Die Konstruktion stellt zwei Formen von Ausgrenzung nebeneinander. Owens erlebt Rassismus zu Hause und tritt dann in einem Land an, das eine Rassenideologie zur Staatsdoktrin gemacht hat. Der Film macht daraus keine einfache Gegenüberstellung.
+
+Ausdrücklich behandelt wird auch die Rolle Avery Brundages beim Ausschluss jüdischer amerikanischer Sportler von den Spielen — eine Entscheidung auf amerikanischer Seite, die der Film nicht ausspart.
+
+Dass die Familie Owens und die nach ihm benannte Stiftung die Produktion unterstützten, ordnet den Film ein: Er entstand mit Zustimmung der Nachfahren.
+
+Das Berliner Olympiastadion als Drehort ist die konsequenteste Entscheidung — gedreht wurde dort, wo es geschah.
+
+### Einordnung & Wirkung
+
+Bei fünf Millionen Dollar Herstellungskosten spielte der Film weltweit 25,1 Millionen ein, davon 19,2 Millionen in Nordamerika.
+
+Rotten Tomatoes weist 64 Prozent aus, Metacritic 56 von 100. Beim Publikum ergab CinemaScore ein „A".
+
+Der Film gewann vier Canadian Screen Awards, darunter Stephan James als bester Hauptdarsteller.
+
+Der Abstand zwischen dem Publikumsurteil und der zurückhaltenderen Fachkritik ist bei Sportbiografien häufig. Er hat hier eine zusätzliche Ursache: Ein Film über einen Sportler, der in einem Unrechtsstaat antritt, kann die politische Lage kaum in dem Maß ausführen, wie es der Stoff nahelegt, ohne die Sportgeschichte zu verlieren — und wird für beides kritisiert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:315465', locale: 'de-de',
+    text: `### Worum es geht
+
+Der neunjährige Ren flieht vor den Pflegeeltern, zu denen er soll. In Shibuya begegnet er dem Biest Kumatetsu, das ihn mit sich nimmt.
+
+Acht Jahre Ausbildung folgen; aus Ren wird Kyūta. Als er das Menschenmädchen Kaede kennenlernt, steht er zwischen zwei Welten. Und mit Ichirōhiko gibt es jemanden, der denselben Weg umgekehrt gegangen ist: ein Mensch, der unter Biestern aufwuchs.
+
+### Entstehungsgeschichte
+
+Mamoru Hosoda führte Regie und schrieb das Drehbuch. Produziert wurde der Film beim Studio Chizu.
+
+Im japanischen Original sprechen Kōji Yakusho den Kumatetsu, Shōta Sometani und Aoi Miyazaki den Kyūta beziehungsweise Ren, Suzu Hirose die Kaede und Mamoru Miyano den Ichirōhiko. In der deutschen Fassung sprechen Matti Klemm den Kumatetsu, Christian Zeiger und Luisa Wietzorek den Kyūta, Lina Rabea Mohr die Kaede und Jeffrey Wipprecht den Ichirōhiko.
+
+Das Charakterdesign stammt von Daisuke Iga, Mamoru Hosoda und Takaaki Yamashita, die Musik von Takagi Masakatsu, den Schnitt besorgte Shigeru Nishiyama.
+
+### Hinter den Kulissen
+
+Die Spiegelung ist der Kern. Kyūta ist ein Mensch, der bei einem Biest aufwächst; Ichirōhiko ein Mensch, der unter Biestern groß wurde, ohne es zu wissen. Zwei gleiche Ausgangslagen mit verschiedenen Ausgängen.
+
+Daraus ergibt sich die eigentliche Frage des Films: was jemanden prägt — die Herkunft oder die Erziehung. Der Film beantwortet sie nicht durch Erklärung, sondern durch die beiden Lebensläufe, die er nebeneinanderstellt.
+
+Kumatetsu ist dabei ein ungewöhnlicher Ziehvater. Er ist grob, ungeduldig und selbst unfertig; die Ausbildung funktioniert, weil beide voneinander lernen müssen.
+
+Shibuya als Ausgangspunkt verankert den Stoff im heutigen Tokio — die andere Welt beginnt in einer Seitengasse.
+
+### Einordnung & Wirkung
+
+Mit 48,6 Millionen Dollar war der Film der zweiterfolgreichste in Japan im Jahr 2015. In den USA kamen 474.000 Dollar zusammen.
+
+Er erhielt den Japanese Academy Award als bester Animationsfilm.
+
+Rotten Tomatoes weist 87 Prozent positive Bewertungen aus (39 Rezensionen), Metacritic 65 von 100 (13 Kritiken). Mark Schilling hob in der Japan Times Kyūtas langen Weg hervor — nicht nur stark, sondern auch erwachsen zu werden. Variety nannte den Film einen actiongefüllten Buddy-Film.
+
+Der Abstand zwischen 48,6 Millionen Dollar in Japan und 474.000 in den USA beschreibt den Markt genauer als jede Bewertung. Anime-Kinofilme dieser Art erreichen ihr Publikum im Herkunftsland; international bleiben sie eine Nische.` },
+  {
+    bereich: 'titel', schluessel: 'movie:463257', locale: 'de-de',
+    text: `### Worum es geht
+
+Zak ist ein junger Mann mit Downsyndrom und lebt in einer Pflegeeinrichtung, in die er nicht gehört. Er läuft weg.
+
+Unterwegs trifft er auf Tyler, einen Fischer, der selbst auf der Flucht ist. Die beiden schließen sich zusammen. Zaks Ziel ist die Wrestling-Schule des „Salt Water Redneck". Hinter ihnen her ist Eleanor, eine Betreuerin, die ihn zurückbringen soll.
+
+### Entstehungsgeschichte
+
+Tyler Nilson und Michael Schwartz führten gemeinsam Regie und schrieben das Drehbuch; es war ihr Spielfilmdebüt.
+
+Shia LaBeouf spielt Tyler, Dakota Johnson die Eleanor, Zack Gottsagen den Zak, Thomas Haden Church den Salt Water Redneck, John Hawkes den Duncan, Bruce Dern den Carl, Jon Bernthal den Mark und Yelawolf den Ratboy; die Wrestler Jake Roberts und Mick Foley sind ebenfalls zu sehen.
+
+Nilson und Schwartz lernten Zack Gottsagen 2011 in Kalifornien kennen, bei einem Camp für Schauspieler mit Behinderung. Aus einem für 20.000 Dollar gedrehten Konzeptvideo entstand die Finanzierung. Die Hauptdarsteller kamen im Juni 2017 dazu, der Dreh begann im Juli 2017 in Georgia und North Carolina.
+
+Die Kamera führte Nigel Bluck, den Schnitt besorgten Kevin Tent und Nathaniel Fuller. Die Musik schrieben Zach Dawes, Noam Pikelny, Jonathan Sadoff und Gabe Witcher; der Soundtrack verbindet Bluegrass, Folk und Spirituals. Das Budget betrug 6,2 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film entstand um seinen Hauptdarsteller herum. Nilson und Schwartz schrieben ihn für Zack Gottsagen, nachdem sie ihn kennengelernt hatten — die Rolle war zuerst da, dann die Geschichte.
+
+Das erklärt die Anlage. Zak ist keine Figur, an der etwas verhandelt wird, sondern derjenige, der handelt: Er läuft weg, er hat ein Ziel, er setzt es durch. Die anderen beiden Hauptfiguren folgen ihm.
+
+Peter Debruge hielt in Variety fest, Gottsagen wirke wie jemand, der eine aufrichtige, ungefilterte Fassung seiner selbst spiele, während bei Shia LaBeouf mehrere Ebenen im Spiel seien.
+
+Der Weg von einem 20.000-Dollar-Konzeptvideo zu einer Produktion mit dieser Besetzung ist der zweite bemerkenswerte Punkt. Der Beleg kam vor dem Geld.
+
+### Einordnung & Wirkung
+
+Bei 6,2 Millionen Dollar Herstellungskosten spielte der Film weltweit 23,3 Millionen ein — 20,5 Millionen in den USA und Kanada, 2,6 Millionen im übrigen Ausland. Er gilt als Überraschungserfolg und war der erfolgreichste unabhängig produzierte Film seines Jahres.
+
+Rotten Tomatoes weist 95 Prozent Zustimmung aus; das Urteil dort nennt ihn ein Wohlfühlabenteuer, das von herausragenden Darstellerleistungen getragen werde.
+
+Der Film gewann zwanzig Preise, darunter den Publikumspreis des SXSW, die Auszeichnung als bester Spielfilm beim Nantucket Film Festival, den Truly Moving Picture Award beim Heartland Film Festival und den Rising Star Award für Zack Gottsagen in Palm Springs.` },
+  {
+    bereich: 'titel', schluessel: 'movie:396461', locale: 'de-de',
+    text: `### Worum es geht
+
+Sam ist dreiunddreißig, lebt in Los Angeles und beschäftigt sich mit Verschwörungstheorien.
+
+Nach einer Nacht mit seiner Nachbarin Sarah ist sie verschwunden — spurlos. Sam beginnt zu suchen und stößt auf ein Geflecht, das Popmusik, versteckte Zeichen und wohlhabende Männer verbindet, die sich in unterirdische Bunker einschließen lassen.
+
+### Entstehungsgeschichte
+
+David Robert Mitchell führte Regie und schrieb das Drehbuch.
+
+Andrew Garfield spielt Sam, Riley Keough die Sarah, Topher Grace einen Mann aus der Bar, Jimmi Simpson den Allen, Callie Hernandez die Millicent Sevence und Zosia Mamet die Troy.
+
+Produziert wurde der Film von Chris Bender, Michael De Luca, Adele Romanski, Jake Weiner und David Robert Mitchell; die Vertriebsrechte liegen bei A24. Die Kamera führte Mike Gioulakis, den Schnitt besorgte Julio Perez, die Musik stammt von Rich Vreeland, der unter dem Namen Disasterpeace arbeitet.
+
+Gedreht wurde in den Bronson Caves im Griffith Park und im Financial District von Los Angeles. Das Budget betrug rund 8,5 Millionen Dollar.
+
+Die Weltpremiere lief am 15. Mai 2018 in Cannes. In Deutschland startete der Film am 6. Dezember 2018, in den USA erst am 19. April 2019.
+
+### Hinter den Kulissen
+
+Die Veröffentlichungsgeschichte ist Teil des Films geworden. Nach der Premiere in Cannes im Mai 2018 dauerte es elf Monate bis zum amerikanischen Start — Deutschland kam vier Monate früher dran als der Heimatmarkt.
+
+Inhaltlich ist die Anlage doppelbödig. Der Film erzählt von jemandem, der überall Zeichen sieht — und liefert seinem Publikum dieselben Zeichen. Wer mitsucht, verhält sich wie die Hauptfigur.
+
+Kai Mihm beschrieb eine labyrinthische Dramaturgie der Verwirrung mit Bezügen zu Hitchcock, Polanski und Lynch, die klassische Studiofilm-Ästhetik mit Genrereflexion und einem surrealen Paranoia-Thriller verbinde.
+
+Los Angeles ist dabei nicht Kulisse, sondern Gegenstand. Die Bronson Caves und der Financial District sind Orte, an denen die Stadt sich selbst darstellt.
+
+### Einordnung & Wirkung
+
+In Cannes 2018 war der Film für die Goldene Palme nominiert. Beim Festival in Neuchâtel erhielt er den Preis der Jugendjury, 2019 folgte eine Nominierung bei den World Soundtrack Awards.
+
+Die verzögerte Auswertung in den USA ist der auffälligste Befund. Ein Film, der im Wettbewerb von Cannes lief, erschien im Heimatmarkt fast ein Jahr später — ein Zeichen dafür, dass der Verleih Schwierigkeiten hatte, ihn einzuordnen.
+
+Genau das entspricht seinem Gegenstand. Ein Film über die Unmöglichkeit, ein Muster zu erkennen, lässt sich schwer bewerben; und die Bezüge, die Mihm benennt, setzen ein Publikum voraus, das sie kennt.
+
+Bei 8,5 Millionen Dollar Budget ist das ein kalkuliertes Risiko gewesen — eingegangen von einem Verleih, der für solche Fälle bekannt ist.` },
+  {
+    bereich: 'titel', schluessel: 'series:52', locale: 'de-de',
+    text: `### Worum es geht
+
+Point Place, ein erfundener Vorort von Kenosha in Wisconsin, in den späten siebziger Jahren. Eine Gruppe Jugendlicher wächst dort auf.
+
+Es geht um Liebe, Freundschaft und die alltäglichen Schwierigkeiten dieses Alters. Wiederkehrende Bestandteile sind Traumsequenzen und die sogenannten Circle-Sessions, bei denen die Kamera im Kreis von Gesicht zu Gesicht wandert.
+
+### Entstehungsgeschichte
+
+Entwickelt wurde die Serie von Bonnie Turner, Terry Turner und Mark Brazill.
+
+Topher Grace spielt Eric Forman, Laura Prepon die Donna Pinciotti, Danny Masterson den Steven Hyde, Ashton Kutcher den Michael Kelso, Mila Kunis die Jackie Burkhart, Wilmer Valderrama den Fez, Kurtwood Smith den Vater Red Forman und Debra Jo Rupp die Mutter Kitty.
+
+Es entstanden acht Staffeln mit insgesamt 200 Folgen von je 22 Minuten. In den USA lief die Serie von 1998 bis 2006 bei FOX, in Deutschland ab Januar 2000 bei RTL.
+
+### Hinter den Kulissen
+
+Der zeitliche Abstand ist die Grundidee. Eine Serie, die 1998 startet und in den späten Siebzigern spielt, blickt auf eine Zeit zurück, die für einen Teil des Publikums Erinnerung und für den anderen Geschichte ist.
+
+Die Circle-Sessions sind die formale Erfindung der Serie. Die Kamera schwenkt im Kreis von Gesicht zu Gesicht, und die Gruppe selbst wird zum Erzählmittel — eine wiederkehrende Form, die keinen Schauplatzwechsel braucht.
+
+Bemerkenswert ist die Rolle der Eltern. Red und Kitty Forman sind keine Randfiguren, sondern eigenständige Figuren mit eigenem Anteil an der Serie.
+
+Acht Staffeln mit 200 Folgen sind für eine Sitcom eine erhebliche Laufzeit; über diesen Zeitraum altern die Darsteller, während die erzählte Zeit nur wenige Jahre umfasst.
+
+### Einordnung & Wirkung
+
+1999 erhielt Melina Root einen Emmy für die Kostüme der Folge „That Disco Episode".
+
+Diese Auszeichnung ist bezeichnend. Bei einer Serie, die ihre Wirkung wesentlich aus der Wiedererkennung eines Jahrzehnts zieht, ist die Ausstattung keine Nebensache — Kleidung, Frisuren und Einrichtung sind das, was die Zeit herstellt.
+
+Acht Jahre Laufzeit von 1998 bis 2006 und 200 Folgen machen die Serie zu einer der langlebigen Sitcoms ihrer Zeit. In Deutschland begann die Ausstrahlung im Januar 2000, gut eineinhalb Jahre nach dem amerikanischen Start.
+
+Die Besetzung ist im Rückblick der auffälligste Punkt: Mehrere der jungen Darsteller wurden über die Serie hinaus bekannt.` },
 ];
