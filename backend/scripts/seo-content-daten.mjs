@@ -40587,4 +40587,299 @@ Slashfilm vergab sieben von zehn Punkten und nannte den Film eine clevere Weiter
 Diese durchweg wohlwollende Aufnahme richtet sich vor allem auf das Erzählverfahren — die Frage, ob sich ein Film, der ausschließlich auf einem Bildschirm stattfindet, über 89 Minuten tragen lässt. Dass Slashfilm von einer Weiterentwicklung spricht, verweist darauf, dass die Form zu diesem Zeitpunkt bereits erprobt war.
 
 Der Gegenstand ist dabei ernster, als das Verfahren zunächst vermuten lässt. Es geht um Menschenhandel und um Aufnahmen von Gewalt gegen Frauen — der Film nutzt die Ästhetik des Alltäglichen für einen Stoff, der es nicht ist.` },
+  // ---- Block 087 ----
+  {
+    bereich: 'titel', schluessel: 'movie:3116', locale: 'de-de',
+    text: `### Worum es geht
+
+Joe Buck verlässt Texas im Cowboykostüm und fährt nach New York. Sein Plan: als Gigolo Geld verdienen.
+
+Es kommt anders. Er wird ausgeraubt und steht mittellos da. In dieser Lage lernt er „Ratso" Rizzo kennen, einen Kleinkriminellen mit schlechter Gesundheit. Die beiden schlagen sich gemeinsam durch, und aus dem Zweckbündnis wird etwas anderes. Ihr Ziel heißt Florida.
+
+### Entstehungsgeschichte
+
+Vorlage ist James Leo Herlihys Roman „Midnight Cowboy" von 1965, auf Deutsch als „Rodeo der Nacht" beziehungsweise „Mitternachts-Cowboy" erschienen.
+
+Regie führte John Schlesinger, das Drehbuch schrieb Waldo Salt, produziert wurde der Film von Jerome Hellman.
+
+Jon Voight spielt Joe Buck, Dustin Hoffman den „Ratso" Rizzo. In weiteren Rollen sind Brenda Vaccaro als Shirley, Sylvia Miles als Cass, John McGiver als Mr. O'Daniel und Ruth White als Sally Buck zu sehen.
+
+Die Kamera führte Adam Holender, den Schnitt besorgte Hugh A. Robertson, die Musik stammt von John Barry. Der Film erschien 1969 und dauert 108 Minuten.
+
+### Hinter den Kulissen
+
+Die Freigabegeschichte ist ein Kapitel für sich. 1969 erhielt der Film in den USA das X-Rating — und war damit der erste Film mit dieser Einstufung, der den Oscar als bester Film gewann. 1971 wurde die Freigabe auf die neu geschaffene R-Kategorie geändert. Die deutsche DVD ist ab 16 Jahren freigegeben.
+
+Erzählerisch beruht der Film auf einem doppelten Missverständnis. Joe hält sich für begehrenswert und die Stadt für eine Gelegenheit; beides erweist sich als falsch. Was ihm bleibt, ist eine Freundschaft, die er nicht gesucht hat.
+
+Der Cowboyaufzug ist dabei die zentrale Setzung. Ein Kostüm, das in Texas nicht auffällt, macht in New York aus seinem Träger eine Figur — und genau darauf setzt Joe, ohne zu merken, dass er damit lächerlich wirkt.
+
+### Einordnung & Wirkung
+
+Bei der Oscarverleihung 1970 gewann der Film in drei Kategorien: bester Film, beste Regie und bestes adaptiertes Drehbuch. Jon Voight erhielt den Golden Globe als vielversprechendster Nachwuchsdarsteller.
+
+Die VideoWoche beschrieb ihn als mehrfach ausgezeichnetes Drama mit nachhaltiger Kritik am amerikanischen Way of Life. Das Lexikon des internationalen Films nannte die Dialoge krass und das Milieu glaubwürdig, hielt die psychologische Zeichnung aber für weniger überzeugend.
+
+Der Oscar für einen Film mit X-Rating markiert eine Zäsur. Er zeigt, dass sich der Maßstab dessen, was ein preiswürdiger Film sein darf, in diesen Jahren verschob — und dass die Einstufung als anstößig nicht mehr gleichbedeutend mit Ausschluss war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:903', locale: 'de-de',
+    text: `### Worum es geht
+
+Luke Jackson ist Kriegsveteran und ausgezeichnet worden. Wegen Sachbeschädigung an Parkuhren wird er zu zwei Jahren Haft verurteilt.
+
+Im Straflager fällt er auf — durch Widerstand gegen jede Anweisung und durch Wetten, die niemand für machbar hält. Die Mitgefangenen nennen ihn „Cool Hand Luke". Nach dem Tod seiner Mutter unternimmt er mehrere Fluchtversuche.
+
+### Entstehungsgeschichte
+
+Vorlage ist der Roman von Donn Pearce, der auch am Drehbuch mitschrieb — gemeinsam mit Frank Pierson.
+
+Regie führte Stuart Rosenberg, produziert wurde der Film von Gordon Carroll für Warner Bros.
+
+Paul Newman spielt Luke Jackson, George Kennedy den Dragline, Strother Martin den Captain, Jo Van Fleet Lukes Mutter Arletta und Joy Harmon die Lucille. In weiteren Rollen sind Harry Dean Stanton, Dennis Hopper und Ralph Waite zu sehen.
+
+Die Kamera führte Conrad L. Hall, den Schnitt besorgte Sam O'Steen, die Musik stammt von Lalo Schifrin.
+
+Der Film erschien 1967, dauert 123 Minuten und ist ab 16 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Das Missverhältnis am Anfang trägt den ganzen Film. Zwei Jahre Haft für beschädigte Parkuhren — der Anlass ist so gering, dass die Strafe selbst zur Frage wird.
+
+Daraus folgt die Figur. Luke widersetzt sich nicht, weil er etwas erreichen will, sondern weil er nicht anders kann. Sein Widerstand hat kein Ziel und deshalb auch keine Grenze; er lässt sich nicht durch Zugeständnisse beenden.
+
+Die Mitgefangenen sind dabei die eigentliche Instanz. Sie machen aus Luke eine Legende, indem sie ihm zusehen — und je mehr sie von ihm erwarten, desto weniger kann er aufhören.
+
+Dass der Autor der Romanvorlage am Drehbuch mitschrieb, verankert den Stoff bei jemandem, der das Milieu kannte.
+
+### Einordnung & Wirkung
+
+Bei den Oscars 1968 gewann George Kennedy den Preis als bester Nebendarsteller. Nominiert waren zudem Paul Newman, das Drehbuch und die Filmmusik.
+
+Rotten Tomatoes weist 100 Prozent aus, Metacritic 92 von 100. Das American Film Institute führt den Film auf Platz 71 seiner Liste der hundert inspirierendsten Filme.
+
+Diese Einordnung als inspirierender Film ist bemerkenswert, weil sie dem Verlauf der Handlung widerspricht. Was inspiriert, ist nicht der Ausgang, sondern die Haltung — und genau darin liegt die Wirkung, die dem Film seinen Platz gesichert hat.
+
+Die Besetzung im Rückblick unterstreicht das. Harry Dean Stanton und Dennis Hopper stehen hier in Nebenrollen; der Film versammelt Gesichter, die später eigene Wege gingen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:244', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Filmregisseur bricht mit seiner Mannschaft zu einer geheimnisvollen Insel auf: Skull Island. Mit an Bord ist die Schauspielerin Ann Darrow.
+
+Auf der Insel wird sie den Bewohnern zum Opfer für ein riesiges Wesen — Kong. Statt sie zu töten, verteidigt der Affe sie gegen die Urzeittiere der Insel. Nach ihrer Befreiung wird Kong nach New York gebracht und dort vorgeführt.
+
+### Entstehungsgeschichte
+
+Regie führten Merian C. Cooper und Ernest B. Schoedsack. Das Drehbuch schrieben James Ashmore Creelman und Ruth Rose nach einem Entwurf von Edgar Wallace. Produziert wurde der Film von Cooper, Schoedsack und David O. Selznick bei RKO Pictures.
+
+Fay Wray spielt Ann Darrow, Robert Armstrong den Carl Denham, Bruce Cabot den Jack Driscoll und Frank Reicher den Kapitän Englehorn.
+
+Die Kamera führten Edward Linden, J. O. Taylor und Vernon L. Walker, den Schnitt besorgte Ted Cheesman. Die Musik stammt von Max Steiner und Bernhard Kaun.
+
+Gedreht wurde von Januar 1932 bis Anfang Februar 1933. Die Uraufführung war am 2. März 1933, die deutsche Erstaufführung am 1. Dezember 1933.
+
+### Hinter den Kulissen
+
+Die Produktion entstand aus einem Abbruch. Mannschaft und Dschungelkulisse stammten von einem eingestellten Projekt namens „Creation"; Willis O'Brien hatte dafür bereits Miniaturen von Urzeittieren gebaut und verfeinerte seine Stop-Motion-Technik nun für Kong. Für die Modelle wurden teils Felle ungeborener Lämmer verwendet.
+
+Technisch war der Film wegweisend. Erstmals kam Miniaturprojektion zum Einsatz, die 1933 zum Patent angemeldet wurde. Und es war der erste Tonfilm mit durchgehend unterlegter Musik in Dialogszenen — weshalb Max Steiner häufig als Vater der Filmmusik bezeichnet wird.
+
+Die deutsche Zensurgeschichte ist ein eigenes Kapitel. Am 26. Juli 1933 wurde der Film als „Angriff auf die Nervenkraft des deutschen Volkes" verboten. Adolf Hitler begeisterte sich für ihn und sah ihn mehrfach; nach einer Beschwerde wurde er freigegeben. Am 5. Oktober 1933 folgte eine zweite Prüfung mit 49 Metern Schnitt und Freigabe unter dem Titel „Die Fabel von King Kong". 1938 wurden weitere Szenen entfernt — solche, in denen Kong der Frau Kleider vom Leib zieht, sowie Tötungsszenen. Kong wirkte danach deutlich freundlicher. Erst 1969 wurden die fehlenden elf Minuten wieder eingefügt.
+
+### Einordnung & Wirkung
+
+Am Startwochenende spielte der Film in den USA über 90.000 Dollar ein — ein Rekord für die Zeit. Der Erfolg bewahrte RKO vor dem Bankrott.
+
+Rotten Tomatoes weist 98 Prozent aus. Das Lexikon des internationalen Films nannte ihn einen tricktechnisch brillanten Monsterfilm und einen Klassiker des Genres, der die Geschichte des Ungeheuers als tragische Liebesromanze erzähle. Adolf Heinzlmeier und Berndt Schulz sprachen von einem Monsterklassiker mit bis heute einmaliger Tricktechnik.
+
+Stephen King verglich Kong mit den Frankenstein-Verfilmungen und hielt fest, keine davon rühre so zu Tränen wie die letzte Filmrolle dieses Films; er nannte Kong einen Archetyp des Archetyps.
+
+Das Bild des Affen auf dem Wolkenkratzer, die Insel Skull Island und Fay Wrays Gesichtsausdruck gehören seither zur Bildsprache der Popkultur. In Deutschland brachte die ZDF-Reihe „Der phantastische Film", die am 13. November 1970 mit diesem Film startete, ihm erneute Bekanntheit.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4960', locale: 'de-de',
+    text: `### Worum es geht
+
+Caden Cotard ist Theaterregisseur und Hypochonder. Als er ein hoch dotiertes Stipendium erhält, trennt sich seine Frau Adele von ihm.
+
+Mit dem Preisgeld beginnt er ein Vorhaben ohne absehbares Ende: In einer leerstehenden Lagerhalle in Manhattan lässt er New York nachbauen, um sein eigenes Leben als Theaterstück aufzuführen. Je weiter er kommt, desto weniger findet er zum Kern dessen, was er erzählen wollte.
+
+### Entstehungsgeschichte
+
+Charlie Kaufman führte Regie und schrieb das Drehbuch; es war sein Debüt als Regisseur.
+
+Philip Seymour Hoffman spielt Caden Cotard, Samantha Morton die Hazel, Michelle Williams die Claire Keen, Catherine Keener die Adele Lack und Emily Watson die Tammy.
+
+Produziert wurde der Film von Anthony Bregman, Spike Jonze, Charlie Kaufman und Sidney Kimmel. Die Kamera führte Frederick Elmes, den Schnitt besorgte Robert Frazen, die Musik stammt von Jon Brion.
+
+Gedreht wurde in New York City, in Schenectady und in Woodlawn. Der Film dauert 124 Minuten, ist ab 12 Jahren freigegeben, und die Produktionskosten betrugen 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Titel ist die Anleitung. Eine Synekdoche ist die Figur, bei der ein Teil für das Ganze steht — und Schenectady, wo teilweise gedreht wurde, klingt fast so. Der Film nimmt diese sprachliche Nähe beim Wort: Ein Nachbau von New York in einer Halle in New York soll für das Leben stehen, das dort geführt wird.
+
+Daraus folgt eine Konstruktion, die sich selbst überholt. Je genauer Caden sein Leben nachstellt, desto mehr Leben entsteht, das nachgestellt werden müsste. Der Film hat damit kein erreichbares Ziel, sondern nur eine Bewegung.
+
+Bemerkenswert ist die Besetzung der Frauenrollen. Samantha Morton, Michelle Williams, Catherine Keener und Emily Watson stehen um eine Hauptfigur herum, deren Verhältnis zu ihnen der eigentliche Gegenstand ist.
+
+### Einordnung & Wirkung
+
+Bei 20 Millionen Dollar Herstellungskosten spielte der Film nur rund vier Millionen ein.
+
+Roger Ebert kürte ihn zum besten Film der 2000er Jahre. Beschrieben wird er als stellenweise verwirrend und zugleich tief traurig.
+
+Der Abstand zwischen Eberts Urteil und dem Einspielergebnis ist einer der größten, die sich bei einem Film dieser Größenordnung finden lassen. Er beschreibt eine Arbeit, die kein Publikum sucht, sondern eines voraussetzt.
+
+Dass ein Drehbuchautor mit seinem Regiedebüt einen Film über einen Regisseur macht, der an seinem eigenen Werk zerbricht, gehört zur Anlage. Der Film handelt von dem Vorhaben, das er selbst ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9829', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film erzählt die Ereignisse an Bord des United-Airlines-Flugs 93 am 11. September 2001.
+
+Attentäter von al-Qaida bringen das Flugzeug in ihre Gewalt. Als die Passagiere erfahren, was an diesem Morgen bereits geschehen ist, versuchen sie, die Entführer zu überwältigen. Die Maschine stürzt bei Shanksville in Pennsylvania ab. Niemand überlebt.
+
+### Entstehungsgeschichte
+
+Paul Greengrass führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Tim Bevan, Eric Fellner, Lloyd Levin und Greengrass selbst.
+
+David Alan Basche spielt Todd Beamer, Christian Clemenson den Thomas E. Burnett Jr., Peter Hermann den Jeremy Glick und Khalid Abdalla den Entführer Ziad Jarrah. Ben Sliney spielt sich selbst — er war an jenem Tag als National Operations Manager der Luftfahrtbehörde FAA im Dienst, es war sein erster Arbeitstag in dieser Funktion.
+
+Die Kamera führte Barry Ackroyd, den Schnitt besorgten Clare Douglas, Richard Pearson und Christopher Rouse, die Musik stammt von John Powell.
+
+Der Film dauert 110 Minuten, das Budget betrug 15 Millionen Dollar. Die Weltpremiere lief am 25. April 2006 beim Tribeca Film Festival, der deutsche Kinostart folgte am 1. Juni 2006.
+
+### Hinter den Kulissen
+
+Greengrass verzichtete auf bekannte Schauspieler. Stattdessen besetzte er Zeitzeugen und Fachleute — Piloten, Fluglotsen, FAA-Personal. Dialoge und Handlungen waren weitgehend improvisiert, um Nähe zum tatsächlichen Ablauf herzustellen.
+
+Dass Ben Sliney sich selbst spielt, ist der weitestgehende Fall dieser Entscheidung. Ein Mann stellt die Rolle nach, die er an jenem Tag tatsächlich innehatte.
+
+Der Film verzichtet zugleich auf Einordnung. Roger Ebert hielt fest, dass er bewusst keine Zusammenhänge aufzeigt — es gibt keinen Kommentar, keine Vorgeschichte, keine Erklärung dessen, was geschah.
+
+Bei einem Stoff mit realen Opfern ist das eine Haltung mit Folgen: Der Film beansprucht keine Deutung, sondern eine Rekonstruktion.
+
+### Einordnung & Wirkung
+
+Die USA Today nannte ihn den aufwühlendsten und fesselndsten Film des Jahres. Blickpunkt:Film lobte die nüchterne, nicht auf Sensation zielende Umsetzung. Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
+
+2007 gab es Oscar-Nominierungen für die beste Regie und den besten Schnitt sowie den NSFC Award für Paul Greengrass.
+
+Umstritten blieb die Darstellung des deutschen Passagiers Christian Adams. Sie zeigt ihn als zögerlich, was den Vorwurf nach sich zog, er werde als Feigling dargestellt. Der Darsteller Erich Redman verteidigte die Zeichnung als der Persönlichkeit von Adams entsprechend. Dessen Witwe verweigerte die Zusammenarbeit mit der Produktion; Kritiker warnten vor kulturellen Stereotypen.
+
+Dieser Streit macht sichtbar, worin die Schwierigkeit solcher Filme liegt. Wo reale Menschen dargestellt werden, die sich nicht mehr äußern können, entscheidet die Produktion über ihr Bild — und die Angehörigen tragen die Folgen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:112336', locale: 'de-de',
+    text: `### Worum es geht
+
+1959 hat Alfred Hitchcock gerade mit „Der unsichtbare Dritte" Erfolg gehabt. Dann stößt er auf Robert Blochs Roman „Psycho" und beschließt, ihn zu verfilmen.
+
+Die Branche ist skeptisch — wegen der Gewalt, wegen der Nacktheit, und weil im Film erstmals eine Toilettenspülung zu sehen sein soll. Hitchcock nimmt eine Hypothek auf sein Haus auf. Das belastet seine Ehe mit Alma Reville, die zudem seine Annäherungen an die Hauptdarstellerin Janet Leigh mit Sorge verfolgt.
+
+### Entstehungsgeschichte
+
+Vorlage ist Stephen Rebellos Biografie „Alfred Hitchcock and the Making of Psycho". Das Drehbuch schrieb John J. McLaughlin, überarbeitet von Rebello.
+
+Regie führte Sacha Gervasi. Produziert wurde der Film von Ivan Reitman, Tom Pollock, Joe Medjuck, Alan Barnette und Tom Thayer.
+
+Anthony Hopkins spielt Alfred Hitchcock, Helen Mirren die Alma Reville, Scarlett Johansson die Janet Leigh, James D'Arcy den Anthony Perkins und Jessica Biel die Vera Miles.
+
+Die Kamera führte Jeff Cronenweth, den Schnitt besorgte Pamela Martin, die Musik stammt von Danny Elfman. Der Film erschien 2012 und dauert 98 Minuten.
+
+### Hinter den Kulissen
+
+Der Film handelt nicht von Hitchcock als Regisseur, sondern von einer Ehe unter Druck. Alma Reville ist die zweite Hauptfigur — und der Film läuft darauf zu, dass ihr Anteil an der Arbeit anerkannt wird.
+
+Die Entstehung von „Psycho" liefert dafür den Rahmen. Ein Regisseur, der sein Haus verpfändet, um einen Film zu machen, den niemand will, ist in einer Lage, in der die Ehe zur Betriebsfrage wird.
+
+Bemerkenswert ist die Wahl der Details, die den Widerstand der Branche belegen: Gewalt, Nacktheit — und eine Toilettenspülung. Der Film macht daran sichtbar, wie eng die Grenzen des Zeigbaren damals gezogen waren.
+
+Anthony Hopkins spielt eine Figur, deren Erscheinung dem Publikum genau bekannt ist. Das ist eine der schwierigsten Aufgaben für einen Darsteller — und der Grund, warum der Film für Maske und Frisur nominiert wurde.
+
+### Einordnung & Wirkung
+
+Helen Mirren erhielt Nominierungen bei den Golden Globes 2013, den Screen Actors Guild Awards, den BAFTA Awards und mehreren Kritikervereinigungen. Bei den Oscars 2013 war der Film für Maske und Frisur nominiert.
+
+Filmstarts hielt fest, Sacha Gervasi bringe ein amüsantes Kapitel Filmgeschichte auf die Leinwand. Critic.de nannte ihn einen Schauspielerfilm, getragen von starken Darbietungen.
+
+Beide Urteile treffen dieselbe Beobachtung. Der Film lebt von seinen Hauptrollen, nicht von einer eigenen These über Hitchcock — und dass sämtliche Nominierungen auf Darstellung sowie Maske entfielen, bestätigt das.
+
+Für einen Film über die Entstehung eines Films ist das eine folgerichtige Bilanz: Ausgezeichnet wurde die Verwandlung, nicht die Deutung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2605', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Militärroboter mit der Bezeichnung Nummer 5 wird von einem Blitz getroffen. Dabei geht sein Kampfprogramm verloren.
+
+Er landet bei Stephanie, die einen Imbisswagen betreibt und Pazifistin ist. Sie versorgt ihn mit Informationen, und Nummer 5 beginnt zu begreifen. Währenddessen wollen die Wissenschaftler ihn untersuchen und ein General ihn zerstören. Die Erkenntnis, die ihn verändert, betrifft den Unterschied zwischen Maschinen und Lebewesen: Was kaputtgeht, lässt sich nicht bei allem reparieren.
+
+### Entstehungsgeschichte
+
+Regie führte John Badham, das Drehbuch schrieben Brent Maddock und S. S. Wilson.
+
+Ally Sheedy spielt Stephanie Speck, Steve Guttenberg den Newton Crosby, Fisher Stevens den Ben Jabituya, G. W. Bailey den General Schroeder, Austin Pendleton den Howard Marner und Brian McNamara den Frank; Tim Blaney spricht Nummer 5.
+
+Produziert wurde der Film von David Foster und Lawrence Turman. Die Musik stammt von David Shire, die Kamera von Nick McLean, den Schnitt besorgte Frank Morriss.
+
+Der Film erschien 1986, dauert 98 Minuten und ist ab 6 Jahren freigegeben.
+
+Die Roboterfigur entwarf Syd Mead; sie war der teuerste Bestandteil der Produktion. Arm- und Handbewegungen wurden über einen Telemetrieanzug gesteuert.
+
+### Hinter den Kulissen
+
+Der Roboter ist keine Computeranimation, sondern eine gebaute Figur — und der größte Kostenpunkt des Films. Die Steuerung über einen Telemetrieanzug bedeutet, dass ein Mensch die Bewegungen unmittelbar überträgt.
+
+Erzählerisch beruht alles auf einem Umschlagen. Ein Gerät, das zum Töten gebaut wurde, entwickelt durch einen Zufall etwas, das sich nicht mehr abschalten lässt — und der Film macht daraus die Frage, ab wann jemand als Person gilt.
+
+Die Erkenntnis über die Unumkehrbarkeit des Todes ist der Wendepunkt. Für eine Familienkomödie mit Freigabe ab sechs Jahren ist das ein bemerkenswert harter Gedanke.
+
+Die Gegenseite ist entsprechend besetzt. Ein General, der zerstören will, und Wissenschaftler, die untersuchen wollen — beide behandeln Nummer 5 als Sache.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 62 Prozent aus, Metacritic 50 von 100. Beim Publikum ergab CinemaScore ein „A−", die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Das Lexikon des internationalen Films beschrieb ihn als Actionfilm mit komödiantischen Zügen, vordergründiger pazifistischer Tendenz und witzigen technischen Effekten.
+
+1987 wurden John Badham, der Film und die Spezialeffekte für den Saturn Award nominiert; David Shire gewann den BMI Film Music Award.
+
+Der Abstand zwischen dem „A−" des Publikums und den 50 Punkten bei Metacritic beschreibt die Lage. Was die Kritik als vordergründig einordnete, hat beim Publikum offenkundig getragen — und die Figur des Roboters ist über den Film hinaus bekannt geblieben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:36670', locale: 'de-de',
+    text: `### Worum es geht
+
+Nach zwölf Jahren wird James Bond zur Erholung in ein Sanatorium geschickt. Dort beobachtet er zufällig etwas, das er nicht sehen sollte.
+
+Dahinter steht SPECTRE mit dem Vorhaben „Tränen von Allah": Zwei Atomsprengköpfe sollen gestohlen und für Lösegeld eingesetzt werden. Bond wird nach Nassau geschickt, arbeitet mit dem CIA-Mann Felix Leiter zusammen und schleust sich auf die Jacht von Maximilian Largo ein.
+
+### Entstehungsgeschichte
+
+Vorlage ist Ian Flemings Roman „Feuerball". Kevin McClory besaß Teilrechte daran und erlangte das Recht auf eine Neuverfilmung — musste sich dabei aber eng an die Vorlage halten.
+
+Regie führte Irvin Kershner; Sean Connery hatte bei der Wahl des Regisseurs Mitspracherecht. Das Drehbuch schrieb Lorenzo Semple Jr.
+
+Sean Connery spielt James Bond, Klaus Maria Brandauer den Maximilian Largo, Barbara Carrera die Fatima Blush, Kim Basinger die Domino Petachi, Max von Sydow den Ernst Stavro Blofeld, Bernie Casey den Felix Leiter, Edward Fox den M, Alec McCowen den Q, Pamela Salem die Miss Moneypenny und Rowan Atkinson den Nigel Small-Fawcett.
+
+Produziert wurde der Film von Jack Schwartzman bei Taliafilm — nicht bei Eon Productions, was in der Reihe ein Sonderfall ist. Die Kamera führte Douglas Slocombe, die Musik stammt von Michel Legrand, der nur sechs bis acht Wochen zur Verfügung hatte; den Titelsong singt Lani Hall.
+
+Gedreht wurde ab dem 27. September 1982 bis 1983 auf den Bahamas, in Südfrankreich, Spanien, Malta, Monaco, Florida und in den Elstree Studios. Das Budget betrug rund 36 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film ist ein Rechtsfall, der zum Film wurde. Weil Kevin McClory Teilrechte am Stoff „Feuerball" hielt, konnte er eine Neuverfilmung durchsetzen — außerhalb der Reihe, mit anderer Produktionsfirma und ohne die Beteiligten, die sonst dazugehören.
+
+Der Streit ging nach Drehschluss weiter. Eon Productions versuchte, die Veröffentlichung zu verhindern, mit der Begründung, der Film halte sich nicht eng genug an die Vorlage — ohne Erfolg.
+
+Der Titel ist der Kommentar dazu. Sean Connery kehrte in eine Rolle zurück, von der er sich verabschiedet hatte; „Sag niemals nie" bezieht sich auf ihn selbst, nicht auf die Handlung.
+
+Michel Legrands knappe Verfügbarkeit von sechs bis acht Wochen ist der letzte Hinweis auf die Sonderstellung dieser Produktion: Sie musste sich aus dem zusammensetzen, was verfügbar war.
+
+### Einordnung & Wirkung
+
+Bei rund 36 Millionen Dollar Herstellungskosten spielte der Film weltweit etwa 160 Millionen ein, davon über 55 Millionen in den USA.
+
+Das Lexikon des internationalen Films nannte ihn eine Neuverfilmung, die über weite Strecken die üblichen Materialschlachten aneinanderreihe, bei abwechslungsreichem Beginn.
+
+Im Rückblick fallen die Urteile auseinander. 2012 setzten ihn die Leser des 007 Magazine auf Platz 22 von 24; Rolling Stone führte ihn auf Platz 13 von 24. Der Stern vergab drei von fünf Sternen.
+
+Diese Spanne hat mit dem Sonderstatus zu tun. Wer den Film als Teil der Reihe misst, bewertet ihn anders als jemand, der ihn als eigenständige Produktion nimmt — und beide Lesarten sind hier gleichermaßen begründbar.` },
 ];
