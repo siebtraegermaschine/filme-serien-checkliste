@@ -36826,4 +36826,574 @@ Das Startdatum der letzten Staffel ist mit Bedacht gewählt: Der 14. Februar ist
 Bemerkenswert ist die Produktionskonstellation. Amazon Prime Video, Pantaya und Corazón Films zusammen — eine Streamingplattform mit weltweiter Reichweite, ein auf spanischsprachige Inhalte ausgerichteter Anbieter und eine mexikanische Produktionsfirma. Diese Kombination beschreibt genau, für wen die Serie gemacht wurde: für ein spanischsprachiges Publikum, das über eine internationale Plattform erreicht wird.
 
 Dass eine Serie mit diesem Gegenstand über drei Staffeln lief, ist dabei die eigentliche Aussage. Der Stoff trug länger als die Provokation, mit der er begann.` },
+  // ---- Block 074 ----
+  {
+    bereich: 'titel', schluessel: 'movie:2323', locale: 'de-de',
+    text: `### Worum es geht
+
+Ray Kinsella baut Mais in Iowa an. Eines Tages hört er eine Stimme: „Wenn du es baust, werden sie kommen."
+
+Er pflügt einen Teil seiner Ernte unter und legt ein Baseballfeld an. Darauf erscheinen längst verstorbene Spieler, die in den Black-Sox-Skandal von 1919 verwickelt waren. Die Stimme fordert mehr von ihm: Er soll den Schriftsteller Terence Mann aufsuchen und einen Mann namens „Moonlight" Graham finden.
+
+### Entstehungsgeschichte
+
+Vorlage ist W. P. Kinsellas Roman „Shoeless Joe" von 1982.
+
+Phil Alden Robinson führte Regie und schrieb das Drehbuch.
+
+Kevin Costner spielt Ray Kinsella, Amy Madigan die Annie Kinsella, Ray Liotta den „Shoeless" Joe Jackson, James Earl Jones den Terence Mann, Burt Lancaster den alten Dr. Archibald Graham und Gaby Hoffmann die Tochter Karin.
+
+Produziert wurde der Film von Lawrence Gordon und Charles Gordon. Die Kamera führte John Lindley, den Schnitt besorgte Ian Crafford, die Musik stammt von James Horner. Der Film dauert 101 Minuten und ist ab 6 Jahren freigegeben.
+
+Universal Pictures ließ das Baseballfeld 1988 außerhalb von Dyersville in Iowa errichten, auf zwei Farmgrundstücken der Familien Lansing und Ameskamp.
+
+### Hinter den Kulissen
+
+Das Feld blieb stehen — und das ist die bemerkenswerteste Nachwirkung dieser Produktion. Was als Kulisse gebaut wurde, zieht mit Stand 2023 jährlich über 100.000 Besucher an. 2021 fand dort ein reguläres Spiel der Major League Baseball statt.
+
+Erzählerisch arbeitet der Film mit einer Anweisung, die nie erklärt wird. Ray handelt ohne Begründung, gegen wirtschaftliche Vernunft und gegen den Rat seiner Umgebung. Der Film verlangt vom Publikum dieselbe Bereitschaft, die er von seiner Hauptfigur verlangt: mitzugehen, bevor klar ist, wohin.
+
+Bemerkenswert ist die Verschachtelung der Aufträge. Kaum ist das Feld gebaut, folgt der nächste Auftrag, dann der übernächste. Erst am Ende zeigt sich, dass es nie um Baseball ging, sondern um etwas, das lange vor der ersten Stimme unerledigt geblieben war.
+
+### Einordnung & Wirkung
+
+1990 gab es drei Oscar-Nominierungen: bester Film, bestes adaptiertes Drehbuch und beste Filmmusik. Hinzu kam eine Grammy-Nominierung für die Musik.
+
+Das Heyne Filmjahrbuch 1990 nannte den Film eine hervorragende, zitatenreiche Komödie mit sozialem Anstrich. Der Film-dienst sprach von märchenhafter Unterhaltung mit Tiefgang.
+
+Der Satz „If you build it, he will come" belegt Platz 39 der Liste der besten amerikanischen Filmzitate. 2017 wurde der Film ins National Film Registry aufgenommen.
+
+Diese Aufnahme ins nationale Filmerbe ist die eigentliche Einordnung. Sie gilt nicht der Machart, sondern dem, was der Film für seine Zuschauer geworden ist — ein Bezugspunkt, der über den Anlass hinausreicht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:777270', locale: 'de-de',
+    text: `### Worum es geht
+
+Belfast, August 1969. Der neunjährige Buddy erlebt mit, wie protestantische Loyalisten katholische Häuser und Geschäfte angreifen.
+
+Seine Familie steht vor einer Entscheidung: bleiben oder gehen. Sydney, Vancouver, England — die Möglichkeiten liegen auf dem Tisch. Buddy dagegen hat andere Sorgen. Er ist in seine katholische Mitschülerin Catherine verliebt und gerät nebenbei in Dinge, die er nicht überblickt.
+
+### Entstehungsgeschichte
+
+Kenneth Branagh führte Regie und schrieb das Drehbuch. Er bezeichnet den Film als sein persönlichstes Projekt.
+
+Jude Hill spielt Buddy, Caitríona Balfe die Mutter, Jamie Dornan den Vater, Judi Dench die Großmutter und Ciarán Hinds den Großvater. Colin Morgan spielt den Billy Clanton, Lara McDonnell die Moira.
+
+Die Kamera führte Haris Zambarloukos, den Schnitt besorgte Úna Ní Dhonghaíle. Gedreht wurde mit einer Arri Alexa Mini LF und Objektiven des Panavision System 65 — digital und mit natürlichem Licht, die Umsetzung in Schwarzweiß erfolgte nachträglich.
+
+Die Musik stammt von Van Morrison, der selbst aus Belfast kommt; im Vordergrund stehen E-Gitarre und Saxofon. Der Film enthält acht ältere Stücke Morrisons sowie das neue Lied „Down to Joy".
+
+Die Dreharbeiten begannen im März 2020, der Hauptdreh lief von September bis Oktober 2020; die gesamte Produktion dauerte sieben Wochen. Gedreht wurde zunächst in London, dann in Belfast. Das Budget lag zwischen 10 und 15 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Perspektive ist die zentrale Entscheidung. Erzählt wird aus der Sicht eines Neunjährigen — der Bürgerkrieg ist damit nie Gegenstand einer Erklärung, sondern etwas, das in einen Alltag einbricht, den das Kind für normal hält.
+
+Die Schwarzweißfassung wurde nicht gedreht, sondern hergestellt: aufgenommen wurde digital in Farbe. Das ist eine bewusst gesetzte Erinnerungsfarbe, kein dokumentarischer Effekt.
+
+Bemerkenswert ist die Rolle der Musik. Van Morrison stammt selbst aus Belfast; seine Stücke sind nicht Untermalung, sondern das akustische Gegengewicht zu dem, was auf der Straße geschieht. Der Film setzt die Stimme der Stadt gegen ihre Gewalt.
+
+### Einordnung & Wirkung
+
+Bei 10 bis 15 Millionen Dollar Herstellungskosten spielte der Film weltweit 49 Millionen ein, davon über 19 Millionen im Vereinigten Königreich und 9,3 Millionen in den USA und Kanada.
+
+Beim Toronto International Film Festival 2021 gewann er den Publikumspreis. Bei den Golden Globes folgte der Preis für das beste Drehbuch bei insgesamt sieben Nominierungen, bei den BAFTA-Awards die Auszeichnung als herausragender britischer Film bei sechs Nominierungen. Bei der Oscarverleihung 2022 gewann Branagh für das beste Originaldrehbuch; der Film war siebenfach nominiert, darunter als bester Film. Bei den Critics' Choice Awards kam er auf elf Nominierungen.
+
+Rotten Tomatoes weist 86 Prozent Zustimmung aus (334 Bewertungen, Schnitt 7,80 von 10), Metacritic 75 von 100. Beim Publikum ergab CinemaScore ein „A−".
+
+Die Kritik war nicht einhellig. Kevin Maher nannte ihn in der Times einen Film formaler Schönheit mit mustergültigen Darbietungen, Peter Bradshaw im Guardian ein verführerisches Meisterwerk der Mythologisierung. David Ehrlich vergab bei IndieWire ein „C" und bemängelte grobe Pinselstriche; Entertainment Weekly gab ein „B−" und sprach von nebligem Nostalgie-Romantizismus.` },
+  {
+    bereich: 'titel', schluessel: 'movie:381', locale: 'de-de',
+    text: `### Worum es geht
+
+An der französischen Riviera treibt ein Juwelendieb sein Unwesen. Die Methode ist die von John Robie, einem berüchtigten Dieb, der längst aufgehört hat.
+
+Robie gerät deshalb unter Verdacht. Um seine Unschuld zu beweisen, muss er den Nachahmer selbst finden — und begegnet dabei Frances Stevens und deren Mutter.
+
+### Entstehungsgeschichte
+
+Regie führte Alfred Hitchcock. Das Drehbuch schrieb John Michael Hayes nach David Dodges Roman von 1952.
+
+Cary Grant spielt John Robie, genannt „Die Katze", Grace Kelly die Frances Stevens, Jessie Royce Landis deren Mutter Jessie Stevens, Charles Vanel den Monsieur Bertani und Brigitte Auber die Danielle Foussard.
+
+Produziert wurde der Film von Alfred Hitchcock für Paramount Pictures. Die Kamera führte Robert Burks, den Schnitt besorgte George Tomasini, die Musik stammt von Lyn Murray. Gedreht wurde von Mai bis August 1954 im Verfahren VistaVision mit einem Seitenverhältnis von 1,5:1.
+
+Zu den Drehorten gehören Saint-Jeannet, Gourdon, Nizza, Monaco, Grasse, Cannes, Èze, Saint-Jean-Cap-Ferrat und Cagnes-sur-Mer.
+
+### Hinter den Kulissen
+
+Die Landschaft ist bei diesem Film kein Hintergrund, sondern Gegenstand. Neun Drehorte an der Riviera, aufgenommen in VistaVision — einem Verfahren, das für Breite und Detailschärfe gebaut war. Robert Burks erhielt dafür den Oscar für die beste Kamera.
+
+Die Konstruktion ist eine Umkehrung des Kriminalfilms. Nicht die Polizei sucht den Täter, sondern der Verdächtige selbst — und er sucht jemanden, der genau so arbeitet, wie er es einmal tat. Robie muss seine eigene Vergangenheit rekonstruieren, um seine Gegenwart zu retten.
+
+Daraus ergibt sich die Doppeldeutigkeit, von der der Film lebt. Jede Figur, die Robie näherkommt, könnte ihn durchschauen oder benutzen; jede Annäherung ist zugleich Ermittlung. Hitchcock lässt offen, wann das eine ins andere übergeht.
+
+### Einordnung & Wirkung
+
+Bei der Oscarverleihung 1956 gewann Robert Burks für die beste Kamera. Nominiert war der Film außerdem für das Szenenbild und das Kostümdesign.
+
+Rotten Tomatoes weist 93 Prozent positive Bewertungen aus. Gelobt wird die Verbindung aus romantischem Thriller, Landschaftsaufnahmen und darstellerischer Leistung.
+
+Diese Verteilung von Preis und Lob ist aufschlussreich. Ausgezeichnet und hervorgehoben wurde durchweg, was man sieht — Kamera, Szenenbild, Kostüm, Landschaft. Die Kriminalhandlung trägt hier die Bilder, nicht umgekehrt.
+
+Dazu passt die Wahl des Aufnahmeverfahrens. VistaVision war auf Breite und Schärfe ausgelegt, und neun Drehorte zwischen Cannes und Monaco sind eine Entscheidung für die Aussicht. Der Verdacht gegen Robie bleibt bestehen, aber er drückt nicht — er hält die Geschichte in Bewegung, während der Film seine Schauplätze vorführt.` },
+  {
+    bereich: 'titel', schluessel: 'series:249042', locale: 'de-de',
+    text: `### Worum es geht
+
+Der dreizehnjährige Jamie Miller wird beschuldigt, seine Mitschülerin Katie getötet zu haben.
+
+Die vier Folgen verfolgen, was daraufhin geschieht: die Festnahme und das Polizeiverhör, die Ermittlungen an der Schule und die Entdeckung von Cybermobbing, eine psychologische Begutachtung in der Jugendstrafanstalt und schließlich der Versuch der Familie, in eine Normalität zurückzufinden, die es nicht mehr gibt.
+
+### Entstehungsgeschichte
+
+Jack Thorne und Stephen Graham entwickelten die Serie als Reaktion auf reale Todesfälle in Liverpool und London zu Beginn der 2020er Jahre, die im Umfeld der Incel-Kultur standen. Ihr Anliegen war, das Versagen des britischen Schulsystems gegenüber frauenfeindlichen Entwicklungen zu zeigen.
+
+Owen Cooper spielt Jamie Miller, Stephen Graham den Vater Eddie, Christine Tremarco die Mutter Manda, Ashley Walters den Detective Inspector Luke Bascombe, Faye Marsay die Detective Sergeant Misha Frank, Erin Doherty die Psychologin Briony Ariston, Jo Hartley die Lehrerin Mrs. Fenumore und Mark Stanley den Pflichtverteidiger Paul Barlow.
+
+Produziert wurde die Serie von Plan B Entertainment, Warp Films und Matriarch Productions. Regie führte bei allen vier Folgen Philip Barantini, die Kamera Matthew Lewis, die Musik stammt von Aaron May und David Ridley.
+
+Alle vier Folgen — je 51 bis 65 Minuten — wurden als durchgehende Einstellung gedreht, ohne versteckte Schnitte und mit minimalem Computereinsatz. Gedreht wurde von Juli bis September 2024 in West Yorkshire, vor allem in South Kirkby und am Minsthorpe Community College. Pro Folge standen drei Wochen zur Verfügung; etwa zehn Durchgänge wurden aufgezeichnet, der beste ausgewählt. Rund 370 Statisten waren beteiligt.
+
+Die Premiere lief am 13. März 2025 weltweit bei Netflix.
+
+### Hinter den Kulissen
+
+Die durchgehende Einstellung ist keine Zurschaustellung von Technik, sondern eine Setzung mit Folgen. Wer nicht schneiden kann, kann nicht auslassen — der Zuschauer bleibt in derselben Zeit wie die Figuren und kann sich nirgends erholen.
+
+Drei Wochen pro Folge, zehn Durchgänge, 370 Statisten: Diese Zahlen beschreiben den Aufwand, den das kostet. Jeder Fehler betrifft die gesamte Stunde, jede Bewegung von Kamera und Ensemble muss über die volle Länge sitzen.
+
+Die Anlage der vier Folgen verschiebt dabei den Blickwinkel. Erzählt wird nicht die Tat, sondern was sie auslöst — Verhör, Schule, Begutachtung, Familie. Die Serie fragt nicht, was geschah, sondern wie ein Dreizehnjähriger dorthin gelangen konnte und wer daran beteiligt war.
+
+### Einordnung & Wirkung
+
+In der ersten Woche kam die Serie auf 24,3 Millionen Abrufe und stand in 71 Ländern auf Platz eins; in der zweiten Woche kamen 42 Millionen hinzu, bis Juni 2025 rund 143 bis 145 Millionen. Sie war in allen 93 Ländern mit Top-Ten-Listen vertreten und ist damit die zweiterfolgreichste Netflix-Serie überhaupt. Im Vereinigten Königreich erreichte sie die höchsten Sieben-Tage-Abrufzahlen einer Streamingserie und führte als erste die britischen Fernsehcharts an.
+
+Rotten Tomatoes weist 97 Prozent positive Bewertungen aus (113 Kritiker), Metacritic 91 von 100. Michael Hogan nannte sie im Guardian altmodisches, themenorientiertes, sozialbewusstes Fernsehen mit dem Potenzial, echte Veränderungen anzustoßen; Ben Dowell schrieb in der Times von einem fesselnden menschlichen Drama. Nick Hilton bemängelte im Independent einen Qualitätsabfall zwischen den Folgen und stellenweise Tendenzen zum Elendsporno.
+
+Über 130 Nominierungen und über 65 Auszeichnungen kamen zusammen, darunter acht Primetime Emmys, vier Golden Globes, vier Critics' Choice Awards sowie BAFTA-Auszeichnungen für die beste Drama-Miniserie, die beste Regie und mehrere Schauspielpreise.
+
+Die Serie löste im Vereinigten Königreich eine landesweite Debatte über Frauenfeindlichkeit aus. Die Polizei nannte sie einen Weckruf für Eltern, Premierminister Keir Starmer traf sich mit Jack Thorne zum Gespräch über soziale Medien, es folgten Forderungen nach einem Smartphone-Verbot an Schulen und einem digitalen Schutzalter ab 16 Jahren. Die Regierung nahm Schulungen gegen Frauenfeindlichkeit in die Lehrpläne auf, Netflix stellte die Serie Schulen kostenlos als Unterrichtsmaterial zur Verfügung. Aus rechtspopulistischen Kreisen kam der Vorwurf, es handle sich um Propaganda gegen Weiße — Thorne wies das als absurde Desinformation zurück.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9331', locale: 'de-de',
+    text: `### Worum es geht
+
+Der CIA-Analyst Jack Ryan erfährt, dass der amerikanische Geschäftsmann Peter Hardin von Mitgliedern eines kolumbianischen Kartells ermordet wurde.
+
+Präsident Bennett genehmigt verdeckte Operationen gegen das Cali-Kartell; die Leitung übernimmt der Nationale Sicherheitsberater James Cutter. Ryan wird zum stellvertretenden CIA-Direktor für Nachrichtendienste ernannt — und stellt fest, dass in Kolumbien militärische Einsätze laufen, während er dem Kongress versichert, es gebe keine amerikanische Beteiligung.
+
+### Entstehungsgeschichte
+
+Vorlage ist Tom Clancys Roman von 1989.
+
+Regie führte Phillip Noyce. Das Drehbuch schrieben John Milius, Donald E. Stewart und Steven Zaillian.
+
+Harrison Ford spielt Jack Ryan, Willem Dafoe den John Clark, James Earl Jones den Admiral James Greer, Anne Archer die Cathy Ryan, Joaquim de Almeida den Félix Cortez, Henry Czerny den Robert Ritter, Harris Yulin den James Cutter, Donald Moffat den Präsidenten Edward Bennett, Miguel Sandoval den Ernesto Escobedo, Benjamin Bratt den Captain Ramírez und Raymond Cruz den Domingo Chavez.
+
+Die Kamera führte Donald McAlpine, den Schnitt besorgte Neil Travis, die Musik stammt von James Horner; das Soundtrack-Album erschien am 2. August 1994. Das Budget betrug 62 Millionen Dollar.
+
+Gedreht wurde in Mexiko-Stadt, in Cuernavaca, in Virginia, in Ecuador und in Kalifornien.
+
+### Hinter den Kulissen
+
+Die Entstehung war zäh. John McTiernan wollte das Projekt zunächst übernehmen, verließ es aber, nachdem Milius' erstes Drehbuch abgelehnt worden war. Im März 1992 wurde Donald E. Stewart engagiert, um Milius' Fassung umzuschreiben; später überarbeitete Steven Zaillian sie erneut. Auch Tom Clancy war zunächst zurückhaltend und stimmte erst nach Verhandlungen mit Paramount zu.
+
+Das Pentagon meldete Bedenken an. Umgeschrieben wurde daraufhin wegen der negativen Darstellung des US-Präsidenten, wegen illegaler Operationen und wegen der Darstellung Kolumbiens.
+
+Auch die Dreharbeiten liefen nicht glatt. In Kolumbien zu drehen galt als zu gefährlich, deshalb spielte Mexiko-Stadt das Bogotá des Films und die Hacienda San Gabriel de la Palmas in Cuernavaca das Hauptquartier Escobedos. Der Chiapas-Konflikt verursachte Verzögerungen, in den USA gedrehtes Material wurde beim Northridge-Erdbeben 1994 zerstört, und nach negativen Testvorführungen mussten Szenen neu gedreht werden.
+
+### Einordnung & Wirkung
+
+Bei 62 Millionen Dollar Herstellungskosten spielte der Film weltweit 215,9 Millionen ein — 122 Millionen in den USA, 94 Millionen im Ausland.
+
+Rotten Tomatoes weist 81 Prozent aus (47 Kritiken, Schnitt 7 von 10), Metacritic 74 von 100. Beim Publikum ergab CinemaScore ein „A".
+
+Rita Kempley lobte in der Washington Post, wie Noyce die verzweigten Handlungsstränge durch geschickten Schnitt zusammenhalte. Mick LaSalle bemerkte im San Francisco Chronicle, der Film habe eine fast jungenhafte Freude an den Insignien der Macht. James Berardinelli kritisierte, der Film sei ganz Handlung und ohne Figuren, und fand Jack Ryan zu sittenstreng. Matthew Alford hinterfragte die Darstellung amerikanischer Empfindlichkeiten gegenüber Lateinamerika.
+
+Dass ausgerechnet ein Film, dessen Drehbuch auf Druck des Pentagons entschärft wurde, seine Handlung um eine illegale Geheimoperation und deren Vertuschung baut, gehört zu den Widersprüchen dieser Produktion.` },
+  {
+    bereich: 'titel', schluessel: 'movie:454227', locale: 'de-de',
+    text: `### Worum es geht
+
+Robert the Bruce wird zum König von Schottland gekrönt. England sieht darin einen Affront.
+
+Ein Überraschungsangriff zwingt ihn ins Exil. Von dort aus nimmt er mit seinen Gefolgsleuten den Kampf gegen die englische Besatzung auf.
+
+### Entstehungsgeschichte
+
+David Mackenzie, der selbst aus Schottland stammt, führte Regie und schrieb das Drehbuch.
+
+Chris Pine spielt Robert the Bruce, Florence Pugh die Elizabeth de Burgh, Aaron Taylor-Johnson den James Douglas, Tony Curran den Angus Og Macdonald, Stephen Dillane den Edward I., Billy Howle den Prince of Wales und James Cosmo den Robert de Brus, Earl of Carrick.
+
+Produziert wurde der Film von Netflix. Die Kamera führte Barry Ackroyd, das Szenenbild verantwortete Donald Graham Burt, die Kostüme Jane Petrie.
+
+Die Musik stammt von Grey Dogs. Milan Records veröffentlichte zunächst eine Single mit drei Stücken; das vollständige Album mit 20 Titeln erschien im Juni 2020 bei Rock Action Records.
+
+Gedreht wurde in Schottland, unter anderem am Linlithgow Palace, in der St. Michael's Church und in der Kathedrale von Glasgow. Der Film dauert 117 Minuten. Die Weltpremiere lief am 6. September 2018 beim Toronto International Film Festival, der Netflix-Start folgte am 9. November 2018.
+
+### Hinter den Kulissen
+
+Ein schottischer Regisseur, schottische Drehorte, ein schottischer Stoff — die Produktion ist konsequent im Land verankert, in dem sie spielt. Linlithgow Palace und die Kathedrale von Glasgow sind keine Nachbauten, sondern die Orte selbst.
+
+Bemerkenswert ist die Ausstattung. Mit Donald Graham Burt für das Szenenbild und Jane Petrie für die Kostüme wurden zwei Bereiche besetzt, in denen Historienfilme gewonnen oder verloren werden. Die Aufnahme des Films gibt ihnen recht: Gelobt wurden vor allem die aufwendige Herstellung und die Landschaftsbilder.
+
+Die Erzählform ist dagegen knapp gehalten. Von der Krönung über das Exil bis zum bewaffneten Widerstand deckt der Film einen großen Zeitraum in 117 Minuten ab. Genau daran setzte die Kritik an.
+
+### Einordnung & Wirkung
+
+Das Echo fiel geteilt aus. Gelobt wurden die aufwendige Produktion und die Landschaftsaufnahmen, kritisiert die mangelhafte Figurenzeichnung und banale Dialoge.
+
+Dieser Befund beschreibt ein Grundproblem des Genres. Ein Historienfilm, der eine mehrjährige Auseinandersetzung erzählt, muss zwischen Schlachten und Figuren aufteilen — und wer die Ereignisfolge vollständig abbilden will, verliert Raum für die Menschen darin.
+
+Die Auswertung über Netflix passt zu dieser Einordnung. Nach der Festivalpremiere in Toronto folgte kein regulärer Kinostart, sondern zwei Monate später der Plattformstart. Ein Film mit dieser Bildgestaltung — Barry Ackroyd an der Kamera, die schottischen Originalschauplätze — war damit von Anfang an für Bildschirme bestimmt, nicht für Leinwände.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2671', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Videoband macht die Runde. Wer es ansieht, stirbt sieben Tage später.
+
+Die Journalistin Reiko Asakawa geht dem rätselhaften Tod ihrer Nichte Tomoko nach und findet das Band in einer Berghütte. Nachdem sie es angesehen hat, klingelt das Telefon. Gemeinsam mit ihrem geschiedenen Mann Ryūji, einem Universitätsprofessor, sucht sie nach der Herkunft der Aufnahme — und stößt auf ein Mädchen namens Sadako.
+
+### Entstehungsgeschichte
+
+Vorlage ist Koji Suzukis Roman „Ring" von 1991.
+
+Regie führte Hideo Nakata, das Drehbuch schrieb Hiroshi Takahashi.
+
+Nanako Matsushima spielt die Journalistin Reiko Asakawa, Hiroyuki Sanada den Ryūji Takayama, Rikiya Otaka den Sohn Yōichi, Miki Nakatani die Studentin Mai Takano, Yuko Takeuchi die Nichte Tomoko Ōishi, Hitomi Sato deren Freundin Masami Kurahashi, Rie Inō die Sadako Yamamura und Yoichi Numata den Takashi Yamamura.
+
+Die Kamera führte Junichiro Hayashi, den Schnitt besorgte Nobuyuki Takahashi, die Musik stammt von Kenji Kawai.
+
+Die gesamte Herstellung dauerte neun Monate und eine Woche: drei bis vier Monate für Drehbuch und Vorbereitung, fünf Wochen Dreh, vier Monate Nachbearbeitung. Gedreht wurde auf 35 mm und anschließend digital bearbeitet. Das Budget betrug 1,5 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Fünf Wochen Dreh, 1,5 Millionen Dollar — und vier Monate Nachbearbeitung. Dieses Verhältnis ist ungewöhnlich und erklärt viel: Die Wirkung des Films entsteht nicht am Set, sondern im Schnitt und in der Tonarbeit.
+
+Die Grundidee braucht keine Effekte. Ein Videoband, ein Telefonanruf, eine Frist von sieben Tagen — der Schrecken ist eine Regel, keine Erscheinung. Weil das Publikum diese Regel früh kennt, wirkt jede verstreichende Minute gegen die Figuren.
+
+Bemerkenswert ist die Wahl des Mediums. Ein Fluch, der sich über Videokassetten verbreitet, verlegt das Übernatürliche in einen Alltagsgegenstand jener Jahre — jeder Haushalt hatte ein Gerät, auf dem er sich hätte abspielen lassen. Genau darin liegt die Verbindung von alten Erzählungen und zeitgenössischer Angst, die Kritiker hervorgehoben haben.
+
+### Einordnung & Wirkung
+
+In Japan spielte der Film 1,7 Milliarden Yen ein, rund 13 Millionen Dollar — das höchste Ergebnis, das ein japanischer Horrorfilm dort erzielte. Hinzu kamen 31,2 Millionen Hongkong-Dollar, 50,83 Millionen Taiwan-Dollar sowie Einnahmen in Frankreich und Südkorea; weltweit rund 19,5 Millionen Dollar.
+
+Rotten Tomatoes weist 98 Prozent positive Bewertungen aus. Mark Kermode lobte die zeitlose Spannung und die Mischung aus alten Volksängsten und zeitgenössischer Moralpanik. Variety hob den schrittweisen Aufbau des Bösen unter einer ruhigen Oberfläche hervor. Der Guardian führte den Film als zwölftbesten Horrorfilm aller Zeiten, Time Out auf Rang 61 seiner Liste der hundert besten.
+
+Die Nachwirkung reicht weit über den Film hinaus. Er löste eine internationale Wiederbelebung des Horrorfilms aus und prägte den Begriff „J-Horror" im Westen; Reihen wie „Ju-On" und „One Missed Call" folgten. In Hollywood verschob sich das Genre daraufhin vom Slasher zu atmosphärischeren Formen, und 2002 erschien eine englischsprachige Neuverfilmung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8469', locale: 'de-de',
+    text: `### Worum es geht
+
+Faber College, 1962. Zwei Studienanfänger schließen sich der Verbindung Delta Tau Chi an — dem chaotischsten Haus auf dem Campus.
+
+Das bringt sie in Konflikt mit Dean Wormer und mit der elitären Verbindung Omega Theta Pi. Als die Deltas exmatrikuliert werden, planen sie ihre Antwort für den Homecoming-Umzug.
+
+### Entstehungsgeschichte
+
+Regie führte John Landis. Das Drehbuch schrieben Harold Ramis, Douglas Kenney und Chris Miller; Grundlage waren Geschichten aus dem National Lampoon sowie eigene Erfahrungen der Autoren in Studentenverbindungen.
+
+John Belushi spielt John „Bluto" Blutarsky, Tim Matheson den Eric „Otter" Stratton, Thomas Hulce den Lawrence „Pinto" Kroger, Peter Riegert den Donald „Boon" Schoenstein, Stephen Furst den Kent „Flounder" Dorfman und Bruce McGill den Daniel Simpson „D-Day" Day. John Vernon spielt Dean Vernon Wormer, Verna Bloom die Marion Wormer, Donald Sutherland den Professor Dave Jennings und Karen Allen die Katy.
+
+Produziert wurde der Film von Matty Simmons und Ivan Reitman für Universal Pictures. Die Kamera führte Charles Correll, die Musik stammt von Elmer Bernstein; der Soundtrack verbindet Rock, Rhythm & Blues und klassische Stücke, darunter Brahms' „Akademische Festouvertüre".
+
+Gedreht wurde von Oktober bis Dezember 1977, hauptsächlich an der University of Oregon in Eugene; die Umzugsszene entstand in Cottage Grove, die Clubszene im Dexter Lake Club. Das Budget betrug drei Millionen Dollar.
+
+### Hinter den Kulissen
+
+Drei Millionen Dollar Herstellungskosten sind die Zahl, an der sich alles Weitere bemisst. Der Film wurde mit einem Etat gedreht, der selbst 1977 klein war — und spielte davon das Siebenundvierzigfache ein.
+
+Die Herkunft des Stoffs erklärt seinen Ton. Die Autoren schrieben aus eigenen Erfahrungen in Verbindungen; der Film ist keine Erfindung über ein Milieu, sondern eine Übertreibung von innen heraus.
+
+Bemerkenswert ist die Musik. Elmer Bernstein, der aus dem großen Hollywoodkino kam, schrieb die Filmmusik zu einer Komödie über Studentenverbindungen — und stellt Brahms neben Rock und Rhythm & Blues. Diese Ernsthaftigkeit im Umgang mit einem unernsten Stoff gehört zur Bauweise des Films.
+
+### Einordnung & Wirkung
+
+Bei drei Millionen Dollar Herstellungskosten spielte der Film weltweit 141,6 Millionen ein, davon 70,8 Millionen Verleiheinnahmen in den USA und Kanada.
+
+Roger Ebert vergab vier von vier Sternen und nannte den Film anarchisch, chaotisch und voller Energie. Das Time-Magazin zählte ihn zu den besten Filmen des Jahres 1978. Rotten Tomatoes weist 89 Prozent positive Bewertungen aus.
+
+Die Nachwirkung ist erheblich. Der Film gab einer ganzen Reihe von Komödien die Richtung vor, darunter „Porky's" und „American Pie". 2001 wurde er ins National Film Registry aufgenommen. Die University of Oregon verweist bis heute auf seine Bedeutung für den Campus.
+
+Damit steht der Film an einem Wendepunkt. Er machte aus dem Studentenmilieu ein eigenes Komödiengenre — und legte zugleich dessen Muster fest, an denen sich Nachfolger jahrzehntelang abarbeiteten.` },
+  // ---- Block 075 ----
+  {
+    bereich: 'titel', schluessel: 'movie:64328', locale: 'de-de',
+    text: `### Worum es geht
+
+Walter ist ein leidenschaftlicher Muppet-Fan. Gemeinsam mit seinem menschlichen Bruder Gary sucht er Kermit den Frosch auf.
+
+Der Anlass ist ernst: Das Muppet Theater soll dem Ölmagnaten Tex Richman zufallen, der auf dem Grundstück bohren will. Um es zu retten, müssen zehn Millionen Dollar zusammenkommen — und dafür müssen die längst verstreuten Muppets erst einmal wieder zusammengeholt werden. Eine Telethon-Show soll es richten.
+
+### Entstehungsgeschichte
+
+Regie führte James Bobin; es war sein Debüt als Spielfilmregisseur. Das Drehbuch schrieben Jason Segel und Nicholas Stoller.
+
+Jason Segel spielt Gary, Amy Adams die Lehrerin Mary, Chris Cooper den Tex Richman, Rashida Jones die Fernsehmanagerin Veronica Martin, Zach Galifianakis den Hobo Joe und Alan Arkin einen Fremdenführer. Jim Parsons ist in einem Kurzauftritt zu sehen, Jack Black ungenannt als er selbst.
+
+Die Muppets werden geführt von Steve Whitmire (Kermit, Beaker, Statler, Rizzo), Eric Jacobson (Miss Piggy, Fozzie, Animal, Sam Eagle), Dave Goelz (Gonzo, Dr. Honeydew, Waldorf), Bill Barretta (Schwedischer Koch, Rowlf, Pepe, Bobo), David Rudman (Scooter, Janis, Miss Poogy), Matt Vogel (Floyd Pepper, Camilla, Uncle Deadly) und Peter Linz, der die neue Figur Walter übernahm.
+
+Produziert wurde der Film von David Hoberman und Todd Lieberman für Walt Disney Pictures und Mandeville Films. Musik-Supervisor war Bret McKenzie, der vier der fünf Originalsongs schrieb; die Filmmusik stammt von Christophe Beck.
+
+Gedreht wurde von September 2010 bis Februar 2011, unter anderem am El Capitan Theatre, in den Warner Bros. Studios, auf der Golden Oak Ranch, auf dem Gelände der Jim Henson Company und in den Walt Disney Studios in Burbank. Das Budget betrug 45 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film handelt von seinem eigenen Anlass. Die Muppets sind in der Handlung verstreut und vergessen — genau die Ausgangslage, aus der heraus die Produktion entstand. Die Rettung des Theaters und die Rückkehr der Figuren auf die Leinwand sind dieselbe Bewegung.
+
+Die neue Figur Walter ist dabei der Schlüssel. Ein Muppet, der selbst Fan ist, erlaubt es dem Film, die Begeisterung des Publikums in die Handlung zu holen — und zugleich zu erklären, warum diese Figuren überhaupt zurückkommen sollten.
+
+Bemerkenswert ist die Rolle der Musik. Bret McKenzie schrieb vier der fünf Originalsongs und gewann dafür den Oscar. Für einen Film, dessen Höhepunkt eine Fernsehshow ist, sind die Lieder nicht Beiwerk, sondern die eigentliche Darbietung.
+
+### Einordnung & Wirkung
+
+Bei 45 Millionen Dollar Herstellungskosten spielte der Film weltweit 171,8 Millionen ein — 88,6 Millionen in Nordamerika, 83,2 Millionen im übrigen Ausland; die Heimauswertung brachte weitere 58,3 Millionen.
+
+Bei der Oscarverleihung 2012 gewann Bret McKenzie für „Man or Muppet" den Preis für den besten Originalsong. Bei den Critics' Choice Awards wurde „Life's a Happy Song" ausgezeichnet, hinzu kam ein Golden Reel Award für den Tonschnitt. James Bobin war 2013 für den BAFTA als bestes Debüt nominiert, „Man or Muppet" für einen Grammy.
+
+Rotten Tomatoes weist 95 Prozent aus (228 Rezensionen), Metacritic 75 von 100; beim Publikum ergab CinemaScore ein „A".
+
+Roger Ebert vergab drei von vier Sternen und lobte die wiederbelebten Figuren mit ihren unverwechselbaren Eigenarten. Variety sprach von einem unerwarteten Vergnügen mit selbstreflexivem Humor. Frank Oz äußerte sich nach der Premiere versöhnlich: Der Film sei wirklich nett und unterhaltsam gewesen, aber ein wenig zu vorsichtig und ein wenig zu rückwärtsgewandt.` },
+  {
+    bereich: 'titel', schluessel: 'series:1420', locale: 'de-de',
+    text: `### Worum es geht
+
+Jessica „Jess" Day ist Lehrerin, Anfang dreißig und exzentrisch. Nach einer Trennung zieht sie in ein Loft in Los Angeles — zu drei Männern, die sie nicht kennt.
+
+Über sieben Staffeln folgt die Serie den Freundschaften und Beziehungen dieser Gruppe.
+
+### Entstehungsgeschichte
+
+Entwickelt wurde die Serie von Elizabeth Meriwether.
+
+Zooey Deschanel spielt Jessica „Jess" Day, Jake Johnson den Nicholas „Nick" Miller, Max Greenfield den Winston Schmidt, Hannah Simone die Cecilia „Cece" Parekh, Lamorne Morris den Winston Bishop und Damon Wayans Jr. den Ernie „Coach" Tagliaboo.
+
+Insgesamt entstanden sieben Staffeln mit 146 Folgen. In den USA lief die Serie vom 20. September 2011 bis zum 15. Mai 2018 bei Fox, in Deutschland vom 5. Januar 2012 bis zum 6. Juni 2018 bei ProSieben.
+
+### Hinter den Kulissen
+
+Die Ausgangslage ist eine klassische Sitcom-Konstruktion: eine Wohngemeinschaft, in der niemand freiwillig zusammengekommen ist. Was die Figuren verbindet, ist zunächst nur die Miete — alles Weitere muss die Serie erst herstellen.
+
+Der Titel benennt dabei eine Rolle, die sich schnell auflöst. Jess ist zu Beginn die Neue unter drei Männern; über sieben Staffeln wird aus der Konstellation ein Ensemble, in dem die ursprüngliche Asymmetrie kaum noch eine Rolle spielt.
+
+Bemerkenswert ist die Breite der Stammbesetzung. Neben Jess stehen mit Nick, Schmidt, Winston, Coach und Cece fünf weitere Figuren gleichrangig im Vordergrund — für eine Serie, die nach einer einzelnen Person benannt ist, eine auffällig gleichmäßige Verteilung.
+
+### Einordnung & Wirkung
+
+Sieben Staffeln und 146 Folgen sind für eine Sitcom eine erhebliche Laufzeit — die Serie lief von 2011 bis 2018 durch.
+
+Zooey Deschanel wurde 2012 für den Golden Globe als beste Serien-Hauptdarstellerin in einer Komödie oder einem Musical nominiert.
+
+Die deutschsprachige Kritik war zurückhaltend, aber wohlwollend. Die FAZ hielt fest, das tauge für ordentliche Späße. Spiegel Online hob Deschanels Leistung hervor: In einem einzigartigen Spagat schaffe sie es, ihre Jess zu gleichen Teilen hilfsbedürftig und eigenwillig anzulegen.
+
+Genau diese Doppelung beschreibt die Serie. Ihre Hauptfigur ist auffällig genug, um eine Sitcom zu tragen, und zugleich so angelegt, dass die Serie nicht auf sie allein angewiesen bleibt — was erklärt, warum sie über sieben Staffeln funktionierte.` },
+  {
+    bereich: 'titel', schluessel: 'series:4589', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Bluths waren wohlhabend. Dann verlor die Familie ihr Vermögen, und der Vater kam wegen Betrugs ins Gefängnis.
+
+Michael Bluth versucht, das Familienunternehmen zu retten und die Familie zusammenzuhalten — gegen den Widerstand genau der Menschen, für die er es tut.
+
+### Entstehungsgeschichte
+
+Erschaffen wurde die Serie von Ron Howard und Mitchell Hurwitz. Hurwitz war Autor und Executive Producer, Howard Co-Produzent und zugleich der Erzähler der Originalfassung.
+
+Jason Bateman spielt Michael Bluth, Portia de Rossi die Lindsay Bluth Fünke, Will Arnett den G.O.B. Bluth, Tony Hale den Buster Bluth, David Cross den Tobias Fünke, Michael Cera den George Michael Bluth, Alia Shawkat die Maeby Fünke, Jeffrey Tambor den George Bluth und Jessica Walter die Lucille Bluth.
+
+Insgesamt entstanden fünf Staffeln mit 84 Folgen, dazu 22 Remix-Folgen. Die Erstausstrahlung begann am 2. November 2003 bei Fox; im deutschsprachigen Raum lief die Serie ab dem 18. Januar 2007 bei Comedy Central und SRF zwei. Die vierte und fünfte Staffel erschienen 2013 beziehungsweise 2018 und 2019 bei Netflix.
+
+### Hinter den Kulissen
+
+Der Erzähler ist die auffälligste Entscheidung. Ron Howard kommentiert die Handlung aus dem Off — und widerspricht dabei regelmäßig dem, was die Figuren behaupten. Die Serie hat damit eine eingebaute Instanz, die richtigstellt, ohne einzugreifen.
+
+Die Familienkonstruktion liefert den Motor. Michael ist der Einzige, der sich verantwortlich fühlt; alle anderen ziehen in andere Richtungen. Damit hat die Serie einen Konflikt, der sich nicht auflösen lässt, ohne die Serie zu beenden — jede gelöste Krise erzeugt die nächste.
+
+Bemerkenswert ist die Rückkehr nach der Unterbrechung. Die ersten drei Staffeln liefen ab 2003 bei Fox, die vierte erschien 2013 bei Netflix, die fünfte 2018 und 2019 — zehn Jahre Abstand zwischen dritter und vierter Staffel. Die zusätzlichen 22 Remix-Folgen zeigen, dass auch die Form der Auswertung dabei noch in Bewegung war.
+
+### Einordnung & Wirkung
+
+Für die erste Staffel gab es sechs Emmy Awards. Hinzu kamen Golden-Globe-Nominierungen, ein Writers Guild Award sowie Auszeichnungen der Television Critics Association und Satellite Awards.
+
+Diese Bilanz gleich für die erste Staffel ist bemerkenswert — und sie steht in einem eigentümlichen Verhältnis zum weiteren Verlauf. Eine Serie, die früh derart ausgezeichnet wurde, lief bei ihrem ursprünglichen Sender nur drei Staffeln.
+
+Die Fortsetzung zehn Jahre später ist die Antwort darauf. Dass ein anderer Anbieter eine Serie aufgreift, deren Erstausstrahlung lange zurücklag, setzt ein Publikum voraus, das sich erst nach dem Ende gefunden hat — und einen Maßstab für Erfolg, der nicht mehr allein an der Einschaltquote der Erstausstrahlung hängt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9208', locale: 'de-de',
+    text: `### Worum es geht
+
+Major Vic Deakins und Captain Riley Hale fliegen einen Testeinsatz mit einem Tarnkappenbomber, der Atomwaffen an Bord hat.
+
+Deakins hat andere Pläne: Er will die Waffen stehlen und damit die Vereinigten Staaten erpressen. Nach einem Kampf im Cockpit schleudert er Hale hinaus und lässt die Bomben an Fallschirmen abgehen. Mit Hilfe der Wildhüterin Terry Carmichael nimmt Hale die Verfolgung auf.
+
+### Entstehungsgeschichte
+
+Regie führte John Woo, das Drehbuch schrieb Graham Yost.
+
+John Travolta spielt Major Vic Deakins, Christian Slater den Captain Riley Hale, Samantha Mathis die Terry Carmichael und Delroy Lindo den Col. Max Wilkins. In der deutschen Fassung sprechen Thomas Danneberg den Deakins, Sven Hasper den Hale, Ulrike Stürzbecher die Carmichael und Leon Boden den Wilkins; die Synchronisation entstand bei Interopa Film, Dialogbuch von Andreas Pollak, Dialogregie von Frank Schaff.
+
+Produziert wurde der Film von Bill Badalato, Terence Chang und Mark Gordon. Die Kamera führte Peter Levy, den Schnitt besorgten Joe Hutshing, Steve Mirkovich und John Wright, die Musik stammt von Hans Zimmer.
+
+Der Film dauert 108 Minuten und ist ab 16 Jahren freigegeben. Gedreht wurde unter anderem in Utah.
+
+### Hinter den Kulissen
+
+Die Anlage ist ein Zweikampf mit vertauschten Fronten. Deakins und Hale kennen einander, fliegen gemeinsam und wissen genau, wie der andere denkt. Der Film braucht deshalb keine Ermittlung — er hat von Anfang an zwei Gegner, die sich gegenseitig lesen können.
+
+Bemerkenswert ist die Rolle der Landschaft. Die Wüste von Utah liefert einen Schauplatz ohne Deckung, in dem sich Verfolgung über große Entfernungen abspielt. Das Lexikon des internationalen Films hob genau diese Aufnahmen hervor.
+
+Die Filmmusik hatte eine eigene Nachgeschichte. Hans Zimmers Motiv für die Figur Deakins wurde später in „Scream 2" verwendet und entwickelte sich dort zum Leitmotiv der ganzen Reihe. Der Film enthält außerdem Verweise auf die Boxtaktik „Rope-a-Dope" aus dem Kampf zwischen Muhammad Ali und George Foreman 1974.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 53 Prozent aus (34 Kritiken), Metacritic 61 von 100 (21 Kritiken), Moviebreak 5,5 von 10.
+
+Das Lexikon des internationalen Films lobte die eindrucksvollen Aufnahmen vor der Kulisse der Wüste von Utah und attestierte ein großes Actionspektakel, kritisierte aber die allzu schlichte Weltrettungsgeschichte. TV Spielfilm würdigte fantasievolle Zerstörungsorgien und ein atemberaubendes Tempo als bombige Actionsause. Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll" und hob Travoltas Spiel sowie hervorragende Aufnahmen des Spiels mit Maschinen hervor.
+
+Hans Zimmer erhielt 1996 den BMI Film Music Award. Bei den MTV Movie Awards desselben Jahres waren Travolta und Slater für den besten Kampf nominiert, Travolta zusätzlich als bester Bösewicht.
+
+Diese Verteilung beschreibt den Film genau: Ausgezeichnet und gelobt wurde die Ausführung — Musik, Bilder, Tempo, Darstellung —, bemängelt der Vorwand, der sie zusammenhält.` },
+  {
+    bereich: 'titel', schluessel: 'movie:453201', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film erzählt vom Anschlag im Thalys-Zug 15:17 nach Paris im Jahr 2015 — und vor allem von den Jahren davor.
+
+Begleitet werden Spencer Stone, Alek Skarlatos und Anthony Sadler von ihrer Schulzeit an bis zu jenem Tag, an dem sie in einem fahrenden Zug einem bewaffneten Angreifer gegenübertreten. Mehrere Reisende werden verletzt, darunter Mark Moogalian, der überlebt. Die drei Amerikaner überwältigen den Täter gemeinsam mit weiteren Passagieren. Der französische Präsident François Hollande zeichnete sie später mit der Ehrenlegion aus.
+
+### Entstehungsgeschichte
+
+Vorlage ist die 2016 erschienene Autobiografie „The 15:17 to Paris: The True Story of a Terrorist, a Train, and Three American Heroes" von Jeffrey E. Stern, Spencer Stone, Anthony Sadler und Alek Skarlatos.
+
+Regie führte Clint Eastwood, das Drehbuch schrieb Dorothy Blyskal — ihr erstes.
+
+Spencer Stone, Anthony Sadler und Alek Skarlatos spielen sich selbst. Judy Greer spielt Spencers Mutter Joyce Eskel, Jenna Fischer Aleks Mutter Heidi Skarlatos, Ray Corasani den Angreifer Ayoub El-Khazzani, Tony Hale den Coach Murray und Thomas Lennon den Schulleiter Michael Akers.
+
+Angekündigt wurde der Film im April 2017. Ursprünglich sollten Kyle Gallner, Jeremie Harris und Alexander Ludwig die Hauptrollen übernehmen; im Juli 2017 entschied sich Eastwood stattdessen für die realen Beteiligten.
+
+Die Kamera führte Tom Stern, den Schnitt besorgte Blu Murray, die Musik stammt von Christian Jacob. Gedreht wurde ab Juli 2017 in Atlanta sowie in Amsterdam, Paris, Rom, Venedig, Brüssel und den Niederlanden; die Aufnahmen endeten am 2. August 2017. Das Budget betrug 30 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Besetzung ist die Entscheidung, an der sich alles entscheidet. Eastwood ließ die drei Männer, die den Angriff abgewehrt hatten, sich selbst spielen — nachdem bereits Berufsschauspieler für die Rollen vorgesehen waren.
+
+Das hat zwei Seiten. Es verleiht dem Zugabschnitt eine Unmittelbarkeit, die sich schwer nachstellen lässt; und es verlangt Menschen ohne Schauspielausbildung ab, ihr eigenes Leben über die volle Filmlänge zu tragen. Genau an dieser zweiten Seite setzte die Kritik an.
+
+Auffällig ist die Gewichtung. Der Anschlag dauert Minuten, der Film erzählt Jahre — Schulzeit, Militärdienst, eine Europareise. Diese Anlage stellt die Frage, wie drei Menschen zu denen wurden, die an jenem Tag eingriffen, und nimmt in Kauf, dass der größte Teil des Films ohne Bedrohung auskommt.
+
+### Einordnung & Wirkung
+
+Bei 30 Millionen Dollar Herstellungskosten spielte der Film weltweit 56,9 Millionen ein — 36,3 Millionen in den USA und Kanada, 20,6 Millionen international.
+
+Die Kritik fiel überwiegend ablehnend aus. Rotten Tomatoes weist 24 Prozent Zustimmung aus (167 Rezensionen), Metacritic 45 von 100; beim Publikum ergab CinemaScore ein „B−".
+
+Kevin P. Sullivan vergab in Entertainment Weekly ein „D" und kritisierte, das gesamte Drehbuch sei voll von schwerfälligen Dialogen. Matt Zoller Seitz gab bei RogerEbert.com zwei von vier Sternen, hob aber die Zugszene als hervorragend hervor. A. O. Scott schrieb in der New York Times zustimmend über Eastwoods handwerkliche Versenkung.
+
+Hinzu kamen eine Nominierung bei den Golden Trailer Awards 2018 und eine der Houston Film Critics Society in der Kategorie „Best Worst Film" — ein Urteil, das die Spaltung dieser Aufnahme deutlich macht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:556694', locale: 'de-de',
+    text: `### Worum es geht
+
+Alithea Binnie ist britische Professorin für Erzählforschung. In Istanbul findet sie eine alte Flasche — und befreit einen Dschinn.
+
+Er bietet ihr drei Wünsche an. Statt sie sofort zu äußern, hört sie zu: Der Dschinn erzählt von seiner Vergangenheit. Von seiner Gefangenschaft durch König Salomon, von einer Liebe zu einer Konkubine zur Zeit Süleymans des Prächtigen und von einer Beziehung zu Zefir.
+
+### Entstehungsgeschichte
+
+Vorlage ist A. S. Byatts Kurzgeschichte „The Djinn in the Nightingale's Eye" von 1994.
+
+George Miller führte Regie und schrieb das Drehbuch gemeinsam mit Augusta Gore.
+
+Tilda Swinton spielt Alithea Binnie, Idris Elba den Dschinn, Aamito Lagum die Königin von Saba, Matteo Bocelli den Prinzen Mustafa und Lachy Hulme den Sultan Suleiman.
+
+Produziert wurde der Film von Doug Mitchell und George Miller. Die Kamera führte John Seale, den Schnitt besorgte Margaret Sixel, die Musik stammt von Tom Holkenborg.
+
+Angekündigt wurde das Projekt im Oktober 2018. Der Dreh begann — durch die COVID-19-Pandemie verzögert — im November 2020 in Australien; weitere Aufnahmen entstanden in der Türkei und im Vereinigten Königreich. Das Budget betrug 60 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Hauptfigur ist Erzählforscherin — das ist kein Zufall, sondern das Programm des Films. Eine Frau, die beruflich Geschichten untersucht, trifft auf ein Wesen, das nur aus Geschichten besteht. Ihre Fachkenntnis macht sie misstrauisch gegenüber Wünschen, weil sie weiß, wie solche Erzählungen ausgehen.
+
+Daraus folgt die Bauform. Der Film besteht überwiegend aus Binnengeschichten — Salomon, Süleyman, Zefir. Die Rahmenebene ist ein Gespräch zwischen zwei Figuren; alles Spektakuläre liegt in der Vergangenheit und wird berichtet, nicht erlebt.
+
+Für einen Regisseur, der für Verfolgungsjagden bekannt ist, ist das eine ungewöhnliche Wahl. Mit John Seale an der Kamera und Margaret Sixel am Schnitt arbeitete George Miller dabei mit denselben Beteiligten, mit denen er zuvor sehr anders geartete Filme gemacht hatte.
+
+### Einordnung & Wirkung
+
+Bei 60 Millionen Dollar Herstellungskosten spielte der Film weltweit 20,3 Millionen ein — 8,3 Millionen in den USA und Kanada, 12 Millionen im übrigen Ausland. Er gilt damit als Misserfolg an der Kasse.
+
+Rotten Tomatoes weist 71 Prozent positive Bewertungen aus (260 Kritiken, Schnitt 6,5 von 10), Metacritic 60 von 100. Beim Publikum ergab CinemaScore ein „B".
+
+Gelobt wurden der visuelle Stil und die Darstellerleistungen, kritisiert die erzählerische Substanz. Eine Besprechung fasste das dahingehend zusammen, der Film sei eher ein visuelles und sprachliches Vergnügen als eine Sache emotionaler Tiefe.
+
+Der Abstand zwischen einer mehrheitlich positiven Kritik und einem Ergebnis von einem Drittel des Budgets beschreibt die Lage genau. Ein Film, dessen Reiz im Zuhören liegt und dessen Handlung überwiegend in einem Hotelzimmer stattfindet, ist an der Kinokasse schwer zu vermitteln — unabhängig davon, wie er beurteilt wird.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9963', locale: 'de-de',
+    text: `### Worum es geht
+
+Linda Hanson erfährt, dass ihr Mann Jim bei einem Autounfall ums Leben gekommen ist.
+
+Am nächsten Morgen lebt er. Am Tag darauf ist er wieder tot. Linda wechselt täglich zwischen zwei Wirklichkeiten und muss erst herausfinden, in welcher Reihenfolge die Tage überhaupt stehen — und ob sich der Unfall verhindern lässt. Dabei stößt sie auf etwas, das sie nicht wissen wollte: eine Annäherung zwischen Jim und seiner Kollegin Claire.
+
+### Entstehungsgeschichte
+
+Regie führte Mennan Yapo, das Drehbuch schrieb Bill Kelly.
+
+Sandra Bullock spielt Linda Hanson, Julian McMahon den Jim Hanson, Nia Long die Annie, Amber Valletta die Claire und Peter Stormare den Dr. Norman Roth.
+
+Produziert wurde der Film von Ashok Amritraj, Jennifer Gibgot, Jon Jashni, Sunil Perkash und Adam Shankman. Die Kamera führte Torsten Lippstock, den Schnitt besorgte Neil Travis, die Musik stammt von Klaus Badelt.
+
+Gedreht wurde in Louisiana. Das Budget betrug 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Konstruktion verlangt vom Publikum dieselbe Arbeit wie von der Hauptfigur. Weil Linda täglich zwischen zwei Wirklichkeiten wechselt, muss man beim Zusehen mitführen, was sie zu welchem Zeitpunkt bereits weiß und was in welcher der beiden Fassungen gilt.
+
+Genau daran hängt auch die Kritik. Ein Film, der seine Wirkung aus einer solchen Verschachtelung zieht, muss sie lückenlos halten; jede Ungenauigkeit fällt sofort auf. Berardinellis Vorwurf der Widersprüche zielt darauf.
+
+Bemerkenswert ist die Rolle der Hauptfigur. Linda erfährt etwas, das noch nicht geschehen ist, kann aber niemanden davon überzeugen — und weiß selbst nicht, ob sie es verhindern darf. Der Film verbindet damit ein übernatürliches Motiv mit einer Ehegeschichte, in der es um Vertrauen geht.
+
+### Einordnung & Wirkung
+
+Bei 20 Millionen Dollar Herstellungskosten spielte der Film weltweit knapp 84 Millionen ein.
+
+Die Kritik fiel vernichtend aus. Rotten Tomatoes weist acht Prozent aus, Metacritic 29 von 100. James Berardinelli bemängelte, der Film sei von Widersprüchen geplagt, seine Hauptfigur passiv und der Epilog problematisch.
+
+Der Abstand zwischen diesem Urteil und dem Einspielergebnis ist erheblich — der Film verdiente mehr als das Vierfache seiner Kosten. Das erklärt sich weniger aus der Machart als aus der Besetzung und aus einer Prämisse, die sich in einem Satz erzählen lässt.
+
+Berardinellis Einwand trifft dabei einen Punkt, der in der Anlage selbst liegt. Wer eine Woche in falscher Reihenfolge erlebt, kann nur reagieren; die Hauptfigur ist konstruktionsbedingt jemand, dem etwas widerfährt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:467660', locale: 'de-de',
+    text: `### Worum es geht
+
+Sawyer Valentini flieht vor einem Stalker und lässt sich in einer psychiatrischen Klinik unterbringen.
+
+Dort stellt sie fest, dass die Einrichtung Versicherungsbetrug betreibt — und dass ihr Verfolger unter falschem Namen als Pfleger dort arbeitet. Wer ihr glauben soll, ist die Frage, auf die alles hinausläuft: In einer Klinik ist die Behauptung, verfolgt zu werden, selbst schon ein Symptom.
+
+### Entstehungsgeschichte
+
+Regie führte Steven Soderbergh, das Drehbuch schrieben Jonathan Bernstein und James Greer.
+
+Claire Foy spielt Sawyer Valentini, Joshua Leonard den David Strine, der unter dem Namen George Shaw auftritt, Jay Pharoah den Nate Hoffman, Juno Temple die Violet, Aimee Mullins die Ashley Brighterhouse und Amy Irving Sawyers Mutter Angela. Matt Damon ist in einem Kurzauftritt als Detective Ferguson zu sehen.
+
+Produziert wurde der Film von Joseph Malloch unter Soderberghs Label Fingerprint Releasing. Die Musik stammt von David Wilder Savage. Soderbergh führte selbst die Kamera und den Schnitt, unter seinen Pseudonymen Peter Andrews und Mary Ann Bernard.
+
+Der Film wurde vollständig mit einem iPhone 7 Plus in 4K gedreht, unter Verwendung der App FiLMiC Pro. Das Budget betrug 1,5 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Aufnahmetechnik ist bei diesem Stoff mehr als eine Sparmaßnahme. Ein Film über eine Frau, deren Wahrnehmung angezweifelt wird, entsteht mit einer Kamera, deren Bild sichtbar von dem abweicht, was man aus dem Kino kennt — Verzerrung und Enge sind Teil der Aussage.
+
+Dass Soderbergh Kamera und Schnitt selbst übernimmt, verstärkt das. Unter zwei Pseudonymen verantwortet er drei der zentralen Gewerke; der Film ist die Arbeit einer einzelnen Handschrift, hergestellt für 1,5 Millionen Dollar.
+
+Die Konstruktion selbst ist eine Falle mit zwei Ausgängen. Entweder Sawyer hat recht — dann ist sie in Lebensgefahr und niemand hilft ihr. Oder sie irrt sich — dann ist sie am richtigen Ort. Der Film hält beide Möglichkeiten so lange offen, wie es geht, und macht daraus seine Spannung.
+
+### Einordnung & Wirkung
+
+Bei 1,5 Millionen Dollar Herstellungskosten spielte der Film weltweit 14,3 Millionen ein.
+
+Rotten Tomatoes weist 80 Prozent aus (239 Bewertungen), Metacritic 63 von 100.
+
+Richard Brody urteilte, Soderberghs Experiment sei geglückt. Justin Chang bescheinigte dem Film, kluge und scharfe Ideen einzuflechten.
+
+Bemerkenswert ist, dass beide Urteile die technische und die inhaltliche Ebene zusammenziehen. Das Experiment, von dem Brody spricht, ist nicht bloß die Aufnahme mit einem Telefon, sondern die Frage, ob sich damit ein Spielfilm herstellen lässt, der seine Mittel für die Sache einsetzt statt umgekehrt. Das Verhältnis von 1,5 zu 14,3 Millionen Dollar beantwortet zumindest die wirtschaftliche Hälfte dieser Frage.` },
 ];
