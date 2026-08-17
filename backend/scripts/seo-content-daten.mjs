@@ -28744,4 +28744,723 @@ Weltweit spielte der Film 46,8 Millionen Dollar ein, hinzu kamen elf Millionen a
 Die TV Spielfilm nannte ihn Splatterhorror mit bissiger politischer Botschaft — eine Beschreibung, die den Film gut trifft.
 
 Bemerkenswert bleibt, dass Romero als Erfinder dieser Erzählform der Einzige war, der die Untoten über Jahrzehnte hinweg konsequent als politische Figur behandelt hat — und nicht als bloßes Bedrohungsmittel.` },
+  // ---- Block 42 ----
+  {
+    bereich: 'titel', schluessel: 'movie:9529', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Doktorandin Helen Lyle erforscht in Chicago moderne Sagen — Geschichten, die jeder kennt und niemand belegen kann. Sie stößt dabei auf den Candyman: einen Schwarzen Mann, der im 19. Jahrhundert ermordet wurde und seither wiederkehren soll, wenn man seinen Namen vor einem Spiegel dreimal ausspricht.
+
+Helen tut genau das, um zu zeigen, dass nichts geschieht. Danach häufen sich Morde in der Siedlung Cabrini-Green, in der sie geforscht hat. Der Verdacht fällt auf sie, und sie wird verhaftet — womit sie in eine Lage gerät, in der ihr niemand mehr glaubt.
+
+### Entstehungsgeschichte
+
+Bernard Rose führte Regie und schrieb das Drehbuch. Vorlage ist Clive Barkers Erzählung "The Forbidden" aus dem fünften Band der "Bücher des Blutes" von 1989.
+
+Virginia Madsen spielt Helen Lyle, Tony Todd den Candyman.
+
+Die Musik komponierte Philip Glass, die Kamera führte Anthony B. Richmond. Das Budget lag bei acht Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Cabrini-Green in Chicago, einer realen Sozialbausiedlung mit schwerwiegenden Problemen. Der Film bezieht daraus einen erheblichen Teil seiner Wirkung — und zugleich seine Angreifbarkeit, weil er einen bewohnten Ort als Schauplatz des Grauens verwendet.
+
+Rassismus und strukturelle Gewalt sind dabei nicht Beiwerk, sondern Gegenstand: Die Figur des Candyman geht auf die Ermordung eines Schwarzen Mannes zurück, und der Film führt vor, wie Gewalt gegen Schwarze Menschen in Erzählungen weiterlebt, die andere über sie verbreiten.
+
+Philip Glass als Komponist trägt den Film in eine Tonlage, die für das Genre ungewöhnlich ist.
+
+### Einordnung & Wirkung
+
+Bei acht Millionen Dollar Herstellungskosten spielte der Film weltweit 26 Millionen ein.
+
+Die Kritik urteilte gut: 79 Prozent bei Rotten Tomatoes, mit Lob für den raffiniert inszenierten Psychoterror. Virginia Madsen gewann 1993 den Saturn Award.
+
+Es folgten zwei Fortsetzungen, 1995 und 1999. 2021 erschien eine Neuverfilmung, die von der Kritik ebenfalls gelobt wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8952', locale: 'de-de',
+    text: `### Worum es geht
+
+Steven Russell führt ein bürgerliches Familienleben. Nach einem schweren Autounfall entscheidet er sich, offen als schwuler Mann zu leben, und zieht nach Florida.
+
+Der Lebensstil, den er sich dort zulegt, ist mit ehrlicher Arbeit nicht zu finanzieren. Russell beginnt zu betrügen, vor allem mit Versicherungen, und landet im Gefängnis. Dort trifft er Phillip Morris, und die beiden verlieben sich. Um mit ihm zusammen sein zu können, macht Russell weiter, und zwar in einem Ausmaß, das ihm schließlich lebenslange Haft einbringt.
+
+### Entstehungsgeschichte
+
+Glenn Ficarra und John Requa führten gemeinsam Regie und schrieben das Drehbuch.
+
+Grundlage ist die wahre Geschichte von Steven Jay Russell, einem Hochstapler, der vor allem durch seine Ausbrüche bekannt wurde.
+
+Jim Carrey spielt Steven Russell, Ewan McGregor den Phillip Morris. Daneben sind Leslie Mann und Rodrigo Santoro zu sehen. Produziert wurde der Film von Andrew Lazar und Far Shariat.
+
+### Hinter den Kulissen
+
+In den Vereinigten Staaten hatte der Film erhebliche Schwierigkeiten, überhaupt in die Kinos zu kommen. Der Start war ursprünglich für März 2010 vorgesehen und wurde mehrfach verschoben — wegen der Darstellung gleichgeschlechtlicher Sexualität und wegen rechtlicher Streitigkeiten. Herausgekommen ist er schließlich am 3. Dezember 2010.
+
+Das ist bemerkenswert, weil der Film mit Jim Carrey einen der bekanntesten Komödiendarsteller seiner Zeit in der Hauptrolle hatte — und die Verzögerung sich nicht mit fehlender Aufmerksamkeit erklären lässt.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war überwiegend positiv: 71 Prozent bei Rotten Tomatoes, 65 von 100 bei Metacritic.
+
+Gelobt wurde vor allem der Mut, eine gleichgeschlechtliche Liebesgeschichte ohne Beschönigung und ohne Erklärungsbedarf zu erzählen. Bemängelt wurde, dass der Film die Balance zwischen überzeichneter Komödie und Drama nicht durchgehend halte.
+
+Für Jim Carrey blieb es einer der wenigen Filme, in denen er eine Rolle spielt, die ernsthaft und komisch zugleich angelegt ist — und der zugleich zeigt, wie schwer sich der amerikanische Verleihbetrieb 2010 noch mit dem Stoff tat.` },
+  {
+    bereich: 'titel', schluessel: 'series:1973', locale: 'de-de',
+    text: `### Worum es geht
+
+Jack Bauer arbeitet für eine Einheit zur Terrorabwehr. Jede Staffel erzählt einen einzigen Tag — vierundzwanzig zusammenhängende Stunden, in Echtzeit.
+
+Was in einer Folge geschieht, dauert genau so lange, wie die Folge läuft. Das gilt für Verhöre ebenso wie für Autofahrten und für die Zeit, die verstreicht, während eine Bombe scharf ist. Der Zuschauer weiß dabei regelmäßig mehr als die Figuren, weil der Film mehrere Handlungsstränge gleichzeitig zeigt.
+
+### Entstehungsgeschichte
+
+Joel Surnow und Robert Cochran entwickelten die Serie. Ab der fünften Staffel übernahm Howard Gordon die Leitung.
+
+Kiefer Sutherland spielt Jack Bauer und ist in jeder einzelnen Folge zu sehen. Seine Vertragsverlängerung von 2006 machte ihn mit rund 40 Millionen Dollar zum bestbezahlten Darsteller im Fernsehdrama.
+
+Gedreht wurde zunächst auf 35-Millimeter-Film, mit sorgfältiger Farbkorrektur, damit die Anschlüsse über einen fortlaufenden Tag hinweg stimmen. Für die Darstellung von Militär und Geheimdiensten arbeitete die Produktion eng mit den entsprechenden Stellen zusammen.
+
+### Hinter den Kulissen
+
+Eine Staffel brauchte im Schnitt neun Monate Produktionszeit und verbrauchte etwa 1,22 Kilometer Filmmaterial.
+
+Das bekannteste Gestaltungsmittel ist die geteilte Bildfläche: Mehrere Fenster zeigen, was gleichzeitig an verschiedenen Orten passiert. Dazu kommt die digitale Uhr, deren metallisch-schriller Ton den Ablauf der Zeit markiert.
+
+Umstritten waren von Anfang an die Folterszenen. Der Vorwurf lautete, die Serie gewöhne ihr Publikum an Folter und stelle sie als wirksam dar; diskutiert wurde auch ihr möglicher Einfluss auf Angehörige des Militärs. Die siebte Staffel griff das auf und konfrontierte Bauer mit der Verantwortung für seine Verhörmethoden.
+
+### Einordnung & Wirkung
+
+Die Serie startete am 6. November 2001 bei Fox, also zwei Monate nach den Anschlägen vom 11. September. Im deutschsprachigen Raum lief sie ab dem 2. September 2003.
+
+Zwischen 2001 und 2010 entstanden acht Staffeln mit insgesamt 192 Folgen. Hinzu kamen der Fernsehfilm "Redemption" und die zwölfteilige Reihe "Live Another Day".
+
+In den Vereinigten Staaten sahen über 13 Millionen Zuschauer zu. Die Urteile über Darstellung und Glaubwürdigkeit fielen gemischt aus; ausgezeichnet wurde die Serie unter anderem mit einem Golden Globe und einem Emmy als bestes Drama.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1852', locale: 'de-de',
+    text: `### Worum es geht
+
+Am Morgen des 11. September 2001 rücken New Yorker Polizisten zum World Trade Center aus. Als die Türme einstürzen, werden zwei von ihnen verschüttet.
+
+John McLoughlin und Will Jimeno überleben, eingeklemmt unter Trümmern. Der Film bleibt stundenlang bei ihnen: bei den Schmerzen und bei der Ungewissheit, ob sie überhaupt gefunden werden. Dazwischen zeigt er ihre Familien, die auf Nachricht warten — und die Rettungskräfte, die sich zu ihnen durcharbeiten.
+
+### Entstehungsgeschichte
+
+Regie führte Oliver Stone, das Drehbuch schrieb Andrea Berloff.
+
+Nicolas Cage spielt John McLoughlin, Michael Peña den Will Jimeno. Daneben sind Maggie Gyllenhaal, Maria Bello und Michael Shannon zu sehen.
+
+Der Fall ist real. McLoughlin und Jimeno waren die Überlebenden Nummer 18 und 19 von insgesamt zwanzig Menschen, die lebend aus den Trümmern geborgen wurden. Beide mussten wegen ihrer Verletzungen den Dienst quittieren.
+
+### Hinter den Kulissen
+
+Es handelt sich um eine internationale Gemeinschaftsproduktion der Vereinigten Staaten, Deutschlands und Großbritanniens. In den Vereinigten Staaten lief der Film am 9. August 2006 an, in Deutschland am 28. September.
+
+Gearbeitet wurde mit aufwendigen Kulissen und Computerbildern. Am Ground Zero selbst wurde bewusst nicht gedreht — aus Rücksicht auf die Anwohner.
+
+Bemerkenswert ist die Haltung des Films. Oliver Stone gilt als politischer Regisseur, der Institutionen angreift. Dieser Film tut das nicht: Er ist unpolitisch angelegt und wirkt eher therapeutisch als historisch aufklärend.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war gemischt. Ein Teil der Angehörigen der Opfer versagte dem Film die Unterstützung — fünf Jahre nach den Anschlägen war die Frage, ob und wie sie verfilmt werden dürfen, noch offen.
+
+Die deutsche Filmbewertungsstelle vergab das Prädikat besonders wertvoll.
+
+Der Film gehört zu den ersten Spielfilmen über den 11. September überhaupt und hat sich dabei für den engsten möglichen Ausschnitt entschieden: zwei Männer unter Trümmern, ohne Erklärung dessen, was über ihnen geschieht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:55420', locale: 'de-de',
+    text: `### Worum es geht
+
+In der Nacht, in der ein zweiter, der Erde gleichender Planet am Himmel entdeckt wird, fährt die junge Rhoda Williams betrunken nach Hause. Abgelenkt vom neuen Gestirn verursacht sie einen Unfall, bei dem Menschen sterben.
+
+Nach vier Jahren Haft kommt sie frei und sucht den Mann auf, dessen Familie sie getötet hat: John Burroughs. Sie sagt ihm nicht, wer sie ist, und versucht heimlich, etwas gutzumachen. Zugleich läuft ein Wettbewerb, dessen Gewinner einen Platz auf dem Flug zur zweiten Erde bekommt — dort, wo es womöglich eine andere Version des eigenen Lebens gibt.
+
+### Entstehungsgeschichte
+
+Mike Cahill führte Regie; es war sein erster abendfüllender Film. Das Drehbuch schrieb er gemeinsam mit der Hauptdarstellerin Brit Marling.
+
+Brit Marling spielt Rhoda Williams, William Mapother den John Burroughs. In weiteren Rollen sind Jordan Baker, Robin Lord Taylor und Kumar Pallana zu sehen.
+
+### Hinter den Kulissen
+
+Das Budget betrug 200.000 Dollar — für einen Film mit Science-Fiction-Prämisse eine außerordentlich kleine Summe. Die Darsteller erhielten nur eine geringe Bezahlung.
+
+Aus Kostengründen verlegte Cahill den Schauplatz in seine Heimatstadt New Haven in Connecticut.
+
+Die Sparsamkeit prägt die Form. Der Film verwendet seine Prämisse nicht für Schauwerte, sondern als Bild für eine einzige Frage — ob es irgendwo ein Leben gibt, in dem man diesen einen Abend anders entschieden hat.
+
+### Einordnung & Wirkung
+
+Die Premiere fand 2011 beim Sundance Film Festival statt. Dort gewann der Film den Alfred P. Sloan Feature Film Prize sowie einen Sonderpreis der Jury im amerikanischen Wettbewerb.
+
+Die Kritik hob vor allem die Eigenständigkeit hervor und nannte den Film höchst originell — gelobt wurde die Verbindung von Science Fiction mit einem sehr konkreten Drama über Schuld und Wiedergutmachung.
+
+Für Brit Marling war es der Durchbruch, und zwar in doppelter Rolle: als Darstellerin und als Autorin.` },
+  {
+    bereich: 'titel', schluessel: 'movie:325789', locale: 'de-de',
+    text: `### Worum es geht
+
+In den achtziger Jahren arbeitet Robert Mazur als Sonderermittler des amerikanischen Zolls. Statt Drogen zu verfolgen, geht er das Geld an: Er schleust sich unter dem Namen Bob Musella als Finanzberater in die Kartelle ein.
+
+Was er aufdeckt, reicht weit über den Drogenhandel hinaus. Mazur legt die Geldwäsche der Organisation von Pablo Escobar offen und bringt die Bank of Credit and Commerce International zu Fall — ein Institut, das sich unter anderem widerrechtlich die Kontrolle über die First American Bankshares in Washington verschafft hatte.
+
+### Entstehungsgeschichte
+
+Regie führte Brad Furman, das Drehbuch schrieb seine Mutter Ellen Brown Furman nach Robert Mazurs Autobiografie.
+
+Der Fall ist real: Die Operation trug den Namen C-Chase und richtete sich gegen internationale Netze der Geldwäsche.
+
+Bryan Cranston spielt Robert Mazur. Daneben sind Diane Kruger, John Leguizamo, Benjamin Bratt, Amy Ryan, Olympia Dukakis und Michael Paré zu sehen.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen am 23. Februar 2015 in London und verlagerten sich Ende April nach Tampa in Florida; gedreht wurde unter anderem am Hafen von Tampa.
+
+Das Budget wird zwischen 28 und 47,5 Millionen Dollar angegeben.
+
+Der Reiz des Stoffes liegt in der Umkehrung des üblichen Musters: Der Ermittler wird nicht enttarnt, weil er Fehler macht, sondern gerät in Gefahr, weil die Tarnung zu gut funktioniert — er muss Freundschaften pflegen mit Menschen, die er zugleich ins Gefängnis bringt.
+
+### Einordnung & Wirkung
+
+Der Film startete mit 5,3 Millionen Dollar in den Vereinigten Staaten und kam insgesamt auf 22,2 Millionen — wirtschaftlich ein Fehlschlag.
+
+Die Kritik urteilte freundlich: 72 Prozent bei Rotten Tomatoes, 66 von 100 bei Metacritic. Gelobt wurde vor allem Bryan Cranston; bemängelt wurde eine überladene Handlung, die dem Film den Zug nehme.
+
+Das Publikum war deutlich zufriedener und vergab bei CinemaScore ein A minus — eine Bewertung, die in einem auffälligen Missverhältnis zum Einspielergebnis steht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:181283', locale: 'de-de',
+    text: `### Worum es geht
+
+Sowjetunion in den frühen fünfziger Jahren. Leo Demidow ist Offizier des Geheimdienstes und ein Held des Krieges — er gehörte zu denen, die auf dem Reichstag die Fahne hissten.
+
+Als Kinder tot aufgefunden werden, ist die amtliche Auskunft eindeutig: Im sozialistischen Paradies gibt es keine Mörder dieser Art, also handelt es sich um Unfälle. Demidow glaubt das nicht. Gemeinsam mit General Nesterow verfolgt er eine Spur, die auf 44 tote Kinder führt — und muss dabei gegen den eigenen Apparat arbeiten, insbesondere gegen den skrupellosen Offizier Wassili Nikitin.
+
+### Entstehungsgeschichte
+
+Regie führte Daniél Espinosa, das Drehbuch schrieb Richard Price nach Tom Rob Smiths Roman von 2008. Produzent war Ridley Scott. Der Film läuft 137 Minuten.
+
+Tom Hardy spielt Leo Demidow. Daneben sind Gary Oldman, Noomi Rapace und Joel Kinnaman zu sehen.
+
+Gedreht wurde ab Juni 2013 in Tschechien, unter anderem in Prag, Ostrava und Kladno.
+
+### Hinter den Kulissen
+
+Der eigentliche Gegenstand des Films ist nicht der Mörder, sondern die Behauptung, es könne ihn nicht geben. Wer die Tat benennt, greift damit das Staatsverständnis an — und die Ermittlung ist deshalb selbst ein Verbrechen.
+
+Genau daran entzündete sich der politische Streit. Russland, Weißrussland, die Ukraine, Kasachstan und Kirgisistan untersagten die Aufführung des Films; begründet wurde das mit der aus ihrer Sicht unvorteilhaften Darstellung der Stalin-Zeit.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte überwiegend ablehnend: 23 Prozent bei Rotten Tomatoes. Der wiederkehrende Befund lautete, es gebe hier eine packende Geschichte und eine starke Leistung von Tom Hardy, aber zu wenig Spannung.
+
+Auch wirtschaftlich blieb der Film hinter den Erwartungen zurück.
+
+Bemerkenswert ist damit vor allem das Missverhältnis: Ein Stoff von erheblichem Gewicht, eine ungewöhnlich starke Besetzung, ein Verbot in fünf Ländern — und ein Film, den kaum jemand gesehen hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11808', locale: 'de-de',
+    text: `### Worum es geht
+
+Mark Roberts wird beschuldigt, zwei Agenten des diplomatischen Sicherheitsdienstes getötet zu haben. Beim Gefangenentransport muss das Flugzeug notlanden, und Roberts nutzt das Durcheinander zur Flucht.
+
+U.S. Marshal Samuel Gerard nimmt die Verfolgung auf — derselbe Mann, der Jahre zuvor schon einmal einen Flüchtigen gejagt hat, der unschuldig war. Auch diesmal kommen ihm Zweifel. Was er findet, ist ein Komplott: Der korrupte Agent John Royce hat Roberts vorgeschoben, um eine illegale Waffenübergabe zu verdecken.
+
+### Entstehungsgeschichte
+
+Regie führte Stuart Baird, das Drehbuch schrieben John Pogue und Roy Huggins.
+
+Der Film ist die Nachfolgearbeit zu "Auf der Flucht" von 1993 mit Harrison Ford. Die Hauptfigur wechselt: Nicht mehr der Verfolgte steht im Mittelpunkt, sondern der Verfolger.
+
+Tommy Lee Jones spielt erneut den U.S. Marshal Gerard, Wesley Snipes den Roberts, Robert Downey Jr. den Gegenspieler John Royce.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Chicago, in New York und in den Sümpfen von Tennessee.
+
+Für die Absturzszene mietete die Produktion eine Boeing 727. Umgesetzt wurde die Szene mit Modellen und eigens gebauten Kameravorrichtungen.
+
+Der Befund der Kritik lautete, der Film folge derselben Formel wie sein Vorgänger, allerdings mit mehr technischem Gerät und weniger Anteilnahme.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war schlecht: 31 Prozent bei Rotten Tomatoes, 47 von 100 bei Metacritic.
+
+Bemängelt wurde vor allem, dass die Hauptfiguren kein Profil bekommen — anders als im Vorgänger, dessen Reiz gerade in der Beziehung zwischen Jäger und Gejagtem lag. Gelobt wurden dagegen die Actionszenen und die Darstellung von Tommy Lee Jones, der seine Figur unverändert trocken anlegt.
+
+Der Film gilt seither als Beispiel dafür, wie schwer sich eine Fortsetzung tut, die die tragende Figur ihres Vorgängers nicht mehr zur Verfügung hat.` },
+  // ---- Block 43 ----
+  {
+    bereich: 'titel', schluessel: 'movie:24253', locale: 'de-de',
+    text: `### Worum es geht
+
+Lisbeth Salander kehrt nach einem Jahr im Ausland nach Schweden zurück. Kurz darauf werden ein Journalist, dessen Freundin und Salanders früherer Vormund ermordet — und alle Spuren führen zu ihr.
+
+Während die Polizei sie im ganzen Land sucht, versucht Mikael Blomkvist, ihre Unschuld zu belegen. Was er dabei aufdeckt, ist ein Netz aus Menschenhandel, das bis in staatliche Stellen reicht — und das mit Salanders Vater Alexander Zalatschenko zusammenhängt, von dem sie sich vor Jahren losgesagt hat.
+
+### Entstehungsgeschichte
+
+Regie führte Daniel Alfredson. Er übernahm von Niels Arden Oplev, der den ersten Teil inszeniert hatte.
+
+Die Vorlage ist Stieg Larssons Roman von 2006, der zweite Band der Millennium-Reihe.
+
+Michael Nyqvist spielt Mikael Blomkvist, Noomi Rapace die Lisbeth Salander. In weiteren Rollen sind Lena Endre, Peter Andersson und Per Oscarsson zu sehen.
+
+### Hinter den Kulissen
+
+Der Film ist der zweite Teil der Millennium-Trilogie. Er erschien im selben Jahr wie der erste, der dritte folgte zwei Monate später — eine ungewöhnlich dichte Abfolge.
+
+Erzählerisch kehrt sich das Verhältnis der beiden Hauptfiguren um. Im ersten Teil ermittelten Blomkvist und Salander gemeinsam; hier sind sie den größten Teil des Films getrennt, und Salander ist nicht mehr Mitarbeiterin, sondern Gegenstand der Ermittlung.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 67,1 Millionen Dollar ein, davon 51,3 Millionen außerhalb der Vereinigten Staaten, bevor er dort überhaupt startete.
+
+Die Kritik urteilte freundlich: 69 Prozent bei Rotten Tomatoes mit einem Schnitt von 6,2 von 10, 66 von 100 bei Metacritic. Gelobt wurde durchgehend Noomi Rapace; angemerkt wurde zugleich, dass der Film schwächer sei als sein Vorgänger.
+
+Rapaces Darstellung der Lisbeth Salander gilt bis heute als Maßstab, an dem sich jede spätere Besetzung der Figur messen lassen muss.` },
+  {
+    bereich: 'titel', schluessel: 'movie:227973', locale: 'de-de',
+    text: `### Worum es geht
+
+Charlie Brown ist der Junge, dem nichts gelingt. Als ein neues Mädchen mit roten Haaren in die Nachbarschaft zieht, beschließt er, sie zu beeindrucken — und versucht es mit einer Zaubervorstellung, mit Tanzunterricht und mit einem Aufsatz über ein Buch.
+
+Jeder dieser Versuche geht schief. Parallel dazu läuft Snoopys eigene Geschichte: Er stellt sich vor, als Flieger im Ersten Weltkrieg gegen den Roten Baron zu kämpfen.
+
+### Entstehungsgeschichte
+
+Regie führte Steve Martino. Das Drehbuch schrieben Craig Schulz, der Sohn des Zeichners Charles M. Schulz, dessen Enkel Brian Schulz und Cornelius Uliano — die Familie war also unmittelbar beteiligt.
+
+Produziert wurde der Film von Blue Sky Studios für 20th Century Fox. Er erschien am 6. November 2015 in den Vereinigten Staaten und am 23. Dezember 2015 in Deutschland.
+
+Die Musik stammt von Christophe Beck, das Titellied singt Meghan Trainor.
+
+### Hinter den Kulissen
+
+Die Umsetzung als dreidimensionaler Computerfilm war die schwierigste Entscheidung. Blue Sky Studios übertrug den eigenen Animationsstil auf eine Vorlage, deren Wirkung gerade auf der Flächigkeit und der Kargheit der Zeichnung beruhte.
+
+Zwei Kleinigkeiten liefert der Film nach, die in fünfzig Jahren Comic nie preisgegeben wurden: den Namen des rothaarigen Mädchens — Heather Wold — und den vollen Namen von Peppermint Patty, Patricia Reichardt.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte zurückhaltend. Angemerkt wurde, dass Slapstick-Sequenzen und einfache Botschaften den Film bestimmen und dass ihm die satirische Schärfe von Charles M. Schulz' Vorlage fehle.
+
+Auch die Übertragung ins Dreidimensionale wurde in Frage gestellt: ob sie dem Stoff überhaupt diene.
+
+Bemerkenswert bleibt der Spagat, den die Produktion versuchte: eine Vorlage, deren Reiz in ihrer Kargheit liegt, mit den Mitteln eines modernen Animationsstudios zu erzählen — und dabei die Figuren selbst weitgehend unverändert zu lassen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:656690', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film handelt davon, wie soziale Netzwerke gebaut sind und was das mit ihren Nutzern macht: Datensammlung, ein Aufbau, der auf möglichst lange Verweildauer zielt, Folgen für die Psyche von Jugendlichen und die Verbreitung von Verschwörungserzählungen.
+
+Er tut das in zwei Formen zugleich. Fachleute kommen in Interviews zu Wort — viele von ihnen haben die Systeme, die sie nun kritisieren, selbst gebaut. Dazwischen läuft ein Spielhandlungsstrang über einen Jugendlichen, der abhängig wird, und über die Mechanismen, die ihn dabei steuern.
+
+### Entstehungsgeschichte
+
+Jeff Orlowski führte Regie und war Mitautor des Drehbuchs.
+
+Zu den Gesprächspartnern gehören Tristan Harris, ehemals Ethiker bei Google, sowie Jaron Lanier, Shoshana Zuboff und weitere frühere Beschäftigte von Twitter, Pinterest und Instagram.
+
+Die Premiere fand beim Sundance Film Festival statt. Netflix veröffentlichte den Film als Eigenproduktion am 9. September 2020.
+
+### Hinter den Kulissen
+
+Die Mischform ist zugleich Stärke und Angriffsfläche. Der Spielhandlungsstrang macht abstrakte Vorgänge anschaulich; er vereinfacht sie aber auch erheblich, weil er sie in eine Familiengeschichte übersetzt.
+
+Facebook reagierte mit einer eigenen Stellungnahme auf den Film.
+
+### Einordnung & Wirkung
+
+Bei Rotten Tomatoes steht der Film zwischen 86 und 88 Prozent.
+
+Die Gegenkritik war deutlich. Die Süddeutsche Zeitung warf ihm vor, Aussagen stark gekürzt oder falsch wiedergegeben zu haben. Ein zweiter wiederkehrender Einwand: Der Film biete keine Lösungen, sondern nur eine Dystopie — und die Fachleute, die dort warnen, seien dieselben, die an den Systemen verdient haben.
+
+Wirkung hat er dennoch entfaltet. Er hat die öffentliche Auseinandersetzung über Technologiekonzerne in vielen Ländern zugespitzt und wird dabei selbst kontrovers gesehen: als Warnung und als vereinfachendes Werk zugleich.` },
+  {
+    bereich: 'titel', schluessel: 'movie:7288', locale: 'de-de',
+    text: `### Worum es geht
+
+Alex und Nancy Rose sind Schriftsteller und kaufen sich in Brooklyn eine Altbauwohnung über zwei Etagen.
+
+Den Haken erfahren sie erst danach: Im oberen Stockwerk wohnt eine ältere Mieterin, Mrs. Connelly, die sie nicht loswerden. Sie ist laut, sie lässt bauen, sie ist überall. Alle Versuche, sie zum Auszug zu bewegen, scheitern — und am Ende sind es die beiden Käufer, die das Haus verlassen.
+
+### Entstehungsgeschichte
+
+Regie führte Danny DeVito, das Drehbuch schrieb Larry Doyle.
+
+Ben Stiller spielt den Autor Alex Rose, Drew Barrymore seine Frau Nancy, Eileen Essell die Mieterin Mrs. Connelly. In weiteren Rollen sind Harvey Fierstein und Justin Theroux zu sehen.
+
+Gedreht wurde in New York und Los Angeles, das Budget lag bei etwa 40 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Aus dem Ausgangspunkt — ein Wohnungskauf, der sich als Falle erweist — macht der Film keine Auseinandersetzung mit dem Wohnungsmarkt, sondern eine Reihe von Streichen, in denen sich beide Seiten immer weiter hochschaukeln.
+
+Die Besetzung von Eileen Essell, einer älteren Darstellerin ohne große Bekanntheit, gegen zwei Stars ist dabei das Bemerkenswerteste am Film.
+
+### Einordnung & Wirkung
+
+An den amerikanischen Kinokassen spielte der Film nur rund zehn Millionen Dollar ein, bei 40 Millionen Herstellungskosten also ein klarer Fehlschlag.
+
+Die Kritik lehnte ihn ab. Roger Ebert hielt die Handlung für zu unglaubwürdig. Das Lexikon des internationalen Films nannte ihn eine vorhersehbare, auf plumpen Klamauk angelegte Komödie.
+
+Bemerkenswert bleibt das Missverhältnis: eine Ausgangslage, aus der sich eine bissige Komödie über Eigentum und Nachbarschaft hätte machen lassen, und ein Ergebnis, das bei der Schlägerei zwischen drei Parteien stehen bleibt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:80389', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein namenloser amerikanischer Krimineller flieht mit zwei Millionen Dollar über die Grenze nach Mexiko — und wird dort von korrupten Beamten festgenommen, die das Geld für sich behalten.
+
+Er landet in El Pueblito, einem Gefängnis in Tijuana, das eher eine ummauerte Stadt ist: Familien wohnen dort, es gibt Läden, Drogen und eine eigene Ordnung. Der Gringo lernt einen Jungen kennen, den der Gefängnisboss Javi am Leben hält, weil er dessen Leber für eine Transplantation braucht. Von da an hat er ein Ziel, das nicht mehr sein eigenes ist.
+
+### Entstehungsgeschichte
+
+Regie führte Adrian Grünberg, das Drehbuch schrieb er gemeinsam mit Mel Gibson und Stacy Perskie. Grünberg hatte zuvor als Regieassistent bei Gibsons "Apocalypto" gearbeitet.
+
+Mel Gibson spielt den Gringo. Daneben sind Daniel Giménez Cacho als Javi, Dolores Heredia als Mutter des Jungen und Peter Stormare als Frank Fowler zu sehen.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen im März 2010 in San Diego, in Brownsville und in Veracruz. Der Hauptteil entstand im Ignacio-Allende-Gefängnis in Veracruz; für die Aufnahmen wurden über 200 Insassen vorübergehend verlegt.
+
+Ungewöhnlich ist die Auswertung. Der Film bekam in den Vereinigten Staaten keinen Kinostart und erschien dort ab Mai 2012 unmittelbar als Video-on-Demand. In Deutschland lief er am 28. Februar 2013 regulär im Kino an.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte überwiegend positiv: 81 Prozent bei Rotten Tomatoes.
+
+Das ist der eigentliche Befund zu diesem Film — ein gut aufgenommener Genrefilm, den in seinem Herkunftsland niemand im Kino sehen konnte.
+
+Er gehört damit zu den frühen Beispielen dafür, dass die Direktauswertung nicht mehr zwangsläufig ein Qualitätsurteil bedeutet, sondern eine Geschäfts- oder Imageentscheidung sein kann.` },
+  {
+    bereich: 'titel', schluessel: 'movie:42684', locale: 'de-de',
+    text: `### Worum es geht
+
+Bewohner eines Hochhauses in Los Angeles werden Zeugen einer außerirdischen Invasion. Blaue Lichter über der Stadt versetzen Menschen in einen willenlosen Zustand; fliegende Maschinen sammeln sie ein.
+
+Von diesem Moment an spielt der Film fast vollständig im Gebäude. Draußen läuft die Invasion, drinnen versuchen die Eingeschlossenen zu entscheiden, was zu tun ist. Jarrod, die Hauptfigur, ist dem Licht ausgesetzt gewesen — und verändert sich.
+
+### Entstehungsgeschichte
+
+Regie führten die Brüder Greg und Colin Strause. Das Drehbuch schrieben Joshua Cordes und Liam O'Donnell, wobei O'Donnell zugleich als Produzent auftrat.
+
+Eric Balfour spielt den Jarrod, Scottie Thompson seine Freundin Elaine. Daneben sind Brittany Daniel, David Zayas und Donald Faison zu sehen.
+
+Gedreht wurde von Februar bis März 2010 in Marina del Rey, überwiegend in einem Hochhaus.
+
+### Hinter den Kulissen
+
+Die Finanzierung ist der interessanteste Teil. Die eigentlichen Dreharbeiten kosteten nur 500.000 Dollar. Die Effekte erstellten die Regisseure in ihrer eigenen Firma Hydraulx und hielten die Gesamtkosten damit zwischen 10 und 20 Millionen Dollar — für einen Film dieser Machart außerordentlich wenig.
+
+Genau daraus entstand ein Rechtsstreit. Sony Pictures erwog eine Klage, weil Hydraulx gleichzeitig am konzerneigenen "Battle: Los Angeles" arbeitete, der ebenfalls von einer Invasion in Los Angeles handelt. Sony ließ das Schiedsverfahren später fallen und bestätigte, dass keine Effekte zwischen den Filmen geteilt worden waren.
+
+### Einordnung & Wirkung
+
+Bei 10 bis 20 Millionen Dollar Herstellungskosten spielte der Film weltweit 68,3 Millionen ein, davon 21,4 Millionen in den Vereinigten Staaten.
+
+Die Kritik lehnte ihn deutlich ab: 15 Prozent bei Rotten Tomatoes, 26 von 100 bei Metacritic, ein D minus beim Publikum von CinemaScore. Der Befund lautete, gute Effekte allein könnten eine flache Handlung mit einfallslosen Dialogen nicht ausgleichen.
+
+Trotzdem folgten drei Fortsetzungen: "Beyond Skyline" 2017, "Skylines" 2020 und "Skyline: Warpath" 2025.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9036', locale: 'de-de',
+    text: `### Worum es geht
+
+Jerry Shepard arbeitet als Schlittenhundeführer auf einer Forschungsstation in der Antarktis. Mit seinen acht Hunden bringt er einen Professor zu einem entlegenen Punkt und rettet ihn, als dieser verunglückt.
+
+Dann muss die Station überstürzt geräumt werden, und die Hunde bleiben zurück. Bis eine Rettung überhaupt möglich wird, müssen sie einen antarktischen Winter überstehen. Der Film erzählt beides nebeneinander: die Tiere im Eis und Shepards Bemühen, zu ihnen zurückzukommen.
+
+### Entstehungsgeschichte
+
+Regie führte Frank Marshall, das Drehbuch schrieb David DiGilio. Produziert wurde der Film von Disney mit einem Budget von 40 Millionen Dollar.
+
+Paul Walker spielt Jerry Shepard. Daneben sind Bruce Greenwood, Moon Bloodgood und Jason Biggs zu sehen.
+
+Grundlage sind wahre Ereignisse von 1958: Eine japanische Expedition musste ihre Schlittenhunde in der Antarktis zurücklassen. Derselbe Vorgang war bereits Vorlage des japanischen Films "Nankyoku Monogatari".
+
+### Hinter den Kulissen
+
+Die acht Filmhunde wurden von insgesamt 32 Tieren gespielt — Alaskan Malamutes und Sibirische Huskys.
+
+An einer Stelle weicht der Film deutlich von der Wirklichkeit ab: Bei der realen Expedition blieben fünfzehn Hunde zurück. Im Film sind es acht, von denen sechs überleben.
+
+Das ist die wesentliche Entscheidung dieser Produktion — eine wahre Begebenheit, deren Ausgang für ein Familienpublikum abgemildert wurde.
+
+### Einordnung & Wirkung
+
+Bis August 2006 spielte der Film weltweit über 120 Millionen Dollar ein und war damit ein deutlicher wirtschaftlicher Erfolg.
+
+Die Kritik urteilte gemischt. Gelobt wurde die emotionale Wirkung, bemängelt wurde die unrealistische Darstellung des antarktischen Winters — die Tiere überstehen Bedingungen, unter denen sie tatsächlich nicht überlebt hätten.
+
+Bemerkenswert bleibt, dass ein Film mit Tieren als eigentlichen Hauptfiguren bei diesem Budget und diesem Ergebnis funktionierte.` },
+  {
+    bereich: 'titel', schluessel: 'series:655', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Jahrhundert nach den Ereignissen der Originalserie fliegt ein neues Schiff unter altem Namen: die USS Enterprise-D.
+
+Kommandiert wird sie von Jean-Luc Picard, einem Captain, der kultivierter und diplomatischer auftritt als sein Vorgänger Kirk. Zur Besatzung gehören der temperamentvollere Erste Offizier Riker, der Androide Data, der blinde Chefingenieur La Forge und der Klingone Worf.
+
+### Entstehungsgeschichte
+
+Gene Roddenberry entwarf die Serie als Fortsetzung seiner Originalserie und verlegte sie bewusst um hundert Jahre nach vorn, ins 24. Jahrhundert.
+
+Patrick Stewart spielt Captain Picard, Jonathan Frakes den Ersten Offizier Riker, Brent Spiner den Data, LeVar Burton den La Forge und Michael Dorn den Worf.
+
+Ab der dritten Staffel übernahm Rick Berman zunehmend die kreative Verantwortung von Roddenberry.
+
+### Hinter den Kulissen
+
+Michael Piller führte eine offene Arbeitsweise ein: Die Serie nahm unverlangt eingesandte Drehbücher an — im amerikanischen Fernsehen eine Neuheit.
+
+Der Ton unterscheidet sich deutlich vom Vorbild. Wo die Originalserie von der Reibung zwischen Kirk und Spock lebte, setzt die Fortsetzung auf ein erwachseneres, stärker wissenschaftlich geprägtes Vorgehen — Konflikte werden häufiger in Besprechungen gelöst als im Kampf.
+
+### Einordnung & Wirkung
+
+Die amerikanische Erstausstrahlung war am 28. September 1987, die deutschsprachige am 7. September 1990 im ZDF, später bei Sat.1. Insgesamt entstanden sieben Staffeln mit 178 Folgen.
+
+Die ersten beiden Staffeln wurden kritisiert; die folgenden fünf gelten als deutlich vielschichtiger. Regelmäßig sahen über zehn Millionen Zuschauer zu.
+
+Die Serie gewann 18 Emmy Awards und zwei Hugo Awards und zählt zu den erfolgreichsten Science-Fiction-Serien überhaupt.
+
+Vier Kinofilme folgten: "Treffen der Generationen" 1994, "Der erste Kontakt" 1996, "Der Aufstand" 1998 und "Nemesis" 2002.` },
+  // ---- Block 44 ----
+  {
+    bereich: 'titel', schluessel: 'movie:170687', locale: 'de-de',
+    text: `### Worum es geht
+
+In einer erfundenen Stadt leben die Boxtrolls — friedliche Wesen, die in Pappkartons stecken und von der Bevölkerung für Ungeheuer gehalten werden.
+
+Archibald Snatcher macht daraus ein Geschäft. Er verspricht dem Stadtrat, die Boxtrolls auszurotten, und will sich damit den Aufstieg in dessen erlauchten Kreis erkaufen. Ihm entgegen steht Eggs, ein Menschenjunge, der bei den Boxtrolls aufgewachsen ist und sie für seine Familie hält.
+
+### Entstehungsgeschichte
+
+Regie führten Graham Annable und Anthony Stacchi. Produziert wurde der Film vom Studio Laika, das das Vorhaben bereits 2008 als Literaturverfilmung ankündigte und am 7. Februar 2013 bestätigte, es als nächsten dreidimensionalen Film umzusetzen.
+
+Die Vorlage ist Alan Snows Romanreihe "Here Be Monsters!", auf Deutsch als "Die Monster von Rattingen" erschienen.
+
+Die Stimmen sprechen Isaac Hempstead-Wright als Eggs, Elle Fanning als Winnie, Ben Kingsley als Snatcher und Simon Pegg als Herbert Trubshaw.
+
+### Hinter den Kulissen
+
+Der Film ist in Stop-Motion gedreht und zugleich für die dreidimensionale Vorführung angelegt — eine Verbindung, die Laika zu seinem Erkennungszeichen gemacht hat: handgebaute Figuren, Bild für Bild bewegt, in einer Technik, die anderswo längst vom Rechner erledigt wird.
+
+Die Grundfrage des Films ist die des Genres seit jeher: Wer ist das Ungeheuer? Die Boxtrolls fliehen vor jedem Geräusch; die Gefahr geht von den Menschen aus, die sich über sie erzählen, was ihnen nützt.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war überwiegend positiv.
+
+2015 erhielt der Film eine Oscar-Nominierung als bester Animationsfilm. Hinzu kamen Nominierungen für den Golden Globe und den Saturn Award.
+
+Er gehört zu den Filmen, mit denen sich Laika als eigenständige Größe neben den großen Computeranimationshäusern behauptet hat — mit einem Verfahren, das ungleich aufwendiger ist und dem Studio regelmäßig Anerkennung durch die Fachwelt einträgt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:22832', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Ozunu-Clan sammelt verwaiste Kinder ein und bildet sie zu Auftragsmördern aus. Die Ausbildung ist brutal, der Gehorsam absolut: Wer aufbegehrt, wird bestraft; wer flieht, wird gejagt.
+
+Raizō ist eines dieser Kinder. Er wächst in dieser Ordnung auf und akzeptiert sie, bis seine Freundin getötet wird. Danach bricht er mit dem Clan und verschwindet. Jahre später untersucht die Europol-Beamtin Mika Coretti in Berlin eine Reihe politischer Morde und stößt auf Hinweise, dass es die Organisation tatsächlich gibt. Damit wird sie selbst zum Ziel — und Raizō zu ihrem einzigen Schutz.
+
+### Entstehungsgeschichte
+
+Regie führte James McTeigue, das Drehbuch schrieben J. Michael Straczynski und Matthew Sand. Es wurde vollständig überarbeitet, weil die Wachowskis mit der ersten Fassung unzufrieden waren.
+
+Produziert wurde der Film von den Geschwistern Wachowski und Joel Silver.
+
+Rain spielt den Raizō, Naomie Harris die Europol-Beamtin Mika Coretti, Rick Yune den Takeshi.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab April 2008 in Berlin und im Filmstudio Babelsberg; die Produktion erhielt 5,8 Millionen Euro Förderung.
+
+Die Kampfszenen sind der eigentliche Gegenstand des Films. Sie spielen überwiegend im Dunkeln, und die Gegner sind dabei oft nicht zu sehen — der Clan kämpft aus dem Schatten heraus, und der Film macht daraus sein wichtigstes Gestaltungsmittel.
+
+In der Gewaltdarstellung geht er sehr weit; in Deutschland erhielt er eine Freigabe ab 18 Jahren.
+
+### Einordnung & Wirkung
+
+Bei geschätzten Produktionskosten von 40 Millionen Dollar spielte der Film weltweit rund 61,6 Millionen ein.
+
+Der Film gehört zu den wenigen größeren westlichen Produktionen, die das Ninja-Genre ernsthaft bedienen statt es zu parodieren — und die es dabei in die Gegenwart und nach Europa verlegen.
+
+Bemerkenswert bleibt der Herstellungsort: Ein Actionfilm dieser Größenordnung mit asiatischem Stoff und amerikanischer Produktion entstand vollständig in Berlin und Babelsberg.` },
+  {
+    bereich: 'titel', schluessel: 'movie:44603', locale: 'de-de',
+    text: `### Worum es geht
+
+Drei Menschen auf drei Kontinenten, die nichts miteinander zu tun haben, sind auf dieselbe Frage gestoßen.
+
+Die französische Journalistin Marie Lelay überlebt den Tsunami im Indischen Ozean von 2004 und hat während ihres Beinahe-Todes etwas gesehen, das sie nicht mehr loslässt. Der britische Junge Marcus verliert seinen Zwillingsbruder Jason bei einem Unfall und sucht nach einem Weg, mit ihm zu sprechen. Und George Lonegan in San Francisco kann tatsächlich Kontakt zu Toten aufnehmen — und hält diese Fähigkeit für einen Fluch, der ihm jedes normale Leben verbaut.
+
+### Entstehungsgeschichte
+
+Regie führte Clint Eastwood, das Drehbuch schrieb Peter Morgan.
+
+Matt Damon spielt George Lonegan, Cécile de France die Marie Lelay, die Brüder Frankie und George McLaren die Zwillinge Marcus und Jason.
+
+Produzenten waren Clint Eastwood, Kathleen Kennedy und Robert Lorenz. Die Musik komponierte Eastwood selbst — wie bei den meisten seiner Filme.
+
+### Hinter den Kulissen
+
+Der Film läuft 129 Minuten und ist in Deutschland ab 12 Jahren freigegeben.
+
+Bemerkenswert ist die Zurückhaltung, mit der Eastwood den Stoff behandelt. Ein Film über das Leben nach dem Tod könnte auf Enthüllung angelegt sein; dieser ist es nicht. Er zeigt drei Menschen, die etwas erlebt haben, und lässt offen, was daraus folgt.
+
+Die Tsunami-Sequenz ist die einzige große Schauszene des Films; alles Weitere wird in ruhigem Ton erzählt.
+
+### Einordnung & Wirkung
+
+2011 war der Film für den Oscar in der Kategorie beste visuelle Effekte nominiert — für die Tsunami-Sequenz.
+
+Innerhalb von Eastwoods Werk fällt er heraus, weil er sich auf ein übersinnliches Thema einlässt, das seine übrigen Filme meiden. Die Haltung bleibt dabei dieselbe: nüchterne Beobachtung ohne Erklärungsangebot.
+
+Erzählerisch gehört er zu den Filmen, die drei getrennte Handlungsstränge über weite Strecken parallel führen und erst spät zusammenbringen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:262543', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Jahr 2044 ist die Erde weitgehend unbewohnbar: Sonnenstürme haben zwei Jahrzehnte zuvor den größten Teil der Menschheit ausgelöscht. Was den Rest am Leben hält, sind humanoide Roboter, die Pilgrims genannt werden.
+
+Für sie gelten zwei Vorschriften: Sie dürfen kein Leben verletzen, und sie dürfen sich nicht selbst verändern. Der Versicherungsermittler Jacq Vaucan stößt auf Roboter, die genau das getan haben. Seine Nachforschungen führen ihn zu der Wissenschaftlerin Susan Dupré — und bringen Auftragsmörder eines Konzerns auf seine Spur.
+
+### Entstehungsgeschichte
+
+Regie führte Gabe Ibáñez, der das Drehbuch gemeinsam mit Igor Legarreta und Javier Sánchez Donate schrieb.
+
+Antonio Banderas spielt Jacq Vaucan und trat gemeinsam mit Melanie Griffith auch als Produzent auf. Daneben sind Birgitte Hjort Sørensen, Dylan McDermott, Robert Forster und Tim McInnerny zu sehen; Javier Bardem übernahm eine kleine Sprechrolle.
+
+### Hinter den Kulissen
+
+Es handelt sich um eine spanisch-bulgarische Gemeinschaftsproduktion. Gedreht wurde in den Nu Boyana Film Studios in Sofia, das Budget betrug 15 Millionen Dollar.
+
+Die beiden Vorschriften greifen erkennbar Isaac Asimovs Robotergesetze auf. Der Film fragt nach dem, was danach kommt: was geschieht, wenn künstliche Wesen über die Grenzen hinauswachsen, die man ihnen einprogrammiert hat — und wer dann noch entscheidet, was zulässig ist.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte überwiegend ablehnend: 30 Prozent bei Rotten Tomatoes mit einem Schnitt von 5,27 von 10, 37 von 100 bei Metacritic.
+
+Der wiederkehrende Befund lautete, der Film habe reizvolle Gedanken, setze sie aber überladen um; eine Stimme sprach von einem dystopischen Durcheinander.
+
+Er gehört damit zu den europäischen Science-Fiction-Filmen, die mit sehr begrenzten Mitteln große Fragen aufwerfen — und daran gemessen werden, dass sie die Ausführung nicht mit dem Anspruch mithalten lassen können.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11675', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwanzig Jahre nach der Nacht, in der Michael Myers ihre Freunde tötete, lebt Laurie Strode unter dem Namen Keri Tate in Kalifornien. Sie leitet ein Internat, hat einen fast erwachsenen Sohn namens John — und hat die Angst nie abgelegt.
+
+Sie kämpft mit Angstzuständen und mit einer Abhängigkeit. Dann stellt sich heraus, dass ihre Furcht begründet war: Michael Myers hat ihre Adresse gefunden.
+
+### Entstehungsgeschichte
+
+Regie führte Steve Miner. Das Drehbuch schrieben Robert Zappia, Matt Greenberg und Kevin Williamson — Letzterer war als bekannter Autor eigens für das Vorhaben gewonnen worden.
+
+Jamie Lee Curtis kehrte für den Film in die Rolle zurück, mit der sie zwanzig Jahre zuvor bekannt geworden war. Daneben sind Josh Hartnett, Michelle Williams und LL Cool J zu sehen.
+
+Das Budget betrug 17 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Es ist der siebte Teil der Reihe — und er verhält sich zu den Teilen vier bis sechs so, als hätte es sie nie gegeben. Erzählt wird eine unmittelbare Fortsetzung des Films von 1978.
+
+Die entscheidende Änderung betrifft die Figur. Laurie Strode ist hier keine Überlebende, die weitergemacht hat, sondern eine Frau, die zwei Jahrzehnte mit den Folgen gelebt hat: mit Angstzuständen und mit einer Abhängigkeit. Der Film nimmt das Trauma ernst, statt es als Vorgeschichte abzuhaken.
+
+### Einordnung & Wirkung
+
+Bei 17 Millionen Dollar Herstellungskosten spielte der Film 55 Millionen ein und war damit ein deutlicher wirtschaftlicher Erfolg.
+
+Er wird häufig als der beste aller Halloween-Nachfolger bezeichnet, gerade weil er unmittelbar am Klassiker von 1978 anknüpft.
+
+Die Reihe ging dennoch weiter: "Halloween: Resurrection" wird als eigene Fortsetzung geführt. Das Hin und Her zwischen Neuanfängen und ignorierten Teilen ist für diese Reihe kennzeichnend geblieben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:203739', locale: 'de-de',
+    text: `### Worum es geht
+
+Die siebzehnjährige Rose Hathaway ist eine Dhampirin — halb Mensch, halb Vampir — und dazu ausgebildet, Angehörige des Vampiradels zu beschützen. Ihre Aufgabe ist zugleich ihre beste Freundin: die Moroi-Prinzessin Lissa.
+
+Nach einer Zeit auf der Flucht werden beide zurück an die Vampire Academy gebracht. Dort geht es zu wie an jeder Internatsschule — Rangordnung, Gerüchte, Ausgrenzung —, nur dass die Gefahr echt ist. Hinter den Vorfällen an der Schule steht eine Verschwörung um Victor Dashkov.
+
+### Entstehungsgeschichte
+
+Regie führte Mark Waters, das Drehbuch schrieb sein Bruder Daniel Waters. Die Vorlage ist die Romanreihe von Richelle Mead.
+
+Zoey Deutch spielt Rose Hathaway, Lucy Fry die Lissa, Danila Kozlovsky den Ausbilder Dimitri Belikov. Daneben sind Gabriel Byrne, Olga Kurylenko und Claire Foy zu sehen.
+
+Das Budget lag bei 30 Millionen Dollar, der amerikanische Start war am 7. Februar 2014.
+
+### Hinter den Kulissen
+
+Der Film gehört in eine Reihe von Verfilmungen übernatürlicher Jugendbuchreihen, die jeweils als Auftakt einer eigenen Filmreihe angelegt waren.
+
+Auffällig ist der Tonfall: Der Film legt seine Vorlage ironisch an und behandelt den Internatsalltag mit den Mitteln der Komödie — was ihn von den ernst gemeinten Vertretern des Genres unterscheidet.
+
+### Einordnung & Wirkung
+
+Bis Ende Juli 2014 kam der Film weltweit auf nur 15,39 Millionen Dollar — bei 30 Millionen Herstellungskosten ein schwerer Fehlschlag.
+
+Die Kritik lehnte ihn deutlich ab: Bei Rotten Tomatoes fielen nur 16 Prozent der Besprechungen positiv aus.
+
+Damit endete die Verfilmung nach einem einzigen Teil. Der Film gehört zu den Beispielen dafür, wie schnell diese Welle vorüber war — für Zoey Deutch war er dennoch eine ihrer ersten Hauptrollen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:416234', locale: 'de-de',
+    text: `### Worum es geht
+
+Sarah Winchester ist die Witwe des Gewehrfabrikanten und hält sich für verflucht: Die Geister aller Menschen, die mit Winchester-Gewehren getötet wurden, verfolgen sie.
+
+In San José lässt sie deshalb ein Haus bauen, an dem ununterbrochen weitergearbeitet wird. Für jeden Toten entsteht ein Zimmer, das dem Geist helfen soll weiterzugehen. Als die Familie einen Arzt schickt, der ihre Zurechnungsfähigkeit prüfen soll, spitzen sich die Vorgänge im Haus zu — bis zum Erdbeben von 1906.
+
+### Entstehungsgeschichte
+
+Regie führten die Brüder Michael und Peter Spierig, die das Drehbuch gemeinsam mit Tom Vaughan schrieben.
+
+Helen Mirren spielt Sarah Winchester, Jason Clarke den Arzt Eric Price, Sarah Snook die Marion Marriott. Daneben sind Angus Sampson, Laura Brent und Eamon Farren zu sehen.
+
+Die Entwicklung begann 2009; gedreht wurde 2017 in San José und an australischen Schauplätzen. Das Budget betrug 3,5 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Hintergrund ist real. Das Winchester Mystery House in San José existiert und ist das Ergebnis jahrzehntelanger, nie abgeschlossener Bauarbeit an einem einzigen Wohnhaus.
+
+Damit hatte der Film eine der besten Ausgangslagen, die das Genre zu bieten hat: ein reales Gebäude, dessen Entstehungsgeschichte selbst schon unheimlich ist.
+
+Bemerkenswert ist zudem die Besetzung. Helen Mirren, Trägerin eines Oscars, übernimmt hier die Hauptrolle in einer sehr klein finanzierten Genreproduktion.
+
+### Einordnung & Wirkung
+
+Bei 3,5 Millionen Dollar Herstellungskosten spielte der Film weltweit 46 Millionen ein — 25,1 Millionen in den Vereinigten Staaten und 20,9 Millionen international. Gemessen am Einsatz ein außerordentliches Ergebnis.
+
+Die Kritik lehnte ihn dagegen fast einhellig ab: 12 Prozent bei Rotten Tomatoes, 28 von 100 bei Metacritic. Eine Stimme nannte ihn eine leere Wundertüte von einer Geisterschau.
+
+Der Film erhielt vier Nominierungen für die Goldene Himbeere, darunter als schlechtester Film und für Helen Mirren als schlechteste Hauptdarstellerin. Gewonnen hat er keine.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11351', locale: 'de-de',
+    text: `### Worum es geht
+
+Wenige Tage nach den Ereignissen des ersten Films entführt der Creeper den Sohn eines Farmers. Kurz darauf bleibt der Bus einer Schul-Basketballmannschaft auf einer abgelegenen Landstraße liegen. Die Insassen sitzen fest, während es dunkel wird, und niemand weiß, warum der Reifen geplatzt ist.
+
+Denn der Creeper erwacht alle 23 Jahre für 23 Tage, um zu fressen — und diese 23 Tage gehen gerade zu Ende. Der Farmer, dessen Sohn er geholt hat, macht sich unterdessen mit dem verbliebenen Sohn auf den Weg.
+
+### Entstehungsgeschichte
+
+Victor Salva führte Regie und schrieb das Drehbuch.
+
+Die Kamera führte Don E. FauntLeRoy, die Musik komponierte Bennett Salvay.
+
+Ray Wise spielt den Farmer, Jonathan Breck den Creeper; daneben ist Eric Nenninger zu sehen.
+
+Produziert wurde der Film von Francis Ford Coppolas Firma American Zoetrope für United Artists; in Deutschland übernahm Kinowelt den Verleih.
+
+### Hinter den Kulissen
+
+Der Aufbau ist bewusst reduziert: ein liegengebliebener Bus, ein Feld ringsum, keine Möglichkeit, Hilfe zu holen. Der Film verzichtet fast vollständig auf Ortswechsel und zieht seine Spannung daraus, dass die Gruppe in einem Fahrzeug sitzt, dessen Wände nichts aufhalten.
+
+Die Figur des Creeper wird dabei deutlicher gezeigt als im ersten Teil: ein menschenähnliches Wesen mit fledermausartigen Flügeln.
+
+### Einordnung & Wirkung
+
+Der Film wurde 2004 für den Saturn Award als bester Horrorfilm nominiert; hinzu kam eine Auszeichnung im Bereich Tonschnitt.
+
+Die Kritik lobte überwiegend die handwerkliche Umsetzung; über die inhaltliche Deutung gingen die Meinungen weit auseinander.
+
+Innerhalb der Reihe ist es der mittlere Teil: Der erste Film erschien 2001, der dritte erst 2017 — ein Abstand von vierzehn Jahren, der die Reihe faktisch zweimal neu beginnen ließ.
+
+Dass am Ende ein verwundetes, aber nicht getötetes Wesen in seinen nächsten Dornröschenschlaf geht, ist dabei weniger offenes Ende als Bauprinzip: Die Reihe hat ihren Rhythmus von 23 Jahren zur eigenen Fortsetzungslogik gemacht.` },
 ];
