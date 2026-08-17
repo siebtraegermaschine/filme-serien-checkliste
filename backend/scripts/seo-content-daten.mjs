@@ -24379,4 +24379,223 @@ Der Film war am Startwochenende der meistgesehene Titel bei Netflix; im ersten Q
 Die Kritik urteilte überwiegend ablehnend: 37 Prozent bei Rotten Tomatoes, 45 von 100 bei Metacritic. Ein wiederkehrender Befund lautete, es handle sich um Science-Fiction von der Stange, die sich immerhin an großen Fragen über die Zukunft der Kriegsführung versuche.
 
 Der Abstand zwischen Zuschauerzahl und Bewertung ist für Netflix-Produktionen jener Jahre kennzeichnend — Reichweite ersetzt dort das, was im Kino das Einspielergebnis wäre.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:1883', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film erzählt das Leben von Malcolm Little in drei Abschnitten. Zuerst der Kleinkriminelle in Boston und Harlem, der sich die Haare glättet und Einbrüche begeht. Dann die Haft, in der er auf die Nation of Islam trifft, lesen lernt und einen neuen Namen annimmt. Schließlich der Prediger Malcolm X, der Hunderttausende erreicht — und sich von der Organisation löst, nachdem er ihren Anführer als Heuchler erkennt.
+
+Nach der Pilgerfahrt nach Mekka ändert er seine Haltung zur Frage der Hautfarbe erneut. Wenige Monate später wird er im Audubon Ballroom in Harlem erschossen.
+
+### Entstehungsgeschichte
+
+Warner Bros. hatte zunächst Norman Jewison als Regisseur verpflichtet. Dagegen gab es öffentlichen Widerspruch, weil ein weißer Filmemacher den Stoff verantworten sollte. Spike Lee, für den das Vorhaben seit dem Studium ein Wunschprojekt war, übernahm — mit der Ansage, dies werde seine Sicht auf Malcolm X.
+
+Denzel Washington spielt die Hauptrolle; daneben sind Angela Bassett, Al Freeman Jr. und Delroy Lindo zu sehen.
+
+### Hinter den Kulissen
+
+Die Finanzierung brach zusammen. Lee steuerte 2 der 3 Millionen Dollar seiner eigenen Gage bei. Als in der Nachbearbeitung das Studiogeld ausblieb, spendeten prominente Schwarze Amerikaner, damit der Film in Lees Fassung fertig werden konnte — unter ihnen Oprah Winfrey, Bill Cosby, Michael Jordan, Prince und Janet Jackson.
+
+Der Film läuft über drei Stunden. Das Budget lag bei 35 Millionen Dollar.
+
+### Einordnung & Wirkung
+
+Weltweit spielte er 73 Millionen Dollar ein; Warner Bros. bezifferte den eigenen Verlust für 1992 dennoch auf über 30 Millionen.
+
+Denzel Washington gewann den Preis des New York Film Critics Circle und wurde für den Oscar als bester Hauptdarsteller nominiert. Roger Ebert setzte den Film auf Platz eins seiner Jahresliste 1992.
+
+2010 wurde er in das National Film Registry aufgenommen. Er gilt bis heute als Lees ehrgeizigste Arbeit — und als eine der wenigen amerikanischen Filmbiografien, die ihre Hauptfigur sich zweimal grundlegend ändern lassen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9576', locale: 'de-de',
+    text: `### Worum es geht
+
+Michael Dorsey ist ein guter Schauspieler und unerträglich: Er diskutiert jede Regieanweisung, und in New York stellt ihn niemand mehr ein. Als seine Freundin eine Rolle in einer Seifenoper nicht bekommt, geht er selbst hin — als Dorothy Michaels.
+
+Er bekommt die Rolle. Dorothy wird zum Publikumsliebling, weil sie sich nichts gefallen lässt, und Michael lernt dabei, wie Frauen in seinem Beruf behandelt werden. Gleichzeitig verliebt er sich in seine Kollegin Julie, die Dorothy vertraut, während Julies Vater sich in Dorothy verliebt.
+
+### Entstehungsgeschichte
+
+Die Idee geht auf ein Stück von Don McGuire aus den frühen siebziger Jahren zurück, über einen arbeitslosen Schauspieler, der sich als Frau ausgibt, um an Aufträge zu kommen. Robert Evans erwarb die Rechte; danach arbeiteten mehrere Autoren daran, bevor Dustin Hoffman einstieg.
+
+Sydney Pollack führte Regie, nachdem Dick Richards und Hal Ashby das Projekt verlassen hatten. Hoffman hatte sich vollständige künstlerische Kontrolle zusichern lassen und galt während der Produktion als außerordentlich fordernd.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab November 1981 in New York und New Jersey.
+
+Pollack spielt zugleich Michaels Agenten — Hoffman hatte darauf gedrängt, weil er wollte, dass die Auseinandersetzungen der beiden auch im Film stattfinden.
+
+### Einordnung & Wirkung
+
+In den USA spielte der Film 177,2 Millionen Dollar ein und war nach "E.T." der zweiterfolgreichste des Jahres 1982 sowie der bis dahin größte Erfolg von Columbia Pictures im eigenen Land.
+
+Es gab zehn Oscar-Nominierungen; Jessica Lange gewann als beste Nebendarstellerin. Bei den Golden Globes gewann der Film als beste Komödie, dazu Hoffman und Lange.
+
+Die Kritik reagierte einhellig: 91 Prozent bei Rotten Tomatoes, vier Sterne von Roger Ebert. 1998 wurde der Film in das National Film Registry aufgenommen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:746', locale: 'de-de',
+    text: `### Worum es geht
+
+1908 wird der zweijährige Puyi zum Kaiser von China ausgerufen. Er wächst in der Verbotenen Stadt auf, umgeben von Tausenden Bediensteten, und erfährt erst Jahre später, dass es die Republik längst gibt und er über nichts mehr herrscht.
+
+Der Film erzählt sein Leben bis 1967: die Vertreibung aus dem Palast, die Jahre als Marionettenherrscher der Japaner in der Mandschurei, zehn Jahre Umerziehungslager unter den Kommunisten und schließlich das Dasein als Gärtner in Peking. Erzählt wird aus dem Gefängnis heraus, in Rückblenden.
+
+### Entstehungsgeschichte
+
+Bernardo Bertolucci führte Regie. Produzent Jeremy Thomas brachte das Budget von 23,8 Millionen Dollar unabhängig von den großen Studios auf.
+
+Es war der erste westliche Spielfilm, dem die Volksrepublik China Dreharbeiten in der Verbotenen Stadt in Peking gestattete.
+
+### Hinter den Kulissen
+
+John Lone spielt den erwachsenen Puyi, Peter O'Toole seinen schottischen Lehrer Reginald Johnston, Joan Chen die Kaiserin Wanrong.
+
+Die Musik schrieben Ryuichi Sakamoto, David Byrne und Cong Su gemeinsam — eine ungewöhnliche Zusammenstellung aus japanischer, amerikanischer und chinesischer Herkunft, die einen Grammy gewann. Sakamoto spielt zudem eine Rolle im Film.
+
+### Einordnung & Wirkung
+
+Bei der Oscar-Verleihung 1988 gewann der Film alle neun Auszeichnungen, für die er nominiert war — darunter bester Film, beste Regie und bestes adaptiertes Drehbuch. Eine solche Bilanz ohne einzige Niederlage ist selten geblieben.
+
+Weltweit spielte er 44 Millionen Dollar ein. Die Kritik lag bei 86 Prozent auf Rotten Tomatoes; Roger Ebert vergab vier von vier Sternen.
+
+Bemerkenswert bleibt die Erzählhaltung: Der Film macht aus dem letzten Kaiser weder einen Helden noch einen Schurken, sondern einen Menschen, der nie etwas selbst entschieden hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9357', locale: 'de-de',
+    text: `### Worum es geht
+
+Sy Parrish arbeitet seit Jahren am Fotoschalter eines großen Kaufhauses und nimmt seine Aufgabe ernster als nötig: Er prüft Farben, richtet Ausschnitte, kennt seine Kundschaft.
+
+Die Familie Yorkin kommt seit Jahren zu ihm. Von jedem Auftrag zieht Sy einen Abzug für sich und hat daraus zu Hause eine Wand aufgebaut. Er kennt die Geburtstage, die Urlaube, die Wohnungseinrichtung. Als er entdeckt, dass der Vater eine Affäre hat, versteht er das als Angriff auf etwas, das ihm gehört — und greift ein.
+
+### Entstehungsgeschichte
+
+Mark Romanek schrieb und inszenierte den Film; es war sein erster Spielfilm nach zahlreichen Musikvideos. Robin Williams spielt Sy Parrish — eine der wenigen ernsten Rollen seiner Laufbahn und die düsterste.
+
+Das Budget lag bei 12 Millionen Dollar, gedreht wurde von Oktober 2000 bis Januar 2001 in Los Angeles.
+
+### Hinter den Kulissen
+
+Die Bildgestaltung ist der eigentliche Beitrag des Regisseurs: Das Kaufhaus ist grell, weiß und farblos ausgeleuchtet, Sys Wohnung ebenso — nur die Fotos der Familie haben Farbe. Romaneks Herkunft vom Musikvideo ist dabei durchgehend sichtbar.
+
+Williams drehte im selben Zeitraum zwei weitere Filme gegen sein bisheriges Bild: "Insomnia" und "Death to Smoochy".
+
+### Einordnung & Wirkung
+
+Der Film lief im Januar 2002 beim Sundance-Festival und kam am 13. September 2002 in die Kinos. Weltweit spielte er 52,2 Millionen Dollar ein, davon 31,6 Millionen in den USA.
+
+Die Kritik reagierte gut: 82 Prozent bei Rotten Tomatoes; Roger Ebert vergab dreieinhalb Sterne und hob Williams hervor. Das Publikum vergab bei CinemaScore ein C — ein deutlicher Hinweis darauf, dass viele einen anderen Film erwartet hatten.
+
+Williams gewann den Saturn Award als bester Hauptdarsteller.` },
+  {
+    bereich: 'titel', schluessel: 'movie:219', locale: 'de-de',
+    text: `### Worum es geht
+
+Raimunda lebt mit Mann und Tochter in einem Vorort von Madrid und arbeitet, wo sie kann. Gemeinsam mit ihrer Schwester Sole fährt sie regelmäßig ins Dorf in La Mancha, um das Grab der Eltern zu pflegen, die bei einem Brand ums Leben kamen.
+
+Als Raimundas Mann sich an der Tochter vergreift, tötet ihn das Mädchen; Raimunda schafft die Leiche in die Kühltruhe eines leerstehenden Lokals und übernimmt die Schuld. Gleichzeitig taucht im Dorf die tote Mutter Irene auf — nicht als Geist, wie sich herausstellt. Was die Frauen einander jahrzehntelang verschwiegen haben, kommt Stück für Stück heraus.
+
+### Entstehungsgeschichte
+
+Pedro Almodóvar schrieb und inszenierte den Film. La Mancha ist seine eigene Herkunftsregion; er kehrt darin zu Schauplätzen und Figuren zurück, die er aus seiner Kindheit kennt.
+
+Penélope Cruz spielt Raimunda, Carmen Maura die Mutter Irene, dazu Lola Dueñas, Blanca Portillo, Yohana Cobo und Chus Lampreave.
+
+### Hinter den Kulissen
+
+Der Film hat kaum männliche Figuren — und die wenigen sind entweder tot oder verschwinden früh. Erzählt wird ausschließlich unter Frauen, über drei Generationen hinweg.
+
+Almodóvar behandelt dabei sexuellen Missbrauch, Mord und Brandstiftung, ohne den Ton eines Kriminalfilms anzunehmen: Die Frauen im Film wundern sich über nichts und helfen einander beim Aufräumen.
+
+### Einordnung & Wirkung
+
+In Cannes gewann der Film 2006 den Preis für das beste Drehbuch; der Darstellerinnenpreis ging gemeinsam an alle sechs Hauptdarstellerinnen.
+
+Penélope Cruz wurde für den Oscar als beste Hauptdarstellerin nominiert — als erste Spanierin überhaupt in dieser Kategorie. Weltweit spielte der Film 87,2 Millionen Dollar ein.
+
+A. O. Scott nannte ihn beschwingt ohne Flapsigkeit und tröstlich, ohne je rührselig zu werden; Roger Ebert vergab vier Sterne und bezeichnete ihn als bezaubernd, sanft und regelwidrig.` },
+  {
+    bereich: 'titel', schluessel: 'movie:483', locale: 'de-de',
+    text: `### Worum es geht
+
+Sailor Ripley kommt aus der Haft und fährt mit Lula Fortune Richtung Kalifornien. Er hat einen Mann getötet, der ihn mit einem Messer angriff — beauftragt von Lulas Mutter, die die Verbindung um jeden Preis beenden will.
+
+Die Mutter schickt einen Privatdetektiv und einen Auftragsmörder hinterher. Auf dem Weg begegnen die beiden einer Reihe von Gestalten, die immer weniger zur Wirklichkeit gehören, und in Texas gerät Sailor an einen Mann namens Bobby Peru. Über allem liegen Bezüge auf "Der Zauberer von Oz": die gelbe Straße, die böse Hexe, und am Ende Glinda die Gute.
+
+### Entstehungsgeschichte
+
+Grundlage ist Barry Giffords Roman von 1989. David Lynch wollte zunächst nur produzieren und entschied sich nach der Lektüre, selbst zu schreiben und Regie zu führen.
+
+Das Ende des Romans, in dem sich das Paar endgültig trennt, gefiel ihm nicht — er änderte es. Die Bezüge auf "Der Zauberer von Oz" kamen erst während der Arbeit am Drehbuch hinzu.
+
+### Hinter den Kulissen
+
+Nicolas Cage spielt Sailor und hat die Figur als eine Art romantischen Gesetzlosen des Südens beschrieben; Laura Dern spielt Lula. Beide unternahmen vor Drehbeginn gemeinsam eine Wochenendfahrt nach Las Vegas, um sich aufeinander einzustellen.
+
+Das Budget lag bei 10 Millionen Dollar.
+
+### Einordnung & Wirkung
+
+Der Film gewann 1990 in Cannes die Goldene Palme — unter erheblichem Widerspruch. Als Jurypräsident Bernardo Bertolucci die Entscheidung verkündete, übertönten Buhrufe beinahe den Beifall; Roger Ebert gehörte zu den lautesten Kritikern.
+
+Weltweit spielte er 14,6 Millionen Dollar ein und galt damit als Enttäuschung.
+
+Die Kritik urteilte zunächst gemischt: 66 Prozent von 58 Besprechungen bei Rotten Tomatoes, 52 von 100 bei Metacritic. Im Rückblick fällt die Bewertung deutlich freundlicher aus — der Film gilt heute als eine der eigenwilligsten Arbeiten Lynchs zwischen "Blue Velvet" und "Twin Peaks".` },
+  {
+    bereich: 'titel', schluessel: 'movie:365222', locale: 'de-de',
+    text: `### Worum es geht
+
+Hongkong im Jahr 1959. Ip Man unterrichtet Wing Chun und lebt zurückgezogen. Eine Triadenbande will die Schule seines Sohnes abreißen lassen, um das Grundstück zu bebauen; dahinter steht der amerikanische Immobilienunternehmer Frank.
+
+Gleichzeitig fordert ihn Cheung Tin-chi heraus, ein anderer Wing-Chun-Lehrer, der als bester der Stadt gelten will. Die eigentliche Handlung liegt jedoch anderswo: Ip Mans Frau erkrankt an Krebs, und der Film fragt, wofür ein Mann seine Zeit verwendet, dem nur noch wenig davon bleibt.
+
+### Entstehungsgeschichte
+
+Regie führte erneut Wilson Yip, Donnie Yen spielt wie in den Vorgängern Ip Man. Die Kampfchoreographie stammt von Yuen Woo-ping.
+
+Ursprünglich sollte Bruce Lee — der als Jugendlicher tatsächlich bei Ip Man lernte — digital nachgebildet werden. Bruce Lee Enterprises widersprach der als vollständig unautorisiert bezeichneten Darstellung. Besetzt wurde daraufhin der Darsteller Danny Chan, der Lee bereits 2008 in einer Fernsehserie gespielt hatte.
+
+### Hinter den Kulissen
+
+Mike Tyson gibt hier sein Filmdebüt — nicht als er selbst, sondern in der Rolle des korrupten Bauunternehmers Frank, der zugleich ein versierter Boxer ist. Sein Zweikampf mit Yen ist eine der meistbesprochenen Szenen des Films: Er stellt westliches Boxen gegen Wing Chun und dauert genau die drei Minuten, die sich die beiden Figuren vorher zugestanden haben.
+
+Der reale Ip Man hat es tatsächlich gegeben; er starb 1972 in Hongkong. Wie viel von den Ereignissen der Reihe belegt ist, bleibt offen — die Filme verwenden seinen Namen und seinen Beruf und erfinden das Übrige.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 157,3 Millionen Dollar ein, allein 71,2 Millionen am Startwochenende in China.
+
+Die Kritik reagierte gut: 76 Prozent bei Rotten Tomatoes. Bemängelt wurde die vorhersehbare Handlung, gelobt die Kampfszenen und die emotionale Ebene um Ip Mans Prioritäten.
+
+Der Erfolg führte zu einem vierten Teil, der 2019 erschien und die Reihe abschloss.` },
+  {
+    bereich: 'titel', schluessel: 'movie:15789', locale: 'de-de',
+    text: `### Worum es geht
+
+Max Goof ist in der Oberstufe und würde gern einmal auffallen — bei Roxanne, in die er verliebt ist. Ein Streich in der Aula bringt ihm ihre Aufmerksamkeit und dem Direktor einen Anruf bei seinem Vater ein.
+
+Goofy hört, sein Sohn sei auf dem falschen Weg, und verordnet eine Angelreise nach Idaho. Max hat Roxanne unterdessen erzählt, er werde beim Konzert des Popstars Powerline in Los Angeles auf der Bühne stehen. Also fälscht er die Karte auf dem Armaturenbrett — und lenkt die Fahrt heimlich nach Kalifornien um.
+
+### Entstehungsgeschichte
+
+Der Film geht auf die Fernsehserie "Goofy und Max" von 1992 zurück. Die Grundidee stammt von Disney-Chef Jeffrey Katzenberg, angeregt von einer geplanten Autofahrt mit seiner Tochter; er gab sie an Jymn Magon weiter, der bei der Serie für die Geschichten zuständig war.
+
+Ziel war, Goofy Tiefe zu geben — als Vater, der überfordert ist, statt als Tolpatsch.
+
+### Hinter den Kulissen
+
+Animiert wurde überwiegend bei Walt Disney Animation France in Paris unter Paul und Gaëtan Brizzi, mit zusätzlicher Arbeit in Sydney.
+
+Bei einer Vorführung fiel ein einziger fehlerhafter Bildpunkt auf. Um ihn zu beseitigen, mussten drei Viertel des Films erneut abgetastet werden — der Start verschob sich dadurch von November 1994 auf April 1995.
+
+Das Budget lag bei 18 Millionen Dollar und damit weit unter dem der großen Disney-Filme jener Zeit.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 37,6 Millionen Dollar ein, davon 35,3 Millionen in den USA.
+
+Die Kritik urteilte zunächst gemischt; Roger Ebert vergab drei Sterne.
+
+Seine eigentliche Wirkung entfaltete er über die Videoauswertung: Er gilt heute als Kultfilm und wird von Disney-Anhängern regelmäßig unter die beliebtesten Arbeiten des Studios gezählt — auch wegen der Musik, insbesondere der Powerline-Lieder.` },
 ];
