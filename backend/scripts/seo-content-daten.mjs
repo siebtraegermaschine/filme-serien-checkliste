@@ -25914,4 +25914,223 @@ Costners Rolle verlangt eine ungewöhnliche Anlage: Jerico spricht anfangs kaum,
 Der Film erschien am 15. April 2016 und spielte weltweit 38,8 Millionen Dollar ein, davon 14,7 Millionen in den USA; das Startwochenende brachte 5,8 Millionen.
 
 Die Kritik lehnte ihn deutlich ab: 30 Prozent bei Rotten Tomatoes, 36 von 100 bei Metacritic. Ein Rezensent hielt fest, trotz der tapferen Bemühungen einer spielfreudigen und begabten Besetzung biete der Film wenig über das Nötigste hinaus. Das Publikum vergab bei CinemaScore ein B minus.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:25237', locale: 'de-de',
+    text: `### Worum es geht
+
+Weißrussland 1943. Der etwa vierzehnjährige Fljora gräbt im Sand nach einem Gewehr, weil man ohne eines nicht zu den Partisanen darf. Er findet eines und geht mit.
+
+Was folgt, ist kein Kriegsfilm im gewohnten Sinn. Fljora wird im Lager zurückgelassen, überlebt einen Bombenangriff, verliert das Gehör, kehrt in sein Dorf zurück und findet es leer. Später gerät er in ein anderes Dorf, in dem eine deutsche Einheit sämtliche Bewohner in eine Scheune treibt und anzündet. Am Ende ist Fljora ein alter Mann im Körper eines Jungen.
+
+### Entstehungsgeschichte
+
+Elem Klimov kämpfte acht Jahre lang gegen die sowjetische Zensur, bevor er drehen durfte. Die Behörden lehnten das Drehbuch zunächst ab und warfen ihm vor, eine Ästhetik des Schmutzes zu propagieren. Der ursprüngliche Titel lautete "Tötet Hitler" und wurde vor der Veröffentlichung geändert.
+
+Der historische Hintergrund steht als Schrifttafel im Film: 628 weißrussische Dörfer wurden samt ihren Bewohnern vernichtet.
+
+### Hinter den Kulissen
+
+Aleksei Kravchenko war bei den Dreharbeiten vierzehn. Klimov zog einen Hypnotiseur mit autogenem Training hinzu, um ihn auf die Belastung vorzubereiten. Kravchenko hat später berichtet, er habe strengste Diät gehalten und sei nach den Dreharbeiten nicht nur dünn, sondern ergraut in die Schule zurückgekehrt — das Grau war allerdings Schminke.
+
+Gedreht wurde neun Monate lang in der Reihenfolge der Handlung. Statt Platzpatronen kam scharfe Munition zum Einsatz; in einzelnen Aufnahmen gingen die Geschosse etwa zehn Zentimeter über dem Kopf des Darstellers hinweg.
+
+### Einordnung & Wirkung
+
+Der Film gilt heute als einer der bedeutendsten Antikriegsfilme überhaupt.
+
+In der Sight-and-Sound-Umfrage von 2022 stand er auf Platz 41 der Regisseurinnen und Regisseure und auf Platz 104 der Kritik; bei Rotten Tomatoes liegt er bei 90 Prozent.
+
+Er wird selten empfohlen, ohne dass eine Warnung mitgeliefert wird — nicht wegen expliziter Bilder, sondern weil er die Erfahrung des Zusehens nicht abfedert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2640', locale: 'de-de',
+    text: `### Worum es geht
+
+An der Westerburg High School bestimmen drei Mädchen, die alle Heather heißen, wer dazugehört. Veronica Sawyer gehört dazu, verachtet sie aber und schreibt das in ihr Tagebuch.
+
+Der neue Schüler J. D. schlägt ihr vor, der Anführerin einen Streich zu spielen. Der Streich endet mit einer Toten und einem gefälschten Abschiedsbrief. Danach gilt Suizid an der Schule plötzlich als Zeichen von Tiefe, Lehrer halten Andachten, und J. D. hat Geschmack daran gefunden. Veronica begreift zu spät, worauf sie sich eingelassen hat.
+
+### Entstehungsgeschichte
+
+Michael Lehmann führte Regie, Daniel Waters schrieb das Drehbuch — für beide die erste Kinoarbeit. Waters hatte es ursprünglich für Stanley Kubrick geschrieben, dessen dunklen Humor er bewunderte.
+
+Gedreht wurde im Juli 1988 an 33 Tagen in Los Angeles, bei einem Budget von 3 Millionen Dollar. Die Premiere fand in Mailand statt, danach lief der Film am 21. Januar 1989 in Sundance.
+
+### Hinter den Kulissen
+
+Winona Ryder spielt Veronica, Christian Slater spielt J. D.; Shannen Doherty, Lisanne Falk und Kim Walker spielen die drei Heathers.
+
+Die Sprache des Films ist sein auffälligstes Merkmal: Waters erfand für die Jugendlichen ein eigenes Idiom mit Wendungen, die es vorher nicht gab. Das Drehbuch gehört zu den am häufigsten im Oxford English Dictionary zitierten Werken für sprachliche Neuschöpfungen.
+
+### Einordnung & Wirkung
+
+Im Kino spielte der Film nur 1,1 Millionen Dollar ein.
+
+Er gewann den Independent Spirit Award für den besten Erstlingsfilm und steht heute bei 95 Prozent auf Rotten Tomatoes.
+
+Aus ihm wurden ein Bühnenmusical und eine Fernsehfassung. Er gilt als Gegenentwurf zu den Jugendfilmen John Hughes' aus denselben Jahren — und als einer der wenigen, die den Ton der Schule nicht beschönigen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:71688', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine alte Frau kauft Milch in einem Londoner Laden und wundert sich über den Preis. Niemand erkennt sie. Zu Hause deckt sie den Tisch für zwei und spricht mit ihrem Mann Denis, der seit acht Jahren tot ist.
+
+Von dieser Gegenwart aus erzählt der Film das Leben von Margaret Thatcher: die Tochter eines Lebensmittelhändlers in Grantham, die erste Wahl ins Unterhaus, der Weg an die Spitze der Konservativen, elf Jahre als Premierministerin, der Falklandkrieg, der Bergarbeiterstreik — und der Rücktritt 1990, erzwungen von der eigenen Partei.
+
+### Entstehungsgeschichte
+
+Regie führte Phyllida Lloyd, das Drehbuch schrieb Abi Morgan. Meryl Streep spielt Thatcher in den erwachsenen Jahren. Das Budget lag bei 13 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Umstritten war die Anlage von Anfang an: Der Film zeigt Thatcher als demenzkranke alte Frau — zu einem Zeitpunkt, als sie noch lebte. Sie starb erst 2013.
+
+Britische Politiker widersprachen, darunter der damalige Premierminister David Cameron: Man hätte länger warten sollen und sich stärker auf ihre politische Laufbahn statt auf ihre persönliche Lage konzentrieren müssen.
+
+Die Maske für die Alterung Streeps war der zweite große Aufwand des Films und wurde ausgezeichnet.
+
+### Einordnung & Wirkung
+
+Bei 13 Millionen Dollar Herstellungskosten spielte der Film weltweit 115,9 Millionen ein, davon 85 Millionen international.
+
+Meryl Streep gewann ihren dritten Oscar als beste Hauptdarstellerin — bei ihrer siebzehnten Nominierung — dazu den Golden Globe und den BAFTA. Der Film selbst gewann den Oscar für die beste Maske.
+
+Die Kritik urteilte gemischt: 51 Prozent bei Rotten Tomatoes. Der wiederkehrende Befund lautete, Streeps Darstellung sei verlässlich perfekt und stecke in einer faden, selbstwichtigen Erzählung fest.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11371', locale: 'de-de',
+    text: `### Worum es geht
+
+Nick Wells betreibt in Montreal einen Jazzclub und bricht nebenher seit Jahrzehnten Tresore auf. Er hat zwei Regeln: nie in der eigenen Stadt, und nie mit Partnern, die er nicht kennt.
+
+Sein Hehler Max bringt ihm einen letzten Auftrag: ein französisches Zepter im Zollhaus von Montreal, sechs Millionen Dollar wert. Max steckt in Schulden bei der Mafia, und Nick braucht Geld, um seinen Club zu behalten. Der Zugang läuft über Jack Teller, einen jungen Dieb, der sich im Zollhaus als geistig behinderter Hilfsarbeiter eingeschlichen hat — und der genau so unberechenbar ist, wie Nicks zweite Regel es befürchten lässt.
+
+### Entstehungsgeschichte
+
+Regie führte Frank Oz; der Film erschien am 13. Juli 2001, das Budget lag bei 68 Millionen Dollar.
+
+Robert De Niro spielt Nick, Edward Norton spielt Jack, Angela Bassett die Freundin, Marlon Brando den Hehler Max. Es war Brandos letzte Rolle.
+
+### Hinter den Kulissen
+
+Zwischen Brando und Oz kam es wiederholt zum Streit. Brando nannte ihn "Miss Piggy" — Oz hatte die Figur in der Muppet Show gespielt — und weigerte sich zeitweise, direkt mit ihm zu arbeiten. Robert De Niro vermittelte und führte in einzelnen Szenen faktisch selbst Regie.
+
+Oz hat sich später dazu geäußert und die Verantwortung teilweise bei sich gesehen: Er sei konfrontativ statt zugewandt gewesen.
+
+### Einordnung & Wirkung
+
+Der Film startete auf Platz zwei hinter "Natürlich blond" und spielte weltweit 113,6 Millionen Dollar ein, davon 71,1 Millionen in den USA.
+
+Die Kritik reagierte überwiegend positiv: 74 Prozent bei Rotten Tomatoes. Roger Ebert vergab dreieinhalb von vier Sternen und nannte ihn den besten reinen Coup-Film seit Jahren; Peter Travers hielt die Handlung für vorhersehbar.
+
+Angela Bassett gewann einen NAACP Image Award als beste Nebendarstellerin.` },
+  {
+    bereich: 'titel', schluessel: 'movie:77953', locale: 'de-de',
+    text: `### Worum es geht
+
+Cam Brady vertritt seit vier Amtszeiten den 14. Wahlbezirk von North Carolina im Kongress und ist stets ohne Gegenkandidat angetreten. Nach einer versehentlich auf einem fremden Anrufbeantworter hinterlassenen Zote wird er angreifbar.
+
+Zwei Industrielle, die Brüder Motch, wittern die Gelegenheit und stellen einen eigenen Kandidaten auf: Marty Huggins, den Leiter des örtlichen Fremdenverkehrsvereins, der mit Möpsen und Strickjacken auftritt. Was folgt, ist ein Wahlkampf, in dem beide Seiten einander Terrorismus vorwerfen, Tonbänder veröffentlichen und ein Baby geschlagen wird.
+
+### Entstehungsgeschichte
+
+Regie führte Jay Roach, das Drehbuch schrieb er gemeinsam mit Adam McKay und Chris Henchy. Der Film erschien am 10. August 2012, das Budget lag bei 95 Millionen Dollar.
+
+Will Ferrell spielt Cam Brady, Zach Galifianakis spielt Marty Huggins. Die Musik schrieb Theodore Shapiro.
+
+### Hinter den Kulissen
+
+Die Zielscheibe ist der Einfluss von Konzerngeld auf amerikanische Wahlen. Die Brüder Motch sind eine offene Anspielung auf die Brüder Koch, die zu diesem Zeitpunkt als größte private Wahlkampffinanciers der Republikaner galten.
+
+Ferrells Figur wird verbreitet auf den früheren Senator John Edwards bezogen, dessen Laufbahn kurz zuvor an einer Affäre zerbrochen war.
+
+Bemerkenswert ist das Erscheinungsdatum: knapp drei Monate vor der Präsidentschaftswahl 2012.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 104,9 Millionen Dollar ein — bei 95 Millionen Herstellungskosten eine wirtschaftliche Enttäuschung.
+
+Die Kritik urteilte gemischt: 66 Prozent bei Rotten Tomatoes, 50 von 100 bei Metacritic; das Publikum vergab bei CinemaScore ein B minus.
+
+Im Rückblick fällt vor allem auf, wie zahm die Übertreibungen des Films aus heutiger Sicht wirken — ein Umstand, der ihn eher als Zeitdokument denn als Satire lesbar macht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:553604', locale: 'de-de',
+    text: `### Worum es geht
+
+Tom Dolan hat als früherer Marinesoldat zwölf Banken ausgeraubt, ohne je jemanden zu verletzen; die Presse nennt ihn den Rein-und-Raus-Räuber. Neun Millionen Dollar liegen in einem Lagerraum, und er hat sie nie angerührt.
+
+Als er Annie kennenlernt, will er reinen Tisch machen: Er ruft beim FBI an und bietet an, das Geld zurückzugeben, gegen eine milde Strafe in einem Gefängnis nahe bei ihr. Zwei Ermittler nehmen das Geld an sich und beschließen, es zu behalten — und Dolan zum Mörder zu machen.
+
+### Entstehungsgeschichte
+
+Regie führte Mark Williams, das Budget lag bei 30 Millionen Dollar. Liam Neeson spielt Tom Dolan; daneben sind Kate Walsh, Jai Courtney, Jeffrey Donovan, Anthony Ramos und Robert Patrick zu sehen.
+
+Gedreht wurde in Worcester, Massachusetts; die Handlung spielt in Boston.
+
+### Hinter den Kulissen
+
+Der Film gehört zur langen Reihe von Actionfilmen, die Neeson seit "96 Hours" (2008) in schneller Folge gedreht hat — mit dem Unterschied, dass die Hauptfigur hier nicht sucht, sondern sich stellen will.
+
+Der Kinostart am 16. Oktober 2020 fiel mitten in die Pandemie und war mehrfach verschoben worden. Damit gehörte er zu den wenigen Filmen, die in jenem Herbst überhaupt regulär in amerikanische Kinos kamen — was das Startergebnis erklärt.
+
+### Einordnung & Wirkung
+
+Trotz weitgehend geschlossener Kinos führte der Film sein Startwochenende mit 4,1 Millionen Dollar an. Weltweit kamen 32,6 Millionen zusammen, davon 14,2 Millionen in den USA.
+
+Die Kritik urteilte gemischt bis ablehnend: 41 Prozent bei Rotten Tomatoes mit dem Befund, der Film versäume es, eine Geschichte zu liefern; 46 von 100 bei Metacritic. Gelobt wurde Neesons Einsatz, kritisiert die abgeleitete Handlung.
+
+Das Publikum sah es freundlicher — bei PostTrak lag die Zustimmung bei 75 Prozent.` },
+  {
+    bereich: 'titel', schluessel: 'movie:646207', locale: 'de-de',
+    text: `### Worum es geht
+
+In einer Diamantmine in Manitoba stürzt ein Schacht ein; 26 Bergleute sind eingeschlossen und haben etwa dreißig Stunden Luft. Die Bohrköpfe, die sie retten könnten, liegen 500 Kilometer entfernt.
+
+Der einzige Weg führt über die Eisstraßen — zugefrorene Seen, die im April kaum noch tragen. Der Fahrer Mike McCann nimmt den Auftrag an und seinen Bruder Gurty mit, der nach einer Kriegsverletzung nicht mehr richtig spricht, aber jeden Motor versteht. Unterwegs zeigt sich, dass der Einsturz kein Unfall war.
+
+### Entstehungsgeschichte
+
+Jonathan Hensleigh schrieb das Drehbuch und führte Regie. Liam Neeson spielt Mike McCann; daneben sind Laurence Fishburne, Benjamin Walker und Amber Midthunder zu sehen.
+
+Gedreht wurde im Februar 2020 in Winnipeg und Umgebung in Manitoba.
+
+### Hinter den Kulissen
+
+Netflix erwarb im März 2021 die amerikanischen Rechte für 18 Millionen Dollar und veröffentlichte den Film am 25. Juni 2021.
+
+Die Ausgangslage ist real: Eisstraßen über zugefrorene Seen sind in Nordkanada ein regulärer Transportweg, dessen Tragfähigkeit von Temperatur, Geschwindigkeit und Abstand zwischen den Fahrzeugen abhängt. Der Film macht daraus seine wichtigste Spannungsquelle — die Regel, dass ein Lastwagen nicht anhalten darf, weil die Druckwelle unter dem Eis ihn sonst einholt.
+
+### Einordnung & Wirkung
+
+Der Film war am Startwochenende der meistgesehene Titel bei Netflix.
+
+Die Kritik urteilte gemischt: 44 Prozent bei Rotten Tomatoes mit dem Befund, Liam Neeson bleibe ein erstklassiger Actiondarsteller, der Film leide aber an Vorhersehbarkeit; 42 von 100 bei Metacritic.
+
+Am 27. Juni 2025 erschien mit "Ice Road: Vengeance" eine Fortsetzung, die die Handlung in die Berge Nepals verlegt.
+
+Der Fall zeigt zugleich, wie sich die Auswertung solcher Filme verschoben hat: Ein Actionfilm dieser Größenordnung wäre zehn Jahre zuvor ins Kino gekommen; hier kaufte ein Streamingdienst die Rechte, bevor überhaupt ein Kinostart geplant war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:454640', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Vögel und die Schweine liegen weiterhin im Dauerkonflikt — bis eine dritte Insel auftaucht. Zeta, die Anführerin von Eagle Island, hat genug vom Eis und beschießt beide Inseln mit Eisbomben, um sie unbewohnbar zu machen und selbst dorthin zu ziehen.
+
+Rot und Leonard, die Anführer der verfeindeten Seiten, schließen daraufhin ein Bündnis. Der Film gibt damit die Ausgangslage des Spiels auf, aus dem er stammt: Es geht nicht mehr darum, Vögel auf Schweine zu schleudern, sondern darum, dass beide zusammenarbeiten müssen.
+
+### Entstehungsgeschichte
+
+Regie führte Thurop Van Orman. Der Film erschien am 14. August 2019 — zum zehnten Jahrestag des ursprünglichen Spiels. Das Budget lag bei 65 Millionen Dollar.
+
+Die Entscheidung zur Zusammenarbeit statt zum Konflikt war eine bewusste. Josh Gad, einer der Sprecher, hat berichtet, das Team habe den Ansatz angesichts einer zunehmend gespaltenen politischen Lage für sinnvoll und einfallsreich gehalten.
+
+### Hinter den Kulissen
+
+Der Film enthält eine Nebenhandlung über drei Küken, die versuchen, Eier vor dem Wegrollen zu bewahren — eine in sich geschlossene Slapstick-Erzählung ohne Dialog, die von der Kritik durchgehend hervorgehoben wurde.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 152,8 Millionen Dollar ein, davon 41,7 Millionen in den USA und 110,1 Millionen international. In den USA blieb er damit deutlich hinter dem ersten Teil zurück, dessen Startwochenende allein 38,1 Millionen gebracht hatte.
+
+Die Kritik reagierte deutlich besser als beim Vorgänger: 72 Prozent bei Rotten Tomatoes — zum Erscheinungszeitpunkt die beste dort verzeichnete Bewertung einer Videospielverfilmung überhaupt. Metacritic vergab 60 von 100, das Publikum bei CinemaScore ein B plus.
+
+Der Fall ist damit ungewöhnlich: bessere Kritiken, weniger Zuschauer.` },
 ];
