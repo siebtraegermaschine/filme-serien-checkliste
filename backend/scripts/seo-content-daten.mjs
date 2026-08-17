@@ -42381,4 +42381,293 @@ Die Kritik fiel vernichtend aus. Rotten Tomatoes weist zehn Prozent bei 139 Krit
 Die Deutsche Film- und Medienbewertung vergab dagegen das Prädikat „wertvoll" für unterhaltsames Popcornkino. Kate Hudson wurde 2009 für die Goldene Himbeere als schlechteste Schauspielerin nominiert.
 
 Null Prozent Zustimmung unter den Spitzenkritikern bei gleichzeitig 111 Millionen Dollar Einspielergebnis ist eine der schärfsten Trennungen zwischen Urteil und Publikum, die sich finden lassen.` },
+  // ---- Block 093 ----
+  {
+    bereich: 'titel', schluessel: 'movie:288', locale: 'de-de',
+    text: `### Worum es geht
+
+Marshal Will Kane heiratet die Quäkerin Amy Fowler. Es ist sein letzter Tag im Amt.
+
+Dann erfährt er, dass der begnadigte Frank Miller mit dem Mittagszug kommt, um sich zu rächen. Kane sucht Unterstützung in der Stadt. Er findet keine — nicht bei den Bürgern, nicht bei seinen Freunden. Amy will gehen.
+
+### Entstehungsgeschichte
+
+Vorlage ist John W. Cunninghams Kurzgeschichte „The Tin Star" von 1947. Carl Foreman begann 1948 mit der Entwicklung, zunächst ohne die Geschichte zu kennen.
+
+Regie führte Fred Zinnemann, das Drehbuch schrieb Foreman, produziert wurde der Film von Stanley Kramer.
+
+Gary Cooper spielt Marshal Will Kane, Grace Kelly die Amy Fowler Kane, Lloyd Bridges den Deputy Harvey Pell, Katy Jurado die Helen Ramirez, Ian MacDonald den Frank Miller, Thomas Mitchell den Bürgermeister Henderson und Otto Kruger den Richter Mettrick.
+
+Die Kamera führte Floyd Crosby, den Schnitt besorgten Elmo Williams und Harry W. Gerstad. Dimitri Tiomkin schrieb die Musik und den Titelsong „High Noon (Do Not Forsake Me)" mit Text von Ned Washington; gesungen hat ihn Tex Ritter.
+
+Gedreht wurde ab dem 5. September über vier Wochen — in Columbia und Tuolumne City in Kalifornien, auf der Iverson Ranch in Los Angeles und in der Mother-Lode-Region bei Sonora. Das Budget betrug 794.000 Dollar und lag damit unter dem Durchschnitt des Jahres 1952 von rund 900.000.
+
+### Hinter den Kulissen
+
+Die politische Vorgeschichte gehört zum Film. Carl Foreman war zwischen 1938 und 1942 Mitglied der Kommunistischen Partei. Im September 1951 wurde er vor den Ausschuss für unamerikanische Umtriebe geladen und verweigerte die Aussage. Stanley Kramer brach daraufhin öffentlich mit ihm; Foreman erhielt eine Abfindung von 250.000 Dollar und behielt die Rechte an „The Tin Star".
+
+Das Lexikon des internationalen Films liest den Film als bittere Abrechnung mit der McCarthy-Ära — Foreman verarbeitete seine Erfahrungen mit den schwarzen Listen in der Geschichte eines Mannes, den alle im Stich lassen.
+
+Widerspruch kam aus dem Fach. Howard Hawks lehnte die Zeichnung Kanes als zu wenig heldenhaft ab und drehte mit „Rio Bravo" eine ausdrückliche Gegenposition, mit John Wayne als entschlossenem, zuversichtlichem Sheriff.
+
+### Einordnung & Wirkung
+
+In den ersten 18 Wochen spielte der Film 2,5 Millionen Dollar ein — das beste Ergebnis für United Artists seit „African Queen". Der deutsche Start war in der ersten Januarwoche 1953, die DDR-Premiere am 11. Juni 1965.
+
+Vier Oscars kamen zusammen: Gary Cooper als bester Hauptdarsteller, Elmo Williams und Harry W. Gerstad für den Schnitt, Dimitri Tiomkin für die Musik und für den besten Song. Hinzu kamen ein Golden Globe für die Filmmusik und der Preis der Screenwriters Guild.
+
+Rotten Tomatoes weist 94 Prozent aus, Metacritic 89 von 100; die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
+
+Dass ein Western zur Parabel auf politische Verfolgung wurde — und dass ein anderer Regisseur einen ganzen Film schrieb, um ihm zu widersprechen —, macht seine Stellung aus.` },
+  {
+    bereich: 'titel', schluessel: 'movie:3114', locale: 'de-de',
+    text: `### Worum es geht
+
+Texas, 1868. Ethan Edwards kehrt als früherer Konföderiertensoldat zurück und findet die Ranch seiner Familie überfallen vor. Seine Schwägerin Martha und mehrere Angehörige sind tot, die Töchter Lucy und Debbie verschleppt.
+
+Fünf Jahre lang verfolgt Edwards die Comanchen unter Chief Scar, gemeinsam mit Martin Pawley. Was er vorhat, wenn er Debbie findet, ist die eigentliche Frage des Films.
+
+### Entstehungsgeschichte
+
+Vorlage ist Alan Le Mays Roman, der aus der Kurzgeschichte „The Avenging Texans" hervorging (1954 im Saturday Evening Post). Das Drehbuch schrieb Frank S. Nugent.
+
+Regie führte John Ford — es war sein 115. Spielfilm. Produziert wurde er von C. V. Whitney für Warner Bros.
+
+John Wayne spielt Ethan Edwards, Jeffrey Hunter den Martin Pawley, Vera Miles die Laurie Jorgensen, Ward Bond den Rev. Clayton, Natalie Wood die erwachsene und Lana Wood die kleine Debbie, Henry Brandon den Chief Scar, Hank Worden den Mose Harper und Antonio Moreno den Emilio Figueroa.
+
+Die Kamera führte Winton C. Hoch in Farbe und VistaVision, die Musik stammt von Max Steiner, den Schnitt besorgte Jack Murray.
+
+Gedreht wurde vor allem im Monument Valley, dazu in Colorado, Kanada, im Bronson Canyon und in den RKO-Pathé-Studios. Der Kulissenbau begann am 31. Mai 1955, im August 1955 war der Film fertig. Uraufführung war am 13. März 1956, deutscher Start am 5. Oktober 1956.
+
+### Hinter den Kulissen
+
+Der Film hat kein Oscar-Nominierung erhalten. Erst später kam die Anerkennung: 1989 Aufnahme ins National Film Registry, 2007 Platz 12 der AFI-Liste der besten amerikanischen Filme, 2008 Rang 10 bei den Cahiers du cinéma, 2012 Platz 7 und 2022 Platz 15 bei Sight & Sound.
+
+Die Wirkung auf andere Filmemacher ist außergewöhnlich dokumentiert. Martin Scorsese sieht ihn ein- bis zweimal im Jahr und nennt die Dialoge Poesie; Steven Spielberg zählt ihn zu vier Filmen, die er vor jedem neuen Projekt ansieht. Der Film wirkte nachweislich auf „Lawrence von Arabien", „Spiel mir das Lied vom Tod", „Taxi Driver", „Hardcore", das erste „Star Wars", mehrere Arbeiten Spielbergs und die Schlussszene von „Paris, Texas". Stuart Byron behauptete 1979, das gesamte moderne amerikanische Kino stamme von diesem Film ab.
+
+Die Schlusseinstellung mit dem offenen Türrahmen wurde zum meistzitierten Bild dieser Art.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 87 Prozent aus (102 Kritiken), Metacritic 94 von 100. Joe Hembus vergab in seinem Western-Lexikon die Höchstwertung und nannte den Film den Moby Dick des Western. Prisma sprach von einem Meisterwerk, Thomas Jeier vom endgültigen Western. Loren D. Estleman blieb die einzige deutlich abweichende Stimme und hielt ihn für eher mittelmäßig.
+
+Über die Hauptfigur wird bis heute gestritten. Ronald M. Hahn und Volker Jansen stellten die Frage, wie ein Film zum Kultfilm werden könne, dessen Held ein engstirniger, rassistischer, mörderisch-brutaler Reaktionär ist. Ihre Antwort: Die Merkmale, die auf Ethan Edwards zutreffen, müssten im historischen Zusammenhang gesehen werden — der amerikanische Durchschnittsbürger von 1868 sei, zumal aus dem Süden, genau das gewesen.
+
+Der Film wird demnach als psychologische Studie einer von Rassenhass getriebenen Figur gelesen, nicht als Bestätigung dieser Haltung. Dass diese Frage bei jeder Neubewertung erneut gestellt wird, gehört zu seiner Wirkungsgeschichte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:838', locale: 'de-de',
+    text: `### Worum es geht
+
+Modesto, Kalifornien, im September 1962. Vier Freunde verbringen ihre letzte gemeinsame Nacht, bevor zwei von ihnen zum Studium an die Ostküste gehen.
+
+Vier Handlungsstränge laufen parallel: Curt sucht eine Blondine, die er in einem weißen Thunderbird gesehen hat. Steve und seine Freundin Laurie geraten aneinander. John Milner fährt die Nacht hindurch mit der zwölfjährigen Carol. Und Terry Fields hat eine Pechsträhne, die nicht abreißt.
+
+### Entstehungsgeschichte
+
+Regie führte George Lucas. Das Drehbuch schrieb er gemeinsam mit Gloria Katz und Willard Huyck, produziert wurde der Film von Francis Ford Coppola.
+
+Richard Dreyfuss spielt Curt Henderson, Ron Howard den Steve Bolander, Paul Le Mat den John Milner, Charles Martin Smith den Terry Fields, Cindy Williams die Laurie, Candy Clark die Debbie Dunham, Mackenzie Phillips die Carol, Suzanne Somers die Blondine im Thunderbird und Harrison Ford den Bob Falfa; Wolfman Jack tritt als er selbst auf.
+
+Gedreht wurde von Juni bis August 1972 in Modesto — Lucas' Geburtsstadt —, in Petaluma und auf dem Flugplatz Buchanan Field. Die Kamera führten Ron Eveslage und Jan D'Alquen, beraten von Haskell Wexler; gearbeitet wurde in Techniscope, das eine körnige Anmutung erzeugt. Den Schnitt besorgten Verna Fields, Marcia Lucas und George Lucas; aus dreieinhalb Stunden Rohschnitt wurden rund anderthalb Stunden herausgenommen.
+
+Lucas wählte etwa 40 Rock-'n'-Roll-Titel aus; die Lizenzen kosteten rund 80.000 Dollar. Das Budget betrug 775.000 Dollar. Kinostart war der 1. August 1973.
+
+### Hinter den Kulissen
+
+Die Musik ist keine Untermalung, sondern Handlungsraum. Rund 40 Stücke laufen über Autoradios; Wolfman Jack ist der Diskjockey, den alle hören, und tritt selbst auf. 80.000 Dollar allein für Lizenzen bei 775.000 Dollar Gesamtbudget zeigen, welches Gewicht das hatte.
+
+Die vier parallelen Stränge sind die zweite Setzung. Es gibt keine Hauptfigur; der Film schneidet zwischen vier Nächten hin und her, die sich nur gelegentlich berühren.
+
+Der Abspann bringt kurze Biografien der Figuren — was aus ihnen wurde. Damit setzt der Film seine Nacht in einen Rahmen, den die Figuren selbst nicht kennen.
+
+Das Ergebnis machte Lucas zum Millionär: Er erhielt 70.000 Dollar Regiegage, die Gewinnbeteiligung tat den Rest; der Wert von Lucasfilm stieg bis Jahresende auf rund vier Millionen Dollar.
+
+### Einordnung & Wirkung
+
+Bei 775.000 Dollar Herstellungskosten spielte der Film weltweit über 118 Millionen ein.
+
+Bei den Oscars 1974 gab es fünf Nominierungen: Regie, Schnitt, Originaldrehbuch, bester Film und Candy Clark als beste Nebendarstellerin. Bei den Golden Globes gewann der Film als beste Komödie und Paul Le Mat als bester Nachwuchsdarsteller. 1973 kam der Bronzene Leopard von Locarno hinzu, 1974 der Preis des New York Film Critics Circle für das Drehbuch; 1995 folgte die Aufnahme ins National Film Registry.
+
+Das Lexikon des internationalen Films nannte ihn eine bittersüße, nostalgische Reminiszenz an vergangene Jugendträume der späteren Vietnam-Generation — atmosphärisch dicht, mit viel alter Popmusik und charmanten Darstellern.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4176', locale: 'de-de',
+    text: `### Worum es geht
+
+Dezember 1935: Hercule Poirot reist mit dem Orientexpress von Istanbul nach London.
+
+In einer Nacht der Fahrt wird der amerikanische Geschäftsmann Samuel Ratchett getötet — zwölfmal erstochen. Poirot beginnt, die Mitreisenden zu befragen. Was sie verbindet, führt zurück zu einer Kindesentführung des Jahres 1930.
+
+### Entstehungsgeschichte
+
+Vorlage ist Agatha Christies Roman von 1934. Christie stand Verfilmungen skeptisch gegenüber und wurde nach Aussage ihres Mannes Max Mallowan nur widerwillig überzeugt.
+
+Regie führte Sidney Lumet, das Drehbuch schrieb Paul Dehn. Produziert wurde der Film von John Brabourne und Richard Goodwin für G.W. Films und EMI Films.
+
+Albert Finney spielt Hercule Poirot, Lauren Bacall die Mrs. Hubbard, Ingrid Bergman die Greta Ohlsson, Sean Connery den Colonel Arbuthnott, John Gielgud den Edward Beddoes, Vanessa Redgrave die Mary Debenham, Michael York den Grafen Andrenyi und Richard Widmark den Ratchett.
+
+Die Kamera führte Geoffrey Unsworth in Panavision, die Musik stammt von Richard Rodney Bennett. Innenaufnahmen entstanden in den Elstree Studios, Außenaufnahmen 1973 in Frankreich — in einer Eisenbahnwerkstatt bei Paris als Istanbuler Bahnhof, im Jura auf der Strecke Pontarlier–Gilley und in Montbenoît für die Schneeszenen.
+
+Das Budget betrug 1,4 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Zug ist die perfekte Anordnung für diesen Stoff. Ein eingeschneiter Waggon lässt keinen hinein und keinen hinaus — der Täter muss unter den Anwesenden sein, und das weiß jeder von ihnen.
+
+Die Besetzung folgt derselben Logik. Wenn jeder verdächtig ist, muss jeder Verdächtige ein Gesicht haben, das man wiedererkennt: Bacall, Bergman, Connery, Gielgud, Redgrave, York, Widmark. Der Aufwand steckt nicht in der Ausstattung, sondern in der Anzahl bekannter Namen.
+
+Dass der Film bei 1,4 Millionen Dollar Budget dieses Ensemble zusammenbrachte, ist die eigentliche Leistung der Produktion.
+
+### Einordnung & Wirkung
+
+Bei 1,4 Millionen Dollar Herstellungskosten spielte der Film weltweit 37,7 Millionen ein, davon 36 Millionen in Nordamerika — der elfterfolgreichste Film des Jahres 1974. Nat Cohen erklärte, es sei der erste vollständig von einer britischen Firma finanzierte Film gewesen, der Platz eins der wöchentlichen US-Kinocharts erreichte.
+
+Ingrid Bergman gewann den Oscar als beste Nebendarstellerin; nominiert waren zudem Albert Finney, das adaptierte Drehbuch, die Musik, die Kamera und die Kostüme. Bei den BAFTA-Awards gewannen John Gielgud und Ingrid Bergman sowie die Filmmusik.
+
+Roger Ebert vergab drei von vier Sternen und sprach von großem Stil, einer liebevollen Verbeugung vor einer früheren Epoche des Filmemachens. Vincent Canby nannte den Film in der New York Times eine großartig unterhaltsame Liebeserklärung an die Kriminalliteratur. Rotten Tomatoes weist 89 Prozent aus.
+
+Agatha Christie starb 14 Monate nach der Premiere. Sie erklärte, dieser Film und „Zeugin der Anklage" seien die einzigen Verfilmungen ihrer Bücher, die sie mochte — nur Finneys Schnurrbart hielt sie für zu klein geraten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:440298', locale: 'de-de',
+    text: `### Worum es geht
+
+Nach dem Zweiten Weltkrieg gründet die polnische Regierung das Folkloreensemble Mazurek. Der Pianist Wiktor und seine Kollegin Irena entdecken dort die Sängerin Zula.
+
+Aus Wiktor und Zula wird ein Paar. 1952 wollen sie gemeinsam fliehen — Zula erscheint nicht zum Treffpunkt. Über rund fünfzehn Jahre und mehrere Länder hinweg finden sie immer wieder zueinander und wieder auseinander.
+
+### Entstehungsgeschichte
+
+Regie führte Paweł Pawlikowski, das Drehbuch schrieb er gemeinsam mit Janusz Głowacki. Pawlikowski widmete den Film seinen verstorbenen Eltern; die Hauptfiguren tragen deren Vornamen.
+
+Joanna Kulig spielt Zula Lichon, Tomasz Kot den Wiktor Warski, Agata Kulesza die Irena Bielecka, Borys Szyc den Lech Kaczmarek, Jeanne Balibar die Juliette und Cédric Kahn den Michel. Kulig trainierte ein halbes Jahr lang Gesang und Tanz mit dem Ensemble Mazowsze, das es tatsächlich gibt.
+
+Produziert wurde der Film von Ewa Puszczyńska und Tanya Seghatchian als polnisch-französisch-britische Koproduktion; gesprochen wird Polnisch, Deutsch, Französisch, Italienisch, Kroatisch und Russisch. Die Kamera führte Łukasz Żal in Schwarzweiß und im fast quadratischen 4:3-Format; den Schnitt besorgte Jarosław Kamiński.
+
+Gedreht wurde in Łódź und in der verfallenen orthodoxen Kirche in Kniazie bei Lubycza Królewska an der ukrainischen Grenze. Der Film dauert 88 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Pawlikowski hat die Rolle der Musik selbst beschrieben: Sie sei der Klebstoff, der den Film zusammenhält, und ständig ein Spiegel der Beziehungsstadien. Dasselbe Volkslied — „Dwa serduszka, cztery oczy" — erscheint in mehreren Fassungen; dazu kommen Gershwin, Chopins Fantaisie-Impromptu, „Blue Moon", „Katjuscha", „Die Internationale" und Bachs Goldberg-Variationen. Marcin Masecki arrangierte mehrere Stücke als Jazz.
+
+Adam Soboczynski beschrieb, wie die Melodien bäuerlich burlesk, sozialistisch pathetisch und in einer entrückten Jazzfassung erklingen — die Musik erzählt die politische Geschichte mit.
+
+Für die Bildgestaltung nutzte Pawlikowski zeitgenössische Fotografien als Vorlage. Seine Begründung: Polen sei so gewesen, auf dem Land habe es kaum Elektrizität gegeben, und Paris sei die Stadt des Lichts.
+
+### Einordnung & Wirkung
+
+In Cannes 2018 erhielt Pawlikowski den Regiepreis. Beim Europäischen Filmpreis 2018 gewann der Film als bester europäischer Film sowie für Regie, Drehbuch, Hauptdarstellerin und Schnitt. Bei den Oscars 2019 gab es Nominierungen für Regie, Kamera und als bester fremdsprachiger Film. Beim Polnischen Filmpreis 2018 kamen sieben Auszeichnungen bei dreizehn Nominierungen zusammen.
+
+Rotten Tomatoes weist 92 Prozent aus (Schnitt 8,3 von 10), Metacritic 90 von 100. Weltweit spielte der Film knapp 20 Millionen Dollar ein; in Deutschland kamen 100.495 Zuschauer.
+
+Jörg Taszman lobte im Deutschlandfunk Kultur ein latent emotionales, sinnliches, raffiniert kühles Kino. Adam Soboczynski hielt fest, Pawlikowski gelinge es, in nur 85 Minuten ein episches Panorama des Kalten Krieges anhand eines Paares zu entfalten.` },
+  {
+    bereich: 'titel', schluessel: 'series:108545', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie erzählt auf zwei Zeitebenen. Während der Kulturrevolution in China sendet die Astrophysikerin Ye Wenjie eine Nachricht ins All — und erhält Jahre später eine Antwort.
+
+Die Absender nennt die Serie San-Ti. Ye Wenjie fordert sie auf, zur Erde zu kommen. Gemeinsam mit dem Ölmilliardär Mike Evans bereitet eine geheime Organisation deren Ankunft vor. In der Gegenwart des Jahres 2024 versuchen Behörden, Wissenschaftler und Militärs zu begreifen, womit sie es zu tun haben.
+
+### Entstehungsgeschichte
+
+Vorlage ist Liu Cixins Trisolaris-Trilogie, insbesondere der Roman „Die drei Sonnen".
+
+Entwickelt wurde die Serie von David Benioff, D. B. Weiss und Alexander Woo.
+
+Rosalind Chao und Zine Tseng spielen Ye Wenjie in zwei Lebensaltern, Jonathan Pryce und Ben Schnetzer entsprechend den Mike Evans. Jess Hong spielt Jin Cheng, Jovan Adepo den Saul Durand, Eiza González die Augustina Salazar, Liam Cunningham den Thomas Wade, John Bradley West den Jack Rooney, Benedict Wong den Shi Qiang, Alex Sharp den Will Downing, Saamer Usmani den Raj Varma, Sea Shimooka die Sophon und Marlo Kelly die Tatiana Haas.
+
+Produziert wurde die Serie von Plan B Entertainment, Primitive Streak, T-Street und Three-Body Universe; die Musik stammt von Ramin Djawadi. Gedreht wurde ab dem 8. November 2021 im Vereinigten Königreich und in China; gesprochen wird Englisch und Hochchinesisch.
+
+Die erste Staffel umfasst acht Folgen von 44 bis 64 Minuten und erschien am 21. März 2024 bei Netflix, deutschsprachig zeitgleich. Im Mai 2024 wurde die Serie um zwei weitere Staffeln verlängert.
+
+### Hinter den Kulissen
+
+Der Ausgangspunkt ist historisch verankert. Die Serie beginnt in der Kulturrevolution — die Entscheidung, die eine Wissenschaftlerin dort trifft, wird aus dem erklärt, was sie in dieser Zeit erlebt.
+
+Damit hat die Serie eine Erzählung, die nicht bei der Bedrohung beginnt, sondern bei ihrer Einladung. Die Frage ist nicht, wer angreift, sondern warum jemand gerufen hat.
+
+Bemerkenswert ist die Namensgebung. In der Serie heißen die Außerirdischen San-Ti, in den deutschen Romanübersetzungen Trisolarier — eine Unterscheidung, die aus verschiedenen Übertragungen des chinesischen Begriffs herrührt.
+
+Die Besetzung mehrerer Figuren in zwei Lebensaltern ist die formale Folge der doppelten Zeitebene: Wer die Kulturrevolution erlebt hat, ist 2024 ein anderer Mensch.
+
+### Einordnung & Wirkung
+
+Tjark Lorenzen urteilte bei Netzwelt.de, die Serie sei intelligent, aber nie kompliziert und habe das Zeug dazu, Science-Fiction-Anhänger zu begeistern.
+
+Die Verlängerung um zwei Staffeln bereits zwei Monate nach dem Start ist der aussagekräftigste Befund. Sie zeigt, dass die Plattform den Stoff über die erste Staffel hinaus tragen wollte — bei einer Vorlage, die aus drei Bänden besteht, eine folgerichtige Entscheidung.
+
+Die gleichzeitige deutschsprachige Premiere am 21. März 2024 und die Zweisprachigkeit der Produktion verweisen auf den internationalen Zuschnitt. Eine Serie nach einem chinesischen Roman, gedreht in Großbritannien und China, auf Englisch und Chinesisch — das ist ein Format, das es in dieser Form vor den globalen Plattformen nicht gab.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1548', locale: 'de-de',
+    text: `### Worum es geht
+
+Enid und Rebecca sind Außenseiterinnen und haben gerade die Schule beendet. Der Sommer danach gehört ihnen — und niemandem sonst.
+
+Enid stößt auf Seymour, einen deutlich älteren, einsamen Sammler alter Schallplatten. Sie will ihm helfen, jemanden kennenzulernen. Was daraus entsteht, bringt sie und Rebecca auseinander.
+
+### Entstehungsgeschichte
+
+Vorlage ist Daniel Clowes' Graphic Novel „Ghost World" aus den neunziger Jahren. Clowes schrieb das Drehbuch gemeinsam mit Terry Zwigoff, der Regie führte.
+
+Clowes beschrieb den Vorgang später: Er habe zunächst den Comic abgeschrieben, dann alles zu verwerfen versucht und eine völlig neue Geschichte geschrieben — der Film habe sich am Ende stark von ihrem Skript unterschieden.
+
+Thora Birch spielt Enid, Scarlett Johansson die Rebecca, Steve Buscemi den Seymour, Brad Renfro den Josh, Bob Balaban Enids Vater und Illeana Douglas die Kunstlehrerin Roberta.
+
+Die Kamera führte Affonso Beato, den Schnitt besorgten Carole Kravetz-Aykanian und Michael R. Miller, die Musik stammt von David Kitay. Das Budget betrug sieben Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Bildgestaltung folgte einer klaren Vorgabe: Der Film sollte wie ein Comic aussehen. Affonso Beato studierte dafür den Stil der Vorlage; das Ergebnis wirkt absichtlich übersättigt.
+
+Der Soundtrack ist Teil der Figurenzeichnung. Blues- und Jazzstücke, darunter „Devil Got My Woman" von Skip James aus dem Jahr 1931 und ein bekanntes Bollywood-Lied aus „Gumnaam" von 1965 — die Musik gehört zu Seymours Welt und zu Enids Neugier darauf.
+
+Genau daran hängt der Konflikt. Enid interessiert sich für das, was aus der Zeit gefallen ist, und Rebecca will ankommen. Der Sommer entscheidet, welche der beiden recht behält.
+
+Andrew Sarris kritisierte die Hauptfigur ausdrücklich: Enid sei hochmütig, herzlos und täuschend, und sie mache ältere oder ärmere Menschen zum Ziel ihrer Verachtung.
+
+### Einordnung & Wirkung
+
+Bei sieben Millionen Dollar Herstellungskosten spielte der Film weltweit 8,7 Millionen ein — kommerziell blieb er eng begrenzt.
+
+Rotten Tomatoes weist 93 Prozent aus, Metacritic 91 von 100. Roger Ebert vergab vier von vier Sternen und schrieb, er habe diesen Film umarmen wollen; er gehe ein Wagnis ein, ohne einen Fehler zu machen. A. O. Scott lobte in der New York Times Thora Birchs intelligent und zurückhaltend gespielte Rolle, Kevin Thomas in der LA Times Buscemis witzig-sensible Darstellung.
+
+Der Film gewann den Independent Spirit Award für das beste Drehbuch; Steve Buscemi wurde von gleich drei Kritikervereinigungen als bester Nebendarsteller ausgezeichnet. Nominiert war der Film für den Oscar für das beste adaptierte Drehbuch, Thora Birch für den Golden Globe.
+
+2017 wurde er in die Criterion Collection aufgenommen — die formale Bestätigung eines Kultstatus, der sich über Jahre aufgebaut hatte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:308639', locale: 'de-de',
+    text: `### Worum es geht
+
+Malcolm und seine Freunde Jib und Diggy sind Außenseiter in Inglewood, Kalifornien — Geeks in einem Viertel, in dem das nicht hilft.
+
+Nach einer Schießerei findet Malcolm Drogen und eine Waffe in seinem Rucksack. Er hat sie nicht dort hingetan. Um beides loszuwerden und zugleich Geld für eine Empfehlung nach Harvard aufzutreiben, greifen die drei auf Bitcoin und einen Online-Marktplatz zurück.
+
+### Entstehungsgeschichte
+
+Rick Famuyiwa führte Regie und schrieb das Drehbuch.
+
+Shameik Moore spielt Malcolm Adekanbi, Tony Revolori den James „Jib" Caldones, Kiersey Clemons die Cassandra „Diggy" Andrews, Zoë Kravitz die Nakia, Chanel Iman die Lily Jacoby, Blake Anderson den Will Sherwood, Roger Guenveur Smith den Austin Jacoby und LaKeith Stanfield den Marquis „Bug". ASAP Rocky spielt den Dom — sein Filmdebüt.
+
+Produziert wurde der Film von Forest Whitaker und Nina Yang Bongiovi; Pharrell Williams war ausführender Produzent, Sean Combs Co-Executive-Producer. Die Kamera führte Rachel Morrison, die Musik stammt von Germaine Franco.
+
+Das Budget betrug sieben Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Anlage lebt von einer Verschiebung. Der Film nimmt Figuren, die in Geschichten aus diesem Milieu üblicherweise nicht im Mittelpunkt stehen — drei Außenseiter mit guten Noten und Harvard-Ambitionen —, und macht sie zu Hauptpersonen.
+
+Daraus folgt die Erzählweise. Die Lösung des Problems läuft nicht über Gewalt, sondern über Technik: Bitcoin, ein Online-Marktplatz, ein Plan. Der Film setzt Klugheit gegen die Erwartung, die an seine Figuren gerichtet wird.
+
+Die Beteiligung von Pharrell Williams und Sean Combs an der Produktion verweist auf das Gewicht der Musik. Sie ist nicht Untermalung, sondern das, worüber die Figuren sich definieren.
+
+Rachel Morrison an der Kamera ist der zweite bemerkenswerte Name — eine Bildgestalterin, deren Arbeit dem Film seinen Blick auf Inglewood gibt.
+
+### Einordnung & Wirkung
+
+Bei sieben Millionen Dollar Herstellungskosten spielte der Film weltweit knapp 18 Millionen ein.
+
+Rotten Tomatoes weist 88 Prozent aus (161 Bewertungen). The Guardian vergab fünf von fünf Sternen und nannte die Besetzung revolutionär.
+
+Dieses Urteil zielt auf das, was den Film heraushebt. Nicht die Handlung ist neu, sondern wer sie erlebt — und wie selbstverständlich der Film seinen Figuren Interessen zugesteht, die man ihnen sonst nicht zuschreibt.
+
+Für ein Debüt in dieser Besetzung ist ASAP Rockys Auftritt bemerkenswert, ebenso die Zahl der später bekannten Namen: Shameik Moore, Kiersey Clemons, LaKeith Stanfield und Tony Revolori standen hier gemeinsam vor der Kamera.` },
 ];
