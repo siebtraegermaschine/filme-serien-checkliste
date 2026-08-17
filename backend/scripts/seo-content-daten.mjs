@@ -39132,4 +39132,303 @@ Owen Gleiberman nannte den Film eine blutgetränkte, aber nicht beängstigende F
 Der Vorwurf, den Gleiberman und Sims teilen, richtet sich nicht gegen die Ausführung, sondern gegen die Existenz des Films — die Frage, was eine weitere Fortsetzung nach fünfzig Jahren beitragen soll.
 
 Der Weg zur Veröffentlichung stützt das. Aus dem geplanten Kinostart 2021 wurde eine Netflix-Premiere im Februar 2022; ein Film, dessen Herstellung von Personalwechseln geprägt war, fand auch keine reguläre Auswertung.` },
+  // ---- Block 082 ----
+  {
+    bereich: 'titel', schluessel: 'movie:713', locale: 'de-de',
+    text: `### Worum es geht
+
+Die stumme Pianistin Ada McGrath wird von ihrem Vater mit dem Kolonisten Alistair Stewart verheiratet und nach Neuseeland geschickt.
+
+Sie bringt ihr Klavier mit. Stewart lässt es am Strand zurück — für ihn ist es Ballast. Der Nachbar George Baines erwirbt das Instrument und bietet Ada Unterricht an; tatsächlich geht es ihm um ihre Nähe. Was zwischen den dreien entsteht, führt zu Spannungen, die gewaltsam ausgetragen werden.
+
+### Entstehungsgeschichte
+
+Jane Campion führte Regie und schrieb das Drehbuch.
+
+Holly Hunter spielt Ada McGrath, Harvey Keitel den George Baines, Sam Neill den Alistair Stewart und Anna Paquin die Tochter Flora. In der deutschen Fassung sprechen Marina Krogull die Ada, Joachim Kerzel den Baines, Wolfgang Condrus den Stewart und Catrin Dams die Flora.
+
+Produziert wurde der Film von Jan Chapman. Die Kamera führte Stuart Dryburgh, den Schnitt besorgte Veronika Jenet, die Musik stammt von Michael Nyman, angeregt von schottischer Folklore; eingespielt wurde sie in München von den Münchner Philharmonikern.
+
+Es handelt sich um eine australisch-neuseeländisch-französische Produktion; gesprochen wird Englisch und Māori. Gedreht wurde von Mai bis Juli 1992 in Neuseeland, unter anderem am Strand von Karekare. Der Film dauert 121 Minuten, das Budget betrug rund sieben Millionen Dollar.
+
+Der Start in Frankreich war am 19. Mai 1993, in Australien am 5. August, in Deutschland am 12. August 1993.
+
+### Hinter den Kulissen
+
+Die Stummheit der Hauptfigur ist der Kern der Konstruktion. Ada spricht nicht; was sie mitteilen kann, teilt sie über das Klavier mit. Damit ist das Instrument nicht Symbol, sondern Sprechorgan — wer es ihr nimmt, nimmt ihr die Stimme.
+
+Daraus ergibt sich der Handel, um den der Film gebaut ist. Baines gibt Ada Zugang zu ihrem eigenen Klavier zurück, verlangt aber etwas dafür. Der Film benennt diese Ungleichheit, statt sie zu romantisieren.
+
+Der Strand von Karekare ist dabei mehr als ein Schauplatz. Ein Klavier, das an der Brandung steht, wo es nicht hingehört, fasst die Lage der Hauptfigur in ein einziges Bild.
+
+### Einordnung & Wirkung
+
+Bei rund sieben Millionen Dollar Herstellungskosten spielte der Film allein in den USA etwa 40 Millionen ein.
+
+In Cannes 1993 gewann Jane Campion die Goldene Palme, Holly Hunter den Darstellerinnenpreis. Bei den Oscars 1994 folgten drei Auszeichnungen bei acht Nominierungen: Holly Hunter als beste Hauptdarstellerin, Anna Paquin als beste Nebendarstellerin und Jane Campion für das beste Originaldrehbuch. Hinzu kamen ein Golden Globe für Hunter, drei BAFTA-Awards bei zehn Nominierungen, der César als bester ausländischer Film und elf Preise des Australian Film Institute bei dreizehn Nominierungen.
+
+Rotten Tomatoes weist 90 Prozent aus, Metacritic 89 von 100. Roger Ebert vergab vier Sterne, das Lexikon des internationalen Films fünf.
+
+Blickpunkt:Film sprach von einem poetischen Meisterwerk. Thomas Koebner nannte den Film im film-dienst eine in grandiosen Sinnbildern erzählte Parabel über die Selbstbefreiung einer Frau.
+
+2019 wählten 368 Filmfachleute aus 84 Ländern den Film in einer BBC-Umfrage zum besten Film einer Regisseurin.` },
+  {
+    bereich: 'titel', schluessel: 'movie:398', locale: 'de-de',
+    text: `### Worum es geht
+
+November 1959: Truman Capote liest eine Zeitungsmeldung über den Mord an der Familie Clutter in Kansas. Er beschließt, darüber zu schreiben.
+
+Gemeinsam mit Harper Lee reist er nach Holcomb. Er gewinnt das Vertrauen der Einwohner und des Ermittlers Alvin Dewey. Als die Täter Perry Smith und Dick Hickock gefasst und zum Tode verurteilt werden, sucht Capote die Nähe zu Smith — weil er dessen Schilderung der Tatnacht braucht. Was er dafür tut und was er anschließend unterlässt, ist der eigentliche Gegenstand des Films.
+
+### Entstehungsgeschichte
+
+Vorlage ist Gerald Clarkes autorisierte Biografie „Capote: A Biography" von 1988. Clarke hatte über dreizehn Jahre hinweg Capote, Harper Lee, Alvin Dewey, William Shawn und Jack Dunphy befragt. Teile der Dialoge stammen aus über vierzig Briefen, die Smith und Hickock an Capote schrieben.
+
+Regie führte Bennett Miller — sein Spielfilmdebüt. Das Drehbuch schrieb Dan Futterman.
+
+Philip Seymour Hoffman spielt Truman Capote, Catherine Keener die Harper Lee, Clifton Collins Jr. den Perry Smith, Mark Pellegrino den Dick Hickock, Chris Cooper den Alvin Dewey, Bruce Greenwood den Jack Dunphy, Bob Balaban den Verleger William Shawn und Amy Ryan die Marie Dewey.
+
+Produziert wurde der Film von Caroline Baron, Michael Ohoven und William Vince. Die Kamera führte Adam Kimmel, den Schnitt besorgte Christopher Tellefsen, die Musik stammt von Mychael Danna.
+
+Gedreht wurde vom 25. Oktober bis November 2004 in 36 Tagen in Winnipeg. Das Budget betrug rund sieben Millionen Dollar. Die US-Premiere war am 30. September 2005, an Capotes 81. Geburtstag; der deutsche Start folgte am 2. März 2006.
+
+### Hinter den Kulissen
+
+Der Film handelt nicht vom Verbrechen, sondern von dem, was ein Schriftsteller daraus macht. Capote braucht ein Ende für sein Buch — und dieses Ende hängt an der Hinrichtung zweier Menschen, zu denen er ein Verhältnis aufgebaut hat.
+
+Genau darin liegt die Schärfe. Der Film zeigt, wie Vertrauen hergestellt und dann verwendet wird. Die vierzig Briefe, aus denen Teile der Dialoge stammen, sind zugleich Quelle des Films und Beleg für das, was er verhandelt.
+
+Die Beschränkung auf 36 Drehtage und sieben Millionen Dollar passt zur Anlage. Der Film besteht überwiegend aus Gesprächen; sein Aufwand liegt in der Besetzung, nicht in der Ausstattung.
+
+### Einordnung & Wirkung
+
+Das Startwochenende in zwölf Kinos brachte 324.857 Dollar; bis zum 16. Oktober 2005 kamen 1,4 Millionen zusammen.
+
+Philip Seymour Hoffman gewann 2006 den Oscar als bester Hauptdarsteller; der Film war zudem als bester Film, für die Regie, für Catherine Keener als beste Nebendarstellerin und für das adaptierte Drehbuch nominiert. Hoffman erhielt außerdem den Golden Globe und den BAFTA sowie Auszeichnungen zahlreicher Kritikervereinigungen.
+
+Das Lexikon des internationalen Films nannte den Film eine brillant gespielte Filmbiografie mit eleganter Inszenierung und einem Hang zur Melodramatik. Das Time Magazine schrieb, Hoffman kröne damit ein Jahrzehnt brillanter Arbeit. Die New York Times hob hervor, er vermittle mit Klarheit und Feinheit die Kompliziertheiten von Capotes Temperament. John le Carré nannte die Darstellung die beste schauspielerische Leistung, die er in seinem Leben gesehen habe.
+
+Am Schluss steht ein Befund, den der Film nicht kommentiert: „Kaltblütig" wurde 1966 ein Bestseller — einen weiteren Roman hat Capote nicht mehr vollendet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:12104', locale: 'de-de',
+    text: `### Worum es geht
+
+Pink ist Rockmusiker und sitzt in einem Hotelzimmer in Los Angeles. Von dort aus setzt sich der Film mit seiner Lage auseinander.
+
+Was folgt, ist keine Handlung im üblichen Sinn, sondern eine Folge von Erinnerungen, Zuständen und Bildern. Pink errichtet eine Mauer um sich — Stein für Stein, jeder aus einer Verletzung. Am Ende wird sie eingerissen.
+
+### Entstehungsgeschichte
+
+Vorlage ist das gleichnamige Konzeptalbum von Pink Floyd.
+
+Regie führte Alan Parker, das Drehbuch schrieb Roger Waters.
+
+Bob Geldof spielt Pink, Christine Hargreaves die Mutter, James Laurenson den Vater, Eleanor David die Ehefrau und Bob Hoskins den Manager.
+
+Produziert wurde der Film von Alan Marshall, Garth Thomas und Gerald Scarfe. Die Kamera führte Peter Biziou; die Musik stammt von Pink Floyd, Michael Kamen und Bob Ezrin.
+
+Es handelt sich um eine britische Produktion von 95 Minuten Länge; die FSK gab sie ab 16 Jahren frei.
+
+### Hinter den Kulissen
+
+Der Film ist kein Musikfilm mit Handlung, sondern ein Album, das in Bilder übersetzt wurde. Was erzählt wird, läuft über Musik, Bilder und Montage.
+
+Dafür setzt er drei Verfahren nebeneinander: Spielszenen, Comic-Strips und assoziative Schnittfolgen, die eher Videoclips ähneln als Filmszenen. Dass Gerald Scarfe zu den Produzenten gehört, verweist auf das Gewicht, das die gezeichneten Passagen in diesem Film haben.
+
+Dass Roger Waters das Drehbuch schrieb, verankert den Film beim Urheber des Albums. Die Mauer bleibt dabei durchgehend doppeldeutig — Schutz und Gefängnis zugleich —, und der Film löst diese Doppelung nicht auf, sondern führt sie bis zum Einsturz durch.
+
+### Einordnung & Wirkung
+
+Die Kritik beschrieb den Film als technisch brillant, sprach aber auch von einer Kakophonie aus Licht und Ton.
+
+Beide Urteile treffen denselben Sachverhalt. Ein Film ohne durchgehende Handlung, der 95 Minuten lang mit voller Lautstärke Bilder aneinanderreiht, überfordert absichtlich — die Frage ist, ob man diese Überforderung als Form akzeptiert.
+
+Die Verbindung dreier Darstellungsweisen — Spielfilm, Zeichentrick, Clip — war zum Zeitpunkt seiner Entstehung ungewöhnlich. Der Film steht damit an einer Schnittstelle: zwischen dem Konzeptalbum als Kunstform und der Bildsprache, die sich im Musikvideo gerade herausbildete.
+
+Die Besetzung Bob Geldofs in der Hauptrolle ist die konsequente Fortsetzung dieser Anlage. Ein Musiker spielt einen Musiker in einer Erzählung, die aus Musik entstanden ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11031', locale: 'de-de',
+    text: `### Worum es geht
+
+Die britische Heavy-Metal-Band Spinal Tap geht auf Tournee. Ein Filmteam begleitet sie.
+
+Die Band hat eine lange Vorgeschichte — in den sechziger Jahren spielte sie noch Skiffle und Beat. Jetzt steht die Tournee zum Album „Smell the Glove" an, dessen Covergestaltung zensiert wird. Dazu kommen Spannungen, als die Freundin des Sängers Einfluss zu nehmen beginnt. Und dann ist da die Sache mit den Schlagzeugern, die der Band regelmäßig abhandenkommen.
+
+### Entstehungsgeschichte
+
+Regie führte Rob Reiner; es war sein Debüt. Am Drehbuch schrieben Christopher Guest, Michael McKean, Harry Shearer und Reiner selbst — dieselben vier verantworten auch die Musik.
+
+Michael McKean spielt David St. Hubbins, Christopher Guest den Nigel Tufnel, Harry Shearer den Derek Smalls, Tony Hendra den Manager Ian Faith, Rob Reiner den Filmemacher Marty DiBergi, Fran Drescher die Bobbi Flekman und Patrick Macnee den Sir Denis Eton-Hogg. Kurzauftritte haben Billy Crystal, Anjelica Huston, Paul Shaffer und Dana Carvey.
+
+Produziert wurde der Film von Karen Murphy. Die Kamera führte Peter Smokler, den Schnitt besorgten Kent Beyda und Kim Secrist.
+
+Die Band entstand bereits 1978 für eine Comedy-Sendung. Ein großer Teil des Films hatte kein ausformuliertes Drehbuch; die Darsteller improvisierten weitgehend, und Reiner setzte aus dem Rohmaterial die Endfassung zusammen. Die DVD-Ausgabe enthielt eine zusätzliche Stunde Material.
+
+Der Film dauert 82 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Herstellungsweise ist der Witz und die Methode zugleich. Ohne festes Drehbuch entstanden Szenen aus Improvisation; was zusammenhält, ist die Form der Dokumentation, die der Film vorgibt zu sein.
+
+Rob Reiner spielt den Filmemacher, der die Band begleitet — der Regisseur ist damit als Figur im Film anwesend und stellt die Fragen, deren Antworten den Witz tragen.
+
+Das Verhältnis von Drehmaterial zu Endfassung erklärt die Machart. Eine zusätzliche Stunde auf der DVD gegenüber 82 Minuten im Kino bedeutet: Der Film wurde nicht geschrieben, sondern ausgewählt.
+
+Ein einzelner Gag hatte dabei besondere Nachwirkung — der Verstärker, dessen Lautstärkeregler bis 11 geht. Die IMDb bewertet diesen Film als einzigen auf einer Skala von 11 statt 10 Punkten.
+
+### Einordnung & Wirkung
+
+Roger Ebert nannte ihn einen der lustigsten Filme, die je gemacht wurden. Das Lexikon des internationalen Films lobte ihn als intelligente und witzige Auseinandersetzung mit dem Showgeschäft und als differenzierten satirischen Kommentar zum Verhältnis von Schein und Sein.
+
+2002 wurde der Film ins National Film Registry aufgenommen. Zum Kultfilm wurde er erst nach der DVD-Veröffentlichung.
+
+Die Figur Bobbi Flekman trat 1997 in einer Folge von „Die Nanny" auf — ein Hinweis darauf, wie weit die erfundene Welt dieses Films über ihn hinausreichte.
+
+2025 erschien eine Fortsetzung: „Spinal Tap II: The End Continues". Vier Jahrzehnte zwischen zwei Teilen sind selbst für Kultfilme ein ungewöhnlicher Abstand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:892', locale: 'de-de',
+    text: `### Worum es geht
+
+In einer verfallenen Stadt betreibt ein Fleischer ein Geschäft mit klarer Rechnung: Er stellt Hausmeister ein und schlachtet sie nach wenigen Tagen. Das Fleisch verkauft er an die hungernden Bewohner des Hauses.
+
+Der ehemalige Clown Louison ist als Nächster vorgesehen. Dann verliebt er sich in Julie, die Tochter des Fleischers — und der Ablauf gerät durcheinander. Im selben Haus versucht eine lebensmüde Bewohnerin täglich, sich mit einer selbstgebauten Apparatur umzubringen.
+
+### Entstehungsgeschichte
+
+Regie führten Jean-Pierre Jeunet und Marc Caro. Das Drehbuch schrieben Gilles Adrien, Jeunet und Caro.
+
+Dominique Pinon spielt Louison, Marie-Laure Dougnac die Julie Clapet, Jean-Claude Dreyfus den Fleischer Clapet, Karin Viard die Mademoiselle Plusse und Rufus den Robert Kube.
+
+Produziert wurde der Film von Claudie Ossard. Die Kamera führte Darius Khondji, den Schnitt besorgte Hervé Schneid, die Musik stammt von Carlos D'Alessio.
+
+### Hinter den Kulissen
+
+Der Film verlegt seine Dystopie in ein einziges Mietshaus. Alles, was er über den Zustand der Welt sagt, sagt er über die Bewohner eines Gebäudes und die Ordnung, die dort gilt.
+
+Diese Ordnung wird nicht angeklagt, sondern vorgeführt. Der Fleischer ist kein Ungeheuer, sondern ein Geschäftsmann; die Mieter sind keine Mitwisser, sondern Kunden. Der Schrecken liegt darin, wie beiläufig das Ganze abläuft.
+
+Formal setzt der Film auf Rhythmus. Die Apparatur, mit der eine Bewohnerin ihre Selbsttötung versucht, ist eine Kette aus Einzelteilen, die einander auslösen — ein Prinzip, nach dem auch der Film selbst gebaut ist.
+
+Dass drei Namen unter dem Drehbuch stehen und zwei Regie führen, passt zu dieser Bauweise. Der Film ist eine Konstruktion aus ineinandergreifenden Teilen — und wurde entsprechend gemeinsam entworfen.
+
+### Einordnung & Wirkung
+
+Der Film erhielt vier Césars — für das Drehbuch, den Schnitt, das Szenenbild und als bester Erstlingsfilm.
+
+Rotten Tomatoes weist 90 Prozent aus. Der Spiegel nannte ihn eine schwarze Messe des Humors, gruselig und grotesk.
+
+Dass drei der vier Césars auf Buch, Schnitt und Ausstattung entfielen, beschreibt den Film genau. Seine Wirkung entsteht nicht aus Darstellerleistungen oder aus einer Geschichte, sondern aus der Machart — aus dem, was zwischen den Bildern passiert.
+
+Die Auszeichnung als bester Erstlingsfilm ordnet ihn zusätzlich ein: Zwei Regisseure legten hier gemeinsam ihre erste abendfüllende Arbeit vor und hatten ihre Bildsprache bereits vollständig entwickelt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:791177', locale: 'de-de',
+    text: `### Worum es geht
+
+Maren Yearly ist jung und in den achtziger Jahren allein unterwegs quer durch die USA. Sie sucht ihre Mutter.
+
+Sie trägt etwas mit sich, das sie von anderen trennt: das Bedürfnis, Menschen zu töten und zu essen — gerade die, die ihr nahekommen. Unterwegs trifft sie andere, denen es ebenso geht, und verliebt sich in Lee.
+
+### Entstehungsgeschichte
+
+Vorlage ist Camille DeAngelis' Roman „Bones & All" von 2015, für den die Autorin den Alex Award erhielt. Der Titel bezeichnet die äußerste Form dessen, worum es geht — wenn nichts übrig bleibt, auch die Knochen nicht.
+
+Regie führte Luca Guadagnino, das Drehbuch schrieb David Kajganich.
+
+Taylor Russell spielt Maren Yearly, Timothée Chalamet den Lee, Mark Rylance den Sully, André Holland den Vater Frank Yearly, Chloë Sevigny die Mutter Janelle Kerns, Jessica Harper die Großmutter Barbara Kerns, Anna Cobb die Kayla und Michael Stuhlbarg den Jake; David Gordon Green hat einen Kurzauftritt.
+
+Die Kamera führte Arseni Khachaturan, den Schnitt besorgte Marco Costa, die Musik stammt von Trent Reznor und Atticus Ross.
+
+Es handelt sich um eine italienisch-amerikanische Produktion von 131 Minuten Länge. Gedreht wurde von Mai bis September 2021 in Cincinnati und Chillicothe, Ohio. Die FSK gab den Film ab 16 Jahren frei.
+
+Die Weltpremiere lief am 2. September 2022 in Venedig; der US-Start folgte am 23. November 2022, der deutsche am 24. November. Seit dem 31. Juli 2023 ist der Film bei Paramount+ verfügbar.
+
+### Hinter den Kulissen
+
+Der Stoff verlangt eine Entscheidung, und der Film trifft sie eindeutig: Er behandelt das Kannibalismus-Motiv nicht als Horror, sondern als Veranlagung, mit der Menschen zurechtkommen müssen. Das macht ihn zu einer Liebesgeschichte mit einem Widerspruch im Kern — Nähe ist genau das, was gefährlich wird.
+
+Die Reise durch die USA der achtziger Jahre gibt dem eine Form. Zwei Menschen ohne Ort, die niemanden haben, treffen unterwegs auf andere ihrer Art — und lernen dabei, dass es auch unter ihnen keine Gemeinschaft gibt.
+
+Der Soundtrack verbindet die Musik von Trent Reznor und Atticus Ross mit Stücken der achtziger Jahre, unter anderem von Duran Duran und Kiss. Das Album mit 24 Titeln erschien am 18. November 2022; der Song „(You Made It Feel Like) Home" wurde 2023 für den Oscar nominiert.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 15,1 Millionen Dollar ein.
+
+Rotten Tomatoes weist 82 Prozent positive Kritiken aus (7,5 von 10), Metacritic 74 von 100. Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Peter Bradshaw vergab im Guardian fünf Sterne und sprach von einem herzzerreißenden Bankett der Brillanz. Leila Latif nannte den Film bei IndieWire eine wunderschön umgesetzte, tragische Romanze. Owen Gleiberman kritisierte in Variety das Drehbuch, das den Film in willkürliche Richtungen führe.
+
+In Venedig 2022 erhielt Luca Guadagnino den Silbernen Löwen für die beste Regie, Taylor Russell den Marcello-Mastroianni-Preis als beste Nachwuchsdarstellerin. Nominierungen folgten bei den Gotham Awards, den Independent Spirit Awards, der Chicago Film Critics Association und den Fangoria Chainsaw Awards.` },
+  {
+    bereich: 'titel', schluessel: 'movie:338189', locale: 'de-de',
+    text: `### Worum es geht
+
+Louis kehrt nach zwölf Jahren zu seiner Familie zurück. Er ist 34, Schriftsteller, und hat eine Nachricht mitgebracht: Er ist unheilbar krank und will sich verabschieden.
+
+Dazu kommt er nicht. Kaum ist er da, brechen die alten Rechnungen auf. Die Schwester Suzanne wirft ihm vor, sie habe die Familie nie verlassen können; der Bruder Antoine hält ihm vor, seine Sonderstellung bei der Mutter eingebüßt zu haben. Was Louis sagen wollte, geht in den gegenseitigen Vorwürfen unter.
+
+### Entstehungsgeschichte
+
+Vorlage ist Jean-Luc Lagarces Theaterstück „Juste la fin du monde" von 1990. Lagarce, 1957 geboren, war selbst HIV-positiv und starb 1995 an AIDS. Uraufgeführt wurde das Stück 1999 am Théâtre National de la Colline in Paris, die deutsche Erstaufführung folgte 2001 am Theater Bremen.
+
+Xavier Dolan führte Regie, schrieb das Drehbuch und übernahm den Schnitt. Es war seine zweite Adaption eines Theaterstücks nach „Sag nicht, wer du bist!" von 2013.
+
+Gaspard Ulliel spielt Louis, Nathalie Baye die Mutter Martine, Vincent Cassel den Bruder Antoine, Marion Cotillard dessen Frau Catherine und Léa Seydoux die Schwester Suzanne. Gaspard Ulliel starb 2022 bei einem Skiunfall.
+
+Produziert wurde der Film von Sylvain Corbeil, Xavier Dolan, Nancy Grant und Nathanaël Karmitz. Die Kamera führte André Turpin, die Musik stammt von Gabriel Yared.
+
+Es handelt sich um eine französisch-kanadische Produktion von 97 Minuten Länge, freigegeben ab 12 Jahren. Die Premiere lief am 19. Mai 2016 in Cannes, der französische Start folgte am 21. September 2016, der deutsche am 29. Dezember 2016.
+
+### Hinter den Kulissen
+
+Die Kameraarbeit ist die auffälligste Entscheidung. André Turpin arbeitet fast durchgehend in Nahaufnahmen und mit gesättigten Farben; die Kamera weicht selten von den Gesichtern. Das erzeugt Enge — und macht sichtbar, dass hier niemand dem anderen zuhört.
+
+Die Konstruktion ist die eines Kammerspiels mit einem Geheimnis, das nie ausgesprochen wird. Der Zuschauer weiß, warum Louis gekommen ist; die Familie weiß es nicht. Jede Szene läuft deshalb auf zwei Ebenen zugleich.
+
+Dass die Vorlage von einem Autor stammt, der an AIDS starb, gibt dem Stoff eine zusätzliche Schicht. Lagarce schrieb über eine Rückkehr, um Abschied zu nehmen; er selbst starb fünf Jahre nach der Niederschrift und vier Jahre vor der Uraufführung.
+
+### Einordnung & Wirkung
+
+In Cannes 2016 erhielt Xavier Dolan den Großen Preis der Jury. Beim Filmfest Hamburg folgte der Art Cinema Award. Bei den Canadian Screen Awards 2017 gab es neun Nominierungen, bei den Prix Lumières drei. Beim César 2017 stand der Film sechsmal auf der Liste und gewann dreimal: Gaspard Ulliel als Schauspieler, Xavier Dolan für Regie und Schnitt. Für den Oscar als fremdsprachiger Film stand er auf der Shortlist.
+
+Die Kritik war tief gespalten. Rotten Tomatoes weist nur 44 Prozent von 86 Kritiken als positiv aus. Peter Debruge urteilte in Variety, der Film verärgere und erschöpfe sein Publikum über quälende anderthalb Stunden. Hannah Pilarczyk nannte ihn auf Spiegel Online schlicht großartig und in seiner Darstellung dysfunktionaler Familien völlig neu. Christiane Peitz beschrieb ihn im Tagesspiegel als Psychothriller über die Grenzen der Kommunikation.
+
+Der Abstand zwischen 44 Prozent bei der Kritik und dem Großen Preis der Jury in Cannes ist ungewöhnlich groß — und er hat dieselbe Ursache: die Rücksichtslosigkeit, mit der der Film sein Publikum in dieser Familie festhält.` },
+  {
+    bereich: 'titel', schluessel: 'movie:6538', locale: 'de-de',
+    text: `### Worum es geht
+
+1980 wird der texanische Kongressabgeordnete Charlie Wilson durch einen Fernsehbericht auf den Krieg in Afghanistan aufmerksam.
+
+Gemeinsam mit der wohlhabenden Texanerin Joanne Herring und dem CIA-Agenten Gust Avrakotos organisiert er verdeckte Waffenlieferungen an die Mudschahedin. Über Verbindungen nach Israel, Ägypten, Pakistan und Saudi-Arabien beschafft er sowjetische Waffen. Das Budget wächst von fünf Millionen auf schließlich 500 Millionen Dollar; mit der saudischen Verdopplung wird daraus eine Milliarde. Nach dem sowjetischen Rückzug 1988 scheitert Wilsons Versuch, Geld für den Wiederaufbau zu beschaffen.
+
+### Entstehungsgeschichte
+
+Vorlage ist George Criles gleichnamiges Buch.
+
+Regie führte Mike Nichols — es war seine letzte Regiearbeit vor seinem Tod 2014. Das Drehbuch schrieb Aaron Sorkin.
+
+Tom Hanks spielt Charlie Wilson, Julia Roberts die Joanne Herring, Philip Seymour Hoffman den CIA-Agenten Gust Avrakotos, Amy Adams die Bonnie Bach, Ned Beatty den Clarence „Doc" Long, Om Puri den Präsidenten Zia-ul-Haq, Ken Stott den Zvi Rafiah und Christopher Denham den Michael G. Vickers.
+
+Produziert wurde der Film von Gary Goetzman und Tom Hanks. Die Kamera führte Stephen Goldblatt, den Schnitt besorgten John Bloom und Antonia Van Drimmelen, die Musik stammt von James Newton Howard.
+
+Es handelt sich um eine amerikanisch-deutsche Produktion von 98 Minuten Länge, freigegeben ab 12 Jahren. Das Budget betrug rund 75 Millionen Dollar. Der US-Start war am 21. Dezember 2007, der deutsche am 7. Februar 2008.
+
+### Hinter den Kulissen
+
+Aaron Sorkins Drehbuch behandelt einen politischen Vorgang als Komödie. Das ist die Entscheidung, an der sich alles Weitere entzündet — Waffenlieferungen an eine Kriegspartei werden über pointierte Dialoge und Sitzungsszenen erzählt.
+
+Die Zahlen tragen dabei die eigentliche Erzählung. Von fünf Millionen auf eine Milliarde Dollar in wenigen Jahren, beschafft über ein Geflecht aus vier Staaten — der Film macht sichtbar, wie das ohne öffentliche Debatte möglich war.
+
+Das Ende ist bezeichnend. Wilson bekommt Geld für Waffen und keines für Schulen; sein Antrag auf Mittel für den Wiederaufbau scheitert. Der Film benennt das, ohne die Folgen auszuführen.
+
+### Einordnung & Wirkung
+
+Bei rund 75 Millionen Dollar Herstellungskosten spielte der Film weltweit 119 Millionen ein — 66,7 Millionen in den USA, vier Millionen in Deutschland.
+
+Bei den Golden Globes 2008 gab es fünf Nominierungen, darunter als bester Film, für beide Hauptdarsteller und für das Drehbuch. Philip Seymour Hoffman war 2008 für den Oscar als bester Nebendarsteller nominiert. Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
+
+Die Kritik lobte Handwerk und Darstellerleistungen, äußerte aber deutliche Bedenken gegen die Darstellung. Ein Rezensent hielt fest, die Gegenwart der Vergangenheit sei zu mächtig, als dass man sie derart einfach zu den Akten legen könne. Ein anderer urteilte, das Satirische sei keineswegs die geeignete Form für diese Geschichte.
+
+Historiker bewerten den Film als faktisch ungenau. Er habe nur eine sporadische Verbindung zur historischen Realität und neige dazu, deren Bedeutung zu verzerren. Dieser Einwand wiegt bei einem Film schwer, der sich ausdrücklich auf ein Sachbuch stützt.` },
 ];
