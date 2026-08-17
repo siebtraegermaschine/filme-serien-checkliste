@@ -34373,4 +34373,1088 @@ Bei 30 Millionen Dollar Herstellungskosten spielte der Film weltweit rund 181 Mi
 Die Kritik urteilte gemischt. Eine Stimme hielt fest, der Film folge blind den enttäuschenden Tendenzen des Genres; eine andere nannte ihn harmlose Unterhaltung, die ihr Publikum trotz aller Einfältigkeit für sich einnehmen könne.
 
 Der Abstand zwischen diesen beiden Urteilen und dem Einspielergebnis ist für romantische Komödien jener Jahre kennzeichnend — und erklärt, warum sie in dieser Zahl produziert wurden.` },
+  // ---- Block 065 ----
+  {
+    bereich: 'titel', schluessel: 'movie:976893', locale: 'de-de',
+    text: `### Worum es geht
+
+Hirayama, ein Mann mittleren Alters, lebt bescheiden in Tokio und reinigt öffentliche Toilettenanlagen — künstlerisch gestaltete Bauten im Bezirk Shibuya. Sein Tag folgt festen Routinen. In seiner freien Zeit hört er Musik von Kassetten und liest.
+
+Diese Ordnung gerät in Bewegung: durch seinen unzuverlässigen Assistenten Takashi, durch die unangemeldete Ankunft seiner Nichte Niko und durch eine Reihe von Begegnungen.
+
+### Entstehungsgeschichte
+
+2022 wurde Wim Wenders eingeladen, einen Dokumentarfilm über „The Tokyo Toilet" zu drehen — 17 künstlerisch gestaltete WC-Anlagen in Shibuya. Wenders entschied sich stattdessen für einen Spielfilm.
+
+Regie führte Wenders, das Drehbuch schrieb er gemeinsam mit Takuma Takasaki. Beide produzierten den Film zusammen mit Koji Yanai. Die Kamera führte Franz Lustig, den Schnitt besorgte Toni Froschhammer.
+
+Kōji Yakusho spielt Hirayama; Wenders hatte ihn seit „Shall we dance?" (1996) bewundert, Yakusho interessierte sich seinerseits für die Rolle. Arisa Nakano spielt die Nichte Niko, Tokio Emoto den Assistenten Takashi, Yumi Aso die Schwester Keiko, Sayuri Ishikawa die Restaurantbesitzerin „Mama", Tomokazu Miura den Tomoyama, Aoi Yamada die Aya und Min Tanaka einen Obdachlosen.
+
+Gedreht wurde im Herbst 2022 in nur 17 Tagen, weil Yakusho zeitlich begrenzt verfügbar war.
+
+### Hinter den Kulissen
+
+Franz Lustig drehte „von der Schulter" statt mit Handkamera und fungierte dabei als „lebendes Stativ". So kamen etwa 50 Einstellungen am Tag zustande — eine Arbeitsweise, die den semidokumentarischen Ansatz des Films stützt.
+
+Der Soundtrack besteht aus den Stücken, die Hirayama auf Kassetten hört: Lou Reed, Patti Smith, Otis Redding, The Velvet Underground, Nina Simone, Van Morrison und andere. Der Titel verweist auf Reeds Lied „Perfect Day"; Wenders hatte mit Reed gearbeitet, bevor dieser 2013 starb.
+
+Wenders erklärte, Hirayama sei seiner Vorstellung nach ein wohlhabender Geschäftsmann gewesen, der seine Karriere aufgab, nachdem ihn die Schönheit von Sonnenlicht durch Baumblätter bewegt hatte. Der Film ist eine Hommage an Yasujirō Ozu — die Hauptfigur trägt denselben Namen wie Ozus Figur in „Die Reise nach Tokyo" (1953).
+
+### Einordnung & Wirkung
+
+Premiere war am 25. Mai 2023 in Cannes. Kōji Yakusho erhielt dort den Preis als bester Schauspieler, Wenders den Preis der Ökumenischen Jury. 2024 folgte die Oscar-Nominierung als bester internationaler Film — die erste Nominierung eines nicht-japanischen Regisseurs für Japan.
+
+Screen International vergab 2,9 von 4 Sternen. Dieter Oßwald urteilte, mit „furioser Leichtigkeit" gelinge Wenders „der ziemlich perfekte Film". Das Lexikon des internationalen Films hält fest, Wenders entfalte „seine filmische Hommage an sein Vorbild Yasujiro Ozu in eindrucksvoller Seelenruhe".` },
+  {
+    bereich: 'titel', schluessel: 'movie:149871', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein armer Bambussammler findet in einem leuchtenden Bambus eine winzige Frau. Sie wächst rasch zu einem Mädchen heran, das die Dorfkinder „Takenoko" nennen — Bambussprössling.
+
+Als der Vater in anderen Bambusstauden Gold findet, zieht die Familie in die Stadt. Dort wird das Mädchen zur Prinzessin Kaguya erzogen. Verehrer kommen in großer Zahl, doch Kaguya lehnt alle Heiratsanträge ab. Schließlich erkennt sie ihre Herkunft: Sie stammt vom Mond, und Mondwesen holen sie ab.
+
+### Entstehungsgeschichte
+
+Vorlage ist die klassische japanische Erzählung „Taketori Monogatari".
+
+Regie führte Isao Takahata, das Drehbuch schrieb er gemeinsam mit Riko Sakaguchi. Produziert wurde der Film bei Studio Ghibli von Toshio Suzuki und Yoshiaki Nishimura. Nach Nishimuras Angabe wurde acht Jahre an dem Film gearbeitet.
+
+Die Musik stammt von Joe Hisaishi, den Abspanntitel „Inochi no Kioku" singt Kazumi Nikaido.
+
+Im japanischen Original spricht Aki Asakura die Prinzessin Kaguya, Takeo Chii und Yūji Miyake sprechen den Bambussammler, Kengo Kōra den Sutemaru. In der deutschen Fassung sprechen Sarah Alles die Kaguya, Uli Krohm den Bambussammler und Nico Sablik den Sutemaru.
+
+In Japan lief der Film am 23. November 2013 an, in Deutschland am 20. November 2014.
+
+### Hinter den Kulissen
+
+Bemerkenswert ist, was der Film aus der Vorlage macht. Der Aufstieg der Familie vom Bambuswald in die Stadt ist kein Glücksfall, sondern der Beginn einer Einschnürung: Das Gold, das der Vater findet, ermöglicht die Erziehung zur Prinzessin — und nimmt dem Mädchen genau das Leben, das es im Dorf hatte.
+
+Die Reihe der abgewiesenen Heiratsanträge trägt denselben Gedanken weiter. Kaguya wird begehrt, aber nicht gefragt; ihre Ablehnung ist die einzige Form von Entscheidung, die ihr bleibt.
+
+Dass die Auflösung nicht in der Menschenwelt liegt, sondern in Kaguyas Herkunft vom Mond, verschiebt den Schluss ins Unabänderliche. Die Figur wird nicht befreit, sondern abgeholt — und der Film verweigert damit die Versöhnung, auf die die Anlage zunächst hinauszulaufen scheint.
+
+### Einordnung & Wirkung
+
+Bis Mitte Dezember 2013 spielte der Film in Japan etwa 13 Millionen US-Dollar ein. Gemessen an acht Jahren Arbeit ist das eine nüchterne Zahl.
+
+Kritiker Mark Schilling beschrieb den visuellen Stil als zunächst unfertig wirkend; er entwickle sich jedoch und passe gut zum Inhalt. Schilling erkannte in dem Film „große Weisheit, aber auch große Traurigkeit".
+
+2015 wurde „Die Legende der Prinzessin Kaguya" für den Oscar als bester animierter Spielfilm nominiert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4379', locale: 'de-de',
+    text: `### Worum es geht
+
+Charlie lebt ohne geregelte Verhältnisse und verliebt sich in den erfolgreichen Chirurgen Kevin. Das Problem ist seine Mutter: Viola Fields, eine berühmte Moderatorin, die nach ihrer Entlassung und einer psychiatrischen Behandlung alles daransetzt, die Hochzeit zu verhindern.
+
+Zwischen den beiden Frauen entsteht ein erbitterter Kampf. Er endet erst, als Violas eigene Schwiegermutter auftaucht.
+
+### Entstehungsgeschichte
+
+Regie führte Robert Luketic, das Drehbuch schrieb Anya Kochoff.
+
+Jennifer Lopez spielt Charlotte „Charlie" Cantilini, Jane Fonda die Viola Fields, Michael Vartan den Dr. Kevin Fields, Wanda Sykes die Ruby, Adam Scott den Remy, Annie Parisse die Morgan und Elaine Stritch die Gertrude.
+
+Produziert wurde der Film von Chris Bender, J.C. Spink und Paula Weinstein. Die Musik stammt von David Newman und Rosey, die Kamera von Russell Carpenter, den Schnitt besorgten Scott Hill und Kevin Tent. Das Budget betrug 43 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Anlage ist die des Zweikampfs: zwei Frauen, ein Mann dazwischen und ein Termin, der beide unter Druck setzt. Der Film verteilt die Rollen dabei nicht symmetrisch — die Schwiegermutter ist die treibende Kraft, die Braut die Reagierende.
+
+Erklärt wird Violas Verhalten aus ihrem Absturz. Sie hat ihre Position als Moderatorin verloren und war in psychiatrischer Behandlung. Der Kampf um den Sohn ist damit auch ein Kampf um das, was ihr geblieben ist — die Komödie hat einen härteren Kern, als die Prämisse vermuten lässt.
+
+Dass die Auflösung über eine dritte Generation läuft, über Violas eigene Schwiegermutter, ordnet den Streit noch einmal neu ein: Was wie ein persönlicher Konflikt aussieht, ist eine Rolle, die weitergereicht wurde.
+
+### Einordnung & Wirkung
+
+Bei 43 Millionen Dollar Herstellungskosten spielte der Film weltweit rund 155 Millionen ein.
+
+Die Kritik fiel deutlich aus. Roger Ebert beschrieb den Film als gehasst und hielt ihn kaum für interessanter als eine Dokumentation über die Darsteller beim Mittagessen. Das Lexikon des internationalen Films nannte ihn eine „romantische Komödie ohne Dialogwitz, die das Staraufgebot unter Wert verkauft".
+
+Jennifer Lopez wurde für die Goldene Himbeere nominiert. Die Deutsche Film- und Medienbewertung vergab dem Film dagegen das Prädikat „wertvoll".
+
+Diese Spannweite — von der Himbeeren-Nominierung bis zum Prädikat einer Bewertungsstelle, bei einem Einspielergebnis vom mehr als Dreifachen des Budgets — ist auch für romantische Komödien jener Jahre auffällig groß.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10327', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Anwältin Elle Woods verliert ihre Stelle, nachdem sie moralische Bedenken gegen Tierversuche geäußert hat. Sie zieht nach Washington und arbeitet in einem Abgeordnetenbüro, um eine Gesetzesvorlage gegen Tierversuche durchzubringen.
+
+Der Widerstand ist zunächst groß. Elle sammelt Unterschriften, mobilisiert ihre Studentinnenverbindung und hält schließlich eine Rede vor dem Kongress.
+
+### Entstehungsgeschichte
+
+Regie führte Charles Herman-Wurmfeld. Am Drehbuch schrieben Eve Ahlert, Amanda Brown, Dennis Drake und Kate Kondell.
+
+Reese Witherspoon spielt Elle Woods, Sally Field die Victoria Rudd, Regina King die Grace Rossiter, Jennifer Coolidge die Paulette Bonafonte und Luke Wilson den Emmett Richmond.
+
+Produziert wurde der Film von David Nicksay und Marc E. Platt. Die Musik stammt von Rolfe Kent, die Kamera von Elliot Davis, den Schnitt besorgten Ricky Andres und Peter Teschner. Das Produktionsbudget lag bei etwa 45 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Konstruktion ist auffällig direkt: Der Anlass für die Kündigung — Bedenken gegen Tierversuche — wird zugleich zum Ziel der gesamten Handlung. Wer Elle entlässt, gibt ihr damit ihr Thema.
+
+Der Weg dorthin folgt einem klaren Muster. Erst der Einzelfall, dann die Unterschriften, dann die Mobilisierung der Studentinnenverbindung, schließlich die Rede vor dem Kongress. Die Verbindung, die in Filmen dieser Art sonst als gesellschaftliche Kulisse dient, wird hier zur politischen Organisationsform.
+
+Genau an dieser Zuspitzung setzte die Kritik an: Dass eine Gesetzesvorlage am Ende an einer einzigen Rede hängt, war der Punkt, an dem sich mehrere Rezensenten stießen.
+
+### Einordnung & Wirkung
+
+In den USA spielte der Film 89 Millionen Dollar ein, bei etwa 45 Millionen Herstellungskosten.
+
+Die Besprechungen waren überwiegend ablehnend. Rotten Tomatoes weist 35 Prozent aus, Metacritic 47 von 100. James Berardinelli nannte den Film eine „cineastische Abscheulichkeit", Roger Ebert bezeichnete die Rede als wahrlich idiotisch. Das Lexikon des internationalen Films kritisierte die überzogene patriotische Botschaft.
+
+Ausgezeichnet wurde er dennoch: Rolfe Kent erhielt 2004 den BMI Film Music Award, der Film selbst im selben Jahr den Genesis Award. Hinzu kamen Nominierungen für den MTV Movie Award, den Costume Designers Guild Award und den Hollywood Makeup Artist Guild Award.
+
+Auffällig ist, worauf sich Preise und Nominierungen verteilen: auf Musik, Kostüm und Maske — nicht auf Drehbuch oder Regie.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11081', locale: 'de-de',
+    text: `### Worum es geht
+
+Die FBI-Profilerin Illeana Scott unterstützt die Polizei von Montreal bei der Jagd auf einen Serienmörder, der seine Opfer tötet und danach deren Identität annimmt.
+
+Rebecca Asher gibt an, ihren totgeglaubten Sohn Martin auf einer Fähre gesehen zu haben. Die Ermittlungen laufen darauf zu, dass Martin der Täter ist. Zugleich kommt James Costa, der in den Fall verwickelt ist, der Ermittlerin näher — und Christopher Hart rückt als zweiter Verdächtiger ins Bild.
+
+### Entstehungsgeschichte
+
+Regie führte D. J. Caruso. Das Drehbuch schrieb Jon Bokenkamp nach dem 1999 erschienenen Roman von Michael Pye.
+
+Angelina Jolie spielt Illeana Scott, Ethan Hawke den James Costa, Kiefer Sutherland den Christopher Hart, Gena Rowlands die Rebecca Asher, Olivier Martinez den Joseph Paquette, Tchéky Karyo den Hugo Leclair, Jean-Hugues Anglade den Emil Duval, Justin Chatwin den Matt Soulsby und Paul Dano den jungen Asher.
+
+Produziert wurde der Film von Mark Canton und Bernie Goldmann für Village Roadshow. Die Kamera führte Amir M. Mokri, den Schnitt besorgte Anne V. Coates, die Musik stammt von Philip Glass und Walter Werzowa.
+
+Es handelt sich um eine amerikanisch-kanadische Produktion. Das Budget betrug 45 Millionen Dollar, die Laufzeit 99 Minuten, der Start war der 19. März 2004. Die FSK gab den Film ab 16 Jahren frei.
+
+### Hinter den Kulissen
+
+Obwohl die Handlung in Montreal spielt, wurde überwiegend in Québec gedreht, unter anderem im Château Frontenac.
+
+Der Fall ist um eine Idee herum gebaut, die den üblichen Ermittlerfilm umdreht. Der Täter hinterlässt keine Signatur, sondern übernimmt die Identität der Getöteten. Wer gesucht wird, ist damit nicht durch ein Aussehen bestimmt, sondern durch eine Lücke.
+
+Daraus folgt die Bauweise: Der Film muss seine Verdächtigen offenhalten. Ethan Hawke, Kiefer Sutherland und Olivier Martinez besetzen Rollen, deren Verhältnis zur Tat lange in der Schwebe bleibt — die Besetzung arbeitet hier mit, nicht nur das Drehbuch.
+
+Die Musik von Philip Glass, gemeinsam mit Walter Werzowa, ist für einen Thriller dieser Machart eine ungewöhnliche Wahl.
+
+### Einordnung & Wirkung
+
+Bei 45 Millionen Dollar Herstellungskosten spielte der Film weltweit 65 Millionen ein, davon 33 Millionen in Nordamerika.
+
+Die Besprechungen fielen überwiegend negativ aus. Rotten Tomatoes weist 21 Prozent aus, Metacritic 38 von 100. Roger Ebert vergab dagegen drei Sterne und lobte Darsteller und Regie trotz der Abweichungen des Drehbuchs. Ethan Hawke nannte den Film später schlicht schrecklich. Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Die Spannweite ist bemerkenswert: ein Hauptdarsteller, der sein eigenes Werk verwirft, ein Kritiker, der es verteidigt, und eine Bewertungsstelle, die es auszeichnet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11249', locale: 'de-de',
+    text: `### Worum es geht
+
+Sechs Jahre nach den Ereignissen von „Bride of Chucky": Glen/Glenda, das Kind von Chucky und Tiffany, wird von einem britischen Bauchredner misshandelt. Als im Fernsehen eine Vorschau auf „Chucky Goes Psycho" läuft, flieht Glen/Glenda und erweckt die Eltern mit einem Voodoo-Amulett zum Leben.
+
+Von da an geht es um den Konflikt zwischen der friedlichen Natur des Kindes und den gewalttätigen Neigungen der Eltern — und um die Aufspaltung des Kindes in zwei getrennte Seelen.
+
+### Entstehungsgeschichte
+
+Don Mancini schrieb das Drehbuch und führte Regie; es war sein Debüt als Spielfilmregisseur. Anregung holte er sich beim Kultfilm „Glen or Glenda" (1953), und er wollte LGBT-Themen erkunden.
+
+Brad Dourif spricht Chucky, Jennifer Tilly spielt sich selbst und spricht Tiffany, Billy Boyd spricht Glen/Glenda. Redman tritt als er selbst auf, Hannah Spearritt spielt die Joan, John Waters den Pete Peters.
+
+Gedreht wurde fast vollständig in Rumänien in den Castel Studios, um Kosten zu sparen. Tony Gardner verantwortete sämtliche Animatronik- und Make-up-Effekte. Die Angaben zum Budget schwanken zwischen 12 und 29 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Mancini orientierte sich an Horrorfilmen und an Filmemachern wie Brian De Palma und Dario Argento.
+
+Auffällig ist, dass der Film das Filmgeschäft selbst zum Schauplatz macht: Jennifer Tilly spielt Jennifer Tilly, Redman spielt Redman, und die Ankündigung eines Films über Chucky treibt die Handlung an. Die Reihe kommentiert damit ihre eigene Fortsetzbarkeit.
+
+Ungewöhnlich ist auch die Konfliktachse. Nicht der Mörder gegen die Welt, sondern ein Kind gegen seine Eltern — und zwar, weil es nicht töten will. Die Aufspaltung in zwei Seelen führt diesen Gedanken zu Ende: Die Frage nach der Identität des Kindes ist kein Nebenmotiv, sondern der Motor der Handlung.
+
+### Einordnung & Wirkung
+
+Der Film spielte weltweit 24,8 Millionen Dollar ein, davon 17,1 Millionen in Nordamerika.
+
+Rotten Tomatoes weist 36 Prozent aus (80 Bewertungen), Metacritic 46 von 100; beim Publikum kam der Film bei CinemaScore auf ein „C+". Roger Ebert gab zwei von vier Sternen und schrieb, „Seed of Chucky" seien eigentlich zwei Filme, einer davon miserabel, der andere komisch. Variety bemängelte die fehlende Spannung.
+
+Später erfuhr der Film eine positive Neubewertung und gilt wegen seiner progressiven Themen als Kultfilm. Der Abstand zwischen Erstbesprechung und Neubewertung liegt vor allem an dem, was 2004 als Nebensache gelesen wurde: dem Umgang mit Geschlecht und Identität, den der Film in den Mittelpunkt seiner Handlung stellt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:454293', locale: 'de-de',
+    text: `### Worum es geht
+
+Teddy Walker bricht 2001 die High School ab. 2017 verkauft er Grills und hält vor seiner wohlhabenden Freundin Lisa den Schein aufrecht.
+
+Nach einer Explosion verliert er den Job. Eine Stelle in Marvins Investmentfirma bekommt er nur, wenn er den Schulabschluss nachholt. In der Abendschule trifft er auf die unkonventionelle Lehrerin Carrie und auf eine Gruppe sehr unterschiedlicher Mitschüler. Dass er dort nicht weiterkommt, hat einen Grund, den erst die Diagnose einer Dyslexie sichtbar macht.
+
+### Entstehungsgeschichte
+
+Regie führte Malcolm D. Lee. Am Drehbuch schrieben Kevin Hart, Harry Ratchford, Joey Wells, Matt Kellard, Nicholas Stoller und John Hamburg.
+
+Kevin Hart spielt Theodore „Teddy" Walker, Tiffany Haddish die Lehrerin Carrie Carter, Rob Riggle den Mackenzie, Romany Malco den Jaylen, Taran Killam den Schulleiter Stewart und Megalyn Echikunwoke die Lisa King.
+
+Produziert wurde der Film von Kevin Hart und Will Packer für HartBeat Productions und Will Packer Productions, den Verleih übernahm Universal Pictures. Die Kamera führte Greg Gardiner, die Musik stammt von David Newman.
+
+Gedreht wurde ab September 2017 in Atlanta, Georgia. Das Budget betrug 29 Millionen Dollar, der Start war der 28. September 2018.
+
+### Hinter den Kulissen
+
+Sechs Autoren für eine Komödie sind eine Ansage über die Machart. Hart schrieb an seinem eigenen Stoff mit und produzierte ihn zugleich — der Film ist auf ihn hin gebaut.
+
+Erzählerisch ruht er auf einer Umkehrung. Die Abendschule, sonst Randnotiz, ist der Hauptschauplatz; die Figuren, die dort sitzen, sind keine Jugendlichen, sondern Erwachsene mit Gründen. Und der Held ist keiner, der bloß faul war — die Diagnose verschiebt die Schuldfrage nachträglich.
+
+Dass Teddy die Prüfung nicht im ersten Anlauf schafft und zwischendurch sogar ausgeschlossen wird, ist für eine Komödie eine auffällig lange Kette von Niederlagen.
+
+### Einordnung & Wirkung
+
+Bei 29 Millionen Dollar Herstellungskosten spielte der Film weltweit 103,1 Millionen ein — 77,3 Millionen in den USA und Kanada, 25,8 Millionen im übrigen Ausland.
+
+Die Kritik war überwiegend ablehnend. Rotten Tomatoes weist 27 Prozent aus, Metacritic 43 von 100. Owen Gleiberman schrieb in Variety, der Film halte sich zu lange auf der sicheren Seite; David Ehrlich nannte ihn in IndieWire eine freudlose und endlose Komödie.
+
+Das Publikum urteilte anders: Bei CinemaScore gab es ein „A−", bei PostTrak 3,5 von 5 Sternen. Diese Lücke zwischen Fach- und Publikumsurteil erklärt das Einspielergebnis besser als die Rezensionen es tun.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11187', locale: 'de-de',
+    text: `### Worum es geht
+
+Acht Jahre nach Chuckys zweitem Ende wird die Spielzeugfabrik Play Pals wieder eröffnet. Chuckys Blut gerät in geschmolzenen Kunststoff und belebt ihn in einem neuen Körper.
+
+Andy Barclay ist inzwischen 16 und auf die Kent Military School geschickt worden. Chucky folgt ihm dorthin, hat es aber auf den achtjährigen Ronald Tyler abgesehen, dessen Körper er übernehmen will. Nach einer Reihe von Morden läuft das Ganze auf ein Duell in einem Horror-Karussell hinaus.
+
+### Entstehungsgeschichte
+
+Regie führte Jack Bender, das Drehbuch schrieb Don Mancini.
+
+Brad Dourif spricht Chucky. Justin Whalin spielt Andy Barclay, Perrey Reeves die Kristin de Silva, Jeremy Sylvers den Ronald Tyler, Travis Fine den Brett C. Shelton und Dakin Matthews den Colonel Cochrane. Alex Vincent übernahm die Rolle des Andy wegen des Zeitsprungs nicht erneut.
+
+Mancini begann mit dem Drehbuch noch vor der Veröffentlichung von „Child's Play 2". Ursprünglich wollte er mehrere Chuckys einführen, verwarf die Idee aber aus Budgetgründen. Jack Bender bekam die Regie, nachdem Mancini zunächst Peter Jackson hatte engagieren wollen.
+
+Gedreht wurde an der Kemper Military School in Boonville, Missouri, in Los Angeles, auf dem Gelände der Universal Studios und in Valencia, Kalifornien. Das Budget betrug 13 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Für Chuckys Mundbewegungen setzten die Puppenspieler Computertechnik ein.
+
+Der Zeitsprung ist die eigentliche Entscheidung des Films. Er tauscht das Kind gegen einen Jugendlichen — und muss deshalb ein zweites Kind einführen, damit die Grundidee überhaupt weiterlaufen kann: Die Puppe braucht einen kindlichen Körper.
+
+Das Militärinternat verlegt die Handlung in eine Institution mit fester Rangordnung. Für eine Reihe, deren Schrecken an einem Spielzeug hängt, ist das ein deutlicher Wechsel des Umfelds.
+
+### Einordnung & Wirkung
+
+Bei 13 Millionen Dollar Herstellungskosten spielte der Film weltweit 20,5 Millionen ein, davon 15 Millionen in den USA und Kanada — das niedrigste Ergebnis der Reihe.
+
+Die Kritik war ablehnend. Rotten Tomatoes weist 19 Prozent aus (16 Kritiker), Metacritic 27 von 100 (13 Kritiker). Die New York Times vermisste die Schärfe und den dunklen Humor des Originals. Don Mancini nannte den Film später sein Lieblingswerk der Reihe; auch in der Rezeption wurde er nachträglich besser bewertet als spätere Teile.
+
+Nach dem Mord an James Bulger 1993 wurde in Großbritannien eine Verbindung zu dem Film vermutet — einer der Täter solle eine Szene nachgeahmt haben. Die Polizei fand dafür keinen Beleg: Der Junge lebte nicht bei seinem Vater, der den Film ausgeliehen hatte, und mochte Horrorfilme nicht. Die britische Video Retailers Association empfahl dennoch, den Film aus dem Verleih zu nehmen; Sky Television und Canal+ weigerten sich, ihn zu zeigen.` },
+  // ---- Block 066 ----
+  {
+    bereich: 'titel', schluessel: 'movie:226857', locale: 'de-de',
+    text: `### Worum es geht
+
+Die zurückhaltende Jade und David lernen sich kennen und werden ein Paar. Ihre Beziehung wird schnell intensiv.
+
+Jades Vater Hugh hält nichts von dieser Verbindung und arbeitet daran, sie zu unterbinden. Zwischen einem Autounfall und einer einstweiligen Verfügung gerät das Paar unter einen Druck, dem es nicht standhält. Jades Mutter Anne ist die Einzige, die sich auf Davids Seite stellt.
+
+### Entstehungsgeschichte
+
+Der Film ist eine Neuverfilmung. Vorlage sind der Roman von Scott Spencer und der Film „Endlose Liebe" von 1981.
+
+Regie führte Shana Feste, das Drehbuch schrieb sie gemeinsam mit Joshua Safran.
+
+Alex Pettyfer spielt David Elliot, Gabriella Wilde die Jade Butterfield, Bruce Greenwood den Vater Hugh Butterfield, Joely Richardson die Mutter Anne Butterfield und Robert Patrick den Harry Elliot.
+
+Produziert wurde der Film von Scott Stuber, Pamela Abdy, Josh Schwartz und Stephanie Savage für Bluegrass Films und Fake Empire Productions, den Vertrieb übernahm Universal Pictures. Die Musik stammt von Christophe Beck, die Kamera von Andrew Dunn, den Schnitt besorgte Maryann Brandon.
+
+Gedreht wurde von Mai bis Juli 2013 in Georgia — im Fayette County und im Butts County, am Lake Jackson und im Atlanta Botanical Garden. Die Produktionskosten betrugen 20 Millionen Dollar, die Laufzeit 104 Minuten. Der US-Start war der 14. Februar 2014, der deutsche der 27. März 2014; die FSK gab den Film ab 6 Jahren frei.
+
+### Hinter den Kulissen
+
+Der US-Start am Valentinstag ist keine Nebensache — er benennt die Zielgruppe.
+
+Erzählerisch verlagert der Film das Hindernis vollständig nach außen. Nicht die Figuren stehen sich im Weg, sondern Jades Vater; die Liebesgeschichte selbst wird kaum in Frage gestellt. Das macht Hugh zur eigentlichen Gegenfigur und die Mutter zur heimlichen Verbündeten.
+
+Auffällig ist auch, wie hart die Mittel sind, mit denen die Handlung eskaliert: ein Autounfall, eine einstweilige Verfügung, ein Hausbrand. Für eine Jugendromanze ist das ein ungewöhnlich schweres Instrumentarium.
+
+### Einordnung & Wirkung
+
+Bis zum 17. April 2014 hatte der Film rund 32,75 Millionen Dollar eingespielt, bei 20 Millionen Produktionskosten.
+
+Die Kritik war geteilt. Entertainment Weekly hielt fest, der Film sei weniger treu zur Vorlage, aber deutlich besser als die Version mit Brooke Shields. Rolling Stone urteilte scharf über die Darstellerführung: Schönheit werde personifiziert, während in Variationen des Ausziehens posiert werde — das als Schauspielerei auszugeben, sei fehl am Platz.
+
+Zwischen diesen beiden Urteilen liegt die ganze Frage, die Neuverfilmungen dieser Art begleitet: Gemessen wird nicht der Film, sondern der Abstand zum Original.` },
+  {
+    bereich: 'titel', schluessel: 'movie:615469', locale: 'de-de',
+    text: `### Worum es geht
+
+Spiderhead ist ein Versuchsgefängnis. Insassen melden sich freiwillig zu Tests mit psychoaktiven Substanzen und verkürzen damit ihre Haftstrafen.
+
+An Jeff werden verschiedene Mittel erprobt, darunter eines, das Zuneigung auslöst, und eines, das Angst erzeugt. Nach einem tragischen Zwischenfall beginnt er zu fragen, wozu die Versuchsanordnung eigentlich dient — und stößt darauf, dass hinter dem Gefängnis ein Pharmaunternehmen steht.
+
+### Entstehungsgeschichte
+
+Vorlage ist George Saunders' Kurzgeschichte „Escape from Spiderhead" von 2010, die 2013 in dem Band „Tenth of December" erschien.
+
+Regie führte Joseph Kosinski, das Drehbuch schrieben Rhett Reese und Paul Wernick.
+
+Chris Hemsworth spielt Steve Abnesti, Miles Teller den Jeff, Jurnee Smollett die Lizzy, Mark Paguio den Mark Verlaine und Tess Haubrich die Heather.
+
+Produziert wurde der Film von Eric Newman, Chris Hemsworth, Rhett Reese, Paul Wernick, Agnes Chu, Geneva Wasserman, Tommy Harper und Jeremy Steckler. Die Kamera führte Claudio Miranda, den Schnitt besorgte Stephen Mirrione, die Musik stammt von Joseph Trapanese. Das Budget betrug 100 Millionen Dollar.
+
+Gedreht wurde ab November 2020 in Queensland, Australien: an der Gold Coast, am Hinze Dam, auf den Whitsunday Islands und im Tallebudgera Valley.
+
+### Hinter den Kulissen
+
+Die Konstruktion stellt eine Frage, die den ganzen Stoff trägt. Wenn ein Mittel Zuneigung auslösen kann, was bedeutet dann noch Einwilligung? Die Insassen haben zugestimmt, an den Versuchen teilzunehmen — aber jede weitere Zustimmung, die im Verlauf abgefragt wird, steht unter dem Einfluss dessen, was ihnen bereits verabreicht wurde.
+
+Der Zwang in diesem Gefängnis liegt damit nicht in Gittern, sondern in der Verfügung über das, was die Insassen fühlen. Das ist die eigentliche Verschiebung gegenüber dem üblichen Gefängnisfilm.
+
+Auch die Drehorte tragen dazu bei. Eine Geschichte über Freiheitsentzug entsteht an der Gold Coast, am Hinze Dam und auf den Whitsunday Islands — in einer Umgebung, die alles andere als eng wirkt.
+
+### Einordnung & Wirkung
+
+Die Weltpremiere fand am 11. Juni 2022 in Sydney statt, am 17. Juni 2022 startete der Film bei Netflix.
+
+Rotten Tomatoes weist 39 Prozent positive Bewertungen aus; der dortige Konsens nennt ihn einen pseudo-tiefgründigen Science-Fiction-Film, der sein Potenzial nicht ausschöpft. Metacritic kommt auf 54 von 100 und damit auf gemischte Bewertungen.
+
+Bemerkenswert ist das Verhältnis von Aufwand und Auswertung: 100 Millionen Dollar Budget, eine Kurzgeschichte als Vorlage, Dreharbeiten an vier australischen Schauplätzen — und ein Start direkt im Streaming, ohne reguläre Kinoauswertung. Für den klassischen Kinobetrieb gibt es zu dieser Rechnung keine Entsprechung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:298382', locale: 'de-de',
+    text: `### Worum es geht
+
+1951 kehrt Tilly Dunnage in ihr Heimatdorf Dungatar zurück. 25 Jahre zuvor war sie als Kind wegen eines Todesfalls von dort vertrieben worden.
+
+Inzwischen ist sie eine anerkannte Pariser Schneiderin. Sie will sich um ihre Mutter Molly kümmern — und zugleich klären, was damals wirklich geschah. Zwischen der Annäherung an das Dorf und der Abrechnung mit ihm verläuft der Film.
+
+### Entstehungsgeschichte
+
+Vorlage ist Rosalie Hams Gothic-Roman von 2000. Ham wirkte zunächst am Drehbuch mit, zog sich dann aber zurück; die notwendigen Straffungen fielen ihr schwer.
+
+Regie führte Jocelyn Moorhouse, das Drehbuch schrieb sie gemeinsam mit P. J. Hogan.
+
+Kate Winslet spielt Tilly Dunnage, Judy Davis die Mutter Molly Dunnage, Liam Hemsworth den Teddy McSwiney und Hugo Weaving den Sergeant Horatio Farrat.
+
+Produziert wurde der Film von Sue Maslin. Die Kamera führte Donald McAlpine, den Schnitt besorgte Jill Bilcock, die Musik stammt von David Hirschfelder, die Kostüme von Marion Boyce und Margot Wilson.
+
+Gedreht wurde von Oktober bis Dezember 2014: Studioaufnahmen in den Docklands Studios Melbourne, Außenaufnahmen in Victoria — am Mount Rothwell, in Little River, in Horsham und in der Wimmera-Region. Der Film ist eine australische Produktion, dauert 118 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Dass zwei eigene Kostümbildnerinnen benannt und für ihre Arbeit ausgezeichnet wurden, ist bei diesem Stoff kein Nebenaspekt. Die Kleider sind das Mittel, mit dem die Hauptfigur auf das Dorf einwirkt — ihr Beruf ist der Motor der Handlung.
+
+Der Bau der Geschichte ist dabei ungewöhnlich. Eine Frau kehrt an den Ort ihrer Verstoßung zurück, wird dort gebraucht — und gewinnt genau dadurch Macht über Menschen, die ihr Unrecht getan haben. Zuwendung und Abrechnung laufen nicht nacheinander ab, sondern gleichzeitig.
+
+Die deutsche Kritik hat diese Doppelbödigkeit als Schwanken beschrieben: zwischen Drama, Liebesgeschichte, Persiflage und Hommage. Das lässt sich als Mangel lesen oder als Programm.
+
+### Einordnung & Wirkung
+
+Premiere war am 14. September 2015 beim Toronto International Film Festival.
+
+Bei den AACTA Awards 2015 stand der Film 13-mal auf der Nominiertenliste und gewann fünfmal: Kate Winslet als beste Hauptdarstellerin, Hugo Weaving als bester Nebendarsteller, Judy Davis als beste Nebendarstellerin, Marion Boyce und Margot Wilson für das Kostümdesign sowie den Publikumspreis. Der Film Critics Circle of Australia zeichnete Winslet und Davis ebenfalls aus. 2016 kam eine Nominierung für Judy Davis beim AACTA International Award hinzu.
+
+Rotten Tomatoes weist 58 Prozent positive Kritiken aus, bei 142 Kritiken und einem Schnitt von 5,9 von 10.
+
+Der Abstand zwischen der Preisbilanz im Produktionsland und dem internationalen Kritikerurteil ist deutlich — ein Muster, das sich bei Filmen mit stark lokalem Stoff häufiger zeigt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4858', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Space Shuttle stürzt ab und verteilt außerirdische Organismen über die Vereinigten Staaten. Wer im Schlaf befallen wird, verliert seine Gefühlsregungen.
+
+Die Psychiaterin Carol Bennell und der Arzt Ben Driscoll versuchen, die Ausbreitung zu stoppen — in einer Welt, in der zugleich überall Konflikte friedlich beigelegt werden.
+
+### Entstehungsgeschichte
+
+Es ist die vierte Verfilmung von Jack Finneys Roman „Die Körperfresser kommen"; Fassungen gab es zuvor 1956, 1978 und 1993.
+
+Regie führte Oliver Hirschbiegel; James McTeigue wirkte ungenannt mit. Das Drehbuch schrieb David Kajganich, die Wachowskis trugen ungenannt bei.
+
+Nicole Kidman spielt Carol Bennell, Daniel Craig den Ben Driscoll, Jeremy Northam den Tucker Kaufman, Jackson Bond den Oliver und Jeffrey Wright den Dr. Stephen Galeano.
+
+Produziert wurde der Film von Joel Silver. Die Kamera führte Rainer Klausmann, den Schnitt besorgten Hans Funck und Joel Negron, die Musik stammt von John Ottman.
+
+Gedreht wurde zwischen September 2005 und Januar 2007 in Baltimore, in Los Angeles und in Washington D.C. Die Produktionskosten lagen bei etwa 80 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Drehzeitraum erzählt die Produktionsgeschichte mit. Zwischen erstem und letztem Drehtag liegen knapp anderthalb Jahre; ein zweiter Regisseur und zwei weitere Autoren arbeiteten mit, ohne genannt zu werden. Das sind die Spuren einer Produktion, die im Verlauf umgebaut wurde.
+
+Inhaltlich steckt die Pointe dieser Fassung in einem Detail der Handlung. Während sich die Befallenen ausbreiten, hören weltweit die Konflikte auf. Der Film stellt damit die Frage, was ein befriedeter Zustand wert ist, wenn niemand mehr etwas empfindet — die Bedrohung ist nicht Gewalt, sondern Gleichmut.
+
+Mit Oliver Hirschbiegel auf dem Regiestuhl und Rainer Klausmann an der Kamera lagen bei dieser amerikanischen Großproduktion Regie und Bildgestaltung in deutschsprachiger Hand.
+
+### Einordnung & Wirkung
+
+Bei etwa 80 Millionen Dollar Produktionskosten spielte der Film in den USA rund 15 Millionen ein — ein deutlicher Misserfolg.
+
+Die Kritik urteilte ablehnend. Rotten Tomatoes weist 20 Prozent aus, Metacritic 45 von 100. James Berardinelli nannte den Film einen filmischen Blindgänger, der nicht wisse, was er sein wolle.
+
+Berardinellis Einwand trifft dabei genau die Stelle, an der die Produktionsgeschichte sichtbar wird: Ein Film, an dem zwei Regisseure und mehrere Autorengruppen gearbeitet haben, ohne dass alle genannt werden, hat sein Ziel selten von Anfang an gekannt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:334524', locale: 'de-de',
+    text: `### Worum es geht
+
+Kenny Wells will als Minenunternehmer groß herauskommen. In Indonesien trifft er den Geologen Michael Acosta; gemeinsam suchen sie nach Gold.
+
+Nach schwierigen Anfängen melden sie einen gewaltigen Fund. Das Unternehmen Washoe geht an die Börse und wird zum Erfolg — bis Zweifel an den Bohrproben aufkommen.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf dem Bre-X-Skandal von 1997 in Indonesien. Namen und Einzelheiten wurden aus rechtlichen Gründen geändert.
+
+Regie führte Stephen Gaghan, das Drehbuch schrieben Patrick Massett und John Zinman.
+
+Matthew McConaughey spielt Kenny Wells, eine Figur nach dem Vorbild von David Walsh. Édgar Ramírez spielt Michael Acosta nach dem Vorbild von Michael de Guzman, Bryce Dallas Howard die Kay, Wells' Freundin. In weiteren Rollen sind Corey Stoll, Toby Kebbell, Bruce Greenwood, Stacy Keach und Craig T. Nelson zu sehen.
+
+Produziert wurde der Film von Matthew McConaughey, Patrick Massett, John Zinman, Teddy Schwarzman und Michael Nozik. Die Kamera führte Robert Elswit, die Musik stammt von Daniel Pemberton. Gedreht wurde in Thailand, in Albuquerque (New Mexico), in Reno (Nevada) und in New York. Das Budget betrug 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Dass der Hauptdarsteller zugleich als Produzent auftritt, ordnet den Film ein: Er ist auf eine Rolle hin gebaut.
+
+Der Stoff selbst ist heikel. Eine Betrugsgeschichte lässt sich als Kriminalfall erzählen oder als Aufstiegsgeschichte — dieser Film wählt die zweite Möglichkeit und bleibt bei seiner Hauptfigur, auch als der Boden unter ihr nachgibt. Wer den Fall kennt, sieht die Handlung mit anderen Augen als jemand, der Kenny Wells zum ersten Mal begegnet.
+
+Die rechtlich bedingten Änderungen an Namen und Details sind dabei mehr als eine Formalie. Sie geben dem Film die Freiheit, den realen Vorgang zu verdichten — und nehmen ihm zugleich den Anspruch, ihn zu dokumentieren.
+
+### Einordnung & Wirkung
+
+Bei 20 Millionen Dollar Herstellungskosten spielte der Film weltweit 14,8 Millionen ein und blieb damit unter seinem Budget.
+
+Rotten Tomatoes weist 42 Prozent Zustimmung aus; der dortige Konsens hebt McConaugheys Leistung hervor und nennt den Film im Übrigen unausgewogen. Metacritic kommt auf 49 von 100 und damit auf gemischte Bewertungen. Beim Publikum ergab CinemaScore ein „B−".
+
+Auffällig ist, worin sich die Urteile einig sind: Sie trennen die Hauptrolle vom Film. McConaughey wird gelobt, das Ganze nicht — eine Konstellation, die bei Produktionen, die stark auf einen Darsteller zugeschnitten sind, immer wieder auftritt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10808', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Wald soll gerodet werden. Dr. Dolittle versucht ihn zu retten, indem er den Zirkusbären Archie dort ansiedelt — er soll mit der Bärin Ava ein Paar werden.
+
+Der Plan hat Startschwierigkeiten. Es kommt zu einer Gerichtsverhandlung, und Dolittle organisiert eine Protestaktion. Am Ende bleibt ein Großteil des Waldes erhalten, und Archie und Ava bekommen zwei Junge.
+
+### Entstehungsgeschichte
+
+Regie führte Steve Carr, das Drehbuch schrieb Larry Levin.
+
+Eddie Murphy spielt Dr. John Dolittle, Kristen Wilson die Lisa Dolittle, Kyla Pratt die Maya Dolittle und Raven-Symoné Pearman die Charisse Dolittle. Zu den Sprechrollen gehören Arnold Schwarzenegger als Waldwolf und Lisa Kudrow als Ava.
+
+Produziert wurde der Film von John Davis und Joseph Singer. Die Musik stammt von David Newman, die Kamera von Daryn Okada, den Schnitt besorgte Craig Herring. Das Budget betrug rund 72 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Fortsetzung verschiebt den Ansatz der Reihe. Aus der Gabe, mit Tieren zu sprechen, wird ein Werkzeug im Naturschutz. Der Film bindet seine Handlung dabei an ein Gerichtsverfahren — also an eine Form, in der Argumente ausgetauscht werden, nicht Gags.
+
+Bemerkenswert ist die Besetzung der Sprechrollen. Arnold Schwarzenegger für einen Waldwolf und Lisa Kudrow für die Bärin Ava sind Entscheidungen, die auf Wiedererkennung setzen: Das Publikum soll die Stimmen kennen, bevor es die Tiere richtig gesehen hat.
+
+Auch die Grundidee ist konsequenter gedacht, als die Machart vermuten lässt. Dolittle argumentiert nicht gegen die Rodung, er verändert die Lage vor Ort: Zwei Bären sollen den Wald bewohnen. Erst danach folgen Gerichtsverhandlung und Protestaktion — und ihr Erfolg hängt daran, dass zuvor etwas eingezogen ist.
+
+### Einordnung & Wirkung
+
+Bei rund 72 Millionen Dollar Herstellungskosten spielte der Film allein in den USA etwa 113 Millionen ein.
+
+Die Kritik war zurückhaltend. Die Washington Post nannte ihn eine zu vergessende Fortsetzung ohne Humor. Das Lexikon des internationalen Films urteilte, er sei anspruchslos-albern und habe nur wenige überzeugende Gags.
+
+Ausgezeichnet wurde er dennoch: 2001 mit dem Environmental Media Award, 2002 mit dem Genesis Award; die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Preise und Rezensionen bewerten hier offenkundig verschiedene Dinge — die einen das Anliegen, die anderen die Ausführung.` },
+  {
+    bereich: 'titel', schluessel: 'series:64464', locale: 'de-de',
+    text: `### Worum es geht
+
+Jake Epping, geschiedener Englischlehrer, entdeckt in einem Diner ein Zeitportal. Es führt an einen festen Tag: den 21. Oktober 1960.
+
+Er reist in die Vergangenheit, um das Attentat auf John F. Kennedy am 22. November 1963 zu verhindern — und um herauszufinden, ob es im Umfeld von Lee Harvey Oswald Mitwisser gab.
+
+### Entstehungsgeschichte
+
+Vorlage ist Stephen Kings 2011 erschienener Roman „Der Anschlag".
+
+Bridget Carpenter schrieb die Drehbücher und war Executive Producer, J. J. Abrams war ebenfalls Executive Producer. Produziert wurde die Serie von Bad Robot Productions und Warner Bros. Television.
+
+James Franco spielt Jake Epping, Sarah Gadon die Sadie Dunhill, Cherry Jones die Marguerite Oswald, Daniel Webber den Lee Harvey Oswald, Chris Cooper den Al Templeton und Josh Duhamel den Frank Dunning.
+
+Die Serie umfasst acht Folgen von 44 bis 60 Minuten Länge; die Pilotfolge dauert rund 81 Minuten. In den USA lief sie ab dem 15. Februar 2016 bei Hulu, in Deutschland vom 11. April bis zum 30. Mai 2016 bei FOX. Am 9. August 2016 erschien sie auf Blu-ray, DVD und als Digital HD.
+
+### Hinter den Kulissen
+
+Acht Folgen für einen Roman dieses Umfangs sind eine bewusste Beschränkung. Die Serie ist als abgeschlossene Erzählung angelegt, nicht als fortlaufende — die überlange Pilotfolge von rund 81 Minuten setzt das Format gleich zu Beginn.
+
+Das feste Datum des Portals — der 21. Oktober 1960 — legt zugleich den Zeitraum fest, den die Hauptfigur überbrücken muss. Zwischen Ankunft und Attentat liegen gut drei Jahre. Das ist die eigentliche dramaturgische Entscheidung: Jake kann nicht zuschlagen und zurückkehren, er muss in der Vergangenheit leben.
+
+Auch der Umgang mit Lee Harvey Oswald zeigt den Anspruch. Er ist nicht bloß Kulisse, sondern Figur mit eigenem Umfeld; Cherry Jones spielt seine Mutter Marguerite Oswald.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 83 Prozent positive Kritiken aus und führt die Serie dort als überzeugend und gut ausgeführt. Hervorgehoben wurden die gekonnte Umsetzung und die elegant verwobenen Motive.
+
+2016 folgte eine Emmy-Nominierung für die besten Spezialeffekte. 2017 gewann die Serie den Saturn Award als beste Fernsehpräsentation; die Writers Guild of America nominierte sie in der Kategorie Adapted Longform.
+
+Auffällig ist, wie sich diese Bilanz verteilt: eine Nominierung für die Spezialeffekte, eine für das adaptierte Drehbuch, und der Hauptpreis für die Präsentation als Ganzes. Das entspricht einer Produktion, deren Aufwand im Wiederherstellen einer Zeit liegt und deren Leistung in der Verdichtung eines langen Romans.` },
+  {
+    bereich: 'titel', schluessel: 'movie:60670', locale: 'de-de',
+    text: `### Worum es geht
+
+Kommissar Pierre Niémans wird nach Guernon beordert. An der dortigen Elite-Universität ist ein Bibliothekar ermordet worden.
+
+200 Kilometer entfernt ermittelt Inspektor Max Kerkerian in einem Fall von Grabschändung. Dass die beiden Fälle zusammengehören, ist der Ausgangspunkt — was sie verbindet, führt weit in die Geschichte der Universität zurück.
+
+### Entstehungsgeschichte
+
+Vorlage ist Jean-Christophe Grangés Roman von 1997.
+
+Regie führte Mathieu Kassovitz, das Drehbuch schrieb er gemeinsam mit Grangé.
+
+Jean Reno spielt Pierre Niémans, Vincent Cassel den Max Kerkerian, Nadia Farès die Fanny Ferreira, Jean-Pierre Cassel den Dr. Bernard Chernezé und Dominique Sanda die Schwester Andrée.
+
+Produziert wurde der Film von Alain Goldman. Die Kamera führte Thierry Arbogast, den Schnitt besorgte Maryline Monthieux, die Musik stammt von Bruno Coulais.
+
+Gedreht wurde von Oktober 1999 bis März 2000, unter anderem bei der ONERA, an der Aiguille des Grands Montets, am Mer de Glace und im Pavillon Keller.
+
+### Hinter den Kulissen
+
+Die Drehorte sind Teil der Wirkung. Die Aiguille des Grands Montets und das Mer de Glace bringen Hochgebirge und Gletscher in einen Kriminalfilm — eine Umgebung, die Spuren konserviert und Menschen zugleich fernhält.
+
+Der Aufbau setzt auf zwei Ermittler, die zunächst nichts miteinander zu tun haben. Niémans und Kerkerian arbeiten getrennt, in verschiedenen Städten und an verschiedenen Fällen; erst ihr Zusammentreffen macht aus zwei Rätseln eines. Jean Reno und Vincent Cassel spielen dabei zwei Temperamente, die sich nicht ähneln müssen, um zu funktionieren.
+
+Dass eine Elite-Universität den Schauplatz stellt, gibt dem Film seine Richtung. Der Fall führt nicht zu einem einzelnen Täter, sondern in die Geschichte einer Institution.
+
+### Einordnung & Wirkung
+
+Der Film spielte weltweit rund 60 Millionen US-Dollar ein.
+
+Die Kritik urteilte geteilt. Cinema nannte ihn einen atmosphärisch dichten Psychothriller mit beeindruckenden Bildern. Das Lexikon des internationalen Films hielt dagegen, es sei „ein Film ohne Zwischentöne", dem die tiefere Atmosphäre der Romanvorlage fehle.
+
+Fünf César-Nominierungen kamen zusammen — für Regie, Musik, Kamera, Ton und Schnitt — dazu drei Nominierungen für den Europäischen Filmpreis.
+
+Auffällig ist, worauf sich diese Nominierungen verteilen: fast ausschließlich auf handwerkliche Kategorien. Genau dort liegt auch das Lob der Kritik, während der Haupteinwand das Drehbuch trifft.` },
+  // ---- Block 067 ----
+  {
+    bereich: 'titel', schluessel: 'movie:10992', locale: 'de-de',
+    text: `### Worum es geht
+
+Ohne dass die Menschen davon wissen, führen Hunde und Katzen einen verdeckten Krieg. Die Katzen unter Mr. Tinkles wollen die Weltherrschaft, die Hunde arbeiten als Geheimagenten dagegen.
+
+Professor Brody entwickelt ein Serum gegen Hundeallergie. Deshalb wird seine Familie von Hundeagenten bewacht — und der ungeschulte Welpe Lou gerät versehentlich mitten in den Einsatz. Die Katzen entführen die Brodys und drehen die Formel um, damit sie Allergien auslöst.
+
+### Entstehungsgeschichte
+
+Regie führte Lawrence Guterman, das Drehbuch schrieben John Requa und Glenn Ficarra.
+
+Jeff Goldblum spielt Professor Brody, Elizabeth Perkins die Mrs. Brody und Alexander Pollock den Sohn Scotty. Zu den Sprechrollen gehören Tobey Maguire als Beagle Lou, Alec Baldwin als Anatolischer Hirtenhund Butch, Sean Hayes als Perserkater Mr. Tinkles, Susan Sarandon als Saluki Ivy und Charlton Heston als Mastiff. In der deutschen Fassung sprechen unter anderem Arne Elsholtz den Professor Brody, Oliver Petszokat den Lou, Heiner Lauterbach den Butch, Rufus Beck den Mr. Tinkles, Hannelore Elsner die Ivy und Wolfgang Hess den Mastiff.
+
+Produziert wurde der Film von Christopher DeFaria, Andrew Lazar, Craig Perry und Warren Zide. Die Kamera führte Julio Macat, den Schnitt besorgten Rick Finney und Michael A. Stevenson, die Musik stammt von John Debney.
+
+Es handelt sich um eine amerikanisch-australische Produktion von 83 Minuten Länge. Das Budget betrug rund 60 Millionen Dollar. Der US-Start war der 4. Juli 2001, der deutsche der 19. Juli 2001.
+
+### Hinter den Kulissen
+
+Die Grundidee ist eine Spionagefilm-Parodie mit vertauschten Rollen. Was die Menschen für Haustiere halten, ist in Wahrheit ein Apparat mit Diensträngen, Einsatzbefehlen und einer Zentrale.
+
+Wie ernst dieser Scherz genommen wurde, zeigt die Besetzung der Sprechrollen. Für Tiere, die im Bild oft nur Sekunden zu sehen sind, wurden Tobey Maguire, Alec Baldwin, Susan Sarandon und Charlton Heston verpflichtet — die Stimmen tragen die Figuren.
+
+Erzählerisch hängt alles am Serum gegen Hundeallergie. Es ist der Grund, warum Menschen überhaupt in den Konflikt geraten, und zugleich der Hebel, mit dem die Gegenseite ihn umdrehen kann: Dieselbe Erfindung kann Hunde ins Haus holen oder aus ihm vertreiben.
+
+### Einordnung & Wirkung
+
+Bei rund 60 Millionen Dollar Herstellungskosten spielte der Film weltweit etwa 200 Millionen ein, davon rund 93 Millionen in den USA und 4,8 Millionen in Deutschland.
+
+Die Kritik urteilte gemischt. Rotten Tomatoes weist 52 Prozent aus, Metacritic 47 von 100. Der Spiegel hielt fest, der Film verhackstücke selbst die gelungenen Gags zu einer Handlungspampe. Das Lexikon des internationalen Films lobte die ansprechend animierten Vierbeiner.
+
+John Debney erhielt 2002 einen ASCAP Award für die Filmmusik. Charlton Heston bekam im selben Jahr die Goldene Himbeere als schlechtester Nebendarsteller — für eine reine Sprechrolle eine bemerkenswerte Auszeichnung.` },
+  {
+    bereich: 'titel', schluessel: 'series:77606', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie spielt zwischen dem ersten und dem zweiten Kinofilm, im Mittleren Westen der USA in der Nähe von Chicago.
+
+Boss Baby und Tim arbeiten für Baby Corp und bekommen es mit wechselnden Gegnern zu tun. In der ersten Staffel ist das Bootsy Calico, in der zweiten das Konsortium der Alten, in der dritten Happy Sedengry und Bubbezee, in der vierten Puppy Co und weitere Rivalen.
+
+### Entstehungsgeschichte
+
+Entwickelt wurde die Serie von Brandon Sawyer, der zugleich als Executive Producer fungierte. Produziert wurde sie von DreamWorks Animation Television.
+
+J.P. Karliak spricht Theodore „Ted" Templeton Jr. alias Boss Baby, Pierce Gagnon den Timothy „Tim" Templeton, Kevin Michael Richardson den Jimbo sowie Buddy from HR, Alex Cazares die Staci und Eric Bell Jr. die Drillinge.
+
+Insgesamt entstanden vier Staffeln mit 49 Folgen sowie ein Special. Die erste und die zweite Staffel liefen 2018 mit je 13 Folgen, die dritte 2020 mit elf Folgen; hinzu kamen 2020 ein interaktives Special und die vierte Staffel mit zwölf Folgen.
+
+Die Premiere fand am 6. April 2018 bei Netflix statt, das Finale lief am 17. November 2020. Am 3. Oktober 2025 folgte die Erstausstrahlung im Fernsehen bei Nickelodeon.
+
+### Hinter den Kulissen
+
+Die Serie ist zwischen zwei Kinofilme gesetzt — eine Entscheidung mit Folgen. Sie kann die Figuren nicht dauerhaft verändern, weil der zweite Film an einem festgelegten Punkt anschließt. Was sie stattdessen ausbaut, ist die Welt: Baby Corp als Firma, mit Abteilungen, Personal und Konkurrenz.
+
+Daran hängt auch der Aufbau der Staffeln. Jede bekommt einen eigenen Gegenspieler, von Bootsy Calico über das Konsortium der Alten bis zu Puppy Co. Das gibt jeder Staffel eine geschlossene Form, ohne dass sich der Ausgangszustand verschiebt.
+
+Aus der Reihe fällt das interaktive Special von 2020, bei dem das Publikum in den Verlauf eingreift — ein Format außerhalb der üblichen Serienerzählung.
+
+### Einordnung & Wirkung
+
+Von 2018 bis 2020 kam die Serie bei Netflix auf 49 Folgen und ein Special. Für eine Animationsserie im Umfeld eines Kinofilms ist das eine beachtliche Laufzeit.
+
+2019 war sie bei den Kidscreen Awards in den Kategorien „Best New Series" und „Best Animated Series" nominiert. Bei den Kids' Choice Awards folgten Nominierungen als „Favorite Cartoon" 2019 und als „Favorite Animated Series" 2021 — Letztere also erst, nachdem die Serie bereits abgeschlossen war.
+
+Bemerkenswert ist der Weg ins Fernsehen. Erst am 3. Oktober 2025, fast fünf Jahre nach dem Finale, lief die Serie erstmals linear bei Nickelodeon. Damit kehrt sich die frühere Reihenfolge um, in der Serien zunächst im Fernsehen liefen und erst danach in die Zweitverwertung gingen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2294', locale: 'de-de',
+    text: `### Worum es geht
+
+Jay und Silent Bob erfahren, dass der Comic „Bluntman & Chronic", der auf ihnen beruht, bei Miramax verfilmt werden soll. Sie machen sich auf den Weg nach Hollywood, um die Produktion zu verhindern.
+
+Unterwegs schließen sie sich einer Gruppe an, die sie für eine Tierschutzorganisation halten, werden eines Diamantenraubs beschuldigt und befreien einen Affen aus einem Labor.
+
+### Entstehungsgeschichte
+
+Kevin Smith führte Regie und schrieb das Drehbuch.
+
+Jason Mewes spielt Jay, Kevin Smith den Silent Bob. Ben Affleck ist als Holden McNeil und als er selbst zu sehen, Jason Lee als Brodie Bruce und als Banky Edwards. Shannon Elizabeth spielt die Justice, Will Ferrell den Federal Wildlife Marshal Willenholly, Eliza Dushku die Sissy, Ali Larter die Chrissy, Jennifer Schwalbach Smith die Missy, Brian O'Halloran den Dante Hicks, Jeff Anderson den Randal Graves, George Carlin einen Anhalter, Carrie Fisher eine Nonne, Seann William Scott den Brent, Jon Stewart den Reg Hartner, Chris Rock den Chaka Luther King, Mark Hamill den Cocknocker und Tracy Morgan den Pumpkin Escobar. Matt Damon, Jason Biggs, James Van Der Beek und Stan Lee treten als sie selbst auf.
+
+Produziert wurde der Film von Scott Mosier. Die Kamera führte Jamie Anderson, den Schnitt besorgten Mosier und Smith, die Musik stammt von James L. Venable. Das Budget betrug 22 Millionen Dollar.
+
+Der US-Start war der 24. August 2001, der deutsche der 18. April 2002; am 19. September 2002 erschien der Film in Deutschland auf VHS und DVD.
+
+### Hinter den Kulissen
+
+Der Film ist auf Selbstbezug gebaut. Die Hauptfiguren wollen die Verfilmung eines Comics verhindern, der auf ihnen beruht.
+
+Die Gastauftritte führen den Gedanken weiter. Darsteller aus Smiths früheren Filmen kehren in ihren alten Rollen zurück, während Matt Damon, Jason Biggs, James Van Der Beek und Stan Lee sich selbst spielen. Auch Wes Craven, Gus Van Sant und Shannen Doherty sind zu sehen — Hollywood tritt als Ensemble seiner selbst auf.
+
+Der Schlussteil ist die konsequenteste Wendung dieser Anlage: Die Figuren stellen Internetkritiker zur Rede, die sie im Netz beleidigt haben. Ein Film über die Verfilmung von Figuren beantwortet damit zugleich die Kritik an ihnen.
+
+### Einordnung & Wirkung
+
+Bei 22 Millionen Dollar Herstellungskosten spielte der Film weltweit 33 Millionen ein.
+
+Die deutschsprachige Kritik fiel abweisend aus. Der Spiegel beschrieb ihn als pubertäre Abschiedsparty voller geschmackloser Witze, leicht bekleideter Mädchen, Drogen, Popkultur-Verweise und absurder Gastauftritte. Die Süddeutsche Zeitung urteilte, die Witze blieben auf dem Niveau von „American Pie", die Filmzitate seien zu offensichtlich, um wirklich Vergnügen zu bereiten. Das Lexikon des internationalen Films nannte den Film weniger anarchisch als seine Vorgänger und nur einen blassen Aufguss früherer Versuche.
+
+Damit trifft die Kritik den Punkt, an dem der Film sich selbst verortet. Er setzt voraus, dass man die Vorgänger kennt — für alle anderen bleibt der Selbstbezug leer.` },
+  {
+    bereich: 'titel', schluessel: 'movie:398929', locale: 'de-de',
+    text: `### Worum es geht
+
+Greg leitet die Agentur Alibi.com. Sie verschafft Untreuen Alibis: Wer eine Erklärung braucht, wo er gewesen sein will, bekommt sie hier gegen Bezahlung.
+
+Dann verliebt er sich in die Anwältin Florence und gibt sich ihr gegenüber als Steward aus. Unhaltbar wird die Lage, als sich Florences Vater als Kunde der eigenen Agentur herausstellt — und alle Beteiligten im selben Hotel in Cannes auftauchen.
+
+### Entstehungsgeschichte
+
+Philippe Lacheau führte Regie und schrieb das Drehbuch gemeinsam mit Julien Arruti und Pierre Dudan.
+
+Lacheau spielt zugleich die Hauptrolle, den Grégory Van Huffel. Élodie Fontan spielt die Florence Martin, Tarek Boudali den Mehdi, Nathalie Baye die Marlène Martin und Kad Merad den Monsieur Godet.
+
+Produziert wurde der Film von Alexandra Fechner. Die Kamera führte Dominique Colin, den Schnitt besorgte Olivier Michaut-Alchourroun, die Musik stammt von Loïc Van Zon.
+
+Gedreht wurde von April bis Juli 2016 in Paris und in Cannes. Die Premiere fand am 20. Januar 2017 beim Filmfestival von Alpe d'Huez statt, der französische Kinostart folgte am 15. Februar 2017.
+
+### Hinter den Kulissen
+
+Die Prämisse liefert die Komödienmechanik gleich mit. Eine Agentur, die Lügen professionell herstellt, hat einen Betrieb, Abläufe und Kunden — jede dieser Ebenen kann auffliegen, und jede Aufdeckung zieht die nächste nach sich.
+
+Dass der Betreiber ausgerechnet in eigener Sache lügt und sich als Steward ausgibt, kehrt die Anlage um: Der Fachmann für Ausreden wird zum Kunden seiner eigenen Dienstleistung.
+
+Die Zuspitzung liegt in der Verwandtschaft. Florences Vater ist Kunde der Agentur; wer jetzt die Wahrheit sagt, verrät den anderen mit. Deshalb funktioniert das Hotel in Cannes als Schauplatz — ein geschlossener Ort, an dem niemand mehr ausweichen kann, ist die klassische Form für diese Art von Auflösung.
+
+Auffällig ist die Dreifachrolle Philippe Lacheaus. Er schreibt mit, inszeniert und spielt die Hauptfigur; der Film ist ganz auf ihn hin gebaut.
+
+### Einordnung & Wirkung
+
+Die Premiere am 20. Januar 2017 in Alpe d'Huez lag knapp vier Wochen vor dem regulären Kinostart am 15. Februar 2017.
+
+Rotten Tomatoes weist 67 Prozent aus, allerdings auf der schmalen Grundlage von nur sechs Bewertungen. Beschrieben wird der Film dort als albern-klamaukig, mit pubertären Gags, aber unterhaltsam.
+
+Dass überhaupt nur sechs Besprechungen vorliegen, sagt dabei mehr über die Auswertung als über den Film. Eine französische Ensemble-Komödie mit einem Autorendarsteller im Zentrum findet ihr Publikum im Inland; international wird sie kaum wahrgenommen. Für die Einordnung heißt das: Die Prozentzahl trägt hier weniger als sonst.` },
+  {
+    bereich: 'titel', schluessel: 'movie:3600', locale: 'de-de',
+    text: `### Worum es geht
+
+Julie James gewinnt bei einem Radiospiel eine Reise auf eine karibische Insel.
+
+Was wie ein Glücksfall aussieht, ist eine Falle. Auf der abgeriegelten Insel wartet ein Mörder aus ihrer Vergangenheit — und er ist nicht allein. Was folgt, ist ein Kampf ums Überleben an einem Ort, von dem niemand wegkommt.
+
+### Entstehungsgeschichte
+
+Der Film ist die Fortsetzung des Horrorfilms von 1997 und der zweite Teil einer Trilogie. Es handelt sich um eine amerikanisch-mexikanische Koproduktion von 100 Minuten Länge; die FSK gab sie ab 16 Jahren frei.
+
+Regie führte Danny Cannon. Das Drehbuch schrieb Trey Callaway auf Grundlage des Romans von Lois Duncan.
+
+Jennifer Love Hewitt spielt Julie James, Brandy die Karla Wilson, Freddie Prinze Jr. den Ray Bronson, Muse Watson den Ben Willis, Mekhi Phifer den Tyrell, Matthew Settle den Will Benson und Jack Black den Titus.
+
+Produziert wurde der Film von William S. Beasley, Stokely Chaffin, Erik Feig und Neal H. Moritz. Die Kamera führte Vernon Layton, den Schnitt besorgte Peck Prior, die Musik stammt von John Frizzell. Das Budget betrug 24 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Ortswechsel ist die zentrale Entscheidung dieser Fortsetzung. Statt eines Ortes, den man verlassen kann, gibt es eine Insel. Das Radiospiel liefert dafür den Vorwand — die Opfer reisen freiwillig genau dorthin, wo sie erwartet werden.
+
+Damit ändert sich die Bauart. Die Bedrohung muss nicht mehr in einen Alltag eindringen; sie ist die Grundbedingung des Schauplatzes. Wer die Insel betritt, ist bereits gefangen.
+
+Auffällig ist auch die Besetzung. Neben Jennifer Love Hewitt und Freddie Prinze Jr. stehen Brandy, Mekhi Phifer und Jack Black in Rollen, die den Zuschnitt des Films auf ein junges Publikum ausweisen. Muse Watson kehrt als Ben Willis zurück und stellt die Verbindung zum ersten Teil her.
+
+### Einordnung & Wirkung
+
+Bei 24 Millionen Dollar Herstellungskosten spielte der Film knapp 40 Millionen ein.
+
+Die Kritik urteilte ablehnend. Bemängelt wurden öder Horror nach Schema F und ein spannungsarmer Plot; gelobt wurde dagegen das frische Spiel der jungen Darsteller.
+
+Diese Trennung ist bezeichnend: Der Einwand richtet sich gegen das Drehbuch, das Lob gilt den Darstellern. Am Ergebnis an der Kasse änderten die Besprechungen nichts.
+
+Als mittlerer Teil einer Trilogie steht der Film zwischen dem Erfolg von 1997 und einem dritten Teil — eine Position, die selten die günstigste ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:45132', locale: 'de-de',
+    text: `### Worum es geht
+
+Frank Darbo arbeitet als Koch. Nach einer Vision, die er als göttlichen Auftrag versteht, zieht er ein selbstgemachtes Kostüm an und nennt sich Crimson Bolt.
+
+Übernatürliche Kräfte hat er keine. Was er hat, ist eine Rohrzange. Als er seine drogenabhängige Frau Sarah aus dem Umfeld eines Drogenbosses holen will, schließt sich ihm Libby an — eine labile Angestellte aus einem Comicladen, die sich Boltie nennt.
+
+### Entstehungsgeschichte
+
+James Gunn schrieb das Drehbuch und führte Regie. Er arbeitete seit 2002 daran und stieß lange auf Widerstand: Produzenten hielten den Stoff für zu gewalttätig.
+
+Rainn Wilson spielt Frank Darbo alias Crimson Bolt, Elliot Page die Libby alias Boltie, Liv Tyler die Sarah Helgeland, Kevin Bacon den Drogenboss Jacques und Nathan Fillion den Holy Avenger.
+
+Die Kamera führte Steve Gainer, die Musik stammt von Tyler Bates. Gedreht wurde zwischen Dezember 2009 und Januar 2010 in Shreveport, Louisiana, sowie in Los Angeles. Der Comicladen war ein reales Geschäft: ComicSmash in Studio City. Alle Beteiligten arbeiteten zu den Mindestgagen nach SAG-Sätzen. Das Budget betrug 2,5 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Mindestgagen erklären, wie dieser Film überhaupt zustande kam. Ein Stoff, den Produzenten acht Jahre lang für zu gewalttätig hielten, ließ sich nur zu einem Budget herstellen, bei dem alle Beteiligten auf die Mindestsätze gingen.
+
+Inhaltlich stellt der Film eine unbequeme Frage. Ein Mann ohne Kräfte, ohne Ausbildung und ohne Kontrolle beschließt, Verbrechen zu bekämpfen — und schlägt mit einer Rohrzange zu. Die Gewalt bleibt dabei nicht Stilmittel, sondern wird in ihrer Wirkung gezeigt.
+
+Genau daran hängen die Tonwechsel, die die Kritik bemängelte. Der Film springt zwischen Komik und Grausamkeit, ohne eine der beiden Ebenen zur Leitebene zu erklären. Die religiöse Grundierung — Frank handelt aufgrund einer Vision — bleibt dabei ebenso in der Schwebe.
+
+### Einordnung & Wirkung
+
+Bei 2,5 Millionen Dollar Herstellungskosten spielte der Film weltweit 593.933 Dollar ein. Das Startwochenende brachte 46.549 Dollar in elf Kinos.
+
+Rotten Tomatoes weist 50 Prozent aus; der dortige Konsens hält fest, die verwickelte Prämisse und die begabte Besetzung gingen in drastischer Gewalt und schroffen Tonwechseln unter. Owen Gleiberman nannte ihn einen Ein-Witz-Film, dessen Witz allerdings gut sei.
+
+Die Aufnahme war entsprechend geteilt: Lob für Humor und Darsteller auf der einen Seite, Kritik an der ungefilterten Gewalt auf der anderen. Für einen Film, der acht Jahre auf seine Herstellung warten musste, ist das eine folgerichtige Bilanz.` },
+  {
+    bereich: 'titel', schluessel: 'movie:19458', locale: 'de-de',
+    text: `### Worum es geht
+
+Das Princess Protection Program ist ein Geheimdienst, der Prinzessinnen in Sicherheit bringt. Rosalinda muss vor einem Diktator fliehen und wird in Louisiana versteckt.
+
+Dort lebt sie bei der Tochter eines Agenten des Programms. Aus der Prinzessin wird eine Schülerin — und aus den beiden Mädchen ein Gespann, das einen Plan schmiedet, um den Verfolger zu stellen.
+
+### Entstehungsgeschichte
+
+Regie führte Allison Liddi-Brown. Das Drehbuch schrieb Annie DeYoung nach einer Geschichte von DeYoung und David Morgasen.
+
+Demi Lovato spielt Prinzessin Rosalinda alias Rosie Gonzalez, Selena Gomez die Carter Mason, Tom Verica den Major Joe Mason, Johnny Ray Rodriguez den General Magnus Kane, Jamie Chung die Chelsea Barnes und Nicholas Braun den Ed.
+
+Gedreht wurde von März bis April 2008 in Puerto Rico. Zu den Drehorten zählten Schulen in San Juan, der Carraizo-See in Trujillo Alto, das Castillo Serrallés in Ponce und die Casa de España in Alt-San Juan.
+
+Die Premiere lief am 26. Juni 2009 auf dem Disney Channel, die DVD erschien vier Tage später, am 30. Juni 2009.
+
+### Hinter den Kulissen
+
+Die Anlage ist ein doppelter Rollentausch. Rosalinda muss lernen, unauffällig zu sein; Carter lernt von einer Prinzessin, wie man auftritt. Beide Figuren geben der jeweils anderen, was ihr fehlt — die Freundschaft ist zugleich der Lehrplan.
+
+Der Schutzdienst liefert dafür den Rahmen und einen Scherz mit Ernst darin: Ein Geheimdienst, der Prinzessinnen versteckt, arbeitet mit denselben Mitteln wie ein Zeugenschutzprogramm — neue Identität, neuer Wohnort, keine Rückfragen.
+
+Bemerkenswert ist der Abstand zwischen Dreh und Ausstrahlung: gedreht im Frühjahr 2008, gezeigt erst im Sommer 2009. Ebenso auffällig ist die Verlagerung der Schauplätze. Die Handlung spielt in Louisiana, gedreht wurde vollständig in Puerto Rico — bis hin zu den Schulszenen, für die Schulen in San Juan dienten.
+
+### Einordnung & Wirkung
+
+Am Premierenwochenende sahen 8,5 Millionen Zuschauer den Film.
+
+Ein Rezensent beschrieb ihn als leicht wie eine Sommerbrise über dem Bayou von Louisiana und hob die Botschaft zur Selbstachtung hervor.
+
+Beide Angaben zusammen beschreiben das Format genau. Ein Film dieser Art wird nicht an der Zahl seiner Besprechungen gemessen, sondern an der Zahl derer, die ihn am ersten Wochenende einschalten — und 8,5 Millionen sind dafür ein deutlicher Wert. Dass die DVD nur vier Tage nach der Erstausstrahlung erschien, gehört zur selben Rechnung.
+
+Die Botschaft, auf die der Rezensent verweist, liegt dabei in der Konstruktion selbst: Beide Mädchen kommen am Ende ohne die Rolle aus, die ihnen zugeschrieben wird — die eine ohne den Titel, die andere ohne die fremde Zuschreibung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:6435', locale: 'de-de',
+    text: `### Worum es geht
+
+1690 wird Maria Owens wegen ihrer Zauberkünste verbannt. Sie belegt sich selbst mit einem Fluch, der an ihre Nachkommen weitergegeben wird: Jeder Mann, der sich in eine Frau namens Owens verliebt, stirbt eines unnatürlichen Todes.
+
+Die Schwestern Sally und Gillian erben diesen Fluch. Sally hält sich von der Magie fern — bis Gillians gewalttätiger Freund deren Leben bedroht. Dann müssen beide ihre Kräfte einsetzen.
+
+### Entstehungsgeschichte
+
+Vorlage ist Alice Hoffmans Roman, der auf Deutsch „Im Hexenhaus" heißt und im Original „Practical Magic". Es ist die erste Verfilmung des Buches.
+
+Regie führte Griffin Dunne. Das Drehbuch schrieben Robin Swicord, Akiva Goldsman und Adam Brooks.
+
+Sandra Bullock spielt Sally Owens, Nicole Kidman die Gillian Owens, Stockard Channing die Tante Frances „Franny", Dianne Wiest die Tante Bridget „Jet", Goran Višnjić den Jimmy Angelov, Aidan Quinn den Officer Gary Hallet und Evan Rachel Wood die Kylie Owens.
+
+Produziert wurde der Film von Denise Di Novi. Die Kamera führte Andrew Dunn, den Schnitt besorgte Elizabeth Kling, die Musik stammt von Alan Silvestri.
+
+Gedreht wurde im Bundesstaat Washington, in Coupeville auf Whidbey Island und in Friday Harbor auf San Juan Island. Das Hexenhaus wurde eigens für den Film gebaut und danach wieder abgerissen.
+
+### Hinter den Kulissen
+
+An diesem Haus zeigt sich die Machart. Es wurde nicht gefunden, sondern gebaut — und nach Drehschluss wieder abgerissen. Ein Bauwerk, das nur für die Dauer der Aufnahmen existierte, passt zu einer Geschichte über etwas, das sich nicht behalten lässt.
+
+Der Fluch selbst ist sorgfältiger konstruiert, als er zunächst wirkt. Er trifft nicht die Frauen, sondern die Männer, die sie lieben. Die Strafe für Maria Owens wird an ihren Nachfahrinnen dadurch vollstreckt, dass sie niemanden behalten dürfen — Verbannung wird auf diese Weise vererbbar.
+
+Daraus folgt die Aufteilung der beiden Schwestern. Sally meidet die Magie, weil sie den Preis kennt; Gillian lebt, als gäbe es ihn nicht. Dass am Ende beide handeln müssen, löst diese Arbeitsteilung auf.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte geteilt. Der Spiegel nannte den Film schwachsinnig konstruiert und sprach von faulem Zauber; andere Stimmen würdigten ihn als kurzweilige Unterhaltung.
+
+Auffällig ist die Verteilung der Rollen. Sandra Bullock und Nicole Kidman als Schwestern, Stockard Channing und Dianne Wiest als Tanten, Evan Rachel Wood als Tochter — fünf tragende Frauenrollen, während die männlichen Figuren im Hintergrund bleiben. Für eine Studioproduktion der späten neunziger Jahre ist das eine ungewöhnliche Gewichtung.
+
+Auch der deutsche Titel verschiebt den Akzent. Aus „Practical Magic" — praktischer, angewandter Magie — werden „Zauberhafte Schwestern". Der Roman heißt auf Deutsch „Im Hexenhaus"; Buch und Film tragen hierzulande also verschiedene Namen.` },
+  // ---- Block 068 ----
+  {
+    bereich: 'titel', schluessel: 'movie:512', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Journalistikstudentin bekommt einen Hinweis aus unerwarteter Quelle: Ein Geist erscheint ihr und deutet an, dass ein Adliger ein Serienmörder sein könnte.
+
+Gemeinsam mit einem Zauberkünstler geht sie der Sache nach. Dabei kommt sie dem Verdächtigen näher, als es der Recherche guttut — und stößt auf Tarotkarten und einen Mordfall.
+
+### Entstehungsgeschichte
+
+Woody Allen führte Regie und schrieb das Drehbuch.
+
+Scarlett Johansson spielt Sondra Pransky, die unter dem Namen Jade Spence auftritt; Woody Allen den Sidney Waterman alias Splendini. Hugh Jackman spielt den Peter Lyman, Ian McShane den Joe Strombel, Charles Dance den Mr. Malcom, Romola Garai die Vivian, Kevin R. McNally den Mike Tinsley, Julian Glover den Lord Lyman und Anthony Head einen Detective.
+
+Produziert wurde der Film von Letty Aronson und Gareth Wiley. Die Kamera führte Remi Adefarasin, den Schnitt besorgte Alisa Lepselter. Die Musik greift auf klassische Stücke zurück, darunter Chatschaturjans „Säbeltanz" und Griegs „In der Halle des Bergkönigs".
+
+Gedreht wurde in London. Das Budget betrug vier Millionen Dollar. Der US-Start war der 28. Juli 2006, der deutsche der 16. November 2006.
+
+### Hinter den Kulissen
+
+Vier Millionen Dollar Budget bei dieser Besetzung sind die eigentliche Nachricht der Produktionsdaten. Der Film arbeitet mit Schauplätzen in London, mit Scarlett Johansson und Hugh Jackman — und kostet einen Bruchteil dessen, was er später einspielte.
+
+Die Musikwahl ist bezeichnend. Statt einer eigens komponierten Filmmusik stehen bekannte klassische Stücke im Vordergrund; der „Säbeltanz" und „In der Halle des Bergkönigs" tragen dabei eine Ironie mit, die der Film auch in seiner Anlage sucht.
+
+Diese Anlage ist ein Mischwesen. Ein Geist stößt die Ermittlung an, ein Zauberkünstler führt sie mit, und die Ermittlerin verliebt sich in den Verdächtigen. Kriminalfilm, Komödie und Gespenstergeschichte greifen ineinander, ohne dass eine der drei Formen die Führung übernimmt.
+
+### Einordnung & Wirkung
+
+Bei vier Millionen Dollar Herstellungskosten spielte der Film weltweit 40 Millionen ein, davon 10,5 Millionen in den USA — gemessen am Einsatz ein sehr gutes Ergebnis.
+
+Die Kritik urteilte gemischt. Rotten Tomatoes weist 42 Prozent aus, Metacritic 48 von 100; die Bandbreite der Besprechungen reichte von lahm bis witzig und klug. Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
+
+Auffällig ist die Verteilung der Einnahmen: Drei Viertel des Einspielergebnisses kamen von außerhalb der Vereinigten Staaten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:60747', locale: 'de-de',
+    text: `### Worum es geht
+
+Nach einem EMP-Anschlag und Landungen an beiden Küsten der USA besetzen nordkoreanische Truppen das Land.
+
+In Spokane im Bundesstaat Washington schließen sich Jugendliche zu einer Guerillagruppe zusammen. Sie nennen sich „Wolverines" und nehmen den Kampf gegen die Besatzer auf.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf dem Original von Kevin Reynolds und John Milius.
+
+Regie führte Dan Bradley; es war sein Spielfilmdebüt. Das Drehbuch schrieben Carl Ellsworth und Jeremy Passmore.
+
+Chris Hemsworth spielt den Marine Jed Eckert, Josh Peck dessen Bruder Matt, einen Footballspieler, Josh Hutcherson den Robert Kitner, Adrianne Palicki die Toni Walsh, Jeffrey Dean Morgan den Sergeant Major Andrew Tanner und Will Yun Lee den Captain Il-Ho Cho.
+
+Angekündigt wurde das Projekt im Mai 2008, gedreht wurde ab September 2009 in Mount Clemens, Michigan; als Drehort diente auch die geschlossene Notre Dame High School in Harper Woods. Das Budget betrug 65 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Produktionsgeschichte ist bemerkenswerter als der Film selbst. Zwei angesetzte Starttermine — September und November 2010 — mussten verschoben werden, weil MGM in die Insolvenz ging.
+
+In der Postproduktion wurde dann der Gegner ausgetauscht. Aus China wurde Nordkorea, um den Zugang zum chinesischen Markt nicht zu verlieren; die Umarbeitung kostete weniger als eine Million Dollar.
+
+Das ist ein ungewöhnlich klarer Fall. Ein fertig gedrehter Film ändert nachträglich, wer sein Feind ist — und zwar aus Vertriebsgründen. Zwischen Drehbeginn 2009 und Kinostart lagen drei Jahre, in denen sich nicht die Handlung verschob, sondern ihre Adresse.
+
+### Einordnung & Wirkung
+
+Bei 65 Millionen Dollar Herstellungskosten spielte der Film weltweit 51 Millionen ein und blieb damit im Minus.
+
+Die Kritik urteilte ablehnend. Rotten Tomatoes weist 15 Prozent aus, Metacritic 31 von 100. Bemängelt wurden eine grobschlächtige Behandlung des Stoffs und fehlende Logik; hinzu kam eine Razzie-Nominierung. Beim Publikum ergab CinemaScore ein „B".
+
+Chinesische Medien hatten das ursprüngliche Szenario scharf kritisiert — der Grund für die nachträgliche Änderung. John Milius, Mitautor des Originals, nannte das Drehbuch schlicht schrecklich.` },
+  {
+    bereich: 'titel', schluessel: 'movie:539681', locale: 'de-de',
+    text: `### Worum es geht
+
+Superman und sein Hund Krypto bekommen es mit Lex Luthor und dem Meerschweinchen Lulu zu tun.
+
+Als die Justice League gefangen genommen wird, muss Krypto ein Team aus Tierheimtieren zusammenstellen: den Boxermischling Ace, das Schwein PB, die Schildkröte Merton und das Eichhörnchen Chip. Durch oranges Kryptonit erhalten sie Superkräfte — und damit die Aufgabe, ihre eigenen Helden zu retten.
+
+### Entstehungsgeschichte
+
+Regie führte Jared Stern, das Drehbuch schrieb er gemeinsam mit John Whittington.
+
+In der Originalfassung sprechen Dwayne Johnson den Krypto, Kevin Hart den Ace, Kate McKinnon die Lulu, John Krasinski den Superman, Keanu Reeves den Batman, Vanessa Bayer die PB, Natasha Lyonne die Merton, Diego Luna den Chip, Marc Maron den Lex Luthor sowie Thomas Middleditch und Ben Schwartz die Meerschweinchen Keith und Mark.
+
+In der deutschen Fassung sprechen Ingo Albrecht den Krypto, Leonhard Mahlich den Ace, Tahnee die Lulu, Jaron Löwenberg den Superman, Torsten Sträter den Batman und Florian Halm den Lex Luthor.
+
+Die Computeranimation entstand bei Animal Logic in Sydney und Vancouver mit etwa 70 Animatoren; federführend war die Warner Animation Group. Der Bildstil ist von Art déco und vom Illustrator J.C. Leyendecker angeregt. Die Musik stammt von Steve Jablonsky. Das Budget betrug 90 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Bildstil ist die auffälligste Entscheidung. Art déco und J.C. Leyendecker als Bezugspunkte führen weg vom üblichen Aussehen computeranimierter Familienfilme, hin zu klaren Flächen und einer Formensprache, die älter ist als das Genre.
+
+Erzählerisch dreht der Film die Machtverhältnisse um. Die Helden sind gefangen, die Haustiere müssen ran — und die Tiere, die zu Rettern werden, kommen aus dem Tierheim. Die Vermittlung von Tieren ist damit nicht Beiwerk, sondern Voraussetzung der Handlung.
+
+Auch die Wahl des Gegners passt dazu. Ein Meerschweinchen als Widersacherin entspricht den Größenverhältnissen dieses Films: Hier entscheidet nicht die Statur.
+
+### Einordnung & Wirkung
+
+Bei 90 Millionen Dollar Herstellungskosten spielte der Film weltweit 207,6 Millionen ein.
+
+Rotten Tomatoes weist 72 Prozent positive Bewertungen aus, bei einem Schnitt von 6,3 von 10. Metacritic kommt auf 56 von 100 und damit auf gemischte bis durchschnittliche Rezensionen.
+
+Nell Minow lobte die lebhaften Sprecher und nannte das Drehbuch intelligent, spannend und sehr lustig. Andere Stimmen bemängelten eine begrenzte Vorstellungskraft und den Mangel an Neuerungen.
+
+Das Verhältnis von Budget und Einspielergebnis zeigt, wie diese Rechnung ausging: Das Publikum folgte dem Film deutlicher als der zurückhaltendere Teil der Kritik.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11096', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Psychologe David Callaway lebt mit seiner Frau Alison und der Tochter Emily in scheinbar geordneten Verhältnissen. Unter der Oberfläche steht die Ehe auf Kriegsfuß.
+
+Emily wird Zeugin, wie ihre Mutter im Badezimmer stirbt. Danach zieht sich das Kind zurück und spricht von einem unsichtbaren Freund namens Charlie, der immer bedrohlicher wird. David zieht mit ihr aufs Land — und was dort geschieht, lässt sich mit einer kindlichen Fantasie bald nicht mehr erklären.
+
+### Entstehungsgeschichte
+
+Regie führte John Polson, das Drehbuch schrieb Ari Schlossberg.
+
+Robert De Niro spielt David Callaway, Dakota Fanning die Tochter Emily, Amy Irving die Mutter Alison, Famke Janssen die Katherine, Elisabeth Shue die Elizabeth Young, Dylan Baker den Sheriff Hafferty und Melissa Leo die Laura.
+
+Produziert wurde der Film von Barry Josephson. Die Kamera führte Dariusz Wolski, den Schnitt besorgte Jeffrey Ford, die Musik stammt von John Ottman.
+
+Der Film dauert 101 Minuten. Die FSK gab ihn ab 16 Jahren frei, in Österreich lautet die Freigabe JMK 16. Das Budget betrug 25 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Für die DVD-Auswertung wurden drei alternative Enden gedreht. In einem bringt Katherine das Kind in einer psychiatrischen Einrichtung zu Bett — Emily wird damit zur Patientin statt zum Mündel. In einem zweiten zeigt Emilys letztes Bild nur einen Kopf statt zwei. Im dritten spielt sie allein Verstecken, öffnet einen Schrank und spricht ihr eigenes Spiegelbild an.
+
+Dass gleich drei Varianten existieren, sagt viel über die Konstruktion. Der Film hängt an einer Auflösung, die sich in verschiedene Richtungen drehen lässt, ohne dass das Vorangegangene widerlegt würde. Jede der Fassungen verschiebt, wem am Ende zu trauen ist.
+
+Getragen wird das von der Besetzung. Robert De Niro und Dakota Fanning bestreiten weite Teile des Films allein miteinander; die übrigen Figuren treten von außen hinzu.
+
+### Einordnung & Wirkung
+
+Bei 25 Millionen Dollar Herstellungskosten spielte der Film weltweit rund 123 Millionen ein. In den USA wurden 2005 fast acht Millionen Eintrittskarten verkauft, in Europa rund vier Millionen.
+
+Die Kritik urteilte geteilt. Das Lexikon des internationalen Films nannte ihn einen atmosphärischen, intelligent inszenierten Thriller, bemängelte aber unlogische Brüche und Konventionen. Carsten Baumgardt verwies auf allzu offensichtlich gelegte falsche Fährten. Prisma kritisierte die konstruierte Lösung, verglich sie mit „The Sixth Sense" und urteilte, sie könne nur absolute Laien verblüffen.
+
+Dakota Fanning erhielt 2005 einen MTV Movie Award. Elisabeth Shue war für einen Teen Choice Award nominiert, ebenso der Film in der Kategorie „Choice Movie: Thriller".` },
+  {
+    bereich: 'titel', schluessel: 'movie:634528', locale: 'de-de',
+    text: `### Worum es geht
+
+Jim Hanson lebt als Witwer an der Grenze zwischen Arizona und Mexiko. Er war Scharfschütze bei den US-Marines und hat in Vietnam gedient.
+
+An der Grenze trifft er auf Rosa und ihren Sohn Miguel, die vor der mexikanischen Mafia fliehen. Nachdem Rosa tödlich verletzt wird, übernimmt Hanson widerwillig die Aufgabe, den Jungen nach Chicago zu bringen. Eine Gruppe des Kartells unter Mauricio nimmt die Verfolgung auf.
+
+### Entstehungsgeschichte
+
+Regie führte Robert Lorenz, das Drehbuch schrieb er gemeinsam mit Chris Charles und Danny Kravitz. Angekündigt wurde das Projekt im Mai 2019 zunächst unter dem Titel „The Minuteman".
+
+Liam Neeson spielt Jim Hanson, Jacob Perez den Miguel, Katheryn Winnick die Grenzschutzbeamtin Sarah Pennington, Juan Pablo Raba den Mauricio und Teresa Ruiz die Rosa. In weiteren Rollen sind Dylan Kenan, Luke Rains, Sean Rosales, Alfredo Quiroz und Amber Midthunder zu sehen.
+
+Produziert wurde der Film von Tai Duncan, Mark Williams, Warren Goz, Eric Gold und Robert Lorenz. Gedreht wurde in Ohio — im Lorain County, im Portage County, in Cleveland, im Cuyahoga County und in Chardon — sowie in New Mexico; die Aufnahmen endeten im Oktober 2019.
+
+Der Film dauert 108 Minuten, das Budget lag zwischen 23 und 30 Millionen Dollar. Der US-Start war der 15. Januar 2021, eine Woche früher als ursprünglich angesetzt. Den Verleih übernahmen Open Road Films und Briarcliff Entertainment.
+
+### Hinter den Kulissen
+
+Die Drehorte sind bemerkenswert. Ein Film, der an der Grenze zwischen Arizona und Mexiko beginnt und in Chicago endet, entstand größtenteils in Ohio, ergänzt um Aufnahmen in New Mexico. Die Reiseroute der Handlung wurde also überwiegend anderswo hergestellt.
+
+Die Anlage selbst ist die einer Eskorte. Zwei Figuren, die einander nichts zu sagen haben, müssen eine lange Strecke gemeinsam zurücklegen; der Verfolger sorgt dafür, dass sie nicht anhalten können. Was dabei entsteht, ist weniger eine Verfolgungsjagd als eine erzwungene Bekanntschaft.
+
+Auch die Vorgeschichte der Hauptfigur arbeitet mit. Hanson ist Witwer, Veteran und ausgebildeter Scharfschütze — drei Merkmale, die den Film mit Verlust, Erfahrung und Fähigkeit ausstatten, ohne dass er sie eigens erklären müsste. Zwischen Drehschluss im Oktober 2019 und dem Start im Januar 2021 lagen 15 Monate.
+
+### Einordnung & Wirkung
+
+Bei einem Budget zwischen 23 und 30 Millionen Dollar spielte der Film weltweit 23,9 Millionen ein — 15,6 Millionen in den USA und Kanada, 8,3 Millionen im übrigen Ausland. Am Wochenende um den Martin-Luther-King-Tag stand er mit 3,7 Millionen Dollar auf Platz eins.
+
+Rotten Tomatoes weist 39 Prozent aus (108 Rezensionen); der Konsens dort hält fest, der Film profitiere von Liam Neesons Rolle, hätte als formelhaft gebauter Actionthriller aber höher zielen sollen. Metacritic kommt auf 44 von 100. Beim Publikum ergab PostTrak 73 Prozent Zustimmung.
+
+Die New York Times nannte den Film vorhersehbar, aber angenehm getragen von Neesons Ausstrahlung. Die Washington Post vergab zwei von vier Sternen und sprach von einer filmischen Ausgabe von Comfort Food. Variety kritisierte das unterentwickelte Drehbuch als Standardware; IndieWire vergab ein „C−" und verglich den Film mit späten Arbeiten Clint Eastwoods.` },
+  {
+    bereich: 'titel', schluessel: 'series:39340', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei Kellnerinnen in Brooklyn, aus sehr verschiedenen Verhältnissen. Max Black stammt aus armen Familienverhältnissen; Caroline Channing hat ihr Vermögen verloren, nachdem ihr Vater mit einem Schneeballsystem aufgeflogen ist.
+
+Beide arbeiten in demselben Diner und verfolgen dasselbe Ziel: ein eigenes Cupcake-Geschäft.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Michael Patrick King und Whitney Cummings. Produziert wurde sie von Warner Bros. Television.
+
+Kat Dennings spielt Max Black, Beth Behrs die Caroline Channing, Garrett Morris den Kassierer Earl Washington, Jonathan Kite den ukrainischen Koch Oleg Golishevsky und Matthew Moy den Diner-Besitzer Han Lee. Ab der zweiten Staffel gehört Jennifer Coolidge als Sophie Kaczyński zur Stammbesetzung.
+
+Insgesamt entstanden sechs Staffeln mit 138 Folgen. In den USA lief die Serie vom 19. September 2011 bis zum 17. April 2017 bei CBS, in Deutschland vom 28. August 2012 bis Januar 2017 bei ProSieben.
+
+### Hinter den Kulissen
+
+Die Serie setzt auf ein klassisches Gegensatzpaar. Zwei Frauen mit entgegengesetzter Herkunft teilen sich Arbeitsplatz und Ziel — die eine hat nie etwas gehabt, die andere alles verloren.
+
+Bemerkenswert ist, wie dieser Verlust erklärt wird: durch das Schneeballsystem des Vaters. Die Serie startete 2011 und macht damit einen Finanzbetrug zum Ausgangspunkt einer Sitcom — die Reiche fällt nicht durch Zufall, sondern durch eine Straftat in der eigenen Familie.
+
+Das gemeinsame Ziel wiederum hält die Serie über sechs Staffeln in Bewegung, ohne dass es erreicht sein müsste. Darin liegt die Bauweise vieler Sitcoms: Der Wunsch trägt, die Erfüllung würde beenden.
+
+### Einordnung & Wirkung
+
+Die erste Folge erreichte 19,4 Millionen Zuschauer. Danach gingen die Werte stetig zurück — von durchschnittlich 11,29 Millionen in der ersten auf 7,03 Millionen in der sechsten Staffel.
+
+Ausgezeichnet wurde die Serie 2012 mit dem People's Choice Award als beste neue Comedy und im selben Jahr mit einem Emmy für die Ausstattung; insgesamt kamen zwölf Emmy-Nominierungen zusammen.
+
+Die Kritik lobte die unbestreitbare Chemie zwischen Kat Dennings und Beth Behrs, bemängelte aber billige, vorhersehbare Witze sowie übermäßig sexualisierte und rassistische Elemente. Insbesondere die Darstellung der Figur Han Lee stand in der Kritik. Michael Patrick King verteidigte sie mit den Worten, er finde das nicht beleidigend.
+
+Damit steht die Serie für eine Sitcom-Praxis, deren Grenzen noch während ihrer Laufzeit öffentlich verhandelt wurden.` },
+  {
+    bereich: 'titel', schluessel: 'series:124834', locale: 'de-de',
+    text: `### Worum es geht
+
+Charlie Spring und Nick Nelson gehen auf die Truham Grammar School. Charlie ist offen schwul und wurde im Vorjahr gemobbt; Nick spielt Rugby und ist beliebt. Im Unterricht sitzen sie nebeneinander.
+
+Aus dem Nebeneinander wird eine Freundschaft, aus der Freundschaft mehr. Um die beiden herum stehen Elle, Tao und Isaac — Figuren mit eigenen Fragen.
+
+### Entstehungsgeschichte
+
+Vorlage sind der Webcomic und die Graphic Novels von Alice Oseman.
+
+Oseman schrieb die Drehbücher. In den ersten beiden Staffeln führte Euros Lyn Regie, in der dritten Andy Newbery; Oseman blieb durchgehend als Autorin verantwortlich.
+
+Joe Locke spielt Charlie Spring, Kit Connor den Nick Nelson, Yasmin Finney die Elle Argent, William Gao den Tao Xu und Tobie Donovan den Isaac Henderson. Olivia Colman spielt in den ersten beiden Staffeln Nicks Mutter Sarah Nelson. Zur weiteren Hauptbesetzung gehören Jenny Walser als Tori, Fisayo Akinade als Mr. Ajayi und Sebastian Croft als Ben Hope.
+
+Produziert wurde die Serie von See-Saw Films; als Produzenten sind Zorana Piggott, Euros Lyn, Patrick Walters, Jamie Laurenson, Hakan Kousetta, Iain Canning und Emile Sherman genannt.
+
+Gedreht wurde die erste Staffel in Südengland — in Burnham, Slough, Herne Bay und Windsor —, die zweite in Großbritannien und in Paris, die dritte in Lyme Regis.
+
+Es entstanden drei Staffeln mit insgesamt 24 Folgen: Staffel eins erschien am 22. April 2022, Staffel zwei am 3. August 2023, Staffel drei am 3. Oktober 2024, jeweils bei Netflix und in Deutschland zeitgleich. Am 17. Juli 2026 folgte der Film „Heartstopper Forever".
+
+### Hinter den Kulissen
+
+Dass die Autorin der Vorlage auch die Drehbücher schreibt, ist der Kern dieser Produktion. Alice Oseman begleitet den Stoff vom Webcomic über die Graphic Novels bis in alle drei Staffeln — ein Grad an Kontinuität, der bei Adaptionen selten ist.
+
+Die Drehorte wachsen mit der Erzählung. Staffel eins bleibt in Südengland, Staffel zwei geht nach Paris, Staffel drei nach Lyme Regis; der Radius der Figuren erweitert sich mit ihrem Alter.
+
+Auffällig ist die Erzählhaltung. Charlies Mobbing-Erfahrung ist Vorgeschichte, nicht Handlung — erzählt wird, was danach kommt. Mehrere Besprechungen haben genau diesen Punkt hervorgehoben.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war außergewöhnlich einhellig. Rotten Tomatoes weist 100 Prozent aus, Metacritic 84 von 100, die IMDb-Bewertung liegt bei 9,0 von 10.
+
+Rebecca Nicholson vergab im Guardian vier von fünf Sternen und nannte die Serie eine warmherzige Adaption von Osemans Webcomic, die sich anfühle wie eine Umarmung im Fernsehen. Saloni Gajjar bewertete sie im A.V. Club mit A− und hob hervor, dass Nicks Zuneigung zu Charlie ihn überrascht, ohne ihn abzustoßen. Adam Miller nannte sie in Metro eine Geschichte der Hoffnung, wie sie alle LGBTQ+-Menschen in ihrer Jugend hätten haben sollen. Alex Moreland charakterisierte sie in National World als nett — im ernsthaftesten und am wenigsten abwertenden Sinn des Wortes.
+
+Bei den National Television Awards 2022 war die Serie als „New Drama" nominiert, Kit Connor und Joe Locke jeweils als „Rising Star".` },
+  {
+    bereich: 'titel', schluessel: 'movie:8843', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Psychologin Catherine Deane arbeitet mit einer experimentellen Therapietechnik: Sie dringt in das Unterbewusstsein von Komapatienten ein, um ihnen beim Aufwachen zu helfen.
+
+Das FBI holt sie in einen Mordfall. Ein Serienmörder liegt im Koma; sein letztes Opfer ist irgendwo eingesperrt, in einer Kammer, die sich mit Wasser füllt. Vierzig Stunden bleiben. Die einzige Spur zu diesem Ort führt durch den Kopf des Täters.
+
+### Entstehungsgeschichte
+
+Regie führte Tarsem Singh, das Drehbuch schrieb Mark Protosevich.
+
+Jennifer Lopez spielt die Psychologin Catherine Deane, Vincent D'Onofrio den Serienmörder Carl Rudolph Stargher und Vince Vaughn den FBI-Agenten Peter Novak.
+
+Produziert wurde der Film von Julio Caro und Eric McLeod; es handelt sich um eine amerikanisch-deutsche Koproduktion. Die Kamera führte Paul Laufer, den Schnitt besorgten Robert Duffy und Paul Rubell, die Musik stammt von Howard Shore.
+
+### Hinter den Kulissen
+
+Die Konstruktion trennt zwei Filme voneinander. Der eine ist ein Ermittlungsthriller mit laufender Uhr: vierzig Stunden, ein unbekannter Ort, ein Opfer. Der andere spielt vollständig im Inneren eines Kopfes und kennt keine physikalischen Regeln.
+
+Der zweite trägt den Ruf des Films. Was in Starghers Unterbewusstsein zu sehen ist, folgt keiner Handlungslogik, sondern einer Bildlogik. Dafür stehen die Oscar-Nominierung für das beste Make-up ebenso wie die vier Nominierungen für den Saturn Award.
+
+Bemerkenswert ist auch die Rollenverteilung. Die entscheidende Ermittlung geht nicht von der Polizei aus, sondern von einer Therapeutin. Sie sucht nicht nach Beweisen, sondern nach einem Ort in einer Vorstellungswelt — und ist dabei dem ausgeliefert, was sich diese Welt ausgedacht hat. Der Zeitdruck von vierzig Stunden hält beide Ebenen zusammen.
+
+### Einordnung & Wirkung
+
+Der Film wurde 2001 für den Oscar für das beste Make-up nominiert und erhielt vier Nominierungen für den Saturn Award. Jennifer Lopez gewann den Blockbuster Entertainment Award als beste Darstellerin in der Kategorie Science-Fiction sowie einen MTV Movie Award für das beste Kostüm.
+
+In der New York Post verglich Brad Hamilton den Film mit „Das Schweigen der Lämmer".
+
+Dieser Vergleich trifft allerdings nur die eine Hälfte. Die Ermittlungshandlung folgt bekannten Bahnen; was den Film davon abhebt, ist der Teil, für den er ausgezeichnet wurde. Die Preise und Nominierungen verteilen sich fast ausschließlich auf das Sichtbare — Make-up, Kostüm, Bildwelt —, nicht auf das Erzählte. Für einen Thriller ist das eine ungewöhnliche Bilanz, und sie beschreibt den Film genauer als jede Genrezuordnung.` },
 ];
