@@ -42080,4 +42080,305 @@ Die Kritik fiel vernichtend aus. Rotten Tomatoes weist 21 Prozent aus, Metacriti
 Bemerkenswert ist der Widerspruch zwischen Anspruch und Ergebnis. Ein Autorenfilm mit dieser Besetzung, gedreht an einem außergewöhnlichen Ort, scheiterte an einer einzigen Entscheidung — der Frage, was der Film eigentlich ist.
 
 Dass sowohl Fachkritik als auch Publikum ihn ablehnten, ist selten. Meist geht eines von beiden mit; hier waren sich beide einig.` },
+  // ---- Block 092 ----
+  {
+    bereich: 'titel', schluessel: 'movie:6073', locale: 'de-de',
+    text: `### Worum es geht
+
+Jerry Welbach ist Kleinkrimineller und bekommt einen Auftrag: Er soll eine antike Pistole aus Mexiko holen — den „Mexican".
+
+Seine Freundin Samantha hat davon genug und verlässt ihn. Während Jerry in Mexiko unterwegs ist, wird sie von einem Auftragsmörder entführt, der dafür sorgen soll, dass die Waffe auch wirklich ankommt. Was folgt, ist eine Kette von Verwicklungen mit mehreren Killern, die alle eigene Aufträge haben.
+
+### Entstehungsgeschichte
+
+Regie führte Gore Verbinski, das Drehbuch schrieb J. H. Wyman.
+
+Brad Pitt spielt Jerry Welbach, Julia Roberts die Samantha „Sam" Barzel, James Gandolfini den Winston Baldry, Bob Balaban den Bernie Nayman, Gene Hackman den Arnold Margolese und J. K. Simmons den Ted Slocum.
+
+Die Kamera führte Dariusz Wolski, den Schnitt besorgte Craig Wood, die Musik stammt von Alan Silvestri.
+
+Ursprünglich war der Stoff als unabhängige Produktion gedacht. Nach Julia Roberts' Initiative kam Brad Pitt dazu. Als Regisseure waren zuvor Kevin Reynolds und David Fincher im Gespräch, beide standen nicht zur Verfügung.
+
+Gedreht wurde in Real de Catorce in San Luis Potosí, in Toluca, in Las Vegas und in Los Angeles. Das Budget lag zwischen 40 und 57 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film trennt seine beiden Stars fast vollständig. Brad Pitt und Julia Roberts spielen zwar ein Paar, sind aber über weite Strecken getrennt unterwegs — eine ungewöhnliche Entscheidung bei einer Besetzung, die auf ihr Zusammenspiel hin vermarktet wurde.
+
+Daraus ergibt sich der eigentliche Handlungsstrang. Samantha verbringt den Film mit ihrem Entführer, und aus dieser Zwangsgemeinschaft wird das Zentrum: James Gandolfini spielt den Auftragsmörder Winston Baldry als schwulen Mann mit eigenen Sorgen — die Rolle, die in den Besprechungen am meisten Aufmerksamkeit fand.
+
+Dass der Stoff als kleiner Film gedacht war und dann mit zwei der bekanntesten Namen seiner Zeit besetzt wurde, erklärt einen Teil der Aufnahme. Die Erwartung war eine andere als das, was der Film liefert.
+
+### Einordnung & Wirkung
+
+Bei einem Budget zwischen 40 und 57 Millionen Dollar spielte der Film weltweit 147,8 Millionen ein.
+
+Rotten Tomatoes weist 54 Prozent aus; der Konsens dort hält fest, die schwerfällige Länge lasse den Film seinen Willkommensvorschuss verbrauchen. Metacritic kommt auf 43 von 100, beim Publikum ergab CinemaScore ein „C".
+
+Besonders hervorgehoben wurde durchgehend James Gandolfinis Darstellung.
+
+Der Befund ist bezeichnend. Ein Film, der auf zwei Hauptdarsteller hin gebaut und beworben wurde, wird am Ende für einen Dritten gelobt — und dafür kritisiert, dass er die beiden, wegen derer man gekommen ist, auseinanderhält.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9728', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film knüpft unmittelbar an den Vorgänger an: Jason überlebt einen Angriff und tötet ein Ehepaar.
+
+Eine Gruppe Jugendlicher verbringt das Wochenende am Crystal Lake. Chris Higgins ist unter ihnen. Was folgt, ist die Reihenfolge, in der Jason sie findet.
+
+### Entstehungsgeschichte
+
+Regie führte Steve Miner. Das Drehbuch schrieben Martin Kitrosser und Carol Watson.
+
+Dana Kimmell spielt Chris Higgins, Paul Kratka den Rick, Tracie Savage die Debbie, Jeffrey Rogers den Andy und Richard Brooker den Jason Voorhees.
+
+Produziert wurde der Film von Frank Mancuso Jr. und Tony Bishop. Die Kamera führte Gerald Feil, die Musik stammt von Harry Manfredini.
+
+Gedreht wurde in 3D; nur die ersten Minuten — die Rückblenden auf den zweiten Teil — sind zweidimensional. Das Budget betrug rund zwei Millionen Dollar.
+
+### Hinter den Kulissen
+
+Das 3D-Verfahren bestimmt die Machart. Ein Film, der auf räumliche Wirkung setzt, muss Gegenstände in Richtung Publikum bewegen — und der Film tut das erkennbar häufig.
+
+Genau daran setzte die Kritik an: Die Technik sei nur ein Gimmick. Der Vorwurf trifft eine Entscheidung, die den Film von der Handlung wegführt und auf einen Effekt hin ausrichtet.
+
+Bemerkenswert ist der Bruch am Anfang. Die Rückblenden laufen in 2D, dann schaltet der Film um — die Technik wird als Ereignis eingeführt, nicht als Selbstverständlichkeit.
+
+Zwei Millionen Dollar Budget für einen Film, der in 3D gedreht wurde, sind knapp bemessen; der Aufwand steckt im Verfahren, nicht in der Ausstattung.
+
+### Einordnung & Wirkung
+
+Bei rund zwei Millionen Dollar Herstellungskosten spielte der Film allein in den USA über 36 Millionen ein — das Achtzehnfache seines Budgets.
+
+Die Kritik urteilte vernichtend. Rotten Tomatoes weist sieben Prozent aus, die IMDb-Bewertung liegt bei 5,7 von 10 und damit deutlich unter dem Vorgänger. Bemängelt wurden Wiederholungen, ein oberflächliches Drehbuch und die 3D-Technik als bloße Spielerei.
+
+Der Abstand zwischen sieben Prozent Zustimmung und dem Achtzehnfachen des Budgets beschreibt die Marktlage dieser Reihe. Sie brauchte keine guten Besprechungen; sie brauchte ein Publikum, das wusste, was es bekommt.
+
+Bemerkenswert bleibt die Besetzung der Titelfigur. Richard Brooker spielt Jason Voorhees — in einer Reihe, in der die Rolle über die Teile hinweg mehrfach den Darsteller wechselte, ohne dass es dem Publikum auffallen sollte.` },
+  {
+    bereich: 'titel', schluessel: 'series:45790', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie erzählt die Geschichte mehrerer Generationen der Familie Joestar und ihrer Feindschaft mit Dio Brando.
+
+Sie ist in neun Handlungsstränge gegliedert, die „Parts" heißen. Jeder hat eigene Hauptfiguren und spielt zu einer anderen Zeit an einem anderen Ort.
+
+### Entstehungsgeschichte
+
+Vorlage ist der Manga von Hirohiko Araki, der seit Januar 1987 erscheint. Es ist die zweitlängste Manga-Reihe des Verlags Shūeisha.
+
+Die Anime-Fernsehserie entsteht bei David Production. Sie startete am 6. Oktober 2012 bei Tokyo MX und umfasst über 191 Folgen in sechs Staffeln.
+
+Im deutschsprachigen Raum lief die Premiere am 11. Mai 2021 auf YouTube und Twitch. Eine deutsche Synchronfassung erschien seit Sommer 2021 bei Kazé Anime auf Blu-ray und DVD.
+
+### Hinter den Kulissen
+
+Die Gliederung in Parts ist das Besondere. Statt einer durchgehenden Erzählung mit denselben Figuren wechselt die Reihe regelmäßig Hauptperson, Zeit und Schauplatz — verbunden nur über die Familie und ihren Gegenspieler.
+
+Das erlaubt etwas, was kaum eine andere Langzeitreihe kann: Genrewechsel ohne Bruch. Wer in einem späteren Part einsteigt, braucht die früheren nicht zwingend zu kennen.
+
+Der Umfang ist entsprechend. Ein Manga, der seit 1987 läuft, und über 191 Anime-Folgen seit 2012 bedeuten, dass Vorlage und Verfilmung parallel weiterlaufen.
+
+Die deutsche Auswertung ist bemerkenswert spät. Neun Jahre nach dem japanischen Start kam die Serie hierzulande — und zwar zuerst über YouTube und Twitch, nicht über einen Sender.
+
+### Einordnung & Wirkung
+
+Animerica hob die Kampfszenen zwischen Jotaro Kujo und Dio als einen der Höhepunkte der Handlung hervor.
+
+Die Reihe wird zudem in dem Band „1001 Comics, die Sie lesen sollten, bevor das Leben vorbei ist" geführt — eine Einordnung, die auf die Vorlage zielt, nicht auf die Verfilmung.
+
+Dass eine Manga-Reihe seit 1987 läuft und die zweitlängste ihres Verlags ist, sagt mehr über ihre Stellung aus als jede Bewertung. Der Anime kam 25 Jahre nach dem Beginn der Vorlage und arbeitet einen Vorrat ab, der zu diesem Zeitpunkt bereits gewaltig war.
+
+Der Weg über YouTube und Twitch in den deutschsprachigen Raum ist dabei kennzeichnend für Anime-Auswertung dieser Jahre: Die Verfügbarkeit lief nicht über Sender, sondern über Plattformen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:254473', locale: 'de-de',
+    text: `### Worum es geht
+
+Detroit im Jahr 2018. Der Stadtteil Brick Mansions ist durch eine Mauer vom Rest der Stadt abgetrennt und sich selbst überlassen.
+
+Ein verdeckter Ermittler und ein früherer Häftling müssen zusammenarbeiten. Es geht um eine Massenvernichtungswaffe in der Hand eines Drogenbosses — und um ein Komplott, das aus dem Rathaus stammt.
+
+### Entstehungsgeschichte
+
+Der Film ist eine Neuverfilmung des französischen Films „Ghettogangz – Die Hölle vor Paris" von 2004.
+
+Regie führte Camille Delamarre, das Drehbuch schrieb Luc Besson.
+
+Paul Walker spielt Damien Collier, David Belle den Lino und RZA den Tremaine Alexander.
+
+Produziert wurde der Film von Luc Besson, Claude Léger und Jonathan Vanger. Die Kamera führte Christophe Collette, die Musik stammt von Marc Bell und Trevor Morris.
+
+Das Budget betrug 28 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Figur des Lino ist auf körperliche Bewegung hin angelegt — David Belle bringt die Fortbewegungsform mit, auf der schon das Original beruhte.
+
+Der Schauplatzwechsel ist die eigentliche Anpassung. Aus einer Pariser Vorstadt wird ein abgeriegelter Bezirk in Detroit — eine Stadt, die zum Zeitpunkt der Produktion für Verfall und Abwanderung stand.
+
+Die Mauer ist dabei mehr als eine Kulisse. Ein Film, der einen Stadtteil physisch vom Rest abtrennt, macht aus einer sozialen Frage eine bauliche.
+
+Dass Luc Besson sowohl das Original als auch die Neuverfilmung schrieb, erklärt die Nähe beider Fassungen.
+
+### Einordnung & Wirkung
+
+Bei 28 Millionen Dollar Herstellungskosten spielte der Film bis Juli 2014 rund 32,2 Millionen ein.
+
+Rotten Tomatoes weist 26 Prozent bei den Kritikern und 47 Prozent beim Publikum aus; die Aufnahme wird als gemischt bis negativ beschrieben.
+
+Der Abstand zwischen Kritiker- und Publikumsurteil ist bei Actionfilmen dieser Machart üblich. Was die Kritik als dünne Handlung bewertet, nimmt das Genrepublikum als Rahmen für das, weswegen es gekommen ist.
+
+Bemerkenswert bleibt die enge Verwandtschaft zum Original. Zehn Jahre nach dem französischen Film, mit demselben Autor und einem der beiden Hauptdarsteller, ist dies weniger eine Neuinterpretation als eine Übersetzung — und wurde entsprechend an ihrem Vorbild gemessen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:254904', locale: 'de-de',
+    text: `### Worum es geht
+
+Peter Devereaux war CIA-Agent und ist im Ruhestand. Man holt ihn für einen Auftrag zurück: Er soll eine Agentin herausbringen.
+
+Sie wird getötet — von Leuten aus dem eigenen Apparat. Devereaux geht der Sache nach und stößt auf eine Verschwörung, die mit Kriegsverbrechen und einem Bombenanschlag zu tun hat.
+
+### Entstehungsgeschichte
+
+Vorlage ist Bill Grangers Roman „There Are No Spies".
+
+Regie führte Roger Donaldson. Das Drehbuch schrieben Michael Finch und Karl Gajdusek.
+
+Pierce Brosnan spielt Peter Devereaux, Luke Bracey den David Mason, Olga Kurylenko die Alice Fournier alias Mira Filipova, Eliza Taylor die Sarah, Will Patton den Perry Weinstein und Bill Smitrovich den John Hanley.
+
+Produziert wurde der Film von Beau St. Clair und Sriram Das. Die Kamera führte Romain Lacourbas, den Schnitt besorgte John Gilbert, die Musik stammt von Marco Beltrami.
+
+Der US-Kinostart war am 28. August 2014.
+
+### Hinter den Kulissen
+
+Die Verschiebung gegenüber üblichen Agentenfilmen liegt in der Frontstellung. Der Gegner ist keine fremde Macht, sondern der eigene Dienst — getötet wird die Agentin, die Devereaux herausholen soll, von Kollegen.
+
+Damit hat der Film keine Seite, auf die seine Hauptfigur zurückkann. Wer im Ruhestand zurückgeholt wird und dann feststellt, dass der Auftraggeber das Problem ist, hat weder Rückhalt noch Ausweg.
+
+Die Besetzung Pierce Brosnans trägt dazu einen eigenen Beiklang. Ein Darsteller, der für einen anderen Geheimagenten bekannt ist, spielt hier einen ausgemusterten, desillusionierten Mann — die Rolle arbeitet mit dem, was das Publikum mitbringt.
+
+Der Bezug zu Kriegsverbrechen gibt dem Film einen ernsteren Hintergrund, als das Genre gewöhnlich vorsieht.
+
+### Einordnung & Wirkung
+
+Bis November 2014 hatte der Film das Doppelte seiner Produktionskosten eingespielt.
+
+Rotten Tomatoes weist 34 Prozent Zustimmung aus. Die Zeitschrift Cinema lobte Brosnans Leistung in einem kurzweiligen Agententhriller.
+
+Diese beiden Angaben zusammen beschreiben die Lage. Ein Film, der bei einem Drittel Zustimmung sein Budget verdoppelt, findet sein Publikum unabhängig von den Besprechungen — getragen von einem Hauptdarsteller, dessen Name im Genre für etwas steht.
+
+Bemerkenswert bleibt die Vorlage. Ein Roman von Bill Granger liefert den Stoff — unter einem anderen Titel als der Film, der ihn verfilmt.` },
+  {
+    bereich: 'titel', schluessel: 'series:94954', locale: 'de-de',
+    text: `### Worum es geht
+
+Charlie Morningstar ist die Tochter des Höllenkönigs Luzifer. Sie eröffnet in der Hölle ein Hotel, in dem Sünder sich bessern sollen.
+
+Ihre Hoffnung: Wer sich läutert, kommt in den Himmel. Der Anlass ist ernst — bislang lösen himmlische Engel das Überfüllungsproblem der Hölle durch jährliche Massenvernichtungen.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Vivienne Medrano; die Idee stammt aus ihrer Schulzeit.
+
+Nach zweieinhalb Jahren Arbeit erschien im Oktober 2019 eine halbstündige Pilotfolge auf YouTube. A24 erwarb 2020 die Produktionsrechte. Die erste Staffel entstand bei SpindleHorse Toons, Bento Box Entertainment, A24 und Amazon MGM Studios.
+
+Vivienne Medrano verantwortet Regie und Musik gemeinsam mit weiteren Produzenten und Komponisten, darunter Parry Gripp und Sam Haft.
+
+In der deutschen Fassung sprechen Rieke Werner die Charlie, Anja Stadlober die Vaggie, Hannes Maurer den Angel Dust, Simon Jäger den Alastor und Gerrit Schmidt-Foß den Adam.
+
+Es liegen 17 Folgen in mehr als zwei Staffeln vor. Die Premiere war am 19. Januar 2024 bei Amazon Prime Video, englisch und deutsch zugleich.
+
+### Hinter den Kulissen
+
+Der Weg dieser Serie ist ungewöhnlich. Sie begann als Einzelprojekt einer Zeichnerin, wurde über zweieinhalb Jahre gebaut und erschien zunächst kostenlos auf YouTube — erst danach kaufte ein Studio die Rechte.
+
+Damit hat der Erfolg eine andere Reihenfolge als üblich. Nicht ein Sender gab eine Serie in Auftrag, sondern ein fertiger Pilotfilm bewies, dass ein Publikum vorhanden war.
+
+Inhaltlich verbindet die Serie ein Musical mit einem Stoff über Schuld und Besserung. Die Ausgangsfrage — ob Verdammte sich ändern können — ist theologisch besetzt und wird hier in einer Hotelkomödie verhandelt.
+
+Dass Medrano auch die Musik verantwortet, macht sie zur Urheberin in nahezu allen Bereichen.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 80 Prozent positive Bewertungen aus (7,8 von 10), Metacritic 69 von 100. Der Konsens dort nennt die Serie eine höllisch gute Musicalserie.
+
+Der bemerkenswerteste Punkt bleibt die Entstehung. Eine Pilotfolge, die auf YouTube veröffentlicht wurde, führte zu einer Produktion mit A24 und Amazon — ein Weg, den es vor der Plattformära nicht gab.
+
+Die gleichzeitige Veröffentlichung auf Englisch und Deutsch am 19. Januar 2024 zeigt zudem, welchen Stellenwert die internationale Auswertung von Beginn an hatte.
+
+Für eine Serie, deren Idee aus der Schulzeit ihrer Erfinderin stammt, ist der Weg von der eigenen Zeichnung zur Studioproduktion die eigentliche Geschichte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:14199', locale: 'de-de',
+    text: `### Worum es geht
+
+Max ist zehn, lebt in Austin und hat wenig Anschluss. In seinem Traumtagebuch hat er eine Welt erfunden: Planet Drool, samt zweier Superhelden — Sharkboy und Lavagirl.
+
+Dann stehen die beiden vor ihm. Ihre Welt ist in Gefahr, und Max soll sie retten. Dort trifft er auf Mr. Electric und auf einen Gegner namens Minus, hinter dem ein Klassenkamerad steckt.
+
+### Entstehungsgeschichte
+
+Regie führte Robert Rodriguez, das Drehbuch schrieb er gemeinsam mit Marcel Rodriguez. Die Geschichte stammt von Racer Max Rodriguez — die Kinder des Regisseurs steuerten wesentliche Teile bei.
+
+Cayden Boyd spielt Max, Taylor Lautner den Sharkboy, Taylor Dooley die Lavagirl, David Arquette und Kristin Davis die Eltern, George Lopez den Mr. Electricidad in mehreren Gestalten, Jacob Davich den Linus alias Minus und Sasha Pieterse die Marissa alias Ice Princess.
+
+Produziert wurde der Film von Elizabeth Avellán und Robert Rodriguez. Rodriguez ist vierzehnmal im Abspann genannt — als Regisseur, Produzent, Autor, Kameramann, Cutter und Komponist. An der Musik waren zudem John Debney und Graeme Revell beteiligt.
+
+Gedreht wurde von September bis Dezember 2004 in Texas, überwiegend vor Greenscreen. Elf Effektfirmen arbeiteten an über 1.000 Einstellungen. Das Budget betrug 50 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Herkunft des Stoffs ist der ungewöhnlichste Punkt. Die Geschichte stammt von den Kindern des Regisseurs; der Film setzt eine Kinderfantasie um, statt sie nachzuahmen.
+
+Das erklärt die Logik der Traumwelt. Planet Drool folgt keiner Erzähllogik, sondern der Sprunghaftigkeit eines Einfalls — Milchflüsse, Züge aus Zuckerstangen, ein Eisprinzessinnenreich.
+
+Vierzehn Nennungen im Abspann für eine Person sind auch eine Aussage über die Arbeitsweise. Rodriguez macht fast alles selbst; das Budget geht in die Effekte, nicht in die Stäbe.
+
+Der Greenscreen-Dreh mit über 1.000 Effekteinstellungen war für 2004 ein erheblicher Aufwand — und der Grund, warum der Film so aussieht, wie er aussieht.
+
+### Einordnung & Wirkung
+
+Bei 50 Millionen Dollar Herstellungskosten spielte der Film weltweit 72 Millionen ein — 39,2 Millionen in den USA, 32,8 Millionen im übrigen Ausland. Das Startwochenende brachte 12,6 Millionen und Platz fünf.
+
+Rotten Tomatoes weist 19 Prozent aus (Schnitt 4,4 von 10), Metacritic 38 von 100. Beim Publikum ergab CinemaScore ein „B+".
+
+Roger Ebert vergab zwei von vier Sternen. Er kritisierte, das 3D-Verfahren lenke ab und dämpfe die Farben; auf Heimmedien sehe der Film besser aus.
+
+Später erlangte der Film Kultstatus — trotz der schlechten Aufnahme durch die Kritik. Der Abstand zwischen 19 Prozent bei Rotten Tomatoes und einem „B+" des Publikums deutete diese Entwicklung bereits an.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8676', locale: 'de-de',
+    text: `### Worum es geht
+
+Ben „Finn" Finnegan sucht seit Jahren nach einem spanischen Schatz, der 1715 vor der Küste Floridas versunken ist.
+
+Als er eine entscheidende Scherbe findet, kommt seine frühere Frau Tess zurück ins Spiel. Mit dem wohlhabenden Nigel Honeycutt gewinnen sie einen Geldgeber. Gegen sie steht der Gangster Bigg Bunny, der denselben Schatz will.
+
+### Entstehungsgeschichte
+
+Regie führte Andy Tennant. Das Drehbuch schrieben John Claflin, Daniel Zelman und Tennant selbst.
+
+Matthew McConaughey spielt Ben „Finn" Finnegan, Kate Hudson die Tess, Donald Sutherland den Nigel Honeycutt, Alexis Dziena die Gemma Honeycutt, Ray Winstone den Moe Fitch, Kevin Hart den Bigg Bunny Deenz und Malcolm-Jamal Warner den Cordell.
+
+Produziert wurde der Film von Donald De Line, Bernie Goldmann und Jon Klane. Die Musik stammt von George Fenton, die Kamera von Don Burgess, den Schnitt besorgten Troy Takaki und Tracey Wadmore-Smith.
+
+Gedreht wurde von November 2006 bis Mai 2007 in Queensland, auf Eleuthera und auf Lizard Island. Das Budget betrug rund 70 Millionen Dollar. Die Premiere war am 7. Februar 2008 in Australien, der US-Start am 8. Februar, der deutsche am 24. April 2008.
+
+### Hinter den Kulissen
+
+Sechs Monate Dreh an drei Schauplätzen in Australien und auf den Bahamas sind für eine romantische Abenteuerkomödie ein erheblicher Aufwand. Der Film setzt auf Unterwasseraufnahmen und tropische Schauplätze als eigenen Wert.
+
+Erzählerisch beruht alles auf einem geschiedenen Paar, das zusammenarbeiten muss. Der Schatz ist der Anlass, die Wiederannäherung das Ziel — eine Anlage, die das Genre seit Jahrzehnten kennt.
+
+Die Datierung auf 1715 gibt dem Ganzen einen historischen Anker. Der gesuchte Schatz ist kein erfundenes Artefakt, sondern eine spanische Ladung mit Jahreszahl — das verankert die Suche in etwas Nachprüfbarem.
+
+Auffällig ist die Besetzung der Nebenrollen. Donald Sutherland, Ray Winstone und Kevin Hart geben dem Film ein Ensemble, das über das Hauptpaar hinausreicht.
+
+### Einordnung & Wirkung
+
+Bei rund 70 Millionen Dollar Herstellungskosten spielte der Film weltweit etwa 111 Millionen ein — rund 70 Millionen in den USA und 2,7 Millionen in Deutschland.
+
+Die Kritik fiel vernichtend aus. Rotten Tomatoes weist zehn Prozent bei 139 Kritiken aus; unter den dort geführten Spitzenkritikern lag die Zustimmung bei null Prozent. James Berardinelli bemängelte, die Chemie zwischen den Hauptdarstellern sei praktisch vollständig verdampft. Das Lexikon des internationalen Films nannte den Film eine biedere Mischung ohne originellen Zugang.
+
+Die Deutsche Film- und Medienbewertung vergab dagegen das Prädikat „wertvoll" für unterhaltsames Popcornkino. Kate Hudson wurde 2009 für die Goldene Himbeere als schlechteste Schauspielerin nominiert.
+
+Null Prozent Zustimmung unter den Spitzenkritikern bei gleichzeitig 111 Millionen Dollar Einspielergebnis ist eine der schärfsten Trennungen zwischen Urteil und Publikum, die sich finden lassen.` },
 ];
