@@ -32652,4 +32652,747 @@ Die Kritik urteilte gemischt. Das Lexikon des internationalen Films bemängelte 
 Damit steht der Film für eine bekannte Schwierigkeit: Der erste Teil hatte den Reiz der Entdeckung — eine kleine Welt, die man zum ersten Mal betritt. Beim zweiten ist diese Welt bekannt, und der Film muss sie durch Handlung ersetzen.
 
 Bemerkenswert bleibt die Konstellation: Ein Regisseur verfilmt seine eigene Buchreihe und dreht dabei zwei Teile gleichzeitig — eine Aufstellung, die wirtschaftlich sinnvoll ist und erzählerisch ihren Preis hat.` },
+  // ---- Block 58 ----
+  {
+    bereich: 'titel', schluessel: 'movie:303', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Jahr nach dem Zweiten Weltkrieg wirbt der amerikanische Geheimdienst Alicia Huberman an. Sie ist Amerikanerin deutscher Herkunft, und ihr Vater stand den Nationalsozialisten nahe.
+
+Agent Devlin führt sie — und verliebt sich in sie. Trotzdem muss er sie dazu bringen, Alexander Sebastian zu heiraten, einen früheren Vertrauten ihres Vaters, der in Brasilien einer Nazi-Organisation angehört. In dessen Weinkeller finden die beiden Uranerz. Danach beginnen Sebastian und seine Mutter, Alicia langsam zu vergiften.
+
+### Entstehungsgeschichte
+
+Regie führte Alfred Hitchcock. Das Drehbuch schrieb Ben Hecht, unter Mitarbeit von Hitchcock und Clifford Odets. Produziert wurde der Film von RKO Pictures; er läuft 101 Minuten.
+
+Cary Grant spielt Devlin, Ingrid Bergman die Alicia Huberman, Claude Rains den Alexander Sebastian.
+
+### Hinter den Kulissen
+
+Zwei Szenen sind in die Filmgeschichte eingegangen. Die eine ist die damals längste Kussszene des Kinos: knapp drei Minuten, mit Unterbrechungen. Damit umging Hitchcock die Zensurvorschrift, die höchstens drei Sekunden erlaubte — er ließ die Darsteller sich immer wieder kurz lösen und weiterreden.
+
+Die andere ist eine Kamerafahrt, die aus der Totale eines Festsaals bis auf die Nahaufnahme eines Schlüssels in Alicias Hand zufährt.
+
+Das Uranerz ist der bekannteste MacGuffin Hitchcocks — ein Gegenstand, der die Handlung antreibt und inhaltlich beliebig ist. Hitchcock hat erzählt, er habe die Idee 1944 gehabt und dafür den Nobelpreisträger Robert Millikan befragt. Belege dafür gibt es außer seiner eigenen Erzählung nicht; der Biograf Donald Spoto hält es für wahrscheinlich, dass das Uran erst nach Hiroshima in den Stoff kam.
+
+### Einordnung & Wirkung
+
+Der Film gilt als Klassiker und wird außergewöhnlich hoch bewertet: 96 Prozent bei Rotten Tomatoes, 100 von 100 bei Metacritic.
+
+Claude Rains war als bester Nebendarsteller für den Oscar nominiert, Ben Hecht für das beste Originaldrehbuch.
+
+2006 wurde der Film in das National Film Registry aufgenommen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:635731', locale: 'de-de',
+    text: `### Worum es geht
+
+Rob Feld lebt allein in einem Wald in Oregon, sucht Trüffel und verkauft sie an einen jungen Zwischenhändler namens Amir. Sein einziger Gefährte ist ein Schwein, das die Trüffel findet.
+
+Eines Nachts wird er überfallen und das Tier gestohlen. Rob macht sich auf den Weg nach Portland, um es zurückzuholen — in eine Stadt, aus der er vor Jahren verschwunden ist und in der ihn noch immer Leute kennen. Denn Rob war einmal einer der bedeutendsten Köche der Gegend.
+
+### Entstehungsgeschichte
+
+Michael Sarnoski schrieb das Drehbuch und führte Regie; es war sein erster abendfüllender Film. Die Anregung kam von einer Fotografie eines Trüffelsuchers.
+
+Nicolas Cage spielt Rob, Alex Wolff den Amir, Adam Arkin den Darius.
+
+Gedreht wurde in 20 Tagen im September 2019 in Portland; das Budget betrug drei Millionen Dollar. Cage bereitete sich unter anderem mit örtlichen Köchen vor.
+
+### Hinter den Kulissen
+
+Sarnoski hat den Film in drei Teile gegliedert, die dem Aufbau einer Mahlzeit folgen. Der Anlass war persönlich: der Tod seines Vaters.
+
+Der Reiz liegt in der Erwartung, die der Film nicht erfüllt. Die Ausgangslage — Nicolas Cage, ein gestohlenes Tier, ein Mann mit Vergangenheit — lässt einen Rachefilm erwarten. Stattdessen führt Rob Gespräche. Seine wirksamste Waffe ist, dass er den Leuten sagt, wer sie sind.
+
+Cage selbst hat den Film als seinen liebsten und die Rolle als seine beste Leistung bezeichnet.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 16. Juli 2021 bei Neon und spielte in den Vereinigten Staaten 4,6 Millionen Dollar ein — bei drei Millionen Herstellungskosten.
+
+Die Kritik urteilte außerordentlich positiv: 97 Prozent bei Rotten Tomatoes mit einem Schnitt von 8,2 von 10, 82 von 100 bei Metacritic. Gelobt wurden vor allem Cages zurückgenommene Darstellung und die emotionale Tiefe des Drehbuchs.
+
+Der Film gewann den Independent Spirit Award für das beste Erstlingsdrehbuch; Cage erhielt eine Nominierung bei den Critics' Choice Awards und mehrere Darstellerpreise von Kritikerverbänden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:152747', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Mann segelt allein über den Indischen Ozean. Sein knapp zwölf Meter langes Boot rammt einen treibenden Frachtcontainer, der ein Loch in den Rumpf schlägt.
+
+Von da an arbeitet er. Er dichtet ab, pumpt, repariert das Funkgerät, bestimmt seine Position. Dann kommt ein Sturm, dann ein zweiter. Als das Boot nicht mehr zu halten ist, steigt er in die Rettungsinsel um — und kämpft dort gegen Durst, Hunger und die Aussicht, dass niemand kommt.
+
+### Entstehungsgeschichte
+
+J. C. Chandor schrieb das Drehbuch und führte Regie. Das Buch umfasst nur 30 Seiten und enthält fast keinen Dialog: einen Text aus dem Off zu Beginn, versuchte Funksprüche und einzelne Ausrufe.
+
+Robert Redford ist der einzige Darsteller, der zu sehen ist. Seine Figur hat keinen Namen. Der Film läuft 106 Minuten.
+
+Gedreht wurde 2012 auf den Bahamas, in Kalifornien und in Mexiko, unter anderem in den Baja Studios. Das Budget lag bei etwa neun Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Verzicht auf Sprache ist die Grundentscheidung. Es gibt keine Rückblenden, keine Erklärung, wer dieser Mann ist und warum er allein unterwegs ist. Alles, was der Zuschauer über ihn erfährt, erfährt er aus dem, was der Mann tut.
+
+Das verlangt einem Darsteller alles ab — und Robert Redford war zum Zeitpunkt der Dreharbeiten in einem Alter, in dem die körperlichen Anforderungen dieser Rolle bemerkenswert sind.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 22. Mai 2013 in Cannes statt, danach lief der Film bei den Festivals in New York und London. Der amerikanische Kinostart war am 25. Oktober 2013, der deutsche am 9. Januar 2014.
+
+Die Kritik urteilte überwiegend begeistert: 94 Prozent bei Rotten Tomatoes.
+
+Alex Eberts Musik gewann den Golden Globe. Bei den Oscars gab es eine Nominierung für den besten Tonschnitt.
+
+Bemerkenswert bleibt die Reduktion: ein Film mit einem einzigen Darsteller, 30 Drehbuchseiten und fast ohne Sprache — und dennoch 106 Minuten, die von Handlung getragen werden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:6312', locale: 'de-de',
+    text: `### Worum es geht
+
+Frankreich, 1764. Im Gévaudan tötet ein Wesen, das niemand gesehen hat, Frauen und Kinder. König Ludwig XV. entsendet den Naturwissenschaftler Grégoire de Fronsac, um die Bestie zu erlegen und zu bestimmen.
+
+Fronsac reist mit Mani, einem Irokesen, und schließt sich mit dem jungen Adligen Thomas d'Apcher zusammen. In einer der Leichen findet er einen Zahn aus Metall — das Tier ist kein Wolf, und es handelt nicht allein.
+
+### Entstehungsgeschichte
+
+Regie führte Christophe Gans, das Drehbuch schrieb er gemeinsam mit Stéphane Cabel. Produzenten waren Richard Grandpierre und Samuel Hadida.
+
+Samuel Le Bihan spielt Grégoire de Fronsac, Mark Dacascos den Mani, Vincent Cassel den Jean-François de Morangias, Monica Bellucci die Sylvia.
+
+Die Bestie schuf Jim Henson's Creature Shop mit mechanischen und digitalen Mitteln.
+
+### Hinter den Kulissen
+
+Der historische Kern ist belegt: Die Bestie des Gévaudan tötete zwischen 1764 und 1767 etwa hundert Menschen in Südfrankreich unter bis heute ungeklärten Umständen.
+
+Der Film macht daraus eine ungewöhnliche Mischung — Fantasy, Horror und Kriminalfilm im Gewand eines Mantel-und-Degen-Abenteuers. Dazu kommen Kampfszenen, für die mit Mark Dacascos ein Darsteller aus dem Kampfsportfilm besetzt wurde.
+
+### Einordnung & Wirkung
+
+Der Film erschien 2001 und war einer der wenigen französischen Filme, die auch in amerikanischen Kinos erfolgreich liefen.
+
+Bei Rotten Tomatoes steht er bei 73 Prozent. Gelobt wurden die brillante Fotografie und die gelungene Verbindung der Gattungen; bemängelt wurden eine unübersichtliche Handlung und Längen.
+
+2002 gewann der Film den César für die besten Kostüme. Émilie Dequenne erhielt beim Cabourg Romantic Film Festival den Preis als beste Nachwuchsdarstellerin.
+
+Bemerkenswert bleibt die Ausgangslage: ein realer, nie geklärter Fall des 18. Jahrhunderts, aus dem ein Film wurde, der vier Gattungen gleichzeitig bedient.` },
+  {
+    bereich: 'titel', schluessel: 'movie:233063', locale: 'de-de',
+    text: `### Worum es geht
+
+Zeki Müller kommt aus dem Gefängnis und will an sein Geld: Die Beute aus einem Banküberfall liegt unter einer Turnhalle, die inzwischen zu einer Schule gehört.
+
+Um heranzukommen, schleicht er sich als Aushilfslehrer ein. Man setzt ihn auf die 10b an — die Klasse, die niemand will. Zeki hat von Pädagogik keine Ahnung und wendet Methoden an, für die er anderswo entlassen würde. Ausgerechnet damit erreicht er die Schüler. Nebenher verliebt er sich in die überkorrekte Referendarin Lisi.
+
+### Entstehungsgeschichte
+
+Bora Dagtekin schrieb das Drehbuch und führte Regie; es war die Fortsetzung seiner Zusammenarbeit mit Elyas M'Barek nach "Türkisch für Anfänger".
+
+Elyas M'Barek spielt Zeki Müller, Karoline Herfurth die Lisi. Daneben sind Katja Riemann als Schulleiterin, Uschi Glas als ausgebrannte Lehrerin sowie Max von der Groeben und Jella Haase als Schüler zu sehen.
+
+Produziert wurde der Film von Rat Pack Filmproduktion und Constantin Film. Gedreht wurde ab dem 28. April 2013 an 41 Tagen in München und Berlin; als Schule diente das Lise-Meitner-Gymnasium in Unterhaching.
+
+### Hinter den Kulissen
+
+Die Anlage ist alt — der ungeeignete Lehrer, der genau deshalb durchdringt. Der Ton dagegen ist derb und verzichtet auf pädagogische Absicht, und genau das erklärt sowohl den Erfolg als auch die Zurückhaltung eines Teils der Kritik.
+
+### Einordnung & Wirkung
+
+2013 sahen den Film etwa 5,6 Millionen Menschen in deutschen Kinos — der meistbesuchte deutsche Film des Jahres. Bis November 2015 waren es 7,4 Millionen, womit er auf Rang fünf aller deutschen Filme seit 1968 stand.
+
+Die Kritik lobte den frech-witzigen Zugriff und die Darsteller, blieb im Urteil aber verhalten.
+
+Ausgezeichnet wurde der Film unter anderem mit dem Bambi, dem Deutschen Comedypreis und Jupiter Awards.
+
+Es folgten zwei Fortsetzungen: "Fack ju Göhte 2" von 2015 und "Fack ju Göhte 3" von 2017.` },
+  {
+    bereich: 'titel', schluessel: 'movie:407448', locale: 'de-de',
+    text: `### Worum es geht
+
+Detroit im Sommer 1967. Während der Unruhen, die die Stadt tagelang erschüttern, kommt es im Algiers Motel zu einem Vorfall: Polizisten und Nationalgardisten durchsuchen das Gebäude, nachdem Schüsse gemeldet wurden.
+
+Was folgt, dauert Stunden. Die Beamten stellen die Gäste — überwiegend junge Schwarze Männer und zwei weiße Frauen — an eine Wand und verhören sie einzeln. Am Ende sind drei Menschen tot. Der spätere Prozess endet mit Freisprüchen, weil die Aussagen der Angeklagten unter Verletzung ihrer Rechte zustande gekommen waren.
+
+### Entstehungsgeschichte
+
+Regie führte Kathryn Bigelow, das Drehbuch schrieb Mark Boal.
+
+Im Ensemble stehen John Boyega als Wachmann, Will Poulter als Polizist, Algee Smith und Jason Mitchell als Mitglieder einer Musikgruppe sowie John Krasinski und Anthony Mackie.
+
+Produziert wurde der Film von Annapurna Pictures mit einem Budget von 34 Millionen Dollar. Gedreht wurde im Sommer 2016 in Boston und Detroit — zum fünfzigsten Jahrestag der Unruhen.
+
+### Hinter den Kulissen
+
+Der Mittelteil des Films bildet den Vorfall im Motel nahezu in Echtzeit ab. Das ist die zentrale Entscheidung: Der Zuschauer wird der Dauer ausgesetzt, nicht nur dem Ergebnis.
+
+Genau daran entzündete sich die Auseinandersetzung. Mehrere Kritiker stellten in Frage, ob eine weiße Regisseurin diese Geschichte so erzählen sollte. A. O. Scott hielt fest, ein Film vor dem Hintergrund Schwarzen Widerstands werde hier zur Erzählung Schwarzer Hilflosigkeit. Richard Brody nannte ihn ein moralisches Versagen.
+
+### Einordnung & Wirkung
+
+Bei 34 Millionen Dollar Herstellungskosten spielte der Film weltweit nur 24,1 Millionen ein.
+
+Die Kritik urteilte überwiegend gut: 82 Prozent bei Rotten Tomatoes, 77 von 100 bei Metacritic. Gelobt wurden Bigelows Regie und die Darsteller, insbesondere Will Poulter und Algee Smith.
+
+Der Film bleibt damit ein zwiespältiger Fall: handwerklich hoch bewertet, wirtschaftlich gescheitert und in der Frage seiner Perspektive bis heute umstritten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:922', locale: 'de-de',
+    text: `### Worum es geht
+
+1876 reist William Blake, ein Buchhalter aus Cleveland, in die Stadt Machine im äußersten Westen. Dort soll er eine Stelle antreten — die es nicht mehr gibt.
+
+Nach einer Schießerei flieht er verwundet in die Wildnis. Dort findet ihn ein Indianer, der sich Nobody nennt und ihn für die Wiedergeburt des Dichters William Blake hält. Gemeinsam ziehen sie weiter nach Westen, verfolgt von Kopfgeldjägern — auf einer Reise, die weniger Flucht ist als Übergang.
+
+### Entstehungsgeschichte
+
+Jim Jarmusch schrieb das Drehbuch und führte Regie. Er hat betont, der Western sei für ihn nur ein Ausgangspunkt gewesen.
+
+Johnny Depp spielt William Blake, Gary Farmer den Nobody. Im Ensemble stehen zudem Robert Mitchum und John Hurt.
+
+Der Film ist in Schwarzweiß gedreht.
+
+### Hinter den Kulissen
+
+Die Musik stammt von Neil Young. Er improvisierte sie, indem er den fertig geschnittenen Film ansah und dazu auf Gitarre, Klavier und Orgel spielte — ein Verfahren, das dem Film seinen unruhigen, brüchigen Klang gibt.
+
+Erzählerisch bricht Jarmusch den Western an jeder Stelle: Der Held ist untauglich, das Ziel bleibt unklar, und der Fortschritt nach Westen ist keine Eroberung, sondern ein Weg ins Sterben.
+
+Auffällig ist zudem die Rolle des Nobody. Er ist nicht Begleiter des weißen Helden, sondern die Figur, die versteht, worum es geht — während Blake bis zuletzt nichts begreift.
+
+### Einordnung & Wirkung
+
+Der Film lief 1995 bei den Filmfestspielen von Cannes.
+
+Die Kritik urteilte gespalten. Das Lexikon des internationalen Films würdigte die dichte Atmosphäre; Roger Ebert nannte ihn langsam und fremdartig.
+
+1996 erhielt der Film den Europäischen Filmpreis als bester nichteuropäischer Film.
+
+Er gilt heute als einer der Filme, mit denen einer amerikanischen Gründungserzählung ihre Selbstverständlichkeit genommen wurde — ein Western, in dem der Weg nach Westen nirgendwohin führt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:635', locale: 'de-de',
+    text: `### Worum es geht
+
+New York, 1955. Der Privatdetektiv Harry Angel bekommt einen Auftrag von einem Mann namens Louis Cyphre: Er soll den verschollenen Sänger Johnny Favorite finden, der Cyphre etwas schuldet.
+
+Die Spur führt Angel von New York nach New Orleans. Überall, wo er nachfragt, sterben kurz darauf Menschen. Er lernt die junge Epiphany kennen, deren Verbindung zu Favorite sich nach und nach zeigt — und je näher er kommt, desto weniger will er wissen.
+
+### Entstehungsgeschichte
+
+Alan Parker führte Regie und schrieb das Drehbuch nach William Hjortsbergs Roman "Falling Angel".
+
+Mickey Rourke spielt Harry Angel, Robert De Niro den Auftraggeber Louis Cyphre, Lisa Bonet die Epiphany.
+
+Das Budget lag bei etwa 17 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film verbindet zwei Gattungen, die einander eigentlich ausschließen: den Detektivfilm, der auf Aufklärung zielt, und den Okkulthorror, in dem die Aufklärung selbst das Verhängnis ist.
+
+Umstritten war die Rolle der Lisa Bonet und die Art, wie der Film sie einsetzt. In Deutschland erhielt er zunächst eine Freigabe ab 18 Jahren; 2001 wurde sie auf 16 herabgesetzt.
+
+Die Verlagerung der Handlung von New York nach New Orleans ist dabei mehr als ein Ortswechsel. Der Film verlässt damit die Welt des klassischen Detektivfilms und betritt eine, in der die Regeln andere sind — was sich in Licht, Musik und Ausstattung unmittelbar niederschlägt.
+
+Die Vorlage von William Hjortsberg trägt den Titel "Falling Angel" und macht den Ausgang bereits im Namen deutlich, ohne dass der Leser es bemerkt. Der Film übernimmt dieses Verfahren.
+
+### Einordnung & Wirkung
+
+In den Vereinigten Staaten spielte der Film 17,2 Millionen Dollar ein, in Großbritannien 1,1 Millionen Pfund.
+
+Die Fachpresse würdigte die brillante Inszenierung; gelobt wurden vor allem Mickey Rourkes Darstellung und die Dichte der Atmosphäre.
+
+Der Film gehört zu jenen Arbeiten, deren Ruf sich erst über die Jahre gefestigt hat — und deren Auflösung man besser nicht vorher kennt.` },
+  // ---- Block 59 ----
+  {
+    bereich: 'titel', schluessel: 'movie:330764', locale: 'de-de',
+    text: `### Worum es geht
+
+Gott lebt in Brüssel. Er ist ein Tyrann und regiert die Menschheit über ein Computerprogramm.
+
+Seine Tochter Éa hält das nicht mehr aus. Sie lehnt sich auf und verschickt jedem Menschen sein Sterbedatum. Damit befreit sie die Menschheit — und zwingt Gott aus seiner Wohnung hinaus in die Welt.
+
+### Entstehungsgeschichte
+
+Regie führte Jaco Van Dormael, das Drehbuch schrieb er gemeinsam mit Thomas Gunzig.
+
+Benoît Poelvoorde spielt Gott, Catherine Deneuve eine Nebenrolle; daneben sind Yolande Moreau und François Damiens zu sehen.
+
+Es handelt sich um eine belgisch-französisch-luxemburgische Gemeinschaftsproduktion von 2015; der Film läuft 113 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Der Grundeinfall — das bekannte Sterbedatum — verändert alles, ohne dass der Film Katastrophen zeigen müsste. Wer weiß, dass er noch sechzig Jahre hat, verhält sich anders; wer weiß, dass er noch zwei Tage hat, ebenfalls.
+
+Der Tonfall ist dabei ausdrücklich absurd. Kritiker haben den Film mit dem Surrealismus von Monty Python verglichen und ihn als amüsant und skurril mit irrwitzigen Einfällen beschrieben.
+
+Bemerkenswert ist die Erzählperspektive: Die Geschichte wird von einem Kind geführt, und Gott ist darin nicht die höchste Instanz, sondern ein tyrannischer Hausvater, der die Wohnung nicht verlassen kann.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 17. Mai 2015 bei den Filmfestspielen in Cannes statt; in Deutschland lief der Film am 3. Dezember 2015 an.
+
+Belgien reichte ihn als Beitrag für den Oscar als bester fremdsprachiger Film ein; eine Nominierung kam nicht zustande.
+
+Er gewann den Preis als beste Komödie beim Fantastic Fest in Austin und war für den Europäischen Filmpreis in der Sparte beste europäische Komödie nominiert; hinzu kam eine Auszeichnung für das Szenenbild.` },
+  {
+    bereich: 'titel', schluessel: 'movie:14462', locale: 'de-de',
+    text: `### Worum es geht
+
+Während des Golfkriegs 1991 gerät eine amerikanische Einheit in Kuwait in einen Hinterhalt. Sergeant Raymond Shaw rettet nach der offiziellen Darstellung seine Kameraden und wird zum Helden erklärt.
+
+Jahre später sitzt Shaw für seine ehrgeizige Mutter, Senatorin Eleanor Shaw, im Kongress und soll Vizepräsident werden. Sein früherer Vorgesetzter Bennett Marco wird von Albträumen verfolgt, in denen die Nacht in Kuwait anders verlaufen ist. Er beginnt nachzuforschen — und stößt auf ein Unternehmen namens Manchurian Global.
+
+### Entstehungsgeschichte
+
+Regie führte Jonathan Demme. Das Drehbuch schrieben Daniel Pyne und Dean Georgaris nach Richard Condons Roman von 1959 und der Verfilmung von 1962.
+
+Denzel Washington spielt Bennett Marco, Meryl Streep die Senatorin Eleanor Shaw, Liev Schreiber den Raymond Shaw.
+
+Gedreht wurde von September bis Dezember 2003; die Produktionskosten lagen bei etwa 80 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Neufassung verschiebt den Gegner. An die Stelle des Koreakriegs tritt der Golfkrieg, an die Stelle kommunistischer Mächte ein Konzern. Demme hat das so begründet: Ausgangspunkt sei die Frage gewesen, wer heute eine Weltbedrohung darstelle.
+
+Auch das Auslösesignal für die Konditionierung wurde geändert — aus einer Spielkarte wurde eine Wortfolge.
+
+Meryl Streeps Rolle ist der eigentliche Angelpunkt: eine Mutter, die ihren Sohn als Werkzeug behandelt und darin vollkommen aufgeht.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film etwa 96 Millionen Dollar ein, davon 66 Millionen in den Vereinigten Staaten und 2,5 Millionen in Deutschland.
+
+Die Kritik hob die politischen Allegorien hervor und die Verbindung von Kapitalismuskritik mit der Angststimmung nach dem 11. September 2001. Einzelne Stimmen hielten den Film für subversiver als Michael Moores "Fahrenheit 9/11".
+
+Damit gehört er zu den wenigen Neuverfilmungen, die ihre Vorlage nicht nachstellen, sondern deren Verfahren auf eine neue Lage anwenden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:401246', locale: 'de-de',
+    text: `### Worum es geht
+
+Christian leitet ein Museum für zeitgenössische Kunst in Stockholm. Er ist gebildet, freundlich und von sich überzeugt. Dann wird Christian auf offener Straße bestohlen. Über eine Ortung findet er das Haus, in dem sein Telefon liegt, und wirft anonyme Drohbriefe in sämtliche Briefkästen. Zugleich läuft eine Werbekampagne des Museums aus dem Ruder. Beides fällt auf ihn zurück.
+
+### Entstehungsgeschichte
+
+Der schwedische Regisseur Ruben Östlund schrieb das Drehbuch und führte Regie.
+
+Claes Bang spielt Christian, Elisabeth Moss die Journalistin Anne. Daneben sind Dominic West, Terry Notary und Christopher Læssø zu sehen.
+
+Es handelt sich um eine europäische Gemeinschaftsproduktion aus Schweden, Deutschland, Frankreich und Dänemark; der Film läuft 142 Minuten.
+
+### Hinter den Kulissen
+
+Die bekannteste Szene ist ein Wohltätigkeitsessen, bei dem Terry Notary als Menschenaffe auftritt — eine Darbietung, die der Film so lange laufen lässt, bis sie unerträglich wird.
+
+Genau darum geht es im ganzen Film: um den Abstand zwischen dem, was Menschen für richtig halten, und dem, was sie tun, wenn es sie etwas kostet.
+
+Parallel dazu läuft eine Werbekampagne des Museums, in der ein Kind bei einer Explosion stirbt. Der öffentliche Aufruhr darüber kostet Christian am Ende seine Stellung.
+
+### Einordnung & Wirkung
+
+Der Film gewann 2017 die Goldene Palme in Cannes und fünf Europäische Filmpreise.
+
+Bei den Oscars und den Golden Globes war er als bester fremdsprachiger Film nominiert.
+
+Die Kritik urteilte gemischt: gelobt als brillante Satire, kritisiert als zynisch und distanziert. Die Affenszene wurde dabei von einem Teil der Rezensenten ausdrücklich als schlechte Idee bezeichnet — was für einen Film, dessen Gegenstand die Zumutung ist, kein ganz unpassendes Urteil ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:333352', locale: 'de-de',
+    text: `### Worum es geht
+
+Oberst Katherine Powell leitet von Großbritannien aus einen Einsatz in Nairobi. Ziel ist die Festnahme mehrerer Mitglieder von al-Shabaab. Im Verlauf des Einsatzes ändert sich der Auftrag: aus Festnahme wird Angriff.
+
+Dann betritt ein junges Mädchen das Zielgebiet. Von diesem Moment an wird die Entscheidung nach oben gereicht — vom Drohnenpiloten über die Militärführung bis in die Politik. Jeder will, dass ein anderer sie trifft.
+
+### Entstehungsgeschichte
+
+Regie führte der südafrikanische Regisseur Gavin Hood, das Drehbuch schrieb Guy Hibbert.
+
+Helen Mirren spielt Oberst Powell, Aaron Paul den Drohnenpiloten Steve Watts, Alan Rickman den Generalleutnant Benson. In weiteren Rollen ist Barkhad Abdi zu sehen.
+
+Gedreht wurde ab September 2014 in Südafrika. Beteiligt waren Entertainment One und Raindog Films, Colin Firth trat als Produzent auf. Die Drohnenaufnahmen entstanden mit digitalen Mitteln, weil die tatsächlichen Aufnahmen rechtlich nicht möglich waren.
+
+### Hinter den Kulissen
+
+Die Anlage ist die eines Kammerspiels auf drei Kontinenten: Alle Beteiligten sitzen in Räumen, sehen dieselben Bilder und sprechen miteinander über Leitungen. Niemand ist vor Ort.
+
+Genau das ist der Gegenstand. Der Filmdienst hielt fest, der Film entwickle sich von einem spannenden Politthriller zu einem Moraldrama.
+
+### Einordnung & Wirkung
+
+Die Kritik lobte den ausgezeichnet gespielten Film und seinen abwägenden Umgang mit einer Frage, die keine gute Antwort hat: ob ein Menschenleben gegen viele aufgerechnet werden darf, und wer diese Rechnung verantwortet.
+
+Bemerkenswert ist, dass der Film keine Seite entlastet. Weder die Militärs noch die Politiker noch die Techniker kommen ungeschoren davon — und der Film verweigert am Schluss die Erleichterung, die eine eindeutige Bewertung bringen würde.
+
+Er gehört damit zu den wenigen Spielfilmen, die den Drohnenkrieg nicht als Schauwert behandeln, sondern als Verfahrensfrage.` },
+  {
+    bereich: 'titel', schluessel: 'movie:416144', locale: 'de-de',
+    text: `### Worum es geht
+
+Mumbai, November 2008. Bewaffnete greifen mehrere Ziele in der Stadt an; eines davon ist das Luxushotel Taj Mahal Palace. Die Angreifer dringen ein, nehmen Geiseln und legen Feuer.
+
+Der Film folgt mehreren Menschen, die sich in dem Gebäude befinden: dem Sikh-Kellner Arjun, dem amerikanischen Gast David, weiteren Gästen und dem Küchenchef. Was sie verbindet, ist nichts außer dem Ort — und die Frage, wie weit jeder von ihnen für einen anderen geht.
+
+### Entstehungsgeschichte
+
+Anthony Maras gab mit diesem Film sein Spielfilmdebüt; die Zeitschrift Variety hatte ihn zuvor als einen der Regisseure ausgezeichnet, auf die man achten solle. Das Drehbuch schrieb er gemeinsam mit John Collee. Grundlage war der Dokumentarfilm "Surviving Mumbai" von 2009.
+
+Dev Patel spielt den Hotelangestellten Arjun, Armie Hammer den Amerikaner David. Daneben sind Jason Isaacs, Nazanin Boniadi und Anupam Kher als Küchenchef zu sehen.
+
+### Hinter den Kulissen
+
+Gedreht wurde von August bis September 2016 in Adelaide und von Oktober 2016 bis Januar 2017 in Mumbai.
+
+Der historische Hintergrund ist belegt: Bei den Anschlägen vom November 2008 war das Taj Mahal Palace eines der Ziele der Gruppe, die sich Deccan Mujahideen nannte. Mehrere Dutzend Geiseln wurden festgehalten, viele Menschen starben im Feuer.
+
+Der Film erzählt fast ausschließlich aus der Sicht der Eingeschlossenen. Was außerhalb geschieht — die Verzögerung des Einsatzes, die politische Lage —, erfährt der Zuschauer nur so weit, wie es die Figuren erfahren.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 7. September 2018 beim Filmfestival in Toronto statt, der amerikanische Kinostart folgte am 22. März 2019.
+
+Bei Rotten Tomatoes steht der Film bei 76 Prozent. Gelobt wurden die Darsteller und die glaubwürdige Schilderung von Mut und Ausdauer — insbesondere die Entscheidung des Hotelpersonals, im Gebäude zu bleiben.
+
+Der Film gehört zu den wenigen Verfilmungen dieses Vorgangs und behandelt ihn ohne Heldenerzählung: Die Menschen, die hier über sich hinauswachsen, sind Angestellte, deren Beruf damit nichts zu tun hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:46146', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Gruppe Studenten verfolgt einen Mann namens Hans, den sie für einen Wilderer halten. Sie hängen sich an ihn und stellen fest, dass er etwas anderes tut.
+
+Hans jagt Trolle. Er ist es leid, die Sache geheim zu halten, und lässt die drei mitkommen — während die Kamera läuft und er sich an verschiedene Arten dieser Wesen in den norwegischen Wäldern heranarbeitet.
+
+### Entstehungsgeschichte
+
+André Øvredal schrieb das Drehbuch und führte Regie.
+
+Otto Jespersen spielt den Trolljäger Hans; er ist in Norwegen als Komiker bekannt. Die übrigen Darsteller waren weitgehend unbekannt.
+
+Das Budget betrug etwa 19,9 Millionen norwegische Kronen, umgerechnet rund 2,5 Millionen Euro.
+
+### Hinter den Kulissen
+
+Der Film ist als vorgetäuschte Dokumentation angelegt. Er gibt sich als grob geschnittenes Material aus, das einer Filmgesellschaft anonym zugeschickt wurde.
+
+Vor der Premiere hielt die Produktion Titel und Einzelheiten zurück und setzte auf Mundpropaganda im Netz — ein Verfahren, das zu dieser Erzählform passt: Wer behauptet, gefundenes Material zu zeigen, darf vorher nicht zu viel erklären.
+
+Die Besetzung folgt derselben Logik. Mit Otto Jespersen steht ein bekannter Komiker in der Hauptrolle, umgeben von weitgehend unbekannten Darstellern — was den Eindruck verstärkt, hier seien tatsächlich Leute mit einer Kamera unterwegs gewesen.
+
+Der eigentliche Einfall liegt aber im Ton. Der Film behandelt norwegische Sagengestalten nicht als Zauber, sondern als Sachverhalt — mit einem Mann, der seine Arbeit macht und darüber Aufklärung betreiben will.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte gemischt; die Bewertungen reichten von drei bis sechs von sechs Punkten. Otto Jespersens Darstellung wurde dabei durchgehend gelobt.
+
+Der Film gehört zu den bekanntesten norwegischen Produktionen seiner Zeit und hat die Aufmerksamkeit auf ein Land gelenkt, dessen Genrekino international kaum wahrgenommen wurde.
+
+Für André Øvredal war er der Ausgangspunkt einer Laufbahn, die ihn anschließend zu englischsprachigen Produktionen führte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1551', locale: 'de-de',
+    text: `### Worum es geht
+
+Fünf Medizinstudenten wollen wissen, was nach dem Tod kommt — und beschließen, es auszuprobieren. Sie halten einander abwechselnd im klinischen Tod, jedes Mal etwas länger, und holen sich anschließend zurück.
+
+Was sie dort sehen, bringen sie mit. Jeder von ihnen wird von etwas eingeholt, das er verdrängt hat: eine Grausamkeit aus der Kindheit, ein Verrat, ein Verstoß gegen die eigenen Regeln. Die Erscheinungen bleiben, auch wenn die Versuche aufhören.
+
+### Entstehungsgeschichte
+
+Regie führte Joel Schumacher, das Drehbuch schrieb Peter Filardi. Produziert wurde der Film von Michael Douglas und Rick Bieber; das Budget betrug 17 Millionen Dollar.
+
+Kiefer Sutherland spielt Nelson Wright, Julia Roberts die Rachel Mannus, Kevin Bacon den Dave Labraccio, William Baldwin den Joe Hurley und Oliver Platt den Randy Steckle.
+
+Sutherland und Roberts kamen während der Dreharbeiten zusammen; die für 1991 geplante Hochzeit fand nicht statt.
+
+### Hinter den Kulissen
+
+Der Film bewegt sich zwischen drei Bereichen, die selten zusammenkommen: Metaphysik, Medizin und Psychologie. Er behandelt das Jenseits nicht als Ort, sondern als Rückkehr des Verdrängten — was den Schrecken vom Übersinnlichen ins Persönliche verlagert.
+
+Ein Rezensent hat das als den feinen Schrecken des Films bezeichnet — die Balance zwischen Metaphysik, Medizin und Psychologie.
+
+### Einordnung & Wirkung
+
+Bei 17 Millionen Dollar Herstellungskosten spielte der Film weltweit etwa 61,5 Millionen ein — ein deutlicher Erfolg.
+
+1991 erhielt er eine Oscar-Nominierung für den besten Tonschnitt. Die deutsche Filmbewertungsstelle vergab das Prädikat besonders wertvoll.
+
+2017 entstand unter der Regie von Niels Arden Oplev eine Neuverfilmung mit Nina Dobrev, Diego Luna und Elliot Page.
+
+Bemerkenswert bleibt, dass die Prämisse fast dreißig Jahre später noch für eine Neuverfilmung taugte — ein Hinweis darauf, wie tragfähig die Grundfrage ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:501907', locale: 'de-de',
+    text: `### Worum es geht
+
+Fred Rogers war Moderator und Schöpfer der amerikanischen Kindersendung "Mister Rogers' Neighborhood".
+
+Der Dokumentarfilm zeichnet sein Leben und seine Haltung nach. Die Kritik hat ihn als gutherzigen, altmodischen und geradezu heiligmäßigen Mann beschrieben, der Kinder tatsächlich geliebt habe — und genau darum geht es dem Film: um eine Ernsthaftigkeit im Umgang mit Kindern, die im Fernsehen ohne Beispiel war.
+
+### Entstehungsgeschichte
+
+Regie führte Morgan Neville. Produziert wurde der Film von Neville gemeinsam mit Caryn Capotosto und Nicholas Ma — dem Sohn des Cellisten Yo-Yo Ma, der selbst zweimal in Rogers' Sendung aufgetreten war.
+
+Der Arbeitstitel lautete "The Radical Mister Rogers"; er wurde wegen der politischen Anklänge geändert.
+
+### Hinter den Kulissen
+
+Die Herausforderung des Films besteht darin, dass sein Gegenstand kein Drama hergibt. Rogers war weder gescheitert noch skandalumwittert; er hat über dreißig Jahre dasselbe getan. Der Film macht daraus seine Stärke, indem er die Beharrlichkeit selbst zum Thema nimmt.
+
+Bezeichnend ist auch der Arbeitstitel: "The Radical Mister Rogers". Er wurde geändert, weil das Wort inzwischen politisch besetzt ist — obwohl es die Sache traf.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 19. Januar 2018 beim Sundance Film Festival statt, der breite amerikanische Kinostart folgte am 8. Juni 2018. PBS strahlte den Film am 9. Februar 2019 aus.
+
+Er spielte 22,8 Millionen Dollar ein und wurde damit der erfolgreichste biografische Dokumentarfilm überhaupt sowie der zwölfterfolgreichste Dokumentarfilm insgesamt.
+
+Die Kritik urteilte einhellig: 97 Prozent bei Rotten Tomatoes aus 255 Besprechungen, 85 von 100 bei Metacritic.
+
+Der Film gewann den Independent Spirit Award als bester Dokumentarfilm sowie Preise der Critics' Choice Awards und der Producers Guild. Das Time-Magazin führte ihn unter den zehn besten Filmen des Jahres 2018.` },
+  // ---- Block 60 ----
+  {
+    bereich: 'titel', schluessel: 'movie:5516', locale: 'de-de',
+    text: `### Worum es geht
+
+Professor Goldthwait Higginson Dorr mietet sich bei der frommen Witwe Munson in New Orleans ein. Er gibt an, mit einem Kammerorchester im Keller alte Musik zu proben.
+
+Tatsächlich gräbt er dort mit vier Komplizen einen Tunnel zum Tresorraum eines benachbarten Spielkasinos. Der Plan geht auf — bis Mrs. Munson dahinterkommt und von den Männern verlangt, das Geld zurückzugeben und sonntags mit in die Kirche zu kommen. Die Bande beschließt, sie zu töten. Es kommt anders.
+
+### Entstehungsgeschichte
+
+Ethan und Joel Coen führten Regie und schrieben das Drehbuch gemeinsam mit William Rose, nach dem britischen Original von 1955.
+
+Tom Hanks spielt Professor Dorr, Irma P. Hall die Witwe Munson. Daneben sind Marlon Wayans und J. K. Simmons zu sehen.
+
+Produziert wurde der Film von den Coen-Brüdern gemeinsam mit Tom Jacobson und Barry Josephson. Die Kamera führte Roger Deakins, die Musik komponierte Carter Burwell.
+
+### Hinter den Kulissen
+
+Die Verlegung ist der wesentliche Eingriff. Das britische Original von 1955 spielt in London; die Neufassung siedelt die Handlung im amerikanischen Süden an, in New Orleans.
+
+Tom Hanks spielt darin eine geschwätzige, dauernd zitierende Figur, die sich für gebildeter hält, als sie ist — eine Besetzung gegen seine übliche Wirkung.
+
+Bemerkenswert ist die Reihenfolge der Todesfälle. Die Verschwörer kommen einer nach dem anderen durch Zufälle um — ein Verfahren, das der Film mit der Ruhe eines Naturgesetzes abhandelt.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte gespalten. Das Lexikon des internationalen Films lobte die inszenatorisch souveräne Leichtigkeit; Prisma bemängelte die Überzeichnung einzelner Figuren.
+
+Irma P. Hall gewann 2004 in Cannes den Preis der Jury sowie einen Saturn Award. Die deutsche Filmbewertungsstelle vergab das Prädikat besonders wertvoll.
+
+Innerhalb des Werks der Coen-Brüder gilt der Film als eine ihrer umstrittensten Arbeiten — auch, weil er als Neuverfilmung eines Klassikers antrat und sich damit einem unmittelbaren Vergleich stellte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9035', locale: 'de-de',
+    text: `### Worum es geht
+
+In der Kleinstadt Wheelsy schlägt ein Meteorit ein und bringt einen außerirdischen Organismus mit. Als Erster wird der wohlhabende Grant Grant befallen.
+
+Er verändert sich, wird zu einem Wesen mit Tentakeln und beginnt, die Bewohner zu befallen. Wer getroffen wird, wird zu einer Art Zombie, der Säure spucken kann. Sheriff Bill Pardy und die Jugendliche Kylie stellen sich dagegen.
+
+### Entstehungsgeschichte
+
+Es war das Regie- und Drehbuchdebüt von James Gunn.
+
+Nathan Fillion spielt Sheriff Bill Pardy, Elizabeth Banks die Starla Grant, Michael Rooker den Grant Grant.
+
+Produziert wurde der Film von Paul Brooks und Eric Newman; die Musik stammt von Tyler Bates.
+
+Die Namensgebung ist Teil des Scherzes: Der Befallene heißt Grant Grant, der Ort trägt den Namen Wheelsy, und der Sheriff bleibt bis zum Schluss der einzige, der die Lage nüchtern betrachtet.
+
+### Hinter den Kulissen
+
+Der Film verbindet zwei Haltungen, die einander widersprechen: Er nimmt die Vorbilder des Körperhorrors der siebziger und achtziger Jahre ernst und macht sich zugleich über sie lustig.
+
+Das Lexikon des internationalen Films hat das als fröhliche Huldigung beschrieben, in der Genre-Motive in heiligem Ernst und kokettem Augenzwinkern zugleich behandelt werden.
+
+Bemerkenswert bleibt, dass ein Regiedebüt diesen Ton so sicher trifft — die Gratwanderung zwischen Ekel und Komik gelingt über die volle Laufzeit.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte geteilt. Prisma warf dem Film vor, Widerlichkeiten mit Witz zu verwechseln — ein Vorwurf, den die Machart geradezu einlädt.
+
+2007 gewann der Film zwei Saturn Awards, für das beste Make-up und im Rahmen des Filmmaker's Showcase.
+
+Über die Jahre hat er eine feste Anhängerschaft gewonnen. Nach dem Abspann deutet der Film an, dass der Organismus über eine Katze weiterleben könnte — eine Fortsetzung gab es nie.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11153', locale: 'de-de',
+    text: `### Worum es geht
+
+Clark W. Griswold will mit Frau und Kindern von Chicago nach Kalifornien fahren, zum Vergnügungspark Walley World. Die Reise selbst soll dabei das eigentliche Erlebnis sein.
+
+Was folgt, ist eine Kette von Missgeschicken. Der Leihwagen ist der falsche, Radkappen gehen verloren, eine Tante stirbt unterwegs. Als die Familie nach Tagen ankommt, ist der Park geschlossen. Clark verschafft sich mit einer Spielzeugpistole Zutritt.
+
+### Entstehungsgeschichte
+
+Regie führte Harold Ramis. Das Drehbuch schrieb John Hughes nach seiner eigenen Kurzgeschichte "Vacation 58".
+
+Ursprünglich war der Film mit einer Freigabe ab 17 Jahren angelegt; das Buch wurde umgeschrieben, um den Schwerpunkt von den Jugendlichen auf die Eltern zu verlagern.
+
+Chevy Chase spielt Clark W. Griswold, Beverly D'Angelo seine Frau Ellen, Anthony Michael Hall und Dana Barron die Kinder Russell und Audrey.
+
+### Hinter den Kulissen
+
+Die Verschiebung im Drehbuch ist der Grund für den Erfolg. Aus einer Jugendkomödie wurde ein Film über einen Vater, der eine Vorstellung von Familienglück durchsetzen will, gegen jeden Widerstand und gegen alle Anzeichen.
+
+Das Budget betrug etwa 15 Millionen Dollar.
+
+Die Reihe der Missgeschicke ist dabei streng aufgebaut: Jede Station verschlechtert die Lage, und keine davon wird durch die nächste ausgeglichen.
+
+### Einordnung & Wirkung
+
+In amerikanischen Kinos spielte der Film etwa 61 Millionen Dollar ein — bei 15 Millionen Herstellungskosten ein großer Erfolg.
+
+Die Kritik würdigte die schnelle, witzige Satire und besonders Chevy Chases Darstellung; der Film wurde als überraschend gelungene Farce beschrieben.
+
+Zwischen 1985 und 2015 entstanden fünf Fortsetzungen; Chase und D'Angelo spielten ihre Rollen in den ersten drei erneut.
+
+Damit gehört der Film zu den wenigen Komödien der achtziger Jahre, deren Figuren über drei Jahrzehnte hinweg tragfähig blieben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:12201', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Bostoner Detective Thomas Craven erfährt, dass seine Tochter ermordet wurde.
+
+Er ermittelt selbst und findet heraus, dass sie bei einem Unternehmen für Atomforschung Korruption aufgedeckt hatte — und dabei auf radioaktive Sprengsätze gestoßen war. Je weiter er kommt, desto klarer wird, dass sie das Ziel war — und dass er selbst inzwischen verstrahlt ist.
+
+### Entstehungsgeschichte
+
+Regie führte Martin Campbell. Er hatte bereits 1985 bei der BBC-Reihe "Am Rande der Finsternis" Regie geführt und verfilmte den Stoff 25 Jahre später neu. Das Drehbuch schrieben William Monahan und Andrew Bovell.
+
+Mel Gibson spielt Thomas Craven, Ray Winstone den undurchsichtigen Jedburgh, Danny Huston den Jack Bennett.
+
+Es handelt sich um eine britisch-amerikanische Gemeinschaftsproduktion von 2010.
+
+Mit William Monahan war ein Autor beteiligt, der zuvor für "Departed" den Oscar gewonnen hatte — was das Gewicht erklärt, das der Stoff bekam.
+
+### Hinter den Kulissen
+
+Dass derselbe Regisseur seinen eigenen Stoff nach einem Vierteljahrhundert erneut verfilmt, ist ungewöhnlich. Aus einer mehrteiligen Fernsehreihe wurde dabei ein Kinofilm von normaler Länge — was zwangsläufig Kürzungen bedeutet.
+
+Die Ausgangslage bleibt dieselbe: Ein Vater, der nichts mehr zu verlieren hat, weil er selbst bereits vergiftet ist. Das nimmt dem Thriller die übliche Frage, ob die Hauptfigur überlebt, und ersetzt sie durch eine andere: wie weit sie in der verbleibenden Zeit kommt.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte gemischt: 55 von 100 bei Metacritic, 55 Prozent bei Rotten Tomatoes.
+
+Gelobt wurde durchgehend Mel Gibson. Moviemaze formulierte, die Rolle des Thomas Craven sei ihm wie auf den Leib geschrieben.
+
+Bemerkenswert bleibt die Verschärfung gegenüber dem üblichen Rachethriller: Der Ermittler wird während seiner eigenen Nachforschungen verstrahlt und arbeitet damit gegen eine Uhr, die niemand anhalten kann.` },
+  {
+    bereich: 'titel', schluessel: 'movie:300673', locale: 'de-de',
+    text: `### Worum es geht
+
+Am 18. Februar 1952 zerbricht der Öltanker SS Pendleton vor Cape Cod in einem Nordoststurm. Die hintere Hälfte treibt mit der Besatzung an Bord.
+
+Die Küstenwache schickt Bernie Webber mit einem kleinen Rettungsboot hinaus. Es ist für zwölf Personen zugelassen. Webber bringt 32 Männer zurück. Der Einsatz gilt als die größte Rettung mit einem kleinen Boot in der Geschichte der amerikanischen Küstenwache.
+
+### Entstehungsgeschichte
+
+Regie führte Craig Gillespie. Das Drehbuch schrieben Eric Johnson, Scott Silver und Paul Tamasy nach dem Sachbuch von Michael J. Tougias und Casey Sherman.
+
+Chris Pine spielt Bernie Webber, Casey Affleck den Maschinisten Ray Sybert. Im Ensemble stehen zudem Ben Foster, Holliday Grainger und Eric Bana.
+
+Gedreht wurde ab September 2014 in Massachusetts; die Musik stammt von Carter Burwell.
+
+### Hinter den Kulissen
+
+Der Film erzählt zwei Handlungen gleichzeitig: die Fahrt des Rettungsboots und die Lage an Bord des zerbrochenen Tankers, wo der Maschinist Sybert die Männer zusammenhalten muss.
+
+Technisch war das aufwendig. Fast 1.000 Effektaufnahmen mussten in der Nachbearbeitung erstellt werden — Sturm, See und ein Schiff, das es nicht mehr gibt.
+
+Das Budget lag zwischen 70 und 80 Millionen Dollar.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film nur 52,1 Millionen Dollar ein; für Disney ergab sich daraus ein Verlust von etwa 75 Millionen.
+
+Die Kritik urteilte gemischt: 63 Prozent bei Rotten Tomatoes, 58 von 100 bei Metacritic. Das Publikum war zufriedener und vergab bei CinemaScore ein A minus.
+
+Der Fall steht für eine wiederkehrende Schwierigkeit: Historische Rettungsgeschichten ohne Gegner sind schwer zu vermarkten — es gibt niemanden zu besiegen, nur etwas zu überstehen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2251', locale: 'de-de',
+    text: `### Worum es geht
+
+Connie und Edward Sumner leben mit ihrem Sohn in einem Vorort von New York. Die Ehe ist in Ordnung, das Leben geordnet.
+
+Durch einen Zufall lernt Connie in Manhattan einen jungen Franzosen kennen. Daraus entsteht eine Affäre. Als Edward Verdacht schöpft und den Mann aufsucht, kommt es zu einer Tat, die alles verändert.
+
+### Entstehungsgeschichte
+
+Regie führte Adrian Lyne. Das Drehbuch schrieben Alvin Sargent und William Broyles Jr. nach Claude Chabrols französischem Film "Die untreue Frau" von 1969.
+
+Richard Gere spielt Edward Sumner, Diane Lane die Connie, Olivier Martinez den Franzosen Paul; Erik Per Sullivan spielt den Sohn.
+
+Gedreht wurde von März bis Juni 2001 in New York; das Budget betrug 50 Millionen Dollar.
+
+Die Vorlage von Claude Chabrol erzählt dieselbe Geschichte aus der Sicht des betrogenen Mannes. Die Neufassung verschiebt den Schwerpunkt auf die Frau — und lässt die längste Zeit offen, ob der Ehemann überhaupt etwas ahnt.
+
+### Hinter den Kulissen
+
+Lyne hat die Geschichte bewusst so angelegt, dass der Fehltritt nicht aus einer schlechten Ehe folgt, sondern aus der vollkommenen Willkür der Umstände. Genau das macht den Film unbequemer als die üblichen Vertreter seiner Gattung: Es gibt nichts zu erklären.
+
+Für die Atmosphäre ließ Lyne Rauch in die Kulissen pumpen, was den Darstellern gesundheitlich zusetzte. Mehrere der intimen Szenen erforderten zahlreiche Wiederholungen und verlangten den Beteiligten körperlich wie seelisch einiges ab.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 119,1 Millionen Dollar ein und war damit wirtschaftlich erfolgreich, bei gemischten Kritiken.
+
+Diane Lane wurde durchgehend gelobt und als beste Hauptdarstellerin für den Oscar nominiert; gewonnen hat in jenem Jahr Nicole Kidman.
+
+Bemerkenswert bleibt die Erzählperspektive: Der Film beobachtet Connie über weite Strecken ohne Urteil — und überlässt es dem Zuschauer, ob er das aushält.` },
+  {
+    bereich: 'titel', schluessel: 'movie:40662', locale: 'de-de',
+    text: `### Worum es geht
+
+In Sarajevo tötet der Joker den zweiten Robin: Jason Todd, den Batman als Jugendlichen aufgenommen hatte.
+
+Fünf Jahre später taucht in Gotham City eine maskierte Gestalt auf, die sich Red Hood nennt. Sie übernimmt den Drogenhandel der Stadt — mit einer Auflage: An Kinder wird nicht verkauft. Batman geht der Sache nach und findet heraus, wer unter der Maske steckt. Was folgt, ist keine Auseinandersetzung über Verbrechen, sondern über eine Frage, die Batman seit Jahren ausweicht: warum er den Joker nicht tötet.
+
+### Entstehungsgeschichte
+
+Regie führte Brandon Vietti, das Drehbuch schrieb Judd Winick nach seiner eigenen Comicreihe "Under the Hood".
+
+Bruce Greenwood spricht Batman, Jensen Ackles den Red Hood und Jason Todd, Neil Patrick Harris den Nightwing, John DiMaggio den Joker.
+
+Produziert wurde der Film von Warner Bros. Animation unter Warner Premiere und DC Entertainment. Er erschien am 27. Juli 2010 unmittelbar auf Video und ist der achte Film der Reihe DC Universe Animated Original Movies.
+
+### Hinter den Kulissen
+
+Der Ton ist für einen Zeichentrickfilm ungewöhnlich hart. Der Film beginnt mit dem Tod eines Jugendlichen und behandelt danach durchgehend die Schuldfrage — ohne den Ausgleich, den Superheldenstoffe sonst anbieten.
+
+Der Reiz liegt darin, dass der Gegner recht haben könnte. Jason Todds Vorwurf ist nicht abwegig: Der Joker ist mehrfach entkommen und hat jedes Mal weitergetötet.
+
+### Einordnung & Wirkung
+
+Bei Rotten Tomatoes steht der Film bei 100 Prozent, allerdings auf Grundlage von nur sieben Besprechungen.
+
+Im Heimvideomarkt spielte er über zwölf Millionen Dollar ein und gehört damit zu den erfolgreichsten DC-Animationsfilmen.
+
+Er gilt bis heute als einer der besten Filme dieser Reihe — und als Beleg dafür, dass Animation für erwachsene Stoffe kein Hindernis ist, sondern eine Freiheit.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8845', locale: 'de-de',
+    text: `### Worum es geht
+
+Die USS Missouri fährt ihre letzte Reise vor der Außerdienststellung. An Bord ist Casey Ryback, ehemaliger Navy SEAL, der nach einem Zerwürfnis als Schiffskoch dient.
+
+Dann übernimmt eine Gruppe von Angreifern das Schiff. Ihr Ziel sind die Tomahawk-Marschflugkörper mit Atomsprengköpfen an Bord. Ryback ist der Einzige, den sie nicht auf der Rechnung haben.
+
+### Entstehungsgeschichte
+
+Regie führte Andrew Davis, das Drehbuch schrieb J. F. Lawton.
+
+Steven Seagal spielt Casey Ryback, Tommy Lee Jones den Anführer William Strannix, Gary Busey den Commander Krill, Erika Eleniak die Jordan Tate.
+
+Produziert wurde der Film von Arnon Milchan, Steven Reuther und Seagal selbst. Die Musik stammt von Gary Chang, die Kamera von Frank Tidy.
+
+Als Drehort für die im Film gezeigte Missouri diente die USS Alabama — ein Schlachtschiff desselben Bautyps, das heute als Museum zugänglich ist. Das erklärt einen erheblichen Teil der Wirkung: Die Gänge, Geschütztürme und Maschinenräume sind echt.
+
+### Hinter den Kulissen
+
+Das Budget lag bei etwa 35 Millionen Dollar.
+
+Die Anlage ist die eines Kammerspiels mit Waffen: ein abgeschlossener Ort, eine Geiselnahme, ein Einzelner im Inneren. Der Schauplatz trägt dabei erheblich — ein Schlachtschiff bietet Gänge, Ebenen und Maschinenräume für eine Verfolgung über Stunden.
+
+Roger Ebert lobte gerade die Glaubwürdigkeit der Szenen an Bord und die Darstellungen.
+
+### Einordnung & Wirkung
+
+In den Vereinigten Staaten spielte der Film 83,36 Millionen Dollar ein, weltweit etwa 156,4 Millionen.
+
+Die Urteile gingen weit auseinander. Das Lexikon des internationalen Films nannte ihn menschenverachtend; die Zeitschrift Cinema hielt fest, die Regie hebe die Actionszenen über den Durchschnitt.
+
+1995 folgte eine Fortsetzung mit Seagal in derselben Rolle. 2021 gab HBO Max eine Neuverfilmung unter der Regie von Timo Tjahjanto in Auftrag.` },
 ];
