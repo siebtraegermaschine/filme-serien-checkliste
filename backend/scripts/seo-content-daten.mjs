@@ -37396,4 +37396,572 @@ Rotten Tomatoes weist 80 Prozent aus (239 Bewertungen), Metacritic 63 von 100.
 Richard Brody urteilte, Soderberghs Experiment sei geglückt. Justin Chang bescheinigte dem Film, kluge und scharfe Ideen einzuflechten.
 
 Bemerkenswert ist, dass beide Urteile die technische und die inhaltliche Ebene zusammenziehen. Das Experiment, von dem Brody spricht, ist nicht bloß die Aufnahme mit einem Telefon, sondern die Frage, ob sich damit ein Spielfilm herstellen lässt, der seine Mittel für die Sache einsetzt statt umgekehrt. Das Verhältnis von 1,5 zu 14,3 Millionen Dollar beantwortet zumindest die wirtschaftliche Hälfte dieser Frage.` },
+  // ---- Block 076 ----
+  {
+    bereich: 'titel', schluessel: 'movie:527261', locale: 'de-de',
+    text: `### Worum es geht
+
+Aus einer Mine werden Kreaturen freigesetzt, die im Film „Vesps" heißen. Sie sind blind und jagen nach Geräuschen.
+
+Die taube Jugendliche Ally Andrews flieht mit ihrer Familie in die Wildnis. Unterwegs stoßen sie auf eine religiöse Gruppe, die sich „The Hushed" nennt und Ally für ihre eigenen Zwecke beanspruchen will. Das Ziel der Familie ist eine Zuflucht in Alaska.
+
+### Entstehungsgeschichte
+
+Vorlage ist der Roman von Tim Lebbon aus dem Jahr 2015.
+
+Regie führte John R. Leonetti, das Drehbuch schrieben Carey Van Dyke und Shane Van Dyke.
+
+Stanley Tucci spielt Hugh Andrews, Kiernan Shipka die taube Ally Andrews, Miranda Otto die Kelly Andrews, John Corbett den Glenn, Kate Trotter die Lynn und Kyle Harrison Breitkopf den Jude Andrews.
+
+Produziert wurde der Film von Constantin Film und EMJAG Productions. Die Kamera führte Michael Galbraith, die Musik stammt von Tomandandy. Gedreht wurde ab September 2017 in Toronto. Der Film dauert 90 Minuten.
+
+Am 10. April 2019 startete er bei Netflix; in sieben Ländern lief er zusätzlich im Kino — in Österreich, Deutschland, der Schweiz, Bolivien, Singapur, Südkorea und China. An den Kassen kamen 2,3 Millionen Dollar zusammen.
+
+### Hinter den Kulissen
+
+Die Anlage der Hauptfigur ist der Kern der Konstruktion. Eine taube Jugendliche in einer Welt, in der Geräusche tödlich sind, kehrt die übliche Zuordnung um: Was sonst als Einschränkung erzählt wird, ist hier der Ausgangsvorteil — Ally lebt seit jeher unter Bedingungen, an die sich alle anderen erst gewöhnen müssen.
+
+Der zweite Handlungsstrang verschiebt die Bedrohung. Nicht die Kreaturen sind das eigentliche Problem, sondern was Menschen unter diesen Bedingungen aus sich machen — die Gruppe der „Hushed" ist die gefährlichere Begegnung.
+
+Die Auswertung war ungewöhnlich zweigeteilt: Netflix weltweit, dazu ein Kinostart in genau sieben Ländern. Das ist keine reguläre Verwertungskette, sondern eine Folge unterschiedlicher Rechtelagen — Constantin Film als Mitproduzent erklärt den deutschsprachigen Teil dieser Liste.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 30 Prozent aus (37 Rezensionen), Metacritic 25 von 100.
+
+Bemängelt wurden eine abgeleitete Prämisse und ein stockendes Erzähltempo. Der Guardian nannte den Film eine schludrige Neumischung von „A Quiet Place".
+
+Dieser Vergleich hat allerdings eine Vorgeschichte, die die Kritik selten mitliefert: Die Romanvorlage von Tim Lebbon erschien 2015. Der Film wurde ab September 2017 gedreht — der Vorwurf der Nachahmung trifft damit eher die Reihenfolge der Veröffentlichungen als die Entstehung des Stoffs.
+
+Am Ergebnis änderte das nichts. Ein Film, der weltweit über eine Plattform lief und nur in sieben Ländern ins Kino kam, wird ohnehin nicht an Kinozahlen gemessen — die 2,3 Millionen Dollar sind kein Maßstab, sondern eine Randnotiz.` },
+  {
+    bereich: 'titel', schluessel: 'movie:87825', locale: 'de-de',
+    text: `### Worum es geht
+
+Gus Lobel ist Baseball-Scout bei den Atlanta Braves und kämpft um seinen Posten.
+
+Seine Tochter Mickey, eine ehrgeizige Anwältin, begleitet ihn auf eine Sichtungsreise. Dabei geht es um Bo Gentry, einen hoch gehandelten Nachwuchsspieler — und um dessen Schwäche gegen Curveballs, die außer Gus niemand bemerkt.
+
+### Entstehungsgeschichte
+
+Regie führte Robert Lorenz; es war sein Debüt. Das Drehbuch schrieb Randy Brown.
+
+Clint Eastwood spielt Gus Lobel, Amy Adams die Tochter Mickey, Justin Timberlake den Johnny „The Flame" Flanagan, Matthew Lillard den Phillip Sanderson, John Goodman den Pete Klein und Robert Patrick den Vince.
+
+Produziert wurde der Film von Malpaso Productions. Die Kamera führte Tom Stern, den Schnitt besorgten Joel Cox und Gary D. Roach, die Musik stammt von Marco Beltrami.
+
+Gedreht wurde in Georgia — an der Georgia Tech, in Atlanta, im Turner Field, in Macon, Dawsonville, Young Harris, Athens, an der Dunwoody High School und in Jasper — sowie in Swannanoa und Marion in North Carolina. Das Budget betrug 60 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Ausgangslage verbindet zwei Konflikte in einer Person. Gus kämpft um seinen Posten, und was er zu bieten hat, ist ein Urteil, das sich nicht belegen lässt: Er hört, dass Gentry den Curveball nicht trifft. Der Film erzählt Berufsfrage und Alter als dasselbe Problem.
+
+Daraus ergibt sich die Rolle der Tochter. Mickey ist Anwältin, arbeitet also in einem Feld, in dem Belege zählen — und muss sich auf etwas einlassen, das ihr Vater nicht beweisen kann. Der zweite Fund, der junge Pitcher Rigoberto Sanchez, ist ihrer.
+
+Bemerkenswert ist die Konstellation hinter der Kamera. Robert Lorenz gab hier sein Regiedebüt, mit Clint Eastwoods Produktionsfirma, dessen Stammkameramann Tom Stern und dessen langjährigem Cutter Joel Cox — und mit Eastwood selbst in der Hauptrolle.
+
+### Einordnung & Wirkung
+
+Bei 60 Millionen Dollar Herstellungskosten spielte der Film weltweit 49 Millionen ein und blieb damit unter seinen Kosten.
+
+Rotten Tomatoes weist 51 Prozent Zustimmung aus. Gelobt wurden Eastwoods Ausstrahlung und das Zusammenspiel mit Amy Adams. Beim Publikum ergab CinemaScore ein „B+".
+
+Diese Bewertungen beschreiben einen Film, der über seine Besetzung getragen wird. Die Kritik trennt dabei sauber: Was zwischen den beiden Hauptdarstellern geschieht, überzeugt; was um sie herum gebaut ist, weniger.
+
+Dass der Publikumswert deutlich über der Kritikerquote liegt, ist bei Filmen dieser Machart die Regel — ein ruhig erzähltes Vater-Tochter-Drama vor Baseball-Kulisse findet sein Publikum, ohne die Fachkritik zu überzeugen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11565', locale: 'de-de',
+    text: `### Worum es geht
+
+FBI-Agent Malcolm Turner geht erneut undercover — als „Big Mama". Diesmal als Kindermädchen bei der Familie Fuller.
+
+Der Auftrag: einen verdächtigen Software-Entwickler überwachen und einen Computerwurm aufspüren, der in Regierungsrechner eindringen kann. Während Malcolm die Tarnung hält und sich um drei Kinder kümmert, kommt ihm seine schwangere Freundin Sherry auf die Schliche.
+
+### Entstehungsgeschichte
+
+Regie führte John Whitesell, das Drehbuch schrieb Don Rhymer.
+
+Martin Lawrence spielt Malcolm Turner alias Big Mama, Nia Long die Sherry Pierce, Emily Procter die Leah Fuller, Zachary Levi den Agenten Kevin Kennelly, Mark Moses den Tom Fuller, Kat Dennings die Molly, Chloë Moretz die Carrie und Marisol Nichols die Liliana Morales.
+
+Produziert wurde der Film von David T. Friendly und Michael Green. Die Kamera führte Mark Irwin, den Schnitt besorgte Priscilla Nedd-Friendly, die Musik stammt von George S. Clinton.
+
+Gedreht wurde im April 2005 in Kalifornien und Louisiana. Der Film dauert 99 Minuten und ist ohne Altersbeschränkung freigegeben. Das Budget betrug rund 40 Millionen Dollar. Der US-Start war am 27. Januar 2006, der deutsche am 13. April 2006.
+
+### Hinter den Kulissen
+
+Die Verkleidung bekommt hier einen Alltag. Big Mama ist nicht zu Besuch, sondern angestellt — als Kindermädchen im Haus der Zielperson. Damit muss die Tarnung nicht Stunden, sondern Wochen halten, und zwar unter den Augen von drei Kindern.
+
+Erzählerisch laufen zwei Linien nebeneinander. Die eine ist Überwachung und Computerkriminalität, die andere das Kindermädchen, das drei Kinder tatsächlich versorgt. Die zweite trägt den Film — der Fall dient vor allem als Grund, warum die Figur bleiben muss.
+
+Bemerkenswert ist die Freigabe ohne Altersbeschränkung. Eine Komödie über verdeckte Ermittlung, Erpressung und eine Entführung wurde damit als durchweg kindertauglich eingestuft — ein Hinweis darauf, wie weit die Handlung ins Harmlose gedreht wurde.
+
+### Einordnung & Wirkung
+
+Bei rund 40 Millionen Dollar Herstellungskosten spielte der Film weltweit etwa 138 Millionen ein — 70 Millionen in den USA und 2,5 Millionen in Deutschland.
+
+Die Kritik fiel deutlich negativ aus. Eine Rezension sprach von Holzhammerhumor, moralinsaurem Unterton und kitschigen Dialogen, eine andere nannte den Film eine eher ermüdende als unterhaltsame Fortsetzung. Das Lexikon des internationalen Films urteilte, es handle sich um eine fade Verkleidungskomödie.
+
+2007 wurde der Film für die Goldene Himbeere in der Kategorie schlechteste Fortsetzung nominiert.
+
+Der Abstand zwischen diesen Urteilen und dem mehr als dreifachen Einspielergebnis ist der eigentliche Befund. Die Verkleidungskomödie funktionierte für ihr Publikum unabhängig davon, wie sie besprochen wurde.` },
+  {
+    bereich: 'titel', schluessel: 'series:84661', locale: 'de-de',
+    text: `### Worum es geht
+
+In Cherokee City, Georgia, wird ein elfjähriger Junge ermordet. Die Beweislage ist eindeutig: Detective Ralph Anderson verhaftet den Trainer Terry Maitland öffentlich.
+
+Dann tauchen andere Beweise auf. Sie zeigen, dass Maitland zur Tatzeit nachweislich anderswo war. Beides lässt sich nicht zugleich stimmen — und aus der Ermittlung wird eine Untersuchung dessen, was hier überhaupt möglich ist.
+
+### Entstehungsgeschichte
+
+Vorlage ist Stephen Kings Roman „Der Outsider" von 2018. Die Figur Holly Gibney stammt aus Kings „Mr. Mercedes"-Trilogie von 2014 bis 2016.
+
+Richard Price entwickelte die Serienfassung. Jason Bateman führte Regie und spielte zugleich eine Hauptrolle. Die Musik stammt von Daniel Bensi und Saunder Jurriaans.
+
+Jason Bateman spielt Terry Maitland, Ben Mendelsohn den Ralph Anderson, Cynthia Erivo die Holly Gibney und Bill Camp den Howard Salomon.
+
+Produziert wurde die Serie für HBO von Aggregate Films, Temple Hill Entertainment und weiteren Studios. Die deutsche Synchronisation entstand bei der Interopa Film GmbH in Berlin und umfasst 45 Sprechrollen; Tobias Kluckert spricht Terry Maitland.
+
+Die Miniserie umfasst zehn Folgen von 50 bis 60 Minuten. Die Premiere lief am 12. Januar 2020 bei HBO, die deutsche Erstausstrahlung am 20. März 2020 bei Sky Atlantic.
+
+### Hinter den Kulissen
+
+Der Widerspruch ist die Konstruktion. Zwei Beweisketten, die einander ausschließen — und eine Ermittlung, die weitergehen muss, obwohl das Verfahren zu Ende gedacht keine Lösung kennt. Die Serie beginnt als Kriminalfall und wird zu etwas anderem, ohne den Ton zu wechseln.
+
+Jason Bateman verantwortet Regie und Hauptrolle zugleich. Dass ausgerechnet er den Verdächtigen spielt, dessen Schuld die Serie in der Schwebe hält, ist eine Doppelrolle mit Gewicht: Der Regisseur inszeniert seine eigene Undurchschaubarkeit.
+
+Mit Holly Gibney holt die Serie eine Figur aus einer anderen Romanreihe Kings herüber. Für die Adaption ist das eine Setzung mit Folgen — sie bringt eine Ermittlerin mit, die genau dort weiterarbeitet, wo Polizeiarbeit an ihre Grenze kommt.
+
+### Einordnung & Wirkung
+
+Zehn Folgen für einen einzelnen Roman sind großzügig bemessen. Die Serie nimmt sich damit Zeit für den Teil, der in einer Verfilmung sonst gerafft wird: die Phase, in der niemand weiß, was der Fall überhaupt ist.
+
+Die Anlage als abgeschlossene Miniserie ist dabei die zweite wichtige Entscheidung. Sie erlaubt es, die Auflösung zu erzählen, statt sie für eine Fortsetzung offenzuhalten — bei Stephen-King-Adaptionen keine Selbstverständlichkeit.
+
+Bemerkenswert ist der zeitliche Abstand zwischen den Ausstrahlungen. In den USA lief die Serie ab dem 12. Januar 2020, im deutschsprachigen Raum ab dem 20. März 2020 — gut zwei Monate später, was für eine HBO-Produktion dieser Größenordnung ein vergleichsweise enger Takt ist.
+
+Der Aufwand der deutschen Fassung mit 45 Sprechrollen zeigt zugleich, wie breit das Figurenensemble angelegt ist: Der Fall betrifft nicht zwei Ermittler, sondern eine ganze Stadt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:93856', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Gruppe amerikanischer Touristen bucht eine Führung nach Prypjat, in die Sperrzone von Tschernobyl.
+
+Der Bus springt nicht wieder an. Die Gruppe muss die Nacht in der verlassenen Stadt verbringen — und stellt fest, dass Prypjat nicht so leer ist, wie es aussieht.
+
+### Entstehungsgeschichte
+
+Regie führte Bradley Parker; es war sein Spielfilmdebüt. Das Drehbuch schrieben Oren Peli, Carey Van Dyke und Shane Van Dyke nach Pelis Geschichte „The Diary of Lawson Oxford".
+
+Jesse McCartney spielt Chris, Olivia Dudley die Natalie, Devin Kelley die Amanda, Jonathan Sadowski den Paul, Nathan Phillips den Michael, Ingrid Bolsø Berdal die Zoe und Dimitri Diatchenko den Fremdenführer Juri.
+
+Produziert wurde der Film von Oren Peli und Brian Witten. Die Kamera führte Morten Søborg, den Schnitt besorgte Stan Stalfas, die Musik stammt von Diego Stocco.
+
+Gedreht wurde nicht in der Ukraine, sondern in Belgrad und im Umland von Budapest. Alcon Entertainment und Warner Bros. Pictures brachten den Film am 25. Mai 2012 in den USA, in Kanada und in Bulgarien in die Kinos; der deutsche Start war der 21. Juni 2012.
+
+### Hinter den Kulissen
+
+Der Schauplatz ist der heikelste Punkt dieses Films. Prypjat wurde nach der Reaktorkatastrophe von 1986 evakuiert; die Stadt steht für ein reales Unglück mit realen Betroffenen. Der Film macht daraus eine Kulisse für ein Horrorszenario und lässt die Bedrohung von Menschen ausgehen, die dort geblieben sein sollen.
+
+Gedreht wurde entsprechend auch nicht vor Ort. Belgrad und die Umgebung von Budapest liefern die Bilder; was der Film zeigt, ist eine Nachbildung.
+
+Erzählerisch arbeitet er mit einer Umkehrung, die im Ausgangspunkt steckt: Die Gruppe bezahlt dafür, einen Ort des Unglücks zu besichtigen — und wird dort selbst zum Gegenstand eines Unglücks. Dass die Bedrohung von den mutierten Bewohnern ausgeht, verlegt die Folgen der Katastrophe dabei in die Menschen, die sie erlitten haben.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war schlecht. Rotten Tomatoes weist 18 Prozent aus, Metacritic 32 von 100; der Film erhielt insgesamt ein schlechtes Presseecho.
+
+Kino.de beschrieb eine gruselige Atmosphäre in einer radioaktiven Geisterstadt in der ersten Hälfte, die später nachließ.
+
+Dieses Urteil trifft die Aufteilung des Films genau. Solange er die Leere zeigt, trägt der Ort; sobald er sie füllt, wird aus dem Besonderen ein gewöhnlicher Horrorfilm.
+
+Damit stellt sich die Frage, die bei Filmen an realen Unglücksorten immer mitläuft: Was rechtfertigt die Wahl dieses Schauplatzes, wenn die Geschichte auch anderswo spielen könnte? Der Film liefert darauf keine Antwort, die über den Schauwert hinausginge.` },
+  {
+    bereich: 'titel', schluessel: 'movie:252838', locale: 'de-de',
+    text: `### Worum es geht
+
+Doug Harris heiratet in zwei Wochen. Ein Problem hat er noch: Er hat keinen Trauzeugen — und der Braut und ihrer Familie sieben Groomsmen versprochen.
+
+Also engagiert er Jimmy, der eine Agentur für genau diesen Fall betreibt. Sieben Männer werden gestellt, eine gemeinsame Vorgeschichte erfunden. Das Ganze muss nur bis zur Hochzeit halten.
+
+### Entstehungsgeschichte
+
+Regie führte Jeremy Garelick, das Drehbuch schrieb er gemeinsam mit Jay Lavender.
+
+Kevin Hart spielt Jimmy Callahan, der unter dem Namen Bic auftritt, Josh Gad den Doug Harris und Kaley Cuoco die Gretchen Palmer. In weiteren Rollen sind Ken Howard, Cloris Leachman, Jenifer Lewis, Mimi Rogers, Olivia Thirlby, Affion Crockett, Jorge Garcia und Alan Ritchson zu sehen.
+
+Produziert wurde der Film von Adam Fields, William Packer und Valerie Bleth Sharp. Die Musik stammt von Christopher Lennertz, die Kamera von Brad Lipson, den Schnitt besorgten Jeff Groth, Shelly Westerman und Byron Wong. Das Budget betrug 23 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Prämisse trägt ihre Pointe in sich. Wer einen Trauzeugen mieten muss, hat keine Freunde — und die Komödie beginnt genau dort, wo diese Feststellung wehtut. Der Film verhandelt Einsamkeit über eine Dienstleistung.
+
+Daraus folgt die Konstruktion. Je überzeugender die erfundene Freundschaft nach außen wirkt, desto deutlicher wird, was Doug tatsächlich fehlt. Und weil Jimmy den Beruf ausübt, ist auch seine Seite betroffen: Er stellt beruflich her, was man nicht kaufen kann.
+
+Bemerkenswert ist der Umfang der Nebenbesetzung. Sieben gestellte Groomsmen bedeuten sieben zusätzliche Figuren, die alle eine erfundene Vorgeschichte tragen müssen — die Anlage verlangt ein großes Ensemble, obwohl es im Kern um zwei Männer geht.
+
+### Einordnung & Wirkung
+
+Bei 23 Millionen Dollar Herstellungskosten spielte der Film 79 Millionen ein.
+
+Der Filmdienst nannte ihn eine bedingt unterhaltsame Komödie, die auf wilden, sinnfreien Slapstick setze, mit gelegentlich witzigen Dialogen.
+
+Kevin Hart war für MTV Movie Awards und BET Awards nominiert. Kaley Cuoco erhielt die Goldene Himbeere als schlechteste Nebendarstellerin, Josh Gad war dafür nominiert.
+
+Diese Verteilung ist bezeichnend. Ausgezeichnet und nominiert wurde, was der Film an seinen beiden Hauptfiguren aufbietet; die Himbeeren trafen die Rollen daneben. Bei einer Konstruktion, die ihre Nebenfiguren als Staffage anlegt — sieben gemietete Freunde, eine Braut mit Familie —, ist das eine folgerichtige Bilanz.` },
+  {
+    bereich: 'titel', schluessel: 'movie:21407', locale: 'de-de',
+    text: `### Worum es geht
+
+Arkin O'Brien war im Gefängnis. Um eine Schuld zu begleichen, plant er einen Einbruch im Haus der Familie Chase.
+
+Als er dort ankommt, ist jemand vor ihm da. Ein Maskierter hat das Haus mit Fallen präpariert und Teile der Familie bereits in seiner Gewalt. Aus dem Einbrecher wird der Einzige, der die Bewohner noch herausholen könnte.
+
+### Entstehungsgeschichte
+
+Regie führte Marcus Dunstan, das Drehbuch schrieb er gemeinsam mit Patrick Melton.
+
+Josh Stewart spielt Arkin O'Brien, Michael Reilly Burke den Michael Chase, Andrea Roth die Victoria Chase, Juan Fernández den Sammler, Karley Scott Collins die Hannah Chase, Madeline Zima die Jill Chase und Robert Wisdom den Roy.
+
+Produziert wurde der Film von Brett Forbes, Patrick Rizzotti und Julie Richardson für LD Entertainment, Fortress Features und die Imaginarium Entertainment Group; den Verleih übernahm Freestyle Releasing. Die Kamera führte Brandon Cox, die Musik stammt von Jerome Dillon. Das Budget betrug drei Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Grundidee ist eine Umkehrung. Der Einbrecher wird zum Beschützer, weil jemand Schlimmeres bereits im Haus ist. Damit hat der Film eine Hauptfigur, die weder ins Recht noch ins Unrecht gesetzt werden muss — Arkin ist ein Krimineller mit einem Ziel, das die Umstände neu bewerten.
+
+Der Schauplatz erledigt den Rest. Ein einziges Haus, präpariert von jemandem, der es besser kennt als die Bewohner: Jeder Raum ist eine Gefahr, jeder Weg nach draußen versperrt. Bei drei Millionen Dollar Budget ist das auch eine wirtschaftliche Entscheidung — die Spannung entsteht aus Anordnung, nicht aus Aufwand.
+
+Auffällig ist, wie wenig der Film über seinen Gegenspieler preisgibt. Der Sammler bleibt maskiert und ohne Erklärung; die Bedrohung ist eine Methode, keine Person.
+
+### Einordnung & Wirkung
+
+Bei drei Millionen Dollar Herstellungskosten spielte der Film weltweit 10,5 Millionen ein, davon 7,7 Millionen im Heimatmarkt.
+
+Rotten Tomatoes weist 29 Prozent positive Bewertungen aus. Kritiker nannten den Film eine routinierte Gewaltdarstellung. Bloody Disgusting vergab dagegen 3,5 von 5 Sternen und lobte die rohe, kompromisslose Machart.
+
+Der Abstand zwischen diesen beiden Urteilen ist genrebedingt. Was die allgemeine Kritik als Routine abtut, bewertet die Genrekritik als Konsequenz — beide beschreiben dieselbe Eigenschaft mit umgekehrtem Vorzeichen.
+
+Wirtschaftlich ging die Rechnung auf: das Dreieinhalbfache des Budgets bei einem Film, der mit einem Haus, einer Handvoll Darsteller und einer Idee auskommt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:256961', locale: 'de-de',
+    text: `### Worum es geht
+
+Paul Blart fährt mit seiner Tochter Maya nach Las Vegas — zu einer Fachmesse für Sicherheitspersonal.
+
+Während Maya sich für den Hotelangestellten Lane interessiert, muss Paul sich von den Sicherheitsleuten des Casinos aufziehen lassen. Dann plant eine Bande unter Führung von Vincent, mehrere Hotels und Casinos auszurauben.
+
+### Entstehungsgeschichte
+
+Regie führte Andy Fickman, das Drehbuch schrieben Kevin James und Nick Bakay.
+
+Kevin James spielt Paul Blart, Raini Rodriguez die Tochter Maya, David Henrie den Lane und Neal McDonough den Vincent. Jayma Mays konnte ihre Rolle nicht wieder übernehmen, weil sie durch die Serie „Glee" gebunden war. Kevin James' Bruder Gary Valentine erhielt eine Nebenrolle.
+
+Produziert wurde der Film von Todd Garner, Jack Giarraputo, Kevin James und Adam Sandler für Happy Madison Productions und Sony Pictures Entertainment. Die Musik stammt von Rupert Gregson-Williams, die Kamera von Dean Semler, den Schnitt besorgte Scott Hill. Das Budget betrug 38 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Ortswechsel ist die zentrale Entscheidung der Fortsetzung. Aus dem Einkaufszentrum wird Las Vegas, aus einem Kaufhausdetektiv einer unter vielen — die Sicherheitsmesse liefert dem Film gleich eine ganze Zunft, in der die Hauptfigur ganz unten steht.
+
+Daraus zieht der Film seinen Antrieb. Paul wird nicht ernst genommen, und der Überfall gibt ihm die Gelegenheit, das zu ändern. Die Kränkung kommt vor der Tat, nicht umgekehrt.
+
+Bemerkenswert ist die Konstellation der Produzenten. Kevin James schreibt mit, produziert mit und spielt die Hauptrolle; Adam Sandlers Firma Happy Madison steht dahinter. Der Film ist eine Familienangelegenheit im doppelten Sinn — auch James' Bruder ist besetzt.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist fünf Prozent aus.
+
+Der Filmdienst kritisierte den Film als uninspiriert und spannungsarm. Kino.de bewertete ihn dagegen als höchst vergnüglich.
+
+Dieser Widerspruch beschreibt die Lage. Eine Komödie, die vollständig auf einen Hauptdarsteller und dessen Körperkomik zugeschnitten ist, spaltet ihr Publikum entlang der Frage, ob man diese Art von Humor mag — Zwischenurteile gibt es kaum.
+
+Bei 38 Millionen Dollar Herstellungskosten ist das eine kalkulierte Spaltung. Der Film war nie für die Kritik gemacht, sondern für ein Publikum, das den ersten Teil gesehen hatte.` },
+  // ---- Block 077 ----
+  {
+    bereich: 'titel', schluessel: 'movie:10030', locale: 'de-de',
+    text: `### Worum es geht
+
+Als Kind wurde Charlie Logan von einem Mädchen verflucht. Der Fluch besagt: Jede Frau, mit der er schläft, findet beim nächsten Date den Mann fürs Leben.
+
+25 Jahre später ist Charlie erfolgreicher Zahnarzt — und unter unverheirateten Frauen als Glücksbringer begehrt. Dann verliebt er sich in die tollpatschige Tierpflegerin Cam. Und muss feststellen, dass der Fluch tatsächlich wirkt.
+
+### Entstehungsgeschichte
+
+Regie führte Mark Helfrich, das Drehbuch schrieb Josh Stolberg.
+
+Dane Cook spielt Dr. Charles „Charlie" Logan, Jessica Alba die Cam Wexler, Jodelle Ferland die Lila Carpenter und Dan Fogler den Dr. Stuart „Stu" Klaminsky.
+
+Produziert wurde der Film von Tracey E. Edmonds, Mike Karz, Barry Katz und Brian Volk-Weiss. Die Musik stammt von Aaron Zigman, die Kamera von Anthony B. Richmond, den Schnitt besorgte Julia Wong.
+
+### Hinter den Kulissen
+
+Die Prämisse dreht ein romantisches Versprechen ins Gegenteil. Wer mit Charlie zusammen war, findet das Glück — nur eben mit jemand anderem. Damit hat der Film eine Hauptfigur, deren Erfolg zugleich ihr Ausschluss ist.
+
+Die eigentliche Verschiebung tritt ein, als Charlie sich verliebt. Von da an arbeitet der Fluch gegen ihn: Jede Annäherung an Cam ist zugleich die Gefahr, sie an den Nächsten zu verlieren. Der Film macht aus einer Pointe eine Entscheidungssituation.
+
+Genau an dieser Konstruktion setzte die Kritik an. Ein Film, dessen Mechanik auf einer Kette von Bettgeschichten beruht, muss diese Kette auch zeigen — und die Frauen darin bleiben Stationen auf dem Weg der Hauptfigur. Der Vorwurf sexistischer Inhalte richtet sich auf diese Anlage, nicht auf einzelne Szenen.
+
+### Einordnung & Wirkung
+
+Die Besprechungen fielen zum größten Teil negativ aus. Bemängelt wurden das niedrige Niveau der Komödie und sexistische Inhalte; gelobt wurde Jessica Alba.
+
+Kino.de urteilte abweichend und beschrieb den Film als originelle Beziehungskomödie mit starken romantischen Tendenzen.
+
+Dieser Widerspruch lässt sich aus der Bauart erklären. Der Film enthält beides — eine romantische Geschichte um zwei Figuren und eine Nummernfolge, die davon unabhängig läuft. Je nachdem, welche der beiden Ebenen eine Besprechung in den Vordergrund stellt, fällt das Urteil anders aus.
+
+Dass Jessica Alba in fast allen Rezensionen ausgenommen wurde, verweist auf denselben Befund: Die Figur Cam gehört zur romantischen Ebene, nicht zur Nummernfolge.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4643', locale: 'de-de',
+    text: `### Worum es geht
+
+Ben Randall ist Rettungsschwimmer der US-Küstenwache und eine Größe in seinem Fach. Nach einem tragischen Einsatz wird er Ausbilder an der Akademie.
+
+Dort trifft er auf Jake Fischer, einen hochbegabten Rekruten. Was Randall ihm beibringen will, hat wenig mit Technik zu tun: dass Teamgeist mehr zählt als Einzelleistung. Nach der Ausbildung werden beide nach Kodiak in Alaska versetzt.
+
+### Entstehungsgeschichte
+
+Regie führte Andrew Davis, das Drehbuch schrieb Ron L. Brinkerhoff.
+
+Kevin Costner spielt Ben Randall, Ashton Kutcher den Jakob „Jake" Fischer, Clancy Brown den Captain William Hadley, Sela Ward die Helen Randall, John Heard den Captain Frank Larson, Neal McDonough den Jack Skinner und Melissa Sagemiller die Emily Thomas.
+
+Produziert wurde der Film von Beau Flynn und Tripp Vinson für Touchstone Pictures. Die Musik stammt von Trevor Rabin, die Kamera von Stephen St. John, den Schnitt besorgten Thomas J. Nordberg und Dennis Virkler.
+
+Der Film dauert 136 Minuten und ist ab 12 Jahren freigegeben, in Österreich ab 10.
+
+### Hinter den Kulissen
+
+Der Aufwand für die Umgebung war beträchtlich. Über 27 Tonnen Eis wurden verwendet, um Kodiak nachzubilden; die großen Rettungsszenen entstanden in einem eigens gebauten Wellenbecken.
+
+Zwei Nebenbefunde zeigen, wie eng der Film mit realen Verhältnissen arbeitete. Der Olympiaschwimmer Mark Gangloff übernahm die Rolle eines Schülers, und James Burtons Rock'n'Roll-Café diente als „Maggie's Hangar" — und behielt diesen Namen anschließend bei.
+
+Erzählerisch folgt der Film einem klaren Muster: der erfahrene Lehrer und der begabte Schüler, der erst noch begreifen muss, worauf es ankommt. Die 136 Minuten Laufzeit geben dieser Entwicklung viel Raum — und verlagern das Gewicht von der Rettung auf die Ausbildung.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films beschreibt den Film als ambitioniert in seiner Mythologisierung.
+
+Critic.de kritisierte, der Film suggeriere, man könne alles richtig machen — und verliere durch spektakuläre Effekte an Glaubwürdigkeit.
+
+Beide Urteile treffen dieselbe Stelle von zwei Seiten. Ein Film über einen Berufsstand, dessen Alltag aus Rettung unter Lebensgefahr besteht, steht vor der Wahl: Er kann die Arbeit zeigen oder sie überhöhen. Dass 27 Tonnen Eis und ein Wellenbecken aufgeboten wurden, um die See herzustellen, gehört zu dieser Entscheidung — je überzeugender das Spektakel, desto weiter rückt es vom Dokumentarischen ab.
+
+Die Mythologisierung, die das Lexikon benennt, ist dabei kein Nebeneffekt, sondern das Ziel des Films: Er erzählt von einer Figur, die am Ende zur Legende wird.` },
+  {
+    bereich: 'titel', schluessel: 'series:86430', locale: 'de-de',
+    text: `### Worum es geht
+
+Michael Desiato ist Richter in New Orleans. Sein Sohn Adam verursacht einen Autounfall, bei dem ein Jugendlicher stirbt, und fährt weiter.
+
+Dann erfährt Michael, wer das Opfer war: der Sohn eines Mafiabosses. Von da an tut ein Mann, dessen Beruf das Recht ist, alles, um seinen Sohn davor zu bewahren. Die zweite Staffel führt Michael in eine verdeckte Ermittlung gegen die Mafia und zu der Frage, wie seine Frau ums Leben kam.
+
+### Entstehungsgeschichte
+
+Vorlage ist die israelische Serie „Kvodo" von Shlomo Mashiach und Ron Ninio.
+
+Entwickelt wurde die amerikanische Fassung von Peter Moffat; Robert und Michelle King fungierten als Executive Producers.
+
+Bryan Cranston spielt Michael Desiato, Hunter Doohan den Sohn Adam, Hope Davis die Gina Baxter, Michael Stuhlbarg den Jimmy Baxter, Isiah Whitlock Jr. den Charlie Figaro, Sofia Black-D'Elia die Frannie Latimer, Carmen Ejogo die Lee Delamere und Andrene Ward-Hammond die „Big Mo".
+
+Die Dreharbeiten begannen am 16. September 2019 in New Orleans. Wegen der COVID-19-Pandemie wurden sie im März 2020 unterbrochen, im Oktober 2020 fortgesetzt und im November 2020 abgeschlossen.
+
+Es entstanden zwei Staffeln mit je zehn Folgen. Die erste lief vom 6. Dezember 2020 bis zum 14. Februar 2021 bei Showtime, die zweite vom 15. Januar bis zum 19. März 2023.
+
+### Hinter den Kulissen
+
+Der Kern ist ein Widerspruch, der sich nicht auflösen lässt. Ein Richter weiß genauer als jeder andere, was er tut, wenn er Beweise verschwinden lässt — und tut es trotzdem. Die Serie braucht keine Ausrede für ihn; sie zeigt, wie jemand mit vollem Wissen das Gegenteil dessen tut, wofür er steht.
+
+New Orleans ist dabei mehr als Kulisse. Gedreht wurde vollständig vor Ort, und die Stadt liefert die Verflechtungen, auf die die Handlung angewiesen ist: Ein Richter, ein Mafiaboss und eine lokale Öffentlichkeit, die sich kennt.
+
+Die Fortsetzung in einer zweiten Staffel ist bemerkenswert. Die Anlage der ersten läuft auf einen Abschluss zu; dass die Serie weitergeführt wurde, verlangte einen neuen Antrieb — die verdeckte Ermittlung und die Frage nach dem Tod der Ehefrau.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist für die erste Staffel 50 Prozent Zustimmung aus (50 Kritiken). Der Konsens hält fest, Bryan Cranston sei kraftvoll, „Your Honor" ähnele aber anderen, besseren Serien zu sehr. Metacritic kommt auf 60 von 100.
+
+Für die zweite Staffel weist Rotten Tomatoes 67 Prozent aus, allerdings nur auf Grundlage von sechs Kritiken.
+
+Der Einwand des Konsenses trifft ein Problem, das Adaptionen dieser Art teilen. Der Stoff stammt aus Israel und wurde für den amerikanischen Markt neu erzählt; was dort eigenständig war, trifft hier auf ein Feld, in dem es bereits Serien über moralisch verstrickte Männer in Machtpositionen gibt.
+
+Dass die Kritikerzahl zur zweiten Staffel von 50 auf sechs zurückging, sagt dabei mehr über die Aufmerksamkeit aus als die gestiegene Prozentzahl.` },
+  {
+    bereich: 'titel', schluessel: 'movie:522924', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Golden Retriever Enzo blickt auf sein Leben zurück — auf die Jahre bei dem Rennfahrer Denny Swift.
+
+Erzählt wird, wie Denny Eve heiratet und die beiden eine Tochter bekommen, Zoë. Als Eve an einem Hirntumor erkrankt und stirbt, kommt es zum Sorgerechtsstreit mit ihrem Vater Maxwell. Enzo ist dabei nicht Nebenfigur, sondern Erzähler.
+
+### Entstehungsgeschichte
+
+Vorlage ist Garth Steins Roman von 2008.
+
+Regie führte Simon Curtis, das Drehbuch schrieb Mark Bomback.
+
+Der Hund Parker spielt Enzo, Kevin Costner spricht ihn. Milo Ventimiglia spielt Denny, Amanda Seyfried die Eve, Kathy Baker die Trish, Martin Donovan den Maxwell und Ryan Kiera Armstrong die Zoë; Gary Cole ist in einer weiteren Rolle zu sehen.
+
+Produziert wurde der Film von Patrick Dempsey, Tania Landau und Neal H. Moritz für Fox 2000 Pictures, Original Film und Starbucks Entertainment. Die Kamera führte Ross Emery, den Schnitt besorgte Adam Recht, die Musik stammt von Dustin O'Halloran und Volker Bertelmann.
+
+Der Dreh begann am 9. Mai 2018. Gedreht wurde in Vancouver, im Canadian Tire Motorsport Park in Bowmanville, auf dem Laguna Seca Raceway bei Monterey, auf den Pacific Raceways in Kent und im Mission Raceway Park südöstlich von Vancouver. Das Budget betrug 18 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Erzählperspektive ist die eigentliche Wagnis. Ein Hund, der aus dem Off berichtet und Zusammenhänge deutet, die er nicht begreifen könnte — der Film muss diese Setzung durchhalten, auch wenn die Handlung ins Schwere kippt.
+
+Der Rennsport liefert dabei die durchgehende Metapher. Das titelgebende Fahren im Regen steht für den Umgang mit Bedingungen, die man nicht ändern kann. Die vier realen Rennstrecken, auf denen gedreht wurde, geben dieser Bildebene ihren Untergrund.
+
+Bemerkenswert ist die Produktionskonstellation. Neben Fox 2000 und Original Film steht Starbucks Entertainment als Mitproduzent — ein Kaffeehausunternehmen als Beteiligter an einer Romanverfilmung.
+
+### Einordnung & Wirkung
+
+Bei 18 Millionen Dollar Herstellungskosten spielte der Film weltweit 33,8 Millionen ein — 26,3 Millionen in den USA und Kanada, 7,3 Millionen im übrigen Ausland. Das Startwochenende brachte 8,1 Millionen und Platz sechs.
+
+Rotten Tomatoes weist 44 Prozent aus (120 Bewertungen, Schnitt 5,3 von 10), Metacritic 43 von 100. Beschrieben wurde der Film als gefühlsbeladen und konstruiert; kritisiert wurden kitschige Klischees. Ein Rezensent hielt fest, es gebe nicht viele Überraschungen — merkte aber an, gerade die Vorhersehbarkeit könne die emotionale Wirkung verstärken.
+
+Beim Publikum ergab CinemaScore ein „A−".
+
+Der Abstand zwischen 44 Prozent bei der Kritik und einem „A−" beim Publikum ist einer der größten, die bei Filmen dieser Größenordnung vorkommen. Er beschreibt genau, was der Film sein will: keine Überraschung, sondern eine Erwartung, die eingelöst wird.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9610', locale: 'de-de',
+    text: `### Worum es geht
+
+Königin Taramis bittet Conan um Geleit für ihre Nichte, Prinzessin Jehnna. Die beiden sollen einen magischen Diamanten holen.
+
+Der Stein ist der Schlüssel zu einem Horn, mit dem sich ein Gott namens Dagoth erwecken lässt. Was Conan nicht weiß: Er ist Teil eines Plans, der auf ein Opferritual hinausläuft.
+
+### Entstehungsgeschichte
+
+Regie führte Richard Fleischer, das Drehbuch schrieb Stanley Mann.
+
+Arnold Schwarzenegger spielt Conan, Grace Jones die Kriegerin Zula, Wilt Chamberlain den Leibwächter Bombaata, Mako den Zauberer Akiro, Olivia d'Abo die Prinzessin Jehnna, Sarah Douglas die Königin Taramis, Pat Roach den Zauberer Toth-Amon und Tracey Walter den Dieb Malak.
+
+Produziert wurde der Film von Raffaella De Laurentiis. Die Musik stammt von Basil Poledouris, die Kamera von Jack Cardiff, den Schnitt besorgte Frank J. Urioste.
+
+Der Film dauert 97 Minuten und ist ab 16 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Besetzung ist der auffälligste Teil dieser Produktion. Neben Schwarzenegger stehen mit Grace Jones und Wilt Chamberlain zwei Personen im Bild, die aus ganz anderen Feldern kommen — Musik und Basketball. Der Film setzt auf körperliche Präsenz und auf Wiedererkennbarkeit, nicht auf Schauspielerfahrung.
+
+Hinter der Kamera stand mit Jack Cardiff ein Bildgestalter, hinter dem Schnitt mit Frank J. Urioste ein Cutter, hinter der Musik mit Basil Poledouris ein Komponist — die technischen Gewerke sind namhaft besetzt, während die Rollen nach Erscheinung vergeben wurden. Diese Mischung beschreibt die Machart des Films.
+
+Erzählerisch ist die Anlage eine Auftragsreise mit eingebautem Verrat. Conan wird losgeschickt, um etwas zu holen, das seinem Auftraggeber dient und nicht ihm — die Handlung besteht aus Stationen, die diesem Ziel entgegenlaufen, bis er es durchschaut.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 26 Prozent positive Rezensionen aus, Metacritic 53 von 100.
+
+Das Lexikon des internationalen Films nannte den Film eindimensional mit zahlreichen Schaukämpfen, aufwendig und relativ unblutig. Filmstarts urteilte, er sei zu dümmlich, zu billig und schlicht zu langweilig. Das TV Spielfilm Filmlexikon lobte dagegen die gehörige Portion Selbstironie.
+
+Die Kennzeichnung „relativ unblutig" ist dabei aufschlussreich. Ein Fantasy-Abenteuer mit zahlreichen Schaukämpfen, das ohne drastische Darstellung auskommt, zielt auf ein breiteres Publikum — und dazu passt der Ton, den die Kritik teils als selbstironisch, teils als dümmlich beschreibt.
+
+Dass Metacritic mit 53 Punkten deutlich über der Rotten-Tomatoes-Quote liegt, deutet auf genau diese Spaltung: Die Urteile fallen nicht durchweg vernichtend aus, sondern uneinheitlich.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11358', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein ehemaliger Elitesoldat kehrt in seine Heimatstadt zurück. Er findet sie verändert vor: Ein Casino kontrolliert den Ort, und die Verhältnisse sind korrupt.
+
+Nach einem Überfall und der Vergiftung seines Neffen geht er gewaltsam gegen die Verantwortlichen vor. Vor Gericht macht er ein Angebot: Er will als Sheriff kandidieren.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf der wahren Geschichte des amerikanischen Polizisten Buford Pusser, der von 1964 bis 1970 als Sheriff in Tennessee tätig war.
+
+Regie führte Kevin Bray. Das Drehbuch schrieben David Klass, Channing Gibson, David Levien und Brian Koppelman.
+
+Dwayne Johnson spielt Christian Vaughn, Johnny Knoxville den Ray Templeton, Neal McDonough den Jay Hamilton und Kristen Wilson die Michelle Vaughn.
+
+Produziert wurde der Film von Ashok Amritraj, Jim Burke, Lucas Foster, David Hoberman und Paul Schiff. Die Kamera führte Glen MacPherson, den Schnitt besorgten George Bowers und Robert Ivison, die Musik stammt von Graeme Revell.
+
+Gedreht wurde in einer Kleinstadt im Kitsap County, Washington. Der Film dauert 82 Minuten und ist ab 16 Jahren freigegeben, in Österreich ab 14.
+
+### Hinter den Kulissen
+
+82 Minuten sind für einen Actionfilm knapp bemessen. Die Kürze ist Programm: Der Film verzichtet auf Nebenhandlungen und führt seine Figur auf direktem Weg von der Rückkehr zur Selbstjustiz und von dort ins Amt.
+
+Genau darin liegt seine heikle Stelle. Die Handlung rechtfertigt gewaltsames Vorgehen nachträglich durch ein Wahlamt — wer zuerst zuschlägt und danach Sheriff wird, hat sich die Legitimation im Nachhinein besorgt. Das Lexikon des internationalen Films benennt das ausdrücklich.
+
+Die reale Vorlage verschiebt die Frage zusätzlich. Buford Pusser war tatsächlich Sheriff in Tennessee; der Film verlegt den Stoff nach Washington und in die Gegenwart. Was als wahre Geschichte eingeführt wird, ist damit im Wesentlichen ein Ausgangspunkt, kein Bericht.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films urteilte, es handle sich um einen soliden, aber gesichtslos inszenierten Actionfilm, der gewalttätiges Vorgehen gegen Verbrecher propagiere.
+
+Dieses Urteil trennt Handwerk und Haltung — und der zweite Teil wiegt schwerer. Ein Film, dessen Held Recht durch Gewalt herstellt und dafür belohnt wird, macht eine Aussage, unabhängig davon, wie gut die Kampfszenen gebaut sind.
+
+Die Besetzung ordnet den Film zusätzlich ein. Dwayne Johnson in der Hauptrolle und Johnny Knoxville als Begleiter verweisen auf ein Publikum, das aus Wrestling und Stuntkomik kommt — der Film setzt auf körperliche Präsenz statt auf Ermittlungsarbeit.
+
+Bemerkenswert bleibt der Abstand zur Vorlage. Der reale Buford Pusser amtierte sechs Jahre lang; der Film erzählt in 82 Minuten die Vorgeschichte eines Amtsantritts.` },
+  {
+    bereich: 'titel', schluessel: 'series:62285', locale: 'de-de',
+    text: `### Worum es geht
+
+Vier Figuren, die bislang jede für sich erzählt wurden, treffen in New York aufeinander: Daredevil, Jessica Jones, Luke Cage und Iron Fist.
+
+Der Anlass ist eine gemeinsame Bedrohung — die kriminelle Organisation „Die Hand". Über acht Folgen arbeiten die vier zusammen, obwohl keiner von ihnen dafür gemacht ist.
+
+### Entstehungsgeschichte
+
+Marvel und Disney kündigten das Projekt im November 2013 an. Als Showrunner fungierten Douglas Petrie und Marco Ramírez.
+
+Charlie Cox spielt Matt Murdock alias Daredevil, Krysten Ritter die Jessica Jones, Mike Colter den Luke Cage und Finn Jones den Daniel Rand alias Iron Fist. Sigourney Weaver spielt die Alexandra Reid, Élodie Yung die Elektra Natchios und Scott Glenn den Stick.
+
+Produziert wurde die Serie von ABC Studios, Marvel Studios und Marvel Television. Grundlage ist das Defenders-Team aus den Comics; die Besetzung stammt aus den vier vorangegangenen Serien.
+
+Die Miniserie umfasst acht Folgen von 44 bis 57 Minuten. Gedreht wurde in New York City. Am 18. August 2017 erschienen alle Folgen gleichzeitig bei Netflix.
+
+### Hinter den Kulissen
+
+Vier Jahre liegen zwischen der Ankündigung im November 2013 und der Veröffentlichung. In dieser Zeit mussten erst die vier Einzelserien entstehen, aus denen die Besetzung übernommen wurde — die Miniserie ist der Zielpunkt einer über Jahre angelegten Konstruktion.
+
+Acht Folgen sind dafür knapp bemessen. In dieser Zeit müssen vier Hauptfiguren zusammengeführt, ihre Verhältnisse zueinander geklärt und ein Konflikt abgeschlossen werden — und jede der vier bringt ein Umfeld mit, das ebenfalls Platz braucht.
+
+Die Zusammenführung ist zugleich das Problem, das die Serie zu lösen hat. Die vier Figuren stammen aus Serien mit sehr verschiedenen Tonlagen; sie in denselben Handlungsraum zu stellen, verlangt Kompromisse bei allen vier.
+
+### Einordnung & Wirkung
+
+Die Veröffentlichung aller acht Folgen an einem Tag war für Netflix-Produktionen jener Jahre das übliche Verfahren. Für eine Serie, die als Zusammenführung angelegt ist, hat es einen zusätzlichen Effekt: Das Publikum erlebt das Zusammentreffen in einem Zug, nicht über Wochen verteilt.
+
+Bemerkenswert ist die Besetzung der Gegenseite. Sigourney Weaver als Alexandra Reid führt eine Organisation an, die zuvor in mehreren der Einzelserien eine Rolle spielte — die Serie holt damit einen Strang zusammen, der schon vorher lief.
+
+New York als vollständiger Drehort ist dabei mehr als ein Schauplatz. Alle vier Figuren sind an bestimmte Viertel gebunden; ihre Zusammenarbeit bedeutet auch, dass diese Bezirke miteinander in Berührung kommen.
+
+Mit acht Folgen bleibt die Miniserie das kürzeste Glied dieser Produktionsreihe — angelegt als Höhepunkt, nicht als eigenständige Fortsetzung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1041613', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Novizin Cecilia folgt einer Einladung in ein italienisches Kloster.
+
+Dort stellt sich heraus, dass sie schwanger ist — obwohl sie Jungfrau ist. Das Kloster behandelt sie daraufhin als neue Gottesmutter. Cecilia beginnt zu begreifen, dass hinter dieser Deutung etwas anderes steht.
+
+### Entstehungsgeschichte
+
+Regie führte Michael Mohan, das Drehbuch schrieb Andrew Lobel.
+
+Sydney Sweeney spielt Schwester Cecilia, Álvaro Morte den Pater Sal Tedeschi, Benedetta Porcaroli die Schwester Gwen, Dora Romano die Oberin, Giorgio Colangeli den Kardinal Franco Merola und Simona Tabasco die Schwester Mary.
+
+Die Entwicklung begann 2014. Nach ihrem Erfolg in „Euphoria" erwarb Sydney Sweeney die Rechte am Drehbuch und holte Michael Mohan als Regisseur. Der Stoff wurde dabei umgeschrieben: Aus Schülerinnen einer Highschool wurden Nonnen.
+
+Die Kamera führte Elisha Christian, den Schnitt besorgte Christian Masini, die Musik stammt von Will Bates.
+
+Gedreht wurde in Rom und Umgebung, unter anderem in der Villa Parisi und der Galleria Doria Pamphilj; die Katakombenszenen entstanden in echten römischen Katakomben. Das Budget betrug neun Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Entstehungsgeschichte ist ungewöhnlich. Ein Drehbuch von 2014 liegt zehn Jahre lang brach, bis eine Schauspielerin die Rechte kauft, um sich selbst die Hauptrolle zu sichern — und den Stoff dabei vom Schulmilieu ins Kloster verlegen lässt.
+
+Diese Verlegung verändert alles. Was als Geschichte über Jugendliche angelegt war, gewinnt im klösterlichen Rahmen eine zusätzliche Ebene: Es geht um Gehorsam, um Deutungshoheit und darum, wer bestimmt, was mit einem Körper geschieht.
+
+Die Drehorte tragen das mit. Villa Parisi, Galleria Doria Pamphilj und echte römische Katakomben liefern Räume, die vorhanden waren und nicht gebaut werden mussten — bei neun Millionen Dollar Budget ist das auch eine wirtschaftliche Entscheidung.
+
+### Einordnung & Wirkung
+
+Bei neun Millionen Dollar Herstellungskosten spielte der Film weltweit 35 Millionen ein — 15,7 Millionen in den USA und Kanada, 19,7 Millionen im übrigen Ausland.
+
+Rotten Tomatoes weist 72 Prozent positive Bewertungen aus, Metacritic 57 von 100 und damit gemischte Rezensionen. Die New York Times führte den Film als „Critic's Pick", The Telegraph vergab drei von fünf Sternen.
+
+Beim Publikum ergab CinemaScore dagegen ein „C".
+
+Diese Spreizung ist für Horrorfilme mit religiösem Stoff nicht ungewöhnlich, hier aber besonders deutlich. Ein Film, der eine Marienerzählung gegen den Strich bürstet und auf ein hartes Ende zuläuft, findet bei der Fachkritik eher Zustimmung als bei einem Publikum, das eine andere Art von Auflösung erwartet.
+
+Wirtschaftlich ging die Rechnung dennoch auf: fast das Vierfache des Budgets, davon deutlich mehr außerhalb Nordamerikas als darin.` },
 ];
