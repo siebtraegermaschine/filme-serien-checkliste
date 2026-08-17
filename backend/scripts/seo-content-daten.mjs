@@ -23491,4 +23491,452 @@ Die erste Staffel lag 2019 auf Platz acht der in Südkorea beliebtesten Netflix-
 Die zweite Staffel wurde deutlich schlechter aufgenommen — bemängelt wurde vor allem, dass sie gegenüber der ersten an erzählerischer Tiefe verliere.
 
 Ihre Bedeutung liegt damit weniger im Ergebnis als im Zeitpunkt: Sie gehört zu den Produktionen, mit denen koreanische Serien für ein weltweites Publikum verfügbar wurden — ein Vorgang, der das Fernsehen der folgenden Jahre erheblich verändert hat.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:840705', locale: 'de-de',
+    text: `### Worum es geht
+
+Frida arbeitet als Bedienung bei einer Wohltätigkeitsgala und schmuggelt sich in die Feier. Dort spricht sie der Technikmilliardär Slater King an, der sich kurz zuvor öffentlich für unbenannte Verfehlungen entschuldigt hat, und lädt sie samt Freundin auf seine Privatinsel ein.
+
+Dort ist alles vorbereitet: Champagner, Abendessen, Bedienstete. Die Tage verschwimmen. Frida bemerkt Kleinigkeiten, die nicht stimmen — sie kann sich an den Vortag nicht erinnern, unter ihren Fingernägeln ist Erde, eine der Frauen ist plötzlich nicht mehr da, und niemand vermisst sie. Was auf der Insel geschieht, klärt der Film in der zweiten Hälfte auf.
+
+### Entstehungsgeschichte
+
+Zoë Kravitz führte hier zum ersten Mal Regie und schrieb das Drehbuch gemeinsam mit E. T. Feigenbaum.
+
+Der Film hieß ursprünglich "Pussy Island" und wurde im Januar 2024 umbenannt. Kravitz hat den Grund genannt: Die amerikanische Filmvereinigung und die Kinobetreiber wollten den Titel nicht auf Werbematerial zeigen, und Befragungen ergaben, dass er gerade Frauen abschreckte.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab Juni 2022 in den mexikanischen Bundesstaaten Yucatán und Quintana Roo. Das Budget lag bei 20 Millionen Dollar.
+
+Naomi Ackie spielt Frida, Channing Tatum den Milliardär Slater King; daneben sind Christian Slater, Alia Shawkat, Haley Joel Osment, Geena Davis und Kyle MacLachlan zu sehen.
+
+Der Film behandelt sexualisierte Gewalt und das Auslöschen von Erinnerung — und wählt für die erste Hälfte bewusst die Form des Urlaubsfilms, damit das Publikum dieselbe Verschiebung erlebt wie die Hauptfigur.
+
+### Einordnung & Wirkung
+
+Bei 20 Millionen Dollar Herstellungskosten spielte der Film weltweit rund 48,1 Millionen ein — 23,1 Millionen in den USA und 25 Millionen international.
+
+Die Kritik reagierte überwiegend positiv: 75 Prozent bei Rotten Tomatoes, 66 von 100 bei Metacritic, mit Lob für Kravitz' Regiearbeit und Vorbehalten gegen die inhaltliche Tiefe. Das Publikum vergab bei CinemaScore ein B minus — ein Wert, der bei Filmen mit unangenehmem Gegenstand häufig vorkommt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:799583', locale: 'de-de',
+    text: `### Worum es geht
+
+1941 kontrollieren deutsche U-Boote den Atlantik, und Großbritannien steht vor der Frage, wie es überhaupt weiter Nachschub bekommen soll. Winston Churchill genehmigt eine Einheit, die außerhalb jeder militärischen Regel arbeitet.
+
+Eine Handvoll Männer unter Gus March-Phillipps soll vor der Insel Fernando Po, spanisches Hoheitsgebiet und damit neutral, ein deutsches Versorgungsschiff kapern. Offiziell darf es die Aktion nicht geben — bei einem Fehlschlag würde die Regierung jede Kenntnis bestreiten.
+
+### Entstehungsgeschichte
+
+Grundlage ist Damien Lewis' Buch "Churchill's Secret Warriors" von 2014. Die zugrundeliegende Operation Postmaster hat es tatsächlich gegeben; der Film erzählt sie in stark ausgeschmückter Form.
+
+Regie führte Guy Ritchie, produziert hat Jerry Bruckheimer. Das Budget lag bei 60 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde von Februar bis April 2023 in Antalya in der Türkei.
+
+Henry Cavill spielt March-Phillipps; daneben sind Eiza González, Alan Ritchson, Alex Pettyfer und Henry Golding zu sehen.
+
+Der Ton unterscheidet den Film von den meisten Kriegsfilmen: Ritchie behandelt den Stoff als Gaunerstück mit einem zusammengewürfelten Team, klaren Rollen und trockenen Sprüchen — eine Machart, die er seit "Bube, Dame, König, Gras" pflegt und hier auf den Zweiten Weltkrieg überträgt.
+
+### Einordnung & Wirkung
+
+Der Film spielte weltweit 29,8 Millionen Dollar ein und blieb damit weit unter seinem Budget von 60 Millionen; der Start in den USA brachte 9 Millionen und Platz vier. Damit gilt er als Fehlschlag im Kino.
+
+Bemerkenswert ist der Unterschied zwischen Kasse und Zuspruch: Das Publikum vergab bei CinemaScore ein A minus, bei PostTrak lag die Zustimmung bei 88 Prozent, und die Kritiken fielen überwiegend positiv aus. In der digitalen Auswertung war der Film anschließend deutlich erfolgreicher.
+
+Er steht damit für ein wiederkehrendes Muster der zwanziger Jahre: Filme mittlerer Größe, die im Kino durchfallen und ihr Publikum erst danach finden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:6279', locale: 'de-de',
+    text: `### Worum es geht
+
+Deloris Van Cartier tritt wieder in Las Vegas auf, als drei Nonnen aus dem ersten Film sie um Hilfe bitten. Die katholische Schule St. Francis in San Francisco soll geschlossen werden; die Schüler gelten als hoffnungslos.
+
+Als Schwester Mary Clarence unterrichtet Deloris dort Musik — in einer Klasse, die weder singen will noch zuhört. Sie gründet trotzdem einen Chor und meldet ihn beim landesweiten Musikwettbewerb an. Der Verwaltungsleiter Mr. Crisp arbeitet unterdessen weiter auf die Schließung hin.
+
+### Entstehungsgeschichte
+
+Regie führte Bill Duke, der Film erschien am 10. Dezember 1993. Whoopi Goldberg, Maggie Smith und Kathy Najimy kehrten aus dem ersten Teil zurück. Das Budget lag bei 38 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Besetzung der Schülerrollen ist im Rückblick bemerkenswert: Lauryn Hill spielt Rita Louise Watson — es war ihre erste größere Rolle, fünf Jahre vor ihrem Album "The Miseducation of Lauryn Hill". Ebenfalls dabei sind Jennifer Love Hewitt und Ryan Toby, der später die Gruppe City High gründete; Sheryl Lee Ralph spielt Ritas Mutter.
+
+Der Chorauftritt am Ende, bei dem Hill die Hauptstimme singt, ist der bekannteste Teil des Films und wird bis heute in Musikvideos und sozialen Netzen zitiert.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 124,6 Millionen Dollar ein.
+
+Die Kritik lehnte ihn zunächst ab: 19 Prozent bei Rotten Tomatoes, Roger Ebert nannte ihn schematisch. Das Publikum vergab bei CinemaScore ein A minus.
+
+Seine Wirkung ist erheblich und lässt sich belegen: Der Film hat weltweit Gospelchöre angeregt, allein in Japan rund dreißig. Er beeinflusste spätere Produktionen wie "Glee", und Musiker von Harry Styles bis Katy Perry haben ihn als prägend genannt.
+
+Seit März 2025 ist ein dritter Teil mit Whoopi Goldberg und Tyler Perry in Vorbereitung und wartet auf die Zusage von Disney.` },
+  {
+    bereich: 'titel', schluessel: 'movie:280996', locale: 'de-de',
+    text: `### Worum es geht
+
+Sussex im Jahr 1947. Sherlock Holmes ist 93 Jahre alt, lebt zurückgezogen mit seinen Bienen und wird vergesslich. Von seinem letzten Fall, der ihn vor über dreißig Jahren zum Rückzug bewog, weiß er nur noch, dass er ihn falsch gelöst hat — nicht aber, worin der Fehler bestand.
+
+Er versucht ihn zu rekonstruieren und schreibt dabei gegen sein eigenes Gedächtnis an. Dabei helfen ihm die Haushälterin Mrs. Munro und deren Sohn Roger. Parallel läuft die Erinnerung an eine kürzliche Reise nach Japan, deren Anlass sich ebenfalls als etwas anderes herausstellt.
+
+### Entstehungsgeschichte
+
+Grundlage ist Mitch Cullins Roman "A Slight Trick of the Mind" von 2005.
+
+Regie führte Bill Condon, der zuvor bereits mit Ian McKellen an "Gods and Monsters" gearbeitet hatte. Das Budget lag bei geschätzten 10 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen am 5. Juli 2014 in London und im Süden Englands. Die Musik schrieb Carter Burwell, die Kamera führte Tobias A. Schliessler.
+
+Der Kern der Figur ist umgekehrt zu allem, wofür Holmes steht: Ein Mann, dessen einzige Fähigkeit das Erinnern und Schlussfolgern war, verliert genau das. Der Film verzichtet auf Deerstalker und Pfeife und benennt diese Zutaten ausdrücklich als Erfindungen Watsons.
+
+### Einordnung & Wirkung
+
+Der Film lief am 7. Februar 2015 bei den Filmfestspielen in Berlin, kam am 19. Juni 2015 in Großbritannien und am 17. Juli in den USA ins Kino. Weltweit spielte er 29,4 Millionen Dollar ein.
+
+Die Kritik reagierte gut: 88 Prozent bei Rotten Tomatoes, 67 von 100 bei Metacritic; das Publikum vergab bei CinemaScore ein A minus.
+
+Er steht damit neben den lauten Holmes-Verfilmungen jener Jahre — den Guy-Ritchie-Filmen und der BBC-Serie — als der leiseste und einzige, der die Figur altern lässt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11013', locale: 'de-de',
+    text: `### Worum es geht
+
+Lee Holloway kommt aus einer psychiatrischen Klinik zurück nach Hause. Sie hat sich jahrelang selbst verletzt und tut es weiter; ihre Familie ist überfordert. Ihre erste Anstellung findet sie als Sekretärin in der Kanzlei von E. Edward Grey.
+
+Grey ist penibel, zurückhaltend und beobachtet ihre Fehler. Aus Korrekturen wird Kontrolle, aus Kontrolle ein Verhältnis, das beide zunächst nicht benennen. Für Lee wird daraus ein Weg, mit dem eigenen Schmerz anders umzugehen — für Grey ein Konflikt mit dem Bild, das er von sich hat.
+
+### Entstehungsgeschichte
+
+Grundlage ist eine Kurzgeschichte von Mary Gaitskill aus dem Jahr 1988, die für den Film erheblich erweitert wurde. Regie führte Steven Shainberg, das Drehbuch schrieb Erin Cressida Wilson.
+
+Die wichtigste Änderung betrifft den Schluss: Er wurde umgeschrieben, um zu zeigen, dass solche Beziehungen etwas Normales sein können.
+
+### Hinter den Kulissen
+
+James Spader spielt den Anwalt, Maggie Gyllenhaal die Sekretärin — es war ihre erste Hauptrolle. Die Musik schrieb Angelo Badalamenti. Obwohl der Film in Florida spielt, wurde in Los Angeles gedreht. Das Budget lag bei 4 Millionen Dollar.
+
+Umstritten war der Film von Anfang an. Kritiker unter anderem bei LitHub und PopMatters hielten ihm vor, er verkläre eine Beziehung, in der ausdrückliches Einverständnis fehle. Roger Ebert bewertete die Herangehensweise anders: Der Film nähere sich dem heiklen Gegenstand auf leisen Sohlen und vermeide dabei sowohl das Anstößige als auch das Lächerliche.
+
+### Einordnung & Wirkung
+
+Der Film lief 2002 beim Sundance-Festival und gewann dort einen Sonderpreis der Jury für Originalität. Lions Gate brachte ihn am 20. September 2002 ins Kino; weltweit spielte er 9,3 Millionen Dollar ein.
+
+Die Kritik lag bei 78 Prozent auf Rotten Tomatoes. Maggie Gyllenhaal erhielt zahlreiche Auszeichnungen als Nachwuchsdarstellerin, unter anderem von der Boston Society of Film Critics.
+
+Er gilt als einer der wenigen Filme, die dieses Thema behandeln, ohne es zum Skandal oder zur Komödie zu machen — und als Gegenstück zu den deutlich erfolgreicheren, inhaltlich flacheren Verfilmungen ein Jahrzehnt später.` },
+  {
+    bereich: 'titel', schluessel: 'movie:32823', locale: 'de-de',
+    text: `### Worum es geht
+
+Aaron Green arbeitet bei einer Plattenfirma, die kaum noch Geld verdient. Sein Vorschlag zur Rettung: ein Jubiläumskonzert des britischen Rockstars Aldous Snow im Greek Theatre in Los Angeles, zehn Jahre nach dessen letztem großen Auftritt.
+
+Aaron soll ihn aus London abholen und rechtzeitig hinbringen. Snow ist nach Jahren der Abstinenz rückfällig geworden, hat seine Freundin und seinen Sohn verloren und keinerlei Interesse an Pünktlichkeit. Die Reise führt über London, New York und Las Vegas und besteht überwiegend darin, dass Aaron Dinge zu sich nimmt, die er nicht möchte.
+
+### Entstehungsgeschichte
+
+Der Film ist ein Ableger von "Nie wieder Sex mit der Ex" (2008): Russell Brand spielt dort dieselbe Figur, Aldous Snow, in einer Nebenrolle.
+
+Regie führte Nicholas Stoller, produziert hat Judd Apatow. Jonah Hill spielt Aaron — allerdings nicht dieselbe Figur wie im Vorgängerfilm, in dem er einen Kellner spielte. Das Budget lag bei 40 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Elisabeth Moss spielt Aarons Freundin, Rose Byrne die Sängerin Jackie Q.
+
+Die Lieder von Aldous Snow und dessen Band Infant Sorrow wurden eigens für den Film geschrieben und von Brand selbst eingesungen; sie erschienen als Album und funktionieren als eigenständige Parodie auf Rockmusik der zweitausender Jahre.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 4. Juni 2010 und startete auf Platz zwei hinter "Shrek — Für immer Shrek". Weltweit spielte er 95,5 Millionen Dollar ein, davon 61 Millionen in den USA.
+
+Die Kritik reagierte überwiegend positiv: 72 Prozent bei Rotten Tomatoes, 65 von 100 bei Metacritic. Roger Ebert vergab drei von vier Sternen und merkte an, unter der Slapstick-Oberfläche stecke eine solide Geschichte.
+
+Bemerkenswert bleibt, wie ernst der Film seine Nebenhandlung nimmt: Hinter dem Krawall steht die Geschichte eines Süchtigen, dessen Umgebung von seinem Zustand lebt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:513310', locale: 'de-de',
+    text: `### Worum es geht
+
+Roy Pulver, ehemaliger Soldat einer Spezialeinheit, wacht jeden Morgen um 7:00 Uhr auf, während ein Mann mit Machete auf ihn einschlägt. Vor dem Fenster wartet ein Hubschrauber mit Maschinengewehr. Er stirbt an diesem Tag über hundertfünfzigmal.
+
+Der Tag wiederholt sich, und Roy weiß inzwischen, wo jeder Angreifer steht. Was er nicht weiß, ist der Grund. Die Spur führt zu seiner Ex-Frau, einer Wissenschaftlerin, die an einem Gerät zur Manipulation der Zeit arbeitet, und zu deren Vorgesetztem. Nebenbei bleibt Roy an jedem Durchgang genau ein Nachmittag mit seinem Sohn, den er kaum kennt.
+
+### Entstehungsgeschichte
+
+Joe Carnahan schrieb und inszenierte den Film. Er hat die Anlage selbst beschrieben: "Und täglich grüßt das Murmeltier" als Actionfilm, mit Anleihen bei der Logik von Videospielen — daher auch der Titel, der die Endgegner-Ebene eines Spiels meint.
+
+Das Vorhaben begann 2012 bei 20th Century Fox unter dem Titel "Continue" und blieb jahrelang liegen. Im November 2017 wurde es unter neuem Titel wiederbelebt.
+
+### Hinter den Kulissen
+
+Gedreht wurde von März bis Mai 2018 in Savannah und Atlanta. Das Budget lag bei 45 Millionen Dollar.
+
+Frank Grillo spielt Roy; daneben sind Mel Gibson, Naomi Watts, Annabelle Wallis und Michelle Yeoh zu sehen.
+
+Der Weg zum Publikum war lang: Entertainment Studios erwarb die Rechte im April 2018 und ließ sie im Juni 2020 fallen. Hulu kaufte im November 2020 die amerikanischen Streaming-Rechte für rund 11,75 Millionen Dollar; die Veröffentlichung erfolgte am 5. März 2021.
+
+Im Juli 2021 verklagte Blumhouse Productions die Produzenten auf ausstehende Vergütung für Umschnittarbeiten und machte fünf Prozent des Hulu-Erlöses geltend; die Sache wurde außergerichtlich beigelegt.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte gemischt bis wohlwollend: 74 Prozent bei Rotten Tomatoes mit dem Befund, der Film bringe das zunehmend überfüllte Zeitschleifen-Genre mit vergnügter Übertreibung voran; 56 von 100 bei Metacritic.
+
+Er steht damit für eine Welle von Zeitschleifenfilmen um 2020 — neben "Palm Springs", "Happy Deathday" und "The Edge of Tomorrow" — und für die Schwierigkeit mittelgroßer Actionfilme, überhaupt einen Weg ins Kino zu finden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:83389', locale: 'de-de',
+    text: `### Worum es geht
+
+Yokohama im Jahr 1963, ein Jahr vor den Olympischen Spielen in Tokio. Die Schülerin Umi Matsuzaki führt die Pension Coquelicot, weil ihre Mutter im Ausland studiert und ihr Vater als Kapitän im Koreakrieg umgekommen ist. Jeden Morgen setzt sie Signalflaggen für ihn.
+
+An ihrer Schule soll das Vereinshaus abgerissen werden — ein verfallenes Gebäude aus der Zeit vor dem Krieg, in dem sich sämtliche Arbeitsgemeinschaften eingerichtet haben. Gemeinsam mit Shun Kazama von der Schülerzeitung kämpft Umi für den Erhalt. Zwischen beiden entsteht mehr, bis sich eine Frage aus der Vergangenheit ihrer Eltern stellt.
+
+### Entstehungsgeschichte
+
+Grundlage ist ein Manga von 1980. Regie führte Gorō Miyazaki, das Drehbuch schrieben sein Vater Hayao Miyazaki und Keiko Niwa. Produziert wurde der Film von Studio Ghibli.
+
+Der Zeitpunkt der Handlung ist bewusst gewählt: Japan räumte damals im Vorfeld der Olympischen Spiele auf, riss Altes ab und baute neu — der Streit um das Vereinshaus ist ein Streit über den Umgang mit der eigenen Vergangenheit.
+
+### Hinter den Kulissen
+
+Die Produktion fiel mit dem Tōhoku-Erdbeben vom März 2011 zusammen. Wegen der anschließenden Abschaltungen im Stromnetz musste die Animation nachts fortgesetzt werden, um Unterbrechungen zu vermeiden. Zeitweise war erst rund die Hälfte fertig; der Starttermin wurde dennoch gehalten.
+
+Der Film erschien am 16. Juli 2011 in Japan.
+
+### Einordnung & Wirkung
+
+In Japan spielte er rund 4,5 Milliarden Yen ein, weltweit 61,5 Millionen Dollar — damit gehört er zu den vierzehn erfolgreichsten Anime-Filmen überhaupt.
+
+Die Kritik reagierte gut: 87 Prozent bei Rotten Tomatoes mit dem Befund, es handle sich um eine der sanfteren Arbeiten des Studios. 2012 gewann der Film den japanischen Filmpreis als Animationsfilm des Jahres.
+
+Für Gorō Miyazaki war es die zweite Regiearbeit nach "Die Chroniken von Erdsee", das deutlich schlechter aufgenommen worden war — und die erste, bei der sein Vater das Drehbuch beisteuerte.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:147773', locale: 'de-de',
+    text: `### Worum es geht
+
+Duncan ist vierzehn und fährt mit seiner Mutter, deren Freund Trent und dessen Tochter in ein Ferienhaus in Massachusetts. Auf der Hinfahrt fragt Trent ihn, was er sich auf einer Skala von eins bis zehn geben würde. Duncan sagt sechs. Trent sagt drei.
+
+Im Ferienort findet Duncan einen Ort für sich: den Wasserpark Water Wizz, wo ihn der Angestellte Owen ohne Umstände einstellt und wie einen Erwachsenen behandelt. Der Film erzählt einen Sommer, in dem ein Junge einen Menschen kennenlernt, der etwas von ihm hält — und in dem ihm gleichzeitig auffällt, was in der Beziehung seiner Mutter nicht stimmt.
+
+### Entstehungsgeschichte
+
+Nat Faxon und Jim Rash schrieben das Drehbuch und führten gemeinsam Regie; es war ihre erste Regiearbeit. Zwei Jahre zuvor hatten sie den Oscar für das adaptierte Drehbuch zu "The Descendants" gewonnen.
+
+Der Film lief 2013 beim Sundance-Festival, wo Fox Searchlight die Rechte erwarb; der Kinostart folgte am 5. Juli 2013. Das Budget lag bei 5 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Es spielen Liam James als Duncan, Sam Rockwell als Owen, Toni Collette als Mutter, Steve Carell als Trent und Maya Rudolph.
+
+Bemerkenswert ist Carells Besetzung: Er spielt hier gegen sein Bild als sympathischer Komödiendarsteller einen kleinlichen, herablassenden Mann — und der Film verzichtet darauf, ihn am Ende zu erlösen.
+
+Sam Rockwells Owen ist die Gegenfigur dazu und wurde von der Kritik durchgehend hervorgehoben.
+
+### Einordnung & Wirkung
+
+Bei 5 Millionen Dollar Herstellungskosten spielte der Film weltweit 26,9 Millionen ein — einer der wirtschaftlich erfolgreichsten Filme des Sundance-Jahrgangs.
+
+Die Kritik reagierte gut: 83 Prozent bei Rotten Tomatoes, mit dem Befund, es handle sich um eine komische und befriedigende Erzählung übers Erwachsenwerden.
+
+Er gehört zu jener Gruppe amerikanischer Sommerfilme, die ohne große Ereignisse auskommen und deren Wirkung vollständig an der Besetzung hängt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:16538', locale: 'de-de',
+    text: `### Worum es geht
+
+Peter Klaven verkauft Immobilien in Los Angeles und macht seiner Freundin Zooey einen Heiratsantrag. Beim Feiern fällt ihm auf, dass er niemanden hat, den er als Trauzeugen fragen könnte: Er hat seit Jahren nur Freundinnen gehabt und keine Freunde.
+
+Also beginnt er, Verabredungen mit Männern zu arrangieren — mit demselben Ungeschick, mit dem andere Menschen daten. Bei einer Immobilienbesichtigung trifft er auf Sydney Fife, mit dem er sich sofort versteht, vor allem über die Band Rush. Je enger die Freundschaft wird, desto mehr gerät die Beziehung zu Zooey in Schieflage.
+
+### Entstehungsgeschichte
+
+Regie führte John Hamburg, der auch am Drehbuch mitschrieb. Das ursprüngliche Buch hieß "Let's Be Friends" und lag rund elf Jahre unbearbeitet, bevor Hamburg es neu fasste.
+
+Hamburg hat seinen Anspruch beschrieben: Er habe über Sex sprechen wollen, nicht um derb oder gratis anstößig zu sein, sondern weil die meisten Menschen in einer Welt lebten, die eine Freigabe ab 17 verdiene.
+
+Das Budget lag bei 40 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Paul Rudd spielt Peter, Jason Segel spielt Sydney, Rashida Jones spielt Zooey.
+
+Der Film gehört zu einer kleinen Gruppe von Komödien jener Jahre, die Männerfreundschaft zum eigentlichen Gegenstand machen statt zum Beiwerk einer Liebesgeschichte — und der dabei die Formen der romantischen Komödie übernimmt: das erste Treffen, die Missverständnisse, die Versöhnung am Ende.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 92 Millionen Dollar ein und hielt sich fünf Wochen in den Top Ten.
+
+Die Kritik reagierte gut: 82 Prozent bei Rotten Tomatoes, mit besonderem Lob für das Zusammenspiel der beiden Hauptdarsteller. Entertainment Weekly vergab die Bestnote und nannte Rudds Auftritt verblüffend komisch. Das Publikum vergab bei CinemaScore ein B plus.
+
+Aus dem Film stammt zudem ein Begriff, der sich im Englischen gehalten hat: die "Bromance" als eigene Gattung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11452', locale: 'de-de',
+    text: `### Worum es geht
+
+Van Wilder studiert im siebten Jahr am Coolidge College und denkt nicht daran, aufzuhören. Er organisiert Feiern, sammelt Spenden für Studentenverbindungen und ist auf dem gesamten Gelände bekannt — nur einen Abschluss hat er nicht.
+
+Als sein Vater erfährt, wie lange das schon geht, dreht er ihm das Geld ab. Van muss die Studiengebühren selbst aufbringen und macht sein Talent zum Gewerbe: Er veranstaltet Feiern gegen Bezahlung. Gleichzeitig recherchiert die Journalistin Gwen Pearson für die Studentenzeitung über ihn, und deren Freund, ein angehender Mediziner, arbeitet dagegen.
+
+### Entstehungsgeschichte
+
+Regie führte Walt Becker; es war sein erster Kinofilm. Das Budget lag bei 5 Millionen Dollar.
+
+Der Film erschien unter der Marke National Lampoon, die seit "Ich glaub', mich tritt ein Pferd" von 1978 für amerikanische College-Komödien stand.
+
+### Hinter den Kulissen
+
+Ryan Reynolds spielt Van Wilder — es war seine erste Hauptrolle in einem Kinofilm. Tara Reid spielt Gwen, daneben sind Tim Matheson und Paul Gleason zu sehen.
+
+Kal Penn spielt Vans Assistenten Taj Mahal Badalandabad. Er hat später berichtet, was ihn zur Zusage bewog: Bei den Besetzungsproben sah er einen Mitbewerber, der für dieselbe Rolle braun geschminkt worden war.
+
+### Einordnung & Wirkung
+
+Der Film startete auf Platz sechs mit 7,3 Millionen Dollar und spielte weltweit 38,3 Millionen ein — bei 5 Millionen Produktionskosten trotz schlechter Kritiken ein klarer Erfolg.
+
+Die Kritik lehnte ihn deutlich ab: 18 Prozent bei Rotten Tomatoes mit dem Befund, es handle sich um eine abgeleitete Ekelkomödie mit zu wenig Lachern; 26 von 100 bei Metacritic.
+
+Aus dem Erfolg wurden zwei Fortsetzungen, in denen Kal Penns Figur die Hauptrolle übernahm — für Ryan Reynolds war der Film dagegen der Anfang einer Laufbahn, die in eine völlig andere Richtung führte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:556678', locale: 'de-de',
+    text: `### Worum es geht
+
+Emma Woodhouse ist reich, hübsch und klug und hat, wie es im Roman heißt, kaum etwas zu betrüben. Sie lebt mit ihrem Vater auf dem Landsitz Hartfield und verschafft sich Beschäftigung, indem sie ihre Umgebung verkuppelt.
+
+Ihr neuestes Vorhaben ist Harriet Smith, ein Mädchen unklarer Herkunft, dem Emma eine bessere Partie verschaffen will als den Bauern, der um sie wirbt. Jeder ihrer Eingriffe geht schief, und der Einzige, der ihr widerspricht, ist der Nachbar George Knightley. Dass sie sich vor allem selbst im Weg steht, ist ihr am längsten unklar.
+
+### Entstehungsgeschichte
+
+Grundlage ist Jane Austens Roman von 1815. Das Drehbuch schrieb die Booker-Preisträgerin Eleanor Catton.
+
+Autumn de Wilde führte Regie; es war ihre erste Kinoarbeit — zuvor war sie als Fotografin und für Musikvideos bekannt.
+
+Der Titel trägt im Original einen Punkt: "Emma." De Wilde hat das begründet, es solle den Film als Kostümfilm kenntlich machen; im Englischen bezeichnet "period" sowohl den Punkt als auch die Epoche.
+
+### Hinter den Kulissen
+
+Gedreht wurde von März bis Juni 2019 an englischen Schauplätzen, unter anderem in Firle Place in Sussex und in Lower Slaughter in den Cotswolds. Das Budget lag bei 10 Millionen Dollar.
+
+Anya Taylor-Joy spielt Emma, Johnny Flynn spielt Knightley; daneben sind Bill Nighy und Mia Goth zu sehen.
+
+Die Bildgestaltung ist der eigentliche Beitrag der Regisseurin: Farben, Anordnungen und Kostüme sind wie Fotografien komponiert und deutlich künstlicher als in üblichen Austen-Verfilmungen.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 14. Februar 2020 in Großbritannien und am 21. Februar in den USA — wenige Wochen vor den Kinoschließungen der Pandemie. Weltweit spielte er 27,4 Millionen Dollar ein.
+
+Die Kritik reagierte gut: 86 Prozent von 260 Besprechungen bei Rotten Tomatoes.
+
+Bei der Oscar-Verleihung 2021 gab es zwei Nominierungen, für Kostüme und für Maske; dazu kamen Nominierungen bei BAFTA und Golden Globes.` },
+  {
+    bereich: 'titel', schluessel: 'movie:18405', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Familie Collingwood fährt zu ihrem Ferienhaus an einem See. Die siebzehnjährige Mari nimmt das Auto, um eine Freundin zu besuchen. Die beiden Mädchen geraten an eine Gruppe auf der Flucht: Krug, dessen Bruder, dessen Freundin und Krugs Sohn Justin.
+
+Was folgt, ist eine Vergewaltigung und ein Mordversuch im Wald. Mari überlebt schwer verletzt und schleppt sich nach Hause. In derselben Nacht bittet die Gruppe bei einem Gewitter ausgerechnet die Collingwoods um Unterkunft — und die Eltern erkennen erst nach und nach, wen sie beherbergen.
+
+### Entstehungsgeschichte
+
+Der Film ist die Neuverfilmung von Wes Cravens Werk aus dem Jahr 1972, das seinerseits an Ingmar Bergmans "Die Jungfrauenquelle" angelehnt war.
+
+Regie führte der Grieche Dennis Iliadis, das Drehbuch schrieben Adam Alleca und Carl Ellsworth. Craven selbst war als Produzent beteiligt und begründete seine Zustimmung damit, dass ihn beim Original fehlendes Geld zur Streichung von Szenen gezwungen hatte.
+
+### Hinter den Kulissen
+
+Iliadis wollte ausdrücklich keinen Film in der Art des sogenannten Folterhorrors, der damals verbreitet war. Sein Ansatz war die Figurenzeichnung: zu zeigen, wie gewöhnliche Familien Böses tun, wenn man sie weit genug treibt.
+
+Es spielen Tony Goldwyn und Monica Potter als Eltern, Sara Paxton als Mari, Garret Dillahunt als Krug, dazu Aaron Paul, Spencer Treat Clark, Riki Lindhome und Martha MacIsaac. Aaron Paul stand kurz vor seinem Durchbruch mit "Breaking Bad".
+
+### Einordnung & Wirkung
+
+Der Film erschien am 13. März 2009 in 2.402 Kinos. Bei einem Budget von 15 Millionen Dollar spielte er 46 Millionen ein.
+
+Die Kritik urteilte gemischt: 42 Prozent bei Rotten Tomatoes, ebenso 42 von 100 bei Metacritic. Gelobt wurden Darstellerleistungen und Figurenzeichnung, kritisiert wurde der ausbeuterische Charakter des Stoffs. Das Publikum vergab bei CinemaScore ein B.
+
+Er gehört zu einer Welle von Neuverfilmungen amerikanischer Horrorfilme der siebziger Jahre, die in den zweitausender Jahren fast vollständig durchdekliniert wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:330483', locale: 'de-de',
+    text: `### Worum es geht
+
+Travis Shaw ist Tierarzt in einem Küstenort in North Carolina, lebt in einem Haus am Wasser und hat keine Absicht, daran etwas zu ändern. Nebenan zieht Gabby Holland ein, Medizinstudentin, die in einer festen Beziehung steht.
+
+Der erste Kontakt ist ein Streit über bellende Hunde. Daraus wird eine Freundschaft und dann mehr; Gabby verlässt ihren Freund, die beiden heiraten und bekommen Kinder. Jahre später verunglückt Gabby mit dem Auto und liegt im Koma. Travis muss über die Fortsetzung der lebenserhaltenden Maßnahmen entscheiden — die Wahl, auf die der Titel verweist.
+
+### Entstehungsgeschichte
+
+Grundlage ist Nicholas Sparks' Roman von 2007. Es ist eine von rund einem Dutzend Verfilmungen seiner Bücher, die seit "Message in a Bottle" von 1999 entstanden sind und die fast alle demselben Muster folgen: zwei Menschen in einem Küstenort in North Carolina, eine Verbindung, ein Schicksalsschlag.
+
+Regie führte Ross Katz, das Budget lag bei 10 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde vom 13. Oktober bis 21. November 2014 in Wilmington, North Carolina — dem Ort, an dem auch mehrere andere Sparks-Verfilmungen entstanden.
+
+Es spielen Benjamin Walker als Travis und Teresa Palmer als Gabby; in Nebenrollen sind Tom Wilkinson, Tom Welling, Maggie Grace und Alexandra Daddario zu sehen.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 5. Februar 2016 und spielte weltweit 23,4 Millionen Dollar ein — 18,7 Millionen in den USA und 4,7 Millionen international. Gemessen an 10 Millionen Produktionskosten war das trotz aller Verrisse ein Gewinn.
+
+Die Kritik lehnte ihn nahezu vollständig ab: 11 Prozent bei Rotten Tomatoes und 26 von 100 bei Metacritic, mit dem Befund, er sei schmerzhaft schematisch; ein Rezensent nannte ihn das filmische Gegenstück dazu, zwei Stunden auf eine Grußkarte zu starren. Das Publikum vergab bei CinemaScore ein B plus.
+
+Der Abstand zwischen Fachkritik und Zielpublikum ist bei diesen Verfilmungen die Regel — und der Grund, warum sie über zwei Jahrzehnte weiterproduziert wurden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:109689', locale: 'de-de',
+    text: `### Worum es geht
+
+Hugo, genannt H, kehrt nach zwei Jahren in London nach Barcelona zurück. Er hat die Zeit gebraucht, um über den Tod seines besten Freundes und die Trennung von Babi hinwegzukommen — beides ist ihm nicht gelungen.
+
+Zu Hause trifft er auf Gin, eine junge Frau, die ihm zunächst nur auf die Nerven geht und die eine ähnliche Verlusterfahrung mitbringt. Als Babi wieder auftaucht, inzwischen mit einem anderen verlobt, muss H entscheiden, ob er der Vergangenheit nachläuft oder das annimmt, was tatsächlich da ist.
+
+### Entstehungsgeschichte
+
+Der Film ist die Fortsetzung von "Tres metros sobre el cielo" (2010) und beruht wie dieser auf einem Roman von Federico Moccia. Beide sind spanische Neuverfilmungen italienischer Vorlagen; die italienische Fassung dieses Stoffs hieß "Ho voglia di te".
+
+Regie führte Fernando González Molina. Produziert wurde der Film unter anderem von Zeta Cinema, Antena 3 Films und Globomedia; verliehen hat ihn Warner Bros.
+
+### Hinter den Kulissen
+
+Gedreht wurde von Ende Oktober bis zum 30. Dezember 2011 in Barcelona.
+
+Mario Casas spielt erneut H, María Valverde kehrt als Babi zurück, Clara Lago spielt Gin. Für Casas war die Reihe der Durchbruch in Spanien.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 22. Juni 2012 und spielte weltweit 24 Millionen Dollar ein. Der Starttag brachte 1.628.000 Euro — der beste Kinostart in Spanien in jenem Jahr bis zu diesem Zeitpunkt. Am Startwochenende lag er weltweit auf Platz zehn.
+
+Auffällig ist die Reichweite außerhalb Spaniens: In Russland war er am selben Wochenende der zweiterfolgreichste Film, nur "The Amazing Spider-Man" lag davor.
+
+Er steht damit für ein Phänomen, das im deutschsprachigen Raum kaum wahrgenommen wird: spanische Jugendfilme, die in Südeuropa und Lateinamerika ein Millionenpublikum erreichen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:579047', locale: 'de-de',
+    text: `### Worum es geht
+
+Miami in einer nahen Zukunft. Der Meeresspiegel ist gestiegen, die Stadt steht teilweise unter Wasser, und weil es tagsüber zu heiß ist, lebt man nachts. Nick Bannister betreibt ein Geschäft, das Menschen ihre eigenen Erinnerungen noch einmal erleben lässt — die meisten kommen, um Verstorbene wiederzusehen.
+
+Eines Abends erscheint Mae. Aus dem Auftrag wird eine Beziehung, und als Mae spurlos verschwindet, beginnt Nick, sich durch seine eigenen Aufzeichnungen zu arbeiten. Die Spur führt zu einem Drogenhändler und zu einer Vergangenheit, die nicht zu dem passt, woran er sich erinnert. Angelegt ist das Ganze entlang der Sage von Orpheus und Eurydike — ein Mann, der eine Tote zurückholen will und dabei nicht wegsehen kann.
+
+### Entstehungsgeschichte
+
+Lisa Joy schrieb das Drehbuch, führte Regie und produzierte; es war ihre erste Kinoarbeit. Zuvor hatte sie gemeinsam mit Jonathan Nolan die Serie "Westworld" verantwortet, die ebenfalls von Erinnerung und deren Verlässlichkeit handelt.
+
+Hugh Jackman spielt Nick Bannister, Rebecca Ferguson spielt Mae, Thandiwe Newton seine Geschäftspartnerin Watts und Cliff Curtis den Gegenspieler Cyrus Boothe.
+
+### Hinter den Kulissen
+
+Die Anlage ist die des Film noir, in eine Klimazukunft übertragen: der Ermittler, der zu viel weiß, die Frau, die verschwindet, die Erzählstimme aus dem Off.
+
+Das überflutete Miami dient dabei nicht als Katastrophenbild, sondern als Alltag: Der Klimawandel hat den größten Teil der Bevölkerung dazu gebracht, nachts zu arbeiten, weil es tagsüber nicht auszuhalten ist. Das Budget lag zwischen 54 und 68 Millionen Dollar.
+
+Der Film erschien am 20. August 2021 gleichzeitig im Kino und für einen Monat bei HBO Max — Teil jener Strategie von Warner Bros., mit der das Studio 2021 sämtliche Filme parallel auswertete und die in der Branche heftig umstritten war. Über zwei Millionen amerikanische Haushalte sahen ihn im Abo.
+
+### Einordnung & Wirkung
+
+Im Kino war der Film ein schwerer Fehlschlag: weltweit 16,4 Millionen Dollar. Der Start brachte 2 Millionen Dollar — der schlechteste Wert, den je ein Film in mehr als 3.000 Kinos erzielt hat.
+
+Die Kritik urteilte überwiegend ablehnend: 37 Prozent bei Rotten Tomatoes; das Publikum vergab bei CinemaScore ein C plus.
+
+Bemerkenswert bleibt die Gestaltung: Nur wenige Filme haben den steigenden Meeresspiegel so beiläufig ins Bild gesetzt — als Stadt, in der man mit dem Boot zur Arbeit fährt, ohne dass es jemand erwähnenswert fände.` },
 ];
