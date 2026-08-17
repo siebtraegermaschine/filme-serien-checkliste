@@ -25472,4 +25472,227 @@ Die Aufnahme fiel geteilt aus. Anerkannt wurden Momente von großer Qualität; k
 Der Bruch wird meist bei Folge 15 verortet: Ab dort ändert die Serie ihre Ausrichtung, das Erzähltempo zieht an, und mehrere Rezensenten warfen ihr vor, alles aufzugeben, was sie zuvor ausgemacht habe, und den einfachen Weg zu wählen. Andere hielten dagegen, sie werde über Jahre in Erinnerung bleiben.
 
 Bei den Newtype Anime Awards 2018 wurde sie für das beste maschinelle Design ausgezeichnet; Zero Two war als beste weibliche Figur nominiert, die Serie selbst als beste Fernsehproduktion.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:11327', locale: 'de-de',
+    text: `### Worum es geht
+
+Der junge Amerikaner Billy Hayes wird 1970 am Flughafen Istanbul festgenommen — er hat zwei Kilogramm Haschisch am Körper festgeklebt. Zunächst zu vier Jahren verurteilt, wird die Strafe kurz vor der Entlassung auf dreißig Jahre erhöht, weil sein Fall zur politischen Frage geworden ist.
+
+Was folgt, spielt fast vollständig im Gefängnis Sağmalcılar: Willkür der Wärter, Gewalt unter Gefangenen, ein Mitgefangener, der Namen an die Leitung weitergibt. Der Titel bezeichnet in der Sprache der Insassen die Flucht — den Zug um Mitternacht, den man nehmen muss.
+
+### Entstehungsgeschichte
+
+Grundlage ist Billy Hayes' Erinnerungsbuch von 1977. Das Drehbuch schrieb Oliver Stone, Regie führte Alan Parker.
+
+Die türkischen Behörden verweigerten Dreharbeiten in Istanbul. Gedreht wurde deshalb überwiegend im Fort Saint Elmo auf Malta, bei einem Budget von 2,3 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Darstellung der Türken war von Anfang an umstritten: Türkische Gemeinden protestierten in mehreren Ländern gegen Vorführungen.
+
+Oliver Stone hat sich 2004 bei einem Besuch in der Türkei ausdrücklich dafür entschuldigt und eingeräumt, der Film habe die Wahrheit verbogen.
+
+Auch Billy Hayes selbst kritisierte die Verfilmung. Er äußerte sich enttäuscht und hielt fest, der Film zeige sämtliche Türken als Ungeheuer — was seiner tatsächlichen Erfahrung nicht entspreche.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film über 35 Millionen Dollar ein.
+
+Er gewann zwei Oscars: bestes adaptiertes Drehbuch für Stone und beste Musik für Giorgio Moroder, dessen elektronische Partitur bis heute nachwirkt. Dazu kamen sechs Golden Globes und mehrere BAFTAs.
+
+Der Film gilt als Musterbeispiel für ein doppeltes Erbe: handwerklich wirkungsvoll und zugleich dafür verantwortlich, das Bild eines ganzen Landes über Jahrzehnte geprägt zu haben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2604', locale: 'de-de',
+    text: `### Worum es geht
+
+Ron Kovic wächst auf Long Island auf, ist am 4. Juli geboren und meldet sich freiwillig zu den Marines. In Vietnam erschießt er versehentlich einen eigenen Kameraden und wird kurz darauf selbst getroffen — von der Brust abwärts gelähmt.
+
+Zurück in den USA erlebt er zunächst ein Veteranenkrankenhaus mit Ratten und fehlendem Personal, dann eine Familie, die nicht darüber sprechen will, und eine Heimatstadt, die ihn als Helden feiert und sonst nichts von ihm hört. Der Film erzählt seinen Weg über Jahre — bis zum Sprecher der Veteranen gegen den Krieg auf dem Parteitag der Demokraten.
+
+### Entstehungsgeschichte
+
+Grundlage ist Ron Kovics Erinnerungsbuch. Produzent Martin Bregman erwarb die Rechte 1976, mit Al Pacino in der Hauptrolle; beide verließen das Vorhaben, und es blieb über ein Jahrzehnt liegen.
+
+Oliver Stone nahm es nach dem Erfolg von "Platoon" 1986 wieder auf und bekam Universal Pictures mit einem Budget von zunächst 14 Millionen Dollar an Bord.
+
+### Hinter den Kulissen
+
+Stone war Tom Cruise gegenüber zunächst skeptisch. Er hat es so beschrieben: Er habe einen jungen Mann gesehen, der alles hat, und sich gefragt, was geschähe, wenn ihn ein Unglück trifft.
+
+Cruise bereitete sich ein Jahr lang vor und besuchte Veteranenkrankenhäuser. Gedreht wurde von Oktober bis Dezember 1988 in Dallas, auf den Philippinen und in Kalifornien, an 65 Tagen; nach Nachdrehs lag das Budget bei 17,8 Millionen Dollar — allein die Schlussszene beim Parteitag wurde für 500.000 Dollar neu gedreht.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 162 Millionen Dollar ein und war der zehnterfolgreichste des Jahres 1989.
+
+Bei acht Oscar-Nominierungen, darunter bester Film, gewann er zwei: beste Regie für Stone — seine zweite — und bester Schnitt. Tom Cruise war als bester Hauptdarsteller nominiert und ging leer aus.
+
+Für ihn war es der Bruch mit dem Bild des strahlenden Hauptdarstellers, das "Top Gun" drei Jahre zuvor begründet hatte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:290', locale: 'de-de',
+    text: `### Worum es geht
+
+Barton Fink hat 1941 am Broadway Erfolg mit einem Stück über einfache Leute und wird nach Hollywood geholt. Dort soll er ein Drehbuch für einen Ringerfilm schreiben — ein Genre, von dem er nichts versteht und nichts halten will.
+
+Er zieht in das heruntergekommene Hotel Earle, wo die Tapeten sich von den Wänden lösen, und bringt keine Zeile zustande. Sein Nachbar Charlie Meadows, ein redseliger Versicherungsvertreter, will ihm helfen. Was Barton dabei übersieht: Er redet unablässig über den einfachen Mann und hört keinem einzigen zu.
+
+### Entstehungsgeschichte
+
+Die Coen-Brüder schrieben den Film als Pause, während sie bei "Miller's Crossing" nicht weiterkamen. Joel Coen hat das erklärt: Das Arbeitstempo habe nachgelassen, und man habe Abstand gewinnen wollen.
+
+Das Drehbuch entstand in drei Wochen. Das Budget lag bei 9 Millionen Dollar.
+
+### Hinter den Kulissen
+
+John Turturro spielt Barton Fink, John Goodman den Nachbarn Charlie Meadows. Die Kamera führte Roger Deakins — die erste von vielen gemeinsamen Arbeiten mit den Coens.
+
+Das Hotel Earle ist als eigene Figur angelegt: verfallender Art déco, abblätternde Wände, nahezu leer. Die Coens haben ihre Vorstellung davon beschrieben — ein Geisterschiff, das antriebslos treibt.
+
+### Einordnung & Wirkung
+
+Bei den Filmfestspielen in Cannes 1991 gewann der Film gleich dreifach: Goldene Palme, beste Regie und bester Darsteller. Eine solche Häufung ist in der Festivalgeschichte außergewöhnlich geblieben — die Jury änderte anschließend die Regeln, um sie künftig zu verhindern.
+
+Wirtschaftlich fiel er durch: 6,2 Millionen Dollar Einspielergebnis bei 9 Millionen Herstellungskosten. Es gab drei Oscar-Nominierungen.
+
+Er gilt heute als eine der geschlossensten Arbeiten der Coens und als einer der wenigen Filme, die das Schreiben selbst zum Gegenstand machen, ohne es zu verklären.` },
+  {
+    bereich: 'titel', schluessel: 'movie:395991', locale: 'de-de',
+    text: `### Worum es geht
+
+Prescott in Arizona: Eine örtliche Feuerwehrtruppe unter Eric Marsh will als Hotshots anerkannt werden — jene Elitegruppen, die bei Waldbränden vorn eingesetzt werden und Schneisen in den Boden schlagen. Bislang dürfen sie nur hinterher aufräumen.
+
+Sie schaffen die Anerkennung als Granite Mountain Hotshots. Der Film erzählt daneben die Geschichte von Brendan McDonough, der drogenabhängig war und aufgenommen wird, weil er Vater geworden ist. Am 30. Juni 2013 rückt die Truppe zum Yarnell-Hill-Brand aus. Neunzehn der zwanzig Männer kommen dabei ums Leben.
+
+### Entstehungsgeschichte
+
+Grundlage ist ein Artikel von Sean Flynn im Magazin GQ mit dem Titel "No Exit". Das Drehbuch schrieben Ken Nolan und Eric Warren Singer, Regie führte Joseph Kosinski.
+
+Josh Brolin spielt Eric Marsh, Miles Teller spielt Brendan McDonough, Jeff Bridges spielt Duane Steinbrink.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab Juni 2016 in New Mexico. Das Budget lag bei 38 Millionen Dollar.
+
+Bei den Dreharbeiten wurde ein Kameramann schwer verletzt; er erstritt 2022 einen Vergleich über 60 Millionen Dollar — mehr, als der Film insgesamt eingespielt hat.
+
+Der Film verzichtet weitgehend auf digitale Feuerdarstellung und arbeitet mit echten Bränden und Modellen; die Effektarbeit wurde entsprechend ausgezeichnet.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 20. Oktober 2017 und spielte weltweit nur 26,3 Millionen Dollar ein, davon 18,3 Millionen in den USA — bei 38 Millionen Produktionskosten ein Fehlschlag.
+
+Die Kritik reagierte dagegen gut: 87 Prozent bei Rotten Tomatoes, mit Lob für die Besetzung; das Publikum vergab bei CinemaScore ein A.
+
+Er gehört damit zu jenen Filmen, deren Qualität unbestritten ist und die dennoch niemand gesehen hat — ein wiederkehrendes Schicksal ernster amerikanischer Filme mittlerer Größe in den zehner Jahren.` },
+  {
+    bereich: 'titel', schluessel: 'movie:787752', locale: 'de-de',
+    text: `### Worum es geht
+
+Noa ist die Verabredungen über Anwendungen leid — Männer, die sie kritisieren, während sie das Essen bezahlt. Im Supermarkt spricht sie ein Mann an, der ihr Trauben empfiehlt: Steve, charmant, ohne soziale Netzwerke, offenbar Chirurg.
+
+Nach wenigen Treffen lädt er sie zu einem Wochenende ein. Was dort geschieht, gibt der Film erst nach mehr als dreißig Minuten preis — an der Stelle, an der der Vorspann einsetzt. Steve verkauft Menschenfleisch an wohlhabende Kunden, und Noa ist die nächste Lieferung.
+
+### Entstehungsgeschichte
+
+Es ist der erste Kinofilm von Mimi Cave. Produziert wurde er von Adam McKay über Hyperobject Industries gemeinsam mit Legendary Pictures.
+
+Daisy Edgar-Jones spielt Noa, Sebastian Stan spielt Steve; daneben sind Jonica T. Gibbs, Charlotte Le Bon und Andrea Bang zu sehen.
+
+### Hinter den Kulissen
+
+Gedreht wurde von Februar bis März 2021 in British Columbia.
+
+Der verzögerte Vorspann ist die auffälligste Entscheidung: Bis dahin sieht der Film wie eine romantische Komödie aus, und die Umstellung erfolgt genau in dem Moment, in dem Noa begreift, worauf sie sich eingelassen hat.
+
+Es war der erste Legendary-Film, der über Disney veröffentlicht wurde — bei Hulu statt im Kino.
+
+### Einordnung & Wirkung
+
+Der Film lief am 20. Januar 2022 beim Sundance-Festival und erschien am 4. März 2022 bei Hulu.
+
+Die Kritik reagierte gut: 82 Prozent bei Rotten Tomatoes, mit Lob für das Zusammenspiel der beiden Hauptdarsteller und für die Übertragung: Der Film mache aus dem Schrecken des heutigen Verabredungswesens eine Mahlzeit.
+
+Er gehört damit zu einer Reihe von Filmen der frühen zwanziger Jahre, die Genrekino als Gesellschaftskommentar verwenden — neben "Get Out", "Promising Young Woman" und "The Menu".` },
+  {
+    bereich: 'titel', schluessel: 'movie:9531', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Computerfachmann Gus Gorman entdeckt zufällig, dass er begabt ist: Er zweigt Centbeträge von Gehaltsabrechnungen ab und wird prompt vom Konzernchef Ross Webster angeheuert, der die Weltmärkte beherrschen will.
+
+Websters erster Schritt ist die Beseitigung Supermans. Ein nachgebautes Kryptonit mit fehlerhafter Zusammensetzung tötet ihn nicht, sondern verdirbt seinen Charakter: Superman lässt sich gehen, trinkt und richtet Schaden an. Der Höhepunkt ist ein Kampf gegen sich selbst — der verdorbene Superman gegen Clark Kent auf einem Schrottplatz.
+
+### Entstehungsgeschichte
+
+Regie führte Richard Lester, der bereits "Superman II" fertiggestellt hatte. Christopher Reeve spielt erneut Superman.
+
+Richard Pryor wurde als Gus Gorman besetzt und erhielt dafür 5 Millionen Dollar. Die Ausrichtung des Films auf ihn war eine bewusste Entscheidung in Richtung Komödie.
+
+### Hinter den Kulissen
+
+Die Rolle der Lois Lane wurde stark zurückgenommen. Produzent Ilya Salkind hat das begründet: Man habe für Superman eine andere Richtung bei der Liebesgeschichte einschlagen wollen — an Margot Kidders Stelle tritt Lana Lang.
+
+Die Schrottplatz-Szene wird bis heute hervorgehoben: Reeves Darstellung des verdorbenen Superman gilt als der stärkste Teil des Films — er spielt darin beide Figuren gegeneinander, und der Film verzichtet dabei auf jede Erklärung.
+
+### Einordnung & Wirkung
+
+Bei einem Budget von 39 Millionen Dollar spielte der Film weltweit 80,2 Millionen ein — deutlich weniger als die beiden Vorgänger.
+
+Die Kritik lehnte ihn ab: 31 Prozent bei Rotten Tomatoes. Leonard Maltin nannte ihn eine grässliche Fortsetzung, die alles zerstört habe, wofür Superman stand, um billiger Lacher willen.
+
+Der Film markiert den Bruch der Reihe: Der vierte Teil von 1987 fiel noch deutlicher durch, und erst 2006 wurde die Figur mit "Superman Returns" wieder aufgegriffen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:22824', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film behauptet, auf Tonband- und Videoaufnahmen aus dem Jahr 2000 zu beruhen. In Nome, Alaska, verschwinden seit Jahren Menschen. Die Psychologin Abigail Tyler nimmt Sitzungen mit Patienten auf, die nachts erwachen und eine Eule vor dem Fenster sehen.
+
+Unter Hypnose berichten sie von etwas anderem. Die Aufnahmen brechen ab, Tyler selbst gerät in die Vorgänge. Der Film zeigt dazu vermeintliche Originalaufnahmen neben nachgestellten Szenen — mitunter im geteilten Bild nebeneinander.
+
+### Entstehungsgeschichte
+
+Milla Jovovich tritt zu Beginn vor die Kamera und stellt den Film als Tatsachenbericht vor, in dem Archivmaterial einer realen Psychologin namens Abigail Tyler verwendet werde.
+
+Das ist nicht zutreffend: Die "echte" Abigail Tyler wird von der Darstellerin Charlotte Milchard gespielt. Das Budget lag bei 10 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Universal Pictures ging bei der Werbung noch weiter und veröffentlichte erfundene Zeitungsberichte, die realen alaskischen Blättern zugeschrieben wurden — dem "Nome Nugget" und dem "Fairbanks Daily News-Miner".
+
+Die Zeitungen klagten. Universal beglich die Sache mit 20.000 Dollar an den Alaska Press Club und weiteren 2.500 Dollar für ein Stipendium. Der Fall gehört zu den wenigen, in denen die Werbung für einen Film gerichtliche Folgen hatte.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 49,5 Millionen Dollar ein; der Start in den USA brachte 12,2 Millionen aus 2.527 Kinos.
+
+Die Kritik lehnte ihn ab: 18 Prozent von 114 Besprechungen bei Rotten Tomatoes, 34 von 100 bei Metacritic. Roger Ebert vergab anderthalb Sterne und verglich ihn zuungunsten mit "Paranormal Activity" und "Blair Witch Project", lobte aber Jovovich.
+
+Bemerkenswert ist die Nachgeschichte: Nachdem der Film 2023 bei Netflix verfügbar wurde, erlebte er über soziale Netzwerke eine späte Bekanntheit.` },
+  {
+    bereich: 'titel', schluessel: 'movie:13971', locale: 'de-de',
+    text: `### Worum es geht
+
+Poppy Moore ist sechzehn, lebt in Malibu und hat eine Kreditkarte ohne Grenze. Nachdem sie die Sachen der neuen Freundin ihres Vaters auf den Rasen geworfen und in Brand gesteckt hat, meldet er sie in einem englischen Internat an.
+
+Dort gibt es Schuluniformen, Ausgangssperren und keine Klimaanlage. Poppy versucht zunächst, sich hinauswerfen zu lassen, und macht dabei so viel kaputt, dass ihre Mitschülerinnen sie ausschließen. Was sie danach lernt, hat mit dem zu tun, wovor sie eigentlich davonläuft: dem Tod ihrer Mutter.
+
+### Entstehungsgeschichte
+
+Regie führte Nick Moore, das Drehbuch schrieb Lucy Dahl — eine Tochter des Schriftstellers Roald Dahl.
+
+Emma Roberts spielt Poppy, Natasha Richardson die Schulleiterin Mrs. Kingsley, Alex Pettyfer den Sohn der Schulleiterin. Das Budget lag bei 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Innenaufnahmen entstanden in Cobham Hall in Kent, die Außenaufnahmen in Balls Park. Weitere Aufnahmen entstanden in Yorkshire und im Brontë-Pfarrhaus in Haworth.
+
+Für Natasha Richardson war es eine der letzten Rollen; sie starb im März 2009 nach einem Skiunfall. Alex Pettyfer stand am Anfang seiner Laufbahn — drei Jahre später spielte er die Hauptrolle in "Ich bin Nummer Vier".
+
+### Einordnung & Wirkung
+
+Der Film erschien am 15. August 2008 in Großbritannien und spielte weltweit 21,9 Millionen Dollar ein. In Nordamerika kam er nicht ins Kino, sondern direkt auf DVD.
+
+Die Kritik urteilte zurückhaltend: 38 Prozent bei Rotten Tomatoes mit dem Wortspiel, der Film sei eher mild als wild; andere nannten ihn sympathisch, aber zahm.
+
+Seither hat er eine beachtliche Anhängerschaft gewonnen, besonders in Großbritannien, wo er spielt — einer jener Jugendfilme, deren Wirkung sich erst über Wiederholungen im Fernsehen und über Streaming entfaltet hat.` },
 ];
