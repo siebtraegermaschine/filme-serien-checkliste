@@ -614,7 +614,7 @@
   @media (hover: hover) { .onb-wahl:hover { border-color:var(--accent); } }
   .onb-mehr { background:none; border:none; color:var(--accent); font-size:13px; font-weight:600;
     cursor:pointer; padding:8px 2px 0; text-decoration:underline; }
-  .onb-zaehler { color:var(--text-dim); font-size:12px; margin-top:10px; }
+  .onb-zaehler { color:var(--text-dim); font-size:12px; text-align:center; margin:0 0 8px; min-height:15px; }
   .auth-forgot { display:block; margin:8px auto 0; background:none; border:none; color:var(--text-dim);
     font-size:12px; cursor:pointer; text-decoration:underline; }
 
@@ -1811,6 +1811,10 @@
     <div class="onb-inhalt" id="onbInhalt"></div>
     <div class="auth-error" id="onbFehlerEl"></div>
     <div class="onb-fuss">
+      <!-- Der Zaehler ("2 von 3") gehoert NEBEN den Knopf, nicht in die
+           Chipliste: dort scrollt er auf dem Telefon unter die Falte, und
+           genau er sagt, warum "Weiter" noch gesperrt ist. -->
+      <div class="onb-zaehler" id="onbZaehlerEl"></div>
       <button type="button" class="auth-submit" id="onbWeiterBtn"></button>
     </div>
   </div>
@@ -9711,6 +9715,7 @@ var ONB_FREIGABE = false;
   var introEl = document.getElementById('onbIntroEl');
   var inhaltEl = document.getElementById('onbInhalt');
   var fehlerEl = document.getElementById('onbFehlerEl');
+  var zaehlerEl = document.getElementById('onbZaehlerEl');
   var zurueckBtn = document.getElementById('onbZurueckBtn');
   var weiterBtn = document.getElementById('onbWeiterBtn');
 
@@ -9799,8 +9804,7 @@ var ONB_FREIGABE = false;
           return kachel(g, genreName(g), wahlGenres.indexOf(g) !== -1);
         }).join('') + '</div>' +
         (genresAufgeklappt ? '' : '<button type="button" class="onb-mehr" id="onbMehrBtn">' +
-          esc(TXT.onbGenreMehr) + '</button>') +
-        '<div class="onb-zaehler" id="onbZaehlerEl"></div>';
+          esc(TXT.onbGenreMehr) + '</button>');
         zaehlerSetzen();
         inhaltEl.onclick = function(e){
           if (e.target.id === 'onbMehrBtn') { genresAufgeklappt = true; SCHRITTE[3].zeichnen(); return; }
@@ -9836,6 +9840,8 @@ var ONB_FREIGABE = false;
     balkenEl.style.width = Math.round(n / ONB_SCHRITTE * 100) + '%';
     titelEl.textContent = s.titel;
     introEl.textContent = s.intro;
+    // Der Zaehler steht dauerhaft im Fuss -- nur der Genre-Schritt fuellt ihn.
+    zaehlerEl.textContent = '';
     s.zeichnen();
     // Der Zurueck-Pfeil bleibt im Fluss stehen (visibility statt display),
     // sonst ruecken Stand und Balken beim ersten Schritt seitlich weg.
