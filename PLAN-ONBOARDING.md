@@ -258,15 +258,21 @@ aufblasen kann. Damit ist sichtbar, welcher Schritt Leute verliert.
 
 | Route | Zweck |
 |---|---|
-| `GET /api/onboarding` | Stand: Schritt, Anläufe, bisherige Antworten |
-| `PUT /api/onboarding/schritt` | Einen Schritt speichern (`{schritt, daten}`), zählt das Aggregat hoch und schreibt das KPI-Ereignis |
+| `GET /api/onboarding` | Stand (Schritt, Anläufe, bisherige Antworten) **plus** die Antwortmöglichkeiten und Grenzwerte |
+| `PUT /api/onboarding/schritt` | Einen Schritt abschließen (`{schritt, daten}`), zählt das Aggregat hoch und schreibt das KPI-Ereignis |
 | `POST /api/onboarding/abbruch` | Anläufe +1 beim Schließen per ✕ |
 | `POST /api/onboarding/fertig` | Abschluss vermerken |
 
-`publicUser()` in `backend/routes/auth.js` liefert zusätzlich
-`onboarding: { schritt, anlaeufe, abgeschlossen }` — sonst müsste das Frontend
-nach jeder Anmeldung eine zweite Abfrage machen, bevor es weiß, ob das Fenster
-aufgeht.
+Der Stand kommt über die **eigene Route**, nicht über `publicUser()`:
+`publicUser` wird an sieben Stellen aus unterschiedlichen SELECTs gebaut, die
+alle um einen Join erweitert werden müssten. Die Abfrage läuft im Frontend
+parallel zu den übrigen Anmeldeabfragen (`loadUserProgressAndRefresh`) und
+kostet dort keine zusätzliche Wartezeit.
+
+`GET /api/onboarding` liefert auch die Listen für Schauverhalten und Genres.
+Sie stehen damit **nur** in `backend/lib/onboarding.js` — eine zweite Liste im
+Browser wäre eine, die auseinanderläuft, und der Bruch fiele erst auf, wenn
+eine gültige Antwort abgelehnt wird.
 
 Schritt 4 und 5 benutzen die **bestehenden** Routen (Anbieter speichern,
 `/api/kinos/*`) und melden nur ihren Abschluss an `/api/onboarding/schritt`.
@@ -299,8 +305,9 @@ das ist der größte einzelne Aufwandsposten des Vorhabens, größer als die Log
 Alle sieben werden zusammen fertig; ein Prozess, der für sechs von sieben
 Sprachen auf Deutsch steht, ist schlimmer als keiner.
 
-Dazu: die Genre-Namen liegen für en (`GENRE_EN`) und fr/es/it/nl
-(`GENRE_NAMEN`) schon vor; **pt fehlt dort und muss ergänzt werden**. Die vier
+Die Genre-Namen sind bereits vollständig gepflegt (`GENRE_EN` für Englisch,
+`GENRE_NAMEN` für fr/es/it/nl/pt) — das Fenster übersetzt sie mit derselben
+Funktion wie die Genre-Schildchen an den Titelzeilen. Nur die vier
 Themen-Schlagwörter (True Crime usw.) brauchen eigene Übersetzungen.
 
 ---

@@ -894,3 +894,60 @@ CREATE TABLE IF NOT EXISTS seo_content (
   aktualisiert_am TIMESTAMPTZ NOT NULL DEFAULT now(),
   UNIQUE (bereich, schluessel, locale)
 );
+
+-- ============================================================================
+-- Onboarding (siehe PLAN-ONBOARDING.md)
+--
+-- Der Prozess nach der ersten Anmeldung: Titel bewerten, Schauverhalten,
+-- Lieblings-Genres, Streaminganbieter, Kinos. Bewusst ZWEI getrennte Ablagen:
+--
+--   user_onboarding      -- personenbezogen, verschwindet mit dem Konto
+--   onboarding_aggregat  -- reine Zaehler ohne Personenbezug, bleiben
+--
+-- Anbieter und Kinos stehen NICHT in user_onboarding: sie liegen weiterhin in
+-- users.watch_provider_ids und user_kinos. Zwei Speicherorte fuer dieselbe
+-- Angabe waeren zwei Wahrheiten, die auseinanderlaufen, sobald jemand die
+-- Einstellungen aendert.
+-- ============================================================================
+
+CREATE TABLE IF NOT EXISTS user_onboarding (
+  user_id          BIGINT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+  -- Schritt 2: Mehrfachauswahl aus SCHAUVERHALTEN (lib/onboarding.js).
+  schauverhalten   TEXT[] NOT NULL DEFAULT '{}',
+  -- Schritt 3: Genre-Namen in der Datenbankfassung ("Science Fiction") bzw.
+  -- Themen-Schlagwoerter mit Praefix ("thema:TrueCrime").
+  genres           TEXT[] NOT NULL DEFAULT '{}',
+  -- Zuletzt ABGESCHLOSSENER Schritt (0 = noch keiner). Daran haengt zweierlei:
+  -- wo die Wiederaufnahme ansetzt, und ob ein Schritt schon im Aggregat
+  -- gezaehlt wurde (gezaehlt wird nur beim ersten Erreichen -- wer ueber den
+  -- Zurueck-Pfeil noch einmal antwortet, soll die Statistik nicht verdoppeln).
+  schritt          SMALLINT NOT NULL DEFAULT 0,
+  -- Wie oft das Fenster per X geschlossen wurde. Ab ANLAEUFE_MAX kommt es
+  -- nicht mehr von selbst -- wer dreimal weggeklickt hat, will nicht.
+  anlaeufe         SMALLINT NOT NULL DEFAULT 0,
+  begonnen_am      TIMESTAMPTZ NOT NULL DEFAULT now(),
+  abgeschlossen_am TIMESTAMPTZ
+);
+
+-- Anonyme Zusammenfassung, die eine Kontoloeschung ueberdauert.
+--
+-- KEINE user_id, kein Zeitstempel feiner als der Monat, keine Zeile, die eine
+-- Person beschreibt -- nur Summen je Antwortmoeglichkeit. Solche Aggregate sind
+-- nach Erwaegungsgrund 26 DSGVO keine personenbezogenen Daten mehr; genau
+-- deshalb duerfen sie bleiben (dieselbe Ueberlegung wie bei
+-- title_rating_stats, siehe datenschutz.html Abschnitt 8).
+--
+-- Kinos werden bewusst nur als ORT gezaehlt, nicht je Kino: ein einzelnes Kino
+-- in einer kleinen Stadt ist praktisch eine Wohnadresse. Und bei kleinen Zahlen
+-- kann eine Zeile mit anzahl = 1 in Verbindung mit anderen Zeilen desselben
+-- Monats theoretisch auf eine Person zurueckfuehren -- die Auswertung blendet
+-- Werte unter einer Mindestzahl deshalb aus (siehe lib/onboarding.js,
+-- AGGREGAT_SCHWELLE).
+CREATE TABLE IF NOT EXISTS onboarding_aggregat (
+  frage   TEXT NOT NULL,     -- 'schauverhalten' | 'genre' | 'anbieter' | 'kino_ort' | 'titel' | 'abschluss' | 'abbruch'
+  antwort TEXT NOT NULL,     -- 'kino' | 'Thriller' | '8' | 'Koblenz' | '10-14' | 'fertig' | '3'
+  monat   DATE NOT NULL,     -- Monatserster
+  region  TEXT NOT NULL,     -- ISO-3166-Region der Person, 'XX' wenn unbekannt
+  anzahl  INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (frage, antwort, monat, region)
+);

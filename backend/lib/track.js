@@ -11,6 +11,12 @@ import { pool } from '../db/pool.js';
 export const EVENT_NAMEN = [
   'app_opened',
   'user_signed_up',
+  // Trichter des Onboardings (PLAN-ONBOARDING.md): NUR Schrittnummer und was
+  // dort geschah ('fertig' | 'abgebrochen' | 'abgeschlossen'), keine Antworten.
+  // Wird ausschliesslich serverseitig ausgeloest (routes/onboarding.js) und
+  // steht deshalb NICHT in CLIENT_EVENT_NAMEN -- so lassen sich die Zahlen von
+  // aussen weder ausloesen noch aufblasen.
+  'onboarding_step',
   'group_created',
   'invite_sent',
   'invite_opened',

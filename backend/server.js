@@ -28,6 +28,7 @@ import movieNightRouter from './routes/movieNight.js';
 import metrikRouter from './routes/metrik.js';
 import eventsRouter from './routes/events.js';
 import kpiRouter from './routes/kpi.js';
+import onboardingRouter from './routes/onboarding.js';
 import { anonId } from './middleware/anonId.js';
 import { starteKpiSnapshot, starteKpiAufraeumen } from './lib/kpi.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
@@ -113,6 +114,7 @@ app.use('/api/movie-night', movieNightRouter);
 app.use('/api/metrik', metrikRouter);
 app.use('/api/events', eventsRouter);
 app.use('/api/kpi', kpiRouter);
+app.use('/api/onboarding', onboardingRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
 const frontendRoot = path.join(__dirname, '..');

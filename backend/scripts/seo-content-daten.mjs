@@ -37964,4 +37964,580 @@ Beim Publikum ergab CinemaScore dagegen ein „C".
 Diese Spreizung ist für Horrorfilme mit religiösem Stoff nicht ungewöhnlich, hier aber besonders deutlich. Ein Film, der eine Marienerzählung gegen den Strich bürstet und auf ein hartes Ende zuläuft, findet bei der Fachkritik eher Zustimmung als bei einem Publikum, das eine andere Art von Auflösung erwartet.
 
 Wirtschaftlich ging die Rechnung dennoch auf: fast das Vierfache des Budgets, davon deutlich mehr außerhalb Nordamerikas als darin.` },
+  // ---- Block 078 ----
+  {
+    bereich: 'titel', schluessel: 'series:64432', locale: 'de-de',
+    text: `### Worum es geht
+
+Quentin Coldwater beginnt ein Magiestudium am Brakebills College for Magical Pedagogy.
+
+Dabei stellt er fest, dass die Welt aus seinen Lieblingsbüchern aus der Kindheit tatsächlich existiert. Was in den Büchern ein Sehnsuchtsort war, erweist sich als Gefahr — und die Ausbildung, die Quentin durchläuft, ist keine Vorbereitung darauf.
+
+### Entstehungsgeschichte
+
+Vorlage ist Lev Grossmans Roman „The Magicians".
+
+Erschaffen wurde die Serie von Sera Gamble und John McNamara.
+
+Jason Ralph spielt Quentin Coldwater, Stella Maeve die Julia Wicker, Olivia Taylor Dudley die Alice Quinn, Hale Appleman den Eliot Waugh, Arjun Gupta den William „Penny" Adiyodi, Summer Bishil die Margo Hanson und Jade Tailor die Kady Orloff-Diaz.
+
+Produziert wurde die Serie von Universal Cable Productions, der McNamara Moving Company, Man Sewing Dinosaur und Groundswell Productions; Mitch Engel war Produzent, die Musik stammt von Will Bates.
+
+Es entstanden fünf Staffeln mit 65 Folgen von je 42 Minuten. In den USA lief die Serie vom 16. Dezember 2015 bis zum 1. April 2020 bei Syfy, in Deutschland ab dem 30. September 2016 bei sixx und bis März 2021 bei Prime Video.
+
+### Hinter den Kulissen
+
+Die Grundidee ist eine Verschiebung. Eine Zauberschule und ein Kinderbuchland — beides Bausteine, die das Genre kennt — werden hier an Erwachsene übergeben, mit allem, was das mitbringt: Abhängigkeiten, Versagen, Konsequenzen.
+
+Der zweite Baustein ist die Enttäuschung. Quentin liebt die Kinderbücher, in denen diese Welt vorkommt; dass sie existiert, ist für ihn zunächst eine Erfüllung — und wird dann zur Bedrohung. Die Serie nimmt eine Sehnsucht ernst genug, um sie zu widerlegen.
+
+Fünf Staffeln bei 65 Folgen bedeuten im Schnitt 13 Folgen je Staffel — ein Zuschnitt, der Raum für abgeschlossene Erzählbögen lässt, ohne die Serie in eine reine Fallstruktur zu drängen.
+
+### Einordnung & Wirkung
+
+Über viereinhalb Jahre und fünf Staffeln lief die Serie bei Syfy — für einen Sender mit diesem Profil eine erhebliche Laufzeit.
+
+Bemerkenswert ist die deutsche Auswertung. Nach dem Start bei sixx im September 2016 wanderte die Serie zu Prime Video, wo sie bis März 2021 lief. Damit endete die deutsche Ausstrahlung fast ein Jahr nach dem amerikanischen Serienfinale.
+
+Die Anlage der Vorlage erklärt einen Teil der Wirkung. Lev Grossmans Roman arbeitet mit dem Wissen seiner Leser über andere Magiegeschichten — die Serie erbt diese Voraussetzung. Wer die Bausteine kennt, sieht, wo sie zusammengesetzt und wo sie gebrochen werden.
+
+Dass die Serie über fünf Staffeln getragen hat, spricht dafür, dass diese Voraussetzung bei ihrem Publikum vorhanden war.` },
+  {
+    bereich: 'titel', schluessel: 'series:58474', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie behandelt wissenschaftliche Themen in großer Spannweite — vom Aufbau des Universums bis zur Entstehung des Lebens auf der Erde.
+
+Sie knüpft an „Unser Kosmos" von 1980 an, die von Carl Sagan moderierte Reihe, die als Durchbruch im Wissenschaftsfernsehen galt und über 400 Millionen Zuschauer in 60 Ländern erreichte.
+
+### Entstehungsgeschichte
+
+Moderiert wird die Neuauflage von Neil deGrasse Tyson.
+
+Als Executive Producers fungierten Seth MacFarlane, Brannon Braga, Mitchell Cannold und Ann Druyan — Letztere die Witwe Carl Sagans.
+
+Die Musik komponierte Alan Silvestri.
+
+Es entstanden 26 Folgen in zwei Staffeln, jede 52 Minuten lang. In den USA lief die Serie vom 9. März 2014 bis zum 20. April 2020 bei Fox, international und in Deutschland beim National Geographic Channel; die deutsche Ausstrahlung lief vom 10. März 2014 bis zum 7. Juni 2020.
+
+### Hinter den Kulissen
+
+Die Beteiligung Ann Druyans stellt die Verbindung zur Vorgängerserie her. Als Witwe Carl Sagans steht sie für die Fortsetzung eines Vorhabens, nicht für eine Neuauflage unter altem Namen.
+
+Auffällig ist die Konstellation der Produzenten. Seth MacFarlane, bekannt aus einem ganz anderen Bereich des Fernsehens, steht neben Brannon Braga und Ann Druyan — eine Kombination, die den Zugang zu einem großen Sender erklärt. Die Serie lief bei Fox im Hauptprogramm, nicht auf einem Spartenkanal.
+
+Der zeitliche Zuschnitt ist bemerkenswert. Zwischen dem Start 2014 und dem Ende 2020 liegen sechs Jahre für 26 Folgen — die zweite Staffel folgte erst mit erheblichem Abstand.
+
+### Einordnung & Wirkung
+
+Die Serie gewann den Critics' Choice Award als beste Realityshow, Neil deGrasse Tyson wurde als bester Moderator ausgezeichnet. 2014 kamen zwölf Emmy-Nominierungen hinzu, darunter in der Kategorie Outstanding Documentary Or Nonfiction Series.
+
+Der Bezugspunkt bleibt dabei die Vorgängerserie. Über 400 Millionen Zuschauer in 60 Ländern sind ein Maßstab, an dem sich jede Fortsetzung messen lassen muss — und der zugleich erklärt, warum eine Neuauflage überhaupt versucht wurde.
+
+Dass die Reihe im Hauptprogramm eines großen Senders lief und dennoch zwölf Emmy-Nominierungen erhielt, beschreibt ihren Anspruch: Sie sollte weder ein Nischenprodukt noch eine Vereinfachung sein.
+
+Die Ausstrahlung in Deutschland lief nahezu zeitgleich mit der amerikanischen — ein Hinweis darauf, dass die Serie von Anfang an für den internationalen Markt angelegt war.` },
+  {
+    bereich: 'titel', schluessel: 'series:8358', locale: 'de-de',
+    text: `### Worum es geht
+
+Dr. Cal Lightman und sein Team von der Lightman Group arbeiten für Auftraggeber, die wissen wollen, ob jemand die Wahrheit sagt.
+
+Ihr Werkzeug sind Mikroexpressionen und Körpersprache — flüchtige Regungen im Gesicht, die verraten, was jemand tatsächlich empfindet.
+
+### Entstehungsgeschichte
+
+Die Serie beruht auf den Forschungen des Psychologen Paul Ekman, der die Deutung von Emotionen anhand von Gesichtsausdrücken entwickelt hat.
+
+Konzipiert wurde sie von Samuel Baum.
+
+Tim Roth spielt Dr. Cal Lightman, Kelli Williams die Dr. Gillian Foster, Brendan Hines den Eli Loker, Monica Raymund die Ria Torres und Mekhi Phifer den Ben Reynolds. In der deutschen Fassung sprechen Patrick Winczewski den Lightman, Claudia Lössl die Foster, Markus Pfeiffer den Loker, Sonja Spuhl die Torres und Dennis Schmidt-Foß den Reynolds.
+
+Es entstanden drei Staffeln mit 48 Folgen von je 42 Minuten. In den USA lief die Serie vom 21. Januar 2009 bis zum 31. Januar 2011 bei Fox, in Deutschland vom 10. März 2010 bis zum 25. Januar 2012 bei VOX.
+
+### Hinter den Kulissen
+
+Die wissenschaftliche Grundlage ist zugleich das erzählerische Werkzeug. Weil Paul Ekmans Forschung reale Grundlage hat, kann die Serie ihre Ermittlungen als Verfahren darstellen — nicht als Eingebung, sondern als Auswertung.
+
+Daraus folgt eine ungewöhnliche Bildsprache. Die entscheidenden Beweise sind Gesichter; die Serie muss zeigen, was sie behauptet, und arbeitet deshalb mit Nahaufnahmen und Standbildern statt mit Spurensicherung.
+
+Die Hauptfigur ist entsprechend angelegt. Jemand, der beruflich Lügen erkennt, hat ein besonderes Verhältnis zu allen um ihn herum — Cal Lightman kann nicht abschalten, und die Serie zieht daraus ihren Zugriff auf das Privatleben ihrer Figuren.
+
+### Einordnung & Wirkung
+
+Drei Staffeln und 48 Folgen in zwei Jahren — die Serie lief von Januar 2009 bis Januar 2011 bei Fox.
+
+Die deutsche Ausstrahlung begann gut ein Jahr nach der amerikanischen und endete fast ein Jahr nach dem Serienfinale. VOX zeigte die letzte Folge am 25. Januar 2012.
+
+Bemerkenswert ist der Ansatz im Vergleich zu anderen Ermittlungsserien jener Jahre. Wo dort Labore, Datenbanken und Spuren im Mittelpunkt stehen, arbeitet diese Serie mit einer Methode, die keine Technik braucht — nur Beobachtung.
+
+Das ist zugleich ihre schwierigste Stelle. Eine Serie, die sich auf reale Forschung beruft, muss deren Reichweite dramaturgisch überdehnen, damit ein Fall pro Folge gelöst werden kann. Der Ausgangspunkt bei Ekman ist belegt; was die Lightman Group daraus macht, ist Fiktion.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1087891', locale: 'de-de',
+    text: `### Worum es geht
+
+Charlie Heller ist Kryptograph bei der CIA — ein Mann für Schreibtisch und Bildschirm. Bei einem Terroranschlag kommt seine Frau ums Leben.
+
+Was folgt, ist kein Antrag auf Ermittlung. Heller setzt seinen Arbeitgeber unter Druck, damit die CIA ihn selbst ausbildet, und macht sich dann an vier Verdächtige. Sein Mittel ist nicht Gewalt im üblichen Sinn, sondern Improvisation und Technik.
+
+### Entstehungsgeschichte
+
+Vorlage ist Robert Littells Roman „The Amateur" von 1981.
+
+Regie führte James Hawes. Das Drehbuch schrieben Ken Nolan und Gary Spinelli.
+
+Rami Malek spielt Charlie Heller, Laurence Fishburne den Robert „Hendo" Henderson, Rachel Brosnahan die Ehefrau Sarah Heller, Caitríona Balfe die Inquiline/Davies, Michael Stuhlbarg den Horst Schiller, Holt McCallany den CIA-Direktor Alex Moore, Julianne Nicholson die CIA-Direktorin Samantha O'Brien und Jon Bernthal den Jackson O'Brien alias „The Bear".
+
+Produziert wurde der Film von Hutch Parker Entertainment, den Verleih übernahm 20th Century Studios. Die Kamera führte Martin Ruhe, den Schnitt besorgte Jonathan Amos, die Musik stammt von Volker Bertelmann.
+
+Gedreht wurde in London, in Südostengland, in Frankreich, in der Türkei und in den Pinewood Studios. Das Budget betrug 60 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Titel ist das Programm. Die Hauptfigur ist kein Agent, sondern ein Fachmann für Verschlüsselung — jemand, der weiß, wie Systeme funktionieren, aber nicht, wie man kämpft. Der Film muss ihn deshalb anders bewaffnen als übliche Rachegeschichten.
+
+Daraus folgt die Bauweise. Statt Konfrontationen gibt es Vorbereitung; Heller nutzt, was er kann, und das ist Wissen. Der Reiz liegt darin, dass er jeden Vorteil selbst herstellen muss.
+
+Die Erpressung des eigenen Dienstes ist der zweite Baustein. Heller wendet sein Handwerk zuerst gegen seinen Arbeitgeber an — er verschafft sich die Ausbildung, die man ihm nicht geben will. Der Film hat damit von Anfang an zwei Gegenseiten.
+
+### Einordnung & Wirkung
+
+Bei 60 Millionen Dollar Herstellungskosten spielte der Film weltweit 96 Millionen ein.
+
+Rotten Tomatoes weist 61 Prozent positive Bewertungen aus. Ein Kritiker nannte ihn einen aggressiv kompetenten Spionagethriller; andere hielten ihn für formelhaft und fanden ihn emotional dünn.
+
+Diese Formulierung — kompetent, aber formelhaft — beschreibt eine Bilanz, die für Genrefilme dieser Größenordnung typisch ist. Handwerk und Besetzung stehen außer Frage; die Frage ist, ob die Prämisse trägt.
+
+Bemerkenswert ist die Herkunft des Stoffs. Der Roman erschien 1981, der Film 2025 — mehr als vier Jahrzehnte liegen dazwischen. Was damals die Ausnahme war, ein Zivilist gegen einen Apparat, ist inzwischen ein eigenes Genre; entsprechend fällt der Vorwurf der Formelhaftigkeit auf die Nachfolger zurück, nicht auf die Vorlage.` },
+  {
+    bereich: 'titel', schluessel: 'movie:974635', locale: 'de-de',
+    text: `### Worum es geht
+
+Gary Johnson unterrichtet Psychologie und Philosophie an der Universität von New Orleans. Nebenbei arbeitet er verdeckt für die Polizei.
+
+Seine Aufgabe: sich als Auftragsmörder ausgeben, damit Mordpläne auffliegen, bevor sie ausgeführt werden. Er ist gut darin — bis er sich in eine Frau verliebt, die ihren gewalttätigen Mann töten lassen will. Ab da lässt sich nicht mehr sauber trennen, wer er gerade ist.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf einem Artikel von Skip Hollandsworth, der 2001 im Texas Monthly erschien. Er handelt von einem realen Hochschullehrer, der in den späten achtziger und in den neunziger Jahren für die Polizei von Houston als vermeintlicher Auftragsmörder arbeitete. Der reale Gary Johnson starb 2022; der Film enthält eine Widmung.
+
+Richard Linklater führte Regie und schrieb das Drehbuch gemeinsam mit Glen Powell, der zugleich die Hauptrolle spielt.
+
+Glen Powell spielt Gary Johnson, Adria Arjona die Madison Figueroa Masters, Austin Amelio den Jasper, Retta die Claudette und Sanjay Rao den Phil.
+
+Angekündigt wurde die Produktion vor dem Filmmarkt in Cannes 2022. Gedreht wurde von Oktober bis November 2022 in New Orleans. Die Kamera führte Shane F. Kelly, den Schnitt besorgte Sandra Adair, die Musik stammt von Graham Reynolds. Das Budget betrug 8,8 Millionen Dollar.
+
+Die Weltpremiere lief am 5. September 2023 in Venedig, der US-Kinostart folgte am 24. Mai 2024, der Netflix-Start am 7. Juni 2024.
+
+### Hinter den Kulissen
+
+Der Beruf der Hauptfigur ist der Schlüssel. Ein Philosophieprofessor, der beruflich Identitäten wechselt, ist eine Figur, die ihr eigenes Handwerk reflektieren kann — der Film verhandelt die Frage, ob ein Selbst überhaupt feststeht, an jemandem, der es beruflich verändert.
+
+Dass Glen Powell am Drehbuch mitschreibt und die Hauptrolle spielt, verstärkt das. Die Rolle verlangt viele Erscheinungsformen; sie ist auf einen Darsteller hin geschrieben, der sie selbst mitentworfen hat.
+
+Bemerkenswert ist der Weg zum Publikum. Nach der Premiere in Venedig im September 2023 dauerte es acht Monate bis zum Kinostart und weitere zwei Wochen bis zum Streaming — bei einem Budget von 8,8 Millionen Dollar ist das eine Auswertung, die auf Aufmerksamkeit statt auf Leinwandzahlen setzt.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 95 Prozent positive Bewertungen aus. Der Konsens dort nennt den Film einen hintergründig dunklen Thriller, der zugleich voller Lacher stecke und Glen Powell als Hauptdarsteller hervorragend zur Geltung bringe. Metacritic kommt auf 82 von 100.
+
+Die Washington Post sprach von einem Ausbruch reinen Vergnügens, die New York Times beschrieb Powells Leistung als echten Durchbruch zum Star.
+
+Für einen Film mit 8,8 Millionen Dollar Budget ist das eine außergewöhnliche Bilanz. Sie beruht nicht auf Aufwand, sondern auf Buch und Hauptrolle — genau den beiden Bereichen, an denen Powell selbst beteiligt war.
+
+Die Widmung an den 2022 verstorbenen Gary Johnson hält dabei den Bezug zur Vorlage präsent. Was der Film erzählt, ist ausgebaut und zugespitzt; der Ausgangspunkt war ein realer Mann mit einem sehr ungewöhnlichen Nebenberuf.` },
+  {
+    bereich: 'titel', schluessel: 'series:80743', locale: 'de-de',
+    text: `### Worum es geht
+
+Patty Bladell wird in der Highschool gemobbt. Nachdem sie stark abgenommen hat, will sie sich rächen.
+
+Der Anwalt Bob Armstrong wird ihr Trainer für Schönheitswettbewerbe. Was er in Gang setzt, entgleitet ihm — Patty verfolgt eigene Ziele.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Lauren Gussis.
+
+Debby Ryan spielt Patricia „Patty" Bladell, Dallas Roberts den Robert „Bob" Armstrong Jr., Christopher Gorham den Robert „Bob" Barnard, Sarah Colonna die Angie Bladell, Alyssa Milano die Coralee Armstrong und Erinn Westbrook die Magnolia Barnard.
+
+Produziert wurde die Serie von der Storied Media Group, Ryan Seacrest Productions und CBS Television Studios.
+
+Es entstanden zwei Staffeln mit 22 Folgen — zwölf in der ersten, zehn in der zweiten. Die erste Staffel erschien am 10. August 2018 bei Netflix, die zweite am 11. Oktober 2019. Im Februar 2020 wurde die Serie abgesetzt.
+
+### Hinter den Kulissen
+
+Die Prämisse war von Anfang an umstritten. Eine Rachegeschichte, die davon ausgeht, dass Gewichtsverlust den Weg zur Vergeltung öffnet, setzt eine Gleichung an den Anfang, die viele als schädlich empfanden.
+
+Der Widerspruch kam vor der Ausstrahlung. Bereits nach dem Trailer forderte eine Petition die Absetzung; bis Ende Juli 2018 kamen fast 208.000 Unterschriften zusammen. Der zentrale Vorwurf lautete Fat-Shaming, verbunden mit der Sorge um junge Mädchen mit Essstörungen.
+
+Die Serie erschien dennoch. Ob die Handlung ihre eigene Ausgangsgleichung später infrage stellt oder bestätigt, blieb der Streitpunkt — die Debatte war bereits geführt, bevor die erste Folge zu sehen war.
+
+### Einordnung & Wirkung
+
+Der Serie wurde Fat-Shaming vorgeworfen. Die Petition zur Absetzung erreichte bis Ende Juli 2018 fast 208.000 Unterschriften — also vor dem Start am 10. August 2018.
+
+Netflix zeigte trotzdem beide Staffeln und setzte die Serie erst im Februar 2020 ab, gut vier Monate nach dem Erscheinen der zweiten Staffel.
+
+Dieser Verlauf ist aufschlussreich für die Streaming-Praxis jener Jahre. Eine Petition mit sechsstelliger Beteiligung verhinderte weder die Veröffentlichung noch eine Fortsetzung; entschieden wurde nach anderen Maßstäben.
+
+Der inhaltliche Kern des Vorwurfs bleibt dabei bestehen und ist mehr als eine Geschmacksfrage: Eine Erzählung, die Anerkennung an eine Gewichtsveränderung koppelt, richtet sich an ein Publikum, für das genau diese Kopplung ein Problem ist. Wer die Serie einordnet, kommt an diesem Punkt nicht vorbei.` },
+  {
+    bereich: 'titel', schluessel: 'movie:50698', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Fernsehteam dreht eine Reihe über paranormale Phänomene. Für eine Folge lässt es sich in einer stillgelegten psychiatrischen Klinik einschließen.
+
+Der Plan ist eine Nacht mit laufenden Kameras. Was dann geschieht, lässt sich mit den Mitteln, die das Team mitgebracht hat, nicht mehr dokumentieren — die Ausgänge stimmen nicht mehr, und die Gruppe wird kleiner.
+
+### Entstehungsgeschichte
+
+Geschrieben und inszeniert wurde der Film von den „Vicious Brothers" — Colin Minihan und Stuart Ortiz.
+
+Sean Rogerson spielt Lance Preston, Ashleigh Gryzko die Sasha Parker, Merwin Mondesir den T.C. Gibson, Mackenzie Gray den Houston Grey, Juan Riedinger den Matt White und Arthur Corber den Dr. Arthur Friedkin.
+
+Das Budget betrug 120.000 Dollar. Gedreht wurde im Riverview Hospital in Coquitlam, British Columbia. Das Found-Footage-Verfahren wurde bewusst gewählt, um Horror kostengünstig herzustellen.
+
+Ein Teaser-Trailer kam binnen drei Monaten auf über 1,5 Millionen Aufrufe bei YouTube.
+
+### Hinter den Kulissen
+
+Die Machart ist zugleich der Gegenstand. Der Film gibt sich als das Material einer Fernsehsendung aus, die es nicht gibt — die Aufnahmen, die das Team für seine Folge dreht, sind der Film selbst.
+
+Damit trägt die Konstruktion ihre eigene Begründung. Warum jemand weiterfilmt, während er um sein Leben rennt, muss der Film nicht erklären: Die Kamera läuft, weil sie der Grund für den Aufenthalt in dem Gebäude ist. Aus dem Werkzeug einer Fernsehproduktion wird der einzige Zeuge dessen, was dort geschieht.
+
+Das Budget von 120.000 Dollar erklärt die Entscheidungen. Ein einziger Drehort, kein sichtbares Team, keine aufwendigen Effekte — die Angst muss aus Anordnung und Ton entstehen, nicht aus Herstellung.
+
+Der Trailer mit 1,5 Millionen Aufrufen in drei Monaten war dabei ein eigener Produktionsfaktor. Der Film fand sein Publikum online, bevor er es im Verleih finden musste.
+
+### Einordnung & Wirkung
+
+Bei 120.000 Dollar Herstellungskosten spielte der Film 5,4 Millionen ein — das Fünfundvierzigfache des Budgets.
+
+Rotten Tomatoes weist 65 Prozent Zustimmung aus (17 Bewertungen), Metacritic dagegen 33 von 100 und damit ein überwiegend ungünstiges Urteil.
+
+Negative Stimmen bemängelten abgeleitete Elemente und Wiederholungen. Positive hoben die atmosphärische Unheimlichkeit und echte Schreckmomente hervor.
+
+Dieser Abstand zwischen den beiden Bewertungsportalen ist bezeichnend. Rotten Tomatoes zählt Daumen, Metacritic gewichtet Noten — bei einem Film, den viele für solide und wenige für gelungen halten, gehen die beiden Verfahren auseinander.
+
+Wirtschaftlich war der Film ein außergewöhnlicher Erfolg. Das Verhältnis von Einsatz zu Ertrag erklärt, warum das Found-Footage-Verfahren in jenen Jahren so häufig gewählt wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8838', locale: 'de-de',
+    text: `### Worum es geht
+
+Die NSA entwickelt einen Code, der als unknackbar gilt: Mercury. Um das zu belegen, verstecken die Programmierer eine verschlüsselte Botschaft in einem Rätselheft.
+
+Der neunjährige Simon löst sie. Der Junge ist Autist — und ruft die Nummer an, die in der Botschaft steht. Damit ist er für die Verantwortlichen ein Sicherheitsrisiko. Nachdem seine Eltern ermordet wurden, findet FBI-Agent Art Jeffries ihn und stellt sich zwischen ihn und seine Verfolger.
+
+### Entstehungsgeschichte
+
+Vorlage ist Ryne Douglas Pearsons Roman, der auf Deutsch „Der rote Schaukelstuhl" heißt; der Originaltitel lautet „Simple Simon".
+
+Regie führte Harold Becker. Das Drehbuch schrieben Lawrence Konner und Mark Rosenthal.
+
+Bruce Willis spielt den FBI-Agenten Art Jeffries, Alec Baldwin den Lt. Col. Nicholas Kudrow, Miko Hughes den Simon Lynch, Chi McBride den FBI-Agenten Thomas Jordan und Kim Dickens die Stacey Siebring.
+
+Produziert wurde der Film von Brian Grazer und Karen Kehela. Die Kamera führte Michael Seresin, den Schnitt besorgte Peter Honess, die Musik stammt von John Barry, ergänzt durch Carter Burwell.
+
+Der Film dauert 108 Minuten und ist ab 16 Jahren freigegeben. Der US-Start war am 3. April 1998, der deutsche am 28. Mai 1998.
+
+### Hinter den Kulissen
+
+Die Ausgangslage ist bemerkenswert direkt. Eine Behörde will die Sicherheit ihres Codes beweisen, veröffentlicht ihn versteckt — und muss dann jemanden beseitigen, der klüger war als vorgesehen. Der Fehler liegt beim Apparat, die Folgen trägt ein Kind.
+
+Daraus ergibt sich die Konstellation. Ein Agent, der nicht reden will, und ein Junge, der nicht reden kann wie erwartet, verbringen den Film miteinander. Die Verständigung zwischen beiden ist der eigentliche Handlungsverlauf.
+
+Die Besetzung der Rolle Simon trägt den Film mit. In fast allen Besprechungen wurde Miko Hughes' Leistung ausgenommen, wenn der Rest kritisiert wurde — ein seltener Fall, in dem eine Kinderrolle als das Beste eines Films gilt.
+
+### Einordnung & Wirkung
+
+Der Film spielte weltweit 60 Millionen Dollar ein, davon 33 Millionen in Nordamerika.
+
+Die Aufnahme war schlecht. Rotten Tomatoes weist 21 Prozent aus, Metacritic 37 von 100. Das Lexikon des internationalen Films nannte ihn routiniert inszeniert, aber uninspiriert, und bemängelte logische Brüche. Die Cinema-Kritik urteilte, es sei ein Puzzle, das nicht aufgehe.
+
+Die Deutsche Film- und Medienbewertung vergab dagegen das Prädikat „wertvoll".
+
+Der einzige Punkt, in dem sich die Besprechungen einig waren, ist die Leistung von Miko Hughes. Dass ein Film mit dieser Besetzung — Bruce Willis, Alec Baldwin — durchweg an seinem jüngsten Darsteller gemessen wurde, sagt etwas über die Gewichtung: Was funktionierte, war die Beziehung zwischen den beiden Hauptfiguren, nicht der Apparat drumherum.` },
+  // ---- Block 079 ----
+  {
+    bereich: 'titel', schluessel: 'movie:818397', locale: 'de-de',
+    text: `### Worum es geht
+
+Alex Lewis war Auftragsmörder und lebt zurückgezogen in Mexiko. Er ist an Alzheimer erkrankt, früh und fortschreitend.
+
+Ein letzter Auftrag führt ihn nach El Paso. Den ersten Teil führt er aus. Den zweiten verweigert er: Das Mädchen Beatriz soll er nicht töten. Sie stirbt trotzdem, durch einen anderen. Von da an steht Alex zwischen seiner Auftraggeberin Davana Sealman und dem FBI-Agenten Vincent Serra, der wegen Menschenhandels ermittelt — und gegen sein eigenes Gedächtnis.
+
+### Entstehungsgeschichte
+
+Vorlage sind Jef Geeraerts' Roman „De Zaak Alzheimer" und der gleichnamige belgische Film von Carl Joos und Erik Van Looy.
+
+Regie führte Martin Campbell, das Drehbuch schrieb Dario Scardapane.
+
+Liam Neeson spielt Alex Lewis, Guy Pearce den Vincent Serra, Monica Bellucci die Davana Sealman, Harold Torres den Hugo Marquez, Taj Atwal die Linda Amistead, Ray Fearon den Gerald Nussbaum und Ray Stevenson den Detective Danny Mora.
+
+Angekündigt wurde der Film im Februar 2020, gedreht ab April 2021 in Bulgarien. Beteiligt waren Black Bear Pictures, Briarcliff Entertainment, Open Road Films, STXfilms, Welle Entertainment, Saville Productions und Arthur Sarkissian Productions. Die Kamera führte David Tattersall, den Schnitt besorgte Jo Francis, die Musik stammt von Rupert Parkes.
+
+### Hinter den Kulissen
+
+Die Krankheit ist nicht Ausschmückung, sondern Handlungsmotor. Ein Auftragsmörder, der sich nicht erinnert, kann seine Spuren nicht überblicken — er muss sich Notizen machen, um zu wissen, was er getan hat und wem er trauen darf.
+
+Damit kehrt der Film die übliche Anlage um. Sonst verfügt die Hauptfigur über mehr Wissen als ihre Verfolger; hier über weniger, und der Abstand wächst mit jeder Szene.
+
+Bemerkenswert ist die Verlagerung der Drehorte. Ein Film, der in Mexiko und in El Paso spielt, entstand vollständig in Bulgarien — eine Entscheidung, die bei Produktionen dieser Größenordnung mit den Kosten zu tun hat, nicht mit dem Stoff.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 14 Millionen Dollar ein — 7,3 Millionen in den USA und Kanada, 6,7 Millionen international.
+
+Rotten Tomatoes weist 29 Prozent positive Bewertungen aus (Schnitt 4,8 von 10), Metacritic 41 von 100. Kritiker nannten den Film eine blasse Nachahmung besserer Actionthriller.
+
+Richard Roeper urteilte abweichend. Er vergab drei von vier Sternen und hielt fest, Martin Campbell beweise, dass er immer noch einen eleganten und fesselnden Thriller inszenieren könne.
+
+Der Abstand zwischen beiden Urteilen liegt in der Gewichtung. Wer den Film als Genrebeitrag misst, findet Bekanntes; wer auf die Regie sieht, findet Handwerk. Die Prämisse — ein Täter, der sich selbst nicht mehr traut — bleibt in beiden Lesarten der stärkste Teil.` },
+  {
+    bereich: 'titel', schluessel: 'movie:287424', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Epidemie hat die Vereinigten Staaten erfasst. Wer infiziert ist, verwandelt sich — langsam, über bis zu sechs Monate.
+
+Der Farmer Wade Vogel holt seine infizierte Tochter Maggie aus dem Krankenhaus nach Hause. Seine Frau Caroline kommt damit nicht zurecht. Ein befreundeter Arzt legt Wade die Möglichkeiten dar, die am Ende bleiben — drei, und keine davon ist gut. Maggie trifft ihren ebenfalls infizierten Schulfreund Trent.
+
+### Entstehungsgeschichte
+
+Regie führte Henry Hobson; es war sein Spielfilmdebüt. Das Drehbuch schrieb John Scott 3.
+
+Arnold Schwarzenegger spielt Wade Vogel, Abigail Breslin die Maggie Vogel und Joely Richardson die Caroline.
+
+Produziert wurde der Film von Matthew Baer, Colin Bates, Bill Johnson, Trevor Kaufman, Ara Keshishian, Pierre-Ange Le Pogam, Arnold Schwarzenegger und Joey Tufaro. Die Kamera führte Lukas Ettlin, den Schnitt besorgte Jane Rizzo, die Musik stammt von David Wingo.
+
+### Hinter den Kulissen
+
+Der Film nimmt ein Genre und entfernt sein Tempo. Sechs Monate Verwandlung bedeuten: keine Belagerung, keine Flucht, kein Überfall. Was bleibt, ist Zeit — und die Frage, wie man sie miteinander verbringt, wenn man weiß, wie es endet.
+
+Damit wird aus einem Horrorstoff ein Familiendrama. Der Konflikt läuft nicht zwischen Menschen und Infizierten, sondern innerhalb eines Hauses: ein Vater, der bleibt, eine Stiefmutter, die es nicht aushält, und ein Mädchen, das beiden die Entscheidung abnehmen möchte.
+
+Die Besetzung ist dabei die auffälligste Entscheidung. Arnold Schwarzenegger, zugleich als Produzent beteiligt, spielt einen Mann, der nichts ausrichten kann — eine Rolle, die dem Bild widerspricht, für das er bekannt ist. Genau daran schieden sich die Urteile.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 60 Prozent positive Rezensionen aus, Metacritic 52 von 100.
+
+Dietmar Dath sah in der FAZ in Schwarzenegger „die Rolle seines Lebens". Michael Meyns urteilte dagegen, der Film gerate durch die Präsenz Arnold Schwarzeneggers aus dem Gleichgewicht.
+
+Beide Urteile betreffen dieselbe Beobachtung mit umgekehrtem Vorzeichen. Ein Darsteller, dessen Erscheinung Handlungsfähigkeit verspricht, spielt eine Figur, deren Kern die Ohnmacht ist. Für die einen ist das der Reiz des Films, für die anderen sein Bruch.
+
+Dass Schwarzenegger den Film mitproduziert hat, verweist darauf, dass diese Besetzung kein Zufall war, sondern der Ausgangspunkt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:406761', locale: 'de-de',
+    text: `### Worum es geht
+
+Los Angeles im Jahr 2028. Im Hotel Artemis betreibt eine Krankenschwester eine geheime Klinik — behandelt werden ausschließlich Kriminelle, und nur solche mit Mitgliedschaft.
+
+An diesem Abend kommen zwei Brüder mit gestohlenen Diamanten. Dann trifft der Gangsterboss Wolfking ein. Im Haus gelten Regeln, die an diesem Abend immer schwerer durchzusetzen sind — und ein Stromausfall gibt der Auftragsmörderin Nice die Gelegenheit, auf die sie gewartet hat.
+
+### Entstehungsgeschichte
+
+Drew Pearce führte Regie und schrieb das Drehbuch; es war sein Debüt als Regisseur.
+
+Jodie Foster spielt die Schwester Jean Thomas, Sterling K. Brown den Waikiki alias Sherman, Sofia Boutella die Nice, Jeff Goldblum den Niagara alias Wolfking, Brian Tyree Henry den Honolulu, Jenny Slate die Morgan, Zachary Quinto den Crosby Franklin, Charlie Day den Acapulco und Dave Bautista den Everest.
+
+Produziert wurde der Film von Simon Cornwell, Stephen Cornwell, Marc Platt und Adam Siegel. Die Kamera führte Chung Chung-hoon, den Schnitt besorgten Gardner Gould und Paul Zucker, die Musik stammt von Cliff Martinez.
+
+Es handelt sich um eine amerikanisch-britische Produktion von 95 Minuten Länge; die FSK gab sie ab 16 Jahren frei.
+
+### Hinter den Kulissen
+
+Die Regel ist die Konstruktion. Ein Krankenhaus für Kriminelle funktioniert nur, solange sich alle daran halten — keine Waffen, keine Polizei, keine Abrechnungen im Haus. Der Film muss diese Ordnung erst aufbauen, damit ihr Zusammenbruch etwas bedeutet.
+
+Die Figuren tragen Decknamen nach Städten und Inseln: Waikiki, Honolulu, Nice, Acapulco, Niagara. Das ist keine Spielerei, sondern Teil der Hausordnung — wer hier behandelt wird, gibt seinen Namen ab.
+
+Der Schauplatz erledigt den Rest. Ein einziges Gebäude, ein Abend, eine Handvoll Personen. Bei 95 Minuten Laufzeit ist das ein Kammerspiel im Genregewand — der Filmdienst lobte entsprechend die architektonische Qualität.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 12,8 Millionen Dollar ein, davon über 6,7 Millionen in den USA und Kanada.
+
+Metacritic weist 58 von 100 aus (36 Rezensionen), Rotten Tomatoes 58 Prozent (179 Rezensionen).
+
+Der Filmdienst lobte die architektonische Qualität, kritisierte aber unvollendete Handlungsstränge.
+
+Dieser Einwand trifft die Bauweise. Ein Film, der neun Figuren in einem Haus versammelt und jeder eine Vorgeschichte gibt, muss in 95 Minuten Prioritäten setzen — was nicht aufgelöst wird, bleibt als Andeutung stehen.
+
+Für ein Regiedebüt mit dieser Besetzung ist das Einspielergebnis von 12,8 Millionen Dollar bescheiden. Der Film fand sein Publikum nicht im Kino; was von ihm bleibt, ist die Idee des Hauses und die Ordnung, die dort gilt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:35554', locale: 'de-de',
+    text: `### Worum es geht
+
+Checco stammt aus Polignano a Mare in Apulien. Er liebt Musik, ist aber unbeholfen und wird deshalb aufgezogen.
+
+Nach einer Trennung zieht er zu seinem Cousin Alfredo nach Mailand, um im Musikgeschäft unterzukommen. Dort verliebt er sich in Marika. Deren Vater sympathisiert mit der Lega Nord und hat für Süditaliener nichts übrig.
+
+### Entstehungsgeschichte
+
+Regie führte Gennaro Nunziante, das Drehbuch schrieb er gemeinsam mit Checco Zalone.
+
+Checco Zalone spielt die Hauptfigur unter seinem eigenen Namen. Giulia Michelini spielt die Marika, Dino Abbrescia den Cousin Alfredo, Ivano Marescotti Marikas Vater, Peppino Mazzotta den Livio und Francesca Chillemi die Luisa.
+
+Produziert wurde der Film von Pietro Valsecchi, den Vertrieb übernahm Medusa Film. Die Musik stammt von Checco Zalone. Gedreht wurde in Apulien und in Mailand.
+
+Der Film dauert 95 Minuten und erschien am 27. November 2009.
+
+### Hinter den Kulissen
+
+Der Konflikt ist politisch grundiert. Ein Süditaliener in Mailand, verliebt in die Tochter eines Mannes, der Süditaliener ablehnt — der Film verhandelt das italienische Nord-Süd-Verhältnis als Komödienstoff.
+
+Dass die Lega Nord ausdrücklich benannt wird, gibt der Anlage ihre Schärfe. Der Vater ist kein allgemein voreingenommener Schwiegervater, sondern jemand mit einer politischen Zuordnung — die Komödie macht daraus einen konkreten Gegner.
+
+Bemerkenswert ist die Doppelrolle Checco Zalones. Er schreibt am Buch mit, schreibt die Musik und spielt eine Figur seines Namens. Der Film ist auf eine Bühnenfigur zugeschnitten, die das Publikum bereits kennt — und die aus derselben Region stammt, um die es geht.
+
+### Einordnung & Wirkung
+
+Der Film spielte 14 Millionen Euro ein.
+
+Kritikerstimmen sind nicht überliefert — was für sich genommen aussagekräftig ist. Ein Film, der im Inland ein Massenpublikum erreicht, ohne internationale Besprechungen nach sich zu ziehen, ist ein Fall für sich.
+
+Die Konstruktion erklärt das. Eine Komödie, die vom Gegensatz zwischen Apulien und Mailand lebt, von Dialektfärbungen und von einer politischen Zuordnung, die außerhalb Italiens kaum jemand einordnen kann, ist schwer zu übertragen.
+
+Für Gennaro Nunziante und Checco Zalone war dieser Film zugleich der Anfang einer Zusammenarbeit, die später zu deutlich größeren Ergebnissen führte — bei „Sole a catinelle" von 2013 stand am Ende ein Einspielergebnis vom mehr als Dreifachen dieses Werts.` },
+  {
+    bereich: 'titel', schluessel: 'series:12926', locale: 'de-de',
+    text: `### Worum es geht
+
+Teresa Chávez Aguirre stammt aus armen Verhältnissen und ist ehrgeizig.
+
+Nachdem sie von wohlhabenden Mitschülern öffentlich gedemütigt wurde, schwört sie Rache. Sie studiert Jura — mit Unterstützung ihres Mentors Arturo, den sie später heiratet, obwohl sie noch für ihren früheren Freund Mariano empfindet.
+
+### Entstehungsgeschichte
+
+Die Serie ist eine Neuverfilmung der Telenovela von Mimí Bechelani aus dem Jahr 1959; eine weitere Fassung gab es bereits 1989.
+
+Produziert wurde sie von José Alberto Castro für Televisa.
+
+Angelique Boyer spielt Teresa Chávez Aguirre, Sebastián Rulli den Arturo de la Barrera, Aarón Díaz den Mariano Sánchez Suárez und Cynthia Klitbo die Juana Godoy. In weiteren Rollen sind Ana Brenda Contreras als Aurora, Margarita Magaña als Aída, Daniel Arenas als Fernando, Fernanda Castillo als Luisa und Alejandro Nones als Paulo zu sehen.
+
+Die Serie umfasst 152 Folgen. In Mexiko lief sie vom 2. August 2010 bis zum 27. Februar 2011 auf Canal de las Estrellas, in den USA vom 30. März bis zum 3. Oktober 2011 bei Univision.
+
+### Hinter den Kulissen
+
+Der Stoff ist über fünf Jahrzehnte hinweg dreimal verfilmt worden — 1959, 1989 und 2010. Diese Beständigkeit sagt etwas über die Anlage: Eine Frau, die aus Demütigung Ehrgeiz macht und dabei über Grenzen geht, ist eine Figur, die in jeder Zeit neu verhandelt werden kann.
+
+Bemerkenswert ist, dass die Hauptfigur keine Sympathieträgerin sein muss. Teresa nutzt Menschen, auch den Mann, den sie heiratet. Die Telenovela verlangt vom Publikum, ihr zu folgen, ohne ihr recht zu geben.
+
+152 Folgen über knapp sieben Monate täglicher Ausstrahlung sind dabei das Format, in dem sich das entfalten kann. Jede Entscheidung hat Zeit, Folgen zu entwickeln.
+
+### Einordnung & Wirkung
+
+Die Schlussfolge erreichte in Mexiko einen Wert von 33,0 in den Einschaltquoten.
+
+Angelique Boyer erhielt den TVyNovelas Award als beste Schauspielerin sowie einen Latin ACE Award. Sebastián Rulli war für den Preis als bester Schauspieler nominiert und erhielt ebenfalls einen Latin ACE Award. „Esa hembra es mala" von Gloria Trevi wurde als bester Song ausgezeichnet.
+
+Die Auswertung in den USA ab März 2011 bei Univision — einen Monat nach dem mexikanischen Finale — zeigt, wie eng der spanischsprachige Markt beider Länder verbunden ist.
+
+Dass ein Titelsong eigens ausgezeichnet wurde, verweist auf eine Besonderheit des Formats: In der Telenovela trägt die Musik die Wiedererkennung über Monate täglicher Ausstrahlung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1317288', locale: 'de-de',
+    text: `### Worum es geht
+
+New York, 1952. Marty Mauser verkauft Schuhe und spielt Tischtennis — beides mit Ernst, das zweite mit Ehrgeiz.
+
+Sein Ziel sind die British Open. Der Weg dorthin führt durch Skandale, durch Beziehungen und durch Geschäfte, die er besser nicht gemacht hätte — und schließlich nach London und Tokio.
+
+### Entstehungsgeschichte
+
+Josh Safdie führte Regie und schrieb das Drehbuch gemeinsam mit Ronald Bronstein. Es war Safdies erste Alleinregie seit „The Pleasure of Being Robbed" von 2008.
+
+Timothée Chalamet spielt Marty Mauser, eine Figur nach dem Vorbild des Tischtennisspielers Marty Reisman. Gwyneth Paltrow spielt die Kay Stone, Odessa A'zion die Rachel Mizler, Kevin O'Leary den Milton Rockwell, Tyler Okonma den Wally, Abel Ferrara den Ezra Mishkin und Fran Drescher die Mutter Rebecca Mauser.
+
+Safdie erhielt 2018 eine Ausgabe von Reismans Autobiografie „The Money Player" und bot Chalamet noch im selben Jahr die Hauptrolle an. Offiziell angekündigt wurde das Projekt im Juli 2024.
+
+Die Kamera führte Darius Khondji, überwiegend auf 35-mm-Film mit Arriflex-Kameras und alten anamorphotischen Panavision-Objektiven, um die Anmutung der fünfziger Jahre herzustellen. Die Musik stammt von Daniel Lopatin; gemischt wurde in den Electric Lady Studios in New York.
+
+Gedreht wurde von September bis Dezember 2024 in New York und im Februar 2025 in Japan. Das Budget lag zwischen 60 und 70 Millionen Dollar — damit war es der teuerste Film von A24.
+
+### Hinter den Kulissen
+
+Sieben Jahre liegen zwischen dem Buchgeschenk 2018 und dem Kinostart. Chalamet war von Beginn an vorgesehen; das Projekt wuchs mit ihm.
+
+Die Aufnahmetechnik ist eine Entscheidung gegen den Standard. 35-mm-Film, Arriflex-Kameras, alte Panavision-Objektive — der Film stellt die fünfziger Jahre nicht digital nach, sondern mit Mitteln, die ihnen näherstehen.
+
+Tischtennis als Gegenstand ist der eigentliche Wagemut. Ein Sport, der im Kino kaum vorkommt und dessen Reiz in Geschwindigkeit auf kleinstem Raum liegt, trägt einen Film von dieser Größenordnung. Dass es der teuerste Film seines Verleihs wurde, macht das Risiko sichtbar.
+
+### Einordnung & Wirkung
+
+Die Premiere lief am 6. Oktober 2025 beim New York Film Festival, der US-Kinostart folgte am 25. Dezember 2025 über A24. Am 10. Februar 2026 erschien der Film als Video on Demand, am 24. April 2026 bei HBO Max.
+
+Weltweit spielte er 191 Millionen Dollar ein — 96 Millionen in den USA und Kanada, 95 Millionen international. Damit ist er der erfolgreichste Film in der Geschichte von A24.
+
+Rotten Tomatoes weist 93 Prozent positive Bewertungen aus (360 Kritiker, Schnitt 8,6 von 10), Metacritic 89 von 100 und damit weitgehend einhellige Zustimmung.
+
+Chalamets Leistung wurde mehrfach als laufbahnprägend beschrieben. David Ehrlich nannte sie bei IndieWire eine der gewaltigsten Darbietungen des 21. Jahrhunderts, Peter Bradshaw vergab im Guardian fünf Sterne.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1195506', locale: 'de-de',
+    text: `### Worum es geht
+
+Nathan Caine arbeitet in einer Bank und lebt zurückgezogen. Er hat CIPA — eine Erkrankung, bei der man keinen Schmerz empfindet.
+
+Als seine Kollegin Sherry bei einem Überfall als Geisel genommen wird, nimmt Nathan die Verfolgung auf. Was ihn zum Sonderfall macht, ist genau das, was ihn sonst gefährdet: Er merkt nicht, was ihm zugefügt wird.
+
+### Entstehungsgeschichte
+
+Regie führten Dan Berk und Robert Olsen, das Drehbuch schrieb Lars Jacobson.
+
+Jack Quaid spielt Nathan „Novocaine" Caine, Amber Midthunder die Sherry Margrave, Ray Nicholson den Simon Greenly, Jacob Batalon den Roscoe Dixon, Betty Gabriel die Mincy Langston, Matt Walsh den Coltraine Duffy, Conrad Kemp den Andre Clark und Evan Hengst den Ben Clark.
+
+Angekündigt wurde der Film im Oktober 2023; Paramount Pictures erwarb ihn im Februar 2024. Der Dreh begann am 8. April 2024, Hauptdrehort war Kapstadt in Südafrika.
+
+Die Kamera führte Jacques Jouffret, die Musik stammt von Lorne Balfe und Andrew Kawczynski; zum Soundtrack gehört unter anderem „Everybody Hurts" von R.E.M. Das Budget betrug 18 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Erkrankung ist zugleich Prämisse und Problem. Schmerzunempfindlichkeit klingt nach einem Vorteil, ist aber das Gegenteil: Wer Verletzungen nicht spürt, bemerkt sie nicht rechtzeitig. Der Film zieht daraus beides — Komik und Schrecken.
+
+Daraus folgt die Bauweise. Nathan kann Dinge tun, die niemand sonst tut, aber jede dieser Handlungen kostet ihn etwas, das er erst später bemerkt. Die Spannung liegt nicht darin, ob er durchhält, sondern was von ihm übrig bleibt.
+
+Die Wahl von „Everybody Hurts" für den Soundtrack ist eine ironische Setzung, die den Ton des Films beschreibt: Er nimmt seine Prämisse ernst genug, um mit ihr zu spielen.
+
+### Einordnung & Wirkung
+
+Bei 18 Millionen Dollar Herstellungskosten spielte der Film weltweit 34,2 Millionen ein — 19,9 Millionen in den USA und Kanada, 14,3 Millionen im übrigen Ausland.
+
+Rotten Tomatoes weist 81 Prozent positive Bewertungen aus, Metacritic 58 von 100. Beim Publikum ergab CinemaScore ein „B".
+
+Ein Kritiker beschrieb die Darstellerleistungen als charmant, bemängelte aber, das Potenzial sei verschenkt worden.
+
+Dieser Einwand kehrt bei Filmen mit starker Prämisse regelmäßig wieder. Eine Ausgangsidee, die sich in einem Satz erzählen lässt, weckt Erwartungen, die die Handlung dann einlösen muss — und der Abstand zwischen 81 Prozent bei Rotten Tomatoes und 58 Punkten bei Metacritic zeigt, dass die Urteile darüber auseinandergingen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:125521', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei Söldnerinnen nehmen einen Auftrag an: Ein Dorf soll vor einem bösen Zauberer geschützt werden, der hinter einem legendären Schatz her ist.
+
+Was folgt, ist ein Abenteuer um einen Golem — mit deutlich mehr Komik, als der Auftrag vermuten lässt.
+
+### Entstehungsgeschichte
+
+Regie führten Hiroshi Watanabe und Kunihiko Yuyama. Das Drehbuch schrieb Hajime Kanzaka auf Grundlage seines eigenen Slayers-Universums.
+
+Im japanischen Original spricht Megumi Hayashibara die Lina Inverse, Maria Kawamura die Naga the Serpent, Kenji Utsumi den Antagonisten Galev, Kazuki Yao den Zahhard und Akiko Hiramatsu die Saleena.
+
+Produziert wurde der Film von J.C.Staff, vertrieben von der Toei Company. Die Musik stammt von Takayuki Hattori.
+
+Der Film dauert 61 Minuten. Die Uraufführung in Japan war am 3. August 1996.
+
+### Hinter den Kulissen
+
+61 Minuten sind für einen Kinofilm ungewöhnlich kurz. Das Format entspricht einer Erzählung, die zwischen Serie und Spielfilm steht — lang genug für ein eigenes Abenteuer, kurz genug, um ohne Nebenhandlungen auszukommen.
+
+Dass der Autor der Buchvorlage selbst das Drehbuch schreibt, ist der zweite Befund. Hajime Kanzaka überträgt seinen eigenen Stoff, statt ihn übertragen zu lassen — die Figuren behalten damit den Ton, den sie in den Vorlagen haben.
+
+Die Anlage mit zwei Söldnerinnen als Hauptfiguren ist für das Genre und die Zeit bemerkenswert. Lina Inverse und Naga the Serpent führen die Handlung; der Zauberer ist ihr Gegner, nicht ihr Auftraggeber.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war überwiegend positiv. Ein Rezensent beschrieb den Film als urkomischen kleinen Film mit liebenswerten Figuren und vergab ein „B+". Andere nannten ihn eine perfekte Zeitkapsel der mittleren neunziger Jahre.
+
+Eine Minderheit bemängelte, die Handlung sei weniger einprägsam als bei anderen Filmen der Reihe.
+
+Diese Einordnung als Zeitkapsel trifft einen Punkt, der über den Film hinausgeht. Anime-Kinofilme dieser Machart — kurz, an eine laufende Reihe angeschlossen, für ein Publikum gemacht, das die Figuren bereits kennt — waren in jenen Jahren ein eigenes Format.
+
+Dass der Film heute vor allem als Momentaufnahme seiner Entstehungszeit gelesen wird, ist deshalb weniger ein Urteil über seine Qualität als eine Beschreibung dessen, wofür er steht.` },
 ];
