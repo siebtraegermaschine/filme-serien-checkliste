@@ -4,6 +4,21 @@
 > ausdrücklich als solche markiert. Ergänzt Vorschlag **A** aus
 > `IDEEN-WACHSTUM.md` (Kennenlern-Strecke) um alles, was NACH der Anmeldung
 > passiert.
+>
+> **Umsetzungsstand 17. August 2026:** Punkte 1–7 der Reihenfolge unten sind
+> gebaut, live und geprüft — Schema und Routen, das Fenster, alle fünf
+> Schritte, der Abschluss mit Taste-Score, das Teilen-Fenster, sieben Sprachen
+> und die Rechtstexte.
+>
+> **Das Fenster ist noch abgeschaltet:** `ONB_FREIGABE` in `index.html` steht
+> auf `false`. Vor dem Umlegen sind zwei Dinge zu tun:
+> 1. Christian liest die neuen Abschnitte in `datenschutz.html` / `privacy.html`
+>    gegen.
+> 2. Die Anläufe zurücksetzen, die am Platzhalter-Fenster verbraucht wurden
+>    (es war am 17. August versehentlich kurz live):
+>    `UPDATE user_onboarding SET anlaeufe = 0 WHERE abgeschlossen_am IS NULL;`
+>
+> Danach bleibt Punkt 8: der Durchlauf mit einem echten Konto.
 
 ## Das Ziel
 
