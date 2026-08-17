@@ -40296,4 +40296,295 @@ Das Lexikon des internationalen Films urteilte, es handle sich um eine verkitsch
 Der Hinweis auf die fehlenden Fantasy-Elemente trifft den Kern. Ein Stoff über gefallene Engel und Wiedergeburt verspricht eine Welt mit eigenen Regeln; der Film verwendet sie vor allem als Rahmen für eine Schulromanze.
 
 Dass der Film in Deutschland erst 2018 seine Fernsehpremiere hatte — zwei Jahre nach seinem Erscheinungsjahr — passt zu dieser Einordnung. Er fand hier keinen Kinostart, sondern lief bei einem Spartensender.` },
+  // ---- Block 086 ----
+  {
+    bereich: 'titel', schluessel: 'movie:8836', locale: 'de-de',
+    text: `### Worum es geht
+
+Mulder und Scully sind nicht mehr beim FBI. Für einen Fall werden sie zurückgeholt: In Virginia verschwinden junge Frauen.
+
+Ein verurteilter Priester namens Joe Crissman behauptet, Visionen zu haben, die mit den Fällen zusammenhängen. Ob er tatsächlich sieht, was er zu sehen behauptet, ist die Frage, an der sich Mulder und Scully wie eh und je scheiden. Die Spur führt zu zwei Männern, die Körper für illegale Organtransplantationen zerlegen.
+
+### Entstehungsgeschichte
+
+Chris Carter führte Regie und schrieb das Drehbuch gemeinsam mit Frank Spotnitz; beide produzierten den Film auch.
+
+David Duchovny spielt Fox Mulder, Gillian Anderson die Dana Scully, Billy Connolly den Pater Joe Crissman, Mitch Pileggi den Walter Skinner und Xzibit den FBI-Agenten Mosley Drummy.
+
+Die Musik stammt von Mark Snow, die Kamera von Bill Roe, den Schnitt besorgte Richard A. Harris. Das Budget betrug rund 35 Millionen Dollar.
+
+Gedreht wurde in Vancouver und an weiteren Orten in British Columbia. Der Kinostart lag je nach Land am 24. oder 25. Juli 2008.
+
+### Hinter den Kulissen
+
+Der Film verzichtet auf die Mythologie der Serie und erzählt einen abgeschlossenen Fall. Wer die Serie nicht kennt, braucht kein Vorwissen — was zugleich bedeutet, dass die große Erzählung, für die die Serie bekannt war, hier keine Rolle spielt.
+
+Die Figur des Pater Joe trägt den Grundkonflikt. Ein verurteilter Priester mit angeblichen Visionen ist genau der Fall, bei dem Mulders Bereitschaft zu glauben und Scullys Widerstand gegeneinander stehen — und der Film gibt keiner Seite vorschnell recht.
+
+Vancouver als Drehort schließt an die Serie an, die dort über Jahre entstand. Die Rückkehr betrifft also nicht nur die Figuren, sondern auch den Produktionsort.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films lobte eine reizvolle Reminiszenz. Die Süddeutsche Zeitung sprach dagegen von serieller Abnutzung.
+
+Beide Urteile beschreiben dieselbe Ausgangslage aus entgegengesetzter Richtung. Ein Kinofilm, der zwei bereits bekannte Ermittler zurückholt und ihnen einen einzelnen Fall gibt, kann als Wiedersehen funktionieren oder als Beleg dafür, dass der Stoff erschöpft ist.
+
+Bei 35 Millionen Dollar Budget war der Film deutlich kleiner angelegt als übliche Sommerproduktionen. Das passt zur Entscheidung, keinen groß angelegten Verschwörungsstoff zu erzählen, sondern eine Ermittlung — mit dem Risiko, dass gerade die Zuschauer enttäuscht werden, die wegen der Mythologie gekommen sind.` },
+  {
+    bereich: 'titel', schluessel: 'movie:639720', locale: 'de-de',
+    text: `### Worum es geht
+
+Bea kann etwas sehen, was andere nicht sehen: imaginäre Freunde, kurz IFs. Ihr Nachbar Cal kann es auch.
+
+Gemeinsam kümmern sie sich um Wesen, deren Kinder groß geworden sind und die niemand mehr braucht — den Riesen Blue, den Schmetterling Blossom, das Einhorn Eini, den Hund Super Dog.
+
+### Entstehungsgeschichte
+
+John Krasinski führte Regie und schrieb das Drehbuch; es war seine vierte Regiearbeit.
+
+Cailey Fleming spielt Bea, Ryan Reynolds den Nachbarn Cal, John Krasinski selbst Beas Vater, Catherine Daddario ihre Mutter, Fiona Shaw die Großmutter und Liza Colón-Zayas die Janet.
+
+Die animierten Figuren sprechen unter anderem Steve Carell den Blue, Phoebe Waller-Bridge die Blossom, Emily Blunt die Eini, Louis Gossett Jr. den Lewis und Matt Damon die Blume; Gastauftritte haben Maya Rudolph, Jon Stewart, Sam Rockwell, George Clooney und Bradley Cooper.
+
+Produziert wurde der Film von Andrew Form, John Krasinski, Ryan Reynolds und Allyson Seeger. Die Kamera führte Janusz Kamiński, den Schnitt besorgten Christopher Rouse und Andy Canny. Die Musik stammt von Michael Giacchino — ursprünglich war Randy Newman vorgesehen.
+
+Gedreht wurde von Ende August 2022 bis Anfang Mai 2023. Der Film verbindet Realaufnahmen mit Animation, dauert 104 Minuten und ist ohne Altersbeschränkung freigegeben. Die Premiere lief am 7. Mai 2024 am Leicester Square in London, der deutsche Start folgte am 16. Mai, der amerikanische am 17. Mai 2024.
+
+### Hinter den Kulissen
+
+Die Grundidee dreht das Motiv um. Nicht Kinder brauchen imaginäre Freunde, sondern imaginäre Freunde brauchen Kinder — der Film handelt von Wesen, die überflüssig geworden sind.
+
+Daraus ergibt sich sein eigentlicher Gegenstand: das Erwachsenwerden, gesehen von der Seite dessen, was dabei zurückbleibt. Bea ist alt genug, um die IFs eigentlich nicht mehr sehen zu können — und sieht sie trotzdem.
+
+Bemerkenswert ist die Besetzungspolitik. Über ein Dutzend bekannter Namen sprechen animierte Figuren, teils in sehr kurzen Auftritten — der Film setzt auf Wiedererkennung als Teil des Vergnügens.
+
+Mit Janusz Kamiński an der Kamera arbeitete ein Bildgestalter an dem Projekt, dessen Handschrift man in Familienfilmen selten findet.
+
+### Einordnung & Wirkung
+
+Um rentabel zu sein, hätte der Film 275 Millionen Dollar einspielen müssen. Tatsächlich kamen weltweit 190,3 Millionen zusammen; in Deutschland sahen ihn 558.084 Zuschauer.
+
+Rotten Tomatoes weist rund 50 Prozent aus, Metacritic 46 von 100. Beschrieben wurde er als fantasievolle wie nostalgisch-sentimentale Mischung aus Real- und Animationsfilm.
+
+2024 gab es Nominierungen bei den Hollywood Music in Media Awards für die Filmmusik und bei den Kids' Choice Awards für Ryan Reynolds.
+
+Die Formulierung „nostalgisch-sentimental" trifft den Streitpunkt. Ein Film über vergessene Kindheitsgefährten arbeitet zwangsläufig mit Rührung — und die Frage ist, ob er sie verdient oder voraussetzt. Die knappe Hälfte positiver Bewertungen zeigt, dass die Antworten auseinandergingen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10131', locale: 'de-de',
+    text: `### Worum es geht
+
+Kristen Parker führt ein halbwegs normales Leben, fürchtet aber, dass Freddy Krueger zurückkommt.
+
+Sie behält recht. Nach dem Tod ihrer Freunde gibt sie ihre Fähigkeit weiter — andere in ihre Träume ziehen zu können — an Alice Johnson. Was als Schutz gedacht war, wird zum Werkzeug: Freddy nutzt Alice, um an weitere Jugendliche heranzukommen.
+
+### Entstehungsgeschichte
+
+Regie führte Renny Harlin. Das Drehbuch schrieben Brian Helgeland und Scott Pierce.
+
+Robert Englund spielt Freddy Krueger, Lisa Wilcox die Alice Johnson, Tuesday Knight die Kristen Parker, Andras Jones den Rick Johnson und Danny Hassel den Dan Jordan.
+
+Produziert wurde der Film von Robert Shaye und Rachel Talalay. Die Musik stammt von Craig Safan, die Kamera von Steven Fierberg, den Schnitt besorgten Michael N. Knue und Chuck Weiss.
+
+Der Film erschien 1988, dauert 93 Minuten und ist ab 18 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Weitergabe der Fähigkeit ist der Angelpunkt. Sie erlaubt es dem Film, die Hauptfigur zu wechseln, ohne die Regel zu brechen, auf der die Reihe beruht — und sie liefert Freddy zugleich einen neuen Zugang.
+
+Daraus ergibt sich eine Umkehrung. Alice ist nicht bloß Opfer, sondern das Mittel, mit dem der Täter arbeitet; ihre Gabe ist seine Gelegenheit. Erst als sie das begreift, wird aus der Belastung eine Waffe.
+
+Das Lexikon des internationalen Films beschreibt die Machart als Gratwanderung zwischen Schocks, unappetitlichen Abscheulichkeiten und ausgiebiger Selbstironie. Diese Selbstironie ist der Punkt, an dem sich der vierte Teil von einem geradlinigen Horrorfilm entfernt — die Figur des Freddy Krueger tritt hier auch als Darsteller ihrer selbst auf.
+
+### Einordnung & Wirkung
+
+Mit knapp 50 Millionen Dollar war dies der erfolgreichste Teil der klassischen Reihe.
+
+Das Lexikon des internationalen Films sprach von einer banalen Gruselstory.
+
+1990 gab es Nominierungen für den Saturn Award in drei Kategorien, 1989 einen Young Artist Award als beste Horrorfilm-Wahl.
+
+Der wirtschaftliche Erfolg bei gleichzeitig zurückhaltender Kritik ist für Fortsetzungen im Horrorbereich der Normalfall — bemerkenswert ist hier nur, dass ausgerechnet der vierte Teil den Höhepunkt markierte. Die Freigabe ab 18 Jahren zeigt zugleich, dass die Selbstironie den Film nicht harmloser gemacht hat.` },
+  {
+    bereich: 'titel', schluessel: 'series:71411', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie folgt Joaquín Guzmán, genannt El Chapo, von den achtziger Jahren an.
+
+Sie zeigt seinen Aufstieg innerhalb des Guadalajara-Kartells — vom Untergebenen des Bosses Miguel Ángel Félix Gallardo zum eigenen Drogenboss. Dazu gehören seine Flucht, seine Verhaftung und seine spätere Befreiung aus dem Gefängnis.
+
+### Entstehungsgeschichte
+
+Die Handlung beruht auf realen Ereignissen im Umfeld der mexikanischen Drogenorganisationen — darunter die Schießerei am Flughafen von Guadalajara 1993, bei der ein Kardinal erschossen wurde.
+
+Entwickelt wurde die Serie von Silvana Aguirre und Carlos Contreras. Regie führte J. M. Cravioto.
+
+Marco de la O spielt El Chapo — in der deutschen Fassung gesprochen von Wolfgang Wagner —, Humberto Busto den Conrado „Don Sol" Higuera Sol, Diego Vásquez den Ismael Zambrano und Laura Osma die Elba Coronado.
+
+Produziert wurde die Serie als Koproduktion von Univision und Netflix bei Story House Entertainment.
+
+Es entstanden drei Staffeln mit insgesamt 34 Folgen — neun in der ersten, zwölf in der zweiten, dreizehn in der dritten. Der Start in den USA war am 23. April 2017 bei Univision, die deutsche Erstausstrahlung am 16. Juni 2017 bei Netflix; die Serie lief bis 2018.
+
+### Hinter den Kulissen
+
+Der Stoff ist heikel, weil die geschilderten Taten reale Opfer haben. Die Schießerei am Flughafen von Guadalajara 1993, bei der ein Kardinal erschossen wurde, ist kein erfundener Vorfall.
+
+Daraus ergibt sich die Aufgabe jeder Erzählung dieser Art: Sie muss einen Aufstieg nachvollziehbar machen, ohne ihn zu verklären. Serien über Drogenbosse arbeiten mit einer Anziehungskraft, die dem Gegenstand innewohnt.
+
+Die Koproduktion zwischen einem spanischsprachigen US-Sender und einer internationalen Plattform beschreibt das Zielpublikum genau: ein Stoff, der in Mexiko spielt, für Zuschauer diesseits und jenseits der Grenze.
+
+Auffällig ist der Zuschnitt der Staffeln. Von neun über zwölf auf dreizehn Folgen — die Serie wurde mit jeder Staffel umfangreicher, statt sich zu verdichten.
+
+### Einordnung & Wirkung
+
+Drei Staffeln mit 34 Folgen in zwei Jahren sind ein hohes Tempo. Zwischen dem Start im April 2017 und dem Ende 2018 lag kaum mehr als ein Jahr.
+
+Die deutsche Erstausstrahlung folgte weniger als zwei Monate nach dem amerikanischen Start — für eine spanischsprachige Produktion ein ungewöhnlich kurzer Abstand, der die Rolle der Plattform als Vertriebsweg zeigt.
+
+Kritikerstimmen sind nicht überliefert. Das ist bei Serien dieses Zuschnitts nicht ungewöhnlich: Produktionen, die primär über eine Plattform ausgewertet werden und einen sprachlich abgegrenzten Markt bedienen, finden in der deutschsprachigen Fachkritik selten statt.
+
+Was bleibt, ist der Gegenstand selbst. Eine Serie, die reale Ereignisse bis in die jüngere Vergangenheit nachzeichnet und dabei eine namentlich benannte Person ins Zentrum stellt, bewegt sich auf einem Feld, auf dem Erzählung und Wirklichkeit ineinandergreifen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:13335', locale: 'de-de',
+    text: `### Worum es geht
+
+Harold und Kumar wollen nach Amsterdam. Am Flughafen wird Kumars selbstgebaute Wasserpfeife für eine Bombe gehalten.
+
+Die beiden werden verhaftet und nach Guantánamo gebracht. Nach ihrer Flucht führt der Weg quer durch den amerikanischen Süden Richtung Texas — vorbei an einer Versammlung des Ku-Klux-Klan und durch eine Reihe von Begegnungen, die ihnen nicht weiterhelfen.
+
+### Entstehungsgeschichte
+
+Regie führten Jon Hurwitz und Hayden Schlossberg; sie schrieben auch das Drehbuch.
+
+John Cho spielt Harold Lee, Kal Penn den Kumar Patel, Rob Corddry den Ron Fox und Christopher Meloni den Großmeister des Ku-Klux-Klan. Neil Patrick Harris tritt als er selbst auf; in weiteren Rollen sind Roger Bart, Danneel Ackles, Eric Winter und Paula Garcés zu sehen.
+
+Produziert wurde der Film von Nathan Kahane und Greg Shapiro. Die Kamera führte Daryn Okada, den Schnitt besorgte Jeff Freeman, die Musik stammt von George S. Clinton.
+
+Gedreht wurde in Toronto, in Shreveport und in Amsterdam. Das Budget betrug rund zwölf Millionen Dollar. Der US-Start war am 25. April 2008; in Deutschland erschien der Film am 17. Oktober 2008 direkt auf DVD.
+
+### Hinter den Kulissen
+
+Der Film nimmt sich einen politisch aufgeladenen Gegenstand für eine Kifferkomödie vor. Guantánamo, Terrorverdacht, ethnische Zuschreibung — was die Handlung antreibt, sind reale Mechanismen der Jahre nach 2001.
+
+Die Konstruktion beruht auf einem Missverständnis, das für die Figuren tödlich enden könnte und für den Film der Anlass zum Lachen ist. Genau daran entscheidet sich, ob man ihn als Satire liest oder als Geschmacklosigkeit.
+
+Der Auftritt des amtierenden Präsidenten in der Handlung treibt das auf die Spitze. Der Film verlässt endgültig die Ebene, auf der er noch als realistisch durchgehen könnte.
+
+Zwölf Millionen Dollar Budget für einen Film mit Drehorten in drei Ländern zeigen, wie knapp kalkuliert wurde.
+
+### Einordnung & Wirkung
+
+Bei rund zwölf Millionen Dollar Herstellungskosten spielte der Film weltweit 43 Millionen ein — 38 Millionen in den USA, fünf international.
+
+Metacritic weist 57 von 100 aus. James Berardinelli hielt fest, der Film liefere, was seine Anhänger erwarteten. Das Lexikon des internationalen Films nannte ihn eine politisch unkorrekte Komödie, der überzeugendes satirisches Potenzial fehle.
+
+Dieser Einwand trifft den Kern. Ein Film, der Guantánamo als Kulisse für Gags nutzt, ohne eine Haltung dazu zu entwickeln, verschenkt seinen Gegenstand — er benutzt ihn, statt ihn zu behandeln.
+
+Dass der Film in Deutschland gar nicht erst ins Kino kam, sondern direkt auf DVD erschien, zeigt zugleich, wie eng sein Publikum eingegrenzt war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11968', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Gruppe von Tauchern findet in den Gewässern vor den Bahamas zwei Dinge: die Überreste eines legendären Piratenschiffs und ein gesunkenes Flugzeug voller Kokain.
+
+Das eine wäre ein Fund, das andere ein Problem. Die Entscheidung, was sie damit tun, bringt sie in Konflikt mit einem Drogenboss, der von der Ladung weiß.
+
+### Entstehungsgeschichte
+
+Regie führte John Stockwell, das Drehbuch schrieb Matt Johnson.
+
+Paul Walker spielt Jared, Jessica Alba die Sam, Scott Caan den Bryce, Ashley Scott die Amanda, Josh Brolin den Bates und James Frain den Reyes.
+
+Produziert wurde der Film von David Zelon. Die Kamera führte Shane Hurlbut, den Schnitt besorgten Nicolas De Toth und Dennis Virkler, die Musik stammt von Paul Haslinger.
+
+Gedreht wurde auf den Bahamas, auf den Cayman Islands und in Florida — mit echten Haien und Aufnahmen unter Wasser. Das Budget betrug 50 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Unterwasseraufnahmen sind der eigentliche Aufwand. Gedreht wurde mit echten Haien, nicht mit Modellen oder digitalen Ergänzungen — eine Entscheidung, die den Film über weite Strecken trägt und die Produktion zugleich an Bedingungen bindet, die sich nicht steuern lassen.
+
+Erzählerisch beruht alles auf einer moralischen Frage mit klarem Preisschild. Der Piratenschatz ist legal, das Kokain nicht; wer beides findet, muss sich entscheiden, ob der eine Fund den anderen finanzieren soll.
+
+Daraus zieht der Film seinen Konflikt innerhalb der Gruppe. Nicht der Drogenboss ist der Auslöser, sondern die Uneinigkeit unter Freunden — er kommt erst dazu, als die Entscheidung bereits gefallen ist.
+
+### Einordnung & Wirkung
+
+Bei 50 Millionen Dollar Herstellungskosten spielte der Film weltweit 46,1 Millionen ein und blieb damit unter seinen Kosten.
+
+Rotten Tomatoes weist 20 Prozent positive Bewertungen aus, Metacritic 45 von 100. Beim Publikum ergab CinemaScore ein „B".
+
+Roger Ebert vergab dagegen drei von vier Sternen; Richard Roeper urteilte kritischer.
+
+Der Abstand zwischen Eberts Urteil und den 20 Prozent bei Rotten Tomatoes lässt sich am Gegenstand erklären. Wer den Film an seiner Handlung misst, findet Bekanntes; wer die Unterwasseraufnahmen als eigenständige Leistung wertet, kommt zu einem anderen Ergebnis. Das „B" des Publikums liegt zwischen beidem.` },
+  {
+    bereich: 'titel', schluessel: 'movie:14254', locale: 'de-de',
+    text: `### Worum es geht
+
+Anna kehrt aus einer psychiatrischen Klinik nach Hause zurück und sieht ihre Schwester Alex wieder.
+
+Im Haus lebt inzwischen Rachel Summers, die neue Partnerin des Vaters. Anna misstraut ihr, hat Visionen und beginnt, Rachels Vergangenheit nachzugehen. Je weiter sie kommt, desto weniger lässt sich sagen, was sie tatsächlich wahrnimmt.
+
+### Entstehungsgeschichte
+
+Der Film ist eine Neuverfilmung des südkoreanischen Horrorfilms „A Tale of Two Sisters" von 2003, den Kim Ji-woon inszeniert hatte.
+
+Regie führten Charles und Thomas Guard. Das Drehbuch schrieben Craig Rosenberg, Doug Miro und Carlo Bernard.
+
+Emily Browning spielt Anna Ivers, Arielle Kebbel die Schwester Alex, Elizabeth Banks die Rachel Summers, David Strathairn den Vater Steven Ivers und Jesse Moss den Matt Hendricks.
+
+Produziert wurde der Film von Vertigo Entertainment und DreamWorks SKG. Die Musik stammt von Christopher Young, die Kamera von Dan Landin, den Schnitt besorgten Jim Page und Christian Wagner.
+
+Die Premiere war am 30. Januar 2009 in den USA und Kanada, der deutsche Kinostart folgte am 28. Mai 2009.
+
+### Hinter den Kulissen
+
+Die Konstruktion beruht auf einer unzuverlässigen Erzählerin. Anna kommt aus einer psychiatrischen Behandlung; alles, was der Film zeigt, ist zunächst ihre Wahrnehmung. Wer ihr glaubt, sieht einen anderen Film als jemand, der es nicht tut.
+
+Damit gehört er zu einer Gruppe von Filmen, die den Zuschauer bewusst in eine Position bringen, aus der er erst nachträglich herausfindet. Das Risiko dabei ist bekannt: Funktioniert die Auflösung nicht, wirkt das Vorangegangene konstruiert.
+
+Die Vorlage von 2003 hatte dieselbe Ausgangslage. Eine Neuverfilmung muss deshalb doppelt bestehen — vor dem eigenen Publikum und vor der Erinnerung an das Original.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 31 Prozent aus, Metacritic 43 von 100.
+
+Das Lexikon des internationalen Films kritisierte die Banalität der Geschichte. TV Spielfilm bewertete ihn dagegen als bemerkenswert eigenständig.
+
+Dieser Widerspruch betrifft genau die Frage der Neuverfilmung. Wer den Film neben das Original stellt, misst ihn an dessen Vorlage; wer ihn für sich nimmt, sieht eine Arbeit mit eigener Handschrift.
+
+Die Besetzung deutet dabei auf einen höheren Anspruch als üblich. Elizabeth Banks und David Strathairn in tragenden Rollen sind für eine Genreneuverfilmung dieser Art keine Selbstverständlichkeit.` },
+  {
+    bereich: 'titel', schluessel: 'movie:505058', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Programmierer Matias nimmt in einem Internetcafé einen fremden Laptop mit.
+
+Was er darauf findet, hätte er nicht finden sollen: Videos entführter Frauen und den Zugang zu einem Chatraum im Darknet, „The River". Dessen Besitzer, ein Nutzer namens Charon IV, bemerkt den Eindringling — und bedroht Matias und seine Freunde.
+
+### Entstehungsgeschichte
+
+Regie führte Stephen Susco, der auch das Drehbuch schrieb; es war sein Regiedebüt.
+
+Colin Woodell spielt Matias O'Brien, Betty Gabriel die Nari Jemisin, Rebecca Rittenhouse die Serena Lange, Andrew Lees den Damon Horton, Connor Del Rio den AJ Jeffcock, Stephanie Nogueras die Amaya DeSoto und Savira Windyani die Lexx Putri.
+
+Produziert wurde der Film von Timur Bekmambetov und Jason Blum. Die Kamera führte Kevin Stewart, den Schnitt besorgte Andrew Wesman.
+
+Der Film dauert 89 Minuten und ist ab 16 Jahren freigegeben. Die Premiere lief am 9. März 2018 beim South by Southwest, der US-Start folgte am 20. Juli 2018, der deutsche am 6. Dezember 2018.
+
+### Hinter den Kulissen
+
+Der Film spielt vollständig auf einem Bildschirm. Was zu sehen ist, sind Fenster, Videoanrufe, Chatverläufe und Dateien — die Kamera ist der Rechner selbst.
+
+Diese Form hat einen Vorteil und eine Beschränkung. Sie erzeugt Unmittelbarkeit, weil das Publikum genau das sieht, was die Figur sieht; sie verhindert zugleich jeden Perspektivwechsel. Was außerhalb des Bildschirms geschieht, bleibt Vermutung.
+
+Die Ausgangslage ist alltäglich und dadurch unangenehm. Ein gefundener Laptop, ein paar Klicks zu weit — der Film braucht keinen Einbruch und keine Entführung, um seine Figuren in Gefahr zu bringen.
+
+Mit Timur Bekmambetov und Jason Blum stehen zwei Produzenten dahinter, deren Arbeit für dieses Erzählverfahren und für kostengünstigen Horror steht.
+
+### Einordnung & Wirkung
+
+Slashfilm vergab sieben von zehn Punkten und nannte den Film eine clevere Weiterentwicklung. IndieWire bewertete ihn mit einem „B", Dread Central mit vier von fünf Sternen.
+
+Diese durchweg wohlwollende Aufnahme richtet sich vor allem auf das Erzählverfahren — die Frage, ob sich ein Film, der ausschließlich auf einem Bildschirm stattfindet, über 89 Minuten tragen lässt. Dass Slashfilm von einer Weiterentwicklung spricht, verweist darauf, dass die Form zu diesem Zeitpunkt bereits erprobt war.
+
+Der Gegenstand ist dabei ernster, als das Verfahren zunächst vermuten lässt. Es geht um Menschenhandel und um Aufnahmen von Gewalt gegen Frauen — der Film nutzt die Ästhetik des Alltäglichen für einen Stoff, der es nicht ist.` },
 ];
