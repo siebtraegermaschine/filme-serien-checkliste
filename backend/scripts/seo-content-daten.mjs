@@ -34138,4 +34138,239 @@ Weltweit spielte der Film rund 165,9 Millionen Dollar ein.
 Die Kritik urteilte gemischt. Der wiederkehrende Vorwurf lautete, es handle sich um dieselbe Geschichte wie zuvor, nur auf Rädern; einzelne Darstellungen wurden dagegen gelobt.
 
 Bemerkenswert bleibt der Gegenstand: NASCAR ist ein Sport mit eigenen Regeln, eigener Kultur und einem festen Publikum — und der Film gehört zu den wenigen Großproduktionen, die ihn ernsthaft behandeln, statt ihn nur als Kulisse zu benutzen.` },
+  // ---- Block 64 ----
+  {
+    bereich: 'titel', schluessel: 'movie:314405', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film verbindet drei Geschichten aus einer alten Märchensammlung. In der ersten will eine Königin um jeden Preis ein Kind und lässt sich auf einen Handel ein, der einen Preis fordert. In der zweiten zieht ein König einen Floh groß, bis er die Größe eines Schweins hat — und verspricht seine Tochter demjenigen, der die Haut des Tieres erkennt.
+
+In der dritten hört ein König den Gesang einer Frau durch eine Tür und verliebt sich, ohne sie gesehen zu haben. Dahinter steht eine alte Frau, die alles daransetzt, jung zu erscheinen. Alle drei Geschichten handeln von Verwandlung, Opfer und Zauber, der nicht gut ausgeht.
+
+### Entstehungsgeschichte
+
+Regie führte Matteo Garrone. Das Drehbuch schrieben Edoardo Albinati, Ugo Chiti, Garrone selbst und Massimo Gaudioso.
+
+Die Vorlage ist Giambattista Basiles "Pentameron" von 1634 bis 1636 — die erste Märchensammlung überhaupt, aus der später auch die Brüder Grimm und Charles Perrault geschöpft haben.
+
+Salma Hayek, Vincent Cassel und Toby Jones spielen die Hauptrollen; im Ensemble stehen zudem John C. Reilly und Shirley Henderson. Die Musik stammt von Alexandre Desplat, die Kamera von Peter Suschitzky.
+
+Es handelt sich um eine italienisch-französisch-britische Gemeinschaftsproduktion von 134 Minuten, freigegeben ab 12 Jahren.
+
+### Hinter den Kulissen
+
+Die Vorlage ist älter als alles, was man gemeinhin für ein Märchen hält — und sie ist erheblich grausamer. Der Film macht davon nichts weg: Er zeigt die Geschichten so, wie sie überliefert sind, ohne die Milderungen, die spätere Bearbeitungen eingeführt haben.
+
+Die drei Geschichten laufen nebeneinander her, ohne sich zu berühren. Was sie verbindet, ist der Ton — und die Beobachtung, dass jeder Wunsch in dieser Welt bezahlt werden muss.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 14. Mai 2015 statt; danach lief der Film beim Filmfest München und beim Fantasy Filmfest, bevor er am 27. August 2015 in die deutschen Kinos kam.
+
+Die Kritik urteilte positiv: 83 Prozent bei Rotten Tomatoes. Die deutsche Filmbewertungsstelle vergab das Prädikat besonders wertvoll.
+
+Der Film gehört damit zu den wenigen Versuchen, das europäische Märchen für Erwachsene zurückzugewinnen — nicht als Kinderstoff, sondern als das, was es ursprünglich war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4689', locale: 'de-de',
+    text: `### Worum es geht
+
+Ryu ist gehörlos und arbeitet in einer Fabrik. Seine Schwester braucht dringend eine Spenderniere. Er versucht, sich an illegale Organhändler zu wenden — und wird betrogen: Sie nehmen ihm Geld und eine eigene Niere ab und liefern nichts.
+
+Kurz darauf verliert er auch noch die Arbeit. Seine Freundin Yeong-mi überredet ihn zu einer Entführung: das Kind eines wohlhabenden Mannes, gegen Lösegeld, ohne dass jemand zu Schaden kommt. Was daraus wird, zerstört alle Beteiligten.
+
+### Entstehungsgeschichte
+
+Park Chan-wook führte Regie und arbeitete am Drehbuch gemeinsam mit Lee Jae-sun, Lee Mu-yeong und Lee Yong-jong.
+
+Song Kang-ho spielt den Vater Park Dong-jin, Shin Ha-kyun den Ryu, Bae Du-na die Yeong-mi.
+
+Es handelt sich um eine südkoreanische Produktion von 2002 mit einer Laufzeit von 121 Minuten; in Deutschland ist der Film ab 16 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Es ist der erste Teil einer lose zusammenhängenden Trilogie über Rache, zu der auch "Oldboy" von 2003 und "Lady Vengeance" von 2005 gehören.
+
+Die Anlage unterscheidet ihn von den beiden bekannteren Nachfolgern: Es gibt keinen Schuldigen. Jede Figur handelt aus einem nachvollziehbaren Grund, jede Tat folgt aus einer vorhergehenden, und niemand ist auf der falschen Seite. Der Film verteilt seine Anteilnahme gleichmäßig — auf den Entführer wie auf den Vater, der ihn jagt.
+
+### Einordnung & Wirkung
+
+Die Kritik ging auseinander. Die Zeitschrift Cinema nannte den Film ein Meisterwerk mit meisterlichen Bildern urbaner Trostlosigkeit. Das Lexikon des internationalen Films warf ihm dagegen einen berechnenden Geschmack nach Kunstgewerbe vor.
+
+Innerhalb der Trilogie ist er der am wenigsten bekannte und zugleich der kompromissloseste Teil — ohne die stilistische Zuspitzung von "Oldboy" und ohne dessen Schauwerte.
+
+Er gehört damit zu den Filmen, mit denen das südkoreanische Kino Anfang der 2000er Jahre international auf sich aufmerksam machte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:171372', locale: 'de-de',
+    text: `### Worum es geht
+
+Jon ist Angestellter in einer englischen Kleinstadt und will Musiker werden. Was ihm fehlt, sind Einfälle. Durch Zufall kommt er als Keyboarder zu einer Band mit dem unaussprechlichen Namen Soronprfbs.
+
+Deren Kopf ist Frank, ein Mann, der einen übergroßen Kopf aus Pappmaché trägt und ihn niemals abnimmt — auch nicht zum Essen, auch nicht zum Schlafen. Jon hält ihn für ein Genie und will ihn bekannt machen. Die Band arbeitet monatelang an einem Album; danach organisiert Jon einen Auftritt beim Festival South by Southwest. Es geht schief.
+
+### Entstehungsgeschichte
+
+Regie führte Lenny Abrahamson, das Drehbuch schrieben Jon Ronson und Peter Straughan.
+
+Michael Fassbender spielt Frank, Domhnall Gleeson den Jon, Maggie Gyllenhaal die Clara. Daneben sind Scoot McNairy, François Civil und Carla Azar zu sehen.
+
+Die Vorlage sind die Erinnerungen von Jon Ronson, der selbst Keyboarder in der Band des englischen Komikers Chris Sievey war. Sievey trat als Kunstfigur Frank Sidebottom auf — mit einem riesigen Kopf aus Pappmaché.
+
+### Hinter den Kulissen
+
+Michael Fassbender spielt den größten Teil des Films unter einer Maske, die kein Mienenspiel zulässt. Alles muss über Körperhaltung, Stimme und Bewegung laufen.
+
+Die gesamte Musik wurde live aufgenommen. Gedreht wurde 2013.
+
+Der Film handelt dabei von etwas, das er nicht ausspricht: davon, dass Jon die Absonderlichkeit für die Ursache des Talents hält — und übersieht, dass sie eine Krankheit sein könnte.
+
+### Einordnung & Wirkung
+
+Die Premiere fand 2014 beim Sundance Film Festival statt.
+
+Die Kritik urteilte sehr positiv: 92 Prozent bei Rotten Tomatoes. Hervorgehoben wurde durchgehend Michael Fassbenders Darstellung des missverstandenen Außenseiters.
+
+Bemerkenswert bleibt die Ausgangslage: ein Film über eine reale Kunstfigur, geschrieben von jemandem, der sie selbst erlebt hat — und der daraus keine Hommage gemacht hat, sondern eine Auseinandersetzung mit der eigenen Rolle darin.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9667', locale: 'de-de',
+    text: `### Worum es geht
+
+Jack Starks kehrt 1992 aus dem Golfkrieg nach Vermont zurück, mit einer Kopfverletzung und Gedächtnislücken. Kurz darauf wird er eines Mordes beschuldigt, an den er sich nicht erinnern kann.
+
+Er kommt in eine psychiatrische Anstalt. Dort setzt ein Arzt ihn einer Behandlung aus: Starks wird unter Medikamenten in eine Zwangsjacke gesteckt und in eine Leichenschublade geschoben. Was er dabei erlebt, sind keine Halluzinationen — er befindet sich in der Zukunft und trifft dort eine Kellnerin, die sich als das Mädchen erweist, dem er einst seine Erkennungsmarke geschenkt hat.
+
+### Entstehungsgeschichte
+
+Regie führte John Maybury. Das Drehbuch schrieben Massy Tadjedin, Tom Bleecker und Marc Rocco; es geht in Teilen auf Jack Londons Erzählung "The Star Rover" von 1915 zurück.
+
+Adrien Brody spielt Jack Starks, Keira Knightley die erwachsene Jackie Price. Daneben sind Kris Kristofferson, Jennifer Jason Leigh und Daniel Craig zu sehen.
+
+Produziert wurde der Film von George Clooney, Steven Soderbergh und Peter Guber; das Budget lag bei geschätzten 28 Millionen Dollar. Die Musik stammt von Brian Eno.
+
+### Hinter den Kulissen
+
+Die Bildgestaltung folgt dem Zustand der Hauptfigur: sehr kurze Schnitte, überbelichtete Bilder, Ton, der nicht zum Bild passt. Der Zuschauer soll ebenso wenig einordnen können wie Starks selbst.
+
+Bemerkenswert ist die Produzentenriege: George Clooney, Steven Soderbergh und Peter Guber — für einen Film dieser Machart eine ungewöhnliche Aufstellung.
+
+### Einordnung & Wirkung
+
+An den amerikanischen Kinokassen spielte der Film nur 6,3 Millionen Dollar ein.
+
+Die Kritik urteilte gemischt. Stephen King lobte Adrien Brodys Leistung als grandios; andere Stimmen bemängelten fehlende Eleganz und Zusammenhanglosigkeit.
+
+Er gehört damit zu jenen Filmen, deren Ausgangsidee stärker ist als ihre Umsetzung — und die man vor allem wegen einzelner Darstellungen im Gedächtnis behält.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9647', locale: 'de-de',
+    text: `### Worum es geht
+
+Frank Cross ist der jüngste Programmdirektor in der Geschichte eines amerikanischen Fernsehsenders. An Heiligabend produziert er eine Live-Fassung von Dickens' "Weihnachtsgeschichte" — mit Streichhölzern verkaufenden Kindern und Tänzerinnen in Rentierkostümen.
+
+Dann suchen ihn drei Geister auf. Sie zeigen ihm seine Vergangenheit, die Gegenwart, die er anderen bereitet, und eine Zukunft, in der niemand ihn vermisst. Cross muss dabei etwas erkennen, das ihm bis dahin nicht in den Sinn gekommen ist.
+
+### Entstehungsgeschichte
+
+Regie führte Richard Donner, das Drehbuch schrieben Mitch Glazer und Michael O'Donoghue.
+
+Bill Murray spielt Frank Cross. Daneben sind Karen Allen, John Forsythe, Carol Kane und David Johansen als Geister zu sehen; im Ensemble stehen zudem Robert Mitchum und Alfre Woodard.
+
+Produziert wurde der Film von Richard Donner und Art Linson, die Musik stammt von Danny Elfman. In Deutschland lief er am 8. Dezember 1988 an.
+
+### Hinter den Kulissen
+
+Die Verlegung ist der eigentliche Einfall. Dickens' Stoff spielt im London des 19. Jahrhunderts; hier ist der Geizhals ein Fernsehmanager, und die Geschichte spielt in einem Sender, der genau diese Geschichte gerade verfilmt.
+
+Der Wandel am Schluss folgt der Vorlage — der Weg dorthin nicht: Die Geister erscheinen hier als Taxifahrer, als Fee mit Schlagkraft und als Gestalt ohne Gesicht, und die Komik entsteht gerade aus dem Abstand zwischen Dickens und dem Fernsehbetrieb.
+
+### Einordnung & Wirkung
+
+Die Kritik lobte Murrays Darstellung und den Unterhaltungswert. Einzelne Stimmen hielten fest, die Effekte gingen zulasten der Botschaft, die bei Dickens im Mittelpunkt steht.
+
+Der Film erhielt eine Oscar-Nominierung für die beste Maske; Danny Elfman wurde mit einem BMI Award ausgezeichnet.
+
+Er gehört seither zu den Weihnachtsfilmen, die jedes Jahr wiederkehren — und zu den wenigen, die dabei ausgesprochen unversöhnlich bleiben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10998', locale: 'de-de',
+    text: `### Worum es geht
+
+Dan Gallagher ist Anwalt in New York, verheiratet, mit einer Tochter. An einem Wochenende, an dem seine Familie nicht in der Stadt ist, lernt er die Verlagslektorin Alex Forrest kennen. Beide sind sich einig, dass es bei zwei Tagen bleibt.
+
+Alex sieht das anders. Sie ruft an, wartet, taucht auf. Sie folgt ihm nach Hause, spricht mit seiner Frau und tötet schließlich das Kaninchen seiner Tochter. Was als Affäre begann, wird zur Bedrohung der ganzen Familie — bis hin zur Entführung des Kindes.
+
+### Entstehungsgeschichte
+
+Regie führte Adrian Lyne, das Drehbuch schrieb James Dearden. Produziert wurde der Film von Stanley R. Jaffe und Sherry Lansing.
+
+Michael Douglas spielt Dan Gallagher, Glenn Close die Alex Forrest, Anne Archer seine Frau Beth.
+
+### Hinter den Kulissen
+
+Das Ende ist nicht das ursprünglich gedrehte. In der ersten Fassung nahm sich Alex das Leben und richtete es so ein, dass es wie ein Mord durch Dan aussah. Testvorführungen lehnten das ab — daraufhin wurde ein neues Ende gedreht, das die Auseinandersetzung im Badezimmer zeigt.
+
+Diese Änderung hat den Film verändert. Aus einer Figur, die sich selbst zerstört, wurde eine Bedrohung, die beseitigt werden muss — und aus einer Geschichte über Schuld ein Thriller mit klarer Rollenverteilung.
+
+### Einordnung & Wirkung
+
+Der Film spielte weltweit rund 320 Millionen Dollar ein und stand acht Wochen an der Spitze der amerikanischen Kinocharts.
+
+Er erhielt sechs Oscar-Nominierungen, darunter als bester Film und für Glenn Close als beste Hauptdarstellerin. Die Kritiken waren überwiegend positiv.
+
+Bemerkenswert bleibt der Eingriff ins Ende. Ein Film, dessen Wirkung sich über acht Wochen an der Spitze der Kinocharts und rund 320 Millionen Dollar bemisst, verdankt seine bekannteste Szene einer Testvorführung — nicht seinen Autoren.` },
+  {
+    bereich: 'titel', schluessel: 'movie:33909', locale: 'de-de',
+    text: `### Worum es geht
+
+Gordon Gekko kommt nach Jahren aus dem Gefängnis. Draußen wartet niemand: Seine Tochter Winnie hat den Kontakt abgebrochen und macht ihn für den Tod ihres Bruders verantwortlich.
+
+Der junge Investmentbanker Jake Moore, Winnies Verlobter, sucht Gekko auf — er will Rat, und er will die beiden versöhnen. Gekko willigt ein. Zur selben Zeit gerät Jakes Mentor durch die Immobilienkrise in die Klemme und nimmt sich das Leben. Was folgt, verbindet berufliche und familiäre Rechnungen so eng, dass sie nicht mehr zu trennen sind — bis Gekko 100 Millionen Dollar unterschlägt, die seiner Tochter gehören.
+
+### Entstehungsgeschichte
+
+Regie führte Oliver Stone, das Drehbuch schrieb Allan Loeb. Stone entschied sich erst nach der Finanzkrise von 2008 zu einer Fortsetzung seines Films von 1987.
+
+Michael Douglas spielt erneut Gordon Gekko, Shia LaBeouf den Jake Moore, Carey Mulligan die Winnie.
+
+Produziert wurde der Film von Edward R. Pressman und Eric Kopeloff.
+
+### Hinter den Kulissen
+
+Der Film übernimmt die Bauweise des ersten Teils — junger Mann, alter Mentor, Verführung, Fall —, ist aber nach Auffassung der Kritik keine bloße Kopie: Er arbeitet mit mehr Tempo und geschmeidiger Eleganz.
+
+Der Zeitpunkt ist der eigentliche Gegenstand. Der erste Film erschien wenige Wochen vor dem Börsenkrach von 1987; der zweite behandelt die Krise von 2008 — und beide Male ging es um dieselbe Frage, ob das Publikum die Warnung oder die Faszination mitnimmt.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte gemischt. Gelobt wurde Michael Douglas' Darstellung; bemängelt wurden ein zu platter Moralismus und ein sentimentales Ende, das dem Gegenstand nicht gerecht werde.
+
+Genau darin liegt das Grundproblem des Films: Der erste Teil endete mit einer Verurteilung, hat aber eine Generation von Bankern hervorgebracht, die seine Hauptfigur bewunderten. Der zweite versucht das zu korrigieren — und verlässt sich dafür auf einen Ausgang, der die Figur menschlich macht, statt sie beim Wort zu nehmen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11529', locale: 'de-de',
+    text: `### Worum es geht
+
+Melanie ist in New York Modedesignerin und steht vor dem Durchbruch. Andrew, der Sohn der Bürgermeisterin, macht ihr einen Heiratsantrag.
+
+Was niemand weiß: Melanie stammt aus einer Kleinstadt in Alabama und ist dort noch immer mit ihrem Jugendfreund Jake verheiratet. Um die Scheidung zu regeln, muss sie zurück. Als Andrew ihr nach Alabama folgt, bricht das Gebäude zusammen, das sie über Jahre errichtet hat.
+
+### Entstehungsgeschichte
+
+Regie führte Andy Tennant, das Drehbuch schrieben Douglas J. Eboch und C. Jay Cox.
+
+Reese Witherspoon spielt Melanie, Josh Lucas den Jake Perry, Patrick Dempsey den Andrew Hennings und Candice Bergen dessen Mutter, die Bürgermeisterin Kate Hennings.
+
+Produziert wurde der Film von Neal H. Moritz und Stokely Chaffin. Die Musik stammt von George Fenton, die Kamera von Andrew Dunn, den Schnitt besorgten Troy Takaki und Tracey Wadmore-Smith. Das Budget betrug 30 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Anlage ist ein Klassiker der romantischen Komödie: eine Frau zwischen zwei Männern, die für zwei Lebensentwürfe stehen — und die Rückkehr an einen Ort, den man hinter sich gelassen hat.
+
+Der Süden der Vereinigten Staaten ist dabei nicht der Ort, dem man entkommen muss, sondern der, an dem die Hauptfigur ehrlicher ist. Genau darauf beruht die Entscheidung am Schluss.
+
+Bemerkenswert ist die Ausgangslage: Die Hauptfigur ist bereits verheiratet und lässt ihren zweiten Verlobten bis zum Altar im Unklaren — für eine Komödie dieser Art eine ungewöhnlich harte Konstruktion.
+
+### Einordnung & Wirkung
+
+Bei 30 Millionen Dollar Herstellungskosten spielte der Film weltweit rund 181 Millionen ein — ein außerordentlicher Erfolg.
+
+Die Kritik urteilte gemischt. Eine Stimme hielt fest, der Film folge blind den enttäuschenden Tendenzen des Genres; eine andere nannte ihn harmlose Unterhaltung, die ihr Publikum trotz aller Einfältigkeit für sich einnehmen könne.
+
+Der Abstand zwischen diesen beiden Urteilen und dem Einspielergebnis ist für romantische Komödien jener Jahre kennzeichnend — und erklärt, warum sie in dieser Zahl produziert wurden.` },
 ];
