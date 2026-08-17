@@ -31184,4 +31184,488 @@ Die erste Staffel erschien im Juni 2021 bei Netflix mit 13 Folgen. Die zweite ka
 Bis Dezember 2021 waren weltweit über neun Millionen Bände des Mangas im Umlauf.
 
 In Japan schnitt die Reihe bei Preisen und Buchhandelsempfehlungen gut ab. Zugleich zog sie kulturelle Kritik auf sich — der Umstand, dass sie lebendige Glaubensvorstellungen als Turnierstoff verwendet, ist der Kern der Auseinandersetzung um sie.` },
+  // ---- Block 52 ----
+  {
+    bereich: 'titel', schluessel: 'series:63401', locale: 'de-de',
+    text: `### Worum es geht
+
+Drei Bären teilen sich eine Höhle am Rand der Stadt: Grizzly, Panda und Eisbär. Sie sprechen, sie leben zusammen, und sie versuchen, im städtischen Leben zurechtzukommen — was daran scheitert, dass sie Bären sind.
+
+Sie wollen dazugehören und stellen sich dabei an wie Menschen. Nebenbei betreiben sie einen eigenen Kanal im Netz. Meist gehen die Dinge schief, und meist liegt es nicht an ihnen.
+
+### Entstehungsgeschichte
+
+Daniel Chong entwarf die Serie auf Grundlage seines eigenen Webcomics "The Three Bare Bears", der von 2010 bis 2011 erschien. Zuvor hatte er als Storyzeichner bei Pixar und bei Illumination Entertainment gearbeitet.
+
+Produziert wurde sie von den Cartoon Network Studios; die Ankündigung erfolgte 2014 im Rahmen des Kurzfilmprogramms des Senders.
+
+Die deutsche Synchronfassung entstand bei SDI Media Germany; Tim Schwarzmaier spricht den Panda, Laura Maire die Chloe Park.
+
+### Hinter den Kulissen
+
+Die Serie umfasst vier Staffeln mit 140 Folgen zu je elf Minuten.
+
+Die kurze Form prägt den Ton: Jede Folge hat für eine Situation Zeit, die aus einer alltäglichen Kleinigkeit entsteht und eskaliert.
+
+Daniel Chongs Herkunft ist der Serie anzumerken. Wer aus dem Storyboard kommt, denkt in Bewegungsabläufen und Körperhaltungen — und genau darüber, nicht über Dialog, funktioniert ein erheblicher Teil des Humors.
+
+### Einordnung & Wirkung
+
+Die Weltpremiere war am 27. Juli 2015 auf Cartoon Network, die deutschsprachige Erstausstrahlung am 8. November 2015.
+
+Am 30. Juni 2020 erschien "We Bare Bears: Der Film", der die Serie abschloss.
+
+2022 folgte mit "We Baby Bears" eine Vorgeschichte, die auf zwei Staffeln mit 79 Folgen kam.
+
+Aus dem Webcomic eines einzelnen Zeichners wurden damit vier Staffeln, ein Kinofilm und eine eigene Vorgeschichte — mit einem Grundeinfall, der sich in jeder Folge neu bewährt: drei Tiere, die einfach nur mitmachen wollen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:623491', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei Jahre sind vergangen, seit Cole Johnson herausfand, dass seine Babysitterin einem satanischen Zirkel angehört.
+
+Die Sache ist damit nicht vorbei. Cole muss sich erneut wehren — gegen Gegner, die von damals zurückgekehrt sind, und gegen neue.
+
+### Entstehungsgeschichte
+
+Regie führte McG, das Drehbuch schrieb er gemeinsam mit Dan Lagana, Brad Morris und Jimmy Warden. Als Anregung diente die Faust-Sage; im Ton orientierte sich die Produktion an den Komödien von Mel Brooks.
+
+Es ist die unmittelbare Fortsetzung des Films von 2017. Der größte Teil der Besetzung kehrte zurück, darunter Judah Lewis als Cole und Samara Weaving als Bee.
+
+Im Ensemble stehen zudem Emily Alyn Lind, Jenna Ortega, Robbie Amell, Andrew Bachelor, Leslie Bibb, Hana Mae Lee, Bella Thorne und Ken Marino.
+
+### Hinter den Kulissen
+
+Gedreht wurde 2019 in Los Angeles.
+
+Das Grundproblem jeder Fortsetzung dieser Art zeigt sich hier deutlich: Der erste Film lebte von einer Überraschung — der freundlichen Babysitterin, die etwas anderes ist. Diese Überraschung lässt sich nicht wiederholen. Der zweite Teil ersetzt sie durch mehr Figuren, mehr Tempo und mehr Blut.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 10. September 2020 bei Netflix und war am Startwochenende der zweitmeistgesehene Titel des Dienstes.
+
+Die Kritik urteilte dagegen deutlich schlechter als beim Vorgänger: 48 Prozent bei Rotten Tomatoes, 22 von 100 bei Metacritic. Eine Besprechung fasste es so zusammen: Wer den ersten Film mochte, schalte in der Erwartung von mehr gutem schlechtem Vergnügen ein — und bekomme viel zu viel von etwas, das nicht mehr gut sei.
+
+Damit steht der Film für ein wiederkehrendes Muster im Streamingbetrieb: Hohe Abrufzahlen am Startwochenende sagen über die Qualität nichts aus, weil die Entscheidung zum Einschalten nichts kostet.` },
+  {
+    bereich: 'titel', schluessel: 'series:93741', locale: 'de-de',
+    text: `### Worum es geht
+
+Sechs Jugendliche gewinnen Plätze im Camp Cretaceous, einem neuen Ferienlager auf Isla Nublar — auf derselben Insel, auf der der Vergnügungspark Jurassic World betrieben wird. Unter ihnen ist Darius Bowman, der sich mit Dinosauriern besser auskennt als die Betreuer.
+
+Dann brechen die Tiere aus ihren Gehegen aus. Die sechs bleiben auf der Insel zurück und müssen sich dort behaupten — inmitten von Tieren, die nicht mehr eingesperrt sind.
+
+### Entstehungsgeschichte
+
+Zack Stentz entwickelte die Serie; Scott Kreamer und Aaron Hammersley waren die leitenden Produzenten. Als ausführende Produzenten beteiligt waren Steven Spielberg, Colin Trevorrow und Frank Marshall.
+
+Die Stimmen sprechen Paul-Mikél Williams, Sean Giambrone, Kausar Mohammed, Jenna Ortega, Ryan Potter und Raini Rodriguez.
+
+Produziert wurde die Serie gemeinsam von Amblin Entertainment, Universal Television und DreamWorks Animation Television für Netflix; gearbeitet wurde unter anderem mit V-Ray und Autodesk Maya.
+
+### Hinter den Kulissen
+
+Die Serie ist eng mit den Kinofilmen verzahnt. Sie spielt vor, während und nach den Ereignissen von "Jurassic World" aus dem Jahr 2015 und führt bis in die Handlung von "Das gefallene Königreich" hinein.
+
+Das ist erzählerisch anspruchsvoll: Die Serie muss sich in eine bereits erzählte Katastrophe einfügen, ohne ihr zu widersprechen — und dabei mit Ereignissen arbeiten, deren Ausgang das Publikum längst kennt.
+
+### Einordnung & Wirkung
+
+Es entstanden fünf Staffeln mit 8, 8, 10, 11 und 12 Folgen sowie eine interaktive Sonderfolge. Die Premiere war am 18. September 2020, das Ende am 21. Juli 2022; die Sonderfolge erschien am 15. November 2022.
+
+Die Kritik lobte Animation und Sprecher; die dritte Staffel erreichte 100 Prozent bei Rotten Tomatoes. Die Serie gewann einen Annie Award für animierte Effekte.
+
+Am 24. Mai 2024 startete mit "Jurassic World: Chaos Theory" eine Nachfolgeserie, die dieselben Figuren sechs Jahre später zeigt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:76494', locale: 'de-de',
+    text: `### Worum es geht
+
+Fünf Paare in Atlanta bekommen zur selben Zeit Kinder. Der Film verfolgt sie parallel und zeigt, wie unterschiedlich Schwangerschaft und Elternschaft ausfallen können.
+
+Jeder Handlungsstrang steht für eine andere Erfahrung — von der Schwangerschaft, die anders verläuft als erwartet, bis zu dem Paar, für das es auf natürlichem Weg nicht klappt. Was die fünf Geschichten verbindet, ist der Zeitpunkt, nicht das Erlebnis.
+
+### Entstehungsgeschichte
+
+Regie führte Kirk Jones, das Drehbuch schrieben Shauna Cross und Heather Hach.
+
+Die Vorlage ist ungewöhnlich: Heidi Murkoffs Schwangerschaftsratgeber "What to Expect When You're Expecting". Ein Sachbuch ohne Handlung — die Autorinnen mussten die Geschichten vollständig erfinden.
+
+Cameron Diaz, Jennifer Lopez, Elizabeth Banks, Anna Kendrick und Matthew Morrison spielen die Hauptrollen. Hinzu kommen Kurzauftritte von Prominenten, darunter der Basketballspieler Dwyane Wade und die Sängerin Cheryl Cole.
+
+### Hinter den Kulissen
+
+Lions Gate Entertainment erwarb die weltweiten Rechte im Januar 2010. Gedreht wurde ab Juli 2011 in Atlanta.
+
+Die Anlage folgt einem Muster, das in jenen Jahren mehrfach verwendet wurde: mehrere lose verbundene Geschichten, ein gemeinsames Thema, ein großes Ensemble. Der Vorteil ist die Bandbreite, der Nachteil die Zeit — bei fünf Paaren bleiben für jedes rund zwanzig Minuten.
+
+### Einordnung & Wirkung
+
+Der Film spielte in den Vereinigten Staaten 41,2 Millionen Dollar ein und international 33,4 Millionen, insgesamt also rund 74,6 Millionen.
+
+Die Kritik lehnte ihn überwiegend ab: 22 Prozent bei Rotten Tomatoes. Bemängelt wurden die unübersichtliche Erzählweise und ein Humor, der auf naheliegende Pointen setze.
+
+Bemerkenswert bleibt der Ausgangspunkt: die Verfilmung eines Schwangerschaftsratgebers — eines Titels also, der bekannt genug war, um einen Film zu tragen, ohne eine einzige Figur mitzubringen.` },
+  {
+    bereich: 'titel', schluessel: 'series:12697', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie setzt fünf Jahre nach dem Ende der Manga-Vorlage ein und folgt Son-Goku auf neuen Abenteuern.
+
+Begleitet wird er von Trunks und von Pan. Der erste Handlungsbogen dreht sich um die Super-Dragon-Balls; danach folgen über drei weitere Bögen Gegner, die es in der Vorlage nie gegeben hat.
+
+### Entstehungsgeschichte
+
+Es ist die zweite Fortsetzungsserie der Reihe. Der entscheidende Unterschied zu allen vorherigen: Sie wurde von Anfang an als Anime entworfen und beruht nicht auf einer Handlung aus dem Manga.
+
+Akira Toriyama, der Schöpfer der Vorlage, wirkte nur noch als künstlerischer Berater mit.
+
+Produziert wurde die Serie von Toei Animation, Regie führte Minoru Okazaki, die Musik komponierte Akihito Tokunaga.
+
+Damit unterscheidet sich die Aufstellung grundlegend von den Vorgängerserien: Dort lag stets eine abgeschlossene Manga-Handlung vor, die zu bebildern war. Hier musste das Studio die Geschichte selbst entwickeln.
+
+### Hinter den Kulissen
+
+Die 64 Folgen gliedern sich in vier Handlungsbögen: Super-Dragon-Balls von Folge 1 bis 22, Baby von 23 bis 40, Super-Nummer 17 von 41 bis 47 und Teufelsdrachen von 48 bis 64.
+
+Genau daran hat sich die Auseinandersetzung um diese Serie über Jahrzehnte entzündet: Sie ist der einzige Teil der Reihe, für den es keine Manga-Vorlage gibt — jede Wendung ist eine Erfindung des Anime-Teams, nicht des Zeichners.
+
+### Einordnung & Wirkung
+
+Ausgestrahlt wurde vom 7. Februar 1996 bis zum 9. November 1997 auf dem japanischen Sender Fuji TV.
+
+Ihre Stellung innerhalb der Reihe ist bis heute umstritten. Sie gilt als eigenständige Fortsetzung, steht aber neben einem Werk, dessen übrige Teile auf Toriyamas Manga zurückgehen.
+
+Von 2015 bis 2018 lief mit "Dragon Ball Super" eine weitere Fortsetzung — womit sich die Frage nach Reihenfolge und Gültigkeit innerhalb der Reihe noch einmal neu stellte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:26736', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Familie Russo macht Urlaub in der Karibik. Alex wünscht sich dort in einem unbedachten Moment, ihre Eltern hätten sich nie kennengelernt.
+
+Der Wunsch geht in Erfüllung. Von diesem Moment an gibt es die Ehe der Eltern nicht mehr — und damit auch die Kinder nicht, die daraus hervorgegangen sind. Um das rückgängig zu machen, brauchen sie den Stein der Träume, und dafür bleibt ihnen wenig Zeit.
+
+### Entstehungsgeschichte
+
+Regie führte Lev L. Spiro, das Drehbuch schrieb Dan Berendsen. Es handelt sich um einen Disney Channel Original Movie zur laufenden Serie.
+
+Selena Gomez spielt Alex Russo, David Henrie und Jake T. Austin ihre Brüder, David DeLuise den Vater; Jennifer Stone gehört ebenfalls zur Besetzung.
+
+Die Dreharbeiten begannen am 15. Februar 2009 und dauerten etwa sechs Wochen. Gedreht wurde überwiegend in Puerto Rico, dazu in New York und in Los Angeles.
+
+### Hinter den Kulissen
+
+Das Verhältnis zur Serie ist lose: Die Ereignisse des Films wirken sich auf deren Handlung nicht aus, auch wenn gelegentliche Anspielungen darauf hindeuten, dass er in derselben Welt spielt.
+
+Erzählerisch greift der Film ein sehr altes Motiv auf — den unbedachten Wunsch, der sich erfüllt und dabei mehr zerstört als beabsichtigt. Neu ist die Zuspitzung: Die Geschwister verlieren nicht nur ihre Eltern, sondern die eigene Existenz.
+
+### Einordnung & Wirkung
+
+Die Erstausstrahlung fand am 28. August 2009 auf dem amerikanischen Disney Channel statt und erreichte 13,5 Millionen Zuschauer.
+
+Im deutschsprachigen Raum lief der Film am 30. Oktober 2009 auf dem Disney Channel; die Erstausstrahlung im frei empfangbaren Fernsehen auf ProSieben sahen 1,63 Millionen Zuschauer.
+
+2010 gewann der Film den Emmy als herausragendes Kinderprogramm — für einen Fernsehfilm zu einer laufenden Kinderserie eine ungewöhnliche Auszeichnung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:385103', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film erzählt zunächst, wie alles anfing: Der junge Shaggy findet in Venice Beach einen streunenden Hund, der sprechen kann, und nennt ihn Scooby-Doo. Gemeinsam mit Fred, Daphne und Velma gründen die beiden Mystery Inc.
+
+Zehn Jahre später will ein Geldgeber nicht in sie investieren. Kurz darauf werden sie von formwandelnden Robotern angegriffen und vom Superhelden Blue Falcon gerettet. Dahinter steckt Dick Dastardly, der Scooby braucht, um ein Tor zur griechischen Unterwelt zu öffnen — denn der Hund stammt in gerader Linie vom Hund Alexanders des Großen ab.
+
+### Entstehungsgeschichte
+
+Regie führte Tony Cervone. Das Drehbuch schrieben Adam Sztykiel, Jack Donaldson, Derek Elliott und Matt Lieberman.
+
+Die Stimmen sprechen Will Forte den Shaggy, Zac Efron den Fred, Amanda Seyfried die Daphne, Gina Rodriguez die Velma, Mark Wahlberg den Blue Falcon und Jason Isaacs den Dick Dastardly. Frank Welker spricht wie seit Jahrzehnten den Scooby-Doo. Simon Cowell tritt als er selbst auf.
+
+Produziert wurde der Film von der Warner Animation Group und den Reel FX Animation Studios; die Musik stammt von Tom Holkenborg.
+
+### Hinter den Kulissen
+
+Ursprünglich war der Film als Zusammenführung mehrerer Hanna-Barbera-Figuren angelegt — gewissermaßen als deren Avengers. Im Verlauf der Entwicklung rückte stattdessen die Freundschaft zwischen Scooby und Shaggy in den Mittelpunkt.
+
+Gestalterisch wurde die flächige Zeichenweise von Hanna-Barbera in dreidimensionale Animation übertragen, wobei der cartoonhafte Charakter erhalten bleiben sollte.
+
+Der Start war für den 15. Mai 2020 im Kino vorgesehen. Wegen der Schließungen in der Pandemie stellte Warner Bros. den Film am selben Tag stattdessen als kostenpflichtigen Abruf ins Netz — einer der ersten Versuche dieser Art bei einer Großproduktion. Kinostarts folgten ab Juli 2020 international und im Mai 2021 in den Vereinigten Staaten.
+
+### Einordnung & Wirkung
+
+Bei 90 Millionen Dollar Herstellungskosten kamen im Kino weltweit nur rund 28,5 Millionen zusammen. Im Abruf lief es deutlich besser: Der Film war 2020 der dritterfolgreichste Titel dieser Auswertungsform, wobei die Verkaufszahlen nie offengelegt wurden.
+
+Die Kritik urteilte gemischt: 48 Prozent bei Rotten Tomatoes aus 152 Besprechungen mit einem Schnitt von 5,3 von 10, 43 von 100 bei Metacritic. Anerkannt wurden Tempo und Farbigkeit; bemängelt wurden die Überfrachtung mit Anspielungen und die Abkehr vom Detektivformat der Vorlage.` },
+  {
+    bereich: 'titel', schluessel: 'series:96815', locale: 'de-de',
+    text: `### Worum es geht
+
+"Sex, Explained" ist eine fünfteilige Dokumentationsreihe, die einzelne Aspekte menschlicher Sexualität untersucht — jeweils eine Folge pro Thema, mit Fachleuten, Zahlen und historischer Einordnung.
+
+Die fünf Folgen behandeln sexuelle Fantasien, Anziehung — betrachtet über heterosexuelle, homosexuelle und geschlechtsfluide Beziehungen hinweg —, Verhütung mit ihren hormonellen und nichthormonellen Verfahren und ihrer Geschichte, Fruchtbarkeit einschließlich männlicher und weiblicher Unfruchtbarkeit und assistierter Reproduktion sowie Geburt mit den Themen Müttergesundheit, medizinische Eingriffe und Geburtstrauma.
+
+### Entstehungsgeschichte
+
+Produziert wurde die Reihe von Vox Media für Netflix.
+
+Sie ist ein Ableger der Reihe "Explained" und steht neben "The Mind, Explained", das nach demselben Muster arbeitet.
+
+Gesprochen wird sie von Janelle Monáe, die Titelmusik stammt von Jackson Greenberg. Die einzelnen Folgen dauern zwischen 17 und 26 Minuten.
+
+### Hinter den Kulissen
+
+Die Form ist bewusst knapp gehalten. Statt einer abendfüllenden Untersuchung gibt es kurze, in sich abgeschlossene Beiträge mit hohem Tempo, Grafiken und einer erklärenden Erzählstimme — ein Format, das Vox aus seiner Arbeit im Netz übernommen und für das Fernsehen ausgebaut hat.
+
+Der Zuschnitt der Themen ist dabei bemerkenswert: Die Reihe behandelt Sexualität überwiegend als medizinische, historische und gesellschaftliche Frage, nicht als Anlass für Bilder.
+
+### Einordnung & Wirkung
+
+Alle fünf Folgen erschienen am 2. Januar 2020 bei Netflix.
+
+Die Kritik urteilte überwiegend positiv: Bei Rotten Tomatoes steht die Reihe bei 100 Prozent, allerdings auf Grundlage von nur fünf Besprechungen.
+
+Gelobt wurde vor allem der sachliche Zugang — eine Stimme fasste es mit der Formulierung zusammen, die Reihe sei klüger als aufreizend. Salon nannte sie einen unterhaltsamen und lehrreichen Einstieg in die Sexualaufklärung für Erwachsene, The Daily Beast eine wertvolle Ergänzung zu vorhandenem Wissen.` },
+  // ---- Block 53 ----
+  {
+    bereich: 'titel', schluessel: 'movie:417320', locale: 'de-de',
+    text: `### Worum es geht
+
+Mal ist inzwischen an der Seite von König Ben und kommt mit dem Leben in der Öffentlichkeit nicht zurecht. Sie kehrt zurück auf die Isle of the Lost, die Insel der Verbannten, auf der sie aufgewachsen ist.
+
+Dort hat sich einiges geändert. Uma, die Tochter von Ursula, hat die Macht übernommen und wartet auf ihre Gelegenheit. Als sie Ben in ihre Gewalt bringt, muss Mals Gruppe den Zauberstab der guten Fee holen — und Mal und Uma stehen einander schließlich in verwandelter Gestalt gegenüber.
+
+### Entstehungsgeschichte
+
+Regie führte Kenny Ortega. Das Drehbuch schrieben Josann McGibbon und Sara Parriott, die bereits für den ersten Teil verantwortlich waren.
+
+Es ist der zweite Film der Reihe nach "Descendants" von 2015; 2019 folgte "Descendants 3".
+
+Dove Cameron, Cameron Boyce, Sofia Carson, Booboo Stewart und Mitchell Hope kehrten zurück. Neu hinzu kamen China Anne McClain als Uma sowie Thomas Doherty und Dylan Playfair.
+
+### Hinter den Kulissen
+
+Gedreht wurde von September bis Oktober 2016 in Vancouver und Victoria in British Columbia, mit einem Budget von zwölf Millionen Dollar.
+
+Bemerkenswert ist die Art der Ausstrahlung: Der Film lief am 21. Juli 2017 gleichzeitig auf sechs Sendern des Disney-Konzerns — Disney Channel, Disney XD, Freeform, ABC, Lifetime und Lifetime Movies.
+
+Das ist ein Verfahren, das üblicherweise für Großereignisse eingesetzt wird und hier auf einen Fernsehfilm für Jugendliche angewandt wurde.
+
+### Einordnung & Wirkung
+
+Die Erstausstrahlung erreichte über alle Sender hinweg 8,92 Millionen Zuschauer; mit zeitversetzter Nutzung stieg die Zahl auf 21 Millionen.
+
+Die Kritik urteilte überwiegend positiv; der Film erhielt mehrere Nominierungen.
+
+Getragen wird er von seiner Musik; als Vorabsingle erschien "Ways to Be Wicked".
+
+Die Grundidee der Reihe lässt sich in einem Satz erklären: Die Kinder der Bösewichte aus den Zeichentrickfilmen gehen gemeinsam zur Schule. Genau darauf beruht ihr Erfolg — und die gleichzeitige Ausstrahlung auf sechs Sendern zeigt, welchen Stellenwert der Konzern ihr beimaß.` },
+  {
+    bereich: 'titel', schluessel: 'movie:829557', locale: 'de-de',
+    text: `### Worum es geht
+
+Laura und Massimo sind verheiratet. Nach einer Fehlgeburt ist das Verhältnis belastet, und Laura langweilt sich in einem Leben, das aus Sicherheit und Bewachung besteht.
+
+Dann lernt sie Nacho kennen, der als Gärtner arbeitet, und geht mit ihm auf eine Insel. Was sie nicht weiß: Nachos Vater führt eine rivalisierende Verbrecherorganisation. Am Ende steht eine Enthüllung über Massimos Familie und ein offener Schluss, der Lauras Schicksal in der Schwebe lässt.
+
+### Entstehungsgeschichte
+
+Regie führten Barbara Białowąs und Tomasz Mandes. Die Vorlage ist der zweite Band von Blanka Lipińskas Romantrilogie.
+
+Anna-Maria Sieklucka, Michele Morrone und Magdalena Lamparska kehrten aus dem ersten Film zurück.
+
+Gedreht wurde ab Mai 2021 in Italien und Polen; ursprünglich war die Produktion für 2020 vorgesehen und wurde wegen der Pandemie verschoben. Der Film läuft 109 Minuten.
+
+### Hinter den Kulissen
+
+Netflix veröffentlichte den Film am 27. April 2022 weltweit.
+
+Der Kern der Auseinandersetzung um diese Reihe betrifft nicht die Machart, sondern das, was sie zeigt.
+
+Kritiker haben das deutlich benannt: als zutiefst ungesunde Darstellung von Sexualität und Beziehungen, die kontrollierendes und übergriffiges Verhalten verklärt. Das Verhältnis zwischen Laura und Massimo wird durchgehend als Liebesgeschichte erzählt, ohne dass die Umstände, unter denen es zustande kam, je zum Problem würden.
+
+### Einordnung & Wirkung
+
+Die Bewertungen gehören zu den schlechtesten, die je vergeben wurden: null Prozent bei Rotten Tomatoes aus 17 Besprechungen, 8 von 100 bei Metacritic — ein Wert, der dort als überwältigende Ablehnung geführt wird.
+
+Ein Rezensent schätzte, dass von der Laufzeit etwa 15 Minuten auf Handlung entfielen und rund 80 Prozent auf Sexszenen. Wiederkehrende Urteile waren "Müll" und die Feststellung, der Film sei noch schlechter als sein Vorgänger.
+
+Am 19. August 2022 folgte mit "The Next 365 Days" der dritte Teil, der ebenfalls negativ aufgenommen wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9788', locale: 'de-de',
+    text: `### Worum es geht
+
+Bartleby Gaines hat die Schule beendet und ist an jeder Hochschule abgelehnt worden, an der er sich beworben hat. Um seine Eltern zu beruhigen, erfindet er eine: das South Harmon Institute of Technology, kurz S.H.I.T.
+
+Was als Vorwand gedacht war, nimmt eine unerwartete Wendung: Hunderte ebenfalls abgelehnter Jugendlicher schreiben sich ein, weil sie die Einrichtung für echt halten. Bartleby entscheidet sich daraufhin, sie tatsächlich zu betreiben — mit einem Lehrplan, der mit dem üblichen nichts zu tun hat.
+
+### Entstehungsgeschichte
+
+Es war das Regiedebüt von Steve Pink. Das Drehbuch schrieben Adam Cooper, Bill Collage und Mark Perez; produziert wurde der Film von Tom Shadyac und Michael Bostick.
+
+Justin Long spielt Bartleby, Jonah Hill seinen Freund Sherman, Blake Lively die Monica Moreland, Anthony Heald den Gegenspieler Dean Van Horne und Lewis Black den zynischen Dean Lewis.
+
+Der Verleih lag bei Universal Pictures, das Budget bei 23 Millionen Dollar; erschienen ist der Film am 18. August 2006.
+
+### Hinter den Kulissen
+
+Der Einfall ist eine Umkehrung: Nicht die Bewerber sind ungeeignet, sondern das Auswahlverfahren. Der Film führt das über eine Reihe von Figuren aus, deren Fähigkeiten in keiner Bewerbungsmappe vorkommen.
+
+Getragen wird der Film von seiner Besetzung: Mehrere der Beteiligten standen zu diesem Zeitpunkt am Anfang ihrer Laufbahn und wurden in den Jahren danach deutlich bekannter.
+
+### Einordnung & Wirkung
+
+Der Film startete auf Platz fünf in den Vereinigten Staaten und spielte weltweit 38,6 Millionen Dollar ein.
+
+Die Kritik urteilte gemischt. Bemängelt wurde bei Rotten Tomatoes eine unstimmige und absurde Handlung, zugestanden wurden immerhin einige Lacher.
+
+Das Publikum war deutlich zufriedener und vergab bei CinemaScore ein A minus.
+
+Der Abstand zwischen beiden Urteilen erklärt sich aus dem Gegenstand: Ein Film über abgelehnte Bewerber trifft ein Publikum, das die Erfahrung kennt — und das ihm die Unstimmigkeiten der Handlung deshalb nachsieht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:26123', locale: 'de-de',
+    text: `### Worum es geht
+
+Drei Schüler einer Highschool haben eines gemeinsam: Bei keinem von ihnen ist bisher etwas gelaufen. Rob, Nathan und Marshall stoßen auf ein legendäres Handbuch, das schlicht "die Bibel" genannt wird und Ratschläge für genau diese Lage enthält.
+
+Sie versuchen, die Ratschläge umzusetzen. Was folgt, sind Missgeschicke, Fehleinschätzungen und beschädigte Beziehungen — bis sich auf einer Skifahrt der Schule vieles wieder einrenkt.
+
+### Entstehungsgeschichte
+
+Regie führte John Putch, das Drehbuch schrieb David H. Steinberg auf Grundlage der von Adam Herz geschaffenen Figuren.
+
+Es ist der vierte Teil der Ableger-Reihe "American Pie präsentiert", nach "Das Klassentreffen", "Nackte Tatsachen" und "Die College-Clique".
+
+Bug Hall, Brandon Hardesty, Beth Behrs, Jennifer Holland und John Patrick Jordan spielen die Hauptrollen. Eugene Levy tritt wie in allen Teilen der Reihe als Noah Levenstein auf — jene Figur, die das Buch einst verfasst hat. Kurzauftritte haben Kevin Federline, Dustin Diamond, C. Thomas Howell und Christopher Knight.
+
+### Hinter den Kulissen
+
+Universal Studios Home Entertainment veröffentlichte den Film am 22. Dezember 2009 unmittelbar auf Video; einen Kinostart gab es nicht.
+
+Eugene Levy ist die einzige Verbindung zu den Kinofilmen — er kehrt in seiner angestammten Rolle zurück, während die übrige Besetzung von Teil zu Teil vollständig wechselt.
+
+### Einordnung & Wirkung
+
+Der Film brachte 5,2 Millionen Dollar aus dem DVD-Verkauf ein.
+
+Die Kritik urteilte gemischt. Eine Stimme formulierte, man könne einem Film wie diesem allein deshalb nichts vorwerfen, weil er die vierte Fortsetzung direkt für den Videomarkt sei. Eine andere hielt fest, der Versuch, an die Nachdenklichkeit des Originals anzuknüpfen, komme zu spät und falle zu dünn aus.
+
+Der Fall steht für ein Geschäftsmodell, das in den 2000er Jahren verbreitet war: Ein bekannter Titel wird über Jahre in Direktvertriebsfortsetzungen weiterverwertet, mit wechselnder Besetzung und einem festen Bindeglied zur Vorlage.` },
+  {
+    bereich: 'titel', schluessel: 'movie:296100', locale: 'de-de',
+    text: `### Worum es geht
+
+Ethan, Isaac und Chris feiern seit Jahren gemeinsam Heiligabend in New York. Angefangen hat das 2001, als Ethans Eltern starben und die beiden anderen ihm versprachen, ihn an diesem Abend nie allein zu lassen.
+
+2015 sind sie erwachsen. Chris ist Footballprofi geworden, Isaac erwartet ein Kind, nur Ethan kommt als Musiker nicht voran. Sie beschließen, die Tradition ein letztes Mal zu begehen — und dabei endlich auf jene legendäre Feier zu kommen, von der alle reden. Die Nacht verläuft anders als geplant.
+
+### Entstehungsgeschichte
+
+Regie führte Jonathan Levine, das Drehbuch schrieb er gemeinsam mit Evan Goldberg, Kyle Hunter und Ariel Shaffir.
+
+Joseph Gordon-Levitt spielt den Ethan, Seth Rogen den Isaac, Anthony Mackie den Chris. In weiteren Rollen sind Lizzy Caplan, Jillian Bell, Mindy Kaling und Michael Shannon zu sehen; Kurzauftritte haben Miley Cyrus, James Franco und Tracy Morgan.
+
+Für Levine, Rogen und Gordon-Levitt war es die zweite gemeinsame Arbeit nach "50/50" aus dem Jahr 2011.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen am 11. August 2014 in New York. Columbia Pictures brachte den Film am 20. November 2015 heraus — vorgezogen von einem ursprünglich für Dezember vorgesehenen Termin.
+
+Die Anlage ist die eines Weihnachtsfilms, der sich nicht wie einer verhält: Der Film arbeitet mit den Motiven der Gattung — der letzten Nacht, dem Wunder, der Rückkehr zur Familie — und setzt sie in einer Handlung um, die überwiegend aus Rausch und Fehlverhalten besteht.
+
+### Einordnung & Wirkung
+
+Bei einem Budget zwischen 25 und 33 Millionen Dollar spielte der Film in den Vereinigten Staaten 43 Millionen ein und international 9,3 Millionen, insgesamt 52,4 Millionen.
+
+Die Kritik urteilte gemischt: 68 Prozent bei Rotten Tomatoes, 58 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein A minus.
+
+Bemerkenswert bleibt, dass eine derbe Komödie ihre Wirkung ausgerechnet aus dem Gegenteil bezieht: aus einem Versprechen, das drei Jugendliche einem Trauernden gegeben haben und über fünfzehn Jahre gehalten haben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:326359', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Jahr nach den Ereignissen des ersten Films will Elsa ihrer Schwester Anna eine Geburtstagsüberraschung bereiten. Gemeinsam mit Kristoff, Sven und Olaf bereitet sie alles vor.
+
+Nur hat Elsa sich erkältet. Und bei ihr hat eine Erkältung Folgen: Sie bringt unabsichtlich kleine Schneewesen hervor, die Snowgies — und die stören die Feier nachhaltig.
+
+### Entstehungsgeschichte
+
+Regie führten Chris Buck und Jennifer Lee, dieselben wie beim Film von 2013. Der Kurzfilm dauert sieben Minuten.
+
+Die ursprünglichen Stimmen kehrten zurück: Kristen Bell als Anna, Idina Menzel als Elsa, Jonathan Groff als Kristoff und Josh Gad als Olaf.
+
+Die Musik stammt von Christophe Beck; das Lied "Making Today a Perfect Day" schrieben Kristen Anderson-Lopez und Robert Lopez, die bereits die Lieder des ersten Films verfasst hatten.
+
+### Hinter den Kulissen
+
+Die Arbeit begann im Juni 2014 und dauerte sechs Monate — für sieben Minuten Film ein erheblicher Aufwand.
+
+Am 13. März 2015 lief der Kurzfilm im Kino, und zwar als Vorfilm zur Realverfilmung von "Cinderella". Danach erschien er digital, auf Blu-ray und DVD, später bei Netflix und schließlich bei Disney+.
+
+Diese Auswertung ist bezeichnend: Ein Kurzfilm zu einem außerordentlich erfolgreichen Animationsfilm wird als Zugstück für einen anderen Film desselben Studios eingesetzt.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte überwiegend positiv. USA Today nannte den Film einen warmherzigen Ableger, die BBC hielt das neue Lied für eingängig und vergnüglich.
+
+Der Daily Telegraph sah darin einen Hinweis darauf, dass den Verfassern für kommende Fortsetzungen noch Besonderes einfallen könne.
+
+Es gab auch Gegenstimmen: Slate nannte den Kurzfilm schlicht eine Enttäuschung.
+
+Bemerkenswert bleibt der Aufwand: sechs Monate Arbeit, das vollständige ursprüngliche Sprecherensemble, dieselben Regisseure und dieselben Liedermacher — für sieben Minuten Film.` },
+  {
+    bereich: 'titel', schluessel: 'movie:625450', locale: 'de-de',
+    text: `### Worum es geht
+
+Jodi Kreyman ist sechzehn und misst deutlich mehr als alle in ihrer Umgebung. Seit ihrer Kindheit wird sie darauf angesprochen, und sie hat sich angewöhnt, sich klein zu machen.
+
+Dann kommt Stig Mohlin als Austauschschüler aus Schweden an ihre Schule — größer als sie. Jodi verliebt sich. Ihr langjähriger Freund Jack Dunkleman wiederum ist seit Jahren in sie verliebt, ohne dass sie es bemerkt. Was folgt, sind Verwicklungen, an deren Ende Jodi zum ersten Mal aufrecht steht.
+
+### Entstehungsgeschichte
+
+Regie führte Nzingha Stewart, das Drehbuch schrieb Sam Wolfson.
+
+Ava Michelle spielt Jodi, Griffin Gluck den Jack Dunkleman, Sabrina Carpenter die Schwester Harper und Luke Eisner den Austauschschüler Stig. In weiteren Rollen sind Anjelika Washington, Angela Kinsey und Steve Zahn zu sehen.
+
+Netflix produzierte den Film gemeinsam mit McGs Firma Wonderland Sound and Vision. Gedreht wurde von Januar bis März 2019 in New Orleans, das Budget betrug 13,6 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film erschien am 13. September 2019 und erreichte binnen weniger Wochen über 41 Millionen Zuschauer.
+
+Die Prämisse selbst wurde dabei viel diskutiert: ob eine Jugendkomödie Körpergröße als zentrale Ausgrenzungserfahrung tragen kann.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte zurückhaltend: 42 Prozent bei Rotten Tomatoes. Der Befund lautete, der Film sei stellenweise gewinnend, im Kern aber eine ideenlose Jugendkomödie, die dem Genre nichts hinzufüge.
+
+Netflix gab im Dezember 2020 dennoch eine Fortsetzung in Auftrag; "Tall Girl 2" erschien am 11. Februar 2022 mit derselben Besetzung.
+
+Der Fall ist damit ein gutes Beispiel für die Rechenweise der Streamingdienste: Ein Film mit schwachen Kritikerwerten, aber sehr hohen Abrufzahlen bekommt eine Fortsetzung, weil allein die zweite Zahl über die Entscheidung bestimmt.` },
+  {
+    bereich: 'titel', schluessel: 'series:74428', locale: 'de-de',
+    text: `### Worum es geht
+
+Rosario ist eine junge Studentin, die zur Auftragsmörderin wird. Ihr Beiname lautet Tijeras — die Schere.
+
+Die Serie erzählt von Gewalt und Rache in dem Viertel, aus dem sie stammt, und von einem Leben, das sie zwischen zwei Welten führt.
+
+### Entstehungsgeschichte
+
+Die Figur stammt von dem kolumbianischen Schriftsteller Jorge Franco. Diese mexikanische Fassung ist eine Neuverfilmung der kolumbianischen Serie von 2010.
+
+Produziert wurde sie von TV Azteca gemeinsam mit Sony Pictures Television und Teleset.
+
+Bárbara de Regil spielt die Rosario, José María de Tavira und Antonio Gaona die männlichen Hauptrollen. Im Ensemble stehen zudem Hernán Mendoza und Christian Vázquez sowie der kolumbianische Darsteller Sebastián Martínez, der bereits in der Originalfassung mitgewirkt hatte. In späteren Staffeln kamen unter anderem Verónica Langer und Christian Chávez hinzu.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen am 18. Juli 2016 in Tlalnepantla de Baz im Bundesstaat México.
+
+Bemerkenswert ist der Wechsel des Ausstrahlungswegs im Verlauf der Serie: Die erste Staffel lief auf Azteca 13, die zweite und dritte auf Azteca 7, die vierte und fünfte schließlich bei Netflix. Innerhalb von zehn Jahren hat sich das Format damit vom klassischen Fernsehen zum Streamingdienst verschoben — ein Verlauf, der für lateinamerikanische Serienproduktionen dieser Zeit kennzeichnend ist.
+
+### Einordnung & Wirkung
+
+Insgesamt entstanden fünf Staffeln mit 277 Folgen: 60 in der ersten von Oktober 2016 bis Januar 2017, 67 in der zweiten von August bis Dezember 2018, 70 in der dritten von August bis Dezember 2019, die vierte und fünfte 2025 und 2026.
+
+Die erste Staffel erreichte im Schnitt zwischen 10,5 und 12,4 Punkten in der Zuschauermessung. In den späteren Staffeln gingen die Zahlen zurück, auf etwa 1,9 bis 2,7 Millionen Zuschauer.
+
+Der Stoff selbst geht auf den kolumbianischen Schriftsteller Jorge Franco zurück und wurde damit binnen weniger Jahre in zwei Ländern als Serie erzählt.` },
 ];
