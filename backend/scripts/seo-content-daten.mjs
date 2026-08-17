@@ -23939,4 +23939,223 @@ Im Kino war der Film ein schwerer Fehlschlag: weltweit 16,4 Millionen Dollar. De
 Die Kritik urteilte überwiegend ablehnend: 37 Prozent bei Rotten Tomatoes; das Publikum vergab bei CinemaScore ein C plus.
 
 Bemerkenswert bleibt die Gestaltung: Nur wenige Filme haben den steigenden Meeresspiegel so beiläufig ins Bild gesetzt — als Stadt, in der man mit dem Boot zur Arbeit fährt, ohne dass es jemand erwähnenswert fände.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:152', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine gewaltige Energiewolke bewegt sich auf die Erde zu und zerstört alles, was ihr in den Weg kommt. Admiral James T. Kirk übernimmt die frisch umgebaute Enterprise, um sie abzufangen — gegen den Willen ihres derzeitigen Kommandanten Decker.
+
+Was die Wolke umschließt, ist ein Objekt von der Größe eines Sonnensystems. Darin sitzt V'Ger, eine Maschine auf der Suche nach ihrem Schöpfer, die nicht begreift, dass Menschen keine Fehler in einem System sind. Der Film erzählt das ohne Kampf und ohne Bösewicht: Die Bedrohung ist ein Missverständnis.
+
+### Entstehungsgeschichte
+
+Der Film entstand aus einer aufgegebenen Fernsehserie. Für "Star Trek: Phase II" lag ein Pilotdrehbuch namens "In Thy Image" vor; als Paramount-Manager Michael Eisner es las, erklärte er es für kinotauglich. Nach den Erfolgen von "Krieg der Sterne" und "Unheimliche Begegnung der dritten Art" entschied sich das Studio gegen die Serie und für den Film.
+
+Regie führte Robert Wise. Das ursprüngliche Budget von 15 Millionen Dollar stieg auf rund 44 Millionen.
+
+### Hinter den Kulissen
+
+Gedreht wurde von August 1978 bis Januar 1979 an 125 Tagen. Das Drehbuch war dabei nie fertig: Es wurde stündlich am Set geändert, und im März 1979 waren von den ursprünglich 150 Seiten weniger als 20 unverändert.
+
+Douglas Trumbull wurde unter Zeitdruck geholt, um die optischen Effekte fertigzustellen. Die Musik schrieb Jerry Goldsmith — der Beginn einer Verbindung zu "Star Trek", die bis 2002 hielt.
+
+Wise' Anweisung an das Team ist überliefert: Man solle das Publikum die Enterprise einfach lieben lassen. Entsprechend enthält der Film minutenlange Passagen ohne Dialog und ohne Handlung, in denen nur das Schiff zu sehen ist.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 139 Millionen Dollar ein — genug für Paramount, Fortsetzungen zu bewilligen, aber weniger als erhofft.
+
+Die Kritik urteilte gemischt und bemängelte, die Effekte gingen zulasten des Erzähltempos.
+
+2001 legte Wise eine überarbeitete Fassung vor, mit neuem Ton, gestrafftem Schnitt und ergänzter Computergrafik. Sie gilt vielen als die eigentliche Version des Films.` },
+  {
+    bereich: 'titel', schluessel: 'movie:726759', locale: 'de-de',
+    text: `### Worum es geht
+
+1988 entdeckt der niederländische Spieleentwickler Henk Rogers auf einer Messe in Las Vegas ein Spiel aus der Sowjetunion, das ihn nicht mehr loslässt. Er will die Rechte — und stellt fest, dass sie mehrfach vergeben wurden, an verschiedene Firmen, für Gebiete, die sich überschneiden.
+
+Rogers reist nach Moskau, ohne Visum für Geschäftsreisen und ohne Termin. Dort trifft er auf Alexei Paschitnow, den Erfinder des Spiels, der nichts daran verdient, und auf eine Behörde namens Elorg, die als einzige verkaufen darf. Gleichzeitig verhandeln zwei Konkurrenten um dieselben Rechte, und der KGB sieht zu.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf tatsächlichen Vorgängen. Die Entwicklung begann im Juli 2020, Regie führte Jon S. Baird, Taron Egerton spielt Rogers. Das Budget lag bei 80 Millionen Dollar, die Laufzeit beträgt 118 Minuten.
+
+Ein zentraler Punkt der Handlung ist belegt: Rogers überzeugte Nintendo, dem Game Boy nicht "Super Mario Land" beizulegen, sondern Tetris.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Schottland — in Glasgow, Aberdeen und in Perth and Kinross —, das die sowjetischen Schauplätze darstellt.
+
+Sowohl Henk Rogers als auch Alexei Paschitnow lobten den Film für seine emotionale Richtigkeit. Rogers hat zugleich klargestellt, worum es sich handelt: Es sei ein Hollywood-Drehbuch, ein Film, keine Geschichtsschreibung — vieles davon habe nie stattgefunden.
+
+Der Film macht daraus kein Geheimnis: Er verwendet Videospielgrafik als Übergänge und behandelt eine Verhandlung über Lizenzrechte wie einen Agentenfilm.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 15. März 2023 beim Festival South by Southwest statt, die Veröffentlichung folgte am 31. März 2023 bei Apple TV+.
+
+Die Kritik reagierte gut: 82 Prozent bei Rotten Tomatoes, mit dem wiederkehrenden Hinweis, der Film nehme sich erhebliche dramaturgische Freiheiten.
+
+Bemerkenswert bleibt der Gegenstand: ein Wirtschaftskrimi über Urheberrechte, der ohne Waffen auskommt und dessen Spannung vollständig aus Vertragsklauseln entsteht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10220', locale: 'de-de',
+    text: `### Worum es geht
+
+Mike McDermott studiert Jura und finanziert sich über Poker. In der ersten Szene setzt er seine gesamten Ersparnisse von 30.000 Dollar gegen Teddy KGB, einen russischen Clubbesitzer — und verliert alles. Er verspricht seiner Freundin, aufzuhören.
+
+Neun Monate später kommt sein Jugendfreund Worm aus dem Gefängnis und bringt Schulden mit, für die auch Mike geradesteht. Um sie abzutragen, muss Mike zurück an den Tisch. Der Film erklärt dabei genau, worin gutes Pokerspiel besteht: nicht im Glück, sondern im Lesen der anderen Spieler.
+
+### Entstehungsgeschichte
+
+Regie führte John Dahl, das Budget lag bei 12 Millionen Dollar. Die Dreharbeiten begannen im Dezember 1997.
+
+Matt Damon spielt Mike, Edward Norton spielt Worm; John Malkovich spielt Teddy KGB mit einem Akzent, über den bis heute gestritten wird — Peter Travers warf ihm vor, die Kulissen zu zerkauen.
+
+### Hinter den Kulissen
+
+Der Film lief am 4. September 1998 beim Festival in Venedig und kam am 11. September in die amerikanischen Kinos.
+
+Bemerkenswert ist der Umgang mit dem Fachlichen: Der Film erklärt Regeln, Setzverhalten und Wahrscheinlichkeiten so beiläufig, dass Zuschauer ohne Vorkenntnisse mitkommen — und Spieler das Gezeigte für stimmig halten.
+
+### Einordnung & Wirkung
+
+In den USA spielte er 22,9 Millionen Dollar ein. Die Kritik urteilte gemischt: 64 Prozent bei Rotten Tomatoes, 53 von 100 bei Metacritic. Roger Ebert vergab drei von vier Sternen und ordnete ihn im Kern als Sportfilm ein.
+
+Seine eigentliche Wirkung setzte Jahre später ein. Während des Pokerbooms Anfang der zweitausender Jahre — ausgelöst durch die Fernsehübertragungen der World Series of Poker und den Sieg des Amateurs Chris Moneymaker 2003 — wurde er zum Kultfilm. Zahlreiche Berufsspieler nennen ihn als den Anlass, mit dem Spiel angefangen zu haben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:369192', locale: 'de-de',
+    text: `### Worum es geht
+
+1970 erfährt Billie Jean King, dass Turniersieger bei den Männern das Achtfache dessen erhalten, was Frauen bekommen. Gemeinsam mit der Verlegerin Gladys Heldman stellt sie den Verbandsfunktionär Jack Kramer zur Rede, dringt nicht durch und gründet mit acht Mitstreiterinnen eine eigene Turnierserie — aus der die Damentennisorganisation WTA hervorgeht.
+
+Bobby Riggs, ehemaliger Weltranglistenerster und inzwischen 55, wittert ein Geschäft: Er fordert die besten Spielerinnen zum Schaukampf heraus und behauptet öffentlich, jede von ihnen schlagen zu können. Nachdem er Margaret Court besiegt hat, nimmt King an. Parallel dazu erzählt der Film Kings Beziehung zu einer Frau, die sie damals verbergen musste.
+
+### Entstehungsgeschichte
+
+Regie führten Jonathan Dayton und Valerie Faris, die zuvor "Little Miss Sunshine" gedreht hatten. Das Drehbuch schrieb Simon Beaufoy; produziert haben unter anderem Christian Colson und Danny Boyle, verliehen wurde der Film von Fox Searchlight.
+
+Die Dreharbeiten begannen am 13. April 2016 in Los Angeles, das Budget lag bei über 25 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Emma Stone spielt Billie Jean King, Steve Carell spielt Bobby Riggs. Für die Spielszenen dienten die Tennisprofis Kaitlyn Christian und Vince Spadea als Doubles.
+
+Die Anlage der beiden Hauptfiguren ist bemerkenswert genau: Riggs wird nicht als Frauenfeind gezeigt, sondern als Selbstdarsteller mit Spielsucht, der den Streit als Geschäftsmodell begreift — während die tatsächliche Ablehnung von Männern in Verbandsämtern ausgeht, die sich für vernünftig halten.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 18,6 Millionen Dollar ein, davon 12,6 Millionen in den USA — deutlich unter den Erwartungen.
+
+Die Kritik reagierte gut: 84 Prozent bei Rotten Tomatoes, das Publikum vergab bei CinemaScore ein A. Emma Stone und Steve Carell wurden für Golden Globes nominiert.
+
+Der reale Schaukampf vom 20. September 1973 wurde von schätzungsweise 90 Millionen Menschen weltweit verfolgt und gilt bis heute als einer der folgenreichsten Sportabende überhaupt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9349', locale: 'de-de',
+    text: `### Worum es geht
+
+Vietnam, 1969. Der Soldat Luc Deveraux findet seinen Vorgesetzten Andrew Scott vor, der Zivilisten hingerichtet hat und Ohren als Trophäen trägt. Die beiden töten einander.
+
+Jahrzehnte später sind sie wieder da — als Teil eines geheimen Militärprogramms, das gefallene Soldaten einfriert, wiederbelebt und als weisungsgebundene Einsatzkräfte verwendet. Sie haben keine Erinnerung, keine Schmerzempfindung und keinen eigenen Willen. Bis Deveraux Bilder aus Vietnam zurückbekommt, mit der Journalistin Veronica Roberts flieht und Scott dabei ebenfalls erwacht — mit dem Auftrag von damals im Kopf.
+
+### Entstehungsgeschichte
+
+Zunächst war Andrew Davis als Regisseur vorgesehen; im März 1991 übernahm Roland Emmerich. Es war dessen erste amerikanische Produktion.
+
+Emmerich schrieb das Drehbuch gemeinsam mit Dean Devlin um, vor allem um teure Effekte zu vermeiden. Die Dreharbeiten begannen im August 1991; das Budget lag bei 23 Millionen Dollar. Für die Produktionsfirma Carolco Pictures war der Film als Rettung der eigenen Finanzen gedacht.
+
+### Hinter den Kulissen
+
+Jean-Claude Van Damme spielt Deveraux, Dolph Lundgren spielt Scott — die Paarung zweier Actiondarsteller, die zu diesem Zeitpunkt beide auf dem Höhepunkt ihrer Bekanntheit standen.
+
+Die Vietnam-Rahmung gibt dem Film seine einzige Ebene über die Action hinaus: Beide Figuren sind Produkte desselben Krieges, und der eine ist genau deshalb gefährlich, weil ihn niemand gestoppt hat.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 10. Juli 1992 und spielte weltweit 120 Millionen Dollar ein — bei 23 Millionen Herstellungskosten ein deutlicher Erfolg.
+
+Die Kritik lehnte ihn ab: 34 Prozent bei Rotten Tomatoes, mit dem Befund, der Unterhaltungswert sei weitgehend abwesend. Das Publikum vergab bei CinemaScore ein B. Später fielen einzelne Urteile freundlicher aus; Drew Taylor nannte ihn ein charmantes, komisches und streckenweise regelrecht mitreißendes Vergnügen der B-Klasse.
+
+Aus dem Film wurden fünf Fortsetzungen sowie direkt fürs Fernsehen produzierte Ableger. Für Roland Emmerich war er der Einstieg nach Hollywood — es folgten "Stargate", "Independence Day" und "Godzilla".` },
+  {
+    bereich: 'titel', schluessel: 'movie:581032', locale: 'de-de',
+    text: `### Worum es geht
+
+Texas im Jahr 1870. Captain Jefferson Kyle Kidd zieht von Ort zu Ort und liest gegen zehn Cent Eintritt Zeitungsartikel vor — für Menschen, die nicht lesen können oder keine Zeitung bekommen. Der Krieg ist fünf Jahre vorbei, der Süden besetzt, und die Nachrichten sind das Einzige, was von draußen hereinkommt.
+
+Unterwegs findet er ein etwa zehnjähriges Mädchen, das nur Kiowa spricht. Johanna wurde als Kleinkind entführt und von den Kiowa aufgezogen; ihre leiblichen Eltern sind tot. Kidd soll sie zu den einzigen verbliebenen Verwandten bringen — 400 Meilen durch Land, in dem niemandem zu trauen ist.
+
+### Entstehungsgeschichte
+
+Grundlage ist Paulette Jiles' Roman von 2016. Das Drehbuch schrieben Luke Davies und Paul Greengrass, der auch Regie führte.
+
+Tom Hanks spielt Kidd; Helena Zengel spielt Johanna — für die damals zwölfjährige deutsche Darstellerin war es der erste internationale Film. Das Budget lag bei 38 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde von September 2019 bis November 2020 in Santa Fe, New Mexico.
+
+Für Greengrass ist es eine ungewöhnliche Arbeit: Bekannt wurde er mit den "Bourne"-Filmen und mit "Flug 93" für eine hektische, handgeführte Kamera. Hier arbeitet er ruhig und mit weiten Einstellungen.
+
+Der Beruf der Hauptfigur ist der eigentliche Gegenstand: Ein Mann liest Nachrichten vor und entscheidet dabei, welche er auslässt — in einer Gegend, in der jede Meldung Gewalt auslösen kann.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 25. Dezember 2020 bei Universal in den amerikanischen Kinos, mitten in der Pandemie; das Startwochenende brachte 2,3 Millionen Dollar, insgesamt kamen 12,7 Millionen in den USA zusammen. 70 Prozent des Publikums waren über 35 Jahre alt. Die internationalen Rechte übernahm Netflix und veröffentlichte den Film am 10. Februar 2021.
+
+Die Kritik reagierte gut: 88 Prozent bei Rotten Tomatoes, mit Lob für Darsteller und Bildgestaltung. Es gab vier Oscar-Nominierungen, darunter für Kamera und Musik.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11003', locale: 'de-de',
+    text: `### Worum es geht
+
+Robbie Hart singt auf Hochzeiten in New Jersey und ist gut darin: Er kennt jede Peinlichkeit, jeden betrunkenen Trauzeugen und jedes Lied. Am Tag seiner eigenen Hochzeit erscheint die Braut nicht.
+
+Danach sind seine Auftritte eine Zumutung für alle Beteiligten. Halt findet er bei Julia, einer Kellnerin, die er beim Ausrichten ihrer eigenen Hochzeit unterstützt — mit einem Mann, der sie betrügt und dem sie es nicht glaubt. Der Film spielt 1985, was er ausgiebig auskostet.
+
+### Entstehungsgeschichte
+
+Regie führte Frank Coraci, der Film erschien am 13. Februar 1998. Das Budget lag bei 18 Millionen Dollar.
+
+Es ist die erste gemeinsame Arbeit von Adam Sandler und Drew Barrymore, denen zwei weitere folgten: "50 erste Dates" (2004) und "Urlaubsreif" (2014).
+
+### Hinter den Kulissen
+
+Der Film markiert eine Wendung in Sandlers Laufbahn: Nach lauten Komödien wie "Billy Madison" und "Happy Gilmore" spielt er hier zum ersten Mal einen sanften, verletzlichen Mann — was die Kritik durchgehend vermerkte.
+
+Die Musik ist ein eigener Teil: Der Film verwendet durchgehend Stücke der achtziger Jahre, und Sandler singt mehrere davon selbst. Der Soundtrack wurde zum eigenständigen Erfolg.
+
+### Einordnung & Wirkung
+
+Der Film startete auf Platz zwei hinter "Titanic" mit 18,8 Millionen Dollar und spielte weltweit 123,3 Millionen ein.
+
+Die Kritik urteilte überwiegend wohlwollend: 72 Prozent bei Rotten Tomatoes mit dem Befund, er sei uneben und für eine frühe Sandler-Komödie überraschend rührselig, zugleich aber liebenswert und komisch; 60 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein A minus. Besonders hervorgehoben wurde Drew Barrymore.
+
+2006 entstand eine Broadway-Fassung als Musical, die 284 Vorstellungen lief. Der Film gilt bis heute als einer der besten aus Sandlers Werk.` },
+  {
+    bereich: 'titel', schluessel: 'movie:457136', locale: 'de-de',
+    text: `### Worum es geht
+
+Maria Stuart kehrt 1561 als Achtzehnjährige nach Schottland zurück. Sie war in Frankreich aufgewachsen, mit dem französischen König verheiratet und ist nun verwitwet. In Schottland trifft sie auf einen protestantischen Adel, der eine katholische Königin nicht will, und auf den Prediger John Knox, der von der Kanzel gegen sie predigt.
+
+In England regiert ihre Cousine Elisabeth I. Beide Frauen führen einen jahrelangen Briefwechsel, in dem sich Bündnisangebot und Drohung abwechseln — denn Maria hat einen Anspruch auf den englischen Thron. Der Film erzählt, wie beide von Männern in ihrem Umfeld gegeneinander ausgespielt werden.
+
+### Entstehungsgeschichte
+
+Grundlage ist John Guys Biografie von 2004. Josie Rourke führte Regie; es war ihre erste Kinoarbeit — sie kam vom Theater und leitete das Donmar Warehouse in London.
+
+Saoirse Ronan spielt Maria Stuart, Margot Robbie spielt Elisabeth I. Das Budget lag bei 25 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Historiker haben mehrere Punkte beanstandet. Maria hätte vermutlich Französisch gesprochen, da sie ab dem fünften Lebensjahr in Frankreich aufwuchs. Vor allem aber: Die beiden Königinnen sind einander nie begegnet — ihr Austausch verlief ausschließlich brieflich.
+
+Der Film erfindet dennoch eine Begegnung, und zwar als zentrale Szene. A. O. Scott hat das als eine Reihe erfundener dramatischer Momente kritisiert. Rourke hat die Entscheidung damit begründet, dass sie den Kern des Verhältnisses anders nicht habe zeigen können.
+
+### Einordnung & Wirkung
+
+Der Film lief am 15. November 2018 beim AFI Fest und kam am 7. Dezember 2018 in die amerikanischen Kinos. Weltweit spielte er 47 Millionen Dollar ein, davon 16,5 Millionen in den USA.
+
+Die Kritik urteilte gemischt: 62 Prozent bei Rotten Tomatoes, 60 von 100 bei Metacritic — Lob für Darstellerinnen und Kostüme, Kritik an Drehbuch und historischer Genauigkeit.
+
+Es gab drei BAFTA-Nominierungen und zwei Oscar-Nominierungen für Kostüme und Maske; Margot Robbie wurde für den Preis der Screen Actors Guild und einen BAFTA nominiert.` },
 ];
