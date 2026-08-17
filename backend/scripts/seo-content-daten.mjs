@@ -31668,4 +31668,496 @@ Insgesamt entstanden fünf Staffeln mit 277 Folgen: 60 in der ersten von Oktober
 Die erste Staffel erreichte im Schnitt zwischen 10,5 und 12,4 Punkten in der Zuschauermessung. In den späteren Staffeln gingen die Zahlen zurück, auf etwa 1,9 bis 2,7 Millionen Zuschauer.
 
 Der Stoff selbst geht auf den kolumbianischen Schriftsteller Jorge Franco zurück und wurde damit binnen weniger Jahre in zwei Ländern als Serie erzählt.` },
+  // ---- Block 54 ----
+  {
+    bereich: 'titel', schluessel: 'movie:234', locale: 'de-de',
+    text: `### Worum es geht
+
+Auf einem Jahrmarkt zeigt Dr. Caligari eine Attraktion: Cesare, einen Schlafwandler, der seit Jahren nicht erwacht ist und angeblich die Zukunft vorhersagen kann. In derselben Nacht geschieht ein Mord, und in den folgenden Nächten weitere.
+
+Franzis nimmt die Verfolgung auf. Erzählt wird das Ganze aus einer Nervenheilanstalt heraus, in der ein Insasse den Leiter beschuldigt, Caligari zu sein. Was daran stimmt, dreht der Film am Schluss um — und lässt offen, wer hier verrückt ist.
+
+### Entstehungsgeschichte
+
+Regie führte Robert Wiene, das Drehbuch schrieben Carl Mayer und Hans Janowitz. Produziert wurde der Film von der Decla-Film-Gesellschaft.
+
+Werner Krauß spielt den Dr. Caligari, Conrad Veidt den Schlafwandler Cesare, Friedrich Fehér den Franzis und Lil Dagover die Jane Olsen.
+
+Die Rahmenhandlung stand nicht im ursprünglichen Drehbuch — Wiene fügte sie hinzu. Die beiden Autoren stellten sich dagegen; der Streit um diese Änderung wird bis heute geführt.
+
+### Hinter den Kulissen
+
+Die Kulissen entwarfen Walter Reimann, Hermann Warm und Walter Röhrig; hergestellt wurden sie in Berlin-Weißensee.
+
+Sie sind der eigentliche Gegenstand des Films: gemalte und gebaute, grotesk verzerrte Bauten, in denen kaum etwas gerade verläuft.
+
+Damit ist der Film die bekannteste Umsetzung des Expressionismus im Kino — und ein Beleg dafür, dass sich mit Farbe auf Leinwand ein Zustand erzeugen lässt, für den es keine Beleuchtungstechnik gab.
+
+### Einordnung & Wirkung
+
+Die Uraufführung fand am 26. Februar 1920 statt.
+
+Der Filmhistoriker Siegfried Kracauer deutete das Werk als Vorschein einer autoritären Haltung, die in Deutschland später zum Nationalsozialismus führte — eine Lesart, die die Rezeption des Films über Jahrzehnte bestimmt hat.
+
+Seine Wirkung reicht weit: auf das expressionistische Kino, auf den Fantasyfilm und auf die Bildsprache des Horrors bis in die Gegenwart. Zugleich verschaffte er dem deutschen Film nach dem Ersten Weltkrieg international künstlerische Anerkennung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:221', locale: 'de-de',
+    text: `### Worum es geht
+
+Der verunsicherte Jugendliche Jim Stark zieht nach Los Angeles und gerät dort sofort mit einer Bande aneinander.
+
+Es kommt zu einer Mutprobe, die tödlich endet. Danach versteckt sich Jim gemeinsam mit Judy und dem jüngeren Plato in einer leerstehenden Villa. Am Ende steht die Polizei vor dem Griffith-Observatorium.
+
+### Entstehungsgeschichte
+
+Regie führte Nicholas Ray, der für den Film ausführlich zur Jugendkriminalität recherchierte. Das Drehbuch schrieb Stewart Stern unter Mitarbeit von Irving Shulman; Stern verarbeitete darin eigene Jugenderinnerungen.
+
+James Dean spielt Jim Stark, Natalie Wood die Judy, Sal Mineo den Plato.
+
+Warner Bros. drehte von März bis Mai 1955 in Farbe und im Cinemascope-Format. Gedreht wurde unter anderem am Griffith-Observatorium und in der früheren Getty Mansion.
+
+### Hinter den Kulissen
+
+Der Film kam einen Monat nach James Deans tödlichem Autounfall im September 1955 in die Kinos. Das hat seine Wirkung erheblich verstärkt — der Darsteller, der hier eine Mutprobe mit Autos überlebt, war zum Zeitpunkt der Aufführung selbst bei einem Autounfall gestorben.
+
+Bemerkenswert ist außerdem, dass der Film seine Jugendlichen nicht als Problemfälle behandelt, sondern nach den Verhältnissen fragt, aus denen sie kommen — eine Perspektive, für die Nicholas Ray eigens recherchiert hat.
+
+### Einordnung & Wirkung
+
+Der Film gilt als bahnbrechend, weil er als einer der ersten Jugendliche in den Mittelpunkt stellte und die Orientierungslosigkeit einer Generation zum Gegenstand machte.
+
+Er erhielt drei Oscar-Nominierungen — für Sal Mineo, für Natalie Wood und für Nicholas Ray — sowie weitere internationale Auszeichnungen.
+
+1990 wurde er in das National Film Registry aufgenommen.
+
+Seine Bildsprache ist seither so oft zitiert worden, dass einzelne Motive sich vom Film gelöst haben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:86837', locale: 'de-de',
+    text: `### Worum es geht
+
+Georges und Anne sind pensionierte Musiklehrer und leben in einer geräumigen Pariser Wohnung. Beide sind über achtzig, beide bei klarem Verstand, beide selbstständig.
+
+Dann erleidet Anne einen Schlaganfall und bleibt gelähmt. Georges pflegt sie zu Hause, während sie zunehmend vereinsamt und verzweifelt. Ihre Tochter Eva kommt zu Besuch und findet keinen Zugang mehr zu dem, was in dieser Wohnung geschieht.
+
+### Entstehungsgeschichte
+
+Michael Haneke schrieb das Drehbuch und führte Regie. Der Anlass war persönlich: die Entscheidung seiner über neunzigjährigen Tante, die unter schwerem Rheuma litt, ihr Leben zu beenden. Haneke hat sich zwei Jahrzehnte mit dem Stoff beschäftigt, bevor er ihn umsetzte.
+
+Jean-Louis Trintignant spielt Georges, Emmanuelle Riva die Anne, Isabelle Huppert die Tochter Eva. Der Pianist Alexandre Tharaud tritt als ehemaliger Schüler auf.
+
+Es handelt sich um eine österreichisch-französisch-deutsche Gemeinschaftsproduktion.
+
+### Hinter den Kulissen
+
+Gedreht wurde in acht Wochen in den TSF-Filmstudios in Épinay-sur-Seine bei Paris. Die vollständige Wohnung wurde dort als Kulisse errichtet.
+
+Der Film verlässt diese Wohnung fast nie. Was geschieht, geschieht in diesen Räumen — und der Zuschauer bleibt dort ebenso eingeschlossen wie die beiden Figuren.
+
+Dass Haneke die Wohnung im Studio nachbauen ließ, statt in einer echten zu drehen, ist dabei kein Widerspruch, sondern Voraussetzung: Nur so lassen sich Wände versetzen und Kamerawege bauen, die den Eindruck eines vollständig geschlossenen Raums erzeugen.
+
+### Einordnung & Wirkung
+
+2012 gewann der Film die Goldene Palme in Cannes.
+
+2013 folgte der Oscar als bester fremdsprachiger Film, dazu ein Golden Globe, mehrere BAFTAs und fünf Césars.
+
+Die Kritik lobte Hanekes klinische Bilder und die Leistungen der beiden Hauptdarsteller; wiederkehrend war die Einordnung als virtuos inszeniertes Kammerspiel.
+
+Er gehört zu den wenigen Filmen, die das Sterben nicht als Ereignis behandeln, sondern als Zeitraum — und die dem Zuschauer dabei nichts abnehmen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1391', locale: 'de-de',
+    text: `### Worum es geht
+
+Tenoch und Julio sind siebzehn, aus unterschiedlichen Verhältnissen und seit Jahren befreundet. Sie haben einen Sommer vor sich, in dem nichts geplant ist.
+
+Zufällig lernen sie die ältere Luisa kennen. Um sie zu beeindrucken, erfinden sie einen Strand, den es nicht gibt, und laden sie dorthin ein. Zu ihrer Überraschung sagt Luisa nach einer Ehekrise zu — und die drei fahren tatsächlich los.
+
+### Entstehungsgeschichte
+
+Alfonso Cuarón führte Regie und schrieb das Drehbuch gemeinsam mit seinem Bruder Carlos. Es war seine erste spanischsprachige Arbeit nach Jahren in Hollywood.
+
+Diego Luna spielt Tenoch, Gael García Bernal den Julio, Maribel Verdú die Luisa. Cuarón kannte Luna seit dessen Kindheit; Luna und Bernal waren selbst seit Kindertagen befreundet.
+
+Gedreht wurde in chronologischer Reihenfolge, damit sich die Entwicklung der Figuren in der Arbeit der Darsteller abbilden konnte.
+
+### Hinter den Kulissen
+
+Das auffälligste Mittel ist die Erzählstimme aus dem Off, die in der Tradition der französischen Nouvelle Vague steht. Ein allwissender Erzähler berichtet Dinge, die die Figuren selbst nicht wissen — über ihre Zukunft und über das Land, durch das sie fahren.
+
+Damit bekommt der Film eine zweite Ebene: Was als Reisegeschichte zweier Jugendlicher beginnt, ist zugleich eine Bestandsaufnahme Mexikos.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film über 33 Millionen Dollar ein.
+
+Die Kritik urteilte sehr positiv: 90 Prozent bei Rotten Tomatoes, 89 von 100 bei Metacritic. Roger Ebert vergab die Höchstwertung und sprach von der Geburt eines neuen mexikanischen Kinos.
+
+Der Film erhielt über 30 internationale Preise, darunter bei den Filmfestspielen von Venedig 2001 den Marcello-Mastroianni-Preis und den Drehbuchpreis.
+
+2003 waren die Brüder Cuarón für den Oscar für das beste Originaldrehbuch nominiert. Als fremdsprachiger Beitrag schickte Mexiko einen anderen Film ins Rennen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:424781', locale: 'de-de',
+    text: `### Worum es geht
+
+Cassius Green ist Schwarz, pleite und nimmt eine Stelle in einem Telefonverkauf an. Er verkauft nichts — bis er entdeckt, dass er seine Stimme "weiß" klingen lassen kann.
+
+Es funktioniert sofort. Cassius wird befördert und in die obere Etage versetzt, wo die wirklich großen Geschäfte gemacht werden. Was er dort verkauft, kommt moderner Sklaverei gleich. Während seine Freundin Detroit und seine früheren Kollegen für bessere Bedingungen streiken, steigt er weiter auf — bis er erfährt, was der Konzern tatsächlich vorhat.
+
+### Entstehungsgeschichte
+
+Boots Riley schrieb das Drehbuch und führte Regie. Es war sein erster Spielfilm; bekannt war er zuvor als Rapper der Hip-Hop-Gruppe The Coup.
+
+Lakeith Stanfield spielt Cassius Green, Tessa Thompson die Detroit, Armie Hammer den Konzernchef Steve Lift.
+
+Gedreht wurde von Juni bis Juli 2017 in Oakland — der Stadt, in der Riley aufgewachsen ist.
+
+### Hinter den Kulissen
+
+Der Film wechselt im letzten Drittel vollständig die Gangart und wird von einer Satire zu etwas anderem. Was dort geschieht, gehört zu den Wendungen, die man besser nicht vorher erfährt.
+
+Der Grundeinfall mit der weißen Stimme ist dabei mehr als ein Gag: Er macht den Bruch zwischen dem, was man sieht, und dem, was man hört, unmittelbar hörbar — und führt vor, welchen Preis Anpassung hat.
+
+Der Film wird als Sozialthriller eingeordnet. Verhandelt werden struktureller Rassismus, Klassenverhältnisse, Ausbeutung von Arbeit und die Frage, was vom amerikanischen Aufstiegsversprechen bleibt.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 20. Januar 2018 beim Sundance Film Festival statt, der amerikanische Kinostart folgte am 6. Juli 2018.
+
+Mit einem Einspielergebnis von 17,5 Millionen Dollar war der Film für eine unabhängige Produktion ein maßvoller Erfolg.
+
+Die Kritik urteilte sehr gut: 93 Prozent bei Rotten Tomatoes.
+
+Er gehört damit zu den auffälligsten Regiedebüts seines Jahrgangs — und zu den wenigen Filmen, die politische Satire mit einer Bildsprache verbinden, für die es kaum Vergleiche gibt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10843', locale: 'de-de',
+    text: `### Worum es geht
+
+Paul Hackett arbeitet in einem New Yorker Büro und langweilt sich. Abends lernt er in einem Café Marcy Franklin kennen und verabredet sich noch für dieselbe Nacht im Atelier ihrer befreundeten Künstlerin.
+
+Er fährt hin. Unterwegs verliert er sein Geld, danach kommt eines zum anderen: eine Reihe von Missverständnissen, der Verdacht, er sei ein Einbrecher, und schließlich ein aufgebrachter Mob, der ihn durch die Straßen jagt. Bis zum Morgengrauen findet er nicht nach Hause.
+
+### Entstehungsgeschichte
+
+Regie führte Martin Scorsese, das Drehbuch schrieb Joseph Minion. Es trug ursprünglich den Titel "Lies" und ging auf einen Radiomonolog von 1982 zurück — woraus ein Verfahren wegen Plagiats folgte, das außergerichtlich beigelegt wurde.
+
+Griffin Dunne spielt Paul Hackett, Rosanna Arquette die Marcy Franklin. Daneben sind Teri Garr, John Heard und Linda Fiorentino zu sehen.
+
+### Hinter den Kulissen
+
+Der Film entstand aus einer Notlage. Paramount hatte Scorseses langjähriges Vorhaben "Die letzte Versuchung Christi" abgesagt. Er nahm daraufhin diesen kleinen Stoff an, um sich selbst und anderen zu beweisen, dass er auch mit geringen Mitteln arbeiten kann.
+
+Gedreht wurde in 40 Tagen mit einem Budget von etwa vier Millionen Dollar.
+
+Erzählerisch ist der Film streng gebaut: eine Nacht, ein Stadtviertel, eine Figur, der jede einzelne Möglichkeit genommen wird, nach Hause zu kommen. Jede Begegnung verschlechtert die Lage.
+
+### Einordnung & Wirkung
+
+In den Vereinigten Staaten spielte der Film über zehn Millionen Dollar ein — das Doppelte seines Budgets, aber wenig gemessen an Scorseses übrigen Arbeiten.
+
+1986 gewann er in Cannes den Regiepreis.
+
+Bei Rotten Tomatoes steht er bei 90 Prozent. Roger Ebert nannte ihn die angespannteste Komödie, an die er sich erinnern könne — eine Beschreibung, die den Film gut trifft: Er ist als Komödie gebaut und fühlt sich an wie ein Albtraum.` },
+  {
+    bereich: 'titel', schluessel: 'movie:790', locale: 'de-de',
+    text: `### Worum es geht
+
+Die kalifornische Küstenstadt Antonio Bay feiert ihr hundertjähriges Bestehen. In der Nacht zuvor beginnen seltsame Dinge zu geschehen, und vom Meer her zieht ein leuchtender Nebel heran.
+
+Darin sind die Toten eines Schiffes, das vor hundert Jahren absichtlich auf die Klippen gelockt wurde — von den Gründern der Stadt, die verhindern wollten, dass sein an Lepra erkrankter Eigner in der Nähe eine Siedlung errichtet. Der Reichtum, auf dem Antonio Bay steht, stammt aus diesem Mord. Die Toten holen sich sechs Leben zurück.
+
+### Entstehungsgeschichte
+
+John Carpenter führte Regie und schrieb das Drehbuch gemeinsam mit der Produzentin Debra Hill. Die Anregung kam ihm beim Anblick von Nebel über Stonehenge während einer Werbereise; hinzu kam der britische Film "The Trollenberg Terror" von 1958. Historisch grundiert ist der Stoff durch den tatsächlichen Untergang der "Frolic" bei Fort Bragg in Kalifornien.
+
+Adrienne Barbeau steht hier in ihrem ersten Kinofilm; sie war zu diesem Zeitpunkt mit Carpenter verheiratet. Jamie Lee Curtis besetzte er, um ihre nach "Halloween" begonnene Laufbahn weiterzuführen. Daneben sind Tom Atkins, Janet Leigh und Hal Holbrook als schuldbewusster Priester zu sehen. Den Prolog spricht John Houseman als Mr. Machen.
+
+### Hinter den Kulissen
+
+Gedreht wurde im Frühjahr 1979 in den Raleigh Studios und an kalifornischen Schauplätzen, darunter Point Reyes.
+
+Carpenter hielt seine erste Fassung für misslungen und drehte umfangreich nach — darunter die Szene mit der Leiche im Leichenschauhaus und das Ende am Leuchtturm. Etwa ein Drittel des fertigen Films besteht aus diesem Nachdreh. Das Budget stieg dadurch von 900.000 auf 1,1 Millionen Dollar.
+
+Die Musik komponierte Carpenter selbst: überwiegend in a-Moll, mit einer Verschiebung nach H-Dur, wenn die Spannung zunimmt.
+
+### Einordnung & Wirkung
+
+Der Film startete am 1. Februar 1980 und spielte in den Vereinigten Staaten 21,3 Millionen Dollar ein; allein für die Werbung gab das Studio über drei Millionen aus.
+
+Die zeitgenössische Kritik war geteilt. Roger Ebert vergab zwei Sterne und fand, dem Film fehle ein besserer Bösewicht; Vincent Canby hielt ihn für weniger stimmig als "Halloween".
+
+Später wurde er neu bewertet: 76 Prozent bei Rotten Tomatoes, und der Guardian nannte ihn eine der atmosphärischsten Arbeiten des Regisseurs.
+
+2005 entstand eine Neuverfilmung unter der Regie von Rupert Wainwright, die mit vier Prozent bei Rotten Tomatoes fast einhellig abgelehnt wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9372', locale: 'de-de',
+    text: `### Worum es geht
+
+Morgan Spurlock stellt eine einfache Frage: Was geschieht mit einem gesunden Menschen, der sich dreißig Tage lang ausschließlich bei McDonald's ernährt?
+
+Er macht den Versuch an sich selbst. Die Regeln legt er vorher fest: drei Mahlzeiten am Tag, ausschließlich Produkte aus dem Sortiment, jedes Angebot mindestens einmal probiert, und wenn ihm die größere Portion angeboten wird, nimmt er sie. Neunmal kommt es dazu. Bewegung beschränkt er auf höchstens 5.000 Schritte täglich.
+
+### Entstehungsgeschichte
+
+Regie führte Morgan Spurlock, der zugleich Gegenstand seines eigenen Films ist. Er erschien 2004 als Mischung aus Dokumentation und inszeniertem Selbstversuch.
+
+Begleitet wurde der Versuch von Ärzten, die Spurlock vorher untersuchten und während der dreißig Tage überwachten.
+
+### Hinter den Kulissen
+
+Die Messwerte sind das Gerüst des Films. Spurlock nahm 11,1 Kilogramm zu — 13 Prozent seines Körpergewichts — und seine Leberwerte verschlechterten sich drastisch.
+
+Etwa zeitgleich mit dem Kinostart nahm McDonald's leichtere Menüs ins Angebot und schaffte die extragroßen Portionen ab.
+
+### Einordnung & Wirkung
+
+Der Film gewann den Regiepreis beim Sundance Film Festival und wurde für den Oscar als bester Dokumentarfilm nominiert.
+
+Die Methode war von Anfang an umstritten. Ernährungswissenschaftler wandten ein, der Versuch sei nicht kontrolliert und die Kalorienangaben nicht überprüfbar. Tom Naughton und John Cisna führten Gegenversuche durch, aßen ebenfalls bei McDonald's und nahmen bei maßvollerer Kalorienzufuhr ab. Eine Laborstudie von Professor Fredrik Nyström bestätigte Spurlocks Ergebnisse nur teilweise.
+
+Der Film bleibt damit ein zwiespältiger Fall: Er hat eine öffentliche Debatte über industrielle Ernährung angestoßen, die bis heute nachwirkt — mit einem Versuchsaufbau, dessen wissenschaftlicher Wert von Fachleuten von Anfang an bezweifelt wurde.` },
+  // ---- Block 55 ----
+  {
+    bereich: 'titel', schluessel: 'movie:25793', locale: 'de-de',
+    text: `### Worum es geht
+
+1987. Claireece Precious Jones ist sechzehn, kann kaum lesen und schreiben, rechnet aber ausgezeichnet. Sie ist zum zweiten Mal schwanger — von ihrem Vater, der sie über Jahre missbraucht hat. Zu Hause lebt sie mit ihrer Mutter Mary, die sie schlägt und demütigt.
+
+Nach der Geburt des zweiten Kindes kommt Precious an eine alternative Schule mit dem Namen "Each One Teach One". Dort bringt ihr die Lehrerin Miss Rain das Lesen bei — und mit dem Lesen die Möglichkeit, etwas anderes zu wollen.
+
+### Entstehungsgeschichte
+
+Regie führte Lee Daniels, das Drehbuch schrieb Geoffrey Fletcher nach Sapphires Roman "Push".
+
+Gabourey Sidibe spielt Precious, Mo'Nique die Mutter Mary, Paula Patton die Lehrerin Miss Rain. In weiteren Rollen sind Mariah Carey und Lenny Kravitz zu sehen — für beide, damals vor allem als Musiker bekannt, eine ungewöhnliche Besetzung.
+
+### Hinter den Kulissen
+
+Die schwierigste Aufgabe fiel Mo'Nique zu. Ihre Figur ist über weite Strecken die Ursache allen Leids — und der Film muss sie zugleich als Menschen zeigen, damit die Geschichte nicht zur bloßen Anklage wird.
+
+Der Titel benennt dabei die Haltung des Films: Er handelt von einer jungen Frau, deren Umstände nichts Kostbares an sich haben, und behauptet gegen alles Gezeigte, dass ihr Leben es dennoch ist.
+
+### Einordnung & Wirkung
+
+Die Kritik hob die schonungslose Genauigkeit hervor, verbunden mit der Frage nach Widerstandskraft. Eine Besprechung nannte den Film eine packende Sozialstudie, die den Zuschauer erschüttert und zugleich hoffnungsvoll zurücklässt.
+
+Bei der Oscar-Verleihung 2010 gab es sechs Nominierungen und zwei Auszeichnungen: Mo'Nique als beste Nebendarstellerin und Geoffrey Fletcher für das beste adaptierte Drehbuch.
+
+Der Film gehört zu den wenigen Produktionen dieser Größenordnung, die Armut, Missbrauch und Analphabetismus in den Vereinigten Staaten ohne Beschönigung behandeln — und deren Hauptfigur am Ende nicht gerettet, sondern lediglich handlungsfähig ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9944', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei Richter des Obersten Gerichtshofs werden in derselben Nacht ermordet. Die Jurastudentin Darby Shaw schreibt aus reiner Neugier eine Ausarbeitung darüber, wer ein Interesse an beiden Toden haben könnte.
+
+Die Ausarbeitung wird weitergereicht — und kurz darauf sind Männer hinter ihr her, die sie töten wollen. Sie taucht unter und wendet sich an den Journalisten Gray Grantham. Was die beiden aufdecken, führt zu einem Milliardär namens Victor Mattiece, der Ölbohrungen durchsetzen will.
+
+### Entstehungsgeschichte
+
+Regie führte Alan J. Pakula, der auch das Drehbuch schrieb; eine erste Fassung stammte von John Grisham selbst, auf dessen Roman der Film beruht.
+
+Julia Roberts spielt Darby Shaw, Denzel Washington den Reporter Gray Grantham.
+
+Carolco Pictures erwarb die Rechte zunächst für 1,3 Millionen Dollar; Warner Bros. übernahm sie später für 1,75 Millionen. Die Dreharbeiten begannen im Mai 1993.
+
+### Hinter den Kulissen
+
+Gedreht wurde in New Orleans und in Washington, unter anderem an der Tulane University, an der Georgetown University und am Washington Monument.
+
+Die Anlage ist die eines Politthrillers, in dem die Bedrohung nicht von einzelnen Tätern ausgeht, sondern von wirtschaftlichen Interessen — und in dem die Presse die einzige verbliebene Gegenmacht darstellt.
+
+Dass Pakula neben der Regie auch das Drehbuch übernahm, nachdem John Grisham selbst eine erste Fassung vorgelegt hatte, ist dabei ungewöhnlich.
+
+### Einordnung & Wirkung
+
+Der Film spielte etwa 100 Millionen Dollar ein — inflationsbereinigt rund 219 Millionen.
+
+Die Kritik urteilte gemischt. Roger Ebert lobte Julia Roberts, bemängelte aber Pakulas Inszenierung.
+
+Er gehört zu den Grisham-Verfilmungen der neunziger Jahre — Filme nach demselben Muster: eine Hauptfigur, die zu viel weiß, und ein Gegner, der zu mächtig ist, um belangt zu werden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:722778', locale: 'de-de',
+    text: `### Worum es geht
+
+Neapel in den achtziger Jahren. Fabietto ist siebzehn, schüchtern und lebt in einer großen, lauten Familie. Er liebt zwei Dinge: Fußball und das Kino.
+
+Dann sterben seine Eltern bei einem Unglück. Fabietto überlebt, weil er an jenem Tag nicht bei ihnen war, sondern im Stadion. Aus dieser Fügung entsteht der Rest des Films: ein junger Mann, der begreift, dass er etwas machen muss, und der nicht weiß, was.
+
+### Entstehungsgeschichte
+
+Paolo Sorrentino schrieb das Drehbuch, führte Regie und war Mitproduzent. Es ist sein neunter abendfüllender Film.
+
+Der Hintergrund ist autobiografisch. Sorrentino wuchs als Sohn eines Bankangestellten in Neapel auf; 1986 starben seine Eltern, während er ein Fußballspiel besuchte. Er hat den Film als seine intimste und persönlichste Arbeit bezeichnet und als Erzählung vom Erwachsenwerden.
+
+Filippo Scotti spielt Fabietto, Toni Servillo den Vater — es ist die achte gemeinsame Arbeit mit Sorrentino. Daneben sind Teresa Saponangelo und Luisa Ranieri zu sehen.
+
+### Hinter den Kulissen
+
+Netflix erwarb die Auswertungsrechte. Gedreht wurde ab August 2020 in Neapel — Sorrentinos erste Rückkehr dorthin seit seinem Debütfilm von 2001. Weitere Schauplätze waren Stromboli und die Amalfiküste.
+
+Der Titel spielt auf eine der bekanntesten Wendungen der Fußballgeschichte an. Im Film bekommt sie eine zweite Bedeutung: Ein Spiel des SSC Neapel rettet Fabietto das Leben.
+
+### Einordnung & Wirkung
+
+Die Premiere fand 2021 bei den Filmfestspielen von Venedig statt. Dort gewann der Film den Silbernen Löwen; Filippo Scotti erhielt den Marcello-Mastroianni-Preis.
+
+Es folgten Nominierungen für den Oscar und den Golden Globe sowie Auszeichnungen bei den italienischen Filmpreisen David di Donatello und Nastro d'Argento.
+
+Die Kritik urteilte gemischt: gelobt wurden Bildgestaltung und Darstellungen, bemängelt wurde eine erzählerische Selbstbezogenheit — ein Einwand, der bei einem so ausdrücklich autobiografischen Film schwer zu trennen ist von seinem Gegenstand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11023', locale: 'de-de',
+    text: `### Worum es geht
+
+Tracy ist dreizehn, geht in Los Angeles zur Schule und gilt als vorbildlich. Sie lebt bei ihrer alleinerziehenden Mutter Melanie, die selbst gerade so zurechtkommt.
+
+Dann freundet sie sich mit Evie an, der beliebtesten Schülerin ihres Jahrgangs. Tracy verändert sich vollständig: Sie stiehlt, nimmt Drogen und fügt sich selbst Verletzungen zu. Ihre Mutter sieht es und weiß nicht, was sie tun soll. Am Ende lässt Evie sie fallen.
+
+### Entstehungsgeschichte
+
+Regie führte Catherine Hardwicke, das Drehbuch schrieb sie gemeinsam mit Nikki Reed. In die Geschichte flossen Reeds eigene Erfahrungen als Jugendliche ein.
+
+Evan Rachel Wood spielt Tracy, Holly Hunter die Mutter Melanie. Nikki Reed selbst spielt die Evie.
+
+Produziert wurde der Film von Jeffrey Levy-Hinte und Michael London, die Kamera führte Elliot Davis, die Musik stammt von Mark Mothersbaugh. Es handelt sich um eine britisch-amerikanische Gemeinschaftsproduktion von 100 Minuten aus dem Jahr 2003.
+
+### Hinter den Kulissen
+
+Dass die Autorin ihre eigene Verführerin spielt, ist die auffälligste Entscheidung der Produktion: Nikki Reed schrieb die Geschichte über sich selbst und verkörpert darin die Figur, die den Schaden anrichtet.
+
+Für Aufsehen sorgte der Film schon vor der Veröffentlichung — wegen der Darstellung von Drogenkonsum und Sexualität bei Minderjährigen.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte geteilt. Der wiederkehrende Vorwurf lautete, der Film strebe mit Nachdruck nach Authentizität und übertreibe die Probleme des Jugendalters dabei grob.
+
+Holly Hunter war als beste Nebendarstellerin für den Oscar nominiert; sie und Evan Rachel Wood erhielten zudem Nominierungen für den Golden Globe.
+
+Catherine Hardwicke gewann 2002 beim Sundance Film Festival den Regiepreis.
+
+Bemerkenswert bleibt die Herkunft des Stoffes: Ein Drehbuch, das eine Dreizehnjährige über ihre eigene Lage geschrieben hat, wurde zu einem Film, der die Debatte darüber führte, ob man solche Lagen zeigen darf.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10779', locale: 'de-de',
+    text: `### Worum es geht
+
+Frank Bannister kann seit einem Autounfall Geister sehen und mit ihnen sprechen. Daraus hat er ein Geschäft gemacht: Drei befreundete Gespenster spuken in Häusern, er kommt vorbei und treibt sie gegen Bezahlung aus.
+
+Dann sterben in der Stadt auf unerklärliche Weise Menschen, und Bannister gerät unter Verdacht. Gemeinsam mit einer Ärztin findet er heraus, dass hinter den Todesfällen der Geist eines hingerichteten Mörders steckt, der in Gestalt des Sensenmanns auftritt.
+
+### Entstehungsgeschichte
+
+Peter Jackson führte Regie und schrieb das Drehbuch gemeinsam mit Fran Walsh. Ursprünglich war der Stoff als Folge einer Fernsehreihe geplant; Produzent Robert Zemeckis erkannte darin mehr und setzte einen Kinofilm durch.
+
+Michael J. Fox spielt Frank Bannister. Produzenten waren Peter Jackson, Jamie Selkirk und Robert Zemeckis, die Musik komponierte Danny Elfman.
+
+Für Michael J. Fox war es die letzte große Filmrolle vor seinem Rückzug wegen seiner Parkinson-Erkrankung.
+
+### Hinter den Kulissen
+
+Der Film markiert Peter Jacksons Ankunft in Hollywood — dorthin gebracht von Robert Zemeckis, der aus einer geplanten Fernsehfolge einen Kinofilm machte.
+
+Genau daran hängt seine Bedeutung für Jacksons Laufbahn: Es ist die Arbeit, mit der er den Sprung von neuseeländischen Kleinproduktionen zu einer amerikanischen Studioproduktion schaffte.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte gemischt: 67 Prozent bei Rotten Tomatoes. Die Zeitschrift Cinema nannte den Film einen köstlichen Gruselspaß, andere Stimmen hielten ihn für eine zähe und unausgegorene Horrorkomödie.
+
+Für Jacksons Laufbahn war er dennoch der entscheidende Schritt: Ohne diesen Film wäre ihm die Trilogie, die folgte, kaum anvertraut worden.
+
+Damit gehört er zu jenen Arbeiten, deren Bedeutung weniger im Ergebnis liegt als in dem, was sie möglich gemacht haben.` },
+  {
+    bereich: 'titel', schluessel: 'series:61617', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei Halbbrüder verlaufen sich in einem geheimnisvollen Wald. Sie suchen den Weg nach Hause und finden ihn nicht.
+
+Unterwegs begegnen ihnen sonderbare Gestalten. Manches ist komisch, manches nicht — und je weiter die beiden kommen, desto dunkler werden die Geheimnisse, auf die sie stoßen. Was mit ihnen tatsächlich geschehen ist, klärt sich erst spät.
+
+### Entstehungsgeschichte
+
+Patrick McHale entwickelte die Serie auf Grundlage seines neunminütigen Kurzfilms "Tome of the Unknown" von 2013. Zuvor hatte er an "Adventure Time" gearbeitet.
+
+Produziert wurde sie von den Cartoon Network Studios — es war deren erste Miniserie. An der Stoffentwicklung wirkten Amalia Levari und Tom Herpich mit.
+
+Im Original sprechen Elijah Wood, Melanie Lynskey, John Cleese und Christopher Lloyd. In der deutschen Fassung sind Kostja Ullmann, Christian Brückner und Anita Hopt zu hören.
+
+### Hinter den Kulissen
+
+Die gestalterischen Bezüge hat McHale selbst benannt: Kinderbücher des 19. Jahrhunderts, amerikanische Musik des frühen 20. Jahrhunderts, die Illustrationen von Gustave Doré und Disneys frühe Alice Comedies.
+
+Daraus entsteht ein Aussehen, das im Kinderfernsehen der 2010er Jahre allein steht: gedeckte Herbstfarben, ein gemaltes Bild statt klarer Flächen, und ein Ton, der irgendwo zwischen Märchen und Schauergeschichte liegt.
+
+Die Kürze ist dabei Programm: zehn Folgen zu elf Minuten, angelegt als Miniserie mit festem Ende.
+
+### Einordnung & Wirkung
+
+Die amerikanische Premiere war am 3. November 2014 auf Cartoon Network, die deutsche am 30. März 2015.
+
+2015 gewann die Serie zwei Emmys — als herausragendes Animationsprogramm und für das Szenenbild.
+
+Bemerkenswert bleibt die Entscheidung des Senders, für dieses Werk erstmals das Format der Miniserie zu wählen — kurz genug, um ohne Füllmaterial auszukommen, und ernst genug, um ein erwachsenes Publikum zu halten.` },
+  {
+    bereich: 'titel', schluessel: 'series:46786', locale: 'de-de',
+    text: `### Worum es geht
+
+Norma Bates zieht mit ihrem Sohn Norman in die erfundene Kleinstadt White Pine Bay in Oregon, um dort ein Motel zu betreiben.
+
+Was zwischen Mutter und Sohn besteht, ist enger als eine solche Beziehung sein sollte — und die Stadt selbst hat mehr Geheimnisse, als man an einem Ort dieser Größe erwarten würde. Über fünf Staffeln erzählt die Serie, wie aus diesem Jungen der Mann wird, den man aus "Psycho" kennt.
+
+### Entstehungsgeschichte
+
+Entwickelt wurde die Serie von Carlton Cuse, Kerry Ehrin und Anthony Cipriano für den Sender A&E; produziert wurde sie von Universal Television.
+
+Vera Farmiga spielt Norma Bates, Freddie Highmore ihren Sohn Norman. In weiteren Hauptrollen sind Max Thieriot und Olivia Cooke zu sehen.
+
+A&E bestellte im Juli 2012 unmittelbar zehn Folgen, ohne zuvor eine Pilotfolge herstellen zu lassen.
+
+### Hinter den Kulissen
+
+Das Verhältnis zur Vorlage ist lockerer, als der Titel vermuten lässt. Die Serie ist kein Prequel im engen Sinn, sondern greift Motive aus Robert Blochs Roman "Psycho" auf. Die Handlung ist ins 21. Jahrhundert verlegt und spielt in Oregon statt in Kalifornien.
+
+Optisch bestehen deutliche Ähnlichkeiten zu Hitchcocks Film von 1960, während sich Figuren und Handlung erheblich unterscheiden.
+
+Der eigentliche Einfall liegt in der Verschiebung des Schwerpunkts: Die Serie behandelt Norma Bates als gleichrangige Hauptfigur — nicht als Vorgeschichte zu ihrem Sohn, sondern als eigene Person.
+
+### Einordnung & Wirkung
+
+Die Serie umfasst fünf Staffeln mit 50 Folgen zu je 38 bis 47 Minuten und lief von März 2013 bis April 2017.
+
+Die Erstausstrahlung erreichte über drei Millionen Zuschauer. Die erste Staffel kam bei Metacritic auf 66 Punkte.
+
+Vera Farmiga erhielt mehrere Nominierungen und gewann 2014 den Saturn Award als beste Fernsehhauptdarstellerin.` },
+  {
+    bereich: 'titel', schluessel: 'movie:49009', locale: 'de-de',
+    text: `### Worum es geht
+
+Während des Zweiten Weltkriegs fliehen mehrere Gefangene aus einem sowjetischen Straflager in Sibirien. Was folgt, ist ein Marsch über mehr als 6.000 Kilometer: durch Sibirien, durch die Mongolei, durch die Wüste Gobi und über den Himalaya bis nach Britisch-Indien.
+
+Unterwegs sterben mehrere von ihnen. Was unter diesen Bedingungen von ihrer Menschlichkeit bleibt, ist der eigentliche Gegenstand des Films.
+
+### Entstehungsgeschichte
+
+Regie führte Peter Weir, das Drehbuch schrieb er gemeinsam mit Keith R. Clarke.
+
+Die Vorlage ist Sławomir Rawicz' Erinnerungsbuch "The Long Walk". Es ist stark umstritten: Die geschilderte Flucht mag stattgefunden haben — nur offenbar nicht als Erlebnis des Autors.
+
+Jim Sturgess, Colin Farrell, Ed Harris, Saoirse Ronan und Mark Strong spielen die Hauptrollen.
+
+Produziert wurde der Film von Imagenation Abu Dhabi, der Exclusive Media Group, Spitfire Pictures und National Geographic Entertainment.
+
+### Hinter den Kulissen
+
+In Bulgarien wurde eigens ein 5.000 Quadratmeter großes Straflager aufgebaut. Das Budget lag bei etwa 30 Millionen Dollar.
+
+Peter Weir arbeitet mit weiten Landschaftspanoramen, in denen die Figuren sehr klein erscheinen. Das ist keine Schauwertentscheidung, sondern die Aussage des Films: Menschen unter Bedingungen, die sich um sie nicht kümmern.
+
+Die Frage nach dem Wahrheitsgehalt der Vorlage bleibt dabei offen und wird vom Film auch nicht beantwortet.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film etwas über 20 Millionen Dollar ein — bei 30 Millionen Herstellungskosten ein Fehlschlag.
+
+2011 gab es eine Oscar-Nominierung für die beste Maske.
+
+Die Kritik urteilte gemischt: gelobt wurde die Bildgestaltung, bemängelt eine hölzerne Zeichnung der Figuren trotz starker Darsteller.
+
+Bemerkenswert bleibt der Widerspruch: ein Film über eine Flucht, deren Wahrheitsgehalt zweifelhaft ist — und der genau deshalb umso deutlicher macht, dass es solche Fluchten gegeben hat.` },
 ];
