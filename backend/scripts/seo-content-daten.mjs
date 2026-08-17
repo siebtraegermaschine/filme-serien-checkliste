@@ -27290,4 +27290,723 @@ Die amerikanische Kritik lobte überwiegend Demi Moores Darstellung; der Rolling
 In Deutschland fielen die Besprechungen deutlich schärfer aus. Dort wurde der Film überwiegend als pseudofeministisch abgetan — der Vorwurf lautete, er verkaufe die Anpassung an militärische Härte als weiblichen Fortschritt.
 
 Demi Moore erhielt für die Rolle die Goldene Himbeere als schlechteste Hauptdarstellerin — eine Auszeichnung, die im direkten Widerspruch zum amerikanischen Kritikerurteil steht und die Spaltung um diesen Film gut abbildet.` },
+  // ---- Block 36 ----
+  {
+    bereich: 'titel', schluessel: 'movie:9869', locale: 'de-de',
+    text: `### Worum es geht
+
+Jack Ryan hat den Geheimdienst verlassen und lehrt Geschichte. Bei einem Aufenthalt in London gerät er zufällig in einen Anschlag auf einen britischen Minister, greift ein und verletzt mehrere Angreifer.
+
+Damit macht er sich zum Ziel. Die Attentäter gehören zu einer abgespaltenen Gruppe der IRA, und einer der Beteiligten führt einen persönlichen Rachefeldzug gegen Ryan. Der Konflikt verlagert sich nach Amerika und trifft dort Ryans Frau und seine Tochter — womit der Film das Muster des Politthrillers verlässt und zum Angriff auf ein Wohnhaus wird.
+
+### Entstehungsgeschichte
+
+Regie führte Phillip Noyce, das Drehbuch schrieben W. Peter Iliff und Donald E. Stewart nach Tom Clancys Roman von 1987.
+
+Harrison Ford spielt Jack Ryan, Anne Archer seine Frau, James Earl Jones wieder den Admiral Greer. Daneben sind Sean Bean, Patrick Bergin, Samuel L. Jackson und James Fox zu sehen.
+
+Die Rolle war neu zu besetzen: Alec Baldwin hatte Ryan in "Jagd auf Roter Oktober" gespielt, sich nach Verzögerungen aber für die Broadway-Aufführung von "Endstation Sehnsucht" entschieden. Das Studio bevorzugte ohnehin Ford, weil Paramount ihm aus einem abgesagten Vorhaben noch Geld schuldete. Ford unterschrieb einen Vertrag über drei Filme und neun Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab dem 2. November 1991 in London, am Royal Naval College in Greenwich, in den Pinewood Studios und an der Marineakademie der Vereinigten Staaten. Es war der erste Film, der im Hauptquartier der CIA drehen durfte.
+
+Das Budget war zunächst mit 28 Millionen Dollar angesetzt und stieg auf 40. Testvorführungen lehnten den ursprünglichen Schluss ab, einen Unterwasserkampf; die Nachdrehs trieben die Kosten auf 45 Millionen.
+
+### Einordnung & Wirkung
+
+Der Film startete auf Platz eins, hielt sich zwei Wochen dort und spielte weltweit 178,1 Millionen Dollar ein, davon 83,4 in den Vereinigten Staaten.
+
+Die Kritik urteilte überwiegend wohlwollend: 72 Prozent bei Rotten Tomatoes, Roger Ebert nannte den Film fesselnd, das Publikum vergab bei CinemaScore ein A minus.
+
+Umstritten war die Zeichnung der Iren. Der Kritiker Joseph McBride nannte den Film faschistisch und unverhohlen antiirisch, wofür ihn der Variety-Chefredakteur Peter Bart öffentlich rüffelte. Tom Clancy selbst ging zunächst auf Abstand, bemängelte Fords Alter — 49 gegenüber Baldwins 34 — und fachliche Fehler, zeigte sich nach einer Sichtung aber beeindruckt davon, wie der Film die Auswertungsarbeit der CIA darstellte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:846', locale: 'de-de',
+    text: `### Worum es geht
+
+In einer Höhle in Texas liegt ein Virus, das seit der Urzeit dort ruht. Als es freigesetzt wird, sind Mulder und Scully bereits versetzt: Die X-Akten sind geschlossen, beide arbeiten an Fällen ohne Bezug zum Übersinnlichen.
+
+Eine Bombenexplosion in einem Bundesgebäude in Dallas bringt sie zurück auf die Spur. Was sie finden, führt zu einer Verschwörung, in der Teile der Regierung mit dem Virus arbeiten — und zu einer Frage, die die Serie seit Jahren offenhielt: was hinter der jahrzehntelangen Vertuschung tatsächlich steht.
+
+### Entstehungsgeschichte
+
+Regie führte Rob S. Bowman, das Drehbuch schrieben Serienschöpfer Chris Carter und Frank Spotnitz. Die Musik stammt wie in der Serie von Mark Snow.
+
+David Duchovny und Gillian Anderson spielen Mulder und Scully. Daneben sind Martin Landau, William B. Davis als der rauchende Mann und John Neville zu sehen.
+
+Der Film ist zwischen der fünften und der sechsten Staffel angesiedelt und musste beides leisten: den Handlungsstrang der Serie fortsetzen und zugleich für Zuschauer verständlich bleiben, die nie eine Folge gesehen hatten.
+
+### Hinter den Kulissen
+
+Gedreht wurde von Juni bis September 1997, überwiegend in British Columbia und in Kalifornien. Die Produktionskosten werden auf 66 Millionen Dollar geschätzt.
+
+Weil der Film parallel zur laufenden Serie entstand und deren Auflösung vorwegnahm, wurde unter strenger Geheimhaltung gearbeitet.
+
+Einen Scherz erlaubte sich die Produktion mit einem Verweis auf "Independence Day", dessen Zerstörungsbilder wenige Jahre zuvor dasselbe Kinopublikum bedient hatten.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 189 Millionen Dollar ein, davon 84 Millionen in den Vereinigten Staaten und 15,5 Millionen in Deutschland.
+
+Die Kritik fiel durchwachsen aus: 66 Prozent bei Rotten Tomatoes, 60 von 100 bei Metacritic. Bemängelt wurden die dünne Handlung und das Verschwörungsgerede, das viele Zuschauer aus der Serie bereits kannten.
+
+Die Filmbewertungsstelle Wiesbaden vergab das Prädikat wertvoll.` },
+  {
+    bereich: 'titel', schluessel: 'movie:15152', locale: 'de-de',
+    text: `### Worum es geht
+
+Kairo im Jahr 1955. Der französische Agent OSS 117 wird entsandt, um den Tod eines Kollegen aufzuklären und ein verschwundenes sowjetisches Schiff im Suezkanal zu finden.
+
+Er hält sich für einen Weltmann und ist das Gegenteil. Er hält Frankreich für die Mitte der Welt, verwechselt Religionen, beleidigt seine Gastgeber im Minutentakt und merkt nichts davon. Dass er den Fall am Ende dennoch löst, verdankt er nicht seinem Verstand, sondern der örtlichen Agentin Larmina und einer Serie glücklicher Zufälle.
+
+### Entstehungsgeschichte
+
+Regie führte Michel Hazanavicius, das Drehbuch schrieb er gemeinsam mit Jean-François Halin.
+
+Die Figur stammt aus der Romanreihe von Jean Bruce und ist älter als James Bond; die Bücher waren ernst gemeint. Der Film macht daraus eine Parodie.
+
+Jean Dujardin spielt OSS 117, Bérénice Bejo die Agentin Larmina.
+
+### Hinter den Kulissen
+
+Der Film ahmt das Kino der fünfziger bis siebziger Jahre nicht nur inhaltlich nach, sondern auch in Bild und Ton: Rückprojektionen, Farbgebung, Schnitt und Musik folgen den Vorbildern, darunter Arbeiten von Hitchcock und die frühen Bond-Filme.
+
+Der Witz liegt darin, dass der Film seinen Helden nie belehrt. OSS 117 wird als selbstbezogen, engstirnig und kindisch gezeigt und bleibt es bis zum Schluss — erfolgreich vor allem bei Frauen, ohne je zu begreifen, warum.
+
+Damit richtet sich die Parodie weniger gegen das Genre als gegen das koloniale Selbstverständnis, das in den Vorlagen mitläuft.
+
+### Einordnung & Wirkung
+
+In Frankreich sahen über zwei Millionen Zuschauer den Film im Kino.
+
+Die französische Kritik lobte ihn als meisterhafte Unterhaltung und als fein gearbeitete Parodie.
+
+Bei den Césars 2007 gewann der Film für das beste Szenenbild; Jean Dujardin war als Darsteller nominiert.
+
+Es folgten zwei Fortsetzungen, 2009 und 2021.` },
+  {
+    bereich: 'titel', schluessel: 'series:136315', locale: 'de-de',
+    text: `### Worum es geht
+
+Carmy Berzatto hat in den besten Küchen der Welt gearbeitet. Nach dem Tod seines Bruders erbt er dessen Laden in Chicago: einen Imbiss für Italian-Beef-Sandwiches, tief verschuldet, mit einer Mannschaft, die ihn nicht will.
+
+Er will den Betrieb retten und bringt Verfahren mit, die dort niemand kennt. Was folgt, ist ein Dauerkonflikt zwischen seinem Anspruch und den Verhältnissen — und daneben die Frage, was seinen Bruder tatsächlich in den Tod getrieben hat und welchen Anteil die Familie daran hat.
+
+### Entstehungsgeschichte
+
+Christopher Storer entwickelte die Serie für FX on Hulu.
+
+Jeremy Allen White spielt Carmy, Ebon Moss-Bachrach den Geschäftsführer Richie, Ayo Edebiri die Souschefin Sydney, Lionel Boyce den Konditor Marcus, Liza Colón-Zayas die Köchin Tina, Abby Elliott die Schwester Sugar, Matty Matheson den Handwerker Neil Fak und Edwin Lee Gibson den Koch Ebraheim.
+
+### Hinter den Kulissen
+
+Gedreht wird in Chicago, unter anderem in River North und Ukrainian Village. Als Vorbild für die Ausstattung diente das reale Lokal Mr. Beef.
+
+Mehrere Folgen brechen mit der Form der Serie: "Fishes" ist eine Rückblende auf ein Weihnachtsessen der Familie, "Bears" ist mit 70 Minuten die längste Folge, das Finale der dritten Staffel endet mit der Einblendung "Fortsetzung folgt". Einzelne Folgen bekommen zudem einen eigenen Vorspann.
+
+Köchinnen und Köche haben der Serie bescheinigt, die körperliche, seelische und finanzielle Belastung des Gastronomiebetriebs zutreffend zu zeigen.
+
+### Einordnung & Wirkung
+
+Bis 2026 entstanden fünf Staffeln mit 47 Folgen, dazu eine Sonderfolge. Die erste Staffel erschien im Juni 2022, die fünfte im Juni 2026.
+
+Die Bewertungen sind außergewöhnlich: Staffel eins 100 Prozent bei Rotten Tomatoes und 88 bei Metacritic, Staffel zwei 99 und 92, danach etwas niedriger. Über alle Staffeln steht die Serie bei 93 Prozent. Der Guardian nannte sie die beste Serie über Arbeit seit "Mad Men".
+
+Insgesamt gewann sie 21 Primetime Emmys, darunter als beste Comedyserie.
+
+Genau diese Einordnung wird bestritten. Die Serie ist über weite Strecken ein Drama; sie läuft bei den Emmys als Komödie, weil die Folgen unter einer Stunde bleiben — eine Regel, die auf Formate zielt, die es so nicht mehr gibt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:48415', locale: 'de-de',
+    text: `### Worum es geht
+
+Alberto Colombo leitet ein Postamt in der Nähe von Mailand und will unbedingt in die Stadt versetzt werden. Er versucht es mit einem Trick — und wird dafür strafversetzt: nach Castellabate in Kampanien, tief im Süden.
+
+Für ihn ist das ein Ort, an dem er nichts versteht, weder die Sprache noch die Leute. Seiner Frau erzählt er am Telefon, es sei die Hölle, während er in Wahrheit anfängt, sich wohlzufühlen. Als sie ihn besucht, muss er die Lüge aufrechterhalten — und die Kollegen spielen mit.
+
+### Entstehungsgeschichte
+
+Regie führte Luca Miniero. Das Drehbuch schrieben Dany Boon, Alexandre Charlot, Franck Magnier und Massimo Gaudioso.
+
+Die Vorlage ist der französische Erfolgsfilm "Willkommen bei den Sch'tis" von 2008, dessen Aufbau die italienische Fassung eng übernimmt. Getauscht ist nur die Himmelsrichtung: Aus dem verachteten Norden Frankreichs wird der verachtete Süden Italiens.
+
+Claudio Bisio spielt Alberto, Angela Finocchiaro seine Frau Silvia, Alessandro Siani den Postkollegen Mattia.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Santa Maria di Castellabate in der Provinz Salerno. Produzenten waren Marco Chimenz, Francesca Longardi, Giovanni Stabilini und Riccardo Tozzi.
+
+Die Übertragung funktioniert, weil das italienische Nord-Süd-Gefälle dieselbe Rolle spielt wie das französische: Der Film lebt von Vorurteilen, die das Publikum sofort erkennt, und löst sie durch Alltag auf — nicht durch Belehrung.
+
+### Einordnung & Wirkung
+
+Die Kritik fiel gespalten aus. Der wiederkehrende Vorwurf lautete, die Neuverfilmung verliere gegenüber dem Original an Charme und Witz; eine Stimme nannte sie einen der überflüssigsten Filme des Jahres.
+
+Beim italienischen Publikum kam er dennoch an — deutlich besser als bei der Kritik.
+
+2012 folgte mit "Willkommen im Norden" eine Fortsetzung, die das Verhältnis umdreht und den Süditaliener nach Mailand schickt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10495', locale: 'de-de',
+    text: `### Worum es geht
+
+Nach seiner Niederlage hat John Kreese sein Dojo verloren; alle Schüler sind weg. Sein Kriegskamerad Terry Silver, inzwischen wohlhabend, nimmt sich der Sache an und plant die Rache an Daniel LaRusso und Mr. Miyagi.
+
+Silver heuert den Kämpfer Mike Barnes an, der Daniels Bonsai-Geschäft zerstört und ihn unter Druck setzt, erneut anzutreten. Miyagi lehnt es ab, ihn dabei zu unterstützen. Also bietet sich Silver selbst als Trainer an — und bringt Daniel genau das bei, wovon Miyagi ihn immer ferngehalten hat.
+
+### Entstehungsgeschichte
+
+Regie führte wie schon bei den ersten beiden Teilen John G. Avildsen, das Drehbuch schrieb Robert Mark Kamen. Die Musik stammt von Bill Conti, die Kamera von Steve Yaconelli, produziert wurde der Film von Jerry Weintraub für Columbia Pictures.
+
+Ralph Macchio spielt Daniel LaRusso, Pat Morita den Mr. Miyagi, Thomas Ian Griffith den Terry Silver, Sean Kanan den Mike Barnes und Martin Kove den John Kreese.
+
+### Hinter den Kulissen
+
+Der Film startete am 30. Juni 1989 in den Vereinigten Staaten und am 20. Juli in Deutschland. Er läuft 112 Minuten und ist ab 12 Jahren freigegeben.
+
+Erzählerisch dreht der Teil das Verhältnis des ersten Films um: Nicht der Gegner ist die Gefahr, sondern der falsche Lehrer. Daniel wird nicht besiegt, sondern umerzogen — und muss zurückfinden.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war schlecht: 15 Prozent bei Rotten Tomatoes, 36 von 100 bei Metacritic. Das Urteil, das sinngemäß immer wiederkehrte: Das sympathische Anliegen, Karate als Weg innerer Reife zu zeigen, versande in vorhersehbarer Handlung.
+
+1990 war der Film bei der Goldenen Himbeere in fünf Kategorien nominiert.
+
+Innerhalb der Reihe steht er zwischen "Karate Kid II" von 1986 und "Karate Kid IV" von 1994.
+
+Späte Wirkung entfaltete er erst durch die Serie "Cobra Kai", die von 2018 bis 2025 lief: Sie belebte die Reihe neu und griff dabei auch auf Figuren und Handlungsfäden dieses Teils zurück.` },
+  {
+    bereich: 'titel', schluessel: 'movie:407451', locale: 'de-de',
+    text: `### Worum es geht
+
+Megs Vater, ein Physiker, ist vor vier Jahren spurlos verschwunden. In der Schule gilt sie seither als schwierig, und sie selbst hält sich für ein Kind, an dem nichts stimmt.
+
+Dann tauchen drei Wesen auf — Frau Wasdenn, Frau Wer und Frau Welche —, die behaupten, ihr Vater sei nicht tot, sondern in einem anderen Teil des Universums gefangen. Gemeinsam mit ihrem hochbegabten Bruder Charles Wallace und ihrem Mitschüler Calvin macht Meg sich auf die Suche. Am Ende steht ihr eine Macht gegenüber, die alles gleichmachen will.
+
+### Entstehungsgeschichte
+
+Regie führte Ava DuVernay. Das Drehbuch schrieb Jennifer Lee, nachdem Jeff Stockwell eine erste Fassung vorgelegt hatte.
+
+Die Vorlage ist Madeleine L'Engles Roman von 1962, der eine vierteilige Reihe eröffnete und als Klassiker der Kinder- und Jugendliteratur gilt.
+
+Storm Reid spielt Meg, Chris Pine ihren Vater. Oprah Winfrey, Reese Witherspoon und Mindy Kaling verkörpern die drei Wesen.
+
+### Hinter den Kulissen
+
+Das Budget lag über 100 Millionen Dollar. Damit war es der erste Realfilm dieser Größenordnung, bei dem eine Schwarze Frau Regie führte — ein Umstand, der in der Berichterstattung mindestens so viel Raum einnahm wie der Film selbst.
+
+Der Roman gilt seit Jahrzehnten als schwer verfilmbar, weil seine zentralen Vorgänge — Reisen durch Raumfalten, ein körperloses Gehirn als Gegner — kaum bildlich zu fassen sind.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 124,5 Millionen Dollar ein und blieb damit knapp im Bereich der Herstellungskosten, ohne die Werbeausgaben zu decken.
+
+Die Kritik lobte die Besetzung und ihre bewusste Vielfalt, bemängelte aber Lücken in der Handlung, fehlende Tiefe der Figuren und Lebensweisheiten, die als billig empfunden wurden.
+
+2018 gab es eine Nominierung bei den People's Choice Awards als Familienfilm des Jahres.` },
+  {
+    bereich: 'titel', schluessel: 'movie:264999', locale: 'de-de',
+    text: `### Worum es geht
+
+Drei Jahre nach seinem Ausstieg baut Mike Möbel. Der Laden läuft mäßig, die Beziehung ist vorbei. Dann rufen die alten Kollegen an: Sie wollen ein letztes Mal auftreten, bei einem Wettbewerb in Myrtle Beach, und danach aufhören.
+
+Mike fährt mit. Was folgt, ist weniger eine Handlung als eine Reise: Stationen entlang der Küste, Begegnungen mit Frauen, die den Männern sagen, was sie eigentlich wollen, und die Vorbereitung einer Abschlussnummer, in der jeder etwas Eigenes zeigt.
+
+### Entstehungsgeschichte
+
+Regie führte Gregory Jacobs, das Drehbuch schrieb Reid Carolin. Beide waren schon am ersten Film beteiligt, damals in anderen Aufgaben.
+
+Steven Soderbergh, der den ersten Teil inszeniert hatte, arbeitete diesmal als Kameramann und Cutter. Matthew McConaughey, dessen Rolle den ersten Film mitgetragen hatte, ist nicht dabei.
+
+Channing Tatum spielt Mike. Daneben sind Matt Bomer, Joe Manganiello, Kevin Nash, Adam Rodriguez, Gabriel Iglesias, Andie MacDowell, Amber Heard, Jada Pinkett Smith, Elizabeth Banks, Donald Glover und Michael Strahan zu sehen.
+
+### Hinter den Kulissen
+
+Der Verzicht auf den Gegenspieler verändert den Film grundlegend. Der erste Teil war eine Aufstiegs- und Abstiegsgeschichte mit einem Ausbeuter im Zentrum; der zweite hat weder Bösewicht noch Bedrohung.
+
+Das Ergebnis ist ein Film ohne Konflikt, dessen erklärtes Ziel das Vergnügen des Publikums ist — mit einer Verschiebung: Die Frauen im Film sind nicht Beiwerk, sondern die, für die gespielt wird und deren Urteil zählt.
+
+Der Start war am 1. Juli 2015, in Deutschland am 23. Juli.
+
+### Einordnung & Wirkung
+
+Am ersten Tag spielte der Film 9,3 Millionen Dollar ein und überschritt binnen eines Monats weltweit die 100-Millionen-Marke.
+
+Die Kritik urteilte gemischt: 60 Prozent bei Rotten Tomatoes. Der Vorwurf lautete, es handle sich nur um eine fade Nummernrevue ohne Geschichte. Gelobt wurden dagegen Tatums sichtbare Freude am Tanz und der Humor der Reiseszenen.
+
+Beim Publikum kam der Film besser an als bei den Kritikern; bei Rotten Tomatoes vergaben die Zuschauer 3,7 von 5 Sternen.` },
+  // ---- Block 37 ----
+  {
+    bereich: 'titel', schluessel: 'movie:664469', locale: 'de-de',
+    text: `### Worum es geht
+
+New York in den dreißiger Jahren. Der Arzt Burt Berendsen und der Anwalt Harold Woodman kennen sich aus dem Ersten Weltkrieg; mit der Krankenschwester Valerie Bandenberg haben sie danach eine Zeit lang in Amsterdam gelebt.
+
+Fünfzehn Jahre später bittet die Tochter eines Senators die beiden Männer, den Tod ihres Vaters zu untersuchen. Was als Obduktion beginnt, führt sie in eine Verschwörung: Eine Gruppe wohlhabender Männer plant, Präsident Roosevelt zu stürzen und durch einen General zu ersetzen, den sie kontrollieren können.
+
+### Entstehungsgeschichte
+
+David O. Russell schrieb das Drehbuch und führte Regie. Es war seine erste Arbeit seit "Joy" von 2015.
+
+Der Film greift lose auf den sogenannten Business Plot zurück — eine Verschwörung von 1933, Roosevelt aus dem Amt zu drängen. Robert De Niros Figur ist an General Smedley Butler angelehnt, der die Sache öffentlich machte und vor einem Ausschuss aussagte. Das meiste andere ist erfunden, darunter das Komitee der Fünf und die Verbindungen zu den Nationalsozialisten.
+
+Christian Bale, Margot Robbie und John David Washington spielen die drei Hauptrollen. Im Ensemble stehen zudem Robert De Niro, Taylor Swift, Mike Myers und Rami Malek.
+
+### Hinter den Kulissen
+
+Gedreht wurde in 49 Tagen zwischen Januar und März 2021 in Los Angeles. Die Kamera führte Emmanuel Lubezki, den Schnitt besorgte Jay Cassidy.
+
+Die Musik hatte zunächst Hildur Guðnadóttir übernommen; im August 2022 wurde sie durch Daniel Pemberton ersetzt.
+
+Das Herstellungsbudget lag bei 80 Millionen Dollar.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 31,2 Millionen Dollar ein. Deadline bezifferte den Verlust auf 108,4 Millionen — einer der teuersten Fehlschläge seines Jahrgangs.
+
+Die Kritik fiel schlecht aus: 31 Prozent bei Rotten Tomatoes, 48 von 100 bei Metacritic. Gelobt wurden die Besetzung und die Bildgestaltung, bemängelt eine überladene Handlung und ein Tonfall, der zwischen Komödie und Thriller ständig wechselt. Das Publikum vergab bei CinemaScore ein B.
+
+Bemerkenswert bleibt der Stoff: Der Business Plot ist ein historischer Vorgang, über den in der amerikanischen Öffentlichkeit auffallend wenig bekannt ist — und der Film hat daran nichts geändert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:551804', locale: 'de-de',
+    text: `### Worum es geht
+
+Millie Kessler geht in Blissfield zur Schule, wird dort schikaniert und traut sich nichts zu. In derselben Stadt geht ein Serienmörder um, den alle nur den Schlächter nennen.
+
+Als er Millie mit einem alten Dolch namens La Dola angreift, tauschen die beiden die Körper. Millie steckt im Leib eines mittelalten Mannes, den die halbe Stadt sucht; der Mörder steckt in dem einer Schülerin, was ihm sämtliche Türen öffnet. Bis Mitternacht muss Millie den Dolch zurückholen und ihn erneut einsetzen — sonst bleibt der Tausch für immer.
+
+### Entstehungsgeschichte
+
+Regie führte Christopher Landon, das Drehbuch schrieb er gemeinsam mit Michael Kennedy.
+
+Der Film überträgt den Körpertausch aus "Freaky Friday" in den Slasher; der Arbeitstitel lautete entsprechend "Freaky Friday the 13th". Produziert wurde er von Jason Blum für Blumhouse, verliehen von Universal.
+
+Vince Vaughn spielt den Schlächter, Kathryn Newton die Millie. In weiteren Rollen sind Katie Finneran, Alan Ruck, Celeste O'Connor und Misha Osherovich zu sehen.
+
+### Hinter den Kulissen
+
+Gedreht wurde in 35 Tagen vom 21. Oktober bis 12. Dezember 2019. Das Budget betrug sechs Millionen Dollar und entsprach damit der sparsamen Arbeitsweise von Blumhouse.
+
+Der Reiz liegt in der Besetzung gegen die Erwartung: Vince Vaughn, sonst Komödiendarsteller, spielt über weite Strecken eine schüchterne Schülerin, während Kathryn Newton einen Mörder gibt. Die Gewaltszenen sind dabei ernst gemeint — der Film macht aus dem Slasher keine Parodie, sondern lässt beide Formen nebeneinander laufen.
+
+### Einordnung & Wirkung
+
+Der Start am 13. November 2020 fiel mitten in die Pandemie. Am ersten Wochenende kamen 3,7 Millionen Dollar aus 2.472 Kinos zusammen; insgesamt waren es 18,1 Millionen weltweit, je neun Millionen im In- und Ausland.
+
+Die Kritik reagierte gut: 84 Prozent bei Rotten Tomatoes aus 251 Besprechungen, 67 von 100 bei Metacritic. Gelobt wurden vor allem die Mischung aus Horror und Komödie und die beiden Hauptdarsteller.
+
+Das Publikum war zurückhaltender und vergab bei CinemaScore ein B minus.` },
+  {
+    bereich: 'titel', schluessel: 'movie:7516', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Mafiaboss Primo Sparazza liegt im Sterben und setzt vorher noch ein Kopfgeld aus: eine Million Dollar für den Tod von Buddy Israel, einem Zauberkünstler aus Las Vegas, der mit dem organisierten Verbrechen zu tun hat und nun mit dem FBI reden will.
+
+Die Bundesagenten Messner und Carruthers sollen Israel ins Zeugenschutzprogramm bringen. Gleichzeitig macht sich eine ganze Reihe von Auftragsmördern auf den Weg zu seinem Penthouse am Lake Tahoe — jeder mit eigenen Methoden, keiner mit Kenntnis von den anderen. Was hinter dem Auftrag wirklich steckt, klärt der Film erst ganz am Schluss.
+
+### Entstehungsgeschichte
+
+Joe Carnahan schrieb das Drehbuch und führte Regie. Produziert wurde der Film von Tim Bevan und Eric Fellner, die Musik stammt von Clint Mansell.
+
+Jeremy Piven spielt Buddy Israel. Daneben sind Ryan Reynolds, Ray Liotta und Ben Affleck in einem großen Ensemble zu sehen.
+
+### Hinter den Kulissen
+
+Der Aufbau ist ungewöhnlich: Der Film führt über eine Stunde lang immer neue Figuren ein, ohne dass sie einander begegnen. Erst im Hotel treffen alle Fäden aufeinander, und dann sehr schnell.
+
+Das Budget lag bei 17 Millionen Dollar.
+
+Carnahan arbeitet mit hohem Tempo und einem Wechsel der Tonlagen von Slapstick bis zu ausgestellter Brutalität — ein Verfahren, das dem Film sowohl seine Anhänger als auch seine Gegner eingebracht hat.
+
+### Einordnung & Wirkung
+
+Der Film spielte 57 Millionen Dollar ein und war damit wirtschaftlich erfolgreich.
+
+Die Kritik urteilte reserviert. Beschrieben wurde er als rasant inszeniert und von vehementer Gewalt, aber als bloße Tarantino-Fingerübung, die letztlich nur Leerlauf produziere. Der Vorwurf zielte auf die Figuren: Sie seien Einfälle, keine Menschen.
+
+2010 entstand mit "Smokin' Aces 2: Assassins' Ball" unter der Regie von P. J. Pesce eine Vorgeschichte, die direkt auf DVD erschien.` },
+  {
+    bereich: 'titel', schluessel: 'series:1415', locale: 'de-de',
+    text: `### Worum es geht
+
+Sherlock Holmes ist aus London nach New York gezogen, hat eine Entziehungskur hinter sich und arbeitet als Berater für das dortige Polizeidezernat.
+
+Sein Vater bezahlt eine Begleiterin, die den Rückfall verhindern soll: Joan Watson, eine ehemals erfolgreiche Chirurgin. Aus der bezahlten Aufsicht wird zunächst eine Zusammenarbeit und dann eine gleichrangige Partnerschaft — Watson löst Fälle selbst und wird im Lauf der Serie zur Ermittlerin.
+
+### Entstehungsgeschichte
+
+Robert Doherty entwickelte die Serie. Produziert wurde sie von CBS Television Studios, Timberman/Beverly Productions und Hill of Beans Productions. Die Musik komponierte Sean Callery.
+
+Jonny Lee Miller spielt Sherlock Holmes, Lucy Liu die Joan Watson, Aidan Quinn den Captain Thomas Gregson und Jon Michael Hill den Detective Marcus Bell.
+
+Die Vorlage sind Arthur Conan Doyles Erzählungen, allerdings nur lose: Die Serie verlegt sie in die Gegenwart und nach New York.
+
+### Hinter den Kulissen
+
+Die auffälligste Änderung betrifft Watson. Aus dem Militärarzt der Vorlage wird eine Frau — und zwar keine, die Holmes bewundert und protokolliert, sondern eine ehemalige Chirurgin, die eigene Schlüsse zieht. Diese Entwicklung zur ebenbürtigen Partnerin gibt es bei Doyle nicht.
+
+Die Serie startete zwei Jahre nach der BBC-Serie "Sherlock", die dieselbe Grundidee verfolgte, und wurde dauerhaft an ihr gemessen.
+
+Im deutschsprachigen Raum sprechen Robin Kahnmeyer den Holmes, Melanie Hinze die Watson, Oliver Siebeck den Gregson und Roman Wolko den Bell.
+
+### Einordnung & Wirkung
+
+Die Serie lief vom 27. September 2012 bis zum 15. August 2019 auf CBS und kam auf sieben Staffeln mit 154 Folgen. In Deutschland begann die Ausstrahlung am 10. Januar 2013 auf Sat.1.
+
+Die Kritik urteilte gemischt. Ein wiederkehrendes Urteil lautete, es handle sich um durchschnittliche Krimikost, die man sich ansehen könne, aber nicht müsse. Andere Stimmen nannten die Serie eine unterhaltsame und spannende Neudeutung, räumten aber ein, dass sie nicht so witzig sei wie das britische Gegenstück.
+
+2012 gab es eine Nominierung bei den Satellite Awards für Jonny Lee Miller.` },
+  {
+    bereich: 'titel', schluessel: 'series:4629', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Jahr nach den Ereignissen des Kinofilms wird das Sternentor wieder in Betrieb genommen. Es stellt sich heraus, dass es nicht nur eine Verbindung gibt, sondern ein Netz aus Toren über die ganze Galaxie.
+
+Das Militär stellt Erkundungsteams auf; das erste heißt SG-1 und besteht aus Colonel Jack O'Neill, der Wissenschaftlerin Samantha Carter, dem Sprachforscher Daniel Jackson und dem Jaffa Teal'c. Sie erkunden ferne Welten und stoßen dabei auf Gegner, die den Menschen technisch weit überlegen sind.
+
+### Entstehungsgeschichte
+
+Jonathan Glassner und Brad Wright entwickelten die Serie auf Grundlage des Kinofilms "Stargate" von 1994. Produziert wurde sie von Brad Wright, Richard Dean Anderson und Robert C. Cooper, die Musik stammt von Joel Goldsmith. Gedreht wurde in Kanada und in den Vereinigten Staaten.
+
+Richard Dean Anderson spielt Jack O'Neill, Amanda Tapping die Samantha Carter, Michael Shanks den Daniel Jackson und Christopher Judge den Teal'c.
+
+### Hinter den Kulissen
+
+Die Serie führt den Film nicht nur fort, sondern erweitert seine Welt erheblich: Aus einer einmaligen Reise wird ein stehendes Programm mit eigener Behörde, eigenen Verfahren und wachsender Mythologie.
+
+Geplant war ein Ende nach vier Staffeln. Stattdessen wechselte die Serie den Sender: Sie war am 27. Juli 1997 auf Showtime gestartet, ab der sechsten Staffel lief sie auf dem Sci Fi Channel, beginnend am 7. Juni 2002.
+
+### Einordnung & Wirkung
+
+Insgesamt entstanden zehn Staffeln mit 214 Folgen. Die letzte Folge, "Unending", lief am 13. März 2007.
+
+Das Guinness-Buch der Rekorde führte die Serie als die am längsten ohne Unterbrechung laufende Science-Fiction-Serie.
+
+Aus ihr gingen mehrere Ableger hervor: "Stargate Atlantis" und "Stargate Universe", die nicht zum Kanon zählende Zeichentrickserie "Stargate Infinity", die beiden direkt auf DVD erschienenen Filme "The Ark of Truth" und "Continuum" sowie 2017 die Webserie "Stargate Origins".` },
+  {
+    bereich: 'titel', schluessel: 'series:32798', locale: 'de-de',
+    text: `### Worum es geht
+
+Steve McGarrett, früher Navy SEAL, leitet auf Hawaii eine Sondereinheit der Behörde für öffentliche Sicherheit. Sie ist niemandem in der Polizeihierarchie unterstellt, sondern berichtet unmittelbar der Gouverneurin.
+
+Zur Einheit gehören der Polizist Danny Williams, Chin Ho Kelly und Kono Kalakaua. Bearbeitet werden schwere Fälle — Entführungen, Morde, Raubüberfälle, Terrorismus. Der Name der Einheit lautet Five-0.
+
+### Entstehungsgeschichte
+
+Roberto Orci, Alex Kurtzman und Peter M. Lenkov entwickelten die Serie für CBS; Lenkov war der leitende Produzent.
+
+Es handelt sich um eine Neuauflage der Serie, die von 1968 bis 1980 lief. Ein Unterschied steckt schon im Titel: Die neue Fassung schreibt sich mit der Ziffer Null statt mit dem Buchstaben O — angeblich, damit Suchmaschinen sie besser finden.
+
+Alex O'Loughlin spielt McGarrett, Scott Caan den Danny Williams, Daniel Dae Kim den Chin Ho Kelly und Grace Park die Kono Kalakaua. Später kamen unter anderem Chi McBride und Jorge Garcia hinzu.
+
+### Hinter den Kulissen
+
+Gedreht wurde auf Oahu. Als Studio diente eine Lagerhalle im früheren Gebäude des Honolulu Advertiser, für die Außenaufnahmen der Zentrale die Ali'iolani Hale in Honolulu.
+
+Im Juni 2017 verließen Daniel Dae Kim und Grace Park die Serie nach einem Streit um die Bezahlung. Das letzte Angebot von CBS lag 10 bis 15 Prozent unter dem, was O'Loughlin und Caan verdienten. Der Vorgang wurde in den Vereinigten Staaten breit als Frage der Gleichbehandlung asiatisch-amerikanischer Darsteller diskutiert.
+
+### Einordnung & Wirkung
+
+Die Serie lief vom 20. September 2010 bis zum 3. April 2020 und kam auf zehn Staffeln mit 240 Folgen.
+
+Die erste Staffel steht bei 66 von 100 auf Metacritic und 74 Prozent bei Rotten Tomatoes. Beim Publikum war sie außergewöhnlich erfolgreich und steht im Guinness-Buch der Rekorde als bestbewertete neue Serie der Vereinigten Staaten.
+
+Scott Caan war für einen Golden Globe nominiert. Bei den People's Choice Awards gewann die Serie als beliebtestes neues Fernsehdrama, dazu kamen mehrere Teen Choice Awards.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1588', locale: 'de-de',
+    text: `### Worum es geht
+
+Torrance Shipman wird Kapitänin der Cheerleader an der Rancho Carne High School in San Diego. Dann entdeckt sie, worauf die Erfolge ihrer Mannschaft, der Toros, beruhen: Die Choreografien sind bei den East Compton Clovers abgeschaut, einer Schwarzen Mannschaft aus einem anderen Stadtteil. Torrance engagiert daraufhin einen Choreografen — und stellt fest, dass er dieselbe Nummer an mehrere Schulen verkauft hat. Bleibt nur, etwas Eigenes zu erfinden.
+
+### Entstehungsgeschichte
+
+Regie führte Peyton Reed, das Drehbuch schrieb Jessica Bendinger. Die Musik stammt von Christophe Beck, die Kamera von Shawn Maurer, den Schnitt besorgte Larry Bock.
+
+Kirsten Dunst spielt Torrance, Eliza Dushku die Missy, Gabrielle Union die Isis, Anführerin der Clovers, und Jesse Bradford den Cliff.
+
+### Hinter den Kulissen
+
+Gedreht wurde von Oktober 1999 bis Februar 2000 in Kalifornien, unter anderem in Chula Vista und San Diego.
+
+Bemerkenswert ist, wie ernst der Film seinen Gegenstand nimmt: Cheerleading erscheint nicht als Beiwerk zum Football, sondern als Sport mit eigenem Wettkampf, eigener Technik und eigenem Verletzungsrisiko. Das Lexikon des internationalen Films hob genau das hervor.
+
+Zugleich handelt der Film von kulturellem Diebstahl — davon, dass die wohlhabende weiße Schule von der Arbeit der Schwarzen Schule lebt, ohne sie je zu nennen. Der Film löst das nicht harmonisch auf: Bei der Meisterschaft in Daytona Beach gewinnen die Clovers, die Toros werden Zweite.
+
+### Einordnung & Wirkung
+
+Bei rund zehn Millionen Dollar Herstellungskosten spielte der Film weltweit etwa 90 Millionen ein.
+
+Die Kritik urteilte gemischt. Die Zeitschrift Cinema lobte die atemberaubenden Stunts und die Selbstironie, nannte den Film aber vorhersehbar.
+
+Es folgten sechs Fortsetzungen, alle direkt auf Video — mit Ausnahme von "Bring It On: Cheer or Die" aus dem Jahr 2022, das im Fernsehen lief und Horrorelemente einbaute.` },
+  {
+    bereich: 'titel', schluessel: 'movie:399366', locale: 'de-de',
+    text: `### Worum es geht
+
+Maine im Jahr 1968. Eine Mutter kehrt mit ihren vier Kindern in das Haus ihrer Familie zurück, weit außerhalb, um dort neu anzufangen. Was sie hinter sich lassen, wird lange nicht ausgesprochen.
+
+Als die Mutter stirbt, steht der älteste Sohn Jack vor einem Problem: Erfährt jemand davon, werden die Geschwister getrennt und in Heime gegeben. Bis zu seiner Volljährigkeit sind es Monate, und so lange muss der Tod geheim bleiben. Die Kinder leben abgeschottet und lassen niemanden ins Haus. Nur Allie, eine junge Frau aus der Umgebung, kommt Jack nahe.
+
+### Entstehungsgeschichte
+
+Sergio G. Sánchez schrieb das Drehbuch und führte Regie; es war seine erste Regiearbeit. Die Musik stammt von Fernando Velázquez, die Kamera von Xavi Giménez, den Schnitt besorgte Elena Ruiz.
+
+George MacKay spielt Jack, Anya Taylor-Joy die Allie, Charlie Heaton den Bruder Billy, Mia Goth die Schwester Jane, Matthew Stagg den kleinen Sam und Kyle Soller den Notar Tom Porter.
+
+### Hinter den Kulissen
+
+Es handelt sich um eine spanische Produktion von 2017; gedreht wurde auf Englisch. Der Film läuft 111 Minuten und ist in Deutschland ab 16 Jahren freigegeben.
+
+Erzählerisch arbeitet er mit einer doppelten Verheimlichung: Die Kinder verbergen etwas vor der Außenwelt, und der Film verbirgt zugleich etwas vor dem Zuschauer. Beide Ebenen fallen erst am Schluss zusammen.
+
+Das Haus selbst ist die zentrale Figur: ein abgelegenes Anwesen, in dem Geräusche auftreten, deren Ursache offenbleibt.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films beschrieb ihn als atmosphärischen Horrorfilm, der mit zurückhaltenden Mitteln arbeitet.
+
+Gelobt wurde die stilsichere Regie und die Verbindung von Familiendrama und Horror; hervorgehoben wurde, dass der Film die üblichen Klischees des Spukhauses vermeidet.
+
+Für alle vier jungen Hauptdarsteller lag der Film in einer frühen Phase ihrer Laufbahn: Anya Taylor-Joy, Mia Goth, George MacKay und Charlie Heaton wurden in den Jahren danach jeweils deutlich bekannter.` },
+  // ---- Block 38 ----
+  {
+    bereich: 'titel', schluessel: 'movie:242095', locale: 'de-de',
+    text: `### Worum es geht
+
+Drei Studenten sind auf einer Autofahrt quer durch die Vereinigten Staaten. Zwei von ihnen, Nic und Jonah, werden seit Monaten von einem Hacker verfolgt, der in ihre Rechner eingedrungen ist. Als sie eine Spur zu seinem mutmaßlichen Aufenthaltsort finden, machen sie einen Umzug daraus.
+
+An der Adresse verlieren alle drei das Bewusstsein. Nic wacht in einer Anlage auf, isoliert und betreut von einem Mann namens Damon, der ihm erklärt, sie seien Außerirdischen begegnet. Nic bekommt Prothesen für seine Beine, deren Bauart er nicht versteht — und beginnt, an allem zu zweifeln, was man ihm sagt.
+
+### Entstehungsgeschichte
+
+Regie führte William Eubank, das Drehbuch schrieb er gemeinsam mit Carlyle Eubank und David Frigerio.
+
+Laurence Fishburne spielt den Damon, Brenton Thwaites den Nic Eastman, Olivia Cooke die Haley Peterson, Beau Knapp den Jonah und Lin Shaye die Mirabelle.
+
+Produziert wurde der Film von Tyler Davidson und Brian Kavanaugh-Jones. Die Musik stammt von Nima Fakhrara, die Kamera von David Lanzenberg.
+
+### Hinter den Kulissen
+
+Der Film wechselt dreimal die Gangart: Er beginnt als Roadmovie unter Studenten, wird dann zum Kammerspiel in einer sterilen Anlage und endet in einer Form, die mit beidem nichts mehr zu tun hat. Genau das hat ihn gespalten.
+
+Die Premiere fand beim Sundance Film Festival statt. In den Vereinigten Staaten lief er am 13. Juni 2014 an, in Deutschland am 10. Juli. Die Laufzeit beträgt 97 Minuten.
+
+### Einordnung & Wirkung
+
+Bei Rotten Tomatoes steht der Film bei 61 Prozent.
+
+Das Lexikon des internationalen Films lobte die formalen Qualitäten, bemängelte aber wilde Handlungssprünge — ein Urteil, das den Streit um den Film gut zusammenfasst: Die Bildsprache wurde weithin anerkannt, die Erzählung nicht.
+
+Für Olivia Cooke und Brenton Thwaites lag der Film am Anfang ihrer Laufbahn; William Eubank drehte später größere Produktionen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10153', locale: 'de-de',
+    text: `### Worum es geht
+
+Auf dem Grund des Pazifiks wird ein Raumschiff entdeckt, das dort seit Jahrhunderten liegt. Eine Gruppe von Wissenschaftlern wird in eine Unterwasserstation gebracht, um es zu untersuchen: ein Psychologe, eine Biochemikerin, ein Mathematiker und ein Astrophysiker.
+
+An Bord finden sie eine vollkommene Kugel, deren Oberfläche alles spiegelt und die auf keine Untersuchung reagiert. Kurz darauf beginnen Dinge zu geschehen, die niemand erklären kann — und die auffällig genau mit dem übereinstimmen, wovor die Einzelnen sich am meisten fürchten.
+
+### Entstehungsgeschichte
+
+Regie führte Barry Levinson. Das Drehbuch schrieben Kurt Wimmer, Stephen Hauser und Paul Attanasio nach Michael Crichtons Roman "Sphere — Die Gedanken des Bösen" von 1987. Crichton selbst trat als Produzent auf.
+
+Dustin Hoffman spielt den Psychologen Norman Goodman, Sharon Stone die Biochemikerin Halperin, Samuel L. Jackson den Mathematiker Adams und Liev Schreiber den Astrophysiker Fielding. Peter Coyote und Queen Latifah ergänzen die Besetzung.
+
+Die Musik stammt von Elliot Goldenthal, die Kamera von Adam Greenberg, den Schnitt besorgte Stu Linder.
+
+### Hinter den Kulissen
+
+Die Anlage ist die eines Kammerspiels: eine geschlossene Station, eine überschaubare Zahl von Figuren und ein Gegenstand, der nichts tut, außer da zu sein.
+
+Der Grundeinfall gehört zu den älteren der Science-Fiction — ein fremdes Etwas, das nicht angreift, sondern die Menschen mit sich selbst konfrontiert. Der Film hat den Vergleich mit Stanisław Lems "Solaris" deshalb nie loswerden können.
+
+In Deutschland kam er am 2. April 1998 in die Kinos.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war schlecht: 13 Prozent bei Rotten Tomatoes, 35 von 100 bei Metacritic.
+
+Der wiederkehrende Vorwurf betraf nicht die Regie, die als ordentlich galt, sondern die Logik der Handlung — sie erleide, so eine Formulierung, Schiffbruch.
+
+Bemerkenswert bleibt die Besetzung: Hoffman, Stone und Jackson standen zu diesem Zeitpunkt auf dem Höhepunkt ihrer Bekanntheit. Der Film gehört damit zu jenen Großproduktionen der späten neunziger Jahre, deren Aufwand in keinem Verhältnis zum Ergebnis stand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:19265', locale: 'de-de',
+    text: `### Worum es geht
+
+Boris Yellnikoff hat Quantenmechanik an der Columbia University gelehrt, war für den Nobelpreis im Gespräch und gibt jetzt Schachunterricht für Kinder, die er beschimpft. Er hält die Menschheit für einen Irrtum und sagt das jedem, der zuhört.
+
+Vor seiner Tür sitzt eines Abends Melody, 21, aus Mississippi ausgerissen. Er lässt sie herein, für eine Nacht, dann für länger. Die beiden heiraten. Als Melodys Eltern in New York auftauchen, versucht die Mutter, die Ehe zu hintertreiben — mit Folgen, die niemand vorhergesehen hat, sie selbst am wenigsten.
+
+### Entstehungsgeschichte
+
+Woody Allen schrieb das Drehbuch und führte Regie.
+
+Der Text stammt aus den frühen siebziger Jahren; die Hauptrolle war für Zero Mostel gedacht. Nach dessen Tod 1977 legte Allen das Buch beiseite. Drei Jahrzehnte später nahm er es wieder auf und änderte im Wesentlichen nur die Zeitbezüge.
+
+Larry David spielt den Boris, Evan Rachel Wood die Melody, Patricia Clarkson deren Mutter, Ed Begley Jr. den Vater. In weiteren Rollen sind Michael McKean, Henry Cavill und Jessica Hecht zu sehen.
+
+### Hinter den Kulissen
+
+Gedreht wurde in New York. Die Premiere fand am 22. April 2009 beim Tribeca Film Festival statt, der amerikanische Kinostart folgte am 19. Juni 2009 in wenigen Häusern.
+
+Die Besetzung von Larry David ist der eigentliche Einfall: Er spricht Allens Sätze, ohne Allen nachzuahmen, und bringt die Griesgrämigkeit mit, für die er aus "Curb Your Enthusiasm" bekannt war.
+
+Boris wendet sich mehrfach direkt an das Publikum — ein Mittel, das der Film konsequent nutzt und über das er sich zugleich lustig macht.
+
+### Einordnung & Wirkung
+
+Bei 15 Millionen Dollar Herstellungskosten spielte der Film weltweit 35 Millionen ein.
+
+Die Kritik urteilte geteilt: 50 Prozent bei Rotten Tomatoes aus 167 Besprechungen mit einem Schnitt von 5,4 von 10, 45 von 100 bei Metacritic aus 30 Kritiken.
+
+Das wiederkehrende Argument der Gegner war das Alter des Buches — der Film wirke wie ein Werk aus den Siebzigern, dem man neue Namen eingesetzt habe. Die Befürworter hielten genau das für seinen Reiz.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4349', locale: 'de-de',
+    text: `### Worum es geht
+
+Auf eine amerikanische Wohnsiedlung in Riad wird ein Anschlag verübt; unter den Toten sind Zivilisten und ein FBI-Beamter. Die Regierung in Washington will keine Ermittler nach Saudi-Arabien schicken, weil die politische Lage es nicht zulässt.
+
+Agent Ronald Fleury setzt die Reise dennoch durch, indem er den saudischen Botschafter unter Druck setzt. Mit drei Kollegen landet er in Riad — und findet dort Bedingungen vor, unter denen die üblichen Verfahren nicht funktionieren. Erst die Zusammenarbeit mit einem saudischen Offizier bringt sie weiter.
+
+### Entstehungsgeschichte
+
+Regie führte Peter Berg, das Drehbuch schrieb Matthew Michael Carnahan.
+
+Jamie Foxx spielt den Agenten Fleury. Daneben sind Jennifer Garner, Chris Cooper und Jason Bateman als sein Team zu sehen.
+
+Die Produktionskosten werden auf 80 Millionen Dollar geschätzt. Gedreht wurde in Abu Dhabi, in Arizona und in Washington.
+
+### Hinter den Kulissen
+
+Der Film wechselt in der Mitte die Form: Was als Ermittlungsdrama mit diplomatischen Verwicklungen beginnt, endet als Häuserkampf.
+
+Sein bekanntester Einfall steht ganz am Schluss. Zwei Figuren auf entgegengesetzten Seiten haben jeweils einem Kind dasselbe versprochen — und der Film stellt beide Sätze nebeneinander, ohne sie zu bewerten. Die Absurdität des Terrors und seiner Bekämpfung wird darin auf einen Punkt gebracht.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 86,6 Millionen Dollar ein, davon 47,5 Millionen in den Vereinigten Staaten.
+
+Die Kritik ging weit auseinander. Die eine Seite hielt ihn für handwerklich hervorragend gemacht; die andere warf ihm vor, antiarabische Klischees zu verstärken — Saudi-Arabien erscheine über weite Strecken als Kulisse für amerikanisches Handeln.
+
+Der Schluss hat diesen Vorwurf teilweise entkräftet, weil er die Gleichung ausdrücklich in beide Richtungen aufmacht. Er hat den Streit aber nicht beendet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:62206', locale: 'de-de',
+    text: `### Worum es geht
+
+Nick liefert Pizza aus und hat sich mit seinem Leben abgefunden. Zwei Kleinkriminelle brauchen 100.000 Dollar und haben eine Idee: Sie überfallen den Pizzaboten, schnallen ihm eine Sprengstoffweste um und geben ihm zehn Stunden, um eine Bank auszurauben.
+
+Nick holt sich Hilfe bei seinem Freund Chet. Der Überfall gelingt so dilettantisch, wie er geplant war. Danach wird es unübersichtlich: Verfolgungsjagden, wechselnde Fronten und eine Reihe von Wendungen, mit denen keiner der Beteiligten gerechnet hat.
+
+### Entstehungsgeschichte
+
+Regie führte Ruben Fleischer, das Drehbuch schrieben Michael Diliberti und Matthew Sullivan. Produziert wurde der Film von Ben Stiller, Stuart Cornfeld und Jeremy Kramer.
+
+Jesse Eisenberg spielt den Nick, Danny R. McBride und Aziz Ansari die beiden Kriminellen. Aziz Ansari war zu diesem Zeitpunkt vor allem aus der Serie "Parks and Recreation" bekannt, in der er den Tom Haverford spielte.
+
+### Hinter den Kulissen
+
+Der Film lehnt sich lose an einen realen Fall an: 2003 starb im amerikanischen Erie der Pizzabote Brian Wells, dem eine Bombe umgeschnallt worden war und der eine Bank überfallen musste. Wells kam ums Leben, als die Vorrichtung zündete.
+
+Diese Nähe hat dem Film Kritik eingetragen: Der Vorgang, der einen Menschen das Leben kostete, wird hier durchgehend als Komödie behandelt, und der Film geht auf den realen Fall an keiner Stelle ein.
+
+### Einordnung & Wirkung
+
+Bei 28 Millionen Dollar Herstellungskosten spielte der Film weltweit über 40 Millionen ein.
+
+Die Kritik lehnte ihn überwiegend ab. Das Lexikon des internationalen Films nannte ihn eine ebenso einfalls- wie seelenlose Krimikomödie. Bemängelt wurden die dünne Handlung und die flüchtig gezeichneten Figuren.
+
+Der Fall Brian Wells wurde später mehrfach dokumentarisch aufgearbeitet — mit erheblich größerer Aufmerksamkeit, als dieser Film je erhalten hat.
+
+Wirtschaftlich war der Film damit ein maßvoller Erfolg, künstlerisch blieb er ohne Nachwirkung. Er steht für eine Reihe amerikanischer Krimikomödien jener Jahre, die auf kurze Laufzeit, hohes Tempo und die Bekanntheit ihrer Darsteller setzten — und deren Stoffwahl im Rückblick weniger unbedenklich erscheint als zum Zeitpunkt ihres Erscheinens.` },
+  {
+    bereich: 'titel', schluessel: 'movie:425972', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Seuche hat Australien erfasst. Wer gebissen wird, hat 48 Stunden, bevor er sich verwandelt. Andy ist mit seiner Frau und der kleinen Tochter Rosie auf einem Hausboot unterwegs, weil das Wasser sicherer scheint als das Land.
+
+Nach einem Angriff auf seine Frau ist auch Andy infiziert. Von da an läuft die Uhr, und sein Ziel verschiebt sich: Es geht nicht mehr um sein Überleben, sondern darum, in zwei Tagen jemanden zu finden, der das Kind großzieht. Unterwegs trifft er auf Vic, der die Lage für sich nutzt, und auf das Aborigine-Mädchen Thoomi..
+
+### Entstehungsgeschichte
+
+Regie führten Ben Howling und Yolanda Ramke. Der Film ist die lange Fassung ihres eigenen Kurzfilms gleichen Titels.
+
+Martin Freeman spielt den Andy. Daneben sind Anthony Hayes, Susie Porter und David Gulpilil zu sehen — Letzterer einer der bekanntesten Aborigine-Darsteller des australischen Kinos.
+
+Die Kamera führte Geoffrey Simpson.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Südaustralien, unter anderem im Ikara-Flinders-Ranges-Nationalpark, in Leigh Creek und in den Adelaide Studios. Die Bootsszenen entstanden am Murray River.
+
+Der Film verlegt eine Erzählform, die sonst in Städten spielt, ins Landesinnere — mit dem Ergebnis, dass die Bedrohung selten sichtbar ist und die Weite selbst zum Problem wird.
+
+Wesentlich ist die Rolle der Aborigines: Sie sind nicht Kulisse, sondern die Gruppe, die mit der Lage am besten zurechtkommt, weil sie über Kenntnisse des Landes verfügt, die den Siedlern fehlen.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 6. Oktober 2017 beim Adelaide Film Festival statt. In australischen Kinos lief der Film am 17. Mai 2018 an, einen Tag später erschien er weltweit bei Netflix.
+
+Die Kritik reagierte gut: 88 Prozent bei Rotten Tomatoes.
+
+Der Film gewann den AWGIE Award für das beste adaptierte Drehbuch und erhielt fünf Nominierungen bei den AACTA Awards, den wichtigsten australischen Filmpreisen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:441701', locale: 'de-de',
+    text: `### Worum es geht
+
+Madrid 1991. Die fünfzehnjährige Verónica kümmert sich um ihre drei jüngeren Geschwister; der Vater ist tot.
+
+Während einer Sonnenfinsternis versucht sie mit einem Ouija-Brett, Kontakt zu ihrem Vater aufzunehmen. Die Sitzung geht schief. In den Tagen danach häufen sich Vorfälle in der Wohnung, und Verónica findet sich in der Rolle wieder, in der sie ohnehin steckt: Sie muss allein zurechtkommen und ihre Geschwister schützen.
+
+### Entstehungsgeschichte
+
+Regie führte Paco Plaza, das Drehbuch schrieb er gemeinsam mit Fernando Navarro.
+
+Der Film nimmt Anleihen beim sogenannten Fall Vallecas von 1991: Die Madrider Schülerin Estefanía Gutiérrez Lázaro erlitt nach einer Sitzung mit einem Ouija-Brett an ihrer Schule Halluzinationen und Anfälle. Plaza hat ausdrücklich betont, sich nicht an die Tatsachen gebunden zu haben — Figuren und Einzelheiten seien weitgehend erfunden.
+
+Sandra Escacena spielt die Verónica, Claudia Placer, Bruna González und Iván Chavero die Geschwister, Ana Torrent die Mutter. Consuelo Trujillo verkörpert die blinde Nonne, die im Film Schwester Tod genannt wird.
+
+### Hinter den Kulissen
+
+Produziert wurde der Film von Apache Films mit Unterstützung des öffentlich-rechtlichen Senders RTVE. Die spanische Premiere war am 25. August 2017.
+
+Netflix erwarb die Rechte und veröffentlichte den Film im März 2018 international, wo er zu einem großen Erfolg wurde.
+
+Die Vermarktung setzte auf die Behauptung, der Film sei so beängstigend, dass viele ihn nicht zu Ende sähen. Kritiker widersprachen; Jordan Crucchiola etwa hielt einzelne Szenen für stark, die Zuspitzung insgesamt aber für Werbung.
+
+### Einordnung & Wirkung
+
+Bei Rotten Tomatoes steht der Film bei 86 Prozent.
+
+Die Urteile gingen auseinander: Ein Teil der Kritik hielt ihn für außerordentlich wirksam, ein anderer für psychologisch dünn und weniger erschreckend als vergleichbare Arbeiten.
+
+Bei den Goyas 2018 gewann der Film für Ton und Schnitt und war unter anderem als bester Film, für die Regie und für Sandra Escacena nominiert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:329440', locale: 'de-de',
+    text: `### Worum es geht
+
+Sara Price erfährt, dass ihre Zwillingsschwester Jess in Japan verschwunden ist — im Wald Aokigahara am Fuß des Fuji, einem Ort, an dem sich viele Menschen das Leben nehmen. Die Behörden gehen vom Schlimmsten aus. Sara nicht: Sie sagt, sie würde es spüren, wenn ihre Schwester tot wäre.
+
+Sie reist nach Japan, trifft dort den Journalisten Aiden und einen ortskundigen Führer und geht mit ihnen in den Wald. Was sie dort findet, lässt sich bald nicht mehr sicher von dem trennen, was sie zu sehen glaubt.
+
+### Entstehungsgeschichte
+
+Regie führte Jason Zada, das Drehbuch schrieben Ben Ketai, Sarah Cornwell und Nick Antosca. Es handelt sich um eine amerikanisch-britische Gemeinschaftsproduktion. Die Musik stammt von Bear McCreary.
+
+Natalie Dormer spielt beide Schwestern, Sara und Jess. Taylor Kinney spielt den Aiden; daneben sind Yukiyoshi Ozawa und Eoin Macken zu sehen.
+
+Produzent David S. Goyer kam auf die Idee, nachdem er Aokigahara selbst besucht hatte.
+
+### Hinter den Kulissen
+
+Gedreht werden konnte dort nicht: Wegen der Beschränkungen vor Ort entstanden die Waldaufnahmen im Wald von Tara in Serbien.
+
+Der Film läuft 94 Minuten und ist in Deutschland ab 16 Jahren freigegeben.
+
+Der Umgang mit dem Schauplatz war der Hauptkritikpunkt. Aokigahara ist ein realer Ort, an dem jährlich Menschen sterben; die Verwendung als Kulisse für Geistererscheinungen wurde vielfach als pietätlos empfunden. Der Film greift japanische Vorstellungen von Yūrei auf, ordnet sie aber einer westlichen Erzählung unter.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war deutlich negativ: 10 Prozent bei Rotten Tomatoes.
+
+Der Vorwurf zielte weniger auf die Ausgangslage als auf die Ausführung: Statt der Atmosphäre, die der Schauplatz hergibt, setze der Film auf plötzliche Schreckmomente mit untoten Gestalten.
+
+Natalie Dormers Doppelrolle wurde dabei überwiegend positiv hervorgehoben — sie trägt einen Film, dem seine Kritiker fast alles andere absprachen.` },
 ];
