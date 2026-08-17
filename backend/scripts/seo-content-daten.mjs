@@ -39431,4 +39431,295 @@ Bei den Golden Globes 2008 gab es fünf Nominierungen, darunter als bester Film,
 Die Kritik lobte Handwerk und Darstellerleistungen, äußerte aber deutliche Bedenken gegen die Darstellung. Ein Rezensent hielt fest, die Gegenwart der Vergangenheit sei zu mächtig, als dass man sie derart einfach zu den Akten legen könne. Ein anderer urteilte, das Satirische sei keineswegs die geeignete Form für diese Geschichte.
 
 Historiker bewerten den Film als faktisch ungenau. Er habe nur eine sporadische Verbindung zur historischen Realität und neige dazu, deren Bedeutung zu verzerren. Dieser Einwand wiegt bei einem Film schwer, der sich ausdrücklich auf ein Sachbuch stützt.` },
+  // ---- Block 083 ----
+  {
+    bereich: 'titel', schluessel: 'movie:10776', locale: 'de-de',
+    text: `### Worum es geht
+
+Seymour Krelborn arbeitet in einem Blumenladen, der vor dem Aus steht. Dann findet er eine Pflanze, wie es sie nicht geben dürfte — einen außerirdischen Organismus, der das Geschäft rettet.
+
+Der Haken ist ihre Nahrung. Die Pflanze wächst nur mit Blut, und ihr Bedarf steigt. Seymour beginnt, sie zu füttern, und muss dabei feststellen, womit er es tatsächlich zu tun hat.
+
+### Entstehungsgeschichte
+
+Regie führte Frank Oz. Das Drehbuch schrieben Howard Ashman und Charles B. Griffith.
+
+Rick Moranis spielt Seymour Krelborn, Ellen Greene die Audrey, Vincent Gardenia den Mr. Mushnik, Steve Martin den Dr. Orin Scrivello, John Candy den Wink Wilkinson und Bill Murray den Arthur Denton. Levi Stubbs spricht die Pflanze Audrey II.
+
+Produziert wurde der Film von David Geffen. Die Kamera führte Robert Paynter, den Schnitt besorgte John Jympson. Die Instrumentalmusik stammt von Miles Goodman, die Songs von Alan Menken; darunter „Downtown", „Somewhere That's Green", „Feed Me", „Dentist", „Suddenly, Seymour", „Suppertime" und „Mean Green Mother from Outer Space", das eigens für den Film geschrieben wurde.
+
+Der Film dauert 94 Minuten, der Director's Cut 120; die Freigabe lautet ab 12 Jahren.
+
+### Hinter den Kulissen
+
+Audrey II ist keine Computeranimation, sondern eine Puppe. Die Jim Henson Company war an der Konstruktion beteiligt, entworfen wurde die Pflanze von Martin P. Robinson, der aus der Sesamstraße kam. Bis zu drei Dutzend Puppenspieler waren zugleich im Einsatz.
+
+Daraus ergab sich eine Besonderheit der Aufnahmetechnik. Die Szenen mit der Pflanze wurden in verminderter Geschwindigkeit gedreht, damit Darsteller und Animateure gleichzeitig arbeiten konnten — im fertigen Film läuft das Material dann wieder normal.
+
+Die Besetzung der Nebenrollen fällt auf. Steve Martin, John Candy und Bill Murray übernahmen kurze Auftritte; Cinema hob Martins lustvoll überzogene Gastrolle besonders hervor.
+
+### Einordnung & Wirkung
+
+Der Film hat eine ungewöhnliche Schlussgeschichte. Ursprünglich folgte er dem Musical: Audrey stirbt, Seymour wird von der Pflanze verschlungen, riesige Ableger überziehen New York. Nach ablehnenden Reaktionen in Testvorführungen wurde dieses Ende durch ein versöhnliches ersetzt. Der 2012 erschienene Director's Cut enthält beide Fassungen.
+
+1987 gewann der Film den Saturn Award für die beste Musik. Nominiert war er zweimal für den Oscar — für die Effekte und für den besten Song —, fünfmal für den Saturn Award, einmal für den BAFTA und zweimal für den Golden Globe; hinzu kamen Nominierungen für den Hugo Award, den WGA Award und den Artios.
+
+Das Lexikon des internationalen Films nannte ihn recht schwungvoll inszeniert, am Ende aber zu sehr den Spezialeffekten verpflichtet. Cinema sprach von einer schrägen Musical-Verfilmung für Trash-Fans.
+
+Dass die Kritik den Effektaufwand bemängelte, ist bei einem Film bemerkenswert, dessen Hauptfigur eine handgeführte Puppe ist — der Aufwand war die Voraussetzung, nicht die Zutat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:246403', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Podcast-Moderator Wallace Bryton fliegt nach Kanada, um eine Geschichte zu recherchieren. Er trifft dort auf einen älteren Mann namens Howard Howe.
+
+Howe betäubt ihn. Als Wallace aufwacht, fehlt ihm ein Bein — und Howe erklärt ihm sein Vorhaben: Er will ihn in Folgeoperationen in ein Walross verwandeln. Wallace' Freunde Ally und Teddy und der Polizist Guy Lapointe versuchen, ihn zu finden.
+
+### Entstehungsgeschichte
+
+Kevin Smith führte Regie, schrieb das Drehbuch und übernahm den Schnitt.
+
+Die Idee geht auf eine Kleinanzeige zurück, die 2013 auf Gumtree kursierte: Gesucht wurde ein Untermieter, der bereit sei, sich als Walross zu verkleiden. Die Anzeige stellte sich später als Falschmeldung heraus.
+
+Michael Parks spielt Howard Howe, Justin Long den Wallace Bryton, Johnny Depp den Guy Lapointe, Haley Joel Osment den Teddy Craft, Génesis Rodríguez die Ally Leon und Ralph Garman einen Detective.
+
+Produziert wurde der Film von Sam Englebardt, David S. Greathouse, William D. Johnson und Shannon McIntosh. Die Kamera führte James Laxton, die Musik stammt von Christopher Drake.
+
+Gedreht wurde in Kanada, in Manitoba. Der Film dauert 102 Minuten und ist ab 16 Jahren freigegeben. Die Premiere lief beim Toronto International Film Festival, der Start folgte am 19. September 2014 über A24 Films.
+
+Es ist der erste Teil einer geplanten „True North Trilogy", deren Filme sämtlich in Kanada spielen; der zweite Teil „Yoga Hosers" erschien 2016.
+
+### Hinter den Kulissen
+
+Die Herkunft des Stoffs ist der interessanteste Befund. Eine Falschmeldung im Internet wurde zur Grundlage eines Spielfilms — und der Film behält von seiner Quelle die Logik des Absurden bei, führt sie aber ins Körperliche aus.
+
+Genau daran entscheidet sich die Aufnahme. Wer die Anlage als Groteske liest, sieht eine Horrorkomödie; wer sie beim Wort nimmt, sieht eine Folge von Verstümmelungen. Der Film selbst legt sich nicht fest.
+
+Dass Kevin Smith auch den Schnitt verantwortet, macht ihn zum alleinigen Urheber dieses Tonwechsels. Es gibt keine Instanz im Herstellungsprozess, die den Film in eine der beiden Richtungen gedrängt hätte.
+
+### Einordnung & Wirkung
+
+Die Reaktionen fielen weit auseinander. William Bibbiani kritisierte den mangelnden Humor. Glenn Dunks nannte den Film den schlechtesten des Jahres 2014. Erik Lundegaard gab null von vier Sternen und nannte ihn den widerlichsten und sinnlosesten Film, den er je gesehen habe.
+
+Kino.de führte ihn dagegen unter den besten Horrorkomödien.
+
+Diese Spannweite ist kein Zufall, sondern Folge der Anlage. Ein Film, der eine Internet-Falschmeldung ernst nimmt und in Körperhorror überführt, hat kein mittleres Urteil zu erwarten — er wird als Einfall gefeiert oder als Zumutung verworfen.
+
+Dass daraus eine Trilogie werden sollte, zeigt, wie ernst es dem Regisseur mit dieser Richtung war. Der zweite Teil erschien zwei Jahre später.` },
+  {
+    bereich: 'titel', schluessel: 'movie:250574', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Videofilmer Aaron nimmt einen Auftrag an, den er im Netz gefunden hat. Ein Mann namens Josef will für einen Tag gefilmt werden, in einer abgelegenen Hütte in Crestline, Kalifornien.
+
+Josef sagt, er habe einen nicht operablen Hirntumor und wolle ein Videotagebuch für sein ungeborenes Kind hinterlassen. Je länger der Tag dauert, desto weniger passt zusammen, was er erzählt — und desto schwerer wird es für Aaron, einfach zu gehen.
+
+### Entstehungsgeschichte
+
+Regie führte Patrick Brice; es war sein Spielfilmdebüt. Die Geschichte entwickelten Brice und Mark Duplass gemeinsam.
+
+Mark Duplass spielt Josef, Patrick Brice den Aaron; Katie Aselton ist als Stimme von Angela zu hören.
+
+Produziert wurde der Film von Blumhouse Productions und Duplass Brothers Productions. Gedreht wurde in Crestline, Kalifornien — in einer Berghütte und am Lake Gregory. Der Film dauert 78 Minuten.
+
+Brice und Duplass entwickelten die Geschichte während des Drehs weiter; sie entstand aus einer Reihe von Gesprächen zwischen beiden. Von jeder Szene wurden zehn bis zwölf Fassungen gedreht, dazu mehrere alternative Schlussvarianten. Als Anregungen nannten sie eigene Erfahrungen mit Craigslist sowie die Filme „My Dinner with Andre", „Misery" und „Eine verhängnisvolle Affäre". Der Arbeitstitel lautete zunächst „Peachfuzz", nach der Wolfsmaske im Film.
+
+Die Premiere lief am 8. März 2014 beim South by Southwest. In den USA erschien der Film am 23. Juni 2015 als Video on Demand, international am 14. Juli 2015 bei Netflix; die DVD folgte am 5. April 2016.
+
+### Hinter den Kulissen
+
+Zwei Personen, eine Hütte, 78 Minuten — die Anlage ist so knapp wie möglich. Die Spannung entsteht ausschließlich daraus, dass einer der beiden nicht der ist, für den er sich ausgibt, und der andere zu höflich ist, um zu gehen.
+
+Die Herstellungsweise passt dazu. Zehn bis zwölf Fassungen jeder Szene bedeuten, dass der Film nicht geschrieben, sondern gefunden wurde; die Darsteller sind zugleich die Autoren, und Brice spielt die Figur, die er selbst inszeniert.
+
+Das Found-Footage-Verfahren hat hier eine eigene Begründung. Aaron filmt, weil er dafür bezahlt wird — die Kamera ist kein Kunstgriff, sondern der Auftrag.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 91 Prozent Zustimmung aus (35 Kritiker) und beschreibt den Film als intelligenten, eigenartigen Found-Footage-Horrorfilm. Metacritic kommt auf 74 von 100 bei sechs Kritiken.
+
+The Hollywood Reporter und IndieWire urteilten positiv und nannten den Film verstörend; IndieWire beschrieb seine Eigenartigkeit als positiv seismisch. Variety lobte die langsam brennende Geschichte mit klugen Wendungen. Shock Till You Drop hielt ihn dagegen für selbstgefällig gegenüber Horrorkennern.
+
+Bemerkenswert ist der Weg zur Veröffentlichung. Zwischen der Festivalpremiere im März 2014 und der Auswertung im Juni 2015 lagen fünfzehn Monate — ein Film ohne Verleihstart, der sein Publikum über Video on Demand und Netflix fand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:188166', locale: 'de-de',
+    text: `### Worum es geht
+
+Dwight Evans lebt auf der Straße. Dann erfährt er, dass der Mann, der seine Eltern getötet hat, aus der Haft entlassen wird.
+
+Er entschließt sich zur Selbstjustiz und ersticht ihn. Was er damit auslöst, hat er nicht bedacht: eine Kette aus Gewalt und Gegengewalt, die er nicht mehr anhalten kann.
+
+### Entstehungsgeschichte
+
+Jeremy Saulnier führte Regie, schrieb das Drehbuch und führte selbst die Kamera — mit einer Canon EOS C300 Mark 1.
+
+Macon Blair spielt Dwight Evans, Devin Ratray den Ben Gaffney, Amy Hargreaves die Sam Evans, Kevin Kolack den Teddy Cleland und Eve Plumb die Kris Cleland.
+
+Die Musik stammt von Brooke und Will Blair. Gedreht wurde in Rehoboth Beach in Delaware und in Virginia, dazu in privaten Häusern — im Haus von Macon Blairs Cousin und im Haus von Saulniers Mutter.
+
+Das Budget betrug 420.000 Dollar, davon 38.000 aus einer Crowdfunding-Kampagne.
+
+### Hinter den Kulissen
+
+420.000 Dollar sind die Zahl, an der sich diese Produktion messen lässt. Der Regisseur führt zugleich die Kamera, gedreht wird in Häusern von Verwandten, ein Zehntel des Geldes kommt vom Publikum.
+
+Inhaltlich stellt der Film die Rachegeschichte auf den Kopf. Die Tat, auf die andere Filme hinarbeiten, findet früh statt — und was folgt, ist die Frage, was danach kommt. Dwight ist nicht ausgebildet, nicht vorbereitet und nicht kaltblütig; er hat etwas getan, das er nicht rückgängig machen kann.
+
+Daraus zieht der Film seine Härte. Jede weitere Handlung ist eine Reaktion, kein Plan. Das Lexikon des internationalen Films hebt genau diese Auseinandersetzung mit den Folgen von Rache hervor.
+
+### Einordnung & Wirkung
+
+In Cannes erhielt der Film den FIPRESCI-Preis der Quinzaine des Réalisateurs. 2015 war er für den John Cassavetes Award der Independent Spirit Awards nominiert — eine Kategorie für Filme mit besonders geringem Budget.
+
+Rotten Tomatoes weist 96 Prozent positive Bewertungen aus, Metacritic 77 von 100.
+
+Das Lexikon des internationalen Films lobte einen spannenden, atmosphärisch dichten Thriller mit einer klugen Auseinandersetzung über die Folgen von Rache.
+
+Für einen Film, der zu einem Teil über Crowdfunding entstand und in Privathäusern gedreht wurde, ist diese Aufnahme außergewöhnlich. Sie beruht nicht auf Mitteln, sondern auf einer Entscheidung: die Rachegeschichte nicht als Genusserzählung anzulegen, sondern als Schilderung dessen, was sie kostet.` },
+  {
+    bereich: 'titel', schluessel: 'series:2490', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Keller von Reynholm Industries in London sitzt die IT-Abteilung — drei Personen, weit weg von den oberen Etagen.
+
+Roy und Moss betreuen Kollegen, die von Technik nichts verstehen; Roy beantwortet Anrufe grundsätzlich mit der Frage, ob das Gerät schon aus- und wieder eingeschaltet wurde. Dritte im Bunde ist Jen Barber. Was die beiden Techniker eint, ist der Ärger darüber, dass ihre Arbeit niemand wahrnimmt.
+
+### Entstehungsgeschichte
+
+Geschrieben wurde die Serie von Graham Linehan, produziert von Ash Atalla für Channel 4 und Talkback Thames. Die Musik stammt von Neil Hannon.
+
+Chris O'Dowd spielt Roy Trenneman, Richard Ayoade den Maurice Moss, Katherine Parkinson die Jen Barber, Chris Morris den Denholm Reynholm, Matt Berry den Douglas Reynholm und Noel Fielding den Richmond Avenal.
+
+Es entstanden vier Staffeln mit je sechs Folgen — insgesamt 24 Episoden von rund 23 Minuten, dazu eine Sonderfolge.
+
+Im Vereinigten Königreich lief die Serie vom 3. Februar 2006 bis zum 30. Juli 2010 bei Channel 4; die Sonderfolge folgte am 27. September 2013. In Deutschland zeigte Comedy Central die ersten drei Staffeln vom 20. September 2009 bis zum 24. Januar 2010, die vierte ab dem 7. Januar 2011.
+
+### Hinter den Kulissen
+
+Der Keller ist die eigentliche Setzung. Die IT-Abteilung ist räumlich vom Rest der Firma getrennt — was oben geschieht, erreicht sie nur als Anruf oder als Anordnung. Daraus ergibt sich die Grundkonstellation: eine Serie über Menschen, die gebraucht, aber nicht gesehen werden.
+
+Die Firmenspitze liefert dazu den Gegenpol. Mit Denholm und Douglas Reynholm stehen zwei Chefs über der Abteilung, die von deren Arbeit nichts wissen — die Serie hat ihren Konflikt damit fest im Aufbau des Unternehmens verankert.
+
+Sechs Folgen pro Staffel sind das klassische britische Format. Es zwingt zur Verdichtung: Jede Folge trägt eine eigene Konstruktion, es gibt keine Füllfolgen und keine über Wochen gestreckten Handlungsbögen.
+
+### Einordnung & Wirkung
+
+2008 erhielt die Serie die Goldene Rose in der Kategorie Sitcom und einen International Emmy für Comedy. 2009 folgten der BAFTA Award als beste Situation Comedy und ein British Comedy Award für Katherine Parkinson.
+
+Die IMDb-Bewertung liegt bei 8,6 von 10. Die letzte reguläre Folge erreichte 2,17 Millionen Zuschauer in Großbritannien.
+
+Bemerkenswert ist der zeitliche Verlauf. Zwischen der ersten Folge 2006 und der Sonderfolge 2013 liegen sieben Jahre für 25 Episoden — die Serie war nie auf Menge angelegt.
+
+Der Anruf mit der Frage nach Aus- und Einschalten ist über die Serie hinaus bekannt geworden. Für eine Sitcom über einen Berufsstand ist das die höchste Form der Anerkennung: Ein Satz aus der Serie beschreibt seither die Arbeitsrealität derer, über die sie handelt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9722', locale: 'de-de',
+    text: `### Worum es geht
+
+Jack Wyatt ist ein von sich eingenommener Schauspieler und wird für eine Neuauflage der Fernsehserie „Bewitched" besetzt. Er besteht darauf, dass die Rolle der Samantha mit einer Unbekannten besetzt wird.
+
+Er findet Isabel — und ahnt nicht, dass sie tatsächlich eine Hexe ist, die eigentlich ein gewöhnliches Leben führen möchte. Aus Manipulation wird eine Beziehung, die durch Zauberei nicht einfacher wird.
+
+### Entstehungsgeschichte
+
+Vorlage ist die Fernsehserie „Bewitched" von Sol Saks.
+
+Nora Ephron führte Regie und schrieb das Drehbuch gemeinsam mit ihrer Schwester Delia Ephron. Die Entwicklung des Projekts zog sich über rund zehn Jahre mit wechselnden Regisseuren und Autoren hin; Nora Ephron kam 2003 dazu.
+
+Nicole Kidman spielt Isabel Bigelow, die als Samantha Stephens auftritt, Will Ferrell den Jack Wyatt in der Rolle des Darrin Stephens, Shirley MacLaine die Iris Smythson als Endora, Michael Caine den Nigel Bigelow, Steve Carell den Uncle Arthur und Kristin Chenoweth die Maria Kelly — ihr Filmdebüt.
+
+Die Kamera führte John Lindley, die Musik stammt von George Fenton. Gedreht wurde von Ende 2004 bis Anfang 2005. Das Budget betrug 85 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Konstruktion ist doppelt gelagert. Der Film verfilmt nicht die Serie, sondern erzählt von der Neuverfilmung der Serie — und besetzt die Rolle der Hexe mit einer echten Hexe.
+
+Dieser Kunstgriff löst ein Problem und schafft ein neues. Er erlaubt es, die Vorlage zu zitieren, ohne sie nachzuspielen; zugleich muss der Film zwei Ebenen zugleich tragen, die Fernsehproduktion und die Beziehung dahinter.
+
+Zehn Jahre Entwicklung mit wechselnden Beteiligten sind der zweite auffällige Punkt. Ein Stoff, an dem so lange gearbeitet wird, trägt die Spuren mehrerer Ansätze — was die Kritik später als fehlende Richtung beschrieb.
+
+### Einordnung & Wirkung
+
+Bei 85 Millionen Dollar Herstellungskosten spielte der Film weltweit 131,4 Millionen ein — 63,3 Millionen in den USA, 68,1 Millionen international. Trotz dieser Zahlen gilt er als Misserfolg.
+
+Rotten Tomatoes weist 23 Prozent positive Bewertungen aus; das Urteil dort lautet, der Film werde von verstreuten Lachern und einem Mangel an Richtung heimgesucht. Metacritic kommt auf 34 von 100. Die New York Times nannte ihn eine uneingeschränkte Katastrophe. Beim Publikum ergab CinemaScore ein „C+".
+
+Bei den Goldenen Himbeeren gewann der Film in der Kategorie schlechteste Leinwandpaarung für Nicole Kidman und Will Ferrell; weitere Nominierungen kamen hinzu.
+
+Bemerkenswert ist, dass fast alle Urteile dieselbe Ursache benennen: nicht die Besetzung, sondern die Anlage. Ein Film über eine Neuverfilmung, der zugleich eine Neuverfilmung ist, muss sich entscheiden, welche der beiden Geschichten er erzählt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9726', locale: 'de-de',
+    text: `### Worum es geht
+
+Max Skinner arbeitet als Börsenmakler in London und ist erfolgreich darin. Dann erbt er das Weingut La Siroque in der Provence von seinem verstorbenen Onkel Henry.
+
+Er will schnell verkaufen. Doch vor Ort holen ihn Erinnerungen an die Sommer seiner Kindheit ein, er lernt die Restaurantbesitzerin Fanny Chenal kennen — und dann taucht Christie Roberts auf, die behauptet, Henrys uneheliche Tochter zu sein.
+
+### Entstehungsgeschichte
+
+Vorlage ist Peter Mayles Roman „Ein guter Jahrgang".
+
+Regie führte Ridley Scott, das Drehbuch schrieb Marc Klein.
+
+Russell Crowe spielt Max Skinner, Albert Finney den Onkel Henry, Marion Cotillard die Fanny Chenal, Freddie Highmore den jungen Max, Abbie Cornish die Christie Roberts, Tom Hollander den Charlie Willis und Archie Panjabi die Gemma.
+
+Produziert wurde der Film von Lisa Ellzey, Branko Lustig, Julie Payne und Ridley Scott. Die Musik stammt von Marc Streitenfeld, die Kamera von Philippe Le Sourd, den Schnitt besorgte Dody Dorn.
+
+Gedreht wurde in London und in der Provence — in Gordes, Bonnieux und Cucuron. Das Weingut „Chateau La Siroque" entstand auf dem Chateau la Canorgue, Duflots Bauernhaus auf dem Chateau Les Eydins.
+
+Der Film dauert 118 Minuten und ist ohne Altersbeschränkung freigegeben. Die Weltpremiere lief am 9. September 2006 beim Toronto Film Festival, der britische Start folgte am 27. Oktober, der deutsche am 9. November 2006 mit über 100.000 Besuchern am Startwochenende.
+
+### Hinter den Kulissen
+
+Die Wahl des Regisseurs ist der ungewöhnlichste Punkt. Ridley Scott, dessen Name mit ganz anderen Stoffen verbunden ist, dreht hier eine romantische Komödie in der Provence — und produziert sie zugleich mit.
+
+Die Drehorte sind der eigentliche Aufwand. Zwei reale Weingüter dienten als Schauplätze; die Landschaft ist nicht Kulisse, sondern das Angebot, das der Hauptfigur gemacht wird.
+
+Erzählerisch ist die Anlage klar: Ein Mann, dessen Leben aus Zahlen besteht, erbt etwas, das sich nicht in Zahlen ausdrücken lässt. Die Nebenhandlung um Christie Roberts stellt zusätzlich die Frage, wem das Erbe zusteht.
+
+### Einordnung & Wirkung
+
+Kirk Honeycutt fand den Film im Hollywood Reporter unbeholfen, kritisierte ruckartige Schnitte und nannte Crowes Figurenzeichnung konfus.
+
+Cinema beschrieb ihn dagegen als herzhaft und sanft — als Mittel gegen Herbstdepressionen. Das epd film urteilte, Ridley Scott versuche sich im Genre der romantischen Komödie, verfahre sich dabei aber in Klischeelandschaften.
+
+Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Der Einwand mit den Klischeelandschaften trifft eine Schwierigkeit, die dem Stoff eingeschrieben ist. Ein Film, der die Provence als Gegenentwurf zur Londoner City aufbaut, muss sie idealisieren — sonst funktioniert die Entscheidung der Hauptfigur nicht. Über 100.000 Besucher am deutschen Startwochenende zeigen, dass genau das für einen Teil des Publikums der Reiz war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10294', locale: 'de-de',
+    text: `### Worum es geht
+
+David und Amy Fox sind mit dem Auto unterwegs, als sie liegenbleiben. Sie nehmen ein Zimmer in einem abgelegenen Motel.
+
+Auf dem Zimmer finden sie Videokassetten. Was darauf zu sehen ist, wurde in genau diesem Raum aufgenommen: frühere Gäste, gequält und getötet. Dann bemerken sie die Kameras.
+
+### Entstehungsgeschichte
+
+Regie führte Nimród Antal, das Drehbuch schrieb Mark L. Smith.
+
+Kate Beckinsale spielt Amy Fox, Luke Wilson den David Fox, Frank Whaley den Motelmanager Mason und Ethan Embry den Mechaniker.
+
+Produziert wurde der Film von Hal Lieberman für Screen Gems. Die Produktion wurde im März 2005 angekündigt; ursprünglich war Sarah Jessica Parker für die Hauptrolle vorgesehen, bevor Kate Beckinsale 2006 verpflichtet wurde.
+
+Die Kamera führte Andrzej Sekuła, den Schnitt besorgte Armen Minasian, die Musik stammt von Paul Haslinger. Das Budget betrug 19 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Entdeckung der Kassetten ist der Angelpunkt. Bis dahin ist der Film ein Ehedrama in einem schäbigen Zimmer; danach wissen die Figuren, was ihnen bevorsteht — und das Publikum weiß es mit ihnen.
+
+Daraus ergibt sich eine ungewöhnliche Form von Spannung. Der Film verschweigt seine Bedrohung nicht, sondern zeigt sie vorab als Aufzeichnung. Was folgt, ist keine Aufklärung, sondern ein Wettlauf gegen ein Verfahren, das bereits funktioniert hat.
+
+Der Schauplatz erledigt den Rest. Ein Motel an einer leeren Straße, ein Zimmer mit versteckten Kameras, keine Hilfe in Reichweite — die Anordnung braucht keine übernatürliche Erklärung.
+
+Bemerkenswert ist die Besetzungsgeschichte. Ursprünglich war Sarah Jessica Parker für die weibliche Hauptrolle vorgesehen; zwischen Ankündigung im März 2005 und Beckinsales Verpflichtung 2006 lag ein Jahr, in dem das Projekt umgebaut wurde.
+
+### Einordnung & Wirkung
+
+Bei 19 Millionen Dollar Herstellungskosten spielte der Film weltweit 35,4 Millionen ein.
+
+Rotten Tomatoes weist 55 Prozent positive Bewertungen aus, Metacritic 54 von 100.
+
+Gelobt wurden die psychologischen Schreckelemente; kritisiert wurden die dünne Figurenzeichnung und das abrupte Ende.
+
+Diese beiden Einwände hängen zusammen. Ein Film, der auf 19 Millionen Dollar und einen einzigen Schauplatz setzt, hat wenig Raum für Vorgeschichte — und muss zum Schluss kommen, sobald die Anordnung ausgereizt ist. Was als Schwäche gelesen wird, ist zugleich die Bedingung, unter der die erste Hälfte so gut funktioniert.` },
 ];
