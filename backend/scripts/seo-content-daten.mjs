@@ -35457,4 +35457,823 @@ Der Film wurde 2001 für den Oscar für das beste Make-up nominiert und erhielt 
 In der New York Post verglich Brad Hamilton den Film mit „Das Schweigen der Lämmer".
 
 Dieser Vergleich trifft allerdings nur die eine Hälfte. Die Ermittlungshandlung folgt bekannten Bahnen; was den Film davon abhebt, ist der Teil, für den er ausgezeichnet wurde. Die Preise und Nominierungen verteilen sich fast ausschließlich auf das Sichtbare — Make-up, Kostüm, Bildwelt —, nicht auf das Erzählte. Für einen Thriller ist das eine ungewöhnliche Bilanz, und sie beschreibt den Film genauer als jede Genrezuordnung.` },
+  // ---- Block 069 ----
+  {
+    bereich: 'titel', schluessel: 'movie:1407', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film erzählt Schlüsselereignisse aus dem Leben von Édith Piaf, und zwar nicht der Reihe nach. Er beginnt mit einer chaotischen Kindheit in der Normandie.
+
+Von dort führt er über die Begegnung mit dem Nachtclubbesitzer Louis Leplée zur Sängerin, die sie wird. Erzählt werden auch ihre Beziehung zum Boxer Marcel Cerdan, ihre Drogenabhängigkeit, ihre Arthritis und ihre Krebserkrankung. Am Ende steht ihr Auftritt mit „Non, je ne regrette rien".
+
+### Entstehungsgeschichte
+
+Olivier Dahan kam am 22. Januar 2004 auf die Idee, als er in einer Buchhandlung Fotografien von Piaf sah. Das Drehbuch schrieb er gemeinsam mit Isabelle Sobelman; die Arbeit daran dauerte ein Jahr.
+
+Marion Cotillard spielt Édith Piaf. Dahan besetzte sie, bevor er sie persönlich traf — er erkannte eine Ähnlichkeit zwischen Piafs und Cotillards Augen. Ursprünglich war Audrey Tautou im Gespräch. Die französische Verleihgruppe TF1 kürzte das Budget um fünf Millionen Dollar, weil sie Cotillard nicht für zugkräftig hielt.
+
+Sylvie Testud spielt Simone „Mômone" Berteaut, Gérard Depardieu den Louis Leplée, Jean-Pierre Martins den Marcel Cerdan, Pascal Greggory den Louis Barrier und Emmanuelle Seigner die Titine.
+
+Die Kamera führte Tetsuo Nagata, den Schnitt besorgte Richard Marizy, die Musik stammt von Christopher Gunning. Gedreht wurde vom 16. Januar bis April 2006 in Paris, Los Angeles und Prag. Das Budget betrug 25 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Umgang mit dem Gesang ist die heikelste Entscheidung des Films. Cotillard singt „Frou-Frou" selbst; daneben stehen Originalaufnahmen Piafs, und die Sängerin Jil Aigrot übernimmt mehrere Titel, darunter „Mon Homme", „Les Mômes de la Cloche" sowie Teile von „L'Accordéoniste" und „Padam, padam…".
+
+Die nicht-lineare Anlage folgt keiner Chronologie, sondern springt zwischen Lebensabschnitten. Das entlastet den Film von der Pflicht, eine Karriere zu erklären — und erlaubt ihm, Kindheit und Sterben unmittelbar nebeneinanderzustellen.
+
+Bemerkenswert bleibt die Budgetkürzung. TF1 hielt die Hauptdarstellerin für kein Zugpferd und strich fünf Millionen Dollar. Wie diese Einschätzung ausging, lässt sich an den Auszeichnungen ablesen.
+
+### Einordnung & Wirkung
+
+Bei 25 Millionen Dollar Herstellungskosten spielte der Film weltweit 87,4 Millionen ein. In Frankreich wurden über 5,2 Millionen Karten verkauft, europaweit 7,9 Millionen, in den USA 1,1 Millionen. Damit war er der erfolgreichste französische Kinofilm des Jahres 2007.
+
+Marion Cotillard erhielt den Oscar als beste Hauptdarstellerin; ein zweiter Oscar ging an die Maske. Bei den BAFTA-Awards kamen Auszeichnungen für Hauptdarstellerin, Kostüm, Maske und Musik hinzu, beim César für Hauptdarstellerin, Kamera, Kostüm, Szenenbild und Ton, dazu der Golden Globe als beste Hauptdarstellerin in einem Musical oder einer Komödie.
+
+Rotten Tomatoes weist 74 Prozent aus (154 Kritiken, 6,90 von 10), Metacritic 66 von 100. Der Konsens hebt Cotillards Leistung als größte Errungenschaft des Films hervor.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1985', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Diplomat trauert am Turkana-See in Kenia um seine ermordete Frau.
+
+Als er ihrem Tod nachgeht, stößt er auf ein Komplott. Ein großer Pharmahersteller erprobt ein Tuberkulose-Medikament namens Dypraxa an ahnungslosen afrikanischen Patienten; zahlreiche sind daran gestorben. Seine Frau war Aktivistin und hatte genau das dokumentieren wollen.
+
+### Entstehungsgeschichte
+
+Vorlage ist John le Carrés Roman von 2001.
+
+Regie führte Fernando Meirelles, das Drehbuch schrieb Jeffrey Caine.
+
+Ralph Fiennes spielt Justin Quayle, Rachel Weisz die Tessa Abbott Quayle, Hubert Koundé den Arnold Bluhm, Danny Huston den Sandy Woodrow und Bill Nighy den Sir Bernard Pellegrin.
+
+Produziert wurde der Film von Simon Channing-Williams. Die Kamera führte César Charlone, den Schnitt besorgte Claire Simpson, die Musik stammt von Alberto Iglesias.
+
+Es handelt sich um eine britisch-deutsche Produktion von 129 Minuten Länge, gesprochen wird Englisch, Swahili und Deutsch. Gedreht wurde in Berlin — im Hauptbahnhof, in der Akademie der Künste und im Filmstudio Babelsberg —, in London in der Tate Modern und in der St. Mary Magdalene Church sowie in Kenia: in den Slums von Nairobi, am Magadisee, in Lokichoggio und in der Region um den Turkana-See. Das Budget betrug rund 25 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Drehorte sind Teil der Aussage. Ein Film über die Erprobung eines Medikaments an afrikanischen Patienten entsteht nicht im Studio, sondern in den Slums von Nairobi und in der Region, in der er spielt. Nur die europäischen Verwaltungsräume — Berlin, London — kommen als Gegenbild hinzu.
+
+Die Erzählform kehrt die übliche Reihenfolge um. Der Film beginnt mit dem Tod und arbeitet sich rückwärts zu dem vor, was ihn verursacht hat. Justin Quayle erfährt erst nach dem Verlust, woran seine Frau gearbeitet hat — die Ermittlung ist zugleich das nachträgliche Kennenlernen.
+
+Daraus folgt die Rollenverteilung. Tessa treibt die Handlung an, obwohl sie zu Beginn bereits tot ist; Justin, der Diplomat, wird zu der Figur, die ihre Arbeit fortsetzt. Ihre Recherche wird posthum zu seiner.
+
+### Einordnung & Wirkung
+
+Bei rund 25 Millionen Dollar Herstellungskosten spielte der Film weltweit 82,5 Millionen ein, davon 33,6 Millionen in den USA. Das Startwochenende in den USA brachte 8,7 Millionen und Platz drei. Der deutsche Start war der 12. Januar 2006.
+
+Rachel Weisz erhielt 2006 den Oscar, den Golden Globe und den Preis der Screen Actors Guild als beste Nebendarstellerin. Claire Simpson gewann den BAFTA für den besten Schnitt. Bei den British Independent Film Awards 2005 wurde der Film als bester britischer Independentfilm ausgezeichnet, Ralph Fiennes als bester Hauptdarsteller und Rachel Weisz als beste Hauptdarstellerin. Bei den Satellite Awards 2005 gewannen Danny Huston als bester Nebendarsteller und die Kamera.
+
+Kritiker nannten die Inszenierung eine der provokativsten und besten Produktionen des Kinojahres 2005. Das Lexikon des internationalen Films beschrieb den Film als eindrucksvolle Mischung aus Melodram, Thriller und Politdrama.` },
+  {
+    bereich: 'titel', schluessel: 'movie:284427', locale: 'de-de',
+    text: `### Worum es geht
+
+Benjamin Engel ist ein zurückgezogener Hacker, der unter dem Namen WhoAmI auftritt. Er stellt sich der Polizei und erzählt der Europol-Ermittlerin Hanne Lindberg seine Geschichte.
+
+Während des Sozialdienstes lernt er Max kennen; mit ihm, Stephan und Paul gründet er das Kollektiv CLAY. Die Gruppe führt immer aufwendigere Angriffe aus — gegen eine rechtsextreme Partei, gegen Pharmaunternehmen —, weil sie die Anerkennung des legendären Hackers MRX sucht. Nach einem Angriff auf den Bundesnachrichtendienst gerät die Sache außer Kontrolle: Vertrauliche Daten gelangen an MRX, der sie an eine russische Gruppe weiterverkauft. Ein Mensch stirbt.
+
+### Entstehungsgeschichte
+
+Regie führte Baran bo Odar, das Drehbuch schrieb er gemeinsam mit Jantje Friese.
+
+Tom Schilling spielt Benjamin Engel, Elyas M'Barek den Max, Wotan Wilke Möhring den Stephan, Antoine Monot Jr. den Paul, Hannah Herzsprung die Marie, Trine Dyrholm die Ermittlerin Hanne Lindberg und Leonard Carow den MRX.
+
+Produziert wurde der Film von Quirin Berg und Max Wiedemann. Die Kamera führte Nikolaus Summerer, den Schnitt besorgte Robert Rzesacz, die Musik stammt von Michael Kamm und Jaro Messerschmidt.
+
+Gedreht wurde von Oktober bis Dezember 2013 in Berlin und Rostock. Der Film ist eine deutsche Produktion von 105 Minuten Länge; die FSK gab ihn ab 12 Jahren frei, in Österreich lautet die Freigabe JMK 14. Der Kinostart war der 25. September 2014, DVD und Blu-ray erschienen am 16. April 2015.
+
+### Hinter den Kulissen
+
+Die Rahmenerzählung ist der Kern der Konstruktion. Benjamin berichtet einer Ermittlerin, was geschehen ist — alles, was der Film zeigt, ist damit seine Darstellung. Wie verlässlich sie ist, bleibt lange die eigentliche Frage.
+
+Die Motivation der Gruppe ist bemerkenswert unpolitisch gefasst. CLAY greift zwar eine rechtsextreme Partei und Pharmaunternehmen an, aber der Antrieb ist Anerkennung: MRX soll sie wahrnehmen. Der Film erzählt damit weniger von Überzeugung als von Geltungsdrang — und lässt die Folgen umso härter ausfallen.
+
+Für das Genre war das ein Sonderfall. Mit dem ersten Platz in den deutschen Kinocharts gelang dem Film etwas, das seit den Schimanski-Krimis der achtziger Jahre keinem deutschen Thriller mehr geglückt war.
+
+### Einordnung & Wirkung
+
+Über 800.000 Zuschauer sahen den Film in Deutschland, rund 100.000 in Russland.
+
+Spiegel Online urteilte: „Schnell, smart, witzig. Tom Schilling und Elyas M'Barek in Bestform." Filmstarts.de nannte ihn trotz einiger Schwächen einen vor allem in der zweiten Hälfte durchaus sehenswerten, wendungsreichen Thriller. Die IMDb-Bewertung liegt bei 7,5 von 10.
+
+Baran bo Odar erhielt 2014 den Bayerischen Filmpreis für die beste Regie. Beim Deutschen Filmpreis 2015 wurden Robert Rzesacz für den Schnitt, Silke Buhr für das Szenenbild und vier Beteiligte für den Ton ausgezeichnet; nominiert war der Film zudem als bester Spielfilm sowie für Drehbuch und Kamera. Hinzu kamen der Bambi 2015 in der Kategorie Nationaler Film, der Deutsche Kamerapreis 2015 für Nikolaus Summerer und der Publikumspreis für den besten ausländischen Film beim Newport Beach Film Festival 2015.` },
+  {
+    bereich: 'titel', schluessel: 'movie:37786', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film beginnt mit einer Rückblende in die achtziger Jahre: wie Carrie in New York ihre Freundinnen kennenlernte. Dann springt er zwei Jahre hinter den ersten Film.
+
+Stanford und Anthony heiraten in Connecticut, Liza Minnelli traut sie. Jede der vier Frauen hat ihr eigenes Problem: Samantha kämpft mit den Wechseljahren, Charlotte sorgt sich um ihr Kindermädchen Erin, Miranda erlebt Schikanen am Arbeitsplatz, und Carrie kommt damit nicht zurecht, dass Mr. Big lieber fernsieht als auszugehen. Als Samantha von einem arabischen Scheich den Auftrag bekommt, die Pressearbeit für sein Hotel in Abu Dhabi zu übernehmen, lädt sie die drei anderen ein.
+
+### Entstehungsgeschichte
+
+Regie führte Michael Patrick King, das Drehbuch schrieb er gemeinsam mit Darren Star.
+
+Sarah Jessica Parker spielt Carrie, Kim Cattrall die Samantha Jones, Cynthia Nixon die Miranda Hobbes und Kristin Davis die Charlotte York Goldenblatt. Chris Noth spielt Mr. Big, John Corbett den Aidan Shaw, David Eigenberg den Steve Brady und Jason Lewis den Smith Jerrod. Liza Minnelli und Miley Cyrus treten als sie selbst auf, Penélope Cruz spielt die Carmen.
+
+Produziert wurde der Film von Eric M. Cyphers, Michael Patrick King, John P. Melfi, Sarah Jessica Parker und Darren Star. Die Musik stammt von Aaron Zigman, die Kamera von John Thomas, den Schnitt besorgte Michael Berenbaum.
+
+Der Film dauert 146 Minuten und ist ab 12 Jahren freigegeben. Das Budget betrug rund 100 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Drehorte sind der interessanteste Punkt der Produktion. Die Abu-Dhabi-Handlung sollte ursprünglich in Dubai entstehen. Nachdem die Genehmigung verweigert wurde, wich die Produktion nach Marokko aus — der Schauplatz im Film und der Ort der Aufnahmen fallen also auseinander.
+
+Genau an diesem Handlungsstrang setzte die schärfste Kritik an. Der Film lässt seine vier Hauptfiguren nach Samanthas Festnahme wegen Erregung öffentlichen Ärgernisses in traditioneller islamischer Kleidung aus dem Land fliehen. Spiegel Online hielt dazu fest: „die dämliche Islam-Schelte steht dem Film leider gar nicht." Dass ein Film, dem die Dreherlaubnis in der Region verwehrt wurde, diese Region anschließend so darstellt, ist kein Nebenbefund.
+
+Auffällig ist auch die Länge. 146 Minuten sind für eine Komödie viel — der Film verteilt seine Zeit auf vier gleichrangige Handlungsstränge und eine Reise, die erst nach einer Stunde beginnt.
+
+### Einordnung & Wirkung
+
+Bei rund 100 Millionen Dollar Herstellungskosten spielte der Film bis September 2010 weltweit 290 Millionen ein. Das US-Startwochenende brachte etwa 37 Millionen, in Deutschland kamen am ersten Wochenende rund 800.000 Zuschauer.
+
+Bei den Goldenen Himbeeren 2011 gab es drei Auszeichnungen: schlechtestes Leinwandensemble, schlechteste Schauspielerin für Parker, Cattrall, Davis und Nixon gemeinsam sowie schlechteste Fortsetzung. Nominiert war der Film zudem für das schlechteste Drehbuch und Liza Minnelli als schlechteste Nebendarstellerin. Die Deutsche Film- und Medienbewertung vergab dagegen das Prädikat „wertvoll".
+
+Das Lexikon des internationalen Films fand den Film unterhaltsam durch sympathische Figuren und schlagfertig-witzige Dialoge, bemängelte aber die Nichtigkeit der Handlung. Cinema lobte ausgelassenen Hochglanzspaß. Critic.de nannte ihn eine visualisierte Champagnerlaune von irisierender Oberflächlichkeit und kritisierte das Frauenbild.` },
+  {
+    bereich: 'titel', schluessel: 'movie:760883', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Junge Elias erzählt einer Psychologin von einem Flug nach New York, den er mit seiner Mutter Nadja angetreten hat.
+
+Unterwegs übernehmen Terroristen die Maschine. Nadja wird angeschossen — und wacht wieder auf. Sie ist eine Vampirin und hat versucht, ihre Natur zu verbergen. In einem Flugzeug über dem Atlantik lässt sich das nicht länger tun.
+
+### Entstehungsgeschichte
+
+Regie führte Peter Thorwarth, das Drehbuch schrieb er gemeinsam mit Stefan Holtz.
+
+Peri Baumeister spielt Nadja, Carl Anton Koch den Elias, Alexander Scheer den Eightball, Dominic Purcell den Berg und Graham McTavish den Col. Alan Drummond.
+
+Produziert wurde der Film von Christian Becker und Benjamin Munz. Die Kamera führte Yoshi Heimrath, den Schnitt besorgte Knut Hake, die Musik stammt von Dascha Dauenhauer.
+
+Es handelt sich um eine deutsche Produktion von 123 Minuten Länge; gesprochen wird Deutsch, Englisch und Arabisch, die Freigabe lautet ab 16 Jahren. Gedreht wurde vom 3. März bis zum 17. September 2020 in Prag, Poprad, Brünn, Leipzig, Köln und Düsseldorf.
+
+Die Premiere fand am 8. Juli 2021 beim Filmfest München statt, am 23. Juli 2021 folgte der Start bei Netflix.
+
+### Hinter den Kulissen
+
+Die Verbindung zweier Genres ist die Grundidee. Ein Flugzeugentführungsthriller und ein Vampirfilm teilen sich denselben Schauplatz — und der Schauplatz erledigt für beide dieselbe Arbeit: Niemand kann weg.
+
+Daraus folgt eine ungewöhnliche Sympathieverteilung. Die Bedrohung an Bord geht zunächst von den Entführern aus; die Frau, die sich gegen sie stellt, ist selbst das, wovor man sich in einem Vampirfilm fürchten würde. Der Film spielt diese Doppelung aus, statt sie aufzulösen.
+
+Die Erzählung aus Elias' Perspektive ordnet das Ganze noch einmal um. Was zu sehen ist, ist der Bericht eines Kindes über seine Mutter — nicht die Chronik eines Vorfalls. Die deutsche Produktion mit internationaler Besetzung und drei Sprachen an Bord passt zu diesem Zuschnitt.
+
+### Einordnung & Wirkung
+
+In den ersten drei Wochen nach dem Netflix-Start sahen den Film weltweit über 50 Millionen Zuschauer.
+
+Rotten Tomatoes weist 81 Prozent positive Bewertungen aus, bei einem Schnitt von 6,5 von 10. Hervorgehoben wurden überraschende Wendungen; bemängelt wurden teilweise Logiklücken und oberflächlich angelegte Figuren.
+
+Dass ein deutscher Genrefilm diese Reichweite erzielt, hängt am Vertriebsweg. Der Start lief nicht über die Kinoauswertung, sondern direkt über eine internationale Plattform — die Premiere beim Filmfest München zwei Wochen zuvor blieb ein Einzeltermin. Für eine Produktion mit Drehorten in sechs Städten und einem Dreh, der sich über mehr als sechs Monate zog, ist das eine Rechnung, die im klassischen Verleihmodell so nicht aufgegangen wäre.` },
+  {
+    bereich: 'titel', schluessel: 'movie:396806', locale: 'de-de',
+    text: `### Worum es geht
+
+In einer Zukunft ohne Anonymität tragen alle Menschen Augenimplantate, die alles aufzeichnen, was sie sehen.
+
+Detective Sal Friedland begegnet einer Frau, die im System nicht existiert. In mehreren Mordfällen sind die Aufzeichnungen der Opfer manipuliert worden. Sal erkennt, dass diese Frau — „Anon" — in der Lage ist, das Aufzeichnungssystem zu hacken. Bei einem verdeckten Einsatz kommt er ihr näher, als der Ermittlung guttut.
+
+### Entstehungsgeschichte
+
+Andrew Niccol führte Regie und schrieb das Drehbuch.
+
+Clive Owen spielt Detective Sal Friedland, Amanda Seyfried die Frau, die als Anon auftritt, Colm Feore den Detective Charles Gattis und Mark O'Brien den Cyrus Frear. In Nebenrollen sind Sonya Walger, Joe Pingue und Iddo Goldberg zu sehen.
+
+Produziert wurde der Film von Oda Schaefer, Oliver Simon, Daniel Baur und Andrew Niccol. Die Kamera führte Amir Mokri, den Schnitt besorgte Álex Rodríguez, die Musik stammt von Christophe Beck.
+
+Gedreht wurde ab September 2016 in New York City und in Toronto, unter anderem an der University of Toronto Scarborough. Der Film dauert 100 Minuten.
+
+In den USA und Kanada startete er am 4. Mai 2018 bei Netflix, in Großbritannien und Irland am 11. Mai 2018 über Altitude und Sky Cinema. In Deutschland erschien er am 25. Oktober 2018 bei Koch Films auf DVD und Blu-ray. An den Kinokassen kamen 1,2 Millionen Dollar zusammen.
+
+### Hinter den Kulissen
+
+Die Prämisse dreht den üblichen Kriminalfilm um. Wo sonst Spuren fehlen, gibt es hier eine lückenlose Aufzeichnung von allem — und der Ermittler sieht buchstäblich durch die Augen anderer. Ein Verbrechen ist unter diesen Bedingungen nur möglich, wenn jemand die Aufzeichnung selbst angreift.
+
+Damit verschiebt sich, was ein Verdächtiger überhaupt ist. Anon fällt nicht durch eine Tat auf, sondern durch eine Abwesenheit: Sie existiert im System nicht. Die Ermittlung richtet sich gegen eine Leerstelle.
+
+Andrew Niccol, der Regie führt und das Drehbuch geschrieben hat, verantwortet damit beide Ebenen — die technische Setzung und die Kriminalhandlung, die daraus folgt. Dass der Film die erste Ebene deutlich sorgfältiger ausarbeitet als die zweite, ist der wiederkehrende Einwand der Besprechungen.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 36 Prozent aus, bei einem Schnitt von 5,2 von 10; Metacritic kommt auf 54 von 100 und damit auf gemischte Bewertungen.
+
+Bemängelt wurde vor allem, dem Film fehle es an Tiefe und an Spannung. Die Kritik richtet sich also nicht gegen die Ausgangsidee, sondern gegen das, was aus ihr gemacht wird.
+
+Der Vertriebsweg passt zu dieser Aufnahme. In Nordamerika lief der Film bei Netflix, in Großbritannien parallel über einen Verleih und einen Bezahlsender, in Deutschland gar nicht erst im Kino, sondern direkt auf Datenträger. Die 1,2 Millionen Dollar an den Kassen sind entsprechend keine Aussage über die Reichweite, sondern über die wenigen Märkte, in denen überhaupt eine Kinoauswertung stattfand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9920', locale: 'de-de',
+    text: `### Worum es geht
+
+Im 21. Jahrhundert bricht die Krankheit Haemophagia aus. Wer sich ansteckt, wird verfolgt.
+
+Die Krankenschwester Violet Song infiziert sich und wird zur Kämpferin für die Hämophagen. Aus einem Regierungslabor stiehlt sie eine Waffe, die sich als Junge herausstellt: Six. Mit ihm flieht sie vor Vizekardinal Daxus — und stellt fest, dass in Six' Blut ein Gift steckt, das für alle Menschen tödlich ist.
+
+### Entstehungsgeschichte
+
+Kurt Wimmer führte Regie und schrieb das Drehbuch.
+
+Milla Jovovich spielt Violet Song jat Shariff, Cameron Bright den Six, Nick Chinlund den Ferdinand Daxus und William Fichtner den Garth.
+
+Produziert wurde der Film von John Baldecchi, Lucas Foster und Pauline Chan. Die Kamera führten Arthur Wong und Jimmy Wong, den Schnitt besorgte William Yeh, die Musik stammt von Klaus Badelt. Das Budget betrug etwa 30 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film baut seine Welt aus einer einzigen Setzung: einer Krankheit, die ihre Träger stärker macht und sie deshalb zu Verfolgten macht. Alles Weitere — die staatliche Jagd, die kirchlich anmutende Amtsbezeichnung des Gegenspielers, der Widerstand — folgt aus dieser Umkehrung von Krankheit und Fähigkeit.
+
+Die Hauptfigur trägt den Film allein. Violet ist Infizierte, Kämpferin und Beschützerin in einer Person; Six ist Objekt und Waffe zugleich, bevor er zur Figur wird. Die Konstruktion setzt damit von Anfang an auf ein Zweierverhältnis, in dem eine Erwachsene ein Kind gegen alle anderen verteidigt.
+
+Zwei Kameraleute und ein durchgehend stilisierter Bildaufbau kennzeichnen die Machart. Genau daran schieden sich die Urteile: Was die einen als konsequente Formgebung sahen, hielten andere für Selbstzweck.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war schlecht. Rotten Tomatoes weist neun Prozent aus, Metacritic 18 von 100.
+
+James Berardinelli kritisierte Drehbuch und Dialoge, hielt die Regie aber für gelungen. TV Spielfilm fasste das Ergebnis in die Formel, der Film sei „ultragestylt, aber leider auch ultrablöd".
+
+Beide Urteile treffen denselben Punkt von zwei Seiten. Sie trennen die Oberfläche vom Text — die Bildgestaltung wird anerkannt, die Geschichte nicht. Bei einem Budget von rund 30 Millionen Dollar ist das eine kostspielige Trennung, denn der visuelle Aufwand ist genau das, was ein solcher Etat bezahlt.
+
+Bemerkenswert bleibt, dass Kurt Wimmer beide Seiten dieses Urteils zu verantworten hat: Er führte Regie und schrieb das Drehbuch. Der Film, den Berardinelli in der Inszenierung gelungen fand, und der, dessen Dialoge er verwarf, stammen von derselben Person.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10157', locale: 'de-de',
+    text: `### Worum es geht
+
+Das 16. Revier gilt als schlechtester Bezirk der Stadt. Eine Bande unter Zed macht die Straßen unsicher.
+
+Captain Lassard bekommt sechs frische Absolventen der Polizeiakademie zugeteilt, um dagegen vorzugehen. Die Neuen werden auf Streifenpartner verteilt — und arbeiten schließlich auf einen verdeckten Einsatz hin, mit dem die Bande gefasst werden soll. Ein Straßenfest gerät dabei außer Kontrolle.
+
+### Entstehungsgeschichte
+
+Regie führte Jerry Paris. Am Drehbuch schrieben unter anderen Neal Israel und Pat Proft.
+
+Steve Guttenberg spielt Carey Mahoney, Bubba Smith den Moses Hightower, David Graf den Eugene Tackleberry, Michael Winslow den Larvell Jones, Bruce Mahler den Douglas Fackler und Marion Ramsey die Laverne Hooks. Colleen Camp spielt die Kathleen Kirkland, Art Metrano den Lt. Mauser, Bobcat Goldthwait den Zed und Howard Hesseman den Captain Pete Lassard.
+
+Produziert wurde der Film von Paul Maslansky. Die Kamera führte James Crabe, den Schnitt besorgte Bob Wyman, die Musik stammt von Robert Folk.
+
+### Hinter den Kulissen
+
+Die Fortsetzung verlegt den Schauplatz. Statt der Ausbildung steht der Dienst im Mittelpunkt — aus Anwärtern werden Beamte, aus dem Übungsgelände wird ein Revier. Die Figuren bleiben dieselben, ihre Lage ändert sich.
+
+Das spart dem Film die Einführung. Die sechs Absolventen sind aus dem Vorgänger bekannt und werden hier auf Streifenpartner verteilt — die Konstellationen, die dabei entstehen, tragen einen Großteil der Komik. Neu hinzu kommen im Wesentlichen die Gegenseite und die Vorgesetzten, mit Art Metrano als Lt. Mauser und Howard Hesseman als Captain Lassard.
+
+Bemerkenswert ist die Rolle des Gegenspielers. Bobcat Goldthwait spielt Zed als Bandenanführer, dessen Auftreten selbst komisch angelegt ist. Die Bedrohung, gegen die das Revier antritt, wird damit nie ernsthaft bedrohlich — eine Entscheidung, die den Ton der ganzen Reihe festlegt.
+
+### Einordnung & Wirkung
+
+In den USA spielte der Film 55 Millionen Dollar ein. In Deutschland kamen 3,9 Millionen Zuschauer in die Kinos.
+
+Die Kritik fiel deutlich negativ aus. Rotten Tomatoes weist 29 Prozent aus, die IMDb-Bewertung liegt bei 5,8 von 10. Das Lexikon des internationalen Films nannte den Film eine Revue einfältiger Gags.
+
+Der Abstand zwischen diesen Urteilen und den Zuschauerzahlen ist der eigentliche Befund. Eine Komödie, die von den Eigenarten wiedererkennbarer Figuren lebt, wird von Rezensenten an dem gemessen, was sie nicht sein will — an Handlung und Originalität. Die 3,9 Millionen deutschen Kinobesucher zeigen, dass das Publikum eine andere Erwartung mitbrachte und sie erfüllt sah.` },
+  // ---- Block 070 ----
+  {
+    bereich: 'titel', schluessel: 'movie:475430', locale: 'de-de',
+    text: `### Worum es geht
+
+Artemis Fowl II ist ein junges irisches Verbrechergenie. Sein Vater wird entführt.
+
+Um ihn zu befreien, muss Artemis mit Holly Short zusammenarbeiten — einer Elfe und Offizierin. Aus dem Versuch, den Vater zurückzuholen, wird eine Sache, an der mehr hängt als eine Familie.
+
+### Entstehungsgeschichte
+
+Die Entwicklung begann 2013 bei den Walt Disney Studios. Der Film konzentriert sich auf die Ereignisse des ersten Romans der Buchreihe.
+
+Regie führte Kenneth Branagh, das Drehbuch schrieben Michael Goldenberg und Conor McPherson.
+
+Ferdia Shaw spielt Artemis Fowl II, Lara McDonnell die Captain Holly Short, Judi Dench die Commander Julius Root, Colin Farrell den Artemis Fowl I und Josh Gad den Mulch Diggums.
+
+Produziert wurde der Film von Kenneth Branagh und Judy Hofflund. Die Kamera führte Haris Zambarloukos, den Schnitt besorgte Martin Walsh, die Musik stammt von Patrick Doyle.
+
+Gedreht wurde 2018 in England, in Nordirland und in Vietnam; zu den Schauplätzen gehören die Felsenküste bei Portrush und Dunluce Castle.
+
+Geplant war ein Kinostart. Wegen der COVID-19-Pandemie erschien der Film stattdessen am 12. Juni 2020 auf Disney+, in Deutschland am 14. August 2020.
+
+### Hinter den Kulissen
+
+Sieben Jahre zwischen Entwicklungsbeginn und Veröffentlichung sind die auffälligste Zahl dieser Produktion. Zwischen 2013 und 2020 lagen Drehbucharbeit, Dreharbeiten in drei Ländern und schließlich ein vollständiger Wechsel des Auswertungswegs.
+
+Dieser Wechsel ist mehr als eine Terminfrage. Ein Film, der als Kinostart konzipiert und budgetiert wurde, erschien direkt auf einer Streamingplattform — ohne Startwochenende, ohne Kinozahlen und damit ohne den Maßstab, an dem solche Produktionen üblicherweise gemessen werden.
+
+Erzählerisch beschränkt sich der Film auf den ersten Band. Das ist eine Entscheidung für den Auftakt einer Reihe: Figuren und Welt werden eingeführt, die Fortsetzung mitgedacht. Dass es dabei blieb, ist an der Aufnahme abzulesen.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist acht Prozent positive Bewertungen aus. Damit zählt der Film zu den am schlechtesten bewerteten Eigenproduktionen von Disney+.
+
+Bemerkenswert an dieser Bilanz ist der Abstand zum Aufwand. Ein Regisseur, der zugleich produziert, eine Besetzung mit Judi Dench und Colin Farrell, Drehorte in drei Ländern, sieben Jahre Entwicklungszeit — die Mittel waren vorhanden.
+
+Ohne Kinoauswertung fehlt dem Ergebnis allerdings die übliche Gegenprobe. Es gibt kein Startwochenende und keine Besucherzahl, die neben die acht Prozent zu stellen wären; die Bewertung der Kritik steht allein. Für einen Film, der als Auftakt einer Reihe angelegt war und auf den ersten Roman beschränkt bleibt, ist das eine unglückliche Ausgangslage — die Fortsetzung hätte den Anfang nachträglich rechtfertigen müssen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:597891', locale: 'de-de',
+    text: `### Worum es geht
+
+Kate ist Auftragsmörderin, ausgebildet von ihrem Mentor Varrick. Ein Einsatz in Osaka, bei dem sie einen Yakuza-Offizier tötet, setzt ihr zu.
+
+Vor dem letzten Auftrag begegnet sie einem Mann namens Stephen, der ihr Polonium-204 ins Getränk mischt. Die Diagnose ist eindeutig: akute Strahlenvergiftung, ein Tag zu leben. Was danach folgt, ist eine Suche nach dem, der das veranlasst hat — und dabei begegnet sie Ani wieder, dem Mädchen aus jenem ersten Einsatz.
+
+### Entstehungsgeschichte
+
+Regie führte Cedric Nicolas-Troyan, das Drehbuch schrieb Umair Aleem. Netflix erwarb das Skript 2017; das Budget betrug 25 Millionen Dollar.
+
+Mary Elizabeth Winstead spielt Kate, Woody Harrelson den Mentor und Führungsoffizier Varrick, Miku Martineau die Ani, Jun Kunimura den Yakuza-Boss Kijima, Tadanobu Asano den Renji, Michiel Huisman den Stephen und Miyavi den Nahkämpfer Jojima. Die Rockband Band-Maid tritt im Film auf und steuert zwei Stücke zum Soundtrack bei.
+
+Die Kamera führte Lyle Vincent, die Musik stammt von Nathan Barr. Gedreht wurde vom 16. September bis zum 29. November 2019 in Thailand, in Tokio und in Los Angeles. Der Film erschien am 10. September 2021 bei Netflix.
+
+### Hinter den Kulissen
+
+Die Vergiftung ist mehr als ein Auslöser — sie ist die Uhr des Films. Wer nur noch einen Tag hat, kann nicht planen, sich nicht erholen und nichts aufschieben. Die Hauptfigur wird dadurch von Anfang an zur Getriebenen, und jede Szene steht unter der Frage, wie viel Kraft ihr noch bleibt.
+
+Damit verschiebt sich auch das Kräfteverhältnis. In einem Genre, in dem Auftragsmörder normalerweise überlegen sind, ist die Hauptfigur hier körperlich im Nachteil — nicht gegen einen Gegner, sondern gegen ihren eigenen Zustand.
+
+Die zweite Achse ist Ani. Das Mädchen stammt aus dem Einsatz, der Kate belastet hat; die Begegnung mit ihr verbindet Schuld und Auftrag. Dass eine Auftragsmörderin ausgerechnet die Angehörige ihres Opfers beschützt, ist die eigentliche Konstruktion des Films.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 45 Prozent von 95 Kritiken als positiv aus. Der Konsens dort hält fest, Winstead leiste zuverlässig fesselnde Arbeit, der Film sei aber enttäuschend abgeleitet von zahlreichen anderen Filmen über Mörderinnen.
+
+Richard Roeper verglich ihn mit einer Mischung aus „John Wick", „Die Hard" und „Kill Bill" und sprach von einem Grindhouse-Vergnügen. Brian Lowry kritisierte bei CNN die fehlende Originalität und eine trotz reichlicher Gewalt vorhersehbare Handlung.
+
+Beide Urteile decken sich in einem Punkt: Sie trennen die Hauptdarstellerin vom Buch. Bei 25 Millionen Dollar Budget, Drehorten in drei Ländern und einem Start direkt bei Netflix ist das eine Bilanz, die für Plattformproduktionen dieser Jahre kennzeichnend ist — der Aufwand ist sichtbar, die Erzählung austauschbar.` },
+  {
+    bereich: 'titel', schluessel: 'movie:68817', locale: 'de-de',
+    text: `### Worum es geht
+
+Nach einem Trauerfall zieht der begabte Jugendliche Ren MacCormack in die Kleinstadt Bomont in den Südstaaten.
+
+Dort gilt eine Regel, die er nicht kennt: Musik und Tanzen sind für Jugendliche verboten. Beschlossen wurde das nach einem tödlichen Autounfall. Gemeinsam mit der Tochter des örtlichen Geistlichen arbeitet Ren darauf hin, dieses Verbot aufzuheben.
+
+### Entstehungsgeschichte
+
+Der Film ist eine Neuverfilmung des Films von 1984. Handlung und Figurennamen wurden übernommen, der Originalsoundtrack größtenteils ebenfalls; die Tanzszenen wurden dagegen modernisiert.
+
+Regie führte Craig Brewer, das Drehbuch schrieb er gemeinsam mit Dean Pitchford.
+
+Kenny Wormald spielt Ren MacCormack, Julianne Hough die Ariel Moore, Dennis Quaid den Reverend Shaw Moore, Andie MacDowell die Vi Moore und Miles Teller den Willard Hewitt.
+
+Produziert wurde der Film von Neil Meron, Dylan Sellers, Brad Weston und Craig Zadan. Die Musik stammt von Deborah Lurie, die Kamera von Amy Vincent, den Schnitt besorgte Billy Fox.
+
+Der Film dauert 113 Minuten. Der US-Start war der 14. Oktober 2011, der deutsche der 20. Oktober 2011; die FSK gab ihn ab 6 Jahren frei, in Österreich lautet die Freigabe JMK 10.
+
+### Hinter den Kulissen
+
+Die Konstruktion der Vorlage bleibt vollständig erhalten — und mit ihr ihre Stärke. Das Tanzverbot ist keine Willkür, sondern die Reaktion einer Gemeinde auf einen tödlichen Unfall. Der Widerstand dagegen richtet sich damit nicht gegen Bosheit, sondern gegen Trauer, die sich in eine Regel verwandelt hat.
+
+Dass der Geistliche zugleich Vater der weiblichen Hauptfigur ist, hält den Konflikt in der Familie. Ariel steht zwischen Ren und ihrem Vater; die politische Auseinandersetzung um eine Verordnung und der häusliche Streit sind derselbe Vorgang.
+
+Die Entscheidung, den Soundtrack weitgehend zu übernehmen und nur die Tanzszenen zu erneuern, beschreibt die Haltung der Neuverfilmung genau. Sie will nicht neu erzählen, sondern neu ausführen.
+
+### Einordnung & Wirkung
+
+Die Aufnahme fiel geteilt aus. Eine Rezension hob hervor, die Darsteller wirkten überzeugend und die Figuren hätten wesentlich mehr Tiefe als erwartet. Positive Besprechungen richteten sich vor allem auf die Besetzung.
+
+Dagegen stand der grundsätzliche Einwand, der Sinn und Zweck der Neuverfilmung erschließe sich nicht. Das ist die Frage, an der sich Remakes regelmäßig entscheiden — und sie stellt sich hier besonders scharf, weil Handlung, Namen und Musik weitgehend übernommen wurden.
+
+Bemerkenswert ist die Freigabe. Ein Film, dessen Ausgangspunkt ein tödlicher Unfall und ein daraus folgendes Verbot ist, erhielt in Deutschland eine Freigabe ab 6 Jahren. Das verweist darauf, wie der Stoff behandelt wird: Der Konflikt wird verhandelt, nicht ausgestellt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9691', locale: 'de-de',
+    text: `### Worum es geht
+
+Robert Rath ist Auftragsmörder in Portland und gilt als der Beste seines Fachs. Seine Aufträge erhält er anonym über das Internet.
+
+Seit fünfzehn Jahren belastet ihn die Erinnerung an seinen Freund Nicolai, den er getötet hat. Ein letzter Auftrag soll Schluss machen: 200.000 Dollar für den Milliardär Alan Branch. Doch ein anderer Killer kommt ihm zuvor — Miguel Bain. Daraus wird ein Kräftemessen, in das die Computerspezialistin Electra gerät, die gestohlene Daten im Wert von 20 Millionen Dollar besitzt.
+
+### Entstehungsgeschichte
+
+Regie führte Richard Donner. Das Drehbuch schrieben Larry und Andy Wachowski gemeinsam mit Brian Helgeland.
+
+Sylvester Stallone spielt Robert Rath, Antonio Banderas den Miguel Bain und Julianne Moore die Electra. In weiteren Rollen sind Anatoli Davydov, Muse Watson, Steve Kahan und Kelly Rowan zu sehen.
+
+Produziert wurde der Film von Richard Donner und Joel Silver. Die Kamera führte Vilmos Zsigmond, den Schnitt besorgte Richard Marks, die Musik stammt von Mark Mancina.
+
+Es handelt sich um eine amerikanisch-französische Produktion von 133 Minuten Länge; die FSK gab sie ab 16 Jahren frei, in Österreich lautet die Freigabe JMK 14. Gedreht wurde vom 6. April bis zum 24. Juli 1995 in Seattle, Everett, Portland und San Juan.
+
+Das Budget betrug rund 50 Millionen Dollar, davon 15 Millionen Gage für Stallone. Premiere war am 6. Oktober 1995 in den USA und in Großbritannien, der deutsche Start folgte am 26. Oktober 1995.
+
+### Hinter den Kulissen
+
+Die Aufträge kommen anonym über das Internet — 1995 eine bemerkenswerte Setzung. Der Film macht das Netz zum Verteiler von Mordaufträgen, zu einer Zeit, als das für die meisten Zuschauer noch keine Alltagserfahrung war.
+
+Dass Larry und Andy Wachowski das Drehbuch geschrieben haben, ist im Rückblick der interessanteste Produktionsbefund. Datennetze, Identitätswechsel und gestohlene Daten tragen hier bereits die Handlung — Motive, die sie später weiterverfolgten.
+
+Ein Viertel des Budgets ging an den Hauptdarsteller. Fünfzehn Millionen Dollar Gage bei fünfzig Millionen Gesamtkosten beschreiben die Produktionslogik jener Jahre genauer als jede Genrezuordnung: Der Name trug den Film.
+
+### Einordnung & Wirkung
+
+Bei rund 50 Millionen Dollar Herstellungskosten spielte der Film weltweit 83 Millionen ein, davon 30 Millionen in den USA. In Deutschland kamen über 680.000 Zuschauer.
+
+Das Lexikon des internationalen Films urteilte, Genreklischees würden hier mit einer Kaltschnäuzigkeit vorgetragen, wie man sie im gehobenen Actionkino selten finde. Cinema lobte dagegen Donners Ausgleich zwischen spannungsvoller Ruhe und wirkungsvoller Action. Prisma kritisierte den in die Länge gezogenen Schlussteil als typisches Hollywood-Übermaß der neunziger Jahre.
+
+Sylvester Stallone wurde 1996 für die Goldene Himbeere als schlechtester Hauptdarsteller nominiert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:560057', locale: 'de-de',
+    text: `### Worum es geht
+
+Das Waisenmädchen Maisie schmuggelt sich an Bord der „Inevitable", des Schiffs des berühmten Seeungeheuer-Jägers Captain Crow.
+
+Nach einem Unglück freundet sie sich mit dem roten Ungeheuer an, das alle nur „Red" nennen — und erkennt, dass die Bestie nicht böse ist. Gemeinsam mit Jacob Holland und der Offizierin Sarah Sharpe versucht sie, Reds Leben zu retten, bevor Crow das Tier der Krone als Trophäe übergeben kann.
+
+### Entstehungsgeschichte
+
+Chris Williams führte Regie und schrieb das Drehbuch gemeinsam mit Nell Benjamin. Williams war zuvor für „Baymax – Riesiges Robowabohu" bekannt.
+
+Produziert wurde der Film von Jed Schlanger und Chris Williams. Die Musik stammt von Mark Mancina.
+
+In der deutschen Fassung sprechen Valentina Bonalana die Maisie Brumble, Florian Hoffmann den Jacob Holland, Tilo Schmitz den Captain Crow, Melanie Pukaß die Sarah Sharpe und Torben Liebrecht den Admiral Hornagold.
+
+Der Kinostart war am 24. Juni 2022 über AMC, Cinemark, Regal und Cineplex Entertainment; am 8. Juli 2022 folgte der Start bei Netflix.
+
+### Hinter den Kulissen
+
+Der Film dreht die Jagdgeschichte um. Nicht das Ungeheuer ist das Problem, sondern die Erzählung über das Ungeheuer — und die wird von denen aufrechterhalten, die vom Jagen leben. Maisie ist die Figur, die zuerst hinschaut, statt zu glauben.
+
+Dass die Gegenseite nicht bösartig gezeichnet ist, sondern als Beruf mit Tradition, gibt dem Konflikt Gewicht. Captain Crow will kein Unrecht tun; er tut, wofür er ausgebildet wurde und wofür die Krone bezahlt. Der Film stellt damit weniger eine Person infrage als eine Ordnung.
+
+Auch die Auswertung ist bemerkenswert. Der Film lief zwei Wochen regulär im Kino und ging dann zu Netflix — ein Zwischenweg, der weder dem klassischen Verleih noch dem reinen Streamingstart entspricht.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films vergab 2,5 von 5 Sternen. Der Film sei technisch höchst kompetent, erreiche aber emotional nicht das Niveau von „Drachenzähmen leicht gemacht".
+
+Dieser Vergleich ist die naheliegende Messlatte: Auch dort geht es um ein Kind, das ein gefürchtetes Tier kennenlernt und die Deutung seiner Gemeinschaft infrage stellt. Dass die Kritik den Unterschied nicht im Handwerk, sondern in der Wirkung verortet, ist der eigentliche Befund.
+
+Die kurze Kinophase über vier große Ketten hinweg zeigt, welchen Anspruch die Produktion hatte. Für einen animierten Abenteuerfilm dieser Größenordnung war der Weg über die Leinwand nicht mehr selbstverständlich — und der Netflix-Start zwei Wochen später macht deutlich, wo das eigentliche Publikum erwartet wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:84348', locale: 'de-de',
+    text: `### Worum es geht
+
+Vier Männer brechen in ein Haus ein, in dem ein alter Mann lebt. Was sie dort vorfinden, ist eine Sammlung mysteriöser Videobänder.
+
+In die Rahmenhandlung sind fünf Episoden eingeflochten. In „Amateur Night" nehmen drei Männer ein Mädchen mit nach Hause, das sich als übernatürliches Wesen herausstellt. „Second Honeymoon" handelt von einer Frau, die sich in das Leben eines Paares in der Wüste drängt. In „Tuesday the 17th" werden Jugendliche an einem See von einem unsichtbaren Killer angegriffen. „The Sick Thing That Happened to Emily When She Was Younger" zeigt eine Frau, die in ihrer Wohnung übernatürliche Vorgänge erlebt. In „10/31/98" betreten Freunde an Halloween ein Haus, in dem ein Ritual stattfindet.
+
+### Entstehungsgeschichte
+
+Regie führten Adam Wingard, David Bruckner, Ti West, Glenn McQuaid, Joe Swanberg und das Kollektiv Radio Silence. Am Drehbuch schrieben Simon Barrett sowie Bruckner, West, McQuaid, Swanberg und Radio Silence.
+
+An der Produktion beteiligt waren unter anderen Barrett, Sherman, Burns, Bruckner, Phok, West, McQuaid, Nussbaum, Swanberg und Radio Silence.
+
+Zur Besetzung gehören Hannah Fierman als Lily, Joe Swanberg als Sam, Helen Rogers als Emily sowie Matt Bettinelli-Olpin und Tyler Gillett als Matt und Tyler.
+
+Der US-Start war am 31. August 2012, der deutsche am 18. Oktober 2012. Die FSK verweigerte eine Jugendfreigabe; der Film ist ab 18 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Anlage als Anthologie ist zugleich eine Produktionsform. Sechs Regieteams arbeiten unabhängig voneinander an je einem Beitrag; die Rahmenhandlung hält das Ganze zusammen und liefert den Grund, warum jemand diese Aufnahmen überhaupt sieht.
+
+Das Found-Footage-Verfahren erledigt dabei zwei Aufgaben auf einmal. Es begründet die Bildqualität — jede Episode sieht anders aus, weil jede von einer anderen Kamera stammen soll — und es macht aus der Zusammenstellung selbst einen Fund. Was sonst eine Sammlung von Kurzfilmen wäre, wird so zu einem Gegenstand innerhalb der Handlung.
+
+Auffällig ist die Verteilung der Beteiligten. Wer Regie führte, schrieb häufig auch mit und produzierte; die Liste der Namen wiederholt sich in allen drei Funktionen. Das beschreibt eine Arbeitsweise, in der Regieteams ihre Beiträge weitgehend selbst verantworten.
+
+### Einordnung & Wirkung
+
+Robert Cherkowski vergab 3,5 von 5 Sternen. Hervorgehoben wurden clevere Ideen, eine dichte Atmosphäre und harte Gewaltdarstellung.
+
+Die Freigabe ab 18 Jahren ohne Jugendfreigabe ordnet den Film ein. Er zielt nicht auf ein breites Publikum, sondern auf ein Genrepublikum — und die Aufnahme, die er fand, entsprach dieser Ausrichtung.
+
+Die Konstruktion aus sechs unabhängigen Beiträgen bringt dabei eine Eigenheit mit, die alle Anthologien teilen: Die Episoden sind ungleich stark, und jede Besprechung hebt andere hervor. Für die Wirkung des Films ist das kein Nachteil — sie entsteht gerade aus dem Wechsel der Handschriften innerhalb eines Abends.` },
+  {
+    bereich: 'titel', schluessel: 'movie:548473', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Familie zieht auf einen Bauernhof. Dort schlägt ein leuchtender Meteorit ein.
+
+Was er mitbringt, lässt sich nicht benennen — der Film spricht von einem Phänomen. Es verseucht das Grundwasser und verändert alles, was davon trinkt: die Tiere, die Pflanzen, die Familie. Der Hydrologe Ward Phillips versucht, den Vorgang zu dokumentieren, während die Gardners ihm nach und nach erliegen.
+
+### Entstehungsgeschichte
+
+Vorlage ist H. P. Lovecrafts Kurzgeschichte „The Colour Out of Space".
+
+Richard Stanley führte Regie und schrieb das Drehbuch gemeinsam mit Scarlett Amaris. Es war sein erster Spielfilm, seit er 1996 von „The Island of Dr. Moreau" entlassen worden war.
+
+Nicolas Cage spielt den Vater Nathan Gardner, Joely Richardson die Mutter Theresa, Madeleine Arthur die Tochter Lavinia, Brendan Meyer den Sohn Benny und Julian Hilliard den jüngsten Sohn Jack. Elliot Knight spielt den Hydrologen Ward Phillips, Tommy Chong den Ezra und Q'orianka Kilcher die Bürgermeisterin Tooma.
+
+Produziert wurde der Film von SpectreVision, Elijah Wood war Co-Produzent. Stanley kündigte das Projekt 2013 an, 2015 folgte eine Ankündigung mit geplantem Produktionsstart 2016; Nicolas Cage wurde im Dezember 2018 bestätigt, gedreht wurde im Februar 2019 im Naturpark Sintra-Cascais in Portugal.
+
+Die Kamera führte Steve Annis, den Schnitt besorgte Brett W. Bachman, die Musik stammt von Colin Stetson. Das Budget lag zwischen 6 und 12 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Vorlage stellt jede Verfilmung vor dasselbe Problem: Der Titel benennt eine Farbe, die es nicht gibt. Was zu sehen sein müsste, ist definitionsgemäß nicht darstellbar — und genau daran entscheidet sich, ob der Film funktioniert.
+
+Für Richard Stanley war das ein Wiedereinstieg nach 23 Jahren. Seine Entlassung von „The Island of Dr. Moreau" 1996 hatte seine Laufbahn als Spielfilmregisseur unterbrochen; dieser Film war die Rückkehr.
+
+Die Produktionsgeschichte selbst zog sich über sechs Jahre. Zwischen der ersten Ankündigung 2013 und dem Dreh im Februar 2019 lag mehrfach Stillstand; der Dreh selbst fand dann nicht in den USA statt, sondern in einem portugiesischen Naturpark.
+
+### Einordnung & Wirkung
+
+Premiere war am 7. September 2019 beim Toronto Film Festival. Der US-Start folgte am 24. Januar 2020 in 81 Kinos; in den ersten vier Tagen kamen 358.154 Dollar zusammen. Insgesamt spielte der Film rund eine Million Dollar ein.
+
+Die Kritik fiel deutlich positiv aus. Rotten Tomatoes weist 86 Prozent aus (210 Rezensionen), Metacritic 70 von 100. Gelobt wurden der visuell ansprechende lovecraftsche Horror und Nicolas Cages unbeschwertes Spiel; kritisiert wurden Länge und Tonlage.
+
+Ausgezeichnet wurde der Film beim Toronto Film Festival mit dem Creative Coalition Spotlight Award für Cage, beim Fantastic Fest als bester Horrorfilm und beim H. P. Lovecraft Film Festival als bester Spielfilm sowie mit dem Publikumspreis. Der Abstand zwischen dieser Aufnahme und dem Einspielergebnis erklärt sich aus dem Start in nur 81 Kinos.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10735', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine 17-jährige Amerikanerin reist von New York nach London. Sie will ihren leiblichen Vater kennenlernen, den sie nie getroffen hat.
+
+Was sie dort vorfindet, ist die britische High Society — und einen Vater, der in ihr eine Rolle vorsieht. Sie lernt einen Musiker kennen und steht bald vor der Frage, wie viel Anpassung sie bereit ist zu leisten.
+
+### Entstehungsgeschichte
+
+Regie führte Dennie Gordon, das Drehbuch schrieb William Douglas-Home.
+
+Amanda Bynes spielt Daphne Reynolds, Colin Firth den Lord Henry Dashwood, Kelly Preston die Mutter Libby Reynolds, Oliver James den Ian Wallace und Eileen Atkins die Jocelyn Dashwood.
+
+Produziert wurde der Film von Denise Di Novi. Die Musik stammt von Rupert Gregson-Williams, die Kamera von Andrew Dunn, den Schnitt besorgte Charles McClelland.
+
+Es handelt sich um eine amerikanische Produktion von 105 Minuten Länge. Gedreht wurde in London und in Buckinghamshire. Das Budget betrug rund 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Anlage ist ein doppelter Fremdheitsfall. Die Hauptfigur kommt in eine Familie, die sie nicht kennt, und zugleich in eine Gesellschaftsschicht, deren Regeln sie nicht beherrscht. Beide Ebenen fordern dasselbe von ihr — sich anzupassen.
+
+Daraus ergibt sich der eigentliche Konflikt. Die Frage ist nicht, ob der Vater sie annimmt, sondern zu welchem Preis. Der Film macht die Anpassung sichtbar, statt sie vorauszusetzen, und stellt ihr eine Alternative gegenüber.
+
+Die Besetzung stützt diese Konstruktion. Colin Firth als Lord Henry Dashwood und Eileen Atkins als Jocelyn Dashwood vertreten die Ordnung, in die Daphne gerät; Kelly Preston als Mutter steht für die Herkunft, die sie mitbringt. Der Film verteilt seine Positionen auf Figuren, nicht auf Argumente.
+
+### Einordnung & Wirkung
+
+Bei rund 20 Millionen Dollar Herstellungskosten spielte der Film in den USA etwa 36 Millionen ein; in Großbritannien kamen rund 600.000 Pfund zusammen.
+
+Die Kritik war abweisend. Eine Stimme nannte den Film durchgehend uninspiriert und fade, eine andere sprach von aalglattem Krempel für Girlies.
+
+Amanda Bynes gewann 2004 bei den Kids' Choice Awards den Blimp Award als beliebteste Schauspielerin. Diese Auszeichnung beschreibt die Lage genauer als die Rezensionen: Der Film wurde von der Fachkritik verworfen und von seinem Zielpublikum getragen.
+
+Auffällig bleibt das Missverhältnis der Märkte. Ein Film, der vollständig in London und in Buckinghamshire gedreht wurde und dessen halbe Handlung in der britischen Oberschicht spielt, spielte in Großbritannien nur einen Bruchteil dessen ein, was er in den Vereinigten Staaten erzielte.` },
+  // ---- Block 071 ----
+  {
+    bereich: 'titel', schluessel: 'movie:11228', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Holland Tunnel unter dem Hudson River stürzt während des Berufsverkehrs die Röhre ein. Dutzende Menschen sind verschüttet.
+
+Kit Latura, ehemaliger Chef des New Yorker Rettungsdienstes, steigt hinab, um die Überlebenden herauszuholen. Der Film folgt dabei mehreren Eingeschlossenen — einer frustrierten Autorin, einem Firmendirektor, einem älteren Ehepaar, Gefangenen — im Kampf gegen Explosionen, Feuer und eindringendes Wasser.
+
+### Entstehungsgeschichte
+
+Regie führte Rob Cohen, das Drehbuch schrieb Leslie Bohem.
+
+Sylvester Stallone spielt Kit Latura, Amy Brenneman die Madelyne Thompson, Viggo Mortensen den Roy Nord, Dan Hedaya den Frank Kraft und Claire Bloom die Eleanor Trilling.
+
+Produziert wurde der Film von John Davis und David T. Friendly. Die Kamera führte David Eggby, den Schnitt besorgte Peter Amundson, die Musik stammt von Randy Edelman.
+
+Der Film dauert 114 Minuten und ist ab 12 Jahren freigegeben. Das Budget betrug rund 80 Millionen Dollar, davon 20 Millionen Gage für Stallone.
+
+### Hinter den Kulissen
+
+Ein Viertel des Budgets ging an den Hauptdarsteller. Diese Zahl beschreibt die Produktionslogik der neunziger Jahre genauer als jede Genrezuordnung — der Katastrophenfilm war zugleich ein Vehikel für einen Namen.
+
+Der Schauplatz erledigt dabei die Hauptarbeit. Ein Tunnel unter einem Fluss ist ein geschlossener Raum mit zwei versperrten Enden und Wasser über der Decke; jede Gefahr, die der Film braucht, ergibt sich aus dieser Anordnung von selbst. Feuer, Einsturz und Flutung sind keine hinzuerfundenen Bedrohungen, sondern Folgen desselben Unglücks.
+
+Die Figurenauswahl folgt dem klassischen Muster des Genres: eine Autorin, ein Firmendirektor, ein altes Ehepaar, Gefangene. Ein Querschnitt, der zusammengewürfelt wird, damit Herkunft und Rang unter Tage bedeutungslos werden.
+
+### Einordnung & Wirkung
+
+Bei rund 80 Millionen Dollar Herstellungskosten spielte der Film weltweit 159 Millionen ein.
+
+Die Besprechungen fielen durchschnittlich bis schwach aus. Ein Kritiker merkte an, Logik habe in einem Stallone-Streifen wenig zu suchen. Das Lexikon des internationalen Films urteilte, der Film variiere lustlos die Stereotypen des Katastrophenfilms.
+
+1997 gab es eine Oscar-Nominierung für den Tonschnitt und den Golden Reel Award in derselben Kategorie — zugleich aber auch Nominierungen für die Goldene Himbeere. Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Diese Verteilung ist bezeichnend. Ausgezeichnet wurde, was der Film handwerklich leistet; verworfen wurde, was er erzählt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:167032', locale: 'de-de',
+    text: `### Worum es geht
+
+Neun Jahre nach den Ereignissen von „Seed of Chucky" erhält die querschnittsgelähmte Nica Pierce ein Paket. Darin: eine „Good Guys"-Puppe, die niemand bestellt hat.
+
+Nach dem rätselhaften Tod ihrer Mutter Sarah kommt die Familie im Haus zusammen — Nicas Schwester Barb, deren Mann Ian und weitere Angehörige. Was mit der Puppe im Haus geschieht, hat mit der Familiengeschichte mehr zu tun, als zunächst erkennbar ist.
+
+### Entstehungsgeschichte
+
+Don Mancini schrieb das Drehbuch und führte Regie. Der Film kehrt zu den Horrorwurzeln der Reihe zurück, statt die Horror-Komödie der vorangegangenen Teile fortzusetzen.
+
+Fiona Dourif spielt Nica Pierce, Brad Dourif spricht Chucky, Danielle Bisutti spielt die Barb Pierce, Brennan Elliott den Ian, Maitland McConnell die Jill, Chantal Quesnelle die Sarah Pierce, Summer H. Howell die Alice Pierce und A Martinez den Father Frank. Jennifer Tilly ist als Tiffany Valentine zu sehen, Alex Vincent als Andy Barclay in einer Szene nach dem Abspann.
+
+Produziert wurde der Film von David Kirschner für Universal 1440 Entertainment. Die Kamera führte Michael Marshall, den Schnitt besorgte James Coblentz, die Musik stammt von Joseph LoDuca.
+
+Gedreht wurde von Anfang September bis Mitte Oktober 2012 in Winnipeg, Manitoba. Das Budget betrug fünf Millionen Dollar.
+
+### Hinter den Kulissen
+
+Brad Dourif spielt Charles Lee Ray in Rückblenden erstmals seit 1988 wieder in menschlicher Gestalt. Die Reihe holt damit ihren Ursprung zurück ins Bild — nicht als Zitat, sondern als Teil der Handlung.
+
+Bemerkenswert ist die Besetzung der Hauptrolle. Fiona Dourif spielt Nica, Brad Dourif spricht Chucky; Tochter und Vater stehen sich in einem Film gegenüber, in dem die Figuren durch eine Familiengeschichte verbunden sind.
+
+Die Rückkehr zum Horror ist zugleich eine Produktionsentscheidung. Fünf Millionen Dollar Budget, ein Haus als Hauptschauplatz, ein Dreh von sechs Wochen — das ist die Rechnung für einen Film, der nicht ins Kino, sondern in die Heimauswertung geht, und die Beschränkung auf einen Ort passt zu dieser Rechnung.
+
+### Einordnung & Wirkung
+
+Die Weltpremiere fand am 2. August 2013 beim Fantasia Festival in Montreal statt. Am 24. September 2013 folgte die Veröffentlichung als Video on Demand in den USA, am 8. Oktober 2013 DVD und Blu-ray. Im ersten Monat kamen im Heimatmarkt 3.821.602 Dollar zusammen.
+
+Rotten Tomatoes weist 78 Prozent positive Bewertungen aus (18 Kritiker, Schnitt 6,3 von 10). Der Konsens dort hält fest, der Fluch enttäuschender Fortsetzungen werde durch die Rückkehr zu den Grundlagen gebrochen.
+
+Bloody Disgusting nannte den Film die beste Direct-to-Video-Fortsetzung seit „Wrong Turn 2". Shock Till You Drop lobte den blutgetränkten Spaß und Mancinis Figurenarbeit.
+
+Für eine sechste Folge einer Horrorreihe ist das eine ungewöhnliche Bilanz — die Aufnahme fiel deutlich besser aus als bei mehreren Vorgängern.` },
+  {
+    bereich: 'titel', schluessel: 'series:31251', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie erzählt vom Alltag von sieben Schülern an der fiktiven Schauspielschule „Hollywood Arts" in Los Angeles.
+
+Im Mittelpunkt steht die 16-jährige Tori Vega. Nach einem Auftritt bei einer Talentveranstaltung darf sie die Schule besuchen — und findet dort neue Freunde, aber auch Konkurrenz.
+
+### Entstehungsgeschichte
+
+Dan Schneider entwickelte die Serie, nachdem Victoria Justice erwähnt hatte, dass sie früher selbst eine Schule für darstellende Künste besucht hatte.
+
+Victoria Justice spielt Tori Vega, Leon Thomas III den André Harris, Matt Bennett den Robbie Shapiro, Elizabeth Gillies die Jade West, Ariana Grande die Cat Valentine, Avan Jogia den Beck Oliver und Daniella Monet die Trina Vega.
+
+Es entstanden vier Staffeln mit insgesamt 60 Folgen von je rund 23 Minuten. In den USA lief die Serie vom 27. März 2010 bis zum 2. Februar 2013 bei Nickelodeon, im deutschsprachigen Raum vom 29. August 2010 bis zum 8. März 2013 bei Nickelodeon Deutschland.
+
+Den Titelsong „Make It Shine" singt Victoria Justice, komponiert hat ihn Dr. Luke. Das erste Soundtrack-Album erschien am 2. August 2011 und erreichte Platz fünf der US-Charts.
+
+### Hinter den Kulissen
+
+Der Ausgangspunkt der Serie liegt in einer Bemerkung der Hauptdarstellerin. Dass Victoria Justice selbst eine Schule für darstellende Künste besucht hatte, gab Dan Schneider den Schauplatz — die Serie ist um eine Erfahrung herum gebaut, die im Ensemble bereits vorhanden war.
+
+Daraus folgt die Bauform. Eine Schauspielschule erlaubt es, Gesangsauftritte und Wettbewerbe regelmäßig in die Handlung einzubauen, ohne dass sie aufgesetzt wirken. Die Musiknummern sind Unterricht, nicht Einlage — und genau das machte den Soundtrack zum eigenständigen Produkt.
+
+Bemerkenswert ist im Rückblick die Besetzung. Sieben junge Darsteller in gleichrangigen Rollen, darunter Ariana Grande als Cat Valentine und Elizabeth Gillies als Jade West — ein Ensemble, das die Serie über vier Staffeln trug.
+
+### Einordnung & Wirkung
+
+Bei den Nickelodeon Kids' Choice Awards gewann die Serie 2012 und 2013 in der Kategorie „Favorite TV Show". 2011 und 2012 war sie jeweils für den Emmy als „Outstanding Children's Program" nominiert. Victoria Justice erhielt mehrere Nominierungen bei den Teen Choice Awards, den Imagen Awards und den ALMA Awards.
+
+Die Kritik fiel gemischt aus. Manche Stimmen bemängelten eine hohle Handlung, andere nannten die Serie harmlos, aber wenig unterhaltsam. Victoria Justice wurde dagegen fast durchgehend gelobt — ihr wurde das Talent bescheinigt, das der nächste große Star brauche.
+
+Diese Aufteilung ist typisch für Serien dieses Formats: Die Fachkritik misst an der Handlung, das Zielpublikum an den Figuren. Zwei Publikumspreise in Folge zeigen, welche der beiden Bewertungen für die Laufzeit ausschlaggebend war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:412105', locale: 'de-de',
+    text: `### Worum es geht
+
+Nach einer Party trennt sich der Schüler Tyler Hanson von seiner Freundin Ali. Er lernt Holly kennen und verbringt ein Wochenende mit ihr.
+
+Als Tyler und Ali wieder zusammenfinden, will er Holly abschütteln. Das gelingt nicht. Holly dringt stattdessen in den Freundeskreis ein — und es stellt sich heraus, dass sie an einer psychischen Erkrankung leidet und zuvor bereits eine Mitschülerin angegriffen hat.
+
+### Entstehungsgeschichte
+
+Regie führte Brent Bonacorso, das Drehbuch schrieb Ben Epstein.
+
+Bella Thorne spielt Holly Viola, Halston Sage die Alison „Ali" Hewitt, Taylor John Smith den Tyler Hanson, Nash Grier den Gil und Anna Akana die Lydia. In weiteren Rollen sind Rhys Wakefield, Brigid Brannagh und Kathryn Morris zu sehen.
+
+Produziert wurde der Film von Brian Robbins, Matt Kaplan und Nicki Cortese für Awesomeness Films. Die Kamera führte Magdalena Górka, die Musik stammt von Robert Miller.
+
+Gedreht wurde von April bis Mai 2016 in Los Angeles, unter anderem am Strand von Santa Monica. Die Weltpremiere lief beim Los Angeles Film Festival zwischen dem 14. und 22. Juni 2017, der Netflix-Start folgte am 23. Juni 2017.
+
+### Hinter den Kulissen
+
+Der Film gehört zu einem Genre mit fester Bauform: Eine flüchtige Begegnung wird zur Bedrohung, weil eine Seite sie anders bewertet als die andere. Die Spannung entsteht daraus, dass Tyler etwas beenden will, was für Holly nie eine Episode war.
+
+Heikel ist der Umgang mit der Erklärung. Der Film führt die psychische Erkrankung der Figur als Auflösung ein — als Grund dafür, dass sie gefährlich ist. Das ist eine Erzählentscheidung mit Nebenwirkungen: Sie erklärt Verhalten mit Diagnose und macht Krankheit zum Motiv des Thrillers.
+
+Produktionsseitig ist der Zuschnitt eindeutig. Awesomeness Films, ein Dreh in Los Angeles über zwei Monate, junge Hauptdarsteller mit Reichweite und ein Start direkt bei Netflix — der Film ist für ein Publikum gemacht, das ihn dort findet, nicht im Kino.
+
+### Einordnung & Wirkung
+
+Die Kritik fiel scharf aus. Brian Costello nannte den Film von Anfang bis Ende ein Durcheinander. Eddie Strait bemängelte die fehlende Originalität. Felix Vasquez Jr. beschrieb ihn als miserabel und warf ihm vor, kaum als Nachahmung von „Swimfan" durchzugehen.
+
+Der Vorwurf, den alle drei teilen, betrifft nicht die Machart, sondern die Vorlage — der Film wird an Vorgängern gemessen, deren Muster er übernimmt.
+
+Bemerkenswert ist der Abstand zwischen dieser Aufnahme und dem Auswertungsweg. Ein Film, der bei einem Festival Premiere feiert und einen Tag später weltweit auf einer Streamingplattform verfügbar ist, erreicht sein Publikum unabhängig von Besprechungen. Die Kritik konnte hier nichts steuern — sie erschien, als der Film bereits abrufbar war.` },
+  {
+    bereich: 'titel', schluessel: 'series:1620', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie begleitet die Spurensicherung in Miami. Geleitet wird die Einheit von Lieutenant Horatio Caine, einem Sprengstoffexperten.
+
+Ermittelt wird mit forensischen Beweisen und Gentechnik — der Anspruch ist, Verbrechen mit den modernsten verfügbaren Methoden aufzuklären.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Anthony E. Zuiker, Ann Donahue und Carol Mendelsohn. Produziert wurde sie von CBS Television Studios, Alliance Atlantis und Jerry Bruckheimer Television. Es ist der erste Ableger der CSI-Reihe.
+
+David Caruso spielt Lt. Horatio Caine, Emily Procter die Det. Calleigh Duquesne, Khandi Alexander die Dr. Alexx Woods, Rory Cochrane in den Staffeln eins bis drei den Det. Tim Speedle, Adam Rodriguez den Det. Eric Delko und Jonathan Togo ab der dritten Staffel den Det. Ryan Wolfe.
+
+Es entstanden zehn Staffeln mit 232 Folgen. Die Standardlänge beträgt 39 bis 45 Minuten, zwei Folgen sind auf 63 Minuten verlängert.
+
+Die US-Premiere war am 23. September 2002 bei CBS, die deutsche am 12. Januar 2004 bei VOX; weitere Ausstrahlungen liefen bei RTL und RTLnitro, in Österreich bei ORF 1 und Puls 4, in der Schweiz bei SRF zwei. Im Mai 2012 wurde die Serie abgesetzt.
+
+Der Titelsong ist „Won't Get Fooled Again" von The Who.
+
+### Hinter den Kulissen
+
+Der auffälligste Produktionsbefund ist die Diskrepanz zwischen Schauplatz und Drehort. Gedreht wurde überwiegend in Los Angeles, in einer Lagerhalle in El Segundo, mit Außenaufnahmen in Long Beach; nur ein Teil entstand tatsächlich im Miami-Dade County und in Südflorida.
+
+Umso wichtiger ist die Bildsprache. Die Serie arbeitet mit stark gesättigten Farben, die die Landschaft Floridas betonen — ein visuelles Erkennungszeichen, das den Ableger von seiner Ursprungsserie unterscheidbar macht. Was am Schauplatz fehlte, wurde über die Farbgebung hergestellt.
+
+Auch der Zuschnitt der Hauptfigur ist ein Unterscheidungsmerkmal. Horatio Caine ist Sprengstoffexperte — an der Spitze einer Spurensicherung steht damit jemand, der aus dem Umgang mit unmittelbarer Gefahr kommt, nicht aus der Auswertung von Befunden.
+
+### Einordnung & Wirkung
+
+In den USA erreichte die Serie im Durchschnitt über 16 Millionen Zuschauer. Ausgestrahlt wurde sie in über 36 Ländern.
+
+In Deutschland lag der Marktanteil in der werberelevanten Zielgruppe je nach Staffel zwischen 17,6 und 28,5 Prozent, die Gesamtzuschauerzahl zwischen 12,6 und 18,5 Millionen in den späteren Staffeln.
+
+Zehn Staffeln und 232 Folgen sind für eine Krimiserie eine erhebliche Laufzeit — und für einen Ableger einer bereits laufenden Reihe umso bemerkenswerter. Als erster Spin-off der CSI-Familie musste die Serie beweisen, dass sich das Format übertragen lässt; die Absetzung erfolgte erst 2012, zehn Jahre nach dem Start.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10357', locale: 'de-de',
+    text: `### Worum es geht
+
+Unter Los Angeles entsteht ein Vulkan — an den La Brea Tar Pits, mitten in der Stadt.
+
+Der Katastrophenschutzmanager Mike Roark und die Geophysikerin Amy Barnes versuchen, die Lavaströme zu lenken, statt sie aufzuhalten. Sie errichten Betonsperren und sprengen ein Gebäude, um die Lava zum Meer umzuleiten.
+
+### Entstehungsgeschichte
+
+Regie führte Mick Jackson. Das Drehbuch schrieben Jerome Armstrong und Billy Ray, die Geschichte stammt von Armstrong.
+
+Tommy Lee Jones spielt Michael „Mike" Roark, Anne Heche die Geophysikerin Amy Barnes, Gaby Hoffmann die Tochter Kelly Roark, Don Cheadle den Emmit Reese, Keith David den Polizeileutnant Edward „Ed" Fox, John Carroll Lynch den Stan Olber und Michael Rispoli den Gator Harris.
+
+Produziert wurde der Film von Neal H. Moritz und Andrew Z. Davis für Fox 2000 Pictures, The Donners' Company und Original Film; den Verleih übernahm 20th Century Fox. Die Kamera führte Theo van de Sande, den Schnitt besorgten Don Brochu und Michael Tronick, die Musik stammt von Alan Silvestri, gespielt von der Hollywood Studio Symphony; das Soundtrack-Album erschien am 22. April 1997 bei Varèse Sarabande.
+
+Gedreht wurde in Los Angeles — im MacArthur Park, am Cedars-Sinai Medical Center und an den La Brea Tar Pits. In Torrance, Kalifornien, entstand außerdem ein Nachbau des Wilshire Boulevard im Maßstab von 80 Prozent. Das Budget betrug 90 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Nachbau in Torrance ist die aufschlussreichste Produktionsentscheidung. Eine Straße wird zu vier Fünfteln ihrer Größe neu errichtet, damit man sie zerstören kann — ein Aufwand, der sich nur in einem Film rechnet, dessen Zentrum die Zerstörung selbst ist.
+
+Bemerkenswert ist die Wahl des Ortes. Die La Brea Tar Pits sind eine reale Fundstätte mitten in Los Angeles; der Film nimmt eine Besonderheit der Stadt und dreht sie ins Bedrohliche. Die Katastrophe kommt nicht von außen, sondern aus dem Untergrund, auf dem die Stadt ohnehin steht.
+
+Auch die Lösung ist ungewöhnlich. Statt die Lava zu stoppen, wird sie umgeleitet — die Handlung besteht aus Bauarbeiten unter Zeitdruck. Das gibt dem Film ein technisches statt eines heldenhaften Zentrum.
+
+### Einordnung & Wirkung
+
+Bei 90 Millionen Dollar Herstellungskosten spielte der Film weltweit 122,8 Millionen ein, davon 49,3 Millionen in den USA und Kanada und 73,5 Millionen international.
+
+Die Kritik urteilte gemischt. Rotten Tomatoes weist 49 Prozent aus (Schnitt 5,10 von 10), Metacritic 55 von 100.
+
+Roger Ebert nannte ihn einen überraschend billig wirkenden Katastrophenfilm und hielt die Darstellung der Lava für nicht überzeugend. Janet Maslin lobte das schnelle Tempo, kritisierte aber vertraute Genre-Klischees. Kenneth Turan schrieb, die Lava wirke wie eine böswillige Flut geschmolzener Butter.
+
+Alle drei Einwände treffen denselben Punkt: die Glaubwürdigkeit des zentralen Effekts. Bei einem Film, der 90 Millionen Dollar kostete und dessen Bedrohung vollständig aus einem Material besteht, ist das der empfindlichste Ort.` },
+  {
+    bereich: 'titel', schluessel: 'movie:12233', locale: 'de-de',
+    text: `### Worum es geht
+
+Das verwaiste Kätzchen Oliver trifft auf den Straßenhund Dodger und wird in dessen Bande aufgenommen.
+
+Später wird Oliver von einem Mädchen namens Jenny adoptiert. Als der Bandenchef Fagin und der skrupellose Sykes erfahren, dass Jenny aus einer wohlhabenden Familie stammt, entführt Sykes das Mädchen, um Lösegeld zu erpressen. Oliver und die Bande machen sich daran, sie zurückzuholen.
+
+### Entstehungsgeschichte
+
+Die Handlung beruht frei auf Charles Dickens' Roman „Oliver Twist" und auf Victor Hugos „Die Elenden".
+
+Regie führte George Scribner, das Drehbuch schrieben Jim Cox, Tim Disney und James Mangold.
+
+In der Originalfassung sprechen Joey Lawrence den Oliver, Billy Joel den Dodger, Dom DeLuise den Fagin, Bette Midler die Georgette und Natalie Gregory die Jenny. In der deutschen Fassung übernahm Jürgen Drews die Gesangsparts des Dodger.
+
+Produziert wurde der Film bei Disney Animation von Kathleen Gavin. Die Musik stammt von J. A. C. Redford, den Schnitt besorgten Mark A. Hester und Jim Melton.
+
+### Hinter den Kulissen
+
+Die Übertragung ist die Grundidee. Dickens' Waisenjunge wird zum Kätzchen, die Diebesbande zu Straßenhunden, Fagin bleibt dem Namen nach erhalten. Der Stoff besteht fort, die Gestalt wechselt vollständig.
+
+Diese Übertragung löst zugleich ein Problem. Was bei Dickens soziale Not ist, lässt sich in einem Zeichentrickfilm für Kinder schwer direkt zeigen — als Geschichte über streunende Tiere wird sie erzählbar, ohne dass ihr Kern verloren geht: Es geht um jemanden, der niemandem gehört.
+
+Bemerkenswert ist die Besetzung der Sprechrollen. Mit Billy Joel als Dodger und Bette Midler als Georgette stehen zwei Musiker in tragenden Rollen — und in der deutschen Fassung übernahm Jürgen Drews den Gesang, statt ihn einem Synchronsprecher zu überlassen.
+
+### Einordnung & Wirkung
+
+Der Film spielte rund 53 Millionen Dollar ein und war damit der siebzehnterfolgreichste Film des Jahres 1988 in den USA. Bei der Wiederaufführung 1996 kamen weitere 20,9 Millionen hinzu.
+
+Die Kritik urteilte gemischt. Rotten Tomatoes weist 52 Prozent aus, Metacritic 58 von 100. Das Lexikon des internationalen Films bescheinigte dem Film liebevoll gestaltete Zeichentrickkunst und eine optimistische Botschaft.
+
+Aufschlussreich ist die Wiederaufführung. Dass ein Zeichentrickfilm acht Jahre nach seinem Start noch einmal ins Kino kommt und dabei rund 40 Prozent des ursprünglichen Ergebnisses hinzugewinnt, sagt mehr über seine Haltbarkeit aus als die Erstbesprechungen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:77883', locale: 'de-de',
+    text: `### Worum es geht
+
+Auf einem Flohmarkt findet das Mädchen Emily eine alte Holzkiste. Darin liegen rätselhafte Gegenstände, unter ihnen ein Ring.
+
+Nachdem sie den Ring angelegt hat, ist sie von der Kiste besessen und zieht sich zurück. Ihre Lehrerin stirbt, nachdem sie die Kiste geöffnet hat. Als Emilys Verhalten weiter eskaliert, sucht ihr Vater Hilfe bei einem jüdischen Exorzisten namens Tzadok, der in dem, was von der Tochter Besitz ergriffen hat, den Dämon Abyzou erkennt.
+
+### Entstehungsgeschichte
+
+Der Vorfall, auf den sich der Film beruft, wurde im Februar 2004 öffentlich. Der amerikanische Antiquitätenhändler Kevin Mannis bot bei eBay einen hölzernen Weinschrank mit verschiedenen Gegenständen an. Berichtet wurde von merkwürdigen Gerüchen, von Albträumen bei den Besitzern und von Türen, die sich selbst öffneten. Der Schrank soll von einer polnisch-jüdischen Frau gestammt haben, die einem Konzentrationslager entkommen war.
+
+Regie führte Ole Bornedal, das Drehbuch schrieben Juliet Snowden und Stiles White.
+
+Natasha Calis spielt Emily Brenek, Jeffrey Dean Morgan den Vater Clyde Brenek, Kyra Sedgwick die Stephanie Brenek, Madison Davenport die Schwester Hannah und Matisyahu den Tzadok.
+
+Produziert wurde der Film von Sam Raimi, Robert G. Tapert und J. R. Young. Die Kamera führte Dan Laustsen, den Schnitt besorgten Eric L. Beason und Anders Villadsen, die Musik stammt von Anton Sanko.
+
+Gedreht wurde in Vancouver; für die Exorzismusszenen diente das Riverview Hospital in Coquitlam bei Vancouver, wegen seiner unheimlichen Atmosphäre. Das Budget wird auf 14 Millionen Dollar geschätzt.
+
+### Hinter den Kulissen
+
+Die Herkunft des Stoffs ist ungewöhnlich. Ausgangspunkt ist keine Zeitungsmeldung über einen Kriminalfall, sondern eine eBay-Auktion aus dem Jahr 2004 samt der Erzählungen, die sich um den angebotenen Gegenstand rankten.
+
+Bemerkenswert ist die religiöse Verortung. Der Exorzismus wird hier nicht von einem katholischen Priester ausgeführt, sondern von einem jüdischen Exorzisten; der Dämon trägt einen Namen aus jüdischer Überlieferung. Das unterscheidet den Film von den meisten Vertretern seines Genres.
+
+Der Drehort trägt dazu bei. Ein stillgelegtes Krankenhaus in Coquitlam liefert die Räume für den entscheidenden Teil der Handlung — die Produktion suchte einen Ort, der die Atmosphäre bereits mitbringt, statt sie zu bauen.
+
+### Einordnung & Wirkung
+
+Bei einem geschätzten Budget von 14 Millionen Dollar spielte der Film rund 85,5 Millionen ein.
+
+Das Lexikon des internationalen Films lobte die einfallsreiche, atmosphärische Bildgestaltung, hielt aber fest, dass „Der Exorzist" als Vorbild diente, ohne dass diese Produktion in Handlung und Spannungsdramaturgie an ihn heranreiche.
+
+Dieser Vergleich ist naheliegend und für den Film zugleich unbequem. Er benennt das Muster, dem die Handlung folgt — ein besessenes Kind, ein ratloser Vater, ein Geistlicher als letzte Instanz —, und misst ihn an einem Werk, das dieses Muster geprägt hat. Was der Film eigenständig beisteuert, ist weniger die Struktur als die Herkunft des Gegenstands und die religiöse Tradition, aus der die Gegenwehr kommt.` },
 ];
