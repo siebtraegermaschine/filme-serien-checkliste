@@ -39722,4 +39722,283 @@ Rotten Tomatoes weist 55 Prozent positive Bewertungen aus, Metacritic 54 von 100
 Gelobt wurden die psychologischen Schreckelemente; kritisiert wurden die dünne Figurenzeichnung und das abrupte Ende.
 
 Diese beiden Einwände hängen zusammen. Ein Film, der auf 19 Millionen Dollar und einen einzigen Schauplatz setzt, hat wenig Raum für Vorgeschichte — und muss zum Schluss kommen, sobald die Anordnung ausgereizt ist. Was als Schwäche gelesen wird, ist zugleich die Bedingung, unter der die erste Hälfte so gut funktioniert.` },
+  // ---- Block 084 ----
+  {
+    bereich: 'titel', schluessel: 'movie:11368', locale: 'de-de',
+    text: `### Worum es geht
+
+In Texas betrügt Abby ihren Mann Julian Marty, dem eine Bar gehört, mit dessen Angestelltem Ray.
+
+Marty engagiert den Privatdetektiv Loren Visser und beauftragt ihn, beide zu töten. Visser hat eigene Vorstellungen. Was danach geschieht, beruht auf einer Kette von Missverständnissen: Jede Figur handelt aufgrund dessen, was sie zu wissen glaubt — und jede irrt sich.
+
+### Entstehungsgeschichte
+
+Joel und Ethan Coen führten Regie und schrieben das Drehbuch; Ethan Coen produzierte.
+
+John Getz spielt Ray, Frances McDormand die Abby, Dan Hedaya den Julian Marty, M. Emmet Walsh den Loren Visser und Samm-Art Williams den Meurice.
+
+Die Kamera führte Barry Sonnenfeld, den Schnitt besorgten Roderick Jaynes und Don Wiegmann, die Musik stammt von Carter Burwell und Jim Roberge.
+
+Der Film erschien 1984, dauert 99 Minuten — der Director's Cut 95 — und ist ab 18 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Konstruktion ist die eines Uhrwerks aus Fehlannahmen. Kein Beteiligter hat die vollständige Übersicht; das Publikum dagegen sieht alles. Daraus entsteht die Spannung — nicht aus der Frage, was geschieht, sondern aus dem Wissen, wie falsch die Figuren liegen.
+
+Bemerkenswert ist, wer hier zusammenkam: Joel und Ethan Coen als Regie- und Autorengespann, Barry Sonnenfeld an der Kamera, Carter Burwell an der Musik und Frances McDormand in einer der Hauptrollen. Das Pseudonym Roderick Jaynes für den Schnitt gehört den Coens selbst — dieselbe Konstellation und dasselbe Pseudonym finden sich in ihren späteren Arbeiten wieder.
+
+Der Aufbau setzt konsequent auf Verzögerung. Ray findet eine Leiche und trifft eine Entscheidung, die alles verschlimmert; von da an handelt jede Figur gegen die falsche Annahme. Die Freigabe ab 18 Jahren hat ihren Grund weniger in der Menge der Gewalt als in ihrer Umständlichkeit.
+
+### Einordnung & Wirkung
+
+Beim Sundance Film Festival 1985 gewann der Film den Großen Preis der Jury.
+
+Newsweek nannte ihn den erfindungsreichsten und originellsten Thriller seit Langem. Das Lexikon des internationalen Films beschrieb ihn zurückhaltender als düsteren, handwerklich nicht uninteressanten Psycho-Thriller.
+
+Die Freigabe ab 18 Jahren ordnet ihn ein. Der Film verzichtet auf jede Beschönigung — was in ihm geschieht, wird gezeigt, und der Schrecken liegt in der Umständlichkeit, mit der die Figuren dabei vorgehen.
+
+Für ein Regiedebüt ist der Sundance-Hauptpreis eine ungewöhnliche Ausgangslage. Er markiert den Beginn einer Zusammenarbeit, die über Jahrzehnte fortgeführt wurde — mit denselben Namen in denselben Funktionen.` },
+  {
+    bereich: 'titel', schluessel: 'series:79788', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie beruht auf Alan Moores Graphic Novel „Watchmen", erzählt aber keine Nacherzählung. Damon Lindelof hat betont, dass sie nicht direkt auf den Comics beruhe, sondern eine neue Handlung in deren Welt entwickle.
+
+Im Mittelpunkt steht Angela Abar, die als Sister Night auftritt. Um sie herum: der Polizeichef Judd Crawford, Adrian Veidt alias Ozymandias und Wade Tillman.
+
+### Entstehungsgeschichte
+
+Die Idee stammt von Damon Lindelof. Es ist die zweite Realverfilmung des Stoffs nach Zack Snyders Kinofilm von 2009.
+
+Regina King spielt Angela Abar alias Sister Night, Don Johnson den Judd Crawford, Jeremy Irons den Adrian Veidt alias Ozymandias und Tim Blake Nelson den Wade Tillman.
+
+Produziert wurde die Serie von White Rabbit, Warner Bros. Television und DC Entertainment. Die Musik stammt von Trent Reznor und Atticus Ross.
+
+Gedreht wurde von Juni bis Dezember 2018 in Georgia — in Atlanta, Fayetteville, Macon und weiteren Orten.
+
+Die Staffel umfasst neun Folgen von 52 bis 67 Minuten. Die Erstausstrahlung lief ab dem 20. Oktober 2019 bei HBO, im deutschsprachigen Raum ab dem 4. November 2019 bei Sky Atlantic. Die einzelnen Folgen erreichten zwischen 620.000 und 935.000 Zuschauer in den USA.
+
+### Hinter den Kulissen
+
+Die Entscheidung, nicht zu adaptieren, sondern fortzuschreiben, ist der Kern dieser Produktion. Eine Vorlage, die als abgeschlossen gilt, wird nicht noch einmal erzählt — stattdessen entsteht eine neue Handlung in derselben Welt, Jahrzehnte später.
+
+Das bringt eine Schwierigkeit mit sich, die die Serie ausdrücklich annimmt: Wer die Vorlage kennt, liest anders als jemand, der sie nicht kennt. Figuren wie Adrian Veidt tragen eine Vorgeschichte, die die Serie nicht wiederholt.
+
+Neun Folgen für eine in sich geschlossene Staffel sind knapp bemessen und bewusst so gewählt. Die Serie ist als abgeschlossene Erzählung angelegt, nicht als fortlaufende — bei einem Stoff mit dieser Vorgeschichte eine bemerkenswerte Zurückhaltung.
+
+### Einordnung & Wirkung
+
+Bei den Primetime Emmys 2020 gewann die Serie elf Auszeichnungen bei 26 Nominierungen, darunter als beste Miniserie und für Regina King als beste Hauptdarstellerin.
+
+Elf Emmys sind für eine einzelne Staffel eine außergewöhnliche Bilanz — und sie steht in einem auffälligen Verhältnis zu den Zuschauerzahlen zwischen 620.000 und 935.000 je Folge. Die Serie war kein Massenerfolg, sondern ein Kritikererfolg.
+
+Dass sie nach einer Staffel endete, gehört zur Anlage. Die Erzählung war abgeschlossen; eine Fortsetzung hätte den Entschluss aufgehoben, statt einer Adaption eine eigenständige Geschichte zu erzählen.
+
+Die Musik von Trent Reznor und Atticus Ross gehört zu den Bestandteilen, die über die Serie hinaus wahrgenommen wurden — ein Muster, das ihre Arbeiten häufiger begleitet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:579974', locale: 'de-de',
+    text: `### Worum es geht
+
+Indien im Jahr 1920, unter britischer Herrschaft. Gouverneur Scott Buxton verschleppt das Mädchen Malli aus einem Dorf.
+
+Der Dorfkämpfer Komaram Bheem reist nach Delhi, um sie zurückzuholen. Der Offizier Alluri Sitarama Raju erhält den Auftrag, Bheem zu fassen — und freundet sich mit ihm an, ohne zu wissen, wer der andere ist. Beide verfolgen Ziele, die der jeweils andere nicht kennt.
+
+### Entstehungsgeschichte
+
+S. S. Rajamouli führte Regie und schrieb das Drehbuch. Produziert wurde der Film von D. V. V. Danayya.
+
+N. T. Rama Rao Jr. spielt Komaram Bheem, Ram Charan den Alluri Sitarama Raju, Alia Bhatt die Sita, Ray Stevenson den Scott Buxton, Alison Doody die Catherine Buxton und Olivia Morris die Jenny.
+
+Die Musik stammt von M. M. Keeravani, die Kamera von K. K. Senthil Kumar, den Schnitt besorgte A. Sreekar Prasad.
+
+Das Budget betrug 550 Crore Indische Rupien, umgerechnet rund 72 Millionen Dollar. Der Film dauert 187 Minuten; gesprochen wird Telugu und Englisch. Die FSK gab ihn in Deutschland ab 16 Jahren frei. Der weltweite Kinostart war am 25. März 2022.
+
+### Hinter den Kulissen
+
+Die Anlage beruht auf einer doppelten Täuschung. Zwei Männer werden Freunde, während jeder den anderen jagt — und der Film hält diesen Zustand lange aufrecht, bevor er ihn auflöst.
+
+Der Rahmen ist die britische Kolonialherrschaft von 1920. Der Film erzählt den Widerstand dagegen als Freundschaftsgeschichte zweier Männer, die auf verschiedenen Seiten zu stehen scheinen.
+
+Genau daran setzt ein Teil der Kritik an. Ein Film, der antikolonialen Widerstand in dieser Größenordnung inszeniert, verhandelt zugleich nationale Identität — Kritiker haben angemerkt, dass die nationalistischen Tendenzen des Films kritisch zu betrachten sind.
+
+187 Minuten Laufzeit und ein Budget von 72 Millionen Dollar machen ihn zu einer Großproduktion, die vor allem in ihren Bewegungsszenen technische Maßstäbe setzt.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 96 Prozent Zustimmung aus. Gewürdigt werden die technischen Neuerungen.
+
+Der Film gewann 2022 den Saturn Award als bester internationaler Film und den Regiepreis des New York Film Critics Circle. 2023 folgten der Golden Globe und der Critics' Choice Movie Award für den besten Filmsong sowie der Oscar für den besten Song — jeweils für „Naatu Naatu".
+
+Der Oscar ist der bemerkenswerteste Punkt dieser Bilanz. Ein Telugu-sprachiger Film gewann damit in einer Kategorie, die üblicherweise englischsprachigen Produktionen zufällt.
+
+Zugleich steht der Einwand gegen die nationalistische Grundierung neben dem Lob. Beides gehört zur Einordnung dieses Films: die handwerkliche Anerkennung und die Frage, welche Geschichtserzählung er transportiert.` },
+  {
+    bereich: 'titel', schluessel: 'series:131927', locale: 'de-de',
+    text: `### Worum es geht
+
+Zehn Jahre nach dem Ende der Ursprungsserie lebt Dexter Morgan unter dem Namen Jim Lindsay in Iron Lake im Bundesstaat New York.
+
+Er arbeitet in einem Waffengeschäft und hat seine Tötungsimpulse unterdrückt. Seine Beziehung zur Polizeichefin Angela Bishop wird kompliziert, als sein Sohn Harrison auftaucht — und mit ihm sein früheres Leben.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Miniserie von Clyde Phillips.
+
+Michael C. Hall spielt Dexter Morgan alias Jim Lindsay, Jack Alcott den Sohn Harrison Morgan, Julia Jones die Angela Bishop und Clancy Brown den Kurt Caldwell. Jennifer Carpenter tritt als Debra Morgan in Erscheinung.
+
+Produziert wurde die Serie von Showtime Networks, die Musik stammt von Pat Irwin. Die deutsche Synchronisation entstand bei der Cinephon Filmproduktions GmbH in Berlin.
+
+Die Miniserie umfasst zehn Folgen. Die US-Premiere war am 7. November 2021, die deutschsprachige am 22. November 2021 bei Sky Atlantic.
+
+### Hinter den Kulissen
+
+Der Zeitsprung von zehn Jahren und der Ortswechsel sind die beiden Setzungen, auf denen alles ruht. Aus Florida wird eine Kleinstadt im Norden; aus einem Mann mit Doppelleben einer, der beide Leben aufgegeben hat.
+
+Der Sohn ist der Auslöser. Harrison bringt nicht nur eine Vergangenheit zurück, sondern eine Frage: Was gibt jemand wie Dexter weiter? Die Serie stellt damit die Konstruktion der Ursprungsserie auf eine neue Grundlage.
+
+Die Anlage als Miniserie mit zehn Folgen ist dabei die entscheidende formale Wahl. Sie verpflichtet zu einem Abschluss — und genau daran wurde die Serie gemessen, weil die Ursprungsserie für ihr Ende in der Kritik stand.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war geteilt. Moviepilot nannte sie eine der besten Serienfortsetzungen. Zeit Online sah Potenzial, hielt sie aber nicht für unverzichtbares Fernsehen. DWDL.de urteilte, die zweite Chance, alte Fehler zu korrigieren, sei nicht genutzt worden.
+
+Diese Spanne hat eine gemeinsame Ursache. Eine Fortsetzung, die zehn Jahre nach einem umstrittenen Serienfinale ansetzt, wird nicht für sich bewertet, sondern daran gemessen, ob sie etwas geradezieht.
+
+Bemerkenswert ist die enge Taktung der Ausstrahlung. Zwischen der US-Premiere am 7. November 2021 und dem deutschsprachigen Start am 22. November lagen zwei Wochen — ein Hinweis darauf, wie eng die Auswertung international abgestimmt war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8007', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Marineflieger Chris Burnett und Jeremy Stackhouse sind auf dem Flugzeugträger Carl Vinson vor Kroatien stationiert und überwachen ein Flugverbot über Bosnien und Herzegowina.
+
+Bei einem Aufklärungsflug an Weihnachten fotografieren sie, wie serbische Milizen einen Völkermord an Muslimen begehen. Ihre F-18 wird abgeschossen. Stackhouse wird getötet, Burnett überlebt — mit einem Datenträger, auf dem die Aufnahmen sind. Admiral Reigart will ihn herausholen, wird aber vom französischen Admiral Piquet blockiert, um den Friedensprozess nicht zu gefährden.
+
+### Entstehungsgeschichte
+
+Regie führte John Moore. Das Drehbuch schrieben David Veloz und Zak Penn.
+
+Owen Wilson spielt Lt. Chris Burnett, Gene Hackman den Admiral Leslie Reigart, Gabriel Macht den Lt. Jeremy Stackhouse, Wladimir Maschkow den Sasha, Joaquim de Almeida den Admiral Piquet und Olek Krupa den Miroslav Lokar.
+
+Produziert wurde der Film von John Davis. Die Kamera führte Brendan Galvin, den Schnitt besorgte Paul Martin Smith, die Musik stammt von Don Davis. Der Film dauert 101 Minuten und ist ab 16 Jahren freigegeben.
+
+Angeregt wurde er vom tatsächlichen Abschuss des Piloten Scott O'Grady am 2. Juni 1995 während des Bosnienkriegs — mit erheblichen Freiheiten. O'Grady widersprach seiner Darstellung und versuchte, 20th Century Fox auf Schadensersatz zu verklagen. Das US-Verteidigungsministerium unterstützte die Produktion und nahm dabei direkten Einfluss auf das Drehbuch; Bedingung war eine positive Darstellung der Marine.
+
+### Hinter den Kulissen
+
+Die Einflussnahme des Verteidigungsministeriums ist der wichtigste Produktionsbefund. Ein Film über einen realen Krieg entstand mit Unterstützung einer Kriegspartei, die im Gegenzug Einfluss auf das Drehbuch nahm.
+
+Die Klage des realen Vorbilds kommt hinzu. Scott O'Grady, dessen Abschuss den Anstoß gab, wollte gegen seine Darstellung gerichtlich vorgehen.
+
+Beides zusammen beschreibt die Lage eines Films, der sich auf reale Ereignisse beruft und zugleich mehrere Interessen bedienen musste. Der Völkermord an bosnischen Muslimen ist dabei nicht Beiwerk, sondern der Grund, warum die Hauptfigur verfolgt wird — die Aufnahmen sind der Gegenstand.
+
+### Einordnung & Wirkung
+
+Roger Ebert kritisierte das Handeln der Hauptfigur und die Unfähigkeit der Gegenseite. Johannes Pietsch urteilte, statt einer naturalistischen Kriegsdarstellung sei alles dumme Propaganda gegen Serben. Der Filmdienst nannte ihn einen actionorientierten Kriegsfilm, wirkungsvoll gemacht, aber ohne differenzierte gedankliche Tiefe.
+
+Bei den Taurus Awards 2002 gewann der Film für den besten Flugstunt. Nominierungen gab es bei den ALMA Awards für das Drehbuch und beim Political Film Society Award in der Kategorie Enthüllung. Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Der Vorwurf der Propaganda wiegt bei diesem Film besonders schwer, weil er einen realen Krieg mit realen Opfern behandelt und mit staatlicher Unterstützung entstand. Dass ausgerechnet eine Nominierung in der Kategorie Enthüllung danebensteht, zeigt, wie unterschiedlich sein Verhältnis zur Wirklichkeit bewertet wurde.
+
+Drei Fortsetzungen folgten: 2006, 2009 und 2014, sämtlich außerhalb der Kinoauswertung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:38357', locale: 'de-de',
+    text: `### Worum es geht
+
+Becky Fuller ist Fernsehproduzentin und verliert ihre Stelle in New Jersey.
+
+Sie findet eine neue bei „Daybreak", der Morgensendung des Senders IBS — Platz vier in der Zuschauergunst. Um die Sendung zu retten, verpflichtet sie den angesehenen Nachrichtenjournalisten Mike Pomeroy als Co-Moderator. Der hält von Unterhaltung nichts, sie von Ernsthaftigkeit ohne Quote wenig.
+
+### Entstehungsgeschichte
+
+Regie führte Roger Michell, das Drehbuch schrieb Aline Brosh McKenna.
+
+Rachel McAdams spielt Becky Fuller, Harrison Ford den Mike Pomeroy, Diane Keaton die Colleen Peck, Jeff Goldblum den Jerry Barnes, Ty Burrell den Paul McVee und Patrick Wilson den Adam Bennett.
+
+Produziert wurde der Film von J. J. Abrams und Bryan Burk für Bad Robot Productions; den Vertrieb übernahm Paramount Pictures. Die Kamera führte Alwin Kuchler, die Musik stammt von David Arnold; den Titelsong „Strip Me" singt Natasha Bedingfield.
+
+Der Film dauert 108 Minuten, das Budget betrug 40 Millionen Dollar. Der US-Start war am 10. November 2010, der deutschsprachige am 13. Januar 2011.
+
+### Hinter den Kulissen
+
+Der Konflikt ist der eigentliche Gegenstand. Zwei Auffassungen vom Fernsehen stehen sich gegenüber — Quote gegen Anspruch —, und der Film lässt beide Seiten ihre Argumente vortragen, ohne eine davon zu widerlegen.
+
+Die Auflösung ist dabei aufschlussreich. Es ist ein investigativer Beitrag Pomeroys, der die Sendung rettet; der ernsthafte Journalismus gewinnt also, allerdings als Quotenerfolg.
+
+Bemerkenswert ist die Entscheidung der Hauptfigur am Schluss. Becky bekommt ein Angebot von einer größeren Sendung und lehnt ab. Der Aufstieg, auf den die Handlung hinauszulaufen scheint, findet nicht statt.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes zählte 103 positive gegenüber 81 negativen Rezensionen. Die IMDb-Bewertung liegt bei 6,5 von 10.
+
+Cinema lobte Tempo und Darsteller. Critic.de kritisierte dagegen das völlig fehlende Problembewusstsein hinsichtlich der Rolle der Medien.
+
+Dieser Einwand trifft eine Schwachstelle, die in der Anlage liegt. Ein Film, der die Auseinandersetzung zwischen Unterhaltung und Journalismus als Komödie führt und sie über eine Quotensteigerung löst, entscheidet sie damit — ohne die Frage gestellt zu haben, die dahintersteht.
+
+Bei 40 Millionen Dollar Budget und einer Besetzung mit Harrison Ford und Diane Keaton neben Rachel McAdams war der Film als breite Unterhaltung angelegt. Die knappe Mehrheit positiver Rezensionen beschreibt genau das: solide gemacht, aber ohne Zugriff auf sein Thema.` },
+  {
+    bereich: 'titel', schluessel: 'series:2085', locale: 'de-de',
+    text: `### Worum es geht
+
+Courage ist ein rosafarbener Hund und lebt bei Muriel und Eustace Bagge in einer Stadt namens Nowhere.
+
+Dort geschehen fortwährend merkwürdige und bedrohliche Dinge. Courage hat Angst vor allem — und stellt sich trotzdem jedes Mal dazwischen, um seine Besitzer zu schützen.
+
+### Entstehungsgeschichte
+
+Erdacht und produziert wurde die Serie von John R. Dilworth. Produziert wurde sie bei Stretch Films für Cartoon Network.
+
+Im Original sprechen Marty Grabstein den Courage, Arthur Anderson den Eustace Bagge und Thea White die Muriel Bagge. In der deutschen Fassung sprechen Dirk Meyer den Courage, Peter Musäus den Eustace und Marion Hartmann die Muriel.
+
+Es entstanden vier Staffeln mit insgesamt 52 Folgen zuzüglich eines Pilotfilms. Ausgestrahlt wurde vom 12. November 1999 bis zum 22. November 2002; 2013 kam eine zusätzliche 3D-Folge hinzu.
+
+### Hinter den Kulissen
+
+Der Widerspruch im Titel ist das ganze Konzept. Ein Hund, der sich fürchtet und trotzdem handelt — Mut wird hier nicht als Furchtlosigkeit definiert, sondern als das, was man trotz Furcht tut.
+
+Die Konstellation ist bewusst eng gehalten. Drei Figuren, ein Haus, ein Ort namens Nowhere: Alles Bedrohliche kommt von außen in eine Anordnung, die sich nie ändert. Damit kann jede Folge eine eigene Bedrohung einführen, ohne die Grundlage zu verschieben.
+
+Bemerkenswert ist die Rollenverteilung im Haus. Muriel ist freundlich und ahnungslos, Eustace abweisend und ebenso ahnungslos; Courage ist der Einzige, der wahrnimmt, was geschieht — und der Einzige, der nicht sprechen kann, um es mitzuteilen.
+
+### Einordnung & Wirkung
+
+52 Folgen über drei Jahre sind für eine Zeichentrickserie dieses Senders ein üblicher Umfang. Bemerkenswerter ist, was elf Jahre später geschah: 2013 entstand eine zusätzliche Folge in 3D.
+
+Dass eine Serie mehr als ein Jahrzehnt nach ihrem Ende noch einmal fortgesetzt wird, verweist auf eine anhaltende Nachfrage — ein Nachleben, das über die Erstausstrahlung deutlich hinausreicht.
+
+Die Anlage erklärt einen Teil davon. Eine Serie, die für Kinder gemacht ist und dabei mit Schrecken arbeitet, spricht ihr Publikum auch dann noch an, wenn es älter geworden ist — der Gegenstand bleibt derselbe, die Lesart ändert sich.
+
+Der Ortsname Nowhere ist dabei Programm: eine Serie, die ihre Handlung ausdrücklich nirgendwo ansiedelt und alles Weitere aus dieser Leere heraus entwickelt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:6280', locale: 'de-de',
+    text: `### Worum es geht
+
+Der österreichische Genetiker Alexander Hesse forscht an einem Präparat namens Expectane. Um es zu erproben, geht er weiter, als vorgesehen war: Er lässt sich selbst eine Eizelle einsetzen.
+
+Was folgt, ist seine eigene Schwangerschaft — und daneben eine Annäherung an die britische Kryobiologin Diana Reddin.
+
+### Entstehungsgeschichte
+
+Regie führte Ivan Reitman. Das Drehbuch schrieben Kevin Wade und Chris Conrad; es entstand bereits 1990. Der ursprüngliche Titel lautete „Oh Baby".
+
+Arnold Schwarzenegger spielt Dr. Alexander „Alex" Hesse, Danny DeVito den Dr. Larry Arbogast, Emma Thompson die Dr. Diana Reddin, Frank Langella den Noah Banes und Pamela Reed die Angela.
+
+Die Kamera führte Adam Greenberg, den Schnitt besorgten Wendy Greene Bricmont und Sheldon Kahn, die Musik stammt von James Newton Howard. Das Budget betrug 60 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Besetzung ist der Witz. Ein Darsteller, dessen Erscheinung für körperliche Unverwundbarkeit steht, spielt einen Mann, dessen Körper sich verändert und der ihm dabei nicht gehorcht.
+
+Daraus zieht der Film seinen Zugriff. Die Schwangerschaft wird nicht als Gag abgehandelt, sondern durchgespielt — mit den Beschwerden, den Stimmungslagen und der Frage, wie das Umfeld reagiert.
+
+Dass das Drehbuch bereits 1990 vorlag und erst 1994 verfilmt wurde, verweist darauf, wie ungewöhnlich der Stoff galt. Zustande kam der Film über eine Konstellation, die sich zuvor bewährt hatte: Ivan Reitman und Arnold Schwarzenegger hatten schon zusammengearbeitet.
+
+### Einordnung & Wirkung
+
+Bei 60 Millionen Dollar Herstellungskosten spielte der Film weltweit 108,4 Millionen ein, davon 37 Millionen in Nordamerika. Zwei Drittel des Ergebnisses kamen also von außerhalb.
+
+Rotten Tomatoes weist 39 Prozent Zustimmung aus, Metacritic 59 von 100. Roger Ebert vergab dagegen dreieinhalb von vier Sternen.
+
+Der Film war für den Oscar für den besten Originalsong nominiert — „Look What Love Has Done". Arnold Schwarzenegger und Emma Thompson erhielten Golden-Globe-Nominierungen, Thompson zusätzlich eine für den American Comedy Award.
+
+Die Spanne zwischen 39 Prozent bei Rotten Tomatoes und Eberts dreieinhalb Sternen beschreibt die Lage. Wer die Prämisse als Einfall abtut, findet wenig; wer sie als ernsthaft durchgeführtes Gedankenexperiment nimmt, findet mehr — und die Nominierungen für beide Hauptdarsteller sprechen dafür, dass die Darstellung über den Gag hinausging.` },
 ];
