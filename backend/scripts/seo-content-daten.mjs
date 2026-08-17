@@ -21936,4 +21936,450 @@ Bis Mai 2024 wurden weltweit über 7,8 Millionen gedruckte Exemplare verkauft. A
 Die Kritik hob Animationsqualität und Musik hervor. Ein wiederkehrendes Urteil lautete, die Serie sei als allgemeine Veröffentlichung etwas besser als der Durchschnitt und als Fanservice-Titel klar überdurchschnittlich.
 
 Sie steht damit für ein Genre, das kommerziell verlässlich funktioniert und außerhalb seiner Zielgruppe kaum besprochen wird.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:16', locale: 'de-de',
+    text: `### Worum es geht
+
+Selma Ježková ist tschechische Einwanderin und arbeitet 1964 in einer Fabrik im Bundesstaat Washington. Sie erblindet allmählich an einer erblichen Krankheit — und ihr Sohn Gene hat sie ebenfalls. Eine Operation könnte ihn retten, wenn sie das Geld dafür zusammenbekommt.
+
+Also arbeitet sie Doppelschichten, verheimlicht ihre Blindheit und spart jeden Dollar. Ihr Vermieter, ein Polizist in Geldnot, stiehlt die Ersparnisse. Was daraus folgt, führt Selma vor Gericht und schließlich zur Hinrichtung. Zwischen den Szenen bricht der Film immer wieder in Musicalnummern aus — Selmas einzige Zuflucht, weil sie aus dem Rhythmus von Maschinen, Zügen und Schritten Musik hört.
+
+### Entstehungsgeschichte
+
+Lars von Trier schrieb und inszenierte den Film. Die Hauptrolle übernahm die isländische Musikerin Björk, für die es das Schauspieldebüt war; sie schrieb zugleich die Musik.
+
+Die Zusammenarbeit zwischen beiden verlief außerordentlich schwierig und ist bis heute Gegenstand von Berichten und Vorwürfen. In den Nebenrollen sind Catherine Deneuve, David Morse und Peter Stormare zu sehen.
+
+### Hinter den Kulissen
+
+Die Musicalnummern wurden mit über hundert digitalen Kameras gleichzeitig aufgenommen, um sämtliche Blickwinkel in einem Durchgang zu erfassen. Die Montage konnte danach frei zusammenstellen, und die Drehzeit verkürzte sich erheblich.
+
+Der Gegensatz ist beabsichtigt: Die Handlungsszenen sind mit wackliger Handkamera und entsättigten Farben gedreht, die Musiknummern dagegen fest, farbig und aus vielen Perspektiven — die Form wechselt genau dann, wenn Selma sich in ihre Vorstellung flüchtet.
+
+### Einordnung & Wirkung
+
+In Cannes gewann der Film 2000 die Goldene Palme, Björk den Preis als beste Darstellerin. Das Lied "I've Seen It All" wurde für den Oscar nominiert und unterlag Bob Dylans Beitrag zu "Die Wonder Boys".
+
+Die Kritik ging weit auseinander. Roger Ebert nannte ihn eine kühne, rücksichtslose Geste; Peter Bradshaw hielt ihn für den flachsten und plumpest manipulativen Film des Jahres 2000. Einig war man sich über Björks Leistung, die auch in ablehnenden Besprechungen gelobt wurde.
+
+Es blieb ihre einzige Hauptrolle in einem Spielfilm.` },
+  {
+    bereich: 'titel', schluessel: 'movie:64720', locale: 'de-de',
+    text: `### Worum es geht
+
+Curtis LaForche arbeitet auf dem Bau in Ohio, hat eine Frau, eine gehörlose Tochter und ein Haus. Dann beginnen die Träume: Ein Sturm zieht auf, der Regen ist ölig und braun, und Menschen, die er kennt, greifen ihn an.
+
+Curtis beginnt, den Sturmkeller im Garten auszubauen — heimlich, mit geliehenem Gerät und einem Kredit, den er nicht bedienen kann. Gleichzeitig weiß er, dass seine Mutter im selben Alter an paranoider Schizophrenie erkrankt ist. Der Film hält beide Möglichkeiten offen: dass er krank wird, oder dass er als Einziger sieht, was kommt.
+
+### Entstehungsgeschichte
+
+Jeff Nichols schrieb und inszenierte den Film; es war seine zweite Arbeit nach "Shotgun Stories". Michael Shannon spielt Curtis, Jessica Chastain seine Frau Samantha.
+
+Das Budget lag bei 4,7 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film erzählt konsequent aus Curtis' Perspektive, ohne die Träume als solche zu kennzeichnen: Erst wenn er aufwacht, weiß auch das Publikum, dass es ein Traum war. Dadurch verliert man dieselbe Sicherheit wie die Figur.
+
+Nichols hat zum offenen Schluss gesagt, entscheidend sei der Moment, in dem sich die beiden Hauptfiguren ansehen und miteinander verbinden. Ob der Sturm wirklich kommt oder Ausdruck von Curtis' Erkrankung ist, bleibt ausdrücklich unbeantwortet.
+
+### Einordnung & Wirkung
+
+Der Film spielte 5 Millionen Dollar ein — bei 4,7 Millionen Produktionskosten also kaum mehr als seine Herstellung.
+
+Die Kritik reagierte hervorragend: 92 Prozent bei Rotten Tomatoes, 85 von 100 bei Metacritic, vier Sterne von Roger Ebert. In Cannes gewann er den Grand Prix der 50. Semaine de la Critique, dazu kamen zwei Saturn Awards für Nichols' Drehbuch und Shannons Darstellung.
+
+Er gilt als einer der genauesten Filme über die Angst vor der eigenen Erkrankung — und darüber, wie schwer es ist, jemandem zu vertrauen, der seiner eigenen Wahrnehmung nicht trauen kann.` },
+  {
+    bereich: 'titel', schluessel: 'movie:521777', locale: 'de-de',
+    text: `### Worum es geht
+
+Max, Lucas und Thor sind zwölf und in der sechsten Klasse. Sie sind zu einer Party eingeladen, auf der geküsst werden soll — und keiner der drei weiß, wie das geht.
+
+Um es herauszufinden, nehmen sie ohne Erlaubnis die Drohne von Max' Vater und beobachten damit die Nachbarin. Die Drohne wird beschlagnahmt, und um sie zurückzubekommen, müssen die drei mit zwei Studentinnen verhandeln, deren Drogen sie versehentlich mitgenommen haben. Der Witz des Films liegt darin, dass die Jungen ununterbrochen über Dinge reden, von denen sie nichts verstehen — und dabei überraschend anständig bleiben.
+
+### Entstehungsgeschichte
+
+Gene Stupnitsky führte Regie; es war sein erster Kinofilm. Das Drehbuch schrieb er mit Lee Eisenberg, mit dem er zuvor an der Serie "The Office" gearbeitet hatte.
+
+Produziert wurde der Film von Seth Rogen und Evan Goldberg über Point Grey Pictures. Das Budget lag bei 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde in British Columbia, unter anderem in Vancouver und Surrey. Die Hauptrollen spielen Jacob Tremblay, Keith L. Williams und Brady Noon.
+
+Der Widerspruch der Produktion war offensichtlich und wurde in der Werbung selbst zum Thema gemacht: eine Komödie mit Freigabe ab 17 Jahren, deren Hauptdarsteller ihren eigenen Film nicht sehen durften.
+
+### Einordnung & Wirkung
+
+Der Film lief am 11. März 2019 beim Festival South by Southwest und kam am 16. August 2019 in die Kinos. Weltweit spielte er 111,2 Millionen Dollar ein.
+
+Er war die erste Komödie mit Freigabe ab 17 seit drei Jahren, die ihr Startwochenende anführte — ein Hinweis darauf, wie selten dieses Genre im Kino jener Jahre geworden war.
+
+Die Kritik reagierte gut: 81 Prozent bei Rotten Tomatoes, 60 von 100 bei Metacritic. Der wiederkehrende Befund lautete, der Film habe trotz aller Derbheit ein Herz, sei aber vorhersehbar.` },
+  {
+    bereich: 'titel', schluessel: 'movie:37430', locale: 'de-de',
+    text: `### Worum es geht
+
+Conan wird auf einem Schlachtfeld geboren; seine Mutter stirbt bei der Geburt. Er wächst in einem Dorf der Cimmerier auf, bis der Kriegsherr Khalar Zym es überfällt, um ein Bruchstück einer uralten Maske zu holen, und Conans Vater vor dessen Augen tötet.
+
+Jahre später sucht Conan als Söldner und Dieb nach Zym. Der will mit der wieder zusammengesetzten Maske und dem Blut einer bestimmten Nachfahrin seine tote Frau zurückholen — und Conan findet diese Frau, eine Mönchin namens Tamara, vor ihm.
+
+### Entstehungsgeschichte
+
+Die Figur stammt aus den Erzählungen von Robert E. Howard aus den dreißiger Jahren. Das Drehbuch schrieben Thomas Dean Donnelly, Joshua Oppenheimer und Sean Hood.
+
+Die Entwicklung dauerte ungewöhnlich lange: Warner Bros. arbeitete sieben Jahre daran, zeitweise mit den Wachowskis, John Milius und Robert Rodriguez. 2007 gingen die Rechte an Paradox Entertainment, im August 2007 übernahm Millennium Films. Brett Ratner war kurz als Regisseur vorgesehen, bevor Marcus Nispel im Juni 2009 übernahm.
+
+### Hinter den Kulissen
+
+Jason Momoa spielt Conan. Für ihn war es die erste große Kinohauptrolle — zeitgleich lief seine Rolle als Khal Drogo in "Game of Thrones" an, die ihn bekannter machte als dieser Film.
+
+Das Budget lag bei 90 Millionen Dollar. Die Maskenarbeit wurde für einen Saturn Award nominiert.
+
+Der Vergleich mit John Milius' Verfilmung von 1982 mit Arnold Schwarzenegger begleitete den Film von Anfang an — und fiel in nahezu jeder Besprechung zu seinen Ungunsten aus.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film nur 48,8 Millionen Dollar ein, davon 21,3 Millionen in den USA. Gemessen an 90 Millionen Produktionskosten war das ein deutlicher Fehlschlag.
+
+Die Kritik lehnte ihn ab: 25 Prozent bei Rotten Tomatoes, 36 von 100 bei Metacritic; das Publikum vergab bei CinemaScore ein B minus. Einzelne Stimmen hoben die Actionszenen und die Treue zum rauen Ton der Vorlagen hervor.
+
+Geplante Fortsetzungen kamen nicht zustande.` },
+  {
+    bereich: 'titel', schluessel: 'movie:482321', locale: 'de-de',
+    text: `### Worum es geht
+
+In einer nahen Zukunft besitzt jedes Kind einen B-Bot: einen kugelförmigen Roboter, der die sozialen Netzwerke des Kindes durchsucht und ihm passende Freunde vermittelt. Nur Barney hat keinen — seine Familie kann sich das nicht leisten.
+
+Zum Geburtstag bekommt er doch einen, allerdings ein beschädigtes Exemplar vom Lastwagen. Ron ist fehlerhaft: Er hat keinen Zugriff auf die Daten, kennt die Sicherheitsregeln nicht und weiß nichts über Barney. Genau deshalb muss er ihn kennenlernen — was der Film als das eigentliche Gegenmodell zur algorithmischen Freundschaftsvermittlung ausspielt.
+
+### Entstehungsgeschichte
+
+Es ist der erste abendfüllende Film von Locksmith Animation. Regie führten Sarah Smith und Jean-Philippe Vine, die Animation stammt von DNEG Animation, verliehen wurde er von 20th Century Studios.
+
+Die Herstellung dauerte rund fünf Jahre und wurde wegen der Pandemie vollständig aus dem Heimbüro abgeschlossen — für einen Animationsfilm dieser Größe ein ungewöhnlicher Vorgang.
+
+### Hinter den Kulissen
+
+Gesprochen wird Ron von Zach Galifianakis, Barney von Jack Dylan Grazer; daneben sind Ed Helms, Justice Smith, Olivia Colman und Rob Delaney zu hören.
+
+Das Thema ist bemerkenswert direkt für einen Kinderfilm: Der Gegenspieler ist kein Bösewicht, sondern ein Geschäftsmodell — ein Konzern, der Freundschaft aus Datenprofilen berechnet und daran verdient.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 60,7 Millionen Dollar ein, davon 23 Millionen in den USA und 37,7 Millionen international.
+
+Die Kritik reagierte überwiegend positiv: 82 Prozent bei Rotten Tomatoes, mit dem Befund, er biete eine spritzige und schonungslos komische Abrechnung mit der Rolle der Technik. Das Publikum vergab bei CinemaScore ein A.
+
+Bei den British Animation Awards gewann er in der Kategorie "Best Long Form". Er steht damit für den schwierigen Start eines neuen Animationsstudios gegen die etablierten Häuser.` },
+  {
+    bereich: 'titel', schluessel: 'movie:591275', locale: 'de-de',
+    text: `### Worum es geht
+
+Der dritte Teil führt zurück zum Ursprung: Shadyside im Jahr 1666, damals noch eine einzige Siedlung namens Union. Die junge Sarah Fier liebt eine andere Frau, wird deshalb der Hexerei bezichtigt und gehängt — so lautet die Legende, die drei Jahrhunderte lang erzählt wird.
+
+Der Film zeigt, was tatsächlich geschah, und dreht die Schuldfrage um. Danach springt er zurück ins Jahr 1994 und schließt die Handlung der beiden Vorgängerfilme ab.
+
+### Entstehungsgeschichte
+
+Grundlage ist R. L. Stines Buchreihe "Fear Street". Die Entwicklung begann 2015 bei 20th Century Fox; Leigh Janiak wurde 2017 verpflichtet und schrieb gemeinsam mit Phil Graziadei und Kate Trefry.
+
+Alle drei Filme entstanden am Stück von März bis September 2019 in Georgia. Geplant war ein Kinostart ab Juni 2020; wegen der Pandemie und der Übernahme von Fox durch Disney verkaufte Chernin Entertainment die Auswertungsrechte im August 2020 an Netflix.
+
+### Hinter den Kulissen
+
+Die Veröffentlichung war ungewöhnlich: drei Filme im Abstand von je einer Woche im Juli 2021 — eine Form, die weder dem Kino noch der üblichen Serienveröffentlichung entspricht.
+
+Die Besetzung spielt in beiden Zeitebenen: Kiana Madeira, Ashley Zukerman und andere übernehmen 1666 und 1994 jeweils andere Figuren. Das ist kein Sparzwang, sondern erzählerisch begründet — die Wiederkehr derselben Gesichter über drei Jahrhunderte ist der Kern dessen, was der Ort mit seinen Bewohnern macht.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 16. Juli 2021 und erreichte 89 Prozent bei Rotten Tomatoes. Die Kritik lobte ihn als kreischenden Schlusston der Reihe; einzelne Stimmen hielten ihn für den schwächsten der drei.
+
+Rotten Tomatoes führte ihn unter den besten Horrorfilmen des Jahres 2021.
+
+Die Trilogie gilt als eines der wenigen gelungenen Beispiele dafür, eine geschlossene Filmreihe von vornherein als Ganzes zu drehen und in kurzer Folge zu veröffentlichen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:727745', locale: 'de-de',
+    text: `### Worum es geht
+
+Elle Evans hat den letzten Sommer vor dem Studium vor sich. Sie ist bei Harvard und bei Berkeley angenommen — an einer Universität wartet ihr Freund Noah, an der anderen ihr bester Freund Lee, dem sie seit Kindertagen versprochen hat, gemeinsam dorthin zu gehen.
+
+Statt zu entscheiden, arbeitet sie eine Liste ab, die die beiden als Kinder geschrieben haben, und verbringt den Sommer im Strandhaus von Noahs Familie, das verkauft werden soll. Am Ende wählt sie weder das eine noch das andere: Sie geht nach Südkalifornien und studiert Spieleentwicklung.
+
+### Entstehungsgeschichte
+
+Der Film schließt die Trilogie nach Beth Reekles' Roman ab, die Netflix 2018 begonnen hatte. Regie führte erneut Vince Marcello.
+
+Teil zwei und drei wurden 2019 am Stück in Südafrika gedreht; die Ankündigung des dritten Teils erfolgte erst im Juli 2020, als er längst abgedreht war.
+
+### Hinter den Kulissen
+
+Joey King spielt Elle, Joel Courtney ihren Freund Lee, Jacob Elordi den Freund Noah und Taylor Zakhar Perez den Nebenbuhler Marco; Molly Ringwald spielt Noahs Mutter.
+
+Ringwalds Besetzung ist ein bewusster Verweis: Sie war in den achtziger Jahren durch John Hughes' Jugendfilme bekannt geworden, an denen sich die Reihe erkennbar orientiert.
+
+Der Film erschien am 11. August 2021 und läuft 113 Minuten.
+
+### Einordnung & Wirkung
+
+Die Kritik lehnte ihn überwiegend ab: 25 Prozent bei Rotten Tomatoes, 36 von 100 bei Metacritic. Der wiederkehrende Befund lautete, es sei ein passendes, aber fades Ende, das gelegentlich überrasche.
+
+Der Zuspruch beim Zielpublikum war davon unabhängig — die Reihe gehört zu den meistgesehenen Jugendproduktionen von Netflix und hat maßgeblich dazu beigetragen, dass der Anbieter dieses Genre systematisch ausbaute.
+
+Für Joey King und Jacob Elordi war sie der Ausgangspunkt: Beide arbeiteten anschließend in deutlich anders gelagerten Produktionen weiter.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1038392', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film beginnt 1964 mit einem Fall der Warrens, der ihnen fast das Leben gekostet hätte: ein Spiegel, der etwas beherbergt, und eine Geburt, die schiefgeht. Zweiundzwanzig Jahre später sind Ed und Lorraine Warren älter, Ed herzkrank, und beide haben sich aus der Arbeit zurückgezogen.
+
+Der Fall, der sie zurückholt, ist der der Familie Smurl in West Pittston, Pennsylvania — ein realer Vorgang aus den achtziger Jahren, bei dem eine Familie über Jahre von Erscheinungen berichtete. Im Film hängen die drei Wesen im Haus mit jenem Spiegel von 1964 zusammen, und ihre Tochter Judy ist inzwischen erwachsen und selbst betroffen.
+
+### Entstehungsgeschichte
+
+Es ist der abschließende Film der Hauptreihe um Ed und Lorraine Warren, die 2013 begann. Regie führte Michael Chaves, der zuvor bereits den dritten Teil inszeniert hatte.
+
+Patrick Wilson und Vera Farmiga spielen erneut die Warrens, Mia Tomlinson ihre Tochter Judy. Das Budget lag bei 55 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Reihe beruht durchgehend auf Fällen, die die realen Warrens bearbeitet haben — Vorgänge, deren Deutung von Anfang an umstritten war und deren Darstellung in den Filmen erheblich ausgeschmückt ist.
+
+Der Aufbau schließt einen Kreis: Der Prolog von 1964 liefert nachträglich die Erklärung für die gesamte Reihe und verknüpft die Familiengeschichte der Warrens mit ihrer Arbeit.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 5. September 2025 und spielte weltweit 499,3 Millionen Dollar ein — 177,8 Millionen in den USA und 321,4 Millionen international. Damit ist er der erfolgreichste der ganzen Reihe. Der Start in den USA war mit 84 Millionen Dollar der drittstärkste, den je ein Horrorfilm hatte.
+
+Die Kritik blieb geteilt: 57 Prozent bei Rotten Tomatoes, 54 von 100 bei Metacritic; das Publikum vergab bei CinemaScore ein B.
+
+Abgeschlossen ist damit nur die Hauptreihe, nicht das Filmuniversum: Ein Vorgeschichtenfilm mit dem Titel "The Conjuring: First Communion" ist für den 10. September 2027 angekündigt.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:925', locale: 'de-de',
+    text: `### Worum es geht
+
+Der heißeste Tag des Jahres in Bedford-Stuyvesant, Brooklyn. Mookie liefert Pizza für Sal, dessen Familie seit fünfundzwanzig Jahren an dieser Straße eine Pizzeria betreibt — als eine der wenigen weißen Familien in einem schwarzen Viertel.
+
+An Sals Wand hängen Fotos italoamerikanischer Berühmtheiten. Buggin' Out fragt, warum dort niemand hängt, der aussieht wie die Kundschaft. Aus dieser Frage wird über den Tag hinweg ein Boykott, ein Streit, eine Schlägerei — und am Abend erstickt ein Polizist Radio Raheem im Würgegriff. Mookie wirft daraufhin einen Mülleimer in Sals Schaufenster.
+
+### Entstehungsgeschichte
+
+Spike Lee schrieb, inszenierte und produzierte den Film und spielt Mookie selbst. Das Budget lag bei 6,2 Millionen Dollar.
+
+Gedreht wurde von Juli bis September 1988 an einem einzigen Straßenblock in Bed-Stuy. Die Beschränkung auf diesen Ort und einen Tag ist die Grundentscheidung des Films: Alles, was geschieht, geschieht zwischen Menschen, die einander kennen.
+
+### Hinter den Kulissen
+
+Radio Raheems Tod im Würgegriff der Polizei war kein erfundenes Motiv — solche Fälle waren in New York in den achtziger Jahren dokumentiert und Gegenstand öffentlicher Auseinandersetzungen.
+
+Der Schluss stellt zwei Zitate nebeneinander: eines von Martin Luther King Jr. gegen Gewalt und eines von Malcolm X, das Gewalt zur Selbstverteidigung für Intelligenz erklärt. Der Film entscheidet nicht zwischen ihnen — bis heute wird darüber gestritten, ob Mookies Wurf gerechtfertigt war.
+
+Vor dem Start äußerten mehrere Kritiker die Sorge, der Film könne schwarze Zuschauer zu Aufruhr anstiften. Lee nannte diese Befürchtung selbst rassistisch.
+
+### Einordnung & Wirkung
+
+Gene Siskel und Roger Ebert wählten ihn beide zum besten Film des Jahres 1989. Ebert schrieb später, kein anderer Film komme dem Zustand der Rassenbeziehungen in Amerika näher.
+
+Er steht bei 92 Prozent auf Rotten Tomatoes und 93 von 100 bei Metacritic. Oscar-Nominierungen gab es für das Originaldrehbuch und für Danny Aiello als Nebendarsteller.
+
+1999 wurde er in das National Film Registry aufgenommen; in der Sight-and-Sound-Umfrage von 2022 stand er auf Platz 24 der besten Filme aller Zeiten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:39013', locale: 'de-de',
+    text: `### Worum es geht
+
+Ree Dolly ist siebzehn und versorgt in den Ozarks in Missouri ihre psychisch kranke Mutter und ihre beiden jüngeren Geschwister. Ihr Vater ist wegen Methamphetaminherstellung angeklagt und untergetaucht.
+
+Ein Polizist eröffnet ihr, dass er Haus und Grundstück als Kaution eingesetzt hat: Erscheint er nicht vor Gericht, verliert die Familie alles. Also macht Ree sich auf, ihn zu finden — in einer Gegend, in der alle miteinander verwandt sind, niemand redet und Fragen als Verrat gelten. Was sie schließlich erfährt, muss sie sich körperlich erkämpfen.
+
+### Entstehungsgeschichte
+
+Grundlage ist Daniel Woodrells Roman von 2006. Debra Granik führte Regie und schrieb das Drehbuch mit. Das Budget lag bei 2 Millionen Dollar.
+
+Jennifer Lawrence spielt Ree; es war ihre erste Hauptrolle in einem Kinofilm. John Hawkes spielt ihren Onkel Teardrop.
+
+### Hinter den Kulissen
+
+Gedreht wurde an Originalschauplätzen in den Ozarks, mit Bewohnern der Gegend in Nebenrollen und in deren eigenen Häusern. Die Musik, das Gerät, die Kleidung stammen aus der Region — der Film arbeitet dokumentarisch, ohne dokumentarisch zu tun.
+
+Bemerkenswert ist die Rolle der Frauen: Es sind Frauen, die den Zugang verweigern, und Frauen, die ihn am Ende gewähren. Ein Kritiker nannte den Film eines der großen feministischen Werke des Kinos.
+
+### Einordnung & Wirkung
+
+Der Film gewann 2010 beim Sundance-Festival den Großen Preis der Jury. Er startete in nur vier Kinos und spielte weltweit 16,1 Millionen Dollar ein — die Ausweitung lief vor allem über Städte im Landesinneren wie St. Louis und Denver.
+
+Die Kritik reagierte einhellig: 94 Prozent bei Rotten Tomatoes, vier von vier Sternen von Roger Ebert, Platz zwei der Jahresliste bei Metacritic.
+
+Es gab vier Oscar-Nominierungen, darunter bester Film und beste Hauptdarstellerin — Lawrence war mit zwanzig Jahren die zweitjüngste je Nominierte. Zwei Jahre später begann mit "Die Tribute von Panem" ihre Laufbahn im Großkino.` },
+  {
+    bereich: 'titel', schluessel: 'movie:775', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Versammlung von Astronomen beschließt unter Leitung von Professor Barbenfouillis eine Reise zum Mond. Sechs Männer besteigen eine Kapsel, die aus einer riesigen Kanone abgeschossen wird.
+
+Die Kapsel trifft den Mond ins Auge — die bekannteste Einstellung der frühen Filmgeschichte. Auf der Oberfläche schlafen die Reisenden unter Sternen ein, treffen auf insektenartige Bewohner, die Seleniten, und stellen fest, dass diese sich bei Berührung in Rauch auflösen. Mit einem Gefangenen kehren sie zur Erde zurück, wo man ihnen ein Denkmal setzt.
+
+### Entstehungsgeschichte
+
+Georges Méliès schrieb, produzierte und inszenierte den Film 1902. Das Budget betrug 10.000 französische Franc, die Herstellung dauerte drei Monate.
+
+Mit rund 260 Metern Länge — etwa 17 Minuten bei Méliès' bevorzugter Vorführgeschwindigkeit — war er für seine Zeit außergewöhnlich lang und aufwendig.
+
+### Hinter den Kulissen
+
+Méliès kam vom Theater und vom Zauberkunststück, was den Film prägt: Er arbeitete mit dem Stopptrick, bei dem die Kamera angehalten und die Szene verändert wird, dazu mit Bühnenmaschinerie und Pyrotechnik.
+
+Die berühmte Fahrt auf den Mond zu entstand ohne bewegte Kamera: Ein Darsteller saß auf einem Stuhl, der über einen Flaschenzug auf die feststehende Kamera zugezogen wurde.
+
+Farbfassungen wurden von Hand koloriert, im Pariser Labor von Elisabeth und Berthe Thuillier. Lange galt keine erhalten — bis 1993 eine Kopie in einer Sammlung auftauchte, die der Filmoteca de Catalunya übergeben wurde.
+
+### Einordnung & Wirkung
+
+Der Film wurde umgehend raubkopiert: Die Edison Manufacturing Company, Vitagraph, Siegmund Lubin und die Selig Polyscope Company brachten ihn ohne Vergütung in Umlauf. Méliès versuchte vergeblich, den Vertrieb über eigene Händler zu steuern.
+
+Er gilt als einer der ersten Filme, die eine erfundene Geschichte erzählen statt eine Begebenheit abzubilden, und als Ausgangspunkt der Science-Fiction im Kino. Das Village Voice führte ihn auf Platz 84 der besten Filme des Jahrhunderts.
+
+Das Bild der Kapsel im Auge des Mondes gehört zu den bekanntesten Einzelbildern der Filmgeschichte überhaupt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2064', locale: 'de-de',
+    text: `### Worum es geht
+
+Lucy Moderatz verkauft Fahrscheine an einer Station der Chicagoer Hochbahn und ist allein. Jeden Tag sieht sie denselben Mann durch die Sperre gehen und stellt sich ein Leben mit ihm vor, ohne je ein Wort gewechselt zu haben.
+
+An Weihnachten wird er von Räubern auf die Gleise gestoßen; Lucy zieht ihn heraus und rettet ihm das Leben. Im Krankenhaus hält eine Schwester sie für seine Verlobte, und Lucys Widerspruch geht unter. Peters Familie nimmt sie auf, und je länger die Sache dauert, desto weniger kann Lucy sie aufklären — zumal sie sich in seinen Bruder Jack verliebt, während Peter im Koma liegt.
+
+### Entstehungsgeschichte
+
+Das Drehbuch hieß ursprünglich "Coma Guy" und spielte in New York; aus Kostengründen wurde die Handlung nach Chicago verlegt. Regie führte Jon Turteltaub.
+
+Mehrere bekannte Darstellerinnen lehnten die Hauptrolle ab. Meg Ryan sagte als eine der ersten ab — in der frühen Fassung war es Lucy, die ins Koma fällt.
+
+Besetzt wurde Sandra Bullock, für die es nach "Speed" der Film wurde, der sie als Hauptdarstellerin etablierte. Bill Pullman spielt Jack.
+
+### Hinter den Kulissen
+
+Gedreht wurde vom 8. Oktober bis 14. Dezember 1994 in Chicago. Das Budget lag bei 17 Millionen Dollar.
+
+Der Film lebt von der Familie: Ein großer Teil der Laufzeit besteht aus Szenen an einem Esstisch, an dem alle gleichzeitig reden. Was Lucy an dieser Familie anzieht, ist nicht Peter, sondern dass dort überhaupt jemand zusammensitzt.
+
+### Einordnung & Wirkung
+
+Der Film spielte weltweit 182 Millionen Dollar ein, davon 9,3 Millionen am Startwochenende, und war der dreizehnterfolgreichste Film des Jahres 1995 in den USA.
+
+Die Kritik reagierte gut: 81 Prozent bei Rotten Tomatoes. Roger Ebert vergab drei Sterne und nannte ihn einen warmherzigen Wohlfühlfilm. Sandra Bullock wurde für den Golden Globe als beste Hauptdarstellerin in einer Komödie nominiert.
+
+Er gilt als einer der Filme, die das Genre der romantischen Komödie in den neunziger Jahren prägten — und als der, mit dem Bullock zum festen Namen wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10025', locale: 'de-de',
+    text: `### Worum es geht
+
+Ashley Albright arbeitet in der Werbung in Manhattan und hat außerordentliches Glück: Taxis halten, Aufzüge warten, Beförderungen kommen von selbst. Jake Hardin dagegen ist Hausmeister in einer Bowlingbahn, will Musikproduzent werden und wird von jedem Missgeschick getroffen, das es gibt.
+
+Auf einem Maskenball küssen sich beide, ohne einander zu erkennen — und tauschen dabei ihr Glück. Ashley verliert Wohnung und Stelle, Jake bekommt einen Plattenvertrag für die Band, die er betreut. Um ihr Leben zurückzubekommen, muss Ashley den Mann finden, den sie geküsst hat.
+
+### Entstehungsgeschichte
+
+Regie führte Donald Petrie, der zuvor "Wie werde ich ihn los — in 10 Tagen" gedreht hatte. Der Film erschien am 12. Mai 2006 bei 20th Century Fox, das Budget lag bei 28 Millionen Dollar.
+
+Lindsay Lohan spielt Ashley, Chris Pine spielt Jake — für ihn eine seiner ersten größeren Rollen, drei Jahre vor "Star Trek". Die britische Band McFly tritt als sie selbst auf.
+
+### Hinter den Kulissen
+
+Die Innenaufnahmen entstanden in New Orleans, noch vor dem Hurrikan Katrina; die Außenaufnahmen im März 2005 in New York, unter anderem am Grand Central Terminal und im Central Park. Lohan verstauchte sich während der Dreharbeiten den Knöchel.
+
+Im Juni 2006 erschien ein Soundtrack von McFly mit Stücken ihrer früheren Alben und dem neuen Titel "Just My Luck".
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 38,2 Millionen Dollar ein und blieb damit unter seinen Produktionskosten.
+
+Die Kritik lehnte ihn deutlich ab: 14 Prozent bei Rotten Tomatoes mit dem Befund, es handle sich um eine mittelmäßige Jugendkomödie ohne Funken, dazu 29 von 100 bei Metacritic. Roger Ebert merkte an, der Film sei weder für Erwachsene noch für jugendliche Zuschauer interessant. Das Publikum vergab bei CinemaScore ein B.
+
+Er fällt in die Phase, in der Lindsay Lohan nach "Girls Club" und "Freaky Friday" die erfolgreichsten Jahre bereits hinter sich hatte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:614479', locale: 'de-de',
+    text: `### Worum es geht
+
+Zehn Jahre nach den Ereignissen des zweiten Teils sind die Erinnerungen der Familie Lambert gelöscht — Josh und sein Sohn Dalton wurden hypnotisiert, um zu vergessen, was ihnen widerfahren ist. Die Ehe der Eltern ist daran zerbrochen.
+
+Dalton beginnt ein Kunststudium und lernt in einer Zeichenübung, in sein Inneres zu greifen. Was er dabei hervorholt, ist eine rote Tür. Gleichzeitig kehren bei Josh die verdrängten Bilder zurück. Der Film erzählt beide Handlungsstränge parallel und führt sie in jenem Zwischenreich zusammen, das die Reihe "The Further" nennt.
+
+### Entstehungsgeschichte
+
+Es ist der fünfte Teil der "Insidious"-Reihe und die unmittelbare Fortsetzung von "Chapter 2" aus dem Jahr 2013.
+
+Patrick Wilson, der Josh Lambert seit dem ersten Teil spielt, führte hier zum ersten Mal Regie. Das Drehbuch schrieb Scott Teems nach einer Geschichte von Leigh Whannell und Teems; die Musik stammt wie in allen Teilen von Joseph Bishara.
+
+### Hinter den Kulissen
+
+Gedreht wurde im August 2022 in Morris County und in Madison im Bundesstaat New Jersey. Das Budget lag bei 16 Millionen Dollar.
+
+Ty Simpkins spielt erneut Dalton — er war beim ersten Teil neun Jahre alt und ist hier Student, sodass die Reihe die Alterung ihres Darstellers erzählerisch nutzen kann. Rose Byrne und Lin Shaye kehren ebenfalls zurück.
+
+### Einordnung & Wirkung
+
+Der Film wurde am 27. Juni 2023 in New York gezeigt und startete am 7. Juli 2023. Weltweit spielte er 189,1 Millionen Dollar ein — 82,2 Millionen in den USA, 106,9 Millionen international — und ist damit der erfolgreichste Teil der Reihe.
+
+Die Kritik blieb zurückhaltend: 39 Prozent bei Rotten Tomatoes; das Publikum vergab bei CinemaScore ein C plus.
+
+Der Abstand zwischen Einspielergebnis und Bewertung ist bezeichnend für die Reihe: Sie funktioniert wirtschaftlich verlässlich, ohne dass die Kritik das je mitgetragen hätte.` },
+  {
+    bereich: 'titel', schluessel: 'series:47640', locale: 'de-de',
+    text: `### Worum es geht
+
+Auf dem Flughafen JFK landet ein Flugzeug aus Berlin und bleibt auf der Rollbahn stehen: kein Funkkontakt, alle Lichter aus, sämtliche Passagiere tot. Die Seuchenbehörde CDC schickt Dr. Ephraim Goodweather und sein Team.
+
+Vier Menschen überleben, und die Toten stehen wieder auf. Was sich ausbreitet, ist keine Krankheit im üblichen Sinn, sondern ein Parasit — ein wurmartiger Organismus, der den Körper umbaut, einen Stachel unter der Zunge wachsen lässt und den Wirt zu seinen eigenen Angehörigen zurückschickt. Dahinter steht ein uralter Meister und ein Milliardär, der sich davon sein eigenes Weiterleben verspricht.
+
+### Entstehungsgeschichte
+
+Guillermo del Toro bot den Stoff 2006 zunächst als Fernsehserie an. Als ein Programmverantwortlicher daraus eine Komödie machen wollte, schrieb er ihn stattdessen gemeinsam mit Chuck Hogan als Romantrilogie: 2009, 2010 und 2011.
+
+Nach dem Erscheinen der Bücher sicherte sich FX die Rechte und bewilligte die Serie mit Carlton Cuse als Verantwortlichem — bekannt durch "Lost".
+
+### Hinter den Kulissen
+
+Die Serie lief vom 13. Juli 2014 bis zum 17. September 2017 über vier Staffeln mit 46 Folgen, aufgeteilt in 13, 13, 10 und 10 Episoden. Gedreht wurde in Toronto, die Musik schrieb Ramin Djawadi.
+
+Der Ansatz unterscheidet sie von anderen Vampirstoffen: Vampirismus wird durchgehend biologisch erklärt — als Parasit mit Lebenszyklus, Wirtsverhalten und Ausbreitungswegen. Das ist erkennbar del Toros Handschrift, der Ungeheuer bevorzugt, die man sezieren kann.
+
+### Einordnung & Wirkung
+
+Die erste Staffel wurde gut aufgenommen: 84 Prozent bei Rotten Tomatoes. In den mittleren Staffeln fielen die Bewertungen ab, die letzte erreichte dort wieder 100 Prozent.
+
+Die Serie steht damit für einen typischen Verlauf: ein sehr starker Anfang, ein Mittelteil, der die Bücher streckt, und ein Abschluss, der die Erzählung wieder zusammenzieht.
+
+Bemerkenswert bleibt die Entstehung — ein Fernsehstoff, der zu Romanen wurde, weil ihn niemand so verfilmen wollte, und der erst über den Umweg des Buches ins Fernsehen zurückkam.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1197306', locale: 'de-de',
+    text: `### Worum es geht
+
+Levon Cade hat bei den britischen Royal Marines gedient und arbeitet inzwischen als Vorarbeiter auf dem Bau. Er hat mit seiner Vergangenheit abgeschlossen und will nichts weiter, als in Ruhe seiner Arbeit nachgehen.
+
+Als Jenny, die Tochter seines Arbeitgebers Joe Garcia, entführt wird, ändert sich das. Cade nimmt die Suche selbst auf und stößt auf einen Ring von Menschenhändlern. Der Film folgt damit einem Muster, das Jason Stathams Arbeiten dieser Jahre kennzeichnet: ein Mann mit militärischer Vergangenheit, ein Unrecht an Schutzbedürftigen, eine Aufarbeitung ohne Behörden.
+
+### Entstehungsgeschichte
+
+Grundlage ist Chuck Dixons Roman "Levon's Trade" von 2014. Das Drehbuch schrieben David Ayer und Sylvester Stallone gemeinsam.
+
+Regie führte David Ayer. Neben Statham spielen David Harbour, Michael Peña und Jason Flemyng. Den Schnitt besorgte Fred Raskin, die Kamera führte Shawn White.
+
+Bemerkenswert ist Stallones Beteiligung am Drehbuch: Er schreibt seit einigen Jahren wiederholt an Stoffen mit, in denen er nicht selbst auftritt.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen im April 2024 in London und endeten am 31. Mai 2024 in den Winnersh Film Studios in Berkshire. Das Budget lag bei 40 Millionen Dollar.
+
+Der Film spielt also in den Vereinigten Staaten, gedreht wurde er vollständig in England — ein Verfahren, das bei Produktionen dieser Größenordnung inzwischen die Regel ist.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 28. März 2025 über Amazon MGM Studios und in Großbritannien über Warner Bros. Weltweit spielte er 89 Millionen Dollar ein — 37 Millionen in den USA und 52 Millionen international.
+
+Die Kritik blieb geteilt: 46 Prozent bei Rotten Tomatoes, 52 von 100 bei Metacritic. Der wiederkehrende Befund lautete, der Film liefere solide ab, was man von einem Statham-Film erwarte, entwickle darüber hinaus aber kein eigenes Gesicht.
+
+Er steht damit für den handgemachten Actionfilm mittlerer Größe, der seinen Platz behalten hat — auch nachdem das Kino ihn weitgehend an die Streamingdienste abgegeben hatte.` },
 ];
