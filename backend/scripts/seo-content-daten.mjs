@@ -32160,4 +32160,496 @@ Weltweit spielte der Film etwas über 20 Millionen Dollar ein — bei 30 Million
 Die Kritik urteilte gemischt: gelobt wurde die Bildgestaltung, bemängelt eine hölzerne Zeichnung der Figuren trotz starker Darsteller.
 
 Bemerkenswert bleibt der Widerspruch: ein Film über eine Flucht, deren Wahrheitsgehalt zweifelhaft ist — und der genau deshalb umso deutlicher macht, dass es solche Fluchten gegeben hat.` },
+  // ---- Block 56 ----
+  {
+    bereich: 'titel', schluessel: 'movie:848538', locale: 'de-de',
+    text: `### Worum es geht
+
+Elly Conway schreibt Spionageromane um einen Agenten namens Argylle. Die Bücher verkaufen sich gut, und Elly selbst führt ein zurückgezogenes Leben.
+
+Dann stellt sich heraus, dass ihre erfundenen Handlungen die tatsächlichen Einsätze eines realen Agenten wiedergeben — eines Mannes namens Aidan Wilde. Eine Geheimorganisation mit dem Namen Division will von ihr wissen, woher sie das hat. Elly weiß es selbst nicht.
+
+### Entstehungsgeschichte
+
+Regie führte Matthew Vaughn, das Drehbuch schrieb Jason Fuchs.
+
+Bryce Dallas Howard spielt Elly Conway, Sam Rockwell den Aidan Wilde, Henry Cavill den Agenten Argylle.
+
+Apple sicherte sich die Rechte für rund 200 Millionen Dollar; das Gesamtbudget lag zwischen 200 und 250 Millionen.
+
+### Hinter den Kulissen
+
+Die Vermarktung arbeitete mit einer eigenen Erfindung. Zum Film erschien ein Roman, angeblich von einer Autorin namens Elly Conway — also von der Figur des Films. Wer tatsächlich dahintersteckte, blieb zunächst offen; später wurde bekannt, dass Terry Hayes und Tammy Cohen ihn geschrieben hatten.
+
+In der Zwischenzeit war die Vermutung aufgekommen, Taylor Swift habe das Buch verfasst. Matthew Vaughn hat das später dementiert.
+
+Damit hat der Film ein Verfahren angewandt, das sonst der Literaturbetrieb kennt: Ein Werk wird über eine erfundene Urheberschaft beworben — nur dass hier der Film selbst von einer Autorin handelt, die nicht weiß, wer sie ist.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film nur 96,2 Millionen Dollar ein. Gemessen am Einsatz ist das der bis dahin größte finanzielle Fehlschlag von Apple im Kinogeschäft.
+
+Die Kritik lehnte ihn deutlich ab: 33 Prozent bei Rotten Tomatoes, 35 von 100 bei Metacritic.
+
+Der Fall ist damit doppelt aufschlussreich — für die Größenordnungen, in denen Streamingdienste inzwischen Kinofilme finanzieren, und dafür, wie wenig ein aufwendiger Vermarktungseinfall ausrichtet, wenn der Film selbst nicht überzeugt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:810693', locale: 'de-de',
+    text: `### Worum es geht
+
+Yuta Okkotsu ist sechzehn und wird von einem Fluch begleitet: Rika Orimoto, seine Jugendfreundin, ist vor sechs Jahren gestorben und seither an ihn gebunden. Wenn ihm jemand etwas antut, greift sie ein — mit Gewalt, die er nicht steuern kann.
+
+Nach einem solchen Vorfall holt ihn der Zauberer Satoru Gojo an die Tokioter Oberschule für Jujutsu. Dort lernt Yuta gemeinsam mit anderen Schülern, mit Flüchen umzugehen. Am Ende steht die Auseinandersetzung mit Suguru Geto, der alle Menschen ohne Zauberkraft beseitigen will.
+
+### Entstehungsgeschichte
+
+Die Vorlage stammt von Gege Akutami. Sie erschien zunächst unter dem Titel "Tokyo Metropolitan Curse Technical School" von April bis Juli 2017 im Magazin Jump Giga und wurde später umbenannt — als Vorgeschichte zur eigentlichen Reihe "Jujutsu Kaisen".
+
+Die Verfilmung entstand beim Studio MAPPA unter der Regie von Sunghoo Park. Die Premiere in Japan war am 24. Dezember 2021.
+
+### Hinter den Kulissen
+
+Die Reihenfolge ist ungewöhnlich. Die Vorlage wurde erst nachträglich zur Vorgeschichte erklärt: Sie erschien 2017 unter eigenem Titel und bekam ihre Stellung innerhalb der Reihe erst später zugewiesen.
+
+Der Kern der Geschichte ist dabei kein Kampf, sondern eine Bindung — die zwischen Yuta und Rika, und die Frage, was von einem Menschen bleibt, der als Fluch weiterexistiert.
+
+### Einordnung & Wirkung
+
+Die Vorlage war schon als Manga erfolgreich: 70.774 verkaufte Exemplare in der ersten Woche und über 1,9 Millionen bis November 2021.
+
+Die Kritik hob die Hauptfigur hervor. Yuta gilt vielen als zugänglicher als Yuji Itadori, die Hauptfigur der Serie, weil seine Entwicklung und sein Verhältnis zu Rika den ganzen Bogen tragen. Eine Besprechung nannte den Stoff die wahrscheinlich beste und geschlossenste Erzählung der gesamten Reihe.
+
+Damit steht der Film für eine Besonderheit dieses Franchise: Der Nebenstrang gilt vielen als der stärkere Teil.` },
+  {
+    bereich: 'titel', schluessel: 'series:61056', locale: 'de-de',
+    text: `### Worum es geht
+
+Annalise Keating ist eine herausragende Strafverteidigerin und lehrt zugleich an einer Universität.
+
+Aus ihren Studierenden wählt sie fünf aus, die bei ihren echten Fällen mitarbeiten dürfen.
+
+Was als Auszeichnung beginnt, wird zur Verstrickung. Die fünf geraten in einen Mordfall hinein — den an Keatings Ehemann Sam, den sie selbst getötet haben — und müssen ihn von da an vertuschen. Von diesem Punkt an läuft die Serie auf zwei Ebenen: den Fällen im Gerichtssaal und dem, was die Gruppe selbst zu verbergen hat.
+
+### Entstehungsgeschichte
+
+Peter Nowalk entwickelte die Serie, produziert wurde sie von Shonda Rhimes und den ABC Studios unter dem Dach von Shondaland. ABC erwarb den Stoff im August 2013, bestellte im Dezember 2013 die Pilotfolge und im Mai 2014 die Serie.
+
+Viola Davis spielt Annalise Keating.
+
+Die Pilotfolge lief am 25. September 2014 auf ABC und erreichte über 14 Millionen Zuschauer. Gedreht wurde sie an mehreren Orten in Pennsylvania — am Bryn Mawr College und am Ursinus College — sowie in Los Angeles und Philadelphia. Die deutschsprachige Erstausstrahlung folgte am 15. April 2015 auf RTL Crime.
+
+### Hinter den Kulissen
+
+Erzählt wird mit Zeitsprüngen und nicht in gerader Linie — ein Mittel, mit dem die Serie ihre Spannung über ganze Staffeln hinweg aufbaut.
+
+Der eigentliche Einschnitt liegt aber in der Besetzung. Eine Schwarze Frau als Hauptfigur einer Anwaltsserie war zu diesem Zeitpunkt neu — eine Kritikerstimme nannte das ohnehin längst überfällig.
+
+### Einordnung & Wirkung
+
+Insgesamt entstanden sechs Staffeln mit 90 Folgen zu je 43 bis 44 Minuten; die Serie lief von 2014 bis 2020.
+
+Die erste Staffel steht bei 84 Prozent auf Rotten Tomatoes, die zweite bei 93, die dritte bei 90. Die Zuschauerzahlen gingen dagegen deutlich zurück: von durchschnittlich 11,40 Millionen in der ersten Staffel auf 4,27 Millionen in der sechsten.
+
+Viola Davis gewann 2015 einen Emmy und einen Screen Actors Guild Award. Zweimal war sie zudem für den Golden Globe nominiert.
+
+Ihr Emmy war der erste, den eine Schwarze Frau in der Kategorie beste Hauptdarstellerin in einer Dramaserie gewonnen hat.` },
+  {
+    bereich: 'titel', schluessel: 'series:62264', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie spielt rund dreißig Jahre nach den Ereignissen des ursprünglichen Films. Ash Williams räumt inzwischen Regale in einem Kaufhaus namens Value Stop ein und wohnt in einem Wohnwagen.
+
+Dann holt ihn die Sache von damals wieder ein. Die Toten kehren zurück, und Ash muss noch einmal antreten — widerwillig und gemeinsam mit seinen Kollegen Pablo und Kelly.
+
+### Entstehungsgeschichte
+
+Sam Raimi entwickelte die Serie auf Grundlage seiner eigenen Filmreihe. Sie ist eine unmittelbare Fortsetzung der drei Kinofilme und behält deren Handlungsstrang bei.
+
+Entwickelt wurde sie von Sam Raimi, Ivan Raimi und Tom Spezialy; ursprünglich standen dafür konkurrierende Filmideen im Raum, aus denen schließlich eine Fernsehserie wurde.
+
+Bruce Campbell spielt erneut Ash Williams. Ray Santiago spielt den Pablo Simon Bolivar, Dana DeLorenzo die Kelly Maxwell, Lucy Lawless die Ruby Knowby; ab der zweiten Staffel kommt Lee Majors als Ashs Vater Brock hinzu.
+
+Produziert und ausgestrahlt wurde die Serie von Starz; ab September 2016 erhielt Amazon Video die Auswertungsrechte.
+
+### Hinter den Kulissen
+
+Gedreht wurde vollständig in Auckland in Neuseeland.
+
+Der Reiz liegt im Zeitsprung. Ash ist nicht mehr der junge Mann aus den Filmen, sondern ein alternder, prahlerischer Versager — und die Serie behandelt das nicht als Rührstück, sondern als Pointe.
+
+Mit dreißig Minuten pro Folge ist das Format kurz gehalten. Das kommt dem Ton entgegen: Für Handlungsentwicklung bleibt wenig Raum, für Blut, Tempo und Sprüche umso mehr.
+
+### Einordnung & Wirkung
+
+Der Start war am 31. Oktober 2015. Es entstanden drei Staffeln mit 30 Folgen; nach der dritten Staffel von 2018 wurde die Serie eingestellt.
+
+Die Bewertungen sind außergewöhnlich: 98 Prozent für die erste Staffel bei Rotten Tomatoes, 100 Prozent für die zweite und dritte; bei Metacritic 76 und 82 von 100. Bruce Campbell gewann mehrere Fangoria- und Saturn Awards als bester Fernsehdarsteller.
+
+Die Zuschauerzahlen entwickelten sich gegenläufig: von 437.000 in der ersten Staffel auf rund 177.000 in der dritten. Genau daran scheiterte die Serie — Starz stellte sie am 29. April 2018 wegen sinkender Quoten ein.
+
+Bemerkenswert bleibt die Konstellation: Derselbe Schöpfer und derselbe Hauptdarsteller setzen nach über drei Jahrzehnten eine Reihe fort, die sie in den achtziger Jahren begonnen hatten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9012', locale: 'de-de',
+    text: `### Worum es geht
+
+"Jackass — Der Film" hat keine Handlung. Er besteht aus Stunts, Sketchen und Streichen, die aneinandergereiht werden — ohne Rahmen, ohne Figuren im üblichen Sinn.
+
+Zu Beginn steht eine Parodie auf das große Hollywoodkino: Die Gruppe fährt in einem riesigen Einkaufswagen durch eine eigens gebaute Kulisse. Danach folgt Nummer auf Nummer — teils gefährliche körperliche Wagnisse, teils Streiche an ahnungslosen Passanten.
+
+### Entstehungsgeschichte
+
+Regie führte Jeff Tremaine; produziert wurde der Film von Tremaine, Spike Jonze und Johnny Knoxville. Beteiligt waren Dickhouse Productions und Lynch Siderow Productions, den Verleih übernahmen Paramount Pictures und MTV Films.
+
+Der Film ist die Fortsetzung der gleichnamigen MTV-Serie, die zuvor eingestellt worden war. Knoxville lehnte den Vorschlag zunächst ab, weil er annahm, Schauspieler sollten die Gruppe darstellen. Er stimmte erst zu, als klar war, dass es eine derbere Fassung der Serie werden sollte.
+
+Zur Besetzung gehören Johnny Knoxville, Bam Margera, Steve-O, Ryan Dunn, Chris Pontius, Dave England, Wee Man, Preston Lacy und Ehren McGhehey; Gastauftritte haben unter anderem Tony Hawk und Mat Hoffman.
+
+### Hinter den Kulissen
+
+Das Budget betrug fünf Millionen Dollar.
+
+Die Machart bleibt die der Fernsehserie: Aufgenommen wird mit kleinen Kameras, die Bildqualität ist zweitrangig, und der Ton ist der eines Videos unter Freunden.
+
+Dass Knoxville zunächst ablehnte, weil er Schauspieler in seiner Rolle befürchtete, ist dabei bezeichnend: Der Reiz dieser Sache besteht ausschließlich darin, dass die Beteiligten sich tatsächlich verletzen.
+
+### Einordnung & Wirkung
+
+Bei fünf Millionen Dollar Herstellungskosten spielte der Film weltweit 79,5 Millionen ein, davon 64,3 Millionen in den Vereinigten Staaten. Er startete auf Platz eins.
+
+Die Kritik urteilte gespalten: 49 Prozent bei Rotten Tomatoes mit einem Schnitt von 5 von 10, 42 von 100 bei Metacritic. Richard Roeper nannte ihn den Film des Jahres, von dem einem schlecht werde, und lobte ihn zugleich als urkomisch. Das Publikum vergab bei CinemaScore ein A minus.
+
+Es folgten "Jackass Number Two" 2006, "Jackass 3D" 2010, "Jackass Forever" 2022 und der angekündigte Abschluss "Jackass: Best and Last" für 2026.` },
+  {
+    bereich: 'titel', schluessel: 'movie:6964', locale: 'de-de',
+    text: `### Worum es geht
+
+Harry Sanborn ist 63 und Musikproduzent. In einem Strandhaus trifft er unerwartet auf dessen Besitzerin: die Theaterautorin Erica Barry, ungefähr in seinem Alter.
+
+Dann erleidet Harry einen Herzinfarkt. Er erholt sich in Ericas Haus, und die beiden kommen einander näher. Als Harry mit einer jüngeren Frau gesehen wird, beendet Erica die Sache. Ein halbes Jahr später steht er in Paris an ihrem Geburtstag vor ihr.
+
+### Entstehungsgeschichte
+
+Nancy Meyers schrieb das Drehbuch und führte Regie.
+
+Jack Nicholson spielt Harry Sanborn, Diane Keaton die Erica Barry, Keanu Reeves den Arzt Julian Mercer.
+
+Produziert wurde der Film von Bruce A. Block und Nancy Meyers. Die Kamera führte Michael Ballhaus, die Musik stammt von Hans Zimmer.
+
+### Hinter den Kulissen
+
+Der Einfall ist eine Umkehrung des Üblichen: Der Film gibt einer Frau in fortgeschrittenem Alter eine Hauptrolle, die in dieser Gattung sonst zwanzig Jahre jünger besetzt wird.
+
+Dass mit Keanu Reeves ein deutlich jüngerer Mann um dieselbe Frau wirbt, dreht die Konstellation zusätzlich um.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte gemischt. Das Lexikon des internationalen Films hielt fest, der Film sei zunächst präzise inszeniert und voller Witz, verliere aber bald seinen Erzählrhythmus.
+
+Diane Keaton gewann den Golden Globe als beste Hauptdarstellerin in einer Komödie und war für den Oscar als beste Hauptdarstellerin nominiert. Jack Nicholson erhielt eine Golden-Globe-Nominierung. Die deutsche Filmbewertungsstelle vergab das Prädikat wertvoll.
+
+Der Film gehört zu den Arbeiten, mit denen Nancy Meyers eine eigene Gattung geprägt hat: romantische Komödien über Menschen im mittleren und höheren Alter, in sehr schönen Häusern, mit Figuren, die einen Beruf und eine Vergangenheit haben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:760741', locale: 'de-de',
+    text: `### Worum es geht
+
+Der verwitwete Arzt Nate Samuels fährt mit seinen beiden halbwüchsigen Töchtern nach Südafrika, in ein Wildreservat.
+
+Dort geraten sie an einen Löwen, der bereits Dorfbewohner getötet hat. Wilderer haben sein Rudel ausgelöscht; seither greift er Menschen an. Von da an geht es für die drei ums Überleben.
+
+### Entstehungsgeschichte
+
+Regie führte Baltasar Kormákur, das Drehbuch schrieb Ryan Engle nach einer Idee von Jaime Primak Sullivan.
+
+Idris Elba spielt Dr. Nate Samuels, Sharlto Copley den Wildhüter Martin Battles, Iyana Halley und Leah Jeffries die beiden Töchter Norah und Meredith.
+
+Die Musik stammt von Steven Price, die Kamera von Philippe Rousselot.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen am 1. Juni 2021 und dauerten zehn Wochen; gedreht wurde in ländlichen Gegenden Namibias.
+
+Bemerkenswert ist der Unterschied zwischen Schauplatz und Drehort: Die Handlung ist in Südafrika angesiedelt, aufgenommen wurde jedoch in Namibia.
+
+Die Anlage ist streng begrenzt: vier Menschen, ein Tier, eine Gegend ohne Hilfe. Alles hängt daran, ob der Löwe als Gegner trägt — und ob man Idris Elba abnimmt, dass ein Arzt in dieser Lage überhaupt etwas ausrichten kann.
+
+Bemerkenswert ist die Ursache, die der Film seinem Tier gibt. Der Löwe ist nicht bösartig, sondern die Folge menschlichen Handelns: Wilderer haben sein Rudel getötet.
+
+### Einordnung & Wirkung
+
+Bei 36 Millionen Dollar Herstellungskosten spielte der Film weltweit 59,1 Millionen ein — 31,8 Millionen in den Vereinigten Staaten, 27,3 Millionen international.
+
+Die Kritik urteilte freundlich: 68 Prozent bei Rotten Tomatoes. Gelobt wurde die Bildgestaltung; der wiederkehrende Einwand lautete, der Film sei achtbar gemacht, aber letztlich verzichtbar, und die Handlung nicht durchgehend glaubwürdig.
+
+Er gehört damit zu einer kleinen Gattung, die es seit "Der weiße Hai" gibt: der Überlebensfilm mit einem einzelnen Tier als Gegner — und mit dem Zwang, mit sehr wenig Handlung 90 Minuten zu füllen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:626735', locale: 'de-de',
+    text: `### Worum es geht
+
+Jackson Briggs war Army Ranger und ist es nicht mehr. Er leidet an einer posttraumatischen Belastungsstörung und findet keinen Weg zurück in den Dienst — bis ihm ein Auftrag angeboten wird: Er soll den Diensthund Lulu, einen Belgischen Schäferhund, von Washington nach Arizona bringen, zur Beerdigung ihres gefallenen Hundeführers.
+
+Lulu ist ebenso beschädigt wie er und soll danach eingeschläfert werden. Die Fahrt quer durchs Land wird für beide zur Prüfung — und Briggs beginnt zu begreifen, was er tatsächlich transportiert.
+
+### Entstehungsgeschichte
+
+Channing Tatum und Reid Carolin führten gemeinsam Regie; für beide war es das Regiedebüt. Das Drehbuch schrieb Carolin nach einer Geschichte von ihm selbst und Brett Rodriguez.
+
+Channing Tatum spielt Briggs. Daneben sind Jane Adams, Kevin Nash, Q'orianka Kilcher, Ethan Suplee, Emmy Raver-Lampman und Nicole LaLiberte zu sehen.
+
+Die Hündin Lulu wurde von drei einander sehr ähnlichen Belgischen Schäferhunden dargestellt: Britta, Zuza und Lana.
+
+### Hinter den Kulissen
+
+Der Anlass ist persönlich. Tatum unternahm 2018 eine Autofahrt mit seiner sterbenden Hündin, die ebenfalls Lulu hieß.
+
+Gedreht wurde in Valencia und Lancaster in Kalifornien, während der Pandemie. Das Budget betrug 15 Millionen Dollar.
+
+Die Anlage ist die eines Roadmovies mit zwei Figuren, von denen eine nicht spricht. Alles, was über Lulu erzählt wird, muss über Verhalten und über Briggs' Reaktion darauf laufen — was den Film ungewöhnlich abhängig von der Arbeit mit den Tieren macht.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 84,6 Millionen Dollar ein, davon 61,8 Millionen in den Vereinigten Staaten — bei 15 Millionen Herstellungskosten ein deutlicher Erfolg.
+
+Die Kritik urteilte überwiegend positiv: 77 Prozent bei Rotten Tomatoes, 61 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein A minus.
+
+Bemerkenswert ist, was der Film nicht tut: Er behandelt weder den Krieg noch die Folgen als Nebensache und verzichtet zugleich auf das große Rührstück, das der Stoff nahelegt.` },
+  // ---- Block 57 ----
+  {
+    bereich: 'titel', schluessel: 'movie:2026', locale: 'de-de',
+    text: `### Worum es geht
+
+Jeff Talley war Verhandlungsführer bei Geiselnahmen für die Polizei in Los Angeles. Inzwischen leitet er die Polizei eines kleinen Ortes in Kalifornien.
+
+Dann brechen Jugendliche in die Villa des Buchhalters Walter Smith ein. Aus dem Einbruch wird eine Geiselnahme — und was Talley zunächst für eine überschaubare Lage hält, ist es nicht: Smith arbeitet für eine kriminelle Organisation, die etwas aus dem Haus haben will. Um Talley gefügig zu machen, entführt sie seine eigene Familie.
+
+### Entstehungsgeschichte
+
+Regie führte Florent-Emilio Siri, das Drehbuch schrieb Doug Richardson nach Robert Crais' gleichnamigem Roman von 2001. Die Musik stammt von Alexandre Desplat.
+
+Bruce Willis spielt Jeff Talley. Daneben sind Kevin Pollak, Ben Foster und Jonathan Tucker zu sehen.
+
+Produziert wurde der Film von Mark Gordon, Bruce Willis und Bob Yari; das Budget lag bei etwa 52 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Anlage ist doppelt: Talley muss gleichzeitig eine Geiselnahme lösen und selbst als Geiselnehmer handeln, weil seine Familie in fremder Hand ist. Was er beruflich beherrscht, wendet sich damit gegen ihn.
+
+Der Film muss dabei zwei Erpressungen gleichzeitig führen — die im Haus und die gegen Talley selbst —, ohne dass eine die andere entwertet.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 78 Millionen Dollar ein, davon 34 Millionen in den Vereinigten Staaten.
+
+Die Kritik urteilte gemischt. Prisma lobte die einfallsreiche, komplexe Thriller-Handlung; das Lexikon des internationalen Films bemängelte Schwächen in der Zeichnung der Figuren.
+
+Der Film gehört damit zu jener Reihe von Bruce-Willis-Thrillern der 2000er Jahre, die von seiner Bekanntheit getragen wurden und deren Vorlagen oft besser waren als die Umsetzung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10796', locale: 'de-de',
+    text: `### Worum es geht
+
+Es gibt nicht ein Universum, sondern viele — und in jedem davon existiert dieselbe Person noch einmal. Stirbt eine dieser Ausführungen, verteilt sich ihre Lebensenergie auf die übrigen. Wer also seine eigenen Doppelgänger tötet, wird stärker.
+
+Gabriel Yulaw war Beamter der Behörde, die den Übergang zwischen den Welten überwacht. Er hat bereits 124 Ausführungen seiner selbst beseitigt. Übrig ist nur noch eine: der Polizist Gabe Law, der von alldem nichts weiß — und der seit einiger Zeit merkt, dass er schneller und stärker wird.
+
+### Entstehungsgeschichte
+
+Regie führte James Wong, das Drehbuch schrieb er gemeinsam mit Glen Morgan.
+
+Jet Li spielt beide Hauptrollen: Gabe Law und Gabriel Yulaw. Jason Statham und Delroy Lindo spielen die Beamten, die Yulaw durch die Universen verfolgen; Carla Gugino ist als Gabes Frau zu sehen.
+
+Die Musik stammt von Trevor Rabin, die Kamera von Robert McLachlan, den Schnitt besorgte James Coblentz.
+
+### Hinter den Kulissen
+
+Die Prämisse ist die eines Multiversums — Jahre bevor dieser Begriff im Kino geläufig wurde. Der Film zieht daraus eine schlichte Regel und macht daraus eine Kampfhandlung: Jeder Tod macht den Überlebenden mächtiger.
+
+Für Jet Li bedeutet die Doppelrolle, dass er am Ende gegen sich selbst antreten muss — was in einem Kampffilm erhebliche technische Anforderungen stellt.
+
+Bemerkenswert ist außerdem, dass der Film seine Regel bis zum Ende durchhält: Auch die Auflösung folgt der Logik der Energieübertragung, statt sie zu umgehen.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films urteilte, der Film überspiele die üblichen Logikprobleme der Science Fiction durch starke visuelle Effekte, eine virtuose Hauptdarstellerleistung und eine solide Regie.
+
+2002 gab es eine Nominierung für den MTV Movie Award in der Sparte bester Kampf.
+
+Er gehört damit zu den Filmen, die eine Idee früh aufgreifen, die zwanzig Jahre später das Blockbusterkino bestimmen sollte — und die man deshalb heute anders liest als beim Erscheinen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:617505', locale: 'de-de',
+    text: `### Worum es geht
+
+Hubie Dubois lebt in Salem in Massachusetts, ist überaus hilfsbereit und wird von der halben Stadt verspottet. Jedes Jahr an Halloween zieht er durch die Straßen und passt auf, dass niemandem etwas zustößt.
+
+Diesmal verschwinden tatsächlich Menschen. Die Polizei nimmt Hubie nicht ernst, also ermittelt er selbst. Sein Verdacht fällt zunächst auf einen entflohenen Patienten und auf einen auffälligen Nachbarn — und liegt in beiden Fällen daneben.
+
+### Entstehungsgeschichte
+
+Regie führte Steven Brill, das Drehbuch schrieben Adam Sandler und Tim Herlihy.
+
+Adam Sandler spielt Hubie Dubois. Daneben sind Kevin James, Julie Bowen, Maya Rudolph und Ray Liotta zu sehen; Kurzauftritte haben unter anderem Shaquille O'Neal und Ben Stiller.
+
+Produziert wurde der Film von Happy Madison Productions; Netflix erwarb die weltweiten Auswertungsrechte. Gedreht wurde im Sommer 2019 in Massachusetts, erschienen ist er am 7. Oktober 2020.
+
+### Hinter den Kulissen
+
+Die Anlage entspricht dem Muster, das Sandlers Filme seit Jahrzehnten prägt — eine kindlich gebliebene Hauptfigur mit auffälliger Sprechweise, ein Ensemble aus denselben wiederkehrenden Mitspielern und eine Geschichte, die der Figur am Ende recht gibt.
+
+Neu ist die Auswertung: Der Film erschien nicht im Kino, sondern unmittelbar bei Netflix, das die weltweiten Rechte erworben hatte.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte gemischt: 53 Prozent bei Rotten Tomatoes, 54 von 100 bei Metacritic. Gelobt wurden einzelne wiederkehrende Gags, bemängelt die Anlage der Hauptfigur.
+
+2021 erhielt der Film mehrere Nominierungen für die Goldene Himbeere.
+
+Bemerkenswert bleibt der Schauplatz: Ein Halloween-Film, der in Salem spielt, kommt an der Geschichte dieses Ortes nicht vorbei — und der Film nutzt sie als Kulisse, ohne sie zum Thema zu machen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:38317', locale: 'de-de',
+    text: `### Worum es geht
+
+Griffin Kayes arbeitet als Tierpfleger im Zoo von Boston und liebt seinen Beruf. Seine Freundin Stephanie tut das nicht — sie macht mit ihm Schluss, weil ein Zoowärter für sie nicht in Frage kommt.
+
+Fünf Jahre später will Griffin kündigen und etwas Angeseheneres machen. Da offenbaren ihm die Tiere ihr Geheimnis: Sie können sprechen und haben es seit Jahren verheimlicht. Um ihn im Zoo zu halten, bieten sie ihm an, ihm bei Stephanie zu helfen — mit Ratschlägen aus dem Tierreich.
+
+### Entstehungsgeschichte
+
+Regie führte Frank Coraci. Das Drehbuch schrieben Nick Bakay, Rock Reuben, Kevin James, Jay Scherick und David Ronn.
+
+Kevin James spielt Griffin Kayes, Rosario Dawson die Tierärztin Kate, Leslie Bibb die Stephanie.
+
+Die Tiere sprechen unter anderem Adam Sandler als Affe Donald, Sylvester Stallone als Löwe Joe und Cher als Löwin Janet.
+
+Gedreht wurde von August bis Oktober 2009 im Franklin Park Zoo in Boston; die Produktionskosten werden auf 80 Millionen Dollar geschätzt.
+
+### Hinter den Kulissen
+
+Während der Dreharbeiten starb die Giraffe Tweet unerwartet. Die Tierschutzorganisation PETA warf der Produktion Tierquälerei vor und forderte Untersuchungen durch das amerikanische Landwirtschaftsministerium.
+
+Der Vorfall wirft ein Licht auf die grundsätzliche Schwierigkeit dieser Art von Film: Ein Werk, das von der Zuneigung zu Tieren handelt, setzt für seine Herstellung lebende Tiere ein.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte enttäuscht. Der Filmdienst hielt fest, die Tiere und ihre Ratschläge seien ebenso einfältig wie vorhersehbar. Bemängelt wurden durchgehend das Drehbuch und die uneinheitliche Komik.
+
+Der Film gehört zu einer Reihe von Familienkomödien jener Jahre, die eine bekannte Hauptfigur mit sprechenden Tieren zusammenbringen — ein Verfahren, das verlässlich funktioniert und selten mehr ergibt als seine Bestandteile.
+
+Auffällig ist der Aufwand hinter den Stimmen: Für die Tierrollen wurden Namen verpflichtet, die sonst Hauptrollen tragen — Sandler, Stallone und Cher sprechen hier Nebenfiguren.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9038', locale: 'de-de',
+    text: `### Worum es geht
+
+Eddie Cantrow verkauft in San Francisco Sportartikel, als er Lila kennenlernt. Nach sechs Wochen heiraten die beiden.
+
+In den Flitterwochen in Mexiko lernt er sie dann tatsächlich kennen: ihre Schulden, ihre Vergangenheit, ihre Ansichten — und stellt fest, dass die beiden nichts gemeinsam haben. Zur selben Zeit begegnet er am Strand Miranda, mit der es auf Anhieb stimmt. Er verschweigt ihr, dass er auf Hochzeitsreise ist.
+
+### Entstehungsgeschichte
+
+Regie führten Peter und Bobby Farrelly, die das Drehbuch gemeinsam mit Scot Armstrong, Kevin Barnett und Leslie Dixon schrieben.
+
+Die Vorlage ist Bruce Jay Friedmans Erzählung "A Change of Plan". Der Film ist zugleich eine Neuverfilmung von Elaine Mays "Der Herzensbrecher" aus dem Jahr 1972.
+
+Ben Stiller spielt Eddie Cantrow, Malin Åkerman die Lila, Michelle Monaghan die Miranda; Eva Longoria hat einen Gastauftritt als Consuela.
+
+### Hinter den Kulissen
+
+Die Farrelly-Brüder waren zu diesem Zeitpunkt für eine Art Komödie bekannt, die peinliche Situationen bis zur Schmerzgrenze auskostet. Der Stoff von 1972 dagegen ist eine bittere Beobachtung über einen Mann, der sich selbst nicht kennt.
+
+Zwischen diesen beiden Zugängen liegt die Schwierigkeit des Films: Er muss entscheiden, ob Eddie ein sympathischer Pechvogel ist oder ein Mann, der zwei Frauen belügt — und entscheidet sich nicht.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film etwa 127,8 Millionen Dollar ein, davon 36,8 Millionen in den Vereinigten Staaten und 11,7 Millionen in Deutschland — der deutsche Anteil ist damit auffällig hoch.
+
+Das Lexikon des internationalen Films beschrieb ihn als abwechslungsreiche Unterhaltung mit überzeugenden Darstellern.
+
+Bemerkenswert bleibt der Schluss: Der Film gibt seiner Hauptfigur kein glückliches Ende, sondern lässt sie denselben Fehler ein zweites Mal machen — für eine Komödie dieser Art ungewöhnlich konsequent.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10898', locale: 'de-de',
+    text: `### Worum es geht
+
+Arielle und Prinz Erik haben eine Tochter: Melody. Bei ihrer Taufe versucht die Meerhexe Morgana, das Kind zu entführen. Danach schottet Arielle ihre Tochter vom Meer ab — Melody erfährt nichts von ihrer Herkunft und darf das Wasser nicht betreten.
+
+Zwölf Jahre später kommt sie dahinter. Morgana nutzt das aus und bringt Melody dazu, den Dreizack ihres Großvaters König Triton zu stehlen. Am Ende muss Melody entscheiden, zu welcher der beiden Welten sie gehören will.
+
+### Entstehungsgeschichte
+
+Regie führten Jim Kammerud und Brian Smith. Der Film läuft 75 Minuten und wurde von Disney nicht fürs Kino, sondern unmittelbar für den Videomarkt hergestellt.
+
+Die Musik stammt von Danny Troob, produziert wurde der Film von Leslie Hough und David Lovegren.
+
+Jodi Benson spricht die Arielle wie schon 1989, Tara Strong die Melody, Pat Carroll die Morgana.
+
+### Hinter den Kulissen
+
+Der Film gehört zu einer ganzen Reihe von Fortsetzungen, die Disney in den neunziger und frühen 2000er Jahren mit deutlich geringerem Aufwand für den Heimmarkt herstellte.
+
+Das ist dem Ergebnis anzusehen. Der Kritik zufolge fehlen ihm die außergewöhnliche Animation und die eingängigen Lieder des Kinofilms von 1989.
+
+Erzählerisch kehrt der Film die Ausgangslage um: Wollte Arielle einst an Land, will ihre Tochter ins Wasser. Dass Arielle dabei die Rolle übernimmt, die früher ihr Vater innehatte — die des verbietenden Elternteils —, ist der interessanteste Einfall des Films.
+
+### Einordnung & Wirkung
+
+Erschienen ist er 2000 auf Videokassette, 2006 auf DVD und 2013 auf Blu-ray.
+
+Die Aufnahme fiel gemischt aus: familientauglich, aber deutlich schwächer als der Vorgänger.
+
+Der Fall ist bezeichnend für eine Geschäftspraxis jener Jahre: Ein sehr erfolgreicher Kinofilm bekommt eine Fortsetzung, die nie ins Kino kommt, deutlich weniger kostet — und deren Anspruch entsprechend niedriger liegt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:258509', locale: 'de-de',
+    text: `### Worum es geht
+
+Alvin, Simon und Theodore glauben, dass ihr Ziehvater Dave seiner Freundin einen Heiratsantrag machen will — und dass sie damit einen Stiefbruder bekommen, der es auf sie abgesehen hat.
+
+Um das zu verhindern, reisen die drei nach Miami. Was als Verfolgungsfahrt beginnt, wird zu einer Reihe von Zwischenfällen: eine Auseinandersetzung im Flugzeug, ein Beamter, der sich an ihre Fersen heftet, und ein Missverständnis, das sich erst ganz am Schluss aufklärt.
+
+### Entstehungsgeschichte
+
+Regie führte Walt Becker, das Drehbuch schrieben Randi Mayem Singer und Adam Sztykiel. Die Musik stammt von Mark Mothersbaugh.
+
+Es ist der vierte Kinofilm der Reihe nach "Alvin und die Chipmunks — Der Kinofilm" von 2007 und den Fortsetzungen von 2009 und 2011.
+
+Jason Lee spielt Dave Seville, Tony Hale den Agenten Suggs. Die Chipmunks sprechen Justin Long, Matthew Gray Gubler und Jesse McCartney; in weiteren Rollen sind Bella Thorne, Kimberly Williams-Paisley und Josh Green zu sehen.
+
+### Hinter den Kulissen
+
+Die Reihe verbindet Realfilm und Computeranimation — die Darsteller spielen gegen Figuren, die erst später eingefügt werden.
+
+Das Budget betrug 90 Millionen Dollar. Für einen vierten Teil einer Familienreihe ist das erheblich, und es erklärt sich vor allem aus dem Aufwand für die Animation: Drei durchgehend sichtbare Hauptfiguren müssen Bild für Bild in reale Aufnahmen eingepasst werden.
+
+Musikalisch folgt der Film dem Muster der Reihe: aktuelle Chart-Titel, gesungen in stark beschleunigter Tonlage.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 235 Millionen Dollar ein — bei 90 Millionen Herstellungskosten ein klarer Erfolg.
+
+Die Kritik lehnte ihn dagegen weitgehend ab: 16 Prozent bei Rotten Tomatoes. Eine Besprechung nannte ihn einen lauten, bisweilen strapaziösen Mix aus Charthits und Situationskomik.
+
+Der Abstand zwischen beiden Zahlen ist für diese Reihe kennzeichnend — und erklärt, warum sie über vier Filme hinweg fortgesetzt wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:26505', locale: 'de-de',
+    text: `### Worum es geht
+
+Arthur ist inzwischen in den Stamm der Minimoys aufgenommen worden. Zehn Monde sind vergangen, seit er zuletzt bei ihnen war, und er wartet auf ein Zeichen, dass er zurückkehren darf.
+
+Das Zeichen kommt — allerdings anders als erhofft: Maltazard hat Prinzessin Selenia in seine Gewalt gebracht. Arthur macht sich auf, sie zu befreien. Das gelingt ihm, doch Maltazard entkommt durch ein Tor in die Menschenwelt, wo er auf normale Größe anwächst.
+
+### Entstehungsgeschichte
+
+Luc Besson führte Regie und war Mitautor des Drehbuchs. Die Vorlage ist seine eigene Buchreihe. Produziert wurde der französische Film von Besson und Emmanuel Prévost.
+
+Freddie Highmore spielt Arthur, Mia Farrow seine Großmutter. Zu den Sprechern gehören Selena Gomez als Prinzessin Selenia und Lou Reed als Maltazard.
+
+Der Film verbindet Realaufnahmen mit Computeranimation — eine Mischform, die für die gesamte Reihe kennzeichnend ist.
+
+### Hinter den Kulissen
+
+Der zweite und der dritte Teil wurden gleichzeitig gedreht, um Kosten zu sparen. Das erklärt auch den Schluss: Der Film endet mit einem offenen Ende, das unmittelbar in den dritten Teil führt.
+
+Diese Entscheidung hat Folgen für den Film selbst. Er hat keinen eigenen Abschluss, sondern ist der Mittelteil einer Erzählung — mit allem, was das mit sich bringt: viel Aufbau, wenig Auflösung.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte gemischt. Das Lexikon des internationalen Films bemängelte fehlende Eigenständigkeit. Kino.de lobte die außergewöhnliche Animation, hielt aber fest, Herz und Charme des ersten Teils seien verloren gegangen.
+
+Damit steht der Film für eine bekannte Schwierigkeit: Der erste Teil hatte den Reiz der Entdeckung — eine kleine Welt, die man zum ersten Mal betritt. Beim zweiten ist diese Welt bekannt, und der Film muss sie durch Handlung ersetzen.
+
+Bemerkenswert bleibt die Konstellation: Ein Regisseur verfilmt seine eigene Buchreihe und dreht dabei zwei Teile gleichzeitig — eine Aufstellung, die wirtschaftlich sinnvoll ist und erzählerisch ihren Preis hat.` },
 ];
