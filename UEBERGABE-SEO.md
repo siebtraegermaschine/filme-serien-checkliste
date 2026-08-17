@@ -1,6 +1,6 @@
 # Übergabe: SEO-Texte movietaste.de
 
-Stand: 17.08.2026 · 1453 Titeltexte · letzter Commit `34c8391`
+Stand: 17.08.2026 · 1453 Titeltexte · SEO-Seiten freigegeben
 
 ---
 
@@ -24,10 +24,19 @@ movietaste.de hat neben der Web-App eigenständige SEO-Landingpages unter `/de-d
 Jede Titelseite braucht einen eigenen redaktionellen Text in der Tabelle `seo_content`.
 **Der TMDB-Kurztext wird nie verwendet** — Seiten ohne eigenen Text bleiben `noindex`.
 
-Alle SEO-Seiten stehen aktuell auf `noindex`, bis Christian sie freigibt.
-Schalter: `SEO_FREIGEGEBEN = false` in `backend/lib/seoRender.js`.
-Ebenso die auskommentierte `Sitemap:`-Zeile in `robots.txt`.
-**Beides nicht ohne ausdrückliche Anweisung ändern.**
+**Indexierung — dauerhafte Regel (Christian, 17.08.2026):**
+Eine Seite wird genau dann indexiert, wenn sie eigenen Inhalt hat. Angelegte URLs
+ohne Inhalt bleiben erreichbar, tragen aber `noindex` — und kippen automatisch auf
+`index`, sobald ein Text vorliegt. Es gibt keinen Gesamtschalter mehr; gesteuert wird
+das je Seite über `indexierbar` in `backend/lib/seoData.js` (im Regelfall
+`!!text`, bei Listen- und Personenseiten zusätzlich: es müssen Einträge da sein).
+
+`indexierbar` **nie hart auf true setzen.** Wer neue Seitentypen ergänzt, folgt
+derselben Regel. Abgesichert durch `backend/test/seoIndexierung.test.js` (6 Tests,
+laufen ohne Datenbank).
+
+Die `Sitemap:`-Zeile in `robots.txt` ist aktiv. Die Sitemap listet ausschließlich
+Seiten mit vorhandener `seo_content`-Zeile — dieselbe Regel wie das Meta-Tag.
 
 ## 2. Pflichtformat für `bereich='titel'`
 
@@ -104,7 +113,7 @@ Aktueller Schnitt: 326 Wörter.
    });"
    ```
 
-8. **Tests** (`cd backend && npm test`): 26 Tests, 15 grün, 11 rot.
+8. **Tests** (`cd backend && npm test`): 32 Tests, 21 grün, 11 rot.
    Die 11 roten sind **immer** `ECONNREFUSED 127.0.0.1:55432` — keine lokale
    Postgres-Instanz. Das ist der Normalzustand, kein Regressionszeichen.
 
@@ -126,7 +135,8 @@ Aktueller Schnitt: 326 Wörter.
     curl -s -o /dev/null -w '%{http_code}' https://movietaste.de/de-de/film/SLUG-ID
     curl -s https://movietaste.de/de-de/film/SLUG-ID | grep -o '<meta name="robots"[^>]*>'
     ```
-    Erwartung: Sitemap-Zahl = Titelzahl, HTTP 200, `noindex,follow`.
+    Erwartung: Sitemap-Zahl = Titelzahl, HTTP 200, und `index,follow` bei Seiten
+    mit Text bzw. `noindex,follow` bei Seiten ohne.
 
 ## 4. Kandidatenliste nachladen
 
