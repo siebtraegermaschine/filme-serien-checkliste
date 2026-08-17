@@ -42969,4 +42969,313 @@ Meryl Streep war 2014 für den Oscar als beste Hauptdarstellerin nominiert, Juli
 Die Zeit hielt fest, hier tobten sich die Stars aus — Streep, Roberts und Cumberbatch lieferten sich einen hochkarätigen Schlagabtausch.
 
 Dass sämtliche Nominierungen auf Darstellerinnen entfielen und keine auf Regie oder Drehbuch, beschreibt den Film genau. Er ist eine Bühne für seine Besetzung; was ihn trägt, ist gesprochener Text, und der stammt aus einem preisgekrönten Theaterstück.` },
+  // ---- Block 95 ----
+  {
+    bereich: 'titel', schluessel: 'movie:2924', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei Brüder aus einer irischstämmigen Familie arbeiten bei der Chicagoer Feuerwehr. Nach der Ausbildung kommt Brian McCaffrey in die Einheit seines älteren Bruders Stephen.
+
+Brian zweifelt, ob der Beruf der richtige für ihn ist, und wechselt zu den Brandermittlern unter Donald Rimgale. Dort steht eine Serie rätselhafter Explosionen zur Untersuchung — verursacht durch einen seltenen Brandbeschleuniger auf Magnesiumbasis.
+
+### Entstehungsgeschichte
+
+Regie führte Ron Howard, das Drehbuch schrieb Gregory Widen. Produziert wurde der Film von Richard Barton Lewis, John Watson und Pen Densham.
+
+Kurt Russell spielt Stephen McCaffrey, William Baldwin den Brian, Robert De Niro den Brandermittler Donald Rimgale, Donald Sutherland den Ronald Bartel, Jennifer Jason Leigh die Jennifer Vaitkus, Scott Glenn den John Adcox, Rebecca De Mornay die Helen McCaffrey, J. T. Walsh den Abgeordneten Marty Swayzak, Jack McGee den Schmidt und Clint Howard den Pathologen Ricco; David Crosby ist in einem Kurzauftritt zu sehen.
+
+Die Musik stammt von Hans Zimmer, die Kamera von Mikael Salomon, den Schnitt besorgten Daniel P. Hanley und Mike Hill.
+
+Der Film erschien 1991, dauert 131 Minuten und ist ab 12 Jahren freigegeben; eine neu geschnittene Fassung erhielt eine Freigabe ab 16.
+
+### Hinter den Kulissen
+
+Das Feuer ist die eigentliche Hauptfigur. Der Film behandelt es nicht als Kulisse, sondern als Gegenspieler mit eigenem Verhalten — der Titel benennt ein Phänomen, das eintritt, wenn einem schwelenden Brand plötzlich Sauerstoff zugeführt wird.
+
+Dafür wurde erheblicher Aufwand betrieben. Die drei Oscar-Nominierungen entfielen sämtlich auf technische Kategorien: visuelle Effekte, Ton und Tonschnitt.
+
+Erzählerisch verbindet der Film zwei Ebenen. Die eine ist ein Bruderkonflikt, die andere eine Ermittlung, die in die Stadtpolitik führt — zu Haushaltsfälschungen, mit denen Sparmaßnahmen bei der Feuerwehr begründet wurden.
+
+Genau daran setzte die Kritik an: Das Lexikon des internationalen Films nannte den Film eine Mischung aus privatem Drama und Actionfilm, deren dünne Handlung sich auf emotionale Klischeesituationen verlasse.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 72 Prozent aus, Metacritic 39 von 100. Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+1992 gab es drei Oscar-Nominierungen — für die besten visuellen Effekte, den besten Ton und den besten Tonschnitt. Hans Zimmer gewann den Film Music Award von Broadcast Music Incorporated.
+
+Der Abstand zwischen 72 Prozent bei Rotten Tomatoes und 39 Punkten bei Metacritic ist bemerkenswert und lässt sich aus der Aufteilung erklären: Was der Film technisch leistet, ist unbestritten; was er erzählt, überzeugte weniger.
+
+2019 erschien mit „Backdraft 2" eine Fortsetzung direkt für den Videomarkt, wieder mit William Baldwin und Donald Sutherland.` },
+  {
+    bereich: 'titel', schluessel: 'movie:7305', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine uruguayische Rugbymannschaft stürzt 1972 mit ihrem Flugzeug in den Anden ab.
+
+Von 45 Menschen an Bord sterben zwölf beim Absturz oder unmittelbar danach, fünf in der ersten Nacht, eine weitere am achten Tag und acht durch eine Lawine. Die sechzehn Überlebenden halten sich am Leben, indem sie Fleisch der Toten essen. Nach 62 Tagen brechen drei von ihnen — Parrado, Canessa und Vizintín — auf, um Hilfe zu holen.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf dem Absturz des Fluges 571 der Fuerza Aérea Uruguaya im Jahr 1972 in Chile. Vorlage ist das Buch von Piers Paul Read, der mit Überlebenden zusammenarbeitete.
+
+Regie führte Frank Marshall, das Drehbuch schrieb John Patrick Shanley. Produziert wurde der Film von Kathleen Kennedy und Robert Watts.
+
+Ethan Hawke spielt Nando Parrado, Josh Hamilton den Roberto Canessa, Vincent Spano den Antonio Balbi, Jack Noseworthy den Bobby François, Danny Nucci den Hugo Díaz und John Newton den Antonio „Tintín" Vizintín.
+
+Die Musik stammt von James Newton Howard, die Kamera von Peter James, den Schnitt besorgten William Goldenberg und Michael Kahn.
+
+Der Film erschien 1993, dauert 127 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Der Stoff verlangt eine Entscheidung, die kein anderer Film dieser Art umgehen kann: wie man zeigt, wovon die Überlebenden sich ernährt haben. Der Film benennt es, ohne es auszustellen — und die Beteiligten sind reale Menschen, von denen viele noch lebten.
+
+Die Zusammenarbeit mit Überlebenden begann bei der Vorlage. Piers Paul Read schrieb sein Buch mit ihnen; der Film stützt sich darauf.
+
+Die Zahlen sprechen für sich: 45 Menschen an Bord, 16 nach 72 Tagen gerettet. Der Film muss diese Zeitspanne erzählen, ohne dass etwas geschieht — Warten und Kälte sind der Hauptzustand.
+
+Genau hier setzte die Kritik an. Der Film-Dienst bemängelte eine zu geringe Individualisierung der Opfer und unzureichende Inspirationskraft.
+
+### Einordnung & Wirkung
+
+Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
+
+Der Einwand des Film-Dienst wiegt bei diesem Stoff besonders. Wenn reale Tote als Gruppe erscheinen und nicht als Einzelne, verliert der Film genau das, was ihn rechtfertigen würde — dass er von bestimmten Menschen handelt.
+
+Dass ausgerechnet dieser Film das Prädikat „besonders wertvoll" erhielt, während die Fachkritik ihm mangelnde Tiefe vorwarf, beschreibt die Spannweite der Urteile.
+
+Was unbestritten bleibt, ist der Vorgang selbst. 62 Tage in den Anden, ein Fußmarsch zweier Männer über die Berge, 16 Gerettete — die Geschichte braucht keine Steigerung, und der Film versucht auch keine.` },
+  {
+    bereich: 'titel', schluessel: 'movie:353326', locale: 'de-de',
+    text: `### Worum es geht
+
+Srinivasa Ramanujan ist ein mathematisches Ausnahmetalent aus Indien — ohne akademische Ausbildung und mit Ergebnissen, die er nicht beweisen kann, weil er sie nicht herleitet, sondern sieht.
+
+In Cambridge trifft er auf Godfrey Harold Hardy, der auf Beweisen besteht. Zwischen beiden entsteht aus Missverständnissen eine enge Verbindung. Daneben stehen Ramanujans Krankheit, seine Sehnsucht nach zu Hause und der Erste Weltkrieg.
+
+### Entstehungsgeschichte
+
+Vorlage ist Robert Kanigels Biografie, die im Englischen denselben Titel trägt wie der Film.
+
+Matthew Brown führte Regie und schrieb das Drehbuch; er war auch als Produzent beteiligt, gemeinsam mit Sofia Sondervan, Edward R. Pressman, Jomon Thomas und Jim Young.
+
+Dev Patel spielt S. Ramanujan, Jeremy Irons den Godfrey Harold Hardy, Toby Jones den John Edensor Littlewood und Jeremy Northam den Bertrand Russell; in weiteren Rollen sind Stephen Fry, Devika Bhise, Kevin McNally und Enzo Cilenti zu sehen.
+
+Die Kamera führte Larry Smith, den Schnitt besorgte JC Bond, die Musik stammt von Coby Brown.
+
+Gedreht wurde 2014 am Trinity College in Cambridge. Als mathematische Berater wirkten Ken Ono und Manjul Bhargava mit. Der Film dauert 109 Minuten und ist ab 6 Jahren freigegeben.
+
+Premiere war im September 2015 in Toronto, der Kinostart in den USA und Großbritannien im April 2016, in Deutschland im Mai 2016.
+
+### Hinter den Kulissen
+
+Der Kern des Films ist ein methodischer Streit. Ramanujan geht intuitiv vor, Hardy verlangt Beweise — beide haben recht, und keiner kann den anderen von seinem Weg abbringen.
+
+Die Beteiligung zweier Mathematiker als Berater ist bei diesem Stoff mehr als eine Formalie. Ein Film über Mathematik muss zeigen, worum gestritten wird, ohne sein Publikum zu verlieren.
+
+Der Dreh am Trinity College verankert die Geschichte an dem Ort, an dem sie stattfand. Für einen Inder ohne Abschluss war Cambridge zu dieser Zeit eine Institution, in die er nicht gehörte — der Kulturkonflikt liegt in der Architektur.
+
+Der Erste Weltkrieg läuft dabei im Hintergrund mit und verschärft alles: Ramanujans Gesundheit, seine Isolation, die Möglichkeit einer Rückkehr.
+
+### Einordnung & Wirkung
+
+Der Mathematiker George E. Andrews lobte die stimmige Darstellung der Figuren und des mathematischen Inhalts.
+
+Dieses Urteil ist bei einem Film über einen Wissenschaftler der aussagekräftigste Befund. Wenn ein Fachmann bestätigt, dass die Sache selbst richtig dargestellt ist, hat der Film die schwierigste Hürde genommen.
+
+Die Besetzung Dev Patels in der Hauptrolle und Jeremy Irons' als Hardy stellt zwei Spielweisen gegeneinander, die dem Gegenstand entsprechen — Ungestüm gegen Zurückhaltung.
+
+Für einen britischen Film über einen indischen Mathematiker des frühen 20. Jahrhunderts ist die internationale Auswertung bemerkenswert breit; zwischen Festivalpremiere und deutschem Start lagen acht Monate.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9454', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film erzählt Aschenputtel neu — angesiedelt am französischen Königshof des 16. Jahrhunderts.
+
+Nach dem Tod ihres Vaters wird Danielle De Barbarac von ihrer Stiefmutter zur Dienstmagd gemacht. Prinz Henry flieht unterdessen vor einer arrangierten Ehe. Die beiden begegnen sich mehrfach — und Danielle sagt ihm nicht, wer sie ist.
+
+### Entstehungsgeschichte
+
+Regie führte Andy Tennant. Das Drehbuch schrieben Susannah Grant, Tennant und Rick Parks.
+
+Drew Barrymore spielt Danielle De Barbarac, Dougray Scott den Prinzen Henry, Anjelica Huston die Baroness Rodmilla De Ghent, Patrick Godfrey den Leonardo da Vinci, Megan Dodds die Marguerite, Melanie Lynskey die Jacqueline, Timothy West den König Franz und Jeanne Moreau die Grande Dame.
+
+Produziert wurde der Film von Mireille Soria und Tracey Trench für Fox Family Films. Die Kamera führte Andrew Dunn, die Musik stammt von George Fenton; das Lied „Put Your Arms Around Me" steuerte die Band Texas bei.
+
+Gedreht wurde vom 12. September bis zum 18. November 1997 in Frankreich — auf Schloss Fénelon, Schloss Hautefort und Schloss Losse in der Dordogne. Das Budget betrug 26 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Neufassung nimmt dem Märchen das Übernatürliche. Es gibt keine gute Fee; an ihrer Stelle steht Leonardo da Vinci, der als Gast bei Hofe weilt und praktisch hilft.
+
+Damit verschiebt sich die Hauptfigur. Danielle wartet nicht auf Rettung, sondern handelt — Cinema.de nannte sie eine Cinderella voller Trotz.
+
+Die Rahmenerzählung tut ein Übriges. Der Film gibt vor, die wahre Geschichte hinter dem Märchen zu erzählen; die Grande Dame, gespielt von Jeanne Moreau, berichtet sie den Brüdern Grimm.
+
+Die drei Schlösser in der Dordogne liefern die Ausstattung, für die der Film ausgezeichnet wurde — Jenny Beavan gewann den Saturn Award für die Kostüme.
+
+### Einordnung & Wirkung
+
+Bei 26 Millionen Dollar Herstellungskosten spielte der Film weltweit rund 98 Millionen ein.
+
+Bei den Saturn Awards 1999 gewannen Drew Barrymore als beste Hauptdarstellerin und Jenny Beavan für die Kostüme; nominiert waren Anjelica Huston als beste Nebendarstellerin und George Fenton für die Musik. Hinzu kamen eine Nominierung beim Golden Satellite Award und drei bei den Teen Choice Awards.
+
+Das Lexikon des internationalen Films sprach von ausgesprochen kurzweiliger Märchenunterhaltung mit guten Darstellerinnen und opulenter Ausstattung.
+
+Cinema.de lobte Barrymores Charme, merkte aber an, der Film pendle zwischen Seifenoper, feministischem Manifest und Parodie.
+
+Dieser Einwand benennt die Schwierigkeit der Anlage. Wer ein bekanntes Märchen entzaubert und zugleich als Märchen erzählen will, muss zwischen zwei Tonlagen wechseln — und der Film tut das erkennbar.` },
+  {
+    bereich: 'titel', schluessel: 'movie:398175', locale: 'de-de',
+    text: `### Worum es geht
+
+Bradley Thomas verliert seine Arbeit und steigt in den Drogenhandel ein. Als eine Übergabe schiefgeht, kommt er ins Gefängnis.
+
+Dort erreicht ihn eine Nachricht: Seine schwangere Frau Lauren ist entführt worden. Um sie freizubekommen, soll er einen Mann töten, der in einem Hochsicherheitstrakt sitzt — in Zellenblock 99. Er muss sich also erst dorthin verlegen lassen.
+
+### Entstehungsgeschichte
+
+S. Craig Zahler schrieb das Drehbuch 2011, nachdem er sich Gefängnisfilme angesehen hatte, und führte auch Regie. Er behielt dabei die künstlerische Kontrolle.
+
+Vince Vaughn spielt Bradley Thomas, Jennifer Carpenter die Ehefrau Lauren, Don Johnson den Gefängnisdirektor Tuggs, Udo Kier den Placid Man, Marc Blucas den Gil und Dion Mucciacito den Eleazar; in weiteren Rollen sind Mustafa Shakir und Thomas Guiry zu sehen.
+
+Produziert wurde der Film von Jack Heller und Dallas Sonnier. Die Kamera führte Benji Bakshi mit einer RED Weapon im Bildformat 1.85:1; Zahler ließ die Farbtöne im Verlauf zunehmend abdunkeln. Die Musik stammt von Jeff Herriott — Vintage Soul mit echten Instrumenten, unter Beteiligung von Künstlern wie The O'Jays.
+
+Vince Vaughn trainierte für die Kampfszenen unter dem Choreografen Drew Leary. Gedreht wurde von August bis Oktober 2016 auf Staten Island. Das Budget betrug vier Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die zunehmende Verdunkelung der Farben ist keine Stilübung, sondern folgt der Handlung. Je weiter Bradley in das Gefängnissystem hineingerät, desto weniger Licht lässt der Film zu.
+
+Die Besetzung Vince Vaughns ist die auffälligste Entscheidung. Ein Darsteller, der überwiegend für Komödien bekannt ist, spielt hier eine Figur, die durch Gewalt vorankommt — und musste dafür eigens trainieren.
+
+Erzählerisch beruht alles auf einer Umkehrung. Bradley will nicht aus dem Gefängnis heraus, sondern tiefer hinein; jede Verschärfung seiner Lage ist ein Schritt zum Ziel.
+
+Vier Millionen Dollar Budget bedeuten: keine Ausstattung, keine Effekte. Was der Film hat, sind Räume, Körper und eine Idee.
+
+### Einordnung & Wirkung
+
+Bei vier Millionen Dollar Herstellungskosten spielte der Film weltweit 79.208 Dollar ein.
+
+Rotten Tomatoes weist 90 Prozent aus; hervorgehoben wird Vince Vaughns engagierte Darstellung in einem brutal gewalttätigen Grindhouse-Film. Die New York Times führte ihn als Critic's Pick.
+
+Der Abstand zwischen 90 Prozent Zustimmung und einem Kinoergebnis von unter 80.000 Dollar ist einer der größten, die sich finden lassen. Er beschreibt einen Film, der über den Verleih praktisch nicht ausgewertet wurde und sein Publikum anderswo fand.
+
+Für einen Regisseur, der die künstlerische Kontrolle behielt und mit vier Millionen Dollar auskam, ist das eine folgerichtige Bilanz: Der Preis für die Freiheit war der Verzicht auf Reichweite.` },
+  {
+    bereich: 'titel', schluessel: 'movie:597219', locale: 'de-de',
+    text: `### Worum es geht
+
+Ellie Chu ist die Klassenbeste an einer Schule in einer konservativen amerikanischen Kleinstadt — und verdient sich etwas dazu, indem sie für andere Hausarbeiten schreibt.
+
+Ihr Mitschüler Paul bittet sie um etwas anderes: Liebesbriefe an Aster Flores. Ellie schreibt sie. Was Paul nicht weiß: Ellie ist selbst von Aster angetan. Und was in den Briefen steht, versteht er nur zur Hälfte.
+
+### Entstehungsgeschichte
+
+Alice Wu führte Regie und schrieb das Drehbuch.
+
+Leah Lewis spielt Ellie Chu, Daniel Diemer den Paul Munsky, Alexxis Lemire die Aster Flores und Collin Chou Ellies Vater Edwin.
+
+Die Kamera führte Greta Zozula, den Schnitt besorgten Lee Percy und Ian Blume, die Musik stammt von Anton Sanko.
+
+Gedreht wurde von April bis Mai 2019 in New York. Die Premiere war für das Tribeca Film Festival 2020 vorgesehen; wegen der Coronavirus-Pandemie erschien der Film stattdessen am 1. Mai 2020 bei Netflix.
+
+Der Titel verweist auf Platons „Symposion" und dessen Gedanken zur Seelenverwandtschaft; die Anlage folgt dem Muster von „Cyrano de Bergerac".
+
+### Hinter den Kulissen
+
+Die Cyrano-Konstruktion bekommt hier eine zusätzliche Ebene. Nicht nur schreibt jemand für einen anderen — die Schreibende ist selbst in die Empfängerin verliebt, und alle drei Beteiligten wissen jeweils nur einen Teil.
+
+Der Titel benennt genau das. „Nur die halbe Geschichte" gilt für Paul, der die Briefe nicht versteht, für Aster, die nicht weiß, wer schreibt, und für Ellie, die nichts sagen kann.
+
+Der Bezug auf Platons „Symposion" gibt dem eine ältere Fassung. Dort wird die Vorstellung entwickelt, dass Menschen nach ihrer fehlenden Hälfte suchen — der Film prüft, ob diese Vorstellung trägt.
+
+Bemerkenswert ist, dass aus der Konstellation keine Rivalität wird. Zwischen Ellie und Paul entsteht eine Freundschaft, obwohl beide dasselbe wollen.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 97 Prozent positive Bewertungen aus.
+
+Der Film gewann 2020 den Founders Award beim Tribeca Film Festival und erhielt Nominierungen für die GLAAD Media Awards und die Independent Spirit Awards.
+
+Bemerkenswert ist der Weg zur Veröffentlichung. Statt einer Festivalpremiere mit anschließendem Verleihstart erschien der Film am 1. Mai 2020 direkt bei Netflix — die Pandemie machte aus dem geplanten Ablauf einen anderen.
+
+Für einen Film mit dieser Aufnahme war das kein Nachteil. 97 Prozent Zustimmung und ein Festivalpreis, verbunden mit weltweiter Verfügbarkeit am ersten Tag, sind eine Konstellation, die es vor den Plattformen nicht gab.` },
+  {
+    bereich: 'titel', schluessel: 'series:89456', locale: 'de-de',
+    text: `### Worum es geht
+
+Spear ist ein Neandertaler, Fang eine Tyrannosaurierin. Beide haben ihre Familien verloren.
+
+Sie finden zusammen und bleiben zusammen — in einer Vorzeit, die es so nie gab, mit Dinosauriern, urzeitlichen Tieren und verschiedenen menschlichen Zivilisationen nebeneinander.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Genndy Tartakovsky.
+
+Produziert wurde sie von Cartoon Network Studios und Williams Street; die Animation übernahm das Studio La Cachette.
+
+Es entstanden drei Staffeln mit je zehn Folgen, insgesamt 30 Episoden. Ausgestrahlt wurden sie vom 8. Oktober 2019 bis zum 15. März 2026 bei Adult Swim.
+
+Die erste Staffel kommt vollständig ohne Dialog aus; die zweite führt sparsame Dialoge ein. Fang spricht durchgehend nicht — Frank Welker steuert nur Lautäußerungen bei.
+
+### Hinter den Kulissen
+
+Der Verzicht auf Sprache in der ersten Staffel ist die grundlegende Entscheidung. Was erzählt wird, muss über Bild, Bewegung und Ton laufen; es gibt niemanden, der etwas erklärt.
+
+Das setzt die Zeichnung unter Druck. Jede Regung muss lesbar sein, jede Absicht sichtbar — die visuelle Erzählweise steht nicht neben der Handlung, sie ist die Handlung.
+
+Die Anachronismen sind bewusst gesetzt. Ein Neandertaler und ein Tyrannosaurus haben nie zur selben Zeit gelebt; die Serie stellt keine Urgeschichte dar, sondern baut eine eigene Welt aus deren Bestandteilen.
+
+Dass die zweite Staffel Dialoge einführt, ist deshalb ein spürbarer Eingriff — er verändert, was die Serie ist.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes vergibt allen drei Staffeln 100 Prozent Zustimmung. Eine Rezension nannte die Serie episch in jeder Hinsicht, mit wunderschöner Rohheit.
+
+Die Serie gewann drei Emmy Awards in der Kategorie herausragende individuelle Leistung in der Animation und einen Annie Award als beste Animationsserie; hinzu kamen mehrfache Nominierungen bei den Critics' Choice Awards und den Saturn Awards.
+
+Drei Emmys für individuelle Leistung sind bei einer Serie ohne Dialog folgerichtig. Ausgezeichnet wurde genau das, worauf alles beruht — die Zeichnung selbst.
+
+Über sechseinhalb Jahre und drei Staffeln hinweg 100 Prozent Zustimmung zu halten, gelingt kaum einer Serie. Der Ausstrahlungsplatz bei Adult Swim, dem Nachtprogramm eines Kindersenders, passt zu einer Arbeit, die weder Kinderserie noch gewöhnliche Erwachsenenunterhaltung ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:199373', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Polizist in Alaska nimmt die Aussage einer jungen Prostituierten ernst, die seinen Vorgesetzten nicht genügt. Sie beschuldigt einen angesehenen Geschäftsmann: Robert Hansen.
+
+Gegen Widerstände geht der Ermittler der Sache nach. Was er zutage fördert, betrifft eine Reihe junger Frauen — und Jagdausflüge, die einem anderen Zweck dienten.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf dem Fall des Serienmörders Robert Hansen, der in den siebziger und achtziger Jahren in Alaska zahlreiche junge Frauen im Alter zwischen 17 und 41 Jahren tötete.
+
+Scott Walker schrieb das Drehbuch und führte Regie; es war sein Debüt.
+
+Nicolas Cage spielt den Polizisten Jack Halcombe, John Cusack den Robert Hansen und Vanessa Hudgens die Überlebende Cindy Paulson. In weiteren Rollen sind 50 Cent, Radha Mitchell, Katherine LaNasa und Dean Norris zu sehen.
+
+Produziert wurde der Film unter anderem von 50 Cent, Randall Emmett und Mark Ordesky. Die Kamera führte Patrick Murguia, den Schnitt besorgte Sarah Boyd, die Musik stammt von Lorne Balfe.
+
+Der Film erschien 2013, dauert 105 Minuten und ist ab 16 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Der Ausgangspunkt ist eine Frage der Glaubwürdigkeit. Eine Frau aus dem Rotlichtmilieu belastet einen angesehenen Bürger — und die Behörden glauben ihr zunächst nicht. Der Film macht daraus seinen eigentlichen Gegenstand: nicht die Ermittlung gegen den Täter, sondern die Ermittlung gegen den Widerstand im eigenen Apparat.
+
+Damit rückt die Überlebende in den Mittelpunkt. Cindy Paulson ist nicht Nebenfigur, sondern die Person, von deren Aussage alles abhängt.
+
+Bei einem Stoff mit realen Opfern ist das eine Entscheidung mit Gewicht. Der Film konzentriert sich auf die, die entkommen ist, statt die Taten auszubreiten.
+
+Die Zahlen im Hintergrund bleiben nüchtern: eine Verurteilung zu 461 Jahren Haft.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 61 Prozent aus, Metacritic 37 Prozent. Nicolas Cages Leistung wurde durchgehend gelobt.
+
+Der Abstand zwischen beiden Bewertungsportalen deutet auf ein uneinheitliches Bild: solide, aber ohne durchgehende Überzeugungskraft.
+
+Was den Film heraushebt, ist die Perspektive. Filme über Serienmörder erzählen üblicherweise vom Täter; dieser erzählt von einem Ermittler, der einer Zeugin glaubt, der sonst niemand glaubt.
+
+Dass die Taten reale Opfer hatten, bleibt dabei präsent. Der Film benennt Zeitraum und Altersspanne der Getöteten — und verzichtet darauf, mehr daraus zu machen als die Ausgangslage eines Verfahrens.` },
 ];
