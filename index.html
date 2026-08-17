@@ -620,6 +620,15 @@
   .onb-inhalt .kennen-name { min-height:0; margin-top:6px; }
   .onb-mehr { background:none; border:none; color:var(--accent); font-size:13px; font-weight:600;
     cursor:pointer; padding:8px 2px 0; text-decoration:underline; }
+  /* Die drei Vorschlaege am Ende: der Beweis, dass die zwei Minuten etwas
+     gebracht haben. Poster, Name, Taste-Score -- wie in der Liste dahinter. */
+  .onb-treffer { display:flex; gap:8px; }
+  .onb-treffer-karte { flex:1; min-width:0; position:relative; text-align:center; }
+  .onb-treffer-karte img { width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:8px;
+    background:var(--border); display:block; }
+  .onb-treffer-karte .score { position:absolute; top:5px; right:5px; }
+  .onb-treffer-name { font-size:12px; margin-top:5px; color:var(--text);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .onb-zaehler { color:var(--text-dim); font-size:12px; text-align:center; margin:0 0 8px; min-height:15px; }
   .auth-forgot { display:block; margin:8px auto 0; background:none; border:none; color:var(--text-dim);
     font-size:12px; cursor:pointer; text-decoration:underline; }
@@ -1828,6 +1837,20 @@
   </div>
 </div>
 
+<!-- Nach dem Onboarding: der Hinweis aufs Teilen (PLAN-ONBOARDING.md).
+     Der Knopf loest den vorhandenen Referral-Weg aus (einladungTeilen mit
+     kind 'referral'), damit der geteilte Link wie ueberall sonst dem Konto
+     zugeordnet werden kann. Texte setzt das JS aus TXT. -->
+<div id="onbTeilenModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <button class="modal-x" id="onbTeilenX" aria-label="Schließen">✕</button>
+    <h3 id="onbTeilenTitelEl"></h3>
+    <p class="prov-intro" id="onbTeilenTextEl"></p>
+    <button type="button" class="auth-submit" id="onbTeilenKnopf" style="width:100%"></button>
+    <button type="button" class="kennen-weiss" id="onbTeilenSpaeter"></button>
+  </div>
+</div>
+
 <div id="inviteModal" class="modal-overlay" style="display:none">
   <div class="modal auth-modal">
     <button class="modal-x" id="inviteModalX" aria-label="Schließen">✕</button>
@@ -2290,8 +2313,12 @@ var UI_TEXTE = {
     onbWeiter: 'Weiter',
     onbLosGehts: 'Los geht’s',
     onbFehler: 'Das hat nicht geklappt. Bitte noch einmal versuchen.',
-    onbFertigTitel: 'Fertig!',
-    onbFertigText: 'Deine Angaben sind gespeichert.',
+    onbFertigTitel: 'Dein Taste-Score steht',
+    onbFertigText: 'Ab jetzt ist alles nach deinem Geschmack sortiert. Diese drei passen zu dir:',
+    onbTeilenTitel: 'Filmabend mit Freunden?',
+    onbTeilenText: 'Teile MovieMatch mit Freunden: Seht gegenseitig eure Watchlists und stimmt gemeinsam ab, was ihr schauen wollt.',
+    onbTeilenKnopf: 'Freunde einladen',
+    onbTeilenSpaeter: 'Später',
     onbTitelIntro: 'Sag zu ein paar bekannten Titeln kurz deine Meinung — daraus entsteht deine persönliche Sortierung.',
     kinoPlatzhalter: 'Postleitzahl oder Ort …',
     kinoStandort: 'Meinen Standort verwenden',
@@ -2586,8 +2613,12 @@ var UI_TEXTE = {
     onbWeiter: 'Continue',
     onbLosGehts: 'Let’s go',
     onbFehler: 'That didn’t work. Please try again.',
-    onbFertigTitel: 'All set!',
-    onbFertigText: 'Your answers are saved.',
+    onbFertigTitel: 'Your Taste Score is ready',
+    onbFertigText: 'From now on everything is sorted to your taste. These three fit you:',
+    onbTeilenTitel: 'Movie night with friends?',
+    onbTeilenText: 'Share MovieMatch with friends: see each other’s watchlists and vote together on what to watch.',
+    onbTeilenKnopf: 'Invite friends',
+    onbTeilenSpaeter: 'Later',
     onbTitelIntro: 'Give a quick take on a few well-known titles — that builds your personal ranking.',
     kinoPlatzhalter: 'Postal code or town …',
     kinoStandort: 'Use my location',
@@ -2882,8 +2913,12 @@ var UI_TEXTE = {
     onbWeiter: 'Continuer',
     onbLosGehts: 'C’est parti',
     onbFehler: 'Ça n’a pas marché. Réessaie.',
-    onbFertigTitel: 'C’est fait !',
-    onbFertigText: 'Tes réponses sont enregistrées.',
+    onbFertigTitel: 'Ton Taste Score est prêt',
+    onbFertigText: 'À partir de maintenant, tout est trié selon tes goûts. Ces trois-là te correspondent :',
+    onbTeilenTitel: 'Soirée ciné entre amis ?',
+    onbTeilenText: 'Partage MovieMatch avec tes amis : voyez vos watchlists respectives et votez ensemble pour choisir un film.',
+    onbTeilenKnopf: 'Inviter des amis',
+    onbTeilenSpaeter: 'Plus tard',
     onbTitelIntro: 'Donne vite ton avis sur quelques titres connus — c’est ce qui crée ton classement personnel.',
     kinoPlatzhalter: 'Code postal ou ville …',
     kinoStandort: 'Utiliser ma position',
@@ -3178,8 +3213,12 @@ var UI_TEXTE = {
     onbWeiter: 'Continuar',
     onbLosGehts: '¡Vamos!',
     onbFehler: 'No ha funcionado. Inténtalo de nuevo.',
-    onbFertigTitel: '¡Listo!',
-    onbFertigText: 'Tus respuestas están guardadas.',
+    onbFertigTitel: 'Tu Taste Score está listo',
+    onbFertigText: 'A partir de ahora todo se ordena según tu gusto. Estos tres encajan contigo:',
+    onbTeilenTitel: '¿Noche de cine con amigos?',
+    onbTeilenText: 'Comparte MovieMatch con tus amigos: ved vuestras listas y votad juntos qué ver.',
+    onbTeilenKnopf: 'Invitar a amigos',
+    onbTeilenSpaeter: 'Más tarde',
     onbTitelIntro: 'Da tu opinión rápida sobre algunos títulos conocidos — con eso se crea tu orden personal.',
     kinoPlatzhalter: 'Código postal o localidad …',
     kinoStandort: 'Usar mi ubicación',
@@ -3474,8 +3513,12 @@ var UI_TEXTE = {
     onbWeiter: 'Avanti',
     onbLosGehts: 'Si parte',
     onbFehler: 'Non ha funzionato. Riprova.',
-    onbFertigTitel: 'Fatto!',
-    onbFertigText: 'Le tue risposte sono salvate.',
+    onbFertigTitel: 'Il tuo Taste Score è pronto',
+    onbFertigText: 'Da ora tutto è ordinato secondo i tuoi gusti. Questi tre fanno per te:',
+    onbTeilenTitel: 'Serata film con gli amici?',
+    onbTeilenText: 'Condividi MovieMatch con gli amici: guardate le vostre watchlist e votate insieme cosa vedere.',
+    onbTeilenKnopf: 'Invita gli amici',
+    onbTeilenSpaeter: 'Più tardi',
     onbTitelIntro: 'Dai un giudizio veloce su alcuni titoli noti — da lì nasce il tuo ordinamento personale.',
     kinoPlatzhalter: 'Codice postale o città …',
     kinoStandort: 'Usa la mia posizione',
@@ -3770,8 +3813,12 @@ var UI_TEXTE = {
     onbWeiter: 'Verder',
     onbLosGehts: 'Aan de slag',
     onbFehler: 'Dat is niet gelukt. Probeer het opnieuw.',
-    onbFertigTitel: 'Klaar!',
-    onbFertigText: 'Je antwoorden zijn opgeslagen.',
+    onbFertigTitel: 'Je Taste Score is er',
+    onbFertigText: 'Vanaf nu is alles op jouw smaak gesorteerd. Deze drie passen bij jou:',
+    onbTeilenTitel: 'Filmavond met vrienden?',
+    onbTeilenText: 'Deel MovieMatch met vrienden: bekijk elkaars watchlists en stem samen over wat jullie kijken.',
+    onbTeilenKnopf: 'Vrienden uitnodigen',
+    onbTeilenSpaeter: 'Later',
     onbTitelIntro: 'Geef snel je mening over een paar bekende titels — daaruit ontstaat jouw persoonlijke volgorde.',
     kinoPlatzhalter: 'Postcode of plaats …',
     kinoStandort: 'Mijn locatie gebruiken',
@@ -4066,8 +4113,12 @@ var UI_TEXTE = {
     onbWeiter: 'Continuar',
     onbLosGehts: 'Vamos lá',
     onbFehler: 'Não funcionou. Tente de novo.',
-    onbFertigTitel: 'Pronto!',
-    onbFertigText: 'Suas respostas foram salvas.',
+    onbFertigTitel: 'Seu Taste Score está pronto',
+    onbFertigText: 'De agora em diante tudo fica ordenado pelo seu gosto. Estes três combinam com você:',
+    onbTeilenTitel: 'Noite de cinema com amigos?',
+    onbTeilenText: 'Compartilhe o MovieMatch com amigos: vejam as watchlists uns dos outros e votem juntos no que assistir.',
+    onbTeilenKnopf: 'Convidar amigos',
+    onbTeilenSpaeter: 'Mais tarde',
     onbTitelIntro: 'Dê sua opinião rápida sobre alguns títulos conhecidos — é daí que vem sua ordenação pessoal.',
     kinoPlatzhalter: 'Código postal ou cidade …',
     kinoStandort: 'Usar minha localização',
@@ -10012,16 +10063,57 @@ var ONB_FREIGABE = false;
     pruefen();
   }
 
-  /* Abschluss. Vorerst ein schlichtes "Fertig" -- der Taste-Score mit drei
-     passenden Titeln und das Teilen-Fenster kommen als eigener Baustein. */
+  /* Die drei bestbewerteten Titel, die noch nicht markiert sind -- gerechnet
+     mit demselben Profil wie die Liste dahinter (aktuellesProfil/punkteFuer).
+     Der Abschluss soll zeigen, was die Angaben gebracht haben; ein blosses
+     "Gespeichert" waere die Gelegenheit verschenkt. */
+  /* Bei gleichem Score entscheidet die Bekanntheit. Ohne diesen zweiten
+     Schluessel gewaenne bei einem duennen Profil (viele Titel mit Score 0) der
+     Zufall der Katalogreihenfolge -- und der Abschluss zeigte drei voellig
+     unbekannte Titel als "das passt zu dir". */
+  function besser(a, b){
+    return (b.wert - a.wert) || ((b.it.vc || 0) - (a.it.vc || 0));
+  }
+
+  function passendeTitel(anzahl){
+    var profil = aktuellesProfil();
+    var beste = [];
+    POOL.forEach(function(it){
+      if (it.realId == null || !(it.p || it.poster64) || PROGRESS.get(it.realId)) return;
+      var wert = punkteFuer(it, profil);
+      // Kleine Bestenliste statt vollstaendiger Sortierung: bei zehntausenden
+      // Titeln spart das den Sortierlauf, und gebraucht werden drei.
+      if (beste.length < anzahl) { beste.push({ it: it, wert: wert }); beste.sort(besser); }
+      else if (besser({ it: it, wert: wert }, beste[anzahl - 1]) < 0) {
+        beste[anzahl - 1] = { it: it, wert: wert };
+        beste.sort(besser);
+      }
+    });
+    return beste;
+  }
+
   function abschlussZeigen(){
     schritt = ONB_SCHRITTE + 1;
     fehlerEl.textContent = '';
     standEl.textContent = '';
+    zaehlerEl.textContent = '';
     balkenEl.style.width = '100%';
     titelEl.textContent = TXT.onbFertigTitel;
     introEl.textContent = TXT.onbFertigText;
-    inhaltEl.textContent = '';
+    inhaltEl.onclick = null;
+    // Erst die Listen neu aufbauen: Das Profil entsteht aus state.filme/serien
+    // (buildProfile), nicht aus PROGRESS -- ohne rebuild() waeren die gerade
+    // bewerteten Titel noch nicht drin und jeder Score stuende auf 0.
+    rebuild();
+    var treffer = passendeTitel(3);
+    inhaltEl.innerHTML = treffer.length ? '<div class="onb-treffer">' + treffer.map(function(t){
+      var poster = t.it.poster64 || (t.it.p ? (POSTER + t.it.p) : '');
+      var wert = Math.round(t.wert);
+      return '<div class="onb-treffer-karte">' +
+        (poster ? '<img alt="" src="' + escAttr(poster) + '">' : '<div class="onb-treffer-leer"></div>') +
+        '<span class="score' + (wert >= 60 ? ' hi' : '') + '">' + wert + '</span>' +
+        '<div class="onb-treffer-name">' + esc(t.it.t) + '</div></div>';
+    }).join('') + '</div>' : '';
     zurueckBtn.style.visibility = 'hidden';
     weiterBtn.textContent = TXT.onbLosGehts;
     weiterBtn.disabled = false;
@@ -10035,6 +10127,9 @@ var ONB_FREIGABE = false;
       try { await apiRequest('POST', '/api/onboarding/fertig'); }
       catch (e) { fehlerEl.textContent = TXT.onbFehler; weiterBtn.disabled = false; return; }
       schliessen(false);
+      // Die Liste dahinter kennt die frischen Marken und Anbieter noch nicht.
+      rebuild(); renderCurrentTab();
+      teilenZeigen();
       return;
     }
     if (!s.gueltig()) return;
@@ -10065,6 +10160,31 @@ var ONB_FREIGABE = false;
     modal.style.display = 'none';
     schritt = 0;
     if (abbruch) apiRequest('POST', '/api/onboarding/abbruch').catch(function(){});
+  }
+
+  /* Direkt nach dem Abschluss: der Hinweis aufs Teilen. Der Knopf ruft den
+     vorhandenen Referral-Weg auf -- der Link bekommt damit denselben Token wie
+     ueberall sonst, und die geworbene Anmeldung laesst sich dem Konto
+     zuordnen (users.invited_by_user_id). Bewusst ein eigener Klick: Auf dem
+     iPhone oeffnet navigator.share nur innerhalb einer frischen Nutzergeste. */
+  function teilenZeigen(){
+    var m = document.getElementById('onbTeilenModal');
+    if (!m) return;
+    document.getElementById('onbTeilenTitelEl').textContent = TXT.onbTeilenTitel;
+    document.getElementById('onbTeilenTextEl').textContent = TXT.onbTeilenText;
+    var knopf = document.getElementById('onbTeilenKnopf');
+    var spaeter = document.getElementById('onbTeilenSpaeter');
+    knopf.textContent = TXT.onbTeilenKnopf;
+    spaeter.textContent = TXT.onbTeilenSpaeter;
+    function zu(){ m.style.display = 'none'; }
+    knopf.onclick = function(){ zu(); einladungTeilen(this, 'referral'); };
+    spaeter.onclick = zu;
+    document.getElementById('onbTeilenX').onclick = zu;
+    m.addEventListener('click', function(e){ if (e.target === m) zu(); });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && m.style.display !== 'none') zu();
+    });
+    m.style.display = 'flex';
   }
 
   weiterBtn.onclick = weiter;
