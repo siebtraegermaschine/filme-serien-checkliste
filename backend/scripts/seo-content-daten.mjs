@@ -22828,4 +22828,223 @@ Weltweit spielte der Film 164,2 Millionen Dollar ein, davon 63,5 Millionen in de
 Die Kritik war zunächst gespalten: 47 Prozent bei Rotten Tomatoes.
 
 Das hat sich deutlich gedreht. Spätestens seit 2016 wird der Film als Kultfilm geführt und vor allem von jüngeren Filmemachern für seine Bildgestaltung geschätzt — eine der klarsten Neubewertungen im amerikanischen Kino der zweitausender Jahre.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:7270', locale: 'de-de',
+    text: `### Worum es geht
+
+Roy Waller lebt in einem makellos sauberen Haus in Los Angeles und betrügt Menschen am Telefon: Er verkauft überteuerte Wasserfilter und lässt sich Schecks schicken. Nebenbei leidet er unter Zwangsstörung und einem Tic — er kann keine Tür durchschreiten, ohne dreimal zu zählen.
+
+Sein Partner Frank drängt auf einen größeren Coup. Da taucht Angela auf, vierzehn Jahre alt und angeblich Roys Tochter aus einer gescheiterten Ehe. Sie zieht bei ihm ein, bringt seine Ordnung durcheinander und will lernen, wie man betrügt. Roy blüht auf — und übersieht dabei, dass er selbst gerade Teil eines Plans ist.
+
+### Entstehungsgeschichte
+
+Grundlage ist Eric Garcias Roman von 2002. Ridley Scott führte Regie; der Film erschien am 12. September 2003 bei Warner Bros., das Budget lag bei 62 Millionen Dollar.
+
+Es spielen Nicolas Cage als Roy, Sam Rockwell als Frank und Alison Lohman als Angela.
+
+### Hinter den Kulissen
+
+Lohman war zum Zeitpunkt der Dreharbeiten Anfang zwanzig und spielt eine Vierzehnjährige — eine Besetzung, die für die Wendung des Films erforderlich ist und die von der Kritik durchgehend als überzeugend hervorgehoben wurde.
+
+Cage legt die Zwangsstörung nicht als Marotte an, sondern als tägliche Arbeit: Der Film verwendet erhebliche Zeit darauf, wie viel Aufwand Roy betreiben muss, um überhaupt aus dem Haus zu kommen.
+
+### Einordnung & Wirkung
+
+Der Film startete auf Platz zwei hinter "Irgendwann in Mexico" mit 13 Millionen Dollar und spielte weltweit 65,6 Millionen ein, davon 36,9 Millionen in den USA — gemessen an 62 Millionen Produktionskosten ein bescheidener Erfolg.
+
+Die Kritik reagierte gut: 83 Prozent von 183 Besprechungen bei Rotten Tomatoes, 61 von 100 bei Metacritic. Roger Ebert vergab vier Sterne und schrieb, der Film sei so fesselnd, dass es bei jedem Wechsel vom einen Handlungsstrang zum anderen wieder besser werde. Das Publikum vergab bei CinemaScore ein B.
+
+In Ridley Scotts Werk steht der Film abseits: kein Ausstattungsfilm, kein Science-Fiction, sondern ein Kammerspiel über drei Menschen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:34647', locale: 'de-de',
+    text: `### Worum es geht
+
+Oscar dealt in Tokio mit Drogen und wohnt dort mit seiner Schwester Linda, die in einem Nachtclub arbeitet. Beide haben als Kinder ihre Eltern bei einem Autounfall verloren und einander damals versprochen, sich nie zu trennen.
+
+Bei einer Polizeirazzia in einer Bar namens "The Void" wird Oscar erschossen. Von da an löst sich der Film vom Körper: Was folgt, ist ein Blick von oben über die Neonlichter der Stadt, durch Wände und Decken, in die Vergangenheit und zurück — Oscars Bewusstsein, das Linda nicht verlassen kann. Die Anlage folgt lose dem Tibetischen Totenbuch.
+
+### Entstehungsgeschichte
+
+Gaspar Noé schrieb den Film gemeinsam mit Lucile Hadzihalilovic und nennt ihn ein psychedelisches Melodram.
+
+Er trug die Idee fünfzehn Jahre mit sich. Erst der kommerzielle Erfolg von "Irreversibel" (2002) ermöglichte die Finanzierung über Wild Bunch; das Budget lag bei 12,4 Millionen Euro. Gedreht wurde ab Oktober 2007 in Tokio und Montreal.
+
+### Hinter den Kulissen
+
+Der Film ist fast durchgehend aus der Ich-Perspektive gefilmt: Zu Beginn sieht man Oscars Blick einschließlich Blinzeln, später schwebt die Kamera über der Stadt und taucht durch Fenster. Die Kamera führte Benoît Debie, der schon bei "Irreversibel" gearbeitet hatte.
+
+Diese Konsequenz hat einen Preis: Der Film verzichtet über weite Strecken auf Handlung und Dialog und verlangt seinem Publikum eine Ausdauer ab, an der sich die Urteile scheiden.
+
+### Einordnung & Wirkung
+
+Eine unfertige Fassung lief 2009 in Cannes, die vollständige 2010 in Sundance. Die Kinostarts folgten im Mai 2010 in Frankreich und im September 2010 in den USA und Großbritannien.
+
+Die Kritik reagierte scharf gespalten: gelobt für Erfindungsreichtum und Bildgestaltung, abgelehnt als ermüdend. Bei Rotten Tomatoes steht er bei 73 Prozent, weltweit spielte er nur rund 1,5 Millionen Dollar ein.
+
+Er gilt als einer der formal radikalsten Filme seiner Zeit — und als einer, den man entweder als Erfahrung oder als Zumutung beschreibt.` },
+  {
+    bereich: 'titel', schluessel: 'series:61550', locale: 'de-de',
+    text: `### Worum es geht
+
+1946, ein Jahr nach Kriegsende. Peggy Carter hat in der Strategic Scientific Reserve gedient und gilt dort inzwischen als Sekretärin: Ihre Kollegen schicken sie Kaffee holen und teilen ihr die Ablage zu.
+
+Als Howard Stark beschuldigt wird, Waffen an Feinde verkauft zu haben, bittet er sie heimlich um Hilfe. Peggy ermittelt fortan gegen die eigene Behörde, unterstützt allein von Starks Butler Edwin Jarvis. Die zweite Staffel führt sie 1947 nach Los Angeles, in den beginnenden Kalten Krieg und das Atomzeitalter.
+
+### Entstehungsgeschichte
+
+Erdacht wurde die Serie von Christopher Markus und Stephen McFeely, den Autoren mehrerer Captain-America-Filme. Hayley Atwell spielt Peggy Carter wie schon in den Kinofilmen.
+
+Sie gehört zum Marvel-Filmuniversum und spielt vor der Gründung von S.H.I.E.L.D.; nebenbei liefert sie die Ursprünge der Programme, aus denen später Black Widow und der Winter Soldier hervorgehen.
+
+### Hinter den Kulissen
+
+Die eigentliche Idee der Serie hat Atwell selbst beschrieben: Peggys Fähigkeit bestehe darin, dass andere sie unterschätzen. Der Sexismus der Nachkriegszeit ist damit nicht Beiwerk, sondern Handlungsmittel — Peggy kommt an Orte, an denen niemand eine Frau vermutet.
+
+Die Serie lief in zwei Staffeln mit acht und zehn Folgen von Januar 2015 bis März 2016.
+
+### Einordnung & Wirkung
+
+Die erste Staffel erreichte 98 Prozent bei Rotten Tomatoes. Die Zuschauerzahlen fielen in der zweiten Staffel deutlich ab.
+
+ABC stellte die Serie am 12. Mai 2016 wegen zu geringer Quoten ein. Die Verantwortlichen hatten eine dritte Staffel geplant, die Peggys Vergangenheit und ihre Familie behandeln sollte; offene Handlungsstränge blieben unaufgelöst.
+
+Sie gilt bis heute als eine der besten Fernsehproduktionen aus dem Marvel-Umfeld — und als Beispiel dafür, dass gute Kritiken allein eine Serie nicht am Leben halten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1079091', locale: 'de-de',
+    text: `### Worum es geht
+
+Lily Bloom eröffnet in Boston einen Blumenladen und lernt den Neurochirurgen Ryle Kincaid kennen. Was als Liebesgeschichte beginnt, kippt: Ryle wird gewalttätig, und jedes Mal folgt eine Erklärung, die im Moment plausibel klingt.
+
+Parallel dazu erzählt der Film in Rückblenden Lilys Jugend — ihren Vater, der ihre Mutter schlug, und ihre erste Liebe Atlas, der damals obdachlos war. Als Atlas wieder auftaucht, steht Lily vor der Frage, die sie ihrer Mutter jahrelang gestellt hat: warum jemand bleibt.
+
+### Entstehungsgeschichte
+
+Grundlage ist Colleen Hoovers Roman von 2016, der über die Buchgemeinde im Internet zu einem Verkaufserfolg wurde.
+
+Justin Baldoni führte Regie und spielt Ryle, Blake Lively spielt Lily. Gedreht wurde von Mai 2023 bis Anfang 2024, unterbrochen von den Streiks der Drehbuch- und Schauspielgewerkschaften. Das Budget lag bei 25 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Umstritten war schon die Vermarktung: Der Film wurde weitgehend als leichte Liebesgeschichte beworben, obwohl er häusliche Gewalt behandelt — ein Widerspruch, den mehrere Kritiker ausdrücklich benannten.
+
+Danach folgte ein langwieriger Rechtsstreit. Im Dezember 2024 reichte Blake Lively Beschwerde wegen sexueller Belästigung und eines feindseligen Arbeitsumfelds ein. Baldoni wies die Vorwürfe zurück und führte den Konflikt auf künstlerische Differenzen zurück. Es folgten mehrere Klagen; Livelys verbliebene Ansprüche wurden am 4. Mai 2026 außergerichtlich beigelegt, ohne Zahlung.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 9. August 2024 und spielte weltweit 351 Millionen Dollar ein — 148,5 Millionen in den USA und 202,5 Millionen international. Gemessen am Einsatz von 25 Millionen war er einer der einträglichsten Filme des Jahres 2024.
+
+Die Kritik urteilte gemischt: 55 Prozent bei Rotten Tomatoes, 53 von 100 bei Metacritic; das Publikum vergab bei CinemaScore ein A minus.
+
+Bemerkenswert bleibt die Diskrepanz zwischen dem Erfolg beim Publikum und dem Umstand, dass der Film heute vor allem wegen der Auseinandersetzungen um ihn erinnert wird.` },
+  {
+    bereich: 'titel', schluessel: 'movie:739405', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Datenträger von unschätzbarem Wert ist gestohlen worden: "The Handle", eine hochentwickelte Technik, deren Käufer noch nicht feststeht. Der britische Geheimdienst setzt den Agenten Orson Fortune darauf an — einen Mann, der seine Einsätze grundsätzlich mit Wein und Erste-Klasse-Flügen verbindet und die Rechnungen einreicht.
+
+Um an den Waffenhändler Greg Simmonds heranzukommen, verpflichtet das Team einen Hollywoodstar, den Simmonds verehrt. Der Weg führt über eine Wohltätigkeitsgala in Cannes zu einer Villa im türkischen Antalya.
+
+### Entstehungsgeschichte
+
+Regie führte Guy Ritchie, das Drehbuch schrieb er gemeinsam mit Ivan Atkinson und Marn Davies. Das Vorhaben hieß zunächst "Five Eyes". Das Budget lag bei 50 Millionen Dollar.
+
+Es spielen Jason Statham als Fortune, Aubrey Plaza, Hugh Grant als Simmonds und Josh Hartnett als der Filmstar.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen am 14. Januar 2021 in Antalya, in Farnborough und in Katar.
+
+Der Start verzögerte sich erheblich: Ursprünglich für Januar 2022 vorgesehen, nahm STX Entertainment den Film im Februar 2022 aus dem Programm. Berichten zufolge stand das im Zusammenhang mit der Darstellung ukrainischer Bösewichte während des russischen Angriffskriegs. International lief er ab dem 4. Januar 2023, in den USA ab dem 3. März 2023 über Lionsgate.
+
+Hugh Grant spielt hier wie schon in "The Gentlemen" gegen sein früheres Rollenbild — eine Wendung seiner Laufbahn, die Ritchie mit angestoßen hat.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 49 Millionen Dollar ein, davon nur 6,5 Millionen in den USA.
+
+Die Kritik urteilte geteilt: 51 Prozent bei Rotten Tomatoes mit dem Befund, er halte mit den besten modernen Actionfilmen nicht mit, biete aber anspruchslose Unterhaltung.
+
+Er steht damit für eine Werkphase Ritchies, in der er in kurzer Folge mehrere ähnlich gebaute Agentenkomödien drehte — routiniert, ohne den Zugriff seiner früheren Arbeiten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9874', locale: 'de-de',
+    text: `### Worum es geht
+
+Marion Cobretti, genannt Cobra, gehört zur Sondereinheit der Polizei von Los Angeles und wird gerufen, wenn andere nicht weiterkommen. Seine Auffassung von Polizeiarbeit ist einfach: Er verhandelt nicht.
+
+Eine Reihe von Morden führt ihn zu einer Sekte, die sich "Neue Ordnung" nennt und die Gesellschaft durch Auslese vom Schwachen befreien will. Das Model Ingrid hat einen der Täter gesehen und ist damit die einzige Zeugin. Cobra soll sie beschützen — und die Sekte schickt daraufhin alles, was sie hat.
+
+### Entstehungsgeschichte
+
+Sylvester Stallone schrieb das Drehbuch und spielt die Hauptrolle. Der Ursprung liegt anderswo: Stallone hatte zuvor an "Beverly Hills Cop" gearbeitet und eine Fassung vorgelegt, die dem Studio zu teuer und zu actionlastig war. Er verließ das Projekt und verarbeitete seine Einfälle in diesem eigenen Stoff.
+
+Regie führte George P. Cosmatos, das Budget lag bei 25 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Freigabe war ein Problem: Zunächst erhielt der Film wegen der Gewaltdarstellung ein X, was einen regulären Start unmöglich gemacht hätte, und musste erheblich gekürzt werden, um ein R zu bekommen.
+
+Weitere Schnitte folgten aus wirtschaftlichen Gründen: Nach dem Erfolg von "Top Gun" kürzte Stallone die Laufzeit, damit die Kinos täglich eine Vorstellung mehr ansetzen konnten. Dabei fielen Handlungsteile und Figurenszenen weg — was dem fertigen Film anzumerken ist.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 160 Millionen Dollar ein. Einzelne Berichte werteten das gemessen an der "Rambo"-Reihe dennoch als enttäuschend.
+
+Die Kritik lehnte ihn scharf ab: 21 Prozent bei Rotten Tomatoes, mit Vorwürfen gegen die Gewaltdarstellung und die dünne Figurenzeichnung. Es gab sechs Nominierungen für die Goldene Himbeere, darunter schlechtester Film und schlechtester Hauptdarsteller. Das Publikum vergab bei CinemaScore ein B.
+
+Heute gilt er als Kultfilm — auch, weil kaum ein anderer Film die Ästhetik amerikanischer Actionfilme der achtziger Jahre so konzentriert enthält.` },
+  {
+    bereich: 'titel', schluessel: 'movie:81796', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Jahr 2079 sitzen Schwerverbrecher nicht mehr auf der Erde, sondern in MS One — einem Gefängnis in der Erdumlaufbahn, in dem sie in künstlichem Tiefschlaf liegen. Der Vorwurf steht im Raum, dieser Zustand mache die Insassen wahnsinnig.
+
+Die Tochter des amerikanischen Präsidenten reist hin, um das zu prüfen. Bei ihrem Besuch kommt es zum Aufstand, und sämtliche Insassen sind wach. Der zu Unrecht verurteilte Agent Snow bekommt ein Angebot: seine Freiheit gegen ihre Rettung.
+
+### Entstehungsgeschichte
+
+Die Geschichte stammt von Luc Besson, der das Drehbuch gemeinsam mit James Mather und Stephen St. Leger schrieb; die beiden führten auch Regie. Das Budget lag bei 20 Millionen Dollar.
+
+Guy Pearce spielt Snow, Maggie Grace die Präsidententochter Emilie.
+
+### Hinter den Kulissen
+
+Gedreht wurde überwiegend in Belgrad, mit ausgedehntem Einsatz grüner Leinwände statt gebauter Kulissen — was dem Film seine eigentümlich flache Anmutung gibt und ein wiederkehrender Kritikpunkt war.
+
+2015 hatte die Ähnlichkeit zu einem älteren Film ein juristisches Nachspiel: John Carpenter klagte wegen Übernahmen aus "Die Klapperschlange" und "Flucht aus L.A." — ein Mann, der zu Unrecht einsitzt, wird gegen Straferlass zur Rettung einer hochrangigen Person geschickt. Ein französisches Gericht sprach ihm 20.000 Euro zu; nach Zurückweisung der Berufung wurde der Betrag auf 450.000 Euro erhöht.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 32,2 Millionen Dollar ein, davon 14,3 Millionen in den USA.
+
+Die Kritik urteilte gemischt: 38 Prozent bei Rotten Tomatoes mit dem Befund, Guy Pearce mache das Beste aus seiner Rolle, der Film sei aber zu abgeleitet; 48 von 100 bei Metacritic.
+
+Bemerkenswert bleibt der Rechtsstreit: Fälle, in denen die Ähnlichkeit zu einem Vorbild gerichtlich festgestellt wird, sind im Kino selten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:183011', locale: 'de-de',
+    text: `### Worum es geht
+
+Barry Allen wacht auf und ist nicht mehr der Flash. Seine Mutter, die vor Jahren ermordet wurde, lebt. Sein Vater ist nicht im Gefängnis. Und die Welt ist im Krieg: Aquaman hat Europa geflutet, Wonder Woman hat Großbritannien erobert, Millionen sind tot.
+
+Es gibt keine Justice League. Bruce Wayne ist als Kind erschossen worden — überlebt hat sein Vater Thomas, der als Batman tötet. Barry begreift, dass jemand die Zeitlinie verändert hat, und sucht einen Weg zurück. Was er dabei über seinen eigenen Anteil erfährt, macht die Sache nicht leichter.
+
+### Entstehungsgeschichte
+
+Grundlage ist die Comicreihe "Flashpoint" von Geoff Johns und Andy Kubert aus dem Jahr 2011. Regie führte Jay Oliva, die Laufzeit beträgt 81 Minuten.
+
+Es ist der erste Film des DC Animated Movie Universe — einer Reihe direkt für den Heimmarkt produzierter Animationsfilme mit durchgehender Handlung, die über Jahre fortgesetzt wurde.
+
+### Hinter den Kulissen
+
+Gesprochen wird Barry Allen von Justin Chambers, sein Gegenspieler Professor Zoom von C. Thomas Howell. Kevin Conroy übernimmt Bruce Wayne — er sprach Batman seit der Zeichentrickserie von 1992 und gilt vielen als die maßgebliche Stimme der Figur. Michael B. Jordan spricht Cyborg.
+
+Auffällig ist die Härte: Der Film ist ab 16 Jahren freigegeben und zeigt Todesfälle unter Hauptfiguren ohne Beschönigung — für einen Zeichentrickfilm über Superhelden ungewöhnlich.
+
+### Einordnung & Wirkung
+
+Bei Rotten Tomatoes steht der Film bei 100 Prozent, allerdings auf Grundlage von nur sechs Besprechungen. IGN nannte ihn geschliffen und hart zupackend und vergab 8,5 von 10, merkte aber an, die vielen Kurzauftritte lenkten von der Haupthandlung ab.
+
+Über den Verkauf für zu Hause kamen in den USA 5.263.980 Dollar zusammen.
+
+Die Szene nach dem Abspann leitet zum nächsten Teil "Justice League: War" über und begründet damit die durchgehende Erzählung der Reihe. Derselbe Comicstoff wurde 2023 als Realfilm "The Flash" verfilmt.` },
 ];
