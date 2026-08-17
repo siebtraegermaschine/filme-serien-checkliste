@@ -29463,4 +29463,742 @@ Die Kritik lobte überwiegend die handwerkliche Umsetzung; über die inhaltliche
 Innerhalb der Reihe ist es der mittlere Teil: Der erste Film erschien 2001, der dritte erst 2017 — ein Abstand von vierzehn Jahren, der die Reihe faktisch zweimal neu beginnen ließ.
 
 Dass am Ende ein verwundetes, aber nicht getötetes Wesen in seinen nächsten Dornröschenschlaf geht, ist dabei weniger offenes Ende als Bauprinzip: Die Reihe hat ihren Rhythmus von 23 Jahren zur eigenen Fortsetzungslogik gemacht.` },
+  // ---- Block 45 ----
+  {
+    bereich: 'titel', schluessel: 'series:46639', locale: 'de-de',
+    text: `### Worum es geht
+
+Shadow Moon kommt aus dem Gefängnis und hat nichts mehr, wozu er zurückkehren könnte. Auf dem Weg nach Hause trifft er einen Mann, der sich Mr. Wednesday nennt und ihm eine Stelle anbietet, ohne zu sagen, worin sie besteht.
+
+Wednesday ist Odin. Er reist durch die Vereinigten Staaten und sammelt die alten Götter ein — jene, die Einwanderer über Jahrhunderte mitgebracht und dann vergessen haben. Ihnen gegenüber stehen die neuen Götter. Wednesday will den Krieg zwischen beiden Lagern, und Shadow soll ihn dabei begleiten.
+
+### Entstehungsgeschichte
+
+Bryan Fuller und Michael Green entwickelten die Serie nach Neil Gaimans gleichnamigem Roman. Produziert wurde sie von Living Dead Guy, FremantleMedia North America und Starz Originals.
+
+Ricky Whittle spielt Shadow Moon, Ian McShane den Mr. Wednesday, Emily Browning die Laura Moon, Pablo Schreiber den Mad Sweeney und Yetide Badaki die Bilquis.
+
+### Hinter den Kulissen
+
+Die Serie verbindet Fantasy, Mythologie und amerikanische Folklore. Ihr Grundgedanke: Die Götter sind mit den Einwanderern ins Land gekommen und leben dort weiter, solange jemand an sie glaubt.
+
+Jede Folge dauert zwischen 52 und 62 Minuten. Diese Schwankungsbreite ist ein Hinweis darauf, dass die Serie eher dem Rhythmus der jeweiligen Geschichte folgte als einem festen Sendeschema.
+
+### Einordnung & Wirkung
+
+Die Premiere war am 30. April 2017 bei Starz, im deutschsprachigen Raum einen Tag später bei Amazon Video.
+
+Insgesamt entstanden drei Staffeln mit 26 Folgen, jede Staffel zwischen acht und zehn Folgen lang. Im März 2021 wurde die Serie abgesetzt.
+
+Die Kritik lobte durchgehend die Bildgestaltung und die Besetzung. Das Lexikon des internationalen Films vergab drei von fünf Sternen.
+
+Was bleibt, ist eine Serie mit einer ungewöhnlich starken Bildsprache — und ein Stoff, dessen angekündigter Krieg zwischen alten und neuen Göttern auf dem Bildschirm nie ausgetragen wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:55931', locale: 'de-de',
+    text: `### Worum es geht
+
+"Animatrix" ist kein zusammenhängender Film, sondern eine Sammlung: neun Kurzfilme, die alle in der Welt der Matrix spielen und von unterschiedlichen Regisseuren stammen.
+
+Der bekannteste Teil, "The Second Renaissance", erzählt die Vorgeschichte des Maschinenaufstands, die in den Spielfilmen nur angedeutet wird. Die übrigen acht Teile erzählen jeweils eigene Geschichten aus derselben Welt.
+
+### Entstehungsgeschichte
+
+Es handelt sich um eine amerikanisch-japanische Gemeinschaftsproduktion aus dem Jahr 2003.
+
+Regie führten bekannte japanische Anime-Regisseure, darunter Shin'ichirō Watanabe, Yoshiaki Kawajiri, Takeshi Koike, Mahiro Maeda und Kōji Morimoto. Beteiligt waren mehrere Studios, unter anderem Studio 4°C, Madhouse und DNA.
+
+Die Wachowskis schrieben die Drehbücher gemeinsam mit den Regisseuren und traten als Produzenten auf — sie haben also nicht nur ihre Welt zur Verfügung gestellt, sondern mitgearbeitet.
+
+### Hinter den Kulissen
+
+Die neun Teile verbinden Computeranimation und klassischen Zeichentrick und unterscheiden sich untereinander erheblich in Machart und Tonfall. Es gibt keinen gemeinsamen Zeichenstil und keine durchgehende Erzählstimme — jeder Regisseur bringt seine eigene Handschrift ein, und der Zusammenhalt entsteht allein über die gemeinsame Welt.
+
+Erzählerisch greifen sie unmittelbar in die Reihe ein: Sie beziehen sich auf Vorgänge aus "Matrix Reloaded" und "Matrix Revolutions" sowie auf das Videospiel "Enter the Matrix". Wer die Reihe vollständig verstehen will, kommt an ihnen nicht vorbei.
+
+Handlungsteile einer Kinoreihe in ein anderes Medium auszulagern, war zu diesem Zeitpunkt ein ungewöhnlicher Ansatz.
+
+### Einordnung & Wirkung
+
+Der Film erschien 2003 auf DVD und später auf Blu-ray — ein regulärer Kinostart war nie vorgesehen. Veröffentlicht wurde er im selben Jahr wie die beiden Fortsetzungen der Kinoreihe und war damit Teil einer umfassenden Verwertung über Kino, Heimkino und Videospiel hinweg.
+
+Die Kritik beschrieb ihn als Begleitwerk mit hochkarätiger, abwechslungsreicher Optik, das auch für Zuschauer ohne Bindung an die Reihe interessant sei.
+
+Seine Bedeutung reicht über die Matrix hinaus: Er versammelt eine Reihe namhafter japanischer Anime-Regisseure in einem Werk, das über den westlichen Heimkinomarkt vertrieben wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:504253', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Oberschüler, dessen Namen der Film nicht nennt, findet ein Tagebuch. Es gehört Sakura Yamauchi, seiner Mitschülerin — beliebt und gesellig, das Gegenteil von ihm. Auf den Seiten steht, dass sie unheilbar an der Bauchspeicheldrüse erkrankt ist.
+
+Sakura führt ihr Schulleben weiter, als wäre nichts. Und sie nimmt ihn mit zu den Dingen, die sie vorher noch tun will, darunter eine Reise nach Fukuoka. Aus zwei Menschen, die nichts gemeinsam haben, wird eine Freundschaft.
+
+### Entstehungsgeschichte
+
+Regie führte Shinichirō Ushijima, der auch das Drehbuch schrieb. Es war seine erste Arbeit in diesem Fach.
+
+Die Vorlage ist der Light Novel von Yoru Sumino aus dem Jahr 2015.
+
+Produziert wurde der Film von Studio VOLN, den Verleih übernahm Aniplex.
+
+Die Stimmen sprechen Mahiro Takasugi als namenlosen Erzähler und Lynn als Sakura. Daneben sind Yukiyo Fujii, Yuma Uchida, Jun Fukushima, Atsuko Tanaka, Shin-ichirō Miki und Emi Wakui zu hören. Für die englische Fassung übernahmen Robbie Daymond und Erika Harlacher die Hauptrollen.
+
+### Hinter den Kulissen
+
+Der Titel ist bewusst irritierend: Er klingt nach Horror und gehört zu einer stillen Geschichte über Freundschaft und Sterblichkeit.
+
+Bemerkenswert ist die Erzählperspektive. Die Hauptfigur bleibt über den gesamten Film namenlos — erzählt wird also von jemandem, den der Film selbst nicht benennt.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 24. Juli 2018 in Tokio statt, der landesweite japanische Start folgte am 1. September 2018. Danach lief der Film international, unter anderem in Australien, Großbritannien und den Vereinigten Staaten.
+
+Weltweit spielte er 6,2 Millionen Dollar ein.
+
+Die Kritik urteilte sehr positiv: 93 Prozent bei Rotten Tomatoes, mit dem wiederkehrenden Befund, es handle sich um eine aufrichtige Feier des Lebens und der Freundschaft.
+
+Beim Festival Scotland Loves Anime gewann der Film den Publikumspreis; hinzu kamen weitere Festivalnominierungen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:140420', locale: 'de-de',
+    text: `### Worum es geht
+
+New York. Der Büroangestellte George wartet auf dem Bahnsteig, als ihm ein Blatt Papier aus der Hand weht und einer jungen Frau ins Gesicht fliegt. Auf dem Blatt bleibt der Abdruck ihres Lippenstifts zurück. Dann fährt ihr Zug ab.
+
+Später sieht George sie zufällig durch das Fenster eines gegenüberliegenden Gebäudes wieder. Er hat keine Möglichkeit, sie zu erreichen — außer der einen, die er hat: Er beginnt, Papierflieger zu falten und hinüberzuwerfen. Keiner kommt an.
+
+### Entstehungsgeschichte
+
+Regie führte John Kahrs. Produziert wurde der Kurzfilm von den Walt Disney Animation Studios; er dauert sechs Minuten.
+
+Die Musik komponierte Christophe Beck.
+
+Die Premiere fand am 4. Juni 2012 beim Festival d'Animation in Annecy statt. Danach lief der Film als Vorfilm zu "Ralph reichts" — ab dem 2. November 2012 in den Vereinigten Staaten, ab dem 6. Dezember 2012 in Deutschland.
+
+### Hinter den Kulissen
+
+Die Technik ist der eigentliche Gegenstand: Der Film verbindet klassische Zeichenanimation mit Computeranimation und sucht damit einen Weg zwischen zwei Verfahren, die bei Disney lange als Gegensatz galten.
+
+Das Bild ist in Graustufen gehalten. Farbig ist einzig der Lippenstiftabdruck auf dem Papier.
+
+Gesprochen wird nicht. Der Film kommt vollständig ohne Dialog aus und trägt seine Geschichte über Geräusche, Musik und Bewegung.
+
+### Einordnung & Wirkung
+
+2013 gewann der Film den Oscar als bester animierter Kurzfilm sowie den Annie Award in derselben Sparte. Die deutsche Filmbewertungsstelle vergab das Prädikat besonders wertvoll.
+
+Bemerkenswert bleibt, wie viel der Film mit wie wenig erreicht: sechs Minuten, kein Wort, zwei Farben — und eine vollständig erzählte Geschichte.
+
+Sein Verfahren, gezeichnete Linie und dreidimensionale Berechnung zusammenzuführen, war der Versuch, zwei bei Disney getrennte Traditionen wieder zusammenzubringen.` },
+  {
+    bereich: 'titel', schluessel: 'series:85723', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Erde ist zerstört. Zwei Androiden, die nur Mutter und Vater genannt werden, landen auf dem Planeten Kepler-22b mit dem Auftrag, dort menschliche Kinder großzuziehen.
+
+Die Aufgabe erweist sich als ungleich schwerer als vorgesehen — und zwar nicht wegen des Planeten, sondern wegen der Kinder. Denn die Überzeugungen von Menschen zu steuern, ist ein heikles und schwieriges Geschäft. Genau darum kreist die Serie: darum, was Glauben mit Menschen macht und ob er sich von außen festlegen lässt.
+
+### Entstehungsgeschichte
+
+Aaron Guzikowski entwickelte die Serie. Ridley Scott trat als ausführender Produzent auf und führte bei den ersten beiden Folgen selbst Regie.
+
+Amanda Collin spielt die Mutter, Abubakar Salim den Vater, Travis Fimmel den Marcus, Niamh Algar die Sue und Winta McGrath den Campion.
+
+Produziert wurde die Serie unter anderem von Scott Free Productions.
+
+### Hinter den Kulissen
+
+Gedreht wurde in der südafrikanischen Provinz Westkap, unter anderem in Somerset West, in Stellenbosch und in Kapstadt. Die dortigen Landschaften liefern den fremden Planeten, ohne dass viel nachgeholfen werden müsste.
+
+Ridley Scotts Handschrift ist in den ersten Folgen deutlich: kalte Bildgestaltung, sehr langsame Bewegungen, Androiden, deren Menschlichkeit dauerhaft in der Schwebe bleibt.
+
+Der Gegenstand ist ungewöhnlich für eine Science-Fiction-Serie. Es geht nicht um Technik oder um fremde Wesen, sondern darum, wie Überzeugungen weitergegeben werden — und wie schwer es ist, sie zu unterdrücken.
+
+### Einordnung & Wirkung
+
+Es entstanden zwei Staffeln mit insgesamt 18 Folgen: zehn im Jahr 2020, acht im Jahr 2022.
+
+Die Bewertungen stiegen deutlich an. Die erste Staffel kam auf 74 Prozent bei Rotten Tomatoes und 64 von 100 bei Metacritic, die zweite auf 86 Prozent und 84 von 100.
+
+Genau in diesem Moment endete die Serie. HBO Max setzte sie im Juni 2022 nach der Fusion von WarnerMedia und Discovery ab und nahm sie im Dezember 2022 vom Angebot.
+
+Sie gehört damit zu den bekanntesten Fällen einer Serie, die nicht an ihrer Aufnahme scheiterte, sondern an einem Konzernumbau.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1151031', locale: 'de-de',
+    text: `### Worum es geht
+
+Andy und Piper sind Stiefgeschwister. Nach dem Tod ihres Vaters kommen sie zu einer Pflegemutter namens Laura, bei der bereits ein weiterer Junge lebt.
+
+Laura ist zugewandt und warmherzig — und verbirgt etwas. Was sie vorhat, hängt mit ihrer eigenen, verstorbenen Tochter zusammen und mit okkulten Ritualen, in deren Mitte die beiden Kinder geraten, bevor sie begreifen, worum es geht.
+
+### Entstehungsgeschichte
+
+Regie führten die Brüder Danny und Michael Philippou; es ist ihre zweite Arbeit nach "Talk to Me". Das Drehbuch schrieb Danny Philippou gemeinsam mit Bill Hinzman, angeregt vom Genre des sogenannten Psycho-Biddy-Horrors, in dem ältere Frauen die Bedrohung darstellen.
+
+Billy Barratt spielt den Andy, Sora Wong die Piper — es ist ihre erste professionelle Rolle —, Sally Hawkins die Laura und Jonah Wren Phillips den Oliver.
+
+Das Budget lag bei 15 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab Juni 2024 an 41 Drehtagen in Adelaide und Umgebung in Südaustralien. Die Kamera führte Aaron McLisky.
+
+Die Effekte entstanden weitgehend handwerklich, unter anderem mit Arbeitsplatten, die mit Schokolade gefüllt waren, und mit Messern aus Schaumstoff, die später digital ergänzt wurden.
+
+Die eigentliche Leistung des Films ist aber keine Effektfrage. Sally Hawkins spielt eine Frau, deren Fürsorge und deren Wahn nicht voneinander zu trennen sind — und der Film lässt lange offen, was davon was ist.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 39,1 Millionen Dollar ein — 19,3 Millionen in den Vereinigten Staaten und 19,8 Millionen international.
+
+Die Kritik urteilte sehr gut: 89 Prozent bei Rotten Tomatoes mit einem Schnitt von 7,6 von 10, 75 von 100 bei Metacritic. Wiederkehrend war die Einschätzung, die beiden Regisseure hätten sich damit als führende Vertreter des gegenwärtigen Horrorkinos bestätigt; Sally Hawkins' Darstellung wurde durchgehend hervorgehoben.
+
+Beim Publikum kam der Film auf ein B plus bei CinemaScore und 80 Prozent Zustimmung bei PostTrak.
+
+Bei den australischen AACTA Awards gewann er unter anderem als bester Film, für die Regie und für Sally Hawkins als beste Hauptdarstellerin.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11017', locale: 'de-de',
+    text: `### Worum es geht
+
+Billy Madison ist 27, Sohn eines Hotelmagnaten und hat sein Leben bisher am Pool verbracht. Sein Vater will die Firma an einen Vizepräsidenten übergeben, weil er seinen Sohn für ungeeignet hält.
+
+Billy schlägt eine Wette vor: Wenn er die gesamte Schullaufbahn von der ersten bis zur zwölften Klasse in 24 Wochen nachholt — zwei Wochen pro Klasse —, bekommt er die Firma. Er beginnt also in der Grundschule, wo er der einzige Erwachsene ist, und arbeitet sich hoch.
+
+### Entstehungsgeschichte
+
+Regie führte Tamra Davis. Das Drehbuch schrieb Adam Sandler gemeinsam mit Tim Herlihy; Sandler spielt zugleich die Hauptrolle.
+
+Darren McGavin spielt den Vater, Bridgette Wilson die Lehrerin Veronica Vaughn und Steve Buscemi den Danny McGrath.
+
+Gedreht wurde vorwiegend in Oshawa in Ontario nahe Toronto; das Anwesen Parkwood diente als Villa der Familie Madison.
+
+### Hinter den Kulissen
+
+Adam Sandler spielt hier die Hauptrolle und war zugleich am Drehbuch beteiligt — eine Aufstellung, die für seine späteren Filme kennzeichnend blieb, ebenso wie das Muster: eine kindlich gebliebene erwachsene Hauptfigur und eine absurde Ausgangslage.
+
+Der Titel wirkt bis heute nach: Sandlers Produktionsfirma heißt Happy Madison Productions — zusammengesetzt aus diesem Film und "Happy Gilmore".
+
+### Einordnung & Wirkung
+
+Bei zehn Millionen Dollar Herstellungskosten spielte der Film weltweit rund 25,5 Millionen ein.
+
+Die Kritik urteilte zurückhaltend bis ablehnend. Eine Stimme nannte ihn eine schwache Komödie, eine andere formulierte, die Gags seien so schlecht, dass sie fast schon wieder gut seien — aber eben nur fast.
+
+Adam Sandler war für einen MTV Movie Award als beste komödiantische Leistung nominiert.
+
+Dass der Film der Produktionsfirma seinen Namen gab, sagt mehr über seine Bedeutung für Sandlers Laufbahn aus als seine Zahlen von 1995.` },
+  {
+    bereich: 'titel', schluessel: 'movie:642885', locale: 'de-de',
+    text: `### Worum es geht
+
+An Halloween erwecken zwei Jugendliche versehentlich die drei Sanderson-Schwestern wieder zum Leben.
+
+Winifred, Sarah und Mary sind zurück und haben ein Ziel: einen Zauber, der ihnen dauerhafte Macht verschafft. Die beiden Jugendlichen, die sie geweckt haben, müssen das verhindern.
+
+### Entstehungsgeschichte
+
+Regie führte Anne Fletcher — es war ihr sechster Spielfilm als Regisseurin. Das Drehbuch schrieb Jen D'Angelo. Die Musik komponierte John Debney.
+
+Der Film ist die unmittelbare Fortsetzung von Kenny Ortegas "Hocus Pocus" aus dem Jahr 1993.
+
+Die drei ursprünglichen Darstellerinnen kehrten zurück: Bette Midler als Winifred, Sarah Jessica Parker als Sarah und Kathy Najimy als Mary. Auch Doug Jones spielt wieder den Zombie Billy Butcherson.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab Herbst 2021 in Rhode Island.
+
+Die Aufgabe der Regisseurin bestand vor allem darin, ein Ensemble wieder zusammenzuführen, das drei Jahrzehnte lang getrennte Wege gegangen war — und dabei einen Tonfall zu treffen, der weder Parodie des Originals noch bloße Wiederholung ist.
+
+Zwischen den beiden Filmen liegen 29 Jahre — ein außergewöhnlich langer Abstand für eine unmittelbare Fortsetzung.
+
+Genau darin liegt die Schwierigkeit: Der Film musste ein Publikum bedienen, das mit dem Original aufgewachsen ist, und zugleich ein neues gewinnen. Dass alle drei Hauptdarstellerinnen nach dieser Zeit zurückkehrten, ist dabei die Voraussetzung, auf der alles Weitere aufbaut.
+
+### Einordnung & Wirkung
+
+Die Premiere fand am 27. September 2022 statt, die Veröffentlichung bei Disney+ am 30. September 2022 — einen Kinostart gab es nicht.
+
+Die Aufnahme war gemischt: 64 Prozent bei Rotten Tomatoes mit einem Schnitt von 5,7 von 10, 56 von 100 bei Metacritic.
+
+Gelobt wurden durchgehend die drei Hauptdarstellerinnen, denen man das Vergnügen an ihren Rollen anmerke. Bemängelt wurden oberflächlich angelegte Nebenhandlungen und blass gezeichnete jugendliche Figuren.
+
+Damit steht der Film stellvertretend für eine ganze Reihe später Fortsetzungen dieser Art: Die Wiedersehensfreude trägt, sobald die ursprüngliche Besetzung im Bild ist — und alles, was daneben erzählt wird, bleibt dahinter zurück.` },
+  // ---- Block 46 ----
+  {
+    bereich: 'titel', schluessel: 'series:16420', locale: 'de-de',
+    text: `### Worum es geht
+
+Geum Jan-di stammt aus armen Verhältnissen und besucht eine exklusive Oberschule, an der sonst nur Kinder sehr wohlhabender Familien lernen.
+
+Dort bestimmt eine Gruppe den Ton, die sich F4 nennt: vier Schüler, reich, gut aussehend und arrogant, angeführt von Goo Jun-pyo. Jan-di legt sich mit ihnen an, statt sich zu fügen — und verändert damit alles, auch für Jun-pyo selbst.
+
+### Entstehungsgeschichte
+
+Die südkoreanische Serie beruht auf der japanischen Manga-Reihe "Hana Yori Dango".
+
+Ku Hye-sun spielt Geum Jan-di, Lee Min-ho den Goo Jun-pyo, Kim Hyun-joong den Yoon Ji-hoo und Kim Bum den So Yi-jung. In weiteren Rollen sind Kim Joon und Kim So-eun zu sehen.
+
+Produziert wurde die Serie 2009. Sie lief vom 5. Januar bis zum 31. März desselben Jahres auf dem Sender KBS2 und umfasst 25 Folgen in zwei Staffeln.
+
+### Hinter den Kulissen
+
+Bemerkenswert ist die Herkunft des Stoffes: Eine japanische Manga-Reihe wird hier zu einem koreanischen Fernsehdrama — ein Weg, den in jenen Jahren mehrere erfolgreiche koreanische Serien genommen haben.
+
+Erzählerisch folgt die Serie einem Muster, das im koreanischen Fernsehdrama bis heute wiederkehrt: eine Hauptfigur ohne Vermögen, ein Umfeld aus großem Reichtum, und ein Konflikt, der ebenso sehr von Klassenunterschieden wie von Gefühlen handelt. Die Schule ist dabei weniger Lernort als Miniatur der Gesellschaft.
+
+### Einordnung & Wirkung
+
+Die Reichweite der Serie lässt sich daran ablesen, dass zu ihr Artikel in 48 Sprachen existieren — für eine koreanische Fernsehproduktion von 2009 ein außergewöhnlicher Wert.
+
+Sie fällt damit in jene Jahre, in denen koreanische Fernsehserien erstmals ein größeres Publikum außerhalb Asiens erreichten — deutlich bevor internationale Streamingdienste diesen Weg systematisch ausbauten.
+
+Innerhalb der zahlreichen Bearbeitungen desselben Manga-Stoffes ist sie die international bekannteste geblieben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:76617', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film setzt unmittelbar nach den Ereignissen von 1974 an. Nachdem Sally Hardesty dem Sawyer-Clan entkommen ist, brennen Polizei und Einwohner das Haus der Familie nieder.
+
+Ein Säugling überlebt: Edith Sawyer wird von der Familie Miller aufgenommen und als Heather großgezogen, ohne je von ihrer Herkunft zu erfahren. Jahrzehnte später erbt sie ein viktorianisches Anwesen in Texas. Bei der ersten Besichtigung mit Freunden zeigt sich, dass das Haus nicht leer steht: Leatherface, mit bürgerlichem Namen Jed Sawyer, lebt noch immer dort.
+
+### Entstehungsgeschichte
+
+Regie führte John Luessenhop, das Drehbuch schrieben Stephen Susco, Adam Marcus und Debra Sullivan. Der Film läuft 92 Minuten und erschien am 4. Januar 2013.
+
+Alexandra Daddario spielt die Heather, Dan Yeager den Leatherface.
+
+Mit Gunnar Hansen und Marilyn Burns treten zwei Darsteller aus dem Original von 1974 in Nebenrollen auf.
+
+### Hinter den Kulissen
+
+Es ist der erste Film der Reihe in dreidimensionaler Technik.
+
+Erzählerisch übergeht er sämtliche Fortsetzungen, die zwischen 1974 und 2013 entstanden sind, und knüpft direkt am Original an. Das ist ein Verfahren, das in dieser Reihe wiederholt angewandt wurde: Jede Generation beginnt neu und erklärt die vorherigen Teile für nicht geschehen.
+
+Ungewöhnlich ist die Umkehrung am Schluss. Der Film führt seine Hauptfigur nicht als Überlebende aus der Sache heraus, sondern lässt sie ihre eigene Herkunft annehmen.
+
+### Einordnung & Wirkung
+
+Die Kritik urteilte gemischt. Joe Leydon bescheinigte dem Film, ein überdurchschnittlicher Horrorthriller zu sein. Frank Scheck bemängelte, das aufdringliche 3D trage zur Geschichte nichts bei.
+
+Innerhalb der Reihe steht der Film für eine Entwicklung, die sich schwer aufhalten ließ: Aus einem Film, der 1974 vor allem durch das entstand, was er nicht zeigte, wurde über Jahrzehnte eine Reihe, die vom Gegenteil lebt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:499701', locale: 'de-de',
+    text: `### Worum es geht
+
+Dora ist im peruanischen Dschungel aufgewachsen, bei ihren Eltern, die als Forscher nach der verschollenen Inkastadt Parapata suchen. Als Jugendliche kommt sie nach Los Angeles und besucht dort eine normale Schule — eine Umgebung, in der sie vollkommen fehl am Platz ist. Dann werden ihre Eltern von Schatzräubern entführt. Dora kehrt gemeinsam mit Mitschülern nach Peru zurück, wo ihre Kenntnisse plötzlich alles sind, was zählt.
+
+### Entstehungsgeschichte
+
+Regie führte James Bobin, das Drehbuch schrieben Matthew Robinson und Nicholas Stoller. Die Musik komponierten John Debney und Germaine Franco.
+
+Die Vorlage ist die Zeichentrickserie "Dora"; der Film greift ihre Merkmale vielfach auf und verbindet sie mit den Mitteln des Abenteuerfilms nach dem Vorbild von "Indiana Jones".
+
+Isabela Merced spielt die Dora. Daneben sind Eugenio Derbez als Alejandro, Michael Peña als Doras Vater und Eva Longoria als ihre Mutter zu sehen.
+
+### Hinter den Kulissen
+
+Die Schwierigkeit lag in der Vorlage: Eine Zeichentrickserie für sehr kleine Kinder lässt sich nicht unverändert in einen abendfüllenden Realfilm übertragen.
+
+Der Film löst das, indem er die Eigenheiten seiner Figur beibehält und die Umgebung darauf reagieren lässt: Dora bleibt, wie sie ist, und alle anderen finden es befremdlich.
+
+Das Budget betrug etwa 49 Millionen Dollar.
+
+### Einordnung & Wirkung
+
+Am ersten Wochenende spielte der Film 17 Millionen Dollar ein; bis Oktober 2019 kamen weltweit rund 113,8 Millionen zusammen.
+
+Über die Zahlen hinaus wird der Film als bedeutsam für die Sichtbarkeit lateinamerikanischer Figuren und Darsteller in Hollywood eingeordnet — eine Hauptfigur, eine Sprache und ein Schauplatz, die in großen amerikanischen Familienfilmen selten im Mittelpunkt stehen.
+
+Bemerkenswert bleibt die Verbindung zweier Vorlagen, die zunächst nichts miteinander zu tun haben: eine Vorschulserie und das Abenteuerkino der achtziger Jahre.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9530', locale: 'de-de',
+    text: `### Worum es geht
+
+Bob Munro leitet ein Getränkeunternehmen und hat eine Familie, die sich vor allem für Besitz interessiert. Um eine geschäftliche Besprechung in Colorado wahrnehmen zu können, erklärt er den Angehörigen, man mache Urlaub in den Rocky Mountains — und zwar mit dem Wohnmobil.
+
+Die Fahrt quer durchs Land wird zu einer Kette von Missgeschicken. Dass die Familie am Ende näher zusammenrückt als zuvor, verdankt sie weniger dem Urlaub als dem gemeinsamen Scheitern daran.
+
+### Entstehungsgeschichte
+
+Regie führte Barry Sonnenfeld, das Drehbuch schrieb Geoff Rodkey. Produziert wurde der Film von Lucy Fisher und Douglas Wick, die Musik stammt von James Newton Howard.
+
+Robin Williams spielt Bob Munro. Daneben sind Cheryl Hines, Josh Hutcherson, Jeff Daniels und Kristin Chenoweth zu sehen.
+
+### Hinter den Kulissen
+
+Der Film gehört zu einer Reihe amerikanischer Familienkomödien jener Jahre, deren Aufbau immer derselbe ist: eine Reise, eine überforderte Familie, eine Folge von Katastrophen, eine Versöhnung am Schluss.
+
+Bemerkenswert ist, wer daran beteiligt war: ein Regisseur, ein Hauptdarsteller und ein Komponist, die alle drei aus anspruchsvolleren Arbeiten kamen — und ein Ergebnis, das davon wenig erkennen lässt.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war gemischt bis ablehnend.
+
+Der wiederkehrende Vorwurf betraf die Uneinheitlichkeit: Der Film bediene fast jede Art von Humor, aber keine richtig — so formulierte es die TV Spielfilm.
+
+2007 erhielt er die Goldene Himbeere in der Kategorie schlechteste Ausrede für Familienunterhaltung.
+
+Innerhalb von Robin Williams' Werk gehört er zu den Arbeiten, die im Rückblick kaum noch genannt werden — ein Beleg dafür, wie wenig auch große Namen ausrichten, wenn der Ton eines Films nicht festgelegt ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10761', locale: 'de-de',
+    text: `### Worum es geht
+
+Tom Bailey lebt in New York, hat Geld und wechselnde Bekanntschaften — und seit Jahren eine beste Freundin, mit der er nie etwas angefangen hat: Hannah.
+
+Als Hannah ihre Verlobung mit dem schottischen Whiskybrenner Colin McMurray verkündet, begreift Tom, dass er sie liebt. Sie bittet ihn, Trauzeuge zu sein — genauer: die Rolle zu übernehmen, die sonst eine Brautjungfer hat. Tom sagt zu und nutzt die Position, um die Hochzeit zu hintertreiben.
+
+### Entstehungsgeschichte
+
+Regie führte Paul Weiland. Das Drehbuch schrieben Adam Sztykiel, Deborah Kaplan und Harry Elfont. Produzent war Neal H. Moritz, das Budget lag bei etwa 40 Millionen Dollar.
+
+Patrick Dempsey spielt Tom Bailey, Michelle Monaghan die Hannah, Kevin McKidd den Colin McMurray. In weiteren Rollen sind Kadeem Hardison, Chris Messina und Busy Philipps zu sehen.
+
+### Hinter den Kulissen
+
+Gedreht wurde in New York, in Los Angeles, in Budapest, in London und in Schottland; die Hochzeit findet auf einem schottischen Schloss statt.
+
+Die Anlage entspricht der von "Die Hochzeit meines besten Freundes" aus dem Jahr 1997, mit vertauschten Geschlechtern — ein Vergleich, den die Kritik durchgehend gezogen hat und der dem Film am meisten geschadet hat.
+
+### Einordnung & Wirkung
+
+Am ersten verlängerten Startwochenende im Mai 2008 spielte der Film in den Vereinigten Staaten rund 16,7 Millionen Dollar ein.
+
+Die Kritik lehnte ihn überwiegend ab: 16 Prozent bei Rotten Tomatoes, mit dem durchgehenden Hinweis auf die Nähe zum Vorbild von 1997.
+
+Anerkannt wurde dagegen die Wirkung der beiden Hauptdarsteller, die dem Film über das vorhersehbare Drehbuch hinweghelfen. Der Film gehört damit zu jenen Komödien, deren Besetzung mehr trägt als ihr Buch.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2179', locale: 'de-de',
+    text: `### Worum es geht
+
+JB wächst in Missouri in einem streng religiösen Elternhaus auf. Ronnie James Dio bringt ihn dazu, alles hinzuwerfen und nach Hollywood zu gehen, um Rockstar zu werden.
+
+Jahre später trifft er in Venice Beach den Straßenmusiker KG. Die beiden gründen die Band Tenacious D. Um endlich groß herauszukommen, brauchen sie das Plektrum des Schicksals — ein sagenhaftes Stück, mit dem angeblich alle großen Rockmusiker gespielt haben und das in einem Museum liegt. Also beschließen sie, es zu stehlen.
+
+### Entstehungsgeschichte
+
+Regie führte Liam Lynch, das Drehbuch schrieb er gemeinsam mit den beiden Hauptdarstellern Jack Black und Kyle Gass.
+
+Der Film ist um die ältere HBO-Fernsehserie von Tenacious D herum gebaut und greift deren wiederkehrende Figuren auf, darunter Lee und den Sasquatch.
+
+Neben Black und Gass sind Tim Robbins, Dave Grohl als Satan, Ben Stiller als Verkäufer in einem Gitarrenladen, Meat Loaf als JBs Vater, John C. Reilly als Sasquatch und Ronnie James Dio als er selbst zu sehen.
+
+### Hinter den Kulissen
+
+Die Produktionskosten lagen bei etwa 20 Millionen Dollar. Der Film erschien am 22. November 2006 in den Vereinigten Staaten und am 8. Februar 2007 in Deutschland.
+
+Zeitgleich, am 14. November 2006, erschien das Album "The Pick of Destiny" — das zweite Studioalbum der Band, mit Beiträgen von Dave Grohl, Meat Loaf und Ronnie James Dio. Film und Platte sind also nicht Werk und Beiwerk, sondern zwei Fassungen desselben Vorhabens.
+
+### Einordnung & Wirkung
+
+Die amerikanische Kritik lobte den Humor, nahm aber Anstoß an der Darstellung von Drogenkonsum und an der Sprache: 55 von 100 bei Metacritic aus 29 Besprechungen, 52 Prozent bei Rotten Tomatoes aus 124 Besprechungen mit einem Schnitt von 5,6 von 10.
+
+Im deutschsprachigen Raum fielen die Urteile schärfer aus. Der Kurier nannte den Film eine pubertierende Kiffer-Komödie; anerkannt wurde immerhin Jack Blacks körperliche Komik.
+
+Über die Jahre hat der Film eine feste Anhängerschaft gewonnen — getragen vor allem von seinen Liedern, die als Album ein eigenständiges Werk der Band geblieben sind.` },
+  {
+    bereich: 'titel', schluessel: 'movie:13836', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Taxifahrer Jack Bruno nimmt in Las Vegas zwei Jugendliche mit — und findet sich kurz darauf auf der Flucht vor Regierungsleuten wieder.
+
+Die beiden sind Außerirdische. Ihr Raumschiff ist in der Nähe abgestürzt und wird inzwischen in einer geheimen Militäranlage verwahrt. Ohne dieses Schiff ist ihr Heimatplanet verloren. Gemeinsam mit einer Astrophysikerin macht Bruno sich mit ihnen auf den Weg dorthin.
+
+### Entstehungsgeschichte
+
+Regie führte Andy Fickman, das Drehbuch schrieben Mark Bomback und Matt Lopez.
+
+Dwayne Johnson spielt den Taxifahrer Jack Bruno, AnnaSophia Robb und Alexander Ludwig die beiden außerirdischen Geschwister.
+
+Grundlage ist Alexander Keys Roman "Escape to Witch Mountain", den Disney bereits 1975 verfilmt hatte. Fickman hat seinen Film ausdrücklich nicht als Neuverfilmung bezeichnet, sondern als neues Kapitel in derselben Welt.
+
+Kim Richards und Ike Eisenmann, die 1975 die beiden Kinder gespielt hatten, treten in kurzen Rollen auf.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab März 2008 in Los Angeles.
+
+Die Produktion zog Fachleute für unbekannte Flugobjekte, militärische Berater und Berater des Geheimdienstes hinzu — für einen Familienfilm ein ungewöhnlicher Aufwand, der zeigt, wie ernst die Ausstattung genommen wurde.
+
+Das Wesen namens Siphon, das die Geschwister verfolgt, entwarf ein Team, das zuvor an "Alien" und "Predator" gearbeitet hatte.
+
+### Einordnung & Wirkung
+
+Bemerkenswert bleibt der Umgang mit dem Vorbild. Statt es zu ersetzen, holt der Film dessen ursprüngliche Darsteller zurück und stellt sich damit ausdrücklich in seine Nachfolge — was auch die Bezeichnung des Regisseurs erklärt, es handle sich um ein neues Kapitel und nicht um eine Neuverfilmung.
+
+Dwayne Johnson trägt den Film in einer Rolle, die für ihn zu diesem Zeitpunkt neu war: nicht der Kämpfer, sondern der überforderte Erwachsene, der zwei Kindern hinterherläuft.` },
+  {
+    bereich: 'titel', schluessel: 'movie:585245', locale: 'de-de',
+    text: `### Worum es geht
+
+Die zwölfjährige Emily Elizabeth lebt in New York und bekommt von einem Mann namens Bridwell einen roten Welpen. Der Hund wächst — und zwar in dem Maß, in dem er geliebt wird. Am nächsten Morgen ist er riesig.
+
+Das bleibt nicht unbemerkt. Der Vorstandsvorsitzende eines Biotechnologieunternehmens behauptet öffentlich, er habe das Tier erschaffen, und will es für Versuche einfangen. Emily und ihr Onkel Casey müssen Clifford beschützen und zugleich Bridwell wiederfinden, der als Einziger weiß, wie der Hund seine normale Größe zurückbekommt.
+
+### Entstehungsgeschichte
+
+Regie führte Walt Becker. Das Drehbuch schrieben Blaise Hemingway, Jay Scherick und David Ronn nach der Kinderbuchreihe von Norman Bridwell.
+
+Darby Camp spielt Emily Elizabeth, Jack Whitehall den Onkel Casey, Tony Hale den Firmenchef Zac Tieran, Sienna Guillory die Mutter und John Cleese den Mr. Bridwell.
+
+Die Effekte stammen von der Moving Picture Company, die Musik von John Debney. Das Budget betrug 64 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde von Juni bis August 2019 in New York — mehr als zwei Jahre vor der Veröffentlichung.
+
+Dazwischen lag die Pandemie. Der Start war ursprünglich für November 2020 vorgesehen und wurde mehrfach verschoben. Ein Termin im September 2021 wurde wegen der Delta-Variante zurückgenommen. Erschienen ist der Film schließlich am 10. November 2021, gleichzeitig im Kino und bei Paramount+.
+
+Dass die Namensgleichheit des Buchautors Norman Bridwell mit der Figur Mr. Bridwell kein Zufall ist, gehört zu den kleinen Verbeugungen des Films vor seiner Vorlage.
+
+### Einordnung & Wirkung
+
+Bei 64 Millionen Dollar Herstellungskosten spielte der Film weltweit 107,4 Millionen ein — 49 Millionen in den Vereinigten Staaten, 58,4 Millionen international.
+
+Die Kritik urteilte gemischt: 58 Prozent bei Rotten Tomatoes, 55 von 100 bei Metacritic. Eine Stimme nannte ihn so umgänglich wie Clifford selbst — niedlich und mitten ins Gesicht.
+
+Das Publikum war deutlich zufriedener und vergab bei CinemaScore ein A.
+
+Paramount kündigte im November 2021 eine Fortsetzung an; bis 2026 ist dazu nichts weiter bekannt geworden.` },
+  // ---- Block 47a ----
+  {
+    bereich: 'titel', schluessel: 'series:62046', locale: 'de-de',
+    text: `### Worum es geht
+
+An der erfundenen Wallace University gibt die Studentinnenverbindung Kappa Kappa Tau den Ton an. Wer nicht hineinpasst, wird aussortiert — bis jemand beginnt, die Mitglieder zu töten, verkleidet als das Maskottchen der Hochschule, ein roter Teufel.
+
+Die zweite Staffel wechselt den Schauplatz vollständig: Sie spielt in einem Krankenhaus, und der Mörder tritt dort als Green Meanie auf.
+
+### Entstehungsgeschichte
+
+Ryan Murphy, Brad Falchuk und Ian Brennan entwickelten die Serie. Produziert wurde sie von den dreien gemeinsam mit Alexis Martin Woodall und 20th Century Fox Television.
+
+In der ersten Staffel spielen unter anderem Emma Roberts, Skyler Samuels, Lea Michele, Glen Powell, Diego Boneta, Abigail Breslin, Keke Palmer, Oliver Hudson, Nasim Pedrad, Lucien Laviscount, Billie Lourd und Jamie Lee Curtis; in Nebenrollen sind Ariana Grande, Niecy Nash und Nick Jonas zu sehen. Für die zweite Staffel kamen John Stamos, Taylor Lautner, James Earl III und Kirstie Alley hinzu.
+
+### Hinter den Kulissen
+
+Gedreht wurde die erste Staffel an der Tulane University in New Orleans, die zweite in Los Angeles.
+
+Die Serie ist als Satire angelegt: Sie bedient die Regeln des Slasher-Films und stellt sie gleichzeitig aus. Die Figuren wissen, in welcher Art von Geschichte sie sich befinden, und verhalten sich trotzdem entsprechend.
+
+Bemerkenswert ist die Größe des Ensembles: Die erste Staffel führt über ein Dutzend Hauptfiguren, was der Anlage entgegenkommt — in einer solchen Erzählung ist jede von ihnen zugleich verdächtig und gefährdet.
+
+### Einordnung & Wirkung
+
+Insgesamt entstanden 23 Folgen: 13 in der ersten Staffel vom 22. September bis 8. Dezember 2015, zehn in der zweiten vom 20. September bis 20. Dezember 2016.
+
+Die erste Staffel wurde gemischt aufgenommen: 68 Prozent bei Rotten Tomatoes mit einem Schnitt von 6,3 von 10, 59 von 100 bei Metacritic. Die zweite schnitt mit 86 Prozent deutlich besser ab — verlor aber rund die Hälfte der Zuschauer.
+
+Am 15. Mai 2017 wurde die Serie abgesetzt. Ryan Murphy erklärte im Mai 2020, er arbeite an einer dritten Staffel.
+
+Ausgezeichnet wurde sie 2015 mit dem Critics' Choice Television Award als aufregendste neue Serie, 2016 mit einem People's Choice Award und einem Preis der Make-Up Artists & Hair Stylists Guild.` },
+  {
+    bereich: 'titel', schluessel: 'series:117581', locale: 'de-de',
+    text: `### Worum es geht
+
+Georgia Miller ist dreißig und hat eine Tochter im Teenageralter. Mit Ginny und deren jüngerem Bruder Austin zieht sie nach Neuengland, um dort neu anzufangen.
+
+Georgia will ihren Kindern ein besseres Leben ermöglichen, als sie es selbst hatte. Ginny wiederum steckt mitten in der eigenen Entwicklung und muss sich zu einer Mutter verhalten, die kaum älter wirkt als sie selbst. Die Serie erzählt beides parallel: das Erwachsenwerden der Tochter und die Vergangenheit der Mutter.
+
+### Entstehungsgeschichte
+
+Sarah Lampert entwickelte die Serie. Netflix erteilte 2019 den Auftrag; Showrunnerin war Debra J. Fisher.
+
+Brianne Howey spielt Georgia, Antonia Gentry die Ginny.
+
+Gedreht wurde 2019 und 2020 in Toronto und in Cobourg. Die deutsche Synchronfassung entstand bei RRP Media unter der Dialogregie von Ina Kämpfe.
+
+### Hinter den Kulissen
+
+Der Aufbau ist ungewöhnlich für eine Serie, die als Jugendstoff vermarktet wird: Mutter und Tochter sind gleichrangige Hauptfiguren, und der geringe Altersabstand macht sie eher zu Konkurrentinnen als zu zwei Generationen.
+
+Für Diskussionen sorgte ein Witz über wechselnde Beziehungen, der auf Taylor Swift gemünzt war. Er wurde öffentlich als schwach und zutiefst sexistisch kritisiert — und zeigte, wie schnell eine einzelne Zeile eine ganze Serie überlagern kann.
+
+### Einordnung & Wirkung
+
+Es entstanden drei Staffeln mit je zehn Folgen. Die erste erschien im Februar 2021, die zweite im Januar 2023, die dritte im Juni 2025.
+
+Die erste Staffel erreichte nach Angaben von Netflix 52 Millionen Abonnenten.
+
+Bei Rotten Tomatoes steht die Serie bei 68 Prozent. Ein wiederkehrender Kritikpunkt betrifft die Behandlung von Rassismus, die von Rezensenten als oberflächlich beurteilt wurde.
+
+Damit steht die Serie stellvertretend für eine ganze Reihe von Netflix-Produktionen dieser Jahre: sehr hohe Reichweite bei zurückhaltenden Kritikerurteilen — und ein Publikum, das über drei Staffeln und vier Jahre hinweg geblieben ist.` },
+  {
+    bereich: 'titel', schluessel: 'series:4686', locale: 'de-de',
+    text: `### Worum es geht
+
+Der zehnjährige Benjamin Tennyson verbringt die Sommerferien mit seinem Großvater Maxwell und seiner gleichaltrigen Cousine Gwendolyn. Dabei findet er ein außerirdisches Gerät, das ihm die Fähigkeit verleiht, seine Gestalt zu verändern: Er kann sich in zehn verschiedene Außerirdische verwandeln, jeder mit eigenen Fähigkeiten.
+
+Aus dem Ferienspaß wird eine Verantwortung — denn das Gerät weckt Begehrlichkeiten, unter anderem beim Außerirdischen Vilgax.
+
+### Entstehungsgeschichte
+
+Entworfen wurde die Serie von der Autorengruppe Man of Action. Produziert wurde sie von den Cartoon Network Studios.
+
+Zu den Sprechern gehören Tara Strong als junger Ben, Steven Blum als Gegenspieler Vilgax und Paul Eiding als Großvater Max. In der deutschen Fassung sprechen Claudia Schmidt den Ben, Willi Röbke den Vilgax und Ulf J. Söhmisch den Großvater.
+
+### Hinter den Kulissen
+
+Die Serie lief von 2005 bis 2008 und umfasst vier Staffeln mit 52 Folgen zu je etwa 22 Minuten.
+
+Das Grundprinzip ist auf Wiederholbarkeit angelegt: zehn Verwandlungen, jede mit eigenen Stärken und Schwächen, und eine Situation pro Folge, für die genau eine davon passt. Diese Anlage kommt zugleich dem Merchandising entgegen, das solche Serien seit jeher begleitet.
+
+Die Premiere in den Vereinigten Staaten war am 27. Dezember 2005 auf Cartoon Network, die deutsche Erstausstrahlung am 7. Oktober 2006 auf kabel eins.
+
+### Einordnung & Wirkung
+
+Aus der Serie entstand ein umfangreiches Franchise. Drei unmittelbare Nachfolgeserien folgten: "Alien Force" 2008, "Ultimate Alien" 2011 und "Omniverse" 2012.
+
+Die Folge "Ben 10.000" wurde 2007 für den Golden Reel Award nominiert, mit dem herausragender Tonschnitt im Fernsehtrickfilm ausgezeichnet wird.
+
+Damit gehört "Ben 10" zu den Zeichentrickserien der 2000er Jahre, deren Grundeinfall über mehrere eigenständige Nachfolgeserien hinweg getragen hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:6877', locale: 'de-de',
+    text: `### Worum es geht
+
+Tripp ist 35 und wohnt noch immer bei seinen Eltern. Ausziehen will er nicht, und seine Eltern bekommen ihn mit eigenen Mitteln nicht dazu.
+
+Also engagieren sie Paula. Sie ist Fachfrau für genau diesen Fall: Sie lernt erwachsene Söhne kennen, baut ihr Selbstvertrauen auf und bringt sie so weit, dass sie eine eigene Wohnung nehmen. Bei Tripp läuft der Plan wie vorgesehen — bis beide anfangen, tatsächlich etwas füreinander zu empfinden.
+
+### Entstehungsgeschichte
+
+Regie führte Tom Dey, das Drehbuch schrieben Tom J. Astle und Matt Ember.
+
+Matthew McConaughey spielt Tripp, Sarah Jessica Parker die Paula. Daneben sind Kathy Bates, Terry Bradshaw, Justin Bartha, Bradley Cooper und Zooey Deschanel zu sehen.
+
+Produziert wurde der Film von Scott Rudin und Scott Aversano. Die Musik stammt von Rolfe Kent, die Kamera von Claudio Miranda, den Schnitt besorgte Steven Rosenblum.
+
+### Hinter den Kulissen
+
+Die Ausgangslage ist die klassische einer Verwechslungskomödie: Eine Figur handelt im Auftrag und verliebt sich in ihre Aufgabe. Der Gegenstand dagegen war zeitgemäß: der erwachsene Sohn, der im Elternhaus wohnen bleibt.
+
+Auffällig ist die Nebenbesetzung: Mit Bradley Cooper und Zooey Deschanel stehen zwei Darsteller in kleineren Rollen, die wenige Jahre später eigene Hauptrollen trugen.
+
+### Einordnung & Wirkung
+
+Bei rund 50 Millionen Dollar Herstellungskosten spielte der Film in den Vereinigten Staaten etwa 88,66 Millionen ein, weltweit rund 128 Millionen — ein deutlicher wirtschaftlicher Erfolg.
+
+Die Kritik lehnte ihn ab: 23 Prozent bei Rotten Tomatoes, 47 von 100 bei Metacritic. Roger Ebert nannte die Figuren schlicht dumm und bemängelte den Schnitt. Das Lexikon des internationalen Films sprach von einer belanglosen romantischen Komödie ohne komödiantische Substanz.
+
+Der Abstand zwischen Kassenergebnis und Kritikerurteil ist bei diesem Film ungewöhnlich groß — und kennzeichnend für eine Gattung, die in jenen Jahren verlässlich funktionierte.` },
+  {
+    bereich: 'titel', schluessel: 'series:31586', locale: 'de-de',
+    text: `### Worum es geht
+
+Teresa Mendoza ist eine junge Frau aus Mexiko, die mit dem Drogenhandel zunächst nur über ihren Freund zu tun hat. Was als Randbeteiligung beginnt, treibt sie schließlich außer Landes.
+
+Sie landet in Südspanien und arbeitet sich dort über Jahre nach oben — bis sie die mächtigste Drogenhändlerin der Region ist. Die Serie erzählt diesen Aufstieg als Lebensgeschichte, nicht als Verbrechensepos: Jede Entscheidung, die sie nach oben bringt, kostet sie etwas, das sie nicht zurückbekommt.
+
+### Entstehungsgeschichte
+
+Die Vorlage ist der Roman von Arturo Pérez-Reverte. Der Autor ließ sich dabei von mexikanischen Drogenballaden anregen sowie von der realen Händlerin Sandra Ávila Beltrán, die als Königin des Pazifiks bekannt wurde.
+
+Kate del Castillo spielt Teresa Mendoza. Daneben sind unter anderem Humberto Zurita und Rafael Amaya zu sehen.
+
+Die erste Staffel produzierte Telemundo gemeinsam mit Antena 3 und RTI Producciones; für die zweite und dritte Staffel kam Netflix als Koproduzent hinzu.
+
+### Hinter den Kulissen
+
+Mit einem Budget von zehn Millionen Dollar war die Serie die zweitteuerste Telenovela, die Telemundo je hergestellt hat.
+
+Bemerkenswert ist auch die Beteiligung: Für die erste Staffel arbeiteten mit Telemundo, Antena 3 und RTI Producciones Häuser aus drei Ländern zusammen; ab der zweiten Staffel kam Netflix hinzu. Das erklärt, warum der Stoff über den spanischsprachigen Markt hinaus wahrgenommen wurde.
+
+### Einordnung & Wirkung
+
+Insgesamt entstanden 183 Folgen in drei Staffeln: 63 ab dem 28. Februar 2011, 60 ab dem 22. April 2019 und 60 vom 18. Oktober 2022 bis zum 16. Januar 2023. Im Mai 2026 wurde eine vierte Staffel bewilligt.
+
+Das Finale der ersten Staffel sahen 4,2 Millionen Zuschauer. Danach gingen die Zahlen zurück: Die zweite Staffel kam im Schnitt auf 1,89 Millionen, die dritte auf 0,93 Millionen.
+
+Im Juni 2016 startete beim amerikanischen Sender USA Network eine englischsprachige Neuverfilmung unter dem Titel "Queen of the South" mit Alice Braga in der Hauptrolle.` },
+  {
+    bereich: 'titel', schluessel: 'movie:238215', locale: 'de-de',
+    text: `### Worum es geht
+
+Max Simkin führt in New York eine Schusterwerkstatt. Sein Leben steht still.
+
+Dann findet er ein Erbstück mit einer besonderen Eigenschaft: Wer die damit bearbeiteten Schuhe anzieht, nimmt für andere die Gestalt ihres Besitzers an. Max nutzt das zunächst für kleine Vorteile und für die Neugier. Dann steigt er in die Schuhe eines Gangsters namens Ludlow — und kommt nicht mehr ohne Weiteres heraus.
+
+### Entstehungsgeschichte
+
+Regie führte Tom McCarthy, das Drehbuch schrieb er gemeinsam mit Paul Sado. Produziert wurde der Film von McCarthy und Mary Jane Skalski, die Musik stammt von John Debney und Nick Urata.
+
+Adam Sandler spielt Max Simkin. Daneben sind Steve Buscemi, Dustin Hoffman, Ellen Barkin und Method Man zu sehen.
+
+Die Premiere fand am 11. September 2014 beim Filmfestival in Toronto statt.
+
+### Hinter den Kulissen
+
+Der Film ist einer der Versuche, Adam Sandler ernsthaft zu besetzen — mit einem Regisseur, der aus dem unabhängigen Kino kommt, und einem Stoff, der als Parabel angelegt ist.
+
+Genau daran scheiterte er nach übereinstimmender Auffassung der Kritik: Der Filmdienst hielt fest, die Komödie mache die Wandlung ihrer Hauptfigur nicht glaubhaft.
+
+Anerkannt wurde dagegen die Zeichnung des Viertels. Derselbe Text nannte den Film eine liebevolle Hommage an die Lower East Side — an eine Nachbarschaft aus Handwerksbetrieben, die es so kaum noch gibt.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war fast einhellig ablehnend: 23 von 100 bei Metacritic aus 22 Besprechungen, zehn Prozent bei Rotten Tomatoes aus 72 Besprechungen.
+
+Damit gehört der Film zu den am schlechtesten bewerteten Arbeiten von Tom McCarthy — einem Regisseur, dessen unmittelbar folgende Arbeit "Spotlight" zu den meistausgezeichneten Filmen ihres Jahrgangs zählte.
+
+Dieser Abstand zwischen zwei aufeinanderfolgenden Arbeiten desselben Regisseurs ist ungewöhnlich groß.` },
+  // ---- Block 47b ----
+  {
+    bereich: 'titel', schluessel: 'movie:10033', locale: 'de-de',
+    text: `### Worum es geht
+
+Chris Brander war in der Schule stark übergewichtig und in seine beste Freundin Jamie verliebt — ohne dass daraus je etwas wurde. Am Abend der Abschlussfeier gestand er ihr seine Gefühle und wurde vor allen Anwesenden abgewiesen.
+
+Zehn Jahre später ist er ein anderer: schlank, erfolgreich, in der Musikbranche tätig. Über Weihnachten verschlägt es ihn zurück in seine Heimatstadt, und dort trifft er Jamie wieder. Diesmal will er es richtig machen — und stellt fest, dass die Rolle des besten Freundes deutlich schwerer abzulegen ist als das Gewicht.
+
+### Entstehungsgeschichte
+
+Regie führte Roger Kumble, das Drehbuch schrieb Adam "Tex" Davis. Davis griff dabei auf eine eigene Erfahrung aus der Studienzeit zurück: eine Freundschaft, die für ihn keine bleiben sollte.
+
+Ryan Reynolds spielt Chris Brander, Amy Smart die Jamie, Anna Faris die Popsängerin Samantha James. In weiteren Rollen sind Chris Klein und Christopher Marquette zu sehen.
+
+New Line Cinema erwarb das Drehbuch bereits um 2001; gedreht wurde erst Anfang 2005.
+
+### Hinter den Kulissen
+
+Die Rückblende zu Beginn ist das, wovon der Film lebt: Ryan Reynolds spielt seine eigene Figur als Jugendlicher in einem aufwendigen Fettanzug — eine Verwandlung, die zugleich die gesamte Prämisse trägt.
+
+Gedreht wurde in Los Angeles sowie in der kanadischen Provinz Saskatchewan, unter anderem in Regina und Moose Jaw. Es handelt sich um eine Gemeinschaftsproduktion amerikanischer, kanadischer und deutscher Firmen.
+
+Anna Faris' Rolle als übersteuerte Popsängerin ist im Gefüge des Films eine Nebenfigur — und wurde von der Kritik durchgehend als das Beste daran hervorgehoben.
+
+### Einordnung & Wirkung
+
+Der Film startete am 23. November 2005 und spielte weltweit 50,9 Millionen Dollar ein, davon 32,6 Millionen in den Vereinigten Staaten.
+
+Die Kritik urteilte gemischt: 43 Prozent bei Rotten Tomatoes, 47 von 100 bei Metacritic. Roger Ebert vergab einen einzigen Stern und nannte den Film reinen Speck ohne Spaß. Das Publikum vergab bei CinemaScore ein B minus.
+
+Über die Jahre hat der Film dennoch eine feste Anhängerschaft gewonnen — vor allem als Weihnachtsfilm, was zum Zeitpunkt seines Erscheinens niemand vorgesehen hatte.` },
+  {
+    bereich: 'titel', schluessel: 'series:92685', locale: 'de-de',
+    text: `### Worum es geht
+
+Luz Noceda ist ein Mädchen, das mit der Wirklichkeit nicht zurechtkommt: Sie liest zu viel, sie verhält sich zu auffällig, und ihre Mutter will sie deshalb in ein Feriencamp schicken, das sie normal machen soll.
+
+Stattdessen gerät sie versehentlich in eine magische Welt. Dort findet sie Unterschlupf bei einer Hexe namens Eda und beginnt, Magie zu lernen — obwohl sie als Mensch dafür eigentlich nicht ausgestattet ist. Aus dem Versehen wird ein Ort, an dem sie zum ersten Mal richtig ist, wie sie ist.
+
+### Entstehungsgeschichte
+
+Dana Terrace entwickelte die Serie gemeinsam mit dem künstlerischen Leiter Ricky Cometa. Als bildliche Anregung diente unter anderem das Werk von Hieronymus Bosch.
+
+Produziert wurde die Serie von Disney Television Animation für den Disney Channel.
+
+Die deutsche Synchronfassung entstand bei SDI Media Germany unter der Regie von Marina Köhler; Paulina Rümmelein spricht die Luz, Dagmar Dempe die Eda.
+
+### Hinter den Kulissen
+
+Die Serie umfasst 43 Folgen in drei Staffeln und lief von 2020 bis 2023. Die US-Premiere war am 10. Januar 2020, die deutschsprachige Erstausstrahlung am 31. August 2020.
+
+Der Verlauf ist ungewöhnlich. Im Mai 2021 kündigte Disney eine stark verkürzte dritte Staffel an: statt zwanzig Folgen nur drei, dafür je 44 Minuten lang. Als Begründung wurde angegeben, die Serie spreche eine ältere Zuschauergruppe an und passe damit nicht mehr zur Marke.
+
+Die Schöpferin und ihr Team mussten daraufhin eine auf mehrere Jahre angelegte Handlung in gut zwei Stunden zu Ende bringen.
+
+### Einordnung & Wirkung
+
+Die Serie gilt als bedeutsam für die Darstellung queerer Figuren im Kinderfernsehen: Luz und Amity Blight werden ein Paar, und die Serie zeigt ihren ersten Kuss.
+
+Das ist der Punkt, an dem sich die Auseinandersetzung um die Kürzung entzündete. Die offizielle Begründung — die Serie passe nicht zur Marke — wurde von Teilen des Publikums und der Fachpresse anders gelesen.
+
+Was bleibt, ist eine Serie, deren Ende erzwungen wurde und die gerade deshalb ein außergewöhnlich beständiges Publikum behalten hat.` },
 ];
