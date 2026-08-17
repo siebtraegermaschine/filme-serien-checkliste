@@ -38833,4 +38833,303 @@ Rotten Tomatoes weist 96 Prozent positive Bewertungen aus (Schnitt 7,9 von 10), 
 31,2 Millionen Aufrufe in drei Tagen sind für einen Film ohne bekannte Hauptrolle ein bemerkenswerter Wert. Er zeigt, was eine Plattform leisten kann, wenn ein Stoff trägt: Der Film brauchte keinen Verleihstart und keine Werbekampagne über Monate.
 
 Bemerkenswert ist, worauf sich das Lob konzentriert. Anerkannt wird nicht der Aufwand — der ist überschaubar —, sondern die Genauigkeit: ein Thriller, der aus einer realen Rechtspraxis heraus gebaut ist und seine Spannung aus Verfahrensfragen zieht statt aus Verfolgungsjagden.` },
+  // ---- Block 081 ----
+  {
+    bereich: 'titel', schluessel: 'movie:11775', locale: 'de-de',
+    text: `### Worum es geht
+
+Miles Massey ist Scheidungsanwalt und sehr gut in seinem Fach. Dann verliebt er sich in Marilyn Rexroth — eine Frau, die ihr Auskommen aus Ehen bezieht.
+
+Nach einer überstürzten Hochzeit in Las Vegas zerreißt Marilyn den Ehevertrag und hat damit Anspruch auf sein Vermögen. Miles findet heraus, dass sie eine Schauspielerin engagiert hat, um ihren angeblich vermögenden zweiten Ehemann darzustellen. Es folgt eine Kette von Zwischenfällen, bis hin zu einem missglückten Mordauftrag.
+
+### Entstehungsgeschichte
+
+Regie führten Ethan und Joel Coen. Am Drehbuch schrieben Robert Ramsey, Matthew Stone sowie die Coens selbst.
+
+George Clooney spielt Miles Massey, Catherine Zeta-Jones die Marilyn Rexroth, Geoffrey Rush den Donovan Donaly und Billy Bob Thornton den Howard D. Doyle.
+
+Produziert wurde der Film von Ethan Coen, Brian Grazer und Joel Coen. Die Kamera führte Roger Deakins, den Schnitt besorgte Roderick Jaynes — ein Pseudonym der Coen-Brüder. Die Musik stammt von Carter Burwell und stützt sich überwiegend auf Bearbeitungen von Simon & Garfunkel.
+
+Das Budget betrug rund 60 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Anlage ist eine Screwball-Komödie mit Eheverträgen als Waffen. Beide Hauptfiguren sind Profis im selben Geschäft — er verteidigt Vermögen vor Ehefrauen, sie eignet es sich an. Der Reiz liegt darin, dass keiner den anderen unterschätzt.
+
+Dass die Coens unter dem Pseudonym Roderick Jaynes selbst schneiden, ist bei ihnen Regel. Bemerkenswerter ist die Musikwahl: Statt einer Komödienpartitur stehen Bearbeitungen von Simon & Garfunkel im Vordergrund — eine Setzung, die dem Film eine ironische Wärme gibt, die seine Figuren nicht haben.
+
+Die Konstruktion hält ihren Zynismus bis kurz vor Schluss durch. Erst der Umweg über einen Mordauftrag löst auf, was auf normalem Weg nicht aufzulösen war.
+
+### Einordnung & Wirkung
+
+Bei rund 60 Millionen Dollar Herstellungskosten spielte der Film weltweit etwa 120 Millionen ein — rund 35 Millionen in den USA und 8,7 Millionen in Deutschland, wo 1,2 Millionen Zuschauer kamen.
+
+Rotten Tomatoes weist 76 Prozent aus, Metacritic 71 von 100. Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll". Gelobt wurden die intelligente, witzige Anlage und die darstellerischen Leistungen.
+
+Auffällig ist die Verteilung der Einnahmen. Zwei Drittel des Ergebnisses kamen von außerhalb der Vereinigten Staaten; in Deutschland allein sammelte der Film ein Viertel dessen ein, was er im Heimatmarkt erzielte.
+
+Für die Coen-Brüder war das eine ungewöhnliche Position: eine Studiokomödie mit zwei Hauptdarstellern von diesem Rang, gebaut nach den Regeln eines Genres, das seine Blütezeit lange hinter sich hatte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8834', locale: 'de-de',
+    text: `### Worum es geht
+
+Jerry Fletcher fährt Taxi in New York und lebt für Verschwörungstheorien.
+
+Zugleich verfolgt er die Staatsanwältin Alice Sutton — beharrlich und ohne dass sie versteht, warum. Dann wird Fletcher entführt und gefoltert. Was danach zutage tritt, gibt einer seiner Theorien recht: Er war Teil eines Programms, das mit Menschen experimentierte.
+
+### Entstehungsgeschichte
+
+Regie führte Richard Donner, das Drehbuch schrieb Brian Helgeland.
+
+Mel Gibson spielt Jerry Fletcher, Julia Roberts die Alice Sutton, Patrick Stewart den Dr. Jonas und Cylk Cozart den Agent Lowry.
+
+Produziert wurde der Film von Joel Silver und Richard Donner für Warner Bros. Die Musik stammt von Carter Burwell, die Kamera von John Schwartzman, den Schnitt besorgten Kevin Stitt und Frank J. Urioste.
+
+Gedreht wurde überwiegend in New York City. Der Film dauert 135 Minuten, das Budget betrug rund 75 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Konstruktion beruht auf einer Umkehrung. Eine Figur, die alles für eine Verschwörung hält, ist als Erzähler denkbar unzuverlässig — und genau deshalb kann der Film die Frage offenhalten, welche seiner Theorien stimmen.
+
+Daraus folgt die Bauart der ersten Hälfte. Fletchers Verhalten gegenüber Alice Sutton wirkt bedrohlich, weil sie es nicht einordnen kann; erst später verschiebt sich, wie es zu lesen ist. Der Film verlangt vom Publikum, eine Figur zu ertragen, bevor es sie verstehen darf.
+
+135 Minuten sind für einen Thriller dieser Machart viel. Die Länge geht an die Zwischenzone: den Zeitraum, in dem weder klar ist, ob Fletcher recht hat, noch, ob ihm zu trauen ist.
+
+### Einordnung & Wirkung
+
+Spiegel Online beschrieb den Film als temporeichen Seelentrip mit zwei toll aufspielenden Stars. Das Lexikon des internationalen Films urteilte dagegen, das Werk sei routiniert und konventionell.
+
+Mel Gibson, Julia Roberts und Patrick Stewart gewannen den Blockbuster Entertainment Award. Brian Helgeland wurde für den Edgar Allan Poe Award für das Drehbuch nominiert.
+
+Der Widerspruch zwischen den beiden Urteilen betrifft dieselbe Eigenschaft. Ein Film, der ein heikles Thema — staatliche Experimente an Menschen — in die Form eines Starvehikels bringt, kann als gelungene Verbindung oder als Verharmlosung gelesen werden.
+
+Dass eine Krimiautoren-Vereinigung das Drehbuch nominierte, spricht für die erste Lesart: Die Konstruktion mit dem unzuverlässigen Erzähler wurde als handwerkliche Leistung anerkannt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:309886', locale: 'de-de',
+    text: `### Worum es geht
+
+John Link hat eine Haftstrafe hinter sich und arbeitet als Tätowierer. Er lebt zurückgezogen und trocken.
+
+Dann steht seine Tochter Lydia vor der Tür. Sie ist auf der Flucht vor Leuten, mit denen sie sich eingelassen hat. Der Vater, der jahrelang nicht da war, ist plötzlich der Einzige, der noch bleibt.
+
+### Entstehungsgeschichte
+
+Vorlage ist Peter Craigs Roman von 2005. Craig schrieb auch das Drehbuch, gemeinsam mit Andrea Berloff.
+
+Regie führte Jean-François Richet.
+
+Mel Gibson spielt John Link, Erin Moriarty die Lydia, William H. Macy den Kirby Curtis, Diego Luna den Jonah und Elisabeth Röhm die Ursula.
+
+Produziert wurde der Film von Chris Briggs, Pascal Caucheteux, Peter Craig und Sebastien Lemercier. Die Kamera führte Robert Gantz, den Schnitt besorgte Steven Rosenblum, die Musik stammt von Sven Faulconer.
+
+Gedreht wurde vom 5. Juni bis zum 3. Juli 2014 in Albuquerque, New Mexico, mit Aufnahmen in der Wüste. Den Weltvertrieb übernahm Wild Bunch, die US-Rechte lagen bei Lionsgate. Die Premiere lief am 21. Mai 2016 in Cannes, der US-Kinostart folgte am 26. August 2016.
+
+### Hinter den Kulissen
+
+Die Ausgangslage ist knapp und ohne Vorlauf. Es gibt keine Versöhnungsszene, keine Aufarbeitung der Vergangenheit — die Tochter ist da, und es ist keine Zeit für das, was zwischen ihnen ungeklärt ist.
+
+Daraus zieht der Film seine Form. Was Vater und Tochter voneinander wissen, erfahren sie unterwegs, unter Druck. Die Beziehung entsteht im Vollzug, nicht im Gespräch.
+
+Bemerkenswert ist die Rolle der Vergangenheit des Vaters. John Link kennt die Kreise, aus denen die Bedrohung kommt — dieselbe Vergangenheit, die ihn als Vater unmöglich gemacht hat, macht ihn jetzt brauchbar.
+
+Vier Wochen Dreh in Albuquerque und der umliegenden Wüste sind ein knapper Rahmen. Der Film ist entsprechend gebaut: wenige Schauplätze, eine Bewegungsrichtung, kaum Nebenhandlung.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 89 Prozent positive Bewertungen aus. Bei den Golden Tomato Awards belegte der Film den zweiten Platz in der Kategorie bester Actionfilm des Jahres 2016.
+
+Owen Gleiberman beschrieb ihn als packend — trotz einer Machart, die er als Trash einordnete.
+
+Dieses Urteil trifft den Film genauer, als es zunächst klingt. Er beansprucht keine Erneuerung des Genres; was ihn heraushebt, ist die Genauigkeit, mit der ein einfacher Aufbau durchgeführt wird.
+
+Die Premiere in Cannes im Mai 2016 ist dabei bemerkenswert. Ein Actionfilm mit kleinem Budget, gedreht bereits 2014, fand über ein Festival den Weg zu einem Publikum, das ihn sonst kaum wahrgenommen hätte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:619979', locale: 'de-de',
+    text: `### Worum es geht
+
+Vic und Melinda Van Allen führen eine Ehe, die sie nicht beenden wollen. Ihre Lösung ist eine Absprache: Melinda darf andere Männer haben.
+
+Was folgt, ist keine Entspannung. Melindas Liebhaber verschwinden — und Vic tut wenig, um den Verdacht von sich zu weisen. Ein gefundener Ausweis bringt Melinda dazu, ihren Mann verlassen zu wollen; die gemeinsame Tochter Trixie hält sie davon ab.
+
+### Entstehungsgeschichte
+
+Vorlage ist Patricia Highsmiths Roman von 1957.
+
+Regie führte Adrian Lyne — sein erster Film nach zwanzig Jahren Pause. Das Drehbuch schrieben Zach Helm und Sam Levinson; sie holten den Stoff in die Gegenwart und schrieben die Auflösung vollständig um.
+
+Ben Affleck spielt Vic Van Allen, Ana de Armas die Melinda, Grace Jenkins die Tochter Trixie, Tracy Letts den Don Wilson, Jacob Elordi den Charlie De Lisle und Finn Wittrock den Tony Cameron.
+
+Produziert wurde der Film von Arnon Milchan, Guymon Casady, Benjamin Forkner und Anthony Katagas. Die Kamera führte Eigil Bryld, den Schnitt besorgten Andrew Mondshein und Tim Squyres, die Musik stammt von Marco Beltrami.
+
+Gedreht wurde ab November 2019 in New Orleans. Der ursprünglich für Januar 2022 geplante Kinostart wurde gestrichen; am 18. März 2022 erschien eine gekürzte Fassung digital.
+
+### Hinter den Kulissen
+
+Die Rückkehr Adrian Lynes nach zwanzig Jahren ist der auffälligste Produktionsbefund. Ein Regisseur, dessen Name mit einem bestimmten Typ von Ehethriller verbunden ist, nimmt sich einen Highsmith-Stoff vor — und wird an beidem gemessen.
+
+Die Umarbeitung der Auflösung ist die zweite Entscheidung mit Folgen. Wer den Roman kennt, sieht einen anderen Film als jemand, der ihn nicht kennt; die Drehbuchautoren haben das Ende ausgetauscht, nicht angepasst.
+
+Die Absprache zwischen den Eheleuten ist dabei der Motor. Sie soll die Ehe retten und schafft genau die Lage, in der Vic handeln kann, ohne dass es zunächst auffällt — jede Verschwiegenheit ist Teil der Vereinbarung.
+
+Bemerkenswert ist der Auswertungsweg. Gedreht 2019, geplanter Kinostart 2022, dann gestrichen und stattdessen eine gekürzte Fassung im Digitalvertrieb — ein Film, der seinen Weg zur Leinwand nicht mehr fand.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 35 Prozent positive Bewertungen aus.
+
+Die Süddeutsche Zeitung kritisierte, statt eines Psychodramas mit Tiefgang, das zum Nachdenken anrege, unterhalte der Film mit Erotik, Sex und Blutvergießen. Justin Chang würdigte in der LA Times dagegen Lynes Hinwendung zu einer kühlen Highsmith'schen Misanthropie.
+
+Beide Urteile beschreiben denselben Film aus entgegengesetzter Richtung. Was die eine Seite als Verflachung liest, sieht die andere als Konsequenz — die Frage ist, ob die Kälte des Films sein Thema ist oder sein Mangel.
+
+Dass die Kinoauswertung entfiel und eine gekürzte Fassung digital erschien, hat dieser Debatte einen Teil ihres Gegenstands genommen: Was zu sehen war, war nicht die Fassung, die gedreht worden war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:316152', locale: 'de-de',
+    text: `### Worum es geht
+
+Newton Knight kämpft im Amerikanischen Bürgerkrieg auf Seiten der Konföderation. Nach dem Tod seines Neffen desertiert er.
+
+Er versteckt sich in den Sümpfen von Jones County, Mississippi — gemeinsam mit entflohenen Sklaven. Aus dieser Gruppe wird eine bewaffnete Widerstandsbewegung gegen die Konföderation. Nach dem Krieg setzt Knight seinen Kampf fort, nun für die Rechte schwarzer Menschen. Ein zweiter Erzählstrang spielt 85 Jahre später: Knights Urenkel Davis steht vor Gericht, weil er eine weiße Frau geheiratet hat.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf tatsächlichen Ereignissen in Jones County, Mississippi, zwischen 1862 und 1876. Behandelt werden unter anderem die Schlacht um Corinth im Oktober 1862 und die Schlacht um Vicksburg.
+
+Gary Ross führte Regie und schrieb das Drehbuch; er arbeitete zehn Jahre an der Entwicklung des Projekts.
+
+Matthew McConaughey spielt Newton Knight, Gugu Mbatha-Raw die Rachel, Mahershala Ali den Moses Washington, Keri Russell die Serena und Christopher Berry den Jasper Collins.
+
+Die Kamera führte Benoît Delhomme, den Schnitt besorgten Pamela Martin und Juliette Welfling, die Musik stammt von Nicholas Britell.
+
+Gedreht wurde vom 23. Februar bis zum 28. Mai 2015. Der Start in den USA und Kanada war der 24. Juni 2016; in Deutschland erschien der Film am 10. November 2016 auf DVD und Blu-ray. Das Budget betrug 50 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Zehn Jahre Entwicklungsarbeit sind die auffälligste Zahl dieser Produktion. Sie erklären sich aus dem Stoff: Ein bewaffneter Aufstand von Deserteuren und entflohenen Sklaven gegen die Konföderation gehört nicht zu den Erzählungen, die über den Bürgerkrieg gewöhnlich verfilmt werden.
+
+Der zweite Erzählstrang ist die eigentliche These des Films. Indem er die Anklage gegen Davis Knight 85 Jahre später einschneidet, verbindet er den Widerstand von 1862 mit den Rassengesetzen des 20. Jahrhunderts — der Film behauptet damit eine Linie, keine abgeschlossene Episode.
+
+Diese Konstruktion hat einen Preis. Ein Film, der zwei Zeitebenen und vierzehn Jahre Geschichte abdeckt, kann keine der beiden vollständig ausführen; die Verbindung ist gesetzt, nicht entwickelt.
+
+### Einordnung & Wirkung
+
+Bei 50 Millionen Dollar Herstellungskosten spielte der Film 25 Millionen ein und blieb damit weit unter seinen Kosten.
+
+In Deutschland erschien er nicht im Kino, sondern rund fünf Monate nach dem US-Start direkt auf DVD und Blu-ray.
+
+Diese Zahlen beschreiben ein Grundproblem des Stoffs. Ein Historienfilm über einen wenig bekannten Aufstand, ohne Genrezugehörigkeit und mit einer Handlung, die über vierzehn Jahre läuft, findet schwer ein Publikum — unabhängig von seiner Besetzung.
+
+Bemerkenswert bleibt, wofür der Film steht. Er erzählt einen Teil der Geschichte des amerikanischen Südens, in dem weiße Deserteure und entflohene Sklaven gemeinsam gegen die Konföderation kämpften — und stellt der üblichen Erzählung damit eine Gegenüberlieferung entgegen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:7364', locale: 'de-de',
+    text: `### Worum es geht
+
+In Westafrika breitet sich eine Seuche aus. Ärzte der WHO bitten die NUMA-Leute Dirk Pitt und Al Giordino um Hilfe bei der Suche nach der Ursache.
+
+Was sie finden, ist kein Krankheitserreger im üblichen Sinn, sondern eine Absprache: Ein malischer Kriegsherr und ein französischer Industrieller lagern Giftmüll illegal ein. Die Folge ist das Wachstum von Rotalgen — mit Auswirkungen, die weit über die Region hinausreichen könnten.
+
+### Entstehungsgeschichte
+
+Vorlage ist Clive Cusslers Roman „Operation Sahara", einer von über zwanzig Dirk-Pitt-Abenteuern.
+
+Regie führte Breck Eisner. Am Drehbuch schrieben Thomas Dean Donnelly, Joshua Oppenheimer, John C. Richards und James V. Hart.
+
+Matthew McConaughey spielt Dirk Pitt, Steve Zahn den Al Giordino, Penélope Cruz die Dr. Eva Rojas, William H. Macy den Admiral Sandecker und Lennie James den General Kazim.
+
+Produziert wurde der Film von Mace Neufeld, Howard Baldwin, Karen Elise Baldwin und Stephanie Austin. Die Musik stammt von Clint Mansell, die Kamera von Seamus McGarvey, den Schnitt besorgte Andrew MacRitchie.
+
+Gedreht wurde von Januar bis März 2004 in Marokko, Spanien und Großbritannien; Sandstürme behinderten die Arbeiten in Afrika. Das Budget betrug 160 Millionen Dollar.
+
+### Hinter den Kulissen
+
+160 Millionen Dollar für einen Abenteuerfilm sind eine erhebliche Summe. Der Stoff hätte den Aufwand tragen können: Clive Cusslers Vorlage ist einer von über zwanzig Dirk-Pitt-Romanen, ein Vorrat, der weit über einen einzelnen Film hinausreicht.
+
+Die Verbindung von Umweltkriminalität und Abenteuerhandlung ist der inhaltliche Kern. Der Film stellt seiner Schatzsucher-Anlage ein Thema an die Seite, das nicht dazugehört: illegale Giftmüllentsorgung mit Folgen für das Weltklima.
+
+Die Dreharbeiten waren aufwendig. Drei Länder, Wüstenaufnahmen, Sandstürme — der sichtbare Aufwand ist beträchtlich, und genau er macht das Verhältnis von Einsatz und Ergebnis so ungünstig.
+
+Vier Drehbuchautoren für einen Abenteuerfilm sind ein weiterer Hinweis. Wo so viele Fassungen entstehen, ist die Richtung selten von Anfang an klar.
+
+### Einordnung & Wirkung
+
+Bei 160 Millionen Dollar Herstellungskosten spielte der Film 119 Millionen ein — ein deutlicher Misserfolg an der Kasse.
+
+Rotten Tomatoes weist 38 Prozent Zustimmung aus. Ein Rezensent nannte ihn einen einfältigen Abenteuerstreifen mit einer absurden Handlung.
+
+Damit war die geplante Reihe erledigt. Ein Auftakt, der ein Drittel seines Budgets nicht wieder einspielt, bekommt keine Fortsetzung — und die über zwanzig Romane, auf die sich die Rechnung gestützt hatte, blieben unverfilmt.
+
+Der Fall zeigt, wie riskant diese Kalkulation ist. Der Aufwand richtet sich nicht nach dem einzelnen Film, sondern nach der erhofften Reihe; bleibt sie aus, steht der Einsatz allein.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2334', locale: 'de-de',
+    text: `### Worum es geht
+
+In Marseille treibt eine Bande ihr Unwesen, die als „Weihnachtsmann-Gang" auftritt. Die Anführerin gibt sich als chinesische Reporterin aus.
+
+Daneben laufen die privaten Verhältnisse aus dem Ruder: Émilien lebt mit Petra zusammen, die ihm eröffnet, dass sie schwanger ist. Daniel hat eigene Schwierigkeiten — sein Taxi steht ihm näher als seine Beziehung. Am Ende stellen er und seine alten Freunde die Bande.
+
+### Entstehungsgeschichte
+
+Regie führte Gérard Krawczyk, das Drehbuch schrieb Luc Besson.
+
+Samy Naceri spielt Daniel Morales, Frédéric Diefenthal den Émilien Coutant-Kerbalec, Marion Cotillard die Lilly Bertineau, Édouard Montoute den Alain, Emma Wiklund die Petra und Bai Ling die Qiu.
+
+Produziert wurde der Film von Luc Besson und Laurent Pétin. Die Kamera führte Gérard Sterin, den Schnitt besorgte Yann Hervé, die Musik stammt von DJ Kore und DJ Skalp.
+
+Es handelt sich um eine französische Produktion von 82 Minuten Länge; die FSK gab sie ab 6 Jahren frei.
+
+### Hinter den Kulissen
+
+82 Minuten sind knapp — und für diese Reihe bezeichnend. Der Film verzichtet auf Vorlauf und setzt voraus, dass man die Figuren kennt; wer Daniel und Émilien nicht aus den Vorgängern kennt, bekommt sie hier nicht mehr erklärt.
+
+Die Bandenidee steht dabei quer zur Anlage. Eine Gruppe im Weihnachtsmannkostüm ist ein visueller Einfall, kein Konflikt — der Film braucht sie als Anlass für die Verfolgungsjagden, um die es eigentlich geht.
+
+Bemerkenswert ist die Musikwahl. Mit DJ Kore und DJ Skalp verantworten zwei DJs die Filmmusik; das setzt auf Tempo statt auf Thematik und passt zu einem Film, der in erster Linie Bewegung sein will.
+
+Die privaten Nebenhandlungen — Schwangerschaft, Beziehungsprobleme — liefern die Ruhepunkte zwischen den Fahrten. Sie sind die Struktur, an der die Nummern aufgehängt sind.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films bezeichnete den Film als langweilige Fortsetzung mit überdrehten und abgestandenen Gags.
+
+Dieses Urteil trifft ein Problem, das dritte Teile regelmäßig haben. Was beim ersten Mal als Einfall wirkte, ist beim dritten Mal eine Erwartung — und der Film erfüllt sie, ohne sie zu erneuern.
+
+Die Freigabe ab 6 Jahren ordnet ihn zusätzlich ein. Eine Actionkomödie über eine Verbrecherbande, die für Kinder freigegeben ist, hat ihren Ton weit ins Harmlose verschoben.
+
+Bemerkenswert bleibt die Besetzung. Marion Cotillard spielt die Lilly Bertineau, Bai Ling die Anführerin Qiu — zwei Rollen, die dem Film mehr Gewicht geben, als die Handlung ihnen einräumt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:632727', locale: 'de-de',
+    text: `### Worum es geht
+
+Fünfzig Jahre nach der Mordserie von 1973 reisen junge Unternehmer in die verlassene texanische Stadt Harlow. Sie wollen Immobilien ersteigern und den Ort aufwerten.
+
+In einem verfallenen Waisenhaus treffen sie auf eine alte Frau namens Ginny und einen stillen Mann. Was sie in Gang setzen, holt die Vergangenheit des Ortes zurück — und Sally Hardesty, die einzige Überlebende von 1973 und inzwischen Texas Ranger, wird gerufen.
+
+### Entstehungsgeschichte
+
+Regie führte David Blue Garcia. Das Drehbuch schrieb Chris Thomas Devlin nach einer Geschichte von Fede Álvarez und Rodo Sayagues.
+
+Elsie Fisher spielt die Fotografin Lila, Sarah Yarkin die Unternehmerin Melody, Moe Dunford den Richter, Nell Hudson die Ruth, Olwen Fouéré die Texas Rangerin Sally Hardesty, Jacob Latimore den Dante Spivey, Jessica Allain die Investorin Catherine, Alice Krige die Virginia McCumber und Mark Burnham den Leatherface.
+
+Die ursprünglich verpflichteten Regisseure Ryan und Andy Tohill wurden nach einer Woche durch Garcia ersetzt; ihre Aufnahmen wurden verworfen. Auch der Kameramann Angus Mitchell verließ das Projekt und wurde durch Ricardo Diaz ersetzt. Gearbeitet wurde mit alten Objektiven und praktischen Effekten für die Gewaltszenen. Die Musik stammt von Colin Stetson.
+
+Gedreht wurde im August 2020 in Bulgarien. Der Film erschien am 18. Februar 2022 exklusiv bei Netflix; ein Kinostart war ursprünglich für 2021 vorgesehen.
+
+### Hinter den Kulissen
+
+Der Regiewechsel nach einer Woche ist der auffälligste Produktionsbefund. Zwei Regisseure und ein Kameramann verließen den Film in der ersten Drehwoche; alles bereits Gedrehte wurde verworfen und neu begonnen.
+
+Inhaltlich setzt der Film auf einen Gegensatz, der über den Horror hinausweist. Junge Investoren wollen einen verlassenen Ort aufwerten und begegnen dabei dem, was dort zurückgeblieben ist — Aufwertung trifft auf Vergangenheit.
+
+Die technische Entscheidung passt dazu. Alte Objektive und praktische Effekte statt digitaler Bearbeitung sind ein Bekenntnis zur Machart der siebziger Jahre, an die der Film anschließt.
+
+Dass in Bulgarien gedreht wurde, ist der ökonomische Gegenpol dazu: Ein Film, der Texas beschwört, entstand vollständig in Osteuropa.
+
+### Einordnung & Wirkung
+
+Die Kritik fiel überwiegend negativ aus. Rotten Tomatoes weist 30 Prozent positive Bewertungen aus, Metacritic 34 von 100.
+
+Owen Gleiberman nannte den Film eine blutgetränkte, aber nicht beängstigende Fußnote. David Sims urteilte, er wirke unnötig und beliebig. Benjamin Lee vergab im Guardian dagegen drei von fünf Sternen.
+
+Der Vorwurf, den Gleiberman und Sims teilen, richtet sich nicht gegen die Ausführung, sondern gegen die Existenz des Films — die Frage, was eine weitere Fortsetzung nach fünfzig Jahren beitragen soll.
+
+Der Weg zur Veröffentlichung stützt das. Aus dem geplanten Kinostart 2021 wurde eine Netflix-Premiere im Februar 2022; ein Film, dessen Herstellung von Personalwechseln geprägt war, fand auch keine reguläre Auswertung.` },
 ];

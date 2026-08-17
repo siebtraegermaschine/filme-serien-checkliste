@@ -9627,6 +9627,11 @@ async function onboardingMarkenUebernehmen(){
    Abbruch. */
 var ONB_SCHRITTE = 5;
 var ONB_GEPRUEFT = false;   // je Seitenaufruf hoechstens einmal nachfragen
+/* Solange die Schritte nur Platzhalter zeigen, darf sich das Fenster NICHT von
+   selbst oeffnen -- sonst steht angemeldeten Leuten ein Pflichtfenster ohne
+   Inhalt im Weg, dessen "Weiter" am Server scheitert. Wird auf true gesetzt,
+   sobald die Inhalte der Schritte stehen (Punkte 3-5 in PLAN-ONBOARDING.md). */
+var ONB_FREIGABE = false;
 
 (function onboardingEinrichten(){
   var modal = document.getElementById('onboardModal');
@@ -9749,7 +9754,7 @@ var ONB_GEPRUEFT = false;   // je Seitenaufruf hoechstens einmal nachfragen
      gefragt. Bestandskonten haben noch keine Zeile -- der Server liefert dann
      schritt 0, und sie durchlaufen dasselbe. */
   window.onboardingFaellig = async function(){
-    if (!CURRENT_USER || ONB_GEPRUEFT) return;
+    if (!ONB_FREIGABE || !CURRENT_USER || ONB_GEPRUEFT) return;
     ONB_GEPRUEFT = true;
     // Nicht ueber ein anderes Fenster legen (etwa die Nachfrage nach dem
     // Anzeigenamen bei Bestandskonten). Dann eben beim naechsten Mal --
