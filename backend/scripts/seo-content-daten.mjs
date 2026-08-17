@@ -25034,4 +25034,221 @@ Die Anlage folgt einem Muster, das Ferrell in jenen Jahren mehrfach durchspielte
 Der Start brachte 33 Millionen Dollar aus 3.372 Kinos und Platz eins; weltweit spielte der Film 145,7 Millionen ein, davon 118,2 Millionen in den USA.
 
 Die Kritik reagierte überwiegend positiv: 70 Prozent von 188 Besprechungen bei Rotten Tomatoes, 64 von 100 bei Metacritic, mit Lob für das Spiel von Ferrell und Heder. Das Publikum vergab bei CinemaScore ein B.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:9281', locale: 'de-de',
+    text: `### Worum es geht
+
+Der achtjährige Samuel reist mit seiner verwitweten Mutter Rachel von der Amisch-Gemeinde in Pennsylvania nach Baltimore. Auf dem Bahnhof in Philadelphia geht er auf die Toilette und sieht dort, wie ein Mann ermordet wird.
+
+Detective John Book übernimmt den Fall — und stellt fest, dass der Täter ein hochrangiger Polizist ist. Als er selbst angeschossen wird, bringt er Mutter und Kind zurück in die Gemeinde und bleibt dort, um zu genesen. Ein Großstadtpolizist unter Menschen, die Gewalt grundsätzlich ablehnen: Der Film lebt von diesem Widerspruch und von der Nähe zwischen Book und Rachel, die für beide Seiten nicht vorgesehen ist.
+
+### Entstehungsgeschichte
+
+Es war Peter Weirs erster amerikanischer Film; zuvor hatte er in Australien gearbeitet. Gedreht wurde von April bis Juni 1984 an Originalschauplätzen in Pennsylvania, das Budget lag bei 12 Millionen Dollar.
+
+Harrison Ford spielt John Book. Es ist bis heute seine einzige Oscar-Nominierung — bemerkenswert für einen Darsteller, dessen Filme zu den erfolgreichsten der Kinogeschichte gehören.
+
+### Hinter den Kulissen
+
+Die Amisch selbst lehnten die Produktion ab. Das National Committee for Amish Religious Freedom rief zum Boykott auf, weil es zunehmenden Fremdenverkehr und das Betreten der Höfe befürchtete. Der Gouverneur von Pennsylvania sagte daraufhin zu, die Region künftig nicht mehr als Drehort zu bewerben.
+
+Die bekannteste Sequenz zeigt den gemeinschaftlichen Bau einer Scheune an einem einzigen Tag — eine Szene ohne Handlung im engeren Sinn, die zeigt, worin die Stärke dieser Gemeinschaft besteht.
+
+### Einordnung & Wirkung
+
+Der Film wurde ein unerwarteter Erfolg und spielte weltweit 117,1 Millionen Dollar ein, davon 68,7 Millionen in den USA.
+
+Von acht Oscar-Nominierungen wurden zwei umgesetzt: bestes Originaldrehbuch und bester Schnitt. Roger Ebert sprach von einem frischen neuen Tag im Kino.
+
+Der Verhandlungsfachmann William Ury hat die Schlussszene später als Sinnbild dafür angeführt, wie eine Gemeinschaft Gewalt verhindern kann, ohne selbst Gewalt anzuwenden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2657', locale: 'de-de',
+    text: `### Worum es geht
+
+David sieht am liebsten Wiederholungen der Schwarzweißserie "Pleasantville" aus den fünfziger Jahren, in der niemand streitet, es nie regnet und die Feuerwehr ausschließlich Katzen von Bäumen holt. Seine Zwillingsschwester Jennifer hält ihn dafür für hoffnungslos.
+
+Ein Fernsehtechniker gibt ihnen eine merkwürdige Fernbedienung — und beide finden sich in der Serie wieder, als Bud und Mary Sue. Jennifer hält sich nicht an das Drehbuch, und mit jeder Abweichung bekommt etwas in Pleasantville Farbe: eine Rose, ein Gesicht, ein ganzer Mensch. Die Bewohner, die farbig werden, gelten bald als Bedrohung.
+
+### Entstehungsgeschichte
+
+Gary Ross schrieb und inszenierte den Film; es war seine erste Regiearbeit. Verliehen wurde er von New Line Cinema und erschien am 23. Oktober 1998.
+
+Tobey Maguire und Reese Witherspoon spielen die Geschwister, daneben Jeff Daniels, Joan Allen, William H. Macy und J. T. Walsh. Don Knotts spielt den Fernsehtechniker — einer seiner letzten Auftritte.
+
+### Hinter den Kulissen
+
+Der technische Aufwand war für seine Zeit außergewöhnlich: Rund 163.000 Einzelbilder auf 35-Millimeter-Film wurden eingescannt, um Farbe gezielt zu entfernen. Damit war es einer der bis dahin umfangreichsten digitalen Eingriffe in einen Spielfilm.
+
+Das Verfahren ist zugleich die Aussage des Films: Farbe steht für alles, was aus dem vorgesehenen Ablauf ausbricht — Wut, Begehren, eigene Meinung. Und die Reaktion darauf folgt bekannten Mustern, bis hin zu Schildern mit der Aufschrift, dass nur Farblose bedient werden.
+
+### Einordnung & Wirkung
+
+Bei einem Budget von 60 Millionen Dollar spielte der Film 49,8 Millionen ein und blieb damit hinter den Erwartungen zurück.
+
+Die Kritik reagierte überwiegend positiv; es gab drei Oscar-Nominierungen. Über die Jahre ist er zum Kultfilm geworden.
+
+Bemerkenswert bleibt, wie genau der Film sein Gleichnis durchführt — und dass er sich zum Schluss weigert, die heile Welt einfach zu verwerfen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:13813', locale: 'de-de',
+    text: `### Worum es geht
+
+Weißrussland, Sommer 1941. Die deutsche Besatzung und einheimische Kollaborateure ermorden die jüdische Bevölkerung ganzer Dörfer. Die Brüder Tuvia, Zus und Asael Bielski überleben, weil sie im Wald sind, als ihre Eltern getötet werden.
+
+Sie fliehen in den Naliboki-Urwald. Was als Versteck für drei beginnt, wird zum Lager für schließlich rund 1.200 Menschen. Zwischen den Brüdern verläuft dabei ein Bruch: Tuvia will Menschen retten und aufnehmen, auch Alte und Kranke, Zus will kämpfen und schließt sich sowjetischen Partisanen an.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf tatsächlichen Vorgängen. Regie führte Edward Zwick; Daniel Craig spielt Tuvia, Liev Schreiber spielt Zus und Jamie Bell spielt Asael.
+
+Gedreht wurde über drei Monate in Litauen, das Budget lag bei 32 Millionen Dollar. Der Film erschien am 31. Dezember 2008.
+
+### Hinter den Kulissen
+
+Aus Polen und Weißrussland kam Widerspruch gegen die Darstellung: Kritiker bemängelten, dass die Anwesenheit polnischer Partisanen ausgelassen werde und dass im Film Russisch statt Weißrussisch gesprochen wird. Auch die Frage, wie die Bielski-Gruppe sich versorgte und wie sie sich gegenüber der örtlichen Bevölkerung verhielt, ist historisch umstritten.
+
+Ein Fehler ist unstrittig: Im Film wird Ampicillin erwähnt, ein Antibiotikum, das erst 1958 entwickelt wurde.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 51,2 Millionen Dollar ein.
+
+Die Kritik urteilte gemischt: 58 Prozent bei Rotten Tomatoes, ebenso 58 von 100 bei Metacritic. A. O. Scott nannte den Film steif und muskelbepackt; David Denby lobte dagegen seine Wirkung und sprach von einer Art realistischem Märchen in einem Wald, den die geheiligte Arbeit des Überlebens verzaubert habe.
+
+Geblieben ist er vor allem als eine der wenigen Verfilmungen, die jüdischen Widerstand im Zweiten Weltkrieg als bewaffneten Widerstand zeigen.` },
+  {
+    bereich: 'titel', schluessel: 'series:100883', locale: 'de-de',
+    text: `### Worum es geht
+
+Devi Vishwakumar ist fünfzehn, indisch-amerikanisch und lebt im San Fernando Valley. Ihr Vater ist im Vorjahr bei einem Schulkonzert an einem Herzinfarkt gestorben; Devi war anschließend drei Monate lang gelähmt, ohne körperliche Ursache.
+
+Zum neuen Schuljahr hat sie einen Plan: Sie will endlich beliebt sein und einen Freund haben, am liebsten den Schwimmer Paxton. Was der Plan nicht vorsieht, ist die Trauer, die sie umgeht, statt sie zuzulassen — und ein Streit mit ihrer Mutter, der immer wieder darauf hinausläuft.
+
+### Entstehungsgeschichte
+
+Erdacht wurde die Serie von Mindy Kaling und Lang Fisher. Kaling hat ihr Verhältnis zum Stoff genau bezeichnet: Die Serie sei im Geist ihrer eigenen Kindheit, aber keine Nacherzählung davon. Sie selbst wuchs bei Boston auf, die Serie spielt in Los Angeles.
+
+Netflix bewilligte sie im März 2019; sie lief von 2020 bis 2023 über vier Staffeln mit 40 Folgen.
+
+### Hinter den Kulissen
+
+Maitreyi Ramakrishnan bekam die Hauptrolle über ein offenes Vorsprechen, auf das über 15.000 Bewerbungen eingingen — sie hatte zuvor nie professionell gespielt.
+
+Erzählt wird die Serie aus dem Off von John McEnroe, dem früheren Tennisprofi. Der Einfall geht auf Kaling zurück, die ihn auf einer Oscar-Feier der Vanity Fair ansprach; im Film erklärt sich die Wahl über Devis Vater, der McEnroe verehrte.
+
+Gedreht wurde in Los Angeles mit einer Kamera, bei rund 2,5 Millionen Dollar je Folge.
+
+### Einordnung & Wirkung
+
+Die Serie erreichte in allen vier Staffeln zwischen 92 und 97 Prozent bei Rotten Tomatoes. Gelobt wurden der frische Zugriff auf das Erwachsenwerden und die abgestufte Figurenzeichnung.
+
+Bis Juli 2020 hatten laut Netflix 40 Millionen Haushalte weltweit die Serie gesehen.
+
+Sie gilt als Wendepunkt für die Darstellung südasiatischer Figuren im amerikanischen Unterhaltungsbetrieb — eine Hauptfigur, deren Herkunft weder ausgespart noch zum einzigen Gegenstand gemacht wird.` },
+  {
+    bereich: 'titel', schluessel: 'movie:458220', locale: 'de-de',
+    text: `### Worum es geht
+
+Eddie Palmer kommt nach zwölf Jahren aus dem Gefängnis zurück in seinen Heimatort in Louisiana. Er war ein gefeierter Footballspieler, bevor er wegen versuchten Mordes und bewaffneten Raubes verurteilt wurde.
+
+Er zieht bei seiner Großmutter ein. Nebenan wohnt Sam, ein etwa siebenjähriger Junge, dessen Mutter drogenabhängig ist und regelmäßig verschwindet. Sam spielt mit Puppen, sieht eine Zeichentrickserie über Feen und trägt gern Kleider — was ihm in der Schule und im Ort Feindschaft einbringt. Als die Mutter wieder wegbleibt, kümmert Palmer sich um ihn.
+
+### Entstehungsgeschichte
+
+Regie führte Fisher Stevens, das Budget lag bei 6,7 Millionen Dollar. Der Film erschien am 29. Januar 2021 bei Apple TV+.
+
+Justin Timberlake spielt Palmer, Ryder Allen den Jungen Sam; daneben sind Juno Temple, Alisha Wainwright und June Squibb zu sehen.
+
+### Hinter den Kulissen
+
+Die Anlage ist die eines vertrauten Musters — der harte Mann und das Kind, das ihn verändert. Was den Film davon abhebt, ist die Zurückhaltung: Sams Verhalten wird nicht erklärt, nicht diagnostiziert und nicht zum Thema gemacht. Er ist einfach so.
+
+David Ehrlich von IndieWire hat das treffend beschrieben: Die berührenden Momente entstünden weniger daraus, wie sehr Palmer und Sam sich verändern, als daraus, dass sie einander die Erlaubnis geben, sie selbst zu sein.
+
+### Einordnung & Wirkung
+
+Der Film erzielte den zweitgrößten Start einer Eigenproduktion bei Apple TV+ und ließ die Zuschauerzahlen des Anbieters an jenem Wochenende um 33 Prozent steigen.
+
+Die Kritik urteilte überwiegend positiv: 72 Prozent von 108 Besprechungen bei Rotten Tomatoes, mit dem Befund, würdige Themen und ein starkes Ensemble unter einem überzeugenden Justin Timberlake hoben den Film über vertrautes Gelände. Metacritic verzeichnete mit 53 von 100 gemischte Urteile.` },
+  {
+    bereich: 'titel', schluessel: 'movie:13600', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Stadt Ember liegt tief unter der Erde. Sie wurde von den "Erbauern" angelegt, um Menschen eine Katastrophe an der Oberfläche überdauern zu lassen — für zweihundert Jahre, danach sollten sie zurückkehren. Die Anweisung dazu lag in einer Kassette mit Zeitschloss, die verlorenging.
+
+Inzwischen sind mehr als zweihundert Jahre vergangen. Der Generator fällt regelmäßig aus, Vorräte gehen zur Neige, und Dunkelheit bedeutet in einer Stadt ohne Sonne den Tod. Die Jugendlichen Lina und Doon finden Reste der Anweisung und versuchen, den Weg nach draußen zu rekonstruieren — gegen einen Bürgermeister, der ein eigenes Lager angelegt hat.
+
+### Entstehungsgeschichte
+
+Grundlage ist Jeanne DuPraus Roman von 2003. Tom Hanks und Gary Goetzman erwarben die Rechte 2004 für einen mittleren sechsstelligen Betrag.
+
+Regie führte Gil Kenan, der zuvor "Monster House" gedreht hatte. Das Budget lag bei 55 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde im Sommer 2007 im Titanic Quarter in Belfast — in den ehemaligen Werfthallen, deren Größe die unterirdische Stadt überhaupt erst darstellbar machte.
+
+Saoirse Ronan spielt Lina, Harry Treadaway spielt Doon; in Nebenrollen sind Bill Murray als Bürgermeister und Tim Robbins zu sehen. Für Ronan war es einer der ersten Filme nach ihrer Oscar-Nominierung für "Abbitte".
+
+### Einordnung & Wirkung
+
+Der Film erschien am 10. Oktober 2008 über 20th Century Fox, startete auf Platz elf mit rund 3,1 Millionen Dollar und spielte weltweit nur 17,9 Millionen ein — bei 55 Millionen Produktionskosten ein schwerer Fehlschlag.
+
+Die Kritik urteilte gemischt: 53 Prozent bei Rotten Tomatoes, 58 von 100 bei Metacritic. Gelobt wurden Ausstattung und Besetzung, bemängelt wurde eine gehetzte und unausgeführte Erzählung. Das Publikum vergab bei CinemaScore ein B plus.
+
+Die geplante Verfilmung der Folgebände unterblieb.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2332', locale: 'de-de',
+    text: `### Worum es geht
+
+Daniel fährt in Marseille Taxi und hat seinen Peugeot so umgebaut, dass er auf Knopfdruck zum Rennwagen wird. Sein Freund Émilien ist Polizist und weiterhin ungeschickt in allem, was nicht mit Vorschriften zu tun hat.
+
+Diesmal geht es um den japanischen Verteidigungsminister, der Frankreich besucht und von der Yakuza entführt wird — gemeinsam mit Émiliens Freundin Petra. Die Verfolgung führt von Marseille nach Paris und endet mit einem Sprung über eine Hausfassade.
+
+### Entstehungsgeschichte
+
+Das Drehbuch schrieb Luc Besson, der bereits den ersten Teil von 1998 verfasst hatte. Regie führte Gérard Krawczyk und ersetzte damit Gérard Pirès.
+
+Das Budget lag bei 10,5 Millionen Dollar. Besson handelte für diesen Teil einen höheren Anteil aus: Statt der bisherigen hälftigen Teilung ging das Verhältnis auf 70 zu 30 zu seinen Gunsten.
+
+### Hinter den Kulissen
+
+Bei den Dreharbeiten kam es am 16. August 1999 zu einem tödlichen Unfall: Der Kameramann Alain Dutartre starb bei einem Stunt. Das Verfahren zog sich über Jahre — 2009 wurden Besson und die Produktionsgesellschaft wegen fahrlässiger Tötung verurteilt.
+
+Die Fahrszenen sind der eigentliche Gegenstand des Films und wurden ohne Computertechnik gedreht, was den Unfall in einen unmittelbaren Zusammenhang mit der Machart stellt.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 25. März 2000 auf 830 Leinwänden und stellte damit einen französischen Startrekord auf. In Frankreich kamen 10,3 Millionen Zuschauer, international 5 Millionen; weltweit spielte er 64,4 Millionen Dollar ein.
+
+Die Kritik urteilte gemischt. Der Rezensent der BBC hielt fest, der Film liefere das erwartete Maß an Tempo, ohne darüber hinaus viel zu bieten.
+
+Er gehört zu den erfolgreichsten französischen Filmreihen überhaupt; insgesamt entstanden fünf Teile.` },
+  {
+    bereich: 'titel', schluessel: 'movie:6171', locale: 'de-de',
+    text: `### Worum es geht
+
+Vier Freunde aus Maine treffen sich wie jedes Jahr zur Jagd in einer Blockhütte. Sie kennen einander seit der Kindheit und verfügen über Fähigkeiten, die andere nicht haben — sie können Gedanken lesen und einander über Entfernungen hinweg erreichen. Verdankt haben sie das einem Jungen namens Duddits, den sie damals vor Schlägern gerettet haben.
+
+In diesem Winter taucht ein orientierungsloser Fremder auf, und im Wald landet etwas. Was folgt, ist ein Befall durch außerirdische Parasiten, eine Quarantäne durch das Militär unter einem Colonel, der seit Jahrzehnten Jagd auf diese Wesen macht, und ein Rückgriff auf Duddits.
+
+### Entstehungsgeschichte
+
+Grundlage ist Stephen Kings Roman von 2001, den er nach einem schweren Verkehrsunfall im Jahr 1999 schrieb — in einer Phase starker Schmerzmittel und mit der Hand, weil er nicht sitzen konnte.
+
+Lawrence Kasdan führte Regie und schrieb das Drehbuch gemeinsam mit William Goldman. Das Budget lag bei 68 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab Januar 2002 sieben Wochen lang in Prince George in British Columbia und weitere zehn Wochen in Vancouver. Die Laufzeit beträgt 134 Minuten.
+
+Auffällig ist der Bruch in der Mitte: Die erste Hälfte ist ein sorgfältig aufgebautes Kammerspiel über vier Männer, die zweite ein Monsterfilm mit Militäreinsatz — ein Wechsel, den nahezu jede Besprechung bemängelte.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 75,7 Millionen Dollar ein, davon nur 33,7 Millionen in den USA — etwa die Hälfte der Herstellungskosten.
+
+Die Kritik lehnte ihn deutlich ab: 28 Prozent von 180 Besprechungen bei Rotten Tomatoes, 35 von 100 bei Metacritic. Roger Ebert vergab anderthalb Sterne und schrieb, der Film beginne als reizvolle Geschichte über Freunde mit telepathischer Gabe und ende als Monsterfilm von verblüffender Grässlichkeit.
+
+Stephen King selbst lobte die Verfilmung und nannte sie eine der sehr, sehr guten Umsetzungen seiner Arbeit. Kasdan hat später eingeräumt, dass der Misserfolg seiner Laufbahn erheblich geschadet hat.` },
 ];
