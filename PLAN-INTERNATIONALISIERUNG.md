@@ -430,9 +430,7 @@ statt 22.509 Anbieter-Zeilen, 25.642 verschiedene Titel; Auslieferung 6,81 MB
 JSON / 2,35 MB gzip statt 5,89 / 2,04 (+15 % bei dreifacher Anbieterzahl — das
 zahlt die Entdopplung). Laufzeit 25 min 46 s im ersten Lauf (rund 4.700 Titel
 brauchten noch einen Detail-Abruf), 15 min 36 s im zweiten, 0
-Rate-Limit-Bremsungen. Vorab für alle 41 Regionen durchgerechnet: 1.057.089
-Anbieter-Zeilen gegenüber 744.685; Datenbank vorher 1.005 MB Tabelle / 1.387 MB
-gesamt.
+Rate-Limit-Bremsungen. Datenbank vorher 1.005 MB Tabelle / 1.387 MB gesamt.
 
 Weil die Kataloge weit auseinandergehen (Amazon Prime Video hat in den USA
 28.476 Titel, Apple TV+ überall rund 320), begrenzt nicht die Anbieterzahl,
@@ -443,11 +441,30 @@ künftiges Wachstum. Ein knapperer Wert hätte in GB und ES ausgerechnet Sky Go
 und Paramount+ gekostet — genau die Dienste, wegen derer der Ausbau gemacht
 wurde.
 
-Der Preis steht damit in den USA: 76.975 Zeilen bedeuten grob **19 MB JSON /
-6,5 MB gzip** je Seitenaufruf, gegenüber heute 6,9 MB. Falls das stört, ist
-`STREAM_MAX_ZEILEN` die Stellschraube (auch als Repository-Variable im
-Workflow setzbar): Bei 60.000 fielen dort die Live-TV-Pakete fuboTV und Philo
-heraus — zusammen 26.000 Zeilen —, ohne eine andere Region anzutasten.
+Das Budget rechnet mit `total_results`; eingelesen wird bei den größten
+Anbietern **weniger**, weil `/discover` höchstens 500 Seiten hergibt — 10.000
+Titel je Anbieter und Art. Amazon Prime Video kommt in den USA auf 23.482 Filme
+und wird auf 10.000 gekappt; die USA landeten deshalb mit 76.975 gerechneten
+Zeilen tatsächlich bei 61.776. Falls die Größe stört, ist `STREAM_MAX_ZEILEN`
+die Stellschraube (auch als Repository-Variable im Workflow setzbar): Bei
+60.000 fielen in den USA die Live-TV-Pakete fuboTV und Philo heraus, ohne eine
+andere Region anzutasten.
+
+*Ergebnis nach dem Vollausbau (Kette in der Nacht zum 17. August 2026).* Alle
+41 Regionen mit 12 Anbietern (CY: 11 — dort gibt es nicht mehr). **1.061.726
+Anbieter-Zeilen** statt 744.685 (+43 %), **135.049 verschiedene Titel** statt
+75.708; `streaming_cache` 1.761 MB statt 1.005 MB, Datenbank 2.173 MB statt
+1.387 MB. Kettenzeit einmalig **9 h 25 min** (20:00–05:25 UTC), weil die Titel
+der neuen Anbieter noch nirgends angereichert waren; ab dem Folgetag greift die
+Skip-Liste auch für sie (AT: 25 min 46 s im ersten, 15 min 36 s im zweiten
+Lauf). 40 der 41 Regionen liefen auf Anhieb durch; LU fiel mit einem
+vorübergehenden Fehler aus (Ableitung und Wiederholung danach fehlerfrei) und
+wurde von Hand nachgeholt. 0 Rate-Limit-Bremsungen.
+
+Gemessene Auslieferung von `/api/streaming` (JSON / gzip): AT 6,71 / 2,24 MB,
+DE 7,28 / 2,44, BR 8,31 / 2,79, GB 9,05 / 2,97, ES 10,25 / 3,48, **US 12,84 /
+4,28** (größte Region). DE vorher: 5,90 / 2,09 bei vier Anbietern — also +23 %
+bei dreifacher Anbieterzahl.
 
 *Ingest.* Die Zeilen gehen in Bündeln zu 500 in die Datenbank statt einzeln —
 28.000 Einzelabfragen je Region (77.000 für die USA) liefen in den

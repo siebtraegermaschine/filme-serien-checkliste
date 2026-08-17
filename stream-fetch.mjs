@@ -149,11 +149,18 @@ const MAX_ANBIETER   = Number(process.env.STREAM_MAX_PROVIDER || 12);
  * ausgerechnet Sky Go und Paramount+ gekostet, also genau die Dienste, wegen
  * derer der Ausbau gemacht wurde.
  *
- * Der Preis steht damit in den USA: 76.975 Zeilen bedeuten grob 19 MB JSON /
- * 6,5 MB gzip je Seitenaufruf (gemessen: AT 27.755 Zeilen = 6,81 MB /
- * 2,35 MB). Wird das zum Problem, ist STREAM_MAX_ZEILEN die Stellschraube --
- * bei 60.000 fielen dort die beiden Live-TV-Pakete fuboTV und Philo heraus
- * (zusammen 26.000 Zeilen), ohne eine andere Region anzutasten. */
+ * Zu beachten: Das Budget rechnet mit `total_results`, der eingelesene Bestand
+ * ist bei den groessten Anbietern KLEINER. /discover gibt hoechstens 500 Seiten
+ * her (siehe totalPages), also 10.000 Titel je Anbieter UND Art -- Amazon Prime
+ * Video kommt in den USA auf 23.482 Filme und wird damit auf 10.000 gekappt.
+ * Das Budget ist deshalb konservativer, als die Zahl vermuten laesst: Die USA
+ * landeten mit 76.975 gerechneten Zeilen tatsaechlich bei 61.776.
+ *
+ * Der Preis steht dort auch so: gemessen 12,84 MB JSON / 4,28 MB gzip je
+ * Seitenaufruf, gegenueber 6,71 / 2,24 fuer AT. Wird das zum Problem, ist
+ * STREAM_MAX_ZEILEN die Stellschraube -- bei 60.000 fielen in den USA die
+ * beiden Live-TV-Pakete fuboTV und Philo heraus, ohne eine andere Region
+ * anzutasten. */
 const MAX_ZEILEN     = Number(process.env.STREAM_MAX_ZEILEN || 90000);
 // Unter so vielen Abo-Titeln lohnt ein Anbieter die Laufzeit nicht.
 const MIN_TITEL      = Number(process.env.STREAM_MIN_TITEL || 50);
