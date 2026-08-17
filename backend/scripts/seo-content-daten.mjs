@@ -41775,4 +41775,309 @@ Diese Auszeichnung ist bezeichnend. Bei einer Serie, die ihre Wirkung wesentlich
 Acht Jahre Laufzeit von 1998 bis 2006 und 200 Folgen machen die Serie zu einer der langlebigen Sitcoms ihrer Zeit. In Deutschland begann die Ausstrahlung im Januar 2000, gut eineinhalb Jahre nach dem amerikanischen Start.
 
 Die Besetzung ist im Rückblick der auffälligste Punkt: Mehrere der jungen Darsteller wurden über die Serie hinaus bekannt.` },
+  // ---- Block 091 ----
+  {
+    bereich: 'titel', schluessel: 'movie:11596', locale: 'de-de',
+    text: `### Worum es geht
+
+Wes Craven plant einen neuen Film über Freddy Krueger. Gleichzeitig bekommt die Schauspielerin Heather Langenkamp rätselhafte Anrufe, und ihr Sohn Dylan leidet unter Albträumen.
+
+Was in Hollywood als Stoff für eine Fortsetzung verhandelt wird, greift auf die Wirklichkeit der Beteiligten über. Die Figur, die sie erfunden haben, hört auf, eine Figur zu sein.
+
+### Entstehungsgeschichte
+
+Wes Craven führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Robert Shaye.
+
+Heather Langenkamp spielt sich selbst und ihre frühere Rolle Nancy Thompson, John Saxon ebenso sich selbst und den Lt. Thompson, Robert Englund sich selbst und Freddy Krueger. Miko Hughes spielt Dylan Porter, David Newsom den Chase Porter.
+
+Die Kamera führte Mark Irwin, den Schnitt besorgte Patrick Lussier, die Musik stammt von J. Peter Robinson.
+
+Der Film erschien 1994, dauert 112 Minuten und ist ab 16 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Konstruktion ist der eigentliche Gegenstand. Ein Horrorfilm, in dem die Beteiligten des ursprünglichen Films sich selbst spielen und von ihrer eigenen Schöpfung heimgesucht werden — das ist ein Kommentar zur Reihe, nicht ihre Fortsetzung.
+
+Wes Craven tritt dabei doppelt auf: als Regisseur des Films und als Figur darin, die einen Film plant. Damit verhandelt er im Werk selbst die Frage, was das Erfinden solcher Gestalten anrichtet.
+
+Miko Hughes als Sohn ist die verletzlichste Figur der Anordnung. Das Kind hat mit der Filmgeschichte nichts zu tun und trägt die Folgen.
+
+Der Verzicht auf die übliche Fortsetzungsmechanik hat einen Preis, den die Kritik benannte: Wer eine Reihe fortschreibt, indem er über sie nachdenkt, verlangt vom Publikum mehr als einen Schrecken.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 20 Millionen Dollar ein.
+
+Das Lexikon des internationalen Films kritisierte die umständliche Erzählkonstruktion und vermisste psychologische wie ästhetische Tiefe.
+
+Dieser Einwand trifft die Anlage, nicht die Ausführung. Ein Film, der drei Ebenen zugleich bedient — die Handlung, die Filmproduktion darin und die Reihe, auf die er sich bezieht —, muss die Verschachtelung erklären, bevor er wirken kann.
+
+Bemerkenswert bleibt, dass Wes Craven selbst zurückkam, um die von ihm geschaffene Figur infrage zu stellen. In einer Reihe, die zu diesem Zeitpunkt bereits mehrere Fortsetzungen hinter sich hatte, ist das die ungewöhnlichste denkbare Bewegung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2067', locale: 'de-de',
+    text: `### Worum es geht
+
+2020 landen vier Astronauten unter Luke Graham auf dem Mars. In der Region Cydonia finden sie einen metallischen Berg — und einen Wirbelsturm, der nicht natürlich sein kann. Drei von ihnen kommen um.
+
+Lukes Hilferuf erreicht die Erde. Eine Rettungsmission bricht auf: Commander Woody Blake, seine Frau Terri, der Kopilot Jim McConnell und der Techniker Phil Ohlmyer. Ein Unfall im All lichtet auch ihre Reihen, bevor sie ankommen.
+
+### Entstehungsgeschichte
+
+Regie führte Brian De Palma. Das Drehbuch schrieben Jim Thomas, John Thomas und Graham Yost, produziert wurde der Film von Tom Jacobson.
+
+Gary Sinise spielt Jim McConnell, Tim Robbins den Woodrow „Woody" Blake, Don Cheadle den Luke Graham, Connie Nielsen die Terri Fisher, Jerry O'Connell den Phil Ohlmyer, Peter Outerbridge den Sergei Kirov, Kavan Smith den Nicholas Willis, Jill Teed die Reneé Coté, Elise Neal die Debra Graham, Kim Delaney die Maggie McConnell und Armin Mueller-Stahl den Ramier Beck.
+
+Die Musik stammt von Ennio Morricone, die Kamera von Stephen H. Burum, den Schnitt besorgte Paul Hirsch.
+
+Gedreht wurde in Jordanien, in Ontario und in den Mels-Filmstudios. Der Film dauert 114 Minuten, das Budget betrug 90 Millionen Dollar; der deutsche Kinostart war der 11. Mai 2000.
+
+### Hinter den Kulissen
+
+Der Film wechselt in der Mitte das Genre. Was als Katastrophenerzählung beginnt — eine Mission verunglückt, eine zweite bricht auf —, wird zur Begegnung mit einer außerirdischen Hinterlassenschaft.
+
+Die Wahl von Cydonia als Schauplatz ist dabei kein Zufall. Der Film siedelt sein Gesichtsmonument in einer Marsregion an, um die es seit Langem Spekulationen gibt — und nimmt diese Spekulation beim Wort.
+
+Die Besetzung ist ungewöhnlich hochkarätig für einen Science-Fiction-Film dieser Machart. Gary Sinise, Tim Robbins, Don Cheadle und Armin Mueller-Stahl in einem Ensemble, das über weite Strecken in Raumanzügen agiert.
+
+Ennio Morricone als Komponist ist der zweite Sonderfall — ein Name, den man in diesem Genre selten findet.
+
+### Einordnung & Wirkung
+
+Bei 90 Millionen Dollar Herstellungskosten spielte der Film über 100 Millionen ein.
+
+Die Kritik war ablehnend. Das Lexikon des internationalen Films bemängelte das derivative und wenig fesselnde Drehbuch. TV Spielfilm nannte ihn einen dramaturgischen Irrläufer ins All, der Elemente aus „2001: Odyssee im Weltraum" geplündert habe. Jeffrey Westhoff sprach von „2001 für Dummys".
+
+Alle drei Urteile machen dieselbe Rechnung auf: Der Film greift nach einem Vorbild, das er nicht erreicht. Der Vergleich mit Kubrick liegt bei einem Film über eine außerirdische Hinterlassenschaft und den Ursprung des Menschen nahe — und er fällt zwangsläufig zuungunsten des Neueren aus.
+
+Dass der Film trotzdem sein Budget übertraf, zeigt, dass die Erwartung an einen De-Palma-Weltraumfilm mit dieser Besetzung ausreichte, um ein Publikum zu bewegen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2114', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Jahr 2065 ist die Erde von den Phantomen überrannt — außerirdischen Wesen, gegen die kaum etwas hilft.
+
+Die Wissenschaftlerin Dr. Aki Ross verfolgt einen eigenen Ansatz: Sie sammelt acht bioätherische Wellenmuster, um daraus ein Gegenmuster zu erzeugen. Das Militär setzt derweil auf die Zeus-Kanone. General Hein sabotiert die Schutzbarriere von New York, um seine Waffe einsetzen zu können.
+
+### Entstehungsgeschichte
+
+Regie führten Hironobu Sakaguchi und Motonori Sakakibara, das Drehbuch schrieb Al Reinert. Produziert wurde der Film von Jun Aida.
+
+Ming-Na Wen spricht Aki Ross, Alec Baldwin den Captain Gray Edwards, James Woods den General Hein und Donald Sutherland den Dr. Sid.
+
+Die Musik stammt von Elliot Goldenthal, die Kamera von Motonori Sakakibara, den Schnitt besorgte Christopher S. Capp.
+
+Der Film arbeitete umfangreich mit Motion Capture, um computererzeugte Menschen glaubhaft darzustellen — es war der erste vollständig computeranimierte Kinofilm mit lebensecht gestalteten Menschen.
+
+Die Produktion kostete rund 130 Millionen Dollar, hinzu kamen 30 Millionen für die Vermarktung.
+
+### Hinter den Kulissen
+
+Der technische Anspruch war der Zweck des Films. Nicht die Geschichte stand am Anfang, sondern die Frage, ob sich Menschen fotorealistisch berechnen lassen — und zwar in einem abendfüllenden Kinofilm.
+
+Diese Ausrichtung erklärt die Kostenstruktur. 130 Millionen Dollar für einen Animationsfilm waren zu diesem Zeitpunkt eine außergewöhnliche Summe, und der Aufwand steckt in den Oberflächen: Haut, Haare, Licht.
+
+Erzählerisch bleibt der Film beim Genre. Eine Wissenschaftlerin gegen einen Militär, eine friedliche gegen eine gewaltsame Lösung — die Anlage ist konventionell, gerade weil die Technik es nicht war.
+
+Der Zusammenhang mit der Spielereihe, deren Namen der Film trägt, beschränkt sich auf Motive; die Handlung ist eigenständig.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 85 Millionen Dollar ein — bei 160 Millionen Gesamtkosten ein schwerer kommerzieller Misserfolg. Erst die spätere Auswertung auf DVD deckte die Kosten. Eine geplante Fortsetzung und ein Vorgängerfilm kamen nicht zustande.
+
+Das Lexikon des internationalen Films kritisierte die auf Dauer allzu ermüdende Wiederholung gleichförmiger Kampfszenen.
+
+Die Folgen reichten über den Film hinaus. In Japan führte der Misserfolg zu einer Rückbesinnung auf die zweidimensionale Animation im Anime-Bereich.
+
+Damit ist dieser Film ein Wendepunkt mit doppeltem Vorzeichen. Er bewies, dass fotorealistische Computermenschen technisch möglich sind — und dass der Aufwand sich nicht rechnete, wenn die Geschichte nicht trägt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:432068', locale: 'de-de',
+    text: `### Worum es geht
+
+Max ist Hochzeitsplaner und richtet die Feier von Pierre und Héléna aus, in einem Schloss bei Paris.
+
+Was schiefgehen kann, geht schief. Personal fällt aus, Technik versagt, Absprachen halten nicht. Max hält die Sache zusammen — und muss nebenbei entscheiden, wie es mit seiner Firma und mit seinem Privatleben weitergehen soll.
+
+### Entstehungsgeschichte
+
+Regie führten Olivier Nakache und Éric Toledano; sie schrieben auch das Drehbuch.
+
+Jean-Pierre Bacri spielt Max Angély, Eye Haïdara die Adèle, Gilles Lellouche den James, Jean-Paul Rouve den Guy, Vincent Macaigne den Julien, Benjamin Lavernhe den Pierre und Judith Chemla die Héléna.
+
+Produziert wurde der Film von Nicolas Duval, Yann Zenou und Laurent Zeitoun. Die Kamera führte David Chizallet, den Schnitt besorgte Dorian Rigal-Ansous, die Musik stammt von Avishai Cohen.
+
+Gedreht wurde im Schloss Courances, rund 45 Kilometer südöstlich von Paris.
+
+### Hinter den Kulissen
+
+Die Einheit von Ort und Anlass ist die Grundlage. Der Film bleibt bei einer einzigen Hochzeit an einem einzigen Schauplatz; alles, was geschieht, geschieht im Rahmen einer Feier, die stattfinden muss.
+
+Daraus ergibt sich die Perspektive. Erzählt wird nicht aus Sicht des Brautpaars, sondern aus der des Personals: Küche, Bedienung, Musik, Fotografie. Die Hochzeit ist hier ein Arbeitsvorgang.
+
+Das Schloss Courances liefert die Kulisse, die diesen Kontrast trägt. Ein prächtiger Rahmen, in dem hinter jeder Tür improvisiert wird.
+
+Die Besetzung ist als Ensemble angelegt. Kein Handlungsstrang dominiert; die Komik entsteht aus dem Zusammenspiel vieler kleiner Krisen.
+
+### Einordnung & Wirkung
+
+Beim Europäischen Filmpreis 2018 war der Film als beste Komödie und für den Publikumspreis nominiert.
+
+Eine Besprechung sprach von einem Film mit vielen tollen Momenten und lobte einen abwechslungsreichen, vielstimmigen Komödien-Choral.
+
+Der Begriff Choral trifft die Bauweise. Es gibt kein Zentrum, sondern viele Stimmen, die gleichzeitig laufen — genau das, was eine Hochzeitsgesellschaft ausmacht.
+
+2023 erschien eine deutsche Neuverfilmung unter dem Titel „Ein Fest fürs Leben", inszeniert von Richard Huber. Dass ein französischer Ensemblefilm über Dienstleister auf einer Hochzeit sechs Jahre später neu verfilmt wurde, spricht für die Übertragbarkeit der Anlage.` },
+  {
+    bereich: 'titel', schluessel: 'series:103768', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Virus hat die Welt verändert. Seither kommen Kinder zur Welt, die halb Mensch, halb Tier sind — Hybriden.
+
+Gus ist einer von ihnen: zehn Jahre alt, mit Hirschgeweih. Gemeinsam mit dem früheren Footballspieler Tommy Jepperd macht er sich auf den Weg, um seine Mutter zu finden und herauszubekommen, woher die Hybriden kommen.
+
+### Entstehungsgeschichte
+
+Vorlage ist die gleichnamige Comicreihe von Jeff Lemire.
+
+Jim Mickle schrieb und inszenierte den ursprünglichen Pilotfilm.
+
+Christian Convery spielt Gus, Nonso Anozie den Tommy Jepperd, Adeel Akhtar den Dr. Adi Singh; James Brolin spricht den Erzähler beziehungsweise den älteren Gus.
+
+Produziert wurde die Serie von Team Downey, Netflix, DC Entertainment und Warner Bros. Television; Melanie Turner und Evan Moore waren als Produzentinnen beteiligt.
+
+Es entstanden drei Staffeln mit insgesamt 24 Folgen, je acht pro Staffel. Gedreht wurde in Neuseeland — von Juli bis Dezember 2020 für die erste Staffel, von Januar bis Mai 2022 für die zweite, von September bis Dezember 2022 für die dritte.
+
+Die erste Staffel erschien am 4. Juni 2021 bei Netflix, die zweite am 27. April 2023, die dritte und letzte am 6. Juni 2024.
+
+### Hinter den Kulissen
+
+Die Ausgangslage verbindet zwei Genres, die selten zusammenkommen. Eine Endzeiterzählung mit Virus und zerfallener Ordnung trifft auf ein Märchen mit sprechenden Kindern und einem Hirschjungen.
+
+Lutz Göllner fasste das in die Formel „Bambi trifft Mad Max". Andreas Borcholte hielt im Spiegel fest, unter dem süßen Zuckerguss dieses Endzeit-Märchens offenbarten sich bittere Wahrheiten.
+
+Genau darin liegt die Konstruktion. Die kindliche Perspektive erlaubt es, Härte zu zeigen, ohne sie auszustellen — Gus versteht vieles nicht, was das Publikum versteht.
+
+Der Dreh in Neuseeland über drei Staffeln hinweg gab der Serie eine durchgehende Landschaft, die weder eindeutig verwüstet noch heil wirkt.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 98 Prozent Zustimmung aus. Alan Sepinwall vergab im Rolling Stone 3,5 von 5 Sternen.
+
+Drei Staffeln mit je acht Folgen sind ein abgeschlossener Zuschnitt. Die Serie wurde nicht abgesetzt, sondern zu Ende erzählt — bei Streamingproduktionen dieser Größenordnung keine Selbstverständlichkeit.
+
+Bemerkenswert ist der Abstand zwischen den Staffeln. Zwischen der ersten im Juni 2021 und der zweiten im April 2023 liegen fast zwei Jahre; die dritte folgte dann nach gut einem Jahr.
+
+Die Comicvorlage von Jeff Lemire liefert dabei den Rahmen. Dass DC Entertainment und Warner Bros. Television an der Produktion beteiligt waren, verweist auf die Herkunft des Stoffs aus einem Verlagsprogramm.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10715', locale: 'de-de',
+    text: `### Worum es geht
+
+DJ Drake verliert seine Stelle als Wachmann. Daffy Duck wird beim selben Studio gekündigt.
+
+Gemeinsam finden sie heraus, dass DJs Vater tatsächlich ein Spion ist. Von da an geht es um einen Diamanten namens „Der blaue Affe", hinter dem eine Konzernchefin her ist, die damit die Weltherrschaft erlangen will.
+
+### Entstehungsgeschichte
+
+Regie führte Joe Dante, das Drehbuch schrieb Larry Doyle.
+
+Brendan Fraser spielt DJ Drake, Jenna Elfman die Kate Houghton, Steve Martin den Mr. Chairman, Timothy Dalton den Damien Drake und Heather Locklear die Dusty Tails. Zu den Sprechern gehören Joe Alaskey als Bugs Bunny, Billy West als Elmer Fudd und Jeff Bennett als Yosemite Sam.
+
+Die Musik stammt von Jerry Goldsmith, die Kamera von Dean Cundey, den Schnitt besorgten Rick Finney und Marshall Harvey.
+
+Es handelt sich um eine amerikanisch-deutsche Produktion von 91 Minuten Länge aus dem Jahr 2003. Die Produktionskosten betrugen rund 80 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film mischt Realaufnahmen und Zeichentrick — ein Verfahren, das hohe Anforderungen an Kamera und Choreografie stellt, weil die Darsteller mit Figuren agieren müssen, die erst später ins Bild kommen.
+
+Joe Dante als Regisseur ist dabei eine folgerichtige Wahl. Seine Arbeiten leben von Verweisen auf Filmgeschichte, und dieser Film ist über weite Strecken eine Kette solcher Verweise.
+
+Auffällig ist die Selbstbezüglichkeit. Daffy Duck wird bei Warner Bros. gekündigt — der Film handelt also von Figuren, die für dasselbe Studio arbeiten, das ihn produziert.
+
+Jerry Goldsmith als Komponist gehört zu den Namen, die diesem Projekt mehr Gewicht geben, als der Anlass vermuten lässt.
+
+### Einordnung & Wirkung
+
+Bei rund 80 Millionen Dollar Herstellungskosten spielte der Film in den USA etwa 20,95 Millionen und weltweit rund 68,5 Millionen ein. Er gilt als kommerzieller Misserfolg.
+
+Roger Ebert verglich ihn mit „Falsches Spiel mit Roger Rabbit", merkte aber an, er wirke nicht ebenso inspiriert. Das Lexikon des internationalen Films kritisierte das einfallslose Drehbuch und lustlose Darsteller, räumte aber amüsante visuelle Effekte ein.
+
+2004 gab es Nominierungen für den Saturn Award, den Golden Satellite Award und vier Annie Awards.
+
+Der Vergleich mit „Roger Rabbit" ist der Maßstab, an dem sich jeder Film dieser Machart messen lassen muss — und er benennt zugleich das Problem: Das Verfahren war nicht mehr neu, und ohne Neuheit muss die Geschichte tragen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1071215', locale: 'de-de',
+    text: `### Worum es geht
+
+Plymouth in Massachusetts, ein Jahr nach einem Black-Friday-Ansturm im Supermarkt RightMart, bei dem Menschen zu Tode kamen.
+
+Nun tötet ein Maskierter im Kostüm des John Carver diejenigen, die an dem Tumult beteiligt waren. Jessica Wright und ihre Freunde geraten ins Visier.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf einem erfundenen Trailer aus „Grindhouse" von 2007.
+
+Regie führte Eli Roth. Das Drehbuch schrieb Jeff Rendell nach einer Geschichte von Roth und Rendell.
+
+Patrick Dempsey spielt Sheriff Eric Newlon, Nell Verlaque die Jessica Wright, Addison Rae die Gaby, Jalen Thomas Brooks den Bobby, Milo Manheim den Ryan, Rick Hoffman den Thomas Wright, Gina Gershon die Amanda Collins, Tim Dillon den Manny und Karen Cliche die Kathleen.
+
+Produziert wurde der Film von Eli Roth, Roger Birnbaum und Jeff Rendell für Spyglass Media Group, Dragonfly Entertainment und Electromagnetic Productions; den Verleih übernahm TriStar. Die Kamera führte Milan Chadima, den Schnitt besorgten Michele Conroy und Michel Aller, die Musik stammt von Brandon Roberts.
+
+Gedreht wurde vom 13. März bis zum 5. Mai 2023 in Toronto und Hamilton, Ontario. Das Budget betrug 15 Millionen Dollar. Der Kinostart war am 17. November 2023; digital erschien der Film am 19. Dezember 2023, auf Blu-ray und DVD am 30. Januar 2024 und am 17. Februar 2024 bei Netflix.
+
+### Hinter den Kulissen
+
+Die Herkunft ist ungewöhnlich. Der Film geht auf einen Trailer zurück, der 2007 als Scherz zwischen zwei anderen Filmen lief — sechzehn Jahre später wurde daraus ein abendfüllender Film.
+
+Der Ausgangspunkt ist dabei kein erfundener Schrecken. Ein tödlicher Ansturm am Black Friday liefert das Motiv; die Morde richten sich gegen die Beteiligten. Der Film verhandelt damit Konsumverhalten als Schuldfrage.
+
+Das Kostüm des John Carver knüpft an die Erzählung vom ersten Thanksgiving an — die Maske ist ein Gründungsmythos, der zur Tätergestalt wird.
+
+Bei 15 Millionen Dollar Budget und sieben Wochen Dreh in Ontario ist die Produktion knapp kalkuliert; der Aufwand steckt in den Effekten.
+
+### Einordnung & Wirkung
+
+Bei 15 Millionen Dollar Herstellungskosten spielte der Film weltweit 46,6 Millionen ein — 31,9 Millionen in den USA und Kanada, 14,6 Millionen im übrigen Ausland. Das Startwochenende brachte 10,4 Millionen und Platz vier.
+
+Rotten Tomatoes weist 83 Prozent positive Bewertungen aus (150 Kritiken, Schnitt 6,8 von 10); der Konsens dort nennt den Film ein Festmahl für Grindhouse-Anhänger, das derben Humor mit überzeichneter Gewaltdarstellung verbinde. Metacritic kommt auf 63 von 100. Beim Publikum ergab CinemaScore ein „B−", PostTrak 73 Prozent Zustimmung.
+
+Owen Gleiberman hielt in Variety fest, der Film folge klassischen Slasher-Regeln in zeitgemäßerer, unterhaltsamerer Aufmachung. G. Allen Johnson kritisierte im San Francisco Chronicle, der Film verschenke sein Potenzial.
+
+Eine Fortsetzung war geplant; im Januar 2026 wurde ihre Produktion verschoben, weil Addison Rae und Milo Manheim anderweitig gebunden waren.` },
+  {
+    bereich: 'titel', schluessel: 'movie:452832', locale: 'de-de',
+    text: `### Worum es geht
+
+Baker Dill führt ein Fischerboot auf einer tropischen Insel und jagt einen riesigen Gelbflossenthun, den er nicht bekommt.
+
+Dann steht seine frühere Frau Karen vor ihm. Ihr Angebot: zehn Millionen Dollar, wenn er ihren gewalttätigen Mann Frank tötet. Was zunächst wie ein Thriller im Küstenmilieu aussieht, führt in eine Richtung, mit der niemand rechnet.
+
+### Entstehungsgeschichte
+
+Steven Knight führte Regie und schrieb das Drehbuch.
+
+Matthew McConaughey spielt Baker Dill, Anne Hathaway die Karen Zariakas, Jason Clarke den Frank Zariakas, Diane Lane die Constance, Djimon Hounsou den Duke und Jeremy Strong den Reid Miller.
+
+Produziert wurde der Film von Guy Heeley, Steven Knight und Greg Shapiro. Die Kamera führte Jess Hall, den Schnitt besorgte Laura Jennings, die Musik stammt von Benjamin Wallfisch.
+
+Gedreht wurde von Juli bis Ende September 2017 auf Mauritius bei Trou-aux-Biches. Die Produktion erhielt dort einen staatlichen Zuschuss von 39 Prozent, was einen Skandal auslöste. Das Budget betrug 25 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film setzt alles auf eine Wendung. Bis dahin läuft er als Küstenthriller mit einem Mordangebot; danach ist er ein anderer Film. Genau diese Konstruktion wurde ihm zum Verhängnis — Kritiker hielten die Auflösung für unglaubwürdig.
+
+Die Besetzung war entsprechend hochkarätig. Matthew McConaughey, Anne Hathaway, Diane Lane, Djimon Hounsou und Jason Clarke in einem Film mit 25 Millionen Dollar Budget deuten auf ein Projekt, dem man einiges zutraute.
+
+Die Förderung auf Mauritius ist ein eigener Punkt. 39 Prozent staatlicher Zuschuss für eine ausländische Produktion führten vor Ort zu öffentlicher Kritik.
+
+Der Titel im Original — „Serenity" — bezeichnet das Boot der Hauptfigur und zugleich einen Zustand, den sie nicht erreicht.
+
+### Einordnung & Wirkung
+
+Bei 25 Millionen Dollar für Produktion und Vermarktung spielte der Film weltweit 14,45 Millionen an den Kinokassen ein, dazu 1,4 Millionen aus der Heimauswertung.
+
+Die Kritik fiel vernichtend aus. Rotten Tomatoes weist 21 Prozent aus, Metacritic 37 von 100. Beim Publikum ergab CinemaScore ein „D+". Kritiker nannten den Film verrückt und bemängelten die Wendung als unglaubwürdig; er landete auf mehreren Listen der schlechtesten Filme des Jahres 2019.
+
+Bemerkenswert ist der Widerspruch zwischen Anspruch und Ergebnis. Ein Autorenfilm mit dieser Besetzung, gedreht an einem außergewöhnlichen Ort, scheiterte an einer einzigen Entscheidung — der Frage, was der Film eigentlich ist.
+
+Dass sowohl Fachkritik als auch Publikum ihn ablehnten, ist selten. Meist geht eines von beiden mit; hier waren sich beide einig.` },
 ];
