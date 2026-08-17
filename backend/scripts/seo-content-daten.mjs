@@ -41177,4 +41177,307 @@ Bei 70 Millionen Dollar Herstellungskosten spielte der Film weltweit 180,5 Milli
 Die Aufnahme war überwiegend positiv. Justin Chang sprach in der LA Times von einer unerwartet reizvollen Herausforderung. Tom Jorgensen vergab bei IGN acht von zehn Punkten und lobte Selbstvertrauen, Energie und Herz. Charlotte O'Sullivan gab im Evening Standard vier von fünf Sternen. Rafael Motomayor nannte den Film bei SlashFilm einen der schönsten des Jahres. Brian Tallerico vergab auf RogerEbert.com 2,5 von 5 Sternen und kritisierte die Geschichte als zu oberflächlich.
 
 Mehrere Kritiker hielten ihn für den besten Film der Reihe.` },
+  // ---- Block 089 ----
+  {
+    bereich: 'titel', schluessel: 'series:67136', locale: 'de-de',
+    text: `### Worum es geht
+
+Drei Menschen kommen am selben Tag des Jahres 1980 zur Welt: die Zwillinge Kate und Kevin Pearson und Randall, den die Familie adoptiert. Ein drittes Zwillingskind stirbt bei der Geburt.
+
+Die Serie erzählt ihr Leben — und das ihrer Eltern Jack und Rebecca — auf mehreren Zeitebenen zugleich. Sie springt zwischen der Kindheit in Pittsburgh und der Gegenwart in New York, Los Angeles, New Jersey und Philadelphia.
+
+### Entstehungsgeschichte
+
+Die Idee stammt von Dan Fogelman.
+
+Milo Ventimiglia spielt Jack Pearson, Mandy Moore die Rebecca Pearson, Sterling K. Brown den Randall, Chrissy Metz die Kate, Justin Hartley den Kevin und Susan Kelechi Watson die Beth Pearson.
+
+Produziert wurde die Serie von Rhode Island Ave. Productions, Zaftig Films und 20th Century Fox Television. Die Musik stammt von Siddhartha Khosla.
+
+Es entstanden sechs Staffeln mit 106 Folgen von je 42 Minuten. In den USA lief die Serie vom 20. September 2016 bis zum 24. Mai 2022 bei NBC, in Deutschland ab dem 24. Mai 2017 bei ProSieben.
+
+### Hinter den Kulissen
+
+Die Erzählstruktur ist der Kern. Statt chronologisch zu erzählen, stellt die Serie Ereignisse aus verschiedenen Jahrzehnten nebeneinander — was in der Kindheit geschah, erklärt, was in der Gegenwart passiert, und umgekehrt.
+
+Das setzt eine Besetzungsentscheidung voraus, die selten so konsequent durchgehalten wird: Jede Figur muss in mehreren Lebensaltern glaubwürdig sein, teils durch dieselben Darsteller mit Maske, teils durch andere.
+
+Der Tod des dritten Zwillings am Anfang ist dabei mehr als ein Ausgangspunkt. Er erklärt, warum Randall in diese Familie kommt — und legt zugleich das Muster fest, nach dem die Serie arbeitet: Verlust und Ersatz gehören zusammen.
+
+Sechs Staffeln mit 106 Folgen bei einem Sender im klassischen Wochenrhythmus sind in dieser Zeit ein hoher Umfang.
+
+### Einordnung & Wirkung
+
+2017 erhielt die Serie bei den Seoul International Drama Awards den Hauptpreis Daesang.
+
+Bemerkenswert ist die Laufzeit von fast sechs Jahren bei einem großen Sender. Vom Start am 20. September 2016 bis zur letzten Folge am 24. Mai 2022 lief die Serie durch, ohne Unterbrechung im Staffelrhythmus.
+
+Die deutsche Ausstrahlung begann acht Monate nach der amerikanischen und lief über Jahre parallel weiter; ProSieben nahm damit ein Format ins Programm, dessen Erzählweise auf durchgehendes Zuschauen angewiesen ist.
+
+Für eine Serie, die auf mehreren Zeitebenen erzählt und über sechs Jahre lief, ist der Zusammenhalt die eigentliche Leistung: Jede Rückblende muss zu allem passen, was zuvor gezeigt wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:437', locale: 'de-de',
+    text: `### Worum es geht
+
+Fünf Menschen wachen in einem Komplex aus würfelförmigen Räumen auf. Niemand weiß, wie er hierhergekommen ist.
+
+Schnell zeigt sich, dass hier andere Regeln gelten. Der Komplex entspricht einem Tesserakt — einem vierdimensionalen Würfel. Räume wiederholen sich, Zeit läuft ungleich, und Personen begegnen sich selbst.
+
+### Entstehungsgeschichte
+
+Regie führte Andrzej Sekuła, der auch die Kamera übernahm. Das Drehbuch schrieb Sean Hood, produziert wurde der Film von Suzanne Colvin-Goulding.
+
+Kari Matchett spielt Kate Filmore, Geraint Wyn Davies den Simon Grady, Grace Lynn Kung die Sasha, Matthew Ferguson den Max Reisler und Neil Crone den Jerry Whitehall.
+
+Die Musik stammt von Norman Orenstein, den Schnitt besorgte Mark Sanders.
+
+Es handelt sich um eine kanadische Produktion von 90 Minuten Länge, freigegeben ab 16 Jahren. Gedreht wurde in Los Angeles und Toronto.
+
+### Hinter den Kulissen
+
+Die Fortsetzung tauscht das Prinzip aus. Wo der Vorgänger mit tödlichen Fallen arbeitete, setzt dieser Film auf Physik, die nicht gilt — die Bedrohung ist der Raum selbst, nicht das, was darin lauert.
+
+Das ist eine Entscheidung mit Folgen für die Spannung. Fallen lassen sich umgehen; eine Geometrie, die sich nicht an Regeln hält, nicht. Der Film gewinnt dadurch an Rätselhaftigkeit und verliert an unmittelbarer Gefahr.
+
+Dass Andrzej Sekuła Regie führte und zugleich die Kamera bediente, passt zum Gegenstand. Ein Film, dessen Wirkung fast vollständig auf Bildgestaltung beruht, wurde von einem Bildgestalter inszeniert.
+
+Die Ausstattung ist dabei denkbar reduziert: weiße Räume, kaum Requisiten. Was der Film zeigt, muss aus Anordnung entstehen.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films bescheinigte dem Film, er besteche durch das visuelle Konzept, weise aber erhebliche Mängel bei Dramaturgie und Spannungsaufbau auf.
+
+Cinema nannte ihn ein gruseliges Würfelspiel, das trotz schwacher Dialoge eine fesselnde Fortsetzung darstelle.
+
+Beide Urteile trennen dieselben beiden Ebenen. Die Idee und ihre Umsetzung im Bild überzeugen; was zwischen den Figuren geschieht, überzeugt weniger.
+
+Das ist die typische Schwierigkeit dieser Anlage. Ein Film, der auf einer geometrischen Idee beruht, braucht Figuren, die man begleiten mag — und die Konstruktion arbeitet gegen sie, weil sie austauschbar werden müssen, sobald sich Räume und Personen vervielfältigen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:80280', locale: 'de-de',
+    text: `### Worum es geht
+
+Koldo und Clara feiern ihre Hochzeit in einem Landhaus. Die Feier ist groß, die Stimmung gut.
+
+Dann bricht ein Gast zusammen — ein Tierarzt, der sich zuvor angesteckt hat. Was von ihm ausgeht, erfasst binnen kurzem die Gesellschaft. Koldo und Clara werden getrennt, und beide haben von da an nur noch ein Ziel: den anderen wiederzufinden.
+
+### Entstehungsgeschichte
+
+Regie führte Paco Plaza. Das Drehbuch schrieb er gemeinsam mit Luiso Berdejo; die Geschichte stammt von Berdejo, Plaza und David Gallart.
+
+Leticia Dolera spielt Clara, Diego Martín den Koldo, Ismael Martínez den Rafa, Àlex Monner den Adrián und Sr. B den Atún.
+
+Produziert wurde der Film von Julio Fernández. Die Kamera führte Pablo Rosso, den Schnitt besorgte David Gallart, die Musik stammt von Mikel Salas.
+
+Gedreht wurde in sieben Wochen von April bis Mai 2011 in Barcelona. Das Budget betrug fünf Millionen Euro, umgerechnet 6,4 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der dritte Teil bricht mit dem Verfahren der Reihe. Er beginnt mit Handkamera-Aufnahmen von der Hochzeit und verlässt diese Form dann — der Rest ist konventionell gefilmt.
+
+Das ist die auffälligste und umstrittenste Entscheidung. Was die Reihe ausgezeichnet hatte, gibt dieser Film bewusst auf; die Kritik hat ihm genau das vorgehalten.
+
+Die Hochzeit als Schauplatz liefert dafür einen Ausgleich. Eine Feier versammelt Menschen in festlicher Kleidung an einem Ort, den sie nicht kennen — und macht aus Brautkleid und Anzug Arbeitskleidung für das, was folgt.
+
+Sieben Wochen Dreh bei fünf Millionen Euro Budget beschreiben eine Produktion mit klaren Grenzen, die auf einen einzigen Schauplatz setzt.
+
+### Einordnung & Wirkung
+
+Bei 6,4 Millionen Dollar Herstellungskosten spielte der Film 10,1 Millionen ein.
+
+Rotten Tomatoes weist 40 Prozent aus (47 Bewertungen), Metacritic 45 von 100 (11 Kritiken).
+
+Der zentrale Vorwurf lautete, der Film gebe die Handkameraperspektive seiner Vorgänger auf und verliere damit die frische Sicht, die die Reihe ausgezeichnet habe.
+
+Dieser Einwand trifft eine grundsätzliche Frage bei Fortsetzungen. Eine Reihe, die über ein formales Verfahren definiert ist, kann dieses Verfahren nicht ohne Verlust ablegen — auch wenn die Abnutzung des Verfahrens selbst ein Grund für den Wechsel gewesen sein mag.` },
+  {
+    bereich: 'titel', schluessel: 'movie:446894', locale: 'de-de',
+    text: `### Worum es geht
+
+Der junge Yeti Migo lebt in einem Dorf oberhalb der Wolken. Dort ist klar: Menschen gibt es nicht.
+
+Dann stürzt unter der Wolkendecke ein Pilot ab, und Migo sieht ihn — einen „Smallfoot". Sein Dorf bestreitet das. Migo gründet mit anderen Yetis ein Komitee, um Beweise zu suchen. Der Dokumentarfilmer Percy wird zum Bindeglied zwischen den beiden Welten.
+
+### Entstehungsgeschichte
+
+Vorlage ist das Kinderbuch „Yeti Tracks" von Sergio Pablos.
+
+Regie führte Karey Kirkpatrick, Co-Regie Jason Reisig. Das Drehbuch schrieben Kirkpatrick und Clare Sera.
+
+Im Original sprechen Channing Tatum den Migo, James Corden den Percy, Zendaya die Meechee, Common den Steinhüter und Danny DeVito den Dorgle. In der deutschen Fassung sprechen Kostja Ullmann den Migo mit Toby Heinz als Gesangsstimme, Tim Schwarzmaier den Percy, Aylin Tezel die Meechee mit Debby van Dooren als Gesangsstimme, Ingo Albrecht den Steinhüter und Alexander Duda den Dorgle.
+
+Produziert wurde der Film von Bonne Radford, Glenn Ficarra und John Requa. Die Musik stammt von Heitor Pereira, den Schnitt besorgte Peter Ettinger.
+
+Der Film erschien 2018, dauert 96 Minuten und ist ohne Altersbeschränkung freigegeben. Der deutsche Kinostart war der 11. Oktober 2018.
+
+### Hinter den Kulissen
+
+Die Umkehrung ist der Einfall. Nicht Menschen suchen den Yeti, sondern ein Yeti sucht den Menschen — und in seiner Gemeinschaft gilt als ausgemacht, dass es Menschen nicht gibt.
+
+Daraus folgt der eigentliche Gegenstand. Migos Dorf hält an Steintafeln fest, auf denen die Ordnung der Welt festgeschrieben ist; wer etwas anderes sieht, stellt nicht eine Tatsache infrage, sondern die Grundlage des Zusammenlebens.
+
+Der Steinhüter ist die Figur, an der das hängt. Er verwaltet die Regeln — und der Film räumt ihm mehr ein als die Rolle des Bösewichts.
+
+Die Verständigungsschwierigkeit zwischen Yeti und Mensch liefert dazu die Komik: Was der eine sagt, hört der andere als Gebrüll.
+
+### Einordnung & Wirkung
+
+Antje Wessels beschrieb den Film als Beispiel dafür, wie Filmemacher ihr Projekt unterschwellig mit mehr anreichern können als mit oberflächlichen Botschaften.
+
+Cinema.de lobte die knalligen Farben und die rhythmischen Popsongs und hob hervor, dass die Sprachbarriere zwischen Mensch und Yeti für viele Lacher sorge.
+
+Beide Urteile treffen dieselbe Doppelung. Der Film funktioniert als bunter Familienfilm mit Musiknummern — und trägt darunter eine Frage, die weiterreicht: was geschieht, wenn jemand eine Gemeinschaftserzählung widerlegt.
+
+Dass die deutsche Fassung für zwei Figuren eigene Gesangsstimmen besetzte, zeigt, welches Gewicht die Musiknummern in diesem Film haben.` },
+  {
+    bereich: 'titel', schluessel: 'series:60743', locale: 'de-de',
+    text: `### Worum es geht
+
+John Constantine ist Exorzist. Er kämpft gegen dämonische Kräfte — und zugleich darum, seine Seele von dem reinzuwaschen, was er früher getan hat.
+
+Er wird vor einer aufziehenden Dunkelheit gewarnt, die die Welt bedroht.
+
+### Entstehungsgeschichte
+
+Vorlage sind die Hellblazer-Comics von DC Comics.
+
+Erschaffen wurde die Serie von Daniel Cerone und David S. Goyer.
+
+Matt Ryan spielt John Constantine, Angélica Celaya die Zed Martin, Charles Halford den Chas Chandler, Harold Perrineau Jr. den Engel Manny, Michael James Shaw den Papa Midnite, Emmett J. Scanlan den Jim Corrigan und Jeremy Davies den Ritchie Simpson.
+
+Produziert wurde die Serie von Ever After und Phantom Four Productions, DC Entertainment und Warner Bros. Television. Die Musik stammt von Bear McCreary.
+
+Es entstand eine Staffel mit dreizehn Folgen, ausgestrahlt vom 24. Oktober 2014 bis zum 13. Februar 2015 bei NBC. Wegen schwacher Zuschauerzahlen wurde die Serie danach eingestellt.
+
+### Hinter den Kulissen
+
+Die Absetzung nach einer Staffel ist nicht das Ende der Figur gewesen. Matt Ryan spielte Constantine anschließend in „Arrow", dann in „Legends of Tomorrow" — dort ab der dritten Staffel als Gast und ab der vierten in einer Hauptrolle.
+
+Das ist ein ungewöhnlicher Verlauf. Eine Serie scheitert an den Quoten, ihr Hauptdarsteller behält die Rolle und wechselt mit ihr in andere Formate desselben Verbunds.
+
+Der Grund liegt in der Anlage. Constantine ist eine Comicfigur mit eigener Vorgeschichte, die sich in verschiedene Erzählungen einfügen lässt — die Serie war ein Versuch, sie eigenständig zu tragen; als er misslang, blieb die Figur.
+
+Dreizehn Folgen bei einem großen Sender sind dabei die klassische Probestrecke. Sie reichen für einen Handlungsbogen, aber nicht für eine Etablierung.
+
+### Einordnung & Wirkung
+
+Die Serie lief keine vier Monate — vom 24. Oktober 2014 bis zum 13. Februar 2015.
+
+Für eine Produktion mit dieser Ausstattung ist das ein knapper Zeitraum. Bear McCreary als Komponist und die Beteiligung von DC Entertainment und Warner Bros. Television deuten auf Erwartungen, die sich nicht erfüllten.
+
+Das eigentliche Ergebnis liegt außerhalb der Serie. Dass Matt Ryan die Rolle über Jahre in anderen Formaten weiterspielte, ist die deutlichste Anerkennung, die diese Produktion erfahren hat — nicht die Serie überzeugte, sondern ihre Besetzung.
+
+Für den Umgang mit Comicstoffen im Fernsehen jener Jahre ist der Fall aufschlussreich: Figuren überleben ihre Serien, wenn ein Verbund existiert, in den sie hinüberwechseln können.` },
+  {
+    bereich: 'titel', schluessel: 'movie:512895', locale: 'de-de',
+    text: `### Worum es geht
+
+Lady, ein Cocker Spaniel, kommt zu Weihnachten als Geschenk in eine Familie. Sie freundet sich mit den Hunden der Nachbarschaft an.
+
+Dann begegnet sie Tramp, einem Straßenhund ohne Zuhause. Nach einem Missverständnis mit den Katzen der Tante landet Lady im Tierheim. Tramp holt sie dort heraus und zeigt ihr die Stadt aus seiner Perspektive.
+
+### Entstehungsgeschichte
+
+Regie führte Charlie Bean. Das Drehbuch schrieben Andrew Bujalski und Kari Granlund.
+
+Tessa Thompson spricht Susi, Justin Theroux den Strolch, Ashley Jensen die Jackie, Sam Elliott den Trusty, Janelle Monáe die Peg und Benedict Wong den Bull. In den Realrollen sind Kiersey Clemons als Darling, Thomas Mann als Jim Dear und Yvette Nicole Brown als Tante Sarah zu sehen.
+
+Produziert wurde der Film von Brigham Taylor. Die Musik stammt von Joseph Trapanese, die Kamera von Enrique Chediak. Der Film dauert 104 Minuten.
+
+Der Start war am 12. November 2019 bei Disney+; in Deutschland war er ab dem 24. März 2020 verfügbar.
+
+### Hinter den Kulissen
+
+Die Neuverfilmung arbeitet mit echten Hunden statt mit Zeichentrick. Das verändert alles: Was gezeichnet als Ausdruck funktioniert, muss hier über Blick, Haltung und Schnitt entstehen.
+
+Bemerkenswert ist der Umgang mit der Vorlage. Die Süddeutsche Zeitung hebt hervor, dass die Neufassung problematische Elemente des Originals entfernt hat.
+
+Zugleich zeigt die neue Fassung, wie die SZ es nennt, Diversity-Pärchen. Die Besetzung der menschlichen Rollen ist entsprechend anders angelegt als im Original.
+
+Der Verzicht auf einen Kinostart gehört zur Einordnung. Der Film erschien als Startprogramm eines neuen Streamingdienstes.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films vergab drei von fünf Sternen.
+
+Die Süddeutsche Zeitung hob die Überarbeitung problematischer Elemente und die veränderte Besetzung hervor.
+
+Diese Einordnung beschreibt den Zweck solcher Neuverfilmungen genauer als jede Bewertung der Machart. Ein alter Zeichentrickstoff wird nicht neu verfilmt, weil die frühere Fassung technisch veraltet wäre, sondern weil Teile davon nicht mehr gezeigt werden sollen.
+
+Dass der Film am 12. November 2019 direkt auf Disney+ erschien und Deutschland erst vier Monate später erreichte, zeigt zugleich die damalige Lage: Der Dienst startete in verschiedenen Ländern zu unterschiedlichen Zeitpunkten, und die Verfügbarkeit der Filme folgte diesem Takt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:84332', locale: 'de-de',
+    text: `### Worum es geht
+
+Darius Britt hat ihren Abschluss an der University of Washington gemacht und ist als Praktikantin beim Seattle Magazine gelandet. Begeistert ist sie davon nicht.
+
+Der Journalist Jeff Schwensen nimmt sie mit auf eine Recherche: Jemand hat eine Kleinanzeige aufgegeben und sucht einen Begleiter für eine Zeitreise. Sie finden Kenneth Calloway, einen Lagerarbeiter. Darius soll sein Vertrauen gewinnen — und stellt dabei fest, dass er tatsächlich glaubt, was er schreibt.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf einer realen Kleinanzeige. Sie erschien in der Ausgabe September/Oktober 1997 des Backwoods Home Magazine; der leitende Redakteur John Silveira hatte sie als Platzhalter und Scherz verfasst. Die Anzeige wurde zum Selbstläufer, brachte tausende Zuschriften ein, tauchte in der „Tonight Show" auf und wurde in der Radiosendung „Car Talk" besprochen.
+
+Regie führte Colin Trevorrow — sein Spielfilmdebüt. Das Drehbuch schrieb Derek Connolly, der 2007 auf die Anzeige stieß und sie zunächst für echt hielt. Seine erste Fassung war als Buddy-Komödie angelegt; die Hauptrolle schrieb er später eigens für Aubrey Plaza um. Connolly suchte Silveira auf und erhielt dessen Einverständnis.
+
+Aubrey Plaza spielt Darius Britt, Mark Duplass den Kenneth Calloway, Jake Johnson den Jeff Schwensen, Karan Soni den Arnau, Jenica Bergere die Liz, Mary Lynn Rajskub die Bridget, Kristen Bell die Belinda und Jeff Garlin den Vater.
+
+Produziert wurde der Film von Marc Turtletaub, Peter Saraf, Stephanie Langhoff, Derek Connolly und Colin Trevorrow für Big Beach und Duplass Brothers Productions; den Verleih übernahm FilmDistrict. Die Kamera führte Benjamin Kasulke mit einer Sony F3 und alten Panavision-Objektiven; angestrebt war die Anmutung der Filme Hal Ashbys. Die Musik stammt von Ryan Miller, den Schnitt besorgten Franklin Peterson und Joe Landauer.
+
+Gedreht wurde in Seattle, in Ocean Shores und im Umkreis von rund 50 Kilometern um Seattle. Das Budget betrug 750.000 Dollar.
+
+### Hinter den Kulissen
+
+Die Konstruktion hält eine Frage offen, die sie erst am Schluss beantwortet: Ist Kenneth verrückt oder hat er recht? Der Film nimmt beide Möglichkeiten ernst und macht daraus keine Pointe, sondern eine Haltung.
+
+Darius' Auftrag verkehrt sich dabei. Sie soll ihn ausforschen und beginnt, ihm zu glauben — und der Journalismus, der sie hergeführt hat, wird zur Nebensache.
+
+Die technische Wahl passt dazu. Eine digitale Kamera mit alten Objektiven und die erklärte Absicht, wie Hal Ashby auszusehen, zielen auf eine Wärme, die dem Stoff sonst fehlen würde.
+
+750.000 Dollar Budget bedeuten: keine Ausstattung, keine Effekte. Der Film muss aus Gesprächen entstehen.
+
+### Einordnung & Wirkung
+
+Bei 750.000 Dollar Herstellungskosten spielte der Film 4,4 Millionen ein.
+
+Rotten Tomatoes weist 91 Prozent aus (150 Kritiken, Schnitt 7,40 von 10), Metacritic 72 von 100.
+
+Stephen Holden hob in der New York Times das klagende Grundthema hervor — die verblassenden Träume von Berufsanfängern in den Zwanzigern und Dreißigern. Roger Ebert lobte die Qualität der Dialoge, Figuren mit Tiefe und Dimension sowie Mark Duplass' ausgewogene Leistung.
+
+Ausgezeichnet wurde der Film unter anderem mit dem Waldo Salt Screenwriting Award in Sundance und dem Independent Spirit Award für das beste Erstlingsdrehbuch, beides für Derek Connolly; Aubrey Plaza erhielt den ALMA Award und den Young Hollywood Award. Hinzu kamen Nominierungen für Colin Trevorrow als vielversprechendster Filmemacher und für das Ensemble beim Gotham Independent Film Award.` },
+  {
+    bereich: 'titel', schluessel: 'movie:86828', locale: 'de-de',
+    text: `### Worum es geht
+
+Außerirdische wählen zufällig einen Erdbewohner aus und geben ihm Kräfte: Neil kann alles wahr werden lassen, was er ausspricht. Nutzt er sie für etwas Gutes, bleibt die Erde bestehen; andernfalls nicht.
+
+Neil versucht zunächst, damit seine Nachbarin Catherine zu beeindrucken. Seine gut gemeinten Anordnungen haben Folgen, die er nicht bedacht hat.
+
+### Entstehungsgeschichte
+
+Terry Jones führte Regie und schrieb das Drehbuch gemeinsam mit Gavin Scott.
+
+Simon Pegg spielt Neil, Kate Beckinsale die Catherine, Sanjeev Bhaskar den Ray, Rob Riggle den Grant, Robert Bathurst den James Cleverill und Eddie Izzard den Schulleiter. Robin Williams spricht den Hund Dennis. Die Anführerin der Außerirdischen spricht John Cleese, weitere Aliens sprechen Terry Gilliam, Michael Palin, Eric Idle und Terry Jones selbst.
+
+Produziert wurde der Film von Bill Jones und Ben Timlett. Die Musik stammt von George Fenton, die Kamera von Peter Hannan, den Schnitt besorgte Julian Rodd.
+
+Der Film erschien 2015, dauert 86 Minuten und ist ab 6 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Besetzung der Außerirdischen ist der bemerkenswerteste Punkt. John Cleese, Terry Gilliam, Michael Palin, Eric Idle und Terry Jones sprechen sie gemeinsam — die Monty-Python-Gruppe in einer Nebenrolle, die aus dem Off kommt.
+
+Robin Williams spricht den Hund Dennis — die einzige Figur, mit der Neil offen reden kann, sobald er die Kräfte hat.
+
+Die Prämisse folgt einer alten Komödienregel: Wünsche gehen wörtlich in Erfüllung. Wer ungenau formuliert, bekommt genau das, was er gesagt hat — und die Folgen reichen von globalem Übergewicht bis zu einer Kältewelle.
+
+86 Minuten sind knapp bemessen. Der Film setzt auf eine Kette von Einfällen, nicht auf Entwicklung.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 20 Prozent aus, Metacritic 31 von 100.
+
+Ein Kritiker hielt fest, es gebe zwar ein paar Lacher, mehrheitlich bewege sich die Komödie aber auf einem Niveau, das abseits der Vorschule kaum noch zu begeistern wisse.
+
+Dieses Urteil steht in einem schwer erträglichen Verhältnis zu den Namen, die an dem Film beteiligt waren. Terry Jones auf dem Regiestuhl, vier weitere Pythons als Sprecher, Simon Pegg in der Hauptrolle und Robin Williams als Hund — die Erwartung war eine andere.
+
+Genau darin liegt die Schwierigkeit solcher Projekte. Eine Versammlung bekannter Namen ersetzt kein Drehbuch, und die Fallhöhe steigt mit jedem zusätzlichen.` },
 ];
