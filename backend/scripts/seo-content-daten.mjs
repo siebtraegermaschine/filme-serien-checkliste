@@ -26354,4 +26354,231 @@ Weltweit spielte der Film 13,6 Millionen Dollar ein, davon nur 3 Millionen im be
 Bemerkenswert ist die Auswertung danach: Der Film lief im Verleihgeschäft außergewöhnlich gut und stand drei Wochen in Folge in den Top Ten der Automaten von Redbox. Egoyan hat später festgehalten, dass er damit mehr eingebracht habe als jeder seiner früheren Filme.
 
 Die Kritik urteilte gemischt: 52 Prozent bei Rotten Tomatoes, 49 von 100 bei Metacritic. Roger Ebert vergab dreieinhalb Sterne, andere warfen dem Film vor, ins Alberne abzugleiten.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:10775', locale: 'de-de',
+    text: `### Worum es geht
+
+Chan Wing-yan wurde als junger Mann von der Polizeiakademie geworfen — scheinbar. Tatsächlich hat ihn sein Vorgesetzter Wong in eine Triade eingeschleust, und seit zehn Jahren lebt er dort als Verbrecher, ohne dass irgendjemand außer Wong seine Akte kennt.
+
+Lau Kin-ming ging denselben Weg in die andere Richtung: Der Triadenchef Sam schickte ihn als Jugendlichen zur Polizei, wo er inzwischen befördert wurde und Zugriff auf alles hat. Bei einem misslungenen Zugriff wird beiden Seiten klar, dass es in ihren Reihen einen Verräter gibt — und jeder der beiden Männer bekommt den Auftrag, den jeweils anderen zu finden.
+
+### Entstehungsgeschichte
+
+Regie führten Andrew Lau und Alan Mak, das Drehbuch schrieben Mak und Felix Chong. Angeregt wurden sie von John Woos "Im Körper des Feindes" — allerdings ohne dessen Science-Fiction: Der Identitätstausch geschieht hier nicht durch Operation, sondern durch Jahre der Anpassung.
+
+Tony Leung spielt den verdeckten Polizisten, Andy Lau den eingeschleusten Triaden; daneben sind Anthony Wong und Eric Tsang zu sehen.
+
+### Hinter den Kulissen
+
+Der Film erschien in einer Zeit, in der das Kino Hongkongs schwer angeschlagen war — durch Raubkopien, durch die Abwanderung von Regisseuren nach Hollywood und durch den Wettbewerb mit amerikanischen Produktionen. Er gilt als der Film, der die Branche dort wieder aufgerichtet hat.
+
+Erzählerisch bemerkenswert ist die Spiegelung: Beide Hauptfiguren führen dasselbe Leben in umgekehrter Richtung, und der Film schneidet ihre Szenen so, dass sie einander entsprechen — bis hin zu einem Treffen in einem Hi-Fi-Geschäft, bei dem keiner den anderen erkennt.
+
+### Einordnung & Wirkung
+
+In Hongkong spielte der Film rund 55,1 Millionen Hongkong-Dollar ein.
+
+Bei den 22. Hong Kong Film Awards gewann er sieben von sechzehn Nominierungen, darunter bester Film und beste Regie. Tony Leung wurde sowohl dort als auch bei den Golden Horse Awards als bester Hauptdarsteller ausgezeichnet. Bei Rotten Tomatoes steht der Film bei 94 Prozent.
+
+Martin Scorsese verfilmte den Stoff 2006 als "Departed — Unter Feinden" neu. Diese Fassung gewann den Oscar als bester Film und brachte Scorsese seinen ersten Regie-Oscar überhaupt ein.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8489', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film beginnt 1964 in Miami, wo der 22-jährige Cassius Clay gegen Sonny Liston antritt und als krasser Außenseiter Weltmeister wird. Am Tag darauf gibt er seinen Übertritt zur Nation of Islam bekannt und legt den Namen ab, den er den Namen eines Sklavenhalters nennt.
+
+Über zehn Jahre folgt der Film Muhammad Ali: die Weigerung, zum Militärdienst nach Vietnam einzurücken, der Entzug des Titels und der Boxlizenz, drei Jahre ohne Kampf, die Rückkehr, der Bruch mit der Nation of Islam nach dem Mord an Malcolm X — bis zum "Rumble in the Jungle" 1974 in Kinshasa gegen George Foreman.
+
+### Entstehungsgeschichte
+
+Die Entwicklung begann 1992, als Produzent Paul Ardaji Muhammad Ali dazu bewegte, den Film zu genehmigen. Michael Mann führte Regie.
+
+Will Smith spielt Ali, Jon Voight den Sportreporter Howard Cosell, Jamie Foxx den Betreuer Drew Bundini Brown und Mario Van Peebles Malcolm X.
+
+Das Budget lag zwischen 107 und 118 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen am 11. Januar 2001 in Los Angeles, New York, Chicago, Miami und in Mosambik.
+
+Will Smith nahm für die Rolle erheblich an Gewicht zu und trainierte über lange Zeit Boxen — er wollte die Kämpfe selbst bestreiten statt sie andeuten zu lassen. Jon Voights Verwandlung in Howard Cosell verlangte umfangreiche Maskenarbeit.
+
+Michael Mann erzählt den Film ungewöhnlich unerklärt: Es gibt keine Rückblenden und keine Erzählstimme, und wer die Zeitgeschichte nicht kennt, muss vieles aus Andeutungen erschließen.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 87,7 Millionen Dollar ein und blieb damit deutlich unter seinen Kosten.
+
+Die Kritik urteilte überwiegend wohlwollend: 69 Prozent bei Rotten Tomatoes; Roger Ebert fiel zurückhaltender aus.
+
+Will Smith wurde als bester Hauptdarsteller für den Oscar nominiert, Jon Voight als bester Nebendarsteller. Hinzu kamen Auszeichnungen bei den BET Awards, den Black Reel Awards, den NAACP Image Awards und der Chicagoer Filmkritik.` },
+  {
+    bereich: 'titel', schluessel: 'movie:136418', locale: 'de-de',
+    text: `### Worum es geht
+
+Joseph Smith war Elitesoldat in Afghanistan und lebt in London auf der Straße, alkoholabhängig und auf der Flucht vor einem Militärgericht. Bei einem Überfall bricht er in eine leerstehende Wohnung ein, deren Mieter für Monate im Ausland ist.
+
+Er zieht dort ein, nimmt dessen Namen an und arbeitet zunächst als Küchenhilfe, dann für die chinesische Unterwelt. Das Geld schickt er der Ordensschwester Cristina, die eine Suppenküche betreibt. Als seine frühere Weggefährtin von der Straße tot aufgefunden wird, sucht er den Mörder — und der Film fragt, ob sich ein zerstörtes Leben durch die Zerstörung eines anderen richten lässt.
+
+### Entstehungsgeschichte
+
+Steven Knight schrieb das Drehbuch und führte Regie; es war seine erste Regiearbeit. Er hatte zuvor die Drehbücher zu "Kleine schmutzige Tricks" und "Tödliche Versprechen" verfasst und entwickelte später "Peaky Blinders".
+
+Der Film lief in verschiedenen Ländern unter verschiedenen Titeln: als "Hummingbird" in Großbritannien, als "Redemption" in den USA und in Deutschland, als "Crazy Joe" in Frankreich.
+
+### Hinter den Kulissen
+
+Gedreht wurde fast ausschließlich nachts an Londoner Schauplätzen, darunter die Dartford-Querung, Covent Garden und die Umgebung des Royal Opera House. Die Kamera führte Chris Menges, die Musik schrieb Dario Marianelli. Das Budget lag bei 20 Millionen Dollar.
+
+Jason Statham spielt gegen sein übliches Rollenbild: Die Figur ist beschädigt, unsicher und über weite Strecken passiv. Agata Buzek spielt die Nonne Cristina.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 12,6 Millionen Dollar ein und blieb damit deutlich unter seinem Budget.
+
+Die Kritik urteilte gemischt: Bei Rotten Tomatoes hieß es, der Film habe zwar mehr im Sinn als der übliche Statham-Thriller, schöpfe seine Ausgangslage aber nicht aus; Metacritic vergab 43 von 100.
+
+Er ist damit vor allem als Ausnahme interessant — der eine Film, in dem Statham etwas anderes versucht hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:241257', locale: 'de-de',
+    text: `### Worum es geht
+
+Minnesota im Jahr 1990. Der siebzehnjährigen Angela Gray wirft ihrem Vater John vor, sie missbraucht zu haben. Der gesteht sofort — kann sich aber an nichts erinnern.
+
+Detective Bruce Kenner zieht den Psychologen Kenneth Raines hinzu, der mit Hypnose verschüttete Erinnerungen freilegen will. Was dabei zutage tritt, wächst mit jeder Sitzung: erst der Vater, dann die Großmutter, dann ein Polizist, schließlich eine ganze satanistische Gruppe mit Ritualen und Kindsopfern. Kenner beginnt selbst, Gestalten in seinem Haus zu sehen.
+
+### Entstehungsgeschichte
+
+Alejandro Amenábar schrieb und inszenierte den Film. Ethan Hawke spielt Kenner, Emma Watson spielt Angela, David Thewlis den Psychologen.
+
+Der Hintergrund ist real: In den achtziger und frühen neunziger Jahren kam es in den USA zu einer Welle von Anschuldigungen wegen satanistischer Ritualmorde, die sich sämtlich als unbegründet erwiesen. Ausgelöst wurden sie überwiegend durch Therapieverfahren, die angeblich verdrängte Erinnerungen wiederherstellten und tatsächlich falsche erzeugten.
+
+### Hinter den Kulissen
+
+Gedreht wurde von April bis Juni 2014 in Ontario, unter anderem in Mississauga, Tottenham und Toronto. Emma Watson drehte an ihrem 24. Geburtstag. Das Budget lag bei 15 Millionen Dollar.
+
+Die Auflösung ist konsequent: Es hat keine Sekte gegeben. Angela hat die Vorwürfe erfunden, um aus ihrer Familie herauszukommen, und die Erwachsenen um sie herum haben sich ihre Erinnerungen selbst gemacht.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 17,7 Millionen Dollar ein. In den amerikanischen Kinos kamen nur 55.039 Dollar zusammen; in Spanien dagegen war er mit 2,87 Millionen der erfolgreichste einheimische Filmstart des Jahres 2015.
+
+Die Kritik lehnte ihn deutlich ab: 14 Prozent bei Rotten Tomatoes, 32 von 100 bei Metacritic, mit dem Befund, zwei ausgesprochen sympathische Hauptdarsteller könnten den Film nicht aus der Mittelmäßigkeit des psychologischen Thrillers herausheben.
+
+Bemerkenswert bleibt der Gegenstand: eine Massenhysterie, die tatsächlich stattgefunden hat und Menschen ins Gefängnis brachte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:486131', locale: 'de-de',
+    text: `### Worum es geht
+
+JJ Shaft ist Datenanalyst beim FBI, trägt Anzug und Fahrradhelm und hat seinen Vater seit der Kindheit nicht gesehen — die Mutter hatte ihn nach einem Zwischenfall mit Kugeln in der Babyschale mitgenommen.
+
+Als sein bester Freund tot aufgefunden wird und die Polizei von einer Überdosis ausgeht, glaubt JJ das nicht. Er sucht seinen Vater John Shaft auf, der Privatdetektiv in Harlem ist und von der Arbeitsweise seines Sohnes ebenso wenig hält wie umgekehrt. Später kommt der Großvater dazu.
+
+### Entstehungsgeschichte
+
+Regie führte Tim Story, das Drehbuch schrieben Kenya Barris und Alex Barnow nach der Figur von Ernest Tidyman, die 1971 im ersten "Shaft" eingeführt wurde.
+
+Samuel L. Jackson spielt John Shaft II wie schon in der Fassung von 2000, Jessie T. Usher den Sohn JJ und Richard Roundtree den Großvater — Roundtree hatte die Titelrolle im Original von 1971 gespielt.
+
+### Hinter den Kulissen
+
+Das Budget lag zwischen 30 und 35 Millionen Dollar.
+
+Die Auswertung war zweigeteilt: Warner Bros. brachte den Film am 14. Juni 2019 in die amerikanischen Kinos, Netflix veröffentlichte ihn ab dem 28. Juni international im Abo — ein Modell, das damals neu war und das die internationale Kinoauswertung vollständig ersetzte.
+
+Inhaltlich setzt der Film auf den Zusammenprall der Generationen; ein erheblicher Teil des Humors beruht darauf, dass die Ansichten der Titelfigur aus einer anderen Zeit stammen.
+
+### Einordnung & Wirkung
+
+In den USA spielte der Film 21,4 Millionen Dollar ein und blieb damit unter den Erwartungen von 17 bis 20 Millionen allein für das Startwochenende.
+
+Die Kritik lehnte ihn überwiegend ab: 34 Prozent bei Rotten Tomatoes, 40 von 100 bei Metacritic.
+
+Das Publikum sah es deutlich anders und vergab bei CinemaScore ein A — einer der größten Abstände zwischen Fachurteil und Zuschauerurteil in jenem Kinojahr.` },
+  {
+    bereich: 'titel', schluessel: 'movie:35019', locale: 'de-de',
+    text: `### Worum es geht
+
+England im Zweiten Weltkrieg. Isabel Green führt allein einen Hof, während ihr Mann an der Front ist, arbeitet nebenbei im Dorfladen und kommt mit ihren drei Kindern nicht zurecht. Dann werden zwei verwöhnte Cousins aus London als Evakuierte einquartiert, und die Kinder gehen aufeinander los.
+
+In dem Moment klopft Nanny McPhee an die Tür — mit Warze, Stockzahn und einem Stock, der auf den Boden schlägt. Ihre Regel ist bekannt: Wenn man sie braucht und nicht will, bleibt sie; wenn man sie will und nicht mehr braucht, geht sie. Nebenher droht der Schwager, den Hof zu verkaufen, weil er Spielschulden hat.
+
+### Entstehungsgeschichte
+
+Emma Thompson schrieb das Drehbuch und spielt erneut die Titelfigur, wie im ersten Film von 2005. Regie führte Susanna White, die Musik schrieb James Newton Howard.
+
+Produziert wurde der Film von Tim Bevan, Eric Fellner und Lindsay Doran. Das Budget lag bei 35 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film erschien am 2. April 2010 in Europa und am 20. August 2010 in Nordamerika, dort unter dem Titel "Nanny McPhee Returns".
+
+Die Besetzung ist bemerkenswert dicht: Neben Emma Thompson spielen Maggie Gyllenhaal, Ralph Fiennes, Rhys Ifans, Ewan McGregor, Asa Butterfield und Maggie Smith.
+
+Die Kriegszeit ist mehr als Kulisse: Der Film handelt von einer Frau, die alles allein hält, und von der Frage, ob ihr Mann zurückkommt — mit einem gefälschten Telegramm als Wendepunkt.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 93,2 Millionen Dollar ein.
+
+Die Kritik reagierte gut: 76 Prozent bei Rotten Tomatoes; das Publikum vergab bei CinemaScore ein A minus.
+
+Ein dritter Teil war geplant und wurde später fallengelassen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9072', locale: 'de-de',
+    text: `### Worum es geht
+
+Calvin Simms ist Juwelendieb, kleinwüchsig und gerade aus dem Gefängnis entlassen. Beim ersten Bruch nach der Haft muss er den gestohlenen Diamanten loswerden und steckt ihn in die Handtasche einer Frau.
+
+Um ihn zurückzuholen, verkleidet er sich als Kleinkind und lässt sich vor der Wohnungstür des Ehepaars ablegen. Die beiden wünschen sich seit Langem ein Kind und nehmen ihn auf. Calvin bleibt im Haus, sucht nach dem Diamanten und muss dabei durchgehend so tun, als könne er nicht sprechen.
+
+### Entstehungsgeschichte
+
+Die Grundidee stammt aus dem Zeichentrickfilm "Baby Buggy Bunny" mit Bugs Bunny von 1954, in dem ein Bankräuber sich als Säugling ausgibt.
+
+Keenen Ivory Wayans führte Regie, seine Brüder Marlon und Shawn Wayans spielen die Hauptrollen. Daneben sind Kerry Washington, John Witherspoon und Tracy Morgan zu sehen. Das Budget lag bei 64 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde von September 2005 bis Januar 2006 in Vancouver.
+
+Das Verfahren für die Titelfigur war aufwendig: Jede Szene mit Calvin wurde zweimal aufgenommen — einmal mit dem damals neunjährigen, 75 Zentimeter großen kleinwüchsigen Darsteller Linden Porco gemeinsam mit den übrigen Beteiligten, und einmal mit Marlon Wayans allein vor grüner Leinwand. Anschließend wurde dessen Kopf auf Porcos Körper übertragen.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 101,6 Millionen Dollar ein, davon 58,6 Millionen in den USA — bei 64 Millionen Produktionskosten also profitabel.
+
+Die Kritik lehnte ihn nahezu geschlossen ab: 12 Prozent aus 90 Besprechungen bei Rotten Tomatoes; ein Rezensent schrieb, der Film sei vom Teufel besessen.
+
+Bei den Goldenen Himbeeren gab es drei Auszeichnungen: schlechtester Hauptdarsteller, schlechtestes Leinwandpaar und schlechteste Neuverfilmung beziehungsweise Abkupferung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:286554', locale: 'de-de',
+    text: `### Worum es geht
+
+Megan hat ihren Job verloren und ist allein. Über eine Kontaktseite verabredet sie sich mit Alec — fuer eine Nacht, danach will sie wieder gehen.
+
+Am Morgen liegt Schnee. Ein Blizzard hat die Stadt lahmgelegt, und die beiden Fremden sitzen fest. Was folgt, ist ein Tag in einer Wohnung, an dem sie sich gegenseitig auseinandernehmen: ein ehrliches Gespräch darüber, was in der vergangenen Nacht funktioniert hat und was nicht. Komplizierter wird es, als Megan Sachen der früheren Freundin Alecs findet.
+
+### Entstehungsgeschichte
+
+Regie führte Max Nichols, das Drehbuch schrieb Mark Hammer. Lio Tipton spielt Megan, Miles Teller spielt Alec.
+
+Das Budget lag bei 1,6 Millionen Dollar — für einen Kinofilm mit bekannten Darstellern außerordentlich wenig, was die Anlage als Kammerspiel teilweise erklärt.
+
+### Hinter den Kulissen
+
+Gedreht wurde im Oktober 2012 in nur 19 Tagen.
+
+Dabei kam die Wirklichkeit dazwischen: Hurrikan Sandy traf New York während der Dreharbeiten, legte die Produktion zwei Tage lahm und führte zu Stromausfällen. Die Darsteller saßen dadurch selbst ohne Strom fest — in genau der Lage, die ihre Figuren im Film erleben.
+
+Fast der gesamte Film spielt in einer einzigen Wohnung, mit zwei Hauptfiguren und einem Zeitraum von etwa vierundzwanzig Stunden. Der Schneesturm ist dabei nicht Kulisse, sondern die einzige Begründung dafür, dass die beiden bleiben müssen.
+
+### Einordnung & Wirkung
+
+Der Film kam am 26. September 2014 in wenige Kinos und erschien am 3. Oktober bei iTunes und im Abruf. Er spielte 868.081 Dollar ein.
+
+Die Kritik urteilte gemischt: 38 Prozent aus 47 Besprechungen bei Rotten Tomatoes. Gelobt wurde durchgehend das Zusammenspiel der beiden Hauptdarsteller — die New York Times schrieb, man könne kaum anders, als diesem Paar die Daumen zu drücken. Der wiederkehrende Einwand lautete, die Ausgangsidee allein trage keinen ganzen Film.
+
+Für Miles Teller fiel er in ein bemerkenswertes Jahr: Im selben Jahr erschien "Whiplash", der ihn als ernsthaften Darsteller etablierte.` },
 ];
