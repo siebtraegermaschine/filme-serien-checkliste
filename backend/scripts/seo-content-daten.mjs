@@ -26581,4 +26581,713 @@ Der Film kam am 26. September 2014 in wenige Kinos und erschien am 3. Oktober be
 Die Kritik urteilte gemischt: 38 Prozent aus 47 Besprechungen bei Rotten Tomatoes. Gelobt wurde durchgehend das Zusammenspiel der beiden Hauptdarsteller — die New York Times schrieb, man könne kaum anders, als diesem Paar die Daumen zu drücken. Der wiederkehrende Einwand lautete, die Ausgangsidee allein trage keinen ganzen Film.
 
 Für Miles Teller fiel er in ein bemerkenswertes Jahr: Im selben Jahr erschien "Whiplash", der ihn als ernsthaften Darsteller etablierte.` },
+  // ---- Block 33 ----
+  {
+    bereich: 'titel', schluessel: 'movie:615643', locale: 'de-de',
+    text: `### Worum es geht
+
+Anfang der achtziger Jahre zieht die koreanisch-amerikanische Familie Yi aus Kalifornien nach Arkansas. Jacob hat dort fünfzig Morgen Land gekauft und will koreanisches Gemüse für die wachsende Zahl von Einwanderern anbauen. Die Familie wohnt in einem Fertighaus auf Rädern mitten auf dem Feld.
+
+Seine Frau Monica hält das Vorhaben für eine Torheit; beide arbeiten weiterhin in einer Brutanstalt und sortieren Küken nach Geschlecht. Als die Großmutter aus Korea anreist, um auf die Kinder aufzupassen, bringt sie Samen mit und pflanzt am Bachlauf Minari — eine Pflanze, die überall wächst, ohne dass sich jemand um sie kümmert.
+
+### Entstehungsgeschichte
+
+Lee Isaac Chung schrieb und inszenierte den Film; er greift auf seine eigene Kindheit zurück. Verliehen wurde er von A24, das Budget lag bei 2 Millionen Dollar, die Laufzeit beträgt 115 Minuten.
+
+Steven Yeun spielt Jacob, Han Ye-ri seine Frau Monica, Youn Yuh-jung die Großmutter Soon-ja.
+
+### Hinter den Kulissen
+
+Der Film lief am 26. Januar 2020 in Sundance und gewann dort sowohl den Großen Preis der Jury als auch den Publikumspreis.
+
+Umstritten war die Einordnung durch die Golden Globes: Weil überwiegend Koreanisch gesprochen wird, lief der Film dort als fremdsprachiger Beitrag und war damit von der Hauptkategorie ausgeschlossen — obwohl er in Amerika von Amerikanern über amerikanische Einwanderer gedreht wurde. Die Regisseurin Lulu Wang widersprach öffentlich: Sie habe in jenem Jahr keinen amerikanischeren Film gesehen.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 15,5 Millionen Dollar ein.
+
+Youn Yuh-jung gewann bei der Oscar-Verleihung 2021 als beste Nebendarstellerin — als erste koreanische Darstellerin überhaupt.
+
+Die Kritik reagierte einhellig: 98 Prozent bei Rotten Tomatoes, mit Lob für die Darsteller und für Chungs Regiearbeit.` },
+  {
+    bereich: 'titel', schluessel: 'series:127532', locale: 'de-de',
+    text: `### Worum es geht
+
+Seit sich Tore zu anderen Welten geöffnet haben, gibt es Jäger — Menschen mit Fähigkeiten, die in diese Verliese steigen und die Wesen darin töten. Ihre Stärke wird beim Erwachen einmal festgelegt und ändert sich danach nie.
+
+Sung Jin-woo ist der schwächste Jäger Südkoreas, Rang E, und steigt trotzdem ab, weil seine Mutter Behandlung braucht. Nach einem Einsatz, den fast niemand überlebt, erwacht er in einem Krankenhaus — mit einem Fenster vor Augen, das ihm Aufgaben stellt und Belohnungen ausschüttet. Er ist der Einzige, der aufsteigen kann.
+
+### Entstehungsgeschichte
+
+Grundlage ist ein Webroman von Chugong, der ab dem 25. Juli 2016 bei KakaoPage erschien. Am 4. März 2018 folgte eine Webtoon-Fassung, gezeichnet von Jang Sung-rak, genannt Dubu, für Redice Studio; sie endete am 29. Dezember 2021.
+
+Die Anime-Fassung produzierte A-1 Pictures. Regie führte Shunsuke Nakashige, die Drehbücher schrieb Noboru Kimura, die Musik stammt von Hiroyuki Sawano.
+
+### Hinter den Kulissen
+
+Die erste Staffel lief vom 7. Januar bis 31. März 2024, die zweite unter dem Titel "Arise from the Shadow" vom 5. Januar bis 30. März 2025. Ein Kinofilm mit dem Titel "Beyond the System" ist angekündigt.
+
+Die Vorlage stammt nicht aus Japan, sondern aus Südkorea — für einen Anime dieser Größenordnung ungewöhnlich. Die Erzählform mit Fenstern, Statuswerten und Aufgaben übernimmt die Logik von Rollenspielen unmittelbar in die Handlung.
+
+### Einordnung & Wirkung
+
+Die erste Staffel steht bei 100 Prozent auf Rotten Tomatoes, allerdings auf Grundlage von nur neun Besprechungen.
+
+Bei den 9. Crunchyroll Anime Awards gewann die Serie unter anderem als Anime des Jahres, als beste neue Serie und in der Sparte Action. Insgesamt kam sie zwischen 2024 und 2026 auf 15 Nominierungen bei bedeutenden Preisen.
+
+Sie gilt als eines der deutlichsten Zeichen dafür, dass koreanische Vorlagen im Anime-Betrieb angekommen sind.` },
+  {
+    bereich: 'titel', schluessel: 'movie:538362', locale: 'de-de',
+    text: `### Worum es geht
+
+Am 15. Oktober 2009 wird der 31-jährige Bauzeichner Stefano Cucchi in Rom mit Drogen aufgegriffen und in das Gefängnis Regina Coeli gebracht. Sieben Tage später ist er tot.
+
+Der Film erzählt diese sieben Tage. Cucchi wird in Gewahrsam geschlagen, bestreitet die Misshandlung aber gegenüber Ärzten, Richtern und der eigenen Familie. Er wird von einer Stelle zur nächsten verlegt, isst nicht mehr, wiegt zuletzt 37 Kilogramm. Parallel läuft der Versuch der Familie, ihn zu sehen — und ihr späterer Kampf um Aufklärung.
+
+### Entstehungsgeschichte
+
+Regie führte Alessio Cremonini. Alessandro Borghi spielt Stefano Cucchi, Jasmine Trinca dessen Schwester Ilaria. Die Kamera führte Matteo Cocco.
+
+Der Fall ist real und beschäftigte Italien über ein Jahrzehnt. Ilaria Cucchi machte ihn öffentlich und erzwang mehrere Verfahren; erst Jahre später wurden Carabinieri wegen der Misshandlung verurteilt.
+
+### Hinter den Kulissen
+
+Der Film verzichtet auf jede Zuspitzung: keine Musik zur Steigerung, keine Rückblenden, keine Erklärung, wer wann was entschieden hat. Er zeigt Abläufe — Formulare, Verlegungen, Wartezeiten.
+
+Gerade darin liegt sein Vorwurf: Nicht eine einzelne Tat tötet Cucchi, sondern eine Kette von Zuständigkeiten, in der niemand handelt.
+
+Der Film lief am 29. August 2018 bei den Filmfestspielen in Venedig und eröffnete dort die Reihe "Orizzonti". Am 12. September 2018 erschien er gleichzeitig in italienischen Kinos und bei Netflix.
+
+### Einordnung & Wirkung
+
+Bei Rotten Tomatoes steht er bei 67 Prozent.
+
+Bei den David di Donatello 2019 gewann Alessandro Borghi als bester Hauptdarsteller, Alessio Cremonini als bester Nachwuchsregisseur und die Produzenten als beste Produktion. In Venedig erhielt der Film zudem den Brian-Preis.
+
+In Italien hat er den Fall Cucchi einem Publikum bekannt gemacht, das ihn zuvor nur aus Schlagzeilen kannte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8424', locale: 'de-de',
+    text: `### Worum es geht
+
+Julien schenkt der achtjährigen Sophie eine Blechdose mit Spieluhr, um sie zu trösten, nachdem andere Kinder sie wegen ihrer polnischen Herkunft gehänselt haben. Daraus wird ein Spiel: Wer die Dose hat, stellt dem anderen eine Mutprobe. Ablehnen gilt nicht.
+
+Die Aufgaben werden mit den Jahren größer. Erst geht es um Streiche in der Schule, dann um Prüfungen, dann um Hochzeiten, die aus dem Spiel heraus zerstört werden. Beide lieben einander und sagen es nie, weil das Eingeständnis das Spiel beenden würde. Als Sophie es an Juliens Hochzeitstag neu eröffnet, läuft es auf eine Entscheidung hinaus.
+
+### Entstehungsgeschichte
+
+Yann Samuell schrieb und inszenierte den Film; es war seine erste Regiearbeit. Es handelt sich um eine französisch-belgische Produktion.
+
+Guillaume Canet spielt Julien, Marion Cotillard spielt Sophie. Für Cotillard war es eine der Rollen, mit denen sie in Frankreich bekannt wurde — vier Jahre vor ihrem Oscar für "La Vie en Rose".
+
+### Hinter den Kulissen
+
+Die Machart ist stark stilisiert: kräftige Farben, überzeichnete Kulissen, Zeitsprünge ohne Übergang. Der Film behandelt eine im Kern zerstörerische Beziehung mit den Mitteln einer verspielten Komödie — was seine geteilte Aufnahme erklärt.
+
+Das Ende existiert in zwei Deutungen, die der Film beide zeigt, ohne eine als die gültige auszuweisen.
+
+### Einordnung & Wirkung
+
+In Frankreich verkaufte der Film über eine Million Kinokarten und spielte weltweit 8,6 Millionen Dollar ein.
+
+Die nordamerikanische Kritik urteilte deutlich zurückhaltender: 44 Prozent bei Rotten Tomatoes mit dem Befund, die beiden Hauptfiguren seien zu widerwärtig und selbstbezogen, um Anteilnahme zu wecken. Roger Ebert vergab zwei Sterne und nannte den Film sonderbar frustrierend.
+
+James Berardinelli widersprach mit drei Sternen und bezeichnete die beiden als eines der entzückendsten Leinwandpaare der letzten Jahre — ein Auseinandergehen der Urteile, das für diesen Film kennzeichnend geblieben ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9353', locale: 'de-de',
+    text: `### Worum es geht
+
+Ignacio ist Küchenbruder in einem mexikanischen Kloster mit angeschlossenem Waisenhaus. Er kocht schlecht, weil das Geld nur für die billigsten Zutaten reicht, und die Kinder essen es trotzdem.
+
+Heimlich träumt er vom Ringen. Als er erfährt, dass selbst Verlierer bezahlt werden, tritt er mit einem Straßenmann als Partner unter dem Namen Nacho an — maskiert, damit ihn niemand erkennt. Das Geld gibt er für besseres Essen aus. Der Orden hält Ringen für Sünde, und Nacho muss beides zugleich verbergen.
+
+### Entstehungsgeschichte
+
+Jared Hess führte Regie und schrieb das Drehbuch gemeinsam mit Jerusha Hess und Mike White. Es war seine zweite Arbeit nach "Napoleon Dynamite". Produziert wurde der Film von Nickelodeon Movies und Black & White Productions; das Budget lag bei 35 Millionen Dollar.
+
+Die Grundlage ist real: Fray Tormenta, ein mexikanischer Priester, war 23 Jahre lang als maskierter Berufsringer aktiv, um das von ihm geleitete Waisenhaus zu finanzieren.
+
+### Hinter den Kulissen
+
+Gedreht wurde vollständig in Oaxaca in Mexiko. Jack Black zog sich bei den Dreharbeiten eine Platzwunde zu, musste ins Krankenhaus und drehte danach weiter.
+
+Um die Musik gab es Streit: Zunächst schrieb Beck die Partitur, Paramount ersetzte ihn dann durch Danny Elfman. Hess weigerte sich, Beck aus dem Abspann zu streichen — beide werden dort als Komponisten geführt.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 16. Juni 2006, startete auf Platz zwei hinter "Cars" mit 28,3 Millionen Dollar und spielte weltweit 99,3 Millionen ein.
+
+Die Kritik urteilte gemischt: 39 Prozent bei Rotten Tomatoes, 52 von 100 bei Metacritic. Roger Ebert schrieb, es gehöre einiges dazu, eine Jack-Black-Komödie zu machen, die nicht funktioniert. Das Publikum vergab bei CinemaScore ein B plus.
+
+Über die Jahre hat der Film eine feste Anhängerschaft gewonnen, vor allem wegen Blacks Sprechweise und der Musiknummern.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1825', locale: 'de-de',
+    text: `### Worum es geht
+
+Lincoln Hawk fährt Lastwagen und hat seine Familie vor zehn Jahren verlassen. Als seine Frau im Sterben liegt, bittet sie ihn, den gemeinsamen Sohn Michael von der Militärakademie abzuholen und quer durchs Land zu ihr zu bringen.
+
+Michael, in Wohlstand beim Großvater aufgewachsen, verachtet ihn. Auf der Fahrt versucht Hawk, ihm nahezukommen — auch über das Armdrücken, mit dem er nebenher Geld verdient. Am Ende steht die Weltmeisterschaft in Las Vegas, bei der ein Sattelschlepper als Hauptpreis ausgesetzt ist.
+
+### Entstehungsgeschichte
+
+Menahem Golan führte Regie, produziert wurde der Film von Golan und Yoram Globus über die Cannon Group. Das Drehbuch schrieben Stirling Silliphant und Sylvester Stallone.
+
+Stallone erhielt eine Gage von 12 Millionen Dollar — vereinbart bereits im Mai 1984 und damals die höchste, die je gezahlt worden war. Das Gesamtbudget lag bei 25 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde vom 9. Juni bis 15. August 1986.
+
+Der Film ist einer der bekanntesten Versuche, aus einer Randsportart einen Kinostoff zu machen. Das Armdrücken wird dabei mit dem Ernst eines Boxfilms behandelt: Es gibt Trainingsszenen, Regeln, Techniken und ein Zeichen — Hawk dreht sein Basecap um, wenn er umschaltet.
+
+### Einordnung & Wirkung
+
+Der Film startete am 13. Februar 1987 und brachte über das Wochenende zum Presidents' Day 5,1 Millionen Dollar. Insgesamt kamen 16.057.580 Dollar zusammen — bei 25 Millionen Herstellungskosten ein deutlicher Fehlschlag.
+
+Die Kritik lehnte ihn ab: 32 Prozent bei Rotten Tomatoes, 40 von 100 bei Metacritic. Es gab drei Nominierungen für die Goldene Himbeere; der jugendliche Darsteller David Mendenhall gewann zwei davon. Das Publikum vergab bei CinemaScore dagegen ein B plus.
+
+Seither hat der Film eine feste Anhängerschaft gewonnen — auch, weil er in seiner Ernsthaftigkeit gegenüber dem Gegenstand unfreiwillig komisch geblieben ist.` },
+  {
+    bereich: 'titel', schluessel: 'movie:82505', locale: 'de-de',
+    text: `### Worum es geht
+
+Elissa zieht mit ihrer Mutter Sarah nach der Scheidung in ein Haus auf dem Land. Die Miete ist auffällig niedrig, und die Nachbarn erklären auch, warum: Im Haus am Ende der Straße hat vier Jahre zuvor ein Mädchen namens Carrie-Anne ihre Eltern getötet und ist seither verschwunden.
+
+Dort lebt nur noch ihr Bruder Ryan. Elissa freundet sich mit ihm an, gegen den Willen ihrer Mutter und des ganzen Ortes. Was Ryan verbirgt, klärt der Film in zwei Stufen auf — und die zweite verschiebt die erste vollständig.
+
+### Entstehungsgeschichte
+
+Regie führte Mark Tonderai. Jennifer Lawrence spielt Elissa, Elisabeth Shue ihre Mutter, Max Thieriot den Nachbarn Ryan. Das Budget lag zwischen 6,9 und 10 Millionen Dollar.
+
+Zum Zeitpunkt der Dreharbeiten war Lawrence noch weitgehend unbekannt: Gedreht wurde vor dem Erscheinen von "Die Tribute von Panem". Der Kinostart war zunächst für Februar 2012 vorgesehen und wurde auf den 21. September 2012 verschoben — womit der Film erst nach ihrem Durchbruch erschien.
+
+### Hinter den Kulissen
+
+Die Verzögerung erwies sich als wirtschaftlicher Vorteil: Der Film wurde mit Lawrence als Hauptargument beworben, obwohl er entstanden war, als sie noch keines gewesen wäre.
+
+Erzählerisch arbeitet er mit einer Umkehrung, die das Genre häufig verwendet: Die Figur, die man für das Opfer hält, ist es nicht — und diejenige, die niemand vermutet, ist die eigentliche.
+
+### Einordnung & Wirkung
+
+Der Film startete auf Platz zwei mit 12,3 Millionen Dollar und spielte weltweit 44,3 Millionen ein — gemessen am Einsatz ein klarer Erfolg.
+
+Die Kritik lehnte ihn scharf ab: 10 Prozent bei Rotten Tomatoes, 31 von 100 bei Metacritic. Das Publikum vergab bei CinemaScore ein B.
+
+Jennifer Lawrence gewann 2013 einen People's Choice Award als beliebteste Filmdarstellerin, der mehrere ihrer Filme umfasste; Komponist Theo Green erhielt einen ASCAP Film Award.` },
+  {
+    bereich: 'titel', schluessel: 'movie:724209', locale: 'de-de',
+    text: `### Worum es geht
+
+Rachel Stone arbeitet scheinbar als Technikerin für den britischen Geheimdienst MI6 und ist die Unerfahrene im Team. Tatsächlich gehört sie dem Charter an — einer Organisation ohne Staat, ohne Auftraggeber und ohne Rechenschaftspflicht.
+
+Deren Vorteil ist das Herz: eine künstliche Intelligenz, die aus sämtlichen verfügbaren Daten Wahrscheinlichkeiten für jede Handlung errechnet. Als eine Hackerin es an sich bringt, muss Stone es zurückholen — und dabei erfahren, warum die Angreiferin überhaupt darauf aus ist.
+
+### Entstehungsgeschichte
+
+Regie führte Tom Harper. Gal Gadot spielt Rachel Stone; daneben sind Jamie Dornan, Alia Bhatt in ihrem ersten amerikanischen Film, Sophie Okonedo und Matthias Schweighöfer zu sehen.
+
+Das Budget wird mit 150 Millionen Dollar angegeben und gehört damit zu den höchsten, die Netflix je für eine Eigenproduktion aufgewendet hat.
+
+### Hinter den Kulissen
+
+Gedreht wurde von Januar bis Juli 2022 in fünf Ländern.
+
+Die Anlage folgt erkennbar dem Vorbild der "Mission: Impossible"-Reihe: eine Organisation im Verborgenen, ein Gegenstand von unermesslichem Wert, Schauplätze auf mehreren Kontinenten. Der Unterschied liegt im Verzicht auf handgemachte Stunts.
+
+Der Film erschien am 11. August 2023 ausschließlich bei Netflix.
+
+### Einordnung & Wirkung
+
+Er wurde mit knapp 110 Millionen Aufrufen der zweitmeistgesehene Netflix-Film der zweiten Hälfte des Jahres 2023.
+
+Die Kritik lehnte ihn deutlich ab: 30 Prozent bei Rotten Tomatoes, mit dem Befund, er bewege sich in jener weiten Mittelzone der Filme für den kleinen Bildschirm. Variety, die Irish Times und der Rolling Stone führten ihn auf ihren Listen der schlechtesten Filme des Jahres 2023.
+
+Gal Gadot wurde bei den People's Choice Awards als Darstellerin eines Dramas nominiert. Der Fall steht damit für die zentrale Eigenheit des Streaming-Geschäfts: Reichweite und Bewertung haben miteinander nichts zu tun.` },
+  // ---- Block 34 ----
+  {
+    bereich: 'titel', schluessel: 'movie:379', locale: 'de-de',
+    text: `### Worum es geht
+
+In einer amerikanischen Stadt zur Zeit der Prohibition regiert der irische Boss Leo. Sein Berater Tom Reagan denkt für ihn und rät ihm, den kleinen Betrüger Bernie preiszugeben, den ein aufstrebender italienischer Konkurrent tot sehen will.
+
+Leo weigert sich, weil er Bernies Schwester Verna liebt. Was er nicht weiß: Tom hat selbst ein Verhältnis mit ihr. Aus dem Streit wird ein Bandenkrieg, in dem Tom die Seiten wechselt und beide Lager gegeneinander ausspielt. Wem seine Treue am Ende gilt, hält der Film bis zuletzt offen.
+
+### Entstehungsgeschichte
+
+Regie führte Joel Coen, das Drehbuch schrieben Joel und Ethan Coen gemeinsam, Ethan Coen produzierte. Die Kamera führte Barry Sonnenfeld, die Musik komponierte Carter Burwell.
+
+Die Vorlage ist Dashiell Hammetts Roman "Der gläserne Schlüssel" — ein Hinweis darauf fehlt allerdings im Abspann.
+
+### Hinter den Kulissen
+
+Gabriel Byrne spielt Tom Reagan, Albert Finney den Boss Leo. Daneben sind Marcia Gay Harden als Verna, Jon Polito, John Turturro und Steve Buscemi zu sehen.
+
+Zum Budget gibt es widersprüchliche Angaben: Zeitschriften nannten 14 Millionen Dollar, die Coens selbst sprachen von zehn.
+
+Der Film verweigert dem Gangsterkino seine üblichen Mittel — es gibt kaum Aufstiegserzählung und keine Erklärung der Motive. Stattdessen wird beinahe ausschließlich über Sprache verhandelt.
+
+### Einordnung & Wirkung
+
+In den Vereinigten Staaten spielte der Film nur rund fünf Millionen Dollar ein und blieb damit deutlich hinter den Kosten zurück. Ein Grund war die Konkurrenz: 1990 lief auch "GoodFellas".
+
+Die Besprechungen fielen geteilt aus. epd Film lobte die perfekt konstruierte Handlung, der Filmdienst bemängelte fehlende Atmosphäre, die TV Spielfilm zählte den Film zu den besten des Genres, Filmstarts vergab fünf Sterne.
+
+Joel Coen gewann 1990 die Silberne Muschel von San Sebastián und 1991 den Kritikerpreis des Festivals von Yubari.` },
+  {
+    bereich: 'titel', schluessel: 'movie:593', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Psychologe Kris Kelvin wird zu einer Raumstation geschickt, die den Planeten Solaris umkreist. Die Forschung dort ist zum Erliegen gekommen, die verbliebene Besatzung verhält sich unerklärlich.
+
+Der Ozean, der den Planeten bedeckt, erweist sich als denkendes Wesen. Er liest die Erinnerungen der Menschen und macht daraus leibhaftige Gestalten. Kelvin begegnet seiner Frau Hari, die sich Jahre zuvor das Leben genommen hat. Sie ist keine Erinnerung mehr, sondern entwickelt ein eigenes Bewusstsein — und die Frage, was sie ist, lässt sich nicht mehr beantworten.
+
+### Entstehungsgeschichte
+
+Regie führte Andrei Tarkowski, das Drehbuch schrieb er gemeinsam mit Friedrich Gorenstein nach dem Roman von Stanisław Lem aus dem Jahr 1961.
+
+Tarkowski beendete das Manuskript im Juni 1969 und begann im März 1971 zu drehen. Das Budget betrug 900.000 Rubel; es war sein erster Farbfilm.
+
+Donatas Banionis spielt Kelvin, Natalja Bondartschuk seine Frau Hari, Jüri Järvet und Anatoli Solonizyn die beiden verbliebenen Wissenschaftler.
+
+### Hinter den Kulissen
+
+Tarkowski stellte dem Roman einen langen Vorspann auf der Erde voran und änderte den Schluss erheblich. Für die Stadtaufnahmen wurde in Tokio gedreht.
+
+Stanisław Lem blieb zeitlebens unzufrieden mit der Verfilmung. Tarkowski wiederum bedauerte später, die Science-Fiction-Anteile zu stark betont zu haben.
+
+Die sowjetische Zensur verlangte Kürzungen der langen Erdszenen sowie die Streichung religiöser und erotischer Andeutungen; Tarkowski änderte nur wenig.
+
+Ein wiederkehrendes Bildmotiv ist Pieter Bruegels "Jäger im Schnee" — der kulturelle Besitz, den der Mensch mit ins All nimmt.
+
+### Einordnung & Wirkung
+
+In Cannes gewann der Film 1972 den Großen Preis der Jury und den FIPRESCI-Preis.
+
+Das Lexikon des internationalen Films würdigte ihn als glänzende Auseinandersetzung mit zentralen Fragen des Menschen und als Kritik am Fortschrittsglauben. Andere Stimmen hielten den gedanklichen Gehalt für überholte Romantik.
+
+Eine westdeutsche Synchronfassung entstand 1979, eine ostdeutsche 1989.` },
+  {
+    bereich: 'titel', schluessel: 'movie:962', locale: 'de-de',
+    text: `### Worum es geht
+
+Zur Zeit des Goldrauschs am Klondike zieht der Tramp nach Alaska. Ein Schneesturm treibt ihn in eine Hütte, in der bereits der Goldsucher Big Jim und der Verbrecher Black Larsen Schutz suchen.
+
+Der Hunger wird so groß, dass der Tramp seinen eigenen Schuh kocht und ihn mit der Sorgfalt eines Feinschmeckers verzehrt. Später verliebt er sich in die Saaltänzerin Georgine, richtet ihr ein Silvesteressen aus — und wartet vergeblich. Erst als Big Jim ihn wiederfindet, wendet sich das Blatt.
+
+### Entstehungsgeschichte
+
+Charlie Chaplin führte Regie, schrieb das Drehbuch, produzierte und spielte die Hauptrolle. Die Kamera führten Roland Totheroh und Jack Wilson.
+
+Die Anregung kam aus zwei Quellen: stereoskopischen Fotografien vom Chilkoot Pass und der Geschichte der Donner-Gruppe, einer Siedlertreck-Katastrophe, bei der es zu Kannibalismus kam.
+
+Georgia Hale spielt Georgine, Mack Swain den Big Jim, Tom Murray den Black Larsen.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen im Februar 1924. Gedreht wurde in der kalifornischen Sierra Nevada und im Studio in Los Angeles.
+
+Zwei Szenen sind in die Filmgeschichte eingegangen: das Verspeisen des Schuhs, der aus Lakritz gefertigt war, und der Brötchentanz, bei dem Chaplin zwei aufgespießte Brötchen wie Füße über den Tisch tanzen lässt.
+
+1942 brachte Chaplin eine Tonfassung heraus, für die er selbst den Erzähltext sprach und die Musik schrieb.
+
+### Einordnung & Wirkung
+
+Bei Herstellungskosten von rund einer Million Dollar spielte der Film etwa sechs Millionen ein.
+
+Die Bewertungen sind bis heute nahezu einhellig: 98 Prozent bei Rotten Tomatoes, 90 von 100 bei Metacritic. Bei They Shoot Pictures steht er auf Rang 93 der größten Filme.
+
+Die Tonfassung von 1942 erhielt zwei Oscar-Nominierungen. 1991 wurde der Film in das National Film Registry aufgenommen, 2003 in den deutschen Filmkanon.` },
+  {
+    bereich: 'titel', schluessel: 'movie:3112', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Wanderprediger Harry Powell erfährt im Gefängnis von seinem zum Tode verurteilten Zellengenossen, dass dieser 10.000 Dollar geraubt und versteckt hat. Nur dessen beide Kinder wissen, wo — in der Puppe der kleinen Tochter.
+
+Nach seiner Entlassung sucht Powell die Witwe auf und heiratet sie. Die Kinder durchschauen ihn von Anfang an und fliehen den Fluss hinab. Powell folgt ihnen, singend, unermüdlich. Zuflucht finden sie erst bei der alten Rachel Cooper, die Waisen aufnimmt und ein Gewehr im Haus hat.
+
+### Entstehungsgeschichte
+
+Es ist die einzige Regiearbeit des Schauspielers Charles Laughton. Das Drehbuch schrieb James Agee nach dem Debütroman von Davis Grubb aus dem Jahr 1953; Laughton überarbeitete es erheblich.
+
+Der Roman geht auf einen realen Fall zurück: Der Serienmörder Harry F. Powers heiratete in den dreißiger Jahren Witwen, um sie auszurauben und zu töten.
+
+Robert Mitchum spielt Powell, Lillian Gish die Rachel Cooper, Shelley Winters die Witwe Willa Harper.
+
+### Hinter den Kulissen
+
+Das Budget lag bei etwa 600.000 Dollar, gedreht wurde von August bis Oktober 1954 in den Studios von RKO und Republic sowie am Ohio River in West Virginia.
+
+Laughton ließ bewusst in verschiedenen Stilen spielen: Mitchum grotesk überzeichnet, Gish naturalistisch. Kameramann Stanley Cortez arbeitete mit harten Hell-Dunkel-Kontrasten, die Musik von Walter Schumann orientiert sich an Stummfilmbegleitung.
+
+Powells Fingerknöchel tragen die Tätowierungen "LOVE" und "HATE" — bis heute eines der meistzitierten Bilder des amerikanischen Kinos.
+
+### Einordnung & Wirkung
+
+1955 fiel der Film durch. Viele Kritiker hielten ihn für zu kunstbeflissen, United Artists warb kaum für ihn. Pauline Kael berichtete von einem Kino mit 2.000 Plätzen, in dem ein Dutzend Zuschauer saß.
+
+Ab den siebziger Jahren wurde er neu entdeckt. Roger Ebert zählte ihn zu den größten amerikanischen Filmen, die nie die verdiente Anerkennung fanden.
+
+1992 kam er ins National Film Registry, 2001 auf Platz 34 der besten amerikanischen Thriller des AFI, 2008 bei den Cahiers du cinéma auf Platz zwei aller Zeiten, 2022 auf Rang 25 der Sight-&-Sound-Umfrage. David Lynch, die Coen-Brüder und Spike Lee haben sich auf ihn berufen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11645', locale: 'de-de',
+    text: `### Worum es geht
+
+Der alternde Fürst Hidetora teilt sein Reich zur Zeit der Sengoku-Kriege unter seinen drei Söhnen auf und behält nur den Titel. Der jüngste Sohn Saburo hält das für einen Fehler und sagt es ihm ins Gesicht; Hidetora verstößt ihn dafür.
+
+Was folgt, gibt Saburo recht. Die beiden älteren Söhne wenden sich gegen den Vater und dann gegeneinander, getrieben von Dame Kaede, deren Familie Hidetora einst vernichtet hat. Der Fürst verliert erst seine Macht, dann seinen Verstand.
+
+### Entstehungsgeschichte
+
+Akira Kurosawa entwickelte den Stoff Mitte der siebziger Jahre und schrieb das Drehbuch nach "Dersu Uzala" von 1975. Danach lag es sieben Jahre, während er Storyboards malte und nach Geld suchte.
+
+Grundlage ist die Legende des Daimyō Mori Motonari, verbunden mit Motiven aus Shakespeares "König Lear". Es war Kurosawas dritte Shakespeare-Verfilmung nach "Das Schloss im Spinnwebwald" und "Die Bösen schlafen gut".
+
+Tatsuya Nakadai spielt Hidetora, Akira Terao, Jinpachi Nezu und Daisuke Ryu die Söhne, Mieko Harada die Dame Kaede.
+
+### Hinter den Kulissen
+
+Mit 11,5 Millionen Dollar war es der teuerste japanische Film seiner Zeit. Gedreht wurde vorwiegend am Vulkan Aso, dazu auf den historischen Burgen Kumamoto und Himeji. Etwa 1.400 Statisten und 200 Pferde waren im Einsatz.
+
+Die brennende Burg wurde am Fuß des Fuji tatsächlich errichtet und abgebrannt — ohne Modelle. Für Nakadai bedeutete das einen einzigen Versuch.
+
+Die Kostüme entwarf Emi Wada gemeinsam mit Kurosawa; Schneider arbeiteten zwei Jahre daran. Der Spielstil folgt dem Nō-Theater, Nakadais Maske ähnelt einer Nō-Maske.
+
+Während der Dreharbeiten starb Kurosawas Frau Yōko Yaguchi.
+
+### Einordnung & Wirkung
+
+Der Film wurde zu spät fertig für Cannes und hatte Weltpremiere beim Filmfestival in Tokio. Kurosawas Fernbleiben von der Premiere wurde in der japanischen Branche übel vermerkt.
+
+Kommerziell blieb es bei zwölf Millionen Dollar. Die Kritik dagegen ist einhellig: 96 Prozent bei Rotten Tomatoes, 97 von 100 bei Metacritic. Das Lexikon des internationalen Films nannte ihn eine Parabel über das Verhängnis der Macht.
+
+1986 gewann der Film den Oscar für die Kostüme, nominiert war er zudem für Szenenbild, Kamera und Regie.` },
+  {
+    bereich: 'titel', schluessel: 'movie:763', locale: 'de-de',
+    text: `### Worum es geht
+
+Auf der Schädelinsel wird 1957 ein Rattenaffe gefangen und in den Zoo von Wellington gebracht. Dort beißt er die herrschsüchtige Mutter von Lionel Cosgrove, der noch immer bei ihr wohnt und ihr in allem gehorcht.
+
+Die Mutter verwandelt sich. Lionel bringt es nicht über sich, sie zu töten, und sperrt sie in den Keller — zusammen mit allen, die sie bis dahin gebissen hat. Während er im Obergeschoss eine schüchterne Liebesgeschichte mit Paquita führt, wächst unten die Zahl der Untoten. Bis der Keller nicht mehr reicht.
+
+### Entstehungsgeschichte
+
+Peter Jackson führte Regie und schrieb das Drehbuch gemeinsam mit Fran Walsh und Stephen Sinclair. Produzent war Jim Booth, das Budget lag bei etwa drei Millionen Dollar.
+
+Timothy Balme spielt Lionel, Diana Peñalver die Paquita, Elizabeth Moody die Mutter Vera, Ian Watkin den Onkel Les.
+
+### Hinter den Kulissen
+
+Der Film verwendete zwischen 3.000 und 19.000 Liter Kunstblut — die Angaben schwanken erheblich. Rund die Hälfte davon entfiel auf eine einzige Sequenz: den Einsatz eines Rasenmähers gegen die versammelte Menge, der in dieser Form in der Filmgeschichte einzeln steht.
+
+Jackson selbst tritt als Gehilfe des Bestatters auf, seine Frau Fran Walsh und seine Mutter Joan haben ebenfalls kurze Auftritte.
+
+Die Putangirua Pinnacles, an denen gedreht wurde, dienten Jackson später als Pfad der Toten in "Der Herr der Ringe".
+
+### Einordnung & Wirkung
+
+In Deutschland wurde der Film am 28. Dezember 1993 indiziert und 1999 nach Paragraf 131 des Strafgesetzbuchs wegen Gewaltdarstellung beschlagnahmt. 1994 erschien eine um etwa fünf Minuten gekürzte Videofassung.
+
+Die Kritik fiel gespalten aus, im Genre selbst aber überwiegend positiv: 86 Prozent bei Rotten Tomatoes, mit Lob für den schwarzen Humor bei gleichzeitigem Hinweis auf die bewusste Grenzüberschreitung.
+
+Bei den neuseeländischen Film- und Fernsehpreisen 1993 gewann Jackson unter anderem für Film, Regie und Spezialeffekte, dazu kam der Hauptpreis von Avoriaz. Im Juli 2025 lief eine restaurierte 4K-Fassung in Toronto.` },
+  {
+    bereich: 'titel', schluessel: 'movie:590', locale: 'de-de',
+    text: `### Worum es geht
+
+Drei Frauen, drei Zeiten, ein Tag. 1923 beginnt Virginia Woolf in Richmond bei London mit dem Roman "Mrs Dalloway" und erträgt das Landleben nicht, das ihr die Ärzte verordnet haben.
+
+1951 liest die schwangere Hausfrau Laura Brown in Los Angeles denselben Roman und backt einen Geburtstagskuchen für ihren Mann, während sie am eigenen Leben zu ersticken droht. 2001 richtet die New Yorker Lektorin Clarissa Vaughan ein Fest für einen todkranken Freund aus, der sie seit Jahren Mrs Dalloway nennt. Was die drei verbindet, klärt sich erst zum Schluss.
+
+### Entstehungsgeschichte
+
+Regie führte Stephen Daldry, das Drehbuch schrieb David Hare nach dem mit dem Pulitzer-Preis ausgezeichneten Roman von Michael Cunningham.
+
+Produziert wurde der Film von Miramax mit Robert Fox und Scott Rudin. Die Kamera führte Seamus McGarvey, den Schnitt besorgte Peter Boyle. Die Musik stammt von Philip Glass, ergänzt um Stücke von Richard Strauss.
+
+Nicole Kidman spielt Virginia Woolf, Julianne Moore die Laura Brown, Meryl Streep die Clarissa Vaughan. In weiteren Rollen sind Ed Harris und Stephen Dillane zu sehen.
+
+### Hinter den Kulissen
+
+Für die Ähnlichkeit mit der historischen Virginia Woolf trug Kidman eine angesetzte Nase und eine Perücke. Sie behielt beides auch außerhalb des Studios auf — mit der Nebenwirkung, dass Fotografen sie nicht erkannten.
+
+Die Erzählform springt zwischen den drei Zeitebenen, ohne sie zu kennzeichnen; verbunden werden sie über Handlungen und Gegenstände, nicht über Erklärungen.
+
+### Einordnung & Wirkung
+
+Bei 25 Millionen Dollar Herstellungskosten spielte der Film weltweit rund 109 Millionen ein, mit besonders starken Ergebnissen in den Vereinigten Staaten, Spanien und Deutschland.
+
+Die Kritik lobte die verschachtelte Erzählstruktur und die drei Hauptdarstellerinnen.
+
+Nicole Kidman gewann den Oscar als beste Hauptdarstellerin; insgesamt kam der Film auf neun Nominierungen. Bei den Golden Globes gab es sieben Nominierungen und den Preis als bestes Filmdrama.` },
+  {
+    bereich: 'titel', schluessel: 'series:75758', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Jahr 2046 wird die Familie Robinson für die Besiedlung von Alpha Centauri ausgewählt. Das Kolonieschiff wird angegriffen, die Rettungskapseln stürzen auf einem fremden Planeten ab.
+
+Dort müssen die Robinsons überleben: Maureen, Luft- und Raumfahrtingenieurin und Leiterin der Mission, ihr Mann John, ein ehemaliger Navy SEAL, und die drei Kinder Judy, Penny und Will. Mit an Bord sind der Schmuggler Don West und eine Frau, die sich Doktor Smith nennt und in Wahrheit June Harris heißt — eine Kriminelle, die eine fremde Identität übernommen hat. Will schließt derweil Freundschaft mit einem fremden Roboter.
+
+### Entstehungsgeschichte
+
+Die Serie geht auf das Original von Irwin Allen aus dem Jahr 1965 zurück, das seinerseits vom "Schweizerischen Robinson" angeregt war. Entwickelt wurde die Neufassung von Matt Sazama und Burk Sharpless, Showrunner war Zack Estrin.
+
+Die Entwicklung begann 2014, Netflix übernahm das Vorhaben 2015 und bestellte die Serie im Juni 2016.
+
+Molly Parker spielt Maureen Robinson, Toby Stephens ihren Mann John, Maxwell Jenkins den Sohn Will, Taylor Russell und Mina Sundwall die beiden Töchter, Ignacio Serricchio den Don West und Parker Posey die Doktor Smith.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Vancouver, in Island und in Alberta. Die isländischen Landschaften liefern einen großen Teil der fremden Planetenoberflächen.
+
+Gegenüber dem Original von 1965 ist der Ton deutlich ernster: Die Neufassung verlegt die Handlung ins Jahr 2046 und behandelt das Überleben der Familie als tatsächliches Problem statt als Rahmen für Abenteuer der Woche.
+
+### Einordnung & Wirkung
+
+Die erste Staffel erschien am 13. April 2018, die dritte endete am 1. Dezember 2021. Insgesamt entstanden drei Staffeln mit 28 Folgen — zehn, zehn und acht.
+
+Die Bewertungen fielen unterschiedlich aus: Staffel eins kam auf 68 Prozent bei Rotten Tomatoes und 58 von 100 bei Metacritic, Staffel zwei auf 85 Prozent. Gelobt wurde durchweg die Ausstattung, bemängelt die Zeichnung der Figuren.
+
+Die Serie gewann mehrfach bei den Visual Effects Society Awards und war für Emmys nominiert, vor allem für visuelle Effekte und Ton.` },
+  // ---- Block 35 ----
+  {
+    bereich: 'titel', schluessel: 'movie:4584', locale: 'de-de',
+    text: `### Worum es geht
+
+England um 1800. Nach dem Tod des Vaters fällt das Anwesen der Dashwoods an den Sohn aus erster Ehe. Die Witwe und ihre drei Töchter müssen in ein bescheidenes Landhaus ziehen; ihr Einkommen reicht kaum.
+
+Elinor, die älteste, hält ihre Zuneigung zu Edward Ferrars vollständig zurück, weil sie weiß, dass eine Heirat ausgeschlossen scheint. Marianne, die zweite, tut das Gegenteil und verliebt sich offen in den Lebemann John Willoughby. Als dieser sie verlässt und eine andere heiratet, wird sie schwer krank. Colonel Brandon steht beiden Schwestern bei.
+
+### Entstehungsgeschichte
+
+Regie führte der taiwanische Regisseur Ang Lee. Das Drehbuch schrieb Emma Thompson nach dem Roman von Jane Austen — sie arbeitete rund zehn Jahre daran und verfasste vierzehn Fassungen aus etwa 300 handschriftlichen Seiten.
+
+Produziert wurde der Film von Columbia Pictures, die Laufzeit beträgt 136 Minuten.
+
+Emma Thompson spielt Elinor, Kate Winslet die Marianne, Hugh Grant den Edward Ferrars, Alan Rickman den Colonel Brandon.
+
+### Hinter den Kulissen
+
+Gedreht wurde ab dem 19. April 1995 über etwa drei Monate in London und in englischen Herrenhäusern, unter anderem in Saltram House.
+
+Die Besetzung eines taiwanischen Regisseurs für einen Austen-Stoff galt als ungewöhnlich. Lee selbst hat das damit begründet, dass die Familienstrukturen, um die es geht — Rangfolge, Pflicht, Zurückhaltung — ihm aus der eigenen Kultur vertraut waren.
+
+Der Titel benennt das Thema unmittelbar: Der Film stellt zwei Umgangsweisen mit demselben Verlust nebeneinander, ohne eine davon zur richtigen zu erklären.
+
+### Einordnung & Wirkung
+
+Bei der Oscar-Verleihung 1996 erhielt der Film sieben Nominierungen. Gewonnen hat davon nur eine: Emma Thompson für das beste adaptierte Drehbuch.
+
+Bei der Berlinale gewann der Film den Goldenen Bären. Hinzu kamen Auszeichnungen der British Academy und der Golden Globe als bestes Filmdrama.` },
+  {
+    bereich: 'titel', schluessel: 'movie:491584', locale: 'de-de',
+    text: `### Worum es geht
+
+Jong-su schlägt sich mit Gelegenheitsarbeit durch und will eigentlich schreiben. Zufällig trifft er Hae-mi wieder, ein Mädchen aus seinem Heimatdorf. Sie bittet ihn, während ihrer Afrikareise ihre Katze zu füttern — eine Katze, die er nie zu Gesicht bekommt.
+
+Von der Reise bringt sie Ben mit, einen jungen Mann mit Geld, dessen Herkunft niemand kennt. Ben erzählt beiläufig, er zünde ab und zu alte Gewächshäuser an. Als Hae-mi verschwindet, beginnt Jong-su, Ben zu beobachten. Der Film lässt bis zuletzt offen, ob er einer Wahrheit auf der Spur ist oder seiner eigenen Kränkung.
+
+### Entstehungsgeschichte
+
+Regie führte Lee Chang-dong, das Drehbuch schrieb er gemeinsam mit Oh Jung-mi. Für ihn war es die Rückkehr nach acht Jahren ohne Film.
+
+Die Vorlage ist Haruki Murakamis Erzählung "Scheunenabbrennen" aus dem Band "Der Elefant verschwindet"; hinzu kommen Elemente aus William Faulkners gleichnamiger Erzählung von 1939.
+
+Yoo Ah-in spielt Jong-su, Steven Yeun den Ben, Jeon Jong-seo die Hae-mi.
+
+### Hinter den Kulissen
+
+Gedreht wurde von September 2017 bis Januar 2018 in Paju in Südkorea, nahe der Grenze zu Nordkorea. Das Vorhaben hatte sich zunächst verzögert, weil zwischen dem japanischen Sender NHK und Murakami Streit über die Rechte bestand.
+
+Der Film erzählt in ruhigem Tempo und verweigert jede Auflösung. Was tatsächlich geschehen ist, ergibt sich allein aus Andeutungen, die auch anders zu lesen wären.
+
+### Einordnung & Wirkung
+
+Die Premiere fand 2018 im Wettbewerb von Cannes statt. Dort gewann der Film den Preis der internationalen Filmkritik und erhielt in der Jurywertung von Screen International die höchste Punktzahl, die dort je vergeben wurde.
+
+Die Kritik urteilte einhellig: 95 Prozent bei Rotten Tomatoes bei einem Schnitt von 8,6 von 10, 91 von 100 bei Metacritic.
+
+Als südkoreanischer Oscar-Beitrag kam der Film als erster koreanischer Film überhaupt auf die Vorauswahlliste der neun besten fremdsprachigen Filme, wurde aber nicht nominiert. Hinzu kamen Preise der Kritikerverbände von Los Angeles und Toronto sowie ein Saturn Award.` },
+  {
+    bereich: 'titel', schluessel: 'movie:291270', locale: 'de-de',
+    text: `### Worum es geht
+
+Michael Stone ist ein britischer Motivationsredner und reist 2005 nach Cincinnati, um vor Kundendienstmitarbeitern zu sprechen. Für ihn sehen alle Menschen gleich aus und klingen gleich — Frauen wie Männer, die Ex-Freundin wie der Taxifahrer wie sein eigener Sohn.
+
+Im Hotel hört er durch die Wand eine Stimme, die anders ist. Sie gehört Lisa, einer Frau aus der Provinz, die seinen Vortrag besuchen will und sich für unscheinbar hält. Michael sieht in ihr die Ausnahme von allem. Ob sie das bleibt, entscheidet der Film am nächsten Morgen.
+
+### Entstehungsgeschichte
+
+Charlie Kaufman schrieb die Vorlage 2005 als Hörspiel, das unter dem Decknamen Francis Fregoli aufgeführt wurde — eine Anspielung auf das Fregoli-Syndrom, bei dem Betroffene in allen Menschen dieselbe Person erkennen.
+
+Kaufman war zunächst dagegen, den Stoff zu verfilmen; er fürchtete, die Übertragung in Animation koste ihn seine Wirkung. Regie führten schließlich Kaufman und Duke Johnson gemeinsam. Das Drehbuch blieb gegenüber dem Hörspiel nahezu unverändert.
+
+Die Stimmen sprechen David Thewlis als Michael, Jennifer Jason Leigh als Lisa und Tom Noonan als alle übrigen Figuren.
+
+### Hinter den Kulissen
+
+Starburns Industries sammelte über Kickstarter 406.237 Dollar ein — bei einem Ziel von 200.000. Geplant war zunächst ein Kurzfilm von 40 Minuten; erst als Paramount einstieg, wurde daraus ein abendfüllender Film.
+
+Gearbeitet wurde in Stop-Motion mit im 3D-Druck gefertigten Puppen: 18 Ausführungen für Michael, sechs für Lisa. Die Herstellung dauerte zwei Jahre. Erklärtes Ziel war, dass der Zuschauer vergisst, etwas Animiertes zu sehen.
+
+### Einordnung & Wirkung
+
+Bei acht Millionen Dollar Herstellungskosten spielte der Film 5,7 Millionen ein.
+
+Die Kritik urteilte einhellig positiv: 92 Prozent bei Rotten Tomatoes aus 275 Besprechungen, 88 von 100 bei Metacritic.
+
+In Venedig gewann der Film den Großen Preis der Jury — als erster Animationsfilm überhaupt. Bei den Oscars war er als bester Animationsfilm nominiert und damit der erste Beitrag dieser Sparte mit einer Freigabe ab 17 Jahren. Hinzu kamen Nominierungen bei den Golden Globes sowie Preise bei den Annie Awards und den Independent Spirit Awards.` },
+  {
+    bereich: 'titel', schluessel: 'movie:486947', locale: 'de-de',
+    text: `### Worum es geht
+
+Asger Holm arbeitet in der Kopenhagener Notrufzentrale. Er ist dorthin versetzt worden, weil gegen ihn ein Verfahren läuft: Er hat im Dienst auf einen Verdächtigen geschossen. Am nächsten Tag steht die Verhandlung an.
+
+In seiner letzten Schicht meldet sich eine Frau namens Iben. Sie spricht, als telefoniere sie mit ihrer kleinen Tochter, und Asger begreift, dass sie entführt worden ist und nicht frei reden kann. Von seinem Platz aus, mit nichts als einem Telefon, versucht er die Sache zu klären — und stützt sich dabei auf Annahmen, die er nicht überprüfen kann.
+
+### Entstehungsgeschichte
+
+Regie führte Gustav Möller, das Drehbuch schrieb er gemeinsam mit Emil Nygaard Albertsen. Es war Möllers erster abendfüllender Film.
+
+Jakob Cedergren spielt Asger Holm. In den Stimmen sind Omar Shargawi, Jessica Dinnage und Jacob Lohmann zu hören.
+
+Die Kamera führte Jasper Spanning, die Musik stammt von Carl Coleman.
+
+### Hinter den Kulissen
+
+Die Besonderheit des Films ist seine vollständige Beschränkung: Alles spielt in der Notrufzentrale. Man sieht ausschließlich Asger an seinem Arbeitsplatz. Sämtliche Ereignisse existieren nur als Geräusch und Stimme.
+
+Damit verschiebt der Film die Arbeit auf den Zuschauer. Das Bild der Entführung, das im Kopf entsteht, stammt nicht vom Film, sondern von dem, was Asger vermutet — und die Frage, ob seine Vermutungen tragen, ist der eigentliche Gegenstand.
+
+In den Besprechungen wurde das Ergebnis als dunkle Mischung aus Thriller und Charakterporträt mit minimalen Mitteln beschrieben.
+
+### Einordnung & Wirkung
+
+Die Premiere fand 2018 beim Sundance Film Festival statt.
+
+Die Kritik reagierte außergewöhnlich gut: 98 Prozent bei Rotten Tomatoes. Der Film gewann Preise bei der Filmkunstmesse Leipzig und beim Zurich Film Festival und wurde als dänischer Beitrag für den Oscar eingereicht.
+
+2021 entstand eine amerikanische Neuverfilmung mit Jake Gyllenhaal unter der Regie von Antoine Fuqua.` },
+  {
+    bereich: 'titel', schluessel: 'series:8592', locale: 'de-de',
+    text: `### Worum es geht
+
+Leslie Knope ist stellvertretende Leiterin des Amts für Parks und Erholung in der erfundenen Kleinstadt Pawnee in Indiana. Sie glaubt an Verwaltung, an Bürgerbeteiligung und an sich selbst — und will eines Tages Präsidentin der Vereinigten Staaten werden.
+
+Ihr großes Vorhaben beginnt klein: Eine Baugrube soll ein Park werden. Was folgt, sind Anhörungen, Bürgerversammlungen, Zuständigkeitsfragen und Kollegen, die sich in unterschiedlichem Maß weigern mitzuarbeiten — allen voran ihr Vorgesetzter Ron Swanson, der die Verwaltung aus Überzeugung für überflüssig hält und deshalb bei ihr arbeitet.
+
+### Entstehungsgeschichte
+
+Greg Daniels und Michael Schur entwickelten die Serie, nachdem NBC einen Ableger von "Das Büro" verlangt hatte. Sie ließen den Ableger-Gedanken fallen und schrieben eine eigenständige Serie.
+
+Das Vorhaben nahm erst Gestalt an, als Amy Poehler zusagte. Gedreht wurde ab Februar 2009 in Südkalifornien; die Außenaufnahmen des Verwaltungsgebäudes entstanden am Rathaus von Pasadena.
+
+Neben Poehler spielen Rashida Jones, Aziz Ansari, Nick Offerman, Aubrey Plaza, Chris Pratt, Adam Scott und Rob Lowe.
+
+### Hinter den Kulissen
+
+Die erste Staffel kam schlecht an; Kritiker verglichen sie ungünstig mit "Das Büro" und Zuschauer hielten Leslie schlicht für dumm. Die Autoren zogen die Figur daraufhin neu auf: Sie nimmt ihre Arbeit nicht zu naiv, sondern zu ernst.
+
+In der zweiten Staffel wurde außerdem das Verhältnis von Leslie und Ron gestärkt, Andy vom Störenfried zur Sympathiefigur umgebaut und die Finanzkrise von 2008 in die Handlung aufgenommen.
+
+Erzählt wird als vorgetäuschte Dokumentation: eine Kamera, kein Studiopublikum, kein Lachen vom Band, Figuren, die direkt in die Kamera sprechen. Improvisation war ausdrücklich erwünscht und schaffte es regelmäßig in die Endfassung.
+
+Poehlers zwei Schwangerschaften verschoben die Drehpläne der Staffeln zwei und drei.
+
+### Einordnung & Wirkung
+
+Die Serie lief vom 9. April 2009 bis zum 24. Februar 2015 auf NBC und kam auf sieben Staffeln mit 126 Folgen, einschließlich einer Sonderfolge von 2020.
+
+Die erste Staffel steht bei 68 Prozent auf Rotten Tomatoes, die folgenden deutlich höher. Das Time-Magazin führte die Serie 2012 auf Platz eins der Fernsehserien des Jahres.
+
+Es gab 14 Emmy-Nominierungen, darunter zwei als beste Comedyserie, einen Preis der Television Critics Association von 2013, einen Peabody Award und einen Golden Globe für Amy Poehler.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9563', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Miami Sharks stecken in der Krise. Erst fällt der Spielmacher aus, dann sein Ersatz — und auf das Feld muss Willie Beamen, der dritte Mann auf der Liste, der bis dahin nie gebraucht wurde.
+
+Beamen ist zunächst überfordert, wird dann außerordentlich gut und gerät genau deshalb mit Trainer Tony D'Amato aneinander, der auf Mannschaft besteht, wo Beamen auf sich selbst setzt. Über beiden steht Christina Pagniacci, die neue Eigentümerin, für die der Verein zuerst ein Geschäft ist.
+
+### Entstehungsgeschichte
+
+Oliver Stone führte Regie und schrieb das Drehbuch gemeinsam mit Daniel Pyne und John Logan. Die Anregungen kamen aus mehreren Quellen, unter anderem aus einem Buch über einen ehemaligen Spielmacher der 49ers und aus der Abrechnung "You're Okay, It's Just a Bruise" des früheren Mannschaftsarztes Robert Huizenga.
+
+Al Pacino spielt den Trainer D'Amato, Jamie Foxx den Beamen, Cameron Diaz die Eigentümerin, Dennis Quaid den alternden Spielmacher Rooney und James Woods den Mannschaftsarzt. In Nebenrollen treten die Footballspieler Dick Butkus, Johnny Unitas und Terrell Owens auf.
+
+### Hinter den Kulissen
+
+Gedreht wurde vier Monate lang in Miami, mit fünf Zwölfstundentagen pro Woche. Stone selbst nannte die Produktion ein Ungeheuer.
+
+Die NFL drohte mit einer Klage, als sie erfuhr, wie kritisch der Film angelegt war, und untersagte den Vereinen die Mitarbeit. Drei Mannschaften setzten sich darüber hinweg — die Miami Dolphins, die Denver Broncos und die San Francisco 49ers. Der Streit kostete acht Monate Verzögerung.
+
+Der Stil ist entsprechend aggressiv: sehr schneller Schnitt, bewegliche Kamera von Salvatore Totino, ständiger Materialwechsel.
+
+### Einordnung & Wirkung
+
+Die Kritik hob vor allem die Wucht des Films und Al Pacinos Darstellung hervor; Spiegel Online nannte ihn furios.
+
+Bei der Berlinale 2000 war der Film für den Goldenen Bären nominiert. Cameron Diaz erhielt einen Blockbuster Award und einen ALMA Award, Komponist Richard Horowitz einen BMI Award. Die Filmbewertungsstelle Wiesbaden stufte ihn als besonders wertvoll ein.
+
+Der Vorwurf, den der Film erhebt, betrifft weniger den Sport als das Geschäft dahinter: Spieler werden gespritzt und wieder aufs Feld geschickt, solange sie sich verwerten lassen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11336', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Lehrer Johnny Smith verunglückt mit dem Auto und fällt ins Koma. Als er nach fünf Jahren erwacht, ist seine Verlobte mit einem anderen verheiratet, und er hat eine Fähigkeit, die er nicht wollte: Berührt er einen Menschen, sieht er dessen Vergangenheit oder Zukunft.
+
+Zunächst hilft er damit der Polizei bei einer Mordserie. Dann schüttelt er einem Politiker die Hand, der für den Senat kandidiert — und sieht, was geschieht, wenn dieser Mann Präsident wird. Von da an steht Johnny vor einer Frage, die der Film ihm nicht abnimmt.
+
+### Entstehungsgeschichte
+
+Regie führte David Cronenberg. Das Drehbuch schrieb Jeffrey Boam nach Stephen Kings Roman "Dead Zone — Das Attentat" von 1979.
+
+Produziert wurde der Film von Debra Hill und Dino De Laurentiis, die Musik stammt von Michael Kamen.
+
+Christopher Walken spielt Johnny Smith. Daneben sind Brooke Adams, Martin Sheen, Tom Skerritt und Herbert Lom zu sehen.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Ontario in Kanada, das Budget lag bei etwa zehn Millionen Dollar.
+
+Der Film gilt als Cronenbergs zurückhaltendste Arbeit jener Jahre: Er verzichtet weitgehend auf die körperlichen Entstellungen, für die der Regisseur bekannt war, und behandelt die Hellsichtigkeit als Krankheit — jede Vision kostet Johnny Kraft, die nicht zurückkehrt.
+
+Die deutsche Erstaufführung fand am 18. Mai 1984 statt.
+
+### Einordnung & Wirkung
+
+Der Film spielte rund 20,8 Millionen Dollar ein.
+
+Roger Ebert lobte ihn dafür, dass er leiste, was nur gute Thriller mit übernatürlichen Kräften leisteten: Man vergesse über der Figur, dass es um Übersinnliches geht.
+
+1984 gewann der Film den Saturn Award als bester Horrorfilm; Nominierungen gab es zudem für Christopher Walken, David Cronenberg und Jeffrey Boam.
+
+Unter den zahlreichen King-Verfilmungen der achtziger Jahre zählt er bis heute zu den wenigen, die auch von der Kritik durchgehend anerkannt werden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4421', locale: 'de-de',
+    text: `### Worum es geht
+
+Senatorin Lillian DeHaven setzt durch, dass erstmals eine Frau zur Ausbildung der Navy SEALs zugelassen wird. Die Wahl fällt auf Lieutenant Jordan O'Neil, weniger aus Überzeugung als aus politischem Kalkül.
+
+In der Ausbildung trifft O'Neil auf Widerstand von allen Seiten: auf Ausbilder, die sie brechen wollen, auf Kameraden, die sie als Belastung sehen, und auf Regeln, die für sie eigens gelockert werden sollen — was sie ablehnt. Ihr härtester Gegner ist Master Chief Urgayle. Ob sie durchkommt, entscheidet sich erst in einem echten Einsatz.
+
+### Entstehungsgeschichte
+
+Regie führte der britische Regisseur Ridley Scott. Das Drehbuch schrieben Danielle Alexandra und David Twohy.
+
+Demi Moore spielte die Hauptrolle und trat zugleich als Produzentin auf, gemeinsam mit Roger Birnbaum und Suzanne Todd. Die Kamera führte Hugh Johnson, die Musik komponierte Trevor Jones.
+
+Viggo Mortensen spielt den Master Chief Urgayle, Anne Bancroft die Senatorin DeHaven. In weiteren Rollen sind James Caviezel, Jason Beghe und Morris Chestnut zu sehen.
+
+### Hinter den Kulissen
+
+Der Film zeigt eine Ausbildung, die es so nicht gab: Frauen wurden zu den Navy SEALs erst 2016 zugelassen — knapp zwanzig Jahre nach dem Kinostart.
+
+Die bekannteste Szene ist zugleich die umstrittenste. O'Neil rasiert sich vor dem Spiegel den Kopf und stellt sich damit äußerlich gleich; die einen lasen das als Emanzipation, die anderen als Angleichung an eine männliche Norm.
+
+### Einordnung & Wirkung
+
+Die amerikanische Kritik lobte überwiegend Demi Moores Darstellung; der Rolling Stone urteilte, sie habe den Kern ihrer Figur gefunden.
+
+In Deutschland fielen die Besprechungen deutlich schärfer aus. Dort wurde der Film überwiegend als pseudofeministisch abgetan — der Vorwurf lautete, er verkaufe die Anpassung an militärische Härte als weiblichen Fortschritt.
+
+Demi Moore erhielt für die Rolle die Goldene Himbeere als schlechteste Hauptdarstellerin — eine Auszeichnung, die im direkten Widerspruch zum amerikanischen Kritikerurteil steht und die Spaltung um diesen Film gut abbildet.` },
 ];
