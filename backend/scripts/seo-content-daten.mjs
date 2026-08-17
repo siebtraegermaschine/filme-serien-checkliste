@@ -36276,4 +36276,554 @@ Bei einem geschätzten Budget von 14 Millionen Dollar spielte der Film rund 85,5
 Das Lexikon des internationalen Films lobte die einfallsreiche, atmosphärische Bildgestaltung, hielt aber fest, dass „Der Exorzist" als Vorbild diente, ohne dass diese Produktion in Handlung und Spannungsdramaturgie an ihn heranreiche.
 
 Dieser Vergleich ist naheliegend und für den Film zugleich unbequem. Er benennt das Muster, dem die Handlung folgt — ein besessenes Kind, ein ratloser Vater, ein Geistlicher als letzte Instanz —, und misst ihn an einem Werk, das dieses Muster geprägt hat. Was der Film eigenständig beisteuert, ist weniger die Struktur als die Herkunft des Gegenstands und die religiöse Tradition, aus der die Gegenwehr kommt.` },
+  // ---- Block 072 ----
+  {
+    bereich: 'titel', schluessel: 'movie:208134', locale: 'de-de',
+    text: `### Worum es geht
+
+Der 86-jährige Rentner Irving Zisman muss seinen kleinen Enkel Billy quer durch die Vereinigten Staaten bringen, nachdem Billys Mutter ins Gefängnis gekommen ist.
+
+Aus der Fahrt wird eine Kette von Zwischenfällen: Ladendiebstahl, eine gestörte Hochzeit, eine gestörte Beerdigung und ein Auftritt bei einem Schönheitswettbewerb für Kinder. Am Ende behält Zisman den Jungen, statt ihn beim leiblichen Vater zu lassen.
+
+### Entstehungsgeschichte
+
+Regie führte Jeff Tremaine. Am Drehbuch schrieben Spike Jonze, Johnny Knoxville, Jeff Tremaine und Fax Bahr.
+
+Johnny Knoxville spielt Irving Zisman, Jackson Nicoll den Billy, Georgina Cates die Kimmie und Catherine Keener die Ellie. Spike Jonze tritt als alte Frau auf.
+
+Produziert wurde der Film von Johnny Knoxville, Jeff Tremaine, Derek Freda und Spike Jonze. Die Kamera führten Lance Bangs und Dimitry Elyashkevich, den Schnitt besorgten Seth Casriel, Matthew Kosinski und Matthew Probst.
+
+Der Film dauert 92 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Machart verbindet zwei Dinge, die selten zusammengehen: eine durcherzählte Reisehandlung und eine Folge von Streichen und Stunts. Ladendiebstahl, Hochzeit, Beerdigung, Schönheitswettbewerb — jede Station ist zugleich Handlungsschritt und Nummer.
+
+Die Verkleidung trägt das Ganze. Johnny Knoxville spielt einen 86-Jährigen, Spike Jonze eine alte Frau. Dass der Film ausgerechnet für die beste Maske eine Oscar-Nominierung erhielt, zielt genau darauf: Ohne sie gäbe es die Figuren nicht.
+
+Bemerkenswert ist die Rolle des Kindes. Jackson Nicoll trägt als Billy die zweite Hauptrolle und ist an nahezu jeder Nummer beteiligt — eine ungewöhnliche Anforderung an einen Kinderdarsteller in einem Film, der auf Peinlichkeit und Provokation setzt.
+
+### Einordnung & Wirkung
+
+In Deutschland sahen 890.556 Zuschauer den Film; er belegte damit Platz 37 des Kinojahres 2013.
+
+Bei der Oscarverleihung 2014 war der Film für die beste Maske nominiert. Für eine Produktion aus dem Umfeld einer Stunt- und Streich-Reihe ist das eine ungewöhnliche Anerkennung — und zugleich eine folgerichtige: Ohne die Maske funktioniert die Hauptfigur nicht.
+
+Aufschlussreich ist die Freigabe ab 12 Jahren. Ein Film, dessen Nummernfolge auf Ladendiebstahl, eine gestörte Beerdigung und einen Kinderschönheitswettbewerb hinausläuft, wurde damit vergleichsweise mild eingestuft — ein Hinweis darauf, dass der erzählerische Rahmen um Großvater und Enkel als das Bestimmende gewertet wurde, nicht die einzelnen Provokationen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:698687', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film ist eine Vorgeschichte zur Transformers-Reihe. Er erzählt, wie aus zwei Freunden Optimus Prime und Megatron wurden.
+
+Auf dem Planeten Cybertron arbeiten die Bergbauroboter Orion Pax und D-16 zusammen. Gemeinsam decken sie auf, dass ihr Anführer Sentinel Prime die ursprünglichen Primes verraten hat. Was danach geschieht, trennt die beiden dauerhaft: Orion wird zu Optimus Prime, D-16 zu Megatron und zum Gründer der Decepticons.
+
+### Entstehungsgeschichte
+
+Regie führte Josh Cooley. Das Drehbuch schrieben Andrew Barrer, Gabriel Ferrari und Eric Pearson.
+
+In der Originalfassung sprechen Chris Hemsworth den Orion Pax alias Optimus Prime, Brian Tyree Henry den D-16 alias Megatron, Scarlett Johansson die Elita-1, Keegan-Michael Key den B-127, Jon Hamm den Sentinel Prime und Laurence Fishburne den Alpha Trion.
+
+Die deutsche Synchronisation entstand bei der Interopa Film GmbH; Tommy Morgenstern spricht Optimus Prime, Jan-David Rönfeldt den Megatron.
+
+Produziert wurde der Film von Michael Bay, Aaron Dem, Tom DeSanto, Lorenzo di Bonaventura, Don Murphy und Mark Vahradian. Die Animation übernahm Industrial Light & Magic, die Musik stammt von Brian Tyler.
+
+Der US-Start war am 20. September 2024, der deutsche am 10. Oktober 2024.
+
+### Hinter den Kulissen
+
+Die Entscheidung, die Vorgeschichte als Animationsfilm zu erzählen und vollständig auf Cybertron anzusiedeln, ist die auffälligste der Produktion. Menschen kommen nicht vor.
+
+Das prägt die Erzählung. Ohne menschliche Bezugsfigur müssen die Roboter selbst die Figuren tragen — mit Freundschaft, Verrat und Trennung als Kern. Der Film erzählt damit weniger einen Konflikt zwischen Gut und Böse als dessen Entstehung.
+
+Bemerkenswert ist die Ausgangslage der Hauptfiguren. Beide sind Bergbauroboter, also Arbeiter in einer Ordnung, die sie nicht durchschauen. Der Verrat, den sie aufdecken, betrifft nicht sie persönlich, sondern die Grundlage ihrer Welt — die Spaltung entsteht aus der Frage, welche Antwort darauf richtig ist.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 72 Millionen Dollar ein, davon 39,2 Millionen in den USA; das US-Startwochenende brachte 24,6 Millionen.
+
+Die Aufnahme war deutlich besser als das Ergebnis an der Kasse. Rotten Tomatoes weist 89 Prozent Zustimmung bei den Kritikern aus (7,4 von 10) und 98 Prozent beim Publikum, Metacritic 63 von 100.
+
+Diese Kombination ist ungewöhnlich. Ein Film, den fast neun von zehn Kritikern und nahezu alle Zuschauer positiv bewerten, bleibt an der Kasse zurück — die Diskrepanz spricht weniger gegen den Film als für eine Reihe, deren Publikum eine andere Form erwartet hatte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:123025', locale: 'de-de',
+    text: `### Worum es geht
+
+Bruce Wayne hat sich zurückgezogen. Zehn Jahre nach dem Tod seines Schützlings Jason Todd trägt er das Kostüm nicht mehr.
+
+Dann kehrt er zurück. In Gotham ist die Mutanten-Bande zur beherrschenden Kraft geworden, und ein alternder Batman stellt sich ihr entgegen. Dabei trifft er auf die vierzehnjährige Carrie Kelley, die er als neue Robin ausbildet.
+
+### Entstehungsgeschichte
+
+Vorlage ist der Comic von Frank Miller und Klaus Janson aus dem Jahr 1986.
+
+Regie führte Jay Oliva, das Drehbuch schrieb Bob Goodman.
+
+Peter Weller spricht Bruce Wayne und Batman, Ariel Winter die Carrie Kelley alias Robin, Michael Emerson den Joker, David Selby den Commissioner James Gordon und Mark Valley — im zweiten Teil — Clark Kent alias Superman.
+
+Produziert wurde der Film von Warner Premiere, DC Entertainment, Warner Bros. Animation und MOI Animation; den Vertrieb übernahm Warner Home Video. Die Musik zu beiden Teilen stammt von Christopher Drake.
+
+Der Film erschien in zwei Teilen direkt für die Heimauswertung: Teil eins am 25. September 2012, Teil zwei am 29. Januar 2013. Am 8. Oktober 2013 folgte eine Deluxe-Edition, dazu eine erweiterte Soundtrack-Ausgabe.
+
+### Hinter den Kulissen
+
+Die Aufteilung auf zwei Filme ist die zentrale Entscheidung. Der Comic wird nicht gekürzt, sondern geteilt — der erste Teil endet dort, wo die Auseinandersetzung mit der Mutanten-Bande abgeschlossen ist, der zweite bringt Joker und Superman ins Spiel.
+
+Damit hat jeder Teil einen eigenen Gegner und eine eigene Form. Teil eins handelt von der Rückkehr selbst: ein Mann, der zu alt ist für das, was er tut, gegen eine Bande, die ihn nicht kennt. Der Konflikt ist körperlich, nicht ideologisch.
+
+Die Besetzung Peter Wellers ist dabei bemerkenswert. Ein Batman, dessen Stimme Erschöpfung mitträgt, passt zu einer Figur, die nicht aus Überzeugung zurückkehrt, sondern weil sie es nicht lassen kann. Die vierzehnjährige Carrie Kelley steht dem als Gegengewicht gegenüber — sie beginnt dort, wo er aufhören müsste.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist für den ersten Teil 100 Prozent aus, allerdings auf Grundlage von nur sechs Besprechungen.
+
+Joey Esposito bewertete Teil eins bei IGN mit 7,5 von 10 und Teil zwei mit 8,6 von 10. Spencer Perry nannte den ersten Teil einen der besten Batman-Filme, die je gemacht wurden.
+
+Für eine Direct-to-Video-Produktion ist diese Aufnahme außergewöhnlich. Gemessen wurde die Verfilmung vor allem daran, wie genau sie der Vorlage von Frank Miller und Klaus Janson folgt — und die Aufteilung auf zwei Teile erlaubte es, ihr Raum zu geben, statt sie zu raffen. Dass die Bewertungen des zweiten Teils noch höher ausfielen als die des ersten, ist bei zweiteiligen Adaptionen die Ausnahme.` },
+  {
+    bereich: 'titel', schluessel: 'series:86031', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei Jungen erwachen nach 3700 Jahren aus einer rätselhaften Versteinerung. Die Zivilisation, die sie kannten, gibt es nicht mehr.
+
+Von da an geht es darum, sie wieder aufzubauen — Schritt für Schritt, mit den Mitteln der Naturwissenschaft. Gegen sie steht ein Rivale, der einen anderen Weg verfolgt: Er will ausschließlich Jugendliche wiedererwecken.
+
+### Entstehungsgeschichte
+
+Vorlage ist der Manga von Autor Riichiro Inagaki und Zeichner Boichi. Er erschien zwischen März 2017 und März 2022 im Magazin Shūkan Shōnen Jump des Shūeisha-Verlags; 27 Sammelbände kamen zusammen. 2019 erhielt der Manga den Shōgakukan-Manga-Preis in der Kategorie Shōnen.
+
+Die Anime-Serie entstand bei TMS Entertainment unter der Regie von Shinya Iino. Die Folgen dauern 25 Minuten.
+
+Insgesamt entstanden vier Staffeln mit 94 Folgen: die erste 2019 mit 24 Folgen, die zweite unter dem Titel „Stone Wars" 2021 mit elf Folgen, die dritte als „New World" 2023 mit 22 Folgen und die vierte als „Science Future" 2025 bis 2026 mit 37 Folgen.
+
+Ausgestrahlt wurde die Serie vom 5. Juli 2019 bis zum 25. Juni 2026 auf verschiedenen japanischen Sendern. Die deutsche Fassung startete 2020 bei TNT Comedy; die Synchronisation übernahm die Oxygen Sound Studios GmbH in Berlin, mit Tim Schwarzmaier als Senku und Nick Forsberg als Taiju.
+
+### Hinter den Kulissen
+
+Die Grundidee kehrt das übliche Muster des Genres um. Nach dem Zusammenbruch der Zivilisation geht es hier nicht ums Überleben, sondern um Wiederaufbau — und zwar nachvollziehbar, in Arbeitsschritten. Die Serie erklärt, wie etwas hergestellt wird, statt es vorauszusetzen.
+
+Der Konflikt ist entsprechend zugespitzt. Beide Seiten wollen die Menschheit zurückholen, sind sich aber uneinig darüber, wer dazugehören soll. Dass der Gegner nur Jugendliche wiederbeleben will, macht aus einer Aufbaugeschichte eine Frage nach der Ordnung, die dabei entsteht.
+
+Die Produktionsdaten zeigen, wie sich das trug. Von 2019 bis 2026 lief die Serie über sieben Jahre und vier Staffeln; die vierte allein umfasst mit 37 Folgen mehr als die zweite und dritte zusammen.
+
+### Einordnung & Wirkung
+
+Der Shōgakukan-Manga-Preis 2019 in der Kategorie Shōnen ging an die Vorlage — eine Auszeichnung, die vor dem Start der Anime-Serie vergeben wurde und deren Ausgangslage beschreibt.
+
+94 Folgen über vier Staffeln sind für eine Anime-Adaption eine erhebliche Laufzeit. Sie entspricht in etwa dem Umfang der Vorlage von 27 Bänden und erlaubte es, die Manga-Handlung bis zu ihrem Ende zu erzählen — der Manga war 2022 abgeschlossen, die Serie lief bis 2026 weiter.
+
+Auffällig ist die deutsche Auswertung. Die Erstausstrahlung lief 2020 bei TNT Comedy, also ein Jahr nach dem japanischen Start und über einen Sender, dessen Programmprofil nicht auf Anime ausgerichtet war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:532639', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film ist eine Neuverfilmung des Disney-Zeichentrickfilms von 1940.
+
+Die Figuren sind dieselben geblieben: Meister Geppetto, die Holzpuppe Pinocchio, die Jiminy Grille, die Blaue Fee und der Kutscher. Geppetto, die Fee und der Kutscher werden von Darstellern gespielt, Pinocchio und die Grille sind animiert und werden gesprochen. Als Blaue Fee singt Cynthia Erivo „When You Wish Upon a Star".
+
+### Entstehungsgeschichte
+
+Robert Zemeckis führte Regie und schrieb das Drehbuch gemeinsam mit Chris Weitz.
+
+Die Entwicklung zog sich. Im April 2015 war zunächst Peter Hedges als Drehbuchautor vorgesehen, später übernahm Chris Weitz. Als Regisseure waren Sam Mendes und Paul King im Gespräch, bevor Zemeckis im Januar 2020 verpflichtet wurde.
+
+Tom Hanks spielt Meister Geppetto, Cynthia Erivo die Blaue Fee und Luke Evans den Kutscher. Benjamin Evan Ainsworth spricht den animierten Pinocchio, Joseph Gordon-Levitt die animierte Jiminy Grille. In der deutschen Fassung sprechen Joachim Tennstedt den Geppetto, Mareile Moeller die Blaue Fee, Joshua Nath den Pinocchio und Oliver Rohrbeck die Jiminy Grille.
+
+Gedreht wurde vom 17. März bis April 2021 in den Cardington Film Studios in England, unter dem Arbeitstitel „Mahogany". Die visuellen Effekte stammen von Moving Picture Company und DNEG, die Kamera von Don Burgess. Alan Silvestri komponierte die Musik gemeinsam mit Glen Ballard; Cynthia Erivo singt „When You Wish Upon a Star".
+
+Der erste Trailer erschien am 31. Mai 2022, der Film am 8. September 2022 auf Disney+.
+
+### Hinter den Kulissen
+
+Sieben Jahre zwischen dem ersten Drehbuchauftrag 2015 und der Veröffentlichung 2022 beschreiben die Entstehung genauer als jede Inhaltsangabe. In dieser Zeit wechselten Autor und Regisseur mehrfach, bevor die Besetzung überhaupt feststand.
+
+Die Machart mischt zwei Verfahren. Geppetto, die Blaue Fee und der Kutscher sind gespielt, Pinocchio und Jiminy Grille sind animiert — Tom Hanks agiert also gegen Figuren, die erst später ins Bild kommen. Gedreht wurde vollständig im Studio.
+
+Bemerkenswert ist die Entscheidung, ausschließlich auf Disney+ zu veröffentlichen. Ein Film mit diesem Aufwand — Zemeckis als Regisseur, Hanks in der Hauptrolle, zwei große Effektstudios — erschien ohne Kinostart und damit ohne die Zahlen, an denen solche Produktionen sonst gemessen werden.
+
+### Einordnung & Wirkung
+
+Bei der Verleihung der Goldenen Himbeere 2023 war der Film in sechs Kategorien nominiert. Ausgezeichnet wurde er als schlechteste Neuverfilmung beziehungsweise billigster Abklatsch.
+
+Diese Kategorie trifft den Kern des Einwands. Bewertet wurde nicht der Film für sich, sondern sein Verhältnis zur Vorlage von 1940 — und damit die Frage, warum es ihn gibt.
+
+Ohne Kinoauswertung fehlt der Gegenwert zu diesem Urteil. Es gibt kein Einspielergebnis, das dagegenzuhalten wäre, und keine Besucherzahl; die Bilanz besteht allein aus der Nominierungsliste. Für einen Film, an dem ein Regisseur mit dieser Laufbahn und ein Hauptdarsteller dieses Ranges beteiligt waren, ist das eine ungewöhnlich einseitige Überlieferung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:399106', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein junger Regenbrachvogel namens Piper wird von einer Welle überrascht.
+
+Danach traut er sich nicht mehr an den Strand. Erst durch eine Einsiedlerkrabbe findet er einen Weg, die Angst zu überwinden — und lernt dabei, selbst Muscheln zu fangen.
+
+### Entstehungsgeschichte
+
+Alan Barillaro schrieb und inszenierte den Kurzfilm. Marc Sondheimer produzierte, Sarah K. Reimers besorgte den Schnitt, die Musik stammt von Adrian Belew.
+
+Produziert wurde der Film von den Pixar Animation Studios, den Vertrieb übernahm Walt Disney Studios Motion Pictures. Er dauert sechs Minuten.
+
+Die Produktion zog sich über mehr als drei Jahre und arbeitete mit neuer, hochmoderner Technologie.
+
+Die Kinopremiere war am 17. Juni 2016 gemeinsam mit „Findet Dorie". Später erschien der Film auf Blu-ray und DVD.
+
+### Hinter den Kulissen
+
+Drei Jahre Produktionszeit für sechs Minuten Film — das Verhältnis ist die eigentliche Nachricht. Es erklärt sich aus dem Gegenstand: Sand, Wasser und Federn gehören zu dem, was in der Computeranimation am schwersten glaubwürdig herzustellen ist, und der Film besteht fast ausschließlich daraus.
+
+Die Figuren sind ein Vogel und eine Krabbe. Die gesamte Entwicklung — Schreck, Rückzug, Neugier, Können — läuft deshalb über Bewegung und Blick, nicht über Sprache. Das ist die strengste Form, in der ein Animationsfilm arbeiten kann, und sie verlangt genau die Detailgenauigkeit, für die die drei Jahre draufgingen.
+
+Bemerkenswert ist die Lösung des Konflikts. Piper überwindet die Angst nicht durch Mut, sondern durch Hilfe: Die Einsiedlerkrabbe zeigt ihm einen anderen Umgang mit dem Wasser. Aus dem Hindernis wird die Gelegenheit, an Muscheln zu kommen — die Angst wird nicht überwunden, sondern in eine Fähigkeit umgewandelt.
+
+### Einordnung & Wirkung
+
+Der Film gewann 2017 den Oscar für den besten animierten Kurzfilm und im selben Jahr den Annie Award in der Kategorie Best Animated Short Subject. Hinzu kam eine Nominierung für den Empire Award.
+
+Rotten Tomatoes weist 100 Prozent aus. Kritiker lobten die unglaublich lebensechte Animation und beschrieben den Film als einfach wie ein Haiku und dennoch atemberaubend.
+
+Dieser Vergleich trifft die Sache. Ein Kurzfilm von sechs Minuten ohne Dialog, dessen Wirkung vollständig aus Beobachtung entsteht, hat mit einem Gedicht mehr gemein als mit einem Spielfilm — und die Auszeichnungen gelten beidem zugleich: der technischen Leistung und der Knappheit, mit der sie eingesetzt wird.` },
+  {
+    bereich: 'titel', schluessel: 'movie:568620', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Junge erlebt, wie sein Vater von Verfolgern getötet wird. Zwanzig Jahre später sucht er als erwachsener Snake Eyes nach den Mördern.
+
+Der Yakuza-Boss Kenta bietet ihm an, ihn zu den Schuldigen zu führen. Stattdessen rettet Snake Eyes das Leben von Tommy, einem Mitglied des Ninja-Clans Arashikage. Tommy bietet ihm einen Platz im Clan an — dafür muss er drei Prüfungen bestehen, und dabei zeigt sich, welchen Zweck Kentas Angebot wirklich hatte.
+
+### Entstehungsgeschichte
+
+Regie führte Robert Schwentke, das Drehbuch schrieb Evan Spiliotopoulos.
+
+Henry Golding spielt Snake Eyes, Andrew Koji den Tommy alias Storm Shadow, Úrsula Corberó die Baroness, Iko Uwais den Hard Master und Samara Weaving die Scarlett.
+
+Die Kamera führte Bojan Bazelli, den Schnitt besorgte Stuart Levy, die Musik stammt von Martin Todsharow.
+
+Gedreht wurde von Oktober bis Dezember 2019 in Tokio und in Burnaby, Kanada. Das Budget betrug 88 Millionen Dollar. Der US-Kinostart war am 23. Juli 2021, der deutsche am 19. August 2021.
+
+### Hinter den Kulissen
+
+Der Film erzählt eine Vorgeschichte — und steht damit vor einem Problem, das seine Aufnahme bestimmte. Snake Eyes ist eine Figur, die in der Reihe durch das definiert war, was man über sie nicht wusste. Eine Herkunftsgeschichte muss diese Lücke füllen und nimmt der Figur damit genau das, was sie ausmachte.
+
+Die Anlage selbst arbeitet mit einer doppelten Verpflichtung. Snake Eyes schuldet Kenta etwas und Tommy etwas; jede Handlung, die dem einen dient, verrät den anderen. Die drei Prüfungen im Clan sind die Form, in der diese Doppelrolle auf die Probe gestellt wird.
+
+Bemerkenswert sind die Drehorte. Ein Film über einen japanischen Ninja-Clan entstand zur Hälfte in Tokio — für eine amerikanische Großproduktion dieses Zuschnitts ist das nicht selbstverständlich; die andere Hälfte wurde in Burnaby bei Vancouver gedreht.
+
+### Einordnung & Wirkung
+
+Bei 88 Millionen Dollar Herstellungskosten spielte der Film weltweit 40 Millionen ein — etwa die Hälfte des Produktionsbudgets.
+
+Die Kritik fiel gemischt bis überwiegend negativ aus. Eine Stimme hielt fest, der Film sei eine nette Sache geworden, die den Fans gefallen dürfte, verliere aber die Geheimnistuerei um die Hauptfigur.
+
+Genau darin liegt der Widerspruch dieser Produktion. Der Einwand richtet sich nicht gegen Handwerk oder Besetzung, sondern gegen die Prämisse: Ein Film, der eine Figur erklärt, deren Reiz im Unerklärten lag, kann diesen Einwand nicht ausräumen, ohne sich selbst aufzugeben.` },
+  {
+    bereich: 'titel', schluessel: 'movie:65759', locale: 'de-de',
+    text: `### Worum es geht
+
+Mumble ist inzwischen ein angesehenes Mitglied der Kaiserpinguine, lebt mit Gloria zusammen und hat einen Sohn: Eric. Der kann mit Singen und Tanzen zunächst nichts anfangen.
+
+Als Ramón in seine Adeliepinguin-Heimat zurückkehrt, folgen ihm Eric und dessen Freunde. Dort treffen sie auf Sven, einen Papageientaucher aus dem Norden, der Eric auf die Idee bringt, fliegen zu lernen. Zurück bei der Brutstätte versperrt ein riesiger Eisberg den Zugang — und die Kolonie sitzt fest. Nebenher versucht der Krill Will, seine Stellung in der Nahrungskette zu ändern.
+
+### Entstehungsgeschichte
+
+George Miller führte Regie und schrieb das Drehbuch gemeinsam mit Gary Eck, Warren Coleman und Paul Livingston.
+
+Produziert wurde der Film von Bill Miller, George Miller und Doug Mitchell. Die Musik stammt von John Powell, die Kamera von David Dulac und David Peers, den Schnitt besorgte Christian Gazal.
+
+In der Originalfassung sprechen Elijah Wood den Mumble, P!nk die Gloria, Robin Williams den Ramón, Hank Azaria den Sven, Brad Pitt den Krill Will und Matt Damon den Krill Bill. In der deutschen Fassung sprechen Ozan Ünal den Mumble, Katrin Zimmermann die Gloria mit Denise Gorzelanny als Gesangsstimme, Rick Kavanian den Ramón, Stefan Krause den Sven, Olaf Reichmann den Will und Sven Hasper den Bill.
+
+Es handelt sich um eine amerikanisch-australische Produktion von 99 Minuten Länge, freigegeben ohne Altersbeschränkung. Der US-Start war am 18. November 2011 in 3D und IMAX 3D, der deutsche am 1. Dezember 2011.
+
+### Hinter den Kulissen
+
+Der Film führt zwei Handlungen parallel, die kaum etwas miteinander zu tun haben. Oben geht es um eine eingeschlossene Kolonie, unten um zwei Krill, die ihre Rolle in der Nahrungskette überdenken. Diese zweite Ebene ist im Wesentlichen ein eigener Film im Film.
+
+Die Rollen haben sich dabei verschoben. Mumble ist inzwischen angesehenes Mitglied der Kolonie, und der, der nicht ins Schema passt, ist nun sein Sohn — die Abweichung ist von einer Generation zur nächsten weitergerückt.
+
+Bemerkenswert ist die Auswertung in 3D und IMAX 3D. Der Film wurde für diese Formate gebaut, und ein Teil der Kritik richtete sich später genau darauf: dass die Technik die Erzählung überlagere.
+
+### Einordnung & Wirkung
+
+Die Deutsche Film- und Medienbewertung würdigte den Film als präzise kalkulierten Familienfilm und lobte die Balance zwischen Inhalten für Kinder und für Erwachsene.
+
+Das Lexikon des internationalen Films urteilte dagegen, der Familienfilm setze ohne überzeugendes Handlungsgerüst vor allem auf 3D-Effekte, Songs und Slapstick-Nummern. BR-Online bemängelte die aufgesetzte Öko-Botschaft und die deutschen Songtexte.
+
+Der Einwand gegen die deutschen Songtexte trifft eine Eigenheit dieser Produktion. Ein Film, dessen Musiknummern die Handlung tragen, muss sie auch übersetzen — die deutsche Fassung besetzte Gloria dafür sogar doppelt, mit Katrin Zimmermann für die Sprache und Denise Gorzelanny für den Gesang. Dass die Texte trotzdem beanstandet wurden, zeigt, wo bei musikgetragenen Animationsfilmen die Grenze der Synchronisation liegt.` },
+  // ---- Block 073 ----
+  {
+    bereich: 'titel', schluessel: 'movie:1007734', locale: 'de-de',
+    text: `### Worum es geht
+
+Hutch Mansell arbeitet weiter Aufträge für seinen Vermittler „The Barber" ab — er hat eine Schuld zu begleichen.
+
+Um seiner Familie wieder näherzukommen, plant er einen Urlaub in Plummerville, Wisconsin. Ein Zwischenfall im dortigen Vergnügungspark bringt ihn gegen den Parkbesitzer Wyatt und den korrupten Sheriff Abel auf. Dabei stellt sich heraus, dass die Stadt als Umschlagplatz einer kriminellen Organisation dient.
+
+### Entstehungsgeschichte
+
+Regie führte Timo Tjahjanto; es war sein englischsprachiges Debüt. Das Drehbuch schrieben Derek Kolstad und Aaron Rabin nach einer Geschichte von Kolstad.
+
+Bob Odenkirk spielt Hutch Mansell, Connie Nielsen die Rebecca „Becca" Mansell, John Ortiz den Wyatt Martin, Colin Hanks den Sheriff Abel, RZA den Bruder Harry Mansell, Christopher Lloyd den Vater David Mansell, Sharon Stone die Anführerin Lendina, Colin Salmon den „Barber", Gage Munroe den Sohn Brady und Paisley Cadorath die Tochter Sammy.
+
+Produziert wurde der Film von Kelly McCormick, David Leitch, Bob Odenkirk, Marc Provissiero und Braden Aftergood für 87North Productions und Odenkirk Provissiero Entertainment. Die Kamera führte Callan Green, den Schnitt besorgte Elísabet Ronaldsdóttir, die Musik stammt von Dominic Lewis.
+
+Gedreht wurde vom 6. August bis zum 26. September 2024 in Winnipeg, Manitoba. Das Budget betrug 25 Millionen Dollar. Der US-Kinostart über Universal Pictures war am 15. August 2025, der digitale Verkauf startete am 2. September 2025.
+
+### Hinter den Kulissen
+
+Die Fortsetzung verlegt den Stoff in den Familienurlaub — und macht daraus ihre Pointe. Ein Mann, der sich aus der Gewalt lösen will, fährt mit Frau und Kindern in einen Vergnügungspark; genau dort holt ihn ein, wovon er sich entfernen wollte.
+
+Bemerkenswert ist die Besetzung der Familie. Christopher Lloyd als Vater und RZA als Bruder erweitern die Handlung um zwei Generationen — die Gewaltgeschichte ist keine persönliche Verirrung, sondern etwas, das die Mansells miteinander teilen. Am Ende agiert die Familie gemeinsam.
+
+Für Timo Tjahjanto war es der erste englischsprachige Film. Dass ein Regisseur aus dem indonesischen Actionkino diese Fortsetzung übernimmt, ist eine Entscheidung mit klarer Richtung: Sie zielt auf die Choreografie, nicht auf die Erweiterung der Erzählung.
+
+### Einordnung & Wirkung
+
+Bei 25 Millionen Dollar Herstellungskosten spielte der Film weltweit 43 Millionen ein — je 21,5 Millionen in Nordamerika und im übrigen Ausland. Das Startwochenende in den USA und Kanada brachte 9,2 Millionen.
+
+Rotten Tomatoes weist 76 Prozent positive Bewertungen von 204 Kritikern aus. Der Konsens hält fest, Bob Odenkirk arbeite Überstunden, um aus dem Film eine unterhaltsame Fortsetzung zu machen, die dem Original bewundernswert standhalte. Metacritic kommt auf 59 von 100.
+
+Beim Publikum ergab CinemaScore ein „B+", PostTrak vier von fünf Sternen; 62 Prozent würden den Film weiterempfehlen. Für eine Actionfortsetzung mit vergleichsweise kleinem Budget ist das eine solide Bilanz.` },
+  {
+    bereich: 'titel', schluessel: 'movie:777443', locale: 'de-de',
+    text: `### Worum es geht
+
+1990 führt ein Krieg zwischen Menschen und Robotern die Welt an den Rand der Zerstörung. Mit der Neurocaster-Technologie des Konzernchefs Ethan Skate gewinnt die Menschheit.
+
+Vier Jahre später macht sich die Waise Michelle gemeinsam mit dem Bot Cosmo auf die Suche nach ihrem verschwundenen Bruder Christopher. Der Weg führt durch eine verwüstete Landschaft; unterwegs treffen sie den Soldaten Keats und den Roboter Herman.
+
+### Entstehungsgeschichte
+
+Vorlage ist der gleichnamige Bilderroman von Simon Stålenhag.
+
+Regie führten Anthony und Joe Russo, das Drehbuch schrieben Christopher Markus und Stephen McFeely.
+
+Millie Bobby Brown spielt Michelle, Chris Pratt den Keats, Ke Huy Quan den Dr. Amherst, Stanley Tucci den Ethan Skate und Giancarlo Esposito den Colonel Bradbury. Michelle Yeoh verließ das Projekt aus Termingründen; Ke Huy Quan übernahm die Rolle.
+
+Produziert wurde der Film von AGBO und Skybound Entertainment. Die Kamera führte Stephen F. Windon, den Schnitt besorgte Jeffrey Ford, die Musik stammt von Alan Silvestri.
+
+Gedreht wurde ab Oktober 2022 in Atlanta, Georgia; die Aufnahmen endeten am 7. Februar 2023. Das Budget betrug rund 320 Millionen Dollar. Die Premiere fand am 24. Februar 2025 in Los Angeles statt, der Netflix-Start folgte am 14. März 2025.
+
+### Hinter den Kulissen
+
+320 Millionen Dollar für einen Film, der drei Wochen nach seiner Premiere direkt bei Netflix erschien — das ist die Zahl, an der sich alles andere bemisst. Ein Einspielergebnis, das man dagegenhalten könnte, gibt es nicht.
+
+Die Vorlage erklärt einen Teil des Aufwands. Simon Stålenhags Bilderroman lebt von Bildern: verlassene Landschaften mit Maschinen darin. Was dort ein einzelnes Bild leistet, muss ein Spielfilm über seine gesamte Länge tragen — und dafür durchgehend hergestellt werden.
+
+Die Zeitrechnung des Films ist dabei eigenwillig. Der Krieg endet 1990, die Suche beginnt 1994 — eine Vergangenheit, die es so nicht gab, mit einer Technologie, die es nicht gibt. Diese Verschiebung ist der Kern der Vorlage und zugleich das, was sich am schwersten übersetzen lässt.
+
+### Einordnung & Wirkung
+
+Die Kritik fiel überwiegend negativ aus. Rotten Tomatoes weist 14 Prozent aus, Metacritic 30 von 100. Der Spiegel nannte den Film eine schlechte Spielberg-Kopie, Filmstarts vergab 2,5 von 5 Sternen und bemängelte die uninspirierte Geschichte.
+
+Die Nutzungszahlen zeichnen ein anderes Bild. Nach Nielsen-Daten kam der Film im ersten Halbjahr 2025 auf 3,3 Milliarden Streaming-Minuten und damit auf Platz sieben; Netflix meldete 74,2 Millionen Views.
+
+Bei den Goldenen Himbeeren 2026 war der Film als schlechtester Film sowie für Regie und Drehbuch nominiert — zugleich stand er auf der Oscar-Vorauswahlliste 2026 für die besten visuellen Effekte. Diese beiden Listen nebeneinander beschreiben die Produktion genau: Der Aufwand wurde anerkannt, das Ergebnis nicht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:425274', locale: 'de-de',
+    text: `### Worum es geht
+
+Zehn Jahre nach dem letzten Auftritt der Horsemen stellt J. Daniel Atlas ein neues Team zusammen. Er rekrutiert drei junge Illusionisten: Charlie, Bosco und June.
+
+Ihr Ziel ist der Heart Diamond. Er gehört Veronika Vanderberg, der Chefin eines südafrikanischen Diamantenunternehmens, über das Geld gewaschen wird. Bei einem Coup in Antwerpen greifen die ursprünglichen Horsemen ein.
+
+### Entstehungsgeschichte
+
+Regie führte Ruben Fleischer. Das Drehbuch schrieben Michael Lesslie, Paul Wernick, Rhett Reese und Seth Grahame-Smith nach einer Geschichte von Eric Warren Singer und Lesslie.
+
+Jesse Eisenberg spielt J. Daniel Atlas, Woody Harrelson den Merritt McKinney, Dave Franco den Jack Wilder und Isla Fisher die Henley Reeves. Justice Smith spielt Charlie, Dominic Sessa den Bosco LeRoy, Ariana Greenblatt die June Rouclere, Lizzy Caplan die Lula May, Rosamund Pike die Veronika Vanderberg und Morgan Freeman den Thaddeus Bradley; Mark Ruffalo ist in einem Kurzauftritt als Dylan Shrike zu sehen.
+
+Produziert wurde der Film von Bobby Cohen, Alex Kurtzman und Roberto Orci. Die Kamera führte George Richmond, die Musik stammt von Brian Tyler. Das Budget betrug 90 Millionen Dollar.
+
+Gedreht wurde im Juli 2024 in Budapest, im August und September 2024 in Antwerpen sowie in Abu Dhabi; zu den Schauplätzen gehören das Museum der Bildenden Künste in Budapest, Schloss Nádasdy, Yas Island und der Louvre Abu Dhabi.
+
+Premiere war am 11. November 2025 in Amsterdam, der US-Kinostart folgte am 14. November 2025; die digitale Auswertung begann am 16. Dezember 2025, Blu-ray und DVD erschienen am 17. Februar 2026.
+
+### Hinter den Kulissen
+
+Der Zeitsprung von zehn Jahren ist die Lösung für ein Problem, das dritte Teile regelmäßig haben. Statt die vorhandene Gruppe fortzuschreiben, führt der Film eine zweite ein — drei junge Illusionisten neben den vier bekannten. Das erlaubt neue Figuren, ohne die alten zu ersetzen.
+
+Die Drehorte tragen die Anlage mit. Ein Film über einen Diamantenraub entsteht unter anderem in Antwerpen; Budapest und Abu Dhabi liefern die Schauwerte für die Zwischenstationen. Für eine Reihe, deren Reiz an Ortswechseln und Publikumstäuschung hängt, ist das eine folgerichtige Wahl.
+
+Bemerkenswert ist die Zahl der Autoren. Vier Drehbuchautoren, dazu zwei weitere für die Geschichte — sechs Namen für einen Film, der seine Wirkung aus der genauen Vorbereitung seiner Wendungen zieht.
+
+### Einordnung & Wirkung
+
+Bei 90 Millionen Dollar Herstellungskosten spielte der Film weltweit 246,6 Millionen ein: 61,9 Millionen in den USA und Kanada, 184,7 Millionen international.
+
+Rotten Tomatoes weist 61 Prozent positive Bewertungen aus, Metacritic 50 von 100 und damit gemischte Urteile. Beim Publikum ergab CinemaScore ein „B+" — gegenüber „A−" bei den Vorgängern.
+
+Das Verhältnis der Märkte ist der auffälligste Befund. Drei Viertel des Ergebnisses kamen von außerhalb Nordamerikas. Für eine Reihe, die auf visuell erzählte Täuschung setzt und wenig sprachgebundenen Humor braucht, ist das eine naheliegende Verteilung — und sie erklärt, warum ein dritter Teil trotz zurückgehender Publikumsnoten wirtschaftlich aufging.` },
+  {
+    bereich: 'titel', schluessel: 'series:93740', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie erzählt eine über tausend Jahre reichende Geschichte vom Untergang des Galaktischen Imperiums.
+
+Der Wissenschaftler Hari Seldon sagt den Zusammenbruch mit den Mitteln der Psychohistorik voraus. Um die Zivilisation zu bewahren, gründet er auf dem Planeten Terminus die Foundation. Die Handlung erstreckt sich über Jahrhunderte und folgt den aufeinanderfolgenden Krisen, die diese Einrichtung überstehen muss.
+
+### Entstehungsgeschichte
+
+Vorlage ist Isaac Asimovs Foundation-Zyklus. Die Serie weicht erheblich davon ab: Die genetische Dynastie der Cleons, eine weibliche Gaal Dornick, die Sternenbrücke und das Nullfeld-Artefakt sind Erfindungen der Fernsehfassung.
+
+Showrunner und Executive Producer ist David S. Goyer. Josh Friedman war Co-Showrunner, verließ die Serie aber im April 2019. Goyer plante ursprünglich acht Staffeln.
+
+Lou Llobell spielt Gaal Dornick, Jared Harris den Hari Seldon, Lee Pace den Bruder Tag, Leah Harvey die Salvor Hardin, Laura Birn die Eto Demerzel und Terrence Mann den Bruder Dämmerung. In weiteren Rollen sind Cassian Bilton, Mikael Persbrandt, Pilou Asbæk, Cherry Jones und Clarke Peters zu sehen. Die deutsche Synchronisation entstand bei FFS Film- & Fernseh-Synchron in München; Dialogbuch schrieben Jan Odle und Matthias Lange.
+
+Produziert wurde die Serie von Skydance Television und Apple TV+, die Musik stammt von Bear McCreary. Gedreht wurde in den Troy Studios im irischen Limerick, dazu auf Malta, in Tuineje auf Fuerteventura, auf Teneriffa und im Pfahlbaumuseum Unteruhldingen am Bodensee.
+
+Bislang liegen drei Staffeln mit 30 Folgen vor, jede mit zehn Folgen von 45 bis 69 Minuten: Staffel eins ab dem 24. September 2021, Staffel zwei ab dem 14. Juli 2023, Staffel drei ab dem 11. Juli 2025.
+
+### Hinter den Kulissen
+
+Die Vorlage stellt jede Verfilmung vor dasselbe Problem. Asimovs Zyklus erzählt über Jahrhunderte und wechselt dabei sein Personal — für eine Serie, die auf wiederkehrende Figuren angewiesen ist, ist das eine ungünstige Ausgangslage.
+
+Genau hier setzen die Erfindungen der Fernsehfassung an. Die genetische Dynastie der Cleons schafft eine Herrscherfigur, die über Jahrhunderte dieselbe bleibt und trotzdem altert; Eto Demerzel bindet die Zeitebenen zusammen. Was wie eine Abweichung aussieht, ist die Antwort auf eine erzählerische Notwendigkeit.
+
+Die Drehorte spiegeln den Aufwand. Neben dem irischen Studio kamen Malta, Fuerteventura und Teneriffa hinzu — und mit dem Pfahlbaumuseum Unteruhldingen ein Schauplatz am Bodensee. Die Dreharbeiten der ersten Staffel zogen sich über 19 Monate.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist für die erste Staffel 72 Prozent Zustimmung aus (6,9 von 10 bei 89 Kritiken), für die zweite 100 Prozent bei 26 Kritiken und für die dritte 90 Prozent. Metacritic bewertete die erste Staffel mit 62 von 100.
+
+Der Konsens hält fest, die groß angelegte Produktion und die beeindruckenden Darbietungen könnten sich sehen lassen, es falle aber schwer, das Material der Vorlage vollständig befriedigend umzusetzen.
+
+Zur dritten Staffel wurde die Einführung des „Maultiers" als Gegenspieler gelobt, ebenso die Annäherung an die Buchvorlage; kritisiert wurden Schwächen in der Figurenentwicklung über die jahrhundertelange Erzählstruktur hinweg.
+
+Die Kurve dieser Bewertungen ist ungewöhnlich. Wo Serien mit den Staffeln oft nachlassen, stieg die Zustimmung hier deutlich an — die zweite Staffel erreichte den Höchstwert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:268920', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine übereifrig regeltreue Polizistin aus San Antonio bekommt einen heiklen Auftrag: Sie soll die Witwe des Leutnants eines Drogenbosses schützen.
+
+Es geht schief. Nach dem Mord an ihrem Partner und an dem Mann, den sie eigentlich begleiten sollten, fliehen die beiden Frauen durch Texas — und es zeigt sich, dass die Witwe eigene Pläne verfolgt: Rache an dem Kartellchef, der ihren Bruder getötet hat.
+
+### Entstehungsgeschichte
+
+Regie führte Anne Fletcher, das Drehbuch schrieben David Feeney und John Quaintance.
+
+Reese Witherspoon spielt Officer Rose Cooper, Sofía Vergara die Daniella Riva, Robert Kazinsky den Randy, Matthew Del Negro den Detective Hauser, Michael Mosley den Detective Dixon, Joaquín Cosío den Vicente Cortez und John Carroll Lynch den Captain Emmett.
+
+Produziert wurde der Film von Dana Fox, Bruna Papandrea, Reese Witherspoon und Sarah Swick. Die Kamera führte Oliver Stapleton, die Musik stammt von Christophe Beck.
+
+Die Dreharbeiten begannen am 12. Mai 2014 in New Orleans, Louisiana. Das Budget betrug 35 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Anlage ist die des Buddy-Films mit zwei ungleichen Partnerinnen: die eine übergenau und dienstbeflissen, die andere sprunghaft und mit eigener Rechnung. Der Reiz soll aus der Reibung entstehen, nicht aus der Bedrohung.
+
+Dass Reese Witherspoon zugleich als Produzentin auftritt, ordnet den Film ein. Er entstand als Vehikel für zwei Hauptdarstellerinnen — und die Konstruktion räumt beiden gleich viel Raum ein, statt eine als Nebenfigur zu führen.
+
+Bemerkenswert ist die Verlagerung des Drehorts. Die Handlung spielt in Texas, gedreht wurde in New Orleans. Für eine Verfolgungskomödie, deren Wege quer durch einen Bundesstaat führen, ist der Schauplatz weitgehend austauschbar — was auch erklärt, warum die Produktion ihn tauschen konnte.
+
+### Einordnung & Wirkung
+
+Bei 35 Millionen Dollar Herstellungskosten spielte der Film weltweit 51,4 Millionen ein — 34,6 Millionen in den USA und Kanada, 16,9 Millionen international.
+
+Die Kritik fiel vernichtend aus. Rotten Tomatoes weist acht Prozent Zustimmung aus; das dortige Urteil lautet, der Film sei schrill und nicht komisch. Metacritic kommt auf 31 von 100. Peter Travers nannte ihn geradezu betäubend unlustig.
+
+Der Abstand zwischen dieser Aufnahme und dem Einspielergebnis ist bemerkenswert. Der Film verdiente mehr als seine Herstellungskosten und wurde dennoch fast einhellig verworfen — getragen hat ihn offenkundig die Bekanntheit seiner beiden Hauptdarstellerinnen, nicht das, was der Film aus ihnen macht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:231176', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film spielt während der Finanzkrise. Checco Zalone, ein süditalienischer Zugewanderter in Padua, arbeitet als Staubsaugervertreter.
+
+Als es wirtschaftlich abwärtsgeht, verspricht er seinem Sohn Nicolò dennoch eine Urlaubsreise — wenn die Noten stimmen. Im südlichen Molise trifft Checco die französische Künstlerin Zoe und deren Sohn Lorenzo, der an selektivem Mutismus leidet. Es folgen verwickelte Bekanntschaften mit Mafiosi, Geschäftsabschlüsse und eine Annäherung an seine frühere Frau Daniela.
+
+### Entstehungsgeschichte
+
+Regie führte Gennaro Nunziante, das Drehbuch schrieb er gemeinsam mit Checco Zalone.
+
+Checco Zalone spielt die Hauptfigur unter seinem eigenen Namen. Miriam Dalmazio spielt die Daniela Parisi, Aurore Erguy die Zoe Garnier und Marco Paolini den Vittorio Manieri.
+
+Gedreht wurde in Molise und in der Toskana. Das Budget betrug rund acht Millionen Euro, den Verleih übernahm Medusa Film.
+
+Ein Epilog zeigt Checcos Tante Rita, die nach einer hohen Stromrechnung einen Herzstillstand erleidet.
+
+### Hinter den Kulissen
+
+Der Film verbindet Komödie und Zeitdiagnose. Sein Gegenstand ist der wirtschaftliche Abstieg: ein Vertreter, dessen Geschäft wegbricht, und ein Urlaubsversprechen, das er nicht halten kann. Der Witz entsteht aus einer Lage, die für viele Zuschauer keine erfundene war.
+
+Die Wanderungsbewegung ist dabei mitgedacht. Checco ist ein Süditaliener im Norden; die Reise führt ihn zurück in den Süden, nach Molise. Der Film erzählt damit auch von einer Binnenwanderung und von dem, was sie kostet.
+
+Bemerkenswert ist die Doppelrolle Checco Zalones. Er schreibt am Drehbuch mit und spielt eine Figur, die seinen Namen trägt — die Grenze zwischen Rolle und Darsteller wird bewusst offengelassen. Der Epilog um die Tante mit der Stromrechnung zeigt, wie weit die Komödie dabei ins Bittere gehen darf.
+
+### Einordnung & Wirkung
+
+Der Film spielte 51,9 Millionen Euro ein. Allein am Startwochenende kamen 18,6 Millionen zusammen — ein Rekord.
+
+Die Kritik urteilte trotz dieses Erfolgs überwiegend gemischt.
+
+Diese Kombination ist für das italienische Kino jener Jahre kennzeichnend: ein Film, der im Inland ein Massenpublikum erreicht und international kaum wahrgenommen wird. Bei rund acht Millionen Euro Herstellungskosten steht ein Einspielergebnis vom mehr als Sechsfachen — eine Rechnung, die kaum eine Produktion dieser Größenordnung erreicht.
+
+Die Zurückhaltung der Kritik richtet sich dabei nicht gegen den Erfolg, sondern gegen die Machart. Eine Komödie, die auf einen einzelnen Darsteller und dessen Bühnenfigur zugeschnitten ist, lässt sich schwer an den Maßstäben des Erzählkinos messen — und will es auch nicht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:50531', locale: 'de-de',
+    text: `### Worum es geht
+
+Drei Freunde in Mailand — Aldo, Giovanni und Giacomo — arbeiten weit unter ihren Möglichkeiten.
+
+Ihr Traum ist ein eigenes Theaterstück nach „Cyrano de Bergerac". Marina schließt sich ihnen an. Doch die Umsetzung erweist sich als weit schwieriger als der Entschluss.
+
+### Entstehungsgeschichte
+
+Regie führten Aldo, Giovanni und Giacomo gemeinsam mit Massimo Venier. Das Drehbuch schrieben dieselben Regisseure zusammen mit Paolo Cananzi, Walter Fontana und Graziano Ferrari.
+
+Aldo Baglio spielt Aldo, Giovanni Storti den Giovanni und Giacomo Poretti den Giacomo. Marina Massironi spielt die Marina, Paola Cortellesi die Dalia, Giuseppe Battiston den Beppe und Antonio Catania den Antonio.
+
+Produziert wurde der Film von Paolo Guerra. Die Musik komponierte Samuele Bersani.
+
+Gedreht wurde in Mailand und in Latium; ein Teil der Geschichte spielt zudem in Sizilien.
+
+### Hinter den Kulissen
+
+Das Trio führt gemeinsam Regie, schreibt mit und spielt die drei Hauptrollen, die seine eigenen Vornamen tragen. Diese Verschmelzung von Bühnenfiguren und Filmrollen ist die Grundlage des Films — das Publikum kennt die drei bereits, bevor der Film beginnt.
+
+Die Wahl des Stoffs im Stoff ist dabei kein Zufall. „Cyrano de Bergerac" handelt von jemandem, der für einen anderen spricht und dabei selbst leer ausgeht. Ein Film über drei Freunde, die dieses Stück inszenieren wollen, legt sich damit ein Motiv zurecht, das er auf seine eigenen Figuren anwenden kann.
+
+Bemerkenswert ist die Zahl der Beteiligten am Buch. Sieben Namen stehen unter Regie und Drehbuch — eine Arbeitsweise, die eher an ein Ensemble als an eine Autorenproduktion erinnert.
+
+### Einordnung & Wirkung
+
+Mit 28 Millionen Dollar war der Film der erfolgreichste italienische Film seines Jahres.
+
+Bei den Nastri d'Argento 2001 gab es drei Nominierungen: für die schauspielerische Leistung von Aldo, Giovanni und Giacomo, für die Kamera und für den besten Originalsong von Samuele Bersani.
+
+Diese Verteilung ist aufschlussreich. Ausgezeichnet werden sollte, was den Film trägt — das Zusammenspiel des Trios — und was ihn über die reine Nummernfolge hinaushebt: Bildgestaltung und Musik.
+
+Zugleich zeigt sich hier die Grenze dieses Erfolgs. Ein Film, dessen Wirkung an drei eingespielten Figuren und an ihrer Sprache hängt, lässt sich international kaum übertragen — die Spitzenposition blieb eine nationale.` },
+  {
+    bereich: 'titel', schluessel: 'series:90239', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Gruppe befreundeter Paare beschließt, die Partner untereinander zu tauschen.
+
+Was als Spiel beginnt, wird zur Auseinandersetzung mit Fragen, die vorher unausgesprochen blieben: Wie tragfähig ist Monogamie in langjährigen Beziehungen? Was will jeder Einzelne für sich selbst? Und was passiert mit einer Freundschaft, wenn Begehren offen verhandelt wird?
+
+### Entstehungsgeschichte
+
+Erschaffen wurde die Serie von Marisa Quiroga. Entwickelt haben sie Patrick McGinley, Verónica Bellver, Sandro Halphen und Jessica Silvetti.
+
+Maite Perroni spielt Adriana „Adri" Romero, Sebastián Zurita den Sergio Morales, Marimar Vega die Gabriela „Gaby" Albarrán, Humberto Busto den Óscar Romero, Horacio Pancheri den Valentín Lombardo, Hugo Catalán den Leonardo „Leo" Cuevas, Ela Velden die Siena und Fabiola Campomanes die Bárbara Cuevas.
+
+Produziert wurde die Serie gemeinsam von Amazon Prime Video, Pantaya und Corazón Films.
+
+Es entstanden drei Staffeln mit insgesamt 24 Folgen: zehn in der ersten, acht in der zweiten und sechs in der dritten. Ausgestrahlt wurde vom 16. August 2019 bis zum 14. Februar 2024 bei Amazon Prime Video.
+
+### Hinter den Kulissen
+
+Die Ausgangslage erzeugt ihre Konflikte selbst. Sobald ein Freundeskreis eine Vereinbarung dieser Art trifft, hat jede Entscheidung zwei Adressaten — den eigenen Partner und die Gruppe. Die Serie muss keine äußeren Hindernisse einführen; sie folgt den Verwerfungen, die aus der Abmachung entstehen.
+
+Bemerkenswert ist die Anlage als Ensemble. Acht tragende Rollen bedeuten, dass kein Paar den Mittelpunkt bildet; die Serie verteilt ihre Perspektiven und kann dieselbe Situation aus verschiedenen Blickwinkeln erzählen.
+
+Auffällig ist die Entwicklung des Umfangs. Von zehn Folgen in der ersten Staffel geht es auf acht und schließlich sechs herunter — eine Verdichtung, die zu einem Stoff passt, der mit jeder Runde weniger zu klären hat.
+
+### Einordnung & Wirkung
+
+Über viereinhalb Jahre — vom 16. August 2019 bis zum 14. Februar 2024 — kam die Serie auf drei Staffeln und 24 Folgen.
+
+Das Startdatum der letzten Staffel ist mit Bedacht gewählt: Der 14. Februar ist der Valentinstag. Für eine Serie über Paare, Begehren und die Grenzen von Treue ist das eine Positionierung, die für sich spricht.
+
+Bemerkenswert ist die Produktionskonstellation. Amazon Prime Video, Pantaya und Corazón Films zusammen — eine Streamingplattform mit weltweiter Reichweite, ein auf spanischsprachige Inhalte ausgerichteter Anbieter und eine mexikanische Produktionsfirma. Diese Kombination beschreibt genau, für wen die Serie gemacht wurde: für ein spanischsprachiges Publikum, das über eine internationale Plattform erreicht wird.
+
+Dass eine Serie mit diesem Gegenstand über drei Staffeln lief, ist dabei die eigentliche Aussage. Der Stoff trug länger als die Provokation, mit der er begann.` },
 ];
