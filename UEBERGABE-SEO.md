@@ -1,6 +1,6 @@
 # Übergabe: SEO-Texte movietaste.de
 
-Stand: 17.08.2026 · 1453 Titeltexte · SEO-Seiten freigegeben
+Stand: 17.08.2026 · 1589 Titeltexte · SEO-Seiten freigegeben · zuletzt geladen nach Block 81
 
 ---
 
@@ -50,7 +50,7 @@ Exakt diese vier Überschriften, in dieser Reihenfolge, keine weiteren:
 ```
 
 Mindestens 250 Wörter (wird vom Einspielskript erzwungen), Zielwert 300+.
-Aktueller Schnitt: 326 Wörter.
+Aktueller Schnitt: 334 Wörter.
 
 ## 3. Ablauf pro Runde
 
@@ -196,6 +196,6 @@ Danach in `neue-liste.json` mergen, Feldnamen: `k` (Schlüssel), `t` (Titel), `y
 | `backend/lib/seoData.js` | Datenbeschaffung für die Seiten. |
 | `backend/routes/seo.js` | Routen. `/:locale` muss zuletzt registriert bleiben. |
 | `backend/scripts/seo-texte-anhaengen.mjs` | Einspielskript mit Validierung. |
-| `backend/scripts/seo-kandidaten.json` | Kandidatenliste, 528 Einträge, 152 davon offen. |
+| `backend/scripts/seo-kandidaten.json` | Kandidatenliste, 828 Einträge, 300 davon offen. |
 
 Container: `movietaste-backend-1`, `movietaste-caddy-1`, `movietaste-postgres-1`.
