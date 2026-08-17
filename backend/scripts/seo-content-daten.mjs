@@ -40001,4 +40001,299 @@ Rotten Tomatoes weist 39 Prozent Zustimmung aus, Metacritic 59 von 100. Roger Eb
 Der Film war für den Oscar für den besten Originalsong nominiert — „Look What Love Has Done". Arnold Schwarzenegger und Emma Thompson erhielten Golden-Globe-Nominierungen, Thompson zusätzlich eine für den American Comedy Award.
 
 Die Spanne zwischen 39 Prozent bei Rotten Tomatoes und Eberts dreieinhalb Sternen beschreibt die Lage. Wer die Prämisse als Einfall abtut, findet wenig; wer sie als ernsthaft durchgeführtes Gedankenexperiment nimmt, findet mehr — und die Nominierungen für beide Hauptdarsteller sprechen dafür, dass die Darstellung über den Gag hinausging.` },
+  // ---- Block 085 ----
+  {
+    bereich: 'titel', schluessel: 'movie:16577', locale: 'de-de',
+    text: `### Worum es geht
+
+Im 22. Jahrhundert lebt der Junge Toby Tenma in Metro City, einer über der Erde schwebenden Stadt. Bei einem Unfall kommt er ums Leben.
+
+Sein Vater, Dr. Tenma, baut daraufhin einen Roboter mit Tobys Erinnerungen und Fähigkeiten, angetrieben von einem blauen Energiekern. Doch er kann die Schöpfung nicht annehmen. Der Roboter — nun Astro — stürzt auf die verschmutzte Erdoberfläche und findet dort Kinder und Roboter, die ihn aufnehmen. Präsident Stone hat es unterdessen auf seinen Energiekern abgesehen.
+
+### Entstehungsgeschichte
+
+Vorlage ist die Manga-Reihe von Osamu Tezuka.
+
+Regie führte David Bowers, das Drehbuch schrieb er gemeinsam mit Timothy Hyde Harris.
+
+Freddie Highmore spricht Toby Tenma und Astro Boy, Nicolas Cage den Dr. Bill Tenma, Kristen Bell die Cora, Donald Sutherland den Präsidenten Stone, Nathan Lane den Hamegg, Bill Nighy den Dr. Elefun und Samuel L. Jackson den Zog.
+
+Produziert wurde der Film von Imagi Studios in Hongkong; den Vertrieb übernahmen Summit Entertainment in den USA und Panasia Films in Hongkong. Die Entwicklung durchlief seit 1997 mehrere Phasen. Astros Aussehen wurde für das westliche Publikum angepasst — schlanker gestaltet und mit Kleidung versehen.
+
+Die Musik komponierte John Ottman, eingespielt von einem 95-köpfigen Orchester samt Chor in den Abbey Road Studios. Das Budget betrug 65 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Anpassung des Figurendesigns ist der aufschlussreichste Produktionsbefund. Eine Figur, die in Japan seit Jahrzehnten bekannt ist, wurde für einen anderen Markt umgestaltet — schlanker, bekleidet.
+
+Der Kern der Geschichte bleibt dabei hart. Ein Vater erschafft einen Ersatz für sein totes Kind und weist ihn zurück; der Film beginnt mit einer Trauer, die er nicht auflöst, sondern verschiebt.
+
+Bemerkenswert ist der Aufwand für die Musik. Ein 95-köpfiges Orchester mit Chor in den Abbey Road Studios ist für einen Animationsfilm dieser Größenordnung eine deutliche Setzung — sie zielt auf das emotionale Gewicht, das der Stoff mitbringt.
+
+Zwölf Jahre Entwicklungszeit seit 1997 erklären, warum das Ergebnis mehrere Handschriften trägt.
+
+### Einordnung & Wirkung
+
+Bei 65 Millionen Dollar Herstellungskosten spielte der Film weltweit zwischen 42 und 44,6 Millionen ein — ein Verlust. In den USA kamen nur 20 Millionen zusammen, in China lief er dagegen erfolgreich.
+
+Rotten Tomatoes weist 51 Prozent Zustimmung aus; das Fazit dort lautet, der Film sei für seine Zielgruppe hinreichend unterhaltsam.
+
+Roger Ebert vergab drei von vier Sternen und hielt ihn für besser als vergleichbare Konkurrenzfilme. Richard Corliss lobte die emotionale Tiefe. Mehrere Rezensenten bemängelten dagegen die Mischung aus düsterem Ausgangspunkt und kommerziell motiviertem Optimismus.
+
+Genau dieser Einwand beschreibt die Schwierigkeit des Films. Ein Stoff, der mit dem Tod eines Kindes beginnt, muss für ein Familienpublikum irgendwo hin — und der Weg dorthin überzeugte nicht alle.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11001', locale: 'de-de',
+    text: `### Worum es geht
+
+Miles Logan versteckt einen gestohlenen Diamanten, kurz bevor er verhaftet wird. Zwei Jahre später kommt er frei.
+
+Am Versteck steht inzwischen ein Polizeirevier. Um an den Stein zu kommen, gibt Logan sich als Detective aus — und bekommt gleich einen Partner zugeteilt, der ihn nicht mehr aus den Augen lässt.
+
+### Entstehungsgeschichte
+
+Regie führte Les Mayfield. Das Drehbuch schrieben Michael Berry, John Blumenthal und Stephen Carpenter.
+
+Martin Lawrence spielt Miles Logan, der als Chief Detective Malone auftritt, Luke Wilson den Detective Carlson, Dave Chappelle den Tulley, Peter Greene den Deacon und Nicole Ari Parker die Melissa Green.
+
+Produziert wurde der Film von Toby Jaffe und Neal H. Moritz. Die Musik stammt von Ed Shearmur, die Kamera von David Eggby, den Schnitt besorgte Michael Tronick.
+
+Das Budget lag bei über 65 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Prämisse liefert die gesamte Mechanik. Ein Dieb muss Polizist spielen, um an sein Diebesgut zu kommen — und wird dabei ausgerechnet gut in dem Beruf, den er unterwandert.
+
+Daraus folgt die Doppelbelastung der Hauptfigur. Jede Ermittlung, die Logan führt, bringt ihn seinem Ziel näher und gefährdet ihn zugleich; jeder Erfolg als Detective macht es schwerer, unbemerkt zu verschwinden.
+
+Der Partner ist die zweite Setzung. Carlson ist gutgläubig und ausdauernd — die Komik entsteht daraus, dass er nichts merkt und immer dabei ist.
+
+### Einordnung & Wirkung
+
+Bei über 65 Millionen Dollar Herstellungskosten spielte der Film weltweit rund 118 Millionen ein, davon etwa 69 Millionen in den USA. In Deutschland kamen 1.093.983 Zuschauer.
+
+Rotten Tomatoes weist 35 Prozent aus, Metacritic 46 von 100. Das Lexikon des internationalen Films nannte ihn eine glanzlose Krimi-Komödie.
+
+Der Abstand zwischen dieser Aufnahme und den Zuschauerzahlen ist der übliche Befund bei Komödien, die auf einen Hauptdarsteller zugeschnitten sind. Über eine Million Besucher in Deutschland zeigen, dass das Publikum eine andere Erwartung mitbrachte als die Kritik.
+
+Bemerkenswert bleibt die Nebenbesetzung. Dave Chappelle und Luke Wilson stehen hier in Rollen, die den Film über seine Hauptfigur hinaus tragen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:406994', locale: 'de-de',
+    text: `### Worum es geht
+
+Die siebzehnjährige Ashley passt auf den zwölfjährigen Luke Lerner auf, während dessen Eltern aus dem Haus sind.
+
+Luke hat für den Abend etwas geplant. Was als Versuch beginnt, die Babysitterin zu beeindrucken, entwickelt sich in eine Richtung, die niemand mehr steuern kann — und aus dem Weihnachtsabend wird eine Nacht, aus der nicht alle herauskommen.
+
+### Entstehungsgeschichte
+
+Regie führte Chris Peckover; das Drehbuch schrieb er gemeinsam mit Zack Kahn.
+
+Olivia DeJonge spielt die Babysitterin Ashley, Levi Miller den Luke Lerner, Ed Oxenbould dessen Freund Garrett, Aleks Mikic den Ricky, Dacre Montgomery den Jeremy, Patrick Warburton den Vater Robert Lerner und Virginia Madsen die Mutter Deandra.
+
+Die Kamera führte Carl Robertson, den Schnitt besorgte Julie-Anne de Ruvo, die Musik stammt von Brian Cachia.
+
+Gedreht wurde von Januar bis Februar 2016 in Sydney. Das Budget betrug drei Millionen Dollar.
+
+Die Weltpremiere lief am 22. September 2016 beim Fantastic Fest. In den USA startete der Film am 6. Oktober 2017 über Well Go USA, in Australien am 23. November 2017 über Rialto Distribution; DVD und Blu-ray folgten am 5. Dezember 2017.
+
+### Hinter den Kulissen
+
+Der Film arbeitet mit einer Erwartung, die er zuerst bedient und dann unterläuft. Die Anlage — allein im Haus, Bedrohung von außen — ist so bekannt, dass sie keiner Einführung bedarf; genau darauf verlässt sich die Konstruktion.
+
+Die Besetzung stützt das. Ein Zwölfjähriger und eine Siebzehnjährige stehen im Mittelpunkt, die Erwachsenen sind über weite Strecken abwesend. Was zwischen den beiden geschieht, muss ohne Vermittlung auskommen.
+
+Drei Millionen Dollar Budget, ein Haus, sechs Wochen Dreh in Sydney für einen Film, der in einer amerikanischen Vorstadt spielt: Die Produktion setzt vollständig auf die Anordnung, nicht auf Aufwand.
+
+Der Weihnachtsrahmen ist dabei mehr als Dekoration. Er liefert die Sicherheit, gegen die der Film arbeitet.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 89 Prozent positive Bewertungen aus, Metacritic 67 von 100. The Guardian beschrieb den Film als verzweigtes Gedankenspiel mit tadellosen Darbietungen im Gewand des Weihnachtshorrors.
+
+Das Einspielergebnis betrug 188.756 Dollar.
+
+Dieser Wert steht in einem außergewöhnlichen Missverhältnis zur Aufnahme. Ein Film mit 89 Prozent Zustimmung, der weniger als ein Zehntel seines Budgets an den Kassen einspielt, hat sein Publikum offenkundig nicht über die Leinwand gefunden.
+
+Der Verlauf erklärt das teilweise. Zwischen der Festivalpremiere im September 2016 und dem regulären Start ein Jahr später lag eine lange Wartezeit — und der Kinoeinsatz blieb schmal, bevor der Film auf DVD und Blu-ray erschien.` },
+  {
+    bereich: 'titel', schluessel: 'movie:51052', locale: 'de-de',
+    text: `### Worum es geht
+
+Arthur ist der jüngste Sohn des Weihnachtsmanns. In der Weihnachtsnacht stellt er fest, dass ein Kind in England leer ausgegangen ist: Gwen hat ihr Geschenk nicht bekommen.
+
+Seine Familie hält das für verschmerzbar. Arthur nicht. Gemeinsam mit seinem Großvater und der Elfe Bryony macht er sich mit einem alten Schlitten auf den Weg — über Toronto, über Afrika, quer über den Globus.
+
+### Entstehungsgeschichte
+
+Regie führten Sarah Smith und Barry Cook. Das Drehbuch schrieben Peter Baynham und Sarah Smith.
+
+Im Original sprechen James McAvoy den Arthur, Hugh Laurie den Steve Claus, Bill Nighy den Großvater, Jim Broadbent den Weihnachtsmann, Imelda Staunton die Mrs. Claus, Ashley Jensen die Bryony und Eva Longoria die Kommandantin da Silva. Die deutsche Fassung entstand bei Interopa Film in Berlin unter Dialogbuch und Regie von Hilke Flickenschildt; Sebastian Schulz spricht den Arthur, Hans-Jürgen Dittberner den Großvater.
+
+Produziert wurde der Film von Steve Pegram, Peter Lord, Carla Shelley und David Sproxton. Die Computeranimation entstand bei Aardman Animations für Sony Pictures Animation. Die Musik stammt von Harry Gregson-Williams, den Schnitt besorgten John Carnochan und James Cooper.
+
+Der Film dauert 97 Minuten, erschien in 3D und ist ohne Altersbeschränkung freigegeben. Die Premiere lief am 11. November 2011 in Großbritannien und Irland, der deutsche Start folgte am 17. November 2011; die DVD erschien am 8. November 2012.
+
+### Hinter den Kulissen
+
+Die Grundidee ist eine Verwaltungsfrage. Der Weihnachtsmann wird hier als Großbetrieb gezeigt — mit Technik, Abläufen und Zuständigkeiten. Und in jedem Großbetrieb gibt es Fehlerquoten.
+
+Genau daran hängt der Konflikt. Ein Kind unter Milliarden ist statistisch vernachlässigbar; für Arthur ist es ein Kind. Der Film stellt betriebliche Vernunft gegen eine Haltung, die keine Ausnahme zulässt.
+
+Bemerkenswert ist die Produktionskonstellation. Aardman Animations, bekannt für Knetfiguren, liefert hier Computeranimation — die Firma wechselt das Verfahren, behält aber die Erzählweise.
+
+Dass drei Generationen von Weihnachtsmännern auftreten — Großvater, Vater, zwei Söhne —, macht den Film zusätzlich zu einer Geschichte über Nachfolge.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes verzeichnet über 90 Prozent positive Bewertungen.
+
+Kino.de lobte einen liebenswerten Animationsfilm in 3D als großen Spaß für die ganze Familie. KinderFilmWelt vergab vier von fünf Klappen.
+
+Der film-dienst äußerte dagegen Bedenken: Es sei irritierend, wie die Produzenten den Mythos des Weihnachtsmanns mit viel Aufwand und Verve zerstörten.
+
+Dieser Einwand trifft eine echte Spannung im Film. Wer den Weihnachtsmann als Konzern mit Logistikproblemen zeigt, erklärt das Wunder — und nimmt ihm damit etwas. Ob das ein Verlust ist oder der Preis für eine erzählbare Geschichte, ist die Frage, an der sich die Urteile scheiden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:23742', locale: 'de-de',
+    text: `### Worum es geht
+
+Die New Yorker Polizisten Jimmy Monroe und Paul Hodges werden suspendiert, nachdem ein Informant bei einem Einsatz ums Leben kommt.
+
+Jimmy braucht Geld für die Hochzeit seiner Tochter und will dafür eine wertvolle Baseballkarte verkaufen — ein Andy-Pafko-Exemplar. Bei einem Überfall wird sie gestohlen. Die Suche nach dem Dieb führt die beiden über ein Tattoo-Studio zu einer Reihe von Kriminellen und schließlich zum Gangster Poh Boy.
+
+### Entstehungsgeschichte
+
+Regie führte Kevin Smith. Das Drehbuch schrieben Mark und Robb Cullen — es war Smiths erste Studioproduktion und der erste seiner Filme, dessen Drehbuch nicht von ihm selbst stammte.
+
+Bruce Willis spielt Jimmy Monroe, Tracy Morgan den Paul Hodges, Seann William Scott den Dave, Rashida Jones die Debbie, Adam Brody den Barry Mangold, Kevin Pollak den Hunsaker, Guillermo Diaz den Poh Boy, Jason Lee den Roy, Michelle Trachtenberg die Ava Monroe und Ana de la Reguera die Gabriela.
+
+Produziert wurde der Film von Marc E. Platt, Polly Johnsen und Michael Tadross für Warner Bros. Die Kamera führte Dave Klein, den Schnitt besorgte Kevin Smith selbst, die Musik stammt von Harold Faltermeyer.
+
+Gedreht wurde von Mai bis August 2009 in New York. Der Film dauert 107 Minuten, das Budget betrug rund 37 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Konstellation ist ungewöhnlich. Ein Regisseur, dessen Ruf auf selbstgeschriebenen, kleinen Filmen beruht, übernimmt eine Studioproduktion mit fremdem Drehbuch — und schneidet sie selbst.
+
+Die Musik unterstreicht die Absicht. Harold Faltermeyer, dessen Klang mit dem Polizeifilm der achtziger Jahre verbunden ist, schreibt hier die Partitur zu einem Film, der genau dieses Genre aufgreift.
+
+Erzählerisch hängt alles an einem Gegenstand. Die gestohlene Baseballkarte ist der Grund für jede Bewegung — ein Sammlerstück, das für den einen Geld und für den anderen die Hochzeit seiner Tochter bedeutet.
+
+### Einordnung & Wirkung
+
+Bei rund 37 Millionen Dollar Herstellungskosten spielte der Film am US-Startwochenende über 18 Millionen ein, in den USA insgesamt 44,8 Millionen und weltweit rund 55 Millionen.
+
+Die Kritik fiel überwiegend negativ aus. Rotten Tomatoes weist 18 Prozent aus. Ein Kritiker hielt fest, die Gags seien selten komisch und Bruce Willis wirke lustlos. Ein anderer nannte den Film eine halbgare Mischung aus Parodie, der die Qualität vergleichbarer Filme fehle. Einzelne Stimmen sahen dagegen eine turbulente Komödie voller Absurdität und Action.
+
+Der Vorwurf der Lustlosigkeit trifft bei diesem Film eine besondere Stelle. Eine Parodie auf das Buddy-Cop-Genre braucht Darsteller, die die Form ernst nehmen, während der Film sie unterläuft — funktioniert das nicht, bleibt weder Parodie noch Genre übrig.` },
+  {
+    bereich: 'titel', schluessel: 'series:97186', locale: 'de-de',
+    text: `### Worum es geht
+
+Victor Salazar wechselt an die Creekwood High School in Atlanta. Dort setzt er sich mit seiner sexuellen Identität auseinander.
+
+Über drei Staffeln erzählt die Serie seinen Weg zum Coming-out, seine Beziehung zu Benji und das, was die Sache mit seiner Familie macht.
+
+### Entstehungsgeschichte
+
+Die Serie ist eine Nachfolgeproduktion zum Film „Love, Simon" von 2018. Sie beruht nicht auf dem Roman, sondern erzählt eine neue Geschichte mit neuen Figuren.
+
+Erdacht wurde sie von Isaac Aptaker und Elizabeth Berger, die auch als Showrunner fungieren.
+
+Michael Cimino spielt Victor Salazar, George Sear den Benji Campbell, Rachel Hilson die Mia Brooks, Bebe Wood die Lake Meriwether, Anthony Turpel den Felix Weston sowie Ana Ortiz und James Martinez die Eltern Isabel und Armando. Nick Robinson, der Hauptdarsteller des Films, tritt als Erzähler auf.
+
+Produziert wurde die Serie von 20th Television; die deutsche Synchronisation entstand bei SDI Media Germany unter Klaus Terhoeven.
+
+Es entstanden drei Staffeln mit insgesamt 28 Folgen: zehn im Juni 2020, zehn im Juni 2021 und acht im Juni 2022 als Abschluss. In den USA lief die erste Staffel ab dem 17. Juni 2020 bei Hulu, in Deutschland ab dem 23. Februar 2021 bei Disney+ unter der Marke Star.
+
+### Hinter den Kulissen
+
+Die Anlage als Nachfolgeserie statt als Adaption ist die entscheidende Wahl. Die Serie erbt die Schule und den Ton des Films, erzählt aber eine eigene Geschichte — und Nick Robinson, der Hauptdarsteller des Films, verbindet beides als Erzähler.
+
+Die Familie ist dabei der Unterschied zum Vorbild. Victors Eltern sind keine Randfiguren; ihre Reaktion ist ein eigener Handlungsstrang, der über Staffeln läuft.
+
+Der Rhythmus der Veröffentlichung ist bemerkenswert gleichmäßig. Alle drei Staffeln erschienen im Juni — 2020, 2021 und 2022 —, jede genau ein Jahr nach der vorigen.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 90 Prozent aus, auf Grundlage von 49 Bewertungen. Gelobt wurde, dass die Serie den Geist des Vorgängerfilms wachhält und verschiedene Hautfarben und Sexualitäten glaubwürdig darstellt. Eine Kritik bemängelte, dass Diskriminierung zu harmlos dargestellt werde.
+
+Bei den Imagen Awards 2021 und 2022 wurde die Serie als beste Comedyserie ausgezeichnet, Michael Cimino als bester Comedy-Schauspieler. Bei den GLAAD Media Awards gab es zwischen 2021 und 2023 mehrere Nominierungen; bei den Dorian Awards 2021 die Auszeichnung als beste verkannte Serie.
+
+Diese letzte Auszeichnung beschreibt die Lage der Serie gut. Sie fand bei der Kritik hohe Zustimmung und blieb dennoch im Schatten ihres Ausgangsfilms — und die deutsche Erstausstrahlung folgte erst acht Monate nach der amerikanischen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9793', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Einheit der Nationalgarde soll einen Militärstützpunkt in der Wüste von New Mexico beliefern.
+
+Vor Ort finden die Soldaten das Lager verlassen. Die dort stationierten Wissenschaftler sind angegriffen worden — von einem Clan, der in der Gegend lebt und Frauen verschleppt.
+
+### Entstehungsgeschichte
+
+Regie führte Martin Weisz. Das Drehbuch schrieben Wes Craven und sein Sohn Jonathan Craven.
+
+Michael McMillian spielt Pvt. David „Napoleon" Napoli, Jessica Stroup die Pvt. Amber „Barbie" Johnson, Jacob Vargas den Pvt. Carlos „Crank" Medina, Flex Alexander den Sgt. Jeff „Sarge" Millstone, Daniella Alonso die Pvt. Marisol „Missy" Martinez, Michael Bailey Smith den Papa Hades und Derek Mears den Chameleon.
+
+Die Idee entstand in Gesprächen zwischen Wes Craven und dem Produzenten Peter Locke. Ursprünglich sollte die Figur Brenda aus dem ersten Film vorkommen; da Emilie de Ravin durch die Serie „Lost" gebunden war, ließ sich das nicht umsetzen. Craven überarbeitete das Konzept und behielt die Gruppe der Nationalgardisten bei.
+
+Die Kamera führte Sam McCurdy, die Musik stammt von Trevor Morris. Gedreht wurde im Sommer 2006 in Ouarzazate in Marokko — am selben Ort wie der Vorgänger. Das Budget betrug 15 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Wechsel der Opfergruppe ist die zentrale Entscheidung. Statt einer Familie im Urlaub trifft es hier bewaffnete Soldaten — Menschen, die für Gefahr ausgebildet sind.
+
+Damit ändert sich die Grundlage des Schreckens. Wo der Vorgänger von Wehrlosigkeit lebte, muss dieser Film seine Bedrohung an Leuten aufbauen, die zurückschießen können.
+
+Die Wahl desselben Drehorts in Marokko verbindet beide Filme äußerlich. Was in der amerikanischen Wüste spielt, entstand in Ouarzazate — für den Vorgänger wie für die Fortsetzung.
+
+Dass Wes Craven gemeinsam mit seinem Sohn schrieb, ist der zweite Befund. Der Urheber des Ursprungsstoffs war hier als Autor beteiligt, nicht als Regisseur.
+
+### Einordnung & Wirkung
+
+Bei 15 Millionen Dollar Herstellungskosten spielte der Film 37,6 Millionen ein — etwa die Hälfte dessen, was der Vorgänger erzielte. Die DVD-Verkäufe brachten im Inland über 30 Millionen hinzu.
+
+Rotten Tomatoes weist 13 Prozent aus (64 Kritiker), Metacritic 32 von 100 (10 Kritiken).
+
+Peter Bradshaw schrieb, die Fortsetzung des Remakes von Wes Cravens Film sei zu einem langweiligen Durcheinander mutiert. Matt Zoller Seitz nannte ihn in der New York Times im Wesentlichen einen Katalog grenzüberschreitender Bilder, ausgeleuchtet und geschnitten wie ein Heavy-Metal-Video. Scott Tobias kritisierte im A.V. Club die verpasste Gelegenheit, den Clan differenzierter darzustellen.
+
+Tobias' Einwand wiegt am schwersten. Ein Film, dessen Gegner als degenerierte Gruppe angelegt sind, trifft eine Entscheidung darüber, wie er Menschen zeigt — und die Kritik hielt fest, dass er diese Entscheidung nicht hinterfragt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:283378', locale: 'de-de',
+    text: `### Worum es geht
+
+Luce Price wird auf die Sword & Cross Academy geschickt, nachdem man sie für einen Todesfall verantwortlich macht.
+
+Dort begegnet sie Daniel Grigori — und hat das Gefühl, ihn zu kennen. Tatsächlich sind sich beide schon begegnet, in früheren Leben. Daniel ist ein gefallener Engel, und was die beiden verbindet, steht unter einem Fluch.
+
+### Entstehungsgeschichte
+
+Vorlage ist der erste Band der Fantasyreihe „Engelsnacht" von Lauren Kate.
+
+Regie führte Scott Hicks. Das Drehbuch schrieben Michael Arlen Ross, Kathryn Price und Nichole Millard.
+
+Addison Timlin spielt Lucinda Price, Jeremy Irvine den Daniel Grigori, Harrison Gilbertson den Cam Briel, Daisy Head die Arriane Alter und Joely Richardson die Sophia Bliss.
+
+Die Kamera führte Alar Kivilo, den Schnitt besorgte Scott Gray, die Musik stammt von Mark Isham.
+
+Es handelt sich um eine amerikanisch-ungarische Produktion von 92 Minuten Länge, freigegeben ab 12 Jahren. Gedreht wurde in Ungarn — im Schossberger Schloss, im Schloss Wenckheim, in Tura und in Budapest. Die deutsche Fernsehpremiere lief am 9. Dezember 2018 bei Sixx.
+
+### Hinter den Kulissen
+
+Die Anlage folgt einem Muster, das für Jugendbuchverfilmungen jener Jahre kennzeichnend ist: ein Internat, eine Außenseiterin, ein rätselhafter junger Mann und eine Bestimmung, die weiter zurückreicht als beide Figuren.
+
+Die Wiederholung über frühere Leben ist dabei der eigentliche Kunstgriff. Sie erlaubt es, eine Beziehung als schicksalhaft zu setzen, ohne sie entwickeln zu müssen — die beiden kennen einander bereits, bevor der Film beginnt.
+
+Genau darin liegt auch die Schwierigkeit. Was als große Liebe behauptet wird, muss der Film in 92 Minuten glaubhaft machen, ohne die Vorgeschichte zeigen zu können, auf die er sich beruft.
+
+Die ungarischen Schlösser liefern dafür die Ausstattung. Sword & Cross ist keine Kulisse, sondern eine Reihe realer Bauten.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist sieben Prozent aus, Metacritic 47 Prozent, die IMDb-Bewertung liegt bei 5,2 von 10.
+
+Das Lexikon des internationalen Films urteilte, es handle sich um eine verkitschte melodramatische Romanze nahezu ohne Fantasy-Elemente und von glatter Substanzlosigkeit.
+
+Der Hinweis auf die fehlenden Fantasy-Elemente trifft den Kern. Ein Stoff über gefallene Engel und Wiedergeburt verspricht eine Welt mit eigenen Regeln; der Film verwendet sie vor allem als Rahmen für eine Schulromanze.
+
+Dass der Film in Deutschland erst 2018 seine Fernsehpremiere hatte — zwei Jahre nach seinem Erscheinungsjahr — passt zu dieser Einordnung. Er fand hier keinen Kinostart, sondern lief bei einem Spartensender.` },
 ];
