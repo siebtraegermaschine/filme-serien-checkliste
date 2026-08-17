@@ -25695,4 +25695,223 @@ Der Film erschien am 15. August 2008 in Großbritannien und spielte weltweit 21,
 Die Kritik urteilte zurückhaltend: 38 Prozent bei Rotten Tomatoes mit dem Wortspiel, der Film sei eher mild als wild; andere nannten ihn sympathisch, aber zahm.
 
 Seither hat er eine beachtliche Anhängerschaft gewonnen, besonders in Großbritannien, wo er spielt — einer jener Jugendfilme, deren Wirkung sich erst über Wiederholungen im Fernsehen und über Streaming entfaltet hat.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:963', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Privatdetektiv Sam Spade in San Francisco bekommt Besuch von einer Frau, die sich Miss Wonderly nennt und ihre Schwester sucht. Noch in derselben Nacht sind sein Partner Miles Archer und der Mann, den er beschatten sollte, tot.
+
+Die Frau heißt in Wahrheit Brigid O'Shaughnessy, und ihr Anliegen ist ein anderes: Sie ist hinter einer Statuette her, einem schwarzen Falken, den Kreuzritter im 16. Jahrhundert dem spanischen König schicken wollten und der unter der Bemalung mit Edelsteinen besetzt sein soll. Hinter ihr her sind der dicke Kasper Gutman, der ihn seit siebzehn Jahren sucht, und zwei weitere Männer. Spade weiß von Anfang an, dass ihn jeder von ihnen belügt.
+
+### Entstehungsgeschichte
+
+Grundlage ist Dashiell Hammetts Roman von 1930. Es war die dritte Verfilmung des Stoffs innerhalb von zehn Jahren — die beiden früheren sind heute vergessen.
+
+John Huston führte hier zum ersten Mal Regie. Die Produktion blieb im Zeitplan und im Rahmen des Budgets von 375.000 Dollar.
+
+### Hinter den Kulissen
+
+Die Rolle des Sam Spade war zunächst George Raft angeboten worden; er lehnte ab, weil er nicht mit einem unerfahrenen Regisseur arbeiten wollte. Humphrey Bogart übernahm — und wurde damit zum Hauptdarsteller.
+
+Sydney Greenstreet spielt Kasper Gutman. Er war 61 Jahre alt und stand hier zum ersten Mal vor einer Filmkamera.
+
+Der Schlusssatz über die Statuette — sie sei der Stoff, aus dem Träume sind — spielt auf Shakespeares "Sturm" an und gehört zu den meistzitierten Zeilen der Filmgeschichte.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 3. Oktober 1941 und wurde sofort gelobt. Es gab drei Oscar-Nominierungen: bester Film, bester Nebendarsteller für Greenstreet und bestes adaptiertes Drehbuch für Huston.
+
+1989 gehörte er zu den ersten 25 Filmen, die in das National Film Registry aufgenommen wurden.
+
+Heute steht er bei 99 Prozent auf Rotten Tomatoes und 97 von 100 bei Metacritic. Er gilt als der erste bedeutende Film noir — und als Vorbild für praktisch jeden Detektivfilm danach.` },
+  {
+    bereich: 'titel', schluessel: 'movie:845', locale: 'de-de',
+    text: `### Worum es geht
+
+Im Zug lernt der Tennisspieler Guy Haines den redseligen Bruno Antony kennen, der alles über ihn weiß: die Ehe, die er beenden will, die Senatorentochter, die er heiraten möchte. Bruno unterbreitet ihm einen Vorschlag — jeder bringe den Menschen um, der dem anderen im Weg steht. Ohne Verbindung zwischen Täter und Opfer gebe es kein Motiv.
+
+Guy hält das für Gerede und geht. Bruno erwürgt daraufhin Guys Frau auf einem Jahrmarkt und erwartet nun, dass Guy seinen Teil erfüllt: den Mord an Brunos Vater. Als Guy sich weigert, beginnt Bruno, ihm die Tat anzuhängen.
+
+### Entstehungsgeschichte
+
+Grundlage ist Patricia Highsmiths Roman von 1950 — ihr erstes Buch. Hitchcock erwarb die Rechte für 7.500 Dollar, ein sehr niedriger Betrag, weil die Autorin unbekannt war.
+
+Das Drehbuch weicht ab: Guy ist im Buch Architekt und begeht den Mord tatsächlich; im Film ist er Tennisspieler und weigert sich.
+
+### Hinter den Kulissen
+
+Die Arbeit mit Raymond Chandler am Drehbuch scheiterte. Chandler hielt den Stoff für eine alberne kleine Geschichte und geriet mit Hitchcock über die Arbeitsweise aneinander; nachdem er zwei Fassungen ohne jede Rückmeldung abgegeben hatte, entließ Hitchcock ihn. Czenzi Ormonde schrieb das Buch daraufhin in weniger als drei Wochen neu, gemeinsam mit Alma Reville und Barbara Keon.
+
+Hitchcock wollte William Holden für Guy und nahm Farley Granger, dessen weichere Wirkung besser passte. Robert Walker spielt Bruno.
+
+Die Aufnahme des Mordes, gespiegelt im Brillenglas des Opfers, verlangte ein aufwendiges Doppelbelichtungsverfahren. Das Karussell-Finale ist einem Roman von Edmund Crispin aus dem Jahr 1946 entlehnt, ohne dass dieser genannt wurde.
+
+### Einordnung & Wirkung
+
+Die ersten Kritiken fielen gemischt aus. Heute steht der Film bei 98 Prozent auf Rotten Tomatoes; 2021 wurde er in das National Film Registry aufgenommen.
+
+Er gilt als eine der klarsten Ausführungen von Hitchcocks wiederkehrendem Motiv: dem Schuldtausch zwischen zwei Männern, von denen einer sich für unschuldig hält.` },
+  {
+    bereich: 'titel', schluessel: 'movie:965150', locale: 'de-de',
+    text: `### Worum es geht
+
+Sophie ist elf und verbringt mit ihrem Vater Calum eine Woche in einem Ferienhotel in der Türkei. Er ist Anfang dreißig, sie leben nicht zusammen, und sie filmt vieles mit einer kleinen Videokamera.
+
+Es geschieht nichts Besonderes: Bus zum Ausflug, Tauchgang, Karaoke, ein Streit über eine Rechnung. Der Film zeigt daneben, was Sophie damals nicht sehen konnte — dass ihr Vater schwer depressiv ist und es vor ihr verbirgt. Die erwachsene Sophie sieht die Aufnahmen Jahre später erneut durch und versucht, ihn darin zu finden.
+
+### Entstehungsgeschichte
+
+Charlotte Wells schrieb und inszenierte den Film; es war ihre erste abendfüllende Arbeit. Sie hat ihn als emotional autobiographisch bezeichnet, gestützt auf eigene Kindheitserfahrungen.
+
+Paul Mescal spielt Calum, Frankie Corio spielt Sophie — sie wurde aus über 800 Bewerbungen ausgewählt.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Ölüdeniz in der Türkei. Die Besetzung verbrachte vorab zwei Wochen in einer tatsächlichen Ferienanlage, um ein glaubwürdiges Verhältnis zwischen Vater und Tochter aufzubauen.
+
+Der Film erklärt nichts. Was mit Calum ist, wird nie ausgesprochen — es steht in Nebensätzen, in einem Gipsarm, dessen Ursache offenbleibt, und in Einstellungen, in denen er allein im Bild ist und Sophie gerade nicht hinsieht.
+
+### Einordnung & Wirkung
+
+Der Film spielte 9,7 Millionen Dollar ein.
+
+Die Kritik reagierte einhellig: 96 Prozent bei Rotten Tomatoes mit einem Durchschnitt von 8,8 von 10, dazu 95 von 100 bei Metacritic.
+
+Paul Mescal wurde für den Oscar und den BAFTA als bester Hauptdarsteller nominiert; Charlotte Wells gewann den BAFTA für das herausragende Debüt einer britischen Autorin, Regisseurin oder Produzentin. Mehrere Redaktionen führen den Film unter den besten der zwanziger Jahre.` },
+  {
+    bereich: 'titel', schluessel: 'movie:660120', locale: 'de-de',
+    text: `### Worum es geht
+
+Julie ist Ende zwanzig in Oslo und wechselt die Richtung, sobald etwas sich festzulegen droht: von der Medizin zur Psychologie, von dort zur Fotografie. Ihr Freund Aksel ist fünfzehn Jahre älter, ein anerkannter Comiczeichner, und möchte Kinder.
+
+Auf einer Hochzeitsfeier, zu der sie nicht eingeladen ist, lernt sie Eivind kennen. Der Film erzählt in zwölf Kapiteln mit Prolog und Epilog, wie Julie sich zwischen beiden Leben bewegt — und was geschieht, als Aksel erkrankt.
+
+### Entstehungsgeschichte
+
+Joachim Trier führte Regie und schrieb das Drehbuch mit Eskil Vogt. Der Film schließt Triers sogenannte Oslo-Trilogie ab, nach "Auf Anfang" (2006) und "Oslo, 31. August" (2011).
+
+Renate Reinsve spielt Julie. Sie hatte zuvor kaum größere Rollen gespielt; in Triers "Oslo, 31. August" bestand ihr Auftritt aus einem einzigen Satz.
+
+### Hinter den Kulissen
+
+Die Kapitelstruktur erlaubt es dem Film, Zeitsprünge ohne Überleitung zu machen und einzelne Kapitel in völlig anderem Ton zu erzählen — eines davon besteht darin, dass Oslo stillsteht und Julie durch die eingefrorene Stadt läuft.
+
+Der Titel bezieht sich nicht auf ein Urteil über die Hauptfigur, sondern auf ein Gefühl, das der Film wiederholt: die Überzeugung, anderen gegenüber unmöglich zu sein.
+
+### Einordnung & Wirkung
+
+Renate Reinsve gewann 2021 in Cannes den Preis als beste Darstellerin.
+
+Bei der Oscar-Verleihung 2022 gab es zwei Nominierungen: bester internationaler Film und bestes Originaldrehbuch für Trier und Vogt.
+
+Die Kritik reagierte einhellig: 96 Prozent von 251 Besprechungen bei Rotten Tomatoes mit einem Durchschnitt von 8,8 von 10. Die New York Times führte den Film 2025 auf Platz 95 ihrer hundert besten Filme des 21. Jahrhunderts.` },
+  {
+    bereich: 'titel', schluessel: 'movie:18491', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film erzählt das Ende der Serie "Neon Genesis Evangelion" neu — in zwei Teilen, die als Folgen 25 und 26 gezählt werden.
+
+Im ersten greift die Organisation Seele die Zentrale von Nerv an, um das Projekt zur Vervollkommnung des Menschen einzuleiten. Misato rettet Shinji, damit er seinen Kampfroboter besteigt, und stirbt an ihren Verletzungen. Im zweiten Teil verbindet sich Rei mit Lilith und löst den Dritten Impact aus: Die Menschheit zerfließt zu einer einzigen Substanz, in der niemand mehr allein ist. Shinji lehnt das am Ende ab — Leben heiße, Schmerz und Freude beide zu haben.
+
+### Entstehungsgeschichte
+
+Der Schluss der Fernsehserie hatte 1996 heftigen Widerspruch ausgelöst: Die letzten beiden Folgen verlassen die Handlung und spielen fast vollständig in Shinjis Kopf.
+
+Hideaki Anno geriet danach in eine schwere Krise. Er erlebte Vorwürfe als Unterstellung von Nachlässigkeit, las im Internet Aufrufe, ihm etwas anzutun, dachte an Selbsttötung und erwog, die Animation ganz aufzugeben. Sein Freund Hayao Miyazaki riet ihm zu einer Pause, die er mehrere Monate lang nahm, bevor die Produktion begann.
+
+### Hinter den Kulissen
+
+Anno hat sich später gegen die Deutung verwahrt, der Film sei eine Korrektur: Die Serie habe zufriedenstellend geendet, und er verteidigte die Arbeit seiner Mitarbeiter.
+
+Bemerkenswert ist, wie der Film mit dem Widerspruch umgeht — er nimmt ihn auf. In einer Passage sind Zuschriften von Zuschauern zu sehen, darunter Beschimpfungen, und kurz darauf reales Publikum in einem Kinosaal.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 19. Juli 1997 und spielte in Japan 2,47 Milliarden Yen ein, umgerechnet rund 19 Millionen Dollar.
+
+Er gilt als eines der bedeutendsten Werke des japanischen Animationsfilms und wird bis heute in Kinos wiederaufgeführt.
+
+Bemerkenswert bleibt das Verhältnis von Werk und Publikum: Ein Film, der als Antwort auf eine Empörung entstand und diese Empörung selbst zum Gegenstand macht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8689', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Filmteam ist im Amazonasgebiet verschwunden. Der Anthropologe Harold Monroe reist hin, um es zu suchen, und findet nur die belichteten Filmrollen.
+
+Die zweite Hälfte des Films besteht aus diesem Material. Es zeigt, dass die vermissten Dokumentarfilmer die Grausamkeiten, die sie festhalten wollten, selbst herbeigeführt haben: Sie zünden eine Hütte an, treiben Menschen zusammen, begehen eine Vergewaltigung. Was ihnen zuletzt widerfährt, ist die Reaktion darauf.
+
+### Entstehungsgeschichte
+
+Regie führte Ruggero Deodato; der Film wurde am 7. Februar 1980 in Mailand erstaufgeführt.
+
+Er ist einer der frühesten Filme, die vollständig auf gefundenes Material setzen — fast zwei Jahrzehnte vor "Blair Witch Project", das dieses Verfahren einem breiten Publikum bekannt machte.
+
+### Hinter den Kulissen
+
+Zehn Tage nach der Premiere wurde der Film wegen Unzüchtigkeit beschlagnahmt. Deodato wurde vorgeworfen, die gezeigten Todesfälle seien echt. Er entging einer Mordanklage nur, indem er die Darsteller vor Gericht erscheinen ließ — sie hatten vertraglich zugesichert, ein Jahr lang öffentlich nicht aufzutreten. Erst 1984 hoben italienische Gerichte das Verbot auf und erteilten einer gekürzten Fassung eine Freigabe.
+
+Unstrittig echt ist etwas anderes: Im Film werden Tiere tatsächlich getötet, darunter eine Schildkröte, ein Nasenbär, ein Schwein und Affen — insgesamt sieben. Diese Aufnahmen waren weltweit der Hauptgrund für Verbote, unter anderem in Großbritannien, Australien und Südafrika.
+
+### Einordnung & Wirkung
+
+Die Bewertung ist bis heute geteilt. Verteidiger sehen darin eine Auseinandersetzung mit der Ausbeutung durch Medien und mit westlichem Überlegenheitsdenken.
+
+Kritiker halten dagegen, die drastische Darstellung untergrabe jede ernsthafte Aussage — ein Film, der genau das betreibt, was er anprangert.
+
+Er gehört damit zu den meistverbotenen Filmen überhaupt und zu den wenigen, deren Wirkungsgeschichte fast vollständig aus Gerichtsverfahren und Zensurentscheidungen besteht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:3432', locale: 'de-de',
+    text: `### Worum es geht
+
+Earl Brooks ist Unternehmer in Portland, Familienvater und gerade zum Mann des Jahres der Handelskammer gewählt worden. Er ist außerdem der Daumenabdruck-Mörder, der seit Jahren gesucht wird.
+
+Brooks weiß, dass er krank ist, und besucht Sitzungen der Anonymen Alkoholiker, um gegen den Drang anzugehen. Sein innerer Antreiber Marshall — für das Publikum sichtbar, für alle anderen nicht — redet ihm zu. Nach einer Tat fotografiert ihn ein Nachbar durch ein Fenster. Der Mann will kein Geld, sondern mitkommen.
+
+### Entstehungsgeschichte
+
+Bruce A. Evans führte Regie und schrieb das Drehbuch mit. Kevin Costner spielt Earl Brooks und produzierte den Film zugleich; das Budget lag bei 20 Millionen Dollar.
+
+William Hurt spielt Marshall, Demi Moore die ermittelnde Polizistin Tracy Atwood.
+
+### Hinter den Kulissen
+
+Die Besetzung war eine bewusste Entscheidung gegen Costners Bild: Er war jahrzehntelang der aufrechte Amerikaner in "Der mit dem Wolf tanzt" und "Feld der Träume" gewesen. Kritiker hoben ihn und Hurt gleichermaßen hervor.
+
+Der Kunstgriff mit dem sichtbaren Alter Ego erlaubt es, das innere Ringen als Dialog zu führen — Marshall lacht, wenn Brooks sich rechtfertigt.
+
+Evans hat später zwei geplante Fortsetzungen beschrieben, die nie zustande kamen: Sie hätten eine Entführung, Marshalls Tod und Wiederkehr sowie am Ende Brooks' Selbsttötung samt der seiner Tochter enthalten.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 48,1 Millionen Dollar ein, davon 28,5 Millionen in den USA — deutlich über den Herstellungskosten.
+
+Die Kritik urteilte gemischt: 56 Prozent von 158 Besprechungen bei Rotten Tomatoes, 45 von 100 bei Metacritic, mit dem Befund, der Film überlade sich mit Wendungen und Nebenhandlungen.
+
+Was in Erinnerung geblieben ist, sind die beiden Hauptdarsteller — und die Idee, einen Serienmörder als Süchtigen zu zeigen, der sich selbst behandelt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:302156', locale: 'de-de',
+    text: `### Worum es geht
+
+Der CIA-Agent Bill Pope wird in London getötet, bevor er den Aufenthaltsort eines Hackers preisgeben kann, der Zugriff auf amerikanische Atomwaffen-Codes hat. Sein Wissen ist damit verloren.
+
+Die Behörde greift zu einem Verfahren, das bislang nur an Tieren erprobt wurde: Popes Erinnerungen werden in das Gehirn eines Häftlings verpflanzt. Jerico Stewart hat als Kind eine Hirnverletzung erlitten, empfindet nichts und kennt keine Hemmung — was ihn geeignet macht. Mit Popes Erinnerungen kommen jedoch auch dessen Gefühle: für dessen Frau und Tochter.
+
+### Entstehungsgeschichte
+
+Regie führte Ariel Vromen, das Drehbuch schrieben Douglas Cook und David Weisberg.
+
+Kevin Costner spielt Jerico, Gary Oldman den CIA-Leiter, Tommy Lee Jones den Wissenschaftler — für Costner, Oldman und Jones war es die zweite gemeinsame Arbeit nach "JFK" von 1991. Ryan Reynolds spielt den zu Beginn getöteten Agenten; daneben sind Gal Gadot und Antje Traue zu sehen.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten begannen am 4. September 2014 in London. Produziert wurde der Film von Campbell-Grobman Films und Millennium Films; das Budget lag bei 31,5 Millionen Dollar.
+
+Costners Rolle verlangt eine ungewöhnliche Anlage: Jerico spricht anfangs kaum, reagiert falsch auf einfache Situationen und verändert sich im Verlauf, ohne dass der Film das erklärt.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 15. April 2016 und spielte weltweit 38,8 Millionen Dollar ein, davon 14,7 Millionen in den USA; das Startwochenende brachte 5,8 Millionen.
+
+Die Kritik lehnte ihn deutlich ab: 30 Prozent bei Rotten Tomatoes, 36 von 100 bei Metacritic. Ein Rezensent hielt fest, trotz der tapferen Bemühungen einer spielfreudigen und begabten Besetzung biete der Film wenig über das Nötigste hinaus. Das Publikum vergab bei CinemaScore ein B minus.` },
 ];
