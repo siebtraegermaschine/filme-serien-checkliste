@@ -24598,4 +24598,225 @@ Weltweit spielte der Film 37,6 Millionen Dollar ein, davon 35,3 Millionen in den
 Die Kritik urteilte zunächst gemischt; Roger Ebert vergab drei Sterne.
 
 Seine eigentliche Wirkung entfaltete er über die Videoauswertung: Er gilt heute als Kultfilm und wird von Disney-Anhängern regelmäßig unter die beliebtesten Arbeiten des Studios gezählt — auch wegen der Musik, insbesondere der Powerline-Lieder.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:129670', locale: 'de-de',
+    text: `### Worum es geht
+
+Woody Grant ist alt, trinkt und hat einen Werbebrief erhalten, der ihm eine Million Dollar verspricht. Er hält ihn für echt und will nach Lincoln in Nebraska, um das Geld abzuholen — zu Fuß, wenn es sein muss.
+
+Sein Sohn David fährt ihn schließlich hin, um die Sache hinter sich zu bringen. Unterwegs machen sie Station im Heimatort der Familie, wo sich die Nachricht vom angeblichen Gewinn herumspricht. Alte Bekannte melden Ansprüche an, Verwandte werden freundlich, und David erfährt zum ersten Mal etwas über das Leben seines Vaters, bevor der zu dem wurde, den er kennt.
+
+### Entstehungsgeschichte
+
+Regie führte Alexander Payne, das Drehbuch schrieb Bob Nelson. Das Budget lag bei 13,5 Millionen Dollar.
+
+Es spielen Bruce Dern als Woody, Will Forte als sein Sohn David, June Squibb als Mutter Kate sowie Bob Odenkirk und Stacy Keach.
+
+### Hinter den Kulissen
+
+Gedreht wurde in Schwarzweiß, digital und mit anamorphen Objektiven. Payne hat die Entscheidung begründet: Er suchte die poetische Kraft des Schwarzweiß und ein sinnbildliches, archetypisches Aussehen.
+
+Der Film war die letzte Kinoveröffentlichung von Paramount Vantage, bevor das Label geschlossen wurde.
+
+June Squibbs Rolle ist die Gegenfigur zum wortkargen Woody: Sie spricht aus, was alle anderen verschweigen, besonders auf dem Friedhof des Heimatorts.
+
+### Einordnung & Wirkung
+
+Bruce Dern gewann 2013 in Cannes den Preis als bester Darsteller. Es folgten sechs Oscar-Nominierungen, darunter bester Film, beste Regie, bester Hauptdarsteller und beste Nebendarstellerin.
+
+Weltweit spielte der Film 27,7 Millionen Dollar ein und war damit erfolgreich.
+
+Die Kritik reagierte einhellig: 90 Prozent bei Rotten Tomatoes. Eine Besprechung nannte ihn eine bittersüße Elegie auf die amerikanische Großfamilie.` },
+  {
+    bereich: 'titel', schluessel: 'movie:318917', locale: 'de-de',
+    text: `### Worum es geht
+
+Adolf Hitler erwacht 2014 auf einer Brache in Berlin, dort wo einmal der Führerbunker lag. Er trägt Uniform, riecht nach Benzin und hält die Bundesrepublik für eine vorübergehende Erscheinung.
+
+Ein arbeitsloser Fernsehmitarbeiter namens Sawatzki hält ihn für einen außerordentlich guten Kabarettisten und filmt ihn. Die Aufnahmen werden im Netz zum Erfolg, Hitler bekommt eine eigene Sendung, und niemand kommt auf die Idee, dass er ernst meint, was er sagt. Der Film erzählt damit weniger von Hitler als davon, wie eine Gesellschaft reagiert, die alles für Unterhaltung hält.
+
+### Entstehungsgeschichte
+
+Grundlage ist Timur Vermes' Roman von 2012. Regie führte David Wnendt; der Film erschien am 8. Oktober 2015.
+
+Oliver Masucci spielt Hitler und bereitete sich mit dem Studium von Reden und Auftreten vor.
+
+### Hinter den Kulissen
+
+Die Besonderheit liegt in der Machart: Gespielte Szenen wechseln mit Aufnahmen, die Masucci in Uniform unter echten Passanten gedreht hat, die nichts von der Inszenierung wussten. Rund 300 Stunden Material kamen dabei zusammen, von denen nur ein Bruchteil verwendet wurde.
+
+Genau diese Passagen sind der beunruhigende Teil des Films: Menschen lassen sich mit ihm fotografieren, viele lachen — und einige beginnen, ihm zuzustimmen.
+
+### Einordnung & Wirkung
+
+Bei einem Budget von rund 3,3 Millionen Dollar spielte der Film weltweit 25,5 Millionen ein und stand in Deutschland auf Platz eins.
+
+Die Kritik urteilte gemischt. Eine Besprechung hielt fest, als Mediensatire halte er stand, äußerte aber Bedenken gegen seine Botschaft. Die Deutsche Film- und Medienbewertung stufte ihn als "besonders wertvoll" ein, während andere Stimmen bezweifelten, ob die Satire ihr Ziel erreicht.
+
+Die Debatte darüber, ob man über Hitler lachen darf und was dabei geschieht, hat der Film in Deutschland neu angestoßen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2291', locale: 'de-de',
+    text: `### Worum es geht
+
+Jacob Singer arbeitet bei der Post in New York und war in Vietnam. Sein Sohn Gabe ist bei einem Unfall gestorben, seine Ehe zerbrochen; er lebt mit einer Kollegin zusammen.
+
+Dann beginnen die Bilder: Gestalten mit zuckenden Köpfen in der U-Bahn, Fühler unter der Haut, Ärzte ohne Gesicht. Andere Männer aus seiner Einheit erleben dasselbe und sterben nacheinander. Jacob vermutet ein Experiment der Armee — und was tatsächlich vorliegt, klärt der Film erst in den letzten Minuten.
+
+### Entstehungsgeschichte
+
+Das Drehbuch schrieb Bruce Joel Rubin, der sich zuvor zwei Jahre lang mit tibetischem Buddhismus befasst hatte. Im selben Jahr erschien "Ghost", ebenfalls nach seinem Buch.
+
+Regie führte Adrian Lyne, Tim Robbins spielt Jacob; daneben sind Elizabeth Peña und Danny Aiello zu sehen. Das Budget lag bei 25 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde im Großraum New York; die Vietnam-Szenen entstanden in Puerto Rico.
+
+Die berühmten zuckenden Bewegungen der Erscheinungen entstanden ohne Computertechnik: Die Darsteller bewegten ihre Köpfe langsam, und die Aufnahmen wurden mit stark verringerter Bildrate gedreht und später in normaler Geschwindigkeit abgespielt.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 2. November 1990, startete mit 7,5 Millionen Dollar auf Platz eins und spielte in den USA 26,1 Millionen ein.
+
+Die Kritik urteilte gemischt, aber respektvoll: 72 Prozent bei Rotten Tomatoes; Roger Ebert vergab dreieinhalb von vier Sternen und nannte ihn kraftvoll geschrieben, inszeniert und gespielt.
+
+Seine Wirkung reicht weit über den Film hinaus: Er hat die Videospielreihe "Silent Hill" maßgeblich geprägt und wird von Shinji Mikami ("Resident Evil") ebenso als Vorbild genannt wie von Christopher Nolan. Eine Neuverfilmung von 2019 fiel durch.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2196', locale: 'de-de',
+    text: `### Worum es geht
+
+Daniel richtet die Beerdigung seines Vaters aus. Sein erfolgreicher Bruder Robert reist aus New York an, ohne sich an den Kosten zu beteiligen, und erwartet, die Grabrede zu halten.
+
+Von da an geht alles schief. Der falsche Sarg wird geliefert. Der Verlobte einer Cousine nimmt versehentlich eine halluzinogene Droge statt eines Beruhigungsmittels und steht kurz darauf nackt auf dem Dach. Und ein ungeladener kleinwüchsiger Gast namens Peter erklärt, er sei der Geliebte des Verstorbenen gewesen, und legt Fotos vor.
+
+### Entstehungsgeschichte
+
+Regie führte Frank Oz, das Drehbuch schrieb Dean Craig. Das Budget lag bei 9 Millionen Dollar; gedreht wurde in den Ealing Studios in London.
+
+Der Film erschien am 17. August 2007 in den USA und am 2. November 2007 in Großbritannien.
+
+### Hinter den Kulissen
+
+Die Anlage ist die einer klassischen Farce: ein einziger Schauplatz, ein festgelegter Zeitraum, eine wachsende Zahl von Geheimnissen und Beteiligten, die einander im Weg stehen.
+
+Frank Oz kam von den Muppets, wo er Miss Piggy und Fozzie Bär gespielt hatte, und später von Komödien wie "Was ist mit Bob?"; die Genauigkeit im Timing ist seine Handschrift.
+
+Bemerkenswert ist die Besetzung: Der Film verwendet durchgehend britische Fernseh- und Theaterdarsteller, die dem amerikanischen Publikum damals kaum bekannt waren — was der Farce zugutekommt, weil niemand eine bestimmte Rolle erwartet.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 46,8 Millionen Dollar ein.
+
+Die Kritik urteilte wohlwollend: 62 Prozent bei Rotten Tomatoes mit dem Befund, es handle sich um eine mitreißende britische Farce, deren Klamauk über die Schwächen hinweghelfe. Roger Ebert vergab drei von vier Sternen.
+
+Bereits 2010 entstand eine amerikanische Neuverfilmung mit Chris Rock und Tracy Morgan — bemerkenswert dabei: Peter Dinklage spielte dieselbe Rolle noch einmal, unter anderem Figurennamen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:85889', locale: 'de-de',
+    text: `### Worum es geht
+
+Bruce Robertson ist Detective Sergeant in Edinburgh und will befördert werden. Sein Vorgehen dabei besteht darin, sämtliche Kollegen gegeneinander auszuspielen — mit Gerüchten, gefälschten Anrufen und dem gezielten Ausnutzen dessen, was jeder von ihnen verbirgt.
+
+Nebenbei soll er einen Mord aufklären. Der Film ist aus Bruces Sicht erzählt, und die ist zunehmend unzuverlässig: Er ist bipolar, medikamentenabhängig, und seine Frau, die er ständig erwähnt, taucht in Bildern auf, die immer weniger zusammenpassen. Was mit seinem Bruder geschehen ist, bildet den Kern.
+
+### Entstehungsgeschichte
+
+Grundlage ist Irvine Welshs Roman von 1998, der lange als unverfilmbar galt. Jon S. Baird schrieb das Drehbuch und führte Regie.
+
+Es handelt sich um eine Gemeinschaftsproduktion aus Belgien, Großbritannien, Deutschland, Schweden und den USA. Die Musik schrieb Clint Mansell; der Soundtrack verwendet daneben Stücke von Billy Ocean und Tom Jones.
+
+### Hinter den Kulissen
+
+James McAvoy spielt Bruce Robertson — eine Rolle, die gegen alles steht, wofür er zuvor besetzt worden war. Daneben sind Jamie Bell, Jim Broadbent und Joanne Froggatt zu sehen. Für David Soul war es die letzte Filmrolle.
+
+Die Halluzinationen nehmen im Verlauf zu und übernehmen schließlich die Erzählung — der Film wechselt dabei die Machart, ohne es anzukündigen.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 9,1 Millionen Dollar ein; in Schottland führte er sein Startwochenende mit 250.000 Pfund an.
+
+Die Kritik urteilte überwiegend positiv: 67 Prozent bei Rotten Tomatoes mit dem Befund, er sei verdreht, schmutzig und mit Begeisterung unangenehm; 56 von 100 bei Metacritic.
+
+McAvoys Darstellung gilt bis heute als eine seiner stärksten — und als der Beleg dafür, dass er mehr kann als die freundlichen Rollen, für die er bekannt war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9718', locale: 'de-de',
+    text: `### Worum es geht
+
+Ricky Bobby ist der beste NASCAR-Fahrer des Landes und hat eine einzige Lebensregel, die ihm sein Vater als Kind mitgegeben hat: Wer nicht Erster ist, ist Letzter. Er gewinnt alles, hat eine schöne Frau, zwei ungezogene Söhne und einen besten Freund, der ihm zuliebe immer Zweiter wird.
+
+Dann kommt Jean Girard, ein französischer Formel-1-Fahrer, der Jazz hört, Espresso trinkt und Ricky auf der Strecke schlägt. Nach einem schweren Unfall kann Ricky nicht mehr fahren — er glaubt zu brennen, sobald er ins Auto steigt — und muss von vorn anfangen.
+
+### Entstehungsgeschichte
+
+Adam McKay und Will Ferrell entwickelten die Idee während der Arbeit an "Buddy — Der Weihnachtself". Nach dem Besuch eines NASCAR-Rennens in Kalifornien trugen sie den Studios einen Vorschlag aus sechs Wörtern vor: Will Ferrell als NASCAR-Fahrer.
+
+Das genügte — Ferrell war durch "Old School" und "Anchorman" auf dem Höhepunkt seiner Bekanntheit. Das Budget lag bei 72,5 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Gedreht wurde überwiegend in North Carolina, eine Woche davon am Talladega Superspeedway in Alabama.
+
+Neben Ferrell spielen John C. Reilly, Sacha Baron Cohen als Jean Girard, Gary Cole und Michael Clarke Duncan. Die echten Fahrer Dale Earnhardt Jr. und Jamie McMurray treten auf, ebenso die Übertragungsteams von NASCAR bei Fox und NBC.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 163,4 Millionen Dollar ein.
+
+Die Kritik reagierte gut: 72 Prozent bei Rotten Tomatoes, mit Lob für die Satire, den Aufbau und die Besetzung. Er gilt heute als einer der besten Filme Ferrells und als Kultfilm.
+
+Bemerkenswert ist die Rückwirkung: Sätze und Bilder aus dem Film sind Teil der NASCAR-Kultur geworden — Fahrer und Teams zitieren ihn noch Jahre später.` },
+  {
+    bereich: 'titel', schluessel: 'movie:18480', locale: 'de-de',
+    text: `### Worum es geht
+
+Brüno Gehard moderiert in Österreich eine Modesendung und wird nach einem Auftritt im Klettverschlussanzug entlassen. Er reist nach Los Angeles, um berühmt zu werden — mit jedem Mittel, das ihm einfällt.
+
+Wie schon bei "Borat" besteht der Film überwiegend aus Begegnungen mit Menschen, die nichts von der Inszenierung wissen: Casting-Agenten, die Eltern für ihre Kleinkinder alles unterschreiben lassen, ein Sprecher einer Umerziehungseinrichtung für Homosexuelle, Jäger in Alabama, ein Publikum bei einem Käfigkampf in Arkansas.
+
+### Entstehungsgeschichte
+
+Sacha Baron Cohen entwickelte die Figur wie Borat zuvor im britischen Fernsehen. Regie führte erneut Larry Charles. Der Film wurde am 25. Juni 2009 gezeigt und erschien am 10. Juli 2009; das Budget lag bei 42 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Eine Szene mit einer Schwester Michael Jacksons wurde vor der Veröffentlichung entfernt — Jackson war am Tag der Premiere gestorben.
+
+Der Film wurde in der Ukraine verboten. Ayman Abu Aita klagte, weil er darin als Terrorist dargestellt worden sei; das Verfahren wurde 2012 zu nicht genannten Bedingungen beigelegt. Baron Cohen berichtete anschließend von vermehrten Drohungen und verschärften Sicherheitsvorkehrungen.
+
+Eine bleibende Folge betrifft die amerikanische Prüfstelle: Die MPAA führte nach diesem Film "männliche Nacktheit" ausdrücklich als Hinweis in ihren Alterseinstufungen ein, nachdem Eltern sich beschwert hatten.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 139 Millionen Dollar ein — deutlich weniger als "Borat" und mit einem auffällig starken Einbruch nach dem Startwochenende.
+
+Die Kritik urteilte gemischt: 68 Prozent bei Rotten Tomatoes, 54 von 100 bei Metacritic. Roger Ebert vergab dreieinhalb Sterne und lobte das Tempo; A. O. Scott von der New York Times nannte ihn eine träge Arbeit, die mehr anbiedere als herausfordere.` },
+  {
+    bereich: 'titel', schluessel: 'movie:381719', locale: 'de-de',
+    text: `### Worum es geht
+
+Peter Hase und seine Schwestern plündern seit Jahren den Gemüsegarten des alten McGregor, der ihren Vater einst zu Pastete verarbeitet hat. Als McGregor an einem Herzinfarkt stirbt, gehört der Garten den Tieren.
+
+Dann erbt sein Großneffe Thomas das Anwesen — ein pedantischer Angestellter aus London, der Ordnung will und verkaufen möchte. Zwischen ihm und den Hasen entwickelt sich ein Krieg mit Sprengfallen, Elektrozäunen und Dynamit, während beide Seiten zugleich um die Gunst der Nachbarin Bea werben.
+
+### Entstehungsgeschichte
+
+Grundlage sind Beatrix Potters Geschichten, deren erste 1902 erschien. Will Gluck führte Regie und schrieb das Drehbuch gemeinsam mit Rob Lieber. Das Budget lag bei 50 Millionen Dollar.
+
+Die Figur der Bea ist an Potter selbst angelehnt — sie malt Tierbilder und lebt allein auf dem Land.
+
+### Hinter den Kulissen
+
+Umstritten war eine Szene, in der die Hasen den gegen Brombeeren allergischen Thomas gezielt mit den Früchten bewerfen, bis er einen anaphylaktischen Schock erleidet und sich selbst eine Notfallspritze setzen muss.
+
+Mehrere Verbände für Allergiker kritisierten das als Verharmlosung und als Anleitung zum Schikanieren. Sony entschuldigte sich öffentlich: Man bedaure aufrichtig, für dieses Thema nicht aufmerksamer und einfühlsamer gewesen zu sein.
+
+Der Fall ist einer der wenigen, in denen ein großes Studio wegen einer einzelnen Szene eines Familienfilms eine förmliche Entschuldigung abgegeben hat — und er hat in mehreren Ländern eine Debatte darüber ausgelöst, wie Allergien im Kinderfilm dargestellt werden.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 351,3 Millionen Dollar ein — 115,3 Millionen in den USA und 235,9 Millionen international.
+
+Die Kritik urteilte gemischt: 64 Prozent bei Rotten Tomatoes, 51 von 100 bei Metacritic; das Publikum vergab bei CinemaScore ein A minus. Bemängelt wurden vor allem die Abweichungen von Potters Vorlage und die Anlage der Titelfigur, gelobt die Animation.
+
+2021 folgte eine Fortsetzung.` },
 ];
