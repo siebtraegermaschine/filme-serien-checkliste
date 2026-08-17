@@ -612,6 +612,12 @@
   .onb-liste .onb-wahl { width:100%; text-align:left; }
   .onb-wahl.an { border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
   @media (hover: hover) { .onb-wahl:hover { border-color:var(--accent); } }
+  /* Schritt 1 zeigt dieselbe Titelkarte wie die Kennenlern-Strecke, nur
+     kleiner: im Onboarding-Fenster stehen darueber noch Fortschritt, Titel und
+     Einleitung -- in voller Groesse lagen die Antwortknoepfe unter der Falte,
+     und der allererste Schritt darf kein Scrollen verlangen. */
+  .onb-inhalt .kennen-poster { width:110px; height:165px; }
+  .onb-inhalt .kennen-name { min-height:0; margin-top:6px; }
   .onb-mehr { background:none; border:none; color:var(--accent); font-size:13px; font-weight:600;
     cursor:pointer; padding:8px 2px 0; text-decoration:underline; }
   .onb-zaehler { color:var(--text-dim); font-size:12px; text-align:center; margin:0 0 8px; min-height:15px; }
@@ -1097,6 +1103,8 @@
   .kino-item-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
   .kino-item-text b { font-size: 14px; font-weight: 600; color: var(--text); }
   .kino-item-text small { font-size: 12px; color: var(--text-dim); }
+  .kino-standort { background: none; border: none; color: var(--accent); font-size: 13px;
+    font-weight: 600; cursor: pointer; padding: 0 2px 10px; text-decoration: underline; }
   .watch-source a { color: var(--text-dim); text-decoration: underline; }
   @media (hover: hover) { .watch-source a:hover { color: var(--accent); } }
   .det-actions { clear: both; display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); }
@@ -1872,16 +1880,9 @@
     <button class="modal-x" id="kinosModalX" aria-label="Schließen">✕</button>
     <h3>Deine Kinos</h3>
     <p class="prov-intro">Suche deinen Ort und wähle die Kinos, in die du gehst.</p>
-    <div class="kino-suche">
-      <input type="text" id="kinoOrtInput" placeholder="Postleitzahl oder Ort …" autocomplete="off">
-      <div class="kino-vorschlaege" id="kinoVorschlaege" style="display:none"></div>
-    </div>
-    <div class="kino-umkreis" id="kinoUmkreis">
-      <button type="button" data-km="10">10 km</button>
-      <button type="button" data-km="25" class="active">25 km</button>
-      <button type="button" data-km="50">50 km</button>
-    </div>
-    <div class="prov-list" id="kinosList">Suche zuerst deinen Ort.</div>
+    <!-- Suchfeld, Umkreis und Liste baut kinoSucheErstellen (derselbe
+         Baustein wie im Onboarding-Fenster). -->
+    <div id="kinosBereich"></div>
     <div class="prov-foot">
       <span class="prov-hint" id="kinosHint"></span>
       <button type="button" id="kinosSaveBtn" class="auth-submit">Speichern</button>
@@ -2289,9 +2290,17 @@ var UI_TEXTE = {
     onbWeiter: 'Weiter',
     onbLosGehts: 'Los geht’s',
     onbFehler: 'Das hat nicht geklappt. Bitte noch einmal versuchen.',
-    onbPlatzhalter: function(n){ return 'Schritt ' + n + ' — Inhalt folgt.'; },
     onbFertigTitel: 'Fertig!',
     onbFertigText: 'Deine Angaben sind gespeichert.',
+    onbTitelIntro: 'Sag zu ein paar bekannten Titeln kurz deine Meinung — daraus entsteht deine persönliche Sortierung.',
+    kinoPlatzhalter: 'Postleitzahl oder Ort …',
+    kinoStandort: 'Meinen Standort verwenden',
+    kinoStandortFehler: 'Standort nicht verfügbar. Such einfach nach Ort oder Postleitzahl.',
+    onbKinoTitel: 'Deine Lieblingskinos',
+    onbKinoIntro: 'Such deinen Ort und wähle die Kinos, in die du gehst. Gehst du nicht ins Kino? Dann einfach weiter.',
+    onbAnbieterTitel: 'Deine Streaming-Anbieter',
+    onbAnbieterIntro: 'Welche nutzt du? Nur diese tauchen bei „Ansehen, Leihen, Kaufen“ und an den Titeln auf. Keinen dabei? Dann einfach weiter.',
+    onbTitelStand: function(n, mind){ return n < mind ? n + ' von ' + mind : n + ' bewertet'; },
     onbTypTitel: 'Wie schaust du?',
     onbTypIntro: 'Mehrfach möglich — such dir alles aus, was auf dich zutrifft.',
     onbTypen: { selten: 'Eher selten – dann muss es sich lohnen', serien: 'Serien-Marathon am Wochenende', kino: 'Regelmäßig im Kino', streaming: 'Was gerade bei Netflix, Prime & Co läuft', sammlung: 'Eigene Sammlung (DVD, Blu-ray, 4K)', klassiker: 'Klassiker und Filmgeschichte' },
@@ -2577,9 +2586,17 @@ var UI_TEXTE = {
     onbWeiter: 'Continue',
     onbLosGehts: 'Let’s go',
     onbFehler: 'That didn’t work. Please try again.',
-    onbPlatzhalter: function(n){ return 'Step ' + n + ' — content to follow.'; },
     onbFertigTitel: 'All set!',
     onbFertigText: 'Your answers are saved.',
+    onbTitelIntro: 'Give a quick take on a few well-known titles — that builds your personal ranking.',
+    kinoPlatzhalter: 'Postal code or town …',
+    kinoStandort: 'Use my location',
+    kinoStandortFehler: 'Location unavailable. Just search by town or postal code.',
+    onbKinoTitel: 'Your favourite cinemas',
+    onbKinoIntro: 'Search for your town and pick the cinemas you go to. Not a cinema-goer? Just continue.',
+    onbAnbieterTitel: 'Your streaming services',
+    onbAnbieterIntro: 'Which ones do you use? Only these show up under “Stream, Rent, Buy” and on the titles. None of them? Just continue.',
+    onbTitelStand: function(n, mind){ return n < mind ? n + ' of ' + mind : n + ' rated'; },
     onbTypTitel: 'How do you watch?',
     onbTypIntro: 'Pick as many as you like — everything that applies to you.',
     onbTypen: { selten: 'Rarely – and then it had better be good', serien: 'Series marathon on the weekend', kino: 'Regularly at the cinema', streaming: 'Whatever’s on Netflix, Prime & co right now', sammlung: 'My own collection (DVD, Blu-ray, 4K)', klassiker: 'Classics and film history' },
@@ -2865,9 +2882,17 @@ var UI_TEXTE = {
     onbWeiter: 'Continuer',
     onbLosGehts: 'C’est parti',
     onbFehler: 'Ça n’a pas marché. Réessaie.',
-    onbPlatzhalter: function(n){ return 'Étape ' + n + ' — contenu à venir.'; },
     onbFertigTitel: 'C’est fait !',
     onbFertigText: 'Tes réponses sont enregistrées.',
+    onbTitelIntro: 'Donne vite ton avis sur quelques titres connus — c’est ce qui crée ton classement personnel.',
+    kinoPlatzhalter: 'Code postal ou ville …',
+    kinoStandort: 'Utiliser ma position',
+    kinoStandortFehler: 'Position indisponible. Cherche par ville ou code postal.',
+    onbKinoTitel: 'Tes cinémas préférés',
+    onbKinoIntro: 'Cherche ta ville et choisis les cinémas où tu vas. Tu n’y vas jamais ? Continue simplement.',
+    onbAnbieterTitel: 'Tes services de streaming',
+    onbAnbieterIntro: 'Lesquels utilises-tu ? Seuls ceux-ci apparaîtront sous « Voir, Louer, Acheter » et sur les titres. Aucun ? Continue simplement.',
+    onbTitelStand: function(n, mind){ return n < mind ? n + ' sur ' + mind : n + ' notés'; },
     onbTypTitel: 'Comment regardes-tu ?',
     onbTypIntro: 'Plusieurs choix possibles — prends tout ce qui te correspond.',
     onbTypen: { selten: 'Rarement – et alors il faut que ça vaille le coup', serien: 'Marathon de séries le week-end', kino: 'Régulièrement au cinéma', streaming: 'Ce qui passe sur Netflix, Prime & Cie', sammlung: 'Ma collection (DVD, Blu-ray, 4K)', klassiker: 'Les classiques et l’histoire du cinéma' },
@@ -3153,9 +3178,17 @@ var UI_TEXTE = {
     onbWeiter: 'Continuar',
     onbLosGehts: '¡Vamos!',
     onbFehler: 'No ha funcionado. Inténtalo de nuevo.',
-    onbPlatzhalter: function(n){ return 'Paso ' + n + ' — contenido pendiente.'; },
     onbFertigTitel: '¡Listo!',
     onbFertigText: 'Tus respuestas están guardadas.',
+    onbTitelIntro: 'Da tu opinión rápida sobre algunos títulos conocidos — con eso se crea tu orden personal.',
+    kinoPlatzhalter: 'Código postal o localidad …',
+    kinoStandort: 'Usar mi ubicación',
+    kinoStandortFehler: 'Ubicación no disponible. Busca por localidad o código postal.',
+    onbKinoTitel: 'Tus cines favoritos',
+    onbKinoIntro: 'Busca tu localidad y elige los cines a los que vas. ¿No vas al cine? Continúa sin más.',
+    onbAnbieterTitel: 'Tus plataformas de streaming',
+    onbAnbieterIntro: '¿Cuáles usas? Solo estas aparecerán en «Ver, Alquilar, Comprar» y en los títulos. ¿Ninguna? Continúa sin más.',
+    onbTitelStand: function(n, mind){ return n < mind ? n + ' de ' + mind : n + ' valorados'; },
     onbTypTitel: '¿Cómo ves cine y series?',
     onbTypIntro: 'Puedes elegir varias — todo lo que se ajuste a ti.',
     onbTypen: { selten: 'Pocas veces – y entonces tiene que merecer la pena', serien: 'Maratón de series el fin de semana', kino: 'Voy al cine con regularidad', streaming: 'Lo que hay ahora en Netflix, Prime y compañía', sammlung: 'Mi propia colección (DVD, Blu-ray, 4K)', klassiker: 'Clásicos e historia del cine' },
@@ -3441,9 +3474,17 @@ var UI_TEXTE = {
     onbWeiter: 'Avanti',
     onbLosGehts: 'Si parte',
     onbFehler: 'Non ha funzionato. Riprova.',
-    onbPlatzhalter: function(n){ return 'Passo ' + n + ' — contenuto in arrivo.'; },
     onbFertigTitel: 'Fatto!',
     onbFertigText: 'Le tue risposte sono salvate.',
+    onbTitelIntro: 'Dai un giudizio veloce su alcuni titoli noti — da lì nasce il tuo ordinamento personale.',
+    kinoPlatzhalter: 'Codice postale o città …',
+    kinoStandort: 'Usa la mia posizione',
+    kinoStandortFehler: 'Posizione non disponibile. Cerca per città o codice postale.',
+    onbKinoTitel: 'I tuoi cinema preferiti',
+    onbKinoIntro: 'Cerca la tua città e scegli i cinema in cui vai. Non vai al cinema? Vai pure avanti.',
+    onbAnbieterTitel: 'I tuoi servizi di streaming',
+    onbAnbieterIntro: 'Quali usi? Solo questi compaiono sotto «Guarda, Noleggia, Acquista» e sui titoli. Nessuno? Vai pure avanti.',
+    onbTitelStand: function(n, mind){ return n < mind ? n + ' di ' + mind : n + ' valutati'; },
     onbTypTitel: 'Come guardi?',
     onbTypIntro: 'Puoi sceglierne più di una — tutto ciò che ti descrive.',
     onbTypen: { selten: 'Di rado – e allora deve valerne la pena', serien: 'Maratona di serie nel weekend', kino: 'Regolarmente al cinema', streaming: 'Quello che passa su Netflix, Prime & co', sammlung: 'La mia collezione (DVD, Blu-ray, 4K)', klassiker: 'Classici e storia del cinema' },
@@ -3729,9 +3770,17 @@ var UI_TEXTE = {
     onbWeiter: 'Verder',
     onbLosGehts: 'Aan de slag',
     onbFehler: 'Dat is niet gelukt. Probeer het opnieuw.',
-    onbPlatzhalter: function(n){ return 'Stap ' + n + ' — inhoud volgt.'; },
     onbFertigTitel: 'Klaar!',
     onbFertigText: 'Je antwoorden zijn opgeslagen.',
+    onbTitelIntro: 'Geef snel je mening over een paar bekende titels — daaruit ontstaat jouw persoonlijke volgorde.',
+    kinoPlatzhalter: 'Postcode of plaats …',
+    kinoStandort: 'Mijn locatie gebruiken',
+    kinoStandortFehler: 'Locatie niet beschikbaar. Zoek gewoon op plaats of postcode.',
+    onbKinoTitel: 'Je favoriete bioscopen',
+    onbKinoIntro: 'Zoek je woonplaats en kies de bioscopen waar je heen gaat. Ga je nooit? Ga gewoon verder.',
+    onbAnbieterTitel: 'Jouw streamingdiensten',
+    onbAnbieterIntro: 'Welke gebruik je? Alleen deze zie je bij “Kijken, Huren, Kopen” en bij de titels. Geen enkele? Ga gewoon verder.',
+    onbTitelStand: function(n, mind){ return n < mind ? n + ' van ' + mind : n + ' beoordeeld'; },
     onbTypTitel: 'Hoe kijk jij?',
     onbTypIntro: 'Meerdere keuzes mogelijk — alles wat op jou van toepassing is.',
     onbTypen: { selten: 'Zelden – en dan moet het de moeite waard zijn', serien: 'Seriemarathon in het weekend', kino: 'Regelmatig naar de bioscoop', streaming: 'Wat er nu op Netflix, Prime & co staat', sammlung: 'Eigen verzameling (dvd, Blu-ray, 4K)', klassiker: 'Klassiekers en filmgeschiedenis' },
@@ -4017,9 +4066,17 @@ var UI_TEXTE = {
     onbWeiter: 'Continuar',
     onbLosGehts: 'Vamos lá',
     onbFehler: 'Não funcionou. Tente de novo.',
-    onbPlatzhalter: function(n){ return 'Passo ' + n + ' — conteúdo em breve.'; },
     onbFertigTitel: 'Pronto!',
     onbFertigText: 'Suas respostas foram salvas.',
+    onbTitelIntro: 'Dê sua opinião rápida sobre alguns títulos conhecidos — é daí que vem sua ordenação pessoal.',
+    kinoPlatzhalter: 'Código postal ou cidade …',
+    kinoStandort: 'Usar minha localização',
+    kinoStandortFehler: 'Localização indisponível. Busque por cidade ou código postal.',
+    onbKinoTitel: 'Seus cinemas favoritos',
+    onbKinoIntro: 'Busque sua cidade e escolha os cinemas que você frequenta. Não vai ao cinema? É só continuar.',
+    onbAnbieterTitel: 'Seus serviços de streaming',
+    onbAnbieterIntro: 'Quais você usa? Só esses aparecem em “Assistir, Alugar, Comprar” e nos títulos. Nenhum? É só continuar.',
+    onbTitelStand: function(n, mind){ return n < mind ? n + ' de ' + mind : n + ' avaliados'; },
     onbTypTitel: 'Como você assiste?',
     onbTypIntro: 'Pode escolher vários — tudo o que se aplica a você.',
     onbTypen: { selten: 'Raramente – e aí tem que valer a pena', serien: 'Maratona de séries no fim de semana', kino: 'Vou ao cinema com frequência', streaming: 'O que está passando na Netflix, Prime e afins', sammlung: 'Minha própria coleção (DVD, Blu-ray, 4K)', klassiker: 'Clássicos e história do cinema' },
@@ -4415,8 +4472,6 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Save' },
     '#kinosModal h3': { t: 'Your cinemas' },
     '#kinosModal .prov-intro': { t: 'Search for your town and choose the cinemas you go to.' },
-    '#kinoOrtInput': { p: 'Postal code or town …' },
-    '#kinosList': { t: 'Search for your town first.' },
     '#kinosSaveBtn': { t: 'Save' },
     '#hiddenTitlesModal h3': { t: 'Removed titles' },
     '#accountModal h3': { t: 'Account details' },
@@ -4534,8 +4589,6 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Enregistrer' },
     '#kinosModal h3': { t: 'Tes cinémas' },
     '#kinosModal .prov-intro': { t: 'Cherche ta ville et choisis les cinémas où tu vas.' },
-    '#kinoOrtInput': { p: 'Code postal ou ville …' },
-    '#kinosList': { t: 'Cherche d’abord ta ville.' },
     '#kinosSaveBtn': { t: 'Enregistrer' },
     '#hiddenTitlesModal h3': { t: 'Titres retirés' },
     '#accountModal h3': { t: 'Données du compte' },
@@ -4653,8 +4706,6 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Guardar' },
     '#kinosModal h3': { t: 'Tus cines' },
     '#kinosModal .prov-intro': { t: 'Busca tu localidad y elige los cines a los que vas.' },
-    '#kinoOrtInput': { p: 'Código postal o localidad …' },
-    '#kinosList': { t: 'Busca primero tu localidad.' },
     '#kinosSaveBtn': { t: 'Guardar' },
     '#hiddenTitlesModal h3': { t: 'Títulos eliminados' },
     '#accountModal h3': { t: 'Datos de la cuenta' },
@@ -4772,8 +4823,6 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Salva' },
     '#kinosModal h3': { t: 'I tuoi cinema' },
     '#kinosModal .prov-intro': { t: 'Cerca la tua città e scegli i cinema in cui vai.' },
-    '#kinoOrtInput': { p: 'Codice postale o città …' },
-    '#kinosList': { t: 'Cerca prima la tua città.' },
     '#kinosSaveBtn': { t: 'Salva' },
     '#hiddenTitlesModal h3': { t: 'Titoli rimossi' },
     '#accountModal h3': { t: 'Dati dell’account' },
@@ -4891,8 +4940,6 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Opslaan' },
     '#kinosModal h3': { t: 'Jouw bioscopen' },
     '#kinosModal .prov-intro': { t: 'Zoek naar je woonplaats en kies de bioscopen waar je naartoe gaat.' },
-    '#kinoOrtInput': { p: 'Postcode of plaats …' },
-    '#kinosList': { t: 'Zoek eerst naar je woonplaats.' },
     '#kinosSaveBtn': { t: 'Opslaan' },
     '#hiddenTitlesModal h3': { t: 'Verwijderde titels' },
     '#accountModal h3': { t: 'Accountgegevens' },
@@ -5010,8 +5057,6 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Salvar' },
     '#kinosModal h3': { t: 'Seus cinemas' },
     '#kinosModal .prov-intro': { t: 'Busque a sua cidade e escolha os cinemas que você frequenta.' },
-    '#kinoOrtInput': { p: 'Código postal ou cidade …' },
-    '#kinosList': { t: 'Primeiro busque a sua cidade.' },
     '#kinosSaveBtn': { t: 'Salvar' },
     '#hiddenTitlesModal h3': { t: 'Títulos removidos' },
     '#accountModal h3': { t: 'Dados da conta' },
@@ -9612,29 +9657,99 @@ async function onboardingMarkenUebernehmen(){
   var modal = document.getElementById('kennenModal');
   if (!modal) return;
   var inhalt = document.getElementById('kennenInhalt');
-  var reihe = [], stelle = 0, marken = 0;
+  var laufend = null;   // die Strecke im eigenen Fenster (Gast)
+
   function schliessen(){
     modal.style.display = 'none';
     // Auch ein frueher Abbruch behaelt die bis dahin gesetzten Marken --
     // die Liste soll sie sofort zeigen.
-    if (marken) { rebuild(); renderCurrentTab(); }
+    if (laufend && laufend.marken()) { rebuild(); renderCurrentTab(); }
   }
   document.getElementById('kennenModalX').onclick = schliessen;
   modal.addEventListener('click', function(e){ if (e.target === modal) schliessen(); });
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && modal.style.display !== 'none') schliessen();
   });
+
+  // Die bekanntesten Titel zuerst (Stimmenzahl) -- gefragt wird nur, was ein
+  // Poster hat und noch nicht markiert ist. 60 Kandidaten reichen fuer 15
+  // Marken auch dann, wenn jemand vieles nicht kennt.
+  function kandidaten(){
+    return POOL.filter(function(it){
+      return it.realId != null && (it.p || it.poster64) && it.y && !PROGRESS.get(it.realId);
+    }).sort(function(a, b){ return (b.vc || 0) - (a.vc || 0); }).slice(0, 60);
+  }
+
+  /* Die Karte traegt KLASSEN statt Kennungen: dieselbe Strecke laeuft an zwei
+     Stellen (eigenes Fenster ohne Konto, Onboarding-Fenster mit Konto), und
+     doppelte Kennungen im selben Dokument waeren eine Falle. */
+  function karteHtml(it, stand){
+    var poster = it.poster64 || (it.p ? (POSTER + it.p) : '');
+    return (poster ? '<img class="kennen-poster" alt="" src="' + escAttr(poster) + '">' : '') +
+      '<div class="kennen-name">' + esc(it.t) + '</div>' +
+      '<div class="kennen-meta">' + esc(String(it.y || '')) + ' · ' + esc(it.type === 'series' ? TXT.serie : TXT.film) + '</div>' +
+      '<div class="kennen-knoepfe">' +
+        '<button type="button" class="kennen-ja">' + esc(TXT.kennenMag) + '</button>' +
+        '<button type="button" class="kennen-nein">' + esc(TXT.kennenMagNicht) + '</button>' +
+      '</div>' +
+      '<button type="button" class="kennen-weiss">' + esc(TXT.kennenWeiss) + '</button>' +
+      (stand === null ? '' : '<div class="kennen-stand">' + stand + ' / ' + KENNEN_ZIEL + '</div>');
+  }
+
+  /* Wertung: "Mochte ich" = gesehen mit 8/10, "Nicht meins" = gesehen mit
+     4/10 -- beides fliesst mit Vorzeichen in den Score ein. Angemeldet geht
+     die Marke sofort aufs Konto; das Versprechen wird zurueckgegeben, damit
+     der Aufrufer darauf warten kann, bevor er den Schritt abschliesst. */
   function markieren(item, patch){
     metrikMarkierungMelden();
-    if (CURRENT_USER) {
-      updateProgressRemote(item.realId, patch).catch(function(){});
-    } else {
-      PROGRESS.set(item.realId, { seen: true, watchlist: false, rating: patch.rating });
-      profilStandErhoehen();
-      onboardingMarkeSichern(item.realId, patch);
-    }
-    marken++;
+    if (CURRENT_USER) return updateProgressRemote(item.realId, patch).catch(function(){});
+    PROGRESS.set(item.realId, { seen: true, watchlist: false, rating: patch.rating });
+    profilStandErhoehen();
+    onboardingMarkeSichern(item.realId, patch);
+    return null;
   }
+
+  /* Ein Durchlauf in einem beliebigen Behaelter.
+     opt.beiEnde   -- statt der letzten Karte (Gast: die Abschlusskarte)
+     opt.beiMarke  -- nach jeder Wertung, mit der Anzahl
+     opt.ohneStand -- die Zaehlung steht anderswo (Onboarding: im Fuss) */
+  function strecke(behaelter, opt){
+    opt = opt || {};
+    var reihe = kandidaten(), stelle = 0, marken = 0, offen = [];
+    if (reihe.length < 10) return null;
+
+    function werten(it, note){
+      var p = markieren(it, { seen: true, rating: note });
+      if (p) offen.push(p);
+      marken++; stelle++;
+      if (opt.beiMarke) opt.beiMarke(marken);
+      zeigen();
+    }
+    function zeigen(){
+      if (marken >= KENNEN_ZIEL || stelle >= reihe.length) {
+        if (opt.beiEnde) opt.beiEnde();
+        else behaelter.innerHTML = '';
+        return;
+      }
+      var it = reihe[stelle];
+      behaelter.innerHTML = karteHtml(it, opt.ohneStand ? null : marken);
+      behaelter.querySelector('.kennen-ja').onclick = function(){ werten(it, 8); };
+      behaelter.querySelector('.kennen-nein').onclick = function(){ werten(it, 4); };
+      behaelter.querySelector('.kennen-weiss').onclick = function(){ stelle++; zeigen(); };
+    }
+    zeigen();
+    return {
+      // Dieselbe Karte noch einmal zeichnen, ohne von vorn zu beginnen --
+      // gebraucht, wenn das Onboarding ueber den Zurueck-Pfeil hierher kommt.
+      zeichnen: zeigen,
+      marken: function(){ return marken; },
+      // Angemeldet laufen die Marken einzeln zum Server. Wer sofort nach der
+      // letzten Wertung weiterklickt, waere sonst schneller als die letzte
+      // Schreiboperation -- und der Server zaehlte eine Marke zu wenig.
+      fertig: function(){ return Promise.all(offen); }
+    };
+  }
+
   function fertigZeigen(){
     document.getElementById('kennenTitelEl').textContent = TXT.kennenFertigTitel;
     document.getElementById('kennenIntroEl').textContent = TXT.kennenFertigText;
@@ -9648,37 +9763,24 @@ async function onboardingMarkenUebernehmen(){
     };
     document.getElementById('kennenListeBtn').onclick = schliessen;
   }
-  function zeigen(){
-    if (marken >= KENNEN_ZIEL || stelle >= reihe.length) { fertigZeigen(); return; }
-    var it = reihe[stelle];
-    var poster = it.poster64 || (it.p ? (POSTER + it.p) : '');
-    inhalt.innerHTML =
-      (poster ? '<img class="kennen-poster" alt="" src="' + escAttr(poster) + '">' : '') +
-      '<div class="kennen-name">' + esc(it.t) + '</div>' +
-      '<div class="kennen-meta">' + esc(String(it.y || '')) + ' · ' + esc(it.type === 'series' ? TXT.serie : TXT.film) + '</div>' +
-      '<div class="kennen-knoepfe">' +
-        '<button type="button" id="kennenJa">' + esc(TXT.kennenMag) + '</button>' +
-        '<button type="button" id="kennenNein">' + esc(TXT.kennenMagNicht) + '</button>' +
-      '</div>' +
-      '<button type="button" class="kennen-weiss" id="kennenWeissBtn">' + esc(TXT.kennenWeiss) + '</button>' +
-      '<div class="kennen-stand">' + marken + ' / ' + KENNEN_ZIEL + '</div>';
-    document.getElementById('kennenJa').onclick = function(){ markieren(it, { seen: true, rating: 8 }); stelle++; zeigen(); };
-    document.getElementById('kennenNein').onclick = function(){ markieren(it, { seen: true, rating: 4 }); stelle++; zeigen(); };
-    document.getElementById('kennenWeissBtn').onclick = function(){ stelle++; zeigen(); };
-  }
+
+  // Beim ersten Besuch, ohne Konto: eigenes Fenster mit Abschlusskarte.
   window.kennenlernStarten = function(){
-    // Die bekanntesten Titel zuerst (Stimmenzahl) -- gefragt wird nur, was
-    // ein Poster hat und noch nicht markiert ist. 60 Kandidaten reichen fuer
-    // 15 Marken auch dann, wenn jemand vieles nicht kennt.
-    reihe = POOL.filter(function(it){
-      return it.realId != null && (it.p || it.poster64) && it.y && !PROGRESS.get(it.realId);
-    }).sort(function(a, b){ return (b.vc || 0) - (a.vc || 0); }).slice(0, 60);
-    if (reihe.length < 10) return;
-    stelle = 0; marken = 0;
     document.getElementById('kennenTitelEl').textContent = TXT.kennenTitel;
     document.getElementById('kennenIntroEl').textContent = TXT.kennenIntro;
-    zeigen();
+    var s = strecke(inhalt, { beiEnde: fertigZeigen });
+    if (!s) return;
+    laufend = s;
     modal.style.display = 'flex';
+  };
+
+  // Angemeldet, als Schritt 1 des Onboardings: derselbe Ablauf im fremden
+  // Behaelter, ohne Abschlusskarte -- dort fuehrt der Fuss des Fensters weiter.
+  window.kennenlernStrecke = function(behaelter, beiMarke){
+    return strecke(behaelter, { beiMarke: beiMarke, ohneStand: true, beiEnde: function(){
+      behaelter.innerHTML = '';
+      if (beiMarke) beiMarke(-1);   // -1: keine Karten mehr, Ende der Strecke
+    } });
   };
 })();
 /* ---- Onboarding nach der ersten Anmeldung (PLAN-ONBOARDING.md) ----
@@ -9723,25 +9825,14 @@ var ONB_FREIGABE = false;
   var grenzen = null;     // Mindestzahlen vom Server
   var optionen = null;    // Antwortmoeglichkeiten vom Server
 
-  /* Ein Schritt liefert seinen Text, zeichnet seinen Inhalt und sagt, ob
-     weitergegangen werden darf. `daten()` ist das, was an den Server geht --
-     bei den Schritten, die anderswo speichern (Titel, Anbieter, Kinos),
-     bleibt es null, dort liest der Server die echte Ablage nach. */
-  function platzhalter(n){
-    return {
-      titel: TXT.onbTitel,
-      intro: TXT.onbPlatzhalter(n),
-      zeichnen: function(){ inhaltEl.textContent = ''; },
-      gueltig: function(){ return true; },
-      daten: function(){ return null; }
-    };
-  }
   /* Die Auswahl der beiden Antwortschritte. Sie ueberlebt den Zurueck-Pfeil
      und wird beim Oeffnen aus dem Kontostand vorbelegt -- wer bei Schritt 4
      abgebrochen hat, findet seine Genres beim naechsten Mal angehakt vor. */
   var wahlSchauen = [];
   var wahlGenres = [];
   var genresAufgeklappt = false;
+  var strecke1 = null;      // Kennenlern-Strecke in Schritt 1
+  var kinoBereich5 = null;  // Kinosuche in Schritt 5
 
   function kachel(schluessel, text, an){
     return '<button type="button" class="onb-wahl' + (an ? ' an' : '') + '" data-w="' +
@@ -9769,8 +9860,34 @@ var ONB_FREIGABE = false;
     return g.indexOf('thema:') === 0 ? (TXT.onbThemen[g] || g.slice(6)) : genreAnzeige(g);
   }
 
+  /* Ein Schritt liefert seinen Text, zeichnet seinen Inhalt und sagt, ob
+     weitergegangen werden darf. `speichern()` ist fuer die Schritte da, die
+     anderswo ablegen (Titel, Anbieter, Kinos) -- sie laufen vor dem Abschicken.
+     `daten()` ist das, was an /api/onboarding/schritt geht; bei jenen Schritten
+     bleibt es null, dort liest der Server die echte Ablage nach. */
   var SCHRITTE = {
-    1: platzhalter(1),
+    1: {
+      titel: TXT.kennenTitel,
+      intro: TXT.onbTitelIntro,
+      zeichnen: function(){
+        inhaltEl.innerHTML = '';
+        inhaltEl.onclick = null;
+        // Beim Zurueckkommen NICHT neu beginnen: eine frische Strecke stuende
+        // wieder bei null Marken, und "Weiter" waere ohne sichtbaren Grund
+        // gesperrt, obwohl schon bewertet wurde.
+        if (strecke1) strecke1.zeichnen();
+        else strecke1 = window.kennenlernStrecke(inhaltEl, function(){
+          titelStandSetzen();
+          pruefen();
+        });
+        titelStandSetzen();
+      },
+      gueltig: function(){ return !!strecke1 && strecke1.marken() >= titelMindestens(); },
+      // Erst wenn die letzten Marken wirklich auf dem Konto stehen, darf der
+      // Schritt abgeschickt werden -- der Server zaehlt dort nach.
+      speichern: function(){ return strecke1 ? strecke1.fertig() : Promise.resolve(); },
+      daten: function(){ return null; }
+    },
 
     // Schritt 2 -- "Wie schaust du?", mindestens eine Antwort.
     2: {
@@ -9815,10 +9932,55 @@ var ONB_FREIGABE = false;
       daten: function(){ return { genres: wahlGenres }; }
     },
 
-    4: platzhalter(4), 5: platzhalter(5)
+    /* Schritt 4 -- Streaminganbieter. Dieselbe Liste wie in den
+       Einstellungen, gespeichert in derselben Spalte (users.watch_provider_ids).
+       Immer gueltig: "Ich nutze keinen" ist eine Antwort, kein Ueberspringen --
+       sie landet als leere Auswahl, was im bestehenden Modell ohnehin
+       "nicht filtern" bedeutet. */
+    4: {
+      titel: TXT.onbAnbieterTitel,
+      intro: TXT.onbAnbieterIntro,
+      zeichnen: function(){
+        inhaltEl.onclick = null;
+        inhaltEl.innerHTML = '<div class="prov-list"></div>';
+        var ziel = inhaltEl.firstChild;
+        ziel.textContent = TXT.laedt;
+        _provShowAll = false;
+        ziel.addEventListener('change', function(){ updateProvidersHint(ziel, zaehlerEl); });
+        anbieterKatalogLaden().then(function(){
+          renderProvidersList(ziel, zaehlerEl);
+        }).catch(function(){ ziel.textContent = TXT.anbieterFehler; });
+      },
+      gueltig: function(){ return true; },
+      speichern: function(){ return anbieterSpeichern(inhaltEl.querySelector('.prov-list')); },
+      daten: function(){ return null; }
+    },
+
+    /* Schritt 5 -- Kinos. Derselbe Baustein wie in den Einstellungen,
+       gespeichert in derselben Tabelle (user_kinos). Immer gueltig: "Ich gehe
+       nicht ins Kino" ist eine Antwort -- und wer im Umkreis keines findet
+       (laendliche Gegend, duenner OSM-Bestand), saesse sonst fest. */
+    5: {
+      titel: TXT.onbKinoTitel,
+      intro: TXT.onbKinoIntro,
+      zeichnen: function(){
+        inhaltEl.onclick = null;
+        inhaltEl.innerHTML = '';
+        kinoBereich5 = kinoSucheErstellen(inhaltEl, { hinweisEl: zaehlerEl, standort: true });
+        kinoBereich5.laden();
+      },
+      gueltig: function(){ return true; },
+      speichern: function(){ return kinoBereich5 ? kinoBereich5.speichern() : Promise.resolve(); },
+      daten: function(){ return null; }
+    }
   };
 
   function genreMindestens(){ return (grenzen && grenzen.genresMindestens) || 3; }
+  function titelMindestens(){ return (grenzen && grenzen.titelMindestens) || 5; }
+  function titelStandSetzen(){
+    zaehlerEl.textContent = strecke1
+      ? TXT.onbTitelStand(strecke1.marken(), titelMindestens()) : '';
+  }
   function zaehlerSetzen(){
     var el = document.getElementById('onbZaehlerEl');
     if (el) el.textContent = TXT.onbGenreStand(wahlGenres.length, genreMindestens());
@@ -9879,6 +10041,9 @@ var ONB_FREIGABE = false;
     weiterBtn.disabled = true;
     fehlerEl.textContent = '';
     try {
+      // Schritte, die anderswo speichern (Titel, Anbieter, Kinos), tun das
+      // hier -- der Server liest danach die echte Ablage nach.
+      if (s.speichern) await s.speichern();
       await apiRequest('PUT', '/api/onboarding/schritt', { schritt: schritt, daten: s.daten() });
     } catch (e) {
       fehlerEl.textContent = TXT.onbFehler;
@@ -11029,7 +11194,13 @@ async function loadMyProviders(){
   } catch (e) { MY_PROVIDER_IDS = null; }
 }
 
-function renderProvidersList(){
+/* Die Anbieterliste wird an ZWEI Stellen gebraucht: in den Einstellungen und
+   als Schritt 4 des Onboardings (PLAN-ONBOARDING.md). Deshalb nehmen diese
+   Funktionen ihren Behaelter entgegen, statt fest auf #providersList zu
+   zeigen -- eine zweite Kopie liefe frueher oder spaeter auseinander.
+   Ohne Angabe bleibt es beim Fenster in den Einstellungen. */
+function renderProvidersList(ziel, hinweisEl){
+  ziel = ziel || _provList;
   var chosen = new Set(Array.isArray(MY_PROVIDER_IDS) ? MY_PROVIDER_IDS : []);
   var sichtbar = _provShowAll ? PROVIDER_CATALOG : PROVIDER_CATALOG.filter(function(p){ return p.common; });
   var html = sichtbar.map(function(p){
@@ -11038,29 +11209,53 @@ function renderProvidersList(){
            (chosen.has(p.id) ? ' checked' : '') + '>' + logo + '<span>' + esc(p.name) + '</span></label>';
   }).join('');
   if (!_provShowAll && PROVIDER_CATALOG.length > sichtbar.length) {
-    html += '<button type="button" class="prov-more" id="provMoreBtn">' +
+    // Ueber die KLASSE angesprochen, nicht ueber eine Kennung: die Liste kann
+    // zweimal im Dokument stehen.
+    html += '<button type="button" class="prov-more">' +
             TXT.weitereAnbieterZeigen(PROVIDER_CATALOG.length - sichtbar.length) + '</button>';
   }
-  _provList.innerHTML = html || TXT.keineAnbieter;
-  var more = document.getElementById('provMoreBtn');
-  if (more) more.onclick = function(){ _provShowAll = true; renderProvidersList(); };
-  updateProvidersHint();
+  ziel.innerHTML = html || TXT.keineAnbieter;
+  var more = ziel.querySelector('.prov-more');
+  if (more) more.onclick = function(){ _provShowAll = true; renderProvidersList(ziel, hinweisEl); };
+  updateProvidersHint(ziel, hinweisEl);
 }
-function updateProvidersHint(){
-  var n = _provList.querySelectorAll('input:checked').length;
-  document.getElementById('providersHint').textContent =
+function updateProvidersHint(ziel, hinweisEl){
+  ziel = ziel || _provList;
+  var n = ziel.querySelectorAll('input:checked').length;
+  (hinweisEl || document.getElementById('providersHint')).textContent =
     n ? TXT.nAusgewaehlt(n) : TXT.nichtsAusgewaehlt;
 }
-_provList.addEventListener('change', updateProvidersHint);
+_provList.addEventListener('change', function(){ updateProvidersHint(); });
+
+// Katalog UND eigene Auswahl -- beides regionsabhaengig (backend/lib/anbieter.js).
+async function anbieterKatalogLaden(){
+  var cat = await apiRequest('GET', mitSpracheRegion('/api/watch-providers/catalog'));
+  PROVIDER_CATALOG = cat.providers || [];
+  if (!Array.isArray(MY_PROVIDER_IDS)) await loadMyProviders();
+}
+
+/* Speichern aus einem beliebigen Behaelter. Beim Speichern zaehlt nur, was
+   gerade sichtbar ist -- war die Liste eingeklappt, blieben ausgeblendete
+   Haken sonst unbemerkt auf der Strecke. */
+async function anbieterSpeichern(ziel){
+  ziel = ziel || _provList;
+  var ids = [...(ziel.querySelectorAll('input:checked'))].map(function(i){ return Number(i.value); });
+  if (!_provShowAll && Array.isArray(MY_PROVIDER_IDS)) {
+    var sichtbareIds = new Set(PROVIDER_CATALOG.filter(function(p){ return p.common; }).map(function(p){ return p.id; }));
+    MY_PROVIDER_IDS.forEach(function(id){ if (!sichtbareIds.has(id) && ids.indexOf(id) === -1) ids.push(id); });
+  }
+  var d = await apiRequest('PUT', mitSpracheRegion('/api/watch-providers/selection'), { selected: ids });
+  MY_PROVIDER_IDS = d.selected || [];
+  // Anbieter-Schildchen und "Nur Streaming" haengen ebenfalls daran.
+  watchDataCache.clear();
+}
 
 async function openProvidersModal(){
   _provShowAll = false;
   _provModal.style.display = 'flex';
   _provList.textContent = TXT.laedt;
   try {
-    var cat = await apiRequest('GET', mitSpracheRegion('/api/watch-providers/catalog'));
-    PROVIDER_CATALOG = cat.providers || [];
-    if (!Array.isArray(MY_PROVIDER_IDS)) await loadMyProviders();
+    await anbieterKatalogLaden();
     renderProvidersList();
   } catch (e) {
     _provList.textContent = TXT.anbieterFehler;
@@ -11075,18 +11270,8 @@ document.getElementById('providersSaveBtn').onclick = async function(){
   var btn = this;
   if (btn.disabled) return;
   btn.disabled = true;
-  var ids = [...(_provList.querySelectorAll('input:checked'))].map(function(i){ return Number(i.value); });
-  // Beim Speichern zaehlt nur, was gerade sichtbar ist -- war die Liste
-  // eingeklappt, blieben ausgeblendete Haken sonst unbemerkt auf der Strecke.
-  if (!_provShowAll && Array.isArray(MY_PROVIDER_IDS)) {
-    var sichtbareIds = new Set(PROVIDER_CATALOG.filter(function(p){ return p.common; }).map(function(p){ return p.id; }));
-    MY_PROVIDER_IDS.forEach(function(id){ if (!sichtbareIds.has(id) && ids.indexOf(id) === -1) ids.push(id); });
-  }
   try {
-    var d = await apiRequest('PUT', mitSpracheRegion('/api/watch-providers/selection'), { selected: ids });
-    MY_PROVIDER_IDS = d.selected || [];
-    // Anbieter-Schildchen und "Nur Streaming" haengen ebenfalls daran.
-    watchDataCache.clear();
+    await anbieterSpeichern();
     closeProvidersModal();
     renderCurrentTab();
   } catch (e) {
@@ -11094,138 +11279,193 @@ document.getElementById('providersSaveBtn').onclick = async function(){
   } finally { btn.disabled = false; }
 };
 
-/* ---- Einstellungen -> "Deine Kinos" ----
-   Ort suchen, Umkreis waehlen, Kinos anhaken. Die Kinos kommen aus
-   OpenStreetMap, die Orte aus dem GeoNames-Abzug -- beides in der eigenen
-   Datenbank (siehe PLAN-KINOS.md und backend/scripts/import-*.mjs).
+/* ---- "Deine Kinos": Ort suchen, Umkreis waehlen, Kinos anhaken ----
+   Die Kinos kommen aus OpenStreetMap, die Orte aus dem GeoNames-Abzug --
+   beides in der eigenen Datenbank (siehe PLAN-KINOS.md und
+   backend/scripts/import-*.mjs).
+
+   Gebraucht an ZWEI Stellen: in den Einstellungen und als Schritt 5 des
+   Onboardings (PLAN-ONBOARDING.md). Deshalb ein Baustein mit eigenem Zustand,
+   der in einen beliebigen Behaelter zeichnet, statt eines fest verdrahteten
+   Fensters -- zwei Kopien liefen frueher oder spaeter auseinander.
 
    Noch OHNE Wirkung auf die Kino-Seite: Dafuer muesste bekannt sein, WELCHE
-   Filme in einem Kino laufen, und das ist eine andere, kostenpflichtige Quelle.
-   Ein Filterknopf, der nichts filtert, waere schlimmer als keiner -- deshalb
-   steht hier vorerst nur die Auswahl. */
-var _kinoModal = document.getElementById('kinosModal');
-var _kinoListe = document.getElementById('kinosList');
-var _kinoOrtInput = document.getElementById('kinoOrtInput');
-var _kinoVorschlaege = document.getElementById('kinoVorschlaege');
-// Die Auswahl ueberlebt Suche und Umkreiswechsel: Wer ein Kino in Koblenz
-// angehakt hat und danach nach Trier sucht, soll es nicht verlieren. Deshalb
-// eine Menge von Kennungen plus die zugehoerigen Angaben zum Anzeigen.
-var _kinoGewaehlt = new Map();
-var _kinoGefunden = [];
-var _kinoUmkreisKm = 25;
-var _kinoOrtTimer = null;
+   Filme in einem Kino laufen, und das ist eine andere, kostenpflichtige
+   Quelle. Ein Filterknopf, der nichts filtert, waere schlimmer als keiner. */
 var KINO_ORT_VERZOEGERUNG = 200;
+var KINO_UMKREISE = [10, 25, 50];
 
-function kinoZeile(k, angehakt){
-  var zusatz = [k.strasse, [k.plz, k.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
-  if (k.entfernung != null) zusatz = (zusatz ? zusatz + ' · ' : '') + String(k.entfernung).replace('.', ',') + ' km';
-  return '<label class="prov-item"><input type="checkbox" value="' + escAttr(String(k.id)) + '"' +
-         (angehakt ? ' checked' : '') + '>' +
-         '<span class="kino-item-text"><b>' + esc(k.name) + '</b>' +
-         (zusatz ? '<small>' + esc(zusatz) + '</small>' : '') + '</span></label>';
-}
+/* opt.hinweisEl    -- wohin "3 Kinos ausgewaehlt" geschrieben wird
+   opt.standort     -- Knopf "Meinen Standort verwenden" anbieten
+   opt.beiAenderung -- nach jeder Aenderung, mit der Anzahl */
+function kinoSucheErstellen(behaelter, opt){
+  opt = opt || {};
+  // Die Auswahl ueberlebt Suche und Umkreiswechsel: Wer ein Kino in Koblenz
+  // angehakt hat und danach nach Trier sucht, soll es nicht verlieren. Deshalb
+  // eine Menge von Kennungen plus die zugehoerigen Angaben zum Anzeigen.
+  var gewaehlt = new Map(), gefunden = [], ort = null, umkreisKm = 25, timer = null;
 
-function renderKinoListe(){
-  // Die eigene Auswahl steht immer oben -- auch die Kinos, die im gerade
-  // gesuchten Umkreis gar nicht vorkommen. Sonst waere sie unsichtbar und beim
-  // Speichern still verloren.
-  var gefundenIds = new Set(_kinoGefunden.map(function(k){ return k.id; }));
-  var oben = [..._kinoGewaehlt.values()].filter(function(k){ return !gefundenIds.has(k.id); });
-  var html = '';
-  if (oben.length) {
-    html += oben.map(function(k){ return kinoZeile(k, true); }).join('');
-    if (_kinoGefunden.length) html += '<div class="prov-more" style="text-decoration:none;cursor:default">' + TXT.inDerNaehe + '</div>';
+  behaelter.innerHTML =
+    '<div class="kino-suche">' +
+      '<input type="text" class="kino-ort" placeholder="' + escAttr(TXT.kinoPlatzhalter) + '" autocomplete="off">' +
+      '<div class="kino-vorschlaege" style="display:none"></div>' +
+    '</div>' +
+    // Der Knopf erscheint nur, wo der Browser die Ortung ueberhaupt anbietet --
+    // ein Knopf, der nichts tun kann, waere schlimmer als keiner.
+    (opt.standort && navigator.geolocation
+      ? '<button type="button" class="kino-standort">' + esc(TXT.kinoStandort) + '</button>' : '') +
+    '<div class="kino-umkreis">' + KINO_UMKREISE.map(function(km){
+      return '<button type="button" data-km="' + km + '"' +
+        (km === umkreisKm ? ' class="active"' : '') + '>' + km + ' km</button>';
+    }).join('') + '</div>' +
+    '<div class="prov-list kino-liste"></div>';
+
+  var eingabe = behaelter.querySelector('.kino-ort');
+  var vorschlaege = behaelter.querySelector('.kino-vorschlaege');
+  var liste = behaelter.querySelector('.kino-liste');
+  var standortBtn = behaelter.querySelector('.kino-standort');
+
+  function hinweis(){
+    if (opt.hinweisEl) opt.hinweisEl.textContent = TXT.kinoAusgewaehlt(gewaehlt.size);
+    if (opt.beiAenderung) opt.beiAenderung(gewaehlt.size);
   }
-  html += _kinoGefunden.map(function(k){ return kinoZeile(k, _kinoGewaehlt.has(k.id)); }).join('');
-  if (!html) html = _kinoOrtInput.value.trim()
-    ? TXT.keineKinosUmkreis
-    : TXT.ortZuerst;
-  _kinoListe.innerHTML = html;
-  kinoHinweis();
-}
-function kinoHinweis(){
-  document.getElementById('kinosHint').textContent = TXT.kinoAusgewaehlt(_kinoGewaehlt.size);
-}
-// Ein Haken aendert sofort die Menge -- nicht erst beim Speichern. Sonst ginge
-// er beim naechsten Suchlauf verloren.
-_kinoListe.addEventListener('change', function(e){
-  var box = e.target;
-  if (!box || box.type !== 'checkbox') return;
-  var id = Number(box.value);
-  if (box.checked) {
-    var k = _kinoGefunden.find(function(x){ return x.id === id; }) || _kinoGewaehlt.get(id);
-    if (k) _kinoGewaehlt.set(id, k);
-  } else {
-    _kinoGewaehlt.delete(id);
+  function zeile(k, angehakt){
+    var zusatz = [k.strasse, [k.plz, k.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+    if (k.entfernung != null) zusatz = (zusatz ? zusatz + ' · ' : '') + String(k.entfernung).replace('.', ',') + ' km';
+    return '<label class="prov-item"><input type="checkbox" value="' + escAttr(String(k.id)) + '"' +
+           (angehakt ? ' checked' : '') + '>' +
+           '<span class="kino-item-text"><b>' + esc(k.name) + '</b>' +
+           (zusatz ? '<small>' + esc(zusatz) + '</small>' : '') + '</span></label>';
   }
-  kinoHinweis();
-});
-
-async function kinosLaden(lat, lon){
-  _kinoListe.textContent = TXT.laedt;
-  try {
-    var d = await apiRequest('GET', '/api/kinos?lat=' + encodeURIComponent(lat) +
-      '&lon=' + encodeURIComponent(lon) + '&umkreis=' + _kinoUmkreisKm);
-    _kinoGefunden = d.kinos || [];
-  } catch (e) {
-    _kinoGefunden = [];
-    _kinoListe.textContent = TXT.kinosFehler;
-    return;
+  function zeichnen(){
+    // Die eigene Auswahl steht immer oben -- auch die Kinos, die im gerade
+    // gesuchten Umkreis gar nicht vorkommen. Sonst waere sie unsichtbar und
+    // beim Speichern still verloren.
+    var gefundenIds = new Set(gefunden.map(function(k){ return k.id; }));
+    var oben = [...gewaehlt.values()].filter(function(k){ return !gefundenIds.has(k.id); });
+    var html = '';
+    if (oben.length) {
+      html += oben.map(function(k){ return zeile(k, true); }).join('');
+      if (gefunden.length) html += '<div class="prov-more" style="text-decoration:none;cursor:default">' + TXT.inDerNaehe + '</div>';
+    }
+    html += gefunden.map(function(k){ return zeile(k, gewaehlt.has(k.id)); }).join('');
+    if (!html) html = (eingabe.value.trim() || ort) ? TXT.keineKinosUmkreis : TXT.ortZuerst;
+    liste.innerHTML = html;
+    hinweis();
   }
-  renderKinoListe();
-}
 
-var _kinoOrt = null;
-function ortWaehlen(ort){
-  _kinoOrt = ort;
-  _kinoOrtInput.value = ort.anzeige;
-  _kinoVorschlaege.style.display = 'none';
-  kinosLaden(ort.lat, ort.lon);
-}
+  // Ein Haken aendert sofort die Menge -- nicht erst beim Speichern. Sonst
+  // ginge er beim naechsten Suchlauf verloren.
+  liste.addEventListener('change', function(e){
+    var box = e.target;
+    if (!box || box.type !== 'checkbox') return;
+    var id = Number(box.value);
+    if (box.checked) {
+      var k = gefunden.find(function(x){ return x.id === id; }) || gewaehlt.get(id);
+      if (k) gewaehlt.set(id, k);
+    } else {
+      gewaehlt.delete(id);
+    }
+    hinweis();
+  });
 
-// Wie bei der Titelsuche: erst nach kurzer Tippruhe fragen, nicht bei jedem
-// Zeichen (siehe SUCHE_RENDER_VERZOEGERUNG).
-_kinoOrtInput.addEventListener('input', function(){
-  clearTimeout(_kinoOrtTimer);
-  var q = _kinoOrtInput.value.trim();
-  if (q.length < 2) { _kinoVorschlaege.style.display = 'none'; return; }
-  _kinoOrtTimer = setTimeout(async function(){
+  async function kinosLaden(lat, lon){
+    liste.textContent = TXT.laedt;
     try {
-      var d = await apiRequest('GET', '/api/kinos/orte?q=' + encodeURIComponent(q) + '&region=' + REGION_WAHL);
-      var orte = d.orte || [];
-      if (!orte.length) { _kinoVorschlaege.style.display = 'none'; return; }
-      _kinoVorschlaege.innerHTML = orte.map(function(o, i){
-        return '<button type="button" data-i="' + i + '">' + esc(o.anzeige) + '</button>';
-      }).join('');
-      _kinoVorschlaege.style.display = '';
-      _kinoVorschlaege.onclick = function(e){
-        var b = e.target.closest('button');
-        if (b) ortWaehlen(orte[Number(b.dataset.i)]);
-      };
-    } catch (e) { _kinoVorschlaege.style.display = 'none'; }
-  }, KINO_ORT_VERZOEGERUNG);
-});
-document.getElementById('kinoUmkreis').onclick = function(e){
-  var b = e.target.closest('button');
-  if (!b) return;
-  [...this.querySelectorAll('button')].forEach(function(x){ x.classList.remove('active'); });
-  b.classList.add('active');
-  _kinoUmkreisKm = Number(b.dataset.km);
-  if (_kinoOrt) kinosLaden(_kinoOrt.lat, _kinoOrt.lon);
-};
+      var d = await apiRequest('GET', '/api/kinos?lat=' + encodeURIComponent(lat) +
+        '&lon=' + encodeURIComponent(lon) + '&umkreis=' + umkreisKm);
+      gefunden = d.kinos || [];
+    } catch (e) {
+      gefunden = [];
+      liste.textContent = TXT.kinosFehler;
+      return;
+    }
+    zeichnen();
+  }
+
+  function ortWaehlen(o){
+    ort = o;
+    eingabe.value = o.anzeige;
+    vorschlaege.style.display = 'none';
+    kinosLaden(o.lat, o.lon);
+  }
+
+  // Wie bei der Titelsuche: erst nach kurzer Tippruhe fragen, nicht bei jedem
+  // Zeichen (siehe SUCHE_RENDER_VERZOEGERUNG).
+  eingabe.addEventListener('input', function(){
+    clearTimeout(timer);
+    var frage = eingabe.value.trim();
+    if (frage.length < 2) { vorschlaege.style.display = 'none'; return; }
+    timer = setTimeout(async function(){
+      try {
+        var d = await apiRequest('GET', '/api/kinos/orte?q=' + encodeURIComponent(frage) + '&region=' + REGION_WAHL);
+        var orte = d.orte || [];
+        if (!orte.length) { vorschlaege.style.display = 'none'; return; }
+        vorschlaege.innerHTML = orte.map(function(o, i){
+          return '<button type="button" data-i="' + i + '">' + esc(o.anzeige) + '</button>';
+        }).join('');
+        vorschlaege.style.display = '';
+        vorschlaege.onclick = function(e){
+          var b = e.target.closest('button');
+          if (b) ortWaehlen(orte[Number(b.dataset.i)]);
+        };
+      } catch (e) { vorschlaege.style.display = 'none'; }
+    }, KINO_ORT_VERZOEGERUNG);
+  });
+
+  behaelter.querySelector('.kino-umkreis').onclick = function(e){
+    var b = e.target.closest('button');
+    if (!b) return;
+    [...this.querySelectorAll('button')].forEach(function(x){ x.classList.remove('active'); });
+    b.classList.add('active');
+    umkreisKm = Number(b.dataset.km);
+    if (ort) kinosLaden(ort.lat, ort.lon);
+  };
+
+  /* Standort im Browser: geht auch ohne native App, verlangt aber HTTPS und
+     eine frische Nutzergeste -- deshalb haengt es an diesem Klick. Die
+     Koordinate wird NUR gesucht, nirgends gespeichert; die Ortssuche steht
+     gleichberechtigt daneben, denn wer im Browser "Nie erlauben" gewaehlt hat,
+     bekommt hier nie wieder einen Dialog. */
+  if (standortBtn) standortBtn.onclick = function(){
+    standortBtn.disabled = true;
+    navigator.geolocation.getCurrentPosition(function(pos){
+      standortBtn.disabled = false;
+      eingabe.value = '';
+      vorschlaege.style.display = 'none';
+      ort = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+      kinosLaden(ort.lat, ort.lon);
+    }, function(){
+      standortBtn.disabled = false;
+      liste.textContent = TXT.kinoStandortFehler;
+    }, { timeout: 10000, maximumAge: 300000 });
+  };
+
+  return {
+    // Die bereits gewaehlten Kinos vom Konto holen und zeigen.
+    async laden(){
+      liste.textContent = TXT.laedt;
+      try {
+        var d = await apiRequest('GET', '/api/kinos/meine');
+        gewaehlt = new Map((d.kinos || []).map(function(k){ return [k.id, k]; }));
+      } catch (e) { gewaehlt = new Map(); }
+      zeichnen();
+    },
+    anzahl(){ return gewaehlt.size; },
+    speichern(){ return apiRequest('PUT', '/api/kinos/meine', { ids: [...gewaehlt.keys()] }); }
+  };
+}
+
+var _kinoModal = document.getElementById('kinosModal');
+var _kinoBereich = null;
 
 async function openKinosModal(){
   _kinoModal.style.display = 'flex';
-  _kinoVorschlaege.style.display = 'none';
-  _kinoGefunden = [];
-  _kinoOrt = null;
-  _kinoOrtInput.value = '';
-  _kinoListe.textContent = TXT.laedt;
-  try {
-    var d = await apiRequest('GET', '/api/kinos/meine');
-    _kinoGewaehlt = new Map((d.kinos || []).map(function(k){ return [k.id, k]; }));
-  } catch (e) { _kinoGewaehlt = new Map(); }
-  renderKinoListe();
+  _kinoBereich = kinoSucheErstellen(document.getElementById('kinosBereich'), {
+    hinweisEl: document.getElementById('kinosHint'),
+    standort: true
+  });
+  await _kinoBereich.laden();
 }
 function closeKinosModal(){ _kinoModal.style.display = 'none'; }
 document.getElementById('settingsKinosBtn').onclick = function(){ closeSettingsModal(); openKinosModal(); };
@@ -11234,10 +11474,10 @@ _kinoModal.addEventListener('click', function(e){ if (e.target === _kinoModal) c
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _kinoModal.style.display !== 'none') closeKinosModal(); });
 document.getElementById('kinosSaveBtn').onclick = async function(){
   var btn = this;
-  if (btn.disabled) return;
+  if (btn.disabled || !_kinoBereich) return;
   btn.disabled = true;
   try {
-    await apiRequest('PUT', '/api/kinos/meine', { ids: [..._kinoGewaehlt.keys()] });
+    await _kinoBereich.speichern();
     closeKinosModal();
   } catch (e) {
     alert(TXT.speichernFehlgeschlagen);
