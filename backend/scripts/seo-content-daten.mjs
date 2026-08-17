@@ -24819,4 +24819,219 @@ Weltweit spielte der Film 351,3 Millionen Dollar ein — 115,3 Millionen in den 
 Die Kritik urteilte gemischt: 64 Prozent bei Rotten Tomatoes, 51 von 100 bei Metacritic; das Publikum vergab bei CinemaScore ein A minus. Bemängelt wurden vor allem die Abweichungen von Potters Vorlage und die Anlage der Titelfigur, gelobt die Animation.
 
 2021 folgte eine Fortsetzung.` },
+  // ---- Block 2 (Fortsetzung) ----
+  {
+    bereich: 'titel', schluessel: 'movie:108', locale: 'de-de',
+    text: `### Worum es geht
+
+Julie überlebt einen Autounfall, bei dem ihr Mann — ein bekannter Komponist — und ihre fünfjährige Tochter sterben. Im Krankenhaus versucht sie, sich das Leben zu nehmen, und schafft es nicht.
+
+Danach beschließt sie, nichts mehr zu haben, woran sie hängen könnte: Sie verkauft das Haus, vernichtet die unvollendete Partitur ihres Mannes, zieht in eine Wohnung, in der niemand ihren Namen kennt. Der Film handelt davon, dass ihr das nicht gelingt — weil die Musik zurückkommt, ein Nachbar Hilfe braucht und sie erfährt, dass ihr Mann eine Geliebte hatte.
+
+### Entstehungsgeschichte
+
+Es ist der erste Teil von Krzysztof Kieślowskis Trilogie "Drei Farben", benannt nach den Farben der französischen Flagge und den Grundsätzen der Revolution: Freiheit, Gleichheit, Brüderlichkeit.
+
+Gemeint ist hier nicht die politische, sondern die persönliche Freiheit — die Frage, ob ein Mensch sich von allem lösen kann, was ihn bindet.
+
+### Hinter den Kulissen
+
+Juliette Binoche spielt Julie. Die Musik schrieb Zbigniew Preisner, der mit Kieślowski regelmäßig arbeitete; sie ist nicht Untermalung, sondern Gegenstand — die Partitur, die Julie vernichten will, ist im Film zu hören.
+
+Die Farbe Blau durchzieht Bild für Bild: Filter, Lichtquellen, Gegenstände, ein Kronleuchter aus blauen Perlen, den Julie als einziges Andenken behält.
+
+### Einordnung & Wirkung
+
+Bei den Filmfestspielen in Venedig 1993 gewann der Film den Goldenen Löwen; Juliette Binoche erhielt die Coppa Volpi als beste Darstellerin und wurde zusätzlich für den César und den Golden Globe nominiert.
+
+Die Kritik reagierte einhellig: 96 Prozent bei Rotten Tomatoes, 87 von 100 bei Metacritic.
+
+Der Guardian führte ihn 2007 auf Platz 29 seiner vierzig größten fremdsprachigen Filme, BBC Culture 2018 auf Platz 64 einer entsprechenden Liste.` },
+  {
+    bereich: 'titel', schluessel: 'movie:519010', locale: 'de-de',
+    text: `### Worum es geht
+
+Salvador Mallo hat lange keinen Film mehr gedreht. Er ist Anfang sechzig, hat Rückenschmerzen, Migräne, Schluckbeschwerden und eine Liste von Beschwerden, die er selbst aufzählt. Ein Kino zeigt eine restaurierte Fassung seines wichtigsten Films, und er soll dazu erscheinen.
+
+Das bringt ihn mit dem Hauptdarsteller zusammen, mit dem er sich vor über dreißig Jahren zerstritten hat — und über ihn zum Heroin. Dazwischen liegen Erinnerungen an die Kindheit in einer Höhlenwohnung in Valencia, an die Mutter, an einen jungen Maler und an das erste Begehren.
+
+### Entstehungsgeschichte
+
+Pedro Almodóvar schrieb und inszenierte den Film. Die Bezüge zu seinem eigenen Leben sind unübersehbar: Regisseur, Herkunft, Krankheiten, die Mutter — der Film wurde durchgehend als autobiographisch besprochen, ohne dass Almodóvar ihn so genannt hätte.
+
+Das Budget lag bei 9,6 Millionen Euro. Die Musik schrieb Alberto Iglesias, die Kamera führte José Luis Alcaine.
+
+### Hinter den Kulissen
+
+Antonio Banderas spielt Salvador — mit Almodóvars Frisur, dessen Kleidung und in einer Wohnung, die dessen eigener nachgebaut ist. Penélope Cruz spielt die Mutter in den Rückblenden; daneben sind Asier Etxeandia, Leonardo Sbaraglia, Nora Navas und Julieta Serrano zu sehen.
+
+Banderas und Almodóvar arbeiten seit "Labyrinth der Leidenschaften" von 1982 zusammen; hier spielt Banderas ihn selbst.
+
+### Einordnung & Wirkung
+
+In Cannes gewann Banderas 2019 den Preis als bester Darsteller, Iglesias den für die beste Musik. Es folgten Oscar-Nominierungen als bester Hauptdarsteller und als bester internationaler Film sowie der Goya als bester Film.
+
+Weltweit spielte der Film 37,4 Millionen Dollar ein; in Spanien war er der erfolgreichste einheimische Film des Jahres 2019.
+
+Die Kritik reagierte außergewöhnlich: 96 Prozent von 306 Besprechungen bei Rotten Tomatoes, 88 von 100 bei Metacritic. Das Magazin TIME nannte ihn den besten Film des Jahres 2019.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10377', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei Studenten aus New York fahren durch Alabama und werden verhaftet — sie sollen einen Verkäufer in einem Gemischtwarenladen erschossen haben. Tatsächlich hat einer von ihnen versehentlich eine Dose Thunfisch mitgenommen.
+
+Zur Verteidigung reist Vincent Gambini an, genannt Vinny, Cousin des einen Angeklagten. Er hat die Anwaltsprüfung im sechsten Anlauf bestanden, noch nie einen Fall geführt und trägt Lederjacke. Der Richter erkennt schnell, dass etwas nicht stimmt. Was Vinny rettet, ist seine Verlobte Mona Lisa Vito — gelernte Kfz-Mechanikerin, deren Fachwissen den Fall entscheidet.
+
+### Entstehungsgeschichte
+
+Regie führte Jonathan Lynn, das Drehbuch schrieb Dale Launer. Der Film erschien am 13. März 1992, das Budget lag bei 11 Millionen Dollar.
+
+Joe Pesci spielt Vinny, Ralph Macchio einen der Angeklagten, Marisa Tomei die Verlobte, Fred Gwynne den Richter.
+
+### Hinter den Kulissen
+
+Bemerkenswert ist der Ruf des Films unter Juristen. Er wird an amerikanischen Rechtsfakultäten regelmäßig zur Veranschaulichung von Strafprozess- und Beweisrecht gezeigt.
+
+Richter Richard Posner nannte den Inhalt zur Prozessführung besonders ergiebig; der Bundesrichter Joseph F. Anderson bezeichnete Vinnys Kreuzverhör als Lehrbuchbeispiel für richtige Technik. Das ABA Journal führte den Film 2008 auf Platz drei der besten Justizfilme. Fred Gwynne, hierzulande vor allem als Herman Munster bekannt, spielt den Richter — es war eine seiner letzten Rollen.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 64,1 Millionen Dollar ein und übertraf damit die Erwartungen deutlich.
+
+Marisa Tomei gewann den Oscar als beste Nebendarstellerin — eine Entscheidung, über die anschließend jahrelang spekuliert wurde, weil manche einen Verlesungsfehler vermuteten; die Filmakademie hat das mehrfach dementiert.
+
+Die Kritik lag bei 85 Prozent auf Rotten Tomatoes: Das Zusammenspiel von Pesci und Tomei hebe ein vorhersehbares Drehbuch zu einer scharfen und komischen Gerichtssaalkomödie.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9316', locale: 'de-de',
+    text: `### Worum es geht
+
+Aus dem Dorftempel von Ban Nong Pradu wird der Kopf der Buddha-Statue Ong-Bak gestohlen. Für die Bewohner ist das keine Sachbeschädigung, sondern eine Katastrophe: Ohne die Statue steht die nächste Trockenzeit bevor.
+
+Ting, der bei einem Mönch Muay Thai gelernt hat und das Gelernte nie anwenden darf, wird nach Bangkok geschickt. Dort findet er einen Cousin, der von zu Hause nichts mehr wissen will, gerät in Wettkämpfe in Hinterhofarenen und schließlich an den Hehler, der den Kopf hat.
+
+### Entstehungsgeschichte
+
+Regie führte Prachya Pinkaew, die Kampfchoreographie stammt von Panna Rittikrai. Das Budget lag bei 1,1 Millionen Dollar.
+
+Tony Jaa spielt Ting; für ihn war es der Durchbruch. Er hatte jahrelang als Stuntman gearbeitet und bei Rittikrai trainiert.
+
+### Hinter den Kulissen
+
+Das Verkaufsargument war ein Verzicht: keine Drahtseile, keine Computertricks, keine beschleunigten Aufnahmen. Was zu sehen ist, hat Jaa tatsächlich getan — Sprünge durch Stacheldrahtringe, Läufe über Schultern von Passanten, Stürze aus mehreren Metern.
+
+Der Film unterstreicht das, indem er einzelne Sprünge dreimal hintereinander aus verschiedenen Blickwinkeln zeigt — ein Verfahren, das aus dem Hongkong-Kino stammt und dem Publikum vorführt, dass nichts nachgeholfen wurde.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 20,1 Millionen Dollar ein; in Nordamerika lief er in 387 Kinos und brachte dort 4,56 Millionen.
+
+Die Kritik reagierte gut: 85 Prozent bei Rotten Tomatoes, mit durchgehendem Lob für die Choreographie und den Verzicht auf Hilfsmittel. Vergleiche mit Bruce Lee, Jackie Chan und Jet Li waren die Regel.
+
+Der Erfolg machte Tony Jaa international bekannt und brachte zwei weitere Filme hervor, "Ong Bak 2" und "Ong Bak 3", die zeitlich vor der Handlung dieses Films spielen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9437', locale: 'de-de',
+    text: `### Worum es geht
+
+Der forensische Psychologe Alex Cross erfährt, dass seine Nichte Naomi in North Carolina verschwunden ist. Er reist hin und stößt auf eine Reihe ähnlicher Fälle: Junge Frauen werden entführt und nicht getötet, sondern gefangen gehalten.
+
+Der Täter nennt sich Casanova. Als die Ärztin Kate McTiernan als Einzige entkommt, arbeitet Cross mit ihr zusammen — und stellt fest, dass zwei Männer im Spiel sind, die einander ihre Taten zur Kenntnis geben, ohne sich je begegnet zu sein.
+
+### Entstehungsgeschichte
+
+Grundlage ist James Pattersons Roman von 1995. Das Drehbuch schrieb David Klass, Regie führte Gary Fleder. Das Budget lag bei 27 Millionen Dollar.
+
+Es ist der erste von zwei Filmen mit Morgan Freeman als Alex Cross; 2001 folgte "Im Netz der Spinne", das im Buchwerk früher spielt.
+
+### Hinter den Kulissen
+
+Ashley Judd spielt die Ärztin Kate McTiernan; daneben sind Cary Elwes und Tony Goldwyn zu sehen.
+
+Die Rolle der Kate ist für einen Thriller jener Jahre ungewöhnlich angelegt: Sie ist Kickboxerin, entkommt aus eigener Kraft und bleibt an der Ermittlung beteiligt, statt als gerettetes Opfer aus der Handlung zu verschwinden. Für Ashley Judd war es die Rolle, mit der sie als Hauptdarstellerin wahrgenommen wurde.
+
+### Einordnung & Wirkung
+
+Der Film erschien am 3. Oktober 1997 und spielte weltweit 100 Millionen Dollar ein.
+
+Die Kritik urteilte gemischt: 35 Prozent bei Rotten Tomatoes mit dem Befund, der Film beginne vielversprechend und verliere dann die Richtung. Roger Ebert widersprach deutlich und vergab dreieinhalb von vier Sternen, mit Lob für Dialoge und Darsteller.
+
+Aus der Figur wurde eine kleine Reihe: Nach dem zweiten Film mit Freeman folgte 2012 ein Neuanfang mit Tyler Perry, der ohne Fortsetzung blieb.` },
+  {
+    bereich: 'titel', schluessel: 'series:68507', locale: 'de-de',
+    text: `### Worum es geht
+
+Lyra Belacqua wächst am Jordan College in Oxford auf — in einer Welt, die unserer ähnelt, aber nicht dieselbe ist: Dort trägt jeder Mensch seine Seele außerhalb des Körpers, als sprechendes Tier, das Dæmon heißt.
+
+Als Kinder aus armen Familien verschwinden, darunter Lyras Freund Roger, macht sie sich auf die Suche. Was sie findet, führt zu einer kirchlichen Behörde namens Magisterium, zu Versuchen an Kindern und zu einer Substanz namens Staub, an der sich alles entscheidet — und schließlich in andere Welten.
+
+### Entstehungsgeschichte
+
+Grundlage ist Philip Pullmans Romantrilogie, erschienen zwischen 1995 und 2000.
+
+Die Serie entstand als Gemeinschaftsproduktion von BBC One und HBO über Bad Wolf und New Line Productions. Sie folgt auf die Verfilmung "Der Goldene Kompass" von 2007, die weltweit 372 Millionen Dollar einspielte und von religiösen Verbänden wegen ihrer kirchenkritischen Haltung angegriffen wurde — weshalb die geplanten Fortsetzungen unterblieben.
+
+### Hinter den Kulissen
+
+Dafne Keen spielt Lyra, Ruth Wilson die Gegenspielerin Marisa Coulter, James McAvoy den Forscher Lord Asriel und Lin-Manuel Miranda den Ballonfahrer Lee Scoresby.
+
+Die Dæmonen sind vollständig am Rechner erzeugt und in nahezu jeder Szene präsent — ein Aufwand, den die Kinoverfilmung noch reduziert hatte und der hier der Grund für die hohen Kosten ist.
+
+Drei Staffeln mit insgesamt 23 Folgen erschienen: acht ab November 2019, sieben ab November 2020 und acht bis Dezember 2022.
+
+### Einordnung & Wirkung
+
+Die Bewertungen stiegen von Staffel zu Staffel: 77 Prozent, dann 85, dann 90 Prozent bei Rotten Tomatoes.
+
+Gelobt wurden Effekte, Besetzung und die Treue zur Vorlage; ein wiederkehrender Einwand betraf das Erzähltempo.
+
+Anders als der Kinofilm hat die Serie die religionskritischen Teile der Vorlage nicht entschärft — was als wesentlicher Grund dafür gilt, dass sie zu Ende erzählt werden konnte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9725', locale: 'de-de',
+    text: `### Worum es geht
+
+Fünf Jahre nach den Morden am Crystal Lake eröffnet in der Nachbarschaft ein Ausbildungslager für Betreuer. Die Gegend gilt weiterhin als gemieden, und ein Einheimischer warnt vor dem, was dort geschehen sei.
+
+Was die jungen Leute nicht wissen: Jason Voorhees, den alle für ertrunken hielten, lebt in den Wäldern. Er hat als Kind gesehen, was mit seiner Mutter geschah, und führt deren Werk fort — mit einem Sack über dem Kopf, aus dem ein Auge hervorsieht.
+
+### Entstehungsgeschichte
+
+Steve Miner führte hier zum ersten Mal Regie; produziert und verliehen wurde der Film von Paramount. Das Budget lag bei 1,25 Millionen Dollar.
+
+Es ist der Teil, in dem Jason erstmals selbst der Mörder ist — im ersten Film war es seine Mutter. Die berühmte Eishockeymaske kommt allerdings erst im dritten Teil.
+
+### Hinter den Kulissen
+
+Um statt eines X eine Freigabe ab 17 zu erhalten, mussten 48 Sekunden geschnitten werden. Die amerikanische Prüfstelle beanstandete die sich häufende Gewalt über den gesamten Film, besonders eine Szene, in der zwei Betreuer beim Geschlechtsverkehr mit einem Speer aufgespießt werden. Die geschnittenen Passagen gelten seither als verschollen.
+
+### Einordnung & Wirkung
+
+Der Start brachte 6,4 Millionen Dollar, insgesamt kamen in den USA 21,7 Millionen zusammen. Der Erfolg blieb dennoch hinter dem ersten Teil zurück: 7,8 Millionen verkaufte Karten gegenüber 14,8 Millionen.
+
+Die Kritik lehnte den Film ab. Roger Ebert vergab einen halben Stern; heutige Übersichten fallen ähnlich aus, mit 29 Prozent bei Rotten Tomatoes und 26 von 100 bei Metacritic.
+
+Für die Reihe war er dennoch entscheidend: Mit ihm bekam sie die Figur, die sie über zwölf Filme hinweg getragen hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9955', locale: 'de-de',
+    text: `### Worum es geht
+
+Chazz Michael Michaels und Jimmy MacElroy teilen sich den Weltmeistertitel im Eiskunstlauf und können einander nicht ausstehen. Bei der Siegerehrung prügeln sie sich, das Podest fängt Feuer, und beide werden lebenslang aus dem Einzelwettbewerb ausgeschlossen.
+
+Jahre später findet Jimmys früherer Trainer eine Lücke: Der Ausschluss gilt nur für den Einzelwettbewerb. Die beiden können im Paarlauf antreten — als erstes männliches Paar überhaupt. Was folgt, sind Hebefiguren, für die niemand gebaut ist, und ein Wettbewerb gegen ein Geschwisterpaar, das nicht verlieren will.
+
+### Entstehungsgeschichte
+
+Regie führten Will Speck und Josh Gordon. Der Film erschien am 30. März 2007 bei Paramount, produziert von DreamWorks Pictures, MTV Films und Red Hour Films. Das Budget lag bei 61 Millionen Dollar.
+
+Will Ferrell spielt Chazz, Jon Heder spielt Jimmy; Will Arnett und Amy Poehler spielen das Geschwisterpaar.
+
+### Hinter den Kulissen
+
+Jon Heder brach sich während der Dreharbeiten den Knöchel und drehte weiter. Er war zu diesem Zeitpunkt fast ausschließlich durch "Napoleon Dynamite" bekannt.
+
+Die Anlage folgt einem Muster, das Ferrell in jenen Jahren mehrfach durchspielte: eine Sportart, die selten im Kino vorkommt, ein überheblicher Titelverteidiger und ein Wettkampf, dessen Regeln der Film ausführlich erklärt — nach "Anchorman" und vor "Ricky Bobby" und "Semi-Pro".
+
+### Einordnung & Wirkung
+
+Der Start brachte 33 Millionen Dollar aus 3.372 Kinos und Platz eins; weltweit spielte der Film 145,7 Millionen ein, davon 118,2 Millionen in den USA.
+
+Die Kritik reagierte überwiegend positiv: 70 Prozent von 188 Besprechungen bei Rotten Tomatoes, 64 von 100 bei Metacritic, mit Lob für das Spiel von Ferrell und Heder. Das Publikum vergab bei CinemaScore ein B.` },
 ];
