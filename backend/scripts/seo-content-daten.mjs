@@ -44765,4 +44765,307 @@ Das Lexikon des internationalen Films befand, der Film lebe besonders von der Pr
 Dieser Einwand beschreibt die Bauart genau. Der Weg zum letzten Kampf ist berechenbar, und der Film weicht davon nicht ab.
 
 Was ihn dennoch von vergleichbaren Arbeiten unterscheidet, ist der Einsatz. Nicht ein Champion, sondern ein Musikprogramm steht auf dem Spiel — und die Hauptfigur ist kein verkanntes Talent, sondern ein Lehrer mittleren Alters, der weiß, dass er unterlegen ist.` },
+  // ---- Block 101 ----
+  {
+    bereich: 'titel', schluessel: 'movie:126963', locale: 'de-de',
+    text: `### Worum es geht
+
+Beerus ist der Gott der Zerstörung. Ein Traum weckt ihn — darin ist von einem Super-Saiyajin-Gott die Rede, und Beerus will wissen, ob es ihn gibt.
+
+Die Suche führt ihn zur Erde, und zwar mitten in Bulmas Geburtstagsfeier. Was folgt, ist keine Auseinandersetzung unter Gleichen: Beerus steht auf einer Stufe, die niemand auf diesem Planeten erreicht. Son-Goku versucht es trotzdem — indem er die Kraft von fünf weiteren Saiyajin bündelt.
+
+### Entstehungsgeschichte
+
+Regie führte Masahiro Hosoda. Das Drehbuch schrieb Yūsuke Watanabe; die Geschichte entstand gemeinsam mit Akira Toriyama. Die Musik stammt von Norihito Sumitomo, produziert wurde der Film von Tōei Animation.
+
+Die Premiere war am 30. März 2013 in Japan; die Kinofassung dauert 85 Minuten. Eine erweiterte Fassung von 105 Minuten lief am 22. März 2014 bei Fuji TV.
+
+In Deutschland brachte Universum Anime den Film am 21. August 2015 auf DVD, Blu-ray und als Video on Demand heraus. Die deutsche Fassung entstand bei EuroSync in Berlin mit über 30 Sprechern; Oliver Stritzel spricht Beerus, Tommy Morgenstern den Son-Goku.
+
+### Hinter den Kulissen
+
+Der Film war der erste japanische Film, der in einem IMAX Digital Theater gezeigt wurde. Für eine Anime-Produktion aus einer laufenden Reihe ist das eine bemerkenswerte Auszeichnung — und ein Hinweis darauf, welchen Rang die Vorlage in Japan hat.
+
+Bemerkenswert ist auch die Autorenschaft. Das Drehbuch stammt von Yūsuke Watanabe, die Geschichte entwickelte er gemeinsam mit Akira Toriyama.
+
+Der Einfall, den Gegner unerreichbar stark zu machen, verschiebt die übliche Anlage. Es geht nicht darum, ob Son-Goku gewinnt, sondern darum, wie weit er kommt — und was Beerus daraus über die Erde schließt.
+
+Dass die Fernsehfassung zwanzig Minuten länger ist als die Kinofassung, ist zudem ungewöhnlich; üblicherweise verläuft die Kürzung in die andere Richtung.
+
+### Einordnung & Wirkung
+
+Am Startwochenende in Japan spielte der Film rund 684 Millionen Yen ein, insgesamt 2,9 Milliarden Yen.
+
+Die deutsche Auswertung lief zweieinhalb Jahre später und ohne Kinostart — Universum Anime brachte ihn direkt für den Heimmarkt heraus.
+
+Dieser Unterschied beschreibt die Lage des Anime im deutschsprachigen Raum um 2015. In Japan ein Kinoereignis mit IMAX-Premiere, hier eine Veröffentlichung für ein Publikum, das die Reihe bereits kannte.
+
+Der Abstand zwischen 684 Millionen Yen am ersten Wochenende und 2,9 Milliarden insgesamt zeigt zudem eine lange Laufzeit — der Film lief nicht nur an, er hielt sich.` },
+  {
+    bereich: 'titel', schluessel: 'movie:442062', locale: 'de-de',
+    text: `### Worum es geht
+
+Drei Jugendliche finden ein verwunschenes Buch. Darin steckt Slappy, eine Bauchrednerpuppe, die nicht darin bleiben will.
+
+Es ist Halloween. Slappy nutzt die Nacht, in der ohnehin alles verkleidet ist: Dekorationen und Kostüme in der ganzen Stadt erwachen. Als er die Mutter der Geschwister entführt, bleibt den drei Freunden nur ein Weg — dasselbe Buch, aus dem er kam.
+
+### Entstehungsgeschichte
+
+Regie führte Ari Sandel, das Drehbuch schrieb Rob Lieber.
+
+Madison Iseman spielt Sarah Quinn, Jeremy Ray Taylor ihren Bruder Sonny, Caleel Harris den Sam, Ken Jeong den Mr. Chu, Wendi McLendon-Covey die Mutter Kathy Quinn und Shari Headley die Mrs. Carter. Jack Black tritt als R. L. Stine auf.
+
+Produziert wurde der Film von Deborah Forte und Neal H. Moritz. Die Kamera führte Barry Peterson, den Schnitt besorgten Keith Brachmann und David Rennie, die Musik stammt von Dominic Lewis.
+
+Gedreht wurde ab dem 7. März 2018 bis in den April. Der Film dauert 86 Minuten, das Budget betrug 35 Millionen Dollar.
+
+Der Start war am 12. Oktober 2018 in den Vereinigten Staaten, am 25. Oktober 2018 in Deutschland.
+
+### Hinter den Kulissen
+
+Dass Jack Black als R. L. Stine auftritt — als der Autor der Buchreihe also, auf der alles beruht —, stellt die Verbindung zum ersten Film her.
+
+Halloween als Zeitpunkt ist mehr als Kulisse. Der Film braucht eine Nacht, in der lebendig gewordene Dekoration nicht sofort auffällt; das erspart ihm die Erklärung, warum niemand die Polizei ruft.
+
+Die Kritik traf sich in einem Punkt: solide, aber ohne Ehrgeiz. Filmstarts nannte den Film solide unterhaltsam, aber ohne erzählerischen Anspruch; film.at fand ihn unterhaltsam, aber mit etwas weniger Herz als den ersten Teil.
+
+Der Filmdienst ging weiter und warf ihm Einfallslosigkeit bei einem Übermaß an Effekten vor.
+
+### Einordnung & Wirkung
+
+Bei 35 Millionen Dollar Herstellungskosten spielte der Film allein in den Vereinigten Staaten 93,3 Millionen ein; das Startwochenende brachte dort 23,5 Millionen.
+
+In Deutschland sahen ihn 165.404 Zuschauer, was 1.196.741 Euro einbrachte.
+
+Der Abstand zwischen amerikanischem und deutschem Ergebnis fällt auf: 93,3 Millionen Dollar dort, knapp 1,2 Millionen Euro hier. Die Vorlage hat in beiden Ländern offenkundig nicht denselben Rang.
+
+Ein Film, der bei 35 Millionen Dollar Kosten allein im Heimatmarkt fast das Dreifache einspielt, ist unabhängig von der Kritik ein kaufmännischer Erfolg.` },
+  {
+    bereich: 'titel', schluessel: 'movie:20760', locale: 'de-de',
+    text: `### Worum es geht
+
+Lilo trainiert mit ihrer Hula-Gruppe für einen Wettbewerb, und Stitch hilft ihr dabei.
+
+Dann setzt bei ihm eine Fehlfunktion ein, die aus seiner Entstehung stammt: Er wurde nie richtig aufgeladen. Die Folge ist ein Rückfall in sein zerstörerisches Verhalten — gegen seinen Willen. Gelingt es Jamba nicht, ihn umzuprogrammieren, geht Stitch die Energie aus.
+
+### Entstehungsgeschichte
+
+Regie führten Michael LaBash und Tony Leondis. Die Musik stammt von Joel McNeely.
+
+Dakota Fanning spricht Lilo, Chris Sanders den Stitch. In der deutschen Fassung sprechen Shir-Aviv Hommelsheim und James Gardiner.
+
+Der Film erschien 2005 als 36. Direct-to-Video-Produktion der Walt Disney Company, dauert 68 Minuten und ist ohne Altersbeschränkung freigegeben.
+
+### Hinter den Kulissen
+
+Der Film ist der einzige der Reihe ohne die reguläre Sprecherin Daveigh Chase. Sie war durch ihre Verpflichtungen für die Fernsehserie verhindert; Dakota Fanning übernahm.
+
+Für eine Figur, deren Stimme so bestimmend ist wie die von Lilo, ist das ein erheblicher Eingriff — und in einer Reihe, die auf Wiedererkennbarkeit setzt, ungewöhnlich.
+
+Der eigentliche Einfall liegt in der Ursache. Stitchs Rückfall ist kein Charakterfehler, sondern ein Defekt aus seiner Entstehung — er wurde nie richtig aufgeladen und kann deshalb nicht anders.
+
+Damit stellt der Film eine Frage, die für ein Kinderpublikum selten so direkt gestellt wird: Was bleibt von jemandem, wenn er sein Verhalten nicht mehr steuern kann?
+
+### Einordnung & Wirkung
+
+Als 36. Direct-to-Video-Produktion des Studios steht der Film in einer langen Reihe von Fortsetzungen, die für den Heimmarkt entstanden.
+
+Mit 68 Minuten ist er deutlich kürzer als ein Kinofilm — auch das gehört zum Format.
+
+Bemerkenswert bleibt, dass die Reihe um Lilo und Stitch neben den Filmen auch eine Fernsehserie hervorbrachte, deren Produktion die Besetzung dieses Films unmittelbar beeinflusste.
+
+Die Freigabe ohne Altersbeschränkung steht neben einer Handlung, in der es um das mögliche Ende einer Hauptfigur geht — der Film traut seinem jungen Publikum einiges zu.` },
+  {
+    bereich: 'titel', schluessel: 'movie:42949', locale: 'de-de',
+    text: `### Worum es geht
+
+Arthur ist bei den Minimoys geblieben, bei Prinzessin Selenia und ihrem Bruder Beta.
+
+In seiner eigenen Welt hat unterdessen Maltazard menschliche Größe erreicht. Mit einem Heer riesiger Insekten will er die Erde unterwerfen — und danach mehr. Arthur muss zurück, und dafür braucht er ein Elixier, das im Haus seiner Großmutter versteckt ist.
+
+### Entstehungsgeschichte
+
+Regie führte Luc Besson, der das Drehbuch gemeinsam mit Céline Garcia schrieb und den Film mit Emmanuel Prévost produzierte.
+
+Freddie Highmore spielt Arthur, Mia Farrow die Großmutter. An den Sprechfassungen in Französisch, Englisch und Deutsch wirkten unter anderem Mylène Farmer, Selena Gomez und Iggy Pop mit.
+
+Die Kamera führte Thierry Arbogast, den Schnitt Julien Rey, die Musik stammt von Eric Serra.
+
+Der Film ist eine französische Produktion in englischer und französischer Sprache, dauert 97 Minuten und ist ab 6 Jahren freigegeben. Premiere war am 13. Oktober 2010 in Paris; in Deutschland erschien er am 15. April 2011 auf DVD.
+
+Er verbindet Realaufnahmen mit Computeranimation.
+
+### Hinter den Kulissen
+
+Die Mischform ist die Grundentscheidung: Der Film verbindet Realaufnahmen mit Computeranimation, und der Wechsel zwischen beiden Welten treibt die Handlung.
+
+Im dritten Teil verschiebt sich das Verhältnis. Maltazard ist nicht mehr klein, sondern groß; die Bedrohung findet also in der Welt der Menschen statt, während Arthur in der anderen festsitzt.
+
+Auffällig ist die Besetzung der Sprechrollen. An den Fassungen in Französisch, Englisch und Deutsch wirkten mit Mylène Farmer, Selena Gomez und Iggy Pop Musiker mit, die jeweils in einem anderen Sprachraum bekannt sind.
+
+Die deutsche Auswertung erfolgte ein halbes Jahr nach der Pariser Premiere und direkt auf DVD.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films fand den dritten Teil wirkungsvoller als den zweiten, nannte ihn aber triviale Unterhaltung mit Spezialeffekten.
+
+Dieses Urteil beschreibt die Reihe insgesamt. Sie war von Beginn an auf Schauwerte gebaut, und der dritte Teil ändert daran nichts — er tut nur mehr davon.
+
+Bemerkenswert ist der Aufwand hinter einer Produktion, die in Deutschland direkt auf DVD erschien. Thierry Arbogast an der Kamera und Eric Serra an der Musik sind Namen, die man eher bei Bessons Kinofilmen erwartet.
+
+Zwischen der Pariser Premiere im Oktober 2010 und der deutschen Veröffentlichung im April 2011 lag ein halbes Jahr — der Film erschien hier also mit Verzögerung und ohne Leinwand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:618344', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Angriff auf Apokalips ist gescheitert. Zwei Jahre später sind die meisten Helden tot, versklavt oder untergetaucht.
+
+Superman ist entmachtet und gilt als der, der das Unglück verursacht hat. Was von der Justice League, der Justice League Dark, den Teen Titans und der Suicide Squad übrig ist, schließt sich zusammen — für einen letzten Plan gegen Darkseid.
+
+### Entstehungsgeschichte
+
+Regie führten Matt Peters und Christina Sotta. Das Drehbuch schrieben Ernie Altbacker und Mairghread Scott, von der auch die Geschichte stammt.
+
+Matt Ryan spricht John Constantine, Jerry O'Connell den Superman, Jason O'Mara den Batman, Taissa Farmiga die Raven, Stuart Allan den Damian Wayne als Robin und Tony Todd den Darkseid.
+
+Produziert wurde der Film von Warner Bros. Animation; angekündigt wurde er im Juli 2019 auf der San Diego Comic-Con. Die Musik stammt von Frederik Wiedmann.
+
+Die digitale Veröffentlichung war am 5. Mai 2020, die Ausgaben auf 4K, Blu-ray und DVD folgten am 19. Mai 2020.
+
+### Hinter den Kulissen
+
+Der Film ist kein Einzelstück. IGN-Kritiker Jesse Schedeen nannte ihn das Finale eines Bogens über fünfzehn Filme — eine über Jahre gewachsene Reihe von Animationsfilmen kommt hier zum Abschluss.
+
+Das erklärt die Ausgangslage. Ein Film, der mit einer bereits verlorenen Schlacht beginnt und die Helden am Boden zeigt, setzt voraus, dass das Publikum diese Figuren kennt und ihren Zustand vorher gesehen hat.
+
+Der Zeitsprung von zwei Jahren tut das Übrige. Was zwischen der Niederlage und dem Beginn des Films geschah, muss der Zuschauer aus dem Zustand der Figuren ableiten.
+
+Dass Superman entmachtet ist und die Schuld trägt, kehrt die übliche Rollenverteilung um.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 100 Prozent Zustimmung aus, auf Grundlage von 18 Bewertungen.
+
+Jesse Schedeen lobte die überraschenden Wendungen der Handlung — bei einem Abschluss, dessen Ausgang für ein eingeweihtes Publikum vorgezeichnet schien, ist das der entscheidende Punkt.
+
+Ein einstimmiges Urteil bei 18 Kritiken ist ein seltener Befund. Es weist zugleich darauf hin, wer über diesen Film schreibt: ein Fachpublikum, das die vorangegangenen Filme kennt.
+
+Für eine Reihe, die überwiegend für den Heimmarkt entstand, ist ein Abschluss dieser Art bemerkenswert — Direktveröffentlichungen enden sonst selten mit einem geplanten Finale.` },
+  {
+    bereich: 'titel', schluessel: 'movie:14191', locale: 'de-de',
+    text: `### Worum es geht
+
+Claire und Hailey sind unzertrennlich, und beide sind in denselben Rettungsschwimmer verliebt: Raymond.
+
+Nach einem Sturm finden sie im Schwimmbecken etwas, das dort nicht hingehört — eine Meerjungfrau namens Aquamarine. Sie soll gegen ihren Willen verheiratet werden und kann das nur abwenden, wenn sie beweist, dass es wahre Liebe gibt. Der Handel liegt nahe: Sie hilft den Mädchen bei Raymond, die Mädchen helfen ihr.
+
+### Entstehungsgeschichte
+
+Vorlage ist ein Kinderbuch von Alice Hoffman.
+
+Regie führte Elizabeth Allen. Das Drehbuch schrieben John Quaintance und Jessica Bendinger, produziert wurde der Film von Susan Cartsonis.
+
+Emma Roberts spielt Claire, Joanna Levesque die Hailey, Sara Paxton die Aquamarine, Jake McDorman den Raymond, Arielle Kebbel die Cecilia, Claudia Karvan die Ginny, Bruce Spence den Leonard und Tammin Sursok die Marjorie.
+
+Die Kamera führte Brian J. Breheny, den Schnitt Jane Moran, die Musik stammt von David Hirschfelder.
+
+Der Film ist eine amerikanisch-australische Produktion von 2006, dauert 110 Minuten und ist ohne Altersbeschränkung freigegeben. Gedreht wurde in Australien und in Louisiana; der deutsche Start war am 15. Juni 2006. In den Vereinigten Staaten spielte er rund 18,6 Millionen Dollar ein.
+
+### Hinter den Kulissen
+
+Die Konstruktion ist geschickter, als sie zunächst wirkt. Aquamarine braucht einen Beweis dafür, dass es wahre Liebe gibt — und zugleich stellt derselbe Junge die Freundschaft zwischen Claire und Hailey auf die Probe.
+
+Damit laufen zwei Fragen nebeneinander: die nach der Liebe, um die es angeblich geht, und die nach der Freundschaft, um die es tatsächlich geht.
+
+Gedreht wurde in Australien und in Louisiana — eine amerikanisch-australische Gemeinschaftsproduktion, an der mit Claudia Karvan, Bruce Spence und Tammin Sursok mehrere australische Darsteller beteiligt waren.
+
+Die Auszeichnungen gingen fast ausschließlich an den Nachwuchs im Ensemble.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 53 Prozent aus, Metacritic 51 von 100.
+
+Die Urteile fielen entsprechend gemischt aus. Roger Ebert nannte den Film schrecklich süß mit vorhersehbarer Handlung. Das Lexikon des internationalen Films sprach von einer herkömmlichen Teenager-Komödie ohne sonderliche inszenatorische Finessen. Ruth Steinhof fand ihn teilweise peinlich, räumte aber ein, dass das Ende nicht völlig oberflächlich sei.
+
+James Berardinelli traf die genaueste Einordnung: empfehlenswert für junge Mädchen, mit einem Publikum überwiegend zwischen acht und vierzehn Jahren.
+
+Ausgezeichnet wurde vor allem der Nachwuchs. Emma Roberts erhielt 2007 den Young Artist Award als beste Nebendarstellerin; Sara Paxton und Joanna Levesque waren dafür nominiert, Film und Levesque zudem für den Teen Choice Award 2006.` },
+  {
+    bereich: 'titel', schluessel: 'series:87784', locale: 'de-de',
+    text: `### Worum es geht
+
+Andy Barber ist stellvertretender Bezirksstaatsanwalt. Als in seiner Stadt ein Mord geschieht, übernimmt er den Fall.
+
+Dann fällt der Verdacht auf seinen eigenen Sohn: Jacob, 14 Jahre alt. Andy muss abgeben — und wird vom Ankläger zum Vater eines Beschuldigten. Was die Serie erzählt, ist weniger der Prozess als das, was er mit einer Familie macht.
+
+### Entstehungsgeschichte
+
+Vorlage ist der gleichnamige Roman von 2012.
+
+Mark Bomback entwickelte die Serie und schrieb die Drehbücher; Regie führte Morten Tyldum.
+
+Chris Evans spielt Andy Barber, Michelle Dockery seine Frau Laurie, Jaeden Martell den Sohn Jacob, Cherry Jones die Anwältin Joanna Klein, Pablo Schreiber den Staatsanwalt Neal Logiudice und J. K. Simmons den William Barber.
+
+Apple TV gab die Serie im September 2018 in Auftrag; produziert wurde sie von Paramount Television Studios und Anonymous Content.
+
+Es entstanden acht Folgen, ausgestrahlt vom 24. April bis zum 29. Mai 2020 bei Apple TV+.
+
+Gedreht wurde überwiegend in Massachusetts — in Newton, Belmont, Salem, Worcester, Watertown und Needham; hinzu kamen Aufnahmen in Nuevo Vallarta in Mexiko.
+
+### Hinter den Kulissen
+
+Der Kern ist eine Frage, die die Serie nicht auflöst: Was, wenn die Eltern es nicht wissen?
+
+Was die Kritik ausdrücklich hervorhob, war die Mehrdeutigkeit. Die Serie hält die Frage offen, statt sie früh zu beantworten — und genau daraus bezieht sie ihre Wirkung.
+
+Die Besetzung von Chris Evans in der Hauptrolle war dabei der auffälligste Zug; neben ihm stehen Michelle Dockery als Mutter und J. K. Simmons als William Barber.
+
+Gedreht wurde überwiegend an Originalschauplätzen in Massachusetts — in sechs verschiedenen Orten, dazu Aufnahmen in Mexiko.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 72 Prozent Zustimmung aus. Gelobt wurden die Darsteller, die Mehrdeutigkeit und die emotionale Wirkung; kritisiert wurden das Tempo und die Länge.
+
+Der Einwand zum Tempo trifft eine bewusste Entscheidung. Acht Folgen für einen einzigen Fall bedeuten, dass die Serie sich Zeit nimmt für das, was zwischen den Verhandlungstagen geschieht.
+
+Dass die Mehrdeutigkeit ausdrücklich gelobt wurde, ist bei diesem Stoff der wichtigste Befund. Eine Serie, die die Schuldfrage offen hält, riskiert, ihr Publikum zu verlieren — hier hat es sich als Stärke ausgezahlt.
+
+Zwischen Auftrag im September 2018 und Ausstrahlung im April 2020 lagen anderthalb Jahre; acht Folgen erschienen innerhalb von fünf Wochen.` },
+  {
+    bereich: 'titel', schluessel: 'series:89247', locale: 'de-de',
+    text: `### Worum es geht
+
+Bruce Wayne ist verschwunden, und Gotham steht ohne den da, auf den es sich verlassen hat.
+
+Kate Kane, seine Cousine, übernimmt. Was sie dabei findet, betrifft sie persönlich: Ihre totgeglaubte Schwester Beth lebt — als Alice, und auf der anderen Seite. Später verschwindet auch Kate, und Ryan Wilder tritt an ihre Stelle.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Caroline Dries.
+
+Ruby Rose spielt Kate Kane in der ersten Staffel, Javicia Leslie die Ryan Wilder in der zweiten und dritten. Rachel Skarsten ist Beth Kane alias Alice, Meagan Tandy die Sophie Moore, Nicole Kang die Dr. Mary Hamilton und Camrus Johnson der Luke Fox.
+
+Produziert wurde die Serie von Berlanti Productions, Mad Ghost Productions, DC Entertainment und Warner Bros. Television.
+
+Es entstanden drei Staffeln mit insgesamt 51 Episoden, ausgestrahlt vom 6. Oktober 2019 bis zum 2. März 2022 bei The CW. In Deutschland lief sie ab dem 20. Dezember 2019 bei Prime Video.
+
+### Hinter den Kulissen
+
+Der Wechsel der Hauptdarstellerin nach der ersten Staffel ist der einschneidendste Vorgang. Die Serie ersetzte nicht die Darstellerin, sondern die Figur: Aus Kate Kane wurde Ryan Wilder — ein anderer Mensch unter derselben Maske.
+
+Das ist eine ungewöhnliche Lösung. Der übliche Weg wäre eine Neubesetzung derselben Rolle gewesen; stattdessen schrieb die Serie den Wechsel in die Handlung hinein.
+
+Die Gegenspielerin blieb dabei durchgehend dieselbe. Alice — die verlorene Schwester — verbindet beide Abschnitte und ist die Figur, an der die Serie ihre Zusammengehörigkeit festmacht.
+
+Der Verzicht auf Bruce Wayne als handelnde Figur ist eine weitere Setzung. Sein Verschwinden ist die Voraussetzung, unter der die Serie überhaupt stattfindet.
+
+### Einordnung & Wirkung
+
+Die deutsche Kritik fiel scharf aus. Wolfgang Höbel nannte die Serie eine Freude fürs genderpolitisch bewegte Herz und eine Beleidigung fürs unterhaltungsbegeisterte Hirn; bemängelt wurden läppisch angerichtete Abenteuer und hölzerne Dialoge.
+
+Höbel trennt darin zwei Ebenen: das Anliegen der Serie und ihre Ausführung. Sein Lob gilt dem einen, sein Verriss dem anderen.
+
+Dass die Serie trotz solcher Urteile 51 Folgen erreichte, spricht dafür, dass sie ihr Publikum fand — über zweieinhalb Jahre hinweg und über einen Wechsel der Hauptfigur hinweg.
+
+In Deutschland lief sie ab dem 20. Dezember 2019 bei Prime Video und damit nur gut zwei Monate nach dem amerikanischen Start.` },
 ];
