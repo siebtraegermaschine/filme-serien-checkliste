@@ -47552,4 +47552,299 @@ Für einen Film mit weitgehend unbekannter Besetzung sind das gute Werte — und
 Der Weg über ein Festival und dann direkt zu einer Plattform verschaffte dem Film binnen Wochen ein weltweites Publikum. Ein Kinostart hätte ihn in den meisten Ländern nie erreicht.
 
 Für Craig Johnson bleibt es eine Arbeit, die eine bekannte Erzählform benutzt, um etwas zu erzählen, das darin lange nicht vorkam.` },
+  // ---- Block 110 ----
+  {
+    bereich: 'titel', schluessel: 'movie:1156593', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Jahr ist seit dem Tod von Noahs Vater vergangen. Nick kehrt aus San Francisco zurück, und zwischen ihm und Noah steht mehr als die Entfernung.
+
+Denn ihre Eltern sind ein Paar — und arbeiten daran, die Verbindung der beiden zu unterbinden. Was Noah und Nick nach und nach erfahren, betrifft nicht nur sie selbst: Auch die Generation davor hat Geheimnisse, darunter eine frühere Affäre.
+
+### Entstehungsgeschichte
+
+Vorlage ist Mercedes Rons Roman, der zuerst auf der Plattform Wattpad erschien.
+
+Domingo González führte Regie, schrieb das Drehbuch und übernahm den Schnitt. Produziert wurde der Film von Álex de la Iglesia und Carolina Bang.
+
+Nicole Wallace spielt Noah Morgan, Gabriel Guevara den Nicholas Leister, Marta Hazas die Rafaella und Iván Sánchez den William Leister.
+
+Die Kamera führte Hermes Marco, die Musik stammt von Federico Jusid.
+
+Gedreht wurde von August 2023 bis Februar 2024 an der Costa del Sol, in Marbella, in Manilva und in Madrid.
+
+Der Film ist eine spanische Produktion, dauert 116 Minuten, ist ab 12 Jahren freigegeben und erschien am 27. Dezember 2024 bei Prime Video. Er ist der zweite Teil einer Trilogie.
+
+### Hinter den Kulissen
+
+Die Herkunft der Vorlage ist bemerkenswert. Mercedes Rons Geschichte erschien zuerst auf Wattpad — der Stoff hatte sein Publikum also, bevor jemand an eine Verfilmung dachte.
+
+Die Konstellation selbst ist der Motor: Der Widerstand gegen die Beziehung kommt nicht von außen, sondern von den Eltern der beiden — und die haben, wie sich zeigt, selbst eine Vergangenheit miteinander.
+
+Die Drehorte an der Costa del Sol geben dem einen Rahmen, der zur Vorlage passt — Wohlstand als Kulisse, in der die Probleme trotzdem nicht kleiner werden.
+
+### Einordnung & Wirkung
+
+Der Film ist der mittlere Teil einer Trilogie und erschien direkt bei Prime Video.
+
+Veröffentlicht wurde er am 27. Dezember 2024 — in der Woche zwischen den Feiertagen.
+
+Ein halbes Jahr Drehzeit — August 2023 bis Februar 2024 — ist für eine Produktion dieser Art überdurchschnittlich lang und deutet auf einen entsprechenden Aufwand hin.
+
+Dass Álex de la Iglesia und Carolina Bang als Produzenten auftreten, ordnet den Film in das spanische Genrekino ein, aus dem beide kommen.` },
+  {
+    bereich: 'titel', schluessel: 'series:72305', locale: 'de-de',
+    text: `### Worum es geht
+
+An dieser privaten Eliteschule entscheidet sich die Rangordnung nicht im Unterricht, sondern beim Glücksspiel.
+
+Wer zu viel verliert, wird zum Sklaven der anderen Schüler. Dann kommt Yumeko Jabami als Neue an die Schule — und stellt sich als jemand heraus, der die Gegner lesen kann und mit Berechnung gewinnt, wo andere auf Glück hoffen.
+
+### Entstehungsgeschichte
+
+Vorlage ist die Mangareihe von Homura Kawamoto und Tōru Naomura, die seit 2014 im Magazin „Gangan Joker" bei Square Enix erscheint.
+
+Produziert wurde der Anime vom Studio MAPPA. Regie führten Yuichiro Hayashi und Kiyoshi Matsuda.
+
+Die Musik stammt von Technoboys Pulcraft Green-Fund; das Titellied „Deal with devil" singt Tia.
+
+Es entstanden zwei Staffeln mit insgesamt 24 Episoden zu je 24 Minuten. Die erste lief vom 1. Juli bis zum 23. September 2017 in Japan bei Tokyo MX, MBS, BS11, RKB und TVA. Die zweite Staffel erschien in Deutschland am 13. Juni 2019 bei Netflix.
+
+Daneben entstand eine japanische Realverfilmung als Fernsehserie unter der Regie von Tsutomu Hanabusa, ausgestrahlt vom 15. Januar bis zum 19. März 2018 in zehn Folgen.
+
+### Hinter den Kulissen
+
+Die Grundidee kehrt die übliche Schulhierarchie um. Nicht Noten, Herkunft oder Sport entscheiden über den Rang, sondern das Spiel — und wer verliert, verliert nicht Ansehen, sondern Freiheit.
+
+Damit ist die Schule ein Modell: Eine Ordnung, die sich für gerecht hält, weil jeder dieselben Regeln hat, und die in Wahrheit die begünstigt, die genug Geld zum Verlieren haben.
+
+Yumeko bringt dieses System durcheinander, ohne es abschaffen zu wollen. Sie spielt nach denselben Regeln und gewinnt — genau darin liegt der Reiz für die Kritik, die die schonungslose Klassenordnung und ihre Demontage durch die Hauptfigur hervorhob.
+
+Dass innerhalb weniger Monate nach der ersten Staffel eine Realverfilmung folgte, zeigt, wie schnell der Stoff in Japan angenommen wurde.
+
+### Einordnung & Wirkung
+
+24 Folgen in zwei Staffeln sind ein überschaubarer Umfang für eine Serie, die aus einer laufenden Mangareihe schöpft.
+
+Die deutsche Auswertung lief über Netflix — die zweite Staffel erschien hier im Juni 2019, knapp zwei Jahre nach dem japanischen Start der ersten.
+
+Dass ein Stoff über Glücksspiel an einer Schule so breit ausgewertet wurde — Anime, Realserie, internationale Plattform —, deutet auf eine Vorlage hin, die weit über ihr ursprüngliches Publikum hinausreichte.
+
+Dass die Vorlage seit 2014 fortlaufend erscheint, während der Anime bei 24 Folgen blieb, zeigt zugleich: Die Serie schöpft nur einen Ausschnitt aus dem, was der Manga inzwischen umfasst.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10222', locale: 'de-de',
+    text: `### Worum es geht
+
+Eric Sloane ist amerikanischer Kickbox-Champion. Gemeinsam mit seinem Bruder Kurt reist er nach Thailand, um dort gegen den amtierenden Meister anzutreten: Tong Po.
+
+Der Kampf endet schlimmer als eine Niederlage — Eric bleibt gelähmt zurück. Kurt sucht daraufhin den Meister Xian auf, um bei ihm zu lernen, was nötig ist.
+
+### Entstehungsgeschichte
+
+Regie führten Mark DiSalle und David Worth. Das Drehbuch schrieben DiSalle und Glenn A. Bruce; DiSalle produzierte den Film außerdem.
+
+Jean-Claude Van Damme spielt Kurt Sloane, Dennis Alexio den Bruder Eric, Dennis Chan den Xian Chow, Michel Qissi den Tong Po, Haskell V. Anderson III den Winston Taylor und Rochelle Ashana die Mylee; DiSalle selbst tritt als US-Reporter auf.
+
+Die Kamera führte Jon Kranhouse, den Schnitt Wayne Wahrman, die Musik stammt von Paul Hertzog.
+
+Gedreht wurde in Thailand. Das Budget betrug rund 1,5 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Das Verhältnis von Aufwand und Ertrag ist der bemerkenswerteste Punkt: 1,5 Millionen Dollar Herstellungskosten stehen 39,3 Millionen weltweit gegenüber — mehr als das Fünfundzwanzigfache.
+
+Die Anlage ist so alt wie das Genre. Ein Kämpfer wird geschlagen, ein Angehöriger sucht einen Lehrer auf, es folgt die Ausbildung und dann der Rückkampf. Der Film bringt keine neue Idee mit, sondern führt das Muster in seiner reinsten Form vor.
+
+Was ihn heraushebt, ist der Dreh in Thailand statt in einem Studio.
+
+Die Kritik war entsprechend hart. Das Lexikon des internationalen Films nannte ihn einen mit Folklore, Vietnam-Bewältigung und mythischem Firlefanz verbrämten Actionfilm; TV Spielfilm fasste zusammen: brutale Fights, dazwischen grausame Langeweile.
+
+### Einordnung & Wirkung
+
+In den Vereinigten Staaten spielte der Film 14,7 Millionen Dollar ein, weltweit 39,3 Millionen. In Deutschland sahen ihn 490.912 Kinobesucher.
+
+Aus diesem Erfolg wurde eine der langlebigsten Reihen des Genres. Es folgten „Kickboxer 2" im Jahr 1991, „Karate Tiger 6" 1992, „Kickboxer 4" und „5" in den Jahren 1994 und 1995 sowie Neuverfilmungen zwischen 2016 und 2018.
+
+Die Titelvergabe ist dabei verwirrend: Die Fortsetzungen laufen teils als „Kickboxer 2", „4" und „5", teils als „Karate Tiger 6" — zwei Zählungen für dieselbe Reihe.` },
+  {
+    bereich: 'titel', schluessel: 'movie:13186', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Fernsehproduktion dreht in den Wäldern von West Virginia eine Reality-Show: „The Ultimate Survivalist — The Apocalypse". Sechs Kandidaten sollen sich unter Aufsicht des ehemaligen Soldaten Dale Murphy durchschlagen.
+
+Was niemand am Set weiß: In diesen Wäldern lebt eine Familie von Kannibalen.
+
+### Entstehungsgeschichte
+
+Regie führte Joe Lynch, das Drehbuch schrieben Turi Meyer und Al Septien. Produziert wurde der Film von Erik Feig und Jeff Freilich.
+
+Erica Leerhsen spielt Nina Papas, Henry Rollins den Dale Murphy, Texas Battle den Jake Washington, Daniella Alonso die Amber, Crystal Lowe die Elena, Aleksa Palladino die Mara und Ken Kirzinger den Pa. Kimberly Caldwell tritt als sie selbst auf.
+
+Die Kamera führte Robin Loewen, den Schnitt Ed Marx, die Musik stammt von Bear McCreary.
+
+Gedreht wurde vom 29. Mai bis zum 30. Juni 2006 in Vancouver. Das Budget betrug rund fünf Millionen Dollar.
+
+In Deutschland ist der Film ab 18 Jahren freigegeben; die ungekürzte Fassung ist indiziert.
+
+### Hinter den Kulissen
+
+Der Einfall liegt in der Verdopplung. Eine Sendung, die Überleben inszeniert, trifft auf eine Lage, in der es tatsächlich ums Überleben geht — und die Kandidaten brauchen eine Weile, um den Unterschied zu bemerken.
+
+Henry Rollins als ehemaliger Soldat und Ausbilder ist die auffälligste Besetzung — die einzige Figur, die auf so etwas vorbereitet wäre.
+
+Dass Kimberly Caldwell sich selbst spielt, verstärkt den Reality-Rahmen. Der Film benutzt eine echte Fernsehbekanntheit, um seine erfundene Sendung glaubwürdig zu machen.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films nannte ihn schlicht einen überharten Horrorthriller. Dreadcentral vergab dreieinhalb von fünf Sternen.
+
+Der Unterschied zwischen diesen beiden Urteilen ist der zwischen zwei Publikumsgruppen. Für das eine ist die Gewalt der Grund, den Film abzulehnen, für das andere der Grund, ihn zu sehen.
+
+Die Freigabe ab 18 Jahren gilt in Deutschland nur für eine gekürzte Fassung; die vollständige ist indiziert.
+
+Bei fünf Millionen Dollar Budget und einer Veröffentlichung, die überwiegend über den Heimmarkt lief, ist das ein Film, der genau für sein Publikum gemacht wurde — und für kein anderes.` },
+  {
+    bereich: 'titel', schluessel: 'movie:440471', locale: 'de-de',
+    text: `### Worum es geht
+
+Ray Breslin führt inzwischen ein eigenes Sicherheitsunternehmen. Nach einer misslungenen Rettung entlässt er seinen Mitarbeiter Kimbral.
+
+Ein Jahr später verschwinden zwei Menschen aus seinem Umfeld: sein Schützling Shu und dessen Cousin Yusheng. Beide landen in einer Anlage namens HADES — einem Gefängnis, das ohne Wärter auskommt, weil es vollständig automatisiert ist.
+
+### Entstehungsgeschichte
+
+Regie führte Steven C. Miller, das Drehbuch schrieb Miles Chapman.
+
+Sylvester Stallone spielt Ray Breslin, Dave Bautista den Trent DeRosa, Huang Xiaoming den Shu, Jaime King die Abigail, Jesse Metcalfe den Luke, Wes Chatham den Jasper Kimbral, Titus Welliver den Gregor Faust und Curtis Jackson den Hush; Chen Tang spielt Yusheng Ma.
+
+Die Kamera führte Brandon Cox, den Schnitt Vincent Tabaillon, die Musik stammt von The Newton Brothers.
+
+Angekündigt wurde das Projekt im Oktober 2016, Steven C. Miller kam im Februar 2017 hinzu. Gedreht wurde ab März 2017 in Atlanta sowie in Bangkok und Shanghai. Das Budget betrug 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Idee eines Gefängnisses ohne menschliche Aufsicht ist der Kern. HADES überwacht sich selbst; Kimbral hat es entworfen, um seine Algorithmen zu beweisen.
+
+Damit ist der Gegner kein Gefängnisdirektor, sondern ein System — und die Fluchtgeschichte wird zur Frage, ob sich eine Maschine austricksen lässt, die aus jedem Versuch lernt.
+
+Die Drehorte in Atlanta, Bangkok und Shanghai deuten auf eine Produktion hin, die mehrere Märkte zugleich bedienen sollte; die Besetzung mit Huang Xiaoming in einer tragenden Rolle passt dazu.
+
+Was daraus wurde, hat der Hauptdarsteller selbst am deutlichsten benannt.
+
+### Einordnung & Wirkung
+
+Bei 20 Millionen Dollar Herstellungskosten spielte der Film 17,6 Millionen im Kino und 4,2 Millionen im Heimmarkt ein.
+
+Rotten Tomatoes weist 7 Prozent aus — einer der niedrigsten Werte, die ein Film mit dieser Besetzung erreicht hat.
+
+Sylvester Stallone nannte ihn den am schrecklichsten produzierten Film seiner Laufbahn.
+
+Ein Hauptdarsteller, der seinen eigenen Film öffentlich so beurteilt, ist ein außergewöhnlicher Vorgang — und er sagt mehr über die Entstehung als jede Kritik.
+
+Dass ein Film mit Stallone, Bautista und Curtis Jackson bei 7 Prozent landet und seine 20 Millionen Dollar nicht einspielt, ist die nüchterne Bilanz dazu.` },
+  {
+    bereich: 'titel', schluessel: 'series:42035', locale: 'de-de',
+    text: `### Worum es geht
+
+Das Schulschiff Estrella Polar läuft mit Besatzung und Studenten aus. Während der Fahrt geschieht in Genf ein Unfall an einem Teilchenbeschleuniger.
+
+Als das Schiff wieder Kontakt sucht, ist niemand mehr da. Neunzig Prozent der Landmasse liegen unter Wasser. Was von der Welt übrig ist, findet auf diesem Schiff statt — und die Menschen an Bord müssen aus einem Ausbildungsbetrieb eine Gemeinschaft machen.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Álex Pina und Iván Escobar. Produziert wurde sie von Globomedia.
+
+Mario Casas spielt den Ulises Garmendia, Blanca Suárez die Ainhoa Montero, Irene Montalà die Julia Wilson, Luis Callejo den Julián de la Cuadra und Juanjo Artero den Kapitän Ricardo Montero.
+
+Es entstanden drei Staffeln mit insgesamt 43 Episoden — dreizehn, vierzehn und sechzehn. Ausgestrahlt wurden sie vom 17. Januar 2011 bis zum 21. Februar 2013 bei Antena 3.
+
+### Hinter den Kulissen
+
+Die Ausgangslage ist eine radikale Verknappung. Ein Schiff, eine Besatzung, kein Land — die Serie nimmt sich alles weg, was Handlungsspielraum gäbe, und muss dann sehen, wie sie weitererzählt.
+
+Damit steht sie in einer Reihe mit anderen Geschichten über Gruppen, die von der Welt abgeschnitten sind. Der Unterschied liegt darin, dass hier nicht die Gruppe verschwunden ist, sondern die Welt.
+
+Die Zusammensetzung an Bord ist der zweite Zug: Ein Schulschiff bedeutet Lehrende und Lernende, also eine Ordnung mit Rängen, die unter den neuen Umständen wenig wert ist.
+
+Die Serie stammt von Álex Pina und Iván Escobar, produziert wurde sie von Globomedia.
+
+### Einordnung & Wirkung
+
+Drei Staffeln über gut zwei Jahre bei einem großen spanischen Privatsender sind eine solide Laufzeit.
+
+Die Zuschauerzahlen waren nach der ersten Staffel Grundlage für die Fortsetzung; auch die zweite und dritte Staffel erreichten starke Quoten.
+
+43 Folgen für eine Geschichte, die mit dem Ende der Welt beginnt, verlangen einiges an Erfindungskraft: Die Serie muss immer wieder Gründe finden, warum das Schiff nicht einfach stillsteht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:53319', locale: 'de-de',
+    text: `### Worum es geht
+
+Checco arbeitet als Türsteher in einer Diskothek in der Brianza und will eigentlich etwas anderes: Carabiniere werden. Dreimal hat man ihn abgelehnt.
+
+Stattdessen bekommt er eine Stelle als Sicherheitsbeamter am Mailänder Dom. Dort lernt er Farah kennen, die sich als Architekturstudentin ausgibt. Checco verliebt sich — und ahnt nicht, was sie tatsächlich vorhat.
+
+### Entstehungsgeschichte
+
+Regie führte Gennaro Nunziante, das Drehbuch schrieb er gemeinsam mit Checco Zalone. Produziert wurde der Film von Pietro Valsecchi; die Musik stammt von Zalone selbst.
+
+Checco Zalone spielt Checco, Rocco Papaleo dessen Vater Nicola, Nabiha Akkari die Farah, Luigi Luciano den Giovanni, Mehdi Brando Mahdloo den Sufien, Ivano Marescotti den Colonel Mazzini und Tullio Solenghi den Kardinal Rosselli.
+
+Das Budget betrug sechs Millionen Euro.
+
+### Hinter den Kulissen
+
+Der Film verhandelt einen heiklen Stoff im Gewand einer Komödie: einen geplanten Anschlag auf ein Wahrzeichen, ausgeführt von jemandem, der sich für die eigene Familie rächen will.
+
+Was ihn vor der bloßen Provokation bewahrt, ist die Anlage der Hauptfigur. Checco ist weder Held noch Ermittler, sondern ein Mann, der aus Gutmütigkeit tut, was er tut — und genau dadurch etwas verändert.
+
+Der Mailänder Dom und ein geerbter Trullo in Alberobello markieren die beiden Pole des Films: das Wahrzeichen einer Großstadt und ein Rundhaus im Süden.
+
+Dass der Hauptdarsteller auch das Drehbuch mitschrieb und die Musik beisteuerte, macht deutlich, wessen Film das ist.
+
+### Einordnung & Wirkung
+
+Bei sechs Millionen Euro Herstellungskosten spielte der Film weltweit 43,4 Millionen Euro ein — mehr als das Siebenfache.
+
+Damit steht er auf Platz fünf der im Inland erfolgreichsten italienischen Filme.
+
+Das ist die eigentliche Einordnung: eine Komödie, die außerhalb Italiens kaum bekannt ist und dort zu den größten Erfolgen ihrer Geschichte gehört.
+
+43,4 Millionen Euro bei sechs Millionen Budget sind ein Verhältnis, das im europäischen Kino selten erreicht wird — und es entstand fast vollständig im eigenen Land.` },
+  {
+    bereich: 'titel', schluessel: 'series:80240', locale: 'de-de',
+    text: `### Worum es geht
+
+Yeimy Montoya ist siebzehn und schreibt Texte für Reggaeton. Dann verrät sie ihr Freund Charly — und sie verbringt siebzehn Jahre im Gefängnis.
+
+Als sie herauskommt, ist sie eine andere: Unter dem Namen Tammy Andrade arbeitet sie als erfolgreiche Musikproduzentin. Was sie vorhat, ist keine Rückkehr, sondern eine Abrechnung.
+
+### Entstehungsgeschichte
+
+Geschaffen wurde die Telenovela von Claudia Sánchez und Said Chamie, entwickelt von Andrés Salgado Tous.
+
+Carolina Ramírez spielt Yeimy Montoya, Carlos Torres den Charly Flow, Andrés Sandoval den Juancho Mesa und Juan Manuel Restrepo den Erik Mateo Cruz Montoya.
+
+Produziert wurde die Serie von Sony Pictures Television und Teleset für Caracol Televisión. Die Dreharbeiten begannen am 26. August 2017; gedreht wurde in Medellín und in New York.
+
+Es entstanden drei Staffeln mit insgesamt 237 Episoden — 82 im Jahr 2018, 90 im Jahr 2021 und 65 im Jahr 2026. Ausgestrahlt wurde vom 12. Juni 2018 bis zum 21. April 2026.
+
+### Hinter den Kulissen
+
+Der Zeitsprung ist die tragende Konstruktion. Siebzehn Jahre Haft bedeuten, dass die Hauptfigur in eine Welt zurückkehrt, die sich vollständig gedreht hat — und dass die Menschen, die sie sucht, inzwischen etwas geworden sind.
+
+Der neue Name ist dabei mehr als eine Tarnung. Tammy Andrade ist keine Verkleidung, sondern eine Person mit eigener Laufbahn; die Serie erzählt beide Leben nebeneinander.
+
+Dass Musik nicht Kulisse, sondern Handlungsgegenstand ist, hebt die Serie von vergleichbaren Stoffen ab. Reggaeton ist das Feld, auf dem der Konflikt ausgetragen wird — Texte, Urheberschaft, wer wovon lebt.
+
+Die Dreharbeiten in Medellín und New York verbinden die beiden Welten, zwischen denen die Figur sich bewegt.
+
+### Einordnung & Wirkung
+
+2019 gewann die Serie den International Emmy Award als beste Telenovela.
+
+Die Premiere war das meistgesehene Programm Kolumbiens und erreichte 15,4 Punkte.
+
+237 Folgen über acht Jahre hinweg, von 2018 bis 2026, sind selbst für eine Telenovela eine erhebliche Strecke — mit einer dreijährigen Pause zwischen erster und zweiter Staffel.
+
+Ein International Emmy für eine kolumbianische Produktion ist der Beleg dafür, dass der Stoff über den heimischen Markt hinaus wahrgenommen wurde.` },
 ];
