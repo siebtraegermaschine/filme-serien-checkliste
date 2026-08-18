@@ -43862,4 +43862,303 @@ Die Urteile waren deutlich. The Globe and Mail nannte die Serie erbärmlich schl
 Bemerkenswert ist die zweite Formulierung. Sie beschreibt nicht dasselbe wie die erste — der Guardian bescheinigt der Serie, dass ihre Maßlosigkeit ein eigenes Vergnügen bereitet.
 
 Dass NBC trotz dieser Aufnahme drei Staffeln bestellte, zeigt, dass die Bewertung durch die Fachkritik und die Zuschauerbindung hier auseinanderliefen.` },
+  // ---- Block 98 ----
+  {
+    bereich: 'titel', schluessel: 'movie:1086747', locale: 'de-de',
+    text: `### Worum es geht
+
+Mina ist 28 und Künstlerin. In einem Wald in Irland verliert sie die Orientierung — und findet keinen Weg zurück.
+
+Sie stößt auf einen Bunker, in dem drei andere Menschen leben. Deren Regeln sind eindeutig: Bei Einbruch der Dunkelheit muss man drinnen sein. Denn draußen sind Wesen, die die Gruppe beobachten. Wer sie sind, weiß niemand genau.
+
+### Entstehungsgeschichte
+
+Vorlage ist der Roman „The Watchers" von A. M. Shine aus dem Jahr 2021.
+
+Ishana Night Shyamalan schrieb das Drehbuch und führte Regie; es war ihr erster Spielfilm. Produziert wurde er von M. Night Shyamalan.
+
+Dakota Fanning spielt Mina, Georgina Campbell die Ciara, Olwen Fouéré die Madeline, Oliver Finnegan den Daniel und John Lynch den Professor Kilmartin.
+
+Die Kamera führte Eli Arenson, die Musik stammt von Abel Korzeniowski.
+
+Gedreht wurde von Juli bis September 2023 in Irland — in Dublin, in Wicklow und in Galway.
+
+Der Film wurde zunächst selbst finanziert und dann für 30 Millionen Dollar an Warner Bros. verkauft.
+
+### Hinter den Kulissen
+
+Die Anlage kehrt das übliche Verhältnis um. Nicht die Menschen beobachten das Unbekannte, sondern werden beobachtet — und wissen es. Wer drinnen ist, bleibt fuer die Wesen draussen sichtbar.
+
+Was die Wesen sind, entfaltet der Film schrittweise. Es sind Feen, die ihre Gestalt wechseln können — und die versuchen, Menschen nachzuahmen.
+
+Der Dreh in Dublin, Wicklow und Galway verankert den Stoff damit an dem Ort, an dem die Vorlage spielt.
+
+Bemerkenswert ist die Finanzierung. Der Film entstand zunächst auf eigene Rechnung und wurde erst danach an ein grosses Studio verkauft — ein Weg, den Erstlingsfilme selten nehmen.
+
+### Einordnung & Wirkung
+
+Bei 30 Millionen Dollar spielte der Film weltweit 33,4 Millionen ein.
+
+Die Aufnahme war schlecht. Rotten Tomatoes weist 33 Prozent aus, Metacritic 46 von 100; das Publikum vergab bei CinemaScore die Note C–.
+
+Ein C– ist ein deutliches Signal. Es bedeutet, dass auch die Zuschauer, die den Film gezielt gesehen haben, ihn nicht empfehlen — bei einem Horrorfilm mit ausgeschriebener Prämisse deutet das auf eine Auflösung hin, die nicht trug.
+
+Für ein Regiedebüt bleibt festzuhalten, was gelang: ein selbst finanziertes Projekt, das ein großes Studio für 30 Millionen Dollar übernahm und weltweit in die Kinos brachte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:171424', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine Gruppe von Studenten in New York schließt sich einer Umweltaktion an. Ihr Ziel: der Amazonas, wo Regenwald gerodet wird und ein indigener Stamm dadurch bedroht ist.
+
+Die Aktion gelingt zunächst. Auf dem Rückflug stürzt das Flugzeug ab. Die Überlebenden geraten in die Hände genau jenes Stammes, für den sie eingetreten sind — und der kannibalistische Rituale kennt.
+
+### Entstehungsgeschichte
+
+Regie führte Eli Roth, der das Drehbuch gemeinsam mit Guillermo Amoedo schrieb. Zu den Produzenten gehörten neben Roth auch Miguel Asensio, Molly Conners, Nicolás López und Christopher Woodrow.
+
+Lorenza Izzo spielt Justine, Ariel Levy den Alejandro, Daryl Sabara den Lars, Kirby Bliss Blanton die Amy, Sky Ferreira die Kaycee und Richard Burgi den Charles.
+
+Die Kamera führte Antonio Quercia, den Schnitt besorgte Ernesto Díaz Espinoza, die Musik stammt von Manuel Riveiro.
+
+Der Film entstand 2013 als Gemeinschaftsproduktion der Vereinigten Staaten, Chiles und Kanadas, dauert 100 Minuten und ist in Deutschland ab 18 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Konstruktion ist bewusst bitter. Aktivisten, die sich für einen Stamm einsetzen, werden von diesem Stamm getötet — der Film führt die Hilfsbereitschaft seiner Figuren gegen sie.
+
+Die Angriffsfläche liegt auf der Hand. Ein Film, der eine indigene Gemeinschaft als Bedrohung zeigt, muss sich fragen lassen, was dieses Bild anrichtet — unabhängig davon, wie die Figuren dorthin gelangt sind.
+
+Der Film beantwortet diese Frage nicht. Er stellt die Aktivisten als naiv dar und den Stamm als Gefahr, und beides bleibt nebeneinander stehen.
+
+Die Beteiligung chilenischer Produktionsfirmen und eines chilenischen Teams bei Kamera und Schnitt verortet den Film zugleich in Südamerika.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war überwiegend ablehnend. Rotten Tomatoes weist 38 Prozent aus.
+
+Stephen King nannte den Film wie eine glorreiche Rückkehr in die Autokinos seiner Jugend — ein Lob, das genau beschreibt, worauf Roth zielt: nicht auf Anerkennung durch die Fachkritik, sondern auf ein Publikum, das die Gattung kennt.
+
+Die Freigabe ab 18 Jahren in Deutschland ist bei diesem Stoff die zu erwartende Einstufung.
+
+Was den Film ausmacht, ist die Ausgangslage. Nicht Abenteurer oder Geschäftsleute geraten hier in die Gewalt des Stammes, sondern Menschen, die eigens angereist waren, um ihn zu schützen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:614933', locale: 'de-de',
+    text: `### Worum es geht
+
+2043 führt eine künstliche Intelligenz namens Harlan einen Aufstand der Maschinen gegen die Menschheit an.
+
+28 Jahre später findet die Analystin Atlas Shepherd heraus, wohin Harlan verschwunden ist: in die Andromeda-Galaxie. Sie schließt sich einer Militärmission an, um ihn aufzuhalten. Dabei muss sie lernen, ausgerechnet einer künstlichen Intelligenz zu vertrauen — einer namens Smith.
+
+### Entstehungsgeschichte
+
+Regie führte Brad Peyton. Das Drehbuch schrieben Leo Sardarian und Aron Eli Coleite.
+
+Jennifer Lopez spielt Atlas Shepherd, Simu Liu den Harlan Shepherd, Sterling K. Brown den Colonel Elias Banks, Mark Strong den General Jake Boothe, Lana Parrilla die Val Shepherd und Abraham Popoola den Casca Decius; Gregory James Cohan spricht den Smith.
+
+Produziert wurde der Film von ASAP Entertainment, Safehouse Pictures, Nuyorican Productions und Berlanti-Schechter Films. Die Kamera führte John Schwartzman, den Schnitt Bob Ducsay, die Musik stammt von Andrew Lockington.
+
+Gedreht wurde vom 26. August bis zum 26. November 2022 in Los Angeles und in Neuseeland. Das Budget betrug 100 Millionen Dollar, die Laufzeit beträgt 120 Minuten. Der Film erschien am 24. Mai 2024 bei Netflix.
+
+### Hinter den Kulissen
+
+Der Kern ist ein Zweipersonenstück. Atlas misstraut künstlicher Intelligenz und muss ausgerechnet mit einer zusammenarbeiten.
+
+Auffällig ist der Besetzungszettel: Atlas Shepherd, Harlan Shepherd und Val Shepherd tragen denselben Nachnamen. Der Gegner ist damit kein Fremder.
+
+Bei 100 Millionen Dollar Budget und einer Veröffentlichung ohne Kinostart zeigt sich, was Plattformproduktionen inzwischen kosten dürfen. Der Aufwand ist der eines Sommerfilms, die Auswertung eine andere.
+
+### Einordnung & Wirkung
+
+In der ersten Woche kam der Film auf 28,2 Millionen Aufrufe und 56,3 Millionen Stunden; bis zum 5. Juni waren es 60 Millionen Aufrufe und 119,4 Millionen Stunden. Er stand in 93 Ländern in den Top 10 und in 71 auf Platz eins; 80 Prozent der Zuschauer sahen ihn zu Ende.
+
+Die Kritik urteilte gegenteilig. Rotten Tomatoes weist 19 Prozent bei 110 Kritiken aus, Metacritic 37 von 100.
+
+Die New York Times lobte Lopez' Darstellung. Der Guardian befand, der Film wirke wie vor zwei Jahrzehnten gemacht; der Hollywood Reporter nannte ihn einen weiteren Netflix-Film zum Nebenbeischauen.
+
+2025 war Lopez für die Goldene Himbeere nominiert, das Tonteam für einen Golden Reel Award.
+
+Der Abstand zwischen 19 Prozent Zustimmung und einer Abschlussquote von 80 Prozent beschreibt die Lage genau: Wer den Film anfing, sah ihn zu Ende — nur empfehlen wollte ihn kaum jemand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:142061', locale: 'de-de',
+    text: `### Worum es geht
+
+Herbst 1986. Der Joker, seit Jahren stumm in Arkham, meldet sich zurück — mit gespielter Reue und einem Auftritt in einer Fernseh-Talkshow.
+
+Zugleich gerät Batman von anderer Seite unter Druck. Der Präsident beauftragt Superman damit, der Selbstjustiz des Mannes aus Gotham ein Ende zu setzen. Zwei alte Bekannte stehen damit auf verschiedenen Seiten.
+
+### Entstehungsgeschichte
+
+Vorlage ist die Graphic Novel von Frank Miller und Klaus Janson aus dem Jahr 1986.
+
+Regie führte Jay Oliva, der beide Teile inszenierte. Das Drehbuch schrieb Bob Goodman. Produziert wurde der Film von Warner Premiere, DC Entertainment und Warner Bros. Animation; die Musik stammt von Christopher Drake.
+
+Peter Weller spricht Bruce Wayne und Batman, Ariel Winter die Carrie Kelley als Robin, Michael Emerson den Joker, Mark Valley den Clark Kent und Superman, David Selby den James Gordon, Robin Atkin Downes den Oliver Queen, Tress MacNeille die Selina Kyle und Jim Meskimen den Präsidenten Ronald Reagan. Conan O'Brien spricht den Talkmaster David Endochrine.
+
+Teil 2 erschien am 29. Januar 2013.
+
+### Hinter den Kulissen
+
+Die Vorlage von 1986 gehört zu den einflussreichsten Comicarbeiten überhaupt, und der Film geht mit ihr behutsam um — Kofi Outlaw von Screen Rant nannte ihn eine liebevoll getreue Nachgestaltung der Geschichte, die ihn inspirierte.
+
+Genau daraus folgt aber auch das Problem, das derselbe Kritiker benannte: Die Handlung ist im Kalten Krieg verankert, und was 1986 unmittelbar war, wirkt 27 Jahre später als historischer Stoff.
+
+Ein zweiter Einwand betraf den Joker, dessen Zeichnung Outlaw abgeschwächt fand.
+
+Bemerkenswert ist die Besetzung der Sprecherrolle. Peter Weller als alternder Bruce Wayne bringt eine Stimme mit, die Erschöpfung transportiert, ohne schwach zu klingen.
+
+### Einordnung & Wirkung
+
+Die Zweiteilung des Stoffes ist die grundlegende Entscheidung. Statt die Vorlage auf Spielfilmlänge zu kürzen, verteilten Warner Premiere, DC Entertainment und Warner Bros. Animation sie auf zwei Filme unter derselben Regie.
+
+Das Urteil von Screen Rant beschreibt die Folge genau. Wer so nah an der Vorlage bleibt, übernimmt auch deren Zeitbezug — und der Kalte Krieg, der die Geschichte 1986 grundierte, war 2013 Geschichte.
+
+Für das Publikum, das die Graphic Novel kennt, ist der Film damit weniger Interpretation als Übertragung. Wer sie nicht kennt, bekommt einen Batman zu sehen, der alt ist, müde und mit dem Staat über Kreuz liegt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:287948', locale: 'de-de',
+    text: `### Worum es geht
+
+Frank Martin war bei einer Spezialeinheit. Heute fährt er an der Côte d'Azur — Transporte, bei denen niemand Fragen stellt, weder der Auftraggeber noch er.
+
+Anna engagiert ihn, um sie und zwei Pakete von einer Bank abzuholen. Was wie ein gewöhnlicher Auftrag beginnt, ist der Anfang eines Rachefeldzugs: Anna und drei weitere Frauen wollen ihren früheren Zuhälter Karasov und dessen Komplizen um alles bringen, was sie besitzen.
+
+### Entstehungsgeschichte
+
+Regie führte Camille Delamarre. Das Drehbuch schrieben Luc Besson, Bill Collage und Adam Cooper; Besson produzierte den Film gemeinsam mit Mark Gao.
+
+Ed Skrein spielt Frank Martin, Ray Stevenson dessen Vater Frank Martin Sr., Loan Chabanol die Anna, Gabriella Wright die Gina, Tatjana Pajković die Maria und Yu Wenxia die Qiao.
+
+Die Kamera führte Christophe Collette, den Schnitt Julien Rey, die Musik stammt von Alexandre Azaria.
+
+Der Film ist eine französische Produktion aus dem Jahr 2015 und dauert 96 Minuten; der französische Originaltitel lautet „Le Transporteur : Héritage".
+
+### Hinter den Kulissen
+
+Der Film ist ein Neuanfang mit bekanntem Namen. Die Hauptrolle wechselte den Darsteller, und der französische Titel benennt das offen — „Héritage", also Erbe.
+
+Die auffälligste Ergänzung ist der Vater. Ray Stevenson spielt einen Frank Martin Sr., der es einmal ähnlich getrieben hat und nun als Zweitbesetzung mitfährt; das verschiebt die Reihe vom Einzelgänger zum Familienbetrieb.
+
+Auf der anderen Seite steht eine Gruppe von vier Frauen, die den Rachefeldzug führen. Der Transporteur ist damit nicht die treibende Kraft der Handlung, sondern das Werkzeug.
+
+Der Filmdienst kritisierte, dass die ernsthaften Themen — Zwangsprostitution und Menschenhandel — nur oberflächlich behandelt werden. Der Einwand trifft die Bauart: Der Stoff liefert das Motiv, tragen muss ihn die Verfolgungsjagd.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war schlecht. Rotten Tomatoes weist 17 Prozent aus.
+
+Cinema nannte ihn in Maßen unterhaltsam, stellte aber die Frage, ob eine Reaktivierung des rasenden Kurierboten wirklich nötig gewesen sei.
+
+Das ist der Kern der Sache. Der Film setzt darauf, dass die Reihe stärker trägt als ihr Personal — und 17 Prozent Zustimmung sind die Antwort darauf.
+
+Was bleibt, ist eine französische Produktion mit Luc Besson als Autor und Produzent, die das Muster ihrer Vorgänger genau kennt und ihm folgt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:107811', locale: 'de-de',
+    text: `### Worum es geht
+
+Jeff Chang wird 21 — in den Vereinigten Staaten das Alter, ab dem man legal trinken darf. Am nächsten Morgen hat er ein Vorstellungsgespräch für ein Medizinstudium, und sein Vater erwartet, dass er es bekommt.
+
+Seine Freunde Miller und Casey sind angereist und lassen sich davon nicht beeindrucken. Ein Bier, dann heim. So beginnt eine Nacht, die durch Bars, Studentinnenverbindungen und schließlich zur Polizei führt — irgendwann ohne Jeff, den die beiden unterwegs verloren haben.
+
+### Entstehungsgeschichte
+
+Jon Lucas und Scott Moore führten Regie und schrieben das Drehbuch. Es war ihr Regiedebüt; zuvor hatten sie die Drehbücher zu „Hangover" von 2009 und „Wie ausgewechselt" von 2011 geschrieben.
+
+Miles Teller spielt Miller, Skylar Astin den Casey, Justin Chon den Jeff Chang, Sarah Wright die Nicole, Jonathan Keltz den Randy und François Chau den Vater Dr. Chang.
+
+Produziert wurde der Film von David Hoberman, Todd Lieberman, Ryan Kavanaugh und Hugo Shong. Die Kamera führte Terry Stacey, den Schnitt John Refoua, die Musik stammt von Lyle Workman.
+
+Gedreht wurde im Bundesstaat Washington, unter anderem an der University of Washington in Seattle; die Szenen auf dem Musikfestival entstanden in George, Washington.
+
+Das Budget betrug 13 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Herkunft der Autoren erklärt die Bauform. Beide hatten „Hangover" geschrieben, und der Aufbau ist derselbe: eine Nacht, deren Verlauf sich erst im Rückblick zusammensetzt, und ein Freund, der abhandenkommt.
+
+Der Unterschied liegt im Einsatz. Hier steht nicht eine Hochzeit auf dem Spiel, sondern die Laufbahn eines jungen Mannes und dessen Verhältnis zu seinem Vater.
+
+Für Miles Teller war es eine frühe Hauptrolle. Er stand kurz darauf in Arbeiten ganz anderer Art vor der Kamera.
+
+Der Dreh an einer echten Universität liefert die Kulisse, die der Film braucht — und die Festivalszenen entstanden an dem Ort in Washington, an dem tatsächlich Konzerte dieser Größe stattfinden.
+
+### Einordnung & Wirkung
+
+Bei 13 Millionen Dollar Herstellungskosten spielte der Film weltweit rund 48 Millionen ein — ein solider kaufmännischer Erfolg.
+
+Die Kritik war deutlich ablehnend. Rotten Tomatoes weist 26 Prozent bei 100 Kritiken aus, Metacritic 34 von 100; Filmstarts vergab anderthalb von fünf Sternen.
+
+Dieser Abstand zwischen Zuspruch und Ertrag ist bei Komödien dieser Art die Regel. Das Publikum, das für einen solchen Film ins Kino geht, richtet sich nicht nach Besprechungen.
+
+Was bleibt, ist ein Debüt zweier Autoren, die für andere bereits einen der erfolgreichsten Komödienstoffe des Jahrzehnts geschrieben hatten — und deren eigene Regiearbeit daran gemessen wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:522518', locale: 'de-de',
+    text: `### Worum es geht
+
+Bailey lebt auf einer Farm in Michigan, bei Ethan und Hannah. Zum Haushalt gehören auch Gloria und deren kleine Tochter C. J.
+
+Als Bailey stirbt, ist die Geschichte nicht zu Ende. Er kehrt zurück — in anderer Gestalt, mit anderem Namen, aber mit demselben Auftrag: bei C. J. zu sein. Über mehrere Hundeleben hinweg begleitet er sie durch ihre Kindheit, ihre Jugend und weit darüber hinaus.
+
+### Entstehungsgeschichte
+
+Vorlage ist W. Bruce Camerons Roman „A Dog's Journey" von 2012. Der Film ist die Fortsetzung von „A Dog's Purpose" aus dem Jahr 2017.
+
+Regie führte Gail Mancuso; es war ihr erster Spielfilm. Das Drehbuch schrieben Cameron, Cathryn Michon, Maya Forbes und Wally Wolodarsky.
+
+Josh Gad spricht Bailey in allen seinen Gestalten. Dennis Quaid spielt Ethan Montgomery, Marg Helgenberger die Hannah, Betty Gilpin die Gloria Mitchell, Kathryn Prescott die C. J. Mitchell und Henry Lau den Trent Mahoney.
+
+Die Fortsetzung wurde im Juni 2017 angekündigt, die Produktion begann im August 2018. Die Kamera führte Rogier Stoffers, die Musik stammt von Mark Isham. Das Budget betrug 16 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Anlage verlangt dem Publikum etwas ab, das Kinderfilme sonst vermeiden: Der Hund stirbt mehrfach, und der Film zeigt es.
+
+Genau darin liegt seine Absicht. Wer ihn sieht, erlebt jeden Abschied — und jedes Mal die Rückkehr. Der Trost besteht nicht darin, dass nichts endet, sondern darin, dass etwas bleibt.
+
+Der Erzähler ist durchgehend der Hund. Josh Gads Stimme trägt damit die gesamte Innensicht, während die Menschen um ihn herum altern und wechseln.
+
+Für Gail Mancuso war es das Spielfilmdebüt — bei einem Stoff, der von Zeitsprüngen und wechselnden Hauptdarstellern lebt.
+
+### Einordnung & Wirkung
+
+Bei 16 Millionen Dollar Herstellungskosten spielte der Film weltweit 75,8 Millionen ein — 22,7 Millionen in den Vereinigten Staaten und Kanada, 52,8 Millionen international.
+
+Rotten Tomatoes weist 53 Prozent bei 86 Kritiken aus, Metacritic 43 von 100. Bei CinemaScore vergab das Publikum ein A.
+
+Dieser Unterschied ist der aufschlussreichste Befund. Die Fachkritik sah einen Film, der auf Rührung zielt; die Zuschauer, die ihn sahen, vergaben die zweitbeste Note, die dieses Verfahren kennt.
+
+Dass die internationale Auswertung mehr als das Doppelte des nordamerikanischen Ergebnisses erbrachte, zeigt zudem, wie gut der Stoff über Sprachgrenzen hinweg funktioniert.` },
+  {
+    bereich: 'titel', schluessel: 'series:94664', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein arbeitsloser Mann stirbt — und wacht in einer Welt auf, in der es Magie gibt, als Säugling namens Rudeus Greyrat.
+
+Er behält die Erinnerungen an sein früheres Leben. Was er daraus macht, ist der Gegenstand der Serie: Rudeus ist entschlossen, dieses zweite Leben ohne Bedauern zu führen.
+
+### Entstehungsgeschichte
+
+Vorlage ist die Light-Novel-Reihe von Rifujin na Magonote.
+
+Produziert wird die Serie vom Studio Bind. Die Regie wechselte im Verlauf: Die erste Staffel verantwortete Manabu Okamoto, die zweite Hiroki Hirano für den ersten und Ryōsuke Shibuya für den zweiten Teil.
+
+Das Charakterdesign stammt von Kazutaka Sugiyama, die Musik von Yoshiaki Fujisawa.
+
+Es entstanden drei Staffeln. Die erste lief von Januar bis Dezember 2021, die zweite von Juli 2023 bis Juli 2024, die dritte hatte im Juli 2026 Premiere.
+
+### Hinter den Kulissen
+
+Die Serie gehört zu einer Gattung, die im japanischen Erzählen einen eigenen Namen trägt: Geschichten, in denen jemand aus unserer Welt in eine andere versetzt wird. Was Mushoku Tensei davon abhebt, ist die Konsequenz, mit der es beim Anfang beginnt — Rudeus wird als Kind geboren und wächst über die Staffeln hinweg auf.
+
+Damit erzählt die Serie eine Entwicklung statt eines Abenteuers. Der Erwachsene im Kinderkörper muss lernen, und was er aus seinem ersten Leben mitbringt, ist nicht nur Wissen.
+
+Die lange Produktionszeit fällt auf. Zwischen dem Beginn der ersten und der Premiere der dritten Staffel liegen fünfeinhalb Jahre — für eine fortlaufende Serie ein bemerkenswerter Zeitraum, der auf hohen Aufwand pro Folge hindeutet.
+
+### Einordnung & Wirkung
+
+Tappei Nagatsuki, der Autor von „Re:Zero", nannte die Handhabung der Figur Rudeus eine der stärksten Seiten der Serie.
+
+Dieses Urteil kommt von jemandem, der eine der bekanntesten Arbeiten derselben Gattung geschrieben hat — und es zielt nicht auf die Welt, die Ausstattung oder den Kampf, sondern auf die Figurenführung.
+
+Drei Staffeln über fünfeinhalb Jahre hinweg sind zugleich der Beleg dafür, dass das Publikum der Serie über lange Pausen hinweg treu geblieben ist — zwischen dem Ende der ersten und dem Beginn der zweiten Staffel lagen anderthalb Jahre, zwischen zweiter und dritter zwei.
+
+Dass die Regie dreimal in andere Hände ging, ohne dass die Serie ihren Zusammenhalt verlor, ist bei einer Produktion dieser Laufzeit ebenfalls bemerkenswert.` },
 ];
