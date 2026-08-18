@@ -47239,4 +47239,317 @@ Die zweite Staffel erreichte 91 Prozent bei Rotten Tomatoes und 74 von 100 bei M
 Trotz dieser durchgehend guten Werte endete die Serie nach zwei Staffeln und 16 Folgen.
 
 Das ist bemerkenswert. 97 und 91 Prozent Zustimmung sind Werte, mit denen Serien üblicherweise fortgesetzt werden — die Entscheidung fiel hier erkennbar nicht nach der Kritik.` },
+  // ---- Block 109 ----
+  {
+    bereich: 'titel', schluessel: 'movie:289222', locale: 'de-de',
+    text: `### Worum es geht
+
+Jan und Antonina Żabiński leiten den Warschauer Zoo. Als 1939 der Krieg beginnt, wird der Zoo bombardiert.
+
+Was danach folgt, hat mit Tieren nichts mehr zu tun. Unter deutscher Besatzung verstecken die Żabińskis Menschen auf dem Zoogelände — insgesamt etwa 300 Jüdinnen und Juden. Als Vorwand dient eine Schweinezucht; und die Żabińskis müssen den deutschen Zoologen Lutz Heck hinhalten, von dem der Zoo abhängt.
+
+### Entstehungsgeschichte
+
+Vorlage ist das gleichnamige Buch von Diane Ackerman, die dafür ein Tagebuch des damaligen Zoodirektors Jan Żabiński und seiner Frau Antonina auswertete.
+
+Regie führte Niki Caro, das Drehbuch schrieb Angela Workman. Produziert wurde der Film von Jeff Abberley.
+
+Jessica Chastain spielt Antonina Żabińska, Johan Heldenbergh den Dr. Jan Żabiński, Daniel Brühl den Dr. Lutz Heck, Shira Haas die Urszula und Iddo Goldberg den Maurycy Fraenkel.
+
+Die Kamera führte Andrij Parekh, den Schnitt David Coulson, die Musik stammt von Harry Gregson-Williams.
+
+Gedreht wurde in Prag, obwohl der Film in Warschau spielt.
+
+Die Premiere war am 7. März 2017 in Warschau, der US-Kinostart am 31. März 2017. In Deutschland erschien der Film direkt auf DVD.
+
+### Hinter den Kulissen
+
+Die Rettung ist historisch belegt. Etwa 300 Menschen überlebten im Warschauer Zoo; der Film endet mit der Anerkennung der Żabińskis als Gerechte unter den Völkern.
+
+Der Zoo als Versteck ist dabei kein erzählerischer Einfall, sondern der tatsächliche Ort — mitten in der besetzten Stadt.
+
+Die Figur des Lutz Heck ist die schwierigste. Ein deutscher Zoologe, mit dem die Żabińskis auskommen mussten, weil er über den Zoo verfügte — der Film macht daraus ein Verhältnis, in dem jede Freundlichkeit berechnet ist.
+
+Genau an dieser Stelle setzte die Kritik an: ob ein Film über den Holocaust so erzählt werden darf.
+
+### Einordnung & Wirkung
+
+Stephen Holden warf dem Film in der New York Times vor, eine Disney-Version des Holocaust zu sein, mit unzureichender Dramatik. Oliver Armknecht bemängelte die zu zurückhaltende Darstellung.
+
+Katja Iken hielt dagegen und würdigte das Verdienst, eine nahezu vergessene Geschichte bekannt gemacht zu haben.
+
+Beide Positionen haben Gewicht, und sie schließen einander nicht aus. Ein Film kann einen Stoff zu glatt behandeln und zugleich der Grund sein, warum jemand überhaupt von ihm erfährt.
+
+Dass der Film in Deutschland nicht ins Kino kam, sondern direkt auf DVD erschien, ist bei einem Stoff dieser Art bemerkenswert — und sagt mehr über den Verleih als über den Film.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11814', locale: 'de-de',
+    text: `### Worum es geht
+
+Gary Wallace und Wyatt Donnelly sind Schüler, schüchtern und in der Rangordnung ihrer Schule ganz unten.
+
+Dann versuchen die beiden etwas, das eigentlich nicht gehen kann: Sie erschaffen mit dem Computer eine Frau. Es funktioniert. Lisa steht in der Tür, sie kann offenbar mehr, als ein Computer hervorbringen sollte — und sie hat vor, aus den beiden etwas zu machen.
+
+### Entstehungsgeschichte
+
+John Hughes führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Joel Silver.
+
+Anthony Michael Hall spielt Gary Wallace, Kelly LeBrock die Lisa, Ilan Mitchell-Smith den Wyatt Donnelly, Bill Paxton dessen Bruder Chet, Robert Downey Jr. den Ian, Robert Rusler den Max, Judie Aronson die Hilly, Suzanne Snyder die Deb und Vernon Wells den Anführer der Motorradbande.
+
+Die Kamera führte Matthew F. Leonetti, die Musik stammt von Ira Newborn; den Schnitt besorgten Chris Lebenzon, Scott K. Wallace und Mark Warner.
+
+Gedreht wurde in Illinois — in Chicago, Highland Park, Northbrook und Skokie. Als Schule diente die Niles East High School, die seit 1980 geschlossen war.
+
+Der Film erschien 1985, dauert 94 Minuten und kostete rund 7,5 Millionen Dollar. Weltweit spielte er etwa 38,9 Millionen ein, davon 23,8 Millionen in Nordamerika.
+
+### Hinter den Kulissen
+
+Der Titelsong stammt von Oingo Boingo, geschrieben von Danny Elfman. Auf dem Soundtrack stehen daneben Kim Wilde, Wall of Voodoo, Mike Oldfield, Ratt und Van Halen — eine Zusammenstellung, die den Film in seiner Zeit verankert.
+
+Die Anlage selbst ist heikler, als der Ton vermuten lässt: Zwei Jungen erschaffen sich eine Frau nach ihren Vorstellungen. Was den Film davor bewahrt, nur das zu sein, ist die Figur Lisa — sie folgt nicht den Anweisungen, sondern hat einen eigenen Plan.
+
+Roger Ebert hob genau das hervor und lobte Kelly LeBrocks kluge Darstellung als witziger und etwas tiefgründiger, als der Stoff erwarten ließ.
+
+Bemerkenswert ist die Besetzung im Rückblick: Bill Paxton und Robert Downey Jr. in Nebenrollen.
+
+### Einordnung & Wirkung
+
+Bei 7,5 Millionen Dollar Herstellungskosten spielte der Film weltweit 38,9 Millionen ein — mehr als das Fünffache.
+
+Das Lexikon des internationalen Films urteilte deutlich zurückhaltender: auf Tempo angelegt und größtenteils oberflächlich, mit verpassten Gelegenheiten zur Ironie über die Kultur der achtziger Jahre.
+
+Zwischen Eberts Lob und diesem Einwand liegt die Bandbreite der Rezeption. Der eine sieht eine Figur, die den Film über seine Prämisse hinaushebt; der andere einen Film, der seine eigene Prämisse nicht befragt.
+
+Dass als Schule ein seit fünf Jahren geschlossenes Gebäude diente, ist eine dieser Produktionsnotizen, die im fertigen Film niemand bemerkt.` },
+  {
+    bereich: 'titel', schluessel: 'series:82596', locale: 'de-de',
+    text: `### Worum es geht
+
+Emily Cooper arbeitet in Chicago im Marketing. Dann bekommt sie eine Stelle bei einer Pariser Tochterfirma.
+
+Was sie dort erwartet, ist ein Kulturschock und eine Belegschaft, die ihr skeptisch begegnet — allen voran ihre Chefin Sylvie Grateau. Daneben entwickelt sich ein Privatleben, das schnell unübersichtlich wird.
+
+### Entstehungsgeschichte
+
+Entwickelt wurde die Serie von Darren Star, der zuvor „Sex and the City" gemacht hatte. Produziert wurde sie von Darren Star Productions, Jax Media und MTV/Paramount Studios; die Musik stammt von Chris Alan Lee für die ersten drei und von Gabriel Mann für die weiteren Staffeln.
+
+Lily Collins spielt Emily Cooper, Philippine Leroy-Beaulieu die Sylvie Grateau, Ashley Park die Mindy Chen, Lucas Bravo den Gabriel, Lucien Laviscount den Alfie und Camille Razat die Camille.
+
+Es entstanden fünf Staffeln mit insgesamt 50 Episoden zu je rund 30 Minuten; eine sechste ist bestätigt. Die erste Staffel erschien am 2. Oktober 2020, die zweite am 22. Dezember 2021, die dritte am 21. Dezember 2022, die vierte in zwei Teilen im August und September 2024, die fünfte am 18. Dezember 2025.
+
+Gedreht wurde in Paris — unter anderem an der Place de l'Estrapade, in den Jardins du Trocadéro und auf der Pont Alexandre III —, im Département Indre-et-Loire, in Studios in Saint-Denis, in Chicago und später auch in Italien.
+
+### Hinter den Kulissen
+
+Die Serie lebt von einem Frankreichbild, das sie zugleich bedient und ausstellt. Genau daran arbeitet sich die Kritik ab: Die Darstellung wird als klischeehaft bemängelt, während Kostüme und Darsteller Zuspruch finden.
+
+Zwei Vorgänge gingen darüber hinaus. Die Zusammenarbeit mit McDonald's in der dritten Staffel wurde als Produktplatzierung kritisiert.
+
+Und die Figur Petra, eine Ukrainerin, löste in der Ukraine Widerspruch aus — unter dem Schlagwort „Wir sind nicht Petra" wurde die Darstellung öffentlich zurückgewiesen.
+
+Das ist der Punkt, an dem eine Serie, die von nationalen Zuschreibungen lebt, an ihre Grenze stößt: Was als Pointe gedacht ist, trifft Menschen, die sich darin wiedererkennen sollen.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 63 Prozent aus, Metacritic 58 von 100 — beides im Mittelfeld.
+
+Dem steht eine Laufzeit von fünf Staffeln und 50 Folgen gegenüber, mit bestätigter Fortsetzung. Über fünf Jahre hinweg, von 2020 bis 2025, hat die Serie ihr Publikum gehalten.
+
+Dieser Abstand zwischen mittelmäßigen Bewertungen und beständigem Zuspruch ist der aufschlussreichste Befund. Die Serie wird nicht trotz ihres Frankreichbildes gesehen, sondern wegen ihm.
+
+Die Ausweitung der Drehorte nach Italien in den späteren Staffeln zeigt zugleich, dass dasselbe Verfahren sich übertragen lässt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:404378', locale: 'de-de',
+    text: `### Worum es geht
+
+James lebt auf der Straße, spielt Musik in der Londoner Innenstadt und ist drogenabhängig.
+
+Dann findet er einen verletzten rot getigerten Kater. Die Tierfreundin Betty hilft ihm, das Tier durchzubringen; James nennt es Bob. Und dann stellt er etwas fest: Wenn Bob beim Spielen dabei ist, bleiben die Leute stehen — und geben deutlich mehr.
+
+### Entstehungsgeschichte
+
+Vorlage ist James Bowens autobiografisches Buch „Bob, der Streuner: Die Katze, die mein Leben veränderte" aus dem Jahr 2013. Zur Veröffentlichung angeregt hatte ihn die Literaturagentin Mary.
+
+Regie führte Roger Spottiswoode, das Drehbuch schrieben Tim John und Maria Nation. Produziert wurde der Film von Adam Rolston.
+
+Luke Treadaway spielt James, Ruta Gedmintas die Betty, Joanne Froggatt die Val, Anthony Head den Vater, Darren Evans den Baz, Caroline Goodall die Mary und Ruth Sheen die Elsie.
+
+Die Kamera führte Peter Wunstorf, den Schnitt Paul Tothill, die Musik stammt von David Hirschfelder.
+
+Gedreht wurde 2015 in London, in Covent Garden. Der Film dauert 103 Minuten und ist ab 12 Jahren freigegeben. Premiere war am 3. November 2016 in London, der deutsche Start am 12. Januar 2017.
+
+### Hinter den Kulissen
+
+Für die Dreharbeiten waren vier trainierte Katzen im Einsatz. Nur der echte Bob eignete sich für die Szenen in Menschenmengen — er war das gewohnt.
+
+James Bowen selbst ist im Film zu sehen: in der Schlussszene in der Buchhandlung.
+
+Der Weg, den der Film erzählt, ist der reale. Bowen kam von der Straße, wurde Verkäufer der Obdachlosenzeitung The Big Issue und schrieb schließlich das Buch, auf dem der Film beruht.
+
+Was danach geschah, gehört zur Wahrheit dieser Geschichte dazu: Der echte Bob starb 2020 im Alter von vierzehn Jahren. Bowen geriet danach zeitweise wieder in den Drogenkonsum und wurde obdachlos.
+
+### Einordnung & Wirkung
+
+Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
+
+Antje Wessels beschrieb den Film als ungeschönt und traurig, aber doch wunderschön, und verglich Spottiswoodes Regie mit einer Mischung aus „Once" und „Trainspotting".
+
+Dieser Vergleich trifft die Anlage genau. Der Film ist Musikerzählung und Suchtgeschichte zugleich, und er kippt in keine der beiden Richtungen ganz.
+
+Die Freigabe ab 12 Jahren steht neben einem Stoff, der Entzug und Straßenleben zeigt — der Film hält das aus, weil er nichts davon ausstellt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:894205', locale: 'de-de',
+    text: `### Worum es geht
+
+Ulysses Bloodstone ist gestorben. Auf seinem Anwesen versammeln sich fünf Monsterjäger, um in einem Wettstreit um sein Erbe anzutreten: den Bloodstone, einen Stein von erheblicher Macht.
+
+Unter ihnen ist Jack Russell, der ein eigenes Ziel verfolgt — er sucht seinen Freund Ted. Und Elsa Bloodstone, die im Verlauf feststellt, dass sie und Russell dasselbe wollen.
+
+### Entstehungsgeschichte
+
+Vorlage ist die Marvel-Comicfigur Werewolf by Night.
+
+Michael Giacchino führte Regie; es war sein Debüt als Regisseur. Das Drehbuch schrieben Heather Quinn und Peter Cameron nach einer Geschichte von Quinn. Die Musik stammt ebenfalls von Giacchino.
+
+Gael García Bernal spielt Jack Russell, Laura Donnelly die Elsa Bloodstone, Harriet Sansom Harris die Verussa Bloodstone und Carey Jones den Ted; weitere Jäger spielen Kirk R. Thatcher, Eugenie Bondurant, Leonardo Nam und Daniel J. Watts.
+
+Produziert wurde der Film von Marvel Studios mit Leeann Stonebreaker als Produzentin und Kevin Feige unter den ausführenden Produzenten. Die Kamera führte Zoë White.
+
+Gedreht wurde in 18 Tagen von März bis April 2022 in den Trilith Studios in Atlanta. Die Laufzeit beträgt 53 Minuten; die Veröffentlichung erfolgte am 7. Oktober 2022 bei Disney+.
+
+### Hinter den Kulissen
+
+Die auffälligste Entscheidung ist das Bild. Der Film ist in Schwarzweiß gedreht, im Stil des klassischen Schauerfilms — bis auf das Ende, das in Farbe übergeht.
+
+Dazu kommen eingesetzte Marker, die einen Rollenwechsel im Projektor nachahmen: Der Film gibt vor, von einer Filmrolle zu laufen.
+
+Die Ungeheuer entstanden überwiegend praktisch. Die KNB EFX Group baute sämtliche Monster und die Animatronik; Ted entstand aus einem Anzug, Animatronik und ergänzendem Computerbild.
+
+Bemerkenswert ist eine Nebenwirkung des Schwarzweiß: Trotz Blutszenen genügte in den Vereinigten Staaten die Einstufung TV-14, weil die Farbe fehlt.
+
+Am 20. Oktober 2023 erschien mit „Werewolf by Night in Color" eine Farbfassung.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 90 Prozent bei einem Schnitt von 7,5 von 10 aus, Metacritic 69 von 100.
+
+Variety nannte ihn einen triumphalen ersten Versuch und lobte die praktischen Effekte. Der Hollywood Reporter hob Bernal und Donnelly hervor sowie Giacchinos Musik als herausragendes Element. Rolling Stone lobte Giacchinos Gespür für Führung und die Verwandlung selbst. /Film vergab 7 von 10, IndieWire ein B+ — beide schätzten Gestaltung und Musik, IndieWire bemängelte, die kurze Laufzeit lasse zu wenig Raum für die Figuren.
+
+53 Minuten sind der Kern dieser Bilanz: kurz genug, um keinen Leerlauf zuzulassen, zu kurz für alles Übrige.
+
+Für einen Komponisten als Regiedebütant ist bemerkenswert, dass ausgerechnet die Musik durchgängig hervorgehoben wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:137116', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine geheimnisvolle Karte bringt Schlumpfine auf eine Spur: Irgendwo soll es ein weiteres, verlorenes Schlumpfdorf geben.
+
+Gemeinsam mit Schlaubi, Clumsy und Hefty bricht sie auf, um es vor Gargamel zu erreichen. Für Schlumpfine geht es dabei um mehr als um eine Entdeckung — sie wurde einst von Gargamel erschaffen.
+
+### Entstehungsgeschichte
+
+Vorlage ist die Comicreihe des belgischen Zeichners Peyo.
+
+Regie führte Kelly Asbury, das Drehbuch schrieben Stacey Harman und Pamela Ribon. Produziert wurde der Film von Jordan Kerner und Mary Ellen Bauder Andrews für Columbia Pictures, Sony Pictures Animation und The Kerner Entertainment Company.
+
+Die Musik stammt von Christopher Lennertz; der Soundtrack erschien am 31. März 2017. Meghan Trainor sang das Lied „I'm a Lady".
+
+In der englischen Fassung sprechen Demi Lovato die Schlumpfine, Mandy Patinkin den Papa Schlumpf, Rainn Wilson den Gargamel, Joe Manganiello den Hefty, Jack McBrayer den Clumsy, Danny Pudi den Schlaubi sowie Julia Roberts, Michelle Rodriguez, Ellie Kemper, Ariel Winter und Meghan Trainor die Bewohnerinnen des verlorenen Dorfes.
+
+Der Film dauert 84 Minuten, kostete 60 Millionen Dollar und erschien am 7. April 2017 in den Vereinigten Staaten.
+
+### Hinter den Kulissen
+
+Die Hauptfigur ist die entscheidende Setzung. Schlumpfine verdankt ihre Existenz Gargamel — der Film macht daraus die Frage, wer sie ohne ihn ist, und schickt sie auf die Suche nach einem Dorf, das sie nie gekannt hat.
+
+Genau dafür wurde er gelobt: Die Entwicklung der Figur hoben die Kritiken durchgängig hervor. 2018 erhielt der Film den ReFrame Stamp, eine Auszeichnung für ausgewogene Geschlechterverteilung in der Produktion.
+
+Bemängelt wurde daneben eine vorhersehbare Geschichte und eine blasse Animation.
+
+### Einordnung & Wirkung
+
+Bei 60 Millionen Dollar Herstellungskosten spielte der Film weltweit 197,6 Millionen ein — 45 Millionen in Nordamerika, 152,6 Millionen anderswo.
+
+Dieses Verhältnis ist der auffälligste Punkt der Bilanz. Über drei Viertel des Ergebnisses kamen von außerhalb Nordamerikas; die Vorlage ist in Europa deutlich stärker verankert als in den Vereinigten Staaten.
+
+Rotten Tomatoes weist 41 Prozent bei 96 Bewertungen aus, Metacritic 40 von 100. Bei CinemaScore vergab das Publikum ein A.
+
+Der Abstand zwischen 41 Prozent bei der Fachkritik und der Bestnote beim Publikum ist bei Kinderfilmen die Regel — hier fällt er besonders deutlich aus.` },
+  {
+    bereich: 'titel', schluessel: 'movie:13483', locale: 'de-de',
+    text: `### Worum es geht
+
+Clay Beresford ist jung, sehr reich und schwer herzkrank. Kurz vor der Transplantation heiratet er heimlich Samantha Lockwood, die Assistentin seiner Mutter Lilith.
+
+Operiert wird er von seinem besten Freund, Dr. Jack Harper. Dann geschieht während des Eingriffs, was nicht geschehen darf: Die Narkose wirkt nicht vollständig. Clay ist gelähmt, aber bei Bewusstsein — und hört alles, was im Operationssaal gesprochen wird.
+
+### Entstehungsgeschichte
+
+Joby Harold schrieb das Drehbuch und führte Regie; es war sein erster Spielfilm.
+
+Hayden Christensen spielt Clay Beresford Jr., Jessica Alba die Samantha Lockwood, Terrence Howard den Dr. Jack Harper, Lena Olin die Mutter Lilith Beresford, Arliss Howard den Dr. Jonathan Neyer, Fisher Stevens den Dr. Eugene Puttnam und Georgina Chapman die Schwester Penny Carver.
+
+Die Kamera führte Russell Carpenter, die Musik stammt von Graeme Revell und Samuel Sim.
+
+Gedreht wurde in New York — auf dem Lincoln-Center-Campus der Fordham University und im Bellevue Hospital.
+
+Das Budget betrug 8,6 Millionen Dollar; weltweit spielte der Film 32,7 Millionen ein, davon 14,4 Millionen in den Vereinigten Staaten.
+
+### Hinter den Kulissen
+
+Der Film beruht auf einem realen medizinischen Phänomen: Wachheit während der Narkose. Wer davon betroffen ist, nimmt die Operation wahr, kann sich aber weder bewegen noch äußern.
+
+Daraus baut der Film seine Anlage. Die Hauptfigur ist im Wortsinn handlungsunfähig — sie kann nur zuhören, und was sie hört, verändert alles.
+
+Das ist eine reizvolle Konstruktion und zugleich die Schwierigkeit. Ein Film, dessen Held sich nicht rühren kann, muss seine Bewegung anderswo hernehmen — bei den Figuren, die um ihn herum stehen.
+
+Bei 8,6 Millionen Dollar Budget ist der Zuschnitt entsprechend: wenige Schauplätze, ein überschaubares Ensemble.
+
+### Einordnung & Wirkung
+
+Bei 8,6 Millionen Dollar Herstellungskosten spielte der Film weltweit 32,7 Millionen ein — kaufmännisch ein Erfolg.
+
+Die Kritik urteilte gegenteilig. Rotten Tomatoes weist 23 Prozent aus, Metacritic 33 von 100; das Publikum vergab bei CinemaScore ein C+. Bemängelt wurden Darstellungen und Regie.
+
+Roger Ebert stand mit drei von vier Sternen allein gegen dieses Urteil.
+
+2008 war Jessica Alba bei den Goldenen Himbeeren als schlechteste Hauptdarstellerin nominiert, gemeinsam mit Hayden Christensen zudem als schlechtestes Leinwandpaar.
+
+Zwischen einem verdreifachten Einspielergebnis und Himbeeren-Nominierungen liegt die ganze Bilanz dieses Films: Die Prämisse zog, die Ausführung überzeugte nicht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:511785', locale: 'de-de',
+    text: `### Worum es geht
+
+Alex Truelove ist Schüler und mit Claire zusammen.
+
+Dann lernt er Elliot kennen, der offen schwul ist — und stellt fest, dass er sich zu ihm hingezogen fühlt. Was er an sich bemerkt, passt nicht zu dem Leben, das er führt.
+
+### Entstehungsgeschichte
+
+Craig Johnson schrieb das Drehbuch und führte Regie.
+
+Daniel Doheny spielt Alex Truelove, Antonio Marziale den Elliot, Madeline Weinstein die Claire und Daniel Zolghadri den Dell; in weiteren Rollen sind Nik Dodani, Fred Hechinger, Joanna P. Adler und William Ragsdale zu sehen.
+
+Produziert wurde der Film von Jared Goldman, Ben Stiller und Nicholas Weinstock unter dem Dach von Red Hour Films; die Herstellung übernahm STXfilms, die Auswertung sicherte sich Netflix im Jahr 2017.
+
+Die Kamera führte Hillary Spera, die Musik stammt von Nathan Larson.
+
+Weltpremiere war am 14. April 2018 beim San Francisco International Film Festival, der Start bei Netflix am 8. Juni 2018.
+
+### Hinter den Kulissen
+
+Die Konstruktion vermeidet den bequemen Weg. Claire ist keine Hürde, die aus dem Weg muss — sie ist eine Freundin, der gegenüber Alex ehrlich sein muss, und der Film nimmt sich Zeit für diese Seite.
+
+Damit hat der Stoff zwei Coming-out-Geschichten: eine gegenüber sich selbst und eine gegenüber jemandem, den man nicht verlieren will.
+
+Dass der Film über Ben Stillers Produktionsfirma entstand und dann bei Netflix landete, ist für das Jahr 2018 bezeichnend: Ein Stoff dieser Größe hätte zuvor kaum einen Kinostart bekommen.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 84 Prozent aus, Metacritic 62 von 100 mit dem Befund überwiegend positiver Bewertungen.
+
+Für einen Film mit weitgehend unbekannter Besetzung sind das gute Werte — und sie beruhen auf der Behandlung des Stoffes, nicht auf Namen.
+
+Der Weg über ein Festival und dann direkt zu einer Plattform verschaffte dem Film binnen Wochen ein weltweites Publikum. Ein Kinostart hätte ihn in den meisten Ländern nie erreicht.
+
+Für Craig Johnson bleibt es eine Arbeit, die eine bekannte Erzählform benutzt, um etwas zu erzählen, das darin lange nicht vorkam.` },
 ];
