@@ -3,3 +3,6 @@ backend/.env
 .DS_Store
 rated-titles-last-run.json
 .claude/
+
+# Batch-Protokolle (lokal, nicht versionieren)
+backend/scripts/.seo-*.jsonl
