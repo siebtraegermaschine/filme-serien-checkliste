@@ -46928,4 +46928,315 @@ Roger Ebert nannte ihn die schlimmste Art von schlechtem Film — lobte aber aus
 Dieses gespaltene Urteil beschreibt die Lage: Die Machart wurde gelobt, die Geschichte nicht.
 
 Kaufmännisch ging die Rechnung dennoch auf. 73 Millionen Dollar Herstellungskosten stehen 104 Millionen weltweit gegenüber — getragen vor allem vom Ausland, denn in den Vereinigten Staaten blieb der Film unter seinen Kosten.` },
+  // ---- Block 108 ----
+  {
+    bereich: 'titel', schluessel: 'movie:1023922', locale: 'de-de',
+    text: `### Worum es geht
+
+Los Angeles, 1985. Maxine Minx hat als Pornodarstellerin gearbeitet und will nun ins reguläre Filmgeschäft — sechs Jahre nach dem Überfall, der ihr Leben geteilt hat.
+
+Sie bekommt eine Hauptrolle in „The Puritan II". Zur selben Zeit taucht ein Privatdetektiv auf, der ihre Vergangenheit kennt und sie damit unter Druck setzt. Und durch die Stadt zieht ein Serienmörder.
+
+### Entstehungsgeschichte
+
+Ti West führte Regie, schrieb das Drehbuch und übernahm den Schnitt. Produziert wurde der Film von Mia Goth, Jacob Jaffke, Harrison Kreiss, Kevin Turen und West.
+
+Mia Goth spielt Maxine Minx, Elizabeth Debicki die Regisseurin Elizabeth Bender, Kevin Bacon den Privatdetektiv John Labat, Giancarlo Esposito den Teddy Night und Michelle Monaghan die Ermittlerin Marianne Williams.
+
+Die Kamera führte Eliot Rockett, die Musik stammt von Tyler Bates.
+
+Der Film dauert 103 Minuten und erschien am 4. Juli 2024 in Deutschland, einen Tag später in Nordamerika.
+
+### Hinter den Kulissen
+
+Der Zeitpunkt ist die Setzung, aus der alles folgt. Der Film stellt Maxines Aufstieg in ein Los Angeles, durch das zur selben Zeit ein Serienmörder zieht.
+
+Die Figur trägt dabei eine doppelte Last. Sie will als Schauspielerin ernst genommen werden, und ihre Vergangenheit ist das Einzige, woran sich alle festhalten. Der Privatdetektiv ist nur die konkrete Form dieses Drucks.
+
+Dass Mia Goth den Film auch mitproduziert hat, ist bemerkenswert. Die Rolle ist nicht auf eine Darstellerin zugeschnitten worden — die Darstellerin hat den Film mit auf den Weg gebracht.
+
+Ti West übernahm neben Regie und Buch auch den Schnitt. Bei einem Film, der von Rhythmus und Zitat lebt, ist das eine Entscheidung mit Folgen.
+
+### Einordnung & Wirkung
+
+Die Besetzung ist für einen Genrefilm ungewöhnlich prominent: Elizabeth Debicki, Kevin Bacon, Giancarlo Esposito und Michelle Monaghan in Nebenrollen.
+
+103 Minuten sind knapp bemessen für einen Stoff, der Aufstiegsgeschichte, Verfolgung und Mordserie gleichzeitig erzählen will.
+
+Der fast zeitgleiche Start in Deutschland und Nordamerika — 4. und 5. Juli 2024 — ist bemerkenswert; deutsche Kinostarts liegen sonst meist Wochen hinter dem amerikanischen.` },
+  {
+    bereich: 'titel', schluessel: 'series:90669', locale: 'de-de',
+    text: `### Worum es geht
+
+1899. Der Dampfer Kerberos bringt europäische Auswanderer von London nach New York. An Bord: Menschen aus vielen Ländern, die alle etwas hinter sich lassen.
+
+Mitten auf dem Atlantik entdeckt die Besatzung ein Schiff, das seit Monaten als vermisst gilt — die Prometheus. Was auf der Kerberos danach geschieht, folgt keiner Ordnung mehr, die jemand an Bord versteht.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Jantje Friese und Baran bo Odar, die zuvor gemeinsam „Dark" gemacht hatten.
+
+Emily Beecham spielt Maura Franklin, Aneurin Barnard den Daniel, Andreas Pietschmann den Kapitän Eyk Larsen, Miguel Bernardeau den Ángel, Maciej Musiał den Olek, Clara Rosager die Tove und Yann Gael den Jérôme.
+
+Produziert wurde die Serie von Dark Ways mit einem Budget von 48 Millionen Euro — die teuerste deutsche Serie. Die Kamera führte Nikolaus Summerer, die Musik stammt von Ben Frost, die Kostüme von Bina Daigeler.
+
+Gedreht wurde vom 3. Mai bis zum 5. November 2021 an 160 Drehtagen, überwiegend im Studio Babelsberg mit virtueller Produktionstechnik, dazu in den Shepperton Studios und in Schottland. Ursprünglich waren Spanien und Polen vorgesehen; die Pandemie reduzierte das.
+
+Es entstand eine Staffel mit acht Folgen zu je 50 Minuten. Weltpremiere war am 12. September 2022 in Toronto, die Europapremiere am 10. November in Berlin, der Start bei Netflix am 17. November 2022.
+
+### Hinter den Kulissen
+
+Die Besetzung ist bewusst international zusammengestellt — Emily Beecham, Aneurin Barnard, Andreas Pietschmann, Miguel Bernardeau, Maciej Musiał, Clara Rosager und Yann Gael kommen aus sieben verschiedenen Herkunftsländern, passend zu einem Schiff voller Auswanderer aus ganz Europa.
+
+Die virtuelle Produktionstechnik im Studio Babelsberg machte es möglich, ein Schiff auf offener See zu erzählen, ohne auf See zu drehen.
+
+48 Millionen Euro und 160 Drehtage sind Größenordnungen, die im deutschen Fernsehen keine Entsprechung haben.
+
+Zeit Online hob hervor, dass Szenen- und Kostümbild nicht nur optisch beeindruckten, sondern die Dekadenz und den Klassismus des Fin de Siècle spiegelten.
+
+### Einordnung & Wirkung
+
+Die Serie war 2023 für den Grimme-Preis in der Kategorie Fiktion nominiert.
+
+Im Januar 2023 wurde sie nach einer Staffel eingestellt — trotz hohen Zuschauerzuspruchs und obwohl zwei weitere Staffeln konzipiert waren.
+
+Das ist der Kern ihrer Bilanz. Die teuerste deutsche Serie endet nach acht Folgen an einem Punkt, an dem die Geschichte gerade erst ihre Richtung offenlegt.
+
+Für ein Publikum, das die Auflösung erwartet hatte, bleibt ein Fragment — bemerkenswert gebaut, aber unvollendet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11454', locale: 'de-de',
+    text: `### Worum es geht
+
+Will Graham war Profiler beim FBI und hat aufgehört. Jetzt lebt er in Florida, und Jack Crawford holt ihn zurück.
+
+Ein Mörder tötet Familien in Vollmondnächten. Die Presse nennt ihn die Zahnfee. Um seine Denkweise zu verstehen, sucht Graham einen Mann auf, den er selbst gefasst hat: Dr. Hannibal Lecktor. Der antwortet — und nutzt die Gelegenheit.
+
+### Entstehungsgeschichte
+
+Vorlage ist Thomas Harris' Roman „Red Dragon" von 1981. Es ist die erste Verfilmung des Stoffes.
+
+Michael Mann führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Dino De Laurentiis und Richard A. Roth; das Budget betrug 15 Millionen Dollar, die Dreharbeiten begannen am 9. September 1985.
+
+William L. Petersen spielt Will Graham, Brian Cox den Dr. Hannibal Lecktor, Tom Noonan den Francis Dollarhyde, Joan Allen die Reba McClane, Kim Greist die Molly Graham, Dennis Farina den Jack Crawford, Stephen Lang den Reporter Freddy Lounds und Chris Elliott den Zeller.
+
+Die Kamera führte Dante Spinotti, den Schnitt Dov Hoenig, die Musik stammt von Michel Rubini.
+
+Gedreht wurde in Atlanta, Florida, Chicago, Santa Cruz, St. Louis, Washington und Wilmington. Lecktors Gefängnisszenen entstanden im High Museum of Art in Atlanta, Grahams Haus gehörte dem Künstler Robert Rauschenberg.
+
+Der Film dauert 120 Minuten und ist ab 16 Jahren freigegeben. In der deutschen Fassung sprechen Stephan Schwartz den Graham und Manfred Lehmann den Lecktor.
+
+### Hinter den Kulissen
+
+Ursprünglich war David Lynch als Regisseur vorgesehen.
+
+Die Schreibweise des Namens weicht vom Original ab: Brian Cox spielt den Lecktor, nicht den Lecter. Der Film ist die erste Verfilmung des Stoffes — die Neuverfilmung folgte 2002.
+
+Die Wahl der Drehorte ist bezeichnend. Ein Kunstmuseum als Gefängnis und das Haus eines Künstlers als Wohnort des Ermittlers — der Film sucht Räume, die kühl und gestaltet wirken.
+
+Genau daran setzte die Kritik an. Das Lexikon des internationalen Films nannte ihn einen psychologischen Thriller mit suggestiver und spannender Kriminalgeschichte, bemängelte aber eine Handwerklichkeit, die allzu sehr in glattem, postmodernem Design schwelge.
+
+### Einordnung & Wirkung
+
+TV Spielfilm fasste zusammen: körnig, kalt, pervers — ein Fröstel-Thriller.
+
+David Edelstein schrieb in Slate, der Film habe den Weg in eine Ära der Einfühlung in den Teufel gewiesen, und betonte seinen Einfluss auf spätere Krimiserien und Filme.
+
+Dieses Urteil beschreibt den Rang der Arbeit. Was heute selbstverständlich ist — dass ein Ermittler die Perspektive des Täters einnimmt und daran Schaden nimmt —, war 1986 neu.
+
+Im Finale läuft eine gekürzte Fassung von „In-A-Gadda-Da-Vida" der Iron Butterfly.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9556', locale: 'de-de',
+    text: `### Worum es geht
+
+Peyton Westlake ist Wissenschaftler und entwickelt synthetische Haut, um Brandopfern zu helfen.
+
+Dann überfallen Gangster ihn und lassen ihn entstellt zurück. Man erklärt ihn für tot, doch er entkommt aus dem Krankenhaus. Mit seiner eigenen Technik baut er sich Masken — und tritt unter den Gesichtern derer auf, die sein Leben und seine Forschung zerstört haben.
+
+### Entstehungsgeschichte
+
+Regie führte Sam Raimi. Das Drehbuch schrieben Raimi, Chuck Pfarrer, Ivan Raimi, Daniel Goldin und Joshua Goldin.
+
+Liam Neeson spielt Peyton Westlake, Frances McDormand die Anwältin Julie Hastings, Colin Friels den Louis Strack Jr., Larry Drake den Robert G. Durant und Jenny Agutter eine Brandspezialistin; Bruce Campbell hat einen Kurzauftritt.
+
+Produziert wurde der Film von Robert G. Tapert. Die Kamera führte Bill Pope, die Musik stammt von Danny Elfman; den Schnitt besorgten Bud S. Smith und David Stiven.
+
+Der Film dauert 91 Minuten, ist ab 16 Jahren freigegeben und spielte weltweit 49 Millionen Dollar ein.
+
+### Hinter den Kulissen
+
+Der eigentliche Einfall liegt in der Umnutzung. Was als medizinische Forschung für Brandopfer begann, wird zum Werkzeug eines Rachefeldzugs — dieselbe Technik, anderer Zweck.
+
+Liam Neeson spielt dabei eine Figur, die entstellt ist oder ein fremdes Gesicht trägt. Was durchgehend bleibt, sind Stimme und Haltung.
+
+Danny Elfmans Musik gibt dem Ganzen den Ton eines Schauerstücks.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 49 Millionen Dollar ein.
+
+Prisma lobte ihn als packende Comic-Unterhaltung mit virtuos inszenierten Actionszenen. MSN Movies führte ihn auf Platz sechs einer Liste von Superheldenfilmen.
+
+Es folgten zwei Fortsetzungen, beide direkt für den Videomarkt: „Darkman II — Durants Rückkehr" 1994 und „Darkman III — Das Experiment" 1996.
+
+Bemerkenswert bleibt die Besetzung: Liam Neeson und Frances McDormand tragen gemeinsam einen Genrefilm, den fünf Autoren geschrieben haben — Sam Raimi, Chuck Pfarrer, Ivan Raimi sowie Daniel und Joshua Goldin.` },
+  {
+    bereich: 'titel', schluessel: 'movie:6488', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein amerikanischer Fotograf begleitet Wissenschaftler in den venezolanischen Dschungel. Dort finden sie eine bislang unbekannte, außerordentlich aggressive Spinnenart.
+
+Eine der Spinnen gelangt unbemerkt in seinen Rucksack und tötet ihn. Sein Leichnam wird nach Kalifornien überführt — und die Spinne reist im Sarg mit. In der Kleinstadt Canaima entkommt sie und paart sich mit einheimischen Arten.
+
+Der neue Arzt der Stadt, Dr. Ross Jennings, hat panische Angst vor Spinnen.
+
+### Entstehungsgeschichte
+
+Regie führte Frank Marshall. Das Drehbuch schrieben Don Jakoby, Wesley Strick und Al Williams. Produziert wurde der Film von Kathleen Kennedy, Richard Vane und Steven Spielberg.
+
+Jeff Daniels spielt Dr. Ross Jennings, John Goodman den Kammerjäger Delbert McClintock, Harley Jane Kozak die Molly Jennings und Julian Sands den Dr. James Atherton.
+
+Die Kamera führte Mikael Salomon, den Schnitt Michael Kahn, die Musik stammt von Trevor Jones.
+
+Gedreht wurde im Canaima-Nationalpark in Venezuela und in Cambria in Kalifornien. Der Film dauert 105 Minuten, kostete 31 Millionen Dollar und spielte in den Vereinigten Staaten 53 Millionen ein. Er ist ab 16 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Anlage ist klug gebaut: Der Mann, der das Problem lösen muss, ist derjenige, der es am wenigsten aushält. Seine Phobie ist keine Charakternote, sondern das Hindernis, um das der ganze Film kreist.
+
+Der Tonfall ist dabei die entscheidende Wahl. Das Lexikon des internationalen Films nannte ihn einen Horrorfilm, der dem brutalen Schock den sanften Schauder vorzieht.
+
+Prisma beschrieb dasselbe als brillante Mischung aus skurrilem Humor und Spinnen-Horror.
+
+John Goodman als Kammerjäger liefert diesen Humor. Er ist die einzige Figur, die die Lage von Anfang an für lösbar hält.
+
+Dass der Name der Kleinstadt derselbe ist wie der des venezolanischen Nationalparks, in dem gedreht wurde, verbindet Anfang und Hauptteil des Films.
+
+### Einordnung & Wirkung
+
+Bei 31 Millionen Dollar Herstellungskosten spielte der Film allein in den Vereinigten Staaten 53 Millionen ein.
+
+Die Beteiligung von Steven Spielberg als Produzent ordnet ihn ein: Es ist ein Film, der auf breite Wirkung angelegt ist und Schrecken dosiert.
+
+Die Freigabe ab 16 Jahren wirkt aus heutiger Sicht streng für einen Film, dessen Kritik ihm gerade den sanften Schauder attestiert.
+
+Was ihn bis heute wirksam macht, ist ein simpler Umstand: Er braucht kein Ungeheuer. Was er zeigt, gibt es in jedem Keller — nur kleiner und harmloser.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1241436', locale: 'de-de',
+    text: `### Worum es geht
+
+19. November 2006, Irak, nach der Schlacht von Ramadi. Ein Zug der Navy SEALs, Alpha One, bezieht ein zweistöckiges Haus und koordiniert von dort Luftunterstützung.
+
+Dann gerät die Einheit unter schweren Beschuss. Ein Granatwerfer verletzt den Scharfschützen Elliott Miller schwer. Bei der Evakuierung explodiert ein Sprengsatz, weitere Soldaten werden verwundet.
+
+Der Film erzählt das in Echtzeit.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf den Erfahrungen von Ray Mendoza, der als Navy SEAL im Irakkrieg diente. Das Drehbuch entstand aus den Aussagen der Angehörigen des Zuges.
+
+Mendoza schrieb und inszenierte den Film gemeinsam mit Alex Garland, der die Regie unterstützend begleitete. Produziert wurde er von DNA Films.
+
+D'Pharaoh Woon-A-Tai spielt Ray Mendoza, Will Poulter den Leutnant Erik, Cosmo Jarvis den Elliott Miller, Kit Connor den Tommy, Taylor John Smith den Frank, Joseph Quinn den Sam und Michael Gandolfini den Lt. MacDonald. Zum zweiten Zug gehören Charles Melton als Jake, Finn Bennett als John, Noah Centineo als Brian Zawi und Henry Zaga als Aaron.
+
+Die Kamera führte David J. Thompson, den Schnitt Fin Oates. Gedreht wurde in den Bovingdon Airfield Studios in Großbritannien; das Budget betrug 20 Millionen Dollar.
+
+Der Film ist Elliott Miller gewidmet, der bei diesem Einsatz ein Bein und die Fähigkeit zu sprechen verlor.
+
+### Hinter den Kulissen
+
+Die Echtzeiterzählung ist die Entscheidung, aus der alles folgt. Es gibt keine Rückblenden, keine Vorgeschichte, keine Heimatfront — nur die Dauer des Einsatzes selbst.
+
+Die Grundlage sind ausschließlich Aussagen der Beteiligten. Was niemand erinnert, steht nicht im Film.
+
+Dass ein Veteran des Einsatzes selbst Regie führt und ein anderer Beteiligter von einem Schauspieler dargestellt wird, während er noch lebt, ist ein außergewöhnlicher Umstand — und die Widmung an Elliott Miller macht deutlich, worauf der Film zielt.
+
+Nicht alle sahen das unkritisch. Eine Besprechung bei Deadline warnte vor Elementen von Militärpropaganda.
+
+Dieser Einwand gehört zur Bilanz. Ein Film, der ausschließlich auf den Aussagen einer Einheit beruht, zeigt den Einsatz aus deren Blickwinkel — das ist seine Stärke und zugleich seine Grenze.
+
+### Einordnung & Wirkung
+
+Bei 20 Millionen Dollar Herstellungskosten spielte der Film weltweit 34,9 Millionen ein — 26 Millionen in den Vereinigten Staaten und Kanada, 8,9 Millionen anderswo.
+
+Rotten Tomatoes weist 92 Prozent bei einem Schnitt von 7,9 von 10 aus, Metacritic 78 von 100.
+
+Caryn James nannte den Film bei der BBC ein technisches Meisterwerk, entstanden aus Garlands Virtuosität und Mendozas eigener Erfahrung. Wendy Ide verglich ihn im Guardian mit „Der Soldat James Ryan" und „Komm und sieh".
+
+Ausgezeichnet wurde er beim Taormina Film Festival für die beste Regie sowie bei den British Independent Film Awards für Schnitt, Ton und das Ensemble; hinzu kamen Nominierungen bei den Critics' Choice Awards und den BAFTAs.` },
+  {
+    bereich: 'titel', schluessel: 'movie:468224', locale: 'de-de',
+    text: `### Worum es geht
+
+J. R. R. Tolkien wächst als Waise auf. Früh beschäftigt ihn, woraus Sprache gemacht ist.
+
+An der King Edward's School gründet er mit drei Freunden einen Bund, den sie T.C.B.S. nennen. Später studiert er am Exeter College in Oxford, wo er Professor Joseph Wright auf sich aufmerksam macht. Und da ist Edith Bratt.
+
+Dann kommt der Erste Weltkrieg, und Tolkien geht an die Somme.
+
+### Entstehungsgeschichte
+
+Regie führte der finnische Regisseur Dome Karukoski, das Drehbuch schrieben David Gleeson und Stephen Beresford. Produziert wurde der Film von Peter Chernin, David Ready, Kris Thykier und Jenno Topping.
+
+Nicholas Hoult spielt J. R. R. Tolkien, Lily Collins die Edith Bratt, Derek Jacobi den Professor Joseph Wright, Colm Meaney den Father Francis Morgan, Anthony Boyle den Geoffrey Bache Smith, Tom Glynn-Carney den Christopher Wiseman und Patrick Gibson den Robert Q. Gilson; Harry Gilby und Mimi Keene spielen Tolkien und Edith als Jugendliche.
+
+Die Kamera führte Lasse Frank Johannessen, den Schnitt Harri Ylönen, die Musik stammt von Thomas Newman — 25 Stücke, veröffentlicht im Mai 2019.
+
+Gedreht wurde von Oktober bis zum 14. Dezember 2017 in Liverpool und Manchester. Die Premiere war am 29. April 2019 in London, der deutsche Start am 20. Juni 2019. Der Film ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Der Film verknüpft drei Stränge: eine Freundschaft, eine Liebe und Tolkiens schöpferisches Erwachen. Die Schlacht an der Somme bildet dabei die Rahmenhandlung, in die alles Übrige eingelassen ist.
+
+Der Bezug zu Tolkiens späterem Werk bleibt bewusst vorsichtig. Der Film deutet autobiografische Spuren an, stellt die Bücher aber nicht als bloße Kriegsallegorie dar.
+
+Die Kriegsszenen sind laut Freigabebegründung in keiner Weise verherrlichend, die Gewalt nicht übermäßig dargestellt.
+
+Zwei der drei Schulfreunde überleben den Krieg nicht — das ist der Punkt, an dem der Film seine drei Stränge zusammenführt.
+
+### Einordnung & Wirkung
+
+Die Urteile gingen auseinander. Johannes Hahn lobte bei Robots & Dragons die Anspielungen auf die späteren Verfilmungen sowie die Leistungen von Hoult und Collins, bemängelte aber ein Absacken gegen Ende.
+
+Peter Osteried von der Arbeitsgemeinschaft Kino fand, das Drama konzentriere sich zu sehr auf die Frage, ob Tolkien die Liebe seines Lebens bekommt, und wirke insgesamt etwas dröge — bei allerdings glaubwürdiger Ausstattung.
+
+kinofenster.de empfahl den Film für den Unterricht in Deutsch, Englisch, Geschichte und Kunst.
+
+Diese Empfehlung trifft die Anlage besser als jede Kritik. Der Film ist als Zugang gebaut — zu einer Biografie, zu einem Krieg und zu der Frage, woher Geschichten kommen.` },
+  {
+    bereich: 'titel', schluessel: 'series:205715', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Godolkin University ist eine Hochschule für junge Superhelden. Wer hier gut abschneidet, hat Aussicht auf das, was in dieser Welt als höchste Auszeichnung gilt: die Aufnahme in The Seven, die Elitetruppe des Konzerns Vought.
+
+Der Wettbewerb um die Plätze bestimmt alles. Und die Universität hat mehr zu verbergen, als ihre Studenten ahnen.
+
+### Entstehungsgeschichte
+
+Entwickelt wurde die Serie von Craig Rosenberg, Evan Goldberg und Eric Kripke. Die Leitung hatten in der ersten Staffel Michele Fazekas und Tara Butters, in der zweiten Fazekas allein.
+
+Jaz Sinclair spielt Marie Moreau, Chance Perdomo in der ersten Staffel den Andre Anderson, Lizze Broadway die Emma Meyer, Maddie Phillips die Cate Dunlap, London Thor und Derek Luh die Figur Jordan Li, Asa Germann den Samuel Riordan und Shelley Conn die Indira Shetty. In der zweiten Staffel kommen Sean Patrick Thomas als Polarity und Hamish Linklater als Dean Cipher hinzu.
+
+Gedreht wurde im Großraum Toronto, beginnend im Mai 2022.
+
+Es entstanden zwei Staffeln mit je acht Folgen. Die erste lief vom 29. September bis zum 3. November 2023, die zweite vom 17. September bis zum 22. Oktober 2025. Im April 2026 wurde die Serie eingestellt.
+
+### Hinter den Kulissen
+
+Der Zugriff ist der einer Hochschulgeschichte. Konkurrenz um Ranglistenplätze, Freundschaften unter Druck, eine Einrichtung mit eigener Tagesordnung — die Superkräfte verschärfen das, sie ersetzen es nicht.
+
+Im März 2024 starb Chance Perdomo bei einem Motorradunfall. Die zweite Staffel wurde daraufhin umgeschrieben; seine Rolle wurde nicht neu besetzt.
+
+Das ist ein Einschnitt, der über das Erzählerische hinausgeht. Eine Serie, die von einer Gruppe junger Figuren lebt, musste eine davon verlieren und damit umgehen.
+
+Die zweite Staffel führt die Handlung unter neuen Vorzeichen weiter: Die Studenten kehren an eine Universität zurück, die unter der Herrschaft Homelanders steht.
+
+### Einordnung & Wirkung
+
+Die erste Staffel kam bei Rotten Tomatoes auf 97 Prozent und bei Metacritic auf 73 von 100. IGN vergab 9 von 10 und lobte, wie umfassend die Serie die Themen der Vorlage erweitere. Den of Geek nannte sie eine gelungene Erweiterung, der Hollywood Reporter fand sie uneinheitlich, aber unterhaltsam.
+
+Die zweite Staffel erreichte 91 Prozent bei Rotten Tomatoes und 74 von 100 bei Metacritic; hervorgehoben wurde Hamish Linklaters Auftritt als Gegenspieler.
+
+Trotz dieser durchgehend guten Werte endete die Serie nach zwei Staffeln und 16 Folgen.
+
+Das ist bemerkenswert. 97 und 91 Prozent Zustimmung sind Werte, mit denen Serien üblicherweise fortgesetzt werden — die Entscheidung fiel hier erkennbar nicht nach der Kritik.` },
 ];
