@@ -45696,4 +45696,305 @@ Rotten Tomatoes weist 83 Prozent aus, Metacritic 62 von 100; AllMovie vergab vie
 Janet Maslin urteilte in der New York Times zurückhaltender: Die Horrorakzente seien mehr ekelhaft als gruselig.
 
 1988 folgte die Fortsetzung „Mein Nachbar, der Vampir" unter der Regie von Tommy Lee Wallace, wieder mit Roddy McDowall; 2011 entstand eine Neuverfilmung mit Anton Yelchin, Colin Farrell, Christopher Mintz-Plasse und David Tennant.` },
+  // ---- Block 104 ----
+  {
+    bereich: 'titel', schluessel: 'movie:417870', locale: 'de-de',
+    text: `### Worum es geht
+
+Vier Freundinnen, die sich Flossy Posse nennen, fahren gemeinsam zum Essence-Festival nach New Orleans. Sie kennen sich seit Ewigkeiten, haben sich aber lange nicht gesehen.
+
+Was die Reise aufdeckt, ist der Zustand von Ryans Ehe: Ihr Mann Stewart betrügt sie. Nach diesem Zwischenfall landen die vier in einem billigen Motel — und aus dem Wochenende wird eine Abrechnung, unterbrochen von Partys, einem Tanzduell und einer Schlägerei.
+
+### Entstehungsgeschichte
+
+Regie führte Malcolm D. Lee. Das Drehbuch schrieben Tracy Oliver und Kenya Barris; produziert wurde der Film von Will Packer und Lee.
+
+Regina Hall spielt Ryan Pierce, Tiffany Haddish die Dina, Jada Pinkett Smith die Lisa Cooper, Queen Latifah die Sasha Franklin, Larenz Tate den Julian Stevens, Mike Colter den Ehemann Stewart Pierce und Kate Walsh die Elizabeth Davelli.
+
+Die Kamera führte Greg Gardiner, den Schnitt Paul Millspaugh, die Musik stammt von David Newman.
+
+Der Film erschien 2017, dauert 122 Minuten und ist ab 16 Jahren freigegeben. Das Budget betrug 19 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Das Essence-Festival in New Orleans gibt dem Film seinen Rahmen — eine reale Veranstaltung als Schauplatz einer erfundenen Geschichte.
+
+Der Kern ist eine Freundschaft, die auseinandergedriftet ist. Vier Frauen, deren Leben verschiedene Richtungen genommen haben — die Komödie ist das Mittel, nicht der Zweck.
+
+Herausgestellt wurde durchgängig Tiffany Haddish, die in der Rezeption als komödiantisches Herzstück des Films beschrieben wurde.
+
+Bei 19 Millionen Dollar Budget und einer Laufzeit von 122 Minuten ist der Film zudem länger, als das Genre üblicherweise erlaubt — er nimmt sich Zeit für seine Figuren.
+
+### Einordnung & Wirkung
+
+Bei 19 Millionen Dollar Herstellungskosten spielte der Film weltweit 140 Millionen ein, davon über 100 Millionen allein in den Vereinigten Staaten.
+
+Rotten Tomatoes weist 91 Prozent bei 175 Kritiken aus. Das Magazin Time zählte ihn zu den zehn besten Filmen des Jahres 2017.
+
+Eine Komödie in einer Jahresbestenliste von Time ist selten; noch seltener ist das Verhältnis von 19 zu 140 Millionen Dollar.
+
+Beides zusammen macht den Film zu einem Sonderfall: kaufmännisch ein Volltreffer und von der Kritik ernst genommen — 91 Prozent bei 175 Rezensionen sind für eine Komödie ein ungewöhnlich hoher Wert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10851', locale: 'de-de',
+    text: `### Worum es geht
+
+Jake Green kommt aus dem Gefängnis. In der Isolationshaft hat er etwas gelernt, das er die Formel nennt: eine Methode, jedes Spiel und jeden Betrug zu gewinnen.
+
+Er will Rache an dem Verbrecherboss Dorothy Macha. Zwei Männer, Avi und Zach, bieten ihm Hilfe an, zu Bedingungen, die er nicht versteht. Zugleich erfährt er, dass er tödlich krank ist.
+
+### Entstehungsgeschichte
+
+Regie führte Guy Ritchie, der das Drehbuch gemeinsam mit Luc Besson schrieb. Produziert wurde der Film von Besson, Virginie Silla und Marty Katz für EuropaCorp und Isle of Man Film.
+
+Jason Statham spielt Jake Green, Ray Liotta den Dorothy Macha, Vincent Pastore den Zach, André Benjamin den Avi, Mark Strong den Sorter, Andrew Howard den Billy und Francesca Annis die Lily Walker.
+
+Die Kamera führte Tim Maurice Jones, die Musik stammt von Nathaniel Méchaly.
+
+Das Budget betrug 27 Millionen Dollar. Es existieren zwei verschiedene Fassungen; für den amerikanischen Markt wurde 2007 ein Director's Cut bearbeitet.
+
+### Hinter den Kulissen
+
+Der Film ist nicht das, was sein Personal erwarten lässt. Was mit dem Aufbau eines Gangsterfilms beginnt, verlässt dessen Bahnen bald wieder — neben dem Rachefeldzug laufen die Formel, die beiden rätselhaften Helfer und Jakes tödliche Erkrankung nebeneinander her.
+
+Genau daran scheiterte er beim Publikum.
+
+Dass zwei Fassungen existieren und für die Vereinigten Staaten zwei Jahre nach dem Start neu geschnitten wurde, ist der deutlichste Beleg dafür, dass die Beteiligten selbst um die Wirkung rangen.
+
+Bemerkenswert ist die Beteiligung Luc Bessons — als Koautor und Produzent — an einem britischen Gangsterstoff.
+
+### Einordnung & Wirkung
+
+Bei 27 Millionen Dollar Herstellungskosten spielte der Film 6,7 Millionen ein.
+
+Rotten Tomatoes weist 13 Prozent bei 67 Kritiken aus; zusammengefasst wurde er dort als inkohärenter Fehlzünder.
+
+13 Prozent sind ein außergewöhnlich hartes Urteil. Kaufmännisch deckte der Film ein Viertel seiner Kosten.
+
+Was ihm bis heute anhängt, ist die Kluft zwischen Anspruch und Wirkung: ein Film, der über Wahrnehmung und Ego nachdenken will, und ein Publikum, das ihm dabei nicht folgte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1696', locale: 'de-de',
+    text: `### Worum es geht
+
+Monate nach den Ereignissen des Vorgängerfilms geht das Sheriff Department mit einer Großoffensive gegen die Familie Firefly vor.
+
+Der Einsatz misslingt. Baby Firefly und Otis entkommen und treffen wieder auf Captain Spaulding. Sheriff Wydell nimmt die Verfolgung auf — und was ihn antreibt, unterscheidet sich bald kaum noch von dem, was er verfolgt.
+
+### Entstehungsgeschichte
+
+Rob Zombie führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Mike Elliott, Andy Gould, Marco Mehlitz, Michael Ohoven und Zombie.
+
+Sid Haig spielt Captain Spaulding, Bill Moseley den Otis B. Driftwood, Sheri Moon Zombie die Baby Firefly, William Forsythe den Sheriff Wydell, Matthew McGrory den Tiny und Leslie Easterbrook die Mutter Firefly.
+
+Die Kamera führte Phil Parmet, den Schnitt Glenn Garland, die Musik stammt von Tyler Bates.
+
+Der Film ist in Deutschland ab 18 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die auffälligste Entscheidung betrifft die Perspektive. Der Film folgt den Tätern, nicht ihren Opfern, und verlangt vom Publikum, eine Fluchtgeschichte aus Sicht derer zu verfolgen, die geflohen werden müssen.
+
+Der Sheriff ist dabei keine Gegenfigur im üblichen Sinn. Je weiter die Verfolgung fortschreitet, desto weniger unterscheidet ihn sein Vorgehen von dem der Verfolgten.
+
+Roger Ebert las den Film als sehr dunkle Satire und ordnete ihn einem Publikum zu, das Horrorfilme kennt. James Berardinelli dagegen kritisierte die Schrecklichkeit des Films scharf.
+
+Filmstarts warnte ausdrücklich vor der extremen Gewalt; das Lexikon des internationalen Films vermisste neue Akzente.
+
+### Einordnung & Wirkung
+
+Die Freigabe ab 18 Jahren in Deutschland ist bei diesem Film die zu erwartende Einstufung.
+
+Die Kritik zerfiel in zwei Lager, die kaum miteinander sprachen. Für Ebert war der Film eine bewusste Konstruktion mit satirischer Absicht; für Berardinelli schlicht abstoßend.
+
+Beide beschreiben dasselbe Werk. Der Unterschied liegt darin, ob man die Perspektive der Täter als Kunstgriff versteht oder als Zumutung.
+
+Was unbestritten bleibt: Der Film setzt die Handlung von „Haus der 1000 Leichen" fort und macht daraus eine Verfolgungsgeschichte — mit denselben Figuren, aber anderer Anlage.` },
+  {
+    bereich: 'titel', schluessel: 'series:21510', locale: 'de-de',
+    text: `### Worum es geht
+
+Neal Caffrey ist Kunstdieb. Peter Burke ist der FBI-Agent, der ihn gefasst hat.
+
+Nach der Verhaftung macht Neal ein Angebot: Er hilft dem FBI bei Kunstdiebstählen, wenn er dafür mit einer Fußfessel in New York leben darf statt in einer Zelle. Burke nimmt an — und die beiden arbeiten fortan zusammen, ohne dass einer dem anderen ganz trauen könnte.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Jeff Eastin, der sie auch produzierte.
+
+Matt Bomer spielt Neal Caffrey, Tim DeKay den Special Agent Peter Burke, Willie Garson den Teddy Winters, genannt Mozzie, Tiffani Thiessen die Elizabeth Burke und Marsha Thomason die Special Agent Diana Barrigan.
+
+Es entstanden sechs Staffeln mit insgesamt 81 Episoden. Ausgestrahlt wurden sie vom 23. Oktober 2009 bis zum 18. Dezember 2014 beim USA Network.
+
+In Deutschland lief die Serie ab dem 13. September 2011 bei RTL, später bei RTL Crime und bei Netflix.
+
+### Hinter den Kulissen
+
+Die Anlage beruht auf einer Abhängigkeit, die in beide Richtungen wirkt. Neal braucht Peter, um nicht ins Gefängnis zurückzumüssen; Peter braucht Neal, weil dieser Dinge sieht, die ein Ermittler nicht sieht.
+
+Die Fußfessel ist dabei mehr als ein Handlungselement. Sie steckt den Radius ab, in dem sich die Serie bewegt — Neal ist frei, aber nur innerhalb einer Grenze, und jede Folge misst diese Grenze neu aus.
+
+Der Gegenstand — Kunstdiebstahl — erlaubt der Serie zudem eine Leichtigkeit, die Kriminalserien mit Gewaltverbrechen nicht haben.
+
+Neben den Fällen der Woche entwickeln sich über sechs Staffeln hinweg die Figuren weiter; die Serie ist auf beides angelegt.
+
+### Einordnung & Wirkung
+
+81 Folgen über gut fünf Jahre sind für eine Serie dieses Formats eine lange Laufzeit.
+
+Bemerkenswert ist die deutsche Auswertungsgeschichte: Erstausstrahlung bei RTL fast zwei Jahre nach dem amerikanischen Start, dann der Weg über einen Spartensender zu einer Plattform.
+
+Dass die Serie über drei verschiedene deutsche Anbieter lief, zeigt, dass sie ihr Publikum jeweils neu gefunden hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:542224', locale: 'de-de',
+    text: `### Worum es geht
+
+Gretel ist sechzehn, ihr Bruder Hänsel acht. Der Vater ist tot, und die Mutter schickt beide fort.
+
+Im Wald stoßen sie auf ein Haus, in dem eine Frau namens Holda lebt. Sie nimmt die Geschwister auf und scheint sie zu beherbergen. Doch was Holda tatsächlich ist, entdeckt Gretel erst nach und nach.
+
+### Entstehungsgeschichte
+
+Vorlage ist das Märchen der Brüder Grimm.
+
+Regie führte Osgood Perkins, das Drehbuch schrieb Rob Hayes. Die Umstellung des Titels begründete Perkins damit, dass diese Fassung Gretel in den Mittelpunkt stelle und als Erzählung vom Erwachsenwerden angelegt sei.
+
+Sophia Lillis spielt Gretel, Sam Leakey den Hänsel — es war sein erster Film —, Alice Krige die Holda, Jessica De Gouw die junge Holda, Charles Babalola den Jäger und Fiona O'Shaughnessy die Mutter.
+
+Produziert wurde der Film von Brian Kavanaugh-Jones und Fred Berger für Orion Pictures, Bron Creative und Automatik Entertainment; angekündigt wurde er im Oktober 2018.
+
+Die Kamera führte Galo Olivares, den Schnitt Josh Ethier und Julia Wong. Die Musik stammt von Robin Coudert, der betonte, es sei ihm wesentlich, Melodien zu schaffen, die man singen oder pfeifen könne — bewusst gegen die übliche Horrorfilmmusik.
+
+Gedreht wurde von November bis Dezember 2018 in Dublin; Nachaufnahmen entstanden im Januar 2019 in Langley in British Columbia. Das Budget betrug fünf Millionen Dollar, der Kinostart war am 31. Januar 2020.
+
+### Hinter den Kulissen
+
+Die vorangestellte Geschichte über ein übernatürlich begabtes Mädchen, das aus seinem Dorf in den Wald verbannt wird, ist der Schlüssel zum Ganzen. Sie erklärt, warum Holda ist, was sie ist — und stellt die Frage, ob Gretel denselben Weg nimmt.
+
+Damit wird aus dem Märchen ein Stoff über Begabung und darüber, was eine Gemeinschaft mit Frauen tut, die etwas können.
+
+Die Musik folgt derselben Absicht. Statt Schreckakzente zu setzen, arbeitet Coudert mit Melodien — der Film soll nicht erschrecken, sondern beunruhigen.
+
+Die Kritik traf sich in einem Punkt: Was zu sehen ist, überzeugt; wie erzählt wird, weniger.
+
+### Einordnung & Wirkung
+
+Bei fünf Millionen Dollar Herstellungskosten spielte der Film weltweit 22,3 Millionen ein; das Startwochenende in Nordamerika brachte 6,1 Millionen und Platz vier bei 3000 Kinos.
+
+Rotten Tomatoes weist 63 Prozent bei 115 Rezensionen aus, Metacritic 64 von 100. Bei CinemaScore vergab das Publikum ein C−.
+
+Chandler Levack fand im Globe and Mail alles daran eigentümlicher, klüger und viel filmischer als erwartet. Kate Rife lobte im A.V. Club Gestaltung und Atmosphäre, Frank Sheck im Hollywood Reporter die üppige Stilisierung bei gemächlichem Tempo.
+
+Dagegen befand Andrew Barker in Variety, viele Vorzüge wirkten kompromittiert; Kimber Myers meinte in der Los Angeles Times, die Substanz könnte Zuschauer hungrig zurücklassen. Mark Kennedy nannte den Film bei Associated Press visuell beeindruckend, aber langweilig — eher neunzig Minuten Beklemmung.
+
+Ein C− bei gleichzeitig 64 Metacritic-Punkten beschreibt die Lage genau: Wer ihn für einen Horrorfilm hielt, wurde enttäuscht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:72784', locale: 'de-de',
+    text: `### Worum es geht
+
+Fünf verheiratete Männer teilen sich ein gehobenes Loft. Sie nutzen es, um sich dort diskret mit ihren Geliebten zu treffen.
+
+Dann liegt dort die Leiche einer Frau. Fünf Schlüssel gibt es, und keiner der fünf Männer weiß, wer noch da war. Der Film entfaltet das über Rückblenden — jeder erzählt, was er zu wissen glaubt.
+
+### Entstehungsgeschichte
+
+Der Film ist die Neuverfilmung von Erik Van Looys eigenem belgischem Film „Loft" von 2008; Van Looy führte auch hier Regie. Das Drehbuch schrieben Bart De Pauw und Wesley Strick.
+
+Karl Urban spielt Vincent Stevens, James Marsden den Dr. Chris Vanowen, Wentworth Miller den Luke Seacord, Eric Stonestreet den Marty Landry, Matthias Schoenaerts den Philip Trauner, Rachael Taylor die Anne Morris und Isabel Lucas die Sarah Deakins.
+
+Die Kamera führte Nicolas Karakatsanis, die Musik stammt von John Frizzell.
+
+Gedreht wurde vom 6. Juni bis zum 27. Juli 2011 in New Orleans und in Brüssel. Das Budget betrug 13 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Dass ein Regisseur seinen eigenen Film für einen anderen Markt noch einmal dreht, ist die Besonderheit dieser Produktion. Van Looys belgisches Original „Loft" erschien 2008.
+
+Die Konstruktion ist auf Misstrauen gebaut. Fünf Männer, fünf Schlüssel, eine Leiche — und weil jeder etwas zu verbergen hat, ist keine Aussage verlässlich.
+
+Genau daraus ergibt sich der Haupteinwand der Kritik: Die Handlung wurde als klug konstruiert beschrieben, die Figuren aber als undurchsichtig. Wer allen misstraut, hat niemanden, dem er folgen kann.
+
+Zwischen Drehende im Juli 2011 und Kinostart 2014 lagen zudem mehr als zwei Jahre.
+
+### Einordnung & Wirkung
+
+Bei 13 Millionen Dollar Herstellungskosten spielte der Film weltweit elf Millionen ein — sechs in den Vereinigten Staaten, fünf international.
+
+Rotten Tomatoes weist 14 Prozent bei 42 Bewertungen aus, Metacritic 24 von 100. Bei CinemaScore vergab das Publikum ein B−.
+
+Der Abstand zwischen 14 Prozent bei der Fachkritik und einem B− beim Publikum ist auffällig. Er deutet darauf hin, dass die Konstruktion beim Zuschauen funktioniert, auch wenn sie der Prüfung nicht standhält.
+
+Die lange Verzögerung zwischen Dreharbeiten und Start ist bei Filmen dieser Art ein bekanntes Warnzeichen — und in diesem Fall bestätigte sie sich.` },
+  {
+    bereich: 'titel', schluessel: 'series:97180', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Serie erzählt das Leben der Tejano-Sängerin Selena Quintanilla Pérez.
+
+Im Mittelpunkt steht nicht nur ihr Aufstieg, sondern was er kostete — für sie und für ihre Familie, die von Anfang an dazugehörte: Vater Abraham, Mutter Marcella, Bruder A. B. und Schwester Suzette.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Moisés Zamora.
+
+Christian Serratos spielt Selena, Gabriel Chavarria den Bruder A. B. Quintanilla, Ricardo Chavira den Vater Abraham Quintanilla, Noemi Gonzalez die Schwester Suzette und Seidy López die Mutter Marcella.
+
+Produziert wurde die Serie von Campanario Entertainment und Baja Studios; die Dreharbeiten begannen im Oktober 2019 in Baja California in Mexiko. Es handelt sich um die von Selenas Familie autorisierte Fassung.
+
+Es entstanden zwei Staffeln mit je neun Folgen, insgesamt 18. Ausgestrahlt wurden sie vom 4. Dezember 2020 bis zum 4. Mai 2021 bei Netflix.
+
+### Hinter den Kulissen
+
+Dass die Familie die Serie autorisiert hat, ist der entscheidende Umstand — und zugleich der Kern der Kritik.
+
+Eine autorisierte Fassung hat Zugang zu Material und Erinnerungen, die andere nicht haben. Sie hat aber auch Rücksichten zu nehmen, die eine unabhängige Arbeit nicht hätte.
+
+Genau darauf zielte der zusammengefasste Befund bei Rotten Tomatoes: Die Zuneigung sei offensichtlich, aber ohne tiefere Auseinandersetzung mit der Hauptfigur bleibe es bei einer weiteren Nacherzählung.
+
+Der Familienzuschnitt der Besetzung — Vater, Mutter, Bruder, Schwester als durchgehende Hauptrollen — zeigt zugleich, wie die Serie ihren Gegenstand versteht: als Geschichte eines gemeinsamen Unternehmens.
+
+### Einordnung & Wirkung
+
+Die Aufnahme war ablehnend. Der erste Teil kam bei Rotten Tomatoes auf 32 Prozent, der zweite auf 14 Prozent.
+
+Ein Absinken von 32 auf 14 Prozent zwischen zwei Staffeln ist ungewöhnlich deutlich. Es deutet darauf hin, dass die Einwände sich im Verlauf nicht auflösten, sondern verstärkten.
+
+Der Vorwurf, es fehle die tiefere Auseinandersetzung mit der Hauptfigur, wiegt bei einer Biografie besonders schwer — mehr als bei jeder anderen Erzählform hängt hier alles daran, ob die Person im Zentrum erkennbar wird.
+
+Was der Serie bleibt, ist die Nähe zur Familie und ein Publikum, das die Sängerin kennt.` },
+  {
+    bereich: 'titel', schluessel: 'series:71790', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Spezialeinheit SWAT des Los Angeles Police Department rückt aus, wenn andere nicht mehr weiterkommen. Jede Folge bringt einen neuen Einsatz.
+
+Daneben läuft das Privatleben der Beteiligten mit — und mit ihm die Themen, an denen sich Polizeiarbeit in Los Angeles reibt: Rassismus und Polizeigewalt.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Aaron Rahsaan Thomas und Shawn Ryan. Vorlage ist die Fernsehserie „Die knallharten Fünf" von 1975 und 1976.
+
+Shemar Moore spielt Sergeant Daniel Harrelson, genannt Hondo, Jay Harrington den Sergeant David Kay, David Lim den Officer Victor Tan, Kenny Johnson den Officer Dominique Luca, Alex Russell den Officer Jim Street und Lina Esco die Officer Christina Alonso.
+
+Produziert wurde die Serie von MiddKid Productions, Kansas Art Productions, Original Film, Perfect Storm Entertainment, CBS Television Studios und Sony Pictures Television; die Musik stammt von Robert Duncan.
+
+Es entstanden acht Staffeln mit insgesamt 163 Episoden. Die Premiere war am 2. November 2017 bei CBS, die Serie lief bis 2025. In Deutschland startete sie am 12. Februar 2018 bei Sky 1.
+
+### Hinter den Kulissen
+
+Die Serie steht vor einer Aufgabe, die sich nicht auflösen lässt: Sie erzählt wöchentlich von einer Polizeieinheit und will zugleich von Polizeigewalt handeln.
+
+Genau daran setzte die Kritik an. Serienjunkies bemängelte, die Serie gehe mit wichtigen Themen unsensibel um.
+
+Die Anlage als Wochenfall-Format verschärft das. Jede Folge braucht einen Einsatz, und die gesellschaftlichen Fragen laufen im Privatleben der Figuren nebenher.
+
+TVwunschliste.de nannte die Serie gut gemachte Krimi-Unterhaltung mit Schwerpunkt auf Action, merkte aber an, Hondos Charme werde etwas penetrant ausgestellt.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes bewertete die erste Staffel mit 48 Prozent.
+
+Dass eine Serie mit dieser Aufnahme acht Staffeln und 163 Episoden erreichte, beschreibt den Unterschied zwischen Fachkritik und Zuschauerbindung deutlicher als jede Zahl.
+
+Acht Jahre Laufzeit, von 2017 bis 2025, sind für eine wöchentliche Krimiserie eine erhebliche Strecke.
+
+Bemerkenswert ist auch die Herkunft. Die Vorlage — „Die knallharten Fünf" — lief 1975 und 1976; die Neufassung brachte es auf ein Vielfaches an Folgen.` },
 ];
