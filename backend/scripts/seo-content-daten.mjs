@@ -46304,4 +46304,317 @@ Awkwafina gewann 2020 den Golden Globe als beste Hauptdarstellerin und 2019 den 
 Christy Lemire schrieb, Zhao Shu-zhen sei die häufigste Quelle des Lachens — und werde einem still das Herz brechen. Richard Lawson hob in Vanity Fair hervor, Wang erzähle bewegend nicht nur von familiärer Liebe, sondern auch von der Erfahrung des Einwanderns.
 
 Dass ausgerechnet in China kaum jemand den Film sah, ist die stillste Pointe seiner Bilanz.` },
+  // ---- Block 106 ----
+  {
+    bereich: 'titel', schluessel: 'movie:11416', locale: 'de-de',
+    text: `### Worum es geht
+
+Südamerika im 18. Jahrhundert. Pater Gabriel leitet eine Jesuitenmission bei den Guaraní.
+
+Rodrigo Mendoza war Sklavenhändler. Nachdem er seinen Halbbruder getötet hat, sucht er bei den Jesuiten Buße und bleibt bei der Mission. Dann verschiebt der Vertrag von Madrid im Jahr 1750 die Grenzen: Die Missionen liegen nun auf portugiesischem Gebiet — und die Kolonialmacht duldet sie nicht.
+
+### Entstehungsgeschichte
+
+Regie führte Roland Joffé, das Drehbuch schrieb Robert Bolt. Angeregt wurde es durch das Theaterstück „Das heilige Experiment" des österreichischen Dramatikers Fritz Hochwälder aus dem Jahr 1943. Produziert wurde der Film von Fernando Ghia und David Puttnam.
+
+Robert De Niro spielt Rodrigo Mendoza, Jeremy Irons den Pater Gabriel, Ray McAnally den Altamirano, Aidan Quinn den Felipe Mendoza und Liam Neeson den Pater Fielding.
+
+Die Kamera führte Chris Menges, den Schnitt Jim Clark, die Musik stammt von Ennio Morricone.
+
+Gedreht wurde an den Iguazú-Wasserfällen in Argentinien sowie in Kolumbien — in Cartagena und am Río Magdalena. Die Guaraní wurden von Angehörigen des Volkes der Wounaan dargestellt.
+
+### Hinter den Kulissen
+
+Der historische Hintergrund ist der Guaraní-Krieg von 1754 bis 1756, in dem Angehörige dieses Volkes unter Sepé Tiaraju ihre Heimat gegen spanische und portugiesische Truppen verteidigten.
+
+Die Figuren haben reale Vorbilder. Pater Gabriel trägt Züge von Roque González de Santa Cruz, der von 1576 bis 1628 lebte und 1988 heiliggesprochen wurde; Altamirano entspricht dem päpstlichen Gesandten Luis Altamirano, der 1752 nach Paraguay geschickt wurde.
+
+Der Kern des Films ist eine Entscheidung, die keine richtige Antwort hat: Als die Mission angegriffen wird, wählt Mendoza die Waffen und Gabriel den gewaltlosen Widerstand. Der Film urteilt nicht darüber.
+
+Ennio Morricones „Gabriels Oboe" belegte 2005 in einer Liste der besten amerikanischen Filmmusiken Platz 23.
+
+### Einordnung & Wirkung
+
+In Cannes gewann der Film 1986 die Goldene Palme.
+
+Bei den Oscars 1987 gewann Chris Menges für die beste Kamera; nominiert war der Film zudem als bester Film, für die Regie, Musik, Szenenbild, Kostüme und Schnitt. Bei den Golden Globes gewannen Morricone für die Musik und Bolt für das Drehbuch; hinzu kamen drei BAFTA Awards.
+
+1995 wurde der Film in die Filmliste des Vatikans aufgenommen; 2009 wählte ihn eine niederländische Jury zum besten katholischen Film aller Zeiten.
+
+Roger Ebert kritisierte dagegen eine fehlende geschlossene Handlung und verwirrende Kampfszenen. Rita Kempley lobte die Bilder der Wasserfälle, Steven D. Greydanus nannte den Film nicht perfekt, aber mit den bewegendsten Bildern von Verzweiflung, Buße und Versöhnung.
+
+Das Lexikon des internationalen Films würdigte ein Drama, das ethische Ansprüche formuliert und den inneren Konflikt differenziert darstellt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:606', locale: 'de-de',
+    text: `### Worum es geht
+
+Karen reist 1914 nach Afrika, heiratet Baron Bror von Blixen-Finecke und übernimmt dessen Kaffeeplantage.
+
+Nach einer Syphilis-Erkrankung beginnt sie eine Beziehung mit dem britischen Abenteurer Denys Finch Hatton. Der Film erzählt ihre Jahre in Afrika von 1914 bis 1931 im Rückblick.
+
+### Entstehungsgeschichte
+
+Vorlage ist Karen Blixens autobiografischer Roman „Afrika — dunkel lockende Welt" von 1937, dazu ihre Novelle „Schatten wandern übers Gras" und die „Briefe aus Afrika 1914–1931". Herangezogen wurden außerdem Judith Thurmans Biografie „Isak Dinesen. The Life of a Storyteller" und Errol Trzebinskis „Silence will speak".
+
+Regie führte Sydney Pollack, der den Film auch produzierte; das Drehbuch schrieb Kurt Luedtke.
+
+Meryl Streep spielt Karen Blixen, Robert Redford den Denys Finch Hatton und Klaus Maria Brandauer den Baron Bror von Blixen-Finecke.
+
+Die Kamera führte David Watkin, die Musik stammt von John Barry; den Schnitt besorgten Pembroke J. Herring, Sheldon Kahn, Fredric und William Steinkamp.
+
+Der Film erschien 1985, dauert 160 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Alle drei Hauptfiguren hat es gegeben. Karen Blixen war eine dänische Schriftstellerin, Denys Finch Hatton ein britischer Adliger und Abenteurer, Bror von Blixen-Finecke ihr Ehemann.
+
+Der Film stützt sich dabei nicht nur auf Blixens eigene Bücher, sondern auch auf zwei Biografien — er nimmt also die Innensicht und die Außensicht zugleich in Anspruch.
+
+Die Erzählung im Rückblick gibt dem Ganzen seinen Ton. Was zu sehen ist, ist bereits vergangen, wenn es beginnt.
+
+Das Lexikon des internationalen Films nannte den Film sensibel inszeniert und lobte, wie eindrucksvoll er den romantischen Idealismus vermittle — merkte aber an, dass er gelegentlich selbst in sentimentaler Wehmut versinke.
+
+### Einordnung & Wirkung
+
+Bei den Oscars 1986 gewann der Film sieben von elf Nominierungen: bester Film, beste Regie, bestes adaptiertes Drehbuch, beste Filmmusik, beste Kamera, bester Ton und bestes Szenenbild.
+
+Bei den Golden Globes 1986 gewann er drei von sechs — bestes Filmdrama, bester Nebendarsteller für Klaus Maria Brandauer und beste Filmmusik. 1987 folgten drei BAFTA Awards aus zehn Nominierungen, für adaptiertes Drehbuch, Kamera und Ton.
+
+Sieben Oscars machen den Film zu einem der meistausgezeichneten seines Jahrzehnts.
+
+Der Einwand des Lexikons — gelegentliche sentimentale Wehmut — steht dabei neben sieben Oscars. Beides gilt für denselben Film, und beides ist nachvollziehbar.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11873', locale: 'de-de',
+    text: `### Worum es geht
+
+Eddie Felson hat früher Poolbillard gespielt, auf hohem Niveau. Heute spielt er nicht mehr selbst.
+
+Dann sieht er Vincent Lauria — jung, talentiert und ohne jedes Gespür dafür, wann man verlieren muss. Eddie nimmt ihn unter seine Fittiche und bringt ihm bei, was er selbst kann: nicht das Spielen, sondern das Täuschen. Gemeinsam ziehen sie durch Billardhallen, bis das Turnier in Atlantic City ansteht.
+
+### Entstehungsgeschichte
+
+Vorlage ist Walter Tevis' Roman von 1984. Der Film ist die Fortsetzung von „Haie der Großstadt" aus dem Jahr 1961, in dem Paul Newman dieselbe Figur bereits gespielt hatte.
+
+Regie führte Martin Scorsese, das Drehbuch schrieb Richard Price. Produziert wurde der Film von Irving Axelrad und Barbara De Fina.
+
+Paul Newman spielt Eddie Felson, Tom Cruise den Vincent Lauria, Mary Elizabeth Mastrantonio die Carmen, Helen Shaver die Janelle, John Turturro den Julian, Forest Whitaker den Amos, Bill Cobbs den Orvis, Bruce A. Young den Moselle, Paul Herman einen Zocker und Elizabeth Bracco die Diane.
+
+Die Kamera führte Michael Ballhaus, den Schnitt Thelma Schoonmaker, die Musik stammt von Robbie Robertson.
+
+Der Film erschien 1986, dauert 115 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+25 Jahre zwischen zwei Filmen über dieselbe Figur sind eine Seltenheit. Paul Newman spielte Eddie Felson zweimal — als jungen Mann und als alten — und wurde damit einer von nur drei Darstellern, die zweimal für dieselbe Rolle für den Oscar nominiert wurden.
+
+Beim zweiten Mal gewann er.
+
+Die Konstruktion kehrt die Vorlage um. Im ersten Film war Eddie der Junge, den ein Älterer belehrte; hier ist er der Ältere, und Vincent macht dieselben Fehler.
+
+Michael Ballhaus' Kamera wurde als virtuos in Szene gesetzt beschrieben — bei einem Film über Billard ist die Frage, wie man Tische filmt, die entscheidende.
+
+### Einordnung & Wirkung
+
+Paul Newman gewann den Oscar als bester Hauptdarsteller sowie den Preis des National Board of Review.
+
+Nominiert war der Film zudem für Mary Elizabeth Mastrantonio als beste Nebendarstellerin, für das adaptierte Drehbuch und für das Szenenbild von Boris Leven und Karen O'Hara. Newman und Mastrantonio waren auch für den Golden Globe nominiert, Mastrantonio zusätzlich für den Preis des New York Film Critics Circle.
+
+Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
+
+Das Lexikon des internationalen Films lobte die moralphilosophische Reflexion über Korruption und Unschuld, Lebenslust und Resignation.
+
+Dass Newman den Oscar für die zweite Begegnung mit dieser Figur erhielt und nicht für die erste, gehört zu den auffälligeren Verläufen der Preisgeschichte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:14784', locale: 'de-de',
+    text: `### Worum es geht
+
+Los Angeles in den zwanziger Jahren. Der Stuntman Roy Walker liegt gelähmt im Krankenhaus. Im selben Haus liegt Alexandria, ein kleines Mädchen.
+
+Roy beginnt, ihr eine Geschichte zu erzählen — von fünf Helden, die sich am bösen Gouverneur Odious rächen wollen. Während er erzählt, sieht Alexandria die Figuren vor sich. Was sie nicht weiß: Roy verfolgt mit der Geschichte einen Zweck.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf dem bulgarischen Film „Yo Ho Ho" von 1981 von Valeri Petrov und Zako Heskiya.
+
+Tarsem Singh führte Regie, produzierte den Film und schrieb das Drehbuch gemeinsam mit Dan Gilroy und Nico Soultanakis.
+
+Lee Pace spielt Roy Walker und den Schwarzen Banditen, Catinca Untaru die Alexandria und die Tochter des Banditen, Justine Waddell die Schwester Evelyn, Daniel Caltagirone den Sinclair und den Gouverneur Odious, Marcus Wesley den Eislieferanten und Otta Benga, Robin Smith den einbeinigen Schauspieler und Luigi sowie Leo Bill einen Pfleger und Charles Darwin.
+
+Die Kamera führte Colin Watkinson, die Musik stammt von Krishna Levy.
+
+Das Budget betrug 30 Millionen Dollar — Singh finanzierte den Film größtenteils selbst.
+
+### Hinter den Kulissen
+
+Die Dreharbeiten zogen sich über vier Jahre und 24 Länder — darunter Indien, Bali, Italien, Frankreich, Spanien, Namibia und China.
+
+Zu den Schauplätzen gehören das Valkenberg Hospital in Kapstadt, Deadvlei in Namibia, die blaue Stadt Jodhpur, der Taj Mahal, die Karlsbrücke in Prag, das Lake Palace Hotel in Udaipur und der Stufenbrunnen Chand Baori in Rajasthan.
+
+Singh betonte, wie wichtig ihm der Dreh vor Ort und der Verzicht auf Spezialeffekte gewesen sei — moderne Techniken alterten zeitlich nicht gut.
+
+Das ist die Grundentscheidung dieses Films: Was aussieht wie ein Computerbild, ist an einem realen Ort entstanden.
+
+Die doppelte Besetzung — jede Figur aus dem Krankenhaus taucht in der Erzählung wieder auf — macht sichtbar, dass die Geschichte aus dem gebaut ist, was Alexandria kennt.
+
+### Einordnung & Wirkung
+
+Bei 30 Millionen Dollar Herstellungskosten spielte der Film weltweit 3,7 Millionen ein.
+
+Rotten Tomatoes weist 64 Prozent bei 116 Bewertungen aus, Metacritic 64 von 100.
+
+Roger Ebert vergab vier von vier Sternen und schrieb, man solle den Film schon deshalb sehen, weil es ihn gibt — es werde nie einen anderen wie ihn geben. Er führte ihn unter seinen zwanzig besten Filmen des Jahres 2008.
+
+Nathan Lee urteilte in der New York Times gegenteilig: eine echte Liebesmüh — und wirklich langweilig.
+
+Ein selbst finanzierter Film für 30 Millionen Dollar, der ein Zehntel davon einspielt, ist ein Sonderfall. Was Singh gewonnen hat, war die vollständige Kontrolle über eine Arbeit, die so kein Studio finanziert hätte.` },
+  {
+    bereich: 'titel', schluessel: 'series:67195', locale: 'de-de',
+    text: `### Worum es geht
+
+David Haller hört Stimmen, seit er denken kann. Die Diagnose lautet Schizophrenie, und er lebt in einer psychiatrischen Einrichtung.
+
+Dann stellt sich heraus, dass die Stimmen keine Einbildung sind. David ist Mutant, und seine Fähigkeiten sind gewaltig — nur werden sie nicht von ihm gesteuert, sondern jede von einer anderen Persönlichkeit in seinem Kopf. Eine davon ist nicht seine: Amahl Farouk, der Shadow King.
+
+### Entstehungsgeschichte
+
+Entwickelt wurde die Serie von Noah Hawley. Vorlage ist die Marvel-Comicfigur David Haller alias Legion, geschaffen von Chris Claremont und Bill Sienkiewicz.
+
+Dan Stevens spielt David Haller, Rachel Keller die Sydney Barrett, Aubrey Plaza die Lenny Busker, Bill Irwin den Cary Loudermilk, Jemaine Clement den Oliver Bird, Jean Smart die Melanie Bird und Navid Negahban den Amahl Farouk.
+
+Produziert wurde die Serie von FX Productions, The Donners' Company, Bad Hat Harry Productions, Genre Films, Marvel Television und 26 Keys Productions.
+
+Es entstanden drei Staffeln mit insgesamt 27 Episoden. Ausgestrahlt wurden sie vom 8. Februar 2017 bis zum 12. August 2019 bei FX; im deutschsprachigen Raum lief die Serie vom 9. Februar 2017 bis zum 21. August 2019 beim FOX Channel.
+
+### Hinter den Kulissen
+
+Die Ausgangslage ist heikel und wird von der Serie ausdrücklich verhandelt: Eine psychiatrische Diagnose erweist sich als Fehldeutung übernatürlicher Fähigkeiten.
+
+Was die Serie daraus macht, ist keine Auflösung, sondern eine Verdopplung. David ist krank und er ist mächtig, und die Serie hält beides nebeneinander, statt eines gegen das andere auszuspielen.
+
+Die Aufteilung der Fähigkeiten auf verschiedene Persönlichkeiten ist der zweite Kunstgriff. Wer über seine Kräfte nicht verfügt, weil andere in ihm sie kontrollieren, ist auch für sich selbst eine Bedrohung.
+
+Dass David der Sohn von Professor X ist, verbindet die Serie mit einem größeren Erzählzusammenhang, ohne dass sie ihn ausbreitet.
+
+### Einordnung & Wirkung
+
+Drei Staffeln mit 27 Folgen über zweieinhalb Jahre sind ein überschaubarer Umfang — und ein abgeschlossener.
+
+Bemerkenswert ist die deutsche Auswertung: Der FOX Channel zeigte die Serie jeweils einen Tag nach der amerikanischen Ausstrahlung.
+
+Der Zuschnitt der Besetzung fällt auf. Dan Stevens, Aubrey Plaza, Jean Smart und Jemaine Clement sind Namen, die man bei einer Comicverfilmung nicht als Erstes erwartet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11287', locale: 'de-de',
+    text: `### Worum es geht
+
+1943. Weil die Baseballspieler im Krieg sind, gründen die Klubbesitzer eine Frauenliga. Ein Talentscout kommt nach Oregon und will Dottie Hinson verpflichten — sie stimmt nur zu, wenn ihre jüngere Schwester Kit mitkommt.
+
+Beide landen bei den Rockford Peaches, durchlaufen eine Benimmschule und spielen unter einem Trainer, den die Sache zunächst nicht interessiert: Jimmy Dugan. Aus der Verlegenheitslösung wird eine Mannschaft — und aus dem Verhältnis der Schwestern ein Konflikt.
+
+### Entstehungsgeschichte
+
+Die All-American Girls Professional Baseball League gab es tatsächlich; sie bestand von 1943 bis 1954. Eine Dokumentation von PBS aus dem Jahr 1987 mit demselben Titel hatte diese vergessene Geschichte wieder ins Bewusstsein gebracht.
+
+Regie führte Penny Marshall. Zunächst war David Anspaugh vorgesehen und Marshall als leitende Produzentin; nach ihrem Vertrag mit Columbia Pictures übernahm sie 1991 selbst. Die Geschichte stammt von Kim Wilson und Kelly Candaele, das Drehbuch von Lowell Ganz und Babaloo Mandel.
+
+Tom Hanks spielt Jimmy Dugan, Geena Davis die Dottie Hinson, Lori Petty die Kit Keller, Madonna die Mae Mordabito, Rosie O'Donnell die Doris Murphy, Jon Lovitz den Talentscout Ernie Capadino, David Strathairn den Ira Lowenstein, Garry Marshall den Teambesitzer Walter Harvey, Bill Pullman den Bob Hinson, Megan Cavanagh die Marla Hooch und Bitty Schram die Evelyn Gardner.
+
+Die Kamera führte Miroslav Ondříček, die Musik stammt von Hans Zimmer; den Schnitt besorgten Adam Bernardi und George Bowers.
+
+Gedreht wurde vom 10. Juli bis zum 31. Oktober 1991, unter anderem im Stadion der Chicago Cubs, in Huntingburg und Evansville in Indiana, in Ontario in Kalifornien und in Cooperstown. Das Budget lag bei 40 bis 50 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Darstellerinnen trainierten drei Monate lang unter Coach Rod Dedeaux an der University of Southern California — sechs Tage die Woche, vier Stunden täglich. Sämtliche Baseballszenen spielten sie selbst.
+
+Die Besetzung hat eigene Geschichten. Debra Winger war für Dottie vorgesehen, zog sich zurück und erhielt dennoch ihre volle Gage. Geena Davis überzeugte Penny Marshall mit einem einzigen Wurf. Lori Petty musste achtmal vorsprechen. Madonna wurde nach einem Probetraining in New York persönlich engagiert.
+
+Die Originalfassung war über viereinhalb Stunden lang.
+
+Das Endspiel gegen die Racine Belles bleibt in einem Punkt offen: Ob Dottie den Ball absichtlich fallen ließ, sagt der Film nicht.
+
+### Einordnung & Wirkung
+
+In den Vereinigten Staaten und Kanada spielte der Film 107,5 Millionen Dollar ein.
+
+Nominiert war er 1993 für zwei Golden Globes — Geena Davis als beste Hauptdarstellerin und „This Used to Be My Playground" als bester Song —, für einen Grammy und für drei MTV Movie Awards. Ausgezeichnet wurde er mit dem Hochi Film Award als bester fremdsprachiger Film und einem ASCAP Award. Bei den Oscars 1993 gab es trotz des Erfolgs keine Nominierung.
+
+2012 nahm die Library of Congress den Film ins National Film Registry auf.
+
+Das Lexikon des internationalen Films nannte ihn intelligente Hollywood-Unterhaltung, perfekt ausbalanciert zwischen Verklärung, Sentiment, Witz, sportlicher Dramatik und einigen Seitenhieben auf männlichen Chauvinismus.
+
+1993 folgte eine Serienfassung bei CBS, von der nur fünf von sechs Folgen ausgestrahlt wurden; 2022 startete eine Neuverfilmung als Serie bei Amazon Prime Video.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10400', locale: 'de-de',
+    text: `### Worum es geht
+
+Rubin Carter war Boxer. 1966 wurde er wegen dreifachen Mordes zu lebenslanger Haft verurteilt — dreimal lebenslang.
+
+Der Film erzählt seinen Kampf gegen dieses Urteil. Daneben läuft eine zweite Geschichte: die eines Jugendlichen aus Brooklyn, der sich für Carters Freilassung einsetzt.
+
+### Entstehungsgeschichte
+
+Regie führte Norman Jewison. Das Drehbuch schrieben Armyan Bernstein und Dan Gordon nach Carters Autobiografie „The 16th Round" und der Biografie „Lazarus and the Hurricane" von Sam Chaiton und Terry Swinton.
+
+Denzel Washington spielt Rubin Carter, Vicellous Reon Shannon den Lesra Martin, Deborah Kara Unger die Lisa Peters, Liev Schreiber den Sam Chaiton, John Hannah den Terry Swinton und Rod Steiger den Richter Haddon Lee Sarokin; in weiteren Rollen sind Dan Hedaya, Clancy Brown und David Paymer zu sehen.
+
+Produziert wurde der Film von Bernstein, Jewison und John Ketcham. Die Kamera führte Roger Deakins, den Schnitt Stephen E. Rivkin, die Musik stammt von Christopher Young.
+
+Gedreht wurde unter anderem im East Jersey State Prison. Der Film dauert 145 Minuten.
+
+### Hinter den Kulissen
+
+Der Film nimmt sich erhebliche Freiheiten, und sie sind dokumentiert.
+
+Carters kriminelle Vergangenheit wird kaum erwähnt. Denzel Washington trägt Uniformauszeichnungen, die Carter nie erhalten hat. Und der Kampf gegen Joey Giardello wird als unfaire Niederlage dargestellt, obwohl Giardello regulär gewann.
+
+Giardello verklagte daraufhin die Produzenten; die außergerichtliche Einigung soll 300.000 Dollar betragen haben.
+
+Das ist der schwierige Punkt bei diesem Film. Er tritt für einen Mann ein, dem Unrecht geschah — und geht dabei mit einem anderen so um, dass dieser sich vor Gericht wehrte.
+
+### Einordnung & Wirkung
+
+Denzel Washington gewann 2000 den Golden Globe und bei der Berlinale den Silbernen Bären; für den Oscar als bester Hauptdarsteller war er nominiert und unterlag Kevin Spacey.
+
+Rotten Tomatoes weist 82 Prozent aus, Metacritic 74 von 100. Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Das Lexikon des internationalen Films lobte einen mit konventionellen erzählerischen Mitteln stilsicher inszenierten Film und ordnete ihn als politisches Drama über Rassenproblematik ein.
+
+Die Auszeichnungen für Washington und der Rechtsstreit um Giardello stehen unvermittelt nebeneinander. Beides gehört zur Bilanz dieses Films: eine herausragende Darstellung — und ein Umgang mit realen Personen, der einer davon Anlass zur Klage gab.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8326', locale: 'de-de',
+    text: `### Worum es geht
+
+Stanley Yelnats wird wegen eines Diebstahls verurteilt, den er nicht begangen hat. Statt ins Gefängnis kommt er ins Jugendcamp Green Lake in Texas.
+
+Dort gilt eine Regel: Jeder Insasse gräbt täglich ein Loch. Warum, sagt niemand. Stanley freundet sich mit Zero an, und was die beiden finden, hat mit einer Gesetzlosen namens Kate Barlow zu tun und mit einem Fluch, der auf Stanleys Familie liegt.
+
+### Entstehungsgeschichte
+
+Vorlage ist Louis Sachars Jugendroman, der im deutschsprachigen Raum als „Löcher. Die Geheimnisse von Green Lake" erschien. Sachar schrieb auch das Drehbuch.
+
+Regie führte Andrew Davis, der den Film gemeinsam mit Mike Medavoy, Lowell D. Blank und Teresa Tucker-Davies produzierte.
+
+Shia LaBeouf spielt Stanley Yelnats IV., Sigourney Weaver die Lagerleiterin Louise Walker, Jon Voight den Mr. Sir, Khleo Thomas den Hector Zeroni und Patricia Arquette die Katherine Barlow.
+
+Die Kamera führte Stephen St. John, die Musik stammt von Joel McNeely; den Schnitt besorgten Thomas J. Nordberg und Jeffrey Wolf.
+
+Der Film erschien 2003, dauert 117 Minuten und ist ab 6 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Dass der Autor der Vorlage selbst das Drehbuch schrieb, ist der entscheidende Umstand. Sachars Roman verbindet drei Zeitebenen, die erst am Ende zusammenlaufen — eine Konstruktion, die bei einer Bearbeitung durch Dritte leicht zerfällt.
+
+Die Grundidee ist dabei denkbar einfach und denkbar bedrohlich: Kinder graben Löcher in der Wüste, und niemand erklärt ihnen, wozu.
+
+Ein Kritiker beschrieb den Film als unendlich fantasievolles Kinopuzzle mit fesselnder, verschlungener Erzählung — warnte aber, der Inhalt könne für sehr junge Zuschauer verstörend sein.
+
+Diese Warnung steht neben einer Freigabe ab 6 Jahren — der Film verpackt harte Bestandteile in einen Abenteuerfilm für Jugendliche.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films lobte einen originellen Abenteuerfilm für Jugendliche.
+
+Bemerkenswert ist die Besetzung. Sigourney Weaver, Jon Voight und Patricia Arquette in einem Jugendfilm sind ein Aufwand, den das Format selten rechtfertigt.
+
+Was den Film über vergleichbare Arbeiten hebt, ist die Verweigerung der einfachen Auflösung. Die drei Erzählstränge — Stanleys Gegenwart, die Geschichte von Kate Barlow und der Fluch der Familie — greifen ineinander, und der Film verlangt, dass man mitdenkt.` },
 ];
