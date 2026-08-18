@@ -204,13 +204,29 @@ Gib ausschliesslich den Text aus, ohne Vorrede und ohne Nachbemerkung.`;
 }
 
 // --- API --------------------------------------------------------------------
-async function erzeugen({ apiKey, model, t, locale }) {
-  const body = {
+// Der System-Prompt ist bei jedem Aufruf identisch und macht den groesseren
+// Teil der Eingabe aus. Als zwischengespeicherter Block wird er nur einmal
+// berechnet und danach zum Bruchteil gelesen -- bei zehntausenden Aufrufen ist
+// das der groesste Kostenhebel ueberhaupt.
+//
+// Der Cache lebt wenige Minuten und wird durch jeden Aufruf verlaengert. Bei
+// durchgehendem Betrieb bleibt er also warm; nur der allererste Aufruf und
+// laengere Pausen zahlen den vollen Preis.
+function anfrageKoerper(model, locale, t) {
+  return {
     model,
     max_tokens: 1600,
-    system: systemPrompt(locale),
+    system: [{ type: 'text', text: systemPrompt(locale), cache_control: { type: 'ephemeral' } }],
     messages: [{ role: 'user', content: `DATENSATZ\n${datensatz(t, locale)}\n\nSchreibe den Titeltext.` }],
   };
+}
+
+// Laufende Summe des Verbrauchs, damit am Ende belastbare Zahlen stehen statt
+// Schaetzungen -- und damit sichtbar wird, ob der Cache tatsaechlich greift.
+export const verbrauch = { eingabe: 0, cacheGeschrieben: 0, cacheGelesen: 0, ausgabe: 0, aufrufe: 0 };
+
+async function erzeugen({ apiKey, model, t, locale }) {
+  const body = anfrageKoerper(model, locale, t);
   for (let versuch = 1; versuch <= 5; versuch++) {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -219,6 +235,12 @@ async function erzeugen({ apiKey, model, t, locale }) {
     });
     if (res.ok) {
       const j = await res.json();
+      const u = j.usage || {};
+      verbrauch.eingabe += u.input_tokens || 0;
+      verbrauch.cacheGeschrieben += u.cache_creation_input_tokens || 0;
+      verbrauch.cacheGelesen += u.cache_read_input_tokens || 0;
+      verbrauch.ausgabe += u.output_tokens || 0;
+      verbrauch.aufrufe++;
       return j.content.map((c) => c.text || '').join('').trim();
     }
     if (![429, 500, 502, 503, 529].includes(res.status)) {
@@ -356,6 +378,28 @@ async function main() {
   console.log(`\nFertig in ${dauer}s: ${zaehler.ok} geschrieben, ${zaehler.format} Formatfehler, ${zaehler.fakten} Faktenverdacht, ${zaehler.fehler} Fehler.`);
   console.log(`Durchsatz: ~${Math.round((zaehler.ok / dauer) * 3600)} Texte/h · Protokoll: ${opt.journal}`);
   if (zaehler.fakten) console.log('Faktenverdacht = verworfen und protokolliert, nicht geschrieben.');
+
+  // Gemessener Verbrauch statt Schaetzung -- die Grundlage fuer jede
+  // Hochrechnung auf den vollen Katalog.
+  if (verbrauch.aufrufe) {
+    const v = verbrauch, n = v.aufrufe;
+    const eingabeGesamt = v.eingabe + v.cacheGeschrieben + v.cacheGelesen;
+    const cacheAnteil = eingabeGesamt ? Math.round((v.cacheGelesen / eingabeGesamt) * 100) : 0;
+    console.log(`\nVerbrauch ueber ${n} Aufrufe:`);
+    console.log(`  Eingabe voll berechnet   ${v.eingabe.toLocaleString('de-DE')} (${Math.round(v.eingabe / n)}/Aufruf)`);
+    console.log(`  Cache geschrieben        ${v.cacheGeschrieben.toLocaleString('de-DE')}`);
+    console.log(`  Cache gelesen            ${v.cacheGelesen.toLocaleString('de-DE')} (${Math.round(v.cacheGelesen / n)}/Aufruf, ${cacheAnteil} % der Eingabe)`);
+    console.log(`  Ausgabe                  ${v.ausgabe.toLocaleString('de-DE')} (${Math.round(v.ausgabe / n)}/Aufruf)`);
+    const je = (eingabeGesamt + v.ausgabe) / n;
+    console.log(`\nHochrechnung: ${Math.round(je).toLocaleString('de-DE')} Token je Text.`);
+    for (const ziel of [1000, 18400]) {
+      console.log(`  ${ziel.toLocaleString('de-DE')} Texte  ->  ` +
+        `${Math.round((v.eingabe / n) * ziel).toLocaleString('de-DE')} Eingabe voll · ` +
+        `${Math.round((v.cacheGelesen / n) * ziel).toLocaleString('de-DE')} Cache · ` +
+        `${Math.round((v.ausgabe / n) * ziel).toLocaleString('de-DE')} Ausgabe`);
+    }
+    console.log('Preise je Million Token stehen in der Anthropic-Konsole; Cache-Lesen ist ein Bruchteil der vollen Eingabe.');
+  }
   await pool.end();
 }
 
