@@ -45385,4 +45385,315 @@ Gelobt wurden durchgehend die Animation, die Sprecherleistungen und die Qualitä
 Dieses Urteil zielt nicht auf den Stoff, sondern auf die Ausführung — genannt werden Animation, Sprecher und Bücher, also die drei Bereiche, in denen eine Serie handwerklich zu bestehen hat.
 
 Vier Staffeln bei nahezu durchgängiger Höchstbewertung sind ein Befund, den kaum eine Serie erreicht.` },
+  // ---- Block 103 ----
+  {
+    bereich: 'titel', schluessel: 'movie:281', locale: 'de-de',
+    text: `### Worum es geht
+
+Lenny Nero war Polizist. Heute handelt er mit Clips — Aufzeichnungen fremder Erlebnisse, die man sich über ein Gerät namens SQUID direkt ins Hirn spielt. Alles ist zu haben, und alles ist verboten.
+
+Dann hinterlässt ihm die Prostituierte Iris eine Aufnahme, die er nicht verkaufen kann. Sie zeigt, wie der Rapper Jeriko One von rassistischen Polizisten hingerichtet wird. Von diesem Moment an ist Lenny nicht mehr Händler, sondern Mitwisser.
+
+### Entstehungsgeschichte
+
+Regie führte Kathryn Bigelow. Das Drehbuch schrieben James Cameron und Jay Cocks; Cameron produzierte den Film gemeinsam mit Steven-Charles Jaffe.
+
+Ralph Fiennes spielt Lenny Nero, Angela Bassett die Mace Mason, Tom Sizemore den Max Peltier, Juliette Lewis die Faith Justin und Michael Wincott den Philo Gant.
+
+Die Kamera führte Matthew F. Leonetti, den Schnitt Howard E. Smith, die Musik stammt von Graeme Revell.
+
+Der Film erschien 1995 in den Vereinigten Staaten, dauert 139 Minuten und ist ab 16 Jahren freigegeben. Der deutsche Kinostart war am 1. Februar 1996.
+
+### Hinter den Kulissen
+
+Die Erfindung im Zentrum ist der Motor des Films. Über das SQUID-Gerät lassen sich Erlebnisse anderer Menschen abrufen — daraus entsteht ein illegaler Handel, und Lenny Nero lebt davon.
+
+Daraus folgt alles Weitere. Ein solches Gerät macht Erfahrung handelbar, und der Film fragt nicht, ob das möglich ist, sondern was Menschen damit tun.
+
+Der Clip, um den es geht, ist deshalb mehr als ein Beweisstück. Er zeigt die Hinrichtung eines Rappers durch rassistische Polizisten — und wer ihn abspielt, sieht sie nicht, sondern erlebt sie.
+
+Damit steht Polizeigewalt nicht am Rand der Handlung, sondern in deren Mitte.
+
+### Einordnung & Wirkung
+
+Im Kino war der Film ein Fehlschlag — er spielte nicht einmal die Hälfte seiner Herstellungskosten ein.
+
+Rotten Tomatoes weist 68 Prozent aus.
+
+1996 gewann Angela Bassett den Saturn Award als beste Darstellerin und Kathryn Bigelow den für die beste Regie; hinzu kamen Nominierungen in drei weiteren Kategorien.
+
+Dass ausgerechnet Regie und Hauptdarstellerin ausgezeichnet wurden, während der Film kaufmännisch scheiterte, ist bezeichnend. Angela Bassetts Mace und Bigelows Inszenierung wurden gesehen — der Film als Ganzes nicht.
+
+139 Minuten und eine Freigabe ab 16 Jahren machten den Film zudem zu keinem leichten Fall für den Verleih.` },
+  {
+    bereich: 'titel', schluessel: 'movie:227', locale: 'de-de',
+    text: `### Worum es geht
+
+Tulsa, Oklahoma, im Jahr 1965. Zwei Gruppen stehen sich gegenüber: die Socs aus wohlhabenden Familien und die Greaser, die nichts haben.
+
+Ponyboy Curtis gehört zu den Greasern. Als ein Streit tödlich endet, fliehen er, Johnny und Dallas aus der Stadt. Was danach geschieht — die Rettung von Kindern aus einer brennenden Kirche — macht sie zu Helden und kostet zugleich.
+
+### Entstehungsgeschichte
+
+Vorlage ist S. E. Hintons Roman von 1967, geschrieben, als die Autorin neunzehn Jahre alt war.
+
+Regie führte Francis Ford Coppola, das Drehbuch schrieb Kathleen Knutsen Rowell. Produziert wurde der Film von Zoetrope Studios.
+
+C. Thomas Howell spielt Ponyboy Curtis, Ralph Macchio den Johnny Cade, Matt Dillon den Dallas Winston, Patrick Swayze den Darry Curtis, Rob Lowe den Sodapop Curtis, Emilio Estevez den Keith Matthews, Tom Cruise den Steve Randle, Diane Lane die Cherry Valance und Leif Garrett den Bob Sheldon.
+
+Die Kamera führte Stephen H. Burum, den Schnitt Anne Goursaud, die Musik stammt von Carmine Coppola; „Stay Gold" steuerte Stevie Wonder bei.
+
+Gedreht wurde von März bis Mai 1982 in Tulsa. Das Budget betrug zehn Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Anstoß kam aus einer Schule. Schüler einer kalifornischen Schulbibliothekarin schrieben Coppola einen Brief; er las daraufhin den Roman und war begeistert.
+
+Ein Film, der auf Zuschriften von Schülern zurückgeht, ist eine Seltenheit.
+
+Die Besetzung ist im Rückblick der auffälligste Umstand. Tom Cruise, Patrick Swayze, Rob Lowe, Matt Dillon, Emilio Estevez, Ralph Macchio und Diane Lane standen hier gemeinsam vor der Kamera — 1982, in Tulsa, für zehn Millionen Dollar.
+
+Die Fassungsgeschichte ist ebenso bemerkenswert: Aus ursprünglich 133 Minuten wurden 91; 2005 erschien unter dem Titel „The Complete Novel" eine Fassung von 114 Minuten.
+
+### Einordnung & Wirkung
+
+Bei zehn Millionen Dollar Herstellungskosten spielte der Film weltweit 25,8 Millionen ein.
+
+Rotten Tomatoes weist 71 Prozent bei einem Schnitt von 6,3 von 10 aus. Roger Ebert vergab zweieinhalb von vier Sternen.
+
+Gewürdigt wurde die glaubwürdige Darstellung jugendlicher Wirklichkeit, kritisiert Coppolas Bildsprache.
+
+Dieser Einwand betrifft die Reibung im Kern des Films. Ein Regisseur mit ausgeprägter Handschrift verfilmt einen Roman, den eine Neunzehnjährige über Jugendliche geschrieben hatte.
+
+Dass die Kürzung um 42 Minuten Jahrzehnte später rückgängig gemacht wurde, spricht dafür, dass diese Reibung schon damals bemerkt wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:26428', locale: 'de-de',
+    text: `### Worum es geht
+
+Alexandria im Jahr 391. Hypatia lehrt an der Bibliothek des Serapeum — Philosophie, Astronomie, Mathematik. Unter ihren Schülern sind Orestes und der Christ Synesios; beide, wie auch der Sklave Davus, sind in sie verliebt.
+
+Die Stadt zerreißt es zwischen Christen, Juden und Anhängern der alten Götter. Als fanatische Christen den Tempel zerstören, stirbt Hypatias Vater Theon. Jahre später ist Orestes Präfekt, Synesios Bischof — und Hypatia forscht weiter, während Bischof Kyrill sie als Hexe bezeichnet.
+
+### Entstehungsgeschichte
+
+Regie führte Alejandro Amenábar, der das Drehbuch gemeinsam mit Mateo Gil schrieb. Produziert wurde der Film von Álvaro Augustin und Fernando Bovaira.
+
+Rachel Weisz spielt Hypatia, Max Minghella den Davus, Oscar Isaac den Orestes, Ashraf Barhom den Ammonius, Michael Lonsdale den Theon, Rupert Evans den Synesios von Kyrene, Sami Samir den Kyrill von Alexandria und Manuel Cauchi den Theophilus.
+
+Die Kamera führte Xavi Giménez, den Schnitt Nacho Ruiz Capillas, die Musik stammt von Dario Marianelli; die Kostüme entwarf Gabriella Pescucci, das Szenenbild Guy Dyas.
+
+Der Film ist eine spanische Produktion in englischer Sprache, dauert 126 Minuten und ist ab 12 Jahren freigegeben. Der spanische Start war am 9. Oktober 2009, der deutsche am 11. März 2010.
+
+### Hinter den Kulissen
+
+Der Film ist ausdrücklich keine Rekonstruktion, sondern eine fiktionalisierte Darstellung. Erfunden ist insbesondere Hypatias Forschungsarbeit zum heliozentrischen Weltbild und zu elliptischen Planetenbahnen.
+
+Genau daran setzt die historische Kritik an. Maria Dzielska hält dem Film vor, den Konflikt fälschlich als Wissenschaft gegen Religion darzustellen, und findet wenig von der überlieferten Hypatia darin wieder.
+
+Richard Carrier widerspricht in diesem Punkt. Er nennt den Film hervorragend und betont, es gehe darin nicht um Christentum gegen Wissenschaft; er sieht darin eher eine Entsprechung zur Lage im Nahen Osten.
+
+Der Film zeigt Hypatias gewaltsamen Tod — und er zeigt, was ihm vorausgeht: dass Bischof Kyrill sie als Hexe diffamiert, bevor die Menge sich holt, was ihr zugewiesen wurde.
+
+### Einordnung & Wirkung
+
+Bei den Goyas 2010 gewann der Film sieben Preise — für Kamera, Kostüme, Maske, Szenenbild, Produktionsleitung, Originaldrehbuch und Spezialeffekte. Nominiert war er zudem als bester Film, für die Regie, Rachel Weisz, Schnitt, Musik und Ton; hinzu kamen fünf Nominierungen beim Cinema Writers Circle Award.
+
+Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Rotten Tomatoes weist 56 Prozent aus, Metacritic 55 von 100.
+
+Das Lexikon des internationalen Films nannte ihn ein leidenschaftliches Plädoyer für Vernunft und Humanismus gegen Fanatismus, Intoleranz und Machtstreben, mit einer charismatischen, vorzüglich gespielten Frauengestalt.
+
+Sieben Goyas bei mittelmäßigen internationalen Bewertungen beschreiben die Lage: In Spanien galt der Film als große Produktion, andernorts als eine, die sich zu viel vorgenommen hatte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:395993', locale: 'de-de',
+    text: `### Worum es geht
+
+Jeff Bauman ist ein gewöhnlicher Mann aus Boston. Beim Anschlag auf den Marathon im Jahr 2013 verliert er beide Beine. Was folgt, ist kein Heldenstoff: der Umgang mit der Behinderung, das Trauma — und eine Öffentlichkeit, die in ihm ein Sinnbild sehen will.
+
+### Entstehungsgeschichte
+
+Vorlage ist Jeff Baumans Autobiografie, geschrieben mit Bret Witter.
+
+Regie führte David Gordon Green, das Drehbuch schrieb John Pollono.
+
+Jake Gyllenhaal spielt Jeff Bauman, Tatiana Maslany seine Freundin Erin Hurley, Miranda Richardson die Mutter Patty, Clancy Brown den Vater Jeff Bauman Sr. und Carlos Sanz den Carlos Arredondo.
+
+Produziert wurde der Film von Bold Films, Mandeville Films und Nine Stories Productions. Die Kamera führte Sean Bobbitt, den Schnitt Dylan Tichenor, die Musik stammt von Michael Brook.
+
+Gedreht wurde ab dem 4. April 2016 im Großraum Boston und in New York. Das Budget betrug 30 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Anschlag beim Boston-Marathon 2013 ist der Ausgangspunkt, nicht der Gegenstand. Der Film beginnt dort, wo die Nachrichten aufhörten.
+
+Jeff Bauman identifizierte für das FBI einen der Attentäter — der Umstand, der ihn öffentlich machte. Der Film erzählt, was diese Öffentlichkeit mit einem Menschen macht, der sie nicht gesucht hat.
+
+Das ist die schwierigste Entscheidung dieser Produktion. Ein Film über ein Attentat mit realen Toten kann sich leicht in eine Erhebung verwandeln; dieser hält dagegen, indem er bei einem Einzelnen bleibt und dessen Rückschläge zeigt.
+
+Dass Bauman selbst die Vorlage geschrieben hat, gibt dem eine Grundlage. Was der Film über ihn erzählt, hat er zuvor über sich selbst erzählt.
+
+### Einordnung & Wirkung
+
+Bei 30 Millionen Dollar Herstellungskosten spielte der Film 7,7 Millionen ein — 4,2 Millionen in den Vereinigten Staaten und Kanada, 3,5 Millionen international.
+
+Rotten Tomatoes weist 91 Prozent aus. Gelobt wurden Jake Gyllenhaals Darstellung und der reife Umgang mit dem Stoff.
+
+Der Abstand zwischen 91 Prozent Zustimmung und einem Ergebnis, das ein Viertel der Kosten deckt, beschreibt ein bekanntes Problem. Ein Film über die Folgen eines Attentats, der weder tröstet noch überhöht, findet schwer sein Publikum.
+
+Genau das, was ihn kaufmännisch scheitern ließ, hebt ihn heraus: dass er den Betroffenen nicht zum Symbol macht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:413518', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Tischler Geppetto schnitzt eine Holzpuppe. Sie erwacht zum Leben und läuft ihm davon.
+
+Pinocchio verkauft sein Schulbuch, fällt auf Kater und Fuchs herein, gerät an den Puppenspieler Mangiafuoco, verwandelt sich in einen Esel und wird schließlich von einem Wal verschluckt — wo er seinen Vater wiederfindet.
+
+### Entstehungsgeschichte
+
+Vorlage ist Carlo Collodis Roman, der ab 1881 in der Kinderzeitschrift „Giornale per i bambini" erschien.
+
+Matteo Garrone führte Regie und bearbeitete den Stoff; er wollte, wie er sagte, Kindern helfen, dieses zeitlose Meisterwerk der italienischen Literatur wiederzuentdecken, und Erwachsene auf eine Zeitreise mitnehmen. Produziert wurde der Film von Garrone, Jean Labadie und Jeremy Thomas.
+
+Federico Ielapi spielt Pinocchio, Roberto Benigni den Geppetto, Marine Vacth die Fata Turchina, Gigi Proietti den Mangiafuoco, Davide Marotta den Grillo Parlante, Massimo Ceccherini den Fuchs und Rocco Papaleo den Kater.
+
+Die Kamera führte Nicolai Brüel. Die Musik stammt von Dario Marianelli, eingespielt vom Roma Tre Orchestra; das Titellied „Passo Passo" singt Petra Magoni.
+
+Gedreht wurde ab März 2019 in Sinalunga in der Toskana und bis Juni 2019 in Apulien — in Polignano a Mare, Noicattaro, Ostuni und Gravina in Puglia — sowie in Viterbo.
+
+### Hinter den Kulissen
+
+Der entscheidende Unterschied zu bekannteren Fassungen liegt in der Machart. Garrone arbeitet mit Darstellern und Masken statt mit Animation; Pinocchio wird von einem Kind gespielt.
+
+Das erklärt, warum die Auszeichnungen fast ausschließlich in handwerklichen Kategorien fielen — Ausstattung, Kostüme, Maske, Frisuren, visuelle Effekte.
+
+Es erklärt aber auch den Haupteinwand. Die Gilde deutscher Filmkunsttheater befand, der Film kranke schnell am eigenen vorsätzlichen Realismus, und das märchenhafte Flair komme nicht auf.
+
+Der Stoff selbst ist härter als sein Ruf. Betrug, die Verwandlung in einen Esel, das Verschlungenwerden — Garrone kürzt nichts davon weg.
+
+### Einordnung & Wirkung
+
+Bei den David di Donatello 2020 gewann der Film fünf Preise, bei den Nastri d'Argento sechs — darunter für Garrones Regie und Roberto Benigni als Nebendarsteller.
+
+2021 folgten zwei Oscar-Nominierungen für Kostüme und Maske, eine BAFTA-Nominierung für die Maske und eine Nominierung beim Europäischen Filmpreis als bester Kinderfilm.
+
+Rotten Tomatoes weist 84 Prozent aus, Metacritic 65 von 100. Weltweit spielte der Film 23,9 Millionen Dollar ein.
+
+Zwei Oscar-Nominierungen für eine italienische Literaturverfilmung sind ein bemerkenswertes Ergebnis — und sie fielen genau dort, wo der Film seine eigentliche Arbeit geleistet hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2255', locale: 'de-de',
+    text: `### Worum es geht
+
+Holden und Banky zeichnen gemeinsam Comics. Dann lernen sie Alyssa kennen, die ebenfalls zeichnet.
+
+Holden verliebt sich. Dann erfährt er, dass Alyssa lesbisch ist — und verliebt sich weiter. Was die beiden daraus machen, funktioniert eine Weile. Bis Holden anfängt, sich mit Alyssas Vergangenheit zu beschäftigen.
+
+### Entstehungsgeschichte
+
+Kevin Smith führte Regie und schrieb das Drehbuch; produziert wurde der Film von Scott Mosier, John Pierson und Smith.
+
+Ben Affleck spielt Holden McNeil, Jason Lee den Banky Edwards, Joey Lauren Adams die Alyssa Jones, Matt Damon den Shawn Oran, Jason Mewes den Jay und Kevin Smith den Silent Bob.
+
+Die Kamera führte David Klein, den Schnitt besorgten Scott Mosier und Smith. Die Musik stammt von David Pirner, Joey Lauren Adams, Brynn Arens und Petra Haden.
+
+Das Produktionsbudget betrug 250.000 Dollar; hinzu kamen 600.000 Dollar für die Nachbearbeitung und acht Millionen für die Werbung. In den Vereinigten Staaten und Kanada spielte der Film rund 12,1 Millionen Dollar ein.
+
+### Hinter den Kulissen
+
+Das Zahlenverhältnis ist der aufschlussreichste Umstand dieser Produktion: 250.000 Dollar für den Film, acht Millionen für seine Bewerbung. Die Herstellung kostete drei Prozent dessen, was der Verleih ausgab.
+
+Erzählerisch bricht der Film mit der Erwartung, die er selbst weckt. Die Frage ist nicht, ob Holden Alyssa bekommt — das klärt sich früh —, sondern was er anschließend damit anstellt.
+
+Der Bruch geht dabei nicht von ihr aus. Was die Beziehung zerstört, ist seine Unfähigkeit, mit dem umzugehen, was vor ihm war.
+
+Die Kritik hat das gewürdigt und zugleich eingeschränkt: gelobt für ehrliche Dialoge, kritisiert für einen unbeholfenen Umgang mit queeren Themen.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 87 Prozent aus, Metacritic 71 von 100; bei CinemaScore vergab das Publikum ein A−.
+
+Joey Lauren Adams war 1998 für den Golden Globe nominiert und gewann den Preis der Las Vegas Film Critics Society. Kevin Smith und Jason Lee erhielten im selben Jahr Independent Spirit Awards.
+
+Für einen Film, der für 250.000 Dollar entstand, sind eine Golden-Globe-Nominierung und zwei Independent Spirit Awards ein außergewöhnliches Ergebnis.
+
+Der Einwand zum Umgang mit queeren Themen stammt aus derselben Kritik, die dem Film seine ehrlichen Dialoge bescheinigt. Beides steht nebeneinander, und der Film hält beides aus.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9768', locale: 'de-de',
+    text: `### Worum es geht
+
+Baltimore in den fünfziger Jahren. Wade Walker, genannt Cry-Baby, führt die Drapes an — die Jugendlichen von der falschen Seite.
+
+Allison Vernon-Williams kommt aus gutem Haus und ist genau deshalb hingerissen. Nach einer Schlägerei landet Cry-Baby im Gefängnis. Allison setzt sich für ihn ein, und am Ende entscheidet ein Autorennen zwischen Cry-Baby und Baldwin, ihrem bisherigen Freund.
+
+### Entstehungsgeschichte
+
+John Waters führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Jim Abrahams, Brian Grazer und Rachel Talalay.
+
+Johnny Depp spielt Wade Walker, Amy Locane die Allison Vernon-Williams, Polly Bergen die Mrs. Vernon-Williams, Ricki Lake die Pepper Walker, Iggy Pop den Onkel Belvedere Rickettes und Traci Lords die Wanda Woodward.
+
+Die Kamera führte David Insley, den Schnitt Janice Hampton, die Musik stammt von Patrick Williams.
+
+An der amerikanischen Kinokasse spielte der Film rund 8,3 Millionen Dollar ein.
+
+### Hinter den Kulissen
+
+Die Besetzung ist Programm. John Waters stellt Johnny Depp neben Iggy Pop, Traci Lords, Ricki Lake und Polly Bergen — Namen aus Bereichen, die im selben Film sonst nicht vorkommen.
+
+Der Stoff selbst ist eine Verdrehung. Erzählt wird die Liebe zwischen der Tochter aus gutem Haus und dem Anführer der Aussenseiter — und der Film steht dabei durchweg auf der Seite der Aussenseiter.
+
+Dass daraus ein Musical wurde, verschärft den Effekt zusätzlich. Was ernst gemeint gewesen wäre, wird gesungen.
+
+Roger Ebert lobte genau diese Perspektive — den nostalgischen Blick, mit dem Waters auf ein Jahrzehnt schaut, das er nicht verklärt.
+
+### Einordnung & Wirkung
+
+Das Lexikon des internationalen Films nannte den Film ein grelles Pop-Musical mit unterhaltsamen Momenten für ein junges Publikum.
+
+Mit 8,3 Millionen Dollar an der amerikanischen Kinokasse blieb er ein Randerfolg — was für einen Film von John Waters eher die Regel als die Ausnahme ist.
+
+Bemerkenswert bleibt der Zusammenschnitt der Namen. Dass Johnny Depp, Iggy Pop und Traci Lords in derselben Besetzungsliste stehen, ist keine Verlegenheitslösung, sondern die Handschrift des Regisseurs.
+
+Roger Eberts Lob für den nostalgischen Blick trifft dabei den Punkt: Waters schaut auf ein Jahrzehnt zurück, ohne es zu verklären.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11797', locale: 'de-de',
+    text: `### Worum es geht
+
+Charley Brewster ist Teenager und schaut nachts Horrorfilme. Als nebenan zwei Männer einziehen, beobachtet er das Haus — und kommt zu einem Schluss, den ihm niemand glaubt: Jerry Dandrige ist ein Vampir.
+
+Weder seine Freundin Amy noch sein Freund Ed nehmen ihn ernst. Charley wendet sich an den Einzigen, der Erfahrung haben müsste: Peter Vincent, einen abgehalfterten Vampirjäger aus dem Fernsehen.
+
+### Entstehungsgeschichte
+
+Tom Holland führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Herb Jaffe.
+
+Chris Sarandon spielt Jerry Dandrige, William Ragsdale den Charley Brewster, Amanda Bearse die Amy Peterson, Stephen Geoffreys den Ed Thompson, Roddy McDowall den Peter Vincent, Jonathan Stark den Billy Cole, Dorothy Fielding die Judy Brewster und Art J. Evans den Detective Lennox.
+
+Die Kamera führte Jan Kiesser, den Schnitt Kent Beyda, die Musik stammt von Brad Fiedel — eine Mischung aus Rock, Pop und Instrumentalstücken; das Hauptthema heißt „Come To Me", im Abspann läuft „Fright Night" der J. Geils Band.
+
+Gedreht wurde in Los Angeles. Der Film dauert 103 Minuten, kostete rund neun Millionen Dollar und ist ab 16 Jahren freigegeben.
+
+Die deutsche Fassung entstand bei cine-adaption in München; das Dialogbuch schrieb Michael Brennicke, Regie führte John Pauls-Harding. Udo Wachtveitl spricht Charley, Norbert Langer den Dandrige, Reinhard Glemnitz den Peter Vincent.
+
+### Hinter den Kulissen
+
+Die Konstruktion setzt auf eine Umkehrung: Der Junge, der zu viele Horrorfilme gesehen hat, hat ausnahmsweise recht — und der Fachmann, den er zu Hilfe holt, hat noch nie einen echten Vampir gesehen.
+
+Roddy McDowalls Peter Vincent ist damit die Schlüsselfigur — und wurde für diese Rolle mit dem Saturn Award als bester Nebendarsteller ausgezeichnet.
+
+Roger Ebert beschrieb die Zweiteilung des Films treffend: die erste Hälfte witzig, die zweite mit spektakulären Spezialeffekten. Das Lexikon des internationalen Films nannte ihn einen parodistisch angelegten Horrorfilm mit vielen grellen Grusel- und Schockeffekten.
+
+Variety hielt fest, Tom Holland halte seinen Film schön einfach und durchaus glaubhaft — sofern man Vampire akzeptiere. Time Out London formulierte es knapper: Seltsam, dass der Film überhaupt funktioniere, aber er tue es.
+
+### Einordnung & Wirkung
+
+Bei rund neun Millionen Dollar Herstellungskosten spielte der Film in den Vereinigten Staaten etwa 24,9 Millionen ein.
+
+Rotten Tomatoes weist 83 Prozent aus, Metacritic 62 von 100; AllMovie vergab vier von fünf Sternen, Roger Ebert drei von vier.
+
+1986 gewann der Film drei Saturn Awards — bester Horrorfilm, bestes Drehbuch und Roddy McDowall als bester Nebendarsteller; nominiert war er zudem für Regie, Spezialeffekte und Chris Sarandon als besten Hauptdarsteller.
+
+Janet Maslin urteilte in der New York Times zurückhaltender: Die Horrorakzente seien mehr ekelhaft als gruselig.
+
+1988 folgte die Fortsetzung „Mein Nachbar, der Vampir" unter der Regie von Tommy Lee Wallace, wieder mit Roddy McDowall; 2011 entstand eine Neuverfilmung mit Anton Yelchin, Colin Farrell, Christopher Mintz-Plasse und David Tennant.` },
 ];
