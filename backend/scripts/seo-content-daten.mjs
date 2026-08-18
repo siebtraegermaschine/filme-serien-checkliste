@@ -43563,4 +43563,303 @@ Bei 35 Millionen Dollar Herstellungskosten spielte der Film weltweit rund 117 Mi
 Die Kritik war zurückhaltend. Das Lexikon des internationalen Films nannte ihn kindgerecht, aber mit wenig Anspruch, und sah in Walter Matthau den einzigen Lichtblick. TV Spielfilm lobte die Besetzung, besonders Mason Gamble, kritisierte aber die reichlich brutalen Scherze.
 
 Dieser Einwand ist der interessanteste. Slapstick für Kinder bewegt sich immer an der Grenze, an der ein Streich in eine Verletzung übergeht — und der Film geht bis dicht an sie heran.` },
+  // ---- Block 97 ----
+  {
+    bereich: 'titel', schluessel: 'movie:586863', locale: 'de-de',
+    text: `### Worum es geht
+
+Stéphane wird zu einer Kriminaleinheit nach Montfermeil versetzt, einem Vorort von Paris. Seine neuen Kollegen sind Chris, der aggressiv auftritt, und Gwada, der ruhiger bleibt.
+
+Ein Junge stiehlt ein Löwenjunges aus dem Zirkus. Bei der Festnahme wird er verletzt. Die Beamten beschlagnahmen die Aufnahmen einer Drohne, die den Vorfall gefilmt hat — und ab da läuft ein Tag ab, den niemand mehr anhalten kann. Der Film endet offen.
+
+### Entstehungsgeschichte
+
+Ladj Ly führte Regie und schrieb das Drehbuch gemeinsam mit Giordano Gederlini und Alexis Manenti; es war sein erster Spielfilm.
+
+Damien Bonnard spielt Stéphane, Alexis Manenti den Chris, Djebril Zonga den Gwada, Issa Perica den Issa, Al-Hassan Ly den Drohnenflieger Buzz und Steve Tientcheu den „Bürgermeister"; Jeanne Balibar hat einen Kurzauftritt als Polizeichefin.
+
+Produziert wurde der Film von Toufik Ayadi und Christophe Barral. Die Kamera führte Julien Poupard, den Schnitt Flora Volpelière, die Musik stammt von Marco Casanova und Kim Chapiron.
+
+Premiere war am 15. Mai 2019 in Cannes, der französische Start folgte am 20. November 2019, der deutsche am 23. Januar 2020.
+
+### Hinter den Kulissen
+
+Ly ist in Montfermeil aufgewachsen; seine Familie stammt aus Mali. Der Film greift die Unruhen von 2005 auf, insbesondere die Ereignisse dort, bei denen zwei Jugendliche auf der Flucht vor der Polizei ums Leben kamen.
+
+Der Ort teilt die Geografie mit Victor Hugos Roman, nicht die Handlung. Der Titel ist also kein Verweis auf eine Vorlage, sondern auf einen Schauplatz, an dem sich seit 1862 die Verhältnisse geändert haben und die Lage nicht.
+
+Vorausgegangen waren ein Dokumentarfilm — „365 Tage in Clichy-Montfermeil" — und ein Kurzfilm von 2017, aus dem dieser Spielfilm hervorging.
+
+Gedreht wurde überwiegend mit der Handkamera, unter Beteiligung von Anwohnern neben professionellen Darstellern. Die Drohnenbilder sind kein Stilmittel, sondern Teil der Handlung.
+
+### Einordnung & Wirkung
+
+In Cannes gewann der Film 2019 den Preis der Jury. 2020 folgten drei Césars — bester Film, bester Schnitt, bester Nebendarsteller — sowie der Prix Lumières als bester Film; in Jerusalem war er 2019 bester internationaler Film.
+
+Nominiert war er 2020 für den Oscar als bester internationaler Film, für den Golden Globe und 2021 für den BAFTA.
+
+Rotten Tomatoes weist 87 Prozent aus. Gelobt wurde die Verbindung von chaotischem Vorstadtleben, grobem Polizeihumor und schockierender Gewalt.
+
+Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll"; für den Unterricht wurde der Film für Französisch, Sozialkunde, Ethik und Psychologie empfohlen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:315011', locale: 'de-de',
+    text: `### Worum es geht
+
+In der Bucht von Tokio treibt ein führerloses Boot. Die Küstenwache findet an Bord Unterlagen eines Journalisten namens Goro Maki. Kurz darauf tritt im Wasser eine rätselhafte radioaktive Substanz auf.
+
+Der ehrgeizige Kabinettssekretär Rando Yaguchi äußert einen Verdacht, den im Krisenstab niemand hören will: ein Riesenwesen. Dann taucht Godzilla auf — und wächst schneller, als der Apparat Entscheidungen treffen kann.
+
+### Entstehungsgeschichte
+
+Regie führten Hideaki Anno und Shinji Higuchi; das Drehbuch schrieb Anno, der auch am Schnitt beteiligt war und zu den Produzenten gehörte. Weitere Produzenten waren Minami Ichikawa, Taichi Ueda, Yoshihiro Sato, Masaya Shibusawa und Kazutoshi Wadakura.
+
+Hiroki Hasegawa spielt Rando Yaguchi, Yutaka Takenouchi den Hideki Akasaka und Satomi Ishihara die Kayoko Ann Patterson.
+
+Die Kamera führte Kōsuke Yamada, den Schnitt besorgten Atsuki Satō und Anno, die Musik stammt von Shirō Sagisu.
+
+Der Film ist eine japanische Produktion, dauert 118 Minuten und ist ab 12 Jahren freigegeben. Der Start in Japan war am 29. Juli 2016, in den Vereinigten Staaten am 11. Oktober 2016 unter dem Titel „Godzilla Resurgence", in Deutschland am 4. Mai 2017.
+
+### Hinter den Kulissen
+
+Der eigentliche Gegenstand ist die Verwaltung. Ein erheblicher Teil des Films besteht aus Sitzungen, Zuständigkeitsfragen und Protokollen — das Monster zerstört Tokio, während Ausschüsse tagen.
+
+Damit kehrt der Film zur Anlage des Ursprungsstoffs zurück, deutet sie aber neu. Godzilla ist hier kein Krieger, sondern ein Vorgang, auf den ein Staat reagieren muss und dabei an seinen eigenen Abläufen scheitert.
+
+Bemerkenswert ist die Entwicklung des Wesens selbst: Es verändert im Verlauf mehrfach seine Gestalt, statt von Beginn an in der bekannten Form aufzutreten.
+
+Gestoppt wird es zunächst nicht mit Waffen, sondern mit Kühlflüssigkeit — auch das eine technische, keine heroische Lösung.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 78 Millionen Dollar ein und war damit bis dahin der finanziell erfolgreichste Godzilla-Film.
+
+Rotten Tomatoes weist 86 Prozent positive Kritiken und 74 Prozent Publikumszustimmung aus.
+
+Jörg Buttgereit schrieb im ray Filmmagazin, das Monster stehe für die Tsunami- und Reaktorkatastrophe von Fukushima und sei das manifestierte Schuldeingeständnis einer sonst so stolzen Nation.
+
+Diese Lesart erklärt, warum der Film seine Zeit auf Krisenstäbe verwendet. Was 2011 versagte, war nicht die Technik allein, sondern die Entscheidungskette — und genau die führt der Film vor.` },
+  {
+    bereich: 'titel', schluessel: 'movie:424121', locale: 'de-de',
+    text: `### Worum es geht
+
+1905, eine abgelegene Insel vor der walisischen Küste. Thomas Richardson, ein ehemaliger Missionar, schleust sich in eine dort lebende Glaubensgemeinschaft ein.
+
+Der Grund ist einfach: Seine Schwester Jennifer ist entführt worden und wird auf der Insel festgehalten. Die Gemeinschaft steht unter der Führung von Malcolm Howe und beruft sich darauf, den unfruchtbaren Boden durch Blutopfer fruchtbar zu machen.
+
+### Entstehungsgeschichte
+
+Gareth Evans schrieb das Drehbuch, führte Regie und übernahm auch den Schnitt.
+
+Dan Stevens spielt Thomas Richardson, Michael Sheen den Kultführer Malcolm Howe, Mark Lewis Jones dessen Stellvertreter Quinn, Paul Higgins den Mitbegründer Frank, Lucy Boynton die Malcolms Tochter Andrea, Bill Milner den Jeremy, Kristine Froseth die Ffion, Elen Rhys die Jennifer Richardson und Sharon Morgan die Gottheit.
+
+Die Kamera führte Matt Flannery, die Musik stammt von Fajar Yuskemal und Aria Prayogi.
+
+Angekündigt wurde das Projekt am 2. November 2016; Netflix erwarb die Rechte im März 2017. Gedreht wurde ab April 2017, überwiegend im Margam Park in Neath Port Talbot in Wales.
+
+Weltpremiere war am 21. September 2018 beim Fantastic Fest, der Start bei Netflix folgte am 12. Oktober 2018. Der Film dauert 129 Minuten.
+
+### Hinter den Kulissen
+
+Gareth Evans war zuvor für Kampfchoreografien bekannt. Hier arbeitet er an einem Stoff, der überwiegend von Atmosphäre lebt — und der Hollywood Reporter bemängelte genau an dieser Stelle, dass die Kampfszenen ohne Spannung blieben.
+
+Die Ausgangslage ist eine doppelte Täuschung. Die Gemeinschaft hat Jennifer nicht aus Glaubensgründen verschleppt, sondern des Lösegelds wegen — die Erpressung steht neben dem Kult, nicht in ihm.
+
+Der Dreh im Margam Park liefert dafür die Kulisse: ein Ort, der abgeschlossen wirkt, ohne dass es einer Studiobauten bedürfte.
+
+Dass Michael Sheen den Anführer spielt, verschiebt die Figur weg vom bloßen Fanatiker — die Gemeinschaft hat Regeln, und sie funktioniert eine Weile.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 79 Prozent bei 73 Rezensionen aus, Metacritic 62 von 100.
+
+Variety verglich den Film mit „The Wicker Man" — der naheliegende Bezug für eine Geschichte über einen Außenstehenden, der auf einer britischen Insel auf eine geschlossene Glaubensgemeinschaft trifft.
+
+Der Weg über ein Genrefestival und dann direkt zu Netflix ist für diese Art Produktion inzwischen der Regelfall. Was früher ein begrenzter Kinostart gewesen wäre, erreicht so an einem Tag ein weltweites Publikum.
+
+Für Dan Stevens ist die Hauptrolle Teil einer Reihe von Arbeiten abseits des Fachs, in dem er bekannt wurde.` },
+  {
+    bereich: 'titel', schluessel: 'movie:201', locale: 'de-de',
+    text: `### Worum es geht
+
+Die Besatzung der Enterprise findet einen Androiden-Prototyp namens B-4 — eine frühere Bauform dessen, was Data ist.
+
+Kurz darauf wird das Schiff nach Romulus entsandt. Dort hat Shinzon die Macht übernommen: ein Klon von Captain Picard, aufgewachsen unter Bedingungen, die nichts mit dessen Leben zu tun haben. Shinzon verfügt über die Thalaron-Matrix, eine Massenvernichtungswaffe.
+
+### Entstehungsgeschichte
+
+Regie führte Stuart Baird — es war seine dritte Regiearbeit. Das Drehbuch schrieb John Logan, produziert wurde der Film von Rick Berman.
+
+Patrick Stewart spielt Jean-Luc Picard, Jonathan Frakes den William Riker, Brent Spiner den Data und den B-4, Marina Sirtis die Deanna Troi, LeVar Burton den Geordi La Forge, Michael Dorn den Worf und Gates McFadden die Beverly Crusher. Shinzon wird von Tom Hardy gespielt, Commander Donatra von Dina Meyer, der remanische Vizekönig von Ron Perlman.
+
+In der deutschen Fassung sprechen unter anderem Rolf Schult den Picard, Michael Pan den Data und Torsten Michaelis den Shinzon.
+
+Die Kamera führte Jeffrey L. Kimball, den Schnitt Dallas Puett. Die Musik stammt von Jerry Goldsmith — es war seine fünfte und letzte Arbeit für die Reihe.
+
+Der Film dauert 116 Minuten, kostete rund 60 Millionen Dollar und startete am 13. Dezember 2002 in Nordamerika, am 16. Januar 2003 in Deutschland.
+
+### Hinter den Kulissen
+
+Die Anlage stellt zwei Doppelungen nebeneinander. Picard trifft auf seinen Klon, Data auf eine frühere Version seiner selbst — beide Figuren sehen sich mit der Frage konfrontiert, wie viel an ihnen Herkunft ist und wie viel Entscheidung.
+
+Tom Hardy stand hier am Anfang seiner Laufbahn und spielt einen jungen Patrick Stewart. Die Besetzung ist rückblickend die bemerkenswerteste Entscheidung des Films.
+
+Der Regiewechsel zu Stuart Baird, der aus dem Schnitt kam und nicht aus dem Umfeld der Serie, wurde in der Rezeption häufig als Erklärung für den Bruch mit dem gewohnten Ton herangezogen.
+
+### Einordnung & Wirkung
+
+Bei rund 60 Millionen Dollar Herstellungskosten spielte der Film etwa 67,3 Millionen ein und gilt als finanzieller Misserfolg.
+
+Rotten Tomatoes weist 38 Prozent aus. Roger Ebert schrieb, Star Trek sei früher ziemlich grandios gewesen, sei nun aber eine Kopie einer Kopie einer Kopie.
+
+Das Lexikon des internationalen Films nannte ihn ein ohne erkennbare oder gar nachvollziehbare Begeisterung inszeniertes Science-Fiction-Abenteuer. Prisma fand, das Werk wirke eher wie eine erweiterte Fernsehepisode mit akzeptablen Darstellern. Cinema hielt ihn für besser als „Der Aufstand", aber schwächer als „Der erste Kontakt", mit einer arg zerredeten ersten Hälfte.
+
+Es blieb der letzte Kinofilm mit dieser Besatzung.` },
+  {
+    bereich: 'titel', schluessel: 'movie:207933', locale: 'de-de',
+    text: `### Worum es geht
+
+1899 führt ein Professor in Oxford seiner Klasse eine Patientin vor: Eliza Graves, diagnostiziert mit Hysterie.
+
+Später trifft ein junger Mann in der Anstalt Stonehearst ein und stellt sich als Dr. Edward Newgate vor, der dort arbeiten möchte. Der Leiter, Dr. Silas Lamb, führt das Haus nach eigenen Vorstellungen — die Patienten werden nicht behandelt, sondern in ihren Vorstellungen bestätigt. Newgate merkt bald, dass an diesem Ort etwas grundlegend anders liegt, als es scheint.
+
+### Entstehungsgeschichte
+
+Vorlage ist Edgar Allan Poes Erzählung „The System of Doctor Tarr and Professor Fether" von 1845.
+
+Regie führte Brad Anderson, das Drehbuch schrieb Joseph Gangemi.
+
+Kate Beckinsale spielt Lady Eliza Graves, Jim Sturgess den Mann, der sich als Dr. Edward Newgate vorstellt, Ben Kingsley den Dr. Silas Lamb, Michael Caine den Dr. Benjamin Salt, David Thewlis den Mickey Finn und Brendan Gleeson den Dr. Edward Newgate.
+
+Die Kamera führte Thomas Yatsko, die Musik stammt von John Debney; der Soundtrack erschien am 14. Oktober 2014 digital und am 11. November physisch.
+
+Gedreht wurde ab dem 21. Juni 2013 in Bulgarien. Der ursprüngliche Titel „Eliza Graves" wurde am 31. Juli 2014 geändert.
+
+### Hinter den Kulissen
+
+Poes Erzählung von 1845 ist die Blaupause für eine ganze Gattung von Geschichten. Was sie liefert, ist eine Ausgangslage, in der die Rollen im Haus nicht so verteilt sind, wie ein Besucher annimmt.
+
+Der Besetzungszettel ist dabei selbst ein Hinweis. Dass zwei Darsteller in den Rollenangaben denselben Namen tragen, gehört zur Anlage des Films.
+
+Die Verlegung ins Jahr 1899 setzt die Handlung an einen bestimmten Punkt der Medizingeschichte — an dem sich zwei Auffassungen von Behandlung gegenüberstanden, ohne dass eine sich hätte durchsetzen können.
+
+Bulgarien als Drehort ist die übliche Wahl für europäische Historienbauten außerhalb großer Budgets.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 3,2 Millionen Dollar ein.
+
+Rotten Tomatoes weist 54 Prozent bei 56 Bewertungen aus, Metacritic 52 von 100. Gelobt wurden Besetzung und Atmosphäre, bemängelt fehlende Spannung und ein vorhersehbares Szenario. Die Los Angeles Times befand, der Schreckensfaktor entgehe dem Film — er sei mehr fade als wahnsinnig.
+
+Dieser Einwand trifft die Schwierigkeit der Vorlage. Wer Poes Erzählung kennt, kennt den Dreh; der Film muss also anderswo bestehen als in der Auflösung.
+
+Was bleibt, ist ein Ensemble, das für eine Produktion dieser Größe ungewöhnlich prominent besetzt ist — Ben Kingsley, Michael Caine, David Thewlis und Brendan Gleeson in einem Haus.` },
+  {
+    bereich: 'titel', schluessel: 'movie:530382', locale: 'de-de',
+    text: `### Worum es geht
+
+Philadelphia, 1988. Innerhalb einer Nacht sterben mehrere Menschen an denselben Symptomen: Blutungen aus Nase, Ohren und Augen, ausgelöst von innen.
+
+Der Polizist Thomas Lockhart verfolgt die Täterin in die U-Bahn. Bevor sie von einem Zug erfasst wird, nennt sie ihm Einzelheiten aus seinem Privatleben, die sie nicht wissen kann. Neun Jahre später geschehen dieselben Morde erneut — und noch einmal neun Jahre danach.
+
+### Entstehungsgeschichte
+
+Regie führte Jim Mickle. Das Drehbuch schrieben Gregory Weidman und Geoff Tock.
+
+Boyd Holbrook spielt Thomas Lockhart, Cleopatra Coleman die Rya, Michael C. Hall den Holt, Bokeem Woodbine den Maddox, Rudi Dharmalingam den Naveen Rao, Rachel Keller die Jean, Sarah Dugdale und Quincy Kirkwood die Amy in verschiedenen Lebensaltern und Tony Nappo den Clark.
+
+Produziert wurde der Film von Brian Kavanaugh-Jones, Ben Pugh, Rian Cahill, Linda Moran und Mickle; angekündigt wurde er im Februar 2018.
+
+Die Kamera führte David Lanzenberg, den Schnitt Michael Berenbaum, die Musik stammt von Jeff Grace.
+
+Gedreht wurde vom 2. Juli bis zum 27. August 2018 in Toronto. Die Weltpremiere war am 21. September 2019 beim Fantastic Fest, der Start bei Netflix folgte am 27. September 2019. Der Film dauert 115 Minuten.
+
+### Hinter den Kulissen
+
+Die Struktur ist der eigentliche Einfall. Der Film springt in Neun-Jahres-Schritten — 1988, 1997, 2006 und weiter — und begleitet dieselbe Figur über Jahrzehnte, während der Fall sie nicht loslässt.
+
+Damit erzählt er zwei Dinge zugleich: eine Ermittlung und ein Leben, das an dieser Ermittlung zerbricht. Lockhart verliert im Verlauf mehr, als der Fall wert ist.
+
+Die Kritik benannte die Kehrseite. Crooked Marquee lobte die Darsteller, bemängelte aber, der Film konzentriere sich auf gewöhnliche Polizeiarbeit statt auf seine Science-Fiction-Elemente. /Film nannte ihn eine hektische Mischung aus Science-Fiction, Rätsel, Horror und Action mit erfinderischen Ideen, aber unklarer Genrezuordnung.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 59 Prozent bei 51 Kritiken aus, Metacritic 48 von 100.
+
+Der Guardian vergab drei von fünf Sternen und befand, der Film balanciere seine Bestandteile nicht immer erfolgreich, sein Ringen darum sei aber unterhaltsam genug für einen Abend. IGN hob hochgesteckte Ziele und energische Regie hervor, merkte aber an, der Film sei nicht ganz die Summe seiner Teile.
+
+Diese Urteile decken sich auffallend. Alle benennen dasselbe: eine gute Idee, die sich nicht auf ein Genre festlegen mag.
+
+Für Netflix war der Film Teil einer Reihe von Genrearbeiten, die über Festivals eingeführt und dann direkt auf die Plattform gestellt wurden.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10228', locale: 'de-de',
+    text: `### Worum es geht
+
+In einem Labor entsteht ein geklontes Pokémon: Mewtwo. Es entwickelt Verstand und übermenschliche Kräfte — und befreit sich.
+
+Mewtwo will beweisen, dass Klone den Originalen überlegen sind. Es lädt Trainer auf eine abgelegene Insel ein und stellt sich dem legendären Mew zum Kampf. Was dort beginnt, gerät außer Kontrolle.
+
+### Entstehungsgeschichte
+
+Regie führte Kunihiko Yuyama, das Drehbuch schrieb Takeshi Shudō. Die Musik stammt von Shinji Miyazaki.
+
+Produziert wurde der Film vom Studio OLM; zu den Produzenten gehörten Choji Yoshikawa, Tomoyuki Igarashi und Takemoto Mori.
+
+Der Film erschien 1998 in Japan, dauert 75 Minuten und ist in Deutschland ab 6 Jahren freigegeben. Der deutsche Start war am 13. April 2000. In den Vereinigten Staaten lief er in über 3000 Kinos.
+
+### Hinter den Kulissen
+
+Der Ausgangspunkt ist ungewöhnlich für einen Film, der sich an Kinder richtet. Mewtwo ist kein Bösewicht im herkömmlichen Sinn, sondern ein Geschöpf, das nicht gefragt wurde, ob es entstehen will, und daraus einen Anspruch ableitet.
+
+Die Frage, die der Film stellt, ist entsprechend: Ist ein Klon weniger wert als das Original? Mewtwo beantwortet sie mit Gewalt, und der Film lässt diese Antwort nicht stehen.
+
+Die Auswertung war ein Ereignis eigener Art. Der Film erschien auf dem Höhepunkt einer weltweiten Begeisterung für die Reihe und traf ein Publikum, das die Figuren aus Spiel und Fernsehserie bereits kannte.
+
+Der Start in über 3000 Kinos in den Vereinigten Staaten war für einen japanischen Zeichentrickfilm zu dieser Zeit außergewöhnlich.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 163,64 Millionen Dollar ein. In Japan war er damit der zweiterfolgreichste Anime nach Miyazakis „Prinzessin Mononoke".
+
+In Deutschland sahen ihn 3,22 Millionen Zuschauer; er war dort der sechsterfolgreichste Film des Jahres 2000.
+
+Diese Zahlen ordnen ihn in eine Reihe, in der er sonst nicht auftaucht. Neben einem Werk von Hayao Miyazaki zu stehen, war für einen Film, der aus einem Videospiel hervorging, zu diesem Zeitpunkt neu.
+
+Bemerkenswert ist auch der Abstand zwischen japanischem und deutschem Start: knapp zwei Jahre. Was heute weltweit am selben Tag erscheint, brauchte damals den Weg über Synchronisation und einzelne Verleihentscheidungen.` },
+  {
+    bereich: 'titel', schluessel: 'series:128839', locale: 'de-de',
+    text: `### Worum es geht
+
+Am 26. September 2021 öffnet sich in Los Angeles bei den La Brea Tar Pits ein gewaltiges Erdloch. Häuser, Fahrzeuge und Menschen stürzen hinein.
+
+Wer den Sturz überlebt, findet sich in einer urzeitlichen Landschaft wieder. Oben bleiben die Angehörigen zurück, die nicht wissen, ob unten jemand lebt. Später zeigt sich, dass das Loch kein Erdrutsch ist, sondern ein Durchgang — in das Jahr 10.000 vor unserer Zeitrechnung.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von David Appelbaum.
+
+Natalie Zea spielt Eve Harris, Eoin Macken ihren Mann Gavin, Zyra Gorecki die Tochter Izzy, Jack Martin den Sohn Josh, Chiké Okonkwo den Ty Coleman, Jon Seda den Dr. Sam Velez, Nicholas Gonzalez den Levi Delgado und Tonantzin Carmelo die Paara.
+
+Produziert wurde die Serie von Keshet Studios, Universal Television, Matchbox Pictures und Bad Apple. Gedreht wurde in Melbourne und im ländlichen Victoria für die ersten beiden Staffeln, in Queensland für die dritte; das Budget in Australien betrug 71 Millionen Dollar.
+
+Es entstanden drei Staffeln mit insgesamt 30 Episoden — zehn, vierzehn und sechs. Ausgestrahlt wurden sie bei NBC vom 28. September 2021 bis zum 13. Februar 2024.
+
+### Hinter den Kulissen
+
+Die Anlage teilt die Familie und damit die Erzählung. Ein Teil ist unten in der Vorzeit, ein Teil oben in der Gegenwart — beide Stränge laufen parallel, und beide wissen zu wenig voneinander.
+
+Die absteigende Folgenzahl von zehn über vierzehn auf sechs beschreibt den Verlauf deutlich. Die dritte Staffel war eine verkürzte Abschlussstaffel.
+
+Australien als Drehort für ein Los Angeles der Vorzeit ist eine praktische Entscheidung: Die Landschaften dort liefern das Bild, das die Serie braucht, und 71 Millionen Dollar flossen in die dortige Produktion.
+
+Der 26. September 2021 als Datum des Einsturzes lag zwei Tage vor der Erstausstrahlung — die Serie beginnt also gewissermaßen am Tag ihres eigenen Starts.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 29 Prozent Zustimmung aus.
+
+Die Urteile waren deutlich. The Globe and Mail nannte die Serie erbärmlich schlecht, der Guardian herrlich und unverschämt schlecht.
+
+Bemerkenswert ist die zweite Formulierung. Sie beschreibt nicht dasselbe wie die erste — der Guardian bescheinigt der Serie, dass ihre Maßlosigkeit ein eigenes Vergnügen bereitet.
+
+Dass NBC trotz dieser Aufnahme drei Staffeln bestellte, zeigt, dass die Bewertung durch die Fachkritik und die Zuschauerbindung hier auseinanderliefen.` },
 ];
