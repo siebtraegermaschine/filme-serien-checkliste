@@ -22,7 +22,9 @@
     "kpi:backfill": "node scripts/kpi-backfill.mjs",
     "seo-content": "node scripts/seo-content-laden.mjs",
     "seo-batch": "node scripts/seo-batch.mjs",
-    "seo-batch:pruefen": "node scripts/seo-batch-pruefen.mjs"
+    "seo-batch:pruefen": "node scripts/seo-batch-pruefen.mjs",
+    "seo-pakete": "node scripts/seo-pakete.mjs",
+    "seo-einspielen": "node scripts/seo-einspielen.mjs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
