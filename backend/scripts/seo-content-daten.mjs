@@ -45997,4 +45997,311 @@ Dass eine Serie mit dieser Aufnahme acht Staffeln und 163 Episoden erreichte, be
 Acht Jahre Laufzeit, von 2017 bis 2025, sind für eine wöchentliche Krimiserie eine erhebliche Strecke.
 
 Bemerkenswert ist auch die Herkunft. Die Vorlage — „Die knallharten Fünf" — lief 1975 und 1976; die Neufassung brachte es auf ein Vielfaches an Folgen.` },
+  // ---- Block 105 ----
+  {
+    bereich: 'titel', schluessel: 'movie:110', locale: 'de-de',
+    text: `### Worum es geht
+
+Valentine arbeitet in Genf als Fotomodell. Auf der Straße fährt sie einen Hund an — und bringt ihn zu seinem Besitzer zurück, einem pensionierten Richter.
+
+Der Mann ist zynisch und einsam, und er hat eine Gewohnheit, die Valentine entsetzt: Er hört die Telefonate seiner Nachbarn ab. Gleichzeitig erlebt der Jurastudent Auguste, der ganz in der Nähe wohnt, Zufälle, die der Jugend des Richters gleichen. Valentine und Auguste kreuzen einander ständig, ohne sich zu begegnen.
+
+### Entstehungsgeschichte
+
+Regie führte Krzysztof Kieślowski, der das Drehbuch gemeinsam mit Krzysztof Piesiewicz schrieb. Produziert wurde der Film von Marin Karmitz.
+
+Irène Jacob spielt Valentine, Jean-Louis Trintignant den Richter, Jean-Pierre Lorit den Auguste und Samuel Le Bihan den Fotografen.
+
+Die Kamera führte Piotr Sobociński, den Schnitt Jacques Witta, die Musik stammt von Zbigniew Preisner und Bertrand Lenclos.
+
+Der Film entstand 1994 als französisch-polnisch-schweizerische Produktion in französischer Sprache, dauert 99 Minuten und ist ab 6 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Der Film ist der Abschluss einer Trilogie, und er löst sie ein: Bei einem Fährunglück auf einer Reise nach England treffen Überlebende aus allen drei Filmen zusammen.
+
+Das ist mehr als eine Verbeugung. Kieślowski hatte drei Geschichten erzählt, die nebeneinander liefen; erst hier zeigt sich, dass sie in derselben Welt spielen.
+
+Die eigentliche Konstruktion ist aber die Doppelung. Was Auguste erlebt, hat der Richter Jahrzehnte zuvor erlebt — der Film stellt zwei Leben nebeneinander, die um eine Generation versetzt sind.
+
+Das Abhören der Nachbarn ist dabei der moralische Prüfstein. Der Richter tut etwas Verwerfliches, und Valentine muss entscheiden, wie sie sich dazu verhält.
+
+### Einordnung & Wirkung
+
+Metacritic vergab 100 von 100 Punkten, Rotten Tomatoes weist 100 Prozent Zustimmung aus — beides Höchstwerte, die kaum ein Film erreicht.
+
+Die Kritik nannte den Film einen glänzenden formalen Abschluss und sah darin menschliche Missverständnisse und Formen der Entfremdung, durchzogen von Skepsis und zugleich geprägt von humanem Interesse am Schicksal anderer.
+
+Ausgezeichnet wurde er mit dem César für die beste Filmmusik. Hinzu kamen drei Oscar-Nominierungen — für Regie, Drehbuch und Kamera —, vier BAFTA-Nominierungen und mehrere internationale Kritikerpreise, darunter als bester ausländischer Film in Boston, Chicago, Los Angeles und New York.
+
+Drei Oscar-Nominierungen für einen französischsprachigen Film, darunter für Regie und Drehbuch, sind ein außergewöhnlicher Befund — und sie gingen an einen Film, der zugleich das Ende eines Werks markierte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:574', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein amerikanischer Arzt macht mit Frau und Sohn Urlaub in Marokko. Dort erfahren die beiden von einem geplanten Attentat: In London soll ein ausländischer Staatsmann ermordet werden.
+
+Bevor Ben McKenna damit zur Polizei gehen kann, entführen die Verschwörer seinen Sohn Hank. Von da an haben die Eltern zwei Aufgaben, die einander ausschließen: das Attentat verhindern und das Kind zurückbekommen.
+
+### Entstehungsgeschichte
+
+Regie führte Alfred Hitchcock, der den Film gemeinsam mit Herbert Coleman produzierte. Das Drehbuch schrieb John Michael Hayes unter Mitwirkung von Angus MacPhail.
+
+James Stewart spielt Dr. Ben McKenna, Doris Day seine Frau Jo, Christopher Olsen den Sohn Hank, Brenda de Banzie die Lucy Drayton, Bernard Miles den Edward Drayton, Ralph Truman den Inspektor Buchanan, Daniel Gélin den Louis Bernard und Reggie Nalder den Auftragsmörder Rien.
+
+Die Kamera führte Robert Burks, den Schnitt George Tomasini. Die Musik stammt von Bernard Herrmann, Ray Evans und Jay Livingston; produziert wurde der Film von Paramount Pictures.
+
+Teile entstanden an Originalschauplätzen in Marrakesch, weitere im Studio mit Rückprojektionen. Der Film erschien 1956 und dauert 120 Minuten.
+
+### Hinter den Kulissen
+
+Hitchcock musste zu drehen beginnen, ohne fertiges Drehbuch. Hayes' Entwürfe wurden häufig noch am Abend vor dem Dreh von Hitchcock und MacPhail umgeschrieben; die Produktion verzögerte sich um 34 Drehtage.
+
+Der Höhepunkt spielt in der Royal Albert Hall während eines Konzerts. Bernard Herrmann, Hitchcocks Komponist, tritt darin selbst auf und dirigiert die „Storm Clouds Cantata" des australischen Komponisten Arthur Benjamin.
+
+Das Studio verpflichtete Doris Day vertraglich, ein Lied zu singen. Sie zögerte zunächst bei „Que Sera, Sera" — sie hielt es für nur ein Kinderlied.
+
+Dieses Lied gewann 1957 den Oscar als bester Song und wurde 1990 mit dem ASCAP-Award als meistgespielter Standard aus einem Spielfilm ausgezeichnet.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 87 Prozent bei 39 Kritiken aus.
+
+Bosley Crowther bescheinigte dem Film in der New York Times Schlagkraft und eine schnell fortschreitende Handlung; Stewart spiele besser als in „Das Fenster zum Hof", Day sei als verzweifelte Mutter überraschend wirkungsvoll. Der Filmdienst nannte ihn mit Intelligenz und Raffinesse inszeniert und sah Hitchcocks Stoff zum Meisterwerk weiterentwickelt.
+
+Dave Kehr urteilte anders: Der Film wirke uncharakteristisch starr und fromm, als habe Hitchcock ihn eher aus Pflicht gedreht — die stärkste Szene sei die stille Sequenz, in der Stewart seiner Frau Beruhigungstabletten gibt.
+
+Hitchcock war in Cannes für die Goldene Palme nominiert.
+
+Bemerkenswert ist die Verfügbarkeit. Der Film gehörte zu den fünf verlorenen Hitchcocks, weil der Regisseur die Rechte zurückgekauft hatte; er war jahrzehntelang nicht zu sehen und wurde erst 1984 nach 25 Jahren wieder gezeigt. Die deutsche Synchronfassung von 1956 gehört zu den wenigen erhaltenen fremdsprachigen Tonspuren.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4808', locale: 'de-de',
+    text: `### Worum es geht
+
+Regina Lampert kehrt nach Paris zurück und findet ihre Wohnung leer vor. Alles ist verkauft. Ihr Mann ist ermordet worden.
+
+Kurz darauf stehen drei Männer vor ihr, ehemalige Kriegskameraden ihres Mannes. Sie verlangen 250.000 Dollar aus einem Golddiebstahl aus der Zeit der Nationalsozialisten. Ein Amerikaner bietet Regina Hilfe an — und stellt sich im Verlauf unter immer neuen Namen vor.
+
+### Entstehungsgeschichte
+
+Regie führte Stanley Donen, der den Film auch produzierte. Das Drehbuch schrieb Peter Stone.
+
+Cary Grant spielt den Mann, der sich als Peter Joshua, Alexander Dyle, Adam Canfield und schließlich als Brian Cruikshank vorstellt; Audrey Hepburn ist Regina Lampert, Walter Matthau der Hamilton Bartholomew, James Coburn der Tex Panthollow und George Kennedy der Herman Scobie.
+
+Die Kamera führte Charles Lang, den Schnitt Jim Clark, die Musik stammt von Henry Mancini.
+
+Der Film erschien 1963 in den Vereinigten Staaten, dauert 113 Minuten und ist ab 12 Jahren freigegeben. Die deutsche Premiere war am 13. Dezember 1963.
+
+### Hinter den Kulissen
+
+Der Film wird häufig als der beste Hitchcockfilm bezeichnet, der nicht von Hitchcock stammt — und das trifft die Machart.
+
+Was ihn darüber hinaus auszeichnet, ist die Mischung. Kriminalfilm, Thriller, Agentenfilm, Romanze und Screwball-Komödie laufen nebeneinander, ohne dass eine Tonlage die andere verdrängt.
+
+Der Wechsel der Identitäten ist dabei das Grundprinzip. Vier Namen für eine Figur bedeuten, dass die Hauptdarstellerin — und mit ihr das Publikum — nie weiß, mit wem sie es zu tun hat.
+
+Henry Mancinis Titelsong war 1964 für den Oscar nominiert.
+
+### Einordnung & Wirkung
+
+Audrey Hepburn gewann 1965 den BAFTA als beste Schauspielerin; 1964 waren beide Hauptdarsteller für den Golden Globe nominiert.
+
+2022 wurde der Film ins National Film Registry aufgenommen.
+
+Das Lexikon des internationalen Films nannte ihn einen exzellenten Kriminalfilm mit geschickt hinausgezögerter Pointe. Die Prisma-Filmdatenbank lobte den temporeichen Mix und vergab vier von fünf Sternen.
+
+Die Aufnahme ins National Film Registry — fast sechzig Jahre nach dem Start — ist die formelle Bestätigung dessen, was das Publikum längst entschieden hatte: Der Film gehört zum Bestand.` },
+  {
+    bereich: 'titel', schluessel: 'movie:705996', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Hobbykletterer stürzt in den Tod. Kommissar Jang Hae-joon untersucht den Fall — und richtet seinen Blick auf die Witwe: Song Seo-rae, deutlich jünger als der Tote und aus China stammend.
+
+Sie hat ein Alibi, das plausibel wirkt. Trotzdem observiert Hae-joon sie — und irgendwann beobachtet er nicht mehr aus dienstlichen Gründen.
+
+### Entstehungsgeschichte
+
+Regie führte Park Chan-wook — es war sein zwölfter Spielfilm —, das Drehbuch schrieb er gemeinsam mit Chung Seo-kyung. Produziert wurde der Film von Park und Go Dae-suk für Moho und CJ Entertainment.
+
+Park Hae-il spielt Chang Hae-joon, Tang Wei die Song Seo-rae, Lee Jung-hyun die Jeong-an, Go Kyung-pyo den Soo-wan, Park Yong-woo den Ho-sin und Jeong Ha-dam die Oh Ga-in.
+
+Die Kamera führte Kim Ji-yong, den Schnitt Kim Sang-beom, die Musik stammt von Cho Young-wuk.
+
+Die Dreharbeiten begannen im Oktober 2020, der Schnitt war im Oktober 2021 abgeschlossen. Der Film dauert 138 Minuten und ist ab 16 Jahren freigegeben. Premiere war am 23. Mai 2022 in Cannes, der deutsche Kinostart am 2. Februar 2023.
+
+### Hinter den Kulissen
+
+Die Anlage ist die einer Ermittlung, die sich gegen den Ermittler wendet. Hae-joon führt eine Beobachtung, die ihm entgleitet — was als Dienstpflicht beginnt, wird Besessenheit.
+
+Peter Bradshaw nannte den Film im Guardian eine sensationelle Black-Widow-Noir-Romanze und verglich ihn mit Arbeiten Hitchcocks. Der Vergleich liegt nahe: Ein Mann, der eine Frau beobachtet und dabei sich selbst verliert, ist ein Grundmuster dieses Kinos.
+
+Die Herkunft der Figur gehört zur Konstruktion. Seo-rae ist Chinesin in Südkorea — zwischen ihr und dem Ermittler steht nicht nur ein Verdacht, sondern auch eine Sprache.
+
+Jan Küveler hob in der Welt die Verbindung von Krimi und Liebesgeschichte hervor und lobte besonders die Kamera.
+
+### Einordnung & Wirkung
+
+In Cannes wurde Park Chan-wook 2022 für die beste Regie ausgezeichnet. Bei den Blue Dragon Awards gewann der Film als bester Film, für die Regie, für Tang Wei als beste Hauptdarstellerin und für die Musik. Insgesamt kam er auf über 39 Preise bei mehr als 150 Nominierungen.
+
+2023 folgten eine Golden-Globe-Nominierung als bester fremdsprachiger Film und die Aufnahme in die Oscar-Vorauswahl für die beste internationale Produktion.
+
+Nicht alle waren überzeugt. Daniel Kothenschulte fand den Film in der Berliner Zeitung kunstfertig, aber unnötig lang. Andreas Kilb urteilte in der FAZ, Parks Kino wirke gealtert und sehe sehr elegant aus — aber Stil sei eben nicht alles.
+
+Beide Einwände zielen auf dieselbe Stelle: 138 Minuten für eine Geschichte, die von Blicken lebt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:817758', locale: 'de-de',
+    text: `### Worum es geht
+
+Lydia Tár steht an der Spitze. Sie ist die erste Frau als Chefdirigentin eines großen deutschen Orchesters, arbeitet an Mahlers Fünfter und leitet ein Förderprogramm für Dirigentinnen.
+
+Dann stirbt eine ehemalige Schülerin, und Vorwürfe des sexuellen Machtmissbrauchs werden laut. Was zuvor als Strenge galt, erscheint plötzlich in anderem Licht — und Tár verliert die Kontrolle über die Erzählung, die über sie geführt wird.
+
+### Entstehungsgeschichte
+
+Todd Field führte Regie und schrieb das Drehbuch. Es war seine erste Regiearbeit seit „Little Children" von 2006 — nach fünfzehn Jahren.
+
+Cate Blanchett spielt Lydia Tár, Nina Hoss die Sharon Goodnow, Noémie Merlant die Francesca Lentini, Mark Strong den Eliot Kaplan, Sophie Kauer die Olga Metkina, Julian Glover den Andris Davis und Allan Corduner den Sebastian Brix.
+
+Produziert wurde der Film von Field, Scott Lambert und Alexandra Milchan. Die Kamera führte Florian Hoffmeister, den Schnitt Monika Willi, die Musik stammt von Hildur Guðnadóttir.
+
+Gedreht wurde ab August 2021 überwiegend in Berlin, dazu im Kulturpalast Dresden, im Orangerieschloss Potsdam und in der Berliner Hufeisensiedlung. Der Film dauert 158 Minuten; gesprochen wird Englisch und Deutsch.
+
+### Hinter den Kulissen
+
+Lydia Tár ist eine erfundene Figur. Der Film behandelt sie durchweg so, als wäre sie es nicht — mit Werdegang, Aufnahmen, Interviews.
+
+Das ist die entscheidende Entscheidung. Wer über Machtmissbrauch im Kulturbetrieb erzählen will, ohne einen konkreten Fall zu verhandeln, braucht eine Figur, die es geben könnte.
+
+Die Verlagerung nach Berlin verankert das in einer realen Umgebung — ein deutsches Spitzenorchester, deutsche Sprache, deutsche Institutionen.
+
+Die Kritik verglich Fields Arbeit mit Michael Haneke und beschrieb die Regie als sehr europäisch, mit kühler Präzision; manche fühlten sich an Horrorfilme Dario Argentos erinnert.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 90 Prozent bei einem Schnitt von 8,2 von 10 aus, Metacritic 91 Punkte — universelle Anerkennung. Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
+
+Cate Blanchett gewann 2022 in Venedig die Coppa Volpi als beste Darstellerin, 2023 den Golden Globe und den BAFTA. Todd Field erhielt 2022 den Gotham Award für das beste Drehbuch.
+
+Bei der Oscarverleihung 2023 war der Film in sechs Kategorien nominiert — bester Film, Regie, Originaldrehbuch, Hauptdarstellerin, Kamera und Schnitt.
+
+David Ehrlich vergab bei IndieWire die Bestnote und nannte den Film spannend und täuschend streng, Blanchetts Leistung erschütternd. Peter Bradshaw gab im Guardian vier von fünf Sternen und nannte ihre Darstellung kolossal.
+
+Sechs Oscar-Nominierungen für einen 158 Minuten langen Film über eine Dirigentin sind ein Befund, mit dem vor der Premiere niemand gerechnet hätte.` },
+  {
+    bereich: 'titel', schluessel: 'series:1104', locale: 'de-de',
+    text: `### Worum es geht
+
+New York in den sechziger Jahren. In der Werbeagentur Sterling Cooper an der Madison Avenue werden Kampagnen ausgedacht, Konkurrenten ausgestochen und Ehen ruiniert.
+
+Im Mittelpunkt steht Donald Draper, der beste Mann der Agentur — und einer, dessen Vergangenheit nicht zu dem passt, was alle über ihn zu wissen glauben. Um ihn herum verändert sich das Land: Kennedys Wahl, die Kubakrise, das Attentat.
+
+### Entstehungsgeschichte
+
+Entwickelt wurde die Serie von Matthew Weiner. Er schrieb das Drehbuch bereits 1999, während er für die Serie „Becker" arbeitete. HBO lehnte das Projekt 2002 ab. David Chase, der Schöpfer der „Sopranos", unterstützte Weiner und ermöglichte die Herstellung des Pilotfilms mit seinem eigenen Team.
+
+Jon Hamm spielt Don Draper, Elisabeth Moss die Peggy Olson, Vincent Kartheiser den Pete Campbell, January Jones die Betty Francis, Christina Hendricks die Joan Harris und John Slattery den Roger Sterling. In der deutschen Fassung sprechen Sascha Rotermund den Draper, Corinna Riegner die Olson und Bernd Vollbrecht den Sterling.
+
+Produziert wurde die Serie von Lionsgate Television. Es entstanden sieben Staffeln mit insgesamt 92 Episoden zu je 47 Minuten, ausgestrahlt vom 19. Juli 2007 bis zum 17. Mai 2015 bei AMC.
+
+In Deutschland lief sie vom 6. Juli 2009 bis zum 18. Mai 2015 beim FOX Channel, später bei ZDFneo und Arte; in der Schweiz ab dem 18. August 2011 bei SRF 1.
+
+### Hinter den Kulissen
+
+Die Entstehungsgeschichte ist selbst bemerkenswert. Ein Drehbuch von 1999, eine Absage von HBO im Jahr 2002, und erst 2007 die Ausstrahlung — acht Jahre zwischen Idee und Sendung.
+
+Dass ausgerechnet David Chase den Ausschlag gab, ist folgerichtig. Weiner arbeitete an den „Sopranos"; ohne diese Verbindung wäre der Pilotfilm nicht entstanden.
+
+Die Werbeagentur als Schauplatz erlaubt der Serie einen doppelten Blick. Sie zeigt Menschen, die beruflich Bilder von Familie, Glück und Fortschritt herstellen — und privat an genau diesen Bildern scheitern.
+
+Die historischen Ereignisse laufen dabei im Hintergrund mit, statt die Handlung zu bestimmen.
+
+### Einordnung & Wirkung
+
+Die Serie gewann von 2007 bis 2009 dreimal in Folge den Golden Globe als beste Dramaserie; Jon Hamm wurde als bester Hauptdarsteller ausgezeichnet und erhielt 2015 einen Emmy.
+
+Von 2008 bis 2011 gewann sie viermal in Folge den Emmy als beste Dramaserie.
+
+Sie gilt als eine der angesehensten Serien der Fernsehgeschichte und prägte den sogenannten Mad-Men-Effekt, der die Ästhetik der fünfziger und sechziger Jahre neu populär machte.
+
+Vier Emmys in Folge als beste Dramaserie hat kaum eine Produktion erreicht. Dass eine Serie über Werbefachleute die Mode und Einrichtung ihrer Zeit zurück in die Gegenwart trug, ist dabei eine Pointe, die zum Gegenstand passt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:374473', locale: 'de-de',
+    text: `### Worum es geht
+
+Daniel Blake ist 59, Zimmermann und verwitwet. Nach einem Herzinfarkt verbietet ihm sein Arzt zu arbeiten.
+
+Die Behörde sieht das anders und stuft ihn als arbeitsfähig ein. Damit beginnt sein Kampf mit einem Sozialsystem, das ihn zwischen zwei unvereinbaren Vorgaben stehen lässt. Er freundet sich mit Katie an, einer alleinerziehenden Mutter, die von derselben Bürokratie schikaniert wird.
+
+### Entstehungsgeschichte
+
+Regie führte Ken Loach, das Drehbuch schrieb Paul Laverty. Produziert wurde der Film von Rebecca O'Brien.
+
+Dave Johns spielt Daniel Blake, Hayley Squires die Katie, Dylan McKiernan den Dylan, Briana Shann die Daisy und Helen Dixon eine Polizeibeamtin.
+
+Die Kamera führte Robbie Ryan, den Schnitt Jonathan Morris, die Musik stammt von George Fenton. Als verbindendes Element zwischen Daniels Erinnerungen und Katies Familie dient „Sailing By" von Ronald Binge aus dem Jahr 1963.
+
+Der Film entstand 2016 als britisch-französisch-belgische Produktion und dauert 100 Minuten. Gedreht wurde in Newcastle upon Tyne, unter anderem in der Central Library.
+
+### Hinter den Kulissen
+
+Der Gegenstand ist nicht Armut, sondern Verwaltung. Was Daniel zusetzt, sind Formulare, Warteschleifen und Termine — ein System, das nicht böswillig ist, aber so gebaut, dass es Menschen wie ihn ausscheidet.
+
+Ken Loach macht daraus keine Anklage mit erhobenem Zeigefinger. Die Kritik nannte den Film den unversöhnlichsten Loach-Film seit Langem, geradlinig erzählt und mit zurückhaltenden Darstellern.
+
+Die Musik arbeitet nach demselben Grundsatz. Statt zu untermalen, verbindet „Sailing By" von Ronald Binge aus dem Jahr 1963 Daniels Erinnerungen mit Katies Familie.
+
+Der Dreh in Newcastle verortet das an einem konkreten Ort statt in einem abstrakten Großbritannien.
+
+### Einordnung & Wirkung
+
+In Cannes gewann Ken Loach 2016 die Goldene Palme.
+
+Bei den British Independent Film Awards wurden Dave Johns als bester Schauspieler und Hayley Squires als beste Newcomerin ausgezeichnet. 2017 folgten der BAFTA als bester britischer Film und der César als bester ausländischer Film; beim Europäischen Filmpreis 2016 gewann der Film den European University Film Award.
+
+Rotten Tomatoes weist 92 Prozent aus.
+
+Eine Goldene Palme für einen Film über das britische Sozialsystem ist eine politische Entscheidung — und sie wurde in Großbritannien auch so verhandelt.
+
+Dass derselbe Film daneben den BAFTA als besten britischen Film und den César als besten ausländischen Film erhielt, zeigt, dass die Wirkung nicht auf ein Festival beschränkt blieb.` },
+  {
+    bereich: 'titel', schluessel: 'movie:565310', locale: 'de-de',
+    text: `### Worum es geht
+
+Billi lebt in New York und schreibt. Dann erfährt sie, dass ihre Großmutter in China unheilbar an Lungenkrebs erkrankt ist.
+
+Die Familie beschließt, ihr die Diagnose zu verschweigen. Damit alle sich verabschieden können, ohne dass die Großmutter etwas merkt, wird die Hochzeit eines Cousins vorgezogen. Billi reist mit — und hält die Lüge kaum aus.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf dem Leben der Regisseurin. Lulu Wang hatte die Geschichte zuerst im April 2016 in einem Radiobeitrag für „This American Life" erzählt, unter dem Titel „What You Don't Know".
+
+Wang führte Regie und schrieb das Drehbuch. Produziert wurde der Film unter anderem von Daniele Melia, Marc Turtletaub, Peter Saraf, Andrew Miano, Chris Weitz, Jane Zheng, Anita Gou und Wang selbst.
+
+Awkwafina spielt Billi Wang, Tzi Ma den Vater Haiyan, Diana Lin die Mutter Jian, Zhao Shu-zhen die Großmutter Nai Nai und Chen Han den Cousin Hao Hao.
+
+Die Kamera führte Anna Franquesa Solano, die Musik stammt von Alex Weston. Gedreht wurde im Juni 2018 an 24 Tagen in Changchun in China sowie in New York. Das Budget betrug drei Millionen Dollar.
+
+Premiere war am 25. Januar 2019 in Sundance; A24 erwarb die weltweiten Rechte für sieben Millionen Dollar und brachte den Film am 12. Juli 2019 in die amerikanischen Kinos.
+
+### Hinter den Kulissen
+
+Die Finanzierung war schwierig. Wang berichtete, viele Geldgeber hätten eine prominente weiße Figur in der Erzählung sehen wollen und die Geschichte kommerzieller gewünscht.
+
+Dass der Film trotzdem so entstand, wie er gedacht war, ist sein wichtigster Umstand. Er wird überwiegend auf Mandarin gesprochen und spielt zum größten Teil in China.
+
+Die Kamerafrau Anna Franquesa Solano nannte zwar Bezugspunkte, betonte aber, ihre Hauptinspiration sei das Zusammensein mit Lulu Wangs Familie in Changchun gewesen.
+
+Der Nachspann enthält den entscheidenden Satz: Sechs Jahre nach ihrer Diagnose lebte Wangs Großmutter noch immer — und wusste noch immer nichts von ihrer Krankheit.
+
+### Einordnung & Wirkung
+
+Bei drei Millionen Dollar Herstellungskosten spielte der Film weltweit 23,1 Millionen ein — 17,7 Millionen in den Vereinigten Staaten und Kanada, 5,4 Millionen anderswo. In China selbst blieb er bei 580.000 Dollar.
+
+Rotten Tomatoes weist 97 Prozent aus, Metacritic 89 von 100.
+
+Awkwafina gewann 2020 den Golden Globe als beste Hauptdarstellerin und 2019 den Gotham Award; der Film erhielt den Independent Spirit Award als bester Film, Zhao Shu-zhen den für die beste Nebendarstellerin. 2021 führte die Writers Guild of America das Drehbuch auf Platz 91 der 101 besten Drehbücher des 21. Jahrhunderts.
+
+Christy Lemire schrieb, Zhao Shu-zhen sei die häufigste Quelle des Lachens — und werde einem still das Herz brechen. Richard Lawson hob in Vanity Fair hervor, Wang erzähle bewegend nicht nur von familiärer Liebe, sondern auch von der Erfahrung des Einwanderns.
+
+Dass ausgerechnet in China kaum jemand den Film sah, ist die stillste Pointe seiner Bilanz.` },
 ];
