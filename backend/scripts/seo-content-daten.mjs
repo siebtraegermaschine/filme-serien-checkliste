@@ -48146,4 +48146,303 @@ Der Weg der Auswertung ist bemerkenswert: Kinostart am 19. September 2023, Strea
 Für einen Film ohne Dialog ist die Aufnahme bemerkenswert gut — und sie beruht fast ausschließlich auf der Hauptdarstellerin und der Machart.
 
 22,8 Millionen Dollar für ein Werk mit einer Darstellerin, einem Haus und fünf Wörtern zeigen zugleich, wo das Geld hingeht: in die Effekte von DNEG.` },
+  // ---- Block 112 ----
+  {
+    bereich: 'titel', schluessel: 'movie:9441', locale: 'de-de',
+    text: `### Worum es geht
+
+Jackie und Luke Harrison sind geschieden und wollen ihre beiden Kinder Anna und Ben gemeinsam großziehen. Das funktioniert, solange nichts dazwischenkommt.
+
+Dann kommt Lukes neue Freundin dazu: Isabel Kelly, eine erfolgreiche Modefotografin. Die Kinder nehmen sie unterschiedlich auf, Jackie gar nicht. Und dann erfährt Jackie, dass sie an einem Lymphom erkrankt ist.
+
+### Entstehungsgeschichte
+
+Regie führte Chris Columbus. Das Drehbuch schrieben Gigi Levangie, Jessie Nelson, Steven Rogers, Karen Leigh Hopkins und Ron Bass nach einer Geschichte von Levangie.
+
+Julia Roberts spielt Isabel Kelly, Susan Sarandon die Jackie Harrison, Ed Harris den Luke Harrison, Jena Malone die Tochter Anna, Liam Aiken den Sohn Ben, Lynn Whitfield die Dr. Sweikert und Darrell Larson den Duncan Samuels.
+
+Produziert wurde der Film von Wendy Finerman, Columbus, Mark Radcliffe und Michael Barnathan für Columbia Pictures, 1492 Pictures und Wendy Finerman Productions.
+
+Die Kamera führte Donald M. McAlpine, den Schnitt Neil Travis, die Musik stammt von John Williams.
+
+Gedreht wurde im Bundesstaat New York und in New Jersey. Der Film dauert 125 Minuten, kostete 50 Millionen Dollar und startete am 25. Dezember 1998.
+
+### Hinter den Kulissen
+
+Der Film gehört zwei Darstellerinnen, und er weiß das. Julia Roberts und Susan Sarandon spielen Frauen, die einander nicht ausstehen können und dasselbe wollen — dass es den Kindern gut geht.
+
+Dass fünf Autoren am Drehbuch arbeiteten, ist bei Studioproduktionen dieser Größe nicht ungewöhnlich, hinterlässt aber Spuren. Genau daran setzte die Kritik an.
+
+John Williams schrieb die Musik — ein Name, den man bei einem Familiendrama seltener erwartet als bei den großen Abenteuerfilmen.
+
+Der Kinostart lag auf dem ersten Weihnachtstag 1998 — ein Termin, den Studios für Familienstoffe reservieren.
+
+### Einordnung & Wirkung
+
+Bei 50 Millionen Dollar Herstellungskosten spielte der Film in den Vereinigten Staaten 91,1 Millionen ein, weltweit 159,7 Millionen. Das Startwochenende brachte 19,1 Millionen und Platz zwei.
+
+Rotten Tomatoes weist 44 Prozent bei 93 Kritiken aus, mit dem Befund, die solide Arbeit von Roberts und Sarandon reiche nicht, um den Film vor einer Geschichte zu retten, deren Manipulationen die Wirkung verwässerten. Metacritic vergab 58 von 100. Das Publikum bewertete bei CinemaScore mit einem A.
+
+Ausgezeichnet wurden vor allem die Darsteller: Ed Harris erhielt den Preis des National Board of Review als bester Nebendarsteller, Susan Sarandon den der San Diego Film Critics Society und eine Golden-Globe-Nominierung; Julia Roberts gewann den Blockbuster Entertainment Award, Jena Malone und Liam Aiken je einen Young Artist Award.
+
+Der Abstand zwischen 44 Prozent und einem A beim Publikum beschreibt den Streitpunkt: Was die Kritik als Manipulation las, wirkte beim Publikum wie beabsichtigt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9886', locale: 'de-de',
+    text: `### Worum es geht
+
+Johnny arbeitet als Kurier — nur transportiert er keine Pakete, sondern Daten, gespeichert in einem Implantat in seinem Kopf.
+
+Ein Auftrag übersteigt die Kapazität. Johnny lädt mehr, als das Implantat verträgt, und leidet fortan unter Aussetzern. Was er trägt, ist die Grundlage für ein Heilmittel gegen NAS, das Nerve Attenuation Syndrome — und ein Konzern will genau das verhindern und setzt die Yakuza auf ihn an.
+
+### Entstehungsgeschichte
+
+Vorlage ist William Gibsons Kurzgeschichte „Der mnemonische Johnny". Gibson schrieb auch das Drehbuch; Regie führte Robert Longo.
+
+Keanu Reeves spielt Johnny Mnemonic, Ice-T den J-Bone, Takeshi Kitano den Takahashi, Dolph Lundgren einen Straßenprediger und Udo Kier den Ralfi.
+
+Produziert wurde der Film von Don Carmody als kanadisch-amerikanische Gemeinschaftsproduktion. Die Kamera führte François Protat, den Schnitt Ronald Sanders, die Musik stammt von Brad Fiedel.
+
+Der Film erschien 1995 und dauert 92 Minuten. In Deutschland war er zunächst ab 18 Jahren freigegeben, seit August 2017 ab 16.
+
+### Hinter den Kulissen
+
+Dass der Autor der Vorlage sein eigenes Drehbuch schrieb, ist ungewöhnlich — und schützte den Film nicht vor dem Hauptvorwurf.
+
+Die Kritik bemängelte, Gibsons vielschichtige Handlung sei zu einem geradlinigen, hollywoodtauglichen Actionplot vereinfacht worden, dazu naive Dialoge und lustlose Darstellungen. Gelobt wurden Ausstattung und Spezialeffekte.
+
+Der Film spielt im Jahr 2021 — eine Zukunft, die inzwischen Vergangenheit ist. Was er sich darunter vorstellte, ist damit selbst ein Dokument geworden.
+
+Die Besetzungsliste ist eine eigene Merkwürdigkeit. Keanu Reeves, Ice-T, Takeshi Kitano, Dolph Lundgren und Udo Kier in einem Film ergeben eine Zusammenstellung, die man nicht plant, sondern die entsteht.
+
+### Einordnung & Wirkung
+
+Die Herabstufung der Altersfreigabe von 18 auf 16 im August 2017 ist ein stiller Hinweis darauf, wie sich Maßstäbe verschieben — derselbe Film, zweiundzwanzig Jahre später anders eingestuft.
+
+Gibsons Vorlage wird dem Cyberpunk zugerechnet. Dass ausgerechnet der Autor selbst das Drehbuch schrieb und der Film trotzdem als Vereinfachung seiner Handlung galt, ist die Pointe dieser Produktion.
+
+Was bleibt, sind die gelobte Ausstattung und die Spezialeffekte — und eine Besetzung, die es so kein zweites Mal gibt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10158', locale: 'de-de',
+    text: `### Worum es geht
+
+Billy Hoyle hat einmal College-Basketball gespielt. Heute verdient er sein Geld auf Straßenplätzen — indem er sich unterschätzen lässt und dann gewinnt.
+
+Sidney Deane durchschaut ihn und macht ihm einen Vorschlag: gemeinsam. Zwei gegen zwei, mit verteilten Rollen — Billy sieht aus, als könne er nichts, und genau darauf setzen sie. Die Rechnung geht auf, solange keiner den anderen betrügt.
+
+### Entstehungsgeschichte
+
+Ron Shelton schrieb das Drehbuch und führte Regie. Die Idee kam ihm, während er an einem anderen Buch arbeitete; er stützte sich auf seine eigene Zeit als College-Basketballspieler und auf Pickup-Spiele im YMCA.
+
+Woody Harrelson spielt Billy Hoyle, Wesley Snipes den Sidney Deane, Rosie Perez die Gloria Clemente, Tyra Ferrell die Rhonda Deane, Kadeem Hardison den Junior, Freeman Williams den Duck Johnson, Louis Price den Eddie Faroo und Marques Johnson den Raymond; Alex Trebek tritt als er selbst auf.
+
+Die Kamera führte Russell Boyd, die Musik stammt von Bennie Wallace. Es erschienen zwei Soundtracks — einer mit R&B, einer mit Hip-Hop unter dem Titel „White Men Can't Rap".
+
+Das Budget betrug 31 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Für die Basketballszenen war Bob Lanier als Trainer verpflichtet, ein früherer NBA-Spieler und Mitglied der Hall of Fame. Die Hauptdarsteller absolvierten ein einmonatiges Trainingslager.
+
+Laniers Beobachtung ist die schönste Notiz zu diesem Film: Harrelson war tatsächlich der bessere Spieler von beiden — also genau der, dessen Figur für unfähig gehalten wird.
+
+Die Rolle der Gloria war ursprünglich anders angelegt und wurde geändert, nachdem Rosie Perez bei Shelton bleibenden Eindruck hinterlassen hatte. Ihre Figur will bei „Jeopardy!" antreten, weshalb Alex Trebek selbst auftritt.
+
+Der Titel benennt ein Vorurteil, und der ganze Film handelt davon, wie sich damit Geld verdienen lässt.
+
+### Einordnung & Wirkung
+
+Bei 31 Millionen Dollar Herstellungskosten spielte der Film in Nordamerika 76,25 Millionen ein, weltweit 90,8 Millionen — der sechzehnterfolgreichste Film des Jahres 1992.
+
+Rotten Tomatoes weist 75 Prozent bei 106 Kritiken aus, Metacritic 65 Punkte.
+
+Roger Ebert vergab dreieinhalb von fünf Sternen und befand, es sei nicht einfach ein Basketballfilm. Janet Maslin lobte Snipes' komische, wissende Darstellung mit körperlichem Schwung.
+
+Und ein Urteil ragt heraus: Stanley Kubrick zählte den Film zu seinen Lieblingsfilmen.
+
+Für eine Sportkomödie ist das eine außergewöhnliche Empfehlung — und ein Hinweis darauf, dass der Film mehr betreibt als Sport.` },
+  {
+    bereich: 'titel', schluessel: 'movie:157', locale: 'de-de',
+    text: `### Worum es geht
+
+Spock ist tot. Die Enterprise kehrt beschädigt zur Erde zurück, und Admiral Kirk erfährt, dass sein Schiff außer Dienst gestellt wird.
+
+Dann stellt sich heraus, dass Spocks Geist nicht verloren ist — er lebt in Dr. McCoy weiter, und sein Körper hat sich auf dem Genesis-Planeten regeneriert. Kirk stiehlt die Enterprise, um beides zusammenzuführen. Gleichzeitig interessieren sich die Klingonen für Genesis, allerdings als Waffe.
+
+### Entstehungsgeschichte
+
+Regie führte Leonard Nimoy. Das Drehbuch schrieb Harve Bennett, der den Film auch produzierte.
+
+William Shatner spielt Admiral James T. Kirk, Nimoy den Spock, DeForest Kelley den Dr. McCoy, James Doohan den Montgomery Scott, George Takei den Hikaru Sulu, Christopher Lloyd den klingonischen Kommandanten Kruge und Mark Lenard den Sarek.
+
+Die Kamera führte Charles Correll, den Schnitt Robert F. Shugrue, die Musik stammt von James Horner.
+
+Die Spezialeffekte entstanden bei Industrial Light & Magic unter Verantwortung von Bob Dawson. Der Film erschien 1984, dauert 105 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Dass der Darsteller des Spock bei dem Film Regie führte, in dem Spock zurückgeholt wird, ist die auffälligste Entscheidung dieser Produktion.
+
+Die Kritik hob genau das hervor und bescheinigte Nimoy eine einfühlsame, auf die Darsteller ausgerichtete Regie.
+
+Der schwerste Eingriff betrifft nicht Spock, sondern das Schiff. Die Zerstörung der Enterprise wurde zweimal gefilmt, um eine stärkere emotionale Wirkung zu erzielen — für eine Reihe, in der das Schiff selbst eine Figur ist, ein bemerkenswerter Aufwand.
+
+Christopher Lloyd als klingonischer Kommandant ist die zweite Überraschung der Besetzungsliste.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 79 Prozent aus, Metacritic 58 von 100. Gelobt wurden die hervorragenden Miniaturen und Animationen.
+
+Der Film wurde weniger positiv aufgenommen als sein Vorgänger — ein Vergleich, dem sich jeder dritte Teil einer Reihe stellen muss.
+
+1985 gab es Nominierungen bei den Saturn Awards, unter anderem für die beste Regie und den besten Film, sowie bei den Hugo Awards.
+
+Dass ausgerechnet die Regie in der Rezeption hervorgehoben wurde — einfühlsam und auf die Darsteller ausgerichtet —, ist für einen Film, dessen Regisseur zugleich vor der Kamera steht, ein bemerkenswerter Befund.` },
+  {
+    bereich: 'titel', schluessel: 'movie:22897', locale: 'de-de',
+    text: `### Worum es geht
+
+Jane Adler führt eine Bäckerei in Santa Barbara, hat drei erwachsene Kinder und ist seit Jahren geschieden. Ihr Ex-Mann Jake ist mit einer deutlich jüngeren Frau namens Agness verheiratet.
+
+Bei der Abschlussfeier ihres Sohnes treffen Jane und Jake wieder aufeinander — und finden zueinander zurück, obwohl er verheiratet ist. Zugleich lernt Jane den Architekten Adam kennen.
+
+### Entstehungsgeschichte
+
+Nancy Meyers schrieb das Drehbuch und führte Regie; produziert wurde der Film von Scott Rudin und Meyers.
+
+Meryl Streep spielt Jane Adler, Alec Baldwin den Jake Adler und Steve Martin den Adam Schiffer; in weiteren Rollen sind John Krasinski, Zoe Kazan und Caitlin Fitzgerald zu sehen.
+
+Die Kamera führte John Toll, den Schnitt besorgten Joe Hutshing und David Moritz, die Musik stammt von Hans Zimmer und Heitor Pereira.
+
+Der Film dauert 118 Minuten und startete am 25. Dezember 2009 in den Vereinigten Staaten, am 21. Januar 2010 in Deutschland.
+
+### Hinter den Kulissen
+
+Die Umkehrung ist der Kern. Die Affäre führt nicht ein Mann mit einer Jüngeren, sondern eine geschiedene Frau mit ihrem eigenen Ex-Mann — und sie ist dabei diejenige, die etwas zu verlieren hat, während er der Betrüger ist.
+
+Damit stellt der Film eine Frage, die Komödien selten stellen: Was passiert, wenn jemand die Wahl hat und keine Antwort weiß?
+
+Meryl Streep, Alec Baldwin und Steve Martin in einem Dreieck — das ist die Besetzung, an der alles hängt, und der Film gibt allen dreien Raum.
+
+Dass Nancy Meyers Drehbuch, Regie und Produktion in einer Hand hielt, erklärt die Geschlossenheit des Ergebnisses — gelobt wurden durchgehend Dialoge und Timing.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film über 220 Millionen Dollar ein.
+
+Meryl Streep war für den Golden Globe als beste Hauptdarstellerin in Komödie oder Musical nominiert — gewonnen hat sie ihn im selben Jahr für „Julie & Julia". Hinzu kamen Nominierungen als bester Film in dieser Sparte und für das Drehbuch. Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Das Lexikon des internationalen Films lobte die witzigen Dialoge und das ausgezeichnete Timing. Prisma bemängelte dagegen eine schwache komödiantische Umsetzung trotz starker Darsteller.
+
+Über 220 Millionen Dollar für eine Komödie über Menschen jenseits der fünfzig sind der bemerkenswerteste Punkt der Bilanz — ein Publikum, dem Hollywood selten eigene Filme widmet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11618', locale: 'de-de',
+    text: `### Worum es geht
+
+Eleanor Vance wird zu einer Studie über Schlafstörungen eingeladen. Der Ort: Hill House, ein abgelegenes Anwesen mit einer Geschichte, über die niemand spricht.
+
+Dort trifft sie auf Dr. Marrow, der die Studie leitet, und auf zwei weitere Probanden, Theo und Luke. Was Eleanor bald begreift, ist zweierlei — dass in diesem Haus etwas ist, und dass ihre Anwesenheit kein Zufall war.
+
+### Entstehungsgeschichte
+
+Vorlage ist Shirley Jacksons Roman „Spuk in Hill House". Eine frühere Verfilmung entstand 1963 unter dem Titel „Bis das Blut gefriert", Regie führte damals Robert Wise.
+
+Bei dieser Fassung führte Jan de Bont Regie, das Drehbuch schrieb David Self. Produziert wurde der Film von Susan Arnold, Donna Arkoff Roth und Colin Wilson.
+
+Lili Taylor spielt Eleanor Vance, Liam Neeson den Dr. David Marrow, Catherine Zeta-Jones die Theo, Owen Wilson den Luke Sanderson, Bruce Dern den Mr. Dudley, Marian Seldes die Mrs. Dudley, Virginia Madsen die Jane und Todd Field den Todd Hackett.
+
+Die Kamera führte Karl Walter Lindenlaub, den Schnitt Michael Kahn, die Musik stammt von Jerry Goldsmith, das Szenenbild von Eugenio Zanetti.
+
+Die Außenaufnahmen entstanden an zwei englischen Herrenhäusern: Harlaxton Manor in Lincolnshire und Belvoir Castle in Leicestershire. Der Film erschien 1999, dauert 113 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Der Vergleich mit der Verfilmung von 1963 zieht sich durch die gesamte Rezeption — und fällt einhellig gegen die neuere aus.
+
+Thilo Wydra brachte es in der Welt auf den Punkt: Hatte bei Wise die Geschichte eine Seele, so gehe diese bei dem spukenden Holländer in Dekors und Tricks verloren.
+
+Die taz kritisierte den übermäßigen Einsatz von Spezialeffekten, durch den keine Zeit zum Fürchten bleibe. Stefanie Rosenkranz nannte den Film im Stern komplett gaga und total unfreiwillig komisch.
+
+Der gemeinsame Vorwurf ist immer derselbe: Ein Stoff, der von dem lebt, was man nicht sieht, wurde mit dem Aufwand eines Effektfilms behandelt.
+
+Was unbestritten bleibt, ist das Szenenbild von Eugenio Zanetti und die Wahl der beiden englischen Herrenhäuser.
+
+### Einordnung & Wirkung
+
+Der Film gewann 1999 den Bogey Award und 2000 den BMI Film Music Award; die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
+
+Zugleich war er 2000 in fünf Kategorien für die Goldene Himbeere nominiert und für den Blockbuster Entertainment Award.
+
+Diese Kombination — ein Prädikat und fünf Himbeeren-Nominierungen — beschreibt die Lage genau. Handwerklich und in der Ausstattung überzeugte der Film; als Erzählung nicht.
+
+Die Besetzung mit Liam Neeson, Catherine Zeta-Jones, Owen Wilson und Lili Taylor war für einen Schauerfilm ungewöhnlich stark.` },
+  {
+    bereich: 'titel', schluessel: 'movie:32985', locale: 'de-de',
+    text: `### Worum es geht
+
+Um 1600. Solomon Kane ist Söldner. Nach einer Zuflucht im Kloster verschreibt er sich dem Kampf gegen das Böse und wird in seine Heimat zurückgeschickt.
+
+Dort trifft er auf die Familie Crowthorn — und auf den Hexenmeister Malachi.
+
+### Entstehungsgeschichte
+
+M. J. Bassett führte Regie und schrieb das Drehbuch.
+
+James Purefoy spielt Solomon Kane, Max von Sydow den Josiah Kane, Rachel Hurd-Wood die Meredith Crowthorn, Pete Postlethwaite den William Crowthorn, Alice Krige die Katherine Crowthorn und Jason Flemyng den Malachi.
+
+Die Kamera führte Dan Laustsen, die Musik stammt von Klaus Badelt. Das Budget betrug 45 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Kern ist ein Bruch in der Figur: ein Söldner, der über ein Kloster zu einer anderen Bestimmung findet und dann feststellt, dass sie ihn zurück zu den Waffen führt.
+
+Die Besetzung ist für eine europäische Produktion bemerkenswert. Max von Sydow und Pete Postlethwaite in Nebenrollen sind Namen, die man bei einem Fantasy-Abenteuer nicht erwartet.
+
+45 Millionen Dollar sind für einen Film, der außerhalb des amerikanischen Studiosystems entstand, eine erhebliche Summe — und genau daran scheiterte die Rechnung.
+
+### Einordnung & Wirkung
+
+Bis Dezember 2010 spielte der Film weltweit nur rund 19 Millionen Dollar ein — bei 45 Millionen Herstellungskosten ein deutlicher Fehlschlag.
+
+Die Urteile gingen auseinander. Variety kritisierte die Regie als ohne Fingerspitzengefühl. Der Guardian vergab dagegen drei von fünf Sternen und lobte den ernsthaften Tonfall sowie James Purefoys Darstellung.
+
+Der Guardian trifft damit, was den Film ausmacht: Er nimmt seinen Stoff ernst, statt ihn augenzwinkernd zu behandeln — und verzichtet damit auf das, was vergleichbare Filme trägt.
+
+Bei 45 Millionen Dollar Budget und 19 Millionen Einspielergebnis blieb es bei diesem einen Film.` },
+  {
+    bereich: 'titel', schluessel: 'movie:333669', locale: 'de-de',
+    text: `### Worum es geht
+
+Michael Mason ist Amerikaner in Paris und lebt vom Taschendiebstahl. Eine Handtasche, die er entwendet, enthält Sprengstoff.
+
+Kurz darauf detoniert sie, vier Menschen sterben. Der CIA-Agent Sean Briar hält Mason für unschuldig — und arbeitet mit ihm, statt ihn festzunehmen. Was die beiden finden, führt zu korrupten Polizisten und zu einem geplanten digitalen Raub in der Banque de France.
+
+### Entstehungsgeschichte
+
+James Watkins führte Regie und schrieb das Drehbuch gemeinsam mit Andrew Baldwin. Zuvor waren Pierre Morel, Morten Tyldum und Baran bo Odar als Regisseure vorgesehen gewesen und wieder ausgeschieden.
+
+Idris Elba spielt Sean Briar, Richard Madden den Michael Mason, Charlotte Le Bon die Zoé Naville, Kelly Reilly die CIA-Agentin Karen Dacre, José Garcia den DGSI-Direktor Victor Gamieux und Thierry Godard den Rafi Bertrand.
+
+Die Kamera führte Tim Maurice-Jones, den Schnitt Jon Harris, die Musik stammt von Alex Heffes. Produziert wurde der Film von Anonymous Content, Vendôme Pictures, StudioCanal und TF1 Films Production.
+
+Gedreht wurde vom 13. Oktober bis zum 17. Dezember 2014 in Paris. Das Budget betrug vier Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Veröffentlichungsgeschichte dieses Films ist von realen Anschlägen bestimmt, und das lässt sich nicht trennen von dem, was er erzählt.
+
+Geplant war der Start für Februar 2016. Nach den Anschlägen von Paris im November 2015 wurde die britische Premiere auf den 22. April 2016 verschoben.
+
+In Frankreich wurde der Film am 13. Juli 2016 freigegeben — und nach dem Anschlag von Nizza am 17. Juli 2016 wieder aus den Kinos genommen.
+
+Dass ein Stoff, dessen Handlung mit einem Sprengsatz in Paris beginnt, binnen weniger Monate zweimal von der Wirklichkeit eingeholt wurde, gehört zu seiner Geschichte — und ist der Grund, warum ihn kaum jemand im Kino gesehen hat.
+
+### Einordnung & Wirkung
+
+Bei vier Millionen Dollar Herstellungskosten spielte der Film weltweit 14,9 Millionen ein.
+
+Rotten Tomatoes weist 48 Prozent bei 80 Rezensionen aus, Metacritic 48 von 100.
+
+Der zusammengefasste Befund bei Rotten Tomatoes ist zugleich das treffendste Urteil: Der Film beweise, dass Idris Elba ein Actionheld im Wartestand sei — und zwar wartend auf ein Drehbuch, das seinem Können entspricht.
+
+Dass drei Regisseure vor Watkins ausstiegen, deutet auf eine Entwicklung hin, die nicht geradlinig verlief. Was daraus wurde, ist ein solide gemachter Film, dessen Veröffentlichung von Ereignissen bestimmt wurde, die niemand vorhersehen konnte.` },
 ];
