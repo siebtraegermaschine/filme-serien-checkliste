@@ -45068,4 +45068,321 @@ Höbel trennt darin zwei Ebenen: das Anliegen der Serie und ihre Ausführung. Se
 Dass die Serie trotz solcher Urteile 51 Folgen erreichte, spricht dafür, dass sie ihr Publikum fand — über zweieinhalb Jahre hinweg und über einen Wechsel der Hauptfigur hinweg.
 
 In Deutschland lief sie ab dem 20. Dezember 2019 bei Prime Video und damit nur gut zwei Monate nach dem amerikanischen Start.` },
+  // ---- Block 102 ----
+  {
+    bereich: 'titel', schluessel: 'movie:6069', locale: 'de-de',
+    text: `### Worum es geht
+
+Eastwick in Rhode Island ist eine Kleinstadt, in der wenig geschieht. Alexandra ist Bildhauerin, Jane Musiklehrerin, Sukie schreibt für die Zeitung. Alle drei sind unzufrieden, und alle drei ahnen nicht, dass sie zusammen einen Hexenzirkel bilden.
+
+Dann zieht Daryl Van Horne in die Stadt. Er verführt eine nach der anderen — und die drei entdecken dabei Kräfte, von denen sie nichts wussten. Zu Außenseiterinnen macht sie das ohnehin.
+
+### Entstehungsgeschichte
+
+Vorlage ist John Updikes Roman von 1984; die deutsche Übersetzung von Maria Carlsson erschien 1985.
+
+Regie führte George Miller, das Drehbuch schrieb Michael Cristofer. Produziert wurde der Film von Neil Canton, Peter Guber und Jon Peters.
+
+Jack Nicholson spielt Daryl Van Horne, Cher die Alexandra Medford, Susan Sarandon die Jane Spofford, Michelle Pfeiffer die Sukie Ridgemont, Veronica Cartwright die Felicia Alden und Richard Jenkins den Clyde Alden.
+
+Die Kamera führte Vilmos Zsigmond, die Musik stammt von John Williams.
+
+Gedreht wurde vom 14. Juli 1986 an über sechs Wochen — in Massachusetts, unter anderem in Cohasset, Marblehead und Scituate, auf Castle Hill in Ipswich, im Wang Theatre in Boston, in der Greystone Mansion in Beverly Hills und auf dem Gelände von Warner Bros.
+
+Das Budget betrug 22 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der eigentliche Zug liegt in der Umkehrung. Was als Verführungsgeschichte beginnt, kippt in dem Moment, in dem die drei begreifen, dass sie gemeinsam etwas vermögen, was keine von ihnen allein könnte.
+
+Dass sie erst durch Van Horne von ihren Kräften erfahren, macht ihn zugleich zur Ursache ihres Problems und zu dessen Auslöser.
+
+Jack Nicholson wurde für diese Rolle mehrfach ausgezeichnet, und die Kritik war sich einig, dass der Film an ihm hängt. Auf Rotten Tomatoes heißt es, Nicholson leihe dieser Anlage genug dekadente Bosheit.
+
+Die Kehrseite benannte dieselbe Kritik: Das Finale wurde als überambitioniert empfunden.
+
+### Einordnung & Wirkung
+
+Bei 22 Millionen Dollar Herstellungskosten spielte der Film weltweit 103 Millionen ein, davon 63,8 Millionen in den Vereinigten Staaten und Kanada.
+
+Ausgezeichnet wurde er mit dem BAFTA für die besten visuellen Effekte, dem BMI Film Music Award und dem Saturn Award für den besten Hauptdarsteller; Jack Nicholson erhielt zudem die Preise der Filmkritiker von Los Angeles und New York.
+
+Nominiert war der Film für zwei Oscars — Musik und Ton — sowie für einen Grammy und einen Hugo Award.
+
+Zwei Oscar-Nominierungen für John Williams' Musik und den Ton bei einer Komödie über Hexerei sind ein Hinweis darauf, mit welchem Aufwand hier gearbeitet wurde. Der Stoff wurde später noch zweimal verfilmt: 1992 als Fernsehfilm und 2009 als Serie mit dreizehn Folgen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1965', locale: 'de-de',
+    text: `### Worum es geht
+
+Steven Taylor ist Unternehmer und steht kurz vor dem finanziellen Zusammenbruch. Seine Frau Emily verfügt über ein Vermögen von 100 Millionen Dollar — und über eine Affäre, von der er weiß.
+
+Ihr Liebhaber ist der Maler David Shaw. Steven sucht ihn auf, legt ihm offen, was er über ihn herausgefunden hat, und macht ihm ein Angebot, das keines ist: Shaw soll Emily töten.
+
+### Entstehungsgeschichte
+
+Der Film beruht frei auf Frederick Knotts Theaterstück „Bei Anruf — Mord".
+
+Regie führte Andrew Davis, das Drehbuch schrieb Patrick Smith Kelly. Produziert wurde er von Arnold Kopelson, Anne Kopelson und Peter Macgregor-Scott.
+
+Michael Douglas spielt Steven Taylor, Gwyneth Paltrow die Emily Bradford Taylor, Viggo Mortensen den David Shaw, David Suchet den Kriminalbeamten Mohamed Karaman und Sarita Choudhury die Raquel Martinez.
+
+Die Kamera führte Dariusz Wolski, den Schnitt besorgten Dov Hoenig und Dennis Virkler, die Musik stammt von James Newton Howard.
+
+Gedreht wurde in New York City, auf Long Island und in New Jersey. Der Film erschien 1998, dauert 107 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Vorlage ist eine der bekanntesten Konstruktionen des Kriminalstücks: ein Ehemann, der den perfekten Mord plant, und ein Plan, der genau an der Stelle scheitert, an der er am sichersten schien.
+
+Der Film übernimmt diese Anlage frei — die Quellen sprechen ausdrücklich von einer freien Bearbeitung, nicht von einer Verfilmung des Stücks.
+
+Was daraus wird, ist ein Spiel aus Erpressung und Gegenerpressung, in dem alle drei Beteiligten ihre Karten nacheinander aufdecken. Emily ist dabei nicht nur Gegenstand des Plans.
+
+Gedreht wurde in New York, auf Long Island und in New Jersey — die Wohnung des Ehepaars und das Atelier des Malers markieren die beiden Pole, zwischen denen alles stattfindet.
+
+### Einordnung & Wirkung
+
+In den Vereinigten Staaten spielte der Film 67,6 Millionen Dollar ein, international rund 32 Millionen.
+
+Die Kritik maß ihn durchweg am Original. Cinema nannte ihn ein mäßiges Remake, TV Movie befand, er werde dem Original bei weitem nicht gerecht. Das Lexikon des internationalen Films sprach von einer handwerklich soliden und recht spannenden Inszenierung, inhaltlich aber frei von Überraschungen.
+
+Die Deutsche Film- und Medienbewertung vergab dennoch das Prädikat „wertvoll"; Gwyneth Paltrow erhielt 1999 den Blockbuster Entertainment Award.
+
+Dass sämtliche Einwände auf den Vergleich hinauslaufen, ist das eigentliche Urteil. Wer eine berühmte Konstruktion neu verfilmt, wird an ihr gemessen — und dieser Film hat sie nicht überboten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:9702', locale: 'de-de',
+    text: `### Worum es geht
+
+Drei Verwandte, drei Wege. Der Film begleitet sie von 1972 bis 1984.
+
+Miklo kommt aus Las Vegas nach East Los Angeles und schließt sich der Gang Vatos Locos an. Nach einer Tat kommt er in San Quentin, wo er neun Jahre verbringt und in der Gefängnisbande La Onda aufsteigt. Sein Cousin Paco wird Polizist. Sein Cousin Cruz, der malt, gerät in die Drogensucht.
+
+### Entstehungsgeschichte
+
+Regie führte Taylor Hackford. Das Drehbuch schrieben Jimmy Santiago Baca, Jeremy Iacone und Floyd Mutrux nach einer Geschichte von Ross Thomas — teilweise autobiografisch, gestützt auf Bacas eigene Erfahrungen in Straßenbanden und im Gefängnis.
+
+Damian Chapa spielt Miklo Velka, Benjamin Bratt den Paco Aguilar, Jesse Borrego den Cruz Candelaria, Enrique Castillo den Montana Segura, Delroy Lindo den Bonafide, Billy Bob Thornton den Lightning und Danny Trejo den Geronimo.
+
+Produziert wurde der Film von Hackford und Jerry Gershwin für Hollywood Pictures; verliehen wurde er von Buena Vista. Die Kamera führte Gabriel Beristain, den Schnitt Fredric und Karl F. Steinkamp, die Musik stammt von Bill Conti.
+
+Die Dreharbeiten begannen im Mai 1991 in und um East Los Angeles. Teile entstanden im Staatsgefängnis San Quentin, wo echte Insassen als Statisten mitwirkten; ein Caterer wurde bei einem Drive-by-Shooting verletzt. Sämtliche Gemälde der Figur Cruz stammen vom Künstler Adan Hernandez.
+
+Das Budget betrug 35 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Entwicklung reichte bis in die frühen achtziger Jahre zurück. Edward James Olmos lehnte es ab, das Projekt zu leiten und darin zu spielen; Hackford übernahm und verstand es als Gefängnisdrama in der Tradition von „White Heat" und „I Am a Fugitive from a Chain Gang".
+
+Dass in San Quentin selbst gedreht wurde und Häftlinge als Statisten auftraten, verankert den Film an dem Ort, von dem er handelt.
+
+Dass ein Mitarbeiter der Produktion während der Dreharbeiten Opfer eines Drive-by-Shootings wurde, ist ein Umstand, der sich nicht wegerzählen lässt.
+
+Die Bilder, die Cruz im Film malt, sind echte Arbeiten eines Künstlers — nicht Requisiten.
+
+### Einordnung & Wirkung
+
+Bei 35 Millionen Dollar Herstellungskosten spielte der Film 4.496.583 Dollar ein. Kaufmännisch war das ein Fehlschlag.
+
+Die Urteile gingen weit auseinander. Roger Ebert vergab zwei Sterne und bescheinigte wirkungsvolle Darstellungen bei fehlender Gesamtvision. Kenneth Turan nannte ihn in der Los Angeles Times rund drei Stunden gewalttätiges, comichaftes Getue. Mim Eichler dagegen pries ihn als möglicherweise einen der stärksten und wichtigsten Filme des Jahrzehnts.
+
+Rotten Tomatoes weist 64 Prozent bei 14 Kritiken aus, Metacritic 47 von 100.
+
+Entscheidend ist, was danach geschah: Der Film wurde in der mexikanisch-amerikanischen Gemeinschaft zum Kultfilm — trotz des Misserfolgs im Kino, und über Jahrzehnte hinweg.` },
+  {
+    bereich: 'titel', schluessel: 'movie:13855', locale: 'de-de',
+    text: `### Worum es geht
+
+Eom Joong-ho war Polizist. Heute ist er Zuhälter, und zwei der Frauen, die für ihn arbeiten, sind verschwunden.
+
+Er stellt fest, dass beide zuletzt denselben Kunden hatten, und nimmt dessen Spur auf — in der Annahme, es gehe um Menschenhandel. Was er stattdessen findet, ist ein Mann namens Ji Yeong-min. Und dann beginnt ein Wettlauf, bei dem die Polizei zum Hindernis wird.
+
+### Entstehungsgeschichte
+
+Der Film beruht auf dem Fall des südkoreanischen Serienmörders Yoo Young-chul.
+
+Regie führte Na Hong-jin; es war sein erster Film. Das Drehbuch schrieb er gemeinsam mit Lee Shin-ho und Hong Won-chan.
+
+Kim Yoon-seok spielt Eom Joong-ho, Ha Jung-woo den Ji Yeong-min und Seo Yeong-hee die Kim Mi-jin.
+
+Produziert wurde der Film von Kim Su-jin und Yun In-beom. Die Kamera führte Lee Seong-jae, den Schnitt Kim Sun-min, die Musik stammt von Kim Joon-seok und Choe Yong-rak.
+
+### Hinter den Kulissen
+
+Die entscheidende Umkehrung liegt beim Ermittler. Joong-ho sucht die Frauen nicht, weil ihm an ihnen liegt, sondern weil er einen Verlust vermutet — und der Film lässt ihm diese Haltung, statt ihn zu läutern.
+
+Der zweite Bruch mit dem Üblichen betrifft den Ablauf. Der Täter wird früh gefasst. Was den Film trägt, ist nicht die Suche nach ihm, sondern das, was danach schiefgeht: Verfahrensfehler führen zu seiner Freilassung.
+
+Damit richtet sich der Film gegen den Apparat. Nicht die Tat allein ist der Skandal, sondern die Unfähigkeit derer, die sie aufklären sollen.
+
+Dass ein realer Fall zugrunde liegt — der des Serienmörders Yoo Young-chul —, macht diesen Vorwurf konkret.
+
+### Einordnung & Wirkung
+
+In Südkorea sahen den Film über fünf Millionen Menschen im Kino; er war der zweiterfolgreichste des Jahres 2008.
+
+Ausgezeichnet wurde er unter anderem bei den Grand Bell Awards als bester Film und für die beste Regie sowie beim Puchon International Fantastic Film Festival als bester Film. Kim Yoon-seok erhielt sechs Auszeichnungen für seine Darstellung.
+
+Cinema lobte ein bis zum Ende fesselndes Rennen mit einem toll gespielten Psychoduell zwischen Drama und Horror.
+
+Sechs Darstellerpreise für eine einzige Rolle sind ein außergewöhnlicher Befund — und ein Hinweis darauf, dass der Film seine Wirkung nicht über das Verbrechen bezieht, sondern über den Mann, der ihm nachgeht.
+
+Für Na Hong-jin war es zugleich der erste Film — ein Debüt, das im eigenen Land auf über fünf Millionen Zuschauer kam.` },
+  {
+    bereich: 'titel', schluessel: 'movie:491472', locale: 'de-de',
+    text: `### Worum es geht
+
+Vincent van Gogh geht von Paris nach Arles. Es ist 1888, und das Malen ist alles, was ihm bleibt.
+
+Der Film begleitet ihn durch die Anfälle, die ihn heimsuchen, durch die Zeit mit Paul Gauguin und dessen Abreise, in die Nervenheilanstalt von Saint-Rémy und schließlich nach Auvers-sur-Oise, wo Dr. Paul Gachet sich um ihn kümmert.
+
+### Entstehungsgeschichte
+
+Regie führte Julian Schnabel. Das Drehbuch schrieben Jean-Claude Carrière — der 2015 einen Ehrenoscar für sein Lebenswerk erhielt —, Louise Kugelberg und Schnabel.
+
+Willem Dafoe spielt Vincent van Gogh, Rupert Friend seinen Bruder Theo, Oscar Isaac den Paul Gauguin, Mathieu Amalric den Dr. Paul Gachet, Mads Mikkelsen einen Priester, Emmanuelle Seigner die Madame Ginoux, Frank Molinaro den Henri de Toulouse-Lautrec und Amira Casar die Johanna van Gogh-Bonger.
+
+Produziert wurde der Film von Jon Kilik. Die Kamera führte Benoît Delhomme, den Schnitt besorgten Louise Kugelberg und Schnabel, die Musik stammt von Tatiana Lisovskaya; Szenenbild und Kostüme verantworteten Cécile Vatelot und Karen Muller Serreau.
+
+Gedreht wurde von November 2017 bis Februar 2018 in Arles und in Auvers-sur-Oise. Der Film dauert 111 Minuten und ist ab 6 Jahren freigegeben.
+
+Premiere war am 3. September 2018 in Venedig im Hauptwettbewerb; der US-Start folgte am 16. November 2018, der deutsche am 18. April 2019.
+
+### Hinter den Kulissen
+
+Die Kamera ist der eigentliche Zugriff. Benoît Delhomme arbeitete mit Handkamera und Weitwinkelobjektiven; ein Kritiker beschrieb die rasende Unruhe der Aufnahmen als Entsprechung zur Perspektive eines gestörten Geistes.
+
+Rudolf Worschech hob hervor, dass Schnabel auf die übliche Verknüpfung von Genie und Wahnsinn verzichtet und viele Szenen aus van Goghs Sicht drehte.
+
+Die Musik von Tatiana Lisovskaya folgt demselben Prinzip: minimalistisch, überwiegend Klavier solo, mit Vorliebe für Dissonanz.
+
+Der Film greift zudem in eine offene Frage der Kunstgeschichte ein. Statt der Selbsttötung zeigt er eine andere Version von van Goghs Tod — und stellt zugleich die vielen nachträglichen psychiatrischen Diagnosen in Frage, die über ihn gestellt wurden.
+
+### Einordnung & Wirkung
+
+In Venedig wurde Willem Dafoe 2018 als bester Schauspieler ausgezeichnet; es folgten der Satellite Award sowie Nominierungen für den Golden Globe und den Oscar als bester Hauptdarsteller.
+
+Peter Bradshaw lobte im Guardian die wortlosen Passagen, in denen van Gogh fast betäubt durch die Landschaft schreitet, und hob hervor, dass der Film auf Dramatisierung verzichte.
+
+David Rooney bemerkte im Hollywood Reporter, Dafoe erinnere mit zerklüfteten Zügen und durchdringenden blauen Augen unter einem zerbeulten Strohhut an van Goghs Selbstporträts — kritisierte aber, dass die außergewöhnlich schöpferische Phase mit rund 70 Gemälden zur Fußnote gerate.
+
+Barbara Schweizerhof schrieb in epd Film von einem Porträt von ergreifender Traurigkeit, das zugleich die Kunst des gepeinigten Mannes feiere.
+
+kinofenster.de empfahl den Film für höhere Jahrgangsstufen und den Kunstunterricht — besonders für den Vergleich von van Goghs impulsivem Malen vor dem Objekt mit Gauguins handwerklicherem Vorgehen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:23759', locale: 'de-de',
+    text: `### Worum es geht
+
+117 nach Christus, im Norden Britanniens. Der Centurio Quintus Dias überlebt einen Überfall der Pikten und gerät in Gefangenschaft.
+
+Nach der Flucht schließt er sich General Titus Flavius Virilus und der Neunten Legion an. Doch die Pikten Etain, die den Römern als Führerin dient, bringt sie in einen Hinterhalt: 3000 Legionäre sterben. Was übrig bleibt, ist eine Handvoll Männer in feindlichem Land.
+
+### Entstehungsgeschichte
+
+Neil Marshall führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Christian Colson und Robert Jones.
+
+Michael Fassbender spielt Quintus Dias, Dominic West den Titus Flavius Virilus, Olga Kurylenko die Etain, Liam Cunningham den Brick und Imogen Poots die Arianne.
+
+Die Kamera führte Sam McCurdy, den Schnitt Chris Gill, die Musik stammt von Ilan Eshkeri.
+
+Der Film ist eine britisch-französische Produktion in englischer und schottisch-gälischer Sprache, gedreht 2009 in Schottland und England. Er dauert 95 Minuten und ist ab 18 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Der Stoff setzt an einem historischen Bezugspunkt an: der Neunten Legion in Britannien im Jahr 117.
+
+Was der Film daraus macht, ist kein Historiendrama, sondern ein Fluchtfilm. Nach dem Hinterhalt geht es nur noch darum, lebend nach Süden zu kommen, und die Kameraden sterben nacheinander.
+
+Der Verzicht auf große Schlachtenbilder zugunsten einer Verfolgung durch die Wildnis ist die entscheidende Entscheidung. Der Gegner ist dabei überwiegend unsichtbar, und die Landschaft tut das Übrige.
+
+Dass neben Englisch auch schottisches Gälisch gesprochen wird, gibt den Pikten eine eigene Stimme, statt sie nur als Bedrohung zu zeigen.
+
+### Einordnung & Wirkung
+
+Cinema fasste zusammen: brutal, aber fesselnd — Action ohne Gnade.
+
+Kino.de bescheinigte Neil Marshall, hier ganz in seinem Element zu sein, und verglich den Film mit „Gladiator" und „300".
+
+Der Vergleich trifft nur halb. Anders als die genannten Filme setzt „Centurion" nicht auf Monumentalität, sondern auf ein kleines Format: 95 Minuten, wenige Figuren, ein Dauerlauf.
+
+Die Freigabe ab 18 Jahren in Deutschland ist bei einem Film, den die Kritik als gnadenlos beschreibt, folgerichtig.
+
+Bemerkenswert bleibt die Besetzung für eine britisch-französische Produktion dieser Größe: Michael Fassbender, Dominic West, Olga Kurylenko, Liam Cunningham und Imogen Poots in 95 Minuten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:484482', locale: 'de-de',
+    text: `### Worum es geht
+
+Bertrand ist depressiv und krankgeschrieben. Im Schwimmbad fällt ihm ein Aushang auf: Eine Gruppe von Männern sucht Verstärkung — für Synchronschwimmen.
+
+Er macht mit. Die anderen sind ähnlich beschädigt: Laurent kümmert sich um seine demenzkranke Mutter, Marcus ist als Unternehmer gescheitert, Simon als Musiker, Basile hat keine Wohnung, Avanish spricht kaum Französisch, Thierry bangt um seine Stelle. Trainerin Delphine war selbst einmal Synchronschwimmerin und trinkt.
+
+Dann fasst die Gruppe einen Entschluss: die Weltmeisterschaft in Norwegen.
+
+### Entstehungsgeschichte
+
+Gilles Lellouche führte Regie — es war sein erster langer Film — und schrieb das Drehbuch gemeinsam mit Ahmed Hamidi und Julien Lambroschini. Produziert wurde er von Alain Attal und Hugo Sélignac.
+
+Mathieu Amalric spielt Bertrand, Guillaume Canet den Laurent, Benoît Poelvoorde den Marcus, Jean-Hugues Anglade den Simon, Virginie Efira die Delphine, Philippe Katerine den Thierry, Alban Ivanov den Basile, Balasingham Thamilchelvan den Avanish, Félix Moati den John, Jonathan Zaccaï den Thibault sowie Leïla Bekhti und Marina Foïs die Amanda und die Claire.
+
+Die Kamera führte Laurent Tangy, den Schnitt Simon Jacquet, die Musik stammt von Jon Brion. Kostüme verantworteten Elise Bouquet und Reem Kuzayli, die Bauten Florian Sanson.
+
+Premiere war am 13. Mai 2018 in Cannes; der französische Start folgte am 24. Oktober 2018, der deutsche am 27. Juni 2019.
+
+### Hinter den Kulissen
+
+Die Idee entstand nach einer Dokumentation über eine schwedische Männer-Synchronschwimmmannschaft. Bis zum fertigen Film vergingen über fünf Jahre.
+
+Die Darsteller trainierten ab Ende 2016 sieben Monate lang zweimal wöchentlich unter der Trainerin Julie Fabre. Was im Film zu sehen ist, mussten sie also tatsächlich können.
+
+Gedreht wurde an Schauplätzen in ganz Frankreich — in Chennevières-sur-Marne, Nogent-sur-Oise, Avon, Échirolles und Lans-en-Vercors.
+
+Auffällig ist, wie der Film seine Figuren anlegt: Jeder Einzelne bringt eine eigene Notlage mit — Krankheit, Schulden, Wohnungslosigkeit, Sprachbarriere, Sucht —, und keine davon wird durch das Schwimmen aufgelöst.
+
+### Einordnung & Wirkung
+
+Bei den Césars 2019 gewann Philippe Katerine als bester Nebendarsteller; der Film war in zehn weiteren Kategorien nominiert.
+
+Beim Globe de Cristal 2019 wurde er als bester Film ausgezeichnet, Katerine als bester Schauspieler; beim Europäischen Filmpreis 2019 war er für den Publikumspreis nominiert.
+
+Zehn César-Nominierungen für einen Regieerstling sind ein außergewöhnliches Ergebnis — und ein Hinweis darauf, dass der Film in Frankreich weit über sein Thema hinaus wahrgenommen wurde.
+
+Bemerkenswert ist auch der Umfang des Ensembles. Zwölf Hauptrollen, sieben Monate gemeinsames Training und über fünf Jahre Entwicklung stehen hinter einem Film, dessen Prämisse sich in einem Satz erzählen lässt.` },
+  {
+    bereich: 'titel', schluessel: 'series:71024', locale: 'de-de',
+    text: `### Worum es geht
+
+Lisa ist ein Mensch und mit Vlad Dracula Țepeș verheiratet. Als sie hingerichtet wird, schwört er der Menschheit Rache — und setzt ein Heer von Dämonen in Bewegung.
+
+Ihm entgegen steht Trevor Belmont, der letzte einer Familie von Monsterjägern, den seine Herkunft nicht mehr interessiert. An seiner Seite: die Magierin Sypha Belnades und Alucard, Draculas eigener Sohn.
+
+### Entstehungsgeschichte
+
+Vorlage sind Spiele von Konami — „Castlevania III: Dracula's Curse" von 1989, „Castlevania: Symphony of the Night" von 1997 und „Castlevania: Curse of Darkness" von 2005.
+
+Erfunden wurde die Serie von Warren Ellis, der auch als Autor und ausführender Produzent tätig war.
+
+Richard Armitage spricht Trevor Belmont, James Callis den Alucard, Graham McTavish den Vlad Dracula Țepeș und Alejandra Reynoso die Sypha Belnades; weitere Rollen sprechen Matt Frewer, Emily Swallow, Tony Amendola, Theo James und Jaime Murray.
+
+Produziert wurde die Serie von Frederator Studios, Powerhouse Animation, Adi Shankar Animation und Project 51 Productions; die Animation übernahm MUA Film. Regie führten Sam Deats, Adam Deats und Spencer Wan, die Musik stammt von Trevor Morris.
+
+Es entstanden vier Staffeln mit insgesamt 32 Episoden — vier, acht, zehn und zehn. Ausgestrahlt wurden sie vom 7. Juli 2017 bis zum 13. Mai 2021 bei Netflix.
+
+### Hinter den Kulissen
+
+Der entscheidende Zug liegt in der Begründung. Dracula ist hier kein Ungeheuer, das aus Bosheit handelt, sondern ein Mann, dessen Frau von Menschen getötet wurde — sein Rachefeldzug hat einen Anlass, den die Serie ernst nimmt.
+
+Damit ist der Gegner die interessanteste Figur — und ihm gegenüber steht mit Trevor Belmont der letzte einer Jägerfamilie, dem sein Erbe wenig nützt.
+
+Die erste Staffel umfasst nur vier Folgen. Dass daraus über vier Jahre hinweg 32 wurden, beschreibt einen Verlauf, der so nicht angelegt war.
+
+Als Vorlage dienen drei Spiele aus drei Jahrzehnten — von 1989, 1997 und 2005. Die Serie schöpft also aus mehreren Teilen der Reihe zugleich.
+
+### Einordnung & Wirkung
+
+Die Bewertungen stiegen im Verlauf: 83 Prozent für die erste Staffel bei Rotten Tomatoes, 100 Prozent für die zweite, 95 Prozent für die dritte und wieder 100 Prozent für die vierte; Metacritic vergab für die erste Staffel 71 Punkte.
+
+Gelobt wurden durchgehend die Animation, die Sprecherleistungen und die Qualität der Bücher; die Serie gilt als eine der besten Videospielverfilmungen überhaupt.
+
+Dieses Urteil zielt nicht auf den Stoff, sondern auf die Ausführung — genannt werden Animation, Sprecher und Bücher, also die drei Bereiche, in denen eine Serie handwerklich zu bestehen hat.
+
+Vier Staffeln bei nahezu durchgängiger Höchstbewertung sind ein Befund, den kaum eine Serie erreicht.` },
 ];
