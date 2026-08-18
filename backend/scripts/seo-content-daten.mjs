@@ -48445,4 +48445,311 @@ Rotten Tomatoes weist 48 Prozent bei 80 Rezensionen aus, Metacritic 48 von 100.
 Der zusammengefasste Befund bei Rotten Tomatoes ist zugleich das treffendste Urteil: Der Film beweise, dass Idris Elba ein Actionheld im Wartestand sei — und zwar wartend auf ein Drehbuch, das seinem Können entspricht.
 
 Dass drei Regisseure vor Watkins ausstiegen, deutet auf eine Entwicklung hin, die nicht geradlinig verlief. Was daraus wurde, ist ein solide gemachter Film, dessen Veröffentlichung von Ereignissen bestimmt wurde, die niemand vorhersehen konnte.` },
+  // ---- Block 113 ----
+  {
+    bereich: 'titel', schluessel: 'movie:124459', locale: 'de-de',
+    text: `### Worum es geht
+
+Burt Wonderstone und Anton Marvelton treten seit Jahren gemeinsam in einem Casino in Las Vegas auf. Ihre Zaubershow ist eine Institution — und niemand geht mehr hin.
+
+Denn ein Straßenkünstler namens Steve Gray zieht das Publikum ab. Die beiden verlieren ihr Engagement, zerstreiten sich und stehen ohne Bühne da.
+
+### Entstehungsgeschichte
+
+Regie führte Don Scardino. Das Drehbuch schrieben Jonathan Goldstein und John Francis Daley.
+
+Steve Carell spielt Albert „Burt" Wonderstone, Steve Buscemi den Anthony „Anton" Marvelton, Jim Carrey den Steve Gray, Olivia Wilde die Jane, James Gandolfini den Casinobesitzer Doug Munny, Alan Arkin den Rance Holloway und Michael Herbig den Lucius Belvedere.
+
+Die Kamera führte Matthew Clark, den Schnitt Lee Haxall, die Musik stammt von Lyle Workman.
+
+Der Film erschien 2013, dauert 101 Minuten und kostete 30 Millionen Dollar; eingespielt hat er 27,4 Millionen.
+
+### Hinter den Kulissen
+
+Der Gegensatz, um den es geht, ist der zwischen zwei Vorstellungen von Zauberei. Die eine arbeitet mit Illusion, Kostüm und Bühne; die andere zeigt einen Mann, der sich etwas antut, und filmt es.
+
+Jim Carrey spielt den Herausforderer — die auffälligste Besetzung des Films.
+
+Mit Michael Herbig steht zudem ein deutscher Name auf der Besetzungsliste, was bei einer amerikanischen Studiokomödie selten vorkommt.
+
+Die Kritik traf sich in einem Punkt: Das Lexikon des internationalen Films nannte ihn einen durchaus interessanten Mix mit Höhepunkten, fand aber, zu viele Handlungsstränge führten ins Mittelmaß.
+
+### Einordnung & Wirkung
+
+Bei 30 Millionen Dollar Herstellungskosten spielte der Film 27,4 Millionen ein — er deckte seine Kosten nicht.
+
+Rotten Tomatoes weist 38 Prozent bei 196 Kritiken aus.
+
+Die Süddeutsche Zeitung urteilte freundlicher und nannte ihn eine ziemlich fiese Hollywood-Komödie, wobei sie Carell und Buscemi als grandiose Paarung hervorhob. Negativ vermerkt wurden plumpe Gags.
+
+Bemerkenswert bleibt die Besetzungsliste. Steve Carell, Steve Buscemi, Jim Carrey, Olivia Wilde, James Gandolfini und Alan Arkin in einem Film, den kaum jemand gesehen hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:4474', locale: 'de-de',
+    text: `### Worum es geht
+
+Matt Saunders ist Architekt in New York und ein unsicherer Mensch. In der U-Bahn verhindert er, dass einer Fremden die Handtasche gestohlen wird — und kommt so mit Jenny Johnson ins Gespräch.
+
+Es wird eine Beziehung daraus. Dann erfährt er, was Jenny sonst noch macht: Sie ist G-Girl, Superheldin, seit ein Meteorit sie in ihrer Jugend traf. Und als Matt Schluss machen will, erfährt er, was das bedeutet.
+
+### Entstehungsgeschichte
+
+Regie führte Ivan Reitman, das Drehbuch schrieb Don Payne. Produziert wurde der Film von Bill Carraro, Arnon Milchan und Gavin Polone.
+
+Uma Thurman spielt Jenny Johnson alias G-Girl, Luke Wilson den Matt Saunders, Anna Faris die Hannah, Rainn Wilson den Vaughn Haige und Eddie Izzard den Professor Bedlam.
+
+Die Kamera führte Don Burgess, die Musik stammt von Teddy Castellucci; den Schnitt besorgten Wendy Greene Bricmont und Sheldon Kahn.
+
+Gedreht wurde in New York, teilweise in den Steiner Studios in Brooklyn. Die Filmmusik nahm im Mai 2006 das 88-köpfige Hollywood Studio Symphony unter Pete Anthony auf.
+
+### Hinter den Kulissen
+
+Die Idee ist eine Umkehrung mit Biss: Was passiert, wenn die verlassene Partnerin nicht nur wütend ist, sondern unbesiegbar?
+
+Damit verhandelt der Film unter komödiantischen Vorzeichen etwas Unangenehmes — Rache nach einer Trennung, ausgeführt mit Mitteln, gegen die kein Kraut gewachsen ist.
+
+Das Lexikon des internationalen Films erkannte darin eine hinterlistige Parodie auf den Superheldenmythos.
+
+Ein Kritiker sah dagegen nur einen dünnen, ausgedehnten Gag — die Prämisse trage nicht über die volle Länge.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film rund 61 Millionen Dollar ein — 22,5 Millionen in den Vereinigten Staaten und Kanada, 38,5 Millionen anderswo.
+
+Rotten Tomatoes weist 40 Prozent bei 131 Kritiken aus, Metacritic 50 von 100 bei 28 Kritiken.
+
+Dass zwei Drittel des Ergebnisses außerhalb Nordamerikas entstanden, ist bei einer Komödie mit diesem Zuschnitt ungewöhnlich.
+
+Zwischen dem Lob des Lexikons für die hinterlistige Parodie und dem Vorwurf des ausgedehnten Gags liegt die ganze Rezeption dieses Films.` },
+  {
+    bereich: 'titel', schluessel: 'movie:607259', locale: 'de-de',
+    text: `### Worum es geht
+
+Matthew Logelin wird Vater. Kurz nach der Geburt stirbt seine Frau Liz an einer Lungenembolie.
+
+Er steht mit einem neugeborenen Kind allein da. Seine Schwiegermutter Marion bezweifelt, dass er das schafft, und bietet an zu übernehmen. Matt entscheidet sich dagegen — und der Film erzählt, was daraus wird: Trauer, ein Beruf, der weiterläuft, und ein Kind, das aufwächst.
+
+### Entstehungsgeschichte
+
+Vorlage ist Matthew Logelins Erinnerungsbuch „Two Kisses for Maddy: A Memoir of Loss and Love" aus dem Jahr 2011.
+
+Regie führte Paul Weitz, der das Drehbuch gemeinsam mit Dana Stevens nach deren Geschichte schrieb.
+
+Kevin Hart spielt Matthew Logelin, Melody Hurd die Tochter Maddy, Alfre Woodard die Schwiegermutter Marion und DeWanda Wise die Lizzie Swan; in Nebenrollen sind Lil Rel Howery, Anthony Carrigan und Paul Reiser zu sehen.
+
+Die Kamera führte Tobias Datum, den Schnitt Jonathan Corn, die Musik stammt von Rupert Gregson-Williams.
+
+Gedreht wurde in Boston und Montreal. Das Budget betrug 15 Millionen Dollar, die Laufzeit 109 Minuten.
+
+Der Film erschien nach mehrfachen Verschiebungen am 18. Juni 2021 weltweit bei Netflix.
+
+### Hinter den Kulissen
+
+Das Projekt hat eine lange Vorgeschichte. Zunächst war es 2012 als Fernsehfilm geplant, später als Kinofilm mit Channing Tatum vorgesehen. Erst 2019 kam es in der heutigen Besetzung zustande.
+
+Die Umbesetzung ist dabei die entscheidende Wendung. Kevin Hart, bekannt für Komödien, übernimmt eine Rolle, in der nichts komisch ist.
+
+Genau darauf zielte die Rezeption: TheWrap lobte seine vertrauensvolle Darstellung, der Hollywood Reporter nannte ihn in den dramatischen Momenten überraschend überzeugend.
+
+Dass der reale Matthew Logelin sein Buch selbst geschrieben hat, gibt dem Stoff seine Grundlage.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 67 Prozent bei 75 Bewertungen aus, Metacritic 53 von 100.
+
+Die Verschiebungen sind Teil der Geschichte: Geplant war der Start für April 2020, gekommen ist er im Juni 2021 — über ein Jahr später und ohne Kino.
+
+Für einen Film über Trauer und Alleinerziehung ist der Weg über eine Plattform womöglich der passendere. Er erreicht Menschen dort, wo sie ihn brauchen, statt in einer Vorstellung mit Publikum.
+
+15 Millionen Dollar Budget für einen Film mit dieser Besetzung sind zudem sparsam kalkuliert.` },
+  {
+    bereich: 'titel', schluessel: 'movie:969492', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Delta-Force-Team wird auf den Philippinen abgesetzt, um eine Geisel zu befreien. Mit dabei: JJ Kinney, ein junger Sergeant, der die Luftunterstützung anfordern soll.
+
+Diese Unterstützung fliegt Captain Eddie Grimm — als Drohnenpilot, weit entfernt vom Ort des Geschehens. Als das Feuergefecht mit der Abu Sayyaf ausbricht, ist der Funk zwischen beiden das Einzige, was bleibt.
+
+### Entstehungsgeschichte
+
+Regie führte William Eubank, der das Drehbuch gemeinsam mit David Frigerio schrieb. Beide verfassten es zwischen 2012 und 2013 in Albuquerque und recherchierten dafür bei echten Fliegerleitoffizieren; auch die Funkbefehle übten sie durch.
+
+Liam Hemsworth spielt Sergeant JJ Kinney, Russell Crowe den Captain Eddie Grimm, Milo Ventimiglia den Master Sergeant John Sweet, Ricky Whittle den Sergeant Bishop und Luke Hemsworth den Sergeant Abell.
+
+Die Kamera führte Agustin Claramunt, die Musik stammt von Brandon Roberts.
+
+Gedreht wurde von September bis November 2022 an der Gold Coast in Queensland. Das Budget betrug 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Anlage teilt den Film in zwei Räume, die nichts miteinander gemein haben: den Einsatzort auf den Philippinen und den Arbeitsplatz des Drohnenpiloten.
+
+Daraus entsteht die eigentliche Frage — was es bedeutet, jemanden aus der Ferne sterben zu sehen und dabei nichts tun zu können außer zu sprechen.
+
+Die Recherche bei echten Fliegerleitoffizieren ist deshalb keine Nebensache. Der Funkverkehr ist der Kern des Films, und wenn er falsch klingt, bricht alles zusammen.
+
+Der Kritiker Simon Abrams sah darin allerdings vor allem einen ausufernd dramatisierten Vortrag über die amerikanische Armee.
+
+### Einordnung & Wirkung
+
+Bei 20 Millionen Dollar Herstellungskosten spielte der Film weltweit sieben Millionen ein.
+
+Rotten Tomatoes weist 67 Prozent bei einem Schnitt von 6,1 von 10 aus, Metacritic 57 von 100.
+
+Der Einwand von Abrams benennt das Problem solcher Filme. Wer den Einsatz aus Sicht der Beteiligten erzählt und dabei technisch genau bleibt, läuft Gefahr, deren Sicht zur einzigen zu machen.
+
+Dass zwischen dem Drehbuch von 2012 und dem Dreh 2022 zehn Jahre lagen, ist ein eigener Befund — der Stoff brauchte ein Jahrzehnt, bis ihn jemand herstellte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:24150', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei Jahre nach den Ereignissen des ersten Films lebt Laurie Strode bei den Bracketts. Sie schläft schlecht, sie erschrickt vor allem, und sie ist nicht dieselbe.
+
+Michael Myers ist verschwunden. Was ihn antreibt, sind Erscheinungen seiner Mutter Deborah, die ihn auffordern, Laurie heimzuholen. Und auch Laurie beginnt, Dinge zu sehen, die nicht da sind.
+
+### Entstehungsgeschichte
+
+Rob Zombie führte Regie und schrieb das Drehbuch; produziert wurde der Film von Malek Akkad, Andy Gould und Zombie.
+
+Tyler Mane spielt Michael Myers, Scout Taylor-Compton die Laurie Strode, Malcolm McDowell den Dr. Samuel Loomis, Sheri Moon Zombie die Deborah Myers, Danielle Harris die Annie Brackett, Brad Dourif den Sheriff Leigh Brackett, Brea Grant die Mya Rockwell, Octavia Spencer eine Krankenschwester und Margot Kidder die Barbara Collier; Chase Wright Vanek spielt den jungen Michael.
+
+Die Kamera führte Brandon Trost, die Musik stammt von Tyler Bates; den Schnitt besorgten Glenn Garland und Joel T. Pashby.
+
+Gedreht wurde vom 23. Februar bis zum 9. April 2009 in Georgia, Connecticut und Kalifornien, mit Nachaufnahmen im Juli. Das Budget betrug geschätzt 15 Millionen Dollar. Die Kinofassung dauert 105 Minuten, der Director's Cut 119.
+
+### Hinter den Kulissen
+
+Zwei Entscheidungen prägen den Film und wurden beide überwiegend abgelehnt: Michael Myers' Gesicht ist mehrfach deutlich zu sehen, und er spricht.
+
+Bei einer Figur, deren Wirkung auf der Maske und dem Schweigen beruht, ist das ein Eingriff ins Wesen.
+
+Der zweite Schwerpunkt liegt auf Laurie. Der Film interessiert sich für das, was nach dem Überleben kommt — und der Director's Cut geht darin weiter als die Kinofassung.
+
+Eine Nebennotiz aus der Produktion: Daeg Faerch, der 2007 den jungen Michael gespielt hatte, musste ersetzt werden, weil er zu schnell gewachsen war.
+
+In Deutschland existieren mehrere Schnittfassungen. Der Director's Cut und eine um etwa eine Minute gekürzte Fassung sind indiziert; nur eine um rund drei Minuten gekürzte Fassung ist freigegeben. Einen bundesweiten Kinostart gab es hier nicht.
+
+### Einordnung & Wirkung
+
+Das Startwochenende brachte rund sieben Millionen Dollar — drei Millionen weniger als beim Vorgänger. Weltweit kam der Film auf 39,4 Millionen.
+
+Die Kritik war hart. Mike Hale nannte ihn in der New York Times fast frei von Esprit. Das Lexikon des internationalen Films befand, er folge mehr den Prinzipien des Pornos als denen des erzählenden Kinos — Meuchelszenen aneinandergereiht statt Spannung aufgebaut.
+
+James Berardinelli schrieb, der Film sei so schlecht, dass er seine frühere Bewertung eines anderen Teils der Reihe überdenken müsse, und warf Zombie vor, Dunkelheit mit Atmosphäre zu verwechseln.
+
+Oliver Forst zeigte sich bei filmrezension.de zwiegespalten und fand sämtliche Figuren unausstehlich.
+
+Vier Kritiken, vier Ablehnungen aus verschiedenen Richtungen — bei einem Film, der ausdrücklich etwas anderes wollte als sein Vorgänger.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10607', locale: 'de-de',
+    text: `### Worum es geht
+
+Ashtray zieht zu seinem Vater, damit ein richtiger Mann aus ihm wird.
+
+Im Viertel trifft er auf seinen Cousin Loc Dog und auf Dashiki, eine alleinerziehende Mutter. Was folgt, ist eine Aneinanderreihung von Situationen, die jeder kennt, der die Filme kennt, auf die sich dieser bezieht.
+
+### Entstehungsgeschichte
+
+Regie führte Paris Barclay. Das Drehbuch schrieben Phil Beauman, Marlon Wayans und Shawn Wayans; produziert wurde der Film von Eric L. Gold und Keenen Ivory Wayans.
+
+Shawn Wayans spielt Ashtray, Marlon Wayans den Loc Dog, Tracey Cherelle Jones die Dashiki und Bernie Mac einen Polizisten; Keenen Ivory Wayans tritt als Postbote auf, Kim Wayans als Mrs. Johnson.
+
+Die Kamera führte Russ Brandt, die Musik stammt von John Barnes; den Schnitt besorgten Marshall Harvey und William Young.
+
+Der Film erschien 1996, dauert 89 Minuten und ist in Deutschland ab 12 Jahren freigegeben; in den Vereinigten Staaten trug er ein R-Rating.
+
+### Hinter den Kulissen
+
+Der Film ist eine Parodie, und er setzt voraus, dass man die Vorlagen kennt. Ohne diesen Bezugspunkt bleiben von den Szenen nur Einzelgags übrig.
+
+Auffällig ist der Familienbetrieb dahinter. Vier Mitglieder der Familie Wayans stehen vor der Kamera, zwei von ihnen schrieben mit, einer produzierte.
+
+Bernie Mac in einer Nebenrolle gehört zu den Namen, die man im Rückblick bemerkt.
+
+Der große deutsche Abstand bei der Altersfreigabe — 12 hier, R in den Vereinigten Staaten — zeigt, wie unterschiedlich derselbe Film eingestuft wurde.
+
+### Einordnung & Wirkung
+
+Die Kritik lehnte ab. Das Lexikon des internationalen Films vermisste ein dramaturgisches Konzept und sprach von minderwertigen Gags.
+
+Antje Krum kritisierte das Fehlen einer unterhaltsamen Handlung und beschrieb den Film als Revue ohne das nötige Tempo.
+
+Beide Einwände zielen auf dasselbe: Eine Parodie, die nur aus Einzelnummern besteht, braucht Tempo, um über die Länge zu tragen.
+
+Was der Film hinterlässt, ist eine Momentaufnahme dessen, worüber 1996 gelacht wurde — und eine Familie, die daraus ein eigenes Verfahren machte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:227348', locale: 'de-de',
+    text: `### Worum es geht
+
+Oxnard in Kalifornien, im Juni 2012. Der achtzehnjährige Jesse Arista filmt mit seinem Freund Hector alles, was um sie herum geschieht.
+
+Als die Nachbarin Ana Sanchez stirbt, gehen die beiden der Sache nach — und stoßen in ihrer Wohnung auf okkulte Gegenstände. Kurz darauf ist Jesse „markiert", und mit ihm verändert sich etwas.
+
+### Entstehungsgeschichte
+
+Christopher Landon schrieb das Drehbuch und führte Regie. Er beschrieb den Film als Cousin der Reihe, nicht als direkte Fortsetzung.
+
+Andrew Jacobs spielt Jesse Arista, Jorge Diaz den Hector Estrella, Gabrielle Walsh die Marisol Vargas und Richard Cabral den Arturo Lopez; Katie Featherston, Micah Sloat und Molly Ephraim kehren in ihren Rollen aus früheren Teilen zurück.
+
+Produziert wurde der Film von Jason Blum und Oren Peli für Blumhouse Productions, Solana Films und Room 101; verliehen wurde er von Paramount Pictures. Die Kamera führte Gonzalo Amat, den Schnitt Gregory Plotkin.
+
+Wie die gesamte Reihe ist der Film im Found-Footage-Verfahren gedreht, mit Handkamera-Ästhetik. Das Budget lag zwischen fünf und 9,2 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Verlagerung ist die Entscheidung, um die es geht. Der Film spielt in einer mexikanisch-amerikanischen Nachbarschaft in Oxnard — anderes Personal, anderer Ton als in den vorangegangenen Teilen.
+
+Genau das wurde gelobt. Mark Olsen befand in der Los Angeles Times, der Film wirke wie ein Neubeginn; Richard Corliss würdigte in Time vertraute billige Schrecken mit Salsa-Würze.
+
+Landons Bezeichnung als Cousin statt Fortsetzung beschreibt das Verhältnis genau: dieselbe Welt, andere Familie.
+
+Zugleich verknüpft der Film sich am Ende mit dem ersten Teil der Reihe — er löst sich also nicht so weit, wie der Anfang vermuten lässt.
+
+### Einordnung & Wirkung
+
+Bei fünf bis 9,2 Millionen Dollar Herstellungskosten spielte der Film weltweit 90,9 Millionen ein — 32,5 Millionen in Nordamerika, 58,4 Millionen international.
+
+Rotten Tomatoes weist 40 Prozent aus. Bei CinemaScore vergab das Publikum ein C−.
+
+Filmink vermisste denkwürdige Schreckmomente.
+
+Der Abstand zwischen einem C− beim Publikum und einem Ergebnis, das das Zehnfache der Kosten einspielt, beschreibt das Geschäftsmodell dieser Reihe: geringe Kosten, hoher Ertrag, und die Zufriedenheit der Zuschauer ist zweitrangig.
+
+Dass zwei Drittel des Ergebnisses außerhalb Nordamerikas entstanden, ist bei einem Film mit spanischsprachigem Umfeld folgerichtig.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11260', locale: 'de-de',
+    text: `### Worum es geht
+
+Auf Liberty Island landet ein außerirdisches Raumschiff. Seine Besatzung stammt vom Planeten Nil und sucht eine Energiekugel, die auf der Erde verlorenging.
+
+Der Kapitän soll die Sache erledigen und wieder verschwinden. Stattdessen entwickelt er Gefühle für die Menschen — und weigert sich, die Erde auszubeuten. Sein Stellvertreter entmachtet ihn daraufhin.
+
+### Entstehungsgeschichte
+
+Regie führte Brian Robbins. Das Drehbuch schrieben Rob Greenberg und Bill Corbett; produziert wurde der Film von Jon Berg, David T. Friendly und Todd Komarnicki.
+
+Eddie Murphy spielt sowohl Dave Ming Cheng als auch den Kapitän im Inneren, Elizabeth Banks die Gina Morrison, Gabrielle Union die Nummer 3, Scott Caan den Officer Dooley, Ed Helms die Nummer 2 und Kevin Hart die Nummer 17.
+
+Die Kamera führte J. Clark Mathis, den Schnitt Ned Bastille, die Musik stammt von John Debney.
+
+Gedreht wurde ab März 2007 in New York, Los Angeles und Pasadena. Das Budget betrug 60 Millionen Dollar; der US-Kinostart war am 11. Juli 2008.
+
+### Hinter den Kulissen
+
+Eddie Murphy spielt zwei Rollen zugleich: Dave Ming Cheng und den Kapitän. Diese Doppelung ist der Kern der Anlage.
+
+Der Konflikt an Bord treibt die Handlung: Ein Kapitän, der die Erde verschonen will, ein Stellvertreter, der ihn absetzt, und eine Mannschaft, die sich am Ende gegen den Stellvertreter stellt.
+
+Damit verhandelt eine Komödie für Familien beiläufig eine Meuterei.
+
+Kevin Hart und Ed Helms in kleinen Rollen sind aus heutiger Sicht die auffälligsten Einträge der Besetzungsliste.
+
+### Einordnung & Wirkung
+
+Bei 60 Millionen Dollar Herstellungskosten brachte das Startwochenende in den Vereinigten Staaten gut 5,2 Millionen. In Deutschland sahen den Film knapp 265.000 Zuschauer.
+
+Rotten Tomatoes weist 20 Prozent aus, Metacritic 43 von 100. Der Film erhielt überwiegend negative Kritiken und Nominierungen für die Goldene Himbeere.
+
+Ein Startwochenende von 5,2 Millionen bei 60 Millionen Herstellungskosten ist ein Verhältnis, aus dem sich kein Film mehr erholt.
+
+Was bleibt, ist eine Idee, die besser war als ihre Ausführung — und ein Ensemble, dessen jüngere Mitglieder wenige Jahre später sehr viel bekannter waren.` },
 ];
