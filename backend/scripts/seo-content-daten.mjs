@@ -44462,4 +44462,307 @@ Trotz dieser Aufnahme endete die Serie nach zwei Staffeln.
 Das ist der bemerkenswerteste Punkt ihrer Bilanz. 87 Prozent Zustimmung sind ein Wert, mit dem viele Produktionen weiterlaufen — die Entscheidung fiel hier offenkundig nicht nach der Kritik.
 
 Zurück bleiben 16 Folgen, die zwei Buchreihen zusammenführen und deren Erzählung an einem Punkt abbricht, an dem die Vorlagen weitergehen.` },
+  // ---- Block 100 ----
+  {
+    bereich: 'titel', schluessel: 'movie:11355', locale: 'de-de',
+    text: `### Worum es geht
+
+Josie Geller ist 25 und arbeitet als Journalistin bei der Chicago Sun-Times. Für eine Reportage über Jugendliche soll sie undercover an eine High School gehen — an ihre eigene alte Schule.
+
+Anschluss zu finden fällt ihr schwer; ihr Bruder Robert hilft ihr dabei. Und dann verliebt sie sich in ihren Literaturlehrer, der nicht weiß, dass die Schülerin vor ihm 25 Jahre alt ist.
+
+### Entstehungsgeschichte
+
+Regie führte Raja Gosnell. Das Drehbuch schrieben Abby Kohn und Marc Silverstein.
+
+Drew Barrymore spielt Josie Geller und produzierte den Film gemeinsam mit Nancy Juvonen. Michael Vartan ist der Lehrer Sam Coulson, David Arquette der Bruder Robert Geller, Molly Shannon die Anita Olesky, Leelee Sobieski die Aldys Martin und John C. Reilly der Augustus Strauss.
+
+Die Kamera führte Alex Nepomniaschy, den Schnitt besorgten Debra Chiate und Marcelo Sansevieri, die Musik stammt von David Newman.
+
+Der Film erschien 1999 in den Vereinigten Staaten und dauert 103 Minuten.
+
+### Hinter den Kulissen
+
+Die Anlage stellt eine unangenehme Frage in den Mittelpunkt und beantwortet sie über den Verlauf: Wie geht ein Erwachsener damit um, dass jemand sich in eine Person verliebt, die es gar nicht gibt?
+
+Der Film löst das nicht über einen Trick, sondern über eine Offenlegung. Josie muss ihre Tarnung selbst aufgeben — und alles, was danach kommt, hängt davon ab, wie ihr Gegenüber darauf reagiert.
+
+Drew Barrymore spielt nicht nur die Hauptrolle, sie hat den Film gemeinsam mit Nancy Juvonen auch produziert — die Figur ist also in doppeltem Sinn ihre.
+
+John C. Reilly und Molly Shannon in Nebenrollen liefern dazu die Erwachsenenwelt, aus der Josie kommt und in die sie zurück muss.
+
+### Einordnung & Wirkung
+
+Roger Ebert lobte, Barrymore schaffe mit ihrer sonnigen Art eine liebenswerte Figur; der Film sei witzig, großherzig und gewinnend.
+
+Drew Barrymore und David Arquette gewannen den Blockbuster Entertainment Award.
+
+Ebert benennt damit, worauf der Film steht. Die Konstruktion — Erwachsene an der High School — ist nicht neu; was ihn trägt, ist die Bereitschaft der Hauptdarstellerin, ihre Figur zunächst peinlich sein zu lassen.
+
+Dass beide Hauptdarsteller den Blockbuster Entertainment Award erhielten — Barrymore und David Arquette als ihr Bruder —, weist auf die zweite Ebene des Films hin: Er ist ebenso eine Geschwistergeschichte wie eine Liebesgeschichte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:13179', locale: 'de-de',
+    text: `### Worum es geht
+
+Tinker Bell entsteht aus dem ersten Lachen eines Babys und kommt nach Pixie Hollow, wo die Feen leben.
+
+Dort bekommt jede Fee ein Talent zugewiesen. Ihres lautet: Tinkerfee — sie repariert und baut Dinge. Damit ist sie unzufrieden. Sie versucht, andere Fähigkeiten zu erlernen, und scheitert an jeder einzelnen. Bis sich zeigt, wozu ihr eigenes Talent taugt.
+
+### Entstehungsgeschichte
+
+Regie führte Bradley Raymond, das Drehbuch schrieb Jeffrey M. Howard. Das Projekt hatte eine lange Entwicklung hinter sich — es entstanden zwei Dutzend Drehbuchfassungen unter mehreren Regisseuren.
+
+Produziert wurde der Film von den Disneytoon Studios; animiert wurde er von Prana Studios in Indien am Computer. Das Budget betrug 50 Millionen Dollar. Massive Überschreitungen führten zu Wechseln in der Leitung.
+
+Mae Whitman spricht Tinker Bell; ursprünglich war Brittany Murphy dafür vorgesehen. Lucy Liu spricht Silvermist, Raven-Symoné die Iridessa, Kristin Chenoweth die Rosetta, America Ferrera die Fawn, Jane Horrocks die Fairy Mary, Jesse McCartney den Terence, Jeff Bennett den Clank, Rob Paulsen den Bobble, Pamela Adlon die Vidia und Anjelica Huston die Queen Clarion; Loreena McKennitt spricht die Erzählerin.
+
+Die Musik stammt von Joel McNeely, eingespielt vom Hollywood Studio Symphony mit 88 Musikern und unter Mitwirkung der keltischen Geigerin Máiréad Nesbitt.
+
+Der Film erschien am 28. Oktober 2008 auf DVD und Blu-ray; zuvor lief er vom 19. September bis zum 2. Oktober 2008 im El Capitan Theatre.
+
+### Hinter den Kulissen
+
+Der Kern der Geschichte ist eine Frage der Selbsteinschätzung. Tinker Bell hält ihr Talent für minderwertig, weil es praktisch ist, und der Film widerspricht ihr, indem er zeigt, was Handwerk vermag.
+
+Die Produktionsgeschichte mit zwei Dutzend Drehbuchfassungen, wechselnden Regisseuren und Budgetüberschreitungen deutet darauf hin, wie lange der richtige Zugriff gesucht wurde. Animiert wurde am Ende von Prana Studios in Indien.
+
+Auch die Titelrolle wechselte: Vorgesehen war zunächst Brittany Murphy, gesprochen hat sie Mae Whitman.
+
+Ursprünglich für Herbst 2007 geplant, erschien der Film ein Jahr später.
+
+### Einordnung & Wirkung
+
+Auf DVD verkaufte sich der Film 3.347.686 Mal und brachte 52.201.882 Dollar ein; allein am ersten Verkaufstag gingen in Nordamerika 668.000 Exemplare über die Ladentheke.
+
+Rotten Tomatoes weist 90 Prozent aus — allerdings auf Grundlage von nur zehn Kritiken, mit einem Durchschnitt von 6,5 von 10.
+
+Fünf Fortsetzungen folgten: „Tinker Bell and the Lost Treasure" 2009, „Tinker Bell and the Great Fairy Rescue" 2010, „Pixie Hollow Games" 2011, „Secret of the Wings" 2012 und „The Pirate Fairy" 2014; 2015 kam „Tinker Bell and the Legend of the NeverBeast" hinzu.
+
+Aus einem Film, dessen Herstellung schwierig war, wurde damit eine der beständigsten Reihen des Studios für den Heimmarkt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:146239', locale: 'de-de',
+    text: `### Worum es geht
+
+David Wozniak fährt Lieferwagen, hat Schulden und bekommt sein Leben nicht geordnet.
+
+Dann erfährt er, was aus seinen Samenspenden geworden ist, die er mit zwanzig abgab: 533 Kinder. Von diesen haben 142 eine Sammelklage eingereicht, um seinen Namen zu erfahren. Sein bester Freund Brett, ein Anwalt, will die Anonymität verteidigen. David beginnt derweil, einzelne seiner Kinder aufzusuchen, ohne sich zu erkennen zu geben.
+
+### Entstehungsgeschichte
+
+Der Film ist die Neuverfilmung des kanadischen Films „Starbuck" von 2011 — bei dem Ken Scott ebenfalls Regie geführt hatte. Scott schrieb auch hier das Drehbuch und inszenierte.
+
+Vince Vaughn spielt David Wozniak, Chris Pratt den Anwalt Brett und Cobie Smulders die Emma; zehn weitere Darsteller sind in Nebenrollen zu sehen.
+
+Produziert wurde der Film von André Rouleau. Die Kamera führte Eric Alan Edwards, den Schnitt Priscilla Nedd-Friendly, die Musik stammt von Jon Brion.
+
+Der Film erschien 2013, dauert 105 Minuten und ist ohne Altersbeschränkung freigegeben. Das Budget betrug 26 Millionen Dollar; in Nordamerika spielte er 31 Millionen ein, weltweit 50 Millionen.
+
+### Hinter den Kulissen
+
+Dass derselbe Regisseur seinen eigenen Film zwei Jahre später noch einmal drehte, ist der ungewöhnlichste Umstand dieser Produktion. Ken Scott hatte „Starbuck" in Kanada gemacht; die amerikanische Fassung folgte mit größerem Budget und bekannteren Namen.
+
+Genau daran setzte die Kritik an: Die Neuverfilmung wiederhole das Original nach Schema, ohne dessen satirische Schärfe zu erreichen.
+
+Die Zahl 533 ist der Motor der Handlung. Sie ist groß genug, um absurd zu sein, und klein genug, dass einzelne Begegnungen zählen — David lernt seine Kinder nacheinander kennen, ohne dass sie es wissen.
+
+Als frischer Zug wurde Chris Pratt hervorgehoben, der den überforderten Anwalt spielt.
+
+### Einordnung & Wirkung
+
+Bei 26 Millionen Dollar Herstellungskosten spielte der Film weltweit 50 Millionen ein.
+
+Die Freigabe ohne Altersbeschränkung ist bemerkenswert für einen Film, dessen Ausgangspunkt Samenspenden sind — sie zeigt, wie zurückhaltend der Stoff behandelt wird.
+
+Der Vorwurf der Kritik trifft ein bekanntes Problem. Wer einen erfolgreichen Film für einen größeren Markt noch einmal dreht, muss entscheiden, was er behält; was dabei oft verlorengeht, ist die Schärfe.
+
+Dass Ken Scott beide Fassungen inszenierte, macht den Vergleich zugleich unausweichlich — die Kritik zog ihn und entschied gegen die zweite.` },
+  {
+    bereich: 'titel', schluessel: 'movie:930094', locale: 'de-de',
+    text: `### Worum es geht
+
+Alex Claremont-Diaz ist der Sohn der amerikanischen Präsidentin. Henry ist Dritter in der britischen Thronfolge. Die beiden können einander nicht ausstehen.
+
+Bei einer königlichen Hochzeit kommt es zu einem Zwischenfall, der beide Regierungen in Verlegenheit bringt. Die Lösung der Stäbe: Die zwei müssen öffentlich als Freunde auftreten. Was daraus wird, war nicht geplant — und passt in keinen Protokollentwurf.
+
+### Entstehungsgeschichte
+
+Vorlage ist Casey McQuistons Roman von 2019.
+
+Matthew López führte Regie — es war sein erster Spielfilm — und schrieb das Drehbuch gemeinsam mit Ted Malawer.
+
+Taylor Zakhar Perez spielt Alex Claremont-Diaz, Nicholas Galitzine den Prinzen Henry, Uma Thurman die Präsidentin Ellen Claremont, Stephen Fry den König James III., Sarah Shahi die Zahra Bankston, Rachel Hilson die Nora Holleran, Clifton Collins Jr. den Kongressabgeordneten Oscar Diaz und Ellie Bamber die Prinzessin Beatrice.
+
+Amazon Studios sicherte sich 2019 die Rechte; produziert wurde der Film von Greg Berlanti und Sarah Schechter über Berlanti-Schechter Films. Die Kamera führte Stephen Goldblatt, die Musik stammt von Drum & Lace; der Soundtrack erschien im August 2023 und enthält Stücke von Vagabon und Oliver Sim.
+
+Gedreht wurde von Juni bis August 2022 in England, unter anderem in der Sculpture Gallery des Victoria and Albert Museum. Premiere war am 22. Juli 2023 im BFI IMAX in London, der Start bei Amazon Prime Video folgte am 11. August 2023.
+
+### Hinter den Kulissen
+
+Die Konstruktion ist die einer klassischen Liebeskomödie, versetzt in einen Rahmen, in dem jede private Entscheidung eine politische ist. Was zwischen den beiden geschieht, betrifft zwei Staaten.
+
+Damit steht ein Genre unter neuen Vorzeichen. Das Muster — erst Abneigung, dann erzwungene Nähe — ist alt; neu ist, dass eine Enthüllung hier nicht nur peinlich wäre, sondern staatstragend.
+
+Der Dreh in England, samt einer Tanzszene im Victoria and Albert Museum, liefert dafür die Räume.
+
+Für Matthew López war es der erste Spielfilm.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 75 Prozent bei einem Schnitt von 6,4 von 10 aus, Metacritic 62 von 100.
+
+Gelobt wurde durchweg das Zusammenspiel der beiden Hauptdarsteller; kritisiert wurden die schematische Handlung und teilweise Uma Thurmans Darstellung.
+
+Der Film war für einen Primetime Emmy als bester Fernsehfilm nominiert, außerdem bei den GLAAD Media Awards und den Producers Guild of America Awards. Gewonnen hat er den Astra TV Award als bester Fernsehfilm und den GLAAD Queer Fan Favorite.
+
+Eine Emmy-Nominierung als bester Fernsehfilm ordnet die Arbeit ein: Was als Kinostoff angelegt wirkt, wurde als Plattformproduktion ausgewertet und dort auch bewertet.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1151534', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Spanien, in dem eine Regierung die Bevölkerung dezimiert, um Vorräte zu strecken. Mia und Nico versuchen zu fliehen.
+
+Bei der Flucht werden sie getrennt. Mia landet allein in einem Container, der aufs Meer hinausgebracht wird. Sie ist hochschwanger. Was folgt, spielt fast vollständig in diesem Container: die Geburt ihrer Tochter Noa und die Wochen danach.
+
+### Entstehungsgeschichte
+
+Regie führte Albert Pintó. Das Drehbuch schrieben Ernest Riera, Miguel Ruz, Indiana Lista, Seanne Winslow und Teresa Rosendoy nach einer Geschichte von Indiana Lista.
+
+Anna Castillo spielt Mia, Tamar Novas den Nico.
+
+Produziert wurde der Film von Miguel Ruz über Rock & Ruz; Jordi Roca war ausführender Produzent. Gedreht wurde im Hafen von Tarragona.
+
+Der Film erschien am 29. September 2023 bei Netflix.
+
+### Hinter den Kulissen
+
+Der Film ist ein Kammerstück im engsten Sinn. Ein Container auf offener See, eine Darstellerin, ein Neugeborenes — mehr steht nicht zur Verfügung.
+
+Das verlagert das gesamte Gewicht auf Anna Castillo. Ohne Gegenüber, ohne Ortswechsel und über weite Strecken ohne Dialog muss sie den Film allein tragen, und genau dafür wurde sie durchgängig gelobt.
+
+Der Dreh im Hafen von Tarragona ermöglichte, was der Stoff verlangt: Wasser, ein Container und die Kontrolle über beides.
+
+Die dystopische Rahmenhandlung bleibt dabei knapp. Der Film erklärt sein Regime nicht, sondern setzt es voraus — die Not, die in den Container führt, ist die eigentliche Vorgeschichte.
+
+### Einordnung & Wirkung
+
+Innerhalb von drei Tagen kam der Film auf über 24 Millionen Aufrufe und wurde damit zum meistgesehenen nicht englischsprachigen Netflix-Film des Jahres 2023.
+
+Rotten Tomatoes weist 64 Prozent bei 14 Kritiken aus, mit einem Schnitt von 6,2 von 10. Castillos Leistung wurde durchweg gelobt, das Drehbuch kritisiert.
+
+Diese Aufteilung ist bezeichnend. Was den Film trägt, ist eine Darstellerin unter extremen Bedingungen; was ihn angreifbar macht, ist die Konstruktion um sie herum.
+
+Bemerkenswert bleibt die Reichweite. Ein spanischsprachiger Film mit zwei Darstellern und einem einzigen Schauplatz erreichte binnen drei Tagen ein weltweites Publikum in einer Größenordnung, die früher großen Produktionen vorbehalten war.` },
+  {
+    bereich: 'titel', schluessel: 'series:69629', locale: 'de-de',
+    text: `### Worum es geht
+
+Reed und Caitlin Strucker sind gewöhnliche Eltern. Dann stellt sich heraus, dass ihre beiden Kinder Mutanten sind — Lauren und Andy haben Fähigkeiten, die sie nicht beherrschen.
+
+Die Familie muss fliehen. Sie schließt sich einer Untergrundgemeinschaft von Mutanten an, die selbst ums Überleben kämpft.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Matt Nix als Adaption von Marvel-Comics.
+
+Produziert wurde sie von 20th Century Fox Television in Zusammenarbeit mit Marvel Television; ausführende Produzenten waren Bryan Singer, Lauren Shuler Donner und Simon Kinberg.
+
+Stephen Moyer spielt Reed Strucker, Amy Acker die Caitlin, Natalie Alyn Lind die Tochter Lauren, Percy Hynes White den Sohn Andy, Sean Teale den Marcos Diaz alias Eclipse, Coby Bell den Jace Turner, Jamie Chung die Clarice Fong alias Blink, Blair Redford den John Proudstar alias Thunderbird und Emma Dumont die Lorna Dane alias Polaris.
+
+Es entstanden zwei Staffeln mit insgesamt 29 Episoden — dreizehn und sechzehn. Ausgestrahlt wurden sie vom 2. Oktober 2017 bis zum 26. Februar 2019 bei Fox, in Kanada bei CTV; ab Februar 2021 war die Serie bei Disney+ verfügbar.
+
+Der Pilot entstand in Dallas, die beiden Staffeln wurden in Atlanta gedreht.
+
+### Hinter den Kulissen
+
+Der Zugriff ist der einer Familiengeschichte. Erzählt wird aus der Sicht von Eltern, die über Nacht auf der Flucht sind, weil ihre Kinder etwas können, das sie selbst nicht verstehen.
+
+Damit verschiebt sich der Gegenstand vom Heldenstoff zur Verfolgung: Verstecke, falsche Namen, eine Gemeinschaft, die selbst kaum durchkommt.
+
+Die Produktionsseite verweist dabei auf das Umfeld, aus dem der Stoff kommt — 20th Century Fox Television mit Marvel Television, unter ausführenden Produzenten wie Bryan Singer, Lauren Shuler Donner und Simon Kinberg.
+
+Bemerkenswert ist die Bewertungsentwicklung: Rotten Tomatoes weist für die erste Staffel 76 Prozent aus, für die zweite 83 Prozent. Die Serie wurde also besser, während sie lief.
+
+### Einordnung & Wirkung
+
+Metacritic bewertete die erste Staffel mit 63 von 100 als gemischt bis positiv.
+
+Am 17. April 2019 wurde die Serie abgesetzt — knapp zwei Monate nach der letzten Folge und trotz der besseren Zahlen für die zweite Staffel.
+
+Ab Februar 2021 war sie bei Disney+ verfügbar und fand dort ein zweites Publikum.
+
+Was bleibt, sind 29 Folgen, die den Stoff auf ein Familiendrama herunterbrechen — und deren Erzählung an einem Punkt abbricht, an dem sie gerade an Fahrt gewonnen hatte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:487297', locale: 'de-de',
+    text: `### Worum es geht
+
+Ali Davis ist Sportagentin in Atlanta und gut in ihrem Beruf. Befördert wird sie trotzdem nicht — die Männer in der Firma gehen an ihr vorbei.
+
+Nach einem Getränk, das ihr eine Wahrsagerin gibt, kann sie hören, was Männer denken. Sie setzt die Fähigkeit sofort ein: Der Nachwuchsstar Jamal Barry soll bei ihr unterschreiben.
+
+### Entstehungsgeschichte
+
+Vorlage ist „Was Frauen wollen" aus dem Jahr 2000, dessen Anlage hier umgekehrt wird.
+
+Regie führte Adam Shankman. Das Drehbuch schrieben Tina Gordon, Alex Gregory und Peter Huyck nach einer Geschichte von Tina Gordon und Jas Waters.
+
+Taraji P. Henson spielt Ali Davis, Aldis Hodge den Will Thomas, Josh Brener den Brandon Wallace, Erykah Badu die Sister, Richard Roundtree den Skip Davis und Tracy Morgan den Joe Barry.
+
+Produziert wurde der Film von Will Packer Productions, BET Films und Paramount Players; verliehen wurde er von Paramount Pictures. Die Kamera führte Jim Denault, den Schnitt Emma E. Hickox, die Musik stammt von Brian Tyler.
+
+Gedreht wurde von März bis Juni 2018 in Atlanta. Das Budget betrug 20 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Umkehrung der Vorlage ist mehr als ein Tausch der Vorzeichen. Im Original nutzte ein Mann die Gabe, um Frauen besser zu verstehen; hier verschafft sie einer Frau Zugang zu einem Raum, aus dem sie ausgeschlossen war.
+
+Die Sportagentur ist dafür der passende Schauplatz. Es ist ein Geschäft, in dem Verträge in Umkleidekabinen und Hinterzimmern zustande kommen — an Orten, zu denen Ali keinen Zugang hat.
+
+Auffällig ist die Zusammensetzung des Ensembles: Neben Taraji P. Henson stehen mit Erykah Badu, Richard Roundtree und Tracy Morgan Namen aus sehr verschiedenen Bereichen.
+
+Bei 20 Millionen Dollar Budget und einem Dreh von März bis Juni 2018 in Atlanta ist der Film kalkuliert wie eine mittelgroße Studiokomödie — und wurde von drei Häusern gemeinsam getragen.
+
+### Einordnung & Wirkung
+
+Bei 20 Millionen Dollar Herstellungskosten spielte der Film weltweit 72,2 Millionen ein — 54,6 Millionen in den Vereinigten Staaten und Kanada, 17,6 Millionen anderswo.
+
+Rotten Tomatoes weist 41 Prozent bei 147 Bewertungen aus, Metacritic 49 von 100. Bei CinemaScore vergab das Publikum ein A−.
+
+Die Kritik nannte den Film unausgeglichen, aber sympathisch; Taraji P. Henson wurde durchweg gelobt.
+
+Der Abstand zwischen 41 Prozent bei der Fachkritik und einem A− beim Publikum ist der übliche Befund bei Komödien dieser Art — und die Einspielzahlen geben dem Publikum recht.` },
+  {
+    bereich: 'titel', schluessel: 'movie:87826', locale: 'de-de',
+    text: `### Worum es geht
+
+Scott Voss ist 42 und unterrichtet Biologie an einer Highschool in Boston. Er hat sich mit seiner Lage abgefunden — bis die Schule das Musikprogramm streichen will.
+
+48.000 Dollar fehlen. Voss beschließt, sie sich zu erkämpfen: durch Mixed Martial Arts. Ein Mann in seinem Alter, ohne Erfahrung, steigt in den Käfig, weil es sonst niemand tut.
+
+### Entstehungsgeschichte
+
+Regie führte Frank Coraci. Das Drehbuch schrieben Allan Loeb, Kevin James und Rock Reuben.
+
+Kevin James spielt Scott Voss und produzierte den Film gemeinsam mit Todd Garner. Salma Hayek ist die Bella Flores, Henry Winkler der Marty, Charice die Malia De La Cruz und Bas Rutten der Niko.
+
+Die Kamera führte Phil Méheux, den Schnitt Scott Hill, die Musik stammt von Rupert Gregson-Williams.
+
+Der Film erschien 2012 in den Vereinigten Staaten, dauert 105 Minuten und startete am 8. November 2012 in Deutschland; er ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Kevin James, der die Hauptrolle spielt, am Drehbuch mitschrieb und mitproduzierte, hat den Film in erheblichem Maß selbst geformt. Er ist auf eine Figur zugeschnitten, die körperlich unterschätzt wird und genau daraus ihre Wirkung zieht.
+
+Der Antrieb der Handlung ist bemerkenswert unaufgeregt: keine Rache, kein Titel, sondern ein Musikprogramm und eine konkrete Summe — 48.000 Dollar.
+
+Dass der Weg dorthin bis in die UFC führt, ist die Übertreibung, die der Film sich leistet.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 39 Prozent bei 95 Kritiken aus.
+
+Das Lexikon des internationalen Films befand, der Film lebe besonders von der Präsenz Kevin James', im Finale setzten sich aber die üblichen Muster des amerikanischen Sportfilms durch.
+
+Dieser Einwand beschreibt die Bauart genau. Der Weg zum letzten Kampf ist berechenbar, und der Film weicht davon nicht ab.
+
+Was ihn dennoch von vergleichbaren Arbeiten unterscheidet, ist der Einsatz. Nicht ein Champion, sondern ein Musikprogramm steht auf dem Spiel — und die Hauptfigur ist kein verkanntes Talent, sondern ein Lehrer mittleren Alters, der weiß, dass er unterlegen ist.` },
 ];
