@@ -48752,4 +48752,303 @@ Rotten Tomatoes weist 20 Prozent aus, Metacritic 43 von 100. Der Film erhielt ü
 Ein Startwochenende von 5,2 Millionen bei 60 Millionen Herstellungskosten ist ein Verhältnis, aus dem sich kein Film mehr erholt.
 
 Was bleibt, ist eine Idee, die besser war als ihre Ausführung — und ein Ensemble, dessen jüngere Mitglieder wenige Jahre später sehr viel bekannter waren.` },
+  // ---- Block 114 ----
+  {
+    bereich: 'titel', schluessel: 'series:200875', locale: 'de-de',
+    text: `### Worum es geht
+
+Derry, Maine, im Jahr 1962. Unter der Stadt liegt etwas, das alle siebenundzwanzig Jahre erwacht — und das Militär will wissen, was es ist.
+
+Während die Suche läuft, spitzen sich in Derry rassistische Spannungen zu. Sie münden in einen Brandanschlag. Die Serie erzählt beides nebeneinander: das Wesen unter der Stadt und das, was die Menschen darüber einander antun.
+
+### Entstehungsgeschichte
+
+Vorlage ist Stephen Kings Roman „Es" von 1986; das Drehbuch orientiert sich an dessen Zwischenkapiteln. Die Serie ist ein Vorspiel zu den Filmen von 2017 und 2019.
+
+Entwickelt wurde sie von Andrés Muschietti, Barbara Muschietti und Jason Fuchs, die bereits an den Filmen beteiligt waren. Showrunner sind Fuchs und Brad Caleb Kane; die Musik stammt von Benjamin Wallfisch.
+
+Lilly Bainbridge spielt die Clara Stack, Matilda Lawler die Marge Truman, Amanda Christine die Ronnie Grogan, Jovan Adepo den Major Leroy Hanlon, James Remar den General Francis Shaw, Chris Chalk den Dick Hallorann und Bill Skarsgård den Pennywise.
+
+Gedreht wurde von Mai 2023 bis Juli 2024 in Kanada — in Hamilton, Port Hope, Toronto und Lincoln.
+
+Die erste Staffel umfasst acht Folgen. Sie lief ab dem 26. Oktober 2025 bei HBO, in Deutschland ab dem 27. Oktober bei Sky Atlantic.
+
+### Hinter den Kulissen
+
+Die Anlage der Reihe ist ungewöhnlich: Drei Staffeln sind geplant, und sie spielen chronologisch rückwärts — 1962, dann 1935, dann 1908.
+
+Damit arbeitet sich die Serie zum Ursprung vor, statt von ihm auszugehen. Wer alle drei sieht, erlebt die Geschichte in umgekehrter Reihenfolge ihres Geschehens.
+
+Die Grundlage in den Zwischenkapiteln des Romans ist die zweite Entscheidung. Das Drehbuch orientiert sich ausdrücklich an ihnen und nicht an der Haupthandlung.
+
+Dass die rassistischen Spannungen des Jahres 1962 gleichrangig neben dem Übernatürlichen stehen und in einen Brandanschlag münden, gibt der Serie einen zweiten Gegenstand.
+
+### Einordnung & Wirkung
+
+Vierzehn Monate Drehzeit für acht Folgen sind eine erhebliche Strecke.
+
+Dass Bill Skarsgård seine Rolle aus den Filmen fortführt, verbindet Serie und Kinofassungen personell.
+
+Der Abstand zwischen amerikanischer und deutscher Ausstrahlung betrug einen Tag — bei einem Stoff mit dieser Bekanntheit ist alles andere kaum noch möglich.
+
+Acht Folgen für die erste von drei geplanten Staffeln lassen der Erzählung Raum, ohne sie zu strecken.` },
+  {
+    bereich: 'titel', schluessel: 'movie:533533', locale: 'de-de',
+    text: `### Worum es geht
+
+Fünfzehn Jahre nach Sam Flynns Rückkehr aus dem Netz konkurrieren zwei Unternehmen um dieselbe Sache: digitale Konstrukte, die in der realen Welt Bestand haben.
+
+ENCOM wird von Eve Kim geführt; bei Dillinger Systems arbeitet Julian Dillinger an einem Programm namens Ares. Das Hindernis für beide ist eine Grenze von neunundzwanzig Minuten — so lange hält ein digitales Konstrukt draußen durch. Dann findet Eve Kevin Flynns Persistenzcode.
+
+### Entstehungsgeschichte
+
+Regie führte Joachim Rønning. Das Drehbuch schrieben Jesse Wigutow und David Digilio.
+
+Jared Leto spielt Ares, Greta Lee die Eve Kim, Evan Peters den Julian Dillinger, Jodie Turner-Smith die Athena, Jeff Bridges den Kevin Flynn und Clu, Gillian Anderson die Elisabeth Dillinger, Hasan Minhaj den Ajay Singh und Cameron Monaghan den Caius.
+
+Produziert wurde der Film von Sean Bailey, Leto, Steven Lisberger, Emma Ludbrook, Jeffrey Silver und Justin Springer. Die Kamera führte Jeff Cronenweth, den Schnitt Tyler Nelson; die Musik stammt von Nine Inch Nails.
+
+Gedreht wurde ab Januar 2024 in Vancouver unter dem Arbeitstitel „Vecro"; die Dreharbeiten endeten am 1. Mai 2024. Der Film dauert 119 Minuten, ist ab 12 Jahren freigegeben und startete am 10. Oktober 2025 in den Vereinigten Staaten.
+
+### Hinter den Kulissen
+
+Die Umkehrung ist der Einfall dieses Teils: Nicht ein Mensch gerät in die digitale Welt, sondern ein Programm tritt in die reale.
+
+Die Neunundzwanzig-Minuten-Grenze ist dabei die Regel, an der alles hängt. Sie gibt der Handlung eine Uhr, und der Persistenzcode ist das, was diese Uhr abschaffen würde.
+
+Dass Steven Lisberger als Produzent auftritt, verbindet den Film mit dem Ursprung der Reihe. Jeff Bridges kehrt als Kevin Flynn zurück.
+
+Dass Nine Inch Nails die Musik beisteuern, ist die auffälligste Wahl abseits der Besetzung.
+
+### Einordnung & Wirkung
+
+Die Besetzung ist auffällig breit. Jared Leto, Greta Lee, Evan Peters, Gillian Anderson und Jeff Bridges decken sehr verschiedene Herkünfte ab.
+
+Ein Dreh, der im Januar 2024 begann und im Mai desselben Jahres endete, gefolgt von einem Start im Oktober 2025, zeigt, wie viel Zeit bei einem Film dieser Machart in die Nachbearbeitung geht — rund siebzehn Monate.
+
+Der Arbeitstitel „Vecro" diente dabei der Geheimhaltung während der Dreharbeiten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:993710', locale: 'de-de',
+    text: `### Worum es geht
+
+Matt und Emily waren beide bei der CIA. Seit fünfzehn Jahren leben sie unter anderem Namen als gewöhnliches Ehepaar mit zwei Kindern.
+
+Dann fliegt die Tarnung auf. Ehemalige Kollegen und Terroristen sind hinter ihnen her, und zugleich müssen sie ein Gerät namens ICS aus dem Verkehr ziehen. Ihre Kinder erfahren dabei zum ersten Mal, wer ihre Eltern wirklich sind.
+
+### Entstehungsgeschichte
+
+Regie führte Seth Gordon, der das Drehbuch gemeinsam mit Brendan O'Brien schrieb — unter Beteiligung von siebzehn weiteren Autoren.
+
+Jamie Foxx spielt Matt, Cameron Diaz die Emily, Andrew Scott den MI6-Agenten Baron, Kyle Chandler den früheren CIA-Vorgesetzten Chuck, Glenn Close die frühere MI6-Scharfschützin Ginny, Jamie Demetriou den Nigel sowie McKenna Roberts und Rylan Jackson die Kinder Leo und Alice.
+
+Die Kamera führte Ken Seng, die Musik stammt von Christopher Lennertz.
+
+Gedreht wurde von Dezember 2022 bis März 2023 in London, danach in Atlanta; weitere Aufnahmen entstanden in Ljubljana. Das Produktionsbudget betrug 207,2 Millionen Dollar, nach Steuergutschriften 158,9 Millionen.
+
+Der Film erschien am 17. Januar 2025 bei Netflix; geplant war ursprünglich November 2024.
+
+### Hinter den Kulissen
+
+Die Zahl der Autoren ist die auffälligste Angabe zu dieser Produktion. Neunzehn Beteiligte am Drehbuch sind selbst für eine Studioproduktion außergewöhnlich viele — und die Kritik bemängelte genau das Ergebnis: eine routinierte Handlung.
+
+Das Budget von 207,2 Millionen Dollar ist die zweite bemerkenswerte Zahl. Für einen Film, der ohne Kinostart direkt auf eine Plattform geht, ist das eine Größenordnung, die es vor wenigen Jahren nicht gab.
+
+Was durchgehend gelobt wurde, ist das Zusammenspiel von Cameron Diaz und Jamie Foxx.
+
+Zwischen Drehende im März 2023 und Veröffentlichung im Januar 2025 lagen fast zwei Jahre.
+
+### Einordnung & Wirkung
+
+In drei Tagen kam der Film auf 46,8 Millionen Aufrufe — der beste Start für einen englischsprachigen Netflix-Film seit „The Adam Project".
+
+Rotten Tomatoes weist 31 Prozent aus, Metacritic 46 von 100.
+
+Dieser Abstand ist bei Plattformproduktionen inzwischen der Regelfall: Was gesehen wird, und was gelobt wird, sind zwei verschiedene Größen.
+
+Bemerkenswert bleibt die Besetzung der Nebenrollen: Andrew Scott, Kyle Chandler und Glenn Close in einer Actionkomödie.` },
+  {
+    bereich: 'titel', schluessel: 'movie:269795', locale: 'de-de',
+    text: `### Worum es geht
+
+Dylan Branson arbeitet als Fluglotse am Flughafen JFK. Jeden Tag um 14:22 Uhr geschieht dasselbe: Er nimmt etwas wahr, das nicht da ist.
+
+Einmal beinahe mit Folgen — zwei Maschinen kommen sich gefährlich nahe, er verhindert den Zusammenstoß im letzten Moment und wird suspendiert. Danach fällt ihm auf, dass sich in seinem Tagesablauf Muster wiederholen. Am Grand Central Terminal trifft er Sarah, die in einem der beiden Flugzeuge saß. Beide haben denselben Geburtstag.
+
+### Entstehungsgeschichte
+
+Regie führte Paul Currie. Das Drehbuch schrieben Nathan Parker und Todd Stein.
+
+Michiel Huisman spielt Dylan Branson, Teresa Palmer die Sarah, Sam Reid ihren früheren Freund Jonas, Duncan Ragg den Jake, Jessica Clarke die Evelyn, Jack Ellis den Noah, John Waters Dylans Vorgesetzten Bill und Maeve Dermody die Sandy.
+
+Produziert wurde der Film von Bill Mechanic, Steve Hutensky, Currie, Bruce Davey und Jodi Matterson. Die Kamera führte David Eggby, die Musik stammt von Lisa Gerrard und James Orr.
+
+Zunächst war Armie Hammer für die Hauptrolle vorgesehen, ehe Michiel Huisman sie übernahm.
+
+Obwohl der Film in New York spielt, wurde er in Australien gedreht — in den Fox Studios Australia und im Moore Park in Sydney.
+
+### Hinter den Kulissen
+
+Die Konstruktion beruht auf Wiederholung. Dylan erlebt denselben Ablauf immer wieder, und der Film macht daraus keine Zeitschleife, sondern ein Muster, das er zu entschlüsseln versucht.
+
+Danielle Solzman nannte es folgerichtig eine Thriller-Fassung von „Und täglich grüßt das Murmeltier".
+
+Die zweite Ebene liegt dreißig Jahre zurück: Briefe eines Paares namens Jake und Evelyn, die denselben Geburtstag hatten und an demselben Tag starben, an dem eine Supernova auftrat.
+
+Dass ein Film, der in New York spielt, vollständig in Sydney entstand, ist die auffälligste Produktionsnotiz.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 3,9 Millionen Dollar ein.
+
+Rotten Tomatoes weist 20 Prozent bei zehn Kritiken aus — eine kleine Grundlage, aber ein deutliches Bild.
+
+Nick Allen schrieb bei RogerEbert.com, bei einem Film wie diesem sei schwer zu sagen, wo die gute Idee verschwunden sei. Brian Orndorf vergab bei Blu-ray.com die Note D.
+
+Edward Douglas urteilte im Film Journal International freundlicher und bescheinigte einen faszinierenden Überblick über kosmische Führung.
+
+Allens Formulierung trifft den Kern: Die Ausgangslage — ein Mann, der täglich zur selben Minute etwas sieht — trägt weiter, als der Film sie trägt.` },
+  {
+    bereich: 'titel', schluessel: 'series:5371', locale: 'de-de',
+    text: `### Worum es geht
+
+Carly Shay geht zur Schule und produziert nebenbei eine Webshow. Sie heißt iCarly, läuft aus dem Wohnzimmer und gibt Menschen eine Bühne, die sonst keine hätten.
+
+Mit dabei sind ihre Freundin Sam, die für Streiche zuständig ist, und Freddie, der die Technik macht. Über ihnen wohnt Carlys älterer Bruder Spencer, der als Erziehungsberechtigter gilt und Künstler ist.
+
+### Entstehungsgeschichte
+
+Erfunden und produziert wurde die Serie von Dan Schneider für Nickelodeon.
+
+Miranda Cosgrove spielt Carly Shay, Jennette McCurdy die Samantha Puckett, Nathan Kress den Fredward Benson, Jerry Trainor den Spencer Shay und Noah Munck den Gibby Gibson.
+
+Es entstanden sechs Staffeln mit insgesamt 109 Episoden. Ausgestrahlt wurden sie vom 8. September 2007 bis zum 23. November 2012 in den Vereinigten Staaten; in Deutschland lief die Serie vom 23. Februar 2008 bis zum 12. April 2013 bei Nick.
+
+### Hinter den Kulissen
+
+Eine Fernsehserie, deren Hauptfiguren eine eigene Webshow produzieren, war 2007 eine neue Idee — die Serie erzählt vom Selbermachen zu einem Zeitpunkt, als das gerade begann.
+
+Bemerkenswert ist auch die Familienkonstellation. Carly lebt nicht bei ihren Eltern, sondern bei ihrem älteren Bruder — eine Setzung, die den Erwachsenen aus der Handlung weitgehend heraushält.
+
+109 Folgen über fünf Jahre sind für eine Serie dieses Formats eine erhebliche Strecke.
+
+### Einordnung & Wirkung
+
+Die Serie gewann viermal den Kids Choice Award als Lieblingsserie — 2008, 2010, 2011 und 2012. Jennette McCurdy wurde 2011 und 2012 als beste Nebendarstellerin ausgezeichnet.
+
+Vier Publikumspreise in fünf Jahren sind für eine Kinderserie ein außergewöhnlicher Befund und sagen mehr über ihre Stellung aus als jede Kritik.
+
+Die deutsche Ausstrahlung lief fünf Monate hinter der amerikanischen und dauerte entsprechend länger — bis April 2013.
+
+Dass die Auszeichnungen ausschliesslich Publikumspreise waren, passt zur Serie: Sie wurde von denen gewählt, für die sie gemacht war.` },
+  {
+    bereich: 'titel', schluessel: 'movie:71469', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei junge Amerikaner reisen nach Moskau, um dort eine Software zu verkaufen.
+
+Dann fällt in der ganzen Stadt der Strom aus. Was danach kommt, ist nicht zu sehen: Die Angreifer sind unsichtbar, und wer ihnen zu nahe kommt, zerfällt zu Asche.
+
+### Entstehungsgeschichte
+
+Regie führte Chris Gorak, das Drehbuch schrieb Jon Spaihts. Produziert wurde der Film von Timur Bekmambetov für Regency Enterprises, die Bazelevs Company und New Regency.
+
+Emile Hirsch spielt Sean, Olivia Thirlby die Natalie, Max Minghella den Ben, Rachael Taylor die Anne und Joel Kinnaman den Skyler; weitere Rollen sind mit russischen Darstellern besetzt.
+
+Die Kamera führte Scott Kevan, die Musik stammt von Tyler Bates; den Schnitt besorgten Priscilla Nedd-Friendly und Fernando Villena.
+
+Gedreht wurde ab Juli 2010 in Moskau mit 3D-Kameras. Die Waldbrände des Jahres 2010 unterbrachen die Produktion. Das Budget betrug 34,8 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Entscheidung, unsichtbare Angreifer zu zeigen, spart Effekte und erzeugt zugleich Spannung — sichtbar ist nur, was sie anrichten.
+
+Daraus folgt die Regel, die der Film aufstellt: Die Wesen nehmen elektrische Ladungen wahr, nicht aber, was hinter Isolatoren wie Glas liegt. Das gibt den Überlebenden etwas, womit sie arbeiten können.
+
+Moskau als Schauplatz ist die zweite Setzung. Eine amerikanische Produktion, die ihre Invasion nicht in New York oder Los Angeles ansiedelt, ist die Ausnahme.
+
+Dass Waldbrände die Dreharbeiten unterbrachen, ist eine Randnotiz mit eigener Ironie — die Wirklichkeit störte einen Film über eine Katastrophe.
+
+### Einordnung & Wirkung
+
+Bei 34,8 Millionen Dollar Herstellungskosten spielte der Film 64,6 Millionen ein.
+
+Die Kritik war vernichtend. Rotten Tomatoes weist 12 Prozent aus, Metacritic 18 von 100 — ein Wert, der dort als überwältigende Ablehnung geführt wird.
+
+Der Hollywood Reporter bemängelte ein flaches Drehbuch und das Fehlen auch nur einer überzeugenden Figur.
+
+Dass ein Film mit 18 Metacritic-Punkten dennoch fast das Doppelte seiner Kosten einspielte, zeigt, wie wenig Kritiken bei Genrefilmen dieser Größenordnung wiegen — und wie stark die internationale Auswertung trägt.
+
+Bemerkenswert bleibt, dass eine amerikanische Produktion ihren Weltuntergang vollständig in Moskau ansiedelt und mit russischen Darstellern besetzt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10010', locale: 'de-de',
+    text: `### Worum es geht
+
+Kenai und Koda erwachen aus dem Winterschlaf. Und Kenai begegnet jemandem, den er lange nicht gesehen hat: Nita, seiner Freundin aus Kindertagen.
+
+Nita will heiraten, kann es aber nicht — ein Zauber steht dem im Weg, und um ihn zu brechen, muss sie an den Wasserfällen ein Amulett verbrennen. Kenai begleitet sie. Koda begleitet beide und fühlt sich zunehmend übergangen.
+
+### Entstehungsgeschichte
+
+Regie führte Ben Gluck, das Drehbuch schrieb Rich Burns. Produziert wurde der Film von Jim Ballantine und Carolyn Bates.
+
+Die Musik stammt von Matthew Gerrard, Dave Metzger und Robbie Nevil.
+
+In der deutschen Fassung sprechen Daniel Brühl den Kenai, Ranja Bonalana die Nita und Johann Hillmann den Koda.
+
+Der Film entstand 2006 als 41. Direct-to-DVD-Produktion der Walt Disney Studios, dauert 74 Minuten und ist ohne Altersbeschränkung freigegeben.
+
+### Hinter den Kulissen
+
+Der Reiz liegt in der Konstellation. Nita braucht Kenai, um einen Zauber zu brechen — und auf dem gemeinsamen Weg zu den Wasserfällen entsteht zwischen beiden mehr als eine alte Freundschaft.
+
+Kodas Eifersucht ist die zweite Ebene. Der jüngere Bär hat in Kenai einen Bruder gefunden und sieht sich nun in die zweite Reihe gerückt.
+
+Dass Daniel Brühl in der deutschen Fassung spricht, ist für eine Direct-to-DVD-Produktion eine bemerkenswerte Besetzung.
+
+### Einordnung & Wirkung
+
+Als 41. Direktveröffentlichung des Studios steht der Film in einer langen Reihe von Fortsetzungen, die für den Heimmarkt entstanden.
+
+74 Minuten sind entsprechend knapp bemessen — deutlich kürzer als ein Kinofilm.
+
+Die Freigabe ohne Altersbeschränkung passt zum Zuschnitt: Der Film richtet sich an dieselben Zuschauer wie der Vorgänger, nur einige Jahre später.
+
+Was ihn von reinen Wiederholungen unterscheidet, ist die Entscheidung, das Verhältnis der Figuren zueinander tatsächlich zu verändern statt es am Ende zurückzusetzen.` },
+  {
+    bereich: 'titel', schluessel: 'series:97175', locale: 'de-de',
+    text: `### Worum es geht
+
+Bloom ist eine Fee mit Feuerkräften und schreibt sich an der Magierschule Alfea ein. Sie teilt sich dort ein Zimmer mit vier anderen Feen.
+
+Was sie über ihre eigene Herkunft erfährt, passt nicht zu dem, was sie zu wissen glaubte. Und vor den Toren der Schule sind Wesen unterwegs, die man die Verbrannten nennt.
+
+### Entstehungsgeschichte
+
+Vorlage ist die Zeichentrickserie „Winx Club" von Iginio Straffi. Die Realverfilmung entwickelte Brian Young.
+
+Abigail Cowen spielt Bloom, Hannah van der Westhuysen die Lichtfee Stella, Precious Mustapha die Wasserfee Aisha, Eliot Salt die Erdfee Terra, Elisha Applebaum die Gedankenfee Musa, Danny Griffin den Spezialisten Sky und Eve Best die Schulleiterin Farah Dowling.
+
+Produziert wurde die Serie von Archery Pictures, Young Blood Productions und Rainbow S.p.A.; die Musik stammt von Anne Nikitin. Gedreht wurde in Irland — im County Wicklow, in den Ardmore Studios und auf Killruddery House.
+
+Es entstanden zwei Staffeln mit insgesamt dreizehn Folgen — sechs im Jahr 2021, sieben im Jahr 2022. Ausgestrahlt wurden sie vom 22. Januar 2021 bis zum 16. September 2022 bei Netflix. Im November 2022 wurde die Serie eingestellt.
+
+### Hinter den Kulissen
+
+Die Besetzung wurde zum Streitpunkt. Kritisiert wurde, dass Musa — in der Vorlage ostasiatisch angelegt — mit Elisha Applebaum besetzt wurde und dass die Figur Flora, in der Vorlage lateinamerikanisch angelegt, ganz fehlte.
+
+Iginio Straffi, der Schöpfer der Zeichentrickserie, äußerte sich dazu: Rainbow habe ethnische Vielfalt gefordert, Netflix habe andere Entscheidungen getroffen.
+
+Das ist ein ungewöhnlicher Vorgang — der Urheber einer Vorlage widerspricht öffentlich der Umsetzung.
+
+Erzählerisch verlegt die Serie einen Stoff für Kinder in ein deutlich älteres Register. Die Drehorte in Irland liefern dazu die passende, düstere Umgebung.
+
+### Einordnung & Wirkung
+
+57 Millionen Haushalte sahen die erste Staffel in den ersten 28 Tagen.
+
+Die Kritik urteilte gegenteilig. Der zusammengefasste Befund bei Rotten Tomatoes lautete, die Serie sei flach, dünn und vergessenswert — ein fantastischer Reinfall, der die Magie seiner Vorlage nicht einfange.
+
+Im November 2022 endete die Serie nach zwei Staffeln, und zwar mit einem ungelösten Cliffhanger.
+
+Diese Kombination — hohe Zuschauerzahlen, schlechte Kritiken, Absetzung mitten in der Geschichte — beschreibt ein Muster, das bei Plattformserien häufig auftritt.` },
 ];
