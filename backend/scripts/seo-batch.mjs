@@ -272,35 +272,84 @@ export function formatFehler(text, locale) {
 // Faengt die haeufigste Sorte erfundener Angaben deterministisch ab, bevor die
 // LLM-Pruefstufe laeuft: Zahlen und Eigennamen, die im Datensatz nicht vorkommen,
 // sowie Formulierungen, die fast immer eine unbelegte Behauptung einleiten.
+// Formulierungen, die fast immer eine unbelegte Behauptung einleiten.
+//
+// Die Muster mussten enger gefasst werden, nachdem ein Probelauf an 48 echten
+// Texten zwei Fehlalarme erzeugte: "300 Millionen Dollar" war der Auftragswert
+// aus der Inhaltsangabe, nicht das Einspielergebnis, und "Fortsetzung des
+// Kampfes" meinte keine Filmfortsetzung. Ein blosses Stichwort genuegt also
+// nicht -- geprueft wird die Wendung, in der es eine Tatsache ueber das Werk
+// behauptet.
 const MUSTER = [
-  [/\b(gewann|ausgezeichnet|nominiert|Oscar|Golden Globe|Palme|Bär(en)?preis|won|award|nominated|premio|galardón|récompense|César)\b/i, 'Auszeichnung'],
-  [/\b(Millionen? (Dollar|Euro)|million (dollars|euros)|Einspiel|box office|budget|taquilla|recette)\b/i, 'Geschaeftszahl'],
-  [/\b(gedreht|Drehort|Dreharbeiten|Produktionsfirma|filmed|shot in|rodaje|tournage|studio)\b/i, 'Produktionsangabe'],
-  [/\b(Kritiker|Rezension|Rotten Tomatoes|Metacritic|IMDb|critics|reseña|critique)\b/i, 'Rezeption'],
-  [/\b(basiert auf|Vorlage|Fortsetzung|Neuverfilmung|Remake|based on|sequel|adaptación|adapté de|secuela|suite)\b/i, 'Werkbezug'],
+  [/\b(gewann (?:den|einen|die)|wurde ausgezeichnet|(?:war |wurde )?nominiert|Oscar|Golden Globe|Goldene[nr]? (?:Palme|Bär|Himbeere)|César|Emmy|BAFTA|won (?:the|an)|nominated for)\b/i, 'Auszeichnung'],
+  [/\b(Einspielergebnis|spielte[^.]{0,40}\bein\b|Herstellungskosten|Budget von|Produktionskosten|Kinokasse|box office|grossed)\b/i, 'Geschaeftszahl'],
+  [/\b(gedreht (?:wurde|in|von)|Drehort|Dreharbeiten|Produktionsfirma|Studio[s]? (?:von|in)|filmed in|shot in)\b/i, 'Produktionsangabe'],
+  [/\b(Kritiker|Rezension|Rotten Tomatoes|Metacritic|IMDb|Lexikon des internationalen Films|CinemaScore)\b/i, 'Rezeption'],
+  [/\b(basiert auf (?:dem|einem|der)|Neuverfilmung|Remake|Fortsetzung (?:von|des Films|der Reihe|zu)\b|Vorlage (?:ist|war|bildet)|nach (?:dem|einem) (?:Roman|Buch|Comic|Theaterstück)|based on the)\b/i, 'Werkbezug'],
 ];
 
-export function faktenVerdacht(text, t, locale) {
-  const quelle = (datensatz(t, locale) + ' ' + (t.plot || '') + ' ' + (t.overview_en || '')).toLowerCase();
-  const verdacht = [];
+// Woerter, die ein Gewerk oder eine Rolle einleiten. Nur DIREKT dahinter wird
+// nach Namen gesucht -- eine generische Suche nach grossgeschriebenen
+// Wortpaaren ist im Deutschen unbrauchbar, weil dort jedes Substantiv gross
+// geschrieben wird ("Die Altersfreigabe", "Genres Action"). Ein erster
+// Versuch damit meldete 36 von 36 Texten als verdaechtig, also ausnahmslos
+// falsch. Eine Pruefung, die immer anschlaegt, ist schlechter als keine:
+// Sie erzieht dazu, sie zu ignorieren.
+//
+// Was hier stattdessen geprueft wird, ist der tatsaechliche Fehlerfall --
+// eine Person, die als Beteiligte genannt wird, ohne im Datensatz zu stehen.
+const NAME_TEIL = '[A-ZÄÖÜÁÉÍÓÚÀÈÌÒÙÇ][\\p{L}\'’-]*(?:\\.[\\p{L}\'’-]+)*';
+const NAMENSKONTEXT = new RegExp(
+  '(?:Regie(?:\\s+f[üu]hrte[n]?)?|inszeniert(?:e)?\\s+von|gespielt\\s+von|verk[öo]rpert\\s+von|' +
+  'gesprochen\\s+von|Drehbuch(?:\\s+von)?|geschrieben\\s+von|Musik\\s+von|Kamera(?:\\s+von)?|' +
+  'Schnitt\\s+von|produziert\\s+von|Produktion\\s+von|nach\\s+(?:einem\\s+)?(?:Roman|Buch|Vorlage)\\s+von|' +
+  'directed\\s+by|written\\s+by|starring|dirigid[ao]\\s+por|r[éa]alis[ée]\\s+par)' +
+  // Ein Punkt gehoert nur dann zum Namen, wenn unmittelbar ein Buchstabe folgt
+  // ("J.R.R.", "Jr."). Ein Punkt vor einem Leerzeichen beendet den Satz -- ohne
+  // diese Unterscheidung verschluckt der Ausdruck das erste Wort des naechsten
+  // Satzes ("Brett Ratner. Die") und meldet den belegten Namen als erfunden.
+  '[:\\s]+(' + NAME_TEIL + '(?:\\s+' + NAME_TEIL + '){1,3})',
+  'gu'
+);
 
-  // Zahlen: jede Zahl im Text muss im Datensatz vorkommen oder sich zwingend
-  // daraus errechnen (Jahresabstand, Jahrzehnt).
+// Vergleicht einen Text gegen eine Quelle. Getrennt von faktenVerdacht(),
+// damit die Pruefung auch gegen einen fertig gerenderten Datensatz laufen kann
+// -- so laesst sie sich ohne Datenbank an echten Texten nachmessen.
+export function pruefeGegenQuelle(text, quellText, kennzahlen = {}) {
+  const quelle = quellText.toLowerCase();
+  const verdacht = [];
+  const { year, rating, voteCount, castCount, genreCount } = kennzahlen;
+
+  // Zahlen: jede Zahl im Text muss in der Quelle vorkommen oder sich zwingend
+  // daraus errechnen. Deutsche Texte schreiben "8,7", der Datensatz "8.7" --
+  // ohne diese Angleichung meldet die Pruefung jede Bewertung als erfunden.
+  const norm = (s) => s.replace(/\.(?=\d{3}\b)/g, '').replace(',', '.');
   const jetzt = new Date().getFullYear();
-  const erlaubt = new Set([String(t.year), String(t.rating ?? ''), String(t.vote_count ?? ''),
-    String(jetzt), String(jetzt - t.year), String(Math.floor(t.year / 10) * 10),
-    String((t.cast_names || []).length), String((t.genres || []).length), '10']);
+  // Der Jahresabstand darf um eins abweichen: "gut 15 Jahre" bei rechnerisch
+  // 16 ist normales Runden in Fliesstext, keine erfundene Zahl.
+  const abstand = year ? jetzt - year : null;
+  const erlaubt = new Set([year, rating, voteCount, jetzt,
+    abstand, abstand != null ? abstand - 1 : null, abstand != null ? abstand + 1 : null,
+    year ? Math.floor(year / 10) * 10 : null, castCount, genreCount, 10]
+    .filter((x) => x != null).map((x) => norm(String(x))));
+  const quelleZahlen = new Set([...quelle.matchAll(/\d[\d.,]*/g)].map((m) => norm(m[0].replace(/[.,]$/, ''))));
   for (const m of text.matchAll(/\b\d[\d.,]*\b/g)) {
-    const roh = m[0].replace(/[.,]$/, '');
-    if (erlaubt.has(roh) || quelle.includes(roh.toLowerCase())) continue;
-    verdacht.push(`Zahl ohne Beleg: ${roh}`);
+    const z = norm(m[0].replace(/[.,]$/, ''));
+    if (erlaubt.has(z) || quelleZahlen.has(z)) continue;
+    verdacht.push(`Zahl ohne Beleg: ${m[0]}`);
   }
 
-  // Eigennamen: Zweiwortfolgen aus Grossbuchstaben-Anfaengen, die nicht im
-  // Datensatz stehen. Trifft erfundene Personen, Studios, Festivals und Preise
-  // zuverlaessig; einzelne grossgeschriebene Woerter erzeugen zu viel Rauschen.
-  for (const m of text.matchAll(/\b([A-ZÄÖÜÁÉÍÓÚÀÈÌÒÙÇ][\p{Ll}]{2,}\s+[A-ZÄÖÜÁÉÍÓÚÀÈÌÒÙÇ][\p{Ll}]{2,})\b/gu)) {
-    if (!quelle.includes(m[1].toLowerCase())) verdacht.push(`Eigenname ohne Beleg: ${m[1]}`);
+  // Namen, die als Beteiligte genannt werden, ohne in der Quelle zu stehen.
+  for (const m of text.matchAll(NAMENSKONTEXT)) {
+    const name = m[1].trim();
+    // Auch Teiltreffer zaehlen: "Ryan Gosling" gilt als belegt, wenn die
+    // Quelle den Namen enthaelt, selbst wenn der Text ihn anders einbettet.
+    if (quelle.includes(name.toLowerCase())) continue;
+    // Einzelne Bestandteile pruefen -- "Phil Lord" ist belegt, wenn die Quelle
+    // "Phil Lord" fuehrt; "Phil Lord und Chris Miller" faellt sonst durch.
+    const teile = name.split(/\s+/).filter((w) => w.length > 2);
+    if (teile.length && teile.every((w) => quelle.includes(w.toLowerCase()))) continue;
+    verdacht.push(`Beteiligte(r) ohne Beleg: ${name}`);
   }
 
   for (const [re, was] of MUSTER) {
@@ -308,6 +357,14 @@ export function faktenVerdacht(text, t, locale) {
     if (treffer && !quelle.includes(treffer[0].toLowerCase())) verdacht.push(`${was}: „${treffer[0]}“`);
   }
   return [...new Set(verdacht)];
+}
+
+export function faktenVerdacht(text, t, locale) {
+  const quelle = datensatz(t, locale) + ' ' + (t.plot || '') + ' ' + (t.overview_en || '');
+  return pruefeGegenQuelle(text, quelle, {
+    year: t.year, rating: t.rating, voteCount: t.vote_count,
+    castCount: (t.cast_names || []).length, genreCount: (t.genres || []).length,
+  });
 }
 
 // --- Ablauf -----------------------------------------------------------------
