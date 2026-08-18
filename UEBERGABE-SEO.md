@@ -208,15 +208,33 @@ ssh root@movietaste.de "docker exec -w /app/backend movietaste-backend-1 \
   node scripts/plot-quellen-pruefen.mjs --stichprobe 40"
 ```
 
-**Was daraus folgt:** `inhaltsangabe()` in `seo-batch.mjs` wählt bereits
-sprachübergreifend die ausführlichste Quelle, sortiert dabei aber nur nach Länge
-und Sprachnähe — Vollständigkeit kommt im Vergleich nicht vor. Ohne Argument
-gemessen (`node scripts/plot-quellen-pruefen.mjs`) landen für `de-de` 5.886 von
-25.330 gewählten Quellen auf einem Fragment, für `fr-fr` 6.796 von 25.294. Bei
-zwei Dritteln davon (3.873 deutsch, 4.824 französisch) liegt eine ebenso lange,
-aber vollständige Fassung in einer anderen Sprache vor. Ein
-Vollständigkeits-Kriterium im bestehenden 0,67-Band würde diese Titel auf eine
-saubere Quelle heben — offen, noch nicht umgesetzt.
+**Was daraus folgt — umgesetzt am 18.08.2026:** `inhaltsangabe()` in
+`seo-batch.mjs` wählt sprachübergreifend die ausführlichste Quelle, sortierte
+dabei aber nur nach Länge und Sprachnähe — Vollständigkeit kam im Vergleich
+nicht vor. Innerhalb des bestehenden 0,67-Bandes schlägt sie jetzt die
+Sprachnähe: Eine Übersetzung kostet nur Nähe, ein abgebrochener Text kostet
+Tatsachen. Gemessen am gesamten Bestand:
+
+| Locale | Fragmente vorher | nachher | geheilt | Längenverlust Ø / p95 / max |
+|---|---|---|---|---|
+| de-de | 5.886 | 2.057 | 3.829 | 40 / 236 / 337 Zeichen |
+| fr-fr | 6.796 | 2.057 | 4.739 | 14 / 227 / 337 Zeichen |
+| es-es | 4.679 | 2.057 | 2.622 | 40 / 243 / 337 Zeichen |
+
+Bei rund einem Drittel der gewechselten Titel wird die Quelle sogar **länger**
+(deutsch 1.384, französisch 2.164), weil die bisher gewählte nahe Fassung kürzer
+war als die vollständige entfernte. Die 2.057 verbleibenden Fragmente sind
+Titel, bei denen **jede** Fassung im Band abbricht — dort ist nichts zu holen.
+Abgesichert durch `backend/test/seoQuellenwahl.test.js`, in beide Richtungen:
+Vollständigkeit gewinnt, aber nicht um jeden Preis — eine deutlich kürzere
+Quelle bleibt liegen.
+
+**Beim nächsten Durchgang beachten:** `seo-einspielen.mjs` prüft die
+geschriebenen Texte mit `datensatz()` gegen dieselbe Auswahl. Pakete, die
+**vor** dieser Änderung geschnitten wurden, können danach gegen eine andere
+Quelle geprüft werden und dabei zu Unrecht anschlagen. Wer noch offene Pakete
+liegen hat: erst einspielen, dann neu schneiden — oder die Pakete verwerfen und
+mit `seo-pakete.mjs` neu erzeugen.
 
 **Indexierung:** Titelseiten tragen `index` erst ab 250 Wörtern Fließtext
 (`MINDESTWOERTER_INDEX` in `seoData.js`). Damit können Texte gefahrlos
@@ -295,6 +313,7 @@ Danach in `neue-liste.json` mergen, Feldnamen: `k` (Schlüssel), `t` (Titel), `y
 | `backend/scripts/seo-einspielen.mjs` | Sammelt die Texte ein, prüft sie, schreibt nach `seo_content`. |
 | `backend/scripts/seo-batch.mjs` | Dasselbe über die API. Enthält die Prüffunktionen, die beide Wege nutzen. |
 | `backend/scripts/plot-quellen-pruefen.mjs` | Prüft die Inhaltsangaben auf Fragmente und gleicht sie gegen TMDB ab. Nur lesend. |
+| `backend/test/seoQuellenwahl.test.js` | Sichert die Wahl der Inhaltsangabe ab (Vollständigkeit vor Sprachnähe). |
 | `backend/test/seoFaktenpruefung.test.js` | Sichert die Faktenprüfung ab, in beide Richtungen. |
 | `backend/test/seoIndexierung.test.js` | Sichert die Indexierungsregel und die 250-Wörter-Schwelle ab. |
 

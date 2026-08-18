@@ -17,10 +17,8 @@
 // Nur lesend -- das Skript schreibt nichts in die Datenbank.
 
 import { pool } from '../db/pool.js';
-import { inhaltsangabe, SPRACHEN } from './seo-batch.mjs';
+import { inhaltsangabe, istFragment, SPRACHEN } from './seo-batch.mjs';
 
-// Fragment = endet auf Auslassungspunkte oder ganz ohne schliessendes Zeichen.
-const istFragment = (s) => !!s && (/(\.\.\.|…)\s*$/.test(s) || !/[.!?…")»']\s*$/.test(s));
 const rumpf = (s) => s.replace(/(\.\.\.|…)\s*$/, '').trim();
 
 const HAUPTLAND = { de: 'DE', en: 'US', es: 'ES', fr: 'FR', it: 'IT', nl: 'NL', pt: 'BR' };

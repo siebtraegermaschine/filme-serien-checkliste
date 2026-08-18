@@ -108,6 +108,13 @@ async function kandidaten({ locale, limit, minVotes, stufe }) {
 // je naeher die Quelle an der Zielsprache liegt, desto weniger geht verloren.
 const UEB_SPRACHEN = ['es', 'fr', 'it', 'nl', 'pt', 'en'];
 
+// Fragment = endet auf Auslassungspunkte oder ganz ohne schliessendes Zeichen.
+// Beides kommt bei TMDB haeufig vor und ist dort kein Importfehler, sondern
+// Schreibstil der jeweiligen Gemeinschaft (Beleg: plot-quellen-pruefen.mjs).
+// Fuer uns bleibt es trotzdem eine schlechtere Quelle: Wo der Text abbricht,
+// fehlen Tatsachen, und die Faktenregel verbietet es, sie zu ergaenzen.
+export const istFragment = (s) => !!s && (/(\.\.\.|…)\s*$/.test(s) || !/[.!?…")»']\s*$/.test(s));
+
 export function inhaltsangabe(t, locale) {
   const zielKey = SPRACHEN[locale]?.uebKey;
   const kandidaten = [];
@@ -123,8 +130,14 @@ export function inhaltsangabe(t, locale) {
   // Haelfte laengere Quelle ist die Uebersetzung wert, eine knapp laengere nicht.
   kandidaten.sort((a, b) => (b.text.length - a.text.length) || (a.rang - b.rang));
   const laengste = kandidaten[0];
-  const nah = kandidaten.filter((k) => k.text.length >= laengste.text.length * 0.67)
-                        .sort((a, b) => a.rang - b.rang)[0];
+  const band = kandidaten.filter((k) => k.text.length >= laengste.text.length * 0.67);
+  // Innerhalb des Bandes schlaegt Vollstaendigkeit die Sprachnaehe: Eine
+  // Uebersetzung kostet nur Naehe, ein abgebrochener Text kostet Tatsachen.
+  // Gemessen am Bestand hebt das 3.873 deutsche und 4.824 franzoesische Titel
+  // von einem Fragment auf eine vollstaendige Quelle. Gibt es im Band nur
+  // Fragmente, bleibt es bei der bisherigen Wahl -- kuerzen tun wir nichts.
+  const vollstaendig = band.filter((k) => !istFragment(k.text));
+  const nah = (vollstaendig.length ? vollstaendig : band).sort((a, b) => a.rang - b.rang)[0];
   return nah.text;
 }
 
