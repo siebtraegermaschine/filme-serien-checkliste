@@ -9,6 +9,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { seiteTitelDetail, seiteGenre, seite404, dokument } from '../lib/seoRender.js';
+import { textReichtFuerIndex, MINDESTWOERTER_INDEX } from '../lib/seoData.js';
 
 const robotsVon = (html) => {
   const treffer = html.match(/<meta name="robots" content="([^"]+)">/);
@@ -82,4 +83,35 @@ test('dokument() setzt robots ausschliesslich nach indexierbar', () => {
   });
   assert.equal(robotsVon(bauen(true)), 'index,follow');
   assert.equal(robotsVon(bauen(false)), 'noindex,follow');
+});
+
+// --- Qualitaetsschwelle (Christian, 18.08.2026) ------------------------------
+// Praezisierung derselben Regel fuer die Batch-Welle: "Inhalt" heisst ab jetzt
+// "genug Inhalt". Ein Rumpftext macht eine Seite nicht indexierbar, weil eine
+// als duenn abgewertete Seite schwerer in den Index zurueckkehrt als eine, die
+// nie drin war.
+test('Text unter der Schwelle macht eine Seite nicht indexierbar', () => {
+  const kurz = '### Worum es geht\n\n' + 'Wort '.repeat(200);
+  assert.equal(textReichtFuerIndex(kurz), false);
+});
+
+test('Text ab der Schwelle macht eine Seite indexierbar', () => {
+  const lang = '### Worum es geht\n\n' + 'Wort '.repeat(MINDESTWOERTER_INDEX);
+  assert.equal(textReichtFuerIndex(lang), true);
+});
+
+test('Ueberschriften zaehlen nicht zur Wortzahl', () => {
+  // Genau an der Schwelle im Fliesstext, dazu vier Ueberschriften mit
+  // zusammen elf Woertern -- die duerfen den Ausschlag nicht geben.
+  const koerper = 'Wort '.repeat(MINDESTWOERTER_INDEX - 1);
+  const mitUeberschriften =
+    '### Worum es geht\n\n' + koerper +
+    '\n\n### Entstehungsgeschichte\n\n### Hinter den Kulissen\n\n### Einordnung & Wirkung\n';
+  assert.equal(textReichtFuerIndex(mitUeberschriften), false);
+});
+
+test('Leerer oder fehlender Text bleibt noindex', () => {
+  assert.equal(textReichtFuerIndex(null), false);
+  assert.equal(textReichtFuerIndex(''), false);
+  assert.equal(textReichtFuerIndex('   '), false);
 });

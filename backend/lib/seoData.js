@@ -11,6 +11,34 @@ import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatist
 import { ladePersonDaten, resolvePersonIdCachedOnly } from './personen.js';
 import { holeTitelDetails, holeTrailer } from './titeldetails.js';
 
+// Ab wie vielen Woertern ein Redaktionstext eine Seite indexierbar macht.
+// Die Regel lautet unveraendert: Seiten mit Inhalt stehen auf index, angelegte
+// Seiten ohne Inhalt bleiben erreichbar mit noindex. Praezisiert wird nur, was
+// "Inhalt" heisst -- ein Rumpftext ist keiner.
+//
+// Der Grund ist nicht Aesthetik, sondern Umkehrbarkeit: Eine Seite, die als
+// duenn eingestuft und aus dem Index geworfen wurde, kommt schwerer zurueck
+// als eine, die nie drin war. Lieber spaeter indexieren als zu frueh.
+//
+// Die Schwelle entspricht der Mindestwortzahl, die seo-texte-anhaengen.mjs und
+// seo-batch.mjs beim Schreiben durchsetzen -- sie greift also erst, wenn ein
+// Text auf anderem Weg in die Tabelle gelangt ist.
+//
+// Sie gilt AUSSCHLIESSLICH fuer Titelseiten. Dort ist der Text der Inhalt.
+// Genre-, Anbieter-, Bestenlisten-, Hub- und Stadtseiten tragen bewusst kurze
+// Einleitungen -- ihr Inhalt sind die Listen darunter, und die sind dort
+// ohnehin schon Bedingung fuer index (`&& gesamt > 0` und Verwandte). Wuerde
+// man die Schwelle auch auf sie anwenden, fielen 21 bereits indexierte Seiten
+// heraus, ohne dass sich an ihrem Wert etwas geaendert haette.
+export const MINDESTWOERTER_INDEX = 250;
+
+export function textReichtFuerIndex(text) {
+  if (!text) return false;
+  // Ueberschriftszeilen zaehlen nicht mit, sonst wuerde das Vier-Abschnitte-
+  // Format allein schon acht Woerter beisteuern.
+  return text.replace(/^#{1,6}.*$/gm, '').split(/\s+/).filter(Boolean).length >= MINDESTWOERTER_INDEX;
+}
+
 const TMDB_KIND = { film: 'movie', serie: 'series' };
 // Plural-Wortformen fuer Genre-/Bestenlisten-URLs (/filme/..., /serien/...).
 const LISTEN_TYP = { filme: 'movie', serien: 'series' };
@@ -151,7 +179,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     bilder: details ? details.bilder : [],
     trailerKey: trailer ? trailer.key : null,
     text,
-    indexierbar: !!text,
+    indexierbar: textReichtFuerIndex(text),
   };
 }
 
