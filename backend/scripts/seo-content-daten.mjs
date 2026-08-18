@@ -44161,4 +44161,305 @@ Dieses Urteil kommt von jemandem, der eine der bekanntesten Arbeiten derselben G
 Drei Staffeln über fünfeinhalb Jahre hinweg sind zugleich der Beleg dafür, dass das Publikum der Serie über lange Pausen hinweg treu geblieben ist — zwischen dem Ende der ersten und dem Beginn der zweiten Staffel lagen anderthalb Jahre, zwischen zweiter und dritter zwei.
 
 Dass die Regie dreimal in andere Hände ging, ohne dass die Serie ihren Zusammenhalt verlor, ist bei einer Produktion dieser Laufzeit ebenfalls bemerkenswert.` },
+  // ---- Block 99 ----
+  {
+    bereich: 'titel', schluessel: 'movie:175', locale: 'de-de',
+    text: `### Worum es geht
+
+Zwei Jungen wachsen auf der griechischen Insel Amorgos auf. Beide zieht es unter Wasser. Nach dem Tod seines Vaters verlässt Jacques die Insel.
+
+Jahre später treffen sich die Freunde wieder. Jacques hat sein Tauchen der Wissenschaft zur Verfügung gestellt, Enzo hält Rekorde im Apnoetauchen — im Tauchen ohne Gerät, allein mit angehaltenem Atem. Vor Sizilien treten sie bei einer Weltmeisterschaft gegeneinander an.
+
+### Entstehungsgeschichte
+
+Vorbild für die beiden Figuren waren der französische Apnoetaucher Jacques Mayol und der italienische Rekordhalter Enzo Maiorca, die sich in den sechziger Jahren über ein Jahrzehnt hinweg Rekorde streitig machten.
+
+Luc Besson führte Regie, schrieb das Drehbuch und produzierte den Film.
+
+Jean-Marc Barr spielt Jacques Mayol, Jean Reno den Enzo Molinari, Rosanna Arquette die Johana Baker, Paul Shenar den Dr. Laurence und Sergio Castellitto den Novelli.
+
+Die Kamera führte Carlo Varini, den Schnitt Olivier Mauffroy, die Musik stammt von Éric Serra.
+
+Das Budget betrug rund 80 Millionen französische Francs. Barr und Reno absolvierten eine mehrmonatige Tauchausbildung; die Unterwasseraufnahmen entstanden in Tiefen bis 40 Meter. Technischer Berater war Jacques Mayol selbst. Die Drehzeit betrug neun Monate, gedreht wurde unter anderem auf Amorgos — dort liegt auch das gestrandete Schiff Olympia, das im Film zu sehen ist.
+
+### Hinter den Kulissen
+
+Der Film existiert in drei deutlich verschiedenen Fassungen. Die französische Kinofassung dauert 138 Minuten. Für die Vereinigten Staaten entstand eine Version von 118 Minuten — mit anderem Ende und einer neuen Filmmusik von Bill Conti. Der Director's Cut kommt auf 168 Minuten und war nur in Europa und Japan erhältlich.
+
+Ein Eingriff dieser Größe ist selten: Ein Verleih ersetzte nicht nur den Schluss, sondern die gesamte Musik.
+
+Dass der reale Jacques Mayol als technischer Berater mitarbeitete, verankert den Film in der Sache. Neun Monate Drehzeit und Tauchgänge bis 40 Meter zeigen, dass hier nicht simuliert wurde.
+
+### Einordnung & Wirkung
+
+In Frankreich lief der Film über ein Jahr in den Kinos und war außergewöhnlich erfolgreich. Der Zuspruch blieb allerdings auf Europa beschränkt; in den Vereinigten Staaten fand er kein Publikum.
+
+1989 gab es acht César-Nominierungen — darunter für den besten Film, die beste Regie, Jean-Marc Barr als besten Hauptdarsteller, Jean Reno als besten Nebendarsteller und die beste Kamera. Gewonnen wurden zwei: beste Filmmusik für Éric Serra und bester Ton. Hinzu kam der Grand Prix der Prix de l'Académie nationale du cinéma als bester Film.
+
+Der film-dienst würdigte eine weithin spannende Bildererzählung, störte sich aber am Schluss — die dort glorifizierten Selbsttötungen trübten den positiven Eindruck.
+
+Dieser Einwand betrifft den Kern. Der Film erzählt von Menschen, die die Grenze zwischen Beherrschung und Selbstaufgabe nicht mehr sehen, und stellt sich dabei nicht neben sie, sondern hinter sie.` },
+  {
+    bereich: 'titel', schluessel: 'movie:73567', locale: 'de-de',
+    text: `### Worum es geht
+
+Chris Smith hat Schulden bei einem Drogenhändler und keine Aussicht, sie zu bezahlen. Sein Ausweg ist eine Lebensversicherung — die seiner Mutter.
+
+Er wendet sich an Joe Cooper: Polizist, nebenbei Auftragsmörder. Joe verlangt Vorkasse, die Chris nicht hat. Also bietet die Familie etwas anderes an: Chris' Schwester Dottie, die geistig behindert ist.
+
+### Entstehungsgeschichte
+
+Vorlage ist Tracy Letts' gleichnamiges Bühnenstück; Letts schrieb auch das Drehbuch. Regie führte William Friedkin.
+
+Matthew McConaughey spielt Killer Joe Cooper, Emile Hirsch den Chris Smith, Thomas Haden Church den Vater Ansel, Gina Gershon die Sharla Smith und Juno Temple die Dottie.
+
+Produziert wurde der Film von Nicolas Chartier und Scott Einbinder. Die Kamera führte Caleb Deschanel, den Schnitt Darrin Navarro, die Musik stammt von Tyler Bates.
+
+Der Film entstand 2011 in den Vereinigten Staaten und dauert 102 Minuten.
+
+In den USA erhielt er die Freigabe NC-17, im Vereinigten Königreich eine ab 18 Jahren. In Deutschland wurde er am 30. April 2013 indiziert.
+
+### Hinter den Kulissen
+
+Die Einstufungen sprechen für sich. NC-17 in den Vereinigten Staaten, eine Freigabe ab 18 im Vereinigten Königreich und die Indizierung in Deutschland stehen für einen Film, der auf jede Zugänglichkeit verzichtet.
+
+Die Ausgangslage selbst ist der Skandal: Eine Familie handelt über den Wert eines ihrer Mitglieder und verfügt über eine Frau, die sich nicht wehren kann.
+
+Tracy Letts hatte den Stoff zuerst für die Bühne geschrieben; die Verfilmung stammt von ihm selbst.
+
+### Einordnung & Wirkung
+
+Die Urteile waren zurückhaltend bis ablehnend. Manohla Dargis bemängelte fehlenden Rhythmus, das Lexikon des internationalen Films den fehlenden dramaturgischen Atem. Das Fantasy Filmfest kritisierte übertriebenes Spiel und problematische Szenen.
+
+Gina Gershon wurde für ihre Darstellung mehrfach nominiert — 2011 bei den Toronto Film Critics, 2013 bei der International Cinephile Society und für den Saturn Award.
+
+Dass ein Film mit dieser Besetzung in Deutschland indiziert wurde, ist ein außergewöhnlicher Vorgang — und ein Hinweis darauf, wie weit die Verfilmung geht.
+
+Was bleibt, ist eine Arbeit, deren Rang strittig ist: nominiert für Darstellerpreise, abgelehnt von der Fachkritik, in mehreren Ländern nur eingeschränkt zugänglich.` },
+  {
+    bereich: 'titel', schluessel: 'movie:521935', locale: 'de-de',
+    text: `### Worum es geht
+
+Alice arbeitet als Camgirl. Unter dem Namen Lola_Lola sendet sie auf der Plattform FreeGirlsLive.
+
+Dann verliert sie den Zugang zu ihrem Konto. Nicht, weil es gesperrt wäre — es sendet weiter. Nur steht jemand anderes vor der Kamera: eine Frau, die genauso aussieht wie sie. Ihre Versuche, Behörden einzuschalten, laufen ins Leere.
+
+### Entstehungsgeschichte
+
+Das Drehbuch schrieb Isa Mazzei, Regie führte Daniel Goldhaber; es war sein erster Spielfilm. Die Geschichte stammt von Goldhaber, Mazzei und Isabelle Link-Levy.
+
+Madeline Brewer spielt Alice und Lola, Patch Darragh den Arnold, Melora Walters die Mutter Lynne, Devin Druid den Bruder Jordan, Imani Hakim die Baby und Michael Dempsey den Barney.
+
+Produziert wurde der Film von Divide/Conquer, Blumhouse Productions und Gunpowder & Sky. Die Kamera führte Katelin Arizmendi, den Schnitt Daniel Garber, die Musik stammt von Gavin Brivik. Das Budget betrug eine Million Dollar; gedreht wurde in 20 Tagen, vom 27. März bis zum 23. April 2017.
+
+Premiere war am 18. Juli 2018 beim Fantasia International Film Festival, der Start bei Netflix folgte am 16. November 2018.
+
+### Hinter den Kulissen
+
+Isa Mazzei hat selbst als Camgirl gearbeitet. Ursprünglich wollte sie einen Dokumentarfilm drehen, entschied sich aber für das Horrorgenre, weil sie das Thema so wirksamer vermitteln zu können glaubte.
+
+Vieles im Film geht auf ihre eigenen Erfahrungen zurück — insbesondere der Diebstahl ihres Kamerabildes durch Videopiraterie, dazu Herabwürdigung durch Polizisten und durch Filmmanager, die ihr unangemessene Fragen stellten.
+
+Goldhaber und Mazzei kennen sich seit der Schulzeit; er hatte zuvor pornografische Videos von ihr gedreht.
+
+Der Vorspann nennt beide gemeinsam — „A Film by Isa Mazzei & Daniel Goldhaber" — ausdrücklich als Einwand gegen die Vorstellung, ein Film gehöre allein seiner Regie.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 93 Prozent bei 103 Bewertungen aus, Metacritic 71 von 100.
+
+Beim Fantasia Festival 2018 gewann der Film den New Flesh Award als bester Spielfilm und den Cheval Noir Award für das Drehbuch. Beim Brooklyn Horror Film Festival kamen Auszeichnungen für Madeline Brewer, für das Szenenbild von Emma Rose Mead und der Publikumspreis hinzu.
+
+Bryan Bishop nannte in The Verge die Prämisse beunruhigender als eine durchschnittliche Folge von „Black Mirror". David Ehrlich verglich den Film bei IndieWire mit David Lynch. Yomi Adegoke lobte im Guardian die Bilder und Brewers Wechsel zwischen der nervösen Alice und der selbstsicheren Lola.
+
+Jeannette Catsoulis urteilte in der New York Times gemischt: starke Prämisse, aber zu viele Aufnahmen von Bildschirmen im Bild.
+
+Für eine Million Dollar Budget und 20 Drehtage ist die Aufnahme außergewöhnlich.` },
+  {
+    bereich: 'titel', schluessel: 'movie:531454', locale: 'de-de',
+    text: `### Worum es geht
+
+Lars Erickssong hat ein Ziel, seit er ein Kind ist: den Eurovision Song Contest gewinnen. Zusammen mit seiner Jugendfreundin Sigrit bildet er die Band Fire Saga.
+
+Wie sie zum isländischen Vorentscheid kommen, ist der erste Witz des Films — und einer, der es in sich hat. Danach geht es nach Edinburgh, wo der Wettbewerb stattfindet und wo Lars und Sigrit sich unter Bedingungen behaupten müssen, für die weder Talent noch Ehrgeiz reichen.
+
+### Entstehungsgeschichte
+
+Regie führte David Dobkin. Das Drehbuch schrieben Will Ferrell und Andrew Steele; Ferrell produzierte den Film gemeinsam mit Jessica Elbaum und Chris Henchy.
+
+Ferrell spielt auch Lars Erickssong. Rachel McAdams ist Sigrit Ericksdottir, Dan Stevens der Alexander Lemtov, Pierce Brosnan der Vater Erick Erickssong und Mikael Persbrandt der Victor Karlosson.
+
+Die Kamera führte Danny Cohen, den Schnitt Greg Hayden, die Musik stammt von Atli Örvarsson.
+
+Gedreht wurde in Glasgow, in Edinburgh und in Island; das Knebworth House diente als Außenkulisse. Sämtliche Musikaufnahmen entstanden im Mai 2019 auf der Bühne des Eurovision Song Contest.
+
+Der Film erschien am 26. Juni 2020 bei Netflix. Geplant war ursprünglich eine Veröffentlichung während des Wettbewerbs 2020 — der wegen der Coronavirus-Pandemie ausfiel.
+
+### Hinter den Kulissen
+
+Dass die Musiknummern auf der echten Bühne des Wettbewerbs aufgenommen wurden, ist die entscheidende Produktionsentscheidung. Der Film parodiert den Eurovision Song Contest nicht von außen, sondern mit dessen eigenen Mitteln.
+
+Die geplatzte Veröffentlichung ist die traurigste Pointe. Der Film sollte zum Wettbewerb 2020 erscheinen — und erschien stattdessen in dem einzigen Jahr, in dem es keinen gab.
+
+Bemerkenswert ist zudem, wie ernst der Film seinen Gegenstand nimmt. Die Musik ist echte Musik, nicht bloß Kulisse für Gags.
+
+### Einordnung & Wirkung
+
+Der Song „Husavik" war für den Oscar nominiert, der Soundtrack für einen Grammy als beste Zusammenstellung. Der Golden Reel Award für den besten Tonschnitt in einem Musical ging an den Film; hinzu kamen Nominierungen bei den Critics' Choice Awards und den People's Choice Awards.
+
+Rotten Tomatoes weist 64 Prozent aus, mit dem Befund, inspirierte Zutaten wechselten sich mit flachen Passagen ab. Metacritic vergab 50 von 100. Quotenmeter.de nannte ihn eine bunte, musikalische Will-Ferrell-Komödie.
+
+Eine Oscar-Nominierung für einen Song aus einer Netflix-Komödie ist der bemerkenswerteste Punkt dieser Bilanz. Sie bestätigt, was die gemischten Kritiken andeuten: Was am Film unstrittig gelungen ist, ist die Musik.` },
+  {
+    bereich: 'titel', schluessel: 'movie:284536', locale: 'de-de',
+    text: `### Worum es geht
+
+Jim Bennett unterrichtet Literatur an einer Universität in Los Angeles. Nachts spielt er — und verliert planmäßig.
+
+Er schuldet dem Glücksspielbetreiber Lee 260.000 Dollar und dem Kredithai Neville Baraka weitere 50.000. Lee gibt ihm sieben Tage. Was Jim in dieser Woche unternimmt, folgt keiner Vernunft, sondern einem Willen zur Selbstzerstörung, den er selbst nicht erklären kann.
+
+### Entstehungsgeschichte
+
+Vorlage ist der Film „The Gambler" von James Toback aus dem Jahr 1974, der wiederum auf Dostojewskis Roman zurückgeht.
+
+Regie führte Rupert Wyatt, das Drehbuch schrieb William Monahan.
+
+Mark Wahlberg spielt Jim Bennett, John Goodman den Frank, Brie Larson die Studentin Amy Phillips, Michael K. Williams den Neville Baraka, Jessica Lange die Mutter Roberta, Andre Braugher den Dekan Fuller, Alvin Ing den Lee und Emory Cohen den Dexter.
+
+Produziert wurde der Film von Irwin Winkler, Robert Chartoff, Wahlberg, Stephen Levinson und David Winkler. Die Kamera führte Greig Fraser, die Musik stammt von Theo Green und Jon Brion.
+
+Gedreht wurde ab dem 20. Januar 2014 in Downtown Los Angeles. Das Budget lag zwischen 25 und 31 Millionen Dollar.
+
+Premiere war am 10. November 2014 beim AFI Fest, der breite Kinostart folgte am 25. Dezember 2014.
+
+### Hinter den Kulissen
+
+Das Projekt hatte eine lange Vorgeschichte. Paramount kündigte die Neuverfilmung im August 2011 an — zunächst mit Martin Scorsese als Regisseur und Leonardo DiCaprio in der Hauptrolle. Nach Scorseses Ausstieg war kurzzeitig Todd Phillips im Gespräch; erst im September 2013 kamen Wahlberg und Wyatt hinzu.
+
+Der Kern der Figur ist ihre Widersprüchlichkeit. Jim erkennt im Hörsaal Begabung — er identifiziert die Studentin Amy Phillips als mögliches Talent — und richtet zugleich sein eigenes Leben zugrunde.
+
+Die Kritik hob dabei besonders eine Nebenfigur hervor: Jessica Langes Roberta wurde als ihre fleischigste Filmrolle seit Jahren beschrieben, IndieWire brachte sie für eine Oscar-Nominierung ins Gespräch.
+
+### Einordnung & Wirkung
+
+Bei 25 bis 31 Millionen Dollar Herstellungskosten spielte der Film 30 Millionen ein.
+
+Rotten Tomatoes weist 43 Prozent bei 142 Bewertungen aus, Metacritic 55 von 100; bei CinemaScore vergab das Publikum ein C+.
+
+Die Einzelurteile gingen auseinander. Todd McCarthy nannte den Film im Hollywood Reporter eine schlanke und effiziente Neuverfilmung, Bilge Ebiri befand in Vulture, Wahlberg wachse in die Rolle hinein. Peter Travers vergab im Rolling Stone zwei von vier Sternen und fand, Wyatts Eile in der Inszenierung ermüde.
+
+Einig war man sich bei Jessica Lange. Die Beschreibungen reichen von einprägsam über ergreifend bis herzzerreißend — für eine Nebenrolle in einem mittelmäßig aufgenommenen Film ein bemerkenswerter Befund.` },
+  {
+    bereich: 'titel', schluessel: 'movie:98357', locale: 'de-de',
+    text: `### Worum es geht
+
+Billy Taggart war Polizist in New York. Er erschoss einen Vergewaltiger und wurde wegen Notwehr freigesprochen.
+
+Jahre später arbeitet er als Privatdetektiv. Der Bürgermeister, Nicholas Hostetler, gibt ihm einen Auftrag: Er soll dessen Frau beschatten, die ihn betrügt. Was Taggart dabei findet, hat mit Ehebruch wenig zu tun — und mit einem Wohnungsbauprojekt umso mehr.
+
+### Entstehungsgeschichte
+
+Regie führte Allen Hughes; es war sein erstes Regieprojekt allein. Das Drehbuch schrieb Brian Tucker.
+
+Mark Wahlberg spielt Billy Taggart, Russell Crowe den Bürgermeister Nicholas Hostetler, Catherine Zeta-Jones dessen Frau Cathleen, Jeffrey Wright den Carl Fairbanks und Barry Pepper den Jack Valliant.
+
+Produziert wurde der Film von Regency Enterprises und New Regency Productions; zu den Produzenten gehörten Randall Emmett, Wahlberg, Stephen Levinson, Arnon Milchan und Teddy Schwarzman.
+
+Die Kamera führte Ben Seresin, den Schnitt Cindy Mollo, die Musik stammt von Atticus Ross, Claudia Sarne und Leo Ross. Gedreht wurde im Bildformat 2,35:1 in New York City sowie in Carrollton und New Orleans in Louisiana.
+
+Das Budget betrug 35 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Die Anlage ist klassisch. Ein Ermittler bekommt einen Auftrag, der harmlos aussieht, und stellt fest, dass er als Werkzeug gedacht war — das Muster gehört zum Bestand des amerikanischen Kriminalfilms.
+
+Was der Film daraus macht, ist ein Stück über Stadtpolitik. Der Bürgermeister lässt ein Wohnprojekt abreißen, weil er daran verdient; der Wahlkampf gegen ihn läuft parallel.
+
+Die Besetzung setzt auf Reibung. Russell Crowe als Amtsinhaber, der jeden Handschlag als Geschäft versteht, gegen Mark Wahlberg als Mann, dem man ansieht, dass er nicht durchschaut, worin er steckt.
+
+Dass drei Komponisten an der Musik arbeiteten, darunter Atticus Ross, verweist auf einen Klang, der eher Stimmung erzeugen als Melodien liefern soll.
+
+### Einordnung & Wirkung
+
+Bei 35 Millionen Dollar Herstellungskosten spielte der Film weltweit 19,7 Millionen ein; das Startwochenende in Nordamerika brachte gut acht Millionen. Der Film blieb damit deutlich hinter seinen Kosten zurück.
+
+Die Urteile fielen unterschiedlich hart aus. Prisma nannte ihn einen absolut unglaubwürdigen Selbstjustizstreifen. Das Lexikon des internationalen Films sprach von einem soliden Thriller mit Drehbuchschwächen.
+
+Zwischen diesen beiden Einschätzungen liegt der Film. Handwerklich funktioniert er, in der Konstruktion nicht durchgehend.
+
+Eine Nebenbemerkung: Der Name der Hauptfigur ist eine Anspielung auf „Beverly Hills Cop".` },
+  {
+    bereich: 'titel', schluessel: 'series:96648', locale: 'de-de',
+    text: `### Worum es geht
+
+Cha Hyun-su ist Schulabbrecher und schwer depressiv. Bei einem Autounfall stirbt seine Familie. Er zieht in ein heruntergekommenes Wohnhaus namens Green Home.
+
+Dann verändert sich die Welt draußen. Menschen verwandeln sich in Ungeheuer — und zwar entsprechend dem, wonach sie sich am stärksten gesehnt haben. Die Bewohner des Hauses verbarrikadieren sich und müssen aushalten, dass die Gefahr auch von innen kommen kann.
+
+### Entstehungsgeschichte
+
+Vorlage ist der gleichnamige Webtoon von Kim Carnby und Hwang Young-chan, erschienen bei Naver und dort über 2,1 Milliarden Mal aufgerufen.
+
+Die Regie der ersten Staffel führten Lee Eung-bok, Jang Young-woo und Park So-hyun; für die zweite und dritte Staffel blieben Lee Eung-bok und Park So-hyun. Das Drehbuch schrieben Hong So-ri, Kim Hyung-min und Park So-jung.
+
+Song Kang spielt Cha Hyun-su, Lee Jin-wook den Auftragsmörder Pyeon Sang-wook, Lee Si-young die frühere Feuerwehrfrau Seo Yi-kyung, Lee Do-hyun den ehemaligen Medizinstudenten Lee Eun-hyuk, Park Gyu-young die Bassistin Yoon Ji-su und Go Min-si die angehende Ballerina Lee Eun-yu.
+
+Produziert wurde die Serie von Studio Dragon und Studio N mit einem Budget von 30 Milliarden Won. Gedreht wurde von September 2019 bis Februar 2020. An den Effekten arbeiteten Legacy Effects, VFX Studio Westworld und Spectral Motion.
+
+Es entstanden drei Staffeln mit insgesamt 26 Folgen: zehn ab dem 18. Dezember 2020, acht ab dem 1. Dezember 2023 und acht ab dem 19. Juli 2024, alle bei Netflix.
+
+### Hinter den Kulissen
+
+Die Idee hinter den Ungeheuern ist der eigentliche Einfall. Wer sich verwandelt, wird zu dem, wonach er sich gesehnt hat — die Gestalt verrät also, was der Mensch wollte.
+
+Damit wird jede Figur im Haus zu einer offenen Frage. Die Bedrohung steht nicht nur vor der Tür, sie sitzt mit am Tisch.
+
+Dass für die Effekte Studios verpflichtet wurden, die zuvor an Produktionen wie Avengers, Avatar, Game of Thrones und Stranger Things gearbeitet hatten, zeigt den Anspruch. Für eine koreanische Serie war das 2020 ein neues Niveau.
+
+### Einordnung & Wirkung
+
+Die Serie war die erste südkoreanische Produktion in den amerikanischen Netflix-Top-10 und erreichte dort Platz drei. In den ersten vier Wochen sahen sie 22 Millionen zahlende Haushalte; in den ersten drei Tagen stand sie in acht Regionen auf Platz eins und in 42 in den Top 10, insgesamt in über 70 Ländern.
+
+Rotten Tomatoes weist für die erste Staffel 86 Prozent aus, für die zweite 80 Prozent. Kavya Christopher vergab in der Times of India vier von fünf Sternen und lobte die Qualität der Effekte und die zwischenmenschliche Tiefe.
+
+Pierce Conran urteilte in der South China Morning Post zurückhaltender: drei von fünf Sternen, mit dem Einwand, die Serie biete nach einem spannenden Auftakt nicht viel Geschichte. Bemängelt wurden außerdem der Soundtrack und das Fehlen der Ungeheuer in späteren Folgen der ersten Staffel.
+
+Der bemerkenswerteste Punkt bleibt der erste: Vor dieser Serie hatte es keine südkoreanische Produktion in die amerikanischen Netflix-Top-10 geschafft.` },
+  {
+    bereich: 'titel', schluessel: 'series:85720', locale: 'de-de',
+    text: `### Worum es geht
+
+Alina Starkow arbeitet als Kartografin in einer Welt, die ein Riss teilt: die Schattenflur, ein Streifen aus Dunkelheit, den zu durchqueren lebensgefährlich ist.
+
+Dann zeigt sich, dass Alina eine seltene Gabe besitzt: Sie kann Sonnenlicht herbeirufen. Damit wird sie zur Hoffnung eines ganzen Reiches und zugleich zum Einsatz in einem Spiel, dessen Regeln andere machen.
+
+### Entstehungsgeschichte
+
+Vorlage sind Leigh Bardugos Grisha-Trilogie und ihre Krähen-Dilogie. Für das Fernsehen entwickelt wurde die Serie von Eric Heisserer.
+
+Jessie Mei Li spielt Alina Starkow, Ben Barnes den Aleksander Kirigan, Archie Renaux den Malyen Oretsev, Freddy Carter den Kaz Brekker, Amita Suman die Inej Ghafa und Kit Young den Jesper Fahey.
+
+Produziert wurde die Serie von 21 Laps Entertainment für Netflix; die Musik stammt von Joseph Trapanese. Gedreht wurde in Budapest und in Vancouver, die Produktion lief von Oktober 2019 bis Februar 2020.
+
+Es entstanden 16 Folgen in zwei Staffeln, jede zwischen 45 und 65 Minuten lang. Die erste Staffel erschien am 23. April 2021, die zweite am 16. März 2023. Danach wurde die Serie eingestellt.
+
+### Hinter den Kulissen
+
+Die Adaption verbindet zwei Buchreihen derselben Autorin: die Grisha-Trilogie und die Krähen-Dilogie. Die Serie führt Figuren aus beiden nebeneinander.
+
+Das ist ein erheblicher Eingriff und erklärt zugleich einen der Kritikpunkte: Wer zwei Erzählwelten gleichzeitig einführen muss, hat viel zu erklären, und einige Rezensenten fanden die Erläuterungen verwirrend.
+
+Der Gewinn liegt auf der anderen Seite. Zwei Gruppen mit ganz verschiedenen Beweggründen bewegen sich durch dieselbe Welt, und das erzeugt eine Reibung, die keine der Vorlagen allein hätte.
+
+Budapest als Drehort liefert dabei die Architektur, aus der die Serie ihre Welt zusammensetzt.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 87 Prozent Zustimmung aus, Metacritic 70 von 100. Gelobt wurden die Darsteller und der Weltentwurf, kritisiert wurden Erklärpassagen, die einige Rezensenten verwirrend fanden.
+
+Trotz dieser Aufnahme endete die Serie nach zwei Staffeln.
+
+Das ist der bemerkenswerteste Punkt ihrer Bilanz. 87 Prozent Zustimmung sind ein Wert, mit dem viele Produktionen weiterlaufen — die Entscheidung fiel hier offenkundig nicht nach der Kritik.
+
+Zurück bleiben 16 Folgen, die zwei Buchreihen zusammenführen und deren Erzählung an einem Punkt abbricht, an dem die Vorlagen weitergehen.` },
 ];
