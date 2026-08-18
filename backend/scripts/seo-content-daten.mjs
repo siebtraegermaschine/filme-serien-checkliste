@@ -46617,4 +46617,315 @@ Das Lexikon des internationalen Films lobte einen originellen Abenteuerfilm für
 Bemerkenswert ist die Besetzung. Sigourney Weaver, Jon Voight und Patricia Arquette in einem Jugendfilm sind ein Aufwand, den das Format selten rechtfertigt.
 
 Was den Film über vergleichbare Arbeiten hebt, ist die Verweigerung der einfachen Auflösung. Die drei Erzählstränge — Stanleys Gegenwart, die Geschichte von Kate Barlow und der Fluch der Familie — greifen ineinander, und der Film verlangt, dass man mitdenkt.` },
+  // ---- Block 107 ----
+  {
+    bereich: 'titel', schluessel: 'movie:1090', locale: 'de-de',
+    text: `### Worum es geht
+
+Los Angeles im Jahr 1999. Der Computermilliardär Hannon Fuller wird ermordet — kurz nachdem er ein System fertiggestellt hat, das eine vollständige Simulation von Los Angeles im Jahr 1937 erzeugt.
+
+Verdächtigt wird sein Schützling Douglas Hall. Um den Mord aufzuklären, steigt Hall in die Simulation. Was er dort findet, wirft eine Frage auf, die er lieber nicht gestellt hätte.
+
+### Entstehungsgeschichte
+
+Vorlage ist Daniel F. Galouyes Roman „Simulacron-3" von 1964. Der Film ist zugleich eine Neuverfilmung von Rainer Werner Fassbinders Fernsehmehrteiler „Welt am Draht" aus dem Jahr 1973.
+
+Regie führte Josef Rusnak, der das Drehbuch gemeinsam mit Ravel Centeno-Rodriguez schrieb. Produziert wurde der Film von Roland Emmerich, Ute Emmerich und Marco Weber.
+
+Craig Bierko spielt Douglas Hall, in den anderen Zeitebenen John Ferguson und David. Gretchen Mol ist Jane Fuller und Natasha Molinaro, Armin Mueller-Stahl der Hannon Fuller, Grierson und Janes Vater, Vincent D'Onofrio der Jason Whitney und Jerry Ashton, Dennis Haysbert der Detective Larry McBain.
+
+Die Kamera führte Wedigo von Schultzendorff, den Schnitt Henry Richardson, die Musik stammt von Harald Kloser.
+
+Das Budget betrug 16 Millionen Dollar. Der Start war am 16. April 1999 in Dänemark, am 28. Mai 1999 in den Vereinigten Staaten und am 25. November 1999 in Deutschland.
+
+### Hinter den Kulissen
+
+Josef Rusnak wurde für den Film verpflichtet, nachdem er 1998 als Second-Unit-Regisseur an „Godzilla" gearbeitet hatte; Weber und Emmerich waren von seiner Kameraarbeit beeindruckt.
+
+Die Besetzungsliste erzählt die Konstruktion mit. Fast jeder Darsteller spielt mehrere Figuren in verschiedenen Zeitebenen — 1937, 1999 und 2024 — und wer wem entspricht, ist der Kern der Geschichte.
+
+Bemerkenswert ist die Herkunft des Stoffes. Fassbinder hatte denselben Roman 1973 fürs Fernsehen verfilmt; dass 26 Jahre später eine amerikanische Fassung entstand, ist ein seltener Weg.
+
+Der Film erschien im selben Jahr wie ein anderer über simulierte Wirklichkeit — und stand von Beginn an in dessen Schatten.
+
+### Einordnung & Wirkung
+
+Bei 16 Millionen Dollar Herstellungskosten spielte der Film weltweit 18,5 Millionen ein, davon 11,9 Millionen in Nordamerika.
+
+Rotten Tomatoes weist 29 Prozent aus, mit dem Befund, ein schwaches Drehbuch und eine verwirrende Handlung untergrüben die beeindruckenden Bilder. Metacritic vergab 36 von 100, das Publikum bei CinemaScore ein D+.
+
+Nominiert war der Film für den Saturn Award als bester Science-Fiction-Film — er unterlag „Matrix".
+
+Dagegen steht ein einzelnes, gewichtiges Urteil: Der Philosoph Slavoj Žižek nannte ihn viel besser als „Matrix".
+
+Dass ausgerechnet dieser Film gegen jenen verlor, dem er inhaltlich am nächsten steht, gehört zu seiner Geschichte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:38684', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine junge Frau verlässt bei Tagesanbruch ein Anwesen und läuft ins Moor. Von dort erzählt der Film zurück.
+
+Jane Eyre ist Waise. Ihre Jugend verbrachte sie bei Mrs. Reed und in einem Internat, in dem sie seelischem Terror ausgesetzt war. Als Erwachsene tritt sie eine Stelle als Gouvernante auf Thornfield an — und verliebt sich in den Hausherrn Edward Rochester.
+
+### Entstehungsgeschichte
+
+Vorlage ist Charlotte Brontës Roman von 1847.
+
+Regie führte Cary Joji Fukunaga, das Drehbuch schrieb Moira Buffini; es stand 2008 auf der Brit List. Produziert wurde der Film gemeinsam von BBC Films, Focus Features und Ruby Films.
+
+Mia Wasikowska spielt Jane Eyre, Michael Fassbender den Edward Rochester, Jamie Bell den St. John Rivers, Judi Dench die Mrs. Fairfax, Sally Hawkins die Mrs. Reed, Imogen Poots die Blanche Ingram und Valentina Cervi die Bertha Mason.
+
+Die Kamera führte Adriano Goldman, den Schnitt Melanie Oliver, die Musik stammt von Dario Marianelli, die Kostüme von Michael O'Connor.
+
+Gedreht wurde vom 22. März bis Mitte Mai 2010 in London, in Derbyshire — auf Chatsworth House, in Haddon Hall, in den Derbyshire Dales und an Froggatt Edge — sowie bei Sheffield.
+
+Der Film dauert 120 Minuten; ein Director's Cut umfasst rund 150 Minuten. Der Start war am 11. März 2011 in den Vereinigten Staaten, am 9. September 2011 in Großbritannien und Irland und am 1. Dezember 2011 in Deutschland.
+
+### Hinter den Kulissen
+
+Die Entscheidung, mit Janes Flucht zu beginnen und alles Übrige im Rückblick zu erzählen, ist der wichtigste Eingriff dieser Fassung. Der Roman erzählt geradeaus; der Film beginnt mit dem Zusammenbruch.
+
+Fukunaga betonte die Schauerelemente des Stoffes. Diese Art von Grusel, sagte er, und dunkle Seiten wie diese seien sehr selten.
+
+Damit rückt der Film die Seite des Stoffes nach vorn, die in Verfilmungen sonst hinter der Liebesgeschichte zurücktritt.
+
+Das Lexikon des internationalen Films beschrieb genau diese Mischung — elegant verbinde der Film Horror, Krimi, Liebes-, Psycho- und Emanzipationsdrama.
+
+### Einordnung & Wirkung
+
+Mia Wasikowska erhielt 2011 den British Independent Film Award als beste Schauspielerin, Michael Fassbender den Preis der Filmkritiker von Los Angeles und 2012 den Evening Standard British Film Award.
+
+2012 war Michael O'Connor für den Oscar für das beste Kostümdesign nominiert, 2011 zudem für den Satellite Award.
+
+Cinema nannte den Film ein kunstvoll arrangiertes Porträt einer nur äußerlich unscheinbaren Frau.
+
+Was diese Fassung heraushebt, ist die Verlagerung des Schwerpunkts vom Romantischen ins Bedrohliche — und die Entscheidung, mit dem Ende des Aufenthalts auf Thornfield zu beginnen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:102362', locale: 'de-de',
+    text: `### Worum es geht
+
+Victor ist Ingenieur und stammt aus Ungarn. Er arbeitet für eine kriminelle Organisation in New York — nicht aus Not, sondern mit Absicht.
+
+Vor zwei Jahren wurde seine Tochter bei einer Schießerei getötet und seine Frau von Auftragsmördern ermordet. Victor hat sich eingeschleust, um Rache zu nehmen.
+
+Dann beobachtet ihn die Nachbarin Beatrice bei einer Tat. Victor erkennt in ihr eine Verbündete — auch sie hat eine Rechnung offen.
+
+### Entstehungsgeschichte
+
+Regie führte Niels Arden Oplev, das Drehbuch schrieb J. H. Wyman. Produziert wurde der Film von Neal H. Moritz.
+
+Colin Farrell spielt Victor, der eigentlich László Kerick heißt, Noomi Rapace die Beatrice Louzon, Isabelle Huppert deren Mutter Maman Louzon, Terrence Howard den Alphonse Hoyt und Dominic Cooper den Darcy.
+
+Die Kamera führte Paul Cameron, die Musik stammt von Jacob Groth; den Schnitt besorgten Timothy A. Good und Frédéric Thoraval.
+
+Der Film erschien 2013, dauert 117 Minuten und ist ab 16 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Anlage verbindet zwei Rachegeschichten, die nichts miteinander zu tun haben — und stellt die Frage, ob zwei Menschen einander helfen können, wenn beide nur ihr eigenes Ziel im Blick haben.
+
+Gelobt wurde durchgängig die intensive Chemie zwischen Farrell und Rapace sowie die düstere Atmosphäre.
+
+Kritisiert wurden dagegen die Handlung, die Mischung der Genres und die Stimmigkeit des Plots.
+
+### Einordnung & Wirkung
+
+Der Befund der Kritik teilt den Film sauber in zwei Hälften: Was zwischen den beiden Hauptfiguren geschieht, überzeugt; was um sie herum konstruiert ist, weniger.
+
+Das ist bei einem Film, der zwei Rachegeschichten und einen Bandenkrieg gleichzeitig erzählen will, ein absehbares Ergebnis.
+
+Die Besetzung ist auffällig international: Colin Farrell, Noomi Rapace und Isabelle Huppert in einer amerikanischen Produktion.
+
+Die Freigabe ab 16 Jahren in Deutschland entspricht dem, was der Film zeigt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:11329', locale: 'de-de',
+    text: `### Worum es geht
+
+In New Orleans erschießt ein Mann mehrere Menschen. Die Witwe eines Opfers verklagt nicht den Täter, sondern den Hersteller der Waffe.
+
+Damit beginnt kein gewöhnlicher Prozess. Auf Seiten der Waffenlobby arbeitet Rankin Fitch, ein Geschworenenberater, der die Jury zusammenstellt, durchleuchtet und beeinflusst. Und in der Jury sitzt Nicholas Easter, der gemeinsam mit seiner Freundin Marlee ein eigenes Geschäft betreibt: Er bietet das Urteil zum Verkauf an — beiden Seiten.
+
+### Entstehungsgeschichte
+
+Vorlage ist John Grishams Roman. Für den Film wurde der Konflikt von der Tabak- auf die Waffenindustrie verlegt, um Abstand zu „Insider" von 1999 zu gewinnen.
+
+Regie führte Gary Fleder. Am Drehbuch arbeiteten John Grisham, Brian Koppelman, David Levien, Rick Cleveland und Matthew Chapman. Produziert wurde der Film von Regency Enterprises.
+
+John Cusack spielt Nicholas Easter, Gene Hackman den Rankin Fitch, Dustin Hoffman den Anwalt Wendell Rohr, Rachel Weisz die Marlee, Bruce Davison den Durwood Cable und Bruce McGill den Richter Harkin.
+
+Die Kamera führte Robert Elswit, die Musik stammt von David Baerwald und Christopher Young; den Schnitt besorgten William Steinkamp und Jeff Williams.
+
+Der Film erschien 2003, dauert 122 Minuten und ist ab 12 Jahren freigegeben. Der US-Start war am 17. Oktober 2003, der deutsche am 29. April 2004.
+
+### Hinter den Kulissen
+
+Die Verlegung von Tabak auf Waffen geschah, um Abstand zu „Insider" von 1999 zu gewinnen — und verschiebt damit zugleich den politischen Gegenstand des Films.
+
+Der eigentliche Gegenstand ist ohnehin ein anderer: die Frage, ob ein Geschworenengericht überhaupt unabhängig sein kann, wenn genug Geld darauf verwendet wird, es nicht zu sein.
+
+Die Besetzung setzt auf ein Duell: Gene Hackman als Berater der Gegenseite gegen Dustin Hoffman als Anwalt der Klägerin.
+
+Das Lexikon des internationalen Films befand, der Film werde mitunter zu einem dichten Paranoia-Thriller und transportiere eine durchaus liberale politische Botschaft.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 73 Prozent aus, Metacritic 61 von 100.
+
+2004 war der Film für den Edgar Allan Poe Award, einen Golden Trailer Award und den Preis der Political Film Society nominiert; gewonnen hat er keinen davon.
+
+Die Nominierung durch die Political Film Society ist dabei die aufschlussreichste. Sie zeigt, dass der Film nicht nur als Gerichtsthriller wahrgenommen wurde, sondern als Beitrag zu einer politischen Debatte.
+
+Das deckt sich mit dem Urteil des Lexikons, das dem Film eine durchaus liberale politische Botschaft bescheinigte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:174772', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine internationale Besatzung bricht zum Jupitermond Europa auf. Unter dessen Eiskruste wird ein Ozean vermutet, und in diesem Ozean vielleicht Leben.
+
+Es ist die erste bemannte Mission dorthin. Was der Film zeigt, sind die Aufzeichnungen der Bordkameras — nach dem Ausfall der Verbindung zur Erde, nach den ersten Zwischenfällen und nach dem, was die Besatzung dort tatsächlich findet.
+
+### Entstehungsgeschichte
+
+Regie führte Sebastián Cordero, das Drehbuch schrieb Philip Gelatt. Produziert wurde der Film von Ben Browning; das Budget lag unter zehn Millionen Dollar.
+
+Embeth Davidtz spielt Dr. Samantha Unger, Sharlto Copley den James Corrigan, Michael Nyqvist den Andrei Blok, Christian Camargo den Dr. Daniel Luxembourg, Karolina Wydra die Dr. Katya Petrovna, Dan Fogler den Dr. Sokolov, Anamaria Marinca die Rosa Dasque, Daniel Wu den William Xu und Isiah Whitlock Jr. den Dr. Tarik Pamuk.
+
+Die Kamera führte Enrique Chediak, die Musik stammt von Bear McCreary.
+
+Der Film erschien 2013; die deutsche Premiere war am 22. August 2013 beim Fantasy Filmfest.
+
+### Hinter den Kulissen
+
+Der Szenenbildner Eugenio Caballero zog für seine Arbeit Wissenschaftler der NASA, des Jet Propulsion Laboratory und von SpaceX hinzu.
+
+Das ist bei diesem Film keine Nebensache, sondern die Grundlage. Der Aufwand steckt nicht in Schauwerten, sondern darin, dass die Mission plausibel bleibt.
+
+Die Form des gefundenen Materials tut das Übrige. Was zu sehen ist, stammt aus fest montierten Bordkameras; es gibt keine Einstellung, die niemand aufgenommen haben könnte.
+
+Bei einem Budget unter zehn Millionen Dollar ist das zugleich die kluge Wahl: Was man nicht zeigen kann, zeigt eine ausgefallene Kamera einfach nicht.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 80 Prozent aus, Metacritic 68.
+
+Für einen Film dieser Größenordnung ist das ein starkes Ergebnis — und es beruht auf der Genauigkeit, nicht auf dem Schauwert.
+
+Die Beratung durch NASA, JPL und SpaceX ist dabei der Punkt, auf den die meisten Besprechungen zurückkamen. Wissenschaftliche Redlichkeit ist im Science-Fiction-Kino die Ausnahme, nicht die Regel.
+
+Bemerkenswert ist auch die Besetzung. Neun Rollen, ein internationales Ensemble und keine Hauptfigur im üblichen Sinn — der Film verteilt sein Gewicht auf die gesamte Mannschaft.` },
+  {
+    bereich: 'titel', schluessel: 'movie:471498', locale: 'de-de',
+    text: `### Worum es geht
+
+Elizabeth Hansen wacht in einer Kryokammer auf. Sie kann sich an nichts erinnern, nicht einmal an ihren Namen, und die Kammer lässt sich von innen nicht öffnen.
+
+Was funktioniert, ist eine künstliche Intelligenz namens MILO. Sie beantwortet Fragen — und teilt mit, wie viel Sauerstoff noch bleibt. Von da an läuft die Zeit.
+
+### Entstehungsgeschichte
+
+Regie führte Alexandre Aja. Das Drehbuch schrieb Christie LeBlanc; es stand 2016 auf der Black List der besten unverfilmten Drehbücher Hollywoods.
+
+Mélanie Laurent spielt Elizabeth Hansen, Mathieu Amalric spricht die künstliche Intelligenz MILO. Malik Zidi ist der Léo Ferguson, Marc Saez der Ortiz, Laura Boujenah die Alice Hansen und Eric Herson-Macarel der Capitaine Moreau.
+
+Die Kamera führte Maxime Alexandre, den Schnitt Stéphane Roche, die Musik stammt von Robin Coudert.
+
+Ursprünglich war Anne Hathaway für die Hauptrolle vorgesehen, dann Noomi Rapace; im Juli 2020 kam Mélanie Laurent hinzu, im selben Monat begannen die Dreharbeiten.
+
+Der Film ist eine französisch-amerikanische Produktion, dauert 100 Minuten und erschien am 12. Mai 2021 bei Netflix.
+
+### Hinter den Kulissen
+
+Der Film spielt in einer Kryokammer. Eine Darstellerin, eine Stimme, ein geschlossener Raum — mehr steht nicht zur Verfügung.
+
+Das verlagert alles auf Mélanie Laurent. Sie muss Panik, Erschöpfung und Denkarbeit zeigen, ohne sich bewegen zu können, und der Film hängt vollständig an dieser Leistung.
+
+Die künstliche Intelligenz MILO ist dabei ihr einziges Gegenüber — gesprochen von Mathieu Amalric.
+
+Die Besetzung wechselte vor Drehbeginn zweimal: Vorgesehen waren nacheinander Anne Hathaway und Noomi Rapace, ehe Mélanie Laurent im Juli 2020 hinzukam.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 89 Prozent aus, Metacritic 67 von 100.
+
+Verglichen wurde der Film mit Spielbergs „Minority Report" und „Krieg der Welten".
+
+Der wichtigste Einwand betraf das Ende: Es wähle wohl die leichtesten Antworten auf die moralischen Fragen, die der Film selbst aufwirft.
+
+Dieser Vorwurf ist bei Stoffen dieser Art häufig. Eine Ausgangslage, die philosophische Fragen stellt, muss sie am Ende auch beantworten — und jede Antwort ist kleiner als die Frage.
+
+89 Prozent Zustimmung für ein Kammerspiel mit einer einzigen sichtbaren Darstellerin bleiben dennoch ein bemerkenswertes Ergebnis.` },
+  {
+    bereich: 'titel', schluessel: 'movie:241239', locale: 'de-de',
+    text: `### Worum es geht
+
+New York im Jahr 1981. Abel Morales ist eingewandert und hat sich einen Heizölhandel aufgebaut. Jetzt will er wachsen und kauft ein Ölterminal am Wasser.
+
+Doch seine Tankwagen werden wiederholt überfallen. Zugleich ermittelt der Staatsanwalt Lawrence gegen ihn. Abel versucht, moralisch integer zu bleiben — während seine Frau Anna zunehmend aggressiver wird.
+
+### Entstehungsgeschichte
+
+J. C. Chandor führte Regie und schrieb das Drehbuch; produziert wurde der Film von Chandor, Neal Dodson und Anna Gerb.
+
+Oscar Isaac spielt Abel Morales, Jessica Chastain seine Frau Anna, David Oyelowo den Staatsanwalt Lawrence, Albert Brooks den Anwalt Andrew Walsh und Alessandro Nivola den Peter Forente.
+
+Die Kamera führte Bradford Young, den Schnitt Ron Patane, die Musik stammt von Alex Ebert.
+
+Der Film erschien 2014, dauert 125 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Der Titel benennt das Jahr, in dem der Film spielt. Erzählt wird von einem Mann, der in einer gewalttätigen Umgebung darauf besteht, seine Geschäfte legal zu führen — und dabei feststellt, dass ihm das niemand abnimmt.
+
+Der Konflikt läuft dabei nicht zwischen Abel und den Überfällen, sondern zwischen ihm und seiner Frau: Er will integer bleiben, sie hält das für untauglich.
+
+Der Deutschlandfunk sah den Film in der Tradition von Sidney Lumets New-York-Filmen. Das trifft den Ton — kalt, langsam, an Verfahren interessiert statt an Schüssen.
+
+Die Zeit lobte ihn als künstlerisch herausragend.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 90 Prozent bei der Kritik und 69 Prozent beim Publikum aus, Metacritic 79 von 100.
+
+Der National Board of Review zeichnete den Film 2014 als besten Film aus, Oscar Isaac als besten Hauptdarsteller und Jessica Chastain als beste Nebendarstellerin. 2015 folgten der Saturn Award als bester Independentfilm und eine Golden-Globe-Nominierung für Chastain.
+
+Dass der National Board of Review gleich dreifach auszeichnete, während die Oscars den Film übergingen, gehört zu den auffälligeren Diskrepanzen jener Preissaison.
+
+Der Abstand zwischen 90 Prozent bei der Kritik und 69 Prozent beim Publikum erklärt sich aus der Anlage: Wer nach dem Titel einen Gangsterfilm erwartet, bekommt ein Wirtschaftsdrama.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8688', locale: 'de-de',
+    text: `### Worum es geht
+
+Atlantic City, ein Boxkampf in einer ausverkauften Halle. Auf der Tribüne sitzt der Verteidigungsminister der Vereinigten Staaten, Charles Kirkland — und wird erschossen.
+
+Der Polizist Rick Santoro ist zufällig anwesend. Er ist korrupt, laut und keineswegs der Mann, den man für so einen Fall wollen würde. Trotzdem beginnt er zu ermitteln — und stößt auf eine Verschwörung, die Militär, Politik und organisierte Kriminalität verbindet.
+
+### Entstehungsgeschichte
+
+Brian De Palma führte Regie und schrieb das Drehbuch gemeinsam mit David Koepp.
+
+Nicolas Cage spielt Rick Santoro, Gary Sinise den Commander Kevin Dunne, Carla Gugino die Julia Costello, John Heard den Gilbert Powell, Stan Shaw den Boxer Lincoln Tyler, Kevin Dunn den Lou Logan und Michael Rispoli den Jimmy George.
+
+Die Kamera führte Stephen H. Burum, den Schnitt Bill Pankow, die Musik stammt von Ryūichi Sakamoto.
+
+Gedreht wurde überwiegend in Montreal — in Studios und im Forum de Montréal —, dazu zwei Wochen in Atlantic City mit Aufnahmen im Trump Taj Mahal Hotel & Casino.
+
+Die Produktionskosten betrugen rund 73 Millionen Dollar.
+
+### Hinter den Kulissen
+
+Der Film ist für seine Eröffnungssequenz bekannt. Roger Ebert, der den Film ansonsten hart verurteilte, nannte sie ausdrücklich wundervoll.
+
+Dass ausgerechnet ein korrupter Polizist die Wahrheit sucht, ist die zweite Setzung. Santoro hat keinen moralischen Anspruch — er hat nur den Zufall, dabei gewesen zu sein.
+
+Die Verlegung nach Montreal für einen Film, der vollständig in Atlantic City spielt, ist eine Produktionsentscheidung, die man dem Ergebnis nicht ansieht.
+
+### Einordnung & Wirkung
+
+Bei rund 73 Millionen Dollar Herstellungskosten spielte der Film in den Vereinigten Staaten etwa 55 Millionen ein, weltweit rund 104 Millionen.
+
+Roger Ebert nannte ihn die schlimmste Art von schlechtem Film — lobte aber ausdrücklich die Eröffnungssequenz.
+
+Dieses gespaltene Urteil beschreibt die Lage: Die Machart wurde gelobt, die Geschichte nicht.
+
+Kaufmännisch ging die Rechnung dennoch auf. 73 Millionen Dollar Herstellungskosten stehen 104 Millionen weltweit gegenüber — getragen vor allem vom Ausland, denn in den Vereinigten Staaten blieb der Film unter seinen Kosten.` },
 ];
