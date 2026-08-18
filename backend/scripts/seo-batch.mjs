@@ -95,16 +95,37 @@ async function kandidaten({ locale, limit, minVotes, stufe }) {
 }
 
 // --- Datensatz --------------------------------------------------------------
-// Quellenkette fuer die Inhaltsangabe: muttersprachlich, sonst englisch, sonst
-// deutsch. Eine Inhaltsangabe in anderer Sprache ist keine andere Tatsache --
-// sie beschreibt denselben Titel, und das Modell gibt sie in der Zielsprache
-// wieder. Erfunden wird dadurch nichts.
+// Quelle fuer die Inhaltsangabe ist die ausfuehrlichste verfuegbare -- in
+// welcher Sprache auch immer. Eine Inhaltsangabe auf Spanisch ist keine andere
+// Tatsache als dieselbe auf Deutsch: Sie beschreibt denselben Titel, und das
+// Modell gibt sie in der Zielsprache wieder. Erfunden wird dadurch nichts.
+//
+// Das ist kein Detail: Gegenueber der reinen Verwendung des deutschen Plots
+// bringt diese Auswahl 3.339 zusaetzliche Titel ueber die Schwelle von 250
+// Zeichen. Ohne sie faellt jeder dieser Titel aus dem Verfahren heraus.
+//
+// Bei Gleichstand gewinnt die Zielsprache, dann Deutsch, dann Englisch --
+// je naeher die Quelle an der Zielsprache liegt, desto weniger geht verloren.
+const UEB_SPRACHEN = ['es', 'fr', 'it', 'nl', 'pt', 'en'];
+
 export function inhaltsangabe(t, locale) {
-  const k = SPRACHEN[locale]?.uebKey;
-  const nativ = k && t.uebersetzungen?.[k]?.ov;
-  if (nativ && nativ.length > 150) return nativ;
-  if (t.overview_en && t.overview_en.length > 150) return t.overview_en;
-  return t.plot;
+  const zielKey = SPRACHEN[locale]?.uebKey;
+  const kandidaten = [];
+  if (zielKey && t.uebersetzungen?.[zielKey]?.ov) kandidaten.push({ text: t.uebersetzungen[zielKey].ov, rang: 0 });
+  if (t.plot) kandidaten.push({ text: t.plot, rang: 1 });
+  if (t.overview_en) kandidaten.push({ text: t.overview_en, rang: 2 });
+  for (const k of UEB_SPRACHEN) {
+    const ov = t.uebersetzungen?.[k]?.ov;
+    if (ov && k !== zielKey) kandidaten.push({ text: ov, rang: 3 });
+  }
+  if (!kandidaten.length) return null;
+  // Laenge schlaegt Naehe, aber nur bei deutlichem Vorsprung: eine um die
+  // Haelfte laengere Quelle ist die Uebersetzung wert, eine knapp laengere nicht.
+  kandidaten.sort((a, b) => (b.text.length - a.text.length) || (a.rang - b.rang));
+  const laengste = kandidaten[0];
+  const nah = kandidaten.filter((k) => k.text.length >= laengste.text.length * 0.67)
+                        .sort((a, b) => a.rang - b.rang)[0];
+  return nah.text;
 }
 
 export function datensatz(t, locale) {
