@@ -312,6 +312,17 @@ const NAMENSKONTEXT = new RegExp(
   'gu'
 );
 
+// Deutsche Texte setzen Namen in den Genitiv: "die Regie David Lynchs". Die
+// Quelle fuehrt "David Lynch". Ohne diese Angleichung meldet die Pruefung den
+// belegten Namen als erfunden. Gestrichen wird nur ein angehaengtes s an einem
+// Wort ab vier Zeichen -- kurz genug, dass kein anderer Name dadurch passt.
+function steht(wort, quelle) {
+  const w = wort.toLowerCase();
+  if (quelle.includes(w)) return true;
+  const ohneGenitiv = w.replace(/(\w{3,})[’']?s\b/gu, "$1");
+  return ohneGenitiv !== w && quelle.includes(ohneGenitiv);
+}
+
 // Vergleicht einen Text gegen eine Quelle. Getrennt von faktenVerdacht(),
 // damit die Pruefung auch gegen einen fertig gerenderten Datensatz laufen kann
 // -- so laesst sie sich ohne Datenbank an echten Texten nachmessen.
@@ -344,11 +355,11 @@ export function pruefeGegenQuelle(text, quellText, kennzahlen = {}) {
     const name = m[1].trim();
     // Auch Teiltreffer zaehlen: "Ryan Gosling" gilt als belegt, wenn die
     // Quelle den Namen enthaelt, selbst wenn der Text ihn anders einbettet.
-    if (quelle.includes(name.toLowerCase())) continue;
+    if (steht(name, quelle)) continue;
     // Einzelne Bestandteile pruefen -- "Phil Lord" ist belegt, wenn die Quelle
     // "Phil Lord" fuehrt; "Phil Lord und Chris Miller" faellt sonst durch.
     const teile = name.split(/\s+/).filter((w) => w.length > 2);
-    if (teile.length && teile.every((w) => quelle.includes(w.toLowerCase()))) continue;
+    if (teile.length && teile.every((w) => steht(w, quelle))) continue;
     verdacht.push(`Beteiligte(r) ohne Beleg: ${name}`);
   }
 

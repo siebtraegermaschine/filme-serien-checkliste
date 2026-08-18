@@ -91,3 +91,14 @@ test('Format verlangt genau die vier Ueberschriften', () => {
   assert.deepEqual(formatFehler(gut, 'de-de'), []);
   assert.ok(formatFehler(gut.replace('### Hinter den Kulissen', '### Sonstiges'), 'de-de').length);
 });
+
+// Nachgereicht, nachdem ein Text zu „Der Wüstenplanet" an „die Regie David
+// Lynchs" scheiterte, obwohl der Datensatz David Lynch fuehrt.
+test('belegter Name im Genitiv wird nicht beanstandet', () => {
+  assert.deepEqual(pruefe('Die Regie Anna Beispiels traegt den Film.'), []);
+  assert.deepEqual(pruefe('Gespielt von Max Musters Figur.'), []);
+});
+
+test('erfundener Name im Genitiv faellt trotzdem auf', () => {
+  assert.ok(pruefe('Die Regie Steven Spielbergs traegt den Film.').length);
+});
