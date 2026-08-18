@@ -189,6 +189,35 @@ ignorieren. Wer sie ändert, misst sie an echten Texten nach und lässt
 `backend/test/seoFaktenpruefung.test.js` laufen — die Tests halten **beide**
 Richtungen fest, auch die Fehlalarme.
 
+**Abgeschnittene Inhaltsangaben — geprüft und widerlegt (18.08.2026):** Rund 23
+Prozent der deutschen Inhaltsangaben über 250 Zeichen enden auf „..." oder ganz
+ohne Satzzeichen. Der naheliegende Verdacht ist eine Kürzung im TMDB-Import. Er
+trifft **nicht** zu: 290 auffällige Zeilen wurden gegen die TMDB-API abgeglichen
+und sind zeichengleich mit dem, was TMDB heute liefert — in `plot`, `overview_en`
+und `uebersetzungen`. Kein einziger Fall, in dem TMDB mehr Text hat. Auf dem
+Schreibweg gibt es auch keine Kürzung (`plot` ist `TEXT` ohne Grenze, die
+Ingest-Route legt den Wert unverändert ab). Die Auslassungspunkte stehen so in
+der Quelle: Die TMDB-Gemeinschaften schreiben Inhaltsangaben oft als Cliffhanger,
+und die Quote hängt an der Sprache statt an der Technik — englisch 2,5 Prozent,
+spanisch 5, italienisch 10, deutsch 23, französisch 32. Eine Kürzung im Import
+träfe alle Spalten gleich. **Nicht erneut untersuchen, nichts nachladen.** Der
+Beleg lässt sich jederzeit wiederholen:
+
+```bash
+ssh root@movietaste.de "docker exec -w /app/backend movietaste-backend-1 \
+  node scripts/plot-quellen-pruefen.mjs --stichprobe 40"
+```
+
+**Was daraus folgt:** `inhaltsangabe()` in `seo-batch.mjs` wählt bereits
+sprachübergreifend die ausführlichste Quelle, sortiert dabei aber nur nach Länge
+und Sprachnähe — Vollständigkeit kommt im Vergleich nicht vor. Ohne Argument
+gemessen (`node scripts/plot-quellen-pruefen.mjs`) landen für `de-de` 5.886 von
+25.330 gewählten Quellen auf einem Fragment, für `fr-fr` 6.796 von 25.294. Bei
+zwei Dritteln davon (3.873 deutsch, 4.824 französisch) liegt eine ebenso lange,
+aber vollständige Fassung in einer anderen Sprache vor. Ein
+Vollständigkeits-Kriterium im bestehenden 0,67-Band würde diese Titel auf eine
+saubere Quelle heben — offen, noch nicht umgesetzt.
+
 **Indexierung:** Titelseiten tragen `index` erst ab 250 Wörtern Fließtext
 (`MINDESTWOERTER_INDEX` in `seoData.js`). Damit können Texte gefahrlos
 geschrieben werden, ohne dass dünne Seiten in den Index laufen und dort
@@ -265,6 +294,7 @@ Danach in `neue-liste.json` mergen, Feldnamen: `k` (Schlüssel), `t` (Titel), `y
 | `backend/scripts/seo-pakete.mjs` | Schneidet offene Titel in Arbeitspakete (Fächer-Verfahren). |
 | `backend/scripts/seo-einspielen.mjs` | Sammelt die Texte ein, prüft sie, schreibt nach `seo_content`. |
 | `backend/scripts/seo-batch.mjs` | Dasselbe über die API. Enthält die Prüffunktionen, die beide Wege nutzen. |
+| `backend/scripts/plot-quellen-pruefen.mjs` | Prüft die Inhaltsangaben auf Fragmente und gleicht sie gegen TMDB ab. Nur lesend. |
 | `backend/test/seoFaktenpruefung.test.js` | Sichert die Faktenprüfung ab, in beide Richtungen. |
 | `backend/test/seoIndexierung.test.js` | Sichert die Indexierungsregel und die 250-Wörter-Schwelle ab. |
 
