@@ -43278,4 +43278,289 @@ Der Abstand zwischen beiden Bewertungsportalen deutet auf ein uneinheitliches Bi
 Was den Film heraushebt, ist die Perspektive. Filme über Serienmörder erzählen üblicherweise vom Täter; dieser erzählt von einem Ermittler, der einer Zeugin glaubt, der sonst niemand glaubt.
 
 Dass die Taten reale Opfer hatten, bleibt dabei präsent. Der Film benennt Zeitraum und Altersspanne der Getöteten — und verzichtet darauf, mehr daraus zu machen als die Ausgangslage eines Verfahrens.` },
+  // ---- Block 96 ----
+  {
+    bereich: 'titel', schluessel: 'movie:1480', locale: 'de-de',
+    text: `### Worum es geht
+
+An der Grenze zwischen Mexiko und den Vereinigten Staaten explodiert eine Autobombe. Ein wohlhabender Geschäftsmann und seine Begleiterin sterben.
+
+Der mexikanische Drogenfahnder Miguel Vargas gerät in die Ermittlung — und schnell in Verdacht gegen den amerikanischen Captain Hank Quinlan. Der hat einen Tatverdächtigen binnen kurzem festgenommen; Vargas findet in dessen Wohnung Dynamit, das dort niemand hingelegt haben kann außer der Polizei.
+
+Während Vargas dem nachgeht, gerät seine Frau Susan in die Hände einer kriminellen Familie.
+
+### Entstehungsgeschichte
+
+Orson Welles führte Regie und schrieb das Drehbuch nach dem Kriminalroman „Badge of Evil" von Whit Masterson — einem Pseudonym von Robert Wade und Bill Miller.
+
+Charlton Heston spielt Miguel Vargas, Welles selbst den Captain Hank Quinlan, Janet Leigh die Susan Vargas, Joseph Calleia den Sergeant Pete Menzies, Akim Tamiroff den „Onkel" Joe Grandi, Marlene Dietrich die Tanya und Zsa Zsa Gabor eine Nachtclubbesitzerin.
+
+Produziert wurde der Film 1958 von Universal-International Pictures; Produzent der Originalfassung war Albert Zugsmith. Die Kamera führte Russell Metty. Die Musik stammt von Henry Mancini — es war seine erste große Filmmusik, geprägt von lateinamerikanisch gefärbtem Jazz.
+
+### Hinter den Kulissen
+
+Der Film existiert nicht in einer Fassung, sondern in mehreren. Das Studio kürzte Welles' Version erheblich. Er antwortete mit einem 58 Seiten langen Memorandum voller Änderungswünsche — die abgelehnt wurden.
+
+Vierzig Jahre später schnitt Walter Murch, gemeinsam mit Rick Schmidlin, eine Fassung nach Welles' Vorgaben. Sie erschien 1998 und ist zehn Minuten länger als die Kinofassung von 1958; dazwischen liegt eine Langfassung aus den siebziger Jahren. Im Deutschen entstanden zwei Synchronfassungen.
+
+Damit ist der Film ein Sonderfall: Was heute als Klassiker gilt, ist in Teilen eine Rekonstruktion nach einem Beschwerdebrief.
+
+### Einordnung & Wirkung
+
+1993 wurde der Film ins National Film Registry aufgenommen.
+
+Die restaurierte Fassung erhielt 1998 einen Spezialpreis der New York Film Critics Circle Awards; 1999 zeichnete die Society of Camera Operators die Anfangssequenz aus.
+
+Das Lexikon des internationalen Films nannte ihn intelligent sowie inszenatorisch wie darstellerisch eindrucksvoll. Alex Rühle hob hervor, Welles führe mit den gewohnten Sehkonventionen hinters Licht.
+
+Dass ausgerechnet die Kameraarbeit der Eröffnung noch 41 Jahre nach dem Kinostart einen eigenen Preis bekam, sagt genug über den Rang dieses Films.` },
+  {
+    bereich: 'titel', schluessel: 'movie:504562', locale: 'de-de',
+    text: `### Worum es geht
+
+New York in den fünfziger Jahren. Lionel Essrog arbeitet in einer kleinen Privatdetektei und hat das Tourette-Syndrom — Tics und Wortausbrüche, die er nicht steuern kann, aber ein Gedächtnis, das nichts verliert.
+
+Als sein Mentor Frank Minna ermordet wird, ermittelt Lionel auf eigene Faust. Die Spur führt nicht in die Unterwelt, sondern in die Stadtverwaltung: zu dem Stadtplaner Moses Randolph, der ganze Viertel abreißen lässt.
+
+### Entstehungsgeschichte
+
+Vorlage ist Jonathan Lethems Roman von 1999. Edward Norton, der Regie führte und das Drehbuch schrieb, verlegte die Handlung aus den siebziger in die fünfziger Jahre.
+
+Norton spielt auch die Hauptrolle des Lionel Essrog. Bruce Willis ist Frank Minna, Alec Baldwin der Moses Randolph, Willem Dafoe dessen Bruder Paul, Gugu Mbatha-Raw die Laura Rose und Leslie Mann die Julia Minna.
+
+Produziert wurde der Film von Norton, Bill Migliore, Gigi Pritzker, Rachel Shane und Michael Bederman. Die Kamera führte Dick Pope, den Schnitt besorgte Joe Klotz. Die Musik stammt von Daniel Pemberton, orchestriert von Wynton Marsalis; das Lied „Daily Battles" schrieben Thom Yorke und Flea.
+
+Gedreht wurde ab Februar 2018 in New York, unter anderem in Harlem und am Washington Square Park. Während der Dreharbeiten kam ein Feuerwehrmann ums Leben.
+
+Premiere war im August 2019 in Telluride, der US-Start am 1. November 2019, der deutsche am 12. Dezember.
+
+### Hinter den Kulissen
+
+Die Zeitverschiebung um zwei Jahrzehnte ist der entscheidende Eingriff. Sie verlegt den Roman in die Ära des Film noir und macht aus einem Kriminalfall eine Geschichte über Stadtplanung — darüber, wer entscheidet, welche Viertel verschwinden.
+
+Die Erkrankung der Hauptfigur ist dabei keine Beigabe. Lionel fällt auf, wo ein Detektiv unauffällig sein müsste; zugleich vergisst er nichts.
+
+Dass Wynton Marsalis die Orchestrierung übernahm, verankert den Film zusätzlich in seiner Zeit.
+
+### Einordnung & Wirkung
+
+Bei rund 26 Millionen Dollar Herstellungskosten spielte der Film weltweit 18,47 Millionen ein.
+
+„Daily Battles" war 2020 für den Oscar nominiert, die Filmmusik für den Golden Globe; hinzu kamen eine Camerimage-Nominierung für die Kamera und mehrere Satellite Awards.
+
+Die Urteile gingen auseinander. Michael Meyns fand, Norton habe zweieinhalb Stunden Material gepresst und der Film sei als runder Film nur bedingt gelungen. Martin Schwickert bewertete ihn mit „gut" und nannte ihn einen modernen Film noir von erstaunlicher künstlerischer Kohärenz.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10047', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Film umspannt elf Jahre. Er beginnt 1420 mit der achtjährigen Jeanne in Domrémy und springt dann um ein Jahrzehnt weiter — zu der Siebzehnjährigen, die überzeugt ist, einen Auftrag zu haben.
+
+Es folgen die Begegnung mit dem Dauphin Charles, die Befreiung von Orléans, dessen Krönung, der gescheiterte Angriff auf Paris, ihre Gefangennahme und die Verbrennung am 30. Mai 1431.
+
+### Entstehungsgeschichte
+
+Regie führte Luc Besson, der das Drehbuch gemeinsam mit Andrew Birkin schrieb. Produziert wurde der Film von Patrice Ledoux und Besson.
+
+Milla Jovovich spielt Jeanne d'Arc, Dustin Hoffman eine Figur, die als ihr Gewissen auftritt und historisch nicht belegt ist, John Malkovich den Charles VII., Timothy West den Bischof Pierre Cauchon, Faye Dunaway die Jolanthe von Aragón, Tchéky Karyo den Jean de Dunois, Vincent Cassel den Gilles de Rais und Desmond Harrington den Jean d'Aulon.
+
+Die Kamera führte Thierry Arbogast, den Schnitt Sylvie Landra, die Musik stammt von Eric Serra.
+
+Der Film ist eine französische Produktion in englischer Sprache, dauert 158 Minuten und kostete rund 60 Millionen Dollar; weltweit spielte er etwa 67 Millionen ein.
+
+### Hinter den Kulissen
+
+Der Film stützt sich auf die Prozessakten, nimmt sich daneben aber Freiheiten — Jeanne hatte historisch Brüder, im Film eine Schwester.
+
+Die auffälligste Erfindung ist Dustin Hoffmans Figur. Ein Gewissen, das mit Jeanne spricht und ihre Berufung in Frage stellt, verschiebt den Stoff: Der Film entscheidet nicht, ob die Visionen echt waren, sondern lässt die Frage im Bild stehen.
+
+Der Hundertjährige Krieg und das von englischen Truppen besetzte Frankreich bilden den Rahmen. Die Massenszenen wurden dafür entsprechend aufwendig angelegt.
+
+### Einordnung & Wirkung
+
+2000 gab es zwei Césars — für die Kostüme von Catherine Leterrier und für den Ton. Hinzu kamen Prix Lumières für Film und Regie sowie eine Auszeichnung der Motion Picture Sound Editors für den Tonschnitt. Milla Jovovich war zugleich für die Goldene Himbeere nominiert.
+
+Das Lexikon des internationalen Films sprach von einem rasant geschnittenen Film in atemraubend schönen Bildern mit kraftvoller Hauptdarstellerin als moderner Identifikationsfigur. Prisma fand ihn zu lang, lobte aber Jovovichs Darstellung zwischen Wahn und Wirklichkeit.
+
+Der Historiker Gerd Krumeich nannte Bessons Arbeit einen sehr ernsthaften Versuch und die Massenszenen hervorragend gelungen, warf dem Film aber vor, zu sorglos mit den Quellen umzugehen.
+
+Das Nebeneinander von César und Himbeere-Nominierung beschreibt die Aufnahme treffend.` },
+  {
+    bereich: 'titel', schluessel: 'movie:377264', locale: 'de-de',
+    text: `### Worum es geht
+
+Lee Weathers ist Risikomanagerin. Sie wird in eine abgelegene Forschungsstation geschickt, weil es dort einen Vorfall gab.
+
+Morgan ist ein künstlich erschaffener Mensch mit synthetischer DNA — und hat eine Betreuerin angegriffen. Das Team, das Morgan hervorgebracht hat, ist emotional gebunden und will sie erhalten. Lees Auftrag ist ein anderer: einschätzen, welches Risiko hier steht.
+
+### Entstehungsgeschichte
+
+Luke Scott führte Regie; es war sein Spielfilmdebüt. Das Drehbuch schrieb Seth W. Owen — es stand 2014 auf der Black List der besten unverfilmten Ideen Hollywoods.
+
+Anya Taylor-Joy spielt Morgan, Kate Mara die Lee Weathers, Toby Jones den Dr. Simon Ziegler, Michelle Yeoh die Dr. Lui Cheng, Paul Giamatti den Dr. Alan Shapiro, Boyd Holbrook den Skip Vronsky und Rose Leslie die Dr. Amy Menser.
+
+Produziert wurde der Film von Mark Huffam, Michael Schaefer und Ridley Scott. Die Kamera führte Mark Patten, die Musik stammt von Max Richter.
+
+Gedreht wurde in Nordirland — im Cairndhu House in Larne, in Newcastle und auf Galgorm Castle — sowie in Kanada, in Coquitlam und am Mount Seymour.
+
+### Hinter den Kulissen
+
+Die Anlage ist ein Kammerspiel. Eine abgeschiedene Station, ein überschaubares Team, eine Außenstehende, die prüfen soll — der Film braucht kaum mehr als Räume und Gespräche, bis er kippt.
+
+Der Konflikt ist einer der Rollen. Die Forscher sehen in Morgan ihr Werk und beinahe ihr Kind; Lee sieht einen Posten in einer Bilanz. Beide Sichtweisen sind in sich stimmig, und keine lässt sich mit der anderen verbinden.
+
+Bei acht Millionen Dollar Budget bedeutet das: Der Film setzt auf Besetzung statt auf Ausstattung. Mit Michelle Yeoh, Paul Giamatti und Toby Jones in Nebenrollen ist das Ensemble deutlich größer besetzt, als die Produktionsgröße erwarten ließe.
+
+### Einordnung & Wirkung
+
+Bei rund acht Millionen Dollar Herstellungskosten spielte der Film weltweit 8,8 Millionen ein — er blieb damit ohne nennenswerten Ertrag.
+
+Rotten Tomatoes weist 37 Prozent Zustimmung aus. Ein Rezensent beschrieb ihn als intensiven Science-Fiction-Schocker mit energiegeladenen Actionszenen.
+
+Bemerkenswert bleibt die Ausgangslage: ein Drehbuch von der Black List, ein Regiedebüt und Ridley Scott als Produzent. Die Zutaten deuteten auf mehr hin, als am Ende ankam.
+
+Für Anya Taylor-Joy, die im selben Zeitraum als Nachwuchsdarstellerin auffiel, ist die Titelrolle ein früher Beleg ihrer Fähigkeit, mit sehr wenig Bewegung sehr viel Bedrohung zu erzeugen.` },
+  {
+    bereich: 'titel', schluessel: 'movie:524251', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein zehnjähriger Junge verschwindet. Der Fall ähnelt einer Reihe von Verbrechen, die Jahre zurückliegen — und der ermittelnde Detective nimmt die Spur auf.
+
+Zur gleichen Zeit geschehen in seinem eigenen Haus Dinge, die niemand erklären kann. Gegenstände verschwinden, Türen bewegen sich. Der Film erzählt beides parallel, und die Verbindung ist nicht die, die man zunächst annimmt.
+
+### Entstehungsgeschichte
+
+Regie führte Adam Randall, das Drehbuch schrieb Devon Graye.
+
+Helen Hunt spielt Jackie Harper, Jon Tenney ihren Mann Greg, Judah Lewis den Sohn Connor, Owen Teague den Alec Travers, Libe Barer die Mindy, Gregory Alan Williams den Spitzky und Erika Alexander die Lieutenant Moriah Davis.
+
+Produziert wurde der Film von Matt Waldeck. Die Kamera führte Philipp Blaubach, den Schnitt besorgte Jeff Castelluccio, die Musik stammt von William Arcane. Das Budget betrug fünf Millionen Dollar.
+
+Gedreht wurde im Mai 2018 in Ohio — in Chagrin Falls, Cleveland und Lakewood.
+
+Die Weltpremiere war am 13. März 2019 beim SXSW Film Festival, der Kinostart folgte am 6. Dezember 2019.
+
+### Hinter den Kulissen
+
+Der Film ist zweigeteilt gebaut. Was in der ersten Hälfte als übernatürliches Geschehen erscheint, bekommt in der zweiten eine irdische Erklärung — es gibt zwei Personen, die sich im Haus versteckt halten, ohne dass die Familie davon weiß.
+
+Damit gehört der Film zu den Arbeiten, die dieselben Ereignisse zweimal zeigen, aus verschiedener Perspektive. Wer die erste Hälfte gesehen hat, sieht in der zweiten dieselben Szenen mit anderem Wissen.
+
+Diese Konstruktion ist zugleich die Schwachstelle, die die Kritik benannte: Die Handlungsstränge sind kompliziert, und der Film verlangt Aufmerksamkeit für Details, die zunächst beiläufig wirken.
+
+Bei fünf Millionen Dollar Budget ist das eine kluge Wahl — Spannung entsteht hier aus Anordnung, nicht aus Aufwand.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 73 Prozent Zustimmung aus. Gelobt wurden die solide Besetzung und die Spannungsführung, kritisiert die komplizierten Handlungsstränge.
+
+Der Weg über SXSW und einen späten Kinostart im Dezember ist typisch für Produktionen dieser Größe: ein Festival als Bühne, dann eine begrenzte Auswertung.
+
+Helen Hunt in der Hauptrolle einer Mutter, deren Familie an ihr zerbricht, ist die Besetzungsentscheidung, an der der Film hängt — die erste Hälfte funktioniert nur, wenn die häuslichen Spannungen glaubwürdig sind.` },
+  {
+    bereich: 'titel', schluessel: 'series:71789', locale: 'de-de',
+    text: `### Worum es geht
+
+Bravo Team ist eine Eliteeinheit der US Navy SEALs. Die Serie begleitet sie bei Einsätzen rund um die Welt.
+
+Der zweite Erzählstrang liegt zu Hause. Was die Einsätze mit den Soldaten machen und was sie für deren Familien bedeuten, läuft durchgehend mit — die Serie behandelt beides als denselben Gegenstand.
+
+### Entstehungsgeschichte
+
+Erfunden wurde die Serie von Benjamin Cavell. Produziert wurde sie von CBS Studios gemeinsam mit Chulack Productions und Timberman/Beverly Productions.
+
+David Boreanaz spielt Master Chief Jason Hayes, den Anführer als Bravo 1. Max Thieriot ist in den Staffeln eins bis sechs der Special Warfare Operator Clay Spenser, Neil Brown Jr. der Chief Warrant Officer Raymond Perry, Jessica Paré die CIA-Verbindungsoffizierin Mandy Ellis, A. J. Buckley der Chief Sonny Quinn und Toni Trucks die Lieutenant Lisa Davis.
+
+Es entstanden sieben Staffeln mit insgesamt 114 Episoden. Die Erstausstrahlung lief vom 27. September 2017 bis zum 31. Oktober 2021 bei CBS; danach wechselte die Serie zu Paramount+, wo sie vom 1. November 2021 bis zum 6. Oktober 2024 lief.
+
+Als Drehort wird Belgrad genannt.
+
+### Hinter den Kulissen
+
+Der Senderwechsel mitten in der Laufzeit ist der markanteste Einschnitt. Vier Staffeln liefen im Abendprogramm eines großen Netzwerks, die restlichen bei einem Streamingdienst — mit den Freiheiten und den kleineren Zuschauerzahlen, die das mit sich bringt.
+
+Für eine Serie über Militäreinsätze bedeutet das auch andere Erzählmöglichkeiten. Was ein Netzwerk am Dienstagabend zeigen kann, ist enger begrenzt als das, was eine Plattform zulässt.
+
+Bemerkenswert ist die Beständigkeit des Ensembles. Über sieben Jahre und 114 Folgen blieb der Kern der Besetzung zusammen; Max Thieriot stieg nach der sechsten Staffel aus.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 71 Prozent auf Grundlage von 24 Rezensionen aus. Der zusammengefasste Befund zur ersten Staffel: überzeugende Figuren bei einer gewissen Vorhersehbarkeit.
+
+Dieses Urteil trifft die Anlage. Eine Einsatzserie mit wiederkehrendem Team folgt notwendig einem Muster; was sie trägt, sind die Menschen darin.
+
+Sieben Staffeln über sieben Jahre, davon drei nach dem Wechsel zu einer Plattform, sind für eine Serie dieses Formats eine lange Laufzeit — und ein Beleg dafür, dass das Publikum ihr über den Senderwechsel hinweg folgte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:734265', locale: 'de-de',
+    text: `### Worum es geht
+
+Natalie Bauer schreibt in Los Angeles eine Kolumne über ihre gescheiterten Verabredungen. Dann lernt sie über eine Dating-App Josh Lin kennen — und alles passt.
+
+Sie fliegt zu Weihnachten zu ihm nach Lake Placid im Staat New York. Dort stellt sich heraus: Die Fotos im Profil zeigen einen anderen Mann. Josh macht ihr einen Vorschlag — er verkuppelt sie mit dem Mann von den Fotos, wenn sie vor seiner Familie seine Freundin spielt.
+
+### Entstehungsgeschichte
+
+Regie führte Hernán Jiménez. Das Drehbuch schrieben Danny Mackey und Rebecca Ewing.
+
+Nina Dobrev spielt Natalie Bauer, Jimmy O. Yang den Josh Lin, Darren Barnet den Tag, Harry Shum Jr. den Bruder Owen Lin, James Saito den Vater Bob und Rebecca Staab die Mutter Barb.
+
+Produziert wurde der Film von McG und Mary Viola für Wonderland Sound and Vision. Die Kamera führte Shane Hurlbut, den Schnitt besorgte Priscilla Nedd-Friendly, die Musik stammt von Mark Orton.
+
+Gedreht wurde von Oktober bis November 2020 in Vancouver. Das Haus der Familie Lin stand in New Westminster, der Flughafen von Lake Placid wurde vom Boundary Bay Airport dargestellt.
+
+Der Film erschien am 5. November 2021 bei Netflix.
+
+### Hinter den Kulissen
+
+Die Handlung beruht auf einer Täuschung, die der Film beim Namen nennt: Josh hat Natalie mit fremden Fotos angelockt. Ungewöhnlich ist, dass die Komödie den Täuschenden nicht fallen lässt, sondern zur zweiten Hauptfigur macht.
+
+Die Abmachung, die daraus folgt, verdoppelt die Lüge. Natalie spielt vor Joshs Familie eine Rolle, damit Josh ihr den Mann verschafft, als der er sich ausgegeben hat.
+
+Dass in Vancouver gedreht wurde und ein Flughafen in British Columbia den von Lake Placid darstellt, ist für eine Produktion dieser Art gewöhnlich — der Winter im Bild musste im Herbst 2020 entstehen.
+
+### Einordnung & Wirkung
+
+Der Film stand bis zum 7. November 2021 in 87 Ländern auf Platz eins.
+
+Die Kritik war deutlich zurückhaltender: Rotten Tomatoes weist 50 Prozent bei 32 Rezensionen aus, Metacritic 42 von 100 bei acht Kritikern.
+
+Dieser Abstand zwischen Reichweite und Bewertung ist bei Weihnachtskomödien einer Plattform der Normalfall. Was gemessen wird, ist nicht dasselbe: hier Zuspruch von Fachkritik, dort Abrufe in der ersten Woche.
+
+Für Jimmy O. Yang, der lange in Nebenrollen zu sehen war, ist es eine der ersten großen Hauptrollen in einer Produktion mit dieser Reichweite.` },
+  {
+    bereich: 'titel', schluessel: 'movie:12139', locale: 'de-de',
+    text: `### Worum es geht
+
+Dennis Mitchell ist fünf Jahre alt und meint es gut. Das Ergebnis ist trotzdem regelmäßig ein Schaden.
+
+Am schwersten trifft es den Nachbarn: George Wilson. Als Dennis' Eltern verreisen müssen, übernehmen ausgerechnet die Wilsons die Aufsicht. Dann taucht ein Einbrecher in der Nachbarschaft auf, der es auf Mr. Wilsons wertvolle Münzsammlung abgesehen hat.
+
+### Entstehungsgeschichte
+
+Regie führte Nick Castle. Das Drehbuch schrieb John Hughes, der den Film gemeinsam mit Richard Vane auch produzierte.
+
+Mason Gamble spielt Dennis Mitchell, Walter Matthau den George Wilson, Joan Plowright dessen Frau Martha, Lea Thompson die Mutter Alice Mitchell, Christopher Lloyd den Schnappmesser-Sam und Natasha Lyonne die Polly.
+
+Die Kamera führte Thomas E. Ackerman, den Schnitt besorgte Alan Heim, die Musik stammt von Jerry Goldsmith.
+
+Gedreht wurde vom 3. August 1992 bis zum 12. Januar 1993, überwiegend in Illinois; die Flughafenszenen entstanden in Oklahoma City. Das Budget betrug 35 Millionen Dollar.
+
+Der Kinostart war am 25. Juni 1993 in den Vereinigten Staaten und am 8. Juli 1993 in Deutschland.
+
+### Hinter den Kulissen
+
+Die Handschrift John Hughes' ist an der Anlage ablesbar. Ein Kind, das ohne böse Absicht Chaos verursacht, und ein Erwachsener, der daran verzweifelt — das Muster hatte er zuvor schon in anderer Besetzung durchgespielt.
+
+Der Film hängt an Walter Matthau. Ein Kinderfilm, dessen wichtigste Figur ein mürrischer alter Mann ist, braucht jemanden, der das Mürrische spielbar macht, ohne unsympathisch zu werden.
+
+Die lange Drehzeit von August bis Januar erklärt sich aus der Arbeit mit einem fünfjährigen Hauptdarsteller — dafür gelten Arbeitszeitgrenzen, die den Plan bestimmen.
+
+Christopher Lloyd als Einbrecher liefert die Bedrohung, die die Handlung in Gang bringt.
+
+### Einordnung & Wirkung
+
+Bei 35 Millionen Dollar Herstellungskosten spielte der Film weltweit rund 117 Millionen ein, davon 51 Millionen in den Vereinigten Staaten — ein deutlicher Erfolg.
+
+Die Kritik war zurückhaltend. Das Lexikon des internationalen Films nannte ihn kindgerecht, aber mit wenig Anspruch, und sah in Walter Matthau den einzigen Lichtblick. TV Spielfilm lobte die Besetzung, besonders Mason Gamble, kritisierte aber die reichlich brutalen Scherze.
+
+Dieser Einwand ist der interessanteste. Slapstick für Kinder bewegt sich immer an der Grenze, an der ein Streich in eine Verletzung übergeht — und der Film geht bis dicht an sie heran.` },
 ];
