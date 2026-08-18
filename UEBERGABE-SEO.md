@@ -1,6 +1,6 @@
 # Übergabe: SEO-Texte movietaste.de
 
-Stand: 18.08.2026 · 1741 Titeltexte · SEO-Seiten freigegeben · zuletzt geladen nach Block 100
+Stand: 18.08.2026 · 1869 Titeltexte · SEO-Seiten freigegeben · Fächer-Verfahren aktiv (Abschnitt 3b)
 
 ---
 
@@ -138,6 +138,71 @@ Aktueller Schnitt: 339 Wörter.
     Erwartung: Sitemap-Zahl = Titelzahl, HTTP 200, und `index,follow` bei Seiten
     mit Text bzw. `noindex,follow` bei Seiten ohne.
 
+---
+
+## 3b. Fächer-Verfahren für den Langschwanz (ab 18.08.2026)
+
+Der Ablauf unter 3. bleibt gültig für **Spitzentitel**, bei denen sich Wikipedia-
+Recherche lohnt. Für die rund 18.000 übrigen Titel gilt ein zweites Verfahren:
+Die Texte entstehen aus den **eigenen Metadaten**, mehrere Bearbeiter arbeiten
+gleichzeitig, und die Faktenregel wird maschinell durchgesetzt statt von Hand.
+
+**Warum überhaupt:** Von den 27.019 Titeln haben nur 30–40 Prozent im
+Langschwanz einen brauchbaren Wikipedia-Artikel. Das Handverfahren ist dort
+nicht langsam, sondern nicht zu Ende führbar. Aus der Datenbank dagegen lassen
+sich 23.439 Titel belegen — Quelle ist dann der Datensatz statt eines Artikels.
+
+**Ein Durchgang:**
+
+```bash
+# 1. Pakete schneiden (auf dem Server, wegen DB-Zugriff)
+ssh root@movietaste.de "docker exec movietaste-backend-1 sh -c \
+  'cd /app/backend && node scripts/seo-pakete.mjs --pakete 10 --je 15 --ziel /tmp/pakete'"
+
+# 2. Pakete herunterladen, je Paket einen Bearbeiter starten
+#    (Auftragsbeschreibung: scratchpad/auftrag.md — steht EINMAL dort,
+#     nicht in jedem Prompt, damit Regeländerungen an einer Stelle passieren)
+
+# 3. Fertige Texte hochladen und prüfen lassen
+ssh root@movietaste.de "docker exec movietaste-backend-1 sh -c \
+  'cd /app/backend && node scripts/seo-einspielen.mjs --verzeichnis /tmp/texte --dry-run'"
+
+# 4. Wenn sauber: ohne --dry-run wiederholen. Schreibt direkt nach seo_content,
+#    kein Umweg über seo-content-daten.mjs und keinen Ladelauf.
+```
+
+**Gemessen am 18.08.2026:** 4 Bearbeiter × 12 Titel = 48 Texte in ~4,5 Minuten,
+~6.200 Token je Text, 48 von 48 durch die Prüfung. Bindende Grenze ist das
+Nutzungsfenster, nicht das Verfahren.
+
+**Die Prüfung ist die halbe Miete.** `seo-einspielen.mjs` verwirft jeden Text,
+der durchfällt, und schreibt ihn nicht. Geprüft wird auf Format, auf Zahlen ohne
+Beleg, auf Beteiligte, die im Datensatz nicht vorkommen, und auf Wendungen, die
+typischerweise eine unbelegte Behauptung einleiten (Auszeichnungen, Einspiel-
+ergebnisse, Drehorte, Rezeption, Werkbezüge).
+
+**Warnung aus Erfahrung:** Der erste Entwurf dieser Prüfung meldete 36 von 36
+Texten als verdächtig — ausnahmslos falsch, weil er im Deutschen nach zwei
+großgeschriebenen Wörtern hintereinander suchte („Die Altersfreigabe"). Eine
+Prüfung, die immer anschlägt, ist schlechter als keine: Sie erzieht dazu, sie zu
+ignorieren. Wer sie ändert, misst sie an echten Texten nach und lässt
+`backend/test/seoFaktenpruefung.test.js` laufen — die Tests halten **beide**
+Richtungen fest, auch die Fehlalarme.
+
+**Indexierung:** Titelseiten tragen `index` erst ab 250 Wörtern Fließtext
+(`MINDESTWOERTER_INDEX` in `seoData.js`). Damit können Texte gefahrlos
+geschrieben werden, ohne dass dünne Seiten in den Index laufen und dort
+abgewertet werden. Die Schwelle gilt **nur** für Titelseiten — Genre-, Hub- und
+Anbieterseiten haben bewusst kurze Einleitungen, ihr Inhalt sind die Listen.
+
+**Falls doch über die API:** `seo-batch.mjs` macht dasselbe unbeaufsichtigt,
+inklusive Prompt-Caching und Verbrauchszählung. Kosten mit Sonnet 5 über die
+Batch-API rund 66 € für Deutsch, 463 € für sieben Sprachen. Braucht
+`ANTHROPIC_API_KEY` in `/opt/movietaste/backend/.env` — getrennte Abrechnung,
+nicht vom Abo gedeckt.
+
+---
+
 ## 4. Kandidatenliste nachladen
 
 Wenn die vorbereitete Liste zur Neige geht — Schwellwert aus der bestehenden Liste ablesen
@@ -196,6 +261,11 @@ Danach in `neue-liste.json` mergen, Feldnamen: `k` (Schlüssel), `t` (Titel), `y
 | `backend/lib/seoData.js` | Datenbeschaffung für die Seiten. |
 | `backend/routes/seo.js` | Routen. `/:locale` muss zuletzt registriert bleiben. |
 | `backend/scripts/seo-texte-anhaengen.mjs` | Einspielskript mit Validierung. |
-| `backend/scripts/seo-kandidaten.json` | Kandidatenliste, 828 Einträge, 140 davon offen. |
+| `backend/scripts/seo-kandidaten.json` | Kandidatenliste für das Handverfahren, 828 Einträge. |
+| `backend/scripts/seo-pakete.mjs` | Schneidet offene Titel in Arbeitspakete (Fächer-Verfahren). |
+| `backend/scripts/seo-einspielen.mjs` | Sammelt die Texte ein, prüft sie, schreibt nach `seo_content`. |
+| `backend/scripts/seo-batch.mjs` | Dasselbe über die API. Enthält die Prüffunktionen, die beide Wege nutzen. |
+| `backend/test/seoFaktenpruefung.test.js` | Sichert die Faktenprüfung ab, in beide Richtungen. |
+| `backend/test/seoIndexierung.test.js` | Sichert die Indexierungsregel und die 250-Wörter-Schwelle ab. |
 
 Container: `movietaste-backend-1`, `movietaste-caddy-1`, `movietaste-postgres-1`.
