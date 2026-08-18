@@ -47847,4 +47847,303 @@ Die Premiere war das meistgesehene Programm Kolumbiens und erreichte 15,4 Punkte
 237 Folgen über acht Jahre hinweg, von 2018 bis 2026, sind selbst für eine Telenovela eine erhebliche Strecke — mit einer dreijährigen Pause zwischen erster und zweiter Staffel.
 
 Ein International Emmy für eine kolumbianische Produktion ist der Beleg dafür, dass der Stoff über den heimischen Markt hinaus wahrgenommen wurde.` },
+  // ---- Block 111 ----
+  {
+    bereich: 'titel', schluessel: 'movie:5551', locale: 'de-de',
+    text: `### Worum es geht
+
+1958 waren vier Piloten der Air Force für einen Raumflug ausgewählt — Corvin, Hawk, Sullivan und O'Neill. Dann entschied die NASA anders und schickte einen Schimpansen.
+
+Vierzig Jahre später droht ein russischer Satellit in die Erdatmosphäre einzutreten. Gebaut wurde er nach gestohlenen Skylab-Plänen — und die vier bekommen die Gelegenheit, ihn zu reparieren. Vorher müssen sie die Fitnesstests der NASA bestehen.
+
+### Entstehungsgeschichte
+
+Regie führte Clint Eastwood, der den Film gemeinsam mit Andrew Lazar produzierte. Das Drehbuch schrieben Ken Kaufman und Howard Klausner.
+
+Eastwood spielt Colonel Frank Corvin, Tommy Lee Jones den Colonel Hawk Hawkins, Donald Sutherland den Captain Jerry O'Neill, James Garner den Tank Sullivan, James Cromwell den Bob Gerson, Marcia Gay Harden die Sara Holland, William Devane den Gene Davis und Rade Šerbedžija den General Vostov.
+
+Die Kamera führte Jack N. Green, den Schnitt Joel Cox, die Musik stammt von Lennie Niehaus.
+
+Der Film erschien 2000, dauert 126 Minuten und ist ab 12 Jahren freigegeben. Der deutsche Kinostart war am 10. Mai 2001.
+
+### Hinter den Kulissen
+
+Der Film verweist auf einen realen Vorgang: John Glenns Raumflug im Jahr 1998.
+
+Damit hat die Prämisse eine Grundlage, und der Film nutzt sie für das, was er eigentlich erzählen will — nicht von Raumfahrt, sondern von vier Männern, denen man vor vierzig Jahren etwas weggenommen hat.
+
+Das Lexikon des internationalen Films nannte ihn folgerichtig eine sehnsüchtig-sentimentale Charakterstudie.
+
+Die Achterbahn, in der die Männer ihre Tauglichkeit beweisen sollen, ist die Viper im Six Flags Magic Mountain in Kalifornien.
+
+### Einordnung & Wirkung
+
+2001 war der Film für den Oscar für den besten Tonschnitt nominiert; hinzu kamen drei Nominierungen für den Saturn Award — für Eastwood als Darsteller und als Regisseur sowie als bester Science-Fiction-Film. Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
+
+Die Kritik war geteilt. Gelobt wurde die Situationskomik des Grundeinfalls, bemängelt fehlende Straffheit, dramaturgische Spitzen und vor allem Spannung. TV Spielfilm bescheinigte dem Film coolen Humor, fand aber, die Weltraumszenen verlören etwas an Bodenhaftung.
+
+Der Einwand trifft eine bewusste Entscheidung. Ein Film mit vier Hauptdarstellern jenseits der sechzig, der sich für deren Verhältnis zueinander mehr interessiert als für den Satelliten, wird zwangsläufig langsamer sein als sein Genre erlaubt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:2001', locale: 'de-de',
+    text: `### Worum es geht
+
+Bobby Green führt einen Nachtclub in New York, und das Geschäft läuft. Was kaum jemand weiß: Er heißt eigentlich Robert Grusinsky, und sein Bruder Joseph ist Polizist.
+
+Bobby hält beide Welten getrennt. Dann führt die Polizei eine Razzia in seinem Club durch — und kurz darauf wird Joseph niedergeschossen. Von diesem Moment an lässt sich nichts mehr trennen.
+
+### Entstehungsgeschichte
+
+James Gray führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Marc Butan, Joaquin Phoenix, Mark Wahlberg und Nick Wechsler.
+
+Joaquin Phoenix spielt Bobby Green, Mark Wahlberg den Bruder Joseph Grusinsky, Robert Duvall den Vater Albert Grusinsky, Eva Mendes die Amada Juarez, Danny Hoch den Jumbo Falsetti, Tony Musante den Jack Shapiro und Alex Veadov den Drogenhändler Vadim Nezhinski.
+
+Die Kamera führte Joaquín Baca-Asay, den Schnitt John Axelrad, die Musik stammt von Wojciech Kilar.
+
+Gedreht wurde in New York, unter anderem im Paradise Movie Theatre in der Bronx. Das Budget betrug rund 21 Millionen Dollar; in den Vereinigten Staaten spielte der Film etwa 27,6 Millionen ein.
+
+Der US-Start war am 12. Oktober 2007, der deutsche am 21. Februar 2008.
+
+### Hinter den Kulissen
+
+Der Kern ist eine Familie, die sich an einer Berufswahl entzweit hat. Vater und ein Sohn bei der Polizei, der andere Sohn im Nachtleben — und die Frage, welche Loyalität am Ende schwerer wiegt.
+
+Dass Joaquin Phoenix und Mark Wahlberg den Film mitproduzierten, erklärt die Anlage: Es ist ein Schauspielerfilm, in dem die Handlung dem Verhältnis der Figuren dient und nicht umgekehrt.
+
+Die Musik stammt von Wojciech Kilar — ein Name, den man bei einem New Yorker Polizeifilm nicht erwartet.
+
+James Berardinelli benannte die Schwachstelle: Zu viele Zufälle belasteten die Handlung, und die letzten zwanzig Minuten seien vorhersehbar. Zugleich bescheinigte er dem Film, ein wirkungsvolles Drama zu bieten.
+
+### Einordnung & Wirkung
+
+Bei rund 21 Millionen Dollar Herstellungskosten spielte der Film in den Vereinigten Staaten 27,6 Millionen ein.
+
+James Gray war 2007 für die Goldene Palme nominiert und 2008 für den César; hinzu kam eine Nominierung für den Visual Effects Society Award.
+
+Rotten Tomatoes fasste zusammen, blasse Figuren, klischeehafte Dialoge und eine wacklige Handlung hätten den Film daran gehindert, sein Potenzial auszuschöpfen. Bei Metacritic standen 19 positiven Bewertungen 14 gemischte gegenüber.
+
+Zwischen einer Nominierung für die Goldene Palme und diesem Befund liegt die Spannweite. In Cannes wurde ein Autorenfilm gesehen, in den Vereinigten Staaten ein Polizeifilm, der die Erwartungen des Genres nicht erfüllte.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10135', locale: 'de-de',
+    text: `### Worum es geht
+
+James Dalton ist Türsteher — der beste seines Fachs, mit einem Hochschulabschluss in Philosophie und dem Ruf, jeden Laden wieder in Ordnung zu bringen.
+
+Er wird nach Missouri geholt, in einen heruntergekommenen Nachtclub. Dass die eigentliche Schwierigkeit nicht drinnen liegt, merkt er schnell: Die Stadt wird von einem Gangster namens Brad Wesley kontrolliert, der Schutzgeld eintreibt und keinen Widerspruch duldet.
+
+### Entstehungsgeschichte
+
+Regie führte Rowdy Herrington. Das Drehbuch schrieben David Lee Henry und Hilary Henkin, produziert wurde der Film von Joel Silver.
+
+Patrick Swayze spielt James Dalton, Kelly Lynch die Ärztin Elizabeth Clay, Sam Elliott den Wade Garrett und Ben Gazzara den Brad Wesley.
+
+Die Kamera führte Dean Cundey, die Musik stammt von Michael Kamen; den Schnitt besorgten John F. Link und Frank J. Urioste.
+
+Der Film erschien 1989, dauert 114 Minuten und ist ab 16 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Figur ist der eigentliche Einfall. Ein Türsteher mit Philosophiestudium, der Gewalt als letztes Mittel begreift und trotzdem ständig anwendet — der Widerspruch ist eingebaut und wird nicht aufgelöst.
+
+Sam Elliott als älterer Kollege und Lehrer gibt dem eine zweite Ebene: Dalton hat selbst einmal jemanden gehabt, von dem er lernte.
+
+Mit Dean Cundey an der Kamera und Michael Kamen an der Musik ist der Film handwerklich besser ausgestattet, als seine Zutaten vermuten lassen.
+
+Roger Ebert brachte die Wirkung auf eine Formel: kein guter Film, aber auch kein langweiliger. Das Lexikon des internationalen Films urteilte härter und nannte ihn einen primitiven Actionfilm voller selbstzweckhafter Brutalitäten.
+
+### Einordnung & Wirkung
+
+Der Film erhielt fünf Nominierungen für die Goldene Himbeere, gewann aber keine.
+
+Fünf Nominierungen und kein einziger Preis ist eine eigene Art von Ergebnis — schlecht genug für die Nominierung, nicht schlecht genug für die Auszeichnung.
+
+Eberts Formel trifft den Punkt. Der Film verspricht nichts, was er nicht hält, und weiß in jeder Minute, was er ist.
+
+Patrick Swayze in einer Rolle, die Prügelei und Philosophie zusammenbringt, spielt dabei beides ernst gemeint — darauf steht der ganze Film.` },
+  {
+    bereich: 'titel', schluessel: 'movie:8066', locale: 'de-de',
+    text: `### Worum es geht
+
+Der Psychiater Sam Foster übernimmt einen neuen Patienten: Henry Letham, College-Student, nach einem Autounfall auf der Brooklyn Bridge.
+
+Henry ist depressiv, paranoid und suizidal — und er behauptet, künftige Ereignisse vorhersagen zu können. Sam versucht, ihn davon abzubringen, was Henry vorhat. Während er das tut, beginnt die Wirklichkeit um ihn herum, brüchig zu werden.
+
+### Entstehungsgeschichte
+
+Regie führte Marc Forster, das Drehbuch schrieb David Benioff.
+
+Ewan McGregor spielt Dr. Sam Foster, Ryan Gosling den Henry Letham, Naomi Watts die Lila Culpepper, Bob Hoskins den Dr. Leon Patterson, Janeane Garofalo die Dr. Beth Levy und Elizabeth Reaser die Athena.
+
+Die Kamera führte Roberto Schaefer, den Schnitt Matt Chessé, die Musik stammt von Asche & Spencer.
+
+Gedreht wurde im Herbst 2003 in New York, unter anderem auf der Brooklyn Bridge. Das Budget betrug 50 Millionen Dollar; die Veröffentlichung war am 21. Oktober 2005.
+
+### Hinter den Kulissen
+
+Forster legte den Film als visuell komplexe Arbeit an, mit Anspielungen auf Klassiker wie „Vertigo".
+
+Das ist die entscheidende Entscheidung — und zugleich die Zumutung. Je weiter der Film fortschreitet, desto brüchiger wird die Wirklichkeit, die er zeigt.
+
+Wer darauf einsteigt, bekommt einen Film über Wahrnehmung. Wer nicht, bekommt einen Film, der sich nicht entscheiden mag.
+
+Bei 50 Millionen Dollar Budget ist das ein bemerkenswertes Wagnis. Es ist die Summe eines Studiofilms, eingesetzt für eine Erzählform, die dem Publikum einiges abverlangt.
+
+### Einordnung & Wirkung
+
+Weltweit spielte der Film 8,4 Millionen Dollar ein — ein massiver Misserfolg an der Kinokasse bei 50 Millionen Herstellungskosten.
+
+Die Kritik war gespalten, und zwar deutlich. Roger Ebert vergab dreieinhalb von vier Sternen. Rex Reed schrieb dagegen, das sei die Sorte Reinfall, bei der sogar das Popcorn schal schmecke.
+
+Zwischen diesen beiden Urteilen liegt kein Missverständnis, sondern eine echte Entscheidung darüber, was ein Film leisten soll.
+
+Bemerkenswert ist die Besetzung im Rückblick: Ewan McGregor, Naomi Watts und Ryan Gosling in einem Film, der praktisch niemand gesehen hat.` },
+  {
+    bereich: 'titel', schluessel: 'movie:228194', locale: 'de-de',
+    text: `### Worum es geht
+
+Eine indische Familie verliert bei Unruhen in Mumbai ihr Restaurant. Der Vater beschließt, mit seinen fünf Kindern nach Europa zu gehen.
+
+Nach einer Autopanne bleiben sie in Saint-Antonin in Südfrankreich hängen und eröffnen dort das „Maison Mumbai" — genau gegenüber vom „Le Saule Pleureur", einem Restaurant mit Michelin-Stern. Dessen Inhaberin Madame Mallory begreift das als Kriegserklärung.
+
+### Entstehungsgeschichte
+
+Vorlage ist Richard C. Morais' Roman „The Hundred-Foot Journey".
+
+Regie führte Lasse Hallström, das Drehbuch schrieb Steven Knight. Produziert wurde der Film von Juliet Blake, Steven Spielberg und Oprah Winfrey.
+
+Helen Mirren spielt Madame Mallory, Om Puri den Vater, Manish Dayal den Sohn und Koch Hassan, Charlotte Le Bon die Sous-Chefin Marguerite, Amit Shah den Mansur, Michel Blanc den Bürgermeister, Juhi Chawla die Mutter und Vincent Elbaz den Geschäftsführer Paul.
+
+Die Kamera führte Linus Sandgren, den Schnitt Andrew Mondshein, die Musik stammt von A. R. Rahman.
+
+### Hinter den Kulissen
+
+Der Titel der Vorlage benennt die Entfernung, um die es geht: hundert Fuß zwischen zwei Restaurants. Der ganze Film spielt sich in diesem Abstand ab.
+
+Das ist die kluge Verkleinerung. Was hier verhandelt wird — Herkunft, Zugehörigkeit, wer wo kochen darf —, wird nicht als Debatte geführt, sondern als Streit zwischen zwei Küchen auf gegenüberliegenden Straßenseiten.
+
+Die Deutsche Film- und Medienbewertung nannte den Film folgerichtig ein Integrationsstück mit kulinarischen Kochwettkämpfen.
+
+Dass Steven Spielberg und Oprah Winfrey als Produzenten auftreten, ist ungewöhnlich — beide zusammen bei einem Film dieser Größe.
+
+### Einordnung & Wirkung
+
+Ausgezeichnet wurde der Film 2014 mit dem Publikumspreis der Norwegischen Filmfestspiele und dem Truly Moving Picture Award des Heartland Film Festival; 2015 war Helen Mirren für den Golden Globe nominiert.
+
+Die Urteile drehten sich fast alle um sie. Susan Vahabzadeh befand, der Film sei ohne Helen Mirren nur die Hälfte wert. Bill Zwecker lobte den verbalen Schlagabtausch zwischen Mirren und Om Puri.
+
+Tom Shone vergab im Guardian dagegen nur zwei von fünf Sternen und kritisierte die Vorhersehbarkeit.
+
+Beide Seiten beschreiben denselben Film. Er hält keine Überraschung bereit — und lebt vollständig davon, wie zwei Darsteller sich aneinander abarbeiten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:1642', locale: 'de-de',
+    text: `### Worum es geht
+
+Angela Bennett arbeitet als Softwareentwicklerin und lebt praktisch allein. Ihre Kontakte laufen über den Bildschirm, ihre Aufträge kommen per Datenleitung.
+
+Ein Kollege schickt ihr eine Diskette mit einem Programm namens „Mozarts Geist". Kurz darauf stirbt er bei einem Flugzeugabsturz. Und dann beginnt jemand, Angelas Identität zu verändern: Was in den Datenbanken über sie steht, ist plötzlich nicht mehr ihr Leben.
+
+### Entstehungsgeschichte
+
+Regie führte Irwin Winkler, der den Film gemeinsam mit Rob Cowan produzierte. Das Drehbuch schrieben John D. Brancato und Michael Ferris.
+
+Sandra Bullock spielt Angela Bennett, Jeremy Northam den Jack Devlin, Dennis Miller den Dr. Alan Champion, Diane Baker die Mutter, Wendy Gazelle die Ruth Marx, Ken Howard den Michael Bergstrom und Ray McKinnon den Dale Hessman.
+
+Die Kamera führte Jack N. Green, die Musik stammt von Mark Isham; den Schnitt besorgten Jimmy Giritlian und Richard Halsey.
+
+Der Film erschien 1995, dauert 114 Minuten und ist ab 12 Jahren freigegeben.
+
+### Hinter den Kulissen
+
+Die Grundangst des Films ist heute schwerer zu erschrecken als 1995 — und genau deshalb interessanter. Was damals als Schreckensvision galt, ist inzwischen Alltag: Ein Leben, das in Datenbanken geführt wird, und eine Person, die nur so viel wert ist, wie über sie gespeichert steht.
+
+Dass die Hauptfigur isoliert lebt, ist dabei kein Zufall, sondern Voraussetzung. Wer niemanden hat, der ihn persönlich kennt, ist auf die Bestätigung durch Papiere angewiesen — und die lassen sich ändern.
+
+Das Trojanische Pferd im Programm und die Hackergruppe, die es einsetzt, sind die Erklärung; die eigentliche Wirkung liegt davor.
+
+Der Filmdienst nannte die Handlung thematisch reizvoll, Prisma dagegen sprach von einer oberflächlichen Produktion.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 43 Prozent aus, Metacritic 51 von 100.
+
+Bemerkenswert ist ein Urteil aus großem Abstand. Die taz schrieb 2021 im Rückblick, es sei selten, dass ein Thriller so hervorragend altere wie dieser.
+
+Damit hat der Film eine Laufbahn genommen, die man ihm 1995 nicht zugetraut hätte: von der mittelmäßig aufgenommenen Unterhaltung zum Zeitdokument.
+
+Was ihn trägt, ist Sandra Bullock in einer Rolle, die fast durchgehend allein bestehen muss — ohne Partner, ohne Behörde, die ihr glaubt.` },
+  {
+    bereich: 'titel', schluessel: 'movie:10676', locale: 'de-de',
+    text: `### Worum es geht
+
+Ein Spielzeughändler flieht vor Männern, die ihn verfolgen, und hat eine Halloweenmaske dabei. Er stirbt — und Dr. Dan Challis, der Arzt in der Notaufnahme, will wissen, warum.
+
+Gemeinsam mit der Tochter des Toten kommt er in eine Kleinstadt, die von einer einzigen Firma beherrscht wird: Silver Shamrock, Hersteller genau dieser Masken. Was darin steckt, hat mit Steinen von Stonehenge zu tun — und mit einem Termin am Abend des 31. Oktober.
+
+### Entstehungsgeschichte
+
+Tommy Lee Wallace führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Debra Hill und John Carpenter; die Musik stammt von Carpenter gemeinsam mit Alan Howarth.
+
+Tom Atkins spielt Dr. Daniel Challis, Stacey Nelkin die Ellie Grimbridge, Dan O'Herlihy den Firmenchef Conal Cochran, Ralph Strait den Buddy Kupfer und Garn Stephens die Marge Guttman.
+
+Die Kamera führte Dean Cundey, den Schnitt Millie Moore.
+
+Der Film erschien 1982, dauert 98 Minuten und ist ab 16 Jahren freigegeben. Er spielte 14,4 Millionen Dollar ein und galt als Misserfolg.
+
+### Hinter den Kulissen
+
+Die Besonderheit des Films ist zugleich der Grund seines Scheiterns. John Carpenter wollte aus „Halloween" eine Reihe machen, die jedes Jahr eine neue, eigenständige Geschichte erzählt — nicht die Fortsetzung derselben.
+
+Michael Myers taucht deshalb nur kurz auf, in einem Fernsehausschnitt.
+
+Das Publikum von 1982 kam für etwas anderes, und der Film enttäuschte diese Erwartung vollständig — 14,4 Millionen Dollar Einspielergebnis waren die Antwort darauf.
+
+Was er stattdessen erzählt, ist ungewöhnlich: keltisches Blutopfer, industriell hergestellt, ausgeliefert über eine Fernsehwerbung.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 48 Prozent aus, Metacritic 50 von 100. Das Lexikon des internationalen Films nannte ihn einen spannungslosen Aufguss mit außergewöhnlich lächerlicher Geschichte.
+
+Inzwischen gilt der Film als Kultfilm mit wachsender Anhängerschaft.
+
+Diese Umwertung ist der interessanteste Teil seiner Geschichte. Was ihn 1982 scheitern ließ — dass er nicht war, was der Titel versprach —, ist der Grund, warum er heute geschätzt wird.
+
+Dass Debra Hill und John Carpenter ihn produzierten und Carpenter zudem die Musik schrieb, macht ihn zum Sonderfall: ein bewusster Ausreißer, hergestellt von denen, die die Reihe begründet hatten.` },
+  {
+    bereich: 'titel', schluessel: 'movie:820609', locale: 'de-de',
+    text: `### Worum es geht
+
+Brynn ist Schneiderin und lebt zurückgezogen im Haus ihrer Eltern am Waldrand.
+
+Dann steht nachts etwas in ihrem Haus, das nicht von hier ist. Was danach beginnt, muss sie allein durchstehen — es gibt niemanden, den sie rufen könnte, und der Titel des Films sagt genau das.
+
+### Entstehungsgeschichte
+
+Brian Duffield schrieb das Drehbuch bereits 2019 auf eigenes Risiko und führte auch Regie. 20th Century Studios erwarb das Skript 2021.
+
+Kaitlyn Dever spielt Brynn.
+
+Die Kamera führte Aaron Morton, den Schnitt Gabriel Fleming, die Musik stammt von Joseph Trapanese; die visuellen Effekte kamen von DNEG.
+
+Gedreht wurde von April bis Juni 2022 in New Orleans. Das Budget betrug 22,8 Millionen Dollar.
+
+Der Kinostart war am 19. September 2023, der Start bei Hulu drei Tage später am 22. September.
+
+### Hinter den Kulissen
+
+Der Film kommt mit fünf gesprochenen Wörtern aus. Über die gesamte Laufzeit.
+
+Das ist keine Spielerei, sondern folgt aus der Anlage: Brynn ist allein, und wer allein ist, spricht nicht. Alles, was das Publikum über sie erfährt, muss über Handlung und Bild transportiert werden.
+
+Damit steht die Arbeit vollständig auf Kaitlyn Dever. Sie trägt einen abendfüllenden Film ohne Dialog, ohne Gegenüber und ohne Erzählerstimme.
+
+Dass das Drehbuch 2019 ohne Auftrag entstand und erst zwei Jahre später verkauft wurde, passt dazu — ein Film, den so kaum jemand bestellt hätte.
+
+### Einordnung & Wirkung
+
+Rotten Tomatoes weist 81 Prozent aus, Metacritic 60 von 100.
+
+Der Weg der Auswertung ist bemerkenswert: Kinostart am 19. September 2023, Streaming bei Hulu bereits am 22. — drei Tage dazwischen.
+
+Für einen Film ohne Dialog ist die Aufnahme bemerkenswert gut — und sie beruht fast ausschließlich auf der Hauptdarstellerin und der Machart.
+
+22,8 Millionen Dollar für ein Werk mit einer Darstellerin, einem Haus und fünf Wörtern zeigen zugleich, wo das Geld hingeht: in die Effekte von DNEG.` },
 ];
