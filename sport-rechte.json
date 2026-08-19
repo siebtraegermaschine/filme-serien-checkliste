@@ -26,13 +26,17 @@
         29,
         30
       ],
-      "link": "https://www.wowtv.de/live-sport"
+      "link": "https://www.wowtv.de/live-sport",
+      "kanal": "Sky Sport / WOW-App",
+      "info": "Ein Anbieter, zwei Wege: das klassische Sky-Abo (Receiver) oder WOW, Skys eigenes Streaming ohne Receiver — gleicher Inhalt."
     },
     "dazn": {
       "name": "DAZN",
       "frei": false,
       "tmdb": [],
-      "link": "https://www.dazn.com/de-DE"
+      "link": "https://www.dazn.com/de-DE",
+      "kanal": "DAZN-App",
+      "info": "Läuft in der DAZN-App; die linearen Kanäle DAZN 1/2 sind zusätzlich über Sky und Vodafone empfangbar."
     },
     "amazon": {
       "name": "Amazon Prime",
@@ -41,7 +45,9 @@
         9,
         119
       ],
-      "link": "https://www.amazon.de/gp/video/storefront"
+      "link": "https://www.amazon.de/gp/video/storefront",
+      "kanal": "Prime Video",
+      "info": "Läuft in der Prime-Video-App, im Prime-Abo enthalten."
     },
     "rtlplus": {
       "name": "RTL+",
@@ -49,32 +55,52 @@
       "tmdb": [
         298
       ],
-      "link": "https://plus.rtl.de/"
+      "link": "https://plus.rtl.de/",
+      "kanal": "RTL+ (Stream)",
+      "info": "Läuft im RTL+-Stream (Premium-Abo)."
     },
     "sat1": {
       "name": "Sat.1",
       "frei": true,
-      "link": "https://www.joyn.de/live-tv/sat1"
+      "link": "https://www.joyn.de/live-tv/sat1",
+      "kanal": "Sat.1",
+      "info": "Frei empfangbar; Stream über Joyn."
     },
     "ard": {
       "name": "ARD",
       "frei": true,
-      "link": "https://www.ardmediathek.de/live"
+      "link": "https://www.ardmediathek.de/live",
+      "kanal": "Das Erste",
+      "info": "Frei empfangbar; Stream in der ARD-Mediathek."
     },
     "zdf": {
       "name": "ZDF",
       "frei": true,
-      "link": "https://www.zdf.de/live-tv"
+      "link": "https://www.zdf.de/live-tv",
+      "kanal": "ZDF",
+      "info": "Frei empfangbar; Stream in der ZDF-Mediathek."
     },
     "rtl": {
       "name": "RTL",
       "frei": true,
-      "link": "https://plus.rtl.de/"
+      "link": "https://plus.rtl.de/",
+      "kanal": "RTL",
+      "info": "Frei empfangbar; Stream über RTL+."
     },
     "nitro": {
       "name": "RTL Nitro",
       "frei": true,
-      "link": "https://plus.rtl.de/"
+      "link": "https://plus.rtl.de/",
+      "kanal": "RTL Nitro",
+      "info": "Frei empfangbar; Stream über RTL+."
+    },
+    "magenta": {
+      "name": "MagentaSport",
+      "frei": false,
+      "tmdb": [],
+      "link": "https://www.magentasport.de/",
+      "kanal": "MagentaSport-App",
+      "info": "Läuft bei MagentaSport (Telekom-Abo, für Telekom-Kunden günstiger). Ausgewählte Spiele zeigen die ARD-Dritten zusätzlich frei."
     }
   },
   "wettbewerbe": {
@@ -83,6 +109,9 @@
     },
     "bl2": {
       "name": "2. Bundesliga"
+    },
+    "bl3": {
+      "name": "3. Liga"
     },
     "dfb": {
       "name": "DFB-Pokal"
@@ -116,11 +145,25 @@
             "zeit": "15:30",
             "tv": [
               {
-                "s": "sky"
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 2–10 (Einzelspiel)"
               },
               {
                 "s": "dazn",
-                "typ": "konferenz"
+                "typ": "konferenz",
+                "kanal": "DAZN 1 / DAZN-App"
+              }
+            ]
+          },
+          {
+            "tag": [
+              "Sat"
+            ],
+            "zeit": "18:30",
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1 (Topspiel)"
               }
             ]
           },
@@ -130,14 +173,16 @@
             ],
             "tv": [
               {
-                "s": "dazn"
+                "s": "dazn",
+                "kanal": "DAZN-App / DAZN 1"
               }
             ]
           },
           {
             "tv": [
               {
-                "s": "sky"
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1"
               }
             ]
           }
@@ -149,7 +194,20 @@
           {
             "tv": [
               {
-                "s": "sky"
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "bl3": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "magenta"
               }
             ]
           }
@@ -161,7 +219,8 @@
           {
             "tv": [
               {
-                "s": "sky"
+                "s": "sky",
+                "kanal": "Sky Sport"
               }
             ]
           }
@@ -208,7 +267,8 @@
           {
             "tv": [
               {
-                "s": "sky"
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1"
               },
               {
                 "s": "sat1"
@@ -237,11 +297,25 @@
             "zeit": "15:30",
             "tv": [
               {
-                "s": "sky"
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 2–10 (Einzelspiel)"
               },
               {
                 "s": "dazn",
-                "typ": "konferenz"
+                "typ": "konferenz",
+                "kanal": "DAZN 1 / DAZN-App"
+              }
+            ]
+          },
+          {
+            "tag": [
+              "Sat"
+            ],
+            "zeit": "18:30",
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1 (Topspiel)"
               }
             ]
           },
@@ -251,14 +325,16 @@
             ],
             "tv": [
               {
-                "s": "dazn"
+                "s": "dazn",
+                "kanal": "DAZN-App / DAZN 1"
               }
             ]
           },
           {
             "tv": [
               {
-                "s": "sky"
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1"
               }
             ]
           }
@@ -279,7 +355,20 @@
           {
             "tv": [
               {
-                "s": "sky"
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "bl3": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "magenta"
               }
             ]
           }
@@ -291,7 +380,8 @@
           {
             "tv": [
               {
-                "s": "sky"
+                "s": "sky",
+                "kanal": "Sky Sport"
               }
             ]
           }
@@ -387,7 +477,8 @@
           {
             "tv": [
               {
-                "s": "sky"
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1"
               },
               {
                 "s": "sat1"
@@ -448,5 +539,5 @@
       }
     }
   },
-  "_stand": "2026-08-19 (Supercup + Laenderspiele ergaenzt; Heimspiel gegen NED am 16.11. noch offen: ARD oder ZDF)"
+  "_stand": "2026-08-19 (3. Liga ergaenzt: MagentaSport, ARD-Free-Picks via Ausnahmen; Kanal-Angaben + Sender-Infos fuers Badge-Popup)"
 }

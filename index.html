@@ -560,6 +560,9 @@
     border: 1px solid var(--border); border-radius: 8px; padding: 9px 14px;
     color: var(--text); font-size: 14px; outline: none; margin: 0 0 10px; }
   #vereinSuche:focus { border-color: var(--accent); }
+  /* Chips im "Deine Ansicht"-Fenster: gleiche Optik, aber ohne die
+     Seitenraender/Zentrierung der Seiten-Chipreihen. */
+  .ansicht-chips { margin: 0 0 12px; padding: 0; max-width: none; }
   /* Vereins-Logos als Filter-Chips in der Verfuegbarkeitsreihe. */
   .sport-chips button.verein-chip { padding: 3px 9px; }
   .verein-chip img { width: 20px; height: 20px; object-fit: contain; display: block; }
@@ -598,14 +601,17 @@
   /* Sender-Badges: Links zum Anbieter. Gruen = frei empfangbar; ✅/🔒 sagt an,
      ob das Spiel mit den eigenen Abos drin ist (nur wenn Abos konfiguriert
      sind -- vorher bleibt das Badge neutral, siehe sportBadgeHtml). */
-  a.tv-badge {
-    display:inline-flex; align-items:center; gap:5px;
+  .tv-badge {
+    display:inline-flex; align-items:center; gap:5px; background:none; cursor:pointer;
     border:1px solid var(--border); border-radius:999px; padding:3px 10px;
-    font-size:12px; color:var(--text-dim); text-decoration:none; transition: all .15s;
+    font-family:inherit; font-size:12px; color:var(--text-dim); text-decoration:none; transition: all .15s;
   }
-  @media (hover: hover) { a.tv-badge:hover { border-color: var(--accent); color: var(--accent); } }
-  a.tv-badge.tv-frei { border-color: rgba(76,195,138,.5); color: var(--done); }
-  a.tv-badge.tv-hab { border-color: rgba(76,195,138,.5); color: var(--done); }
+  @media (hover: hover) { .tv-badge:hover { border-color: var(--accent); color: var(--accent); } }
+  .tv-badge.tv-frei { border-color: rgba(76,195,138,.5); color: var(--done); }
+  .tv-badge.tv-hab { border-color: rgba(76,195,138,.5); color: var(--done); }
+  /* Sender-Popup: Zeilen wie .prov-intro, der Anbieter-Link als Knopf. */
+  #senderModalInhalt p { margin: 0 0 10px; }
+  .sender-cta { display:inline-block; text-decoration:none; margin-top:6px; }
   .tv-zusatz { font-weight:400; opacity:.8; }
 
   /* Im Popup ist die Spalte fuer Titel/Aktionen schmaler als auf Discovery/
@@ -1596,7 +1602,7 @@
     <!-- Bewusst ein Textlink, kein Knopf (Christian, 19. August 2026):
          oeffnet die Vereinsauswahl (#vereinModal); die gewaehlten Vereine
          erscheinen als Logo-Chips in der Filterreihe. -->
-    <span class="sport-verein-link" id="sportVereinBtn" role="button" tabindex="0">+ Dein Verein</span>
+    <span class="sport-verein-link" id="sportVereinBtn" role="button" tabindex="0">+ Deine Ansicht</span>
   </div>
   <!-- Zwei Filterreihen (renderSportChips): oben die Wettbewerbe
        (Alle/Bundesliga/...), darunter die Verfuegbarkeit als Dreier-Auswahl
@@ -2108,15 +2114,31 @@
 <div id="vereinModal" class="modal-overlay" style="display:none">
   <div class="modal similar-modal">
     <button class="modal-x" id="vereinModalX" aria-label="Schließen">✕</button>
-    <h3 id="vereinTitel">Dein Verein</h3>
-    <p class="prov-intro" id="vereinIntro">Wähle bis zu drei Vereine. Ihre Logos erscheinen als
-      Filter über dem Spielplan.</p>
+    <h3 id="vereinTitel">Deine Ansicht</h3>
+    <p class="prov-intro" id="vereinIntro">Stell dir die Sport-Seite ein: Wettbewerbe als
+      Vorauswahl (einer, mehrere oder alle) — und bis zu drei Vereine als Logo-Filter.
+      Vereine sind nie vorausgewählt.</p>
+    <h4 class="prov-sport-titel" id="ansichtLigenTitel">Wettbewerbe</h4>
+    <div class="sport-chips ansicht-chips" id="ansichtLigen"></div>
+    <h4 class="prov-sport-titel" id="ansichtVereineTitel">Deine Vereine (bis zu 3)</h4>
     <input type="text" id="vereinSuche" placeholder="Verein suchen …" autocomplete="off">
     <div class="prov-list" id="vereinList">Lädt …</div>
     <div class="prov-foot">
       <span class="prov-hint" id="vereinHint"></span>
       <button type="button" id="vereinSaveBtn" class="auth-submit">Speichern</button>
     </div>
+  </div>
+</div>
+
+<!-- Sender-Popup (Sport): Klick auf ein Sender-Badge zeigt, WO genau das
+     Spiel laeuft (Kanal je Slot aus der Rechte-Matrix), ob es im eigenen Abo
+     ist, und erklaert den Anbieter (z.B. Sky/WOW = ein Anbieter, zwei Wege).
+     Der Link zum Anbieter sitzt jetzt hier statt direkt am Badge. -->
+<div id="senderModal" class="modal-overlay" style="display:none">
+  <div class="modal similar-modal">
+    <button class="modal-x" id="senderModalX" aria-label="Schließen">✕</button>
+    <h3 id="senderModalTitel"></h3>
+    <div id="senderModalInhalt"></div>
   </div>
 </div>
 
@@ -2355,6 +2377,13 @@ var UI_TEXTE = {
     sportAlle: 'Alle',
     sportNurFrei: 'Free-TV',
     sportDeineAnbieter: 'Deine Streaming-Anbieter',
+    sportFreiEmpfangbar: 'Frei empfangbar',
+    sportImAbo: 'In deinem Abo enthalten',
+    sportNichtImAbo: 'Nicht in deinen Abos',
+    sportAboNoetig: 'Abo nötig',
+    sportLaeuftAuf: 'Läuft auf',
+    sportZum: function(n){ return 'Zu ' + n + ' →'; },
+    sportVslLang: 'Zuordnung noch nicht bestätigt – voraussichtlich.',
     sportFrei: 'frei',
     sportKonferenz: 'Konferenz',
     sportVoraussichtlich: 'vsl.',
@@ -2687,6 +2716,13 @@ var UI_TEXTE = {
     sportAlle: 'All',
     sportNurFrei: 'Free TV',
     sportDeineAnbieter: 'Your streaming services',
+    sportFreiEmpfangbar: 'Free to watch',
+    sportImAbo: 'Included in your subscription',
+    sportNichtImAbo: 'Not in your subscriptions',
+    sportAboNoetig: 'Subscription required',
+    sportLaeuftAuf: 'Airs on',
+    sportZum: function(n){ return 'Go to ' + n + ' →'; },
+    sportVslLang: 'Assignment not yet confirmed – expected.',
     sportFrei: 'free',
     sportKonferenz: 'Conference',
     sportVoraussichtlich: 'likely',
@@ -3016,6 +3052,13 @@ var UI_TEXTE = {
     sportAlle: 'Tous',
     sportNurFrei: 'TV gratuite',
     sportDeineAnbieter: 'Tes services de streaming',
+    sportFreiEmpfangbar: 'En clair',
+    sportImAbo: 'Inclus dans ton abonnement',
+    sportNichtImAbo: 'Pas dans tes abonnements',
+    sportAboNoetig: 'Abonnement requis',
+    sportLaeuftAuf: 'Diffusé sur',
+    sportZum: function(n){ return 'Vers ' + n + ' →'; },
+    sportVslLang: 'Attribution pas encore confirmée – probable.',
     sportFrei: 'gratuit',
     sportKonferenz: 'Multiplex',
     sportVoraussichtlich: 'prob.',
@@ -3345,6 +3388,13 @@ var UI_TEXTE = {
     sportAlle: 'Todos',
     sportNurFrei: 'TV en abierto',
     sportDeineAnbieter: 'Tus servicios de streaming',
+    sportFreiEmpfangbar: 'En abierto',
+    sportImAbo: 'Incluido en tu suscripción',
+    sportNichtImAbo: 'No está en tus suscripciones',
+    sportAboNoetig: 'Requiere suscripción',
+    sportLaeuftAuf: 'Se emite en',
+    sportZum: function(n){ return 'Ir a ' + n + ' →'; },
+    sportVslLang: 'Asignación aún no confirmada – probable.',
     sportFrei: 'gratis',
     sportKonferenz: 'Multipartido',
     sportVoraussichtlich: 'prob.',
@@ -3674,6 +3724,13 @@ var UI_TEXTE = {
     sportAlle: 'Tutti',
     sportNurFrei: 'TV in chiaro',
     sportDeineAnbieter: 'I tuoi servizi di streaming',
+    sportFreiEmpfangbar: 'In chiaro',
+    sportImAbo: 'Incluso nel tuo abbonamento',
+    sportNichtImAbo: 'Non nei tuoi abbonamenti',
+    sportAboNoetig: 'Abbonamento necessario',
+    sportLaeuftAuf: 'In onda su',
+    sportZum: function(n){ return 'Vai a ' + n + ' →'; },
+    sportVslLang: 'Assegnazione non ancora confermata – probabile.',
     sportFrei: 'gratis',
     sportKonferenz: 'Diretta gol',
     sportVoraussichtlich: 'prob.',
@@ -4003,6 +4060,13 @@ var UI_TEXTE = {
     sportAlle: 'Alle',
     sportNurFrei: 'Free-tv',
     sportDeineAnbieter: 'Jouw streamingdiensten',
+    sportFreiEmpfangbar: 'Gratis te zien',
+    sportImAbo: 'Inbegrepen in je abonnement',
+    sportNichtImAbo: 'Niet in je abonnementen',
+    sportAboNoetig: 'Abonnement vereist',
+    sportLaeuftAuf: 'Te zien op',
+    sportZum: function(n){ return 'Naar ' + n + ' →'; },
+    sportVslLang: 'Toewijzing nog niet bevestigd – waarschijnlijk.',
     sportFrei: 'gratis',
     sportKonferenz: 'Conferentie',
     sportVoraussichtlich: 'wrsch.',
@@ -4332,6 +4396,13 @@ var UI_TEXTE = {
     sportAlle: 'Todos',
     sportNurFrei: 'TV aberta',
     sportDeineAnbieter: 'Seus serviços de streaming',
+    sportFreiEmpfangbar: 'Em TV aberta',
+    sportImAbo: 'Incluído na sua assinatura',
+    sportNichtImAbo: 'Não está nas suas assinaturas',
+    sportAboNoetig: 'Assinatura necessária',
+    sportLaeuftAuf: 'Passa em',
+    sportZum: function(n){ return 'Ir para ' + n + ' →'; },
+    sportVslLang: 'Atribuição ainda não confirmada – provável.',
     sportFrei: 'grátis',
     sportKonferenz: 'Conferência',
     sportVoraussichtlich: 'prov.',
@@ -4955,11 +5026,13 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Save' },
     '#sportPageTitle': { t: 'Football live on TV' },
     '#providersSportTitel': { t: 'Sports subscriptions' },
-    '#sportVereinBtn': { t: '+ Your club' },
+    '#sportVereinBtn': { t: '+ Your view' },
     '#sportHeaderBtn': { a: 'Sports' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'The schedules in the Sports section come from <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, a free community project. Broadcaster information is derived rule-based from the German TV rights split – without guarantee.' },
-    '#vereinTitel': { t: 'Your club' },
-    '#vereinIntro': { t: 'Pick up to three clubs. Their logos appear as filters above the schedule.' },
+    '#vereinTitel': { t: 'Your view' },
+    '#vereinIntro': { t: 'Set up the Sports page: pre-select competitions (one, several or all) — and up to three clubs as logo filters. Clubs are never pre-selected.' },
+    '#ansichtLigenTitel': { t: 'Competitions' },
+    '#ansichtVereineTitel': { t: 'Your clubs (up to 3)' },
     '#vereinSuche': { p: 'Search club …' },
     '#vereinSaveBtn': { t: 'Save' },
     '#providersSportIntro': { t: 'For the Sports section: matches you can watch with these get a ✅.' },
@@ -5083,11 +5156,13 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Enregistrer' },
     '#sportPageTitle': { t: 'Foot en direct à la télé' },
     '#providersSportTitel': { t: 'Abonnements sport' },
-    '#sportVereinBtn': { t: '+ Ton club' },
+    '#sportVereinBtn': { t: '+ Ta vue' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Les calendriers de la section Sport proviennent d’<a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un projet communautaire libre. Les diffuseurs sont déduits des droits TV allemands – sans garantie.' },
-    '#vereinTitel': { t: 'Ton club' },
-    '#vereinIntro': { t: 'Choisis jusqu’à trois clubs. Leurs logos apparaissent comme filtres au-dessus du calendrier.' },
+    '#vereinTitel': { t: 'Ta vue' },
+    '#vereinIntro': { t: 'Configure la page Sport : compétitions présélectionnées (une, plusieurs ou toutes) — et jusqu’à trois clubs comme filtres. Les clubs ne sont jamais présélectionnés.' },
+    '#ansichtLigenTitel': { t: 'Compétitions' },
+    '#ansichtVereineTitel': { t: 'Tes clubs (max. 3)' },
     '#vereinSuche': { p: 'Chercher un club …' },
     '#vereinSaveBtn': { t: 'Enregistrer' },
     '#providersSportIntro': { t: 'Pour la section Sport : les matchs que tu peux voir sont marqués ✅.' },
@@ -5211,11 +5286,13 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Guardar' },
     '#sportPageTitle': { t: 'Fútbol en directo por TV' },
     '#providersSportTitel': { t: 'Suscripciones deportivas' },
-    '#sportVereinBtn': { t: '+ Tu equipo' },
+    '#sportVereinBtn': { t: '+ Tu vista' },
     '#sportHeaderBtn': { a: 'Deporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Los calendarios de la sección Deporte provienen de <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un proyecto comunitario libre. Las emisoras se derivan de los derechos de TV alemanes – sin garantía.' },
-    '#vereinTitel': { t: 'Tu equipo' },
-    '#vereinIntro': { t: 'Elige hasta tres equipos. Sus logos aparecen como filtros sobre el calendario.' },
+    '#vereinTitel': { t: 'Tu vista' },
+    '#vereinIntro': { t: 'Configura la página de Deporte: competiciones preseleccionadas (una, varias o todas) — y hasta tres equipos como filtros. Los equipos nunca están preseleccionados.' },
+    '#ansichtLigenTitel': { t: 'Competiciones' },
+    '#ansichtVereineTitel': { t: 'Tus equipos (máx. 3)' },
     '#vereinSuche': { p: 'Buscar equipo …' },
     '#vereinSaveBtn': { t: 'Guardar' },
     '#providersSportIntro': { t: 'Para la sección Deporte: los partidos que puedas ver se marcan con ✅.' },
@@ -5339,11 +5416,13 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Salva' },
     '#sportPageTitle': { t: 'Calcio in diretta TV' },
     '#providersSportTitel': { t: 'Abbonamenti sport' },
-    '#sportVereinBtn': { t: '+ La tua squadra' },
+    '#sportVereinBtn': { t: '+ La tua vista' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'I calendari della sezione Sport provengono da <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un progetto comunitario libero. Le emittenti sono dedotte dai diritti TV tedeschi – senza garanzia.' },
-    '#vereinTitel': { t: 'La tua squadra' },
-    '#vereinIntro': { t: 'Scegli fino a tre squadre. I loro loghi appaiono come filtri sopra il calendario.' },
+    '#vereinTitel': { t: 'La tua vista' },
+    '#vereinIntro': { t: 'Configura la pagina Sport: competizioni preselezionate (una, più o tutte) — e fino a tre squadre come filtri. Le squadre non sono mai preselezionate.' },
+    '#ansichtLigenTitel': { t: 'Competizioni' },
+    '#ansichtVereineTitel': { t: 'Le tue squadre (max 3)' },
     '#vereinSuche': { p: 'Cerca squadra …' },
     '#vereinSaveBtn': { t: 'Salva' },
     '#providersSportIntro': { t: 'Per la sezione Sport: le partite che puoi vedere sono contrassegnate con ✅.' },
@@ -5467,11 +5546,13 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Opslaan' },
     '#sportPageTitle': { t: 'Voetbal live op tv' },
     '#providersSportTitel': { t: 'Sportabonnementen' },
-    '#sportVereinBtn': { t: '+ Jouw club' },
+    '#sportVereinBtn': { t: '+ Jouw weergave' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'De speelschema’s in het Sport-gedeelte komen van <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, een vrij communityproject. Zenders worden afgeleid uit de Duitse tv-rechten – zonder garantie.' },
-    '#vereinTitel': { t: 'Jouw club' },
-    '#vereinIntro': { t: 'Kies maximaal drie clubs. Hun logo’s verschijnen als filters boven het speelschema.' },
+    '#vereinTitel': { t: 'Jouw weergave' },
+    '#vereinIntro': { t: 'Stel de Sport-pagina in: vooraf geselecteerde competities (één, meerdere of alle) — en maximaal drie clubs als filters. Clubs zijn nooit vooraf geselecteerd.' },
+    '#ansichtLigenTitel': { t: 'Competities' },
+    '#ansichtVereineTitel': { t: 'Jouw clubs (max. 3)' },
     '#vereinSuche': { p: 'Club zoeken …' },
     '#vereinSaveBtn': { t: 'Opslaan' },
     '#providersSportIntro': { t: 'Voor het Sport-gedeelte: wedstrijden die je kunt zien krijgen een ✅.' },
@@ -5595,11 +5676,13 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Salvar' },
     '#sportPageTitle': { t: 'Futebol ao vivo na TV' },
     '#providersSportTitel': { t: 'Assinaturas de esporte' },
-    '#sportVereinBtn': { t: '+ Seu clube' },
+    '#sportVereinBtn': { t: '+ Sua visualização' },
     '#sportHeaderBtn': { a: 'Esporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Os calendários da seção Esporte vêm do <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, um projeto comunitário livre. As emissoras são derivadas dos direitos de TV alemães – sem garantia.' },
-    '#vereinTitel': { t: 'Seu clube' },
-    '#vereinIntro': { t: 'Escolha até três clubes. Seus logos aparecem como filtros acima do calendário.' },
+    '#vereinTitel': { t: 'Sua visualização' },
+    '#vereinIntro': { t: 'Configure a página de Esporte: competições pré-selecionadas (uma, várias ou todas) — e até três clubes como filtros. Clubes nunca são pré-selecionados.' },
+    '#ansichtLigenTitel': { t: 'Competições' },
+    '#ansichtVereineTitel': { t: 'Seus clubes (máx. 3)' },
     '#vereinSuche': { p: 'Buscar clube …' },
     '#vereinSaveBtn': { t: 'Salvar' },
     '#providersSportIntro': { t: 'Para a seção Esporte: jogos que você pode ver são marcados com ✅.' },
@@ -9623,7 +9706,17 @@ let SPORT_DATA = null;                 // { sender, wettbewerbe, spiele }
 // abgeleitet aus den Streaminganbietern (sportAbosVorauswahl).
 let SPORT_ABOS = null;
 var SPORT_ABOS_KEY = 'mm_sport_abos';
-var SPORT_COMP = 'alle';               // Wettbewerbs-Chip ('alle' | 'bl1' | ...)
+// Wettbewerbs-Filter: MEHRERE gleichzeitig moeglich (leer = alle). Die
+// Startbelegung kommt aus der gespeicherten Vorauswahl ("Deine Ansicht",
+// Christian 19. August 2026) -- jedes Oeffnen der Seite beginnt damit.
+var SPORT_COMPS = [];
+var SPORT_ANSICHT_KEY = 'mm_sport_ansicht';
+function gespeicherteAnsicht(){
+  try {
+    var a = JSON.parse(localStorage.getItem(SPORT_ANSICHT_KEY) || '{}');
+    return Array.isArray(a.comps) ? a.comps : [];
+  } catch (e) { return []; }
+}
 // Verfuegbarkeits-Reihe (zweite Chip-Reihe): "Alle" ist exklusiv, die
 // uebrigen Filter -- Deine Streaming-Anbieter, Nur Free-TV und die
 // Vereins-Logos -- sind frei kombinierbar (Christian, 19. August 2026).
@@ -9744,12 +9837,58 @@ function sportBadgeHtml(b){
   if (b.typ === 'konferenz') zusatz.push(TXT.sportKonferenz);
   if (info.frei) zusatz.push(TXT.sportFrei);
   if (b.unsicher) zusatz.push(TXT.sportVoraussichtlich);
-  return '<a class="' + cls + '"' +
-         (info.link ? ' href="' + escAttr(info.link) + '" target="_blank" rel="noopener"' : '') +
+  // Button statt Link: der Klick oeffnet das Sender-Popup (Kanal, Abo-Status,
+  // Erklaerung, Anbieter-Link) -- siehe openSenderModal.
+  return '<button type="button" class="' + cls + '" data-s="' + escAttr(b.s) + '"' +
+         (b.typ ? ' data-typ="' + escAttr(b.typ) + '"' : '') +
+         (b.unsicher ? ' data-u="1"' : '') +
+         (b.kanal ? ' data-kanal="' + escAttr(b.kanal) + '"' : '') +
          '>' + praefix + esc(info.name) +
          (zusatz.length ? ' <span class="tv-zusatz">· ' + esc(zusatz.join(' · ')) + '</span>' : '') +
-         '</a>';
+         '</button>';
 }
+
+/* ---- Sender-Popup: Was genau bedeutet dieses Badge? Kanal (aus der Regel
+   oder dem Sender-Standard), frei/Abo-Status, kurze Anbieter-Erklaerung aus
+   der Rechte-Matrix (deutsch -- der Sport-Bereich ist DE-only) und der Link
+   zum Anbieter. Ein Spiel kann durchaus auf mehreren Kanaelen EINES
+   Anbieters laufen (Einzelspiel + Konferenz, App + Linearkanal) -- deshalb
+   sind die Kanal-Angaben je Slot formuliert. ---- */
+var _senderModal = document.getElementById('senderModal');
+function openSenderModal(d){
+  var info = sportSenderInfo(d.s);
+  var konfiguriert = Array.isArray(SPORT_ABOS);
+  var imAbo = konfiguriert && SPORT_ABOS.indexOf(d.s) !== -1;
+  document.getElementById('senderModalTitel').textContent = info.name;
+  var status = info.frei
+    ? '<span style="color:var(--done)">' + esc(TXT.sportFreiEmpfangbar) + '</span>'
+    : konfiguriert
+      ? (imAbo ? '✅ ' + esc(TXT.sportImAbo) : '🔒 ' + esc(TXT.sportNichtImAbo))
+      : '🔒 ' + esc(TXT.sportAboNoetig);
+  var kanal = d.kanal || info.kanal || null;
+  var html = '<p class="prov-intro">' + status + '</p>';
+  if (kanal) {
+    html += '<p class="prov-intro"><b>' + esc(TXT.sportLaeuftAuf) + ':</b> ' + esc(kanal) +
+            (d.typ === 'konferenz' ? ' · ' + esc(TXT.sportKonferenz) : '') + '</p>';
+  }
+  if (d.u) html += '<p class="prov-intro">⚠️ ' + esc(TXT.sportVslLang) + '</p>';
+  if (info.info) html += '<p class="prov-intro">' + esc(info.info) + '</p>';
+  if (info.link) {
+    html += '<a class="auth-submit sender-cta" href="' + escAttr(info.link) +
+            '" target="_blank" rel="noopener">' + esc(TXT.sportZum(info.name)) + '</a>';
+  }
+  document.getElementById('senderModalInhalt').innerHTML = html;
+  _senderModal.style.display = 'flex';
+}
+function closeSenderModal(){ _senderModal.style.display = 'none'; }
+document.getElementById('senderModalX').onclick = closeSenderModal;
+_senderModal.addEventListener('click', function(e){ if (e.target === _senderModal) closeSenderModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _senderModal.style.display !== 'none') closeSenderModal(); });
+// EIN Handler fuer alle Badges (die Listen werden staendig neu gezeichnet).
+document.getElementById('sportPage').addEventListener('click', function(e){
+  var b = e.target.closest('.tv-badge');
+  if (b) openSenderModal(b.dataset);
+});
 
 function sportSpielLi(spiel){
   var li = document.createElement('li');
@@ -9781,18 +9920,22 @@ function renderSportChips(){
   var vorhanden = Object.keys(data.wettbewerbe).filter(function(c){
     return data.spiele.some(function(s){ return s.c === c; });
   });
-  var html = '<button type="button" data-comp="alle"' + (SPORT_COMP === 'alle' ? ' class="active"' : '') + '>' +
+  var html = '<button type="button" data-comp="alle"' + (SPORT_COMPS.length ? '' : ' class="active"') + '>' +
              esc(TXT.sportAlle) + '</button>';
   vorhanden.forEach(function(c){
-    html += '<button type="button" data-comp="' + escAttr(c) + '"' + (SPORT_COMP === c ? ' class="active"' : '') + '>' +
+    html += '<button type="button" data-comp="' + escAttr(c) + '"' + (SPORT_COMPS.indexOf(c) !== -1 ? ' class="active"' : '') + '>' +
             esc(data.wettbewerbe[c].name || c) + '</button>';
   });
   el.innerHTML = html;
   el.querySelectorAll('button[data-comp]').forEach(function(b){
     b.onclick = function(){
-      // Erneuter Klick auf den aktiven Wettbewerb waehlt ihn ab (zurueck zu
-      // "Alle") -- dasselbe Muster wie ueberall sonst in der App.
-      SPORT_COMP = (SPORT_COMP === b.dataset.comp) ? 'alle' : b.dataset.comp;
+      // Wettbewerbe sind seit "Deine Ansicht" MEHRFACH waehlbar: Klick
+      // schaltet einen an/ab, "Alle" leert die Auswahl (= kein Filter).
+      if (b.dataset.comp === 'alle') SPORT_COMPS = [];
+      else {
+        var i = SPORT_COMPS.indexOf(b.dataset.comp);
+        if (i === -1) SPORT_COMPS.push(b.dataset.comp); else SPORT_COMPS.splice(i, 1);
+      }
       sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
       renderSportPage();
     };
@@ -9867,7 +10010,7 @@ function renderSportPage(){
   renderSportChips();
   var begriffe = aktiveSuchbegriffe();
   var gefiltert = data.spiele.filter(function(s){
-    if (SPORT_COMP !== 'alle' && s.c !== SPORT_COMP) return false;
+    if (SPORT_COMPS.length && SPORT_COMPS.indexOf(s.c) === -1) return false;
     if (SPORT_VERF_FREI && !sportSpielFrei(s)) return false;
     if (SPORT_VERF_ABO && !sportSpielImAbo(s)) return false;
     if (SPORT_VEREIN_AKTIV.length &&
@@ -9894,7 +10037,9 @@ function renderSportPage(){
 function openSportPage(){
   closeCinemaPage();
   sportMode = true;
-  // Frisch geoeffnet heisst wieder eingeklappt (wie beim Kino).
+  // Frisch geoeffnet heisst wieder eingeklappt (wie beim Kino) -- und die
+  // Wettbewerbe starten mit der gespeicherten Vorauswahl aus "Deine Ansicht".
+  SPORT_COMPS = gespeicherteAnsicht().slice();
   sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
   updateFilterRowUI();
   document.querySelector('.head-controls').style.display = '';
@@ -9966,6 +10111,31 @@ var _vereinList = document.getElementById('vereinList');
 var _vereinSuche = document.getElementById('vereinSuche');
 var VEREIN_MAX = 3;
 var _vereinAuswahl = [];               // Arbeitskopie waehrend das Fenster offen ist
+var _ansichtComps = [];                // Arbeitskopie der Wettbewerbs-Vorauswahl
+function renderAnsichtLigen(){
+  var el = document.getElementById('ansichtLigen');
+  var data = SPORT_DATA;
+  var vorhanden = Object.keys(data.wettbewerbe).filter(function(c){
+    return data.spiele.some(function(sp){ return sp.c === c; });
+  });
+  var html = '<button type="button" data-comp="alle" class="' + (_ansichtComps.length ? '' : 'active') + '">' +
+             esc(TXT.sportAlle) + '</button>';
+  vorhanden.forEach(function(c){
+    html += '<button type="button" data-comp="' + escAttr(c) + '" class="' +
+            (_ansichtComps.indexOf(c) !== -1 ? 'active' : '') + '">' + esc(data.wettbewerbe[c].name || c) + '</button>';
+  });
+  el.innerHTML = html;
+  el.querySelectorAll('button').forEach(function(b){
+    b.onclick = function(){
+      if (b.dataset.comp === 'alle') _ansichtComps = [];
+      else {
+        var i = _ansichtComps.indexOf(b.dataset.comp);
+        if (i === -1) _ansichtComps.push(b.dataset.comp); else _ansichtComps.splice(i, 1);
+      }
+      renderAnsichtLigen();
+    };
+  });
+}
 function vereinKatalog(){
   var map = new Map();
   (SPORT_DATA ? SPORT_DATA.spiele : []).forEach(function(sp){
@@ -10010,11 +10180,13 @@ _vereinList.addEventListener('change', function(e){
 _vereinSuche.addEventListener('input', renderVereinList);
 document.getElementById('sportVereinBtn').onclick = async function(){
   _vereinAuswahl = MEINE_VEREINE.slice();
+  _ansichtComps = gespeicherteAnsicht().slice();
   _vereinSuche.value = '';
   _vereinModal.style.display = 'flex';
   _vereinList.textContent = TXT.laedt;
   try {
     await loadSportData();
+    renderAnsichtLigen();
     renderVereinList();
   } catch (e) { _vereinList.textContent = TXT.sportFehler; }
 };
@@ -10025,6 +10197,10 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _ver
 document.getElementById('vereinSaveBtn').onclick = function(){
   MEINE_VEREINE = _vereinAuswahl.slice(0, VEREIN_MAX);
   try { localStorage.setItem(MEINE_VEREINE_KEY, JSON.stringify(MEINE_VEREINE)); } catch (e) {}
+  // Wettbewerbs-Vorauswahl speichern UND sofort anwenden; die Vereins-Chips
+  // bleiben bewusst INAKTIV (nie vorausgewaehlt, Christians Vorgabe).
+  try { localStorage.setItem(SPORT_ANSICHT_KEY, JSON.stringify({ comps: _ansichtComps })); } catch (e) {}
+  SPORT_COMPS = _ansichtComps.slice();
   // Abgewaehlte Vereine auch aus den aktiven Filtern nehmen -- ein Chip, den
   // es nicht mehr gibt, darf nicht unsichtbar weiterfiltern.
   SPORT_VEREIN_AKTIV = SPORT_VEREIN_AKTIV.filter(function(n){

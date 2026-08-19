@@ -31,10 +31,13 @@ test('Bundesliga: die vier festen Slots', () => {
     { id: 'so', anstossUtc: '2026-08-23T15:30:00Z' },  // So 17:30 -> DAZN
   ];
   const tv = tvFuerSpiele(RECHTE, 'bl1', '2026', spiele);
-  assert.deepEqual(tv.get('fr'), [{ s: 'sky' }]);
-  assert.deepEqual(tv.get('sa1530'), [{ s: 'sky' }, { s: 'dazn', typ: 'konferenz' }]);
-  assert.deepEqual(tv.get('sa1830'), [{ s: 'sky' }]);
-  assert.deepEqual(tv.get('so'), [{ s: 'dazn' }]);
+  // Nur Sender/Typ pruefen -- die Kanal-Texte (kanal) sind Anzeige-Details,
+  // die sich aendern duerfen, ohne dass die Zuordnung falsch wird.
+  const schlank = (id) => tv.get(id).map(({ s, typ }) => (typ ? { s, typ } : { s }));
+  assert.deepEqual(schlank('fr'), [{ s: 'sky' }]);
+  assert.deepEqual(schlank('sa1530'), [{ s: 'sky' }, { s: 'dazn', typ: 'konferenz' }]);
+  assert.deepEqual(schlank('sa1830'), [{ s: 'sky' }]);
+  assert.deepEqual(schlank('so'), [{ s: 'dazn' }]);
 });
 
 test('Champions League: Dienstag unsicher (Amazon-Pick unbekannt), Mittwoch sicher', () => {
@@ -65,7 +68,7 @@ test('Ausnahme "zusatz": Free-TV ergaenzt den Abo-Sender, ersetzt ihn nicht', ()
   const tv = tvFuerSpiele(rechte, 'dfb', '2026', [
     { id: '42', anstossUtc: '2026-08-22T18:45:00Z' },
   ]);
-  assert.deepEqual(tv.get('42'), [{ s: 'sky' }, { s: 'ard' }]);
+  assert.deepEqual(tv.get('42').map(({ s }) => ({ s })), [{ s: 'sky' }, { s: 'ard' }]);
 });
 
 test('saisonBlock: unbekannte Saison erbt die juengste davor', () => {
