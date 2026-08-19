@@ -8,6 +8,12 @@ on:
     # zusaetzlich am Nachmittag/Abend fuer Ergebnisse. Zeiten in UTC.
     - cron: "0 5,11,17 * * *"
     - cron: "0 14,20 * * 5,6,0"
+  # Aenderungen an Matrix oder Skript sollen sofort wirken -- vor allem fuer
+  # die woechentliche Pflege der Ausnahmen (PLAN-SPORT.md 5b): Commit auf
+  # main -> Daten laufen neu ein, ohne auf den naechsten Cron zu warten.
+  push:
+    branches: [main]
+    paths: ["sport-rechte.json", "sport-fetch.mjs", "backend/lib/sportRechte.js"]
   workflow_dispatch: {}         # erlaubt manuelles Ausloesen im Actions-Tab
 
 concurrency:
