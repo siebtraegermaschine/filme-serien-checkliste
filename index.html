@@ -9711,10 +9711,16 @@ var SPORT_ABOS_KEY = 'mm_sport_abos';
 // Christian 19. August 2026) -- jedes Oeffnen der Seite beginnt damit.
 var SPORT_COMPS = [];
 var SPORT_ANSICHT_KEY = 'mm_sport_ansicht';
+// In der Vorauswahl stehen NUR die Ligen (Christian, 19. August 2026):
+// Es geht darum, welche Top-Liga beim Oeffnen vorgewaehlt ist, wenn nicht
+// alle -- Pokal, CL & Co. klickt man bei Bedarf auf der Seite an.
+var ANSICHT_LIGEN = ['bl1', 'bl2', 'bl3'];
 function gespeicherteAnsicht(){
   try {
     var a = JSON.parse(localStorage.getItem(SPORT_ANSICHT_KEY) || '{}');
-    return Array.isArray(a.comps) ? a.comps : [];
+    if (!Array.isArray(a.comps)) return [];
+    // Alte Speicherstaende koennen noch andere Wettbewerbe enthalten.
+    return a.comps.filter(function(c){ return ANSICHT_LIGEN.indexOf(c) !== -1; });
   } catch (e) { return []; }
 }
 // Verfuegbarkeits-Reihe (zweite Chip-Reihe): "Alle" ist exklusiv, die
@@ -10120,8 +10126,8 @@ var _ansichtComps = [];                // Arbeitskopie der Wettbewerbs-Vorauswah
 function renderAnsichtLigen(){
   var el = document.getElementById('ansichtLigen');
   var data = SPORT_DATA;
-  var vorhanden = Object.keys(data.wettbewerbe).filter(function(c){
-    return data.spiele.some(function(sp){ return sp.c === c; });
+  var vorhanden = ANSICHT_LIGEN.filter(function(c){
+    return data.wettbewerbe[c] && data.spiele.some(function(sp){ return sp.c === c; });
   });
   var html = '<button type="button" data-comp="alle" class="' + (_ansichtComps.length ? '' : 'active') + '">' +
              esc(TXT.sportAlle) + '</button>';
