@@ -388,7 +388,11 @@
   .shared-poster { display:block; width:150px; border-radius:10px; margin:0 auto 12px; }
   .shared-name { color:var(--accent); font-size:17px; font-weight:700; text-align:center; }
   .shared-meta { color:var(--text-dim); font-size:13px; text-align:center; margin-top:4px; }
-  .shared-plot { color:var(--text); font-size:13.5px; line-height:1.45; margin:12px 0 4px; text-align:justify; }
+  /* Linksbuendig, NICHT im Blocksatz: In der schmalen Spalte des Popups zog der
+     Blocksatz die Wortabstaende weit auseinander ("schwankt     zwischen
+     Anspannung"), und eingeklappt geriet auch die Zeile mit den Auslassungs-
+     punkten in den Streckdruck ("Ausgelassenheit.    ...   Als d"). */
+  .shared-plot { color:var(--text); font-size:13.5px; line-height:1.45; margin:12px 0 4px; text-align:left; }
   /* Lange Inhaltsangaben (ueber 1000 Zeichen sind keine Seltenheit) schoben
      frueher Titel, Knoepfe und Kreuz aus dem Bild -- und scrollen liess sich im
      Fenster nicht. Jetzt steht der Text eingeklappt auf vier Zeilen, "Mehr"
