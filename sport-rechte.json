@@ -46,7 +46,7 @@
       "tmdb": [],
       "link": "https://www.dazn.com/de-DE",
       "kanal": "DAZN-App",
-      "info": "Läuft in der DAZN-App; die linearen Kanäle DAZN 1/2 sind zusätzlich über Sky und Vodafone empfangbar."
+      "info": "Läuft in der DAZN-App. Die linearen Kanäle DAZN 1/2 lassen sich auch über Sky-Receiver und Vodafone empfangen — brauchen aber ebenfalls die DAZN-Buchung, ein Sky-Abo allein reicht dafür nicht."
     },
     "amazon": {
       "name": "Amazon Prime",
@@ -569,5 +569,5 @@
       }
     }
   },
-  "_stand": "2026-08-19 (ARD/ZDF: Mediathek- und Joyn-Knopf im Sender-Popup)"
+  "_stand": "2026-08-20 (DAZN-Infotext praezisiert: Empfangsweg != Abo)"
 }
