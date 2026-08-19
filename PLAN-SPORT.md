@@ -5,11 +5,18 @@
 > Engine, getestet in `backend/test/sportRechte.test.js`), `sport-fetch.mjs`,
 > `backend/routes/sport.js` (+ Tabellen `sport_matches`/`sport_meta`,
 > `users.sport_abos`), GitHub Action `sport.yml` (nutzt das vorhandene
-> CINEMA_INGEST_SECRET, kein neues Server-Secret nötig), Sport-Tab ⚽ samt
-> Vollseite, Wettbewerbs-/Free-TV-Filter und „Meine Abos"-Abgleich in
-> `index.html`. Free-TV-Picks der 1. Pokalrunde und das Sat.1-Eröffnungsspiel
-> sind als Ausnahmen eingetragen. Offen: Wochenpflege-Routine (5b) aktivieren,
-> Phase 4 (Länderspiele/Turniere, SEO-Unterseiten).
+> CINEMA_INGEST_SECRET, kein neues Server-Secret nötig) samt Sport-Vollseite
+> in `index.html`. Free-TV-Picks der 1. Pokalrunde und das Sat.1-Eröffnungs-
+> spiel sind als Ausnahmen eingetragen; die Wochenpflege-Routine (5b) läuft
+> (montags, per PR). Offen: Phase 4 (Länderspiele/Turniere, SEO-Unterseiten).
+>
+> Oberflächen-Nachträge vom selben Abend (Christian): Der Einstieg ist der
+> **erste Punkt im Menü rechts oben („⚽ Sport")**, kein vierter Tab — die
+> Tab-Reihe blieb wie vorher. Zwei Filterreihen auf der Sport-Seite:
+> Wettbewerbe und Verfügbarkeit („Alle" exklusiv; „Deine Streaming-Anbieter",
+> „Nur Free-TV" und bis zu drei Vereins-Logos („+ Dein Verein") frei
+> kombinierbar). Die Sport-Abos werden **im Fenster „Streaminganbieter"**
+> mitverwaltet (eigener Abschnitt), der frühere „Meine Abos"-Knopf entfiel.
 >
 > Hinweis aus der Umsetzung: OpenLigaDB führt die CL 2026/27 bereits (`ucl`,
 > noch leer bis zur Auslosung Ende August); die Europa League pflegt die
