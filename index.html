@@ -896,8 +896,20 @@
   /* "Trailer" ganz links, Kaufen/Leihen/Ansehen rechts abgesetzt. Der
      automatische Abstand rechts vom Trailer schiebt alles Nachfolgende ans
      Ende -- und laesst ihn auf der Kino-Seite, wo er allein steht, ganz links. */
-  .watch-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; justify-content: flex-start; }
-  .trailer-btn { margin-right: auto; }
+  /* 10px wie in .det-actions darunter -- mit unterschiedlichen Abstaenden
+     saessen die beiden linken Bloecke sonst um 2px versetzt. */
+  .watch-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-content: flex-start; }
+  /* "Trailer" und "Teilen" als linke Gruppe. Sie nimmt -- genau wie
+     "Ähnliche Titel" in der Zeile darunter -- den Platz neben dem 62%-Block
+     rechts ein, beide Knoepfe teilen ihn sich zu gleichen Teilen. Damit sind
+     Trailer + Teilen zusammen exakt so breit wie "Ähnliche Titel". */
+  .watch-links { display: flex; align-items: center; gap: 8px; flex: 1 1 auto; min-width: 0; margin-right: auto; }
+  .watch-links > .watch-btn { flex: 1; min-width: 0; }
+  /* Auf der Kino-Seite steht die Gruppe allein in der Zeile (nurTrailer, siehe
+     watchRowHtml) -- dort soll sie nicht auf volle Breite gehen, sondern wie
+     bisher links stehen bleiben. */
+  .watch-row.nur-trailer .watch-links,
+  .watch-row.nur-trailer .watch-links > .watch-btn { flex: 0 1 auto; }
   /* Beide Zeilen der aufgeklappten Ansicht sollen dasselbe Raster zeigen:
      rechts ein gleich breiter Block (oben Kaufen/Leihen/Ansehen, unten
      Watchlist/Gesehen), links davon Trailer bzw. "Ähnliche Titel". Ohne das
@@ -934,8 +946,16 @@
   @media (max-width: 520px) {
     .watch-rechts, .det-rechts { flex: 0 1 auto; margin-left: auto; }
     .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts > .det-left { flex: 0 1 auto; }
-    .det-actions { gap: 8px; }
+    .det-actions, .watch-btns { gap: 8px; }
     .det-rechts { gap: 6px; }
+    /* Hier gilt das gemeinsame Raster nicht mehr (siehe oben): Die Bloecke
+       nehmen ihre Inhaltsbreite. "Trailer" und "Teilen" bleiben als Paar links
+       stehen -- gestreckt wuerden sie unter ihre Beschriftung gequetscht.
+       Ab etwa 400px Geraetebreite passt die obere Zeile damit noch in eine
+       Zeile; darunter rutscht Kaufen/Leihen/Ansehen in die naechste, was der
+       Umbruch sauber abfaengt. */
+    .watch-links, .similar-btn { flex: 0 1 auto; }
+    .watch-links > .watch-btn { flex: 0 1 auto; }
   }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
@@ -1174,7 +1194,7 @@
   body.kompakte-aktionen .det-rechts > .det-left > .wl-btn { width: auto; }
   /* "Ähnliche Titel" bleibt links (Gesehen/Watchlist weiter rechts gepackt) und ist
      nur sichtbar, wenn die Details dieser Zeile aufgeklappt sind. */
-  .similar-btn { display: none; margin-right: auto; }
+  .similar-btn { display: none; flex: 1 1 auto; margin-right: auto; }
   li.item.show-details .similar-btn, li.disc.show-details .similar-btn { display: inline-block; }
   .watch-empty { text-align: center; color: var(--text-dim); font-size: 14px; margin: 26px auto; max-width: 520px; line-height: 1.7; padding: 0 20px; }
   @media (max-width: 640px) { .details .detposter { width: 96px; } }
@@ -6016,8 +6036,15 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _tra
 function trailerBtnHtml(api, title){
   // Steht IMMER zur Verfuegung: kennt TMDB keinen Trailer, oeffnet der Button
   // ersatzweise eine YouTube-Suche nach "Titel Trailer" (siehe openTrailer).
-  return '<button type="button" class="watch-btn trailer-btn" data-trailer="' + escAttr(api || '') +
-         '" data-ttitle="' + escAttr(title || '') + '">' + TXT.trailer + '</button>';
+  //
+  // Daneben "Teilen" -- dasselbe Fenster wie beim Rechtswisch auf der Zeile
+  // (oeffneTeilen). Die beiden bilden links eine Gruppe, die zusammen genau so
+  // breit ist wie "Ähnliche Titel" in der Zeile darunter (siehe .watch-links).
+  return '<div class="watch-links">' +
+    '<button type="button" class="watch-btn trailer-btn" data-trailer="' + escAttr(api || '') +
+    '" data-ttitle="' + escAttr(title || '') + '">' + TXT.trailer + '</button>' +
+    '<button type="button" class="watch-btn teilen-btn">' + TXT.teilen + '</button>' +
+  '</div>';
 }
 function watchRowHtml(tmdbId, type, title, realId, opts){
   // Bevorzugt die TMDB-ID (spart dem Backend die Suche). Fehlt sie, laeuft die
@@ -6108,6 +6135,17 @@ document.addEventListener('click', function(e){
   if (!btn) return;
   if (btn.classList.contains('trailer-btn')) {
     openTrailerModal(btn.dataset.trailer, btn.dataset.ttitle, row);
+    return;
+  }
+  // "Teilen" -- derselbe Weg wie ueber den Rechtswisch. Der POOL-Eintrag haengt
+  // am li (siehe render/poolItemLi); ohne ihn liesse sich der Link nicht bauen.
+  if (btn.classList.contains('teilen-btn')) {
+    var zeile = row.closest('li');
+    var eintrag = zeile && zeile._poolItem;
+    if (!eintrag && row.dataset.wtid) {
+      eintrag = POOL.filter(function(x){ return String(x.realId) === String(row.dataset.wtid); })[0];
+    }
+    if (eintrag) oeffneTeilen(eintrag); else alert(TXT.nichtTeilbar);
     return;
   }
   var cat = btn.dataset.cat;
@@ -13575,23 +13613,27 @@ async function idFuerGeteilten(d){
 }
 
 // Klappt eine lange Inhaltsangabe ein und haengt einen "Mehr"-Knopf darunter.
-// Gemessen wird erst nach dem Layout: Passt der Text ohnehin in vier Zeilen,
-// bleibt alles wie es war und es erscheint kein Knopf.
+// Passt der Text ohnehin in vier Zeilen, bleibt alles wie es war und es
+// erscheint kein Knopf.
+//
+// Gemessen wird SOFORT, nicht in requestAnimationFrame: In einem Tab, der im
+// Hintergrund geoeffnet wird (Link "in neuem Tab oeffnen", weggewischte App),
+// laeuft rAF gar nicht -- der Text bliebe dann fuer immer abgeschnitten, ohne
+// Knopf zum Aufklappen. Das Lesen von scrollHeight erzwingt das Layout, das
+// Element steht zu diesem Zeitpunkt schon sichtbar im Fenster.
 function plotAusklappbar(el){
   if (!el) return;
   el.classList.add('eingeklappt');
-  requestAnimationFrame(function(){
-    if (el.scrollHeight <= el.clientHeight + 2) { el.classList.remove('eingeklappt'); return; }
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'plot-mehr';
-    btn.textContent = TXT.textMehr;
-    btn.onclick = function(){
-      var zu = el.classList.toggle('eingeklappt');
-      btn.textContent = zu ? TXT.textMehr : TXT.textWeniger;
-    };
-    el.insertAdjacentElement('afterend', btn);
-  });
+  if (el.scrollHeight <= el.clientHeight + 2) { el.classList.remove('eingeklappt'); return; }
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'plot-mehr';
+  btn.textContent = TXT.textMehr;
+  btn.onclick = function(){
+    var zu = el.classList.toggle('eingeklappt');
+    btn.textContent = zu ? TXT.textMehr : TXT.textWeniger;
+  };
+  el.insertAdjacentElement('afterend', btn);
 }
 
 async function zeigeGeteiltenTitel(ziel){
