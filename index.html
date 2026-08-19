@@ -611,7 +611,7 @@
   .tv-badge.tv-hab { border-color: rgba(76,195,138,.5); color: var(--done); }
   /* Sender-Popup: Zeilen wie .prov-intro, der Anbieter-Link als Knopf. */
   #senderModalInhalt p { margin: 0 0 10px; }
-  .sender-cta { display:inline-block; text-decoration:none; margin-top:6px; }
+  .sender-cta { display:inline-block; text-decoration:none; margin-top:6px; margin-right:8px; }
   .tv-zusatz { font-weight:400; opacity:.8; }
 
   /* Im Popup ist die Spalte fuer Titel/Aktionen schmaler als auf Discovery/
@@ -9873,10 +9873,15 @@ function openSenderModal(d){
   }
   if (d.u) html += '<p class="prov-intro">⚠️ ' + esc(TXT.sportVslLang) + '</p>';
   if (info.info) html += '<p class="prov-intro">' + esc(info.info) + '</p>';
-  if (info.link) {
-    html += '<a class="auth-submit sender-cta" href="' + escAttr(info.link) +
-            '" target="_blank" rel="noopener">' + esc(TXT.sportZum(info.name)) + '</a>';
-  }
+  // Ein Knopf je Weg: Sky/WOW ist EIN Anbieter mit ZWEI Produkten und damit
+  // zwei Zielseiten (links[]); alle anderen haben nur den einen Link.
+  var ziele = Array.isArray(info.links) && info.links.length
+    ? info.links
+    : (info.link ? [{ n: info.name, url: info.link }] : []);
+  ziele.forEach(function(z){
+    html += '<a class="auth-submit sender-cta" href="' + escAttr(z.url) +
+            '" target="_blank" rel="noopener">' + esc(TXT.sportZum(z.n)) + '</a>';
+  });
   document.getElementById('senderModalInhalt').innerHTML = html;
   _senderModal.style.display = 'flex';
 }

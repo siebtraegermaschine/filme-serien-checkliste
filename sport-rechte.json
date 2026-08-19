@@ -28,7 +28,17 @@
       ],
       "link": "https://www.wowtv.de/live-sport",
       "kanal": "Sky Sport / WOW-App",
-      "info": "Ein Anbieter, zwei Wege: das klassische Sky-Abo (Receiver) oder WOW, Skys eigenes Streaming ohne Receiver — gleicher Inhalt."
+      "info": "Ein Anbieter, zwei Wege: das klassische Sky-Abo (Receiver) oder WOW, Skys eigenes Streaming ohne Receiver — gleicher Inhalt.",
+      "links": [
+        {
+          "n": "Sky",
+          "url": "https://www.sky.de/sport"
+        },
+        {
+          "n": "WOW",
+          "url": "https://www.wowtv.de/live-sport"
+        }
+      ]
     },
     "dazn": {
       "name": "DAZN",
@@ -539,5 +549,5 @@
       }
     }
   },
-  "_stand": "2026-08-19 (3. Liga ergaenzt: MagentaSport, ARD-Free-Picks via Ausnahmen; Kanal-Angaben + Sender-Infos fuers Badge-Popup)"
+  "_stand": "2026-08-19 (Sky/WOW: zwei Links im Sender-Popup)"
 }
