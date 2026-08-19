@@ -211,6 +211,116 @@ router.post('/hinweise/gelesen', async (req, res) => {
   res.status(204).end();
 });
 
+/* ---- Verknuepfungs-Anfragen ----
+   Gehoert zum Knopf "Mit X verknuepfen" in der Kopfzeile einer geteilten
+   Ansicht (?titel=TOKEN, siehe routes/share.js). Anders als beim
+   Einladungslink hat die teilende Person dem Oeffnen ihrer Listen nicht vorab
+   zugestimmt -- sie wollte eine Liste zeigen. Deshalb entsteht aus dem Klick
+   erst eine Anfrage, und die Verknuepfung erst aus dem Annehmen.
+
+   Bezugspunkt ist immer der Momentaufnahme-Token, nie eine Kontonummer: Nur
+   wer den geteilten Link hat, kann die dahinterstehende Person anfragen.
+   Blind durch die Kontonummern gehen kann damit niemand. */
+
+// Die beiden Zeilen einer Verknuepfung. hinweis_offen kommt auf die Zeile der
+// ANFRAGENDEN Seite -- sie soll beim naechsten Start erfahren, dass es geklappt
+// hat (siehe GET /hinweise).
+async function verknuepfen(client, a, b, hinweisFuer) {
+  await client.query(
+    `INSERT INTO user_links (user_id, linked_user_id) VALUES ($1,$2) ON CONFLICT DO NOTHING`, [a, b]);
+  const { rowCount: neu } = await client.query(
+    `INSERT INTO user_links (user_id, linked_user_id) VALUES ($1,$2) ON CONFLICT DO NOTHING`, [b, a]);
+  if (neu && hinweisFuer) {
+    await client.query(
+      'UPDATE user_links SET hinweis_offen = true WHERE user_id = $1 AND linked_user_id = $2',
+      [hinweisFuer, hinweisFuer === a ? b : a]);
+  }
+  await client.query(
+    'DELETE FROM user_link_anfragen WHERE (von_id = $1 AND an_id = $2) OR (von_id = $2 AND an_id = $1)', [a, b]);
+}
+
+// Anfrage stellen. Der Deckel je Stunde ist bewusst niedriger als bei den
+// Einladungen: Anfragen landen ungefragt bei anderen Leuten.
+router.post('/anfrage', mengenGrenze({ name: 'link-anfrage', anzahl: 20, minuten: 60 }), async (req, res) => {
+  const token = String((req.body && req.body.token) || '');
+  if (!/^[a-f0-9]{32}$/.test(token)) return res.status(400).json({ error: 'invalid_params' });
+  const { rows } = await pool.query('SELECT user_id FROM titel_momentaufnahmen WHERE token = $1', [token]);
+  if (!rows.length) return res.status(404).json({ error: 'unbekannt' });
+  const ziel = String(rows[0].user_id);
+  const ich = String(req.session.userId);
+  if (ziel === ich) return res.status(400).json({ error: 'anfrage_eigene' });
+  const { rows: person } = await pool.query('SELECT id, display_name FROM users WHERE id = $1', [ziel]);
+  if (!person.length) return res.status(404).json({ error: 'unbekannt' });
+  const name = anzeigename(person[0]);
+
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    const { rows: schon } = await client.query(
+      'SELECT 1 FROM user_links WHERE user_id = $1 AND linked_user_id = $2', [ich, ziel]);
+    if (schon.length) { await client.query('ROLLBACK'); return res.json({ status: 'verknuepft', name }); }
+    // Gegenanfrage liegt vor: Dann sind beide Zustimmungen da, und der Klick
+    // hier ist die zweite -- ein zweiter Dialog waere Schikane.
+    const { rows: gegen } = await client.query(
+      'SELECT 1 FROM user_link_anfragen WHERE von_id = $1 AND an_id = $2', [ziel, ich]);
+    if (gegen.length) {
+      await verknuepfen(client, ich, ziel, null);
+      await client.query('COMMIT');
+      return res.json({ status: 'verknuepft', name });
+    }
+    // rowCount 0 heisst: Die Anfrage lag schon vor. Fuer die Gegenseite aendert
+    // sich dadurch nichts -- nur die Rueckmeldung ist eine andere.
+    const { rowCount: gestellt } = await client.query(
+      'INSERT INTO user_link_anfragen (von_id, an_id) VALUES ($1,$2) ON CONFLICT DO NOTHING', [ich, ziel]);
+    await client.query('COMMIT');
+    res.json({ status: gestellt ? 'offen' : 'schon_gefragt', name });
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
+});
+
+// Offene Anfragen an mich. Wird beim Start abgeholt, genau wie /hinweise.
+router.get('/anfragen', async (req, res) => {
+  const { rows } = await pool.query(
+    `SELECT u.id, u.display_name
+       FROM user_link_anfragen a JOIN users u ON u.id = a.von_id
+      WHERE a.an_id = $1
+      ORDER BY a.created_at`,
+    [req.session.userId]
+  );
+  res.json(rows.map((r) => ({ id: String(r.id), name: anzeigename(r) })));
+});
+
+// Annehmen oder ablehnen. Beides raeumt die Anfrage weg; abgelehnt wird nichts
+// gespeichert -- eine Sperrliste waere die naechste Ausbaustufe, solange es
+// keine gibt, kann dieselbe Person mit demselben Link erneut fragen.
+router.post('/anfragen/:userId', async (req, res) => {
+  const anderer = String(req.params.userId || '');
+  if (!/^[0-9]+$/.test(anderer)) return res.status(400).json({ error: 'invalid_params' });
+  const ich = String(req.session.userId);
+  const annehmen = !!(req.body && req.body.annehmen);
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    const { rowCount } = await client.query(
+      'DELETE FROM user_link_anfragen WHERE von_id = $1 AND an_id = $2', [anderer, ich]);
+    if (!rowCount) { await client.query('ROLLBACK'); return res.status(404).json({ error: 'anfrage_weg' }); }
+    if (!annehmen) { await client.query('COMMIT'); return res.json({ linked: null }); }
+    await verknuepfen(client, ich, anderer, anderer);
+    await client.query('COMMIT');
+    const { rows: partner } = await pool.query('SELECT id, display_name FROM users WHERE id = $1', [anderer]);
+    res.json({ linked: { id: String(partner[0].id), name: anzeigename(partner[0]) } });
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
+});
+
 // Loest die Verknuepfung -- immer beidseitig.
 router.delete('/:userId', async (req, res) => {
   const anderer = Number.parseInt(req.params.userId, 10);
@@ -218,6 +328,13 @@ router.delete('/:userId', async (req, res) => {
   await pool.query(
     `DELETE FROM user_links
       WHERE (user_id = $1 AND linked_user_id = $2) OR (user_id = $2 AND linked_user_id = $1)`,
+    [req.session.userId, anderer]
+  );
+  // Eine noch offene Anfrage in eine der beiden Richtungen faellt mit weg --
+  // sonst stuende sie nach dem Loesen als Angebot wieder im Raum.
+  await pool.query(
+    `DELETE FROM user_link_anfragen
+      WHERE (von_id = $1 AND an_id = $2) OR (von_id = $2 AND an_id = $1)`,
     [req.session.userId, anderer]
   );
   res.status(204).end();

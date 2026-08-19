@@ -636,11 +636,17 @@
   .disc-sub { display:flex; gap:8px; justify-content:center; margin:4px 0 16px; }
   .disc-hint { text-align:center; color:var(--text-dim); font-size:13px; margin:0 auto 14px; max-width:620px; line-height:1.5; }
   .load-more-btn { display:block; margin:18px auto 6px; padding:11px 26px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--text-dim); transition:all .15s; }
-  /* Kopfzeile einer geteilten Momentaufnahme ("Diese Titel teilen"). */
+  /* Kopfzeile einer geteilten Momentaufnahme ("Diese Ansicht teilen"). */
   .moment-bar { display:flex; align-items:center; justify-content:space-between; gap:8px;
     margin:0 0 10px; padding:9px 12px; border:1px solid var(--border); border-radius:10px;
     background:var(--card); color:var(--text-dim); font-size:13px; }
   .moment-bar button { background:none; border:none; color:var(--text-dim); font-size:15px; cursor:pointer; padding:2px 6px; }
+  /* "Mit X verknuepfen" -- steht zwischen Text und Schliessen-Kreuz und muss
+     als Knopf erkennbar sein, ohne der Liste die Schau zu stehlen. */
+  .moment-bar .moment-verknuepfen { flex:0 0 auto; border:1px solid var(--border); border-radius:20px;
+    padding:4px 12px; font-size:12px; font-weight:600; color:var(--accent); white-space:nowrap; }
+  .moment-bar .moment-text { flex:1 1 auto; min-width:0; }
+  @media (hover: hover) { .moment-bar .moment-verknuepfen:hover { border-color:var(--accent); } }
   @media (hover: hover) { .load-more-btn:hover { border-color:var(--accent); color:var(--accent); } }
   /* Im Kino folgt direkt unter dem Knopf schon die naechste Ueberschrift
      ("In Kürze im Kino", "Bald im Kino") -- die 6px von oben liessen den Knopf
@@ -1479,8 +1485,8 @@
 <div id="teilenSheet" class="teilen-sheet" style="display:none">
   <!-- Titel teilen zuerst (Wunsch vom 13. August) -- der haeufigste Fall. -->
   <button type="button" id="teilenTitelBtn">Einen Titel teilen</button>
-  <button type="button" id="teilenAnsichtBtn">Diese Titel teilen</button>
-  <button type="button" id="teilenProfilBtn">Gesamte Watchlist teilen</button>
+  <button type="button" id="teilenAnsichtBtn">Diese Ansicht teilen</button>
+  <button type="button" id="teilenProfilBtn">Meine Watchlist teilen</button>
 </div>
 
 <!-- Fertige Einladung. Seit dem 13. August nur noch der RUECKFALL: Der Link
@@ -2207,8 +2213,8 @@ var UI_TEXTE = {
     einladungEingeloest: 'Diese Einladung wurde bereits eingelöst.',
     einladungEigene: 'Das ist deine eigene Einladung.',
     einladungUngueltig: 'Diese Einladung ist ungültig.',
-    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' haben' : ' hat') +
-      ' deine Einladung angenommen.\n\nIhr seht ab jetzt gegenseitig eure Watchlist und ' +
+    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' sind' : ' ist') +
+      ' jetzt mit dir verknüpft.\n\nIhr seht ab jetzt gegenseitig eure Watchlist und ' +
       '„gesehen"-Liste. Unter „Match" seht ihr eure Übereinstimmungen. ' +
       'Lösen kannst du das links oben unter „Gemeinsam schauen".'; },
     nameFehlt: 'Bitte einen Namen eintragen.',
@@ -2286,16 +2292,33 @@ var UI_TEXTE = {
     teilen: 'Teilen',
     teilenAnsicht: 'Aktuelle Ansicht teilen',
     teilenTitel: 'Einen Titel teilen',
-    teilenProfil: 'Gesamte Watchlist teilen',
+    teilenProfil: 'Meine Watchlist teilen',
     teilenAnsichtTitel: 'Ansicht teilen',
     teilenAnsichtText: 'Schau mal — meine aktuelle Ansicht bei MovieMatch:',
-    teilenMoment: 'Diese Titel teilen',
+    teilenMoment: 'Diese Ansicht teilen',
     teilenMomentText: 'Schau mal — diese Titel bei MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' Titel, geteilt von ' + name : n + ' geteilte Titel'; },
     momentKeineTitel: 'Keine teilbaren Titel in dieser Liste.',
     momentFehler: 'Teilen hat nicht geklappt. Bitte später erneut versuchen.',
     momentWeg: 'Diese geteilte Liste gibt es nicht mehr.',
     momentSchliessen: 'Geteilte Liste schließen',
+    /* Knopf in der Kopfzeile einer geteilten Ansicht. Er verknuepft NICHT
+       sofort: Wer eine Ansicht teilt, hat dem Oeffnen seiner ganzen Watchlist
+       nicht zugestimmt -- deshalb geht von hier nur eine Anfrage raus. */
+    momentVerknuepfen: function(name){ return 'Mit ' + name + ' verknüpfen'; },
+    anfrageFrage: function(name){ return 'Du fragst ' + name + ', ob ihr euch verknüpfen wollt.<br><br>' +
+      'Nimmt ' + name + ' an, könnt ihr <b>gegenseitig eure ganze Watchlist und „gesehen&quot;-Liste ansehen</b> – ' +
+      'einschließlich der Sterne-Bewertungen – und nach gemeinsamen Titeln filtern. ' +
+      'Nicht sichtbar werden E-Mail-Adresse und Kontodaten.<br><br>' +
+      'Lösen könnt ihr die Verknüpfung jederzeit von beiden Seiten. ' +
+      'Näheres in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.'; },
+    anfrageSenden: 'Anfrage senden',
+    anfrageAbbrechen: 'Abbrechen',
+    anfrageGesendet: function(name){ return 'Die Anfrage ist unterwegs. Sobald ' + name +
+      ' sie annimmt, seht ihr eure Listen gegenseitig – du erfährst es beim nächsten Start.'; },
+    anfrageOffen: function(name){ return 'Deine Anfrage an ' + name + ' läuft noch.'; },
+    anfrageFehler: 'Die Anfrage konnte nicht gestellt werden.',
+    anfrageWeg: 'Diese Anfrage gibt es nicht mehr.',
     sucheKombinieren: 'Weitere Suche hinzufügen',
     sucheEntfernen: 'Diese Suche entfernen',
     benachrichtigungKnopf: function(an){ return 'E-Mail bei neuen Watchlist-Treffern: ' + (an ? 'An' : 'Aus'); },
@@ -2507,8 +2530,8 @@ var UI_TEXTE = {
     einladungEingeloest: 'This invitation has already been used.',
     einladungEigene: 'This is your own invitation.',
     einladungUngueltig: 'This invitation is invalid.',
-    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' have' : ' has') +
-      ' accepted your invitation.\n\nYou can now see each other’s watchlist and ' +
+    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' are' : ' is') +
+      ' now connected with you.\n\nYou can now see each other’s watchlist and ' +
       '“watched” list. Under “Match” you see your shared titles. ' +
       'You can remove this at the top left under “Watch together”.'; },
     nameFehlt: 'Please enter a name.',
@@ -2586,16 +2609,30 @@ var UI_TEXTE = {
     teilen: 'Share',
     teilenAnsicht: 'Share current view',
     teilenTitel: 'Share a title',
-    teilenProfil: 'Share entire watchlist',
+    teilenProfil: 'Share my watchlist',
     teilenAnsichtTitel: 'Share view',
     teilenAnsichtText: 'Have a look — my current view on MovieMatch:',
-    teilenMoment: 'Share these titles',
+    teilenMoment: 'Share this view',
     teilenMomentText: 'Have a look — these titles on MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' titles shared by ' + name : n + ' shared titles'; },
     momentKeineTitel: 'No shareable titles in this list.',
     momentFehler: 'Sharing failed. Please try again later.',
     momentWeg: 'This shared list no longer exists.',
     momentSchliessen: 'Close shared list',
+    momentVerknuepfen: function(name){ return 'Connect with ' + name; },
+    anfrageFrage: function(name){ return 'You are asking ' + name + ' whether you want to connect.<br><br>' +
+      'If ' + name + ' accepts, you can <b>both see each other’s entire watchlist and “watched” list</b> – ' +
+      'including star ratings – and filter for shared titles. ' +
+      'Your e-mail address and account data stay hidden.<br><br>' +
+      'Either side can remove the connection at any time. ' +
+      'More in the <a href="datenschutz.html" target="_blank" rel="noopener">privacy policy</a>.'; },
+    anfrageSenden: 'Send request',
+    anfrageAbbrechen: 'Cancel',
+    anfrageGesendet: function(name){ return 'The request is on its way. Once ' + name +
+      ' accepts, you can see each other’s lists – you will hear about it at your next start.'; },
+    anfrageOffen: function(name){ return 'Your request to ' + name + ' is still pending.'; },
+    anfrageFehler: 'The request could not be sent.',
+    anfrageWeg: 'This request no longer exists.',
     sucheKombinieren: 'Add another search',
     sucheEntfernen: 'Remove this search',
     benachrichtigungKnopf: function(an){ return 'Email for new watchlist matches: ' + (an ? 'On' : 'Off'); },
@@ -2807,8 +2844,8 @@ var UI_TEXTE = {
     einladungEingeloest: 'Cette invitation a déjà été utilisée.',
     einladungEigene: 'C’est ta propre invitation.',
     einladungUngueltig: 'Cette invitation n’est pas valide.',
-    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' ont' : ' a') +
-      ' accepté ton invitation.\n\nVous pouvez désormais voir la watchlist et la liste ' +
+    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' font' : ' fait') +
+      ' maintenant partie de tes profils liés.\n\nVous pouvez désormais voir la watchlist et la liste ' +
       '« Vus » l’un de l’autre. Sous « Match », tu vois vos titres en commun. ' +
       'Tu peux supprimer cela en haut à gauche sous « Regarder ensemble ».'; },
     nameFehlt: 'Merci d’indiquer un nom.',
@@ -2886,16 +2923,30 @@ var UI_TEXTE = {
     teilen: 'Partager',
     teilenAnsicht: 'Partager la vue actuelle',
     teilenTitel: 'Partager un titre',
-    teilenProfil: 'Partager toute la watchlist',
+    teilenProfil: 'Partager ma watchlist',
     teilenAnsichtTitel: 'Partager la vue',
     teilenAnsichtText: 'Regarde — ma vue actuelle sur MovieMatch :',
-    teilenMoment: 'Partager ces titres',
+    teilenMoment: 'Partager cette vue',
     teilenMomentText: 'Regarde — ces titres sur MovieMatch :',
     momentVon: function(n, name){ return name ? n + ' titres partagés par ' + name : n + ' titres partagés'; },
     momentKeineTitel: 'Aucun titre partageable dans cette liste.',
     momentFehler: 'Le partage a échoué. Réessaie plus tard.',
     momentWeg: 'Cette liste partagée n’existe plus.',
     momentSchliessen: 'Fermer la liste partagée',
+    momentVerknuepfen: function(name){ return 'Se connecter avec ' + name; },
+    anfrageFrage: function(name){ return 'Tu demandes à ' + name + ' si vous voulez vous connecter.<br><br>' +
+      'Si ' + name + ' accepte, vous pourrez <b>voir l’intégralité de la watchlist et de la liste « Vus » ' +
+      'l’un de l’autre</b> – y compris les notes en étoiles – et filtrer les titres en commun. ' +
+      'Ton adresse e-mail et tes données de compte restent invisibles.<br><br>' +
+      'Chacun peut supprimer la connexion à tout moment. ' +
+      'Plus d’informations dans la <a href="datenschutz.html" target="_blank" rel="noopener">politique de confidentialité</a>.'; },
+    anfrageSenden: 'Envoyer la demande',
+    anfrageAbbrechen: 'Annuler',
+    anfrageGesendet: function(name){ return 'La demande est partie. Dès que ' + name +
+      ' l’accepte, vous verrez vos listes mutuellement – tu le sauras au prochain démarrage.'; },
+    anfrageOffen: function(name){ return 'Ta demande à ' + name + ' est encore en attente.'; },
+    anfrageFehler: 'La demande n’a pas pu être envoyée.',
+    anfrageWeg: 'Cette demande n’existe plus.',
     sucheKombinieren: 'Ajouter une autre recherche',
     sucheEntfernen: 'Retirer cette recherche',
     benachrichtigungKnopf: function(an){ return 'E-mail pour les nouveautés de ta watchlist\u202f: ' + (an ? 'activé' : 'désactivé'); },
@@ -3107,8 +3158,8 @@ var UI_TEXTE = {
     einladungEingeloest: 'Esta invitación ya se ha usado.',
     einladungEigene: 'Esta es tu propia invitación.',
     einladungUngueltig: 'Esta invitación no es válida.',
-    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' han' : ' ha') +
-      ' aceptado tu invitación.\n\nAhora podéis ver la watchlist y la lista de ' +
+    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' forman' : ' forma') +
+      ' ahora parte de tus perfiles vinculados.\n\nAhora podéis ver la watchlist y la lista de ' +
       '«vistos» del otro. En «Match» veis vuestros títulos en común. ' +
       'Puedes eliminarlo arriba a la izquierda en «Ver juntos».'; },
     nameFehlt: 'Escribe un nombre, por favor.',
@@ -3186,16 +3237,30 @@ var UI_TEXTE = {
     teilen: 'Compartir',
     teilenAnsicht: 'Compartir la vista actual',
     teilenTitel: 'Compartir un título',
-    teilenProfil: 'Compartir toda la watchlist',
+    teilenProfil: 'Compartir mi watchlist',
     teilenAnsichtTitel: 'Compartir vista',
     teilenAnsichtText: 'Mira — mi vista actual en MovieMatch:',
-    teilenMoment: 'Compartir estos títulos',
+    teilenMoment: 'Compartir esta vista',
     teilenMomentText: 'Mira — estos títulos en MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' títulos compartidos por ' + name : n + ' títulos compartidos'; },
     momentKeineTitel: 'No hay títulos para compartir en esta lista.',
     momentFehler: 'No se pudo compartir. Inténtalo más tarde.',
     momentWeg: 'Esta lista compartida ya no existe.',
     momentSchliessen: 'Cerrar lista compartida',
+    momentVerknuepfen: function(name){ return 'Vincular con ' + name; },
+    anfrageFrage: function(name){ return 'Le preguntas a ' + name + ' si queréis vincularos.<br><br>' +
+      'Si ' + name + ' acepta, podréis <b>ver toda la watchlist y la lista de «vistos» del otro</b> – ' +
+      'incluidas las valoraciones con estrellas – y filtrar los títulos en común. ' +
+      'Tu correo electrónico y los datos de tu cuenta no se muestran.<br><br>' +
+      'Cualquiera de los dos puede eliminar la vinculación en cualquier momento. ' +
+      'Más información en la <a href="datenschutz.html" target="_blank" rel="noopener">política de privacidad</a>.'; },
+    anfrageSenden: 'Enviar solicitud',
+    anfrageAbbrechen: 'Cancelar',
+    anfrageGesendet: function(name){ return 'La solicitud está en camino. En cuanto ' + name +
+      ' la acepte, veréis vuestras listas mutuamente – lo sabrás en el próximo inicio.'; },
+    anfrageOffen: function(name){ return 'Tu solicitud a ' + name + ' sigue pendiente.'; },
+    anfrageFehler: 'No se pudo enviar la solicitud.',
+    anfrageWeg: 'Esta solicitud ya no existe.',
     sucheKombinieren: 'Añadir otra búsqueda',
     sucheEntfernen: 'Quitar esta búsqueda',
     benachrichtigungKnopf: function(an){ return 'Correo con novedades de tu watchlist: ' + (an ? 'activado' : 'desactivado'); },
@@ -3407,8 +3472,8 @@ var UI_TEXTE = {
     einladungEingeloest: 'Questo invito è già stato usato.',
     einladungEigene: 'Questo è il tuo invito.',
     einladungUngueltig: 'Questo invito non è valido.',
-    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' hanno' : ' ha') +
-      ' accettato il tuo invito.\n\nOra potete vedere la watchlist e la lista dei ' +
+    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' fanno' : ' fa') +
+      ' ora parte dei tuoi profili collegati.\n\nOra potete vedere la watchlist e la lista dei ' +
       '“visti” l’uno dell’altro. In “Match” vedi i vostri titoli in comune. ' +
       'Puoi rimuovere il collegamento in alto a sinistra in “Guarda insieme”.'; },
     nameFehlt: 'Inserisci un nome.',
@@ -3486,16 +3551,30 @@ var UI_TEXTE = {
     teilen: 'Condividi',
     teilenAnsicht: 'Condividi la vista attuale',
     teilenTitel: 'Condividi un titolo',
-    teilenProfil: 'Condividi l’intera watchlist',
+    teilenProfil: 'Condividi la mia watchlist',
     teilenAnsichtTitel: 'Condividi vista',
     teilenAnsichtText: 'Guarda — la mia vista attuale su MovieMatch:',
-    teilenMoment: 'Condividi questi titoli',
+    teilenMoment: 'Condividi questa vista',
     teilenMomentText: 'Guarda — questi titoli su MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' titoli condivisi da ' + name : n + ' titoli condivisi'; },
     momentKeineTitel: 'Nessun titolo condivisibile in questa lista.',
     momentFehler: 'Condivisione non riuscita. Riprova più tardi.',
     momentWeg: 'Questa lista condivisa non esiste più.',
     momentSchliessen: 'Chiudi lista condivisa',
+    momentVerknuepfen: function(name){ return 'Collegati con ' + name; },
+    anfrageFrage: function(name){ return 'Stai chiedendo a ' + name + ' se volete collegarvi.<br><br>' +
+      'Se ' + name + ' accetta, potrete <b>vedere l’intera watchlist e la lista dei “visti” l’uno dell’altro</b> – ' +
+      'comprese le valutazioni a stelle – e filtrare i titoli in comune. ' +
+      'Il tuo indirizzo e-mail e i dati del conto restano nascosti.<br><br>' +
+      'Il collegamento può essere rimosso da entrambi in qualsiasi momento. ' +
+      'Maggiori informazioni nell’<a href="datenschutz.html" target="_blank" rel="noopener">informativa sulla privacy</a>.'; },
+    anfrageSenden: 'Invia richiesta',
+    anfrageAbbrechen: 'Annulla',
+    anfrageGesendet: function(name){ return 'La richiesta è partita. Appena ' + name +
+      ' la accetta, vedrete le vostre liste a vicenda – lo saprai al prossimo avvio.'; },
+    anfrageOffen: function(name){ return 'La tua richiesta a ' + name + ' è ancora in sospeso.'; },
+    anfrageFehler: 'Non è stato possibile inviare la richiesta.',
+    anfrageWeg: 'Questa richiesta non esiste più.',
     sucheKombinieren: 'Aggiungi un’altra ricerca',
     sucheEntfernen: 'Rimuovi questa ricerca',
     benachrichtigungKnopf: function(an){ return 'E-mail per le novità della tua watchlist: ' + (an ? 'attiva' : 'disattivata'); },
@@ -3707,8 +3786,8 @@ var UI_TEXTE = {
     einladungEingeloest: 'Deze uitnodiging is al gebruikt.',
     einladungEigene: 'Dit is je eigen uitnodiging.',
     einladungUngueltig: 'Deze uitnodiging is ongeldig.',
-    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' hebben' : ' heeft') +
-      ' je uitnodiging geaccepteerd.\n\nJullie kunnen nu elkaars watchlist en ' +
+    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' zijn' : ' is') +
+      ' nu met je verbonden.\n\nJullie kunnen nu elkaars watchlist en ' +
       '“gezien”-lijst zien. Onder “Match” zie je jullie gedeelde titels. ' +
       'Je kunt dit linksboven onder “Samen kijken” verwijderen.'; },
     nameFehlt: 'Vul een naam in.',
@@ -3786,16 +3865,30 @@ var UI_TEXTE = {
     teilen: 'Delen',
     teilenAnsicht: 'Huidige weergave delen',
     teilenTitel: 'Een titel delen',
-    teilenProfil: 'Volledige watchlist delen',
+    teilenProfil: 'Mijn watchlist delen',
     teilenAnsichtTitel: 'Weergave delen',
     teilenAnsichtText: 'Kijk — mijn huidige weergave op MovieMatch:',
-    teilenMoment: 'Deze titels delen',
+    teilenMoment: 'Deze weergave delen',
     teilenMomentText: 'Kijk — deze titels op MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' titels gedeeld door ' + name : n + ' gedeelde titels'; },
     momentKeineTitel: 'Geen deelbare titels in deze lijst.',
     momentFehler: 'Delen is niet gelukt. Probeer het later opnieuw.',
     momentWeg: 'Deze gedeelde lijst bestaat niet meer.',
     momentSchliessen: 'Gedeelde lijst sluiten',
+    momentVerknuepfen: function(name){ return 'Verbinden met ' + name; },
+    anfrageFrage: function(name){ return 'Je vraagt ' + name + ' of jullie verbinding willen maken.<br><br>' +
+      'Als ' + name + ' accepteert, kunnen jullie <b>elkaars volledige watchlist en “gezien”-lijst zien</b> – ' +
+      'inclusief de sterrenbeoordelingen – en filteren op gedeelde titels. ' +
+      'Je e-mailadres en accountgegevens blijven verborgen.<br><br>' +
+      'Beide kanten kunnen de verbinding altijd verwijderen. ' +
+      'Meer in de <a href="datenschutz.html" target="_blank" rel="noopener">privacyverklaring</a>.'; },
+    anfrageSenden: 'Verzoek sturen',
+    anfrageAbbrechen: 'Annuleren',
+    anfrageGesendet: function(name){ return 'Het verzoek is onderweg. Zodra ' + name +
+      ' het accepteert, zien jullie elkaars lijsten – je hoort het bij de volgende start.'; },
+    anfrageOffen: function(name){ return 'Je verzoek aan ' + name + ' loopt nog.'; },
+    anfrageFehler: 'Het verzoek kon niet worden verstuurd.',
+    anfrageWeg: 'Dit verzoek bestaat niet meer.',
     sucheKombinieren: 'Nog een zoekopdracht toevoegen',
     sucheEntfernen: 'Deze zoekopdracht verwijderen',
     benachrichtigungKnopf: function(an){ return 'E-mail bij nieuwe watchlist-treffers: ' + (an ? 'aan' : 'uit'); },
@@ -4007,8 +4100,8 @@ var UI_TEXTE = {
     einladungEingeloest: 'Este convite já foi usado.',
     einladungEigene: 'Este é o seu próprio convite.',
     einladungUngueltig: 'Este convite é inválido.',
-    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' aceitaram' : ' aceitou') +
-      ' o seu convite.\n\nAgora vocês podem ver a watchlist e a lista de ' +
+    einladungAngenommen: function(wer, mehrere){ return wer + (mehrere ? ' fazem' : ' faz') +
+      ' agora parte dos seus perfis vinculados.\n\nAgora vocês podem ver a watchlist e a lista de ' +
       '“assistidos” um do outro. Em “Match” você vê os títulos em comum. ' +
       'Você pode remover isso no canto superior esquerdo, em “Assistir juntos”.'; },
     nameFehlt: 'Digite um nome, por favor.',
@@ -4086,16 +4179,30 @@ var UI_TEXTE = {
     teilen: 'Compartilhar',
     teilenAnsicht: 'Compartilhar a visão atual',
     teilenTitel: 'Compartilhar um título',
-    teilenProfil: 'Compartilhar toda a watchlist',
+    teilenProfil: 'Compartilhar minha watchlist',
     teilenAnsichtTitel: 'Compartilhar visão',
     teilenAnsichtText: 'Olha — minha visão atual no MovieMatch:',
-    teilenMoment: 'Compartilhar estes títulos',
+    teilenMoment: 'Compartilhar esta visão',
     teilenMomentText: 'Olha — estes títulos no MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' títulos compartilhados por ' + name : n + ' títulos compartilhados'; },
     momentKeineTitel: 'Nenhum título compartilhável nesta lista.',
     momentFehler: 'Não foi possível compartilhar. Tente novamente mais tarde.',
     momentWeg: 'Esta lista compartilhada não existe mais.',
     momentSchliessen: 'Fechar lista compartilhada',
+    momentVerknuepfen: function(name){ return 'Conectar com ' + name; },
+    anfrageFrage: function(name){ return 'Você está perguntando a ' + name + ' se vocês querem se conectar.<br><br>' +
+      'Se ' + name + ' aceitar, vocês poderão <b>ver toda a watchlist e a lista de “assistidos” um do outro</b> – ' +
+      'incluindo as avaliações por estrelas – e filtrar os títulos em comum. ' +
+      'Seu e-mail e os dados da conta não ficam visíveis.<br><br>' +
+      'Os dois lados podem remover a conexão a qualquer momento. ' +
+      'Mais na <a href="datenschutz.html" target="_blank" rel="noopener">política de privacidade</a>.'; },
+    anfrageSenden: 'Enviar pedido',
+    anfrageAbbrechen: 'Cancelar',
+    anfrageGesendet: function(name){ return 'O pedido está a caminho. Assim que ' + name +
+      ' aceitar, vocês verão as listas um do outro – você saberá no próximo início.'; },
+    anfrageOffen: function(name){ return 'Seu pedido para ' + name + ' ainda está pendente.'; },
+    anfrageFehler: 'Não foi possível enviar o pedido.',
+    anfrageWeg: 'Este pedido não existe mais.',
     sucheKombinieren: 'Adicionar outra busca',
     sucheEntfernen: 'Remover esta busca',
     benachrichtigungKnopf: function(an){ return 'E-mail para novos matches na watchlist: ' + (an ? 'Ativado' : 'Desativado'); },
@@ -11053,7 +11160,7 @@ function ansichtAusLink(){
   else { updateFilterRowUI(); renderCurrentTab(); }
   return true;
 }
-/* ---- "Diese Titel teilen": Momentaufnahmen ----
+/* ---- "Diese Ansicht teilen": Momentaufnahmen ----
    Ersetzt im Teilen-Blatt den Ansicht-Link (Entscheidung vom 14. August):
    Der Ansicht-Link uebertrug nur EINSTELLUNGEN -- der Empfaenger sah seine
    eigenen Markierungen durch fremde Filter, also meist etwas anderes (oder
@@ -11098,7 +11205,11 @@ async function momentTeilen(){
 async function momentAusLink(token){
   try {
     var d = await apiRequest('GET', '/api/share/titel-liste/' + token);
-    MOMENT = { ids: d.ids || [], von: d.von || null };
+    // token bleibt liegen: Er ist der Bezugspunkt fuer die Verknuepfungs-Anfrage
+    // aus der Kopfzeile (siehe anfrageAusMoment) -- eine Kontonummer steht
+    // absichtlich nirgends im Link.
+    MOMENT = { ids: d.ids || [], von: d.von || null, token: token,
+               vonMir: !!d.vonMir, verknuepft: !!d.verknuepft, gefragt: !!d.angefragt };
   } catch (e) { momentVerlassen(); alert(TXT.momentWeg); return; }
   einstiegSetzen();
   renderCurrentTab();
@@ -11124,13 +11235,28 @@ function renderMoment(profile){
   var bar = document.createElement('div');
   bar.className = 'moment-bar';
   var text = document.createElement('span');
+  text.className = 'moment-text';
   text.textContent = TXT.momentVon(items.length, MOMENT.von);
+  bar.appendChild(text);
+  // "Mit X verknuepfen" -- nur wenn es etwas zu verknuepfen gibt: nicht bei der
+  // eigenen Liste, nicht wenn man schon verknuepft ist, nicht wenn die Anfrage
+  // in dieser Sitzung schon raus ist und nicht ohne Namen (dann waere gar nicht
+  // erkennbar, wem man da zustimmt). Abgemeldet steht der Knopf sehr wohl da --
+  // er fuehrt dann zuerst durch die Anmeldung.
+  if (MOMENT.von && !MOMENT.vonMir && !MOMENT.verknuepft && !MOMENT.gefragt) {
+    var v = document.createElement('button');
+    v.type = 'button';
+    v.className = 'moment-verknuepfen';
+    v.textContent = TXT.momentVerknuepfen(MOMENT.von);
+    v.onclick = function(){ anfrageAusMoment(); };
+    bar.appendChild(v);
+  }
   var x = document.createElement('button');
   x.type = 'button';
   x.textContent = '✕';
   x.setAttribute('aria-label', TXT.momentSchliessen);
   x.onclick = momentSchliessen;
-  bar.appendChild(text); bar.appendChild(x);
+  bar.appendChild(x);
   list.appendChild(bar);
   var sichtbar = items.slice(0, titelLimit);
   sichtbar.forEach(function(p){ list.appendChild(poolItemLi(p, punkteFuer(p, profile))); });
@@ -11211,6 +11337,10 @@ function closeInviteModal(){
   _inviteModal.style.display = 'none';
   // Token aus der Adresszeile entfernen, damit ein Neuladen ihn nicht erneut anbietet.
   try { history.replaceState(null, '', location.pathname); } catch (e) {}
+  // Steht darunter eine geteilte Ansicht, kann sich ihre Kopfzeile geaendert
+  // haben (der Verknuepfen-Knopf faellt nach einer Anfrage weg) -- das gilt
+  // auch fuers Schliessen ueber das Kreuz, das hier landet.
+  if (MOMENT) renderCurrentTab();
 }
 document.getElementById('inviteModalX').onclick = closeInviteModal;
 async function handleInviteToken(token){
@@ -11269,6 +11399,102 @@ async function handleInviteToken(token){
     actions.innerHTML = '<button type="button" class="modal-yes" id="inviteOkBtn">' + TXT.schliessen + '</button>';
     document.getElementById('inviteOkBtn').onclick = closeInviteModal;
   }
+}
+
+/* ---- Verknuepfungs-Anfragen ----
+   Zwei Seiten desselben Vorgangs, beide ueber das Einladungs-Fenster:
+
+   1. anfrageAusMoment -- der Knopf "Mit X verknuepfen" in der Kopfzeile einer
+      geteilten Ansicht. Er verknuepft NICHT sofort. Wer eine Ansicht teilt, hat
+      damit eine Liste gezeigt, nicht seine ganze Watchlist samt Bewertungen
+      geoeffnet; die Zustimmung dazu fehlt auf dieser Seite noch. Also geht von
+      hier nur eine Anfrage raus (siehe routes/links.js).
+   2. zeigeAnfragen -- beim Start: offene Anfragen an mich, eine nach der
+      anderen. Erst das Annehmen legt die Verknuepfung an.
+
+   Der Text vor dem Absenden ist derselbe Umfang wie bei einer Einladung: Auch
+   die anfragende Seite oeffnet mit dem "Ja" ihre eigenen Listen. */
+function anfrageModalSchliessen(){
+  _inviteModal.style.display = 'none';
+  if (MOMENT) renderCurrentTab();
+}
+async function anfrageAusMoment(){
+  if (!MOMENT || !MOMENT.token || !MOMENT.von) return;
+  // Ohne Konto laesst sich niemand verknuepfen -- erst anmelden, dann weiter.
+  // Die Momentaufnahme bleibt dabei stehen (kein Neuladen).
+  if (!CURRENT_USER) { requireLogin(anfrageAusMoment); return; }
+  var name = MOMENT.von, token = MOMENT.token;
+  var textEl = document.getElementById('inviteText');
+  var actions = document.getElementById('inviteActions');
+  _inviteModal.style.display = 'flex';
+  textEl.innerHTML = TXT.anfrageFrage(esc(name));
+  actions.innerHTML = '<button type="button" class="modal-no" id="anfrageNoBtn">' + TXT.anfrageAbbrechen + '</button>' +
+                      '<button type="button" class="modal-yes" id="anfrageYesBtn">' + TXT.anfrageSenden + '</button>';
+  document.getElementById('anfrageNoBtn').onclick = anfrageModalSchliessen;
+  document.getElementById('anfrageYesBtn').onclick = async function(){
+    this.disabled = true;
+    var fertig = anfrageModalSchliessen;   // zeichnet die Kopfzeile ohne den Knopf neu
+    try {
+      var d = await apiRequest('POST', '/api/links/anfrage', { token: token });
+      // Hatte die andere Seite mich schon angefragt, liegen beide Zustimmungen
+      // vor und der Server hat direkt verknuepft.
+      if (MOMENT && MOMENT.token === token) {
+        if (d.status === 'verknuepft') MOMENT.verknuepft = true; else MOMENT.gefragt = true;
+      }
+      if (d.status === 'verknuepft') {
+        await loadLinkedProfiles();
+        updateProfileBtn();
+        textEl.textContent = TXT.verknuepftMit(d.name);
+      } else if (d.status === 'schon_gefragt') {
+        textEl.textContent = TXT.anfrageOffen(d.name);
+      } else {
+        textEl.textContent = TXT.anfrageGesendet(d.name);
+      }
+    } catch (err) {
+      textEl.textContent = err.code === 'anfrage_eigene' ? TXT.einladungEigene
+                         : err.code === 'unbekannt' ? TXT.momentWeg
+                         : TXT.anfrageFehler;
+    }
+    actions.innerHTML = '<button type="button" class="modal-yes" id="anfrageOkBtn">' + TXT.allesKlar + '</button>';
+    document.getElementById('anfrageOkBtn').onclick = fertig;
+  };
+}
+async function zeigeAnfragen(){
+  if (!CURRENT_USER) return;
+  var offen = null;
+  try { offen = await apiRequest('GET', '/api/links/anfragen'); }
+  catch (e) { return; }   /* Beiwerk -- ein Fehler darf den Start nicht stoeren */
+  if (!offen || !offen.length) return;
+  naechsteAnfrage(offen, 0);
+}
+function naechsteAnfrage(liste, i){
+  if (i >= liste.length) { anfrageModalSchliessen(); return; }
+  var a = liste[i];
+  var textEl = document.getElementById('inviteText');
+  var actions = document.getElementById('inviteActions');
+  _inviteModal.style.display = 'flex';
+  // Derselbe Text wie bei einer Einladung -- der Vorgang ist derselbe, nur die
+  // Richtung ist eine andere.
+  textEl.innerHTML = TXT.einladungFrage(esc(a.name));
+  actions.innerHTML = '<button type="button" class="modal-no" id="anfrageAbBtn">' + TXT.ablehnen + '</button>' +
+                      '<button type="button" class="modal-yes" id="anfrageAnBtn">' + TXT.annehmen + '</button>';
+  async function antworten(annehmen){
+    document.getElementById('anfrageAbBtn').disabled = true;
+    document.getElementById('anfrageAnBtn').disabled = true;
+    try {
+      var d = await apiRequest('POST', '/api/links/anfragen/' + encodeURIComponent(a.id), { annehmen: annehmen });
+      if (!annehmen) { naechsteAnfrage(liste, i + 1); return; }
+      await loadLinkedProfiles();
+      updateProfileBtn();
+      textEl.textContent = TXT.verknuepftMit(d.linked.name);
+    } catch (err) {
+      textEl.textContent = err.code === 'anfrage_weg' ? TXT.anfrageWeg : TXT.anfrageFehler;
+    }
+    actions.innerHTML = '<button type="button" class="modal-yes" id="anfrageWeiterBtn">' + TXT.allesKlar + '</button>';
+    document.getElementById('anfrageWeiterBtn').onclick = function(){ naechsteAnfrage(liste, i + 1); };
+  }
+  document.getElementById('anfrageAbBtn').onclick = function(){ antworten(false); };
+  document.getElementById('anfrageAnBtn').onclick = function(){ antworten(true); };
 }
 
 /* ---- Anzeigename nachtraeglich erfragen (Konten von vor dieser Funktion) ---- */
@@ -12276,6 +12502,11 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
     try { history.replaceState(null, '', location.pathname); } catch (e) {}
     openFeedbackModal();
   }
+  // Offene Verknuepfungs-Anfragen an mich. Bewusst NICHT, wenn dieser Aufruf
+  // schon ein Fenster mitbringt (Einladung, geteilter Titel, Feedback) oder
+  // wenn gerade eine geteilte Ansicht aufgeht -- das Fenster deckte sonst
+  // genau das zu, wofuer jemand dem Link gefolgt ist.
+  if (!einladung && !geteilt && !feedbackGewuenscht && !momentToken && !ansichtLinkDa) zeigeAnfragen();
   if (einladung) handleInviteToken(einladung);
   else if (geteilt) zeigeGeteiltenTitel(geteilt);
   else if (!feedbackGewuenscht) {

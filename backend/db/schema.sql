@@ -115,8 +115,10 @@ CREATE INDEX IF NOT EXISTS idx_user_links_user ON user_links (user_id);
 
 -- Einladungen zum Verknuepfen. Wie bei password_reset_tokens wird NUR der Hash
 -- gespeichert -- wer die Datenbank liest, kann damit keine Einladung einloesen.
--- Einmalig einloesbar (accepted_by) und mit Ablaufdatum, weil ein weitergeleiteter
--- Link sonst dauerhaft Zugriff auf die eigene Titelliste eroeffnen wuerde.
+-- Mit Ablaufdatum, weil ein weitergeleiteter Link sonst dauerhaft Zugriff auf
+-- die eigene Titelliste eroeffnen wuerde. Einmalig einloesbar waren sie nur bis
+-- zum 13. August 2026 (accepted_by); seitdem zaehlt user_link_invite_uses die
+-- Einloesungen, siehe unten.
 CREATE TABLE IF NOT EXISTS user_link_invites (
   token_hash  TEXT PRIMARY KEY,
   inviter_id  BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -166,6 +168,27 @@ CREATE INDEX IF NOT EXISTS idx_users_invited_by ON users (invited_by_user_id);
 -- naechsten Oeffnen der App. Steht auf der Zeile der einladenden Person, wird
 -- dort gesetzt und nach dem Anzeigen wieder geleert.
 ALTER TABLE user_links ADD COLUMN IF NOT EXISTS hinweis_offen BOOLEAN NOT NULL DEFAULT false;
+
+-- Verknuepfungs-Anfragen (19. August 2026). Sie gehoeren zum Knopf
+-- "Mit X verknuepfen" in der Kopfzeile einer geteilten Ansicht (?titel=TOKEN).
+--
+-- Warum eine Anfrage und nicht gleich eine Verknuepfung: Bei einem
+-- Einladungslink hat die teilende Person vorher ausdruecklich zugestimmt (der
+-- Text vor dem Erstellen sagt, was sichtbar wird). Beim Ansicht-Link hat sie
+-- das NICHT -- sie wollte eine Liste zeigen, nicht ihre ganze Watchlist samt
+-- Bewertungen oeffnen. Ein Klick der Gegenseite darf das deshalb nicht allein
+-- ausloesen; die Verknuepfung entsteht erst mit dem Annehmen (routes/links.js).
+--
+-- Eine Zeile je Richtung. Liegt die Gegenanfrage schon vor, sind beide
+-- Zustimmungen da und die Verknuepfung entsteht sofort.
+CREATE TABLE IF NOT EXISTS user_link_anfragen (
+  von_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  an_id      BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (von_id, an_id),
+  CHECK (von_id <> an_id)
+);
+CREATE INDEX IF NOT EXISTS idx_user_link_anfragen_an ON user_link_anfragen (an_id);
 
 CREATE TABLE IF NOT EXISTS password_reset_tokens (
   id         BIGSERIAL PRIMARY KEY,
@@ -751,7 +774,7 @@ BEGIN
   END IF;
 END $$;
 
--- "Diese Titel teilen" -- Momentaufnahmen (14. August 2026, ersetzt im
+-- "Diese Ansicht teilen" -- Momentaufnahmen (14. August 2026, ersetzt im
 -- Teilen-Blatt den Ansicht-Link): eine feste Liste von Titel-Kennungen in
 -- Anzeige-Reihenfolge, geteilt per Token-Link (?titel=TOKEN). BEWUSST ohne
 -- Zeitverfall (Entscheidung vom 14. August): Ein einmal geteilter Link soll
