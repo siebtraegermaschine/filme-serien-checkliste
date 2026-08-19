@@ -81,14 +81,34 @@
       "frei": true,
       "link": "https://www.ardmediathek.de/live",
       "kanal": "Das Erste",
-      "info": "Frei empfangbar; Stream in der ARD-Mediathek."
+      "info": "Frei empfangbar; Stream in der ARD-Mediathek oder über Joyn.",
+      "links": [
+        {
+          "n": "ARD Mediathek",
+          "url": "https://www.ardmediathek.de/live"
+        },
+        {
+          "n": "Joyn",
+          "url": "https://www.joyn.de/live-tv/das-erste"
+        }
+      ]
     },
     "zdf": {
       "name": "ZDF",
       "frei": true,
       "link": "https://www.zdf.de/live-tv",
       "kanal": "ZDF",
-      "info": "Frei empfangbar; Stream in der ZDF-Mediathek."
+      "info": "Frei empfangbar; Stream in der ZDF-Mediathek oder über Joyn.",
+      "links": [
+        {
+          "n": "ZDF Mediathek",
+          "url": "https://www.zdf.de/live-tv"
+        },
+        {
+          "n": "Joyn",
+          "url": "https://www.joyn.de/live-tv/zdf"
+        }
+      ]
     },
     "rtl": {
       "name": "RTL",
@@ -549,5 +569,5 @@
       }
     }
   },
-  "_stand": "2026-08-19 (Sky/WOW: zwei Links im Sender-Popup)"
+  "_stand": "2026-08-19 (ARD/ZDF: Mediathek- und Joyn-Knopf im Sender-Popup)"
 }
