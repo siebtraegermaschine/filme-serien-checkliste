@@ -389,6 +389,23 @@
   .shared-name { color:var(--accent); font-size:17px; font-weight:700; text-align:center; }
   .shared-meta { color:var(--text-dim); font-size:13px; text-align:center; margin-top:4px; }
   .shared-plot { color:var(--text); font-size:13.5px; line-height:1.45; margin:12px 0 4px; text-align:justify; }
+  /* Lange Inhaltsangaben (ueber 1000 Zeichen sind keine Seltenheit) schoben
+     frueher Titel, Knoepfe und Kreuz aus dem Bild -- und scrollen liess sich im
+     Fenster nicht. Jetzt steht der Text eingeklappt auf vier Zeilen, "Mehr"
+     zeigt den Rest, und der Rumpf scrollt (siehe #sharedTitleBody). */
+  .shared-plot.eingeklappt { display:-webkit-box; -webkit-line-clamp:4; line-clamp:4;
+    -webkit-box-orient:vertical; overflow:hidden; }
+  .plot-mehr { display:block; margin:2px auto 0; background:none; border:none; padding:4px 6px;
+    color:var(--accent); font-size:12.5px; font-weight:600; cursor:pointer; }
+  /* Nur der Rumpf scrollt, damit das Schliessen-Kreuz oben stehen bleibt.
+     100dvh neben 100vh wegen der ein- und ausfahrenden Leisten am Handy: 100vh
+     ist dort die GROESSTE Hoehe, das Fenster raegte also weiter unten heraus. */
+  #sharedTitleBody { max-height:calc(100vh - 96px); max-height:calc(100dvh - 96px);
+    overflow-y:auto; overscroll-behavior:contain; }
+  /* Dasselbe fuer den Zustimmungstext beim Verknuepfen -- er ist absichtlich
+     ausfuehrlich und passt auf kleinen Geraeten sonst nicht neben die Knoepfe. */
+  #inviteText { max-height:calc(100vh - 250px); max-height:calc(100dvh - 250px);
+    overflow-y:auto; overscroll-behavior:contain; }
   .shared-von { color:var(--text-dim); font-size:13px; text-align:center; margin-bottom:10px; }
   /* Trailer ueber die volle Breite, ueber den Watchlist/Gesehen-Knoepfen. Im
      Stil des Trailer-Play-Knopfs (Akzent), damit er als eigene Handlung lesbar
@@ -2088,6 +2105,8 @@ var UI_TEXTE = {
     aehnlicheTitelZu: function(t){ return 'Ähnliche Titel zu „' + t + '“'; },
     keineAehnlichen: 'Keine ähnlichen Titel für diese Filterkombination.',
     mehrLaden: 'Mehr laden',
+    textMehr: 'Mehr',
+    textWeniger: 'Weniger',
     mehrAnzeigen: function(n){ return 'Mehr anzeigen (' + n + ' weitere)'; },
     laedt: 'Lädt …',
     regie: 'Regie', originaltitel: 'Originaltitel:', besetzung: 'Besetzung:',
@@ -2406,6 +2425,8 @@ var UI_TEXTE = {
     aehnlicheTitelZu: function(t){ return 'Titles similar to “' + t + '”'; },
     keineAehnlichen: 'No similar titles for this filter combination.',
     mehrLaden: 'Load more',
+    textMehr: 'More',
+    textWeniger: 'Less',
     mehrAnzeigen: function(n){ return 'Show more (' + n + ' more)'; },
     laedt: 'Loading …',
     regie: 'Director', originaltitel: 'Original title:', besetzung: 'Cast:',
@@ -2720,6 +2741,8 @@ var UI_TEXTE = {
     aehnlicheTitelZu: function(t){ return 'Titres similaires à « ' + t + ' »'; },
     keineAehnlichen: 'Aucun titre similaire pour cette combinaison de filtres.',
     mehrLaden: 'Charger plus',
+    textMehr: 'Plus',
+    textWeniger: 'Moins',
     mehrAnzeigen: function(n){ return 'Afficher plus (' + n + ' de plus)'; },
     laedt: 'Chargement …',
     regie: 'Réalisation', originaltitel: 'Titre original :', besetzung: 'Distribution :',
@@ -3034,6 +3057,8 @@ var UI_TEXTE = {
     aehnlicheTitelZu: function(t){ return 'Títulos similares a «' + t + '»'; },
     keineAehnlichen: 'No hay títulos similares para esta combinación de filtros.',
     mehrLaden: 'Cargar más',
+    textMehr: 'Más',
+    textWeniger: 'Menos',
     mehrAnzeigen: function(n){ return 'Mostrar más (' + n + ' más)'; },
     laedt: 'Cargando …',
     regie: 'Dirección', originaltitel: 'Título original:', besetzung: 'Reparto:',
@@ -3348,6 +3373,8 @@ var UI_TEXTE = {
     aehnlicheTitelZu: function(t){ return 'Titoli simili a “' + t + '”'; },
     keineAehnlichen: 'Nessun titolo simile per questa combinazione di filtri.',
     mehrLaden: 'Carica altri',
+    textMehr: 'Altro',
+    textWeniger: 'Meno',
     mehrAnzeigen: function(n){ return 'Mostra altri (' + n + ' in più)'; },
     laedt: 'Caricamento …',
     regie: 'Regia', originaltitel: 'Titolo originale:', besetzung: 'Cast:',
@@ -3662,6 +3689,8 @@ var UI_TEXTE = {
     aehnlicheTitelZu: function(t){ return 'Titels vergelijkbaar met “' + t + '”'; },
     keineAehnlichen: 'Geen vergelijkbare titels voor deze filtercombinatie.',
     mehrLaden: 'Meer laden',
+    textMehr: 'Meer',
+    textWeniger: 'Minder',
     mehrAnzeigen: function(n){ return 'Meer tonen (nog ' + n + ')'; },
     laedt: 'Laden …',
     regie: 'Regie', originaltitel: 'Originele titel:', besetzung: 'Cast:',
@@ -3976,6 +4005,8 @@ var UI_TEXTE = {
     aehnlicheTitelZu: function(t){ return 'Títulos semelhantes a “' + t + '”'; },
     keineAehnlichen: 'Nenhum título semelhante para essa combinação de filtros.',
     mehrLaden: 'Carregar mais',
+    textMehr: 'Mais',
+    textWeniger: 'Menos',
     mehrAnzeigen: function(n){ return 'Mostrar mais (+' + n + ')'; },
     laedt: 'Carregando …',
     regie: 'Direção', originaltitel: 'Título original:', besetzung: 'Elenco:',
@@ -13543,6 +13574,26 @@ async function idFuerGeteilten(d){
   });
 }
 
+// Klappt eine lange Inhaltsangabe ein und haengt einen "Mehr"-Knopf darunter.
+// Gemessen wird erst nach dem Layout: Passt der Text ohnehin in vier Zeilen,
+// bleibt alles wie es war und es erscheint kein Knopf.
+function plotAusklappbar(el){
+  if (!el) return;
+  el.classList.add('eingeklappt');
+  requestAnimationFrame(function(){
+    if (el.scrollHeight <= el.clientHeight + 2) { el.classList.remove('eingeklappt'); return; }
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'plot-mehr';
+    btn.textContent = TXT.textMehr;
+    btn.onclick = function(){
+      var zu = el.classList.toggle('eingeklappt');
+      btn.textContent = zu ? TXT.textMehr : TXT.textWeniger;
+    };
+    el.insertAdjacentElement('afterend', btn);
+  });
+}
+
 async function zeigeGeteiltenTitel(ziel){
   var koerper = document.getElementById('sharedTitleBody');
   koerper.innerHTML = '<div class="share-preview-lade">' + TXT.titelWirdGeladen + '</div>';
@@ -13573,6 +13624,8 @@ async function zeigeGeteiltenTitel(ziel){
     (trailerApi ? '<button type="button" class="shared-trailer-btn" id="sharedTrailerBtn">' + TXT.trailerAnsehen + '</button>' : '') +
     '<div class="modal-actions" id="sharedActions"></div>' +
     '<div class="share-hint" id="sharedHint"></div>';
+
+  plotAusklappbar(koerper.querySelector('.shared-plot'));
 
   // Der Trailer stapelt sich als eigenes Popup ueber diesem -- danach ist man
   // wieder hier und kann sich entscheiden. Steht ausserhalb des Anmelde-Zweigs,
