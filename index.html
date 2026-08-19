@@ -147,14 +147,28 @@
     border-color: var(--accent);
     color: var(--accent);
   }
-  /* Kino tut etwas anderes als die beiden davor: Filme und Serien sind Filter,
-     die sich frei kombinieren lassen (beide koennen gleichzeitig leuchten),
-     Kino wechselt auf eine eigene Seite. Sichtbar gemacht wird das allein
-     durch die runde Form statt der eckigen -- der fruehere Abstand samt
-     senkrechter Trennlinie ist am 13. August entfallen, damit die drei
-     Knoepfe buendig ueber den Statusknoepfen stehen. */
-  .tabs .kino-tab {
+  /* Kino und Sport tun etwas anderes als die beiden davor: Filme und Serien
+     sind Filter, die sich frei kombinieren lassen (beide koennen gleichzeitig
+     leuchten), Kino und Sport wechseln je auf eine eigene Seite. Sichtbar
+     gemacht wird das durch die runde Form und die reine Symbol-Darstellung
+     (Umbau 19. August 2026, vorher stand "🍿 Kino" ausgeschrieben).
+
+     Zur Breite: Beide zusammen (samt 4px Fuge) sollen exakt so breit sein wie
+     "Neue entdecken" darunter. Die drei Statusknoepfe teilen sich ihre Zeile
+     zu gleichen Teilen (flex:1 in .filter-group, Fuge 4px), einer ist also
+     (100% - 8px)/3 breit. Kino+Sport+4px = (100% - 8px)/3
+     => je Knopf (100% - 8px)/6 - 2px. Prozente in flex-basis beziehen sich
+     auf die Reihe selbst -- .tabs und .toolbar haben dieselbe Innenbreite
+     (max-width 700, 20px Rand), die Rechnung stimmt daher auf jeder
+     Schirmbreite. Filme und Serien behalten flex:1 und teilen sich den Rest. */
+  /* Mit .tabs-row im Selektor (drei Klassen): Die Grundregel
+     ".tabs .tabs-row button" weiter unten hat (0,2,1) und wuerde flex und
+     padding sonst ueberstimmen -- Spezifitaet schlaegt Reihenfolge. */
+  .tabs .tabs-row .kino-tab, .tabs .tabs-row .sport-tab {
     border-radius: 999px;
+    flex: 0 0 calc((100% - 8px) / 6 - 2px);
+    padding: 11px 0;
+    font-size: 16px;
   }
   /* Der frueher hier stehende Discovery-Button ("Alle Filme & Serien
      entdecken") ist entfallen: "Neue entdecken" ist jetzt ein dritter Status neben
@@ -523,6 +537,59 @@
     color:var(--text); font-size:15px; font-weight:700; }
   .cinema-heading .cinema-count { color:var(--text-dim); font-weight:600; }
   .cinema-empty { color:var(--text-dim); font-size:13px; padding:6px 20px; max-width:700px; margin:0 auto; box-sizing:border-box; }
+
+  /* ===== Sport-Seite (PLAN-SPORT.md) =====
+     Nutzt die Kino-Bausteine (.cinema-page-header/-heading/-empty) fuer den
+     Rahmen; die Spielzeilen sind eigene Karten -- ein Spiel hat kein Poster
+     und keine Watchlist, poolItemLi passt hier nicht. */
+  #sportAbosBtn {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 9px 14px; color: var(--text-dim); font-size: 13px; cursor: pointer;
+    transition: all 0.15s; white-space: nowrap; width: 100%;
+  }
+  @media (hover: hover) { #sportAbosBtn:hover { border-color: var(--accent); color: var(--accent); } }
+  /* Chips: Wettbewerbe als ODER-Auswahl (einer oder "Alle") plus "Nur Free-TV"
+     als UND-Filter -- gleiche Optik wie die Tabs, nur kleiner und rund. */
+  .sport-chips { max-width:700px; margin:8px auto 0; padding:0 20px; box-sizing:border-box;
+    display:flex; flex-wrap:wrap; gap:6px; }
+  .sport-chips button {
+    background: var(--card); border:1px solid var(--border); border-radius:999px;
+    padding:6px 12px; color:var(--text-dim); font-size:12px; font-weight:600;
+    cursor:pointer; transition: all 0.15s; white-space:nowrap;
+  }
+  @media (hover: hover) { .sport-chips button:hover { border-color: var(--accent); color: var(--accent); } }
+  .sport-chips button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  /* "Nur Free-TV" ist ein anderer Filtertyp als die Wettbewerbe -- gruen statt
+     gold, dieselbe Farbe wie die frei-Badges an den Spielen. */
+  .sport-chips button.sport-frei-chip.active { background: rgba(76,195,138,.14); border-color: var(--done); color: var(--done); }
+  li.sport-match {
+    background: var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:11px 16px; margin-bottom:8px;
+    display:flex; flex-direction:column; gap:7px;
+  }
+  .sport-top { display:flex; justify-content:space-between; gap:10px; font-size:12px; color:var(--text-dim); }
+  .sport-zeit { font-weight:700; color:var(--text); white-space:nowrap; }
+  .sport-comp { text-align:right; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .sport-teams { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--text); flex-wrap:wrap; }
+  .sport-teams img { width:20px; height:20px; object-fit:contain; flex:0 0 auto; }
+  .sport-vs { color:var(--text-dim); font-weight:400; }
+  .sport-score { margin-left:auto; font-weight:700; color:var(--text); white-space:nowrap; }
+  .sport-live { margin-left:auto; color:#e05d5d; font-weight:700; font-size:12px; letter-spacing:.5px; }
+  .sport-tv { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+  /* Sender-Badges: Links zum Anbieter. Gruen = frei empfangbar; ✅/🔒 sagt an,
+     ob das Spiel mit den eigenen Abos drin ist (nur wenn Abos konfiguriert
+     sind -- vorher bleibt das Badge neutral, siehe sportBadgeHtml). */
+  a.tv-badge {
+    display:inline-flex; align-items:center; gap:5px;
+    border:1px solid var(--border); border-radius:999px; padding:3px 10px;
+    font-size:12px; color:var(--text-dim); text-decoration:none; transition: all .15s;
+  }
+  @media (hover: hover) { a.tv-badge:hover { border-color: var(--accent); color: var(--accent); } }
+  a.tv-badge.tv-frei { border-color: rgba(76,195,138,.5); color: var(--done); }
+  a.tv-badge.tv-hab { border-color: rgba(76,195,138,.5); color: var(--done); }
+  .tv-zusatz { font-weight:400; opacity:.8; }
+  .sport-quelle { max-width:700px; margin:18px auto 0; padding:0 20px; box-sizing:border-box;
+    color:var(--text-dim); font-size:11px; }
   /* Im Popup ist die Spalte fuer Titel/Aktionen schmaler als auf Discovery/
      Streaming (Poster + Modal-Rand nehmen relativ mehr Platz weg) -- kleineres
      Poster und kompaktere Abstaende schaffen genug Raum, damit Watchlist und
@@ -1401,11 +1468,15 @@
   <div class="tabs">
     <div class="tabs-row">
       <!-- Filme und Serien sind Filter (frei kombinierbar, siehe setTab), Kino
-           wechselt die Seite. Zwei verschiedene Dinge in einer Reihe -- deshalb
-           steht Kino abgesetzt (siehe .tabs .kino-tab). -->
+           und Sport wechseln je auf eine eigene Seite. Zwei verschiedene Dinge
+           in einer Reihe -- deshalb stehen Kino und Sport abgesetzt: nur als
+           Symbol, mit runden Ecken (siehe .tabs .kino-tab/.sport-tab). Beide
+           zusammen sind so breit wie "Neue entdecken" darunter (Christian,
+           19. August 2026: "spaeter aendern wir das nochmal irgendwann"). -->
       <button id="tabFilme" class="active">🎬 Filme</button>
       <button id="tabSerien" class="active">📺 Serien</button>
-      <button id="tabKino" class="kino-tab">🍿 Kino</button>
+      <button id="tabKino" class="kino-tab" aria-label="Kino" title="Kino">🍿</button>
+      <button id="tabSport" class="sport-tab" aria-label="Sport" title="Sport">⚽</button>
     </div>
   </div>
 </header>
@@ -1484,6 +1555,37 @@
   <ol class="list" id="cinemaListenHinweisWrap" style="display:none">
     <button type="button" id="cinemaListenHinweis" class="load-more-btn kino-hinweis"></button>
   </ol>
+</div>
+
+<!-- "Sport": eigene Vollseite wie das Kino (PLAN-SPORT.md) -- Fussball-
+     Spielplan mit Sender je Spiel (frei / Abo), gespeist aus /api/sport.
+     Nur fuer Region DE sichtbar: die Senderrechte gelten fuer Deutschland,
+     in allen anderen Regionen bleibt der ⚽-Knopf versteckt. -->
+<div id="sportPage" style="display:none">
+  <div class="cinema-page-header">
+    <h2 class="cinema-page-title" id="sportPageTitle">Fußball live im TV</h2>
+    <div class="cinema-page-actions">
+      <button id="sportAbosBtn" type="button">📺 Meine Abos</button>
+    </div>
+  </div>
+  <!-- Wettbewerbs-Chips (Alle/Bundesliga/...) plus "Nur Free-TV" -- werden je
+       nach vorhandenen Daten von renderSportPage gefuellt. -->
+  <div class="sport-chips" id="sportChips"></div>
+  <div class="cinema-section">
+    <h3 class="cinema-heading" id="sportHeuteHeading">Heute</h3>
+    <ol class="list sport-liste" id="sportHeuteList"></ol>
+  </div>
+  <div class="cinema-section">
+    <h3 class="cinema-heading" id="sportWocheHeading">Diese Woche</h3>
+    <ol class="list sport-liste" id="sportWocheList"></ol>
+  </div>
+  <div class="cinema-section">
+    <h3 class="cinema-heading" id="sportSpaeterHeading">Demnächst</h3>
+    <ol class="list sport-liste" id="sportSpaeterList"></ol>
+  </div>
+  <!-- Quellenhinweis: Spielplandaten von OpenLigaDB (Community-Projekt),
+       Senderangaben aus der eigenen Rechte-Matrix -- ohne Gewähr. -->
+  <p class="sport-quelle" id="sportQuelle"></p>
 </div>
 
 <footer>
@@ -1948,6 +2050,24 @@
   </div>
 </div>
 
+<!-- "Meine Sport-Abos": Sender-Auswahl fuer den Sport-Bereich, getrennt von
+     den Streaminganbietern (DAZN & Co. sind keine TMDB-Filmanbieter, siehe
+     users.sport_abos in schema.sql). Angemeldet wird am Konto gespeichert,
+     sonst am Geraet (localStorage). -->
+<div id="sportAbosModal" class="modal-overlay" style="display:none">
+  <div class="modal similar-modal">
+    <button class="modal-x" id="sportAbosModalX" aria-label="Schließen">✕</button>
+    <h3 id="sportAbosTitel">Meine Sport-Abos</h3>
+    <p class="prov-intro" id="sportAbosIntro">Wähle die Abos, die du hast. Spiele, die du damit
+      sehen kannst, werden mit ✅ markiert — Free-TV kann natürlich jeder sehen.</p>
+    <div class="prov-list" id="sportAbosList">Lädt …</div>
+    <div class="prov-foot">
+      <span class="prov-hint" id="sportAbosHint"></span>
+      <button type="button" id="sportAbosSaveBtn" class="auth-submit">Speichern</button>
+    </div>
+  </div>
+</div>
+
 <!-- "Deine Kinos": Ort suchen, Umkreis waehlen, Kinos anhaken. Das Suchfeld
      nimmt Postleitzahl UND Ortsname -- zwei Felder waeren eine Entscheidung,
      die niemand treffen will, bevor er getippt hat. Siehe PLAN-KINOS.md. -->
@@ -2176,6 +2296,20 @@ var UI_TEXTE = {
     kinoLabels: { now: 'Aktuell im Kino', soon: 'In Kürze im Kino', later: 'Bald im Kino' },
     kinoLeer: { now: 'Aktuell sind keine Titel hinterlegt.', soon: 'In Kürze startet aktuell nichts Neues.', later: 'Für die kommenden Monate ist noch nichts hinterlegt.' },
     kinoFehler: 'Kino-Daten konnten nicht geladen werden.',
+    sportTitel: 'Fußball live im TV',
+    sportLabels: { heute: 'Heute', woche: 'Diese Woche', spaeter: 'Demnächst' },
+    sportKeineSpiele: 'Keine Spiele für diese Auswahl.',
+    sportFehler: 'Der Spielplan konnte nicht geladen werden.',
+    sportAlle: 'Alle',
+    sportNurFrei: 'Nur Free-TV',
+    sportFrei: 'frei',
+    sportKonferenz: 'Konferenz',
+    sportVoraussichtlich: 'vsl.',
+    sportLive: 'LIVE',
+    sportHeuteWort: 'Heute',
+    sportMorgen: 'Morgen',
+    sportNichtsGewaehlt: 'Keine Abos ausgewählt.',
+    sportQuelle: 'Spielplan: OpenLigaDB (Community-Projekt). Sender regelbasiert aus der deutschen Rechteverteilung abgeleitet – Angaben ohne Gewähr, „vsl.“ = voraussichtlich.',
     gesehenZuWl: 'Du hast diesen Titel als gesehen markiert. Auf der Watchlist gilt er nicht mehr als gesehen: Er verschwindet aus „Gesehen“ und deine Sterne-Bewertung zählt nicht mehr für deinen Taste-Score. Trotzdem auf die Watchlist setzen?',
     wischFilme: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
     wischSerien: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
@@ -2495,6 +2629,20 @@ var UI_TEXTE = {
     kinoLabels: { now: 'Now playing', soon: 'Coming soon', later: 'Coming later' },
     kinoLeer: { now: 'No titles on file right now.', soon: 'Nothing new starting soon.', later: 'Nothing on file for the coming months yet.' },
     kinoFehler: 'Cinema data could not be loaded.',
+    sportTitel: 'Football live on TV',
+    sportLabels: { heute: 'Today', woche: 'This week', spaeter: 'Coming up' },
+    sportKeineSpiele: 'No matches for this selection.',
+    sportFehler: 'The schedule could not be loaded.',
+    sportAlle: 'All',
+    sportNurFrei: 'Free TV only',
+    sportFrei: 'free',
+    sportKonferenz: 'Conference',
+    sportVoraussichtlich: 'likely',
+    sportLive: 'LIVE',
+    sportHeuteWort: 'Today',
+    sportMorgen: 'Tomorrow',
+    sportNichtsGewaehlt: 'No subscriptions selected.',
+    sportQuelle: 'Schedule: OpenLigaDB (community project). Broadcasters derived rule-based from the German rights split – no guarantee, “likely” = expected.',
     gesehenZuWl: 'You marked this title as watched. On the watchlist it no longer counts as watched: it disappears from “Watched” and your star rating no longer counts towards your Taste Score. Add it to the watchlist anyway?',
     wischFilme: 'Swiping left removes the title from your movies list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
     wischSerien: 'Swiping left removes the title from your series list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
@@ -2811,6 +2959,20 @@ var UI_TEXTE = {
     kinoLabels: { now: 'À l’affiche', soon: 'Prochainement', later: 'Plus tard' },
     kinoLeer: { now: 'Aucun titre référencé pour le moment.', soon: 'Rien de nouveau ne démarre prochainement.', later: 'Rien de référencé pour les mois à venir pour l’instant.' },
     kinoFehler: 'Les données cinéma n’ont pas pu être chargées.',
+    sportTitel: 'Foot en direct à la télé',
+    sportLabels: { heute: 'Aujourd’hui', woche: 'Cette semaine', spaeter: 'À venir' },
+    sportKeineSpiele: 'Aucun match pour cette sélection.',
+    sportFehler: 'Le calendrier n’a pas pu être chargé.',
+    sportAlle: 'Tous',
+    sportNurFrei: 'TV gratuite uniquement',
+    sportFrei: 'gratuit',
+    sportKonferenz: 'Multiplex',
+    sportVoraussichtlich: 'prob.',
+    sportLive: 'LIVE',
+    sportHeuteWort: 'Aujourd’hui',
+    sportMorgen: 'Demain',
+    sportNichtsGewaehlt: 'Aucun abonnement sélectionné.',
+    sportQuelle: 'Calendrier : OpenLigaDB (projet communautaire). Diffuseurs déduits des droits TV allemands – sans garantie, « prob. » = probable.',
     gesehenZuWl: 'Tu as marqué ce titre comme vu. Sur la watchlist, il ne compte plus comme vu : il disparaît de « Vus » et ta note en étoiles ne compte plus pour ton Taste Score. L’ajouter quand même à la watchlist ?',
     wischFilme: 'Balayer vers la gauche retire le titre de ta liste de films. Tu peux le rajouter à tout moment via « Découvrir » ou la recherche. Cette question ne te sera posée qu’une seule fois. Retirer maintenant ?',
     wischSerien: 'Balayer vers la gauche retire le titre de ta liste de séries. Tu peux le rajouter à tout moment via « Découvrir » ou la recherche. Cette question ne te sera posée qu’une seule fois. Retirer maintenant ?',
@@ -3127,6 +3289,20 @@ var UI_TEXTE = {
     kinoLabels: { now: 'En cartelera', soon: 'Próximamente', later: 'Más adelante' },
     kinoLeer: { now: 'Ahora mismo no hay títulos registrados.', soon: 'No hay estrenos próximos.', later: 'Aún no hay nada registrado para los próximos meses.' },
     kinoFehler: 'No se pudieron cargar los datos de cine.',
+    sportTitel: 'Fútbol en directo por TV',
+    sportLabels: { heute: 'Hoy', woche: 'Esta semana', spaeter: 'Próximamente' },
+    sportKeineSpiele: 'No hay partidos para esta selección.',
+    sportFehler: 'No se pudo cargar el calendario.',
+    sportAlle: 'Todos',
+    sportNurFrei: 'Solo TV en abierto',
+    sportFrei: 'gratis',
+    sportKonferenz: 'Multipartido',
+    sportVoraussichtlich: 'prob.',
+    sportLive: 'LIVE',
+    sportHeuteWort: 'Hoy',
+    sportMorgen: 'Mañana',
+    sportNichtsGewaehlt: 'Ninguna suscripción seleccionada.',
+    sportQuelle: 'Calendario: OpenLigaDB (proyecto comunitario). Emisoras derivadas de los derechos de TV alemanes – sin garantía, «prob.» = probable.',
     gesehenZuWl: 'Has marcado este título como visto. En la watchlist ya no cuenta como visto: desaparece de «Vistos» y tu valoración con estrellas deja de contar para tu Taste Score. ¿Añadirlo a la watchlist de todos modos?',
     wischFilme: 'Al deslizar a la izquierda, el título se elimina de tu lista de películas. Puedes volver a añadirlo en cualquier momento con «Descubrir» o la búsqueda. Solo se te preguntará esta vez. ¿Eliminar ahora?',
     wischSerien: 'Al deslizar a la izquierda, el título se elimina de tu lista de series. Puedes volver a añadirlo en cualquier momento con «Descubrir» o la búsqueda. Solo se te preguntará esta vez. ¿Eliminar ahora?',
@@ -3443,6 +3619,20 @@ var UI_TEXTE = {
     kinoLabels: { now: 'Ora al cinema', soon: 'Prossimamente', later: 'In arrivo più avanti' },
     kinoLeer: { now: 'Nessun titolo registrato al momento.', soon: 'Nessuna novità in arrivo a breve.', later: 'Ancora niente in programma per i prossimi mesi.' },
     kinoFehler: 'Impossibile caricare i dati del cinema.',
+    sportTitel: 'Calcio in diretta TV',
+    sportLabels: { heute: 'Oggi', woche: 'Questa settimana', spaeter: 'In arrivo' },
+    sportKeineSpiele: 'Nessuna partita per questa selezione.',
+    sportFehler: 'Impossibile caricare il calendario.',
+    sportAlle: 'Tutti',
+    sportNurFrei: 'Solo TV in chiaro',
+    sportFrei: 'gratis',
+    sportKonferenz: 'Diretta gol',
+    sportVoraussichtlich: 'prob.',
+    sportLive: 'LIVE',
+    sportHeuteWort: 'Oggi',
+    sportMorgen: 'Domani',
+    sportNichtsGewaehlt: 'Nessun abbonamento selezionato.',
+    sportQuelle: 'Calendario: OpenLigaDB (progetto comunitario). Emittenti dedotte dai diritti TV tedeschi – senza garanzia, «prob.» = probabile.',
     gesehenZuWl: 'Hai segnato questo titolo come visto. Sulla watchlist non conta più come visto: sparisce da “Visti” e le tue stelle non contano più per il tuo Taste Score. Aggiungerlo comunque alla watchlist?',
     wischFilme: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista dei film. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri novità” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
     wischSerien: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista delle serie. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri novità” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
@@ -3759,6 +3949,20 @@ var UI_TEXTE = {
     kinoLabels: { now: 'Nu in de bioscoop', soon: 'Binnenkort', later: 'Later te zien' },
     kinoLeer: { now: 'Op dit moment geen titels bekend.', soon: 'Binnenkort start er niets nieuws.', later: 'Voor de komende maanden is nog niets bekend.' },
     kinoFehler: 'Bioscoopgegevens konden niet worden geladen.',
+    sportTitel: 'Voetbal live op tv',
+    sportLabels: { heute: 'Vandaag', woche: 'Deze week', spaeter: 'Binnenkort' },
+    sportKeineSpiele: 'Geen wedstrijden voor deze selectie.',
+    sportFehler: 'Het speelschema kon niet worden geladen.',
+    sportAlle: 'Alle',
+    sportNurFrei: 'Alleen free-tv',
+    sportFrei: 'gratis',
+    sportKonferenz: 'Conferentie',
+    sportVoraussichtlich: 'wrsch.',
+    sportLive: 'LIVE',
+    sportHeuteWort: 'Vandaag',
+    sportMorgen: 'Morgen',
+    sportNichtsGewaehlt: 'Geen abonnementen geselecteerd.',
+    sportQuelle: 'Speelschema: OpenLigaDB (communityproject). Zenders regelgebaseerd afgeleid uit de Duitse tv-rechten – zonder garantie, „wrsch.“ = waarschijnlijk.',
     gesehenZuWl: 'Je hebt deze titel als gezien gemarkeerd. Op de watchlist telt hij niet meer als gezien: hij verdwijnt uit “Gezien” en je sterrenbeoordeling telt niet meer mee voor je Taste Score. Toch aan de watchlist toevoegen?',
     wischFilme: 'Naar links vegen verwijdert de titel uit je filmlijst. Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
     wischSerien: 'Naar links vegen verwijdert de titel uit je serielijst. Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
@@ -4075,6 +4279,20 @@ var UI_TEXTE = {
     kinoLabels: { now: 'Em cartaz', soon: 'Em breve', later: 'Mais adiante' },
     kinoLeer: { now: 'Nenhum título registrado no momento.', soon: 'Nada novo estreando em breve.', later: 'Ainda nada registrado para os próximos meses.' },
     kinoFehler: 'Não foi possível carregar os dados de cinema.',
+    sportTitel: 'Futebol ao vivo na TV',
+    sportLabels: { heute: 'Hoje', woche: 'Esta semana', spaeter: 'Em breve' },
+    sportKeineSpiele: 'Nenhum jogo para esta seleção.',
+    sportFehler: 'Não foi possível carregar o calendário.',
+    sportAlle: 'Todos',
+    sportNurFrei: 'Só TV aberta',
+    sportFrei: 'grátis',
+    sportKonferenz: 'Conferência',
+    sportVoraussichtlich: 'prov.',
+    sportLive: 'AO VIVO',
+    sportHeuteWort: 'Hoje',
+    sportMorgen: 'Amanhã',
+    sportNichtsGewaehlt: 'Nenhuma assinatura selecionada.',
+    sportQuelle: 'Calendário: OpenLigaDB (projeto comunitário). Emissoras derivadas dos direitos de TV alemães – sem garantia, «prov.» = provável.',
     gesehenZuWl: 'Você marcou este título como assistido. Na watchlist ele deixa de contar como assistido: ele some de “Assistidos” e sua avaliação em estrelas deixa de contar para o seu Taste Score. Adicionar à watchlist mesmo assim?',
     wischFilme: 'Deslizar para a esquerda remove o título da sua lista de filmes. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
     wischSerien: 'Deslizar para a esquerda remove o título da sua lista de séries. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
@@ -4613,7 +4831,8 @@ var MARKUP_TEXTE = {
     '#authBarLogout': { t: 'Sign out' },
     '#tabFilme': { t: '🎬 Movies' },
     '#tabSerien': { t: '📺 Series' },
-    '#tabKino': { t: '🍿 Cinema' },
+    '#tabKino': { a: 'Cinema' },
+    '#tabSport': { a: 'Sports' },
     '#search': { p: 'Search title, genre or name …' },
     '#fOpen': { t: 'Watchlist' },
     '#fDone': { t: 'Watched' },
@@ -4689,6 +4908,11 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Choose the services you use. Only these are shown under “Stream / Rent / Buy” and on the title rows.' },
     '#providersList': { t: 'Loading …' },
     '#providersSaveBtn': { t: 'Save' },
+    '#sportPageTitle': { t: 'Football live on TV' },
+    '#sportAbosBtn': { t: '📺 My subscriptions' },
+    '#sportAbosTitel': { t: 'My sports subscriptions' },
+    '#sportAbosIntro': { t: 'Pick the subscriptions you have. Matches you can watch with them get a ✅ — free TV is for everyone.' },
+    '#sportAbosSaveBtn': { t: 'Save' },
     '#kinosModal h3': { t: 'Your cinemas' },
     '#kinosModal .prov-intro': { t: 'Search for your town and choose the cinemas you go to.' },
     '#kinosSaveBtn': { t: 'Save' },
@@ -4730,7 +4954,8 @@ var MARKUP_TEXTE = {
     '#authBarLogout': { t: 'Se déconnecter' },
     '#tabFilme': { t: '🎬 Films' },
     '#tabSerien': { t: '📺 Séries' },
-    '#tabKino': { t: '🍿 Cinéma' },
+    '#tabKino': { a: 'Cinéma' },
+    '#tabSport': { a: 'Sport' },
     '#search': { p: 'Chercher un titre, un genre ou un nom …' },
     '#fOpen': { t: 'Watchlist' },
     '#fDone': { t: 'Vus' },
@@ -4806,6 +5031,11 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Choisis les services que tu utilises. Seuls ceux-ci sont affichés sous « Regarder / Louer / Acheter » et sur les lignes de titres.' },
     '#providersList': { t: 'Chargement …' },
     '#providersSaveBtn': { t: 'Enregistrer' },
+    '#sportPageTitle': { t: 'Foot en direct à la télé' },
+    '#sportAbosBtn': { t: '📺 Mes abonnements' },
+    '#sportAbosTitel': { t: 'Mes abonnements sport' },
+    '#sportAbosIntro': { t: 'Choisis les abonnements que tu as. Les matchs que tu peux voir avec sont marqués ✅ — la TV gratuite est pour tout le monde.' },
+    '#sportAbosSaveBtn': { t: 'Enregistrer' },
     '#kinosModal h3': { t: 'Tes cinémas' },
     '#kinosModal .prov-intro': { t: 'Cherche ta ville et choisis les cinémas où tu vas.' },
     '#kinosSaveBtn': { t: 'Enregistrer' },
@@ -4847,7 +5077,8 @@ var MARKUP_TEXTE = {
     '#authBarLogout': { t: 'Cerrar sesión' },
     '#tabFilme': { t: '🎬 Películas' },
     '#tabSerien': { t: '📺 Series' },
-    '#tabKino': { t: '🍿 Cine' },
+    '#tabKino': { a: 'Cine' },
+    '#tabSport': { a: 'Deporte' },
     '#search': { p: 'Buscar título, género o nombre …' },
     '#fOpen': { t: 'Watchlist' },
     '#fDone': { t: 'Vistos' },
@@ -4923,6 +5154,11 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Elige los servicios que usas. Solo estos se muestran en «Ver / Alquilar / Comprar» y en las filas de títulos.' },
     '#providersList': { t: 'Cargando …' },
     '#providersSaveBtn': { t: 'Guardar' },
+    '#sportPageTitle': { t: 'Fútbol en directo por TV' },
+    '#sportAbosBtn': { t: '📺 Mis suscripciones' },
+    '#sportAbosTitel': { t: 'Mis suscripciones deportivas' },
+    '#sportAbosIntro': { t: 'Elige las suscripciones que tienes. Los partidos que puedas ver con ellas se marcan con ✅ — la TV en abierto es para todos.' },
+    '#sportAbosSaveBtn': { t: 'Guardar' },
     '#kinosModal h3': { t: 'Tus cines' },
     '#kinosModal .prov-intro': { t: 'Busca tu localidad y elige los cines a los que vas.' },
     '#kinosSaveBtn': { t: 'Guardar' },
@@ -4964,7 +5200,8 @@ var MARKUP_TEXTE = {
     '#authBarLogout': { t: 'Esci' },
     '#tabFilme': { t: '🎬 Film' },
     '#tabSerien': { t: '📺 Serie' },
-    '#tabKino': { t: '🍿 Cinema' },
+    '#tabKino': { a: 'Cinema' },
+    '#tabSport': { a: 'Sport' },
     '#search': { p: 'Cerca titolo, genere o nome …' },
     '#fOpen': { t: 'Watchlist' },
     '#fDone': { t: 'Visti' },
@@ -5040,6 +5277,11 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Scegli i servizi che usi. Solo questi vengono mostrati in “Streaming / Noleggio / Acquisto” e nelle righe dei titoli.' },
     '#providersList': { t: 'Caricamento …' },
     '#providersSaveBtn': { t: 'Salva' },
+    '#sportPageTitle': { t: 'Calcio in diretta TV' },
+    '#sportAbosBtn': { t: '📺 I miei abbonamenti' },
+    '#sportAbosTitel': { t: 'I miei abbonamenti sport' },
+    '#sportAbosIntro': { t: 'Scegli gli abbonamenti che hai. Le partite che puoi vedere con essi sono contrassegnate con ✅ — la TV in chiaro è per tutti.' },
+    '#sportAbosSaveBtn': { t: 'Salva' },
     '#kinosModal h3': { t: 'I tuoi cinema' },
     '#kinosModal .prov-intro': { t: 'Cerca la tua città e scegli i cinema in cui vai.' },
     '#kinosSaveBtn': { t: 'Salva' },
@@ -5081,7 +5323,8 @@ var MARKUP_TEXTE = {
     '#authBarLogout': { t: 'Uitloggen' },
     '#tabFilme': { t: '🎬 Films' },
     '#tabSerien': { t: '📺 Series' },
-    '#tabKino': { t: '🍿 Bioscoop' },
+    '#tabKino': { a: 'Bioscoop' },
+    '#tabSport': { a: 'Sport' },
     '#search': { p: 'Zoek op titel, genre of naam …' },
     '#fOpen': { t: 'Watchlist' },
     '#fDone': { t: 'Gezien' },
@@ -5157,6 +5400,11 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Kies de diensten die je gebruikt. Alleen deze worden getoond onder “Streamen / Huren / Kopen” en bij de titelrijen.' },
     '#providersList': { t: 'Laden …' },
     '#providersSaveBtn': { t: 'Opslaan' },
+    '#sportPageTitle': { t: 'Voetbal live op tv' },
+    '#sportAbosBtn': { t: '📺 Mijn abonnementen' },
+    '#sportAbosTitel': { t: 'Mijn sportabonnementen' },
+    '#sportAbosIntro': { t: 'Kies de abonnementen die je hebt. Wedstrijden die je daarmee kunt zien krijgen een ✅ — free-tv kan iedereen zien.' },
+    '#sportAbosSaveBtn': { t: 'Opslaan' },
     '#kinosModal h3': { t: 'Jouw bioscopen' },
     '#kinosModal .prov-intro': { t: 'Zoek naar je woonplaats en kies de bioscopen waar je naartoe gaat.' },
     '#kinosSaveBtn': { t: 'Opslaan' },
@@ -5198,7 +5446,8 @@ var MARKUP_TEXTE = {
     '#authBarLogout': { t: 'Sair' },
     '#tabFilme': { t: '🎬 Filmes' },
     '#tabSerien': { t: '📺 Séries' },
-    '#tabKino': { t: '🍿 Cinema' },
+    '#tabKino': { a: 'Cinema' },
+    '#tabSport': { a: 'Esporte' },
     '#search': { p: 'Busque por título, gênero ou nome …' },
     '#fOpen': { t: 'Watchlist' },
     '#fDone': { t: 'Assistidos' },
@@ -5274,6 +5523,11 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Escolha os serviços que você usa. Só eles aparecem em “Stream / Alugar / Comprar” e nas linhas de título.' },
     '#providersList': { t: 'Carregando …' },
     '#providersSaveBtn': { t: 'Salvar' },
+    '#sportPageTitle': { t: 'Futebol ao vivo na TV' },
+    '#sportAbosBtn': { t: '📺 Minhas assinaturas' },
+    '#sportAbosTitel': { t: 'Minhas assinaturas de esporte' },
+    '#sportAbosIntro': { t: 'Escolha as assinaturas que você tem. Jogos que você pode ver com elas são marcados com ✅ — TV aberta é para todos.' },
+    '#sportAbosSaveBtn': { t: 'Salvar' },
     '#kinosModal h3': { t: 'Seus cinemas' },
     '#kinosModal .prov-intro': { t: 'Busque a sua cidade e escolha os cinemas que você frequenta.' },
     '#kinosSaveBtn': { t: 'Salvar' },
@@ -7526,7 +7780,7 @@ function wireRow(li, src, i){
     li.classList.toggle('show-details');
   });
 }
-const tabBtns = { filme: document.getElementById('tabFilme'), serien: document.getElementById('tabSerien'), kino: document.getElementById('tabKino') };
+const tabBtns = { filme: document.getElementById('tabFilme'), serien: document.getElementById('tabSerien'), kino: document.getElementById('tabKino'), sport: document.getElementById('tabSport') };
 tabBtns.filme.onclick = () => setTab('filme');
 tabBtns.serien.onclick = () => setTab('serien');
 // Kino ist kein Tab im Sinne von activeTab (es hat weder Watchlist noch
@@ -7537,6 +7791,16 @@ tabBtns.serien.onclick = () => setTab('serien');
 // zur Titelliste mit der Typauswahl, die vor dem Kino eingestellt war.
 tabBtns.kino.onclick = () => {
   if (!cinemaMode) { openCinemaPage(); return; }
+  listenAnsichtHerstellen();
+  titelLimit = TITEL_PRO_SEITE;
+  updateFilterRowUI();
+  window.scrollTo(0, 0);
+  nachDemZeichnen(renderCurrentTab);
+};
+// Sport verhaelt sich wie Kino: eigene Vollseite, zweiter Klick geht zurueck
+// zur Titelliste mit der Typauswahl von vorher (siehe openSportPage).
+tabBtns.sport.onclick = () => {
+  if (!sportMode) { openSportPage(); return; }
   listenAnsichtHerstellen();
   titelLimit = TITEL_PRO_SEITE;
   updateFilterRowUI();
@@ -7575,6 +7839,7 @@ function renderList() {
 function renderCurrentTab(){
   updateProfileBtn();
   updateFilterRowUI();         // erzwingt u.a. die Entdecken-Sperre beim Abgleich
+  if (sportMode) { renderSportPage(); return; }
   if (cinemaMode) { renderCinemaPage(); return; }
   renderList();
   // Inhaltsangaben der gerade gerenderten Zeilen nachladen (siehe fillPlots).
@@ -7717,9 +7982,10 @@ function updateFilterRowUI(){
     btns.inStream.classList.toggle('active', inStreamFilterOn);
     var sz = document.querySelector('.tb-streamrow');
     if (sz) sz.style.display = '';
-    tabBtns.filme.classList.toggle('active', !cinemaMode && TYPEN.filme);
-    tabBtns.serien.classList.toggle('active', !cinemaMode && TYPEN.serien);
+    tabBtns.filme.classList.toggle('active', !cinemaMode && !sportMode && TYPEN.filme);
+    tabBtns.serien.classList.toggle('active', !cinemaMode && !sportMode && TYPEN.serien);
     tabBtns.kino.classList.toggle('active', !!cinemaMode);
+    tabBtns.sport.classList.toggle('active', !!sportMode);
     // Der Streaming-Filter ergibt im Kino auch hier keinen Sinn.
     var szp = document.querySelector('.tb-streamrow');
     if (szp) szp.style.display = cinemaMode ? 'none' : '';
@@ -7738,11 +8004,13 @@ function updateFilterRowUI(){
   var streamZeile = document.querySelector('.tb-streamrow');
   if (streamZeile) streamZeile.style.display = cinemaMode ? 'none' : '';
   // Beide Typen koennen gleichzeitig leuchten -- sie sind Filter, kein
-  // Seitenwechsel. Auf der Kino-Seite leuchtet keiner von beiden: dort ist
-  // "Im Kino" der ausgewaehlte Bereich (siehe openCinemaPage/closeCinemaPage).
-  tabBtns.filme.classList.toggle('active', !cinemaMode && TYPEN.filme);
-  tabBtns.serien.classList.toggle('active', !cinemaMode && TYPEN.serien);
+  // Seitenwechsel. Auf der Kino-/Sport-Seite leuchtet keiner von beiden: dort
+  // ist der jeweilige Bereich der ausgewaehlte (siehe openCinemaPage/
+  // openSportPage und die close-Gegenstuecke).
+  tabBtns.filme.classList.toggle('active', !cinemaMode && !sportMode && TYPEN.filme);
+  tabBtns.serien.classList.toggle('active', !cinemaMode && !sportMode && TYPEN.serien);
   tabBtns.kino.classList.toggle('active', !!cinemaMode);
+  tabBtns.sport.classList.toggle('active', !!sportMode);
 }
 /* Filme und Serien an-/abwaehlen. Kein Seitenwechsel mehr, sondern ein Filter
    wie die drei Status darunter -- beide zugleich sind der Normalfall, und die
@@ -7767,6 +8035,7 @@ function updateFilterRowUI(){
 // setTab jetzt UMSCHALTET: "setTab('filme')" haette dort Filme abgewaehlt.
 function listenAnsichtHerstellen(){
   closeCinemaPage();
+  closeSportPage();
   document.querySelector('.toolbar').style.display = '';
   searchEl.style.display = '';
   var sw = document.querySelector('.sort-wrap'); if (sw) sw.style.display = 'flex';
@@ -7775,9 +8044,11 @@ function setTab(t) {
   // Ein Klick auf die Typ-Knoepfe verlaesst eine geteilte Momentaufnahme --
   // sonst saehen die Knoepfe tot aus (renderMoment ignoriert die Filter).
   momentVerlassen();
-  var warKino = cinemaMode;
+  // Aus Kino ODER Sport heraus stellt der Klick genau auf diesen Typ um
+  // (siehe Kommentar oben) -- innerhalb der Titelliste schaltet er um.
+  var warVollseite = cinemaMode || sportMode;
   listenAnsichtHerstellen();
-  if (warKino) {
+  if (warVollseite) {
     TYPEN.filme = (t === 'filme');
     TYPEN.serien = (t === 'serien');
   } else {
@@ -9168,6 +9439,9 @@ function openCinemaPage(){
   // hier, sonst stuende die Leiste "Watchlist von Anna" ueber dem Kinoprogramm.
   // updateProfileBtn() muss dabei mit: die Leiste wird nur dort neu geschrieben,
   // ohne den Aufruf blieb der alte Text stehen, obwohl die Ansicht schon beendet war.
+  // Kino und Sport schliessen sich gegenseitig aus -- erst die andere
+  // Vollseite herstellen, dann diese oeffnen (Gegenstueck in openSportPage).
+  closeSportPage();
   cinemaMode = true;
   // Die Leiste haengt am Bereich: Im Kino heisst derselbe Abgleich anders (er
   // filtert dort nicht, siehe unten), und eine fremde Liste ist hier ausgesetzt.
@@ -9269,6 +9543,317 @@ if (_cinemaSortBtn && _cinemaSortMenu) {
   });
   document.addEventListener('click', function(){ _cinemaSortMenu.style.display = 'none'; });
 }
+
+/* ---- "Sport": eigene Vollseite wie das Kino, erreichbar ueber den vierten
+   Knopf (⚽) in der Tab-Reihe (PLAN-SPORT.md). Zeigt den Fussball-Spielplan
+   (Bundesliga, 2. Bundesliga, DFB-Pokal, Champions League, Europa League)
+   mit Sender je Spiel -- frei empfangbar oder Abo, abgeglichen mit den
+   eigenen Sport-Abos. Daten: /api/sport (OpenLigaDB + Rechte-Matrix,
+   siehe sport-fetch.mjs und sport-rechte.json).
+
+   Nur fuer Region DE: Die Senderrechte gelten fuer Deutschland; in allen
+   anderen Regionen bleibt der Knopf versteckt (siehe ganz unten). ---- */
+let sportMode = false;
+let SPORT_DATA = null;                 // { sender, wettbewerbe, spiele }
+// Eigene Sport-Abos (Sender-Slugs). null = nie konfiguriert -- dann bleiben
+// die Badges neutral (kein ✅/🔒) und das Abo-Fenster zeigt eine Vorauswahl,
+// abgeleitet aus den Streaminganbietern (sportAbosVorauswahl).
+let SPORT_ABOS = null;
+var SPORT_ABOS_KEY = 'mm_sport_abos';
+var SPORT_COMP = 'alle';               // Wettbewerbs-Chip ('alle' | 'bl1' | ...)
+var sportNurFrei = false;              // "Nur Free-TV"-Chip
+// "Heute" zeigt immer alles (selten mehr als ein Dutzend Spiele); die beiden
+// anderen Bereiche starten eingeklappt -- gleiche Ueberlegung wie beim Kino.
+var SPORT_PREVIEW = { heute: 500, woche: 10, spaeter: 5 };
+var SPORT_STEP = 25;
+let sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
+const sportListEls = {
+  heute: document.getElementById('sportHeuteList'),
+  woche: document.getElementById('sportWocheList'),
+  spaeter: document.getElementById('sportSpaeterList'),
+};
+const sportHeadingEls = {
+  heute: document.getElementById('sportHeuteHeading'),
+  woche: document.getElementById('sportWocheHeading'),
+  spaeter: document.getElementById('sportSpaeterHeading'),
+};
+
+async function loadSportData(){
+  if (!SPORT_DATA) SPORT_DATA = await apiRequest('GET', '/api/sport');
+  return SPORT_DATA;
+}
+
+/* Abos laden: Konto zuerst (users.sport_abos), sonst Geraet (localStorage).
+   Beides leer heisst "nie konfiguriert" (SPORT_ABOS bleibt null). */
+var _sportAbosGeladen = false;
+async function sportAbosLaden(){
+  if (_sportAbosGeladen) return;
+  _sportAbosGeladen = true;
+  if (CURRENT_USER) {
+    try {
+      var d = await apiRequest('GET', '/api/sport/abos');
+      if (Array.isArray(d.abos)) { SPORT_ABOS = d.abos; return; }
+    } catch (e) {}
+  }
+  try {
+    var roh = localStorage.getItem(SPORT_ABOS_KEY);
+    if (roh) { var arr = JSON.parse(roh); if (Array.isArray(arr)) SPORT_ABOS = arr; }
+  } catch (e) {}
+}
+
+// Vorauswahl fuer noch nicht Konfigurierte: Sport-Sender, deren TMDB-Nummern
+// schon in der Streaming-Anbieterauswahl stecken (wer WOW als Filmanbieter
+// gewaehlt hat, hat vermutlich auch den Sport dort). Nur Anzeige im
+// Abo-Fenster -- gespeichert wird erst beim ausdruecklichen Speichern.
+function sportAbosVorauswahl(){
+  if (!Array.isArray(MY_PROVIDER_IDS) || !SPORT_DATA) return [];
+  return Object.keys(SPORT_DATA.sender).filter(function(slug){
+    var s = SPORT_DATA.sender[slug];
+    return !s.frei && (s.tmdb || []).some(function(id){ return MY_PROVIDER_IDS.indexOf(Number(id)) !== -1; });
+  });
+}
+
+function sportSenderInfo(slug){
+  return (SPORT_DATA && SPORT_DATA.sender[slug]) || { name: slug, frei: false, link: null };
+}
+function sportSpielFrei(spiel){
+  return (spiel.tv || []).some(function(b){ return sportSenderInfo(b.s).frei; });
+}
+
+// Suchfeld gilt auch hier: trifft Teams, Wettbewerb und Runde (ODER ueber
+// alle Chips, wie ueberall sonst -- siehe aktiveSuchbegriffe).
+function sportTrifft(spiel, begriffe){
+  if (!begriffe.length) return true;
+  var comp = (SPORT_DATA.wettbewerbe[spiel.c] || {}).name || spiel.c;
+  var text = (spiel.h + ' ' + spiel.a + ' ' + (spiel.hk || '') + ' ' + (spiel.ak || '') + ' ' +
+              comp + ' ' + (spiel.rd || '')).toLowerCase();
+  return begriffe.some(function(q){ return text.indexOf(q) !== -1; });
+}
+
+// "Sa 30.08. · 18:30" -- heute/morgen als Wort, sonst Wochentag+Datum; die
+// Uhrzeit in der Zeitzone des Geraets (LOCALE haengt an der Sprache).
+function sportZeitLabel(ko){
+  var d = new Date(ko);
+  var heute = new Date(); heute.setHours(0, 0, 0, 0);
+  var tage = Math.floor((d - heute) / 86400000);
+  var tag = tage === 0 ? TXT.sportHeuteWort
+          : tage === 1 ? TXT.sportMorgen
+          : d.toLocaleDateString(LOCALE, { weekday: 'short', day: '2-digit', month: '2-digit' });
+  return tag + ' · ' + d.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
+}
+
+/* Ein Sender-Badge. Gruen = frei empfangbar. ✅/🔒 nur, wenn Abos konfiguriert
+   sind -- vorher waere ein 🔒 an jedem Abo-Spiel nur Gemecker ohne Wissen.
+   'konferenz' und 'unsicher' (CL-Dienstag ohne eingetragenen Amazon-Pick,
+   siehe sport-rechte.json) stehen klein dahinter. */
+function sportBadgeHtml(b){
+  var info = sportSenderInfo(b.s);
+  var konfiguriert = Array.isArray(SPORT_ABOS);
+  var imAbo = konfiguriert && SPORT_ABOS.indexOf(b.s) !== -1;
+  var cls = 'tv-badge' + (info.frei ? ' tv-frei' : (konfiguriert && imAbo ? ' tv-hab' : ''));
+  var praefix = info.frei ? '' : (konfiguriert ? (imAbo ? '✅ ' : '🔒 ') : '');
+  var zusatz = [];
+  if (b.typ === 'konferenz') zusatz.push(TXT.sportKonferenz);
+  if (info.frei) zusatz.push(TXT.sportFrei);
+  if (b.unsicher) zusatz.push(TXT.sportVoraussichtlich);
+  return '<a class="' + cls + '"' +
+         (info.link ? ' href="' + escAttr(info.link) + '" target="_blank" rel="noopener"' : '') +
+         '>' + praefix + esc(info.name) +
+         (zusatz.length ? ' <span class="tv-zusatz">· ' + esc(zusatz.join(' · ')) + '</span>' : '') +
+         '</a>';
+}
+
+function sportSpielLi(spiel){
+  var li = document.createElement('li');
+  li.className = 'sport-match';
+  var comp = (SPORT_DATA.wettbewerbe[spiel.c] || {}).name || spiel.c;
+  var jetzt = Date.now(), ko = new Date(spiel.ko).getTime();
+  // "LIVE" grob ueber die Anstosszeit (bis 2,5h danach) -- Zwischenstaende
+  // liefert der Ingest nur alle paar Stunden, deshalb bewusst KEIN Ergebnis
+  // waehrend des Spiels (ein veralteter Spielstand waere schlimmer als keiner).
+  var status = '';
+  if (spiel.fin && spiel.th != null) {
+    status = '<span class="sport-score">' + esc(String(spiel.th) + ':' + String(spiel.ta)) + '</span>';
+  } else if (!spiel.fin && jetzt >= ko && jetzt < ko + 2.5 * 3600000) {
+    status = '<span class="sport-live">' + esc(TXT.sportLive) + '</span>';
+  }
+  var logo = function(url){ return url ? '<img src="' + escAttr(url) + '" alt="" loading="lazy">' : ''; };
+  li.innerHTML =
+    '<div class="sport-top"><span class="sport-zeit">' + esc(sportZeitLabel(spiel.ko)) + '</span>' +
+    '<span class="sport-comp">' + esc(comp + (spiel.rd ? ' · ' + spiel.rd : '')) + '</span></div>' +
+    '<div class="sport-teams">' + logo(spiel.hl) + '<span>' + esc(spiel.h) + '</span>' +
+    '<span class="sport-vs">–</span>' + logo(spiel.al) + '<span>' + esc(spiel.a) + '</span>' + status + '</div>' +
+    '<div class="sport-tv">' + (spiel.tv || []).map(sportBadgeHtml).join('') + '</div>';
+  return li;
+}
+
+function renderSportChips(){
+  var el = document.getElementById('sportChips');
+  var data = SPORT_DATA;
+  var vorhanden = Object.keys(data.wettbewerbe).filter(function(c){
+    return data.spiele.some(function(s){ return s.c === c; });
+  });
+  var html = '<button type="button" data-comp="alle"' + (SPORT_COMP === 'alle' ? ' class="active"' : '') + '>' +
+             esc(TXT.sportAlle) + '</button>';
+  vorhanden.forEach(function(c){
+    html += '<button type="button" data-comp="' + escAttr(c) + '"' + (SPORT_COMP === c ? ' class="active"' : '') + '>' +
+            esc(data.wettbewerbe[c].name || c) + '</button>';
+  });
+  html += '<button type="button" class="sport-frei-chip' + (sportNurFrei ? ' active' : '') + '">' +
+          esc(TXT.sportNurFrei) + '</button>';
+  el.innerHTML = html;
+  el.querySelectorAll('button[data-comp]').forEach(function(b){
+    b.onclick = function(){
+      // Erneuter Klick auf den aktiven Wettbewerb waehlt ihn ab (zurueck zu
+      // "Alle") -- dasselbe Muster wie ueberall sonst in der App.
+      SPORT_COMP = (SPORT_COMP === b.dataset.comp) ? 'alle' : b.dataset.comp;
+      sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
+      renderSportPage();
+    };
+  });
+  el.querySelector('.sport-frei-chip').onclick = function(){
+    sportNurFrei = !sportNurFrei;
+    sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
+    renderSportPage();
+  };
+}
+
+function renderSportSection(key, spiele){
+  var el = sportListEls[key];
+  el.innerHTML = '';
+  sportHeadingEls[key].textContent = TXT.sportLabels[key] + (spiele.length ? ' (' + spiele.length + ')' : '');
+  if (!spiele.length) {
+    el.innerHTML = '<li class="cinema-empty">' + esc(TXT.sportKeineSpiele) + '</li>';
+    return;
+  }
+  var limit = sportSectionLimit[key];
+  spiele.slice(0, limit).forEach(function(s){ el.appendChild(sportSpielLi(s)); });
+  if (spiele.length > limit) {
+    var moreBtn = document.createElement('button');
+    moreBtn.type = 'button';
+    moreBtn.className = 'load-more-btn';
+    moreBtn.textContent = TXT.mehrAnzeigen(Math.min(SPORT_STEP, spiele.length - limit));
+    moreBtn.onclick = function(){
+      nachladenOhneSprung(function(){
+        sportSectionLimit[key] = Math.min(spiele.length, sportSectionLimit[key] + SPORT_STEP);
+        return renderSportPage();
+      });
+    };
+    el.appendChild(moreBtn);
+  }
+}
+
+function renderSportPage(){
+  var data = SPORT_DATA;
+  if (!data) return;
+  document.getElementById('sportPageTitle').textContent = TXT.sportTitel;
+  document.getElementById('sportQuelle').textContent = TXT.sportQuelle;
+  renderSportChips();
+  var begriffe = aktiveSuchbegriffe();
+  var gefiltert = data.spiele.filter(function(s){
+    if (SPORT_COMP !== 'alle' && s.c !== SPORT_COMP) return false;
+    if (sportNurFrei && !sportSpielFrei(s)) return false;
+    return sportTrifft(s, begriffe);
+  });
+  // Drei Bereiche nach ORTSTAGEN: Heute (inkl. laufender Spiele -- der Server
+  // liefert ab 8h rueckwirkend), Morgen bis +7 Tage, Rest (Server-Deckel +70).
+  var heute0 = new Date(); heute0.setHours(0, 0, 0, 0);
+  var morgen0 = heute0.getTime() + 86400000;
+  var woche0 = heute0.getTime() + 8 * 86400000;
+  var buckets = { heute: [], woche: [], spaeter: [] };
+  gefiltert.forEach(function(s){
+    var t = new Date(s.ko).getTime();
+    if (t < morgen0) buckets.heute.push(s);
+    else if (t < woche0) buckets.woche.push(s);
+    else buckets.spaeter.push(s);
+  });
+  renderSportSection('heute', buckets.heute);
+  renderSportSection('woche', buckets.woche);
+  renderSportSection('spaeter', buckets.spaeter);
+}
+
+function openSportPage(){
+  closeCinemaPage();
+  sportMode = true;
+  // Frisch geoeffnet heisst wieder eingeklappt (wie beim Kino).
+  sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
+  updateFilterRowUI();
+  document.querySelector('.head-controls').style.display = '';
+  // Anders als im Kino ist die Werkzeugleiste hier KOMPLETT weg: Watchlist/
+  // Gesehen/Sortierung beziehen sich auf Titel, ein Spiel hat nichts davon.
+  // Die Suche oben bleibt und filtert nach Teams und Wettbewerb.
+  document.querySelector('.toolbar').style.display = 'none';
+  list.style.display = 'none';
+  document.getElementById('sportPage').style.display = '';
+  window.scrollTo(0, 0);
+  Object.keys(sportListEls).forEach(function(key){
+    sportListEls[key].innerHTML = '<li class="cinema-empty">' + TXT.laedt + '</li>';
+  });
+  Promise.all([loadSportData(), sportAbosLaden()]).then(renderSportPage).catch(function(err){
+    console.error('Sport-Daten konnten nicht geladen werden:', err);
+    Object.keys(sportListEls).forEach(function(key){
+      sportListEls[key].innerHTML = '<li class="cinema-empty">' + esc(TXT.sportFehler) + '</li>';
+    });
+  });
+}
+function closeSportPage(){
+  if (!sportMode) return;
+  sportMode = false;
+  document.getElementById('sportPage').style.display = 'none';
+  document.querySelector('.toolbar').style.display = '';
+  list.style.display = '';
+  updateFilterRowUI();
+}
+
+/* ---- "Meine Sport-Abos": kleines Fenster mit den Abo-Sendern (die freien
+   brauchen keinen Haken -- frei ist frei). Speichert am Geraet und, wenn
+   angemeldet, zusaetzlich am Konto. ---- */
+var _sportAbosModal = document.getElementById('sportAbosModal');
+var _sportAbosList = document.getElementById('sportAbosList');
+function renderSportAbosList(){
+  var gewaehlt = new Set(Array.isArray(SPORT_ABOS) ? SPORT_ABOS : sportAbosVorauswahl());
+  var slugs = Object.keys(SPORT_DATA.sender).filter(function(s){ return !SPORT_DATA.sender[s].frei; });
+  _sportAbosList.innerHTML = slugs.map(function(slug){
+    return '<label class="prov-item"><input type="checkbox" value="' + escAttr(slug) + '"' +
+           (gewaehlt.has(slug) ? ' checked' : '') + '><span>' + esc(SPORT_DATA.sender[slug].name) + '</span></label>';
+  }).join('');
+  updateSportAbosHint();
+}
+function updateSportAbosHint(){
+  var n = _sportAbosList.querySelectorAll('input:checked').length;
+  document.getElementById('sportAbosHint').textContent = n ? TXT.nAusgewaehlt(n) : TXT.sportNichtsGewaehlt;
+}
+_sportAbosList.addEventListener('change', updateSportAbosHint);
+document.getElementById('sportAbosBtn').onclick = async function(){
+  _sportAbosModal.style.display = 'flex';
+  _sportAbosList.textContent = TXT.laedt;
+  try {
+    await Promise.all([loadSportData(), sportAbosLaden()]);
+    renderSportAbosList();
+  } catch (e) { _sportAbosList.textContent = TXT.sportFehler; }
+};
+function closeSportAbosModal(){ _sportAbosModal.style.display = 'none'; }
+document.getElementById('sportAbosModalX').onclick = closeSportAbosModal;
+_sportAbosModal.addEventListener('click', function(e){ if (e.target === _sportAbosModal) closeSportAbosModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _sportAbosModal.style.display !== 'none') closeSportAbosModal(); });
+document.getElementById('sportAbosSaveBtn').onclick = async function(){
+  var btn = this;
+  if (btn.disabled) return;
+  btn.disabled = true;
+  try {
+    SPORT_ABOS = [...(_sportAbosList.querySelectorAll('input:checked'))].map(function(i){ return i.value; });
+    try { localStorage.setItem(SPORT_ABOS_KEY, JSON.stringify(SPORT_ABOS)); } catch (e) {}
+    if (CURRENT_USER) await apiRequest('PUT', '/api/sport/abos', { abos: SPORT_ABOS }).catch(function(){});
+    closeSportAbosModal();
+    if (sportMode) renderSportPage();
+  } finally {
+    btn.disabled = false;
+  }
+};
+
+// Region-Schalter: Die Senderrechte gelten fuer Deutschland -- ausserhalb
+// bleibt der ⚽-Knopf weg. (Spaeter je Land eine eigene Matrix, PLAN-SPORT.md.)
+if (REGION_WAHL !== 'DE') document.getElementById('tabSport').style.display = 'none';
 
 /* ---- "Als App speichern": Android hat mit beforeinstallprompt eine echte
    Browser-API dafuer, iOS nicht -- Apple erlaubt keine programmatische

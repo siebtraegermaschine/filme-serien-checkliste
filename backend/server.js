@@ -15,6 +15,7 @@ import feedbackRouter from './routes/feedback.js';
 import searchLogRouter from './routes/searchLog.js';
 import hiddenTitlesRouter from './routes/hiddenTitles.js';
 import cinemaRouter from './routes/cinema.js';
+import sportRouter from './routes/sport.js';
 import watchProvidersRouter from './routes/watchProviders.js';
 import trailersRouter from './routes/trailers.js';
 import linksRouter from './routes/links.js';
@@ -71,9 +72,12 @@ if (process.env.CORS_ORIGIN) {
 app.use('/api/titles/bulk-ingest', express.json({ limit: '30mb' }));
 app.use('/api/streaming/ingest', express.json({ limit: '60mb' }));
 app.use('/api/cinema/ingest', express.json({ limit: '20mb' }));
+// Sport: eine Saison aller Wettbewerbe sind ~1.000 kompakte Spielzeilen
+// (<1 MB) -- 5mb lassen Luft fuer weitere Wettbewerbe/Sportarten.
+app.use('/api/sport/ingest', express.json({ limit: '5mb' }));
 app.use((req, res, next) => {
   if (req.path === '/api/titles/bulk-ingest' || req.path === '/api/streaming/ingest'
-      || req.path === '/api/cinema/ingest') return next(); // oben schon geparst
+      || req.path === '/api/cinema/ingest' || req.path === '/api/sport/ingest') return next(); // oben schon geparst
   express.json({ limit: '1mb' })(req, res, next);
 });
 
@@ -105,6 +109,7 @@ app.use('/api/feedback', feedbackRouter);
 app.use('/api/search-log', searchLogRouter);
 app.use('/api/hidden-titles', hiddenTitlesRouter);
 app.use('/api/cinema', cinemaRouter);
+app.use('/api/sport', sportRouter);
 app.use('/api/watch-providers', watchProvidersRouter);
 app.use('/api/trailers', trailersRouter);
 app.use('/api/links', linksRouter);

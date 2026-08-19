@@ -974,3 +974,48 @@ CREATE TABLE IF NOT EXISTS onboarding_aggregat (
   anzahl  INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (frage, antwort, monat, region)
 );
+
+-- ===== Sport-Bereich (PLAN-SPORT.md): Fussball-Spielplan + Sender je Spiel =====
+--
+-- Befuellt ausschliesslich vom Ingest (sport-fetch.mjs via GitHub Action,
+-- Quelle OpenLigaDB + Rechte-Matrix sport-rechte.json). tv ist JSONB
+-- ([{s, typ, unsicher}]) statt eigener Tabelle: gelesen wird immer die ganze
+-- Zeile, nie nach Sendern gejoint -- dieselbe Ueberlegung wie bei
+-- users.watch_provider_ids weiter oben.
+CREATE TABLE IF NOT EXISTS sport_matches (
+  external_id BIGINT PRIMARY KEY,        -- OpenLigaDB matchID (saisonuebergreifend eindeutig)
+  wettbewerb  TEXT NOT NULL,             -- 'bl1' | 'bl2' | 'dfb' | 'ucl' | 'uel'
+  saison      TEXT NOT NULL,             -- '2026' = Saison 2026/27
+  runde       TEXT,                      -- '3. Spieltag' | 'Achtelfinale' | ...
+  anstoss     TIMESTAMPTZ NOT NULL,
+  heim        TEXT NOT NULL,
+  gast        TEXT NOT NULL,
+  heim_kurz   TEXT,
+  gast_kurz   TEXT,
+  heim_logo   TEXT,
+  gast_logo   TEXT,
+  beendet     BOOLEAN NOT NULL DEFAULT false,
+  tore_heim   SMALLINT,
+  tore_gast   SMALLINT,
+  tv          JSONB NOT NULL DEFAULT '[]',
+  fetched_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+-- Die einzige Leseabfrage ist ein Zeitfenster ueber anstoss (siehe routes/sport.js).
+CREATE INDEX IF NOT EXISTS sport_matches_anstoss_idx ON sport_matches (anstoss);
+
+-- Sender-Katalog und Wettbewerbsnamen, wie sie der letzte Ingest mitgebracht
+-- hat (Quelle: sport-rechte.json). Als Meta-Tabelle statt im Frontend
+-- verdrahtet, damit ein Rechtewechsel nur die JSON-Datei anfasst.
+CREATE TABLE IF NOT EXISTS sport_meta (
+  key        TEXT PRIMARY KEY,           -- 'sender' | 'wettbewerbe'
+  value      JSONB NOT NULL,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Eigene Sport-Abos (Sender-Slugs aus sport-rechte.json, z.B. '{sky,dazn}').
+-- Getrennt von watch_provider_ids: DAZN & Co. sind keine TMDB-Filmanbieter,
+-- die Auswahl dort kann diese Abos gar nicht ausdruecken. Dieselben drei
+-- Zustaende wie oben: NULL = nie konfiguriert (das Frontend leitet dann eine
+-- Vorauswahl aus den Streaminganbietern ab), leer = bewusst keine, gefuellt =
+-- genau diese.
+ALTER TABLE users ADD COLUMN IF NOT EXISTS sport_abos TEXT[];

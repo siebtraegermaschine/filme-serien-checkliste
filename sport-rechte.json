@@ -1,0 +1,108 @@
+{
+  "_hinweis": [
+    "Rechte-Matrix fuer den Sport-Bereich (siehe PLAN-SPORT.md).",
+    "WER ein Spiel zeigt, steht in Deutschland pro Wettbewerb und Anstoss-Slot",
+    "fest -- deshalb leiten sich ~90% der Sender REGELBASIERT aus Wochentag und",
+    "Uhrzeit (Europe/Berlin) ab. Die Regeln je Saison stehen unter 'saisons';",
+    "die erste passende Regel gewinnt (Reihenfolge zaehlt!).",
+    "",
+    "Die restlichen ~10% sind PICK-basiert (Amazons CL-Dienstagsspiel, Free-TV-",
+    "Spiele in Pokal und Europa League) und stehen als 'ausnahmen' je Spiel:",
+    "  \"<OpenLigaDB-matchID>\": { \"ersetzen\": [{\"s\":\"amazon\"}], \"quelle\": \"...\" }",
+    "  \"<OpenLigaDB-matchID>\": { \"zusatz\":   [{\"s\":\"ard\"}],    \"quelle\": \"...\" }",
+    "'ersetzen' verdraengt das Regel-Ergebnis (Amazon-Pick ist EXKLUSIV, das",
+    "Spiel laeuft dann NICHT bei DAZN), 'zusatz' ergaenzt es (Free-TV-Spiele",
+    "laufen ZUSAETZLICH zum Abo-Sender). Gepflegt wird das woechentlich von",
+    "einer Claude-Routine (PLAN-SPORT.md Abschnitt 5b).",
+    "",
+    "ACHTUNG Rechtewechsel 2027/28: CL -> Paramount+/Amazon, EL/ECL -> DAZN.",
+    "Dann NUR einen neuen Saisons-Block '2027' anlegen -- nichts im Code."
+  ],
+  "sender": {
+    "sky":     { "name": "Sky/WOW",           "frei": false, "tmdb": [29, 30], "link": "https://www.wow.de/live-sport" },
+    "dazn":    { "name": "DAZN",              "frei": false, "tmdb": [],       "link": "https://www.dazn.com/de-DE" },
+    "amazon":  { "name": "Amazon Prime",      "frei": false, "tmdb": [9, 119], "link": "https://www.amazon.de/gp/video/storefront" },
+    "rtlplus": { "name": "RTL+",              "frei": false, "tmdb": [298],    "link": "https://plus.rtl.de/" },
+    "sat1":    { "name": "Sat.1",             "frei": true,                    "link": "https://www.joyn.de/live-tv/sat1" },
+    "ard":     { "name": "ARD",               "frei": true,                    "link": "https://www.ardmediathek.de/live" },
+    "zdf":     { "name": "ZDF",               "frei": true,                    "link": "https://www.zdf.de/live-tv" },
+    "rtl":     { "name": "RTL",               "frei": true,                    "link": "https://plus.rtl.de/" },
+    "nitro":   { "name": "RTL Nitro",         "frei": true,                    "link": "https://plus.rtl.de/" }
+  },
+  "wettbewerbe": {
+    "bl1": { "name": "Bundesliga" },
+    "bl2": { "name": "2. Bundesliga" },
+    "dfb": { "name": "DFB-Pokal" },
+    "ucl": { "name": "Champions League" },
+    "uel": { "name": "Europa League" }
+  },
+  "saisons": {
+    "2025": {
+      "bl1": {
+        "regeln": [
+          { "tag": ["Sat"], "zeit": "15:30", "tv": [{ "s": "sky" }, { "s": "dazn", "typ": "konferenz" }] },
+          { "tag": ["Sun"], "tv": [{ "s": "dazn" }] },
+          { "tv": [{ "s": "sky" }] }
+        ],
+        "ausnahmen": {}
+      },
+      "bl2": {
+        "regeln": [{ "tv": [{ "s": "sky" }] }],
+        "ausnahmen": {}
+      },
+      "dfb": {
+        "regeln": [{ "tv": [{ "s": "sky" }] }],
+        "ausnahmen": {}
+      },
+      "ucl": {
+        "regeln": [
+          { "tag": ["Tue"], "tv": [{ "s": "dazn" }], "unsicher": true },
+          { "tv": [{ "s": "dazn" }] }
+        ],
+        "ausnahmen": {}
+      },
+      "uel": {
+        "regeln": [{ "tv": [{ "s": "rtlplus" }] }],
+        "ausnahmen": {}
+      }
+    },
+    "2026": {
+      "bl1": {
+        "regeln": [
+          { "tag": ["Sat"], "zeit": "15:30", "tv": [{ "s": "sky" }, { "s": "dazn", "typ": "konferenz" }] },
+          { "tag": ["Sun"], "tv": [{ "s": "dazn" }] },
+          { "tv": [{ "s": "sky" }] }
+        ],
+        "ausnahmen": {
+          "83156": { "zusatz": [{ "s": "sat1" }], "quelle": "Eroeffnungsspiel laeuft laut DFL-Rechtepaket zusaetzlich frei bei Sat.1 (bundesliga.com TV-Plan 2026/27), eingetragen 19.08.2026" }
+        }
+      },
+      "bl2": {
+        "regeln": [{ "tv": [{ "s": "sky" }] }],
+        "ausnahmen": {}
+      },
+      "dfb": {
+        "regeln": [{ "tv": [{ "s": "sky" }] }],
+        "ausnahmen": {
+          "81855": { "zusatz": [{ "s": "zdf" }], "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): ZDF zeigt Rostock-Stuttgart" },
+          "81849": { "zusatz": [{ "s": "rtl" }], "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): RTL zeigt Saarbruecken-Hertha" },
+          "81863": { "zusatz": [{ "s": "rtl" }], "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): RTL zeigt Wuerzburg-Koeln" },
+          "81836": { "zusatz": [{ "s": "rtl" }], "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): RTL zeigt HEBC-Dortmund" },
+          "81843": { "zusatz": [{ "s": "ard" }], "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): ARD zeigt Halle-Schalke" },
+          "81852": { "zusatz": [{ "s": "ard" }], "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): ARD zeigt Osnabrueck-Bayern" }
+        }
+      },
+      "ucl": {
+        "regeln": [
+          { "tag": ["Tue"], "tv": [{ "s": "dazn" }], "unsicher": true },
+          { "tv": [{ "s": "dazn" }] }
+        ],
+        "ausnahmen": {}
+      },
+      "uel": {
+        "regeln": [{ "tv": [{ "s": "rtlplus" }] }],
+        "ausnahmen": {}
+      }
+    }
+  }
+}
