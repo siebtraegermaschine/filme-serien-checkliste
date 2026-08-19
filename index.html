@@ -377,6 +377,9 @@
     background:var(--card); border:1px solid var(--border); border-radius:8px;
     color:var(--text); font-size:18px; cursor:pointer; z-index:20; line-height:1; }
   @media (hover: hover) { .nav-menu-btn:hover { border-color:var(--accent); color:var(--accent); } }
+  /* Der ⚽-Schnellzugriff erbt die Menue-Knopf-Optik und rueckt links davon:
+     16px Rand + 40px Knopf + 8px Fuge. */
+  .sport-header-btn { right: 64px; }
   /* "Nach oben": Die Listen werden lang -- Discovery laedt in 250er-Schritten
      nach, "Bald im Kino" hat ueber 300 Eintraege -- der Weg zurueck war ein
      langes Wischen. Erscheint erst nach etwa einer halben Bildschirmhoehe,
@@ -604,8 +607,7 @@
   a.tv-badge.tv-frei { border-color: rgba(76,195,138,.5); color: var(--done); }
   a.tv-badge.tv-hab { border-color: rgba(76,195,138,.5); color: var(--done); }
   .tv-zusatz { font-weight:400; opacity:.8; }
-  .sport-quelle { max-width:700px; margin:18px auto 0; padding:0 20px; box-sizing:border-box;
-    color:var(--text-dim); font-size:11px; }
+
   /* Im Popup ist die Spalte fuer Titel/Aktionen schmaler als auf Discovery/
      Streaming (Poster + Modal-Rand nehmen relativ mehr Platz weg) -- kleineres
      Poster und kompaktere Abstaende schaffen genug Raum, damit Watchlist und
@@ -1416,6 +1418,10 @@
       <path d="M18.2 14.5c1.9.7 3 2.2 3 4.5"/>
     </svg>
   </button>
+  <!-- Schnellzugriff auf den Sport-Bereich (Christian, 19. August 2026):
+       links neben dem Menue-Knopf, zusaetzlich zum Menuepunkt darunter.
+       Nur fuer Region DE sichtbar (siehe Sport-Block im JS). -->
+  <button type="button" id="sportHeaderBtn" class="nav-menu-btn sport-header-btn" aria-label="Sport">⚽</button>
   <button type="button" id="navMenuBtn" class="nav-menu-btn" aria-label="Menü" aria-haspopup="true" aria-expanded="false">☰</button>
   <div id="navMenu" class="nav-menu">
     <!-- Reihenfolge: erst die beiden Punkte zur App selbst (Anleitung,
@@ -1612,9 +1618,6 @@
     <h3 class="cinema-heading" id="sportSpaeterHeading">Demnächst</h3>
     <ol class="list sport-liste" id="sportSpaeterList"></ol>
   </div>
-  <!-- Quellenhinweis: Spielplandaten von OpenLigaDB (Community-Projekt),
-       Senderangaben aus der eigenen Rechte-Matrix -- ohne Gewähr. -->
-  <p class="sport-quelle" id="sportQuelle"></p>
 </div>
 
 <footer>
@@ -1905,6 +1908,12 @@
     <p class="prov-intro">Postleitzahlen und Orte für die Umkreissuche stammen von
       <a href="https://www.geonames.org" target="_blank" rel="noopener">GeoNames</a>,
       veröffentlicht unter der Lizenz Creative Commons Namensnennung 4.0 (CC BY 4.0).</p>
+    <!-- Steht hier statt auf der Sport-Seite selbst (Christian, 19. August
+         2026: Credits gehoeren unter Credits). -->
+    <p class="prov-intro">Die Spielpläne im Sport-Bereich stammen von
+      <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>,
+      einem freien Community-Projekt. Die Senderangaben sind regelbasiert aus der
+      deutschen Rechteverteilung abgeleitet – Angaben ohne Gewähr.</p>
   </div>
 </div>
 
@@ -2352,7 +2361,6 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Heute',
     sportMorgen: 'Morgen',
-    sportQuelle: 'Spielplan: OpenLigaDB (Community-Projekt). Sender regelbasiert aus der deutschen Rechteverteilung abgeleitet – Angaben ohne Gewähr, „vsl.“ = voraussichtlich.',
     gesehenZuWl: 'Du hast diesen Titel als gesehen markiert. Auf der Watchlist gilt er nicht mehr als gesehen: Er verschwindet aus „Gesehen“ und deine Sterne-Bewertung zählt nicht mehr für deinen Taste-Score. Trotzdem auf die Watchlist setzen?',
     wischFilme: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
     wischSerien: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
@@ -2685,7 +2693,6 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Today',
     sportMorgen: 'Tomorrow',
-    sportQuelle: 'Schedule: OpenLigaDB (community project). Broadcasters derived rule-based from the German rights split – no guarantee, “likely” = expected.',
     gesehenZuWl: 'You marked this title as watched. On the watchlist it no longer counts as watched: it disappears from “Watched” and your star rating no longer counts towards your Taste Score. Add it to the watchlist anyway?',
     wischFilme: 'Swiping left removes the title from your movies list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
     wischSerien: 'Swiping left removes the title from your series list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
@@ -3015,7 +3022,6 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Aujourd’hui',
     sportMorgen: 'Demain',
-    sportQuelle: 'Calendrier : OpenLigaDB (projet communautaire). Diffuseurs déduits des droits TV allemands – sans garantie, « prob. » = probable.',
     gesehenZuWl: 'Tu as marqué ce titre comme vu. Sur la watchlist, il ne compte plus comme vu : il disparaît de « Vus » et ta note en étoiles ne compte plus pour ton Taste Score. L’ajouter quand même à la watchlist ?',
     wischFilme: 'Balayer vers la gauche retire le titre de ta liste de films. Tu peux le rajouter à tout moment via « Découvrir » ou la recherche. Cette question ne te sera posée qu’une seule fois. Retirer maintenant ?',
     wischSerien: 'Balayer vers la gauche retire le titre de ta liste de séries. Tu peux le rajouter à tout moment via « Découvrir » ou la recherche. Cette question ne te sera posée qu’une seule fois. Retirer maintenant ?',
@@ -3345,7 +3351,6 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Hoy',
     sportMorgen: 'Mañana',
-    sportQuelle: 'Calendario: OpenLigaDB (proyecto comunitario). Emisoras derivadas de los derechos de TV alemanes – sin garantía, «prob.» = probable.',
     gesehenZuWl: 'Has marcado este título como visto. En la watchlist ya no cuenta como visto: desaparece de «Vistos» y tu valoración con estrellas deja de contar para tu Taste Score. ¿Añadirlo a la watchlist de todos modos?',
     wischFilme: 'Al deslizar a la izquierda, el título se elimina de tu lista de películas. Puedes volver a añadirlo en cualquier momento con «Descubrir» o la búsqueda. Solo se te preguntará esta vez. ¿Eliminar ahora?',
     wischSerien: 'Al deslizar a la izquierda, el título se elimina de tu lista de series. Puedes volver a añadirlo en cualquier momento con «Descubrir» o la búsqueda. Solo se te preguntará esta vez. ¿Eliminar ahora?',
@@ -3675,7 +3680,6 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Oggi',
     sportMorgen: 'Domani',
-    sportQuelle: 'Calendario: OpenLigaDB (progetto comunitario). Emittenti dedotte dai diritti TV tedeschi – senza garanzia, «prob.» = probabile.',
     gesehenZuWl: 'Hai segnato questo titolo come visto. Sulla watchlist non conta più come visto: sparisce da “Visti” e le tue stelle non contano più per il tuo Taste Score. Aggiungerlo comunque alla watchlist?',
     wischFilme: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista dei film. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri novità” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
     wischSerien: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista delle serie. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri novità” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
@@ -4005,7 +4009,6 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Vandaag',
     sportMorgen: 'Morgen',
-    sportQuelle: 'Speelschema: OpenLigaDB (communityproject). Zenders regelgebaseerd afgeleid uit de Duitse tv-rechten – zonder garantie, „wrsch.“ = waarschijnlijk.',
     gesehenZuWl: 'Je hebt deze titel als gezien gemarkeerd. Op de watchlist telt hij niet meer als gezien: hij verdwijnt uit “Gezien” en je sterrenbeoordeling telt niet meer mee voor je Taste Score. Toch aan de watchlist toevoegen?',
     wischFilme: 'Naar links vegen verwijdert de titel uit je filmlijst. Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
     wischSerien: 'Naar links vegen verwijdert de titel uit je serielijst. Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
@@ -4335,7 +4338,6 @@ var UI_TEXTE = {
     sportLive: 'AO VIVO',
     sportHeuteWort: 'Hoje',
     sportMorgen: 'Amanhã',
-    sportQuelle: 'Calendário: OpenLigaDB (projeto comunitário). Emissoras derivadas dos direitos de TV alemães – sem garantia, «prov.» = provável.',
     gesehenZuWl: 'Você marcou este título como assistido. Na watchlist ele deixa de contar como assistido: ele some de “Assistidos” e sua avaliação em estrelas deixa de contar para o seu Taste Score. Adicionar à watchlist mesmo assim?',
     wischFilme: 'Deslizar para a esquerda remove o título da sua lista de filmes. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
     wischSerien: 'Deslizar para a esquerda remove o título da sua lista de séries. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
@@ -4954,6 +4956,8 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Football live on TV' },
     '#providersSportTitel': { t: 'Sports subscriptions' },
     '#sportVereinBtn': { t: '+ Your club' },
+    '#sportHeaderBtn': { a: 'Sports' },
+    '#creditsModal .prov-intro:nth-of-type(6)': { h: 'The schedules in the Sports section come from <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, a free community project. Broadcaster information is derived rule-based from the German TV rights split – without guarantee.' },
     '#vereinTitel': { t: 'Your club' },
     '#vereinIntro': { t: 'Pick up to three clubs. Their logos appear as filters above the schedule.' },
     '#vereinSuche': { p: 'Search club …' },
@@ -5080,6 +5084,8 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Foot en direct à la télé' },
     '#providersSportTitel': { t: 'Abonnements sport' },
     '#sportVereinBtn': { t: '+ Ton club' },
+    '#sportHeaderBtn': { a: 'Sport' },
+    '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Les calendriers de la section Sport proviennent d’<a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un projet communautaire libre. Les diffuseurs sont déduits des droits TV allemands – sans garantie.' },
     '#vereinTitel': { t: 'Ton club' },
     '#vereinIntro': { t: 'Choisis jusqu’à trois clubs. Leurs logos apparaissent comme filtres au-dessus du calendrier.' },
     '#vereinSuche': { p: 'Chercher un club …' },
@@ -5206,6 +5212,8 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Fútbol en directo por TV' },
     '#providersSportTitel': { t: 'Suscripciones deportivas' },
     '#sportVereinBtn': { t: '+ Tu equipo' },
+    '#sportHeaderBtn': { a: 'Deporte' },
+    '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Los calendarios de la sección Deporte provienen de <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un proyecto comunitario libre. Las emisoras se derivan de los derechos de TV alemanes – sin garantía.' },
     '#vereinTitel': { t: 'Tu equipo' },
     '#vereinIntro': { t: 'Elige hasta tres equipos. Sus logos aparecen como filtros sobre el calendario.' },
     '#vereinSuche': { p: 'Buscar equipo …' },
@@ -5332,6 +5340,8 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Calcio in diretta TV' },
     '#providersSportTitel': { t: 'Abbonamenti sport' },
     '#sportVereinBtn': { t: '+ La tua squadra' },
+    '#sportHeaderBtn': { a: 'Sport' },
+    '#creditsModal .prov-intro:nth-of-type(6)': { h: 'I calendari della sezione Sport provengono da <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un progetto comunitario libero. Le emittenti sono dedotte dai diritti TV tedeschi – senza garanzia.' },
     '#vereinTitel': { t: 'La tua squadra' },
     '#vereinIntro': { t: 'Scegli fino a tre squadre. I loro loghi appaiono come filtri sopra il calendario.' },
     '#vereinSuche': { p: 'Cerca squadra …' },
@@ -5458,6 +5468,8 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Voetbal live op tv' },
     '#providersSportTitel': { t: 'Sportabonnementen' },
     '#sportVereinBtn': { t: '+ Jouw club' },
+    '#sportHeaderBtn': { a: 'Sport' },
+    '#creditsModal .prov-intro:nth-of-type(6)': { h: 'De speelschema’s in het Sport-gedeelte komen van <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, een vrij communityproject. Zenders worden afgeleid uit de Duitse tv-rechten – zonder garantie.' },
     '#vereinTitel': { t: 'Jouw club' },
     '#vereinIntro': { t: 'Kies maximaal drie clubs. Hun logo’s verschijnen als filters boven het speelschema.' },
     '#vereinSuche': { p: 'Club zoeken …' },
@@ -5584,6 +5596,8 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Futebol ao vivo na TV' },
     '#providersSportTitel': { t: 'Assinaturas de esporte' },
     '#sportVereinBtn': { t: '+ Seu clube' },
+    '#sportHeaderBtn': { a: 'Esporte' },
+    '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Os calendários da seção Esporte vêm do <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, um projeto comunitário livre. As emissoras são derivadas dos direitos de TV alemães – sem garantia.' },
     '#vereinTitel': { t: 'Seu clube' },
     '#vereinIntro': { t: 'Escolha até três clubes. Seus logos aparecem como filtros acima do calendário.' },
     '#vereinSuche': { p: 'Buscar clube …' },
@@ -9850,7 +9864,6 @@ function renderSportPage(){
   var data = SPORT_DATA;
   if (!data) return;
   document.getElementById('sportPageTitle').textContent = TXT.sportTitel;
-  document.getElementById('sportQuelle').textContent = TXT.sportQuelle;
   renderSportChips();
   var begriffe = aktiveSuchbegriffe();
   var gefiltert = data.spiele.filter(function(s){
@@ -10028,9 +10041,14 @@ document.getElementById('sportMenuBtn').onclick = function(){
   closeNavMenu();
   openSportPage();
 };
+// Zweiter Weg: der ⚽-Knopf im Kopf, links neben dem Menue.
+document.getElementById('sportHeaderBtn').onclick = function(){ openSportPage(); };
 // Region-Schalter: Die Senderrechte gelten fuer Deutschland -- ausserhalb
-// bleibt der Menuepunkt weg. (Spaeter je Land eine eigene Matrix, PLAN-SPORT.md.)
-if (REGION_WAHL !== 'DE') document.getElementById('sportMenuBtn').style.display = 'none';
+// bleiben Menuepunkt und Kopf-Knopf weg. (Spaeter je Land eine eigene Matrix.)
+if (REGION_WAHL !== 'DE') {
+  document.getElementById('sportMenuBtn').style.display = 'none';
+  document.getElementById('sportHeaderBtn').style.display = 'none';
+}
 
 /* ---- "Als App speichern": Android hat mit beforeinstallprompt eine echte
    Browser-API dafuer, iOS nicht -- Apple erlaubt keine programmatische

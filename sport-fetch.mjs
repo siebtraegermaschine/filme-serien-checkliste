@@ -74,12 +74,21 @@ function ergebnis(match) {
 }
 
 async function holeWettbewerb(kuerzel, saison, grenzeIso) {
+  const conf = RECHTE.wettbewerbe[kuerzel] || {};
+  // OpenLigaDB-Kuerzel kann vom eigenen abweichen ('blsc' -> 'BLSupercup');
+  // das eigene bleibt stabil in Datenbank und Oberflaeche.
+  const olb = conf.olb || kuerzel;
   // Ganze Saison in einem Abruf; null/leer heisst: (noch) nicht gepflegt.
-  const roh = await openLigaDb(`/getmatchdata/${kuerzel}/${saison}`);
+  const roh = await openLigaDb(`/getmatchdata/${olb}/${saison}`);
   if (!Array.isArray(roh) || !roh.length) return [];
 
   const spiele = roh
     .filter((m) => m && m.matchID && m.matchDateTimeUTC && m.team1 && m.team2)
+    // nurTeams (z.B. Laenderspiele): nur Partien MIT diesen Teams -- die
+    // uebrigen 40+ Nations-League-Spiele fremder Nationen sind fuer die
+    // deutsche Senderfrage Rauschen.
+    .filter((m) => !Array.isArray(conf.nurTeams) || conf.nurTeams.some(
+      (t) => m.team1.teamName === t || m.team2.teamName === t))
     // OpenLigaDB traegt fuer noch unterminierte Spiele teils Platzhalter um
     // Mitternacht ein -- die bleiben drin (Datum stimmt, Zeit folgt), nur
     // Vergangenes vor der Grenze fliegt raus.

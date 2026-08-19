@@ -92,6 +92,17 @@
     },
     "uel": {
       "name": "Europa League"
+    },
+    "blsc": {
+      "name": "Supercup",
+      "olb": "BLSupercup"
+    },
+    "nla": {
+      "name": "Länderspiele",
+      "olb": "nla",
+      "nurTeams": [
+        "Deutschland"
+      ]
     }
   },
   "saisons": {
@@ -188,6 +199,29 @@
                 "s": "rtlplus"
               }
             ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "blsc": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "sky"
+              },
+              {
+                "s": "sat1"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "nla": {
+        "regeln": [
+          {
+            "tv": []
           }
         ],
         "ausnahmen": {}
@@ -347,8 +381,72 @@
           }
         ],
         "ausnahmen": {}
+      },
+      "blsc": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "sky"
+              },
+              {
+                "s": "sat1"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "nla": {
+        "regeln": [
+          {
+            "tv": []
+          }
+        ],
+        "ausnahmen": {
+          "85224": {
+            "ersetzen": [
+              {
+                "s": "rtl"
+              }
+            ],
+            "quelle": "kicker/ZDF-Presseportal 19.08.2026: RTL zeigt alle drei Auswaertsspiele (24.09. Niederlande-Deutschland)"
+          },
+          "85227": {
+            "ersetzen": [
+              {
+                "s": "ard"
+              }
+            ],
+            "quelle": "kicker 19.08.2026: ARD zeigt Heimspiel gegen Griechenland (27.09.)"
+          },
+          "85228": {
+            "ersetzen": [
+              {
+                "s": "zdf"
+              }
+            ],
+            "quelle": "ZDF-Presseportal 19.08.2026: ZDF zeigt Deutschland-Serbien (01.10.)"
+          },
+          "85231": {
+            "ersetzen": [
+              {
+                "s": "rtl"
+              }
+            ],
+            "quelle": "kicker 19.08.2026: RTL zeigt alle drei Auswaertsspiele (04.10. Griechenland-Deutschland)"
+          },
+          "85232": {
+            "ersetzen": [
+              {
+                "s": "rtl"
+              }
+            ],
+            "quelle": "kicker 19.08.2026: RTL zeigt alle drei Auswaertsspiele (13.11. Serbien-Deutschland)"
+          }
+        }
       }
     }
   },
-  "_stand": "2026-08-19 (1. Pokalrunde + Sat.1-Eroeffnungsspiel eingetragen)"
+  "_stand": "2026-08-19 (Supercup + Laenderspiele ergaenzt; Heimspiel gegen NED am 16.11. noch offen: ARD oder ZDF)"
 }
