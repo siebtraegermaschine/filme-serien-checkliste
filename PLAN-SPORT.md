@@ -18,6 +18,16 @@
 > kombinierbar). Die Sport-Abos werden **im Fenster „Streaminganbieter"**
 > mitverwaltet (eigener Abschnitt), der frühere „Meine Abos"-Knopf entfiel.
 >
+> Weitere Nachträge (noch 19. August): **Supercup**, **Länderspiele** (nur
+> Deutschland-Partien, `nurTeams`-Filter) und **3. Liga** (MagentaSport) als
+> Wettbewerbe; ⚽-Schnellzugriff im Kopf; Klick auf ein Sender-Badge öffnet
+> ein **Popup mit Kanal je Slot** (Konferenz → DAZN 1, Topspiel → Sky Sport
+> Bundesliga 1 …), Abo-Status, Anbieter-Erklärung und Link; „+ Deine Ansicht"
+> speichert eine **Wettbewerbs-Vorauswahl** (Chips mehrfach wählbar) plus bis
+> zu drei Vereine als Logo-Filter (nie vorausgewählt). OpenLigaDB steht unter
+> Einstellungen → Credits. Die Wochenroutine kennt Länderspiele und
+> 3.-Liga-Free-Picks.
+>
 > Hinweis aus der Umsetzung: OpenLigaDB führt die CL 2026/27 bereits (`ucl`,
 > noch leer bis zur Auslosung Ende August); die Europa League pflegt die
 > Community erfahrungsgemäß lückenhaft — 2025/26 lag nur die K.-o.-Phase vor.
