@@ -17,6 +17,20 @@
      Logos nur seinen grauen Platzhalter. -->
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- iOS-Safari zoomt automatisch hinein, sobald ein Eingabefeld mit Schrift
+     unter 16px den Fokus bekommt (Suche, Vereinsauswahl, Anmeldung) -- und
+     der Zoom blieb nach dem Schliessen haengen, bis man ihn per Fingergeste
+     zurueckstellte (iPhone 15 Pro Max, 19. August 2026). maximum-scale=1
+     unterbindet genau diesen Auto-Zoom; echte Pinch-Gesten laesst iOS aus
+     Barrierefreiheitsgruenden trotzdem zu (seit iOS 10). Gesetzt wird die
+     Grenze NUR auf iOS-Geraeten: Android-Chrome respektiert maximum-scale
+     woertlich und wuerde dort das Zoomen komplett sperren. -->
+<script>
+  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    document.querySelector('meta[name="viewport"]')
+      .setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover');
+  }
+</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -2330,7 +2344,7 @@ var UI_TEXTE = {
     sportKeineSpiele: 'Keine Spiele für diese Auswahl.',
     sportFehler: 'Der Spielplan konnte nicht geladen werden.',
     sportAlle: 'Alle',
-    sportNurFrei: 'Nur Free-TV',
+    sportNurFrei: 'Free-TV',
     sportDeineAnbieter: 'Deine Streaming-Anbieter',
     sportFrei: 'frei',
     sportKonferenz: 'Konferenz',
@@ -2663,7 +2677,7 @@ var UI_TEXTE = {
     sportKeineSpiele: 'No matches for this selection.',
     sportFehler: 'The schedule could not be loaded.',
     sportAlle: 'All',
-    sportNurFrei: 'Free TV only',
+    sportNurFrei: 'Free TV',
     sportDeineAnbieter: 'Your streaming services',
     sportFrei: 'free',
     sportKonferenz: 'Conference',
@@ -2993,7 +3007,7 @@ var UI_TEXTE = {
     sportKeineSpiele: 'Aucun match pour cette sélection.',
     sportFehler: 'Le calendrier n’a pas pu être chargé.',
     sportAlle: 'Tous',
-    sportNurFrei: 'TV gratuite uniquement',
+    sportNurFrei: 'TV gratuite',
     sportDeineAnbieter: 'Tes services de streaming',
     sportFrei: 'gratuit',
     sportKonferenz: 'Multiplex',
@@ -3323,7 +3337,7 @@ var UI_TEXTE = {
     sportKeineSpiele: 'No hay partidos para esta selección.',
     sportFehler: 'No se pudo cargar el calendario.',
     sportAlle: 'Todos',
-    sportNurFrei: 'Solo TV en abierto',
+    sportNurFrei: 'TV en abierto',
     sportDeineAnbieter: 'Tus servicios de streaming',
     sportFrei: 'gratis',
     sportKonferenz: 'Multipartido',
@@ -3653,7 +3667,7 @@ var UI_TEXTE = {
     sportKeineSpiele: 'Nessuna partita per questa selezione.',
     sportFehler: 'Impossibile caricare il calendario.',
     sportAlle: 'Tutti',
-    sportNurFrei: 'Solo TV in chiaro',
+    sportNurFrei: 'TV in chiaro',
     sportDeineAnbieter: 'I tuoi servizi di streaming',
     sportFrei: 'gratis',
     sportKonferenz: 'Diretta gol',
@@ -3983,7 +3997,7 @@ var UI_TEXTE = {
     sportKeineSpiele: 'Geen wedstrijden voor deze selectie.',
     sportFehler: 'Het speelschema kon niet worden geladen.',
     sportAlle: 'Alle',
-    sportNurFrei: 'Alleen free-tv',
+    sportNurFrei: 'Free-tv',
     sportDeineAnbieter: 'Jouw streamingdiensten',
     sportFrei: 'gratis',
     sportKonferenz: 'Conferentie',
@@ -4313,7 +4327,7 @@ var UI_TEXTE = {
     sportKeineSpiele: 'Nenhum jogo para esta seleção.',
     sportFehler: 'Não foi possível carregar o calendário.',
     sportAlle: 'Todos',
-    sportNurFrei: 'Só TV aberta',
+    sportNurFrei: 'TV aberta',
     sportDeineAnbieter: 'Seus serviços de streaming',
     sportFrei: 'grátis',
     sportKonferenz: 'Conferência',

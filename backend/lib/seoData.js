@@ -11,6 +11,16 @@ import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatist
 import { ladePersonDaten, resolvePersonIdCachedOnly } from './personen.js';
 import { holeTitelDetails, holeTrailer } from './titeldetails.js';
 
+// Sortierung aller SEO-Titellisten: die GEWICHTETE TMDB-Bewertung, identisch
+// zur App (gewichteteNote in index.html: m = 1000, Katalogmittel 6,76).
+// Bewusst nicht das rohe rating -- damit staende jeder 10,0-Titel mit drei
+// Stimmen ueber dem Klassiker mit 30.000. Ohne Bewertung zaehlt 0 (ans Ende),
+// unbekannte Stimmenzahl wie null Stimmen (siehe Kommentar in index.html).
+const NOTE_SQL = `CASE WHEN COALESCE(rating, 0) = 0 THEN 0
+  ELSE (COALESCE(vote_count, 0)::float / (COALESCE(vote_count, 0) + 1000)) * rating
+     + (1000::float / (COALESCE(vote_count, 0) + 1000)) * 6.76 END`;
+
+
 // Ab wie vielen Woertern ein Redaktionstext eine Seite indexierbar macht.
 // Die Regel lautet unveraendert: Seiten mit Inhalt stehen auf index, angelegte
 // Seiten ohne Inhalt bleiben erreichbar mit noindex. Praezisiert wird nur, was
@@ -117,7 +127,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
       ? pool.query(
           `SELECT id, tmdb_id, title, year, poster_path FROM titles
             WHERE type = $1 AND director = $2 AND id <> $3
-            ORDER BY vote_count DESC NULLS LAST LIMIT 6`,
+            ORDER BY ${NOTE_SQL} DESC LIMIT 6`,
           [type, titel.director, titel.id]
         )
       : { rows: [] },
@@ -126,7 +136,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
       ? pool.query(
           `SELECT id, tmdb_id, title, year, genres, rating, poster_path FROM titles
             WHERE type = $1 AND genres && $2::text[] AND id <> $3
-            ORDER BY vote_count DESC NULLS LAST LIMIT 6`,
+            ORDER BY ${NOTE_SQL} DESC LIMIT 6`,
           [type, titel.genres, titel.id]
         )
       : { rows: [] },
@@ -235,7 +245,7 @@ export async function ladeGenreSeite(art, genreSlug, seite, locale) {
   const { rows } = await pool.query(
     `SELECT id, tmdb_id, title, year, genres, rating, vote_count, poster_path
        FROM titles WHERE type = $1 AND genres @> ARRAY[$2::text]
-      ORDER BY vote_count DESC NULLS LAST, rating DESC NULLS LAST, title ASC
+      ORDER BY ${NOTE_SQL} DESC, title ASC
       LIMIT $3 OFFSET $4`,
     [type, genre, SEITENGROESSE, offset]
   );
@@ -258,7 +268,7 @@ export async function ladeGenreSeite(art, genreSlug, seite, locale) {
 export async function ladeAnbieterSeite(anbieterSlug, locale) {
   const region = regionFuerLocale(locale);
   const { rows } = await pool.query(
-    `SELECT * FROM streaming_cache WHERE provider_id = $1 AND region = $2 ORDER BY type, title`,
+    `SELECT * FROM streaming_cache WHERE provider_id = $1 AND region = $2 ORDER BY ${NOTE_SQL} DESC, title ASC`,
     [anbieterSlug, region]
   );
   if (!rows.length) return null;
@@ -311,12 +321,12 @@ export async function ladeBestenliste(art, modus, wert, locale) {
   const { rows } = await pool.query(
     `SELECT id, tmdb_id, title, year, genres, rating, vote_count, poster_path
        FROM titles WHERE type = $1 AND ${bedingung}
-      ORDER BY vote_count DESC NULLS LAST, rating DESC NULLS LAST LIMIT 200`,
+      ORDER BY ${NOTE_SQL} DESC LIMIT 200`,
     [type, param]
   );
   const bewertungen = await bewertungenFuer(rows.map((r) => r.id));
-  // Community-Bewertung schlaegt TMDB-Popularitaet, wo vorhanden -- danach
-  // wie zuvor nach TMDB-Stimmenzahl (die Reihenfolge der SQL-Abfrage).
+  // Community-Bewertung schlaegt TMDB, wo vorhanden -- danach nach der
+  // gewichteten TMDB-Bewertung (NOTE_SQL, die Reihenfolge der SQL-Abfrage).
   const sortiert = rows
     .map((r) => ({
       id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
@@ -365,7 +375,7 @@ async function alleGenres(type) {
 async function topTitel(type, limit = HUB_ANZAHL) {
   const { rows } = await pool.query(
     `SELECT id, tmdb_id, title, year, genres, rating, vote_count, poster_path
-       FROM titles WHERE type = $1 ORDER BY vote_count DESC NULLS LAST, rating DESC NULLS LAST LIMIT $2`,
+       FROM titles WHERE type = $1 ORDER BY ${NOTE_SQL} DESC LIMIT $2`,
     [type, limit]
   );
   const bewertungen = await bewertungenFuer(rows.map((r) => r.id));
@@ -480,7 +490,7 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
   const bedingung = rolle === 'regisseur' ? 'director = $1' : '$1 = ANY(cast_names)';
   const { rows } = await pool.query(
     `SELECT id, tmdb_id, type, title, year, poster_path FROM titles
-      WHERE ${bedingung} ORDER BY vote_count DESC NULLS LAST LIMIT 24`,
+      WHERE ${bedingung} ORDER BY ${NOTE_SQL} DESC LIMIT 24`,
     [person.name]
   );
   const filmografie = rows.map((r) => ({
