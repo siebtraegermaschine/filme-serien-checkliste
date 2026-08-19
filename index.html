@@ -1195,6 +1195,12 @@
   /* "Ähnliche Titel" bleibt links (Gesehen/Watchlist weiter rechts gepackt) und ist
      nur sichtbar, wenn die Details dieser Zeile aufgeklappt sind. */
   .similar-btn { display: none; flex: 1 1 auto; margin-right: auto; }
+  /* Auf schmalen Geraeten wie oben: Inhaltsbreite statt gestreckt. Die Regel
+     MUSS hier stehen und nicht im grossen 520er-Block weiter oben -- der steht
+     im Quelltext vor der Zeile darueber und verloere bei gleicher
+     Spezifitaet. Gestreckt war "Ähnliche Titel" bei 430px 178px breit, also
+     deutlich breiter als Trailer + Teilen daneben. */
+  @media (max-width: 520px) { .similar-btn { flex: 0 1 auto; } }
   li.item.show-details .similar-btn, li.disc.show-details .similar-btn { display: inline-block; }
   .watch-empty { text-align: center; color: var(--text-dim); font-size: 14px; margin: 26px auto; max-width: 520px; line-height: 1.7; padding: 0 20px; }
   @media (max-width: 640px) { .details .detposter { width: 96px; } }
