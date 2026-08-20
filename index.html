@@ -2119,6 +2119,21 @@
   </div>
 </div>
 
+<!-- Hinweis, wenn "Deine Streaming-Anbieter" ohne festgelegte Abos geklickt
+     wird (abgemeldet): wirbt fuer die kostenlose Registrierung -- dort legt
+     man Streaming-Anbieter und Verein fest. Angemeldet ohne Abos oeffnet der
+     Klick stattdessen direkt das Streaminganbieter-Fenster. -->
+<div id="sportAboHinweisModal" class="modal-overlay" style="display:none">
+  <div class="modal similar-modal">
+    <button class="modal-x" id="sportAboHinweisX" aria-label="Schließen">✕</button>
+    <h3 id="sportAboHinweisTitel">Deine Streaming-Anbieter</h3>
+    <p class="prov-intro" id="sportAboHinweisText">Kostenlos registrieren und deine
+      Streaming-Anbieter sowie deinen Verein festlegen — dann filtert dieser Knopf
+      genau die Spiele, die du sehen kannst.</p>
+    <button type="button" id="sportAboHinweisBtn" class="auth-submit">Kostenlos registrieren / anmelden</button>
+  </div>
+</div>
+
 <!-- Sender-Popup (Sport): Klick auf ein Sender-Badge zeigt, WO genau das
      Spiel laeuft (Kanal je Slot aus der Rechte-Matrix), ob es im eigenen Abo
      ist, und erklaert den Anbieter (z.B. Sky/WOW = ein Anbieter, zwei Wege).
@@ -2366,6 +2381,8 @@ var UI_TEXTE = {
     sportAlle: 'Alle',
     sportNurFrei: 'Free-TV',
     sportDeineAnbieter: 'Deine Streaming-Anbieter',
+    sportAboHinweisText: 'Kostenlos registrieren und deine Streaming-Anbieter sowie deinen Verein festlegen — dann filtert dieser Knopf genau die Spiele, die du sehen kannst.',
+    sportAboHinweisKnopf: 'Kostenlos registrieren / anmelden',
     sportFreiEmpfangbar: 'Frei empfangbar',
     sportImAbo: 'In deinem Abo enthalten',
     sportNichtImAbo: 'Nicht in deinen Abos',
@@ -2705,6 +2722,8 @@ var UI_TEXTE = {
     sportAlle: 'All',
     sportNurFrei: 'Free TV',
     sportDeineAnbieter: 'Your streaming services',
+    sportAboHinweisText: 'Register for free and set your streaming services and your club — then this filter shows exactly the matches you can watch.',
+    sportAboHinweisKnopf: 'Register / sign in for free',
     sportFreiEmpfangbar: 'Free to watch',
     sportImAbo: 'Included in your subscription',
     sportNichtImAbo: 'Not in your subscriptions',
@@ -3041,6 +3060,8 @@ var UI_TEXTE = {
     sportAlle: 'Tous',
     sportNurFrei: 'TV gratuite',
     sportDeineAnbieter: 'Tes services de streaming',
+    sportAboHinweisText: 'Inscris-toi gratuitement et définis tes services de streaming et ton club — ce filtre montrera exactement les matchs que tu peux voir.',
+    sportAboHinweisKnopf: 'S’inscrire / se connecter',
     sportFreiEmpfangbar: 'En clair',
     sportImAbo: 'Inclus dans ton abonnement',
     sportNichtImAbo: 'Pas dans tes abonnements',
@@ -3377,6 +3398,8 @@ var UI_TEXTE = {
     sportAlle: 'Todos',
     sportNurFrei: 'TV en abierto',
     sportDeineAnbieter: 'Tus servicios de streaming',
+    sportAboHinweisText: 'Regístrate gratis y define tus servicios de streaming y tu equipo — este filtro mostrará exactamente los partidos que puedes ver.',
+    sportAboHinweisKnopf: 'Registrarse / iniciar sesión',
     sportFreiEmpfangbar: 'En abierto',
     sportImAbo: 'Incluido en tu suscripción',
     sportNichtImAbo: 'No está en tus suscripciones',
@@ -3713,6 +3736,8 @@ var UI_TEXTE = {
     sportAlle: 'Tutti',
     sportNurFrei: 'TV in chiaro',
     sportDeineAnbieter: 'I tuoi servizi di streaming',
+    sportAboHinweisText: 'Registrati gratis e imposta i tuoi servizi di streaming e la tua squadra — questo filtro mostrerà esattamente le partite che puoi vedere.',
+    sportAboHinweisKnopf: 'Registrati / accedi',
     sportFreiEmpfangbar: 'In chiaro',
     sportImAbo: 'Incluso nel tuo abbonamento',
     sportNichtImAbo: 'Non nei tuoi abbonamenti',
@@ -4049,6 +4074,8 @@ var UI_TEXTE = {
     sportAlle: 'Alle',
     sportNurFrei: 'Free-tv',
     sportDeineAnbieter: 'Jouw streamingdiensten',
+    sportAboHinweisText: 'Registreer gratis en stel je streamingdiensten en je club in — dan toont dit filter precies de wedstrijden die je kunt zien.',
+    sportAboHinweisKnopf: 'Gratis registreren / inloggen',
     sportFreiEmpfangbar: 'Gratis te zien',
     sportImAbo: 'Inbegrepen in je abonnement',
     sportNichtImAbo: 'Niet in je abonnementen',
@@ -4385,6 +4412,8 @@ var UI_TEXTE = {
     sportAlle: 'Todos',
     sportNurFrei: 'TV aberta',
     sportDeineAnbieter: 'Seus serviços de streaming',
+    sportAboHinweisText: 'Registre-se grátis e defina seus serviços de streaming e seu clube — este filtro mostrará exatamente os jogos que você pode ver.',
+    sportAboHinweisKnopf: 'Registrar-se / entrar',
     sportFreiEmpfangbar: 'Em TV aberta',
     sportImAbo: 'Incluído na sua assinatura',
     sportNichtImAbo: 'Não está nas suas assinaturas',
@@ -9913,6 +9942,23 @@ function sportBadgeHtml(b){
          '</button>';
 }
 
+/* ---- Hinweis "Deine Streaming-Anbieter" ohne Abos (siehe Chip-Handler). */
+var _sportAboHinweis = document.getElementById('sportAboHinweisModal');
+function openSportAboHinweis(){
+  document.getElementById('sportAboHinweisTitel').textContent = TXT.sportDeineAnbieter;
+  document.getElementById('sportAboHinweisText').textContent = TXT.sportAboHinweisText;
+  document.getElementById('sportAboHinweisBtn').textContent = TXT.sportAboHinweisKnopf;
+  _sportAboHinweis.style.display = 'flex';
+}
+function closeSportAboHinweis(){ _sportAboHinweis.style.display = 'none'; }
+document.getElementById('sportAboHinweisX').onclick = closeSportAboHinweis;
+_sportAboHinweis.addEventListener('click', function(e){ if (e.target === _sportAboHinweis) closeSportAboHinweis(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _sportAboHinweis.style.display !== 'none') closeSportAboHinweis(); });
+document.getElementById('sportAboHinweisBtn').onclick = function(){
+  closeSportAboHinweis();
+  openAuthModal();
+};
+
 /* ---- Sender-Popup: Was genau bedeutet dieses Badge? Kanal (aus der Regel
    oder dem Sender-Standard), frei/Abo-Status, kurze Anbieter-Erklaerung aus
    der Rechte-Matrix (deutsch -- der Sport-Bereich ist DE-only) und der Link
@@ -10038,7 +10084,19 @@ function renderSportChips(){
   verfEl.querySelectorAll('button[data-verf]').forEach(function(b){
     b.onclick = function(){
       if (b.dataset.verf === 'alle') { SPORT_VERF_ABO = false; SPORT_VERF_FREI = false; SPORT_VEREIN_AKTIV = []; }
-      else if (b.dataset.verf === 'abo') SPORT_VERF_ABO = !SPORT_VERF_ABO;
+      else if (b.dataset.verf === 'abo') {
+        // Ohne festgelegte Abos filtert der Knopf ins Leere -- statt einer
+        // leeren Liste kommt der passende naechste Schritt: abgemeldet die
+        // Einladung zur kostenlosen Registrierung, angemeldet direkt das
+        // Streaminganbieter-Fenster mit dem Sport-Abo-Abschnitt.
+        var abosDa = (Array.isArray(SPORT_ABOS) && SPORT_ABOS.length > 0) || sportAbosVorauswahl().length > 0;
+        if (!SPORT_VERF_ABO && !abosDa) {
+          if (CURRENT_USER) openProvidersModal();
+          else openSportAboHinweis();
+          return;
+        }
+        SPORT_VERF_ABO = !SPORT_VERF_ABO;
+      }
       else if (b.dataset.verf === 'frei') SPORT_VERF_FREI = !SPORT_VERF_FREI;
       verfReset();
     };
