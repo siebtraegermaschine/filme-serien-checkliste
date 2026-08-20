@@ -10150,6 +10150,14 @@ function openSportPage(){
 function closeSportPage(){
   if (!sportMode) return;
   sportMode = false;
+  // Vertagte Erst-Besuchs-Strecken (Kennenlern/Onboarding) nachholen: Wer
+  // ueber /sport kam, hat sie beim Start bewusst nicht gesehen -- erst der
+  // Wechsel in die Titelbereiche ist der richtige Moment (siehe Boot unten).
+  if (window._sportVertagteStrecken) {
+    var vertagt = window._sportVertagteStrecken;
+    window._sportVertagteStrecken = null;
+    vertagt();
+  }
   // Beim Verlassen gehoert wieder die Startseite in die Adresszeile -- sonst
   // laedt der naechste Neuladen erneut die Sport-Ansicht.
   if (location.pathname === '/sport') {
@@ -13654,18 +13662,27 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
     // und vorher ist der Katalog leer. Abgemeldet passiert hier nichts; dann
     // greift die Kennenlern-Strecke darunter.
     if (!ansichtLinkDa && !momentToken) {
-      STARTLADUNG.then(function(){ if (CURRENT_USER) onboardingFaellig(); }).catch(function(){});
-    }
-    // Erster Besuch: Kennenlern-Strecke, sobald der Katalog da ist. Nur
-    // abgemeldet und nur ohne bestehendes Profil -- wer schon markiert hat
-    // (etwa auf einem anderen Weg hierher kam), braucht sie nicht. Bewusst
-    // NICHT bei Einladungs-, geteilten und Ansicht-Links: Dort stuenden sonst
-    // zwei Fenster uebereinander bzw. verdeckte die Strecke genau die Liste,
-    // fuer die jemand dem Link gefolgt ist.
-    if (KENNENLERN_NEU && !ansichtLinkDa && !momentToken) {
-      STARTLADUNG.then(function(){
-        if (!CURRENT_USER && tasteProfileSize() === 0 && window.kennenlernStarten) window.kennenlernStarten();
-      }).catch(function(){});
+      // Onboarding (angemeldet) und Kennenlern-Strecke (Erstbesuch,
+      // abgemeldet, ohne Profil) -- Kennenlern bewusst NICHT bei Einladungs-,
+      // geteilten und Ansicht-Links: Dort stuenden sonst zwei Fenster
+      // uebereinander bzw. verdeckte die Strecke genau die Liste, fuer die
+      // jemand dem Link gefolgt ist.
+      //
+      // Und BEIDE nicht ueber der Sport-Ansicht (Christian, 20. August 2026):
+      // Wer einem /sport-Link folgt, will den Spielplan sehen, nicht Filme
+      // auswaehlen. Vertagt bis zum Wechsel in die Titelbereiche -- der Hol-
+      // Auftrag liegt in _sportVertagteStrecken, closeSportPage loest ihn ein.
+      var kennenlernJetzt = KENNENLERN_NEU;
+      var strecken = function(){
+        STARTLADUNG.then(function(){ if (CURRENT_USER) onboardingFaellig(); }).catch(function(){});
+        if (kennenlernJetzt) {
+          STARTLADUNG.then(function(){
+            if (!CURRENT_USER && tasteProfileSize() === 0 && window.kennenlernStarten) window.kennenlernStarten();
+          }).catch(function(){});
+        }
+      };
+      if (sportMode) window._sportVertagteStrecken = strecken;
+      else strecken();
     }
   }
 });
