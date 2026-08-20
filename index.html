@@ -2110,8 +2110,9 @@
          Sport-Bereich. -->
     <div id="providersSportWrap" style="display:none">
       <h4 class="prov-sport-titel" id="providersSportTitel">Sport-Abos</h4>
-      <p class="prov-intro" id="providersSportIntro">Für den Sport-Bereich: Spiele, die du damit
-        sehen kannst, werden mit ✅ markiert.</p>
+      <p class="prov-intro" id="providersSportIntro">Wähle die Streaming-Anbieter aus, die du
+        bereits nutzt. „Deine Streaming-Anbieter“ filtert nach allen Spielen, die in deinen
+        Abos enthalten sind.</p>
       <div class="prov-list" id="providersSportList"></div>
     </div>
     <div class="prov-foot">
@@ -5085,7 +5086,7 @@ var MARKUP_TEXTE = {
     '#ansichtVereineTitel': { t: 'Your clubs (up to 3)' },
     '#vereinSuche': { p: 'Search club …' },
     '#vereinSaveBtn': { t: 'Save' },
-    '#providersSportIntro': { t: 'For the Sports section: matches you can watch with these get a ✅.' },
+    '#providersSportIntro': { t: 'Select the streaming services you already use. “Your streaming services” filters to all matches included in your subscriptions.' },
     '#kinosModal h3': { t: 'Your cinemas' },
     '#kinosModal .prov-intro': { t: 'Search for your town and choose the cinemas you go to.' },
     '#kinosSaveBtn': { t: 'Save' },
@@ -5215,7 +5216,7 @@ var MARKUP_TEXTE = {
     '#ansichtVereineTitel': { t: 'Tes clubs (max. 3)' },
     '#vereinSuche': { p: 'Chercher un club …' },
     '#vereinSaveBtn': { t: 'Enregistrer' },
-    '#providersSportIntro': { t: 'Pour la section Sport : les matchs que tu peux voir sont marqués ✅.' },
+    '#providersSportIntro': { t: 'Sélectionne les services de streaming que tu utilises déjà. « Tes services de streaming » filtre tous les matchs inclus dans tes abonnements.' },
     '#kinosModal h3': { t: 'Tes cinémas' },
     '#kinosModal .prov-intro': { t: 'Cherche ta ville et choisis les cinémas où tu vas.' },
     '#kinosSaveBtn': { t: 'Enregistrer' },
@@ -5345,7 +5346,7 @@ var MARKUP_TEXTE = {
     '#ansichtVereineTitel': { t: 'Tus equipos (máx. 3)' },
     '#vereinSuche': { p: 'Buscar equipo …' },
     '#vereinSaveBtn': { t: 'Guardar' },
-    '#providersSportIntro': { t: 'Para la sección Deporte: los partidos que puedas ver se marcan con ✅.' },
+    '#providersSportIntro': { t: 'Selecciona los servicios de streaming que ya usas. «Tus servicios de streaming» filtra todos los partidos incluidos en tus suscripciones.' },
     '#kinosModal h3': { t: 'Tus cines' },
     '#kinosModal .prov-intro': { t: 'Busca tu localidad y elige los cines a los que vas.' },
     '#kinosSaveBtn': { t: 'Guardar' },
@@ -5475,7 +5476,7 @@ var MARKUP_TEXTE = {
     '#ansichtVereineTitel': { t: 'Le tue squadre (max 3)' },
     '#vereinSuche': { p: 'Cerca squadra …' },
     '#vereinSaveBtn': { t: 'Salva' },
-    '#providersSportIntro': { t: 'Per la sezione Sport: le partite che puoi vedere sono contrassegnate con ✅.' },
+    '#providersSportIntro': { t: 'Seleziona i servizi di streaming che già usi. «I tuoi servizi di streaming» filtra tutte le partite incluse nei tuoi abbonamenti.' },
     '#kinosModal h3': { t: 'I tuoi cinema' },
     '#kinosModal .prov-intro': { t: 'Cerca la tua città e scegli i cinema in cui vai.' },
     '#kinosSaveBtn': { t: 'Salva' },
@@ -5605,7 +5606,7 @@ var MARKUP_TEXTE = {
     '#ansichtVereineTitel': { t: 'Jouw clubs (max. 3)' },
     '#vereinSuche': { p: 'Club zoeken …' },
     '#vereinSaveBtn': { t: 'Opslaan' },
-    '#providersSportIntro': { t: 'Voor het Sport-gedeelte: wedstrijden die je kunt zien krijgen een ✅.' },
+    '#providersSportIntro': { t: 'Kies de streamingdiensten die je al gebruikt. „Jouw streamingdiensten” filtert op alle wedstrijden die in je abonnementen zijn inbegrepen.' },
     '#kinosModal h3': { t: 'Jouw bioscopen' },
     '#kinosModal .prov-intro': { t: 'Zoek naar je woonplaats en kies de bioscopen waar je naartoe gaat.' },
     '#kinosSaveBtn': { t: 'Opslaan' },
@@ -5735,7 +5736,7 @@ var MARKUP_TEXTE = {
     '#ansichtVereineTitel': { t: 'Seus clubes (máx. 3)' },
     '#vereinSuche': { p: 'Buscar clube …' },
     '#vereinSaveBtn': { t: 'Salvar' },
-    '#providersSportIntro': { t: 'Para a seção Esporte: jogos que você pode ver são marcados com ✅.' },
+    '#providersSportIntro': { t: 'Selecione os serviços de streaming que você já usa. «Seus serviços de streaming» filtra todos os jogos incluídos nas suas assinaturas.' },
     '#kinosModal h3': { t: 'Seus cinemas' },
     '#kinosModal .prov-intro': { t: 'Busque a sua cidade e escolha os cinemas que você frequenta.' },
     '#kinosSaveBtn': { t: 'Salvar' },
@@ -12920,6 +12921,11 @@ async function openProvidersModal(){
   _provList.style.display = nurSport ? 'none' : '';
   var intro = _provModal.querySelector('.prov-intro');
   if (intro) intro.style.display = nurSport ? 'none' : '';
+  // Nur der Erklaersatz, keine Zwischenueberschrift (Christian, 20.08.2026:
+  // "dann nur den Satz") -- in den vollen Einstellungen trennt die
+  // Ueberschrift weiterhin die beiden Abschnitte.
+  var sportTitel = document.getElementById('providersSportTitel');
+  if (sportTitel) sportTitel.style.display = nurSport ? 'none' : '';
   if (nurSport) { _provList.textContent = ''; return; }
   _provList.textContent = TXT.laedt;
   try {
