@@ -588,9 +588,6 @@
   }
   @media (hover: hover) { .sport-chips button:hover { border-color: var(--accent); color: var(--accent); } }
   .sport-chips button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-  /* "Nur Free-TV" ist ein anderer Filtertyp als die Wettbewerbe -- gruen statt
-     gold, dieselbe Farbe wie die frei-Badges an den Spielen. */
-  .sport-chips button.sport-frei-chip.active { background: rgba(76,195,138,.14); border-color: var(--done); color: var(--done); }
   li.sport-match {
     background: var(--card); border:1px solid var(--border); border-radius:10px;
     padding:11px 16px; margin-bottom:8px;
@@ -9972,7 +9969,7 @@ function renderSportChips(){
   var vhtml =
     '<button type="button" data-verf="alle" class="' + (alleAktiv ? 'active' : '') + '">' + esc(TXT.sportAlle) + '</button>' +
     '<button type="button" data-verf="abo" class="' + (SPORT_VERF_ABO ? 'active' : '') + '">' + esc(TXT.sportDeineAnbieter) + '</button>' +
-    '<button type="button" data-verf="frei" class="sport-frei-chip' + (SPORT_VERF_FREI ? ' active' : '') + '">' + esc(TXT.sportNurFrei) + '</button>';
+    '<button type="button" data-verf="frei" class="' + (SPORT_VERF_FREI ? 'active' : '') + '">' + esc(TXT.sportNurFrei) + '</button>';
   MEINE_VEREINE.forEach(function(v){
     var aktiv = SPORT_VEREIN_AKTIV.indexOf(v.n) !== -1;
     vhtml += '<button type="button" class="verein-chip' + (aktiv ? ' active' : '') + '" data-verein="' + escAttr(v.n) + '" title="' + escAttr(v.n) + '">' +
