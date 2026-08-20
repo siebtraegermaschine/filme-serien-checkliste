@@ -18,6 +18,13 @@
 > kombinierbar). Die Sport-Abos werden **im Fenster „Streaminganbieter"**
 > mitverwaltet (eigener Abschnitt), der frühere „Meine Abos"-Knopf entfiel.
 >
+> **21./20. August, Ausbau:** SEO-Spielseiten je Partie (Zeitstufen zur
+> Abrufzeit, `backend/lib/seoSport.js`), tägliche Inhalte-Routine
+> (Vorberichte alle Spiele ≤3 Tage, Aufstellungen nur Topspiele, Direkt-
+> Commit) — und die eigene Sport-Domain **couchultras.com** („CouchUltras")
+> ist aktiviert: White-Label-App plus alleiniges Zuhause der Spielseiten,
+> movietaste leitet per 301 um. Logo folgt.
+>
 > Weitere Nachträge (noch 19. August): **Supercup**, **Länderspiele** (nur
 > Deutschland-Partien, `nurTeams`-Filter) und **3. Liga** (MagentaSport) als
 > Wettbewerbe; ⚽-Schnellzugriff im Kopf; Klick auf ein Sender-Badge öffnet
