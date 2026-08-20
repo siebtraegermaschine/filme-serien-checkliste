@@ -171,6 +171,10 @@ function sportKopfFuss(ctx) {
   if (!ctx.marke) return {};
   return {
     basis: ctx.basis,
+    // Link-Vorschau mit dem CouchUltras-Logo statt des MovieMatch-Banners
+    // (Popcorn); Favicon ebenso (Christian, 20.08.2026).
+    bild: ctx.basis + '/couchultras.png',
+    favicon: '/cu-favicon-32.png',
     kopfHtml: `<header class="seo-kopf"><a class="marke" href="/"><img class="marke-logo" src="/couchultras.png" alt="${attrEsc(ctx.marke)} – Wissen, wo’s läuft."></a>
       <nav class="seo-nav"><a href="/">Zum Spielplan</a></nav></header>`,
     fussHtml: `<footer>

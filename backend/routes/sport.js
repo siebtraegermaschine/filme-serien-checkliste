@@ -2,6 +2,7 @@ import { pool } from '../db/pool.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { geheimnisStimmt } from '../lib/vergleich.js';
+import { sportKontext } from '../lib/seoSport.js';
 
 const router = createAsyncRouter();
 
@@ -26,7 +27,11 @@ router.get('/', async (_req, res) => {
         ORDER BY anstoss`, [RUECKBLICK, VORAUSBLICK]),
   ]);
   const m = Object.fromEntries(meta.rows.map((r) => [r.key, r.value]));
+  // Wo die SEO-Spielseiten wohnen (couchultras.com, sobald aktiv) -- das
+  // Frontend baut daraus die Teilen-Links beim Wischen einer Spielkarte.
+  const ktx = sportKontext();
   res.json({
+    seiten: { basis: ktx.basis, prefix: ktx.spielPrefix },
     sender: m.sender || {},
     wettbewerbe: m.wettbewerbe || {},
     spiele: spiele.rows.map((r) => ({

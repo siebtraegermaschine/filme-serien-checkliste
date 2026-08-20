@@ -10060,13 +10060,32 @@ function sportBadgeHtml(b){
          '</button>';
 }
 
-/* ---- Sport teilen: nur der /sport-Link, ohne Konto. navigator.share wo
-   vorhanden, sonst das Kopier-Fenster (zeigeEinladung). ---- */
+/* ---- Sport teilen: nur der /sport-Link, ohne Konto. Auf der Sport-Domain
+   wird das Logo als BILD mitgeteilt (Christian, 20.08.2026) -- die Datei ist
+   VORAB geladen, denn navigator.share darf nur direkt in der Klick-Geste
+   laufen; ein await mitten im Klick verliert sie auf iOS. ---- */
+var _sportLogoDatei = null;
+function sportLogoVorladen(){
+  if (_sportLogoDatei !== null || !SPORT_SEITE_MODUS || typeof File === 'undefined') return;
+  _sportLogoDatei = false;   // "laedt/fehlgeschlagen" -- nie zweimal anstossen
+  fetch('couchultras.png').then(function(r){ return r.blob(); }).then(function(blob){
+    _sportLogoDatei = new File([blob], 'couchultras.png', { type: 'image/png' });
+  }).catch(function(){});
+}
 document.getElementById('sportTeilenFabText').textContent = TXT.teilen;
 document.getElementById('sportTeilenFab').onclick = function(){
   var url = location.origin + (SPORT_SEITE_MODUS ? '/' : '/sport');
   var text = TXT.sportTeilenText;
   if (navigator.share) {
+    // Mit Logo-Bild, wenn geladen und teilbar -- der Link wandert dann in
+    // den Text (manche Teilen-Ziele lassen files+url nicht kombiniert zu).
+    if (_sportLogoDatei && navigator.canShare && navigator.canShare({ files: [_sportLogoDatei] })) {
+      navigator.share({ files: [_sportLogoDatei], text: text + '\n' + url })
+        .catch(function(err){
+          if (!err || err.name !== 'AbortError') zeigeEinladung(TXT.sportTitel, text, url, TXT.linkLaeuftNichtAb);
+        });
+      return;
+    }
     navigator.share({ title: TXT.sportTitel, text: text, url: url })
       .catch(function(err){
         if (!err || err.name !== 'AbortError') zeigeEinladung(TXT.sportTitel, text, url, TXT.linkLaeuftNichtAb);
@@ -10075,6 +10094,57 @@ document.getElementById('sportTeilenFab').onclick = function(){
     zeigeEinladung(TXT.sportTitel, text, url, TXT.linkLaeuftNichtAb);
   }
 };
+
+/* ---- Spiel teilen per Wisch nach rechts (Christian, 20.08.2026): jede
+   Spielkarte laesst sich nach rechts ziehen; ab 60px wird das Spiel samt
+   Link auf seine CouchUltras-Seite geteilt. Die Seiten-Basis kommt vom
+   Server (SPORT_DATA.seiten). ---- */
+function sportSpielUrl(spiel){
+  var seiten = (SPORT_DATA && SPORT_DATA.seiten) || { basis: 'https://couchultras.com', prefix: '/spiel' };
+  var slug = function(t){
+    return String(t).toLowerCase()
+      .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  };
+  return seiten.basis + seiten.prefix + '/' + slug(spiel.h) + '-' + slug(spiel.a) + '-' + spiel.id;
+}
+function sportSpielTeilen(spiel){
+  var url = sportSpielUrl(spiel);
+  var sender = (spiel.tv || []).map(function(b){ return sportSenderInfo(b.s).name; }).join(' und ');
+  var text = '⚽ ' + spiel.h + ' – ' + spiel.a + ', ' + sportZeitLabel(spiel.ko) + ' Uhr' +
+             (sender ? ' bei ' + sender : '') + '.';
+  if (navigator.share) {
+    navigator.share({ title: spiel.h + ' – ' + spiel.a, text: text, url: url })
+      .catch(function(err){
+        if (!err || err.name !== 'AbortError') zeigeEinladung(spiel.h + ' – ' + spiel.a, text, url, TXT.linkLaeuftNichtAb);
+      });
+  } else {
+    zeigeEinladung(spiel.h + ' – ' + spiel.a, text, url, TXT.linkLaeuftNichtAb);
+  }
+}
+function sportWischTeilen(li, spiel){
+  var startX = null, startY = null, dx = 0;
+  li.addEventListener('touchstart', function(e){
+    var t = e.touches[0]; startX = t.clientX; startY = t.clientY; dx = 0;
+  }, { passive: true });
+  li.addEventListener('touchmove', function(e){
+    if (startX == null) return;
+    var t = e.touches[0]; dx = t.clientX - startX;
+    var dy = Math.abs(t.clientY - startY);
+    // Nur klar horizontale Zuege nach RECHTS folgen der Bewegung -- senkrechtes
+    // Scrollen bleibt unberuehrt.
+    if (dx > 10 && dx > dy * 1.5) {
+      li.style.transition = 'none';
+      li.style.transform = 'translateX(' + Math.min(dx, 90) + 'px)';
+    }
+  }, { passive: true });
+  li.addEventListener('touchend', function(){
+    li.style.transition = 'transform .2s';
+    li.style.transform = '';
+    if (dx > 60) sportSpielTeilen(spiel);
+    startX = null; dx = 0;
+  });
+}
 
 /* ---- Erstbesuchs-Hilfe der Sport-Seite (siehe Markup #sportHilfe). ---- */
 var SPORT_HILFE_KEY = 'mm_sport_hilfe';
@@ -10190,6 +10260,7 @@ function sportSpielLi(spiel){
     '<div class="sport-teams">' + logo(spiel.hl) + '<span>' + esc(spiel.h) + '</span>' +
     '<span class="sport-vs">–</span>' + logo(spiel.al) + '<span>' + esc(spiel.a) + '</span>' + status + '</div>' +
     '<div class="sport-tv">' + (spiel.tv || []).map(sportBadgeHtml).join('') + '</div>';
+  sportWischTeilen(li, spiel);
   return li;
 }
 
@@ -10387,6 +10458,7 @@ function openSportPage(){
   Object.keys(sportListEls).forEach(function(key){
     sportListEls[key].innerHTML = '<li class="cinema-empty">' + TXT.laedt + '</li>';
   });
+  sportLogoVorladen();
   Promise.all([loadSportData(), sportAbosLaden()]).then(function(){
     renderSportPage();
     // Erstbesuch: Hilfe-Ebene ueber die frisch gerenderte Seite legen.
@@ -10620,9 +10692,9 @@ if (SPORT_SEITE_MODUS) {
   // Fusszeile: Rechtstexte (gleicher Umfang wie movietaste.de) + Quelle.
   var fuss = document.querySelector('footer');
   if (fuss) {
-    fuss.innerHTML = 'Spielplandaten: <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>' +
-      ' · Senderangaben ohne Gewähr<br>' +
-      '<a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · ' +
+    // Nur die Rechtstexte -- OpenLigaDB steht wie TMDB & Co. unter
+    // Einstellungen -> Credits (Christian, 20.08.2026).
+    fuss.innerHTML = '<a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · ' +
       '<a href="nutzungsbedingungen.html">Nutzungsbedingungen</a>';
   }
 }

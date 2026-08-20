@@ -35,7 +35,7 @@ const BILD_FALLBACK = SITE + '/og-image.png';
 // Wer beides gleichzeitig macht (Disallow + noindex), erreicht das Gegenteil --
 // bereits indexierte Seiten blieben dann im Index stehen.
 
-function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis }) {
+function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis, favicon }) {
   // basis: Ursprung fuer canonical/og/hreflang -- Standard movietaste.de,
   // die Sport-Domain-Spielseiten (seoSport.js) reichen ihre eigene durch.
   const wurzel = basis || SITE;
@@ -54,7 +54,7 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   ${hreflangs}
   <link rel="alternate" hreflang="x-default" href="${attrEsc(url)}">
   <link rel="stylesheet" href="/seo.css">
-  <link rel="icon" href="/favicon-32.png">
+  <link rel="icon" href="${attrEsc(favicon || '/favicon-32.png')}">
   <meta property="og:site_name" content="MovieMatch">
   <meta property="og:url" content="${attrEsc(url)}">
   <meta property="og:title" content="${attrEsc(titelZeile)}">
@@ -79,11 +79,11 @@ function fusszeile() {
   </footer>`;
 }
 
-export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml, basis, kopfHtml, fussHtml }) {
+export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml, basis, kopfHtml, fussHtml, favicon }) {
   return `<!DOCTYPE html>
 <html lang="${locale.split('-')[0]}">
 <head>
-  ${kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis })}
+  ${kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis, favicon })}
 </head>
 <body>
   ${kopfHtml || kopfzeile()}

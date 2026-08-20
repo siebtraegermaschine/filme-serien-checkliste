@@ -160,6 +160,15 @@ function sportSeiteHtml() {
   const a = html.indexOf(OG_START);
   const b = html.indexOf(OG_ENDE);
   if (a >= 0 && b >= 0) html = html.slice(0, a) + block + html.slice(b + OG_ENDE.length);
+  // Eigene App-Identitaet: Favicons, Homescreen-Icon und Manifest der
+  // Sport-Marke statt der MovieMatch-Dateien -- damit "Als App speichern"
+  // und Link-Vorschauen das CouchUltras-Zeichen tragen, nicht das Popcorn.
+  html = html
+    .replace('<link rel="manifest" href="/manifest.json">', '<link rel="manifest" href="/couchultras-manifest.json">')
+    .replace('<link rel="apple-touch-icon" href="/apple-touch-icon.png">', '<link rel="apple-touch-icon" href="/cu-apple-touch.png">')
+    .replace('<link rel="icon" href="/favicon-32.png" sizes="32x32">', '<link rel="icon" href="/cu-favicon-32.png" sizes="32x32">')
+    .replace('<link rel="icon" href="/icon-192.png" sizes="192x192">', '<link rel="icon" href="/cu-icon-192.png" sizes="192x192">')
+    .replace('<meta name="apple-mobile-web-app-title" content="MovieMatch">', '<meta name="apple-mobile-web-app-title" content="' + attrEsc(SPORT_BRAND) + '">');
   return html.replace(/<title>[^<]*<\/title>/, '<title>' + attrEsc(SPORT_BRAND) + '</title>');
 }
 app.use(async (req, res, next) => {
@@ -177,6 +186,9 @@ app.use(async (req, res, next) => {
       return res.type('html').send(seiteSpiel(daten));
     }
     if (p === '/sitemap-spiele.xml') return res.type('application/xml').send(await sitemapSpiele());
+    // Viele Dienste fragen zuerst /favicon.ico -- hier gehoert das
+    // CouchUltras-Zeichen hin, nicht das MovieMatch-Popcorn.
+    if (p === '/favicon.ico') return res.sendFile(path.join(frontendRoot, 'cu-favicon-32.png'));
     // Eigene robots.txt samt Verweis auf die Spiel-Sitemap.
     if (p === '/robots.txt') {
       return res.type('txt').send(`User-agent: *\nAllow: /\nSitemap: https://${SPORT_DOMAIN}/sitemap-spiele.xml\n`);
