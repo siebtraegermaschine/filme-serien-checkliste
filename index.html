@@ -558,7 +558,7 @@
   #vereinSuche:focus { border-color: var(--accent); }
   /* Chips im "Deine Ansicht"-Fenster: gleiche Optik, aber ohne die
      Seitenraender/Zentrierung der Seiten-Chipreihen. */
-  .sport-chips.ansicht-chips { margin: 0 0 12px; padding: 0; max-width: none; flex-wrap: wrap; overflow-x: visible; }
+  .sport-chips.ansicht-chips { margin: 0 0 12px; padding: 0; max-width: none; }
   /* Vereins-Logos als Filter-Chips in der Verfuegbarkeitsreihe. */
   .sport-chips button.verein-chip { padding: 3px 9px; }
   .verein-chip img { width: 20px; height: 20px; object-fit: contain; display: block; }
@@ -9756,16 +9756,10 @@ var SPORT_ABOS_KEY = 'mm_sport_abos';
 // Christian 19. August 2026) -- jedes Oeffnen der Seite beginnt damit.
 var SPORT_COMPS = [];
 var SPORT_ANSICHT_KEY = 'mm_sport_ansicht';
-// In der Vorauswahl stehen NUR die Ligen (Christian, 19. August 2026):
-// Es geht darum, welche Top-Liga beim Oeffnen vorgewaehlt ist, wenn nicht
-// alle -- Pokal, CL & Co. klickt man bei Bedarf auf der Seite an.
-var ANSICHT_LIGEN = ['bl1', 'bl2', 'bl3'];
 function gespeicherteAnsicht(){
   try {
     var a = JSON.parse(localStorage.getItem(SPORT_ANSICHT_KEY) || '{}');
-    if (!Array.isArray(a.comps)) return [];
-    // Alte Speicherstaende koennen noch andere Wettbewerbe enthalten.
-    return a.comps.filter(function(c){ return ANSICHT_LIGEN.indexOf(c) !== -1; });
+    return Array.isArray(a.comps) ? a.comps : [];
   } catch (e) { return []; }
 }
 // Verfuegbarkeits-Reihe (zweite Chip-Reihe): "Alle" ist exklusiv, die
@@ -10178,8 +10172,8 @@ var _ansichtComps = [];                // Arbeitskopie der Wettbewerbs-Vorauswah
 function renderAnsichtLigen(){
   var el = document.getElementById('ansichtLigen');
   var data = SPORT_DATA;
-  var vorhanden = ANSICHT_LIGEN.filter(function(c){
-    return data.wettbewerbe[c] && data.spiele.some(function(sp){ return sp.c === c; });
+  var vorhanden = Object.keys(data.wettbewerbe).filter(function(c){
+    return data.spiele.some(function(sp){ return sp.c === c; });
   });
   var html = '<button type="button" data-comp="alle" class="' + (_ansichtComps.length ? '' : 'active') + '">' +
              esc(TXT.sportAlle) + '</button>';
