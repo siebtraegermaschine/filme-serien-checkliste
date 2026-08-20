@@ -9856,15 +9856,14 @@ function sportSenderInfo(slug){
 function sportSpielFrei(spiel){
   return (spiel.tv || []).some(function(b){ return sportSenderInfo(b.s).frei; });
 }
-// "Kann ich sehen": frei empfangbar oder Sender in den eigenen Sport-Abos.
-// Ohne konfigurierte Abos zaehlt die Vorauswahl aus den Streaminganbietern
-// (sportAbosVorauswahl) -- besser eine begruendete Annahme als ein leerer
-// Filter, und gespeichert wird erst beim ausdruecklichen Speichern.
+// STRIKT nur die eigenen Sport-Abos -- Free-TV zaehlt hier bewusst NICHT
+// mit (Christian, 20. August 2026: der Chip daneben filtert frei, dieser
+// hier nur die Abos; wer beides will, waehlt beide an). Ohne konfigurierte
+// Abos zaehlt die Vorauswahl aus den Streaminganbietern (sportAbosVorauswahl)
+// -- besser eine begruendete Annahme als ein leerer Filter.
 function sportSpielImAbo(spiel){
   var abos = Array.isArray(SPORT_ABOS) ? SPORT_ABOS : sportAbosVorauswahl();
-  return (spiel.tv || []).some(function(b){
-    return sportSenderInfo(b.s).frei || abos.indexOf(b.s) !== -1;
-  });
+  return (spiel.tv || []).some(function(b){ return abos.indexOf(b.s) !== -1; });
 }
 
 // Suchfeld gilt auch hier: trifft Teams, Wettbewerb und Runde (ODER ueber
