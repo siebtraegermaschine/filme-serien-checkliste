@@ -10078,7 +10078,11 @@ function openSportPage(){
   sportMode = true;
   // Frisch geoeffnet heisst wieder eingeklappt (wie beim Kino) -- und die
   // Wettbewerbe starten mit der gespeicherten Vorauswahl aus "Deine Ansicht".
+  // Die gewaehlten Vereine sind dabei AKTIV vorausgewaehlt (Christian,
+  // 20. August 2026): Wer Vereine gewaehlt hat, will zuerst deren Spiele --
+  // "Alle" bzw. das Abwaehlen der Logos oeffnet den Blick wieder.
   SPORT_COMPS = gespeicherteAnsicht().slice();
+  SPORT_VEREIN_AKTIV = MEINE_VEREINE.map(function(v){ return v.n; });
   sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
   updateFilterRowUI();
   document.querySelector('.head-controls').style.display = '';
@@ -10240,11 +10244,9 @@ document.getElementById('vereinSaveBtn').onclick = function(){
   // bleiben bewusst INAKTIV (nie vorausgewaehlt, Christians Vorgabe).
   try { localStorage.setItem(SPORT_ANSICHT_KEY, JSON.stringify({ comps: _ansichtComps })); } catch (e) {}
   SPORT_COMPS = _ansichtComps.slice();
-  // Abgewaehlte Vereine auch aus den aktiven Filtern nehmen -- ein Chip, den
-  // es nicht mehr gibt, darf nicht unsichtbar weiterfiltern.
-  SPORT_VEREIN_AKTIV = SPORT_VEREIN_AKTIV.filter(function(n){
-    return MEINE_VEREINE.some(function(v){ return v.n === n; });
-  });
+  // Nach dem Speichern sind die gewaehlten Vereine sofort AKTIVE Filter
+  // (siehe openSportPage) -- entfernte Vereine fallen damit automatisch raus.
+  SPORT_VEREIN_AKTIV = MEINE_VEREINE.map(function(v){ return v.n; });
   closeVereinModal();
   if (sportMode) renderSportPage();
 };
