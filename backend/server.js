@@ -176,6 +176,14 @@ app.use(async (req, res, next) => {
   const p = req.path;
   try {
     if (p === '/' || p === '/sport') return res.type('html').send(sportSeiteHtml());
+    // /index.html traegt eine Dateiendung und fiele sonst zur Statik durch --
+    // die liefert die ROHE MovieMatch-Fassung aus (so wirkte der "Zurueck zur
+    // App"-Link der Rechtstexte wie ein Domainwechsel, 20.08.2026). Sauber
+    // auf die Wurzel umleiten, Query bleibt erhalten (?feedback=1).
+    if (p === '/index.html') {
+      const frage = req.originalUrl.includes('?') ? req.originalUrl.slice(req.originalUrl.indexOf('?')) : '';
+      return res.redirect(301, '/' + frage);
+    }
     // Die SEO-Spielseiten wohnen bei aktiver Sport-Domain HIER (kuerzere
     // Pfade ohne Locale) -- movietaste leitet auf sie um (routes/seo.js).
     if (p === '/spiele') return res.type('html').send(seiteSpiele(await ladeSpieleUebersicht()));
