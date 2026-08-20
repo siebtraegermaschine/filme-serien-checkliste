@@ -1041,6 +1041,10 @@ CREATE TABLE IF NOT EXISTS sport_matches (
   tv          JSONB NOT NULL DEFAULT '[]',
   fetched_at  TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+-- OpenLigaDB-Team-IDs (fuer Formkurven der SEO-Spielseiten, siehe
+-- lib/seoSport.js -- getmatchesbyteamid braucht die numerische ID).
+ALTER TABLE sport_matches ADD COLUMN IF NOT EXISTS heim_id INTEGER;
+ALTER TABLE sport_matches ADD COLUMN IF NOT EXISTS gast_id INTEGER;
 -- Die einzige Leseabfrage ist ein Zeitfenster ueber anstoss (siehe routes/sport.js).
 CREATE INDEX IF NOT EXISTS sport_matches_anstoss_idx ON sport_matches (anstoss);
 

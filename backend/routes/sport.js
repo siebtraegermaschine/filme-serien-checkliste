@@ -110,15 +110,16 @@ router.post('/ingest', async (req, res) => {
       await client.query(
         `INSERT INTO sport_matches
            (external_id, wettbewerb, saison, runde, anstoss, heim, gast, heim_kurz, gast_kurz,
-            heim_logo, gast_logo, beendet, tore_heim, tore_gast, tv, fetched_at)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15, clock_timestamp())
+            heim_logo, gast_logo, beendet, tore_heim, tore_gast, tv, heim_id, gast_id, fetched_at)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17, clock_timestamp())
          ON CONFLICT (external_id) DO UPDATE SET
            wettbewerb = EXCLUDED.wettbewerb, saison = EXCLUDED.saison, runde = EXCLUDED.runde,
            anstoss = EXCLUDED.anstoss, heim = EXCLUDED.heim, gast = EXCLUDED.gast,
            heim_kurz = EXCLUDED.heim_kurz, gast_kurz = EXCLUDED.gast_kurz,
            heim_logo = EXCLUDED.heim_logo, gast_logo = EXCLUDED.gast_logo,
            beendet = EXCLUDED.beendet, tore_heim = EXCLUDED.tore_heim, tore_gast = EXCLUDED.tore_gast,
-           tv = EXCLUDED.tv, fetched_at = clock_timestamp()`,
+           tv = EXCLUDED.tv, heim_id = EXCLUDED.heim_id, gast_id = EXCLUDED.gast_id,
+           fetched_at = clock_timestamp()`,
         [
           item.externalId, item.wettbewerb, String(item.saison || ''), item.runde || null,
           item.anstoss, item.heim, item.gast, item.heimKurz || null, item.gastKurz || null,
@@ -126,6 +127,8 @@ router.post('/ingest', async (req, res) => {
           item.toreHeim != null ? item.toreHeim : null,
           item.toreGast != null ? item.toreGast : null,
           JSON.stringify(Array.isArray(item.tv) ? item.tv : []),
+          item.heimId != null ? item.heimId : null,
+          item.gastId != null ? item.gastId : null,
         ]
       );
     }
@@ -137,7 +140,10 @@ router.post('/ingest', async (req, res) => {
       `DELETE FROM sport_matches
         WHERE wettbewerb = ANY($1) AND anstoss > $2 AND fetched_at < $2`,
       [laufWettbewerbe, runStartedAt]);
-    await client.query(`DELETE FROM sport_matches WHERE anstoss < now() - interval '5 days'`);
+    // 45 statt 5 Tage: Die SEO-Spielseiten (lib/seoSport.js) beantworten nach
+    // dem Abpfiff "Wer zeigte ...?" samt Endstand -- so behalten sie ihren
+    // Suchwert, statt nach ein paar Tagen ins 404 zu laufen.
+    await client.query(`DELETE FROM sport_matches WHERE anstoss < now() - interval '45 days'`);
 
     // Sender-Katalog/Wettbewerbsnamen des Laufs festhalten (Quelle:
     // sport-rechte.json) -- die Ausspielung oben liest sie von hier.

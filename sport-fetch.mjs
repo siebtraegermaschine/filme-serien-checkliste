@@ -114,6 +114,8 @@ async function holeWettbewerb(kuerzel, saison, grenzeIso) {
       anstoss: anstossUtc,
       heim: m.team1.teamName || '',
       gast: m.team2.teamName || '',
+      heimId: m.team1.teamId || null,
+      gastId: m.team2.teamId || null,
       heimKurz: m.team1.shortName || null,
       gastKurz: m.team2.shortName || null,
       heimLogo: httpsLogo(m.team1.teamIconUrl),

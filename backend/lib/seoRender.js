@@ -76,7 +76,7 @@ function fusszeile() {
   </footer>`;
 }
 
-function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml }) {
+export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml }) {
   return `<!DOCTYPE html>
 <html lang="${locale.split('-')[0]}">
 <head>
@@ -138,7 +138,7 @@ function genreLinksHtml(genres, type, locale) {
 // nach oben (Titel -> Genre -> Hub -> Start), zusaetzlich als BreadcrumbList
 // strukturierte Daten. `kette` ist [{label, href}], das letzte Glied (die
 // aktuelle Seite) traegt kein href.
-function brotkrumenHtml(kette) {
+export function brotkrumenHtml(kette) {
   return `<nav class="brotkrumen" aria-label="Brotkrumen">${kette.map((k, i) =>
     (i > 0 ? ' › ' : '') + (k.href ? `<a href="${k.href}">${attrEsc(k.label)}</a>` : `<span>${attrEsc(k.label)}</span>`)
   ).join('')}</nav>`;
@@ -146,7 +146,7 @@ function brotkrumenHtml(kette) {
 
 // Das letzte Glied (aktuelle Seite) braucht laut Google-Vorgabe kein "item" --
 // JSON.stringify laesst `undefined`-Werte ohnehin weg.
-function brotkrumenJsonLd(kette) {
+export function brotkrumenJsonLd(kette) {
   return {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: kette.map((k, i) => ({
@@ -633,4 +633,4 @@ export function seite404(locale) {
   });
 }
 
-export { dokument, kurzfassung };
+export { kurzfassung };
