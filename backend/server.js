@@ -231,6 +231,12 @@ app.get('/t/:art/:kennung', mengenGrenze({ name: 'share-page', anzahl: 120, minu
 // und manche zeigten daraufhin ihren eigenen Platzhalter statt des Logos.
 app.get('/favicon.ico', (req, res) => res.sendFile(path.join(frontendRoot, 'favicon-32.png')));
 
+// /sport ist ein teilbarer Einstieg in die Sport-Ansicht der App (die App
+// setzt den Pfad beim Oeffnen selbst, siehe openSportPage in index.html).
+// express.static kennt den Pfad nicht (kein solches File), deshalb hier --
+// dieselbe Idee wie die /t/-Titellinks im share-Router.
+app.get('/sport', (req, res) => res.sendFile(path.join(frontendRoot, 'index.html')));
+
 // SEO-Seiten (/<locale>/film|serie|filme|... und /sitemap-*.xml) -- eigene,
 // von der App getrennte Dokumente (siehe PLAN-SEO-UMSETZUNG). Muss vor
 // express.static stehen, sonst faengt dessen SPA-Fallback (index.html mit

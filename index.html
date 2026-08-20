@@ -10076,6 +10076,11 @@ function renderSportPage(){
 function openSportPage(){
   closeCinemaPage();
   sportMode = true;
+  // Teilbarer Einstieg: /sport in der Adresszeile (Christian, 20. August
+  // 2026). replaceState statt pushState -- dieselbe Konvention wie bei den
+  // /t/-Titellinks, der Bereichswechsel soll kein eigener Verlaufsschritt
+  // sein. Der Server liefert /sport als App aus (siehe backend/server.js).
+  try { history.replaceState(null, '', '/sport'); } catch (e) {}
   // Frisch geoeffnet heisst wieder eingeklappt (wie beim Kino) -- und die
   // Wettbewerbe starten mit der gespeicherten Vorauswahl aus "Deine Ansicht".
   // Die gewaehlten Vereine sind dabei AKTIV vorausgewaehlt (Christian,
@@ -10106,6 +10111,11 @@ function openSportPage(){
 function closeSportPage(){
   if (!sportMode) return;
   sportMode = false;
+  // Beim Verlassen gehoert wieder die Startseite in die Adresszeile -- sonst
+  // laedt der naechste Neuladen erneut die Sport-Ansicht.
+  if (location.pathname === '/sport') {
+    try { history.replaceState(null, '', '/'); } catch (e) {}
+  }
   document.getElementById('sportPage').style.display = 'none';
   document.querySelector('.toolbar').style.display = '';
   list.style.display = '';
@@ -10266,6 +10276,10 @@ if (REGION_WAHL !== 'DE') {
   document.getElementById('sportMenuBtn').style.display = 'none';
   document.getElementById('sportHeaderBtn').style.display = 'none';
 }
+// Direkteinstieg ueber die geteilte URL: /sport oeffnet die Sport-Ansicht
+// sofort -- bewusst OHNE Regionspruefung, ein geteilter Link soll auch bei
+// anderer Regionswahl ankommen (die Daten sind ohnehin deutsch).
+if (/^\/sport\/?$/.test(location.pathname)) openSportPage();
 
 /* ---- "Als App speichern": Android hat mit beforeinstallprompt eine echte
    Browser-API dafuer, iOS nicht -- Apple erlaubt keine programmatische
