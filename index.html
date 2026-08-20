@@ -1004,63 +1004,32 @@
   /* Das Teilen-Zeichen sitzt mittig im Knopf und bekommt weniger Rand als eine
      Beschriftung -- sonst waere der Knopf fast so breit wie "Trailer". */
   .teilen-btn { display: inline-flex; align-items: center; justify-content: center; padding-left: 10px; padding-right: 10px; }
-  /* Beide Zeilen der aufgeklappten Ansicht sollen dasselbe Raster zeigen:
-     rechts ein gleich breiter Block (oben Kaufen/Leihen/Ansehen, unten
-     Watchlist/Gesehen), links davon Trailer bzw. "Ähnliche Titel". Ohne das
-     begann die obere Dreiergruppe 14px weiter links als Watchlist darunter --
-     nachgemessen per getBoundingClientRect.
-     Die Knoepfe im Block teilen sich die Breite zu gleichen Teilen, damit die
-     linke Kante beider Bloecke exakt zusammenfaellt. Der geringere seitliche
-     Innenabstand haelt "▶ Ansehen" als laengste Beschriftung lesbar, wenn sich
-     drei statt zwei Knoepfe die Breite teilen. */
-  /* Der rechte Block nimmt, was die linke Gruppe uebrig laesst, und verteilt
-     ihn zu gleichen Teilen auf seine Knoepfe: Die Beschriftungen stehen damit
-     mittig in gleich grossen Feldern, und beide Zeilen enden buendig.
-     min-width:max-content statt 0 schuetzt dabei die laengste Beschriftung
-     ("▶ Ansehen") -- reicht der Platz nicht, rutscht der ganze Block per
-     flex-wrap in die naechste Zeile, statt dass der Text ueberlaeuft. */
-  .watch-rechts, .det-rechts { display: flex; gap: 8px; flex: 1 1 auto; min-width: 0; }
-  /* ZUGEKLAPPT steht in der unteren Zeile nur Watchlist/Gesehen -- ohne
-     "Ähnliche Titel" davor wuerden die beiden gestreckt die ganze Zeilenbreite
-     fuellen, und zwar in jeder Zeile der Liste. Dort bleibt es deshalb beim
-     alten Mass: 62% rechts, auf schmalen Geraeten Inhaltsbreite (siehe unten).
-     Gestreckt wird erst, wenn die Details offen sind und es links etwas gibt,
-     woran sich das Raster ausrichtet. */
-  .det-rechts { flex: 0 0 62%; }
-  body:not(.kompakte-aktionen) li.show-details .det-rechts { flex: 1 1 auto; margin-left: 0; }
-  .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts > .det-left { flex: 1; min-width: max-content; }
+  /* ZWEI GRUPPEN, nicht ausgemittelt (Christian, 20. August 2026): links
+     "Trailer" und das Teilen-Zeichen, rechts Kaufen/Leihen/Ansehen bzw.
+     Watchlist/Gesehen -- jede Gruppe mit ihrer natuerlichen Breite, die eine an
+     der linken, die andere an der rechten Kante. Dazwischen bleibt Luft, und
+     das ist Absicht.
+     Vorher fuellte der rechte Block den ganzen Rest und verteilte ihn zu
+     gleichen Teilen auf seine Knoepfe. Die Beschriftungen standen dadurch weit
+     auseinander und die Reihe las sich wie eine ausgemittelte Zeile statt wie
+     zwei Gruppen.
+     Die Abstaende INNERHALB einer Gruppe sind ueberall dieselben 8px (auf
+     schmalen Geraeten 6px) -- also genau so viel wie zwischen Watchlist und
+     Gesehen und keinen Pixel mehr. */
+  .watch-rechts, .det-rechts { display: flex; gap: 8px; flex: 0 1 auto; margin-left: auto; min-width: 0; }
+  .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts > .det-left { flex: 0 1 auto; min-width: 0; }
   .det-rechts > .det-left > .wl-btn { width: 100%; }
   .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts .wl-btn { padding-left: 6px; padding-right: 6px; white-space: nowrap; }
-  /* Auf schmalen Bildschirmen reichen 62% nicht: Drei gleich breite Knoepfe
-     bekommen dort weniger als "▶ Ansehen" braucht (nachgemessen per scrollWidth
-     gegen clientWidth bei 375px).
-     Die Bloecke nehmen deshalb hier nur noch ihre Inhaltsbreite und ruecken
-     rechtsbuendig neben Trailer bzw. "Ähnliche Titel" -- statt wie vorher auf
-     volle Breite zu gehen. Volle Breite erzwang naemlich einen Umbruch: Aus den
-     zwei Zeilen wurden vier, und die Knoepfe wurden dabei viel breiter als ihre
-     Beschriftung (nachgemessen bei 430px: "gesehen" 205px fuer 81px Text).
-     Beide Bloecke sitzen jetzt buendig an der rechten Kante -- die gemeinsame
-     linke Kante von oben ist bei diesen Breiten nicht zu halten, ohne dass
-     wieder umgebrochen wird.
-     Die untere Zeile ist die knappere von beiden ("Ähnliche Titel" allein ist
-     breiter als "Trailer" plus Luecke), deshalb dort zusaetzlich engere
-     Abstaende: 8px statt 10px zwischen den Bloecken, 6px statt 8px innerhalb.
-     Das sind die 4px, an denen ein 360px-Geraet sonst scheitert -- gemessen
-     fehlten dort 2,8px. Optisch ist der Unterschied nicht auszumachen.
-     Zwei Zeilen sind damit ab 360px sicher (gemessen bei 360/375/430px, auch
-     mit kompakte-aktionen). Bei 320px reicht es nicht: Die untere Zeile
-     braucht dort 293px und hat 254px -- das liesse sich nur durch eine
-     kuerzere Beschriftung als "Ähnliche Titel" loesen. */
-  /* Auf schmalen Geraeten zaehlt jeder Pixel: Passen linke Gruppe und rechter
-     Block nicht nebeneinander, rutscht der Block per flex-wrap in eine eigene
-     Zeile (lesbar, aber zwei Zeilen statt einer). Die engeren Abstaende halten
-     das ab etwa 390px Geraetebreite auf. Darunter -- 360 und 375px -- reicht es
-     nicht mehr: Kaufen/Leihen/Ansehen brauchen allein rund 210px. */
+  /* Auf schmalen Geraeten zaehlt jeder Pixel: Passen linke und rechte Gruppe
+     nicht nebeneinander, rutscht die rechte per flex-wrap in eine eigene Zeile
+     (lesbar, aber zwei Zeilen statt einer). Die engeren Abstaende halten das so
+     lange wie moeglich auf. Kaufen/Leihen/Ansehen brauchen zusammen rund
+     210px, "Ähnliche Titel" plus Watchlist/Gesehen entsprechend weniger --
+     deshalb bricht die obere Zeile frueher um als die untere. */
   @media (max-width: 520px) {
     .watch-btns { gap: 8px; }
     .watch-rechts, .det-rechts { gap: 6px; }
     .watch-links { gap: 6px; }
-    .det-rechts { flex: 0 1 auto; margin-left: auto; }
   }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
