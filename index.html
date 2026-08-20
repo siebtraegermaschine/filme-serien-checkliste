@@ -562,14 +562,21 @@
   #vereinSuche:focus { border-color: var(--accent); }
   /* Chips im "Deine Ansicht"-Fenster: gleiche Optik, aber ohne die
      Seitenraender/Zentrierung der Seiten-Chipreihen. */
-  .ansicht-chips { margin: 0 0 12px; padding: 0; max-width: none; }
+  .ansicht-chips { margin: 0 0 12px; padding: 0; max-width: none; flex-wrap: wrap; overflow-x: visible; }
   /* Vereins-Logos als Filter-Chips in der Verfuegbarkeitsreihe. */
   .sport-chips button.verein-chip { padding: 3px 9px; }
   .verein-chip img { width: 20px; height: 20px; object-fit: contain; display: block; }
   /* Chips: Wettbewerbe als ODER-Auswahl (einer oder "Alle") plus "Nur Free-TV"
      als UND-Filter -- gleiche Optik wie die Tabs, nur kleiner und rund. */
+  /* EINE Zeile, seitlich wischbar (Christian, 20. August 2026): Mit CL/EL
+     nach der Auslosung werden es ~9 Wettbewerbs-Chips, umgebrochen waeren
+     das drei Zeilen. Kein sichtbarer Scrollbalken -- der am Rand
+     angeschnittene Chip zeigt, dass rechts mehr kommt. */
   .sport-chips { max-width:700px; margin:8px auto 0; padding:0 20px; box-sizing:border-box;
-    display:flex; flex-wrap:wrap; gap:6px; }
+    display:flex; flex-wrap:nowrap; gap:6px; overflow-x:auto;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  .sport-chips::-webkit-scrollbar { display:none; }
+  .sport-chips button { flex:0 0 auto; }
   /* Die zweite Reihe (Verfuegbarkeit) sitzt dichter an der ersten; die 16px
      nach unten sind die gewuenschte Luft zur Ueberschrift "Heute" darunter
      (Christian, 19. August 2026 -- vorher klebten Chips und Ueberschrift). */
@@ -9927,6 +9934,11 @@ function sportSpielLi(spiel){
 
 function renderSportChips(){
   var el = document.getElementById('sportChips');
+  // Beide Reihen werden gleich komplett neu gebaut -- die Wischposition
+  // vorher merken und danach wiederherstellen, sonst springt die Reihe bei
+  // jedem Chip-Klick an den Anfang zurueck.
+  var verfElVorab = document.getElementById('sportVerfChips');
+  var scrollVorher = [el.scrollLeft, verfElVorab.scrollLeft];
   var data = SPORT_DATA;
   var vorhanden = Object.keys(data.wettbewerbe).filter(function(c){
     return data.spiele.some(function(s){ return s.c === c; });
@@ -9987,6 +9999,8 @@ function renderSportChips(){
       verfReset();
     };
   });
+  el.scrollLeft = scrollVorher[0];
+  verfEl.scrollLeft = scrollVorher[1];
 }
 
 function renderSportSection(key, spiele){
