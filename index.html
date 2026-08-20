@@ -558,7 +558,7 @@
   #vereinSuche:focus { border-color: var(--accent); }
   /* Chips im "Deine Ansicht"-Fenster: gleiche Optik, aber ohne die
      Seitenraender/Zentrierung der Seiten-Chipreihen. */
-  .ansicht-chips { margin: 0 0 12px; padding: 0; max-width: none; flex-wrap: wrap; overflow-x: visible; }
+  .sport-chips.ansicht-chips { margin: 0 0 12px; padding: 0; max-width: none; flex-wrap: wrap; overflow-x: visible; }
   /* Vereins-Logos als Filter-Chips in der Verfuegbarkeitsreihe. */
   .sport-chips button.verein-chip { padding: 3px 9px; }
   .verein-chip img { width: 20px; height: 20px; object-fit: contain; display: block; }
@@ -2112,7 +2112,7 @@
     <p class="prov-intro" id="vereinIntro">Stell dir die Sport-Seite ein: Wettbewerbe als
       Vorauswahl (einer, mehrere oder alle) — und bis zu drei Vereine als Logo-Filter.
       Vereine sind nie vorausgewählt.</p>
-    <h4 class="prov-sport-titel" id="ansichtLigenTitel">Wettbewerbe</h4>
+    <h4 class="prov-sport-titel" id="ansichtLigenTitel">Wettbewerbe (vorausgewählt)</h4>
     <div class="sport-chips ansicht-chips" id="ansichtLigen"></div>
     <h4 class="prov-sport-titel" id="ansichtVereineTitel">Deine Vereine (bis zu 3)</h4>
     <input type="text" id="vereinSuche" placeholder="Verein suchen …" autocomplete="off">
@@ -5025,7 +5025,7 @@ var MARKUP_TEXTE = {
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'The schedules in the Sports section come from <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, a free community project. Broadcaster information is derived rule-based from the German TV rights split – without guarantee.' },
     '#vereinTitel': { t: 'Your view' },
     '#vereinIntro': { t: 'Set up the Sports page: pre-select competitions (one, several or all) — and up to three clubs as logo filters. Clubs are never pre-selected.' },
-    '#ansichtLigenTitel': { t: 'Competitions' },
+    '#ansichtLigenTitel': { t: 'Competitions (pre-selected)' },
     '#ansichtVereineTitel': { t: 'Your clubs (up to 3)' },
     '#vereinSuche': { p: 'Search club …' },
     '#vereinSaveBtn': { t: 'Save' },
@@ -5155,7 +5155,7 @@ var MARKUP_TEXTE = {
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Les calendriers de la section Sport proviennent d’<a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un projet communautaire libre. Les diffuseurs sont déduits des droits TV allemands – sans garantie.' },
     '#vereinTitel': { t: 'Ta vue' },
     '#vereinIntro': { t: 'Configure la page Sport : compétitions présélectionnées (une, plusieurs ou toutes) — et jusqu’à trois clubs comme filtres. Les clubs ne sont jamais présélectionnés.' },
-    '#ansichtLigenTitel': { t: 'Compétitions' },
+    '#ansichtLigenTitel': { t: 'Compétitions (présélection)' },
     '#ansichtVereineTitel': { t: 'Tes clubs (max. 3)' },
     '#vereinSuche': { p: 'Chercher un club …' },
     '#vereinSaveBtn': { t: 'Enregistrer' },
@@ -5285,7 +5285,7 @@ var MARKUP_TEXTE = {
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Los calendarios de la sección Deporte provienen de <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un proyecto comunitario libre. Las emisoras se derivan de los derechos de TV alemanes – sin garantía.' },
     '#vereinTitel': { t: 'Tu vista' },
     '#vereinIntro': { t: 'Configura la página de Deporte: competiciones preseleccionadas (una, varias o todas) — y hasta tres equipos como filtros. Los equipos nunca están preseleccionados.' },
-    '#ansichtLigenTitel': { t: 'Competiciones' },
+    '#ansichtLigenTitel': { t: 'Competiciones (preseleccionadas)' },
     '#ansichtVereineTitel': { t: 'Tus equipos (máx. 3)' },
     '#vereinSuche': { p: 'Buscar equipo …' },
     '#vereinSaveBtn': { t: 'Guardar' },
@@ -5415,7 +5415,7 @@ var MARKUP_TEXTE = {
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'I calendari della sezione Sport provengono da <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un progetto comunitario libero. Le emittenti sono dedotte dai diritti TV tedeschi – senza garanzia.' },
     '#vereinTitel': { t: 'La tua vista' },
     '#vereinIntro': { t: 'Configura la pagina Sport: competizioni preselezionate (una, più o tutte) — e fino a tre squadre come filtri. Le squadre non sono mai preselezionate.' },
-    '#ansichtLigenTitel': { t: 'Competizioni' },
+    '#ansichtLigenTitel': { t: 'Competizioni (preselezionate)' },
     '#ansichtVereineTitel': { t: 'Le tue squadre (max 3)' },
     '#vereinSuche': { p: 'Cerca squadra …' },
     '#vereinSaveBtn': { t: 'Salva' },
@@ -5545,7 +5545,7 @@ var MARKUP_TEXTE = {
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'De speelschema’s in het Sport-gedeelte komen van <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, een vrij communityproject. Zenders worden afgeleid uit de Duitse tv-rechten – zonder garantie.' },
     '#vereinTitel': { t: 'Jouw weergave' },
     '#vereinIntro': { t: 'Stel de Sport-pagina in: vooraf geselecteerde competities (één, meerdere of alle) — en maximaal drie clubs als filters. Clubs zijn nooit vooraf geselecteerd.' },
-    '#ansichtLigenTitel': { t: 'Competities' },
+    '#ansichtLigenTitel': { t: 'Competities (vooraf geselecteerd)' },
     '#ansichtVereineTitel': { t: 'Jouw clubs (max. 3)' },
     '#vereinSuche': { p: 'Club zoeken …' },
     '#vereinSaveBtn': { t: 'Opslaan' },
@@ -5675,7 +5675,7 @@ var MARKUP_TEXTE = {
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Os calendários da seção Esporte vêm do <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, um projeto comunitário livre. As emissoras são derivadas dos direitos de TV alemães – sem garantia.' },
     '#vereinTitel': { t: 'Sua visualização' },
     '#vereinIntro': { t: 'Configure a página de Esporte: competições pré-selecionadas (uma, várias ou todas) — e até três clubes como filtros. Clubes nunca são pré-selecionados.' },
-    '#ansichtLigenTitel': { t: 'Competições' },
+    '#ansichtLigenTitel': { t: 'Competições (pré-selecionadas)' },
     '#ansichtVereineTitel': { t: 'Seus clubes (máx. 3)' },
     '#vereinSuche': { p: 'Buscar clube …' },
     '#vereinSaveBtn': { t: 'Salvar' },
