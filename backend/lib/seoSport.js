@@ -140,8 +140,45 @@ const uhrzeit = new Intl.DateTimeFormat('de-DE', { timeZone: 'Europe/Berlin', ho
 export function spielSlugId(m) {
   return `${slugify(m.heim)}-${slugify(m.gast)}-${m.external_id}`;
 }
+
+/* ---- Zuhause der Spielseiten (Christian, 20.08.2026): Sobald die eigene
+   Sport-Domain aktiv ist (SPORT_DOMAIN, siehe server.js), wohnen die Seiten
+   NUR dort -- unter kuerzeren Pfaden (/spiel/..., /spiele) und mit eigener
+   Marke; movietaste.de leitet per 301 dorthin um und nimmt sie aus der
+   eigenen Sitemap (kein doppelter Inhalt auf zwei Domains). Ohne gesetzte
+   Domain gilt der bisherige movietaste-Pfad. Env wird bewusst je Aufruf
+   gelesen (testbar, kein Neustart-Zwang bei Konfig-Wechsel im Test). ---- */
+export function sportDomainAktiv() {
+  return !!(process.env.SPORT_DOMAIN || '').trim();
+}
+export function sportKontext() {
+  const domain = (process.env.SPORT_DOMAIN || '').trim().toLowerCase();
+  if (!domain) {
+    return { basis: SITE, spielPrefix: `/${LOCALE}/spiel`, uebersichtPfad: `/${LOCALE}/spiele`,
+             appUrl: SITE + '/sport', marke: null };
+  }
+  const basis = 'https://' + domain;
+  return { basis, spielPrefix: '/spiel', uebersichtPfad: '/spiele',
+           appUrl: basis + '/', marke: process.env.SPORT_BRAND || 'Fußball live im TV' };
+}
 export function spielPfad(m) {
-  return `/${LOCALE}/spiel/${spielSlugId(m)}`;
+  return `${sportKontext().spielPrefix}/${spielSlugId(m)}`;
+}
+
+// Kopf-/Fusszeile fuer die Sport-Domain-Fassung (movietaste nutzt die
+// Standards aus seoRender): eigene Marke, Rechtstexte, OpenLigaDB-Quelle.
+function sportKopfFuss(ctx) {
+  if (!ctx.marke) return {};
+  return {
+    basis: ctx.basis,
+    kopfHtml: `<header class="seo-kopf"><a class="marke" href="/">⚽ ${attrEsc(ctx.marke)}</a>
+      <nav class="seo-nav"><a href="/">Zum Spielplan</a></nav></header>`,
+    fussHtml: `<footer>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+      <a href="https://www.openligadb.de" rel="noopener">Spielplandaten: OpenLigaDB</a>
+    </footer>`,
+  };
 }
 
 /* ---- Daten laden ---- */
@@ -313,7 +350,10 @@ function soSehen(daten) {
       saetze.push(`Mit Abo siehst du das Spiel bei ${s.name}${b.kanal || s.kanal ? ` auf ${b.kanal || s.kanal}` : ''}${b.typ === 'konferenz' ? ' (als Teil der Konferenz)' : ''}${s.info ? ` – ${s.info}` : '.'}`);
     }
   }
-  saetze.push(`Den kompletten Spielplan mit Sender-Angaben – filterbar nach Wettbewerb, Free-TV und deinem Verein – gibt es in der <a href="${SITE}/sport">Sport-Übersicht von MovieMatch</a>.`);
+  const ctx = sportKontext();
+  saetze.push(ctx.marke
+    ? `Den kompletten Spielplan mit Sender-Angaben – filterbar nach Wettbewerb, Free-TV und deinem Verein – gibt es auf der <a href="${ctx.appUrl}">Startseite</a>.`
+    : `Den kompletten Spielplan mit Sender-Angaben – filterbar nach Wettbewerb, Free-TV und deinem Verein – gibt es in der <a href="${ctx.appUrl}">Sport-Übersicht von MovieMatch</a>.`);
   return `<h2>So siehst du das Spiel</h2>${saetze.map((t) => `<p>${t}</p>`).join('')}`;
 }
 
@@ -368,7 +408,7 @@ function weitereBlock(daten) {
   const li = daten.weitere.map((w) =>
     `<li><a href="${spielPfad(w)}">${attrEsc(w.heim)} – ${attrEsc(w.gast)}</a> <span class="hinweis">(${datumKurz.format(w.anstoss)}, ${uhrzeit.format(w.anstoss)} Uhr)</span></li>`).join('');
   return `<h2>Weitere Spiele: ${attrEsc(wettbewerbName(daten, daten.match.wettbewerb))}</h2><ul>${li}</ul>
-  <p><a href="/${LOCALE}/spiele">Alle Spiele der nächsten zwei Wochen im Überblick</a></p>`;
+  <p><a href="${sportKontext().uebersichtPfad}">Alle Spiele der nächsten zwei Wochen im Überblick</a></p>`;
 }
 
 function faq(daten) {
@@ -413,16 +453,16 @@ export function seiteSpiel(daten) {
   const comp = wettbewerbName(daten, m.wettbewerb);
   const sender = senderNamen(daten, m.tv, { mitZusatz: false });
   const vorbei = daten.stufe === 'beendet';
+  const markeSuffix = sportKontext().marke ? ` | ${sportKontext().marke}` : ' | MovieMatch';
   const titelZeile = vorbei
-    ? `${paarung(m)}${m.tore_heim != null ? ` ${m.tore_heim}:${m.tore_gast}` : ''}: So lief die Übertragung | MovieMatch`
-    : `Wer zeigt ${paarung(m)}? Übertragung am ${datumKurz.format(m.anstoss)} | MovieMatch`;
+    ? `${paarung(m)}${m.tore_heim != null ? ` ${m.tore_heim}:${m.tore_gast}` : ''}: So lief die Übertragung${markeSuffix}`
+    : `Wer zeigt ${paarung(m)}? Übertragung am ${datumKurz.format(m.anstoss)}${markeSuffix}`;
   const beschreibung = antwortSatz(daten).slice(0, 200);
-  const kette = [
-    { label: 'Start', href: SITE + '/' },
-    { label: 'Sport', href: SITE + '/sport' },
-    { label: 'Spiele', href: `/${LOCALE}/spiele` },
-    { label: paarung(m) },
-  ];
+  const ctx = sportKontext();
+  const kette = ctx.marke
+    ? [ { label: ctx.marke, href: '/' }, { label: 'Spiele', href: ctx.uebersichtPfad }, { label: paarung(m) } ]
+    : [ { label: 'Start', href: SITE + '/' }, { label: 'Sport', href: SITE + '/sport' },
+        { label: 'Spiele', href: ctx.uebersichtPfad }, { label: paarung(m) } ];
   const faqTeil = faq(daten);
   const jsonLd = [
     {
@@ -438,7 +478,7 @@ export function seiteSpiel(daten) {
       ],
       // Vor-Ort-Angaben kennen wir nicht -- fuer Google reicht der Modus.
       eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
-      location: { '@type': 'VirtualLocation', url: SITE + pfad },
+      location: { '@type': 'VirtualLocation', url: ctx.basis + pfad },
       ...(sender.length ? {
         publication: (m.tv || []).map((b) => ({
           '@type': 'BroadcastEvent',
@@ -484,20 +524,19 @@ export function seiteSpiel(daten) {
   // (Deshalb hier true, sobald es das Spiel wirklich gibt.)
   return dokument({
     locale: LOCALE, pfad, titelZeile, beschreibung,
-    indexierbar: true, jsonLd, bodyHtml,
+    indexierbar: true, jsonLd, bodyHtml, ...sportKopfFuss(ctx),
   });
 }
 
-/* ---- Die Übersicht /de-de/spiele ---- */
+/* ---- Die Übersicht (/de-de/spiele bzw. /spiele auf der Sport-Domain) ---- */
 export function seiteSpiele(daten) {
-  const pfad = `/${LOCALE}/spiele`;
-  const titelZeile = 'Fußball heute & diese Woche: Alle Spiele mit Sender | MovieMatch';
+  const ctx = sportKontext();
+  const pfad = ctx.uebersichtPfad;
+  const titelZeile = `Fußball heute & diese Woche: Alle Spiele mit Sender${ctx.marke ? ` | ${ctx.marke}` : ' | MovieMatch'}`;
   const beschreibung = 'Welches Fußballspiel läuft wann und wo? Alle Partien der nächsten zwei Wochen mit Anstoß, Sender und Free-TV-Hinweis.';
-  const kette = [
-    { label: 'Start', href: SITE + '/' },
-    { label: 'Sport', href: SITE + '/sport' },
-    { label: 'Spiele' },
-  ];
+  const kette = ctx.marke
+    ? [ { label: ctx.marke, href: '/' }, { label: 'Spiele' } ]
+    : [ { label: 'Start', href: SITE + '/' }, { label: 'Sport', href: SITE + '/sport' }, { label: 'Spiele' } ];
   // Nach Berliner Kalendertag gruppieren.
   const tagVon = new Intl.DateTimeFormat('de-DE', { timeZone: 'Europe/Berlin', weekday: 'long', day: 'numeric', month: 'long' });
   const tagKey = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' });
@@ -521,17 +560,36 @@ export function seiteSpiele(daten) {
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: daten.spiele.slice(0, 50).map((s, i) => ({
       '@type': 'ListItem', position: i + 1, name: `${s.heim} – ${s.gast}`,
-      url: SITE + spielPfad(s),
+      url: ctx.basis + spielPfad(s),
     })),
   }, brotkrumenJsonLd(kette)];
   const bodyHtml = `
     ${brotkrumenHtml(kette)}
     <h1>Fußball heute &amp; diese Woche: Alle Spiele mit Sender</h1>
-    <p class="einleitung">Jede Partie mit Anstoßzeit und Übertragung – ein Klick führt zur Detailseite mit Sendern, Kanälen, Tabellenstand und Formkurve. Den filterbaren Spielplan gibt es in der <a href="${SITE}/sport">Sport-Übersicht von MovieMatch</a>.</p>
+    <p class="einleitung">Jede Partie mit Anstoßzeit und Übertragung – ein Klick führt zur Detailseite mit Sendern, Kanälen, Tabellenstand und Formkurve. Den filterbaren Spielplan gibt es ${ctx.marke ? `auf der <a href="${ctx.appUrl}">Startseite</a>` : `in der <a href="${ctx.appUrl}">Sport-Übersicht von MovieMatch</a>`}.</p>
     ${bloecke || '<p class="hinweis">Aktuell sind keine Spiele im Zeitraum.</p>'}
   `;
   return dokument({
     locale: LOCALE, pfad, titelZeile, beschreibung,
-    indexierbar: daten.spiele.length > 0, jsonLd, bodyHtml,
+    indexierbar: daten.spiele.length > 0, jsonLd, bodyHtml, ...sportKopfFuss(ctx),
   });
+}
+
+/* ---- Sitemap der Spielseiten in der Sport-Domain-Fassung (fuer
+   /sitemap-spiele.xml dort; movietaste liefert im aktiven Zustand keine
+   Spiel-URLs mehr, siehe seoSitemap.js). ---- */
+export async function sitemapSpiele() {
+  const ctx = sportKontext();
+  const { rows } = await pool.query(
+    `SELECT external_id, heim, gast, anstoss, fetched_at FROM sport_matches ORDER BY anstoss`);
+  const heute = new Date().toISOString().slice(0, 10);
+  const xmlEsc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const urls = [{ loc: `${ctx.basis}${ctx.uebersichtPfad}`, lastmod: heute }].concat(rows.map((m) => ({
+    loc: ctx.basis + spielPfad(m),
+    lastmod: Math.abs(new Date(m.anstoss) - Date.now()) < 3 * 86400000
+      ? heute : (m.fetched_at ? m.fetched_at.toISOString().slice(0, 10) : null),
+  })));
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls.map((u) => `  <url><loc>${xmlEsc(u.loc)}</loc>${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}</url>`).join('\n') +
+    `\n</urlset>`;
 }

@@ -7,7 +7,7 @@ import { slugify } from './slug.js';
 import { SITE } from './seoRender.js';
 import { SEO_LOCALES } from './seoLocale.js';
 import { ladePersonSeite } from './seoData.js';
-import { spielPfad } from './seoSport.js';
+import { spielPfad, sportDomainAktiv } from './seoSport.js';
 
 export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person', 'spiel'];
 
@@ -54,6 +54,10 @@ async function personenUrls(locale) {
 // letzten Datenlauf.
 async function spielUrls(locale) {
   if (locale !== 'de-de') return [];
+  // Aktive Sport-Domain: Die Spielseiten wohnen NUR dort (movietaste leitet
+  // per 301 um, siehe routes/seo.js) -- hier darf keine Spiel-URL mehr
+  // stehen, sonst meldet die Sitemap Weiterleitungsziele.
+  if (sportDomainAktiv()) return [];
   const { rows } = await pool.query(
     `SELECT external_id, heim, gast, anstoss, fetched_at FROM sport_matches ORDER BY anstoss`);
   const heute = new Date().toISOString().slice(0, 10);

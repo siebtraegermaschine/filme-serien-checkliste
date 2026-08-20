@@ -96,6 +96,21 @@ test('seiteSpiel: Vorbericht und Aufstellung erscheinen nur mit Inhalt', () => {
   assert.doesNotMatch(vorbei, /Voraussichtliche Aufstellungen/);
 });
 
+test('Sport-Domain aktiv: eigene Basis, kurze Pfade, eigene Marke', () => {
+  process.env.SPORT_DOMAIN = 'sport-test.de';
+  process.env.SPORT_BRAND = 'Testmarke';
+  try {
+    const html = seiteSpiel(beispielDaten('fern'));
+    assert.match(html, /https:\/\/sport-test\.de\/spiel\/fc-bayern-muenchen-vfb-stuttgart-83156/);
+    assert.match(html, /Testmarke/);
+    assert.doesNotMatch(html, /de-de\/spiel\//);           // keine movietaste-Pfade mehr
+    assert.doesNotMatch(html, /\| MovieMatch<\/title>/);   // Titel traegt die eigene Marke
+  } finally {
+    delete process.env.SPORT_DOMAIN;
+    delete process.env.SPORT_BRAND;
+  }
+});
+
 test('seiteSpiele: Uebersicht gruppiert und verlinkt', () => {
   const html = seiteSpiele({
     spiele: [{ external_id: 1, wettbewerb: 'bl1', runde: '1. Spieltag',

@@ -25,6 +25,7 @@ import seoRouter from './routes/seo.js';
 import { attrEsc } from './lib/seoRender.js';
 import { slugify } from './lib/slug.js';
 import { ladeSeoText } from './lib/seoData.js';
+import { ladeSpielSeite, ladeSpieleUebersicht, seiteSpiel, seiteSpiele, sitemapSpiele } from './lib/seoSport.js';
 import movieNightRouter from './routes/movieNight.js';
 import metrikRouter from './routes/metrik.js';
 import eventsRouter from './routes/events.js';
@@ -161,13 +162,26 @@ function sportSeiteHtml() {
   if (a >= 0 && b >= 0) html = html.slice(0, a) + block + html.slice(b + OG_ENDE.length);
   return html.replace(/<title>[^<]*<\/title>/, '<title>' + attrEsc(SPORT_BRAND) + '</title>');
 }
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   if (!istSportDomain(req)) return next();
   const p = req.path;
-  if (p === '/' || p === '/sport') return res.type('html').send(sportSeiteHtml());
-  // Eigene, schlichte robots.txt -- die von movietaste.de verweist auf deren
-  // Sitemap, die hier nichts verloren hat.
-  if (p === '/robots.txt') return res.type('txt').send('User-agent: *\nAllow: /\n');
+  try {
+    if (p === '/' || p === '/sport') return res.type('html').send(sportSeiteHtml());
+    // Die SEO-Spielseiten wohnen bei aktiver Sport-Domain HIER (kuerzere
+    // Pfade ohne Locale) -- movietaste leitet auf sie um (routes/seo.js).
+    if (p === '/spiele') return res.type('html').send(seiteSpiele(await ladeSpieleUebersicht()));
+    const spiel = p.match(/^\/spiel\/.*-(\d+)$/);
+    if (spiel) {
+      const daten = await ladeSpielSeite(spiel[1]);
+      if (!daten) return res.status(404).type('txt').send('Nicht gefunden');
+      return res.type('html').send(seiteSpiel(daten));
+    }
+    if (p === '/sitemap-spiele.xml') return res.type('application/xml').send(await sitemapSpiele());
+    // Eigene robots.txt samt Verweis auf die Spiel-Sitemap.
+    if (p === '/robots.txt') {
+      return res.type('txt').send(`User-agent: *\nAllow: /\nSitemap: https://${SPORT_DOMAIN}/sitemap-spiele.xml\n`);
+    }
+  } catch (err) { return next(err); }
   // Statische Dateien (Bilder, Rechtstexte, Manifest, ...) laufen normal weiter.
   if (/\.[a-z0-9]+$/i.test(p)) return next();
   // Alles Uebrige (SEO-Seiten, /t/-Titellinks, Passwort-Reset, ...) gehoert

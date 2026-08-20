@@ -35,11 +35,14 @@ const BILD_FALLBACK = SITE + '/og-image.png';
 // Wer beides gleichzeitig macht (Disallow + noindex), erreicht das Gegenteil --
 // bereits indexierte Seiten blieben dann im Index stehen.
 
-function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates }) {
-  const url = SITE + pfad;
+function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis }) {
+  // basis: Ursprung fuer canonical/og/hreflang -- Standard movietaste.de,
+  // die Sport-Domain-Spielseiten (seoSport.js) reichen ihre eigene durch.
+  const wurzel = basis || SITE;
+  const url = wurzel + pfad;
   const robots = indexierbar ? 'index,follow' : 'noindex,follow';
   const hreflangs = (alternates && alternates.length ? alternates : [{ locale, pfad }])
-    .map((a) => `<link rel="alternate" hreflang="${attrEsc(hreflangCode(a.locale))}" href="${attrEsc(SITE + a.pfad)}">`)
+    .map((a) => `<link rel="alternate" hreflang="${attrEsc(hreflangCode(a.locale))}" href="${attrEsc(wurzel + a.pfad)}">`)
     .join('\n  ');
   const ld = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
   return `<meta charset="UTF-8">
@@ -76,18 +79,18 @@ function fusszeile() {
   </footer>`;
 }
 
-export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml }) {
+export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml, basis, kopfHtml, fussHtml }) {
   return `<!DOCTYPE html>
 <html lang="${locale.split('-')[0]}">
 <head>
-  ${kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates })}
+  ${kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis })}
 </head>
 <body>
-  ${kopfzeile()}
+  ${kopfHtml || kopfzeile()}
   <main>
     ${bodyHtml}
   </main>
-  ${fusszeile()}
+  ${fussHtml || fusszeile()}
 </body>
 </html>`;
 }
