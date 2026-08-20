@@ -558,7 +558,12 @@
   #vereinSuche:focus { border-color: var(--accent); }
   /* Chips im "Deine Ansicht"-Fenster: gleiche Optik, aber ohne die
      Seitenraender/Zentrierung der Seiten-Chipreihen. */
-  .sport-chips.ansicht-chips { margin: 0 0 12px; padding: 0; max-width: none; }
+  /* flex:0 0 auto ist hier entscheidend: Das Fenster ist eine Flex-Spalte
+     (.similar-modal, max-height 82vh), und ein Flex-Kind mit overflow darf
+     auf Hoehe 0 schrumpfen, sobald die Vereinsliste den Platz beansprucht --
+     die Chip-Zeile verschwand dann unter der naechsten Ueberschrift
+     (zweimal passiert, 20. August 2026). */
+  .sport-chips.ansicht-chips { margin: 0 0 12px; padding: 0; max-width: none; flex: 0 0 auto; }
   /* Vereins-Logos als Filter-Chips in der Verfuegbarkeitsreihe. */
   .sport-chips button.verein-chip { padding: 3px 9px; }
   .verein-chip img { width: 20px; height: 20px; object-fit: contain; display: block; }
