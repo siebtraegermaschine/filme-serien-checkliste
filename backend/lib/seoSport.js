@@ -118,6 +118,44 @@ async function teamForm(teamId, teamName) {
   return spiele;
 }
 
+/* ---- Rechte-Matrix (sport-rechte.json) fuer die Wettbewerbs-Seiten:
+   aus den Regeln entstehen die "Wer uebertraegt?"-Erklaertexte. Datei liegt
+   in der Repo-Wurzel (im Image neben backend/), kurzer Cache. ---- */
+const MATRIX_PFAD = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'sport-rechte.json');
+let matrixCache = { at: 0, daten: null };
+function rechteMatrix() {
+  if (Date.now() - matrixCache.at > 5 * 60_000) {
+    let daten = null;
+    try { daten = JSON.parse(fs.readFileSync(MATRIX_PFAD, 'utf8')); } catch { /* ohne Matrix keine Regeltexte */ }
+    matrixCache = { at: Date.now(), daten };
+  }
+  return matrixCache.daten;
+}
+
+const TAG_NAMEN = { Mon: 'Montag', Tue: 'Dienstag', Wed: 'Mittwoch', Thu: 'Donnerstag', Fri: 'Freitag', Sat: 'Samstag', Sun: 'Sonntag' };
+
+// Die Regeln eines Wettbewerbs als lesbare Saetze ("Samstag 15:30 Uhr:
+// Sky/WOW (Einzelspiele) und DAZN (Konferenz)"). Die letzte Regel ohne
+// Bedingungen ist die "alle uebrigen Spiele"-Zeile.
+function regelnAlsText(kuerzel, sender) {
+  const matrix = rechteMatrix();
+  if (!matrix) return [];
+  const saisons = Object.keys(matrix.saisons || {}).sort();
+  const block = saisons.length ? matrix.saisons[saisons[saisons.length - 1]][kuerzel] : null;
+  if (!block || !Array.isArray(block.regeln)) return [];
+  return block.regeln.map((r) => {
+    const wann = r.tag
+      ? `${r.tag.map((t) => TAG_NAMEN[t] || t).join('/')}${r.zeit ? ` ${r.zeit} Uhr` : ''}`
+      : 'Alle übrigen Spiele';
+    const wer = (r.tv || []).map((b) => {
+      const info = (sender || {})[b.s] || { name: b.s };
+      const zusatz = [b.typ === 'konferenz' ? 'Konferenz' : '', info.frei ? 'frei empfangbar' : ''].filter(Boolean).join(', ');
+      return info.name + (zusatz ? ` (${zusatz})` : '');
+    }).join(' und ');
+    return `${wann}: ${wer || 'Sender noch offen'}`;
+  });
+}
+
 /* ---- Zeitstufe zur Abrufzeit: bestimmt Wortlaut und Bloecke. ---- */
 export function zeitstufe(anstoss, beendet, jetzt = new Date()) {
   const ko = new Date(anstoss);
@@ -163,6 +201,15 @@ export function sportKontext() {
 }
 export function spielPfad(m) {
   return `${sportKontext().spielPrefix}/${spielSlugId(m)}`;
+}
+export function wettbewerbSlug(daten, kuerzel) {
+  return slugify(((daten.wettbewerbe || {})[kuerzel] || {}).name || kuerzel);
+}
+export function wettbewerbPfad(daten, kuerzel) {
+  return `/wettbewerb/${wettbewerbSlug(daten, kuerzel)}`;
+}
+export function vereinPfad(name) {
+  return `/verein/${slugify(name)}`;
 }
 
 // Kopf-/Fusszeile fuer die Sport-Domain-Fassung (movietaste nutzt die
@@ -519,6 +566,12 @@ export function seiteSpiel(daten) {
     ${formBlock(daten)}
     ${aufstellungBlock(daten)}
     ${weitereBlock(daten)}
+    <h2>Mehr dazu</h2>
+    <ul>
+      <li><a href="${vereinPfad(m.heim)}">Alle Spiele: ${attrEsc(m.heim)}</a></li>
+      <li><a href="${vereinPfad(m.gast)}">Alle Spiele: ${attrEsc(m.gast)}</a></li>
+      <li><a href="${wettbewerbPfad(daten, m.wettbewerb)}">Wer überträgt ${attrEsc(comp)}?</a></li>
+    </ul>
     ${faqTeil.html}
     ${stand}
   `;
@@ -567,11 +620,24 @@ export function seiteSpiele(daten) {
       url: ctx.basis + spielPfad(s),
     })),
   }, brotkrumenJsonLd(kette)];
+  // Themen-Hubs: Wettbewerbe (in Matrix-Reihenfolge) und alle Teams des
+  // Spielplans -- die Einstiege fuer "wo laeuft bundesliga" / "fc bayern
+  // spiele" (Christian, 20.08.2026).
+  const compKeys = Object.keys(daten.wettbewerbe)
+    .sort((a, b) => ((daten.wettbewerbe[a].reihe || 99) - (daten.wettbewerbe[b].reihe || 99)));
+  const compChips = compKeys.map((k) =>
+    `<a class="chip" href="${wettbewerbPfad(daten, k)}">${attrEsc(wettbewerbName(daten, k))}</a>`).join('');
+  const teamNamen = [...new Set(daten.spiele.flatMap((s) => [s.heim, s.gast]))].sort((a, b) => a.localeCompare(b, 'de'));
+  const teamLinks = teamNamen.map((n) => `<a class="chip" href="${vereinPfad(n)}">${attrEsc(n)}</a>`).join('');
   const bodyHtml = `
     ${brotkrumenHtml(kette)}
     <h1>Fußball heute &amp; diese Woche: Alle Spiele mit Sender</h1>
     <p class="einleitung">Jede Partie mit Anstoßzeit und Übertragung – ein Klick führt zur Detailseite mit Sendern, Kanälen, Tabellenstand und Formkurve. Den filterbaren Spielplan gibt es ${ctx.marke ? `auf der <a href="${ctx.appUrl}">Startseite</a>` : `in der <a href="${ctx.appUrl}">Sport-Übersicht von MovieMatch</a>`}.</p>
+    <h2>Nach Wettbewerb</h2>
+    <div class="chips">${compChips}</div>
     ${bloecke || '<p class="hinweis">Aktuell sind keine Spiele im Zeitraum.</p>'}
+    <h2>Nach Verein &amp; Nationalmannschaft</h2>
+    <div class="chips">${teamLinks}</div>
   `;
   return dokument({
     locale: LOCALE, pfad, titelZeile, beschreibung,
@@ -579,16 +645,151 @@ export function seiteSpiele(daten) {
   });
 }
 
+/* ---- Wettbewerbs-Seite (/wettbewerb/<slug>): "Wo läuft Bundesliga?" ----
+   Antwort oben (die Sender-Regeln als Saetze aus der Rechte-Matrix), dazu
+   die kommenden Spiele des Wettbewerbs als Linkliste und FAQ. ---- */
+export async function ladeWettbewerbSeite(slug) {
+  const { rows: metaRows } = await pool.query('SELECT key, value FROM sport_meta');
+  const meta = Object.fromEntries(metaRows.map((r) => [r.key, r.value]));
+  const daten = { wettbewerbe: meta.wettbewerbe || {}, sender: meta.sender || {} };
+  const kuerzel = Object.keys(daten.wettbewerbe).find((k) => wettbewerbSlug(daten, k) === slug);
+  if (!kuerzel) return null;
+  const { rows } = await pool.query(
+    `SELECT external_id, heim, gast, anstoss, runde, tv, wettbewerb FROM sport_matches
+      WHERE wettbewerb = $1 AND anstoss > now() - interval '3 hours'
+      ORDER BY anstoss LIMIT 40`, [kuerzel]);
+  return { ...daten, kuerzel, spiele: rows };
+}
+
+function spielZeile(s, daten) {
+  const sender = (s.tv || []).map((b) => ((daten.sender || {})[b.s] || { name: b.s }).name).join(', ');
+  const frei = (s.tv || []).some((b) => ((daten.sender || {})[b.s] || {}).frei);
+  return `<li><a href="${spielPfad(s)}">${attrEsc(s.heim)} – ${attrEsc(s.gast)}</a> ` +
+         `<span class="hinweis">${datumKurz.format(s.anstoss)}, ${uhrzeit.format(s.anstoss)} Uhr` +
+         `${sender ? ` · ${attrEsc(sender)}` : ''}${frei ? ' · Free-TV' : ''}</span></li>`;
+}
+
+export function seiteWettbewerb(daten) {
+  const ctx = sportKontext();
+  const name = wettbewerbName(daten, daten.kuerzel);
+  const pfad = wettbewerbPfad(daten, daten.kuerzel);
+  const titelZeile = `Wer überträgt ${name}? Alle Spiele im TV & Stream${ctx.marke ? ` | ${ctx.marke}` : ''}`;
+  const regeln = regelnAlsText(daten.kuerzel, daten.sender);
+  const beschreibung = `${name} live: welche Spiele wann bei welchem Sender laufen – Übertragung, Free-TV-Hinweise und der komplette Spielplan.`;
+  const kette = [ { label: ctx.marke || 'Sport', href: '/' }, { label: 'Spiele', href: ctx.uebersichtPfad }, { label: name } ];
+  const freiSender = [...new Set(daten.spiele.flatMap((s) => (s.tv || [])
+    .filter((b) => ((daten.sender || {})[b.s] || {}).frei)
+    .map((b) => daten.sender[b.s].name)))];
+  const fragen = [
+    [`Wer überträgt die ${name}?`, regeln.length ? regeln.join(' – ') : 'Die Senderverteilung steht noch nicht fest.'],
+    [`Läuft ${name} im Free-TV?`, freiSender.length
+      ? `Einzelne Spiele laufen frei empfangbar, aktuell bei ${freiSender.join(' und ')}.`
+      : 'Nach aktuellem Stand laufen die Spiele bei Abo-Anbietern; Free-TV-Ansetzungen erscheinen hier, sobald sie bekannt sind.'],
+  ];
+  const jsonLd = [{
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: fragen.map(([f, a]) => ({ '@type': 'Question', name: f, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  }, brotkrumenJsonLd(kette)];
+  const bodyHtml = `
+    ${brotkrumenHtml(kette)}
+    <h1>Wer überträgt ${attrEsc(name)}?</h1>
+    ${regeln.length ? `<p class="spiel-antwort">${attrEsc(regeln.join(' · '))}</p>` : ''}
+    <h2>Die nächsten Spiele</h2>
+    ${daten.spiele.length ? `<ul>${daten.spiele.map((sp) => spielZeile(sp, daten)).join('')}</ul>`
+      : '<p class="hinweis">Aktuell sind keine Termine bekannt – sie erscheinen hier automatisch, sobald der Spielplan feststeht.</p>'}
+    <h2>Häufige Fragen</h2>
+    ${fragen.map(([f, a]) => `<h3>${attrEsc(f)}</h3><p>${attrEsc(a)}</p>`).join('')}
+    <p><a href="${ctx.uebersichtPfad}">Alle Spiele aller Wettbewerbe</a></p>
+  `;
+  return dokument({ locale: LOCALE, pfad, titelZeile, beschreibung,
+    indexierbar: true, jsonLd, bodyHtml, ...sportKopfFuss(ctx) });
+}
+
+/* ---- Vereins-/Nationalmannschafts-Seite (/verein/<slug>): "FC Bayern
+   Spiele im TV", "Deutschland-Spiele" -- automatisch fuer jedes Team, das
+   im Spielplan vorkommt. Antwortbox = naechstes Spiel (Wann/Wo). ---- */
+export async function ladeVereinSeite(slug) {
+  const { rows: teamRows } = await pool.query(
+    `SELECT heim AS name, MAX(heim_logo) AS logo FROM sport_matches GROUP BY heim
+     UNION SELECT gast AS name, MAX(gast_logo) AS logo FROM sport_matches GROUP BY gast`);
+  const teams = new Map();
+  for (const t of teamRows) if (!teams.has(t.name)) teams.set(t.name, t.logo);
+  const name = [...teams.keys()].find((n) => slugify(n) === slug);
+  if (!name) return null;
+  const [{ rows: kommend }, { rows: vorbei }, { rows: metaRows }] = await Promise.all([
+    pool.query(`SELECT external_id, heim, gast, anstoss, runde, tv, wettbewerb FROM sport_matches
+                 WHERE (heim = $1 OR gast = $1) AND anstoss > now() - interval '3 hours'
+                 ORDER BY anstoss LIMIT 20`, [name]),
+    pool.query(`SELECT external_id, heim, gast, anstoss, tore_heim, tore_gast, wettbewerb FROM sport_matches
+                 WHERE (heim = $1 OR gast = $1) AND beendet AND anstoss <= now()
+                 ORDER BY anstoss DESC LIMIT 5`, [name]),
+    pool.query('SELECT key, value FROM sport_meta'),
+  ]);
+  const meta = Object.fromEntries(metaRows.map((r) => [r.key, r.value]));
+  return { name, logo: teams.get(name), kommend, vorbei,
+           sender: meta.sender || {}, wettbewerbe: meta.wettbewerbe || {} };
+}
+
+export function seiteVerein(daten) {
+  const ctx = sportKontext();
+  const pfad = vereinPfad(daten.name);
+  const titelZeile = `${daten.name}: Nächste Spiele live im TV & Stream${ctx.marke ? ` | ${ctx.marke}` : ''}`;
+  const naechstes = daten.kommend[0];
+  const antwort = naechstes
+    ? `Das nächste Spiel: ${naechstes.heim} – ${naechstes.gast} am ${datumLang.format(naechstes.anstoss)} um ${uhrzeit.format(naechstes.anstoss)} Uhr` +
+      ((naechstes.tv || []).length ? ` live bei ${(naechstes.tv || []).map((b) => ((daten.sender || {})[b.s] || { name: b.s }).name).join(' und ')}.` : ' – der Sender steht noch nicht fest.')
+    : `Aktuell sind keine kommenden Spiele von ${daten.name} im Spielplan.`;
+  const beschreibung = antwort.slice(0, 200);
+  const kette = [ { label: ctx.marke || 'Sport', href: '/' }, { label: 'Spiele', href: ctx.uebersichtPfad }, { label: daten.name } ];
+  const fragen = [
+    [`Wo läuft das nächste Spiel von ${daten.name}?`, antwort],
+    [`Wann spielt ${daten.name} wieder?`, naechstes
+      ? `Am ${datumLang.format(naechstes.anstoss)} um ${uhrzeit.format(naechstes.anstoss)} Uhr (${wettbewerbName(daten, naechstes.wettbewerb)}).`
+      : 'Der nächste Termin steht noch nicht fest.'],
+  ];
+  const jsonLd = [{
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: fragen.map(([f, a]) => ({ '@type': 'Question', name: f, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  }, brotkrumenJsonLd(kette)];
+  const vorbeiHtml = daten.vorbei.length
+    ? `<h2>Letzte Ergebnisse</h2><ul>${daten.vorbei.map((sp) =>
+        `<li><a href="${spielPfad(sp)}">${attrEsc(sp.heim)} – ${attrEsc(sp.gast)}</a> ` +
+        `<span class="hinweis">${sp.tore_heim != null ? `${sp.tore_heim}:${sp.tore_gast} · ` : ''}${datumKurz.format(sp.anstoss)} · ${attrEsc(wettbewerbName(daten, sp.wettbewerb))}</span></li>`).join('')}</ul>`
+    : '';
+  const bodyHtml = `
+    ${brotkrumenHtml(kette)}
+    <h1>${attrEsc(daten.name)}: Nächste Spiele live im TV</h1>
+    <p class="spiel-antwort">${attrEsc(antwort)}</p>
+    <h2>Kommende Spiele</h2>
+    ${daten.kommend.length ? `<ul>${daten.kommend.map((sp) => spielZeile(sp, daten)).join('')}</ul>`
+      : '<p class="hinweis">Sobald neue Termine feststehen, erscheinen sie hier automatisch.</p>'}
+    ${vorbeiHtml}
+    <h2>Häufige Fragen</h2>
+    ${fragen.map(([f, a]) => `<h3>${attrEsc(f)}</h3><p>${attrEsc(a)}</p>`).join('')}
+    <p><a href="${ctx.uebersichtPfad}">Alle Spiele aller Wettbewerbe</a></p>
+  `;
+  return dokument({ locale: LOCALE, pfad, titelZeile, beschreibung,
+    indexierbar: daten.kommend.length > 0 || daten.vorbei.length > 0, jsonLd, bodyHtml, ...sportKopfFuss(ctx) });
+}
+
 /* ---- Sitemap der Spielseiten in der Sport-Domain-Fassung (fuer
    /sitemap-spiele.xml dort; movietaste liefert im aktiven Zustand keine
    Spiel-URLs mehr, siehe seoSitemap.js). ---- */
 export async function sitemapSpiele() {
   const ctx = sportKontext();
-  const { rows } = await pool.query(
-    `SELECT external_id, heim, gast, anstoss, fetched_at FROM sport_matches ORDER BY anstoss`);
+  const [{ rows }, { rows: metaRows }] = await Promise.all([
+    pool.query(`SELECT external_id, heim, gast, anstoss, fetched_at FROM sport_matches ORDER BY anstoss`),
+    pool.query('SELECT key, value FROM sport_meta'),
+  ]);
+  const meta = Object.fromEntries(metaRows.map((r) => [r.key, r.value]));
+  const daten = { wettbewerbe: meta.wettbewerbe || {} };
   const heute = new Date().toISOString().slice(0, 10);
   const xmlEsc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const urls = [{ loc: `${ctx.basis}${ctx.uebersichtPfad}`, lastmod: heute }].concat(rows.map((m) => ({
+  const teams = [...new Set(rows.flatMap((m) => [m.heim, m.gast]))];
+  const urls = [{ loc: `${ctx.basis}${ctx.uebersichtPfad}`, lastmod: heute }]
+    .concat(Object.keys(daten.wettbewerbe).map((k) => ({ loc: ctx.basis + wettbewerbPfad(daten, k), lastmod: heute })))
+    .concat(teams.map((n) => ({ loc: ctx.basis + vereinPfad(n), lastmod: heute })))
+    .concat(rows.map((m) => ({
     loc: ctx.basis + spielPfad(m),
     lastmod: Math.abs(new Date(m.anstoss) - Date.now()) < 3 * 86400000
       ? heute : (m.fetched_at ? m.fetched_at.toISOString().slice(0, 10) : null),

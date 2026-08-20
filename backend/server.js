@@ -25,7 +25,8 @@ import seoRouter from './routes/seo.js';
 import { attrEsc } from './lib/seoRender.js';
 import { slugify } from './lib/slug.js';
 import { ladeSeoText } from './lib/seoData.js';
-import { ladeSpielSeite, ladeSpieleUebersicht, seiteSpiel, seiteSpiele, sitemapSpiele } from './lib/seoSport.js';
+import { ladeSpielSeite, ladeSpieleUebersicht, seiteSpiel, seiteSpiele, sitemapSpiele,
+         ladeWettbewerbSeite, seiteWettbewerb, ladeVereinSeite, seiteVerein } from './lib/seoSport.js';
 import movieNightRouter from './routes/movieNight.js';
 import metrikRouter from './routes/metrik.js';
 import eventsRouter from './routes/events.js';
@@ -192,6 +193,20 @@ app.use(async (req, res, next) => {
       const daten = await ladeSpielSeite(spiel[1]);
       if (!daten) return res.status(404).type('txt').send('Nicht gefunden');
       return res.type('html').send(seiteSpiel(daten));
+    }
+    // Themen-Hubs: je Wettbewerb ("wo laeuft bundesliga") und je Verein/
+    // Nationalmannschaft ("fc bayern spiele") -- siehe lib/seoSport.js.
+    const wettbewerb = p.match(/^\/wettbewerb\/([a-z0-9-]+)$/);
+    if (wettbewerb) {
+      const daten = await ladeWettbewerbSeite(wettbewerb[1]);
+      if (!daten) return res.status(404).type('txt').send('Nicht gefunden');
+      return res.type('html').send(seiteWettbewerb(daten));
+    }
+    const verein = p.match(/^\/verein\/([a-z0-9-]+)$/);
+    if (verein) {
+      const daten = await ladeVereinSeite(verein[1]);
+      if (!daten) return res.status(404).type('txt').send('Nicht gefunden');
+      return res.type('html').send(seiteVerein(daten));
     }
     if (p === '/sitemap-spiele.xml') return res.type('application/xml').send(await sitemapSpiele());
     // Viele Dienste fragen zuerst /favicon.ico -- hier gehoert das
