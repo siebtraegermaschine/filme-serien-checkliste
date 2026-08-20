@@ -1,0 +1,44 @@
+name: Sport-Daten aktualisieren
+
+on:
+  schedule:
+    # Ein Lauf dauert nur Sekunden (5 Wettbewerbe x 2 Saisons von OpenLigaDB,
+    # kein TMDB beteiligt) -- deshalb mehrmals taeglich, damit Verlegungen und
+    # neu terminierte Spiele zeitnah ankommen. Am Wochenende (Spieltage)
+    # zusaetzlich am Nachmittag/Abend fuer Ergebnisse. Zeiten in UTC.
+    - cron: "0 5,11,17 * * *"
+    - cron: "0 14,20 * * 5,6,0"
+  # Aenderungen an Matrix oder Skript sollen sofort wirken -- vor allem fuer
+  # die woechentliche Pflege der Ausnahmen (PLAN-SPORT.md 5b): Commit auf
+  # main -> Daten laufen neu ein, ohne auf den naechsten Cron zu warten.
+  push:
+    branches: [main]
+    paths: ["sport-rechte.json", "sport-fetch.mjs", "backend/lib/sportRechte.js"]
+  workflow_dispatch: {}         # erlaubt manuelles Ausloesen im Actions-Tab
+
+concurrency:
+  group: sport-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Sport-Daten aktualisieren
+        env:
+          STREAMING_API_URL: ${{ vars.STREAMING_API_URL }}
+          # Bewusst DASSELBE Secret wie beim Kino: gleiche Vertrauensstufe
+          # (GitHub Action -> Backend), und der Server braucht kein neues
+          # Secret in backend/.env (routes/sport.js faellt auf
+          # CINEMA_INGEST_SECRET zurueck, wenn SPORT_INGEST_SECRET fehlt).
+          SPORT_INGEST_SECRET: ${{ secrets.CINEMA_INGEST_SECRET }}
+        run: node sport-fetch.mjs

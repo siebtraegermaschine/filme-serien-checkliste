@@ -1,6 +1,6 @@
 # Übergabe: SEO-Texte movietaste.de
 
-Stand: 18.08.2026 · 2737 Titeltexte · SEO-Seiten freigegeben · Fächer-Verfahren aktiv (Abschnitt 3b)
+Stand: 19.08.2026 · 7237 Titeltexte in der Datenbank (de-de), 13.026 offen auf Stufe B · SEO-Seiten freigegeben · Fächer-Verfahren aktiv (Abschnitt 3b)
 
 ---
 

@@ -7,3 +7,6 @@ rated-titles-last-run.json
 # Batch-Protokolle (lokal, nicht versionieren)
 backend/scripts/.seo-*.jsonl
 backend/scripts/.pakete/
+
+# Lokale Vorschau von sport-fetch.mjs (Lauf ohne STREAMING_API_URL)
+sport-vorschau.json

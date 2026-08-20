@@ -143,7 +143,7 @@ router.get('/qr', GRENZE_QR, async (req, res) => {
   res.json({ size: n, modules: module });
 });
 
-/* ---- "Diese Titel teilen": Momentaufnahmen ----
+/* ---- "Diese Ansicht teilen": Momentaufnahmen ----
    Eine feste Liste von Titel-Kennungen in Anzeige-Reihenfolge, geteilt per
    Token-Link (?titel=TOKEN). Ohne Zeitverfall -- der Link stirbt nur mit dem
    Konto (CASCADE, siehe schema.sql). Erstellen nur angemeldet; der Deckel je
@@ -187,13 +187,39 @@ router.get('/titel-liste/:token', GRENZE_MOMENT, async (req, res) => {
   const token = String(req.params.token || '');
   if (!/^[a-f0-9]{32}$/.test(token)) return res.status(404).json({ error: 'unbekannt' });
   const { rows } = await pool.query(
-    `SELECT m.title_ids, u.display_name FROM titel_momentaufnahmen m
+    `SELECT m.title_ids, m.user_id, u.display_name FROM titel_momentaufnahmen m
        JOIN users u ON u.id = m.user_id
       WHERE m.token = $1`,
     [token]
   );
   if (!rows.length) return res.status(404).json({ error: 'unbekannt' });
-  res.json({ ids: rows[0].title_ids.map(Number), von: rows[0].display_name || null });
+  // Fuer den Knopf "Mit X verknuepfen" in der Kopfzeile (siehe renderMoment):
+  // Er hat nur Sinn, wenn hier jemand angemeldet ist, dem die Liste nicht
+  // selbst gehoert und der noch nicht verknuepft ist. Abgemeldet bleiben beide
+  // Angaben false -- der Knopf fragt dann erst nach dem Anmelden.
+  const ich = req.session && req.session.userId ? String(req.session.userId) : null;
+  const vonMir = ich != null && ich === String(rows[0].user_id);
+  let verknuepft = false;
+  let angefragt = false;
+  if (ich != null && !vonMir) {
+    const { rows: schon } = await pool.query(
+      'SELECT 1 FROM user_links WHERE user_id = $1 AND linked_user_id = $2', [ich, String(rows[0].user_id)]);
+    verknuepft = schon.length > 0;
+    if (!verknuepft) {
+      // Laeuft die Anfrage schon, soll der Knopf nicht noch einmal dastehen --
+      // sonst sieht es aus, als waere beim ersten Mal nichts passiert.
+      const { rows: offen } = await pool.query(
+        'SELECT 1 FROM user_link_anfragen WHERE von_id = $1 AND an_id = $2', [ich, String(rows[0].user_id)]);
+      angefragt = offen.length > 0;
+    }
+  }
+  res.json({
+    ids: rows[0].title_ids.map(Number),
+    von: rows[0].display_name || null,
+    vonMir,
+    verknuepft,
+    angefragt,
+  });
 });
 
 export { ladeTitel, ergaenzeBackdrop };

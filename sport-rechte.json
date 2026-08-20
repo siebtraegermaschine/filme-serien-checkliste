@@ -1,0 +1,573 @@
+{
+  "_hinweis": [
+    "Rechte-Matrix fuer den Sport-Bereich (siehe PLAN-SPORT.md).",
+    "WER ein Spiel zeigt, steht in Deutschland pro Wettbewerb und Anstoss-Slot",
+    "fest -- deshalb leiten sich ~90% der Sender REGELBASIERT aus Wochentag und",
+    "Uhrzeit (Europe/Berlin) ab. Die Regeln je Saison stehen unter 'saisons';",
+    "die erste passende Regel gewinnt (Reihenfolge zaehlt!).",
+    "",
+    "Die restlichen ~10% sind PICK-basiert (Amazons CL-Dienstagsspiel, Free-TV-",
+    "Spiele in Pokal und Europa League) und stehen als 'ausnahmen' je Spiel:",
+    "  \"<OpenLigaDB-matchID>\": { \"ersetzen\": [{\"s\":\"amazon\"}], \"quelle\": \"...\" }",
+    "  \"<OpenLigaDB-matchID>\": { \"zusatz\":   [{\"s\":\"ard\"}],    \"quelle\": \"...\" }",
+    "'ersetzen' verdraengt das Regel-Ergebnis (Amazon-Pick ist EXKLUSIV, das",
+    "Spiel laeuft dann NICHT bei DAZN), 'zusatz' ergaenzt es (Free-TV-Spiele",
+    "laufen ZUSAETZLICH zum Abo-Sender). Gepflegt wird das woechentlich von",
+    "einer Claude-Routine (PLAN-SPORT.md Abschnitt 5b).",
+    "",
+    "ACHTUNG Rechtewechsel 2027/28: CL -> Paramount+/Amazon, EL/ECL -> DAZN.",
+    "Dann NUR einen neuen Saisons-Block '2027' anlegen -- nichts im Code."
+  ],
+  "sender": {
+    "sky": {
+      "name": "Sky/WOW",
+      "frei": false,
+      "tmdb": [
+        29,
+        30
+      ],
+      "link": "https://www.wowtv.de/live-sport",
+      "kanal": "Sky Sport / WOW-App",
+      "info": "Ein Anbieter, zwei Wege: das klassische Sky-Abo (Receiver) oder WOW, Skys eigenes Streaming ohne Receiver — gleicher Inhalt.",
+      "links": [
+        {
+          "n": "Sky",
+          "url": "https://www.sky.de/sport"
+        },
+        {
+          "n": "WOW",
+          "url": "https://www.wowtv.de/live-sport"
+        }
+      ]
+    },
+    "dazn": {
+      "name": "DAZN",
+      "frei": false,
+      "tmdb": [],
+      "link": "https://www.dazn.com/de-DE",
+      "kanal": "DAZN-App",
+      "info": "Läuft in der DAZN-App. Die linearen Kanäle DAZN 1/2 lassen sich auch über Sky-Receiver und Vodafone empfangen — brauchen aber ebenfalls die DAZN-Buchung, ein Sky-Abo allein reicht dafür nicht."
+    },
+    "amazon": {
+      "name": "Amazon Prime",
+      "frei": false,
+      "tmdb": [
+        9,
+        119
+      ],
+      "link": "https://www.amazon.de/gp/video/storefront",
+      "kanal": "Prime Video",
+      "info": "Läuft in der Prime-Video-App, im Prime-Abo enthalten."
+    },
+    "rtlplus": {
+      "name": "RTL+",
+      "frei": false,
+      "tmdb": [
+        298
+      ],
+      "link": "https://plus.rtl.de/",
+      "kanal": "RTL+ (Stream)",
+      "info": "Läuft im RTL+-Stream (Premium-Abo)."
+    },
+    "sat1": {
+      "name": "Sat.1",
+      "frei": true,
+      "link": "https://www.joyn.de/live-tv/sat1",
+      "kanal": "Sat.1",
+      "info": "Frei empfangbar; Stream über Joyn."
+    },
+    "ard": {
+      "name": "ARD",
+      "frei": true,
+      "link": "https://www.ardmediathek.de/live",
+      "kanal": "Das Erste",
+      "info": "Frei empfangbar; Stream in der ARD-Mediathek oder über Joyn.",
+      "links": [
+        {
+          "n": "ARD Mediathek",
+          "url": "https://www.ardmediathek.de/live"
+        },
+        {
+          "n": "Joyn",
+          "url": "https://www.joyn.de/live-tv/das-erste"
+        }
+      ]
+    },
+    "zdf": {
+      "name": "ZDF",
+      "frei": true,
+      "link": "https://www.zdf.de/live-tv",
+      "kanal": "ZDF",
+      "info": "Frei empfangbar; Stream in der ZDF-Mediathek oder über Joyn.",
+      "links": [
+        {
+          "n": "ZDF Mediathek",
+          "url": "https://www.zdf.de/live-tv"
+        },
+        {
+          "n": "Joyn",
+          "url": "https://www.joyn.de/live-tv/zdf"
+        }
+      ]
+    },
+    "rtl": {
+      "name": "RTL",
+      "frei": true,
+      "link": "https://plus.rtl.de/",
+      "kanal": "RTL",
+      "info": "Frei empfangbar; Stream über RTL+."
+    },
+    "nitro": {
+      "name": "RTL Nitro",
+      "frei": true,
+      "link": "https://plus.rtl.de/",
+      "kanal": "RTL Nitro",
+      "info": "Frei empfangbar; Stream über RTL+."
+    },
+    "magenta": {
+      "name": "MagentaSport",
+      "frei": false,
+      "tmdb": [],
+      "link": "https://www.magentasport.de/",
+      "kanal": "MagentaSport-App",
+      "info": "Läuft bei MagentaSport (Telekom-Abo, für Telekom-Kunden günstiger). Ausgewählte Spiele zeigen die ARD-Dritten zusätzlich frei."
+    }
+  },
+  "wettbewerbe": {
+    "bl1": {
+      "name": "Bundesliga"
+    },
+    "bl2": {
+      "name": "2. Bundesliga"
+    },
+    "bl3": {
+      "name": "3. Liga"
+    },
+    "dfb": {
+      "name": "DFB-Pokal"
+    },
+    "ucl": {
+      "name": "Champions League"
+    },
+    "uel": {
+      "name": "Europa League"
+    },
+    "blsc": {
+      "name": "Supercup",
+      "olb": "BLSupercup"
+    },
+    "nla": {
+      "name": "Länderspiele",
+      "olb": "nla",
+      "nurTeams": [
+        "Deutschland"
+      ]
+    }
+  },
+  "saisons": {
+    "2025": {
+      "bl1": {
+        "regeln": [
+          {
+            "tag": [
+              "Sat"
+            ],
+            "zeit": "15:30",
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 2–10 (Einzelspiel)"
+              },
+              {
+                "s": "dazn",
+                "typ": "konferenz",
+                "kanal": "DAZN 1 / DAZN-App"
+              }
+            ]
+          },
+          {
+            "tag": [
+              "Sat"
+            ],
+            "zeit": "18:30",
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1 (Topspiel)"
+              }
+            ]
+          },
+          {
+            "tag": [
+              "Sun"
+            ],
+            "tv": [
+              {
+                "s": "dazn",
+                "kanal": "DAZN-App / DAZN 1"
+              }
+            ]
+          },
+          {
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "bl2": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "bl3": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "magenta"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "dfb": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "ucl": {
+        "regeln": [
+          {
+            "tag": [
+              "Tue"
+            ],
+            "tv": [
+              {
+                "s": "dazn"
+              }
+            ],
+            "unsicher": true
+          },
+          {
+            "tv": [
+              {
+                "s": "dazn"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "uel": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "rtlplus"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "blsc": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1"
+              },
+              {
+                "s": "sat1"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "nla": {
+        "regeln": [
+          {
+            "tv": []
+          }
+        ],
+        "ausnahmen": {}
+      }
+    },
+    "2026": {
+      "bl1": {
+        "regeln": [
+          {
+            "tag": [
+              "Sat"
+            ],
+            "zeit": "15:30",
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 2–10 (Einzelspiel)"
+              },
+              {
+                "s": "dazn",
+                "typ": "konferenz",
+                "kanal": "DAZN 1 / DAZN-App"
+              }
+            ]
+          },
+          {
+            "tag": [
+              "Sat"
+            ],
+            "zeit": "18:30",
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1 (Topspiel)"
+              }
+            ]
+          },
+          {
+            "tag": [
+              "Sun"
+            ],
+            "tv": [
+              {
+                "s": "dazn",
+                "kanal": "DAZN-App / DAZN 1"
+              }
+            ]
+          },
+          {
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {
+          "83156": {
+            "zusatz": [
+              {
+                "s": "sat1"
+              }
+            ],
+            "quelle": "Eroeffnungsspiel laeuft laut DFL-Rechtepaket zusaetzlich frei bei Sat.1 (bundesliga.com TV-Plan 2026/27), eingetragen 19.08.2026"
+          }
+        }
+      },
+      "bl2": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "bl3": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "magenta"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "dfb": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {
+          "81855": {
+            "zusatz": [
+              {
+                "s": "zdf"
+              }
+            ],
+            "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): ZDF zeigt Rostock-Stuttgart"
+          },
+          "81849": {
+            "zusatz": [
+              {
+                "s": "rtl"
+              }
+            ],
+            "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): RTL zeigt Saarbruecken-Hertha"
+          },
+          "81863": {
+            "zusatz": [
+              {
+                "s": "rtl"
+              }
+            ],
+            "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): RTL zeigt Wuerzburg-Koeln"
+          },
+          "81836": {
+            "zusatz": [
+              {
+                "s": "rtl"
+              }
+            ],
+            "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): RTL zeigt HEBC-Dortmund"
+          },
+          "81843": {
+            "zusatz": [
+              {
+                "s": "ard"
+              }
+            ],
+            "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): ARD zeigt Halle-Schalke"
+          },
+          "81852": {
+            "zusatz": [
+              {
+                "s": "ard"
+              }
+            ],
+            "quelle": "1. Runde Free-TV-Picks (kicker/web.de, 19.08.2026): ARD zeigt Osnabrueck-Bayern"
+          }
+        }
+      },
+      "ucl": {
+        "regeln": [
+          {
+            "tag": [
+              "Tue"
+            ],
+            "tv": [
+              {
+                "s": "dazn"
+              }
+            ],
+            "unsicher": true
+          },
+          {
+            "tv": [
+              {
+                "s": "dazn"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "uel": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "rtlplus"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "blsc": {
+        "regeln": [
+          {
+            "tv": [
+              {
+                "s": "sky",
+                "kanal": "Sky Sport Bundesliga 1"
+              },
+              {
+                "s": "sat1"
+              }
+            ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "nla": {
+        "regeln": [
+          {
+            "tv": []
+          }
+        ],
+        "ausnahmen": {
+          "85224": {
+            "ersetzen": [
+              {
+                "s": "rtl"
+              }
+            ],
+            "quelle": "kicker/ZDF-Presseportal 19.08.2026: RTL zeigt alle drei Auswaertsspiele (24.09. Niederlande-Deutschland)"
+          },
+          "85227": {
+            "ersetzen": [
+              {
+                "s": "ard"
+              }
+            ],
+            "quelle": "kicker 19.08.2026: ARD zeigt Heimspiel gegen Griechenland (27.09.)"
+          },
+          "85228": {
+            "ersetzen": [
+              {
+                "s": "zdf"
+              }
+            ],
+            "quelle": "ZDF-Presseportal 19.08.2026: ZDF zeigt Deutschland-Serbien (01.10.)"
+          },
+          "85231": {
+            "ersetzen": [
+              {
+                "s": "rtl"
+              }
+            ],
+            "quelle": "kicker 19.08.2026: RTL zeigt alle drei Auswaertsspiele (04.10. Griechenland-Deutschland)"
+          },
+          "85232": {
+            "ersetzen": [
+              {
+                "s": "rtl"
+              }
+            ],
+            "quelle": "kicker 19.08.2026: RTL zeigt alle drei Auswaertsspiele (13.11. Serbien-Deutschland)"
+          }
+        }
+      }
+    }
+  },
+  "_stand": "2026-08-20 (DAZN-Infotext praezisiert: Empfangsweg != Abo)"
+}

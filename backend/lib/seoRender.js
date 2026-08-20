@@ -302,7 +302,7 @@ export function seiteTitelDetail(titel, locale) {
       <div>
         <h1>${attrEsc(titel.title)}${titel.year ? ` <span class="hinweis">(${titel.year})</span>` : ''}</h1>
         <div class="meta-zeile">${attrEsc(bewertungsZeile(titel))}</div>
-        <a class="cta" href="${SITE}/t/${titel.type}/${titel.tmdbId}">Zur Watchlist hinzufuegen</a>
+        <a class="cta" href="${SITE}/t/${titel.type}/${titel.tmdbId}">Zur Watchlist hinzufügen</a>
       </div>
     </div>
     <h2>Kurzüberblick</h2>

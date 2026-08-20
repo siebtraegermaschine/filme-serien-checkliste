@@ -10,7 +10,7 @@
 # und sozialen Netzen holen og-image.png, und ein gesperrtes Bild bedeutet dort
 # eine leere Kachel statt eines Logos.
 #
-# "Diese Titel teilen"-Momentaufnahmen (?titel=TOKEN) bleiben noindex: feste,
+# "Diese Ansicht teilen"-Momentaufnahmen (?titel=TOKEN) bleiben noindex: feste,
 # personenbezogene Listen, keine eigenstaendigen Inhaltsseiten.
 
 # STAND 17.08.2026 -- SEO-Seiten freigegeben.

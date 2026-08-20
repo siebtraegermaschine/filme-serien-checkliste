@@ -115,8 +115,10 @@ CREATE INDEX IF NOT EXISTS idx_user_links_user ON user_links (user_id);
 
 -- Einladungen zum Verknuepfen. Wie bei password_reset_tokens wird NUR der Hash
 -- gespeichert -- wer die Datenbank liest, kann damit keine Einladung einloesen.
--- Einmalig einloesbar (accepted_by) und mit Ablaufdatum, weil ein weitergeleiteter
--- Link sonst dauerhaft Zugriff auf die eigene Titelliste eroeffnen wuerde.
+-- Mit Ablaufdatum, weil ein weitergeleiteter Link sonst dauerhaft Zugriff auf
+-- die eigene Titelliste eroeffnen wuerde. Einmalig einloesbar waren sie nur bis
+-- zum 13. August 2026 (accepted_by); seitdem zaehlt user_link_invite_uses die
+-- Einloesungen, siehe unten.
 CREATE TABLE IF NOT EXISTS user_link_invites (
   token_hash  TEXT PRIMARY KEY,
   inviter_id  BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -166,6 +168,27 @@ CREATE INDEX IF NOT EXISTS idx_users_invited_by ON users (invited_by_user_id);
 -- naechsten Oeffnen der App. Steht auf der Zeile der einladenden Person, wird
 -- dort gesetzt und nach dem Anzeigen wieder geleert.
 ALTER TABLE user_links ADD COLUMN IF NOT EXISTS hinweis_offen BOOLEAN NOT NULL DEFAULT false;
+
+-- Verknuepfungs-Anfragen (19. August 2026). Sie gehoeren zum Knopf
+-- "Mit X verknuepfen" in der Kopfzeile einer geteilten Ansicht (?titel=TOKEN).
+--
+-- Warum eine Anfrage und nicht gleich eine Verknuepfung: Bei einem
+-- Einladungslink hat die teilende Person vorher ausdruecklich zugestimmt (der
+-- Text vor dem Erstellen sagt, was sichtbar wird). Beim Ansicht-Link hat sie
+-- das NICHT -- sie wollte eine Liste zeigen, nicht ihre ganze Watchlist samt
+-- Bewertungen oeffnen. Ein Klick der Gegenseite darf das deshalb nicht allein
+-- ausloesen; die Verknuepfung entsteht erst mit dem Annehmen (routes/links.js).
+--
+-- Eine Zeile je Richtung. Liegt die Gegenanfrage schon vor, sind beide
+-- Zustimmungen da und die Verknuepfung entsteht sofort.
+CREATE TABLE IF NOT EXISTS user_link_anfragen (
+  von_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  an_id      BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (von_id, an_id),
+  CHECK (von_id <> an_id)
+);
+CREATE INDEX IF NOT EXISTS idx_user_link_anfragen_an ON user_link_anfragen (an_id);
 
 CREATE TABLE IF NOT EXISTS password_reset_tokens (
   id         BIGSERIAL PRIMARY KEY,
@@ -792,7 +815,7 @@ BEGIN
   END IF;
 END $$;
 
--- "Diese Titel teilen" -- Momentaufnahmen (14. August 2026, ersetzt im
+-- "Diese Ansicht teilen" -- Momentaufnahmen (14. August 2026, ersetzt im
 -- Teilen-Blatt den Ansicht-Link): eine feste Liste von Titel-Kennungen in
 -- Anzeige-Reihenfolge, geteilt per Token-Link (?titel=TOKEN). BEWUSST ohne
 -- Zeitverfall (Entscheidung vom 14. August): Ein einmal geteilter Link soll
@@ -992,3 +1015,48 @@ CREATE TABLE IF NOT EXISTS onboarding_aggregat (
   anzahl  INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (frage, antwort, monat, region)
 );
+
+-- ===== Sport-Bereich (PLAN-SPORT.md): Fussball-Spielplan + Sender je Spiel =====
+--
+-- Befuellt ausschliesslich vom Ingest (sport-fetch.mjs via GitHub Action,
+-- Quelle OpenLigaDB + Rechte-Matrix sport-rechte.json). tv ist JSONB
+-- ([{s, typ, unsicher}]) statt eigener Tabelle: gelesen wird immer die ganze
+-- Zeile, nie nach Sendern gejoint -- dieselbe Ueberlegung wie bei
+-- users.watch_provider_ids weiter oben.
+CREATE TABLE IF NOT EXISTS sport_matches (
+  external_id BIGINT PRIMARY KEY,        -- OpenLigaDB matchID (saisonuebergreifend eindeutig)
+  wettbewerb  TEXT NOT NULL,             -- 'bl1' | 'bl2' | 'dfb' | 'ucl' | 'uel'
+  saison      TEXT NOT NULL,             -- '2026' = Saison 2026/27
+  runde       TEXT,                      -- '3. Spieltag' | 'Achtelfinale' | ...
+  anstoss     TIMESTAMPTZ NOT NULL,
+  heim        TEXT NOT NULL,
+  gast        TEXT NOT NULL,
+  heim_kurz   TEXT,
+  gast_kurz   TEXT,
+  heim_logo   TEXT,
+  gast_logo   TEXT,
+  beendet     BOOLEAN NOT NULL DEFAULT false,
+  tore_heim   SMALLINT,
+  tore_gast   SMALLINT,
+  tv          JSONB NOT NULL DEFAULT '[]',
+  fetched_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+-- Die einzige Leseabfrage ist ein Zeitfenster ueber anstoss (siehe routes/sport.js).
+CREATE INDEX IF NOT EXISTS sport_matches_anstoss_idx ON sport_matches (anstoss);
+
+-- Sender-Katalog und Wettbewerbsnamen, wie sie der letzte Ingest mitgebracht
+-- hat (Quelle: sport-rechte.json). Als Meta-Tabelle statt im Frontend
+-- verdrahtet, damit ein Rechtewechsel nur die JSON-Datei anfasst.
+CREATE TABLE IF NOT EXISTS sport_meta (
+  key        TEXT PRIMARY KEY,           -- 'sender' | 'wettbewerbe'
+  value      JSONB NOT NULL,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Eigene Sport-Abos (Sender-Slugs aus sport-rechte.json, z.B. '{sky,dazn}').
+-- Getrennt von watch_provider_ids: DAZN & Co. sind keine TMDB-Filmanbieter,
+-- die Auswahl dort kann diese Abos gar nicht ausdruecken. Dieselben drei
+-- Zustaende wie oben: NULL = nie konfiguriert (das Frontend leitet dann eine
+-- Vorauswahl aus den Streaminganbietern ab), leer = bewusst keine, gefuellt =
+-- genau diese.
+ALTER TABLE users ADD COLUMN IF NOT EXISTS sport_abos TEXT[];
