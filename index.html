@@ -1465,6 +1465,9 @@
          liegt im Geraet (localStorage) und zusaetzlich am Konto. Abgemeldet
          zeigt das Einstellungen-Fenster nur die kontofreien Punkte
          (einstellungenSichtbarkeit). -->
+    <!-- Direkt zum "Deine Ansicht"-Popup (Verein + Wettbewerbs-Vorauswahl)
+         -- derselbe Dialog wie der Textlink auf der Sport-Seite. -->
+    <button type="button" id="vereinMenuBtn" class="nav-menu-item">+ Dein Verein</button>
     <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
     <hr class="nav-menu-sep">
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
@@ -5130,6 +5133,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Football live on TV' },
     '#providersSportTitel': { t: 'Sports subscriptions' },
     '#sportVereinBtn': { t: '+ Your club' },
+    '#vereinMenuBtn': { t: '+ Your club' },
     '#sportHeaderBtn': { a: 'Sports' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'The schedules in the Sports section come from <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, a free community project. Broadcaster information is derived rule-based from the German TV rights split – without guarantee.' },
     '#vereinTitel': { t: 'Your view' },
@@ -5261,6 +5265,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Foot en direct à la télé' },
     '#providersSportTitel': { t: 'Abonnements sport' },
     '#sportVereinBtn': { t: '+ Ton club' },
+    '#vereinMenuBtn': { t: '+ Ton club' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Les calendriers de la section Sport proviennent d’<a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un projet communautaire libre. Les diffuseurs sont déduits des droits TV allemands – sans garantie.' },
     '#vereinTitel': { t: 'Ta vue' },
@@ -5392,6 +5397,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Fútbol en directo por TV' },
     '#providersSportTitel': { t: 'Suscripciones deportivas' },
     '#sportVereinBtn': { t: '+ Tu club' },
+    '#vereinMenuBtn': { t: '+ Tu club' },
     '#sportHeaderBtn': { a: 'Deporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Los calendarios de la sección Deporte provienen de <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un proyecto comunitario libre. Las emisoras se derivan de los derechos de TV alemanes – sin garantía.' },
     '#vereinTitel': { t: 'Tu vista' },
@@ -5523,6 +5529,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Calcio in diretta TV' },
     '#providersSportTitel': { t: 'Abbonamenti sport' },
     '#sportVereinBtn': { t: '+ La tua squadra' },
+    '#vereinMenuBtn': { t: '+ La tua squadra' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'I calendari della sezione Sport provengono da <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un progetto comunitario libero. Le emittenti sono dedotte dai diritti TV tedeschi – senza garanzia.' },
     '#vereinTitel': { t: 'La tua vista' },
@@ -5654,6 +5661,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Voetbal live op tv' },
     '#providersSportTitel': { t: 'Sportabonnementen' },
     '#sportVereinBtn': { t: '+ Jouw club' },
+    '#vereinMenuBtn': { t: '+ Jouw club' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'De speelschema’s in het Sport-gedeelte komen van <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, een vrij communityproject. Zenders worden afgeleid uit de Duitse tv-rechten – zonder garantie.' },
     '#vereinTitel': { t: 'Jouw weergave' },
@@ -5785,6 +5793,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Futebol ao vivo na TV' },
     '#providersSportTitel': { t: 'Assinaturas de esporte' },
     '#sportVereinBtn': { t: '+ Seu clube' },
+    '#vereinMenuBtn': { t: '+ Seu clube' },
     '#sportHeaderBtn': { a: 'Esporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Os calendários da seção Esporte vêm do <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, um projeto comunitário livre. As emissoras são derivadas dos direitos de TV alemães – sem garantia.' },
     '#vereinTitel': { t: 'Sua visualização' },
@@ -10610,7 +10619,7 @@ _vereinList.addEventListener('change', function(e){
   renderVereinList();
 });
 _vereinSuche.addEventListener('input', renderVereinList);
-document.getElementById('sportVereinBtn').onclick = async function(){
+async function openVereinModal(){
   _vereinAuswahl = MEINE_VEREINE.slice();
   _ansichtComps = gespeicherteAnsicht().slice();
   _vereinSuche.value = '';
@@ -10621,6 +10630,13 @@ document.getElementById('sportVereinBtn').onclick = async function(){
     renderAnsichtLigen();
     renderVereinList();
   } catch (e) { _vereinList.textContent = TXT.sportFehler; }
+}
+document.getElementById('sportVereinBtn').onclick = openVereinModal;
+// Zweiter Einstieg: Menuepunkt rechts oben, ueber "Einstellungen"
+// (Christian, 20.08.2026).
+document.getElementById('vereinMenuBtn').onclick = function(){
+  closeNavMenu();
+  openVereinModal();
 };
 function closeVereinModal(){ _vereinModal.style.display = 'none'; }
 document.getElementById('vereinModalX').onclick = closeVereinModal;
@@ -10661,6 +10677,7 @@ document.getElementById('settingsSportAbosBtn').onclick = function(){
 if (REGION_WAHL !== 'DE' && !SPORT_SEITE_MODUS) {
   document.getElementById('sportMenuBtn').style.display = 'none';
   document.getElementById('sportHeaderBtn').style.display = 'none';
+  document.getElementById('vereinMenuBtn').style.display = 'none';
 }
 
 /* ---- Eigene Sport-Domain: Marke statt MovieMatch (siehe SPORT_SEITE_MODUS).
