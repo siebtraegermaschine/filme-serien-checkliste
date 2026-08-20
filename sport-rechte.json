@@ -135,38 +135,48 @@
   },
   "wettbewerbe": {
     "bl1": {
-      "name": "Bundesliga"
+      "name": "Bundesliga",
+      "reihe": 1
     },
     "bl2": {
-      "name": "2. Bundesliga"
+      "name": "2. Bundesliga",
+      "reihe": 2
     },
     "bl3": {
-      "name": "3. Liga"
+      "name": "3. Liga",
+      "reihe": 3
     },
     "dfb": {
-      "name": "DFB-Pokal"
+      "name": "DFB-Pokal",
+      "reihe": 4
     },
     "ucl": {
-      "name": "Champions League"
+      "name": "Champions League",
+      "reihe": 5
     },
     "uel": {
-      "name": "Europa League"
+      "name": "Europa League",
+      "reihe": 6
     },
     "blsc": {
       "name": "Supercup",
-      "olb": "BLSupercup"
+      "olb": "BLSupercup",
+      "reihe": 7
     },
     "nla": {
       "name": "Länderspiele",
-      "olb": "nla"
+      "olb": "nla",
+      "reihe": 8
     },
     "em": {
       "name": "EM",
-      "olb": "em"
+      "olb": "em",
+      "reihe": 9
     },
     "wm": {
       "name": "WM",
-      "olb": "wm"
+      "olb": "wm",
+      "reihe": 10
     }
   },
   "saisons": {
@@ -628,5 +638,5 @@
       }
     }
   },
-  "_stand": "2026-08-20 (EM/WM als Wettbewerbe angelegt -- Chips sichtbar, Daten folgen mit den Turnieren)"
+  "_stand": "2026-08-20 (Wettbewerbe mit fester Anzeige-Reihenfolge \"reihe\")"
 }

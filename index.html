@@ -10111,8 +10111,12 @@ function renderSportChips(){
   var data = SPORT_DATA;
   // ALLE Wettbewerbe der Matrix, auch die noch ohne Spiele (CL vor der
   // Auslosung, EM/WM bis zum Turnier) -- Christian, 20.08.2026: jetzt schon
-  // auswaehlbar, Spiele erscheinen, sobald sie bekannt sind.
-  var vorhanden = Object.keys(data.wettbewerbe);
+  // auswaehlbar, Spiele erscheinen, sobald sie bekannt sind. Sortiert nach
+  // "reihe" aus der Matrix: Postgres-JSONB wuerfelt die Schluessel um,
+  // sonst stuenden die leeren EM/WM-Chips ganz vorn.
+  var vorhanden = Object.keys(data.wettbewerbe).sort(function(a, b){
+    return (data.wettbewerbe[a].reihe || 99) - (data.wettbewerbe[b].reihe || 99);
+  });
   var html = '<button type="button" data-comp="alle"' + (SPORT_COMPS.length ? '' : ' class="active"') + '>' +
              esc(TXT.sportAlle) + '</button>';
   vorhanden.forEach(function(c){
@@ -10380,7 +10384,9 @@ var _ansichtComps = [];                // Arbeitskopie der Wettbewerbs-Vorauswah
 function renderAnsichtLigen(){
   var el = document.getElementById('ansichtLigen');
   var data = SPORT_DATA;
-  var vorhanden = Object.keys(data.wettbewerbe);
+  var vorhanden = Object.keys(data.wettbewerbe).sort(function(a, b){
+    return (data.wettbewerbe[a].reihe || 99) - (data.wettbewerbe[b].reihe || 99);
+  });
   var html = '<button type="button" data-comp="alle" class="' + (_ansichtComps.length ? '' : 'active') + '">' +
              esc(TXT.sportAlle) + '</button>';
   vorhanden.forEach(function(c){
