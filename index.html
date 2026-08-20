@@ -351,24 +351,20 @@
   li.item.show-details .details { display: block; }
   .details .plot { font-size: 13px; color: var(--text); line-height: 1.55; }
   .details .tags { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 6px; }
-  /* Genres und Schlagwoerter sind zwei getrennte Reihen (siehe
-     detailChipsHtml). Zwischen ihnen reicht der Zeilenabstand der Reihe selbst
-     -- die vollen 9px sind der Abstand zur Inhaltsangabe darueber. */
-  .details .tags + .tags { margin-top: 6px; }
+  /* EINE Reihe fuer Genres und Schlagwoerter, ohne Trennung dazwischen
+     (Christian, 20. August 2026): erst die Genres, direkt dahinter die
+     Schlagwoerter, alle in derselben zurueckhaltenden Optik. Vorher waren die
+     Schlagwoerter gelb und standen in einer eigenen Reihe darunter -- das las
+     sich wie zwei verschiedene Dinge und war als Wand aus Gelb zu laut. */
   .details .tag {
     font-size: 11px;
-    color: var(--accent);
-    background: var(--accent-soft);
-    border: 1px solid rgba(230,179,76,0.35);
+    color: var(--text-dim);
+    background: var(--card-hover);
+    border: 1px solid var(--border);
     padding: 2px 9px;
     border-radius: 20px;
     white-space: nowrap;
   }
-  /* Genres stehen vor den Schlagwoertern (siehe detailChipsHtml) und bleiben
-     zurueckhaltend: Sie ordnen den Titel ein, die Schlagwoerter sagen, was ihn
-     ausmacht -- in derselben Akzentfarbe waere beides gleich laut und die Reihe
-     eine Wand aus Gelb. */
-  .details .tag.genre-tag { color: var(--text-dim); background: var(--card-hover); border-color: var(--border); }
   .details .credits { margin-top: 8px; font-size: 12px; color: var(--text-dim); line-height: 1.5; }
   .details .credits b { color: var(--text); font-weight: 600; }
   li.item.done .details .plot { color: var(--text-dim); }
@@ -998,17 +994,16 @@
   /* 10px wie in .det-actions darunter -- mit unterschiedlichen Abstaenden
      saessen die beiden linken Bloecke sonst um 2px versetzt. */
   .watch-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-content: flex-start; }
-  /* "Trailer" und "Teilen" als linke Gruppe. Sie nimmt -- genau wie
-     "Ähnliche Titel" in der Zeile darunter -- den Platz neben dem 62%-Block
-     rechts ein, beide Knoepfe teilen ihn sich zu gleichen Teilen. Damit sind
-     Trailer + Teilen zusammen exakt so breit wie "Ähnliche Titel". */
-  .watch-links { display: flex; align-items: center; gap: 8px; flex: 1 1 auto; min-width: 0; margin-right: auto; }
-  .watch-links > .watch-btn { flex: 1; min-width: 0; }
-  /* Auf der Kino-Seite steht die Gruppe allein in der Zeile (nurTrailer, siehe
-     watchRowHtml) -- dort soll sie nicht auf volle Breite gehen, sondern wie
-     bisher links stehen bleiben. */
-  .watch-row.nur-trailer .watch-links,
-  .watch-row.nur-trailer .watch-links > .watch-btn { flex: 0 1 auto; }
+  /* "Trailer" und das Teilen-Zeichen bilden links eine Gruppe mit ihrer
+     natuerlichen Breite. Auf genau dasselbe Mass wie "Ähnliche Titel" in der
+     Zeile darunter bringt sie breitenAngleichenLi() -- in CSS allein ginge das
+     nur mit einem Raster ueber beide Zeilen, und ein Grid koennte auf schmalen
+     Geraeten nicht umbrechen. */
+  .watch-links { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; margin-right: auto; }
+  .watch-links > .watch-btn { flex: 0 0 auto; }
+  /* Das Teilen-Zeichen sitzt mittig im Knopf und bekommt weniger Rand als eine
+     Beschriftung -- sonst waere der Knopf fast so breit wie "Trailer". */
+  .teilen-btn { display: inline-flex; align-items: center; justify-content: center; padding-left: 12px; padding-right: 12px; }
   /* Beide Zeilen der aufgeklappten Ansicht sollen dasselbe Raster zeigen:
      rechts ein gleich breiter Block (oben Kaufen/Leihen/Ansehen, unten
      Watchlist/Gesehen), links davon Trailer bzw. "Ähnliche Titel". Ohne das
@@ -1018,8 +1013,14 @@
      linke Kante beider Bloecke exakt zusammenfaellt. Der geringere seitliche
      Innenabstand haelt "▶ Ansehen" als laengste Beschriftung lesbar, wenn sich
      drei statt zwei Knoepfe die Breite teilen. */
-  .watch-rechts, .det-rechts { display: flex; gap: 8px; flex: 0 0 62%; min-width: 0; }
-  .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts > .det-left { flex: 1; min-width: 0; }
+  /* Der rechte Block nimmt, was die linke Gruppe uebrig laesst, und verteilt
+     ihn zu gleichen Teilen auf seine Knoepfe: Die Beschriftungen stehen damit
+     mittig in gleich grossen Feldern, und beide Zeilen enden buendig.
+     min-width:max-content statt 0 schuetzt dabei die laengste Beschriftung
+     ("▶ Ansehen") -- reicht der Platz nicht, rutscht der ganze Block per
+     flex-wrap in die naechste Zeile, statt dass der Text ueberlaeuft. */
+  .watch-rechts, .det-rechts { display: flex; gap: 8px; flex: 1 1 auto; min-width: 0; }
+  .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts > .det-left { flex: 1; min-width: max-content; }
   .det-rechts > .det-left > .wl-btn { width: 100%; }
   .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts .wl-btn { padding-left: 6px; padding-right: 6px; white-space: nowrap; }
   /* Auf schmalen Bildschirmen reichen 62% nicht: Drei gleich breite Knoepfe
@@ -1043,18 +1044,8 @@
      braucht dort 293px und hat 254px -- das liesse sich nur durch eine
      kuerzere Beschriftung als "Ähnliche Titel" loesen. */
   @media (max-width: 520px) {
-    .watch-rechts, .det-rechts { flex: 0 1 auto; margin-left: auto; }
-    .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts > .det-left { flex: 0 1 auto; }
     .det-actions, .watch-btns { gap: 8px; }
     .det-rechts { gap: 6px; }
-    /* Hier gilt das gemeinsame Raster nicht mehr (siehe oben): Die Bloecke
-       nehmen ihre Inhaltsbreite. "Trailer" und "Teilen" bleiben als Paar links
-       stehen -- gestreckt wuerden sie unter ihre Beschriftung gequetscht.
-       Ab etwa 400px Geraetebreite passt die obere Zeile damit noch in eine
-       Zeile; darunter rutscht Kaufen/Leihen/Ansehen in die naechste, was der
-       Umbruch sauber abfaengt. */
-    .watch-links, .similar-btn { flex: 0 1 auto; }
-    .watch-links > .watch-btn { flex: 0 1 auto; }
   }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
@@ -1293,13 +1284,7 @@
   body.kompakte-aktionen .det-rechts > .det-left > .wl-btn { width: auto; }
   /* "Ähnliche Titel" bleibt links (Gesehen/Watchlist weiter rechts gepackt) und ist
      nur sichtbar, wenn die Details dieser Zeile aufgeklappt sind. */
-  .similar-btn { display: none; flex: 1 1 auto; margin-right: auto; }
-  /* Auf schmalen Geraeten wie oben: Inhaltsbreite statt gestreckt. Die Regel
-     MUSS hier stehen und nicht im grossen 520er-Block weiter oben -- der steht
-     im Quelltext vor der Zeile darueber und verloere bei gleicher
-     Spezifitaet. Gestreckt war "Ähnliche Titel" bei 430px 178px breit, also
-     deutlich breiter als Trailer + Teilen daneben. */
-  @media (max-width: 520px) { .similar-btn { flex: 0 1 auto; } }
+  .similar-btn { display: none; flex: 0 0 auto; margin-right: auto; }
   li.item.show-details .similar-btn, li.disc.show-details .similar-btn { display: inline-block; }
   .watch-empty { text-align: center; color: var(--text-dim); font-size: 14px; margin: 26px auto; max-width: 520px; line-height: 1.7; padding: 0 20px; }
   @media (max-width: 640px) { .details .detposter { width: 96px; } }
@@ -6074,11 +6059,12 @@ function kinoMeta(c, datum, typLabel){
 }
 function escAttr(str){ return esc(str).replace(/"/g,'&quot;'); }
 function tagChip(t){ return '<span class="tag" data-filter="'+escAttr(t)+'">'+esc(t)+'</span>'; }
-/* Chips der aufgeklappten Ansicht: die Genres in einer eigenen Reihe, darunter
-   die Schlagwoerter. Zwei Reihen statt einer, weil es zwei verschiedene Dinge
-   sind -- Genres ordnen den Titel ein, Schlagwoerter sagen, was ihn ausmacht.
-   Genres sind deshalb auch unaufdringlicher gehalten (siehe .genre-tag).
-   Klickbar sind beide, sie fuellen die Suche (siehe openFilterModal).
+/* Chips der aufgeklappten Ansicht: erst die Genres, direkt dahinter die
+   Schlagwoerter -- EINE Reihe, gleiche Optik, keine Trennung (Christian,
+   20. August 2026). Vorher waren es zwei Reihen und die Schlagwoerter gelb;
+   der Unterschied trug nichts bei, kostete aber eine Zeile und machte die
+   Stelle laut. Klickbar sind beide, sie fuellen die Suche (siehe
+   openFilterModal).
 
    Die Genre-Reihe erscheint erst ab ZWEI Genres. Das erste steht schon in der
    Metazeile oben neben der Bewertung (siehe poolToMeta/candMeta/kinoMeta) -- bei
@@ -6091,9 +6077,9 @@ function tagChip(t){ return '<span class="tag" data-filter="'+escAttr(t)+'">'+es
    das Zweitgenre nicht zu erklaeren: "Alles Geld der Welt" ist Krimi UND Drama.
 
    Doppelte fallen raus -- manche Schlagwoerter heissen wie ein Genre. Das gilt
-   auch dann, wenn die Genre-Reihe gar nicht erscheint: Ein Schlagwort "Drama"
-   stuende sonst als gelbe Schaltflaeche da und wiederholte genau die Angabe von
-   oben, also wieder das, was hier weggehen soll. */
+   auch dann, wenn die Genres gar nicht erscheinen: Ein Schlagwort "Drama"
+   stuende sonst da und wiederholte genau die Angabe von oben, also wieder das,
+   was hier weggehen soll. */
 function detailChipsHtml(genres, keywords){
   var gesehen = {};
   // Sammelt die Texte einer Sorte und merkt sie zugleich fuer die naechste vor.
@@ -6118,8 +6104,8 @@ function detailChipsHtml(genres, keywords){
   }
   var g = texte((genres || []).map(genreAnzeige));
   var k = texte(keywords);
-  return (g.length > 1 ? reihe(g, 'tag genre-tag', 'tags tags-genres') : '') +
-         reihe(k, 'tag', 'tags');
+  // Eine einzige Reihe: erst die Genres, direkt dahinter die Schlagwoerter.
+  return reihe((g.length > 1 ? g : []).concat(k), 'tag', 'tags');
 }
 function nameChips(arr){ return (arr||[]).map(function(n){ return '<span class="pill" data-filter="'+escAttr(n)+'">'+esc(n)+'</span>'; }).join(', '); }
 // Manche (aeltere) Katalog-Eintraege speichern mehrere Regisseur:innen als einen
@@ -6469,9 +6455,46 @@ function trailerBtnHtml(api, title){
   return '<div class="watch-links">' +
     '<button type="button" class="watch-btn trailer-btn" data-trailer="' + escAttr(api || '') +
     '" data-ttitle="' + escAttr(title || '') + '">' + TXT.trailer + '</button>' +
-    '<button type="button" class="watch-btn teilen-btn">' + TXT.teilen + '</button>' +
+    '<button type="button" class="watch-btn teilen-btn" aria-label="' + escAttr(TXT.teilen) +
+    '" title="' + escAttr(TXT.teilen) + '">' + TEILEN_SYMBOL + '</button>' +
   '</div>';
 }
+// Dasselbe Zeichen wie am Teilen-Knopf unten (teilenFab) -- im Zeilenraster
+// steht es allein, das Wort haette die linke Gruppe deutlich breiter gemacht
+// als "Ähnliche Titel" darunter. Die Bedeutung traegt das aria-label.
+var TEILEN_SYMBOL =
+  '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"' +
+  ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+  '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>' +
+  '<path d="M8.6 13.5l6.8 3.9M15.4 6.6L8.6 10.5"/></svg>';
+/* ---- Gleiche Breite: "Trailer + Teilen" und "Ähnliche Titel" ----
+   Die beiden stehen in zwei getrennten Flex-Zeilen. Ein gemeinsames Raster
+   liesse sich nur mit einem Grid ueber beide Zeilen ausdruecken -- und ein Grid
+   koennte auf schmalen Geraeten nicht umbrechen, wo Kaufen/Leihen/Ansehen genau
+   das tun MUSS. Also einmal messen und beide auf das groessere der beiden Masse
+   setzen: gequetscht wird so nichts, und es stimmt in jeder Sprache (das
+   franzoesische "Bande-annonce" ist deutlich breiter als "Trailer").
+   Gemessen wird nur an aufgeklappten Zeilen -- zugeklappt ist die Breite 0. */
+function breitenAngleichenLi(li){
+  var gruppe = li.querySelector('.watch-links');
+  var aehnlich = li.querySelector('.similar-btn');
+  if (!gruppe || !aehnlich) return;      // Kino-Zeile, "Ähnliche Titel"-Popup
+  gruppe.style.width = ''; aehnlich.style.width = '';
+  var mass = Math.max(gruppe.offsetWidth, aehnlich.offsetWidth);
+  if (!mass) return;
+  gruppe.style.width = mass + 'px';
+  aehnlich.style.width = mass + 'px';
+}
+function breitenAngleichen(){
+  var offene = document.querySelectorAll('li.show-details');
+  for (var i = 0; i < offene.length; i++) breitenAngleichenLi(offene[i]);
+}
+var _breitenTimer = null;
+window.addEventListener('resize', function(){
+  clearTimeout(_breitenTimer);
+  _breitenTimer = setTimeout(breitenAngleichen, 150);
+});
+
 function watchRowHtml(tmdbId, type, title, realId, opts){
   // Bevorzugt die TMDB-ID (spart dem Backend die Suche). Fehlt sie, laeuft die
   // Abfrage ueber die interne Titel-ID: die 600 urspruenglich kuratierten
@@ -7940,6 +7963,7 @@ function wireRow(li, src, i){
   li.addEventListener('click', (e) => {
     if (e.target.closest('.det-actions')) return;
     li.classList.toggle('show-details');
+    breitenAngleichenLi(li);
   });
 }
 const tabBtns = { filme: document.getElementById('tabFilme'), serien: document.getElementById('tabSerien'), kino: document.getElementById('tabKino') };
@@ -7991,11 +8015,17 @@ function renderList() {
 function renderCurrentTab(){
   updateProfileBtn();
   updateFilterRowUI();         // erzwingt u.a. die Entdecken-Sperre beim Abgleich
-  if (sportMode) { renderSportPage(); return; }
-  if (cinemaMode) { renderCinemaPage(); return; }
-  renderList();
-  // Inhaltsangaben der gerade gerenderten Zeilen nachladen (siehe fillPlots).
-  fillPlots();
+  if (sportMode) renderSportPage();
+  else if (cinemaMode) renderCinemaPage();
+  else {
+    renderList();
+    // Inhaltsangaben der gerade gerenderten Zeilen nachladen (siehe fillPlots).
+    fillPlots();
+  }
+  // Zeilen, die schon aufgeklappt gezeichnet wurden ("Details immer zeigen"),
+  // brauchen den Breitenabgleich sofort -- die drei Klick-Handler unten fangen
+  // nur das Aufklappen von Hand ab.
+  breitenAngleichen();
 }
 // Suchen heisst: ueberall suchen. Sobald etwas im Feld steht, werden alle
 // Bereiche eingeschaltet -- Filme UND Serien, Watchlist, Gesehen und Neue
@@ -12928,6 +12958,7 @@ function hiddenTitleLi(t){
   li.addEventListener('click', function(e){
     if (e.target.closest('.det-actions')) return;
     li.classList.toggle('show-details');
+    breitenAngleichenLi(li);
   });
   return li;
 }
@@ -13861,6 +13892,7 @@ function poolItemLi(item, score, opts){
   li.addEventListener('click', function(e){
     if (e.target.closest('.det-actions')) return;
     li.classList.toggle('show-details');
+    breitenAngleichenLi(li);
   });
   // Wisch-Geste: nach links in Discovery und auf der Kino-Seite dauerhaft
   // ausblenden (siehe Einstellungen -> "Geloeschte Titel"), nach rechts ueberall
