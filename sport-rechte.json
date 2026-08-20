@@ -159,6 +159,14 @@
     "nla": {
       "name": "Länderspiele",
       "olb": "nla"
+    },
+    "em": {
+      "name": "EM",
+      "olb": "em"
+    },
+    "wm": {
+      "name": "WM",
+      "olb": "wm"
     }
   },
   "saisons": {
@@ -320,6 +328,22 @@
                 "kanal": "DAZN-App"
               }
             ]
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "em": {
+        "regeln": [
+          {
+            "tv": []
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "wm": {
+        "regeln": [
+          {
+            "tv": []
           }
         ],
         "ausnahmen": {}
@@ -585,8 +609,24 @@
             "quelle": "kicker 19.08.2026: RTL zeigt alle drei Auswaertsspiele (13.11. Serbien-Deutschland)"
           }
         }
+      },
+      "em": {
+        "regeln": [
+          {
+            "tv": []
+          }
+        ],
+        "ausnahmen": {}
+      },
+      "wm": {
+        "regeln": [
+          {
+            "tv": []
+          }
+        ],
+        "ausnahmen": {}
       }
     }
   },
-  "_stand": "2026-08-20 (Nachlauf: Team-IDs fuer die Formkurven der SEO-Spielseiten einspielen)"
+  "_stand": "2026-08-20 (EM/WM als Wettbewerbe angelegt -- Chips sichtbar, Daten folgen mit den Turnieren)"
 }

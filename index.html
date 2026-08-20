@@ -10109,9 +10109,10 @@ function renderSportChips(){
   var verfElVorab = document.getElementById('sportVerfChips');
   var scrollVorher = [el.scrollLeft, verfElVorab.scrollLeft];
   var data = SPORT_DATA;
-  var vorhanden = Object.keys(data.wettbewerbe).filter(function(c){
-    return data.spiele.some(function(s){ return s.c === c; });
-  });
+  // ALLE Wettbewerbe der Matrix, auch die noch ohne Spiele (CL vor der
+  // Auslosung, EM/WM bis zum Turnier) -- Christian, 20.08.2026: jetzt schon
+  // auswaehlbar, Spiele erscheinen, sobald sie bekannt sind.
+  var vorhanden = Object.keys(data.wettbewerbe);
   var html = '<button type="button" data-comp="alle"' + (SPORT_COMPS.length ? '' : ' class="active"') + '>' +
              esc(TXT.sportAlle) + '</button>';
   vorhanden.forEach(function(c){
@@ -10379,9 +10380,7 @@ var _ansichtComps = [];                // Arbeitskopie der Wettbewerbs-Vorauswah
 function renderAnsichtLigen(){
   var el = document.getElementById('ansichtLigen');
   var data = SPORT_DATA;
-  var vorhanden = Object.keys(data.wettbewerbe).filter(function(c){
-    return data.spiele.some(function(sp){ return sp.c === c; });
-  });
+  var vorhanden = Object.keys(data.wettbewerbe);
   var html = '<button type="button" data-comp="alle" class="' + (_ansichtComps.length ? '' : 'active') + '">' +
              esc(TXT.sportAlle) + '</button>';
   vorhanden.forEach(function(c){
