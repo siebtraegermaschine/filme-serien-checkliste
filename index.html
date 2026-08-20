@@ -10112,6 +10112,16 @@ function renderSportPage(){
   renderSportSection('spaeter', buckets.spaeter);
 }
 
+/* Die Sport-Seite beginnt direkt bei "Fussball live im TV" (Christian,
+   20. August 2026): App-Erklaerung, Suche und die Filme/Serien/Kino-Reihe
+   gehoeren zu den Titelbereichen und verwirren hier nur. Das Logo (Weg
+   zurueck) und die Knoepfe rechts oben bleiben stehen. */
+function sportKopfzeilen(anzeigen){
+  ['header .sub', 'header .sub-zweit', '.head-controls', '.tabs'].forEach(function(sel){
+    var el = document.querySelector(sel);
+    if (el) el.style.display = anzeigen ? '' : 'none';
+  });
+}
 function openSportPage(){
   closeCinemaPage();
   sportMode = true;
@@ -10129,10 +10139,10 @@ function openSportPage(){
   SPORT_VEREIN_AKTIV = MEINE_VEREINE.map(function(v){ return v.n; });
   sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
   updateFilterRowUI();
-  document.querySelector('.head-controls').style.display = '';
-  // Anders als im Kino ist die Werkzeugleiste hier KOMPLETT weg: Watchlist/
-  // Gesehen/Sortierung beziehen sich auf Titel, ein Spiel hat nichts davon.
-  // Die Suche oben bleibt und filtert nach Teams und Wettbewerb.
+  // Kopf komplett auf Sport: Erklaerzeilen, Suche und Tab-Reihe weg (siehe
+  // sportKopfzeilen) -- und die Werkzeugleiste sowieso, Watchlist/Gesehen/
+  // Sortierung beziehen sich auf Titel, ein Spiel hat nichts davon.
+  sportKopfzeilen(false);
   document.querySelector('.toolbar').style.display = 'none';
   list.style.display = 'none';
   document.getElementById('sportPage').style.display = '';
@@ -10164,6 +10174,7 @@ function closeSportPage(){
     try { history.replaceState(null, '', '/'); } catch (e) {}
   }
   document.getElementById('sportPage').style.display = 'none';
+  sportKopfzeilen(true);
   document.querySelector('.toolbar').style.display = '';
   list.style.display = '';
   updateFilterRowUI();
