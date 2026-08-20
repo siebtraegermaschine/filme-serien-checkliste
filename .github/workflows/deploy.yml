@@ -10,6 +10,15 @@ on:
     branches: [main]
   workflow_dispatch: {}
 
+# Deploys nacheinander statt gleichzeitig: Zwei schnelle Pushs (20. August,
+# 08:30 Uhr) trafen sich sonst auf dem Server -- git reset waehrend des
+# laufenden docker-build des anderen Laufs, einer bricht ab. cancel-in-progress
+# bewusst aus: Der laufende Deploy soll fertig werden, der naechste wartet
+# und bringt dann ohnehin den juengsten Stand.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
