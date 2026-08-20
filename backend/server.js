@@ -233,9 +233,26 @@ app.get('/favicon.ico', (req, res) => res.sendFile(path.join(frontendRoot, 'favi
 
 // /sport ist ein teilbarer Einstieg in die Sport-Ansicht der App (die App
 // setzt den Pfad beim Oeffnen selbst, siehe openSportPage in index.html).
-// express.static kennt den Pfad nicht (kein solches File), deshalb hier --
-// dieselbe Idee wie die /t/-Titellinks im share-Router.
-app.get('/sport', (req, res) => res.sendFile(path.join(frontendRoot, 'index.html')));
+// Eigene Open-Graph-Angaben und BEWUSST OHNE og:image: Die Link-Vorschau in
+// WhatsApp & Co. soll den Text zeigen, nicht das MovieMatch-Logo
+// (Christian, 20. August 2026).
+app.get('/sport', (req, res) => {
+  const beschreibung = '⚽ Endlich! Auf einen Blick sehen, welches Fußballspiel bei welchem '
+    + 'Streaming-Anbieter oder im Free-TV läuft.';
+  const block = [
+    '<meta property="og:site_name" content="MovieMatch">',
+    '<meta property="og:type" content="website">',
+    '<meta property="og:url" content="https://movietaste.de/sport">',
+    '<meta property="og:title" content="Fußball live im TV – MovieMatch">',
+    '<meta property="og:description" content="' + attrEsc(beschreibung) + '">',
+    '<meta name="twitter:card" content="summary">',
+  ].join('\n');
+  const html = indexHtml();
+  const a = html.indexOf(OG_START);
+  const b = html.indexOf(OG_ENDE);
+  if (a < 0 || b < 0) return res.type('html').send(html);
+  res.type('html').send(html.slice(0, a) + block + html.slice(b + OG_ENDE.length));
+});
 
 // SEO-Seiten (/<locale>/film|serie|filme|... und /sitemap-*.xml) -- eigene,
 // von der App getrennte Dokumente (siehe PLAN-SEO-UMSETZUNG). Muss vor

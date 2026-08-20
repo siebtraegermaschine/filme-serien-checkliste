@@ -1661,6 +1661,18 @@
   </svg>
   <span id="teilenFabText">Teilen</span>
 </button>
+<!-- Sport-Teilen: eigener Knopf an derselben Stelle, nur auf der Sport-
+     Seite sichtbar (openSportPage tauscht die beiden). Teilt NUR /sport --
+     ohne Konto, ohne Auswahlblatt; der Text kommt aus TXT.sportTeilenText,
+     die Link-Vorschau ohne Logo regelt der Server (og-Angaben von /sport). -->
+<button type="button" id="sportTeilenFab" class="teilen-fab" style="display:none">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+    <path d="M8.6 13.5l6.8 3.9M15.4 6.6L8.6 10.5"/>
+  </svg>
+  <span id="sportTeilenFabText">Teilen</span>
+</button>
 <div id="teilenSheet" class="teilen-sheet" style="display:none">
   <!-- Titel teilen zuerst (Wunsch vom 13. August) -- der haeufigste Fall. -->
   <button type="button" id="teilenTitelBtn">Einen Titel teilen</button>
@@ -2380,6 +2392,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Aktuell sind keine Titel hinterlegt.', soon: 'In Kürze startet aktuell nichts Neues.', later: 'Für die kommenden Monate ist noch nichts hinterlegt.' },
     kinoFehler: 'Kino-Daten konnten nicht geladen werden.',
     sportTitel: 'Fußball live im TV',
+    sportTeilenText: '⚽ Endlich! Auf einen Blick sehen, welches Fußballspiel bei welchem Streaming-Anbieter oder im Free-TV läuft. („+ Deine Ansicht“ filtert die Spiele zukünftig nur nach deinem Verein)',
     sportLabels: { heute: 'Heute', woche: 'Diese Woche', spaeter: 'Demnächst' },
     sportKeineSpiele: 'Keine Spiele für diese Auswahl.',
     sportFehler: 'Der Spielplan konnte nicht geladen werden.',
@@ -2721,6 +2734,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'No titles on file right now.', soon: 'Nothing new starting soon.', later: 'Nothing on file for the coming months yet.' },
     kinoFehler: 'Cinema data could not be loaded.',
     sportTitel: 'Football live on TV',
+    sportTeilenText: '⚽ Finally! See at a glance which football match is on which streaming service or on free TV. (“+ Your view” filters the schedule to your club’s matches)',
     sportLabels: { heute: 'Today', woche: 'This week', spaeter: 'Coming up' },
     sportKeineSpiele: 'No matches for this selection.',
     sportFehler: 'The schedule could not be loaded.',
@@ -3059,6 +3073,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Aucun titre référencé pour le moment.', soon: 'Rien de nouveau ne démarre prochainement.', later: 'Rien de référencé pour les mois à venir pour l’instant.' },
     kinoFehler: 'Les données cinéma n’ont pas pu être chargées.',
     sportTitel: 'Foot en direct à la télé',
+    sportTeilenText: '⚽ Enfin ! Voir d’un coup d’œil quel match de foot passe sur quel service de streaming ou en clair. (« + Ta vue » filtre le calendrier sur ton club)',
     sportLabels: { heute: 'Aujourd’hui', woche: 'Cette semaine', spaeter: 'À venir' },
     sportKeineSpiele: 'Aucun match pour cette sélection.',
     sportFehler: 'Le calendrier n’a pas pu être chargé.',
@@ -3397,6 +3412,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Ahora mismo no hay títulos registrados.', soon: 'No hay estrenos próximos.', later: 'Aún no hay nada registrado para los próximos meses.' },
     kinoFehler: 'No se pudieron cargar los datos de cine.',
     sportTitel: 'Fútbol en directo por TV',
+    sportTeilenText: '⚽ ¡Por fin! Ver de un vistazo qué partido de fútbol se emite en qué servicio de streaming o en abierto. («+ Tu vista» filtra el calendario por tu equipo)',
     sportLabels: { heute: 'Hoy', woche: 'Esta semana', spaeter: 'Próximamente' },
     sportKeineSpiele: 'No hay partidos para esta selección.',
     sportFehler: 'No se pudo cargar el calendario.',
@@ -3735,6 +3751,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Nessun titolo registrato al momento.', soon: 'Nessuna novità in arrivo a breve.', later: 'Ancora niente in programma per i prossimi mesi.' },
     kinoFehler: 'Impossibile caricare i dati del cinema.',
     sportTitel: 'Calcio in diretta TV',
+    sportTeilenText: '⚽ Finalmente! Vedere a colpo d’occhio quale partita va in onda su quale servizio di streaming o in chiaro. («+ La tua vista» filtra il calendario sulla tua squadra)',
     sportLabels: { heute: 'Oggi', woche: 'Questa settimana', spaeter: 'In arrivo' },
     sportKeineSpiele: 'Nessuna partita per questa selezione.',
     sportFehler: 'Impossibile caricare il calendario.',
@@ -4073,6 +4090,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Op dit moment geen titels bekend.', soon: 'Binnenkort start er niets nieuws.', later: 'Voor de komende maanden is nog niets bekend.' },
     kinoFehler: 'Bioscoopgegevens konden niet worden geladen.',
     sportTitel: 'Voetbal live op tv',
+    sportTeilenText: '⚽ Eindelijk! In één oogopslag zien welke voetbalwedstrijd bij welke streamingdienst of op free-tv te zien is. („+ Jouw weergave” filtert het schema op jouw club)',
     sportLabels: { heute: 'Vandaag', woche: 'Deze week', spaeter: 'Binnenkort' },
     sportKeineSpiele: 'Geen wedstrijden voor deze selectie.',
     sportFehler: 'Het speelschema kon niet worden geladen.',
@@ -4411,6 +4429,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Nenhum título registrado no momento.', soon: 'Nada novo estreando em breve.', later: 'Ainda nada registrado para os próximos meses.' },
     kinoFehler: 'Não foi possível carregar os dados de cinema.',
     sportTitel: 'Futebol ao vivo na TV',
+    sportTeilenText: '⚽ Finalmente! Ver de relance qual jogo de futebol passa em qual serviço de streaming ou na TV aberta. («+ Sua visualização» filtra o calendário pelo seu clube)',
     sportLabels: { heute: 'Hoje', woche: 'Esta semana', spaeter: 'Em breve' },
     sportKeineSpiele: 'Nenhum jogo para esta seleção.',
     sportFehler: 'Não foi possível carregar o calendário.',
@@ -9947,6 +9966,22 @@ function sportBadgeHtml(b){
          '</button>';
 }
 
+/* ---- Sport teilen: nur der /sport-Link, ohne Konto. navigator.share wo
+   vorhanden, sonst das Kopier-Fenster (zeigeEinladung). ---- */
+document.getElementById('sportTeilenFabText').textContent = TXT.teilen;
+document.getElementById('sportTeilenFab').onclick = function(){
+  var url = location.origin + '/sport';
+  var text = TXT.sportTeilenText;
+  if (navigator.share) {
+    navigator.share({ title: TXT.sportTitel, text: text, url: url })
+      .catch(function(err){
+        if (!err || err.name !== 'AbortError') zeigeEinladung(TXT.sportTitel, text, url, TXT.linkLaeuftNichtAb);
+      });
+  } else {
+    zeigeEinladung(TXT.sportTitel, text, url, TXT.linkLaeuftNichtAb);
+  }
+};
+
 /* ---- Hinweis "Deine Streaming-Anbieter" ohne Abos (siehe Chip-Handler). */
 var _sportAboHinweis = document.getElementById('sportAboHinweisModal');
 function openSportAboHinweis(){
@@ -10213,6 +10248,10 @@ function openSportPage(){
   // sportKopfzeilen) -- und die Werkzeugleiste sowieso, Watchlist/Gesehen/
   // Sortierung beziehen sich auf Titel, ein Spiel hat nichts davon.
   sportKopfzeilen(false);
+  // Unten mittig teilt der Sport-eigene Knopf NUR /sport -- der allgemeine
+  // Teilen-Knopf (Titel/Ansicht/Watchlist) passt hier nicht.
+  document.getElementById('teilenFab').style.display = 'none';
+  document.getElementById('sportTeilenFab').style.display = '';
   document.querySelector('.toolbar').style.display = 'none';
   list.style.display = 'none';
   document.getElementById('sportPage').style.display = '';
@@ -10244,6 +10283,8 @@ function closeSportPage(){
     try { history.replaceState(null, '', '/'); } catch (e) {}
   }
   document.getElementById('sportPage').style.display = 'none';
+  document.getElementById('sportTeilenFab').style.display = 'none';
+  document.getElementById('teilenFab').style.display = '';
   sportKopfzeilen(true);
   document.querySelector('.toolbar').style.display = '';
   list.style.display = '';
