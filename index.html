@@ -1044,7 +1044,7 @@
      braucht dort 293px und hat 254px -- das liesse sich nur durch eine
      kuerzere Beschriftung als "Ähnliche Titel" loesen. */
   @media (max-width: 520px) {
-    .det-actions, .watch-btns { gap: 8px; }
+    .watch-btns { gap: 8px; }
     .det-rechts { gap: 6px; }
   }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
@@ -1250,6 +1250,11 @@
   .watch-source a { color: var(--text-dim); text-decoration: underline; }
   @media (hover: hover) { .watch-source a:hover { color: var(--accent); } }
   .det-actions { clear: both; display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); }
+  /* Derselbe Abstand wie in .watch-btns darueber, sonst beginnt der rechte
+     Block der unteren Zeile zwei Pixel weiter rechts. Die Regel MUSS hier
+     stehen und nicht im 520er-Block weiter oben: Der steht im Quelltext vor
+     dieser Zeile und verloere bei gleicher Spezifitaet. */
+  @media (max-width: 520px) { .det-actions { gap: 8px; } }
   .det-actions .det-left { display: flex; gap: 8px; align-items: center; }
   .det-actions button { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
   @media (hover: hover) { .det-actions button:hover { border-color: var(--accent); color: var(--accent); } }
