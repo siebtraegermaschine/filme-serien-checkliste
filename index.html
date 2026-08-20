@@ -546,9 +546,13 @@
   /* Ueberschrift des Sport-Abo-Abschnitts im Streaminganbieter-Fenster --
      kleine Zwischenueberschrift mit Luft nach oben zur Anbieterliste. */
   .prov-sport-titel { margin: 16px 0 4px; font-size: 14px; color: var(--text); }
-  /* "+ Dein Verein": bewusst nur Text neben der Ueberschrift, kein Knopf. */
+  /* "+ Deine Ansicht": bewusst nur Text neben der Ueberschrift, kein Knopf. */
   .sport-verein-link { color: var(--text-dim); font-size: 13px; font-weight: 600;
     cursor: pointer; white-space: nowrap; align-self: center; }
+  /* Gold, solange noch nie eine Auswahl getroffen wurde (Christian,
+     20. August 2026) -- der Hinweis auf die Funktion. Nach dem ersten
+     Speichern gilt wieder das gedeckte Grau. */
+  .sport-verein-link.unentdeckt { color: var(--accent); }
   @media (hover: hover) { .sport-verein-link:hover { color: var(--accent); } }
   /* Suchfeld in der Vereinsauswahl: dieselbe Optik wie die Suche oben, aber
      eigener Selektor -- ".toolbar input" erreicht ein Modal nicht. */
@@ -10179,9 +10183,17 @@ function sportKopfzeilen(anzeigen){
     if (el) el.style.display = anzeigen ? '' : 'none';
   });
 }
+// Der "+ Deine Ansicht"-Link leuchtet gold, bis zum ersten Mal gespeichert
+// wurde (egal ob Vereine oder Wettbewerbs-Vorauswahl) -- danach normal.
+function vereinLinkHervorheben(){
+  var gespeichert = false;
+  try { gespeichert = !!localStorage.getItem(SPORT_ANSICHT_KEY); } catch (e) {}
+  document.getElementById('sportVereinBtn').classList.toggle('unentdeckt', !gespeichert && !MEINE_VEREINE.length);
+}
 function openSportPage(){
   closeCinemaPage();
   sportMode = true;
+  vereinLinkHervorheben();
   // Teilbarer Einstieg: /sport in der Adresszeile (Christian, 20. August
   // 2026). replaceState statt pushState -- dieselbe Konvention wie bei den
   // /t/-Titellinks, der Bereichswechsel soll kein eigener Verlaufsschritt
@@ -10369,6 +10381,7 @@ document.getElementById('vereinSaveBtn').onclick = function(){
   // bleiben bewusst INAKTIV (nie vorausgewaehlt, Christians Vorgabe).
   try { localStorage.setItem(SPORT_ANSICHT_KEY, JSON.stringify({ comps: _ansichtComps })); } catch (e) {}
   SPORT_COMPS = _ansichtComps.slice();
+  vereinLinkHervorheben();
   // Nach dem Speichern sind die gewaehlten Vereine sofort AKTIVE Filter
   // (siehe openSportPage) -- entfernte Vereine fallen damit automatisch raus.
   SPORT_VEREIN_AKTIV = MEINE_VEREINE.map(function(v){ return v.n; });
