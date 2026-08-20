@@ -6469,6 +6469,7 @@ var TEILEN_SYMBOL =
    franzoesische "Bande-annonce" ist deutlich breiter als "Trailer").
    Gemessen wird nur an aufgeklappten Zeilen -- zugeklappt ist die Breite 0. */
 function breitenAngleichenLi(li){
+  rechtesPaarAngleichen(li);             // erst zuruecksetzen, dann neu messen
   var gruppe = li.querySelector('.watch-links');
   var aehnlich = li.querySelector('.similar-btn');
   if (!gruppe || !aehnlich) return;      // Kino-Zeile, "Ähnliche Titel"-Popup
@@ -6477,6 +6478,35 @@ function breitenAngleichenLi(li){
   if (!mass) return;
   gruppe.style.width = mass + 'px';
   aehnlich.style.width = mass + 'px';
+  rechtesPaarAngleichen(li);
+}
+/* Rechts unten dasselbe Raster wie rechts oben: "gesehen" so breit wie
+   "Ansehen", "Watchlist" so breit wie "Kaufen" und "Leihen" zusammen (samt
+   Abstand dazwischen). Damit stehen in beiden Zeilen dieselben Kanten.
+
+   Nur solange die beiden ihre Beschriftung tragen: Ab der zehnten Nutzung
+   schrumpfen sie auf ihr Zeichen (body.kompakte-aktionen, siehe
+   nutzungZaehlen) -- dann waere das Strecken sinnlos, und die gesetzten
+   Breiten muessen wieder weg.
+
+   Gerechnet wird ueber erste/vorletzte/letzte Schaltflaeche statt ueber feste
+   Indizes: Kaufen/Leihen/Ansehen kommen aus WATCH_CATS und koennten sich
+   aendern. */
+function rechtesPaarAngleichen(li){
+  var links = li.querySelector('.det-rechts > .det-left');     // umschliesst den Watchlist-Knopf
+  var seen = li.querySelector('.det-rechts > .seen-btn');
+  if (!links || !seen) return;
+  links.style.width = ''; seen.style.width = '';
+  if (document.body.classList.contains('kompakte-aktionen')) return;
+  var oben = li.querySelectorAll('.watch-rechts > .watch-btn');
+  if (oben.length < 2) return;                                 // keine Anbieter-Zeile
+  var erster = oben[0].getBoundingClientRect();
+  var vorletzter = oben[oben.length - 2].getBoundingClientRect();
+  var letzter = oben[oben.length - 1].getBoundingClientRect();
+  var breiteWl = Math.round(vorletzter.right - erster.left);
+  var breiteSeen = Math.round(letzter.width);
+  if (breiteWl > 0) links.style.width = breiteWl + 'px';
+  if (breiteSeen > 0) seen.style.width = breiteSeen + 'px';
 }
 function breitenAngleichen(){
   var offene = document.querySelectorAll('li.show-details');
