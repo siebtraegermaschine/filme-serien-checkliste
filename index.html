@@ -550,9 +550,11 @@
      bleiben dauerhaft weg -- !important, weil renderAuthBar() u.a. die
      Sichtbarkeit von "Anmelden" bei jedem Aufruf inline neu setzt. */
   body.sport-seite #sportMenuBtn, body.sport-seite #howToBtn,
-  body.sport-seite #authBarLogin, body.sport-seite #sportHeaderBtn { display: none !important; }
+  body.sport-seite #authBarLogin, body.sport-seite #sportHeaderBtn,
+  body.sport-seite #profileBtn { display: none !important; }
+  .prov-item .hinweis-frei { color: var(--done); font-size: 12px; font-weight: 400; }
   /* Bild-Logo der eigenen Sport-Domain (couchultras.png, transparent). */
-  .sport-marke-logo { display:block; margin: 0 auto; max-width: min(320px, 78vw);
+  .sport-marke-logo { display:block; margin: 0 auto; max-width: min(240px, 58vw);
     height: auto; cursor: pointer; }
   /* "+ Deine Ansicht": bewusst nur Text neben der Ueberschrift, kein Knopf. */
   .sport-verein-link { color: var(--text-dim); font-size: 13px; font-weight: 600;
@@ -10340,11 +10342,19 @@ async function sportAbosAbschnittLaden(){
     await Promise.all([loadSportData(), sportAbosLaden()]);
   } catch (e) { _sportAbosWrap.style.display = 'none'; return; }
   var gewaehlt = new Set(Array.isArray(SPORT_ABOS) ? SPORT_ABOS : sportAbosVorauswahl());
-  var slugs = Object.keys(SPORT_DATA.sender).filter(function(s){ return !SPORT_DATA.sender[s].frei; });
+  // ALLE Sender, die an Spielen vorkommen koennen -- auch die freien
+  // (Christian, 20.08.2026): erst die Abo-Dienste, dann Free-TV mit
+  // Kennzeichnung. Wer einen freien Sender anhakt, bekommt dessen Spiele
+  // auch ueber den "Deine Streaming-Anbieter"-Filter.
+  var alle = Object.keys(SPORT_DATA.sender);
+  var slugs = alle.filter(function(s){ return !SPORT_DATA.sender[s].frei; })
+    .concat(alle.filter(function(s){ return SPORT_DATA.sender[s].frei; }));
   if (!slugs.length) { _sportAbosWrap.style.display = 'none'; return; }
   _sportAbosList.innerHTML = slugs.map(function(slug){
+    var sender = SPORT_DATA.sender[slug];
     return '<label class="prov-item"><input type="checkbox" value="' + escAttr(slug) + '"' +
-           (gewaehlt.has(slug) ? ' checked' : '') + '><span>' + esc(SPORT_DATA.sender[slug].name) + '</span></label>';
+           (gewaehlt.has(slug) ? ' checked' : '') + '><span>' + esc(sender.name) +
+           (sender.frei ? ' <span class="hinweis-frei">· frei empfangbar</span>' : '') + '</span></label>';
   }).join('');
   _sportAbosWrap.style.display = '';
 }
