@@ -876,6 +876,10 @@
      waeren sonst schlicht Leerzeichen. Texte ohne Umbruch aendern sich nicht.
      Die Erklaerung zu "Match" bringt zwei Absaetze mit. */
   .modal-backdrop .info-body { white-space:pre-line; }
+  /* Das Teilen-Zeichen mitten im Satz (siehe rumpfSetzen): auf Zeilenhoehe
+     gebracht und in der Akzentfarbe, damit es als Verweis auf den Knopf
+     erkennbar ist. */
+  .info-zeichen { display:inline-flex; vertical-align:-3px; color:var(--accent); }
   /* Einstieg in Schritten (siehe TOUR_SLIDES). Feste Mindesthoehe fuer den
      Bildbereich waere falsch -- die Bilder sind unterschiedlich hoch, und ein
      leerer Kasten auf Seiten ohne Bild saehe nach Fehler aus. */
@@ -1585,7 +1589,7 @@
     <!-- Bewusst ein Textlink, kein Knopf (Christian, 19. August 2026):
          oeffnet die Vereinsauswahl (#vereinModal); die gewaehlten Vereine
          erscheinen als Logo-Chips in der Filterreihe. -->
-    <span class="sport-verein-link" id="sportVereinBtn" role="button" tabindex="0">+ Deine Ansicht</span>
+    <span class="sport-verein-link" id="sportVereinBtn" role="button" tabindex="0">+ Dein Verein</span>
   </div>
   <!-- Zwei Filterreihen (renderSportChips): oben die Wettbewerbe
        (Alle/Bundesliga/...), darunter die Verfuegbarkeit als Dreier-Auswahl
@@ -5011,7 +5015,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Save' },
     '#sportPageTitle': { t: 'Football live on TV' },
     '#providersSportTitel': { t: 'Sports subscriptions' },
-    '#sportVereinBtn': { t: '+ Your view' },
+    '#sportVereinBtn': { t: '+ Your club' },
     '#sportHeaderBtn': { a: 'Sports' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'The schedules in the Sports section come from <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, a free community project. Broadcaster information is derived rule-based from the German TV rights split – without guarantee.' },
     '#vereinTitel': { t: 'Your view' },
@@ -5141,7 +5145,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Enregistrer' },
     '#sportPageTitle': { t: 'Foot en direct à la télé' },
     '#providersSportTitel': { t: 'Abonnements sport' },
-    '#sportVereinBtn': { t: '+ Ta vue' },
+    '#sportVereinBtn': { t: '+ Ton club' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Les calendriers de la section Sport proviennent d’<a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un projet communautaire libre. Les diffuseurs sont déduits des droits TV allemands – sans garantie.' },
     '#vereinTitel': { t: 'Ta vue' },
@@ -5271,7 +5275,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Guardar' },
     '#sportPageTitle': { t: 'Fútbol en directo por TV' },
     '#providersSportTitel': { t: 'Suscripciones deportivas' },
-    '#sportVereinBtn': { t: '+ Tu vista' },
+    '#sportVereinBtn': { t: '+ Tu club' },
     '#sportHeaderBtn': { a: 'Deporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Los calendarios de la sección Deporte provienen de <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un proyecto comunitario libre. Las emisoras se derivan de los derechos de TV alemanes – sin garantía.' },
     '#vereinTitel': { t: 'Tu vista' },
@@ -5401,7 +5405,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Salva' },
     '#sportPageTitle': { t: 'Calcio in diretta TV' },
     '#providersSportTitel': { t: 'Abbonamenti sport' },
-    '#sportVereinBtn': { t: '+ La tua vista' },
+    '#sportVereinBtn': { t: '+ La tua squadra' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'I calendari della sezione Sport provengono da <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un progetto comunitario libero. Le emittenti sono dedotte dai diritti TV tedeschi – senza garanzia.' },
     '#vereinTitel': { t: 'La tua vista' },
@@ -5531,7 +5535,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Opslaan' },
     '#sportPageTitle': { t: 'Voetbal live op tv' },
     '#providersSportTitel': { t: 'Sportabonnementen' },
-    '#sportVereinBtn': { t: '+ Jouw weergave' },
+    '#sportVereinBtn': { t: '+ Jouw club' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'De speelschema’s in het Sport-gedeelte komen van <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, een vrij communityproject. Zenders worden afgeleid uit de Duitse tv-rechten – zonder garantie.' },
     '#vereinTitel': { t: 'Jouw weergave' },
@@ -5661,7 +5665,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Salvar' },
     '#sportPageTitle': { t: 'Futebol ao vivo na TV' },
     '#providersSportTitel': { t: 'Assinaturas de esporte' },
-    '#sportVereinBtn': { t: '+ Sua visualização' },
+    '#sportVereinBtn': { t: '+ Seu clube' },
     '#sportHeaderBtn': { a: 'Esporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Os calendários da seção Esporte vêm do <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, um projeto comunitário livre. As emissoras são derivadas dos direitos de TV alemães – sem garantia.' },
     '#vereinTitel': { t: 'Sua visualização' },
@@ -14047,7 +14051,7 @@ function discFilterPool(){
       'the more you add, the smaller the intersection.\n\n' +
       'Close this window to see your shared titles.' },
     teilenNurEigene: { title:'Sharing not possible', body:'You are currently looking at someone else’s list or an active match. Only your OWN view can be shared — first end the selection under “Watch together” (or tap “clear” at the top).' },
-    teilenTitelHinweis: { title:'Share a title', body:'Simply swipe the title you want to share to the RIGHT in the list.\n\nOn a computer: click the title to open its details — you’ll find the “Share” button there.' },
+    teilenTitelHinweis: { title:'Share a title', body:'Simply swipe the title you want to share to the RIGHT in the list. (Or tap a title and choose the {teilen} symbol.)' },
     tastematch: { title:'Taste Match', body:'The number after a name (0–99) estimates how well your tastes match.\n\nIt is calculated in both directions: how well the other person’s titles fit your taste profile – and yours fit theirs. The bracket shows the average of both directions; you both see the same number.\n\nPoorly rated “watched” titles don’t count as taste. The number appears once both of you have marked at least 10 titles, and it gets more accurate with every mark. You don’t need any titles in common – a movie-only person can still match someone who only marks series.' },
     newreleases: { title:'Release date vs. new on streaming', body:'These are two different sort orders: “Release date” '+
       'sorts by when a movie or series was originally released. “New on streaming” sorts by how recently '+
@@ -14089,7 +14093,7 @@ function discFilterPool(){
       'je mehr, desto kleiner wird die Schnittmenge.\n\n' +
       'Schließe dieses Fenster, um die gemeinsamen Titel zu sehen.' },
     teilenNurEigene: { title:'Teilen nicht möglich', body:'Du siehst gerade eine fremde Liste oder einen aktiven Match. Geteilt werden kann nur die EIGENE Ansicht — beende zuerst die Auswahl unter „Gemeinsam schauen“ (oder tippe oben auf „aufheben“).' },
-    teilenTitelHinweis: { title:'Einen Titel teilen', body:'Wische den Titel, den du teilen möchtest, in der Liste einfach nach RECHTS.\n\nAm Rechner: Titel anklicken, um die Details zu öffnen — dort findest du den „Teilen“-Knopf.' },
+    teilenTitelHinweis: { title:'Einen Titel teilen', body:'Wische den Titel, den du teilen möchtest, in der Liste einfach nach RECHTS. (Oder klicke einen Titel an und wähle das {teilen}-Symbol aus.)' },
     tastematch: { title:'Taste-Match', body:'Die Zahl hinter dem Namen (0–99) schätzt, wie gut eure Geschmäcker zusammenpassen.\n\nGerechnet wird in beide Richtungen: Wie gut passen die Titel der anderen Person zu deinem Geschmacksprofil – und deine zu ihrem? In der Klammer steht der Mittelwert beider Richtungen; ihr seht beide dieselbe Zahl.\n\nSchlecht bewertete „Gesehen“-Titel zählen nicht als Geschmack. Die Zahl erscheint erst, wenn beide mindestens 10 Titel markiert haben, und wird mit jeder Markierung genauer. Gemeinsame Titel braucht es nicht – wer nur Filme schaut, kann zu jemandem passen, der nur Serien markiert.' },
     newreleases: { title:'Veröffentlichungsdatum vs. Neu im Streaming', body:'Das sind zwei unterschiedliche Sortierungen: „Veröffentlichungsdatum“ '+
       'sortiert danach, wann ein Film oder eine Serie ursprünglich erschienen ist. „Neu im Streaming“ sortiert danach, '+
@@ -14131,7 +14135,7 @@ function discFilterPool(){
       'plus tu en ajoutes, plus l’intersection est petite.\n\n' +
       'Ferme cette fenêtre pour voir vos titres en commun.' },
     teilenNurEigene: { title:'Partage impossible', body:'Tu regardes la liste de quelqu’un d’autre ou un match actif. Seule ta PROPRE vue peut être partagée — termine d’abord la sélection sous « Regarder ensemble ».' },
-    teilenTitelHinweis: { title:'Partager un titre', body:'Fais simplement glisser le titre à partager vers la DROITE dans la liste.\n\nSur ordinateur : clique sur le titre pour ouvrir les détails — tu y trouveras le bouton « Partager ».' },
+    teilenTitelHinweis: { title:'Partager un titre', body:'Fais simplement glisser le titre à partager vers la DROITE dans la liste. (Ou clique sur un titre et choisis le symbole {teilen}.)' },
     tastematch: { title:'Taste Match', body:'Le nombre derrière un nom (0–99) estime à quel point vos goûts concordent.\n\nLe calcul se fait dans les deux sens : dans quelle mesure les titres de l’autre correspondent à ton profil – et les tiens au sien ? La parenthèse montre la moyenne des deux directions ; vous voyez tous les deux le même nombre.\n\nLes titres « vus » mal notés ne comptent pas comme goût. Le nombre apparaît quand chacun a enregistré au moins 10 titres et gagne en précision à chaque ajout. Aucun titre en commun n’est nécessaire.' },
     newreleases: { title:'Date de sortie vs nouveautés en streaming', body:'Ce sont deux ordres de tri différents : « Date de sortie » '+
       'trie selon la date de sortie initiale d’un film ou d’une série. « Nouveautés en streaming » trie selon la date à laquelle '+
@@ -14173,7 +14177,7 @@ function discFilterPool(){
       'cuantas más añadas, más pequeña será la intersección.\n\n' +
       'Cierra esta ventana para ver vuestros títulos en común.' },
     teilenNurEigene: { title:'No se puede compartir', body:'Estás viendo la lista de otra persona o un match activo. Solo se puede compartir tu PROPIA vista — termina primero la selección en «Ver juntos».' },
-    teilenTitelHinweis: { title:'Compartir un título', body:'Desliza el título que quieras compartir hacia la DERECHA en la lista.\n\nEn el ordenador: haz clic en el título para abrir los detalles — allí está el botón «Compartir».' },
+    teilenTitelHinweis: { title:'Compartir un título', body:'Desliza el título que quieras compartir hacia la DERECHA en la lista. (O haz clic en un título y elige el símbolo {teilen}.)' },
     tastematch: { title:'Taste Match', body:'El número tras un nombre (0–99) estima lo bien que encajan vuestros gustos.\n\nSe calcula en ambas direcciones: ¿qué tal encajan los títulos de la otra persona con tu perfil – y los tuyos con el suyo? El paréntesis muestra la media de ambas direcciones; los dos veis el mismo número.\n\nLos títulos «vistos» con mala nota no cuentan como gusto. El número aparece cuando ambos habéis marcado al menos 10 títulos y se afina con cada marca. No hacen falta títulos en común.' },
     newreleases: { title:'Fecha de estreno vs. novedades en streaming', body:'Son dos criterios de orden distintos: «Fecha de estreno» '+
       'ordena según cuándo se estrenó originalmente una película o serie. «Novedades en streaming» ordena según lo reciente '+
@@ -14215,7 +14219,7 @@ function discFilterPool(){
       'più ne aggiungi, più piccola diventa l’intersezione.\n\n' +
       'Chiudi questa finestra per vedere i vostri titoli in comune.' },
     teilenNurEigene: { title:'Condivisione non possibile', body:'Stai guardando la lista di qualcun altro o un match attivo. Si può condividere solo la PROPRIA vista — termina prima la selezione in «Guarda in compagnia».' },
-    teilenTitelHinweis: { title:'Condividi un titolo', body:'Scorri il titolo che vuoi condividere verso DESTRA nella lista.\n\nAl computer: clicca sul titolo per aprire i dettagli — lì trovi il pulsante «Condividi».' },
+    teilenTitelHinweis: { title:'Condividi un titolo', body:'Scorri il titolo che vuoi condividere verso DESTRA nella lista. (Oppure clicca su un titolo e scegli il simbolo {teilen}.)' },
     tastematch: { title:'Taste Match', body:'Il numero dopo un nome (0–99) stima quanto i vostri gusti coincidano.\n\nSi calcola in entrambe le direzioni: quanto i titoli dell’altra persona corrispondono al tuo profilo – e i tuoi al suo? Tra parentesi c’è la media delle due direzioni; vedete entrambi lo stesso numero.\n\nI titoli «visti» con voto basso non contano come gusto. Il numero appare quando entrambi avete segnato almeno 10 titoli e diventa più preciso a ogni aggiunta. Non servono titoli in comune.' },
     newreleases: { title:'Data di uscita vs. novità in streaming', body:'Sono due ordinamenti diversi: “Data di uscita” '+
       'ordina in base a quando un film o una serie è uscito originariamente. “Novità in streaming” ordina in base a quanto di recente '+
@@ -14257,7 +14261,7 @@ function discFilterPool(){
       'hoe meer je er toevoegt, hoe kleiner de doorsnede.\n\n' +
       'Sluit dit venster om jullie gedeelde titels te zien.' },
     teilenNurEigene: { title:'Delen niet mogelijk', body:'Je bekijkt nu de lijst van iemand anders of een actieve match. Alleen je EIGEN weergave kan worden gedeeld — beëindig eerst de selectie onder “Samen kijken”.' },
-    teilenTitelHinweis: { title:'Een titel delen', body:'Veeg de titel die je wilt delen in de lijst gewoon naar RECHTS.\n\nOp de computer: klik op de titel om de details te openen — daar vind je de “Delen”-knop.' },
+    teilenTitelHinweis: { title:'Een titel delen', body:'Veeg de titel die je wilt delen in de lijst gewoon naar RECHTS. (Of klik op een titel en kies het {teilen}-symbool.)' },
     tastematch: { title:'Taste Match', body:'Het getal achter een naam (0–99) schat hoe goed jullie smaken bij elkaar passen.\n\nEr wordt in beide richtingen gerekend: hoe goed passen de titels van de ander bij jouw profiel – en die van jou bij het hunne? Tussen haakjes staat het gemiddelde van beide richtingen; jullie zien allebei hetzelfde getal.\n\nSlecht beoordeelde “gezien”-titels tellen niet als smaak. Het getal verschijnt zodra beiden minstens 10 titels hebben gemarkeerd en wordt met elke markering nauwkeuriger. Gemeenschappelijke titels zijn niet nodig.' },
     newreleases: { title:'Verschijningsdatum vs. nieuw bij streaming', body:'Dit zijn twee verschillende sorteervolgordes: “Verschijningsdatum” '+
       'sorteert op wanneer een film of serie oorspronkelijk is uitgebracht. “Nieuw bij streaming” sorteert op hoe recent '+
@@ -14299,7 +14303,7 @@ function discFilterPool(){
       'quanto mais você adicionar, menor fica a interseção.\n\n' +
       'Feche esta janela para ver os títulos em comum.' },
     teilenNurEigene: { title:'Não é possível compartilhar', body:'Você está vendo a lista de outra pessoa ou um match ativo. Só a SUA visão pode ser compartilhada — primeiro encerre a seleção em “Assistir juntos”.' },
-    teilenTitelHinweis: { title:'Compartilhar um título', body:'Deslize o título que você quer compartilhar para a DIREITA na lista.\n\nNo computador: clique no título para abrir os detalhes — lá está o botão “Compartilhar”.' },
+    teilenTitelHinweis: { title:'Compartilhar um título', body:'Deslize o título que você quer compartilhar para a DIREITA na lista. (Ou clique em um título e escolha o símbolo {teilen}.)' },
     tastematch: { title:'Taste Match', body:'O número após um nome (0–99) estima o quanto os gostos de vocês combinam.\n\nO cálculo é feito nos dois sentidos: quão bem os títulos da outra pessoa combinam com o seu perfil – e os seus com o dela? Entre parênteses está a média das duas direções; ambos veem o mesmo número.\n\nTítulos “vistos” com nota baixa não contam como gosto. O número aparece quando ambos marcaram pelo menos 10 títulos e fica mais preciso a cada marcação. Não são necessários títulos em comum.' },
     newreleases: { title:'Data de lançamento vs. novidades no streaming', body:'São duas ordenações diferentes: “Data de lançamento” '+
       'ordena por quando um filme ou uma série foi lançado originalmente. “Novidades no streaming” ordena por quão recentemente '+
@@ -14322,12 +14326,22 @@ function discFilterPool(){
     if (key === 'ts' && matchAktiv()) body += '\n\n' + TXT.tasteScoreGemeinsam(namenListe(MATCH_WITH));
     return body;
   }
+  // Der Rumpf ist Text, kein HTML -- Uebersetzungen sollen kein Markup tragen.
+  // Einzige Ausnahme ist der Platzhalter {teilen}: Dort steht dasselbe Zeichen
+  // wie an der aufgeklappten Zeile, damit der Satz auf genau den Knopf zeigt,
+  // den man druecken soll. Alles andere geht vorher durch esc().
+  function rumpfSetzen(el, text){
+    var roh = String(text == null ? '' : text);
+    if (roh.indexOf('{teilen}') === -1) { el.textContent = roh; return; }
+    el.innerHTML = roh.split('{teilen}').map(esc)
+      .join('<span class="info-zeichen">' + TEILEN_SYMBOL + '</span>');
+  }
   // Von aussen aufrufbar: Nicht jede Erklaerung haengt an einem unterstrichenen
   // Wort -- der einmalige Hinweis beim ersten "Match" kommt von selbst.
   window.infoZeigen = function(key){
     if (!INFO_TEXT[key]) return;
     titleEl.textContent = INFO_TEXT[key].title;
-    bodyEl.textContent = infoBody(key);
+    rumpfSetzen(bodyEl, infoBody(key));
     bk.classList.add('open');
   };
   document.addEventListener('click', function(e){
@@ -14349,7 +14363,7 @@ function discFilterPool(){
         var gruende = zeile && zeile._poolItem ? scoreGruende(zeile._poolItem) : null;
         if (gruende) rumpf = gruende + '\n\n' + rumpf;
       }
-      bodyEl.textContent = rumpf;
+      rumpfSetzen(bodyEl, rumpf);
       bk.classList.add('open');
       return;
     }
