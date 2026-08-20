@@ -10306,10 +10306,6 @@ if (REGION_WAHL !== 'DE') {
   document.getElementById('sportMenuBtn').style.display = 'none';
   document.getElementById('sportHeaderBtn').style.display = 'none';
 }
-// Direkteinstieg ueber die geteilte URL: /sport oeffnet die Sport-Ansicht
-// sofort -- bewusst OHNE Regionspruefung, ein geteilter Link soll auch bei
-// anderer Regionswahl ankommen (die Daten sind ohnehin deutsch).
-if (/^\/sport\/?$/.test(location.pathname)) openSportPage();
 
 /* ---- "Als App speichern": Android hat mit beforeinstallprompt eine echte
    Browser-API dafuer, iOS nicht -- Apple erlaubt keine programmatische
@@ -13594,6 +13590,10 @@ renderAuthBar();
 listenAnsichtHerstellen();
 alleFilterAn();
 renderCurrentTab();
+// Direkteinstieg ueber die geteilte URL: /sport oeffnet die Sport-Ansicht --
+// bewusst OHNE Regionspruefung (ein geteilter Link soll immer ankommen) und
+// bewusst NACH listenAnsichtHerstellen() oben, das jede Vollseite schliesst.
+if (/^\/sport\/?$/.test(location.pathname)) openSportPage();
 apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() => { CURRENT_USER = null; }).finally(() => {
   renderAuthBar();
   updateProfileBtn();
