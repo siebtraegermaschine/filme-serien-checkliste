@@ -1020,6 +1020,14 @@
      ("▶ Ansehen") -- reicht der Platz nicht, rutscht der ganze Block per
      flex-wrap in die naechste Zeile, statt dass der Text ueberlaeuft. */
   .watch-rechts, .det-rechts { display: flex; gap: 8px; flex: 1 1 auto; min-width: 0; }
+  /* ZUGEKLAPPT steht in der unteren Zeile nur Watchlist/Gesehen -- ohne
+     "Ähnliche Titel" davor wuerden die beiden gestreckt die ganze Zeilenbreite
+     fuellen, und zwar in jeder Zeile der Liste. Dort bleibt es deshalb beim
+     alten Mass: 62% rechts, auf schmalen Geraeten Inhaltsbreite (siehe unten).
+     Gestreckt wird erst, wenn die Details offen sind und es links etwas gibt,
+     woran sich das Raster ausrichtet. */
+  .det-rechts { flex: 0 0 62%; }
+  body:not(.kompakte-aktionen) li.show-details .det-rechts { flex: 1 1 auto; margin-left: 0; }
   .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts > .det-left { flex: 1; min-width: max-content; }
   .det-rechts > .det-left > .wl-btn { width: 100%; }
   .watch-rechts > .watch-btn, .det-rechts > .seen-btn, .det-rechts .wl-btn { padding-left: 6px; padding-right: 6px; white-space: nowrap; }
@@ -1052,6 +1060,7 @@
     .watch-btns { gap: 8px; }
     .watch-rechts, .det-rechts { gap: 6px; }
     .watch-links { gap: 6px; }
+    .det-rechts { flex: 0 1 auto; margin-left: auto; }
   }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
