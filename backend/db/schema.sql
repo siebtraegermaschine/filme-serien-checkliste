@@ -260,6 +260,47 @@ CREATE TABLE IF NOT EXISTS streaming_cache (
 );
 ALTER TABLE streaming_cache ADD COLUMN IF NOT EXISTS first_seen_at TIMESTAMPTZ NOT NULL DEFAULT now();
 
+-- Zustand eines mehrteiligen Streaming-Imports (seit 20.08.2026).
+--
+-- Der Ingest bekam eine ganze Region in EINEM Request. Der spanische Lauf kam
+-- am 19.08.2026 auf 64 MB und lief gegen das 60-MB-Limit von express.json --
+-- PayloadTooLargeError, drei Stunden Arbeit verworfen, ES blieb zwei Tage alt.
+-- Gemessen an den echten Daten sind es im Rumpffall (alle Titel uebersprungen)
+-- 25,7 MB fuer ES und 30,6 MB fuer US, mit vollen Details 64,0 bzw. 74,8 MB.
+-- Das Limit einfach anzuheben schied aus: Die Maschine hat 1,9 GB RAM, und
+-- express.json puffert erst den Rohtext und baut daraus ein Objektgeflecht von
+-- mehrfacher Groesse.
+--
+-- Seither schickt stream-fetch.mjs die Region in Stapeln (wie
+-- /api/titles/bulk-ingest es laengst tut). Diese Tabelle haelt zusammen, was
+-- ueber die Stapel hinweg gleich bleiben muss:
+--
+--   started_at        Startzeit des LAUFS, nicht des Stapels. Der Aufraeum-
+--                     DELETE am Ende loescht daran, was der Lauf nicht
+--                     angefasst hat. Server-seitig per clock_timestamp()
+--                     gebildet -- siehe den Kommentar in routes/streaming.js,
+--                     warum now() hier schon einmal den Bestand geloescht hat.
+--   bekannte_anbieter Anbieter, die die Region VOR dem Lauf kannte. Nur damit
+--                     bleibt die Rueckdatierung von first_seen_at richtig:
+--                     Ohne diese Liste haette Stapel 2 die von Stapel 1 neu
+--                     eingefuegten Anbieter als "bekannt" gesehen und deren
+--                     Titel faelschlich als Neuzugang gemeldet.
+--   geliefert         Titel des Laufs, ueber alle Stapel summiert. Die
+--                     Plausibilitaetspruefung (mindestens 70 Prozent des
+--                     Bestands) kann erst am Ende urteilen, nicht je Stapel.
+CREATE TABLE IF NOT EXISTS streaming_ingest_run (
+  id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  region            TEXT NOT NULL,
+  started_at        TIMESTAMPTZ NOT NULL,
+  bekannte_anbieter TEXT[] NOT NULL DEFAULT '{}',
+  geliefert         INTEGER NOT NULL DEFAULT 0,
+  angelegt_am       TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+-- Abgebrochene Laeufe (Netzwerkfehler, Timeout) hinterlassen sonst Zeilen. Der
+-- Ingest raeumt beim Anlegen eines neuen Laufs alles Aeltere weg; der Index
+-- macht das billig.
+CREATE INDEX IF NOT EXISTS idx_streaming_ingest_run_alter ON streaming_ingest_run (angelegt_am);
+
 -- Aktuelle/kommende Kinostarts (Deutschland) -- analog zu streaming_cache
 -- eigenstaendig von `titles`, bis eine Person einen Titel per Watchlist/Gesehen
 -- tatsaechlich uebernimmt. category wird beim taeglichen Import aus dem

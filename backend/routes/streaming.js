@@ -247,6 +247,27 @@ router.post('/ingest', async (req, res) => {
   // AT-Lauf niemals den DE-Bestand anfasst (und umgekehrt).
   const region = regionWahl((req.body || {}).region);
 
+  // --- Stapelbetrieb (seit 20.08.2026) -------------------------------------
+  // Eine ganze Region in einem Request sprengte das Body-Limit: ES kam am
+  // 19.08.2026 auf 64 MB gegen 60 MB Grenze, der Lauf brach nach drei Stunden
+  // mit PayloadTooLargeError ab. Seither schickt stream-fetch.mjs die Region in
+  // Stapeln, wie /api/titles/bulk-ingest es laengst tut.
+  //
+  // Das Feld `abschluss` unterscheidet die Betriebsarten:
+  //   fehlt        -- Einzelrequest wie bisher. Aeltere stream-fetch-Fassungen
+  //                   schicken es nicht; die Action checkt das Repo unabhaengig
+  //                   vom Backend-Deploy aus, beide koennen also auseinander-
+  //                   laufen. Der alte Weg muss deshalb weiter funktionieren.
+  //   false        -- Zwischenstapel: nur einfuegen.
+  //   true         -- letzter Stapel: einfuegen, dann pruefen, aufraeumen,
+  //                   Anreicherung kopieren, Genres schreiben.
+  //
+  // `lauf` ist die id aus streaming_ingest_run. Der erste Stapel schickt sie
+  // nicht mit und bekommt sie in der Antwort; alle weiteren reichen sie durch.
+  const gestapelt = typeof req.body.abschluss === 'boolean';
+  const abschluss = !gestapelt || req.body.abschluss === true;
+  const laufId = typeof req.body.lauf === 'string' ? req.body.lauf : null;
+
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -259,7 +280,35 @@ router.post('/ingest', async (req, res) => {
     // Muenzwurf bei jedem Lauf. Am 2026-08-02 verloren -- der Job meldete
     // Erfolg und hinterliess 0 von 20.369 Zeilen. Dieselbe Falle war in
     // cinema.js bereits behoben, hier blieb sie stehen.
-    const { rows: [{ now: runStartedAt }] } = await client.query('SELECT clock_timestamp() AS now');
+    //
+    // Im Stapelbetrieb zaehlt die Startzeit des LAUFS, nicht die des Stapels --
+    // sonst loescht der Aufraeum-DELETE am Ende die Zeilen der frueheren
+    // Stapel. Sie steht deshalb in streaming_ingest_run und wird beim ERSTEN
+    // Stapel gebildet.
+    let runStartedAt;
+    let lauf = laufId;
+    let bekannteAnbieter;
+    let geliefertBisher = 0;
+
+    if (gestapelt && lauf) {
+      const { rows } = await client.query(
+        'SELECT started_at, bekannte_anbieter, geliefert, region FROM streaming_ingest_run WHERE id = $1',
+        [lauf]);
+      if (!rows.length) {
+        await client.query('ROLLBACK');
+        return res.status(410).json({ error: 'unbekannter_lauf', lauf });
+      }
+      // Ein Lauf gehoert genau einer Region. Waere das nicht geprueft, koennte
+      // ein durcheinandergeratener Aufruf mit der Startzeit der einen Region
+      // den Bestand der anderen abraeumen.
+      if (rows[0].region !== region) {
+        await client.query('ROLLBACK');
+        return res.status(409).json({ error: 'region_passt_nicht_zum_lauf', lauf, region, erwartet: rows[0].region });
+      }
+      runStartedAt = rows[0].started_at;
+      bekannteAnbieter = new Set(rows[0].bekannte_anbieter || []);
+      geliefertBisher = rows[0].geliefert;
+    }
 
     /* Welche Anbieter kennt diese Region schon? Nimmt ein Lauf einen Anbieter
        ERSTMALS auf (der Umfang wird seit dem regionalen Ausbau je Region aus
@@ -274,9 +323,25 @@ router.post('/ingest', async (req, res) => {
        Solche Zeilen bekommen deshalb ein zurueckdatiertes first_seen_at. Das
        ist auch die ehrlichere Angabe: Auf WOW oder RTL+ laufen diese Titel
        laengst, nur eingelesen hat sie vorher niemand. */
-    const { rows: bekannteZeilen } = await client.query(
-      'SELECT DISTINCT provider_id FROM streaming_cache WHERE region = $1', [region]);
-    const bekannteAnbieter = new Set(bekannteZeilen.map((r) => r.provider_id));
+    if (!bekannteAnbieter) {
+      const { rows: bekannteZeilen } = await client.query(
+        'SELECT DISTINCT provider_id FROM streaming_cache WHERE region = $1', [region]);
+      bekannteAnbieter = new Set(bekannteZeilen.map((r) => r.provider_id));
+      const { rows: [{ now }] } = await client.query('SELECT clock_timestamp() AS now');
+      runStartedAt = now;
+      if (gestapelt) {
+        // Abgebrochene Laeufe (Netzwerkfehler, Timeout im Runner) hinterlassen
+        // sonst Zeilen. Zwoelf Stunden liegen weit ueber dem laengsten
+        // gemessenen Regionslauf (87 Minuten) und weit unter dem taeglichen
+        // Abstand -- ein noch laufender Lauf wird davon nie getroffen.
+        await client.query("DELETE FROM streaming_ingest_run WHERE angelegt_am < now() - interval '12 hours'");
+        const { rows: [angelegt] } = await client.query(
+          `INSERT INTO streaming_ingest_run (region, started_at, bekannte_anbieter)
+           VALUES ($1, $2, $3) RETURNING id`,
+          [region, runStartedAt, [...bekannteAnbieter]]);
+        lauf = angelegt.id;
+      }
+    }
 
     const puffer = [];
     for (const provider of providers) {
@@ -339,16 +404,44 @@ router.post('/ingest', async (req, res) => {
     // Transaktion wird zurueckgerollt, der Bestand bleibt unveraendert stehen und
     // veraltet hoechstens um einen Lauf. Ein wirklich geschrumpftes Angebot faellt
     // dabei ebenfalls durch -- lieber ein Lauf zu wenig als ein leerer Katalog.
+    // Der Lauf zaehlt ueber alle Stapel, nicht je Stapel -- sonst schlaegt die
+    // Pruefung unten bei jedem einzelnen Stapel an.
+    const geliefert = geliefertBisher
+      + providers.reduce((n, pv) => n + (pv.f || []).length + (pv.s || []).length, 0);
+    if (gestapelt && lauf) {
+      await client.query('UPDATE streaming_ingest_run SET geliefert = $2 WHERE id = $1', [lauf, geliefert]);
+    }
+
+    // Zwischenstapel sind hier fertig: einfuegen, festschreiben, zurueckmelden.
+    // Pruefen, Aufraeumen und die Anreicherungs-Kopie gehoeren ans Ende des
+    // LAUFS und laufen nur im Abschluss-Stapel.
+    if (!abschluss) {
+      await client.query('COMMIT');
+      return res.status(202).json({ lauf, geliefert });
+    }
+
     const { rows: [{ anzahl: bestand }] } = await client.query(
       'SELECT COUNT(*)::int AS anzahl FROM streaming_cache WHERE region = $1', [region]);
-    const geliefert = providers.reduce((n, pv) => n + (pv.f || []).length + (pv.s || []).length, 0);
     const MINDESTANTEIL = 0.7;
     if (bestand > 0 && geliefert < bestand * MINDESTANTEIL) {
-      await client.query('ROLLBACK');
       console.error(`Streaming-Ingest (${region}) abgelehnt: nur ${geliefert} Titel geliefert, im Bestand sind ${bestand}.`);
+      if (gestapelt) {
+        // Im Stapelbetrieb sind die frueheren Stapel laengst festgeschrieben --
+        // ein ROLLBACK holt sie nicht zurueck. Entscheidend ist ohnehin nur,
+        // dass der DELETE unterbleibt: Was dieser Lauf geschrieben hat, sind
+        // echte, frische Zeilen; was er nicht erreicht hat, behaelt sein altes
+        // fetched_at und bleibt stehen. Die Region ist dann gemischt frisch
+        // statt leer -- genau das, was die Pruefung schuetzen soll.
+        await client.query('DELETE FROM streaming_ingest_run WHERE id = $1', [lauf]);
+        await client.query('COMMIT');
+      } else {
+        await client.query('ROLLBACK');
+      }
       return res.status(409).json({
         error: 'implausible_payload', geliefert, bestand, region,
-        hinweis: 'Zu wenige Titel im Vergleich zum Bestand -- nichts uebernommen.',
+        hinweis: gestapelt
+          ? 'Zu wenige Titel im Vergleich zum Bestand -- nicht aufgeraeumt, Bestand bleibt stehen.'
+          : 'Zu wenige Titel im Vergleich zum Bestand -- nichts uebernommen.',
       });
     }
     await client.query('DELETE FROM streaming_cache WHERE region = $1 AND fetched_at < $2', [region, runStartedAt]);
@@ -413,6 +506,9 @@ router.post('/ingest', async (req, res) => {
           [Number(g.id), g.art === 'tv' ? 'tv' : 'movie', g.de, g.en]
         );
       }
+    }
+    if (gestapelt && lauf) {
+      await client.query('DELETE FROM streaming_ingest_run WHERE id = $1', [lauf]);
     }
     await client.query('COMMIT');
   } catch (err) {

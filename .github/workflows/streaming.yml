@@ -46,6 +46,19 @@ on:
     # Bei 60.000 fielen dort die Live-TV-Pakete fuboTV und Philo heraus, ohne
     # eine andere Region anzutasten.
     #
+    # Der Ingest laeuft seit dem 20. August 2026 in STAPELN (Standard 2.000
+    # Titel je Request, STREAM_STAPEL_TITEL). Vorher ging eine ganze Region in
+    # einem Request raus, und das riss: Der ES-Lauf in der Nacht zum 20. August
+    # kam auf 64 MB gegen das 60-MB-Limit von express.json, brach nach drei
+    # Stunden mit PayloadTooLargeError ab und liess ES zwei Tage alt stehen.
+    # Nachgemessen an den echten Daten sind es je Region, ohne Detail-Abrufe
+    # gegenueber mit vollen Details: ES 25,7 / 64,0 MB, US 30,6 / 74,8 MB,
+    # CL 19,0 / 44,8, DE 15,9 / 38,0. Betroffen sind also beide grossen
+    # Regionen, sobald die 7-Tage-Anreicherung faellig wird -- ES zuerst, weil
+    # es 7.142 Titel fuehrt, die es in keiner anderen Region gibt (Filmin,
+    # FlixOlé, Movistar) und die deshalb nur der ES-Lauf anreichern kann.
+    # Das Limit anzuheben schied aus: Die Maschine hat 1,9 GB RAM.
+    #
     # Wird die Kette zu lang, sind STREAM_MAX_ZEILEN, STREAM_MAX_PROVIDER
     # (Anbieter je Region) und TMDB_PAUSE_MS (Seitenpause) die Stellschrauben
     # -- alle drei unten als Repository-Variablen setzbar, ohne den Code

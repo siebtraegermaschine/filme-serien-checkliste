@@ -575,6 +575,91 @@ async function discover(kind, providerId, gmap) {
   return out;
 }
 
+/* Schickt eine Region in Stapeln an /api/streaming/ingest.
+ *
+ * Vorher ging das Dokument in EINEM Request raus. Das hielt, solange die
+ * Kataloge klein waren, und riss dann: Der spanische Lauf kam am 19.08.2026 auf
+ * 64 MB gegen das 60-MB-Limit von express.json -- PayloadTooLargeError nach
+ * drei Stunden Arbeit, nichts uebernommen, ES blieb zwei Tage alt. Nachgemessen
+ * an den echten Daten liegt US mit vollen Details bei 74,8 MB, ES bei 64,0 --
+ * beide ueber der Grenze, sobald die Anreicherung faellig wird (alle ~7 Tage).
+ *
+ * Das Limit anzuheben schied aus: Die Maschine hat 1,9 GB RAM, und express.json
+ * puffert erst den Rohtext und baut daraus ein Objektgeflecht von mehrfacher
+ * Groesse. /api/titles/bulk-ingest stapelt aus demselben Grund seit jeher.
+ *
+ * Geschnitten wird an den TITELN, nicht an den Anbietern: Ein einzelner
+ * Anbieter kann ueber 10.000 Titel fuehren (Filmin in Spanien), eine Aufteilung
+ * je Anbieter brachte also nichts. Ein Anbieter darf ueber mehrere Stapel
+ * verteilt sein -- das Backend fuegt nur ein und urteilt erst im Abschluss.
+ */
+const STAPEL_TITEL = Number(process.env.STREAM_STAPEL_TITEL || 2000);
+
+function stapelBilden(providers) {
+  const stapel = [];
+  let aktuell = [];
+  let frei = STAPEL_TITEL;
+  for (const p of providers) {
+    for (const [feld, items] of [['f', p.f || []], ['s', p.s || []]]) {
+      let i = 0;
+      // Nach der noch freien Kapazitaet schneiden, nicht nach der vollen
+      // Stapelgroesse: Sonst darf ein Stapel auf fast das Doppelte anwachsen
+      // (ein fast voller plus eine ganze Scheibe) -- genau der Ausreisser, den
+      // die Stapelung verhindern soll.
+      while (i < items.length) {
+        const teil = items.slice(i, i + frei);
+        i += teil.length;
+        aktuell.push({ id: p.id, name: p.name, tmdbId: p.tmdbId, f: [], s: [], [feld]: teil });
+        frei -= teil.length;
+        if (frei === 0) { stapel.push(aktuell); aktuell = []; frei = STAPEL_TITEL; }
+      }
+    }
+  }
+  if (aktuell.length) stapel.push(aktuell);
+  // Ein Lauf ganz ohne Titel muss trotzdem EINEN Request schicken: Nur der
+  // Abschluss raeumt auf, und die Plausibilitaetspruefung im Backend soll
+  // diesen Fall sehen und ablehnen, statt dass er stillschweigend ausfaellt.
+  return stapel.length ? stapel : [[]];
+}
+
+async function ingestInStapeln(doc) {
+  const stapel = stapelBilden(doc.providers);
+  console.log(`Ingest in ${stapel.length} Stapeln zu je hoechstens ${STAPEL_TITEL} Titeln.`);
+  let lauf = null;
+  for (let i = 0; i < stapel.length; i++) {
+    const letzter = i === stapel.length - 1;
+    const koerper = {
+      region: doc.region,
+      providers: stapel[i],
+      abschluss: letzter,
+      ...(lauf ? { lauf } : {}),
+      // Die Genre-Paarung haengt am Lauf, nicht am Stapel -- einmal am Ende
+      // genuegt und spart sie in jedem Zwischenstapel ein.
+      ...(letzter ? { genres: doc.genres } : {}),
+    };
+    const res = await fetch(new URL('/api/streaming/ingest', STREAMING_API_URL), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${STREAMING_INGEST_SECRET}`,
+      },
+      body: JSON.stringify(koerper),
+    });
+    if (!res.ok) {
+      throw new Error(`Ingest-API ${res.status} (Stapel ${i + 1}/${stapel.length}): ${await res.text()}`);
+    }
+    if (!letzter) {
+      const antwort = await res.json();
+      // Ohne die Lauf-Kennung faenge jeder Stapel einen neuen Lauf an -- und
+      // der Abschluss loeschte dann alles, was die frueheren geschrieben haben.
+      if (!antwort.lauf) throw new Error(`Ingest-API lieferte keine Lauf-Kennung (Stapel ${i + 1}).`);
+      lauf = antwort.lauf;
+      if ((i + 1) % 5 === 0) console.log(`   Stapel ${i + 1}/${stapel.length} uebertragen (${antwort.geliefert} Titel).`);
+    }
+  }
+  console.log(`An Backend übertragen: ${STREAMING_API_URL} (${stapel.length} Stapel).`);
+}
+
 async function main() {
   const begonnen = Date.now();
   await ladeSkipListe();
@@ -611,18 +696,7 @@ async function main() {
       console.error('FEHLER: STREAMING_API_URL gesetzt, aber STREAMING_INGEST_SECRET fehlt.');
       process.exit(1);
     }
-    const res = await fetch(new URL('/api/streaming/ingest', STREAMING_API_URL), {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${STREAMING_INGEST_SECRET}`,
-      },
-      body: JSON.stringify(doc),
-    });
-    if (!res.ok) {
-      throw new Error(`Ingest-API ${res.status}: ${await res.text()}`);
-    }
-    console.log(`An Backend übertragen: ${STREAMING_API_URL}`);
+    await ingestInStapeln(doc);
   }
 }
 
@@ -637,4 +711,4 @@ if (argv[1] && fileURLToPath(import.meta.url) === argv[1]) {
   main().catch(e => { console.error(e); process.exit(1); });
 }
 
-export { anbieterDerRegion };
+export { anbieterDerRegion, stapelBilden };
