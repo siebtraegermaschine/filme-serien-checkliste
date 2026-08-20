@@ -6503,10 +6503,12 @@ function rechtesPaarAngleichen(li){
   var erster = oben[0].getBoundingClientRect();
   var vorletzter = oben[oben.length - 2].getBoundingClientRect();
   var letzter = oben[oben.length - 1].getBoundingClientRect();
-  var breiteWl = Math.round(vorletzter.right - erster.left);
-  var breiteSeen = Math.round(letzter.width);
-  if (breiteWl > 0) links.style.width = breiteWl + 'px';
-  if (breiteSeen > 0) seen.style.width = breiteSeen + 'px';
+  // Nicht runden: Die Kanten liegen auf Bruchteilen von Pixeln, gerundet stand
+  // "Watchlist" sonst einen Pixel neben "Kaufen".
+  var breiteWl = vorletzter.right - erster.left;
+  var breiteSeen = letzter.width;
+  if (breiteWl > 0) links.style.width = breiteWl.toFixed(2) + 'px';
+  if (breiteSeen > 0) seen.style.width = breiteSeen.toFixed(2) + 'px';
 }
 function breitenAngleichen(){
   var offene = document.querySelectorAll('li.show-details');
@@ -14456,12 +14458,55 @@ async function baueStoryBild(item, url){
   // Bewusst keine Absenderzeile im Bild -- eine Story wird oft weitergereicht,
   // und der eigene Name soll nicht ungefragt mitwandern. Im Nachrichtentext,
   // der gezielt an eine Person geht, steht er weiterhin.
-  // Der freie Rand oben ist ausserdem nuetzlich: Instagram legt dort seine
-  // eigene Bedienleiste ueber das Bild.
+
+  /* ---- Anordnung: sichere Zonen der Story-Formate ----
+     Instagram, TikTok und Co legen oben (Profilzeile, Schliessen-Kreuz) und
+     unten (Antwortfeld, "Senden an") ihre eigene Bedienung ueber das Bild --
+     je rund 250px der 1920. Frueher sass der Hinweis unter dem QR-Code bei
+     y=1820 und damit mitten unter dem Antwortfeld, der Code selbst reichte bis
+     1710 und wurde am unteren Rand angeschnitten.
+     Jetzt bleibt alles Wichtige zwischen 250 und 1670. Weil Titel (ein oder
+     zwei Zeilen) und Code (die Kantenlaenge haengt an der Laenge der Adresse)
+     unterschiedlich viel Platz brauchen, wird von unten nach oben gerechnet:
+     Das Poster bekommt, was uebrig bleibt, gedeckelt auf sein bisheriges Mass
+     und nach unten begrenzt, damit es nie briefmarkenklein wird. Bleibt Platz
+     uebrig, steht der ganze Stapel mittig in der sicheren Zone. */
+  var SICHER = 250;
+  var bandOben = SICHER, bandUnten = H - SICHER, bandHoehe = bandUnten - bandOben;
+
+  // Titel zuerst umbrechen (nur messen, gezeichnet wird weiter unten): Wie
+  // viele Zeilen es werden, entscheidet mit ueber die Postergroesse.
+  var groesse = 72;
+  var zeilen;
+  do {
+    ctx.font = '700 ' + groesse + 'px ' + SCHRIFT;
+    zeilen = textZeilen(ctx, item.t, B - 140, 2);
+    var passt = zeilen.every(function(z){ return ctx.measureText(z).width <= B - 140; });
+    if (passt) break;
+    groesse -= 6;
+  } while (groesse > 40);
+
+  // Der Code wird ebenfalls vorab geholt -- ohne seine Kantenlaenge laesst sich
+  // nicht rechnen. Faellt er aus, bleibt das Bild brauchbar, der Platz geht
+  // dann ans Poster.
+  var qr = await apiRequest('GET', '/api/share/qr?data=' + encodeURIComponent(url))
+           .catch(function(){ return null; });
+  var modul = 7, rand = 4;
+  var flaeche = qr ? (qr.size + rand * 2) * modul : 0;
+
+  var LUECKE_TITEL = 110;   // Poster-Unterkante bis Grundlinie der ersten Titelzeile
+  var LUECKE_QR = 70;       // Metazeile bis Oberkante des Codes
+  var H_QR_TEXT = 122;      // die zwei Zeilen unter dem Code, samt Unterlaengen
+  var hTitel = zeilen.length * (groesse + 12) + 20;      // Titelzeilen bis Grundlinie der Metazeile
+  var hUnten = flaeche ? (LUECKE_QR + flaeche + H_QR_TEXT) : 0;
+  var ph = Math.max(560, Math.min(780, bandHoehe - LUECKE_TITEL - hTitel - hUnten));
+  var pw = Math.round(ph * 2 / 3);                       // Poster sind 2:3
+  var stapel = ph + LUECKE_TITEL + hTitel + hUnten;
+  var py = bandOben + Math.max(0, (bandHoehe - stapel) / 2);
+  var px = (B - pw) / 2;
 
   // Poster
   var posterQuelle = (daten && daten.posterPath) ? daten.posterPath : item.p;
-  var pw = 520, ph = 780, px = (B - pw) / 2, py = 210;
   if (posterQuelle) {
     try {
       var pos = await ladeBildFuerCanvas('https://image.tmdb.org/t/p/w500' + posterQuelle);
@@ -14479,17 +14524,9 @@ async function baueStoryBild(item, url){
   }
 
   // Titel, hoechstens zwei Zeilen
-  var groesse = 72;
-  var zeilen;
-  do {
-    ctx.font = '700 ' + groesse + 'px ' + SCHRIFT;
-    zeilen = textZeilen(ctx, item.t, B - 140, 2);
-    var passt = zeilen.every(function(z){ return ctx.measureText(z).width <= B - 140; });
-    if (passt) break;
-    groesse -= 6;
-  } while (groesse > 40);
+  ctx.font = '700 ' + groesse + 'px ' + SCHRIFT;
   ctx.fillStyle = '#e8eaed';
-  var ty = py + ph + 110;
+  var ty = py + ph + LUECKE_TITEL;
   zeilen.forEach(function(z, i){ ctx.fillText(z, B / 2, ty + i * (groesse + 12)); });
 
   // Metazeile
@@ -14497,16 +14534,13 @@ async function baueStoryBild(item, url){
   ctx.fillStyle = '#9aa3af';
   var meta = ['⭐ ' + sterneText(item.r), genreAnzeige(item.g && item.g[0]) || null, item.y || null,
               item.type === 'series' ? TXT.serie : TXT.film].filter(Boolean).join('  ·  ');
-  ctx.fillText(meta, B / 2, ty + zeilen.length * (groesse + 12) + 20);
+  var metaY = ty + zeilen.length * (groesse + 12) + 20;
+  ctx.fillText(meta, B / 2, metaY);
 
   // QR-Code auf weisser Flaeche -- Leser erwarten dunkel auf hell, und in der
   // Story liegt er sonst auf wechselndem Untergrund.
-  try {
-    var qr = await apiRequest('GET', '/api/share/qr?data=' + encodeURIComponent(url));
-    var modul = 7, rand = 4;
-    var qrPx = qr.size * modul;
-    var flaeche = qrPx + rand * 2 * modul;
-    var qx = (B - flaeche) / 2, qy = H - flaeche - 210;
+  if (qr) {
+    var qx = (B - flaeche) / 2, qy = metaY + LUECKE_QR;
     ctx.fillStyle = '#ffffff';
     rundesRechteck(ctx, qx, qy, flaeche, flaeche, 18);
     ctx.fill();
@@ -14530,7 +14564,7 @@ async function baueStoryBild(item, url){
     ctx.fillStyle = '#e8eaed'; ctx.fillText(vorText, startX, yQrZeile);
     ctx.fillStyle = '#e6b34c'; ctx.fillText(domText, startX + wVor, yQrZeile);
     ctx.textAlign = 'center';
-  } catch (e) { /* ohne QR bleibt das Bild trotzdem brauchbar */ }
+  }
 
   // JPEG statt PNG: Mit Breitbild-Hintergrund wiegt dasselbe Bild als PNG rund
   // 2,4 MB -- zu viel fuers Verschicken ueber Mobilfunk. Qualitaet 0,92 bringt
