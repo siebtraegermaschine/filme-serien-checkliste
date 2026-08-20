@@ -79,6 +79,23 @@ test('spielSlugId: Umlaute und ID sauber im Slug', () => {
     'fc-bayern-muenchen-1-fc-koeln-42');
 });
 
+test('seiteSpiel: Vorbericht und Aufstellung erscheinen nur mit Inhalt', () => {
+  const ohne = seiteSpiel(beispielDaten('fern'));
+  assert.doesNotMatch(ohne, /Vorbericht<\/h2>/);
+  assert.doesNotMatch(ohne, /Voraussichtliche Aufstellungen/);
+  const mit = seiteSpiel({ ...beispielDaten('fern'),
+    inhalte: { vorbericht: 'Absatz eins.\n\nAbsatz zwei.', aufstellung: 'Team A: ...', stand: '2026-08-21' } });
+  assert.match(mit, /<h2>Vorbericht<\/h2>/);
+  assert.match(mit, /Absatz eins\./);
+  assert.match(mit, /Voraussichtliche Aufstellungen/);
+  assert.match(mit, /Stand: 2026-08-21/);
+  // Nach Abpfiff verschwinden beide -- Rueckblick statt Vorschau.
+  const vorbei = seiteSpiel({ ...beispielDaten('beendet'),
+    inhalte: { vorbericht: 'X', aufstellung: 'Y' } });
+  assert.doesNotMatch(vorbei, /<h2>Vorbericht<\/h2>/);
+  assert.doesNotMatch(vorbei, /Voraussichtliche Aufstellungen/);
+});
+
 test('seiteSpiele: Uebersicht gruppiert und verlinkt', () => {
   const html = seiteSpiele({
     spiele: [{ external_id: 1, wettbewerb: 'bl1', runde: '1. Spieltag',

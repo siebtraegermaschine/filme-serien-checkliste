@@ -22,11 +22,30 @@
  * beendete bleiben 45 Tage als Ergebnisseite stehen (routes/sport.js).
  */
 import { pool } from '../db/pool.js';
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import { slugify } from './slug.js';
 import { attrEsc, dokument, brotkrumenHtml, brotkrumenJsonLd, SITE } from './seoRender.js';
 
 const OLB = 'https://api.openligadb.de';
 const LOCALE = 'de-de';
+
+/* ---- Redaktionelle Inhalte (Vorberichte, Aufstellungen fuer Topspiele):
+   sport-inhalte.json in der Repo-Wurzel, geschrieben von der taeglichen
+   Cloud-Routine, auf den Server kommt sie mit dem Auto-Deploy. Gelesen mit
+   kurzem Cache -- die Datei aendert sich hoechstens einmal pro Deploy. ---- */
+const INHALTE_PFAD = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'sport-inhalte.json');
+let inhalteCache = { at: 0, daten: {} };
+function spielInhalte(externalId) {
+  if (Date.now() - inhalteCache.at > 5 * 60_000) {
+    let daten = {};
+    try { daten = JSON.parse(fs.readFileSync(INHALTE_PFAD, 'utf8')); } catch { /* Datei fehlt: ok */ }
+    inhalteCache = { at: Date.now(), daten };
+  }
+  const e = inhalteCache.daten[String(externalId)];
+  return e && typeof e === 'object' ? e : null;
+}
 
 /* ---- Zusatzdaten von OpenLigaDB, prozessintern gecacht. 6 Stunden TTL:
    Tabellenstand und Form ändern sich hoechstens am Spieltag, und die
@@ -155,6 +174,7 @@ export async function ladeSpielSeite(externalId) {
     formHeim,
     formGast,
     weitere: weitereRows.rows,
+    inhalte: spielInhalte(m.external_id),
     stufe: zeitstufe(m.anstoss, m.beendet),
   };
 }
@@ -321,6 +341,28 @@ function formBlock(daten) {
   return `<h2>Formkurve</h2><p class="hinweis">S = Sieg, U = Unentschieden, N = Niederlage – jeweils aus Sicht des genannten Teams, Pflichtspiele der erfassten Wettbewerbe.</p>${teile.join('')}`;
 }
 
+// Redaktioneller Vorbericht (taegliche Routine) -- nur vor dem Spiel; nach
+// dem Abpfiff waere ein "Blick voraus" unfreiwillig komisch.
+function vorberichtBlock(daten) {
+  const i = daten.inhalte;
+  if (!i || !i.vorbericht || daten.stufe === 'beendet') return '';
+  const absaetze = String(i.vorbericht).split('\n\n').map((a) => a.trim()).filter(Boolean);
+  return `<h2>Vorbericht</h2>${absaetze.map((a) => `<p>${attrEsc(a)}</p>`).join('')}`;
+}
+
+// Voraussichtliche Aufstellungen -- nur Topspiele (Entscheidung 20.08.2026),
+// nur solange das Spiel nicht laeuft/vorbei ist, und ausdruecklich als
+// Prognose gekennzeichnet (offizielle Aufstellungen gibt es erst ~1 Stunde
+// vor Anstoss und nur beim Veranstalter).
+function aufstellungBlock(daten) {
+  const i = daten.inhalte;
+  if (!i || !i.aufstellung || daten.stufe === 'beendet' || daten.stufe === 'live') return '';
+  const absaetze = String(i.aufstellung).split('\n\n').map((a) => a.trim()).filter(Boolean);
+  return `<h2>Voraussichtliche Aufstellungen</h2>
+  <p class="hinweis">Prognose auf Basis oeffentlich verfuegbarer Informationen${i.stand ? ` (Stand: ${attrEsc(i.stand)})` : ''} – die offiziellen Aufstellungen veroeffentlichen die Vereine erst rund eine Stunde vor Anstoss.</p>
+  ${absaetze.map((a) => `<p>${attrEsc(a)}</p>`).join('')}`;
+}
+
 function weitereBlock(daten) {
   if (!daten.weitere.length) return '';
   const li = daten.weitere.map((w) =>
@@ -428,8 +470,10 @@ export function seiteSpiel(daten) {
     ${steckbrief(daten)}
     <p class="einleitung">${lageText(daten)}</p>
     ${soSehen(daten)}
+    ${vorberichtBlock(daten)}
     ${tabellenBlock(daten)}
     ${formBlock(daten)}
+    ${aufstellungBlock(daten)}
     ${weitereBlock(daten)}
     ${faqTeil.html}
     ${stand}

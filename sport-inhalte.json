@@ -1,0 +1,15 @@
+{
+  "_hinweis": [
+    "Redaktionelle Inhalte fuer die SEO-Spielseiten (backend/lib/seoSport.js),",
+    "gepflegt von der taeglichen Cloud-Routine 'Sport-Inhalte (taeglich)'",
+    "(PLAN-SPORT.md). Schluessel = OpenLigaDB-matchID als String.",
+    "",
+    "Je Spiel: { \"vorbericht\": \"Absatz\\n\\nAbsatz\", \"aufstellung\": \"...\",",
+    "  \"stand\": \"YYYY-MM-DD\", \"quellen\": \"kurz\" }",
+    "- vorbericht: 2-3 selbst formulierte Absaetze (nichts kopieren!)",
+    "- aufstellung: NUR fuer Topspiele, ausdruecklich als voraussichtlich",
+    "  formuliert (die Seite kennzeichnet sie zusaetzlich)",
+    "- Eintraege zu Spielen, die laenger als 7 Tage vorbei sind, entfernt",
+    "  die Routine wieder (die Ergebnisseite braucht keinen Vorbericht mehr)."
+  ]
+}
