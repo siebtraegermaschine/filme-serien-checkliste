@@ -553,6 +553,18 @@
   body.sport-seite #authBarLogin, body.sport-seite #sportHeaderBtn,
   body.sport-seite #profileBtn { display: none !important; }
   .prov-item .hinweis-frei { color: var(--done); font-size: 12px; font-weight: 400; }
+  /* Erstbesuchs-Hilfe (Sport): abgedunkelte Ebene UNTER den Modals (die
+     liegen bei 1000+), Blasen werden per JS an ihre Ziele gesetzt. */
+  #sportHilfe { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 940; }
+  .sport-hilfe-blase { position: absolute; max-width: 250px; background: var(--card);
+    border: 1px solid var(--accent); border-radius: 12px; padding: 12px 14px;
+    color: var(--text); font-size: 14px; line-height: 1.45;
+    box-shadow: 0 6px 24px rgba(0,0,0,.5); }
+  .sport-hilfe-blase::before { content: ''; position: absolute; top: -7px; right: 22px;
+    width: 12px; height: 12px; background: var(--card); border-left: 1px solid var(--accent);
+    border-top: 1px solid var(--accent); transform: rotate(45deg); }
+  #sportHilfeOk { position: absolute; left: 50%; transform: translateX(-50%);
+    bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
   /* Bild-Logo der eigenen Sport-Domain (couchultras.png, transparent). */
   .sport-marke-logo { display:block; margin: 0 auto; max-width: min(240px, 58vw);
     height: auto; cursor: pointer; }
@@ -2152,6 +2164,17 @@
   </div>
 </div>
 
+<!-- Erstbesuchs-Hilfe der Sport-Seite (Christian, 20.08.2026): halb-
+     transparente Ebene mit zwei Sprechblasen -- eine zeigt auf "+ Dein
+     Verein" (Verein + Wettbewerbe waehlen, Spielplan wird vorgefiltert),
+     die andere auf das Menue ("Als App speichern"). Einmalig; ein Tipp
+     irgendwohin schliesst sie (Merker mm_sport_hilfe am Geraet). -->
+<div id="sportHilfe" style="display:none">
+  <div class="sport-hilfe-blase" id="sportHilfeVereinBlase"></div>
+  <div class="sport-hilfe-blase" id="sportHilfeAppBlase"></div>
+  <button type="button" id="sportHilfeOk" class="auth-submit"></button>
+</div>
+
 <!-- Hinweis, wenn "Deine Streaming-Anbieter" ohne festgelegte Abos geklickt
      wird (abgemeldet): wirbt fuer die kostenlose Registrierung -- dort legt
      man Streaming-Anbieter und Verein fest. Angemeldet ohne Abos oeffnet der
@@ -2417,6 +2440,9 @@ var UI_TEXTE = {
     sportDeineAnbieter: 'Deine Streaming-Anbieter',
     sportAboHinweisText: 'Kostenlos registrieren und deine Streaming-Anbieter sowie deinen Verein festlegen — dann filtert dieser Knopf genau die Spiele, die du sehen kannst.',
     sportAboHinweisKnopf: 'Kostenlos registrieren / anmelden',
+    sportHilfeVerein: 'Tippe auf „+ Dein Verein“: Wähle deinen Verein und deine Wettbewerbe — der Spielplan ist dann künftig genau danach vorgefiltert.',
+    sportHilfeApp: 'Im Menü findest du „Als App speichern“ — damit landet die Seite wie eine App auf deinem Startbildschirm.',
+    sportHilfeOk: 'Alles klar',
     sportFreiEmpfangbar: 'Frei empfangbar',
     sportImAbo: 'In deinem Abo enthalten',
     sportNichtImAbo: 'Nicht in deinen Abos',
@@ -2759,6 +2785,9 @@ var UI_TEXTE = {
     sportDeineAnbieter: 'Your streaming services',
     sportAboHinweisText: 'Register for free and set your streaming services and your club — then this filter shows exactly the matches you can watch.',
     sportAboHinweisKnopf: 'Register / sign in for free',
+    sportHilfeVerein: 'Tap “+ Your club”: pick your club and competitions — the schedule will be pre-filtered for you from then on.',
+    sportHilfeApp: 'In the menu you’ll find “Save as app” to put this page on your home screen like an app.',
+    sportHilfeOk: 'Got it',
     sportFreiEmpfangbar: 'Free to watch',
     sportImAbo: 'Included in your subscription',
     sportNichtImAbo: 'Not in your subscriptions',
@@ -3098,6 +3127,9 @@ var UI_TEXTE = {
     sportDeineAnbieter: 'Tes services de streaming',
     sportAboHinweisText: 'Inscris-toi gratuitement et définis tes services de streaming et ton club — ce filtre montrera exactement les matchs que tu peux voir.',
     sportAboHinweisKnopf: 'S’inscrire / se connecter',
+    sportHilfeVerein: 'Touche « + Ton club » : choisis ton club et tes compétitions — le calendrier sera ensuite préfiltré pour toi.',
+    sportHilfeApp: 'Dans le menu, « Enregistrer comme appli » place cette page sur ton écran d’accueil.',
+    sportHilfeOk: 'Compris',
     sportFreiEmpfangbar: 'En clair',
     sportImAbo: 'Inclus dans ton abonnement',
     sportNichtImAbo: 'Pas dans tes abonnements',
@@ -3437,6 +3469,9 @@ var UI_TEXTE = {
     sportDeineAnbieter: 'Tus servicios de streaming',
     sportAboHinweisText: 'Regístrate gratis y define tus servicios de streaming y tu equipo — este filtro mostrará exactamente los partidos que puedes ver.',
     sportAboHinweisKnopf: 'Registrarse / iniciar sesión',
+    sportHilfeVerein: 'Toca «+ Tu club»: elige tu equipo y tus competiciones — el calendario quedará prefiltrado para ti.',
+    sportHilfeApp: 'En el menú encontrarás «Guardar como app» para poner esta página en tu pantalla de inicio.',
+    sportHilfeOk: 'Entendido',
     sportFreiEmpfangbar: 'En abierto',
     sportImAbo: 'Incluido en tu suscripción',
     sportNichtImAbo: 'No está en tus suscripciones',
@@ -3776,6 +3811,9 @@ var UI_TEXTE = {
     sportDeineAnbieter: 'I tuoi servizi di streaming',
     sportAboHinweisText: 'Registrati gratis e imposta i tuoi servizi di streaming e la tua squadra — questo filtro mostrerà esattamente le partite che puoi vedere.',
     sportAboHinweisKnopf: 'Registrati / accedi',
+    sportHilfeVerein: 'Tocca «+ La tua squadra»: scegli squadra e competizioni — il calendario sarà poi prefiltrato per te.',
+    sportHilfeApp: 'Nel menu trovi «Salva come app» per mettere questa pagina sulla schermata Home.',
+    sportHilfeOk: 'Ho capito',
     sportFreiEmpfangbar: 'In chiaro',
     sportImAbo: 'Incluso nel tuo abbonamento',
     sportNichtImAbo: 'Non nei tuoi abbonamenti',
@@ -4115,6 +4153,9 @@ var UI_TEXTE = {
     sportDeineAnbieter: 'Jouw streamingdiensten',
     sportAboHinweisText: 'Registreer gratis en stel je streamingdiensten en je club in — dan toont dit filter precies de wedstrijden die je kunt zien.',
     sportAboHinweisKnopf: 'Gratis registreren / inloggen',
+    sportHilfeVerein: 'Tik op „+ Jouw club”: kies je club en competities — het speelschema wordt daarna voor jou voorgefilterd.',
+    sportHilfeApp: 'In het menu vind je „Als app opslaan” om deze pagina als app op je beginscherm te zetten.',
+    sportHilfeOk: 'Begrepen',
     sportFreiEmpfangbar: 'Gratis te zien',
     sportImAbo: 'Inbegrepen in je abonnement',
     sportNichtImAbo: 'Niet in je abonnementen',
@@ -4454,6 +4495,9 @@ var UI_TEXTE = {
     sportDeineAnbieter: 'Seus serviços de streaming',
     sportAboHinweisText: 'Registre-se grátis e defina seus serviços de streaming e seu clube — este filtro mostrará exatamente os jogos que você pode ver.',
     sportAboHinweisKnopf: 'Registrar-se / entrar',
+    sportHilfeVerein: 'Toque em «+ Seu clube»: escolha seu clube e competições — o calendário ficará pré-filtrado para você.',
+    sportHilfeApp: 'No menu você encontra «Salvar como app» para colocar esta página na sua tela inicial.',
+    sportHilfeOk: 'Entendi',
     sportFreiEmpfangbar: 'Em TV aberta',
     sportImAbo: 'Incluído na sua assinatura',
     sportNichtImAbo: 'Não está nas suas assinaturas',
@@ -10013,6 +10057,35 @@ document.getElementById('sportTeilenFab').onclick = function(){
   }
 };
 
+/* ---- Erstbesuchs-Hilfe der Sport-Seite (siehe Markup #sportHilfe). ---- */
+var SPORT_HILFE_KEY = 'mm_sport_hilfe';
+function sportHilfeZeigen(){
+  try { if (localStorage.getItem(SPORT_HILFE_KEY)) return; } catch (e) { return; }
+  var link = document.getElementById('sportVereinBtn');
+  var menue = document.getElementById('navMenuBtn');
+  var ebene = document.getElementById('sportHilfe');
+  if (!link || !ebene || !sportMode) return;
+  var vb = document.getElementById('sportHilfeVereinBlase');
+  var ab = document.getElementById('sportHilfeAppBlase');
+  vb.textContent = TXT.sportHilfeVerein;
+  ab.textContent = TXT.sportHilfeApp;
+  document.getElementById('sportHilfeOk').textContent = TXT.sportHilfeOk;
+  ebene.style.display = '';
+  // Blasen unter ihre Ziele setzen (Pfeilspitze zeigt nach oben rechts).
+  var lb = link.getBoundingClientRect();
+  vb.style.top = (lb.bottom + 12) + 'px';
+  vb.style.right = Math.max(12, window.innerWidth - lb.right - 6) + 'px';
+  var mb = menue.getBoundingClientRect();
+  ab.style.top = (mb.bottom + 12) + 'px';
+  ab.style.right = Math.max(12, window.innerWidth - mb.right - 6) + 'px';
+  function schliessen(){
+    ebene.style.display = 'none';
+    try { localStorage.setItem(SPORT_HILFE_KEY, '1'); } catch (e) {}
+  }
+  ebene.onclick = schliessen;
+  document.getElementById('sportHilfeOk').onclick = schliessen;
+}
+
 /* ---- Hinweis "Deine Streaming-Anbieter" ohne Abos (siehe Chip-Handler). */
 var _sportAboHinweis = document.getElementById('sportAboHinweisModal');
 function openSportAboHinweis(){
@@ -10298,7 +10371,11 @@ function openSportPage(){
   Object.keys(sportListEls).forEach(function(key){
     sportListEls[key].innerHTML = '<li class="cinema-empty">' + TXT.laedt + '</li>';
   });
-  Promise.all([loadSportData(), sportAbosLaden()]).then(renderSportPage).catch(function(err){
+  Promise.all([loadSportData(), sportAbosLaden()]).then(function(){
+    renderSportPage();
+    // Erstbesuch: Hilfe-Ebene ueber die frisch gerenderte Seite legen.
+    sportHilfeZeigen();
+  }).catch(function(err){
     console.error('Sport-Daten konnten nicht geladen werden:', err);
     Object.keys(sportListEls).forEach(function(key){
       sportListEls[key].innerHTML = '<li class="cinema-empty">' + esc(TXT.sportFehler) + '</li>';
