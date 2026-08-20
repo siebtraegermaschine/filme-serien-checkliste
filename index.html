@@ -1841,10 +1841,19 @@
     <div class="modal-actions settings-menu">
       <!-- Die beiden Inhaltsfilter zuerst, durch eine Linie vom Rest
            abgesetzt (auf Wunsch vom 13. August hervorgehoben). -->
-      <button type="button" id="settingsProvidersBtn" class="modal-yes">Streaminganbieter</button>
+      <button type="button" id="settingsProvidersBtn" class="modal-yes">Deine Streaming-Anbieter</button>
       <button type="button" id="settingsKinosBtn" class="modal-yes">Deine Kinos</button>
       <hr class="settings-sep" id="settingsSep">
-      <!-- "E-Mail-Einstellungen" ist ein aufklappbarer Punkt wie die anderen
+      <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Filme/Serien</button>
+      <!-- Aus dem Menue rechts oben hierher gewandert (13. August).
+           Beschriftung setzt das JS (sprachModalEinrichten). -->
+      <button type="button" id="langBtn" class="modal-yes">Sprache &amp; Region</button>
+      <button type="button" id="settingsAccountBtn" class="modal-yes">Zugangsdaten</button>
+      <button type="button" id="settingsCreditsBtn" class="modal-yes">Credits</button>
+      <!-- E-Mail-Einstellungen und Import stehen am ENDE der Liste (Christian,
+           20. August 2026): Beides sind Punkte, die man einmal einrichtet und
+           danach kaum wieder anfasst -- die Alltagspunkte stehen davor.
+           "E-Mail-Einstellungen" ist ein aufklappbarer Punkt wie die anderen
            Knoepfe: Der Klick zeigt die eingerueckten Unterpunkte (bislang
            einen); weitere E-Mail-Punkte kommen spaeter darunter. Nur
            angemeldet sichtbar; Beschriftungen samt An/Aus-Zustand kommen aus
@@ -1854,12 +1863,6 @@
       <!-- Watchlist-Import aus Letterboxd/IMDb/Trakt -- nur angemeldet,
            Beschriftung aus dem JS (importKnopfAktualisieren). -->
       <button type="button" id="settingsImportBtn" class="modal-yes" style="display:none">Import</button>
-      <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Titel</button>
-      <!-- Aus dem Menue rechts oben hierher gewandert (13. August).
-           Beschriftung setzt das JS (sprachModalEinrichten). -->
-      <button type="button" id="langBtn" class="modal-yes">Sprache &amp; Region</button>
-      <button type="button" id="settingsAccountBtn" class="modal-yes">Zugangsdaten</button>
-      <button type="button" id="settingsCreditsBtn" class="modal-yes">Credits</button>
       <!-- "Konto loeschen" steht seit dem 13. August NICHT mehr hier,
            sondern unten im Zugangsdaten-Fenster -- eine destruktive Aktion
            gehoert nicht auf dieselbe Ebene wie die Alltagspunkte. -->
@@ -4979,9 +4982,9 @@ var MARKUP_TEXTE = {
     '#feedbackSubmit': { t: 'Send' },
     '#feedbackSuccess p': { t: 'Thanks for your feedback!' },
     '#settingsModal h3': { t: 'Settings' },
-    '#settingsProvidersBtn': { t: 'Streaming services' },
+    '#settingsProvidersBtn': { t: 'Your streaming services' },
     '#settingsKinosBtn': { t: 'Your cinemas' },
-    '#settingsHiddenBtn': { t: 'Removed titles' },
+    '#settingsHiddenBtn': { t: 'Removed movies/series' },
     '#settingsAccountBtn': { t: 'Account details' },
     '#settingsCreditsBtn': { t: 'Credits' },
     '#settingsDeleteBtn': { t: 'Delete account' },
@@ -5109,9 +5112,9 @@ var MARKUP_TEXTE = {
     '#feedbackSubmit': { t: 'Envoyer' },
     '#feedbackSuccess p': { t: 'Merci pour ton retour !' },
     '#settingsModal h3': { t: 'Réglages' },
-    '#settingsProvidersBtn': { t: 'Services de streaming' },
+    '#settingsProvidersBtn': { t: 'Tes services de streaming' },
     '#settingsKinosBtn': { t: 'Tes cinémas' },
-    '#settingsHiddenBtn': { t: 'Titres retirés' },
+    '#settingsHiddenBtn': { t: 'Films/séries retirés' },
     '#settingsAccountBtn': { t: 'Données du compte' },
     '#settingsCreditsBtn': { t: 'Crédits' },
     '#settingsDeleteBtn': { t: 'Supprimer le compte' },
@@ -5239,9 +5242,9 @@ var MARKUP_TEXTE = {
     '#feedbackSubmit': { t: 'Enviar' },
     '#feedbackSuccess p': { t: '¡Gracias por tus comentarios!' },
     '#settingsModal h3': { t: 'Ajustes' },
-    '#settingsProvidersBtn': { t: 'Servicios de streaming' },
+    '#settingsProvidersBtn': { t: 'Tus plataformas de streaming' },
     '#settingsKinosBtn': { t: 'Tus cines' },
-    '#settingsHiddenBtn': { t: 'Títulos eliminados' },
+    '#settingsHiddenBtn': { t: 'Películas/series eliminadas' },
     '#settingsAccountBtn': { t: 'Datos de la cuenta' },
     '#settingsCreditsBtn': { t: 'Créditos' },
     '#settingsDeleteBtn': { t: 'Eliminar cuenta' },
@@ -5369,9 +5372,9 @@ var MARKUP_TEXTE = {
     '#feedbackSubmit': { t: 'Invia' },
     '#feedbackSuccess p': { t: 'Grazie per il tuo feedback!' },
     '#settingsModal h3': { t: 'Impostazioni' },
-    '#settingsProvidersBtn': { t: 'Servizi di streaming' },
+    '#settingsProvidersBtn': { t: 'I tuoi servizi di streaming' },
     '#settingsKinosBtn': { t: 'I tuoi cinema' },
-    '#settingsHiddenBtn': { t: 'Titoli rimossi' },
+    '#settingsHiddenBtn': { t: 'Film/serie rimossi' },
     '#settingsAccountBtn': { t: 'Dati dell’account' },
     '#settingsCreditsBtn': { t: 'Crediti' },
     '#settingsDeleteBtn': { t: 'Elimina account' },
@@ -5499,9 +5502,9 @@ var MARKUP_TEXTE = {
     '#feedbackSubmit': { t: 'Versturen' },
     '#feedbackSuccess p': { t: 'Bedankt voor je feedback!' },
     '#settingsModal h3': { t: 'Instellingen' },
-    '#settingsProvidersBtn': { t: 'Streamingdiensten' },
+    '#settingsProvidersBtn': { t: 'Jouw streamingdiensten' },
     '#settingsKinosBtn': { t: 'Jouw bioscopen' },
-    '#settingsHiddenBtn': { t: 'Verwijderde titels' },
+    '#settingsHiddenBtn': { t: 'Verwijderde films/series' },
     '#settingsAccountBtn': { t: 'Accountgegevens' },
     '#settingsCreditsBtn': { t: 'Credits' },
     '#settingsDeleteBtn': { t: 'Account verwijderen' },
@@ -5629,9 +5632,9 @@ var MARKUP_TEXTE = {
     '#feedbackSubmit': { t: 'Enviar' },
     '#feedbackSuccess p': { t: 'Obrigado pelo seu feedback!' },
     '#settingsModal h3': { t: 'Configurações' },
-    '#settingsProvidersBtn': { t: 'Serviços de streaming' },
+    '#settingsProvidersBtn': { t: 'Seus serviços de streaming' },
     '#settingsKinosBtn': { t: 'Seus cinemas' },
-    '#settingsHiddenBtn': { t: 'Títulos removidos' },
+    '#settingsHiddenBtn': { t: 'Filmes/séries removidos' },
     '#settingsAccountBtn': { t: 'Dados da conta' },
     '#settingsCreditsBtn': { t: 'Créditos' },
     '#settingsDeleteBtn': { t: 'Excluir conta' },
