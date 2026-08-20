@@ -65,6 +65,11 @@ async function openLigaDb(pfad) {
   return null;
 }
 
+// Team-Logos auf https anheben: OpenLigaDB fuehrt teils http-Adressen
+// (z.B. die deutsche Flagge via Wikimedia) -- der Browser blockt http-Bilder
+// auf der https-Seite (Mixed Content), Wikimedia & Co. koennen alle https.
+const httpsLogo = (u) => (u ? String(u).replace(/^http:\/\//, 'https://') : null);
+
 // Endergebnis (resultTypeID 2) bzw. bei laufenden Spielen der letzte Stand.
 function ergebnis(match) {
   const alle = Array.isArray(match.matchResults) ? match.matchResults : [];
@@ -93,7 +98,9 @@ async function holeWettbewerb(kuerzel, saison, grenzeIso) {
     // Mitternacht ein -- die bleiben drin (Datum stimmt, Zeit folgt), nur
     // Vergangenes vor der Grenze fliegt raus.
     .filter((m) => m.matchDateTimeUTC >= grenzeIso)
-    .map((m) => ({ id: String(m.matchID), anstossUtc: m.matchDateTimeUTC, roh: m }));
+    // heim/gast fuer teams-Regeln (siehe sportRechte.js, Laenderspiele).
+    .map((m) => ({ id: String(m.matchID), anstossUtc: m.matchDateTimeUTC,
+                   heim: m.team1.teamName || '', gast: m.team2.teamName || '', roh: m }));
 
   const tvMap = tvFuerSpiele(RECHTE, kuerzel, saison, spiele);
 
@@ -109,8 +116,8 @@ async function holeWettbewerb(kuerzel, saison, grenzeIso) {
       gast: m.team2.teamName || '',
       heimKurz: m.team1.shortName || null,
       gastKurz: m.team2.shortName || null,
-      heimLogo: m.team1.teamIconUrl || null,
-      gastLogo: m.team2.teamIconUrl || null,
+      heimLogo: httpsLogo(m.team1.teamIconUrl),
+      gastLogo: httpsLogo(m.team2.teamIconUrl),
       beendet: !!m.matchIsFinished,
       toreHeim: erg.heim,
       toreGast: erg.gast,

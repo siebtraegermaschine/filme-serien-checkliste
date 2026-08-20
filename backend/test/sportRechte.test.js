@@ -76,6 +76,15 @@ test('saisonBlock: unbekannte Saison erbt die juengste davor', () => {
   assert.equal(saisonBlock(RECHTE, '2024'), RECHTE.saisons['2025']); // aeltester vorhandener
 });
 
+test('teams-Regel: Deutschland-Laenderspiele leer (Ausnahmen), Rest DAZN', () => {
+  const tv = tvFuerSpiele(RECHTE, 'nla', '2026', [
+    { id: 'ger', anstossUtc: '2026-11-16T19:45:00Z', heim: 'Deutschland', gast: 'Niederlande' },
+    { id: 'rest', anstossUtc: '2026-11-16T19:45:00Z', heim: 'Norwegen', gast: 'Daenemark' },
+  ]);
+  assert.deepEqual(tv.get('ger'), []);
+  assert.deepEqual(tv.get('rest').map(({ s }) => ({ s })), [{ s: 'dazn' }]);
+});
+
 test('unbekannter Wettbewerb: leere Zuordnung statt Absturz', () => {
   const tv = tvFuerSpiele(RECHTE, 'nfl', '2026', [{ id: '1', anstossUtc: '2026-08-22T13:30:00Z' }]);
   assert.deepEqual(tv.get('1'), []);

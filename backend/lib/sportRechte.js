@@ -45,7 +45,11 @@ export function saisonBlock(rechte, saison) {
   return rechte.saisons[davor.length ? davor[davor.length - 1] : alle[0]];
 }
 
-function regelPasst(regel, tagZeit) {
+function regelPasst(regel, tagZeit, spiel) {
+  // teams: Regel greift nur fuer Partien MIT einem dieser Teams -- gebraucht
+  // fuer die Laenderspiele (Deutschland-Spiele sind Free-TV je Ausnahme, der
+  // Rest der Nations League laeuft pauschal bei DAZN).
+  if (regel.teams && !(regel.teams.includes(spiel.heim) || regel.teams.includes(spiel.gast))) return false;
   if (regel.tag && !regel.tag.includes(tagZeit.tag)) return false;
   if (regel.zeit && regel.zeit !== tagZeit.zeit) return false;
   return true;
@@ -83,7 +87,7 @@ export function tvFuerSpiele(rechte, wettbewerb, saison, spiele) {
   for (const spiel of spiele) {
     const id = String(spiel.id);
     const tz = berlinTagZeit(spiel.anstossUtc);
-    const regel = (conf.regeln || []).find((r) => regelPasst(r, tz));
+    const regel = (conf.regeln || []).find((r) => regelPasst(r, tz, spiel));
     let tv = regel ? regel.tv.map((e) => ({ ...e })) : [];
     let unsicher = !!(regel && regel.unsicher) && !tageMitPick.has(tz.datum);
 

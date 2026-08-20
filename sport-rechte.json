@@ -158,10 +158,7 @@
     },
     "nla": {
       "name": "Länderspiele",
-      "olb": "nla",
-      "nurTeams": [
-        "Deutschland"
-      ]
+      "olb": "nla"
     }
   },
   "saisons": {
@@ -311,7 +308,18 @@
       "nla": {
         "regeln": [
           {
+            "teams": [
+              "Deutschland"
+            ],
             "tv": []
+          },
+          {
+            "tv": [
+              {
+                "s": "dazn",
+                "kanal": "DAZN-App"
+              }
+            ]
           }
         ],
         "ausnahmen": {}
@@ -521,7 +529,18 @@
       "nla": {
         "regeln": [
           {
+            "teams": [
+              "Deutschland"
+            ],
             "tv": []
+          },
+          {
+            "tv": [
+              {
+                "s": "dazn",
+                "kanal": "DAZN-App"
+              }
+            ]
           }
         ],
         "ausnahmen": {
@@ -569,5 +588,5 @@
       }
     }
   },
-  "_stand": "2026-08-20 (DAZN-Infotext praezisiert: Empfangsweg != Abo)"
+  "_stand": "2026-08-20 (Laenderspiele: ALLE Nations-League-A-Spiele; Deutschland-Partien Free-TV je Ausnahme, Rest pauschal DAZN; Flaggen-Logos auf https)"
 }
