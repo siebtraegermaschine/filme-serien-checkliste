@@ -7,10 +7,12 @@ const router = createAsyncRouter();
 
 // Wie weit die Auslieferung zurueck- bzw. vorausblickt. 8 Stunden Rueckblick:
 // ein laufendes bzw. gerade beendetes Spiel soll unter "Heute" noch stehen.
-// 70 Tage voraus decken "Demnaechst" grosszuegig ab, ohne die ganze Saison
-// (~1000 Spiele) in jede Antwort zu packen.
+// Voraus die GANZE Saison: Der Vereins-Filter ("Deine Ansicht") soll alle
+// Spieltage zeigen -- mit dem frueheren 70-Tage-Fenster endete die Liste
+// scheinbar am 7. Spieltag (Christian, 20. August 2026). ~1000 Spiele sind
+// als Antwort verkraftbar (einmal je Seitenbesuch, gzip drueckt kraeftig).
 const RUECKBLICK = "8 hours";
-const VORAUSBLICK = "70 days";
+const VORAUSBLICK = "370 days";
 
 // Oeffentlich, kein Login noetig -- analog zu /api/cinema. Sender-Katalog und
 // Wettbewerbsnamen kommen aus sport_meta (letzter Ingest), die Spiele als
