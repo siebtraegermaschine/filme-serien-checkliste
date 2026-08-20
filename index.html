@@ -568,6 +568,10 @@
   /* Bild-Logo der eigenen Sport-Domain (couchultras.png, transparent). */
   .sport-marke-logo { display:block; margin: 0 auto; max-width: min(240px, 58vw);
     height: auto; cursor: pointer; }
+  /* Oberkante Logo = Oberkante der Navigations-Knoepfe (die sitzen absolut
+     bei 6px + safe-area; Logo steht daneben und ueberlagert nichts --
+     Christian, 20.08.2026). Ueberschreibt die 30px des Standard-Headers. */
+  body.sport-seite header { padding-top: calc(6px + env(safe-area-inset-top, 0px)); }
   /* "+ Deine Ansicht": bewusst nur Text neben der Ueberschrift, kein Knopf. */
   .sport-verein-link { color: var(--text-dim); font-size: 13px; font-weight: 600;
     cursor: pointer; white-space: nowrap; align-self: center; }
