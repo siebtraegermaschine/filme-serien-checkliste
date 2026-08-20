@@ -26,7 +26,8 @@ import { attrEsc } from './lib/seoRender.js';
 import { slugify } from './lib/slug.js';
 import { ladeSeoText } from './lib/seoData.js';
 import { ladeSpielSeite, ladeSpieleUebersicht, seiteSpiel, seiteSpiele, sitemapSpiele,
-         ladeWettbewerbSeite, seiteWettbewerb, ladeVereinSeite, seiteVerein } from './lib/seoSport.js';
+         ladeWettbewerbSeite, seiteWettbewerb, ladeVereinSeite, seiteVerein,
+         ladeHtmlSitemap, seiteHtmlSitemap } from './lib/seoSport.js';
 import movieNightRouter from './routes/movieNight.js';
 import metrikRouter from './routes/metrik.js';
 import eventsRouter from './routes/events.js';
@@ -188,6 +189,8 @@ app.use(async (req, res, next) => {
     // Die SEO-Spielseiten wohnen bei aktiver Sport-Domain HIER (kuerzere
     // Pfade ohne Locale) -- movietaste leitet auf sie um (routes/seo.js).
     if (p === '/spiele') return res.type('html').send(seiteSpiele(await ladeSpieleUebersicht()));
+    // HTML-Sitemap: alle SEO-Seiten per Link erreichbar (Fusszeilen-Link).
+    if (p === '/sitemap') return res.type('html').send(seiteHtmlSitemap(await ladeHtmlSitemap()));
     const spiel = p.match(/^\/spiel\/.*-(\d+)$/);
     if (spiel) {
       const daten = await ladeSpielSeite(spiel[1]);

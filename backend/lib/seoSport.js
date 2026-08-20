@@ -225,6 +225,7 @@ function sportKopfFuss(ctx) {
     kopfHtml: `<header class="seo-kopf"><a class="marke" href="/"><img class="marke-logo" src="/couchultras.png" alt="${attrEsc(ctx.marke)} – Wissen, wo’s läuft."></a>
       <nav class="seo-nav"><a href="/">Zum Spielplan</a></nav></header>`,
     fussHtml: `<footer>
+      <a href="/sitemap">Sitemap</a>
       <a href="/impressum.html">Impressum</a>
       <a href="/datenschutz.html">Datenschutz</a>
       <a href="https://www.openligadb.de" rel="noopener">Spielplandaten: OpenLigaDB</a>
@@ -770,6 +771,55 @@ export function seiteVerein(daten) {
   `;
   return dokument({ locale: LOCALE, pfad, titelZeile, beschreibung,
     indexierbar: daten.kommend.length > 0 || daten.vorbei.length > 0, jsonLd, bodyHtml, ...sportKopfFuss(ctx) });
+}
+
+/* ---- HTML-Sitemap (/sitemap, Christian 20.08.2026): ein Fusszeilen-Link
+   fuehrt hierher -- oben die wichtigsten Seiten (Uebersicht, Wettbewerbe,
+   Vereine), darunter ALLE Spielseiten, gruppiert nach Wettbewerb. Damit ist
+   jede SEO-Seite auch ohne XML-Sitemap ueber Links erreichbar. ---- */
+export async function ladeHtmlSitemap() {
+  const [{ rows }, { rows: metaRows }] = await Promise.all([
+    pool.query(`SELECT external_id, heim, gast, anstoss, wettbewerb FROM sport_matches ORDER BY anstoss`),
+    pool.query('SELECT key, value FROM sport_meta'),
+  ]);
+  const meta = Object.fromEntries(metaRows.map((r) => [r.key, r.value]));
+  return { spiele: rows, wettbewerbe: meta.wettbewerbe || {}, sender: meta.sender || {} };
+}
+
+export function seiteHtmlSitemap(daten) {
+  const ctx = sportKontext();
+  const pfad = '/sitemap';
+  const titelZeile = `Sitemap: Alle Seiten im Überblick${ctx.marke ? ` | ${ctx.marke}` : ''}`;
+  const kette = [ { label: ctx.marke || 'Sport', href: '/' }, { label: 'Sitemap' } ];
+  const compKeys = Object.keys(daten.wettbewerbe)
+    .sort((a, b) => ((daten.wettbewerbe[a].reihe || 99) - (daten.wettbewerbe[b].reihe || 99)));
+  const teamNamen = [...new Set(daten.spiele.flatMap((sp) => [sp.heim, sp.gast]))].sort((a, b) => a.localeCompare(b, 'de'));
+  const spieleNachComp = compKeys.map((k) => {
+    const liste = daten.spiele.filter((sp) => sp.wettbewerb === k);
+    if (!liste.length) return '';
+    return `<h3>${attrEsc(wettbewerbName(daten, k))}</h3><ul>${liste.map((sp) =>
+      `<li><a href="${spielPfad(sp)}">${attrEsc(sp.heim)} – ${attrEsc(sp.gast)}</a> ` +
+      `<span class="hinweis">${datumKurz.format(sp.anstoss)}</span></li>`).join('')}</ul>`;
+  }).join('');
+  const bodyHtml = `
+    ${brotkrumenHtml(kette)}
+    <h1>Sitemap</h1>
+    <h2>Die wichtigsten Seiten</h2>
+    <ul>
+      <li><a href="/">Startseite: Spielplan mit Sendern</a></li>
+      <li><a href="${ctx.uebersichtPfad}">Fußball heute &amp; diese Woche</a></li>
+    </ul>
+    <h2>Wettbewerbe</h2>
+    <div class="chips">${compKeys.map((k) => `<a class="chip" href="${wettbewerbPfad(daten, k)}">${attrEsc(wettbewerbName(daten, k))}</a>`).join('')}</div>
+    <h2>Vereine &amp; Nationalmannschaften</h2>
+    <div class="chips">${teamNamen.map((n) => `<a class="chip" href="${vereinPfad(n)}">${attrEsc(n)}</a>`).join('')}</div>
+    <h2>Alle Spiele</h2>
+    ${spieleNachComp}
+  `;
+  return dokument({ locale: LOCALE, pfad, titelZeile,
+    beschreibung: 'Alle Seiten im Überblick: Spielplan, Wettbewerbe, Vereine und sämtliche Spiele.',
+    indexierbar: daten.spiele.length > 0, jsonLd: [brotkrumenJsonLd(kette)],
+    bodyHtml, ...sportKopfFuss(ctx) });
 }
 
 /* ---- Sitemap der Spielseiten in der Sport-Domain-Fassung (fuer
