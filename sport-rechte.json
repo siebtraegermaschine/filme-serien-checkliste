@@ -148,11 +148,11 @@
     },
     "dfb": {
       "name": "DFB-Pokal",
-      "reihe": 4
+      "reihe": 5
     },
     "ucl": {
       "name": "Champions League",
-      "reihe": 5
+      "reihe": 4
     },
     "uel": {
       "name": "Europa League",
@@ -161,12 +161,12 @@
     "blsc": {
       "name": "Supercup",
       "olb": "BLSupercup",
-      "reihe": 7
+      "reihe": 8
     },
     "nla": {
       "name": "Länderspiele",
       "olb": "nla",
-      "reihe": 8
+      "reihe": 7
     },
     "em": {
       "name": "EM",
@@ -638,5 +638,5 @@
       }
     }
   },
-  "_stand": "2026-08-20 (Wettbewerbe mit fester Anzeige-Reihenfolge \"reihe\")"
+  "_stand": "2026-08-20 (Reihenfolge: Ligen, dann nach Event-Groesse; EM/WM ruecken 4 Wochen vor Turnierbeginn an die Spitze)"
 }

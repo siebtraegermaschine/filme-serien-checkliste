@@ -9978,6 +9978,25 @@ function sportAbosVorauswahl(){
   });
 }
 
+/* Reihenfolge der Wettbewerbs-Chips (Christian, 20.08.2026): erst die drei
+   Ligen, dann nach Event-Groesse (CL, Pokal, EL, Laenderspiele, Supercup) --
+   das steht als "reihe" in der Rechte-Matrix. EM und WM ruecken erst ab
+   4 Wochen vor Turnierbeginn an die ERSTE Stelle (und bleiben dort, solange
+   Spiele im Fenster sind); vorher stehen sie hinten. */
+function sportWettbewerbsReihenfolge(data){
+  var jetzt = Date.now();
+  function rang(c){
+    var r = (data.wettbewerbe[c] && data.wettbewerbe[c].reihe) || 99;
+    if (c === 'em' || c === 'wm') {
+      var erstes = null;
+      data.spiele.forEach(function(s){ if (s.c === c && (!erstes || s.ko < erstes)) erstes = s.ko; });
+      if (erstes && new Date(erstes).getTime() - jetzt < 28 * 86400000) r = -1;
+    }
+    return r;
+  }
+  return Object.keys(data.wettbewerbe).sort(function(a, b){ return rang(a) - rang(b); });
+}
+
 function sportSenderInfo(slug){
   return (SPORT_DATA && SPORT_DATA.sender[slug]) || { name: slug, frei: false, link: null };
 }
@@ -10183,13 +10202,10 @@ function renderSportChips(){
   var scrollVorher = [el.scrollLeft, verfElVorab.scrollLeft];
   var data = SPORT_DATA;
   // ALLE Wettbewerbe der Matrix, auch die noch ohne Spiele (CL vor der
-  // Auslosung, EM/WM bis zum Turnier) -- Christian, 20.08.2026: jetzt schon
-  // auswaehlbar, Spiele erscheinen, sobald sie bekannt sind. Sortiert nach
-  // "reihe" aus der Matrix: Postgres-JSONB wuerfelt die Schluessel um,
-  // sonst stuenden die leeren EM/WM-Chips ganz vorn.
-  var vorhanden = Object.keys(data.wettbewerbe).sort(function(a, b){
-    return (data.wettbewerbe[a].reihe || 99) - (data.wettbewerbe[b].reihe || 99);
-  });
+  // Auslosung, EM/WM bis zum Turnier) -- jetzt schon auswaehlbar, Spiele
+  // erscheinen, sobald sie bekannt sind. Reihenfolge siehe
+  // sportWettbewerbsReihenfolge (Ligen zuerst, Turniere ruecken vor).
+  var vorhanden = sportWettbewerbsReihenfolge(data);
   var html = '<button type="button" data-comp="alle"' + (SPORT_COMPS.length ? '' : ' class="active"') + '>' +
              esc(TXT.sportAlle) + '</button>';
   vorhanden.forEach(function(c){
@@ -10461,9 +10477,7 @@ var _ansichtComps = [];                // Arbeitskopie der Wettbewerbs-Vorauswah
 function renderAnsichtLigen(){
   var el = document.getElementById('ansichtLigen');
   var data = SPORT_DATA;
-  var vorhanden = Object.keys(data.wettbewerbe).sort(function(a, b){
-    return (data.wettbewerbe[a].reihe || 99) - (data.wettbewerbe[b].reihe || 99);
-  });
+  var vorhanden = sportWettbewerbsReihenfolge(data);
   var html = '<button type="button" data-comp="alle" class="' + (_ansichtComps.length ? '' : 'active') + '">' +
              esc(TXT.sportAlle) + '</button>';
   vorhanden.forEach(function(c){
