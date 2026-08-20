@@ -1003,7 +1003,7 @@
   .watch-links > .watch-btn { flex: 0 0 auto; }
   /* Das Teilen-Zeichen sitzt mittig im Knopf und bekommt weniger Rand als eine
      Beschriftung -- sonst waere der Knopf fast so breit wie "Trailer". */
-  .teilen-btn { display: inline-flex; align-items: center; justify-content: center; padding-left: 12px; padding-right: 12px; }
+  .teilen-btn { display: inline-flex; align-items: center; justify-content: center; padding-left: 10px; padding-right: 10px; }
   /* Beide Zeilen der aufgeklappten Ansicht sollen dasselbe Raster zeigen:
      rechts ein gleich breiter Block (oben Kaufen/Leihen/Ansehen, unten
      Watchlist/Gesehen), links davon Trailer bzw. "Ähnliche Titel". Ohne das
@@ -1043,9 +1043,15 @@
      mit kompakte-aktionen). Bei 320px reicht es nicht: Die untere Zeile
      braucht dort 293px und hat 254px -- das liesse sich nur durch eine
      kuerzere Beschriftung als "Ähnliche Titel" loesen. */
+  /* Auf schmalen Geraeten zaehlt jeder Pixel: Passen linke Gruppe und rechter
+     Block nicht nebeneinander, rutscht der Block per flex-wrap in eine eigene
+     Zeile (lesbar, aber zwei Zeilen statt einer). Die engeren Abstaende halten
+     das ab etwa 390px Geraetebreite auf. Darunter -- 360 und 375px -- reicht es
+     nicht mehr: Kaufen/Leihen/Ansehen brauchen allein rund 210px. */
   @media (max-width: 520px) {
     .watch-btns { gap: 8px; }
-    .det-rechts { gap: 6px; }
+    .watch-rechts, .det-rechts { gap: 6px; }
+    .watch-links { gap: 6px; }
   }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
