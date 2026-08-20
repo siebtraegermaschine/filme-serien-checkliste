@@ -546,6 +546,14 @@
   /* Ueberschrift des Sport-Abo-Abschnitts im Streaminganbieter-Fenster --
      kleine Zwischenueberschrift mit Luft nach oben zur Anbieterliste. */
   .prov-sport-titel { margin: 16px 0 4px; font-size: 14px; color: var(--text); }
+  /* Eigene Sport-Domain: Film-Menuepunkte, Anmeldung und ⚽-Schnellzugriff
+     bleiben dauerhaft weg -- !important, weil renderAuthBar() u.a. die
+     Sichtbarkeit von "Anmelden" bei jedem Aufruf inline neu setzt. */
+  body.sport-seite #sportMenuBtn, body.sport-seite #howToBtn,
+  body.sport-seite #authBarLogin, body.sport-seite #sportHeaderBtn { display: none !important; }
+  /* Text-Logo der eigenen Sport-Domain (Platzhalter bis zum echten Logo). */
+  .sport-marke { display:inline-block; color: var(--accent); font-size: 26px;
+    font-weight: 800; letter-spacing: .3px; cursor: pointer; padding: 6px 0; }
   /* "+ Deine Ansicht": bewusst nur Text neben der Ueberschrift, kein Knopf. */
   .sport-verein-link { color: var(--text-dim); font-size: 13px; font-weight: 600;
     cursor: pointer; white-space: nowrap; align-self: center; }
@@ -2392,7 +2400,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Aktuell sind keine Titel hinterlegt.', soon: 'In Kürze startet aktuell nichts Neues.', later: 'Für die kommenden Monate ist noch nichts hinterlegt.' },
     kinoFehler: 'Kino-Daten konnten nicht geladen werden.',
     sportTitel: 'Fußball live im TV',
-    sportTeilenText: '⚽ Endlich! Auf einen Blick sehen, welches Fußballspiel bei welchem Streaming-Anbieter oder im Free-TV läuft. („+ Deine Ansicht“ filtert die Spiele zukünftig nur nach deinem Verein)',
+    sportTeilenText: '⚽ Endlich! Auf einen Blick sehen, welches Fußballspiel bei welchem Streaming-Anbieter oder im Free-TV läuft. („+ Dein Verein“ filtert die Spiele zukünftig nur nach deinem Verein)',
     sportLabels: { heute: 'Heute', woche: 'Diese Woche', spaeter: 'Demnächst' },
     sportKeineSpiele: 'Keine Spiele für diese Auswahl.',
     sportFehler: 'Der Spielplan konnte nicht geladen werden.',
@@ -2734,7 +2742,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'No titles on file right now.', soon: 'Nothing new starting soon.', later: 'Nothing on file for the coming months yet.' },
     kinoFehler: 'Cinema data could not be loaded.',
     sportTitel: 'Football live on TV',
-    sportTeilenText: '⚽ Finally! See at a glance which football match is on which streaming service or on free TV. (“+ Your view” filters the schedule to your club’s matches)',
+    sportTeilenText: '⚽ Finally! See at a glance which football match is on which streaming service or on free TV. (“+ Your club” filters the schedule to your club’s matches)',
     sportLabels: { heute: 'Today', woche: 'This week', spaeter: 'Coming up' },
     sportKeineSpiele: 'No matches for this selection.',
     sportFehler: 'The schedule could not be loaded.',
@@ -3073,7 +3081,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Aucun titre référencé pour le moment.', soon: 'Rien de nouveau ne démarre prochainement.', later: 'Rien de référencé pour les mois à venir pour l’instant.' },
     kinoFehler: 'Les données cinéma n’ont pas pu être chargées.',
     sportTitel: 'Foot en direct à la télé',
-    sportTeilenText: '⚽ Enfin ! Voir d’un coup d’œil quel match de foot passe sur quel service de streaming ou en clair. (« + Ta vue » filtre le calendrier sur ton club)',
+    sportTeilenText: '⚽ Enfin ! Voir d’un coup d’œil quel match de foot passe sur quel service de streaming ou en clair. (« + Ton club » filtre le calendrier sur ton club)',
     sportLabels: { heute: 'Aujourd’hui', woche: 'Cette semaine', spaeter: 'À venir' },
     sportKeineSpiele: 'Aucun match pour cette sélection.',
     sportFehler: 'Le calendrier n’a pas pu être chargé.',
@@ -3412,7 +3420,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Ahora mismo no hay títulos registrados.', soon: 'No hay estrenos próximos.', later: 'Aún no hay nada registrado para los próximos meses.' },
     kinoFehler: 'No se pudieron cargar los datos de cine.',
     sportTitel: 'Fútbol en directo por TV',
-    sportTeilenText: '⚽ ¡Por fin! Ver de un vistazo qué partido de fútbol se emite en qué servicio de streaming o en abierto. («+ Tu vista» filtra el calendario por tu equipo)',
+    sportTeilenText: '⚽ ¡Por fin! Ver de un vistazo qué partido de fútbol se emite en qué servicio de streaming o en abierto. («+ Tu club» filtra el calendario por tu equipo)',
     sportLabels: { heute: 'Hoy', woche: 'Esta semana', spaeter: 'Próximamente' },
     sportKeineSpiele: 'No hay partidos para esta selección.',
     sportFehler: 'No se pudo cargar el calendario.',
@@ -3751,7 +3759,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Nessun titolo registrato al momento.', soon: 'Nessuna novità in arrivo a breve.', later: 'Ancora niente in programma per i prossimi mesi.' },
     kinoFehler: 'Impossibile caricare i dati del cinema.',
     sportTitel: 'Calcio in diretta TV',
-    sportTeilenText: '⚽ Finalmente! Vedere a colpo d’occhio quale partita va in onda su quale servizio di streaming o in chiaro. («+ La tua vista» filtra il calendario sulla tua squadra)',
+    sportTeilenText: '⚽ Finalmente! Vedere a colpo d’occhio quale partita va in onda su quale servizio di streaming o in chiaro. («+ La tua squadra» filtra il calendario sulla tua squadra)',
     sportLabels: { heute: 'Oggi', woche: 'Questa settimana', spaeter: 'In arrivo' },
     sportKeineSpiele: 'Nessuna partita per questa selezione.',
     sportFehler: 'Impossibile caricare il calendario.',
@@ -4090,7 +4098,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Op dit moment geen titels bekend.', soon: 'Binnenkort start er niets nieuws.', later: 'Voor de komende maanden is nog niets bekend.' },
     kinoFehler: 'Bioscoopgegevens konden niet worden geladen.',
     sportTitel: 'Voetbal live op tv',
-    sportTeilenText: '⚽ Eindelijk! In één oogopslag zien welke voetbalwedstrijd bij welke streamingdienst of op free-tv te zien is. („+ Jouw weergave” filtert het schema op jouw club)',
+    sportTeilenText: '⚽ Eindelijk! In één oogopslag zien welke voetbalwedstrijd bij welke streamingdienst of op free-tv te zien is. („+ Jouw club” filtert het schema op jouw club)',
     sportLabels: { heute: 'Vandaag', woche: 'Deze week', spaeter: 'Binnenkort' },
     sportKeineSpiele: 'Geen wedstrijden voor deze selectie.',
     sportFehler: 'Het speelschema kon niet worden geladen.',
@@ -4429,7 +4437,7 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Nenhum título registrado no momento.', soon: 'Nada novo estreando em breve.', later: 'Ainda nada registrado para os próximos meses.' },
     kinoFehler: 'Não foi possível carregar os dados de cinema.',
     sportTitel: 'Futebol ao vivo na TV',
-    sportTeilenText: '⚽ Finalmente! Ver de relance qual jogo de futebol passa em qual serviço de streaming ou na TV aberta. («+ Sua visualização» filtra o calendário pelo seu clube)',
+    sportTeilenText: '⚽ Finalmente! Ver de relance qual jogo de futebol passa em qual serviço de streaming ou na TV aberta. («+ Seu clube» filtra o calendário pelo seu clube)',
     sportLabels: { heute: 'Hoje', woche: 'Esta semana', spaeter: 'Em breve' },
     sportKeineSpiele: 'Nenhum jogo para esta seleção.',
     sportFehler: 'Não foi possível carregar o calendário.',
@@ -9757,6 +9765,9 @@ function closeCinemaPage(){
 // Menuepunkte "Filme & Serien" und "Im Kino" sind deshalb entfallen. goHome
 // setzt zusaetzlich die Suche zurueck -- das macht ein Tab-Klick nicht.
 function goHome(){
+  // Auf der eigenen Sport-Domain gibt es kein "zurueck zu Filme & Serien" --
+  // das Logo ist dort der Weg nach oben auf der Sport-Seite.
+  if (SPORT_SEITE_MODUS) { openSportPage(); window.scrollTo(0, 0); return; }
   ANSICHT_PERSON = null;
   momentVerlassen();
   closeCinemaPage();
@@ -9819,6 +9830,12 @@ if (_cinemaSortBtn && _cinemaSortMenu) {
    Nur fuer Region DE: Die Senderrechte gelten fuer Deutschland; in allen
    anderen Regionen bleibt der Knopf versteckt (siehe ganz unten). ---- */
 let sportMode = false;
+// Eigene Sport-Domain (White-Label): Der Server spritzt window.SPORT_SEITE
+// ein, wenn die App ueber die Sport-Domain ausgeliefert wird (SPORT_DOMAIN in
+// backend/server.js). Dann ist die App NUR die Sport-Seite: eigener
+// Markenname statt MovieMatch-Logo, Direkteinstieg, keine Wege in die
+// Filmbereiche, Start ohne Registrierung (Entscheidung 20. August 2026).
+var SPORT_SEITE_MODUS = !!window.SPORT_SEITE;
 let SPORT_DATA = null;                 // { sender, wettbewerbe, spiele }
 // Eigene Sport-Abos (Sender-Slugs). null = nie konfiguriert -- dann bleiben
 // die Badges neutral (kein ✅/🔒) und das Abo-Fenster zeigt eine Vorauswahl,
@@ -9970,7 +9987,7 @@ function sportBadgeHtml(b){
    vorhanden, sonst das Kopier-Fenster (zeigeEinladung). ---- */
 document.getElementById('sportTeilenFabText').textContent = TXT.teilen;
 document.getElementById('sportTeilenFab').onclick = function(){
-  var url = location.origin + '/sport';
+  var url = location.origin + (SPORT_SEITE_MODUS ? '/' : '/sport');
   var text = TXT.sportTeilenText;
   if (navigator.share) {
     navigator.share({ title: TXT.sportTitel, text: text, url: url })
@@ -10131,7 +10148,9 @@ function renderSportChips(){
         // Streaminganbieter-Fenster mit dem Sport-Abo-Abschnitt.
         var abosDa = (Array.isArray(SPORT_ABOS) && SPORT_ABOS.length > 0) || sportAbosVorauswahl().length > 0;
         if (!SPORT_VERF_ABO && !abosDa) {
-          if (CURRENT_USER) openProvidersModal();
+          // Auf der Sport-Domain (Start ohne Registrierung) direkt zur
+          // Abo-Auswahl -- gespeichert wird am Geraet.
+          if (CURRENT_USER || SPORT_SEITE_MODUS) openProvidersModal();
           else openSportAboHinweis();
           return;
         }
@@ -10234,7 +10253,8 @@ function openSportPage(){
   // 2026). replaceState statt pushState -- dieselbe Konvention wie bei den
   // /t/-Titellinks, der Bereichswechsel soll kein eigener Verlaufsschritt
   // sein. Der Server liefert /sport als App aus (siehe backend/server.js).
-  try { history.replaceState(null, '', '/sport'); } catch (e) {}
+  // Auf der eigenen Sport-Domain bleibt die Adresse schlicht '/'.
+  if (!SPORT_SEITE_MODUS) { try { history.replaceState(null, '', '/sport'); } catch (e) {} }
   // Frisch geoeffnet heisst wieder eingeklappt (wie beim Kino) -- und die
   // Wettbewerbe starten mit der gespeicherten Vorauswahl aus "Deine Ansicht".
   // Die gewaehlten Vereine sind dabei AKTIV vorausgewaehlt (Christian,
@@ -10442,9 +10462,42 @@ document.getElementById('sportMenuBtn').onclick = function(){
 document.getElementById('sportHeaderBtn').onclick = function(){ openSportPage(); };
 // Region-Schalter: Die Senderrechte gelten fuer Deutschland -- ausserhalb
 // bleiben Menuepunkt und Kopf-Knopf weg. (Spaeter je Land eine eigene Matrix.)
-if (REGION_WAHL !== 'DE') {
+if (REGION_WAHL !== 'DE' && !SPORT_SEITE_MODUS) {
   document.getElementById('sportMenuBtn').style.display = 'none';
   document.getElementById('sportHeaderBtn').style.display = 'none';
+}
+
+/* ---- Eigene Sport-Domain: Marke statt MovieMatch (siehe SPORT_SEITE_MODUS).
+   Das MovieMatch-Logo weicht einem Text-Logo mit dem Markennamen (kommt vom
+   Server, window.SPORT_SEITE.marke -- Platzhalter, bis der echte Name samt
+   Logo feststeht). Menue ohne Film-Punkte und ohne Anmeldung; die Fusszeile
+   nennt Rechtstexte und OpenLigaDB statt TMDB/Watchlist. ---- */
+if (SPORT_SEITE_MODUS) {
+  var _marke = (window.SPORT_SEITE && window.SPORT_SEITE.marke) || 'Fußball live im TV';
+  document.title = _marke;
+  var _logo = document.querySelector('header h1 img.logo');
+  if (_logo) {
+    var mark = document.createElement('span');
+    mark.className = 'sport-marke';
+    mark.textContent = '⚽ ' + _marke;
+    _logo.replaceWith(mark);
+    // Auch die Marke fuehrt nach oben (goHome ist im Sport-Modus die Sport-Seite).
+    mark.addEventListener('click', function(){ goHome(); });
+  }
+  // Menue: ⚽-Eintrag (wir SIND die Sport-Seite), Anleitung (erklaert die
+  // Film-App) und Anmelden (Start ohne Registrierung) verschwinden; der
+  // ⚽-Schnellzugriff im Kopf ebenso. Ueber eine BODY-KLASSE statt inline:
+  // renderAuthBar() setzt die Sichtbarkeit von "Anmelden" bei jedem Aufruf
+  // neu und ueberstimmte das fruehe style.display='none'.
+  document.body.classList.add('sport-seite');
+  // Fusszeile: Rechtstexte (gleicher Umfang wie movietaste.de) + Quelle.
+  var fuss = document.querySelector('footer');
+  if (fuss) {
+    fuss.innerHTML = 'Spielplandaten: <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>' +
+      ' · Senderangaben ohne Gewähr<br>' +
+      '<a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · ' +
+      '<a href="nutzungsbedingungen.html">Nutzungsbedingungen</a>';
+  }
 }
 
 /* ---- "Als App speichern": Android hat mit beforeinstallprompt eine echte
@@ -12857,11 +12910,18 @@ async function anbieterSpeichern(ziel){
 async function openProvidersModal(){
   _provShowAll = false;
   _provModal.style.display = 'flex';
-  _provList.textContent = TXT.laedt;
   // Der Sport-Abo-Abschnitt darunter laedt unabhaengig (eigene Daten, eigene
   // Fehlerbehandlung: bei Problemen bleibt er schlicht versteckt) -- ein
   // TMDB-Katalogfehler oben soll ihn nicht mitreissen und umgekehrt.
   sportAbosAbschnittLaden();
+  // Auf der eigenen Sport-Domain abgemeldet gibt es NUR die Sport-Abos: Die
+  // Streaming-Anbieterauswahl gehoert zur Film-App und braucht ein Konto.
+  var nurSport = SPORT_SEITE_MODUS && !CURRENT_USER;
+  _provList.style.display = nurSport ? 'none' : '';
+  var intro = _provModal.querySelector('.prov-intro');
+  if (intro) intro.style.display = nurSport ? 'none' : '';
+  if (nurSport) { _provList.textContent = ''; return; }
+  _provList.textContent = TXT.laedt;
   try {
     await anbieterKatalogLaden();
     renderProvidersList();
@@ -12881,9 +12941,12 @@ document.getElementById('providersSaveBtn').onclick = async function(){
   try {
     // Sport-Abos zuerst: Sie speichern immer mindestens am Geraet
     // (localStorage) und sollen nicht verlorengehen, falls die
-    // Anbieterauswahl dahinter fehlschlaegt (z.B. abgemeldet).
+    // Anbieterauswahl dahinter fehlschlaegt.
     await sportAbosSpeichern();
-    await anbieterSpeichern();
+    // Abgemeldet gibt es nichts am Konto zu speichern -- der PUT der
+    // Anbieterauswahl scheiterte mit 401 und meldete faelschlich einen
+    // Fehler (relevant v.a. auf der Sport-Domain ohne Registrierung).
+    if (CURRENT_USER) await anbieterSpeichern();
     closeProvidersModal();
     renderCurrentTab();
   } catch (e) {
@@ -13733,7 +13796,7 @@ renderCurrentTab();
 // Direkteinstieg ueber die geteilte URL: /sport oeffnet die Sport-Ansicht --
 // bewusst OHNE Regionspruefung (ein geteilter Link soll immer ankommen) und
 // bewusst NACH listenAnsichtHerstellen() oben, das jede Vollseite schliesst.
-if (/^\/sport\/?$/.test(location.pathname)) openSportPage();
+if (SPORT_SEITE_MODUS || /^\/sport\/?$/.test(location.pathname)) openSportPage();
 apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() => { CURRENT_USER = null; }).finally(() => {
   renderAuthBar();
   updateProfileBtn();
@@ -13804,7 +13867,8 @@ apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() =>
           }).catch(function(){});
         }
       };
-      if (sportMode) window._sportVertagteStrecken = strecken;
+      if (SPORT_SEITE_MODUS) { /* eigene Sport-Domain: nie -- es gibt kein "danach" */ }
+      else if (sportMode) window._sportVertagteStrecken = strecken;
       else strecken();
     }
   }

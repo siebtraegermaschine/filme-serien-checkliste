@@ -121,6 +121,60 @@ app.use('/api/events', eventsRouter);
 app.use('/api/kpi', kpiRouter);
 app.use('/api/onboarding', onboardingRouter);
 
+/* ---- Sport-Domain (White-Label, PLAN-SPORT.md): Dieselbe App unter einer
+   eigenen Domain, wahrgenommen als eigenstaendige Sport-Seite. AKTIV erst,
+   wenn SPORT_DOMAIN gesetzt ist (docker-compose.yml, environment) -- bis
+   dahin ist dieser Block wirkungslos. SPORT_BRAND ist der Markenname fuers
+   Logo/OG (Platzhalter, bis Christian den echten Namen festlegt).
+
+   Ausgeliefert wird dieselbe index.html, nur mit (a) eigenen Open-Graph-
+   Angaben ohne Logo-Bild, (b) eigenem <title> und (c) einem eingespritzten
+   window.SPORT_SEITE-Flag -- das Frontend schaltet damit in den Sport-Modus
+   (Direkteinstieg, eigene Marke, Filmbereiche ausgeblendet; siehe
+   index.html, Abschnitt "Eigene Sport-Domain"). Alles Weitere -- API,
+   statische Dateien, Rechtstexte (gleicher Umfang wie movietaste.de,
+   Entscheidung 20. August 2026) -- laeuft unveraendert; App-Pfade, die es
+   hier nicht gibt (SEO-Seiten, /t/-Links), leiten auf movietaste.de um. */
+const SPORT_DOMAIN = (process.env.SPORT_DOMAIN || '').toLowerCase();
+const SPORT_BRAND = process.env.SPORT_BRAND || 'Fußball live im TV';
+function istSportDomain(req) {
+  if (!SPORT_DOMAIN) return false;
+  const h = String(req.hostname || '').toLowerCase();
+  return h === SPORT_DOMAIN || h === 'www.' + SPORT_DOMAIN;
+}
+function sportSeiteHtml() {
+  const basis = 'https://' + SPORT_DOMAIN;
+  const beschreibung = '⚽ Endlich! Auf einen Blick sehen, welches Fußballspiel bei welchem '
+    + 'Streaming-Anbieter oder im Free-TV läuft.';
+  const block = [
+    '<meta property="og:site_name" content="' + attrEsc(SPORT_BRAND) + '">',
+    '<meta property="og:type" content="website">',
+    '<meta property="og:url" content="' + basis + '/">',
+    '<meta property="og:title" content="' + attrEsc(SPORT_BRAND) + '">',
+    '<meta property="og:description" content="' + attrEsc(beschreibung) + '">',
+    '<meta name="twitter:card" content="summary">',
+    '<script>window.SPORT_SEITE = ' + JSON.stringify({ marke: SPORT_BRAND }) + ';</script>',
+  ].join('\n');
+  let html = indexHtml();
+  const a = html.indexOf(OG_START);
+  const b = html.indexOf(OG_ENDE);
+  if (a >= 0 && b >= 0) html = html.slice(0, a) + block + html.slice(b + OG_ENDE.length);
+  return html.replace(/<title>[^<]*<\/title>/, '<title>' + attrEsc(SPORT_BRAND) + '</title>');
+}
+app.use((req, res, next) => {
+  if (!istSportDomain(req)) return next();
+  const p = req.path;
+  if (p === '/' || p === '/sport') return res.type('html').send(sportSeiteHtml());
+  // Eigene, schlichte robots.txt -- die von movietaste.de verweist auf deren
+  // Sitemap, die hier nichts verloren hat.
+  if (p === '/robots.txt') return res.type('txt').send('User-agent: *\nAllow: /\n');
+  // Statische Dateien (Bilder, Rechtstexte, Manifest, ...) laufen normal weiter.
+  if (/\.[a-z0-9]+$/i.test(p)) return next();
+  // Alles Uebrige (SEO-Seiten, /t/-Titellinks, Passwort-Reset, ...) gehoert
+  // zur Film-App -- dauerhaft dorthin verweisen statt hier zu spiegeln.
+  return res.redirect(301, 'https://movietaste.de' + req.originalUrl);
+});
+
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
 const frontendRoot = path.join(__dirname, '..');
 

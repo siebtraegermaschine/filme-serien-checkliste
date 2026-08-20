@@ -33,3 +33,20 @@ movietaste.de, www.movietaste.de {
 
 	reverse_proxy backend:3000
 }
+
+# ---- Sport-Domain (White-Label, PLAN-SPORT.md) ----
+# Aktivieren, sobald der Domainname feststeht und der A-Record auf diesen
+# Server zeigt: Block einkommentieren, Domain eintragen, dazu SPORT_DOMAIN/
+# SPORT_BRAND in docker-compose.yml setzen -- Zertifikat holt Caddy selbst.
+# sport-domain.de, www.sport-domain.de {
+# 	encode zstd gzip
+# 	header {
+# 		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+# 		X-Frame-Options "DENY"
+# 		Content-Security-Policy "frame-ancestors 'none'"
+# 		X-Content-Type-Options "nosniff"
+# 		Referrer-Policy "strict-origin-when-cross-origin"
+# 		-Server
+# 	}
+# 	reverse_proxy backend:3000
+# }

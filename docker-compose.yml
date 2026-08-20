@@ -26,6 +26,10 @@ services:
       - backend/.env
     environment:
       NODE_ENV: production
+      # Sport-Domain (White-Label) aktivieren, sobald der Name feststeht --
+      # zusammen mit dem Host-Block im Caddyfile (siehe dort):
+      # SPORT_DOMAIN: sport-domain.de
+      # SPORT_BRAND: "Markenname"
     volumes:
       # Datenbank-Sicherungen (siehe backend/lib/sicherung.js). Eigenes Volume,
       # damit sie ein Neubauen des Images ueberstehen -- ohne das laegen sie im
