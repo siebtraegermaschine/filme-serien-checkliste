@@ -118,3 +118,4 @@ h3 { font-size: 16px; margin: 20px 0 10px; color: var(--text-dim); }
 tr.hervor td { color: var(--accent); font-weight: 700; }
 .form-liste { margin: 6px 0 16px; padding-left: 20px; }
 .form-liste li { margin: 3px 0; }
+.marke-logo { height: 52px; width: auto; display: block; }

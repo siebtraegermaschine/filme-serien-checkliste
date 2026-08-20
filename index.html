@@ -551,9 +551,9 @@
      Sichtbarkeit von "Anmelden" bei jedem Aufruf inline neu setzt. */
   body.sport-seite #sportMenuBtn, body.sport-seite #howToBtn,
   body.sport-seite #authBarLogin, body.sport-seite #sportHeaderBtn { display: none !important; }
-  /* Text-Logo der eigenen Sport-Domain (Platzhalter bis zum echten Logo). */
-  .sport-marke { display:inline-block; color: var(--accent); font-size: 26px;
-    font-weight: 800; letter-spacing: .3px; cursor: pointer; padding: 6px 0; }
+  /* Bild-Logo der eigenen Sport-Domain (couchultras.png, transparent). */
+  .sport-marke-logo { display:block; margin: 0 auto; max-width: min(320px, 78vw);
+    height: auto; cursor: pointer; }
   /* "+ Deine Ansicht": bewusst nur Text neben der Ueberschrift, kein Knopf. */
   .sport-verein-link { color: var(--text-dim); font-size: 13px; font-weight: 600;
     cursor: pointer; white-space: nowrap; align-self: center; }
@@ -1871,6 +1871,11 @@
       <!-- Die beiden Inhaltsfilter zuerst, durch eine Linie vom Rest
            abgesetzt (auf Wunsch vom 13. August hervorgehoben). -->
       <button type="button" id="settingsProvidersBtn" class="modal-yes">Deine Streaming-Anbieter</button>
+      <!-- Sport-Abos brauchen KEIN Konto (Geraete-Speicherung) -- der Punkt
+           ist deshalb auch abgemeldet sichtbar (Region DE bzw. Sport-Domain).
+           Ohne ihn gab es nach dem ersten Speichern keinen Weg zurueck zur
+           Auswahl (Christian, 20.08.2026). -->
+      <button type="button" id="settingsSportAbosBtn" class="modal-yes" style="display:none">Sport-Abos</button>
       <button type="button" id="settingsKinosBtn" class="modal-yes">Deine Kinos</button>
       <hr class="settings-sep" id="settingsSep">
       <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Filme/Serien</button>
@@ -5049,6 +5054,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Thanks for your feedback!' },
     '#settingsModal h3': { t: 'Settings' },
     '#settingsProvidersBtn': { t: 'Your streaming services' },
+    '#settingsSportAbosBtn': { t: 'Sports subscriptions' },
     '#settingsKinosBtn': { t: 'Your cinemas' },
     '#settingsHiddenBtn': { t: 'Removed movies/series' },
     '#settingsAccountBtn': { t: 'Account details' },
@@ -5179,6 +5185,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Merci pour ton retour !' },
     '#settingsModal h3': { t: 'Réglages' },
     '#settingsProvidersBtn': { t: 'Tes services de streaming' },
+    '#settingsSportAbosBtn': { t: 'Abonnements sport' },
     '#settingsKinosBtn': { t: 'Tes cinémas' },
     '#settingsHiddenBtn': { t: 'Films/séries retirés' },
     '#settingsAccountBtn': { t: 'Données du compte' },
@@ -5309,6 +5316,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: '¡Gracias por tus comentarios!' },
     '#settingsModal h3': { t: 'Ajustes' },
     '#settingsProvidersBtn': { t: 'Tus plataformas de streaming' },
+    '#settingsSportAbosBtn': { t: 'Suscripciones deportivas' },
     '#settingsKinosBtn': { t: 'Tus cines' },
     '#settingsHiddenBtn': { t: 'Películas/series eliminadas' },
     '#settingsAccountBtn': { t: 'Datos de la cuenta' },
@@ -5439,6 +5447,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Grazie per il tuo feedback!' },
     '#settingsModal h3': { t: 'Impostazioni' },
     '#settingsProvidersBtn': { t: 'I tuoi servizi di streaming' },
+    '#settingsSportAbosBtn': { t: 'Abbonamenti sport' },
     '#settingsKinosBtn': { t: 'I tuoi cinema' },
     '#settingsHiddenBtn': { t: 'Film/serie rimossi' },
     '#settingsAccountBtn': { t: 'Dati dell’account' },
@@ -5569,6 +5578,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Bedankt voor je feedback!' },
     '#settingsModal h3': { t: 'Instellingen' },
     '#settingsProvidersBtn': { t: 'Jouw streamingdiensten' },
+    '#settingsSportAbosBtn': { t: 'Sportabonnementen' },
     '#settingsKinosBtn': { t: 'Jouw bioscopen' },
     '#settingsHiddenBtn': { t: 'Verwijderde films/series' },
     '#settingsAccountBtn': { t: 'Accountgegevens' },
@@ -5699,6 +5709,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Obrigado pelo seu feedback!' },
     '#settingsModal h3': { t: 'Configurações' },
     '#settingsProvidersBtn': { t: 'Seus serviços de streaming' },
+    '#settingsSportAbosBtn': { t: 'Assinaturas de esporte' },
     '#settingsKinosBtn': { t: 'Seus cinemas' },
     '#settingsHiddenBtn': { t: 'Filmes/séries removidos' },
     '#settingsAccountBtn': { t: 'Dados da conta' },
@@ -10461,6 +10472,12 @@ document.getElementById('sportMenuBtn').onclick = function(){
 };
 // Zweiter Weg: der ⚽-Knopf im Kopf, links neben dem Menue.
 document.getElementById('sportHeaderBtn').onclick = function(){ openSportPage(); };
+// Einstellungen -> Sport-Abos (kontofrei; oeffnet fuer Gaeste die reine
+// Sport-Abo-Auswahl, siehe openProvidersModal).
+document.getElementById('settingsSportAbosBtn').onclick = function(){
+  closeSettingsModal();
+  openProvidersModal();
+};
 // Region-Schalter: Die Senderrechte gelten fuer Deutschland -- ausserhalb
 // bleiben Menuepunkt und Kopf-Knopf weg. (Spaeter je Land eine eigene Matrix.)
 if (REGION_WAHL !== 'DE' && !SPORT_SEITE_MODUS) {
@@ -10478,9 +10495,12 @@ if (SPORT_SEITE_MODUS) {
   document.title = _marke;
   var _logo = document.querySelector('header h1 img.logo');
   if (_logo) {
-    var mark = document.createElement('span');
-    mark.className = 'sport-marke';
-    mark.textContent = '⚽ ' + _marke;
+    // Das echte CouchUltras-Logo (Christian, 20.08.2026) statt des frueheren
+    // ⚽-Text-Platzhalters; transparenter Hintergrund, 480px-Fassung im Repo.
+    var mark = document.createElement('img');
+    mark.className = 'sport-marke-logo';
+    mark.src = 'couchultras.png';
+    mark.alt = _marke + ' – Wissen, wo’s läuft.';
     _logo.replaceWith(mark);
     // Auch die Marke fuehrt nach oben (goHome ist im Sport-Modus die Sport-Seite).
     mark.addEventListener('click', function(){ goHome(); });
@@ -11666,6 +11686,11 @@ function einstellungenSichtbarkeit(){
       var el = document.getElementById(id);
       if (el) el.style.display = an ? '' : 'none';
     });
+  // Sport-Abos: kontofrei (Geraete-Speicherung), aber nur wo es den
+  // Sport-Bereich gibt. Angemeldet reicht der Punkt "Deine Streaming-
+  // Anbieter" darueber (der die Sport-Abos enthaelt) -- doppelt waere Laerm.
+  var sportBtn = document.getElementById('settingsSportAbosBtn');
+  if (sportBtn) sportBtn.style.display = (!an && (REGION_WAHL === 'DE' || SPORT_SEITE_MODUS)) ? '' : 'none';
 }
 function openSettingsModal(){
   MAIL_GRUPPE_OFFEN = false;   // Aufklapp-Gruppe startet zu
@@ -12917,7 +12942,7 @@ async function openProvidersModal(){
   sportAbosAbschnittLaden();
   // Auf der eigenen Sport-Domain abgemeldet gibt es NUR die Sport-Abos: Die
   // Streaming-Anbieterauswahl gehoert zur Film-App und braucht ein Konto.
-  var nurSport = SPORT_SEITE_MODUS && !CURRENT_USER;
+  var nurSport = !CURRENT_USER;
   _provList.style.display = nurSport ? 'none' : '';
   var intro = _provModal.querySelector('.prov-intro');
   if (intro) intro.style.display = nurSport ? 'none' : '';

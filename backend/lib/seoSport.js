@@ -171,7 +171,7 @@ function sportKopfFuss(ctx) {
   if (!ctx.marke) return {};
   return {
     basis: ctx.basis,
-    kopfHtml: `<header class="seo-kopf"><a class="marke" href="/">⚽ ${attrEsc(ctx.marke)}</a>
+    kopfHtml: `<header class="seo-kopf"><a class="marke" href="/"><img class="marke-logo" src="/couchultras.png" alt="${attrEsc(ctx.marke)} – Wissen, wo’s läuft."></a>
       <nav class="seo-nav"><a href="/">Zum Spielplan</a></nav></header>`,
     fussHtml: `<footer>
       <a href="/impressum.html">Impressum</a>
