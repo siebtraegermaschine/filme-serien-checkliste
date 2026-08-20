@@ -196,7 +196,9 @@ function antwortSatz(daten) {
     ? `live bei ${sender.join(' und ')}`
     : 'der übertragende Sender steht noch nicht fest';
   const wann = `am ${datumLang.format(m.anstoss)} um ${uhrzeit.format(m.anstoss)} Uhr`;
-  const comp = `${wettbewerbName(daten, m.wettbewerb)}${m.runde ? ` (${m.runde})` : ''}`;
+  // Komma statt Klammer: die Runde steht selbst schon mal in Klammern
+  // ("Supercup (Finale)" ergaebe sonst eine Doppelklammer im Antwortsatz).
+  const comp = `${wettbewerbName(daten, m.wettbewerb)}${m.runde ? `, ${m.runde}` : ''}`;
   switch (daten.stufe) {
     case 'beendet': {
       const erg = m.tore_heim != null ? ` und endete ${m.tore_heim}:${m.tore_gast}` : '';
