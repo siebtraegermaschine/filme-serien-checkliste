@@ -26,10 +26,11 @@ services:
       - backend/.env
     environment:
       NODE_ENV: production
-      # Sport-Domain (White-Label) aktivieren, sobald der Name feststeht --
-      # zusammen mit dem Host-Block im Caddyfile (siehe dort):
-      # SPORT_DOMAIN: sport-domain.de
-      # SPORT_BRAND: "Markenname"
+      # Sport-Domain (White-Label, aktiviert 20.08.2026) -- zusammen mit dem
+      # Host-Block im Caddyfile. Schaltet Direkteinstieg, eigene Marke und
+      # den Umzug der SEO-Spielseiten (301 von movietaste) frei.
+      SPORT_DOMAIN: couchultras.com
+      SPORT_BRAND: "CouchUltras"
     volumes:
       # Datenbank-Sicherungen (siehe backend/lib/sicherung.js). Eigenes Volume,
       # damit sie ein Neubauen des Images ueberstehen -- ohne das laegen sie im
