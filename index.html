@@ -10738,8 +10738,11 @@ if (SPORT_SEITE_MODUS) {
   if (fuss) {
     // Nur die Rechtstexte -- OpenLigaDB steht wie TMDB & Co. unter
     // Einstellungen -> Credits (Christian, 20.08.2026).
-    fuss.innerHTML = '<a href="/spiele">Spielplan &amp; Sender im Überblick</a><br>' +
-      '<a href="/sitemap">Sitemap</a> · <a href="impressum.html">Impressum</a> · ' +
+    // EIN Verzeichnis-Link statt zwei (Christian, 21.08.2026): "Sitemap"
+    // ist die ausfuehrlichste Fassung (Hubs + saemtliche Spiele); die
+    // Spiele-Uebersicht /spiele bleibt als SEO-Seite bestehen und ist von
+    // dort sowie von den Hubs verlinkt.
+    fuss.innerHTML = '<a href="/sitemap">Sitemap</a> · <a href="impressum.html">Impressum</a> · ' +
       '<a href="datenschutz.html">Datenschutz</a> · ' +
       '<a href="nutzungsbedingungen.html">Nutzungsbedingungen</a>';
   }
