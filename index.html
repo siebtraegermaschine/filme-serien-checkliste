@@ -563,8 +563,14 @@
   .sport-hilfe-blase::before { content: ''; position: absolute; top: -7px; right: 22px;
     width: 12px; height: 12px; background: var(--card); border-left: 1px solid var(--accent);
     border-top: 1px solid var(--accent); transform: rotate(45deg); }
-  /* Sender-Blase zeigt auf ein Badge links in der Karte -- Pfeil links oben. */
-  .sport-hilfe-blase.blase-links::before { right: auto; left: 22px; }
+  /* Sender-Blase steht RECHTS NEBEN dem Badge (Pfeil links mittig) --
+     unterhalb kollidierte sie auf kleinen Schirmen mit der Teilen-Blase
+     (Christian, 21.08.2026). */
+  .sport-hilfe-blase.blase-seitlich::before { top: 14px; right: auto; left: -7px;
+    transform: rotate(-45deg); }
+  /* Teilen-Blase breiter und damit flacher -- weniger Zeilen, weniger
+     Kollisionsflaeche ueber dem Knopf. */
+  .sport-hilfe-blase.blase-unten { max-width: min(460px, calc(100vw - 24px)); }
   /* Dritte Blase haengt UEBER dem Teilen-Knopf -- Pfeilspitze nach unten. */
   .sport-hilfe-blase.blase-unten::before { top: auto; bottom: -7px; right: auto;
     left: 50%; margin-left: -6px; transform: rotate(225deg); }
@@ -2194,7 +2200,7 @@
   <div class="sport-hilfe-blase" id="sportHilfeVereinBlase"></div>
   <div class="sport-hilfe-blase" id="sportHilfeAppBlase"></div>
   <div class="sport-hilfe-blase blase-unten" id="sportHilfeTeilenBlase"></div>
-  <div class="sport-hilfe-blase blase-links" id="sportHilfeSenderBlase"></div>
+  <div class="sport-hilfe-blase blase-seitlich" id="sportHilfeSenderBlase"></div>
 </div>
 
 <!-- Hinweis, wenn "Deine Streaming-Anbieter" ohne festgelegte Abos geklickt
@@ -10212,8 +10218,12 @@ function sportHilfeZeigen(){
   if (badge) {
     sb.textContent = TXT.sportHilfeSender;
     var br = badge.getBoundingClientRect();
-    sb.style.top = (br.bottom + 12) + 'px';
-    sb.style.left = Math.max(12, br.left - 8) + 'px';
+    var links = br.right + 12;
+    sb.style.top = (br.top - 10) + 'px';
+    sb.style.left = links + 'px';
+    // Nicht ueber den rechten Rand hinaus -- auf schmalen Schirmen wird die
+    // Blase entsprechend schmaler (und dafuer hoeher, nach unten ist Platz).
+    sb.style.maxWidth = Math.max(140, window.innerWidth - links - 12) + 'px';
     sb.style.display = '';
   } else {
     sb.style.display = 'none';
