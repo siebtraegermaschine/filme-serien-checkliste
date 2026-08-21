@@ -563,8 +563,11 @@
   .sport-hilfe-blase::before { content: ''; position: absolute; top: -7px; right: 22px;
     width: 12px; height: 12px; background: var(--card); border-left: 1px solid var(--accent);
     border-top: 1px solid var(--accent); transform: rotate(45deg); }
-  #sportHilfeOk { position: absolute; left: 50%; transform: translateX(-50%);
-    bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+  /* Dritte Blase haengt UEBER dem Teilen-Knopf -- Pfeilspitze nach unten. */
+  .sport-hilfe-blase.blase-unten::before { top: auto; bottom: -7px; right: auto;
+    left: 50%; margin-left: -6px; transform: rotate(225deg); }
+  #sportHilfeOk { position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%); }
   /* Bild-Logo der eigenen Sport-Domain (couchultras.png, transparent). */
   .sport-marke-logo { display:block; margin: 0 auto; max-width: min(240px, 58vw);
     height: auto; cursor: pointer; }
@@ -2180,6 +2183,7 @@
 <div id="sportHilfe" style="display:none">
   <div class="sport-hilfe-blase" id="sportHilfeVereinBlase"></div>
   <div class="sport-hilfe-blase" id="sportHilfeAppBlase"></div>
+  <div class="sport-hilfe-blase blase-unten" id="sportHilfeTeilenBlase"></div>
   <button type="button" id="sportHilfeOk" class="auth-submit"></button>
 </div>
 
@@ -2450,6 +2454,7 @@ var UI_TEXTE = {
     sportAboHinweisKnopf: 'Kostenlos registrieren / anmelden',
     sportHilfeVerein: 'Tippe auf „+ Dein Verein“: Wähle deinen Verein und deine Wettbewerbe — der Spielplan ist dann künftig genau danach vorgefiltert.',
     sportHilfeApp: 'Im Menü findest du „Als App speichern“ — damit landet die Seite wie eine App auf deinem Startbildschirm.',
+    sportHilfeTeilen: 'Wische ein Spiel nach rechts, um genau dieses Spiel samt Übertragung zu teilen — oder teile die ganze Übersicht über den Teilen-Knopf.',
     sportHilfeOk: 'Alles klar',
     sportFreiEmpfangbar: 'Frei empfangbar',
     sportImAbo: 'In deinem Abo enthalten',
@@ -2795,6 +2800,7 @@ var UI_TEXTE = {
     sportAboHinweisKnopf: 'Register / sign in for free',
     sportHilfeVerein: 'Tap “+ Your club”: pick your club and competitions — the schedule will be pre-filtered for you from then on.',
     sportHilfeApp: 'In the menu you’ll find “Save as app” to put this page on your home screen like an app.',
+    sportHilfeTeilen: 'Swipe a match to the right to share that match and its broadcast — or share the whole page via the share button.',
     sportHilfeOk: 'Got it',
     sportFreiEmpfangbar: 'Free to watch',
     sportImAbo: 'Included in your subscription',
@@ -3137,6 +3143,7 @@ var UI_TEXTE = {
     sportAboHinweisKnopf: 'S’inscrire / se connecter',
     sportHilfeVerein: 'Touche « + Ton club » : choisis ton club et tes compétitions — le calendrier sera ensuite préfiltré pour toi.',
     sportHilfeApp: 'Dans le menu, « Enregistrer comme appli » place cette page sur ton écran d’accueil.',
+    sportHilfeTeilen: 'Fais glisser un match vers la droite pour le partager avec sa diffusion — ou partage toute la page via le bouton Partager.',
     sportHilfeOk: 'Compris',
     sportFreiEmpfangbar: 'En clair',
     sportImAbo: 'Inclus dans ton abonnement',
@@ -3479,6 +3486,7 @@ var UI_TEXTE = {
     sportAboHinweisKnopf: 'Registrarse / iniciar sesión',
     sportHilfeVerein: 'Toca «+ Tu club»: elige tu equipo y tus competiciones — el calendario quedará prefiltrado para ti.',
     sportHilfeApp: 'En el menú encontrarás «Guardar como app» para poner esta página en tu pantalla de inicio.',
+    sportHilfeTeilen: 'Desliza un partido hacia la derecha para compartirlo con su emisión — o comparte toda la página con el botón de compartir.',
     sportHilfeOk: 'Entendido',
     sportFreiEmpfangbar: 'En abierto',
     sportImAbo: 'Incluido en tu suscripción',
@@ -3821,6 +3829,7 @@ var UI_TEXTE = {
     sportAboHinweisKnopf: 'Registrati / accedi',
     sportHilfeVerein: 'Tocca «+ La tua squadra»: scegli squadra e competizioni — il calendario sarà poi prefiltrato per te.',
     sportHilfeApp: 'Nel menu trovi «Salva come app» per mettere questa pagina sulla schermata Home.',
+    sportHilfeTeilen: 'Scorri una partita verso destra per condividerla con la sua trasmissione — oppure condividi l’intera pagina con il pulsante Condividi.',
     sportHilfeOk: 'Ho capito',
     sportFreiEmpfangbar: 'In chiaro',
     sportImAbo: 'Incluso nel tuo abbonamento',
@@ -4163,6 +4172,7 @@ var UI_TEXTE = {
     sportAboHinweisKnopf: 'Gratis registreren / inloggen',
     sportHilfeVerein: 'Tik op „+ Jouw club”: kies je club en competities — het speelschema wordt daarna voor jou voorgefilterd.',
     sportHilfeApp: 'In het menu vind je „Als app opslaan” om deze pagina als app op je beginscherm te zetten.',
+    sportHilfeTeilen: 'Veeg een wedstrijd naar rechts om precies die wedstrijd met uitzending te delen — of deel de hele pagina via de deelknop.',
     sportHilfeOk: 'Begrepen',
     sportFreiEmpfangbar: 'Gratis te zien',
     sportImAbo: 'Inbegrepen in je abonnement',
@@ -4505,6 +4515,7 @@ var UI_TEXTE = {
     sportAboHinweisKnopf: 'Registrar-se / entrar',
     sportHilfeVerein: 'Toque em «+ Seu clube»: escolha seu clube e competições — o calendário ficará pré-filtrado para você.',
     sportHilfeApp: 'No menu você encontra «Salvar como app» para colocar esta página na sua tela inicial.',
+    sportHilfeTeilen: 'Deslize um jogo para a direita para compartilhá-lo com sua transmissão — ou compartilhe a página inteira pelo botão de compartilhar.',
     sportHilfeOk: 'Entendi',
     sportFreiEmpfangbar: 'Em TV aberta',
     sportImAbo: 'Incluído na sua assinatura',
@@ -10181,6 +10192,17 @@ function sportHilfeZeigen(){
   var mb = menue.getBoundingClientRect();
   ab.style.top = (mb.bottom + 12) + 'px';
   ab.style.right = Math.max(12, window.innerWidth - mb.right - 6) + 'px';
+  // Teilen-Blase ueber dem unten mittig schwebenden Teilen-Knopf: erklaert
+  // Wisch-Teilen einzelner Spiele UND den Knopf fuer die ganze Seite
+  // (Christian, 21.08.2026) -- bewusst EIN Feld fuer beides, die Geste und
+  // der Knopf sind zwei Wege desselben Teilens.
+  var tb = document.getElementById('sportHilfeTeilenBlase');
+  tb.textContent = TXT.sportHilfeTeilen;
+  var fab = document.getElementById('sportTeilenFab');
+  var fb = fab.getBoundingClientRect();
+  tb.style.bottom = (window.innerHeight - fb.top + 12) + 'px';
+  tb.style.left = '50%';
+  tb.style.transform = 'translateX(-50%)';
   function schliessen(){
     ebene.style.display = 'none';
     try { localStorage.setItem(SPORT_HILFE_KEY, '1'); } catch (e) {}
