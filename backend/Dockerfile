@@ -28,7 +28,11 @@ RUN cd backend && npm ci --omit=dev
 # live sind -- sie binden /seo.css ein, das lieferte einen 404, und die Seiten
 # erschienen komplett ungestylt. Genau derselbe Fehler wie oben beschrieben,
 # nur ein Muster weiter.
-COPY *.html *.css *.png *.svg manifest.json couchultras-manifest.json robots.txt ./
+# *.json bewusst einzeln (kein Glob): package.json & Co. gehoeren nicht in
+# den Auslieferungsordner. Wer eine neue Wurzel-JSON ergaenzt, muss sie HIER
+# nachtragen -- das Manifest (20.08.) und sport-inhalte.json (21.08.) fehlten
+# beide zunaechst und lieferten still 404.
+COPY *.html *.css *.png *.svg manifest.json couchultras-manifest.json sport-inhalte.json sport-rechte.json robots.txt ./
 COPY tour/ ./tour/
 COPY backend/ ./backend/
 
