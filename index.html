@@ -1485,7 +1485,11 @@
          (einstellungenSichtbarkeit). -->
     <!-- Direkt zum "Deine Ansicht"-Popup (Verein + Wettbewerbs-Vorauswahl)
          -- derselbe Dialog wie der Textlink auf der Sport-Seite. -->
-    <button type="button" id="vereinMenuBtn" class="nav-menu-item">+ Dein Verein</button>
+    <button type="button" id="vereinMenuBtn" class="nav-menu-item">Dein Verein</button>
+    <!-- Aus den Einstellungen hierher gezogen (Christian, 21.08.2026):
+         die Sport-Abos gehoeren neben den Verein, nicht hinter einen
+         weiteren Klick. Gaeste bekommen die reine Sport-Abo-Auswahl. -->
+    <button type="button" id="sportAbosMenuBtn" class="nav-menu-item">Deine Sport-Abos</button>
     <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
     <hr class="nav-menu-sep">
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
@@ -1906,11 +1910,6 @@
       <!-- Die beiden Inhaltsfilter zuerst, durch eine Linie vom Rest
            abgesetzt (auf Wunsch vom 13. August hervorgehoben). -->
       <button type="button" id="settingsProvidersBtn" class="modal-yes">Deine Streaming-Anbieter</button>
-      <!-- Sport-Abos brauchen KEIN Konto (Geraete-Speicherung) -- der Punkt
-           ist deshalb auch abgemeldet sichtbar (Region DE bzw. Sport-Domain).
-           Ohne ihn gab es nach dem ersten Speichern keinen Weg zurueck zur
-           Auswahl (Christian, 20.08.2026). -->
-      <button type="button" id="settingsSportAbosBtn" class="modal-yes" style="display:none">Sport-Abos</button>
       <button type="button" id="settingsKinosBtn" class="modal-yes">Deine Kinos</button>
       <hr class="settings-sep" id="settingsSep">
       <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Filme/Serien</button>
@@ -5130,7 +5129,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Thanks for your feedback!' },
     '#settingsModal h3': { t: 'Settings' },
     '#settingsProvidersBtn': { t: 'Your streaming services' },
-    '#settingsSportAbosBtn': { t: 'Sports subscriptions' },
+    '#sportAbosMenuBtn': { t: 'Your sports subscriptions' },
     '#settingsKinosBtn': { t: 'Your cinemas' },
     '#settingsHiddenBtn': { t: 'Removed movies/series' },
     '#settingsAccountBtn': { t: 'Account details' },
@@ -5160,7 +5159,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Football live on TV' },
     '#providersSportTitel': { t: 'Sports subscriptions' },
     '#sportVereinBtn': { t: '+ Your club' },
-    '#vereinMenuBtn': { t: '+ Your club' },
+    '#vereinMenuBtn': { t: 'Your club' },
     '#sportHeaderBtn': { a: 'Sports' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'The schedules in the Sports section come from <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, a free community project. Broadcaster information is derived rule-based from the German TV rights split – without guarantee.' },
     '#vereinTitel': { t: 'Your view' },
@@ -5262,7 +5261,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Merci pour ton retour !' },
     '#settingsModal h3': { t: 'Réglages' },
     '#settingsProvidersBtn': { t: 'Tes services de streaming' },
-    '#settingsSportAbosBtn': { t: 'Abonnements sport' },
+    '#sportAbosMenuBtn': { t: 'Tes abonnements sport' },
     '#settingsKinosBtn': { t: 'Tes cinémas' },
     '#settingsHiddenBtn': { t: 'Films/séries retirés' },
     '#settingsAccountBtn': { t: 'Données du compte' },
@@ -5292,7 +5291,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Foot en direct à la télé' },
     '#providersSportTitel': { t: 'Abonnements sport' },
     '#sportVereinBtn': { t: '+ Ton club' },
-    '#vereinMenuBtn': { t: '+ Ton club' },
+    '#vereinMenuBtn': { t: 'Ton club' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Les calendriers de la section Sport proviennent d’<a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un projet communautaire libre. Les diffuseurs sont déduits des droits TV allemands – sans garantie.' },
     '#vereinTitel': { t: 'Ta vue' },
@@ -5394,7 +5393,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: '¡Gracias por tus comentarios!' },
     '#settingsModal h3': { t: 'Ajustes' },
     '#settingsProvidersBtn': { t: 'Tus plataformas de streaming' },
-    '#settingsSportAbosBtn': { t: 'Suscripciones deportivas' },
+    '#sportAbosMenuBtn': { t: 'Tus suscripciones deportivas' },
     '#settingsKinosBtn': { t: 'Tus cines' },
     '#settingsHiddenBtn': { t: 'Películas/series eliminadas' },
     '#settingsAccountBtn': { t: 'Datos de la cuenta' },
@@ -5424,7 +5423,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Fútbol en directo por TV' },
     '#providersSportTitel': { t: 'Suscripciones deportivas' },
     '#sportVereinBtn': { t: '+ Tu club' },
-    '#vereinMenuBtn': { t: '+ Tu club' },
+    '#vereinMenuBtn': { t: 'Tu club' },
     '#sportHeaderBtn': { a: 'Deporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Los calendarios de la sección Deporte provienen de <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un proyecto comunitario libre. Las emisoras se derivan de los derechos de TV alemanes – sin garantía.' },
     '#vereinTitel': { t: 'Tu vista' },
@@ -5526,7 +5525,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Grazie per il tuo feedback!' },
     '#settingsModal h3': { t: 'Impostazioni' },
     '#settingsProvidersBtn': { t: 'I tuoi servizi di streaming' },
-    '#settingsSportAbosBtn': { t: 'Abbonamenti sport' },
+    '#sportAbosMenuBtn': { t: 'I tuoi abbonamenti sport' },
     '#settingsKinosBtn': { t: 'I tuoi cinema' },
     '#settingsHiddenBtn': { t: 'Film/serie rimossi' },
     '#settingsAccountBtn': { t: 'Dati dell’account' },
@@ -5556,7 +5555,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Calcio in diretta TV' },
     '#providersSportTitel': { t: 'Abbonamenti sport' },
     '#sportVereinBtn': { t: '+ La tua squadra' },
-    '#vereinMenuBtn': { t: '+ La tua squadra' },
+    '#vereinMenuBtn': { t: 'La tua squadra' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'I calendari della sezione Sport provengono da <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un progetto comunitario libero. Le emittenti sono dedotte dai diritti TV tedeschi – senza garanzia.' },
     '#vereinTitel': { t: 'La tua vista' },
@@ -5658,7 +5657,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Bedankt voor je feedback!' },
     '#settingsModal h3': { t: 'Instellingen' },
     '#settingsProvidersBtn': { t: 'Jouw streamingdiensten' },
-    '#settingsSportAbosBtn': { t: 'Sportabonnementen' },
+    '#sportAbosMenuBtn': { t: 'Jouw sportabonnementen' },
     '#settingsKinosBtn': { t: 'Jouw bioscopen' },
     '#settingsHiddenBtn': { t: 'Verwijderde films/series' },
     '#settingsAccountBtn': { t: 'Accountgegevens' },
@@ -5688,7 +5687,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Voetbal live op tv' },
     '#providersSportTitel': { t: 'Sportabonnementen' },
     '#sportVereinBtn': { t: '+ Jouw club' },
-    '#vereinMenuBtn': { t: '+ Jouw club' },
+    '#vereinMenuBtn': { t: 'Jouw club' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'De speelschema’s in het Sport-gedeelte komen van <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, een vrij communityproject. Zenders worden afgeleid uit de Duitse tv-rechten – zonder garantie.' },
     '#vereinTitel': { t: 'Jouw weergave' },
@@ -5790,7 +5789,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Obrigado pelo seu feedback!' },
     '#settingsModal h3': { t: 'Configurações' },
     '#settingsProvidersBtn': { t: 'Seus serviços de streaming' },
-    '#settingsSportAbosBtn': { t: 'Assinaturas de esporte' },
+    '#sportAbosMenuBtn': { t: 'Suas assinaturas de esporte' },
     '#settingsKinosBtn': { t: 'Seus cinemas' },
     '#settingsHiddenBtn': { t: 'Filmes/séries removidos' },
     '#settingsAccountBtn': { t: 'Dados da conta' },
@@ -5820,7 +5819,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Futebol ao vivo na TV' },
     '#providersSportTitel': { t: 'Assinaturas de esporte' },
     '#sportVereinBtn': { t: '+ Seu clube' },
-    '#vereinMenuBtn': { t: '+ Seu clube' },
+    '#vereinMenuBtn': { t: 'Seu clube' },
     '#sportHeaderBtn': { a: 'Esporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Os calendários da seção Esporte vêm do <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, um projeto comunitário livre. As emissoras são derivadas dos direitos de TV alemães – sem garantia.' },
     '#vereinTitel': { t: 'Sua visualização' },
@@ -10729,10 +10728,10 @@ document.getElementById('sportMenuBtn').onclick = function(){
 };
 // Zweiter Weg: der ⚽-Knopf im Kopf, links neben dem Menue.
 document.getElementById('sportHeaderBtn').onclick = function(){ openSportPage(); };
-// Einstellungen -> Sport-Abos (kontofrei; oeffnet fuer Gaeste die reine
+// Menue -> Deine Sport-Abos (kontofrei; oeffnet fuer Gaeste die reine
 // Sport-Abo-Auswahl, siehe openProvidersModal).
-document.getElementById('settingsSportAbosBtn').onclick = function(){
-  closeSettingsModal();
+document.getElementById('sportAbosMenuBtn').onclick = function(){
+  closeNavMenu();
   openProvidersModal();
 };
 // Region-Schalter: Die Senderrechte gelten fuer Deutschland -- ausserhalb
@@ -10741,6 +10740,7 @@ if (REGION_WAHL !== 'DE' && !SPORT_SEITE_MODUS) {
   document.getElementById('sportMenuBtn').style.display = 'none';
   document.getElementById('sportHeaderBtn').style.display = 'none';
   document.getElementById('vereinMenuBtn').style.display = 'none';
+  document.getElementById('sportAbosMenuBtn').style.display = 'none';
 }
 
 /* ---- Eigene Sport-Domain: Marke statt MovieMatch (siehe SPORT_SEITE_MODUS).
@@ -11949,11 +11949,6 @@ function einstellungenSichtbarkeit(){
       var el = document.getElementById(id);
       if (el) el.style.display = an ? '' : 'none';
     });
-  // Sport-Abos: kontofrei (Geraete-Speicherung), aber nur wo es den
-  // Sport-Bereich gibt. Angemeldet reicht der Punkt "Deine Streaming-
-  // Anbieter" darueber (der die Sport-Abos enthaelt) -- doppelt waere Laerm.
-  var sportBtn = document.getElementById('settingsSportAbosBtn');
-  if (sportBtn) sportBtn.style.display = (!an && (REGION_WAHL === 'DE' || SPORT_SEITE_MODUS)) ? '' : 'none';
 }
 function openSettingsModal(){
   MAIL_GRUPPE_OFFEN = false;   // Aufklapp-Gruppe startet zu
