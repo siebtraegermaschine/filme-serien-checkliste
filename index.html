@@ -563,6 +563,8 @@
   .sport-hilfe-blase::before { content: ''; position: absolute; top: -7px; right: 22px;
     width: 12px; height: 12px; background: var(--card); border-left: 1px solid var(--accent);
     border-top: 1px solid var(--accent); transform: rotate(45deg); }
+  /* Sender-Blase zeigt auf ein Badge links in der Karte -- Pfeil links oben. */
+  .sport-hilfe-blase.blase-links::before { right: auto; left: 22px; }
   /* Dritte Blase haengt UEBER dem Teilen-Knopf -- Pfeilspitze nach unten. */
   .sport-hilfe-blase.blase-unten::before { top: auto; bottom: -7px; right: auto;
     left: 50%; margin-left: -6px; transform: rotate(225deg); }
@@ -2184,6 +2186,7 @@
   <div class="sport-hilfe-blase" id="sportHilfeVereinBlase"></div>
   <div class="sport-hilfe-blase" id="sportHilfeAppBlase"></div>
   <div class="sport-hilfe-blase blase-unten" id="sportHilfeTeilenBlase"></div>
+  <div class="sport-hilfe-blase blase-links" id="sportHilfeSenderBlase"></div>
 </div>
 
 <!-- Hinweis, wenn "Deine Streaming-Anbieter" ohne festgelegte Abos geklickt
@@ -2454,6 +2457,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Tippe auf „+ Dein Verein“: Wähle deinen Verein und deine Wettbewerbe — der Spielplan ist dann künftig genau danach vorgefiltert.',
     sportHilfeApp: 'Im Menü findest du „Als App speichern“ — damit landet die Seite wie eine App auf deinem Startbildschirm.',
     sportHilfeTeilen: 'Wische ein Spiel nach rechts, um die Übertragung mit anderen zu teilen – oder teile die CouchUltras-App über den Teilen-Button mit anderen.',
+    sportHilfeSender: 'Klicke auf einen Anbieter (z. B. Sky) und sieh den übertragenden Sender (z. B. Sky Sport Bundesliga 1).',
     sportFreiEmpfangbar: 'Frei empfangbar',
     sportImAbo: 'In deinem Abo enthalten',
     sportNichtImAbo: 'Nicht in deinen Abos',
@@ -2799,6 +2803,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Tap “+ Your club”: pick your club and competitions — the schedule will be pre-filtered for you from then on.',
     sportHilfeApp: 'In the menu you’ll find “Save as app” to put this page on your home screen like an app.',
     sportHilfeTeilen: 'Swipe a match to the right to share its broadcast with others – or share the CouchUltras app via the share button.',
+    sportHilfeSender: 'Click a provider (e.g. Sky) to see the exact broadcasting channel (e.g. Sky Sport Bundesliga 1).',
     sportFreiEmpfangbar: 'Free to watch',
     sportImAbo: 'Included in your subscription',
     sportNichtImAbo: 'Not in your subscriptions',
@@ -3141,6 +3146,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Touche « + Ton club » : choisis ton club et tes compétitions — le calendrier sera ensuite préfiltré pour toi.',
     sportHilfeApp: 'Dans le menu, « Enregistrer comme appli » place cette page sur ton écran d’accueil.',
     sportHilfeTeilen: 'Fais glisser un match vers la droite pour partager sa diffusion – ou partage l’appli CouchUltras via le bouton Partager.',
+    sportHilfeSender: 'Clique sur un diffuseur (p. ex. Sky) pour voir la chaîne exacte (p. ex. Sky Sport Bundesliga 1).',
     sportFreiEmpfangbar: 'En clair',
     sportImAbo: 'Inclus dans ton abonnement',
     sportNichtImAbo: 'Pas dans tes abonnements',
@@ -3483,6 +3489,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Toca «+ Tu club»: elige tu equipo y tus competiciones — el calendario quedará prefiltrado para ti.',
     sportHilfeApp: 'En el menú encontrarás «Guardar como app» para poner esta página en tu pantalla de inicio.',
     sportHilfeTeilen: 'Desliza un partido hacia la derecha para compartir su emisión – o comparte la app CouchUltras con el botón de compartir.',
+    sportHilfeSender: 'Haz clic en un proveedor (p. ej. Sky) para ver el canal exacto (p. ej. Sky Sport Bundesliga 1).',
     sportFreiEmpfangbar: 'En abierto',
     sportImAbo: 'Incluido en tu suscripción',
     sportNichtImAbo: 'No está en tus suscripciones',
@@ -3825,6 +3832,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Tocca «+ La tua squadra»: scegli squadra e competizioni — il calendario sarà poi prefiltrato per te.',
     sportHilfeApp: 'Nel menu trovi «Salva come app» per mettere questa pagina sulla schermata Home.',
     sportHilfeTeilen: 'Scorri una partita verso destra per condividerne la trasmissione – oppure condividi l’app CouchUltras con il pulsante Condividi.',
+    sportHilfeSender: 'Clicca su un fornitore (es. Sky) per vedere il canale esatto (es. Sky Sport Bundesliga 1).',
     sportFreiEmpfangbar: 'In chiaro',
     sportImAbo: 'Incluso nel tuo abbonamento',
     sportNichtImAbo: 'Non nei tuoi abbonamenti',
@@ -4167,6 +4175,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Tik op „+ Jouw club”: kies je club en competities — het speelschema wordt daarna voor jou voorgefilterd.',
     sportHilfeApp: 'In het menu vind je „Als app opslaan” om deze pagina als app op je beginscherm te zetten.',
     sportHilfeTeilen: 'Veeg een wedstrijd naar rechts om de uitzending met anderen te delen – of deel de CouchUltras-app via de deelknop.',
+    sportHilfeSender: 'Klik op een aanbieder (bijv. Sky) om de exacte zender te zien (bijv. Sky Sport Bundesliga 1).',
     sportFreiEmpfangbar: 'Gratis te zien',
     sportImAbo: 'Inbegrepen in je abonnement',
     sportNichtImAbo: 'Niet in je abonnementen',
@@ -4509,6 +4518,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Toque em «+ Seu clube»: escolha seu clube e competições — o calendário ficará pré-filtrado para você.',
     sportHilfeApp: 'No menu você encontra «Salvar como app» para colocar esta página na sua tela inicial.',
     sportHilfeTeilen: 'Deslize um jogo para a direita para compartilhar a transmissão – ou compartilhe o app CouchUltras pelo botão de compartilhar.',
+    sportHilfeSender: 'Clique em um provedor (ex.: Sky) para ver o canal exato (ex.: Sky Sport Bundesliga 1).',
     sportFreiEmpfangbar: 'Em TV aberta',
     sportImAbo: 'Incluído na sua assinatura',
     sportNichtImAbo: 'Não está nas suas assinaturas',
@@ -10187,6 +10197,19 @@ function sportHilfeZeigen(){
   // Wisch-Teilen einzelner Spiele UND den Knopf fuer die ganze Seite
   // (Christian, 21.08.2026) -- bewusst EIN Feld fuer beides, die Geste und
   // der Knopf sind zwei Wege desselben Teilens.
+  // Sender-Blase: erklaert das Badge-Popup am ersten sichtbaren Sender-Badge
+  // (Christian, 21.08.2026). Ohne Badge (leerer Tag) faellt sie weg.
+  var sb = document.getElementById('sportHilfeSenderBlase');
+  var badge = document.querySelector('#sportPage .sport-match .tv-badge');
+  if (badge) {
+    sb.textContent = TXT.sportHilfeSender;
+    var br = badge.getBoundingClientRect();
+    sb.style.top = (br.bottom + 12) + 'px';
+    sb.style.left = Math.max(12, br.left - 8) + 'px';
+    sb.style.display = '';
+  } else {
+    sb.style.display = 'none';
+  }
   var tb = document.getElementById('sportHilfeTeilenBlase');
   tb.textContent = TXT.sportHilfeTeilen;
   var fab = document.getElementById('sportTeilenFab');
