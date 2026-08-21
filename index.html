@@ -613,6 +613,15 @@
     -webkit-overflow-scrolling:touch; scrollbar-width:none; }
   .sport-chips::-webkit-scrollbar { display:none; }
   .sport-chips button { flex:0 0 auto; }
+  /* Wisch-Hinweis (Christian, 21.08.2026): Solange rechts weitere Chips
+     liegen, laufen die letzten ~56px in Transparenz aus -- der angeschnittene,
+     verblassende Chip sagt "hier geht es weiter". Die Klasse setzt das JS
+     und nimmt sie am Zeilenende wieder weg (sonst waere der letzte Chip
+     dauerhaft angeschnitten). */
+  .sport-chips.wischbar {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent);
+  }
   /* Die zweite Reihe (Verfuegbarkeit) sitzt dichter an der ersten; die 26px
      nach unten sind die gewuenschte Luft zur Ueberschrift "Heute" darunter
      (Christian, 19. August: "ein wenig Abstand", am 20. August auf "ein
@@ -10398,6 +10407,20 @@ function renderSportChips(){
   });
   el.scrollLeft = scrollVorher[0];
   verfEl.scrollLeft = scrollVorher[1];
+  wischFadeAktualisieren(el);
+  wischFadeAktualisieren(verfEl);
+}
+
+// Rechter Ausblende-Verlauf nur, solange dort wirklich noch Chips liegen.
+// Ein Listener je Reihe reicht (einmalig markiert), der Zustand wird beim
+// Rendern und bei jedem Wischen neu bewertet.
+function wischFadeAktualisieren(reihe){
+  if (!reihe._wischFade) {
+    reihe._wischFade = true;
+    reihe.addEventListener('scroll', function(){ wischFadeAktualisieren(reihe); }, { passive: true });
+  }
+  var rest = reihe.scrollWidth - reihe.clientWidth - reihe.scrollLeft;
+  reihe.classList.toggle('wischbar', rest > 8);
 }
 
 function renderSportSection(key, spiele){
