@@ -9989,6 +9989,27 @@ async function loadSportData(){
   return SPORT_DATA;
 }
 
+/* Waehrend Spiele laufen, holt die offene Sport-Seite die Daten jede Minute
+   neu -- so erscheinen Zwischenstaende (lib/sportLive.js) und der Abpfiff
+   ohne Neuladen. Ausserhalb laufender Spiele und im Hintergrund-Tab
+   passiert nichts (kein Datenverbrauch, keine Serverlast). */
+var _sportLiveLaedt = false;
+setInterval(async function(){
+  if (!sportMode || document.visibilityState !== 'visible' || !SPORT_DATA || _sportLiveLaedt) return;
+  var jetzt = Date.now();
+  var laufend = SPORT_DATA.spiele.some(function(s){
+    var ko = new Date(s.ko).getTime();
+    return !s.fin && jetzt >= ko && jetzt < ko + 2.5 * 3600000;
+  });
+  if (!laufend) return;
+  _sportLiveLaedt = true;
+  try {
+    SPORT_DATA = await apiRequest('GET', '/api/sport');
+    renderSportPage();
+  } catch (e) { /* naechster Takt versucht es erneut */ }
+  finally { _sportLiveLaedt = false; }
+}, 60000);
+
 /* Abos laden: Konto zuerst (users.sport_abos), sonst Geraet (localStorage).
    Beides leer heisst "nie konfiguriert" (SPORT_ABOS bleibt null). */
 var _sportAbosGeladen = false;
@@ -10321,14 +10342,16 @@ function sportSpielLi(spiel){
   li.className = 'sport-match';
   var comp = (SPORT_DATA.wettbewerbe[spiel.c] || {}).name || spiel.c;
   var jetzt = Date.now(), ko = new Date(spiel.ko).getTime();
-  // "LIVE" grob ueber die Anstosszeit (bis 2,5h danach) -- Zwischenstaende
-  // liefert der Ingest nur alle paar Stunden, deshalb bewusst KEIN Ergebnis
-  // waehrend des Spiels (ein veralteter Spielstand waere schlimmer als keiner).
+  // "LIVE" grob ueber die Anstosszeit (bis 2,5h danach). Den Zwischenstand
+  // pflegt der Server im Minutentakt in die Daten (lib/sportLive.js) -- aber
+  // nur, wenn OpenLigaDB das Spiel nachweislich live mitschreibt. Fehlt er,
+  // bleibt es beim schlichten "Live" (kein veralteter 0:0-Stand).
   var status = '';
   if (spiel.fin && spiel.th != null) {
     status = '<span class="sport-score">' + esc(String(spiel.th) + ':' + String(spiel.ta)) + '</span>';
   } else if (!spiel.fin && jetzt >= ko && jetzt < ko + 2.5 * 3600000) {
-    status = '<span class="sport-live">' + esc(TXT.sportLive) + '</span>';
+    status = '<span class="sport-live">' + esc(TXT.sportLive +
+      (spiel.th != null ? ' ' + spiel.th + ':' + spiel.ta : '')) + '</span>';
   }
   var logo = function(url){ return url ? '<img src="' + escAttr(url) + '" alt="" loading="lazy">' : ''; };
   li.innerHTML =

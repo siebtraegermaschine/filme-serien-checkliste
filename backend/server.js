@@ -35,6 +35,7 @@ import kpiRouter from './routes/kpi.js';
 import onboardingRouter from './routes/onboarding.js';
 import { anonId } from './middleware/anonId.js';
 import { starteKpiSnapshot, starteKpiAufraeumen } from './lib/kpi.js';
+import { starteSportLive } from './lib/sportLive.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';
@@ -429,6 +430,10 @@ app.listen(port, () => {
   // Loescht Einzelereignisse der Reichweitenmessung nach der in der
   // Datenschutzerklaerung zugesagten Frist (siehe lib/kpi.js).
   starteKpiAufraeumen();
+  // Live-Zwischenstaende waehrend laufender Spiele von OpenLigaDB in die
+  // Datenbank spiegeln (siehe lib/sportLive.js) -- App und SEO-Spielseiten
+  // lesen von dort.
+  starteSportLive();
   /* Die beiden grossen Startlisten gleich bauen, statt den ersten Besucher nach
      einem Deploy warten zu lassen. Der Aufruf entspricht genau dem, den die App
      beim Start macht -- steht dort ein anderer Parameter, waermt das hier ins
