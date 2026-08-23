@@ -220,6 +220,11 @@ router.get('/mine', requireAuth, async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
+  // Nur Zahlen sind Titel-IDs. Alles andere (Bots raten z.B. GET /plots,
+  // das es nur als POST gibt) soll ein stilles 404 sein -- vorher lief
+  // "plots" bis in die bigint-Umwandlung von Postgres und loeste einen
+  // 500er samt Fehler-Mail aus (gemeldet 23.08.2026).
+  if (!/^\d+$/.test(req.params.id)) return res.status(404).json({ error: 'not_found' });
   const { rows } = await pool.query(`SELECT * FROM titles WHERE id = $1`, [req.params.id]);
   if (!rows[0]) return res.status(404).json({ error: 'not_found' });
   res.json(serializeTitle(rows[0]));
