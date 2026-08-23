@@ -10164,12 +10164,17 @@ function sportSpielTeilen(spiel){
   }
 }
 function sportWischTeilen(li, spiel){
-  var startX = null, startY = null, dx = 0;
+  // Variante A (Christian, 21.08.2026): Das Teilen loest schon beim
+  // UEBERSCHREITEN der Schwelle aus, nicht erst beim Loslassen -- mitten in
+  // der aktiven Geste akzeptiert iOS navigator.share zuverlaessig als
+  // Nutzeraktion, waehrend das Loslassen nach laengeren/schraegen Wischen
+  // oft verweigert wurde (dann kam das Kopier-Popup statt des System-Blatts).
+  var startX = null, startY = null, dx = 0, geteilt = false;
   li.addEventListener('touchstart', function(e){
-    var t = e.touches[0]; startX = t.clientX; startY = t.clientY; dx = 0;
+    var t = e.touches[0]; startX = t.clientX; startY = t.clientY; dx = 0; geteilt = false;
   }, { passive: true });
   li.addEventListener('touchmove', function(e){
-    if (startX == null) return;
+    if (startX == null || geteilt) return;
     var t = e.touches[0]; dx = t.clientX - startX;
     var dy = Math.abs(t.clientY - startY);
     // Nur klar horizontale Zuege nach RECHTS folgen der Bewegung -- senkrechtes
@@ -10177,12 +10182,17 @@ function sportWischTeilen(li, spiel){
     if (dx > 10 && dx > dy * 1.5) {
       li.style.transition = 'none';
       li.style.transform = 'translateX(' + Math.min(dx, 90) + 'px)';
+      if (dx > 60) {
+        geteilt = true;
+        li.style.transition = 'transform .2s';
+        li.style.transform = '';
+        sportSpielTeilen(spiel);
+      }
     }
   }, { passive: true });
   li.addEventListener('touchend', function(){
     li.style.transition = 'transform .2s';
     li.style.transform = '';
-    if (dx > 60) sportSpielTeilen(spiel);
     startX = null; dx = 0;
   });
 }

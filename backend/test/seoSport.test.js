@@ -89,11 +89,14 @@ test('seiteSpiel: Vorbericht und Aufstellung erscheinen nur mit Inhalt', () => {
   assert.match(mit, /Absatz eins\./);
   assert.match(mit, /Voraussichtliche Aufstellungen/);
   assert.match(mit, /Stand: 2026-08-21/);
-  // Nach Abpfiff verschwinden beide -- Rueckblick statt Vorschau.
+  // Nach Abpfiff bleiben beide stehen (21.08.2026: nichts entfernen) --
+  // nur der Rahmen wechselt in die Vergangenheitsform.
   const vorbei = seiteSpiel({ ...beispielDaten('beendet'),
-    inhalte: { vorbericht: 'X', aufstellung: 'Y' } });
-  assert.doesNotMatch(vorbei, /<h2>Vorbericht<\/h2>/);
-  assert.doesNotMatch(vorbei, /Voraussichtliche Aufstellungen/);
+    inhalte: { vorbericht: 'X', aufstellung: 'Y', stand: '2026-08-21' } });
+  assert.match(vorbei, /Die Ausgangslage vor dem Spiel/);
+  assert.match(vorbei, /Verfasst vor dem Anstoß\./);
+  assert.match(vorbei, /Voraussichtliche Aufstellungen/);
+  assert.match(vorbei, /veröffentlichten die Vereine kurz vor dem Spiel/);
 });
 
 test('Sport-Domain aktiv: eigene Basis, kurze Pfade, eigene Marke', () => {

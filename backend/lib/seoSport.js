@@ -437,21 +437,31 @@ function formBlock(daten) {
 // dem Abpfiff waere ein "Blick voraus" unfreiwillig komisch.
 function vorberichtBlock(daten) {
   const i = daten.inhalte;
-  if (!i || !i.vorbericht || daten.stufe === 'beendet') return '';
+  if (!i || !i.vorbericht) return '';
   const absaetze = String(i.vorbericht).split('\n\n').map((a) => a.trim()).filter(Boolean);
-  return `<h2>Vorbericht</h2>${absaetze.map((a) => `<p>${attrEsc(a)}</p>`).join('')}`;
+  // Nach dem Abpfiff bleibt der Text stehen (Christian, 21.08.2026: nichts
+  // entfernen) -- nur der Rahmen sagt, dass er VOR dem Spiel entstand.
+  const vorbei = daten.stufe === 'beendet';
+  const kopf = vorbei ? 'Die Ausgangslage vor dem Spiel' : 'Vorbericht';
+  const hinweis = vorbei ? '<p class="hinweis">Verfasst vor dem Anstoß.</p>' : '';
+  return `<h2>${kopf}</h2>${hinweis}${absaetze.map((a) => `<p>${attrEsc(a)}</p>`).join('')}`;
 }
 
 // Voraussichtliche Aufstellungen -- nur Topspiele (Entscheidung 20.08.2026),
-// nur solange das Spiel nicht laeuft/vorbei ist, und ausdruecklich als
+// dauerhaft sichtbar (21.08.: nach Abpfiff nur der Rahmen in Vergangenheit),
+// und ausdruecklich als
 // Prognose gekennzeichnet (offizielle Aufstellungen gibt es erst ~1 Stunde
 // vor Anstoss und nur beim Veranstalter).
 function aufstellungBlock(daten) {
   const i = daten.inhalte;
-  if (!i || !i.aufstellung || daten.stufe === 'beendet' || daten.stufe === 'live') return '';
+  if (!i || !i.aufstellung) return '';
   const absaetze = String(i.aufstellung).split('\n\n').map((a) => a.trim()).filter(Boolean);
+  const vorbei = daten.stufe === 'beendet' || daten.stufe === 'live';
+  const hinweis = vorbei
+    ? `Prognose vor dem Anstoß${i.stand ? ` (Stand: ${attrEsc(i.stand)})` : ''} – die offiziellen Aufstellungen veröffentlichten die Vereine kurz vor dem Spiel.`
+    : `Prognose auf Basis öffentlich verfügbarer Informationen${i.stand ? ` (Stand: ${attrEsc(i.stand)})` : ''} – die offiziellen Aufstellungen veröffentlichen die Vereine erst rund eine Stunde vor Anstoß.`;
   return `<h2>Voraussichtliche Aufstellungen</h2>
-  <p class="hinweis">Prognose auf Basis oeffentlich verfuegbarer Informationen${i.stand ? ` (Stand: ${attrEsc(i.stand)})` : ''} – die offiziellen Aufstellungen veroeffentlichen die Vereine erst rund eine Stunde vor Anstoss.</p>
+  <p class="hinweis">${hinweis}</p>
   ${absaetze.map((a) => `<p>${attrEsc(a)}</p>`).join('')}`;
 }
 
