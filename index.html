@@ -12593,13 +12593,25 @@ document.getElementById('settingsSportAbosBtn').onclick = function(){
   closeSettingsModal();
   openProvidersModal();
 };
+/* Sport-Einstiege in der Film-App ausgeblendet (Christian, 24.08.2026):
+   Der ⚽-Knopf im Kopf und der Menuepunkt "Sport" sind nicht mehr sichtbar.
+   Die Funktion selbst bleibt vollstaendig im Code -- openSportPage(), die
+   Sport-Seite und die eigene Domain (SPORT_SEITE_MODUS, couchultras.com)
+   sind unveraendert. Zum Wiedereinschalten: SPORT_EINSTIEGE_SICHTBAR auf
+   true. Gleiches Muster wie bei Movie Night: gebaut, aber unsichtbar. */
+var SPORT_EINSTIEGE_SICHTBAR = false;
+
 // Region-Schalter: Die Senderrechte gelten fuer Deutschland -- ausserhalb
-// bleiben Menuepunkt und Kopf-Knopf weg. (Spaeter je Land eine eigene Matrix.)
-// Die Sport-Punkte in den Einstellungen regelt einstellungenSichtbarkeit.
-if (REGION_WAHL !== 'DE' && !SPORT_SEITE_MODUS) {
+// blieben Menuepunkt und Kopf-Knopf ohnehin weg. (Spaeter je Land eine eigene
+// Matrix.) Die Sport-Punkte in den Einstellungen regelt
+// einstellungenSichtbarkeit.
+if (!SPORT_SEITE_MODUS && (!SPORT_EINSTIEGE_SICHTBAR || REGION_WAHL !== 'DE')) {
   document.getElementById('sportMenuBtn').style.display = 'none';
   document.getElementById('sportHeaderBtn').style.display = 'none';
-  // Benachrichtigungen sind (noch) reine Sport-Funktion -- gleiche Regel.
+}
+// Benachrichtigungen sind (noch) reine Sport-Funktion -- ausserhalb DE weg.
+// Der Punkt bleibt vorerst stehen, obwohl die Sport-Einstiege fehlen.
+if (REGION_WAHL !== 'DE' && !SPORT_SEITE_MODUS) {
   document.getElementById('pushMenuBtn').style.display = 'none';
 }
 
