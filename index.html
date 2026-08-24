@@ -2750,6 +2750,7 @@ var UI_TEXTE = {
     ansichtKeineAbos: 'Du hast noch keine Sender-Abos festgelegt – unter Einstellungen → „Deine Sport-Abos“.',
     sportFehler: 'Der Spielplan konnte nicht geladen werden.',
     sportAlle: 'Alle',
+    sportAlleMannschaften: 'Alle Mannschaften',
     sportNurFrei: 'Free-TV',
     sportFreeStream: 'Free Stream',
     sportRadioAb: function(zeit){ return 'Radio ab ' + zeit; },
@@ -3159,6 +3160,7 @@ var UI_TEXTE = {
     ansichtKeineAbos: 'You haven’t set any subscriptions yet – under Settings → “Your sports subscriptions”.',
     sportFehler: 'The schedule could not be loaded.',
     sportAlle: 'All',
+    sportAlleMannschaften: 'All teams',
     sportNurFrei: 'Free TV',
     sportFreeStream: 'Free stream',
     sportRadioAb: function(zeit){ return 'Radio from ' + zeit; },
@@ -3565,6 +3567,7 @@ var UI_TEXTE = {
     ansichtKeineAbos: 'Tu n’as pas encore défini d’abonnements – dans Réglages → « Tes abonnements sport ».',
     sportFehler: 'Le calendrier n’a pas pu être chargé.',
     sportAlle: 'Tous',
+    sportAlleMannschaften: 'Toutes les équipes',
     sportNurFrei: 'TV gratuite',
     sportFreeStream: 'Stream gratuit',
     sportRadioAb: function(zeit){ return 'Radio dès ' + zeit; },
@@ -3971,6 +3974,7 @@ var UI_TEXTE = {
     ansichtKeineAbos: 'Aún no has definido suscripciones: en Ajustes → «Tus suscripciones deportivas».',
     sportFehler: 'No se pudo cargar el calendario.',
     sportAlle: 'Todos',
+    sportAlleMannschaften: 'Todos los equipos',
     sportNurFrei: 'TV en abierto',
     sportFreeStream: 'Stream gratis',
     sportDeineAnbieter: 'Tus suscripciones de streaming',
@@ -4377,6 +4381,7 @@ var UI_TEXTE = {
     ansichtKeineAbos: 'Non hai ancora impostato abbonamenti: in Impostazioni → «I tuoi abbonamenti sport».',
     sportFehler: 'Impossibile caricare il calendario.',
     sportAlle: 'Tutti',
+    sportAlleMannschaften: 'Tutte le squadre',
     sportNurFrei: 'TV in chiaro',
     sportFreeStream: 'Stream gratis',
     sportDeineAnbieter: 'I tuoi abbonamenti streaming',
@@ -4783,6 +4788,7 @@ var UI_TEXTE = {
     ansichtKeineAbos: 'Je hebt nog geen abonnementen ingesteld – bij Instellingen → „Jouw sportabonnementen”.',
     sportFehler: 'Het speelschema kon niet worden geladen.',
     sportAlle: 'Alle',
+    sportAlleMannschaften: 'Alle clubs',
     sportNurFrei: 'Free-tv',
     sportFreeStream: 'Gratis stream',
     sportDeineAnbieter: 'Jouw streamingabonnementen',
@@ -5189,6 +5195,7 @@ var UI_TEXTE = {
     ansichtKeineAbos: 'Você ainda não definiu assinaturas – em Configurações → “Suas assinaturas de esporte”.',
     sportFehler: 'Não foi possível carregar o calendário.',
     sportAlle: 'Todos',
+    sportAlleMannschaften: 'Todas as equipes',
     sportNurFrei: 'TV aberta',
     sportFreeStream: 'Stream grátis',
     sportDeineAnbieter: 'Suas assinaturas de streaming',
@@ -11345,7 +11352,8 @@ function renderSportChips(){
   var alleAktiv = !SPORT_VEREIN_AKTIV.length;
   var verfEl = document.getElementById('sportVerfChips');
   var vhtml =
-    '<button type="button" data-verf="alle" class="' + (alleAktiv ? 'active' : '') + '">' + esc(TXT.sportAlle) + '</button>';
+    '<button type="button" data-verf="alle" class="' + (alleAktiv ? 'active' : '') + '">' +
+    esc(TXT.sportAlleMannschaften) + '</button>';
   // Erst Vereine, dann Nationalmannschaften (Christian, 24.08.2026) --
   // innerhalb der beiden Gruppen bleibt die Reihenfolge der Auswahl stehen.
   meineVereineSortiert().forEach(function(v){
@@ -11372,6 +11380,19 @@ function renderSportChips(){
       verfReset();
     };
   });
+  /* "Alle Mannschaften" so breit wie die beiden ersten Chips der Reihe
+     darueber ("Alle" + erster Wettbewerb) samt Fuge -- dann fluchtet die
+     zweite Reihe mit der ersten (Christian, 24.08.2026). Gemessen statt
+     fest verdrahtet, weil die Wettbewerbsnamen je Sprache anders lang sind.
+     min-width, nicht width: Ist die Beschriftung selbst laenger (andere
+     Sprachen), soll sie nicht abgeschnitten werden. */
+  var alleBtn = verfEl.querySelector('button[data-verf="alle"]');
+  var compBtns = el.querySelectorAll('button');
+  if (alleBtn && compBtns.length >= 2) {
+    var links = compBtns[0].getBoundingClientRect().left;
+    var rechts = compBtns[1].getBoundingClientRect().right;
+    if (rechts > links) alleBtn.style.minWidth = Math.round(rechts - links) + 'px';
+  }
   el.scrollLeft = scrollVorher[0];
   verfEl.scrollLeft = scrollVorher[1];
   wischFadeAktualisieren(el);
