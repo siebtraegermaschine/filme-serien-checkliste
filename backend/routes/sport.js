@@ -6,7 +6,7 @@ import { sportKontext } from '../lib/seoSport.js';
 import { LIGEN_MIT_TABELLE, hatTabelle, wettbewerbTabellen, torschuetzen,
          teamForm, direktvergleich } from '../lib/sportDaten.js';
 import { ARTEN } from '../lib/sportPush.js';
-import { audioZuSpielen } from '../lib/sportAudio.js';
+import { audioZuSpielen, RADIO_IMMER } from '../lib/sportAudio.js';
 
 const router = createAsyncRouter();
 
@@ -44,6 +44,9 @@ router.get('/', async (_req, res) => {
   const ktx = sportKontext();
   res.json({
     seiten: { basis: ktx.basis, prefix: ktx.spielPrefix },
+    // Wettbewerbe mit lueckenloser ARD-Radioabdeckung -- dort zeigt die App
+    // das Radio-Feld auch ohne bekannten Termin (siehe sportAudioHtml).
+    radioImmer: RADIO_IMMER,
     sender: m.sender || {},
     wettbewerbe: m.wettbewerbe || {},
     spiele: spiele.rows.map((r) => ({

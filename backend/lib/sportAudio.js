@@ -26,7 +26,15 @@ const PROGRAMSETS = {
   bl1: '90781750',                   // Sportschau Bundesliga Live
   bl2: '10645071',                   // Sportschau 2. Bundesliga Live
   dfb: '10204177',                   // Sportschau DFB-Pokal Live
+  ucl: '10631085',                   // Champions League (nur deutsche Teams)
+  bl3: '16801139',                   // 3. Liga (nur einzelne Spiele)
 };
+
+/* Wettbewerbe, in denen die ARD JEDES Spiel im Radio überträgt. Nur dort darf
+   die App ein Radio-Feld auch dann zeigen, wenn noch kein Termin feststeht --
+   bei Champions League und 3. Liga ist die Abdeckung lückenhaft, ein
+   Versprechen waere dort unredlich. */
+export const RADIO_IMMER = ['bl1', 'bl2', 'dfb'];
 
 /* Woerter, die keinen Verein unterscheiden. "borussia" muss dabei sein --
    sonst gaelten Dortmund und Moenchengladbach als dasselbe Team. */

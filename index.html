@@ -2753,6 +2753,9 @@ var UI_TEXTE = {
     sportRadioAb: function(zeit){ return 'Radio ab ' + zeit; },
     sportRadioJetzt: 'Radio-Reportage',
     sportRadioTitel: 'Radio-Reportage',
+    sportRadioLabel: 'Radio',
+    sportRadioNochOffen: 'Der Termin der Radio-Übertragung steht für dieses Spiel noch nicht fest.',
+    sportRadioNochOffenInfo: 'Die ARD überträgt alle Spiele der Bundesliga, 2. Bundesliga und des DFB-Pokals kostenlos im Radio. Die genaue Zeit erscheint hier wenige Tage vor dem Anpfiff.',
     sportRadioBeginnt: function(wann){ return 'Die Web-Radioübertragung beginnt ' + wann + '.'; },
     sportRadioHeuteUm: function(zeit){ return 'heute um ' + zeit + ' Uhr'; },
     sportRadioAmUm: function(datum, zeit){ return 'am ' + datum + ' um ' + zeit + ' Uhr'; },
@@ -3168,6 +3171,9 @@ var UI_TEXTE = {
     sportRadioAb: function(zeit){ return 'Radio from ' + zeit; },
     sportRadioJetzt: 'Radio commentary',
     sportRadioTitel: 'Radio commentary',
+    sportRadioLabel: 'Radio',
+    sportRadioNochOffen: 'The time of the radio broadcast has not been announced for this match yet.',
+    sportRadioNochOffenInfo: 'ARD broadcasts every Bundesliga, 2. Bundesliga and DFB-Pokal match on the radio free of charge. The exact time appears here a few days before kick-off.',
     sportRadioBeginnt: function(wann){ return 'The web radio broadcast starts ' + wann + '.'; },
     sportRadioHeuteUm: function(zeit){ return 'today at ' + zeit; },
     sportRadioAmUm: function(datum, zeit){ return 'on ' + datum + ' at ' + zeit; },
@@ -3580,6 +3586,9 @@ var UI_TEXTE = {
     sportRadioAb: function(zeit){ return 'Radio dès ' + zeit; },
     sportRadioJetzt: 'Commentaire radio',
     sportRadioTitel: 'Commentaire radio',
+    sportRadioLabel: 'Radio',
+    sportRadioNochOffen: 'L’horaire de la diffusion radio n’est pas encore fixé pour ce match.',
+    sportRadioNochOffenInfo: 'ARD diffuse gratuitement à la radio tous les matchs de Bundesliga, 2. Bundesliga et de la Coupe. L’horaire exact apparaît ici quelques jours avant le coup d’envoi.',
     sportRadioBeginnt: function(wann){ return 'La diffusion radio en ligne commence ' + wann + '.'; },
     sportRadioHeuteUm: function(zeit){ return 'aujourd’hui à ' + zeit; },
     sportRadioAmUm: function(datum, zeit){ return 'le ' + datum + ' à ' + zeit; },
@@ -4019,6 +4028,9 @@ var UI_TEXTE = {
     sportRadioAb: function(zeit){ return 'Radio desde ' + zeit; },
     sportRadioJetzt: 'Narración de radio',
     sportRadioTitel: 'Narración de radio',
+    sportRadioLabel: 'Radio',
+    sportRadioNochOffen: 'La hora de la emisión de radio aún no está confirmada para este partido.',
+    sportRadioNochOffenInfo: 'ARD emite gratis por radio todos los partidos de la Bundesliga, la 2. Bundesliga y la Copa. La hora exacta aparece aquí pocos días antes del inicio.',
     sportRadioBeginnt: function(wann){ return 'La emisión de radio online empieza ' + wann + '.'; },
     sportRadioHeuteUm: function(zeit){ return 'hoy a las ' + zeit; },
     sportRadioAmUm: function(datum, zeit){ return 'el ' + datum + ' a las ' + zeit; },
@@ -4431,6 +4443,9 @@ var UI_TEXTE = {
     sportRadioAb: function(zeit){ return 'Radio dalle ' + zeit; },
     sportRadioJetzt: 'Radiocronaca',
     sportRadioTitel: 'Radiocronaca',
+    sportRadioLabel: 'Radio',
+    sportRadioNochOffen: 'L’orario della radiocronaca non è ancora stabilito per questa partita.',
+    sportRadioNochOffenInfo: 'La ARD trasmette gratis alla radio tutte le partite di Bundesliga, 2. Bundesliga e Coppa. L’orario esatto compare qui pochi giorni prima del fischio d’inizio.',
     sportRadioBeginnt: function(wann){ return 'La radiocronaca online inizia ' + wann + '.'; },
     sportRadioHeuteUm: function(zeit){ return 'oggi alle ' + zeit; },
     sportRadioAmUm: function(datum, zeit){ return 'il ' + datum + ' alle ' + zeit; },
@@ -4843,6 +4858,9 @@ var UI_TEXTE = {
     sportRadioAb: function(zeit){ return 'Radio vanaf ' + zeit; },
     sportRadioJetzt: 'Radioverslag',
     sportRadioTitel: 'Radioverslag',
+    sportRadioLabel: 'Radio',
+    sportRadioNochOffen: 'Het tijdstip van de radio-uitzending staat voor deze wedstrijd nog niet vast.',
+    sportRadioNochOffenInfo: 'De ARD zendt alle wedstrijden van de Bundesliga, 2. Bundesliga en de beker gratis uit op de radio. Het precieze tijdstip verschijnt hier enkele dagen voor de aftrap.',
     sportRadioBeginnt: function(wann){ return 'De webradio-uitzending begint ' + wann + '.'; },
     sportRadioHeuteUm: function(zeit){ return 'vandaag om ' + zeit; },
     sportRadioAmUm: function(datum, zeit){ return 'op ' + datum + ' om ' + zeit; },
@@ -5255,6 +5273,9 @@ var UI_TEXTE = {
     sportRadioAb: function(zeit){ return 'Rádio a partir das ' + zeit; },
     sportRadioJetzt: 'Narração de rádio',
     sportRadioTitel: 'Narração de rádio',
+    sportRadioLabel: 'Rádio',
+    sportRadioNochOffen: 'O horário da transmissão de rádio ainda não está definido para este jogo.',
+    sportRadioNochOffenInfo: 'A ARD transmite de graça no rádio todos os jogos da Bundesliga, 2. Bundesliga e da Copa. O horário exato aparece aqui poucos dias antes do apito inicial.',
     sportRadioBeginnt: function(wann){ return 'A transmissão de rádio online começa ' + wann + '.'; },
     sportRadioHeuteUm: function(zeit){ return 'hoje às ' + zeit; },
     sportRadioAmUm: function(datum, zeit){ return 'em ' + datum + ' às ' + zeit; },
@@ -10960,8 +10981,19 @@ function sportBadgeHtml(b){
      danach  gar nichts ---- */
 function sportAudioHtml(spiel){
   var a = spiel.audio;
-  if (!a) return '';
   var jetzt = Date.now();
+  /* Noch kein Termin: Die ARD-Liste reicht nur rund zwei Spieltage voraus.
+     Frueher fehlte das Feld dann ganz und sah aus, als gaebe es kein Radio
+     (Christian, 24.08.2026). Jetzt steht es da -- der Klick erklaert, dass
+     der Termin noch aussteht. Nur in Wettbewerben mit lueckenloser
+     Abdeckung, und nur fuer Spiele, die noch kommen. */
+  if (!a) {
+    var immer = (SPORT_DATA && SPORT_DATA.radioImmer) || [];
+    if (immer.indexOf(spiel.c) === -1) return '';
+    if (new Date(spiel.ko).getTime() < jetzt) return '';
+    return '<span class="tv-badge audio-badge audio-spaeter" data-offen="1">🎧 ' +
+           esc(TXT.sportRadioLabel) + '</span>';
+  }
   var start = new Date(a.start).getTime();
   var ende = new Date(a.ende).getTime();
   if (jetzt > ende) return '';
@@ -11194,6 +11226,16 @@ function sportStreamSatz(info){
 /* Hinweis, wann die Radio-Reportage beginnt. Datum nur, wenn es nicht heute
    ist -- sonst liest sich "am Montag, 24. August um 20:30 Uhr" fuer ein
    Spiel in zwei Stunden umstaendlich. */
+/* Termin steht noch nicht fest -- die ARD veroeffentlicht ihre Liste erst
+   wenige Tage vorher. Der Hinweis sagt zu, DASS uebertragen wird, ohne eine
+   Uhrzeit zu erfinden. */
+function openRadioOffen(){
+  document.getElementById('senderModalTitel').textContent = TXT.sportRadioTitel;
+  document.getElementById('senderModalInhalt').innerHTML =
+    '<p class="prov-intro">' + esc(TXT.sportRadioNochOffen) + '</p>' +
+    '<p class="prov-intro sender-gratis">✅ ' + esc(TXT.sportRadioNochOffenInfo) + '</p>';
+  _senderModal.style.display = 'flex';
+}
 function openRadioHinweis(startIso){
   if (!startIso) return;
   var d = new Date(startIso);
@@ -11256,7 +11298,9 @@ document.getElementById('sportPage').addEventListener('click', function(e){
      soll einfach oeffnen. */
   var radio = e.target.closest('.audio-badge');
   if (radio) {
-    if (radio.tagName !== 'A') openRadioHinweis(radio.dataset.start);
+    if (radio.tagName === 'A') return;                  // laeuft -> Link oeffnet
+    if (radio.dataset.offen) openRadioOffen();          // Termin steht noch aus
+    else openRadioHinweis(radio.dataset.start);
     return;
   }
   var b = e.target.closest('.tv-badge');
