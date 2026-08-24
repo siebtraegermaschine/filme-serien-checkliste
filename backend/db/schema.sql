@@ -1090,3 +1090,26 @@ CREATE TABLE IF NOT EXISTS push_versand (
   gesendet_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (abo_id, match_id, art)
 );
+
+-- Sport-Ansicht am Konto (24.08.2026): Vereine und Wettbewerbs-Vorauswahl
+-- liegen weiterhin ZUERST am Geraet (der Sport-Bereich funktioniert ohne
+-- Konto). Wer ein Konto anlegt, nimmt sie ueber Browser und Geraete mit --
+-- gleiche drei Zustaende wie sport_abos: NULL = nie gespeichert, leer =
+-- bewusst nichts, gefuellt = genau das.
+ALTER TABLE users ADD COLUMN IF NOT EXISTS sport_vereine JSONB;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS sport_comps TEXT[];
+
+-- Push-Abo dem Konto zuordnen, wenn es beim Abonnieren angemeldet war.
+-- Bleibt NULL fuer Geraete ohne Konto -- die funktionieren unveraendert
+-- weiter. Mit Konto zieht eine geaenderte Vereinsauswahl alle Geraete
+-- dieser Person nach (siehe PUT /api/sport/ansicht).
+ALTER TABLE push_abos ADD COLUMN IF NOT EXISTS user_id BIGINT REFERENCES users(id) ON DELETE CASCADE;
+CREATE INDEX IF NOT EXISTS push_abos_user_idx ON push_abos (user_id);
+
+-- Waehlbare Zeitpunkte statt der einen Spielbeginn-Erinnerung (Christian,
+-- 24.08.2026): 'morgens8' (8 Uhr am Spieltag), 'vor120' | 'vor60' | 'vor30' |
+-- 'vor5' (Minuten vor Anstoss) und 'anstoss'. Mehrfachauswahl, standardmaessig
+-- NICHTS -- niemand bekommt ungefragt Mitteilungen. Bestandsabos aus der
+-- ersten Fassung ('spielbeginn' = 30 Minuten vorher) wandern auf 'vor30'.
+ALTER TABLE push_abos ALTER COLUMN arten SET DEFAULT '{}';
+UPDATE push_abos SET arten = ARRAY['vor30'] WHERE arten = ARRAY['spielbeginn'];

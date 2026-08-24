@@ -100,6 +100,53 @@ router.get('/spiel/:id/details', async (req, res) => {
   res.json({ duelle: duelle || [], formHeim: formHeim || [], formGast: formGast || [] });
 });
 
+/* GET/PUT /api/sport/ansicht -- Vereine und Wettbewerbs-Vorauswahl am Konto
+   (24.08.2026). Das Geraet bleibt die erste Adresse (localStorage, auch ohne
+   Konto); wer angemeldet ist, nimmt seine Auswahl damit ueber Browser und
+   Geraete mit. NULL in beiden Spalten heisst "nie gespeichert" -- das
+   Frontend schiebt dann die lokale Auswahl hoch, statt sie zu ueberschreiben. */
+router.get('/ansicht', requireAuth, async (req, res) => {
+  const { rows } = await pool.query(
+    'SELECT sport_vereine, sport_comps FROM users WHERE id = $1', [req.session.userId]);
+  const u = rows[0] || {};
+  res.json({
+    vereine: u.sport_vereine || null,
+    comps: u.sport_comps || null,
+  });
+});
+
+router.put('/ansicht', requireAuth, async (req, res) => {
+  const { vereine, comps } = req.body || {};
+  if (!Array.isArray(vereine) || !Array.isArray(comps)) {
+    return res.status(400).json({ error: 'invalid_payload' });
+  }
+  // Nur Name und Logo je Verein, hoechstens drei -- dieselbe Obergrenze wie
+  // im Frontend (VEREIN_MAX). Logos sind OpenLigaDB-URLs.
+  const sauberVereine = vereine
+    .filter((v) => v && typeof v.n === 'string' && v.n.trim() && v.n.length <= 80)
+    .slice(0, 3)
+    .map((v) => ({
+      n: v.n.trim(),
+      logo: typeof v.logo === 'string' && /^https:\/\//.test(v.logo) && v.logo.length <= 500 ? v.logo : null,
+    }));
+  // Wettbewerbs-Kuerzel wie in sport-rechte.json (Format- statt
+  // Katalogpruefung, siehe /abos).
+  const sauberComps = [...new Set(comps
+    .map((c) => String(c).toLowerCase().trim())
+    .filter((c) => /^[a-z0-9]{1,12}$/.test(c)))].slice(0, 20);
+
+  await pool.query(
+    'UPDATE users SET sport_vereine = $1, sport_comps = $2 WHERE id = $3',
+    [JSON.stringify(sauberVereine), sauberComps, req.session.userId]);
+  // Alle Push-Abos dieser Person nachziehen -- sonst erinnerte ein zweites
+  // Geraet weiter an den alten Verein. Genau das ist der Konto-Nutzen bei
+  // den Benachrichtigungen (siehe lib/sportPush.js).
+  await pool.query(
+    'UPDATE push_abos SET vereine = $1 WHERE user_id = $2',
+    [sauberVereine.map((v) => v.n), req.session.userId]);
+  res.json({ vereine: sauberVereine, comps: sauberComps });
+});
+
 // GET/PUT /api/sport/abos -- die eigenen Sport-Abos (Sender-Slugs). NULL heisst
 // "nie konfiguriert"; das Frontend leitet dann eine Vorauswahl aus den
 // Streaminganbietern ab (siehe index.html, sportAbosLaden).

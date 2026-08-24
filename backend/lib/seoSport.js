@@ -230,33 +230,55 @@ function wettbewerbName(daten, kuerzel) {
   return (daten.wettbewerbe[kuerzel] || {}).name || kuerzel;
 }
 
-// Der eine Satz, um den es geht -- ganz oben, je Zeitstufe formuliert.
-function antwortSatz(daten) {
+/* Der eine Satz, um den es geht -- ganz oben, je Zeitstufe formuliert.
+ *
+ * Zwei Fassungen aus EINER Quelle (Christian, 24.08.2026): Fuer die
+ * Meta-Beschreibung reiner Text, fuer die Antwortbox HTML, in dem die
+ * eigentliche Antwort -- WANN und WO -- gruen hervorgehoben ist ("läuft am
+ * <gruen>Freitag, 28. August 2026 um 20:30 Uhr live bei Sky/WOW und
+ * Sat.1</gruen>"). Zwei getrennte Textfassungen waeren mit der Zeit
+ * auseinandergelaufen.
+ *
+ * Hervorgehoben wird nur, was auch wirklich eine Antwort ist: Steht der
+ * Sender noch nicht fest, bleibt dieser Halbsatz normal -- gruen liest sich
+ * als "alles klar", und das waere dort schlicht gelogen.
+ */
+function antwortSatz(daten, alsHtml = false) {
   const m = daten.match;
+  // Im HTML-Modus muss JEDES eingesetzte Stueck escaped werden -- der
+  // Aufrufer darf das Ergebnis dann nicht noch einmal durch attrEsc jagen.
+  const t = alsHtml ? attrEsc : ((x) => String(x));
+  const hv = alsHtml ? ((x) => `<span class="antwort-hervor">${attrEsc(x)}</span>`) : ((x) => String(x));
+
   const sender = senderNamen(daten, m.tv);
-  const wo = sender.length
-    ? `live bei ${sender.join(' und ')}`
-    : 'der übertragende Sender steht noch nicht fest';
-  const wann = `am ${datumLang.format(m.anstoss)} um ${uhrzeit.format(m.anstoss)} Uhr`;
+  const senderTeil = sender.length ? `live bei ${sender.join(' und ')}` : null;
+  const zeitTeil = `${datumLang.format(m.anstoss)} um ${uhrzeit.format(m.anstoss)} Uhr`;
+  const nurUhrzeit = `${uhrzeit.format(m.anstoss)} Uhr`;
+  const offen = 'der übertragende Sender steht noch nicht fest';
   // Komma statt Klammer: die Runde steht selbst schon mal in Klammern
   // ("Supercup (Finale)" ergaebe sonst eine Doppelklammer im Antwortsatz).
   const comp = `${wettbewerbName(daten, m.wettbewerb)}${m.runde ? `, ${m.runde}` : ''}`;
+  const kopf = `${t(paarung(m))} (${t(comp)})`;
+  // Zeit und Sender stehen nebeneinander -- als EIN gruener Block, damit
+  // nicht zwei Farbinseln durch den Satz sprenkeln.
+  const zeitUndSender = hv(zeitTeil + (senderTeil ? ` ${senderTeil}` : ''));
+
   switch (daten.stufe) {
     case 'beendet': {
-      const erg = m.tore_heim != null ? ` und endete ${m.tore_heim}:${m.tore_gast}` : '';
-      return `${paarung(m)} (${comp}) lief ${wann} ${sender.length ? `live bei ${sender.join(' und ')}` : ''}${erg}.`;
+      const erg = m.tore_heim != null ? ` und endete ${hv(`${m.tore_heim}:${m.tore_gast}`)}` : '';
+      return `${kopf} lief am ${zeitUndSender}${erg}.`;
     }
     case 'live':
-      return `${paarung(m)} (${comp}) läuft JETZT ${sender.length ? `live bei ${sender.join(' und ')}` : ''} – Anstoß war um ${uhrzeit.format(m.anstoss)} Uhr.`;
+      return `${kopf} läuft JETZT ${senderTeil ? hv(senderTeil) + ' ' : ''}– Anstoß war um ${t(nurUhrzeit)}.`;
     case 'gleich':
-      return `${paarung(m)} (${comp}) beginnt in weniger als einer Stunde: Anstoß heute um ${uhrzeit.format(m.anstoss)} Uhr, ${wo}.`;
+      return `${kopf} beginnt in weniger als einer Stunde: Anstoß heute um ${hv(nurUhrzeit + (senderTeil ? `, ${senderTeil}` : ''))}${senderTeil ? '' : `, ${t(offen)}`}.`;
     case 'bald':
     case 'heute':
-      return `${paarung(m)} (${comp}) läuft HEUTE um ${uhrzeit.format(m.anstoss)} Uhr ${wo}.`;
+      return `${kopf} läuft HEUTE um ${hv(nurUhrzeit + (senderTeil ? ` ${senderTeil}` : ''))}${senderTeil ? '' : ` – ${t(offen)}`}.`;
     case 'morgen':
-      return `${paarung(m)} (${comp}) läuft MORGEN um ${uhrzeit.format(m.anstoss)} Uhr ${wo}.`;
+      return `${kopf} läuft MORGEN um ${hv(nurUhrzeit + (senderTeil ? ` ${senderTeil}` : ''))}${senderTeil ? '' : ` – ${t(offen)}`}.`;
     default:
-      return `${paarung(m)} (${comp}) läuft ${wann} ${wo}.`;
+      return `${kopf} läuft am ${zeitUndSender}${senderTeil ? '' : ` – ${t(offen)}`}.`;
   }
 }
 
@@ -498,7 +520,7 @@ export function seiteSpiel(daten) {
   const bodyHtml = `
     ${brotkrumenHtml(kette)}
     <h1>${vorbei ? `${attrEsc(paarung(m))}: Übertragung im Rückblick` : `Wer zeigt ${attrEsc(paarung(m))}?`}</h1>
-    <p class="spiel-antwort">${attrEsc(antwortSatz(daten))}</p>
+    <p class="spiel-antwort">${antwortSatz(daten, true)}</p>
     <h2>Übertragung im Überblick</h2>
     ${uebertragungsTabelle(daten)}
     <h2>Das Spiel im Steckbrief</h2>

@@ -119,3 +119,9 @@ tr.hervor td { color: var(--accent); font-weight: 700; }
 .form-liste { margin: 6px 0 16px; padding-left: 20px; }
 .form-liste li { margin: 3px 0; }
 .marke-logo { height: 52px; width: auto; display: block; }
+
+/* Antwortbox der Spielseiten: WANN und WO -- also die eigentliche Antwort auf
+   "Wer zeigt ...?" -- stehen gruen im Satz (Christian, 24.08.2026). Derselbe
+   Gruenton wie die Free-TV-Kennzeichnung in der App (--done dort). Bewusst
+   nur Farbe, kein Hintergrund: Der Satz soll ein Satz bleiben. */
+.antwort-hervor { color: #4cc38a; }
