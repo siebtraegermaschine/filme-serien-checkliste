@@ -161,6 +161,15 @@ function sportSeiteHtml() {
     '<meta property="og:url" content="' + basis + '/">',
     '<meta property="og:title" content="' + attrEsc(SPORT_BRAND) + '">',
     '<meta property="og:description" content="' + attrEsc(beschreibung) + '">',
+    // Mit Bild (Christian, 24.08.2026): Ohne og:image blieb im iOS-Teilen-
+    // Blatt und in Link-Vorschauen ein leerer Kasten. Der frueher genannte
+    // Grund -- das MovieMatch-Popcorn -- gilt nicht mehr, seit es ein eigenes
+    // CouchUltras-Zeichen gibt. Das quadratische Icon statt des breiten
+    // Schriftzugs: Vorschaukaesten sind quadratisch, der Schriftzug verschwaende
+    // darin zu einem Streifen.
+    '<meta property="og:image" content="' + basis + '/cu-icon-512.png">',
+    '<meta property="og:image:width" content="512">',
+    '<meta property="og:image:height" content="512">',
     '<meta name="twitter:card" content="summary">',
     '<script>window.SPORT_SEITE = ' + JSON.stringify({ marke: SPORT_BRAND }) + ';</script>',
   ].join('\n');

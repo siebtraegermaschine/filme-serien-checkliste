@@ -603,9 +603,13 @@
     color: var(--text-dim); font-family: inherit; font-size: 13px; cursor: pointer;
     padding: 6px; text-decoration: underline; }
 
-  /* Bild-Logo der eigenen Sport-Domain (couchultras.png, transparent). */
-  .sport-marke-logo { display:block; margin: 0 auto; max-width: min(240px, 58vw);
+  /* Bild-Logo der eigenen Sport-Domain (couchultras.png, transparent).
+     Linksbuendig (Christian, 24.08.2026) -- der Kopf ist sonst zentriert,
+     hier steht die Marke wie in einer Kopfleiste links. Rechts bleibt der
+     Platz fuer das Menue frei (die Knoepfe sitzen absolut). */
+  .sport-marke-logo { display:block; margin: 0; max-width: min(240px, 52vw);
     height: auto; cursor: pointer; }
+  body.sport-seite header { text-align: left; }
   /* Oberkante Logo = Oberkante der Navigations-Knoepfe (die sitzen absolut
      bei 6px + safe-area; Logo steht daneben und ueberlagert nichts --
      Christian, 20.08.2026). Ueberschreibt die 30px des Standard-Headers. */
@@ -703,9 +707,20 @@
   .sender-cta { display:inline-block; text-decoration:none; margin-top:6px; margin-right:8px; }
   .tv-zusatz { font-weight:400; opacity:.8; }
 
-  /* Ansichts-Umschalter der Sport-Seite (Spielplan/Konferenz/Tabelle):
-     dieselbe Chip-Optik, nur mit etwas Abstand zum Seitentitel. */
-  .sport-modus { margin-top:14px; }
+  /* Ansichts-Zeile: links die Chips (scrollbar), rechts "+ Deine Ansicht"
+     -- der Link bleibt stehen, wenn die Chips gewischt werden. */
+  .sport-modus-zeile { display:flex; align-items:center; gap:10px;
+    max-width:700px; margin:14px auto 0; padding:0 20px; box-sizing:border-box; }
+  .sport-modus-zeile .sport-chips { margin:0; padding:0; max-width:none;
+    flex:1 1 auto; min-width:0; }
+  .sport-modus-zeile .sport-verein-link { flex:0 0 auto; }
+  /* Schmale Schirme: Nebeneinander schnitte der Link den "Tabelle"-Chip an.
+     Dann rutscht er unter die Chips -- weiterhin rechtsbuendig. */
+  @media (max-width: 560px) {
+    .sport-modus-zeile { flex-wrap:wrap; row-gap:6px; }
+    .sport-modus-zeile .sport-chips { flex:1 1 100%; }
+    .sport-modus-zeile .sport-verein-link { margin-left:auto; }
+  }
 
   /* Aufklappbare Spielkarten-Details: Direktvergleich + Formkurve. Die
      Karte selbst bleibt das Klickziel (ausser Badges/Links), der Bereich
@@ -737,6 +752,10 @@
     cursor:pointer; }
   /* Aufgeklappte Details ueberspannen alle vier Spalten der Zeile. */
   li.sport-konf .sport-details { grid-column:1 / -1; font-weight:400; }
+  /* Kopfzeile der aufgeklappten Konferenz-Zeile: Wettbewerb, darunter die
+     Sender-Badges (dieselben wie im Spielplan, samt Klick aufs Popup). */
+  .konf-info { color:var(--text-dim); font-size:12.5px; }
+  .konf-info-tv { margin:6px 0 4px; }
   .konf-zeit { font-size:12px; font-weight:700; color:var(--text-dim); white-space:nowrap; }
   .konf-zeit.live { color:#e05d5d; letter-spacing:.5px; }
   .konf-heim, .konf-gast { display:flex; align-items:center; gap:6px; min-width:0; }
@@ -1763,10 +1782,6 @@
        (Einstellungen) -- ein Ort fuer alle Abos statt zwei Verwaltungen. -->
   <div class="cinema-page-header">
     <h2 class="cinema-page-title" id="sportPageTitle">Fußball live im TV</h2>
-    <!-- Bewusst ein Textlink, kein Knopf (Christian, 19. August 2026):
-         oeffnet die Vereinsauswahl (#vereinModal); die gewaehlten Vereine
-         erscheinen als Logo-Chips in der Filterreihe. -->
-    <span class="sport-verein-link" id="sportVereinBtn" role="button" tabindex="0">+ Dein Verein</span>
   </div>
   <!-- Zwei Filterreihen (renderSportChips): oben die Wettbewerbe
        (Alle/Bundesliga/...), darunter die Verfuegbarkeit als Dreier-Auswahl
@@ -1776,8 +1791,17 @@
        immer mit. -->
   <!-- Ansichts-Umschalter (24.08.2026): Spielplan (Standard) / Konferenz
        (alle heutigen Spiele verdichtet mit Staenden) / Tabelle (Ligatabelle
-       samt Torschuetzen). Gerendert von renderSportModusChips. -->
-  <div class="sport-chips sport-modus" id="sportModusChips"></div>
+       samt Torschuetzen). Gerendert von renderSportModusChips.
+       Rechts daneben "+ Deine Ansicht" (Christian, 24.08.2026): Der Link
+       stand bis dahin neben der Ueberschrift -- hier gehoert er hin, denn er
+       stellt dieselbe Sache ein wie die Chips daneben (was sehe ich?). -->
+  <div class="sport-modus-zeile">
+    <div class="sport-chips sport-modus" id="sportModusChips"></div>
+    <!-- Bewusst ein Textlink, kein Knopf (Christian, 19. August 2026):
+         oeffnet die Vereinsauswahl (#vereinModal); die gewaehlten Vereine
+         erscheinen als Logo-Chips in der Filterreihe. -->
+    <span class="sport-verein-link" id="sportVereinBtn" role="button" tabindex="0">+ Deine Ansicht</span>
+  </div>
   <div class="sport-chips" id="sportChips"></div>
   <div class="sport-chips sport-chips-verf" id="sportVerfChips"></div>
   <div id="sportPlanWrap">
@@ -2100,6 +2124,11 @@
   <div class="modal">
     <button class="modal-x" id="creditsModalX" aria-label="Schließen">✕</button>
     <h3>Credits</h3>
+    <!-- Alles zur Film-App in EINEM Block: Auf der Sport-Domain gibt es weder
+         Titel noch Kinos, dort bleibt nur OpenLigaDB stehen (Christian,
+         24.08.2026). Der TMDB-Pflichthinweis gehoert dorthin, wo TMDB-Daten
+         gezeigt werden -- auf CouchUltras werden keine gezeigt. -->
+    <div id="creditsFilm">
     <p class="prov-intro">Angaben zu Filmen und Serien – Titel, Beschreibungen, Poster, Bewertungen,
       Verfügbarkeit und Kinostarts – stammen von The Movie Database (TMDB).</p>
     <a class="credits-logo" href="https://www.themoviedb.org" target="_blank" rel="noopener">
@@ -2119,6 +2148,7 @@
     <p class="prov-intro">Postleitzahlen und Orte für die Umkreissuche stammen von
       <a href="https://www.geonames.org" target="_blank" rel="noopener">GeoNames</a>,
       veröffentlicht unter der Lizenz Creative Commons Namensnennung 4.0 (CC BY 4.0).</p>
+    </div>
     <!-- Steht hier statt auf der Sport-Seite selbst (Christian, 19. August
          2026: Credits gehoeren unter Credits). -->
     <p class="prov-intro">Die Spielpläne im Sport-Bereich stammen von
@@ -2653,16 +2683,17 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Aktuell sind keine Titel hinterlegt.', soon: 'In Kürze startet aktuell nichts Neues.', later: 'Für die kommenden Monate ist noch nichts hinterlegt.' },
     kinoFehler: 'Kino-Daten konnten nicht geladen werden.',
     sportTitel: 'Fußball live im TV',
-    sportTeilenText: '⚽ Endlich! Auf einen Blick sehen, welches Fußballspiel bei welchem Streaming-Anbieter oder im Free-TV läuft. („+ Dein Verein“ filtert die Spiele zukünftig nur nach deinem Verein)',
+    sportTeilenText: '⚽ Endlich! Auf einen Blick sehen, welches Fußballspiel bei welchem Streaming-Anbieter oder im Free-TV läuft. („+ Deine Ansicht“ filtert die Spiele zukünftig nur nach deinem Verein)',
     sportLabels: { heute: 'Heute', woche: 'Diese Woche', spaeter: 'Demnächst' },
     sportKeineSpiele: 'Keine Spiele für diese Auswahl.',
+    sportSenderOffen: 'Sender noch offen',
     sportFehler: 'Der Spielplan konnte nicht geladen werden.',
     sportAlle: 'Alle',
     sportNurFrei: 'Free-TV',
     sportDeineAnbieter: 'Deine Streaming-Abos',
     sportAboHinweisText: 'Kostenlos registrieren und deine Streaming-Anbieter sowie deinen Verein festlegen — dann filtert dieser Knopf genau die Spiele, die du sehen kannst.',
     sportAboHinweisKnopf: 'Kostenlos registrieren / anmelden',
-    sportHilfeVerein: 'Tippe auf „+ Dein Verein“: Wähle deinen Verein und deine Wettbewerbe — der Spielplan ist dann künftig genau danach vorgefiltert.',
+    sportHilfeVerein: 'Tippe auf „+ Deine Ansicht“: Wähle deinen Verein und deine Wettbewerbe — der Spielplan ist dann künftig genau danach vorgefiltert.',
     sportHilfeApp: 'Im Menü findest du „Als App speichern“ — damit landet die Seite wie eine App auf deinem Startbildschirm.',
     sportHilfeTeilen: 'Wische ein Spiel nach rechts, um die Übertragung mit anderen zu teilen – oder teile die CouchUltras-App über den Teilen-Button mit anderen.',
     sportHilfeSender: 'Klicke auf einen Anbieter (z. B. Sky) und sieh den übertragenden Sender (z. B. Sky Sport Bundesliga 1).',
@@ -2689,7 +2720,7 @@ var UI_TEXTE = {
     sportTabNochNicht: 'Für diesen Wettbewerb gibt es noch keine Tabelle – sie entsteht, sobald die ersten Spiele gewertet sind.',
     sportTabBerechnet: 'Aus den Ergebnissen berechnet, sortiert nach Punkten, Tordifferenz und Toren. K.-o.-Spiele zählen nicht mit.',
     sportDetailsDuelle: 'Direktvergleich',
-    sportDetailsForm: 'Formkurve',
+    sportDetailsForm: 'Formkurve (letzte Spiele)',
     sportDetailsLeer: 'Keine Daten zu diesem Spiel gefunden.',
     sportKalenderAbo: function(n){ return '📅 Spielplan von ' + n + ' abonnieren'; },
     pushKalenderTitel: 'Spielplan im Kalender',
@@ -3052,16 +3083,17 @@ var UI_TEXTE = {
     kinoLeer: { now: 'No titles on file right now.', soon: 'Nothing new starting soon.', later: 'Nothing on file for the coming months yet.' },
     kinoFehler: 'Cinema data could not be loaded.',
     sportTitel: 'Football live on TV',
-    sportTeilenText: '⚽ Finally! See at a glance which football match is on which streaming service or on free TV. (“+ Your club” filters the schedule to your club’s matches)',
+    sportTeilenText: '⚽ Finally! See at a glance which football match is on which streaming service or on free TV. (“+ Your view” filters the schedule to your club’s matches)',
     sportLabels: { heute: 'Today', woche: 'This week', spaeter: 'Coming up' },
     sportKeineSpiele: 'No matches for this selection.',
+    sportSenderOffen: 'Broadcaster not confirmed yet',
     sportFehler: 'The schedule could not be loaded.',
     sportAlle: 'All',
     sportNurFrei: 'Free TV',
     sportDeineAnbieter: 'Your streaming subscriptions',
     sportAboHinweisText: 'Register for free and set your streaming services and your club — then this filter shows exactly the matches you can watch.',
     sportAboHinweisKnopf: 'Register / sign in for free',
-    sportHilfeVerein: 'Tap “+ Your club”: pick your club and competitions — the schedule will be pre-filtered for you from then on.',
+    sportHilfeVerein: 'Tap “+ Your view”: pick your club and competitions — the schedule will be pre-filtered for you from then on.',
     sportHilfeApp: 'In the menu you’ll find “Save as app” to put this page on your home screen like an app.',
     sportHilfeTeilen: 'Swipe a match to the right to share its broadcast with others – or share the CouchUltras app via the share button.',
     sportHilfeSender: 'Click a provider (e.g. Sky) to see the exact broadcasting channel (e.g. Sky Sport Bundesliga 1).',
@@ -3088,7 +3120,7 @@ var UI_TEXTE = {
     sportTabNochNicht: 'There is no table for this competition yet – it appears once the first matches have been played.',
     sportTabBerechnet: 'Calculated from the results, ranked by points, goal difference and goals. Knockout matches are not counted.',
     sportDetailsDuelle: 'Head-to-head',
-    sportDetailsForm: 'Form',
+    sportDetailsForm: 'Form (recent matches)',
     sportDetailsLeer: 'No data found for this match.',
     sportKalenderAbo: function(n){ return '📅 Subscribe to the ' + n + ' schedule'; },
     pushKalenderTitel: 'Schedule in your calendar',
@@ -3448,16 +3480,17 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Aucun titre référencé pour le moment.', soon: 'Rien de nouveau ne démarre prochainement.', later: 'Rien de référencé pour les mois à venir pour l’instant.' },
     kinoFehler: 'Les données cinéma n’ont pas pu être chargées.',
     sportTitel: 'Foot en direct à la télé',
-    sportTeilenText: '⚽ Enfin ! Voir d’un coup d’œil quel match de foot passe sur quel service de streaming ou en clair. (« + Ton club » filtre le calendrier sur ton club)',
+    sportTeilenText: '⚽ Enfin ! Voir d’un coup d’œil quel match de foot passe sur quel service de streaming ou en clair. (« + Ta vue » filtre le calendrier sur ton club)',
     sportLabels: { heute: 'Aujourd’hui', woche: 'Cette semaine', spaeter: 'À venir' },
     sportKeineSpiele: 'Aucun match pour cette sélection.',
+    sportSenderOffen: 'Diffuseur pas encore connu',
     sportFehler: 'Le calendrier n’a pas pu être chargé.',
     sportAlle: 'Tous',
     sportNurFrei: 'TV gratuite',
     sportDeineAnbieter: 'Tes abonnements streaming',
     sportAboHinweisText: 'Inscris-toi gratuitement et définis tes services de streaming et ton club — ce filtre montrera exactement les matchs que tu peux voir.',
     sportAboHinweisKnopf: 'S’inscrire / se connecter',
-    sportHilfeVerein: 'Touche « + Ton club » : choisis ton club et tes compétitions — le calendrier sera ensuite préfiltré pour toi.',
+    sportHilfeVerein: 'Touche « + Ta vue » : choisis ton club et tes compétitions — le calendrier sera ensuite préfiltré pour toi.',
     sportHilfeApp: 'Dans le menu, « Enregistrer comme appli » place cette page sur ton écran d’accueil.',
     sportHilfeTeilen: 'Fais glisser un match vers la droite pour partager sa diffusion – ou partage l’appli CouchUltras via le bouton Partager.',
     sportHilfeSender: 'Clique sur un diffuseur (p. ex. Sky) pour voir la chaîne exacte (p. ex. Sky Sport Bundesliga 1).',
@@ -3484,7 +3517,7 @@ var UI_TEXTE = {
     sportTabNochNicht: 'Il n’y a pas encore de classement pour cette compétition – il apparaît dès les premiers matchs joués.',
     sportTabBerechnet: 'Calculé à partir des résultats, classé par points, différence de buts et buts marqués. Les matchs à élimination directe ne comptent pas.',
     sportDetailsDuelle: 'Face-à-face',
-    sportDetailsForm: 'Forme',
+    sportDetailsForm: 'Forme (derniers matchs)',
     sportDetailsLeer: 'Aucune donnée pour ce match.',
     sportKalenderAbo: function(n){ return '📅 S’abonner au calendrier de ' + n; },
     pushKalenderTitel: 'Le calendrier dans ton agenda',
@@ -3844,16 +3877,17 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Ahora mismo no hay títulos registrados.', soon: 'No hay estrenos próximos.', later: 'Aún no hay nada registrado para los próximos meses.' },
     kinoFehler: 'No se pudieron cargar los datos de cine.',
     sportTitel: 'Fútbol en directo por TV',
-    sportTeilenText: '⚽ ¡Por fin! Ver de un vistazo qué partido de fútbol se emite en qué servicio de streaming o en abierto. («+ Tu club» filtra el calendario por tu equipo)',
+    sportTeilenText: '⚽ ¡Por fin! Ver de un vistazo qué partido de fútbol se emite en qué servicio de streaming o en abierto. («+ Tu vista» filtra el calendario por tu equipo)',
     sportLabels: { heute: 'Hoy', woche: 'Esta semana', spaeter: 'Próximamente' },
     sportKeineSpiele: 'No hay partidos para esta selección.',
+    sportSenderOffen: 'Cadena aún sin confirmar',
     sportFehler: 'No se pudo cargar el calendario.',
     sportAlle: 'Todos',
     sportNurFrei: 'TV en abierto',
     sportDeineAnbieter: 'Tus suscripciones de streaming',
     sportAboHinweisText: 'Regístrate gratis y define tus servicios de streaming y tu equipo — este filtro mostrará exactamente los partidos que puedes ver.',
     sportAboHinweisKnopf: 'Registrarse / iniciar sesión',
-    sportHilfeVerein: 'Toca «+ Tu club»: elige tu equipo y tus competiciones — el calendario quedará prefiltrado para ti.',
+    sportHilfeVerein: 'Toca «+ Tu vista»: elige tu equipo y tus competiciones — el calendario quedará prefiltrado para ti.',
     sportHilfeApp: 'En el menú encontrarás «Guardar como app» para poner esta página en tu pantalla de inicio.',
     sportHilfeTeilen: 'Desliza un partido hacia la derecha para compartir su emisión – o comparte la app CouchUltras con el botón de compartir.',
     sportHilfeSender: 'Haz clic en un proveedor (p. ej. Sky) para ver el canal exacto (p. ej. Sky Sport Bundesliga 1).',
@@ -3880,7 +3914,7 @@ var UI_TEXTE = {
     sportTabNochNicht: 'Todavía no hay clasificación para esta competición: aparece en cuanto se juegan los primeros partidos.',
     sportTabBerechnet: 'Calculada a partir de los resultados, ordenada por puntos, diferencia de goles y goles. Los partidos eliminatorios no cuentan.',
     sportDetailsDuelle: 'Cara a cara',
-    sportDetailsForm: 'Forma',
+    sportDetailsForm: 'Forma (últimos partidos)',
     sportDetailsLeer: 'No hay datos de este partido.',
     sportKalenderAbo: function(n){ return '📅 Suscribirse al calendario del ' + n; },
     pushKalenderTitel: 'El calendario en tu agenda',
@@ -4240,16 +4274,17 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Nessun titolo registrato al momento.', soon: 'Nessuna novità in arrivo a breve.', later: 'Ancora niente in programma per i prossimi mesi.' },
     kinoFehler: 'Impossibile caricare i dati del cinema.',
     sportTitel: 'Calcio in diretta TV',
-    sportTeilenText: '⚽ Finalmente! Vedere a colpo d’occhio quale partita va in onda su quale servizio di streaming o in chiaro. («+ La tua squadra» filtra il calendario sulla tua squadra)',
+    sportTeilenText: '⚽ Finalmente! Vedere a colpo d’occhio quale partita va in onda su quale servizio di streaming o in chiaro. («+ La tua vista» filtra il calendario sulla tua squadra)',
     sportLabels: { heute: 'Oggi', woche: 'Questa settimana', spaeter: 'In arrivo' },
     sportKeineSpiele: 'Nessuna partita per questa selezione.',
+    sportSenderOffen: 'Emittente non ancora nota',
     sportFehler: 'Impossibile caricare il calendario.',
     sportAlle: 'Tutti',
     sportNurFrei: 'TV in chiaro',
     sportDeineAnbieter: 'I tuoi abbonamenti streaming',
     sportAboHinweisText: 'Registrati gratis e imposta i tuoi servizi di streaming e la tua squadra — questo filtro mostrerà esattamente le partite che puoi vedere.',
     sportAboHinweisKnopf: 'Registrati / accedi',
-    sportHilfeVerein: 'Tocca «+ La tua squadra»: scegli squadra e competizioni — il calendario sarà poi prefiltrato per te.',
+    sportHilfeVerein: 'Tocca «+ La tua vista»: scegli squadra e competizioni — il calendario sarà poi prefiltrato per te.',
     sportHilfeApp: 'Nel menu trovi «Salva come app» per mettere questa pagina sulla schermata Home.',
     sportHilfeTeilen: 'Scorri una partita verso destra per condividerne la trasmissione – oppure condividi l’app CouchUltras con il pulsante Condividi.',
     sportHilfeSender: 'Clicca su un fornitore (es. Sky) per vedere il canale esatto (es. Sky Sport Bundesliga 1).',
@@ -4276,7 +4311,7 @@ var UI_TEXTE = {
     sportTabNochNicht: 'Per questa competizione non c’è ancora una classifica: compare appena si giocano le prime partite.',
     sportTabBerechnet: 'Calcolata dai risultati, ordinata per punti, differenza reti e gol. Le partite a eliminazione non contano.',
     sportDetailsDuelle: 'Scontri diretti',
-    sportDetailsForm: 'Forma',
+    sportDetailsForm: 'Forma (ultime partite)',
     sportDetailsLeer: 'Nessun dato per questa partita.',
     sportKalenderAbo: function(n){ return '📅 Abbonati al calendario di ' + n; },
     pushKalenderTitel: 'Il calendario nella tua agenda',
@@ -4636,16 +4671,17 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Op dit moment geen titels bekend.', soon: 'Binnenkort start er niets nieuws.', later: 'Voor de komende maanden is nog niets bekend.' },
     kinoFehler: 'Bioscoopgegevens konden niet worden geladen.',
     sportTitel: 'Voetbal live op tv',
-    sportTeilenText: '⚽ Eindelijk! In één oogopslag zien welke voetbalwedstrijd bij welke streamingdienst of op free-tv te zien is. („+ Jouw club” filtert het schema op jouw club)',
+    sportTeilenText: '⚽ Eindelijk! In één oogopslag zien welke voetbalwedstrijd bij welke streamingdienst of op free-tv te zien is. („+ Jouw weergave” filtert het schema op jouw club)',
     sportLabels: { heute: 'Vandaag', woche: 'Deze week', spaeter: 'Binnenkort' },
     sportKeineSpiele: 'Geen wedstrijden voor deze selectie.',
+    sportSenderOffen: 'Zender nog niet bekend',
     sportFehler: 'Het speelschema kon niet worden geladen.',
     sportAlle: 'Alle',
     sportNurFrei: 'Free-tv',
     sportDeineAnbieter: 'Jouw streamingabonnementen',
     sportAboHinweisText: 'Registreer gratis en stel je streamingdiensten en je club in — dan toont dit filter precies de wedstrijden die je kunt zien.',
     sportAboHinweisKnopf: 'Gratis registreren / inloggen',
-    sportHilfeVerein: 'Tik op „+ Jouw club”: kies je club en competities — het speelschema wordt daarna voor jou voorgefilterd.',
+    sportHilfeVerein: 'Tik op „+ Jouw weergave”: kies je club en competities — het speelschema wordt daarna voor jou voorgefilterd.',
     sportHilfeApp: 'In het menu vind je „Als app opslaan” om deze pagina als app op je beginscherm te zetten.',
     sportHilfeTeilen: 'Veeg een wedstrijd naar rechts om de uitzending met anderen te delen – of deel de CouchUltras-app via de deelknop.',
     sportHilfeSender: 'Klik op een aanbieder (bijv. Sky) om de exacte zender te zien (bijv. Sky Sport Bundesliga 1).',
@@ -4672,7 +4708,7 @@ var UI_TEXTE = {
     sportTabNochNicht: 'Voor dit toernooi is er nog geen stand – die verschijnt zodra de eerste wedstrijden gespeeld zijn.',
     sportTabBerechnet: 'Berekend uit de uitslagen, gesorteerd op punten, doelsaldo en doelpunten. Knock-outwedstrijden tellen niet mee.',
     sportDetailsDuelle: 'Onderlinge duels',
-    sportDetailsForm: 'Vorm',
+    sportDetailsForm: 'Vorm (laatste wedstrijden)',
     sportDetailsLeer: 'Geen gegevens voor deze wedstrijd.',
     sportKalenderAbo: function(n){ return '📅 Abonneer op het programma van ' + n; },
     pushKalenderTitel: 'Programma in je agenda',
@@ -5032,16 +5068,17 @@ var UI_TEXTE = {
     kinoLeer: { now: 'Nenhum título registrado no momento.', soon: 'Nada novo estreando em breve.', later: 'Ainda nada registrado para os próximos meses.' },
     kinoFehler: 'Não foi possível carregar os dados de cinema.',
     sportTitel: 'Futebol ao vivo na TV',
-    sportTeilenText: '⚽ Finalmente! Ver de relance qual jogo de futebol passa em qual serviço de streaming ou na TV aberta. («+ Seu clube» filtra o calendário pelo seu clube)',
+    sportTeilenText: '⚽ Finalmente! Ver de relance qual jogo de futebol passa em qual serviço de streaming ou na TV aberta. («+ Sua visão» filtra o calendário pelo seu clube)',
     sportLabels: { heute: 'Hoje', woche: 'Esta semana', spaeter: 'Em breve' },
     sportKeineSpiele: 'Nenhum jogo para esta seleção.',
+    sportSenderOffen: 'Emissora ainda não definida',
     sportFehler: 'Não foi possível carregar o calendário.',
     sportAlle: 'Todos',
     sportNurFrei: 'TV aberta',
     sportDeineAnbieter: 'Suas assinaturas de streaming',
     sportAboHinweisText: 'Registre-se grátis e defina seus serviços de streaming e seu clube — este filtro mostrará exatamente os jogos que você pode ver.',
     sportAboHinweisKnopf: 'Registrar-se / entrar',
-    sportHilfeVerein: 'Toque em «+ Seu clube»: escolha seu clube e competições — o calendário ficará pré-filtrado para você.',
+    sportHilfeVerein: 'Toque em «+ Sua visão»: escolha seu clube e competições — o calendário ficará pré-filtrado para você.',
     sportHilfeApp: 'No menu você encontra «Salvar como app» para colocar esta página na sua tela inicial.',
     sportHilfeTeilen: 'Deslize um jogo para a direita para compartilhar a transmissão – ou compartilhe o app CouchUltras pelo botão de compartilhar.',
     sportHilfeSender: 'Clique em um provedor (ex.: Sky) para ver o canal exato (ex.: Sky Sport Bundesliga 1).',
@@ -5068,7 +5105,7 @@ var UI_TEXTE = {
     sportTabNochNicht: 'Ainda não há classificação para esta competição – ela surge assim que os primeiros jogos forem disputados.',
     sportTabBerechnet: 'Calculada a partir dos resultados, ordenada por pontos, saldo de gols e gols. Jogos eliminatórios não contam.',
     sportDetailsDuelle: 'Confronto direto',
-    sportDetailsForm: 'Forma',
+    sportDetailsForm: 'Forma (últimos jogos)',
     sportDetailsLeer: 'Sem dados para este jogo.',
     sportKalenderAbo: function(n){ return '📅 Assinar o calendário de ' + n; },
     pushKalenderTitel: 'Calendário no seu app',
@@ -5730,7 +5767,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Save' },
     '#sportPageTitle': { t: 'Football live on TV' },
     '#providersSportTitel': { t: 'Sports subscriptions' },
-    '#sportVereinBtn': { t: '+ Your club' },
+    '#sportVereinBtn': { t: '+ Your view' },
     '#settingsVereinBtn': { t: 'Your club' },
     '#sportHeaderBtn': { a: 'Sports' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'The schedules in the Sports section come from <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, a free community project. Broadcaster information is derived rule-based from the German TV rights split – without guarantee.' },
@@ -5863,7 +5900,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Enregistrer' },
     '#sportPageTitle': { t: 'Foot en direct à la télé' },
     '#providersSportTitel': { t: 'Abonnements sport' },
-    '#sportVereinBtn': { t: '+ Ton club' },
+    '#sportVereinBtn': { t: '+ Ta vue' },
     '#settingsVereinBtn': { t: 'Ton club' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Les calendriers de la section Sport proviennent d’<a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un projet communautaire libre. Les diffuseurs sont déduits des droits TV allemands – sans garantie.' },
@@ -5996,7 +6033,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Guardar' },
     '#sportPageTitle': { t: 'Fútbol en directo por TV' },
     '#providersSportTitel': { t: 'Suscripciones deportivas' },
-    '#sportVereinBtn': { t: '+ Tu club' },
+    '#sportVereinBtn': { t: '+ Tu vista' },
     '#settingsVereinBtn': { t: 'Tu club' },
     '#sportHeaderBtn': { a: 'Deporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Los calendarios de la sección Deporte provienen de <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un proyecto comunitario libre. Las emisoras se derivan de los derechos de TV alemanes – sin garantía.' },
@@ -6129,7 +6166,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Salva' },
     '#sportPageTitle': { t: 'Calcio in diretta TV' },
     '#providersSportTitel': { t: 'Abbonamenti sport' },
-    '#sportVereinBtn': { t: '+ La tua squadra' },
+    '#sportVereinBtn': { t: '+ La tua vista' },
     '#settingsVereinBtn': { t: 'La tua squadra' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'I calendari della sezione Sport provengono da <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un progetto comunitario libero. Le emittenti sono dedotte dai diritti TV tedeschi – senza garanzia.' },
@@ -6262,7 +6299,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Opslaan' },
     '#sportPageTitle': { t: 'Voetbal live op tv' },
     '#providersSportTitel': { t: 'Sportabonnementen' },
-    '#sportVereinBtn': { t: '+ Jouw club' },
+    '#sportVereinBtn': { t: '+ Jouw weergave' },
     '#settingsVereinBtn': { t: 'Jouw club' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'De speelschema’s in het Sport-gedeelte komen van <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, een vrij communityproject. Zenders worden afgeleid uit de Duitse tv-rechten – zonder garantie.' },
@@ -6395,7 +6432,7 @@ var MARKUP_TEXTE = {
     '#providersSaveBtn': { t: 'Salvar' },
     '#sportPageTitle': { t: 'Futebol ao vivo na TV' },
     '#providersSportTitel': { t: 'Assinaturas de esporte' },
-    '#sportVereinBtn': { t: '+ Seu clube' },
+    '#sportVereinBtn': { t: '+ Sua visão' },
     '#settingsVereinBtn': { t: 'Seu clube' },
     '#sportHeaderBtn': { a: 'Esporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Os calendários da seção Esporte vêm do <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, um projeto comunitário livre. As emissoras são derivadas dos direitos de TV alemães – sem garantia.' },
@@ -10705,7 +10742,11 @@ var _sportLogoDatei = null;
 function sportLogoVorladen(){
   if (_sportLogoDatei !== null || !SPORT_SEITE_MODUS || typeof File === 'undefined') return;
   _sportLogoDatei = false;   // "laedt/fehlgeschlagen" -- nie zweimal anstossen
-  fetch('couchultras.png').then(function(r){ return r.blob(); }).then(function(blob){
+  // Das quadratische Zeichen statt des breiten Schriftzugs (Christian,
+  // 24.08.2026): Im iOS-Teilen-Blatt sitzt die Vorschau in einem kleinen
+  // Quadrat -- der Schriftzug schrumpfte darin auf einen unlesbaren Streifen
+  // mit viel Leerraum, was wie ein leeres Bild aussah.
+  fetch('cu-icon-512.png').then(function(r){ return r.blob(); }).then(function(blob){
     _sportLogoDatei = new File([blob], 'couchultras.png', { type: 'image/png' });
   }).catch(function(){});
 }
@@ -10713,22 +10754,26 @@ document.getElementById('sportTeilenFabText').textContent = TXT.teilen;
 document.getElementById('sportTeilenFab').onclick = function(){
   var url = location.origin + (SPORT_SEITE_MODUS ? '/' : '/sport');
   var text = TXT.sportTeilenText;
+  // Als Titel die Adresse selbst (Christian, 24.08.2026): Im Teilen-Blatt
+  // stand vorher der Markenname, mit dem ausserhalb der App niemand etwas
+  // anfangen kann -- die Domain sagt, wohin der Link fuehrt.
+  var titel = SPORT_SEITE_MODUS ? location.host.replace(/^www\./, '') : TXT.sportTitel;
   if (navigator.share) {
     // Mit Logo-Bild, wenn geladen und teilbar -- der Link wandert dann in
     // den Text (manche Teilen-Ziele lassen files+url nicht kombiniert zu).
     if (_sportLogoDatei && navigator.canShare && navigator.canShare({ files: [_sportLogoDatei] })) {
-      navigator.share({ files: [_sportLogoDatei], text: text + '\n' + url })
+      navigator.share({ files: [_sportLogoDatei], title: titel, text: text + '\n' + url })
         .catch(function(err){
-          if (!err || err.name !== 'AbortError') zeigeEinladung(TXT.sportTitel, text, url, TXT.linkLaeuftNichtAb);
+          if (!err || err.name !== 'AbortError') zeigeEinladung(titel, text, url, TXT.linkLaeuftNichtAb);
         });
       return;
     }
-    navigator.share({ title: TXT.sportTitel, text: text, url: url })
+    navigator.share({ title: titel, text: text, url: url })
       .catch(function(err){
-        if (!err || err.name !== 'AbortError') zeigeEinladung(TXT.sportTitel, text, url, TXT.linkLaeuftNichtAb);
+        if (!err || err.name !== 'AbortError') zeigeEinladung(titel, text, url, TXT.linkLaeuftNichtAb);
       });
   } else {
-    zeigeEinladung(TXT.sportTitel, text, url, TXT.linkLaeuftNichtAb);
+    zeigeEinladung(titel, text, url, TXT.linkLaeuftNichtAb);
   }
 };
 
@@ -10939,7 +10984,19 @@ function sportFormHtml(name, form){
   }).join('');
   return '<div class="sport-formzeile"><span class="f-team">' + esc(name) + '</span>' + punkte + '</div>';
 }
-function sportDetailsHtml(spiel, d){
+/* mitKopf: In der Konferenz zeigt die Zeile selbst nur Zeit, Teams und Stand
+   -- Wettbewerb und Sender fehlen dort und kommen deshalb beim Aufklappen
+   dazu (Christian, 24.08.2026). Im Spielplan stehen beide schon auf der
+   Karte; dort waere die Wiederholung nur Laerm. */
+function sportDetailsHtml(spiel, d, mitKopf){
+  var kopf = '';
+  if (mitKopf) {
+    var comp = (SPORT_DATA.wettbewerbe[spiel.c] || {}).name || spiel.c;
+    kopf += '<div class="konf-info">' + esc(comp + (spiel.rd ? ' · ' + spiel.rd : '')) + '</div>';
+    var badges = (spiel.tv || []).map(sportBadgeHtml).join('');
+    kopf += '<div class="sport-tv konf-info-tv">' +
+      (badges || '<span class="konf-info">' + esc(TXT.sportSenderOffen) + '</span>') + '</div>';
+  }
   var html = '';
   if (d.duelle && d.duelle.length) {
     html += '<h5>' + esc(TXT.sportDetailsDuelle) + '</h5>' +
@@ -10951,11 +11008,13 @@ function sportDetailsHtml(spiel, d){
   }
   var form = sportFormHtml(spiel.hk || spiel.h, d.formHeim) + sportFormHtml(spiel.ak || spiel.a, d.formGast);
   if (form) html += '<h5>' + esc(TXT.sportDetailsForm) + '</h5>' + form;
+  // "Keine Daten" bezieht sich auf Direktvergleich und Form -- die Kopfzeile
+  // der Konferenz steht ja unabhaengig davon.
   if (!html) html = esc(TXT.sportDetailsLeer);
   // Bewusst OHNE Link auf die SEO-Spielseite (Christian, 24.08.2026): Sie
   // bietet den Aufgeklappten derzeit nichts, was hier nicht schon steht. Die
   // Seite bleibt fuer Suchmaschinen und das Wisch-Teilen bestehen.
-  return html;
+  return kopf + html;
 }
 function sportDetailsToggle(li, spiel){
   var offen = li.querySelector('.sport-details');
@@ -10964,7 +11023,10 @@ function sportDetailsToggle(li, spiel){
   det.className = 'sport-details';
   det.textContent = TXT.laedt;
   li.appendChild(det);
-  var zeigen = function(d){ if (det.isConnected) det.innerHTML = sportDetailsHtml(spiel, d); };
+  // Konferenz-Zeilen zeigen Wettbewerb und Sender nicht selbst -- beim
+  // Aufklappen kommen sie oben mit dazu.
+  var mitKopf = li.classList.contains('sport-konf');
+  var zeigen = function(d){ if (det.isConnected) det.innerHTML = sportDetailsHtml(spiel, d, mitKopf); };
   if (_spielDetails[spiel.id]) { zeigen(_spielDetails[spiel.id]); return; }
   apiRequest('GET', '/api/sport/spiel/' + encodeURIComponent(spiel.id) + '/details')
     .then(function(d){ _spielDetails[spiel.id] = d; zeigen(d); })
@@ -12143,7 +12205,16 @@ function benachrichtigungKnopfAktualisieren(){
   var knopf = document.getElementById('settingsNotifyBtn');
   var gruppe = document.getElementById('settingsMailGruppe');
   if (!knopf) return;
-  if (!CURRENT_USER) { knopf.style.display = 'none'; if (gruppe) gruppe.style.display = 'none'; return; }
+  // Die Mail geht um neue Watchlist-Treffer -- auf der Sport-Domain gibt es
+  // keine Watchlist. Muss HIER stehen und nicht nur in
+  // einstellungenSichtbarkeit: openSettingsModal ruft diese Funktion DANACH
+  // auf und machte den Punkt fuer Angemeldete sonst wieder sichtbar
+  // (Christian, 24.08.2026).
+  if (SPORT_SEITE_MODUS || !CURRENT_USER) {
+    knopf.style.display = 'none';
+    if (gruppe) gruppe.style.display = 'none';
+    return;
+  }
   if (gruppe) {
     gruppe.style.display = '';
     gruppe.textContent = TXT.mailEinstellungen + (MAIL_GRUPPE_OFFEN ? ' ▾' : ' ▸');
@@ -12427,7 +12498,9 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
 function importKnopfAktualisieren(){
   var knopf = document.getElementById('settingsImportBtn');
   if (!knopf) return;
-  if (!CURRENT_USER) { knopf.style.display = 'none'; return; }
+  // Letterboxd/IMDb/Trakt bringen Filmlisten mit -- auf der Sport-Domain
+  // gibt es nichts zu importieren (gleiche Reihenfolge-Falle wie oben).
+  if (SPORT_SEITE_MODUS || !CURRENT_USER) { knopf.style.display = 'none'; return; }
   knopf.style.display = '';
   knopf.textContent = TXT.importKnopf;
 }
@@ -14820,7 +14893,13 @@ function closeAccountModal(){ _accountModal.style.display = 'none'; }
 document.getElementById('settingsAccountBtn').onclick = openAccountModal;
 /* ---- Credits (TMDB-Attribution, siehe Kommentar am Markup) ---- */
 var _creditsModal = document.getElementById('creditsModal');
-function openCreditsModal(){ closeSettingsModal(); _creditsModal.style.display = 'flex'; }
+function openCreditsModal(){
+  closeSettingsModal();
+  // Sport-Domain: nur die Quellen, die hier wirklich genutzt werden.
+  var film = document.getElementById('creditsFilm');
+  if (film) film.style.display = SPORT_SEITE_MODUS ? 'none' : '';
+  _creditsModal.style.display = 'flex';
+}
 function closeCreditsModal(){ _creditsModal.style.display = 'none'; }
 document.getElementById('settingsCreditsBtn').onclick = openCreditsModal;
 document.getElementById('creditsModalX').onclick = closeCreditsModal;
