@@ -445,7 +445,17 @@
             ]
           }
         ],
-        "ausnahmen": {}
+        "ausnahmen": {
+          "84767": {
+            "zusatz": [
+              {
+                "s": "ard",
+                "kanal": "BR"
+              }
+            ],
+            "quelle": "3. Spieltag Free-TV-Pick, recherchiert 24.08.2026: BR zeigt MSV Duisburg - Wuerzburger Kickers (29.08.2026, \"Blickpunkt Sport live\")"
+          }
+        }
       },
       "dfb": {
         "regeln": [
@@ -617,6 +627,14 @@
               }
             ],
             "quelle": "kicker 19.08.2026: RTL zeigt alle drei Auswaertsspiele (13.11. Serbien-Deutschland)"
+          },
+          "85234": {
+            "ersetzen": [
+              {
+                "s": "ard"
+              }
+            ],
+            "quelle": "ARD-Presseportal / uebereinstimmende Presseberichte (u.a. spox.com), recherchiert 24.08.2026: ARD zeigt das Heimspiel gegen die Niederlande (16.11.2026, Olympiastadion Berlin) live"
           }
         }
       },
