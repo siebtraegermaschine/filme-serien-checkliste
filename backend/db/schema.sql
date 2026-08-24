@@ -1119,3 +1119,10 @@ UPDATE push_abos SET arten = ARRAY['vor30'] WHERE arten = ARRAY['spielbeginn'];
 -- Geraet anmeldete, stand dort vor leeren Kaestchen. Das Konto ist jetzt die
 -- geraeteuebergreifende Wahrheit; die Abos der Person werden nachgezogen.
 ALTER TABLE users ADD COLUMN IF NOT EXISTS sport_push_arten TEXT[];
+
+-- Anbieter-Vorauswahl der Sport-Ansicht (Christian, 24.08.2026): 'abo'
+-- (nur Spiele in den eigenen Sender-Abos) und/oder 'frei' (nur Free-TV).
+-- Beides wird seit dem Umbau NUR noch im Fenster "Deine Ansicht" gesetzt,
+-- nicht mehr als Chip im Spielplan -- und gehoert damit zur gespeicherten
+-- Ansicht wie Vereine und Wettbewerbe.
+ALTER TABLE users ADD COLUMN IF NOT EXISTS sport_verf TEXT[];

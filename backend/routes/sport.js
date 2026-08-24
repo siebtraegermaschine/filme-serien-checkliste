@@ -109,20 +109,25 @@ router.get('/spiel/:id/details', async (req, res) => {
    Frontend schiebt dann die lokale Auswahl hoch, statt sie zu ueberschreiben. */
 router.get('/ansicht', requireAuth, async (req, res) => {
   const { rows } = await pool.query(
-    'SELECT sport_vereine, sport_comps, sport_push_arten FROM users WHERE id = $1', [req.session.userId]);
+    'SELECT sport_vereine, sport_comps, sport_verf, sport_push_arten FROM users WHERE id = $1',
+    [req.session.userId]);
   const u = rows[0] || {};
   res.json({
     vereine: u.sport_vereine || null,
     comps: u.sport_comps || null,
+    verf: u.sport_verf || null,
     arten: u.sport_push_arten || null,
   });
 });
 
 router.put('/ansicht', requireAuth, async (req, res) => {
-  const { vereine, comps, arten } = req.body || {};
+  const { vereine, comps, verf, arten } = req.body || {};
   if (!Array.isArray(vereine) || !Array.isArray(comps)) {
     return res.status(400).json({ error: 'invalid_payload' });
   }
+  // Anbieter-Vorauswahl: nur diese beiden Werte, Reihenfolge fest.
+  const sauberVerf = Array.isArray(verf)
+    ? ['abo', 'frei'].filter((v) => verf.indexOf(v) !== -1) : [];
   // arten ist freiwillig: Wer nur Vereine speichert (Ansicht-Fenster), soll
   // die Benachrichtigungs-Auswahl nicht ungewollt loeschen.
   const sauberArten = Array.isArray(arten) ? ARTEN.filter((a) => arten.indexOf(a) !== -1) : null;
@@ -142,17 +147,17 @@ router.put('/ansicht', requireAuth, async (req, res) => {
     .filter((c) => /^[a-z0-9]{1,12}$/.test(c)))].slice(0, 20);
 
   await pool.query(
-    `UPDATE users SET sport_vereine = $1, sport_comps = $2,
-            sport_push_arten = COALESCE($3, sport_push_arten)
-      WHERE id = $4`,
-    [JSON.stringify(sauberVereine), sauberComps, sauberArten, req.session.userId]);
+    `UPDATE users SET sport_vereine = $1, sport_comps = $2, sport_verf = $3,
+            sport_push_arten = COALESCE($4, sport_push_arten)
+      WHERE id = $5`,
+    [JSON.stringify(sauberVereine), sauberComps, sauberVerf, sauberArten, req.session.userId]);
   // Alle Push-Abos dieser Person nachziehen -- sonst erinnerte ein zweites
   // Geraet weiter an den alten Verein bzw. zur alten Zeit. Genau das ist der
   // Konto-Nutzen bei den Benachrichtigungen (siehe lib/sportPush.js).
   await pool.query(
     `UPDATE push_abos SET vereine = $1, arten = COALESCE($2, arten) WHERE user_id = $3`,
     [sauberVereine.map((v) => v.n), sauberArten, req.session.userId]);
-  res.json({ vereine: sauberVereine, comps: sauberComps, arten: sauberArten });
+  res.json({ vereine: sauberVereine, comps: sauberComps, verf: sauberVerf, arten: sauberArten });
 });
 
 // GET/PUT /api/sport/abos -- die eigenen Sport-Abos (Sender-Slugs). NULL heisst

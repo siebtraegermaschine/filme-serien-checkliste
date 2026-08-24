@@ -710,24 +710,17 @@
   .sender-cta { display:inline-block; text-decoration:none; margin-top:6px; margin-right:8px; }
   .tv-zusatz { font-weight:400; opacity:.8; }
 
-  /* Ansichts-Zeile: links die Chips (scrollbar), rechts "+ Deine Ansicht"
-     -- der Link bleibt stehen, wenn die Chips gewischt werden. */
-  .sport-modus-zeile { display:flex; align-items:center; gap:10px;
-    max-width:700px; margin:14px auto 0; padding:0 20px; box-sizing:border-box; }
-  .sport-modus-zeile .sport-chips { margin:0; padding:0; max-width:none;
+  /* Ansichts-Umschalter: eigene Reihe in voller Breite. */
+  .sport-modus { margin-top:14px; }
+  /* Untere Filterzeile: links die Chips (scrollbar, damit drei Vereinslogos
+     neben "Alle" nie den Link verdraengen), rechts "+ Deine Ansicht" --
+     der Link bleibt stehen, wenn die Chips gewischt werden. Diese Zeile ist
+     die letzte vor der ersten Ueberschrift und traegt deren Abstand. */
+  .sport-verf-zeile { display:flex; align-items:center; gap:10px;
+    max-width:700px; margin:6px auto 26px; padding:0 20px; box-sizing:border-box; }
+  .sport-verf-zeile .sport-chips { margin:0; padding:0; max-width:none;
     flex:1 1 auto; min-width:0; }
-  .sport-modus-zeile .sport-verein-link { flex:0 0 auto; }
-  /* Immer EINE Zeile (Christian, 24.08.2026). Auf schmalen Schirmen ruecken
-     Chips und Link enger zusammen, damit alle drei Ansichten neben den Link
-     passen (bei 375px geht es damit gerade auf). Reicht es doch nicht --
-     sehr schmale Geraete, laengere Sprachen --, scrollt die Chip-Reihe
-     (min-width:0 erlaubt ihr das Schrumpfen), der Link bleibt stehen. */
-  @media (max-width: 560px) {
-    .sport-modus-zeile { gap:8px; }
-    .sport-modus-zeile .sport-chips { gap:6px; }
-    .sport-modus button { font-size:12.5px; padding:5px 8px; }
-    .sport-modus-zeile .sport-verein-link { font-size:12px; }
-  }
+  .sport-verf-zeile .sport-verein-link { flex:0 0 auto; margin-left:auto; }
 
   /* Aufklappbare Spielkarten-Details: Direktvergleich + Formkurve. Die
      Karte selbst bleibt das Klickziel (ausser Badges/Links), der Bereich
@@ -1802,15 +1795,19 @@
        Rechts daneben "+ Deine Ansicht" (Christian, 24.08.2026): Der Link
        stand bis dahin neben der Ueberschrift -- hier gehoert er hin, denn er
        stellt dieselbe Sache ein wie die Chips daneben (was sehe ich?). -->
-  <div class="sport-modus-zeile">
-    <div class="sport-chips sport-modus" id="sportModusChips"></div>
+  <div class="sport-chips sport-modus" id="sportModusChips"></div>
+  <div class="sport-chips" id="sportChips"></div>
+  <!-- Untere Filterzeile: links "Alle" und die Vereins-Logos, rechts der Link
+       zur Vorauswahl (Christian, 24.08.2026 -- er stand zuvor bei den
+       Ansichts-Chips). Die Anbieter-Filter sind hier entfallen, sie werden im
+       Fenster "Deine Ansicht" gesetzt. -->
+  <div class="sport-verf-zeile" id="sportVerfZeile">
+    <div class="sport-chips sport-chips-verf" id="sportVerfChips"></div>
     <!-- Bewusst ein Textlink, kein Knopf (Christian, 19. August 2026):
          oeffnet die Vereinsauswahl (#vereinModal); die gewaehlten Vereine
-         erscheinen als Logo-Chips in der Filterreihe. -->
+         erscheinen als Logo-Chips links daneben. -->
     <span class="sport-verein-link" id="sportVereinBtn" role="button" tabindex="0">+ Deine Ansicht</span>
   </div>
-  <div class="sport-chips" id="sportChips"></div>
-  <div class="sport-chips sport-chips-verf" id="sportVerfChips"></div>
   <div id="sportPlanWrap">
     <div class="cinema-section">
       <h3 class="cinema-heading" id="sportHeuteHeading">Heute</h3>
@@ -2361,6 +2358,13 @@
     <p class="prov-intro" id="vereinIntro">Individualisiere deine App. Wähle Wettbewerbe
       und/oder Vereine und Nationalmannschaften aus und sieh zukünftig immer deinen
       personalisierten Spielplan.</p>
+    <!-- Anbieter zuerst (Christian, 24.08.2026): "Deine Streaming-Abos" und
+         "Free-TV" waren Chips im Spielplan; sie gehoeren zur gespeicherten
+         Vorauswahl, nicht ins Tagesgeschaeft. Im Spielplan bleiben nur noch
+         "Alle" und die Vereins-Logos. -->
+    <h4 class="prov-sport-titel" id="ansichtAnbieterTitel">Anbieter</h4>
+    <div class="sport-chips ansicht-chips" id="ansichtAnbieter"></div>
+    <p class="prov-hint" id="ansichtAboHinweis" style="display:none"></p>
     <h4 class="prov-sport-titel" id="ansichtLigenTitel">Wettbewerbe (vorausgewählt)</h4>
     <div class="sport-chips ansicht-chips" id="ansichtLigen"></div>
     <h4 class="prov-sport-titel" id="ansichtVereineTitel">Deine Vereine (bis zu 3)</h4>
@@ -2694,6 +2698,8 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Heute', woche: 'Diese Woche', spaeter: 'Demnächst' },
     sportKeineSpiele: 'Keine Spiele für diese Auswahl.',
     sportSenderOffen: 'Sender noch offen',
+    ansichtAnbieter: 'Anbieter',
+    ansichtKeineAbos: 'Du hast noch keine Sender-Abos festgelegt – unter Einstellungen → „Deine Sport-Abos“.',
     sportFehler: 'Der Spielplan konnte nicht geladen werden.',
     sportAlle: 'Alle',
     sportNurFrei: 'Free-TV',
@@ -3094,6 +3100,8 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Today', woche: 'This week', spaeter: 'Coming up' },
     sportKeineSpiele: 'No matches for this selection.',
     sportSenderOffen: 'Broadcaster not confirmed yet',
+    ansichtAnbieter: 'Providers',
+    ansichtKeineAbos: 'You haven’t set any subscriptions yet – under Settings → “Your sports subscriptions”.',
     sportFehler: 'The schedule could not be loaded.',
     sportAlle: 'All',
     sportNurFrei: 'Free TV',
@@ -3491,6 +3499,8 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Aujourd’hui', woche: 'Cette semaine', spaeter: 'À venir' },
     sportKeineSpiele: 'Aucun match pour cette sélection.',
     sportSenderOffen: 'Diffuseur pas encore connu',
+    ansichtAnbieter: 'Diffuseurs',
+    ansichtKeineAbos: 'Tu n’as pas encore défini d’abonnements – dans Réglages → « Tes abonnements sport ».',
     sportFehler: 'Le calendrier n’a pas pu être chargé.',
     sportAlle: 'Tous',
     sportNurFrei: 'TV gratuite',
@@ -3888,6 +3898,8 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Hoy', woche: 'Esta semana', spaeter: 'Próximamente' },
     sportKeineSpiele: 'No hay partidos para esta selección.',
     sportSenderOffen: 'Cadena aún sin confirmar',
+    ansichtAnbieter: 'Proveedores',
+    ansichtKeineAbos: 'Aún no has definido suscripciones: en Ajustes → «Tus suscripciones deportivas».',
     sportFehler: 'No se pudo cargar el calendario.',
     sportAlle: 'Todos',
     sportNurFrei: 'TV en abierto',
@@ -4285,6 +4297,8 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Oggi', woche: 'Questa settimana', spaeter: 'In arrivo' },
     sportKeineSpiele: 'Nessuna partita per questa selezione.',
     sportSenderOffen: 'Emittente non ancora nota',
+    ansichtAnbieter: 'Emittenti',
+    ansichtKeineAbos: 'Non hai ancora impostato abbonamenti: in Impostazioni → «I tuoi abbonamenti sport».',
     sportFehler: 'Impossibile caricare il calendario.',
     sportAlle: 'Tutti',
     sportNurFrei: 'TV in chiaro',
@@ -4682,6 +4696,8 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Vandaag', woche: 'Deze week', spaeter: 'Binnenkort' },
     sportKeineSpiele: 'Geen wedstrijden voor deze selectie.',
     sportSenderOffen: 'Zender nog niet bekend',
+    ansichtAnbieter: 'Aanbieders',
+    ansichtKeineAbos: 'Je hebt nog geen abonnementen ingesteld – bij Instellingen → „Jouw sportabonnementen”.',
     sportFehler: 'Het speelschema kon niet worden geladen.',
     sportAlle: 'Alle',
     sportNurFrei: 'Free-tv',
@@ -5079,6 +5095,8 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Hoje', woche: 'Esta semana', spaeter: 'Em breve' },
     sportKeineSpiele: 'Nenhum jogo para esta seleção.',
     sportSenderOffen: 'Emissora ainda não definida',
+    ansichtAnbieter: 'Provedores',
+    ansichtKeineAbos: 'Você ainda não definiu assinaturas – em Configurações → “Suas assinaturas de esporte”.',
     sportFehler: 'Não foi possível carregar o calendário.',
     sportAlle: 'Todos',
     sportNurFrei: 'TV aberta',
@@ -10571,6 +10589,15 @@ function gespeicherteAnsicht(){
     return Array.isArray(a.comps) ? a.comps : [];
   } catch (e) { return []; }
 }
+/* Anbieter-Vorauswahl (Christian, 24.08.2026): 'abo' und/oder 'frei'. Sie
+   wird im Fenster "Deine Ansicht" gesetzt -- im Spielplan gibt es dafuer
+   keine Chips mehr, dort bleiben "Alle" und die Vereinslogos. */
+function gespeicherteVerf(){
+  try {
+    var a = JSON.parse(localStorage.getItem(SPORT_ANSICHT_KEY) || '{}');
+    return Array.isArray(a.verf) ? ['abo', 'frei'].filter(function(v){ return a.verf.indexOf(v) !== -1; }) : [];
+  } catch (e) { return []; }
+}
 // Verfuegbarkeits-Reihe (zweite Chip-Reihe): "Alle" ist exklusiv, die
 // uebrigen Filter -- Deine Streaming-Anbieter, Nur Free-TV und die
 // Vereins-Logos -- sind frei kombinierbar (Christian, 19. August 2026).
@@ -11108,16 +11135,16 @@ function renderSportChips(){
       renderSportPage();
     };
   });
-  // Zweite Reihe: Verfuegbarkeit. "Alle" links ist exklusiv, danach frei
-  // kombinierbar: "Deine Streaming-Anbieter" (bewusst derselbe Name wie der
-  // Filter unter Filme/Serien -- dieselbe Frage: Was kann ich sehen?),
-  // "Nur Free-TV" und die Logos der gewaehlten Vereine (#vereinModal).
-  var alleAktiv = !SPORT_VERF_ABO && !SPORT_VERF_FREI && !SPORT_VEREIN_AKTIV.length;
+  /* Zweite Reihe: nur noch "Alle" und die Logos der gewaehlten Vereine
+     (Christian, 24.08.2026). Die Anbieter-Filter ("Deine Streaming-Abos",
+     "Free-TV") sind ins Fenster "Deine Ansicht" gewandert -- sie sind eine
+     Grundeinstellung, kein Handgriff im Spielplan. "Alle" raeumt deshalb nur
+     noch die Vereinsauswahl ab; die Anbieter-Vorauswahl bleibt, wo sie
+     gesetzt wurde. */
+  var alleAktiv = !SPORT_VEREIN_AKTIV.length;
   var verfEl = document.getElementById('sportVerfChips');
   var vhtml =
-    '<button type="button" data-verf="alle" class="' + (alleAktiv ? 'active' : '') + '">' + esc(TXT.sportAlle) + '</button>' +
-    '<button type="button" data-verf="abo" class="' + (SPORT_VERF_ABO ? 'active' : '') + '">' + esc(TXT.sportDeineAnbieter) + '</button>' +
-    '<button type="button" data-verf="frei" class="' + (SPORT_VERF_FREI ? 'active' : '') + '">' + esc(TXT.sportNurFrei) + '</button>';
+    '<button type="button" data-verf="alle" class="' + (alleAktiv ? 'active' : '') + '">' + esc(TXT.sportAlle) + '</button>';
   MEINE_VEREINE.forEach(function(v){
     var aktiv = SPORT_VEREIN_AKTIV.indexOf(v.n) !== -1;
     vhtml += '<button type="button" class="verein-chip' + (aktiv ? ' active' : '') + '" data-verein="' + escAttr(v.n) + '" title="' + escAttr(v.n) + '">' +
@@ -11130,23 +11157,7 @@ function renderSportChips(){
   };
   verfEl.querySelectorAll('button[data-verf]').forEach(function(b){
     b.onclick = function(){
-      if (b.dataset.verf === 'alle') { SPORT_VERF_ABO = false; SPORT_VERF_FREI = false; SPORT_VEREIN_AKTIV = []; }
-      else if (b.dataset.verf === 'abo') {
-        // Ohne festgelegte Abos filtert der Knopf ins Leere -- statt einer
-        // leeren Liste kommt der passende naechste Schritt: abgemeldet die
-        // Einladung zur kostenlosen Registrierung, angemeldet direkt das
-        // Streaminganbieter-Fenster mit dem Sport-Abo-Abschnitt.
-        var abosDa = (Array.isArray(SPORT_ABOS) && SPORT_ABOS.length > 0) || sportAbosVorauswahl().length > 0;
-        if (!SPORT_VERF_ABO && !abosDa) {
-          // Auf der Sport-Domain (Start ohne Registrierung) direkt zur
-          // Abo-Auswahl -- gespeichert wird am Geraet.
-          if (CURRENT_USER || SPORT_SEITE_MODUS) openProvidersModal();
-          else openSportAboHinweis();
-          return;
-        }
-        SPORT_VERF_ABO = !SPORT_VERF_ABO;
-      }
-      else if (b.dataset.verf === 'frei') SPORT_VERF_FREI = !SPORT_VERF_FREI;
+      if (b.dataset.verf === 'alle') SPORT_VEREIN_AKTIV = [];
       verfReset();
     };
   });
@@ -11466,6 +11477,11 @@ function openSportPage(){
   // "Alle" bzw. das Abwaehlen der Logos oeffnet den Blick wieder.
   SPORT_COMPS = gespeicherteAnsicht().slice();
   SPORT_VEREIN_AKTIV = MEINE_VEREINE.map(function(v){ return v.n; });
+  // Anbieter-Filter aus der Vorauswahl uebernehmen (im Spielplan nicht mehr
+  // umschaltbar -- siehe renderSportChips).
+  var _verf = gespeicherteVerf();
+  SPORT_VERF_ABO = _verf.indexOf('abo') !== -1;
+  SPORT_VERF_FREI = _verf.indexOf('frei') !== -1;
   SPORT_MODUS = 'plan';
   sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
   updateFilterRowUI();
@@ -11818,11 +11834,13 @@ if (pushIstAn() && pushUnterstuetzt()) {
    (beide Felder null), wandert die Auswahl DIESES Geraets hinauf -- sonst
    waere die eben getroffene Wahl mit dem ersten Login weg. Hat das Konto
    schon etwas, gewinnt es: Es ist die geraeteuebergreifende Wahrheit. ---- */
-function kontoAnsichtAnwenden(vereine, comps){
+function kontoAnsichtAnwenden(vereine, comps, verf){
   MEINE_VEREINE = (vereine || []).slice(0, VEREIN_MAX);
   try { localStorage.setItem(MEINE_VEREINE_KEY, JSON.stringify(MEINE_VEREINE)); } catch (e) {}
-  try { localStorage.setItem(SPORT_ANSICHT_KEY, JSON.stringify({ comps: comps || [] })); } catch (e) {}
+  try { localStorage.setItem(SPORT_ANSICHT_KEY, JSON.stringify({ comps: comps || [], verf: verf || [] })); } catch (e) {}
   SPORT_COMPS = (comps || []).slice();
+  SPORT_VERF_ABO = (verf || []).indexOf('abo') !== -1;
+  SPORT_VERF_FREI = (verf || []).indexOf('frei') !== -1;
   SPORT_VEREIN_AKTIV = MEINE_VEREINE.map(function(v){ return v.n; });
   vereinLinkHervorheben();
   if (sportMode) renderSportPage();
@@ -11830,18 +11848,21 @@ function kontoAnsichtAnwenden(vereine, comps){
 async function kontoAnsichtSpeichern(){
   if (!CURRENT_USER) return;
   await apiRequest('PUT', '/api/sport/ansicht', {
-    vereine: MEINE_VEREINE, comps: gespeicherteAnsicht(), arten: pushArten(),
+    vereine: MEINE_VEREINE, comps: gespeicherteAnsicht(), verf: gespeicherteVerf(),
+    arten: pushArten(),
   }).catch(function(){});
 }
 async function kontoAnsichtSyncNachLogin(){
   if (!CURRENT_USER) return;
   try {
     var d = await apiRequest('GET', '/api/sport/ansicht');
-    if (d.vereine === null && d.comps === null && d.arten === null) {
+    if (d.vereine === null && d.comps === null && d.verf === null && d.arten === null) {
       // Konto noch unbeschrieben: die Wahl DIESES Geraets hinauf.
       await kontoAnsichtSpeichern();
     } else {
-      if (d.vereine !== null || d.comps !== null) kontoAnsichtAnwenden(d.vereine || [], d.comps || []);
+      if (d.vereine !== null || d.comps !== null || d.verf !== null) {
+        kontoAnsichtAnwenden(d.vereine || [], d.comps || [], d.verf || []);
+      }
       // Benachrichtigungs-Zeitpunkte: Das Konto ist die geraeteuebergreifende
       // Wahrheit. Hat es noch keine, wandert die Wahl dieses Geraets hinauf.
       if (d.arten !== null) pushArtenMerken(d.arten);
@@ -11939,6 +11960,35 @@ var _vereinSuche = document.getElementById('vereinSuche');
 var VEREIN_MAX = 3;
 var _vereinAuswahl = [];               // Arbeitskopie waehrend das Fenster offen ist
 var _ansichtComps = [];                // Arbeitskopie der Wettbewerbs-Vorauswahl
+var _ansichtVerf = [];                 // Arbeitskopie der Anbieter-Vorauswahl
+/* Anbieter-Reihe im Fenster "Deine Ansicht": "Alle" (nichts eingeschraenkt),
+   "Deine Streaming-Abos" und "Free-TV" -- frei kombinierbar. Ohne festgelegte
+   Abos filterte "Deine Streaming-Abos" ins Leere; darauf weist ein Satz
+   darunter hin, statt hier ein zweites Fenster aufzuklappen. */
+function renderAnsichtAnbieter(){
+  var el = document.getElementById('ansichtAnbieter');
+  var an = function(v){ return _ansichtVerf.indexOf(v) !== -1; };
+  el.innerHTML =
+    '<button type="button" data-verf="alle" class="' + (_ansichtVerf.length ? '' : 'active') + '">' + esc(TXT.sportAlle) + '</button>' +
+    '<button type="button" data-verf="abo" class="' + (an('abo') ? 'active' : '') + '">' + esc(TXT.sportDeineAnbieter) + '</button>' +
+    '<button type="button" data-verf="frei" class="' + (an('frei') ? 'active' : '') + '">' + esc(TXT.sportNurFrei) + '</button>';
+  el.querySelectorAll('button').forEach(function(b){
+    b.onclick = function(){
+      var v = b.dataset.verf;
+      if (v === 'alle') _ansichtVerf = [];
+      else {
+        var i = _ansichtVerf.indexOf(v);
+        if (i === -1) _ansichtVerf.push(v); else _ansichtVerf.splice(i, 1);
+      }
+      renderAnsichtAnbieter();
+    };
+  });
+  var hinweis = document.getElementById('ansichtAboHinweis');
+  var abosDa = (Array.isArray(SPORT_ABOS) && SPORT_ABOS.length > 0) || sportAbosVorauswahl().length > 0;
+  var zeigen = an('abo') && !abosDa;
+  hinweis.textContent = zeigen ? TXT.ansichtKeineAbos : '';
+  hinweis.style.display = zeigen ? '' : 'none';
+}
 function renderAnsichtLigen(){
   var el = document.getElementById('ansichtLigen');
   var data = SPORT_DATA;
@@ -12006,11 +12056,14 @@ _vereinSuche.addEventListener('input', renderVereinList);
 async function openVereinModal(){
   _vereinAuswahl = MEINE_VEREINE.slice();
   _ansichtComps = gespeicherteAnsicht().slice();
+  _ansichtVerf = gespeicherteVerf().slice();
   _vereinSuche.value = '';
   _vereinModal.style.display = 'flex';
   _vereinList.textContent = TXT.laedt;
+  document.getElementById('ansichtAnbieterTitel').textContent = TXT.ansichtAnbieter;
   try {
-    await loadSportData();
+    await Promise.all([loadSportData(), sportAbosLaden()]);
+    renderAnsichtAnbieter();
     renderAnsichtLigen();
     renderVereinList();
   } catch (e) { _vereinList.textContent = TXT.sportFehler; }
@@ -12031,8 +12084,12 @@ document.getElementById('vereinSaveBtn').onclick = function(){
   try { localStorage.setItem(MEINE_VEREINE_KEY, JSON.stringify(MEINE_VEREINE)); } catch (e) {}
   // Wettbewerbs-Vorauswahl speichern UND sofort anwenden; die Vereins-Chips
   // bleiben bewusst INAKTIV (nie vorausgewaehlt, Christians Vorgabe).
-  try { localStorage.setItem(SPORT_ANSICHT_KEY, JSON.stringify({ comps: _ansichtComps })); } catch (e) {}
+  try { localStorage.setItem(SPORT_ANSICHT_KEY, JSON.stringify({ comps: _ansichtComps, verf: _ansichtVerf })); } catch (e) {}
   SPORT_COMPS = _ansichtComps.slice();
+  // Anbieter-Vorauswahl sofort anwenden -- im Spielplan gibt es dafuer keine
+  // Chips mehr, sie wirkt allein von hier.
+  SPORT_VERF_ABO = _ansichtVerf.indexOf('abo') !== -1;
+  SPORT_VERF_FREI = _ansichtVerf.indexOf('frei') !== -1;
   vereinLinkHervorheben();
   // Nach dem Speichern sind die gewaehlten Vereine sofort AKTIVE Filter
   // (siehe openSportPage) -- entfernte Vereine fallen damit automatisch raus.
