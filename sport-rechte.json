@@ -74,14 +74,24 @@
       "frei": true,
       "link": "https://www.joyn.de/live-tv/sat1",
       "kanal": "Sat.1",
-      "info": "Frei empfangbar; Stream über Joyn."
+      "stream": {
+        "kostenlos": true,
+        "login": "unklar",
+        "wege": [
+          {
+            "n": "Joyn",
+            "url": "https://www.joyn.de/live-tv/sat1"
+          }
+        ],
+        "geprueft": "2026-08-24",
+        "quelle": "joyn.de Live-TV frei zugaenglich; Joyn-FAQ nennt jedoch Login-Pflicht fuer P7S1-Sender (Regel seit 2020) -- widerspruechlich, deshalb 'unklar'."
+      }
     },
     "ard": {
       "name": "ARD",
       "frei": true,
       "link": "https://www.ardmediathek.de/live",
       "kanal": "Das Erste",
-      "info": "Frei empfangbar; Stream in der ARD-Mediathek oder über Joyn.",
       "links": [
         {
           "n": "ARD Mediathek",
@@ -91,14 +101,29 @@
           "n": "Joyn",
           "url": "https://www.joyn.de/live-tv/das-erste"
         }
-      ]
+      ],
+      "stream": {
+        "kostenlos": true,
+        "login": "nein",
+        "wege": [
+          {
+            "n": "ARD Mediathek",
+            "url": "https://www.ardmediathek.de/live"
+          },
+          {
+            "n": "Sportschau",
+            "url": "https://www.sportschau.de/streams"
+          }
+        ],
+        "geprueft": "2026-08-24",
+        "quelle": "Livestreams der ARD ohne Konto; Konto nur fuer Merkliste. Sport teils nur in DE abrufbar."
+      }
     },
     "zdf": {
       "name": "ZDF",
       "frei": true,
       "link": "https://www.zdf.de/live-tv",
       "kanal": "ZDF",
-      "info": "Frei empfangbar; Stream in der ZDF-Mediathek oder über Joyn.",
       "links": [
         {
           "n": "ZDF Mediathek",
@@ -108,21 +133,57 @@
           "n": "Joyn",
           "url": "https://www.joyn.de/live-tv/zdf"
         }
-      ]
+      ],
+      "stream": {
+        "kostenlos": true,
+        "login": "nein",
+        "wege": [
+          {
+            "n": "ZDFmediathek",
+            "url": "https://www.zdf.de/live-tv"
+          }
+        ],
+        "geprueft": "2026-08-24",
+        "quelle": "Livestream ohne Konto; Sportrechte teils auf Deutschland begrenzt."
+      }
     },
     "rtl": {
       "name": "RTL",
       "frei": true,
       "link": "https://plus.rtl.de/",
       "kanal": "RTL",
-      "info": "Frei empfangbar; Stream über RTL+."
+      "stream": {
+        "kostenlos": false,
+        "login": "abo",
+        "preis": "ab 9,99 €/Monat",
+        "wege": [
+          {
+            "n": "RTL+ Premium",
+            "url": "https://plus.rtl.de/"
+          }
+        ],
+        "geprueft": "2026-08-24",
+        "quelle": "Live-TV der RTL-Sender erst ab RTL+ Premium; die Tarife Free und Basic enthalten kein Live-TV."
+      }
     },
     "nitro": {
       "name": "RTL Nitro",
       "frei": true,
       "link": "https://plus.rtl.de/",
       "kanal": "RTL Nitro",
-      "info": "Frei empfangbar; Stream über RTL+."
+      "stream": {
+        "kostenlos": false,
+        "login": "abo",
+        "preis": "ab 9,99 €/Monat",
+        "wege": [
+          {
+            "n": "RTL+ Premium",
+            "url": "https://plus.rtl.de/"
+          }
+        ],
+        "geprueft": "2026-08-24",
+        "quelle": "Wie RTL: Live-TV nur im Premium-Tarif."
+      }
     },
     "magenta": {
       "name": "MagentaSport",

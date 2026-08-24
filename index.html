@@ -723,6 +723,9 @@
   /* Sender-Popup: Zeilen wie .prov-intro, der Anbieter-Link als Knopf. */
   #senderModalInhalt p { margin: 0 0 10px; }
   .sender-cta { display:inline-block; text-decoration:none; margin-top:6px; margin-right:8px; }
+  /* "Kostenlos online" ist die gute Nachricht -- derselbe Gruenton wie das
+     Free-TV-Badge. */
+  #senderModalInhalt .sender-gratis { color: var(--done); }
   .tv-zusatz { font-weight:400; opacity:.8; }
 
   /* Ansichts-Zeile: links die Chips (scrollbar), rechts "+ Deine Ansicht" --
@@ -2734,6 +2737,10 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Heute', woche: 'Diese Woche', spaeter: 'Demnächst' },
     sportKeineSpiele: 'Keine Spiele für diese Auswahl.',
     sportSenderOffen: 'Sender noch offen',
+    sportStreamKostenlos: 'Kostenlos online',
+    sportStreamOhneLogin: 'ohne Anmeldung',
+    sportStreamLoginUnklar: 'Anmeldung möglicherweise nötig',
+    sportStreamNurAbo: function(wege, preis){ return 'Online nur mit ' + wege + (preis ? ' (' + preis + ')' : '') + '. Im Fernsehen ist die Übertragung frei empfangbar.'; },
     ansichtAnbieter: 'Anbieter',
     ansichtKeineAbos: 'Du hast noch keine Sender-Abos festgelegt – unter Einstellungen → „Deine Sport-Abos“.',
     sportFehler: 'Der Spielplan konnte nicht geladen werden.',
@@ -3136,6 +3143,10 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Today', woche: 'This week', spaeter: 'Coming up' },
     sportKeineSpiele: 'No matches for this selection.',
     sportSenderOffen: 'Broadcaster not confirmed yet',
+    sportStreamKostenlos: 'Free online',
+    sportStreamOhneLogin: 'no sign-in needed',
+    sportStreamLoginUnklar: 'sign-in may be required',
+    sportStreamNurAbo: function(wege, preis){ return 'Online only with ' + wege + (preis ? ' (' + preis + ')' : '') + '. On TV the match is free to air.'; },
     ansichtAnbieter: 'Providers',
     ansichtKeineAbos: 'You haven’t set any subscriptions yet – under Settings → “Your sports subscriptions”.',
     sportFehler: 'The schedule could not be loaded.',
@@ -3535,6 +3546,10 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Aujourd’hui', woche: 'Cette semaine', spaeter: 'À venir' },
     sportKeineSpiele: 'Aucun match pour cette sélection.',
     sportSenderOffen: 'Diffuseur pas encore connu',
+    sportStreamKostenlos: 'Gratuit en ligne',
+    sportStreamOhneLogin: 'sans inscription',
+    sportStreamLoginUnklar: 'inscription peut-être nécessaire',
+    sportStreamNurAbo: function(wege, preis){ return 'En ligne uniquement avec ' + wege + (preis ? ' (' + preis + ')' : '') + '. À la télévision, la diffusion est en clair.'; },
     ansichtAnbieter: 'Diffuseurs',
     ansichtKeineAbos: 'Tu n’as pas encore défini d’abonnements – dans Réglages → « Tes abonnements sport ».',
     sportFehler: 'Le calendrier n’a pas pu être chargé.',
@@ -3934,6 +3949,10 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Hoy', woche: 'Esta semana', spaeter: 'Próximamente' },
     sportKeineSpiele: 'No hay partidos para esta selección.',
     sportSenderOffen: 'Cadena aún sin confirmar',
+    sportStreamKostenlos: 'Gratis online',
+    sportStreamOhneLogin: 'sin registro',
+    sportStreamLoginUnklar: 'puede requerir registro',
+    sportStreamNurAbo: function(wege, preis){ return 'Online solo con ' + wege + (preis ? ' (' + preis + ')' : '') + '. En televisión se emite en abierto.'; },
     ansichtAnbieter: 'Proveedores',
     ansichtKeineAbos: 'Aún no has definido suscripciones: en Ajustes → «Tus suscripciones deportivas».',
     sportFehler: 'No se pudo cargar el calendario.',
@@ -4333,6 +4352,10 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Oggi', woche: 'Questa settimana', spaeter: 'In arrivo' },
     sportKeineSpiele: 'Nessuna partita per questa selezione.',
     sportSenderOffen: 'Emittente non ancora nota',
+    sportStreamKostenlos: 'Gratis online',
+    sportStreamOhneLogin: 'senza registrazione',
+    sportStreamLoginUnklar: 'potrebbe servire la registrazione',
+    sportStreamNurAbo: function(wege, preis){ return 'Online solo con ' + wege + (preis ? ' (' + preis + ')' : '') + '. In TV la partita è in chiaro.'; },
     ansichtAnbieter: 'Emittenti',
     ansichtKeineAbos: 'Non hai ancora impostato abbonamenti: in Impostazioni → «I tuoi abbonamenti sport».',
     sportFehler: 'Impossibile caricare il calendario.',
@@ -4732,6 +4755,10 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Vandaag', woche: 'Deze week', spaeter: 'Binnenkort' },
     sportKeineSpiele: 'Geen wedstrijden voor deze selectie.',
     sportSenderOffen: 'Zender nog niet bekend',
+    sportStreamKostenlos: 'Gratis online',
+    sportStreamOhneLogin: 'zonder account',
+    sportStreamLoginUnklar: 'account mogelijk nodig',
+    sportStreamNurAbo: function(wege, preis){ return 'Online alleen met ' + wege + (preis ? ' (' + preis + ')' : '') + '. Op tv is de wedstrijd vrij te ontvangen.'; },
     ansichtAnbieter: 'Aanbieders',
     ansichtKeineAbos: 'Je hebt nog geen abonnementen ingesteld – bij Instellingen → „Jouw sportabonnementen”.',
     sportFehler: 'Het speelschema kon niet worden geladen.',
@@ -5131,6 +5158,10 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Hoje', woche: 'Esta semana', spaeter: 'Em breve' },
     sportKeineSpiele: 'Nenhum jogo para esta seleção.',
     sportSenderOffen: 'Emissora ainda não definida',
+    sportStreamKostenlos: 'Grátis online',
+    sportStreamOhneLogin: 'sem cadastro',
+    sportStreamLoginUnklar: 'pode exigir cadastro',
+    sportStreamNurAbo: function(wege, preis){ return 'Online somente com ' + wege + (preis ? ' (' + preis + ')' : '') + '. Na TV a transmissão é aberta.'; },
     ansichtAnbieter: 'Provedores',
     ansichtKeineAbos: 'Você ainda não definiu assinaturas – em Configurações → “Suas assinaturas de esporte”.',
     sportFehler: 'Não foi possível carregar o calendário.',
@@ -11012,6 +11043,28 @@ document.getElementById('sportAboHinweisBtn').onclick = function(){
    zum Anbieter. Ein Spiel kann durchaus auf mehreren Kanaelen EINES
    Anbieters laufen (Einzelspiel + Konferenz, App + Linearkanal) -- deshalb
    sind die Kanal-Angaben je Slot formuliert. ---- */
+/* ---- Empfangsweg ONLINE (Christian, 24.08.2026) ----
+   "Frei empfangbar" oben meint das klassische Fernsehen. Ob man das Spiel
+   auch am Handy umsonst sieht, ist eine ANDERE Frage: Sat.1 laeuft gratis
+   ueber Joyn, RTL im Fernsehen zwar frei, der Stream aber erst mit RTL+
+   Premium. Genau diese Luecke fiel im Alltag auf. Die Angaben stehen je
+   Sender in sport-rechte.json (Feld "stream") und sind handgepflegt -- es
+   gibt keine Quelle, die das maschinenlesbar liefert. ---- */
+function sportStreamSatz(info){
+  var st = info && info.stream;
+  if (!st) return '';
+  var wege = (st.wege || []).map(function(w){ return w.n; }).join(', ');
+  if (!wege) return '';
+  if (st.kostenlos) {
+    // Bei Joyn widersprechen sich Anbieter-FAQ und gelebte Praxis -- das
+    // sagen wir, statt uns auf eine Seite zu schlagen.
+    var zusatz = st.login === 'nein' ? TXT.sportStreamOhneLogin
+               : st.login === 'unklar' ? TXT.sportStreamLoginUnklar : '';
+    return '<p class="prov-intro sender-gratis">✅ <b>' + esc(TXT.sportStreamKostenlos) + ':</b> ' +
+           esc(wege) + (zusatz ? ' – ' + esc(zusatz) : '') + '</p>';
+  }
+  return '<p class="prov-intro">' + esc(TXT.sportStreamNurAbo(wege, st.preis || '')) + '</p>';
+}
 var _senderModal = document.getElementById('senderModal');
 function openSenderModal(d){
   var info = sportSenderInfo(d.s);
@@ -11031,6 +11084,7 @@ function openSenderModal(d){
   }
   if (d.u) html += '<p class="prov-intro">⚠️ ' + esc(TXT.sportVslLang) + '</p>';
   if (info.info) html += '<p class="prov-intro">' + esc(info.info) + '</p>';
+  html += sportStreamSatz(info);
   // Ein Knopf je Weg: Sky/WOW ist EIN Anbieter mit ZWEI Produkten und damit
   // zwei Zielseiten (links[]); alle anderen haben nur den einen Link.
   var ziele = Array.isArray(info.links) && info.links.length

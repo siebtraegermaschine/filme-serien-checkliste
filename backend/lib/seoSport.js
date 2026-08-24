@@ -345,6 +345,24 @@ function steckbrief(daten) {
   return `<table class="fakten">${zeilen.map(([k, v]) => `<tr><th>${attrEsc(k)}</th><td>${attrEsc(v)}</td></tr>`).join('')}</table>`;
 }
 
+/* Empfangsweg ONLINE (Christian, 24.08.2026): "Frei empfangbar" meint das
+   klassische Fernsehen -- ob man das Spiel auch am Handy umsonst sieht, ist
+   eine andere Frage. Sat.1 laeuft gratis ueber Joyn, RTL im Fernsehen frei,
+   der Stream aber erst mit RTL+ Premium. Die Angaben stehen handgepflegt in
+   sport-rechte.json (Feld "stream"); ohne Angabe faellt der Satz weg. */
+function streamSatz(s) {
+  const st = s.stream;
+  if (!st) return '';
+  const wege = (st.wege || []).map((w) => w.n).join(' oder ');
+  if (!wege) return '';
+  if (st.kostenlos) {
+    const login = st.login === 'nein' ? ' – ohne Anmeldung'
+                : st.login === 'unklar' ? ' – eine Anmeldung kann nötig sein' : '';
+    return ` Kostenlos im Stream über ${wege}${login}.`;
+  }
+  return ` Der Stream läuft dagegen nur über ${wege}${st.preis ? ` (${st.preis})` : ''}.`;
+}
+
 function soSehen(daten) {
   const m = daten.match;
   if (!(m.tv || []).length) return '';
@@ -352,7 +370,7 @@ function soSehen(daten) {
   for (const b of m.tv) {
     const s = senderVon(daten, b.s);
     if (s.frei) {
-      saetze.push(`Frei empfangbar läuft die Partie bei ${s.name}${b.kanal || s.kanal ? ` (${b.kanal || s.kanal})` : ''}${s.info ? ` – ${s.info}` : '.'}`);
+      saetze.push(`Frei empfangbar läuft die Partie bei ${s.name}${b.kanal || s.kanal ? ` (${b.kanal || s.kanal})` : ''}${s.info ? ` – ${s.info}` : '.'}` + streamSatz(s));
     } else {
       saetze.push(`Mit Abo siehst du das Spiel bei ${s.name}${b.kanal || s.kanal ? ` auf ${b.kanal || s.kanal}` : ''}${b.typ === 'konferenz' ? ' (als Teil der Konferenz)' : ''}${s.info ? ` – ${s.info}` : '.'}`);
     }
