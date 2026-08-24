@@ -687,6 +687,9 @@
   .sport-comp { text-align:right; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .sport-teams { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--text); flex-wrap:wrap; }
   .sport-teams img { width:20px; height:20px; object-fit:contain; flex:0 0 auto; }
+  /* Wappen und Name gehoeren zusammen -- umgebrochen wird davor, nie
+     dazwischen (siehe sportSpielLi). */
+  .sport-teams .sport-team { display:inline-flex; align-items:center; gap:8px; min-width:0; }
   .sport-vs { color:var(--text-dim); font-weight:400; }
   .sport-score { margin-left:auto; font-weight:700; color:var(--text); white-space:nowrap; }
   .sport-live { margin-left:auto; color:#e05d5d; font-weight:700; font-size:12px; letter-spacing:.5px; }
@@ -11054,11 +11057,18 @@ function sportSpielLi(spiel){
       (spiel.th != null ? ' ' + spiel.th + ':' + spiel.ta : '')) + '</span>';
   }
   var logo = function(url){ return url ? '<img src="' + escAttr(url) + '" alt="" loading="lazy">' : ''; };
+  // Logo und Vereinsname als EIN Element (Christian, 24.08.2026): Vorher waren
+  // es zwei Flex-Kinder, ein Umbruch fiel deshalb zwischen Logo und Name --
+  // das Wappen blieb oben haengen, der Name rutschte allein in die naechste
+  // Zeile. So bricht es vor dem Logo, die Mannschaft bleibt zusammen.
+  var team = function(url, name){
+    return '<span class="sport-team">' + logo(url) + '<span>' + esc(name) + '</span></span>';
+  };
   li.innerHTML =
     '<div class="sport-top"><span class="sport-zeit">' + esc(sportZeitLabel(spiel.ko)) + '</span>' +
     '<span class="sport-comp">' + esc(comp + (spiel.rd ? ' · ' + spiel.rd : '')) + '</span></div>' +
-    '<div class="sport-teams">' + logo(spiel.hl) + '<span>' + esc(spiel.h) + '</span>' +
-    '<span class="sport-vs">–</span>' + logo(spiel.al) + '<span>' + esc(spiel.a) + '</span>' + status + '</div>' +
+    '<div class="sport-teams">' + team(spiel.hl, spiel.h) +
+    '<span class="sport-vs">–</span>' + team(spiel.al, spiel.a) + status + '</div>' +
     '<div class="sport-tv">' + (spiel.tv || []).map(sportBadgeHtml).join('') + '</div>';
   li._spiel = spiel;   // fuer das Aufklappen der Details (Klick-Handler oben)
   sportWischTeilen(li, spiel);
