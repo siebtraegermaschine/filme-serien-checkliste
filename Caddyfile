@@ -34,9 +34,17 @@ movietaste.de, www.movietaste.de {
 	reverse_proxy backend:3000
 }
 
-# ---- Sport-Domain CouchUltras (White-Label, PLAN-SPORT.md) ----
-# Gleiche App, eigenes Gesicht: Das Backend erkennt den Host (SPORT_DOMAIN in
-# docker-compose.yml) und liefert die Sport-Fassung samt SEO-Spielseiten aus.
+# ---- CouchUltras (eigenstaendige App, seit 24.08.2026) ----
+# Frueher war das ein White-Label DIESER App: derselbe Container, der am Host
+# entschied, ob er die Film- oder die Sportfassung ausliefert. Inzwischen ist
+# CouchUltras ein eigenes Projekt mit eigenem Repository, eigenem Container und
+# eigener Datenbank -- hier steht nur noch die Weiterleitung dorthin.
+#
+# "couchultras" ist der Dienstname des anderen Compose-Stapels
+# (/opt/couchultras). Beide haengen im Netz movietaste_default, deshalb loest
+# der Name auf. Er heisst bewusst NICHT "backend": Dieser Name gehoert hier
+# schon MovieTaste, und zweimal derselbe Alias im selben Netz haette Caddy mal
+# den einen, mal den anderen Container treffen lassen.
 # Zertifikat holt Caddy automatisch, sobald der A-Record auf diesen Server
 # zeigt (aktiviert 20.08.2026).
 couchultras.com, www.couchultras.com {
@@ -49,5 +57,5 @@ couchultras.com, www.couchultras.com {
 		Referrer-Policy "strict-origin-when-cross-origin"
 		-Server
 	}
-	reverse_proxy backend:3000
+	reverse_proxy couchultras:3000
 }
