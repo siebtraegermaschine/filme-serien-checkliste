@@ -6,6 +6,7 @@ import { sportKontext } from '../lib/seoSport.js';
 import { LIGEN_MIT_TABELLE, hatTabelle, wettbewerbTabellen, torschuetzen,
          teamForm, direktvergleich } from '../lib/sportDaten.js';
 import { ARTEN } from '../lib/sportPush.js';
+import { audioZuSpielen } from '../lib/sportAudio.js';
 
 const router = createAsyncRouter();
 
@@ -30,6 +31,14 @@ router.get('/', async (_req, res) => {
         ORDER BY anstoss`, [RUECKBLICK, VORAUSBLICK]),
   ]);
   const m = Object.fromEntries(meta.rows.map((r) => [r.key, r.value]));
+  /* Radio-Reportagen (lib/sportAudio.js): Die ARD-Liste reicht rund zwei
+     Spieltage voraus -- nur diese Spiele durchsuchen, nicht die ganze Saison.
+     Faellt die ARD-API aus, bleibt die Karte einfach ohne Radio-Feld. */
+  const bald = spiele.rows.filter((r) => {
+    const t = new Date(r.anstoss).getTime();
+    return t < Date.now() + 14 * 86400000;
+  });
+  const audio = await audioZuSpielen(bald).catch(() => new Map());
   // Wo die SEO-Spielseiten wohnen (couchultras.com, sobald aktiv) -- das
   // Frontend baut daraus die Teilen-Links beim Wischen einer Spielkarte.
   const ktx = sportKontext();
@@ -47,6 +56,8 @@ router.get('/', async (_req, res) => {
       fin: r.beendet,
       th: r.tore_heim, ta: r.tore_gast,
       tv: Array.isArray(r.tv) ? r.tv : [],
+      // { start, ende, url } der ARD-Radioreportage -- fehlt, wenn es keine gibt.
+      audio: audio.get(String(r.external_id)) || undefined,
     })),
   });
 });
@@ -125,9 +136,11 @@ router.put('/ansicht', requireAuth, async (req, res) => {
   if (!Array.isArray(vereine) || !Array.isArray(comps)) {
     return res.status(400).json({ error: 'invalid_payload' });
   }
-  // Anbieter-Vorauswahl: nur diese beiden Werte, Reihenfolge fest.
+  // Anbieter-Vorauswahl, Reihenfolge fest. 'frei' = frei empfangbar im
+  // Fernsehen, 'stream' = kostenlos online (Joyn, Mediatheken -- siehe das
+  // Feld "stream" je Sender in sport-rechte.json).
   const sauberVerf = Array.isArray(verf)
-    ? ['abo', 'frei'].filter((v) => verf.indexOf(v) !== -1) : [];
+    ? ['abo', 'frei', 'stream'].filter((v) => verf.indexOf(v) !== -1) : [];
   // arten ist freiwillig: Wer nur Vereine speichert (Ansicht-Fenster), soll
   // die Benachrichtigungs-Auswahl nicht ungewollt loeschen.
   const sauberArten = Array.isArray(arten) ? ARTEN.filter((a) => arten.indexOf(a) !== -1) : null;

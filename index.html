@@ -720,6 +720,11 @@
   @media (hover: hover) { .tv-badge:hover { border-color: var(--accent); color: var(--accent); } }
   .tv-badge.tv-frei { border-color: rgba(76,195,138,.5); color: var(--done); }
   .tv-badge.tv-hab { border-color: rgba(76,195,138,.5); color: var(--done); }
+  /* Radio-Reportage: sieht aus wie ein Sender-Badge, sitzt aber rechts am
+     Zeilenende -- es ist kein Sender, sondern ein zusaetzlicher Weg. */
+  .audio-badge { margin-left: auto; }
+  .audio-badge.audio-spaeter { cursor: default; opacity: .75; }
+  @media (hover: hover) { .audio-badge.audio-spaeter:hover { border-color: var(--border); color: var(--text-dim); } }
   /* Sender-Popup: Zeilen wie .prov-intro, der Anbieter-Link als Knopf. */
   #senderModalInhalt p { margin: 0 0 10px; }
   .sender-cta { display:inline-block; text-decoration:none; margin-top:6px; margin-right:8px; }
@@ -2746,6 +2751,9 @@ var UI_TEXTE = {
     sportFehler: 'Der Spielplan konnte nicht geladen werden.',
     sportAlle: 'Alle',
     sportNurFrei: 'Free-TV',
+    sportFreeStream: 'Free Stream',
+    sportRadioAb: function(zeit){ return 'Radio ab ' + zeit; },
+    sportRadioJetzt: 'Radio-Reportage',
     sportDeineAnbieter: 'Deine Streaming-Abos',
     sportAboHinweisText: 'Kostenlos registrieren und deine Streaming-Anbieter sowie deinen Verein festlegen — dann filtert dieser Knopf genau die Spiele, die du sehen kannst.',
     sportAboHinweisKnopf: 'Kostenlos registrieren / anmelden',
@@ -2779,7 +2787,7 @@ var UI_TEXTE = {
     sportDetailsForm: 'Formkurve (letzte Spiele)',
     sportDetailsLeer: 'Keine Daten zu diesem Spiel gefunden.',
     sportKalenderAbo: function(n){ return '📅 Spielplan von ' + n + ' abonnieren'; },
-    pushKalenderTitel: 'Spielplan im Kalender',
+    pushKalenderTitel: 'Spielplan inkl. Anbieter im Kalender',
     sportKalenderHinweis: 'Öffnet deine Kalender-App: Der Spielplan samt Sendern landet als Abo im Kalender und hält sich von selbst aktuell.',
     pushTitel: 'Benachrichtigungen',
     pushIntro: 'Mitteilungen auf diesem Gerät — auch, wenn die Seite geschlossen ist. Weitere Benachrichtigungen kommen nach und nach dazu.',
@@ -3152,6 +3160,9 @@ var UI_TEXTE = {
     sportFehler: 'The schedule could not be loaded.',
     sportAlle: 'All',
     sportNurFrei: 'Free TV',
+    sportFreeStream: 'Free stream',
+    sportRadioAb: function(zeit){ return 'Radio from ' + zeit; },
+    sportRadioJetzt: 'Radio commentary',
     sportDeineAnbieter: 'Your streaming subscriptions',
     sportAboHinweisText: 'Register for free and set your streaming services and your club — then this filter shows exactly the matches you can watch.',
     sportAboHinweisKnopf: 'Register / sign in for free',
@@ -3185,7 +3196,7 @@ var UI_TEXTE = {
     sportDetailsForm: 'Form (recent matches)',
     sportDetailsLeer: 'No data found for this match.',
     sportKalenderAbo: function(n){ return '📅 Subscribe to the ' + n + ' schedule'; },
-    pushKalenderTitel: 'Schedule in your calendar',
+    pushKalenderTitel: 'Schedule incl. broadcasters in your calendar',
     sportKalenderHinweis: 'Opens your calendar app: the schedule including broadcasters is added as a subscription and keeps itself up to date.',
     pushTitel: 'Notifications',
     pushIntro: 'Notifications on this device — even when the page is closed. More notification types will be added over time.',
@@ -3555,6 +3566,9 @@ var UI_TEXTE = {
     sportFehler: 'Le calendrier n’a pas pu être chargé.',
     sportAlle: 'Tous',
     sportNurFrei: 'TV gratuite',
+    sportFreeStream: 'Stream gratuit',
+    sportRadioAb: function(zeit){ return 'Radio dès ' + zeit; },
+    sportRadioJetzt: 'Commentaire radio',
     sportDeineAnbieter: 'Tes abonnements streaming',
     sportAboHinweisText: 'Inscris-toi gratuitement et définis tes services de streaming et ton club — ce filtre montrera exactement les matchs que tu peux voir.',
     sportAboHinweisKnopf: 'S’inscrire / se connecter',
@@ -3588,7 +3602,7 @@ var UI_TEXTE = {
     sportDetailsForm: 'Forme (derniers matchs)',
     sportDetailsLeer: 'Aucune donnée pour ce match.',
     sportKalenderAbo: function(n){ return '📅 S’abonner au calendrier de ' + n; },
-    pushKalenderTitel: 'Le calendrier dans ton agenda',
+    pushKalenderTitel: 'Le calendrier avec les diffuseurs dans ton agenda',
     sportKalenderHinweis: 'Ouvre ton application calendrier : le calendrier avec les diffuseurs est ajouté en abonnement et reste à jour tout seul.',
     pushTitel: 'Notifications',
     pushIntro: 'Notifications sur cet appareil — même quand la page est fermée. D’autres notifications arriveront au fur et à mesure.',
@@ -3958,6 +3972,7 @@ var UI_TEXTE = {
     sportFehler: 'No se pudo cargar el calendario.',
     sportAlle: 'Todos',
     sportNurFrei: 'TV en abierto',
+    sportFreeStream: 'Stream gratis',
     sportDeineAnbieter: 'Tus suscripciones de streaming',
     sportAboHinweisText: 'Regístrate gratis y define tus servicios de streaming y tu equipo — este filtro mostrará exactamente los partidos que puedes ver.',
     sportAboHinweisKnopf: 'Registrarse / iniciar sesión',
@@ -3985,13 +4000,15 @@ var UI_TEXTE = {
     sportTabKopf: { sp: 'PJ', sun: 'G-E-P', tore: 'Goles', pkt: 'Pts' },
     sportKonfLeer: 'Hoy no hay partidos para esta selección.',
     sportTabFehler: 'No se pudo cargar la clasificación.',
+    sportRadioAb: function(zeit){ return 'Radio desde ' + zeit; },
+    sportRadioJetzt: 'Narración de radio',
     sportTabNochNicht: 'Todavía no hay clasificación para esta competición: aparece en cuanto se juegan los primeros partidos.',
     sportTabBerechnet: 'Calculada a partir de los resultados, ordenada por puntos, diferencia de goles y goles. Los partidos eliminatorios no cuentan.',
     sportDetailsDuelle: 'Cara a cara',
     sportDetailsForm: 'Forma (últimos partidos)',
     sportDetailsLeer: 'No hay datos de este partido.',
     sportKalenderAbo: function(n){ return '📅 Suscribirse al calendario del ' + n; },
-    pushKalenderTitel: 'El calendario en tu agenda',
+    pushKalenderTitel: 'El calendario con las cadenas en tu agenda',
     sportKalenderHinweis: 'Abre tu app de calendario: el calendario con las cadenas se añade como suscripción y se mantiene actualizado solo.',
     pushTitel: 'Notificaciones',
     pushIntro: 'Notificaciones en este dispositivo, incluso con la página cerrada. Con el tiempo se añadirán más notificaciones.',
@@ -4361,6 +4378,7 @@ var UI_TEXTE = {
     sportFehler: 'Impossibile caricare il calendario.',
     sportAlle: 'Tutti',
     sportNurFrei: 'TV in chiaro',
+    sportFreeStream: 'Stream gratis',
     sportDeineAnbieter: 'I tuoi abbonamenti streaming',
     sportAboHinweisText: 'Registrati gratis e imposta i tuoi servizi di streaming e la tua squadra — questo filtro mostrerà esattamente le partite che puoi vedere.',
     sportAboHinweisKnopf: 'Registrati / accedi',
@@ -4388,13 +4406,15 @@ var UI_TEXTE = {
     sportTabKopf: { sp: 'PG', sun: 'V-N-P', tore: 'Gol', pkt: 'Pti' },
     sportKonfLeer: 'Oggi nessuna partita per questa selezione.',
     sportTabFehler: 'Impossibile caricare la classifica.',
+    sportRadioAb: function(zeit){ return 'Radio dalle ' + zeit; },
+    sportRadioJetzt: 'Radiocronaca',
     sportTabNochNicht: 'Per questa competizione non c’è ancora una classifica: compare appena si giocano le prime partite.',
     sportTabBerechnet: 'Calcolata dai risultati, ordinata per punti, differenza reti e gol. Le partite a eliminazione non contano.',
     sportDetailsDuelle: 'Scontri diretti',
     sportDetailsForm: 'Forma (ultime partite)',
     sportDetailsLeer: 'Nessun dato per questa partita.',
     sportKalenderAbo: function(n){ return '📅 Abbonati al calendario di ' + n; },
-    pushKalenderTitel: 'Il calendario nella tua agenda',
+    pushKalenderTitel: 'Il calendario con le emittenti nella tua agenda',
     sportKalenderHinweis: 'Apre la tua app calendario: il calendario con le emittenti viene aggiunto come abbonamento e si aggiorna da solo.',
     pushTitel: 'Notifiche',
     pushIntro: 'Notifiche su questo dispositivo, anche a pagina chiusa. Altre notifiche arriveranno col tempo.',
@@ -4764,6 +4784,7 @@ var UI_TEXTE = {
     sportFehler: 'Het speelschema kon niet worden geladen.',
     sportAlle: 'Alle',
     sportNurFrei: 'Free-tv',
+    sportFreeStream: 'Gratis stream',
     sportDeineAnbieter: 'Jouw streamingabonnementen',
     sportAboHinweisText: 'Registreer gratis en stel je streamingdiensten en je club in — dan toont dit filter precies de wedstrijden die je kunt zien.',
     sportAboHinweisKnopf: 'Gratis registreren / inloggen',
@@ -4791,13 +4812,15 @@ var UI_TEXTE = {
     sportTabKopf: { sp: 'W', sun: 'W-G-V', tore: 'Doelp.', pkt: 'Ptn' },
     sportKonfLeer: 'Vandaag geen wedstrijden voor deze selectie.',
     sportTabFehler: 'Stand kon niet worden geladen.',
+    sportRadioAb: function(zeit){ return 'Radio vanaf ' + zeit; },
+    sportRadioJetzt: 'Radioverslag',
     sportTabNochNicht: 'Voor dit toernooi is er nog geen stand – die verschijnt zodra de eerste wedstrijden gespeeld zijn.',
     sportTabBerechnet: 'Berekend uit de uitslagen, gesorteerd op punten, doelsaldo en doelpunten. Knock-outwedstrijden tellen niet mee.',
     sportDetailsDuelle: 'Onderlinge duels',
     sportDetailsForm: 'Vorm (laatste wedstrijden)',
     sportDetailsLeer: 'Geen gegevens voor deze wedstrijd.',
     sportKalenderAbo: function(n){ return '📅 Abonneer op het programma van ' + n; },
-    pushKalenderTitel: 'Programma in je agenda',
+    pushKalenderTitel: 'Programma incl. zenders in je agenda',
     sportKalenderHinweis: 'Opent je agenda-app: het programma met zenders wordt als abonnement toegevoegd en blijft vanzelf actueel.',
     pushTitel: 'Meldingen',
     pushIntro: 'Meldingen op dit apparaat — ook als de pagina gesloten is. Er komen gaandeweg meer meldingen bij.',
@@ -5167,6 +5190,7 @@ var UI_TEXTE = {
     sportFehler: 'Não foi possível carregar o calendário.',
     sportAlle: 'Todos',
     sportNurFrei: 'TV aberta',
+    sportFreeStream: 'Stream grátis',
     sportDeineAnbieter: 'Suas assinaturas de streaming',
     sportAboHinweisText: 'Registre-se grátis e defina seus serviços de streaming e seu clube — este filtro mostrará exatamente os jogos que você pode ver.',
     sportAboHinweisKnopf: 'Registrar-se / entrar',
@@ -5194,13 +5218,15 @@ var UI_TEXTE = {
     sportTabKopf: { sp: 'J', sun: 'V-E-D', tore: 'Gols', pkt: 'Pts' },
     sportKonfLeer: 'Hoje não há jogos para esta seleção.',
     sportTabFehler: 'Não foi possível carregar a classificação.',
+    sportRadioAb: function(zeit){ return 'Rádio a partir das ' + zeit; },
+    sportRadioJetzt: 'Narração de rádio',
     sportTabNochNicht: 'Ainda não há classificação para esta competição – ela surge assim que os primeiros jogos forem disputados.',
     sportTabBerechnet: 'Calculada a partir dos resultados, ordenada por pontos, saldo de gols e gols. Jogos eliminatórios não contam.',
     sportDetailsDuelle: 'Confronto direto',
     sportDetailsForm: 'Forma (últimos jogos)',
     sportDetailsLeer: 'Sem dados para este jogo.',
     sportKalenderAbo: function(n){ return '📅 Assinar o calendário de ' + n; },
-    pushKalenderTitel: 'Calendário no seu app',
+    pushKalenderTitel: 'Calendário com as emissoras no seu app',
     sportKalenderHinweis: 'Abre seu app de calendário: o calendário com as emissoras é adicionado como assinatura e se mantém atualizado sozinho.',
     pushTitel: 'Notificações',
     pushIntro: 'Notificações neste dispositivo, mesmo com a página fechada. Mais notificações serão adicionadas com o tempo.',
@@ -10661,10 +10687,11 @@ function gespeicherteAnsicht(){
 /* Anbieter-Vorauswahl (Christian, 24.08.2026): 'abo' und/oder 'frei'. Sie
    wird im Fenster "Deine Ansicht" gesetzt -- im Spielplan gibt es dafuer
    keine Chips mehr, dort bleiben "Alle" und die Vereinslogos. */
+var SPORT_VERF_WERTE = ['abo', 'frei', 'stream'];
 function gespeicherteVerf(){
   try {
     var a = JSON.parse(localStorage.getItem(SPORT_ANSICHT_KEY) || '{}');
-    return Array.isArray(a.verf) ? ['abo', 'frei'].filter(function(v){ return a.verf.indexOf(v) !== -1; }) : [];
+    return Array.isArray(a.verf) ? SPORT_VERF_WERTE.filter(function(v){ return a.verf.indexOf(v) !== -1; }) : [];
   } catch (e) { return []; }
 }
 // Verfuegbarkeits-Reihe (zweite Chip-Reihe): "Alle" ist exklusiv, die
@@ -10674,6 +10701,10 @@ function gespeicherteVerf(){
 // (Spiele von Verein A oder B). "Alle" heisst schlicht: kein Filter aktiv.
 var SPORT_VERF_ABO = false;
 var SPORT_VERF_FREI = false;
+// "Free Stream" (Christian, 24.08.2026): Spiele, die es KOSTENLOS ONLINE
+// gibt -- Joyn, ARD/ZDF-Mediathek. Nicht dasselbe wie Free-TV: RTL zeigt
+// frei im Fernsehen, der Stream kostet 9,99 EUR im Monat.
+var SPORT_VERF_STREAM = false;
 var SPORT_VEREIN_AKTIV = [];           // Namen der gerade AKTIVEN Vereins-Chips
 // "Dein Verein": bis zu drei gewaehlte Vereine ({n, logo}), am Geraet
 // gespeichert -- die Auswahl ist Geschmackssache des Geraets, kein Kontogut.
@@ -10709,6 +10740,7 @@ async function loadSportData(){
    ohne Neuladen. Ausserhalb laufender Spiele und im Hintergrund-Tab
    passiert nichts (kein Datenverbrauch, keine Serverlast). */
 var _sportLiveLaedt = false;
+var _sportAudioStand = null;
 setInterval(async function(){
   if (!sportMode || document.visibilityState !== 'visible' || !SPORT_DATA || _sportLiveLaedt) return;
   var jetzt = Date.now();
@@ -10716,13 +10748,23 @@ setInterval(async function(){
     var ko = new Date(s.ko).getTime();
     return !s.fin && jetzt >= ko && jetzt < ko + 2.5 * 3600000;
   });
-  if (!laufend) return;
-  _sportLiveLaedt = true;
-  try {
-    SPORT_DATA = await apiRequest('GET', '/api/sport');
-    renderSportPage();
-  } catch (e) { /* naechster Takt versucht es erneut */ }
-  finally { _sportLiveLaedt = false; }
+  if (laufend) {
+    _sportLiveLaedt = true;
+    try {
+      SPORT_DATA = await apiRequest('GET', '/api/sport');
+      renderSportPage();
+      _sportAudioStand = sportAudioStand(SPORT_DATA.spiele);
+    } catch (e) { /* naechster Takt versucht es erneut */ }
+    finally { _sportLiveLaedt = false; }
+    return;
+  }
+  /* Kein Spiel laeuft, aber die Radio-Reportage beginnt schon 15-20 Minuten
+     vor dem Anpfiff: Wechselt dabei ein Zustand, muss neu gezeichnet werden --
+     sonst stuende "ab 15:15" noch um 15:30 da. Nur DANN, nicht jede Minute:
+     Ein Neuzeichnen schliesst aufgeklappte Spieldetails. */
+  var stand = sportAudioStand(SPORT_DATA.spiele);
+  if (_sportAudioStand !== null && stand !== _sportAudioStand) renderSportPage();
+  _sportAudioStand = stand;
 }, 60000);
 
 /* Abos laden: Konto zuerst (users.sport_abos), sonst Geraet (localStorage).
@@ -10802,6 +10844,14 @@ function sportSenderInfo(slug){
 function sportSpielFrei(spiel){
   return (spiel.tv || []).some(function(b){ return sportSenderInfo(b.s).frei; });
 }
+// Gibt es einen kostenlosen ONLINE-Weg? Steht je Sender in sport-rechte.json
+// (Feld "stream", handgepflegt) -- siehe sportStreamSatz.
+function sportSpielFreiStream(spiel){
+  return (spiel.tv || []).some(function(b){
+    var st = sportSenderInfo(b.s).stream;
+    return !!(st && st.kostenlos);
+  });
+}
 // STRIKT nur die eigenen Sport-Abos -- Free-TV zaehlt hier bewusst NICHT
 // mit (Christian, 20. August 2026: der Chip daneben filtert frei, dieser
 // hier nur die Abos; wer beides will, waehlt beide an). Ohne konfigurierte
@@ -10857,6 +10907,42 @@ function sportBadgeHtml(b){
          '>' + praefix + esc(info.name) +
          (zusatz.length ? ' <span class="tv-zusatz">· ' + esc(zusatz.join(' · ')) + '</span>' : '') +
          '</button>';
+}
+
+/* ---- Radio-Reportage (Christian, 24.08.2026): Die ARD stellt jedes Spiel
+   der Bundesliga, 2. Liga und des DFB-Pokals kostenlos als Audiostream
+   bereit. Wir VERLINKEN nur darauf -- die ARD-Nutzungsbedingungen erlauben
+   das Einbetten ausdruecklich nur privat und nicht-kommerziell, ein eigener
+   Play-Knopf waere davon nicht gedeckt. Zuordnung: backend/lib/sportAudio.js.
+
+   Drei Zustaende, damit der Hinweis KEINEN Klick kostet:
+     vorher  "🎧 Radio ab 15:15" -- nur Text, nicht anklickbar
+     laufend "🎧 Radio-Reportage ↗" -- ein Klick oeffnet die ARD-Seite
+     danach  gar nichts ---- */
+function sportAudioHtml(spiel){
+  var a = spiel.audio;
+  if (!a) return '';
+  var jetzt = Date.now();
+  var start = new Date(a.start).getTime();
+  var ende = new Date(a.ende).getTime();
+  if (jetzt > ende) return '';
+  if (jetzt < start) {
+    var zeit = new Date(start).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
+    return '<span class="tv-badge audio-badge audio-spaeter">🎧 ' + esc(TXT.sportRadioAb(zeit)) + '</span>';
+  }
+  return '<a class="tv-badge audio-badge" href="' + escAttr(a.url) + '" target="_blank" rel="noopener">🎧 ' +
+         esc(TXT.sportRadioJetzt) + ' ↗</a>';
+}
+/* Wechselt bei einem der angezeigten Spiele demnaechst der Radio-Zustand?
+   Danach richtet sich, ob der Minuten-Takt neu zeichnen muss -- sonst
+   stuende "ab 15:15" noch um 15:30 da. */
+function sportAudioStand(spiele){
+  var jetzt = Date.now();
+  return spiele.map(function(s){
+    if (!s.audio) return '';
+    var start = new Date(s.audio.start).getTime(), ende = new Date(s.audio.ende).getTime();
+    return s.id + (jetzt < start ? 'v' : jetzt <= ende ? 'l' : 'n');
+  }).join('|');
 }
 
 /* ---- Sport teilen: nur der /sport-Link, ohne Konto. Auf der Sport-Domain
@@ -11143,7 +11229,8 @@ function sportDetailsHtml(spiel, d, mitKopf){
     kopf += '<div class="konf-info">' + esc(comp + (spiel.rd ? ' · ' + spiel.rd : '')) + '</div>';
     var badges = (spiel.tv || []).map(sportBadgeHtml).join('');
     kopf += '<div class="sport-tv konf-info-tv">' +
-      (badges || '<span class="konf-info">' + esc(TXT.sportSenderOffen) + '</span>') + '</div>';
+      (badges || '<span class="konf-info">' + esc(TXT.sportSenderOffen) + '</span>') +
+      sportAudioHtml(spiel) + '</div>';
   }
   var html = '';
   if (d.duelle && d.duelle.length) {
@@ -11210,7 +11297,7 @@ function sportSpielLi(spiel){
     '<span class="sport-comp">' + esc(comp + (spiel.rd ? ' · ' + spiel.rd : '')) + '</span></div>' +
     '<div class="sport-teams">' + team(spiel.hl, spiel.h) +
     '<span class="sport-vs">–</span>' + team(spiel.al, spiel.a) + status + '</div>' +
-    '<div class="sport-tv">' + (spiel.tv || []).map(sportBadgeHtml).join('') + '</div>';
+    '<div class="sport-tv">' + (spiel.tv || []).map(sportBadgeHtml).join('') + sportAudioHtml(spiel) + '</div>';
   li._spiel = spiel;   // fuer das Aufklappen der Details (Klick-Handler oben)
   sportWischTeilen(li, spiel);
   return li;
@@ -11529,13 +11616,15 @@ function renderSportPage(){
   var gefiltert = data.spiele.filter(function(s){
     if (SPORT_COMPS.length && SPORT_COMPS.indexOf(s.c) === -1) return false;
     if (!konferenz) {
-      /* Die beiden Anbieter-Filter wirken als ODER (Christian, 24.08.2026):
-         Beide angehakt heisst "zeig mir, was ich sehen kann -- im Abo ODER
-         frei empfangbar". Vorher war es ein UND, ein Spiel haette also
-         gleichzeitig frei UND im Abo laufen muessen; das kommt kaum vor,
-         entsprechend blieb die Liste leer. */
-      if (SPORT_VERF_ABO || SPORT_VERF_FREI) {
-        var sichtbar = (SPORT_VERF_FREI && sportSpielFrei(s)) || (SPORT_VERF_ABO && sportSpielImAbo(s));
+      /* Die Anbieter-Filter wirken als ODER (Christian, 24.08.2026):
+         Mehrere angehakt heisst "zeig mir, was ich sehen kann -- im Abo ODER
+         frei empfangbar ODER kostenlos im Stream". Vorher war es ein UND, ein
+         Spiel haette also gleichzeitig frei UND im Abo laufen muessen; das
+         kommt kaum vor, entsprechend blieb die Liste leer. */
+      if (SPORT_VERF_ABO || SPORT_VERF_FREI || SPORT_VERF_STREAM) {
+        var sichtbar = (SPORT_VERF_FREI && sportSpielFrei(s))
+                    || (SPORT_VERF_ABO && sportSpielImAbo(s))
+                    || (SPORT_VERF_STREAM && sportSpielFreiStream(s));
         if (!sichtbar) return false;
       }
       if (SPORT_VEREIN_AKTIV.length &&
@@ -11550,11 +11639,16 @@ function renderSportPage(){
     renderSportKonferenz(gefiltert, sportListEls.heute);
     return;
   }
-  // Drei Bereiche nach ORTSTAGEN: Heute (inkl. laufender Spiele -- der Server
-  // liefert ab 8h rueckwirkend), Morgen bis +7 Tage, Rest (Server-Deckel +70).
+  /* Drei Bereiche nach ORTSTAGEN: Heute (inkl. laufender Spiele -- der Server
+     liefert ab 8h rueckwirkend), "Diese Woche" bis SONNTAG, Rest.
+     Kalenderwoche, keine rollenden sieben Tage (Christian, 24.08.2026): Wer
+     am Donnerstag schaut, erwartet unter "Diese Woche" nicht das Spiel vom
+     kommenden Montag. */
   var heute0 = new Date(); heute0.setHours(0, 0, 0, 0);
   var morgen0 = heute0.getTime() + 86400000;
-  var woche0 = heute0.getTime() + 8 * 86400000;
+  var wochentag = heute0.getDay();                       // 0 = Sonntag
+  var bisSonntag = 7 - (wochentag === 0 ? 7 : wochentag);
+  var woche0 = heute0.getTime() + (bisSonntag + 1) * 86400000;   // Montag 00:00
   var buckets = { heute: [], woche: [], spaeter: [] };
   gefiltert.forEach(function(s){
     var t = new Date(s.ko).getTime();
@@ -11610,6 +11704,7 @@ function openSportPage(){
   var _verf = gespeicherteVerf();
   SPORT_VERF_ABO = _verf.indexOf('abo') !== -1;
   SPORT_VERF_FREI = _verf.indexOf('frei') !== -1;
+  SPORT_VERF_STREAM = _verf.indexOf('stream') !== -1;
   SPORT_MODUS = 'plan';
   SPORT_KONFERENZ = false;
   sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
@@ -11970,6 +12065,7 @@ function kontoAnsichtAnwenden(vereine, comps, verf){
   SPORT_COMPS = (comps || []).slice();
   SPORT_VERF_ABO = (verf || []).indexOf('abo') !== -1;
   SPORT_VERF_FREI = (verf || []).indexOf('frei') !== -1;
+  SPORT_VERF_STREAM = (verf || []).indexOf('stream') !== -1;
   SPORT_VEREIN_AKTIV = MEINE_VEREINE.map(function(v){ return v.n; });
   vereinLinkHervorheben();
   if (sportMode) renderSportPage();
@@ -12100,7 +12196,8 @@ function renderAnsichtAnbieter(){
   el.innerHTML =
     '<button type="button" data-verf="alle" class="' + (_ansichtVerf.length ? '' : 'active') + '">' + esc(TXT.sportAlle) + '</button>' +
     '<button type="button" data-verf="abo" class="' + (an('abo') ? 'active' : '') + '">' + esc(TXT.sportDeineAnbieter) + '</button>' +
-    '<button type="button" data-verf="frei" class="' + (an('frei') ? 'active' : '') + '">' + esc(TXT.sportNurFrei) + '</button>';
+    '<button type="button" data-verf="frei" class="' + (an('frei') ? 'active' : '') + '">' + esc(TXT.sportNurFrei) + '</button>' +
+    '<button type="button" data-verf="stream" class="' + (an('stream') ? 'active' : '') + '">' + esc(TXT.sportFreeStream) + '</button>';
   el.querySelectorAll('button').forEach(function(b){
     b.onclick = function(){
       var v = b.dataset.verf;
@@ -12108,6 +12205,8 @@ function renderAnsichtAnbieter(){
       else {
         var i = _ansichtVerf.indexOf(v);
         if (i === -1) _ansichtVerf.push(v); else _ansichtVerf.splice(i, 1);
+        // In Katalog-Reihenfolge halten, damit gleiche Auswahlen gleich aussehen.
+        _ansichtVerf = SPORT_VERF_WERTE.filter(function(x){ return _ansichtVerf.indexOf(x) !== -1; });
       }
       renderAnsichtAnbieter();
     };
@@ -12219,6 +12318,7 @@ document.getElementById('vereinSaveBtn').onclick = function(){
   // Chips mehr, sie wirkt allein von hier.
   SPORT_VERF_ABO = _ansichtVerf.indexOf('abo') !== -1;
   SPORT_VERF_FREI = _ansichtVerf.indexOf('frei') !== -1;
+  SPORT_VERF_STREAM = _ansichtVerf.indexOf('stream') !== -1;
   vereinLinkHervorheben();
   // Nach dem Speichern sind die gewaehlten Vereine sofort AKTIVE Filter
   // (siehe openSportPage) -- entfernte Vereine fallen damit automatisch raus.
