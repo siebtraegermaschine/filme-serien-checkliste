@@ -723,8 +723,7 @@
   /* Radio-Reportage: sieht aus wie ein Sender-Badge, sitzt aber rechts am
      Zeilenende -- es ist kein Sender, sondern ein zusaetzlicher Weg. */
   .audio-badge { margin-left: auto; }
-  .audio-badge.audio-spaeter { cursor: default; opacity: .75; }
-  @media (hover: hover) { .audio-badge.audio-spaeter:hover { border-color: var(--border); color: var(--text-dim); } }
+  .audio-badge.audio-spaeter { opacity: .8; }
   /* Sender-Popup: Zeilen wie .prov-intro, der Anbieter-Link als Knopf. */
   #senderModalInhalt p { margin: 0 0 10px; }
   .sender-cta { display:inline-block; text-decoration:none; margin-top:6px; margin-right:8px; }
@@ -2755,6 +2754,11 @@ var UI_TEXTE = {
     sportFreeStream: 'Free Stream',
     sportRadioAb: function(zeit){ return 'Radio ab ' + zeit; },
     sportRadioJetzt: 'Radio-Reportage',
+    sportRadioTitel: 'Radio-Reportage',
+    sportRadioBeginnt: function(wann){ return 'Die Web-Radioübertragung beginnt ' + wann + '.'; },
+    sportRadioHeuteUm: function(zeit){ return 'heute um ' + zeit + ' Uhr'; },
+    sportRadioAmUm: function(datum, zeit){ return 'am ' + datum + ' um ' + zeit + ' Uhr'; },
+    sportRadioKostenlos: 'Kostenlos bei der ARD – kein Abo, keine Anmeldung.',
     sportDeineAnbieter: 'Deine Streaming-Abos',
     sportAboHinweisText: 'Kostenlos registrieren und deine Streaming-Anbieter sowie deinen Verein festlegen — dann filtert dieser Knopf genau die Spiele, die du sehen kannst.',
     sportAboHinweisKnopf: 'Kostenlos registrieren / anmelden',
@@ -3165,6 +3169,11 @@ var UI_TEXTE = {
     sportFreeStream: 'Free stream',
     sportRadioAb: function(zeit){ return 'Radio from ' + zeit; },
     sportRadioJetzt: 'Radio commentary',
+    sportRadioTitel: 'Radio commentary',
+    sportRadioBeginnt: function(wann){ return 'The web radio broadcast starts ' + wann + '.'; },
+    sportRadioHeuteUm: function(zeit){ return 'today at ' + zeit; },
+    sportRadioAmUm: function(datum, zeit){ return 'on ' + datum + ' at ' + zeit; },
+    sportRadioKostenlos: 'Free from ARD – no subscription, no sign-in.',
     sportDeineAnbieter: 'Your streaming subscriptions',
     sportAboHinweisText: 'Register for free and set your streaming services and your club — then this filter shows exactly the matches you can watch.',
     sportAboHinweisKnopf: 'Register / sign in for free',
@@ -3572,6 +3581,11 @@ var UI_TEXTE = {
     sportFreeStream: 'Stream gratuit',
     sportRadioAb: function(zeit){ return 'Radio dès ' + zeit; },
     sportRadioJetzt: 'Commentaire radio',
+    sportRadioTitel: 'Commentaire radio',
+    sportRadioBeginnt: function(wann){ return 'La diffusion radio en ligne commence ' + wann + '.'; },
+    sportRadioHeuteUm: function(zeit){ return 'aujourd’hui à ' + zeit; },
+    sportRadioAmUm: function(datum, zeit){ return 'le ' + datum + ' à ' + zeit; },
+    sportRadioKostenlos: 'Gratuit chez ARD – sans abonnement ni inscription.',
     sportDeineAnbieter: 'Tes abonnements streaming',
     sportAboHinweisText: 'Inscris-toi gratuitement et définis tes services de streaming et ton club — ce filtre montrera exactement les matchs que tu peux voir.',
     sportAboHinweisKnopf: 'S’inscrire / se connecter',
@@ -4006,6 +4020,11 @@ var UI_TEXTE = {
     sportTabFehler: 'No se pudo cargar la clasificación.',
     sportRadioAb: function(zeit){ return 'Radio desde ' + zeit; },
     sportRadioJetzt: 'Narración de radio',
+    sportRadioTitel: 'Narración de radio',
+    sportRadioBeginnt: function(wann){ return 'La emisión de radio online empieza ' + wann + '.'; },
+    sportRadioHeuteUm: function(zeit){ return 'hoy a las ' + zeit; },
+    sportRadioAmUm: function(datum, zeit){ return 'el ' + datum + ' a las ' + zeit; },
+    sportRadioKostenlos: 'Gratis en ARD: sin suscripción ni registro.',
     sportTabNochNicht: 'Todavía no hay clasificación para esta competición: aparece en cuanto se juegan los primeros partidos.',
     sportTabBerechnet: 'Calculada a partir de los resultados, ordenada por puntos, diferencia de goles y goles. Los partidos eliminatorios no cuentan.',
     sportDetailsDuelle: 'Cara a cara',
@@ -4413,6 +4432,11 @@ var UI_TEXTE = {
     sportTabFehler: 'Impossibile caricare la classifica.',
     sportRadioAb: function(zeit){ return 'Radio dalle ' + zeit; },
     sportRadioJetzt: 'Radiocronaca',
+    sportRadioTitel: 'Radiocronaca',
+    sportRadioBeginnt: function(wann){ return 'La radiocronaca online inizia ' + wann + '.'; },
+    sportRadioHeuteUm: function(zeit){ return 'oggi alle ' + zeit; },
+    sportRadioAmUm: function(datum, zeit){ return 'il ' + datum + ' alle ' + zeit; },
+    sportRadioKostenlos: 'Gratis su ARD: nessun abbonamento, nessuna registrazione.',
     sportTabNochNicht: 'Per questa competizione non c’è ancora una classifica: compare appena si giocano le prime partite.',
     sportTabBerechnet: 'Calcolata dai risultati, ordinata per punti, differenza reti e gol. Le partite a eliminazione non contano.',
     sportDetailsDuelle: 'Scontri diretti',
@@ -4820,6 +4844,11 @@ var UI_TEXTE = {
     sportTabFehler: 'Stand kon niet worden geladen.',
     sportRadioAb: function(zeit){ return 'Radio vanaf ' + zeit; },
     sportRadioJetzt: 'Radioverslag',
+    sportRadioTitel: 'Radioverslag',
+    sportRadioBeginnt: function(wann){ return 'De webradio-uitzending begint ' + wann + '.'; },
+    sportRadioHeuteUm: function(zeit){ return 'vandaag om ' + zeit; },
+    sportRadioAmUm: function(datum, zeit){ return 'op ' + datum + ' om ' + zeit; },
+    sportRadioKostenlos: 'Gratis bij ARD – geen abonnement, geen account.',
     sportTabNochNicht: 'Voor dit toernooi is er nog geen stand – die verschijnt zodra de eerste wedstrijden gespeeld zijn.',
     sportTabBerechnet: 'Berekend uit de uitslagen, gesorteerd op punten, doelsaldo en doelpunten. Knock-outwedstrijden tellen niet mee.',
     sportDetailsDuelle: 'Onderlinge duels',
@@ -5227,6 +5256,11 @@ var UI_TEXTE = {
     sportTabFehler: 'Não foi possível carregar a classificação.',
     sportRadioAb: function(zeit){ return 'Rádio a partir das ' + zeit; },
     sportRadioJetzt: 'Narração de rádio',
+    sportRadioTitel: 'Narração de rádio',
+    sportRadioBeginnt: function(wann){ return 'A transmissão de rádio online começa ' + wann + '.'; },
+    sportRadioHeuteUm: function(zeit){ return 'hoje às ' + zeit; },
+    sportRadioAmUm: function(datum, zeit){ return 'em ' + datum + ' às ' + zeit; },
+    sportRadioKostenlos: 'Grátis na ARD – sem assinatura, sem cadastro.',
     sportTabNochNicht: 'Ainda não há classificação para esta competição – ela surge assim que os primeiros jogos forem disputados.',
     sportTabBerechnet: 'Calculada a partir dos resultados, ordenada por pontos, saldo de gols e gols. Jogos eliminatórios não contam.',
     sportDetailsDuelle: 'Confronto direto',
@@ -10935,7 +10969,8 @@ function sportAudioHtml(spiel){
   if (jetzt > ende) return '';
   if (jetzt < start) {
     var zeit = new Date(start).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
-    return '<span class="tv-badge audio-badge audio-spaeter">🎧 ' + esc(TXT.sportRadioAb(zeit)) + '</span>';
+    return '<span class="tv-badge audio-badge audio-spaeter" data-start="' + escAttr(a.start) + '">🎧 ' +
+           esc(TXT.sportRadioAb(zeit)) + '</span>';
   }
   return '<a class="tv-badge audio-badge" href="' + escAttr(a.url) + '" target="_blank" rel="noopener">🎧 ' +
          esc(TXT.sportRadioJetzt) + ' ↗</a>';
@@ -11158,6 +11193,24 @@ function sportStreamSatz(info){
   }
   return '<p class="prov-intro">' + esc(TXT.sportStreamNurAbo(wege, st.preis || '')) + '</p>';
 }
+/* Hinweis, wann die Radio-Reportage beginnt. Datum nur, wenn es nicht heute
+   ist -- sonst liest sich "am Montag, 24. August um 20:30 Uhr" fuer ein
+   Spiel in zwei Stunden umstaendlich. */
+function openRadioHinweis(startIso){
+  if (!startIso) return;
+  var d = new Date(startIso);
+  var zeit = d.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
+  var heute = new Date(); heute.setHours(0, 0, 0, 0);
+  var selberTag = d.getTime() < heute.getTime() + 86400000 && d.getTime() >= heute.getTime();
+  var wann = selberTag
+    ? TXT.sportRadioHeuteUm(zeit)
+    : TXT.sportRadioAmUm(d.toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric', month: 'long' }), zeit);
+  document.getElementById('senderModalTitel').textContent = TXT.sportRadioTitel;
+  document.getElementById('senderModalInhalt').innerHTML =
+    '<p class="prov-intro">' + esc(TXT.sportRadioBeginnt(wann)) + '</p>' +
+    '<p class="prov-intro sender-gratis">✅ ' + esc(TXT.sportRadioKostenlos) + '</p>';
+  _senderModal.style.display = 'flex';
+}
 var _senderModal = document.getElementById('senderModal');
 function openSenderModal(d){
   var info = sportSenderInfo(d.s);
@@ -11198,6 +11251,16 @@ document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _sen
 // und seit 24.08.2026 auch fuer das Aufklappen der Spielkarten-Details
 // (Direktvergleich + Formkurve). Badges und Links behalten Vorrang.
 document.getElementById('sportPage').addEventListener('click', function(e){
+  /* Das Radio-Feld traegt zwar die Badge-Optik, ist aber KEIN Sender --
+     ohne diese Abfrage landete der Klick im Sender-Popup und behauptete
+     "Nicht in deinem Abo", obwohl die Reportage kostenlos ist
+     (Christian, 24.08.2026). Laeuft sie schon, ist das Feld ein Link und
+     soll einfach oeffnen. */
+  var radio = e.target.closest('.audio-badge');
+  if (radio) {
+    if (radio.tagName !== 'A') openRadioHinweis(radio.dataset.start);
+    return;
+  }
   var b = e.target.closest('.tv-badge');
   if (b) { openSenderModal(b.dataset); return; }
   if (e.target.closest('a, .sport-details')) return;
