@@ -732,25 +732,24 @@
   #senderModalInhalt .sender-gratis { color: var(--done); }
   .tv-zusatz { font-weight:400; opacity:.8; }
 
-  /* Ansichts-Zeile: links die Chips (scrollbar), rechts "+ Deine Ansicht" --
-     der Link bleibt stehen, wenn die Chips gewischt werden. Diese Zeile gibt
-     es in allen drei Ansichten, der Link sitzt damit immer an derselben
-     Stelle. */
-  .sport-modus-zeile { display:flex; align-items:center; gap:10px;
-    max-width:700px; margin:14px auto 0; padding:0 20px; box-sizing:border-box; }
-  .sport-modus-zeile .sport-chips { margin:0; padding:0; max-width:none;
+  /* Umschalt-Knopf neben der Ueberschrift: Chip-Optik, aber Akzentfarbe --
+     er wechselt die Ansicht, er filtert nicht. */
+  .sport-ansicht-btn {
+    flex:0 0 auto; background:var(--accent-soft); border:1px solid var(--accent);
+    border-radius:999px; padding:4px 13px; font-family:inherit; font-size:13px;
+    font-weight:600; color:var(--accent); cursor:pointer; white-space:nowrap;
+  }
+  /* Letzte Filterzeile: links die Chips (scrollbar, damit drei Vereinslogos
+     den Link nie verdraengen), rechts "+ Deine Ansicht". Sie traegt den
+     Abstand zur ersten Ueberschrift. */
+  .sport-verf-zeile { display:flex; align-items:center; gap:10px;
+    max-width:700px; margin:6px auto 26px; padding:0 20px; box-sizing:border-box; }
+  .sport-verf-zeile .sport-chips { margin:0; padding:0; max-width:none;
     flex:1 1 auto; min-width:0; }
-  .sport-modus-zeile .sport-verein-link { flex:0 0 auto; margin-left:auto; }
-  /* Immer EINE Zeile: Auf schmalen Schirmen ruecken Chips und Link enger
-     zusammen, damit alle drei Ansichten neben den Link passen (bei 375px
-     geht es damit auf). Reicht es doch nicht -- 320px, laengere Sprachen --,
-     scrollt die Chip-Reihe (min-width:0 erlaubt das Schrumpfen), der Link
-     bleibt stehen. */
+  .sport-verf-zeile .sport-verein-link { flex:0 0 auto; margin-left:auto; }
   @media (max-width: 560px) {
-    .sport-modus-zeile { gap:8px; }
-    .sport-modus-zeile .sport-chips { gap:6px; }
-    .sport-modus button { font-size:12.5px; padding:5px 8px; }
-    .sport-modus-zeile .sport-verein-link { font-size:12px; }
+    .sport-verf-zeile { gap:8px; }
+    .sport-verf-zeile .sport-verein-link { font-size:12px; }
   }
 
   /* Aufklappbare Spielkarten-Details: Direktvergleich + Formkurve. Die
@@ -1652,13 +1651,9 @@
          19. August 2026) -- als erster Punkt, damit der Bereich auffindbar
          bleibt, ohne die Reihe zu ueberfrachten. Nur fuer Region DE sichtbar
          (Senderrechte gelten fuer Deutschland, siehe Sport-Block im JS). -->
-    <!-- Die drei Ansichten der Sport-Seite ganz oben (Christian, 24.08.2026):
-         Sie sind das, was man hier am haeufigsten wechselt. Nur sichtbar,
-         solange die Sport-Seite offen ist (navSportAnsichten) -- in der
-         Film-App waeren sie sinnlos. Der aktive Punkt ist hervorgehoben. -->
-    <button type="button" id="navPlanBtn" class="nav-menu-item" style="display:none"></button>
-    <button type="button" id="navTabBtn" class="nav-menu-item" style="display:none"></button>
-    <hr class="nav-menu-sep" id="navSportSep" style="display:none">
+    <!-- Spielplan/Tabelle standen hier bis 24.08.2026. Sie sind jetzt EIN
+         Umschalt-Knopf neben der Seitenueberschrift -- im Menue waren sie ein
+         zweiter Weg zum selben Ziel. -->
     <button type="button" id="sportMenuBtn" class="nav-menu-item">⚽ Sport</button>
     <button type="button" id="howToBtn" class="nav-menu-item">Anleitung</button>
     <!-- "Einstellungen" ist seit dem 13. August auch ABGEMELDET sichtbar
@@ -1823,6 +1818,11 @@
        (Einstellungen) -- ein Ort fuer alle Abos statt zwei Verwaltungen. -->
   <div class="cinema-page-header">
     <h2 class="cinema-page-title" id="sportPageTitle">Fußball live im TV/Stream</h2>
+    <!-- Umschalter zwischen den zwei Ansichten (Christian, 24.08.2026): Der
+         Knopf traegt immer das ZIEL, nie den aktuellen Zustand -- im
+         Spielplan steht "Tabelle", in der Tabelle "Spielplan". Beide
+         nebeneinander gab es vorher als Chip-Reihe; die ist damit weg. -->
+    <button type="button" id="sportAnsichtBtn" class="sport-ansicht-btn"></button>
   </div>
   <!-- Zwei Filterreihen (renderSportChips): oben die Wettbewerbe
        (Alle/Bundesliga/...), darunter die Verfuegbarkeit als Dreier-Auswahl
@@ -1832,24 +1832,22 @@
        immer mit. -->
   <!-- Ansichts-Umschalter (24.08.2026): Spielplan (Standard) / Konferenz
        (alle heutigen Spiele verdichtet mit Staenden) / Tabelle (Ligatabelle
-       samt Torschuetzen). Gerendert von renderSportModusChips.
+       samt Torschuetzen). Gerendert von renderSportTabelle bzw. renderSportSection.
        Rechts daneben "+ Deine Ansicht" (Christian, 24.08.2026): Der Link
        stand bis dahin neben der Ueberschrift -- hier gehoert er hin, denn er
        stellt dieselbe Sache ein wie die Chips daneben (was sehe ich?). -->
-  <!-- Ansichts-Zeile: links die drei Ansichten, rechts der Link zur
-       Vorauswahl. Er steht bewusst HIER (Christian, 24.08.2026) -- diese
-       Zeile gibt es in allen drei Ansichten, die Filterzeile darunter nicht.
-       In der Verein-Zeile sass er sonst je nach Ansicht woanders. -->
-  <div class="sport-modus-zeile">
-    <div class="sport-chips sport-modus" id="sportModusChips"></div>
+  <div class="sport-chips" id="sportChips"></div>
+  <!-- Zweite und letzte Filterzeile: links "Alle Mannschaften" und die
+       Vereins-Logos, rechts der Link zur Vorauswahl. Zwei Zeilen statt drei
+       (Christian, 24.08.2026) -- die Ansichts-Chips sind zum Knopf neben der
+       Ueberschrift geworden. Die Anbieter-Filter wohnen im Fenster
+       "Deine Ansicht". -->
+  <div class="sport-verf-zeile" id="sportVerfZeile">
+    <div class="sport-chips sport-chips-verf" id="sportVerfChips"></div>
     <!-- Bewusst ein Textlink, kein Knopf (Christian, 19. August 2026):
          oeffnet die Vereinsauswahl (#vereinModal). -->
     <span class="sport-verein-link" id="sportVereinBtn" role="button" tabindex="0">+ Deine Ansicht</span>
   </div>
-  <div class="sport-chips" id="sportChips"></div>
-  <!-- Untere Filterzeile: "Alle" und die Vereins-Logos. Die Anbieter-Filter
-       sind entfallen, sie werden im Fenster "Deine Ansicht" gesetzt. -->
-  <div class="sport-chips sport-chips-verf" id="sportVerfChips"></div>
   <div id="sportPlanWrap">
     <div class="cinema-section">
       <!-- "Konferenz" sass bis 24.08.2026 als dritter Punkt neben Spielplan
@@ -11509,28 +11507,22 @@ var SPORT_TAB_COMPS = ['bl1', 'bl2', 'bl3', 'ucl', 'uel', 'nla', 'em', 'wm'];
 function sportTabLigen(){
   return SPORT_TAB_COMPS.filter(function(c){ return SPORT_DATA.wettbewerbe[c]; });
 }
-function renderSportModusChips(){
-  var el = document.getElementById('sportModusChips');
-  // Nur noch zwei Ansichten: Die Konferenz ist ein Schalter im Spielplan
-  // (siehe #sportKonfSchalter), keine eigene Ansicht mehr.
-  var modi = [['plan', TXT.sportModusPlan]];
-  if (sportTabLigen().length) modi.push(['tab', TXT.sportModusTab]);
-  el.innerHTML = modi.map(function(m){
-    return '<button type="button" data-modus="' + m[0] + '"' +
-           (SPORT_MODUS === m[0] ? ' class="active"' : '') + '>' + esc(m[1]) + '</button>';
-  }).join('');
-  el.querySelectorAll('button').forEach(function(b){
-    b.onclick = function(){
-      if (SPORT_MODUS === b.dataset.modus) return;
-      SPORT_MODUS = b.dataset.modus;
-      renderSportPage();
-      window.scrollTo(0, 0);
-    };
-  });
-  // Falls die Reihe neben dem Link doch nicht ganz passt: derselbe
-  // Ausblende-Verlauf rechts wie bei den Filterreihen -- dann liest sich der
-  // angeschnittene Chip als "hier geht es weiter" statt als Fehler.
-  wischFadeAktualisieren(el);
+/* Ein Knopf statt zweier Chips (Christian, 24.08.2026): Er traegt immer die
+   ANDERE Ansicht als Beschriftung -- im Spielplan steht "Tabelle", in der
+   Tabelle "Spielplan". Man sieht die beiden also nie nebeneinander, sondern
+   wechselt hin und her. Ohne Ligen mit Tabelle (Region ohne Sport, Daten
+   fehlen) gibt es nichts zu wechseln, dann bleibt der Knopf weg. */
+function renderSportAnsichtBtn(){
+  var btn = document.getElementById('sportAnsichtBtn');
+  if (!sportTabLigen().length) { btn.style.display = 'none'; return; }
+  var ziel = SPORT_MODUS === 'tab' ? 'plan' : 'tab';
+  btn.style.display = '';
+  btn.textContent = ziel === 'tab' ? TXT.sportModusTab : TXT.sportModusPlan;
+  btn.onclick = function(){
+    SPORT_MODUS = ziel;
+    renderSportPage();
+    window.scrollTo(0, 0);
+  };
 }
 
 /* ---- Konferenz: alle HEUTIGEN Spiele der aktuellen Filter als verdichtete
@@ -11664,18 +11656,19 @@ function renderSportPage(){
   var data = SPORT_DATA;
   if (!data) return;
   document.getElementById('sportPageTitle').textContent = TXT.sportTitel;
-  renderSportModusChips();
+  renderSportAnsichtBtn();
   var planWrap = document.getElementById('sportPlanWrap');
   var tabSection = document.getElementById('sportTabSection');
-  var filterReihen = [document.getElementById('sportChips'), document.getElementById('sportVerfChips')];
   // Tabellen-Ansicht: eigene Liga-Chips statt der Spielplan-Filter.
   if (SPORT_MODUS === 'tab') {
-    filterReihen.forEach(function(el){ el.style.display = 'none'; });
+    document.getElementById('sportChips').style.display = 'none';
+    document.getElementById('sportVerfZeile').style.display = 'none';
     planWrap.style.display = 'none';
     tabSection.style.display = '';
     renderSportTabelle();
     return;
   }
+  document.getElementById('sportVerfZeile').style.display = '';
   /* Konferenz-Schalter rechts neben "Heute" (Christian, 24.08.2026). An
      bedeutet: nur der heutige Spieltag, verdichtet -- und zwar GANZ, ohne
      Abo-, Free-TV- und Vereinsfilter. Wer die Konferenz aufruft, will sehen,
@@ -11689,7 +11682,7 @@ function renderSportPage(){
   // In der Konferenz ist die Wettbewerbs-Reihe die letzte -- sie traegt dann
   // den Abstand zur Ueberschrift, den sonst die Vereins-Reihe setzt.
   compReihe.classList.toggle('chips-letzte', konferenz);
-  document.getElementById('sportVerfChips').style.display = konferenz ? 'none' : '';
+  document.getElementById('sportVerfZeile').style.display = konferenz ? 'none' : '';
   tabSection.style.display = 'none';
   planWrap.style.display = '';
   renderSportChips();
@@ -13686,29 +13679,6 @@ function einstellungenSichtbarkeit(){
     });
   }
 }
-/* Die drei Ansichts-Punkte im Menue -- nur, solange die Sport-Seite offen
-   ist. Beschriftung und Hervorhebung kommen aus dem aktuellen Zustand. */
-function navSportAnsichten(){
-  // Konferenz fehlt hier bewusst -- sie ist ein Schalter im Spielplan, keine
-  // eigene Ansicht mehr (Christian, 24.08.2026).
-  var punkte = [['navPlanBtn', 'plan', TXT.sportModusPlan],
-                ['navTabBtn', 'tab', TXT.sportModusTab]];
-  var tabDa = SPORT_DATA && sportTabLigen().length;
-  punkte.forEach(function(p){
-    var el = document.getElementById(p[0]);
-    if (!el) return;
-    var zeigen = sportMode && (p[1] !== 'tab' || tabDa);
-    el.style.display = zeigen ? '' : 'none';
-    el.textContent = p[2];
-    el.classList.toggle('aktiv', SPORT_MODUS === p[1]);
-    el.onclick = function(){
-      closeNavMenu();
-      if (SPORT_MODUS !== p[1]) { SPORT_MODUS = p[1]; renderSportPage(); }
-      window.scrollTo(0, 0);
-    };
-  });
-  document.getElementById('navSportSep').style.display = sportMode ? '' : 'none';
-}
 function openSettingsModal(){
   MAIL_GRUPPE_OFFEN = false;   // Aufklapp-Gruppe startet zu
   einstellungenSichtbarkeit();
@@ -15514,9 +15484,6 @@ function closeNavMenu(){
   navMenuBtn.setAttribute('aria-expanded', 'false');
 }
 function toggleNavMenu(){
-  // Vor dem Aufklappen den Sport-Teil auf Stand bringen (welche Ansicht ist
-  // aktiv, sind wir ueberhaupt auf der Sport-Seite).
-  navSportAnsichten();
   const open = navMenu.classList.toggle('open');
   navMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
   // Sortier-Dropdowns (Filme/Serien UND Kino) schliessen sich sonst nicht von
