@@ -714,12 +714,16 @@
   .sport-modus-zeile .sport-chips { margin:0; padding:0; max-width:none;
     flex:1 1 auto; min-width:0; }
   .sport-modus-zeile .sport-verein-link { flex:0 0 auto; }
-  /* Schmale Schirme: Nebeneinander schnitte der Link den "Tabelle"-Chip an.
-     Dann rutscht er unter die Chips -- weiterhin rechtsbuendig. */
+  /* Immer EINE Zeile (Christian, 24.08.2026). Auf schmalen Schirmen ruecken
+     Chips und Link enger zusammen, damit alle drei Ansichten neben den Link
+     passen (bei 375px geht es damit gerade auf). Reicht es doch nicht --
+     sehr schmale Geraete, laengere Sprachen --, scrollt die Chip-Reihe
+     (min-width:0 erlaubt ihr das Schrumpfen), der Link bleibt stehen. */
   @media (max-width: 560px) {
-    .sport-modus-zeile { flex-wrap:wrap; row-gap:6px; }
-    .sport-modus-zeile .sport-chips { flex:1 1 100%; }
-    .sport-modus-zeile .sport-verein-link { margin-left:auto; }
+    .sport-modus-zeile { gap:8px; }
+    .sport-modus-zeile .sport-chips { gap:6px; }
+    .sport-modus button { font-size:12.5px; padding:5px 8px; }
+    .sport-modus-zeile .sport-verein-link { font-size:12px; }
   }
 
   /* Aufklappbare Spielkarten-Details: Direktvergleich + Formkurve. Die
@@ -1781,7 +1785,7 @@
        Die Sport-Abos stecken als Abschnitt im Fenster "Streaminganbieter"
        (Einstellungen) -- ein Ort fuer alle Abos statt zwei Verwaltungen. -->
   <div class="cinema-page-header">
-    <h2 class="cinema-page-title" id="sportPageTitle">Fußball live im TV</h2>
+    <h2 class="cinema-page-title" id="sportPageTitle">Fußball live im TV/Stream</h2>
   </div>
   <!-- Zwei Filterreihen (renderSportChips): oben die Wettbewerbe
        (Alle/Bundesliga/...), darunter die Verfuegbarkeit als Dreier-Auswahl
@@ -2682,7 +2686,7 @@ var UI_TEXTE = {
     kinoLabels: { now: 'Aktuell im Kino', soon: 'In Kürze im Kino', later: 'Bald im Kino' },
     kinoLeer: { now: 'Aktuell sind keine Titel hinterlegt.', soon: 'In Kürze startet aktuell nichts Neues.', later: 'Für die kommenden Monate ist noch nichts hinterlegt.' },
     kinoFehler: 'Kino-Daten konnten nicht geladen werden.',
-    sportTitel: 'Fußball live im TV',
+    sportTitel: 'Fußball live im TV/Stream',
     sportTeilenText: '⚽ Endlich! Auf einen Blick sehen, welches Fußballspiel bei welchem Streaming-Anbieter oder im Free-TV läuft. („+ Deine Ansicht“ filtert die Spiele zukünftig nur nach deinem Verein)',
     sportLabels: { heute: 'Heute', woche: 'Diese Woche', spaeter: 'Demnächst' },
     sportKeineSpiele: 'Keine Spiele für diese Auswahl.',
@@ -3082,7 +3086,7 @@ var UI_TEXTE = {
     kinoLabels: { now: 'Now playing', soon: 'Coming soon', later: 'Coming later' },
     kinoLeer: { now: 'No titles on file right now.', soon: 'Nothing new starting soon.', later: 'Nothing on file for the coming months yet.' },
     kinoFehler: 'Cinema data could not be loaded.',
-    sportTitel: 'Football live on TV',
+    sportTitel: 'Football live on TV/stream',
     sportTeilenText: '⚽ Finally! See at a glance which football match is on which streaming service or on free TV. (“+ Your view” filters the schedule to your club’s matches)',
     sportLabels: { heute: 'Today', woche: 'This week', spaeter: 'Coming up' },
     sportKeineSpiele: 'No matches for this selection.',
@@ -3479,7 +3483,7 @@ var UI_TEXTE = {
     kinoLabels: { now: 'À l’affiche', soon: 'Prochainement', later: 'Plus tard' },
     kinoLeer: { now: 'Aucun titre référencé pour le moment.', soon: 'Rien de nouveau ne démarre prochainement.', later: 'Rien de référencé pour les mois à venir pour l’instant.' },
     kinoFehler: 'Les données cinéma n’ont pas pu être chargées.',
-    sportTitel: 'Foot en direct à la télé',
+    sportTitel: 'Foot en direct à la télé/en streaming',
     sportTeilenText: '⚽ Enfin ! Voir d’un coup d’œil quel match de foot passe sur quel service de streaming ou en clair. (« + Ta vue » filtre le calendrier sur ton club)',
     sportLabels: { heute: 'Aujourd’hui', woche: 'Cette semaine', spaeter: 'À venir' },
     sportKeineSpiele: 'Aucun match pour cette sélection.',
@@ -3876,7 +3880,7 @@ var UI_TEXTE = {
     kinoLabels: { now: 'En cartelera', soon: 'Próximamente', later: 'Más adelante' },
     kinoLeer: { now: 'Ahora mismo no hay títulos registrados.', soon: 'No hay estrenos próximos.', later: 'Aún no hay nada registrado para los próximos meses.' },
     kinoFehler: 'No se pudieron cargar los datos de cine.',
-    sportTitel: 'Fútbol en directo por TV',
+    sportTitel: 'Fútbol en directo por TV/streaming',
     sportTeilenText: '⚽ ¡Por fin! Ver de un vistazo qué partido de fútbol se emite en qué servicio de streaming o en abierto. («+ Tu vista» filtra el calendario por tu equipo)',
     sportLabels: { heute: 'Hoy', woche: 'Esta semana', spaeter: 'Próximamente' },
     sportKeineSpiele: 'No hay partidos para esta selección.',
@@ -4273,7 +4277,7 @@ var UI_TEXTE = {
     kinoLabels: { now: 'Ora al cinema', soon: 'Prossimamente', later: 'In arrivo più avanti' },
     kinoLeer: { now: 'Nessun titolo registrato al momento.', soon: 'Nessuna novità in arrivo a breve.', later: 'Ancora niente in programma per i prossimi mesi.' },
     kinoFehler: 'Impossibile caricare i dati del cinema.',
-    sportTitel: 'Calcio in diretta TV',
+    sportTitel: 'Calcio in diretta TV/streaming',
     sportTeilenText: '⚽ Finalmente! Vedere a colpo d’occhio quale partita va in onda su quale servizio di streaming o in chiaro. («+ La tua vista» filtra il calendario sulla tua squadra)',
     sportLabels: { heute: 'Oggi', woche: 'Questa settimana', spaeter: 'In arrivo' },
     sportKeineSpiele: 'Nessuna partita per questa selezione.',
@@ -4670,7 +4674,7 @@ var UI_TEXTE = {
     kinoLabels: { now: 'Nu in de bioscoop', soon: 'Binnenkort', later: 'Later te zien' },
     kinoLeer: { now: 'Op dit moment geen titels bekend.', soon: 'Binnenkort start er niets nieuws.', later: 'Voor de komende maanden is nog niets bekend.' },
     kinoFehler: 'Bioscoopgegevens konden niet worden geladen.',
-    sportTitel: 'Voetbal live op tv',
+    sportTitel: 'Voetbal live op tv/stream',
     sportTeilenText: '⚽ Eindelijk! In één oogopslag zien welke voetbalwedstrijd bij welke streamingdienst of op free-tv te zien is. („+ Jouw weergave” filtert het schema op jouw club)',
     sportLabels: { heute: 'Vandaag', woche: 'Deze week', spaeter: 'Binnenkort' },
     sportKeineSpiele: 'Geen wedstrijden voor deze selectie.',
@@ -5067,7 +5071,7 @@ var UI_TEXTE = {
     kinoLabels: { now: 'Em cartaz', soon: 'Em breve', later: 'Mais adiante' },
     kinoLeer: { now: 'Nenhum título registrado no momento.', soon: 'Nada novo estreando em breve.', later: 'Ainda nada registrado para os próximos meses.' },
     kinoFehler: 'Não foi possível carregar os dados de cinema.',
-    sportTitel: 'Futebol ao vivo na TV',
+    sportTitel: 'Futebol ao vivo na TV/streaming',
     sportTeilenText: '⚽ Finalmente! Ver de relance qual jogo de futebol passa em qual serviço de streaming ou na TV aberta. («+ Sua visão» filtra o calendário pelo seu clube)',
     sportLabels: { heute: 'Hoje', woche: 'Esta semana', spaeter: 'Em breve' },
     sportKeineSpiele: 'Nenhum jogo para esta seleção.',
@@ -5765,7 +5769,7 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Choose the services you use. Only these are shown under “Stream / Rent / Buy” and on the title rows.' },
     '#providersList': { t: 'Loading …' },
     '#providersSaveBtn': { t: 'Save' },
-    '#sportPageTitle': { t: 'Football live on TV' },
+    '#sportPageTitle': { t: 'Football live on TV/stream' },
     '#providersSportTitel': { t: 'Sports subscriptions' },
     '#sportVereinBtn': { t: '+ Your view' },
     '#settingsVereinBtn': { t: 'Your club' },
@@ -5898,7 +5902,7 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Choisis les services que tu utilises. Seuls ceux-ci sont affichés sous « Regarder / Louer / Acheter » et sur les lignes de titres.' },
     '#providersList': { t: 'Chargement …' },
     '#providersSaveBtn': { t: 'Enregistrer' },
-    '#sportPageTitle': { t: 'Foot en direct à la télé' },
+    '#sportPageTitle': { t: 'Foot en direct à la télé/en streaming' },
     '#providersSportTitel': { t: 'Abonnements sport' },
     '#sportVereinBtn': { t: '+ Ta vue' },
     '#settingsVereinBtn': { t: 'Ton club' },
@@ -6031,7 +6035,7 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Elige los servicios que usas. Solo estos se muestran en «Ver / Alquilar / Comprar» y en las filas de títulos.' },
     '#providersList': { t: 'Cargando …' },
     '#providersSaveBtn': { t: 'Guardar' },
-    '#sportPageTitle': { t: 'Fútbol en directo por TV' },
+    '#sportPageTitle': { t: 'Fútbol en directo por TV/streaming' },
     '#providersSportTitel': { t: 'Suscripciones deportivas' },
     '#sportVereinBtn': { t: '+ Tu vista' },
     '#settingsVereinBtn': { t: 'Tu club' },
@@ -6164,7 +6168,7 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Scegli i servizi che usi. Solo questi vengono mostrati in “Streaming / Noleggio / Acquisto” e nelle righe dei titoli.' },
     '#providersList': { t: 'Caricamento …' },
     '#providersSaveBtn': { t: 'Salva' },
-    '#sportPageTitle': { t: 'Calcio in diretta TV' },
+    '#sportPageTitle': { t: 'Calcio in diretta TV/streaming' },
     '#providersSportTitel': { t: 'Abbonamenti sport' },
     '#sportVereinBtn': { t: '+ La tua vista' },
     '#settingsVereinBtn': { t: 'La tua squadra' },
@@ -6297,7 +6301,7 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Kies de diensten die je gebruikt. Alleen deze worden getoond onder “Streamen / Huren / Kopen” en bij de titelrijen.' },
     '#providersList': { t: 'Laden …' },
     '#providersSaveBtn': { t: 'Opslaan' },
-    '#sportPageTitle': { t: 'Voetbal live op tv' },
+    '#sportPageTitle': { t: 'Voetbal live op tv/stream' },
     '#providersSportTitel': { t: 'Sportabonnementen' },
     '#sportVereinBtn': { t: '+ Jouw weergave' },
     '#settingsVereinBtn': { t: 'Jouw club' },
@@ -6430,7 +6434,7 @@ var MARKUP_TEXTE = {
     '#providersModal .prov-intro': { t: 'Escolha os serviços que você usa. Só eles aparecem em “Stream / Alugar / Comprar” e nas linhas de título.' },
     '#providersList': { t: 'Carregando …' },
     '#providersSaveBtn': { t: 'Salvar' },
-    '#sportPageTitle': { t: 'Futebol ao vivo na TV' },
+    '#sportPageTitle': { t: 'Futebol ao vivo na TV/streaming' },
     '#providersSportTitel': { t: 'Assinaturas de esporte' },
     '#sportVereinBtn': { t: '+ Sua visão' },
     '#settingsVereinBtn': { t: 'Seu clube' },
@@ -11213,6 +11217,10 @@ function renderSportModusChips(){
       window.scrollTo(0, 0);
     };
   });
+  // Falls die Reihe neben dem Link doch nicht ganz passt: derselbe
+  // Ausblende-Verlauf rechts wie bei den Filterreihen -- dann liest sich der
+  // angeschnittene Chip als "hier geht es weiter" statt als Fehler.
+  wischFadeAktualisieren(el);
 }
 
 /* ---- Konferenz: alle HEUTIGEN Spiele der aktuellen Filter als verdichtete
