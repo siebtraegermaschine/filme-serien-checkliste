@@ -615,10 +615,16 @@
      700px-Spalte mit 20px Innenrand. Im Browser rutschte das Logo sonst ganz
      nach links und das Menue ganz nach rechts, weit weg von allem anderen.
      Auf schmalen Schirmen (unter 700px) aendert sich dadurch nichts. */
+  /* Der Kopf gibt seinen eigenen Seitenrand ab: Sonst kaeme zu seinen 20px
+     noch einmal der Innenrand der Logo-Zeile -- auf dem Handy stuende das
+     Logo dann 40px vom Rand, die Ueberschrift darunter aber bei 20px
+     (Christian, 24.08.2026). Den Rand setzt jetzt allein die Logo-Zeile,
+     und zwar mit derselben Rechnung wie jede Inhaltsspalte. */
+  body.sport-seite header { padding-left: 0; padding-right: 0; }
   body.sport-seite header h1 { max-width: 700px; margin-left: auto; margin-right: auto;
     padding: 0 20px; box-sizing: border-box; }
-  body.sport-seite .nav-menu-btn { right: max(16px, calc((100% - 700px) / 2 + 20px)); }
-  body.sport-seite .sport-header-btn { right: max(64px, calc((100% - 700px) / 2 + 68px)); }
+  body.sport-seite .nav-menu-btn { right: max(20px, calc((100% - 700px) / 2 + 20px)); }
+  body.sport-seite .sport-header-btn { right: max(68px, calc((100% - 700px) / 2 + 68px)); }
   /* Oberkante Logo = Oberkante der Navigations-Knoepfe (die sitzen absolut
      bei 6px + safe-area; Logo steht daneben und ueberlagert nichts --
      Christian, 20.08.2026). Ueberschreibt die 30px des Standard-Headers. */
