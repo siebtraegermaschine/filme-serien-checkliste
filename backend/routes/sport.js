@@ -3,7 +3,9 @@ import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { geheimnisStimmt } from '../lib/vergleich.js';
 import { sportKontext } from '../lib/seoSport.js';
-import { LIGEN_MIT_TABELLE, ligaTabelle, torschuetzen, teamForm, direktvergleich } from '../lib/sportDaten.js';
+import { LIGEN_MIT_TABELLE, hatTabelle, wettbewerbTabellen, torschuetzen,
+         teamForm, direktvergleich } from '../lib/sportDaten.js';
+import { ARTEN } from '../lib/sportPush.js';
 
 const router = createAsyncRouter();
 
@@ -58,7 +60,7 @@ router.get('/', async (_req, res) => {
    durch. */
 router.get('/tabelle/:comp', async (req, res) => {
   const comp = String(req.params.comp || '').toLowerCase();
-  if (!LIGEN_MIT_TABELLE.has(comp)) return res.status(404).json({ error: 'no_table' });
+  if (!hatTabelle(comp)) return res.status(404).json({ error: 'no_table' });
   const { rows } = await pool.query(
     `SELECT saison FROM sport_matches
       WHERE wettbewerb = $1 AND saison <> ''
@@ -66,17 +68,17 @@ router.get('/tabelle/:comp', async (req, res) => {
       LIMIT 1`, [comp]);
   if (!rows.length) return res.status(404).json({ error: 'no_matches' });
   const saison = rows[0].saison;
-  const [tabelle, schuetzen] = await Promise.all([
-    ligaTabelle(comp, saison),
+  const [gruppen, schuetzen] = await Promise.all([
+    wettbewerbTabellen(comp, saison),
     torschuetzen(comp, saison),
   ]);
   res.json({
     saison,
-    tabelle: (tabelle || []).map((t) => ({
-      name: t.teamName, kurz: t.shortName || null, logo: t.teamIconUrl || null,
-      sp: t.matches, s: t.won, u: t.draw, n: t.lost,
-      tore: t.goals, gegen: t.opponentGoals, pkt: t.points,
-    })),
+    // Immer eine Liste von Gruppen: Ligen und Ligaphase haben genau eine
+    // (name null), Gruppenturniere je Gruppe eine.
+    gruppen: gruppen || [],
+    // Bei selbst gerechneten Tabellen sagt die App dazu, wie sortiert wurde.
+    berechnet: !LIGEN_MIT_TABELLE.has(comp),
     torschuetzen: schuetzen || [],
   });
 });
@@ -107,19 +109,23 @@ router.get('/spiel/:id/details', async (req, res) => {
    Frontend schiebt dann die lokale Auswahl hoch, statt sie zu ueberschreiben. */
 router.get('/ansicht', requireAuth, async (req, res) => {
   const { rows } = await pool.query(
-    'SELECT sport_vereine, sport_comps FROM users WHERE id = $1', [req.session.userId]);
+    'SELECT sport_vereine, sport_comps, sport_push_arten FROM users WHERE id = $1', [req.session.userId]);
   const u = rows[0] || {};
   res.json({
     vereine: u.sport_vereine || null,
     comps: u.sport_comps || null,
+    arten: u.sport_push_arten || null,
   });
 });
 
 router.put('/ansicht', requireAuth, async (req, res) => {
-  const { vereine, comps } = req.body || {};
+  const { vereine, comps, arten } = req.body || {};
   if (!Array.isArray(vereine) || !Array.isArray(comps)) {
     return res.status(400).json({ error: 'invalid_payload' });
   }
+  // arten ist freiwillig: Wer nur Vereine speichert (Ansicht-Fenster), soll
+  // die Benachrichtigungs-Auswahl nicht ungewollt loeschen.
+  const sauberArten = Array.isArray(arten) ? ARTEN.filter((a) => arten.indexOf(a) !== -1) : null;
   // Nur Name und Logo je Verein, hoechstens drei -- dieselbe Obergrenze wie
   // im Frontend (VEREIN_MAX). Logos sind OpenLigaDB-URLs.
   const sauberVereine = vereine
@@ -136,15 +142,17 @@ router.put('/ansicht', requireAuth, async (req, res) => {
     .filter((c) => /^[a-z0-9]{1,12}$/.test(c)))].slice(0, 20);
 
   await pool.query(
-    'UPDATE users SET sport_vereine = $1, sport_comps = $2 WHERE id = $3',
-    [JSON.stringify(sauberVereine), sauberComps, req.session.userId]);
+    `UPDATE users SET sport_vereine = $1, sport_comps = $2,
+            sport_push_arten = COALESCE($3, sport_push_arten)
+      WHERE id = $4`,
+    [JSON.stringify(sauberVereine), sauberComps, sauberArten, req.session.userId]);
   // Alle Push-Abos dieser Person nachziehen -- sonst erinnerte ein zweites
-  // Geraet weiter an den alten Verein. Genau das ist der Konto-Nutzen bei
-  // den Benachrichtigungen (siehe lib/sportPush.js).
+  // Geraet weiter an den alten Verein bzw. zur alten Zeit. Genau das ist der
+  // Konto-Nutzen bei den Benachrichtigungen (siehe lib/sportPush.js).
   await pool.query(
-    'UPDATE push_abos SET vereine = $1 WHERE user_id = $2',
-    [sauberVereine.map((v) => v.n), req.session.userId]);
-  res.json({ vereine: sauberVereine, comps: sauberComps });
+    `UPDATE push_abos SET vereine = $1, arten = COALESCE($2, arten) WHERE user_id = $3`,
+    [sauberVereine.map((v) => v.n), sauberArten, req.session.userId]);
+  res.json({ vereine: sauberVereine, comps: sauberComps, arten: sauberArten });
 });
 
 // GET/PUT /api/sport/abos -- die eigenen Sport-Abos (Sender-Slugs). NULL heisst

@@ -760,9 +760,16 @@
     padding:6px 10px; margin:10px auto 16px; overflow-x:auto;
     max-width:660px; box-sizing:border-box; }
   #sportTabInhalt { padding:0 20px; }
+  /* Gruppenturniere (Nations League, EM, WM): je Gruppe eine Tabelle. */
+  .sport-gruppe-titel { max-width:660px; margin:14px auto 0; font-size:13px; font-weight:700;
+    color:var(--text-dim); text-transform:uppercase; letter-spacing:.5px; }
+  .sport-tab-fussnote { max-width:660px; margin:0 auto 16px; font-size:12px; color:var(--text-dim); }
 
   /* Kalender-Links im "Deine Ansicht"-Fenster. */
-  #vereinKalender { margin-top:10px; }
+  #pushKalender { margin-top:16px; }
+  /* Alle sechs Zeitpunkte sollen ohne Scrollen zu sehen sein -- .prov-list
+     ist sonst auf die Fensterhoehe gedeckelt (Anbieterlisten sind lang). */
+  #pushArtenListe { overflow-y: visible; flex: 0 0 auto; }
   .kalender-link { display:flex; align-items:center; gap:8px; padding:8px 10px; margin-bottom:6px;
     border:1px solid var(--border); border-radius:10px; color:var(--text); text-decoration:none;
     font-size:13.5px; background:var(--card); }
@@ -2305,13 +2312,9 @@
     <h4 class="prov-sport-titel" id="ansichtVereineTitel">Deine Vereine (bis zu 3)</h4>
     <input type="text" id="vereinSuche" placeholder="Verein suchen …" autocomplete="off">
     <div class="prov-list" id="vereinList">Lädt …</div>
-    <!-- Spielplan-Abo (24.08.2026): je gewaehltem Verein ein Kalender-Link
-         (webcal -> /kalender/<slug>.ics) -- die Kalender-App abonniert den
-         Spielplan samt Sendern und haelt ihn von selbst aktuell. -->
-    <div id="vereinKalender" style="display:none">
-      <div id="vereinKalenderLinks"></div>
-      <p class="prov-hint" id="vereinKalenderHinweis"></p>
-    </div>
+    <!-- Das Kalender-Abo stand hier bis 24.08.2026; es wohnt jetzt bei den
+         Benachrichtigungen (#pushModal) -- beide sagen "erinnere mich an die
+         Spiele", das gehoert an einen Ort. -->
     <div class="prov-foot">
       <span class="prov-hint" id="vereinHint"></span>
       <button type="button" id="vereinSaveBtn" class="auth-submit">Speichern</button>
@@ -2377,7 +2380,18 @@
          Mehrfachauswahl, standardmaessig nichts. -->
     <div class="prov-list" id="pushArtenListe"></div>
     <p class="prov-intro" id="pushStatus" style="display:none"></p>
+    <!-- Spielplan-Abo (24.08.2026 hierher gezogen): je gewaehltem Verein ein
+         Kalender-Link (webcal -> /kalender/<slug>.ics). Braucht weder
+         Erlaubnis noch Konto und funktioniert auch dort, wo es kein Web-Push
+         gibt -- deshalb steht der Block VOR allen Push-Zustaenden. -->
+    <!-- Der Knopf gehoert direkt unter seinen Statustext ("hier aktivieren",
+         "Verein wählen") -- erst danach der eigenstaendige Kalender-Block. -->
     <button type="button" id="pushAktionBtn" class="auth-submit" style="display:none"></button>
+    <div id="pushKalender" style="display:none">
+      <h4 class="prov-sport-titel" id="pushKalenderTitel"></h4>
+      <div id="pushKalenderLinks"></div>
+      <p class="prov-hint" id="pushKalenderHinweis"></p>
+    </div>
   </div>
 </div>
 
@@ -2655,10 +2669,13 @@ var UI_TEXTE = {
     sportTabKopf: { sp: 'Sp.', sun: 'S-U-N', tore: 'Tore', pkt: 'Pkt.' },
     sportKonfLeer: 'Heute keine Spiele für diese Auswahl.',
     sportTabFehler: 'Tabelle konnte nicht geladen werden.',
+    sportTabNochNicht: 'Für diesen Wettbewerb gibt es noch keine Tabelle – sie entsteht, sobald die ersten Spiele gewertet sind.',
+    sportTabBerechnet: 'Aus den Ergebnissen berechnet, sortiert nach Punkten, Tordifferenz und Toren. K.-o.-Spiele zählen nicht mit.',
     sportDetailsDuelle: 'Direktvergleich',
     sportDetailsForm: 'Formkurve',
     sportDetailsLeer: 'Keine Daten zu diesem Spiel gefunden.',
     sportKalenderAbo: function(n){ return '📅 Spielplan von ' + n + ' abonnieren'; },
+    pushKalenderTitel: 'Spielplan im Kalender',
     sportKalenderHinweis: 'Öffnet deine Kalender-App: Der Spielplan samt Sendern landet als Abo im Kalender und hält sich von selbst aktuell.',
     pushTitel: 'Benachrichtigungen',
     pushIntro: 'Mitteilungen auf diesem Gerät — auch, wenn die Seite geschlossen ist. Weitere Benachrichtigungen kommen nach und nach dazu.',
@@ -2679,6 +2696,8 @@ var UI_TEXTE = {
     pushVerweigert: 'Mitteilungen sind für diese Seite blockiert. Erlaube sie in den Einstellungen deines Browsers und versuche es erneut.',
     pushFehler: 'Das hat nicht geklappt. Bitte später erneut versuchen.',
     pushAktivFuer: function(namen){ return 'Aktiv für: ' + namen; },
+    pushHierNochNicht: 'Diese Auswahl kommt von deinem Konto — auf diesem Gerät sind Mitteilungen aber noch nicht erlaubt.',
+    pushHierAktivieren: 'Auf diesem Gerät aktivieren',
     pushKontoHinweis: 'Ohne Konto gilt das nur für diesen Browser. Mit einem kostenlosen Konto bekommst du die Mitteilungen auf allen deinen Geräten.',
     kontoMenue: 'Konto anlegen / anmelden',
     kontoHinweisTitel: 'Kostenloses Konto anlegen',
@@ -3049,10 +3068,13 @@ var UI_TEXTE = {
     sportTabKopf: { sp: 'P', sun: 'W-D-L', tore: 'Goals', pkt: 'Pts' },
     sportKonfLeer: 'No matches today for this selection.',
     sportTabFehler: 'Could not load the table.',
+    sportTabNochNicht: 'There is no table for this competition yet – it appears once the first matches have been played.',
+    sportTabBerechnet: 'Calculated from the results, ranked by points, goal difference and goals. Knockout matches are not counted.',
     sportDetailsDuelle: 'Head-to-head',
     sportDetailsForm: 'Form',
     sportDetailsLeer: 'No data found for this match.',
     sportKalenderAbo: function(n){ return '📅 Subscribe to the ' + n + ' schedule'; },
+    pushKalenderTitel: 'Schedule in your calendar',
     sportKalenderHinweis: 'Opens your calendar app: the schedule including broadcasters is added as a subscription and keeps itself up to date.',
     pushTitel: 'Notifications',
     pushIntro: 'Notifications on this device — even when the page is closed. More notification types will be added over time.',
@@ -3073,6 +3095,8 @@ var UI_TEXTE = {
     pushVerweigert: 'Notifications are blocked for this site. Allow them in your browser settings and try again.',
     pushFehler: 'That didn’t work. Please try again later.',
     pushAktivFuer: function(namen){ return 'Active for: ' + namen; },
+    pushHierNochNicht: 'This selection comes from your account — but notifications are not allowed on this device yet.',
+    pushHierAktivieren: 'Enable on this device',
     pushKontoHinweis: 'Without an account this applies to this browser only. With a free account you get the notifications on all your devices.',
     kontoMenue: 'Create account / sign in',
     kontoHinweisTitel: 'Create a free account',
@@ -3440,10 +3464,13 @@ var UI_TEXTE = {
     sportTabKopf: { sp: 'MJ', sun: 'V-N-D', tore: 'Buts', pkt: 'Pts' },
     sportKonfLeer: 'Aucun match aujourd’hui pour cette sélection.',
     sportTabFehler: 'Impossible de charger le classement.',
+    sportTabNochNicht: 'Il n’y a pas encore de classement pour cette compétition – il apparaît dès les premiers matchs joués.',
+    sportTabBerechnet: 'Calculé à partir des résultats, classé par points, différence de buts et buts marqués. Les matchs à élimination directe ne comptent pas.',
     sportDetailsDuelle: 'Face-à-face',
     sportDetailsForm: 'Forme',
     sportDetailsLeer: 'Aucune donnée pour ce match.',
     sportKalenderAbo: function(n){ return '📅 S’abonner au calendrier de ' + n; },
+    pushKalenderTitel: 'Le calendrier dans ton agenda',
     sportKalenderHinweis: 'Ouvre ton application calendrier : le calendrier avec les diffuseurs est ajouté en abonnement et reste à jour tout seul.',
     pushTitel: 'Notifications',
     pushIntro: 'Notifications sur cet appareil — même quand la page est fermée. D’autres notifications arriveront au fur et à mesure.',
@@ -3464,6 +3491,8 @@ var UI_TEXTE = {
     pushVerweigert: 'Les notifications sont bloquées pour ce site. Autorise-les dans les réglages de ton navigateur et réessaie.',
     pushFehler: 'Ça n’a pas marché. Réessaie plus tard.',
     pushAktivFuer: function(namen){ return 'Actif pour : ' + namen; },
+    pushHierNochNicht: 'Cette sélection vient de ton compte — mais les notifications ne sont pas encore autorisées sur cet appareil.',
+    pushHierAktivieren: 'Activer sur cet appareil',
     pushKontoHinweis: 'Sans compte, cela ne vaut que pour ce navigateur. Avec un compte gratuit, tu reçois les notifications sur tous tes appareils.',
     kontoMenue: 'Créer un compte / se connecter',
     kontoHinweisTitel: 'Créer un compte gratuit',
@@ -3831,10 +3860,13 @@ var UI_TEXTE = {
     sportTabKopf: { sp: 'PJ', sun: 'G-E-P', tore: 'Goles', pkt: 'Pts' },
     sportKonfLeer: 'Hoy no hay partidos para esta selección.',
     sportTabFehler: 'No se pudo cargar la clasificación.',
+    sportTabNochNicht: 'Todavía no hay clasificación para esta competición: aparece en cuanto se juegan los primeros partidos.',
+    sportTabBerechnet: 'Calculada a partir de los resultados, ordenada por puntos, diferencia de goles y goles. Los partidos eliminatorios no cuentan.',
     sportDetailsDuelle: 'Cara a cara',
     sportDetailsForm: 'Forma',
     sportDetailsLeer: 'No hay datos de este partido.',
     sportKalenderAbo: function(n){ return '📅 Suscribirse al calendario del ' + n; },
+    pushKalenderTitel: 'El calendario en tu agenda',
     sportKalenderHinweis: 'Abre tu app de calendario: el calendario con las cadenas se añade como suscripción y se mantiene actualizado solo.',
     pushTitel: 'Notificaciones',
     pushIntro: 'Notificaciones en este dispositivo, incluso con la página cerrada. Con el tiempo se añadirán más notificaciones.',
@@ -3855,6 +3887,8 @@ var UI_TEXTE = {
     pushVerweigert: 'Las notificaciones están bloqueadas para este sitio. Permítelas en los ajustes de tu navegador e inténtalo de nuevo.',
     pushFehler: 'No ha funcionado. Inténtalo más tarde.',
     pushAktivFuer: function(namen){ return 'Activo para: ' + namen; },
+    pushHierNochNicht: 'Esta selección viene de tu cuenta, pero en este dispositivo aún no están permitidos los avisos.',
+    pushHierAktivieren: 'Activar en este dispositivo',
     pushKontoHinweis: 'Sin cuenta esto solo vale para este navegador. Con una cuenta gratuita recibes los avisos en todos tus dispositivos.',
     kontoMenue: 'Crear cuenta / iniciar sesión',
     kontoHinweisTitel: 'Crea una cuenta gratuita',
@@ -4222,10 +4256,13 @@ var UI_TEXTE = {
     sportTabKopf: { sp: 'PG', sun: 'V-N-P', tore: 'Gol', pkt: 'Pti' },
     sportKonfLeer: 'Oggi nessuna partita per questa selezione.',
     sportTabFehler: 'Impossibile caricare la classifica.',
+    sportTabNochNicht: 'Per questa competizione non c’è ancora una classifica: compare appena si giocano le prime partite.',
+    sportTabBerechnet: 'Calcolata dai risultati, ordinata per punti, differenza reti e gol. Le partite a eliminazione non contano.',
     sportDetailsDuelle: 'Scontri diretti',
     sportDetailsForm: 'Forma',
     sportDetailsLeer: 'Nessun dato per questa partita.',
     sportKalenderAbo: function(n){ return '📅 Abbonati al calendario di ' + n; },
+    pushKalenderTitel: 'Il calendario nella tua agenda',
     sportKalenderHinweis: 'Apre la tua app calendario: il calendario con le emittenti viene aggiunto come abbonamento e si aggiorna da solo.',
     pushTitel: 'Notifiche',
     pushIntro: 'Notifiche su questo dispositivo, anche a pagina chiusa. Altre notifiche arriveranno col tempo.',
@@ -4246,6 +4283,8 @@ var UI_TEXTE = {
     pushVerweigert: 'Le notifiche sono bloccate per questo sito. Consentile nelle impostazioni del browser e riprova.',
     pushFehler: 'Non ha funzionato. Riprova più tardi.',
     pushAktivFuer: function(namen){ return 'Attivo per: ' + namen; },
+    pushHierNochNicht: 'Questa scelta arriva dal tuo account, ma su questo dispositivo le notifiche non sono ancora consentite.',
+    pushHierAktivieren: 'Attiva su questo dispositivo',
     pushKontoHinweis: 'Senza account vale solo per questo browser. Con un account gratuito ricevi le notifiche su tutti i tuoi dispositivi.',
     kontoMenue: 'Crea account / accedi',
     kontoHinweisTitel: 'Crea un account gratuito',
@@ -4613,10 +4652,13 @@ var UI_TEXTE = {
     sportTabKopf: { sp: 'W', sun: 'W-G-V', tore: 'Doelp.', pkt: 'Ptn' },
     sportKonfLeer: 'Vandaag geen wedstrijden voor deze selectie.',
     sportTabFehler: 'Stand kon niet worden geladen.',
+    sportTabNochNicht: 'Voor dit toernooi is er nog geen stand – die verschijnt zodra de eerste wedstrijden gespeeld zijn.',
+    sportTabBerechnet: 'Berekend uit de uitslagen, gesorteerd op punten, doelsaldo en doelpunten. Knock-outwedstrijden tellen niet mee.',
     sportDetailsDuelle: 'Onderlinge duels',
     sportDetailsForm: 'Vorm',
     sportDetailsLeer: 'Geen gegevens voor deze wedstrijd.',
     sportKalenderAbo: function(n){ return '📅 Abonneer op het programma van ' + n; },
+    pushKalenderTitel: 'Programma in je agenda',
     sportKalenderHinweis: 'Opent je agenda-app: het programma met zenders wordt als abonnement toegevoegd en blijft vanzelf actueel.',
     pushTitel: 'Meldingen',
     pushIntro: 'Meldingen op dit apparaat — ook als de pagina gesloten is. Er komen gaandeweg meer meldingen bij.',
@@ -4637,6 +4679,8 @@ var UI_TEXTE = {
     pushVerweigert: 'Meldingen zijn voor deze site geblokkeerd. Sta ze toe in je browserinstellingen en probeer het opnieuw.',
     pushFehler: 'Dat is niet gelukt. Probeer het later opnieuw.',
     pushAktivFuer: function(namen){ return 'Actief voor: ' + namen; },
+    pushHierNochNicht: 'Deze keuze komt van je account — op dit apparaat zijn meldingen nog niet toegestaan.',
+    pushHierAktivieren: 'Op dit apparaat inschakelen',
     pushKontoHinweis: 'Zonder account geldt dit alleen voor deze browser. Met een gratis account krijg je de meldingen op al je apparaten.',
     kontoMenue: 'Account aanmaken / inloggen',
     kontoHinweisTitel: 'Maak een gratis account',
@@ -5004,10 +5048,13 @@ var UI_TEXTE = {
     sportTabKopf: { sp: 'J', sun: 'V-E-D', tore: 'Gols', pkt: 'Pts' },
     sportKonfLeer: 'Hoje não há jogos para esta seleção.',
     sportTabFehler: 'Não foi possível carregar a classificação.',
+    sportTabNochNicht: 'Ainda não há classificação para esta competição – ela surge assim que os primeiros jogos forem disputados.',
+    sportTabBerechnet: 'Calculada a partir dos resultados, ordenada por pontos, saldo de gols e gols. Jogos eliminatórios não contam.',
     sportDetailsDuelle: 'Confronto direto',
     sportDetailsForm: 'Forma',
     sportDetailsLeer: 'Sem dados para este jogo.',
     sportKalenderAbo: function(n){ return '📅 Assinar o calendário de ' + n; },
+    pushKalenderTitel: 'Calendário no seu app',
     sportKalenderHinweis: 'Abre seu app de calendário: o calendário com as emissoras é adicionado como assinatura e se mantém atualizado sozinho.',
     pushTitel: 'Notificações',
     pushIntro: 'Notificações neste dispositivo, mesmo com a página fechada. Mais notificações serão adicionadas com o tempo.',
@@ -5028,6 +5075,8 @@ var UI_TEXTE = {
     pushVerweigert: 'As notificações estão bloqueadas para este site. Permita-as nas configurações do navegador e tente novamente.',
     pushFehler: 'Não funcionou. Tente novamente mais tarde.',
     pushAktivFuer: function(namen){ return 'Ativo para: ' + namen; },
+    pushHierNochNicht: 'Esta seleção vem da sua conta, mas neste dispositivo as notificações ainda não estão permitidas.',
+    pushHierAktivieren: 'Ativar neste dispositivo',
     pushKontoHinweis: 'Sem conta isso vale só para este navegador. Com uma conta gratuita você recebe os avisos em todos os seus dispositivos.',
     kontoMenue: 'Criar conta / entrar',
     kontoHinweisTitel: 'Crie uma conta gratuita',
@@ -11059,8 +11108,13 @@ function renderSportSection(key, spiele){
 
 /* ---- Ansichts-Umschalter: Spielplan / Konferenz / Tabelle. Der Tabellen-
    Chip erscheint nur, wenn es Ligen mit Tabelle gibt (bl1/bl2/bl3). ---- */
+/* Wettbewerbe mit sinnvoller Tabelle (muss zu hatTabelle in
+   backend/lib/sportDaten.js passen): die drei Ligen, die Ligaphase von
+   Champions und Europa League, dazu die Gruppenturniere. DFB-Pokal und
+   Supercup fehlen bewusst -- reines K.-o., da gibt es keine Tabelle. */
+var SPORT_TAB_COMPS = ['bl1', 'bl2', 'bl3', 'ucl', 'uel', 'nla', 'em', 'wm'];
 function sportTabLigen(){
-  return ['bl1', 'bl2', 'bl3'].filter(function(c){ return SPORT_DATA.wettbewerbe[c]; });
+  return SPORT_TAB_COMPS.filter(function(c){ return SPORT_DATA.wettbewerbe[c]; });
 }
 function renderSportModusChips(){
   var el = document.getElementById('sportModusChips');
@@ -11147,22 +11201,39 @@ function renderSportTabelle(){
     if (SPORT_MODUS !== 'tab' || SPORT_TAB_LIGA !== liga) return;
     var meine = MEINE_VEREINE.map(function(v){ return v.n; });
     var k = TXT.sportTabKopf;
-    var zeilen = d.tabelle.map(function(t, i){
-      return '<tr' + (meine.indexOf(t.name) !== -1 ? ' class="hervor"' : '') + '>' +
-        '<td class="num">' + (i + 1) + '</td>' +
-        '<td><span class="t-team">' + (t.logo ? '<img src="' + escAttr(t.logo) + '" alt="" loading="lazy">' : '') +
-        '<span>' + esc(t.name) + '</span></span></td>' +
-        '<td class="num">' + t.sp + '</td>' +
-        '<td class="num t-sun">' + t.s + '-' + t.u + '-' + t.n + '</td>' +
-        '<td class="num">' + t.tore + ':' + t.gegen + '</td>' +
-        '<td class="num t-pkt">' + t.pkt + '</td></tr>';
-    }).join('');
-    var html = '<h3 class="cinema-heading">' + esc((SPORT_DATA.wettbewerbe[liga] || {}).name || liga) +
-      (d.saison ? ' · ' + esc(d.saison) + '/' + esc(String(Number(d.saison) + 1).slice(-2)) : '') + '</h3>' +
-      '<div class="sport-tab-wrap"><table class="sport-tabelle">' +
-      '<thead><tr><th class="num">#</th><th></th><th class="num">' + esc(k.sp) + '</th>' +
-      '<th class="num t-sun">' + esc(k.sun) + '</th><th class="num">' + esc(k.tore) + '</th>' +
-      '<th class="num">' + esc(k.pkt) + '</th></tr></thead><tbody>' + zeilen + '</tbody></table></div>';
+    var saisonText = d.saison ? ' · ' + d.saison + '/' + String(Number(d.saison) + 1).slice(-2) : '';
+    var html = '<h3 class="cinema-heading">' +
+      esc(((SPORT_DATA.wettbewerbe[liga] || {}).name || liga) + saisonText) + '</h3>';
+    var gruppen = d.gruppen || [];
+    // Noch keine Tabelle: Gruppenphase/Ligaphase hat noch nicht begonnen.
+    // Das sagen statt eine leere Tabelle zu zeichnen.
+    if (!gruppen.length || !gruppen.some(function(g){ return g.zeilen.length; })) {
+      html += '<div class="cinema-empty">' + esc(TXT.sportTabNochNicht) + '</div>';
+      inhalt.innerHTML = html;
+      return;
+    }
+    gruppen.forEach(function(g){
+      if (!g.zeilen.length) return;
+      // Gruppenname nur bei echten Gruppenturnieren (Ligen liefern null).
+      if (g.name) html += '<h4 class="sport-gruppe-titel">' + esc(g.name) + '</h4>';
+      var zeilen = g.zeilen.map(function(t, i){
+        return '<tr' + (meine.indexOf(t.name) !== -1 ? ' class="hervor"' : '') + '>' +
+          '<td class="num">' + (i + 1) + '</td>' +
+          '<td><span class="t-team">' + (t.logo ? '<img src="' + escAttr(t.logo) + '" alt="" loading="lazy">' : '') +
+          '<span>' + esc(t.name) + '</span></span></td>' +
+          '<td class="num">' + t.sp + '</td>' +
+          '<td class="num t-sun">' + t.s + '-' + t.u + '-' + t.n + '</td>' +
+          '<td class="num">' + t.tore + ':' + t.gegen + '</td>' +
+          '<td class="num t-pkt">' + t.pkt + '</td></tr>';
+      }).join('');
+      html += '<div class="sport-tab-wrap"><table class="sport-tabelle">' +
+        '<thead><tr><th class="num">#</th><th></th><th class="num">' + esc(k.sp) + '</th>' +
+        '<th class="num t-sun">' + esc(k.sun) + '</th><th class="num">' + esc(k.tore) + '</th>' +
+        '<th class="num">' + esc(k.pkt) + '</th></tr></thead><tbody>' + zeilen + '</tbody></table></div>';
+    });
+    // Selbst gerechnet (Ligaphase, Gruppen): dazusagen, wonach sortiert wurde
+    // -- der direkte Vergleich mancher Turniere steckt nicht drin.
+    if (d.berechnet) html += '<p class="sport-tab-fussnote">' + esc(TXT.sportTabBerechnet) + '</p>';
     if (d.torschuetzen && d.torschuetzen.length) {
       html += '<h3 class="cinema-heading">' + esc(TXT.sportTorjaeger) + '</h3>' +
         '<div class="sport-tab-wrap"><table class="sport-tabelle"><tbody>' +
@@ -11177,10 +11248,14 @@ function renderSportTabelle(){
   inhalt.innerHTML = '<div class="cinema-empty">' + esc(TXT.laedt) + '</div>';
   apiRequest('GET', '/api/sport/tabelle/' + encodeURIComponent(liga))
     .then(function(d){ _sportTabellen[liga] = d; zeigen(d); })
-    .catch(function(){
-      if (SPORT_MODUS === 'tab' && SPORT_TAB_LIGA === liga) {
-        inhalt.innerHTML = '<div class="cinema-empty">' + esc(TXT.sportTabFehler) + '</div>';
-      }
+    .catch(function(err){
+      if (SPORT_MODUS !== 'tab' || SPORT_TAB_LIGA !== liga) return;
+      // Noch kein einziges Spiel im Bestand (Champions League vor der
+      // Auslosung, EM/WM lange vorher) -- das ist kein Fehler, sondern
+      // schlicht "noch nicht so weit".
+      var nochNicht = err && (err.code === 'no_matches' || err.status === 404);
+      inhalt.innerHTML = '<div class="cinema-empty">' +
+        esc(nochNicht ? TXT.sportTabNochNicht : TXT.sportTabFehler) + '</div>';
     });
 }
 
@@ -11434,6 +11509,20 @@ function pushAboSenden(sub, arten){
     arten: arten,
   });
 }
+/* Hat DIESES Geraet ein laufendes Abo beim Push-Dienst? Die gewaehlten
+   Zeitpunkte kommen vom Konto und stehen deshalb auch auf einem Geraet, das
+   noch gar nicht abonniert hat -- ohne diese Unterscheidung zeigte der Dialog
+   dort angehakte Kaestchen, obwohl nichts ankommt (Christian, 24.08.2026).
+   null = noch nicht ermittelt. */
+var _pushAboHier = null;
+async function pushAboZustandLaden(){
+  if (!pushUnterstuetzt()) { _pushAboHier = false; return; }
+  try {
+    var reg = await navigator.serviceWorker.getRegistration();
+    var sub = reg && await reg.pushManager.getSubscription();
+    _pushAboHier = !!sub;
+  } catch (e) { _pushAboHier = false; }
+}
 /* Auswahl uebernehmen: Beim ersten Haken werden Service Worker, Erlaubnis und
    Abo eingerichtet; beim Abwaehlen der letzten Stufe wird abbestellt. */
 async function pushArtenSetzen(arten){
@@ -11448,6 +11537,10 @@ async function pushArtenSetzen(arten){
   }
   await pushAboSenden(sub, arten);
   pushArtenMerken(arten);
+  _pushAboHier = true;
+  // Angemeldet: Auswahl auch ans Konto, damit sie auf dem naechsten Geraet
+  // schon vorgemerkt ist (der Server zieht dort die Abos nach).
+  if (CURRENT_USER) kontoAnsichtSpeichern();
 }
 async function pushAusschalten(){
   try {
@@ -11459,6 +11552,8 @@ async function pushAusschalten(){
     }
   } finally {
     pushArtenMerken([]);
+    _pushAboHier = false;
+    if (CURRENT_USER) kontoAnsichtSpeichern();
   }
 }
 /* Nach jedem Speichern der Vereinsauswahl das Server-Abo nachziehen --
@@ -11474,10 +11569,27 @@ async function pushVereineAktualisieren(){
     else await pushAusschalten();
   } catch (e) {}
 }
+/* Kalender-Abo je gespeichertem Verein: webcal:// oeffnet die Kalender-App
+   direkt mit dem Abo-Dialog -- dahinter steckt /kalender/<slug>.ics
+   (backend/lib/sportKalender.js). Ohne Verein kein Block. */
+function renderPushKalender(){
+  var wrap = document.getElementById('pushKalender');
+  if (!MEINE_VEREINE.length) { wrap.style.display = 'none'; return; }
+  document.getElementById('pushKalenderTitel').textContent = TXT.pushKalenderTitel;
+  document.getElementById('pushKalenderLinks').innerHTML = MEINE_VEREINE.map(function(v){
+    return '<a class="kalender-link" href="webcal://' + escAttr(location.host + '/kalender/' + sportSlug(v.n) + '.ics') + '">' +
+           esc(TXT.sportKalenderAbo(v.n)) + '</a>';
+  }).join('');
+  document.getElementById('pushKalenderHinweis').textContent = TXT.sportKalenderHinweis;
+  wrap.style.display = '';
+}
 function renderPushModal(){
   document.getElementById('pushModalTitel').textContent = TXT.pushTitel;
   document.getElementById('pushIntro').textContent = TXT.pushIntro;
   document.getElementById('pushArtenTitel').textContent = TXT.pushArtenTitel;
+  // Steht bewusst vor allen Push-Zustaenden: Der Kalender braucht weder
+  // Erlaubnis noch Konto und ist gerade dort wertvoll, wo Push nicht geht.
+  renderPushKalender();
   var liste = document.getElementById('pushArtenListe');
   var status = document.getElementById('pushStatus');
   var aktion = document.getElementById('pushAktionBtn');
@@ -11520,6 +11632,23 @@ function renderPushModal(){
     aktion.onclick = function(){ closePushModal(); openVereinModal(); };
     return;
   }
+  if (gewaehlt.length && _pushAboHier === false) {
+    // Auswahl kommt vom Konto, dieses Geraet hat aber noch nicht abonniert.
+    // Fernaktivieren geht nicht: Die Erlaubnis verlangt eine Nutzergeste HIER.
+    zeigeStatus(TXT.pushHierNochNicht);
+    aktion.textContent = TXT.pushHierAktivieren;
+    aktion.style.display = '';
+    aktion.onclick = async function(){
+      aktion.disabled = true;
+      try { await pushArtenSetzen(pushArten()); }
+      catch (err) {
+        status.textContent = err && err.verweigert ? TXT.pushVerweigert : TXT.pushFehler;
+      }
+      aktion.disabled = false;
+      renderPushModal();
+    };
+    return;
+  }
   if (gewaehlt.length) {
     zeigeStatus(TXT.pushAktivFuer(MEINE_VEREINE.map(function(v){ return v.n; }).join(', ')));
   }
@@ -11554,7 +11683,15 @@ document.getElementById('pushArtenListe').addEventListener('change', async funct
   }
   renderPushModal();
 });
-function openPushModal(){ renderPushModal(); _pushModal.style.display = 'flex'; }
+function openPushModal(){
+  renderPushModal();
+  _pushModal.style.display = 'flex';
+  // Abo-Zustand dieses Geraets nachreichen (asynchron) und neu zeichnen --
+  // davon haengt ab, ob "aktiv" oder "hier noch nicht aktiviert" dasteht.
+  pushAboZustandLaden().then(function(){
+    if (_pushModal.style.display !== 'none') renderPushModal();
+  });
+}
 function closePushModal(){ _pushModal.style.display = 'none'; }
 document.getElementById('pushModalX').onclick = closePushModal;
 _pushModal.addEventListener('click', function(e){ if (e.target === _pushModal) closePushModal(); });
@@ -11591,15 +11728,23 @@ function kontoAnsichtAnwenden(vereine, comps){
 async function kontoAnsichtSpeichern(){
   if (!CURRENT_USER) return;
   await apiRequest('PUT', '/api/sport/ansicht', {
-    vereine: MEINE_VEREINE, comps: gespeicherteAnsicht(),
+    vereine: MEINE_VEREINE, comps: gespeicherteAnsicht(), arten: pushArten(),
   }).catch(function(){});
 }
 async function kontoAnsichtSyncNachLogin(){
   if (!CURRENT_USER) return;
   try {
     var d = await apiRequest('GET', '/api/sport/ansicht');
-    if (d.vereine === null && d.comps === null) await kontoAnsichtSpeichern();
-    else kontoAnsichtAnwenden(d.vereine || [], d.comps || []);
+    if (d.vereine === null && d.comps === null && d.arten === null) {
+      // Konto noch unbeschrieben: die Wahl DIESES Geraets hinauf.
+      await kontoAnsichtSpeichern();
+    } else {
+      if (d.vereine !== null || d.comps !== null) kontoAnsichtAnwenden(d.vereine || [], d.comps || []);
+      // Benachrichtigungs-Zeitpunkte: Das Konto ist die geraeteuebergreifende
+      // Wahrheit. Hat es noch keine, wandert die Wahl dieses Geraets hinauf.
+      if (d.arten !== null) pushArtenMerken(d.arten);
+      else if (pushArten().length) await kontoAnsichtSpeichern();
+    }
   } catch (e) { /* Konto-Sync ist Zugabe -- ohne ihn bleibt die Geraetewahl */ }
   // Ein hier schon laufendes Push-Abo dem Konto zuordnen (und beim Abmelden
   // wieder loesen) -- der Server liest die Sitzung beim Anmelden des Abos.
@@ -11740,22 +11885,6 @@ function renderVereinList(){
              logo + '<span>' + esc(v.n) + '</span></label>';
     }).join('');
   document.getElementById('vereinHint').textContent = gewaehlt.size ? TXT.nAusgewaehlt(gewaehlt.size) : '';
-  renderVereinKalender();
-}
-/* Kalender-Abo je gewaehltem Verein (24.08.2026): webcal:// oeffnet die
-   Kalender-App direkt mit dem Abo-Dialog -- dahinter steckt schlicht
-   /kalender/<slug>.ics dieses Servers (backend/lib/sportKalender.js).
-   Angezeigt fuer die AKTUELLE Auswahl im Fenster, noch vor dem Speichern --
-   wer nur den Kalender will, muss die Auswahl nicht erst speichern. */
-function renderVereinKalender(){
-  var wrap = document.getElementById('vereinKalender');
-  if (!_vereinAuswahl.length) { wrap.style.display = 'none'; return; }
-  document.getElementById('vereinKalenderLinks').innerHTML = _vereinAuswahl.map(function(v){
-    return '<a class="kalender-link" href="webcal://' + escAttr(location.host + '/kalender/' + sportSlug(v.n) + '.ics') + '">' +
-           esc(TXT.sportKalenderAbo(v.n)) + '</a>';
-  }).join('');
-  document.getElementById('vereinKalenderHinweis').textContent = TXT.sportKalenderHinweis;
-  wrap.style.display = '';
 }
 _vereinList.addEventListener('change', function(e){
   var input = e.target;

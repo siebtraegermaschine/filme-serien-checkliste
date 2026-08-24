@@ -43,13 +43,132 @@ export async function ligaTabelle(wettbewerb, saison) {
   return sauber;
 }
 
-/* Torschuetzenliste einer Liga-Saison -- dieselben drei Ligen wie die
-   Tabelle (fuer Pokal/Europapokal liefert OpenLigaDB keine gepflegten
-   Listen). Gedeckelt auf die Spitze: mehr liest in der App niemand. */
+/* ---- Tabellen jenseits der drei Ligen (Christian, 24.08.2026) ----
+   Die Frage war, ob eine Tabelle auch fuer Pokal und Europapokal geht. Die
+   ehrliche Antwort steckt in diesen drei Listen:
+
+   - LIGEN_MIT_TABELLE: eigene Liga-Tabelle bei OpenLigaDB (getbltable) --
+     amtlich gefuehrt, inklusive der jeweiligen Sonderregeln. Die nehmen wir.
+   - LIGAPHASE: Champions und Europa League. Seit 2024/25 spielen dort ALLE
+     in einer Ligaphase, eine Tabelle ergibt also Sinn. getbltable liefert
+     sie zwar auch, wirft aber die K.-o.-Spiele mit hinein (Arsenal stand da
+     nach 15 statt 8 Partien) -- deshalb rechnen wir sie selbst, nur aus den
+     Spieltagen der Ligaphase.
+   - GRUPPEN: Nations League, EM, WM. Dort gibt es Gruppen, und getbltable
+     wirft sie in EINE Liste (16 Mannschaften ohne Gruppenbezug, wertlos).
+     Also je Gruppe eine eigene Tabelle, gerechnet aus den Spielen.
+
+   Nicht dabei und bewusst ohne Tabelle: DFB-Pokal und Supercup. Reines
+   K.-o. -- eine "Tabelle" waere dort erfunden (die API listet brav alle 64
+   Teilnehmer mit "1 Spiel, 3 Punkte", was niemandem etwas sagt). ---- */
+export const LIGAPHASE_COMPS = new Set(['ucl', 'uel']);
+export const GRUPPEN_COMPS = new Set(['nla', 'em', 'wm']);
+export function hatTabelle(wettbewerb) {
+  return LIGEN_MIT_TABELLE.has(wettbewerb) || LIGAPHASE_COMPS.has(wettbewerb) || GRUPPEN_COMPS.has(wettbewerb);
+}
+
+/* Aus Spielen eine Tabelle je Gruppe rechnen. Reine Funktion -- die
+   Punktregel (3/1/0) und die Reihung nach Punkten, Tordifferenz, Toren sind
+   der ueberall gebraeuchliche Nenner. Feinheiten wie der direkte Vergleich
+   (EM/WM) bleiben aussen vor; die Seite sagt das dazu, statt Genauigkeit
+   vorzutaeuschen. Nur BEENDETE Spiele zaehlen. */
+export function tabelleAusSpielen(spiele) {
+  const gruppen = new Map();
+  for (const s of spiele) {
+    if (!s || s.th == null || s.ta == null) continue;
+    const key = s.gruppe || '';
+    if (!gruppen.has(key)) gruppen.set(key, new Map());
+    const tabelle = gruppen.get(key);
+    const hole = (name, logo) => {
+      if (!tabelle.has(name)) {
+        tabelle.set(name, { name, logo: logo || null, sp: 0, s: 0, u: 0, n: 0, tore: 0, gegen: 0, pkt: 0 });
+      }
+      const z = tabelle.get(name);
+      if (!z.logo && logo) z.logo = logo;
+      return z;
+    };
+    const h = hole(s.heim, s.heimLogo);
+    const g = hole(s.gast, s.gastLogo);
+    h.sp++; g.sp++;
+    h.tore += s.th; h.gegen += s.ta;
+    g.tore += s.ta; g.gegen += s.th;
+    if (s.th > s.ta) { h.s++; g.n++; h.pkt += 3; }
+    else if (s.th < s.ta) { g.s++; h.n++; g.pkt += 3; }
+    else { h.u++; g.u++; h.pkt++; g.pkt++; }
+  }
+  return [...gruppen.entries()]
+    .sort((a, b) => a[0].localeCompare(b[0], 'de'))
+    .map(([name, tabelle]) => ({
+      name: name || null,
+      zeilen: [...tabelle.values()].sort((a, b) =>
+        b.pkt - a.pkt ||
+        (b.tore - b.gegen) - (a.tore - a.gegen) ||
+        b.tore - a.tore ||
+        a.name.localeCompare(b.name, 'de')),
+    }));
+}
+
+/* Welche Runden zaehlen fuer die Tabelle eines Wettbewerbs? Ligaphase: die
+   nummerierten Spieltage (K.-o.-Runden heissen "Achtelfinale" & Co.).
+   Gruppen: alles, was "Gruppe ..." heisst. */
+function rundeZaehlt(wettbewerb, runde) {
+  const r = String(runde || '');
+  if (LIGAPHASE_COMPS.has(wettbewerb)) return /^\s*\d+\.\s*Spieltag\s*$/.test(r);
+  if (GRUPPEN_COMPS.has(wettbewerb)) return /^\s*Gruppe\b/i.test(r);
+  return false;
+}
+
+const berechnetCache = new Map();   // 'ucl/2026' -> { at, gruppen }
+
+/* Tabelle(n) eines Wettbewerbs. Rueckgabe immer eine Liste von Gruppen
+   ([{ name, zeilen }]) -- bei Ligen und Ligaphase genau eine mit name null.
+   null heisst "fuer diesen Wettbewerb gibt es keine Tabelle". */
+export async function wettbewerbTabellen(wettbewerb, saison) {
+  if (LIGEN_MIT_TABELLE.has(wettbewerb)) {
+    const rows = await ligaTabelle(wettbewerb, saison);
+    if (!rows) return [];
+    return [{
+      name: null,
+      zeilen: rows.map((t) => ({
+        name: t.teamName, logo: t.teamIconUrl || null,
+        sp: t.matches, s: t.won, u: t.draw, n: t.lost,
+        tore: t.goals, gegen: t.opponentGoals, pkt: t.points,
+      })),
+    }];
+  }
+  if (!hatTabelle(wettbewerb)) return null;
+
+  const key = `${wettbewerb}/${saison}`;
+  const c = berechnetCache.get(key);
+  if (c && Date.now() - c.at < TTL_MS) return c.gruppen;
+  const roh = await olbJson(`/getmatchdata/${wettbewerb}/${saison}`);
+  let gruppen = [];
+  if (Array.isArray(roh)) {
+    const spiele = roh
+      .filter((m) => m && m.matchIsFinished && m.team1 && m.team2
+        && rundeZaehlt(wettbewerb, m.group && m.group.groupName))
+      .map((m) => {
+        const erg = (m.matchResults || []).find((r) => r.resultTypeID === 2) || (m.matchResults || [])[0] || {};
+        return {
+          gruppe: GRUPPEN_COMPS.has(wettbewerb) ? (m.group && m.group.groupName) || null : null,
+          heim: m.team1.teamName, gast: m.team2.teamName,
+          heimLogo: m.team1.teamIconUrl, gastLogo: m.team2.teamIconUrl,
+          th: erg.pointsTeam1, ta: erg.pointsTeam2,
+        };
+      });
+    gruppen = tabelleAusSpielen(spiele);
+  }
+  berechnetCache.set(key, { at: Date.now(), gruppen });
+  return gruppen;
+}
+
+/* Torschuetzenliste einer Saison. OpenLigaDB pflegt sie nicht ueberall (fuer
+   Europa League und Laenderspiele kommt eine leere Liste) -- dann faellt der
+   Block weg. Gedeckelt auf die Spitze: mehr liest in der App niemand. */
 const torschuetzenCache = new Map();   // 'bl1/2026' -> { at, liste }
 
 export async function torschuetzen(wettbewerb, saison, limit = 15) {
-  if (!LIGEN_MIT_TABELLE.has(wettbewerb)) return null;
+  if (!hatTabelle(wettbewerb)) return null;
   const key = `${wettbewerb}/${saison}`;
   const c = torschuetzenCache.get(key);
   if (c && Date.now() - c.at < TTL_MS) return c.liste ? c.liste.slice(0, limit) : null;

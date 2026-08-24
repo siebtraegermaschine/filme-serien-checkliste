@@ -54,6 +54,11 @@ router.post('/abo', mengenGrenze({ name: 'push', anzahl: 30, minuten: 10 }), asy
        p256dh = EXCLUDED.p256dh, auth = EXCLUDED.auth, vereine = EXCLUDED.vereine,
        arten = EXCLUDED.arten, user_id = EXCLUDED.user_id`,
     [abo.endpoint, abo.p256dh, abo.auth, abo.vereine, abo.arten, userId]);
+  // Angemeldet: Auswahl ans Konto, damit das naechste Geraet sie schon
+  // vorgemerkt vorfindet (siehe GET /api/sport/ansicht).
+  if (userId) {
+    await pool.query('UPDATE users SET sport_push_arten = $1 WHERE id = $2', [abo.arten, userId]);
+  }
   res.status(204).end();
 });
 

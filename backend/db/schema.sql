@@ -1113,3 +1113,9 @@ CREATE INDEX IF NOT EXISTS push_abos_user_idx ON push_abos (user_id);
 -- ersten Fassung ('spielbeginn' = 30 Minuten vorher) wandern auf 'vor30'.
 ALTER TABLE push_abos ALTER COLUMN arten SET DEFAULT '{}';
 UPDATE push_abos SET arten = ARRAY['vor30'] WHERE arten = ARRAY['spielbeginn'];
+
+-- Gewaehlte Erinnerungs-Zeitpunkte am KONTO (Christian, 24.08.2026): Sie
+-- lagen zuerst nur am Geraet (push_abos.arten) -- wer sich auf einem zweiten
+-- Geraet anmeldete, stand dort vor leeren Kaestchen. Das Konto ist jetzt die
+-- geraeteuebergreifende Wahrheit; die Abos der Person werden nachgezogen.
+ALTER TABLE users ADD COLUMN IF NOT EXISTS sport_push_arten TEXT[];
