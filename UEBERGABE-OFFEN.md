@@ -1,4 +1,4 @@
-# Offene Punkte — Stand 2026-08-13
+# Offene Punkte — Stand 2026-08-24
 
 Ergänzt `UEBERGABE-CHAT.md` (Stand 2026-08-03). Für Architektur und Auslieferung
 siehe `DEPLOYMENT.md` (enthält seit dem 11. August auch den server-seitigen
@@ -20,6 +20,12 @@ aber kein Arbeitsauftrag mehr.
 Abschnitt 1, 2 und 6, was man vorher wissen sollte. Die Abschnitte 0 bis 2 stehen
 nach Datum, das Neueste zuerst.
 
+> **Neu am 24.08.2026: Der Sportbereich ist ausgezogen.** CouchUltras läuft als
+> eigenes Projekt unter `siebtraegermaschine/couchultras`. Der Sportcode liegt
+> hier zwar noch, ist aber tot. Was zu entfernen ist und warum es noch nicht
+> entfernt wurde, steht ganz oben in Abschnitt 0.0.0.0.0.0. `PLAN-SPORT.md`
+> beschreibt die Entstehung und ist damit Geschichte, kein Arbeitsauftrag.
+
 **Deployment läuft automatisch:** Jeder Push auf `main` stößt
 `.github/workflows/deploy.yml` an, das auf dem Server `/opt/movietaste/deploy.sh`
 ausführt (git fetch/reset, docker compose build/up, migrate). Alles unten
@@ -34,6 +40,76 @@ eingeschränkt). SQL-Abfragen:
 ssh -i ~/.ssh/id_ed25519 root@movietaste.de \
   "cd /opt/movietaste && docker compose exec -T postgres psql -U postgres -d filme_serien -c 'SELECT …'"
 ```
+
+---
+
+## 0.0.0.0.0.0 Was am 24. August dazukam — CouchUltras ist ausgezogen
+
+**Der Sportbereich gehört nicht mehr zu dieser App.** CouchUltras ist seit dem
+24.08.2026 ein eigenes Projekt mit eigenem Repository
+(`siebtraegermaschine/couchultras`), eigenem Container (`/opt/couchultras` auf
+demselben Server) und eigener Datenbank. couchultras.com wird von dort bedient.
+
+Geändert wurde hier nur **eine Zeile**: Im `Caddyfile` zeigt der Host-Block für
+couchultras.com jetzt auf `couchultras:3000` statt auf `backend:3000`. Sonst ist
+an dieser App nichts angefasst — der gesamte Sportcode liegt unverändert da,
+läuft aber ins Leere, weil ihn niemand mehr aufruft.
+
+### Was auf dem Server dazugekommen ist
+
+- Datenbank `couchultras` im **bestehenden** Postgres-Container. Grund: Die
+  Maschine hat 1,9 GB RAM; eine zweite Instanz hätte gut 400 MB gekostet, der
+  Node-Prozess allein braucht 36 MB. Die Daten sind trotzdem getrennt — eigene
+  Datenbank, eigene Tabellen, eigene Nutzer.
+- Der CouchUltras-Container hängt im Netz `movietaste_default` mit. Deshalb
+  heißt sein Dienst `couchultras` und nicht `backend`: Compose vergibt den
+  Dienstnamen als DNS-Alias, und zweimal `backend` im selben Netz hätte Caddy
+  mal den einen, mal den anderen treffen lassen. **Wer hier einen Dienst
+  umbenennt, muss das mitbedenken.**
+- Zwei zusätzliche Schlüssel in `authorized_keys`, beide per `command=` auf
+  `/opt/couchultras/deploy.sh` beschränkt.
+
+### Was hier noch zu tun ist: den Sportcode entfernen
+
+Bewusst **nicht** sofort mitgemacht: Solange der Code hier liegt, ist der
+Rückweg eine einzige Zeile im `Caddyfile`. Danach wäre es ein echter Rückbau.
+Erst wenn CouchUltras ein paar Tage unauffällig läuft.
+
+Zu entfernen:
+
+| Wo | Was |
+|---|---|
+| `backend/routes/` | `sport.js`, `push.js` |
+| `backend/lib/` | `sportAudio.js`, `sportDaten.js`, `sportKalender.js`, `sportLive.js`, `sportPush.js`, `sportRechte.js`, `seoSport.js`, `webpush.js` |
+| Wurzel | `sport-fetch.mjs`, `sport-rechte.json`, `sport-inhalte.json`, `sw.js`, `couchultras-manifest.json`, `couchultras.png`, die vier `cu-*.png` |
+| `.github/workflows/` | `sport.yml` |
+| `backend/server.js` | der Sport-Domain-Block, `/sport`, `/kalender/:slug.ics`, `starteSportLive()`, `starteSportPush()`, die `seoSport`-Importe |
+| `backend/routes/seo.js` | die Sport-Weiche und die 301 |
+| `index.html` | `#sportPage`, alle `sport*`-Funktionen, die `sport*`-Textschlüssel, der Sport-Knopf in der Kopfzeile und im Menü |
+| `backend/db/schema.sql` | `sport_matches`, `sport_meta`, `push_abos`, `push_versand` und die fünf `users.sport_*`-Spalten |
+| `docker-compose.yml` | `SPORT_DOMAIN`, `SPORT_BRAND` |
+| `backend/test/` | `sportAudio`, `sportKalender`, `sportLive`, `sportPush`, `sportRechte`, `sportTabelle`, `seoSport`, `webpush` |
+
+**Zwingend vorher:** eine Datenbanksicherung. Das Löschen der `sport_*`-Spalten
+aus `users` ist nicht rückgängig zu machen. Gespeicherte Sporteinstellungen
+bestehender Konten gehen dabei verloren — von Christian ausdrücklich abgenickt.
+
+**Stehen bleiben soll:** die 301-Weiterleitung von `movietaste.de/de-de/spiel/…`
+und `/de-de/spiele` auf couchultras.com. Sie kostet nichts und hält die
+Linkkraft der indexierten Seiten. Sie hängt an `sportDomainAktiv()`, also an
+`SPORT_DOMAIN` — beim Aufräumen darf die Weiterleitung nicht mit verschwinden.
+Am einfachsten: die Umleitung als feste Regel in den `Caddyfile` heben, bevor
+`seoSport.js` gelöscht wird.
+
+**Der Sport-Workflow läuft weiter** und schreibt weiter in die
+MovieTaste-Datenbank. Schadet nichts, ist aber verschwendete Rechenzeit — er
+kann sofort weg, auch vor dem Rest.
+
+### Was Christian noch entscheiden muss
+
+Ob und wann MovieTaste eine eigene Gesellschaft bekommt beziehungsweise
+CouchUltras ausgegliedert wird. Bis dahin ist der Anbieter in beiden Impressen
+die Digital Wings UG, und das ist auch richtig so.
 
 ---
 
