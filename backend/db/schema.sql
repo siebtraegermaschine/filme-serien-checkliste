@@ -1064,3 +1064,29 @@ CREATE TABLE IF NOT EXISTS sport_meta (
 -- Vorauswahl aus den Streaminganbietern ab), leer = bewusst keine, gefuellt =
 -- genau diese.
 ALTER TABLE users ADD COLUMN IF NOT EXISTS sport_abos TEXT[];
+
+-- Web-Push-Abos (24.08.2026): ein Abo je Browser/Geraet, bewusst OHNE
+-- Kontobezug -- wie Verein und Ansicht ist das eine Geraete-Einstellung
+-- (der Sport-Bereich funktioniert komplett ohne Anmeldung). "arten" sagt,
+-- welche Benachrichtigungen dieses Geraet will; Start nur 'spielbeginn',
+-- weitere Arten (Toralarm, Aufstellung) kommen ohne Schemaaenderung dazu.
+CREATE TABLE IF NOT EXISTS push_abos (
+  id         BIGSERIAL PRIMARY KEY,
+  endpoint   TEXT NOT NULL UNIQUE,      -- URL des Push-Dienstes (FCM/Mozilla/APNs-Web)
+  p256dh     TEXT NOT NULL,             -- oeffentlicher Schluessel des Browsers (base64url)
+  auth       TEXT NOT NULL,             -- Authentifizierungs-Geheimnis (base64url)
+  vereine    TEXT[] NOT NULL DEFAULT '{}',
+  arten      TEXT[] NOT NULL DEFAULT '{spielbeginn}',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Merkliste "schon geschickt": verhindert Doppel-Erinnerungen ueber
+-- Neustarts und Tick-Grenzen hinweg (lib/sportPush.js). Alte Zeilen raeumt
+-- der Versand-Tick nach einer Woche ab.
+CREATE TABLE IF NOT EXISTS push_versand (
+  abo_id      BIGINT NOT NULL REFERENCES push_abos(id) ON DELETE CASCADE,
+  match_id    BIGINT NOT NULL,
+  art         TEXT NOT NULL,
+  gesendet_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (abo_id, match_id, art)
+);

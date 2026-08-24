@@ -1565,6 +1565,10 @@
          die Sport-Abos gehoeren neben den Verein, nicht hinter einen
          weiteren Klick. Gaeste bekommen die reine Sport-Abo-Auswahl. -->
     <button type="button" id="sportAbosMenuBtn" class="nav-menu-item">Deine Sport-Abos</button>
+    <!-- Benachrichtigungen (24.08.2026): Web-Push-Einstellungen dieses
+         Geraets -- zum Start nur die Spielbeginn-Erinnerung, der Dialog ist
+         als Liste angelegt, damit weitere Arten dazukommen koennen. -->
+    <button type="button" id="pushMenuBtn" class="nav-menu-item">Benachrichtigungen</button>
     <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
     <hr class="nav-menu-sep">
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
@@ -2313,6 +2317,27 @@
   </div>
 </div>
 
+<!-- Benachrichtigungen: Web-Push je Geraet (kontofrei). Eine Zeile je
+     Benachrichtigungsart -- heute nur der Spielbeginn der eigenen Vereine;
+     Toralarm ist bewusst NICHT dabei (der Server prueft nur alle 90 Sekunden,
+     das waere kein ehrlicher Live-Alarm). Alle Texte setzt renderPushModal
+     aus TXT; die Zusatzknoepfe (Verein waehlen / Als App speichern) erscheinen
+     je nach Zustand. -->
+<div id="pushModal" class="modal-overlay" style="display:none">
+  <div class="modal similar-modal">
+    <button class="modal-x" id="pushModalX" aria-label="Schließen">✕</button>
+    <h3 id="pushModalTitel">Benachrichtigungen</h3>
+    <p class="prov-intro" id="pushIntro"></p>
+    <label class="prov-item" id="pushSpielbeginnRow">
+      <input type="checkbox" id="pushSpielbeginnToggle">
+      <span><b id="pushSpielbeginnLabel"></b><br>
+        <span id="pushSpielbeginnInfo" style="font-size:12px;color:var(--text-dim)"></span></span>
+    </label>
+    <p class="prov-intro" id="pushStatus" style="display:none"></p>
+    <button type="button" id="pushAktionBtn" class="auth-submit" style="display:none"></button>
+  </div>
+</div>
+
 <!-- Sender-Popup (Sport): Klick auf ein Sender-Badge zeigt, WO genau das
      Spiel laeuft (Kanal je Slot aus der Rechte-Matrix), ob es im eigenen Abo
      ist, und erklaert den Anbieter (z.B. Sky/WOW = ein Anbieter, zwei Wege).
@@ -2593,6 +2618,18 @@ var UI_TEXTE = {
     sportDetailsMehr: 'Zur Spielseite →',
     sportKalenderAbo: function(n){ return '📅 Spielplan von ' + n + ' abonnieren'; },
     sportKalenderHinweis: 'Öffnet deine Kalender-App: Der Spielplan samt Sendern landet als Abo im Kalender und hält sich von selbst aktuell.',
+    pushTitel: 'Benachrichtigungen',
+    pushIntro: 'Mitteilungen auf diesem Gerät — auch, wenn die Seite geschlossen ist. Weitere Benachrichtigungen kommen nach und nach dazu.',
+    pushSpielbeginn: 'Spielbeginn deiner Vereine',
+    pushSpielbeginnInfo: 'Ca. 30 Minuten vor Anstoß: Gegner, Uhrzeit und Sender.',
+    pushKeinVerein: 'Wähle zuerst deinen Verein — die Erinnerung gilt für dessen Spiele.',
+    pushVereinWaehlen: 'Verein wählen',
+    pushNichtUnterstuetzt: 'Dieser Browser unterstützt keine Web-Benachrichtigungen.',
+    pushIosHinweis: 'Auf dem iPhone/iPad gibt es Mitteilungen nur, wenn die Seite als App auf dem Home-Bildschirm gespeichert ist.',
+    pushAlsAppSpeichern: 'Als App speichern',
+    pushVerweigert: 'Mitteilungen sind für diese Seite blockiert. Erlaube sie in den Einstellungen deines Browsers und versuche es erneut.',
+    pushFehler: 'Das hat nicht geklappt. Bitte später erneut versuchen.',
+    pushAktivFuer: function(namen){ return 'Aktiv für: ' + namen; },
     gesehenZuWl: 'Du hast diesen Titel als gesehen markiert. Auf der Watchlist gilt er nicht mehr als gesehen: Er verschwindet aus „Gesehen“ und deine Sterne-Bewertung zählt nicht mehr für deinen Taste-Score. Trotzdem auf die Watchlist setzen?',
     wischFilme: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
     wischSerien: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
@@ -2952,6 +2989,18 @@ var UI_TEXTE = {
     sportDetailsMehr: 'Match page →',
     sportKalenderAbo: function(n){ return '📅 Subscribe to the ' + n + ' schedule'; },
     sportKalenderHinweis: 'Opens your calendar app: the schedule including broadcasters is added as a subscription and keeps itself up to date.',
+    pushTitel: 'Notifications',
+    pushIntro: 'Notifications on this device — even when the page is closed. More notification types will be added over time.',
+    pushSpielbeginn: 'Kick-off for your clubs',
+    pushSpielbeginnInfo: 'About 30 minutes before kick-off: opponent, time and broadcaster.',
+    pushKeinVerein: 'Choose your club first — the reminder applies to its matches.',
+    pushVereinWaehlen: 'Choose club',
+    pushNichtUnterstuetzt: 'This browser does not support web notifications.',
+    pushIosHinweis: 'On iPhone/iPad, notifications only work when the page is saved as an app on the home screen.',
+    pushAlsAppSpeichern: 'Save as app',
+    pushVerweigert: 'Notifications are blocked for this site. Allow them in your browser settings and try again.',
+    pushFehler: 'That didn’t work. Please try again later.',
+    pushAktivFuer: function(namen){ return 'Active for: ' + namen; },
     gesehenZuWl: 'You marked this title as watched. On the watchlist it no longer counts as watched: it disappears from “Watched” and your star rating no longer counts towards your Taste Score. Add it to the watchlist anyway?',
     wischFilme: 'Swiping left removes the title from your movies list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
     wischSerien: 'Swiping left removes the title from your series list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
@@ -3308,6 +3357,18 @@ var UI_TEXTE = {
     sportDetailsMehr: 'Page du match →',
     sportKalenderAbo: function(n){ return '📅 S’abonner au calendrier de ' + n; },
     sportKalenderHinweis: 'Ouvre ton application calendrier : le calendrier avec les diffuseurs est ajouté en abonnement et reste à jour tout seul.',
+    pushTitel: 'Notifications',
+    pushIntro: 'Notifications sur cet appareil — même quand la page est fermée. D’autres notifications arriveront au fur et à mesure.',
+    pushSpielbeginn: 'Coup d’envoi de tes clubs',
+    pushSpielbeginnInfo: 'Environ 30 minutes avant le coup d’envoi : adversaire, heure et diffuseur.',
+    pushKeinVerein: 'Choisis d’abord ton club — le rappel concerne ses matchs.',
+    pushVereinWaehlen: 'Choisir un club',
+    pushNichtUnterstuetzt: 'Ce navigateur ne prend pas en charge les notifications web.',
+    pushIosHinweis: 'Sur iPhone/iPad, les notifications ne fonctionnent que si la page est enregistrée comme app sur l’écran d’accueil.',
+    pushAlsAppSpeichern: 'Enregistrer comme app',
+    pushVerweigert: 'Les notifications sont bloquées pour ce site. Autorise-les dans les réglages de ton navigateur et réessaie.',
+    pushFehler: 'Ça n’a pas marché. Réessaie plus tard.',
+    pushAktivFuer: function(namen){ return 'Actif pour : ' + namen; },
     gesehenZuWl: 'Tu as marqué ce titre comme vu. Sur la watchlist, il ne compte plus comme vu : il disparaît de « Vus » et ta note en étoiles ne compte plus pour ton Taste Score. L’ajouter quand même à la watchlist ?',
     wischFilme: 'Balayer vers la gauche retire le titre de ta liste de films. Tu peux le rajouter à tout moment via « Découvrir » ou la recherche. Cette question ne te sera posée qu’une seule fois. Retirer maintenant ?',
     wischSerien: 'Balayer vers la gauche retire le titre de ta liste de séries. Tu peux le rajouter à tout moment via « Découvrir » ou la recherche. Cette question ne te sera posée qu’une seule fois. Retirer maintenant ?',
@@ -3664,6 +3725,18 @@ var UI_TEXTE = {
     sportDetailsMehr: 'Página del partido →',
     sportKalenderAbo: function(n){ return '📅 Suscribirse al calendario del ' + n; },
     sportKalenderHinweis: 'Abre tu app de calendario: el calendario con las cadenas se añade como suscripción y se mantiene actualizado solo.',
+    pushTitel: 'Notificaciones',
+    pushIntro: 'Notificaciones en este dispositivo, incluso con la página cerrada. Con el tiempo se añadirán más notificaciones.',
+    pushSpielbeginn: 'Inicio de partido de tus equipos',
+    pushSpielbeginnInfo: 'Unos 30 minutos antes del inicio: rival, hora y cadena.',
+    pushKeinVerein: 'Elige primero tu equipo: el recordatorio es para sus partidos.',
+    pushVereinWaehlen: 'Elegir equipo',
+    pushNichtUnterstuetzt: 'Este navegador no admite notificaciones web.',
+    pushIosHinweis: 'En iPhone/iPad las notificaciones solo funcionan si la página está guardada como app en la pantalla de inicio.',
+    pushAlsAppSpeichern: 'Guardar como app',
+    pushVerweigert: 'Las notificaciones están bloqueadas para este sitio. Permítelas en los ajustes de tu navegador e inténtalo de nuevo.',
+    pushFehler: 'No ha funcionado. Inténtalo más tarde.',
+    pushAktivFuer: function(namen){ return 'Activo para: ' + namen; },
     gesehenZuWl: 'Has marcado este título como visto. En la watchlist ya no cuenta como visto: desaparece de «Vistos» y tu valoración con estrellas deja de contar para tu Taste Score. ¿Añadirlo a la watchlist de todos modos?',
     wischFilme: 'Al deslizar a la izquierda, el título se elimina de tu lista de películas. Puedes volver a añadirlo en cualquier momento con «Descubrir» o la búsqueda. Solo se te preguntará esta vez. ¿Eliminar ahora?',
     wischSerien: 'Al deslizar a la izquierda, el título se elimina de tu lista de series. Puedes volver a añadirlo en cualquier momento con «Descubrir» o la búsqueda. Solo se te preguntará esta vez. ¿Eliminar ahora?',
@@ -4020,6 +4093,18 @@ var UI_TEXTE = {
     sportDetailsMehr: 'Pagina della partita →',
     sportKalenderAbo: function(n){ return '📅 Abbonati al calendario di ' + n; },
     sportKalenderHinweis: 'Apre la tua app calendario: il calendario con le emittenti viene aggiunto come abbonamento e si aggiorna da solo.',
+    pushTitel: 'Notifiche',
+    pushIntro: 'Notifiche su questo dispositivo, anche a pagina chiusa. Altre notifiche arriveranno col tempo.',
+    pushSpielbeginn: 'Inizio partita delle tue squadre',
+    pushSpielbeginnInfo: 'Circa 30 minuti prima del fischio d’inizio: avversario, orario ed emittente.',
+    pushKeinVerein: 'Scegli prima la tua squadra: il promemoria vale per le sue partite.',
+    pushVereinWaehlen: 'Scegli squadra',
+    pushNichtUnterstuetzt: 'Questo browser non supporta le notifiche web.',
+    pushIosHinweis: 'Su iPhone/iPad le notifiche funzionano solo se la pagina è salvata come app nella schermata Home.',
+    pushAlsAppSpeichern: 'Salva come app',
+    pushVerweigert: 'Le notifiche sono bloccate per questo sito. Consentile nelle impostazioni del browser e riprova.',
+    pushFehler: 'Non ha funzionato. Riprova più tardi.',
+    pushAktivFuer: function(namen){ return 'Attivo per: ' + namen; },
     gesehenZuWl: 'Hai segnato questo titolo come visto. Sulla watchlist non conta più come visto: sparisce da “Visti” e le tue stelle non contano più per il tuo Taste Score. Aggiungerlo comunque alla watchlist?',
     wischFilme: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista dei film. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri novità” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
     wischSerien: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista delle serie. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri novità” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
@@ -4376,6 +4461,18 @@ var UI_TEXTE = {
     sportDetailsMehr: 'Wedstrijdpagina →',
     sportKalenderAbo: function(n){ return '📅 Abonneer op het programma van ' + n; },
     sportKalenderHinweis: 'Opent je agenda-app: het programma met zenders wordt als abonnement toegevoegd en blijft vanzelf actueel.',
+    pushTitel: 'Meldingen',
+    pushIntro: 'Meldingen op dit apparaat — ook als de pagina gesloten is. Er komen gaandeweg meer meldingen bij.',
+    pushSpielbeginn: 'Aftrap van jouw clubs',
+    pushSpielbeginnInfo: 'Ongeveer 30 minuten voor de aftrap: tegenstander, tijd en zender.',
+    pushKeinVerein: 'Kies eerst je club — de herinnering geldt voor zijn wedstrijden.',
+    pushVereinWaehlen: 'Club kiezen',
+    pushNichtUnterstuetzt: 'Deze browser ondersteunt geen webmeldingen.',
+    pushIosHinweis: 'Op iPhone/iPad werken meldingen alleen als de pagina als app op het beginscherm is opgeslagen.',
+    pushAlsAppSpeichern: 'Als app opslaan',
+    pushVerweigert: 'Meldingen zijn voor deze site geblokkeerd. Sta ze toe in je browserinstellingen en probeer het opnieuw.',
+    pushFehler: 'Dat is niet gelukt. Probeer het later opnieuw.',
+    pushAktivFuer: function(namen){ return 'Actief voor: ' + namen; },
     gesehenZuWl: 'Je hebt deze titel als gezien gemarkeerd. Op de watchlist telt hij niet meer als gezien: hij verdwijnt uit “Gezien” en je sterrenbeoordeling telt niet meer mee voor je Taste Score. Toch aan de watchlist toevoegen?',
     wischFilme: 'Naar links vegen verwijdert de titel uit je filmlijst. Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
     wischSerien: 'Naar links vegen verwijdert de titel uit je serielijst. Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
@@ -4732,6 +4829,18 @@ var UI_TEXTE = {
     sportDetailsMehr: 'Página do jogo →',
     sportKalenderAbo: function(n){ return '📅 Assinar o calendário de ' + n; },
     sportKalenderHinweis: 'Abre seu app de calendário: o calendário com as emissoras é adicionado como assinatura e se mantém atualizado sozinho.',
+    pushTitel: 'Notificações',
+    pushIntro: 'Notificações neste dispositivo, mesmo com a página fechada. Mais notificações serão adicionadas com o tempo.',
+    pushSpielbeginn: 'Início de jogo dos seus clubes',
+    pushSpielbeginnInfo: 'Cerca de 30 minutos antes do início: adversário, horário e emissora.',
+    pushKeinVerein: 'Escolha primeiro seu clube — o lembrete vale para os jogos dele.',
+    pushVereinWaehlen: 'Escolher clube',
+    pushNichtUnterstuetzt: 'Este navegador não suporta notificações web.',
+    pushIosHinweis: 'No iPhone/iPad, as notificações só funcionam se a página estiver salva como app na tela de início.',
+    pushAlsAppSpeichern: 'Salvar como app',
+    pushVerweigert: 'As notificações estão bloqueadas para este site. Permita-as nas configurações do navegador e tente novamente.',
+    pushFehler: 'Não funcionou. Tente novamente mais tarde.',
+    pushAktivFuer: function(namen){ return 'Ativo para: ' + namen; },
     gesehenZuWl: 'Você marcou este título como assistido. Na watchlist ele deixa de contar como assistido: ele some de “Assistidos” e sua avaliação em estrelas deixa de contar para o seu Taste Score. Adicionar à watchlist mesmo assim?',
     wischFilme: 'Deslizar para a esquerda remove o título da sua lista de filmes. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
     wischSerien: 'Deslizar para a esquerda remove o título da sua lista de séries. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
@@ -5322,6 +5431,7 @@ var MARKUP_TEXTE = {
     '#settingsModal h3': { t: 'Settings' },
     '#settingsProvidersBtn': { t: 'Your streaming services' },
     '#sportAbosMenuBtn': { t: 'Your sports subscriptions' },
+    '#pushMenuBtn': { t: 'Notifications' },
     '#settingsKinosBtn': { t: 'Your cinemas' },
     '#settingsHiddenBtn': { t: 'Removed movies/series' },
     '#settingsAccountBtn': { t: 'Account details' },
@@ -5454,6 +5564,7 @@ var MARKUP_TEXTE = {
     '#settingsModal h3': { t: 'Réglages' },
     '#settingsProvidersBtn': { t: 'Tes services de streaming' },
     '#sportAbosMenuBtn': { t: 'Tes abonnements sport' },
+    '#pushMenuBtn': { t: 'Notifications' },
     '#settingsKinosBtn': { t: 'Tes cinémas' },
     '#settingsHiddenBtn': { t: 'Films/séries retirés' },
     '#settingsAccountBtn': { t: 'Données du compte' },
@@ -5586,6 +5697,7 @@ var MARKUP_TEXTE = {
     '#settingsModal h3': { t: 'Ajustes' },
     '#settingsProvidersBtn': { t: 'Tus plataformas de streaming' },
     '#sportAbosMenuBtn': { t: 'Tus suscripciones deportivas' },
+    '#pushMenuBtn': { t: 'Notificaciones' },
     '#settingsKinosBtn': { t: 'Tus cines' },
     '#settingsHiddenBtn': { t: 'Películas/series eliminadas' },
     '#settingsAccountBtn': { t: 'Datos de la cuenta' },
@@ -5718,6 +5830,7 @@ var MARKUP_TEXTE = {
     '#settingsModal h3': { t: 'Impostazioni' },
     '#settingsProvidersBtn': { t: 'I tuoi servizi di streaming' },
     '#sportAbosMenuBtn': { t: 'I tuoi abbonamenti sport' },
+    '#pushMenuBtn': { t: 'Notifiche' },
     '#settingsKinosBtn': { t: 'I tuoi cinema' },
     '#settingsHiddenBtn': { t: 'Film/serie rimossi' },
     '#settingsAccountBtn': { t: 'Dati dell’account' },
@@ -5850,6 +5963,7 @@ var MARKUP_TEXTE = {
     '#settingsModal h3': { t: 'Instellingen' },
     '#settingsProvidersBtn': { t: 'Jouw streamingdiensten' },
     '#sportAbosMenuBtn': { t: 'Jouw sportabonnementen' },
+    '#pushMenuBtn': { t: 'Meldingen' },
     '#settingsKinosBtn': { t: 'Jouw bioscopen' },
     '#settingsHiddenBtn': { t: 'Verwijderde films/series' },
     '#settingsAccountBtn': { t: 'Accountgegevens' },
@@ -5982,6 +6096,7 @@ var MARKUP_TEXTE = {
     '#settingsModal h3': { t: 'Configurações' },
     '#settingsProvidersBtn': { t: 'Seus serviços de streaming' },
     '#sportAbosMenuBtn': { t: 'Suas assinaturas de esporte' },
+    '#pushMenuBtn': { t: 'Notificações' },
     '#settingsKinosBtn': { t: 'Seus cinemas' },
     '#settingsHiddenBtn': { t: 'Filmes/séries removidos' },
     '#settingsAccountBtn': { t: 'Dados da conta' },
@@ -11051,6 +11166,152 @@ async function sportAbosSpeichern(){
   if (CURRENT_USER) await apiRequest('PUT', '/api/sport/abos', { abos: SPORT_ABOS }).catch(function(){});
 }
 
+/* ---- Benachrichtigungen (Web-Push, 24.08.2026): kontofrei, das Abo gehoert
+   dem Geraet. Ablauf beim Einschalten: Service Worker (/sw.js) registrieren,
+   Erlaubnis erfragen, beim Push-Dienst abonnieren, Abo samt Vereinen an
+   /api/push/abo melden. Der Server erinnert dann ~30 Minuten vor Anstoss
+   (backend/lib/sportPush.js). Der Merker mm_push haelt fest, dass DIESES
+   Geraet Push wollte -- beim Start wird der Service Worker dann wieder
+   registriert (noetig nach Browser-Updates). ---- */
+var PUSH_KEY = 'mm_push';
+var _pushModal = document.getElementById('pushModal');
+function pushUnterstuetzt(){
+  return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+}
+function pushIstAn(){
+  try { return localStorage.getItem(PUSH_KEY) === '1'; } catch (e) { return false; }
+}
+function pushB64Bytes(s){
+  var roh = atob(s.replace(/-/g, '+').replace(/_/g, '/'));
+  var a = new Uint8Array(roh.length);
+  for (var i = 0; i < roh.length; i++) a[i] = roh.charCodeAt(i);
+  return a;
+}
+function pushAboSenden(sub){
+  var j = sub.toJSON();
+  return apiRequest('POST', '/api/push/abo', {
+    endpoint: sub.endpoint, p256dh: j.keys.p256dh, auth: j.keys.auth,
+    vereine: MEINE_VEREINE.map(function(v){ return v.n; }),
+  });
+}
+async function pushEinschalten(){
+  var reg = await navigator.serviceWorker.register('/sw.js');
+  var erlaubnis = await Notification.requestPermission();
+  if (erlaubnis !== 'granted') { var err = new Error('keine Erlaubnis'); err.verweigert = true; throw err; }
+  var vapid = await apiRequest('GET', '/api/push/vapid');
+  var sub = await reg.pushManager.getSubscription();
+  if (!sub) {
+    sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: pushB64Bytes(vapid.key) });
+  }
+  await pushAboSenden(sub);
+  try { localStorage.setItem(PUSH_KEY, '1'); } catch (e) {}
+}
+async function pushAusschalten(){
+  try {
+    var reg = await navigator.serviceWorker.getRegistration();
+    var sub = reg && await reg.pushManager.getSubscription();
+    if (sub) {
+      await apiRequest('DELETE', '/api/push/abo', { endpoint: sub.endpoint }).catch(function(){});
+      await sub.unsubscribe();
+    }
+  } finally {
+    try { localStorage.removeItem(PUSH_KEY); } catch (e) {}
+  }
+}
+/* Nach jedem Speichern der Vereinsauswahl das Server-Abo nachziehen --
+   sonst erinnert der Server weiter an den alten Verein. Ohne Vereine wird
+   abbestellt (der Server lehnt leere Vereinslisten ohnehin ab). */
+async function pushVereineAktualisieren(){
+  if (!pushIstAn() || !pushUnterstuetzt()) return;
+  try {
+    var reg = await navigator.serviceWorker.getRegistration();
+    var sub = reg && await reg.pushManager.getSubscription();
+    if (!sub) return;
+    if (MEINE_VEREINE.length) await pushAboSenden(sub);
+    else await pushAusschalten();
+  } catch (e) {}
+}
+function renderPushModal(){
+  document.getElementById('pushModalTitel').textContent = TXT.pushTitel;
+  document.getElementById('pushIntro').textContent = TXT.pushIntro;
+  document.getElementById('pushSpielbeginnLabel').textContent = TXT.pushSpielbeginn;
+  document.getElementById('pushSpielbeginnInfo').textContent = TXT.pushSpielbeginnInfo;
+  var reihe = document.getElementById('pushSpielbeginnRow');
+  var haken = document.getElementById('pushSpielbeginnToggle');
+  var status = document.getElementById('pushStatus');
+  var aktion = document.getElementById('pushAktionBtn');
+  status.style.display = 'none';
+  aktion.style.display = 'none';
+  aktion.onclick = null;
+  var zeigeStatus = function(text){ status.textContent = text; status.style.display = ''; };
+
+  if (!pushUnterstuetzt()) {
+    reihe.style.display = 'none';
+    // Haeufigster Grund: iPhone/iPad im Browser -- Push gibt es dort nur fuer
+    // die auf dem Home-Bildschirm gespeicherte Web-App (iOS ab 16.4).
+    var standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone;
+    if (kpiPlattform() === 'ios' && !standalone) {
+      zeigeStatus(TXT.pushIosHinweis);
+      aktion.textContent = TXT.pushAlsAppSpeichern;
+      aktion.style.display = '';
+      aktion.onclick = function(){ closePushModal(); openInstallModal(); };
+    } else {
+      zeigeStatus(TXT.pushNichtUnterstuetzt);
+    }
+    return;
+  }
+  reihe.style.display = '';
+  haken.checked = pushIstAn();
+  haken.disabled = false;
+  if (Notification.permission === 'denied') {
+    haken.checked = false;
+    haken.disabled = true;
+    zeigeStatus(TXT.pushVerweigert);
+    return;
+  }
+  if (!MEINE_VEREINE.length) {
+    haken.checked = false;
+    haken.disabled = true;
+    zeigeStatus(TXT.pushKeinVerein);
+    aktion.textContent = TXT.pushVereinWaehlen;
+    aktion.style.display = '';
+    aktion.onclick = function(){ closePushModal(); openVereinModal(); };
+    return;
+  }
+  if (pushIstAn()) {
+    zeigeStatus(TXT.pushAktivFuer(MEINE_VEREINE.map(function(v){ return v.n; }).join(', ')));
+  }
+}
+document.getElementById('pushSpielbeginnToggle').onchange = async function(){
+  var haken = this;
+  haken.disabled = true;
+  try {
+    if (haken.checked) await pushEinschalten(); else await pushAusschalten();
+  } catch (err) {
+    haken.checked = false;
+    try { localStorage.removeItem(PUSH_KEY); } catch (e) {}
+    var status = document.getElementById('pushStatus');
+    status.textContent = err && err.verweigert ? TXT.pushVerweigert : TXT.pushFehler;
+    status.style.display = '';
+  }
+  haken.disabled = false;
+  renderPushModal();
+};
+function openPushModal(){ renderPushModal(); _pushModal.style.display = 'flex'; }
+function closePushModal(){ _pushModal.style.display = 'none'; }
+document.getElementById('pushModalX').onclick = closePushModal;
+_pushModal.addEventListener('click', function(e){ if (e.target === _pushModal) closePushModal(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _pushModal.style.display !== 'none') closePushModal(); });
+document.getElementById('pushMenuBtn').onclick = function(){
+  closeNavMenu();
+  openPushModal();
+};
+// Geraet hatte Push an: Service Worker beim Start erneut registrieren, damit
+// das Abo Browser-Updates ueberlebt. Bewusst ohne await -- rein im Hintergrund.
+if (pushIstAn() && pushUnterstuetzt()) {
+  navigator.serviceWorker.register('/sw.js').catch(function(){});
+}
+
 /* ---- "Dein Verein": bis zu drei Vereine aus dem Spielplan waehlen (Suche,
    alphabetisch, Checkboxen) -- die Logos stehen danach als Filter-Chips in
    der Verfuegbarkeitsreihe. Vereinsliste direkt aus den geladenen Spielen:
@@ -11175,6 +11436,8 @@ document.getElementById('vereinSaveBtn').onclick = function(){
   // Nach dem Speichern sind die gewaehlten Vereine sofort AKTIVE Filter
   // (siehe openSportPage) -- entfernte Vereine fallen damit automatisch raus.
   SPORT_VEREIN_AKTIV = MEINE_VEREINE.map(function(v){ return v.n; });
+  // Laufendes Push-Abo auf die neue Vereinsauswahl umstellen (Hintergrund).
+  pushVereineAktualisieren();
   closeVereinModal();
   if (sportMode) renderSportPage();
 };
@@ -11201,6 +11464,8 @@ if (REGION_WAHL !== 'DE' && !SPORT_SEITE_MODUS) {
   document.getElementById('sportHeaderBtn').style.display = 'none';
   document.getElementById('vereinMenuBtn').style.display = 'none';
   document.getElementById('sportAbosMenuBtn').style.display = 'none';
+  // Benachrichtigungen sind (noch) reine Sport-Funktion -- gleiche Regel.
+  document.getElementById('pushMenuBtn').style.display = 'none';
 }
 
 /* ---- Eigene Sport-Domain: Marke statt MovieMatch (siehe SPORT_SEITE_MODUS).

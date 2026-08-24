@@ -36,6 +36,8 @@ import onboardingRouter from './routes/onboarding.js';
 import { anonId } from './middleware/anonId.js';
 import { starteKpiSnapshot, starteKpiAufraeumen } from './lib/kpi.js';
 import { starteSportLive } from './lib/sportLive.js';
+import { starteSportPush } from './lib/sportPush.js';
+import pushRouter from './routes/push.js';
 import { ladeKalender } from './lib/sportKalender.js';
 import { asyncHandler } from './lib/asyncHandler.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
@@ -116,6 +118,7 @@ app.use('/api/search-log', searchLogRouter);
 app.use('/api/hidden-titles', hiddenTitlesRouter);
 app.use('/api/cinema', cinemaRouter);
 app.use('/api/sport', sportRouter);
+app.use('/api/push', pushRouter);
 app.use('/api/watch-providers', watchProvidersRouter);
 app.use('/api/trailers', trailersRouter);
 app.use('/api/links', linksRouter);
@@ -450,6 +453,9 @@ app.listen(port, () => {
   // Datenbank spiegeln (siehe lib/sportLive.js) -- App und SEO-Spielseiten
   // lesen von dort.
   starteSportLive();
+  // Spielbeginn-Erinnerungen per Web-Push an abonnierte Geraete
+  // (siehe lib/sportPush.js).
+  starteSportPush();
   /* Die beiden grossen Startlisten gleich bauen, statt den ersten Besucher nach
      einem Deploy warten zu lassen. Der Aufruf entspricht genau dem, den die App
      beim Start macht -- steht dort ein anderer Parameter, waermt das hier ins
