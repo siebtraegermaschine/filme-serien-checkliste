@@ -709,9 +709,9 @@
   .sport-score { margin-left:auto; font-weight:700; color:var(--text); white-space:nowrap; }
   .sport-live { margin-left:auto; color:#e05d5d; font-weight:700; font-size:12px; letter-spacing:.5px; }
   .sport-tv { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
-  /* Sender-Badges: Links zum Anbieter. Gruen = frei empfangbar; ✅/🔒 sagt an,
-     ob das Spiel mit den eigenen Abos drin ist (nur wenn Abos konfiguriert
-     sind -- vorher bleibt das Badge neutral, siehe sportBadgeHtml). */
+  /* Grundform fuer die kleinen Pillen in der Sender-Zeile: die beiden
+     Empfangsweg-Knoepfe "TV"/"Online" und das Radio-Feld. Gruen heisst
+     "kommst du ohne Zusatzkosten dran" -- siehe sportWegeHtml. */
   .tv-badge {
     display:inline-flex; align-items:center; gap:5px; background:none; cursor:pointer;
     border:1px solid var(--border); border-radius:999px; padding:3px 10px;
@@ -720,6 +720,27 @@
   @media (hover: hover) { .tv-badge:hover { border-color: var(--accent); color: var(--accent); } }
   .tv-badge.tv-frei { border-color: rgba(76,195,138,.5); color: var(--done); }
   .tv-badge.tv-hab { border-color: rgba(76,195,138,.5); color: var(--done); }
+  /* Empfangswege im Popup: eine Zeile je Weg statt einer Tabelle -- auf dem
+     Handy waeren drei Spalten zu eng, und so traegt jede Zeile ihren eigenen
+     Link. Sortiert steht oben, was ohne Zusatzkosten geht. */
+  .weg-zeile {
+    display:flex; align-items:center; gap:12px; padding:10px 0;
+    border-top:1px solid var(--border);
+  }
+  .weg-zeile:first-of-type { border-top:none; }
+  .weg-text { display:flex; flex-direction:column; gap:2px; min-width:0; }
+  .weg-text b { font-size:15px; color:var(--text); }
+  .weg-status { font-size:13px; color:var(--text-dim); }
+  .weg-gut .weg-status { color:var(--done); }
+  .weg-hinweis { font-size:12px; color:var(--text-dim); opacity:.8; }
+  .weg-link {
+    margin-left:auto; flex:none; text-decoration:none; font-size:18px; line-height:1;
+    color:var(--text-dim); border:1px solid var(--border); border-radius:999px;
+    width:34px; height:34px; display:flex; align-items:center; justify-content:center;
+    transition: all .15s;
+  }
+  @media (hover: hover) { .weg-link:hover { border-color:var(--accent); color:var(--accent); } }
+  .weg-paarung { font-weight:600; color:var(--text); }
   /* Radio-Reportage: sieht aus wie ein Sender-Badge, sitzt aber rechts am
      Zeilenende -- es ist kein Sender, sondern ein zusaetzlicher Weg. */
   .audio-badge { margin-left: auto; }
@@ -2739,10 +2760,15 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Heute', woche: 'Diese Woche', spaeter: 'Demnächst' },
     sportKeineSpiele: 'Keine Spiele für diese Auswahl.',
     sportSenderOffen: 'Sender noch offen',
-    sportStreamKostenlos: 'Kostenlos online',
+    sportWegTV: 'TV',
+    sportWegOnline: 'Online',
+    sportGratis: 'gratis',
+    sportAboKurz: 'Abo',
+    sportWegeTitelTV: 'Im Fernsehen',
+    sportWegeTitelOnline: 'Online schauen',
+    sportGratisMit: function(zusatz){ return 'Kostenlos' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'ohne Anmeldung',
     sportStreamLoginUnklar: 'Anmeldung möglicherweise nötig',
-    sportStreamNurAbo: function(wege, preis){ return 'Online nur mit ' + wege + (preis ? ' (' + preis + ')' : '') + '. Im Fernsehen ist die Übertragung frei empfangbar.'; },
     ansichtAnbieter: 'Anbieter',
     ansichtKeineAbos: 'Du hast noch keine Sender-Abos festgelegt – unter Einstellungen → „Deine Sport-Abos“.',
     sportFehler: 'Der Spielplan konnte nicht geladen werden.',
@@ -2766,7 +2792,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Tippe auf „+ Deine Ansicht“: Wähle deinen Verein und deine Wettbewerbe — der Spielplan ist dann künftig genau danach vorgefiltert.',
     sportHilfeApp: 'Im Menü findest du „Als App speichern“ — damit landet die Seite wie eine App auf deinem Startbildschirm.',
     sportHilfeTeilen: 'Wische ein Spiel nach rechts, um die Übertragung mit anderen zu teilen – oder teile die CouchUltras-App über den Teilen-Button mit anderen.',
-    sportHilfeSender: 'Klicke auf einen Anbieter (z. B. Sky) und sieh den übertragenden Sender (z. B. Sky Sport Bundesliga 1).',
+    sportHilfeSender: '„TV“ zeigt dir den genauen Sender (z. B. Sky Sport Bundesliga 1), „Online“ jeden Weg zum Stream – und ob er etwas kostet.',
     sportFreiEmpfangbar: 'Frei empfangbar',
     sportImAbo: 'In deinem Abo enthalten',
     sportNichtImAbo: 'Nicht in deinen Abos',
@@ -3157,10 +3183,15 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Today', woche: 'This week', spaeter: 'Coming up' },
     sportKeineSpiele: 'No matches for this selection.',
     sportSenderOffen: 'Broadcaster not confirmed yet',
-    sportStreamKostenlos: 'Free online',
+    sportWegTV: 'TV',
+    sportWegOnline: 'Online',
+    sportGratis: 'free',
+    sportAboKurz: 'Sub',
+    sportWegeTitelTV: 'On television',
+    sportWegeTitelOnline: 'Watch online',
+    sportGratisMit: function(zusatz){ return 'Free' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'no sign-in needed',
     sportStreamLoginUnklar: 'sign-in may be required',
-    sportStreamNurAbo: function(wege, preis){ return 'Online only with ' + wege + (preis ? ' (' + preis + ')' : '') + '. On TV the match is free to air.'; },
     ansichtAnbieter: 'Providers',
     ansichtKeineAbos: 'You haven’t set any subscriptions yet – under Settings → “Your sports subscriptions”.',
     sportFehler: 'The schedule could not be loaded.',
@@ -3184,7 +3215,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Tap “+ Your view”: pick your club and competitions — the schedule will be pre-filtered for you from then on.',
     sportHilfeApp: 'In the menu you’ll find “Save as app” to put this page on your home screen like an app.',
     sportHilfeTeilen: 'Swipe a match to the right to share its broadcast with others – or share the CouchUltras app via the share button.',
-    sportHilfeSender: 'Click a provider (e.g. Sky) to see the exact broadcasting channel (e.g. Sky Sport Bundesliga 1).',
+    sportHilfeSender: '“TV” shows the exact channel (e.g. Sky Sport Bundesliga 1), “Online” every way to stream it – and what it costs.',
     sportFreiEmpfangbar: 'Free to watch',
     sportImAbo: 'Included in your subscription',
     sportNichtImAbo: 'Not in your subscriptions',
@@ -3572,10 +3603,15 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Aujourd’hui', woche: 'Cette semaine', spaeter: 'À venir' },
     sportKeineSpiele: 'Aucun match pour cette sélection.',
     sportSenderOffen: 'Diffuseur pas encore connu',
-    sportStreamKostenlos: 'Gratuit en ligne',
+    sportWegTV: 'TV',
+    sportWegOnline: 'En ligne',
+    sportGratis: 'gratuit',
+    sportAboKurz: 'Abo',
+    sportWegeTitelTV: 'À la télévision',
+    sportWegeTitelOnline: 'Regarder en ligne',
+    sportGratisMit: function(zusatz){ return 'Gratuit' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'sans inscription',
     sportStreamLoginUnklar: 'inscription peut-être nécessaire',
-    sportStreamNurAbo: function(wege, preis){ return 'En ligne uniquement avec ' + wege + (preis ? ' (' + preis + ')' : '') + '. À la télévision, la diffusion est en clair.'; },
     ansichtAnbieter: 'Diffuseurs',
     ansichtKeineAbos: 'Tu n’as pas encore défini d’abonnements – dans Réglages → « Tes abonnements sport ».',
     sportFehler: 'Le calendrier n’a pas pu être chargé.',
@@ -3599,7 +3635,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Touche « + Ta vue » : choisis ton club et tes compétitions — le calendrier sera ensuite préfiltré pour toi.',
     sportHilfeApp: 'Dans le menu, « Enregistrer comme appli » place cette page sur ton écran d’accueil.',
     sportHilfeTeilen: 'Fais glisser un match vers la droite pour partager sa diffusion – ou partage l’appli CouchUltras via le bouton Partager.',
-    sportHilfeSender: 'Clique sur un diffuseur (p. ex. Sky) pour voir la chaîne exacte (p. ex. Sky Sport Bundesliga 1).',
+    sportHilfeSender: '« TV » indique la chaîne exacte (p. ex. Sky Sport Bundesliga 1), « En ligne » tous les moyens de la voir – et leur prix.',
     sportFreiEmpfangbar: 'En clair',
     sportImAbo: 'Inclus dans ton abonnement',
     sportNichtImAbo: 'Pas dans tes abonnements',
@@ -3987,10 +4023,15 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Hoy', woche: 'Esta semana', spaeter: 'Próximamente' },
     sportKeineSpiele: 'No hay partidos para esta selección.',
     sportSenderOffen: 'Cadena aún sin confirmar',
-    sportStreamKostenlos: 'Gratis online',
+    sportWegTV: 'TV',
+    sportWegOnline: 'Online',
+    sportGratis: 'gratis',
+    sportAboKurz: 'Susc.',
+    sportWegeTitelTV: 'En televisión',
+    sportWegeTitelOnline: 'Ver online',
+    sportGratisMit: function(zusatz){ return 'Gratis' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'sin registro',
     sportStreamLoginUnklar: 'puede requerir registro',
-    sportStreamNurAbo: function(wege, preis){ return 'Online solo con ' + wege + (preis ? ' (' + preis + ')' : '') + '. En televisión se emite en abierto.'; },
     ansichtAnbieter: 'Proveedores',
     ansichtKeineAbos: 'Aún no has definido suscripciones: en Ajustes → «Tus suscripciones deportivas».',
     sportFehler: 'No se pudo cargar el calendario.',
@@ -4004,7 +4045,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Toca «+ Tu vista»: elige tu equipo y tus competiciones — el calendario quedará prefiltrado para ti.',
     sportHilfeApp: 'En el menú encontrarás «Guardar como app» para poner esta página en tu pantalla de inicio.',
     sportHilfeTeilen: 'Desliza un partido hacia la derecha para compartir su emisión – o comparte la app CouchUltras con el botón de compartir.',
-    sportHilfeSender: 'Haz clic en un proveedor (p. ej. Sky) para ver el canal exacto (p. ej. Sky Sport Bundesliga 1).',
+    sportHilfeSender: '«TV» muestra el canal exacto (p. ej. Sky Sport Bundesliga 1); «Online», todas las formas de verlo – y su precio.',
     sportFreiEmpfangbar: 'En abierto',
     sportImAbo: 'Incluido en tu suscripción',
     sportNichtImAbo: 'No está en tus suscripciones',
@@ -4402,10 +4443,15 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Oggi', woche: 'Questa settimana', spaeter: 'In arrivo' },
     sportKeineSpiele: 'Nessuna partita per questa selezione.',
     sportSenderOffen: 'Emittente non ancora nota',
-    sportStreamKostenlos: 'Gratis online',
+    sportWegTV: 'TV',
+    sportWegOnline: 'Online',
+    sportGratis: 'gratis',
+    sportAboKurz: 'Abb.',
+    sportWegeTitelTV: 'In televisione',
+    sportWegeTitelOnline: 'Guarda online',
+    sportGratisMit: function(zusatz){ return 'Gratis' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'senza registrazione',
     sportStreamLoginUnklar: 'potrebbe servire la registrazione',
-    sportStreamNurAbo: function(wege, preis){ return 'Online solo con ' + wege + (preis ? ' (' + preis + ')' : '') + '. In TV la partita è in chiaro.'; },
     ansichtAnbieter: 'Emittenti',
     ansichtKeineAbos: 'Non hai ancora impostato abbonamenti: in Impostazioni → «I tuoi abbonamenti sport».',
     sportFehler: 'Impossibile caricare il calendario.',
@@ -4419,7 +4465,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Tocca «+ La tua vista»: scegli squadra e competizioni — il calendario sarà poi prefiltrato per te.',
     sportHilfeApp: 'Nel menu trovi «Salva come app» per mettere questa pagina sulla schermata Home.',
     sportHilfeTeilen: 'Scorri una partita verso destra per condividerne la trasmissione – oppure condividi l’app CouchUltras con il pulsante Condividi.',
-    sportHilfeSender: 'Clicca su un fornitore (es. Sky) per vedere il canale esatto (es. Sky Sport Bundesliga 1).',
+    sportHilfeSender: '«TV» mostra il canale esatto (es. Sky Sport Bundesliga 1), «Online» ogni modo per vederla – e quanto costa.',
     sportFreiEmpfangbar: 'In chiaro',
     sportImAbo: 'Incluso nel tuo abbonamento',
     sportNichtImAbo: 'Non nei tuoi abbonamenti',
@@ -4817,10 +4863,15 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Vandaag', woche: 'Deze week', spaeter: 'Binnenkort' },
     sportKeineSpiele: 'Geen wedstrijden voor deze selectie.',
     sportSenderOffen: 'Zender nog niet bekend',
-    sportStreamKostenlos: 'Gratis online',
+    sportWegTV: 'TV',
+    sportWegOnline: 'Online',
+    sportGratis: 'gratis',
+    sportAboKurz: 'Abo',
+    sportWegeTitelTV: 'Op televisie',
+    sportWegeTitelOnline: 'Online kijken',
+    sportGratisMit: function(zusatz){ return 'Gratis' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'zonder account',
     sportStreamLoginUnklar: 'account mogelijk nodig',
-    sportStreamNurAbo: function(wege, preis){ return 'Online alleen met ' + wege + (preis ? ' (' + preis + ')' : '') + '. Op tv is de wedstrijd vrij te ontvangen.'; },
     ansichtAnbieter: 'Aanbieders',
     ansichtKeineAbos: 'Je hebt nog geen abonnementen ingesteld – bij Instellingen → „Jouw sportabonnementen”.',
     sportFehler: 'Het speelschema kon niet worden geladen.',
@@ -4834,7 +4885,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Tik op „+ Jouw weergave”: kies je club en competities — het speelschema wordt daarna voor jou voorgefilterd.',
     sportHilfeApp: 'In het menu vind je „Als app opslaan” om deze pagina als app op je beginscherm te zetten.',
     sportHilfeTeilen: 'Veeg een wedstrijd naar rechts om de uitzending met anderen te delen – of deel de CouchUltras-app via de deelknop.',
-    sportHilfeSender: 'Klik op een aanbieder (bijv. Sky) om de exacte zender te zien (bijv. Sky Sport Bundesliga 1).',
+    sportHilfeSender: '„TV“ toont de exacte zender (bijv. Sky Sport Bundesliga 1), „Online“ elke manier om te kijken – en wat dat kost.',
     sportFreiEmpfangbar: 'Gratis te zien',
     sportImAbo: 'Inbegrepen in je abonnement',
     sportNichtImAbo: 'Niet in je abonnementen',
@@ -5232,10 +5283,15 @@ var UI_TEXTE = {
     sportLabels: { heute: 'Hoje', woche: 'Esta semana', spaeter: 'Em breve' },
     sportKeineSpiele: 'Nenhum jogo para esta seleção.',
     sportSenderOffen: 'Emissora ainda não definida',
-    sportStreamKostenlos: 'Grátis online',
+    sportWegTV: 'TV',
+    sportWegOnline: 'Online',
+    sportGratis: 'grátis',
+    sportAboKurz: 'Assin.',
+    sportWegeTitelTV: 'Na televisão',
+    sportWegeTitelOnline: 'Ver online',
+    sportGratisMit: function(zusatz){ return 'Grátis' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'sem cadastro',
     sportStreamLoginUnklar: 'pode exigir cadastro',
-    sportStreamNurAbo: function(wege, preis){ return 'Online somente com ' + wege + (preis ? ' (' + preis + ')' : '') + '. Na TV a transmissão é aberta.'; },
     ansichtAnbieter: 'Provedores',
     ansichtKeineAbos: 'Você ainda não definiu assinaturas – em Configurações → “Suas assinaturas de esporte”.',
     sportFehler: 'Não foi possível carregar o calendário.',
@@ -5249,7 +5305,7 @@ var UI_TEXTE = {
     sportHilfeVerein: 'Toque em «+ Sua visão»: escolha seu clube e competições — o calendário ficará pré-filtrado para você.',
     sportHilfeApp: 'No menu você encontra «Salvar como app» para colocar esta página na sua tela inicial.',
     sportHilfeTeilen: 'Deslize um jogo para a direita para compartilhar a transmissão – ou compartilhe o app CouchUltras pelo botão de compartilhar.',
-    sportHilfeSender: 'Clique em um provedor (ex.: Sky) para ver o canal exato (ex.: Sky Sport Bundesliga 1).',
+    sportHilfeSender: '“TV” mostra o canal exato (ex.: Sky Sport Bundesliga 1); “Online”, todas as formas de assistir – e quanto custa.',
     sportFreiEmpfangbar: 'Em TV aberta',
     sportImAbo: 'Incluído na sua assinatura',
     sportNichtImAbo: 'Não está nas suas assinaturas',
@@ -10905,7 +10961,7 @@ function sportSpielFrei(spiel){
   return (spiel.tv || []).some(function(b){ return sportSenderInfo(b.s).frei; });
 }
 // Gibt es einen kostenlosen ONLINE-Weg? Steht je Sender in sport-rechte.json
-// (Feld "stream", handgepflegt) -- siehe sportStreamSatz.
+// (Feld "stream", handgepflegt) -- siehe openWegeModal.
 function sportSpielFreiStream(spiel){
   return (spiel.tv || []).some(function(b){
     var st = sportSenderInfo(b.s).stream;
@@ -10944,29 +11000,99 @@ function sportZeitLabel(ko){
   return tag + ' · ' + d.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
 }
 
-/* Ein Sender-Badge. Gruen = frei empfangbar. ✅/🔒 nur, wenn Abos konfiguriert
-   sind -- vorher waere ein 🔒 an jedem Abo-Spiel nur Gemecker ohne Wissen.
-   'konferenz' und 'unsicher' (CL-Dienstag ohne eingetragenen Amazon-Pick,
-   siehe sport-rechte.json) stehen klein dahinter. */
-function sportBadgeHtml(b){
-  var info = sportSenderInfo(b.s);
+
+/* ---- Empfangswege als zwei Knoepfe (Christian, 24.08.2026) ----
+   Vorher stand je Sender ein Badge, etwa "ARD · frei". Damit blieb
+   unsichtbar, dass dasselbe Spiel auch online laeuft -- bei der ARD ueber
+   Mediathek und Joyn. Jetzt zwei Knoepfe: "TV" und "Online", beide mit der
+   Kernauskunft in der Beschriftung (frei/gratis oder Abo), damit die Antwort
+   ohne Klick sichtbar bleibt. Der Klick zeigt dann, WER genau. ---- */
+function sportWegeHtml(spiel){
+  var tv = spiel.tv || [];
+  if (!tv.length) return '<span class="tv-badge">' + esc(TXT.sportSenderOffen) + '</span>';
+  /* Prime Video und RTL+ haben keinen Fernsehkanal ("tv": false in
+     sport-rechte.json) -- ein TV-Knopf waere dort schlicht falsch. */
+  var imFernsehen = tv.filter(function(b){ return sportSenderInfo(b.s).tv !== false; });
+  var hatOnline = tv.some(function(b){
+    var st = sportSenderInfo(b.s).stream;
+    return !!(st && (st.wege || []).length);
+  });
+  var knopf = function(art, symbol, wort, gut, zusatz){
+    return '<button type="button" class="tv-badge wege-btn' + (gut ? ' tv-frei' : '') +
+           '" data-art="' + art + '">' + symbol + ' ' + esc(wort) + ' · ' + esc(zusatz) + '</button>';
+  };
+  var html = '';
+  if (imFernsehen.length) {
+    var frei = imFernsehen.some(function(b){ return sportSenderInfo(b.s).frei; });
+    html += knopf('tv', '📺', TXT.sportWegTV, frei, frei ? TXT.sportFrei : TXT.sportAboKurz);
+  }
+  if (hatOnline) {
+    var gratis = sportSpielFreiStream(spiel);
+    html += knopf('online', '🌐', TXT.sportWegOnline, gratis, gratis ? TXT.sportGratis : TXT.sportAboKurz);
+  }
+  return html || '<span class="tv-badge">' + esc(TXT.sportSenderOffen) + '</span>';
+}
+
+/* Ein Empfangsweg als Zeile: Name, darunter der Zugang im Klartext, rechts
+   der Weg dorthin. Bewusst Zeilen statt einer Tabelle -- auf dem Handy
+   waeren drei Spalten zu eng, und jede Zeile traegt ihren eigenen Link. */
+function wegZeile(w){
+  return '<div class="weg-zeile' + (w.gut ? ' weg-gut' : '') + '">' +
+    '<div class="weg-text"><b>' + esc(w.name) + '</b>' +
+    '<span class="weg-status">' + esc(w.status) + '</span>' +
+    (w.hinweis || []).filter(Boolean).map(function(z){
+      return '<span class="weg-hinweis">' + esc(z) + '</span>';
+    }).join('') + '</div>' +
+    (w.url ? '<a class="weg-link" href="' + escAttr(w.url) + '" target="_blank" rel="noopener">→</a>' : '') +
+    '</div>';
+}
+function openWegeModal(spiel, art){
   var konfiguriert = Array.isArray(SPORT_ABOS);
-  var imAbo = konfiguriert && SPORT_ABOS.indexOf(b.s) !== -1;
-  var cls = 'tv-badge' + (info.frei ? ' tv-frei' : (konfiguriert && imAbo ? ' tv-hab' : ''));
-  var praefix = info.frei ? '' : (konfiguriert ? (imAbo ? '✅ ' : '🔒 ') : '');
-  var zusatz = [];
-  if (b.typ === 'konferenz') zusatz.push(TXT.sportKonferenz);
-  if (info.frei) zusatz.push(TXT.sportFrei);
-  if (b.unsicher) zusatz.push(TXT.sportVoraussichtlich);
-  // Button statt Link: der Klick oeffnet das Sender-Popup (Kanal, Abo-Status,
-  // Erklaerung, Anbieter-Link) -- siehe openSenderModal.
-  return '<button type="button" class="' + cls + '" data-s="' + escAttr(b.s) + '"' +
-         (b.typ ? ' data-typ="' + escAttr(b.typ) + '"' : '') +
-         (b.unsicher ? ' data-u="1"' : '') +
-         (b.kanal ? ' data-kanal="' + escAttr(b.kanal) + '"' : '') +
-         '>' + praefix + esc(info.name) +
-         (zusatz.length ? ' <span class="tv-zusatz">· ' + esc(zusatz.join(' · ')) + '</span>' : '') +
-         '</button>';
+  var zeilen = [];
+  (spiel.tv || []).forEach(function(b){
+    var info = sportSenderInfo(b.s);
+    if (art === 'tv') {
+      if (info.tv === false) return;          // reiner Streamingdienst
+      var imAbo = konfiguriert && SPORT_ABOS.indexOf(b.s) !== -1;
+      zeilen.push({
+        name: info.name, url: info.link,
+        status: info.frei ? TXT.sportFreiEmpfangbar
+              : konfiguriert ? (imAbo ? TXT.sportImAbo : TXT.sportNichtImAbo) : TXT.sportAboNoetig,
+        hinweis: [[(b.kanal || info.kanal) ? TXT.sportLaeuftAuf + ': ' + (b.kanal || info.kanal) : '',
+                   b.typ === 'konferenz' ? TXT.sportKonferenz : '',
+                   b.unsicher ? TXT.sportVslLang : ''].filter(Boolean).join(' · '),
+                  info.info || ''],
+        gut: info.frei || imAbo,
+        rang: info.frei ? 0 : (imAbo ? 1 : 2),
+      });
+    } else {
+      var st = info.stream;
+      if (!st) return;
+      (st.wege || []).forEach(function(w, i){
+        var imAbo2 = konfiguriert && SPORT_ABOS.indexOf(b.s) !== -1;
+        zeilen.push({
+          name: w.n, url: w.url,
+          status: st.kostenlos
+            ? TXT.sportGratisMit(st.login === 'nein' ? TXT.sportStreamOhneLogin
+                               : st.login === 'unklar' ? TXT.sportStreamLoginUnklar : '')
+            : (imAbo2 ? TXT.sportImAbo : TXT.sportAboNoetig) + (st.preis ? ' (' + st.preis + ')' : ''),
+          /* Der Hinweis gehoert dem Sender, nicht dem einzelnen Weg -- bei Sky
+             stuende er sonst gleich zweimal untereinander (Sky Go und WOW). */
+          hinweis: i === 0 ? [st.hinweis || ''] : [],
+          gut: st.kostenlos || imAbo2,
+          rang: st.kostenlos ? 0 : (imAbo2 ? 1 : 2),
+        });
+      });
+    }
+  });
+  zeilen.sort(function(a, b){ return a.rang - b.rang; });
+  document.getElementById('senderModalTitel').textContent =
+    art === 'tv' ? TXT.sportWegeTitelTV : TXT.sportWegeTitelOnline;
+  document.getElementById('senderModalInhalt').innerHTML =
+    '<p class="prov-intro weg-paarung">' + esc(spiel.h + ' – ' + spiel.a) + '</p>' +
+    (zeilen.length ? zeilen.map(wegZeile).join('')
+                   : '<p class="prov-intro">' + esc(TXT.sportSenderOffen) + '</p>');
+  _senderModal.style.display = 'flex';
 }
 
 /* ---- Radio-Reportage (Christian, 24.08.2026): Die ARD stellt jedes Spiel
@@ -11201,28 +11327,6 @@ document.getElementById('sportAboHinweisBtn').onclick = function(){
    zum Anbieter. Ein Spiel kann durchaus auf mehreren Kanaelen EINES
    Anbieters laufen (Einzelspiel + Konferenz, App + Linearkanal) -- deshalb
    sind die Kanal-Angaben je Slot formuliert. ---- */
-/* ---- Empfangsweg ONLINE (Christian, 24.08.2026) ----
-   "Frei empfangbar" oben meint das klassische Fernsehen. Ob man das Spiel
-   auch am Handy umsonst sieht, ist eine ANDERE Frage: Sat.1 laeuft gratis
-   ueber Joyn, RTL im Fernsehen zwar frei, der Stream aber erst mit RTL+
-   Premium. Genau diese Luecke fiel im Alltag auf. Die Angaben stehen je
-   Sender in sport-rechte.json (Feld "stream") und sind handgepflegt -- es
-   gibt keine Quelle, die das maschinenlesbar liefert. ---- */
-function sportStreamSatz(info){
-  var st = info && info.stream;
-  if (!st) return '';
-  var wege = (st.wege || []).map(function(w){ return w.n; }).join(', ');
-  if (!wege) return '';
-  if (st.kostenlos) {
-    // Bei Joyn widersprechen sich Anbieter-FAQ und gelebte Praxis -- das
-    // sagen wir, statt uns auf eine Seite zu schlagen.
-    var zusatz = st.login === 'nein' ? TXT.sportStreamOhneLogin
-               : st.login === 'unklar' ? TXT.sportStreamLoginUnklar : '';
-    return '<p class="prov-intro sender-gratis">✅ <b>' + esc(TXT.sportStreamKostenlos) + ':</b> ' +
-           esc(wege) + (zusatz ? ' – ' + esc(zusatz) : '') + '</p>';
-  }
-  return '<p class="prov-intro">' + esc(TXT.sportStreamNurAbo(wege, st.preis || '')) + '</p>';
-}
 /* Hinweis, wann die Radio-Reportage beginnt. Datum nur, wenn es nicht heute
    ist -- sonst liest sich "am Montag, 24. August um 20:30 Uhr" fuer ein
    Spiel in zwei Stunden umstaendlich. */
@@ -11252,37 +11356,6 @@ function openRadioHinweis(startIso){
   _senderModal.style.display = 'flex';
 }
 var _senderModal = document.getElementById('senderModal');
-function openSenderModal(d){
-  var info = sportSenderInfo(d.s);
-  var konfiguriert = Array.isArray(SPORT_ABOS);
-  var imAbo = konfiguriert && SPORT_ABOS.indexOf(d.s) !== -1;
-  document.getElementById('senderModalTitel').textContent = info.name;
-  var status = info.frei
-    ? '<span style="color:var(--done)">' + esc(TXT.sportFreiEmpfangbar) + '</span>'
-    : konfiguriert
-      ? (imAbo ? '✅ ' + esc(TXT.sportImAbo) : '🔒 ' + esc(TXT.sportNichtImAbo))
-      : '🔒 ' + esc(TXT.sportAboNoetig);
-  var kanal = d.kanal || info.kanal || null;
-  var html = '<p class="prov-intro">' + status + '</p>';
-  if (kanal) {
-    html += '<p class="prov-intro"><b>' + esc(TXT.sportLaeuftAuf) + ':</b> ' + esc(kanal) +
-            (d.typ === 'konferenz' ? ' · ' + esc(TXT.sportKonferenz) : '') + '</p>';
-  }
-  if (d.u) html += '<p class="prov-intro">⚠️ ' + esc(TXT.sportVslLang) + '</p>';
-  if (info.info) html += '<p class="prov-intro">' + esc(info.info) + '</p>';
-  html += sportStreamSatz(info);
-  // Ein Knopf je Weg: Sky/WOW ist EIN Anbieter mit ZWEI Produkten und damit
-  // zwei Zielseiten (links[]); alle anderen haben nur den einen Link.
-  var ziele = Array.isArray(info.links) && info.links.length
-    ? info.links
-    : (info.link ? [{ n: info.name, url: info.link }] : []);
-  ziele.forEach(function(z){
-    html += '<a class="auth-submit sender-cta" href="' + escAttr(z.url) +
-            '" target="_blank" rel="noopener">' + esc(TXT.sportZum(z.n)) + '</a>';
-  });
-  document.getElementById('senderModalInhalt').innerHTML = html;
-  _senderModal.style.display = 'flex';
-}
 function closeSenderModal(){ _senderModal.style.display = 'none'; }
 document.getElementById('senderModalX').onclick = closeSenderModal;
 _senderModal.addEventListener('click', function(e){ if (e.target === _senderModal) closeSenderModal(); });
@@ -11303,8 +11376,14 @@ document.getElementById('sportPage').addEventListener('click', function(e){
     else openRadioHinweis(radio.dataset.start);
     return;
   }
-  var b = e.target.closest('.tv-badge');
-  if (b) { openSenderModal(b.dataset); return; }
+  /* "TV" und "Online": beide Knoepfe brauchen das ganze Spiel, nicht nur
+     einen Sender -- die Karte haelt es unter li._spiel. */
+  var weg = e.target.closest('.wege-btn');
+  if (weg) {
+    var karte = weg.closest('li.sport-match, li.sport-konf');
+    if (karte && karte._spiel) openWegeModal(karte._spiel, weg.dataset.art);
+    return;
+  }
   if (e.target.closest('a, .sport-details')) return;
   // Spielplan UND Konferenz: beide Kartenarten klappen dieselben Details auf
   // (Christian, 24.08.2026).
@@ -11339,9 +11418,7 @@ function sportDetailsHtml(spiel, d, mitKopf){
   if (mitKopf) {
     var comp = (SPORT_DATA.wettbewerbe[spiel.c] || {}).name || spiel.c;
     kopf += '<div class="konf-info">' + esc(comp + (spiel.rd ? ' · ' + spiel.rd : '')) + '</div>';
-    var badges = (spiel.tv || []).map(sportBadgeHtml).join('');
-    kopf += '<div class="sport-tv konf-info-tv">' +
-      (badges || '<span class="konf-info">' + esc(TXT.sportSenderOffen) + '</span>') +
+    kopf += '<div class="sport-tv konf-info-tv">' + sportWegeHtml(spiel) +
       sportAudioHtml(spiel) + '</div>';
   }
   var html = '';
@@ -11409,7 +11486,7 @@ function sportSpielLi(spiel){
     '<span class="sport-comp">' + esc(comp + (spiel.rd ? ' · ' + spiel.rd : '')) + '</span></div>' +
     '<div class="sport-teams">' + team(spiel.hl, spiel.h) +
     '<span class="sport-vs">–</span>' + team(spiel.al, spiel.a) + status + '</div>' +
-    '<div class="sport-tv">' + (spiel.tv || []).map(sportBadgeHtml).join('') + sportAudioHtml(spiel) + '</div>';
+    '<div class="sport-tv">' + sportWegeHtml(spiel) + sportAudioHtml(spiel) + '</div>';
   li._spiel = spiel;   // fuer das Aufklappen der Details (Klick-Handler oben)
   sportWischTeilen(li, spiel);
   return li;

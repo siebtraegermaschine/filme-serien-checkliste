@@ -38,7 +38,23 @@
           "n": "WOW",
           "url": "https://www.wowtv.de/live-sport"
         }
-      ]
+      ],
+      "stream": {
+        "kostenlos": false,
+        "login": "abo",
+        "wege": [
+          {
+            "n": "Sky Go",
+            "url": "https://www.sky.de/sky-go"
+          },
+          {
+            "n": "WOW",
+            "url": "https://www.wowtv.de/"
+          }
+        ],
+        "hinweis": "Sky Go ist im Sky-Abo enthalten; WOW ist Skys eigenständiges Streaming-Abo ohne Receiver.",
+        "geprueft": "2026-08-24"
+      }
     },
     "dazn": {
       "name": "DAZN",
@@ -46,7 +62,18 @@
       "tmdb": [],
       "link": "https://www.dazn.com/de-DE",
       "kanal": "DAZN-App",
-      "info": "Läuft in der DAZN-App. Die linearen Kanäle DAZN 1/2 lassen sich auch über Sky-Receiver und Vodafone empfangen — brauchen aber ebenfalls die DAZN-Buchung, ein Sky-Abo allein reicht dafür nicht."
+      "info": "Läuft in der DAZN-App. Die linearen Kanäle DAZN 1/2 lassen sich auch über Sky-Receiver und Vodafone empfangen — brauchen aber ebenfalls die DAZN-Buchung, ein Sky-Abo allein reicht dafür nicht.",
+      "stream": {
+        "kostenlos": false,
+        "login": "abo",
+        "wege": [
+          {
+            "n": "DAZN-App",
+            "url": "https://www.dazn.com/de-DE/"
+          }
+        ],
+        "geprueft": "2026-08-24"
+      }
     },
     "amazon": {
       "name": "Amazon Prime",
@@ -57,7 +84,19 @@
       ],
       "link": "https://www.amazon.de/gp/video/storefront",
       "kanal": "Prime Video",
-      "info": "Läuft in der Prime-Video-App, im Prime-Abo enthalten."
+      "tv": false,
+      "info": "Läuft in der Prime-Video-App, im Prime-Abo enthalten.",
+      "stream": {
+        "kostenlos": false,
+        "login": "abo",
+        "wege": [
+          {
+            "n": "Prime Video",
+            "url": "https://www.amazon.de/gp/video/storefront"
+          }
+        ],
+        "geprueft": "2026-08-24"
+      }
     },
     "rtlplus": {
       "name": "RTL+",
@@ -67,7 +106,20 @@
       ],
       "link": "https://plus.rtl.de/",
       "kanal": "RTL+ (Stream)",
-      "info": "Läuft im RTL+-Stream (Premium-Abo)."
+      "tv": false,
+      "info": "Läuft im RTL+-Stream (Premium-Abo).",
+      "stream": {
+        "kostenlos": false,
+        "login": "abo",
+        "preis": "ab 9,99 €/Monat",
+        "wege": [
+          {
+            "n": "RTL+ Premium",
+            "url": "https://plus.rtl.de/"
+          }
+        ],
+        "geprueft": "2026-08-24"
+      }
     },
     "sat1": {
       "name": "Sat.1",
@@ -191,7 +243,18 @@
       "tmdb": [],
       "link": "https://www.magentasport.de/",
       "kanal": "MagentaSport-App",
-      "info": "Läuft bei MagentaSport (Telekom-Abo, für Telekom-Kunden günstiger). Ausgewählte Spiele zeigen die ARD-Dritten zusätzlich frei."
+      "info": "Läuft bei MagentaSport (Telekom-Abo, für Telekom-Kunden günstiger). Ausgewählte Spiele zeigen die ARD-Dritten zusätzlich frei.",
+      "stream": {
+        "kostenlos": false,
+        "login": "abo",
+        "wege": [
+          {
+            "n": "MagentaSport",
+            "url": "https://www.magentasport.de/"
+          }
+        ],
+        "geprueft": "2026-08-24"
+      }
     }
   },
   "wettbewerbe": {
