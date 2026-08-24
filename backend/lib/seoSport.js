@@ -353,14 +353,47 @@ function steckbrief(daten) {
 function streamSatz(s) {
   const st = s.stream;
   if (!st) return '';
-  const wege = (st.wege || []).map((w) => w.n).join(' oder ');
-  if (!wege) return '';
-  if (st.kostenlos) {
-    const login = st.login === 'nein' ? ' – ohne Anmeldung'
-                : st.login === 'unklar' ? ' – eine Anmeldung kann nötig sein' : '';
-    return ` Kostenlos im Stream über ${wege}${login}.`;
+  /* Seit die Aggregatoren dazugekommen sind (waipu.tv, Zattoo, MagentaTV)
+     haengen Preis und Anmeldung AM WEG, nicht mehr am Sender: Die ARD laeuft
+     ohne Konto in der Mediathek, mit Konto bei waipu.tv, im Abo ueber
+     MagentaTV. Fehlt ein Feld am Weg, gilt der Wert am Sender.
+     "Unsichere" Wege bleiben im Satz aussen vor -- Privatsender geben Sport
+     nicht immer auf Drittplattformen frei, und ein Versprechen, das reissen
+     kann, ist schlimmer als ein fehlendes (Christian, 24.08.2026). */
+  const zugang = (w) => ({
+    kostenlos: w.kostenlos !== undefined ? w.kostenlos : st.kostenlos,
+    login: w.login !== undefined ? w.login : st.login,
+    preis: w.preis !== undefined ? w.preis : st.preis,
+    unsicher: !!w.unsicher,
+  });
+  const alle = st.wege || [];
+  const gratis = alle.filter((w) => { const z = zugang(w); return z.kostenlos && !z.unsicher; });
+  if (gratis.length) {
+    /* Gibt es einen Weg ganz ohne Konto, nennt der Satz NUR den -- sonst
+       stuenden vier Namen mit unterschiedlichen Huerden in einer Reihe und
+       der Zusatz "ohne Anmeldung" waere fuer die Haelfte falsch. */
+    const ohne = gratis.filter((w) => zugang(w).login === 'nein');
+    const nehmen = ohne.length ? ohne : gratis;
+    const logins = new Set(nehmen.map((w) => zugang(w).login));
+    const login = logins.size > 1 ? ''
+                : logins.has('nein') ? ' – ohne Anmeldung'
+                : logins.has('ja') ? ' – mit kostenlosem Konto'
+                : logins.has('unklar') ? ' – eine Anmeldung kann nötig sein' : '';
+    return ` Kostenlos im Stream über ${aufzaehlung(nehmen.map((w) => w.n))}${login}.`;
   }
-  return ` Der Stream läuft dagegen nur über ${wege}${st.preis ? ` (${st.preis})` : ''}.`;
+  const bezahlt = alle.filter((w) => !zugang(w).unsicher);
+  if (!bezahlt.length) return '';
+  // Preis je Weg: RTL+ und MagentaTV kosten Unterschiedliches, eine Klammer
+  // fuer beide waere schlicht falsch.
+  const teile = bezahlt.map((w) => { const pr = zugang(w).preis; return w.n + (pr ? ` (${pr})` : ''); });
+  return ` Der Stream läuft dagegen nur über ${aufzaehlung(teile)}.`;
+}
+
+/* "A", "A oder B", "A, B oder C" -- drei Mal "oder" in einer Reihe liest sich
+   wie eine Aufzaehlung, die vergessen hat aufzuhoeren. */
+function aufzaehlung(namen) {
+  if (namen.length < 2) return namen[0] || '';
+  return namen.slice(0, -1).join(', ') + ' oder ' + namen[namen.length - 1];
 }
 
 function soSehen(daten) {

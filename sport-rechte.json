@@ -44,15 +44,16 @@
         "login": "abo",
         "wege": [
           {
-            "n": "Sky Go",
-            "url": "https://www.sky.de/sky-go"
+            "n": "WOW",
+            "url": "https://www.wowtv.de/",
+            "hinweis": "Skys eigenes Streaming-Abo, ohne Receiver buchbar."
           },
           {
-            "n": "WOW",
-            "url": "https://www.wowtv.de/"
+            "n": "Sky Go",
+            "url": "https://www.sky.de/sky-go",
+            "hinweis": "Im Sky-Abo enthalten – wer Sky schon gebucht hat, zahlt dafür nichts extra."
           }
         ],
-        "hinweis": "Sky Go ist im Sky-Abo enthalten; WOW ist Skys eigenständiges Streaming-Abo ohne Receiver.",
         "geprueft": "2026-08-24"
       }
     },
@@ -133,6 +134,30 @@
           {
             "n": "Joyn",
             "url": "https://www.joyn.de/live-tv/sat1"
+          },
+          {
+            "n": "waipu.tv",
+            "url": "https://www.waipu.tv/",
+            "kostenlos": true,
+            "login": "ja",
+            "hinweis": "Im kostenlosen Tarif nur in SD und mit Werbung. Einzelne Sportübertragungen können auf Drittplattformen fehlen.",
+            "unsicher": true
+          },
+          {
+            "n": "Zattoo",
+            "url": "https://zattoo.com/",
+            "kostenlos": true,
+            "login": "ja",
+            "hinweis": "Im kostenlosen Tarif nur in SD und mit Werbung. Einzelne Sportübertragungen können auf Drittplattformen fehlen.",
+            "unsicher": true
+          },
+          {
+            "n": "MagentaTV",
+            "url": "https://www.telekom.de/magenta-tv",
+            "kostenlos": false,
+            "login": "abo",
+            "preis": "ab 10 €/Monat",
+            "hinweis": "Für Telekom-Kunden günstiger; enthält alle Free-TV-Sender."
           }
         ],
         "geprueft": "2026-08-24",
@@ -165,6 +190,28 @@
           {
             "n": "Sportschau",
             "url": "https://www.sportschau.de/streams"
+          },
+          {
+            "n": "waipu.tv",
+            "url": "https://www.waipu.tv/",
+            "kostenlos": true,
+            "login": "ja",
+            "hinweis": "Kostenloser Tarif mit Werbung."
+          },
+          {
+            "n": "Zattoo",
+            "url": "https://zattoo.com/",
+            "kostenlos": true,
+            "login": "ja",
+            "hinweis": "Kostenloser Tarif mit Werbung."
+          },
+          {
+            "n": "MagentaTV",
+            "url": "https://www.telekom.de/magenta-tv",
+            "kostenlos": false,
+            "login": "abo",
+            "preis": "ab 10 €/Monat",
+            "hinweis": "Für Telekom-Kunden günstiger; enthält alle Free-TV-Sender."
           }
         ],
         "geprueft": "2026-08-24",
@@ -193,6 +240,28 @@
           {
             "n": "ZDFmediathek",
             "url": "https://www.zdf.de/live-tv"
+          },
+          {
+            "n": "waipu.tv",
+            "url": "https://www.waipu.tv/",
+            "kostenlos": true,
+            "login": "ja",
+            "hinweis": "Kostenloser Tarif mit Werbung."
+          },
+          {
+            "n": "Zattoo",
+            "url": "https://zattoo.com/",
+            "kostenlos": true,
+            "login": "ja",
+            "hinweis": "Kostenloser Tarif mit Werbung."
+          },
+          {
+            "n": "MagentaTV",
+            "url": "https://www.telekom.de/magenta-tv",
+            "kostenlos": false,
+            "login": "abo",
+            "preis": "ab 10 €/Monat",
+            "hinweis": "Für Telekom-Kunden günstiger; enthält alle Free-TV-Sender."
           }
         ],
         "geprueft": "2026-08-24",
@@ -212,6 +281,30 @@
           {
             "n": "RTL+ Premium",
             "url": "https://plus.rtl.de/"
+          },
+          {
+            "n": "waipu.tv",
+            "url": "https://www.waipu.tv/",
+            "kostenlos": true,
+            "login": "ja",
+            "hinweis": "Im kostenlosen Tarif nur in SD und mit Werbung. Einzelne Sportübertragungen können auf Drittplattformen fehlen.",
+            "unsicher": true
+          },
+          {
+            "n": "Zattoo",
+            "url": "https://zattoo.com/",
+            "kostenlos": true,
+            "login": "ja",
+            "hinweis": "Im kostenlosen Tarif nur in SD und mit Werbung. Einzelne Sportübertragungen können auf Drittplattformen fehlen.",
+            "unsicher": true
+          },
+          {
+            "n": "MagentaTV",
+            "url": "https://www.telekom.de/magenta-tv",
+            "kostenlos": false,
+            "login": "abo",
+            "preis": "ab 10 €/Monat",
+            "hinweis": "Für Telekom-Kunden günstiger; enthält alle Free-TV-Sender."
           }
         ],
         "geprueft": "2026-08-24",
@@ -231,6 +324,30 @@
           {
             "n": "RTL+ Premium",
             "url": "https://plus.rtl.de/"
+          },
+          {
+            "n": "waipu.tv",
+            "url": "https://www.waipu.tv/",
+            "kostenlos": true,
+            "login": "ja",
+            "hinweis": "Im kostenlosen Tarif nur in SD und mit Werbung. Einzelne Sportübertragungen können auf Drittplattformen fehlen.",
+            "unsicher": true
+          },
+          {
+            "n": "Zattoo",
+            "url": "https://zattoo.com/",
+            "kostenlos": true,
+            "login": "ja",
+            "hinweis": "Im kostenlosen Tarif nur in SD und mit Werbung. Einzelne Sportübertragungen können auf Drittplattformen fehlen.",
+            "unsicher": true
+          },
+          {
+            "n": "MagentaTV",
+            "url": "https://www.telekom.de/magenta-tv",
+            "kostenlos": false,
+            "login": "abo",
+            "preis": "ab 10 €/Monat",
+            "hinweis": "Für Telekom-Kunden günstiger; enthält alle Free-TV-Sender."
           }
         ],
         "geprueft": "2026-08-24",

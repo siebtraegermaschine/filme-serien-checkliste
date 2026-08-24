@@ -661,6 +661,13 @@
      nach der Auslosung werden es ~9 Wettbewerbs-Chips, umgebrochen waeren
      das drei Zeilen. Kein sichtbarer Scrollbalken -- der am Rand
      angeschnittene Chip zeigt, dass rechts mehr kommt. */
+  /* Etwas Luft unter der Ueberschrift: vorher klebte die Chip-Reihe mit 8px
+     daran. 13px ist rund die Haelfte des Abstands, der weiter unten zwischen
+     der Mannschaftsreihe und "Heute" steht (26px) -- so trennt die Ueberschrift
+     sichtbar, ohne einen zweiten Block aufzumachen (Christian, 24.08.2026).
+     Bewusst hier und nicht an .cinema-page-header: die Kopfzeile teilt sich
+     die App mit den Film-Seiten. */
+  #sportPage .cinema-page-header { margin-bottom:13px; }
   .sport-chips { max-width:700px; margin:8px auto 0; padding:0 20px; box-sizing:border-box;
     display:flex; flex-wrap:nowrap; gap:6px; overflow-x:auto;
     -webkit-overflow-scrolling:touch; scrollbar-width:none; }
@@ -2768,6 +2775,7 @@ var UI_TEXTE = {
     sportWegeTitelOnline: 'Online schauen',
     sportGratisMit: function(zusatz){ return 'Kostenlos' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'ohne Anmeldung',
+    sportStreamMitLogin: 'Anmeldung nötig',
     sportStreamLoginUnklar: 'Anmeldung möglicherweise nötig',
     ansichtAnbieter: 'Anbieter',
     ansichtKeineAbos: 'Du hast noch keine Sender-Abos festgelegt – unter Einstellungen → „Deine Sport-Abos“.',
@@ -3191,6 +3199,7 @@ var UI_TEXTE = {
     sportWegeTitelOnline: 'Watch online',
     sportGratisMit: function(zusatz){ return 'Free' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'no sign-in needed',
+    sportStreamMitLogin: 'sign-up required',
     sportStreamLoginUnklar: 'sign-in may be required',
     ansichtAnbieter: 'Providers',
     ansichtKeineAbos: 'You haven’t set any subscriptions yet – under Settings → “Your sports subscriptions”.',
@@ -3611,6 +3620,7 @@ var UI_TEXTE = {
     sportWegeTitelOnline: 'Regarder en ligne',
     sportGratisMit: function(zusatz){ return 'Gratuit' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'sans inscription',
+    sportStreamMitLogin: 'inscription requise',
     sportStreamLoginUnklar: 'inscription peut-être nécessaire',
     ansichtAnbieter: 'Diffuseurs',
     ansichtKeineAbos: 'Tu n’as pas encore défini d’abonnements – dans Réglages → « Tes abonnements sport ».',
@@ -4031,6 +4041,7 @@ var UI_TEXTE = {
     sportWegeTitelOnline: 'Ver online',
     sportGratisMit: function(zusatz){ return 'Gratis' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'sin registro',
+    sportStreamMitLogin: 'requiere registro',
     sportStreamLoginUnklar: 'puede requerir registro',
     ansichtAnbieter: 'Proveedores',
     ansichtKeineAbos: 'Aún no has definido suscripciones: en Ajustes → «Tus suscripciones deportivas».',
@@ -4451,6 +4462,7 @@ var UI_TEXTE = {
     sportWegeTitelOnline: 'Guarda online',
     sportGratisMit: function(zusatz){ return 'Gratis' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'senza registrazione',
+    sportStreamMitLogin: 'registrazione necessaria',
     sportStreamLoginUnklar: 'potrebbe servire la registrazione',
     ansichtAnbieter: 'Emittenti',
     ansichtKeineAbos: 'Non hai ancora impostato abbonamenti: in Impostazioni → «I tuoi abbonamenti sport».',
@@ -4871,6 +4883,7 @@ var UI_TEXTE = {
     sportWegeTitelOnline: 'Online kijken',
     sportGratisMit: function(zusatz){ return 'Gratis' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'zonder account',
+    sportStreamMitLogin: 'aanmelding nodig',
     sportStreamLoginUnklar: 'account mogelijk nodig',
     ansichtAnbieter: 'Aanbieders',
     ansichtKeineAbos: 'Je hebt nog geen abonnementen ingesteld – bij Instellingen → „Jouw sportabonnementen”.',
@@ -5291,6 +5304,7 @@ var UI_TEXTE = {
     sportWegeTitelOnline: 'Ver online',
     sportGratisMit: function(zusatz){ return 'Grátis' + (zusatz ? ' – ' + zusatz : ''); },
     sportStreamOhneLogin: 'sem cadastro',
+    sportStreamMitLogin: 'requer registo',
     sportStreamLoginUnklar: 'pode exigir cadastro',
     ansichtAnbieter: 'Provedores',
     ansichtKeineAbos: 'Você ainda não definiu assinaturas – em Configurações → “Suas assinaturas de esporte”.',
@@ -10965,7 +10979,11 @@ function sportSpielFrei(spiel){
 function sportSpielFreiStream(spiel){
   return (spiel.tv || []).some(function(b){
     var st = sportSenderInfo(b.s).stream;
-    return !!(st && st.kostenlos);
+    if (!st) return false;
+    return (st.wege || []).some(function(w){
+      var z = wegZugang(st, w);
+      return z.kostenlos && !z.unsicher;
+    });
   });
 }
 // STRIKT nur die eigenen Sport-Abos -- Free-TV zaehlt hier bewusst NICHT
@@ -11033,6 +11051,25 @@ function sportWegeHtml(spiel){
   return html || '<span class="tv-badge">' + esc(TXT.sportSenderOffen) + '</span>';
 }
 
+/* Was kostet DIESER Weg? Frueher galt eine Angabe fuer den ganzen Sender --
+   das reicht nicht mehr, seit die Aggregatoren dazugekommen sind: Die ARD
+   laeuft ohne Konto in der Mediathek, mit Konto bei waipu.tv und Zattoo und
+   nur im Abo ueber MagentaTV. Fehlt ein Feld am Weg, gilt der Wert am Sender
+   (Christian, 24.08.2026). */
+function wegZugang(st, w){
+  return {
+    kostenlos: w.kostenlos !== undefined ? w.kostenlos : st.kostenlos,
+    login: w.login !== undefined ? w.login : st.login,
+    preis: w.preis !== undefined ? w.preis : st.preis,
+    hinweis: w.hinweis !== undefined ? w.hinweis : st.hinweis,
+    /* Privatsender geben Sportuebertragungen nicht immer auf Drittplattformen
+       frei. Solche Wege werden gezeigt, sollen den Knopf aber NICHT auf
+       "gratis" stellen -- ein Versprechen, das reissen kann, ist schlimmer
+       als ein fehlendes. */
+    unsicher: !!w.unsicher,
+  };
+}
+
 /* Ein Empfangsweg als Zeile: Name, darunter der Zugang im Klartext, rechts
    der Weg dorthin. Bewusst Zeilen statt einer Tabelle -- auf dem Handy
    waeren drei Spalten zu eng, und jede Zeile traegt ihren eigenen Link. */
@@ -11068,19 +11105,23 @@ function openWegeModal(spiel, art){
     } else {
       var st = info.stream;
       if (!st) return;
-      (st.wege || []).forEach(function(w, i){
-        var imAbo2 = konfiguriert && SPORT_ABOS.indexOf(b.s) !== -1;
+      var imAbo2 = konfiguriert && SPORT_ABOS.indexOf(b.s) !== -1;
+      (st.wege || []).forEach(function(w){
+        var z = wegZugang(st, w);
         zeilen.push({
           name: w.n, url: w.url,
-          status: st.kostenlos
-            ? TXT.sportGratisMit(st.login === 'nein' ? TXT.sportStreamOhneLogin
-                               : st.login === 'unklar' ? TXT.sportStreamLoginUnklar : '')
-            : (imAbo2 ? TXT.sportImAbo : TXT.sportAboNoetig) + (st.preis ? ' (' + st.preis + ')' : ''),
-          /* Der Hinweis gehoert dem Sender, nicht dem einzelnen Weg -- bei Sky
-             stuende er sonst gleich zweimal untereinander (Sky Go und WOW). */
-          hinweis: i === 0 ? [st.hinweis || ''] : [],
-          gut: st.kostenlos || imAbo2,
-          rang: st.kostenlos ? 0 : (imAbo2 ? 1 : 2),
+          status: z.kostenlos
+            ? TXT.sportGratisMit(z.login === 'nein' ? TXT.sportStreamOhneLogin
+                               : z.login === 'ja' ? TXT.sportStreamMitLogin
+                               : z.login === 'unklar' ? TXT.sportStreamLoginUnklar : '')
+            : (imAbo2 ? TXT.sportImAbo : TXT.sportAboNoetig) + (z.preis ? ' (' + z.preis + ')' : ''),
+          hinweis: [z.hinweis || ''],
+          gut: z.kostenlos || imAbo2,
+          /* Reihenfolge: sicher kostenlos, dann in deinen Abos, dann der Rest.
+             Innerhalb einer Stufe bleibt die Reihenfolge aus sport-rechte.json
+             -- dort steht bei Sky bewusst WOW vor Sky Go, weil der laengere
+             Erklaertext so unten steht (Christian, 24.08.2026). */
+          rang: z.kostenlos ? (z.unsicher ? 1 : 0) : (imAbo2 ? 2 : 3),
         });
       });
     }
