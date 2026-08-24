@@ -3,6 +3,7 @@ import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import { geheimnisStimmt } from '../lib/vergleich.js';
 import { sportKontext } from '../lib/seoSport.js';
+import { LIGEN_MIT_TABELLE, ligaTabelle, torschuetzen, teamForm, direktvergleich } from '../lib/sportDaten.js';
 
 const router = createAsyncRouter();
 
@@ -46,6 +47,57 @@ router.get('/', async (_req, res) => {
       tv: Array.isArray(r.tv) ? r.tv : [],
     })),
   });
+});
+
+/* GET /api/sport/tabelle/:comp -- Ligatabelle samt Torschuetzenliste fuer
+   die Tabellen-Ansicht der App (nur bl1/bl2/bl3, siehe LIGEN_MIT_TABELLE).
+   Die Saison kommt aus dem eigenen Spielplan: die des naechsten Spiels des
+   Wettbewerbs (zum Saisonwechsel liegt sonst noch die Vorsaison obenauf),
+   ersatzweise die des juengsten. Datenquelle OpenLigaDB, 6h-Cache in
+   lib/sportDaten.js -- die App-Last schlaegt nicht auf die Community-API
+   durch. */
+router.get('/tabelle/:comp', async (req, res) => {
+  const comp = String(req.params.comp || '').toLowerCase();
+  if (!LIGEN_MIT_TABELLE.has(comp)) return res.status(404).json({ error: 'no_table' });
+  const { rows } = await pool.query(
+    `SELECT saison FROM sport_matches
+      WHERE wettbewerb = $1 AND saison <> ''
+      ORDER BY (anstoss > now() - interval '8 hours') DESC, anstoss
+      LIMIT 1`, [comp]);
+  if (!rows.length) return res.status(404).json({ error: 'no_matches' });
+  const saison = rows[0].saison;
+  const [tabelle, schuetzen] = await Promise.all([
+    ligaTabelle(comp, saison),
+    torschuetzen(comp, saison),
+  ]);
+  res.json({
+    saison,
+    tabelle: (tabelle || []).map((t) => ({
+      name: t.teamName, kurz: t.shortName || null, logo: t.teamIconUrl || null,
+      sp: t.matches, s: t.won, u: t.draw, n: t.lost,
+      tore: t.goals, gegen: t.opponentGoals, pkt: t.points,
+    })),
+    torschuetzen: schuetzen || [],
+  });
+});
+
+/* GET /api/sport/spiel/:id/details -- Direktvergleich und Formkurven fuer
+   die aufgeklappte Spielkarte. Beides kommt von OpenLigaDB (6h-Cache); wo
+   Team-IDs fehlen (etwa Turnier-Platzhalter vor der Auslosung), bleiben die
+   Felder null und die Karte laesst den Abschnitt weg. */
+router.get('/spiel/:id/details', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isFinite(id)) return res.status(404).json({ error: 'not_found' });
+  const { rows } = await pool.query(
+    'SELECT heim, gast, heim_id, gast_id FROM sport_matches WHERE external_id = $1', [id]);
+  const m = rows[0];
+  if (!m) return res.status(404).json({ error: 'not_found' });
+  const [duelle, formHeim, formGast] = await Promise.all([
+    direktvergleich(m.heim_id, m.gast_id),
+    teamForm(m.heim_id, m.heim),
+    teamForm(m.gast_id, m.gast),
+  ]);
+  res.json({ duelle: duelle || [], formHeim: formHeim || [], formGast: formGast || [] });
 });
 
 // GET/PUT /api/sport/abos -- die eigenen Sport-Abos (Sender-Slugs). NULL heisst

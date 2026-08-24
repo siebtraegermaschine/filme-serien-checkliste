@@ -36,6 +36,8 @@ import onboardingRouter from './routes/onboarding.js';
 import { anonId } from './middleware/anonId.js';
 import { starteKpiSnapshot, starteKpiAufraeumen } from './lib/kpi.js';
 import { starteSportLive } from './lib/sportLive.js';
+import { ladeKalender } from './lib/sportKalender.js';
+import { asyncHandler } from './lib/asyncHandler.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';
@@ -360,6 +362,20 @@ app.get('/sport', (req, res) => {
   if (a < 0 || b < 0) return res.type('html').send(html);
   res.type('html').send(html.slice(0, a) + block + html.slice(b + OG_ENDE.length));
 });
+
+/* Spielplan eines Vereins als Kalender-Abo (lib/sportKalender.js) -- auf
+   BEIDEN Domains erreichbar: Die Sport-Domain-Weiche oben laesst Pfade mit
+   Dateiendung durch (next()), movietaste trifft die Route direkt. Kein
+   Cache-Header-Drama: Kalender-Apps fragen ohnehin nur alle paar Stunden. */
+app.get('/kalender/:slug.ics', mengenGrenze({ name: 'kalender', anzahl: 60, minuten: 10 }), asyncHandler(async (req, res) => {
+  const slug = String(req.params.slug || '').toLowerCase();
+  if (!/^[a-z0-9-]{1,80}$/.test(slug)) return res.status(404).type('txt').send('Nicht gefunden');
+  const ics = await ladeKalender(slug);
+  if (!ics) return res.status(404).type('txt').send('Nicht gefunden');
+  res.set('Content-Type', 'text/calendar; charset=utf-8');
+  res.set('Content-Disposition', `inline; filename="${slug}.ics"`);
+  res.send(ics);
+}));
 
 // SEO-Seiten (/<locale>/film|serie|filme|... und /sitemap-*.xml) -- eigene,
 // von der App getrennte Dokumente (siehe PLAN-SEO-UMSETZUNG). Muss vor

@@ -670,6 +670,75 @@
   .sender-cta { display:inline-block; text-decoration:none; margin-top:6px; margin-right:8px; }
   .tv-zusatz { font-weight:400; opacity:.8; }
 
+  /* Ansichts-Umschalter der Sport-Seite (Spielplan/Konferenz/Tabelle):
+     dieselbe Chip-Optik, nur mit etwas Abstand zum Seitentitel. */
+  .sport-modus { margin-top:14px; }
+
+  /* Aufklappbare Spielkarten-Details: Direktvergleich + Formkurve. Die
+     Karte selbst bleibt das Klickziel (ausser Badges/Links), der Bereich
+     haengt mit gestrichelter Trennlinie unten an. */
+  li.sport-match { cursor:pointer; }
+  .sport-details { border-top:1px dashed var(--border); padding-top:8px; margin-top:2px;
+    font-size:12.5px; color:var(--text-dim); cursor:default; }
+  .sport-details h5 { margin:8px 0 4px; font-size:11px; text-transform:uppercase;
+    letter-spacing:.5px; color:var(--text-dim); font-weight:600; }
+  .sport-details h5:first-child { margin-top:0; }
+  .sport-duell { display:flex; justify-content:space-between; gap:10px; padding:2px 0; }
+  .sport-duell .d-datum { white-space:nowrap; opacity:.75; }
+  .sport-duell .d-paarung { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
+  .sport-duell .d-stand { font-weight:700; color:var(--text); white-space:nowrap; }
+  .sport-formzeile { display:flex; align-items:center; gap:6px; padding:2px 0; }
+  .sport-formzeile .f-team { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
+  .form-punkt { display:inline-flex; width:18px; height:18px; border-radius:5px;
+    align-items:center; justify-content:center; font-size:11px; font-weight:700;
+    color:#fff; flex:0 0 auto; }
+  .form-punkt.f-s { background:var(--done, #4cc38a); }
+  .form-punkt.f-u { background:var(--text-dim); opacity:.65; }
+  .form-punkt.f-n { background:#e05d5d; }
+  .sport-details .details-mehr { display:inline-block; margin-top:8px; color:var(--accent);
+    text-decoration:none; font-weight:600; }
+
+  /* Konferenz: verdichtete Zeile je Spiel -- Zeit/LIVE links, Kurznamen mit
+     Logos, der Stand fett mittig. */
+  li.sport-konf { display:grid; grid-template-columns:56px 1fr auto 1fr; align-items:center;
+    gap:8px; background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:9px 12px; margin-bottom:6px; font-size:13.5px; font-weight:600; color:var(--text); }
+  .konf-zeit { font-size:12px; font-weight:700; color:var(--text-dim); white-space:nowrap; }
+  .konf-zeit.live { color:#e05d5d; letter-spacing:.5px; }
+  .konf-heim, .konf-gast { display:flex; align-items:center; gap:6px; min-width:0; }
+  .konf-heim { justify-content:flex-end; text-align:right; }
+  .konf-heim span, .konf-gast span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .konf-heim img, .konf-gast img { width:18px; height:18px; object-fit:contain; flex:0 0 auto; }
+  .konf-stand { font-weight:800; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .konf-stand.offen { color:var(--text-dim); font-weight:600; }
+
+  /* Tabellen-Ansicht: Ligatabelle + Torschuetzen. Eigene Vereine (aus
+     "Dein Verein") sind hervorgehoben. */
+  .sport-tabelle { width:100%; border-collapse:collapse; font-size:13px; color:var(--text);
+    font-variant-numeric:tabular-nums; }
+  .sport-tabelle th { text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.4px;
+    color:var(--text-dim); font-weight:600; padding:6px 6px; border-bottom:1px solid var(--border); }
+  .sport-tabelle td { padding:6px 6px; border-bottom:1px solid var(--border); white-space:nowrap; }
+  .sport-tabelle th.num, .sport-tabelle td.num { text-align:right; }
+  .sport-tabelle .t-team { display:flex; align-items:center; gap:7px; min-width:0; white-space:normal; }
+  .sport-tabelle .t-team img { width:18px; height:18px; object-fit:contain; flex:0 0 auto; }
+  .sport-tabelle .t-pkt { font-weight:700; }
+  .sport-tabelle tr.hervor td { background:var(--accent-soft); }
+  .sport-tabelle tr:last-child td { border-bottom:none; }
+  /* Schmale Schirme: S-U-N faellt weg, damit die Punkte sichtbar bleiben. */
+  @media (max-width: 480px) { .sport-tabelle .t-sun { display:none; } }
+  .sport-tab-wrap { background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:6px 10px; margin:10px auto 16px; overflow-x:auto;
+    max-width:660px; box-sizing:border-box; }
+  #sportTabInhalt { padding:0 20px; }
+
+  /* Kalender-Links im "Deine Ansicht"-Fenster. */
+  #vereinKalender { margin-top:10px; }
+  .kalender-link { display:flex; align-items:center; gap:8px; padding:8px 10px; margin-bottom:6px;
+    border:1px solid var(--border); border-radius:10px; color:var(--text); text-decoration:none;
+    font-size:13.5px; background:var(--card); }
+  @media (hover: hover) { .kalender-link:hover { border-color:var(--accent); color:var(--accent); } }
+
   /* Im Popup ist die Spalte fuer Titel/Aktionen schmaler als auf Discovery/
      Streaming (Poster + Modal-Rand nehmen relativ mehr Platz weg) -- kleineres
      Poster und kompaktere Abstaende schaffen genug Raum, damit Watchlist und
@@ -1655,19 +1724,38 @@
        2026) -- "Deine Streaming-Anbieter" zeigt, was mit den eigenen Abos
        (Abschnitt im Streaminganbieter-Fenster) sichtbar ist, frei zaehlt
        immer mit. -->
+  <!-- Ansichts-Umschalter (24.08.2026): Spielplan (Standard) / Konferenz
+       (alle heutigen Spiele verdichtet mit Staenden) / Tabelle (Ligatabelle
+       samt Torschuetzen). Gerendert von renderSportModusChips. -->
+  <div class="sport-chips sport-modus" id="sportModusChips"></div>
   <div class="sport-chips" id="sportChips"></div>
   <div class="sport-chips sport-chips-verf" id="sportVerfChips"></div>
-  <div class="cinema-section">
-    <h3 class="cinema-heading" id="sportHeuteHeading">Heute</h3>
-    <ol class="list sport-liste" id="sportHeuteList"></ol>
+  <div id="sportPlanWrap">
+    <div class="cinema-section">
+      <h3 class="cinema-heading" id="sportHeuteHeading">Heute</h3>
+      <ol class="list sport-liste" id="sportHeuteList"></ol>
+    </div>
+    <div class="cinema-section">
+      <h3 class="cinema-heading" id="sportWocheHeading">Diese Woche</h3>
+      <ol class="list sport-liste" id="sportWocheList"></ol>
+    </div>
+    <div class="cinema-section">
+      <h3 class="cinema-heading" id="sportSpaeterHeading">Demnächst</h3>
+      <ol class="list sport-liste" id="sportSpaeterList"></ol>
+    </div>
   </div>
-  <div class="cinema-section">
-    <h3 class="cinema-heading" id="sportWocheHeading">Diese Woche</h3>
-    <ol class="list sport-liste" id="sportWocheList"></ol>
+  <!-- Konferenz-Ansicht: nur die heutigen Spiele, kompakt untereinander --
+       Stand mittig, Live-Spiele zuerst (renderSportKonferenz). Der Minuten-
+       Nachlader der Sport-Seite aktualisiert auch diese Ansicht. -->
+  <div class="cinema-section" id="sportKonfSection" style="display:none">
+    <h3 class="cinema-heading" id="sportKonfHeading"></h3>
+    <ol class="list sport-liste" id="sportKonfList"></ol>
   </div>
-  <div class="cinema-section">
-    <h3 class="cinema-heading" id="sportSpaeterHeading">Demnächst</h3>
-    <ol class="list sport-liste" id="sportSpaeterList"></ol>
+  <!-- Tabellen-Ansicht: Liga waehlen (bl1/bl2/bl3), darunter Tabelle und
+       Torschuetzenliste von /api/sport/tabelle/<liga> (renderSportTabelle). -->
+  <div class="cinema-section" id="sportTabSection" style="display:none">
+    <div class="sport-chips" id="sportTabLigaChips"></div>
+    <div id="sportTabInhalt"></div>
   </div>
 </div>
 
@@ -2184,6 +2272,13 @@
     <h4 class="prov-sport-titel" id="ansichtVereineTitel">Deine Vereine (bis zu 3)</h4>
     <input type="text" id="vereinSuche" placeholder="Verein suchen …" autocomplete="off">
     <div class="prov-list" id="vereinList">Lädt …</div>
+    <!-- Spielplan-Abo (24.08.2026): je gewaehltem Verein ein Kalender-Link
+         (webcal -> /kalender/<slug>.ics) -- die Kalender-App abonniert den
+         Spielplan samt Sendern und haelt ihn von selbst aktuell. -->
+    <div id="vereinKalender" style="display:none">
+      <div id="vereinKalenderLinks"></div>
+      <p class="prov-hint" id="vereinKalenderHinweis"></p>
+    </div>
     <div class="prov-foot">
       <span class="prov-hint" id="vereinHint"></span>
       <button type="button" id="vereinSaveBtn" class="auth-submit">Speichern</button>
@@ -2485,6 +2580,19 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Heute',
     sportMorgen: 'Morgen',
+    sportModusPlan: 'Spielplan',
+    sportModusKonf: 'Konferenz',
+    sportModusTab: 'Tabelle',
+    sportTorjaeger: 'Torschützen',
+    sportTabKopf: { sp: 'Sp.', sun: 'S-U-N', tore: 'Tore', pkt: 'Pkt.' },
+    sportKonfLeer: 'Heute keine Spiele für diese Auswahl.',
+    sportTabFehler: 'Tabelle konnte nicht geladen werden.',
+    sportDetailsDuelle: 'Direktvergleich',
+    sportDetailsForm: 'Formkurve',
+    sportDetailsLeer: 'Keine Daten zu diesem Spiel gefunden.',
+    sportDetailsMehr: 'Zur Spielseite →',
+    sportKalenderAbo: function(n){ return '📅 Spielplan von ' + n + ' abonnieren'; },
+    sportKalenderHinweis: 'Öffnet deine Kalender-App: Der Spielplan samt Sendern landet als Abo im Kalender und hält sich von selbst aktuell.',
     gesehenZuWl: 'Du hast diesen Titel als gesehen markiert. Auf der Watchlist gilt er nicht mehr als gesehen: Er verschwindet aus „Gesehen“ und deine Sterne-Bewertung zählt nicht mehr für deinen Taste-Score. Trotzdem auf die Watchlist setzen?',
     wischFilme: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
     wischSerien: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
@@ -2831,6 +2939,19 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Today',
     sportMorgen: 'Tomorrow',
+    sportModusPlan: 'Schedule',
+    sportModusKonf: 'Matchday live',
+    sportModusTab: 'Table',
+    sportTorjaeger: 'Top scorers',
+    sportTabKopf: { sp: 'P', sun: 'W-D-L', tore: 'Goals', pkt: 'Pts' },
+    sportKonfLeer: 'No matches today for this selection.',
+    sportTabFehler: 'Could not load the table.',
+    sportDetailsDuelle: 'Head-to-head',
+    sportDetailsForm: 'Form',
+    sportDetailsLeer: 'No data found for this match.',
+    sportDetailsMehr: 'Match page →',
+    sportKalenderAbo: function(n){ return '📅 Subscribe to the ' + n + ' schedule'; },
+    sportKalenderHinweis: 'Opens your calendar app: the schedule including broadcasters is added as a subscription and keeps itself up to date.',
     gesehenZuWl: 'You marked this title as watched. On the watchlist it no longer counts as watched: it disappears from “Watched” and your star rating no longer counts towards your Taste Score. Add it to the watchlist anyway?',
     wischFilme: 'Swiping left removes the title from your movies list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
     wischSerien: 'Swiping left removes the title from your series list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
@@ -3174,6 +3295,19 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Aujourd’hui',
     sportMorgen: 'Demain',
+    sportModusPlan: 'Calendrier',
+    sportModusKonf: 'Multiplex',
+    sportModusTab: 'Classement',
+    sportTorjaeger: 'Buteurs',
+    sportTabKopf: { sp: 'MJ', sun: 'V-N-D', tore: 'Buts', pkt: 'Pts' },
+    sportKonfLeer: 'Aucun match aujourd’hui pour cette sélection.',
+    sportTabFehler: 'Impossible de charger le classement.',
+    sportDetailsDuelle: 'Face-à-face',
+    sportDetailsForm: 'Forme',
+    sportDetailsLeer: 'Aucune donnée pour ce match.',
+    sportDetailsMehr: 'Page du match →',
+    sportKalenderAbo: function(n){ return '📅 S’abonner au calendrier de ' + n; },
+    sportKalenderHinweis: 'Ouvre ton application calendrier : le calendrier avec les diffuseurs est ajouté en abonnement et reste à jour tout seul.',
     gesehenZuWl: 'Tu as marqué ce titre comme vu. Sur la watchlist, il ne compte plus comme vu : il disparaît de « Vus » et ta note en étoiles ne compte plus pour ton Taste Score. L’ajouter quand même à la watchlist ?',
     wischFilme: 'Balayer vers la gauche retire le titre de ta liste de films. Tu peux le rajouter à tout moment via « Découvrir » ou la recherche. Cette question ne te sera posée qu’une seule fois. Retirer maintenant ?',
     wischSerien: 'Balayer vers la gauche retire le titre de ta liste de séries. Tu peux le rajouter à tout moment via « Découvrir » ou la recherche. Cette question ne te sera posée qu’une seule fois. Retirer maintenant ?',
@@ -3517,6 +3651,19 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Hoy',
     sportMorgen: 'Mañana',
+    sportModusPlan: 'Calendario',
+    sportModusKonf: 'En directo',
+    sportModusTab: 'Clasificación',
+    sportTorjaeger: 'Goleadores',
+    sportTabKopf: { sp: 'PJ', sun: 'G-E-P', tore: 'Goles', pkt: 'Pts' },
+    sportKonfLeer: 'Hoy no hay partidos para esta selección.',
+    sportTabFehler: 'No se pudo cargar la clasificación.',
+    sportDetailsDuelle: 'Cara a cara',
+    sportDetailsForm: 'Forma',
+    sportDetailsLeer: 'No hay datos de este partido.',
+    sportDetailsMehr: 'Página del partido →',
+    sportKalenderAbo: function(n){ return '📅 Suscribirse al calendario del ' + n; },
+    sportKalenderHinweis: 'Abre tu app de calendario: el calendario con las cadenas se añade como suscripción y se mantiene actualizado solo.',
     gesehenZuWl: 'Has marcado este título como visto. En la watchlist ya no cuenta como visto: desaparece de «Vistos» y tu valoración con estrellas deja de contar para tu Taste Score. ¿Añadirlo a la watchlist de todos modos?',
     wischFilme: 'Al deslizar a la izquierda, el título se elimina de tu lista de películas. Puedes volver a añadirlo en cualquier momento con «Descubrir» o la búsqueda. Solo se te preguntará esta vez. ¿Eliminar ahora?',
     wischSerien: 'Al deslizar a la izquierda, el título se elimina de tu lista de series. Puedes volver a añadirlo en cualquier momento con «Descubrir» o la búsqueda. Solo se te preguntará esta vez. ¿Eliminar ahora?',
@@ -3860,6 +4007,19 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Oggi',
     sportMorgen: 'Domani',
+    sportModusPlan: 'Calendario',
+    sportModusKonf: 'Diretta',
+    sportModusTab: 'Classifica',
+    sportTorjaeger: 'Marcatori',
+    sportTabKopf: { sp: 'PG', sun: 'V-N-P', tore: 'Gol', pkt: 'Pti' },
+    sportKonfLeer: 'Oggi nessuna partita per questa selezione.',
+    sportTabFehler: 'Impossibile caricare la classifica.',
+    sportDetailsDuelle: 'Scontri diretti',
+    sportDetailsForm: 'Forma',
+    sportDetailsLeer: 'Nessun dato per questa partita.',
+    sportDetailsMehr: 'Pagina della partita →',
+    sportKalenderAbo: function(n){ return '📅 Abbonati al calendario di ' + n; },
+    sportKalenderHinweis: 'Apre la tua app calendario: il calendario con le emittenti viene aggiunto come abbonamento e si aggiorna da solo.',
     gesehenZuWl: 'Hai segnato questo titolo come visto. Sulla watchlist non conta più come visto: sparisce da “Visti” e le tue stelle non contano più per il tuo Taste Score. Aggiungerlo comunque alla watchlist?',
     wischFilme: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista dei film. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri novità” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
     wischSerien: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista delle serie. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri novità” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
@@ -4203,6 +4363,19 @@ var UI_TEXTE = {
     sportLive: 'LIVE',
     sportHeuteWort: 'Vandaag',
     sportMorgen: 'Morgen',
+    sportModusPlan: 'Programma',
+    sportModusKonf: 'Live',
+    sportModusTab: 'Stand',
+    sportTorjaeger: 'Topscorers',
+    sportTabKopf: { sp: 'W', sun: 'W-G-V', tore: 'Doelp.', pkt: 'Ptn' },
+    sportKonfLeer: 'Vandaag geen wedstrijden voor deze selectie.',
+    sportTabFehler: 'Stand kon niet worden geladen.',
+    sportDetailsDuelle: 'Onderlinge duels',
+    sportDetailsForm: 'Vorm',
+    sportDetailsLeer: 'Geen gegevens voor deze wedstrijd.',
+    sportDetailsMehr: 'Wedstrijdpagina →',
+    sportKalenderAbo: function(n){ return '📅 Abonneer op het programma van ' + n; },
+    sportKalenderHinweis: 'Opent je agenda-app: het programma met zenders wordt als abonnement toegevoegd en blijft vanzelf actueel.',
     gesehenZuWl: 'Je hebt deze titel als gezien gemarkeerd. Op de watchlist telt hij niet meer als gezien: hij verdwijnt uit “Gezien” en je sterrenbeoordeling telt niet meer mee voor je Taste Score. Toch aan de watchlist toevoegen?',
     wischFilme: 'Naar links vegen verwijdert de titel uit je filmlijst. Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
     wischSerien: 'Naar links vegen verwijdert de titel uit je serielijst. Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
@@ -4546,6 +4719,19 @@ var UI_TEXTE = {
     sportLive: 'AO VIVO',
     sportHeuteWort: 'Hoje',
     sportMorgen: 'Amanhã',
+    sportModusPlan: 'Calendário',
+    sportModusKonf: 'Ao vivo',
+    sportModusTab: 'Classificação',
+    sportTorjaeger: 'Artilheiros',
+    sportTabKopf: { sp: 'J', sun: 'V-E-D', tore: 'Gols', pkt: 'Pts' },
+    sportKonfLeer: 'Hoje não há jogos para esta seleção.',
+    sportTabFehler: 'Não foi possível carregar a classificação.',
+    sportDetailsDuelle: 'Confronto direto',
+    sportDetailsForm: 'Forma',
+    sportDetailsLeer: 'Sem dados para este jogo.',
+    sportDetailsMehr: 'Página do jogo →',
+    sportKalenderAbo: function(n){ return '📅 Assinar o calendário de ' + n; },
+    sportKalenderHinweis: 'Abre seu app de calendário: o calendário com as emissoras é adicionado como assinatura e se mantém atualizado sozinho.',
     gesehenZuWl: 'Você marcou este título como assistido. Na watchlist ele deixa de contar como assistido: ele some de “Assistidos” e sua avaliação em estrelas deixa de contar para o seu Taste Score. Adicionar à watchlist mesmo assim?',
     wischFilme: 'Deslizar para a esquerda remove o título da sua lista de filmes. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
     wischSerien: 'Deslizar para a esquerda remove o título da sua lista de séries. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
@@ -9946,6 +10132,10 @@ var SPORT_ABOS_KEY = 'mm_sport_abos';
 // Christian 19. August 2026) -- jedes Oeffnen der Seite beginnt damit.
 var SPORT_COMPS = [];
 var SPORT_ANSICHT_KEY = 'mm_sport_ansicht';
+// Ansicht der Sport-Seite (24.08.2026): 'plan' (Spielplan, Standard),
+// 'konf' (Konferenz: heutige Spiele verdichtet) oder 'tab' (Ligatabelle
+// samt Torschuetzen). Jedes Oeffnen beginnt beim Spielplan.
+var SPORT_MODUS = 'plan';
 function gespeicherteAnsicht(){
   try {
     var a = JSON.parse(localStorage.getItem(SPORT_ANSICHT_KEY) || '{}');
@@ -10161,14 +10351,16 @@ document.getElementById('sportTeilenFab').onclick = function(){
    Spielkarte laesst sich nach rechts ziehen; ab 60px wird das Spiel samt
    Link auf seine CouchUltras-Seite geteilt. Die Seiten-Basis kommt vom
    Server (SPORT_DATA.seiten). ---- */
+// Gleiche Transkription wie slugify() im Backend (lib/slug.js) -- auch die
+// Kalender-Route /kalender/<slug>.ics findet den Verein darueber.
+function sportSlug(t){
+  return String(t).toLowerCase()
+    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
 function sportSpielUrl(spiel){
   var seiten = (SPORT_DATA && SPORT_DATA.seiten) || { basis: 'https://couchultras.com', prefix: '/spiel' };
-  var slug = function(t){
-    return String(t).toLowerCase()
-      .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
-      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-  };
-  return seiten.basis + seiten.prefix + '/' + slug(spiel.h) + '-' + slug(spiel.a) + '-' + spiel.id;
+  return seiten.basis + seiten.prefix + '/' + sportSlug(spiel.h) + '-' + sportSlug(spiel.a) + '-' + spiel.id;
 }
 function sportSpielTeilen(spiel){
   var url = sportSpielUrl(spiel);
@@ -10331,11 +10523,67 @@ function closeSenderModal(){ _senderModal.style.display = 'none'; }
 document.getElementById('senderModalX').onclick = closeSenderModal;
 _senderModal.addEventListener('click', function(e){ if (e.target === _senderModal) closeSenderModal(); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _senderModal.style.display !== 'none') closeSenderModal(); });
-// EIN Handler fuer alle Badges (die Listen werden staendig neu gezeichnet).
+// EIN Handler fuer alle Badges (die Listen werden staendig neu gezeichnet) --
+// und seit 24.08.2026 auch fuer das Aufklappen der Spielkarten-Details
+// (Direktvergleich + Formkurve). Badges und Links behalten Vorrang.
 document.getElementById('sportPage').addEventListener('click', function(e){
   var b = e.target.closest('.tv-badge');
-  if (b) openSenderModal(b.dataset);
+  if (b) { openSenderModal(b.dataset); return; }
+  if (e.target.closest('a, .sport-details')) return;
+  var li = e.target.closest('li.sport-match');
+  if (li && li._spiel) sportDetailsToggle(li, li._spiel);
 });
+
+/* ---- Spielkarten-Details: Klick auf die Karte klappt Direktvergleich und
+   Formkurve auf (GET /api/sport/spiel/<id>/details, einmal je Spiel geholt
+   und am Geraet gemerkt). Fehlen Daten (Turnier-Platzhalter ohne Team-IDs),
+   sagt die Karte das ehrlich statt leer zu bleiben. ---- */
+var _spielDetails = {};    // Spiel-ID -> Antwort der Details-Route
+function sportDetailsDatum(iso){
+  var d = new Date(iso + 'T12:00:00Z');
+  return isNaN(d) ? iso : d.toLocaleDateString(LOCALE, { day: '2-digit', month: '2-digit', year: '2-digit' });
+}
+function sportFormHtml(name, form){
+  if (!form || !form.length) return '';
+  var punkte = form.map(function(f){
+    var titel = (f.tore ? f.tore + ' ' : '') + f.gegner;
+    return '<span class="form-punkt f-' + (f.ausgang || 'u').toLowerCase() + '" title="' + escAttr(titel) + '">' +
+           esc(f.ausgang || '·') + '</span>';
+  }).join('');
+  return '<div class="sport-formzeile"><span class="f-team">' + esc(name) + '</span>' + punkte + '</div>';
+}
+function sportDetailsHtml(spiel, d){
+  var html = '';
+  if (d.duelle && d.duelle.length) {
+    html += '<h5>' + esc(TXT.sportDetailsDuelle) + '</h5>' +
+      d.duelle.slice(0, 5).map(function(u){
+        return '<div class="sport-duell"><span class="d-datum">' + esc(sportDetailsDatum(u.datum)) + '</span>' +
+               '<span class="d-paarung">' + esc(u.heim + ' – ' + u.gast) + '</span>' +
+               '<span class="d-stand">' + esc(u.th + ':' + u.ta) + '</span></div>';
+      }).join('');
+  }
+  var form = sportFormHtml(spiel.hk || spiel.h, d.formHeim) + sportFormHtml(spiel.ak || spiel.a, d.formGast);
+  if (form) html += '<h5>' + esc(TXT.sportDetailsForm) + '</h5>' + form;
+  if (!html) html = esc(TXT.sportDetailsLeer);
+  // Weiterfuehrend: die SEO-Spielseite (Vorbericht, Tabelle, FAQ) -- dieselbe
+  // Adresse, die auch das Wisch-Teilen verschickt.
+  html += '<div><a class="details-mehr" href="' + escAttr(sportSpielUrl(spiel)) +
+          '" target="_blank" rel="noopener">' + esc(TXT.sportDetailsMehr) + '</a></div>';
+  return html;
+}
+function sportDetailsToggle(li, spiel){
+  var offen = li.querySelector('.sport-details');
+  if (offen) { offen.remove(); return; }
+  var det = document.createElement('div');
+  det.className = 'sport-details';
+  det.textContent = TXT.laedt;
+  li.appendChild(det);
+  var zeigen = function(d){ if (det.isConnected) det.innerHTML = sportDetailsHtml(spiel, d); };
+  if (_spielDetails[spiel.id]) { zeigen(_spielDetails[spiel.id]); return; }
+  apiRequest('GET', '/api/sport/spiel/' + encodeURIComponent(spiel.id) + '/details')
+    .then(function(d){ _spielDetails[spiel.id] = d; zeigen(d); })
+    .catch(function(){ if (det.isConnected) det.textContent = TXT.sportDetailsLeer; });
+}
 
 function sportSpielLi(spiel){
   var li = document.createElement('li');
@@ -10360,6 +10608,7 @@ function sportSpielLi(spiel){
     '<div class="sport-teams">' + logo(spiel.hl) + '<span>' + esc(spiel.h) + '</span>' +
     '<span class="sport-vs">–</span>' + logo(spiel.al) + '<span>' + esc(spiel.a) + '</span>' + status + '</div>' +
     '<div class="sport-tv">' + (spiel.tv || []).map(sportBadgeHtml).join('') + '</div>';
+  li._spiel = spiel;   // fuer das Aufklappen der Details (Klick-Handler oben)
   sportWischTeilen(li, spiel);
   return li;
 }
@@ -10490,10 +10739,153 @@ function renderSportSection(key, spiele){
   }
 }
 
+/* ---- Ansichts-Umschalter: Spielplan / Konferenz / Tabelle. Der Tabellen-
+   Chip erscheint nur, wenn es Ligen mit Tabelle gibt (bl1/bl2/bl3). ---- */
+function sportTabLigen(){
+  return ['bl1', 'bl2', 'bl3'].filter(function(c){ return SPORT_DATA.wettbewerbe[c]; });
+}
+function renderSportModusChips(){
+  var el = document.getElementById('sportModusChips');
+  var modi = [['plan', TXT.sportModusPlan], ['konf', TXT.sportModusKonf]];
+  if (sportTabLigen().length) modi.push(['tab', TXT.sportModusTab]);
+  el.innerHTML = modi.map(function(m){
+    return '<button type="button" data-modus="' + m[0] + '"' +
+           (SPORT_MODUS === m[0] ? ' class="active"' : '') + '>' + esc(m[1]) + '</button>';
+  }).join('');
+  el.querySelectorAll('button').forEach(function(b){
+    b.onclick = function(){
+      if (SPORT_MODUS === b.dataset.modus) return;
+      SPORT_MODUS = b.dataset.modus;
+      renderSportPage();
+      window.scrollTo(0, 0);
+    };
+  });
+}
+
+/* ---- Konferenz: alle HEUTIGEN Spiele der aktuellen Filter als verdichtete
+   Zeilen -- laufende zuerst (Stand mittig), dann kommende, dann beendete.
+   Der Minuten-Nachlader oben zeichnet auch diese Ansicht frisch. ---- */
+function renderSportKonferenz(gefiltert){
+  var el = document.getElementById('sportKonfList');
+  var heute0 = new Date(); heute0.setHours(0, 0, 0, 0);
+  var morgen0 = heute0.getTime() + 86400000;
+  var jetzt = Date.now();
+  function rang(s){
+    var ko = new Date(s.ko).getTime();
+    if (!s.fin && jetzt >= ko && jetzt < ko + 2.5 * 3600000) return 0;   // laeuft
+    if (!s.fin && ko > jetzt) return 1;                                  // kommt noch
+    return 2;                                                            // vorbei
+  }
+  var heutige = gefiltert.filter(function(s){ return new Date(s.ko).getTime() < morgen0; })
+    .sort(function(a, b){ return rang(a) - rang(b) || new Date(a.ko) - new Date(b.ko); });
+  document.getElementById('sportKonfHeading').textContent =
+    TXT.sportLabels.heute + (heutige.length ? ' (' + heutige.length + ')' : '');
+  if (!heutige.length) {
+    el.innerHTML = '<li class="cinema-empty">' + esc(TXT.sportKonfLeer) + '</li>';
+    return;
+  }
+  var logo = function(url){ return url ? '<img src="' + escAttr(url) + '" alt="" loading="lazy">' : ''; };
+  el.innerHTML = heutige.map(function(s){
+    var laeuft = rang(s) === 0;
+    var zeit = laeuft
+      ? '<span class="konf-zeit live">' + esc(TXT.sportLive) + '</span>'
+      : '<span class="konf-zeit">' + esc(new Date(s.ko).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' })) + '</span>';
+    var stand = s.th != null
+      ? '<span class="konf-stand">' + esc(s.th + ':' + s.ta) + '</span>'
+      : '<span class="konf-stand offen">–:–</span>';
+    return '<li class="sport-konf">' + zeit +
+           '<span class="konf-heim"><span>' + esc(s.hk || s.h) + '</span>' + logo(s.hl) + '</span>' +
+           stand +
+           '<span class="konf-gast">' + logo(s.al) + '<span>' + esc(s.ak || s.a) + '</span></span></li>';
+  }).join('');
+}
+
+/* ---- Tabelle: Ligatabelle + Torschuetzen von /api/sport/tabelle/<liga>,
+   einmal je Liga geholt und am Geraet gemerkt (der Server cacht seinerseits
+   6 Stunden gegen OpenLigaDB). Eigene Vereine sind hervorgehoben. ---- */
+var _sportTabellen = {};      // Liga -> Antwort der Tabellen-Route
+var SPORT_TAB_LIGA = null;    // zuletzt gewaehlte Liga der Tabellen-Ansicht
+function renderSportTabelle(){
+  var ligen = sportTabLigen();
+  if (!ligen.length) return;
+  if (!SPORT_TAB_LIGA || ligen.indexOf(SPORT_TAB_LIGA) === -1) {
+    // Startliga: die erste gewaehlte Liga aus den Wettbewerbs-Filtern des
+    // Spielplans, sonst die oberste (Bundesliga).
+    SPORT_TAB_LIGA = SPORT_COMPS.filter(function(c){ return ligen.indexOf(c) !== -1; })[0] || ligen[0];
+  }
+  var chips = document.getElementById('sportTabLigaChips');
+  chips.innerHTML = ligen.map(function(c){
+    return '<button type="button" data-liga="' + escAttr(c) + '"' +
+           (SPORT_TAB_LIGA === c ? ' class="active"' : '') + '>' +
+           esc(SPORT_DATA.wettbewerbe[c].name || c) + '</button>';
+  }).join('');
+  chips.querySelectorAll('button').forEach(function(b){
+    b.onclick = function(){ SPORT_TAB_LIGA = b.dataset.liga; renderSportTabelle(); };
+  });
+  var liga = SPORT_TAB_LIGA;
+  var inhalt = document.getElementById('sportTabInhalt');
+  var zeigen = function(d){
+    // Antwort einer inzwischen abgewaehlten Liga/Ansicht verwerfen.
+    if (SPORT_MODUS !== 'tab' || SPORT_TAB_LIGA !== liga) return;
+    var meine = MEINE_VEREINE.map(function(v){ return v.n; });
+    var k = TXT.sportTabKopf;
+    var zeilen = d.tabelle.map(function(t, i){
+      return '<tr' + (meine.indexOf(t.name) !== -1 ? ' class="hervor"' : '') + '>' +
+        '<td class="num">' + (i + 1) + '</td>' +
+        '<td><span class="t-team">' + (t.logo ? '<img src="' + escAttr(t.logo) + '" alt="" loading="lazy">' : '') +
+        '<span>' + esc(t.name) + '</span></span></td>' +
+        '<td class="num">' + t.sp + '</td>' +
+        '<td class="num t-sun">' + t.s + '-' + t.u + '-' + t.n + '</td>' +
+        '<td class="num">' + t.tore + ':' + t.gegen + '</td>' +
+        '<td class="num t-pkt">' + t.pkt + '</td></tr>';
+    }).join('');
+    var html = '<h3 class="cinema-heading">' + esc((SPORT_DATA.wettbewerbe[liga] || {}).name || liga) +
+      (d.saison ? ' · ' + esc(d.saison) + '/' + esc(String(Number(d.saison) + 1).slice(-2)) : '') + '</h3>' +
+      '<div class="sport-tab-wrap"><table class="sport-tabelle">' +
+      '<thead><tr><th class="num">#</th><th></th><th class="num">' + esc(k.sp) + '</th>' +
+      '<th class="num t-sun">' + esc(k.sun) + '</th><th class="num">' + esc(k.tore) + '</th>' +
+      '<th class="num">' + esc(k.pkt) + '</th></tr></thead><tbody>' + zeilen + '</tbody></table></div>';
+    if (d.torschuetzen && d.torschuetzen.length) {
+      html += '<h3 class="cinema-heading">' + esc(TXT.sportTorjaeger) + '</h3>' +
+        '<div class="sport-tab-wrap"><table class="sport-tabelle"><tbody>' +
+        d.torschuetzen.map(function(t, i){
+          return '<tr><td class="num">' + (i + 1) + '</td><td style="width:100%">' + esc(t.name) + '</td>' +
+                 '<td class="num t-pkt">' + t.tore + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+    }
+    inhalt.innerHTML = html;
+  };
+  if (_sportTabellen[liga]) { zeigen(_sportTabellen[liga]); return; }
+  inhalt.innerHTML = '<div class="cinema-empty">' + esc(TXT.laedt) + '</div>';
+  apiRequest('GET', '/api/sport/tabelle/' + encodeURIComponent(liga))
+    .then(function(d){ _sportTabellen[liga] = d; zeigen(d); })
+    .catch(function(){
+      if (SPORT_MODUS === 'tab' && SPORT_TAB_LIGA === liga) {
+        inhalt.innerHTML = '<div class="cinema-empty">' + esc(TXT.sportTabFehler) + '</div>';
+      }
+    });
+}
+
 function renderSportPage(){
   var data = SPORT_DATA;
   if (!data) return;
   document.getElementById('sportPageTitle').textContent = TXT.sportTitel;
+  renderSportModusChips();
+  var planWrap = document.getElementById('sportPlanWrap');
+  var konfSection = document.getElementById('sportKonfSection');
+  var tabSection = document.getElementById('sportTabSection');
+  var filterReihen = [document.getElementById('sportChips'), document.getElementById('sportVerfChips')];
+  // Tabellen-Ansicht: eigene Liga-Chips statt der Spielplan-Filter.
+  if (SPORT_MODUS === 'tab') {
+    filterReihen.forEach(function(el){ el.style.display = 'none'; });
+    planWrap.style.display = 'none';
+    konfSection.style.display = 'none';
+    tabSection.style.display = '';
+    renderSportTabelle();
+    return;
+  }
+  filterReihen.forEach(function(el){ el.style.display = ''; });
+  tabSection.style.display = 'none';
   renderSportChips();
   var begriffe = aktiveSuchbegriffe();
   var gefiltert = data.spiele.filter(function(s){
@@ -10504,6 +10896,14 @@ function renderSportPage(){
         SPORT_VEREIN_AKTIV.indexOf(s.h) === -1 && SPORT_VEREIN_AKTIV.indexOf(s.a) === -1) return false;
     return sportTrifft(s, begriffe);
   });
+  if (SPORT_MODUS === 'konf') {
+    planWrap.style.display = 'none';
+    konfSection.style.display = '';
+    renderSportKonferenz(gefiltert);
+    return;
+  }
+  konfSection.style.display = 'none';
+  planWrap.style.display = '';
   // Drei Bereiche nach ORTSTAGEN: Heute (inkl. laufender Spiele -- der Server
   // liefert ab 8h rueckwirkend), Morgen bis +7 Tage, Rest (Server-Deckel +70).
   var heute0 = new Date(); heute0.setHours(0, 0, 0, 0);
@@ -10555,6 +10955,7 @@ function openSportPage(){
   // "Alle" bzw. das Abwaehlen der Logos oeffnet den Blick wieder.
   SPORT_COMPS = gespeicherteAnsicht().slice();
   SPORT_VEREIN_AKTIV = MEINE_VEREINE.map(function(v){ return v.n; });
+  SPORT_MODUS = 'plan';
   sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
   updateFilterRowUI();
   // Kopf komplett auf Sport: Erklaerzeilen, Suche und Tab-Reihe weg (siehe
@@ -10708,6 +11109,22 @@ function renderVereinList(){
              logo + '<span>' + esc(v.n) + '</span></label>';
     }).join('');
   document.getElementById('vereinHint').textContent = gewaehlt.size ? TXT.nAusgewaehlt(gewaehlt.size) : '';
+  renderVereinKalender();
+}
+/* Kalender-Abo je gewaehltem Verein (24.08.2026): webcal:// oeffnet die
+   Kalender-App direkt mit dem Abo-Dialog -- dahinter steckt schlicht
+   /kalender/<slug>.ics dieses Servers (backend/lib/sportKalender.js).
+   Angezeigt fuer die AKTUELLE Auswahl im Fenster, noch vor dem Speichern --
+   wer nur den Kalender will, muss die Auswahl nicht erst speichern. */
+function renderVereinKalender(){
+  var wrap = document.getElementById('vereinKalender');
+  if (!_vereinAuswahl.length) { wrap.style.display = 'none'; return; }
+  document.getElementById('vereinKalenderLinks').innerHTML = _vereinAuswahl.map(function(v){
+    return '<a class="kalender-link" href="webcal://' + escAttr(location.host + '/kalender/' + sportSlug(v.n) + '.ics') + '">' +
+           esc(TXT.sportKalenderAbo(v.n)) + '</a>';
+  }).join('');
+  document.getElementById('vereinKalenderHinweis').textContent = TXT.sportKalenderHinweis;
+  wrap.style.display = '';
 }
 _vereinList.addEventListener('change', function(e){
   var input = e.target;

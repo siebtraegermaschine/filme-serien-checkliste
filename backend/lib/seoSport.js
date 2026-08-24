@@ -27,8 +27,8 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { slugify } from './slug.js';
 import { attrEsc, dokument, brotkrumenHtml, brotkrumenJsonLd, SITE } from './seoRender.js';
+import { ligaTabelle, teamForm } from './sportDaten.js';
 
-const OLB = 'https://api.openligadb.de';
 const LOCALE = 'de-de';
 
 /* ---- Redaktionelle Inhalte (Vorberichte, Aufstellungen fuer Topspiele):
@@ -47,76 +47,9 @@ function spielInhalte(externalId) {
   return e && typeof e === 'object' ? e : null;
 }
 
-/* ---- Zusatzdaten von OpenLigaDB, prozessintern gecacht. 6 Stunden TTL:
-   Tabellenstand und Form ändern sich hoechstens am Spieltag, und die
-   Crawler-Last darf nicht 1:1 auf OpenLigaDB durchschlagen. Fehler liefern
-   null -- die Seite laesst den Block dann schlicht weg. ---- */
-const TTL_MS = 6 * 3_600_000;
-const tabellenCache = new Map();   // 'bl1/2026' -> { at, rows }
-const formCache = new Map();       // teamId -> { at, spiele }
-
-async function olbJson(pfad) {
-  try {
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), 8000);
-    const res = await fetch(OLB + pfad, { signal: ctrl.signal, headers: { Accept: 'application/json' } });
-    clearTimeout(t);
-    if (!res.ok) return null;
-    return await res.json();
-  } catch {
-    return null;
-  }
-}
-
-// Nur die drei Ligen haben eine Tabelle; Pokal & Co. lassen den Block weg.
-const LIGEN_MIT_TABELLE = new Set(['bl1', 'bl2', 'bl3']);
-
-async function ligaTabelle(wettbewerb, saison) {
-  if (!LIGEN_MIT_TABELLE.has(wettbewerb)) return null;
-  const key = `${wettbewerb}/${saison}`;
-  const c = tabellenCache.get(key);
-  if (c && Date.now() - c.at < TTL_MS) return c.rows;
-  const rows = await olbJson(`/getbltable/${wettbewerb}/${saison}`);
-  const sauber = Array.isArray(rows) && rows.length ? rows : null;
-  tabellenCache.set(key, { at: Date.now(), rows: sauber });
-  return sauber;
-}
-
-// Formkurve: letzte beendete Spiele eines Teams. getmatchesbyteamid liefert
-// AUCH Community-Spielereien ("blclaude", Testligen) -- deshalb streng auf
-// die eigenen Wettbewerbe gefiltert (Kleinschreibung: OpenLigaDB ist da
-// nicht konsequent).
-const FORM_SHORTCUTS = new Set(['bl1', 'bl2', 'bl3', 'dfb', 'ucl', 'uel', 'nla', 'blsupercup']);
-
-async function teamForm(teamId, teamName) {
-  if (!teamId) return null;
-  const c = formCache.get(teamId);
-  if (c && Date.now() - c.at < TTL_MS) return c.spiele;
-  const roh = await olbJson(`/getmatchesbyteamid/${teamId}/16/0`);
-  let spiele = null;
-  if (Array.isArray(roh)) {
-    spiele = roh
-      .filter((m) => m && m.matchIsFinished && FORM_SHORTCUTS.has(String(m.leagueShortcut || '').toLowerCase()))
-      .sort((a, b) => String(b.matchDateTimeUTC).localeCompare(String(a.matchDateTimeUTC)))
-      .slice(0, 5)
-      .map((m) => {
-        const erg = (m.matchResults || []).find((r) => r.resultTypeID === 2) || (m.matchResults || [])[0] || {};
-        const heim = m.team1.teamName === teamName;
-        const eigene = heim ? erg.pointsTeam1 : erg.pointsTeam2;
-        const andere = heim ? erg.pointsTeam2 : erg.pointsTeam1;
-        return {
-          gegner: heim ? m.team2.teamName : m.team1.teamName,
-          heim,
-          tore: eigene != null ? `${erg.pointsTeam1}:${erg.pointsTeam2}` : null,
-          ausgang: eigene == null ? null : eigene > andere ? 'S' : eigene < andere ? 'N' : 'U',
-          datum: String(m.matchDateTimeUTC || '').slice(0, 10),
-        };
-      });
-    if (!spiele.length) spiele = null;
-  }
-  formCache.set(teamId, { at: Date.now(), spiele });
-  return spiele;
-}
+/* ---- Zusatzdaten von OpenLigaDB (Tabelle, Formkurve): wohnen seit den
+   App-Ansichten vom 24.08.2026 in lib/sportDaten.js -- App-Routen und diese
+   SEO-Seiten teilen sich dort dieselben 6h-Caches. ---- */
 
 /* ---- Rechte-Matrix (sport-rechte.json) fuer die Wettbewerbs-Seiten:
    aus den Regeln entstehen die "Wer uebertraegt?"-Erklaertexte. Datei liegt
