@@ -710,17 +710,26 @@
   .sender-cta { display:inline-block; text-decoration:none; margin-top:6px; margin-right:8px; }
   .tv-zusatz { font-weight:400; opacity:.8; }
 
-  /* Ansichts-Umschalter: eigene Reihe in voller Breite. */
-  .sport-modus { margin-top:14px; }
-  /* Untere Filterzeile: links die Chips (scrollbar, damit drei Vereinslogos
-     neben "Alle" nie den Link verdraengen), rechts "+ Deine Ansicht" --
-     der Link bleibt stehen, wenn die Chips gewischt werden. Diese Zeile ist
-     die letzte vor der ersten Ueberschrift und traegt deren Abstand. */
-  .sport-verf-zeile { display:flex; align-items:center; gap:10px;
-    max-width:700px; margin:6px auto 26px; padding:0 20px; box-sizing:border-box; }
-  .sport-verf-zeile .sport-chips { margin:0; padding:0; max-width:none;
+  /* Ansichts-Zeile: links die Chips (scrollbar), rechts "+ Deine Ansicht" --
+     der Link bleibt stehen, wenn die Chips gewischt werden. Diese Zeile gibt
+     es in allen drei Ansichten, der Link sitzt damit immer an derselben
+     Stelle. */
+  .sport-modus-zeile { display:flex; align-items:center; gap:10px;
+    max-width:700px; margin:14px auto 0; padding:0 20px; box-sizing:border-box; }
+  .sport-modus-zeile .sport-chips { margin:0; padding:0; max-width:none;
     flex:1 1 auto; min-width:0; }
-  .sport-verf-zeile .sport-verein-link { flex:0 0 auto; margin-left:auto; }
+  .sport-modus-zeile .sport-verein-link { flex:0 0 auto; margin-left:auto; }
+  /* Immer EINE Zeile: Auf schmalen Schirmen ruecken Chips und Link enger
+     zusammen, damit alle drei Ansichten neben den Link passen (bei 375px
+     geht es damit auf). Reicht es doch nicht -- 320px, laengere Sprachen --,
+     scrollt die Chip-Reihe (min-width:0 erlaubt das Schrumpfen), der Link
+     bleibt stehen. */
+  @media (max-width: 560px) {
+    .sport-modus-zeile { gap:8px; }
+    .sport-modus-zeile .sport-chips { gap:6px; }
+    .sport-modus button { font-size:12.5px; padding:5px 8px; }
+    .sport-modus-zeile .sport-verein-link { font-size:12px; }
+  }
 
   /* Aufklappbare Spielkarten-Details: Direktvergleich + Formkurve. Die
      Karte selbst bleibt das Klickziel (ausser Badges/Links), der Bereich
@@ -1795,19 +1804,20 @@
        Rechts daneben "+ Deine Ansicht" (Christian, 24.08.2026): Der Link
        stand bis dahin neben der Ueberschrift -- hier gehoert er hin, denn er
        stellt dieselbe Sache ein wie die Chips daneben (was sehe ich?). -->
-  <div class="sport-chips sport-modus" id="sportModusChips"></div>
-  <div class="sport-chips" id="sportChips"></div>
-  <!-- Untere Filterzeile: links "Alle" und die Vereins-Logos, rechts der Link
-       zur Vorauswahl (Christian, 24.08.2026 -- er stand zuvor bei den
-       Ansichts-Chips). Die Anbieter-Filter sind hier entfallen, sie werden im
-       Fenster "Deine Ansicht" gesetzt. -->
-  <div class="sport-verf-zeile" id="sportVerfZeile">
-    <div class="sport-chips sport-chips-verf" id="sportVerfChips"></div>
+  <!-- Ansichts-Zeile: links die drei Ansichten, rechts der Link zur
+       Vorauswahl. Er steht bewusst HIER (Christian, 24.08.2026) -- diese
+       Zeile gibt es in allen drei Ansichten, die Filterzeile darunter nicht.
+       In der Verein-Zeile sass er sonst je nach Ansicht woanders. -->
+  <div class="sport-modus-zeile">
+    <div class="sport-chips sport-modus" id="sportModusChips"></div>
     <!-- Bewusst ein Textlink, kein Knopf (Christian, 19. August 2026):
-         oeffnet die Vereinsauswahl (#vereinModal); die gewaehlten Vereine
-         erscheinen als Logo-Chips links daneben. -->
+         oeffnet die Vereinsauswahl (#vereinModal). -->
     <span class="sport-verein-link" id="sportVereinBtn" role="button" tabindex="0">+ Deine Ansicht</span>
   </div>
+  <div class="sport-chips" id="sportChips"></div>
+  <!-- Untere Filterzeile: "Alle" und die Vereins-Logos. Die Anbieter-Filter
+       sind entfallen, sie werden im Fenster "Deine Ansicht" gesetzt. -->
+  <div class="sport-chips sport-chips-verf" id="sportVerfChips"></div>
   <div id="sportPlanWrap">
     <div class="cinema-section">
       <h3 class="cinema-heading" id="sportHeuteHeading">Heute</h3>
@@ -10705,6 +10715,28 @@ function sportWettbewerbsReihenfolge(data){
   return Object.keys(data.wettbewerbe).sort(function(a, b){ return rang(a) - rang(b); });
 }
 
+/* Verein oder Nationalmannschaft? OpenLigaDB sagt es nicht direkt -- aber
+   wer ausschliesslich in Laenderspiel-Wettbewerben antritt (Nations League,
+   EM, WM), ist eine Auswahl. Ohne Spiele im Bestand (Turnier noch weit weg)
+   gilt "Verein": lieber vorn einsortiert als faelschlich hinten. */
+var NATIONAL_COMPS = ['nla', 'em', 'wm'];
+function istNationalelf(name){
+  if (!SPORT_DATA) return false;
+  var nurNational = null;
+  SPORT_DATA.spiele.forEach(function(s){
+    if (s.h !== name && s.a !== name) return;
+    if (nurNational === null) nurNational = true;
+    if (NATIONAL_COMPS.indexOf(s.c) === -1) nurNational = false;
+  });
+  return nurNational === true;
+}
+// Anzeige-Reihenfolge der Vereins-Chips: Vereine zuerst, dann
+// Nationalmannschaften. Stabil -- die gespeicherte Auswahl bleibt unberuehrt.
+function meineVereineSortiert(){
+  var vereine = [], national = [];
+  MEINE_VEREINE.forEach(function(v){ (istNationalelf(v.n) ? national : vereine).push(v); });
+  return vereine.concat(national);
+}
 function sportSenderInfo(slug){
   return (SPORT_DATA && SPORT_DATA.sender[slug]) || { name: slug, frei: false, link: null };
 }
@@ -11145,7 +11177,9 @@ function renderSportChips(){
   var verfEl = document.getElementById('sportVerfChips');
   var vhtml =
     '<button type="button" data-verf="alle" class="' + (alleAktiv ? 'active' : '') + '">' + esc(TXT.sportAlle) + '</button>';
-  MEINE_VEREINE.forEach(function(v){
+  // Erst Vereine, dann Nationalmannschaften (Christian, 24.08.2026) --
+  // innerhalb der beiden Gruppen bleibt die Reihenfolge der Auswahl stehen.
+  meineVereineSortiert().forEach(function(v){
     var aktiv = SPORT_VEREIN_AKTIV.indexOf(v.n) !== -1;
     vhtml += '<button type="button" class="verein-chip' + (aktiv ? ' active' : '') + '" data-verein="' + escAttr(v.n) + '" title="' + escAttr(v.n) + '">' +
              (v.logo ? '<img src="' + escAttr(v.logo) + '" alt="' + escAttr(v.n) + '">' : esc(v.n)) + '</button>';
@@ -11694,7 +11728,7 @@ function renderPushKalender(){
   var wrap = document.getElementById('pushKalender');
   if (!MEINE_VEREINE.length) { wrap.style.display = 'none'; return; }
   document.getElementById('pushKalenderTitel').textContent = TXT.pushKalenderTitel;
-  document.getElementById('pushKalenderLinks').innerHTML = MEINE_VEREINE.map(function(v){
+  document.getElementById("pushKalenderLinks").innerHTML = meineVereineSortiert().map(function(v){
     return '<a class="kalender-link" href="webcal://' + escAttr(location.host + '/kalender/' + sportSlug(v.n) + '.ics') + '">' +
            esc(TXT.sportKalenderAbo(v.n)) + '</a>';
   }).join('');
