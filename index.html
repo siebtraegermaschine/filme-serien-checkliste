@@ -476,6 +476,8 @@
     text-align:left; padding:9px 10px; border-radius:6px; cursor:pointer; width:100%; }
   @media (hover: hover) { .nav-menu-item:hover { background:var(--card-hover); color:var(--accent); } }
   .nav-menu-sep { border:none; border-top:1px solid var(--border); margin:4px 4px; }
+  /* Aktive Ansicht in der Menue-Liste (Spielplan/Konferenz/Tabelle). */
+  .nav-menu-item.aktiv { color:var(--accent); background:var(--accent-soft); }
   .auth-modal { max-width:340px; }
   .auth-modal h3 { color:var(--accent); font-size:18px; margin-bottom:16px; text-align:center; }
   .similar-modal { width:100%; max-height:82vh; display:flex; flex-direction:column; }
@@ -731,7 +733,10 @@
      Logos, der Stand fett mittig. */
   li.sport-konf { display:grid; grid-template-columns:56px 1fr auto 1fr; align-items:center;
     gap:8px; background:var(--card); border:1px solid var(--border); border-radius:10px;
-    padding:9px 12px; margin-bottom:6px; font-size:13.5px; font-weight:600; color:var(--text); }
+    padding:9px 12px; margin-bottom:6px; font-size:13.5px; font-weight:600; color:var(--text);
+    cursor:pointer; }
+  /* Aufgeklappte Details ueberspannen alle vier Spalten der Zeile. */
+  li.sport-konf .sport-details { grid-column:1 / -1; font-weight:400; }
   .konf-zeit { font-size:12px; font-weight:700; color:var(--text-dim); white-space:nowrap; }
   .konf-zeit.live { color:#e05d5d; letter-spacing:.5px; }
   .konf-heim, .konf-gast { display:flex; align-items:center; gap:6px; min-width:0; }
@@ -1586,6 +1591,14 @@
          19. August 2026) -- als erster Punkt, damit der Bereich auffindbar
          bleibt, ohne die Reihe zu ueberfrachten. Nur fuer Region DE sichtbar
          (Senderrechte gelten fuer Deutschland, siehe Sport-Block im JS). -->
+    <!-- Die drei Ansichten der Sport-Seite ganz oben (Christian, 24.08.2026):
+         Sie sind das, was man hier am haeufigsten wechselt. Nur sichtbar,
+         solange die Sport-Seite offen ist (navSportAnsichten) -- in der
+         Film-App waeren sie sinnlos. Der aktive Punkt ist hervorgehoben. -->
+    <button type="button" id="navPlanBtn" class="nav-menu-item" style="display:none"></button>
+    <button type="button" id="navKonfBtn" class="nav-menu-item" style="display:none"></button>
+    <button type="button" id="navTabBtn" class="nav-menu-item" style="display:none"></button>
+    <hr class="nav-menu-sep" id="navSportSep" style="display:none">
     <button type="button" id="sportMenuBtn" class="nav-menu-item">⚽ Sport</button>
     <button type="button" id="howToBtn" class="nav-menu-item">Anleitung</button>
     <!-- "Einstellungen" ist seit dem 13. August auch ABGEMELDET sichtbar
@@ -1594,18 +1607,15 @@
          liegt im Geraet (localStorage) und zusaetzlich am Konto. Abgemeldet
          zeigt das Einstellungen-Fenster nur die kontofreien Punkte
          (einstellungenSichtbarkeit). -->
-    <!-- Direkt zum "Deine Ansicht"-Popup (Verein + Wettbewerbs-Vorauswahl)
-         -- derselbe Dialog wie der Textlink auf der Sport-Seite. -->
-    <button type="button" id="vereinMenuBtn" class="nav-menu-item">Dein Verein</button>
-    <!-- Aus den Einstellungen hierher gezogen (Christian, 21.08.2026):
-         die Sport-Abos gehoeren neben den Verein, nicht hinter einen
-         weiteren Klick. Gaeste bekommen die reine Sport-Abo-Auswahl. -->
-    <button type="button" id="sportAbosMenuBtn" class="nav-menu-item">Deine Sport-Abos</button>
-    <!-- Benachrichtigungen (24.08.2026): Web-Push-Einstellungen dieses
-         Geraets -- zum Start nur die Spielbeginn-Erinnerung, der Dialog ist
-         als Liste angelegt, damit weitere Arten dazukommen koennen. -->
-    <button type="button" id="pushMenuBtn" class="nav-menu-item">Benachrichtigungen</button>
+    <!-- "Dein Verein" und "Deine Sport-Abos" standen bis zum 24.08.2026 hier;
+         seit die drei Ansichten oben stehen, waere das Menue sonst zu lang.
+         Beide wohnen jetzt IM Einstellungen-Fenster (#settingsModal) --
+         Einrichtsachen, die man einmal setzt. -->
     <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
+    <!-- Benachrichtigungen darunter: eigener Punkt statt in den Einstellungen
+         vergraben (Christian, 24.08.2026) -- man kommt oefter hierher zurueck,
+         um Zeitpunkte zu aendern. -->
+    <button type="button" id="pushMenuBtn" class="nav-menu-item">Benachrichtigungen</button>
     <hr class="nav-menu-sep">
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
@@ -2041,6 +2051,13 @@
     <button class="modal-x" id="settingsModalX" aria-label="Schließen">✕</button>
     <h3>Einstellungen</h3>
     <div class="modal-actions settings-menu">
+      <!-- Sport zuerst (Christian, 24.08.2026): Auf der Sport-Domain sind das
+           die einzigen beiden Punkte, die man wirklich einrichtet -- Verein
+           und Wettbewerbe, dazu die eigenen Sender-Abos. Sichtbarkeit regelt
+           einstellungenSichtbarkeit (nur Region DE). -->
+      <button type="button" id="settingsVereinBtn" class="modal-yes" style="display:none">Dein Verein</button>
+      <button type="button" id="settingsSportAbosBtn" class="modal-yes" style="display:none">Deine Sport-Abos</button>
+      <hr class="settings-sep" id="settingsSportSep" style="display:none">
       <!-- Die beiden Inhaltsfilter zuerst, durch eine Linie vom Rest
            abgesetzt (auf Wunsch vom 13. August hervorgehoben). -->
       <button type="button" id="settingsProvidersBtn" class="modal-yes">Deine Streaming-Anbieter</button>
@@ -5683,7 +5700,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Thanks for your feedback!' },
     '#settingsModal h3': { t: 'Settings' },
     '#settingsProvidersBtn': { t: 'Your streaming services' },
-    '#sportAbosMenuBtn': { t: 'Your sports subscriptions' },
+    '#settingsSportAbosBtn': { t: 'Your sports subscriptions' },
     '#pushMenuBtn': { t: 'Notifications' },
     '#settingsKinosBtn': { t: 'Your cinemas' },
     '#settingsHiddenBtn': { t: 'Removed movies/series' },
@@ -5714,7 +5731,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Football live on TV' },
     '#providersSportTitel': { t: 'Sports subscriptions' },
     '#sportVereinBtn': { t: '+ Your club' },
-    '#vereinMenuBtn': { t: 'Your club' },
+    '#settingsVereinBtn': { t: 'Your club' },
     '#sportHeaderBtn': { a: 'Sports' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'The schedules in the Sports section come from <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, a free community project. Broadcaster information is derived rule-based from the German TV rights split – without guarantee.' },
     '#vereinTitel': { t: 'Your view' },
@@ -5816,7 +5833,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Merci pour ton retour !' },
     '#settingsModal h3': { t: 'Réglages' },
     '#settingsProvidersBtn': { t: 'Tes services de streaming' },
-    '#sportAbosMenuBtn': { t: 'Tes abonnements sport' },
+    '#settingsSportAbosBtn': { t: 'Tes abonnements sport' },
     '#pushMenuBtn': { t: 'Notifications' },
     '#settingsKinosBtn': { t: 'Tes cinémas' },
     '#settingsHiddenBtn': { t: 'Films/séries retirés' },
@@ -5847,7 +5864,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Foot en direct à la télé' },
     '#providersSportTitel': { t: 'Abonnements sport' },
     '#sportVereinBtn': { t: '+ Ton club' },
-    '#vereinMenuBtn': { t: 'Ton club' },
+    '#settingsVereinBtn': { t: 'Ton club' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Les calendriers de la section Sport proviennent d’<a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un projet communautaire libre. Les diffuseurs sont déduits des droits TV allemands – sans garantie.' },
     '#vereinTitel': { t: 'Ta vue' },
@@ -5949,7 +5966,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: '¡Gracias por tus comentarios!' },
     '#settingsModal h3': { t: 'Ajustes' },
     '#settingsProvidersBtn': { t: 'Tus plataformas de streaming' },
-    '#sportAbosMenuBtn': { t: 'Tus suscripciones deportivas' },
+    '#settingsSportAbosBtn': { t: 'Tus suscripciones deportivas' },
     '#pushMenuBtn': { t: 'Notificaciones' },
     '#settingsKinosBtn': { t: 'Tus cines' },
     '#settingsHiddenBtn': { t: 'Películas/series eliminadas' },
@@ -5980,7 +5997,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Fútbol en directo por TV' },
     '#providersSportTitel': { t: 'Suscripciones deportivas' },
     '#sportVereinBtn': { t: '+ Tu club' },
-    '#vereinMenuBtn': { t: 'Tu club' },
+    '#settingsVereinBtn': { t: 'Tu club' },
     '#sportHeaderBtn': { a: 'Deporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Los calendarios de la sección Deporte provienen de <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un proyecto comunitario libre. Las emisoras se derivan de los derechos de TV alemanes – sin garantía.' },
     '#vereinTitel': { t: 'Tu vista' },
@@ -6082,7 +6099,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Grazie per il tuo feedback!' },
     '#settingsModal h3': { t: 'Impostazioni' },
     '#settingsProvidersBtn': { t: 'I tuoi servizi di streaming' },
-    '#sportAbosMenuBtn': { t: 'I tuoi abbonamenti sport' },
+    '#settingsSportAbosBtn': { t: 'I tuoi abbonamenti sport' },
     '#pushMenuBtn': { t: 'Notifiche' },
     '#settingsKinosBtn': { t: 'I tuoi cinema' },
     '#settingsHiddenBtn': { t: 'Film/serie rimossi' },
@@ -6113,7 +6130,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Calcio in diretta TV' },
     '#providersSportTitel': { t: 'Abbonamenti sport' },
     '#sportVereinBtn': { t: '+ La tua squadra' },
-    '#vereinMenuBtn': { t: 'La tua squadra' },
+    '#settingsVereinBtn': { t: 'La tua squadra' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'I calendari della sezione Sport provengono da <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, un progetto comunitario libero. Le emittenti sono dedotte dai diritti TV tedeschi – senza garanzia.' },
     '#vereinTitel': { t: 'La tua vista' },
@@ -6215,7 +6232,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Bedankt voor je feedback!' },
     '#settingsModal h3': { t: 'Instellingen' },
     '#settingsProvidersBtn': { t: 'Jouw streamingdiensten' },
-    '#sportAbosMenuBtn': { t: 'Jouw sportabonnementen' },
+    '#settingsSportAbosBtn': { t: 'Jouw sportabonnementen' },
     '#pushMenuBtn': { t: 'Meldingen' },
     '#settingsKinosBtn': { t: 'Jouw bioscopen' },
     '#settingsHiddenBtn': { t: 'Verwijderde films/series' },
@@ -6246,7 +6263,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Voetbal live op tv' },
     '#providersSportTitel': { t: 'Sportabonnementen' },
     '#sportVereinBtn': { t: '+ Jouw club' },
-    '#vereinMenuBtn': { t: 'Jouw club' },
+    '#settingsVereinBtn': { t: 'Jouw club' },
     '#sportHeaderBtn': { a: 'Sport' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'De speelschema’s in het Sport-gedeelte komen van <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, een vrij communityproject. Zenders worden afgeleid uit de Duitse tv-rechten – zonder garantie.' },
     '#vereinTitel': { t: 'Jouw weergave' },
@@ -6348,7 +6365,7 @@ var MARKUP_TEXTE = {
     '#feedbackSuccess p': { t: 'Obrigado pelo seu feedback!' },
     '#settingsModal h3': { t: 'Configurações' },
     '#settingsProvidersBtn': { t: 'Seus serviços de streaming' },
-    '#sportAbosMenuBtn': { t: 'Suas assinaturas de esporte' },
+    '#settingsSportAbosBtn': { t: 'Suas assinaturas de esporte' },
     '#pushMenuBtn': { t: 'Notificações' },
     '#settingsKinosBtn': { t: 'Seus cinemas' },
     '#settingsHiddenBtn': { t: 'Filmes/séries removidos' },
@@ -6379,7 +6396,7 @@ var MARKUP_TEXTE = {
     '#sportPageTitle': { t: 'Futebol ao vivo na TV' },
     '#providersSportTitel': { t: 'Assinaturas de esporte' },
     '#sportVereinBtn': { t: '+ Seu clube' },
-    '#vereinMenuBtn': { t: 'Seu clube' },
+    '#settingsVereinBtn': { t: 'Seu clube' },
     '#sportHeaderBtn': { a: 'Esporte' },
     '#creditsModal .prov-intro:nth-of-type(6)': { h: 'Os calendários da seção Esporte vêm do <a href="https://www.openligadb.de" target="_blank" rel="noopener">OpenLigaDB</a>, um projeto comunitário livre. As emissoras são derivadas dos direitos de TV alemães – sem garantia.' },
     '#vereinTitel': { t: 'Sua visualização' },
@@ -10898,7 +10915,9 @@ document.getElementById('sportPage').addEventListener('click', function(e){
   var b = e.target.closest('.tv-badge');
   if (b) { openSenderModal(b.dataset); return; }
   if (e.target.closest('a, .sport-details')) return;
-  var li = e.target.closest('li.sport-match');
+  // Spielplan UND Konferenz: beide Kartenarten klappen dieselben Details auf
+  // (Christian, 24.08.2026).
+  var li = e.target.closest('li.sport-match, li.sport-konf');
   if (li && li._spiel) sportDetailsToggle(li, li._spiel);
 });
 
@@ -11170,6 +11189,9 @@ function renderSportKonferenz(gefiltert){
            stand +
            '<span class="konf-gast">' + logo(s.al) + '<span>' + esc(s.ak || s.a) + '</span></span></li>';
   }).join('');
+  // Spiel an die Zeile haengen, damit der Klick dieselben Details aufklappt
+  // wie im Spielplan (siehe Klick-Handler auf #sportPage).
+  [...el.children].forEach(function(li, i){ li._spiel = heutige[i]; });
 }
 
 /* ---- Tabelle: Ligatabelle + Torschuetzen von /api/sport/tabelle/<liga>,
@@ -11914,10 +11936,10 @@ async function openVereinModal(){
   } catch (e) { _vereinList.textContent = TXT.sportFehler; }
 }
 document.getElementById('sportVereinBtn').onclick = openVereinModal;
-// Zweiter Einstieg: Menuepunkt rechts oben, ueber "Einstellungen"
-// (Christian, 20.08.2026).
-document.getElementById('vereinMenuBtn').onclick = function(){
-  closeNavMenu();
+// Zweiter Einstieg: Einstellungen -> "Dein Verein" (seit 24.08.2026 dort
+// statt direkt im Menue).
+document.getElementById('settingsVereinBtn').onclick = function(){
+  closeSettingsModal();
   openVereinModal();
 };
 function closeVereinModal(){ _vereinModal.style.display = 'none'; }
@@ -11953,19 +11975,18 @@ document.getElementById('sportMenuBtn').onclick = function(){
 };
 // Zweiter Weg: der ⚽-Knopf im Kopf, links neben dem Menue.
 document.getElementById('sportHeaderBtn').onclick = function(){ openSportPage(); };
-// Menue -> Deine Sport-Abos (kontofrei; oeffnet fuer Gaeste die reine
+// Einstellungen -> Deine Sport-Abos (kontofrei; oeffnet die reine
 // Sport-Abo-Auswahl, siehe openProvidersModal).
-document.getElementById('sportAbosMenuBtn').onclick = function(){
-  closeNavMenu();
+document.getElementById('settingsSportAbosBtn').onclick = function(){
+  closeSettingsModal();
   openProvidersModal();
 };
 // Region-Schalter: Die Senderrechte gelten fuer Deutschland -- ausserhalb
 // bleiben Menuepunkt und Kopf-Knopf weg. (Spaeter je Land eine eigene Matrix.)
+// Die Sport-Punkte in den Einstellungen regelt einstellungenSichtbarkeit.
 if (REGION_WAHL !== 'DE' && !SPORT_SEITE_MODUS) {
   document.getElementById('sportMenuBtn').style.display = 'none';
   document.getElementById('sportHeaderBtn').style.display = 'none';
-  document.getElementById('vereinMenuBtn').style.display = 'none';
-  document.getElementById('sportAbosMenuBtn').style.display = 'none';
   // Benachrichtigungen sind (noch) reine Sport-Funktion -- gleiche Regel.
   document.getElementById('pushMenuBtn').style.display = 'none';
 }
@@ -13182,6 +13203,49 @@ function einstellungenSichtbarkeit(){
       var el = document.getElementById(id);
       if (el) el.style.display = an ? '' : 'none';
     });
+  /* Sport-Punkte (Christian, 24.08.2026): Verein und Sender-Abos wohnen hier,
+     seit die drei Ansichten das Menue anfuehren. Beide sind kontofrei -- die
+     Auswahl liegt am Geraet und wandert mit dem Konto nur MIT. Nur Region DE
+     (Senderrechte gelten fuer Deutschland). */
+  var sportDa = REGION_WAHL === 'DE' || SPORT_SEITE_MODUS;
+  ['settingsVereinBtn', 'settingsSportAbosBtn', 'settingsSportSep'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.style.display = sportDa ? '' : 'none';
+  });
+  /* Auf der eigenen Sport-Domain gibt es keine Filme: Kinos, geloeschte
+     Titel, Import und die E-Mail-Gruppe (Wochenend-Mail zu Filmen) haben hier
+     nichts zu suchen. Die Streaming-Anbieter bleiben -- ueber sie leitet sich
+     die Sport-Abo-Vorauswahl ab (sportAbosVorauswahl) -- verschwinden aber
+     als eigener Punkt, weil "Deine Sport-Abos" dasselbe Fenster oeffnet. */
+  if (SPORT_SEITE_MODUS) {
+    ['settingsProvidersBtn', 'settingsKinosBtn', 'settingsSep', 'settingsHiddenBtn',
+     'settingsMailGruppe', 'settingsNotifyBtn', 'settingsImportBtn'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  }
+}
+/* Die drei Ansichts-Punkte im Menue -- nur, solange die Sport-Seite offen
+   ist. Beschriftung und Hervorhebung kommen aus dem aktuellen Zustand. */
+function navSportAnsichten(){
+  var punkte = [['navPlanBtn', 'plan', TXT.sportModusPlan],
+                ['navKonfBtn', 'konf', TXT.sportModusKonf],
+                ['navTabBtn', 'tab', TXT.sportModusTab]];
+  var tabDa = SPORT_DATA && sportTabLigen().length;
+  punkte.forEach(function(p){
+    var el = document.getElementById(p[0]);
+    if (!el) return;
+    var zeigen = sportMode && (p[1] !== 'tab' || tabDa);
+    el.style.display = zeigen ? '' : 'none';
+    el.textContent = p[2];
+    el.classList.toggle('aktiv', SPORT_MODUS === p[1]);
+    el.onclick = function(){
+      closeNavMenu();
+      if (SPORT_MODUS !== p[1]) { SPORT_MODUS = p[1]; renderSportPage(); }
+      window.scrollTo(0, 0);
+    };
+  });
+  document.getElementById('navSportSep').style.display = sportMode ? '' : 'none';
 }
 function openSettingsModal(){
   MAIL_GRUPPE_OFFEN = false;   // Aufklapp-Gruppe startet zu
@@ -14433,7 +14497,10 @@ async function openProvidersModal(){
   sportAbosAbschnittLaden();
   // Auf der eigenen Sport-Domain abgemeldet gibt es NUR die Sport-Abos: Die
   // Streaming-Anbieterauswahl gehoert zur Film-App und braucht ein Konto.
-  var nurSport = !CURRENT_USER;
+  // Auf der eigenen Sport-Domain IMMER nur die Sport-Abos -- die
+  // TMDB-Streaminganbieter gehoeren zur Film-App (frueher haing das nur am
+  // Anmeldestand, seit es dort Konten gibt reicht das nicht mehr).
+  var nurSport = !CURRENT_USER || SPORT_SEITE_MODUS;
   _provList.style.display = nurSport ? 'none' : '';
   var intro = _provModal.querySelector('.prov-intro');
   if (intro) intro.style.display = nurSport ? 'none' : '';
@@ -14979,6 +15046,9 @@ function closeNavMenu(){
   navMenuBtn.setAttribute('aria-expanded', 'false');
 }
 function toggleNavMenu(){
+  // Vor dem Aufklappen den Sport-Teil auf Stand bringen (welche Ansicht ist
+  // aktiv, sind wir ueberhaupt auf der Sport-Seite).
+  navSportAnsichten();
   const open = navMenu.classList.toggle('open');
   navMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
   // Sortier-Dropdowns (Filme/Serien UND Kino) schliessen sich sonst nicht von
