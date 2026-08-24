@@ -610,6 +610,15 @@
   .sport-marke-logo { display:block; margin: 0; max-width: min(240px, 52vw);
     height: auto; cursor: pointer; }
   body.sport-seite header { text-align: left; }
+  /* Logo und Menue an der INHALTSSPALTE ausrichten, nicht am Fensterrand
+     (Christian, 24.08.2026): Der Inhalt darunter ist eine zentrierte
+     700px-Spalte mit 20px Innenrand. Im Browser rutschte das Logo sonst ganz
+     nach links und das Menue ganz nach rechts, weit weg von allem anderen.
+     Auf schmalen Schirmen (unter 700px) aendert sich dadurch nichts. */
+  body.sport-seite header h1 { max-width: 700px; margin-left: auto; margin-right: auto;
+    padding: 0 20px; box-sizing: border-box; }
+  body.sport-seite .nav-menu-btn { right: max(16px, calc((100% - 700px) / 2 + 20px)); }
+  body.sport-seite .sport-header-btn { right: max(64px, calc((100% - 700px) / 2 + 68px)); }
   /* Oberkante Logo = Oberkante der Navigations-Knoepfe (die sitzen absolut
      bei 6px + safe-area; Logo steht daneben und ueberlagert nichts --
      Christian, 20.08.2026). Ueberschreibt die 30px des Standard-Headers. */
@@ -752,6 +761,17 @@
   .form-punkt.f-s { background:var(--done, #4cc38a); }
   .form-punkt.f-u { background:var(--text-dim); opacity:.65; }
   .form-punkt.f-n { background:#e05d5d; }
+
+  /* "Heute"-Zeile mit dem Konferenz-Schalter rechts. Die Ueberschrift bleibt
+     optisch eine Ueberschrift (.cinema-heading), wird aber zur Flex-Zeile. */
+  .sport-heute-zeile { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .sport-konf-schalter {
+    flex:0 0 auto; background:none; border:1px solid var(--border); border-radius:999px;
+    padding:3px 11px; font-family:inherit; font-size:12.5px; font-weight:600;
+    color:var(--text-dim); cursor:pointer; transition:all .15s;
+  }
+  @media (hover: hover) { .sport-konf-schalter:hover { border-color:var(--accent); color:var(--accent); } }
+  .sport-konf-schalter.active { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
 
   /* Konferenz: verdichtete Zeile je Spiel -- Zeit/LIVE links, Kurznamen mit
      Logos, der Stand fett mittig. */
@@ -1624,7 +1644,6 @@
          solange die Sport-Seite offen ist (navSportAnsichten) -- in der
          Film-App waeren sie sinnlos. Der aktive Punkt ist hervorgehoben. -->
     <button type="button" id="navPlanBtn" class="nav-menu-item" style="display:none"></button>
-    <button type="button" id="navKonfBtn" class="nav-menu-item" style="display:none"></button>
     <button type="button" id="navTabBtn" class="nav-menu-item" style="display:none"></button>
     <hr class="nav-menu-sep" id="navSportSep" style="display:none">
     <button type="button" id="sportMenuBtn" class="nav-menu-item">⚽ Sport</button>
@@ -1820,24 +1839,25 @@
   <div class="sport-chips sport-chips-verf" id="sportVerfChips"></div>
   <div id="sportPlanWrap">
     <div class="cinema-section">
-      <h3 class="cinema-heading" id="sportHeuteHeading">Heute</h3>
+      <!-- "Konferenz" sass bis 24.08.2026 als dritter Punkt neben Spielplan
+           und Tabelle -- zu viel Gewicht fuer das, was sie ist: die heutigen
+           Spiele verdichtet. Jetzt ein Schalter rechts neben "Heute". Ist er
+           an, zeigt die Seite NUR den heutigen Spieltag, kompakt und mit
+           denselben aufklappbaren Details. -->
+      <div class="cinema-heading sport-heute-zeile">
+        <span id="sportHeuteHeading">Heute</span>
+        <button type="button" id="sportKonfSchalter" class="sport-konf-schalter"></button>
+      </div>
       <ol class="list sport-liste" id="sportHeuteList"></ol>
     </div>
-    <div class="cinema-section">
+    <div class="cinema-section" id="sportWocheSection">
       <h3 class="cinema-heading" id="sportWocheHeading">Diese Woche</h3>
       <ol class="list sport-liste" id="sportWocheList"></ol>
     </div>
-    <div class="cinema-section">
+    <div class="cinema-section" id="sportSpaeterSection">
       <h3 class="cinema-heading" id="sportSpaeterHeading">Demnächst</h3>
       <ol class="list sport-liste" id="sportSpaeterList"></ol>
     </div>
-  </div>
-  <!-- Konferenz-Ansicht: nur die heutigen Spiele, kompakt untereinander --
-       Stand mittig, Live-Spiele zuerst (renderSportKonferenz). Der Minuten-
-       Nachlader der Sport-Seite aktualisiert auch diese Ansicht. -->
-  <div class="cinema-section" id="sportKonfSection" style="display:none">
-    <h3 class="cinema-heading" id="sportKonfHeading"></h3>
-    <ol class="list sport-liste" id="sportKonfList"></ol>
   </div>
   <!-- Tabellen-Ansicht: Liga waehlen (bl1/bl2/bl3), darunter Tabelle und
        Torschuetzenliste von /api/sport/tabelle/<liga> (renderSportTabelle). -->
@@ -10589,10 +10609,12 @@ var SPORT_ABOS_KEY = 'mm_sport_abos';
 // Christian 19. August 2026) -- jedes Oeffnen der Seite beginnt damit.
 var SPORT_COMPS = [];
 var SPORT_ANSICHT_KEY = 'mm_sport_ansicht';
-// Ansicht der Sport-Seite (24.08.2026): 'plan' (Spielplan, Standard),
-// 'konf' (Konferenz: heutige Spiele verdichtet) oder 'tab' (Ligatabelle
-// samt Torschuetzen). Jedes Oeffnen beginnt beim Spielplan.
+// Ansicht der Sport-Seite (24.08.2026): 'plan' (Spielplan, Standard) oder
+// 'tab' (Ligatabelle samt Torschuetzen). Jedes Oeffnen beginnt beim Spielplan.
 var SPORT_MODUS = 'plan';
+// Konferenz-Schalter im Spielplan: nur der heutige Spieltag, verdichtet.
+// Beginnt immer aus -- der Spielplan ist der Normalfall.
+var SPORT_KONFERENZ = false;
 function gespeicherteAnsicht(){
   try {
     var a = JSON.parse(localStorage.getItem(SPORT_ANSICHT_KEY) || '{}');
@@ -11258,7 +11280,9 @@ function sportTabLigen(){
 }
 function renderSportModusChips(){
   var el = document.getElementById('sportModusChips');
-  var modi = [['plan', TXT.sportModusPlan], ['konf', TXT.sportModusKonf]];
+  // Nur noch zwei Ansichten: Die Konferenz ist ein Schalter im Spielplan
+  // (siehe #sportKonfSchalter), keine eigene Ansicht mehr.
+  var modi = [['plan', TXT.sportModusPlan]];
   if (sportTabLigen().length) modi.push(['tab', TXT.sportModusTab]);
   el.innerHTML = modi.map(function(m){
     return '<button type="button" data-modus="' + m[0] + '"' +
@@ -11281,8 +11305,7 @@ function renderSportModusChips(){
 /* ---- Konferenz: alle HEUTIGEN Spiele der aktuellen Filter als verdichtete
    Zeilen -- laufende zuerst (Stand mittig), dann kommende, dann beendete.
    Der Minuten-Nachlader oben zeichnet auch diese Ansicht frisch. ---- */
-function renderSportKonferenz(gefiltert){
-  var el = document.getElementById('sportKonfList');
+function renderSportKonferenz(gefiltert, el){
   var heute0 = new Date(); heute0.setHours(0, 0, 0, 0);
   var morgen0 = heute0.getTime() + 86400000;
   var jetzt = Date.now();
@@ -11294,7 +11317,7 @@ function renderSportKonferenz(gefiltert){
   }
   var heutige = gefiltert.filter(function(s){ return new Date(s.ko).getTime() < morgen0; })
     .sort(function(a, b){ return rang(a) - rang(b) || new Date(a.ko) - new Date(b.ko); });
-  document.getElementById('sportKonfHeading').textContent =
+  document.getElementById('sportHeuteHeading').textContent =
     TXT.sportLabels.heute + (heutige.length ? ' (' + heutige.length + ')' : '');
   if (!heutige.length) {
     el.innerHTML = '<li class="cinema-empty">' + esc(TXT.sportKonfLeer) + '</li>';
@@ -11412,54 +11435,61 @@ function renderSportPage(){
   document.getElementById('sportPageTitle').textContent = TXT.sportTitel;
   renderSportModusChips();
   var planWrap = document.getElementById('sportPlanWrap');
-  var konfSection = document.getElementById('sportKonfSection');
   var tabSection = document.getElementById('sportTabSection');
   var filterReihen = [document.getElementById('sportChips'), document.getElementById('sportVerfChips')];
   // Tabellen-Ansicht: eigene Liga-Chips statt der Spielplan-Filter.
   if (SPORT_MODUS === 'tab') {
     filterReihen.forEach(function(el){ el.style.display = 'none'; });
     planWrap.style.display = 'none';
-    konfSection.style.display = 'none';
     tabSection.style.display = '';
     renderSportTabelle();
     return;
   }
-  /* Konferenz zeigt den ganzen Spieltag (Christian, 24.08.2026): Abo-,
-     Free-TV- und Vereinsfilter sind hier fehl am Platz -- wer die Konferenz
-     aufruft, will sehen, was ueberall gerade passiert, nicht nur das eine
-     Spiel seines Vereins. Die Reihe wird deshalb nicht bloss ausgeblendet,
-     ihre Filter greifen auch nicht (die Vereins-Chips sind beim Oeffnen der
-     Seite aktiv -- sonst filterte die Konferenz still weiter). Der
-     Wettbewerbs-Filter darueber bleibt: "nur die Bundesliga-Konferenz" ist
-     ein sinnvoller Wunsch. */
-  var konferenz = SPORT_MODUS === 'konf';
+  /* Konferenz-Schalter rechts neben "Heute" (Christian, 24.08.2026). An
+     bedeutet: nur der heutige Spieltag, verdichtet -- und zwar GANZ, ohne
+     Abo-, Free-TV- und Vereinsfilter. Wer die Konferenz aufruft, will sehen,
+     was ueberall gerade passiert, nicht nur das eine Spiel seines Vereins;
+     deshalb wird die Vereins-Reihe dabei auch ausgeblendet statt wirkungslos
+     dazustehen. Der Wettbewerbs-Filter darueber bleibt: "nur die
+     Bundesliga-Konferenz" ist ein sinnvoller Wunsch. */
+  var konferenz = SPORT_KONFERENZ;
   var compReihe = document.getElementById('sportChips');
   compReihe.style.display = '';
   // In der Konferenz ist die Wettbewerbs-Reihe die letzte -- sie traegt dann
-  // den Abstand zur Ueberschrift, den sonst die Verfuegbarkeits-Reihe setzt.
+  // den Abstand zur Ueberschrift, den sonst die Vereins-Reihe setzt.
   compReihe.classList.toggle('chips-letzte', konferenz);
   document.getElementById('sportVerfChips').style.display = konferenz ? 'none' : '';
   tabSection.style.display = 'none';
+  planWrap.style.display = '';
   renderSportChips();
+  var schalter = document.getElementById('sportKonfSchalter');
+  schalter.textContent = TXT.sportModusKonf;
+  schalter.classList.toggle('active', konferenz);
   var begriffe = aktiveSuchbegriffe();
   var gefiltert = data.spiele.filter(function(s){
     if (SPORT_COMPS.length && SPORT_COMPS.indexOf(s.c) === -1) return false;
     if (!konferenz) {
-      if (SPORT_VERF_FREI && !sportSpielFrei(s)) return false;
-      if (SPORT_VERF_ABO && !sportSpielImAbo(s)) return false;
+      /* Die beiden Anbieter-Filter wirken als ODER (Christian, 24.08.2026):
+         Beide angehakt heisst "zeig mir, was ich sehen kann -- im Abo ODER
+         frei empfangbar". Vorher war es ein UND, ein Spiel haette also
+         gleichzeitig frei UND im Abo laufen muessen; das kommt kaum vor,
+         entsprechend blieb die Liste leer. */
+      if (SPORT_VERF_ABO || SPORT_VERF_FREI) {
+        var sichtbar = (SPORT_VERF_FREI && sportSpielFrei(s)) || (SPORT_VERF_ABO && sportSpielImAbo(s));
+        if (!sichtbar) return false;
+      }
       if (SPORT_VEREIN_AKTIV.length &&
           SPORT_VEREIN_AKTIV.indexOf(s.h) === -1 && SPORT_VEREIN_AKTIV.indexOf(s.a) === -1) return false;
     }
     return sportTrifft(s, begriffe);
   });
+  // Konferenz: nur der Heute-Bereich, die beiden anderen fallen weg.
+  document.getElementById('sportWocheSection').style.display = konferenz ? 'none' : '';
+  document.getElementById('sportSpaeterSection').style.display = konferenz ? 'none' : '';
   if (konferenz) {
-    planWrap.style.display = 'none';
-    konfSection.style.display = '';
-    renderSportKonferenz(gefiltert);
+    renderSportKonferenz(gefiltert, sportListEls.heute);
     return;
   }
-  konfSection.style.display = 'none';
-  planWrap.style.display = '';
   // Drei Bereiche nach ORTSTAGEN: Heute (inkl. laufender Spiele -- der Server
   // liefert ab 8h rueckwirkend), Morgen bis +7 Tage, Rest (Server-Deckel +70).
   var heute0 = new Date(); heute0.setHours(0, 0, 0, 0);
@@ -11476,6 +11506,10 @@ function renderSportPage(){
   renderSportSection('woche', buckets.woche);
   renderSportSection('spaeter', buckets.spaeter);
 }
+document.getElementById('sportKonfSchalter').onclick = function(){
+  SPORT_KONFERENZ = !SPORT_KONFERENZ;
+  renderSportPage();
+};
 
 /* Die Sport-Seite beginnt direkt bei "Fussball live im TV" (Christian,
    20. August 2026): App-Erklaerung, Suche und die Filme/Serien/Kino-Reihe
@@ -11517,6 +11551,7 @@ function openSportPage(){
   SPORT_VERF_ABO = _verf.indexOf('abo') !== -1;
   SPORT_VERF_FREI = _verf.indexOf('frei') !== -1;
   SPORT_MODUS = 'plan';
+  SPORT_KONFERENZ = false;
   sportSectionLimit = { heute: SPORT_PREVIEW.heute, woche: SPORT_PREVIEW.woche, spaeter: SPORT_PREVIEW.spaeter };
   updateFilterRowUI();
   // Kopf komplett auf Sport: Erklaerzeilen, Suche und Tab-Reihe weg (siehe
@@ -13410,8 +13445,9 @@ function einstellungenSichtbarkeit(){
 /* Die drei Ansichts-Punkte im Menue -- nur, solange die Sport-Seite offen
    ist. Beschriftung und Hervorhebung kommen aus dem aktuellen Zustand. */
 function navSportAnsichten(){
+  // Konferenz fehlt hier bewusst -- sie ist ein Schalter im Spielplan, keine
+  // eigene Ansicht mehr (Christian, 24.08.2026).
   var punkte = [['navPlanBtn', 'plan', TXT.sportModusPlan],
-                ['navKonfBtn', 'konf', TXT.sportModusKonf],
                 ['navTabBtn', 'tab', TXT.sportModusTab]];
   var tabDa = SPORT_DATA && sportTabLigen().length;
   punkte.forEach(function(p){
