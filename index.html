@@ -625,6 +625,13 @@
     padding: 0 20px; box-sizing: border-box; }
   body.sport-seite .nav-menu-btn { right: max(20px, calc((100% - 700px) / 2 + 20px)); }
   body.sport-seite .sport-header-btn { right: max(68px, calc((100% - 700px) / 2 + 68px)); }
+  /* Die Menue-Klappe muss dieselbe Rechnung bekommen wie ihr Knopf
+     (Christian, 24.08.2026): Am Desktop rueckte der Knopf mit der
+     700px-Spalte nach innen, die Klappe blieb aber bei ihren 16px am
+     Fensterrand -- sie klappte also RECHTS NEBEN dem Knopf auf statt
+     buendig darunter. Auf dem Handy (unter 700px) greift in beiden
+     Faellen der jeweilige Mindestwert, dort aendert sich nichts. */
+  body.sport-seite .nav-menu { right: max(20px, calc((100% - 700px) / 2 + 20px)); }
   /* Oberkante Logo = Oberkante der Navigations-Knoepfe (die sitzen absolut
      bei 6px + safe-area; Logo steht daneben und ueberlagert nichts --
      Christian, 20.08.2026). Ueberschreibt die 30px des Standard-Headers. */
