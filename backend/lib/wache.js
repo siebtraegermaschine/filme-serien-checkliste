@@ -66,28 +66,40 @@ export async function melde(art, betreff, text) {
    gar nicht laeuft, meldet von sich aus nichts -- ein fehlgeschlagener
    wenigstens in GitHub Actions.
 
-   Gemessen wird am juengsten Zeitstempel der jeweiligen Tabelle. Die Grenzen
-   liegen bewusst deutlich ueber dem Takt, damit eine verspaetete oder einmal
-   uebersprungene Ausfuehrung nicht sofort Alarm ausloest. */
+   Die Grenzen liegen bewusst deutlich ueber dem Takt, damit eine verspaetete
+   oder einmal uebersprungene Ausfuehrung nicht sofort Alarm ausloest.
+
+   Gemessen wird JE REGION, nicht ueber die ganze Tabelle (Christian,
+   25.08.2026). Vorher stand hier max(fetched_at) ueber alles -- und damit war
+   der haeufigste Stoerfall unsichtbar: In der 41er-Kette faellt sporadisch
+   eine einzelne Region aus (im August die Haelfte der Laeufe, jedes Mal eine
+   andere). Die 40 uebrigen halten den Hoechstwert frisch, waehrend die
+   betroffene Region tagelang alt sein kann. Deshalb fragt die Wache jetzt
+   nach der AELTESTEN Region und meldet sie beim Namen; der Streaming-Workflow
+   wiederholt einen solchen Ausfall seinerseits einmal von selbst
+   (.github/workflows/streaming.yml, Job "nachzuegler"). */
 const IMPORTE = [
   {
     art: 'import-streaming',
     name: 'Streaming-Import',
     takt: 'taeglich 04:00 UTC',
-    frage: 'SELECT max(fetched_at) AS zuletzt FROM streaming_cache',
+    frage: `SELECT region AS detail, max(fetched_at) AS zuletzt
+              FROM streaming_cache GROUP BY region ORDER BY 2 ASC LIMIT 1`,
     grenzeStunden: 36,
   },
   {
     art: 'import-kino',
     name: 'Kino-Import',
     takt: 'taeglich 04:30 UTC',
-    frage: 'SELECT max(fetched_at) AS zuletzt FROM cinema_cache',
+    frage: `SELECT region AS detail, max(fetched_at) AS zuletzt
+              FROM cinema_cache GROUP BY region ORDER BY 2 ASC LIMIT 1`,
     grenzeStunden: 36,
   },
   {
     art: 'import-katalog',
     name: 'Katalog-Import (rated-titles)',
     takt: 'alle zwei Tage 05:00 UTC',
+    // titles kennt keine Region -- hier bleibt der Hoechstwert richtig.
     frage: 'SELECT max(updated_at) AS zuletzt FROM titles',
     grenzeStunden: 84,
   },
@@ -96,9 +108,11 @@ const IMPORTE = [
 export async function pruefeImporte() {
   for (const imp of IMPORTE) {
     let zuletzt;
+    let detail = null;
     try {
       const { rows } = await pool.query(imp.frage);
       zuletzt = rows[0]?.zuletzt;
+      detail = rows[0]?.detail || null;
     } catch (err) {
       // Nicht erreichbare Datenbank ist eine eigene Meldung, keine drei.
       await melde(
@@ -117,7 +131,8 @@ export async function pruefeImporte() {
 
     const stunden = (Date.now() - new Date(zuletzt).getTime()) / 3_600_000;
     if (stunden > imp.grenzeStunden) {
-      await melde(imp.art, `${imp.name} bleibt aus`,
+      await melde(imp.art, detail ? `${imp.name} bleibt aus (${detail})` : `${imp.name} bleibt aus`,
+        (detail ? `Aelteste Region: ${detail}.\n` : '') +
         `Letzter Eintrag vor ${Math.round(stunden)} Stunden (${new Date(zuletzt).toISOString()}).\n` +
         `Erwartet: ${imp.takt}, Grenze: ${imp.grenzeStunden} Stunden.\n\n` +
         `Zu pruefen: der zugehoerige GitHub-Workflow und ob das Ingest-Secret noch stimmt.`);

@@ -178,3 +178,77 @@ jobs:
           else
             echo "Keine Änderungen an streaming.json."
           fi
+
+  # ---- Nachzuegler: wiederholt einmal, was in der Kette gescheitert ist ----
+  # Warum (Christian, 25.08.2026): In der 41er-Kette faellt sporadisch eine
+  # einzelne Region aus -- im August die Haelfte der Laeufe, jedes Mal eine
+  # andere (14. NL+SI, 15. ES+FI, 16. LU, 19. ES, 20. NZ, 23. GR, 24. ES).
+  # Die uebrigen 40 laufen dank fail-fast:false sauber durch; die betroffene
+  # Region bleibt aber bis zum naechsten Abend auf dem Vortagsstand, und die
+  # Wache merkt davon nichts (sie prueft die Tabelle, nicht die Region --
+  # seit dem 25.08. je Region, siehe backend/lib/wache.js).
+  #
+  # Der Gesamtlauf bleibt ROT, auch wenn die Wiederholung glueckt: update ist
+  # dann bereits fehlgeschlagen, und GitHub rechnet das ins Ergebnis. Was
+  # nachgeholt wurde, steht in der Zusammenfassung dieses Jobs.
+  nachzuegler:
+    needs: update
+    if: always() && needs.update.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read               # nur zum Lesen der Jobs DIESES Laufs
+    # Ein bis zwei Regionen im Normalfall; der Spielraum deckt den seltenen
+    # Fall ab, dass mehrere ausfallen.
+    timeout-minutes: 240
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Gescheiterte Regionen ermitteln
+        id: finden
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Die Matrix-Jobs heissen "update (ES)" -- daraus das Kuerzel ziehen.
+          # jq ist auf ubuntu-latest vorinstalliert.
+          REGIONEN=$(curl -sS \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "${{ github.api_url }}/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs?per_page=100" \
+            | jq -r '[.jobs[]
+                      | select(.conclusion == "failure")
+                      | .name
+                      | select(test("^update \\([A-Z]{2}\\)$"))
+                      | ltrimstr("update (") | rtrimstr(")")]
+                     | unique | join(" ")')
+          echo "regionen=$REGIONEN" >> "$GITHUB_OUTPUT"
+          echo "Nachzuholen: ${REGIONEN:-(keine erkannt)}"
+
+      - name: Wiederholen
+        if: steps.finden.outputs.regionen != ''
+        env:
+          REGIONEN: ${{ steps.finden.outputs.regionen }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          STREAMING_API_URL: ${{ vars.STREAMING_API_URL }}
+          STREAMING_INGEST_SECRET: ${{ secrets.STREAMING_INGEST_SECRET }}
+          STREAM_MAX_PROVIDER: ${{ vars.STREAM_MAX_PROVIDER }}
+          STREAM_MAX_ZEILEN: ${{ vars.STREAM_MAX_ZEILEN }}
+          TMDB_PAUSE_MS: ${{ vars.TMDB_PAUSE_MS }}
+        run: |
+          FEHLER=0
+          for R in $REGIONEN; do
+            echo "──── zweiter Versuch: $R"
+            if TMDB_REGION="$R" node stream-fetch.mjs; then
+              echo "- $R: nachgeholt" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "- $R: **auch im zweiten Versuch gescheitert**" >> "$GITHUB_STEP_SUMMARY"
+              FEHLER=1
+            fi
+          done
+          exit $FEHLER
