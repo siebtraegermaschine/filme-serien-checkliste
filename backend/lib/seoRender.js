@@ -36,8 +36,7 @@ const BILD_FALLBACK = SITE + '/og-image.png';
 // bereits indexierte Seiten blieben dann im Index stehen.
 
 function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis, favicon }) {
-  // basis: Ursprung fuer canonical/og/hreflang -- Standard movietaste.de,
-  // die Sport-Domain-Spielseiten (seoSport.js) reichen ihre eigene durch.
+  // basis: Ursprung fuer canonical/og/hreflang -- Standard movietaste.de.
   const wurzel = basis || SITE;
   const url = wurzel + pfad;
   const robots = indexierbar ? 'index,follow' : 'noindex,follow';

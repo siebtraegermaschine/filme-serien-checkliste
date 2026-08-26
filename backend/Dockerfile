@@ -30,11 +30,8 @@ RUN cd backend && npm ci --omit=dev
 # nur ein Muster weiter.
 # *.json bewusst einzeln (kein Glob): package.json & Co. gehoeren nicht in
 # den Auslieferungsordner. Wer eine neue Wurzel-JSON ergaenzt, muss sie HIER
-# nachtragen -- das Manifest (20.08.) und sport-inhalte.json (21.08.) fehlten
-# beide zunaechst und lieferten still 404.
-# sw.js einzeln (kein *.js-Glob): der Service Worker fuer Web-Push (24.08.)
-# ist die einzige Wurzel-JS-Datei, die ins Netz gehoert.
-COPY *.html *.css *.png *.svg sw.js manifest.json couchultras-manifest.json sport-inhalte.json sport-rechte.json robots.txt ./
+# nachtragen -- das Manifest fehlte zunaechst (20.08.) und lieferte still 404.
+COPY *.html *.css *.png *.svg manifest.json robots.txt ./
 COPY tour/ ./tour/
 COPY backend/ ./backend/
 

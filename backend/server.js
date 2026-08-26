@@ -15,7 +15,6 @@ import feedbackRouter from './routes/feedback.js';
 import searchLogRouter from './routes/searchLog.js';
 import hiddenTitlesRouter from './routes/hiddenTitles.js';
 import cinemaRouter from './routes/cinema.js';
-import sportRouter from './routes/sport.js';
 import watchProvidersRouter from './routes/watchProviders.js';
 import trailersRouter from './routes/trailers.js';
 import linksRouter from './routes/links.js';
@@ -25,9 +24,6 @@ import seoRouter from './routes/seo.js';
 import { attrEsc } from './lib/seoRender.js';
 import { slugify } from './lib/slug.js';
 import { ladeSeoText } from './lib/seoData.js';
-import { ladeSpielSeite, ladeSpieleUebersicht, seiteSpiel, seiteSpiele, sitemapSpiele,
-         ladeWettbewerbSeite, seiteWettbewerb, ladeVereinSeite, seiteVerein,
-         ladeHtmlSitemap, seiteHtmlSitemap } from './lib/seoSport.js';
 import movieNightRouter from './routes/movieNight.js';
 import metrikRouter from './routes/metrik.js';
 import eventsRouter from './routes/events.js';
@@ -35,11 +31,6 @@ import kpiRouter from './routes/kpi.js';
 import onboardingRouter from './routes/onboarding.js';
 import { anonId } from './middleware/anonId.js';
 import { starteKpiSnapshot, starteKpiAufraeumen } from './lib/kpi.js';
-import { starteSportLive } from './lib/sportLive.js';
-import { starteSportPush } from './lib/sportPush.js';
-import pushRouter from './routes/push.js';
-import { ladeKalender } from './lib/sportKalender.js';
-import { asyncHandler } from './lib/asyncHandler.js';
 import { starteAufraeumen } from './lib/kontoAufraeumen.js';
 import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';
@@ -80,12 +71,9 @@ if (process.env.CORS_ORIGIN) {
 app.use('/api/titles/bulk-ingest', express.json({ limit: '30mb' }));
 app.use('/api/streaming/ingest', express.json({ limit: '60mb' }));
 app.use('/api/cinema/ingest', express.json({ limit: '20mb' }));
-// Sport: eine Saison aller Wettbewerbe sind ~1.000 kompakte Spielzeilen
-// (<1 MB) -- 5mb lassen Luft fuer weitere Wettbewerbe/Sportarten.
-app.use('/api/sport/ingest', express.json({ limit: '5mb' }));
 app.use((req, res, next) => {
   if (req.path === '/api/titles/bulk-ingest' || req.path === '/api/streaming/ingest'
-      || req.path === '/api/cinema/ingest' || req.path === '/api/sport/ingest') return next(); // oben schon geparst
+      || req.path === '/api/cinema/ingest') return next(); // oben schon geparst
   express.json({ limit: '1mb' })(req, res, next);
 });
 
@@ -117,8 +105,6 @@ app.use('/api/feedback', feedbackRouter);
 app.use('/api/search-log', searchLogRouter);
 app.use('/api/hidden-titles', hiddenTitlesRouter);
 app.use('/api/cinema', cinemaRouter);
-app.use('/api/sport', sportRouter);
-app.use('/api/push', pushRouter);
 app.use('/api/watch-providers', watchProvidersRouter);
 app.use('/api/trailers', trailersRouter);
 app.use('/api/links', linksRouter);
@@ -129,118 +115,6 @@ app.use('/api/metrik', metrikRouter);
 app.use('/api/events', eventsRouter);
 app.use('/api/kpi', kpiRouter);
 app.use('/api/onboarding', onboardingRouter);
-
-/* ---- Sport-Domain (White-Label, PLAN-SPORT.md): Dieselbe App unter einer
-   eigenen Domain, wahrgenommen als eigenstaendige Sport-Seite. AKTIV erst,
-   wenn SPORT_DOMAIN gesetzt ist (docker-compose.yml, environment) -- bis
-   dahin ist dieser Block wirkungslos. SPORT_BRAND ist der Markenname fuers
-   Logo/OG (Platzhalter, bis Christian den echten Namen festlegt).
-
-   Ausgeliefert wird dieselbe index.html, nur mit (a) eigenen Open-Graph-
-   Angaben ohne Logo-Bild, (b) eigenem <title> und (c) einem eingespritzten
-   window.SPORT_SEITE-Flag -- das Frontend schaltet damit in den Sport-Modus
-   (Direkteinstieg, eigene Marke, Filmbereiche ausgeblendet; siehe
-   index.html, Abschnitt "Eigene Sport-Domain"). Alles Weitere -- API,
-   statische Dateien, Rechtstexte (gleicher Umfang wie movietaste.de,
-   Entscheidung 20. August 2026) -- laeuft unveraendert; App-Pfade, die es
-   hier nicht gibt (SEO-Seiten, /t/-Links), leiten auf movietaste.de um. */
-const SPORT_DOMAIN = (process.env.SPORT_DOMAIN || '').toLowerCase();
-const SPORT_BRAND = process.env.SPORT_BRAND || 'Fußball live im TV';
-function istSportDomain(req) {
-  if (!SPORT_DOMAIN) return false;
-  const h = String(req.hostname || '').toLowerCase();
-  return h === SPORT_DOMAIN || h === 'www.' + SPORT_DOMAIN;
-}
-function sportSeiteHtml() {
-  const basis = 'https://' + SPORT_DOMAIN;
-  const beschreibung = '⚽ Endlich! Auf einen Blick sehen, welches Fußballspiel bei welchem '
-    + 'Streaming-Anbieter oder im Free-TV läuft.';
-  const block = [
-    '<meta property="og:site_name" content="' + attrEsc(SPORT_BRAND) + '">',
-    '<meta property="og:type" content="website">',
-    '<meta property="og:url" content="' + basis + '/">',
-    '<meta property="og:title" content="' + attrEsc(SPORT_BRAND) + '">',
-    '<meta property="og:description" content="' + attrEsc(beschreibung) + '">',
-    // Mit Bild (Christian, 24.08.2026): Ohne og:image blieb im iOS-Teilen-
-    // Blatt und in Link-Vorschauen ein leerer Kasten. Der frueher genannte
-    // Grund -- das MovieMatch-Popcorn -- gilt nicht mehr, seit es ein eigenes
-    // CouchUltras-Zeichen gibt. Das quadratische Icon statt des breiten
-    // Schriftzugs: Vorschaukaesten sind quadratisch, der Schriftzug verschwaende
-    // darin zu einem Streifen.
-    '<meta property="og:image" content="' + basis + '/cu-icon-512.png">',
-    '<meta property="og:image:width" content="512">',
-    '<meta property="og:image:height" content="512">',
-    '<meta name="twitter:card" content="summary">',
-    '<script>window.SPORT_SEITE = ' + JSON.stringify({ marke: SPORT_BRAND }) + ';</script>',
-  ].join('\n');
-  let html = indexHtml();
-  const a = html.indexOf(OG_START);
-  const b = html.indexOf(OG_ENDE);
-  if (a >= 0 && b >= 0) html = html.slice(0, a) + block + html.slice(b + OG_ENDE.length);
-  // Eigene App-Identitaet: Favicons, Homescreen-Icon und Manifest der
-  // Sport-Marke statt der MovieMatch-Dateien -- damit "Als App speichern"
-  // und Link-Vorschauen das CouchUltras-Zeichen tragen, nicht das Popcorn.
-  html = html
-    .replace('<link rel="manifest" href="/manifest.json">', '<link rel="manifest" href="/couchultras-manifest.json">')
-    .replace('<link rel="apple-touch-icon" href="/apple-touch-icon.png">', '<link rel="apple-touch-icon" href="/cu-apple-touch.png">')
-    .replace('<link rel="icon" href="/favicon-32.png" sizes="32x32">', '<link rel="icon" href="/cu-favicon-32.png" sizes="32x32">')
-    .replace('<link rel="icon" href="/icon-192.png" sizes="192x192">', '<link rel="icon" href="/cu-icon-192.png" sizes="192x192">')
-    .replace('<meta name="apple-mobile-web-app-title" content="MovieMatch">', '<meta name="apple-mobile-web-app-title" content="' + attrEsc(SPORT_BRAND) + '">');
-  return html.replace(/<title>[^<]*<\/title>/, '<title>' + attrEsc(SPORT_BRAND) + '</title>');
-}
-app.use(async (req, res, next) => {
-  if (!istSportDomain(req)) return next();
-  const p = req.path;
-  try {
-    if (p === '/' || p === '/sport') return res.type('html').send(sportSeiteHtml());
-    // /index.html traegt eine Dateiendung und fiele sonst zur Statik durch --
-    // die liefert die ROHE MovieMatch-Fassung aus (so wirkte der "Zurueck zur
-    // App"-Link der Rechtstexte wie ein Domainwechsel, 20.08.2026). Sauber
-    // auf die Wurzel umleiten, Query bleibt erhalten (?feedback=1).
-    if (p === '/index.html') {
-      const frage = req.originalUrl.includes('?') ? req.originalUrl.slice(req.originalUrl.indexOf('?')) : '';
-      return res.redirect(301, '/' + frage);
-    }
-    // Die SEO-Spielseiten wohnen bei aktiver Sport-Domain HIER (kuerzere
-    // Pfade ohne Locale) -- movietaste leitet auf sie um (routes/seo.js).
-    if (p === '/spiele') return res.type('html').send(seiteSpiele(await ladeSpieleUebersicht()));
-    // HTML-Sitemap: alle SEO-Seiten per Link erreichbar (Fusszeilen-Link).
-    if (p === '/sitemap') return res.type('html').send(seiteHtmlSitemap(await ladeHtmlSitemap()));
-    const spiel = p.match(/^\/spiel\/.*-(\d+)$/);
-    if (spiel) {
-      const daten = await ladeSpielSeite(spiel[1]);
-      if (!daten) return res.status(404).type('txt').send('Nicht gefunden');
-      return res.type('html').send(seiteSpiel(daten));
-    }
-    // Themen-Hubs: je Wettbewerb ("wo laeuft bundesliga") und je Verein/
-    // Nationalmannschaft ("fc bayern spiele") -- siehe lib/seoSport.js.
-    const wettbewerb = p.match(/^\/wettbewerb\/([a-z0-9-]+)$/);
-    if (wettbewerb) {
-      const daten = await ladeWettbewerbSeite(wettbewerb[1]);
-      if (!daten) return res.status(404).type('txt').send('Nicht gefunden');
-      return res.type('html').send(seiteWettbewerb(daten));
-    }
-    const verein = p.match(/^\/verein\/([a-z0-9-]+)$/);
-    if (verein) {
-      const daten = await ladeVereinSeite(verein[1]);
-      if (!daten) return res.status(404).type('txt').send('Nicht gefunden');
-      return res.type('html').send(seiteVerein(daten));
-    }
-    if (p === '/sitemap-spiele.xml') return res.type('application/xml').send(await sitemapSpiele());
-    // Viele Dienste fragen zuerst /favicon.ico -- hier gehoert das
-    // CouchUltras-Zeichen hin, nicht das MovieMatch-Popcorn.
-    if (p === '/favicon.ico') return res.sendFile(path.join(frontendRoot, 'cu-favicon-32.png'));
-    // Eigene robots.txt samt Verweis auf die Spiel-Sitemap.
-    if (p === '/robots.txt') {
-      return res.type('txt').send(`User-agent: *\nAllow: /\nSitemap: https://${SPORT_DOMAIN}/sitemap-spiele.xml\n`);
-    }
-  } catch (err) { return next(err); }
-  // Statische Dateien (Bilder, Rechtstexte, Manifest, ...) laufen normal weiter.
-  if (/\.[a-z0-9]+$/i.test(p)) return next();
-  // Alles Uebrige (SEO-Seiten, /t/-Titellinks, Passwort-Reset, ...) gehoert
-  // zur Film-App -- dauerhaft dorthin verweisen statt hier zu spiegeln.
-  return res.redirect(301, 'https://movietaste.de' + req.originalUrl);
-});
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
 const frontendRoot = path.join(__dirname, '..');
@@ -352,43 +226,6 @@ app.get('/t/:art/:kennung', mengenGrenze({ name: 'share-page', anzahl: 120, minu
 // und manche zeigten daraufhin ihren eigenen Platzhalter statt des Logos.
 app.get('/favicon.ico', (req, res) => res.sendFile(path.join(frontendRoot, 'favicon-32.png')));
 
-// /sport ist ein teilbarer Einstieg in die Sport-Ansicht der App (die App
-// setzt den Pfad beim Oeffnen selbst, siehe openSportPage in index.html).
-// Eigene Open-Graph-Angaben und BEWUSST OHNE og:image: Die Link-Vorschau in
-// WhatsApp & Co. soll den Text zeigen, nicht das MovieMatch-Logo
-// (Christian, 20. August 2026).
-app.get('/sport', (req, res) => {
-  const beschreibung = '⚽ Endlich! Auf einen Blick sehen, welches Fußballspiel bei welchem '
-    + 'Streaming-Anbieter oder im Free-TV läuft.';
-  const block = [
-    '<meta property="og:site_name" content="MovieMatch">',
-    '<meta property="og:type" content="website">',
-    '<meta property="og:url" content="https://movietaste.de/sport">',
-    '<meta property="og:title" content="Fußball live im TV – MovieMatch">',
-    '<meta property="og:description" content="' + attrEsc(beschreibung) + '">',
-    '<meta name="twitter:card" content="summary">',
-  ].join('\n');
-  const html = indexHtml();
-  const a = html.indexOf(OG_START);
-  const b = html.indexOf(OG_ENDE);
-  if (a < 0 || b < 0) return res.type('html').send(html);
-  res.type('html').send(html.slice(0, a) + block + html.slice(b + OG_ENDE.length));
-});
-
-/* Spielplan eines Vereins als Kalender-Abo (lib/sportKalender.js) -- auf
-   BEIDEN Domains erreichbar: Die Sport-Domain-Weiche oben laesst Pfade mit
-   Dateiendung durch (next()), movietaste trifft die Route direkt. Kein
-   Cache-Header-Drama: Kalender-Apps fragen ohnehin nur alle paar Stunden. */
-app.get('/kalender/:slug.ics', mengenGrenze({ name: 'kalender', anzahl: 60, minuten: 10 }), asyncHandler(async (req, res) => {
-  const slug = String(req.params.slug || '').toLowerCase();
-  if (!/^[a-z0-9-]{1,80}$/.test(slug)) return res.status(404).type('txt').send('Nicht gefunden');
-  const ics = await ladeKalender(slug);
-  if (!ics) return res.status(404).type('txt').send('Nicht gefunden');
-  res.set('Content-Type', 'text/calendar; charset=utf-8');
-  res.set('Content-Disposition', `inline; filename="${slug}.ics"`);
-  res.send(ics);
-}));
-
 // SEO-Seiten (/<locale>/film|serie|filme|... und /sitemap-*.xml) -- eigene,
 // von der App getrennte Dokumente (siehe PLAN-SEO-UMSETZUNG). Muss vor
 // express.static stehen, sonst faengt dessen SPA-Fallback (index.html mit
@@ -458,13 +295,6 @@ app.listen(port, () => {
   // Loescht Einzelereignisse der Reichweitenmessung nach der in der
   // Datenschutzerklaerung zugesagten Frist (siehe lib/kpi.js).
   starteKpiAufraeumen();
-  // Live-Zwischenstaende waehrend laufender Spiele von OpenLigaDB in die
-  // Datenbank spiegeln (siehe lib/sportLive.js) -- App und SEO-Spielseiten
-  // lesen von dort.
-  starteSportLive();
-  // Spielbeginn-Erinnerungen per Web-Push an abonnierte Geraete
-  // (siehe lib/sportPush.js).
-  starteSportPush();
   /* Die beiden grossen Startlisten gleich bauen, statt den ersten Besucher nach
      einem Deploy warten zu lassen. Der Aufruf entspricht genau dem, den die App
      beim Start macht -- steht dort ein anderer Parameter, waermt das hier ins

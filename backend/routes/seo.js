@@ -14,7 +14,6 @@ import {
   seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart,
 } from '../lib/seoRender.js';
 import { sitemapIndex, sitemapBereich, BEREICHE } from '../lib/seoSitemap.js';
-import { ladeSpielSeite, ladeSpieleUebersicht, seiteSpiel, seiteSpiele, sportDomainAktiv, sportKontext } from '../lib/seoSport.js';
 
 const router = createAsyncRouter();
 
@@ -128,29 +127,6 @@ router.get('/:locale/kino/:stadtSlug', GRENZE, async (req, res) => {
 
 router.get('/:locale/schauspieler/:slugId', GRENZE, (req, res) => personSeite(req, res, 'schauspieler'));
 router.get('/:locale/regisseur/:slugId', GRENZE, (req, res) => personSeite(req, res, 'regisseur'));
-
-// SEO-Spielseiten (Sport, lib/seoSport.js) -- bewusst NUR de-de: Die
-// Senderrechte gelten fuer Deutschland, andere Sprachfassungen gaebe es nur
-// als leere Huelle. Wie bei den Titelseiten entscheidet die ID am Slug-Ende;
-// ein Tippfehler im Namensteil liefert trotzdem die Seite (canonical zeigt
-// auf die richtige URL).
-// Sobald die eigene Sport-Domain aktiv ist, wohnen die Spielseiten NUR dort
-// (Christian, 20.08.2026: kein doppelter Inhalt auf zwei Domains) -- diese
-// movietaste-Pfade leiten dann dauerhaft um und nehmen den bis dahin
-// aufgebauten Suchwert mit.
-router.get('/de-de/spiele', GRENZE, async (req, res) => {
-  if (sportDomainAktiv()) return res.redirect(301, sportKontext().basis + sportKontext().uebersichtPfad);
-  res.type('html').send(seiteSpiele(await ladeSpieleUebersicht()));
-});
-router.get('/de-de/spiel/:slugId', GRENZE, async (req, res) => {
-  if (sportDomainAktiv()) {
-    return res.redirect(301, `${sportKontext().basis}/spiel/${req.params.slugId}`);
-  }
-  const m = String(req.params.slugId).match(/-(\d+)$/);
-  const daten = m ? await ladeSpielSeite(m[1]) : null;
-  if (!daten) return nichtGefunden(res, 'de-de');
-  res.type('html').send(seiteSpiel(daten));
-});
 
 async function personSeite(req, res, rolle) {
   const { locale, slugId } = req.params;

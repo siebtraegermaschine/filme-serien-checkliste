@@ -7,9 +7,8 @@ import { slugify } from './slug.js';
 import { SITE } from './seoRender.js';
 import { SEO_LOCALES } from './seoLocale.js';
 import { ladePersonSeite } from './seoData.js';
-import { spielPfad, sportDomainAktiv } from './seoSport.js';
 
-export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person', 'spiel'];
+export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person'];
 
 const TTL_MS = 60 * 60 * 1000;
 const cache = new Map();
@@ -46,34 +45,8 @@ async function personenUrls(locale) {
 // Nur URLs, deren seo_content-Zeile existiert -- dieselbe Regel wie das
 // `meta robots`-Tag der Einzelseite (seoData.js: indexierbar = !!text). Damit
 // zieht der Content-Fortschritt die Sitemap automatisch nach.
-// Spielseiten: direkt aus sport_matches, kein seo_content noetig (die
-// Seiten sind daten-, nicht redaktionsgetrieben -- siehe lib/seoSport.js).
-// Nur de-de. lastmod: rund um den Spieltag (3 Tage vor bis nach dem Spiel)
-// zaehlt der heutige Tag -- die Seite wechselt dort ihre Zeitstufen-Texte
-// und soll frisch gecrawlt werden; weiter entfernte Termine tragen den
-// letzten Datenlauf.
-async function spielUrls(locale) {
-  if (locale !== 'de-de') return [];
-  // Aktive Sport-Domain: Die Spielseiten wohnen NUR dort (movietaste leitet
-  // per 301 um, siehe routes/seo.js) -- hier darf keine Spiel-URL mehr
-  // stehen, sonst meldet die Sitemap Weiterleitungsziele.
-  if (sportDomainAktiv()) return [];
-  const { rows } = await pool.query(
-    `SELECT external_id, heim, gast, anstoss, fetched_at FROM sport_matches ORDER BY anstoss`);
-  const heute = new Date().toISOString().slice(0, 10);
-  const urls = rows.map((m) => ({
-    loc: SITE + spielPfad(m),
-    lastmod: Math.abs(new Date(m.anstoss) - Date.now()) < 3 * 86400000
-      ? heute
-      : (m.fetched_at ? m.fetched_at.toISOString().slice(0, 10) : null),
-  }));
-  urls.unshift({ loc: `${SITE}/de-de/spiele`, lastmod: heute });
-  return urls;
-}
-
 async function urlsFuerBereich(locale, bereich) {
   if (bereich === 'person') return personenUrls(locale);
-  if (bereich === 'spiel') return spielUrls(locale);
 
   const { rows } = await pool.query(
     `SELECT schluessel, aktualisiert_am FROM seo_content WHERE bereich = $1 AND locale = $2`,
