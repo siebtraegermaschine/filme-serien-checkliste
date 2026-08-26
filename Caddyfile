@@ -31,6 +31,14 @@ movietaste.de, www.movietaste.de {
 		-Server
 	}
 
+	# Die alten Sport-Spielseiten leben seit dem 24.08.2026 auf couchultras.com.
+	# Die 301 sollen dauerhaft stehen bleiben (Linkkraft der indexierten
+	# Seiten) -- als feste Regel hier statt im Backend, damit sie das
+	# Entkernen des Sportcodes ueberleben.
+	redir /de-de/spiele https://couchultras.com/spiele permanent
+	@spiel path_regexp spiel ^/de-de/spiel/(.*)$
+	redir @spiel https://couchultras.com/spiel/{re.spiel.1} permanent
+
 	reverse_proxy backend:3000
 }
 
