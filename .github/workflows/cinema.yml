@@ -71,3 +71,64 @@ jobs:
           CINEMA_INGEST_SECRET: ${{ secrets.CINEMA_INGEST_SECRET }}
           TMDB_REGION: ${{ matrix.region }}
         run: node cinema-fetch.mjs
+
+  # Gegenstueck zum "nachzuegler" in streaming.yml (754756c): faellt in der
+  # Kette eine einzelne Region aus, wird genau sie einmal wiederholt, statt
+  # bis zum naechsten Tageslauf auf dem Vortagsstand zu bleiben (so geschehen
+  # am 26.08.2026 mit RO, Lauf #37 -- die Kino-Kette hatte den Job noch nicht).
+  # Der Gesamtlauf bleibt rot; was nachgeholt wurde, steht in der Summary.
+  nachzuegler:
+    needs: update
+    if: always() && needs.update.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read               # nur zum Lesen der Jobs DIESES Laufs
+    timeout-minutes: 60
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Gescheiterte Regionen ermitteln
+        id: finden
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Die Matrix-Jobs heissen "update (RO)" -- daraus das Kuerzel ziehen.
+          REGIONEN=$(curl -sS \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "${{ github.api_url }}/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs?per_page=100" \
+            | jq -r '[.jobs[]
+                      | select(.conclusion == "failure")
+                      | .name
+                      | select(test("^update \\([A-Z]{2}\\)$"))
+                      | ltrimstr("update (") | rtrimstr(")")]
+                     | unique | join(" ")')
+          echo "regionen=$REGIONEN" >> "$GITHUB_OUTPUT"
+          echo "Nachzuholen: ${REGIONEN:-(keine erkannt)}"
+
+      - name: Wiederholen
+        if: steps.finden.outputs.regionen != ''
+        env:
+          REGIONEN: ${{ steps.finden.outputs.regionen }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          STREAMING_API_URL: ${{ vars.STREAMING_API_URL }}
+          CINEMA_INGEST_SECRET: ${{ secrets.CINEMA_INGEST_SECRET }}
+        run: |
+          FEHLER=0
+          for R in $REGIONEN; do
+            echo "──── zweiter Versuch: $R"
+            if TMDB_REGION="$R" node cinema-fetch.mjs; then
+              echo "- $R: nachgeholt" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "- $R: **auch im zweiten Versuch gescheitert**" >> "$GITHUB_STEP_SUMMARY"
+              FEHLER=1
+            fi
+          done
+          exit $FEHLER
