@@ -49,6 +49,13 @@ Formuliere diese wiederkehrenden Angaben deshalb unterschiedlich und baue sie in
 den Satz ein, statt sie aufzuzaehlen. Nicht jeder Text muss die Freigabe im selben
 Satzbau nennen, und nicht jeder muss sie ueberhaupt an derselben Stelle bringen.
 
+QUELLE NICHT ERWAEHNEN
+Der Text steht auf einer oeffentlichen Seite. Die Leser kennen keinen „Datensatz“
+und keine „Inhaltsangabe“. Schreibe deshalb nie „der Datensatz nennt“, „im Datensatz
+verzeichnet“, „laut Inhaltsangabe“, „Eine Altersfreigabe ist nicht hinterlegt“ oder
+Aehnliches. Nenne die Angabe direkt („Regie führte …“, „Das Drama …“). Fehlt eine
+Angabe (Freigabe, Rollen), lass sie weg, statt ihr Fehlen zu kommentieren.
+
 ZEIT- UND EPOCHENANGABEN
 Nenne Epochen so, wie der Datensatz sie nennt. Steht dort „viktorianisch", schreibe
 „viktorianisch" — nicht „19. Jahrhundert". Die Umrechnung ist Allgemeinwissen und
