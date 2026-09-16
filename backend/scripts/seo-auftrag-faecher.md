@@ -56,6 +56,15 @@ verzeichnet“, „laut Inhaltsangabe“, „Eine Altersfreigabe ist nicht hinte
 Aehnliches. Nenne die Angabe direkt („Regie führte …“, „Das Drama …“). Fehlt eine
 Angabe (Freigabe, Rollen), lass sie weg, statt ihr Fehlen zu kommentieren.
 
+Dasselbe gilt fuer die Datenbanksprache rund um die Felder: nicht „als Genres sind
+Drama und Thriller verzeichnet / angegeben / vermerkt / eingetragen / hinterlegt /
+ausgewiesen“, nicht „wird als Regie geführt“, nicht „die Schlagwörter nennen …“ oder
+„das Schlagwort Weihnachten“. Stattdessen: „Der Film verbindet Drama und Thriller“,
+„Regie führte …“, Motive direkt in den Satz einbauen („Weihnachten bildet den Rahmen“).
+Pruefe vor der Abgabe, dass keines dieser Woerter vorkommt: Datensatz, Inhaltsangabe,
+verzeichnet, hinterlegt, eingetragen, vermerkt, Schlagwort, Schlagwörter, angegeben,
+ausgewiesen, Angabe.
+
 ZEIT- UND EPOCHENANGABEN
 Nenne Epochen so, wie der Datensatz sie nennt. Steht dort „viktorianisch", schreibe
 „viktorianisch" — nicht „19. Jahrhundert". Die Umrechnung ist Allgemeinwissen und
