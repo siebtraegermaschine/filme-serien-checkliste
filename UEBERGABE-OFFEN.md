@@ -1,4 +1,4 @@
-# Offene Punkte — Stand 2026-08-24
+# Offene Punkte — Stand 2026-09-16
 
 Ergänzt `UEBERGABE-CHAT.md` (Stand 2026-08-03). Für Architektur und Auslieferung
 siehe `DEPLOYMENT.md` (enthält seit dem 11. August auch den server-seitigen
@@ -19,6 +19,22 @@ aber kein Arbeitsauftrag mehr.
 **Diese Datei ist der Einstiegspunkt.** Abschnitt 3 sagt, was noch zu tun ist;
 Abschnitt 1, 2 und 6, was man vorher wissen sollte. Die Abschnitte 0 bis 2 stehen
 nach Datum, das Neueste zuerst.
+
+> **Neu am 16.09.2026: Analytics-Fenster für das Betreiber-Konto.** Im
+> Menü rechts oben steht unter „Einstellungen" der Punkt „Analytics" — nur
+> sichtbar für `c.neubauer@digital-wings.com` (`ANALYTICS_EMAIL`), nach dem
+> Vorbild von CouchUltras: `GET /api/analytics` (`backend/routes/analytics.js`,
+> Fremde bekommen 404) liefert 15 Kennzahlen mit Gesamt / Heute / 7 Tage /
+> 30 Tage samt Vergleichswert. Neu gezählt werden dafür die Aufrufe der
+> SEO-Seiten (`seo_aufruf`, serverseitig in `routes/seo.js`, ohne
+> Gerätekennung, Crawler markiert). Beschreibung in `docs/kpi.md`.
+>
+> **Der Sport-Rückbau aus Abschnitt 0.0.0.0.0.0 ist am 26.08.2026 erledigt**
+> (`83c1b5e`, `2b0bb71`, `a752305`): Code, Tests, Workflow, Schema und die
+> `users.sport_*`-Spalten sind weg, auch in der Live-DB (Sicherung
+> `/opt/movietaste/backups/vor-sport-entkernen-2026-08-26.sql.gz`). Die 301
+> auf couchultras.com sind feste Caddy-Regeln. Der Abschnitt unten bleibt als
+> Beleg stehen, ist aber kein Arbeitsauftrag mehr.
 
 > **Neu am 24.08.2026: Der Sportbereich ist ausgezogen.** CouchUltras läuft als
 > eigenes Projekt unter `siebtraegermaschine/couchultras`. Der Sportcode liegt

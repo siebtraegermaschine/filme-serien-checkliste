@@ -14,8 +14,36 @@ import {
   seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart,
 } from '../lib/seoRender.js';
 import { sitemapIndex, sitemapBereich, BEREICHE } from '../lib/seoSitemap.js';
+import { track } from '../lib/track.js';
 
 const router = createAsyncRouter();
+
+/* Aufrufzaehler der SEO-Seiten (16.09.2026, fuer die Analytics-Ansicht des
+   Betreibers): serverseitig und OHNE Geraetekennung -- gespeichert werden nur
+   der Seitentyp (zweites Pfadsegment, 'start' fuer /<locale>) und ob der
+   Aufrufer nach seinem User-Agent ein Crawler ist. Gezaehlt wird erst beim
+   Abschluss der Antwort und nur bei 200 + HTML, also keine 404-Seiten und
+   keine Sitemaps. Der Pfad muss mit einem gueltigen Locale beginnen -- so
+   bleiben index.html und alles, was express.static hinter diesem Router
+   ausliefert, aussen vor. Fire-and-forget wie track() selbst: Zaehlen darf
+   die Auslieferung nie bremsen. */
+const BOT_RE = /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|whatsapp|telegram|preview/i;
+export function seoAufrufTyp(pfad) {
+  const teile = String(pfad || '').split('/').filter(Boolean);
+  if (!localeGueltig(teile[0])) return null;
+  return teile[1] || 'start';
+}
+router.use((req, res, next) => {
+  const typ = seoAufrufTyp(req.path);
+  if (typ) {
+    res.on('finish', () => {
+      if (res.statusCode !== 200) return;
+      if (!/text\/html/.test(String(res.get('content-type') || ''))) return;
+      track('seo_aufruf', { props: { typ, bot: BOT_RE.test(req.get('user-agent') || '') } });
+    });
+  }
+  next();
+});
 
 // Grosszuegig wie /t/ (server.js) -- trifft nur Haemmern ueber viele Slugs,
 // nicht normale Crawler-/Besucher-Last.

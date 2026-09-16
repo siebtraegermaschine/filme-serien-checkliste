@@ -471,6 +471,24 @@
     text-align:left; padding:9px 10px; border-radius:6px; cursor:pointer; width:100%; }
   @media (hover: hover) { .nav-menu-item:hover { background:var(--card-hover); color:var(--accent); } }
   .nav-menu-sep { border:none; border-top:1px solid var(--border); margin:4px 4px; }
+  /* Analytics-Fenster (nur Betreiber-Konto): schlichte KPI-Tabelle, wie bei
+     CouchUltras. */
+  .analytics-tabelle { width:100%; border-collapse:collapse; font-size:13.5px; }
+  .analytics-tabelle th, .analytics-tabelle td { padding:7px 8px; text-align:left;
+    border-bottom:1px solid var(--border); }
+  .analytics-tabelle th { color:var(--text-dim); font-size:11.5px; text-transform:uppercase;
+    letter-spacing:.4px; }
+  .analytics-tabelle .zahl { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .analytics-tabelle .delta { font-size:11px; }
+  .analytics-tabelle .plus { color:var(--done, #4cc38a); }
+  .analytics-tabelle .minus { color:#e05d5d; }
+  .analytics-tabelle .neutral { color:var(--text-dim); }
+  .analytics-scroll { overflow:auto; flex:1; min-height:0; }
+  @media (max-width: 480px) {
+    .analytics-tabelle { font-size:12px; }
+    .analytics-tabelle th, .analytics-tabelle td { padding:6px 5px; }
+  }
+  .analytics-stand { font-size:12px; color:var(--text-dim); margin-top:10px; }
   /* Aktive Ansicht in der Menue-Liste (Spielplan/Konferenz/Tabelle). */
   .nav-menu-item.aktiv { color:var(--accent); background:var(--accent-soft); }
   .auth-modal { max-width:340px; }
@@ -1347,6 +1365,11 @@
          zeigt das Einstellungen-Fenster nur die kontofreien Punkte
          (einstellungenSichtbarkeit). -->
     <button type="button" id="settingsBtn" class="nav-menu-item" style="display:none">Einstellungen</button>
+    <!-- Nur fuer das Betreiber-Konto sichtbar (renderAuthBar blendet ein);
+         die eigentliche Zugangskontrolle sitzt am Server
+         (backend/routes/analytics.js liefert Fremden 404). Bewusst
+         unuebersetzt -- die Ansicht sieht nur ein Konto. (16.09.2026) -->
+    <button type="button" id="navAnalyticsBtn" class="nav-menu-item" style="display:none">Analytics</button>
     <hr class="nav-menu-sep">
     <button type="button" id="feedbackBtn" class="nav-menu-item">Feedback senden</button>
     <button type="button" id="installAppBtn" class="nav-menu-item">Als App speichern</button>
@@ -1564,6 +1587,19 @@
       <button type="button" id="shareImageBtn" class="modal-yes" disabled>Mit anderen teilen</button>
     </div>
     <div class="share-hint" id="shareHint"></div>
+  </div>
+</div>
+
+<!-- Analytics (16.09.2026): einfache KPI-Tabelle, nur fuer das
+     Betreiber-Konto -- Menuepunkt "Analytics". Daten von GET /api/analytics
+     (dort sitzt die Zugangskontrolle). Deutsch, unuebersetzt. -->
+<div id="analyticsModal" class="modal-overlay" style="display:none">
+  <div class="modal similar-modal">
+    <button class="modal-x" id="analyticsModalX" aria-label="Schließen">✕</button>
+    <h3>Analytics</h3>
+    <div class="analytics-scroll">
+      <div id="analyticsInhalt">Lädt …</div>
+    </div>
   </div>
 </div>
 
@@ -12287,7 +12323,59 @@ function renderAuthBar(){
   settingsBtn.style.display = '';
   authBarLogout.style.display = CURRENT_USER ? '' : 'none';
   authBarLogin.style.display = CURRENT_USER ? 'none' : '';
+  // "Analytics" nur fuer das Betreiber-Konto -- reiner Komfort, die
+  // Zugangskontrolle sitzt am Server (GET /api/analytics -> 404 fuer Fremde).
+  document.getElementById('navAnalyticsBtn').style.display =
+    CURRENT_USER && String(CURRENT_USER.email || '').toLowerCase() === 'c.neubauer@digital-wings.com' ? '' : 'none';
 }
+
+/* ---- Analytics-Fenster (16.09.2026): KPI-Tabelle fuer das Betreiber-Konto,
+   nach dem Vorbild von CouchUltras. Deutsch und unuebersetzt -- die Ansicht
+   sieht genau ein Konto. Spalten: Gesamt, Heute, 7 Tage, 30 Tage; die drei
+   Zeitfenster tragen ihre Veraenderung zum Vortag/zur Vorwoche/zum Vormonat
+   klein in derselben Zelle. ---- */
+var _analyticsModal = document.getElementById('analyticsModal');
+async function openAnalyticsModal(){
+  _analyticsModal.style.display = 'flex';
+  var inhalt = document.getElementById('analyticsInhalt');
+  inhalt.textContent = 'Lädt …';
+  try {
+    var d = await apiRequest('GET', '/api/analytics');
+    // Zahl plus kleiner Veraenderung (gruen/rot) in DERSELBEN Zelle -- eine
+    // eigene Delta-Spalte machte die Tabelle zu breit.
+    var zelle = function(wert, vergleich, einheit){
+      if (wert == null) return '<td class="zahl">–</td>';
+      var html = esc(String(wert) + (einheit || ''));
+      if (vergleich != null) {
+        var diff = wert - vergleich;
+        html += ' <span class="delta ' + (diff > 0 ? 'plus' : diff < 0 ? 'minus' : 'neutral') + '">' +
+                esc((diff > 0 ? '+' : '') + diff) + '</span>';
+      }
+      return '<td class="zahl">' + html + '</td>';
+    };
+    var zeilen = (d.zeilen || []).map(function(z){
+      return '<tr><td>' + esc(z.label) + '</td>' +
+             zelle(z.gesamt, null, z.einheit) +
+             zelle(z.t1, z.t1v, z.einheit) +
+             zelle(z.t7, z.t7v, z.einheit) +
+             zelle(z.t30, z.t30v, z.einheit) + '</tr>';
+    }).join('');
+    inhalt.innerHTML = '<table class="analytics-tabelle">' +
+      '<thead><tr><th>KPI</th><th class="zahl">Ges.</th><th class="zahl">Heute</th><th class="zahl">7 T</th><th class="zahl">30 T</th></tr></thead>' +
+      '<tbody>' + zeilen + '</tbody></table>' +
+      '<p class="analytics-stand">Stand: ' + esc(new Date(d.stand).toLocaleString(LOCALE)) +
+      ' · Grün/Rot = Veränderung zum Vortag, zur Vorwoche bzw. zum Vormonat. ' +
+      'SEO-Seitenaufrufe werden seit dem 16.09.2026 gezählt.</p>';
+  } catch (e) {
+    inhalt.textContent = 'Konnte nicht geladen werden.';
+  }
+}
+document.getElementById('navAnalyticsBtn').onclick = function(){
+  closeNavMenu();
+  openAnalyticsModal();
+};
+document.getElementById('analyticsModalX').onclick = function(){ _analyticsModal.style.display = 'none'; };
+_analyticsModal.addEventListener('click', function(e){ if (e.target === _analyticsModal) _analyticsModal.style.display = 'none'; });
 function setAuthMode(m){
   authMode = m;
   authError.textContent = '';

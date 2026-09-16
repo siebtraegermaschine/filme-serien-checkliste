@@ -28,6 +28,7 @@ import movieNightRouter from './routes/movieNight.js';
 import metrikRouter from './routes/metrik.js';
 import eventsRouter from './routes/events.js';
 import kpiRouter from './routes/kpi.js';
+import analyticsRouter from './routes/analytics.js';
 import onboardingRouter from './routes/onboarding.js';
 import { anonId } from './middleware/anonId.js';
 import { starteKpiSnapshot, starteKpiAufraeumen } from './lib/kpi.js';
@@ -114,6 +115,9 @@ app.use('/api/movie-night', movieNightRouter);
 app.use('/api/metrik', metrikRouter);
 app.use('/api/events', eventsRouter);
 app.use('/api/kpi', kpiRouter);
+// Kennzahlen-Fenster fuer das Betreiber-Konto (Menuepunkt "Analytics");
+// die Zugangskontrolle sitzt in der Route selbst (404 fuer Fremde).
+app.use('/api/analytics', analyticsRouter);
 app.use('/api/onboarding', onboardingRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).

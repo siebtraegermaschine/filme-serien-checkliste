@@ -37,6 +37,7 @@ dieses Format, nichts umbenennen oder "verbessern".
 | `match_completed` | einmal je Runde: ≥2 Teilnehmende und ≥1 Titel mit Ja von allen | `{ participant_count, title_id }` | `routes/movieNight.js` |
 | `affiliate_click` | Klick auf Ansehen/Leihen/Kaufen-Anbieterlink | `{ provider, title_id }` | Client |
 | `affiliate_conversion` / `subscription_*` | vorgesehen, aber ohne Auslöser — es gibt (noch) keine Partner-Postbacks und keine Abos | | |
+| `seo_aufruf` | Auslieferung einer SEO-Seite unter `/<locale>/…` mit Status 200 (seit 16.09.2026) | `{ typ, bot }` — Seitentyp (zweites Pfadsegment, `start` für die Locale-Startseite) und ob der User-Agent ein Crawler ist; `anon_id` ist `system`, also ohne Gerätebezug | `routes/seo.js` |
 
 `invite_id` ist immer der **SHA-256-Hash** des Einladungstokens (wie in
 `user_link_invites`) — der einlösbare Rohtoken wird nie gespeichert.
@@ -44,6 +45,18 @@ dieses Format, nichts umbenennen oder "verbessern".
 Der Gast-Pfad: `invite_accepted` mit `guest: true` verknüpft `anon_id` und
 `invite_id`; ein späteres `user_signed_up` desselben Geräts trägt
 `was_guest: true` und ist so demselben Einladungspfad zuordenbar.
+
+## Betreiber-Ansicht „Analytics"
+
+Seit dem 16.09.2026 gibt es zusätzlich zum Wochen-Snapshot eine **Live-Ansicht**
+im Menü der App (Punkt „Analytics" unter „Einstellungen"), nach dem Vorbild von
+CouchUltras: `GET /api/analytics` (`routes/analytics.js`) rechnet die Kennzahlen
+direkt aus den Tabellen — Gesamt, letzte 24 Stunden, 7 Tage, 30 Tage, jeweils mit
+Vergleichswert (Vortag, Vorwoche, Vormonat). Sie ist **ausschließlich für das
+Betreiber-Konto** (`ANALYTICS_EMAIL`, Standard `c.neubauer@digital-wings.com`);
+jede andere Kennung bekommt 404. Der Menüpunkt im Frontend ist nur Komfort, die
+Zugangskontrolle sitzt in der Route. Sie nutzt weder `kpi_snapshots` noch das
+Token von `/api/kpi` und ändert nichts an den Snapshot-Definitionen.
 
 ## Kennzahlen-Regeln
 

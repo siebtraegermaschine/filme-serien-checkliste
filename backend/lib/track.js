@@ -28,6 +28,10 @@ export const EVENT_NAMEN = [
   'affiliate_conversion',
   'subscription_started',
   'subscription_cancelled',
+  // Aufruf einer SEO-Seite (props: { typ, bot }) -- serverseitig gezaehlt
+  // (routes/seo.js), OHNE Geraetekennung (anon_id = SYSTEM_ANON_ID). Fuer
+  // die Analytics-Ansicht des Betreibers (routes/analytics.js), 16.09.2026.
+  'seo_aufruf',
 ];
 
 // Ereignisse, die der Client ueber POST /api/events melden darf (siehe
