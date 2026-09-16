@@ -62,13 +62,15 @@ async function urlsFuerBereich(locale, bereich) {
       return { type, tmdbId: Number(tmdbId), aktualisiert_am: r.aktualisiert_am };
     }).filter((p) => (p.type === 'movie' || p.type === 'series') && Number.isInteger(p.tmdbId));
     if (!paare.length) return [];
+    // Paare als zwei Arrays per unnest statt als IN-Liste mit einem
+    // Platzhalterpaar je Titel: Ab ~8.400 Paaren brach Postgres die IN-Liste
+    // mit "stack depth limit exceeded" ab (16.09.2026, Sitemap lieferte 500).
     const { rows: titelRows } = await pool.query(
       `SELECT t.type, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, t.title
          FROM titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
-        WHERE (t.type, COALESCE(t.tmdb_id, r.tmdb_id)) IN (
-          ${paare.map((_, i) => `($${i * 2 + 1}, $${i * 2 + 2})`).join(',')}
-        )`,
-      paare.flatMap((p) => [p.type, p.tmdbId])
+         JOIN unnest($1::text[], $2::int[]) AS p(type, tmdb_id)
+           ON p.type = t.type AND p.tmdb_id = COALESCE(t.tmdb_id, r.tmdb_id)`,
+      [paare.map((p) => p.type), paare.map((p) => p.tmdbId)]
     );
     const byKey = new Map(titelRows.map((t) => [`${t.type}:${t.tmdb_id}`, t.title]));
     return paare
