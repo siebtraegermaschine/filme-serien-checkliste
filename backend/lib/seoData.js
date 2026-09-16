@@ -20,6 +20,33 @@ const NOTE_SQL = `CASE WHEN COALESCE(rating, 0) = 0 THEN 0
   ELSE (COALESCE(vote_count, 0)::float / (COALESCE(vote_count, 0) + 1000)) * rating
      + (1000::float / (COALESCE(vote_count, 0) + 1000)) * 6.76 END`;
 
+// Titelquelle ALLER SEO-Listen (Genre, Bestenliste, Hub, Filmografie,
+// "aehnliche Titel"). Zwei Dinge, die die Rohtabelle nicht hergibt:
+//
+// 1. Die Kennung. Die 600 kuratierten Katalog-Titel tragen in titles keine
+//    tmdb_id -- ihre steht in title_tmdb_resolution (siehe schema.sql). Ohne
+//    den Blick dorthin wurde der Listenlink zu "...-null" und lief auf "Seite
+//    nicht gefunden"; so stand es vom 16.08. bis 16.09.2026 auf den Genre-,
+//    Hub- und Bestenlisten, waehrend Titelseite und Sitemap laengst ueber
+//    COALESCE gingen. Titel, deren Suche nichts fand (tmdb_id auch dort
+//    NULL), koennen keine Seite haben und fehlen in den Listen.
+// 2. Dubletten. 593 dieser Katalog-Titel gibt es ein zweites Mal aus dem
+//    TMDB-Abzug -- derselbe Film stand zweimal in der Liste. Wie in der App
+//    (ohneDubletten in index.html) bleibt je Kennung der Eintrag mit den
+//    meisten Stimmen; auf dem Live-Bestand ist das ueberall der TMDB-Eintrag
+//    mit Poster, Schlagwoertern und Kino-Abgleich.
+//
+// Kostet einen Sortierlauf ueber ~27.000 Zeilen, ~50 ms auf dem Server --
+// tragbar fuer Seiten, die gecacht sind oder vor allem Crawler lesen.
+const TITEL_MIT_KENNUNG = `(
+  SELECT DISTINCT ON (t.type, COALESCE(t.tmdb_id, r.tmdb_id))
+         t.id, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, t.type, t.title, t.year,
+         t.genres, t.director, t.cast_names, t.rating, t.vote_count, t.poster_path
+    FROM titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
+   WHERE COALESCE(t.tmdb_id, r.tmdb_id) IS NOT NULL
+   ORDER BY t.type, COALESCE(t.tmdb_id, r.tmdb_id), COALESCE(t.vote_count, 0) DESC, t.id
+) titel`;
+
 
 // Ab wie vielen Woertern ein Redaktionstext eine Seite indexierbar macht.
 // Die Regel lautet unveraendert: Seiten mit Inhalt stehen auf index, angelegte
@@ -108,6 +135,9 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
        FROM titles t
        LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
       WHERE t.type = $1 AND COALESCE(t.tmdb_id, r.tmdb_id) = $2
+      -- Bei Dubletten (Katalog + TMDB-Abzug) derselbe Sieger wie in
+      -- TITEL_MIT_KENNUNG, damit id hier und in den Listen uebereinstimmt.
+      ORDER BY COALESCE(t.vote_count, 0) DESC, t.id
       LIMIT 1`,
     [type, tmdbId]
   );
@@ -125,19 +155,19 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     // "Weitere Filme von X" -- nur, wenn eine Regie bekannt ist.
     titel.director
       ? pool.query(
-          `SELECT id, tmdb_id, title, year, poster_path FROM titles
-            WHERE type = $1 AND director = $2 AND id <> $3
+          `SELECT id, tmdb_id, title, year, poster_path FROM ${TITEL_MIT_KENNUNG}
+            WHERE type = $1 AND director = $2 AND tmdb_id <> $3
             ORDER BY ${NOTE_SQL} DESC LIMIT 6`,
-          [type, titel.director, titel.id]
+          [type, titel.director, titel.tmdb_id]
         )
       : { rows: [] },
     // "Aehnliche Titel" -- gleiches Genre, ueberschneidende Menge (&&).
     (titel.genres && titel.genres.length)
       ? pool.query(
-          `SELECT id, tmdb_id, title, year, genres, rating, poster_path FROM titles
-            WHERE type = $1 AND genres && $2::text[] AND id <> $3
+          `SELECT id, tmdb_id, title, year, genres, rating, poster_path FROM ${TITEL_MIT_KENNUNG}
+            WHERE type = $1 AND genres && $2::text[] AND tmdb_id <> $3
             ORDER BY ${NOTE_SQL} DESC LIMIT 6`,
-          [type, titel.genres, titel.id]
+          [type, titel.genres, titel.tmdb_id]
         )
       : { rows: [] },
     // Kein Live-TMDB-Aufruf hier -- nur ein Cache-Blick (resolvePersonIdCachedOnly),
@@ -237,14 +267,14 @@ export async function ladeGenreSeite(art, genreSlug, seite, locale) {
 
   const offset = Math.max(0, (seite - 1) * SEITENGROESSE);
   const { rows: gesamtRows } = await pool.query(
-    `SELECT count(*)::int AS n FROM titles WHERE type = $1 AND genres @> ARRAY[$2::text]`,
+    `SELECT count(*)::int AS n FROM ${TITEL_MIT_KENNUNG} WHERE type = $1 AND genres @> ARRAY[$2::text]`,
     [type, genre]
   );
   const gesamt = gesamtRows[0].n;
 
   const { rows } = await pool.query(
     `SELECT id, tmdb_id, title, year, genres, rating, vote_count, poster_path
-       FROM titles WHERE type = $1 AND genres @> ARRAY[$2::text]
+       FROM ${TITEL_MIT_KENNUNG} WHERE type = $1 AND genres @> ARRAY[$2::text]
       ORDER BY ${NOTE_SQL} DESC, title ASC
       LIMIT $3 OFFSET $4`,
     [type, genre, SEITENGROESSE, offset]
@@ -320,7 +350,7 @@ export async function ladeBestenliste(art, modus, wert, locale) {
 
   const { rows } = await pool.query(
     `SELECT id, tmdb_id, title, year, genres, rating, vote_count, poster_path
-       FROM titles WHERE type = $1 AND ${bedingung}
+       FROM ${TITEL_MIT_KENNUNG} WHERE type = $1 AND ${bedingung}
       ORDER BY ${NOTE_SQL} DESC LIMIT 200`,
     [type, param]
   );
@@ -375,7 +405,7 @@ async function alleGenres(type) {
 async function topTitel(type, limit = HUB_ANZAHL) {
   const { rows } = await pool.query(
     `SELECT id, tmdb_id, title, year, genres, rating, vote_count, poster_path
-       FROM titles WHERE type = $1 ORDER BY ${NOTE_SQL} DESC LIMIT $2`,
+       FROM ${TITEL_MIT_KENNUNG} WHERE type = $1 ORDER BY ${NOTE_SQL} DESC LIMIT $2`,
     [type, limit]
   );
   const bewertungen = await bewertungenFuer(rows.map((r) => r.id));
@@ -489,7 +519,7 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
 
   const bedingung = rolle === 'regisseur' ? 'director = $1' : '$1 = ANY(cast_names)';
   const { rows } = await pool.query(
-    `SELECT id, tmdb_id, type, title, year, poster_path FROM titles
+    `SELECT id, tmdb_id, type, title, year, poster_path FROM ${TITEL_MIT_KENNUNG}
       WHERE ${bedingung} ORDER BY ${NOTE_SQL} DESC LIMIT 24`,
     [person.name]
   );

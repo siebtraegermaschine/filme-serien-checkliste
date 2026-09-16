@@ -73,14 +73,23 @@ test('ladeTitelSeite: indexierbar nur mit seo_content, Community-Bewertung erst 
   assert.equal(aufSchwelle.communityBewertung.gesamt, MINDESTZAHL_BEWERTUNGEN);
   assert.equal(aufSchwelle.communityBewertung.durchschnitt, 8);
 
-  // Mit seo_content wird die Seite indexierbar.
+  // Ein Rumpftext macht die Seite noch nicht indexierbar (MINDESTWOERTER_INDEX).
   await pool.query(
     `INSERT INTO seo_content (bereich, schluessel, locale, text) VALUES ('titel', $1, 'de-de', 'Ein Testtext.')`,
     [`movie:${TMDB_TEST_BASIS}`]
   );
+  const mitRumpf = await ladeTitelSeite('film', TMDB_TEST_BASIS, 'de-de');
+  assert.equal(mitRumpf.indexierbar, false);
+  assert.equal(mitRumpf.text, 'Ein Testtext.');
+
+  // Erst ein Text ab 250 Woertern Fliesstext kippt die Seite auf index.
+  const langerText = '### Worum es geht\n\n' + Array.from({ length: 260 }, (_, i) => 'Wort' + i).join(' ');
+  await pool.query(
+    `UPDATE seo_content SET text = $2 WHERE bereich = 'titel' AND schluessel = $1 AND locale = 'de-de'`,
+    [`movie:${TMDB_TEST_BASIS}`, langerText]
+  );
   const mitText = await ladeTitelSeite('film', TMDB_TEST_BASIS, 'de-de');
   assert.equal(mitText.indexierbar, true);
-  assert.equal(mitText.text, 'Ein Testtext.');
 });
 
 test('ladeTitelSeite: unbekannte tmdbId liefert null (kein Absturz)', async () => {
@@ -190,3 +199,60 @@ test('Hub-Seiten: indexierbar nur mit seo_content, Anbieter-/Stadt-Listen korrek
 });
 
 test.after(async () => { await pool.end(); });
+
+// Die 600 kuratierten Katalog-Titel tragen keine eigene tmdb_id; ihre Kennung
+// steht in title_tmdb_resolution, und meist gibt es denselben Titel ein zweites
+// Mal aus dem TMDB-Abzug. Bis zum 16.09.2026 verlinkten die Listen sie mit
+// "...-null" (Seite nicht gefunden) und zeigten den Zwilling doppelt.
+test('SEO-Listen: Katalog-Titel verlinken ueber title_tmdb_resolution, Dubletten nur einmal', async (t) => {
+  await aufraeumen();
+  t.after(aufraeumen);
+
+  await pool.query(
+    `INSERT INTO genre_alias (tmdb_genre_id, art, name_de, name_en) VALUES (999999, 'movie', $1, 'SEOTEST-Genre-EN')`,
+    [GENRE_TEST]
+  );
+  const lege = async (tmdbId, titel, rating, votes) => {
+    const { rows: [r] } = await pool.query(
+      `INSERT INTO titles (tmdb_id, type, title, year, genres, director, rating, vote_count)
+       VALUES ($1, 'movie', $2, 1994, ARRAY[$3::text], 'Test-Regie', $4, $5) RETURNING id`,
+      [tmdbId, TITEL_PRAEFIX + titel, GENRE_TEST, rating, votes]
+    );
+    return r.id;
+  };
+  const aufloesen = (titleId, tmdbId) =>
+    pool.query(`INSERT INTO title_tmdb_resolution (title_id, tmdb_id) VALUES ($1, $2)`, [titleId, tmdbId]);
+
+  // Katalog-Eintrag ohne Kennung + TMDB-Zwilling mit mehr Stimmen
+  const katalog = await lege(null, 'Zwilling', 9.3, 100);
+  await aufloesen(katalog, TMDB_TEST_BASIS);
+  const zwilling = await lege(TMDB_TEST_BASIS, 'Zwilling', 8.7, 200);
+  // Katalog-Eintrag, nur ueber die Aufloesung erreichbar, ohne Zwilling
+  const allein = await lege(null, 'Allein', 7.0, 50);
+  await aufloesen(allein, TMDB_TEST_BASIS + 1);
+  // Katalog-Eintrag, dessen Suche nichts fand -- kann keine Seite haben
+  const gesuchtNichts = await lege(null, 'Ohne Treffer', 8.0, 500);
+  await aufloesen(gesuchtNichts, null);
+  // Katalog-Eintrag ohne jede Aufloesung
+  await lege(null, 'Nie gesucht', 8.0, 500);
+
+  const seite = await ladeGenreSeite('filme', 'seotest-genre', 1, 'de-de');
+  assert.equal(seite.gesamt, 2);
+  assert.deepEqual(seite.titel.map((x) => x.tmdbId), [TMDB_TEST_BASIS, TMDB_TEST_BASIS + 1]);
+  assert.equal(seite.titel[0].id, String(zwilling), 'bei Dubletten bleibt der Eintrag mit den meisten Stimmen');
+  assert.equal(seite.titel[1].id, String(allein));
+  assert.ok(seite.titel.every((x) => Number.isInteger(x.tmdbId)), 'kein Link ohne Kennung');
+
+  // Die Titelseite waehlt denselben Sieger wie die Liste.
+  const titelSeite = await ladeTitelSeite('film', TMDB_TEST_BASIS, 'de-de');
+  assert.equal(titelSeite.id, String(zwilling));
+  assert.equal(titelSeite.rating, 8.7);
+  // "Weitere Filme von" schliesst den Titel ueber die Kennung aus -- der
+  // Katalog-Zwilling darf nicht als weiterer Film derselben Regie auftauchen.
+  assert.deepEqual(titelSeite.regisseurFilme.map((x) => x.tmdbId), [TMDB_TEST_BASIS + 1]);
+
+  const hub = await ladeFilmeHub('de-de');
+  const kennungen = hub.titel.map((x) => x.tmdbId);
+  assert.ok(kennungen.every((k) => Number.isInteger(k)));
+  assert.equal(new Set(kennungen).size, kennungen.length, 'Hub ohne Dubletten');
+});
