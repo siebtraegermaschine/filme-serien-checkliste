@@ -483,7 +483,30 @@
   .analytics-tabelle .plus { color:var(--done, #4cc38a); }
   .analytics-tabelle .minus { color:#e05d5d; }
   .analytics-tabelle .neutral { color:var(--text-dim); }
-  .analytics-scroll { overflow:auto; flex:1; min-height:0; }
+  .analytics-scroll { overflow:auto; flex:1; min-height:0; -webkit-overflow-scrolling:touch; }
+  .analytics-tabelle .dim { color:var(--text-dim); }
+  .analytics-tabelle .analytics-block th { color:var(--accent); font-size:12.5px; text-transform:none;
+    letter-spacing:0; padding-top:16px; border-bottom:1px solid var(--accent); }
+  .analytics-tabelle .analytics-block:first-child th { padding-top:6px; }
+  /* Tabs der Analytics-Ansicht: Ueberblick, Funnel, Seiten, Herkunft --
+     Chips wie bei CouchUltras. */
+  .analytics-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+  .analytics-tab { background:var(--card); border:1px solid var(--border); color:var(--text-dim);
+    border-radius:999px; padding:5px 12px; font-size:13px; cursor:pointer; font-family:inherit; }
+  .analytics-tab.aktiv { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+  .analytics-titel { font-size:14px; font-weight:600; margin:14px 0 6px; }
+  .analytics-titel:first-child { margin-top:0; }
+  .analytics-leer { font-size:13px; color:var(--text-dim); }
+  .analytics-pfad { display:inline-block; max-width:260px; overflow:hidden; text-overflow:ellipsis;
+    white-space:nowrap; vertical-align:bottom; color:var(--text); }
+  .analytics-pfad:hover { color:var(--accent); }
+  .analytics-typ { font-size:11px; color:var(--text-dim); }
+  .analytics-verlauf { margin-bottom:14px; }
+  .analytics-verlauf svg { width:100%; height:auto; display:block; }
+  .analytics-legende { display:flex; gap:14px; flex-wrap:wrap; font-size:11.5px; color:var(--text-dim); margin-top:4px; }
+  .analytics-legende i { display:inline-block; width:10px; height:2px; margin-right:5px; vertical-align:2px; }
+  .analytics-legende .lg-seo { background:#4cc38a; }
+  .analytics-legende .lg-app { background:var(--accent); }
   @media (max-width: 480px) {
     .analytics-tabelle { font-size:12px; }
     .analytics-tabelle th, .analytics-tabelle td { padding:6px 5px; }
@@ -5541,6 +5564,31 @@ function kpiGastTeilnahme(){
 }
 kpiAppOpenedMelden();
 
+/* ---- Cookieloser Seiten-Ping (16.09.2026, backend/routes/ping.js) ----
+   Meldet jede Ansicht der App (Start, Filme, Serien, Kino) fuer die
+   Analytics-Tabs "Seiten" und "Herkunft". Gezaehlt wird am Server ueber die
+   cookielose Tageskennung; die verweisende Adresse geht einmal beim Start
+   mit und wird am Server zur Kategorie eingedampft. Fehler sind egal. */
+function seitePing(pfad, ref){
+  try {
+    fetch('/api/ping', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin', keepalive: true,
+      body: JSON.stringify({ pfad: pfad, ref: ref || '' }) }).catch(function(){});
+  } catch (e) {}
+}
+seitePing('/', document.referrer);
+// Herkunftsmarker der SEO-Seiten (?von=app bzw. ?von=titel) hat der Server
+// schon gezaehlt -- aus der Adresszeile raeumen, damit ein Neuladen ihn nicht
+// erneut zaehlt und geteilte Links ihn nicht mitschleppen.
+(function vonParameterEntfernen(){
+  try {
+    var u = new URL(location.href);
+    if (!u.searchParams.has('von')) return;
+    u.searchParams.delete('von');
+    history.replaceState(null, '', u.pathname + (u.search || '') + (u.hash || ''));
+  } catch (e) {}
+})();
+
 function progressFor(id) { return (id != null && PROGRESS.get(id)) || { seen: false, watchlist: false, viaStream: false, rating: null }; }
 
 
@@ -7877,6 +7925,7 @@ function setTab(t) {
     TYPEN[t] = !TYPEN[t];
   }
   typenAngleichen();
+  if (t === 'filme' || t === 'serien') seitePing('/#' + t);
   // Andere Typauswahl heisst andere Liste -- "Mehr laden" faengt wieder vorn an.
   titelLimit = TITEL_PRO_SEITE;
   updateFilterRowUI();
@@ -9242,6 +9291,7 @@ function listenHinweisAktualisieren(){
   };
 }
 function openCinemaPage(){
+  seitePing('/#kino');
   // Kinostarts haben mit fremden Watchlists nichts zu tun -- die Ansicht endet
   // hier, sonst stuende die Leiste "Watchlist von Anna" ueber dem Kinoprogramm.
   // updateProfileBtn() muss dabei mit: die Leiste wird nur dort neu geschrieben,
@@ -12329,46 +12379,155 @@ function renderAuthBar(){
     CURRENT_USER && String(CURRENT_USER.email || '').toLowerCase() === 'c.neubauer@digital-wings.com' ? '' : 'none';
 }
 
-/* ---- Analytics-Fenster (16.09.2026): KPI-Tabelle fuer das Betreiber-Konto,
+/* ---- Analytics-Fenster (16.09.2026): KPI-Ansicht fuer das Betreiber-Konto,
    nach dem Vorbild von CouchUltras. Deutsch und unuebersetzt -- die Ansicht
-   sieht genau ein Konto. Spalten: Gesamt, Heute, 7 Tage, 30 Tage; die drei
-   Zeitfenster tragen ihre Veraenderung zum Vortag/zur Vorwoche/zum Vormonat
-   klein in derselben Zelle. ---- */
+   sieht genau ein Konto. Tabs: Ueberblick (KPI-Tabelle in drei Bloecken plus
+   30-Tage-Kurve), Funnel, Seiten (Aufrufe je Pfad), Herkunft. Die Daten
+   kommen mit EINEM Aufruf von /api/analytics; die Tabs zeichnen nur um. ---- */
 var _analyticsModal = document.getElementById('analyticsModal');
+var _analyticsDaten = null;
+var _analyticsTab = 'ueberblick';
+var ANALYTICS_TABS = [['ueberblick', 'Überblick'], ['trichter', 'Funnel'], ['seiten', 'Seiten'], ['herkunft', 'Herkunft']];
 async function openAnalyticsModal(){
   _analyticsModal.style.display = 'flex';
   var inhalt = document.getElementById('analyticsInhalt');
   inhalt.textContent = 'Lädt …';
   try {
-    var d = await apiRequest('GET', '/api/analytics');
-    // Zahl plus kleiner Veraenderung (gruen/rot) in DERSELBEN Zelle -- eine
-    // eigene Delta-Spalte machte die Tabelle zu breit.
-    var zelle = function(wert, vergleich, einheit){
-      if (wert == null) return '<td class="zahl">–</td>';
-      var html = esc(String(wert) + (einheit || ''));
-      if (vergleich != null) {
-        var diff = wert - vergleich;
-        html += ' <span class="delta ' + (diff > 0 ? 'plus' : diff < 0 ? 'minus' : 'neutral') + '">' +
-                esc((diff > 0 ? '+' : '') + diff) + '</span>';
-      }
-      return '<td class="zahl">' + html + '</td>';
-    };
-    var zeilen = (d.zeilen || []).map(function(z){
-      return '<tr><td>' + esc(z.label) + '</td>' +
-             zelle(z.gesamt, null, z.einheit) +
-             zelle(z.t1, z.t1v, z.einheit) +
-             zelle(z.t7, z.t7v, z.einheit) +
-             zelle(z.t30, z.t30v, z.einheit) + '</tr>';
-    }).join('');
-    inhalt.innerHTML = '<table class="analytics-tabelle">' +
-      '<thead><tr><th>KPI</th><th class="zahl">Ges.</th><th class="zahl">Heute</th><th class="zahl">7 T</th><th class="zahl">30 T</th></tr></thead>' +
-      '<tbody>' + zeilen + '</tbody></table>' +
-      '<p class="analytics-stand">Stand: ' + esc(new Date(d.stand).toLocaleString(LOCALE)) +
-      ' · Grün/Rot = Veränderung zum Vortag, zur Vorwoche bzw. zum Vormonat. ' +
-      'SEO-Seitenaufrufe werden seit dem 16.09.2026 gezählt.</p>';
+    _analyticsDaten = await apiRequest('GET', '/api/analytics');
+    analyticsZeichnen();
   } catch (e) {
     inhalt.textContent = 'Konnte nicht geladen werden.';
   }
+}
+function analyticsZeichnen(){
+  var d = _analyticsDaten || {};
+  var inhalt = document.getElementById('analyticsInhalt');
+  var tabs = '<div class="analytics-tabs">' + ANALYTICS_TABS.map(function(t){
+    return '<button type="button" class="analytics-tab' + (t[0] === _analyticsTab ? ' aktiv' : '') +
+           '" data-tab="' + t[0] + '">' + t[1] + '</button>';
+  }).join('') + '</div>';
+  var teil = { ueberblick: analyticsUeberblick, trichter: analyticsTrichter, seiten: analyticsSeiten, herkunft: analyticsHerkunft }[_analyticsTab];
+  inhalt.innerHTML = tabs + teil(d) +
+    '<p class="analytics-stand">Stand: ' + esc(new Date(d.stand).toLocaleString(LOCALE)) +
+    ' · Ereignisse werden seit dem 14.08.2026 gezählt, Seitenaufrufe (SEO-Seiten, App-Ansichten, Herkunft, Gerätetyp, Geräte je Tag) seit dem 16.09.2026.</p>';
+  inhalt.querySelectorAll('.analytics-tab').forEach(function(b){
+    b.onclick = function(){ _analyticsTab = b.getAttribute('data-tab'); analyticsZeichnen(); };
+  });
+}
+// Zahl plus kleiner Veraenderung (gruen/rot) in DERSELBEN Zelle -- eine
+// eigene Delta-Spalte machte die Tabelle zu breit.
+function analyticsZelle(wert, vergleich, einheit){
+  if (wert == null) return '<td class="zahl">–</td>';
+  var html = esc(String(wert) + (einheit || ''));
+  if (vergleich != null) {
+    var diff = wert - vergleich;
+    html += ' <span class="delta ' + (diff > 0 ? 'plus' : diff < 0 ? 'minus' : 'neutral') + '">' +
+            esc((diff > 0 ? '+' : '') + diff) + '</span>';
+  }
+  return '<td class="zahl">' + html + '</td>';
+}
+function analyticsTagKurz(tag){ return tag.slice(8, 10) + '.' + tag.slice(5, 7) + '.'; }
+// 30-Tage-Kurve: App-Oeffnungen (1x je Geraet und Tag) und SEO-Aufrufe ohne
+// Crawler, beide auf einer gemeinsamen Skala.
+function analyticsVerlaufHtml(v){
+  if (!v || !v.length) return '';
+  var W = 600, H = 130, oben = 6, unten = 20, n = v.length, bw = W / n;
+  var max = 0;
+  v.forEach(function(x){ max = Math.max(max, x.seo, x.oeffnungen); });
+  var skala = Math.max(max, 1), hoehe = H - oben - unten;
+  var linie = function(feld, farbe, name){
+    var punkte = v.map(function(x, i){
+      return (i * bw + bw / 2).toFixed(1) + ',' + (H - unten - x[feld] / skala * hoehe).toFixed(1);
+    });
+    var marker = v.map(function(x, i){
+      return '<circle cx="' + (i * bw + bw / 2).toFixed(1) + '" cy="' + (H - unten - x[feld] / skala * hoehe).toFixed(1) +
+             '" r="' + (n > 40 ? 1.5 : 2.5) + '" fill="' + farbe + '"><title>' + esc(analyticsTagKurz(x.tag) + ' · ' + x[feld] + ' ' + name) + '</title></circle>';
+    }).join('');
+    return '<polyline points="' + punkte.join(' ') + '" fill="none" stroke="' + farbe + '" stroke-width="2" stroke-linejoin="round"/>' + marker;
+  };
+  var achse = '<text x="0" y="' + (H - 5) + '" font-size="10" fill="var(--text-dim)">' + esc(analyticsTagKurz(v[0].tag)) + '</text>' +
+              '<text x="' + W + '" y="' + (H - 5) + '" font-size="10" fill="var(--text-dim)" text-anchor="end">' + esc(analyticsTagKurz(v[n - 1].tag)) + '</text>' +
+              '<text x="' + W + '" y="' + (oben + 8) + '" font-size="10" fill="var(--text-dim)" text-anchor="end">' + max + '</text>';
+  return '<div class="analytics-verlauf"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Letzte 30 Tage">' +
+         '<line x1="0" x2="' + W + '" y1="' + (H - unten) + '" y2="' + (H - unten) + '" stroke="var(--border)"/>' +
+         linie('oeffnungen', 'var(--accent)', 'App-Öffnungen') + linie('seo', '#4cc38a', 'SEO-Aufrufe') + achse + '</svg>' +
+         '<div class="analytics-legende"><span><i class="lg-app"></i>App-Öffnungen (1× je Gerät und Tag)</span>' +
+         '<span><i class="lg-seo"></i>SEO-Aufrufe ohne Crawler</span><span>je Tag, letzte 30 Tage (max. ' + max + ')</span></div></div>';
+}
+// Bloecke der KPI-Tabelle: Gesamt, SEO-Seiten, App -- das Backend haengt
+// jeder Zeile ihren Block an; hier nur die Ueberschriften.
+var ANALYTICS_BLOECKE = [['gesamt', 'Gesamt'], ['seo', 'SEO-Seiten'], ['app', 'App']];
+function analyticsUeberblick(d){
+  var alle = d.zeilen || [];
+  var zeilen = ANALYTICS_BLOECKE.map(function(b){
+    var teil = alle.filter(function(z){ return (z.block || 'gesamt') === b[0]; });
+    if (!teil.length) return '';
+    return '<tr class="analytics-block"><th colspan="5">' + esc(b[1]) + '</th></tr>' + teil.map(function(z){
+      return '<tr><td>' + esc(z.label) + '</td>' +
+             analyticsZelle(z.gesamt, null, z.einheit) +
+             analyticsZelle(z.t1, z.t1v, z.einheit) +
+             analyticsZelle(z.t7, z.t7v, z.einheit) +
+             analyticsZelle(z.t30, z.t30v, z.einheit) + '</tr>';
+    }).join('');
+  }).join('');
+  return analyticsVerlaufHtml(d.verlauf) +
+    '<div class="analytics-scroll"><table class="analytics-tabelle">' +
+    '<thead><tr><th>KPI</th><th class="zahl">Ges.</th><th class="zahl">Heute</th><th class="zahl">7 T</th><th class="zahl">30 T</th></tr></thead>' +
+    '<tbody>' + zeilen + '</tbody></table></div>' +
+    '<p class="analytics-leer" style="margin-top:8px">Grün/Rot = Veränderung zum Vortag, zur Vorwoche bzw. zum Vormonat.</p>';
+}
+function analyticsTrichter(d){
+  var t = d.trichter || {}, s7 = t.t7 || [], s30 = t.t30 || [];
+  if (!s30.length) return '<p class="analytics-leer">Keine Daten.</p>';
+  var quote = function(liste, i){
+    if (i === 0 || !liste[i] || !liste[i - 1] || !(liste[i - 1].wert > 0)) return '–';
+    return Math.round(liste[i].wert / liste[i - 1].wert * 100) + ' %';
+  };
+  var zeilen = s30.map(function(z, i){
+    return '<tr><td>' + esc(z.label) + '</td>' +
+           '<td class="zahl">' + (s7[i] ? s7[i].wert : '–') + '</td><td class="zahl dim">' + quote(s7, i) + '</td>' +
+           '<td class="zahl">' + z.wert + '</td><td class="zahl dim">' + quote(s30, i) + '</td></tr>';
+  }).join('');
+  return '<div class="analytics-scroll"><table class="analytics-tabelle">' +
+    '<thead><tr><th>Stufe</th><th class="zahl">7 T</th><th class="zahl">%</th><th class="zahl">30 T</th><th class="zahl">%</th></tr></thead>' +
+    '<tbody>' + zeilen + '</tbody></table></div>' +
+    '<p class="analytics-leer" style="margin-top:8px">% = Anteil an der Stufe darüber. Die Stufen zählen verschiedene Größen (Aufrufe, Geräte, Konten) und auch Besucher, die direkt in die App kommen – eine Lesehilfe für den Weg in die App, keine Verfolgung einzelner Personen. Die Markierungs-Stufen kommen aus den anonymen Tageszählern (npm run metrik).</p>';
+}
+var ANALYTICS_TYP = { app: 'App', start: 'SEO-Startseite', film: 'Film', serie: 'Serie', filme: 'Filme (Hub/Genre)', serien: 'Serien (Hub/Genre)', streaming: 'Streaming', 'beste-filme': 'Beste Filme', 'beste-serien': 'Beste Serien', kino: 'Kino', schauspieler: 'Schauspieler', regisseur: 'Regie' };
+function analyticsSeiten(d){
+  var s = d.seiten || [];
+  if (!s.length) return '<p class="analytics-leer">Noch keine Aufrufe – die Erfassung je Seite läuft seit dem 16.09.2026.</p>';
+  var zeilen = s.map(function(z){
+    var pfad = z.pfad
+      ? '<a class="analytics-pfad" href="' + escAttr(z.pfad) + '" target="_blank" rel="noopener" title="' + escAttr(z.pfad) + '">' + esc(z.pfad) + '</a>'
+      : '<span class="dim">ohne Pfad</span>';
+    return '<tr><td>' + pfad + '<div class="analytics-typ">' + esc(ANALYTICS_TYP[z.typ] || z.typ || '') + '</div></td>' +
+           '<td class="zahl">' + z.gesamt + '</td><td class="zahl">' + z.t1 + '</td><td class="zahl">' + z.t7 + '</td><td class="zahl">' + z.t30 + '</td>' +
+           '<td class="zahl dim">' + (z.geraete30 != null ? z.geraete30 : '–') + '</td><td class="zahl dim">' + z.bots + '</td></tr>';
+  }).join('');
+  return '<div class="analytics-scroll"><table class="analytics-tabelle">' +
+    '<thead><tr><th>Seite</th><th class="zahl">Ges.</th><th class="zahl">Heute</th><th class="zahl">7 T</th><th class="zahl">30 T</th><th class="zahl" title="Geräte je Tag, Summe der letzten 30 Tage">Ger. 30 T</th><th class="zahl" title="Aufrufe durch Crawler, gesamt">Bots</th></tr></thead>' +
+    '<tbody>' + zeilen + '</tbody></table></div>' +
+    '<p class="analytics-leer" style="margin-top:8px">Aufrufe ohne Crawler, sortiert nach Gesamt. „Ger. 30 T“ = verschiedene Geräte je Tag, über die letzten 30 Tage aufsummiert (cookielose Tageskennung). App-Ansichten (/, /#filme, /#serien, /#kino) per Ping aus der App; bis zu 300 Seiten.</p>';
+}
+function analyticsHerkunftTabelle(titel, zeilen, spalte){
+  if (!zeilen || !zeilen.length) return '<div class="analytics-titel">' + esc(titel) + '</div><p class="analytics-leer">Noch keine Daten.</p>';
+  var rows = zeilen.map(function(z){
+    return '<tr><td>' + esc(z.label) + '</td><td class="zahl">' + z.gesamt + '</td><td class="zahl">' + z.t1 + '</td>' +
+           '<td class="zahl">' + z.t7 + '</td><td class="zahl">' + z.t30 + '</td></tr>';
+  }).join('');
+  return '<div class="analytics-titel">' + esc(titel) + '</div><div class="analytics-scroll"><table class="analytics-tabelle">' +
+    '<thead><tr><th>' + esc(spalte || 'Herkunft') + '</th><th class="zahl">Ges.</th><th class="zahl">Heute</th><th class="zahl">7 T</th><th class="zahl">30 T</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table></div>';
+}
+function analyticsHerkunft(d){
+  var h = d.herkunft || {};
+  return analyticsHerkunftTabelle('SEO-Seiten: Woher kommen die Besucher?', h.seo) +
+    analyticsHerkunftTabelle('App: Woher kommen die Aufrufe?', h.app) +
+    analyticsHerkunftTabelle('Von den SEO-Seiten in die App: Welcher Weg?', h.wege, 'Weg') +
+    analyticsHerkunftTabelle('SEO-Seiten: Gerätetyp', h.seoGeraet, 'Gerät') +
+    analyticsHerkunftTabelle('App: Gerätetyp', h.appGeraet, 'Gerät') +
+    '<p class="analytics-leer" style="margin-top:8px">Nur die Kategorie der verweisenden Seite wird gespeichert, nie ihre Adresse. Ohne Crawler; alles seit dem 16.09.2026.</p>';
 }
 document.getElementById('navAnalyticsBtn').onclick = function(){
   closeNavMenu();

@@ -37,7 +37,9 @@ dieses Format, nichts umbenennen oder "verbessern".
 | `match_completed` | einmal je Runde: ≥2 Teilnehmende und ≥1 Titel mit Ja von allen | `{ participant_count, title_id }` | `routes/movieNight.js` |
 | `affiliate_click` | Klick auf Ansehen/Leihen/Kaufen-Anbieterlink | `{ provider, title_id }` | Client |
 | `affiliate_conversion` / `subscription_*` | vorgesehen, aber ohne Auslöser — es gibt (noch) keine Partner-Postbacks und keine Abos | | |
-| `seo_aufruf` | Auslieferung einer SEO-Seite unter `/<locale>/…` mit Status 200 (seit 16.09.2026) | `{ typ, bot }` — Seitentyp (zweites Pfadsegment, `start` für die Locale-Startseite) und ob der User-Agent ein Crawler ist; `anon_id` ist `system`, also ohne Gerätebezug | `routes/seo.js` |
+| `seo_aufruf` | Auslieferung einer SEO-Seite unter `/<locale>/…` mit Status 200 (seit 16.09.2026) | `{ typ, pfad, bot, geraet, herkunft }` — Seitentyp (zweites Pfadsegment, `start` für die Locale-Startseite), Pfad (nur wenn er aus Kleinbuchstaben, Ziffern, `-` und `/` besteht), Crawler-Kennzeichen, Gerätetyp (`ios`/`android`/`desktop`) und Herkunfts-Kategorie aus dem Referer (`lib/herkunft.js`, nie die Adresse); `anon_id` ist `system`, dafür `tages_id` (cookielose Tageskennung, `lib/tageskennung.js`) | `routes/seo.js` |
+| `seite_aufruf` | Ansicht der App geöffnet: `/`, `/#filme`, `/#serien`, `/#kino` (seit 16.09.2026) | wie `seo_aufruf` mit `typ: app`; `anon_id` = `mt_anon`, dazu `tages_id` | Client-Ping → `routes/ping.js` |
+| `seo_weiter` | Klick von einer SEO-Seite in die App: `?von=app` („Zur App") auf `/`, `?von=titel` (Watchlist-Knopf) auf `/t/…` | `{ von, bot }` | `server.js` |
 
 `invite_id` ist immer der **SHA-256-Hash** des Einladungstokens (wie in
 `user_link_invites`) — der einlösbare Rohtoken wird nie gespeichert.
@@ -57,6 +59,17 @@ Betreiber-Konto** (`ANALYTICS_EMAIL`, Standard `c.neubauer@digital-wings.com`);
 jede andere Kennung bekommt 404. Der Menüpunkt im Frontend ist nur Komfort, die
 Zugangskontrolle sitzt in der Route. Sie nutzt weder `kpi_snapshots` noch das
 Token von `/api/kpi` und ändert nichts an den Snapshot-Definitionen.
+
+Vier Tabs wie bei CouchUltras: **Überblick** (drei Blöcke Gesamt / SEO-Seiten /
+App plus 30-Tage-Kurve aus `app_opened` und `seo_aufruf`), **Funnel** (SEO-Aufruf
+→ Klick in die App → App geöffnet → erste Markierung → Konto → Onboarding
+abgeschlossen → zehn Titel; die Markierungs-Stufen kommen aus `metrik_tage`),
+**Seiten** (Aufrufe je Pfad aus `seo_aufruf` + `seite_aufruf`, Crawler getrennt,
+„Geräte je Tag" über `tages_id`) und **Herkunft** (Referer-Kategorie, Weg von den
+SEO-Seiten in die App, Gerätetyp). Die cookielose Tageskennung ist eine
+Prüfsumme aus IP, User-Agent und einem täglich neuen Geheimnis in
+`analytics_meta` — die IP wird nie gespeichert, der Vortag ist nicht
+rückrechenbar (Datenschutzerklärung Abschnitt 4, Absatz „Cookielose Zählung").
 
 ## Kennzahlen-Regeln
 

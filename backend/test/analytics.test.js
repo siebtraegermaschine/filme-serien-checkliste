@@ -12,7 +12,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import express from 'express';
 import analyticsRouter, { istBetreiber } from '../routes/analytics.js';
-import { seoAufrufTyp } from '../routes/seo.js';
+import { seoAufrufTyp, seoAufrufPfad } from '../routes/seo.js';
+import { APP_PFADE } from '../routes/ping.js';
 
 test('istBetreiber erkennt nur die Betreiber-Adresse, unabhaengig von Schreibweise', () => {
   assert.equal(istBetreiber('c.neubauer@digital-wings.com'), true);
@@ -50,4 +51,17 @@ test('seoAufrufTyp zaehlt nur Pfade unter einem gueltigen Locale', () => {
   for (const pfad of ['/', '/index.html', '/robots.txt', '/kpi.html', '/api/titles', '/t/movie/157336', '/xx-yy/film/a-1', '']) {
     assert.equal(seoAufrufTyp(pfad), null, `${pfad} darf nicht gezaehlt werden`);
   }
+});
+
+test('seoAufrufPfad speichert nur saubere Pfade, nie eingetippten Unsinn', () => {
+  assert.equal(seoAufrufPfad('/de-de/film/interstellar-157336'), '/de-de/film/interstellar-157336');
+  assert.equal(seoAufrufPfad('/de-de/'), '/de-de');
+  assert.equal(seoAufrufPfad('/de-de/film/Interstellar-157336'), null);
+  assert.equal(seoAufrufPfad('/de-de/film/<script>-1'), null);
+  assert.equal(seoAufrufPfad('/de-de/film/' + 'a'.repeat(200)), null);
+  assert.equal(seoAufrufPfad('/de-de/film/ä-1'), null);
+});
+
+test('APP_PFADE: feste Liste der App-Ansichten, nichts anderes wird gezaehlt', () => {
+  assert.deepEqual(APP_PFADE, ['/', '/#filme', '/#serien', '/#kino']);
 });

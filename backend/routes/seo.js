@@ -15,23 +15,35 @@ import {
 } from '../lib/seoRender.js';
 import { sitemapIndex, sitemapBereich, BEREICHE } from '../lib/seoSitemap.js';
 import { track } from '../lib/track.js';
+import { tageskennung } from '../lib/tageskennung.js';
+import { herkunftKategorie, geraetTyp, istBot } from '../lib/herkunft.js';
 
 const router = createAsyncRouter();
 
 /* Aufrufzaehler der SEO-Seiten (16.09.2026, fuer die Analytics-Ansicht des
-   Betreibers): serverseitig und OHNE Geraetekennung -- gespeichert werden nur
-   der Seitentyp (zweites Pfadsegment, 'start' fuer /<locale>) und ob der
-   Aufrufer nach seinem User-Agent ein Crawler ist. Gezaehlt wird erst beim
-   Abschluss der Antwort und nur bei 200 + HTML, also keine 404-Seiten und
-   keine Sitemaps. Der Pfad muss mit einem gueltigen Locale beginnen -- so
-   bleiben index.html und alles, was express.static hinter diesem Router
-   ausliefert, aussen vor. Fire-and-forget wie track() selbst: Zaehlen darf
-   die Auslieferung nie bremsen. */
-const BOT_RE = /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|whatsapp|telegram|preview/i;
+   Betreibers, nach dem Vorbild von CouchUltras): serverseitig und OHNE
+   Geraetekennung. Gespeichert werden der Seitentyp (zweites Pfadsegment,
+   'start' fuer /<locale>), der Pfad (nur wenn er aus Kleinbuchstaben, Ziffern,
+   Bindestrich und Schraegstrich besteht -- eingetippter Unsinn landet nie in
+   der Datenbank), ob der Aufrufer nach seinem User-Agent ein Crawler ist,
+   der Geraetetyp und die Herkunfts-Kategorie aus dem Referer (nie dessen
+   Adresse, lib/herkunft.js), dazu die cookielose Tageskennung fuer "Geraete
+   je Tag" (lib/tageskennung.js). Gezaehlt wird erst beim Abschluss der
+   Antwort und nur bei 200 + HTML, also keine 404-Seiten und keine Sitemaps.
+   Der Pfad muss mit einem gueltigen Locale beginnen -- so bleiben index.html
+   und alles, was express.static hinter diesem Router ausliefert, aussen vor.
+   Fire-and-forget wie track() selbst: Zaehlen darf die Auslieferung nie
+   bremsen. */
+export const EIGENE_HOSTS = ['movietaste.de', 'moviematch.app'];
+const PFAD_RE = /^[a-z0-9\/-]{1,160}$/;
 export function seoAufrufTyp(pfad) {
   const teile = String(pfad || '').split('/').filter(Boolean);
   if (!localeGueltig(teile[0])) return null;
   return teile[1] || 'start';
+}
+export function seoAufrufPfad(pfad) {
+  const p = String(pfad || '').replace(/\/+$/, '') || '/';
+  return PFAD_RE.test(p) ? p : null;
 }
 router.use((req, res, next) => {
   const typ = seoAufrufTyp(req.path);
@@ -39,7 +51,12 @@ router.use((req, res, next) => {
     res.on('finish', () => {
       if (res.statusCode !== 200) return;
       if (!/text\/html/.test(String(res.get('content-type') || ''))) return;
-      track('seo_aufruf', { props: { typ, bot: BOT_RE.test(req.get('user-agent') || '') } });
+      const ua = req.get('user-agent') || '';
+      const props = {
+        typ, pfad: seoAufrufPfad(req.path), bot: istBot(ua), geraet: geraetTyp(ua),
+        herkunft: herkunftKategorie(req.get('referer'), [...EIGENE_HOSTS, req.hostname]),
+      };
+      tageskennung(req).then((tagesId) => track('seo_aufruf', { props, tagesId }));
     });
   }
   next();

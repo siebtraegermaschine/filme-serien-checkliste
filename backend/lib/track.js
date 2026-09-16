@@ -28,10 +28,16 @@ export const EVENT_NAMEN = [
   'affiliate_conversion',
   'subscription_started',
   'subscription_cancelled',
-  // Aufruf einer SEO-Seite (props: { typ, bot }) -- serverseitig gezaehlt
-  // (routes/seo.js), OHNE Geraetekennung (anon_id = SYSTEM_ANON_ID). Fuer
+  // Aufruf einer SEO-Seite (props: { typ, pfad, bot, geraet, herkunft })
+  // -- serverseitig gezaehlt (routes/seo.js), OHNE Geraetekennung (anon_id =
+  // SYSTEM_ANON_ID), dafuer mit cookieloser Tageskennung (tages_id). Fuer
   // die Analytics-Ansicht des Betreibers (routes/analytics.js), 16.09.2026.
   'seo_aufruf',
+  // Ansicht der App geoeffnet (Start, Filme, Serien, Kino) -- Ping aus der
+  // App (routes/ping.js), props wie seo_aufruf mit typ 'app'.
+  'seite_aufruf',
+  // Von einer SEO-Seite in die App geklickt (?von=seo auf /, server.js).
+  'seo_weiter',
 ];
 
 // Ereignisse, die der Client ueber POST /api/events melden darf (siehe
@@ -47,15 +53,15 @@ export const CLIENT_EVENT_NAMEN = [
 // anon_id fuer Ereignisse ohne Geraetebezug (Partner-Postbacks, Backfill).
 export const SYSTEM_ANON_ID = 'system';
 
-export async function track(name, { userId = null, anonId = null, groupId = null, sessionId = null, props = {} } = {}) {
+export async function track(name, { userId = null, anonId = null, groupId = null, sessionId = null, props = {}, tagesId = null } = {}) {
   try {
     if (!EVENT_NAMEN.includes(name)) {
       console.error('track: unbekanntes Ereignis verworfen:', name);
       return;
     }
     await pool.query(
-      `INSERT INTO analytics_events (name, user_id, anon_id, group_id, session_id, props)
-       VALUES ($1, $2, $3, $4, $5, $6)`,
+      `INSERT INTO analytics_events (name, user_id, anon_id, group_id, session_id, props, tages_id)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
       [
         name,
         userId != null ? String(userId) : null,
@@ -63,6 +69,7 @@ export async function track(name, { userId = null, anonId = null, groupId = null
         groupId != null ? String(groupId) : null,
         sessionId != null ? String(sessionId) : null,
         JSON.stringify(props || {}),
+        tagesId != null ? String(tagesId) : null,
       ]
     );
   } catch (err) {

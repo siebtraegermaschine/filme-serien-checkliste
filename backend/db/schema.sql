@@ -858,6 +858,18 @@ CREATE INDEX IF NOT EXISTS idx_analytics_events_name_ts ON analytics_events (nam
 CREATE INDEX IF NOT EXISTS idx_analytics_events_user_ts ON analytics_events (user_id, ts);
 CREATE INDEX IF NOT EXISTS idx_analytics_events_session ON analytics_events (session_id);
 CREATE INDEX IF NOT EXISTS idx_analytics_events_group_ts ON analytics_events (group_id, ts);
+-- Cookielose Tageskennung (16.09.2026, lib/tageskennung.js): Pruefsumme aus
+-- IP, Browser-Kennung und einem taeglich neuen Geheimnis -- nicht
+-- rueckrechenbar. NULL bei Ereignissen ohne Anfrage (Serverlaeufe) und bei
+-- allen Zeilen vor der Einfuehrung.
+ALTER TABLE analytics_events ADD COLUMN IF NOT EXISTS tages_id TEXT;
+-- Kleine Ablage fuer die Reichweitenmessung, derzeit nur das Tagesgeheimnis
+-- der Tageskennung (key 'tageskennung', value { tag, salz }).
+CREATE TABLE IF NOT EXISTS analytics_meta (
+  key        TEXT PRIMARY KEY,
+  value      JSONB NOT NULL,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
 
 -- Woechentliche Snapshots (lib/kpi.js, buildSnapshot). Nie ueberschrieben,
 -- sondern versioniert -- deshalb (week_start, version) als Schluessel statt

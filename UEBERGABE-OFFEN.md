@@ -25,9 +25,16 @@ nach Datum, das Neueste zuerst.
 > sichtbar für `c.neubauer@digital-wings.com` (`ANALYTICS_EMAIL`), nach dem
 > Vorbild von CouchUltras: `GET /api/analytics` (`backend/routes/analytics.js`,
 > Fremde bekommen 404) liefert 15 Kennzahlen mit Gesamt / Heute / 7 Tage /
-> 30 Tage samt Vergleichswert. Neu gezählt werden dafür die Aufrufe der
-> SEO-Seiten (`seo_aufruf`, serverseitig in `routes/seo.js`, ohne
-> Gerätekennung, Crawler markiert). Beschreibung in `docs/kpi.md`.
+> 30 Tage samt Vergleichswert, in vier Tabs (Überblick, Funnel, Seiten,
+> Herkunft). Neu gezählt werden dafür die Aufrufe der SEO-Seiten
+> (`seo_aufruf`, serverseitig in `routes/seo.js`), die App-Ansichten per
+> Ping (`seite_aufruf`, `routes/ping.js`) und Klicks von den SEO-Seiten in
+> die App (`seo_weiter`) — mit Pfad, Gerätetyp, Herkunfts-Kategorie und einer
+> cookielosen Tageskennung (`lib/tageskennung.js`, `lib/herkunft.js`, beides
+> aus CouchUltras übernommen). **Rechtstext-Änderung:** Abschnitt 4 von
+> `datenschutz.html`/`privacy.html` hat dafür einen neuen Absatz „Cookielose
+> Zählung" (Wortlaut wie bei CouchUltras) — gehört mit in den Sammelauftrag
+> der Anwaltsprüfung (3.1). Beschreibung in `docs/kpi.md`.
 >
 > **Der Sport-Rückbau aus Abschnitt 0.0.0.0.0.0 ist am 26.08.2026 erledigt**
 > (`83c1b5e`, `2b0bb71`, `a752305`): Code, Tests, Workflow, Schema und die

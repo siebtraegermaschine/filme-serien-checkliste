@@ -29,6 +29,9 @@ import metrikRouter from './routes/metrik.js';
 import eventsRouter from './routes/events.js';
 import kpiRouter from './routes/kpi.js';
 import analyticsRouter from './routes/analytics.js';
+import pingRouter from './routes/ping.js';
+import { istBot } from './lib/herkunft.js';
+import { track } from './lib/track.js';
 import onboardingRouter from './routes/onboarding.js';
 import { anonId } from './middleware/anonId.js';
 import { starteKpiSnapshot, starteKpiAufraeumen } from './lib/kpi.js';
@@ -118,6 +121,8 @@ app.use('/api/kpi', kpiRouter);
 // Kennzahlen-Fenster fuer das Betreiber-Konto (Menuepunkt "Analytics");
 // die Zugangskontrolle sitzt in der Route selbst (404 fuer Fremde).
 app.use('/api/analytics', analyticsRouter);
+// Cookieloser Seiten-Ping der App (Analytics-Tabs "Seiten"/"Herkunft").
+app.use('/api/ping', pingRouter);
 app.use('/api/onboarding', onboardingRouter);
 
 // Statisches Frontend (index.html liegt im Repo-Root, eine Ebene über backend/).
@@ -164,6 +169,10 @@ function vorschauText(t) {
 app.get('/t/:art/:kennung', mengenGrenze({ name: 'share-page', anzahl: 120, minuten: 1 }), async (req, res, next) => {
   const art = req.params.art;
   if (['id', 'movie', 'series'].indexOf(art) === -1) return next();
+  // Herkunftsmarker der SEO-Titelseiten ("Zur Watchlist hinzufuegen"), siehe '/'.
+  if (req.query.von === 'titel') {
+    track('seo_weiter', { props: { von: 'titel', bot: istBot(req.get('user-agent')) } });
+  }
   const kennung = Number(req.params.kennung);
   if (!Number.isInteger(kennung) || kennung <= 0) return next();
   let titel = null;
@@ -223,6 +232,19 @@ app.get('/t/:art/:kennung', mengenGrenze({ name: 'share-page', anzahl: 120, minu
   const b = html.indexOf(OG_ENDE);
   if (a < 0 || b < 0) return res.type('html').send(html);
   res.type('html').send(html.slice(0, a) + block + html.slice(b + OG_ENDE.length));
+});
+
+/* Herkunftsmarker der SEO-Seiten (16.09.2026): "Zur App" auf den SEO-Seiten
+   verlinkt mit ?von=app hierher, der Watchlist-Knopf der Titelseiten mit
+   ?von=titel auf /t/... (dort gezaehlt). Gezaehlt wie seo_aufruf -- serverseitig,
+   ohne Geraetekennung, Crawler markiert -- und dann an express.static
+   weitergereicht, das die index.html wie bisher ausliefert. Die App raeumt
+   den Parameter aus der Adresszeile (index.html, vonParameterEntfernen). */
+app.get('/', (req, res, next) => {
+  if (req.query.von === 'app') {
+    track('seo_weiter', { props: { von: 'app', bot: istBot(req.get('user-agent')) } });
+  }
+  next();
 });
 
 // Viele Vorschau-Dienste und Browser fragen zuerst /favicon.ico ab, bevor sie

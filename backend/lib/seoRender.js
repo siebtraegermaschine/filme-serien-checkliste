@@ -66,7 +66,7 @@ function kopfzeile() {
   return `<header class="seo-kopf">
     <a class="marke" href="${SITE}/">Movie<span>Match</span></a>
     <nav class="seo-nav">
-      <a href="${SITE}/">Zur App</a>
+      <a href="${SITE}/?von=app">Zur App</a>
     </nav>
   </header>`;
 }
@@ -304,7 +304,7 @@ export function seiteTitelDetail(titel, locale) {
       <div>
         <h1>${attrEsc(titel.title)}${titel.year ? ` <span class="hinweis">(${titel.year})</span>` : ''}</h1>
         <div class="meta-zeile">${attrEsc(bewertungsZeile(titel))}</div>
-        <a class="cta" href="${SITE}/t/${titel.type}/${titel.tmdbId}">Zur Watchlist hinzufügen</a>
+        <a class="cta" href="${SITE}/t/${titel.type}/${titel.tmdbId}?von=titel">Zur Watchlist hinzufügen</a>
       </div>
     </div>
     <h2>Kurzüberblick</h2>
