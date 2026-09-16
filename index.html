@@ -12409,7 +12409,8 @@ function analyticsZeichnen(){
   var teil = { ueberblick: analyticsUeberblick, trichter: analyticsTrichter, seiten: analyticsSeiten, herkunft: analyticsHerkunft }[_analyticsTab];
   inhalt.innerHTML = tabs + teil(d) +
     '<p class="analytics-stand">Stand: ' + esc(new Date(d.stand).toLocaleString(LOCALE)) +
-    ' · Ereignisse werden seit dem 14.08.2026 gezählt, Seitenaufrufe (SEO-Seiten, App-Ansichten, Herkunft, Gerätetyp, Geräte je Tag) seit dem 16.09.2026.</p>';
+    // Stichtag wie in backend/routes/analytics.js (STATISTIK_START).
+    ' · Statistik seit dem 01.08.2026 – frühere Daten sind ausgeblendet. Seitenaufrufe (SEO-Seiten, App-Ansichten, Herkunft, Gerätetyp, Geräte je Tag) werden seit dem 16.09.2026 erfasst.</p>';
   inhalt.querySelectorAll('.analytics-tab').forEach(function(b){
     b.onclick = function(){ _analyticsTab = b.getAttribute('data-tab'); analyticsZeichnen(); };
   });

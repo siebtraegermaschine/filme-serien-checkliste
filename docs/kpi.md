@@ -56,7 +56,7 @@ CouchUltras: `GET /api/analytics` (`routes/analytics.js`) rechnet die Kennzahlen
 direkt aus den Tabellen — Gesamt, letzte 24 Stunden, 7 Tage, 30 Tage, jeweils mit
 Vergleichswert (Vortag, Vorwoche, Vormonat). Sie ist **ausschließlich für das
 Betreiber-Konto** (`ANALYTICS_EMAIL`, Standard `c.neubauer@digital-wings.com`);
-jede andere Kennung bekommt 404. Der Menüpunkt im Frontend ist nur Komfort, die
+jede andere Kennung bekommt 404. **Stichtag 01.08.2026** (`STATISTIK_START` in der Route): Ältere Zeilen bleiben in der Datenbank, zählen aber in keiner Auswertung. Der Menüpunkt im Frontend ist nur Komfort, die
 Zugangskontrolle sitzt in der Route. Sie nutzt weder `kpi_snapshots` noch das
 Token von `/api/kpi` und ändert nichts an den Snapshot-Definitionen.
 

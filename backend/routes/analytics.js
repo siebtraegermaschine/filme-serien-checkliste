@@ -19,8 +19,8 @@
    die Auswertung, die Abschnitt 4 der Datenschutzerklaerung beschreibt.
    Die Wochen-Snapshots fuer das externe Cockpit (lib/kpi.js) bleiben davon
    unberuehrt; diese Route rechnet live und ist bewusst einfacher.
-   Anders als CouchUltras ohne Stichtag: Die Erfassung laeuft seit dem
-   14.08.2026 im Echtbetrieb, es gibt keinen Testzeitraum auszublenden. */
+   Stichtag (Christian, 16.09.2026): Es zaehlt nur, was ab dem 01.08.2026
+   passiert ist -- siehe STATISTIK_START. */
 import { pool } from '../db/pool.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { requireAuth } from '../middleware/requireAuth.js';
@@ -29,6 +29,16 @@ import { SYSTEM_ANON_ID } from '../lib/track.js';
 const router = createAsyncRouter();
 
 const ANALYTICS_EMAIL = (process.env.ANALYTICS_EMAIL || 'c.neubauer@digital-wings.com').toLowerCase();
+
+/* Statistik-Start (Christian, 16.09.2026): JEDE Auswertung beginnt hart an
+   diesem Stichtag (Mitternacht Berliner Sommerzeit); aeltere Zeilen bleiben
+   in der Datenbank stehen, geloescht wird nichts. Fester String aus DIESEM
+   Modul, nie Nutzereingabe -- er darf deshalb direkt im SQL stehen. Der
+   Vermerk unter der Tabelle (index.html, analyticsZeichnen) nennt denselben
+   Tag. Fuer die Tageszaehler (metrik_tage, Spalte tag als DATE) gilt
+   STATISTIK_TAG. */
+const STATISTIK_START = `timestamptz '2026-08-01 00:00:00+02'`;
+const STATISTIK_TAG = `date '2026-08-01'`;
 
 // Exportiert, damit die Zugangsregel ohne Datenbank testbar ist.
 export function istBetreiber(email) {
@@ -46,7 +56,8 @@ function fenster(tabelle, spalte, von, bis, zusatz = '', params = []) {
   return zahl(
     `SELECT count(*) AS n FROM ${tabelle}
       WHERE ${spalte} >= now() - ($1 || ' days')::interval
-        AND ${spalte} < now() - ($2 || ' days')::interval${zusatz}`,
+        AND ${spalte} < now() - ($2 || ' days')::interval
+        AND ${spalte} >= ${STATISTIK_START}${zusatz}`,
     [String(von), String(bis), ...params]);
 }
 const ereignisse = (name, von, bis, zusatz = '') =>
@@ -55,7 +66,8 @@ const geraete = (von, bis) => zahl(
   `SELECT count(DISTINCT anon_id) AS n FROM analytics_events
     WHERE name = 'app_opened' AND anon_id <> $3
       AND ts >= now() - ($1 || ' days')::interval
-      AND ts < now() - ($2 || ' days')::interval`,
+      AND ts < now() - ($2 || ' days')::interval
+      AND ts >= ${STATISTIK_START}`,
   [String(von), String(bis), SYSTEM_ANON_ID]);
 /* Wiederkehrer-Quote eines 7-Tage-Fensters: Anteil der Geraete des Fensters
    DAVOR, die im Fenster selbst wieder geoeffnet haben. offset = Tage
@@ -67,10 +79,12 @@ async function wiederkehrerQuote(offset) {
         WHERE a.name = 'app_opened' AND a.anon_id <> $2
           AND a.ts >= now() - (($1::int + 7) || ' days')::interval
           AND a.ts <  now() - ($1 || ' days')::interval
+          AND a.ts >= ${STATISTIK_START}
           AND EXISTS (SELECT 1 FROM analytics_events b
                        WHERE b.name = 'app_opened' AND b.anon_id = a.anon_id
                          AND b.ts >= now() - (($1::int + 14) || ' days')::interval
-                         AND b.ts <  now() - (($1::int + 7) || ' days')::interval)`,
+                         AND b.ts <  now() - (($1::int + 7) || ' days')::interval
+                         AND b.ts >= ${STATISTIK_START})`,
       [String(offset), SYSTEM_ANON_ID]),
     geraete(offset + 14, offset + 7),
   ]);
@@ -93,11 +107,12 @@ const TAG_BERLIN = `(ts AT TIME ZONE 'Europe/Berlin')::date`;
 const tagesGeraete = (namen, von, bis) => zahl(
   `SELECT count(DISTINCT (${TAG_BERLIN}, tages_id)) AS n FROM analytics_events
     WHERE name IN ${namen} AND tages_id IS NOT NULL AND ${OHNE_BOTS}
-      AND ts >= now() - ($1 || ' days')::interval AND ts < now() - ($2 || ' days')::interval`,
+      AND ts >= now() - ($1 || ' days')::interval AND ts < now() - ($2 || ' days')::interval
+      AND ts >= ${STATISTIK_START}`,
   [String(von), String(bis)]);
 const tagesGeraeteGesamt = (namen) => zahl(
   `SELECT count(DISTINCT (${TAG_BERLIN}, tages_id)) AS n FROM analytics_events
-    WHERE name IN ${namen} AND tages_id IS NOT NULL AND ${OHNE_BOTS}`);
+    WHERE name IN ${namen} AND tages_id IS NOT NULL AND ${OHNE_BOTS} AND ts >= ${STATISTIK_START}`);
 // Vier Zeitspalten je Gruppe: gesamt, 24 h, 7 Tage, 30 Tage.
 const ZEITSPALTEN = `count(*) AS gesamt,
   count(*) FILTER (WHERE ts >= now() - interval '1 day') AS t1,
@@ -130,7 +145,7 @@ async function verlauf() {
               count(*) FILTER (WHERE name = 'app_opened' AND anon_id <> $1) AS oeffnungen,
               count(*) FILTER (WHERE name = 'seo_aufruf' AND ${OHNE_BOTS}) AS seo
          FROM analytics_events
-        WHERE name IN ('app_opened', 'seo_aufruf') AND ts >= now() - interval '31 days'
+        WHERE name IN ('app_opened', 'seo_aufruf') AND ts >= now() - interval '31 days' AND ts >= ${STATISTIK_START}
         GROUP BY 1)
      SELECT to_char(t.tag, 'YYYY-MM-DD') AS tag, coalesce(e.oeffnungen, 0) AS oeffnungen, coalesce(e.seo, 0) AS seo
        FROM tage t LEFT JOIN e ON e.tag = t.tag ORDER BY t.tag`,
@@ -147,17 +162,17 @@ async function trichter(tage) {
   const t = String(tage);
   const ereignis = (name, zusatz = '') => zahl(
     `SELECT count(*) AS n FROM analytics_events
-      WHERE name = $1 AND ts >= now() - ($2 || ' days')::interval${zusatz}`, [name, t]);
+      WHERE name = $1 AND ts >= now() - ($2 || ' days')::interval AND ts >= ${STATISTIK_START}${zusatz}`, [name, t]);
   const metrik = (schritt) => zahl(
-    `SELECT coalesce(sum(anzahl), 0) AS n FROM metrik_tage WHERE schritt = $1 AND tag > CURRENT_DATE - $2::int`,
+    `SELECT coalesce(sum(anzahl), 0) AS n FROM metrik_tage WHERE schritt = $1 AND tag > CURRENT_DATE - $2::int AND tag >= ${STATISTIK_TAG}`,
     [schritt, tage]);
   const [seo, weiter, geoeffnet, ersteMarkierung, konten, einstieg, zehn] = await Promise.all([
     ereignis('seo_aufruf', ` AND ${OHNE_BOTS}`),
     ereignis('seo_weiter', ` AND ${OHNE_BOTS}`),
     ereignis('app_opened'),
     metrik('erste-markierung'),
-    zahl(`SELECT count(*) AS n FROM users WHERE created_at >= now() - ($1 || ' days')::interval`, [t]),
-    zahl(`SELECT count(*) AS n FROM user_onboarding WHERE abgeschlossen_am >= now() - ($1 || ' days')::interval`, [t]),
+    zahl(`SELECT count(*) AS n FROM users WHERE created_at >= now() - ($1 || ' days')::interval AND created_at >= ${STATISTIK_START}`, [t]),
+    zahl(`SELECT count(*) AS n FROM user_onboarding WHERE abgeschlossen_am >= now() - ($1 || ' days')::interval AND abgeschlossen_am >= ${STATISTIK_START}`, [t]),
     metrik('zehn-titel'),
   ]);
   return [
@@ -183,7 +198,7 @@ async function seiten() {
             count(*) FILTER (WHERE NOT ${OHNE_BOTS}) AS bots,
             count(DISTINCT (${TAG_BERLIN}, tages_id)) FILTER (WHERE ${OHNE_BOTS} AND tages_id IS NOT NULL AND ts >= now() - interval '30 days') AS geraete30
        FROM analytics_events
-      WHERE name IN ${SEITEN_NAMEN}
+      WHERE name IN ${SEITEN_NAMEN} AND ts >= ${STATISTIK_START}
       GROUP BY 1 ORDER BY gesamt DESC, bots DESC, pfad LIMIT 300`);
   return rows.map((r) => ({ pfad: r.pfad, typ: r.typ, ...zahlen(r), bots: Number(r.bots), geraete30: Number(r.geraete30) }));
 }
@@ -197,7 +212,7 @@ async function herkunft() {
     const { rows } = await pool.query(
       `SELECT coalesce(props->>'${schluessel}', 'unbekannt') AS k, ${ZEITSPALTEN}
          FROM analytics_events
-        WHERE name IN ${namen} AND ${OHNE_BOTS}
+        WHERE name IN ${namen} AND ${OHNE_BOTS} AND ts >= ${STATISTIK_START}
         GROUP BY 1 ORDER BY gesamt DESC`);
     return rows.map((r) => ({ label: labels[r.k] || r.k, ...zahlen(r) }));
   };
@@ -228,11 +243,11 @@ router.get('/', requireAuth, async (req, res) => {
     zaehler(7, 0), zaehler(14, 7), zaehler(30, 0), zaehler(60, 30),
   ]);
   const ereignisSatz = (name, zusatz = '') => satz(
-    `SELECT count(*) AS n FROM analytics_events WHERE name = '${name}'${zusatz}`, [],
+    `SELECT count(*) AS n FROM analytics_events WHERE name = '${name}' AND ts >= ${STATISTIK_START}${zusatz}`, [],
     (v, b) => ereignisse(name, v, b, zusatz));
   const tagesSatz = (namen) => satz(
     `SELECT count(DISTINCT (${TAG_BERLIN}, tages_id)) AS n FROM analytics_events
-      WHERE name IN ${namen} AND tages_id IS NOT NULL AND ${OHNE_BOTS}`, [],
+      WHERE name IN ${namen} AND tages_id IS NOT NULL AND ${OHNE_BOTS} AND ts >= ${STATISTIK_START}`, [],
     (v, b) => tagesGeraete(namen, v, b));
   // Klicks von den SEO-Seiten in die App, getrennt nach Weg -- props.von ist
   // ein fester Aufzaehlungswert aus server.js, kein Freitext.
@@ -244,35 +259,36 @@ router.get('/', requireAuth, async (req, res) => {
     movieNights, momentaufnahmen, feedback, seo, seoTexte,
     seitenGesamt, tagesGesamt, tagesSeo, tagesApp, appAnsichten, seoZurApp, seoTitel,
   ] = await Promise.all([
-    satz('SELECT count(*) AS n FROM users', [], (v, b) => fenster('users', 'created_at', v, b)),
-    zahl('SELECT count(*) AS n FROM users WHERE benachrichtigung = true'),
+    satz(`SELECT count(*) AS n FROM users WHERE created_at >= ${STATISTIK_START}`, [], (v, b) => fenster('users', 'created_at', v, b)),
+    zahl(`SELECT count(*) AS n FROM users WHERE benachrichtigung = true AND created_at >= ${STATISTIK_START}`),
     ereignisSatz('app_opened'),
     Promise.all([
-      zahl(`SELECT count(DISTINCT anon_id) AS n FROM analytics_events WHERE name = 'app_opened' AND anon_id <> $1`, [SYSTEM_ANON_ID]),
+      zahl(`SELECT count(DISTINCT anon_id) AS n FROM analytics_events WHERE name = 'app_opened' AND anon_id <> $1 AND ts >= ${STATISTIK_START}`, [SYSTEM_ANON_ID]),
       geraete(1, 0), geraete(2, 1),
       geraete(7, 0), geraete(14, 7), geraete(30, 0), geraete(60, 30),
     ]),
     wiederkehrerQuote(0),
     wiederkehrerQuote(7),
-    satz('SELECT count(*) AS n FROM user_onboarding WHERE abgeschlossen_am IS NOT NULL', [],
+    satz(`SELECT count(*) AS n FROM user_onboarding WHERE abgeschlossen_am >= ${STATISTIK_START}`, [],
       (v, b) => fenster('user_onboarding', 'abgeschlossen_am', v, b)),
     ereignisSatz('title_rated'),
-    satz('SELECT count(*) AS n FROM user_link_invites', [], (v, b) => fenster('user_link_invites', 'created_at', v, b)),
-    satz('SELECT count(*) AS n FROM user_link_invite_uses', [], (v, b) => fenster('user_link_invite_uses', 'accepted_at', v, b)),
+    satz(`SELECT count(*) AS n FROM user_link_invites WHERE created_at >= ${STATISTIK_START}`, [], (v, b) => fenster('user_link_invites', 'created_at', v, b)),
+    satz(`SELECT count(*) AS n FROM user_link_invite_uses WHERE accepted_at >= ${STATISTIK_START}`, [], (v, b) => fenster('user_link_invite_uses', 'accepted_at', v, b)),
     // user_links traegt je Verknuepfung zwei Zeilen (beide Richtungen).
-    satz('SELECT count(*) / 2 AS n FROM user_links', [],
+    satz(`SELECT count(*) / 2 AS n FROM user_links WHERE created_at >= ${STATISTIK_START}`, [],
       (v, b) => zahl(`SELECT count(*) / 2 AS n FROM user_links
                        WHERE created_at >= now() - ($1 || ' days')::interval
-                         AND created_at <  now() - ($2 || ' days')::interval`, [String(v), String(b)])),
-    satz('SELECT count(*) AS n FROM movie_night_runden', [], (v, b) => fenster('movie_night_runden', 'created_at', v, b)),
-    satz('SELECT count(*) AS n FROM titel_momentaufnahmen', [], (v, b) => fenster('titel_momentaufnahmen', 'created_at', v, b)),
+                         AND created_at <  now() - ($2 || ' days')::interval
+                         AND created_at >= ${STATISTIK_START}`, [String(v), String(b)])),
+    satz(`SELECT count(*) AS n FROM movie_night_runden WHERE created_at >= ${STATISTIK_START}`, [], (v, b) => fenster('movie_night_runden', 'created_at', v, b)),
+    satz(`SELECT count(*) AS n FROM titel_momentaufnahmen WHERE created_at >= ${STATISTIK_START}`, [], (v, b) => fenster('titel_momentaufnahmen', 'created_at', v, b)),
     // ACHTUNG: die Feedback-Tabelle nennt ihre Zeitspalte erstellt_am.
-    satz('SELECT count(*) AS n FROM feedback', [], (v, b) => fenster('feedback', 'erstellt_am', v, b)),
+    satz(`SELECT count(*) AS n FROM feedback WHERE erstellt_am >= ${STATISTIK_START}`, [], (v, b) => fenster('feedback', 'erstellt_am', v, b)),
     ereignisSatz('seo_aufruf', ohneBots),
-    satz(`SELECT count(*) AS n FROM seo_content WHERE bereich = 'titel'`, [],
+    satz(`SELECT count(*) AS n FROM seo_content WHERE bereich = 'titel' AND erstellt_am >= ${STATISTIK_START}`, [],
       (v, b) => fenster('seo_content', 'erstellt_am', v, b, ` AND bereich = 'titel'`)),
     // Alle Seitenaufrufe zusammen: SEO-Seiten plus App-Ansichten.
-    satz(`SELECT count(*) AS n FROM analytics_events WHERE name IN ${SEITEN_NAMEN} AND ${OHNE_BOTS}`, [],
+    satz(`SELECT count(*) AS n FROM analytics_events WHERE name IN ${SEITEN_NAMEN} AND ${OHNE_BOTS} AND ts >= ${STATISTIK_START}`, [],
       (v, b) => fenster('analytics_events', 'ts', v, b, ` AND name IN ${SEITEN_NAMEN}${ohneBots}`)),
     tagesSatz(SEITEN_NAMEN),
     tagesSatz(`('seo_aufruf')`),
