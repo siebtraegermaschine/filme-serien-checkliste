@@ -264,9 +264,12 @@ export function seiteTitelDetail(titel, locale) {
     titel.budget ? ['Budget', `${Number(titel.budget).toLocaleString('de-DE')} $`] : null,
     titel.einspielergebnis ? ['Einspielergebnis', `${Number(titel.einspielergebnis).toLocaleString('de-DE')} $`] : null,
     titel.rating != null ? ['TMDB-Bewertung', String(titel.rating).replace('.', ',') + (titel.voteCount ? ` (${titel.voteCount.toLocaleString('de-DE')} Stimmen)` : '')] : null,
-    ['Community-Bewertung', titel.communityBewertung
-      ? `${String(titel.communityBewertung.durchschnitt).replace('.', ',')} von 10 (${titel.communityBewertung.gesamt} Bewertungen)`
-      : '<span class="hinweis">noch unter der Mindestzahl</span>'],
+    // Vorerst ausgeblendet, solange keine Community-Bewertung vorliegt (Christian,
+    // 17.09.2026) -- statt der Platzhalterzeile "noch unter der Mindestzahl" faellt
+    // die Zeile ueber .filter(Boolean) einfach weg, wie bei den anderen optionalen Fakten.
+    titel.communityBewertung
+      ? ['Community-Bewertung', `${String(titel.communityBewertung.durchschnitt).replace('.', ',')} von 10 (${titel.communityBewertung.gesamt} Bewertungen)`]
+      : null,
     (titel.streaming.flatrate || []).length
       ? ['Verfügbar bei', titel.streaming.flatrate.map((p) => anbieterHtml(p.name, p.anbieterSlug, locale)).join(', ')]
       : null,
