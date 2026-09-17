@@ -1027,3 +1027,12 @@ CREATE TABLE IF NOT EXISTS onboarding_aggregat (
   anzahl  INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (frage, antwort, monat, region)
 );
+
+-- Tagessperre der Wache (lib/wache.js, 17.09.2026): je Stoerungsart der Tag
+-- (UTC) der letzten verschickten Meldung. Liegt in der Datenbank statt im
+-- Arbeitsspeicher, damit Deploys und Neustarts keine Mail-Serie ausloesen.
+CREATE TABLE IF NOT EXISTS wache_meldungen (
+  art         TEXT PRIMARY KEY,
+  tag         DATE NOT NULL,
+  gemeldet_am TIMESTAMPTZ NOT NULL DEFAULT now()
+);

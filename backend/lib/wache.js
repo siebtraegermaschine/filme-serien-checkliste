@@ -16,6 +16,14 @@ const EMPFAENGER = 'info@digital-wings.com';
 // Je Art hoechstens eine Meldung pro Tag. Ohne diese Sperre schickt ein
 // Dauerfehler -- etwa eine nicht erreichbare Datenbank -- hunderte Mails, und
 // das Postfach wird unbrauchbar, genau wenn man es braucht.
+//
+// Die Sperre steht seit dem 17.09.2026 in der Datenbank (wache_meldungen).
+// Vorher lag sie nur im Arbeitsspeicher und ging bei jedem Neustart verloren:
+// Am Morgen des 17.09. schickten sechs Deploys in 40 Minuten sechsmal dieselbe
+// Mail "Katalog-Import bleibt aus", weil die Pruefung drei Minuten nach jedem
+// Start neu lief. Dasselbe haette ein Absturz-Neustart-Kreislauf ausgeloest.
+// Die Map bleibt als Rueckfall, wenn die Datenbank selbst nicht antwortet --
+// genau dann muss die Meldung trotzdem hinaus.
 const zuletztGemeldet = new Map();
 
 // Meldungen, deren Versand selbst gescheitert ist. Sie per Mail zu melden waere
@@ -36,8 +44,7 @@ function heute() {
  * @param {string} text
  */
 export async function melde(art, betreff, text) {
-  if (zuletztGemeldet.get(art) === heute()) return false;
-  zuletztGemeldet.set(art, heute());
+  if (!(await sperreSetzen(art))) return false;
 
   const zeit = new Date().toISOString();
   let voll = `${text}\n\nZeitpunkt: ${zeit}\nArt: ${art}`;
@@ -57,8 +64,41 @@ export async function melde(art, betreff, text) {
     nachzureichen.push(`[${zeit}] ${betreff}\n${text}`);
     // Sperre zuruecknehmen: Sonst gilt die Stoerung als gemeldet, obwohl
     // niemand sie gesehen hat.
-    zuletztGemeldet.delete(art);
+    await sperreLoesen(art);
     return false;
+  }
+}
+
+/* Tagessperre je Art. true = heute noch nicht gemeldet, die Sperre ist jetzt
+   gesetzt und der Aufrufer darf senden. Atomar ueber ON CONFLICT ... WHERE:
+   Zwei gleichzeitige Aufrufe (oder zwei Prozesse waehrend eines Deploys)
+   bekommen nie beide true. */
+async function sperreSetzen(art) {
+  const tag = heute();
+  try {
+    const { rowCount } = await pool.query(
+      `INSERT INTO wache_meldungen (art, tag) VALUES ($1, $2)
+         ON CONFLICT (art) DO UPDATE SET tag = EXCLUDED.tag, gemeldet_am = now()
+         WHERE wache_meldungen.tag IS DISTINCT FROM EXCLUDED.tag`,
+      [art, tag]);
+    zuletztGemeldet.set(art, tag);
+    return rowCount > 0;
+  } catch (err) {
+    // Datenbank weg: Rueckfall auf den Arbeitsspeicher, damit die Meldung
+    // ("Datenbank nicht erreichbar") trotzdem genau einmal hinausgeht.
+    console.error('[wache] Sperre nicht in der Datenbank lesbar:', err.message);
+    if (zuletztGemeldet.get(art) === tag) return false;
+    zuletztGemeldet.set(art, tag);
+    return true;
+  }
+}
+
+async function sperreLoesen(art) {
+  zuletztGemeldet.delete(art);
+  try {
+    await pool.query('DELETE FROM wache_meldungen WHERE art = $1 AND tag = $2', [art, heute()]);
+  } catch (err) {
+    console.error('[wache] Sperre nicht loesbar:', err.message);
   }
 }
 
