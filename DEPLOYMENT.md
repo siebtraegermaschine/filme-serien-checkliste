@@ -2,7 +2,7 @@
 
 Diese Datei beschreibt, wie das Backend (Node/Express + Postgres) lokal läuft
 und später auf dem Hetzner-Server deployed wird. Hintergrund/Architektur
-siehe `konzept-relaunch.md`, Repo-Übergabe siehe `UEBERGABE.md`.
+siehe `konzept-relaunch.md`, Repo-Übergabe siehe `docs/archiv/UEBERGABE.md`.
 
 ## Projektstruktur
 

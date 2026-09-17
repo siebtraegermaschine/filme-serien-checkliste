@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check *)",
+      "Bash(command -v *)",
+      "Bash(dig +short *)",
+      "WebFetch(domain:movietaste.de)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.themoviedb.org)",
+      "WebFetch(domain:developer.themoviedb.org)",
+      "WebFetch(domain:www.omdbapi.com)",
+      "WebFetch(domain:www.internationalshowtimes.com)",
+      "WebFetch(domain:api.cinepass.de)",
+      "WebFetch(domain:resend.com)",
+      "WebFetch(domain:www.dataprivacyframework.gov)",
+      "WebFetch(domain:www.digital-wings.com)",
+      "WebSearch",
+      "Skill(schedule)",
+      "Skill(schedule:*)",
+      "Skill(update-config)",
+      "Skill(update-config:*)"
+    ]
+  }
+}

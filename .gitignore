@@ -2,7 +2,9 @@ node_modules/
 backend/.env
 .DS_Store
 rated-titles-last-run.json
-.claude/
+.claude/settings.local.json
+.claude/worktrees/
+.claude/scheduled_tasks.lock
 
 # Batch-Protokolle (lokal, nicht versionieren)
 backend/scripts/.seo-*.jsonl

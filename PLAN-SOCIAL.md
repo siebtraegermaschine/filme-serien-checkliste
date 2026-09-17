@@ -64,7 +64,7 @@ Verwalter. Sonst ist der spätere Einbau ein Datenumbau statt einer Ergänzung.*
    gefundene Personen- oder Kinoseite bewirbt sich selbst. *Das ist der stärkste
    Nebeneffekt dieser Entscheidung und der Grund, warum sie besser ist als die
    vorherige Fassung.* Voraussetzung ist, dass die SEO-Seiten Zulauf haben —
-   woran gerade ohnehin gearbeitet wird (`UEBERGABE-SEO.md`).
+   woran gerade ohnehin gearbeitet wird (`docs/archiv/UEBERGABE-SEO.md`).
 4. **Indexierung beachten:** Die Regel „indexierbar nur mit eigenem Inhalt"
    (`backend/lib/seoData.js`, `indexierbar` nie hart auf `true`) gilt weiter.
    Inhalte einer beanspruchten Seite dürfen diese Regel nicht aushebeln.
@@ -116,7 +116,7 @@ aufsteigender Belastung:
   in einen gesonderten Eingang, nicht in den Chat.
 
 ### Die Ausgangslage, die man nicht wegplanen kann
-Am 14. August: **9 Konten** (`IDEEN-WACHSTUM.md`). Daraus folgt die Auswahlregel,
+Am 14. August: **9 Konten** (`docs/archiv/IDEEN-WACHSTUM.md`). Daraus folgt die Auswahlregel,
 die diesen Plan durchzieht:
 
 > **Nur bauen, was schon bei einem oder zwei Nutzern Wert stiftet.** Alles mit
@@ -267,7 +267,7 @@ Gruppenfunktionen — und **Movie Night wird eingeschaltet**.
 Auf iOS nur nach „Zum Home-Bildschirm" — der Hinweis muss sauber in die
 Oberfläche, sonst wirkt es kaputt.
 *3–5 Tage · ab 1 Nutzer · verschiebt oder erspart Aufwand aus
-`PLAN-NATIVE-APPS.md`.*
+`docs/archiv/PLAN-NATIVE-APPS.md`.*
 
 ### Block C · Seiten (Sonderprofile)
 
@@ -307,7 +307,7 @@ Anwaltsprüfung geben.*
 **F13 · Kuratierte Listen.** „Die zehn Filme, die mich geprägt haben." Laut
 Recherche das Creator-Format, das auf Filmplattformen wirklich trägt; zugleich
 ein normales Nutzerfeature und SEO-Futter (`bereich='bestenliste'` existiert
-bereits in `seo_content`). Deckt „Merkzettel-Kategorien/Tags" aus `IDEEN.md` ab.
+bereits in `seo_content`). Deckt „Merkzettel-Kategorien/Tags" aus `docs/archiv/IDEEN.md` ab.
 *1–1,5 Wochen · ab 1 Nutzer (als Ordnungsmittel) · Haken: sobald öffentlich,
 greift Abschnitt 4.*
 
@@ -323,7 +323,7 @@ nicht, Letterboxd hat den Ortsbezug nicht, die Kinos haben die Geschmacksdaten
 nicht. Alle Bausteine existieren.
 *3–5 Tage · ab 2 Nutzern · Haken: hängt an der Kinodatenqualität — heute „alles
 der letzten 60 Tage" statt echter Spielpläne; echte Zeiten kosten 149 €/Monat,
-siehe `PLAN-KINOS.md`.* **Der einzige Weg, „Leute ins Kino bringen" ohne
+siehe `docs/archiv/PLAN-KINOS.md`.* **Der einzige Weg, „Leute ins Kino bringen" ohne
 B2B-Vertrieb.**
 
 **✅ F16 · Kino-Seiten.** Seitentyp aus F9, entstanden durch Beanspruchen des

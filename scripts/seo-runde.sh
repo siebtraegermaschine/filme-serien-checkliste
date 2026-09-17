@@ -1,6 +1,6 @@
 #!/bin/zsh
 # Faecher-Verfahren fuer SEO-Titeltexte: eine Runde vorbereiten oder abschliessen.
-# Ablauf und Regeln: UEBERGABE-SEO.md, Abschnitt 3b.
+# Ablauf und Regeln: docs/archiv/UEBERGABE-SEO.md, Abschnitt 3b.
 #
 #   scripts/seo-runde.sh pakete <arbeitsordner>          10 Pakete à 15 offene Titel nach <arbeitsordner>/pakete holen
 #   scripts/seo-runde.sh pruefen <arbeitsordner>         lokale Suche: Laenge, Quellwoerter, „Regie“ in Serientexten

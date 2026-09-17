@@ -85,7 +85,7 @@ Die Umsetzung erfolgt **nicht in Cowork**, sondern in **Claude Code**: Cowork is
 
 - **Modell:** Sonnet 5 als Arbeitspferd für den Großteil der Implementierung (Backend-Code, Frontend-Umbau, Deployment-Skripte). Für sicherheitskritische Stellen zusätzlich mit **Opus 5** gegenlesen lassen: Auth-/Security-Design, Zugriffsregeln auf `user_progress`, Datenmodell-Entscheidungen, finales Review vor Go-Live.
 - **Aufwand:** Kein Ein-Sitzungs-Task, sondern mehrere Claude-Code-Sessions entlang des Phasenplans (Abschnitt 7), mit Kontrolle nach jeder sicherheitsrelevanten Phase (Auth, Zugriffsregeln, Deployment). Größter Aufwand: Backend-API + Auth + Datenmodell. Mittel: Frontend-Umbau auf API-Calls + Login-Gate. Kleiner: rechtliche Seiten, Backups/Monitoring.
-- **Setup:** Wird in einem separaten Cloud-Account/einer separaten Umgebung umgesetzt, nicht hier in Cowork. Dieses Konzeptdokument dient dort als Spezifikation; zusätzlich liegt `UEBERGABE.md` im selben Projektordner als kompakter Einstiegspunkt für die neue Claude-Code-Session.
+- **Setup:** Wird in einem separaten Cloud-Account/einer separaten Umgebung umgesetzt, nicht hier in Cowork. Dieses Konzeptdokument dient dort als Spezifikation; zusätzlich liegt `docs/archiv/UEBERGABE.md` im selben Projektordner als kompakter Einstiegspunkt für die neue Claude-Code-Session.
 
 ## 9. Noch offene Punkte
 

@@ -1,5 +1,5 @@
 # Die Startseite UND die eigenstaendigen SEO-Seiten unter /de-de/... gehoeren
-# in Suchmaschinen (siehe PLAN-SEO.md, Plan "SEO-Seiten: technische
+# in Suchmaschinen (siehe docs/archiv/PLAN-SEO.md, Plan "SEO-Seiten: technische
 # Umsetzung"). Alles andere bleibt draussen -- insbesondere die App selbst
 # (index.html/SPA) und die Vorschauseiten unter /t/...: die Rechtstexte
 # tragen ohnehin noindex, und /t/... wuerde beliebig viele Adressen mit fast
