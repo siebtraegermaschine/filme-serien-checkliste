@@ -4540,7 +4540,7 @@ Nach dem folgenden Streit mit ihrer Mutter erwirbt sie bei einer Hexe einen Zaub
 ### Entstehungsgeschichte
 Brenda Chapman entwickelte den Stoff und stützte sich dabei auf ihr Verhältnis zur eigenen Tochter. Sie war die erste Frau, die bei einem Pixar-Film Regie führte.
 
-Etwa achtzehn Monate vor dem Start wurde sie von der Produktion abgezogen und durch Mark Andrews ersetzt — offiziell wegen kreativer Differenzen. Chapman äußerte sich später öffentlich und deutlich dazu, wie sehr sie der Vorgang getroffen habe, und ordnete ihn in ein Muster ein, das Frauen in Führungspositionen der Branche betreffe. Beide werden im Abspann als Regie geführt, und Chapman erhielt den Oscar gemeinsam mit Andrews.
+Etwa achtzehn Monate vor dem Start wurde sie von der Produktion abgezogen und durch Mark Andrews ersetzt — offiziell wegen kreativer Differenzen. Chapman äußerte sich später öffentlich und deutlich dazu, wie sehr sie der Vorgang getroffen habe, und ordnete ihn in ein Muster ein, das Frauen in Führungspositionen der Branche betreffe. Beide stehen im Abspann für die Regie, und Chapman erhielt den Oscar gemeinsam mit Andrews.
 
 ### Hinter den Kulissen
 Meridas Haar war die technische Hauptaufgabe: rund 1.500 einzeln simulierte Locken, die sich gegenseitig beeinflussen, ihre Form bei Nässe verändern und beim Reiten in Bewegung bleiben. Pixar musste dafür seine Simulationssoftware grundlegend erweitern.
@@ -5810,7 +5810,7 @@ Alan Rickman gab hier sein Filmdebüt; er kam vom Theater und hatte den Ruf, fü
 ### Einordnung & Wirkung
 Der Film spielte weltweit rund 140 Millionen Dollar ein und war für vier Oscars in technischen Kategorien nominiert.
 
-Er veränderte das Actionkino grundlegend: Der Held ist kein Muskelberg, sondern ein erschöpfter Mann, der blutet, flucht und Angst hat. Die Struktur wurde zur Verkaufsformel — jahrelang wurden Projekte als "Stirb langsam in einem Bus", "auf einem Schiff" oder "im Weißen Haus" angeboten. Alan Rickmans Hans Gruber begründete den Typus des kultivierten europäischen Gegenspielers. Ob der Film ein Weihnachtsfilm ist, wird seit Jahrzehnten geführt und ist nicht zu klären.` },
+Er veränderte das Actionkino grundlegend: Der Held ist kein Muskelberg, sondern ein erschöpfter Mann, der blutet, flucht und Angst hat. Die Struktur wurde zur Verkaufsformel — jahrelang wurden Projekte als "Stirb langsam in einem Bus", "auf einem Schiff" oder "im Weißen Haus" angeboten. Alan Rickmans Hans Gruber begründete den Typus des kultivierten europäischen Gegenspielers. Ob der Film ein Weihnachtsfilm ist, wird seit Jahrzehnten diskutiert und ist nicht zu klären.` },
   { bereich: "titel", schluessel: "movie:216015", locale: "de-de",
     text: `### Worum es geht
 Die Literaturstudentin Anastasia Steele springt für ihre erkrankte Mitbewohnerin bei einem Interview ein und trifft dabei den siebenundzwanzigjährigen Unternehmer Christian Grey. Er nimmt anschließend Kontakt auf, taucht an ihrem Arbeitsplatz auf und legt ihr schließlich einen Vertrag vor.
@@ -12405,7 +12405,7 @@ Die Besetzung löste Widerspruch aus, weil im Roman japanische Figuren mit nicht
 ### Hinter den Kulissen
 Gedreht wurde von November 2020 bis März 2021 überwiegend in Los Angeles. Drei vollständige Waggons entstanden als Kulisse.
 
-Brad Pitt führte nach Angaben der Produktion etwa fünfundneunzig Prozent seiner Stunts selbst aus. Mehrere Darsteller traten unbezahlt in kurzen Auftritten auf, darunter Ryan Reynolds und Channing Tatum.
+Laut der Produktion führte Brad Pitt etwa fünfundneunzig Prozent seiner Stunts selbst aus. Mehrere Darsteller traten unbezahlt in kurzen Auftritten auf, darunter Ryan Reynolds und Channing Tatum.
 
 ### Einordnung & Wirkung
 Der Film spielte weltweit rund 239 Millionen Dollar ein, bei einem Budget zwischen 86 und 90 Millionen, und erhielt rund zweiundfünfzig Prozent zustimmende Besprechungen.
@@ -15227,7 +15227,7 @@ Spielberg übernahm Kubricks Umgang mit Geheimhaltung: Kaum jemand außerhalb de
 ### Einordnung & Wirkung
 Der Film spielte weltweit rund 236 Millionen Dollar ein, bei einem Budget zwischen 90 und 100 Millionen, und erhielt rund sechsundsiebzig Prozent zustimmende Besprechungen. Er wurde für Musik und visuelle Effekte für den Oscar nominiert.
 
-Umstritten war vor allem der Schluss, den viele für eine Spielberg-Zutat hielten — tatsächlich stammt er aus Kubricks eigenen Entwürfen. Über die Jahre hat sich das Urteil deutlich verschoben: Der Film gilt inzwischen als eine der härtesten Arbeiten Spielbergs und wird regelmäßig in Bestenlisten des Jahrzehnts geführt.` },
+Umstritten war vor allem der Schluss, den viele für eine Spielberg-Zutat hielten — tatsächlich stammt er aus Kubricks eigenen Entwürfen. Über die Jahre hat sich das Urteil deutlich verschoben: Der Film gilt inzwischen als eine der härtesten Arbeiten Spielbergs und taucht regelmäßig in Bestenlisten des Jahrzehnts auf.` },
   { bereich: "titel", schluessel: "movie:80278", locale: "de-de",
     text: `### Worum es geht
 Eine Familie verbringt Weihnachten 2004 in einer Ferienanlage an der thailändischen Küste. Am Morgen des 26. Dezember sitzen sie am Pool, als sich das Wasser hinter den Palmen aufbaut.
@@ -16262,7 +16262,7 @@ Vor einer Rede bei den Vereinten Nationen wird er entführt und verliert seinen 
 ### Entstehungsgeschichte
 Es war Sacha Baron Cohens erster Film mit ausgeschriebenem Drehbuch — "Borat" und "Brüno" hatten mit versteckter Kamera und ahnungslosen Beteiligten gearbeitet. Er schrieb mit Alec Berg, David Mandel und Jeff Schaffer; Larry Charles führte wie zuvor Regie.
 
-Die Figur ist nach Angaben der Produktion an Muammar al-Gaddafi angelehnt. Paramount verwies zudem auf Saddam Husseins Roman "Zabibah und der König" als Anregung — eine Angabe, die später bestritten wurde.
+Die Figur ist nach Aussage der Produktion an Muammar al-Gaddafi angelehnt. Paramount verwies zudem auf Saddam Husseins Roman "Zabibah und der König" als Anregung — eine Darstellung, die später bestritten wurde.
 
 ### Hinter den Kulissen
 Gedreht wurde von Juni bis August 2011 in New York, in Sevilla und auf Fuerteventura. Die Szenen bei den Vereinten Nationen entstanden in einem Studio auf Long Island, weil die Organisation Dreharbeiten in ihren Räumen ablehnte.
@@ -17710,7 +17710,7 @@ Um nach Hause zu kommen, soll Dorothy dem gelben Ziegelweg zur Smaragdstadt folg
 
 Die Vorlage ist L. Frank Baums Roman von 1900. MGM verfilmte ihn als Großproduktion mit einem Budget von 2,7 Millionen Dollar, einer für die Zeit enormen Summe.
 
-Als Regisseur wird Victor Fleming geführt, tatsächlich arbeiteten mehrere Regisseure am Film: George Cukor und King Vidor verantworteten einzelne Abschnitte. Judy Garland setzte sich in der Besetzung gegen andere Kinderstars durch.
+Als Regisseur gilt Victor Fleming, tatsächlich arbeiteten mehrere Regisseure am Film: George Cukor und King Vidor verantworteten einzelne Abschnitte. Judy Garland setzte sich in der Besetzung gegen andere Kinderstars durch.
 
 ### Hinter den Kulissen
 
@@ -21256,7 +21256,7 @@ Regie führte Lee Tamahori, der zuvor den Bond-Film "Stirb an einem anderen Tag"
 
 ### Hinter den Kulissen
 
-Das Budget lag bei 60 Millionen Dollar, die tatsächlichen Gesamtausgaben werden mit 113,1 Millionen angegeben.
+Das Budget lag bei 60 Millionen Dollar, die tatsächlichen Gesamtausgaben beliefen sich auf 113,1 Millionen.
 
 Die Reihe war ursprünglich als Gegenentwurf zu James Bond angelegt — ein Extremsportler statt eines Agenten im Anzug. Dass ausgerechnet ein Bond-Regisseur den zweiten Teil übernahm, hebt diesen Gegensatz weitgehend auf.
 
@@ -21580,7 +21580,7 @@ Frieza kehrt zurück und tut etwas, das er nie für nötig gehalten hat: Er trai
 
 Akira Toriyama, der Schöpfer von "Dragon Ball", schrieb das Drehbuch selbst — zum ersten Mal in der Geschichte der Reihe.
 
-Nach Angaben eines Produzenten kam ihm die Idee bei einem Konzert der Metal-Band Maximum the Hormone, angeregt von deren Stück "F".
+Nach Aussage eines Produzenten kam ihm die Idee bei einem Konzert der Metal-Band Maximum the Hormone, angeregt von deren Stück "F".
 
 Regie führte Tadayoshi Yamamuro. Die Premiere in Japan war am 18. April 2015.
 
@@ -26785,7 +26785,7 @@ Deren Vorteil ist das Herz: eine künstliche Intelligenz, die aus sämtlichen ve
 
 Regie führte Tom Harper. Gal Gadot spielt Rachel Stone; daneben sind Jamie Dornan, Alia Bhatt in ihrem ersten amerikanischen Film, Sophie Okonedo und Matthias Schweighöfer zu sehen.
 
-Das Budget wird mit 150 Millionen Dollar angegeben und gehört damit zu den höchsten, die Netflix je für eine Eigenproduktion aufgewendet hat.
+Das Budget wird auf 150 Millionen Dollar beziffert und gehört damit zu den höchsten, die Netflix je für eine Eigenproduktion aufgewendet hat.
 
 ### Hinter den Kulissen
 
@@ -28916,7 +28916,7 @@ Bryan Cranston spielt Robert Mazur. Daneben sind Diane Kruger, John Leguizamo, B
 
 Die Dreharbeiten begannen am 23. Februar 2015 in London und verlagerten sich Ende April nach Tampa in Florida; gedreht wurde unter anderem am Hafen von Tampa.
 
-Das Budget wird zwischen 28 und 47,5 Millionen Dollar angegeben.
+Das Budget wird auf 28 bis 47,5 Millionen Dollar beziffert.
 
 Der Reiz des Stoffes liegt in der Umkehrung des üblichen Musters: Der Ermittler wird nicht enttarnt, weil er Fehler macht, sondern gerät in Gefahr, weil die Tarnung zu gut funktioniert — er muss Freundschaften pflegen mit Menschen, die er zugleich ins Gefängnis bringt.
 
@@ -29369,7 +29369,7 @@ Bei 17 Millionen Dollar Herstellungskosten spielte der Film 55 Millionen ein und
 
 Er wird häufig als der beste aller Halloween-Nachfolger bezeichnet, gerade weil er unmittelbar am Klassiker von 1978 anknüpft.
 
-Die Reihe ging dennoch weiter: "Halloween: Resurrection" wird als eigene Fortsetzung geführt. Das Hin und Her zwischen Neuanfängen und ignorierten Teilen ist für diese Reihe kennzeichnend geblieben.` },
+Die Reihe ging dennoch weiter: „Halloween: Resurrection“ gilt als eigene Fortsetzung. Das Hin und Her zwischen Neuanfängen und ignorierten Teilen ist für diese Reihe kennzeichnend geblieben.` },
   {
     bereich: 'titel', schluessel: 'movie:203739', locale: 'de-de',
     text: `### Worum es geht
@@ -34417,7 +34417,7 @@ Als der Vater in anderen Bambusstauden Gold findet, zieht die Familie in die Sta
 
 Vorlage ist die klassische japanische Erzählung „Taketori Monogatari".
 
-Regie führte Isao Takahata, das Drehbuch schrieb er gemeinsam mit Riko Sakaguchi. Produziert wurde der Film bei Studio Ghibli von Toshio Suzuki und Yoshiaki Nishimura. Nach Nishimuras Angabe wurde acht Jahre an dem Film gearbeitet.
+Regie führte Isao Takahata, das Drehbuch schrieb er gemeinsam mit Riko Sakaguchi. Produziert wurde der Film bei Studio Ghibli von Toshio Suzuki und Yoshiaki Nishimura. Nach Aussage Nishimuras wurde acht Jahre an dem Film gearbeitet.
 
 Die Musik stammt von Joe Hisaishi, den Abspanntitel „Inochi no Kioku" singt Kazumi Nikaido.
 
@@ -34555,7 +34555,7 @@ Don Mancini schrieb das Drehbuch und führte Regie; es war sein Debüt als Spiel
 
 Brad Dourif spricht Chucky, Jennifer Tilly spielt sich selbst und spricht Tiffany, Billy Boyd spricht Glen/Glenda. Redman tritt als er selbst auf, Hannah Spearritt spielt die Joan, John Waters den Pete Peters.
 
-Gedreht wurde fast vollständig in Rumänien in den Castel Studios, um Kosten zu sparen. Tony Gardner verantwortete sämtliche Animatronik- und Make-up-Effekte. Die Angaben zum Budget schwanken zwischen 12 und 29 Millionen Dollar.
+Gedreht wurde fast vollständig in Rumänien in den Castel Studios, um Kosten zu sparen. Tony Gardner verantwortete sämtliche Animatronik- und Make-up-Effekte. Die Zahlen zum Budget schwanken zwischen 12 und 29 Millionen Dollar.
 
 ### Hinter den Kulissen
 
@@ -35150,7 +35150,7 @@ Am Premierenwochenende sahen 8,5 Millionen Zuschauer den Film.
 
 Ein Rezensent beschrieb ihn als leicht wie eine Sommerbrise über dem Bayou von Louisiana und hob die Botschaft zur Selbstachtung hervor.
 
-Beide Angaben zusammen beschreiben das Format genau. Ein Film dieser Art wird nicht an der Zahl seiner Besprechungen gemessen, sondern an der Zahl derer, die ihn am ersten Wochenende einschalten — und 8,5 Millionen sind dafür ein deutlicher Wert. Dass die DVD nur vier Tage nach der Erstausstrahlung erschien, gehört zur selben Rechnung.
+Beide Befunde zusammen beschreiben das Format genau. Ein Film dieser Art wird nicht an der Zahl seiner Besprechungen gemessen, sondern an der Zahl derer, die ihn am ersten Wochenende einschalten — und 8,5 Millionen sind dafür ein deutlicher Wert. Dass die DVD nur vier Tage nach der Erstausstrahlung erschien, gehört zur selben Rechnung.
 
 Die Botschaft, auf die der Rezensent verweist, liegt dabei in der Konstruktion selbst: Beide Mädchen kommen am Ende ohne die Rolle aus, die ihnen zugeschrieben wird — die eine ohne den Titel, die andere ohne die fremde Zuschreibung.` },
   {
@@ -36435,7 +36435,7 @@ Der erste Trailer erschien am 31. Mai 2022, der Film am 8. September 2022 auf Di
 
 ### Hinter den Kulissen
 
-Sieben Jahre zwischen dem ersten Drehbuchauftrag 2015 und der Veröffentlichung 2022 beschreiben die Entstehung genauer als jede Inhaltsangabe. In dieser Zeit wechselten Autor und Regisseur mehrfach, bevor die Besetzung überhaupt feststand.
+Sieben Jahre zwischen dem ersten Drehbuchauftrag 2015 und der Veröffentlichung 2022 sagen viel über die Entstehung. In dieser Zeit wechselten Autor und Regisseur mehrfach, bevor die Besetzung überhaupt feststand.
 
 Die Machart mischt zwei Verfahren. Geppetto, die Blaue Fee und der Kutscher sind gespielt, Pinocchio und Jiminy Grille sind animiert — Tom Hanks agiert also gegen Figuren, die erst später ins Bild kommen. Gedreht wurde vollständig im Studio.
 
@@ -37130,7 +37130,7 @@ Regie führte James Bobin; es war sein Debüt als Spielfilmregisseur. Das Drehbu
 
 Jason Segel spielt Gary, Amy Adams die Lehrerin Mary, Chris Cooper den Tex Richman, Rashida Jones die Fernsehmanagerin Veronica Martin, Zach Galifianakis den Hobo Joe und Alan Arkin einen Fremdenführer. Jim Parsons ist in einem Kurzauftritt zu sehen, Jack Black ungenannt als er selbst.
 
-Die Muppets werden geführt von Steve Whitmire (Kermit, Beaker, Statler, Rizzo), Eric Jacobson (Miss Piggy, Fozzie, Animal, Sam Eagle), Dave Goelz (Gonzo, Dr. Honeydew, Waldorf), Bill Barretta (Schwedischer Koch, Rowlf, Pepe, Bobo), David Rudman (Scooter, Janis, Miss Poogy), Matt Vogel (Floyd Pepper, Camilla, Uncle Deadly) und Peter Linz, der die neue Figur Walter übernahm.
+Die Muppets werden gespielt von Steve Whitmire (Kermit, Beaker, Statler, Rizzo), Eric Jacobson (Miss Piggy, Fozzie, Animal, Sam Eagle), Dave Goelz (Gonzo, Dr. Honeydew, Waldorf), Bill Barretta (Schwedischer Koch, Rowlf, Pepe, Bobo), David Rudman (Scooter, Janis, Miss Poogy), Matt Vogel (Floyd Pepper, Camilla, Uncle Deadly) und Peter Linz, der die neue Figur Walter übernahm.
 
 Produziert wurde der Film von David Hoberman und Todd Lieberman für Walt Disney Pictures und Mandeville Films. Musik-Supervisor war Bret McKenzie, der vier der fünf Originalsongs schrieb; die Filmmusik stammt von Christophe Beck.
 
@@ -41092,7 +41092,7 @@ Der Film erschien 1996, dauert 101 Minuten und ist ab 16 Jahren freigegeben. Der
 
 Dass der Hauptdarsteller am Drehbuch mitschrieb und den Film mitproduzierte, ist die auffälligste Konstellation. Kurt Russell verantwortete die Figur in drei Funktionen.
 
-Erzählerisch arbeitet der Film mit einer Zeitangabe, die aus heutiger Sicht Vergangenheit ist: 2013. Was 1996 als Zukunft entworfen wurde, ist inzwischen überholt — der Film erzählt eine Zukunft, die nicht eingetreten ist.
+Erzählerisch arbeitet der Film mit einem Handlungsjahr, das aus heutiger Sicht Vergangenheit ist: 2013. Was 1996 als Zukunft entworfen wurde, ist inzwischen überholt — der Film erzählt eine Zukunft, die nicht eingetreten ist.
 
 Die Ausgangslage ist eine Erpressung. Plissken handelt nicht aus Überzeugung, sondern weil man ihm ein Virus gespritzt hat — der Film verweigert seiner Hauptfigur von Beginn an jedes Motiv außer dem eigenen Überleben. Wofür er sich am Ende entscheidet, folgt daraus konsequent.
 
@@ -42265,7 +42265,7 @@ Bis November 2014 hatte der Film das Doppelte seiner Produktionskosten eingespie
 
 Rotten Tomatoes weist 34 Prozent Zustimmung aus. Die Zeitschrift Cinema lobte Brosnans Leistung in einem kurzweiligen Agententhriller.
 
-Diese beiden Angaben zusammen beschreiben die Lage. Ein Film, der bei einem Drittel Zustimmung sein Budget verdoppelt, findet sein Publikum unabhängig von den Besprechungen — getragen von einem Hauptdarsteller, dessen Name im Genre für etwas steht.
+Diese beiden Werte zusammen beschreiben die Lage. Ein Film, der bei einem Drittel Zustimmung sein Budget verdoppelt, findet sein Publikum unabhängig von den Besprechungen — getragen von einem Hauptdarsteller, dessen Name im Genre für etwas steht.
 
 Bemerkenswert bleibt die Vorlage. Ein Roman von Bill Granger liefert den Stoff — unter einem anderen Titel als der Film, der ihn verfilmt.` },
   {
@@ -43738,7 +43738,7 @@ Gedreht wurde ab dem 21. Juni 2013 in Bulgarien. Der ursprüngliche Titel „Eli
 
 Poes Erzählung von 1845 ist die Blaupause für eine ganze Gattung von Geschichten. Was sie liefert, ist eine Ausgangslage, in der die Rollen im Haus nicht so verteilt sind, wie ein Besucher annimmt.
 
-Der Besetzungszettel ist dabei selbst ein Hinweis. Dass zwei Darsteller in den Rollenangaben denselben Namen tragen, gehört zur Anlage des Films.
+Der Besetzungszettel ist dabei selbst ein Hinweis. Dass zwei Darsteller Figuren desselben Namens spielen, gehört zur Anlage des Films.
 
 Die Verlegung ins Jahr 1899 setzt die Handlung an einen bestimmten Punkt der Medizingeschichte — an dem sich zwei Auffassungen von Behandlung gegenüberstanden, ohne dass eine sich hätte durchsetzen können.
 
@@ -45652,7 +45652,7 @@ Das Lexikon des internationalen Films nannte den Film ein grelles Pop-Musical mi
 
 Mit 8,3 Millionen Dollar an der amerikanischen Kinokasse blieb er ein Randerfolg — was für einen Film von John Waters eher die Regel als die Ausnahme ist.
 
-Bemerkenswert bleibt der Zusammenschnitt der Namen. Dass Johnny Depp, Iggy Pop und Traci Lords in derselben Besetzungsliste stehen, ist keine Verlegenheitslösung, sondern die Handschrift des Regisseurs.
+Bemerkenswert bleibt der Zusammenschnitt der Namen. Dass Johnny Depp, Iggy Pop und Traci Lords in derselben Besetzung stehen, ist keine Verlegenheitslösung, sondern die Handschrift des Regisseurs.
 
 Roger Eberts Lob für den nostalgischen Blick trifft dabei den Punkt: Waters schaut auf ein Jahrzehnt zurück, ohne es zu verklären.` },
   {
@@ -46642,7 +46642,7 @@ Das Budget betrug 16 Millionen Dollar. Der Start war am 16. April 1999 in Dänem
 
 Josef Rusnak wurde für den Film verpflichtet, nachdem er 1998 als Second-Unit-Regisseur an „Godzilla" gearbeitet hatte; Weber und Emmerich waren von seiner Kameraarbeit beeindruckt.
 
-Die Besetzungsliste erzählt die Konstruktion mit. Fast jeder Darsteller spielt mehrere Figuren in verschiedenen Zeitebenen — 1937, 1999 und 2024 — und wer wem entspricht, ist der Kern der Geschichte.
+Die Besetzung erzählt die Konstruktion mit. Fast jeder Darsteller spielt mehrere Figuren in verschiedenen Zeitebenen — 1937, 1999 und 2024 — und wer wem entspricht, ist der Kern der Geschichte.
 
 Bemerkenswert ist die Herkunft des Stoffes. Fassbinder hatte denselben Roman 1973 fürs Fernsehen verfilmt; dass 26 Jahre später eine amerikanische Fassung entstand, ist ein seltener Weg.
 
