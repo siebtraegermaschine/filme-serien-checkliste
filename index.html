@@ -232,7 +232,10 @@
     outline: none;
   }
   .toolbar input:focus, .head-search input:focus { border-color: var(--accent); }
-  .toolbar button {
+  /* .cinema-page-actions mit dazu: der Sortier-Knopf der Kino-Seite soll
+     genauso aussehen wie #fSort unter Filme/Serien, sitzt aber (anders als
+     dieser) nicht in .toolbar. */
+  .toolbar button, .cinema-page-actions button {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -242,8 +245,10 @@
     cursor: pointer;
     transition: all 0.15s;
   }
-  @media (hover: hover) { .toolbar button:hover { border-color: var(--accent); color: var(--accent); } }
-  .toolbar button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) {
+    .toolbar button:hover, .cinema-page-actions button:hover { border-color: var(--accent); color: var(--accent); }
+  }
+  .toolbar button.active, .cinema-page-actions button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   @media (max-width: 640px) {
     .toolbar { row-gap: 8px; }
     /* iOS Safari zoomt automatisch in die Seite rein, sobald ein Eingabefeld mit
@@ -523,9 +528,10 @@
      .list rueckten die Zeilen sonst gegenueber der Buttonleiste ein. */
   .modal .similar-modal-list { overflow-y:auto; flex:1; margin:0; padding-left:0; padding-right:0;
     -webkit-overflow-scrolling:touch; }
-  /* "Im Kino"-Seite: keine eigene Modal-/Card-Optik, sondern dieselben Zeilen wie
-     Discovery/Streaming (poolItemLi in ol.list) -- nur die Abschnitts-Ueberschriften
-     (Aktuell/In Kuerze/Bald im Kino) sind hier neu. */
+  /* "Im Kino"-Seite: keine eigene Modal-/Card-Optik, sondern dieselben Zeilen
+     und dieselbe eine durchgehende, nach Sortierung geordnete Liste wie
+     Discovery/Streaming (poolItemLi in ol.list) -- keine eigene Gliederung
+     mehr in Aktuell/In Kuerze/Bald (siehe cinemaRowToItem/renderCinemaPage). */
   /* 10px oben: Genau der Abstand, mit dem unter Filme/Serien die Sortier-Reihe
      unter der Statusreihe sitzt (nachgemessen). Vorher standen hier 22px -- der
      Knopf sass sichtbar tiefer als derselbe Knopf im anderen Bereich, obwohl er
@@ -546,35 +552,6 @@
     flex: 0 0 calc((100% - 8px) / 3); min-width: 0; }
   .cinema-page-actions .sort-wrap { flex: 1; min-width: 0; }
   #cinemaSort { width: 100%; }
-  /* Eigenstaendiges Styling fuer den Sortier-Button auf der Kino-Seite noetig,
-     da er (anders als #fSort unter Filme/Serien) nicht in .toolbar steckt und
-     ".toolbar button" ihn deshalb nicht erreicht (gleicher Grund wie bei den
-     Discovery-Filterknoepfen weiter oben). */
-  #cinemaSort {
-    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-    padding: 9px 14px; color: var(--text-dim); font-size: 13px; cursor: pointer;
-    transition: all 0.15s; white-space: nowrap;
-  }
-  @media (hover: hover) { #cinemaSort:hover { border-color: var(--accent); color: var(--accent); } }
-  #cinemaSort.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-  /* Dasselbe gilt fuer die drei Eintraege IM Dropdown (#cinemaSortMenu) -- die
-     bekommen ihr Aussehen sonst ueber ".toolbar button", was hier ausserhalb
-     von .toolbar ebenfalls nicht greift (nur ".sort-menu button" oben setzt
-     bislang lediglich Layout-Eigenschaften, keine Optik). */
-  #cinemaSortMenu button {
-    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-    padding: 9px 14px; color: var(--text-dim); font-size: 13px; cursor: pointer;
-    transition: all 0.15s;
-  }
-  @media (hover: hover) { #cinemaSortMenu button:hover { border-color: var(--accent); color: var(--accent); } }
-  /* ".sort-menu button.active" (s.o.) hat als Klassen-Selektor eine niedrigere
-     Spezifitaet als "#cinemaSortMenu button" oben und wird dadurch ueberschrieben --
-     ohne diese ID-Regel bleibt die aktive Sortierung optisch nicht erkennbar. */
-  #cinemaSortMenu button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-  .cinema-section ol.list { margin-top:10px; }
-  .cinema-heading { max-width: 700px; margin-left:auto; margin-right:auto; padding: 0 20px; box-sizing: border-box;
-    color:var(--text); font-size:15px; font-weight:700; }
-  .cinema-heading .cinema-count { color:var(--text-dim); font-weight:600; }
   .cinema-empty { color:var(--text-dim); font-size:13px; padding:6px 20px; max-width:700px; margin:0 auto; box-sizing:border-box; }
 
   /* Im Popup ist die Spalte fuer Titel/Aktionen schmaler als auf Discovery/
@@ -723,13 +700,6 @@
   .moment-bar .moment-text { flex:1 1 auto; min-width:0; }
   @media (hover: hover) { .moment-bar .moment-verknuepfen:hover { border-color:var(--accent); } }
   @media (hover: hover) { .load-more-btn:hover { border-color:var(--accent); color:var(--accent); } }
-  /* Im Kino folgt direkt unter dem Knopf schon die naechste Ueberschrift
-     ("In Kürze im Kino", "Bald im Kino") -- die 6px von oben liessen den Knopf
-     dort an der folgenden Ueberschrift kleben, waehrend darueber 18px Luft
-     standen. Gleicher Abstand auf beiden Seiten. Bewusst nur im Kino: In den
-     uebrigen Listen steht der Knopf am Listenende, dort folgt keine
-     Ueberschrift und die 6px sind richtig. */
-  .cinema-section .load-more-btn { margin-bottom: 18px; }
   /* Der Kino-Hinweis unter den Suchtreffern ist kein "mehr vom Gleichen",
      sondern ein Wegweiser in einen anderen Bereich -- deshalb in Akzentfarbe. */
   .kino-hinweis { border-color:var(--accent); color:var(--accent); }
@@ -1501,25 +1471,13 @@
         <button id="cinemaSort" type="button" title="Sortierung">⇅ Sortieren</button>
         <div id="cinemaSortMenu" class="sort-menu" style="display:none">
           <button type="button" data-sort="imdb">Sortieren nach ★★★★-Bewertung</button>
-          <button type="button" data-sort="date">nach Veröffentlichungsdatum</button>
-          <button type="button" data-sort="cinema">nach Neu im Kino</button>
-          <button type="button" data-sort="taste" class="active">nach Taste-Score</button>
+          <button type="button" data-sort="date" class="active">nach Veröffentlichungsdatum</button>
+          <button type="button" data-sort="taste">nach Taste-Score</button>
         </div>
       </div>
     </div>
   </div>
-  <div class="cinema-section">
-    <h3 class="cinema-heading" id="cinemaNowHeading">Aktuell im Kino</h3>
-    <ol class="list" id="cinemaNowList"></ol>
-  </div>
-  <div class="cinema-section">
-    <h3 class="cinema-heading" id="cinemaSoonHeading">In Kürze im Kino</h3>
-    <ol class="list" id="cinemaSoonList"></ol>
-  </div>
-  <div class="cinema-section">
-    <h3 class="cinema-heading" id="cinemaLaterHeading">Bald im Kino</h3>
-    <ol class="list" id="cinemaLaterList"></ol>
-  </div>
+  <ol class="list" id="cinemaList"></ol>
   <!-- Gegenstueck zum "Auch im Kino"-Hinweis der Titelliste: Trifft der
        Suchbegriff auch unter Filme & Serien, weist dieser Knopf den Weg
        zurueck (siehe listenHinweisAktualisieren). In einem eigenen ol.list,
@@ -2196,7 +2154,6 @@ var UI_TEXTE = {
     mehrLaden: 'Mehr laden',
     textMehr: 'Mehr',
     textWeniger: 'Weniger',
-    mehrAnzeigen: function(n){ return 'Mehr anzeigen (' + n + ' weitere)'; },
     laedt: 'Lädt …',
     regie: 'Regie', idee: 'Idee', originaltitel: 'Originaltitel:', besetzung: 'Besetzung:',
     ansehen: '▶ Ansehen', leihen: 'Leihen', kaufen: 'Kaufen',
@@ -2232,8 +2189,7 @@ var UI_TEXTE = {
     auchImKino: function(n){ return '🍿 Auch im Kino: ' + n + ' Treffer'; },
     auchInListe: function(n){ return '🎬 Auch unter Filme & Serien: ' + n + ' Treffer'; },
     katalogFehler: 'Katalog konnte nicht geladen werden. Ist das Backend erreichbar?',
-    kinoLabels: { now: 'Aktuell im Kino', soon: 'In Kürze im Kino', later: 'Bald im Kino' },
-    kinoLeer: { now: 'Aktuell sind keine Titel hinterlegt.', soon: 'In Kürze startet aktuell nichts Neues.', later: 'Für die kommenden Monate ist noch nichts hinterlegt.' },
+    kinoLeer: 'Aktuell sind keine Titel hinterlegt.',
     kinoFehler: 'Kino-Daten konnten nicht geladen werden.',
     gesehenZuWl: 'Du hast diesen Titel als gesehen markiert. Auf der Watchlist gilt er nicht mehr als gesehen: Er verschwindet aus „Gesehen“ und deine Sterne-Bewertung zählt nicht mehr für deinen Taste-Score. Trotzdem auf die Watchlist setzen?',
     wischFilme: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
@@ -2512,7 +2468,6 @@ var UI_TEXTE = {
     mehrLaden: 'Load more',
     textMehr: 'More',
     textWeniger: 'Less',
-    mehrAnzeigen: function(n){ return 'Show more (' + n + ' more)'; },
     laedt: 'Loading …',
     regie: 'Director', idee: 'Created by', originaltitel: 'Original title:', besetzung: 'Cast:',
     ansehen: '▶ Stream', leihen: 'Rent', kaufen: 'Buy',
@@ -2547,8 +2502,7 @@ var UI_TEXTE = {
     auchImKino: function(n){ return '🍿 Also in cinemas: ' + n + ' ' + (n === 1 ? 'result' : 'results'); },
     auchInListe: function(n){ return '🎬 Also under Movies & Series: ' + n + ' ' + (n === 1 ? 'result' : 'results'); },
     katalogFehler: 'The catalogue could not be loaded. Is the backend reachable?',
-    kinoLabels: { now: 'Now playing', soon: 'Coming soon', later: 'Coming later' },
-    kinoLeer: { now: 'No titles on file right now.', soon: 'Nothing new starting soon.', later: 'Nothing on file for the coming months yet.' },
+    kinoLeer: 'No titles on file right now.',
     kinoFehler: 'Cinema data could not be loaded.',
     gesehenZuWl: 'You marked this title as watched. On the watchlist it no longer counts as watched: it disappears from “Watched” and your star rating no longer counts towards your Taste Score. Add it to the watchlist anyway?',
     wischFilme: 'Swiping left removes the title from your movies list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
@@ -2824,7 +2778,6 @@ var UI_TEXTE = {
     mehrLaden: 'Charger plus',
     textMehr: 'Plus',
     textWeniger: 'Moins',
-    mehrAnzeigen: function(n){ return 'Afficher plus (' + n + ' de plus)'; },
     laedt: 'Chargement …',
     regie: 'Réalisation', idee: 'Création', originaltitel: 'Titre original :', besetzung: 'Distribution :',
     ansehen: '▶ Regarder', leihen: 'Louer', kaufen: 'Acheter',
@@ -2859,8 +2812,7 @@ var UI_TEXTE = {
     auchImKino: function(n){ return '🍿 Aussi au cinéma : ' + n + ' ' + (n === 1 ? 'résultat' : 'résultats'); },
     auchInListe: function(n){ return '🎬 Aussi sous Films & Séries : ' + n + ' ' + (n === 1 ? 'résultat' : 'résultats'); },
     katalogFehler: 'Le catalogue n’a pas pu être chargé. Le backend est-il accessible ?',
-    kinoLabels: { now: 'À l’affiche', soon: 'Prochainement', later: 'Plus tard' },
-    kinoLeer: { now: 'Aucun titre référencé pour le moment.', soon: 'Rien de nouveau ne démarre prochainement.', later: 'Rien de référencé pour les mois à venir pour l’instant.' },
+    kinoLeer: 'Aucun titre référencé pour le moment.',
     kinoFehler: 'Les données cinéma n’ont pas pu être chargées.',
     gesehenZuWl: 'Tu as marqué ce titre comme vu. Sur la watchlist, il ne compte plus comme vu : il disparaît de « Vus » et ta note en étoiles ne compte plus pour ton Taste Score. L’ajouter quand même à la watchlist ?',
     wischFilme: 'Balayer vers la gauche retire le titre de ta liste de films. Tu peux le rajouter à tout moment via « Découvrir » ou la recherche. Cette question ne te sera posée qu’une seule fois. Retirer maintenant ?',
@@ -3136,7 +3088,6 @@ var UI_TEXTE = {
     mehrLaden: 'Cargar más',
     textMehr: 'Más',
     textWeniger: 'Menos',
-    mehrAnzeigen: function(n){ return 'Mostrar más (' + n + ' más)'; },
     laedt: 'Cargando …',
     regie: 'Dirección', idee: 'Creación', originaltitel: 'Título original:', besetzung: 'Reparto:',
     ansehen: '▶ Ver', leihen: 'Alquilar', kaufen: 'Comprar',
@@ -3171,8 +3122,7 @@ var UI_TEXTE = {
     auchImKino: function(n){ return '🍿 También en cines: ' + n + ' ' + (n === 1 ? 'resultado' : 'resultados'); },
     auchInListe: function(n){ return '🎬 También en Películas y Series: ' + n + ' ' + (n === 1 ? 'resultado' : 'resultados'); },
     katalogFehler: 'No se pudo cargar el catálogo. ¿Está accesible el backend?',
-    kinoLabels: { now: 'En cartelera', soon: 'Próximamente', later: 'Más adelante' },
-    kinoLeer: { now: 'Ahora mismo no hay títulos registrados.', soon: 'No hay estrenos próximos.', later: 'Aún no hay nada registrado para los próximos meses.' },
+    kinoLeer: 'Ahora mismo no hay títulos registrados.',
     kinoFehler: 'No se pudieron cargar los datos de cine.',
     gesehenZuWl: 'Has marcado este título como visto. En la watchlist ya no cuenta como visto: desaparece de «Vistos» y tu valoración con estrellas deja de contar para tu Taste Score. ¿Añadirlo a la watchlist de todos modos?',
     wischFilme: 'Al deslizar a la izquierda, el título se elimina de tu lista de películas. Puedes volver a añadirlo en cualquier momento con «Descubrir» o la búsqueda. Solo se te preguntará esta vez. ¿Eliminar ahora?',
@@ -3448,7 +3398,6 @@ var UI_TEXTE = {
     mehrLaden: 'Carica altri',
     textMehr: 'Altro',
     textWeniger: 'Meno',
-    mehrAnzeigen: function(n){ return 'Mostra altri (' + n + ' in più)'; },
     laedt: 'Caricamento …',
     regie: 'Regia', idee: 'Ideazione', originaltitel: 'Titolo originale:', besetzung: 'Cast:',
     ansehen: '▶ Streaming', leihen: 'Noleggio', kaufen: 'Acquisto',
@@ -3483,8 +3432,7 @@ var UI_TEXTE = {
     auchImKino: function(n){ return '🍿 Anche al cinema: ' + n + ' ' + (n === 1 ? 'risultato' : 'risultati'); },
     auchInListe: function(n){ return '🎬 Anche in Film e Serie: ' + n + ' ' + (n === 1 ? 'risultato' : 'risultati'); },
     katalogFehler: 'Impossibile caricare il catalogo. Il backend è raggiungibile?',
-    kinoLabels: { now: 'Ora al cinema', soon: 'Prossimamente', later: 'In arrivo più avanti' },
-    kinoLeer: { now: 'Nessun titolo registrato al momento.', soon: 'Nessuna novità in arrivo a breve.', later: 'Ancora niente in programma per i prossimi mesi.' },
+    kinoLeer: 'Nessun titolo registrato al momento.',
     kinoFehler: 'Impossibile caricare i dati del cinema.',
     gesehenZuWl: 'Hai segnato questo titolo come visto. Sulla watchlist non conta più come visto: sparisce da “Visti” e le tue stelle non contano più per il tuo Taste Score. Aggiungerlo comunque alla watchlist?',
     wischFilme: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista dei film. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri novità” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
@@ -3760,7 +3708,6 @@ var UI_TEXTE = {
     mehrLaden: 'Meer laden',
     textMehr: 'Meer',
     textWeniger: 'Minder',
-    mehrAnzeigen: function(n){ return 'Meer tonen (nog ' + n + ')'; },
     laedt: 'Laden …',
     regie: 'Regie', idee: 'Bedacht door', originaltitel: 'Originele titel:', besetzung: 'Cast:',
     ansehen: '▶ Streamen', leihen: 'Huren', kaufen: 'Kopen',
@@ -3795,8 +3742,7 @@ var UI_TEXTE = {
     auchImKino: function(n){ return '🍿 Ook in de bioscoop: ' + n + ' ' + (n === 1 ? 'resultaat' : 'resultaten'); },
     auchInListe: function(n){ return '🎬 Ook onder Films & Series: ' + n + ' ' + (n === 1 ? 'resultaat' : 'resultaten'); },
     katalogFehler: 'De catalogus kon niet worden geladen. Is de backend bereikbaar?',
-    kinoLabels: { now: 'Nu in de bioscoop', soon: 'Binnenkort', later: 'Later te zien' },
-    kinoLeer: { now: 'Op dit moment geen titels bekend.', soon: 'Binnenkort start er niets nieuws.', later: 'Voor de komende maanden is nog niets bekend.' },
+    kinoLeer: 'Op dit moment geen titels bekend.',
     kinoFehler: 'Bioscoopgegevens konden niet worden geladen.',
     gesehenZuWl: 'Je hebt deze titel als gezien gemarkeerd. Op de watchlist telt hij niet meer als gezien: hij verdwijnt uit “Gezien” en je sterrenbeoordeling telt niet meer mee voor je Taste Score. Toch aan de watchlist toevoegen?',
     wischFilme: 'Naar links vegen verwijdert de titel uit je filmlijst. Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
@@ -4072,7 +4018,6 @@ var UI_TEXTE = {
     mehrLaden: 'Carregar mais',
     textMehr: 'Mais',
     textWeniger: 'Menos',
-    mehrAnzeigen: function(n){ return 'Mostrar mais (+' + n + ')'; },
     laedt: 'Carregando …',
     regie: 'Direção', idee: 'Criação', originaltitel: 'Título original:', besetzung: 'Elenco:',
     ansehen: '▶ Stream', leihen: 'Alugar', kaufen: 'Comprar',
@@ -4107,8 +4052,7 @@ var UI_TEXTE = {
     auchImKino: function(n){ return '🍿 Também nos cinemas: ' + n + ' ' + (n === 1 ? 'resultado' : 'resultados'); },
     auchInListe: function(n){ return '🎬 Também em Filmes e Séries: ' + n + ' ' + (n === 1 ? 'resultado' : 'resultados'); },
     katalogFehler: 'Não foi possível carregar o catálogo. O backend está acessível?',
-    kinoLabels: { now: 'Em cartaz', soon: 'Em breve', later: 'Mais adiante' },
-    kinoLeer: { now: 'Nenhum título registrado no momento.', soon: 'Nada novo estreando em breve.', later: 'Ainda nada registrado para os próximos meses.' },
+    kinoLeer: 'Nenhum título registrado no momento.',
     kinoFehler: 'Não foi possível carregar os dados de cinema.',
     gesehenZuWl: 'Você marcou este título como assistido. Na watchlist ele deixa de contar como assistido: ele some de “Assistidos” e sua avaliação em estrelas deixa de contar para o seu Taste Score. Adicionar à watchlist mesmo assim?',
     wischFilme: 'Deslizar para a esquerda remove o título da sua lista de filmes. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
@@ -4659,11 +4603,7 @@ var MARKUP_TEXTE = {
     '#cinemaSort': { t: '⇅ Sort' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Sort by ★★★★ rating' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'by release date' },
-    '#cinemaSortMenu [data-sort="cinema"]': { t: 'by new in cinemas' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'by Taste Score' },
-    '#cinemaNowHeading': { t: 'Now playing' },
-    '#cinemaSoonHeading': { t: 'Coming soon' },
-    '#cinemaLaterHeading': { t: 'Coming later' },
     '#inviteShareTitel': { t: 'Invitation' },
     '#inviteShareTeilen': { t: 'Share' },
     '#inviteShareKopieren': { t: 'Copy' },
@@ -4776,11 +4716,7 @@ var MARKUP_TEXTE = {
     '#cinemaSort': { t: '⇅ Trier' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Trier par note ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'par date de sortie' },
-    '#cinemaSortMenu [data-sort="cinema"]': { t: 'par nouveautés au cinéma' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'par Taste Score' },
-    '#cinemaNowHeading': { t: 'À l’affiche' },
-    '#cinemaSoonHeading': { t: 'Prochainement' },
-    '#cinemaLaterHeading': { t: 'Plus tard' },
     '#inviteShareTitel': { t: 'Invitation' },
     '#inviteShareTeilen': { t: 'Partager' },
     '#inviteShareKopieren': { t: 'Copier' },
@@ -4893,11 +4829,7 @@ var MARKUP_TEXTE = {
     '#cinemaSort': { t: '⇅ Ordenar' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Ordenar por valoración ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'por fecha de estreno' },
-    '#cinemaSortMenu [data-sort="cinema"]': { t: 'por novedades en el cine' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'por Taste Score' },
-    '#cinemaNowHeading': { t: 'En cartelera' },
-    '#cinemaSoonHeading': { t: 'Próximamente' },
-    '#cinemaLaterHeading': { t: 'Más adelante' },
     '#inviteShareTitel': { t: 'Invitación' },
     '#inviteShareTeilen': { t: 'Compartir' },
     '#inviteShareKopieren': { t: 'Copiar' },
@@ -5010,11 +4942,7 @@ var MARKUP_TEXTE = {
     '#cinemaSort': { t: '⇅ Ordina' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Ordina per valutazione ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'per data di uscita' },
-    '#cinemaSortMenu [data-sort="cinema"]': { t: 'per novità al cinema' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'per Taste Score' },
-    '#cinemaNowHeading': { t: 'Ora al cinema' },
-    '#cinemaSoonHeading': { t: 'Prossimamente' },
-    '#cinemaLaterHeading': { t: 'In arrivo più avanti' },
     '#inviteShareTitel': { t: 'Invito' },
     '#inviteShareTeilen': { t: 'Condividi' },
     '#inviteShareKopieren': { t: 'Copia' },
@@ -5127,11 +5055,7 @@ var MARKUP_TEXTE = {
     '#cinemaSort': { t: '⇅ Sorteren' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Sorteren op ★★★★-beoordeling' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'op verschijningsdatum' },
-    '#cinemaSortMenu [data-sort="cinema"]': { t: 'op nieuw in de bioscoop' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'op Taste Score' },
-    '#cinemaNowHeading': { t: 'Nu in de bioscoop' },
-    '#cinemaSoonHeading': { t: 'Binnenkort' },
-    '#cinemaLaterHeading': { t: 'Later te zien' },
     '#inviteShareTitel': { t: 'Uitnodiging' },
     '#inviteShareTeilen': { t: 'Delen' },
     '#inviteShareKopieren': { t: 'Kopiëren' },
@@ -5244,11 +5168,7 @@ var MARKUP_TEXTE = {
     '#cinemaSort': { t: '⇅ Ordenar' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Ordenar por avaliação ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'por data de lançamento' },
-    '#cinemaSortMenu [data-sort="cinema"]': { t: 'por novidades nos cinemas' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'por Taste Score' },
-    '#cinemaNowHeading': { t: 'Em cartaz' },
-    '#cinemaSoonHeading': { t: 'Em breve' },
-    '#cinemaLaterHeading': { t: 'Mais adiante' },
     '#inviteShareTitel': { t: 'Convite' },
     '#inviteShareTeilen': { t: 'Compartilhar' },
     '#inviteShareKopieren': { t: 'Copiar' },
@@ -9065,28 +8985,14 @@ try {
    Discovery/Streaming, damit Optik und Watchlist-/Gesehen-Funktion identisch sind. ---- */
 let cinemaMode = false;
 let CINEMA_DATA = null;
-const cinemaListEls = {
-  now: document.getElementById('cinemaNowList'),
-  soon: document.getElementById('cinemaSoonList'),
-  later: document.getElementById('cinemaLaterList'),
-};
-const cinemaHeadingEls = {
-  now: document.getElementById('cinemaNowHeading'),
-  soon: document.getElementById('cinemaSoonHeading'),
-  later: document.getElementById('cinemaLaterHeading'),
-};
-const CINEMA_LABELS = TXT.kinoLabels;
-const CINEMA_EMPTY_TEXT = TXT.kinoLeer;
-// Jeder der drei Bereiche zeigt anfangs nur CINEMA_SECTION_PREVIEW Titel
-// (sonst scrollt man scheinbar endlos durch nur EINEN Bereich, ohne zu merken,
-// dass es noch zwei weitere gibt). "Mehr anzeigen" blendet danach jeweils
-// CINEMA_SECTION_STEP weitere ein (nicht alles auf einmal -- bei bis zu ~300
-// Titeln in "Bald im Kino" waere ein einzelner Klick sonst eine Wand aus
-// hunderten Zeilen); der Button bleibt stehen, bis wirklich alle sichtbar sind.
-const CINEMA_SECTION_PREVIEW = 3;
-const CINEMA_SECTION_STEP = 25;
-let cinemaSectionLimit = { now: CINEMA_SECTION_PREVIEW, soon: CINEMA_SECTION_PREVIEW, later: CINEMA_SECTION_PREVIEW };
-let cinemaSortKey = 'taste';
+const cinemaListEl = document.getElementById('cinemaList');
+// Eine durchgehende, nach cinemaSortKey geordnete Liste -- genau wie unter
+// Filme/Serien (siehe TITEL_PRO_SEITE/NACHLADE_SCHRITT weiter oben). Frueher
+// gab es hier drei Bereiche (Aktuell/In Kuerze/Bald im Kino), weil die API die
+// Daten bereits so liefert (data.now/soon/later) -- eine inhaltliche
+// Notwendigkeit war das nicht, siehe renderCinemaPage.
+let cinemaLimit = TITEL_PRO_SEITE;
+let cinemaSortKey = 'date';
 async function loadCinemaData(){
   if (!CINEMA_DATA) {
     CINEMA_DATA = await apiRequest('GET', mitSpracheRegion('/api/cinema'));
@@ -9141,12 +9047,15 @@ function cinemaRowToItem(row, poolByTmdb){
     p: row.p || null, poster64: null, r: row.r, vc: row.vc, fsk: row.fsk || null, ov: ov, providers: [],
   };
 }
-function renderCinemaSection(key, rows, profile, poolByTmdb){
-  const el = cinemaListEls[key];
+async function renderCinemaPage(){
+  const data = await loadCinemaData();
+  // Bei aktivem Abgleich fliessen die Geschmacksprofile aller Ausgewaehlten mit
+  // ein -- die Rangfolge zeigt dann, welcher Kinofilm zu allen passt.
+  const profile = alleProfile(buildProfile());
+  const poolByTmdb = new Map();
+  POOL.forEach(function(p){ if (p.type === 'movie' && p.tmdbId != null) poolByTmdb.set(p.tmdbId, p); });
+  const el = cinemaListEl;
   el.innerHTML = '';
-  // Suchbegriff und Statusauswahl wirken INNERHALB jedes Bereichs -- die
-  // Gliederung nach "Aktuell/Bald/Demnaechst" bleibt also erhalten, statt zu
-  // einer langen Liste zu verschmelzen.
   var q = aktiveSuchbegriffe();
   var st = statusLesen();
   // In einer fremden Liste zaehlen DEREN Markierungen, nicht die eigenen: "Was
@@ -9155,6 +9064,7 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
   // Ueber fremderFortschritt(), nicht direkt aus LINKED_PROGRESS: sonst gilt
   // "Person hat nichts markiert" als "keine fremde Liste" (siehe dort).
   var fremd = fremderFortschritt();
+  var rows = [].concat(data.now || [], data.soon || [], data.later || []);
   var entries = rows.map(function(row){
     var item = cinemaRowToItem(row, poolByTmdb);
     return { row: row, item: item, score: scoreMitProfilen(item, profile) };
@@ -9178,10 +9088,6 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
     if (se) return st.seen;
     return st.disc;
   });
-  // Zaehler ERST hier, nach Altersfreigabe und ausgeblendeten Titeln -- sonst
-  // stuende in der Ueberschrift eine Zahl, die zu den sichtbaren Zeilen nicht
-  // passt (z.B. weiterhin "(12)", nachdem man einen Titel weggewischt hat).
-  cinemaHeadingEls[key].textContent = CINEMA_LABELS[key] + (entries.length ? ' (' + entries.length + ')' : '');
   if (!entries.length) {
     var text = !KATALOG_DA ? TXT.titelWerdenGeladen
              : q ? TXT.keineTrefferFuer(searchEl.value.trim())
@@ -9192,38 +9098,29 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
                            ((st.wl && st.seen) ? TXT.markiert
                             : st.wl ? TXT.aufDerWatchlist : TXT.alsGesehenMarkiert))
                         : TXT.keineTitelAuswahl)
-             : (st.wl && st.seen && st.disc) ? CINEMA_EMPTY_TEXT[key]
+             : (st.wl && st.seen && st.disc) ? TXT.kinoLeer
              : TXT.keineTitelAuswahl;
     el.innerHTML = '<li class="cinema-empty">' + esc(text) + '</li>';
+    listenHinweisAktualisieren();
     return;
   }
   entries.sort(function(a, b){
     if (cinemaSortKey === 'imdb') return gewichteteNote(b.item.r, b.item.vc) - gewichteteNote(a.item.r, a.item.vc);
     if (cinemaSortKey === 'taste') return b.score - a.score;
-    // 'cinema' ("Neu im Kino"): nach dem GENAUEN deutschen Kinostart (nicht nur
-    // Jahr). "now" zeigt zuerst die zuletzt gestarteten Titel, "soon"/"later"
-    // zuerst die naechsten anstehenden Termine (z.B. um zu sehen, was Mittwoch
-    // vs. Donnerstag startet). Dasselbe Datum bestimmt auch, in welchem der drei
-    // Bereiche ein Titel landet -- deshalb kann hier durchaus eine
-    // Wiederauffuehrung von 1984 ganz oben stehen.
-    if (cinemaSortKey === 'cinema') {
-      var ka = a.row.rd || '', kb = b.row.rd || '';
-      return key === 'now' ? kb.localeCompare(ka) : ka.localeCompare(kb);
-    }
-    // 'date': das ECHTE Erstveroeffentlichungsdatum, neueste zuerst. row.ord ist
-    // nur bei Wiederauffuehrungen gesetzt (siehe cinema-fetch.mjs: es faellt
-    // weg, wenn es sich im Jahr nicht vom Kinostart unterscheidet) -- fuer
-    // normale Neustarts ist der Kinostart zugleich die Erstveroeffentlichung.
+    // 'date': das ECHTE Erstveroeffentlichungsdatum, neueste zuerst -- genau wie
+    // "nach Veroeffentlichungsdatum" unter Filme/Serien (siehe eintragSortwert).
+    // row.ord ist nur bei Wiederauffuehrungen gesetzt (siehe cinema-fetch.mjs: es
+    // faellt weg, wenn es sich im Jahr nicht vom Kinostart unterscheidet) --
+    // fuer normale Neustarts ist der Kinostart zugleich die Erstveroeffentlichung.
     // Ohne diese Unterscheidung stand ein 1984 erschienener Film oben, nur weil
     // er diese Woche wieder anlaeuft.
     var da = a.row.ord || a.row.rd || '', db = b.row.ord || b.row.rd || '';
     return db.localeCompare(da);
   });
-  // Fuer Movie Night: die sortierte Reihenfolge JE BEREICH festhalten --
-  // eine Runde von der Kino-Seite nimmt now, dann soon, dann later.
-  MOVIE_NIGHT_KINO[key] = entries;
-  var limit = cinemaSectionLimit[key];
-  var visible = entries.slice(0, limit);
+  // Fuer Movie Night: die sortierte Reihenfolge festhalten -- eine Runde von
+  // der Kino-Seite nimmt die ersten Titel GENAU dieser Ansicht.
+  MOVIE_NIGHT_KINO = entries;
+  var visible = entries.slice(0, cinemaLimit);
   // Kino: Ansehen/Leihen/Kaufen entfallen, die Filme laufen ja erst an --
   // der Trailer ist hier das einzig Sinnvolle (siehe watchRowHtml).
   visible.forEach(function(e){
@@ -9236,31 +9133,16 @@ function renderCinemaSection(key, rows, profile, poolByTmdb){
     el.appendChild(poolItemLi(e.item, e.score, opts));
   });
   fillPlots();
-  if (entries.length > limit) {
-    var remaining = entries.length - limit;
+  if (entries.length > visible.length) {
     var moreBtn = document.createElement('button');
     moreBtn.type = 'button';
     moreBtn.className = 'load-more-btn';
-    moreBtn.textContent = TXT.mehrAnzeigen(Math.min(CINEMA_SECTION_STEP, remaining));
+    moreBtn.textContent = TXT.mehrLaden;
     moreBtn.onclick = function(){
-      nachladenOhneSprung(function(){
-        cinemaSectionLimit[key] = Math.min(entries.length, cinemaSectionLimit[key] + CINEMA_SECTION_STEP);
-        return renderCinemaPage();
-      });
+      nachladenOhneSprung(function(){ cinemaLimit += NACHLADE_SCHRITT; return renderCinemaPage(); });
     };
     el.appendChild(moreBtn);
   }
-}
-async function renderCinemaPage(){
-  const data = await loadCinemaData();
-  // Bei aktivem Abgleich fliessen die Geschmacksprofile aller Ausgewaehlten mit
-  // ein -- die Rangfolge zeigt dann, welcher Kinofilm zu allen passt.
-  const profile = alleProfile(buildProfile());
-  const poolByTmdb = new Map();
-  POOL.forEach(function(p){ if (p.type === 'movie' && p.tmdbId != null) poolByTmdb.set(p.tmdbId, p); });
-  renderCinemaSection('now', data.now || [], profile, poolByTmdb);
-  renderCinemaSection('soon', data.soon || [], profile, poolByTmdb);
-  renderCinemaSection('later', data.later || [], profile, poolByTmdb);
   listenHinweisAktualisieren();
 }
 /* Gegenstueck zu kinoHinweisAnhaengen: Wer auf der KINO-Seite sucht, sieht am
@@ -9307,29 +9189,25 @@ function openCinemaPage(){
   updateProfileBtn();
   // Bei jedem frischen Aufruf wieder eingeklappt starten (nicht den Zustand
   // eines vorherigen Besuchs behalten).
-  cinemaSectionLimit = { now: CINEMA_SECTION_PREVIEW, soon: CINEMA_SECTION_PREVIEW, later: CINEMA_SECTION_PREVIEW };
+  cinemaLimit = TITEL_PRO_SEITE;
   // Die Tab-Reihe bleibt bewusst stehen: "Im Kino" sitzt jetzt darin und ist
   // zugleich der Weg zurueck zu Filme/Serien. Frueher wurde sie hier versteckt,
   // weil Kino nur ueber das Menue erreichbar war.
   updateFilterRowUI();
   // Suche und Statusauswahl gelten hier genauso wie unter Filme/Serien -- die
-  // Kino-Seite filtert damit ihre drei Bereiche (siehe renderCinemaSection).
-  // Frueher war beides ausgeblendet, weil die Suche nur die Titellisten
-  // durchsuchte. Der Streaming-Filter geht in updateFilterRowUI weg, die
-  // Sortierung hat die Kino-Seite in eigener Form.
+  // Kino-Seite filtert damit ihre Liste (siehe renderCinemaPage). Frueher war
+  // beides ausgeblendet, weil die Suche nur die Titellisten durchsuchte. Der
+  // Streaming-Filter geht in updateFilterRowUI weg, die Sortierung hat die
+  // Kino-Seite in eigener Form.
   document.querySelector('.head-controls').style.display = '';
   document.querySelector('.toolbar').style.display = '';
   list.style.display = 'none';
   document.getElementById('cinemaPage').style.display = '';
   window.scrollTo(0, 0);
-  Object.keys(cinemaListEls).forEach(function(key){
-    cinemaListEls[key].innerHTML = '<li class="cinema-empty">' + TXT.laedt + '</li>';
-  });
+  cinemaListEl.innerHTML = '<li class="cinema-empty">' + TXT.laedt + '</li>';
   renderCinemaPage().catch(function(err){
     console.error('Kino-Daten konnten nicht geladen werden:', err);
-    Object.keys(cinemaListEls).forEach(function(key){
-      cinemaListEls[key].innerHTML = '<li class="cinema-empty">' + TXT.kinoFehler + '</li>';
-    });
+    cinemaListEl.innerHTML = '<li class="cinema-empty">' + TXT.kinoFehler + '</li>';
   });
 }
 function closeCinemaPage(){
@@ -9378,8 +9256,8 @@ function goHome(){
 // Sortier-Menue auf der Kino-Seite -- dieselben drei Kriterien wie unter Filme/
 // Serien (TMDB-Bewertung/Taste-Score/Veroeffentlichungsdatum), nur "neu im
 // Streaming" entfaellt (ergibt fuer Kinostarts keinen Sinn). Ein Sortierwechsel
-// klappt alle drei Bereiche wieder ein, damit man nicht in einer laaaangen,
-// neu sortierten Liste landet.
+// setzt die Liste wieder auf die erste Seite zurueck, damit man nicht mitten in
+// einer laaaangen, neu sortierten Liste landet.
 var _cinemaSortBtn = document.getElementById('cinemaSort');
 var _cinemaSortMenu = document.getElementById('cinemaSortMenu');
 if (_cinemaSortBtn && _cinemaSortMenu) {
@@ -9392,7 +9270,7 @@ if (_cinemaSortBtn && _cinemaSortMenu) {
   _cinemaSortMenu.querySelectorAll('button').forEach(function(b){
     b.onclick = function(){
       cinemaSortKey = b.dataset.sort;
-      cinemaSectionLimit = { now: CINEMA_SECTION_PREVIEW, soon: CINEMA_SECTION_PREVIEW, later: CINEMA_SECTION_PREVIEW };
+      cinemaLimit = TITEL_PRO_SEITE;
       _cinemaSortMenu.querySelectorAll('button').forEach(function(bb){ bb.classList.toggle('active', bb === b); });
       _cinemaSortMenu.style.display = 'none';
       renderCinemaPage();
@@ -9540,7 +9418,7 @@ document.getElementById('settingsNotifyBtn').onclick = function(){
    Die ganze Oberflaeche entsteht hier im JS (wie das Info-Popup) -- so
    braucht es keine Markup-Uebersetzungstabellen fuer sieben Sprachen. */
 var MOVIE_NIGHT_SICHTBAR = [];
-var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
+var MOVIE_NIGHT_KINO = [];
 (function movieNightEinrichten(){
   var KENNUNG_KEY = 'mt.nachtKennung', NAME_KEY = 'mt.nachtName';
   function kennung(){
@@ -9729,8 +9607,7 @@ var MOVIE_NIGHT_KINO = { now: [], soon: [], later: [] };
   function kandidatenIds(){
     var quelle;
     if (cinemaMode) {
-      quelle = [].concat(MOVIE_NIGHT_KINO.now || [], MOVIE_NIGHT_KINO.soon || [], MOVIE_NIGHT_KINO.later || [])
-        .map(function(e){ return e.item; });
+      quelle = MOVIE_NIGHT_KINO.map(function(e){ return e.item; });
     } else {
       quelle = MOVIE_NIGHT_SICHTBAR.map(function(e){ return e.pool; });
     }
