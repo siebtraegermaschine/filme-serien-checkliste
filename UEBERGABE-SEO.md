@@ -1,6 +1,6 @@
 # Übergabe: SEO-Texte movietaste.de
 
-Stand: 19.08.2026 · 7237 Titeltexte in der Datenbank (de-de), 13.026 offen auf Stufe B · SEO-Seiten freigegeben · Fächer-Verfahren aktiv (Abschnitt 3b)
+Stand: 17.09.2026 · rund 8.900 Titeltexte in der Datenbank (de-de) · SEO-Seiten freigegeben · Fächer-Verfahren aktiv (Abschnitt 3b) · **Datenbank ist maßgeblich, nicht die Datei (Abschnitt 1b)**
 
 ---
 
@@ -37,6 +37,38 @@ laufen ohne Datenbank).
 
 Die `Sitemap:`-Zeile in `robots.txt` ist aktiv. Die Sitemap listet ausschließlich
 Seiten mit vorhandener `seo_content`-Zeile — dieselbe Regel wie das Meta-Tag.
+
+## 1b. Wo die Texte liegen und was maßgeblich ist (ab 17.09.2026)
+
+**Maßgeblich ist die Tabelle `seo_content`, nicht `seo-content-daten.mjs`.** Die Datei
+enthält nur die handrecherchierten Texte (rund 1.850 von knapp 9.000) plus Genre-,
+Anbieter- und Hub-Texte. Alles andere entsteht und ändert sich direkt in der Datenbank:
+Fächer-Runden, Bereinigungen, Korrekturen.
+
+Bis 17.09.2026 hat `npm run seo-content` jede bestehende Zeile mit dem Dateistand
+überschrieben. Damals waren 29 Titel in der Datenbank neuer als in der Datei — ein
+Ladelauf hätte sie still auf alte Fassungen zurückgesetzt. Deshalb gilt jetzt:
+
+- `npm run seo-content` legt **nur neue** Einträge an. Bestehende Zeilen bleiben stehen;
+  weicht die Datei ab, wird das nur gemeldet.
+- Einen bestehenden Text aus der Datei bewusst ersetzen:
+  `npm run seo-content -- --ueberschreiben movie:497 --dry-run` (zeigt vorher/nachher),
+  dann ohne `--dry-run`. Abgesichert durch `backend/test/seoContentLaden.test.js`.
+- Texte ändern heißt: in der Datenbank ändern. Für Überarbeitungen bestehender Texte
+  nicht `seo-einspielen.mjs` nehmen (das lehnt ab, sobald der Altbestand schon einen
+  Prüfbefund hat, z. B. belegte Wikipedia-Zahlen), sondern prüfen, dass die Änderung
+  keinen **neuen** Befund bringt.
+
+**Sicherung:** Die Tabelle wird jede Nacht um 03:30 auf Christians Mac gezogen
+(`scripts/seo-sicherung-mac.sh`, launchd-Job `de.movietaste.seo-sicherung`, Ablage
+`~/Backups/movietaste/seo_content/`, 14 Tage, Log `~/Library/Logs/movietaste-seo-sicherung.log`).
+Schläft der Mac, läuft die Sicherung beim Aufwachen nach. Am 17.09.2026 wurde die
+Wiederherstellung in einer Wegwerf-Datenbank geprüft: alle Zeilen vollständig. Befehl zum
+Zurückspielen steht im Kopf des Skripts.
+
+**Serien:** In `titles.director` stehen bei Serien die Schöpfer (TMDB `created_by`), nicht
+die Regie. Seit 17.09.2026 heißt das im Datensatz „Entwickelt von“ und auf den Seiten „Idee“.
+Texte schreiben „entwickelt von“, nie „Regie führte“.
 
 ## 2. Pflichtformat für `bereich='titel'`
 
@@ -127,6 +159,7 @@ Aktueller Schnitt: 339 Wörter.
       "docker exec movietaste-backend-1 sh -c 'cd /app/backend && npm run seo-content'"
     ```
     **Wichtig: Der Deploy lädt die Texte nicht.** `npm run seo-content` muss von Hand laufen.
+    Der Lauf legt nur neue Einträge an und überschreibt nichts (siehe 1b).
     `ServerAliveInterval` nicht weglassen — die Verbindung bricht sonst ab.
 
 11. **Live prüfen**
@@ -302,8 +335,9 @@ Danach in `neue-liste.json` mergen, Feldnamen: `k` (Schlüssel), `t` (Titel), `y
 
 | Pfad | Zweck |
 |---|---|
-| `backend/scripts/seo-content-daten.mjs` | Die Texte. Einziger Ort, der wächst. |
-| `backend/scripts/seo-content-laden.mjs` | Lädt sie in die DB (`npm run seo-content`). |
+| `backend/scripts/seo-content-daten.mjs` | Eingang für handrecherchierte Texte. Nicht maßgeblich — das ist `seo_content`. |
+| `backend/scripts/seo-content-laden.mjs` | Legt neue Einträge an (`npm run seo-content`), überschreibt nur mit `--ueberschreiben`. |
+| `scripts/seo-sicherung-mac.sh` | Nächtliche Sicherung von `seo_content` auf Christians Mac. |
 | `backend/lib/seoRender.js` | HTML-Erzeugung, `SEO_FREIGEGEBEN`-Schalter. |
 | `backend/lib/seoData.js` | Datenbeschaffung für die Seiten. |
 | `backend/routes/seo.js` | Routen. `/:locale` muss zuletzt registriert bleiben. |

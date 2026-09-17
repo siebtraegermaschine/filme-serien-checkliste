@@ -7,6 +7,11 @@
 //
 // Wachsende Datei -- neue Bloecke werden angehaengt, nicht ersetzt.
 // Eingespielt per `npm run seo-content` (backend/scripts/seo-content-laden.mjs).
+//
+// NICHT MASSGEBLICH (seit 17.09.2026): Maßgeblich ist die Tabelle seo_content.
+// Diese Datei ist nur der Eingang fuer neue handrecherchierte Texte. Der Ladelauf
+// legt neue Eintraege an und ueberschreibt bestehende nur mit --ueberschreiben.
+// Wer einen Live-Text aendert, aendert ihn in der Datenbank (siehe UEBERGABE-SEO.md, 1b).
 
 export const EINTRAEGE = [
   // ---- Block 1: Titel mit echter Nutzeraktivitaet (Freigabe 15.08.2026) ----
