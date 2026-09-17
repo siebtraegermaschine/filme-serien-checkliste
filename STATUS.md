@@ -24,10 +24,14 @@
   false`. Vor Freischaltung: Christian liest neue Datenschutz-Abschnitte
   gegen, dann `UPDATE user_onboarding SET anlaeufe = 0 …` (versehentlicher
   Kurzlauf am 17.08.), danach ein echter Durchlauf.
-- **SEO-Content**: 10.990 Titeltexte live (de-de), Fächer-Verfahren nach
-  Runde 25 pausiert; ~9.400 offen Stufe B, 3.336 Stufe C, ~2.900 ohne
-  ausreichende Daten. Zwei offene Entscheidungen für Christian: Subagenten
-  (Durchsatz ×3) und Textlänge (300→260 Wörter Kompromiss).
+- **SEO-Content Stufe B (de-de) fertig** (17.09.2026, siehe
+  [[seo-langschwanz-abo-statt-api]]): 19.940 Titeltexte live, ~528 bleiben
+  dauerhaft offen (Faktenprüfung schlug auch beim einmaligen Wiederholungslauf
+  an, kein weiterer Automatik-Retry). Fächer-Verfahren damit für Stufe B
+  hinfällig. Offen: 3.336 Titel Stufe C und ~2.900 ohne ausreichende Daten
+  (Datenlage prüfen, ob sich ein weiterer Batch-Lauf lohnt), sowie die
+  Messfrage aus PLAN-KOSTEN.md 7.6 (bringen die vorhandenen Seiten Klicks?,
+  vor weiterer Skalierung per Search Console prüfen).
 - **Native Apps** (iOS/Android via Capacitor): kompletter 11-Phasen-Plan
   steht, noch nicht begonnen. Kritischer Vorab-Punkt: Sitzungs-Cookie
   funktioniert in der nativen Hülle nicht (Token-Auth nötig), Kontolöschung
@@ -104,9 +108,9 @@
 
 ## Als Nächstes
 
-- SEO-Fächer-Verfahren mit Runde 26 fortsetzen: `scripts/seo-runde.sh
-  pakete <scratchpad>`, 10 Bearbeiter parallel, prüfen, einspielen (siehe
-  UEBERGABE-SEO Abschnitt 0).
+- SEO Stufe C / fehlende Daten: prüfen, ob sich ein weiterer Batch-API-Lauf
+  (`backend/scripts/seo-batch.mjs --stufe C`) lohnt, oder erst die
+  Search-Console-Zahlen der Stufe-B-Seiten abwarten (PLAN-KOSTEN.md 7.6).
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
 - Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
