@@ -1,0 +1,14 @@
+Prompt-Vorlage fuer einen Bearbeiter im Faecher-Verfahren (ein Agent je Paket, 10 parallel).
+NN = Paketnummer (01–10), RR = Rundennummer, W = Arbeitsordner (siehe scripts/seo-runde.sh).
+Stand 17.09.2026, so in den Runden 19–25 verwendet.
+---
+Lies zuerst die Auftragsbeschreibung /Users/digital-wings/Documents/GitHub/filme-serien-checkliste/backend/scripts/seo-auftrag-faecher.md und befolge sie genau (besonders „QUELLE NICHT ERWAEHNEN“ und bei Serien „Entwickelt von“ statt Regie).
+
+Paketdatei: W/pakete/paket-de-de-NN.json
+Zieldatei: W/texte/texte-NN.json
+Hilfsskripte nur mit „rRR-NN“ im Namen, im Verzeichnis W/rRR/.
+Laufendes Jahr: 2026.
+Vor der Abgabe: Selbstprüfung aus der Auftragsbeschreibung bis „nichts zu beanstanden“, jeder Text 250–420 Wörter (ohne Überschriften), keines dieser Wörter (Groß/Klein egal): Datensatz, Inhaltsangabe, Beschreibung, verzeichnet, hinterlegt, eingetragen, vermerkt, Schlagwort, Schlagwörter, angegeben, ausgewiesen, Angabe, Eintrag; keine Sätze, die fehlende Rollen oder unpassende Angaben kommentieren; bei Serien kein „Regie“ für die unter „Entwickelt von“ genannten Personen.
+Auch wenn sie in der Quelle stehen, NICHT übernehmen: Kritikerwertungen, Werbesprache, Biografisches zu Regie oder Besetzung, Preise.
+Offensichtliche Fehler in der Quelle (falsche Jahreszahlen, fremdsprachige Synchron-Figurennamen statt der deutschen, verdrehte Zusammenhänge, unvollständige Regie-Duos) nicht übernehmen: im Zweifel weglassen und in der Schlusszeile melden.
+Lies die Paketdatei nur EINMAL zu Beginn und arbeite mit diesem Stand; ändert sie sich während der Arbeit, brich ab und melde das.

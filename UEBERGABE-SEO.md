@@ -1,10 +1,23 @@
 # Übergabe: SEO-Texte movietaste.de
 
-Stand: 17.09.2026 · rund 8.900 Titeltexte in der Datenbank (de-de) · SEO-Seiten freigegeben · Fächer-Verfahren aktiv (Abschnitt 3b) · **Datenbank ist maßgeblich, nicht die Datei (Abschnitt 1b)**
+Stand: 17.09.2026 abends · 10.990 Titeltexte live (de-de) · Runde 25 abgeschlossen, Texterstellung pausiert · rund 9.400 offen auf Stufe B, 3.336 Stufe C, ~2.900 ohne ausreichende Daten · **Datenbank ist maßgeblich (1b)** · Weitermachen: Abschnitt 0
 
 ---
 
-## Übergabeprompt für den neuen Chat
+## 0. Weitermachen mit dem Fächer-Verfahren (Stand 17.09.2026)
+
+Kopiere in einen neuen Chat:
+
+> Mach bei den SEO-Titeltexten für movietaste.de weiter (Fächer-Verfahren). Lies `UEBERGABE-SEO.md`, Abschnitte 0, 1b und 3b. Arbeitsordner ist dein Scratchpad. Ablauf je Runde: `scripts/seo-runde.sh pakete <scratchpad>`, dann 10 Bearbeiter parallel mit der Vorlage `backend/scripts/seo-auftrag-prompt.txt`, nach ALLEN zehn Abschlussmeldungen `scripts/seo-runde.sh pruefen <scratchpad>`, Treffer ansehen und offensichtliche Fehler direkt in `texte/*.json` beheben, dann `scripts/seo-runde.sh einspielen <scratchpad> <rundennummer>`. Nächste Runde ist 26.
+
+Regeln, die sich in den Runden 9–25 herausgebildet haben:
+- **Erst einspielen, wenn alle zehn Bearbeiter gemeldet haben.** Vorhandene Dateien reichen nicht, ein Bearbeiter kann noch nachbessern.
+- **Treffer der Prüfsuche einzeln ansehen.** Viele sind Handlung („legendäre Pokémon“, eine Figur namens Oscar), echte Funde sind Kritikerwertungen, Biografisches, Kommentare zu fehlenden Angaben oder Quellverweise.
+- **Offensichtliche Datenfehler direkt beheben** (falsche Jahreszahlen, fremdsprachige Synchronnamen, verdrehte Zusammenhänge, halbe Regie-Duos) — streichen, wenn der richtige Wert nicht belegt ist.
+- Die gleiche Stimmenzahl aller 15 Titel eines Pakets ist **kein** Datenfehler: Pakete werden nach Stimmenzahl geschnitten.
+- Pro Runde ca. 150 Texte, ~10 Bearbeiter, ~6–8 Minuten. Nutzungslimit beachten: bei Abbruch liegen Zwischenstände im Scratchpad, abgebrochene Bearbeiter neu starten.
+
+## Übergabeprompt für den neuen Chat (altes Handverfahren, Abschnitt 3)
 
 Kopiere alles ab hier bis zum Trennstrich in den neuen Chat:
 
@@ -337,6 +350,8 @@ Danach in `neue-liste.json` mergen, Feldnamen: `k` (Schlüssel), `t` (Titel), `y
 |---|---|
 | `backend/scripts/seo-content-daten.mjs` | Eingang für handrecherchierte Texte. Nicht maßgeblich — das ist `seo_content`. |
 | `backend/scripts/seo-content-laden.mjs` | Legt neue Einträge an (`npm run seo-content`), überschreibt nur mit `--ueberschreiben`. |
+| `scripts/seo-runde.sh` | Fächer-Runde: Pakete holen, lokal prüfen, einspielen (Abschnitt 0). |
+| `backend/scripts/seo-auftrag-prompt.txt` | Prompt-Vorlage je Bearbeiter. |
 | `scripts/seo-sicherung-mac.sh` | Wöchentliche Sicherung von `seo_content` auf Christians Mac. |
 | `backend/lib/seoRender.js` | HTML-Erzeugung, `SEO_FREIGEGEBEN`-Schalter. |
 | `backend/lib/seoData.js` | Datenbeschaffung für die Seiten. |
