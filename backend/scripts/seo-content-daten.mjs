@@ -42287,7 +42287,7 @@ Erfunden wurde die Serie von Vivienne Medrano; die Idee stammt aus ihrer Schulze
 
 Nach zweieinhalb Jahren Arbeit erschien im Oktober 2019 eine halbstündige Pilotfolge auf YouTube. A24 erwarb 2020 die Produktionsrechte. Die erste Staffel entstand bei SpindleHorse Toons, Bento Box Entertainment, A24 und Amazon MGM Studios.
 
-Vivienne Medrano verantwortet Regie und Musik gemeinsam mit weiteren Produzenten und Komponisten, darunter Parry Gripp und Sam Haft.
+Vivienne Medrano hat die Serie erdacht und verantwortet die Musik gemeinsam mit weiteren Produzenten und Komponisten, darunter Parry Gripp und Sam Haft.
 
 In der deutschen Fassung sprechen Rieke Werner die Charlie, Anja Stadlober die Vaggie, Hannes Maurer den Angel Dust, Simon Jäger den Alastor und Gerrit Schmidt-Foß den Adam.
 
@@ -47857,261 +47857,117 @@ Ein International Emmy für eine kolumbianische Produktion ist der Beleg dafür,
     bereich: 'titel', schluessel: 'movie:5551', locale: 'de-de',
     text: `### Worum es geht
 
-1958 waren vier Piloten der Air Force für einen Raumflug ausgewählt — Corvin, Hawk, Sullivan und O'Neill. Dann entschied die NASA anders und schickte einen Schimpansen.
+Ein alter russischer Kommunikationssatellit droht aus der Atmosphäre in bewohntes Gebiet zu stürzen. Weil die Technik dafür einst von dem Ingenieur Frank Corvin entwickelt wurde, muss er dafür herhalten, das Gerät wieder in Ordnung zu bringen. Nur ist Corvin inzwischen ein alter Mann, der sich damals in den Fünfzigern Hoffnungen gemacht hatte, als erste Crew ins Weltall zu starten. Das Projekt wurde abgeblasen.
 
-Vierzig Jahre später droht ein russischer Satellit in die Erdatmosphäre einzutreten. Gebaut wurde er nach gestohlenen Skylab-Plänen — und die vier bekommen die Gelegenheit, ihn zu reparieren. Vorher müssen sie die Fitnesstests der NASA bestehen.
+Corvin sagt zu, besteht aber auf seiner alten Crew, die längst anderen Jobs nachgeht. In knapp dreißig Tagen müssen diese Männer ein Weltraumtraining absolvieren, das für dreißig Jahre Jüngere gemacht ist. Dann kommt der Tag der Entscheidung.
 
 ### Entstehungsgeschichte
 
-Regie führte Clint Eastwood, der den Film gemeinsam mit Andrew Lazar produzierte. Das Drehbuch schrieben Ken Kaufman und Howard Klausner.
-
-Eastwood spielt Colonel Frank Corvin, Tommy Lee Jones den Colonel Hawk Hawkins, Donald Sutherland den Captain Jerry O'Neill, James Garner den Tank Sullivan, James Cromwell den Bob Gerson, Marcia Gay Harden die Sara Holland, William Devane den Gene Davis und Rade Šerbedžija den General Vostov.
-
-Die Kamera führte Jack N. Green, den Schnitt Joel Cox, die Musik stammt von Lennie Niehaus.
-
-Der Film erschien 2000, dauert 126 Minuten und ist ab 12 Jahren freigegeben. Der deutsche Kinostart war am 10. Mai 2001.
+Clint Eastwood führte bei dem im Jahr 2000 erschienenen Film Regie und steht zugleich vor der Kamera. Tommy Lee Jones, Donald Sutherland und James Garner bilden mit ihm die vierköpfige Besetzung. Die Altersgrenze liegt bei 12 Jahren.
 
 ### Hinter den Kulissen
 
-Der Film verweist auf einen realen Vorgang: John Glenns Raumflug im Jahr 1998.
-
-Damit hat die Prämisse eine Grundlage, und der Film nutzt sie für das, was er eigentlich erzählen will — nicht von Raumfahrt, sondern von vier Männern, denen man vor vierzig Jahren etwas weggenommen hat.
-
-Das Lexikon des internationalen Films nannte ihn folgerichtig eine sehnsüchtig-sentimentale Charakterstudie.
-
-Die Achterbahn, in der die Männer ihre Tauglichkeit beweisen sollen, ist die Viper im Six Flags Magic Mountain in Kalifornien.
+Der Film verbindet Action, Abenteuer und Thriller, doch die eigentliche Spannung entsteht aus einer Voraussetzung, die keinem dieser Genres eigen ist: dem Alter der Beteiligten. Die Anlage stellt eine sehr alte Aufgabe und ein sehr enges Zeitfenster nebeneinander, und beides trifft auf Menschen, denen man die Aufgabe nicht mehr zutraut. Dass alle vier Rollen mit Darstellern gleicher Generation besetzt sind, ist keine Beiläufigkeit, sondern die Bedingung, unter der die Konstellation überhaupt funktioniert.
 
 ### Einordnung & Wirkung
 
-2001 war der Film für den Oscar für den besten Tonschnitt nominiert; hinzu kamen drei Nominierungen für den Saturn Award — für Eastwood als Darsteller und als Regisseur sowie als bester Science-Fiction-Film. Die Deutsche Film- und Medienbewertung vergab das Prädikat „besonders wertvoll".
-
-Die Kritik war geteilt. Gelobt wurde die Situationskomik des Grundeinfalls, bemängelt fehlende Straffheit, dramaturgische Spitzen und vor allem Spannung. TV Spielfilm bescheinigte dem Film coolen Humor, fand aber, die Weltraumszenen verlören etwas an Bodenhaftung.
-
-Der Einwand trifft eine bewusste Entscheidung. Ein Film mit vier Hauptdarstellern jenseits der sechzig, der sich für deren Verhältnis zueinander mehr interessiert als für den Satelliten, wird zwangsläufig langsamer sein als sein Genre erlaubt.` },
+6,4 von 10 bei mehreren tausend Stimmen ergeben ein solides, wenn auch nicht überschwängliches Bild bei überschaubarer Beteiligung. 26 Jahre nach dem Erscheinungsjahr bleibt der Film ein ungewöhnlicher Fall innerhalb des Weltraumkinos, weil er dessen üblichen Zuschnitt auf junge Körper und schnelle Reflexe bewusst umkehrt und das Alter seiner Figuren zum Gegenstand macht. Die kleine Stimmenzahl bedeutet dabei, dass einzelne Urteile stärker durchschlagen als bei breit bewerteten Titeln. Erkennbar bleibt eine Anlage, die ihre Spannung aus einer knappen Frist und aus Erfahrung bezieht statt aus Tempo.` },
   {
     bereich: 'titel', schluessel: 'movie:2001', locale: 'de-de',
     text: `### Worum es geht
 
-Bobby Green führt einen Nachtclub in New York, und das Geschäft läuft. Was kaum jemand weiß: Er heißt eigentlich Robert Grusinsky, und sein Bruder Joseph ist Polizist.
+Für den New Yorker Nachtclub-Manager Bobby Green und seine Freundin Amanda ist das Leben eine einzige Party, mit allem, was dazugehört. Bobby träumt davon, eines Tages einen eigenen Club zu besitzen, und dafür drückt er beide Augen zu, wenn die Russen-Mafia seinen Club für Drogengeschäfte nutzt. Nur Amanda weiß, dass sein Vater und sein Bruder Joseph erfolgreiche Polizisten sind.
 
-Bobby hält beide Welten getrennt. Dann führt die Polizei eine Razzia in seinem Club durch — und kurz darauf wird Joseph niedergeschossen. Von diesem Moment an lässt sich nichts mehr trennen.
+Nach einem Mordanschlag auf Joseph steht Bobby zwischen den Fronten eines Drogenkriegs. Er muss sich entscheiden, auf welcher Seite er künftig steht, und beide Seiten wissen genau, was ihn mit der anderen verbindet.
 
 ### Entstehungsgeschichte
 
-James Gray führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Marc Butan, Joaquin Phoenix, Mark Wahlberg und Nick Wechsler.
-
-Joaquin Phoenix spielt Bobby Green, Mark Wahlberg den Bruder Joseph Grusinsky, Robert Duvall den Vater Albert Grusinsky, Eva Mendes die Amada Juarez, Danny Hoch den Jumbo Falsetti, Tony Musante den Jack Shapiro und Alex Veadov den Drogenhändler Vadim Nezhinski.
-
-Die Kamera führte Joaquín Baca-Asay, den Schnitt John Axelrad, die Musik stammt von Wojciech Kilar.
-
-Gedreht wurde in New York, unter anderem im Paradise Movie Theatre in der Bronx. Das Budget betrug rund 21 Millionen Dollar; in den Vereinigten Staaten spielte der Film etwa 27,6 Millionen ein.
-
-Der US-Start war am 12. Oktober 2007, der deutsche am 21. Februar 2008.
+James Gray inszenierte den 2007 erschienenen Film. Joaquin Phoenix spielt den Nachtclub-Manager, Mark Wahlberg den Bruder, Eva Mendes und Robert Duvall vervollständigen die Besetzung. Die Freigabe erfolgte ab 16 Jahren.
 
 ### Hinter den Kulissen
 
-Der Kern ist eine Familie, die sich an einer Berufswahl entzweit hat. Vater und ein Sohn bei der Polizei, der andere Sohn im Nachtleben — und die Frage, welche Loyalität am Ende schwerer wiegt.
-
-Dass Joaquin Phoenix und Mark Wahlberg den Film mitproduzierten, erklärt die Anlage: Es ist ein Schauspielerfilm, in dem die Handlung dem Verhältnis der Figuren dient und nicht umgekehrt.
-
-Die Musik stammt von Wojciech Kilar — ein Name, den man bei einem New Yorker Polizeifilm nicht erwartet.
-
-James Berardinelli benannte die Schwachstelle: Zu viele Zufälle belasteten die Handlung, und die letzten zwanzig Minuten seien vorhersehbar. Zugleich bescheinigte er dem Film, ein wirkungsvolles Drama zu bieten.
+Der Film verbindet Drama, Krimi und Thriller, und die Reihenfolge stimmt mit der Anlage überein: Der Kriminalfall ist der Anlass, das Familiendrama der Gegenstand. Der Konflikt verläuft nicht zwischen Polizei und Verbrechern, sondern quer durch eine einzige Familie, in der Loyalität und Beruf auseinanderfallen. Dass die Zugehörigkeit der Hauptfigur zu Beginn ein Geheimnis ist, das nur eine Person kennt, legt die Struktur fest: Jede Entwicklung der Handlung ist zugleich eine Frage danach, wer wovon erfährt. Die Nachtwelt liefert dazu den Raum, in dem beide Seiten verkehren.
 
 ### Einordnung & Wirkung
 
-Bei rund 21 Millionen Dollar Herstellungskosten spielte der Film in den Vereinigten Staaten 27,6 Millionen ein.
-
-James Gray war 2007 für die Goldene Palme nominiert und 2008 für den César; hinzu kam eine Nominierung für den Visual Effects Society Award.
-
-Rotten Tomatoes fasste zusammen, blasse Figuren, klischeehafte Dialoge und eine wacklige Handlung hätten den Film daran gehindert, sein Potenzial auszuschöpfen. Bei Metacritic standen 19 positiven Bewertungen 14 gemischte gegenüber.
-
-Zwischen einer Nominierung für die Goldene Palme und diesem Befund liegt die Spannweite. In Cannes wurde ein Autorenfilm gesehen, in den Vereinigten Staaten ein Polizeifilm, der die Erwartungen des Genres nicht erfüllte.` },
+6,7 von 10 bei einer vierstelligen Zahl abgegebener Stimmen ergeben ein zustimmendes Urteil bei überschaubarer Beteiligung. 19 Jahre nach dem Erscheinungsjahr gehört der Film zu jenen Kriminaldramen, die weniger auf Ermittlungsarbeit als auf Zugehörigkeit setzen und ihre Spannung aus einer Entscheidung beziehen, die niemand ohne Verlust treffen kann. Die Stimmenzahl bleibt klein genug, dass der Wert eine Tendenz und kein breites Urteil abbildet. Auffällig ist rückblickend, wie konsequent der Stoff auf zwei Personen zuläuft, die durch Herkunft verbunden und durch Beruf getrennt sind, und wie wenig er die Kriminalhandlung als Selbstzweck behandelt.` },
   {
     bereich: 'titel', schluessel: 'movie:10135', locale: 'de-de',
     text: `### Worum es geht
-
-James Dalton ist Türsteher — der beste seines Fachs, mit einem Hochschulabschluss in Philosophie und dem Ruf, jeden Laden wieder in Ordnung zu bringen.
-
-Er wird nach Missouri geholt, in einen heruntergekommenen Nachtclub. Dass die eigentliche Schwierigkeit nicht drinnen liegt, merkt er schnell: Die Stadt wird von einem Gangster namens Brad Wesley kontrolliert, der Schutzgeld eintreibt und keinen Widerspruch duldet.
+Der professionelle Rausschmeißer Dalton soll das heruntergekommene Double Deuce auf Vordermann bringen. Schnell merkt er, dass er es mit mehr als ein paar Trunkenbolden zu tun hat. Sein Gegenspieler ist der skrupellose Wesley, der mit seinen Leuten nicht nur die Bar, sondern die ganze Stadt terrorisiert. Zu allem Überfluss verliebt sich Dalton in Wesleys frühere Freundin Doc. Als der Gegner Daltons besten Freund und Mentor beseitigen lässt, ist eine Grenze überschritten, und aus dem Auftrag wird eine persönliche Auseinandersetzung.
 
 ### Entstehungsgeschichte
-
-Regie führte Rowdy Herrington. Das Drehbuch schrieben David Lee Henry und Hilary Henkin, produziert wurde der Film von Joel Silver.
-
-Patrick Swayze spielt James Dalton, Kelly Lynch die Ärztin Elizabeth Clay, Sam Elliott den Wade Garrett und Ben Gazzara den Brad Wesley.
-
-Die Kamera führte Dean Cundey, die Musik stammt von Michael Kamen; den Schnitt besorgten John F. Link und Frank J. Urioste.
-
-Der Film erschien 1989, dauert 114 Minuten und ist ab 16 Jahren freigegeben.
+1989 erschienen, mit Rowdy Herrington als Regisseur. Die Besetzung führt Patrick Swayze, Kelly Lynch, Sam Elliott und Ben Gazzara. Die Altersfreigabe ist mit 18 die höchstmögliche.
 
 ### Hinter den Kulissen
-
-Die Figur ist der eigentliche Einfall. Ein Türsteher mit Philosophiestudium, der Gewalt als letztes Mittel begreift und trotzdem ständig anwendet — der Widerspruch ist eingebaut und wird nicht aufgelöst.
-
-Sam Elliott als älterer Kollege und Lehrer gibt dem eine zweite Ebene: Dalton hat selbst einmal jemanden gehabt, von dem er lernte.
-
-Mit Dean Cundey an der Kamera und Michael Kamen an der Musik ist der Film handwerklich besser ausgestattet, als seine Zutaten vermuten lassen.
-
-Roger Ebert brachte die Wirkung auf eine Formel: kein guter Film, aber auch kein langweiliger. Das Lexikon des internationalen Films urteilte härter und nannte ihn einen primitiven Actionfilm voller selbstzweckhafter Brutalitäten.
+Der Film verbindet Action und Thriller, und die Anlage folgt einem sehr alten Bauplan: Ein Fremder kommt in einen Ort, in dem einer das Sagen hat, nimmt einen Auftrag an und gerät dabei in einen Konflikt, der weit über diesen Auftrag hinausreicht. Der Schauplatz ist eng gefasst – eine Bar und die Stadt um sie herum –, was die Auseinandersetzung von Anfang an persönlich macht: Man kann einander nicht ausweichen. Die Liebesgeschichte ist so gelegt, dass sie den Konflikt verschärft, statt ihn zu entspannen, denn sie führt die Hauptfigur unmittelbar in das Umfeld des Gegenspielers. Der Mentor wiederum erfüllt die Funktion, die Eskalation zu begründen. Die Freigabe ab 18 sagt, wie deutlich die Gewalt gezeigt wird.
 
 ### Einordnung & Wirkung
-
-Der Film erhielt fünf Nominierungen für die Goldene Himbeere, gewann aber keine.
-
-Fünf Nominierungen und kein einziger Preis ist eine eigene Art von Ergebnis — schlecht genug für die Nominierung, nicht schlecht genug für die Auszeichnung.
-
-Eberts Formel trifft den Punkt. Der Film verspricht nichts, was er nicht hält, und weiß in jeder Minute, was er ist.
-
-Patrick Swayze in einer Rolle, die Prügelei und Philosophie zusammenbringt, spielt dabei beides ernst gemeint — darauf steht der ganze Film.` },
+6,8 von 10 Punkten bei einer vierstelligen Zahl von Stimmen ist ein guter Wert für einen Actionfilm, der auf Handgreiflichkeiten und eine klare Frontstellung setzt. 37 Jahre nach dem Erscheinen ist die Bewertung längst gefestigt, und die Stimmenzahl zeigt ein Publikum an, das den Film über die Jahre aufgesucht hat. Im Genre steht er für die Spielart, die ihre Handlung an einem einzigen Ort verdichtet, statt sie über Schauplätze zu verteilen.` },
   {
     bereich: 'titel', schluessel: 'movie:8066', locale: 'de-de',
     text: `### Worum es geht
 
-Der Psychiater Sam Foster übernimmt einen neuen Patienten: Henry Letham, College-Student, nach einem Autounfall auf der Brooklyn Bridge.
+Der New Yorker Psychiater Sam Foster übernimmt von einer erkrankten Kollegin den Fall des Kunststudenten Henry Letham. Der leidet nach einem Unfall an Amnesie, macht dafür aber wirre Vorhersagen, die sich aus unerklärlichen Gründen bewahrheiten.
 
-Henry ist depressiv, paranoid und suizidal — und er behauptet, künftige Ereignisse vorhersagen zu können. Sam versucht, ihn davon abzubringen, was Henry vorhat. Während er das tut, beginnt die Wirklichkeit um ihn herum, brüchig zu werden.
+Als Henry ankündigt, sich in drei Tagen an seinem 21. Geburtstag um Mitternacht das Leben zu nehmen, will Sam ihn unbedingt aufhalten. Bei seinen Nachforschungen in Henrys Umfeld stößt er auf eine Welt voller Widersprüche und Rätsel, die auch sein eigenes Leben und besonders die Beziehung zu seiner Freundin Lila zu berühren scheint. Der Versuch, Henry zu retten, wird zu einem Weg, auf dem Traum, Realität und Wahn ineinander übergehen.
 
 ### Entstehungsgeschichte
 
-Regie führte Marc Forster, das Drehbuch schrieb David Benioff.
-
-Ewan McGregor spielt Dr. Sam Foster, Ryan Gosling den Henry Letham, Naomi Watts die Lila Culpepper, Bob Hoskins den Dr. Leon Patterson, Janeane Garofalo die Dr. Beth Levy und Elizabeth Reaser die Athena.
-
-Die Kamera führte Roberto Schaefer, den Schnitt Matt Chessé, die Musik stammt von Asche & Spencer.
-
-Gedreht wurde im Herbst 2003 in New York, unter anderem auf der Brooklyn Bridge. Das Budget betrug 50 Millionen Dollar; die Veröffentlichung war am 21. Oktober 2005.
+Inszeniert wurde der 2005 erschienene Film von Marc Forster. Ewan McGregor spielt den Psychiater, Ryan Gosling den Studenten, Naomi Watts und Kate Burton vervollständigen die Besetzung. Die Freigabe gilt ab 12 Jahren.
 
 ### Hinter den Kulissen
 
-Forster legte den Film als visuell komplexe Arbeit an, mit Anspielungen auf Klassiker wie „Vertigo".
-
-Das ist die entscheidende Entscheidung — und zugleich die Zumutung. Je weiter der Film fortschreitet, desto brüchiger wird die Wirklichkeit, die er zeigt.
-
-Wer darauf einsteigt, bekommt einen Film über Wahrnehmung. Wer nicht, bekommt einen Film, der sich nicht entscheiden mag.
-
-Bei 50 Millionen Dollar Budget ist das ein bemerkenswertes Wagnis. Es ist die Summe eines Studiofilms, eingesetzt für eine Erzählform, die dem Publikum einiges abverlangt.
+Mystery, Thriller und Drama bestimmen den Film, und diese Reihenfolge beschreibt die Gewichtung gut. Die Erzählung stellt eine Frist auf, hält aber die Verlässlichkeit der Wahrnehmung offen: Wenn die Vorhersagen einer Figur eintreffen, kann das an ihr liegen oder an der Beschaffenheit der erzählten Welt. Der Text der Ausgangslage sagt ausdrücklich, dass der Erzähler seiner eigenen Wahrnehmung zu misstrauen beginnt, und damit ist die Form selbst Gegenstand der Handlung. Das Thema Suizid wird dabei als angekündigter Termin behandelt, an dem sich die gesamte Zeitrechnung des Films ausrichtet.
 
 ### Einordnung & Wirkung
 
-Weltweit spielte der Film 8,4 Millionen Dollar ein — ein massiver Misserfolg an der Kinokasse bei 50 Millionen Herstellungskosten.
-
-Die Kritik war gespalten, und zwar deutlich. Roger Ebert vergab dreieinhalb von vier Sternen. Rex Reed schrieb dagegen, das sei die Sorte Reinfall, bei der sogar das Popcorn schal schmecke.
-
-Zwischen diesen beiden Urteilen liegt kein Missverständnis, sondern eine echte Entscheidung darüber, was ein Film leisten soll.
-
-Bemerkenswert ist die Besetzung im Rückblick: Ewan McGregor, Naomi Watts und Ryan Gosling in einem Film, der praktisch niemand gesehen hat.` },
+6,6 von 10 bei einer vierstelligen Zahl von Stimmen ergeben ein positives, aber nicht einhelliges Urteil bei kleiner Beteiligung. 21 Jahre nach dem Erscheinungsjahr gehört der Film zu jener Gruppe von Mystery-Dramen, die ihr Rätsel nicht auflösen wollen, sondern als Zustand vorführen, und die ihr Publikum dementsprechend teilen. Die kleine Stimmenzahl unterstreicht das: Wer sich auf eine Erzählung ohne festen Boden einlässt, tut das bewusst, und wer damit nichts anfangen kann, urteilt entsprechend zurückhaltend.` },
   {
     bereich: 'titel', schluessel: 'movie:228194', locale: 'de-de',
     text: `### Worum es geht
-
-Eine indische Familie verliert bei Unruhen in Mumbai ihr Restaurant. Der Vater beschließt, mit seinen fünf Kindern nach Europa zu gehen.
-
-Nach einer Autopanne bleiben sie in Saint-Antonin in Südfrankreich hängen und eröffnen dort das „Maison Mumbai" — genau gegenüber vom „Le Saule Pleureur", einem Restaurant mit Michelin-Stern. Dessen Inhaberin Madame Mallory begreift das als Kriegserklärung.
+Der junge Hassan Kadam hat ein außergewöhnliches Talent fürs Kochen. Als er sich gemeinsam mit seinem Vater gezwungen sieht, seine indische Heimat zu verlassen, ziehen die beiden in den kleinen südfranzösischen Ort Saint-Antonin-Noble-Val, um dort ein indisches Restaurant zu eröffnen. Das Maison Mumbai soll den Einwohnern die Welt der Gewürze und Reisgerichte näherbringen. Doch Madame Mallory, der gegenüber das Sternerestaurant Le Saule Pleureur gehört, bekommt Wind davon, und zwischen den beiden Lokalen beginnt ein Kampf. Der nimmt eine unerwartete Wendung, als Hassans Interesse an der französischen Haute Cuisine wächst – und er sich in die stellvertretende Küchenchefin Marguerite verliebt.
 
 ### Entstehungsgeschichte
-
-Vorlage ist Richard C. Morais' Roman „The Hundred-Foot Journey".
-
-Regie führte Lasse Hallström, das Drehbuch schrieb Steven Knight. Produziert wurde der Film von Juliet Blake, Steven Spielberg und Oprah Winfrey.
-
-Helen Mirren spielt Madame Mallory, Om Puri den Vater, Manish Dayal den Sohn und Koch Hassan, Charlotte Le Bon die Sous-Chefin Marguerite, Amit Shah den Mansur, Michel Blanc den Bürgermeister, Juhi Chawla die Mutter und Vincent Elbaz den Geschäftsführer Paul.
-
-Die Kamera führte Linus Sandgren, den Schnitt Andrew Mondshein, die Musik stammt von A. R. Rahman.
+Regieführung: Lasse Hallström; der Film erschien 2014. Zur Besetzung gehören Helen Mirren, Manish Dayal, Om Puri und Charlotte Le Bon. Für Zuschauer ab 12 Jahren ist er freigegeben.
 
 ### Hinter den Kulissen
-
-Der Titel der Vorlage benennt die Entfernung, um die es geht: hundert Fuß zwischen zwei Restaurants. Der ganze Film spielt sich in diesem Abstand ab.
-
-Das ist die kluge Verkleinerung. Was hier verhandelt wird — Herkunft, Zugehörigkeit, wer wo kochen darf —, wird nicht als Debatte geführt, sondern als Streit zwischen zwei Küchen auf gegenüberliegenden Straßenseiten.
-
-Die Deutsche Film- und Medienbewertung nannte den Film folgerichtig ein Integrationsstück mit kulinarischen Kochwettkämpfen.
-
-Dass Steven Spielberg und Oprah Winfrey als Produzenten auftreten, ist ungewöhnlich — beide zusammen bei einem Film dieser Größe.
+Drama und Komödie stehen nebeneinander, und die Anlage nutzt beide Register: Der Konflikt zweier Küchen an einer Straße ist als Nachbarschaftsstreit angelegt, lässt sich aber ebenso als Geschichte über Ankunft und Zugehörigkeit lesen. Die Konstruktion arbeitet mit einer Gegenüberstellung, die sich schrittweise auflöst – erst stehen sich zwei Küchen, zwei Haltungen und zwei Herkünfte gegenüber, dann beginnt die Hauptfigur, die Grenze in beide Richtungen zu überschreiten. Dass die Annäherung über das Handwerk und über eine Liebesgeschichte gleichzeitig läuft, verteilt das Gewicht der Erzählung auf zwei Ebenen. Auch die Ortswahl trägt dazu bei: Ein kleiner Ort mit einem ausgezeichneten Haus und einem neu eröffneten Lokal macht jede Entscheidung sofort öffentlich.
 
 ### Einordnung & Wirkung
-
-Ausgezeichnet wurde der Film 2014 mit dem Publikumspreis der Norwegischen Filmfestspiele und dem Truly Moving Picture Award des Heartland Film Festival; 2015 war Helen Mirren für den Golden Globe nominiert.
-
-Die Urteile drehten sich fast alle um sie. Susan Vahabzadeh befand, der Film sei ohne Helen Mirren nur die Hälfte wert. Bill Zwecker lobte den verbalen Schlagabtausch zwischen Mirren und Om Puri.
-
-Tom Shone vergab im Guardian dagegen nur zwei von fünf Sternen und kritisierte die Vorhersehbarkeit.
-
-Beide Seiten beschreiben denselben Film. Er hält keine Überraschung bereit — und lebt vollständig davon, wie zwei Darsteller sich aneinander abarbeiten.` },
+7,3 von 10 Punkten aus mehreren tausend Stimmen ist ein deutlich positiver Wert und der Bereich, in dem sich Filme dieser Art üblicherweise einpendeln. 12 Jahre nach dem Erscheinen ist das Urteil stabil. Die Freigabe ab 12 zeigt an, dass der Konflikt ohne harte Mittel ausgetragen wird. Im Feld der ruhigen Erzählungen über Küche und Fremdsein steht der Titel für die verbindliche, versöhnliche Variante.` },
   {
     bereich: 'titel', schluessel: 'movie:1642', locale: 'de-de',
     text: `### Worum es geht
 
-Angela Bennett arbeitet als Softwareentwicklerin und lebt praktisch allein. Ihre Kontakte laufen über den Bildschirm, ihre Aufträge kommen per Datenleitung.
+Die Computerexpertin Angela Bennett arbeitet von zu Hause aus für die Softwarefirma Cathedral und lebt sehr isoliert. Ihre Pizza kommt per Online-Bestellung, soziale Kontakte pflegt sie ausschließlich am Telefon oder über das Internet. Eines Tages wird ihr eine Diskette mit brisanten Informationen zugespielt, die sie kurz darauf in Lebensgefahr bringt.
 
-Ein Kollege schickt ihr eine Diskette mit einem Programm namens „Mozarts Geist". Kurz darauf stirbt er bei einem Flugzeugabsturz. Und dann beginnt jemand, Angelas Identität zu verändern: Was in den Datenbanken über sie steht, ist plötzlich nicht mehr ihr Leben.
+Der gerissene Profikiller Jack Devlin soll die Daten mit allen Mitteln zurückholen. Angela kann entkommen, doch dann steht ihre Welt Kopf: Jemand hat ihre persönlichen Daten aus allen staatlichen Computern gelöscht und ihre Identität getilgt. Zugleich wurde ihr Strafregister erweitert, sodass ihr nicht nur Devlin, sondern auch die Polizei auf den Fersen ist.
 
 ### Entstehungsgeschichte
 
-Regie führte Irwin Winkler, der den Film gemeinsam mit Rob Cowan produzierte. Das Drehbuch schrieben John D. Brancato und Michael Ferris.
-
-Sandra Bullock spielt Angela Bennett, Jeremy Northam den Jack Devlin, Dennis Miller den Dr. Alan Champion, Diane Baker die Mutter, Wendy Gazelle die Ruth Marx, Ken Howard den Michael Bergstrom und Ray McKinnon den Dale Hessman.
-
-Die Kamera führte Jack N. Green, die Musik stammt von Mark Isham; den Schnitt besorgten Jimmy Giritlian und Richard Halsey.
-
-Der Film erschien 1995, dauert 114 Minuten und ist ab 12 Jahren freigegeben.
+Irwin Winkler inszenierte den Film, der 1995 herauskam. Sandra Bullock trägt die Hauptrolle, Jeremy Northam, Dennis Miller und Wendy Gazelle sind daneben besetzt. Die Freigabe gilt ab 12 Jahren.
 
 ### Hinter den Kulissen
 
-Die Grundangst des Films ist heute schwerer zu erschrecken als 1995 — und genau deshalb interessanter. Was damals als Schreckensvision galt, ist inzwischen Alltag: Ein Leben, das in Datenbanken geführt wird, und eine Person, die nur so viel wert ist, wie über sie gespeichert steht.
-
-Dass die Hauptfigur isoliert lebt, ist dabei kein Zufall, sondern Voraussetzung. Wer niemanden hat, der ihn persönlich kennt, ist auf die Bestätigung durch Papiere angewiesen — und die lassen sich ändern.
-
-Das Trojanische Pferd im Programm und die Hackergruppe, die es einsetzt, sind die Erklärung; die eigentliche Wirkung liegt davor.
-
-Der Filmdienst nannte die Handlung thematisch reizvoll, Prisma dagegen sprach von einer oberflächlichen Produktion.
+Der Film vereint gleich fünf Genres, Krimi, Drama, Mystery, Thriller und Action. Eine so breite Zuordnung deutet auf einen Stoff, der zwischen mehreren Erzählweisen wechselt, statt sich auf eine festzulegen. Der Kern ist ein Verlustmotiv, das ohne körperliche Gewalt auskommt, denn was der Figur genommen wird, ist ihre Identität als Datensatz. Dass die Hauptfigur zu Beginn ausdrücklich als isoliert eingeführt wird, ist keine Nebensache: Wer keine Zeugen im Alltag hat, kann auch nicht bezeugt werden. Aus dieser Prämisse folgt die gesamte Verfolgung.
 
 ### Einordnung & Wirkung
 
-Rotten Tomatoes weist 43 Prozent aus, Metacritic 51 von 100.
-
-Bemerkenswert ist ein Urteil aus großem Abstand. Die taz schrieb 2021 im Rückblick, es sei selten, dass ein Thriller so hervorragend altere wie dieser.
-
-Damit hat der Film eine Laufbahn genommen, die man ihm 1995 nicht zugetraut hätte: von der mittelmäßig aufgenommenen Unterhaltung zum Zeitdokument.
-
-Was ihn trägt, ist Sandra Bullock in einer Rolle, die fast durchgehend allein bestehen muss — ohne Partner, ohne Behörde, die ihr glaubt.` },
+Mit 6,1 von 10 bei einer vierstelligen Zahl abgegebener Stimmen liegt die Bewertung leicht über der Mitte der Skala, auf schmaler Stimmenbasis. 31 Jahre nach dem Erscheinungsjahr wirkt der Film besonders durch seinen Gegenstand: Er verhandelt die Abhängigkeit von digitalen Aufzeichnungen zu einem Zeitpunkt, als diese Abhängigkeit erst begann. Innerhalb des Thrillers gehört er damit zu den frühen Arbeiten über Identität als Verwaltungsvorgang. Die geringe Beteiligung an der Bewertung zeigt zugleich, dass er heute eher gezielt gesucht als beiläufig entdeckt wird. An Alltagsnähe hat sein Gegenstand dabei nichts eingebüßt.` },
   {
     bereich: 'titel', schluessel: 'movie:10676', locale: 'de-de',
     text: `### Worum es geht
-
-Ein Spielzeughändler flieht vor Männern, die ihn verfolgen, und hat eine Halloweenmaske dabei. Er stirbt — und Dr. Dan Challis, der Arzt in der Notaufnahme, will wissen, warum.
-
-Gemeinsam mit der Tochter des Toten kommt er in eine Kleinstadt, die von einer einzigen Firma beherrscht wird: Silver Shamrock, Hersteller genau dieser Masken. Was darin steckt, hat mit Steinen von Stonehenge zu tun — und mit einem Termin am Abend des 31. Oktober.
+Dr. Daniel Challis steckt in einer Familienkrise und hat Dienst in einem amerikanischen Krankenhaus, als ein Sterbender eingeliefert wird, den merkwürdige Gestalten angegriffen haben. Der Mann spricht rätselhafte Worte und wird noch in derselben Nacht getötet. Challis und Ellie Grimbridge, die Tochter des Toten, der Spielzeug verkauft hatte, wollen die Mörder finden und stoßen dabei auf eine undurchsichtige Fabrik für Schreckensmasken. Im Fernsehen wird dafür im Minutentakt geworben, mit besessener Regelmäßigkeit, um die Käufer zum großen Kostümfest in der Nacht zum ersten November einzuladen. Die beiden erreichen den Fabrikort Santa Mira, wo der Besitzer Cochran Conal unangefochten über die Bewohner gebietet, zurückgezogen im Verborgenen lebt und sehr verdächtiges Personal um sich hat. Weitere Tötungen geschehen, und die Opfer sind Menschen, die zu neugierig waren oder zu offen gesprochen haben.
 
 ### Entstehungsgeschichte
-
-Tommy Lee Wallace führte Regie und schrieb das Drehbuch. Produziert wurde der Film von Debra Hill und John Carpenter; die Musik stammt von Carpenter gemeinsam mit Alan Howarth.
-
-Tom Atkins spielt Dr. Daniel Challis, Stacey Nelkin die Ellie Grimbridge, Dan O'Herlihy den Firmenchef Conal Cochran, Ralph Strait den Buddy Kupfer und Garn Stephens die Marge Guttman.
-
-Die Kamera führte Dean Cundey, den Schnitt Millie Moore.
-
-Der Film erschien 1982, dauert 98 Minuten und ist ab 16 Jahren freigegeben. Er spielte 14,4 Millionen Dollar ein und galt als Misserfolg.
+Erschienen 1982, inszeniert von Tommy Lee Wallace. Zur Besetzung gehören Tom Atkins, Stacey Nelkin, Dan O'Herlihy und Michael Currie. Die Freigabe liegt bei 16 Jahren.
 
 ### Hinter den Kulissen
-
-Die Besonderheit des Films ist zugleich der Grund seines Scheiterns. John Carpenter wollte aus „Halloween" eine Reihe machen, die jedes Jahr eine neue, eigenständige Geschichte erzählt — nicht die Fortsetzung derselben.
-
-Michael Myers taucht deshalb nur kurz auf, in einem Fernsehausschnitt.
-
-Das Publikum von 1982 kam für etwas anderes, und der Film enttäuschte diese Erwartung vollständig — 14,4 Millionen Dollar Einspielergebnis waren die Antwort darauf.
-
-Was er stattdessen erzählt, ist ungewöhnlich: keltisches Blutopfer, industriell hergestellt, ausgeliefert über eine Fernsehwerbung.
+Horror, Science-Fiction, Mystery und Thriller kommen hier zusammen. Diese Mischung erklärt die ungewöhnliche Bauweise. Die Handlung setzt als Ermittlung ein, verlagert sich in einen abgeschotteten Ort und findet ihre Bedrohung in einer industriell gefertigten Ware, die per Werbung in jeden Haushalt gelangt. Damit sitzt der Schrecken nicht in einer Figur, sondern in einem Vertriebsweg – eine Anlage, die näher an der Science-Fiction liegt als am klassischen Schauerstück. Auch der Zeitpunkt ist Teil der Konstruktion: Die Handlung läuft auf eine feste Nacht zu, was ihr eine Frist gibt, und der Ort, an dem einer alles beherrscht, liefert die Enge dazu.
 
 ### Einordnung & Wirkung
-
-Rotten Tomatoes weist 48 Prozent aus, Metacritic 50 von 100. Das Lexikon des internationalen Films nannte ihn einen spannungslosen Aufguss mit außergewöhnlich lächerlicher Geschichte.
-
-Inzwischen gilt der Film als Kultfilm mit wachsender Anhängerschaft.
-
-Diese Umwertung ist der interessanteste Teil seiner Geschichte. Was ihn 1982 scheitern ließ — dass er nicht war, was der Titel versprach —, ist der Grund, warum er heute geschätzt wird.
-
-Dass Debra Hill und John Carpenter ihn produzierten und Carpenter zudem die Musik schrieb, macht ihn zum Sonderfall: ein bewusster Ausreißer, hergestellt von denen, die die Reihe begründet hatten.` },
+5,2 von 10 Punkten bei einer vierstelligen Zahl von Stimmen ist der niedrigste Bereich, in dem sich ein Titel mit dieser Sichtbarkeit noch bewegt. 44 Jahre nach dem Erscheinen ist die Bewertung eine feste Größe, an der sich kaum noch etwas verschiebt. Die Freigabe ab 16 verweist auf die Deutlichkeit der Gewaltdarstellung.` },
   {
     bereich: 'titel', schluessel: 'movie:820609', locale: 'de-de',
     text: `### Worum es geht
@@ -48156,682 +48012,292 @@ Für einen Film ohne Dialog ist die Aufnahme bemerkenswert gut — und sie beruh
     bereich: 'titel', schluessel: 'movie:9441', locale: 'de-de',
     text: `### Worum es geht
 
-Jackie und Luke Harrison sind geschieden und wollen ihre beiden Kinder Anna und Ben gemeinsam großziehen. Das funktioniert, solange nichts dazwischenkommt.
+Luke lebt nach der Scheidung von Jackie mit seiner neuen Freundin zusammen, der Werbefotografin Isabel. Während Jackie sich mit ihrer Rolle als alleinerziehende Mutter arrangiert hat, haben die Kinder das keineswegs getan: Die zwölfjährige Anna und der achtjährige Ben lehnen die Neue ab und machen ihr das Leben zur Hölle.
 
-Dann kommt Lukes neue Freundin dazu: Isabel Kelly, eine erfolgreiche Modefotografin. Die Kinder nehmen sie unterschiedlich auf, Jackie gar nicht. Und dann erfährt Jackie, dass sie an einem Lymphom erkrankt ist.
+Was daraus entsteht, ist ein komplexes Beziehungsgeflecht aus Hass und Liebe, aus Verlustängsten, Eifersucht, Stress und familiären Verpflichtungen, an dem die Beteiligten manchmal zu ersticken drohen. In diese ohnehin angespannte Lage fällt eine Diagnose: Bei Jackie wird eine tödliche Krankheit festgestellt.
 
 ### Entstehungsgeschichte
 
-Regie führte Chris Columbus. Das Drehbuch schrieben Gigi Levangie, Jessie Nelson, Steven Rogers, Karen Leigh Hopkins und Ron Bass nach einer Geschichte von Levangie.
-
-Julia Roberts spielt Isabel Kelly, Susan Sarandon die Jackie Harrison, Ed Harris den Luke Harrison, Jena Malone die Tochter Anna, Liam Aiken den Sohn Ben, Lynn Whitfield die Dr. Sweikert und Darrell Larson den Duncan Samuels.
-
-Produziert wurde der Film von Wendy Finerman, Columbus, Mark Radcliffe und Michael Barnathan für Columbia Pictures, 1492 Pictures und Wendy Finerman Productions.
-
-Die Kamera führte Donald M. McAlpine, den Schnitt Neil Travis, die Musik stammt von John Williams.
-
-Gedreht wurde im Bundesstaat New York und in New Jersey. Der Film dauert 125 Minuten, kostete 50 Millionen Dollar und startete am 25. Dezember 1998.
+Chris Columbus führte Regie bei dem Film, der 1998 in die Kinos kam. Julia Roberts und Susan Sarandon tragen die beiden zentralen Rollen, Ed Harris und Jena Malone ergänzen die vierköpfige Besetzung. Freigegeben ist der Film bereits ab 6 Jahren.
 
 ### Hinter den Kulissen
 
-Der Film gehört zwei Darstellerinnen, und er weiß das. Julia Roberts und Susan Sarandon spielen Frauen, die einander nicht ausstehen können und dasselbe wollen — dass es den Kindern gut geht.
-
-Dass fünf Autoren am Drehbuch arbeiteten, ist bei Studioproduktionen dieser Größe nicht ungewöhnlich, hinterlässt aber Spuren. Genau daran setzte die Kritik an.
-
-John Williams schrieb die Musik — ein Name, den man bei einem Familiendrama seltener erwartet als bei den großen Abenteuerfilmen.
-
-Der Kinostart lag auf dem ersten Weihnachtstag 1998 — ein Termin, den Studios für Familienstoffe reservieren.
+Drama, Liebesfilm und Komödie stehen hier nebeneinander, und diese Mischung erklärt viel über den Zuschnitt. Der Stoff braucht die komischen Reibungen des Alltags, um die schwereren Teile tragen zu können, und er braucht die schweren Teile, damit die Reibungen nicht folgenlos bleiben. Erzählt wird nicht aus einer, sondern aus mehreren Perspektiven, die einander widersprechen dürfen: die der geschiedenen Mutter, die der neuen Partnerin, die der Kinder. Die niedrige Altersfreigabe deutet an, dass der Umgang mit dem Thema Krankheit auf Zurückhaltung angelegt ist.
 
 ### Einordnung & Wirkung
 
-Bei 50 Millionen Dollar Herstellungskosten spielte der Film in den Vereinigten Staaten 91,1 Millionen ein, weltweit 159,7 Millionen. Das Startwochenende brachte 19,1 Millionen und Platz zwei.
-
-Rotten Tomatoes weist 44 Prozent bei 93 Kritiken aus, mit dem Befund, die solide Arbeit von Roberts und Sarandon reiche nicht, um den Film vor einer Geschichte zu retten, deren Manipulationen die Wirkung verwässerten. Metacritic vergab 58 von 100. Das Publikum bewertete bei CinemaScore mit einem A.
-
-Ausgezeichnet wurden vor allem die Darsteller: Ed Harris erhielt den Preis des National Board of Review als bester Nebendarsteller, Susan Sarandon den der San Diego Film Critics Society und eine Golden-Globe-Nominierung; Julia Roberts gewann den Blockbuster Entertainment Award, Jena Malone und Liam Aiken je einen Young Artist Award.
-
-Der Abstand zwischen 44 Prozent und einem A beim Publikum beschreibt den Streitpunkt: Was die Kritik als Manipulation las, wirkte beim Publikum wie beabsichtigt.` },
+Die Bewertung von 7,2 von 10 bei über tausend Stimmen liegt deutlich über dem Mittelwert der Skala. Die Zahl der Stimmen ist dabei moderat, sodass es sich um ein zwar zustimmendes, aber überschaubares Votum handelt. 28 Jahre nach dem Erscheinungsjahr ist der Film ein Beispiel für ein Familiendrama, das seinen Konflikt nicht über äußere Ereignisse, sondern über die Neuordnung von Rollen innerhalb einer getrennten Familie führt. Dass Komik und Trauer im selben Werk nebeneinander stehen, macht ihn zugleich schwerer einzuordnen als reine Vertreter einer der drei genannten Gattungen.` },
   {
     bereich: 'titel', schluessel: 'movie:9886', locale: 'de-de',
     text: `### Worum es geht
 
-Johnny arbeitet als Kurier — nur transportiert er keine Pakete, sondern Daten, gespeichert in einem Implantat in seinem Kopf.
+Die Handlung setzt in einem Jahr 2021 an, in dem die ganze Welt über das Internet vernetzt ist und die Hälfte der Bevölkerung am Nerve Attenuation Syndrome leidet. Johnny verdient sein Geld als Cyberkurier: Er hat sich einen Speicherchip ins Hirn implantieren lassen und transportiert darin, was andere ihm anvertrauen. Der neue Auftrag fällt größer aus als üblich, denn eine große Menge gestohlener Daten soll von Beijing nach Newark gelangen.
 
-Ein Auftrag übersteigt die Kapazität. Johnny lädt mehr, als das Implantat verträgt, und leidet fortan unter Aussetzern. Was er trägt, ist die Grundlage für ein Heilmittel gegen NAS, das Nerve Attenuation Syndrome — und ein Konzern will genau das verhindern und setzt die Yakuza auf ihn an.
+Pharmakom Industries, denen die Daten gehören, setzen eine Horde Yakuzas auf ihn an. Zur selben Zeit arbeitet J-Bone, der Anführer der Low-Techs, daran, die Fracht zu entschlüsseln, denn in ihr soll die Heilung für NAS stecken.
 
 ### Entstehungsgeschichte
 
-Vorlage ist William Gibsons Kurzgeschichte „Der mnemonische Johnny". Gibson schrieb auch das Drehbuch; Regie führte Robert Longo.
-
-Keanu Reeves spielt Johnny Mnemonic, Ice-T den J-Bone, Takeshi Kitano den Takahashi, Dolph Lundgren einen Straßenprediger und Udo Kier den Ralfi.
-
-Produziert wurde der Film von Don Carmody als kanadisch-amerikanische Gemeinschaftsproduktion. Die Kamera führte François Protat, den Schnitt Ronald Sanders, die Musik stammt von Brad Fiedel.
-
-Der Film erschien 1995 und dauert 92 Minuten. In Deutschland war er zunächst ab 18 Jahren freigegeben, seit August 2017 ab 16.
+Als Regisseur zeichnet Robert Longo für den Kinofilm verantwortlich, der 1995 herauskam. Im Zentrum steht Keanu Reeves; Dina Meyer, Takeshi Kitano und Ice-T vervollständigen die vierköpfige Besetzung. Jugendliche ab 16 Jahren dürfen den Film sehen.
 
 ### Hinter den Kulissen
 
-Dass der Autor der Vorlage sein eigenes Drehbuch schrieb, ist ungewöhnlich — und schützte den Film nicht vor dem Hauptvorwurf.
-
-Die Kritik bemängelte, Gibsons vielschichtige Handlung sei zu einem geradlinigen, hollywoodtauglichen Actionplot vereinfacht worden, dazu naive Dialoge und lustlose Darstellungen. Gelobt wurden Ausstattung und Spezialeffekte.
-
-Der Film spielt im Jahr 2021 — eine Zukunft, die inzwischen Vergangenheit ist. Was er sich darunter vorstellte, ist damit selbst ein Dokument geworden.
-
-Die Besetzungsliste ist eine eigene Merkwürdigkeit. Keanu Reeves, Ice-T, Takeshi Kitano, Dolph Lundgren und Udo Kier in einem Film ergeben eine Zusammenstellung, die man nicht plant, sondern die entsteht.
+Die Zuordnung zu Science Fiction, Action und Abenteuer beschreibt die Anlage recht genau. Der Ausgangspunkt ist eine technische Idee, nämlich Daten im Kopf eines Menschen, das Erzählmuster darunter aber das der Reise: Eine Fracht muss von einem Ort zum anderen gebracht werden, und die Fracht selbst gibt den Takt vor. Dass in ihr eine Heilung stecken soll, verknüpft die Verfolgung mit der Krankheit, die schon im ersten Satz der Ausgangslage steht. Die Gegenseite ist doppelt besetzt, mit einem Konzern auf der einen und einer Gruppe außerhalb der Ordnung auf der anderen Seite.
 
 ### Einordnung & Wirkung
 
-Die Herabstufung der Altersfreigabe von 18 auf 16 im August 2017 ist ein stiller Hinweis darauf, wie sich Maßstäbe verschieben — derselbe Film, zweiundzwanzig Jahre später anders eingestuft.
-
-Gibsons Vorlage wird dem Cyberpunk zugerechnet. Dass ausgerechnet der Autor selbst das Drehbuch schrieb und der Film trotzdem als Vereinfachung seiner Handlung galt, ist die Pointe dieser Produktion.
-
-Was bleibt, sind die gelobte Ausstattung und die Spezialeffekte — und eine Besetzung, die es so kein zweites Mal gibt.` },
+Mit 5,8 von 10 Punkten bei über tausend abgegebenen Stimmen liegt die Bewertung im unteren Mittelfeld. Die Stimmenzahl ist überschaubar und beschreibt ein Publikum, das den Film kennt, ohne dass er breit diskutiert würde. 31 Jahre nach dem Erscheinungsjahr hat der Film die Eigenheit, dass sein Handlungsjahr inzwischen selbst Vergangenheit ist. Das lässt seine Entwürfe einer vernetzten Zukunft heute anders lesen als zur Zeit ihrer Entstehung und macht ihn innerhalb seines Genres zum Zeitdokument einer bestimmten Vorstellung von Vernetzung.` },
   {
     bereich: 'titel', schluessel: 'movie:10158', locale: 'de-de',
     text: `### Worum es geht
 
-Billy Hoyle hat einmal College-Basketball gespielt. Heute verdient er sein Geld auf Straßenplätzen — indem er sich unterschätzen lässt und dann gewinnt.
+Sydney hält sich für den besten Basketballer von ganz Los Angeles, und Talent hat er tatsächlich reichlich. Seine Masche besteht darin, andere großmäulige Spieler auf dem Court um ihr Geld zu erleichtern. Bei dem unscheinbaren Billy hat er sich allerdings geschnitten: Billy ist ehemaliger Profi und darauf spezialisiert, arrogante Amateure wie Sydney abzuzocken. Weil er weiß ist und deshalb automatisch für einen schlechten Basketballer gehalten wird, muss er sich dafür nicht einmal verstellen.
 
-Sidney Deane durchschaut ihn und macht ihm einen Vorschlag: gemeinsam. Zwei gegen zwei, mit verteilten Rollen — Billy sieht aus, als könne er nichts, und genau darauf setzen sie. Die Rechnung geht auf, solange keiner den anderen betrügt.
+Obwohl Sydney auf dem Platz gedemütigt wird, erkennt er seine Chance und überredet Billy, sich zusammenzutun und die Gegner als Team auszunehmen. Doch Sydney spielt ein doppeltes Spiel mit seinem neuen Partner.
 
 ### Entstehungsgeschichte
 
-Ron Shelton schrieb das Drehbuch und führte Regie. Die Idee kam ihm, während er an einem anderen Buch arbeitete; er stützte sich auf seine eigene Zeit als College-Basketballspieler und auf Pickup-Spiele im YMCA.
-
-Woody Harrelson spielt Billy Hoyle, Wesley Snipes den Sidney Deane, Rosie Perez die Gloria Clemente, Tyra Ferrell die Rhonda Deane, Kadeem Hardison den Junior, Freeman Williams den Duck Johnson, Louis Price den Eddie Faroo und Marques Johnson den Raymond; Alex Trebek tritt als er selbst auf.
-
-Die Kamera führte Russell Boyd, die Musik stammt von Bennie Wallace. Es erschienen zwei Soundtracks — einer mit R&B, einer mit Hip-Hop unter dem Titel „White Men Can't Rap".
-
-Das Budget betrug 31 Millionen Dollar.
+Ron Shelton inszenierte den Film, der 1992 herauskam. Woody Harrelson und Wesley Snipes bilden das ungleiche Duo, Rosie Perez und Tyra Ferrell gehören ebenfalls zur Besetzung. Ab 12 Jahren ist der Film freigegeben.
 
 ### Hinter den Kulissen
 
-Für die Basketballszenen war Bob Lanier als Trainer verpflichtet, ein früherer NBA-Spieler und Mitglied der Hall of Fame. Die Hauptdarsteller absolvierten ein einmonatiges Trainingslager.
-
-Laniers Beobachtung ist die schönste Notiz zu diesem Film: Harrelson war tatsächlich der bessere Spieler von beiden — also genau der, dessen Figur für unfähig gehalten wird.
-
-Die Rolle der Gloria war ursprünglich anders angelegt und wurde geändert, nachdem Rosie Perez bei Shelton bleibenden Eindruck hinterlassen hatte. Ihre Figur will bei „Jeopardy!" antreten, weshalb Alex Trebek selbst auftritt.
-
-Der Titel benennt ein Vorurteil, und der ganze Film handelt davon, wie sich damit Geld verdienen lässt.
+Komödie und Drama sind die beiden Genres, und der Stoff braucht beide. Das Grundmuster ist das der Hochstapelei: Zwei Figuren leben davon, dass andere sie falsch einschätzen, und der Film macht die Erwartung, die an Hautfarbe geknüpft wird, ausdrücklich zum Werkzeug innerhalb der Handlung. Daraus entsteht die Komik, aber auch die Fallhöhe, denn wer vom Täuschen lebt, ist selbst besonders leicht zu täuschen. Genau darauf läuft die Partnerschaft der beiden zu.
 
 ### Einordnung & Wirkung
 
-Bei 31 Millionen Dollar Herstellungskosten spielte der Film in Nordamerika 76,25 Millionen ein, weltweit 90,8 Millionen — der sechzehnterfolgreichste Film des Jahres 1992.
-
-Rotten Tomatoes weist 75 Prozent bei 106 Kritiken aus, Metacritic 65 Punkte.
-
-Roger Ebert vergab dreieinhalb von fünf Sternen und befand, es sei nicht einfach ein Basketballfilm. Janet Maslin lobte Snipes' komische, wissende Darstellung mit körperlichem Schwung.
-
-Und ein Urteil ragt heraus: Stanley Kubrick zählte den Film zu seinen Lieblingsfilmen.
-
-Für eine Sportkomödie ist das eine außergewöhnliche Empfehlung — und ein Hinweis darauf, dass der Film mehr betreibt als Sport.` },
+6,7 von 10 bei einer vierstelligen Zahl abgegebener Stimmen ergeben ein freundliches Urteil auf schmaler Basis. 34 Jahre nach dem Erscheinungsjahr ist der Film ein Beispiel für das Sportkino, das seinen Schwerpunkt nicht auf den Wettkampf um Titel legt, sondern auf das Milieu der Straßenplätze und auf die sozialen Zuschreibungen, die dort mitgespielt werden. Die überschaubare Stimmenzahl bedeutet, dass der Wert nur begrenzt aussagekräftig ist. Erkennbar bleibt jedoch, dass die Anlage weniger vom Spiel selbst lebt als von zwei Figuren, deren Zusammenarbeit von Beginn an auf Misstrauen gebaut ist.` },
   {
     bereich: 'titel', schluessel: 'movie:157', locale: 'de-de',
     text: `### Worum es geht
-
-Spock ist tot. Die Enterprise kehrt beschädigt zur Erde zurück, und Admiral Kirk erfährt, dass sein Schiff außer Dienst gestellt wird.
-
-Dann stellt sich heraus, dass Spocks Geist nicht verloren ist — er lebt in Dr. McCoy weiter, und sein Körper hat sich auf dem Genesis-Planeten regeneriert. Kirk stiehlt die Enterprise, um beides zusammenzuführen. Gleichzeitig interessieren sich die Klingonen für Genesis, allerdings als Waffe.
+Spock ist tot, und die Stimmung unter seinen früheren Weggefährten ist entsprechend. Auch Pille trägt schwer am Verlust seines liebsten Diskussionspartners. Umso mehr wundert sich Kirk, als er ihn in Spocks Kabine antritt und feststellt, dass ausgerechnet er sich benimmt wie der tote Vulkanier. Von Spocks Vater Sarek erfährt Kirk, dass Spock vor seinem Tod versucht haben muss, seinen Geist in einen anderen zu übertragen — ausgerechnet in McCoy? Zur selben Zeit stoßen Saavik und Kirks Sohn David Marcus, beide auf dem Planeten Genesis zurückgeblieben, auf Spocks leeren Sarg. In der Nähe finden sie ein vulkanisches Kind ohne Gedächtnis, das rasant heranwächst.
 
 ### Entstehungsgeschichte
-
-Regie führte Leonard Nimoy. Das Drehbuch schrieb Harve Bennett, der den Film auch produzierte.
-
-William Shatner spielt Admiral James T. Kirk, Nimoy den Spock, DeForest Kelley den Dr. McCoy, James Doohan den Montgomery Scott, George Takei den Hikaru Sulu, Christopher Lloyd den klingonischen Kommandanten Kruge und Mark Lenard den Sarek.
-
-Die Kamera führte Charles Correll, den Schnitt Robert F. Shugrue, die Musik stammt von James Horner.
-
-Die Spezialeffekte entstanden bei Industrial Light & Magic unter Verantwortung von Bob Dawson. Der Film erschien 1984, dauert 105 Minuten und ist ab 12 Jahren freigegeben.
+Das Erscheinungsjahr ist 1984; die Regie übernahm Leonard Nimoy. Vor der Kamera stehen William Shatner, DeForest Kelley, James Doohan und George Takei, also eine Besetzung, deren Figuren einander bereits vertraut sind — das erklärt, warum der Stoff sofort mittendrin beginnen kann. Die Freigabe gilt ab zwölf Jahren. Im englischen Titel „Star Trek III: The Search for Spock“ steht das Ziel der Handlung offen im Namen.
 
 ### Hinter den Kulissen
-
-Dass der Darsteller des Spock bei dem Film Regie führte, in dem Spock zurückgeholt wird, ist die auffälligste Entscheidung dieser Produktion.
-
-Die Kritik hob genau das hervor und bescheinigte Nimoy eine einfühlsame, auf die Darsteller ausgerichtete Regie.
-
-Der schwerste Eingriff betrifft nicht Spock, sondern das Schiff. Die Zerstörung der Enterprise wurde zweimal gefilmt, um eine stärkere emotionale Wirkung zu erzielen — für eine Reihe, in der das Schiff selbst eine Figur ist, ein bemerkenswerter Aufwand.
-
-Christopher Lloyd als klingonischer Kommandant ist die zweite Überraschung der Besetzungsliste.
+Der Film verbindet Science Fiction, Action, Abenteuer und Thriller. Diese Mischung erklärt die Bauweise. Der Ausgangspunkt ist kein technisches Rätsel, sondern ein Trauerfall, und die Suche, die daraus folgt, führt über Planeten und Auseinandersetzungen statt über Beweisketten. Bemerkenswert ist, dass eine Idee aus der Mythologie der Reihe — die Übertragung eines Geistes — als handfester Motor einer Reisehandlung dient. Der Verlust wird nicht betrauert, sondern zum Auftrag gemacht.
 
 ### Einordnung & Wirkung
-
-Rotten Tomatoes weist 79 Prozent aus, Metacritic 58 von 100. Gelobt wurden die hervorragenden Miniaturen und Animationen.
-
-Der Film wurde weniger positiv aufgenommen als sein Vorgänger — ein Vergleich, dem sich jeder dritte Teil einer Reihe stellen muss.
-
-1985 gab es Nominierungen bei den Saturn Awards, unter anderem für die beste Regie und den besten Film, sowie bei den Hugo Awards.
-
-Dass ausgerechnet die Regie in der Rezeption hervorgehoben wurde — einfühlsam und auf die Darsteller ausgerichtet —, ist für einen Film, dessen Regisseur zugleich vor der Kamera steht, ein bemerkenswerter Befund.` },
+6,6 von 10 Punkte bei einer vierstelligen Zahl an Stimmen ergeben eine freundliche, aber nicht überschwängliche Einschätzung. Zweiundvierzig Jahre nach dem Erscheinen liest sich der Film als Beispiel dafür, wie Science Fiction Fragen nach Tod und Identität in eine Abenteuerform übersetzt. Wer die Figuren kennt, findet den Zugang unmittelbar; wer nicht, muss sich die Beziehungen aus dem Zusammenspiel erschließen.` },
   {
     bereich: 'titel', schluessel: 'movie:22897', locale: 'de-de',
     text: `### Worum es geht
-
-Jane Adler führt eine Bäckerei in Santa Barbara, hat drei erwachsene Kinder und ist seit Jahren geschieden. Ihr Ex-Mann Jake ist mit einer deutlich jüngeren Frau namens Agness verheiratet.
-
-Bei der Abschlussfeier ihres Sohnes treffen Jane und Jake wieder aufeinander — und finden zueinander zurück, obwohl er verheiratet ist. Zugleich lernt Jane den Architekten Adam kennen.
+Jane Adler führt in Santa Barbara ein geordnetes Leben als Single: eine Bäckerei, Freude am Kochen, ein sauber sortierter Alltag. Der gerät durcheinander, als es zu einem Tête-à-Tête mit ihrem Ex-Mann Jake kommt. Der alternde Anwalt hat von seiner neuen Partnerin Agness genug und auf Kinder mit ihr wenig Lust. Aus dem einmaligen Rückfall wird eine Affäre, die das frühere Ehepaar zunächst sogar vor den eigenen Kindern verbirgt. Dann tritt auch noch der Innenarchitekt Adam auf und macht Jane den Hof. Als der künftige Schwiegersohn von der Sache Wind bekommt, ist das Beziehungsgeflecht längst unübersichtlich geworden.
 
 ### Entstehungsgeschichte
-
-Nancy Meyers schrieb das Drehbuch und führte Regie; produziert wurde der Film von Scott Rudin und Meyers.
-
-Meryl Streep spielt Jane Adler, Alec Baldwin den Jake Adler und Steve Martin den Adam Schiffer; in weiteren Rollen sind John Krasinski, Zoe Kazan und Caitlin Fitzgerald zu sehen.
-
-Die Kamera führte John Toll, den Schnitt besorgten Joe Hutshing und David Moritz, die Musik stammt von Hans Zimmer und Heitor Pereira.
-
-Der Film dauert 118 Minuten und startete am 25. Dezember 2009 in den Vereinigten Staaten, am 21. Januar 2010 in Deutschland.
+Nancy Meyers inszenierte den Film, der 2009 herauskam. Meryl Streep, Alec Baldwin, Steve Martin und John Krasinski bilden die tragende Besetzung — eine Aufstellung, die den Stoff eindeutig bei den Erwachsenen verortet und die Kinderfiguren an den Rand rückt. Für Zuschauer ab zwölf Jahren ist er zugelassen. Der englische Titel „It's Complicated“ fasst die Ausgangslage knapper, als es die deutsche Fassung tut.
 
 ### Hinter den Kulissen
-
-Die Umkehrung ist der Kern. Die Affäre führt nicht ein Mann mit einer Jüngeren, sondern eine geschiedene Frau mit ihrem eigenen Ex-Mann — und sie ist dabei diejenige, die etwas zu verlieren hat, während er der Betrüger ist.
-
-Damit stellt der Film eine Frage, die Komödien selten stellen: Was passiert, wenn jemand die Wahl hat und keine Antwort weiß?
-
-Meryl Streep, Alec Baldwin und Steve Martin in einem Dreieck — das ist die Besetzung, an der alles hängt, und der Film gibt allen dreien Raum.
-
-Dass Nancy Meyers Drehbuch, Regie und Produktion in einer Hand hielt, erklärt die Geschlossenheit des Ergebnisses — gelobt wurden durchgehend Dialoge und Timing.
+Komödie und Liebesfilm zusammen ergeben hier keine Anbahnungsgeschichte, sondern deren Umkehrung: Die Beziehung, um die es geht, hat bereits stattgefunden und ist offiziell beendet. Daraus bezieht die Anlage ihren Reiz und zugleich ihre Fallhöhe, denn jede Annäherung ist zwangsläufig auch ein Rückschritt. Dass die Affäre geheim bleiben soll, liefert den Mechanismus, der solche Stoffe antreibt — beinahe alles, was komisch wird, entsteht aus dem Aufwand, etwas zu verbergen.
 
 ### Einordnung & Wirkung
-
-Weltweit spielte der Film über 220 Millionen Dollar ein.
-
-Meryl Streep war für den Golden Globe als beste Hauptdarstellerin in Komödie oder Musical nominiert — gewonnen hat sie ihn im selben Jahr für „Julie & Julia". Hinzu kamen Nominierungen als bester Film in dieser Sparte und für das Drehbuch. Die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
-
-Das Lexikon des internationalen Films lobte die witzigen Dialoge und das ausgezeichnete Timing. Prisma bemängelte dagegen eine schwache komödiantische Umsetzung trotz starker Darsteller.
-
-Über 220 Millionen Dollar für eine Komödie über Menschen jenseits der fünfzig sind der bemerkenswerteste Punkt der Bilanz — ein Publikum, dem Hollywood selten eigene Filme widmet.` },
+Mit 6,5 von 10 bei einer vierstelligen Zahl von Stimmen liegt der Film im soliden Mittelfeld, ohne einen Ausschlag nach oben oder unten. Siebzehn Jahre nach dem Erscheinen ist er ein gut erkennbarer Vertreter der Beziehungskomödie für ein erwachsenes Publikum: kein Konflikt, der über die Familie hinausreicht, dafür einer, der genau dort seine ganze Wirkung entfaltet.` },
   {
     bereich: 'titel', schluessel: 'movie:11618', locale: 'de-de',
     text: `### Worum es geht
-
-Eleanor Vance wird zu einer Studie über Schlafstörungen eingeladen. Der Ort: Hill House, ein abgelegenes Anwesen mit einer Geschichte, über die niemand spricht.
-
-Dort trifft sie auf Dr. Marrow, der die Studie leitet, und auf zwei weitere Probanden, Theo und Luke. Was Eleanor bald begreift, ist zweierlei — dass in diesem Haus etwas ist, und dass ihre Anwesenheit kein Zufall war.
+Seit über einem Jahrzehnt steht das finstere Hill House einsam und verlassen da – zumindest scheint es so. Fasziniert von der sagenumwobenen Geschichte des Anwesens lädt Dr. Marrow seine drei Testpersonen Theo, Nell und Luke zu einem scheinbar harmlosen Experiment dorthin ein. Seit ihrer Ankunft fühlt Nell sich auf sonderbare Weise von dem Haus angezogen, und diese Anziehung beruht offenbar auf Gegenseitigkeit. Bei Einbruch der Nacht gerät das Experiment außer Kontrolle, als die vier Eindringlinge entdecken, was sich hinter den Mauern verbirgt.
 
 ### Entstehungsgeschichte
-
-Vorlage ist Shirley Jacksons Roman „Spuk in Hill House". Eine frühere Verfilmung entstand 1963 unter dem Titel „Bis das Blut gefriert", Regie führte damals Robert Wise.
-
-Bei dieser Fassung führte Jan de Bont Regie, das Drehbuch schrieb David Self. Produziert wurde der Film von Susan Arnold, Donna Arkoff Roth und Colin Wilson.
-
-Lili Taylor spielt Eleanor Vance, Liam Neeson den Dr. David Marrow, Catherine Zeta-Jones die Theo, Owen Wilson den Luke Sanderson, Bruce Dern den Mr. Dudley, Marian Seldes die Mrs. Dudley, Virginia Madsen die Jane und Todd Field den Todd Hackett.
-
-Die Kamera führte Karl Walter Lindenlaub, den Schnitt Michael Kahn, die Musik stammt von Jerry Goldsmith, das Szenenbild von Eugenio Zanetti.
-
-Die Außenaufnahmen entstanden an zwei englischen Herrenhäusern: Harlaxton Manor in Lincolnshire und Belvoir Castle in Leicestershire. Der Film erschien 1999, dauert 113 Minuten und ist ab 12 Jahren freigegeben.
+Jan de Bont inszenierte den Film, der 1999 erschien. Die Besetzung nennt Liam Neeson, Lili Taylor, Catherine Zeta-Jones und Owen Wilson. Ab 12 Jahren ist er freigegeben.
 
 ### Hinter den Kulissen
-
-Der Vergleich mit der Verfilmung von 1963 zieht sich durch die gesamte Rezeption — und fällt einhellig gegen die neuere aus.
-
-Thilo Wydra brachte es in der Welt auf den Punkt: Hatte bei Wise die Geschichte eine Seele, so gehe diese bei dem spukenden Holländer in Dekors und Tricks verloren.
-
-Die taz kritisierte den übermäßigen Einsatz von Spezialeffekten, durch den keine Zeit zum Fürchten bleibe. Stefanie Rosenkranz nannte den Film im Stern komplett gaga und total unfreiwillig komisch.
-
-Der gemeinsame Vorwurf ist immer derselbe: Ein Stoff, der von dem lebt, was man nicht sieht, wurde mit dem Aufwand eines Effektfilms behandelt.
-
-Was unbestritten bleibt, ist das Szenenbild von Eugenio Zanetti und die Wahl der beiden englischen Herrenhäuser.
+Mit Horror, Thriller, Fantasy und Mystery kommen gleich vier Genres zusammen, und das entspricht der Anlage: Ein Haus, das selbst handelt, lässt sich weder als reine Bedrohung noch als reines Rätsel erzählen. Der Ausgangspunkt ist eine Versuchsanordnung, was der Erzählung zwei Dinge verschafft – einen Grund, warum vier Fremde freiwillig in einem verrufenen Gebäude übernachten, und eine Fallhöhe, sobald sich zeigt, dass die Anordnung nicht die des Versuchsleiters ist. Dass eine einzelne Figur eine besondere Verbindung zum Haus entwickelt, verschiebt den Schwerpunkt von der Gruppe auf sie und macht aus der Versuchsreihe eine persönliche Angelegenheit. Der zeitliche Rahmen ist eng gesteckt: Was am Tag als Studie beginnt, endet in derselben Nacht. Die Freigabe ab 12 deutet darauf hin, dass der Schrecken eher auf Ausstattung und Atmosphäre setzt als auf Explizites.
 
 ### Einordnung & Wirkung
-
-Der Film gewann 1999 den Bogey Award und 2000 den BMI Film Music Award; die Deutsche Film- und Medienbewertung vergab das Prädikat „wertvoll".
-
-Zugleich war er 2000 in fünf Kategorien für die Goldene Himbeere nominiert und für den Blockbuster Entertainment Award.
-
-Diese Kombination — ein Prädikat und fünf Himbeeren-Nominierungen — beschreibt die Lage genau. Handwerklich und in der Ausstattung überzeugte der Film; als Erzählung nicht.
-
-Die Besetzung mit Liam Neeson, Catherine Zeta-Jones, Owen Wilson und Lili Taylor war für einen Schauerfilm ungewöhnlich stark.` },
+5,5 von 10 Punkten bei mehreren tausend Stimmen ist ein Wert knapp unter der Mitte. 27 Jahre nach dem Erscheinen ist er ausgereift und bewegt sich nicht mehr. Im Feld der Spukhausgeschichten steht der Film für die große, aufwendig ausgestattete Variante, in der das Gebäude selbst zur Hauptfigur wird.` },
   {
     bereich: 'titel', schluessel: 'movie:32985', locale: 'de-de',
     text: `### Worum es geht
 
-Um 1600. Solomon Kane ist Söldner. Nach einer Zuflucht im Kloster verschreibt er sich dem Kampf gegen das Böse und wird in seine Heimat zurückgeschickt.
+Einst war Solomon Kane ein skrupelloser Söldner. Dann begegnete er einem Handlanger des Teufels und erfuhr von ihm, dass seine Seele dazu verdammt sei, in der Hölle zu schmoren. Seither ist Kane Priester und hat der Gewalt abgeschworen, die das 17. Jahrhundert erschüttert.
 
-Dort trifft er auf die Familie Crowthorn — und auf den Hexenmeister Malachi.
+Auf seinen Wanderschaften nimmt ihn die Puritanerfamilie Crowthorn auf, nachdem er von Wegelagerern überfallen wurde. Das Glück ist kurz: Die Schergen des Zauberers Malachi, der die Macht über das Land an sich reißen will, töten fast alle Crowthorns und entführen die Tochter Meredith. Ihr Vater William verspricht Kane mit letztem Atem die Rettung seiner Seele, sollte er Meredith zurückholen.
 
 ### Entstehungsgeschichte
 
-M. J. Bassett führte Regie und schrieb das Drehbuch.
-
-James Purefoy spielt Solomon Kane, Max von Sydow den Josiah Kane, Rachel Hurd-Wood die Meredith Crowthorn, Pete Postlethwaite den William Crowthorn, Alice Krige die Katherine Crowthorn und Jason Flemyng den Malachi.
-
-Die Kamera führte Dan Laustsen, die Musik stammt von Klaus Badelt. Das Budget betrug 45 Millionen Dollar.
+MJ Bassett inszenierte den 2009 erschienenen Film. James Purefoy trägt die Titelrolle, Pete Postlethwaite, Alice Krige und Mackenzie Crook sind daneben besetzt. Ab 16 Jahren ist der Film freigegeben.
 
 ### Hinter den Kulissen
 
-Der Kern ist ein Bruch in der Figur: ein Söldner, der über ein Kloster zu einer anderen Bestimmung findet und dann feststellt, dass sie ihn zurück zu den Waffen führt.
-
-Die Besetzung ist für eine europäische Produktion bemerkenswert. Max von Sydow und Pete Postlethwaite in Nebenrollen sind Namen, die man bei einem Fantasy-Abenteuer nicht erwartet.
-
-45 Millionen Dollar sind für einen Film, der außerhalb des amerikanischen Studiosystems entstand, eine erhebliche Summe — und genau daran scheiterte die Rechnung.
+Abenteuer, Fantasy und Action bestimmen die Anlage, und die Reihenfolge ist bezeichnend: Die Reise steht vor dem Übernatürlichen, das Übernatürliche vor dem Kampf. Der Aufbau folgt einem klaren Muster, in dem eine Figur ihrer Gewalt abgeschworen hat und dann in eine Lage gerät, die genau diese Gewalt verlangt. Der Preis dafür ist im Text der Handlung bereits festgeschrieben, denn es geht um eine Seele, deren Schicksal von Anfang an benannt ist. Damit hat die Verfolgung eine doppelte Rechnung: eine weltliche und eine jenseitige.
 
 ### Einordnung & Wirkung
 
-Bis Dezember 2010 spielte der Film weltweit nur rund 19 Millionen Dollar ein — bei 45 Millionen Herstellungskosten ein deutlicher Fehlschlag.
-
-Die Urteile gingen auseinander. Variety kritisierte die Regie als ohne Fingerspitzengefühl. Der Guardian vergab dagegen drei von fünf Sternen und lobte den ernsthaften Tonfall sowie James Purefoys Darstellung.
-
-Der Guardian trifft damit, was den Film ausmacht: Er nimmt seinen Stoff ernst, statt ihn augenzwinkernd zu behandeln — und verzichtet damit auf das, was vergleichbare Filme trägt.
-
-Bei 45 Millionen Dollar Budget und 19 Millionen Einspielergebnis blieb es bei diesem einen Film.` },
+6,0 von 10 Punkte bei über tausend Stimmen ergeben ein Urteil knapp über der Mitte, getragen von einer eher kleinen Zahl von Stimmen. 17 Jahre nach dem Erscheinungsjahr steht der Film für eine Spielart des Fantasy-Abenteuers, die ihre Welt nicht in erfundenen Reichen ansiedelt, sondern in einer benannten historischen Epoche mit übernatürlichen Zusätzen. Die Stimmenzahl liegt im schmalen Bereich, weshalb der Wert eher eine Tendenz als ein belastbares Urteil beschreibt. Wer Genrekino mit historischem Rahmen sucht, findet hier eine Anlage, die ihre Schauwerte aus der Verbindung von Wanderung, Bedrohung und Schuld bezieht.` },
   {
     bereich: 'titel', schluessel: 'movie:333669', locale: 'de-de',
     text: `### Worum es geht
 
-Michael Mason ist Amerikaner in Paris und lebt vom Taschendiebstahl. Eine Handtasche, die er entwendet, enthält Sprengstoff.
+Am Vorabend des Jahrestags der Erstürmung der Bastille durchquert die junge Französin Zoe Naville Paris. Sie will eine Bombe zünden, als radikales politisches Zeichen, entscheidet im letzten Moment aber, dass sie diese gewaltsame Tat nicht begehen kann. Michael Mason, ein amerikanischer Taschendieb, stiehlt ihr die Tasche.
 
-Kurz darauf detoniert sie, vier Menschen sterben. Der CIA-Agent Sean Briar hält Mason für unschuldig — und arbeitet mit ihm, statt ihn festzunehmen. Was die beiden finden, führt zu korrupten Polizisten und zu einem geplanten digitalen Raub in der Banque de France.
+Zur selben Zeit kämpft in einer CIA-Station in Paris der Agent Sean Briar damit, sich in seiner neuen Arbeit als Datenanalyst für Cyberterrorismus zurechtzufinden, nachdem eine Einsatzmission schwer schiefgegangen ist. Eine Kette von Ereignissen macht Michael bald zum meistgesuchten Mann, und Briar will ihn vor allen französischen Behörden fassen. Von da an verbindet die drei eine atemlose Jagd über 24 Stunden durch die Stadt, bei der eine von Chaos und Gier bestimmte Verschwörung ans Licht kommen soll.
 
 ### Entstehungsgeschichte
 
-James Watkins führte Regie und schrieb das Drehbuch gemeinsam mit Andrew Baldwin. Zuvor waren Pierre Morel, Morten Tyldum und Baran bo Odar als Regisseure vorgesehen gewesen und wieder ausgeschieden.
-
-Idris Elba spielt Sean Briar, Richard Madden den Michael Mason, Charlotte Le Bon die Zoé Naville, Kelly Reilly die CIA-Agentin Karen Dacre, José Garcia den DGSI-Direktor Victor Gamieux und Thierry Godard den Rafi Bertrand.
-
-Die Kamera führte Tim Maurice-Jones, den Schnitt Jon Harris, die Musik stammt von Alex Heffes. Produziert wurde der Film von Anonymous Content, Vendôme Pictures, StudioCanal und TF1 Films Production.
-
-Gedreht wurde vom 13. Oktober bis zum 17. Dezember 2014 in Paris. Das Budget betrug vier Millionen Dollar.
+James Watkins inszenierte den Film, der 2016 erschien. Idris Elba und Richard Madden bilden das ungleiche Paar im Zentrum, Charlotte Le Bon und Kelly Reilly gehören ebenfalls zur Besetzung. Ab 16 Jahren ist der Film freigegeben.
 
 ### Hinter den Kulissen
 
-Die Veröffentlichungsgeschichte dieses Films ist von realen Anschlägen bestimmt, und das lässt sich nicht trennen von dem, was er erzählt.
-
-Geplant war der Start für Februar 2016. Nach den Anschlägen von Paris im November 2015 wurde die britische Premiere auf den 22. April 2016 verschoben.
-
-In Frankreich wurde der Film am 13. Juli 2016 freigegeben — und nach dem Anschlag von Nizza am 17. Juli 2016 wieder aus den Kinos genommen.
-
-Dass ein Stoff, dessen Handlung mit einem Sprengsatz in Paris beginnt, binnen weniger Monate zweimal von der Wirklichkeit eingeholt wurde, gehört zu seiner Geschichte — und ist der Grund, warum ihn kaum jemand im Kino gesehen hat.
+Als einziges Genre steht Action, und diese schmale Zuordnung passt zur Bauweise. Die Handlung ist an eine feste Frist und an einen einzigen Schauplatz gebunden, was Tempo erzwingt und Nebenhandlungen ausschließt. Auffällig ist, dass die drei Hauptfiguren aus verschiedenen Richtungen kommen, von der politischen Tat über den Gelegenheitsdiebstahl bis zum Schreibtisch eines Nachrichtendienstes, und dass ausgerechnet ein gestohlener Gegenstand sie verknüpft.
 
 ### Einordnung & Wirkung
 
-Bei vier Millionen Dollar Herstellungskosten spielte der Film weltweit 14,9 Millionen ein.
-
-Rotten Tomatoes weist 48 Prozent bei 80 Rezensionen aus, Metacritic 48 von 100.
-
-Der zusammengefasste Befund bei Rotten Tomatoes ist zugleich das treffendste Urteil: Der Film beweise, dass Idris Elba ein Actionheld im Wartestand sei — und zwar wartend auf ein Drehbuch, das seinem Können entspricht.
-
-Dass drei Regisseure vor Watkins ausstiegen, deutet auf eine Entwicklung hin, die nicht geradlinig verlief. Was daraus wurde, ist ein solide gemachter Film, dessen Veröffentlichung von Ereignissen bestimmt wurde, die niemand vorhersehen konnte.` },
+6,3 von 10 bei einer vierstelligen Zahl an Stimmen ergeben ein leicht positives Urteil auf kleiner Stimmenbasis. 10 Jahre nach dem Erscheinungsjahr ist der Film ein Beispiel für den europäisch verorteten Actionthriller, der sein Tempo aus einer engen Zeitvorgabe und einer bekannten Stadt bezieht, statt auf große Schauwerte zu setzen. Dass er sich auf ein einziges Genre beschränkt, deckt sich mit diesem Eindruck: Der Film verzichtet auf Nebenlinien und richtet alles auf die Frist aus, die seine Handlung vorgibt. Die kleine Stimmenzahl schränkt die Aussagekraft der Bewertung entsprechend ein.` },
   // ---- Block 113 ----
   {
     bereich: 'titel', schluessel: 'movie:124459', locale: 'de-de',
     text: `### Worum es geht
-
-Burt Wonderstone und Anton Marvelton treten seit Jahren gemeinsam in einem Casino in Las Vegas auf. Ihre Zaubershow ist eine Institution — und niemand geht mehr hin.
-
-Denn ein Straßenkünstler namens Steve Gray zieht das Publikum ab. Die beiden verlieren ihr Engagement, zerstreiten sich und stehen ohne Bühne da.
+Burt Wonderstone und Anton Marvelton beherrschen als Zauberkünstler seit Jahren Las Vegas und verdienen Millionen, wobei der bombastische Aufwand ihrer Illusionen ziemlich genau Burts ständig wachsendem Ego entspricht. Ihr größtes Täuschungsmanöver besteht inzwischen allerdings darin, dem Publikum eine unverbrüchliche Freundschaft vorzuspielen, denn privat können die beiden einander längst nicht mehr ausstehen. Zum Problem wird ihnen außerdem der unkonventionelle Straßenzauberer Steve Gray, der eine wachsende Anhängerschaft um sich schart, weil seine Tricks so extravagant sind, dass die Show der Stars daneben verblasst. Eine letzte Chance bekommen Burt und Anton, ihre Zusammenarbeit beruflich wie privat wieder in Ordnung zu bringen – dafür aber müsste Burt sich auf das besinnen, was ihn ursprünglich für die Zauberei begeistert hat.
 
 ### Entstehungsgeschichte
-
-Regie führte Don Scardino. Das Drehbuch schrieben Jonathan Goldstein und John Francis Daley.
-
-Steve Carell spielt Albert „Burt" Wonderstone, Steve Buscemi den Anthony „Anton" Marvelton, Jim Carrey den Steve Gray, Olivia Wilde die Jane, James Gandolfini den Casinobesitzer Doug Munny, Alan Arkin den Rance Holloway und Michael Herbig den Lucius Belvedere.
-
-Die Kamera führte Matthew Clark, den Schnitt Lee Haxall, die Musik stammt von Lyle Workman.
-
-Der Film erschien 2013, dauert 101 Minuten und kostete 30 Millionen Dollar; eingespielt hat er 27,4 Millionen.
+Don Scardino inszenierte den 2013 erschienenen Film. Die Besetzung führt Steve Carell, Steve Buscemi, Olivia Wilde und Jim Carrey. Ab 12 Jahren ist er freigegeben.
 
 ### Hinter den Kulissen
-
-Der Gegensatz, um den es geht, ist der zwischen zwei Vorstellungen von Zauberei. Die eine arbeitet mit Illusion, Kostüm und Bühne; die andere zeigt einen Mann, der sich etwas antut, und filmt es.
-
-Jim Carrey spielt den Herausforderer — die auffälligste Besetzung des Films.
-
-Mit Michael Herbig steht zudem ein deutscher Name auf der Besetzungsliste, was bei einer amerikanischen Studiokomödie selten vorkommt.
-
-Die Kritik traf sich in einem Punkt: Das Lexikon des internationalen Films nannte ihn einen durchaus interessanten Mix mit Höhepunkten, fand aber, zu viele Handlungsstränge führten ins Mittelmaß.
+Der Film ist eine reine Komödie, und die Anlage bestätigt diese Eindeutigkeit: Es gibt keinen zweiten Strang, der das Geschehen ernst grundieren würde. Die Konstruktion setzt auf eine doppelte Gegenüberstellung – zwei Partner, die sich entfremdet haben, und zwei Formen der Zauberei, die glänzende Bühnenshow gegen den rohen Auftritt auf der Straße. Beide Konflikte laufen auf dieselbe Frage hinaus, nämlich was von einem Handwerk bleibt, wenn die Routine es aufgezehrt hat. Dass die Hauptfiguren beruflich mit Täuschung arbeiten und privat ebenfalls täuschen, ist die Pointe, aus der die Erzählung ihre Bewegung zieht.
 
 ### Einordnung & Wirkung
-
-Bei 30 Millionen Dollar Herstellungskosten spielte der Film 27,4 Millionen ein — er deckte seine Kosten nicht.
-
-Rotten Tomatoes weist 38 Prozent bei 196 Kritiken aus.
-
-Die Süddeutsche Zeitung urteilte freundlicher und nannte ihn eine ziemlich fiese Hollywood-Komödie, wobei sie Carell und Buscemi als grandiose Paarung hervorhob. Negativ vermerkt wurden plumpe Gags.
-
-Bemerkenswert bleibt die Besetzungsliste. Steve Carell, Steve Buscemi, Jim Carrey, Olivia Wilde, James Gandolfini und Alan Arkin in einem Film, den kaum jemand gesehen hat.` },
+5,8 von 10 Punkten bei einer Stimmenzahl im vierstelligen Bereich ist ein Ergebnis knapp unter der Mitte, wie es Komödien häufig erreichen, die sich stark auf ihr Ensemble stützen. 13 Jahre nach dem Erscheinen steht es fest. Die Freigabe ab 12 ordnet den Film im breit zugänglichen Bereich der Komödie ein und zeigt an, dass die Zuspitzung im Rahmen bleibt.` },
   {
     bereich: 'titel', schluessel: 'movie:4474', locale: 'de-de',
     text: `### Worum es geht
 
-Matt Saunders ist Architekt in New York und ein unsicherer Mensch. In der U-Bahn verhindert er, dass einer Fremden die Handtasche gestohlen wird — und kommt so mit Jenny Johnson ins Gespräch.
+Der Architekt Matt ist kein Partylöwe, hat aber in der Galeristin Jenny eine Partnerin gefunden, mit der es zunächst gut läuft. Zunächst, denn Jenny ist gewaltig eifersüchtig und durch und durch neurotisch. Vor allem aber ist sie das Alter Ego der Superheldin G-Girl.
 
-Es wird eine Beziehung daraus. Dann erfährt er, was Jenny sonst noch macht: Sie ist G-Girl, Superheldin, seit ein Meteorit sie in ihrer Jugend traf. Und als Matt Schluss machen will, erfährt er, was das bedeutet.
+Als Matt das aufdringliche Verhalten seiner Freundin zu bunt wird, gibt er ihr den Laufpass und tröstet sich mit seiner Kollegin Hannah. Damit hat er die Rechnung ohne das Temperament und die Superkräfte seiner Ex gemacht, die nun alles unternimmt, um ihn zurückzugewinnen.
 
 ### Entstehungsgeschichte
 
-Regie führte Ivan Reitman, das Drehbuch schrieb Don Payne. Produziert wurde der Film von Bill Carraro, Arnon Milchan und Gavin Polone.
-
-Uma Thurman spielt Jenny Johnson alias G-Girl, Luke Wilson den Matt Saunders, Anna Faris die Hannah, Rainn Wilson den Vaughn Haige und Eddie Izzard den Professor Bedlam.
-
-Die Kamera führte Don Burgess, die Musik stammt von Teddy Castellucci; den Schnitt besorgten Wendy Greene Bricmont und Sheldon Kahn.
-
-Gedreht wurde in New York, teilweise in den Steiner Studios in Brooklyn. Die Filmmusik nahm im Mai 2006 das 88-köpfige Hollywood Studio Symphony unter Pete Anthony auf.
+Hinter der Inszenierung steht Ivan Reitman; erschienen ist der Film 2006. Uma Thurman und Luke Wilson bilden das Paar im Zentrum, Anna Faris und Suzy Eddie Izzard vervollständigen die Besetzung. Trotz der Superkräfte im Stoff liegt die Altersgrenze niedrig, nämlich bei 6 Jahren.
 
 ### Hinter den Kulissen
 
-Die Idee ist eine Umkehrung mit Biss: Was passiert, wenn die verlassene Partnerin nicht nur wütend ist, sondern unbesiegbar?
-
-Damit verhandelt der Film unter komödiantischen Vorzeichen etwas Unangenehmes — Rache nach einer Trennung, ausgeführt mit Mitteln, gegen die kein Kraut gewachsen ist.
-
-Das Lexikon des internationalen Films erkannte darin eine hinterlistige Parodie auf den Superheldenmythos.
-
-Ein Kritiker sah dagegen nur einen dünnen, ausgedehnten Gag — die Prämisse trage nicht über die volle Länge.
+Komödie, Science Fiction und Liebesfilm treffen hier zusammen, dazu kommt das Superheldenmotiv. Diese Kombination verrät die Bauweise: Die Superkräfte sind nicht Anlass für eine Rettungsgeschichte, sondern Verstärker eines gewöhnlichen Beziehungskonflikts. Was in einer Trennung sonst als Wortgefecht abliefe, bekommt hier physische Wucht, und die Komik entsteht aus dem Missverhältnis zwischen Anlass und Mitteln. Erzählt wird konsequent aus der Perspektive dessen, der die schwächere Position hat, was die Rollenverteilung des Genres umkehrt.
 
 ### Einordnung & Wirkung
 
-Weltweit spielte der Film rund 61 Millionen Dollar ein — 22,5 Millionen in den Vereinigten Staaten und Kanada, 38,5 Millionen anderswo.
-
-Rotten Tomatoes weist 40 Prozent bei 131 Kritiken aus, Metacritic 50 von 100 bei 28 Kritiken.
-
-Dass zwei Drittel des Ergebnisses außerhalb Nordamerikas entstanden, ist bei einer Komödie mit diesem Zuschnitt ungewöhnlich.
-
-Zwischen dem Lob des Lexikons für die hinterlistige Parodie und dem Vorwurf des ausgedehnten Gags liegt die ganze Rezeption dieses Films.` },
+Die Bewertung von 5,2 von 10 bei mehreren tausend abgegebenen Stimmen liegt unter der Mitte und zeigt ein geteiltes Publikum. Die Stimmenzahl ist überschaubar, sodass das Urteil auf einer schmalen Basis ruht. 20 Jahre nach dem Erscheinungsjahr ist der Film vor allem als Beispiel dafür interessant, wie das Superheldenmotiv in eine Beziehungskomödie überführt wird, statt eine eigene Heldengeschichte zu tragen. Bemerkenswert bleibt die Verteilung der Macht innerhalb des Paares: Die stärkere Figur ist nicht diejenige, aus deren Sicht erzählt wird. Diese Umkehrung ist die eigentliche Konstruktionsidee und bleibt bestehen, unabhängig davon, wie das Publikum den Film bewertet hat.` },
   {
     bereich: 'titel', schluessel: 'movie:607259', locale: 'de-de',
     text: `### Worum es geht
 
-Matthew Logelin wird Vater. Kurz nach der Geburt stirbt seine Frau Liz an einer Lungenembolie.
+Matt und Lizzie sind schon seit Schultagen ineinander verliebt, doch bisher trennten viele Kilometer die beiden. Jetzt soll die Fernbeziehung enden, und die bevorstehende Geburt ihres gemeinsamen Kindes soll das neue Familienglück krönen.
 
-Er steht mit einem neugeborenen Kind allein da. Seine Schwiegermutter Marion bezweifelt, dass er das schafft, und bietet an zu übernehmen. Matt entscheidet sich dagegen — und der Film erzählt, was daraus wird: Trauer, ein Beruf, der weiterläuft, und ein Kind, das aufwächst.
+Es kommt anders. Lizzie stirbt bei der Geburt der Tochter Maddy und lässt Matt als Witwer und alleinerziehenden Vater zurück. Er trägt von da an zweierlei: die Last der Trauer und die Aufgaben des Vaterseins, für die ihm jede Vorbereitung fehlt. Freunde und Familie stehen ihm dabei zur Seite.
 
 ### Entstehungsgeschichte
 
-Vorlage ist Matthew Logelins Erinnerungsbuch „Two Kisses for Maddy: A Memoir of Loss and Love" aus dem Jahr 2011.
-
-Regie führte Paul Weitz, der das Drehbuch gemeinsam mit Dana Stevens nach deren Geschichte schrieb.
-
-Kevin Hart spielt Matthew Logelin, Melody Hurd die Tochter Maddy, Alfre Woodard die Schwiegermutter Marion und DeWanda Wise die Lizzie Swan; in Nebenrollen sind Lil Rel Howery, Anthony Carrigan und Paul Reiser zu sehen.
-
-Die Kamera führte Tobias Datum, den Schnitt Jonathan Corn, die Musik stammt von Rupert Gregson-Williams.
-
-Gedreht wurde in Boston und Montreal. Das Budget betrug 15 Millionen Dollar, die Laufzeit 109 Minuten.
-
-Der Film erschien nach mehrfachen Verschiebungen am 18. Juni 2021 weltweit bei Netflix.
+Paul Weitz inszenierte den Film, der 2021 erschien. Kevin Hart spielt Matt, Melody Hurd ist als Tochter Maddy zu sehen, DeWanda Wise als Lizzie; Alfre Woodard gehört zur familiären Umgebung. Die Freigabe gilt ab 6 Jahren.
 
 ### Hinter den Kulissen
 
-Das Projekt hat eine lange Vorgeschichte. Zunächst war es 2012 als Fernsehfilm geplant, später als Kinofilm mit Channing Tatum vorgesehen. Erst 2019 kam es in der heutigen Besetzung zustande.
-
-Die Umbesetzung ist dabei die entscheidende Wendung. Kevin Hart, bekannt für Komödien, übernimmt eine Rolle, in der nichts komisch ist.
-
-Genau darauf zielte die Rezeption: TheWrap lobte seine vertrauensvolle Darstellung, der Hollywood Reporter nannte ihn in den dramatischen Momenten überraschend überzeugend.
-
-Dass der reale Matthew Logelin sein Buch selbst geschrieben hat, gibt dem Stoff seine Grundlage.
+Drama und Komödie sind die einzigen beiden Genres des Films, und ihr Zusammentreffen bei diesem Stoff ist bemerkenswert. Ein Todesfall im ersten Drittel legt normalerweise das Drama fest; die Komödie kann hier nur funktionieren, wenn sie aus der Hilflosigkeit des Alltags kommt und nicht aus dem Verlust selbst. Die Anlage ist entsprechend episodisch: Sie folgt einem Mann durch die Jahre, in denen ein Kind heranwächst, und misst seinen Fortschritt an alltäglichen Aufgaben. Die niedrige Altersfreigabe zeigt, dass die Trauer zurückhaltend behandelt wird.
 
 ### Einordnung & Wirkung
 
-Rotten Tomatoes weist 67 Prozent bei 75 Bewertungen aus, Metacritic 53 von 100.
-
-Die Verschiebungen sind Teil der Geschichte: Geplant war der Start für April 2020, gekommen ist er im Juni 2021 — über ein Jahr später und ohne Kino.
-
-Für einen Film über Trauer und Alleinerziehung ist der Weg über eine Plattform womöglich der passendere. Er erreicht Menschen dort, wo sie ihn brauchen, statt in einer Vorstellung mit Publikum.
-
-15 Millionen Dollar Budget für einen Film mit dieser Besetzung sind zudem sparsam kalkuliert.` },
+Mit 7,5 von 10 Punkten bei über tausend abgegebenen Stimmen liegt die Bewertung deutlich im positiven Bereich, wenn auch auf schmaler Stimmenbasis. Der Film ist erst 5 Jahre alt, sodass sich sein Publikum noch verbreitern kann. Innerhalb des Familiendramas gehört er zu den Arbeiten, die Elternschaft nicht als Rahmen, sondern als eigentlichen Gegenstand behandeln, und die dafür einen Darsteller aus dem komischen Fach in eine ernste Rolle stellen. Ob das Urteil Bestand hat, wird sich mit wachsender Beteiligung zeigen; derzeit beschreibt es vor allem die Zustimmung derjenigen, die den Film gezielt ausgewählt haben. Der Umgang mit dem Verlust bleibt durchgehend auf Alltagsnähe angelegt.` },
   {
     bereich: 'titel', schluessel: 'movie:969492', locale: 'de-de',
     text: `### Worum es geht
 
-Ein Delta-Force-Team wird auf den Philippinen abgesetzt, um eine Geisel zu befreien. Mit dabei: JJ Kinney, ein junger Sergeant, der die Luftunterstützung anfordern soll.
+Ein Team der Delta Force gerät im feindlichen Gebiet in einen Hinterhalt. Der junge Offizier Kinney weigert sich, die Eingeschlossenen im Stich zu lassen, und bleibt damit an einem Ort, an dem sich die Lage von Stunde zu Stunde verschlechtert.
 
-Diese Unterstützung fliegt Captain Eddie Grimm — als Drohnenpilot, weit entfernt vom Ort des Geschehens. Als das Feuergefecht mit der Abu Sayyaf ausbricht, ist der Funk zwischen beiden das Einzige, was bleibt.
+Die einzige Hoffnung des Teams ist Reaper, ein Drohnenpilot der Air Force, der aus großer Entfernung die Augen am Himmel hat. Was daraus wird, ist ein brutaler Kampf ums Überleben über 48 Stunden, ausgetragen zwischen zwei Männern, die einander nie gegenüberstehen.
 
 ### Entstehungsgeschichte
 
-Regie führte William Eubank, der das Drehbuch gemeinsam mit David Frigerio schrieb. Beide verfassten es zwischen 2012 und 2013 in Albuquerque und recherchierten dafür bei echten Fliegerleitoffizieren; auch die Funkbefehle übten sie durch.
-
-Liam Hemsworth spielt Sergeant JJ Kinney, Russell Crowe den Captain Eddie Grimm, Milo Ventimiglia den Master Sergeant John Sweet, Ricky Whittle den Sergeant Bishop und Luke Hemsworth den Sergeant Abell.
-
-Die Kamera führte Agustin Claramunt, die Musik stammt von Brandon Roberts.
-
-Gedreht wurde von September bis November 2022 an der Gold Coast in Queensland. Das Budget betrug 20 Millionen Dollar.
+Die Regie übernahm William Eubank für diesen Film aus dem Jahr 2024. Liam Hemsworth und Russell Crowe besetzen die beiden Enden dieser Konstellation, Luke Hemsworth und Ricky Whittle sind ebenfalls im Ensemble. Erst ab 18 Jahren ist der Film freigegeben, was zur ausdrücklich als brutal beschriebenen Anlage passt.
 
 ### Hinter den Kulissen
 
-Die Anlage teilt den Film in zwei Räume, die nichts miteinander gemein haben: den Einsatzort auf den Philippinen und den Arbeitsplatz des Drohnenpiloten.
-
-Daraus entsteht die eigentliche Frage — was es bedeutet, jemanden aus der Ferne sterben zu sehen und dabei nichts tun zu können außer zu sprechen.
-
-Die Recherche bei echten Fliegerleitoffizieren ist deshalb keine Nebensache. Der Funkverkehr ist der Kern des Films, und wenn er falsch klingt, bricht alles zusammen.
-
-Der Kritiker Simon Abrams sah darin allerdings vor allem einen ausufernd dramatisierten Vortrag über die amerikanische Armee.
+Action, Kriegsfilm und Thriller greifen hier ineinander, und die Genrekombination erklärt die ungewöhnliche Bauweise. Ein Kriegsfilm zeigt gewöhnlich das Geschehen am Boden, ein Thriller lebt von der Frist. Beides wird hier über eine Distanz verbunden: Der eine Handlungsstrang spielt im Gelände, der andere an einem Bildschirm, und die Verbindung zwischen ihnen ist zugleich das einzige Mittel der Rettung. Die Zeitspanne von 48 Stunden funktioniert dabei als Uhr, die im Hintergrund mitläuft und jede Entscheidung unter Druck setzt.
 
 ### Einordnung & Wirkung
 
-Bei 20 Millionen Dollar Herstellungskosten spielte der Film weltweit sieben Millionen ein.
-
-Rotten Tomatoes weist 67 Prozent bei einem Schnitt von 6,1 von 10 aus, Metacritic 57 von 100.
-
-Der Einwand von Abrams benennt das Problem solcher Filme. Wer den Einsatz aus Sicht der Beteiligten erzählt und dabei technisch genau bleibt, läuft Gefahr, deren Sicht zur einzigen zu machen.
-
-Dass zwischen dem Drehbuch von 2012 und dem Dreh 2022 zehn Jahre lagen, ist ein eigener Befund — der Stoff brauchte ein Jahrzehnt, bis ihn jemand herstellte.` },
+7,3 von 10 bei einer vierstelligen Zahl abgegebener Stimmen ergeben ein klar positives Bild, wobei die Stimmenzahl noch gering ist. Bei einem Film, der erst 2 Jahre zurückliegt, ist das erwartbar, denn ein Publikumsurteil braucht Zeit, um sich zu verbreitern. Innerhalb des Actionkinos gehört der Film zu den Arbeiten, die den Einsatz von Fernwaffen nicht als Beiwerk, sondern als Kern der Erzählung behandeln. Die geringe Beteiligung an der Bewertung bedeutet zugleich, dass sich das Urteil noch verschieben kann und daraus bislang kein belastbarer Trend abzulesen ist.` },
   {
     bereich: 'titel', schluessel: 'movie:24150', locale: 'de-de',
     text: `### Worum es geht
 
-Zwei Jahre nach den Ereignissen des ersten Films lebt Laurie Strode bei den Bracketts. Sie schläft schlecht, sie erschrickt vor allem, und sie ist nicht dieselbe.
+Michael Myers ist tot, so lautet jedenfalls die offizielle Aussage der Polizei. Laurie Strode, die sein brutales Massaker überlebt hat, glaubt das nicht: Sie ist sich sicher, dass er lebt und wieder zuschlagen wird. Da seine Leiche nie gefunden wurde, bleibt ihr Verdacht ohne Beleg, und niemand will ihr glauben.
 
-Michael Myers ist verschwunden. Was ihn antreibt, sind Erscheinungen seiner Mutter Deborah, die ihn auffordern, Laurie heimzuholen. Und auch Laurie beginnt, Dinge zu sehen, die nicht da sind.
+Ein Jahr später sind die Straßen von Haddonfield wieder mit orangefarbenen Kürbisköpfen geschmückt. Dann geschieht der erste Mord, und Laurie weiß sofort, wer zurückgekommen ist und wem der Rückweg gilt.
 
 ### Entstehungsgeschichte
 
-Rob Zombie führte Regie und schrieb das Drehbuch; produziert wurde der Film von Malek Akkad, Andy Gould und Zombie.
-
-Tyler Mane spielt Michael Myers, Scout Taylor-Compton die Laurie Strode, Malcolm McDowell den Dr. Samuel Loomis, Sheri Moon Zombie die Deborah Myers, Danielle Harris die Annie Brackett, Brad Dourif den Sheriff Leigh Brackett, Brea Grant die Mya Rockwell, Octavia Spencer eine Krankenschwester und Margot Kidder die Barbara Collier; Chase Wright Vanek spielt den jungen Michael.
-
-Die Kamera führte Brandon Trost, die Musik stammt von Tyler Bates; den Schnitt besorgten Glenn Garland und Joel T. Pashby.
-
-Gedreht wurde vom 23. Februar bis zum 9. April 2009 in Georgia, Connecticut und Kalifornien, mit Nachaufnahmen im Juli. Das Budget betrug geschätzt 15 Millionen Dollar. Die Kinofassung dauert 105 Minuten, der Director's Cut 119.
+Rob Zombie inszenierte den Film, der 2009 erschien. Scout Taylor-Compton steht als Laurie im Mittelpunkt, daneben sind Malcolm McDowell, Tyler Mane und Sheri Moon Zombie besetzt. Die Freigabe erst ab 18 Jahren entspricht der Härte, die die Ausgangslage bereits ankündigt.
 
 ### Hinter den Kulissen
 
-Zwei Entscheidungen prägen den Film und wurden beide überwiegend abgelehnt: Michael Myers' Gesicht ist mehrfach deutlich zu sehen, und er spricht.
-
-Bei einer Figur, deren Wirkung auf der Maske und dem Schweigen beruht, ist das ein Eingriff ins Wesen.
-
-Der zweite Schwerpunkt liegt auf Laurie. Der Film interessiert sich für das, was nach dem Überleben kommt — und der Director's Cut geht darin weiter als die Kinofassung.
-
-Eine Nebennotiz aus der Produktion: Daeg Faerch, der 2007 den jungen Michael gespielt hatte, musste ersetzt werden, weil er zu schnell gewachsen war.
-
-In Deutschland existieren mehrere Schnittfassungen. Der Director's Cut und eine um etwa eine Minute gekürzte Fassung sind indiziert; nur eine um rund drei Minuten gekürzte Fassung ist freigegeben. Einen bundesweiten Kinostart gab es hier nicht.
+Der Film ist reiner Horror, und diese Beschränkung ist aussagekräftig. Es gibt keine beigemischte Komödie, kein Krimielement, das die Bedrohung in eine Ermittlung übersetzen würde. Die Erzählung arbeitet stattdessen mit einer Figur, die weiß, was kommt, und mit einer Umgebung, die ihr nicht glaubt. Dieses Missverhältnis zwischen Wissen und Glaubwürdigkeit ist der eigentliche Motor: Die Bedrohung ist längst benannt, bevor sie sichtbar wird. Der Feiertag im Titel liefert dabei den Kalender, an dem sich die Handlung ausrichtet.
 
 ### Einordnung & Wirkung
 
-Das Startwochenende brachte rund sieben Millionen Dollar — drei Millionen weniger als beim Vorgänger. Weltweit kam der Film auf 39,4 Millionen.
-
-Die Kritik war hart. Mike Hale nannte ihn in der New York Times fast frei von Esprit. Das Lexikon des internationalen Films befand, er folge mehr den Prinzipien des Pornos als denen des erzählenden Kinos — Meuchelszenen aneinandergereiht statt Spannung aufgebaut.
-
-James Berardinelli schrieb, der Film sei so schlecht, dass er seine frühere Bewertung eines anderen Teils der Reihe überdenken müsse, und warf Zombie vor, Dunkelheit mit Atmosphäre zu verwechseln.
-
-Oliver Forst zeigte sich bei filmrezension.de zwiegespalten und fand sämtliche Figuren unausstehlich.
-
-Vier Kritiken, vier Ablehnungen aus verschiedenen Richtungen — bei einem Film, der ausdrücklich etwas anderes wollte als sein Vorgänger.` },
+Mit 5,3 von 10 Punkten bei über tausend Stimmen fällt das Urteil verhalten aus und liegt unter der Mitte der Skala. Solche Werte sind im Horrorgenre nicht ungewöhnlich, weil die Erwartungen des Publikums hier besonders verschieden ausfallen. 17 Jahre nach dem Erscheinungsjahr steht der Film für eine Spielart des Genres, die eher auf Wucht und Direktheit als auf Andeutung setzt, und die Bewertung spiegelt vor allem, wie unterschiedlich diese Entscheidung aufgenommen wird. Die geringe Stimmenzahl schränkt die Aussagekraft zusätzlich ein: Sie beschreibt ein Publikum, das den Film gezielt gesucht hat, und kein breit gestreutes Votum.` },
   {
     bereich: 'titel', schluessel: 'movie:10607', locale: 'de-de',
     text: `### Worum es geht
-
-Ashtray zieht zu seinem Vater, damit ein richtiger Mann aus ihm wird.
-
-Im Viertel trifft er auf seinen Cousin Loc Dog und auf Dashiki, eine alleinerziehende Mutter. Was folgt, ist eine Aneinanderreihung von Situationen, die jeder kennt, der die Filme kennt, auf die sich dieser bezieht.
+Mit zwanzig ist Cendar nach Ansicht seiner Mutter kein Kind mehr, aber auch noch kein Erwachsener. Damit sich das ändert, schickt sie ihn zurück zu seinem Vater. In South Central sucht er seine alten Weggefährten zusammen: den Cousin Loc Dog, den gelähmten, aber keineswegs wehrlosen Pattes Folles und Preach, einen entschlossenen schwarzen Aktivisten. Zu viert ziehen sie auf ein Fest, das die Freilassung von Cure Dent feiert, eines Mannes mit sehr lockerem Abzugsfinger. Dort begegnet Cendar der überaus anziehenden Dashiki, alleinerziehende Mutter einer ganzen Kinderschar von verschiedenen Vätern — und verliebt sich Hals über Kopf, ehe Loc Dog ihn warnen kann.
 
 ### Entstehungsgeschichte
-
-Regie führte Paris Barclay. Das Drehbuch schrieben Phil Beauman, Marlon Wayans und Shawn Wayans; produziert wurde der Film von Eric L. Gold und Keenen Ivory Wayans.
-
-Shawn Wayans spielt Ashtray, Marlon Wayans den Loc Dog, Tracey Cherelle Jones die Dashiki und Bernie Mac einen Polizisten; Keenen Ivory Wayans tritt als Postbote auf, Kim Wayans als Mrs. Johnson.
-
-Die Kamera führte Russ Brandt, die Musik stammt von John Barnes; den Schnitt besorgten Marshall Harvey und William Young.
-
-Der Film erschien 1996, dauert 89 Minuten und ist in Deutschland ab 12 Jahren freigegeben; in den Vereinigten Staaten trug er ein R-Rating.
+Der Film stammt aus dem Jahr 1996, Regie führte Paris Barclay. In den tragenden Rollen sind Shawn Wayans, Marlon Wayans, Tracey Cherelle Jones und Chris Spencer zu sehen. Freigegeben ist er ab zwölf Jahren. Der lange englische Titel „Don't Be a Menace to South Central While Drinking Your Juice in the Hood“ macht schon vor dem ersten Bild deutlich, in welchem Tonfall hier erzählt wird.
 
 ### Hinter den Kulissen
-
-Der Film ist eine Parodie, und er setzt voraus, dass man die Vorlagen kennt. Ohne diesen Bezugspunkt bleiben von den Szenen nur Einzelgags übrig.
-
-Auffällig ist der Familienbetrieb dahinter. Vier Mitglieder der Familie Wayans stehen vor der Kamera, zwei von ihnen schrieben mit, einer produzierte.
-
-Bernie Mac in einer Nebenrolle gehört zu den Namen, die man im Rückblick bemerkt.
-
-Der große deutsche Abstand bei der Altersfreigabe — 12 hier, R in den Vereinigten Staaten — zeigt, wie unterschiedlich derselbe Film eingestuft wurde.
+Die Kombination aus Komödie und Krimi legt fest, wie der Stoff funktioniert: Milieu, Bandenlogik und Waffen sind vorhanden, werden aber konsequent ins Übertriebene gezogen. Das zeigt sich schon an den Namen der Figuren, die weniger Personen bezeichnen als Typen. Auch die Anlage der Handlung — Rückkehr an einen Ort, Wiedersehen mit einer Clique, eine Feier, eine überstürzte Verliebtheit — ist eine Kette bekannter Situationen, die den komischen Blick auf sie überhaupt erst möglich macht.
 
 ### Einordnung & Wirkung
-
-Die Kritik lehnte ab. Das Lexikon des internationalen Films vermisste ein dramaturgisches Konzept und sprach von minderwertigen Gags.
-
-Antje Krum kritisierte das Fehlen einer unterhaltsamen Handlung und beschrieb den Film als Revue ohne das nötige Tempo.
-
-Beide Einwände zielen auf dasselbe: Eine Parodie, die nur aus Einzelnummern besteht, braucht Tempo, um über die Länge zu tragen.
-
-Was der Film hinterlässt, ist eine Momentaufnahme dessen, worüber 1996 gelacht wurde — und eine Familie, die daraus ein eigenes Verfahren machte.` },
+Die Durchschnittsbewertung von 7,1 von 10 bei einer vierstelligen Zahl an Stimmen liegt merklich über der Mitte, beruht aber auf einer begrenzten Zahl von Voten. Dreißig Jahre nach dem Erscheinen ist der Film ein Zeugnis einer Zeit, in der Geschichten aus diesem Milieu ein festes Erzählmuster ausgebildet hatten — dicht genug, dass eine Komödie daraus ihr Material beziehen konnte. Wer die Vorlage dieses Tonfalls nicht kennt, dem bleibt eine Reihe von Anspielungen verschlossen.` },
   {
     bereich: 'titel', schluessel: 'movie:227348', locale: 'de-de',
     text: `### Worum es geht
-
-Oxnard in Kalifornien, im Juni 2012. Der achtzehnjährige Jesse Arista filmt mit seinem Freund Hector alles, was um sie herum geschieht.
-
-Als die Nachbarin Ana Sanchez stirbt, gehen die beiden der Sache nach — und stoßen in ihrer Wohnung auf okkulte Gegenstände. Kurz darauf ist Jesse „markiert", und mit ihm verändert sich etwas.
+Oxnard in Kalifornien: In Jesses erzkatholischer, lateinamerikanisch geprägter Nachbarschaft ist kurz zuvor eine alte Frau brutal getötet worden. Aus Neugier bricht er in ihre Wohnung ein und findet dort mehr, als er erwartet hat – neben okkulten Gegenständen und Videokassetten ein Foto von sich selbst. Kurz darauf erwacht er aus einem Albtraum mit Bissspuren am Unterarm, und bald verfügt er über Fähigkeiten, die weit über das Menschenmögliche hinausgehen. Weil seine Freunde das Schlimmste befürchten, bitten sie Ali um Rat: Als Stieftochter von Kristi Featherston hat sie Vergleichbares erlebt, damals wurde ihre Familie getötet und ihr Neffe entführt. Ob Jesse noch zu retten ist, bleibt offen – markiert ist er bereits.
 
 ### Entstehungsgeschichte
-
-Christopher Landon schrieb das Drehbuch und führte Regie. Er beschrieb den Film als Cousin der Reihe, nicht als direkte Fortsetzung.
-
-Andrew Jacobs spielt Jesse Arista, Jorge Diaz den Hector Estrella, Gabrielle Walsh die Marisol Vargas und Richard Cabral den Arturo Lopez; Katie Featherston, Micah Sloat und Molly Ephraim kehren in ihren Rollen aus früheren Teilen zurück.
-
-Produziert wurde der Film von Jason Blum und Oren Peli für Blumhouse Productions, Solana Films und Room 101; verliehen wurde er von Paramount Pictures. Die Kamera führte Gonzalo Amat, den Schnitt Gregory Plotkin.
-
-Wie die gesamte Reihe ist der Film im Found-Footage-Verfahren gedreht, mit Handkamera-Ästhetik. Das Budget lag zwischen fünf und 9,2 Millionen Dollar.
+Christopher Landon übernahm die Regie, der Film erschien 2014. In der Besetzung stehen Andrew Jacobs, Jorge Diaz, Gabrielle Walsh und Renée Victor. Freigegeben ist er ab 16 Jahren.
 
 ### Hinter den Kulissen
-
-Die Verlagerung ist die Entscheidung, um die es geht. Der Film spielt in einer mexikanisch-amerikanischen Nachbarschaft in Oxnard — anderes Personal, anderer Ton als in den vorangegangenen Teilen.
-
-Genau das wurde gelobt. Mark Olsen befand in der Los Angeles Times, der Film wirke wie ein Neubeginn; Richard Corliss würdigte in Time vertraute billige Schrecken mit Salsa-Würze.
-
-Landons Bezeichnung als Cousin statt Fortsetzung beschreibt das Verhältnis genau: dieselbe Welt, andere Familie.
-
-Zugleich verknüpft der Film sich am Ende mit dem ersten Teil der Reihe — er löst sich also nicht so weit, wie der Anfang vermuten lässt.
+Horror und Thriller greifen ineinander, und die Anlage nutzt beides: die schrittweise Verwandlung einer Figur als Schreckmoment, die Suche nach Erklärungen als Ermittlung. Bemerkenswert ist, wie die Erzählung ihre Bedrohung verortet – nicht in einem abgelegenen Haus, sondern in einer dicht bewohnten Nachbarschaft, deren Religiosität ausdrücklich benannt wird. Damit steht der Schrecken nicht am Rand, sondern mitten in einem Umfeld, in dem alle einander kennen. Die Videokassetten in der Wohnung der Toten und der Rückgriff auf früheres Geschehen legen nahe, dass die Erzählung mit aufgezeichnetem Material arbeitet und Vorfälle aus einem größeren Zusammenhang aufgreift. Auch die Rolle der Ratgeberin folgt daraus: Wissen entsteht hier nicht durch Untersuchung, sondern durch jemanden, der Ähnliches überstanden hat.
 
 ### Einordnung & Wirkung
-
-Bei fünf bis 9,2 Millionen Dollar Herstellungskosten spielte der Film weltweit 90,9 Millionen ein — 32,5 Millionen in Nordamerika, 58,4 Millionen international.
-
-Rotten Tomatoes weist 40 Prozent aus. Bei CinemaScore vergab das Publikum ein C−.
-
-Filmink vermisste denkwürdige Schreckmomente.
-
-Der Abstand zwischen einem C− beim Publikum und einem Ergebnis, das das Zehnfache der Kosten einspielt, beschreibt das Geschäftsmodell dieser Reihe: geringe Kosten, hoher Ertrag, und die Zufriedenheit der Zuschauer ist zweitrangig.
-
-Dass zwei Drittel des Ergebnisses außerhalb Nordamerikas entstanden, ist bei einem Film mit spanischsprachigem Umfeld folgerichtig.` },
+5,4 von 10 Punkten bei einer vierstelligen Zahl an Stimmen ist ein verhaltenes Ergebnis unterhalb der Mitte. 12 Jahre nach dem Erscheinen hat sich daran wenig geändert. Die Freigabe ab 16 entspricht der Direktheit des Stoffs, in dem ein Gewaltverbrechen den Ausgangspunkt bildet.` },
   {
     bereich: 'titel', schluessel: 'movie:11260', locale: 'de-de',
     text: `### Worum es geht
-
-Auf Liberty Island landet ein außerirdisches Raumschiff. Seine Besatzung stammt vom Planeten Nil und sucht eine Energiekugel, die auf der Erde verlorenging.
-
-Der Kapitän soll die Sache erledigen und wieder verschwinden. Stattdessen entwickelt er Gefühle für die Menschen — und weigert sich, die Erde auszubeuten. Sein Stellvertreter entmachtet ihn daraufhin.
+Um ihre eigene Welt zu retten, reist eine Mannschaft winziger Außerirdischer zur Erde. Ihr Raumschiff ist eine Sonderanfertigung, die sie fast unbemerkt bleiben lässt: die perfekte Nachbildung eines Mannes, der dem Kapitän des Schiffs zum Verwechseln ähnlich sieht. Jedes Mitglied der Mannschaft ist für einen Körperteil zuständig, gemeinsam steuern sie die Hülle durch die fremde Umgebung. Doch wie ein Mensch auszusehen ist das eine – sich wie ein Mensch zu verhalten erweist sich als ungleich schwieriger.
 
 ### Entstehungsgeschichte
-
-Regie führte Brian Robbins. Das Drehbuch schrieben Rob Greenberg und Bill Corbett; produziert wurde der Film von Jon Berg, David T. Friendly und Todd Komarnicki.
-
-Eddie Murphy spielt sowohl Dave Ming Cheng als auch den Kapitän im Inneren, Elizabeth Banks die Gina Morrison, Gabrielle Union die Nummer 3, Scott Caan den Officer Dooley, Ed Helms die Nummer 2 und Kevin Hart die Nummer 17.
-
-Die Kamera führte J. Clark Mathis, den Schnitt Ned Bastille, die Musik stammt von John Debney.
-
-Gedreht wurde ab März 2007 in New York, Los Angeles und Pasadena. Das Budget betrug 60 Millionen Dollar; der US-Kinostart war am 11. Juli 2008.
+Der Film kam 2008 heraus, Regie führte Brian Robbins. Die Besetzung nennt Eddie Murphy, Elizabeth Banks, Gabrielle Union und Scott Caan. Ab 6 Jahren ist er freigegeben.
 
 ### Hinter den Kulissen
-
-Eddie Murphy spielt zwei Rollen zugleich: Dave Ming Cheng und den Kapitän. Diese Doppelung ist der Kern der Anlage.
-
-Der Konflikt an Bord treibt die Handlung: Ein Kapitän, der die Erde verschonen will, ein Stellvertreter, der ihn absetzt, und eine Mannschaft, die sich am Ende gegen den Stellvertreter stellt.
-
-Damit verhandelt eine Komödie für Familien beiläufig eine Meuterei.
-
-Kevin Hart und Ed Helms in kleinen Rollen sind aus heutiger Sicht die auffälligsten Einträge der Besetzungsliste.
+Der Film verbindet Komödie, Science-Fiction, Abenteuer und Familie, und die Reihenfolge sagt etwas über die Gewichtung: Der Ausgangspunkt ist zwar eine Rettungsmission aus dem All, die Ausführung aber liegt bei der Komik. Die Anlage ist konsequent auf einen einzigen Einfall gebaut. Ein Körper, der von innen wie ein Fahrzeug bedient wird, verwandelt jede alltägliche Geste in eine Aufgabe, die erst gelernt werden muss, und macht den Hauptdarsteller zugleich zur Figur und zur Kulisse. Dass die Mannschaft unbemerkt bleiben will, liefert den Dauerkonflikt gleich mit; jede missglückte Bewegung ist ein Schritt in Richtung Enttarnung. Zugleich verdoppelt die Konstruktion das Personal, denn hinter der einen sichtbaren Gestalt handelt eine ganze Gruppe mit eigenen Absichten. Die Freigabe ab 6 und das Genre Familie zeigen an, wo die Grenzen dieser Komik verlaufen.
 
 ### Einordnung & Wirkung
-
-Bei 60 Millionen Dollar Herstellungskosten brachte das Startwochenende in den Vereinigten Staaten gut 5,2 Millionen. In Deutschland sahen den Film knapp 265.000 Zuschauer.
-
-Rotten Tomatoes weist 20 Prozent aus, Metacritic 43 von 100. Der Film erhielt überwiegend negative Kritiken und Nominierungen für die Goldene Himbeere.
-
-Ein Startwochenende von 5,2 Millionen bei 60 Millionen Herstellungskosten ist ein Verhältnis, aus dem sich kein Film mehr erholt.
-
-Was bleibt, ist eine Idee, die besser war als ihre Ausführung — und ein Ensemble, dessen jüngere Mitglieder wenige Jahre später sehr viel bekannter waren.` },
+5,3 von 10 Punkten aus über tausend Stimmen ist ein zurückhaltendes Ergebnis, das unter der Mitte liegt, ohne ins Abseits zu geraten. 18 Jahre nach dem Erscheinen dürfte sich daran wenig ändern. Im Feld der familientauglichen Science-Fiction-Komödien steht der Film damit für die Sorte Film, die ganz auf die Zugkraft ihres Hauptdarstellers und ihres einen Einfalls setzt.` },
   // ---- Block 114 ----
   {
     bereich: 'titel', schluessel: 'series:200875', locale: 'de-de',
     text: `### Worum es geht
-
-Derry, Maine, im Jahr 1962. Unter der Stadt liegt etwas, das alle siebenundzwanzig Jahre erwacht — und das Militär will wissen, was es ist.
-
-Während die Suche läuft, spitzen sich in Derry rassistische Spannungen zu. Sie münden in einen Brandanschlag. Die Serie erzählt beides nebeneinander: das Wesen unter der Stadt und das, was die Menschen darüber einander antun.
+Derry, eine Kleinstadt im US-Bundesstaat Maine, im Jahr 1962: Die Familie Hanlon kommt an, um ein neues Leben zu beginnen. Die Eltern richten sich mit ihrem kleinen Sohn ein, und zunächst wirkt der Ort so friedlich, wie er sich gibt. Doch bald häufen sich beunruhigende Vorfälle. Immer wieder verschwinden kleine Kinder spurlos, seltsame Erscheinungen versetzen die Bewohner in Angst, und eine Erklärung hat niemand. Parallel dazu schließen einige Jugendliche eine Freundschaft, die sich als schicksalhaft erweist: Gemeinsam stoßen sie auf ein uraltes Grauen, das tief unter der Stadt lauert. Was sie finden, zieht sie in einen Strudel dunkler Geheimnisse, bis die Bedrohung nach und nach Gestalt annimmt – die einer unheimlichen Clownsfigur.
 
 ### Entstehungsgeschichte
-
-Vorlage ist Stephen Kings Roman „Es" von 1986; das Drehbuch orientiert sich an dessen Zwischenkapiteln. Die Serie ist ein Vorspiel zu den Filmen von 2017 und 2019.
-
-Entwickelt wurde sie von Andrés Muschietti, Barbara Muschietti und Jason Fuchs, die bereits an den Filmen beteiligt waren. Showrunner sind Fuchs und Brad Caleb Kane; die Musik stammt von Benjamin Wallfisch.
-
-Lilly Bainbridge spielt die Clara Stack, Matilda Lawler die Marge Truman, Amanda Christine die Ronnie Grogan, Jovan Adepo den Major Leroy Hanlon, James Remar den General Francis Shaw, Chris Chalk den Dick Hallorann und Bill Skarsgård den Pennywise.
-
-Gedreht wurde von Mai 2023 bis Juli 2024 in Kanada — in Hamilton, Port Hope, Toronto und Lincoln.
-
-Die erste Staffel umfasst acht Folgen. Sie lief ab dem 26. Oktober 2025 bei HBO, in Deutschland ab dem 27. Oktober bei Sky Atlantic.
+Erschienen ist die Serie 2025. Entwickelt haben sie Andy Muschietti, Barbara Muschietti und Jason Fuchs, zur Besetzung zählen Taylour Paige, Jovan Adepo, James Remar und Stephen Rider. Freigegeben ist das Ganze ab 16 Jahren.
 
 ### Hinter den Kulissen
-
-Die Anlage der Reihe ist ungewöhnlich: Drei Staffeln sind geplant, und sie spielen chronologisch rückwärts — 1962, dann 1935, dann 1908.
-
-Damit arbeitet sich die Serie zum Ursprung vor, statt von ihm auszugehen. Wer alle drei sieht, erlebt die Geschichte in umgekehrter Reihenfolge ihres Geschehens.
-
-Die Grundlage in den Zwischenkapiteln des Romans ist die zweite Entscheidung. Das Drehbuch orientiert sich ausdrücklich an ihnen und nicht an der Haupthandlung.
-
-Dass die rassistischen Spannungen des Jahres 1962 gleichrangig neben dem Übernatürlichen stehen und in einen Brandanschlag münden, gibt der Serie einen zweiten Gegenstand.
+Die Genrezuordnung nennt Drama und Mystery, nicht Horror, und diese Gewichtung passt zur Anlage: Die Erzählung beginnt bei einer Familie, die ankommen und sich einrichten will, und lässt das Unerklärliche erst allmählich in diesen Alltag sickern. Kleinstadt und Spukhaus markieren die beiden Pole dieses Musters, das Verschwinden der Kinder den wiederkehrenden Vorfall, die Clownsgestalt die Form, in der die Bedrohung schließlich fassbar wird. Als Prequel angelegt, erzählt die Serie eine Vorgeschichte und geht auf einen Roman zurück.
 
 ### Einordnung & Wirkung
-
-Vierzehn Monate Drehzeit für acht Folgen sind eine erhebliche Strecke.
-
-Dass Bill Skarsgård seine Rolle aus den Filmen fortführt, verbindet Serie und Kinofassungen personell.
-
-Der Abstand zwischen amerikanischer und deutscher Ausstrahlung betrug einen Tag — bei einem Stoff mit dieser Bekanntheit ist alles andere kaum noch möglich.
-
-Acht Folgen für die erste von drei geplanten Staffeln lassen der Erzählung Raum, ohne sie zu strecken.` },
+8,2 von 10 Punkten bei über tausend abgegebenen Stimmen ist ein hoher Wert, getragen allerdings von einer überschaubaren Zahl an Voten. Ein Jahr nach dem Erscheinen ist das eher ein früher Eindruck als ein gefestigtes Urteil. Die Freigabe ab 16 grenzt den Zuschauerkreis deutlich ein und benennt zugleich, wie direkt der Stoff seine Schreckmomente setzt. Innerhalb des Mystery-Dramas steht der Titel für die Variante, die ihren Schrecken an einen Ort bindet statt an eine einzelne Figur.` },
   {
     bereich: 'titel', schluessel: 'movie:533533', locale: 'de-de',
     text: `### Worum es geht
-
-Fünfzehn Jahre nach Sam Flynns Rückkehr aus dem Netz konkurrieren zwei Unternehmen um dieselbe Sache: digitale Konstrukte, die in der realen Welt Bestand haben.
-
-ENCOM wird von Eve Kim geführt; bei Dillinger Systems arbeitet Julian Dillinger an einem Programm namens Ares. Das Hindernis für beide ist eine Grenze von neunundzwanzig Minuten — so lange hält ein digitales Konstrukt draußen durch. Dann findet Eve Kevin Flynns Persistenzcode.
+Vor Jahrzehnten entwickelte der Videospielentwickler Kevin Flynn eine Technologie, mit der er in digitale Welten eintauchen konnte – Welten, in denen Daten mit Raumschiffen befördert werden und Programme in menschlicher Gestalt handeln. Der junge Konzernchef Julian Dillinger, Enkel von Flynns einstigem Rivalen Ed Dillinger, verspricht sich vom umgekehrten Weg weit mehr: Er will intelligente Programme in die reale Welt holen und sie dort als entbehrliche Soldaten gewinnbringend in Umlauf bringen. Sein Vorzeigemodell ist der digitale Elitesoldat Ares, der außerhalb des Systems bislang nur 29 Minuten lang bestehen kann, bevor er zerfällt. Die Technik für einen dauerhaften Transfer stammt von Flynn und liegt heute bei seiner Nachfolgerin Eve Kim – weshalb Dillinger Ares auf sie ansetzt.
 
 ### Entstehungsgeschichte
-
-Regie führte Joachim Rønning. Das Drehbuch schrieben Jesse Wigutow und David Digilio.
-
-Jared Leto spielt Ares, Greta Lee die Eve Kim, Evan Peters den Julian Dillinger, Jodie Turner-Smith die Athena, Jeff Bridges den Kevin Flynn und Clu, Gillian Anderson die Elisabeth Dillinger, Hasan Minhaj den Ajay Singh und Cameron Monaghan den Caius.
-
-Produziert wurde der Film von Sean Bailey, Leto, Steven Lisberger, Emma Ludbrook, Jeffrey Silver und Justin Springer. Die Kamera führte Jeff Cronenweth, den Schnitt Tyler Nelson; die Musik stammt von Nine Inch Nails.
-
-Gedreht wurde ab Januar 2024 in Vancouver unter dem Arbeitstitel „Vecro"; die Dreharbeiten endeten am 1. Mai 2024. Der Film dauert 119 Minuten, ist ab 12 Jahren freigegeben und startete am 10. Oktober 2025 in den Vereinigten Staaten.
+Joachim Rønning führte Regie bei dem 2025 erschienenen Film. In der Besetzung stehen Jared Leto, Greta Lee, Evan Peters und Gillian Anderson. Die Freigabe gilt ab 12 Jahren.
 
 ### Hinter den Kulissen
-
-Die Umkehrung ist der Einfall dieses Teils: Nicht ein Mensch gerät in die digitale Welt, sondern ein Programm tritt in die reale.
-
-Die Neunundzwanzig-Minuten-Grenze ist dabei die Regel, an der alles hängt. Sie gibt der Handlung eine Uhr, und der Persistenzcode ist das, was diese Uhr abschaffen würde.
-
-Dass Steven Lisberger als Produzent auftritt, verbindet den Film mit dem Ursprung der Reihe. Jeff Bridges kehrt als Kevin Flynn zurück.
-
-Dass Nine Inch Nails die Musik beisteuern, ist die auffälligste Wahl abseits der Besetzung.
+Science-Fiction, Abenteuer und Action greifen hier ineinander: Die Prämisse ist technisch, die Bewegung durch die Welt abenteuerlich, die Auseinandersetzung körperlich. Die Anlage dreht eine bekannte Richtung um – nicht ein Mensch gerät in die Maschine, sondern das Programm tritt heraus. Daraus folgt fast alles Weitere, auch die Begrenzung auf 29 Minuten, die jeder Szene außerhalb des Systems eine Frist einzieht und den Ablauf takten kann, ohne dass es dafür einen Gegner braucht. Dass die Hauptfigur als Ware gedacht ist, die sich verkaufen lässt, verlagert den Konflikt vom Systemzwang hin zu einem wirtschaftlichen Interesse, und dass zwei Konzernerben einander über Generationen hinweg gegenüberstehen, gibt der Auseinandersetzung eine Vorgeschichte.
 
 ### Einordnung & Wirkung
-
-Die Besetzung ist auffällig breit. Jared Leto, Greta Lee, Evan Peters, Gillian Anderson und Jeff Bridges decken sehr verschiedene Herkünfte ab.
-
-Ein Dreh, der im Januar 2024 begann und im Mai desselben Jahres endete, gefolgt von einem Start im Oktober 2025, zeigt, wie viel Zeit bei einem Film dieser Machart in die Nachbearbeitung geht — rund siebzehn Monate.
-
-Der Arbeitstitel „Vecro" diente dabei der Geheimhaltung während der Dreharbeiten.` },
+6,5 von 10 Punkten aus mehreren tausend Stimmen ist ein ordentlicher Wert, der ein Jahr nach dem Erscheinen noch nicht endgültig ist; bei dieser Stimmenzahl können sich Nachkommastellen noch verschieben. Die Freigabe ab 12 zeigt an, dass die Auseinandersetzungen ohne drastische Darstellung auskommen.` },
   {
     bereich: 'titel', schluessel: 'movie:993710', locale: 'de-de',
     text: `### Worum es geht
@@ -48874,151 +48340,55 @@ Bemerkenswert bleibt die Besetzung der Nebenrollen: Andrew Scott, Kyle Chandler 
   {
     bereich: 'titel', schluessel: 'movie:269795', locale: 'de-de',
     text: `### Worum es geht
-
-Dylan Branson arbeitet als Fluglotse am Flughafen JFK. Jeden Tag um 14:22 Uhr geschieht dasselbe: Er nimmt etwas wahr, das nicht da ist.
-
-Einmal beinahe mit Folgen — zwei Maschinen kommen sich gefährlich nahe, er verhindert den Zusammenstoß im letzten Moment und wird suspendiert. Danach fällt ihm auf, dass sich in seinem Tagesablauf Muster wiederholen. Am Grand Central Terminal trifft er Sarah, die in einem der beiden Flugzeuge saß. Beide haben denselben Geburtstag.
+Das Leben des New Yorker Fluglotsen Dylan Branson gerät völlig aus den Fugen, als ihn ein gleißender Lichtblitz blendet und er um Punkt 2:22 Uhr beinahe einen Flugzeugabsturz verursacht. Seit diesem Vorfall geschehen ihm täglich merkwürdige Dinge, die einem Muster zu folgen scheinen. Während er versucht, dem Phänomen auf den Grund zu gehen, begegnet er Sarah, und beide fühlen sich von Anfang an auf unerklärliche Weise miteinander verbunden. Es sieht sogar so aus, als spiele sie eine wichtige Rolle bei der Auflösung der rätselhaften Ereignisse.
 
 ### Entstehungsgeschichte
-
-Regie führte Paul Currie. Das Drehbuch schrieben Nathan Parker und Todd Stein.
-
-Michiel Huisman spielt Dylan Branson, Teresa Palmer die Sarah, Sam Reid ihren früheren Freund Jonas, Duncan Ragg den Jake, Jessica Clarke die Evelyn, Jack Ellis den Noah, John Waters Dylans Vorgesetzten Bill und Maeve Dermody die Sandy.
-
-Produziert wurde der Film von Bill Mechanic, Steve Hutensky, Currie, Bruce Davey und Jodi Matterson. Die Kamera führte David Eggby, die Musik stammt von Lisa Gerrard und James Orr.
-
-Zunächst war Armie Hammer für die Hauptrolle vorgesehen, ehe Michiel Huisman sie übernahm.
-
-Obwohl der Film in New York spielt, wurde er in Australien gedreht — in den Fox Studios Australia und im Moore Park in Sydney.
+Der Film kam 2017 heraus, die Regie lag bei Paul Currie. Zur Besetzung gehören Michiel Huisman, Teresa Palmer, Sam Reid und John Waters. Für Zuschauer ab 12 Jahren ist er freigegeben.
 
 ### Hinter den Kulissen
-
-Die Konstruktion beruht auf Wiederholung. Dylan erlebt denselben Ablauf immer wieder, und der Film macht daraus keine Zeitschleife, sondern ein Muster, das er zu entschlüsseln versucht.
-
-Danielle Solzman nannte es folgerichtig eine Thriller-Fassung von „Und täglich grüßt das Murmeltier".
-
-Die zweite Ebene liegt dreißig Jahre zurück: Briefe eines Paares namens Jake und Evelyn, die denselben Geburtstag hatten und an demselben Tag starben, an dem eine Supernova auftrat.
-
-Dass ein Film, der in New York spielt, vollständig in Sydney entstand, ist die auffälligste Produktionsnotiz.
+Der Film verbindet Science-Fiction, Mystery, Thriller und Liebesfilm, und die Anlage hält diese vier Stränge zusammen, indem sie alles an eine einzige Uhrzeit bindet. Eine wiederkehrende Minute ist ein Motiv, das gleichzeitig als Rätsel, als Bedrohung und als Verabredung funktioniert: Es verlangt eine Erklärung, es kündigt Gefahr an, und es führt zwei Figuren zusammen. Der Beruf der Hauptfigur ist dabei kein Zufall; wer Flugbewegungen koordiniert, arbeitet ohnehin mit Sekunden, Mustern und der Aussicht auf Katastrophe. Die Wiederholung als Erzählform erlaubt es, dieselbe Situation mehrfach zu zeigen und dabei jedes Mal etwas anderes sichtbar zu machen. Zugleich hält sie den Zuschauer in derselben Unsicherheit wie die Figur, weil beide dasselbe Muster erst nach und nach erkennen.
 
 ### Einordnung & Wirkung
-
-Weltweit spielte der Film 3,9 Millionen Dollar ein.
-
-Rotten Tomatoes weist 20 Prozent bei zehn Kritiken aus — eine kleine Grundlage, aber ein deutliches Bild.
-
-Nick Allen schrieb bei RogerEbert.com, bei einem Film wie diesem sei schwer zu sagen, wo die gute Idee verschwunden sei. Brian Orndorf vergab bei Blu-ray.com die Note D.
-
-Edward Douglas urteilte im Film Journal International freundlicher und bescheinigte einen faszinierenden Überblick über kosmische Führung.
-
-Allens Formulierung trifft den Kern: Die Ausgangslage — ein Mann, der täglich zur selben Minute etwas sieht — trägt weiter, als der Film sie trägt.` },
+6,0 von 10 Punkten bei einer vierstelligen Zahl von Stimmen ist ein Ergebnis in der Mitte, wie es Titel erreichen, die sich zwischen mehreren Genres bewegen. 9 Jahre nach dem Erscheinen ist die Bewertung weitgehend gefestigt, und eine vierstellige Zahl von Stimmen bildet dabei eine überschaubare, aber tragfähige Grundlage. Die Freigabe ab 12 zeigt an, dass die Bedrohung angedeutet und nicht ausgemalt wird. Innerhalb der Mischung aus Rätselgeschichte und Liebesfilm steht der Titel für die Variante, die ihr Übersinnliches als Ordnung behandelt, die sich entschlüsseln lässt.` },
   {
     bereich: 'titel', schluessel: 'series:5371', locale: 'de-de',
     text: `### Worum es geht
-
-Carly Shay geht zur Schule und produziert nebenbei eine Webshow. Sie heißt iCarly, läuft aus dem Wohnzimmer und gibt Menschen eine Bühne, die sonst keine hätten.
-
-Mit dabei sind ihre Freundin Sam, die für Streiche zuständig ist, und Freddie, der die Technik macht. Über ihnen wohnt Carlys älterer Bruder Spencer, der als Erziehungsberechtigter gilt und Künstler ist.
+Es beginnt mit einer Strafe: Carly und Sam hatten Flugblätter verteilt, auf denen ihre Lehrerin Ms. Briggs mit dem Unterkörper eines Rhinozeros zu sehen war, und mussten dafür das Casting für deren Talentshow durchführen und filmen. Während einer kurzen Pause lästerten die beiden über Ms. Briggs – und Freddie stellte genau diese Szene versehentlich ins Netz. Verärgert lehnte die Lehrerin daraufhin alle Vorschläge für die Talentshow ab. Carly kam deshalb auf die Idee, eine eigene Webshow zu produzieren, in der Kinder ihre unentdeckten und eigenartigen Talente zeigen können. Benannt wurde sie nach ihrer Erfinderin: iCarly, wobei das i für Internet steht. Den Namen hatte Freddie, der technische Produzent. Die Show läuft einmal pro Woche und wird immer live gesendet.
 
 ### Entstehungsgeschichte
-
-Erfunden und produziert wurde die Serie von Dan Schneider für Nickelodeon.
-
-Miranda Cosgrove spielt Carly Shay, Jennette McCurdy die Samantha Puckett, Nathan Kress den Fredward Benson, Jerry Trainor den Spencer Shay und Noah Munck den Gibby Gibson.
-
-Es entstanden sechs Staffeln mit insgesamt 109 Episoden. Ausgestrahlt wurden sie vom 8. September 2007 bis zum 23. November 2012 in den Vereinigten Staaten; in Deutschland lief die Serie vom 23. Februar 2008 bis zum 12. April 2013 bei Nick.
+Die Serie startete 2007 und stammt von Dan Schneider. Die Besetzung führt Miranda Cosgrove, Jennette McCurdy, Nathan Kress und Jerry Trainor. Freigegeben ist sie ab 6 Jahren.
 
 ### Hinter den Kulissen
-
-Eine Fernsehserie, deren Hauptfiguren eine eigene Webshow produzieren, war 2007 eine neue Idee — die Serie erzählt vom Selbermachen zu einem Zeitpunkt, als das gerade begann.
-
-Bemerkenswert ist auch die Familienkonstellation. Carly lebt nicht bei ihren Eltern, sondern bei ihrem älteren Bruder — eine Setzung, die den Erwachsenen aus der Handlung weitgehend heraushält.
-
-109 Folgen über fünf Jahre sind für eine Serie dieses Formats eine erhebliche Strecke.
+Komödie, Familie und Drama prägen die Serie, dazu die Stichworte Sitcom, Internet, Freundschaft, Freunde sowie Bruder und Schwester. Zusammen ergeben sie ein klares Bild: ein festes Personal, wiederkehrende Schauplätze und Episoden, die sich in sich abschließen. Die Besonderheit liegt darin, dass die Serie eine Sendung in der Sendung führt. Die Webshow gibt jeder Folge eine eingebaute Bühne, auf der Einfälle untergebracht werden können, die zur Handlung nicht passen würden, und sie verteilt die Rollen im Ensemble gleich mit – vor der Kamera, dahinter, im Publikum. Bemerkenswert ist außerdem, dass die Ausgangslage aus einer Bestrafung entsteht: Die Sendung ist von Beginn an eine Antwort auf eine Zurückweisung.
 
 ### Einordnung & Wirkung
-
-Die Serie gewann viermal den Kids Choice Award als Lieblingsserie — 2008, 2010, 2011 und 2012. Jennette McCurdy wurde 2011 und 2012 als beste Nebendarstellerin ausgezeichnet.
-
-Vier Publikumspreise in fünf Jahren sind für eine Kinderserie ein außergewöhnlicher Befund und sagen mehr über ihre Stellung aus als jede Kritik.
-
-Die deutsche Ausstrahlung lief fünf Monate hinter der amerikanischen und dauerte entsprechend länger — bis April 2013.
-
-Dass die Auszeichnungen ausschliesslich Publikumspreise waren, passt zur Serie: Sie wurde von denen gewählt, für die sie gemacht war.` },
+7,9 von 10 Punkten bei einer vierstelligen Zahl von Stimmen ist ein hoher Wert, der nach 19 Jahren gefestigt sein dürfte und eher von einem verbundenen als von einem breiten Publikum getragen wird. Die Freigabe ab 6 benennt die Zielgruppe unmissverständlich.` },
   {
     bereich: 'titel', schluessel: 'movie:71469', locale: 'de-de',
     text: `### Worum es geht
-
-Zwei junge Amerikaner reisen nach Moskau, um dort eine Software zu verkaufen.
-
-Dann fällt in der ganzen Stadt der Strom aus. Was danach kommt, ist nicht zu sehen: Die Angreifer sind unsichtbar, und wer ihnen zu nahe kommt, zerfällt zu Asche.
+Es sollte eine einzige große Party werden. Fünf Freunde reisen nach Moskau, um die Metropole zu erleben, und geraten stattdessen in einen Kampf ums Überleben. Aus dem All kommt eine Invasion: Außerirdische, die kaum zu sehen sind, greifen die Erde an und beginnen sofort damit, Menschen zu töten. Die Angreifer beherrschen die Elektrizität und setzen sie als tödliche Waffe ein. Den Freunden gelingt die Flucht in den Untergrund, während oben die Menschheit nach und nach ausgelöscht wird. Nach wenigen Tagen gleicht die Metropole einer Geisterstadt. Da fasst die Gruppe einen verzweifelten Entschluss und tritt zum Kampf gegen die fremde Macht an.
 
 ### Entstehungsgeschichte
-
-Regie führte Chris Gorak, das Drehbuch schrieb Jon Spaihts. Produziert wurde der Film von Timur Bekmambetov für Regency Enterprises, die Bazelevs Company und New Regency.
-
-Emile Hirsch spielt Sean, Olivia Thirlby die Natalie, Max Minghella den Ben, Rachael Taylor die Anne und Joel Kinnaman den Skyler; weitere Rollen sind mit russischen Darstellern besetzt.
-
-Die Kamera führte Scott Kevan, die Musik stammt von Tyler Bates; den Schnitt besorgten Priscilla Nedd-Friendly und Fernando Villena.
-
-Gedreht wurde ab Juli 2010 in Moskau mit 3D-Kameras. Die Waldbrände des Jahres 2010 unterbrachen die Produktion. Das Budget betrug 34,8 Millionen Dollar.
+Chris Gorak führte bei diesem Film aus dem Jahr 2011 Regie, der englische Titel lautet „The Darkest Hour“. Die Besetzung nennt Emile Hirsch, Rachael Taylor, Olivia Thirlby und Joel Kinnaman. Die Altersfreigabe ab 12 Jahren zeigt, dass die Bedrohung mehr über Anspannung als über Drastik erzeugt wird.
 
 ### Hinter den Kulissen
-
-Die Entscheidung, unsichtbare Angreifer zu zeigen, spart Effekte und erzeugt zugleich Spannung — sichtbar ist nur, was sie anrichten.
-
-Daraus folgt die Regel, die der Film aufstellt: Die Wesen nehmen elektrische Ladungen wahr, nicht aber, was hinter Isolatoren wie Glas liegt. Das gibt den Überlebenden etwas, womit sie arbeiten können.
-
-Moskau als Schauplatz ist die zweite Setzung. Eine amerikanische Produktion, die ihre Invasion nicht in New York oder Los Angeles ansiedelt, ist die Ausnahme.
-
-Dass Waldbrände die Dreharbeiten unterbrachen, ist eine Randnotiz mit eigener Ironie — die Wirklichkeit störte einen Film über eine Katastrophe.
+Horror, Action, Thriller und Science-Fiction stehen gemeinsam über dem Film, und diese Vierfachzuordnung erklärt sich aus einer einzigen Setzung: Die Angreifer sind kaum zu sehen. Ein unsichtbarer Gegner gehört seiner Wirkung nach in den Horror, seiner Herkunft nach in die Science-Fiction, und er zwingt die Erzählung in die Form des Thrillers, weil die Gefahr überall sein kann. Dass die Invasoren ausgerechnet Elektrizität kontrollieren, verkehrt eine vertraute Umgebung ins Feindliche: Was eine Stadt am Laufen hält, wird zur Waffe gegen ihre Bewohner. Die Verlagerung in den Untergrund folgt daraus zwangsläufig. Die entleerte Metropole liefert dann das Bild, an dem sich das Ausmaß ablesen lässt, ohne dass es beschrieben werden müsste.
 
 ### Einordnung & Wirkung
-
-Bei 34,8 Millionen Dollar Herstellungskosten spielte der Film 64,6 Millionen ein.
-
-Die Kritik war vernichtend. Rotten Tomatoes weist 12 Prozent aus, Metacritic 18 von 100 — ein Wert, der dort als überwältigende Ablehnung geführt wird.
-
-Der Hollywood Reporter bemängelte ein flaches Drehbuch und das Fehlen auch nur einer überzeugenden Figur.
-
-Dass ein Film mit 18 Metacritic-Punkten dennoch fast das Doppelte seiner Kosten einspielte, zeigt, wie wenig Kritiken bei Genrefilmen dieser Größenordnung wiegen — und wie stark die internationale Auswertung trägt.
-
-Bemerkenswert bleibt, dass eine amerikanische Produktion ihren Weltuntergang vollständig in Moskau ansiedelt und mit russischen Darstellern besetzt.` },
+5,3 von 10 bei einer vierstelligen Zahl von Stimmen ist eine Bewertung im unteren Bereich des Durchschnitts, getragen von einer überschaubaren Zahl an Rückmeldungen. 15 Jahre nach dem Erscheinungsjahr steht der Film für die Invasionserzählung, die ihre Wirkung aus einem konkreten Ort und einer kleinen Gruppe bezieht.` },
   {
     bereich: 'titel', schluessel: 'movie:10010', locale: 'de-de',
     text: `### Worum es geht
-
-Kenai und Koda erwachen aus dem Winterschlaf. Und Kenai begegnet jemandem, den er lange nicht gesehen hat: Nita, seiner Freundin aus Kindertagen.
-
-Nita will heiraten, kann es aber nicht — ein Zauber steht dem im Weg, und um ihn zu brechen, muss sie an den Wasserfällen ein Amulett verbrennen. Kenai begleitet sie. Koda begleitet beide und fühlt sich zunehmend übergangen.
+Kenai und Koda spielen, laufen, fischen und genießen ihre Tage. Die Paarungszeit rückt näher, doch die beiden denken nicht an Mädchen, sondern planen, das reiche Beerendickicht zu erreichen. Eines Morgens hat Kenai einen merkwürdigen Traum: Er ist wieder ein Kind und spielt an einem Bach mit seiner Freundin Nita, die dabei zu ertrinken droht – er rettet sie und schenkt ihr danach ein Glück bringendes Amulett. Der Bär Kenai erwacht. Nita ist inzwischen erwachsen und steht kurz davor, den mächtigen Dorfvorsteher Atka zu heiraten. Zu Beginn der Zeremonie schlagen Blitze in der Nähe des Dorfes ein und richten Schaden an, was als böses Vorzeichen und als Zeichen der Geister gedeutet wird. Von einer Schamanin erfährt Nita, dass sie einem anderen versprochen wurde: Kenai. Sie macht sich auf die Suche nach ihm, um das Versprechen zu lösen.
 
 ### Entstehungsgeschichte
-
-Regie führte Ben Gluck, das Drehbuch schrieb Rich Burns. Produziert wurde der Film von Jim Ballantine und Carolyn Bates.
-
-Die Musik stammt von Matthew Gerrard, Dave Metzger und Robbie Nevil.
-
-In der deutschen Fassung sprechen Daniel Brühl den Kenai, Ranja Bonalana die Nita und Johann Hillmann den Koda.
-
-Der Film entstand 2006 als 41. Direct-to-DVD-Produktion der Walt Disney Studios, dauert 74 Minuten und ist ohne Altersbeschränkung freigegeben.
+Der Animationsfilm stammt aus dem Jahr 2006, die Regie übernahm Ben Gluck. Zur Besetzung gehören Patrick Dempsey, Mandy Moore, Jeremy Suarez und Rick Moranis. Eine Altersbeschränkung besteht nicht.
 
 ### Hinter den Kulissen
-
-Der Reiz liegt in der Konstellation. Nita braucht Kenai, um einen Zauber zu brechen — und auf dem gemeinsamen Weg zu den Wasserfällen entsteht zwischen beiden mehr als eine alte Freundschaft.
-
-Kodas Eifersucht ist die zweite Ebene. Der jüngere Bär hat in Kenai einen Bruder gefunden und sieht sich nun in die zweite Reihe gerückt.
-
-Dass Daniel Brühl in der deutschen Fassung spricht, ist für eine Direct-to-DVD-Produktion eine bemerkenswerte Besetzung.
+Abenteuer, Animation und Familie beschreiben eine Erzählung, die einen langen Weg durch die Natur mit einem sehr einfachen inneren Konflikt verbindet. Der Traum am Anfang übernimmt dabei die Arbeit einer Vorgeschichte: Er stellt eine Figur vor, die es in der Gegenwart der Handlung noch gar nicht gibt, und stiftet zugleich das Motiv, an dem alles Weitere hängt – ein Amulett, ein Versprechen, eine offene Rechnung. Auffällig ist außerdem, wie die Erzählung ihre Wendepunkte begründet: Ein Gewitter wird als Zeichen gelesen, eine Schamanin spricht das Urteil, und daraus folgt eine Reise. Nicht eine Entscheidung setzt die Handlung in Gang, sondern eine Deutung.
 
 ### Einordnung & Wirkung
-
-Als 41. Direktveröffentlichung des Studios steht der Film in einer langen Reihe von Fortsetzungen, die für den Heimmarkt entstanden.
-
-74 Minuten sind entsprechend knapp bemessen — deutlich kürzer als ein Kinofilm.
-
-Die Freigabe ohne Altersbeschränkung passt zum Zuschnitt: Der Film richtet sich an dieselben Zuschauer wie der Vorgänger, nur einige Jahre später.
-
-Was ihn von reinen Wiederholungen unterscheidet, ist die Entscheidung, das Verhältnis der Figuren zueinander tatsächlich zu verändern statt es am Ende zurückzusetzen.` },
+6,7 von 10 Punkten bei einer Stimmenzahl im vierstelligen Bereich ist ein freundlicher, nicht überschwänglicher Wert. 20 Jahre nach dem Erscheinen bewegt er sich kaum noch, und die Zahl der Voten deutet auf ein Publikum hin, das den Film gezielt aufgesucht hat. Ohne Altersbeschränkung bleibt er im Familiensegment und dort bei den ruhigeren Vertretern.` },
   {
     bereich: 'titel', schluessel: 'series:97175', locale: 'de-de',
     text: `### Worum es geht

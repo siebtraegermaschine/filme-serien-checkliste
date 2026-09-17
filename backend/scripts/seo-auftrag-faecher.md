@@ -63,7 +63,8 @@ ausgewiesen“, nicht „wird als Regie geführt“, nicht „die Schlagwörter 
 „Regie führte …“, Motive direkt in den Satz einbauen („Weihnachten bildet den Rahmen“).
 Pruefe vor der Abgabe, dass keines dieser Woerter vorkommt: Datensatz, Inhaltsangabe,
 verzeichnet, hinterlegt, eingetragen, vermerkt, Schlagwort, Schlagwörter, angegeben,
-ausgewiesen, Angabe.
+ausgewiesen, Angabe — und „Beschreibung“ als Verweis auf die Handlungsangabe („lässt die
+Beschreibung offen“, „wie es die Beschreibung formuliert“). Stattdessen: „bleibt hier offen“.
 
 ZEIT- UND EPOCHENANGABEN
 Nenne Epochen so, wie der Datensatz sie nennt. Steht dort „viktorianisch", schreibe
