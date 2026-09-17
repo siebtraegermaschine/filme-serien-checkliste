@@ -119,6 +119,13 @@
   ob EIN Opt-in für beide Mail-Arten trägt oder es getrennte braucht, ist
   ausdrücklich Anwaltsfrage.
 
+- **Google Analytics mit Cookie-Banner** (17. September 2026 gebaut): Einwilligung
+  nach § 25 TDDDG, Übermittlung an Google LLC (USA, DPF), Aufbewahrung 14 Monate,
+  Abschnitte 3/4/10/11 der Datenschutzerklärung. Prüfen lassen: Wortlaut,
+  Banner-Gestaltung (Ablehnen gleichwertig), ob das eigene Cookie `mt_anon`
+  (bisher ohne Einwilligung, „Option a" vom 14.08.) jetzt ebenfalls unter das
+  Banner gehört.
+
 ## Bewusst NICHT verfolgt
 
 - **Affiliate-Links** (Amazon & Co.): brächte Einnahmen, machte die App aber

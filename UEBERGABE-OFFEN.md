@@ -20,6 +20,20 @@ aber kein Arbeitsauftrag mehr.
 Abschnitt 1, 2 und 6, was man vorher wissen sollte. Die Abschnitte 0 bis 2 stehen
 nach Datum, das Neueste zuerst.
 
+> **Neu am 17.09.2026: Google Analytics mit Cookie-Banner auf allen Seiten.**
+> Messstelle `G-478EZLZ8NV`. Banner und Google-Tag stecken zusammen in
+> `/consent.js`; jede HTML-Seite im Wurzelordner und das SEO-Grundgerüst
+> (`seoRender.js`) binden sie im `<head>` ein, `backend/test/consent.test.js`
+> erzwingt das auch für künftige Seiten. **Google lädt erst nach
+> „Zustimmen"** (Consent Mode „basic", strenger als CouchUltras); Wahl in
+> `localStorage` `mt.consent`, Widerruf über „Cookie-Einstellungen" in jeder
+> Fußzeile löscht die `_ga`-Cookies. Neue Datei im Wurzelordner ⇒ im
+> `backend/Dockerfile` einzeln kopiert. Datenschutzerklärung DE/EN
+> (Abschnitte 3, 4, 10, 11) umgeschrieben — gehört in die Anwaltsprüfung
+> (3.1). **In der GA-Property von Hand zu setzen:** Datenaufbewahrung
+> 14 Monate, Google-Signale aus, Werbe-Personalisierung aus — so steht es in
+> der Datenschutzerklärung.
+
 > **Neu am 16.09.2026: Analytics-Fenster für das Betreiber-Konto.** Im
 > Menü rechts oben steht unter „Einstellungen" der Punkt „Analytics" — nur
 > sichtbar für `c.neubauer@digital-wings.com` (`ANALYTICS_EMAIL`), nach dem

@@ -19,6 +19,8 @@
   a { color: inherit; }
   code { background: #f2f2f2; padding: 1px 5px; border-radius: 4px; }
 </style>
+<!-- Cookie-Banner + Google Analytics (nur nach Zustimmung), siehe /consent.js -->
+<script src="/consent.js" defer></script>
 </head>
 <body>
 <h1>Datenschutzerklärung</h1>
@@ -54,7 +56,7 @@
   <li><strong>Angaben aus dem Einstieg und Kinoauswahl:</strong> Vorbelegung deiner Filter, passendere Vorschläge und Weiterentwicklung der App – Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung), soweit sie unmittelbar der Nutzung dienen, im Übrigen Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse). Zusätzlich fließen sie in die anonymen Zusammenfassungen nach Abschnitt 9 ein.</li>
   <li><strong>Verbesserung des Dienstes:</strong> Auswertung von Bewertungen in zusammengefasster Form, um Empfehlungen und Katalogpflege zu verbessern – Art. 6 Abs. 1 lit. f DSGVO.</li>
   <li><strong>Anonyme Bewertungsstatistiken</strong> (auch zur Weitergabe an Dritte): Art. 6 Abs. 1 lit. f i. V. m. Art. 5 Abs. 1 lit. b DSGVO – siehe Abschnitt 9.</li>
-  <li><strong>Reichweitenmessung:</strong> zusammengefasste Auswertung der Nutzung (Aufrufe, Wiederkehr, angenommene Einladungen, gemeinsame Abstimmungen), um zu verstehen, ob und wie die App genutzt wird, und sie zu verbessern – Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse). Keine Profilbildung, keine Weitergabe, keine Dienste Dritter – siehe Abschnitt 4.</li>
+  <li><strong>Reichweitenmessung:</strong> zusammengefasste Auswertung der Nutzung (Aufrufe, Wiederkehr, angenommene Einladungen, gemeinsame Abstimmungen), um zu verstehen, ob und wie die App genutzt wird, und sie zu verbessern – mit unserer eigenen Zählung auf Grundlage unseres berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO) und, <strong>nur mit deiner Einwilligung</strong> über das Cookie-Banner, zusätzlich mit Google Analytics (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Keine Profilbildung für eigene Zwecke, keine Werbung – siehe Abschnitt 4.</li>
 </ul>
 
 <h2>4. Cookies und Reichweitenmessung</h2>
@@ -81,9 +83,9 @@
 </p>
 <p>
   Was ausdrücklich <strong>nicht</strong> passiert: Wir bilden keine Werbe- oder Interessenprofile,
-  verfolgen dich nicht über andere Websites hinweg, geben die Kennung an niemanden weiter und
-  binden keine Analysedienste Dritter ein (kein Google Analytics o. Ä.). Die Auswertung läuft
-  ausschließlich auf unserem eigenen Server in Deutschland.
+  verfolgen dich nicht über andere Websites hinweg und geben die Kennung an niemanden weiter. Diese
+  eigene Auswertung läuft ausschließlich auf unserem eigenen Server in Deutschland. Google Analytics
+  (nächste Absätze) kommt nur hinzu, wenn du im Cookie-Banner zustimmst.
 </p>
 <p>
   Das Cookie ist HTTP-only und läuft nach <strong>sechs Monaten</strong> ab. Du kannst es jederzeit
@@ -106,6 +108,51 @@
   Interesse an einer Reichweitenmessung ohne Wiedererkennung (Art. 6 Abs. 1 lit. f DSGVO); da dabei
   nichts auf deinem Gerät gespeichert oder ausgelesen wird, ist keine Einwilligung nach § 25 TDDDG
   erforderlich.
+</p>
+<p>
+  <strong>Google Analytics – nur mit deiner Einwilligung (seit September 2026):</strong> Zusätzlich
+  setzen wir den Analysedienst <strong>Google Analytics</strong> der Google Ireland Limited, Gordon
+  House, Barrow Street, Dublin 4, Irland, ein (zusammen mit der Muttergesellschaft Google LLC,
+  1600 Amphitheatre Parkway, Mountain View, CA 94043, USA) – auf allen Seiten von movietaste.de,
+  also in der App wie auf den Film-, Serien- und Themenseiten. Beim ersten Besuch fragt dich ein
+  Cookie-Banner. <strong>Solange du nicht auf „Zustimmen“ tippst, wird Google Analytics gar nicht
+  geladen</strong>: Es wird dann keine Verbindung zu Google aufgebaut, kein Cookie gesetzt und nichts
+  an Google übermittelt. Deine Wahl speichern wir nur in deinem Browser (Local Storage,
+  Eintrag <code>mt.consent</code>), damit das Banner nicht bei jedem Aufruf erscheint.
+</p>
+<p>
+  <strong>Erst mit deiner Zustimmung</strong> lädt dein Browser das Google-Skript. Google Analytics
+  setzt dann eigene Cookies (<code>_ga</code> und <code>_ga_&lt;Kennung&gt;</code>) mit einer
+  zufälligen Geräte-/Browser-Kennung und erhebt die aufgerufenen Seiten und deren Adresse, den
+  Zeitpunkt, groben technischen Kontext (Gerätetyp, Betriebssystem, Browser, Bildschirmgröße,
+  Sprache), die verweisende Seite, Interaktionen auf der Seite (etwa Scrollen oder Klicks auf
+  externe Links) sowie eine grobe, aus der IP-Adresse abgeleitete Standortangabe (Land, Region,
+  Stadt); die IP-Adresse selbst protokolliert oder speichert Google Analytics nach Angabe von Google
+  nicht. Daraus erstellt Google für uns zusammengefasste Berichte darüber, wie viele Geräte die Seiten
+  nutzen, wie sie darauf gelangen und wiederkommen. Google-Signale und die Personalisierung von
+  Werbeanzeigen sind für unsere Messstelle <strong>ausgeschaltet</strong>; die Daten werden nicht
+  mit Werbeprofilen verknüpft und nicht für Google Ads genutzt. Rechtsgrundlage ist deine
+  Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG).
+</p>
+<p>
+  <strong>Widerruf:</strong> Du kannst deine Einwilligung jederzeit mit Wirkung für die Zukunft
+  widerrufen – über den Link „Cookie-Einstellungen“ im Fußbereich jeder Seite und dort
+  „Ablehnen“. Wir schalten Google Analytics dann ab und löschen die Google-Analytics-Cookies in
+  deinem Browser. Die Cookies laufen andernfalls nach spätestens 2 Jahren ab; die bei Google
+  gespeicherten Ereignisdaten löscht Google nach der von uns eingestellten Aufbewahrungsdauer von
+  <strong>14 Monaten</strong>.
+</p>
+<p>
+  <strong>Übermittlung in die USA:</strong> Mit der Nutzung ist eine Übermittlung an Google LLC in
+  die USA verbunden. Google LLC ist unter dem EU-U.S. Data Privacy Framework zertifiziert
+  (<a href="https://www.dataprivacyframework.gov/" target="_blank" rel="noopener">dataprivacyframework.gov</a>);
+  die Übermittlung stützt sich daher auf den Angemessenheitsbeschluss der Europäischen Kommission
+  (Art. 45 Abs. 1 DSGVO). Ergänzend hat Google in seinen Auftragsverarbeitungsbedingungen die
+  Standardvertragsklauseln der Europäischen Kommission vereinbart (Art. 46 Abs. 2 lit. c DSGVO).
+  Google verarbeitet die Daten für uns als Auftragsverarbeiter. Mehr dazu in der
+  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>
+  und den
+  <a href="https://support.google.com/analytics/answer/6004245" target="_blank" rel="noopener">Hinweisen zu Google Analytics</a>.
 </p>
 
 <h2>5. Hosting</h2>
@@ -255,7 +302,8 @@
 <p>
   Die einzelnen Ereignisse der Reichweitenmessung (Abschnitt 4) löschen wir spätestens nach
   <strong>14 Monaten</strong> – lang genug für den Vergleich mit dem Vorjahresmonat, danach
-  ohne Nutzen. Die daraus gebildeten Wochen-Zusammenfassungen enthalten nur noch Summen und
+  ohne Nutzen. Dieselbe Frist von 14 Monaten haben wir für die Ereignisdaten bei Google Analytics
+  eingestellt (nur bei erteilter Einwilligung, siehe Abschnitt 4). Die daraus gebildeten Wochen-Zusammenfassungen enthalten nur noch Summen und
   Durchschnitte ohne jede Kennung; sie sind keine personenbezogenen Daten mehr und bleiben
   erhalten.
 </p>
@@ -279,7 +327,9 @@
   Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17),
   Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch
   (Art. 21) bezüglich deiner personenbezogenen Daten. Wende dich dazu an die oben genannte
-  Kontaktadresse.
+  Kontaktadresse. Eine erteilte Einwilligung (etwa für Google Analytics) kannst du jederzeit mit
+  Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3 DSGVO) – am einfachsten über
+  <a href="#" data-cookie-einstellungen>Cookie-Einstellungen</a>.
 </p>
 <p>
   <strong>Konto selbst löschen:</strong> Unter „Einstellungen“ &rarr; „Konto löschen“ kannst du

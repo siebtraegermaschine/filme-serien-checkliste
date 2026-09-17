@@ -31,7 +31,9 @@ RUN cd backend && npm ci --omit=dev
 # *.json bewusst einzeln (kein Glob): package.json & Co. gehoeren nicht in
 # den Auslieferungsordner. Wer eine neue Wurzel-JSON ergaenzt, muss sie HIER
 # nachtragen -- das Manifest fehlte zunaechst (20.08.) und lieferte still 404.
-COPY *.html *.css *.png *.svg manifest.json robots.txt ./
+# consent.js (17.09.2026) ebenso einzeln: kein *.js-Glob, sonst kaemen die
+# Wurzel-Skripte mit ins Image. backend/test/consent.test.js prueft die Zeile.
+COPY *.html *.css *.png *.svg manifest.json robots.txt consent.js ./
 COPY tour/ ./tour/
 COPY backend/ ./backend/
 

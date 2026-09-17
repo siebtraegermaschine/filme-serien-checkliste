@@ -53,6 +53,7 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   ${hreflangs}
   <link rel="alternate" hreflang="x-default" href="${attrEsc(url)}">
   <link rel="stylesheet" href="/seo.css">
+  <script src="/consent.js" defer></script>
   <link rel="icon" href="${attrEsc(favicon || '/favicon-32.png')}">
   <meta property="og:site_name" content="MovieMatch">
   <meta property="og:url" content="${attrEsc(url)}">
@@ -75,6 +76,7 @@ function fusszeile() {
   return `<footer>
     <a href="${SITE}/impressum.html">Impressum</a>
     <a href="${SITE}/datenschutz.html">Datenschutz</a>
+    <a href="#" data-cookie-einstellungen>Cookie-Einstellungen</a>
   </footer>`;
 }
 
