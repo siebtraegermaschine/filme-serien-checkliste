@@ -9,20 +9,38 @@
 //   1. hier, mechanisch: Format, Wortzahl, Zahlen und Eigennamen ohne Beleg
 //   2. seo-batch-pruefen.mjs: Stichprobe, jede Aussage gegen den Satz geprueft
 //
+// Laeuft ueber die Message-Batches-API (50 % Rabatt gegenueber Einzelaufrufen,
+// kombiniert mit gecachtem Systemprompt). Ein Lauf verarbeitet die Kandidaten
+// in Chunks: je Chunk ein Batch anlegen, auf "ended" pollen, Ergebnisse holen,
+// pruefen, schreiben. Fortschritt und laufende Kosten stehen in einer
+// Statusdatei -- bricht der Prozess ab, nimmt ein Neustart beim offenen Batch
+// wieder auf, statt ihn doppelt anzulegen.
+//
+// "Hoechstens einmal neu erzeugen" (Christian, 17.09.2026): Innerhalb EINES
+// Laufs (einer Statusdatei) wird jeder Kandidat genau einmal versucht --
+// verworfene Texte tauchen im selben Lauf nicht wieder auf, auch wenn sie noch
+// nicht in seo_content stehen. Ein bewusster zweiter Versuch fuer die
+// Verwerfungen ist ein zweiter Aufruf mit neuer --status-datei (oder die alte
+// loeschen): Erfolge bleiben durch seo_content ausgeschlossen, nur die
+// Verwerfungen werden dann erneut versucht.
+//
 // Aufruf:
-//   ANTHROPIC_API_KEY=... node scripts/seo-batch.mjs --limit 20 --dry-run
-//   ANTHROPIC_API_KEY=... node scripts/seo-batch.mjs --limit 500 --concurrency 8
-//   ANTHROPIC_API_KEY=... node scripts/seo-batch.mjs --locale es-es --limit 500
+//   ANTHROPIC_API_KEY=... node scripts/seo-batch.mjs --limit 50 --dry-run
+//   ANTHROPIC_API_KEY=... node scripts/seo-batch.mjs --limit 500 --chunk-groesse 250
+//   ANTHROPIC_API_KEY=... node scripts/seo-batch.mjs --max-kosten 120
 //
 // Optionen:
 //   --locale CODE        de-de (Standard), en-us, es-es, fr-fr, it-it, nl-nl, pt-pt
-//   --limit N            Hoechstzahl Titel in diesem Lauf (Standard 50)
-//   --concurrency N      Gleichzeitige Anfragen (Standard 6)
+//   --limit N            Hoechstzahl Titel insgesamt (Standard: alle offenen)
+//   --chunk-groesse N    Titel je Batch (Standard 1000)
+//   --intervall N        Sekunden zwischen Status-Abfragen (Standard 30)
 //   --model NAME         Standard claude-sonnet-5; claude-opus-5 fuer mehr Qualitaet
 //   --stufe B|C          B = Plot>250 und >=4 Darsteller (Standard), C = Plot>150 und >=3
 //   --min-votes N        Nur Titel ab dieser Stimmenzahl (Standard 0)
-//   --dry-run            Nichts schreiben, Texte nur ausgeben
-//   --journal PFAD       JSONL-Protokoll (Standard scripts/.seo-batch-journal.jsonl)
+//   --max-kosten ZAHL    Harte Obergrenze in Dollar echter Kosten (Standard 120)
+//   --dry-run            Nichts nach seo_content schreiben, Texte nur ausgeben
+//   --journal PFAD        JSONL-Protokoll je Text (Standard scripts/.seo-batch-journal.jsonl)
+//   --status-datei PFAD  Lauf-Status: offener Batch, Kosten bisher, Versuchte (Standard scripts/.seo-batch-lauf.json)
 import 'dotenv/config';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -54,13 +72,16 @@ function argumente() {
   };
   return {
     locale: hol('locale', 'de-de'),
-    limit: Number(hol('limit', '50')),
-    concurrency: Number(hol('concurrency', '6')),
+    limit: Number(hol('limit', Infinity)),
+    chunkGroesse: Number(hol('chunk-groesse', '1000')),
+    intervall: Number(hol('intervall', '30')),
     model: hol('model', 'claude-sonnet-5'),
     stufe: hol('stufe', 'B').toUpperCase(),
     minVotes: Number(hol('min-votes', '0')),
+    maxKosten: Number(hol('max-kosten', '120')),
     dryRun: a.includes('--dry-run'),
     journal: hol('journal', path.join(import.meta.dirname, '.seo-batch-journal.jsonl')),
+    statusDatei: hol('status-datei', path.join(import.meta.dirname, '.seo-batch-lauf.json')),
   };
 }
 
@@ -68,7 +89,12 @@ function argumente() {
 // Nur Titel mit ausreichenden Metadaten. Fehlt eines der Felder, fehlt dem
 // Modell die Grundlage fuer einen belegten Abschnitt -- solche Titel bleiben
 // bewusst liegen, statt duenn abgehandelt zu werden.
-async function kandidaten({ locale, limit, minVotes, stufe }) {
+//
+// `ausschluss` sind Schluessel, die in DIESEM Lauf schon versucht wurden (egal
+// ob erfolgreich) -- siehe Kopfkommentar zu "hoechstens einmal neu erzeugen".
+// Erfolge stehen zusaetzlich in seo_content und sind damit ueber Laeufe hinweg
+// ausgeschlossen; Verwerfungen nur innerhalb des laufenden `ausschluss`.
+async function kandidaten({ locale, limit, minVotes, stufe, ausschluss }) {
   const [minPlot, minCast] = stufe === 'C' ? [150, 3] : [250, 4];
   const { rows } = await pool.query(
     `SELECT t.tmdb_id, t.type, t.title, t.original_title, t.title_en, t.year,
@@ -87,9 +113,10 @@ async function kandidaten({ locale, limit, minVotes, stufe }) {
                WHERE s.bereich = 'titel'
                  AND s.schluessel = t.type || ':' || t.tmdb_id
                  AND s.locale = $1)
+        AND NOT (t.type || ':' || t.tmdb_id = ANY($6::text[]))
       ORDER BY t.vote_count DESC NULLS LAST
       LIMIT $2`,
-    [locale, limit, minVotes, minPlot, minCast]
+    [locale, limit, minVotes, minPlot, minCast, [...ausschluss]]
   );
   return rows;
 }
@@ -218,52 +245,119 @@ Gewalt, Krankheit, Verbrechen -- nuechtern und respektvoll bleiben, ohne zu besc
 Gib ausschliesslich den Text aus, ohne Vorrede und ohne Nachbemerkung.`;
 }
 
-// --- API --------------------------------------------------------------------
+// --- Preise -------------------------------------------------------------
+// Stand 17.09.2026, https://platform.claude.com/docs/en/about-claude/pricing
+// (Sonnet-5-Einfuehrungspreis ist inzwischen der Standardpreis). Batch-Rabatt
+// ist durchgaengig 50 % auf jede Spalte -- deshalb hier nur die Basispreise
+// je Modell und die Halbierung an einer Stelle in kostenBerechnen().
+// 1h-Cache-Schreiben, weil ein Batch laenger laufen kann als die 5-Minuten-
+// Standarddauer (Empfehlung der Anthropic-Doku fuer die Batch-API).
+export const PREISE = {
+  'claude-sonnet-5': { eingabe: 2, cacheSchreiben1h: 4, cacheLesen: 0.20, ausgabe: 10 },
+  'claude-opus-5': { eingabe: 5, cacheSchreiben1h: 10, cacheLesen: 0.50, ausgabe: 25 },
+  'claude-haiku-4-5-20251001': { eingabe: 1, cacheSchreiben1h: 2, cacheLesen: 0.10, ausgabe: 5 },
+};
+
+// Kosten eines einzelnen Aufrufs in Dollar, aus dem gemessenen `usage`-Objekt
+// der API-Antwort. Rein rechnerisch, ohne Netzwerk/DB -- so laesst es sich
+// gegen bekannte Betraege testen.
+export function kostenBerechnen(usage, model) {
+  const p = PREISE[model];
+  if (!p) throw new Error(`Keine Preise fuer Modell ${model} hinterlegt.`);
+  const u = usage || {};
+  const dollar =
+    (u.input_tokens || 0) * p.eingabe +
+    (u.cache_creation_input_tokens || 0) * p.cacheSchreiben1h +
+    (u.cache_read_input_tokens || 0) * p.cacheLesen +
+    (u.output_tokens || 0) * p.ausgabe;
+  // Batch-Rabatt: 50 % auf alle vier Spalten (Anthropic-Doku, "Batch processing").
+  return (dollar / 2) / 1_000_000;
+}
+
+// --- custom_id ----------------------------------------------------------
+// Die Batches-API erlaubt in custom_id nur [a-zA-Z0-9_-], unser Schluessel
+// ("movie:12345") enthaelt aber einen Doppelpunkt. type ("movie"/"series")
+// und tmdb_id (rein numerisch) enthalten selbst nie einen Bindestrich, der
+// Rueckweg ist also eindeutig.
+export function customId(schluessel) {
+  return schluessel.replace(':', '-');
+}
+export function schluesselAusCustomId(id) {
+  const i = id.indexOf('-');
+  return i < 0 ? id : `${id.slice(0, i)}:${id.slice(i + 1)}`;
+}
+
+// --- Batches-API ----------------------------------------------------------
 // Der System-Prompt ist bei jedem Aufruf identisch und macht den groesseren
 // Teil der Eingabe aus. Als zwischengespeicherter Block wird er nur einmal
 // berechnet und danach zum Bruchteil gelesen -- bei zehntausenden Aufrufen ist
-// das der groesste Kostenhebel ueberhaupt.
-//
-// Der Cache lebt wenige Minuten und wird durch jeden Aufruf verlaengert. Bei
-// durchgehendem Betrieb bleibt er also warm; nur der allererste Aufruf und
-// laengere Pausen zahlen den vollen Preis.
+// das der groesste Kostenhebel ueberhaupt, kombiniert mit dem Batch-Rabatt.
 function anfrageKoerper(model, locale, t) {
   return {
     model,
     max_tokens: 1600,
-    system: [{ type: 'text', text: systemPrompt(locale), cache_control: { type: 'ephemeral' } }],
+    system: [{ type: 'text', text: systemPrompt(locale), cache_control: { type: 'ephemeral', ttl: '1h' } }],
     messages: [{ role: 'user', content: `DATENSATZ\n${datensatz(t, locale)}\n\nSchreibe den Titeltext.` }],
   };
 }
 
-// Laufende Summe des Verbrauchs, damit am Ende belastbare Zahlen stehen statt
-// Schaetzungen -- und damit sichtbar wird, ob der Cache tatsaechlich greift.
-export const verbrauch = { eingabe: 0, cacheGeschrieben: 0, cacheGelesen: 0, ausgabe: 0, aufrufe: 0 };
-
-async function erzeugen({ apiKey, model, t, locale }) {
-  const body = anfrageKoerper(model, locale, t);
-  for (let versuch = 1; versuch <= 5; versuch++) {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify(body),
-    });
-    if (res.ok) {
-      const j = await res.json();
-      const u = j.usage || {};
-      verbrauch.eingabe += u.input_tokens || 0;
-      verbrauch.cacheGeschrieben += u.cache_creation_input_tokens || 0;
-      verbrauch.cacheGelesen += u.cache_read_input_tokens || 0;
-      verbrauch.ausgabe += u.output_tokens || 0;
-      verbrauch.aufrufe++;
-      return j.content.map((c) => c.text || '').join('').trim();
-    }
+async function mitWiederholung(aufruf, versuche = 5) {
+  for (let versuch = 1; versuch <= versuche; versuch++) {
+    const res = await aufruf();
+    if (res.ok) return res;
     if (![429, 500, 502, 503, 529].includes(res.status)) {
       throw new Error(`API ${res.status}: ${(await res.text()).slice(0, 300)}`);
     }
     await new Promise((r) => setTimeout(r, Math.min(60000, 2000 * 2 ** (versuch - 1))));
   }
-  throw new Error('API nach 5 Versuchen nicht erreichbar');
+  throw new Error(`API nach ${versuche} Versuchen nicht erreichbar`);
+}
+
+async function batchAnlegen({ apiKey, model, locale, liste }) {
+  const requests = liste.map((t) => ({
+    custom_id: customId(`${t.type}:${t.tmdb_id}`),
+    params: anfrageKoerper(model, locale, t),
+  }));
+  const res = await mitWiederholung(() =>
+    fetch('https://api.anthropic.com/v1/messages/batches', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
+      body: JSON.stringify({ requests }),
+    })
+  );
+  return res.json();
+}
+
+async function batchStatus({ apiKey, id }) {
+  const res = await mitWiederholung(() =>
+    fetch(`https://api.anthropic.com/v1/messages/batches/${id}`, {
+      headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
+    })
+  );
+  return res.json();
+}
+
+async function batchWartenBisEnde({ apiKey, id, intervall }) {
+  for (;;) {
+    const status = await batchStatus({ apiKey, id });
+    if (status.processing_status === 'ended') return status;
+    const c = status.request_counts || {};
+    console.log(`  Batch ${id}: ${status.processing_status} -- verarbeitet ${c.processing ?? '?'}, fertig ${c.succeeded ?? 0}, Fehler ${c.errored ?? 0}`);
+    await new Promise((r) => setTimeout(r, intervall * 1000));
+  }
+}
+
+// JSONL-Ergebnisdatei zeilenweise lesen. Getrennt vom HTTP-Aufruf, damit sich
+// das Parsen ohne Netzwerk testen laesst.
+export function ergebnisZeilenLesen(text) {
+  return text.split('\n').filter((z) => z.trim()).map((z) => JSON.parse(z));
+}
+
+async function batchErgebnisse({ apiKey, resultsUrl }) {
+  const res = await mitWiederholung(() =>
+    fetch(resultsUrl, { headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' } })
+  );
+  return ergebnisZeilenLesen(await res.text());
 }
 
 // --- Formatpruefung ---------------------------------------------------------
@@ -393,6 +487,90 @@ export function faktenVerdacht(text, t, locale) {
   });
 }
 
+// --- Statusdatei ------------------------------------------------------------
+// Traegt den Lauf ueber Neustarts hinweg: Kosten und Versuche bisher, und --
+// falls beim Absturz ein Batch offen war -- dessen ID samt Kandidaten, damit
+// ein Neustart ihn zu Ende bringt statt ihn doppelt anzulegen (doppelt bezahlt).
+function statusLesen(pfad) {
+  if (!fs.existsSync(pfad)) return { ausgegeben: 0, aufrufe: 0, texte: 0, versucht: [], aktuellerBatch: null };
+  return JSON.parse(fs.readFileSync(pfad, 'utf8'));
+}
+function statusSchreiben(pfad, status) {
+  fs.writeFileSync(pfad, JSON.stringify(status, null, 2));
+}
+
+// --- Ein Chunk: Batch anlegen, abwarten, Ergebnisse pruefen und schreiben --
+async function chunkVerarbeiten({ apiKey, opt, liste, protokoll, zaehler, status }) {
+  let batchId = status.aktuellerBatch?.id;
+  if (!batchId) {
+    const batch = await batchAnlegen({ apiKey, model: opt.model, locale: opt.locale, liste });
+    batchId = batch.id;
+    status.aktuellerBatch = { id: batchId, schluessel: liste.map((t) => `${t.type}:${t.tmdb_id}`), eingereichtAm: new Date().toISOString() };
+    statusSchreiben(opt.statusDatei, status);
+    console.log(`  Batch angelegt: ${batchId} (${liste.length} Titel)`);
+  } else {
+    console.log(`  Nehme offenen Batch wieder auf: ${batchId}`);
+  }
+
+  const ended = await batchWartenBisEnde({ apiKey, id: batchId, intervall: opt.intervall });
+  const zeilen = await batchErgebnisse({ apiKey, resultsUrl: ended.results_url });
+  const nachSchluessel = new Map(liste.map((t) => [`${t.type}:${t.tmdb_id}`, t]));
+
+  let beispieleGezeigt = 0;
+  let kostenChunk = 0;
+  for (const zeile of zeilen) {
+    const schluessel = schluesselAusCustomId(zeile.custom_id);
+    const t = nachSchluessel.get(schluessel);
+    status.versucht.push(schluessel);
+
+    if (zeile.result.type !== 'succeeded') {
+      zaehler.fehler++;
+      protokoll.write(JSON.stringify({ schluessel, locale: opt.locale, status: 'fehler', meldung: zeile.result.type, detail: zeile.result.error?.error?.message }) + '\n');
+      continue;
+    }
+
+    const nachricht = zeile.result.message;
+    const usage = nachricht.usage || {};
+    const kosten = kostenBerechnen(usage, opt.model);
+    kostenChunk += kosten;
+    status.ausgegeben += kosten;
+    status.aufrufe++;
+
+    const text = (nachricht.content || []).map((c) => c.text || '').join('').trim();
+    const ff = formatFehler(text, opt.locale);
+    const fv = faktenVerdacht(text, t, opt.locale);
+    const basis = { schluessel, titel: t.title, jahr: t.year, locale: opt.locale, formatFehler: ff, faktenVerdacht: fv };
+
+    if (ff.length) { zaehler.format++; protokoll.write(JSON.stringify({ ...basis, status: 'format', text }) + '\n'); continue; }
+    if (fv.length) { zaehler.fakten++; protokoll.write(JSON.stringify({ ...basis, status: 'fakten', text }) + '\n'); continue; }
+
+    status.texte++;
+    if (opt.dryRun) {
+      console.log(`\n----- ${schluessel} · ${t.title} (${t.year}) -----\n${text}`);
+    } else {
+      await pool.query(
+        `INSERT INTO seo_content (bereich, schluessel, locale, text)
+         VALUES ('titel', $1, $2, $3)
+         ON CONFLICT (bereich, schluessel, locale) DO UPDATE
+           SET text = EXCLUDED.text, aktualisiert_am = now()`,
+        [schluessel, opt.locale, text]
+      );
+      // Drei Beispiele je Chunk zeigen, auch ausserhalb von --dry-run -- fuer
+      // den Probelauf und als laufende Stichprobe im Hauptlauf.
+      if (beispieleGezeigt < 3) {
+        beispieleGezeigt++;
+        console.log(`\n----- Beispiel ${schluessel} · ${t.title} (${t.year}) -----\n${text}`);
+      }
+    }
+    zaehler.ok++;
+    protokoll.write(JSON.stringify({ ...basis, status: 'ok' }) + '\n');
+  }
+
+  status.aktuellerBatch = null;
+  statusSchreiben(opt.statusDatei, status);
+  console.log(`  Chunk fertig: ${zeilen.length} Ergebnisse, ${kostenChunk.toFixed(2)} $ echte Kosten (gesamt bisher ${status.ausgegeben.toFixed(2)} $).`);
+}
+
 // --- Ablauf -----------------------------------------------------------------
 async function main() {
   const opt = argumente();
@@ -405,84 +583,78 @@ async function main() {
     console.error('ANTHROPIC_API_KEY fehlt. Setze ihn in der Umgebung oder in backend/.env.');
     process.exit(1);
   }
+  if (!PREISE[opt.model]) {
+    console.error(`Keine Preise fuer Modell ${opt.model} hinterlegt (siehe PREISE) -- ohne Preise kein verlaesslicher Kostenabbruch.`);
+    process.exit(1);
+  }
 
-  const liste = await kandidaten(opt);
-  console.log(`${liste.length} Kandidaten · Sprache ${opt.locale} · Stufe ${opt.stufe} · Modell ${opt.model} · ${opt.concurrency} gleichzeitig`);
-  if (!liste.length) { await pool.end(); return; }
-
+  const status = statusLesen(opt.statusDatei);
   const protokoll = fs.createWriteStream(opt.journal, { flags: 'a' });
   const zaehler = { ok: 0, format: 0, fakten: 0, fehler: 0 };
   const begonnen = Date.now();
-  let naechster = 0;
 
-  async function arbeiter() {
-    for (;;) {
-      const i = naechster++;
-      if (i >= liste.length) return;
-      const t = liste[i];
-      const schluessel = `${t.type}:${t.tmdb_id}`;
-      try {
-        const text = await erzeugen({ apiKey, model: opt.model, t, locale: opt.locale });
-        const ff = formatFehler(text, opt.locale);
-        const fv = faktenVerdacht(text, t, opt.locale);
-        const basis = { schluessel, titel: t.title, jahr: t.year, locale: opt.locale, formatFehler: ff, faktenVerdacht: fv };
+  console.log(`Sprache ${opt.locale} · Stufe ${opt.stufe} · Modell ${opt.model} · Chunk-Groesse ${opt.chunkGroesse} · Obergrenze ${opt.maxKosten} $`);
+  if (status.ausgegeben) console.log(`Fortsetzung eines Laufs: ${status.ausgegeben.toFixed(2)} $ bereits ausgegeben, ${status.texte} Texte bisher.`);
 
-        if (ff.length) { zaehler.format++; protokoll.write(JSON.stringify({ ...basis, status: 'format', text }) + '\n'); continue; }
-        if (fv.length) { zaehler.fakten++; protokoll.write(JSON.stringify({ ...basis, status: 'fakten', text }) + '\n'); continue; }
-
-        if (opt.dryRun) {
-          console.log(`\n----- ${schluessel} · ${t.title} (${t.year}) -----\n${text}`);
-        } else {
-          await pool.query(
-            `INSERT INTO seo_content (bereich, schluessel, locale, text)
-             VALUES ('titel', $1, $2, $3)
-             ON CONFLICT (bereich, schluessel, locale) DO UPDATE
-               SET text = EXCLUDED.text, aktualisiert_am = now()`,
-            [schluessel, opt.locale, text]
-          );
-        }
-        zaehler.ok++;
-        protokoll.write(JSON.stringify({ ...basis, status: 'ok' }) + '\n');
-      } catch (e) {
-        zaehler.fehler++;
-        protokoll.write(JSON.stringify({ schluessel, locale: opt.locale, status: 'fehler', meldung: String(e).slice(0, 300) }) + '\n');
-      }
-      const fertig = zaehler.ok + zaehler.format + zaehler.fakten + zaehler.fehler;
-      if (fertig % 25 === 0) {
-        const proStunde = Math.round((fertig / ((Date.now() - begonnen) / 1000)) * 3600);
-        console.log(`  ${fertig}/${liste.length} · ${zaehler.ok} ok · ${zaehler.format} Format · ${zaehler.fakten} Faktenverdacht · ${zaehler.fehler} Fehler · ~${proStunde}/h`);
-      }
-    }
+  // Ein bei Absturz offener Batch wird zuerst zu Ende gebracht, bevor neue
+  // Kandidaten gesucht werden -- sonst legt der Lauf ihn doppelt an.
+  if (status.aktuellerBatch) {
+    const liste = status.aktuellerBatch.schluessel.map((s) => {
+      const [type, tmdb_id] = s.split(':');
+      return { type, tmdb_id };
+    });
+    // Fuer den Wiedereinstieg reicht type/tmdb_id nicht (kein Titel/Jahr fuer
+    // die Anzeige) -- die vollen Datensaetze erneut aus der DB holen.
+    const { rows } = await pool.query(
+      `SELECT t.tmdb_id, t.type, t.title, t.original_title, t.title_en, t.year,
+              t.genres, t.director, t.cast_names, t.keywords, t.rating,
+              t.vote_count, t.plot, t.overview_en, t.certification, t.uebersetzungen
+         FROM titles t
+        WHERE (t.type, t.tmdb_id) IN (
+          SELECT u.typ, u.id::int FROM unnest($1::text[], $2::text[]) AS u(typ, id))`,
+      [liste.map((l) => l.type), liste.map((l) => l.tmdb_id)]
+    );
+    await chunkVerarbeiten({ apiKey, opt, liste: rows, protokoll, zaehler, status });
   }
 
-  await Promise.all(Array.from({ length: Math.max(1, opt.concurrency) }, arbeiter));
+  let verbleibend = opt.limit;
+  for (;;) {
+    if (verbleibend <= 0) break;
+
+    // Kostenschranke vor jedem neuen Chunk: mit dem bisher gemessenen
+    // Durchschnitt hochrechnen, Chunk-Groesse notfalls kappen, bei 0 abbrechen.
+    let chunkGroesse = Math.min(opt.chunkGroesse, verbleibend);
+    if (status.aufrufe > 0) {
+      const durchschnitt = status.ausgegeben / status.aufrufe;
+      const budget = opt.maxKosten - status.ausgegeben;
+      const maxTexte = Math.floor(budget / durchschnitt);
+      if (maxTexte < 1) {
+        console.log(`\nAbbruch: ${status.ausgegeben.toFixed(2)} $ ausgegeben, Obergrenze ${opt.maxKosten} $ -- ein weiterer Text wuerde sie ueberschreiten (Ø ${durchschnitt.toFixed(4)} $/Text).`);
+        break;
+      }
+      chunkGroesse = Math.min(chunkGroesse, maxTexte);
+    }
+
+    const ausschluss = new Set(status.versucht);
+    const liste = await kandidaten({ locale: opt.locale, limit: chunkGroesse, minVotes: opt.minVotes, stufe: opt.stufe, ausschluss });
+    if (!liste.length) { console.log('\nKeine offenen Kandidaten mehr.'); break; }
+
+    console.log(`\nChunk: ${liste.length} Kandidaten`);
+    await chunkVerarbeiten({ apiKey, opt, liste, protokoll, zaehler, status });
+
+    if (status.ausgegeben >= opt.maxKosten) {
+      console.log(`\nAbbruch nach diesem Chunk: ${status.ausgegeben.toFixed(2)} $ erreicht/ueberschreitet die Obergrenze von ${opt.maxKosten} $.`);
+      break;
+    }
+    verbleibend -= liste.length;
+  }
+
   protokoll.end();
   const dauer = Math.round((Date.now() - begonnen) / 1000);
   console.log(`\nFertig in ${dauer}s: ${zaehler.ok} geschrieben, ${zaehler.format} Formatfehler, ${zaehler.fakten} Faktenverdacht, ${zaehler.fehler} Fehler.`);
-  console.log(`Durchsatz: ~${Math.round((zaehler.ok / dauer) * 3600)} Texte/h · Protokoll: ${opt.journal}`);
+  console.log(`Kosten dieses Prozesslaufs: ${status.ausgegeben.toFixed(2)} $ echt (Statusdatei: ${opt.statusDatei}).`);
   if (zaehler.fakten) console.log('Faktenverdacht = verworfen und protokolliert, nicht geschrieben.');
-
-  // Gemessener Verbrauch statt Schaetzung -- die Grundlage fuer jede
-  // Hochrechnung auf den vollen Katalog.
-  if (verbrauch.aufrufe) {
-    const v = verbrauch, n = v.aufrufe;
-    const eingabeGesamt = v.eingabe + v.cacheGeschrieben + v.cacheGelesen;
-    const cacheAnteil = eingabeGesamt ? Math.round((v.cacheGelesen / eingabeGesamt) * 100) : 0;
-    console.log(`\nVerbrauch ueber ${n} Aufrufe:`);
-    console.log(`  Eingabe voll berechnet   ${v.eingabe.toLocaleString('de-DE')} (${Math.round(v.eingabe / n)}/Aufruf)`);
-    console.log(`  Cache geschrieben        ${v.cacheGeschrieben.toLocaleString('de-DE')}`);
-    console.log(`  Cache gelesen            ${v.cacheGelesen.toLocaleString('de-DE')} (${Math.round(v.cacheGelesen / n)}/Aufruf, ${cacheAnteil} % der Eingabe)`);
-    console.log(`  Ausgabe                  ${v.ausgabe.toLocaleString('de-DE')} (${Math.round(v.ausgabe / n)}/Aufruf)`);
-    const je = (eingabeGesamt + v.ausgabe) / n;
-    console.log(`\nHochrechnung: ${Math.round(je).toLocaleString('de-DE')} Token je Text.`);
-    for (const ziel of [1000, 18400]) {
-      console.log(`  ${ziel.toLocaleString('de-DE')} Texte  ->  ` +
-        `${Math.round((v.eingabe / n) * ziel).toLocaleString('de-DE')} Eingabe voll · ` +
-        `${Math.round((v.cacheGelesen / n) * ziel).toLocaleString('de-DE')} Cache · ` +
-        `${Math.round((v.ausgabe / n) * ziel).toLocaleString('de-DE')} Ausgabe`);
-    }
-    console.log('Preise je Million Token stehen in der Anthropic-Konsole; Cache-Lesen ist ein Bruchteil der vollen Eingabe.');
-  }
+  console.log(`Protokoll: ${opt.journal}`);
   await pool.end();
 }
 
