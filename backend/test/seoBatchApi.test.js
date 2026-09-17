@@ -5,7 +5,10 @@
 // abgedeckt (Christian, 18.08.2026) und hier unveraendert.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { kostenBerechnen, customId, schluesselAusCustomId, ergebnisZeilenLesen, PREISE } from '../scripts/seo-batch.mjs';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { kostenBerechnen, customId, schluesselAusCustomId, ergebnisZeilenLesen, statusLesen, PREISE } from '../scripts/seo-batch.mjs';
 
 test('kostenBerechnen: 1 Mio. Basis-Eingabetoken kosten den halbierten Batchpreis', () => {
   const dollar = kostenBerechnen({ input_tokens: 1_000_000 }, 'claude-sonnet-5');
@@ -51,6 +54,29 @@ test('customId/schluesselAusCustomId: Hin- und Rueckweg fuer Filme und Serien', 
     assert.match(id, /^[a-zA-Z0-9_-]{1,64}$/);
     assert.equal(schluesselAusCustomId(id), schluessel);
   }
+});
+
+test('statusLesen: fehlende Datei liefert leeren Status', () => {
+  const s = statusLesen(path.join(os.tmpdir(), `seo-status-fehlt-${Date.now()}.json`));
+  assert.deepEqual(s, { ausgegeben: 0, aufrufe: 0, texte: 0, versucht: [], aktuellerBatch: null });
+});
+
+// Nachgereicht, nachdem ein per `docker -v` vorab angelegter (leerer) Bind-Mount
+// beim JSON.parse einer leeren Datei abgestuerzt ist (Christian, 17.09.2026).
+test('statusLesen: leere Datei (z. B. vorab per touch angelegt) liefert leeren Status statt Absturz', () => {
+  const pfad = path.join(os.tmpdir(), `seo-status-leer-${Date.now()}.json`);
+  fs.writeFileSync(pfad, '');
+  const s = statusLesen(pfad);
+  assert.deepEqual(s, { ausgegeben: 0, aufrufe: 0, texte: 0, versucht: [], aktuellerBatch: null });
+  fs.unlinkSync(pfad);
+});
+
+test('statusLesen: vorhandener Status wird unveraendert zurueckgegeben', () => {
+  const pfad = path.join(os.tmpdir(), `seo-status-voll-${Date.now()}.json`);
+  const original = { ausgegeben: 1.23, aufrufe: 5, texte: 4, versucht: ['movie:1'], aktuellerBatch: null };
+  fs.writeFileSync(pfad, JSON.stringify(original));
+  assert.deepEqual(statusLesen(pfad), original);
+  fs.unlinkSync(pfad);
 });
 
 test('ergebnisZeilenLesen: JSONL mit leeren Zeilen wird korrekt zerlegt', () => {

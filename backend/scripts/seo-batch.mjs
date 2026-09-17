@@ -242,6 +242,36 @@ Sachlich, praezise, ohne Werbesprache. Keine Ausrufezeichen, keine rhetorischen 
 an das Publikum, kein "Fans von X werden Y lieben". Bei heiklen Stoffen -- reale Opfer,
 Gewalt, Krankheit, Verbrechen -- nuechtern und respektvoll bleiben, ohne zu beschoenigen.
 
+WIEDERKEHRENDE ANGABEN VARIIEREN
+Alle Texte nennen dieselben Arten von Angaben -- Regie, Jahr, Freigabe, Bewertung.
+Formuliere sie unterschiedlich und baue sie in den Satz ein, statt sie aufzuzaehlen;
+nicht jeder Text muss sie im selben Satzbau oder an derselben Stelle bringen.
+
+QUELLE NICHT ERWAEHNEN
+Der Text steht auf einer oeffentlichen Seite, die Leser kennen keinen "Datensatz"
+und keine "Inhaltsangabe". Schreibe nie "der Datensatz nennt", "im Datensatz
+verzeichnet", "laut Inhaltsangabe" oder Aehnliches -- auch nicht "nicht
+hinterlegt/verzeichnet/angegeben/vermerkt/ausgewiesen" fuer eine fehlende Angabe.
+Nenne die Angabe direkt, oder lass sie weg, statt ihr Fehlen zu kommentieren.
+
+ZEIT- UND EPOCHENANGABEN
+Nenne Epochen so, wie der DATENSATZ sie nennt (z. B. "viktorianisch"), rechne sie
+nicht in Jahrhunderte um -- die Umrechnung faellt durch die Pruefung, weil die
+Jahreszahl im DATENSATZ so nicht vorkommt. Abstaende zur Gegenwart nur mit der
+genauen Differenz aus laufendem Jahr minus Erscheinungsjahr, nicht gerundet
+("mehr als 35 Jahre").
+
+STIMMENZAHL NICHT BEZIFFERN
+Die Zahl der abgegebenen Stimmen aendert sich taeglich -- ein Text, der sie nennt,
+ist damit oft schon nach einer Nacht falsch. Nenne deshalb nie die genaue
+Stimmenzahl, sondern ordne sie ein ("eine noch schmale Bewertungsbasis", "ein
+Publikum im vierstelligen Bereich"). Die Durchschnittsbewertung selbst darfst du
+nennen, im Deutschen mit Komma (7,4 statt 7.4).
+
+LAENGE MIT PUFFER
+Ziel sind 290 bis 330 Woerter, nicht die Untergrenze von 280 -- wer knapp darueber
+schreibt, rutscht beim Nachschaerfen leicht darunter und faellt durch die Pruefung.
+
 Gib ausschliesslich den Text aus, ohne Vorrede und ohne Nachbemerkung.`;
 }
 
@@ -292,10 +322,18 @@ export function schluesselAusCustomId(id) {
 // Teil der Eingabe aus. Als zwischengespeicherter Block wird er nur einmal
 // berechnet und danach zum Bruchteil gelesen -- bei zehntausenden Aufrufen ist
 // das der groesste Kostenhebel ueberhaupt, kombiniert mit dem Batch-Rabatt.
+// Sonnet 5 denkt ohne Angabe standardmaessig mit "effort: high" -- bei einem
+// Diagnoselauf hat das bei 3 von 10 Titeln das ganze max_tokens-Budget fuer
+// unsichtbares Denken verbraucht, bevor ueberhaupt Text entstand (stop_reason
+// "max_tokens", leerer Text). Diese Aufgabe ist eine reine, deterministische
+// Umformung ohne Ermessensspielraum -- "low" ist laut Anthropic-Doku genau fuer
+// hochvolumige, einfache Aufgaben gedacht und macht den Lauf schneller,
+// guenstiger und vor allem verlaesslich (Christian, 17.09.2026).
 function anfrageKoerper(model, locale, t) {
   return {
     model,
-    max_tokens: 1600,
+    max_tokens: 2048,
+    output_config: { effort: 'low' },
     system: [{ type: 'text', text: systemPrompt(locale), cache_control: { type: 'ephemeral', ttl: '1h' } }],
     messages: [{ role: 'user', content: `DATENSATZ\n${datensatz(t, locale)}\n\nSchreibe den Titeltext.` }],
   };
@@ -491,8 +529,11 @@ export function faktenVerdacht(text, t, locale) {
 // Traegt den Lauf ueber Neustarts hinweg: Kosten und Versuche bisher, und --
 // falls beim Absturz ein Batch offen war -- dessen ID samt Kandidaten, damit
 // ein Neustart ihn zu Ende bringt statt ihn doppelt anzulegen (doppelt bezahlt).
-function statusLesen(pfad) {
-  if (!fs.existsSync(pfad)) return { ausgegeben: 0, aufrufe: 0, texte: 0, versucht: [], aktuellerBatch: null };
+export function statusLesen(pfad) {
+  const leer = { ausgegeben: 0, aufrufe: 0, texte: 0, versucht: [], aktuellerBatch: null };
+  // Leere Datei (z. B. beim Vor-Anlegen eines Bind-Mounts per `touch`) zaehlt
+  // wie "noch kein Status" -- sonst bricht der Lauf beim JSON.parse ab.
+  if (!fs.existsSync(pfad) || !fs.readFileSync(pfad, 'utf8').trim()) return leer;
   return JSON.parse(fs.readFileSync(pfad, 'utf8'));
 }
 function statusSchreiben(pfad, status) {
