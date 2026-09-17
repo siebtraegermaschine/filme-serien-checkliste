@@ -55,6 +55,9 @@ und keine „Inhaltsangabe“. Schreibe deshalb nie „der Datensatz nennt“, �
 verzeichnet“, „laut Inhaltsangabe“, „Eine Altersfreigabe ist nicht hinterlegt“ oder
 Aehnliches. Nenne die Angabe direkt („Regie führte …“, „Das Drama …“). Fehlt eine
 Angabe (Freigabe, Rollen), lass sie weg, statt ihr Fehlen zu kommentieren.
+Also auch nicht: „Wer welche Figur verkörpert, bleibt hier offen“, „Welche Rollen sie spielen,
+bleibt an dieser Stelle offen“, „eine Einordnung, die nur schwer passt“. Passt eine Angabe offensichtlich
+nicht (falsches Genre, falsche Jahreszahl), lass sie weg und melde sie in der Schlusszeile.
 
 Dasselbe gilt fuer die Datenbanksprache rund um die Felder: nicht „als Genres sind
 Drama und Thriller verzeichnet / angegeben / vermerkt / eingetragen / hinterlegt /
