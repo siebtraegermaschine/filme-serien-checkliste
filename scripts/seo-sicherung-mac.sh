@@ -1,5 +1,5 @@
 #!/bin/zsh
-# Naechtliche Sicherung der SEO-Texte (Tabelle seo_content) auf Christians Mac.
+# Woechentliche Sicherung der SEO-Texte (Tabelle seo_content) auf Christians Mac.
 #
 # Warum ausserhalb des Servers (17.09.2026): Die rund 9.000 Titeltexte existieren
 # nur in der Live-Datenbank. Die Datenbank ist dafuer maßgeblich, seo-content-daten.mjs
@@ -7,7 +7,7 @@
 # gegen den Ausfall der Maschine.
 #
 # Gestartet von launchd (~/Library/LaunchAgents/de.movietaste.seo-sicherung.plist),
-# taeglich 03:30. Schlaeft der Mac, holt launchd den Lauf beim Aufwachen nach --
+# sonntags 03:30 (bis 17.09.2026 taeglich; Christian: woechentlich reicht, spart Platz). Schlaeft der Mac, holt launchd den Lauf beim Aufwachen nach --
 # deshalb die Wiederholungen: direkt nach dem Aufwachen steht das Netz oft noch nicht.
 #
 # Wiederherstellen (ersetzt die Tabelle komplett, vorher pruefen!):
@@ -16,7 +16,7 @@
 set -euo pipefail
 
 ZIEL="${SEO_SICHERUNG_ZIEL:-$HOME/Backups/movietaste/seo_content}"
-BEHALTEN="${SEO_SICHERUNG_BEHALTEN:-14}"
+BEHALTEN="${SEO_SICHERUNG_BEHALTEN:-4}"
 SSH=(ssh -i "$HOME/.ssh/id_ed25519" -o BatchMode=yes -o ConnectTimeout=20 root@movietaste.de)
 
 mkdir -p "$ZIEL"

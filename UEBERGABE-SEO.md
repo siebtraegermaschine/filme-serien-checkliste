@@ -59,9 +59,9 @@ Ladelauf hätte sie still auf alte Fassungen zurückgesetzt. Deshalb gilt jetzt:
   Prüfbefund hat, z. B. belegte Wikipedia-Zahlen), sondern prüfen, dass die Änderung
   keinen **neuen** Befund bringt.
 
-**Sicherung:** Die Tabelle wird jede Nacht um 03:30 auf Christians Mac gezogen
+**Sicherung:** Die Tabelle wird jeden Sonntag um 03:30 auf Christians Mac gezogen
 (`scripts/seo-sicherung-mac.sh`, launchd-Job `de.movietaste.seo-sicherung`, Ablage
-`~/Backups/movietaste/seo_content/`, 14 Tage, Log `~/Library/Logs/movietaste-seo-sicherung.log`).
+`~/Backups/movietaste/seo_content/`, die letzten 4 Sicherungen, Log `~/Library/Logs/movietaste-seo-sicherung.log`).
 Schläft der Mac, läuft die Sicherung beim Aufwachen nach. Am 17.09.2026 wurde die
 Wiederherstellung in einer Wegwerf-Datenbank geprüft: alle Zeilen vollständig. Befehl zum
 Zurückspielen steht im Kopf des Skripts.
@@ -337,7 +337,7 @@ Danach in `neue-liste.json` mergen, Feldnamen: `k` (Schlüssel), `t` (Titel), `y
 |---|---|
 | `backend/scripts/seo-content-daten.mjs` | Eingang für handrecherchierte Texte. Nicht maßgeblich — das ist `seo_content`. |
 | `backend/scripts/seo-content-laden.mjs` | Legt neue Einträge an (`npm run seo-content`), überschreibt nur mit `--ueberschreiben`. |
-| `scripts/seo-sicherung-mac.sh` | Nächtliche Sicherung von `seo_content` auf Christians Mac. |
+| `scripts/seo-sicherung-mac.sh` | Wöchentliche Sicherung von `seo_content` auf Christians Mac. |
 | `backend/lib/seoRender.js` | HTML-Erzeugung, `SEO_FREIGEGEBEN`-Schalter. |
 | `backend/lib/seoData.js` | Datenbeschaffung für die Seiten. |
 | `backend/routes/seo.js` | Routen. `/:locale` muss zuletzt registriert bleiben. |
