@@ -251,7 +251,8 @@ export function seiteTitelDetail(titel, locale) {
     : '';
 
   const faktenZeilen = [
-    titel.director ? ['Regie', titel.regisseurPersonId
+    // Bei Serien fuehrt das Feld die Idee/Entwicklung (TMDB created_by), keine Regie.
+    titel.director ? [titel.type === 'series' ? 'Idee' : 'Regie', titel.regisseurPersonId
       ? `<a href="/${locale}/regisseur/${slugify(titel.director)}-${titel.regisseurPersonId}">${attrEsc(titel.director)}</a>`
       : attrEsc(titel.director)] : null,
     (titel.genres || []).length ? ['Genre', genreLinksHtml(titel.genres, titel.type, locale)] : null,

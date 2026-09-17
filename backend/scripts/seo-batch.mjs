@@ -151,7 +151,9 @@ export function datensatz(t, locale) {
   if (t.title_en && t.title_en !== t.title && t.title_en !== t.original_title) z.push(`Englischer Titel: ${t.title_en}`);
   z.push(`Art: ${t.type === 'movie' ? 'Film' : 'Serie'}`);
   z.push(`Erscheinungsjahr: ${t.year}`);
-  z.push(`Regie: ${t.director}`);
+  // Bei Serien steht in director die Idee/Entwicklung (TMDB created_by), nicht die Regie --
+  // bis 17.09.2026 hiess es auch hier "Regie", und 344 Serientexte schrieben "Regie führte".
+  z.push(t.type === 'series' ? `Entwickelt von (Idee, nicht Regie): ${t.director}` : `Regie: ${t.director}`);
   z.push(`Besetzung: ${(t.cast_names || []).slice(0, 8).join(', ')}`);
   z.push(`Genres: ${(t.genres || []).join(', ')}`);
   if ((t.keywords || []).length) z.push(`Schlagwoerter: ${t.keywords.slice(0, 12).join(', ')}`);
@@ -313,7 +315,7 @@ const MUSTER = [
 // eine Person, die als Beteiligte genannt wird, ohne im Datensatz zu stehen.
 const NAME_TEIL = '[A-ZÄÖÜÁÉÍÓÚÀÈÌÒÙÇ][\\p{L}\'’-]*(?:\\.[\\p{L}\'’-]+)*';
 const NAMENSKONTEXT = new RegExp(
-  '(?:Regie(?:\\s+f[üu]hrte[n]?)?|inszeniert(?:e)?\\s+von|gespielt\\s+von|verk[öo]rpert\\s+von|' +
+  '(?:Regie(?:\\s+f[üu]hrte[n]?)?|inszeniert(?:e)?\\s+von|(?:entwickelt|erdacht|erfunden|geschaffen|kreiert)\\s+von|Idee\\s+von|gespielt\\s+von|verk[öo]rpert\\s+von|' +
   'gesprochen\\s+von|Drehbuch(?:\\s+von)?|geschrieben\\s+von|Musik\\s+von|Kamera(?:\\s+von)?|' +
   'Schnitt\\s+von|produziert\\s+von|Produktion\\s+von|nach\\s+(?:einem\\s+)?(?:Roman|Buch|Vorlage)\\s+von|' +
   'directed\\s+by|written\\s+by|starring|dirigid[ao]\\s+por|r[éa]alis[ée]\\s+par)' +

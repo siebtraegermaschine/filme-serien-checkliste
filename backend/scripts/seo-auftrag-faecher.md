@@ -31,7 +31,7 @@ Keine Aufzählungen, keine Fettschrift, keine Zwischenüberschriften. Fließtext
 
 INHALT DER ABSCHNITTE
 1. Worum es geht — die Ausgangslage aus der Inhaltsangabe, erzählt statt zusammengefasst. Hält den Ausgang zurück, wenn die Inhaltsangabe ihn verrät.
-2. Entstehungsgeschichte — Regie, Erscheinungsjahr, Art des Werks, Besetzung mit den Namen aus dem Datensatz, Altersfreigabe falls vorhanden. Nur diese Angaben, keine weiteren Gewerke.
+2. Entstehungsgeschichte — Regie (bei Serien steht „Entwickelt von“: das sind die Schöpfer, NICHT die Regie — schreibe „entwickelt von“ oder „geht auf eine Idee von … zurück“, nie „Regie führte“), Erscheinungsjahr, Art des Werks, Besetzung mit den Namen aus dem Datensatz, Altersfreigabe falls vorhanden. Nur diese Angaben, keine weiteren Gewerke.
 3. Hinter den Kulissen — was Genrekombination, Schlagwörter und die Anlage der Geschichte über den Titel aussagen. Keine Produktionsanekdoten — die kennst du nicht.
 4. Einordnung & Wirkung — Bewertung und Stimmenzahl nüchtern einordnen, den zeitlichen Abstand zum Erscheinungsjahr, die Stellung im Genre. Keine erfundene Rezeption.
 

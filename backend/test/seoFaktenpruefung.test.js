@@ -34,6 +34,12 @@ test('belegte Regie wird nicht beanstandet', () => {
   assert.deepEqual(pruefe('Regie führte Anna Beispiel, vor der Kamera stand Max Muster.'), []);
 });
 
+test('Serien-Schoepfer: belegt ok, erfunden erkannt', () => {
+  const quelle = QUELLE.replace('Regie: Anna Beispiel', 'Entwickelt von (Idee, nicht Regie): Anna Beispiel');
+  assert.deepEqual(pruefeGegenQuelle('Die Serie wurde entwickelt von Anna Beispiel.', quelle, KENNZAHLEN), []);
+  assert.ok(pruefeGegenQuelle('Die Serie wurde entwickelt von Steven Spielberg.', quelle, KENNZAHLEN).length);
+});
+
 test('erfundene Auszeichnung, Geschaeftszahl, Drehort, Rezeption und Werkbezug werden erkannt', () => {
   for (const satz of [
     'Der Film gewann den Oscar.',

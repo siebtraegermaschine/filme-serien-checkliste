@@ -2196,7 +2196,7 @@ var UI_TEXTE = {
     textWeniger: 'Weniger',
     mehrAnzeigen: function(n){ return 'Mehr anzeigen (' + n + ' weitere)'; },
     laedt: 'Lädt …',
-    regie: 'Regie', originaltitel: 'Originaltitel:', besetzung: 'Besetzung:',
+    regie: 'Regie', idee: 'Idee', originaltitel: 'Originaltitel:', besetzung: 'Besetzung:',
     ansehen: '▶ Ansehen', leihen: 'Leihen', kaufen: 'Kaufen',
     trailer: '▶ Trailer',
     trailerTitel: function(t){ return 'Trailer: ' + t; },
@@ -2512,7 +2512,7 @@ var UI_TEXTE = {
     textWeniger: 'Less',
     mehrAnzeigen: function(n){ return 'Show more (' + n + ' more)'; },
     laedt: 'Loading …',
-    regie: 'Director', originaltitel: 'Original title:', besetzung: 'Cast:',
+    regie: 'Director', idee: 'Created by', originaltitel: 'Original title:', besetzung: 'Cast:',
     ansehen: '▶ Stream', leihen: 'Rent', kaufen: 'Buy',
     trailer: '▶ Trailer',
     trailerTitel: function(t){ return 'Trailer: ' + t; },
@@ -2824,7 +2824,7 @@ var UI_TEXTE = {
     textWeniger: 'Moins',
     mehrAnzeigen: function(n){ return 'Afficher plus (' + n + ' de plus)'; },
     laedt: 'Chargement …',
-    regie: 'Réalisation', originaltitel: 'Titre original :', besetzung: 'Distribution :',
+    regie: 'Réalisation', idee: 'Création', originaltitel: 'Titre original :', besetzung: 'Distribution :',
     ansehen: '▶ Regarder', leihen: 'Louer', kaufen: 'Acheter',
     trailer: '▶ Bande-annonce',
     trailerTitel: function(t){ return 'Bande-annonce : ' + t; },
@@ -3136,7 +3136,7 @@ var UI_TEXTE = {
     textWeniger: 'Menos',
     mehrAnzeigen: function(n){ return 'Mostrar más (' + n + ' más)'; },
     laedt: 'Cargando …',
-    regie: 'Dirección', originaltitel: 'Título original:', besetzung: 'Reparto:',
+    regie: 'Dirección', idee: 'Creación', originaltitel: 'Título original:', besetzung: 'Reparto:',
     ansehen: '▶ Ver', leihen: 'Alquilar', kaufen: 'Comprar',
     trailer: '▶ Tráiler',
     trailerTitel: function(t){ return 'Tráiler: ' + t; },
@@ -3448,7 +3448,7 @@ var UI_TEXTE = {
     textWeniger: 'Meno',
     mehrAnzeigen: function(n){ return 'Mostra altri (' + n + ' in più)'; },
     laedt: 'Caricamento …',
-    regie: 'Regia', originaltitel: 'Titolo originale:', besetzung: 'Cast:',
+    regie: 'Regia', idee: 'Ideazione', originaltitel: 'Titolo originale:', besetzung: 'Cast:',
     ansehen: '▶ Streaming', leihen: 'Noleggio', kaufen: 'Acquisto',
     trailer: '▶ Trailer',
     trailerTitel: function(t){ return 'Trailer: ' + t; },
@@ -3760,7 +3760,7 @@ var UI_TEXTE = {
     textWeniger: 'Minder',
     mehrAnzeigen: function(n){ return 'Meer tonen (nog ' + n + ')'; },
     laedt: 'Laden …',
-    regie: 'Regie', originaltitel: 'Originele titel:', besetzung: 'Cast:',
+    regie: 'Regie', idee: 'Bedacht door', originaltitel: 'Originele titel:', besetzung: 'Cast:',
     ansehen: '▶ Streamen', leihen: 'Huren', kaufen: 'Kopen',
     trailer: '▶ Trailer',
     trailerTitel: function(t){ return 'Trailer: ' + t; },
@@ -4072,7 +4072,7 @@ var UI_TEXTE = {
     textWeniger: 'Menos',
     mehrAnzeigen: function(n){ return 'Mostrar mais (+' + n + ')'; },
     laedt: 'Carregando …',
-    regie: 'Direção', originaltitel: 'Título original:', besetzung: 'Elenco:',
+    regie: 'Direção', idee: 'Criação', originaltitel: 'Título original:', besetzung: 'Elenco:',
     ansehen: '▶ Stream', leihen: 'Alugar', kaufen: 'Comprar',
     trailer: '▶ Trailer',
     trailerTitel: function(t){ return 'Trailer: ' + t; },
@@ -5841,7 +5841,8 @@ async function fillPlots(){
   } finally { _plotInFlight = null; }
 }
 function candDetailsHtml(c, kind){
-  var dirLabel = TXT.regie;
+  // Bei Serien steht im Feld die Idee/Entwicklung (TMDB created_by), keine Regie.
+  var dirLabel = kind === 'series' ? TXT.idee : TXT.regie;
   var tagsHtml = detailChipsHtml(c.g, c.kw);
   var rows = '';
   // Wie im Hauptlisten-Pfad (siehe eigeneZeileLi): beschriftet und nur, wenn er
@@ -7058,7 +7059,7 @@ function eigeneZeileLi(tab, i, profile) {
   // oder auf "Theat" in einem Hashtag wie "TheaterVerfilmung" anschlaegt.
   li.dataset.mainBlob = [item[0], item[1], (d.providers||[]).map(function(p){ return p.name; }).join(' ')].filter(Boolean).join(' ');
   li.dataset.exactBlob = [].concat(d.c||[], d.d ? [d.d] : [], kwSuchtexte(d.h)).join(' ');
-  const dirLabel = TXT.regie;
+  const dirLabel = tab === 'serien' ? TXT.idee : TXT.regie;
   // Genres aus dem POOL-Eintrag, der fuehrt alle. Ohne ihn bleibt nur das eine
   // aus dem Meta-Text -- derselbe Rueckfall wie beim Sortierwert weiter unten.
   const rowGenres = s.pool[i] ? (s.pool[i].g || []) : [metaGenre(item[1])].filter(Boolean);
