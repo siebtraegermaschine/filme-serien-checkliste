@@ -161,9 +161,17 @@
   gesamte Pipeline hätte ohne den Fix keinen sichtbaren Text erzeugt. Fix
   live seit 18.09.2026 (Commit 249649f), live geprüft: george-lucas-1,
   mark-hamill-2, anthony-daniels-6 zeigen jetzt Werdegang/Filmografie bei
-  uns/Einordnung. Noch offen: weitere, größere Erzeugungsläufe für den
-  Rest der priorisierten Personen (jeweils eigene Freigabe nötig, bezahlte
-  Anthropic-Nutzung).
+  uns/Einordnung. Zweiter Lauf (18.09.2026, freigegeben) mit 20 Subagenten
+  à 15 Personen (~300 Rollen-Einträge, Priorisierungsschwelle ≥2 Titel):
+  256 von 299 Texten bestanden die Prüfung und sind live (14 Formatfehler,
+  28 Faktenverdacht, 1 unbekannter Schlüssel verworfen) — insgesamt 281
+  Personen-Texte in `seo_content` (de-de). Live geprüft: robert-de-niro-380
+  zeigt den neuen Text. Von den ursprünglich ~16.790 offenen Rollen-
+  Einträgen (Stand 18.09.2026, nach Ausschlüssen und vor diesem Lauf)
+  bleiben rund 16.490 offen. Noch offen: weitere Runden für den Rest
+  (jeweils eigene Freigabe, bezahlte Anthropic-Nutzung) — bei diesem
+  Umfang ggf. wie beim Titeltext-Workflow einen Rundenbetrieb über
+  mehrere Sitzungen einrichten statt einzelner Ad-hoc-Läufe.
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
 - Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
