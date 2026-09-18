@@ -24,6 +24,7 @@
 User-agent: *
 Allow: /$
 Allow: /de-de/
+Allow: /sitemap-*.xml
 Allow: /og-image.png
 Allow: /icon-192.png
 Allow: /icon-512.png
