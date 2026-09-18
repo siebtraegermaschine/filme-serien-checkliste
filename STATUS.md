@@ -35,15 +35,18 @@
 - **Personen-Seiten** (Schauspieler/Regisseur, `/schauspieler/`,
   `/regisseur/`): Technik existiert bereits (`personen.js`, `seoData.js`,
   `seoRender.js`), aber bisher kaum genutzt — reine Lazy-Load-Kette ohne
-  Traffic. 18.09.2026: Migration für `personen_resolution.popularity` und
-  `seo_content`-Bereich `'person'` live, Bulk-Resolve-Skript
-  (`backend/scripts/personen-bulk-resolve.mjs`) läuft auf dem Server, füllt
-  Namensauflösung + TMDB-Bekanntheit für alle ~48.483 Namen im Katalog —
-  Datenbasis für eine Priorisierungsschwelle. Content-Frage entschieden:
-  eigene Absätze nur als Umformulierung verifizierter Fakten (TMDB-Biografie
-  + Katalogdaten), keine neuen Behauptungen über reale Personen. Noch offen:
-  Schwelle selbst (nach Bulk-Resolve mit echten Zahlen), Namenskollisions-
-  Restrisiko bei ausführlicherem Content nochmal bewerten.
+  Traffic. 18.09.2026: Bulk-Resolve (`backend/scripts/personen-bulk-resolve.mjs`)
+  fertig durchgelaufen — alle 48.483 Namen im Katalog geprüft, 47.006 davon
+  (97 %) mit TMDB-`tmdb_person_id` + `popularity` aufgelöst. Priorisierungs-
+  schwelle entschieden: ≥2 Titel im Katalog UND `popularity` ≥1 →
+  9.511 Personen für die erste Runde. `seo-auftrag-personen.md` (Auftrag für
+  redaktionelle Texte, analog `seo-auftrag-faecher.md`) steht. Content-Frage
+  entschieden: eigene Absätze nur als Umformulierung verifizierter Fakten
+  (TMDB-Biografie + Katalogdaten), keine neuen Behauptungen über reale
+  Personen. Noch offen: automatische Faktenprüfung für Personentexte fehlt
+  noch (Pendant zu `pruefeGegenQuelle`/`formatFehler`), Namenskollisions-
+  Restrisiko bei ausführlicherem Content nochmal bewerten, vor dem ersten
+  echten (kostenpflichtigen) Erzeugungslauf separate Freigabe einholen.
 - **Native Apps** (iOS/Android via Capacitor): kompletter 11-Phasen-Plan
   steht, noch nicht begonnen. Kritischer Vorab-Punkt: Sitzungs-Cookie
   funktioniert in der nativen Hülle nicht (Token-Auth nötig), Kontolöschung
@@ -124,10 +127,10 @@
 - SEO Stufe C / fehlende Daten: prüfen, ob sich ein weiterer Batch-API-Lauf
   (`backend/scripts/seo-batch.mjs --stufe C`) lohnt, oder erst die
   Search-Console-Zahlen der Stufe-B-Seiten abwarten (PLAN-KOSTEN.md 7.6).
-- Personen-Seiten: nach Abschluss des Bulk-Resolve-Laufs Priorisierungs-
-  schwelle mit echten popularity-/Titelanzahl-Zahlen festlegen, dann
-  `seo-auftrag-personen.md` (analog `seo-auftrag-faecher.md`) schreiben und
-  erste Texte erzeugen.
+- Personen-Seiten: Namenskollisions-Restrisiko bewerten, automatische
+  Faktenprüfung für Personentexte bauen (Pendant zu `pruefeGegenQuelle`/
+  `formatFehler`), dann mit Freigabe erste Texte für die 9.511 priorisierten
+  Personen erzeugen.
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
 - Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
