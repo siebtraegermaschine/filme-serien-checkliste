@@ -120,10 +120,11 @@ einer Zeile: wie viele Texte geschrieben wurden und ob es Auffälligkeiten
 gab.
 
 SELBSTPRUEFUNG VOR DER ABGABE
-Für Personentexte gibt es noch keine automatische Prüfung wie
-`pruefeGegenQuelle`/`formatFehler` in `seo-batch.mjs` für Titeltexte — die
-muss vor dem ersten echten (kostenpflichtigen) Erzeugungslauf noch gebaut
-werden (Wortzahl, verbotene Quellwörter, Namens-/Zahlenabgleich gegen den
-Datensatz). Bis dahin: Texte besonders sorgfältig gegen die obigen Regeln
-prüfen, bevor sie abgegeben werden — insbesondere, dass keine Angabe aus dem
-Text steht, die nicht wörtlich im Datensatz zu finden ist.
+Die automatische Prüfung für Personentexte steht in
+`scripts/seo-personen-check.mjs` (`formatFehlerPerson`/`faktenVerdachtPerson`,
+Pendant zu `formatFehler`/`pruefeGegenQuelle` für Titeltexte): Überschriften,
+Wortzahl, Zahlen-/Namensabgleich gegen den Datensatz sowie verbotene
+Formulierungen (Auszeichnung, Privatleben, Werturteil, Karriereeinordnung,
+Kontroverse). Trotzdem: Texte sorgfältig gegen die obigen Regeln prüfen,
+bevor sie abgegeben werden — die automatische Prüfung fängt die häufigsten
+Fehler ab, ersetzt aber nicht die eigene Sorgfalt.

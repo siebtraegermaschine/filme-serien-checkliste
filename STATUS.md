@@ -60,9 +60,15 @@
   Content-Runde ausschließen, als Filterregel im noch zu bauenden
   Paketier-Skript verankern; `known_for_department`-Abgleich zu
   rauschbehaftet für Auto-Ausschluss, nur als weicher Hinweis bei
-  Stichproben. Noch offen: automatische Faktenprüfung für Personentexte
-  fehlt noch (Pendant zu `pruefeGegenQuelle`/`formatFehler`), vor dem
-  ersten echten (kostenpflichtigen) Erzeugungslauf separate Freigabe
+  Stichproben. Automatische Faktenprüfung für Personentexte gebaut
+  (18.09.2026, `backend/scripts/seo-personen-check.mjs`): Pendant zu
+  `pruefeGegenQuelle`/`formatFehler`, mit eigenen Mustern für die
+  personenspezifischen Verbote (Auszeichnung, Privatleben, Werturteil,
+  Karriereeinordnung, Kontroverse) statt der titelspezifischen
+  (Geschäftszahl, Produktionsangabe); an Beispieltexten geprüft (saubere
+  Texte ohne Verdacht, fabrizierte Behauptungen werden erkannt). Noch offen:
+  Paketier-Skript (inkl. Ausschluss der 26 kollisionsverdächtigen Personen),
+  vor dem ersten echten (kostenpflichtigen) Erzeugungslauf separate Freigabe
   einholen.
 - **Native Apps** (iOS/Android via Capacitor): kompletter 11-Phasen-Plan
   steht, noch nicht begonnen. Kritischer Vorab-Punkt: Sitzungs-Cookie
@@ -144,11 +150,10 @@
 - SEO Stufe C / fehlende Daten: prüfen, ob sich ein weiterer Batch-API-Lauf
   (`backend/scripts/seo-batch.mjs --stufe C`) lohnt, oder erst die
   Search-Console-Zahlen der Stufe-B-Seiten abwarten (PLAN-KOSTEN.md 7.6).
-- Personen-Seiten: automatische Faktenprüfung für Personentexte bauen
-  (Pendant zu `pruefeGegenQuelle`/`formatFehler`), Paketier-Skript mit
-  Ausschluss der 26 kollisionsverdächtigen Personen bauen, dann mit
-  Freigabe erste Texte für die verbleibenden priorisierten Personen
-  erzeugen.
+- Personen-Seiten: Paketier-Skript bauen (bündelt priorisierte Personen für
+  die Texterzeugung, Ausschluss der 26 kollisionsverdächtigen Personen),
+  dann mit Freigabe erste Texte für die verbleibenden priorisierten
+  Personen erzeugen.
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
 - Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
