@@ -38,8 +38,8 @@
   Traffic. 18.09.2026: Bulk-Resolve (`backend/scripts/personen-bulk-resolve.mjs`)
   fertig durchgelaufen — alle 48.483 Namen im Katalog geprüft, 47.006 davon
   (97 %) mit TMDB-`tmdb_person_id` + `popularity` aufgelöst. Priorisierungs-
-  schwelle entschieden: ≥2 Titel im Katalog UND `popularity` ≥1 →
-  9.511 Personen für die erste Runde. `seo-auftrag-personen.md` (Auftrag für
+  schwelle entschieden: ≥2 Titel im Katalog (ohne popularity-Bedingung) →
+  18.637 Personen für die erste Runde. `seo-auftrag-personen.md` (Auftrag für
   redaktionelle Texte, analog `seo-auftrag-faecher.md`) steht. Content-Frage
   entschieden: eigene Absätze nur als Umformulierung verifizierter Fakten
   (TMDB-Biografie + Katalogdaten), keine neuen Behauptungen über reale
@@ -129,7 +129,7 @@
   Search-Console-Zahlen der Stufe-B-Seiten abwarten (PLAN-KOSTEN.md 7.6).
 - Personen-Seiten: Namenskollisions-Restrisiko bewerten, automatische
   Faktenprüfung für Personentexte bauen (Pendant zu `pruefeGegenQuelle`/
-  `formatFehler`), dann mit Freigabe erste Texte für die 9.511 priorisierten
+  `formatFehler`), dann mit Freigabe erste Texte für die 18.637 priorisierten
   Personen erzeugen.
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
