@@ -88,9 +88,14 @@ async function kandidaten({ locale, limit, minTitel, ausschluss }) {
          SELECT unnest(cast_names) AS name, year FROM titles WHERE cast_names IS NOT NULL AND year IS NOT NULL
        ) x GROUP BY name
      ),
+     -- Ein tmdb_id kann mehrere Namens-Aliase in personen_resolution haben
+     -- (z. B. Kuenstlername und buergerlicher Name) -- ohne Gruppierung nach
+     -- tmdb_id entstehen doppelte Rollen-Eintraege mit demselben Schluessel,
+     -- was die Batch-API wegen doppelter custom_ids hart ablehnt.
      personen AS (
-       SELECT pr.name, pr.tmdb_person_id AS tmdb_id, pc.biografie, pc.geburtstag,
-              coalesce(r.anzahl, 0) AS regie_anzahl, coalesce(b.anzahl, 0) AS besetzung_anzahl
+       SELECT pr.tmdb_person_id AS tmdb_id, array_agg(DISTINCT pr.name) AS namen,
+              max(pc.biografie) AS biografie, max(pc.geburtstag) AS geburtstag,
+              sum(coalesce(r.anzahl, 0)) AS regie_anzahl, sum(coalesce(b.anzahl, 0)) AS besetzung_anzahl
          FROM personen_resolution pr
          JOIN titelzahl t ON t.name = pr.name
          JOIN personen_cache pc ON pc.tmdb_person_id = pr.tmdb_person_id
@@ -105,13 +110,14 @@ async function kandidaten({ locale, limit, minTitel, ausschluss }) {
                 AND (extract(year FROM pc.geburtstag)::int > f.jahr
                      OR f.jahr - extract(year FROM pc.geburtstag)::int < 5)
               )
+        GROUP BY pr.tmdb_person_id
      ),
      rollen AS (
-       SELECT name, tmdb_id, biografie, geburtstag, 'regisseur' AS rolle FROM personen WHERE regie_anzahl > 0
+       SELECT tmdb_id, namen, biografie, geburtstag, 'regisseur' AS rolle FROM personen WHERE regie_anzahl > 0
        UNION ALL
-       SELECT name, tmdb_id, biografie, geburtstag, 'schauspieler' AS rolle FROM personen WHERE besetzung_anzahl > 0
+       SELECT tmdb_id, namen, biografie, geburtstag, 'schauspieler' AS rolle FROM personen WHERE besetzung_anzahl > 0
      )
-     SELECT tmdb_id, name, biografie, geburtstag, rolle
+     SELECT tmdb_id, namen, biografie, geburtstag, rolle
        FROM rollen r
       WHERE NOT EXISTS (
               SELECT 1 FROM seo_content s
@@ -125,12 +131,15 @@ async function kandidaten({ locale, limit, minTitel, ausschluss }) {
   return rows;
 }
 
-async function filmografieFuerRolle(name, rolle) {
-  const bedingung = rolle === 'regisseur' ? 'director = $1' : '$1 = ANY(cast_names)';
+// namen: alle Aliase derselben tmdb_id (siehe kandidaten()) -- ein Titel kann
+// unter einem anderen Alias verzeichnet sein als dem, der spaeter als Name
+// angezeigt wird, deshalb hier gegen alle Aliase matchen.
+async function filmografieFuerRolle(namen, rolle) {
+  const bedingung = rolle === 'regisseur' ? 'director = ANY($1::text[])' : 'cast_names && $1::text[]';
   const { rows } = await pool.query(
     `SELECT title, year, type, genres, rating FROM titles
       WHERE ${bedingung} ORDER BY ${NOTE_SQL} DESC LIMIT 24`,
-    [name]
+    [namen]
   );
   return rows;
 }
@@ -145,9 +154,9 @@ const geburtstagString = (wert) => {
 // baut daraus dasselbe Person-Objekt, das datensatzPerson()/faktenVerdachtPerson()
 // erwarten -- identisch zu personDatensatz() in personen-einspielen.mjs.
 async function personObjekt(row) {
-  const filme = await filmografieFuerRolle(row.name, row.rolle);
+  const filme = await filmografieFuerRolle(row.namen, row.rolle);
   return {
-    name: row.name,
+    name: row.namen[0],
     rolle: row.rolle === 'regisseur' ? 'Regisseur/in' : 'Schauspieler/in',
     geburtstag: geburtstagString(row.geburtstag),
     biografie: row.biografie,
@@ -412,10 +421,11 @@ async function main() {
     const liste = [];
     for (const r of rows) {
       const { rows: personRows } = await pool.query(
-        `SELECT pr.name, pc.biografie, pc.geburtstag
+        `SELECT array_agg(DISTINCT pr.name) AS namen, max(pc.biografie) AS biografie, max(pc.geburtstag) AS geburtstag
            FROM personen_resolution pr
            JOIN personen_cache pc ON pc.tmdb_person_id = pr.tmdb_person_id
-          WHERE pr.tmdb_person_id = $1 LIMIT 1`,
+          WHERE pr.tmdb_person_id = $1
+          GROUP BY pr.tmdb_person_id`,
         [r.tmdb_id]
       );
       if (!personRows.length) continue;
