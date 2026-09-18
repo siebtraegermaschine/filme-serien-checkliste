@@ -78,7 +78,9 @@ export function datensatzPerson(p) {
     const filmeCount = filme.filter((f) => f.type === 'movie').length;
     const serienCount = filme.filter((f) => f.type === 'series').length;
     teile.push(`Davon Filme: ${filmeCount}, Serien: ${serienCount}`);
-    const bewertungen = filme.map((f) => f.rating).filter((r) => r != null);
+    // rating kommt aus Postgres als NUMERIC -- node-postgres liefert das als
+    // String, nicht als Zahl, sonst wirft toFixed().
+    const bewertungen = filme.map((f) => Number(f.rating)).filter((r) => Number.isFinite(r));
     if (bewertungen.length) {
       const schnitt = bewertungen.reduce((a, b) => a + b, 0) / bewertungen.length;
       teile.push(`Unsere Bewertungen: ${bewertungen.map((r) => r.toFixed(1)).join(', ')} (Schnitt ${schnitt.toFixed(1)})`);
