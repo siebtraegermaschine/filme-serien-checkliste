@@ -1036,3 +1036,29 @@ CREATE TABLE IF NOT EXISTS wache_meldungen (
   tag         DATE NOT NULL,
   gemeldet_am TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Personen-Seiten, Vorbereitung (18.09.2026): TMDB-Bekanntheit je Person
+-- mitspeichern, damit sich vor dem eigentlichen Content-Bau eine
+-- Priorisierungsschwelle (Mindestanzahl Titel im Katalog UND/ODER
+-- TMDB-popularity) anhand echter Zahlen festlegen laesst.
+ALTER TABLE personen_resolution ADD COLUMN IF NOT EXISTS popularity REAL;
+
+-- 'person' als eigener Bereich fuer redaktionellen Personen-Text (eigene
+-- Umformulierung von TMDB-Fakten + Katalogdaten, siehe personen.js -- NICHT
+-- die TMDB-Biografie selbst, die bleibt unveraendert in personen_cache).
+-- Gleiche Infrastruktur wie Titel/Genre/etc. statt eigener Spalte.
+DO $$
+DECLARE
+  old_cons TEXT;
+BEGIN
+  SELECT conname INTO old_cons FROM pg_constraint
+    WHERE conrelid = 'seo_content'::regclass
+      AND contype = 'c'
+      AND pg_get_constraintdef(oid) LIKE '%bereich%'
+      AND pg_get_constraintdef(oid) NOT LIKE '%person%';
+  IF old_cons IS NOT NULL THEN
+    EXECUTE format('ALTER TABLE seo_content DROP CONSTRAINT %I', old_cons);
+    ALTER TABLE seo_content ADD CONSTRAINT seo_content_bereich_check
+      CHECK (bereich IN ('titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person'));
+  END IF;
+END $$;

@@ -32,6 +32,18 @@
   (Datenlage prüfen, ob sich ein weiterer Batch-Lauf lohnt), sowie die
   Messfrage aus PLAN-KOSTEN.md 7.6 (bringen die vorhandenen Seiten Klicks?,
   vor weiterer Skalierung per Search Console prüfen).
+- **Personen-Seiten** (Schauspieler/Regisseur, `/schauspieler/`,
+  `/regisseur/`): Technik existiert bereits (`personen.js`, `seoData.js`,
+  `seoRender.js`), aber bisher kaum genutzt — reine Lazy-Load-Kette ohne
+  Traffic. 18.09.2026: Migration für `personen_resolution.popularity` und
+  `seo_content`-Bereich `'person'` live, Bulk-Resolve-Skript
+  (`backend/scripts/personen-bulk-resolve.mjs`) läuft auf dem Server, füllt
+  Namensauflösung + TMDB-Bekanntheit für alle ~48.483 Namen im Katalog —
+  Datenbasis für eine Priorisierungsschwelle. Content-Frage entschieden:
+  eigene Absätze nur als Umformulierung verifizierter Fakten (TMDB-Biografie
+  + Katalogdaten), keine neuen Behauptungen über reale Personen. Noch offen:
+  Schwelle selbst (nach Bulk-Resolve mit echten Zahlen), Namenskollisions-
+  Restrisiko bei ausführlicherem Content nochmal bewerten.
 - **Native Apps** (iOS/Android via Capacitor): kompletter 11-Phasen-Plan
   steht, noch nicht begonnen. Kritischer Vorab-Punkt: Sitzungs-Cookie
   funktioniert in der nativen Hülle nicht (Token-Auth nötig), Kontolöschung
@@ -43,7 +55,8 @@
   MovieGlu, Kinoheld-Anfrage) noch einzuholen.
 - **PLAN-SEO** (redaktionelle SEO-Landingpages, /de-de/...): Technik fertig,
   Content-Befüllung ist der SEO-Content-Prozess oben. Personen-Seiten
-  (Schauspieler/Regisseur) brauchen noch einen eigenen TMDB-Personen-Import.
+  (Schauspieler/Regisseur): siehe eigener Punkt oben, Technik existiert
+  bereits, TMDB-Personen-Import läuft (Bulk-Resolve).
 - **Sportcode-Rückbau**: CouchUltras seit 24.08. ausgegliedert, alter
   Sportcode liegt noch tot im Repo (siehe Tabelle UEBERGABE-OFFEN
   0.0.0.0.0.0) — Rückbau erst, wenn CouchUltras länger unauffällig läuft.
@@ -111,6 +124,10 @@
 - SEO Stufe C / fehlende Daten: prüfen, ob sich ein weiterer Batch-API-Lauf
   (`backend/scripts/seo-batch.mjs --stufe C`) lohnt, oder erst die
   Search-Console-Zahlen der Stufe-B-Seiten abwarten (PLAN-KOSTEN.md 7.6).
+- Personen-Seiten: nach Abschluss des Bulk-Resolve-Laufs Priorisierungs-
+  schwelle mit echten popularity-/Titelanzahl-Zahlen festlegen, dann
+  `seo-auftrag-personen.md` (analog `seo-auftrag-faecher.md`) schreiben und
+  erste Texte erzeugen.
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
 - Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
