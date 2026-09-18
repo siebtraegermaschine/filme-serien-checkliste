@@ -185,6 +185,21 @@ function absaetzeHtml(absaetze) {
 // sie ueberarbeitet sind -- keine Seite bricht durch die Umstellung.
 const NEUE_ABSCHNITTE = ['Worum es geht', 'Entstehungsgeschichte', 'Hinter den Kulissen', 'Einordnung & Wirkung'];
 
+// Personentexte (seo-auftrag-personen.md) tragen dieselben "### "-Marker,
+// aber ihre eigenen drei Abschnitte -- Ueberschriften-Reihenfolge separat
+// von NEUE_ABSCHNITTE, parseNeueAbschnitte() selbst ist generisch genug fuer
+// beide Formate.
+const PERSON_ABSCHNITTE = ['Werdegang', 'Filmografie bei uns', 'Einordnung'];
+
+function personInhaltHtml(text) {
+  const abschnitte = parseNeueAbschnitte(text);
+  if (!abschnitte) return null;
+  return PERSON_ABSCHNITTE
+    .filter((h) => abschnitte[h])
+    .map((h) => `<h2>${attrEsc(h)}</h2>${absaetzeHtml(abschnitte[h].split('\n\n').map((p) => p.trim()).filter(Boolean))}`)
+    .join('');
+}
+
 function parseNeueAbschnitte(text) {
   if (!text || !text.includes('###')) return null;
   const teile = text.split(/\n?###\s*/).map((t) => t.trim()).filter(Boolean);
@@ -595,7 +610,7 @@ export function seitePerson(daten, locale) {
   const rolleWort = daten.rolle === 'regisseur' ? 'Regisseur' : 'Schauspieler';
   const pfad = `/${locale}/${daten.rolle}/${daten.slug}-${daten.tmdbPersonId}`;
   const titelZeile = `${daten.name} — Filme & Serien im Überblick | MovieMatch`;
-  const beschreibung = kurzfassung(daten.biografie) || `${daten.name}: Filmografie, Bewertungen und Verfügbarkeit auf MovieMatch.`;
+  const beschreibung = kurzfassung(daten.text) || kurzfassung(daten.biografie) || `${daten.name}: Filmografie, Bewertungen und Verfügbarkeit auf MovieMatch.`;
   // Keine eigene Hub-Seite fuer Schauspieler/Regisseure in dieser Runde
   // (siehe PLAN-SEO.md 1.5/1.6) -- Breadcrumb bleibt zweistufig.
   const kette = [{ label: 'Start', href: SITE + '/' }, { label: daten.name }];
@@ -609,9 +624,10 @@ export function seitePerson(daten, locale) {
   const fotoHtml = daten.fotoPfad
     ? `<img src="https://image.tmdb.org/t/p/w300${attrEsc(daten.fotoPfad)}" alt="${attrEsc(daten.name)}">`
     : '';
-  const bioHtml = daten.biografie
-    ? `<div class="seo-text">${daten.biografie.split('\n').map((p) => p.trim()).filter(Boolean).map((p) => `<p>${attrEsc(p)}</p>`).join('')}</div>`
-    : '<p class="hinweis">Keine Biografie verfügbar.</p>';
+  const redaktionHtml = personInhaltHtml(daten.text);
+  const bioHtml = redaktionHtml || (daten.biografie
+    ? `<h2>Biografie</h2><div class="seo-text">${daten.biografie.split('\n').map((p) => p.trim()).filter(Boolean).map((p) => `<p>${attrEsc(p)}</p>`).join('')}</div>`
+    : '<h2>Biografie</h2><p class="hinweis">Keine Biografie verfügbar.</p>');
 
   const bodyHtml = `
     ${brotkrumenHtml(kette)}
@@ -622,7 +638,6 @@ export function seitePerson(daten, locale) {
         <div class="meta-zeile">${rolleWort}${daten.geburtstag ? ' · geboren ' + attrEsc(daten.geburtstag) : ''}</div>
       </div>
     </div>
-    <h2>Biografie</h2>
     ${bioHtml}
     <h2>Filmografie${rolleWort === 'Regisseur' ? ' (Regie)' : ''}</h2>
     <div class="raster">${daten.filmografie.map((t) => karte(t, t.type === 'series' ? 'serie' : 'film', locale)).join('')}</div>

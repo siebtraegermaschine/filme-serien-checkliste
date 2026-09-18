@@ -491,10 +491,11 @@ export async function ladeBestenlisteHub(art, locale) {
   return { type, art, jahre: jahre.map((r) => r.year), genres, text, indexierbar: !!text };
 }
 
-// Schauspieler-/Regisseur-Seiten (Phase 1b, PLAN-SEO.md 1.5/1.6). Keine
-// eigene Redaktion (seo_content) -- die Biografie ist TMDBs echter Text
-// (siehe personen.js), der einzigartige Wert dieser Seite ist die
-// Filmografie INNERHALB unseres Katalogs (Bewertung, Verfuegbarkeit).
+// Schauspieler-/Regisseur-Seiten (Phase 1b, PLAN-SEO.md 1.5/1.6). Redaktion
+// (seo_content, bereich 'person', Schluessel '<rolle>:<tmdbPersonId>') wird
+// hier geladen wie bei Titelseiten -- ohne sie bleibt die Seite noindex
+// (s.u.), die rohe TMDB-Biografie dient nur noch als Rueckfallanzeige
+// (seoRender.js), solange fuer diese Person noch kein Text vorliegt.
 // rolle 'regisseur' sucht ueber titles.director, 'schauspieler' ueber
 // cast_names -- eine Person mit beiden Rollen bekommt zwei getrennte Seiten,
 // damit keine der beiden Dubletten-Inhalt zur anderen wird.
@@ -518,11 +519,14 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
   if (!person) return null;
 
   const bedingung = rolle === 'regisseur' ? 'director = $1' : '$1 = ANY(cast_names)';
-  const { rows } = await pool.query(
-    `SELECT id, tmdb_id, type, title, year, poster_path FROM ${TITEL_MIT_KENNUNG}
-      WHERE ${bedingung} ORDER BY ${NOTE_SQL} DESC LIMIT 24`,
-    [person.name]
-  );
+  const [{ rows }, text] = await Promise.all([
+    pool.query(
+      `SELECT id, tmdb_id, type, title, year, poster_path FROM ${TITEL_MIT_KENNUNG}
+        WHERE ${bedingung} ORDER BY ${NOTE_SQL} DESC LIMIT 24`,
+      [person.name]
+    ),
+    ladeSeoText('person', `${rolle}:${tmdbPersonId}`, locale),
+  ]);
   const filmografie = rows.map((r) => ({
     id: String(r.id), tmdbId: r.tmdb_id, type: r.type, slug: slugify(r.title), title: r.title, year: r.year, posterPath: r.poster_path,
   }));
@@ -531,8 +535,8 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
     tmdbPersonId, rolle, name: person.name, slug: slugify(person.name),
     biografie: person.biografie, fotoPfad: person.foto_pfad,
     geburtstag: geburtstagString(person.geburtstag),
-    filmografie,
-    indexierbar: !!person.biografie && filmografie.length > 0,
+    filmografie, text,
+    indexierbar: !!text && filmografie.length > 0,
   };
 }
 
