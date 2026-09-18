@@ -150,12 +150,20 @@
 - SEO Stufe C / fehlende Daten: prüfen, ob sich ein weiterer Batch-API-Lauf
   (`backend/scripts/seo-batch.mjs --stufe C`) lohnt, oder erst die
   Search-Console-Zahlen der Stufe-B-Seiten abwarten (PLAN-KOSTEN.md 7.6).
-- Personen-Seiten: Pipeline (Faktenprüfung, Paketier-Skript, Einspiel-Skript)
-  gebaut und gegen echte Serverdaten getestet — Paketier-Skript hat ein
-  reales Paket mit George Lucas/Mark Hamill erzeugt, Einspiel-Skript hat
-  Format- und Unbekannt-Ablehnung korrekt geprüft. Noch offen: mit
-  Freigabe erste Texte für die priorisierten Personen erzeugen (bezahlte
-  Anthropic-Nutzung, braucht eigene Freigabe).
+- Personen-Seiten: erster echter Erzeugungslauf (18.09.2026, freigegeben,
+  bezahlte Anthropic-Nutzung) mit 2 Subagenten à 15 Personen — 25 von 30
+  Texten bestanden Format- und Faktenprüfung und sind live in `seo_content`,
+  5 wurden verworfen (u. a. Robin Wright „24": echte Regelverletzung durch
+  vermischte Filmografie-Rollenangaben, Rest vermutlich konservative
+  Fehlalarme des mechanischen Checkers). Dabei entdeckt und behoben:
+  `ladePersonSeite()`/`seitePerson()` (`backend/lib/seoData.js`,
+  `backend/lib/seoRender.js`) lasen `seo_content` bisher gar nicht — die
+  gesamte Pipeline hätte ohne den Fix keinen sichtbaren Text erzeugt. Fix
+  live seit 18.09.2026 (Commit 249649f), live geprüft: george-lucas-1,
+  mark-hamill-2, anthony-daniels-6 zeigen jetzt Werdegang/Filmografie bei
+  uns/Einordnung. Noch offen: weitere, größere Erzeugungsläufe für den
+  Rest der priorisierten Personen (jeweils eigene Freigabe nötig, bezahlte
+  Anthropic-Nutzung).
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
 - Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
