@@ -150,10 +150,12 @@
 - SEO Stufe C / fehlende Daten: prüfen, ob sich ein weiterer Batch-API-Lauf
   (`backend/scripts/seo-batch.mjs --stufe C`) lohnt, oder erst die
   Search-Console-Zahlen der Stufe-B-Seiten abwarten (PLAN-KOSTEN.md 7.6).
-- Personen-Seiten: Paketier-Skript bauen (bündelt priorisierte Personen für
-  die Texterzeugung, Ausschluss der 26 kollisionsverdächtigen Personen),
-  dann mit Freigabe erste Texte für die verbleibenden priorisierten
-  Personen erzeugen.
+- Personen-Seiten: Pipeline (Faktenprüfung, Paketier-Skript, Einspiel-Skript)
+  gebaut und gegen echte Serverdaten getestet — Paketier-Skript hat ein
+  reales Paket mit George Lucas/Mark Hamill erzeugt, Einspiel-Skript hat
+  Format- und Unbekannt-Ablehnung korrekt geprüft. Noch offen: mit
+  Freigabe erste Texte für die priorisierten Personen erzeugen (bezahlte
+  Anthropic-Nutzung, braucht eigene Freigabe).
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
 - Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
