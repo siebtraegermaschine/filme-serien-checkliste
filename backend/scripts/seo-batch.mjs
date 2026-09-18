@@ -481,7 +481,10 @@ export function pruefeGegenQuelle(text, quellText, kennzahlen = {}) {
   // Zahlen: jede Zahl im Text muss in der Quelle vorkommen oder sich zwingend
   // daraus errechnen. Deutsche Texte schreiben "8,7", der Datensatz "8.7" --
   // ohne diese Angleichung meldet die Pruefung jede Bewertung als erfunden.
-  const norm = (s) => s.replace(/\.(?=\d{3}\b)/g, '').replace(',', '.');
+  // Fuehrende Nullen fallen weg: ISO-Daten in der Quelle ("1937-06-01")
+  // zerlegen an den Bindestrichen in "01", Fliesstext schreibt "1. Juni" --
+  // ohne diese Angleichung meldet die Pruefung jeden Tag unter 10 als erfunden.
+  const norm = (s) => s.replace(/\.(?=\d{3}\b)/g, '').replace(',', '.').replace(/^0+(?=\d)/, '');
   const jetzt = new Date().getFullYear();
   // Der Jahresabstand darf um eins abweichen: "gut 15 Jahre" bei rechnerisch
   // 16 ist normales Runden in Fliesstext, keine erfundene Zahl.
