@@ -78,14 +78,15 @@ export async function ladePersonDaten(tmdbPersonId) {
     const row = {
       tmdb_person_id: tmdbPersonId, name: d.name,
       biografie, foto_pfad: d.profile_path || null, geburtstag: d.birthday || null,
+      known_for_department: d.known_for_department || null,
     };
     await pool.query(
-      `INSERT INTO personen_cache (tmdb_person_id, name, biografie, foto_pfad, geburtstag)
-       VALUES ($1,$2,$3,$4,$5)
+      `INSERT INTO personen_cache (tmdb_person_id, name, biografie, foto_pfad, geburtstag, known_for_department)
+       VALUES ($1,$2,$3,$4,$5,$6)
        ON CONFLICT (tmdb_person_id) DO UPDATE SET
          name = EXCLUDED.name, biografie = EXCLUDED.biografie, foto_pfad = EXCLUDED.foto_pfad,
-         geburtstag = EXCLUDED.geburtstag, fetched_at = now()`,
-      [row.tmdb_person_id, row.name, row.biografie, row.foto_pfad, row.geburtstag]
+         geburtstag = EXCLUDED.geburtstag, known_for_department = EXCLUDED.known_for_department, fetched_at = now()`,
+      [row.tmdb_person_id, row.name, row.biografie, row.foto_pfad, row.geburtstag, row.known_for_department]
     );
     return row;
   } catch (err) {

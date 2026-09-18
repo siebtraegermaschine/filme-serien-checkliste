@@ -1062,3 +1062,9 @@ BEGIN
       CHECK (bereich IN ('titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person'));
   END IF;
 END $$;
+
+-- Personen-Seiten, Namenskollisions-Check (18.09.2026): TMDBs eigene
+-- Rollenzuordnung mitspeichern, um sie gegen unsere Zuordnung (Schauspieler/
+-- Regisseur aus director/cast_names) abzugleichen -- starke Abweichung ist
+-- ein Hinweis auf eine falsch aufgeloeste Person, siehe STATUS.md.
+ALTER TABLE personen_cache ADD COLUMN IF NOT EXISTS known_for_department TEXT;
