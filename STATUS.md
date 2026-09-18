@@ -49,17 +49,21 @@
   falsche Person treffen. Bei Titeltexten fiel das kaum auf (nur Namens-
   erwähnung), bei einer eigenen Personen-Seite mit Biografie/Geburtsdatum
   wäre eine Fehlzuordnung eine sichtbare Falschaussage über eine reale
-  Person. Mitigation geplant, kostet nur TMDB-Freikontingent: Plausibilitäts-
-  check vor Content-Erstellung, Geburtsdatum der aufgelösten Person gegen
-  Erscheinungsjahre ihrer zugeordneten Katalog-Titel (Person darf zur
-  Titel-Zeit nicht ungeboren/unplausibel jung gewesen sein) sowie TMDBs
-  `known_for_department` gegen unsere Rollenzuordnung (Schauspieler/
-  Regisseur) — Auffälligkeiten zurückstellen statt raten. Braucht einen
-  zweiten Bulk-Lauf (Personendetails statt nur Suche) für die 18.637
-  priorisierten Personen, noch nicht gestartet. Noch offen: automatische
-  Faktenprüfung für Personentexte fehlt noch (Pendant zu
-  `pruefeGegenQuelle`/`formatFehler`), vor dem ersten echten
-  (kostenpflichtigen) Erzeugungslauf separate Freigabe einholen.
+  Person. Mitigation umgesetzt und Check gefahren (18.09.2026): zweiter
+  Bulk-Lauf (`backend/scripts/personen-detail-bulk.mjs`, ergänzt
+  `personen_cache.known_for_department`) hat für 18.696 Personen
+  Geburtsdatum + TMDB-Rollenzuordnung nachgeladen. Plausibilitätscheck
+  (Geburtsjahr vs. frühestes Katalog-Titel-Jahr) fand nur 22 von 18.771
+  Personen (0,12 %) mit hartem Widerspruch — Namensauflösung insgesamt
+  zuverlässig. Entscheidung: 26 Personen mit unplausiblem Geburtsjahr
+  (Geburtsjahr < 5 Jahre vor frühestem Titel oder danach) aus der ersten
+  Content-Runde ausschließen, als Filterregel im noch zu bauenden
+  Paketier-Skript verankern; `known_for_department`-Abgleich zu
+  rauschbehaftet für Auto-Ausschluss, nur als weicher Hinweis bei
+  Stichproben. Noch offen: automatische Faktenprüfung für Personentexte
+  fehlt noch (Pendant zu `pruefeGegenQuelle`/`formatFehler`), vor dem
+  ersten echten (kostenpflichtigen) Erzeugungslauf separate Freigabe
+  einholen.
 - **Native Apps** (iOS/Android via Capacitor): kompletter 11-Phasen-Plan
   steht, noch nicht begonnen. Kritischer Vorab-Punkt: Sitzungs-Cookie
   funktioniert in der nativen Hülle nicht (Token-Auth nötig), Kontolöschung
@@ -140,11 +144,10 @@
 - SEO Stufe C / fehlende Daten: prüfen, ob sich ein weiterer Batch-API-Lauf
   (`backend/scripts/seo-batch.mjs --stufe C`) lohnt, oder erst die
   Search-Console-Zahlen der Stufe-B-Seiten abwarten (PLAN-KOSTEN.md 7.6).
-- Personen-Seiten: zweiten Bulk-Lauf für Personendetails (Geburtsdatum,
-  known_for_department) der 18.637 priorisierten Personen bauen, damit der
-  Plausibilitätscheck gegen Namenskollisionen vor der Textproduktion laufen
-  kann; automatische Faktenprüfung für Personentexte bauen (Pendant zu
-  `pruefeGegenQuelle`/`formatFehler`); dann mit Freigabe erste Texte
+- Personen-Seiten: automatische Faktenprüfung für Personentexte bauen
+  (Pendant zu `pruefeGegenQuelle`/`formatFehler`), Paketier-Skript mit
+  Ausschluss der 26 kollisionsverdächtigen Personen bauen, dann mit
+  Freigabe erste Texte für die verbleibenden priorisierten Personen
   erzeugen.
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
