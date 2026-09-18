@@ -43,10 +43,23 @@
   redaktionelle Texte, analog `seo-auftrag-faecher.md`) steht. Content-Frage
   entschieden: eigene Absätze nur als Umformulierung verifizierter Fakten
   (TMDB-Biografie + Katalogdaten), keine neuen Behauptungen über reale
-  Personen. Noch offen: automatische Faktenprüfung für Personentexte fehlt
-  noch (Pendant zu `pruefeGegenQuelle`/`formatFehler`), Namenskollisions-
-  Restrisiko bei ausführlicherem Content nochmal bewerten, vor dem ersten
-  echten (kostenpflichtigen) Erzeugungslauf separate Freigabe einholen.
+  Personen. Namenskollisionsrisiko bewertet (18.09.2026): `resolvePersonId`/
+  Bulk-Resolve wählt bei mehreren TMDB-Treffern mit exakt gleichem Namen den
+  ersten (populärsten) — ohne Geburtsjahr- oder Werksabgleich kann das die
+  falsche Person treffen. Bei Titeltexten fiel das kaum auf (nur Namens-
+  erwähnung), bei einer eigenen Personen-Seite mit Biografie/Geburtsdatum
+  wäre eine Fehlzuordnung eine sichtbare Falschaussage über eine reale
+  Person. Mitigation geplant, kostet nur TMDB-Freikontingent: Plausibilitäts-
+  check vor Content-Erstellung, Geburtsdatum der aufgelösten Person gegen
+  Erscheinungsjahre ihrer zugeordneten Katalog-Titel (Person darf zur
+  Titel-Zeit nicht ungeboren/unplausibel jung gewesen sein) sowie TMDBs
+  `known_for_department` gegen unsere Rollenzuordnung (Schauspieler/
+  Regisseur) — Auffälligkeiten zurückstellen statt raten. Braucht einen
+  zweiten Bulk-Lauf (Personendetails statt nur Suche) für die 18.637
+  priorisierten Personen, noch nicht gestartet. Noch offen: automatische
+  Faktenprüfung für Personentexte fehlt noch (Pendant zu
+  `pruefeGegenQuelle`/`formatFehler`), vor dem ersten echten
+  (kostenpflichtigen) Erzeugungslauf separate Freigabe einholen.
 - **Native Apps** (iOS/Android via Capacitor): kompletter 11-Phasen-Plan
   steht, noch nicht begonnen. Kritischer Vorab-Punkt: Sitzungs-Cookie
   funktioniert in der nativen Hülle nicht (Token-Auth nötig), Kontolöschung
@@ -127,10 +140,12 @@
 - SEO Stufe C / fehlende Daten: prüfen, ob sich ein weiterer Batch-API-Lauf
   (`backend/scripts/seo-batch.mjs --stufe C`) lohnt, oder erst die
   Search-Console-Zahlen der Stufe-B-Seiten abwarten (PLAN-KOSTEN.md 7.6).
-- Personen-Seiten: Namenskollisions-Restrisiko bewerten, automatische
-  Faktenprüfung für Personentexte bauen (Pendant zu `pruefeGegenQuelle`/
-  `formatFehler`), dann mit Freigabe erste Texte für die 18.637 priorisierten
-  Personen erzeugen.
+- Personen-Seiten: zweiten Bulk-Lauf für Personendetails (Geburtsdatum,
+  known_for_department) der 18.637 priorisierten Personen bauen, damit der
+  Plausibilitätscheck gegen Namenskollisionen vor der Textproduktion laufen
+  kann; automatische Faktenprüfung für Personentexte bauen (Pendant zu
+  `pruefeGegenQuelle`/`formatFehler`); dann mit Freigabe erste Texte
+  erzeugen.
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
 - Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
