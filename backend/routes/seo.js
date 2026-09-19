@@ -17,6 +17,7 @@ import { sitemapIndex, sitemapBereich, BEREICHE } from '../lib/seoSitemap.js';
 import { track } from '../lib/track.js';
 import { tageskennung } from '../lib/tageskennung.js';
 import { herkunftKategorie, geraetTyp, istBot } from '../lib/herkunft.js';
+import { listeAusPfad, analyticsTypFuerListe } from '../lib/seoBestenlisten.js';
 
 const router = createAsyncRouter();
 
@@ -39,6 +40,9 @@ const PFAD_RE = /^[a-z0-9\/-]{1,160}$/;
 export function seoAufrufTyp(pfad) {
   const teile = String(pfad || '').split('/').filter(Boolean);
   if (!localeGueltig(teile[0])) return null;
+  if (teile[1] === 'beste-filme' || teile[1] === 'beste-serien') {
+    return analyticsTypFuerListe(teile.slice(1)) || teile[1];
+  }
   return teile[1] || 'start';
 }
 export function seoAufrufPfad(pfad) {
@@ -158,13 +162,19 @@ router.get('/:locale/beste-serien', GRENZE, async (req, res) => {
   res.type('html').send(seiteBestenlisteHub(daten, locale));
 });
 
-router.get('/:locale/beste-filme/:modus/:wert', GRENZE, (req, res) => bestenlisteSeite(req, res, 'filme'));
-router.get('/:locale/beste-serien/:modus/:wert', GRENZE, (req, res) => bestenlisteSeite(req, res, 'serien'));
+// Ein bis vier Pfadsegmente hinter /beste-filme|serien/ (siehe listeAusPfad).
+for (const [art, wort] of [['filme', 'beste-filme'], ['serien', 'beste-serien']]) {
+  router.get(`/:locale/${wort}/:a`, GRENZE, (req, res) => bestenlisteSeite(req, res, art));
+  router.get(`/:locale/${wort}/:a/:b`, GRENZE, (req, res) => bestenlisteSeite(req, res, art));
+  router.get(`/:locale/${wort}/:a/:b/:c/:d`, GRENZE, (req, res) => bestenlisteSeite(req, res, art));
+}
 
 async function bestenlisteSeite(req, res, art) {
-  const { locale, modus, wert } = req.params;
+  const { locale, a, b, c, d } = req.params;
   if (!localeGueltig(locale)) return nichtGefunden(res, locale);
-  const daten = await ladeBestenliste(art, modus, wert, locale);
+  const liste = listeAusPfad(a, b, c, d);
+  if (!liste) return nichtGefunden(res, locale);
+  const daten = await ladeBestenliste(art, liste.modus, liste.wert, locale);
   if (!daten) return nichtGefunden(res, locale);
   res.type('html').send(seiteBestenliste(daten, locale));
 }

@@ -10,6 +10,7 @@ import { regionFuerLocale } from './seoLocale.js';
 import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatistik.js';
 import { ladePersonDaten } from './personen.js';
 import { holeTitelDetails, holeTrailer } from './titeldetails.js';
+import { MIN_TITEL, MIN_TITEL_KINO, NEU_JAHRE, THEMEN, listeTitel } from './seoBestenlisten.js';
 
 // Sortierung aller SEO-Titellisten: die GEWICHTETE TMDB-Bewertung, identisch
 // zur App (gewichteteNote in index.html: m = 1000, Katalogmittel 6,76).
@@ -41,7 +42,7 @@ const NOTE_SQL = `CASE WHEN COALESCE(rating, 0) = 0 THEN 0
 const TITEL_MIT_KENNUNG = `(
   SELECT DISTINCT ON (t.type, COALESCE(t.tmdb_id, r.tmdb_id))
          t.id, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, t.type, t.title, t.year,
-         t.genres, t.director, t.cast_names, t.rating, t.vote_count, t.poster_path
+         t.genres, t.director, t.cast_names, t.rating, t.vote_count, t.poster_path, t.keywords
     FROM titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
    WHERE COALESCE(t.tmdb_id, r.tmdb_id) IS NOT NULL
    ORDER BY t.type, COALESCE(t.tmdb_id, r.tmdb_id), COALESCE(t.vote_count, 0) DESC, t.id
@@ -315,6 +316,11 @@ export async function ladeAnbieterSeite(anbieterSlug, locale) {
   const filme = rows.filter((r) => r.type === 'movie');
   const serien = rows.filter((r) => r.type === 'series');
   const text = await ladeSeoText('anbieter', anbieterSlug, locale);
+  const [kFilme, kSerien] = await Promise.all([bestenlistenKatalog('movie', locale), bestenlistenKatalog('series', locale)]);
+  const besteListen = {
+    filme: kFilme.anbieter.some((a) => a.slug === anbieterSlug),
+    serien: kSerien.anbieter.some((a) => a.slug === anbieterSlug),
+  };
 
   const zuKarte = (r) => ({
     tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
@@ -323,7 +329,7 @@ export async function ladeAnbieterSeite(anbieterSlug, locale) {
   });
 
   return {
-    anbieterSlug, name: rows[0].provider_name,
+    anbieterSlug, name: rows[0].provider_name, besteListen,
     filme: filme.map(zuKarte), serien: serien.map(zuKarte),
     text, indexierbar: !!text,
   };
@@ -335,33 +341,104 @@ export async function ladeAnbieterSeite(anbieterSlug, locale) {
 const bestenlisteCache = new Map();
 const BESTENLISTE_TTL_MS = 60 * 60 * 1000;
 
+async function anbieterName(slug, region) {
+  const { rows } = await pool.query(
+    `SELECT provider_name FROM streaming_cache WHERE provider_id = $1 AND region = $2 LIMIT 1`, [slug, region]
+  );
+  return rows[0] ? rows[0].provider_name : null;
+}
+
+// Bedingungen einer Liste als SQL-Fragment ueber TITEL_MIT_KENNUNG (alias
+// `titel`). $1 ist immer der Typ. null = Wert unbekannt.
+async function listeBedingung(type, modus, wert, region) {
+  const params = [type];
+  const p = (v) => { params.push(v); return `$${params.length}`; };
+  const [a, b] = String(wert).split('+');
+  const namen = {};
+  const teile = [];
+
+  const genreTeil = async (slug) => {
+    const g = await genreName(type, slug);
+    if (!g) return false;
+    namen.genre = g; namen.genreSlug = slug;
+    teile.push(`genres @> ARRAY[${p(g)}::text]`);
+    return true;
+  };
+  const anbieterTeil = async (slug) => {
+    const n = await anbieterName(slug, region);
+    if (!n) return false;
+    namen.anbieter = n;
+    teile.push(`EXISTS (SELECT 1 FROM streaming_cache s WHERE s.type = titel.type AND s.tmdb_id = titel.tmdb_id AND s.provider_id = ${p(slug)} AND s.region = ${p(region)})`);
+    return true;
+  };
+  const jahrzehntTeil = (jz) => {
+    const j = Number(jz);
+    if (!Number.isInteger(j) || j % 10 || j < 1900 || j > 2020) return false;
+    teile.push(`year >= ${p(j)} AND year < ${p(j + 10)}`);
+    return true;
+  };
+
+  let ok;
+  switch (modus) {
+    case 'jahr': {
+      const j = Number(wert);
+      ok = Number.isInteger(j) && j >= 1900 && j <= 2100;
+      if (ok) teile.push(`year = ${p(j)}`);
+      break;
+    }
+    case 'genre': ok = await genreTeil(a); break;
+    case 'anbieter': ok = await anbieterTeil(a); break;
+    case 'jahrzehnt': ok = jahrzehntTeil(a); break;
+    case 'thema':
+      ok = !!THEMEN[a];
+      if (ok) teile.push(`keywords && ${p(THEMEN[a].keywords)}::text[]`);
+      break;
+    case 'genre-jahrzehnt': ok = (await genreTeil(a)) && jahrzehntTeil(b); break;
+    case 'genre-anbieter': ok = (await genreTeil(a)) && (await anbieterTeil(b)); break;
+    case 'kino':
+      ok = type === 'movie' && wert === 'aktuell';
+      if (ok) teile.push(`EXISTS (SELECT 1 FROM cinema_cache c WHERE c.tmdb_id = titel.tmdb_id AND c.region = ${p(region)} AND c.category = 'now')`);
+      break;
+    case 'neu':
+      ok = wert === 'aktuell';
+      if (ok) teile.push(`year >= ${p(new Date().getFullYear() - NEU_JAHRE + 1)}`);
+      break;
+    default: ok = false;
+  }
+  if (!ok) return null;
+  return { where: teile.join(' AND '), params, namen };
+}
+
+// Modi, die neu dazukamen: unter der Schwelle gibt es keine Seite (404).
+// jahr/genre bleiben wie frueher ohne Mindestzahl erreichbar.
+const ALTE_MODI = new Set(['jahr', 'genre']);
+
 export async function ladeBestenliste(art, modus, wert, locale) {
   const type = LISTEN_TYP[art];
-  if (!type || (modus !== 'jahr' && modus !== 'genre')) return null;
+  if (!type) return null;
 
-  const schluesselTeil = modus === 'jahr' ? `jahr:${wert}` : `genre:${wert}`;
-  const cacheKey = `${type}:${schluesselTeil}:${locale}`;
+  const cacheKey = `${type}:${modus}:${wert}:${locale}`;
   const jetzt = Date.now();
   const gecacht = bestenlisteCache.get(cacheKey);
   if (gecacht && jetzt - gecacht.at < BESTENLISTE_TTL_MS) return gecacht.wert;
 
-  let bedingung, param;
-  if (modus === 'jahr') {
-    const jahr = Number(wert);
-    if (!Number.isInteger(jahr) || jahr < 1900 || jahr > 2100) return null;
-    bedingung = 'year = $2'; param = jahr;
-  } else {
-    const genre = await genreName(type, wert);
-    if (!genre) return null;
-    bedingung = 'genres @> ARRAY[$2::text]'; param = genre;
-  }
+  const region = regionFuerLocale(locale);
+  const bed = await listeBedingung(type, modus, wert, region);
+  if (!bed) return null;
 
   const { rows } = await pool.query(
-    `SELECT id, tmdb_id, title, year, genres, rating, vote_count, poster_path
-       FROM ${TITEL_MIT_KENNUNG} WHERE type = $1 AND ${bedingung}
+    `SELECT id, tmdb_id, title, year, genres, rating, vote_count, poster_path, (count(*) OVER ())::int AS gesamt
+       FROM ${TITEL_MIT_KENNUNG} WHERE type = $1 AND ${bed.where}
       ORDER BY ${NOTE_SQL} DESC LIMIT 200`,
-    [type, param]
+    bed.params
   );
+  const gesamt = rows.length ? rows[0].gesamt : 0;
+  const mindest = modus === 'kino' ? MIN_TITEL_KINO : MIN_TITEL;
+  if (!ALTE_MODI.has(modus) && gesamt < mindest) {
+    bestenlisteCache.set(cacheKey, { at: jetzt, wert: null });
+    return null;
+  }
+
   const bewertungen = await bewertungenFuer(rows.map((r) => r.id));
   // Community-Bewertung schlaegt TMDB, wo vorhanden -- danach nach der
   // gewichteten TMDB-Bewertung (NOTE_SQL, die Reihenfolge der SQL-Abfrage).
@@ -376,13 +453,89 @@ export async function ladeBestenliste(art, modus, wert, locale) {
                      (a.communityBewertung ? a.communityBewertung.durchschnitt : -1))
     .slice(0, 20);
 
-  const text = await ladeSeoText('bestenliste', `${schluesselTeil}:${type}`, locale);
+  const text = await ladeSeoText('bestenliste', `${modus}:${wert}:${type}`, locale);
+  const katalog = await bestenlistenKatalog(type, locale);
   const ergebnis = {
-    type, modus, wert, gesamtGefunden: rows.length, titel: sortiert,
+    verwandt: verwandteListen(modus, wert, katalog),
+    type, modus, wert, gesamtGefunden: gesamt, titel: sortiert,
+    ueberschrift: listeTitel(type, modus, wert, bed.namen),
+    genre: bed.namen.genre || null, genreSlug: bed.namen.genreSlug || null,
+    anbieter: bed.namen.anbieter || null,
     text, indexierbar: !!text && sortiert.length > 0,
   };
   bestenlisteCache.set(cacheKey, { at: jetzt, wert: ergebnis });
   return ergebnis;
+}
+
+// Chips auf einer Liste: die naechstfeinere Kombination (Genre x Jahrzehnt,
+// Genre x Anbieter), nur wo die Schwelle erreicht ist.
+function verwandteListen(modus, wert, katalog) {
+  const gruppen = [];
+  const add = (titel, links) => { if (links.length) gruppen.push({ titel, links }); };
+  if (modus === 'genre') {
+    add('Nach Jahrzehnt', katalog.genreJahrzehnt.filter((e) => e.slug === wert).sort((x, y) => x.jz - y.jz)
+      .map((e) => ({ label: `${e.jz}er`, modus: 'genre-jahrzehnt', wert: `${wert}+${e.jz}` })));
+    add('Nach Anbieter', katalog.genreAnbieter.filter((e) => e.slug === wert)
+      .map((e) => ({ label: e.anbieterName, modus: 'genre-anbieter', wert: `${wert}+${e.anbieter}` })));
+  } else if (modus === 'jahrzehnt') {
+    add('Nach Genre', katalog.genreJahrzehnt.filter((e) => String(e.jz) === wert)
+      .map((e) => ({ label: e.genre, modus: 'genre-jahrzehnt', wert: `${e.slug}+${wert}` })));
+  } else if (modus === 'anbieter') {
+    add('Nach Genre', katalog.genreAnbieter.filter((e) => e.anbieter === wert)
+      .map((e) => ({ label: e.genre, modus: 'genre-anbieter', wert: `${e.slug}+${wert}` })));
+  }
+  return gruppen;
+}
+
+// Welche Listen es je Typ gibt (Schwelle erreicht) -- Grundlage der Chips auf
+// Hubs und Listen, der Verlinkung von Genre-/Anbieter-Seiten und des
+// Textgenerators. Eine Handvoll gruppierter Abfragen, 1 h gecacht.
+const katalogCache = new Map();
+
+export async function bestenlistenKatalog(type, locale) {
+  const region = regionFuerLocale(locale);
+  const key = `${type}:${region}`;
+  const gecacht = katalogCache.get(key);
+  if (gecacht && Date.now() - gecacht.at < BESTENLISTE_TTL_MS) return gecacht.wert;
+
+  const erlaubteGenres = new Set(await alleGenres(type));
+  const q = (sql, params) => pool.query(sql, params).then((r) => r.rows);
+  const [jz, anb, gj, ga, themen, kino, neu] = await Promise.all([
+    q(`SELECT (year / 10 * 10) AS jz, count(*)::int AS n FROM ${TITEL_MIT_KENNUNG}
+        WHERE type = $1 AND year >= 1900 GROUP BY 1 HAVING count(*) >= $2 ORDER BY 1`, [type, MIN_TITEL]),
+    q(`SELECT s.provider_id AS slug, min(s.provider_name) AS name, count(DISTINCT titel.tmdb_id)::int AS n
+         FROM ${TITEL_MIT_KENNUNG} JOIN streaming_cache s ON s.type = titel.type AND s.tmdb_id = titel.tmdb_id AND s.region = $2
+        WHERE titel.type = $1 GROUP BY 1 HAVING count(DISTINCT titel.tmdb_id) >= $3 ORDER BY n DESC`, [type, region, MIN_TITEL]),
+    q(`SELECT g AS genre, (year / 10 * 10) AS jz, count(*)::int AS n
+         FROM ${TITEL_MIT_KENNUNG}, unnest(genres) g
+        WHERE type = $1 AND year >= 1900 GROUP BY 1, 2 HAVING count(*) >= $2`, [type, MIN_TITEL]),
+    q(`SELECT g AS genre, s.provider_id AS slug, min(s.provider_name) AS name, count(DISTINCT titel.tmdb_id)::int AS n
+         FROM ${TITEL_MIT_KENNUNG} JOIN streaming_cache s ON s.type = titel.type AND s.tmdb_id = titel.tmdb_id AND s.region = $2,
+              unnest(titel.genres) g
+        WHERE titel.type = $1 GROUP BY 1, 2 HAVING count(DISTINCT titel.tmdb_id) >= $3`, [type, region, MIN_TITEL]),
+    Promise.all(Object.entries(THEMEN).map(async ([slug, t]) => {
+      const [r] = await q(`SELECT count(*)::int AS n FROM ${TITEL_MIT_KENNUNG} WHERE type = $1 AND keywords && $2::text[]`, [type, t.keywords]);
+      return { slug, n: r.n };
+    })),
+    type === 'movie'
+      ? q(`SELECT count(*)::int AS n FROM ${TITEL_MIT_KENNUNG}
+            WHERE type = 'movie' AND EXISTS (SELECT 1 FROM cinema_cache c WHERE c.tmdb_id = titel.tmdb_id AND c.region = $1 AND c.category = 'now')`, [region])
+      : Promise.resolve([{ n: 0 }]),
+    q(`SELECT count(*)::int AS n FROM ${TITEL_MIT_KENNUNG} WHERE type = $1 AND year >= $2`, [type, new Date().getFullYear() - NEU_JAHRE + 1]),
+  ]);
+
+  const gEintraege = (rows) => rows.filter((r) => erlaubteGenres.has(r.genre));
+  const wert = {
+    jahrzehnte: jz.map((r) => r.jz),
+    anbieter: anb.map((r) => ({ slug: r.slug, name: r.name })),
+    genreJahrzehnt: gEintraege(gj).map((r) => ({ genre: r.genre, slug: slugify(r.genre), jz: r.jz })),
+    genreAnbieter: gEintraege(ga).map((r) => ({ genre: r.genre, slug: slugify(r.genre), anbieter: r.slug, anbieterName: r.name })),
+    themen: themen.filter((t) => t.n >= MIN_TITEL).map((t) => t.slug),
+    kino: kino[0].n >= MIN_TITEL_KINO,
+    neu: neu[0].n >= MIN_TITEL,
+  };
+  katalogCache.set(key, { at: Date.now(), wert });
+  return wert;
 }
 
 // Wie providerCatalog in watchProviders.js: kleine, sich selten aendernde
@@ -486,22 +639,26 @@ export async function ladeStreamingHub(locale) {
 }
 
 export async function ladeBestenlistenUebersicht(locale) {
-  const text = await ladeSeoText('hub', 'bestenlisten', locale);
-  return { text, indexierbar: !!text };
+  const [text, filme, serien] = await Promise.all([
+    ladeSeoText('hub', 'bestenlisten', locale),
+    bestenlistenKatalog('movie', locale), bestenlistenKatalog('series', locale),
+  ]);
+  return { text, indexierbar: !!text, katalog: { filme, serien } };
 }
 
 export async function ladeBestenlisteHub(art, locale) {
   const type = LISTEN_TYP[art];
   if (!type) return null;
-  const [{ rows: jahre }, genres, text] = await Promise.all([
+  const [{ rows: jahre }, genres, text, katalog] = await Promise.all([
     pool.query(
       `SELECT DISTINCT year FROM titles WHERE type = $1 AND year IS NOT NULL ORDER BY year DESC LIMIT 15`,
       [type]
     ),
     alleGenres(type),
     ladeSeoText('hub', `beste-${art}`, locale),
+    bestenlistenKatalog(type, locale),
   ]);
-  return { type, art, jahre: jahre.map((r) => r.year), genres, text, indexierbar: !!text };
+  return { type, art, jahre: jahre.map((r) => r.year), genres, katalog, text, indexierbar: !!text };
 }
 
 // Schauspieler-/Regisseur-Seiten (Phase 1b, PLAN-SEO.md 1.5/1.6). Redaktion

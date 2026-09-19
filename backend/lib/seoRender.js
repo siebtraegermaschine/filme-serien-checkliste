@@ -3,6 +3,7 @@
 // bei der App-OG-Route (server.js) -- jede Funktion hier gibt ein fertiges
 // Dokument zurueck. Kein App-JS, eigenes seo.css (Architektur-Entscheidung 1).
 import { hreflangCode } from './seoLocale.js';
+import { listeSeitenPfad, THEMEN, jahrzehntName } from './seoBestenlisten.js';
 import { slugify } from './slug.js';
 
 export const SITE = 'https://movietaste.de';
@@ -411,6 +412,7 @@ export function seiteGenre(daten, locale) {
     ${brotkrumenHtml(kette)}
     <h1>Beste ${attrEsc(daten.genre)}-${hubWort}</h1>
     <p class="einleitung">${textBlock(daten.text)}</p>
+    <p class="hinweis"><a href="${listeSeitenPfad(locale, daten.type, 'genre', daten.genreSlug)}">Beste ${attrEsc(daten.genre)}-${hubWort} — die Bestenliste</a></p>
     <div class="raster">${daten.titel.map((t) => karte(t, artWort, locale)).join('')}</div>
     ${seitenNavigation(pfad, daten.seite, daten.seiten)}
   `;
@@ -430,10 +432,15 @@ export function seiteAnbieter(daten, locale) {
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: [...daten.filme, ...daten.serien].map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.title })),
   }, brotkrumenJsonLd(kette)];
+  const besteLinks = [];
+  if (daten.besteListen && daten.besteListen.filme) besteLinks.push(`<a href="${listeSeitenPfad(locale, 'movie', 'anbieter', daten.anbieterSlug)}">Beste Filme auf ${attrEsc(daten.name)}</a>`);
+  if (daten.besteListen && daten.besteListen.serien) besteLinks.push(`<a href="${listeSeitenPfad(locale, 'series', 'anbieter', daten.anbieterSlug)}">Beste Serien auf ${attrEsc(daten.name)}</a>`);
+  const besteHtml = besteLinks.length ? `<p class="hinweis">${besteLinks.join(' · ')}</p>` : '';
   const bodyHtml = `
     ${brotkrumenHtml(kette)}
     <h1>Filme & Serien auf ${attrEsc(daten.name)}</h1>
     <p class="einleitung">${textBlock(daten.text)}</p>
+    ${besteHtml}
     <h2>Filme</h2>
     <div class="raster">${daten.filme.map((t) => karte(t, 'film', locale)).join('')}</div>
     <h2>Serien</h2>
@@ -442,29 +449,79 @@ export function seiteAnbieter(daten, locale) {
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
+// Chips-Abschnitte der Bestenlisten-Uebersicht/-Hubs: nur Listen, die es gibt
+// (Schwelle erreicht, siehe bestenlistenKatalog in seoData.js).
+function listenChips(locale, type, links) {
+  return `<div class="chips">${links.map((l) => `<a class="chip" href="${listeSeitenPfad(locale, type, l.modus, l.wert)}">${attrEsc(l.label)}</a>`).join('')}</div>`;
+}
+
+function listenAbschnitte(katalog, type, locale, ebene = 'h2') {
+  const w = type === 'series' ? 'Serien' : 'Filme';
+  const teile = [];
+  const aktuell = [];
+  if (katalog.kino) aktuell.push({ label: `${w} im Kino`, modus: 'kino', wert: 'aktuell' });
+  if (katalog.neu) aktuell.push({ label: `Neue ${w}`, modus: 'neu', wert: 'aktuell' });
+  if (aktuell.length) teile.push(`<${ebene}>Aktuell</${ebene}>${listenChips(locale, type, aktuell)}`);
+  if (katalog.anbieter.length) {
+    teile.push(`<${ebene}>Nach Streaming-Anbieter</${ebene}>${listenChips(locale, type, katalog.anbieter.map((a) => ({ label: a.name, modus: 'anbieter', wert: a.slug })))}`);
+  }
+  if (katalog.jahrzehnte.length) {
+    teile.push(`<${ebene}>Nach Jahrzehnt</${ebene}>${listenChips(locale, type, katalog.jahrzehnte.map((j) => ({ label: jahrzehntName(j), modus: 'jahrzehnt', wert: String(j) })))}`);
+  }
+  if (katalog.themen.length) {
+    teile.push(`<${ebene}>Nach Thema</${ebene}>${listenChips(locale, type, katalog.themen.map((t) => ({ label: THEMEN[t].name, modus: 'thema', wert: t })))}`);
+  }
+  return teile.join('');
+}
+
 export function seiteBestenliste(daten, locale) {
   const artWort = daten.type === 'series' ? 'serie' : 'film';
   const wortTyp = daten.type === 'series' ? 'Serien' : 'Filme';
   const listenWort = daten.type === 'series' ? 'beste-serien' : 'beste-filme';
-  const bezeichnung = daten.modus === 'jahr' ? String(daten.wert) : attrEsc(daten.wert);
-  const pfad = `/${locale}/${listenWort}/${daten.modus}/${daten.wert}`;
-  const titelZeile = `Beste ${wortTyp} ${daten.modus === 'jahr' ? bezeichnung : '(' + bezeichnung + ')'} | MovieMatch`;
-  const beschreibung = kurzfassung(daten.text) || `Die besten ${wortTyp} ${bezeichnung} im Überblick.`;
+  const alleWort = daten.type === 'series' ? 'serien' : 'filme';
+  const pfad = listeSeitenPfad(locale, daten.type, daten.modus, daten.wert);
+  const ueberschrift = daten.ueberschrift;
+  const titelZeile = `${attrEsc(ueberschrift)} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || `${ueberschrift} im Überblick, sortiert nach Bewertung.`;
   const kette = [
     { label: 'Start', href: SITE + '/' },
     { label: 'Bestenlisten', href: `${SITE}/${locale}/bestenlisten` },
     { label: `Beste ${wortTyp}`, href: `/${locale}/${listenWort}` },
-    { label: bezeichnung },
+    { label: ueberschrift.replace(/^Beste (Filme|Serien) /, '') || ueberschrift },
   ];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: daten.titel.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.title })),
   }, brotkrumenJsonLd(kette)];
+
+  // Rueckverweise auf die uebergeordneten Seiten (Genre-Liste, Jahrzehnt, Anbieter).
+  const [erst, zweit] = String(daten.wert).split('+');
+  const rueck = [];
+  if (daten.modus === 'genre') {
+    rueck.push({ href: `/${locale}/${alleWort}/${daten.genreSlug}`, label: `Alle ${daten.genre}-${wortTyp}` });
+  }
+  if (daten.modus === 'genre-jahrzehnt' || daten.modus === 'genre-anbieter') {
+    rueck.push({ href: listeSeitenPfad(locale, daten.type, 'genre', erst), label: `Beste ${wortTyp} im Genre ${daten.genre}` });
+    rueck.push(daten.modus === 'genre-jahrzehnt'
+      ? { href: listeSeitenPfad(locale, daten.type, 'jahrzehnt', zweit), label: `Beste ${wortTyp} der ${jahrzehntName(zweit)}` }
+      : { href: listeSeitenPfad(locale, daten.type, 'anbieter', zweit), label: `Beste ${wortTyp} auf ${daten.anbieter}` });
+  }
+  if (daten.modus === 'anbieter') {
+    rueck.push({ href: `/${locale}/streaming/${daten.wert}`, label: `Alle Titel auf ${daten.anbieter}` });
+  }
+  const rueckHtml = rueck.length
+    ? `<p class="hinweis">${rueck.map((r) => `<a href="${attrEsc(r.href)}">${attrEsc(r.label)}</a>`).join(' · ')}</p>`
+    : '';
+  const verwandtHtml = (daten.verwandt || []).map((g) =>
+    `<h2>${attrEsc(g.titel)}</h2>${listenChips(locale, daten.type, g.links)}`).join('');
+
   const bodyHtml = `
     ${brotkrumenHtml(kette)}
-    <h1>Beste ${wortTyp} ${daten.modus === 'jahr' ? bezeichnung : ''}</h1>
+    <h1>${attrEsc(ueberschrift)}</h1>
     <p class="einleitung">${textBlock(daten.text)}</p>
+    ${rueckHtml}
     <div class="raster">${daten.titel.map((t) => karte(t, artWort, locale)).join('')}</div>
+    ${verwandtHtml}
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
@@ -620,6 +677,7 @@ export function seiteBestenlistenUebersicht(daten, locale) {
     <h1>Bestenlisten</h1>
     <p class="einleitung">${textBlock(daten.text)}</p>
     <ul>${eintraege.map((e) => `<li><a href="/${locale}/${e.pfad}">${e.name}</a> — ${e.text}</li>`).join('')}</ul>
+    ${daten.katalog ? `<h2>Beste Filme</h2>${listenAbschnitte(daten.katalog.filme, 'movie', locale, 'h3')}<h2>Beste Serien</h2>${listenAbschnitte(daten.katalog.serien, 'series', locale, 'h3')}` : ''}
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
@@ -642,6 +700,7 @@ export function seiteBestenlisteHub(daten, locale) {
     <div class="chips">${jahreHtml}</div>
     <h2>Nach Genre</h2>
     <div class="chips">${genreHtml}</div>
+    ${daten.katalog ? listenAbschnitte(daten.katalog, daten.type, locale) : ''}
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }

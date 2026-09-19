@@ -7,6 +7,7 @@ import { slugify } from './slug.js';
 import { SITE } from './seoRender.js';
 import { SEO_LOCALES } from './seoLocale.js';
 import { personenFuerSitemap } from './seoData.js';
+import { schluesselZuPfad } from './seoBestenlisten.js';
 
 export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person'];
 
@@ -87,10 +88,10 @@ async function urlsFuerBereich(locale, bereich) {
   }
 
   if (bereich === 'bestenliste') {
-    // schluessel ist 'jahr:<jahr>:<type>' oder 'genre:<slug>:<type>'
-    return rows.map((r) => {
-      const [modus, wert, type] = r.schluessel.split(':');
-      return { loc: `${SITE}/${locale}/beste-${type === 'series' ? 'serien' : 'filme'}/${modus}/${wert}`, lastmod: r.aktualisiert_am.toISOString().slice(0, 10) };
+    // schluessel ist '<modus>:<wert>:<type>' (seoBestenlisten.js)
+    return rows.flatMap((r) => {
+      const pfad = schluesselZuPfad(r.schluessel, locale);
+      return pfad ? [{ loc: SITE + pfad, lastmod: r.aktualisiert_am.toISOString().slice(0, 10) }] : [];
     });
   }
 
