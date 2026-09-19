@@ -15,6 +15,8 @@
  * Node >= 18 (globales fetch).
  */
 
+import { merkmaleAusDetail } from './backend/lib/tmdbMerkmale.js';
+
 const API = 'https://api.themoviedb.org/3';
 const KEY = process.env.TMDB_API_KEY;
 const LANG = process.env.TMDB_LANG || 'de-DE';
@@ -134,6 +136,7 @@ async function enrich(kind, id) {
     result.tEn = en.titel || ((d.original_language === 'en' && (kind === 'movie' ? d.original_title : d.original_name)) || '');
     result.ovEn = en.ov;
     result.uebers = uebersetzungenAus(d, kind);
+    result.merkmale = merkmaleAusDetail(d, kind);
   } catch (e) { /* Titel ohne Credits: Felder bleiben leer */ }
   enrichCache.set(ck, result);
   return result;
@@ -247,6 +250,7 @@ async function main() {
     item.titleEn = ex.tEn;
     item.overviewEn = ex.ovEn;
     item.uebers = ex.uebers || {};
+    Object.assign(item, ex.merkmale || {});
     item.plot = (item.overviewRaw || '').trim() || ex.ovEn || await overviewWithFallback(kind, item.tmdbId, item.overviewRaw);
     delete item.overviewRaw;
     done++;

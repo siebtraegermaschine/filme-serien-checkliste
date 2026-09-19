@@ -363,8 +363,8 @@ router.post('/bulk-ingest', async (req, res) => {
     for (const item of items) {
       if (!item || !item.tmdbId || (item.type !== 'movie' && item.type !== 'series') || !item.title) continue;
       const { rowCount } = await client.query(
-        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, certifications, plot, title_en, overview_en, uebersetzungen, source)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,$11,$12,$13,$14,$15,$16,'discovery')
+        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, certifications, plot, title_en, overview_en, uebersetzungen, origin_country, original_language, runtime, seasons, source)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,'discovery')
          ON CONFLICT (tmdb_id, type) DO UPDATE SET
            year = EXCLUDED.year,
            genres = EXCLUDED.genres,
@@ -382,6 +382,11 @@ router.post('/bulk-ingest', async (req, res) => {
            overview_en = COALESCE(NULLIF(EXCLUDED.overview_en, ''), titles.overview_en),
            -- Wie certifications: zusammenfuehren, neue Sprachen gewinnen je Schluessel.
            uebersetzungen = titles.uebersetzungen || EXCLUDED.uebersetzungen,
+           -- Leere Werte (Abruf fehlgeschlagen) ueberschreiben nichts.
+           origin_country = COALESCE(EXCLUDED.origin_country, titles.origin_country),
+           original_language = COALESCE(EXCLUDED.original_language, titles.original_language),
+           runtime = COALESCE(EXCLUDED.runtime, titles.runtime),
+           seasons = COALESCE(EXCLUDED.seasons, titles.seasons),
            updated_at = now()
          WHERE titles.source <> 'catalog'`,
         [
@@ -401,6 +406,10 @@ router.post('/bulk-ingest', async (req, res) => {
           item.titleEn || null,
           item.overviewEn || null,
           item.uebers && typeof item.uebers === 'object' ? item.uebers : {},
+          Array.isArray(item.originCountry) && item.originCountry.length ? item.originCountry : null,
+          item.originalLanguage || null,
+          Number.isInteger(item.runtime) ? item.runtime : null,
+          Number.isInteger(item.seasons) ? item.seasons : null,
         ]
       );
       inserted += rowCount;
