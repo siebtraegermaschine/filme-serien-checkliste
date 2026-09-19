@@ -1720,7 +1720,8 @@
       <!-- Die beiden Inhaltsfilter zuerst, durch eine Linie vom Rest
            abgesetzt (auf Wunsch vom 13. August hervorgehoben). -->
       <button type="button" id="settingsProvidersBtn" class="modal-yes">Deine Streaming-Anbieter</button>
-      <button type="button" id="settingsKinosBtn" class="modal-yes">Deine Kinos</button>
+      <!-- Ausgeblendet, bis es Spielzeiten gibt (siehe STATUS.md, "Deine Kinos"). -->
+      <button type="button" id="settingsKinosBtn" class="modal-yes" style="display:none">Deine Kinos</button>
       <hr class="settings-sep" id="settingsSep">
       <button type="button" id="settingsHiddenBtn" class="modal-yes">Gelöschte Filme/Serien</button>
       <!-- Aus dem Menue rechts oben hierher gewandert (13. August).
@@ -10423,7 +10424,7 @@ var ONB_FREIGABE = true;
 // Filter-Punkten darueber.
 function einstellungenSichtbarkeit(){
   var an = !!CURRENT_USER;
-  ['settingsProvidersBtn', 'settingsKinosBtn', 'settingsSep', 'settingsHiddenBtn', 'settingsAccountBtn']
+  ['settingsProvidersBtn', 'settingsSep', 'settingsHiddenBtn', 'settingsAccountBtn']
     .forEach(function(id){
       var el = document.getElementById(id);
       if (el) el.style.display = an ? '' : 'none';
