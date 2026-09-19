@@ -171,7 +171,28 @@
   bleiben rund 16.490 offen. Noch offen: weitere Runden für den Rest
   (jeweils eigene Freigabe, bezahlte Anthropic-Nutzung) — bei diesem
   Umfang ggf. wie beim Titeltext-Workflow einen Rundenbetrieb über
-  mehrere Sitzungen einrichten statt einzelner Ad-hoc-Läufe.
+  mehrere Sitzungen einrichten statt einzelner Ad-hoc-Läufe. **Dritter Lauf
+  (19.09.2026, freigegeben): Batch-API statt Subagenten.** Neues Skript
+  `backend/scripts/personen-batch.mjs` (analog `seo-batch.mjs`, gleiche
+  Faktenprüfung `seo-personen-check.mjs`), erzeugt Personentexte per
+  Anthropic Message-Batches-API (50 % Rabatt, `effort: "low"`) statt über
+  Subagenten. Vorab zwei Fehler gefunden und behoben: Faktenprüfung meldete
+  Tage unter 10 als erfunden (führende Nullen aus ISO-Daten, Commit 6e9e67f);
+  Namens-Aliase in `personen_resolution` erzeugten doppelte `custom_id`s, was
+  die Batch-API hart ablehnte — Kandidaten-Query gruppiert jetzt nach
+  `tmdb_person_id` statt nach Namen (Commit d8de647). Freigabe: 50 % der
+  offenen Rollen-Einträge (~8.267 von ~16.534), Kostenobergrenze 70 $. Lauf
+  zweimal durch Anthropic-Kontoguthaben unterbrochen (nicht durch die
+  70-$-Grenze) und nach Aufstockung fortgesetzt. Dabei aufgefallen und dem
+  Nutzer gemeldet: `--limit` zählt bei jedem Neustart neu (kein kumulatives
+  Kontingent über Läufe hinweg) — nach Rückfrage freigegeben, bis zum
+  Kontoguthaben-Limit weiterlaufen zu lassen statt bei 8.267 zu stoppen.
+  **Endergebnis:** 11.800 Rollen-Einträge versucht, 9.057 Texte bestanden
+  Format-/Faktenprüfung (76,8 % Erfolgsquote), 1.540 Faktenverdacht, 1.202
+  Formatfehler, 1 sonstiger Fehler. Tatsächliche Kosten 58,85 $ (unter der
+  70-$-Freigabe). Insgesamt jetzt 9.338 Personen-Texte live in `seo_content`
+  (inkl. der 281 aus den beiden Subagenten-Runden). Rund 4.700 Rollen-
+  Einträge bleiben offen — weitere Runde erst nach erneuter Freigabe.
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
 - Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
