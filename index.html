@@ -226,7 +226,7 @@
   /* .cinema-page-actions mit dazu: der Sortier-Knopf der Kino-Seite soll
      genauso aussehen wie #fSort unter Filme/Serien, sitzt aber (anders als
      dieser) nicht in .toolbar. */
-  .toolbar button, .cinema-page-actions button {
+  .toolbar button, .cinema-page-actions button, .cinema-filter button {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -237,9 +237,9 @@
     transition: all 0.15s;
   }
   @media (hover: hover) {
-    .toolbar button:hover, .cinema-page-actions button:hover { border-color: var(--accent); color: var(--accent); }
+    .toolbar button:hover, .cinema-page-actions button:hover, .cinema-filter button:hover { border-color: var(--accent); color: var(--accent); }
   }
-  .toolbar button.active, .cinema-page-actions button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .toolbar button.active, .cinema-page-actions button.active, .cinema-filter button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   @media (max-width: 640px) {
     .toolbar { row-gap: 8px; }
     /* iOS Safari zoomt automatisch in die Seite rein, sobald ein Eingabefeld mit
@@ -529,14 +529,20 @@
      an derselben Stelle steht.
      Der Sortier-Knopf steht rechts, wo auch "Neue entdecken" endet. */
   .cinema-page-header { max-width:700px; margin:10px auto 6px; padding:0 20px; box-sizing:border-box;
-    display:flex; align-items:flex-end; justify-content:flex-end; gap:12px; }
+    display:flex; align-items:flex-end; justify-content:flex-end; gap:4px; }
+  /* "Laeuft jetzt" / "Laeuft bald" sitzen unter Watchlist und Gesehen: 4px Fuge
+     wie in .filter-group, dann ist jeder Knopf genau eine Spalte breit
+     ((100% - 8px) / 3), der Sortier-Knopf rechts die dritte. */
+  .cinema-filter { display:flex; gap:4px; flex:1; min-width:0; }
+  .cinema-filter button { flex:1; min-width:0; padding:9px 2px; font-size:12px; white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis; text-align:center; }
   /* Genauso breit wie "Neue entdecken" in der Statusreihe darueber: Dort teilen
      sich drei Knoepfe mit 4px Abstand die Zeile, eine Spalte ist also
      (100% - 8px) / 3. .cinema-page-header hat dieselbe Inhaltsbreite wie
      .toolbar (max-width 700px, 20px Innenabstand), die Rechnung geht damit
      direkt auf. justify-content:space-between schiebt den Block nach rechts,
      wo auch "Neue entdecken" endet. */
-  .cinema-page-actions { display:flex; align-items:center; gap:10px;
+  .cinema-page-actions { display:flex; align-items:center; gap:4px;
     flex: 0 0 calc((100% - 8px) / 3); min-width: 0; }
   .cinema-page-actions .sort-wrap { flex: 1; min-width: 0; }
   #cinemaSort { width: 100%; }
@@ -1452,6 +1458,10 @@
 
 <div id="cinemaPage" style="display:none">
   <div class="cinema-page-header">
+    <div class="cinema-filter">
+      <button id="cinemaNow" type="button">Läuft jetzt</button>
+      <button id="cinemaSoon" type="button">Läuft bald</button>
+    </div>
     <div class="cinema-page-actions">
       <div class="sort-wrap">
         <button id="cinemaSort" type="button" title="Sortierung">⇅ Sortieren</button>
@@ -4591,6 +4601,8 @@ var MARKUP_TEXTE = {
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Sort by ★★★★ rating' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'by release date' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'by Taste Score' },
+    '#cinemaNow': { t: 'Now showing' },
+    '#cinemaSoon': { t: 'Coming soon' },
     '#inviteShareTitel': { t: 'Invitation' },
     '#inviteShareTeilen': { t: 'Share' },
     '#inviteShareKopieren': { t: 'Copy' },
@@ -4703,6 +4715,8 @@ var MARKUP_TEXTE = {
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Trier par note ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'par date de sortie' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'par Taste Score' },
+    '#cinemaNow': { t: 'À l’affiche' },
+    '#cinemaSoon': { t: 'Bientôt' },
     '#inviteShareTitel': { t: 'Invitation' },
     '#inviteShareTeilen': { t: 'Partager' },
     '#inviteShareKopieren': { t: 'Copier' },
@@ -4815,6 +4829,8 @@ var MARKUP_TEXTE = {
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Ordenar por valoración ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'por fecha de estreno' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'por Taste Score' },
+    '#cinemaNow': { t: 'En cartelera' },
+    '#cinemaSoon': { t: 'Próximamente' },
     '#inviteShareTitel': { t: 'Invitación' },
     '#inviteShareTeilen': { t: 'Compartir' },
     '#inviteShareKopieren': { t: 'Copiar' },
@@ -4927,6 +4943,8 @@ var MARKUP_TEXTE = {
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Ordina per valutazione ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'per data di uscita' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'per Taste Score' },
+    '#cinemaNow': { t: 'Al cinema' },
+    '#cinemaSoon': { t: 'Presto' },
     '#inviteShareTitel': { t: 'Invito' },
     '#inviteShareTeilen': { t: 'Condividi' },
     '#inviteShareKopieren': { t: 'Copia' },
@@ -5039,6 +5057,8 @@ var MARKUP_TEXTE = {
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Sorteren op ★★★★-beoordeling' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'op verschijningsdatum' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'op Taste Score' },
+    '#cinemaNow': { t: 'Nu te zien' },
+    '#cinemaSoon': { t: 'Binnenkort' },
     '#inviteShareTitel': { t: 'Uitnodiging' },
     '#inviteShareTeilen': { t: 'Delen' },
     '#inviteShareKopieren': { t: 'Kopiëren' },
@@ -5151,6 +5171,8 @@ var MARKUP_TEXTE = {
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Ordenar por avaliação ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'por data de lançamento' },
     '#cinemaSortMenu [data-sort="taste"]': { t: 'por Taste Score' },
+    '#cinemaNow': { t: 'Em cartaz' },
+    '#cinemaSoon': { t: 'Em breve' },
     '#inviteShareTitel': { t: 'Convite' },
     '#inviteShareTeilen': { t: 'Compartilhar' },
     '#inviteShareKopieren': { t: 'Copiar' },
@@ -7932,6 +7954,7 @@ function saveSortManual(){
 // neu rendern (siehe goHome). render() ruft updateSortMenuActive() selbst auf.
 function sortManualLeeren(){
   sortManual = null;
+  cinemaSortKey = null;
   try { localStorage.removeItem(SORT_MANUAL_KEY); } catch (e) {}
 }
 function resetSortManual(){
@@ -8974,7 +8997,39 @@ const cinemaListEl = document.getElementById('cinemaList');
 // Daten bereits so liefert (data.now/soon/later) -- eine inhaltliche
 // Notwendigkeit war das nicht, siehe renderCinemaPage.
 let cinemaLimit = TITEL_PRO_SEITE;
-let cinemaSortKey = 'date';
+// null = Automatik wie unter Filme/Serien (siehe effectiveSort): ab 10
+// markierten Titeln nach Taste-Score, sonst nach TMDB-Bewertung. Eine Wahl im
+// Sortier-Menue setzt den Schluessel fest. var statt let, weil sortManualLeeren
+// (weiter oben) ihn zuruecksetzt.
+var cinemaSortKey = null;
+// "Laeuft jetzt" / "Laeuft bald": frei kombinierbar; keiner aktiv = alles.
+var cinemaFilterNow = false, cinemaFilterSoon = false;
+var KINO_BALD_TAGE = 28;
+function cinemaSortEffective(){
+  return cinemaSortKey || (tasteProfileSize() >= 10 ? 'taste' : 'imdb');
+}
+function cinemaSortMenuAktualisieren(){
+  var m = document.getElementById('cinemaSortMenu');
+  if (!m) return;
+  var eff = cinemaSortEffective();
+  m.querySelectorAll('button').forEach(function(b){ b.classList.toggle('active', b.dataset.sort === eff); });
+}
+function cinemaFilterAktualisieren(){
+  var n = document.getElementById('cinemaNow'), s = document.getElementById('cinemaSoon');
+  if (n) n.classList.toggle('active', cinemaFilterNow);
+  if (s) s.classList.toggle('active', cinemaFilterSoon);
+}
+// Laeuft jetzt: Kategorie "now" oder Starttermin erreicht. Laeuft bald: Start
+// in den naechsten KINO_BALD_TAGE Tagen (die API-Kategorie "soon" gilt nur bis
+// zum letzten Abruf, das Datum stimmt immer).
+function cinemaKategorie(row, bucket){
+  var d = new Date();
+  var heute = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  d.setDate(d.getDate() + KINO_BALD_TAGE);
+  var grenze = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  if (bucket === 'now' || (row.rd && row.rd <= heute)) return 'now';
+  return row.rd && row.rd <= grenze ? 'soon' : 'later';
+}
 async function loadCinemaData(){
   if (!CINEMA_DATA) {
     CINEMA_DATA = await apiRequest('GET', mitSpracheRegion('/api/cinema'));
@@ -9046,11 +9101,19 @@ async function renderCinemaPage(){
   // Ueber fremderFortschritt(), nicht direkt aus LINKED_PROGRESS: sonst gilt
   // "Person hat nichts markiert" als "keine fremde Liste" (siehe dort).
   var fremd = fremderFortschritt();
-  var rows = [].concat(data.now || [], data.soon || [], data.later || []);
-  var entries = rows.map(function(row){
-    var item = cinemaRowToItem(row, poolByTmdb);
-    return { row: row, item: item, score: scoreMitProfilen(item, profile) };
+  var rows = [];
+  ['now', 'soon', 'later'].forEach(function(b){
+    (data[b] || []).forEach(function(row){ rows.push({ row: row, kat: cinemaKategorie(row, b) }); });
+  });
+  cinemaFilterAktualisieren();
+  cinemaSortMenuAktualisieren();
+  var entries = rows.map(function(r){
+    var item = cinemaRowToItem(r.row, poolByTmdb);
+    return { row: r.row, item: item, kat: r.kat, score: scoreMitProfilen(item, profile) };
   }).filter(function(e){
+    if (cinemaFilterNow || cinemaFilterSoon) {
+      if (!((cinemaFilterNow && e.kat === 'now') || (cinemaFilterSoon && e.kat === 'soon'))) return false;
+    }
     if (!fskErlaubt(e.item) || istVersteckt(e.item)) return false;
     if (q && !poolItemMatchesQuery(e.item, q)) return false;
     if (fremd) {
@@ -9087,8 +9150,9 @@ async function renderCinemaPage(){
     return;
   }
   entries.sort(function(a, b){
-    if (cinemaSortKey === 'imdb') return gewichteteNote(b.item.r, b.item.vc) - gewichteteNote(a.item.r, a.item.vc);
-    if (cinemaSortKey === 'taste') return b.score - a.score;
+    var sk = cinemaSortEffective();
+    if (sk === 'imdb') return gewichteteNote(b.item.r, b.item.vc) - gewichteteNote(a.item.r, a.item.vc);
+    if (sk === 'taste') return b.score - a.score;
     // 'date': das ECHTE Erstveroeffentlichungsdatum, neueste zuerst -- genau wie
     // "nach Veroeffentlichungsdatum" unter Filme/Serien (siehe eintragSortwert).
     // row.ord ist nur bei Wiederauffuehrungen gesetzt (siehe cinema-fetch.mjs: es
@@ -9172,6 +9236,7 @@ function openCinemaPage(){
   // Bei jedem frischen Aufruf wieder eingeklappt starten (nicht den Zustand
   // eines vorherigen Besuchs behalten).
   cinemaLimit = TITEL_PRO_SEITE;
+  cinemaFilterNow = false; cinemaFilterSoon = false;
   // Die Tab-Reihe bleibt bewusst stehen: "Im Kino" sitzt jetzt darin und ist
   // zugleich der Weg zurueck zu Filme/Serien. Frueher wurde sie hier versteckt,
   // weil Kino nur ueber das Menue erreichbar war.
@@ -9242,6 +9307,15 @@ function goHome(){
 // einer laaaangen, neu sortierten Liste landet.
 var _cinemaSortBtn = document.getElementById('cinemaSort');
 var _cinemaSortMenu = document.getElementById('cinemaSortMenu');
+['cinemaNow', 'cinemaSoon'].forEach(function(id){
+  var b = document.getElementById(id);
+  if (!b) return;
+  b.onclick = function(){
+    if (id === 'cinemaNow') cinemaFilterNow = !cinemaFilterNow; else cinemaFilterSoon = !cinemaFilterSoon;
+    cinemaLimit = TITEL_PRO_SEITE;
+    renderCinemaPage();
+  };
+});
 if (_cinemaSortBtn && _cinemaSortMenu) {
   _cinemaSortBtn.onclick = function(e){
     e.stopPropagation();
