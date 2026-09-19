@@ -6,7 +6,7 @@ import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
 import { SITE } from './seoRender.js';
 import { SEO_LOCALES } from './seoLocale.js';
-import { ladePersonSeite } from './seoData.js';
+import { personenFuerSitemap } from './seoData.js';
 
 export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person'];
 
@@ -23,20 +23,13 @@ function urlset(urls) {
     `\n</urlset>`;
 }
 
-// Personen haben kein seo_content (siehe personen.js) -- indexierbar richtet
-// sich nach ladePersonSeite() selbst (Biografie + Filmografie vorhanden).
-// Nur bereits gecachte Personen (personen_cache) koennen ueberhaupt gelistet
-// werden -- ohne vorherigen Seitenaufruf/Backfill ist eine Person hier noch
-// nicht bekannt (derselbe verzoegerte Abruf wie bei der Einzelseite).
+// Personen: indexierbar nach derselben Regel wie die Einzelseite
+// (personenFuerSitemap: Katalog-Titel + Text oder Foto).
 async function personenUrls(locale) {
-  const { rows } = await pool.query(`SELECT tmdb_person_id FROM personen_cache`);
   const urls = [];
-  for (const r of rows) {
-    for (const rolle of ['regisseur', 'schauspieler']) {
-      const daten = await ladePersonSeite(rolle, r.tmdb_person_id, locale);
-      if (daten && daten.indexierbar) {
-        urls.push({ loc: `${SITE}/${locale}/${rolle}/${daten.slug}-${r.tmdb_person_id}`, lastmod: null });
-      }
+  for (const rolle of ['regisseur', 'schauspieler']) {
+    for (const p of await personenFuerSitemap(rolle, locale)) {
+      urls.push({ loc: `${SITE}/${locale}/${rolle}/${p.slug}-${p.tmdbPersonId}`, lastmod: null });
     }
   }
   return urls;

@@ -8,7 +8,7 @@ import { slugify } from './slug.js';
 import { anbieterSlug } from './anbieter.js';
 import { regionFuerLocale } from './seoLocale.js';
 import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatistik.js';
-import { ladePersonDaten, resolvePersonIdCachedOnly } from './personen.js';
+import { ladePersonDaten } from './personen.js';
 import { holeTitelDetails, holeTrailer } from './titeldetails.js';
 
 // Sortierung aller SEO-Titellisten: die GEWICHTETE TMDB-Bewertung, identisch
@@ -145,7 +145,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
   if (!titel || titel.tmdb_id == null) return null;
 
   const region = regionFuerLocale(locale);
-  const [bewertung, streamingRows, text, regisseurRows, aehnlicheRows, regisseurPersonId, details, trailer] = await Promise.all([
+  const [bewertung, streamingRows, text, regisseurRows, aehnlicheRows, details, trailer] = await Promise.all([
     bewertungFuerTitel(titel.id),
     pool.query(
       `SELECT flatrate, rent, buy FROM watch_providers_cache WHERE tmdb_id = $1 AND type = $2 AND region = $3`,
@@ -170,9 +170,6 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
           [type, titel.genres, titel.tmdb_id]
         )
       : { rows: [] },
-    // Kein Live-TMDB-Aufruf hier -- nur ein Cache-Blick (resolvePersonIdCachedOnly),
-    // damit ein Crawler-Treffer nicht auf eine noch unaufgeloeste Person wartet.
-    titel.director ? resolvePersonIdCachedOnly(titel.director) : null,
     // Laufzeit/Budget/Bilder/Besetzung-mit-Rollen UND Trailer sind bewusst
     // live-abrufend (wie ergaenzeBackdrop() in share.js) -- anders als der
     // Regie-Link sollen diese immer vorhanden sein, sobald ein Text existiert.
@@ -182,7 +179,13 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
   const besetzungNamen = details && details.besetzung_rollen.length
     ? details.besetzung_rollen.map((c) => c.name)
     : (titel.cast_names || []).slice(0, 10);
-  const schauspielerIds = await schauspielerMitSeite(besetzungNamen, locale);
+  // Kein Live-TMDB-Aufruf: nur bereits aufgeloeste Personen, damit ein
+  // Crawler-Treffer nicht auf TMDB wartet.
+  const [schauspielerIds, regisseurIds] = await Promise.all([
+    personenMitSeite(besetzungNamen, 'schauspieler', locale),
+    titel.director ? personenMitSeite([titel.director], 'regisseur', locale) : new Map(),
+  ]);
+  const regisseurPersonId = regisseurIds.get(titel.director) ?? null;
 
   const zuKarte = (r) => ({ id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year, posterPath: r.poster_path });
   const streaming = streamingRows.rows[0] || { flatrate: [], rent: [], buy: [] };
@@ -213,14 +216,14 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     communityBewertung: bewertung, // null, solange die Mindestzahl (bewertungsstatistik.js) nicht erreicht ist
     streaming: { ...streaming, flatrate: flatrateMitSlug },
     regisseurFilme: regisseurRows.rows.map(zuKarte),
-    regisseurPersonId, // null, solange die Person nicht schon einmal aufgeloest wurde
+    regisseurPersonId, // null, solange die Person nicht aufgeloest ist oder keine Seite hat
     aehnlicheTitel: aehnlicheRows.rows.map((r) => ({ ...zuKarte(r), genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null })),
     laufzeitMinuten: details ? details.laufzeit_minuten : null,
     erscheinungsdatum: details && details.erscheinungsdatum ? geburtstagString(details.erscheinungsdatum) : null,
     budget: details ? details.budget : null,
     einspielergebnis: details ? details.einspielergebnis : null,
     besetzungRollen: details ? details.besetzung_rollen : [],
-    schauspielerIds, // Map Name -> tmdbPersonId, nur Personen mit veroeffentlichtem Text
+    schauspielerIds, // Map Name -> tmdbPersonId, nur Personen mit indexierbarer Seite
     bilder: details ? details.bilder : [],
     trailerKey: trailer ? trailer.key : null,
     text,
@@ -541,69 +544,105 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
     biografie: person.biografie, fotoPfad: person.foto_pfad,
     geburtstag: geburtstagString(person.geburtstag),
     filmografie, text,
-    indexierbar: !!text && filmografie.length > 0,
+    indexierbar: filmografie.length > 0 && (!!text || !!person.foto_pfad),
   };
 }
 
-// Welche Namen der Besetzung haben eine Schauspieler-Seite mit Redaktionstext?
-// Nur die werden auf der Titelseite verlinkt -- sonst liefe der Link auf eine
-// noindex-Seite ohne Text. Mehrdeutige Namen (zwei Personen gleichen Namens in
-// personen_cache) werden bewusst nicht verlinkt statt geraten.
-export async function schauspielerMitSeite(namen, locale) {
+// Namen, die in personen_cache genau einmal vorkommen, und die Personen mit
+// Redaktionstext -- als CTE-Baustein. Korrelierte Unterabfragen je Person
+// brauchten 30 s, so ~0,1 s.
+const PERSONEN_CTES = `
+  eindeutig AS (SELECT name FROM personen_cache GROUP BY name HAVING count(*) = 1),
+  mit_text AS (SELECT split_part(schluessel, ':', 2)::int AS id FROM seo_content
+                WHERE bereich = 'person' AND locale = $2 AND schluessel LIKE $1 || ':%')`;
+const PERSON_HAT_SEITE = `(pc.tmdb_person_id IN (SELECT id FROM mit_text)
+     OR (pc.foto_pfad IS NOT NULL AND pc.name IN (SELECT name FROM eindeutig)))`;
+
+// Mindestmenge fuer eine indexierbare Personenseite: mindestens ein Titel im
+// Katalog UND (Redaktionstext ODER Foto). Dieselbe Regel steht in
+// ladePersonSeite() und in seoSitemap.js (personenUrls).
+//
+// Welche der Namen haben eine solche Seite? Nur die werden auf Titelseiten
+// verlinkt. Mehrdeutige Namen (zwei Personen gleichen Namens in
+// personen_cache) werden bewusst nicht verlinkt statt geraten. Der Titel,
+// auf dem der Name steht, liefert den Katalog-Titel bereits mit.
+export async function personenMitSeite(namen, rolle, locale) {
   const ids = new Map();
   const eindeutig = [...new Set((namen || []).filter(Boolean))];
   if (!eindeutig.length) return ids;
+  // Laeuft bei jedem Seitenaufruf -- daher nur ueber die wenigen Kandidaten
+  // (Index-Zugriff auf seo_content), nicht ueber die ganze Tabelle.
   const { rows } = await pool.query(
-    `SELECT pc.name, pc.tmdb_person_id
-       FROM personen_cache pc
-       JOIN seo_content s ON s.bereich = 'person' AND s.locale = $2
-                         AND s.schluessel = 'schauspieler:' || pc.tmdb_person_id
-      WHERE pc.name = ANY($1::text[])`,
-    [eindeutig, locale]
+    `SELECT pc.name, pc.tmdb_person_id FROM personen_cache pc
+      WHERE pc.name IN (SELECT name FROM personen_cache WHERE name = ANY($3::text[]) GROUP BY name HAVING count(*) = 1)
+        AND (pc.foto_pfad IS NOT NULL OR EXISTS (
+              SELECT 1 FROM seo_content s
+               WHERE s.bereich = 'person' AND s.locale = $2 AND s.schluessel = $1 || ':' || pc.tmdb_person_id))`,
+    [rolle, locale, eindeutig]
   );
-  const zaehler = new Map();
-  for (const r of rows) zaehler.set(r.name, (zaehler.get(r.name) || 0) + 1);
-  for (const r of rows) if (zaehler.get(r.name) === 1) ids.set(r.name, r.tmdb_person_id);
+  for (const r of rows) ids.set(r.name, r.tmdb_person_id);
   return ids;
 }
 
-// Uebersichtsseite /<locale>/schauspieler: die Schauspieler mit den meisten
-// Titeln im Katalog, soweit ihre Seite einen Redaktionstext hat. Die
-// Rangliste ist teuer (unnest ueber alle Titel), aendert sich aber selten --
+// Uebersichtsseiten /<locale>/schauspieler und /regisseur: die Personen mit den
+// meisten Titeln im Katalog (nur mit Seite, siehe personenMitSeite). Die
+// Rangliste ist teuer (Gruppierung ueber alle Titel), aendert sich aber selten --
 // deshalb wie die Bestenlisten im Prozessspeicher.
 const HUB_PERSONEN = 96;
-const schauspielerHubCache = new Map();
+const personenHubCache = new Map();
 
-async function schauspielerRangliste(locale) {
-  const gecacht = schauspielerHubCache.get(locale);
+const TITEL_ZAEHLUNG = {
+  schauspieler: `SELECT unnest(cast_names) AS name, count(*)::int AS anzahl FROM titles WHERE cast_names IS NOT NULL GROUP BY 1`,
+  regisseur: `SELECT director AS name, count(*)::int AS anzahl FROM titles WHERE director IS NOT NULL GROUP BY 1`,
+};
+
+async function personenRangliste(rolle, locale) {
+  const key = `${rolle}:${locale}`;
+  const gecacht = personenHubCache.get(key);
   if (gecacht && Date.now() - gecacht.at < BESTENLISTE_TTL_MS) return gecacht.liste;
   const { rows } = await pool.query(
-    `WITH besetzung AS (
-       SELECT unnest(cast_names) AS name, count(*)::int AS anzahl
-         FROM titles WHERE cast_names IS NOT NULL GROUP BY 1
-     )
-     SELECT pc.tmdb_person_id, pc.name, pc.foto_pfad, b.anzahl
-       FROM seo_content s
-       JOIN personen_cache pc ON s.schluessel = 'schauspieler:' || pc.tmdb_person_id
-       JOIN besetzung b ON b.name = pc.name
-      WHERE s.bereich = 'person' AND s.locale = $1
-      ORDER BY b.anzahl DESC, pc.name
-      LIMIT $2`,
-    [locale, HUB_PERSONEN]
+    `WITH zaehlung AS (${TITEL_ZAEHLUNG[rolle]}), ${PERSONEN_CTES}
+     SELECT pc.tmdb_person_id, pc.name, pc.foto_pfad, z.anzahl
+       FROM personen_cache pc
+       JOIN zaehlung z ON z.name = pc.name
+      WHERE pc.name IN (SELECT name FROM eindeutig) AND ${PERSON_HAT_SEITE}
+      ORDER BY z.anzahl DESC, pc.name
+      LIMIT $3`,
+    [rolle, locale, HUB_PERSONEN]
   );
   const liste = rows.map((r) => ({
     tmdbPersonId: r.tmdb_person_id, name: r.name, slug: slugify(r.name), fotoPfad: r.foto_pfad, anzahl: r.anzahl,
   }));
-  schauspielerHubCache.set(locale, { at: Date.now(), liste });
+  personenHubCache.set(key, { at: Date.now(), liste });
   return liste;
 }
 
-export async function ladeSchauspielerHub(locale) {
+export async function ladePersonenHub(rolle, locale) {
   const [personen, text] = await Promise.all([
-    schauspielerRangliste(locale),
-    ladeSeoText('hub', 'schauspieler', locale),
+    personenRangliste(rolle, locale),
+    ladeSeoText('hub', rolle, locale),
   ]);
-  return { personen, text, indexierbar: !!text && personen.length > 0 };
+  return { rolle, personen, text, indexierbar: !!text && personen.length > 0 };
+}
+
+// Alle Personen mit indexierbarer Seite (Regel wie ladePersonSeite): Text ODER
+// Foto (bei Foto nur bei eindeutigem Namen), plus mindestens ein Katalog-Titel.
+// Eine Abfrage statt ladePersonSeite() je Person -- ~20.000 Personen.
+export async function personenFuerSitemap(rolle, locale) {
+  const titelMitKennung = `titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
+     WHERE COALESCE(t.tmdb_id, r.tmdb_id) IS NOT NULL`;
+  const zaehlung = rolle === 'regisseur'
+    ? `SELECT DISTINCT t.director AS name FROM ${titelMitKennung} AND t.director IS NOT NULL`
+    : `SELECT DISTINCT unnest(t.cast_names) AS name FROM ${titelMitKennung} AND t.cast_names IS NOT NULL`;
+  const { rows } = await pool.query(
+    `WITH mit_titel AS (${zaehlung}), ${PERSONEN_CTES}
+     SELECT pc.tmdb_person_id, pc.name FROM personen_cache pc
+       JOIN mit_titel m ON m.name = pc.name
+      WHERE ${PERSON_HAT_SEITE}
+      ORDER BY pc.tmdb_person_id`,
+    [rolle, locale]
+  );
+  return rows.map((r) => ({ tmdbPersonId: r.tmdb_person_id, slug: slugify(r.name) }));
 }
 
 export async function ladeKinoStadt(stadtSlug, locale) {

@@ -514,28 +514,41 @@ export function seiteFilmeSerienHub(daten, locale, art) {
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
-export function seiteSchauspielerHub(daten, locale) {
-  const pfad = `/${locale}/schauspieler`;
-  const titelZeile = 'Schauspieler: Filmografie & bekannteste Rollen | MovieMatch';
-  const beschreibung = kurzfassung(daten.text) || 'Bekannte Schauspielerinnen und Schauspieler mit Filmografie, Bewertungen und Verfügbarkeit.';
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Schauspieler' }];
+const PERSONEN_HUB = {
+  schauspieler: {
+    titel: 'Schauspieler', h1: 'Schauspieler', ueberschrift: 'Häufig gesehene Gesichter',
+    titelZeile: 'Schauspieler: Filmografie & bekannteste Rollen | MovieMatch',
+    beschreibung: 'Bekannte Schauspielerinnen und Schauspieler mit Filmografie, Bewertungen und Verfügbarkeit.',
+  },
+  regisseur: {
+    titel: 'Regisseure', h1: 'Regisseure', ueberschrift: 'Regisseure mit den meisten Titeln',
+    titelZeile: 'Regisseure: Filmografie & bekannteste Filme | MovieMatch',
+    beschreibung: 'Bekannte Regisseurinnen und Regisseure mit Filmografie, Bewertungen und Verfügbarkeit.',
+  },
+};
+
+export function seitePersonenHub(daten, locale) {
+  const cfg = PERSONEN_HUB[daten.rolle];
+  const pfad = `/${locale}/${daten.rolle}`;
+  const beschreibung = kurzfassung(daten.text) || cfg.beschreibung;
+  const kette = [{ label: 'Start', href: SITE + '/' }, { label: cfg.titel }];
   const jsonLd = [{
-    '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
+    '@context': 'https://schema.org', '@type': 'ItemList', name: cfg.titelZeile,
     itemListElement: daten.personen.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name })),
   }, brotkrumenJsonLd(kette)];
-  const kartenHtml = daten.personen.map((p) => `<a class="karte" href="/${locale}/schauspieler/${p.slug}-${p.tmdbPersonId}">
+  const kartenHtml = daten.personen.map((p) => `<a class="karte" href="/${locale}/${daten.rolle}/${p.slug}-${p.tmdbPersonId}">
       ${p.fotoPfad ? `<img src="https://image.tmdb.org/t/p/w300${attrEsc(p.fotoPfad)}" alt="${attrEsc(p.name)}" loading="lazy">` : ''}
       <div class="titel">${attrEsc(p.name)}</div>
       <div class="info">${p.anzahl} Titel</div>
     </a>`).join('');
   const bodyHtml = `
     ${brotkrumenHtml(kette)}
-    <h1>Schauspieler</h1>
+    <h1>${cfg.h1}</h1>
     <p class="einleitung">${textBlock(daten.text)}</p>
-    <h2>Häufig gesehene Gesichter</h2>
+    <h2>${cfg.ueberschrift}</h2>
     <div class="raster">${kartenHtml}</div>
   `;
-  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
+  return dokument({ locale, pfad, titelZeile: cfg.titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
 export function seiteKinoHub(daten, locale) {
@@ -608,6 +621,7 @@ const START_BEREICHE = [
   { pfad: 'beste-filme', titel: 'Beste Filme', text: 'Bestenlisten nach Jahr und Genre.' },
   { pfad: 'beste-serien', titel: 'Beste Serien', text: 'Die höchstbewerteten Serien nach Jahr und Genre.' },
   { pfad: 'schauspieler', titel: 'Schauspieler', text: 'Bekannte Schauspielerinnen und Schauspieler mit Filmografie.' },
+  { pfad: 'regisseur', titel: 'Regisseure', text: 'Regisseurinnen und Regisseure mit ihren Filmen und Serien.' },
   { pfad: 'streaming', titel: 'Streaming', text: 'Was bei welchem Anbieter läuft.' },
   { pfad: 'kino', titel: 'Kino', text: 'Aktuelle Kinostarts und Kinos nach Stadt.' },
 ];
@@ -635,15 +649,30 @@ export function seiteStart(daten, locale) {
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
+// Zwei Saetze nur aus Katalogdaten, fuer Personen ohne Redaktionstext und
+// ohne Biografie -- keine erfundenen Fakten, kein Pronomen (Geschlecht unbekannt).
+// filmografie ist nach Bewertung sortiert, die ersten Titel sind die besten.
+function kurzprofil(daten, rolleWort) {
+  const titel = daten.filmografie.slice(0, 3).map((t) => (t.year ? `${t.title} (${t.year})` : t.title));
+  const liste = titel.length > 1 ? `${titel.slice(0, -1).join(', ')} und ${titel[titel.length - 1]}` : titel[0];
+  const satz1 = `${daten.name} ist ${rolleWort === 'Regisseur' ? 'Regisseur' : 'Schauspieler'}${daten.geburtstag ? `, geboren am ${daten.geburtstag}` : ''}.`;
+  const satz2 = titel.length
+    ? `Im MovieMatch-Katalog ${titel.length > 1 ? `zählen zu den am besten bewerteten Titeln ${liste}` : `ist ${liste} verzeichnet`}.`
+    : '';
+  return `${satz1} ${satz2}`.trim();
+}
+
 export function seitePerson(daten, locale) {
   const rolleWort = daten.rolle === 'regisseur' ? 'Regisseur' : 'Schauspieler';
   const pfad = `/${locale}/${daten.rolle}/${daten.slug}-${daten.tmdbPersonId}`;
   const titelZeile = `${daten.name} — Filme & Serien im Überblick | MovieMatch`;
-  const beschreibung = kurzfassung(daten.text) || kurzfassung(daten.biografie) || `${daten.name}: Filmografie, Bewertungen und Verfügbarkeit auf MovieMatch.`;
-  // Schauspieler haben eine Uebersicht (/schauspieler), Regisseure nicht.
-  const kette = daten.rolle === 'schauspieler'
-    ? [{ label: 'Start', href: SITE + '/' }, { label: 'Schauspieler', href: `${SITE}/${locale}/schauspieler` }, { label: daten.name }]
-    : [{ label: 'Start', href: SITE + '/' }, { label: daten.name }];
+  const profil = kurzprofil(daten, rolleWort);
+  const beschreibung = kurzfassung(daten.text) || kurzfassung(daten.biografie) || kurzfassung(profil);
+  const kette = [
+    { label: 'Start', href: SITE + '/' },
+    { label: PERSONEN_HUB[daten.rolle].titel, href: `${SITE}/${locale}/${daten.rolle}` },
+    { label: daten.name },
+  ];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'Person', name: daten.name,
     birthDate: daten.geburtstag || undefined,
@@ -657,7 +686,7 @@ export function seitePerson(daten, locale) {
   const redaktionHtml = personInhaltHtml(daten.text);
   const bioHtml = redaktionHtml || (daten.biografie
     ? `<h2>Biografie</h2><div class="seo-text">${daten.biografie.split('\n').map((p) => p.trim()).filter(Boolean).map((p) => `<p>${attrEsc(p)}</p>`).join('')}</div>`
-    : '<h2>Biografie</h2><p class="hinweis">Keine Biografie verfügbar.</p>');
+    : `<h2>Kurzprofil</h2><div class="seo-text"><p>${attrEsc(profil)}</p></div>`);
 
   const bodyHtml = `
     ${brotkrumenHtml(kette)}

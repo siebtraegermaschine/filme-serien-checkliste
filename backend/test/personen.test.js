@@ -9,7 +9,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { pool } from '../db/pool.js';
 import { resolvePersonIdCachedOnly } from '../lib/personen.js';
-import { ladePersonSeite } from '../lib/seoData.js';
+import { ladePersonSeite, personenMitSeite, personenFuerSitemap } from '../lib/seoData.js';
 
 const PERSON_TEST_ID = 900_000_501;
 const NAME_TEST = 'SEOTEST Regie Person';
@@ -56,6 +56,14 @@ test('ladePersonSeite: indexierbar erst mit Biografie UND Filmografie im eigenen
   assert.equal(mitFilm.indexierbar, true);
   assert.equal(mitFilm.filmografie.length, 1);
   assert.equal(mitFilm.filmografie[0].title, TITEL_PRAEFIX + 'Film');
+
+  // Mindestmenge: Foto reicht ohne Text; ohne Foto und ohne Text nicht.
+  assert.equal((await personenMitSeite([NAME_TEST], 'regisseur', 'de-de')).get(NAME_TEST), PERSON_TEST_ID);
+  assert.ok((await personenFuerSitemap('regisseur', 'de-de')).some((p) => p.tmdbPersonId === PERSON_TEST_ID));
+  await pool.query(`UPDATE personen_cache SET foto_pfad = NULL WHERE tmdb_person_id = $1`, [PERSON_TEST_ID]);
+  assert.equal((await ladePersonSeite('regisseur', PERSON_TEST_ID, 'de-de')).indexierbar, false);
+  assert.equal((await personenMitSeite([NAME_TEST], 'regisseur', 'de-de')).size, 0);
+  assert.ok(!(await personenFuerSitemap('regisseur', 'de-de')).some((p) => p.tmdbPersonId === PERSON_TEST_ID));
 
   // Rolle 'schauspieler' sucht ueber cast_names, nicht director -- fuer
   // dieselbe Person darf das eine andere (hier leere) Filmografie ergeben.

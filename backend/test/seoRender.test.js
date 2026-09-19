@@ -42,13 +42,13 @@ test('kurzfassung: leer/undefined ergibt leeren String', () => {
   assert.equal(kurzfassung(undefined), '');
 });
 
-test('seiteSchauspielerHub: Karten verlinken, ohne Text noindex', async () => {
-  const { seiteSchauspielerHub } = await import('../lib/seoRender.js');
+test('seitePersonenHub: Karten verlinken, ohne Text noindex', async () => {
+  const { seitePersonenHub } = await import('../lib/seoRender.js');
   const personen = [{ tmdbPersonId: 7, name: 'Ada Beispiel', slug: 'ada-beispiel', fotoPfad: '/x.jpg', anzahl: 12 }];
-  const ohne = seiteSchauspielerHub({ personen, text: null, indexierbar: false }, 'de-de');
+  const ohne = seitePersonenHub({ rolle: 'schauspieler', personen, text: null, indexierbar: false }, 'de-de');
   assert.match(ohne, /href="\/de-de\/schauspieler\/ada-beispiel-7"/);
   assert.match(ohne, /noindex/);
-  const mit = seiteSchauspielerHub({ personen, text: 'Einleitung.', indexierbar: true }, 'de-de');
+  const mit = seitePersonenHub({ rolle: 'schauspieler', personen, text: 'Einleitung.', indexierbar: true }, 'de-de');
   assert.doesNotMatch(mit, /noindex/);
 });
 
@@ -63,4 +63,17 @@ test('seiteTitelDetail: nur Namen mit Schauspieler-Seite werden verlinkt', async
   const html = seiteTitelDetail(titel, 'de-de');
   assert.match(html, /<a href="\/de-de\/schauspieler\/ada-beispiel-7">Ada Beispiel<\/a>/);
   assert.doesNotMatch(html, /Bob Ohneseite<\/a>/);
+});
+
+test('seitePerson: Kurzprofil aus Katalogdaten, Brotkrumen ueber die Uebersicht', async () => {
+  const { seitePerson } = await import('../lib/seoRender.js');
+  const daten = {
+    tmdbPersonId: 5, rolle: 'regisseur', name: 'Rita Regie', slug: 'rita-regie', biografie: null, fotoPfad: null,
+    geburtstag: null, text: null, indexierbar: true,
+    filmografie: [{ title: 'Alpha', year: 2001, tmdbId: 1, type: 'movie', slug: 'alpha' }, { title: 'Beta', year: 1999, tmdbId: 2, type: 'movie', slug: 'beta' }],
+  };
+  const html = seitePerson(daten, 'de-de');
+  assert.match(html, /Rita Regie ist Regisseur\. Im MovieMatch-Katalog zählen zu den am besten bewerteten Titeln Alpha \(2001\) und Beta \(1999\)/);
+  assert.match(html, /\/de-de\/regisseur"/);
+  assert.doesNotMatch(html, /noindex/);
 });
