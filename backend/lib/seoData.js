@@ -603,12 +603,14 @@ export async function ladeSerienHub(locale) {
   return filmeOderSerienHub('serien', locale);
 }
 
+// Nur Kinofilme mit Titelseite: die anderen (~150 von ~180) fuehrten auf 404.
 export async function ladeKinoHub(locale) {
   const region = regionFuerLocale(locale);
   const [{ rows: filme }, staedte, text] = await Promise.all([
     pool.query(
       `SELECT tmdb_id, title, year, genres, poster_path FROM cinema_cache
-        WHERE region = $1 AND category = 'now' ORDER BY release_date DESC LIMIT $2`,
+        WHERE region = $1 AND category = 'now'
+          AND tmdb_id IN (SELECT tmdb_id FROM ${TITEL_MIT_KENNUNG} WHERE type = 'movie') ORDER BY release_date DESC LIMIT $2`,
       [region, HUB_ANZAHL]
     ),
     staedteListe(),
@@ -820,7 +822,8 @@ export async function ladeKinoStadt(stadtSlug, locale) {
     ),
     pool.query(
       `SELECT tmdb_id, title, year, genres, poster_path, release_date
-         FROM cinema_cache WHERE region = $1 AND category = 'now' ORDER BY release_date DESC LIMIT 30`,
+         FROM cinema_cache WHERE region = $1 AND category = 'now'
+          AND tmdb_id IN (SELECT tmdb_id FROM ${TITEL_MIT_KENNUNG} WHERE type = 'movie') ORDER BY release_date DESC LIMIT 30`,
       [region]
     ),
     ladeSeoText('kino_stadt', stadtSlug, locale),
