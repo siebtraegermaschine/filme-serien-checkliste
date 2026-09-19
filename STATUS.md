@@ -226,3 +226,9 @@
 - Muttersprachler-Reviews der Übersetzungen einholen und einarbeiten.
 - Tour-Screenshots aktualisieren, sobald aktuelle Oberflächen-Änderungen
   abgeschlossen sind.
+
+## Personen-Übersichten und Verlinkung (19.09.2026, live)
+- `/de-de/schauspieler` und `/de-de/regisseur`: Top 96 nach Titelzahl, Footer-Link, Startseiten-Kachel, Hub-Texte in `seo_content`, index,follow.
+- Personenseite indexierbar bei ≥1 Katalog-Titel UND (Text ODER Foto); ohne Text/Bio erscheint ein Kurzprofil aus Katalogdaten. Sitemap: ~20.500 Personen-URLs (eine SQL-Abfrage, `personenFuerSitemap`).
+- Titelseiten verlinken Besetzung und Regie bei jeder Person mit solcher Seite (nur eindeutige Namen).
+- Offen/später: Hub-Paginierung (bisher nur Top 96), Drehbuch (1.278 Personen im Cache, aber keine Titelzuordnung), Namens-Index auf `personen_cache` (Link-Abfrage ~65 ms je Titelseite).
