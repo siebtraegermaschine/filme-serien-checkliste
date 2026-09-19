@@ -161,15 +161,6 @@
     border-color: var(--accent);
     color: var(--accent);
   }
-  /* Kino tut etwas anderes als die beiden davor: Filme und Serien sind Filter,
-     die sich frei kombinieren lassen (beide koennen gleichzeitig leuchten),
-     Kino wechselt auf eine eigene Seite. Sichtbar gemacht wird das allein
-     durch die runde Form statt der eckigen -- der fruehere Abstand samt
-     senkrechter Trennlinie ist am 13. August entfallen, damit die drei
-     Knoepfe buendig ueber den Statusknoepfen stehen. */
-  .tabs .kino-tab {
-    border-radius: 999px;
-  }
   /* Der frueher hier stehende Discovery-Button ("Alle Filme & Serien
      entdecken") ist entfallen: "Neue entdecken" ist jetzt ein dritter Status neben
      Watchlist/Gesehen in .filter-group, der Typ kommt aus dem aktiven Tab. */
@@ -536,12 +527,9 @@
      unter der Statusreihe sitzt (nachgemessen). Vorher standen hier 22px -- der
      Knopf sass sichtbar tiefer als derselbe Knopf im anderen Bereich, obwohl er
      an derselben Stelle steht.
-     align-items:flex-end statt center: "Im Kino" schliesst damit unten buendig
-     mit dem Sortier-Knopf ab. Mittig zentriert stand die Ueberschrift 8,5px
-     hoeher als dessen Unterkante. */
+     Der Sortier-Knopf steht rechts, wo auch "Neue entdecken" endet. */
   .cinema-page-header { max-width:700px; margin:10px auto 6px; padding:0 20px; box-sizing:border-box;
-    display:flex; align-items:flex-end; justify-content:space-between; gap:12px; }
-  .cinema-page-title { color:var(--accent); font-size:19px; margin:0; }
+    display:flex; align-items:flex-end; justify-content:flex-end; gap:12px; }
   /* Genauso breit wie "Neue entdecken" in der Statusreihe darueber: Dort teilen
      sich drei Knoepfe mit 4px Abstand die Zeile, eine Spalte ist also
      (100% - 8px) / 3. .cinema-page-header hat dieselbe Inhaltsbreite wie
@@ -1414,11 +1402,10 @@
   <div class="tabs">
     <div class="tabs-row">
       <!-- Filme und Serien sind Filter (frei kombinierbar, siehe setTab), Kino
-           wechselt die Seite. Zwei verschiedene Dinge in einer Reihe -- deshalb
-           steht Kino abgesetzt (siehe .tabs .kino-tab). -->
+           wechselt die Seite -- sieht aber genauso aus. -->
       <button id="tabFilme" class="active">🎬 Filme</button>
       <button id="tabSerien" class="active">📺 Serien</button>
-      <button id="tabKino" class="kino-tab">🍿 Kino</button>
+      <button id="tabKino">🍿 Kino</button>
     </div>
   </div>
 </header>
@@ -1465,7 +1452,6 @@
 
 <div id="cinemaPage" style="display:none">
   <div class="cinema-page-header">
-    <h2 class="cinema-page-title">Im Kino</h2>
     <div class="cinema-page-actions">
       <div class="sort-wrap">
         <button id="cinemaSort" type="button" title="Sortierung">⇅ Sortieren</button>
@@ -4600,7 +4586,6 @@ var MARKUP_TEXTE = {
     '#sortMenu [data-sort="newstream"]': { t: 'by new on streaming' },
     '#sortMenu [data-sort="taste"]': { t: 'by Taste Score' },
     '#matchBarClear': { t: 'clear' },
-    '.cinema-page-title': { t: 'In cinemas' },
     '#cinemaSort': { t: '⇅ Sort' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Sort by ★★★★ rating' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'by release date' },
@@ -4713,7 +4698,6 @@ var MARKUP_TEXTE = {
     '#sortMenu [data-sort="newstream"]': { t: 'par nouveautés en streaming' },
     '#sortMenu [data-sort="taste"]': { t: 'par Taste Score' },
     '#matchBarClear': { t: 'effacer' },
-    '.cinema-page-title': { t: 'Au cinéma' },
     '#cinemaSort': { t: '⇅ Trier' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Trier par note ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'par date de sortie' },
@@ -4826,7 +4810,6 @@ var MARKUP_TEXTE = {
     '#sortMenu [data-sort="newstream"]': { t: 'por novedades en streaming' },
     '#sortMenu [data-sort="taste"]': { t: 'por Taste Score' },
     '#matchBarClear': { t: 'quitar' },
-    '.cinema-page-title': { t: 'En cines' },
     '#cinemaSort': { t: '⇅ Ordenar' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Ordenar por valoración ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'por fecha de estreno' },
@@ -4939,7 +4922,6 @@ var MARKUP_TEXTE = {
     '#sortMenu [data-sort="newstream"]': { t: 'per novità in streaming' },
     '#sortMenu [data-sort="taste"]': { t: 'per Taste Score' },
     '#matchBarClear': { t: 'annulla' },
-    '.cinema-page-title': { t: 'Al cinema' },
     '#cinemaSort': { t: '⇅ Ordina' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Ordina per valutazione ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'per data di uscita' },
@@ -5052,7 +5034,6 @@ var MARKUP_TEXTE = {
     '#sortMenu [data-sort="newstream"]': { t: 'op nieuw bij streaming' },
     '#sortMenu [data-sort="taste"]': { t: 'op Taste Score' },
     '#matchBarClear': { t: 'wissen' },
-    '.cinema-page-title': { t: 'In de bioscoop' },
     '#cinemaSort': { t: '⇅ Sorteren' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Sorteren op ★★★★-beoordeling' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'op verschijningsdatum' },
@@ -5165,7 +5146,6 @@ var MARKUP_TEXTE = {
     '#sortMenu [data-sort="newstream"]': { t: 'por novidades no streaming' },
     '#sortMenu [data-sort="taste"]': { t: 'por Taste Score' },
     '#matchBarClear': { t: 'limpar' },
-    '.cinema-page-title': { t: 'Nos cinemas' },
     '#cinemaSort': { t: '⇅ Ordenar' },
     '#cinemaSortMenu [data-sort="imdb"]': { t: 'Ordenar por avaliação ★★★★' },
     '#cinemaSortMenu [data-sort="date"]': { t: 'por data de lançamento' },
