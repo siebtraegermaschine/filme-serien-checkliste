@@ -10,7 +10,11 @@ import { regionFuerLocale } from './seoLocale.js';
 import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatistik.js';
 import { ladePersonDaten } from './personen.js';
 import { holeTitelDetails, holeTrailer } from './titeldetails.js';
-import { MIN_TITEL, MIN_TITEL_KINO, NEU_JAHRE, THEMEN, listeTitel } from './seoBestenlisten.js';
+import { MIN_TITEL, MIN_TITEL_KINO, MIN_TITEL_LAND_GENRE, NEU_JAHRE, THEMEN, LAUFZEITEN, STAFFELN, listeTitel } from './seoBestenlisten.js';
+import {
+  landName, landAus, landSlug, codeAusLandSlug, landHatSeite,
+  sprachName, sprachSlug, codeAusSprachSlug, spracheHatSeite,
+} from './herkunftsnamen.js';
 
 // Sortierung aller SEO-Titellisten: die GEWICHTETE TMDB-Bewertung, identisch
 // zur App (gewichteteNote in index.html: m = 1000, Katalogmittel 6,76).
@@ -42,7 +46,8 @@ const NOTE_SQL = `CASE WHEN COALESCE(rating, 0) = 0 THEN 0
 const TITEL_MIT_KENNUNG = `(
   SELECT DISTINCT ON (t.type, COALESCE(t.tmdb_id, r.tmdb_id))
          t.id, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, t.type, t.title, t.year,
-         t.genres, t.director, t.cast_names, t.rating, t.vote_count, t.poster_path, t.keywords
+         t.genres, t.director, t.cast_names, t.rating, t.vote_count, t.poster_path, t.keywords,
+         t.origin_country, t.original_language, t.runtime, t.seasons
     FROM titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
    WHERE COALESCE(t.tmdb_id, r.tmdb_id) IS NOT NULL
    ORDER BY t.type, COALESCE(t.tmdb_id, r.tmdb_id), COALESCE(t.vote_count, 0) DESC, t.id
@@ -371,6 +376,13 @@ async function listeBedingung(type, modus, wert, region) {
     teile.push(`EXISTS (SELECT 1 FROM streaming_cache s WHERE s.type = titel.type AND s.tmdb_id = titel.tmdb_id AND s.provider_id = ${p(slug)} AND s.region = ${p(region)})`);
     return true;
   };
+  const landTeil = (slug) => {
+    const code = codeAusLandSlug(slug);
+    if (!code) return false;
+    namen.land = landAus(code); namen.landSlug = slug; namen.landKurz = landName(code);
+    teile.push(`origin_country @> ARRAY[${p(code)}::text]`);
+    return true;
+  };
   const jahrzehntTeil = (jz) => {
     const j = Number(jz);
     if (!Number.isInteger(j) || j % 10 || j < 1900 || j > 2020) return false;
@@ -393,6 +405,29 @@ async function listeBedingung(type, modus, wert, region) {
       ok = !!THEMEN[a];
       if (ok) teile.push(`keywords && ${p(THEMEN[a].keywords)}::text[]`);
       break;
+    case 'land': ok = landTeil(a); break;
+    case 'sprache': {
+      const code = codeAusSprachSlug(a);
+      ok = !!code;
+      if (ok) {
+        namen.sprache = sprachName(code);
+        teile.push(`original_language = ${p(code)}`);
+      }
+      break;
+    }
+    case 'laufzeit': {
+      const l = LAUFZEITEN[a];
+      ok = type === 'movie' && !!l;
+      if (ok) teile.push(`runtime >= ${p(l.min)}${l.max ? ` AND runtime <= ${p(l.max)}` : ''}`);
+      break;
+    }
+    case 'staffeln': {
+      const st = STAFFELN[a];
+      ok = type === 'series' && !!st;
+      if (ok) teile.push(`seasons >= ${p(st.min)}${st.max ? ` AND seasons <= ${p(st.max)}` : ''}`);
+      break;
+    }
+    case 'land-genre': ok = landTeil(a) && (await genreTeil(b)); break;
     case 'genre-jahrzehnt': ok = (await genreTeil(a)) && jahrzehntTeil(b); break;
     case 'genre-anbieter': ok = (await genreTeil(a)) && (await anbieterTeil(b)); break;
     case 'kino':
@@ -433,7 +468,7 @@ export async function ladeBestenliste(art, modus, wert, locale) {
     bed.params
   );
   const gesamt = rows.length ? rows[0].gesamt : 0;
-  const mindest = modus === 'kino' ? MIN_TITEL_KINO : MIN_TITEL;
+  const mindest = modus === 'kino' ? MIN_TITEL_KINO : modus === 'land-genre' ? MIN_TITEL_LAND_GENRE : MIN_TITEL;
   if (!ALTE_MODI.has(modus) && gesamt < mindest) {
     bestenlisteCache.set(cacheKey, { at: jetzt, wert: null });
     return null;
@@ -461,6 +496,8 @@ export async function ladeBestenliste(art, modus, wert, locale) {
     ueberschrift: listeTitel(type, modus, wert, bed.namen),
     genre: bed.namen.genre || null, genreSlug: bed.namen.genreSlug || null,
     anbieter: bed.namen.anbieter || null,
+    land: bed.namen.landKurz || null, landAus: bed.namen.land || null, landSlug: bed.namen.landSlug || null,
+    sprache: bed.namen.sprache || null,
     text, indexierbar: !!text && sortiert.length > 0,
   };
   bestenlisteCache.set(cacheKey, { at: jetzt, wert: ergebnis });
@@ -472,7 +509,12 @@ export async function ladeBestenliste(art, modus, wert, locale) {
 function verwandteListen(modus, wert, katalog) {
   const gruppen = [];
   const add = (titel, links) => { if (links.length) gruppen.push({ titel, links }); };
-  if (modus === 'genre') {
+  if (modus === 'land') {
+    add('Nach Genre', katalog.landGenre.filter((e) => e.land === wert)
+      .map((e) => ({ label: e.genre, modus: 'land-genre', wert: `${wert}+${e.genreSlug}` })));
+  } else if (modus === 'genre') {
+    add('Nach Land', katalog.landGenre.filter((e) => e.genreSlug === wert)
+      .map((e) => ({ label: e.landName, modus: 'land-genre', wert: `${e.land}+${wert}` })));
     add('Nach Jahrzehnt', katalog.genreJahrzehnt.filter((e) => e.slug === wert).sort((x, y) => x.jz - y.jz)
       .map((e) => ({ label: `${e.jz}er`, modus: 'genre-jahrzehnt', wert: `${wert}+${e.jz}` })));
     add('Nach Anbieter', katalog.genreAnbieter.filter((e) => e.slug === wert)
@@ -500,7 +542,7 @@ export async function bestenlistenKatalog(type, locale) {
 
   const erlaubteGenres = new Set(await alleGenres(type));
   const q = (sql, params) => pool.query(sql, params).then((r) => r.rows);
-  const [jz, anb, gj, ga, themen, kino, neu] = await Promise.all([
+  const [jz, anb, gj, ga, themen, kino, neu, laender, sprachen, landGenre, laufzeit, staffeln] = await Promise.all([
     q(`SELECT (year / 10 * 10) AS jz, count(*)::int AS n FROM ${TITEL_MIT_KENNUNG}
         WHERE type = $1 AND year >= 1900 GROUP BY 1 HAVING count(*) >= $2 ORDER BY 1`, [type, MIN_TITEL]),
     q(`SELECT s.provider_id AS slug, min(s.provider_name) AS name, count(DISTINCT titel.tmdb_id)::int AS n
@@ -522,6 +564,24 @@ export async function bestenlistenKatalog(type, locale) {
             WHERE type = 'movie' AND EXISTS (SELECT 1 FROM cinema_cache c WHERE c.tmdb_id = titel.tmdb_id AND c.region = $1 AND c.category = 'now')`, [region])
       : Promise.resolve([{ n: 0 }]),
     q(`SELECT count(*)::int AS n FROM ${TITEL_MIT_KENNUNG} WHERE type = $1 AND year >= $2`, [type, new Date().getFullYear() - NEU_JAHRE + 1]),
+    q(`SELECT c AS code, count(*)::int AS n FROM ${TITEL_MIT_KENNUNG}, unnest(origin_country) c
+        WHERE type = $1 GROUP BY 1 HAVING count(*) >= $2 ORDER BY n DESC, 1`, [type, MIN_TITEL]),
+    q(`SELECT original_language AS code, count(*)::int AS n FROM ${TITEL_MIT_KENNUNG}
+        WHERE type = $1 AND original_language IS NOT NULL GROUP BY 1 HAVING count(*) >= $2 ORDER BY n DESC, 1`, [type, MIN_TITEL]),
+    q(`SELECT c AS code, g AS genre, count(*)::int AS n FROM ${TITEL_MIT_KENNUNG}, unnest(origin_country) c, unnest(genres) g
+        WHERE type = $1 GROUP BY 1, 2 HAVING count(*) >= $2`, [type, MIN_TITEL_LAND_GENRE]),
+    Promise.all(Object.entries(LAUFZEITEN).map(async ([slug, l]) => {
+      const [r] = type === 'movie'
+        ? await q(`SELECT count(*)::int AS n FROM ${TITEL_MIT_KENNUNG} WHERE type = 'movie' AND runtime >= $1 AND runtime <= COALESCE($2::int, 100000)`, [l.min, l.max])
+        : [{ n: 0 }];
+      return { slug, n: r.n };
+    })),
+    Promise.all(Object.entries(STAFFELN).map(async ([slug, st]) => {
+      const [r] = type === 'series'
+        ? await q(`SELECT count(*)::int AS n FROM ${TITEL_MIT_KENNUNG} WHERE type = 'series' AND seasons >= $1 AND seasons <= COALESCE($2::int, 100000)`, [st.min, st.max])
+        : [{ n: 0 }];
+      return { slug, n: r.n };
+    })),
   ]);
 
   const gEintraege = (rows) => rows.filter((r) => erlaubteGenres.has(r.genre));
@@ -533,6 +593,12 @@ export async function bestenlistenKatalog(type, locale) {
     themen: themen.filter((t) => t.n >= MIN_TITEL).map((t) => t.slug),
     kino: kino[0].n >= MIN_TITEL_KINO,
     neu: neu[0].n >= MIN_TITEL,
+    laender: laender.filter((r) => landHatSeite(r.code)).map((r) => ({ code: r.code, slug: landSlug(r.code), name: landName(r.code) })),
+    sprachen: sprachen.filter((r) => spracheHatSeite(r.code)).map((r) => ({ code: r.code, slug: sprachSlug(r.code), name: sprachName(r.code) })),
+    landGenre: gEintraege(landGenre).filter((r) => landHatSeite(r.code))
+      .map((r) => ({ genre: r.genre, genreSlug: slugify(r.genre), land: landSlug(r.code), landName: landName(r.code) })),
+    laufzeit: laufzeit.filter((l) => l.n >= MIN_TITEL).map((l) => l.slug),
+    staffeln: staffeln.filter((l) => l.n >= MIN_TITEL).map((l) => l.slug),
   };
   katalogCache.set(key, { at: Date.now(), wert });
   return wert;

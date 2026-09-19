@@ -94,3 +94,26 @@ test('Textgenerator: Kino/Neu ohne Zahlen und Titel, Genre-Text nennt die Spitze
   assert.match(genre, /„A“, „B“ und „C“/);
   assert.match(genre, /Alle Action-Filme/);
 });
+
+test('Land, Sprache, Laufzeit, Staffeln: Pfad, Schluessel, Analytics, Ueberschrift', () => {
+  assert.deepEqual(listeAusPfad('land', 'frankreich'), { modus: 'land', wert: 'frankreich' });
+  assert.deepEqual(listeAusPfad('sprache', 'franzoesisch'), { modus: 'sprache', wert: 'franzoesisch' });
+  assert.deepEqual(listeAusPfad('land', 'usa', 'genre', 'action'), { modus: 'land-genre', wert: 'usa+action' });
+  assert.deepEqual(listeAusPfad('laufzeit', 'unter-90'), { modus: 'laufzeit', wert: 'unter-90' });
+  assert.deepEqual(listeAusPfad('staffeln', 'ab-5'), { modus: 'staffeln', wert: 'ab-5' });
+  assert.equal(listeAusPfad('laufzeit', 'kurz'), null);
+  assert.equal(listeAusPfad('staffeln', '3'), null);
+  assert.equal(listeAusPfad('land', 'usa', 'jahr', '1990'), null);
+  assert.equal(schluesselZuPfad('land-genre:usa+action:movie', 'de-de'), '/de-de/beste-filme/land/usa/genre/action');
+  assert.equal(schluesselZuPfad('staffeln:eine:series', 'de-de'), '/de-de/beste-serien/staffeln/eine');
+  assert.equal(seoAufrufTyp('/de-de/beste-filme/land/usa'), 'beste-land');
+  assert.equal(seoAufrufTyp('/de-de/beste-filme/land/usa/genre/action'), 'beste-land-genre');
+  assert.equal(seoAufrufTyp('/de-de/beste-filme/sprache/franzoesisch'), 'beste-sprache');
+  assert.equal(seoAufrufTyp('/de-de/beste-filme/laufzeit/ueber-150'), 'beste-laufzeit');
+  assert.equal(seoAufrufTyp('/de-de/beste-serien/staffeln/eine'), 'beste-staffeln');
+  assert.equal(listeTitel('movie', 'land', 'usa', { land: 'aus den USA' }), 'Beste Filme aus den USA');
+  assert.equal(listeTitel('movie', 'sprache', 'franzoesisch', { sprache: 'Französisch' }), 'Beste Filme auf Französisch');
+  assert.equal(listeTitel('movie', 'laufzeit', 'unter-90'), 'Beste Filme unter 90 Minuten');
+  assert.equal(listeTitel('series', 'staffeln', 'eine'), 'Beste Serien mit einer Staffel');
+  assert.equal(listeTitel('movie', 'land-genre', 'usa+action', { genre: 'Action', land: 'aus den USA' }), 'Beste Filme im Genre Action aus den USA');
+});

@@ -11,7 +11,7 @@ import 'dotenv/config';
 import { pathToFileURL } from 'node:url';
 import { pool } from '../db/pool.js';
 import { ladeBestenliste, bestenlistenKatalog } from '../lib/seoData.js';
-import { MIN_TITEL, THEMEN, jahrzehntName } from '../lib/seoBestenlisten.js';
+import { MIN_TITEL, THEMEN, jahrzehntName, LAUFZEITEN, STAFFELN } from '../lib/seoBestenlisten.js';
 import { slugify } from '../lib/slug.js';
 
 const LOCALE = 'de-de';
@@ -58,6 +58,22 @@ export function bauText(daten) {
       return `Die besten ${genre}-${w} der ${jahrzehntName(zweit)}: ${treffer} dieser Kombination, die Liste zeigt die 20 am höchsten bewerteten, an der Spitze ${top}. ${SORTIERUNG}`;
     case 'genre-anbieter':
       return `Die besten ${genre}-${w} auf ${daten.anbieter}: Aus dem aktuellen Streaming-Angebot in Deutschland zeigt die Liste die 20 am höchsten bewerteten ${genre}-Titel, an der Spitze ${top}. ${SORTIERUNG} Das Angebot ändert sich; die Liste folgt ihm.`;
+    case 'land':
+      return `Die besten ${w} ${daten.landAus}: ${treffer} mit diesem Herkunftsland, die Liste zeigt die 20 am höchsten bewerteten, angeführt von ${top}. Bei Koproduktionen zählt jedes beteiligte Land. ${SORTIERUNG}`;
+    case 'land-genre':
+      return `Die besten ${genre}-${w} ${daten.landAus}: ${treffer} dieser Kombination, die Liste zeigt die 20 am höchsten bewerteten, an der Spitze ${top}. Bei Koproduktionen zählt jedes beteiligte Land. ${SORTIERUNG}`;
+    case 'sprache':
+      return `Die besten ${w} auf ${daten.sprache}: ${treffer} mit ${daten.sprache} als Originalsprache, die Liste zeigt die 20 am höchsten bewerteten, angeführt von ${top}. Gemeint ist die Originalfassung, nicht die Synchronisation. ${SORTIERUNG}`;
+    case 'laufzeit': {
+      const l = LAUFZEITEN[erst];
+      const hinweis = l.max ? 'Ideal für einen kurzen Filmabend: Filme ab 60 Minuten Laufzeit zählen mit, Kurzfilme nicht.' : 'Für lange Abende und Freunde des großen Erzählens: Die Liste zeigt die Epen unter den Filmen.';
+      return `Die besten ${w} ${l.kurz}: ${treffer} in dieser Länge, die Liste zeigt die 20 am höchsten bewerteten, angeführt von ${top}. ${hinweis} ${SORTIERUNG}`;
+    }
+    case 'staffeln': {
+      const st = STAFFELN[erst];
+      const hinweis = st.max ? 'Abgeschlossene Geschichten, die sich an einem Wochenende schaffen lassen, zählen hier mit.' : 'Serien, die über viele Jahre trugen, sind hier zusammengefasst — ein guter Ausgangspunkt für alle, die lange dranbleiben wollen.';
+      return `Die besten ${w} ${st.kurz}: ${treffer} in dieser Länge, die Liste zeigt die 20 am höchsten bewerteten, angeführt von ${top}. ${hinweis} ${SORTIERUNG}`;
+    }
     case 'kino':
       return `Die besten ${w} im Kino: Aus den Filmen, die gerade in den deutschen Kinos laufen und im MovieMatch-Katalog stehen, zeigt die Liste die am höchsten bewerteten. ${SORTIERUNG} Wer einen Kinoabend plant, sieht hier auf einen Blick, welche der laufenden Filme sich am meisten lohnen — und findet über die Kino-Seiten die Kinos in der eigenen Stadt.`;
     case 'neu':
@@ -82,6 +98,11 @@ export async function alleListen() {
     for (const t of k.themen) liste.push([art, 'thema', t]);
     for (const e of k.genreJahrzehnt) liste.push([art, 'genre-jahrzehnt', `${e.slug}+${e.jz}`]);
     for (const e of k.genreAnbieter) liste.push([art, 'genre-anbieter', `${e.slug}+${e.anbieter}`]);
+    for (const e of k.laender) liste.push([art, 'land', e.slug]);
+    for (const e of k.sprachen) liste.push([art, 'sprache', e.slug]);
+    for (const e of k.landGenre) liste.push([art, 'land-genre', `${e.land}+${e.genreSlug}`]);
+    for (const e of k.laufzeit) liste.push([art, 'laufzeit', e]);
+    for (const e of k.staffeln) liste.push([art, 'staffeln', e]);
     if (k.kino) liste.push([art, 'kino', 'aktuell']);
     if (k.neu) liste.push([art, 'neu', 'aktuell']);
   }

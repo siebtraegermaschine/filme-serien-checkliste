@@ -3,7 +3,7 @@
 // bei der App-OG-Route (server.js) -- jede Funktion hier gibt ein fertiges
 // Dokument zurueck. Kein App-JS, eigenes seo.css (Architektur-Entscheidung 1).
 import { hreflangCode } from './seoLocale.js';
-import { listeSeitenPfad, THEMEN, jahrzehntName } from './seoBestenlisten.js';
+import { listeSeitenPfad, THEMEN, jahrzehntName, LAUFZEITEN, STAFFELN } from './seoBestenlisten.js';
 import { slugify } from './slug.js';
 
 export const SITE = 'https://movietaste.de';
@@ -471,6 +471,16 @@ function listenAbschnitte(katalog, type, locale, ebene = 'h2') {
   if (katalog.themen.length) {
     teile.push(`<${ebene}>Nach Thema</${ebene}>${listenChips(locale, type, katalog.themen.map((t) => ({ label: THEMEN[t].name, modus: 'thema', wert: t })))}`);
   }
+  if (katalog.laender.length) {
+    teile.push(`<${ebene}>Nach Land</${ebene}>${listenChips(locale, type, katalog.laender.map((l) => ({ label: l.name, modus: 'land', wert: l.slug })))}`);
+  }
+  if (katalog.sprachen.length) {
+    teile.push(`<${ebene}>Nach Originalsprache</${ebene}>${listenChips(locale, type, katalog.sprachen.map((l) => ({ label: l.name, modus: 'sprache', wert: l.slug })))}`);
+  }
+  const laenge = type === 'series'
+    ? katalog.staffeln.map((k) => ({ label: `${w} ${STAFFELN[k].kurz}`, modus: 'staffeln', wert: k }))
+    : katalog.laufzeit.map((k) => ({ label: `${w} ${LAUFZEITEN[k].kurz}`, modus: 'laufzeit', wert: k }));
+  if (laenge.length) teile.push(`<${ebene}>${type === 'series' ? 'Nach Staffelzahl' : 'Nach Laufzeit'}</${ebene}>${listenChips(locale, type, laenge)}`);
   return teile.join('');
 }
 
@@ -505,6 +515,10 @@ export function seiteBestenliste(daten, locale) {
     rueck.push(daten.modus === 'genre-jahrzehnt'
       ? { href: listeSeitenPfad(locale, daten.type, 'jahrzehnt', zweit), label: `Beste ${wortTyp} der ${jahrzehntName(zweit)}` }
       : { href: listeSeitenPfad(locale, daten.type, 'anbieter', zweit), label: `Beste ${wortTyp} auf ${daten.anbieter}` });
+  }
+  if (daten.modus === 'land-genre') {
+    rueck.push({ href: listeSeitenPfad(locale, daten.type, 'land', erst), label: `Beste ${wortTyp} ${daten.landAus}` });
+    rueck.push({ href: listeSeitenPfad(locale, daten.type, 'genre', zweit), label: `Beste ${wortTyp} im Genre ${daten.genre}` });
   }
   if (daten.modus === 'anbieter') {
     rueck.push({ href: `/${locale}/streaming/${daten.wert}`, label: `Alle Titel auf ${daten.anbieter}` });
