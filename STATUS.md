@@ -232,3 +232,13 @@
 - Personenseite indexierbar bei ≥1 Katalog-Titel UND (Text ODER Foto); ohne Text/Bio erscheint ein Kurzprofil aus Katalogdaten. Sitemap: ~20.500 Personen-URLs (eine SQL-Abfrage, `personenFuerSitemap`).
 - Titelseiten verlinken Besetzung und Regie bei jeder Person mit solcher Seite (nur eindeutige Namen).
 - Offen/später: Hub-Paginierung (bisher nur Top 96), Drehbuch (1.278 Personen im Cache, aber keine Titelzuordnung), Namens-Index auf `personen_cache` (Link-Abfrage ~65 ms je Titelseite).
+
+## Bestenlisten ausgebaut (19.09.2026, live)
+- **Footer** (SEO-Seiten und App) verlinkt dieselben Übersichten, Test `Footer: … dieselben Uebersichten` sichert das. **Bestenlisten-Übersicht** `/de-de/bestenlisten` mit Abschnitten je Typ (Aktuell, Anbieter, Jahrzehnt, Thema); `/beste-filme|serien` genauso.
+- **Neue Seitenarten** unter `/de-de/beste-filme|serien/`: `anbieter/<slug>`, `jahrzehnt/<1990>`, `thema/<weihnachten|wahre-begebenheit>`, `genre/<g>/jahrzehnt/<jz>`, `genre/<g>/anbieter/<a>`, `im-kino` (nur Filme), `neu`. Schwelle 30 Titel (Kino 10), darunter 404; Schlüssel `<modus>:<wert>:<type>` in `seo_content` (`bestenliste`), zentral in `backend/lib/seoBestenlisten.js`. Analytics-Typen `beste-anbieter|jahrzehnt|thema|genre-jahrzehnt|genre-anbieter|kino|neu`.
+- **Verlinkung**: Genre-Seite ↔ Beste-Genre, Anbieter-Seite ↔ Beste-Anbieter, Kombi-Chips auf Genre-/Jahrzehnt-/Anbieter-Liste. h1-Fehler behoben (Genre fehlte).
+- **Texte**: 547 Listen mit deterministischen Texten aus DB-Fakten (`node backend/scripts/seo-bestenlisten-texte.mjs`, legt nur fehlende an, kein API-Aufruf). Vorher gab es für Bestenlisten gar keine Texte → alle waren noindex und fehlten in der Sitemap. Nach neuen Kombinationen (z. B. neuer Anbieter) Skript auf dem Server erneut laufen lassen.
+- **Kino-Hub/-Städte** zeigten ~150 von ~180 Filmen mit Link auf 404 (kein Titel in `titles`); jetzt nur Filme mit Titelseite.
+- **Entschieden/ausgelassen**: Land/Sprache (fehlt komplett, bräuchte neue Spalte + TMDB-Backfill), Laufzeit/Staffelzahl (nicht im Katalog, nur live über TMDB), Beste-Zeile auf Personenseiten (Filmografie dort schon nach Bewertung sortiert = Doppelung). „Neu“ = laufendes + Vorjahr (Katalog kennt nur `year`, kein Datum).
+- **Offen (Entscheidung nötig)**: Drehbuchautoren-Seiten über TMDB-Writer-Credits. Thema-Listen hängen an den Katalog-Schlagwörtern (nur ~17 % der Titel haben welche) — weitere Themen erst bei besserer Abdeckung. Texte sind templatiert: nach Search-Console-Zahlen entscheiden, ob bezahlte Einzeltexte für Top-Listen lohnen.
+- **Später**: Hub-Paginierung der Personen-Hubs, Namens-Index auf `personen_cache`.
