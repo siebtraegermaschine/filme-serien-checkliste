@@ -190,9 +190,30 @@
   **Endergebnis:** 11.800 Rollen-Einträge versucht, 9.057 Texte bestanden
   Format-/Faktenprüfung (76,8 % Erfolgsquote), 1.540 Faktenverdacht, 1.202
   Formatfehler, 1 sonstiger Fehler. Tatsächliche Kosten 58,85 $ (unter der
-  70-$-Freigabe). Insgesamt jetzt 9.338 Personen-Texte live in `seo_content`
-  (inkl. der 281 aus den beiden Subagenten-Runden). Rund 4.700 Rollen-
-  Einträge bleiben offen — weitere Runde erst nach erneuter Freigabe.
+  70-$-Freigabe). Insgesamt 9.338 Personen-Texte live in `seo_content`
+  (inkl. der 281 aus den beiden Subagenten-Runden). **Vierter Lauf
+  (19.09.2026, freigegeben): Rest bis 100 %.** Nutzer hat Guthaben
+  aufgeladen und explizit freigegeben, alle verbleibenden Rollen-Einträge
+  fertigzustellen. Dabei aufgefallen: der reine STATUS.md-Push zum dritten
+  Lauf hat per „Deploy = Push" einen Redeploy ausgelöst, der die
+  ephemeren Statusdateien des Skripts (`scripts/.personen-batch-lauf.json`,
+  `.personen-batch-journal.jsonl`, nicht auf persistentem Volume) im
+  Container gelöscht hat — dem Nutzer vorab gemeldet. Datenverlust folgenlos,
+  da die Kandidaten-Auswahl live gegen `seo_content` filtert (`NOT EXISTS`),
+  bereits erfolgreiche Texte waren also DB-seitig geschützt; nur die Liste
+  der zuvor abgelehnten Kandidaten ging verloren und wurde in dieser Runde
+  erneut versucht. Live nachgezählt: 7.453 offene Rollen-Einträge, Lauf
+  gestartet mit `--limit 7453 --max-kosten 45`. Nutzer hat den Kostendeckel
+  später auf bis zu 100 $ freigegeben; nicht mehr nötig, da der Lauf mit
+  35,23 $ deutlich darunter blieb. **Endergebnis:** alle 7.453 Einträge
+  versucht, 4.690 Texte bestanden die Prüfung (63,0 % Erfolgsquote), 1.363
+  Faktenverdacht, 1.400 Formatfehler, 0 sonstige Fehler, 35,23 $ echte
+  Kosten. **Damit alle ursprünglich offenen Personen-Rollen abgearbeitet —
+  14.028 Personen-Texte live in `seo_content` (de-de).** Neue Lektion:
+  Statusdateien des Batch-Skripts nicht auf persistentem Volume — bei
+  laufenden Batch-Läufen möglichst keinen Zwischen-Push auf `main`
+  vornehmen, da jeder Push (auch dokumentationsseitig) einen Redeploy und
+  damit Datenverlust bei den Lauf-Statusdateien auslöst.
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
 - Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
