@@ -9,7 +9,7 @@ const SPRACHE = new Intl.DisplayNames(['de'], { type: 'language' });
 const LAND_NAME = { US: 'USA', GB: 'Großbritannien', HK: 'Hongkong' };
 // Nach "aus": nur Laender, die einen Artikel brauchen.
 const LAND_AUS = {
-  US: 'den USA', NL: 'den Niederlanden', PH: 'den Philippinen', AE: 'den Vereinigten Arabischen Emiraten',
+  US: 'den USA', NL: 'den Niederlanden', CH: 'der Schweiz', TR: 'der Türkei', IR: 'dem Iran', IQ: 'dem Irak', LB: 'dem Libanon', SN: 'dem Senegal', SD: 'dem Sudan', PH: 'den Philippinen', AE: 'den Vereinigten Arabischen Emiraten',
   DO: 'der Dominikanischen Republik', CZ: 'Tschechien',
 };
 const SPRACHE_NAME = { cn: 'Kantonesisch' };

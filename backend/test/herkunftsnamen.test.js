@@ -21,3 +21,9 @@ test('Sprachen: Namen und Rueckwaertsaufloesung', () => {
   assert.equal(spracheHatSeite('xx'), false);
   assert.equal(spracheHatSeite('en'), true);
 });
+
+test('Laender mit Artikel', () => {
+  assert.equal(landAus('CH'), 'aus der Schweiz');
+  assert.equal(landAus('IR'), 'aus dem Iran');
+  assert.equal(landAus('TR'), 'aus der Türkei');
+});
