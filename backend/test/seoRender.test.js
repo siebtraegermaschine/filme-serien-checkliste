@@ -77,3 +77,14 @@ test('seitePerson: Kurzprofil aus Katalogdaten, Brotkrumen ueber die Uebersicht'
   assert.match(html, /\/de-de\/regisseur"/);
   assert.doesNotMatch(html, /noindex/);
 });
+
+test('Footer: SEO-Seiten und App-Footer (index.html) verlinken dieselben Uebersichten', async () => {
+  const { FOOTER_BEREICHE, seite404 } = await import('../lib/seoRender.js');
+  const { readFileSync } = await import('node:fs');
+  const index = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
+  const nav = index.match(/<nav class="footer-seo"[\s\S]*?<\/nav>/)[0];
+  const appLinks = [...nav.matchAll(/href="\/de-de\/([^"]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(appLinks, FOOTER_BEREICHE.map(([pfad]) => pfad));
+  const html = seite404('de-de');
+  for (const [pfad] of FOOTER_BEREICHE) assert.match(html, new RegExp(`<footer>[\\s\\S]*href="/de-de/${pfad}"`));
+});

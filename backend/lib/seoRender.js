@@ -72,8 +72,18 @@ function kopfzeile() {
   </header>`;
 }
 
-function fusszeile() {
+// Uebersichtsseiten im Footer jeder SEO-Seite. Dieselbe Liste steht im
+// App-Footer (index.html, .footer-seo); seoRender.test.js prueft die Gleichheit.
+export const FOOTER_BEREICHE = [
+  ['filme', 'Filme'], ['serien', 'Serien'], ['schauspieler', 'Schauspieler'], ['regisseur', 'Regisseure'],
+  ['beste-filme', 'Beste Filme'], ['beste-serien', 'Beste Serien'], ['streaming', 'Streaming'], ['kino', 'Kino'],
+];
+
+function fusszeile(locale) {
   return `<footer>
+    <nav class="footer-seo" aria-label="Übersichtsseiten">
+      ${FOOTER_BEREICHE.map(([pfad, name]) => `<a href="/${locale}/${pfad}">${name}</a>`).join('\n      ')}
+    </nav>
     <a href="${SITE}/impressum.html">Impressum</a>
     <a href="${SITE}/datenschutz.html">Datenschutz</a>
     <a href="#" data-cookie-einstellungen>Cookie-Einstellungen</a>
@@ -91,7 +101,7 @@ export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, 
   <main>
     ${bodyHtml}
   </main>
-  ${fussHtml || fusszeile()}
+  ${fussHtml || fusszeile(locale)}
 </body>
 </html>`;
 }
