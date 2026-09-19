@@ -179,6 +179,10 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     holeTitelDetails(type, titel.tmdb_id),
     holeTrailer(type, titel.tmdb_id),
   ]);
+  const besetzungNamen = details && details.besetzung_rollen.length
+    ? details.besetzung_rollen.map((c) => c.name)
+    : (titel.cast_names || []).slice(0, 10);
+  const schauspielerIds = await schauspielerMitSeite(besetzungNamen, locale);
 
   const zuKarte = (r) => ({ id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year, posterPath: r.poster_path });
   const streaming = streamingRows.rows[0] || { flatrate: [], rent: [], buy: [] };
@@ -216,6 +220,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     budget: details ? details.budget : null,
     einspielergebnis: details ? details.einspielergebnis : null,
     besetzungRollen: details ? details.besetzung_rollen : [],
+    schauspielerIds, // Map Name -> tmdbPersonId, nur Personen mit veroeffentlichtem Text
     bilder: details ? details.bilder : [],
     trailerKey: trailer ? trailer.key : null,
     text,
@@ -538,6 +543,67 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
     filmografie, text,
     indexierbar: !!text && filmografie.length > 0,
   };
+}
+
+// Welche Namen der Besetzung haben eine Schauspieler-Seite mit Redaktionstext?
+// Nur die werden auf der Titelseite verlinkt -- sonst liefe der Link auf eine
+// noindex-Seite ohne Text. Mehrdeutige Namen (zwei Personen gleichen Namens in
+// personen_cache) werden bewusst nicht verlinkt statt geraten.
+export async function schauspielerMitSeite(namen, locale) {
+  const ids = new Map();
+  const eindeutig = [...new Set((namen || []).filter(Boolean))];
+  if (!eindeutig.length) return ids;
+  const { rows } = await pool.query(
+    `SELECT pc.name, pc.tmdb_person_id
+       FROM personen_cache pc
+       JOIN seo_content s ON s.bereich = 'person' AND s.locale = $2
+                         AND s.schluessel = 'schauspieler:' || pc.tmdb_person_id
+      WHERE pc.name = ANY($1::text[])`,
+    [eindeutig, locale]
+  );
+  const zaehler = new Map();
+  for (const r of rows) zaehler.set(r.name, (zaehler.get(r.name) || 0) + 1);
+  for (const r of rows) if (zaehler.get(r.name) === 1) ids.set(r.name, r.tmdb_person_id);
+  return ids;
+}
+
+// Uebersichtsseite /<locale>/schauspieler: die Schauspieler mit den meisten
+// Titeln im Katalog, soweit ihre Seite einen Redaktionstext hat. Die
+// Rangliste ist teuer (unnest ueber alle Titel), aendert sich aber selten --
+// deshalb wie die Bestenlisten im Prozessspeicher.
+const HUB_PERSONEN = 96;
+const schauspielerHubCache = new Map();
+
+async function schauspielerRangliste(locale) {
+  const gecacht = schauspielerHubCache.get(locale);
+  if (gecacht && Date.now() - gecacht.at < BESTENLISTE_TTL_MS) return gecacht.liste;
+  const { rows } = await pool.query(
+    `WITH besetzung AS (
+       SELECT unnest(cast_names) AS name, count(*)::int AS anzahl
+         FROM titles WHERE cast_names IS NOT NULL GROUP BY 1
+     )
+     SELECT pc.tmdb_person_id, pc.name, pc.foto_pfad, b.anzahl
+       FROM seo_content s
+       JOIN personen_cache pc ON s.schluessel = 'schauspieler:' || pc.tmdb_person_id
+       JOIN besetzung b ON b.name = pc.name
+      WHERE s.bereich = 'person' AND s.locale = $1
+      ORDER BY b.anzahl DESC, pc.name
+      LIMIT $2`,
+    [locale, HUB_PERSONEN]
+  );
+  const liste = rows.map((r) => ({
+    tmdbPersonId: r.tmdb_person_id, name: r.name, slug: slugify(r.name), fotoPfad: r.foto_pfad, anzahl: r.anzahl,
+  }));
+  schauspielerHubCache.set(locale, { at: Date.now(), liste });
+  return liste;
+}
+
+export async function ladeSchauspielerHub(locale) {
+  const [personen, text] = await Promise.all([
+    schauspielerRangliste(locale),
+    ladeSeoText('hub', 'schauspieler', locale),
+  ]);
+  return { personen, text, indexierbar: !!text && personen.length > 0 };
 }
 
 export async function ladeKinoStadt(stadtSlug, locale) {

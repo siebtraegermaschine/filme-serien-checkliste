@@ -7,11 +7,11 @@ import { SEO_LOCALES, localeGueltig } from '../lib/seoLocale.js';
 import {
   ladeTitelSeite, ladeGenreSeite, ladeAnbieterSeite, ladeBestenliste, ladeKinoStadt,
   ladeFilmeHub, ladeSerienHub, ladeKinoHub, ladeStreamingHub, ladeBestenlisteHub, ladePersonSeite,
-  ladeStartHub,
+  ladeStartHub, ladeSchauspielerHub,
 } from '../lib/seoData.js';
 import {
   seiteTitelDetail, seiteGenre, seiteAnbieter, seiteBestenliste, seiteKinoStadt, seite404, SITE,
-  seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart,
+  seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart, seiteSchauspielerHub,
 } from '../lib/seoRender.js';
 import { sitemapIndex, sitemapBereich, BEREICHE } from '../lib/seoSitemap.js';
 import { track } from '../lib/track.js';
@@ -104,6 +104,12 @@ router.get('/:locale/serien', GRENZE, async (req, res) => {
   const { locale } = req.params;
   if (!localeGueltig(locale)) return nichtGefunden(res, locale);
   res.type('html').send(seiteFilmeSerienHub(await ladeSerienHub(locale), locale, 'serien'));
+});
+
+router.get('/:locale/schauspieler', GRENZE, async (req, res) => {
+  const { locale } = req.params;
+  if (!localeGueltig(locale)) return nichtGefunden(res, locale);
+  res.type('html').send(seiteSchauspielerHub(await ladeSchauspielerHub(locale), locale));
 });
 
 router.get('/:locale/filme/:genreSlug', GRENZE, (req, res) => genreSeite(req, res, 'filme'));

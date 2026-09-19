@@ -293,10 +293,14 @@ export function seiteTitelDetail(titel, locale) {
 
   // Besetzung MIT Rollennamen, wenn vorhanden (titeldetails.js) -- sonst
   // Ruecksturz auf die reine Namensliste aus titles.cast_names.
+  const schauspielerIds = titel.schauspielerIds || new Map();
+  const schauspielerName = (name) => schauspielerIds.has(name)
+    ? `<a href="/${locale}/schauspieler/${slugify(name)}-${schauspielerIds.get(name)}">${attrEsc(name)}</a>`
+    : attrEsc(name);
   const besetzungHtml = (titel.besetzungRollen && titel.besetzungRollen.length)
-    ? `<ul class="besetzung-liste">${titel.besetzungRollen.map((c) => `<li><b>${attrEsc(c.name)}</b>${c.rolle ? ` als ${attrEsc(c.rolle)}` : ''}</li>`).join('')}</ul>`
+    ? `<ul class="besetzung-liste">${titel.besetzungRollen.map((c) => `<li><b>${schauspielerName(c.name)}</b>${c.rolle ? ` als ${attrEsc(c.rolle)}` : ''}</li>`).join('')}</ul>`
     : ((titel.castNames || []).length
-      ? `<p>${titel.castNames.slice(0, 10).map(attrEsc).join(', ')}</p>`
+      ? `<p>${titel.castNames.slice(0, 10).map(schauspielerName).join(', ')}</p>`
       : '<p class="hinweis">Keine Besetzung hinterlegt.</p>');
 
   const trailerHtml = titel.trailerKey
@@ -510,6 +514,30 @@ export function seiteFilmeSerienHub(daten, locale, art) {
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
+export function seiteSchauspielerHub(daten, locale) {
+  const pfad = `/${locale}/schauspieler`;
+  const titelZeile = 'Schauspieler: Filmografie & bekannteste Rollen | MovieMatch';
+  const beschreibung = kurzfassung(daten.text) || 'Bekannte Schauspielerinnen und Schauspieler mit Filmografie, Bewertungen und Verfügbarkeit.';
+  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Schauspieler' }];
+  const jsonLd = [{
+    '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
+    itemListElement: daten.personen.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.name })),
+  }, brotkrumenJsonLd(kette)];
+  const kartenHtml = daten.personen.map((p) => `<a class="karte" href="/${locale}/schauspieler/${p.slug}-${p.tmdbPersonId}">
+      ${p.fotoPfad ? `<img src="https://image.tmdb.org/t/p/w300${attrEsc(p.fotoPfad)}" alt="${attrEsc(p.name)}" loading="lazy">` : ''}
+      <div class="titel">${attrEsc(p.name)}</div>
+      <div class="info">${p.anzahl} Titel</div>
+    </a>`).join('');
+  const bodyHtml = `
+    ${brotkrumenHtml(kette)}
+    <h1>Schauspieler</h1>
+    <p class="einleitung">${textBlock(daten.text)}</p>
+    <h2>Häufig gesehene Gesichter</h2>
+    <div class="raster">${kartenHtml}</div>
+  `;
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
+}
+
 export function seiteKinoHub(daten, locale) {
   const pfad = `/${locale}/kino`;
   const titelZeile = 'Kino: Aktuelle Filme & Kinos in deiner Stadt | MovieMatch';
@@ -579,6 +607,7 @@ const START_BEREICHE = [
   { pfad: 'serien', titel: 'Serien', text: 'Serien nach Genre, von der laufenden Staffel bis zum Abschluss.' },
   { pfad: 'beste-filme', titel: 'Beste Filme', text: 'Bestenlisten nach Jahr und Genre.' },
   { pfad: 'beste-serien', titel: 'Beste Serien', text: 'Die höchstbewerteten Serien nach Jahr und Genre.' },
+  { pfad: 'schauspieler', titel: 'Schauspieler', text: 'Bekannte Schauspielerinnen und Schauspieler mit Filmografie.' },
   { pfad: 'streaming', titel: 'Streaming', text: 'Was bei welchem Anbieter läuft.' },
   { pfad: 'kino', titel: 'Kino', text: 'Aktuelle Kinostarts und Kinos nach Stadt.' },
 ];
@@ -611,9 +640,10 @@ export function seitePerson(daten, locale) {
   const pfad = `/${locale}/${daten.rolle}/${daten.slug}-${daten.tmdbPersonId}`;
   const titelZeile = `${daten.name} — Filme & Serien im Überblick | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || kurzfassung(daten.biografie) || `${daten.name}: Filmografie, Bewertungen und Verfügbarkeit auf MovieMatch.`;
-  // Keine eigene Hub-Seite fuer Schauspieler/Regisseure in dieser Runde
-  // (siehe PLAN-SEO.md 1.5/1.6) -- Breadcrumb bleibt zweistufig.
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: daten.name }];
+  // Schauspieler haben eine Uebersicht (/schauspieler), Regisseure nicht.
+  const kette = daten.rolle === 'schauspieler'
+    ? [{ label: 'Start', href: SITE + '/' }, { label: 'Schauspieler', href: `${SITE}/${locale}/schauspieler` }, { label: daten.name }]
+    : [{ label: 'Start', href: SITE + '/' }, { label: daten.name }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'Person', name: daten.name,
     birthDate: daten.geburtstag || undefined,
