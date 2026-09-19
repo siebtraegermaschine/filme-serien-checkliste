@@ -253,5 +253,5 @@
 - **Als Nächstes / offen**: Land-Länge-Kombinationen und weitere Schwellen erst nach Search-Console-Zahlen. Neue Länder erscheinen automatisch, sobald sie 30 Titel haben (Katalog-Cache 1 h); danach `seo-bestenlisten-texte.mjs` auf dem Server erneut laufen lassen.
 
 ## Kino-Ansicht: Filter und Sortierung (19.09.2026, live)
-- **Buttons „Läuft jetzt“ / „Läuft bald“** unter Watchlist und Gesehen, Sortieren unter „Neue entdecken“. Beide sind Schalter: keiner aktiv = alles (jetzt, bald, später), beide = Vereinigung. „Bald“ = Start in den nächsten 28 Tagen (nach Datum im Client, unabhängig vom API-Bucket). Filter setzen sich beim Öffnen der Kino-Seite zurück.
+- **Buttons „Läuft jetzt“ / „Läuft bald“** unter Watchlist und Gesehen, Sortieren unter „Neue entdecken“. Beide sind Schalter: keiner aktiv = alles (jetzt, bald, später), beide = Vereinigung. „Bald“ = Start in den nächsten 90 Tagen (nach Datum im Client, unabhängig vom API-Bucket). Filter setzen sich beim Öffnen der Kino-Seite zurück.
 - **Standardsortierung** wie Filme/Serien: Taste-Score ab 10 markierten Titeln, sonst TMDB-Bewertung. Manuelle Wahl im Menü (Bewertung/Datum/Taste-Score) bleibt möglich. Übersetzungen für en/fr/es/it/nl/pt ergänzt.

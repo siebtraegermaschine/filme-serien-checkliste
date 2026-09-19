@@ -9004,7 +9004,7 @@ let cinemaLimit = TITEL_PRO_SEITE;
 var cinemaSortKey = null;
 // "Laeuft jetzt" / "Laeuft bald": frei kombinierbar; keiner aktiv = alles.
 var cinemaFilterNow = false, cinemaFilterSoon = false;
-var KINO_BALD_TAGE = 28;
+var KINO_BALD_TAGE = 90;
 function cinemaSortEffective(){
   return cinemaSortKey || (tasteProfileSize() >= 10 ? 'taste' : 'imdb');
 }
