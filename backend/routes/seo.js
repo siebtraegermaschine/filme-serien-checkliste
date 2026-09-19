@@ -7,11 +7,11 @@ import { SEO_LOCALES, localeGueltig } from '../lib/seoLocale.js';
 import {
   ladeTitelSeite, ladeGenreSeite, ladeAnbieterSeite, ladeBestenliste, ladeKinoStadt,
   ladeFilmeHub, ladeSerienHub, ladeKinoHub, ladeStreamingHub, ladeBestenlisteHub, ladePersonSeite,
-  ladeStartHub, ladePersonenHub,
+  ladeStartHub, ladePersonenHub, ladeBestenlistenUebersicht,
 } from '../lib/seoData.js';
 import {
   seiteTitelDetail, seiteGenre, seiteAnbieter, seiteBestenliste, seiteKinoStadt, seite404, SITE,
-  seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart, seitePersonenHub,
+  seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart, seitePersonenHub, seiteBestenlistenUebersicht,
 } from '../lib/seoRender.js';
 import { sitemapIndex, sitemapBereich, BEREICHE } from '../lib/seoSitemap.js';
 import { track } from '../lib/track.js';
@@ -140,6 +140,11 @@ router.get('/:locale/streaming/:anbieterSlug', GRENZE, async (req, res) => {
   res.type('html').send(seiteAnbieter(daten, locale));
 });
 
+router.get('/:locale/bestenlisten', GRENZE, async (req, res) => {
+  const { locale } = req.params;
+  if (!localeGueltig(locale)) return nichtGefunden(res, locale);
+  res.type('html').send(seiteBestenlistenUebersicht(await ladeBestenlistenUebersicht(locale), locale));
+});
 router.get('/:locale/beste-filme', GRENZE, async (req, res) => {
   const { locale } = req.params;
   if (!localeGueltig(locale)) return nichtGefunden(res, locale);

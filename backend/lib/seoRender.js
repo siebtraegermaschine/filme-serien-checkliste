@@ -76,7 +76,7 @@ function kopfzeile() {
 // App-Footer (index.html, .footer-seo); seoRender.test.js prueft die Gleichheit.
 export const FOOTER_BEREICHE = [
   ['filme', 'Filme'], ['serien', 'Serien'], ['schauspieler', 'Schauspieler'], ['regisseur', 'Regisseure'],
-  ['beste-filme', 'Beste Filme'], ['beste-serien', 'Beste Serien'], ['streaming', 'Streaming'], ['kino', 'Kino'],
+  ['bestenlisten', 'Bestenlisten'], ['streaming', 'Streaming'], ['kino', 'Kino'],
 ];
 
 function fusszeile(locale) {
@@ -452,6 +452,7 @@ export function seiteBestenliste(daten, locale) {
   const beschreibung = kurzfassung(daten.text) || `Die besten ${wortTyp} ${bezeichnung} im Überblick.`;
   const kette = [
     { label: 'Start', href: SITE + '/' },
+    { label: 'Bestenlisten', href: `${SITE}/${locale}/bestenlisten` },
     { label: `Beste ${wortTyp}`, href: `/${locale}/${listenWort}` },
     { label: bezeichnung },
   ];
@@ -601,13 +602,35 @@ export function seiteStreamingHub(daten, locale) {
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
+export function seiteBestenlistenUebersicht(daten, locale) {
+  const pfad = `/${locale}/bestenlisten`;
+  const titelZeile = 'Bestenlisten: Beste Filme & Beste Serien | MovieMatch';
+  const beschreibung = kurzfassung(daten.text) || 'Bestenlisten für Filme und Serien, nach Jahr und Genre.';
+  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Bestenlisten' }];
+  const eintraege = [
+    { pfad: 'beste-filme', name: 'Beste Filme', text: 'Die höchstbewerteten Filme nach Jahr und Genre.' },
+    { pfad: 'beste-serien', name: 'Beste Serien', text: 'Die höchstbewerteten Serien nach Jahr und Genre.' },
+  ];
+  const jsonLd = [{
+    '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
+    itemListElement: eintraege.map((e, i) => ({ '@type': 'ListItem', position: i + 1, name: e.name })),
+  }, brotkrumenJsonLd(kette)];
+  const bodyHtml = `
+    ${brotkrumenHtml(kette)}
+    <h1>Bestenlisten</h1>
+    <p class="einleitung">${textBlock(daten.text)}</p>
+    <ul>${eintraege.map((e) => `<li><a href="/${locale}/${e.pfad}">${e.name}</a> — ${e.text}</li>`).join('')}</ul>
+  `;
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
+}
+
 export function seiteBestenlisteHub(daten, locale) {
   const wortTyp = daten.type === 'series' ? 'Serien' : 'Filme';
   const listenWort = daten.type === 'series' ? 'beste-serien' : 'beste-filme';
   const pfad = `/${locale}/${listenWort}`;
   const titelZeile = `Beste ${wortTyp}: Bestenlisten nach Jahr & Genre | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || `Bestenlisten der ${wortTyp} nach Jahr und Genre.`;
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: `Beste ${wortTyp}` }];
+  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Bestenlisten', href: `${SITE}/${locale}/bestenlisten` }, { label: `Beste ${wortTyp}` }];
   const jsonLd = [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: titelZeile }, brotkrumenJsonLd(kette)];
   const jahreHtml = daten.jahre.map((j) => `<a class="chip" href="/${locale}/${listenWort}/jahr/${j}">${j}</a>`).join('');
   const genreHtml = daten.genres.map((g) => `<a class="chip" href="/${locale}/${listenWort}/genre/${slugify(g)}">${attrEsc(g)}</a>`).join('');
@@ -628,8 +651,7 @@ export function seiteBestenlisteHub(daten, locale) {
 const START_BEREICHE = [
   { pfad: 'filme', titel: 'Filme', text: 'Alle Filme nach Genre, mit Bewertungen und Verfügbarkeit.' },
   { pfad: 'serien', titel: 'Serien', text: 'Serien nach Genre, von der laufenden Staffel bis zum Abschluss.' },
-  { pfad: 'beste-filme', titel: 'Beste Filme', text: 'Bestenlisten nach Jahr und Genre.' },
-  { pfad: 'beste-serien', titel: 'Beste Serien', text: 'Die höchstbewerteten Serien nach Jahr und Genre.' },
+  { pfad: 'bestenlisten', titel: 'Bestenlisten', text: 'Beste Filme und beste Serien nach Jahr und Genre.' },
   { pfad: 'schauspieler', titel: 'Schauspieler', text: 'Bekannte Schauspielerinnen und Schauspieler mit Filmografie.' },
   { pfad: 'regisseur', titel: 'Regisseure', text: 'Regisseurinnen und Regisseure mit ihren Filmen und Serien.' },
   { pfad: 'streaming', titel: 'Streaming', text: 'Was bei welchem Anbieter läuft.' },

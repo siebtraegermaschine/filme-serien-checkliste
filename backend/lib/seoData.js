@@ -485,6 +485,11 @@ export async function ladeStreamingHub(locale) {
   };
 }
 
+export async function ladeBestenlistenUebersicht(locale) {
+  const text = await ladeSeoText('hub', 'bestenlisten', locale);
+  return { text, indexierbar: !!text };
+}
+
 export async function ladeBestenlisteHub(art, locale) {
   const type = LISTEN_TYP[art];
   if (!type) return null;
