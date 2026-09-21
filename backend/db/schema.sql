@@ -909,9 +909,8 @@ CREATE TABLE IF NOT EXISTS b2b_deals (
 -- bereich unterschiedlich aufgebaut: 'movie:<tmdb_id>'/'series:<tmdb_id>'
 -- fuer Titel, ein Genre-Slug fuer 'genre', provider_id fuer 'anbieter',
 -- 'jahr:<jahr>'/'genre:<slug>' fuer 'bestenliste', ein Stadt-Slug fuer
--- 'kino_stadt'. Ohne passende Zeile bleibt eine Seite ausgeliefert, aber
--- nicht indexierbar (siehe seoData.js) -- das haelt unfertige Seiten mit
--- TMDB-Rohtext automatisch aus dem Sitemap-/Crawler-Pfad heraus.
+-- 'kino_stadt'. Seiten ohne Zeile werden trotzdem indexiert (siehe
+-- seoData.js); der Text wird nach und nach ergaenzt.
 -- Name (aus titles.director/cast_names, reiner Text ohne ID) -> TMDB-
 -- Personen-ID. Wie title_tmdb_resolution: NULL bedeutet "gesucht, nichts
 -- gefunden", damit eine erfolglose Suche sich nicht bei jedem Aufruf

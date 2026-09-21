@@ -57,13 +57,16 @@ test('Sitemap-Dateien sind trotz "Disallow: /" erlaubt', () => {
     '/sitemap-de-de-anbieter.xml',
     '/sitemap-de-de-hub.xml',
     '/sitemap-de-de-person.xml',
+    '/sitemap-de-de-bestenliste.xml',
+    '/sitemap-de-de-kino_stadt.xml',
   ]) {
     assert.ok(robotsErlaubt(ROBOTS_TEXT, pfad), `${pfad} sollte erlaubt sein`);
   }
 });
 
 test('SEO-Seiten und Startseite bleiben erlaubt', () => {
-  for (const pfad of ['/', '/de-de/film/x-1', '/de-de/serie/x-1', '/og-image.png', '/manifest.json']) {
+  for (const pfad of ['/', '/de-de/film/x-1', '/de-de/serie/x-1', '/og-image.png', '/manifest.json',
+    '/impressum.html', '/datenschutz.html', '/nutzungsbedingungen.html', '/seo.css', '/consent.js']) {
     assert.ok(robotsErlaubt(ROBOTS_TEXT, pfad), `${pfad} sollte erlaubt sein`);
   }
 });

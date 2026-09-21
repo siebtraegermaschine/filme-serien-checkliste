@@ -23,7 +23,6 @@ import shareRouter, { ladeTitel, ergaenzeBackdrop } from './routes/share.js';
 import seoRouter from './routes/seo.js';
 import { attrEsc } from './lib/seoRender.js';
 import { slugify } from './lib/slug.js';
-import { ladeSeoText } from './lib/seoData.js';
 import movieNightRouter from './routes/movieNight.js';
 import metrikRouter from './routes/metrik.js';
 import eventsRouter from './routes/events.js';
@@ -198,20 +197,14 @@ app.get('/t/:art/:kennung', mengenGrenze({ name: 'share-page', anzahl: 120, minu
   const grossesBild = !!backdrop;
   const titelZeile = titel.title + (titel.year ? ' (' + titel.year + ')' : '') + ' – MovieMatch';
 
-  // Canonical auf die volle SEO-Seite (siehe backend/routes/seo.js), falls es
-  // fuer diesen Titel schon eine gibt -- verhindert, dass Google diese
-  // Vorschauseite und /de-de/film|serie/... als zwei Versionen desselben
-  // Inhalts wertet. Nur moeglich, wenn der Titel eine echte titles-Zeile hat
-  // (titel.quelle !== 'cinema_cache', siehe ladeTitel in share.js) UND schon
-  // eigener SEO-Text existiert (seoData.js: indexierbar erst dann).
+  // Canonical auf die volle SEO-Seite (siehe backend/routes/seo.js) --
+  // verhindert, dass Google diese Vorschau und /de-de/film|serie/... als zwei
+  // Versionen desselben Inhalts wertet. Nur mit echter titles-Zeile
+  // (titel.quelle !== 'cinema_cache', siehe ladeTitel in share.js).
   let canonicalTag = '';
   if (titel.quelle !== 'cinema_cache' && titel.tmdb_id) {
-    let text = null;
-    try { text = await ladeSeoText('titel', `${titel.type}:${titel.tmdb_id}`, 'de-de'); } catch { /* egal, bleibt ohne Canonical */ }
-    if (text) {
-      const artWort = titel.type === 'series' ? 'serie' : 'film';
-      canonicalTag = '<link rel="canonical" href="https://movietaste.de/de-de/' + artWort + '/' + slugify(titel.title) + '-' + titel.tmdb_id + '">';
-    }
+    const artWort = titel.type === 'series' ? 'serie' : 'film';
+    canonicalTag = '<link rel="canonical" href="https://movietaste.de/de-de/' + artWort + '/' + slugify(titel.title) + '-' + titel.tmdb_id + '">';
   }
 
   const block = [

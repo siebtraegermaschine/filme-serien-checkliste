@@ -34,7 +34,7 @@ async function aufraeumen() {
   await pool.query(`DELETE FROM kinos WHERE ort = $1`, [STADT_TEST]);
 }
 
-test('ladeTitelSeite: indexierbar nur mit seo_content, Community-Bewertung erst ab Mindestzahl', async (t) => {
+test('ladeTitelSeite: indexierbar auch ohne Text, Community-Bewertung erst ab Mindestzahl', async (t) => {
   await aufraeumen();
   t.after(aufraeumen);
 
@@ -45,10 +45,10 @@ test('ladeTitelSeite: indexierbar nur mit seo_content, Community-Bewertung erst 
     [TMDB_TEST_BASIS, TITEL_PRAEFIX + 'Ohne Text']
   );
 
-  // Ohne seo_content: Seite existiert (Daten kommen zurueck), aber nicht indexierbar.
+  // Ohne seo_content: Seite existiert und ist trotzdem indexierbar.
   const ohneText = await ladeTitelSeite('film', TMDB_TEST_BASIS, 'de-de');
   assert.ok(ohneText);
-  assert.equal(ohneText.indexierbar, false);
+  assert.equal(ohneText.indexierbar, true);
   assert.equal(ohneText.communityBewertung, null);
 
   // Genau MINDESTZAHL_BEWERTUNGEN - 1 Bewertungen: noch keine Community-Bewertung.
@@ -73,22 +73,12 @@ test('ladeTitelSeite: indexierbar nur mit seo_content, Community-Bewertung erst 
   assert.equal(aufSchwelle.communityBewertung.gesamt, MINDESTZAHL_BEWERTUNGEN);
   assert.equal(aufSchwelle.communityBewertung.durchschnitt, 8);
 
-  // Ein Rumpftext macht die Seite noch nicht indexierbar (MINDESTWOERTER_INDEX).
   await pool.query(
     `INSERT INTO seo_content (bereich, schluessel, locale, text) VALUES ('titel', $1, 'de-de', 'Ein Testtext.')`,
     [`movie:${TMDB_TEST_BASIS}`]
   );
-  const mitRumpf = await ladeTitelSeite('film', TMDB_TEST_BASIS, 'de-de');
-  assert.equal(mitRumpf.indexierbar, false);
-  assert.equal(mitRumpf.text, 'Ein Testtext.');
-
-  // Erst ein Text ab 250 Woertern Fliesstext kippt die Seite auf index.
-  const langerText = '### Worum es geht\n\n' + Array.from({ length: 260 }, (_, i) => 'Wort' + i).join(' ');
-  await pool.query(
-    `UPDATE seo_content SET text = $2 WHERE bereich = 'titel' AND schluessel = $1 AND locale = 'de-de'`,
-    [`movie:${TMDB_TEST_BASIS}`, langerText]
-  );
   const mitText = await ladeTitelSeite('film', TMDB_TEST_BASIS, 'de-de');
+  assert.equal(mitText.text, 'Ein Testtext.');
   assert.equal(mitText.indexierbar, true);
 });
 
@@ -97,7 +87,7 @@ test('ladeTitelSeite: unbekannte tmdbId liefert null (kein Absturz)', async () =
   assert.equal(ergebnis, null);
 });
 
-test('ladeGenreSeite: Genre-Aufloesung ueber Slug, Paginierung, indexierbar erst mit Text', async (t) => {
+test('ladeGenreSeite: Genre-Aufloesung ueber Slug, Paginierung, indexierbar mit Titeln', async (t) => {
   await aufraeumen();
   t.after(aufraeumen);
 
@@ -115,7 +105,7 @@ test('ladeGenreSeite: Genre-Aufloesung ueber Slug, Paginierung, indexierbar erst
 
   const ohneText = await ladeGenreSeite('filme', 'seotest-genre', 1, 'de-de');
   assert.equal(ohneText.gesamt, 3);
-  assert.equal(ohneText.indexierbar, false);
+  assert.equal(ohneText.indexierbar, true);
 
   await pool.query(
     `INSERT INTO seo_content (bereich, schluessel, locale, text) VALUES ('genre', 'seotest-genre:movie', 'de-de', 'Genre-Text.')`
@@ -160,12 +150,12 @@ test('ladeKinoStadt: Staedte unter der Mindestzahl liefern null', async (t) => {
   assert.equal(zuWenig, null);
 });
 
-test('Hub-Seiten: indexierbar nur mit seo_content, Anbieter-/Stadt-Listen korrekt', async (t) => {
+test('Hub-Seiten: indexierbar auch ohne Text, Anbieter-/Stadt-Listen korrekt', async (t) => {
   await aufraeumen();
   t.after(aufraeumen);
 
   const ohneText = await ladeFilmeHub('de-de');
-  assert.equal(ohneText.indexierbar, false);
+  assert.equal(ohneText.indexierbar, true);
   assert.equal(ohneText.type, 'movie');
 
   await pool.query(`INSERT INTO seo_content (bereich, schluessel, locale, text) VALUES ('hub', 'filme', 'de-de', 'Filme-Hub-Text.')`);

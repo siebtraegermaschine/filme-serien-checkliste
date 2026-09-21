@@ -17,7 +17,7 @@ const TITEL_PRAEFIX = 'SEOTEST-PERSON ';
 
 async function aufraeumen() {
   await pool.query(`DELETE FROM titles WHERE title LIKE $1`, [TITEL_PRAEFIX + '%']);
-  await pool.query(`DELETE FROM personen_cache WHERE tmdb_person_id = $1`, [PERSON_TEST_ID]);
+  await pool.query(`DELETE FROM personen_cache WHERE tmdb_person_id IN ($1, $2)`, [PERSON_TEST_ID, PERSON_TEST_ID + 2]);
   await pool.query(`DELETE FROM personen_resolution WHERE name = $1`, [NAME_TEST]);
 }
 
@@ -34,7 +34,7 @@ test('resolvePersonIdCachedOnly: null ohne vorherige Aufloesung, Wert danach', a
   assert.equal(await resolvePersonIdCachedOnly(NAME_TEST), PERSON_TEST_ID);
 });
 
-test('ladePersonSeite: indexierbar erst mit Biografie UND Filmografie im eigenen Katalog', async (t) => {
+test('ladePersonSeite: indexierbar mit Filmografie, gleichnamige Personen nur mit Text', async (t) => {
   await aufraeumen();
   t.after(aufraeumen);
 
@@ -57,10 +57,17 @@ test('ladePersonSeite: indexierbar erst mit Biografie UND Filmografie im eigenen
   assert.equal(mitFilm.filmografie.length, 1);
   assert.equal(mitFilm.filmografie[0].title, TITEL_PRAEFIX + 'Film');
 
-  // Mindestmenge: Foto reicht ohne Text; ohne Foto und ohne Text nicht.
+  // Eindeutiger Name: Seite auch ohne Foto und ohne Text.
+  await pool.query(`UPDATE personen_cache SET foto_pfad = NULL WHERE tmdb_person_id = $1`, [PERSON_TEST_ID]);
+  assert.equal((await ladePersonSeite('regisseur', PERSON_TEST_ID, 'de-de')).indexierbar, true);
   assert.equal((await personenMitSeite([NAME_TEST], 'regisseur', 'de-de')).get(NAME_TEST), PERSON_TEST_ID);
   assert.ok((await personenFuerSitemap('regisseur', 'de-de')).some((p) => p.tmdbPersonId === PERSON_TEST_ID));
-  await pool.query(`UPDATE personen_cache SET foto_pfad = NULL WHERE tmdb_person_id = $1`, [PERSON_TEST_ID]);
+
+  // Zweite Person gleichen Namens: dieselbe Filmografie waere Dublette -> noindex.
+  await pool.query(
+    `INSERT INTO personen_cache (tmdb_person_id, name) VALUES ($1, $2)`,
+    [PERSON_TEST_ID + 2, NAME_TEST]
+  );
   assert.equal((await ladePersonSeite('regisseur', PERSON_TEST_ID, 'de-de')).indexierbar, false);
   assert.equal((await personenMitSeite([NAME_TEST], 'regisseur', 'de-de')).size, 0);
   assert.ok(!(await personenFuerSitemap('regisseur', 'de-de')).some((p) => p.tmdbPersonId === PERSON_TEST_ID));

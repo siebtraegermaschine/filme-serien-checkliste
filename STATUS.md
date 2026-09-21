@@ -115,6 +115,13 @@
   überschreibt nie automatisch. Wöchentliche Sicherung sonntags 03:30 (Mac,
   launchd). Pflichtformat: 4 feste Überschriften, ≥250 Wörter, keine
   erfundenen Fakten (Korrekturdurchgang zwingend).
+- **Alles indexieren** (21.09.2026): jede SEO-Seite mit Einträgen ist
+  index,follow, auch ohne eigenen Text (Titel, Genre, Anbieter, Kino-Städte,
+  Personen, Bestenlisten, Hubs) und steht in der Sitemap. noindex nur für
+  Dubletten: Folgeseiten `?seite=N`, gleichnamige Personen ohne Text, 404;
+  robots.txt sperrt weiter `/t/`, `?titel=`, die App. Deutsche Rechtstexte
+  indexiert, englische (`imprint/privacy/terms.html`) nicht. Die
+  250-Wörter-Regel gilt nur noch als Format für Batch-Texte.
 - **Google Analytics mit Cookie-Banner** seit 17.09.2026 live, Consent Mode
   „basic", lädt erst nach Zustimmung.
 - **Analytics-Fenster** im Menü (nur für c.neubauer@digital-wings.com) seit
@@ -255,3 +262,8 @@
 ## Kino-Ansicht: Filter und Sortierung (19.09.2026, live)
 - **Buttons „Läuft jetzt“ / „Läuft bald“** unter Watchlist und Gesehen, Sortieren unter „Neue entdecken“. Beide sind Schalter: keiner aktiv = alles (jetzt, bald, später), beide = Vereinigung. „Bald“ = Start in den nächsten 90 Tagen (nach Datum im Client, unabhängig vom API-Bucket). Filter setzen sich beim Öffnen der Kino-Seite zurück.
 - **Standardsortierung** wie Filme/Serien: Taste-Score ab 10 markierten Titeln, sonst TMDB-Bewertung. Manuelle Wahl im Menü (Bewertung/Datum/Taste-Score) bleibt möglich. Übersetzungen für en/fr/es/it/nl/pt ergänzt.
+
+## Alles indexieren (21.09.2026, live)
+- `indexierbar` in `backend/lib/seoData.js` hängt nicht mehr am Text; Sitemap (`seoSitemap.js`) zählt alle vorhandenen Seiten auf, lastmod aus `seo_content`, sonst leer. Neu: `sitemap-de-de-kino_stadt.xml` wird befüllt, Hub-Sitemap enthält die drei Rechtstexte. `/t/`-Vorschau setzt den Canonical auf die SEO-Seite jetzt immer.
+- `seo.css`/`consent.js` in robots.txt freigegeben (waren für Crawler gesperrt).
+- **Offen: Texte nachziehen** (Ziel ≥100–200 Zeichen je Seite): ~6.800 Titel, alle Kino-Städte, ~25 Genre-, ~8 Anbieter-Seiten, Personen ohne Bio. Kino-Städte bleiben fast gleiche Seiten (dieselbe bundesweite Filmliste), bis es Spielzeiten oder Stadttexte gibt.

@@ -6,10 +6,17 @@ import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
 import { SITE } from './seoRender.js';
 import { SEO_LOCALES } from './seoLocale.js';
-import { personenFuerSitemap } from './seoData.js';
+import {
+  personenFuerSitemap, titelFuerSitemap, genresFuerSitemap, anbieterFuerSitemap,
+  staedteFuerSitemap, alleBestenlisten,
+} from './seoData.js';
 import { schluesselZuPfad } from './seoBestenlisten.js';
 
 export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person'];
+
+// Hub-Seiten ('start' = /<locale>/ selbst) und die deutschen Rechtstexte.
+const HUBS = ['start', 'filme', 'serien', 'kino', 'streaming', 'bestenlisten', 'beste-filme', 'beste-serien', 'schauspieler', 'regisseur'];
+const RECHTSTEXTE = ['impressum.html', 'datenschutz.html', 'nutzungsbedingungen.html'];
 
 const TTL_MS = 60 * 60 * 1000;
 const cache = new Map();
@@ -24,89 +31,72 @@ function urlset(urls) {
     `\n</urlset>`;
 }
 
-// Personen: indexierbar nach derselben Regel wie die Einzelseite
-// (personenFuerSitemap: Katalog-Titel + Text oder Foto).
-async function personenUrls(locale) {
-  const urls = [];
-  for (const rolle of ['regisseur', 'schauspieler']) {
-    for (const p of await personenFuerSitemap(rolle, locale)) {
-      urls.push({ loc: `${SITE}/${locale}/${rolle}/${p.slug}-${p.tmdbPersonId}`, lastmod: null });
-    }
-  }
-  return urls;
-}
-
-// Nur URLs, deren seo_content-Zeile existiert -- dieselbe Regel wie das
-// `meta robots`-Tag der Einzelseite (seoData.js: indexierbar = !!text). Damit
-// zieht der Content-Fortschritt die Sitemap automatisch nach.
-async function urlsFuerBereich(locale, bereich) {
-  if (bereich === 'person') return personenUrls(locale);
-
+// Letzte Textaenderung je Schluessel -- als lastmod, wo es schon einen Text gibt.
+async function textStaende(bereich, locale) {
   const { rows } = await pool.query(
     `SELECT schluessel, aktualisiert_am FROM seo_content WHERE bereich = $1 AND locale = $2`,
     [bereich, locale]
   );
-  if (!rows.length) return [];
+  return new Map(rows.map((r) => [r.schluessel, r.aktualisiert_am.toISOString().slice(0, 10)]));
+}
+
+// Alle Seiten, die es gibt (Regeln wie `indexierbar` in seoData.js) -- nicht
+// mehr nur die mit eigenem Text.
+async function urlsFuerBereich(locale, bereich) {
+  if (bereich === 'person') {
+    const urls = [];
+    for (const rolle of ['regisseur', 'schauspieler']) {
+      for (const p of await personenFuerSitemap(rolle, locale)) {
+        urls.push({ loc: `${SITE}/${locale}/${rolle}/${p.slug}-${p.tmdbPersonId}`, lastmod: null });
+      }
+    }
+    return urls;
+  }
+
+  const stand = await textStaende(bereich, locale);
 
   if (bereich === 'titel') {
-    // schluessel ist 'movie:<tmdb_id>' oder 'series:<tmdb_id>' -- Slug kommt
-    // aus der aktuellen titles-Zeile, nicht aus dem Schluessel selbst.
-    const paare = rows.map((r) => {
-      const [type, tmdbId] = r.schluessel.split(':');
-      return { type, tmdbId: Number(tmdbId), aktualisiert_am: r.aktualisiert_am };
-    }).filter((p) => (p.type === 'movie' || p.type === 'series') && Number.isInteger(p.tmdbId));
-    if (!paare.length) return [];
-    // Paare als zwei Arrays per unnest statt als IN-Liste mit einem
-    // Platzhalterpaar je Titel: Ab ~8.400 Paaren brach Postgres die IN-Liste
-    // mit "stack depth limit exceeded" ab (16.09.2026, Sitemap lieferte 500).
-    const { rows: titelRows } = await pool.query(
-      `SELECT t.type, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, t.title
-         FROM titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
-         JOIN unnest($1::text[], $2::int[]) AS p(type, tmdb_id)
-           ON p.type = t.type AND p.tmdb_id = COALESCE(t.tmdb_id, r.tmdb_id)`,
-      [paare.map((p) => p.type), paare.map((p) => p.tmdbId)]
-    );
-    const byKey = new Map(titelRows.map((t) => [`${t.type}:${t.tmdb_id}`, t.title]));
-    return paare
-      .filter((p) => byKey.has(`${p.type}:${p.tmdbId}`))
-      .map((p) => ({
-        loc: `${SITE}/${SEO_LOCALES[0]}/${p.type === 'series' ? 'serie' : 'film'}/${slugify(byKey.get(`${p.type}:${p.tmdbId}`))}-${p.tmdbId}`,
-        lastmod: p.aktualisiert_am.toISOString().slice(0, 10),
-      }));
+    return (await titelFuerSitemap()).map((t) => ({
+      loc: `${SITE}/${locale}/${t.type === 'series' ? 'serie' : 'film'}/${slugify(t.title)}-${t.tmdb_id}`,
+      lastmod: stand.get(`${t.type}:${t.tmdb_id}`) || null,
+    }));
   }
 
   if (bereich === 'genre') {
-    // schluessel ist '<genreSlug>:<type>'
-    return rows.map((r) => {
-      const [slug, type] = r.schluessel.split(':');
-      return { loc: `${SITE}/${locale}/${type === 'series' ? 'serien' : 'filme'}/${slug}`, lastmod: r.aktualisiert_am.toISOString().slice(0, 10) };
-    });
+    return (await genresFuerSitemap()).map((g) => ({
+      loc: `${SITE}/${locale}/${g.type === 'series' ? 'serien' : 'filme'}/${g.slug}`,
+      lastmod: stand.get(`${g.slug}:${g.type}`) || null,
+    }));
   }
 
   if (bereich === 'anbieter') {
-    return rows.map((r) => ({ loc: `${SITE}/${locale}/streaming/${r.schluessel}`, lastmod: r.aktualisiert_am.toISOString().slice(0, 10) }));
+    return (await anbieterFuerSitemap(locale)).map((slug) => ({
+      loc: `${SITE}/${locale}/streaming/${slug}`, lastmod: stand.get(slug) || null,
+    }));
   }
 
   if (bereich === 'bestenliste') {
-    // schluessel ist '<modus>:<wert>:<type>' (seoBestenlisten.js)
-    return rows.flatMap((r) => {
-      const pfad = schluesselZuPfad(r.schluessel, locale);
-      return pfad ? [{ loc: SITE + pfad, lastmod: r.aktualisiert_am.toISOString().slice(0, 10) }] : [];
+    return (await alleBestenlisten(locale)).flatMap(([art, modus, wert]) => {
+      const schluessel = `${modus}:${wert}:${art === 'serien' ? 'series' : 'movie'}`;
+      const pfad = schluesselZuPfad(schluessel, locale);
+      return pfad ? [{ loc: SITE + pfad, lastmod: stand.get(schluessel) || null }] : [];
     });
   }
 
   if (bereich === 'kino_stadt') {
-    return rows.map((r) => ({ loc: `${SITE}/${locale}/kino/${r.schluessel}`, lastmod: r.aktualisiert_am.toISOString().slice(0, 10) }));
+    return (await staedteFuerSitemap()).map((slug) => ({
+      loc: `${SITE}/${locale}/kino/${slug}`, lastmod: stand.get(slug) || null,
+    }));
   }
 
   if (bereich === 'hub') {
-    // schluessel ist direkt das URL-Segment ('filme'|'serien'|'kino'|
-    // 'streaming'|'beste-filme'|'beste-serien'). Ausnahme 'start': das ist die
-    // Einstiegsseite unter /<locale>/ selbst, nicht /<locale>/start.
-    return rows.map((r) => ({
-      loc: r.schluessel === 'start' ? `${SITE}/${locale}/` : `${SITE}/${locale}/${r.schluessel}`,
-      lastmod: r.aktualisiert_am.toISOString().slice(0, 10),
-    }));
+    return [
+      ...HUBS.map((h) => ({
+        loc: h === 'start' ? `${SITE}/${locale}/` : `${SITE}/${locale}/${h}`,
+        lastmod: stand.get(h) || null,
+      })),
+      ...RECHTSTEXTE.map((d) => ({ loc: `${SITE}/${d}`, lastmod: null })),
+    ];
   }
 
   return [];

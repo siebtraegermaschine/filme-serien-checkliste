@@ -1,8 +1,9 @@
 // Datenzugriff fuer die SEO-Seiten (PLAN-SEO.md, Plan "SEO-Seiten:
 // technische Umsetzung"). Reine Datenfunktionen, kein HTML -- das baut
 // seoRender.js. Jede Funktion liefert `indexierbar: boolean`: an dieser
-// einen Stelle entschieden, von der jeweiligen Seite UND der Sitemap UND
-// der Canonical-Ergaenzung an /t/ gemeinsam genutzt.
+// einen Stelle entschieden. Regel: index, sobald die Seite Eintraege hat --
+// ein eigener Text ist KEINE Bedingung mehr. seoSitemap.js listet dieselben
+// Seiten ueber die *FuerSitemap-Funktionen unten.
 import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
 import { anbieterSlug } from './anbieter.js';
@@ -53,34 +54,6 @@ const TITEL_MIT_KENNUNG = `(
    ORDER BY t.type, COALESCE(t.tmdb_id, r.tmdb_id), COALESCE(t.vote_count, 0) DESC, t.id
 ) titel`;
 
-
-// Ab wie vielen Woertern ein Redaktionstext eine Seite indexierbar macht.
-// Die Regel lautet unveraendert: Seiten mit Inhalt stehen auf index, angelegte
-// Seiten ohne Inhalt bleiben erreichbar mit noindex. Praezisiert wird nur, was
-// "Inhalt" heisst -- ein Rumpftext ist keiner.
-//
-// Der Grund ist nicht Aesthetik, sondern Umkehrbarkeit: Eine Seite, die als
-// duenn eingestuft und aus dem Index geworfen wurde, kommt schwerer zurueck
-// als eine, die nie drin war. Lieber spaeter indexieren als zu frueh.
-//
-// Die Schwelle entspricht der Mindestwortzahl, die seo-texte-anhaengen.mjs und
-// seo-batch.mjs beim Schreiben durchsetzen -- sie greift also erst, wenn ein
-// Text auf anderem Weg in die Tabelle gelangt ist.
-//
-// Sie gilt AUSSCHLIESSLICH fuer Titelseiten. Dort ist der Text der Inhalt.
-// Genre-, Anbieter-, Bestenlisten-, Hub- und Stadtseiten tragen bewusst kurze
-// Einleitungen -- ihr Inhalt sind die Listen darunter, und die sind dort
-// ohnehin schon Bedingung fuer index (`&& gesamt > 0` und Verwandte). Wuerde
-// man die Schwelle auch auf sie anwenden, fielen 21 bereits indexierte Seiten
-// heraus, ohne dass sich an ihrem Wert etwas geaendert haette.
-export const MINDESTWOERTER_INDEX = 250;
-
-export function textReichtFuerIndex(text) {
-  if (!text) return false;
-  // Ueberschriftszeilen zaehlen nicht mit, sonst wuerde das Vier-Abschnitte-
-  // Format allein schon acht Woerter beisteuern.
-  return text.replace(/^#{1,6}.*$/gm, '').split(/\s+/).filter(Boolean).length >= MINDESTWOERTER_INDEX;
-}
 
 const TMDB_KIND = { film: 'movie', serie: 'series' };
 // Plural-Wortformen fuer Genre-/Bestenlisten-URLs (/filme/..., /serien/...).
@@ -233,7 +206,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     bilder: details ? details.bilder : [],
     trailerKey: trailer ? trailer.key : null,
     text,
-    indexierbar: textReichtFuerIndex(text),
+    indexierbar: true,
   };
 }
 
@@ -299,7 +272,7 @@ export async function ladeGenreSeite(art, genreSlug, seite, locale) {
   return {
     type, genre, genreSlug, seite, seiten: Math.max(1, Math.ceil(gesamt / SEITENGROESSE)), gesamt,
     text,
-    indexierbar: !!text && gesamt > 0,
+    indexierbar: gesamt > 0,
     titel: rows.map((r) => ({
       id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
       genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
@@ -336,7 +309,7 @@ export async function ladeAnbieterSeite(anbieterSlug, locale) {
   return {
     anbieterSlug, name: rows[0].provider_name, besteListen,
     filme: filme.map(zuKarte), serien: serien.map(zuKarte),
-    text, indexierbar: !!text,
+    text, indexierbar: true,
   };
 }
 
@@ -498,7 +471,7 @@ export async function ladeBestenliste(art, modus, wert, locale) {
     anbieter: bed.namen.anbieter || null,
     land: bed.namen.landKurz || null, landAus: bed.namen.land || null, landSlug: bed.namen.landSlug || null,
     sprache: bed.namen.sprache || null,
-    text, indexierbar: !!text && sortiert.length > 0,
+    text, indexierbar: sortiert.length > 0,
   };
   bestenlisteCache.set(cacheKey, { at: jetzt, wert: ergebnis });
   return ergebnis;
@@ -650,7 +623,7 @@ async function filmeOderSerienHub(art, locale) {
     alleGenres(type),
     ladeSeoText('hub', art, locale),
   ]);
-  return { type, titel, genres, text, indexierbar: !!text };
+  return { type, titel, genres, text, indexierbar: true };
 }
 
 // Einstiegsseite unter /<locale>/ -- verlinkt die sechs Bereichs-Hubs.
@@ -658,7 +631,7 @@ async function filmeOderSerienHub(art, locale) {
 // bis 16.08.2026 in einen 404, Crawler landeten also auf einer Fehlerseite.
 export async function ladeStartHub(locale) {
   const text = await ladeSeoText('hub', 'start', locale);
-  return { text, indexierbar: !!text };
+  return { text, indexierbar: true };
 }
 
 export async function ladeFilmeHub(locale) {
@@ -686,7 +659,7 @@ export async function ladeKinoHub(locale) {
   return {
     filme: filme.map((f) => ({ tmdbId: f.tmdb_id, slug: slugify(f.title), title: f.title, year: f.year, genres: f.genres || [], posterPath: f.poster_path })),
     staedte: qualifiziert.map((s) => ({ ort: s.ort, slug: slugify(s.ort) })),
-    text, indexierbar: !!text,
+    text, indexierbar: true,
   };
 }
 
@@ -702,7 +675,7 @@ export async function ladeStreamingHub(locale) {
   ]);
   return {
     anbieter: rows.map((r) => ({ slug: r.provider_id, name: r.provider_name, anzahl: r.anzahl })),
-    text, indexierbar: !!text,
+    text, indexierbar: true,
   };
 }
 
@@ -711,7 +684,7 @@ export async function ladeBestenlistenUebersicht(locale) {
     ladeSeoText('hub', 'bestenlisten', locale),
     bestenlistenKatalog('movie', locale), bestenlistenKatalog('series', locale),
   ]);
-  return { text, indexierbar: !!text, katalog: { filme, serien } };
+  return { text, indexierbar: true, katalog: { filme, serien } };
 }
 
 export async function ladeBestenlisteHub(art, locale) {
@@ -726,14 +699,13 @@ export async function ladeBestenlisteHub(art, locale) {
     ladeSeoText('hub', `beste-${art}`, locale),
     bestenlistenKatalog(type, locale),
   ]);
-  return { type, art, jahre: jahre.map((r) => r.year), genres, katalog, text, indexierbar: !!text };
+  return { type, art, jahre: jahre.map((r) => r.year), genres, katalog, text, indexierbar: true };
 }
 
 // Schauspieler-/Regisseur-Seiten (Phase 1b, PLAN-SEO.md 1.5/1.6). Redaktion
 // (seo_content, bereich 'person', Schluessel '<rolle>:<tmdbPersonId>') wird
-// hier geladen wie bei Titelseiten -- ohne sie bleibt die Seite noindex
-// (s.u.), die rohe TMDB-Biografie dient nur noch als Rueckfallanzeige
-// (seoRender.js), solange fuer diese Person noch kein Text vorliegt.
+// hier geladen wie bei Titelseiten; solange keiner vorliegt, zeigt
+// seoRender.js die rohe TMDB-Biografie.
 // rolle 'regisseur' sucht ueber titles.director, 'schauspieler' ueber
 // cast_names -- eine Person mit beiden Rollen bekommt zwei getrennte Seiten,
 // damit keine der beiden Dubletten-Inhalt zur anderen wird.
@@ -757,13 +729,14 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
   if (!person) return null;
 
   const bedingung = rolle === 'regisseur' ? 'director = $1' : '$1 = ANY(cast_names)';
-  const [{ rows }, text] = await Promise.all([
+  const [{ rows }, text, { rows: gleichnamig }] = await Promise.all([
     pool.query(
       `SELECT id, tmdb_id, type, title, year, poster_path FROM ${TITEL_MIT_KENNUNG}
         WHERE ${bedingung} ORDER BY ${NOTE_SQL} DESC LIMIT 24`,
       [person.name]
     ),
     ladeSeoText('person', `${rolle}:${tmdbPersonId}`, locale),
+    pool.query(`SELECT count(*)::int AS n FROM personen_cache WHERE name = $1`, [person.name]),
   ]);
   const filmografie = rows.map((r) => ({
     id: String(r.id), tmdbId: r.tmdb_id, type: r.type, slug: slugify(r.title), title: r.title, year: r.year, posterPath: r.poster_path,
@@ -774,7 +747,9 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
     biografie: person.biografie, fotoPfad: person.foto_pfad,
     geburtstag: geburtstagString(person.geburtstag),
     filmografie, text,
-    indexierbar: filmografie.length > 0 && (!!text || !!person.foto_pfad),
+    // Gleichnamige Personen zeigen dieselbe (namensbasierte) Filmografie --
+    // Dublette. Die bleibt ohne eigenen Text draussen.
+    indexierbar: filmografie.length > 0 && (!!text || gleichnamig[0].n <= 1),
   };
 }
 
@@ -786,10 +761,10 @@ const PERSONEN_CTES = `
   mit_text AS (SELECT split_part(schluessel, ':', 2)::int AS id FROM seo_content
                 WHERE bereich = 'person' AND locale = $2 AND schluessel LIKE $1 || ':%')`;
 const PERSON_HAT_SEITE = `(pc.tmdb_person_id IN (SELECT id FROM mit_text)
-     OR (pc.foto_pfad IS NOT NULL AND pc.name IN (SELECT name FROM eindeutig)))`;
+     OR pc.name IN (SELECT name FROM eindeutig))`;
 
 // Mindestmenge fuer eine indexierbare Personenseite: mindestens ein Titel im
-// Katalog UND (Redaktionstext ODER Foto). Dieselbe Regel steht in
+// Katalog UND (Redaktionstext ODER eindeutiger Name). Dieselbe Regel steht in
 // ladePersonSeite() und in seoSitemap.js (personenUrls).
 //
 // Welche der Namen haben eine solche Seite? Nur die werden auf Titelseiten
@@ -800,15 +775,12 @@ export async function personenMitSeite(namen, rolle, locale) {
   const ids = new Map();
   const eindeutig = [...new Set((namen || []).filter(Boolean))];
   if (!eindeutig.length) return ids;
-  // Laeuft bei jedem Seitenaufruf -- daher nur ueber die wenigen Kandidaten
-  // (Index-Zugriff auf seo_content), nicht ueber die ganze Tabelle.
+  // Laeuft bei jedem Seitenaufruf -- daher nur ueber die wenigen Kandidaten,
+  // nicht ueber die ganze Tabelle. rolle/locale bleiben fuer die Aufrufer.
   const { rows } = await pool.query(
     `SELECT pc.name, pc.tmdb_person_id FROM personen_cache pc
-      WHERE pc.name IN (SELECT name FROM personen_cache WHERE name = ANY($3::text[]) GROUP BY name HAVING count(*) = 1)
-        AND (pc.foto_pfad IS NOT NULL OR EXISTS (
-              SELECT 1 FROM seo_content s
-               WHERE s.bereich = 'person' AND s.locale = $2 AND s.schluessel = $1 || ':' || pc.tmdb_person_id))`,
-    [rolle, locale, eindeutig]
+      WHERE pc.name IN (SELECT name FROM personen_cache WHERE name = ANY($1::text[]) GROUP BY name HAVING count(*) = 1)`,
+    [eindeutig]
   );
   for (const r of rows) ids.set(r.name, r.tmdb_person_id);
   return ids;
@@ -852,11 +824,11 @@ export async function ladePersonenHub(rolle, locale) {
     personenRangliste(rolle, locale),
     ladeSeoText('hub', rolle, locale),
   ]);
-  return { rolle, personen, text, indexierbar: !!text && personen.length > 0 };
+  return { rolle, personen, text, indexierbar: personen.length > 0 };
 }
 
 // Alle Personen mit indexierbarer Seite (Regel wie ladePersonSeite): Text ODER
-// Foto (bei Foto nur bei eindeutigem Namen), plus mindestens ein Katalog-Titel.
+// eindeutiger Name, plus mindestens ein Katalog-Titel.
 // Eine Abfrage statt ladePersonSeite() je Person -- ~20.000 Personen.
 export async function personenFuerSitemap(rolle, locale) {
   const titelMitKennung = `titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
@@ -902,6 +874,65 @@ export async function ladeKinoStadt(stadtSlug, locale) {
       tmdbId: f.tmdb_id, slug: slugify(f.title), title: f.title, year: f.year,
       genres: f.genres || [], posterPath: f.poster_path,
     })),
-    text, indexierbar: !!text,
+    text, indexierbar: kinos.length > 0,
   };
+}
+
+// ---- Sitemap (seoSitemap.js): alle Seiten, die es gibt -- nach denselben
+// Regeln wie `indexierbar` oben, unabhaengig davon, ob schon ein Text existiert.
+
+export async function titelFuerSitemap() {
+  const { rows } = await pool.query(`SELECT type, tmdb_id, title FROM ${TITEL_MIT_KENNUNG}`);
+  return rows;
+}
+
+// Genres mit mindestens einem Titel (ladeGenreSeite: gesamt > 0).
+async function genresMitTiteln(type) {
+  const [erlaubt, { rows }] = await Promise.all([
+    alleGenres(type),
+    pool.query(`SELECT DISTINCT unnest(genres) AS g FROM ${TITEL_MIT_KENNUNG} WHERE type = $1`, [type]),
+  ]);
+  const vorhanden = new Set(rows.map((r) => r.g));
+  return [...new Set(erlaubt)].filter((g) => vorhanden.has(g));
+}
+
+export async function genresFuerSitemap() {
+  const liste = [];
+  for (const type of ['movie', 'series']) {
+    for (const g of await genresMitTiteln(type)) liste.push({ type, slug: slugify(g) });
+  }
+  return liste;
+}
+
+export async function anbieterFuerSitemap(locale) {
+  return [...await anbieterMitSeite(regionFuerLocale(locale))];
+}
+
+export async function staedteFuerSitemap() {
+  return (await staedteListe()).filter((s) => s.anzahl >= MIN_KINOS_STADT).map((s) => slugify(s.ort));
+}
+
+// Alle Bestenlisten als [art, modus, wert] -- auch fuer scripts/seo-bestenlisten-texte.mjs.
+export async function alleBestenlisten(locale) {
+  const liste = [];
+  for (const [art, type] of [['filme', 'movie'], ['serien', 'series']]) {
+    const k = await bestenlistenKatalog(type, locale);
+    const { rows: jahre } = await pool.query(
+      `SELECT year FROM titles WHERE type = $1 AND year >= 1900 GROUP BY year HAVING count(*) >= $2 ORDER BY year`, [type, MIN_TITEL]);
+    for (const j of jahre) liste.push([art, 'jahr', String(j.year)]);
+    for (const g of await genresMitTiteln(type)) liste.push([art, 'genre', slugify(g)]);
+    for (const a of k.anbieter) liste.push([art, 'anbieter', a.slug]);
+    for (const j of k.jahrzehnte) liste.push([art, 'jahrzehnt', String(j)]);
+    for (const t of k.themen) liste.push([art, 'thema', t]);
+    for (const e of k.genreJahrzehnt) liste.push([art, 'genre-jahrzehnt', `${e.slug}+${e.jz}`]);
+    for (const e of k.genreAnbieter) liste.push([art, 'genre-anbieter', `${e.slug}+${e.anbieter}`]);
+    for (const e of k.laender) liste.push([art, 'land', e.slug]);
+    for (const e of k.sprachen) liste.push([art, 'sprache', e.slug]);
+    for (const e of k.landGenre) liste.push([art, 'land-genre', `${e.land}+${e.genreSlug}`]);
+    for (const e of k.laufzeit) liste.push([art, 'laufzeit', e]);
+    for (const e of k.staffeln) liste.push([art, 'staffeln', e]);
+    if (k.kino) liste.push([art, 'kino', 'aktuell']);
+    if (k.neu) liste.push([art, 'neu', 'aktuell']);
+  }
+  return liste;
 }

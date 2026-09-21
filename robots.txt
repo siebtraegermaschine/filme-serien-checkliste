@@ -1,8 +1,7 @@
-# Die Startseite UND die eigenstaendigen SEO-Seiten unter /de-de/... gehoeren
-# in Suchmaschinen (siehe docs/archiv/PLAN-SEO.md, Plan "SEO-Seiten: technische
-# Umsetzung"). Alles andere bleibt draussen -- insbesondere die App selbst
-# (index.html/SPA) und die Vorschauseiten unter /t/...: die Rechtstexte
-# tragen ohnehin noindex, und /t/... wuerde beliebig viele Adressen mit fast
+# Die Startseite, die eigenstaendigen SEO-Seiten unter /de-de/... und die
+# deutschen Rechtstexte gehoeren in Suchmaschinen. Alles andere bleibt
+# draussen -- insbesondere die App selbst (index.html/SPA) und die
+# Vorschauseiten unter /t/...: /t/... wuerde beliebig viele Adressen mit fast
 # gleichem Inhalt erzeugen (Dublette zur jeweiligen /de-de/film|serie/...-
 # Seite, die per canonical ohnehin bevorzugt wird).
 #
@@ -13,18 +12,22 @@
 # "Diese Ansicht teilen"-Momentaufnahmen (?titel=TOKEN) bleiben noindex: feste,
 # personenbezogene Listen, keine eigenstaendigen Inhaltsseiten.
 
-# STAND 17.08.2026 -- SEO-Seiten freigegeben.
-# Regel: Eine Seite wird genau dann indexiert, wenn sie eigenen Inhalt hat.
-# Angelegte URLs ohne Inhalt bleiben erreichbar, tragen aber "noindex", und
-# kippen automatisch auf "index", sobald ein Text dafuer vorliegt. Gesteuert
-# wird das je Seite ueber "indexierbar" (backend/lib/seoData.js), nicht ueber
-# robots.txt -- ein Disallow wuerde das Gegenteil bewirken, weil ein Crawler
-# die Seite abrufen koennen muss, um das noindex ueberhaupt zu lesen.
+# Regel: Jede SEO-Seite mit Eintraegen wird indexiert, auch ohne eigenen
+# Text. noindex tragen nur noch Dubletten (Folgeseiten ?seite=N) und die
+# 404-Seite. Gesteuert wird das je Seite ueber "indexierbar"
+# (backend/lib/seoData.js), nicht ueber robots.txt -- ein Disallow wuerde das
+# Gegenteil bewirken, weil ein Crawler die Seite abrufen koennen muss, um das
+# noindex ueberhaupt zu lesen.
 
 User-agent: *
 Allow: /$
 Allow: /de-de/
 Allow: /sitemap-*.xml
+Allow: /impressum.html
+Allow: /datenschutz.html
+Allow: /nutzungsbedingungen.html
+Allow: /seo.css
+Allow: /consent.js
 Allow: /og-image.png
 Allow: /icon-192.png
 Allow: /icon-512.png

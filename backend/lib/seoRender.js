@@ -18,18 +18,10 @@ export function attrEsc(wert) {
 
 const BILD_FALLBACK = SITE + '/og-image.png';
 
-// FREIGEGEBEN (Christian, 17.08.2026). Die frühere Gesamtsperre ist entfallen.
-//
-// Die Regel lautet ab jetzt dauerhaft: Eine Seite wird genau dann indexiert,
-// wenn sie eigenen Inhalt hat. Angelegte URLs ohne Inhalt bleiben erreichbar,
-// tragen aber "noindex" -- und kippen automatisch auf "index", sobald ein Text
-// dafuer vorliegt. Es ist kein weiterer Schalter noetig: Jede Seite kennt ihre
-// Indexierbarkeit bereits selbst (seoData.js liefert `indexierbar`, im
-// Regelfall = es existiert eine seo_content-Zeile; bei Listen- und
-// Personenseiten kommt hinzu, dass auch Eintraege vorhanden sein muessen).
-//
-// Wer neue Seitentypen ergaenzt, muss `indexierbar` nach derselben Regel
-// setzen -- NIE hart auf true.
+// Jede SEO-Seite mit Eintraegen wird indexiert, auch ohne eigenen Text --
+// Texte kommen nach und nach dazu. "noindex" nur fuer Dubletten: Folgeseiten
+// (?seite=N), gleichnamige Personen ohne Text, 404. seoData.js liefert
+// `indexierbar` je Seite.
 //
 // "follow" steht auch bei noindex, und robots.txt sperrt /de-de/ NICHT: Ein
 // Crawler muss die Seite abrufen duerfen, um das noindex ueberhaupt zu lesen.

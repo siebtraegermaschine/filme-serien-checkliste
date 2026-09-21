@@ -10,9 +10,8 @@
 import 'dotenv/config';
 import { pathToFileURL } from 'node:url';
 import { pool } from '../db/pool.js';
-import { ladeBestenliste, bestenlistenKatalog } from '../lib/seoData.js';
-import { MIN_TITEL, THEMEN, jahrzehntName, LAUFZEITEN, STAFFELN } from '../lib/seoBestenlisten.js';
-import { slugify } from '../lib/slug.js';
+import { ladeBestenliste, alleBestenlisten } from '../lib/seoData.js';
+import { THEMEN, jahrzehntName, LAUFZEITEN, STAFFELN } from '../lib/seoBestenlisten.js';
 
 const LOCALE = 'de-de';
 
@@ -82,40 +81,13 @@ export function bauText(daten) {
   }
 }
 
-// Alle Listen, die es geben soll: (art, modus, wert).
-export async function alleListen() {
-  const liste = [];
-  for (const [art, type] of [['filme', 'movie'], ['serien', 'series']]) {
-    const k = await bestenlistenKatalog(type, LOCALE);
-    const { rows: jahre } = await pool.query(
-      `SELECT year FROM titles WHERE type = $1 AND year >= 1900 GROUP BY year HAVING count(*) >= $2 ORDER BY year`, [type, MIN_TITEL]);
-    const { rows: genres } = await pool.query(
-      `SELECT DISTINCT name_de FROM genre_alias WHERE art = $1`, [type === 'series' ? 'tv' : 'movie']);
-    for (const j of jahre) liste.push([art, 'jahr', String(j.year)]);
-    for (const g of genres) liste.push([art, 'genre', slugify(g.name_de)]);
-    for (const a of k.anbieter) liste.push([art, 'anbieter', a.slug]);
-    for (const j of k.jahrzehnte) liste.push([art, 'jahrzehnt', String(j)]);
-    for (const t of k.themen) liste.push([art, 'thema', t]);
-    for (const e of k.genreJahrzehnt) liste.push([art, 'genre-jahrzehnt', `${e.slug}+${e.jz}`]);
-    for (const e of k.genreAnbieter) liste.push([art, 'genre-anbieter', `${e.slug}+${e.anbieter}`]);
-    for (const e of k.laender) liste.push([art, 'land', e.slug]);
-    for (const e of k.sprachen) liste.push([art, 'sprache', e.slug]);
-    for (const e of k.landGenre) liste.push([art, 'land-genre', `${e.land}+${e.genreSlug}`]);
-    for (const e of k.laufzeit) liste.push([art, 'laufzeit', e]);
-    for (const e of k.staffeln) liste.push([art, 'staffeln', e]);
-    if (k.kino) liste.push([art, 'kino', 'aktuell']);
-    if (k.neu) liste.push([art, 'neu', 'aktuell']);
-  }
-  return liste;
-}
-
 async function main() {
   const dryRun = process.argv.includes('--dry-run');
   const zi = process.argv.indexOf('--zeige');
   const zeige = zi >= 0 ? Number(process.argv[zi + 1]) || 3 : 0;
   const mi = process.argv.indexOf('--modus');
   const nurModus = mi >= 0 ? process.argv[mi + 1] : null;
-  const listen = (await alleListen()).filter(([, m]) => !nurModus || m === nurModus);
+  const listen = (await alleBestenlisten(LOCALE)).filter(([, m]) => !nurModus || m === nurModus);
   let neu = 0, vorhanden = 0, uebersprungen = 0, gezeigt = 0;
   for (const [art, modus, wert] of listen) {
     const daten = await ladeBestenliste(art, modus, wert, LOCALE);
