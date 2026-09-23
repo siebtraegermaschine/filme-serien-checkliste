@@ -336,9 +336,13 @@
   /* Anheften: sitzt in derselben Zeile wie Sternebewertung/Genre/Jahr
      (.meta bzw. .dmeta) und wird per margin-left:auto an deren rechtes Ende
      geschoben -- daher als Flex-Kind dort eingehaengt, nicht als eigene
-     Zeile. Sichtbar nur bei ausgeklappten Details (show-details). */
+     Zeile. Normalerweise nur bei ausgeklappten Details sichtbar
+     (show-details); ein bereits angehefteter Titel zeigt seinen Pin aber
+     auch zusammengeklappt, damit er von dort direkt geloest werden kann --
+     .pin-row.pinned ist bewusst nicht auf li.item beschraenkt, gilt also
+     genauso fuer die Kino-/Discovery-Zeilen (li.disc). */
   .pin-row { display: none; margin-left: auto; align-items: center; }
-  li.item.show-details .pin-row { display: inline-flex; }
+  li.item.show-details .pin-row, .pin-row.pinned { display: inline-flex; }
   .pin-btn {
     border: 1px solid var(--border); background: transparent; color: var(--text-dim);
     border-radius: 6px; padding: 1px 5px; font-size: 12px; line-height: 1.6; cursor: pointer;
@@ -2180,7 +2184,7 @@ function mitSpracheRegion(pfad){
 var UI_TEXTE = {
   de: {
     film: 'Film', serie: 'Serie', miniSerie: 'Mini-Serie',
-    watchliste: 'Watchlist', anheften: 'Anheften', gesehenKlein: 'gesehen', gesehenGross: 'Gesehen',
+    watchliste: 'Watchlist', anheften: 'Anheften', pinLoesenFrage: 'Anheften für diesen Titel lösen?', gesehenKlein: 'gesehen', gesehenGross: 'Gesehen',
     aehnlicheTitel: 'Ähnliche Titel',
     aehnlicheTitelZu: function(t){ return 'Ähnliche Titel zu „' + t + '“'; },
     keineAehnlichen: 'Keine ähnlichen Titel für diese Filterkombination.',
@@ -2497,7 +2501,7 @@ var UI_TEXTE = {
   },
   en: {
     film: 'Movie', serie: 'Series', miniSerie: 'Mini-series',
-    watchliste: 'Watchlist', anheften: 'Pin', gesehenKlein: 'watched', gesehenGross: 'Watched',
+    watchliste: 'Watchlist', anheften: 'Pin', pinLoesenFrage: 'Unpin this title?', gesehenKlein: 'watched', gesehenGross: 'Watched',
     aehnlicheTitel: 'Similar titles',
     aehnlicheTitelZu: function(t){ return 'Titles similar to “' + t + '”'; },
     keineAehnlichen: 'No similar titles for this filter combination.',
@@ -2810,7 +2814,7 @@ var UI_TEXTE = {
   },
   fr: {
     film: 'Film', serie: 'Série', miniSerie: 'Mini-série',
-    watchliste: 'Watchlist', anheften: 'Épingler', gesehenKlein: 'vu', gesehenGross: 'Vus',
+    watchliste: 'Watchlist', anheften: 'Épingler', pinLoesenFrage: 'Détacher ce titre ?', gesehenKlein: 'vu', gesehenGross: 'Vus',
     aehnlicheTitel: 'Titres similaires',
     aehnlicheTitelZu: function(t){ return 'Titres similaires à « ' + t + ' »'; },
     keineAehnlichen: 'Aucun titre similaire pour cette combinaison de filtres.',
@@ -3123,7 +3127,7 @@ var UI_TEXTE = {
   },
   es: {
     film: 'Película', serie: 'Serie', miniSerie: 'Miniserie',
-    watchliste: 'Watchlist', anheften: 'Fijar', gesehenKlein: 'visto', gesehenGross: 'Vistos',
+    watchliste: 'Watchlist', anheften: 'Fijar', pinLoesenFrage: '¿Desanclar este título?', gesehenKlein: 'visto', gesehenGross: 'Vistos',
     aehnlicheTitel: 'Títulos similares',
     aehnlicheTitelZu: function(t){ return 'Títulos similares a «' + t + '»'; },
     keineAehnlichen: 'No hay títulos similares para esta combinación de filtros.',
@@ -3436,7 +3440,7 @@ var UI_TEXTE = {
   },
   it: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
-    watchliste: 'Watchlist', anheften: 'Fissa', gesehenKlein: 'visto', gesehenGross: 'Visti',
+    watchliste: 'Watchlist', anheften: 'Fissa', pinLoesenFrage: 'Togliere il fissaggio a questo titolo?', gesehenKlein: 'visto', gesehenGross: 'Visti',
     aehnlicheTitel: 'Titoli simili',
     aehnlicheTitelZu: function(t){ return 'Titoli simili a “' + t + '”'; },
     keineAehnlichen: 'Nessun titolo simile per questa combinazione di filtri.',
@@ -3749,7 +3753,7 @@ var UI_TEXTE = {
   },
   nl: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
-    watchliste: 'Watchlist', anheften: 'Vastzetten', gesehenKlein: 'gezien', gesehenGross: 'Gezien',
+    watchliste: 'Watchlist', anheften: 'Vastzetten', pinLoesenFrage: 'Vastzetten van deze titel ongedaan maken?', gesehenKlein: 'gezien', gesehenGross: 'Gezien',
     aehnlicheTitel: 'Vergelijkbare titels',
     aehnlicheTitelZu: function(t){ return 'Titels vergelijkbaar met “' + t + '”'; },
     keineAehnlichen: 'Geen vergelijkbare titels voor deze filtercombinatie.',
@@ -4062,7 +4066,7 @@ var UI_TEXTE = {
   },
   pt: {
     film: 'Filme', serie: 'Série', miniSerie: 'Minissérie',
-    watchliste: 'Watchlist', anheften: 'Fixar', gesehenKlein: 'assistido', gesehenGross: 'Assistidos',
+    watchliste: 'Watchlist', anheften: 'Fixar', pinLoesenFrage: 'Remover a fixação deste título?', gesehenKlein: 'assistido', gesehenGross: 'Assistidos',
     aehnlicheTitel: 'Títulos semelhantes',
     aehnlicheTitelZu: function(t){ return 'Títulos semelhantes a “' + t + '”'; },
     keineAehnlichen: 'Nenhum título semelhante para essa combinação de filtros.',
@@ -5607,7 +5611,7 @@ function pinBtnHtml(id, category) {
   if (!category) return '';
   var mine = id != null && getPinnedCategory(id) === category;
   var belegt = !mine && pinnedTitleId(category) != null;
-  return '<span class="pin-row"><button type="button" aria-label="' + TXT.anheften + '" title="' + TXT.anheften +
+  return '<span class="pin-row' + (mine ? ' pinned' : '') + '"><button type="button" aria-label="' + TXT.anheften + '" title="' + TXT.anheften +
     '" class="pin-btn' + (mine ? ' on' : '') + '"' + (belegt ? ' disabled' : '') +
     ' data-pin-category="' + category + '">📌</button></span>';
 }
@@ -5623,6 +5627,14 @@ function wirePinBtn(li, category, getId) {
     e.stopPropagation();
     if (btn.disabled) return;
     requireLogin(async () => {
+      // Der Pin ist auch in der zusammengeklappten Zeile sichtbar (siehe
+      // .pin-row.pinned) -- ein Klick loest ihn dort ohne weiteren Umweg,
+      // daher vorher eine Rueckfrage, statt den fixierten Titel ungefragt
+      // aus der oberen Zeile verschwinden zu lassen.
+      if (btn.classList.contains('on')) {
+        var ok = await confirmRemove(TXT.pinLoesenFrage);
+        if (!ok) return;
+      }
       btn.disabled = true;
       try {
         var id = await getId();
