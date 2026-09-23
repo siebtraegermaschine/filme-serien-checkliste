@@ -1265,6 +1265,13 @@
   .such-chips { max-width: 660px; margin: 8px auto 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
   .such-chips .chip { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-soft); border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: 4px 11px; font-size: 13px; }
   .such-chips .chip button { background: none; border: none; color: inherit; cursor: pointer; font-size: 15px; line-height: 1; padding: 0; }
+  /* Das Bindewort zwischen zwei Chips: kein Knopf-Aussehen, aber klickbar --
+     die gepunktete Unterstreichung ist der einzige Hinweis darauf, sonst laese
+     sich die Zeile nicht mehr als Satz. */
+  .such-chips .such-bindewort { background: none; border: none; padding: 4px 2px; cursor: pointer;
+    color: var(--text-dim); font-size: 13px; font-family: inherit; line-height: 1;
+    text-decoration: underline dotted; text-underline-offset: 3px; }
+  .such-chips .such-bindewort:hover, .such-chips .such-bindewort:focus-visible { color: var(--accent); }
   .search-suggest { position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 30;
     background: var(--card); border: 1px solid var(--border); border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,.5); overflow: hidden; }
@@ -2394,6 +2401,9 @@ var UI_TEXTE = {
     anfrageWeg: 'Diese Anfrage gibt es nicht mehr.',
     sucheKombinieren: 'Weitere Suche hinzufügen',
     sucheEntfernen: 'Diese Suche entfernen',
+    suchUnd: 'und',
+    suchOder: 'oder',
+    suchModusUmschalten: 'Zwischen „und“ und „oder“ umschalten',
     benachrichtigungKnopf: function(an){ return 'E-Mail bei neuen Watchlist-Treffern: ' + (an ? 'An' : 'Aus'); },
     kennenTitel: 'Finde deinen Taste-Score',
     kennenIntro: 'Sag zu ein paar bekannten Titeln kurz deine Meinung — daraus entsteht deine persönliche Sortierung. Ganz ohne Konto.',
@@ -2704,6 +2714,9 @@ var UI_TEXTE = {
     anfrageWeg: 'This request no longer exists.',
     sucheKombinieren: 'Add another search',
     sucheEntfernen: 'Remove this search',
+    suchUnd: 'and',
+    suchOder: 'or',
+    suchModusUmschalten: 'Switch between “and” and “or”',
     benachrichtigungKnopf: function(an){ return 'Email for new watchlist matches: ' + (an ? 'On' : 'Off'); },
     kennenTitel: 'Find your Taste Score',
     kennenIntro: 'Give a quick take on a few well-known titles — that builds your personal ranking. No account needed.',
@@ -3014,6 +3027,9 @@ var UI_TEXTE = {
     anfrageWeg: 'Cette demande n’existe plus.',
     sucheKombinieren: 'Ajouter une autre recherche',
     sucheEntfernen: 'Retirer cette recherche',
+    suchUnd: 'et',
+    suchOder: 'ou',
+    suchModusUmschalten: 'Basculer entre « et » et « ou »',
     benachrichtigungKnopf: function(an){ return 'E-mail pour les nouveautés de ta watchlist\u202f: ' + (an ? 'activé' : 'désactivé'); },
     kennenTitel: 'Trouve ton Taste Score',
     kennenIntro: 'Donne vite ton avis sur quelques titres connus — ta liste personnelle en découle. Sans compte.',
@@ -3324,6 +3340,9 @@ var UI_TEXTE = {
     anfrageWeg: 'Esta solicitud ya no existe.',
     sucheKombinieren: 'Añadir otra búsqueda',
     sucheEntfernen: 'Quitar esta búsqueda',
+    suchUnd: 'y',
+    suchOder: 'o',
+    suchModusUmschalten: 'Cambiar entre «y» y «o»',
     benachrichtigungKnopf: function(an){ return 'Correo con novedades de tu watchlist: ' + (an ? 'activado' : 'desactivado'); },
     kennenTitel: 'Encuentra tu Taste Score',
     kennenIntro: 'Opina rápido sobre algunos títulos conocidos: así nace tu orden personal. Sin cuenta.',
@@ -3634,6 +3653,9 @@ var UI_TEXTE = {
     anfrageWeg: 'Questa richiesta non esiste più.',
     sucheKombinieren: 'Aggiungi un’altra ricerca',
     sucheEntfernen: 'Rimuovi questa ricerca',
+    suchUnd: 'e',
+    suchOder: 'o',
+    suchModusUmschalten: 'Alterna tra «e» e «o»',
     benachrichtigungKnopf: function(an){ return 'E-mail per le novità della tua watchlist: ' + (an ? 'attiva' : 'disattivata'); },
     kennenTitel: 'Trova il tuo Taste Score',
     kennenIntro: 'Di’ al volo la tua su alcuni titoli famosi: ne nasce il tuo ordinamento personale. Senza account.',
@@ -3944,6 +3966,9 @@ var UI_TEXTE = {
     anfrageWeg: 'Dit verzoek bestaat niet meer.',
     sucheKombinieren: 'Nog een zoekopdracht toevoegen',
     sucheEntfernen: 'Deze zoekopdracht verwijderen',
+    suchUnd: 'en',
+    suchOder: 'of',
+    suchModusUmschalten: 'Wisselen tussen “en” en “of”',
     benachrichtigungKnopf: function(an){ return 'E-mail bij nieuwe watchlist-treffers: ' + (an ? 'aan' : 'uit'); },
     kennenTitel: 'Vind je Taste Score',
     kennenIntro: 'Geef kort je mening over een paar bekende titels — daaruit ontstaat jouw persoonlijke volgorde. Zonder account.',
@@ -4254,6 +4279,9 @@ var UI_TEXTE = {
     anfrageWeg: 'Este pedido não existe mais.',
     sucheKombinieren: 'Adicionar outra busca',
     sucheEntfernen: 'Remover esta busca',
+    suchUnd: 'e',
+    suchOder: 'ou',
+    suchModusUmschalten: 'Alternar entre “e” e “ou”',
     benachrichtigungKnopf: function(an){ return 'E-mail para novos matches na watchlist: ' + (an ? 'Ativado' : 'Desativado'); },
     kennenTitel: 'Descubra seu Taste Score',
     kennenIntro: 'Dê rapidinho sua opinião sobre alguns títulos conhecidos — daí nasce sua ordem pessoal. Sem conta.',
@@ -7687,34 +7715,56 @@ function renderCurrentTab(){
 let sucheZustandVorher = null;
 /* ---- Kombinierte Suche (Chips) ----
    Das "+" neben dem X friert die aktuelle Suche ein; die Liste zeigt dann
-   alles, was auf MINDESTENS EINE der Suchen passt (ODER). Bis zu 10 Chips,
-   jeder einzeln entfernbar; das X im Feld und der Logo-Klick raeumen alles.
+   alles, was auf mindestens EINE der Suchen passt (ODER) bzw. nur, was auf
+   ALLE passt (UND) -- siehe SUCH_MODUS. Bis zu 10 Chips, jeder einzeln
+   entfernbar; das X im Feld und der Logo-Klick raeumen alles.
    Die Chips gehen auch in den Ansicht-Link (siehe ansichtLink) -- so laesst
    sich z.B. eine Handvoll Titel fuer einen Blog-Artikel verlinken. */
 var SUCH_CHIPS = [];
 var SUCH_CHIPS_MAX = 10;
+/* Wie die Begriffe untereinander verknuepft sind: 'oder' (Standard, das
+   bisherige Verhalten) oder 'und'. Gilt fuer ALLE Begriffe gemeinsam --
+   einzeln setzbare Bindewoerter ergaeben Ausdruecke wie "A und B oder C",
+   deren Vorrang sich ohne Klammern nicht erklaeren laesst. Innerhalb eines
+   Begriffs bleibt es beim Oder ueber alle Felder (siehe
+   poolItemMatchesQuery): "Drama" trifft weiterhin Genre ODER Titel. */
+var SUCH_MODUS = 'oder';
+function suchModusWort(){ return SUCH_MODUS === 'und' ? TXT.suchUnd : TXT.suchOder; }
 function aktiveSuchbegriffe(){
   var alle = SUCH_CHIPS.map(function(c){ return c.toLowerCase(); });
   var v = searchEl.value.trim().toLowerCase();
   if (v) alle.push(v);
   return alle;
 }
-// Fuer Leertexte: alle aktiven Suchen als lesbare Aufzaehlung.
+// Fuer Leertexte: alle aktiven Suchen als lesbare Aufzaehlung. Der Feldtext
+// zuerst -- in der Oberflaeche steht er ueber den Chips, der Satz soll sich
+// genauso lesen.
 function sucheAnzeige(){
   var alle = SUCH_CHIPS.slice();
   var v = searchEl.value.trim();
-  if (v) alle.push(v);
-  return alle.join(' | ');
+  if (v) alle.unshift(v);
+  return alle.join(' ' + suchModusWort() + ' ');
 }
 function suchChipsZeichnen(){
   var el = document.getElementById('suchChips');
   if (!el) return;
   el.style.display = SUCH_CHIPS.length ? 'flex' : 'none';
-  el.innerHTML = SUCH_CHIPS.map(function(c, i){
-    return '<span class="chip">' + esc(c) +
-      '<button type="button" data-i="' + i + '" aria-label="' + escAttr(TXT.sucheEntfernen) + '">×</button></span>';
-  }).join('');
-  el.querySelectorAll('button').forEach(function(b){
+  // Das Bindewort steht zwischen je zwei Begriffen -- und einmal VORNE, wenn
+  // im Suchfeld gerade Text steht: der zaehlt als eigener Begriff und sitzt
+  // ueber den Chips. Bei nur einem Begriff ist die Verknuepfung bedeutungslos
+  // und bleibt deshalb unsichtbar.
+  var feldText = searchEl.value.trim().length > 0;
+  var bindewort = '<button type="button" class="such-bindewort" title="' +
+    escAttr(TXT.suchModusUmschalten) + '" aria-label="' + escAttr(TXT.suchModusUmschalten) +
+    '">' + esc(suchModusWort()) + '</button>';
+  var teile = [];
+  SUCH_CHIPS.forEach(function(c, i){
+    if (i > 0 || feldText) teile.push(bindewort);
+    teile.push('<span class="chip">' + esc(c) +
+      '<button type="button" data-i="' + i + '" aria-label="' + escAttr(TXT.sucheEntfernen) + '">×</button></span>');
+  });
+  el.innerHTML = teile.join('');
+  el.querySelectorAll('.chip button').forEach(function(b){
     b.onclick = function(){
       SUCH_CHIPS.splice(Number(b.dataset.i), 1);
       suchChipsZeichnen();
@@ -7722,6 +7772,24 @@ function suchChipsZeichnen(){
       renderCurrentTab();
     };
   });
+  el.querySelectorAll('.such-bindewort').forEach(function(b){
+    b.onclick = function(){
+      SUCH_MODUS = SUCH_MODUS === 'und' ? 'oder' : 'und';
+      suchChipsZeichnen();
+      titelLimit = TITEL_PRO_SEITE;
+      renderCurrentTab();
+    };
+  });
+}
+/* Das fuehrende Bindewort haengt nur daran, OB im Suchfeld etwas steht, nicht
+   woran. Neu gezeichnet wird deshalb allein beim Wechsel leer <-> gefuellt --
+   sonst baute jeder Tastendruck die Chipzeile neu auf. */
+var _suchFeldHatteText = false;
+function suchChipsBindewortPruefen(){
+  var jetzt = searchEl.value.trim().length > 0;
+  if (jetzt === _suchFeldHatteText) return;
+  _suchFeldHatteText = jetzt;
+  if (SUCH_CHIPS.length) suchChipsZeichnen();
 }
 function suchChipHinzufuegen(){
   var v = searchEl.value.trim();
@@ -7735,6 +7803,9 @@ function suchChipHinzufuegen(){
   searchEl.focus();
 }
 function suchChipsLeeren(){
+  // Der Modus geht mit: Wer die Suche raeumt, soll beim naechsten Mal nicht
+  // ueber eine leere Liste stolpern, weil vor Tagen mal UND eingestellt war.
+  SUCH_MODUS = 'oder';
   if (!SUCH_CHIPS.length) return;
   SUCH_CHIPS = [];
   suchChipsZeichnen();
@@ -8059,6 +8130,7 @@ var SUCHE_RENDER_VERZOEGERUNG = 120;
 var _sucheRenderTimer = null;
 searchEl.addEventListener('input', function(){
   sucheZustandAnwenden();
+  suchChipsBindewortPruefen();
   titelLimit = TITEL_PRO_SEITE;
   // Die Suche schaltet auch im Kino alle Status an (siehe sucheZustandAnwenden),
   // das muss sich sofort in der Buttonleiste zeigen -- und die aktualisiert nur
@@ -11290,6 +11362,9 @@ function ansichtLink(){
   var v = searchEl.value.trim();
   if (v) q.push(v);
   if (q.length) p.set('suche', q.join('|'));
+  // Nur wenn er ueberhaupt etwas aendert: bei einem einzigen Begriff sind UND
+  // und ODER dasselbe, und alte Links ohne den Parameter bleiben ODER.
+  if (q.length > 1 && SUCH_MODUS === 'und') p.set('verknuepfung', 'und');
   return location.origin + '/?' + p.toString();
 }
 // Beim Laden: einen geteilten Ansicht-Link anwenden. Liefert true, wenn einer
@@ -11304,6 +11379,8 @@ function ansichtAusLink(){
   // sucheZustandAnwenden ("Suchen heisst ueberall suchen") und schaltet alle
   // Bereiche an -- die ausdruecklich im Link stehenden Filter sollen das
   // Letzte Wort haben, sonst zeigte der Link mehr als der Absender meinte.
+  // Vor dem Zeichnen der Chips setzen -- sie tragen das Bindewort.
+  SUCH_MODUS = p.get('verknuepfung') === 'und' ? 'und' : 'oder';
   var q = p.get('suche');
   if (q) {
     var begriffe = q.split('|').map(function(t){ return t.trim(); }).filter(Boolean).slice(0, SUCH_CHIPS_MAX);
@@ -13189,9 +13266,14 @@ function poolItemLi(item, score, opts){
 // Genres duerfen weiterhin per Teilstring matchen.
 function poolItemMatchesQuery(item, q){
   if (!q || !q.length) return true;
-  // Mehrere Suchen (Chips): ein Treffer bei IRGENDEINER genuegt (ODER).
+  // Mehrere Suchen (Chips): je nach SUCH_MODUS genuegt ein Treffer bei
+  // IRGENDEINER (ODER) oder es muessen ALLE passen (UND). Die eine Stelle fuer
+  // die ganze App -- Titelliste, Kino-Seite und beide Trefferzaehler-Hinweise
+  // fragen ausnahmslos hier.
   if (Array.isArray(q)) {
-    return q.some(function(einzel){ return poolItemMatchesQuery(item, einzel); });
+    return SUCH_MODUS === 'und'
+      ? q.every(function(einzel){ return poolItemMatchesQuery(item, einzel); })
+      : q.some(function(einzel){ return poolItemMatchesQuery(item, einzel); });
   }
   // item.alias: die Namen ausgeblendeter Dubletten (siehe aliasAufnehmen) --
   // damit "Baby Reindeer" auch dann trifft, wenn der Titel "Rentierbaby" heisst.
