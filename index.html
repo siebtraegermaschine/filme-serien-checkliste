@@ -534,8 +534,11 @@
      wie in .filter-group, dann ist jeder Knopf genau eine Spalte breit
      ((100% - 8px) / 3), der Sortier-Knopf rechts die dritte. */
   .cinema-filter { display:flex; gap:4px; flex:1; min-width:0; }
-  .cinema-filter button { flex:1; min-width:0; padding:9px 2px; font-size:12px; white-space:nowrap;
-    overflow:hidden; text-overflow:ellipsis; text-align:center; }
+  /* #cinemaSort steht in DERSELBEN Zeile und muss deshalb dieselbe Groesse
+     haben: Ohne ihn hier stand er mit 13px/14px Innenabstand (das Mass der
+     Sortiermenue-Eintraege) 5px hoeher als die zwei Knoepfe daneben. */
+  .cinema-filter button, #cinemaSort { flex:1; min-width:0; padding:9px 2px; font-size:12px; line-height:1.2;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:center; }
   /* Genauso breit wie "Neue entdecken" in der Statusreihe darueber: Dort teilen
      sich drei Knoepfe mit 4px Abstand die Zeile, eine Spalte ist also
      (100% - 8px) / 3. .cinema-page-header hat dieselbe Inhaltsbreite wie
@@ -1280,19 +1283,27 @@
      min-width:0 erlaubt den Buttons, schmaler als ihr Text zu werden (sonst
      wuerden sie ueberlaufen statt zu schrumpfen); text-overflow:ellipsis bleibt
      als Sicherheitsnetz fuer sehr schmale Bildschirme. */
-  .filter-group button { flex: 1; min-width: 0; padding: 9px 2px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
+  /* #fInStream und #fSort bilden die Zeile darunter und liegen im selben
+     Dreispalten-Raster -- mit dem Grundmass (13px/14px) waren sie 5px hoeher
+     als die Statusreihe darueber und die Kino-Zeile daneben. */
+  .filter-group button, #fInStream, #fSort { flex: 1; min-width: 0; padding: 9px 2px; font-size: 12px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
   /* "Neue entdecken" ist laenger als "Watchlist"/"Gesehen" und wuerde bei 320px
      sonst als "Neue entde…" abgeschnitten -- nachgemessen per scrollWidth gegen
      clientWidth. Der Breakpoint muss NACH der Regel darueber stehen: beide haben
      dieselbe Spezifitaet, also gewinnt die spaetere. */
-  @media (max-width: 360px) { .filter-group button { font-size: 11px; padding: 9px 1px; } }
+  @media (max-width: 360px) {
+    .filter-group button, .cinema-filter button, #fInStream, #fSort, #cinemaSort { font-size: 11px; padding: 9px 1px; }
+  }
   /* Gesperrt in einer fremden Liste (siehe updateFilterRowUI): Was jemand NICHT
      markiert hat, ist keine Liste von ihm. Sichtbar bleiben statt verschwinden --
      ein Knopf, der spurlos weg ist, wirft mehr Fragen auf als einer, der
      erklaert, warum er nicht geht. */
   .filter-group button[disabled] { opacity: .45; cursor: not-allowed; }
   #fInStream { white-space: nowrap; }
-  .funnel-icon { vertical-align: -2px; margin-right: 2px; }
+  /* Groesse an der Schrift statt fest bei 13px: Das feste Mass machte die
+     Streaming-Zeile 1px hoeher als die Statusreihe darueber, sobald die
+     Knopfschrift schrumpft (<=360px). */
+  .funnel-icon { width: 1em; height: 1em; vertical-align: -0.15em; margin-right: 3px; }
   /* Titel einzeilig mit … kuerzen; Taste-Score (auch zweistellig) bleibt sichtbar */
   li.item .title { display: flex; align-items: center; gap: 6px; min-width: 0; }
   li.item .title .ttext { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
@@ -7399,16 +7410,28 @@ function attachSwipeToRemove(li, onRemove, onShare){
     active = true; mode = null; dx = 0;
     startX = e.clientX; startY = e.clientY;
     rechtsErlaubt = !!onShare && e.clientX > RANDZONE;
-    try { li.setPointerCapture(e.pointerId); } catch (err) {}
   });
   li.addEventListener('pointermove', function(e){
     if (!active) return;
+    // Solange noch kein Capture gesetzt ist (das kommt erst mit der erkannten
+    // Wischrichtung), kann ein pointerup ausserhalb der Zeile durchrutschen --
+    // active haengt dann auf true und die naechste blosse Mausbewegung
+    // begaenne eine Geste. Ein Zeiger ohne gedrueckte Taste beendet sie.
+    if (e.buttons === 0) { active = false; mode = null; dx = 0; return; }
     var curDx = e.clientX - startX;
     var curDy = e.clientY - startY;
     if (mode === null) {
       if (Math.abs(curDx) < 8 && Math.abs(curDy) < 8) return;
       mode = Math.abs(curDx) > Math.abs(curDy) ? 'x' : 'y';
-      if (mode === 'x') li.style.transition = 'none';
+      if (mode === 'x') {
+        li.style.transition = 'none';
+        // Erst HIER fangen, nicht schon bei pointerdown: Ein aktiver
+        // Pointer-Capture leitet auch den folgenden Klick auf die Zeile um.
+        // Namen und Schlagwoerter in den aufgeklappten Details (data-filter,
+        // siehe openFilterModal) bekamen den Klick dadurch nie zu sehen -- die
+        // Zeile klappte stattdessen einfach zu.
+        try { li.setPointerCapture(e.pointerId); } catch (err) {}
+      }
     }
     if (mode !== 'x') return;
     dx = curDx;
@@ -8918,15 +8941,18 @@ document.getElementById('tourX').onclick = closeTour;
     if (e.target.closest('button, a')) return;
     aktiv = true; achse = null; dx = 0;
     startX = e.clientX; startY = e.clientY;
-    try { karte.setPointerCapture(e.pointerId); } catch (err) {}
   });
   karte.addEventListener('pointermove', function(e){
     if (!aktiv) return;
+    if (e.buttons === 0) { aktiv = false; achse = null; dx = 0; return; }   // siehe attachSwipeToRemove
     var cdx = e.clientX - startX, cdy = e.clientY - startY;
     if (achse === null) {
       if (Math.abs(cdx) < 8 && Math.abs(cdy) < 8) return;
       achse = Math.abs(cdx) > Math.abs(cdy) ? 'x' : 'y';
-      if (achse === 'x') inhalt.style.transition = 'none';
+      if (achse === 'x') {
+        inhalt.style.transition = 'none';
+        try { karte.setPointerCapture(e.pointerId); } catch (err) {}   // siehe attachSwipeToRemove
+      }
     }
     if (achse !== 'x') return;
     dx = cdx;
