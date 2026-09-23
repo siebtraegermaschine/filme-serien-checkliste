@@ -1265,6 +1265,7 @@
   .such-chips { max-width: 660px; margin: 8px auto 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
   .such-chips .chip { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-soft); border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: 4px 11px; font-size: 13px; }
   .such-chips .chip button { background: none; border: none; color: inherit; cursor: pointer; font-size: 15px; line-height: 1; padding: 0; }
+  .such-chips .such-paar { display: inline-flex; align-items: center; gap: 6px; }
   /* Das Bindewort zwischen zwei Chips: kein Knopf-Aussehen, aber klickbar --
      die gepunktete Unterstreichung ist der einzige Hinweis darauf, sonst laese
      sich die Zeile nicht mehr als Satz. */
@@ -7714,59 +7715,88 @@ function renderCurrentTab(){
 // Gesehen (siehe openCinemaPage).
 let sucheZustandVorher = null;
 /* ---- Kombinierte Suche (Chips) ----
-   Das "+" neben dem X friert die aktuelle Suche ein; die Liste zeigt dann
-   alles, was auf mindestens EINE der Suchen passt (ODER) bzw. nur, was auf
-   ALLE passt (UND) -- siehe SUCH_MODUS. Bis zu 10 Chips, jeder einzeln
-   entfernbar; das X im Feld und der Logo-Klick raeumen alles.
+   Das "+" neben dem X friert die aktuelle Suche ein; zwischen je zwei Suchen
+   steht ein umschaltbares Bindewort ("und"/"oder", siehe SUCH_VERKN).
+   Bis zu 10 Chips, jeder einzeln entfernbar; das X im Feld und der
+   Logo-Klick raeumen alles.
    Die Chips gehen auch in den Ansicht-Link (siehe ansichtLink) -- so laesst
    sich z.B. eine Handvoll Titel fuer einen Blog-Artikel verlinken. */
 var SUCH_CHIPS = [];
 var SUCH_CHIPS_MAX = 10;
-/* Wie die Begriffe untereinander verknuepft sind: 'oder' (Standard, das
-   bisherige Verhalten) oder 'und'. Gilt fuer ALLE Begriffe gemeinsam --
-   einzeln setzbare Bindewoerter ergaeben Ausdruecke wie "A und B oder C",
-   deren Vorrang sich ohne Klammern nicht erklaeren laesst. Innerhalb eines
-   Begriffs bleibt es beim Oder ueber alle Felder (siehe
+/* Ein Bindewort je Luecke, einzeln umschaltbar: SUCH_VERKN[i] verbindet Chip i
+   mit dem, was davor steht -- bei i = 0 ist das der Text im Suchfeld, ohne den
+   bleibt der Eintrag ungenutzt. Immer indexgleich mit SUCH_CHIPS.
+   Ausgewertet wird streng von LINKS NACH RECHTS, ohne Vorrang von "und":
+   "A und B oder C" ist (A und B) oder C. Jede andere Regel muesste man mit
+   Klammern erklaeren, und dafuer ist die Chipleiste der falsche Ort.
+   Innerhalb EINES Begriffs bleibt es beim Oder ueber alle Felder (siehe
    poolItemMatchesQuery): "Drama" trifft weiterhin Genre ODER Titel. */
-var SUCH_MODUS = 'oder';
-function suchModusWort(){ return SUCH_MODUS === 'und' ? TXT.suchUnd : TXT.suchOder; }
+var SUCH_VERKN = [];
+function verknAt(i){ return SUCH_VERKN[i] === 'und' ? 'und' : 'oder'; }
+function verknWort(v){ return v === 'und' ? TXT.suchUnd : TXT.suchOder; }
+/* Die Bindewoerter passend zu aktiveSuchbegriffe(): immer eines weniger als
+   Begriffe. Ohne Text im Suchfeld faellt das vor Chip 0 weg, es verbaende
+   nichts. */
+function aktiveVerknuepfungen(){
+  var feld = searchEl.value.trim().length > 0;
+  var v = [];
+  for (var i = feld ? 0 : 1; i < SUCH_CHIPS.length; i++) v.push(verknAt(i));
+  return v;
+}
+// Der Feldtext zuerst -- er steht in der Oberflaeche ueber den Chips, und seit
+// es einzelne Bindewoerter gibt, entscheidet die Reihenfolge ueber das
+// Ergebnis.
 function aktiveSuchbegriffe(){
   var alle = SUCH_CHIPS.map(function(c){ return c.toLowerCase(); });
   var v = searchEl.value.trim().toLowerCase();
-  if (v) alle.push(v);
+  if (v) alle.unshift(v);
+  // Die Bindewoerter reisen am Array mit: poolItemMatchesQuery laeuft ueber
+  // zehntausende Eintraege, da soll die Liste nicht je Eintrag neu entstehen.
+  alle.verkn = aktiveVerknuepfungen();
   return alle;
 }
-// Fuer Leertexte: alle aktiven Suchen als lesbare Aufzaehlung. Der Feldtext
-// zuerst -- in der Oberflaeche steht er ueber den Chips, der Satz soll sich
-// genauso lesen.
+// Fuer Leertexte: alle aktiven Suchen als lesbarer Satz, genau wie in der Leiste.
 function sucheAnzeige(){
   var alle = SUCH_CHIPS.slice();
   var v = searchEl.value.trim();
   if (v) alle.unshift(v);
-  return alle.join(' ' + suchModusWort() + ' ');
+  var verkn = aktiveVerknuepfungen();
+  return alle.reduce(function(satz, t, i){
+    return i ? satz + ' ' + verknWort(verkn[i - 1]) + ' ' + t : t;
+  }, '');
 }
 function suchChipsZeichnen(){
   var el = document.getElementById('suchChips');
   if (!el) return;
   el.style.display = SUCH_CHIPS.length ? 'flex' : 'none';
-  // Das Bindewort steht zwischen je zwei Begriffen -- und einmal VORNE, wenn
+  // Zwischen je zwei Begriffen ein eigener Schalter -- und einer VORNE, wenn
   // im Suchfeld gerade Text steht: der zaehlt als eigener Begriff und sitzt
-  // ueber den Chips. Bei nur einem Begriff ist die Verknuepfung bedeutungslos
-  // und bleibt deshalb unsichtbar.
+  // ueber den Chips. Bei nur einem Begriff verbindet nichts etwas, dann bleibt
+  // die Leiste ohne Bindewort.
   var feldText = searchEl.value.trim().length > 0;
-  var bindewort = '<button type="button" class="such-bindewort" title="' +
-    escAttr(TXT.suchModusUmschalten) + '" aria-label="' + escAttr(TXT.suchModusUmschalten) +
-    '">' + esc(suchModusWort()) + '</button>';
   var teile = [];
   SUCH_CHIPS.forEach(function(c, i){
-    if (i > 0 || feldText) teile.push(bindewort);
-    teile.push('<span class="chip">' + esc(c) +
-      '<button type="button" data-i="' + i + '" aria-label="' + escAttr(TXT.sucheEntfernen) + '">×</button></span>');
+    var wort = '';
+    if (i > 0 || feldText) {
+      var w = verknWort(verknAt(i));
+      wort = '<button type="button" class="such-bindewort" data-v="' + i + '" title="' +
+        escAttr(TXT.suchModusUmschalten) + '" aria-label="' + escAttr(w + ': ' + TXT.suchModusUmschalten) +
+        '">' + esc(w) + '</button>';
+    }
+    var chip = '<span class="chip">' + esc(c) +
+      '<button type="button" data-i="' + i + '" aria-label="' + escAttr(TXT.sucheEntfernen) + '">×</button></span>';
+    // Bindewort und der Chip dahinter brechen gemeinsam um -- sonst stuende auf
+    // dem Handy ein einzelnes "oder" am Zeilenende und verlaese sich als Rest.
+    teile.push(wort ? '<span class="such-paar">' + wort + chip + '</span>' : chip);
   });
   el.innerHTML = teile.join('');
   el.querySelectorAll('.chip button').forEach(function(b){
     b.onclick = function(){
-      SUCH_CHIPS.splice(Number(b.dataset.i), 1);
+      var i = Number(b.dataset.i);
+      // Das Bindewort gehoert zum Chip und geht mit ihm: Faellt der mittlere
+      // von dreien weg, verbindet das Wort des Rechten die uebrigen zwei.
+      SUCH_CHIPS.splice(i, 1);
+      SUCH_VERKN.splice(i, 1);
       suchChipsZeichnen();
       titelLimit = TITEL_PRO_SEITE;
       renderCurrentTab();
@@ -7774,7 +7804,8 @@ function suchChipsZeichnen(){
   });
   el.querySelectorAll('.such-bindewort').forEach(function(b){
     b.onclick = function(){
-      SUCH_MODUS = SUCH_MODUS === 'und' ? 'oder' : 'und';
+      var i = Number(b.dataset.v);
+      SUCH_VERKN[i] = verknAt(i) === 'und' ? 'oder' : 'und';
       suchChipsZeichnen();
       titelLimit = TITEL_PRO_SEITE;
       renderCurrentTab();
@@ -7791,10 +7822,18 @@ function suchChipsBindewortPruefen(){
   _suchFeldHatteText = jetzt;
   if (SUCH_CHIPS.length) suchChipsZeichnen();
 }
+/* Chips und Bindewoerter muessen indexgleich bleiben -- deshalb laeuft jeder
+   Zugang ueber diese eine Stelle. Neue Suchen haengen mit "oder" an, dem
+   bisherigen Verhalten. */
+function suchChipAnhaengen(text){
+  if (SUCH_CHIPS.indexOf(text) !== -1) return;
+  SUCH_CHIPS.push(text);
+  SUCH_VERKN.push('oder');
+}
 function suchChipHinzufuegen(){
   var v = searchEl.value.trim();
   if (!v || SUCH_CHIPS.length >= SUCH_CHIPS_MAX) return;
-  if (SUCH_CHIPS.indexOf(v) === -1) SUCH_CHIPS.push(v);
+  suchChipAnhaengen(v);
   // Das Leeren laeuft ueber dasselbe input-Ereignis wie das X -- so bleiben
   // Suchzustand, Knopfleiste und verzoegerter Render an einer Stelle.
   searchEl.value = '';
@@ -7803,9 +7842,9 @@ function suchChipHinzufuegen(){
   searchEl.focus();
 }
 function suchChipsLeeren(){
-  // Der Modus geht mit: Wer die Suche raeumt, soll beim naechsten Mal nicht
-  // ueber eine leere Liste stolpern, weil vor Tagen mal UND eingestellt war.
-  SUCH_MODUS = 'oder';
+  // Die Bindewoerter gehen mit: Wer die Suche raeumt, soll beim naechsten Mal
+  // nicht ueber eine leere Liste stolpern, weil vor Tagen mal UND stand.
+  SUCH_VERKN = [];
   if (!SUCH_CHIPS.length) return;
   SUCH_CHIPS = [];
   suchChipsZeichnen();
@@ -8447,7 +8486,7 @@ var _suppressSuggestOnFocus = false;
 function chooseSearchSuggestion(text){
   clearTimeout(_searchSuggestTimer);
   if (SUCH_CHIPS.length < SUCH_CHIPS_MAX) {
-    if (SUCH_CHIPS.indexOf(text) === -1) SUCH_CHIPS.push(text);
+    suchChipAnhaengen(text);
     suchChipsZeichnen();
     searchEl.value = '';
   } else {
@@ -11360,11 +11399,13 @@ function ansichtLink(){
   // Handvoll per Chips gesammelter Titel als EIN Link weitergeben.
   var q = SUCH_CHIPS.slice();
   var v = searchEl.value.trim();
-  if (v) q.push(v);
+  if (v) q.unshift(v);
   if (q.length) p.set('suche', q.join('|'));
-  // Nur wenn er ueberhaupt etwas aendert: bei einem einzigen Begriff sind UND
-  // und ODER dasselbe, und alte Links ohne den Parameter bleiben ODER.
-  if (q.length > 1 && SUCH_MODUS === 'und') p.set('verknuepfung', 'und');
+  // Die Bindewoerter in derselben Reihenfolge, nur wenn sie etwas aendern: ein
+  // einzelner Begriff kennt keine Verknuepfung, und Links ohne den Parameter
+  // bleiben durchgehend ODER.
+  var vs = aktiveVerknuepfungen();
+  if (vs.indexOf('und') !== -1) p.set('verknuepfung', vs.join('.'));
   return location.origin + '/?' + p.toString();
 }
 // Beim Laden: einen geteilten Ansicht-Link anwenden. Liefert true, wenn einer
@@ -11379,8 +11420,6 @@ function ansichtAusLink(){
   // sucheZustandAnwenden ("Suchen heisst ueberall suchen") und schaltet alle
   // Bereiche an -- die ausdruecklich im Link stehenden Filter sollen das
   // Letzte Wort haben, sonst zeigte der Link mehr als der Absender meinte.
-  // Vor dem Zeichnen der Chips setzen -- sie tragen das Bindewort.
-  SUCH_MODUS = p.get('verknuepfung') === 'und' ? 'und' : 'oder';
   var q = p.get('suche');
   if (q) {
     var begriffe = q.split('|').map(function(t){ return t.trim(); }).filter(Boolean).slice(0, SUCH_CHIPS_MAX);
@@ -11388,6 +11427,13 @@ function ansichtAusLink(){
       // Mehrere Suchen kommen als Chips an -- so sieht man sofort, WAS der
       // Link kombiniert, und kann einzelne davon entfernen.
       SUCH_CHIPS = begriffe;
+      // Ein Bindewort je Luecke, eines weniger als Begriffe. Ein einzelnes Wort
+      // gilt fuer alle Luecken -- so lesen sich auch Links aus der Zeit, als es
+      // nur einen gemeinsamen Schalter gab. Index 0 bleibt hier ungenutzt: im
+      // Suchfeld steht nichts, alles ist Chip.
+      var vs = (p.get('verknuepfung') || '').split('.').filter(Boolean);
+      if (vs.length === 1) { while (vs.length < begriffe.length - 1) vs.push(vs[0]); }
+      SUCH_VERKN = begriffe.map(function(_, i){ return i > 0 && vs[i - 1] === 'und' ? 'und' : 'oder'; });
       suchChipsZeichnen();
     } else if (begriffe.length === 1) {
       searchEl.value = begriffe[0];
@@ -13266,14 +13312,20 @@ function poolItemLi(item, score, opts){
 // Genres duerfen weiterhin per Teilstring matchen.
 function poolItemMatchesQuery(item, q){
   if (!q || !q.length) return true;
-  // Mehrere Suchen (Chips): je nach SUCH_MODUS genuegt ein Treffer bei
-  // IRGENDEINER (ODER) oder es muessen ALLE passen (UND). Die eine Stelle fuer
-  // die ganze App -- Titelliste, Kino-Seite und beide Trefferzaehler-Hinweise
-  // fragen ausnahmslos hier.
+  // Mehrere Suchen (Chips): mit ihren Bindewoertern (q.verkn) von LINKS NACH
+  // RECHTS zusammengefasst, ohne Vorrang -- "A und B oder C" ist (A und B)
+  // oder C, so wie es in der Leiste steht. Die eine Stelle fuer die ganze App:
+  // Titelliste, Kino-Seite und beide Trefferzaehler-Hinweise fragen hier.
   if (Array.isArray(q)) {
-    return SUCH_MODUS === 'und'
-      ? q.every(function(einzel){ return poolItemMatchesQuery(item, einzel); })
-      : q.some(function(einzel){ return poolItemMatchesQuery(item, einzel); });
+    var verkn = q.verkn || [];
+    var treffer = poolItemMatchesQuery(item, q[0]);
+    for (var i = 1; i < q.length; i++) {
+      // Steht das Ergebnis schon fest (wahr ODER … / falsch UND …), bleibt der
+      // Begriff ungeprueft -- das spart ueber zehntausende Eintraege spuerbar.
+      if (verkn[i - 1] === 'und' ? !treffer : treffer) continue;
+      treffer = poolItemMatchesQuery(item, q[i]);
+    }
+    return treffer;
   }
   // item.alias: die Namen ausgeblendeter Dubletten (siehe aliasAufnehmen) --
   // damit "Baby Reindeer" auch dann trifft, wenn der Titel "Rentierbaby" heisst.
