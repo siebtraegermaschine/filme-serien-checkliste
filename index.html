@@ -333,15 +333,15 @@
     cursor: default;
   }
   .details::after { content: ''; display: table; clear: both; }
-  /* Anheften: eigene Zeile direkt unter dem Taste-Score, noch oberhalb der
-     gestrichelten Linie von .details -- daher ausserhalb von .details und nur
-     ueber dieselbe show-details-Klasse ein-/ausgeblendet (siehe die beiden
-     Regeln direkt unten sowie li.disc.show-details .pin-row weiter unten). */
-  .pin-row { display: none; justify-content: flex-end; margin: 4px 0 0; }
-  li.item.show-details .pin-row { display: flex; }
+  /* Anheften: sitzt in derselben Zeile wie Sternebewertung/Genre/Jahr
+     (.meta bzw. .dmeta) und wird per margin-left:auto an deren rechtes Ende
+     geschoben -- daher als Flex-Kind dort eingehaengt, nicht als eigene
+     Zeile. Sichtbar nur bei ausgeklappten Details (show-details). */
+  .pin-row { display: none; margin-left: auto; align-items: center; }
+  li.item.show-details .pin-row { display: inline-flex; }
   .pin-btn {
     border: 1px solid var(--border); background: transparent; color: var(--text-dim);
-    border-radius: 8px; padding: 5px 9px; font-size: 15px; line-height: 1; cursor: pointer;
+    border-radius: 6px; padding: 1px 5px; font-size: 12px; line-height: 1.6; cursor: pointer;
     transition: all .15s;
   }
   .pin-btn.on { border-color: var(--done); background: rgba(76,195,138,.15); color: var(--done); }
@@ -738,7 +738,7 @@
   @media (max-width: 640px) { li.disc.stream-item img.dposter { width:60px; height:90px; } }
   li.disc.stream-item .dtitle { font-size:15px; line-height:1.35; }
   li.disc.stream-item .dmeta { font-size:12px; }
-  li.disc .dmeta { color:var(--text-dim); font-size:13px; margin-top:2px; }
+  li.disc .dmeta { color:var(--text-dim); font-size:13px; margin-top:2px; display:flex; flex-wrap:wrap; align-items:center; column-gap:6px; }
   .score { display:inline-block; margin-left:8px; padding:1px 8px; border-radius:20px; font-size:12px;
     font-weight:700; background:var(--accent-soft); color:var(--accent); vertical-align:middle; }
   .score.hi { background:rgba(76,195,138,.18); color:var(--done); }
@@ -1333,7 +1333,7 @@
   li.item .title .ttext { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
   li.item .title .score { flex: none; margin-left: auto; }
   /* Zweite Zeile: TMDB-Wert, Genre, Jahr; Originaltitel/Rest bei Platzmangel in eigene Zeile darunter */
-  li.item .meta { display: flex; flex-wrap: wrap; column-gap: 6px; row-gap: 2px; }
+  li.item .meta { display: flex; flex-wrap: wrap; align-items: center; column-gap: 6px; row-gap: 2px; }
   li.item .meta .meta-main { white-space: nowrap; }
   li.item .meta .meta-extra { min-width: 0; }
   /* Groessere Cover in der Haupt-Liste (Alle/Offen/Gesehen) als in Discovery & Watchlist */
@@ -5607,9 +5607,9 @@ function pinBtnHtml(id, category) {
   if (!category) return '';
   var mine = id != null && getPinnedCategory(id) === category;
   var belegt = !mine && pinnedTitleId(category) != null;
-  return '<div class="pin-row"><button type="button" aria-label="' + TXT.anheften + '" title="' + TXT.anheften +
+  return '<span class="pin-row"><button type="button" aria-label="' + TXT.anheften + '" title="' + TXT.anheften +
     '" class="pin-btn' + (mine ? ' on' : '') + '"' + (belegt ? ' disabled' : '') +
-    ' data-pin-category="' + category + '">📌</button></div>';
+    ' data-pin-category="' + category + '">📌</button></span>';
 }
 // Verdrahtet den Pin-Knopf einer Zeile. `getId` liefert (ggf. async ueber
 // ensurePoolItem) die title_id -- derselbe Aufbau wie beim Watchlist-/Gesehen-
@@ -7151,8 +7151,7 @@ function eigeneZeileLi(tab, i, profile) {
   li.innerHTML =
     posterThumb +
     '<span class="info"><div class="title">' + '<span class="ttext">' + item[0] + '</span>' + scoreBadge + '</div>' +
-    pinBtnHtml(d.id, pinCategory) +
-    '<div class="meta">' + metaHtml(item[1], tab, kinoStartMetaHtml(d.tmdbId, d.type)) + '</div>' +
+    '<div class="meta">' + metaHtml(item[1], tab, kinoStartMetaHtml(d.tmdbId, d.type)) + pinBtnHtml(d.id, pinCategory) + '</div>' +
     providerChipsHtml(d.providers) + detailsHtml +
     watchRowHtml(d.tmdbId, d.type, item[0], d.id) + actionsHtml + '</span>';
   wireRow(li, tab, i);
@@ -13227,7 +13226,7 @@ document.head.insertAdjacentHTML('beforeend',
   '<style>'+
   'li.disc.show-details .details{display:block;}'+
   'li.disc.show-details .watch-row{display:block;}'+
-  'li.disc.show-details .pin-row{display:flex;}'+
+  'li.disc.show-details .pin-row{display:inline-flex;}'+
   // Kleines Vorschaubild beim Aufklappen ausblenden (genau wie
   // li.item.show-details .dposter unter Filme/Serien) -- sonst bleibt .dinfo
   // um die Posterbreite schmaler und die drei Buttons darunter brechen um.
@@ -13305,15 +13304,14 @@ function poolItemLi(item, score, opts){
     '<div class="dinfo">' +
       '<div class="dtitle">'+esc(item.t)+
         '<span class="score'+(score>=60?' hi':'')+'" title="Taste Score" data-ts role="button" tabindex="0" aria-label="' + TXT.tasteScoreAria + '">'+score+'</span></div>'+
-      pinBtnHtml(item.realId, pinCategory) +
       // Auf der Kino-Seite steht der Start schon in der Metazeile selbst (siehe
       // kinoMeta) -- der Zusatz waere dort eine Wiederholung.
       (function(){
         if (opts && opts.kinoDatum !== undefined) {
-          return '<div class="dmeta">' + esc(kinoMeta(item, opts.kinoDatum, typeLabel)) + '</div>';
+          return '<div class="dmeta">' + esc(kinoMeta(item, opts.kinoDatum, typeLabel)) + pinBtnHtml(item.realId, pinCategory) + '</div>';
         }
         return '<div class="dmeta">' + esc(candMeta(item) + ' · ' + typeLabel) +
-               kinoStartMetaHtml(item.tmdbId, item.type) + '</div>';
+               kinoStartMetaHtml(item.tmdbId, item.type) + pinBtnHtml(item.realId, pinCategory) + '</div>';
       })() +
       // Beim Durchsehen einer fremden Liste: deren Sterne-Bewertung, sofern
       // vorhanden. Das ist der eigentliche Mehrwert gegenueber der blossen
