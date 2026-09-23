@@ -333,6 +333,16 @@
     cursor: default;
   }
   .details::after { content: ''; display: table; clear: both; }
+  /* Anheften: erste Zeile in .details, rechtsbuendig -- keine absolute
+     Position noetig, .details beginnt ohnehin erst unterhalb des Taste-Score. */
+  .pin-row { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+  .pin-btn {
+    border: 1px solid var(--border); background: transparent; color: var(--text-dim);
+    border-radius: 8px; padding: 5px 9px; font-size: 15px; line-height: 1; cursor: pointer;
+    transition: all .15s;
+  }
+  .pin-btn.on { border-color: var(--done); background: rgba(76,195,138,.15); color: var(--done); }
+  .pin-btn:disabled { opacity: .35; cursor: not-allowed; }
   .details .poster {
     float: left;
     width: 92px;
@@ -2167,7 +2177,7 @@ function mitSpracheRegion(pfad){
 var UI_TEXTE = {
   de: {
     film: 'Film', serie: 'Serie', miniSerie: 'Mini-Serie',
-    watchliste: 'Watchlist', gesehenKlein: 'gesehen', gesehenGross: 'Gesehen',
+    watchliste: 'Watchlist', anheften: 'Anheften', gesehenKlein: 'gesehen', gesehenGross: 'Gesehen',
     aehnlicheTitel: 'Ähnliche Titel',
     aehnlicheTitelZu: function(t){ return 'Ähnliche Titel zu „' + t + '“'; },
     keineAehnlichen: 'Keine ähnlichen Titel für diese Filterkombination.',
@@ -2484,7 +2494,7 @@ var UI_TEXTE = {
   },
   en: {
     film: 'Movie', serie: 'Series', miniSerie: 'Mini-series',
-    watchliste: 'Watchlist', gesehenKlein: 'watched', gesehenGross: 'Watched',
+    watchliste: 'Watchlist', anheften: 'Pin', gesehenKlein: 'watched', gesehenGross: 'Watched',
     aehnlicheTitel: 'Similar titles',
     aehnlicheTitelZu: function(t){ return 'Titles similar to “' + t + '”'; },
     keineAehnlichen: 'No similar titles for this filter combination.',
@@ -2797,7 +2807,7 @@ var UI_TEXTE = {
   },
   fr: {
     film: 'Film', serie: 'Série', miniSerie: 'Mini-série',
-    watchliste: 'Watchlist', gesehenKlein: 'vu', gesehenGross: 'Vus',
+    watchliste: 'Watchlist', anheften: 'Épingler', gesehenKlein: 'vu', gesehenGross: 'Vus',
     aehnlicheTitel: 'Titres similaires',
     aehnlicheTitelZu: function(t){ return 'Titres similaires à « ' + t + ' »'; },
     keineAehnlichen: 'Aucun titre similaire pour cette combinaison de filtres.',
@@ -3110,7 +3120,7 @@ var UI_TEXTE = {
   },
   es: {
     film: 'Película', serie: 'Serie', miniSerie: 'Miniserie',
-    watchliste: 'Watchlist', gesehenKlein: 'visto', gesehenGross: 'Vistos',
+    watchliste: 'Watchlist', anheften: 'Fijar', gesehenKlein: 'visto', gesehenGross: 'Vistos',
     aehnlicheTitel: 'Títulos similares',
     aehnlicheTitelZu: function(t){ return 'Títulos similares a «' + t + '»'; },
     keineAehnlichen: 'No hay títulos similares para esta combinación de filtros.',
@@ -3423,7 +3433,7 @@ var UI_TEXTE = {
   },
   it: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
-    watchliste: 'Watchlist', gesehenKlein: 'visto', gesehenGross: 'Visti',
+    watchliste: 'Watchlist', anheften: 'Fissa', gesehenKlein: 'visto', gesehenGross: 'Visti',
     aehnlicheTitel: 'Titoli simili',
     aehnlicheTitelZu: function(t){ return 'Titoli simili a “' + t + '”'; },
     keineAehnlichen: 'Nessun titolo simile per questa combinazione di filtri.',
@@ -3736,7 +3746,7 @@ var UI_TEXTE = {
   },
   nl: {
     film: 'Film', serie: 'Serie', miniSerie: 'Miniserie',
-    watchliste: 'Watchlist', gesehenKlein: 'gezien', gesehenGross: 'Gezien',
+    watchliste: 'Watchlist', anheften: 'Vastzetten', gesehenKlein: 'gezien', gesehenGross: 'Gezien',
     aehnlicheTitel: 'Vergelijkbare titels',
     aehnlicheTitelZu: function(t){ return 'Titels vergelijkbaar met “' + t + '”'; },
     keineAehnlichen: 'Geen vergelijkbare titels voor deze filtercombinatie.',
@@ -4049,7 +4059,7 @@ var UI_TEXTE = {
   },
   pt: {
     film: 'Filme', serie: 'Série', miniSerie: 'Minissérie',
-    watchliste: 'Watchlist', gesehenKlein: 'assistido', gesehenGross: 'Assistidos',
+    watchliste: 'Watchlist', anheften: 'Fixar', gesehenKlein: 'assistido', gesehenGross: 'Assistidos',
     aehnlicheTitel: 'Títulos semelhantes',
     aehnlicheTitelZu: function(t){ return 'Títulos semelhantes a “' + t + '”'; },
     keineAehnlichen: 'Nenhum título semelhante para essa combinação de filtros.',
@@ -5558,13 +5568,75 @@ seitePing('/', document.referrer);
   } catch (e) {}
 })();
 
-function progressFor(id) { return (id != null && PROGRESS.get(id)) || { seen: false, watchlist: false, viaStream: false, rating: null }; }
+function progressFor(id) { return (id != null && PROGRESS.get(id)) || { seen: false, watchlist: false, viaStream: false, rating: null, pinnedCategory: null }; }
 
 
 
 function getSeen(id) { return !!progressFor(id).seen; }
 function getWatchlistFlag(id) { return !!progressFor(id).watchlist; }
 function getRating(id) { return progressFor(id).rating || null; }
+function getPinnedCategory(id) { return progressFor(id).pinnedCategory || null; }
+// Welcher Titel haelt gerade den Pin-Platz dieser Kategorie (movie/series/
+// cinema)? Es gibt je Kategorie hoechstens einen (server-seitig per
+// Unique-Index erzwungen, siehe backend/routes/progress.js).
+function pinnedTitleId(category) {
+  for (const [id, p] of PROGRESS) { if (p.pinnedCategory === category) return id; }
+  return null;
+}
+// Zieht die angehefteten Eintraege (falls vorhanden) aus `eintraege` heraus,
+// damit sie unabhaengig von jeder Sortierung an den Anfang gestellt werden
+// koennen. Reihenfolge der `categories` bestimmt die Reihenfolge oben.
+function extrahierePins(eintraege, categories) {
+  var pins = [];
+  categories.forEach(function(cat) {
+    var id = pinnedTitleId(cat);
+    if (id == null) return;
+    var idx = eintraege.findIndex(function(e) { return e.pool && e.pool.realId === id; });
+    if (idx !== -1) pins.push(eintraege.splice(idx, 1)[0]);
+  });
+  return pins;
+}
+// Gemeinsames Pin-Knopf-Markup fuer eigeneZeileLi/poolItemLi. `category` ist
+// null, wenn der Aufrufkontext keinen Pin anbietet (z.B. "Aehnliche Titel"-
+// Popup oder eine geteilte Momentaufnahme -- siehe suppressPin in den
+// jeweiligen opts).
+function pinBtnHtml(id, category) {
+  if (!category) return '';
+  var mine = id != null && getPinnedCategory(id) === category;
+  var belegt = !mine && pinnedTitleId(category) != null;
+  return '<div class="pin-row"><button type="button" aria-label="' + TXT.anheften + '" title="' + TXT.anheften +
+    '" class="pin-btn' + (mine ? ' on' : '') + '"' + (belegt ? ' disabled' : '') +
+    ' data-pin-category="' + category + '">📌</button></div>';
+}
+// Verdrahtet den Pin-Knopf einer Zeile. `getId` liefert (ggf. async ueber
+// ensurePoolItem) die title_id -- derselbe Aufbau wie beim Watchlist-/Gesehen-
+// Knopf, damit auch ein Titel gepinnt werden kann, der noch keine eigene
+// Katalog-Zeile hat (z.B. ein frischer Kino-Titel).
+function wirePinBtn(li, category, getId) {
+  if (!category) return;
+  var btn = li.querySelector('.pin-btn');
+  if (!btn) return;
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (btn.disabled) return;
+    requireLogin(async () => {
+      btn.disabled = true;
+      try {
+        var id = await getId();
+        var mine = getPinnedCategory(id) === category;
+        try {
+          await updateProgressRemote(id, { pinnedCategory: mine ? null : category });
+        } catch (err) {
+          alert(TXT.speichernFehlerNochmal);
+        }
+        rebuild();
+        renderCurrentTab();
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+}
 function idFor(src, title) {
   const idx = state[src].data.findIndex(it => it[0] === title);
   return idx >= 0 ? state[src].det[idx].id : null;
@@ -5809,7 +5881,7 @@ async function fillPlots(){
     // Schlagworte stehen ja weiterhin darunter.
   } finally { _plotInFlight = null; }
 }
-function candDetailsHtml(c, kind){
+function candDetailsHtml(c, kind, pinCategory){
   // Bei Serien steht im Feld die Idee/Entwicklung (TMDB created_by), keine Regie.
   var dirLabel = kind === 'series' ? TXT.idee : TXT.regie;
   var tagsHtml = detailChipsHtml(c.g, c.kw);
@@ -5828,10 +5900,11 @@ function candDetailsHtml(c, kind){
   // unter Filme/Serien nebeneinander passen -- ohne dieses Poster hier waere
   // die aufgeklappte Zeile dann ganz ohne Bild.
   var posterHtml = detPosterHtml(c.poster64 || (c.p ? (POSTER + c.p) : null));
-  if (!plotHtml && !tagsHtml && !rows && !posterHtml) return '';
+  var pinHtml = pinBtnHtml(c.realId, pinCategory);
+  if (!plotHtml && !tagsHtml && !rows && !posterHtml && !pinHtml) return '';
   // tagsHtml bringt seine Reihen-Container selbst mit (Genres und Schlagwoerter
   // sind zwei getrennte Reihen, siehe detailChipsHtml).
-  return '<div class="details">' + posterHtml + plotHtml + tagsHtml + rows + '</div>';
+  return '<div class="details">' + pinHtml + posterHtml + plotHtml + tagsHtml + rows + '</div>';
 }
 // Der Streaming-Abgleich fuehrt seine Anbieter unter Slugs ('netflix',
 // 'amazon', ... -- daran haengen auch die SEO-Seiten), die Anbieterauswahl
@@ -7062,8 +7135,9 @@ function eigeneZeileLi(tab, i, profile) {
         '<button type="button" aria-label="' + TXT.gesehenKlein + '" class="seen-btn' + (_seen ? ' on' : '') + '">' + '<span class="seen-glyph">✓</span> <span class="btn-wort">' + TXT.gesehenKlein + '</span>' + '</button>' +
       '</div>' +
     '</div>';
+  const pinCategory = tab === 'serien' ? 'series' : 'movie';
   const detailsHtml =
-    '<div class="details">' + detPoster +
+    '<div class="details">' + pinBtnHtml(d.id, pinCategory) + detPoster +
       plotDivHtml(s.pool[i]) + matchNoteHtml(d.id) +
       tagsHtml +
       creditRows +
@@ -7079,6 +7153,7 @@ function eigeneZeileLi(tab, i, profile) {
     providerChipsHtml(d.providers) + detailsHtml +
     watchRowHtml(d.tmdbId, d.type, item[0], d.id) + actionsHtml + '</span>';
   wireRow(li, tab, i);
+  wirePinBtn(li, pinCategory, async () => s.det[i].id);
   attachSwipeToRemove(li, async function(){
     // Bei Abbruch neu rendern: Die Zeile ist zu diesem Zeitpunkt schon
     // hinausgeflogen und kommt nur durch einen Neuaufbau zurueck.
@@ -7375,10 +7450,19 @@ function render() {
   const q = (discoverFilterOn || sucheAktiv()) ? aktiveSuchbegriffe() : '';
   const eintraege = sammleEintraege(q);
   if (!eintraege.length) { renderLeerzustand(q); kinoHinweisAnhaengen(q); return; }
+  // Angeheftete Titel zuerst herausziehen -- vor dem Top-K-Sort, damit sie ihn
+  // nicht verfaelschen, und unabhaengig von der Sortierung immer ganz oben
+  // stehen (siehe extrahierePins/pinBtnHtml). Faellt ein angehefteter Titel
+  // schon durch einen Filter/die Suche aus eintraege heraus, bleibt er wie
+  // jeder andere gefilterte Titel unsichtbar -- das Anheften wirkt nur auf die
+  // Reihenfolge, nicht auf Filter.
+  const pinKategorien = aktiveTypen().map(function(t){ return t === 'serien' ? 'series' : 'movie'; });
+  const pins = extrahierePins(eintraege, pinKategorien);
   // Gekuerzt wird in JEDER Liste, auch in Watchlist und Gesehen (siehe
   // TITEL_PRO_SEITE): Erst die besten 25 heraussuchen, den Rest holt
   // "Mehr laden" nach.
-  const sichtbar = besteNachSortwert(eintraege, effectiveSort(), profile, titelLimit);
+  const sichtbar = pins.concat(
+    besteNachSortwert(eintraege, effectiveSort(), profile, Math.max(0, titelLimit - pins.length)));
   // Fuer Movie Night (siehe movieNightEinrichten): die Kandidaten einer
   // Runde sind die ersten Titel GENAU DIESER Ansicht -- Filter und
   // Sortierung der Person eingeschlossen. Die Vorauswahl-Leiste zeigt die
@@ -8899,7 +8983,7 @@ function renderSimilarList(){
   if (!scored.length){
     var p = document.createElement('div'); p.className = 'disc-hint'; p.textContent = TXT.keineAehnlichen; listEl.appendChild(p);
   } else {
-    scored.forEach(function(row){ listEl.appendChild(poolItemLi(row.item, row.score, { suppressSimilar: true })); });
+    scored.forEach(function(row){ listEl.appendChild(poolItemLi(row.item, row.score, { suppressSimilar: true, suppressPin: true })); });
     fillPlots();
   }
 }
@@ -9310,11 +9394,18 @@ async function renderCinemaPage(){
   // Fuer Movie Night: die sortierte Reihenfolge festhalten -- eine Runde von
   // der Kino-Seite nimmt die ersten Titel GENAU dieser Ansicht.
   MOVIE_NIGHT_KINO = entries;
+  // Angehefteter Kinotitel nach vorn, unabhaengig von der Sortierung -- gleiches
+  // Prinzip wie extrahierePins() unter Filme/Serien.
+  var pinnedKinoId = pinnedTitleId('cinema');
+  if (pinnedKinoId != null) {
+    var pinIdx = entries.findIndex(function(e){ return e.item.realId === pinnedKinoId; });
+    if (pinIdx > 0) { var pinnedEntry = entries.splice(pinIdx, 1)[0]; entries.unshift(pinnedEntry); }
+  }
   var visible = entries.slice(0, cinemaLimit);
   // Kino: Ansehen/Leihen/Kaufen entfallen, die Filme laufen ja erst an --
   // der Trailer ist hier das einzig Sinnvolle (siehe watchRowHtml).
   visible.forEach(function(e){
-    var opts = { nurTrailer: true, kinoDatum: e.row.rd || null };
+    var opts = { nurTrailer: true, kinoDatum: e.row.rd || null, pinCategory: 'cinema' };
     if (fremd) {
       var fe = fremd.get(e.item.realId);
       opts.fremdName = profilName(ANSICHT_PERSON);
@@ -11562,7 +11653,7 @@ function renderMoment(profile){
   bar.appendChild(x);
   list.appendChild(bar);
   var sichtbar = items.slice(0, titelLimit);
-  sichtbar.forEach(function(p){ list.appendChild(poolItemLi(p, punkteFuer(p, profile))); });
+  sichtbar.forEach(function(p){ list.appendChild(poolItemLi(p, punkteFuer(p, profile), { suppressPin: true })); });
   if (items.length > sichtbar.length) {
     var moreBtn = document.createElement('button');
     moreBtn.type = 'button';
@@ -12795,7 +12886,7 @@ async function loadUserProgressAndRefresh(){
       // Ebenso: der Abgleich greift schon beim ersten Aufbau der Listen.
       loadLinkedProfiles(),
     ]);
-    rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }));
+    rows.forEach((r) => PROGRESS.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating, pinnedCategory: r.pinnedCategory || null }));
     profilStandErhoehen();
     uebernehmeVersteckte(hidden);
     // Wer seinerzeit den Katalog-Eintrag markiert hat, dessen Markierung haengt
@@ -12986,7 +13077,7 @@ async function refreshOnResume(){
       loadLinkedProfiles(),
     ]);
     var neuerFortschritt = new Map();
-    rows.forEach(function(r){ neuerFortschritt.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating }); });
+    rows.forEach(function(r){ neuerFortschritt.set(r.titleId, { seen: r.seen, watchlist: r.watchlist, rating: r.rating, pinnedCategory: r.pinnedCategory || null }); });
     PROGRESS = neuerFortschritt;
     profilStandErhoehen();
     uebernehmeVersteckte(hidden);
@@ -13186,6 +13277,13 @@ function poolItemLi(item, score, opts){
   // innerhalb des "Ähnliche Titel"-Popups selbst (kein rekursiver Button dort,
   // siehe opts.suppressSimilar).
   var showSimilarBtn = !(opts && opts.suppressSimilar);
+  // Anheften: standardmaessig nach Film/Serie, auf der Kino-Seite ausdruecklich
+  // per opts.pinCategory ueberschrieben; renderMoment/das "Aehnliche Titel"-
+  // Popup setzen opts.suppressPin, weil dort Sortierung/Anheften ohnehin nicht
+  // gelten.
+  var pinCategory = (opts && opts.suppressPin) ? null
+    : (opts && opts.pinCategory) ? opts.pinCategory
+    : (item.type === 'series' ? 'series' : 'movie');
   var seenBtnHtml = '<button type="button" aria-label="'+TXT.gesehenKlein+'" class="seen-btn'+(seen?' on':'')+'">'+'<span class="seen-glyph">✓</span> <span class="btn-wort">'+TXT.gesehenKlein+'</span></button>';
   var wlBtnHtml = '<div class="det-left"><button type="button" aria-label="'+TXT.watchliste+'" class="wl-btn'+(watchlisted?' on':'')+'"><span class="wl-glyph">'+(watchlisted?'★':'☆')+'</span> <span class="btn-wort">'+TXT.watchliste+'</span></button></div>';
   // Ueberall dieselbe Reihenfolge: links Watchlist, rechts Gesehen -- genau wie
@@ -13221,7 +13319,7 @@ function poolItemLi(item, score, opts){
             : TXT.fremdUnbewertet(opts.fremdName)) + '</div>'
         : '') +
       providerChipsHtml(item.providers) +
-      candDetailsHtml(item, item.type) +
+      candDetailsHtml(item, item.type, pinCategory) +
       watchRowHtml(item.tmdbId, item.type, item.t, item.realId,
                    { nurTrailer: !!(opts && opts.nurTrailer) }) + actionsHtml + '</div>';
   var seenBtn = li.querySelector('.seen-btn');
@@ -13342,6 +13440,7 @@ function poolItemLi(item, score, opts){
     openSimilarModal(item);
     similarBtn.blur();
   });
+  wirePinBtn(li, pinCategory, async () => item.realId != null ? item.realId : await ensurePoolItem(item));
   li.addEventListener('click', function(e){
     if (e.target.closest('.det-actions')) return;
     li.classList.toggle('show-details');

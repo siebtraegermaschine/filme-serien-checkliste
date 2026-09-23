@@ -14,7 +14,7 @@ router.use(requireAuth);
 // gespeicherten Fortschritt abgleichen kann.
 router.get('/', async (req, res) => {
   const { rows } = await pool.query(
-    `SELECT up.title_id, up.seen, up.watchlist, up.via_stream, up.rating, t.tmdb_id, t.type
+    `SELECT up.title_id, up.seen, up.watchlist, up.via_stream, up.rating, up.pinned_category, t.tmdb_id, t.type
      FROM user_progress up JOIN titles t ON t.id = up.title_id
      WHERE up.user_id = $1`,
     [req.session.userId]
@@ -26,6 +26,7 @@ router.get('/', async (req, res) => {
       watchlist: r.watchlist,
       viaStream: r.via_stream,
       rating: r.rating,
+      pinnedCategory: r.pinned_category,
       tmdbId: r.tmdb_id,
       type: r.type,
     }))
@@ -46,24 +47,45 @@ router.put('/:titleId', async (req, res) => {
   if (rating != null && (!Number.isInteger(rating) || rating < 1 || rating > 10)) {
     return res.status(400).json({ error: 'invalid_rating' });
   }
+  // pinnedCategory braucht eine eigene "wurde mitgeschickt?"-Erkennung: anders
+  // als bei den booleschen Feldern ist hier NULL selbst der gewollte Wert
+  // ("loesen") -- COALESCE(neu, alt) wie bei den anderen Feldern wuerde ein
+  // Loesen also stillschweigend ignorieren.
+  const pinnedCategoryGesetzt = Object.prototype.hasOwnProperty.call(req.body || {}, 'pinnedCategory');
+  const pinnedCategory = pinnedCategoryGesetzt ? (req.body.pinnedCategory ?? null) : null;
+  if (pinnedCategoryGesetzt && pinnedCategory !== null && !['movie', 'series', 'cinema'].includes(pinnedCategory)) {
+    return res.status(400).json({ error: 'invalid_pinned_category' });
+  }
 
   const { rows: titleRows } = await pool.query(`SELECT id FROM titles WHERE id = $1`, [titleId]);
   if (!titleRows[0]) {
     return res.status(404).json({ error: 'title_not_found' });
   }
 
-  const { rows } = await pool.query(
-    `INSERT INTO user_progress (user_id, title_id, seen, watchlist, via_stream, rating)
-     VALUES ($1, $2, COALESCE($3, false), COALESCE($4, false), COALESCE($5, false), $6)
-     ON CONFLICT (user_id, title_id) DO UPDATE SET
-       seen = COALESCE($3, user_progress.seen),
-       watchlist = COALESCE($4, user_progress.watchlist),
-       via_stream = COALESCE($5, user_progress.via_stream),
-       rating = COALESCE($6, user_progress.rating),
-       updated_at = now()
-     RETURNING title_id, seen, watchlist, via_stream, rating`,
-    [req.session.userId, titleId, seen ?? null, watchlist ?? null, viaStream ?? null, rating ?? null]
-  );
+  let rows;
+  try {
+    ({ rows } = await pool.query(
+      `INSERT INTO user_progress (user_id, title_id, seen, watchlist, via_stream, rating, pinned_category)
+       VALUES ($1, $2, COALESCE($3, false), COALESCE($4, false), COALESCE($5, false), $6, CASE WHEN $8 THEN $7 ELSE NULL END)
+       ON CONFLICT (user_id, title_id) DO UPDATE SET
+         seen = COALESCE($3, user_progress.seen),
+         watchlist = COALESCE($4, user_progress.watchlist),
+         via_stream = COALESCE($5, user_progress.via_stream),
+         rating = COALESCE($6, user_progress.rating),
+         pinned_category = CASE WHEN $8 THEN $7 ELSE user_progress.pinned_category END,
+         updated_at = now()
+       RETURNING title_id, seen, watchlist, via_stream, rating, pinned_category`,
+      [req.session.userId, titleId, seen ?? null, watchlist ?? null, viaStream ?? null, rating ?? null, pinnedCategory, pinnedCategoryGesetzt]
+    ));
+  } catch (err) {
+    // Wettlauf zweier Geraete um dieselbe Pin-Kategorie -- das Frontend
+    // deaktiviert den Knopf zwar, sobald eine Kategorie belegt ist, aber das
+    // ist kein Ersatz fuer die harte Garantie durch den Unique-Index.
+    if (err.code === '23505' && err.constraint === 'user_progress_pinned_unique') {
+      return res.status(409).json({ error: 'pin_slot_taken' });
+    }
+    throw err;
+  }
 
   // Anonymer Trichter-Schritt "zehn Titel erreicht" -- ohne await, das
   // Zaehlen darf das Speichern nicht verzoegern (siehe lib/metrik.js).
@@ -85,7 +107,14 @@ router.put('/:titleId', async (req, res) => {
     });
   }
 
-  res.json({ titleId: rows[0].title_id, seen: rows[0].seen, watchlist: rows[0].watchlist, viaStream: rows[0].via_stream, rating: rows[0].rating });
+  res.json({
+    titleId: rows[0].title_id,
+    seen: rows[0].seen,
+    watchlist: rows[0].watchlist,
+    viaStream: rows[0].via_stream,
+    rating: rows[0].rating,
+    pinnedCategory: rows[0].pinned_category,
+  });
 });
 
 export default router;

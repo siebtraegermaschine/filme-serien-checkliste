@@ -224,6 +224,17 @@ ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS via_stream BOOLEAN NOT NULL D
 -- Watchlist-Eintraege oder Alt-Titel von vor dieser Funktion, die zaehlen
 -- weiterhin neutral (Gewicht 1).
 ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS rating SMALLINT CHECK (rating IS NULL OR rating BETWEEN 1 AND 10);
+-- Anheften ("Pin"): haelt einen Titel oben in seiner Liste fest, unabhaengig
+-- von der Sortierung. Getrennt nach Film/Serie/Kino, NULL = nicht angeheftet.
+-- Der Partial-Unique-Index ist die verlaessliche letzte Instanz fuer "hoechstens
+-- einer je Kategorie" -- das Frontend deaktiviert den Pin-Knopf zusaetzlich,
+-- sobald eine Kategorie belegt ist, aber ohne diesen Index koennte ein
+-- Wettlauf zwischen zwei Geraeten trotzdem zwei Titel derselben Kategorie
+-- anheften.
+ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS pinned_category TEXT
+  CHECK (pinned_category IS NULL OR pinned_category IN ('movie', 'series', 'cinema'));
+CREATE UNIQUE INDEX IF NOT EXISTS user_progress_pinned_unique
+  ON user_progress (user_id, pinned_category) WHERE pinned_category IS NOT NULL;
 -- Umstellung von 1-5 auf 1-10 Sterne: bestehende Bewertungen einmalig umrechnen
 -- (1->2, 2->4, 3->5, 4->8, 5->10) und die alte 1-5-Constraint durch die neue
 -- 1-10-Constraint ersetzen. Erkennt am Constraint-Text, ob die alte 1-5-Grenze
