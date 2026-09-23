@@ -7259,7 +7259,11 @@ function kinoTrefferZahl(q){
 // Termine statt Verfuegbarkeit und eine eigene Gliederung), weist diese Zeile
 // nur den Weg.
 function kinoHinweisAnhaengen(q){
-  if (!q || cinemaMode) return;
+  // q ist bei aktiver Suche ein Array (siehe aktiveSuchbegriffe), sonst ''.
+  // Ein leeres Array ist in JS truthy -- "!q" allein reichte nicht und liess
+  // den Hinweis faelschlich auch ohne jede Sucheingabe erscheinen (z.B. im
+  // Standardfilter "Neue entdecken" direkt nach dem ersten Aufruf).
+  if (!q || !q.length || cinemaMode) return;
   var n = kinoTrefferZahl(q);
   if (!n) return;
   var b = document.createElement('button');
