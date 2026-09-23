@@ -684,7 +684,10 @@
 
   .disc-sub { display:flex; gap:8px; justify-content:center; margin:4px 0 16px; }
   .disc-hint { text-align:center; color:var(--text-dim); font-size:13px; margin:0 auto 14px; max-width:620px; line-height:1.5; }
-  .load-more-btn { display:block; margin:18px auto 6px; padding:11px 26px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--text-dim); transition:all .15s; }
+  /* Gleiche Gruen-Toenung wie der angehakte "gesehen"-Knopf (.det-actions
+     .seen-btn.on) -- auf Wunsch farblich angeglichen, damit der Knopf am
+     Listenende nicht wie ein deaktiviertes Element wirkt. */
+  .load-more-btn { display:block; margin:18px auto 6px; padding:11px 26px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; border:1px solid var(--done); background:rgba(76,195,138,.15); color:var(--done); transition:all .15s; }
   /* Kopfzeile einer geteilten Momentaufnahme ("Diese Ansicht teilen"). */
   .moment-bar { display:flex; align-items:center; justify-content:space-between; gap:8px;
     margin:0 0 10px; padding:9px 12px; border:1px solid var(--border); border-radius:10px;
