@@ -12801,8 +12801,74 @@ async function loadUserProgressAndRefresh(){
   renderCurrentTab();
 }
 
+/* ---- Geraetelokaler Zwischenspeicher fuer Katalog + Streaming (IndexedDB) ----
+   Titel- und Streaming-Antwort sind zusammen ~5-6 MB gepackt / ~19 MB JSON und
+   aendern sich nur beim naechtlichen Import. Ohne diesen Cache laedt die App
+   sie bei JEDEM Aufruf -- auch beim Neuoeffnen desselben Geraets Minuten oder
+   Tage spaeter -- komplett neu uebers Netz, gemessen bis zu 5-8 s allein fuer
+   den Download (siehe STATUS.md). localStorage waere zu klein (Browser
+   deckeln meist bei ~5-10 MB); IndexedDB nicht.
+   Fallback bei fehlender/blockierter IndexedDB (privater Modus o.ae.): die
+   Funktionen liefern/tun dann einfach nichts, loadCatalogAndRefresh laedt wie
+   bisher komplett uebers Netz. */
+var KATALOG_DB_NAME = 'mt-katalog';
+var KATALOG_STORE = 'listen';
+function katalogDbOeffnen(){
+  return new Promise(function(resolve, reject){
+    if (!window.indexedDB) return reject(new Error('keine IndexedDB'));
+    var req = indexedDB.open(KATALOG_DB_NAME, 1);
+    req.onupgradeneeded = function(){
+      if (!req.result.objectStoreNames.contains(KATALOG_STORE)) req.result.createObjectStore(KATALOG_STORE);
+    };
+    req.onsuccess = function(){ resolve(req.result); };
+    req.onerror = function(){ reject(req.error); };
+  });
+}
+async function katalogCacheLesen(schluessel){
+  try {
+    var db = await katalogDbOeffnen();
+    return await new Promise(function(resolve, reject){
+      var tx = db.transaction(KATALOG_STORE, 'readonly');
+      var req = tx.objectStore(KATALOG_STORE).get(schluessel);
+      req.onsuccess = function(){ resolve(req.result || null); };
+      req.onerror = function(){ reject(req.error); };
+    });
+  } catch (e) { return null; }
+}
+async function katalogCacheSchreiben(schluessel, wert){
+  try {
+    var db = await katalogDbOeffnen();
+    await new Promise(function(resolve, reject){
+      var tx = db.transaction(KATALOG_STORE, 'readwrite');
+      tx.objectStore(KATALOG_STORE).put(wert, schluessel);
+      tx.oncomplete = resolve;
+      tx.onerror = function(){ reject(tx.error); };
+    });
+  } catch (e) { /* z.B. Speicher voll oder privater Modus -- Cache bleibt dann leer */ }
+}
+
 /* ---- Katalog von der API laden (ersetzt die frueher eingebetteten Arrays) ---- */
 async function loadCatalogAndRefresh(){
+  // Sprache/Region gehoeren in den Schluessel: der Server liefert je Kombination
+  // andere Titel/Uebersetzungen (siehe mitSpracheRegion).
+  var cacheSchluessel = 'katalog:' + INHALTS_SPRACHE + ':' + REGION_WAHL;
+  var ausCache = false;
+  try {
+    var cached = await katalogCacheLesen(cacheSchluessel);
+    if (cached && cached.combinedRows && cached.streamDoc) {
+      STREAM = cached.streamDoc;
+      genreAliasUebernehmen(cached.streamDoc.genreAlias);
+      buildPool(cached.combinedRows, cached.streamDoc);
+      KATALOG_DA = true;
+      ausCache = true;
+      // Sofort zeichnen -- der Stand vom letzten Besuch steht in aller Regel
+      // noch, ohne aufs Netz zu warten. Gesehen/Watchlist-Marken fehlen hier
+      // noch kurz, die kommen gleich mit loadUserProgressAndRefresh() unten nach.
+      rebuild();
+      renderCurrentTab();
+    }
+  } catch (e) { /* kein Cache -- unten wird ohnehin frisch geladen */ }
+
   try {
     const [combinedRows, streamDoc] = await Promise.all([
       apiRequest('GET', mitSpracheRegion('/api/titles?source=catalog,discovery,streaming')),
@@ -12813,6 +12879,7 @@ async function loadCatalogAndRefresh(){
     buildPool(combinedRows, streamDoc);
     LETZTER_KATALOG_LOAD = Date.now();
     KATALOG_DA = true;
+    katalogCacheSchreiben(cacheSchluessel, { combinedRows: combinedRows, streamDoc: streamDoc });
     // Im Hintergrund, damit die Suche unter Filme/Serien sagen kann, ob es zum
     // Begriff auch Kinotreffer gibt (siehe kinoHinweisAnhaengen). Bewusst ohne
     // await: Die Titelliste soll darauf nicht warten.
@@ -12822,8 +12889,14 @@ async function loadCatalogAndRefresh(){
     loadCinemaData().then(function(){ renderCurrentTab(); }).catch(function(){});
     await loadUserProgressAndRefresh();
   } catch (err) {
-    console.error('Katalog konnte nicht geladen werden:', err);
-    list.innerHTML = '<div class="disc-hint">' + TXT.katalogFehler + '</div>';
+    if (!ausCache) {
+      console.error('Katalog konnte nicht geladen werden:', err);
+      list.innerHTML = '<div class="disc-hint">' + TXT.katalogFehler + '</div>';
+    } else {
+      // Der Stand aus dem Cache steht schon und bleibt sichtbar -- nur der
+      // Versuch, ihn zu aktualisieren, ist gescheitert.
+      console.warn('Katalog-Aktualisierung fehlgeschlagen, Stand aus dem Cache bleibt sichtbar:', err);
+    }
   }
 }
 
