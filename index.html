@@ -333,9 +333,12 @@
     cursor: default;
   }
   .details::after { content: ''; display: table; clear: both; }
-  /* Anheften: erste Zeile in .details, rechtsbuendig -- keine absolute
-     Position noetig, .details beginnt ohnehin erst unterhalb des Taste-Score. */
-  .pin-row { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+  /* Anheften: eigene Zeile direkt unter dem Taste-Score, noch oberhalb der
+     gestrichelten Linie von .details -- daher ausserhalb von .details und nur
+     ueber dieselbe show-details-Klasse ein-/ausgeblendet (siehe die beiden
+     Regeln direkt unten sowie li.disc.show-details .pin-row weiter unten). */
+  .pin-row { display: none; justify-content: flex-end; margin: 4px 0 0; }
+  li.item.show-details .pin-row { display: flex; }
   .pin-btn {
     border: 1px solid var(--border); background: transparent; color: var(--text-dim);
     border-radius: 8px; padding: 5px 9px; font-size: 15px; line-height: 1; cursor: pointer;
@@ -5881,7 +5884,7 @@ async function fillPlots(){
     // Schlagworte stehen ja weiterhin darunter.
   } finally { _plotInFlight = null; }
 }
-function candDetailsHtml(c, kind, pinCategory){
+function candDetailsHtml(c, kind){
   // Bei Serien steht im Feld die Idee/Entwicklung (TMDB created_by), keine Regie.
   var dirLabel = kind === 'series' ? TXT.idee : TXT.regie;
   var tagsHtml = detailChipsHtml(c.g, c.kw);
@@ -5900,11 +5903,10 @@ function candDetailsHtml(c, kind, pinCategory){
   // unter Filme/Serien nebeneinander passen -- ohne dieses Poster hier waere
   // die aufgeklappte Zeile dann ganz ohne Bild.
   var posterHtml = detPosterHtml(c.poster64 || (c.p ? (POSTER + c.p) : null));
-  var pinHtml = pinBtnHtml(c.realId, pinCategory);
-  if (!plotHtml && !tagsHtml && !rows && !posterHtml && !pinHtml) return '';
+  if (!plotHtml && !tagsHtml && !rows && !posterHtml) return '';
   // tagsHtml bringt seine Reihen-Container selbst mit (Genres und Schlagwoerter
   // sind zwei getrennte Reihen, siehe detailChipsHtml).
-  return '<div class="details">' + pinHtml + posterHtml + plotHtml + tagsHtml + rows + '</div>';
+  return '<div class="details">' + posterHtml + plotHtml + tagsHtml + rows + '</div>';
 }
 // Der Streaming-Abgleich fuehrt seine Anbieter unter Slugs ('netflix',
 // 'amazon', ... -- daran haengen auch die SEO-Seiten), die Anbieterauswahl
@@ -7137,7 +7139,7 @@ function eigeneZeileLi(tab, i, profile) {
     '</div>';
   const pinCategory = tab === 'serien' ? 'series' : 'movie';
   const detailsHtml =
-    '<div class="details">' + pinBtnHtml(d.id, pinCategory) + detPoster +
+    '<div class="details">' + detPoster +
       plotDivHtml(s.pool[i]) + matchNoteHtml(d.id) +
       tagsHtml +
       creditRows +
@@ -7149,6 +7151,7 @@ function eigeneZeileLi(tab, i, profile) {
   li.innerHTML =
     posterThumb +
     '<span class="info"><div class="title">' + '<span class="ttext">' + item[0] + '</span>' + scoreBadge + '</div>' +
+    pinBtnHtml(d.id, pinCategory) +
     '<div class="meta">' + metaHtml(item[1], tab, kinoStartMetaHtml(d.tmdbId, d.type)) + '</div>' +
     providerChipsHtml(d.providers) + detailsHtml +
     watchRowHtml(d.tmdbId, d.type, item[0], d.id) + actionsHtml + '</span>';
@@ -13224,6 +13227,7 @@ document.head.insertAdjacentHTML('beforeend',
   '<style>'+
   'li.disc.show-details .details{display:block;}'+
   'li.disc.show-details .watch-row{display:block;}'+
+  'li.disc.show-details .pin-row{display:flex;}'+
   // Kleines Vorschaubild beim Aufklappen ausblenden (genau wie
   // li.item.show-details .dposter unter Filme/Serien) -- sonst bleibt .dinfo
   // um die Posterbreite schmaler und die drei Buttons darunter brechen um.
@@ -13301,6 +13305,7 @@ function poolItemLi(item, score, opts){
     '<div class="dinfo">' +
       '<div class="dtitle">'+esc(item.t)+
         '<span class="score'+(score>=60?' hi':'')+'" title="Taste Score" data-ts role="button" tabindex="0" aria-label="' + TXT.tasteScoreAria + '">'+score+'</span></div>'+
+      pinBtnHtml(item.realId, pinCategory) +
       // Auf der Kino-Seite steht der Start schon in der Metazeile selbst (siehe
       // kinoMeta) -- der Zusatz waere dort eine Wiederholung.
       (function(){
@@ -13319,7 +13324,7 @@ function poolItemLi(item, score, opts){
             : TXT.fremdUnbewertet(opts.fremdName)) + '</div>'
         : '') +
       providerChipsHtml(item.providers) +
-      candDetailsHtml(item, item.type, pinCategory) +
+      candDetailsHtml(item, item.type) +
       watchRowHtml(item.tmdbId, item.type, item.t, item.realId,
                    { nurTrailer: !!(opts && opts.nurTrailer) }) + actionsHtml + '</div>';
   var seenBtn = li.querySelector('.seen-btn');
