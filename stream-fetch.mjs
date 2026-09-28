@@ -402,7 +402,8 @@ async function aboAngebotPruefen(p) {
   let flat = 0, gesamt = 0;
   const proben = [];
   for (const kind of ['movie', 'tv']) {
-    if (!p.arten.includes(kind)) continue;
+    // Beide Arten immer abfragen: /watch/providers liefert zeitweise eine leere
+    // Liste, /discover kennt die Titel trotzdem.
     const basis = {
       language: LANG, watch_region: REGION,
       with_watch_providers: p.id, include_adult: 'false', page: 1,
