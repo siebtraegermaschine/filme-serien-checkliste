@@ -1087,3 +1087,22 @@ ALTER TABLE titles ADD COLUMN IF NOT EXISTS origin_country    TEXT[];
 ALTER TABLE titles ADD COLUMN IF NOT EXISTS original_language TEXT;
 ALTER TABLE titles ADD COLUMN IF NOT EXISTS runtime           INTEGER;
 ALTER TABLE titles ADD COLUMN IF NOT EXISTS seasons           INTEGER;
+
+-- Staffelliste und Folgen je Serie, erst beim Aufklappen bei TMDB geholt
+-- (backend/routes/seasons.js). Je Sprache eine Zeile; `folgen`/`staffeln`
+-- tragen TMDBs eigene Angaben, fehlende Texte ersatzweise englisch (Feld "en").
+CREATE TABLE IF NOT EXISTS serien_staffeln_cache (
+  tmdb_id    INTEGER NOT NULL,
+  sprache    TEXT NOT NULL,
+  staffeln   JSONB NOT NULL DEFAULT '[]',
+  fetched_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (tmdb_id, sprache)
+);
+CREATE TABLE IF NOT EXISTS serien_folgen_cache (
+  tmdb_id    INTEGER NOT NULL,
+  staffel    INTEGER NOT NULL,
+  sprache    TEXT NOT NULL,
+  folgen     JSONB NOT NULL DEFAULT '[]',
+  fetched_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (tmdb_id, staffel, sprache)
+);

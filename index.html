@@ -1008,6 +1008,20 @@
   .watch-provider.is-plain { color: var(--text-dim); cursor: default; background: none; border-style: dashed; }
   .watch-logo { width: 22px; height: 22px; border-radius: 5px; display: block; }
   .watch-note { font-size: 12.5px; color: var(--text-dim); }
+  /* Staffeln & Folgen (siehe watchRowHtml): ein Aufklapp-Block unter den Knoepfen. */
+  .seasons { margin-top: 10px; }
+  .seasons-toggle, .season-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%;
+    background: none; border: 0; padding: 7px 0; font: inherit; font-size: 13px; color: var(--text); cursor: pointer; text-align: left; }
+  .seasons-toggle { font-weight: 600; justify-content: flex-start; }
+  .season-head { border-top: 1px solid var(--border); }
+  .season-m, .ep-m { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+  .pfeil { display: inline-block; transition: transform .15s; }
+  [aria-expanded="true"] > .pfeil, [aria-expanded="true"] .pfeil { transform: rotate(180deg); }
+  .season-eps { padding: 2px 0 8px 10px; }
+  .ep { padding: 6px 0; border-top: 1px dotted var(--border); }
+  .ep-h { font-size: 13px; }
+  .ep-t { font-size: 12.5px; color: var(--text-dim); margin-top: 2px; line-height: 1.4; }
+  .ep-en { font-size: 10px; border: 1px solid var(--border); border-radius: 4px; padding: 0 3px; }
   .watch-more { margin-top: 7px; font-size: 11.5px; }
   .watch-source { margin-top: 8px; font-size: 11px; color: var(--text-dim); }
   /* Trailer-Popup. Die Vorschau zeigt bewusst das TMDB-Poster und NICHT das
@@ -2202,6 +2216,14 @@ var UI_TEXTE = {
     trailerAbspielen: '▶ Trailer abspielen',
     nurBeiAnbietern: function(n){ return 'Nur bei ' + n + ' nicht ausgewählten ' + (n === 1 ? 'Anbieter' : 'Anbietern') + ' verfügbar.'; },
     nichtVerfuegbar: 'Zurzeit nicht verfügbar.',
+    staffelnFolgen: 'Staffeln & Folgen',
+    staffelPraefix: 'Staffel ',
+    staffelSpecials: 'Specials',
+    folgenAnzahl: function(n){ return n + ' ' + (n === 1 ? 'Folge' : 'Folgen'); },
+    staffelnKeine: 'Keine Staffeln gefunden.',
+    staffelnFehler: 'Konnte nicht geladen werden.',
+    folgeNurEnglisch: 'Text nur auf Englisch verfügbar',
+    minKurz: 'Min.',
     weitereAnbieter: function(n){ return '+ ' + n + ' weitere nicht ausgewählte Anbieter'; },
     datenVon: 'Daten von',
     abImKino: function(d){ return 'Ab ' + d + ' im Kino'; },
@@ -2519,6 +2541,14 @@ var UI_TEXTE = {
     trailerAbspielen: '▶ Play trailer',
     nurBeiAnbietern: function(n){ return 'Only available on ' + n + ' unselected ' + (n === 1 ? 'service' : 'services') + '.'; },
     nichtVerfuegbar: 'Currently not available.',
+    staffelnFolgen: 'Seasons & episodes',
+    staffelPraefix: 'Season ',
+    staffelSpecials: 'Specials',
+    folgenAnzahl: function(n){ return n + ' ' + (n === 1 ? 'episode' : 'episodes'); },
+    staffelnKeine: 'No seasons found.',
+    staffelnFehler: 'Could not be loaded.',
+    folgeNurEnglisch: 'Text only available in English',
+    minKurz: 'min',
     weitereAnbieter: function(n){ return '+ ' + n + ' more unselected ' + (n === 1 ? 'service' : 'services'); },
     datenVon: 'Data from',
     abImKino: function(d){ return 'In cinemas from ' + d; },
@@ -2832,6 +2862,14 @@ var UI_TEXTE = {
     trailerAbspielen: '▶ Lire la bande-annonce',
     nurBeiAnbietern: function(n){ return 'Disponible uniquement chez ' + n + ' ' + (n === 1 ? 'service non sélectionné' : 'services non sélectionnés') + '.'; },
     nichtVerfuegbar: 'Actuellement indisponible.',
+    staffelnFolgen: 'Saisons et épisodes',
+    staffelPraefix: 'Saison ',
+    staffelSpecials: 'Épisodes spéciaux',
+    folgenAnzahl: function(n){ return n + ' ' + (n === 1 ? 'épisode' : 'épisodes'); },
+    staffelnKeine: 'Aucune saison trouvée.',
+    staffelnFehler: 'Chargement impossible.',
+    folgeNurEnglisch: 'Texte disponible uniquement en anglais',
+    minKurz: 'min',
     weitereAnbieter: function(n){ return '+ ' + n + ' ' + (n === 1 ? 'autre service non sélectionné' : 'autres services non sélectionnés'); },
     datenVon: 'Données de',
     abImKino: function(d){ return 'Au cinéma à partir du ' + d; },
@@ -3145,6 +3183,14 @@ var UI_TEXTE = {
     trailerAbspielen: '▶ Reproducir tráiler',
     nurBeiAnbietern: function(n){ return 'Solo disponible en ' + n + ' ' + (n === 1 ? 'servicio no seleccionado' : 'servicios no seleccionados') + '.'; },
     nichtVerfuegbar: 'Actualmente no disponible.',
+    staffelnFolgen: 'Temporadas y episodios',
+    staffelPraefix: 'Temporada ',
+    staffelSpecials: 'Especiales',
+    folgenAnzahl: function(n){ return n + ' ' + (n === 1 ? 'episodio' : 'episodios'); },
+    staffelnKeine: 'No se encontraron temporadas.',
+    staffelnFehler: 'No se pudo cargar.',
+    folgeNurEnglisch: 'Texto solo disponible en inglés',
+    minKurz: 'min',
     weitereAnbieter: function(n){ return '+ ' + n + ' ' + (n === 1 ? 'servicio más sin seleccionar' : 'servicios más sin seleccionar'); },
     datenVon: 'Datos de',
     abImKino: function(d){ return 'En cines a partir del ' + d; },
@@ -3458,6 +3504,14 @@ var UI_TEXTE = {
     trailerAbspielen: '▶ Riproduci trailer',
     nurBeiAnbietern: function(n){ return 'Disponibile solo su ' + n + ' ' + (n === 1 ? 'servizio non selezionato' : 'servizi non selezionati') + '.'; },
     nichtVerfuegbar: 'Al momento non disponibile.',
+    staffelnFolgen: 'Stagioni ed episodi',
+    staffelPraefix: 'Stagione ',
+    staffelSpecials: 'Speciali',
+    folgenAnzahl: function(n){ return n + ' ' + (n === 1 ? 'episodio' : 'episodi'); },
+    staffelnKeine: 'Nessuna stagione trovata.',
+    staffelnFehler: 'Impossibile caricare.',
+    folgeNurEnglisch: 'Testo disponibile solo in inglese',
+    minKurz: 'min',
     weitereAnbieter: function(n){ return '+ ' + n + ' ' + (n === 1 ? 'altro servizio non selezionato' : 'altri servizi non selezionati'); },
     datenVon: 'Dati da',
     abImKino: function(d){ return 'Al cinema dal ' + d; },
@@ -3771,6 +3825,14 @@ var UI_TEXTE = {
     trailerAbspielen: '▶ Trailer afspelen',
     nurBeiAnbietern: function(n){ return 'Alleen beschikbaar bij ' + n + ' niet-geselecteerde ' + (n === 1 ? 'dienst' : 'diensten') + '.'; },
     nichtVerfuegbar: 'Momenteel niet beschikbaar.',
+    staffelnFolgen: 'Seizoenen & afleveringen',
+    staffelPraefix: 'Seizoen ',
+    staffelSpecials: 'Specials',
+    folgenAnzahl: function(n){ return n + ' ' + (n === 1 ? 'aflevering' : 'afleveringen'); },
+    staffelnKeine: 'Geen seizoenen gevonden.',
+    staffelnFehler: 'Kon niet worden geladen.',
+    folgeNurEnglisch: 'Tekst alleen in het Engels beschikbaar',
+    minKurz: 'min.',
     weitereAnbieter: function(n){ return '+ nog ' + n + ' niet-geselecteerde ' + (n === 1 ? 'dienst' : 'diensten'); },
     datenVon: 'Gegevens van',
     abImKino: function(d){ return 'In de bioscoop vanaf ' + d; },
@@ -4084,6 +4146,14 @@ var UI_TEXTE = {
     trailerAbspielen: '▶ Reproduzir trailer',
     nurBeiAnbietern: function(n){ return 'Disponível apenas em ' + n + ' ' + (n === 1 ? 'serviço não selecionado' : 'serviços não selecionados') + '.'; },
     nichtVerfuegbar: 'No momento não está disponível.',
+    staffelnFolgen: 'Temporadas e episódios',
+    staffelPraefix: 'Temporada ',
+    staffelSpecials: 'Especiais',
+    folgenAnzahl: function(n){ return n + ' ' + (n === 1 ? 'episódio' : 'episódios'); },
+    staffelnKeine: 'Nenhuma temporada encontrada.',
+    staffelnFehler: 'Não foi possível carregar.',
+    folgeNurEnglisch: 'Texto disponível apenas em inglês',
+    minKurz: 'min',
     weitereAnbieter: function(n){ return '+ ' + n + ' ' + (n === 1 ? 'outro serviço não selecionado' : 'outros serviços não selecionados'); },
     datenVon: 'Dados de',
     abImKino: function(d){ return 'Nos cinemas a partir de ' + d; },
@@ -6278,7 +6348,58 @@ function watchRowHtml(tmdbId, type, title, realId, opts){
       }).join('') + '</div>') +
     '</div>' +
     '<div class="watch-panel" hidden></div>' +
+    // Staffeln & Folgen nur bei Serien -- die Daten holt /api/seasons erst beim Aufklappen.
+    (kennung && type === 'series'
+      ? '<div class="seasons" data-sapi="/api/seasons/' + escAttr(kennung) + '">' +
+          '<button type="button" class="seasons-toggle" aria-expanded="false">' + TXT.staffelnFolgen + ' <span class="pfeil">▾</span></button>' +
+          '<div class="seasons-body" hidden></div></div>'
+      : '') +
   '</div>';
+}
+var seasonCache = new Map();
+function ladeStaffeln(url){
+  // Fehlschlaege nicht merken, sonst bliebe die Zeile bis zum Neuladen leer.
+  if (!seasonCache.has(url)) {
+    seasonCache.set(url, apiRequest('GET', mitSpracheRegion(url)).catch(function(){
+      seasonCache.delete(url); return null;
+    }));
+  }
+  return seasonCache.get(url);
+}
+function folgeDatum(d){
+  if (!d) return '';
+  var t = new Date(d + 'T12:00:00');
+  return isNaN(t) ? d : t.toLocaleDateString(INHALTS_SPRACHE, { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function staffelnRendern(body, url){
+  body.innerHTML = '<div class="watch-note">' + TXT.laedt + '</div>';
+  ladeStaffeln(url).then(function(data){
+    if (!data) { body.innerHTML = '<div class="watch-note">' + TXT.staffelnFehler + '</div>'; return; }
+    var liste = (data.staffeln || []).filter(function(x){ return x.folgen > 0; });
+    if (!liste.length) { body.innerHTML = '<div class="watch-note">' + TXT.staffelnKeine + '</div>'; return; }
+    body.innerHTML = liste.map(function(x){
+      var jahr = x.datum ? String(x.datum).slice(0, 4) : '';
+      return '<div class="season"><button type="button" class="season-head" data-nr="' + x.nr + '" aria-expanded="false">' +
+        '<span>' + (x.nr === 0 ? TXT.staffelSpecials : esc(TXT.staffelPraefix + x.nr)) + '</span>' +
+        '<span class="season-m">' + TXT.folgenAnzahl(x.folgen) + (jahr ? ' · ' + jahr : '') + ' <span class="pfeil">▾</span></span></button>' +
+        '<div class="season-eps" hidden></div></div>';
+    }).join('');
+  });
+}
+function folgenRendern(box, url, nr){
+  box.innerHTML = '<div class="watch-note">' + TXT.laedt + '</div>';
+  ladeStaffeln(url + '/' + nr).then(function(data){
+    if (!data) { box.innerHTML = '<div class="watch-note">' + TXT.staffelnFehler + '</div>'; return; }
+    var f = data.folgen || [];
+    if (!f.length) { box.innerHTML = '<div class="watch-note">' + TXT.staffelnKeine + '</div>'; return; }
+    box.innerHTML = f.map(function(e){
+      var meta = [folgeDatum(e.datum), e.min ? e.min + ' ' + TXT.minKurz : ''].filter(Boolean).join(' · ');
+      return '<div class="ep"><div class="ep-h"><b>' + e.nr + '.</b> ' + esc(e.name) +
+        (meta ? ' <span class="ep-m">' + esc(meta) + '</span>' : '') + '</div>' +
+        (e.ov ? '<div class="ep-t">' + esc(e.ov) + (e.en ? ' <span class="ep-en" title="' + escAttr(TXT.folgeNurEnglisch) + '">EN</span>' : '') + '</div>' : '') +
+        '</div>';
+    }).join('');
+  });
 }
 function renderWatchPanel(row, cat){
   var panel = row.querySelector('.watch-panel');
@@ -6329,6 +6450,21 @@ document.addEventListener('click', function(e){
   var prov = e.target.closest && e.target.closest('a.watch-provider');
   if (prov && prov.dataset.prov && row.dataset.wtid) {
     kpiEvent('affiliate_click', { provider: Number(prov.dataset.prov), title_id: Number(row.dataset.wtid) });
+  }
+  var sTog = e.target.closest('.seasons-toggle');
+  var sKopf = e.target.closest('.season-head');
+  if (sTog || sKopf) {
+    var block = (sTog || sKopf).closest('.seasons');
+    var ziel = sTog ? block.querySelector('.seasons-body') : sKopf.nextElementSibling;
+    var auf = ziel.hidden;                      // war zu -> wird geoeffnet
+    ziel.hidden = !auf;
+    (sTog || sKopf).setAttribute('aria-expanded', String(auf));
+    if (auf && !ziel.dataset.geladen) {
+      ziel.dataset.geladen = '1';
+      if (sTog) staffelnRendern(ziel, block.dataset.sapi);
+      else folgenRendern(ziel, block.dataset.sapi, sKopf.dataset.nr);
+    }
+    return;
   }
   var btn = e.target.closest('.watch-btn');
   if (!btn) return;
