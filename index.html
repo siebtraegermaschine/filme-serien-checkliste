@@ -1012,7 +1012,9 @@
   .seasons { margin-top: 10px; }
   .seasons-toggle, .season-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%;
     background: none; border: 0; padding: 7px 0; font: inherit; font-size: 13px; color: var(--text); cursor: pointer; text-align: left; }
-  .seasons-toggle { font-weight: 600; justify-content: flex-start; }
+  /* Knopf sitzt rechts in der Idee-Zeile, vertikal zentriert dazu. */
+  .details .credits-idee { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .seasons-toggle { width: auto; flex: 0 0 auto; margin-left: auto; padding: 2px 0; font-weight: 600; white-space: nowrap; }
   .season-head { border-top: 1px solid var(--border); }
   .season-m, .ep-m { font-size: 12px; color: var(--text-dim); font-weight: 400; }
   .pfeil { display: inline-block; transition: transform .15s; }
@@ -5977,7 +5979,7 @@ function candDetailsHtml(c, kind){
     rows += '<div class="credits"><b>' + TXT.originaltitel + '</b> '+esc(c.ot)+'</div>';
   }
   if (c.c && c.c.length) rows += '<div class="credits"><b>' + TXT.besetzung + '</b> '+nameChips(c.c)+'</div>';
-  if (c.d) rows += '<div class="credits"><b>'+dirLabel+':</b> '+nameChips(splitNames(c.d))+'</div>';
+  rows += ideeZeileHtml(dirLabel, c.d ? nameChips(splitNames(c.d)) : '', staffelnKnopfHtml(c.tmdbId, kind, c.realId));
   var plotHtml = plotDivHtml(c);
   // Grosses Poster wie im Hauptlisten-Pfad (siehe render/detPoster): beim
   // Aufklappen wird das kleine Vorschaubild ausgeblendet (li.disc.show-details
@@ -6315,6 +6317,16 @@ window.addEventListener('resize', function(){
   _breitenTimer = setTimeout(breitenAngleichen, 150);
 });
 
+// Der Knopf steht in der Idee-Zeile der Details (rechts), der aufklappende
+// Inhalt weiter unten in der Watch-Zeile (siehe watchRowHtml).
+function staffelnKnopfHtml(tmdbId, type, realId){
+  if (type !== 'series' || !((tmdbId) || realId)) return '';
+  return '<button type="button" class="seasons-toggle" aria-expanded="false">' + TXT.staffelnFolgen + ' <span class="pfeil">▾</span></button>';
+}
+function ideeZeileHtml(label, namenHtml, knopf){
+  if (!namenHtml) return knopf ? '<div class="credits credits-idee"><span></span>' + knopf + '</div>' : '';
+  return '<div class="credits credits-idee"><span><b>' + label + ':</b> ' + namenHtml + '</span>' + knopf + '</div>';
+}
 function watchRowHtml(tmdbId, type, title, realId, opts){
   // Bevorzugt die TMDB-ID (spart dem Backend die Suche). Fehlt sie, laeuft die
   // Abfrage ueber die interne Titel-ID: die 600 urspruenglich kuratierten
@@ -6351,7 +6363,6 @@ function watchRowHtml(tmdbId, type, title, realId, opts){
     // Staffeln & Folgen nur bei Serien -- die Daten holt /api/seasons erst beim Aufklappen.
     (kennung && type === 'series'
       ? '<div class="seasons" data-sapi="/api/seasons/' + escAttr(kennung) + '">' +
-          '<button type="button" class="seasons-toggle" aria-expanded="false">' + TXT.staffelnFolgen + ' <span class="pfeil">▾</span></button>' +
           '<div class="seasons-body" hidden></div></div>'
       : '') +
   '</div>';
@@ -6441,6 +6452,19 @@ function renderWatchPanel(row, cat){
 // die Zeile ueberhaupt erreicht. Links im Panel behalten ihr Standardverhalten
 // (kein preventDefault), nur das Zuklappen wird unterbunden.
 document.addEventListener('click', function(e){
+  var tog = e.target.closest && e.target.closest('.seasons-toggle');
+  if (tog) {
+    e.stopPropagation();
+    var zeile = tog.closest('li');
+    var blk = zeile && zeile.querySelector('.seasons');
+    if (!blk) return;
+    var koerper = blk.querySelector('.seasons-body');
+    var oeffnen = koerper.hidden;
+    koerper.hidden = !oeffnen;
+    tog.setAttribute('aria-expanded', String(oeffnen));
+    if (oeffnen && !koerper.dataset.geladen) { koerper.dataset.geladen = '1'; staffelnRendern(koerper, blk.dataset.sapi); }
+    return;
+  }
   var row = e.target.closest && e.target.closest('.watch-row');
   if (!row) return;
   e.stopPropagation();
@@ -6451,18 +6475,16 @@ document.addEventListener('click', function(e){
   if (prov && prov.dataset.prov && row.dataset.wtid) {
     kpiEvent('affiliate_click', { provider: Number(prov.dataset.prov), title_id: Number(row.dataset.wtid) });
   }
-  var sTog = e.target.closest('.seasons-toggle');
   var sKopf = e.target.closest('.season-head');
-  if (sTog || sKopf) {
-    var block = (sTog || sKopf).closest('.seasons');
-    var ziel = sTog ? block.querySelector('.seasons-body') : sKopf.nextElementSibling;
+  if (sKopf) {
+    var block = sKopf.closest('.seasons');
+    var ziel = sKopf.nextElementSibling;
     var auf = ziel.hidden;                      // war zu -> wird geoeffnet
     ziel.hidden = !auf;
-    (sTog || sKopf).setAttribute('aria-expanded', String(auf));
+    sKopf.setAttribute('aria-expanded', String(auf));
     if (auf && !ziel.dataset.geladen) {
       ziel.dataset.geladen = '1';
-      if (sTog) staffelnRendern(ziel, block.dataset.sapi);
-      else folgenRendern(ziel, block.dataset.sapi, sKopf.dataset.nr);
+      folgenRendern(ziel, block.dataset.sapi, sKopf.dataset.nr);
     }
     return;
   }
@@ -7271,7 +7293,7 @@ function eigeneZeileLi(tab, i, profile) {
     creditRows += '<div class="credits"><b>' + TXT.originaltitel + '</b> ' + esc(d.ot) + '</div>';
   }
   if (d.c && d.c.length) creditRows += '<div class="credits"><b>' + TXT.besetzung + '</b> ' + nameChips(d.c) + '</div>';
-  if (d.d) creditRows += '<div class="credits"><b>' + dirLabel + ':</b> ' + nameChips(splitNames(d.d)) + '</div>';
+  creditRows += ideeZeileHtml(dirLabel, d.d ? nameChips(splitNames(d.d)) : '', staffelnKnopfHtml(d.tmdbId, d.type, d.id));
   const detPoster = detPosterHtml(d.poster);
   const _watched = isWatched(tab, item[0]);
   const _seen = s.checked[i];
