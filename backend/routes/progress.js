@@ -38,6 +38,8 @@ router.get('/', async (req, res) => {
 // "+ Liste"-Button in Discovery, der einen Titel nur zur eigenen Liste
 // hinzufügen will, ohne direkt eine gesehen-/Watchlist-Angabe zu machen
 // (siehe GET /api/titles/mine, das anhand der Zeilen-Existenz filtert).
+// Angeheftete Titel je Bereich (Film/Serie/Kino).
+const MAX_PINS = 2;
 router.put('/:titleId', async (req, res) => {
   const titleId = Number(req.params.titleId);
   if (!Number.isInteger(titleId)) {
@@ -63,8 +65,23 @@ router.put('/:titleId', async (req, res) => {
   }
 
   let rows;
+  const client = await pool.connect();
   try {
-    ({ rows } = await pool.query(
+    await client.query('BEGIN');
+    // Hoechstens MAX_PINS je Kategorie. Die Sperre je Nutzer verhindert, dass
+    // zwei Geraete gleichzeitig den letzten freien Platz belegen.
+    if (pinnedCategoryGesetzt && pinnedCategory !== null) {
+      await client.query('SELECT pg_advisory_xact_lock($1)', [req.session.userId]);
+      const { rows: [{ n }] } = await client.query(
+        `SELECT count(*)::int AS n FROM user_progress
+          WHERE user_id = $1 AND pinned_category = $2 AND title_id <> $3`,
+        [req.session.userId, pinnedCategory, titleId]);
+      if (n >= MAX_PINS) {
+        await client.query('ROLLBACK');
+        return res.status(409).json({ error: 'pin_slot_taken' });
+      }
+    }
+    ({ rows } = await client.query(
       `INSERT INTO user_progress (user_id, title_id, seen, watchlist, via_stream, rating, pinned_category)
        VALUES ($1, $2, COALESCE($3, false), COALESCE($4, false), COALESCE($5, false), $6, CASE WHEN $8 THEN $7 ELSE NULL END)
        ON CONFLICT (user_id, title_id) DO UPDATE SET
@@ -77,14 +94,12 @@ router.put('/:titleId', async (req, res) => {
        RETURNING title_id, seen, watchlist, via_stream, rating, pinned_category`,
       [req.session.userId, titleId, seen ?? null, watchlist ?? null, viaStream ?? null, rating ?? null, pinnedCategory, pinnedCategoryGesetzt]
     ));
+    await client.query('COMMIT');
   } catch (err) {
-    // Wettlauf zweier Geraete um dieselbe Pin-Kategorie -- das Frontend
-    // deaktiviert den Knopf zwar, sobald eine Kategorie belegt ist, aber das
-    // ist kein Ersatz fuer die harte Garantie durch den Unique-Index.
-    if (err.code === '23505' && err.constraint === 'user_progress_pinned_unique') {
-      return res.status(409).json({ error: 'pin_slot_taken' });
-    }
+    await client.query('ROLLBACK').catch(() => {});
     throw err;
+  } finally {
+    client.release();
   }
 
   // Anonymer Trichter-Schritt "zehn Titel erreicht" -- ohne await, das

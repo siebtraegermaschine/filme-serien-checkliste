@@ -233,7 +233,10 @@ ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS rating SMALLINT CHECK (rating
 -- anheften.
 ALTER TABLE user_progress ADD COLUMN IF NOT EXISTS pinned_category TEXT
   CHECK (pinned_category IS NULL OR pinned_category IN ('movie', 'series', 'cinema'));
-CREATE UNIQUE INDEX IF NOT EXISTS user_progress_pinned_unique
+-- Seit 28.09.2026 zwei Pins je Kategorie: der Unique-Index faellt weg, die
+-- Grenze erzwingt PUT /api/progress/:titleId unter einer Sperre je Nutzer.
+DROP INDEX IF EXISTS user_progress_pinned_unique;
+CREATE INDEX IF NOT EXISTS user_progress_pinned_idx
   ON user_progress (user_id, pinned_category) WHERE pinned_category IS NOT NULL;
 -- Umstellung von 1-5 auf 1-10 Sterne: bestehende Bewertungen einmalig umrechnen
 -- (1->2, 2->4, 3->5, 4->8, 5->10) und die alte 1-5-Constraint durch die neue

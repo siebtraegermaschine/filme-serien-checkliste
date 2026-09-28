@@ -5656,11 +5656,13 @@ function getWatchlistFlag(id) { return !!progressFor(id).watchlist; }
 function getRating(id) { return progressFor(id).rating || null; }
 function getPinnedCategory(id) { return progressFor(id).pinnedCategory || null; }
 // Welcher Titel haelt gerade den Pin-Platz dieser Kategorie (movie/series/
-// cinema)? Es gibt je Kategorie hoechstens einen (server-seitig per
-// Unique-Index erzwungen, siehe backend/routes/progress.js).
-function pinnedTitleId(category) {
-  for (const [id, p] of PROGRESS) { if (p.pinnedCategory === category) return id; }
-  return null;
+// cinema)? Es gibt je Kategorie hoechstens MAX_PINS (server-seitig erzwungen,
+// siehe backend/routes/progress.js).
+var MAX_PINS = 2;
+function pinnedTitleIds(category) {
+  var ids = [];
+  for (const [id, p] of PROGRESS) { if (p.pinnedCategory === category) ids.push(id); }
+  return ids;
 }
 // Zieht die angehefteten Eintraege (falls vorhanden) aus `eintraege` heraus,
 // damit sie unabhaengig von jeder Sortierung an den Anfang gestellt werden
@@ -5668,10 +5670,10 @@ function pinnedTitleId(category) {
 function extrahierePins(eintraege, categories) {
   var pins = [];
   categories.forEach(function(cat) {
-    var id = pinnedTitleId(cat);
-    if (id == null) return;
-    var idx = eintraege.findIndex(function(e) { return e.pool && e.pool.realId === id; });
-    if (idx !== -1) pins.push(eintraege.splice(idx, 1)[0]);
+    pinnedTitleIds(cat).forEach(function(id) {
+      var idx = eintraege.findIndex(function(e) { return e.pool && e.pool.realId === id; });
+      if (idx !== -1) pins.push(eintraege.splice(idx, 1)[0]);
+    });
   });
   return pins;
 }
@@ -5682,7 +5684,7 @@ function extrahierePins(eintraege, categories) {
 function pinBtnHtml(id, category) {
   if (!category) return '';
   var mine = id != null && getPinnedCategory(id) === category;
-  var belegt = !mine && pinnedTitleId(category) != null;
+  var belegt = !mine && pinnedTitleIds(category).length >= MAX_PINS;
   return '<span class="pin-row' + (mine ? ' pinned' : '') + '"><button type="button" aria-label="' + TXT.anheften + '" title="' + TXT.anheften +
     '" class="pin-btn' + (mine ? ' on' : '') + '"' + (belegt ? ' disabled' : '') +
     ' data-pin-category="' + category + '">📌</button></span>';
@@ -9566,11 +9568,10 @@ async function renderCinemaPage(){
   MOVIE_NIGHT_KINO = entries;
   // Angehefteter Kinotitel nach vorn, unabhaengig von der Sortierung -- gleiches
   // Prinzip wie extrahierePins() unter Filme/Serien.
-  var pinnedKinoId = pinnedTitleId('cinema');
-  if (pinnedKinoId != null) {
+  pinnedTitleIds('cinema').slice().reverse().forEach(function(pinnedKinoId){
     var pinIdx = entries.findIndex(function(e){ return e.item.realId === pinnedKinoId; });
     if (pinIdx > 0) { var pinnedEntry = entries.splice(pinIdx, 1)[0]; entries.unshift(pinnedEntry); }
-  }
+  });
   var visible = entries.slice(0, cinemaLimit);
   // Kino: Ansehen/Leihen/Kaufen entfallen, die Filme laufen ja erst an --
   // der Trailer ist hier das einzig Sinnvolle (siehe watchRowHtml).
