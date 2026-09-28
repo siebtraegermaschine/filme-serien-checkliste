@@ -5979,7 +5979,7 @@ function candDetailsHtml(c, kind){
     rows += '<div class="credits"><b>' + TXT.originaltitel + '</b> '+esc(c.ot)+'</div>';
   }
   if (c.c && c.c.length) rows += '<div class="credits"><b>' + TXT.besetzung + '</b> '+nameChips(c.c)+'</div>';
-  rows += ideeZeileHtml(dirLabel, c.d ? nameChips(splitNames(c.d)) : '', staffelnKnopfHtml(c.tmdbId, kind, c.realId));
+  rows += ideeZeileHtml(dirLabel, c.d ? nameChips(splitNames(c.d)) : '', staffelnKnopfHtml(c.tmdbId, kind, c.realId), c.tmdbId, c.realId);
   var plotHtml = plotDivHtml(c);
   // Grosses Poster wie im Hauptlisten-Pfad (siehe render/detPoster): beim
   // Aufklappen wird das kleine Vorschaubild ausgeblendet (li.disc.show-details
@@ -6323,9 +6323,11 @@ function staffelnKnopfHtml(tmdbId, type, realId){
   if (type !== 'series' || !((tmdbId) || realId)) return '';
   return '<button type="button" class="seasons-toggle" aria-expanded="false">' + TXT.staffelnFolgen + ' <span class="pfeil">▾</span></button>';
 }
-function ideeZeileHtml(label, namenHtml, knopf){
-  if (!namenHtml) return knopf ? '<div class="credits credits-idee"><span></span>' + knopf + '</div>' : '';
-  return '<div class="credits credits-idee"><span><b>' + label + ':</b> ' + namenHtml + '</span>' + knopf + '</div>';
+function ideeZeileHtml(label, namenHtml, knopf, tmdbId, realId){
+  if (!namenHtml && !knopf) return '';
+  var kennung = tmdbId ? ('series/' + tmdbId) : ('by-title/' + realId);
+  return '<div class="credits credits-idee"><span>' + (namenHtml ? '<b>' + label + ':</b> ' + namenHtml : '') + '</span>' + knopf + '</div>' +
+    (knopf ? '<div class="seasons" data-sapi="/api/seasons/' + escAttr(kennung) + '"><div class="seasons-body" hidden></div></div>' : '');
 }
 function watchRowHtml(tmdbId, type, title, realId, opts){
   // Bevorzugt die TMDB-ID (spart dem Backend die Suche). Fehlt sie, laeuft die
@@ -6360,11 +6362,6 @@ function watchRowHtml(tmdbId, type, title, realId, opts){
       }).join('') + '</div>') +
     '</div>' +
     '<div class="watch-panel" hidden></div>' +
-    // Staffeln & Folgen nur bei Serien -- die Daten holt /api/seasons erst beim Aufklappen.
-    (kennung && type === 'series'
-      ? '<div class="seasons" data-sapi="/api/seasons/' + escAttr(kennung) + '">' +
-          '<div class="seasons-body" hidden></div></div>'
-      : '') +
   '</div>';
 }
 var seasonCache = new Map();
@@ -6465,18 +6462,9 @@ document.addEventListener('click', function(e){
     if (oeffnen && !koerper.dataset.geladen) { koerper.dataset.geladen = '1'; staffelnRendern(koerper, blk.dataset.sapi); }
     return;
   }
-  var row = e.target.closest && e.target.closest('.watch-row');
-  if (!row) return;
-  e.stopPropagation();
-  // KPI affiliate_click: Klick auf einen Anbieter-Link (Ansehen/Leihen/
-  // Kaufen). Der Link behaelt sein Standardverhalten; ohne interne Titel-ID
-  // (reine Streaming-Kandidaten) wird nicht gezaehlt.
-  var prov = e.target.closest && e.target.closest('a.watch-provider');
-  if (prov && prov.dataset.prov && row.dataset.wtid) {
-    kpiEvent('affiliate_click', { provider: Number(prov.dataset.prov), title_id: Number(row.dataset.wtid) });
-  }
-  var sKopf = e.target.closest('.season-head');
+  var sKopf = e.target.closest && e.target.closest('.season-head');
   if (sKopf) {
+    e.stopPropagation();
     var block = sKopf.closest('.seasons');
     var ziel = sKopf.nextElementSibling;
     var auf = ziel.hidden;                      // war zu -> wird geoeffnet
@@ -6487,6 +6475,16 @@ document.addEventListener('click', function(e){
       folgenRendern(ziel, block.dataset.sapi, sKopf.dataset.nr);
     }
     return;
+  }
+  var row = e.target.closest && e.target.closest('.watch-row');
+  if (!row) return;
+  e.stopPropagation();
+  // KPI affiliate_click: Klick auf einen Anbieter-Link (Ansehen/Leihen/
+  // Kaufen). Der Link behaelt sein Standardverhalten; ohne interne Titel-ID
+  // (reine Streaming-Kandidaten) wird nicht gezaehlt.
+  var prov = e.target.closest && e.target.closest('a.watch-provider');
+  if (prov && prov.dataset.prov && row.dataset.wtid) {
+    kpiEvent('affiliate_click', { provider: Number(prov.dataset.prov), title_id: Number(row.dataset.wtid) });
   }
   var btn = e.target.closest('.watch-btn');
   if (!btn) return;
@@ -7293,7 +7291,7 @@ function eigeneZeileLi(tab, i, profile) {
     creditRows += '<div class="credits"><b>' + TXT.originaltitel + '</b> ' + esc(d.ot) + '</div>';
   }
   if (d.c && d.c.length) creditRows += '<div class="credits"><b>' + TXT.besetzung + '</b> ' + nameChips(d.c) + '</div>';
-  creditRows += ideeZeileHtml(dirLabel, d.d ? nameChips(splitNames(d.d)) : '', staffelnKnopfHtml(d.tmdbId, d.type, d.id));
+  creditRows += ideeZeileHtml(dirLabel, d.d ? nameChips(splitNames(d.d)) : '', staffelnKnopfHtml(d.tmdbId, d.type, d.id), d.tmdbId, d.id);
   const detPoster = detPosterHtml(d.poster);
   const _watched = isWatched(tab, item[0]);
   const _seen = s.checked[i];
