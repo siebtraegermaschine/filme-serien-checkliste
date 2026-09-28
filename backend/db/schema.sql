@@ -691,6 +691,29 @@ BEGIN
 END $$;
 CREATE INDEX IF NOT EXISTS idx_cinema_cache_region ON cinema_cache (region);
 
+-- Filme mit Termin nur im Ausland ("Start in Deutschland offen"): regionslos,
+-- einmal taeglich von cinema-fetch.mjs (CINEMA_MODE=offen) ersetzt. GET /api/cinema
+-- mischt sie je Region zu, solange die Region keinen eigenen Termin hat.
+CREATE TABLE IF NOT EXISTS cinema_offen_cache (
+  tmdb_id        INTEGER PRIMARY KEY,
+  title          TEXT NOT NULL,
+  title_en       TEXT,
+  uebersetzungen JSONB NOT NULL DEFAULT '{}',
+  year           INTEGER,
+  genres         TEXT[] NOT NULL DEFAULT '{}',
+  director       TEXT,
+  cast_names     TEXT[] NOT NULL DEFAULT '{}',
+  poster_path    TEXT,
+  rating         NUMERIC(3,1),
+  vote_count     INTEGER,
+  certification  TEXT,
+  certifications JSONB NOT NULL DEFAULT '{}',
+  overview       TEXT,
+  overview_en    TEXT,
+  release_date   DATE,
+  fetched_at     TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
 -- Sprache und Region am Konto: geraeteuebergreifend, gesetzt ueber
 -- PUT /api/auth/settings. NULL = noch nie gewaehlt, dann entscheidet das
 -- Geraet (localStorage bzw. Browsersprache).

@@ -3,8 +3,9 @@ import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { sprachWahl, regionWahl, sprachFeld, freigabeFuer } from '../lib/i18n.js';
 
 const router = createAsyncRouter();
+const SOON_TAGE = 28; // wie SOON_WINDOW_DAYS in cinema-fetch.mjs
 
-function rowToCand(row, lang = 'de', region = 'DE') {
+function rowToCand(row, lang = 'de', region = 'DE', offen = false) {
   return {
     id: String(row.tmdb_id),
     t: sprachFeld(lang, row.title, row.title_en, row.uebersetzungen, 't'),
@@ -25,6 +26,8 @@ function rowToCand(row, lang = 'de', region = 'DE') {
     ov: sprachFeld(lang, row.overview, row.overview_en, row.uebersetzungen, 'ov'),
     rd: row.release_date ? row.release_date.toISOString().slice(0, 10) : null,
     ord: row.original_release_date ? row.original_release_date.toISOString().slice(0, 10) : null,
+    // Termin nur aus dem Ausland, Start in der eigenen Region noch offen
+    ...(offen ? { o: 1 } : {}),
   };
 }
 
@@ -42,6 +45,20 @@ router.get('/', async (req, res) => {
     if (buckets[row.category]) buckets[row.category].push(rowToCand(row, lang, region));
   }
   buckets.now.reverse();
+  // Auslandstermine ohne eigenen Termin der Region dazumischen; sobald die
+  // Region einen hat (cinema_cache), verdraengt dieser den Auslandstermin.
+  const grenze = new Date(Date.now() + SOON_TAGE * 86400000).toISOString().slice(0, 10);
+  const { rows: offen } = await pool.query(
+    `SELECT * FROM cinema_offen_cache
+      WHERE release_date >= CURRENT_DATE
+        AND tmdb_id NOT IN (SELECT tmdb_id FROM cinema_cache WHERE region = $1)
+      ORDER BY release_date`, [region]);
+  for (const row of offen) {
+    const c = rowToCand(row, lang, region, true);
+    (c.rd <= grenze ? buckets.soon : buckets.later).push(c);
+  }
+  buckets.soon.sort((a, b) => (a.rd || '').localeCompare(b.rd || ''));
+  buckets.later.sort((a, b) => (a.rd || '').localeCompare(b.rd || ''));
   res.json(buckets);
 });
 
@@ -141,6 +158,60 @@ router.post('/ingest', async (req, res) => {
     client.release();
   }
 
+  res.status(204).end();
+});
+
+// Tageslauf "Termin offen" (cinema-fetch.mjs, CINEMA_MODE=offen): ersetzt die
+// ganze regionslose Liste. Gleiche Authentifizierung und gleicher Plausibilitaets-
+// schutz wie beim Regions-Ingest.
+router.post('/ingest-offen', async (req, res) => {
+  const expected = process.env.CINEMA_INGEST_SECRET;
+  const provided = (req.get('authorization') || '').replace(/^Bearer\s+/i, '');
+  if (!expected || provided !== expected) {
+    return res.status(401).json({ error: 'invalid_ingest_secret' });
+  }
+  const { items } = req.body || {};
+  if (!Array.isArray(items)) return res.status(400).json({ error: 'invalid_payload' });
+
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    const { rows: [{ bestand }] } = await client.query('SELECT COUNT(*)::int AS bestand FROM cinema_offen_cache');
+    if (bestand >= 20 && items.length < bestand * 0.5) {
+      await client.query('ROLLBACK');
+      return res.status(409).json({ error: 'implausible_payload', geliefert: items.length, bestand });
+    }
+    await client.query('DELETE FROM cinema_offen_cache');
+    for (const item of items) {
+      if (!item || !item.tmdbId || !item.title || !item.releaseDate) continue;
+      await client.query(
+        `INSERT INTO cinema_offen_cache
+           (tmdb_id, title, title_en, uebersetzungen, year, genres, director, cast_names, poster_path, rating, vote_count, certification, certifications, overview, overview_en, release_date)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)
+         ON CONFLICT (tmdb_id) DO NOTHING`,
+        [
+          item.tmdbId, item.title, item.titleEn || null,
+          item.uebers && typeof item.uebers === 'object' ? item.uebers : {},
+          item.year || null,
+          Array.isArray(item.genres) ? item.genres : [],
+          item.director || null,
+          Array.isArray(item.cast) ? item.cast : [],
+          item.posterPath || null,
+          item.rating != null ? item.rating : null,
+          item.voteCount != null ? item.voteCount : null,
+          item.certification || null,
+          item.certifications && typeof item.certifications === 'object' ? item.certifications : {},
+          item.overview || null, item.overviewEn || null, item.releaseDate,
+        ]
+      );
+    }
+    await client.query('COMMIT');
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
+  }
   res.status(204).end();
 });
 

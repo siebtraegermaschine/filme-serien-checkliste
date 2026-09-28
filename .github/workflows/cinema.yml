@@ -72,6 +72,31 @@ jobs:
           TMDB_REGION: ${{ matrix.region }}
         run: node cinema-fetch.mjs
 
+  # Regionsloser Tageslauf fuer Filme mit Termin nur im Ausland ("Start in
+  # Deutschland offen"), siehe cinema-fetch.mjs (CINEMA_MODE=offen). Laeuft nach
+  # der Kette, egal wie sie ausging; ein Fehler hier ist unabhaengig von ihr.
+  offen:
+    needs: update
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Repo auschecken
+        uses: actions/checkout@v4
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Auslandstermine aktualisieren
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          STREAMING_API_URL: ${{ vars.STREAMING_API_URL }}
+          CINEMA_INGEST_SECRET: ${{ secrets.CINEMA_INGEST_SECRET }}
+          CINEMA_MODE: offen
+        run: node cinema-fetch.mjs
+
   # Gegenstueck zum "nachzuegler" in streaming.yml (754756c): faellt in der
   # Kette eine einzelne Region aus, wird genau sie einmal wiederholt, statt
   # bis zum naechsten Tageslauf auf dem Vortagsstand zu bleiben (so geschehen

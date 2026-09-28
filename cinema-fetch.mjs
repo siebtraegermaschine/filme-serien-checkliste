@@ -17,6 +17,9 @@
  * Schickt das Ergebnis per POST an /api/cinema/ingest (Auth ueber
  * CINEMA_INGEST_SECRET), analog zu stream-fetch.mjs/streaming_cache.
  *
+ * CINEMA_MODE=offen: regionsloser Tageslauf fuer Filme, die nur im Ausland einen
+ * Kinotermin haben ("Start in Deutschland offen") -- siehe offenMain unten.
+ *
  * Aufruf:  TMDB_API_KEY=xxxx STREAMING_API_URL=https://... CINEMA_INGEST_SECRET=xxx node cinema-fetch.mjs
  * Node >= 18 (globales fetch).
  */
@@ -27,6 +30,10 @@ const REGION = process.env.TMDB_REGION || 'DE';
 const LANG = process.env.TMDB_LANG || 'de-DE';
 const STREAMING_API_URL = process.env.STREAMING_API_URL || '';
 const CINEMA_INGEST_SECRET = process.env.CINEMA_INGEST_SECRET || '';
+const OFFEN = process.env.CINEMA_MODE === 'offen';
+// Maerkte, deren Kinotermin fuer "Termin offen" zaehlt, und das Suchfenster.
+const OFFEN_MAERKTE = ['DE', 'US', 'GB', 'FR', 'ES', 'IT', 'AT', 'CH'];
+const OFFEN_FENSTER_TAGE = 183;
 
 const NOW_LOOKBACK_DAYS = 60;  // wie weit "aktuell im Kino" rueckwirkend reicht
 const SOON_WINDOW_DAYS = 28;   // Ende von "in Kuerze im Kino" (~4 Wochen)
@@ -111,10 +118,12 @@ const enrichCache = new Map();
 // Datum herausgesucht wird).
 async function enrich(id) {
   if (enrichCache.has(id)) return enrichCache.get(id);
-  const result = { cast: [], dir: '', regionDates: [], fsk: null, certs: {}, tEn: '', ovEn: '' };
+  const result = { cast: [], dir: '', regionDates: [], fsk: null, certs: {}, tEn: '', ovEn: '', castAnzahl: 0, trailer: false, marktDaten: [], laufzeit: null, status: '' };
   try {
-    const d = await tmdb(`/movie/${id}`, { language: LANG, append_to_response: 'credits,release_dates,translations' });
+    const d = await tmdb(`/movie/${id}`, { language: LANG, append_to_response: OFFEN ? 'credits,release_dates,translations,videos' : 'credits,release_dates,translations',
+      ...(OFFEN ? { include_video_language: 'de,en,null' } : {}) });
     const cr = d.credits || {};
+    result.castAnzahl = (cr.cast || []).length;
     result.cast = (cr.cast || []).slice(0, 4).map((p) => p.name).filter(Boolean);
     const dd = (cr.crew || []).find((p) => p.job === 'Director');
     result.dir = dd ? dd.name : '';
@@ -125,6 +134,21 @@ async function enrich(id) {
         .filter((rd) => rd.type === 2 || rd.type === 3)
         .map((rd) => String(rd.release_date).slice(0, 10))
         .sort();
+    }
+    if (OFFEN) {
+      // Frueheste Kinotermine je Markt (Typ 2/3) und offizieller Trailer/Teaser auf YouTube.
+      for (const r of rdResults) {
+        if (!OFFEN_MAERKTE.includes(r.iso_3166_1)) continue;
+        for (const rd of r.release_dates || []) {
+          if (rd.type === 2 || rd.type === 3) result.marktDaten.push(String(rd.release_date).slice(0, 10));
+        }
+      }
+      result.marktDaten.sort();
+      result.trailer = ((d.videos && d.videos.results) || [])
+        .some((v) => v.site === 'YouTube' && v.official && (v.type === 'Trailer' || v.type === 'Teaser'));
+      result.laufzeit = d.runtime || null;
+      result.status = d.status || '';
+      result.adult = !!d.adult;
     }
     // Freigaben je Land -- oft nur an einem der Eintraege, daher der erste
     // nicht leere Wert je Land.
@@ -202,6 +226,72 @@ async function discoverRange(gteDate, lteDate, sortDir, gmap, category, out, see
   } while (page <= totalPages);
 }
 
+// Filme, die in mindestens einem Markt einen Kinotermin im Fenster haben und die
+// Mindestanforderungen erfuellen (Poster, Inhaltsangabe, offizieller Trailer/
+// Teaser, Cast >= 3, Genre, Laufzeit >= 60 Min. oder noch unveroeffentlicht).
+// Ob eine Region schon einen eigenen Termin hat, entscheidet das Backend beim
+// Ausliefern -- der Lauf ist deshalb regionslos und einmal taeglich genug.
+async function offenMain() {
+  const gmap = await genreMap();
+  const heute = fmtDate(new Date());
+  const bis = fmtDate(addDays(new Date(), OFFEN_FENSTER_TAGE));
+  const out = [];
+  const seen = new Set();
+  console.log(`Discover "offen" (regionslos, ${fmtDate(addDays(new Date(), 1))} bis ${bis})...`);
+  let page = 1, totalPages = 1;
+  do {
+    const d = await tmdb('/discover/movie', {
+      language: LANG, with_release_type: '2|3',
+      'release_date.gte': fmtDate(addDays(new Date(), 1)), 'release_date.lte': bis,
+      sort_by: 'primary_release_date.asc', include_adult: 'false', page,
+    });
+    totalPages = Math.min(d.total_pages || 1, 500);
+    for (const it of d.results || []) {
+      if (seen.has(it.id) || !it.poster_path) continue; seen.add(it.id);
+      out.push({
+        tmdbId: it.id, title: it.title,
+        year: it.release_date ? parseInt(it.release_date.slice(0, 4), 10) : null,
+        genres: (it.genre_ids || []).map((g) => gmap[g]).filter(Boolean),
+        posterPath: it.poster_path,
+        rating: it.vote_average != null ? Math.round(it.vote_average * 10) / 10 : null,
+        voteCount: it.vote_count != null ? it.vote_count : null,
+        overview: (it.overview || '').trim(),
+      });
+    }
+    page++;
+    await sleep(200);
+  } while (page <= totalPages);
+  console.log(`  ${out.length} Kandidaten mit Poster; pruefe Details...`);
+
+  const ok = [];
+  let done = 0;
+  for (const item of out) {
+    done++;
+    if (done % 200 === 0) console.log(`  ... ${done}/${out.length}, bisher ${ok.length} aufgenommen`);
+    if (!item.genres.length) continue;
+    const ex = await enrich(item.tmdbId);
+    await sleep(130);
+    const termin = ex.marktDaten.find((x) => x >= heute && x <= bis);
+    if (!termin || ex.adult || !ex.trailer || ex.castAnzahl < 3) continue;
+    if (!(ex.laufzeit >= 60 || (ex.status && ex.status !== 'Released'))) continue;
+    if (!item.overview) item.overview = ex.ovEn || await overviewFallback(item.tmdbId);
+    if (!item.overview) continue;
+    Object.assign(item, {
+      cast: ex.cast, director: ex.dir, certification: ex.fsk, certifications: ex.certs,
+      titleEn: ex.tEn, uebers: ex.uebers || {}, overviewEn: ex.ovEn, releaseDate: termin,
+    });
+    ok.push(item);
+  }
+  console.log(`${ok.length} von ${out.length} Kandidaten erfuellen die Mindestanforderungen.`);
+  const res = await fetch(new URL('/api/cinema/ingest-offen', STREAMING_API_URL), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${CINEMA_INGEST_SECRET}` },
+    body: JSON.stringify({ items: ok }),
+  });
+  if (!res.ok) throw new Error(`Ingest-API ${res.status}: ${await res.text()}`);
+  console.log(`An Backend übertragen: ${ok.length} Titel (Termin offen).`);
+}
+
 async function main() {
   const gmap = await genreMap();
   const today = new Date();
@@ -269,4 +359,4 @@ async function main() {
   console.log(`An Backend übertragen: ${out.length} Titel (Region ${REGION}).`);
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+(OFFEN ? offenMain() : main()).catch((e) => { console.error(e); process.exit(1); });

@@ -2229,6 +2229,7 @@ var UI_TEXTE = {
     weitereAnbieter: function(n){ return '+ ' + n + ' weitere nicht ausgewählte Anbieter'; },
     datenVon: 'Daten von',
     abImKino: function(d){ return 'Ab ' + d + ' im Kino'; },
+    startOffen: 'Start in deinem Land noch offen',
     wiederauffuehrung: function(jahr){ return '🎬 Wiederaufführung im Kino – ursprünglich erschienen ' + jahr + '.'; },
     zuVieleVersuche: 'Zu viele Versuche. Bitte später erneut versuchen.',
     zuVieleVersucheIn: function(min){ return 'Zu viele Versuche. Bitte in ' + (min <= 1 ? 'einer Minute' : min + ' Minuten') + ' erneut versuchen.'; },
@@ -2554,6 +2555,7 @@ var UI_TEXTE = {
     weitereAnbieter: function(n){ return '+ ' + n + ' more unselected ' + (n === 1 ? 'service' : 'services'); },
     datenVon: 'Data from',
     abImKino: function(d){ return 'In cinemas from ' + d; },
+    startOffen: 'Release in your country not yet set',
     wiederauffuehrung: function(jahr){ return '🎬 Cinema re-release – originally released ' + jahr + '.'; },
     zuVieleVersuche: 'Too many attempts. Please try again later.',
     zuVieleVersucheIn: function(min){ return 'Too many attempts. Please try again in ' + (min <= 1 ? 'a minute' : min + ' minutes') + '.'; },
@@ -2875,6 +2877,7 @@ var UI_TEXTE = {
     weitereAnbieter: function(n){ return '+ ' + n + ' ' + (n === 1 ? 'autre service non sélectionné' : 'autres services non sélectionnés'); },
     datenVon: 'Données de',
     abImKino: function(d){ return 'Au cinéma à partir du ' + d; },
+    startOffen: 'Sortie dans votre pays pas encore fixée',
     wiederauffuehrung: function(jahr){ return '🎬 Ressortie au cinéma – sortie initiale en ' + jahr + '.'; },
     zuVieleVersuche: 'Trop de tentatives. Réessaie plus tard.',
     zuVieleVersucheIn: function(min){ return 'Trop de tentatives. Réessaie dans ' + (min <= 1 ? 'une minute' : min + ' minutes') + '.'; },
@@ -3196,6 +3199,7 @@ var UI_TEXTE = {
     weitereAnbieter: function(n){ return '+ ' + n + ' ' + (n === 1 ? 'servicio más sin seleccionar' : 'servicios más sin seleccionar'); },
     datenVon: 'Datos de',
     abImKino: function(d){ return 'En cines a partir del ' + d; },
+    startOffen: 'Estreno en tu país aún sin fecha',
     wiederauffuehrung: function(jahr){ return '🎬 Reestreno en cines – estreno original en ' + jahr + '.'; },
     zuVieleVersuche: 'Demasiados intentos. Inténtalo de nuevo más tarde.',
     zuVieleVersucheIn: function(min){ return 'Demasiados intentos. Inténtalo de nuevo en ' + (min <= 1 ? 'un minuto' : min + ' minutos') + '.'; },
@@ -3517,6 +3521,7 @@ var UI_TEXTE = {
     weitereAnbieter: function(n){ return '+ ' + n + ' ' + (n === 1 ? 'altro servizio non selezionato' : 'altri servizi non selezionati'); },
     datenVon: 'Dati da',
     abImKino: function(d){ return 'Al cinema dal ' + d; },
+    startOffen: 'Uscita nel tuo paese ancora da definire',
     wiederauffuehrung: function(jahr){ return '🎬 Riedizione al cinema – uscito originariamente nel ' + jahr + '.'; },
     zuVieleVersuche: 'Troppi tentativi. Riprova più tardi.',
     zuVieleVersucheIn: function(min){ return 'Troppi tentativi. Riprova tra ' + (min <= 1 ? 'un minuto' : min + ' minuti') + '.'; },
@@ -3838,6 +3843,7 @@ var UI_TEXTE = {
     weitereAnbieter: function(n){ return '+ nog ' + n + ' niet-geselecteerde ' + (n === 1 ? 'dienst' : 'diensten'); },
     datenVon: 'Gegevens van',
     abImKino: function(d){ return 'In de bioscoop vanaf ' + d; },
+    startOffen: 'Start in jouw land nog niet bekend',
     wiederauffuehrung: function(jahr){ return '🎬 Opnieuw in de bioscoop – oorspronkelijk uitgebracht in ' + jahr + '.'; },
     zuVieleVersuche: 'Te veel pogingen. Probeer het later opnieuw.',
     zuVieleVersucheIn: function(min){ return 'Te veel pogingen. Probeer het over ' + (min <= 1 ? 'een minuut' : min + ' minuten') + ' opnieuw.'; },
@@ -4159,6 +4165,7 @@ var UI_TEXTE = {
     weitereAnbieter: function(n){ return '+ ' + n + ' ' + (n === 1 ? 'outro serviço não selecionado' : 'outros serviços não selecionados'); },
     datenVon: 'Dados de',
     abImKino: function(d){ return 'Nos cinemas a partir de ' + d; },
+    startOffen: 'Estreia no seu país ainda por definir',
     wiederauffuehrung: function(jahr){ return '🎬 Reestreia nos cinemas – lançado originalmente em ' + jahr + '.'; },
     zuVieleVersuche: 'Tentativas demais. Tente novamente mais tarde.',
     zuVieleVersucheIn: function(min){ return 'Tentativas demais. Tente novamente em ' + (min <= 1 ? 'um minuto' : min + ' minutos') + '.'; },
@@ -6055,7 +6062,7 @@ function kinoStartsUebernehmen(data){
   if (!data) return;
   ['now', 'soon', 'later'].forEach(function(key){
     (data[key] || []).forEach(function(row){
-      if (row && row.rd) KINO_STARTS.set(Number(row.id), row.rd);
+      if (row && row.rd && !row.o) KINO_STARTS.set(Number(row.id), row.rd);
     });
   });
 }
@@ -9576,7 +9583,7 @@ async function renderCinemaPage(){
   // Kino: Ansehen/Leihen/Kaufen entfallen, die Filme laufen ja erst an --
   // der Trailer ist hier das einzig Sinnvolle (siehe watchRowHtml).
   visible.forEach(function(e){
-    var opts = { nurTrailer: true, kinoDatum: e.row.rd || null, pinCategory: 'cinema' };
+    var opts = { nurTrailer: true, kinoDatum: e.row.rd || null, kinoOffen: !!e.row.o, pinCategory: 'cinema' };
     if (fremd) {
       var fe = fremd.get(e.item.realId);
       opts.fremdName = profilName(ANSICHT_PERSON);
@@ -13477,7 +13484,9 @@ function poolItemLi(item, score, opts){
       // kinoMeta) -- der Zusatz waere dort eine Wiederholung.
       (function(){
         if (opts && opts.kinoDatum !== undefined) {
-          return '<div class="dmeta">' + esc(kinoMeta(item, opts.kinoDatum, typeLabel)) + pinBtnHtml(item.realId, pinCategory) + '</div>';
+          return '<div class="dmeta">' + esc(kinoMeta(item, opts.kinoDatum, typeLabel)) +
+                 (opts.kinoOffen ? '<span class="kino-start">' + TXT.startOffen + '</span>' : '') +
+                 pinBtnHtml(item.realId, pinCategory) + '</div>';
         }
         return '<div class="dmeta">' + esc(candMeta(item) + ' · ' + typeLabel) +
                kinoStartMetaHtml(item.tmdbId, item.type) + pinBtnHtml(item.realId, pinCategory) + '</div>';
