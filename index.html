@@ -11899,6 +11899,7 @@ function renderMoment(profile){
     // Momentaufnahme. Die Beschriftung sagt jeweils, was passiert.
     ansichtBtn.textContent = cinemaMode ? TXT.teilenAnsicht : TXT.teilenMoment;
     sheet.style.display = sheet.style.display === 'none' ? 'flex' : 'none';
+    if (sheet.style.display === 'flex') refLinkVorbereiten();
   };
   sheet.addEventListener('click', function(e){ e.stopPropagation(); });
   document.addEventListener('click', schliessen);
@@ -11923,11 +11924,32 @@ function renderMoment(profile){
     if (!CURRENT_USER) { requireLogin(momentTeilen); return; }
     momentTeilen();
   };
-  // Wie "Personen einladen": gibt nichts preis, geht deshalb auch ausgeloggt
-  // und in fremden Listen (siehe einladungTeilen).
+  // "App teilen" oeffnet direkt das System-Teilen-Blatt. navigator.share muss
+  // ohne await in der Klick-Geste laufen (iOS), deshalb wird der ?ref=-Link
+  // schon beim Oeffnen des Blatts geholt; ist er noch nicht da, geht der
+  // blanke App-Link raus. Zwischenfenster nur ohne navigator.share (Rechner).
+  var refLink = null, refLinkFuer = null;
+  function refLinkVorbereiten(){
+    var uid = CURRENT_USER ? CURRENT_USER.id : null;
+    if (refLinkFuer !== uid) { refLink = null; refLinkFuer = uid; }
+    if (!uid || refLink) return;
+    apiRequest('POST', '/api/links/invite', { kind: 'referral' })
+      .then(function(d){ if (refLinkFuer === uid) refLink = d.url; }, function(){});
+  }
   appBtn.onclick = function(){
     schliessen();
-    einladungTeilen(appBtn, 'referral', function(){ einladungTeilen(appBtn, 'referral'); });
+    var art = EINLADUNGSARTEN.referral;
+    var eingeloggt = !!CURRENT_USER;
+    var text = eingeloggt ? art.text(CURRENT_USER.displayName || TXT.jemand) : art.textAusgeloggt;
+    var url = (eingeloggt && refLinkFuer === CURRENT_USER.id && refLink) || location.origin;
+    if (navigator.share) {
+      navigator.share({ title: 'MovieMatch', text: text, url: url })
+        .catch(function(err){
+          if (!err || err.name !== 'AbortError') zeigeEinladung(art.titel, text, url, TXT.linkLaeuftNichtAb);
+        });
+    } else {
+      zeigeEinladung(art.titel, text, url, TXT.linkLaeuftNichtAb);
+    }
   };
   titelBtn.onclick = function(){ schliessen(); infoZeigen('teilenTitelHinweis'); };
   profilBtn.onclick = function(){
