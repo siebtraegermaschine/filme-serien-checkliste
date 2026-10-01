@@ -929,6 +929,11 @@
      die Lupe zeigt genau das an. Ein Poster ohne .zoombar sieht deshalb auch
      nicht so aus, als koenne man es antippen. */
   .details .detposter.zoombar { cursor: zoom-in; }
+  /* Poster und Trailer-Knopf als eine Spalte: der Knopf direkt unter dem Bild,
+     genau so breit wie es (siehe detKopfHtml). */
+  .details .detkopf { float: left; width: 120px; max-width: 34%; margin: 2px 14px 10px 0; }
+  .details .detkopf .detposter { float: none; width: 100%; max-width: none; margin: 0 0 8px; }
+  .details .detkopf .trailer-btn { display: block; width: 100%; padding-left: 4px; padding-right: 4px; }
   @media (hover: hover) { .details .detposter.zoombar:hover { box-shadow: 0 2px 10px rgba(0,0,0,.45), 0 0 0 2px var(--accent); } }
   .details .detposter.zoombar:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   /* Grossansicht: ueber allen anderen Popups, damit sie auch aus dem
@@ -942,24 +947,14 @@
      Discovery-Regeln. */
   .watch-row { display: none; clear: both; margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--border); cursor: default; }
   li.item.show-details .watch-row { display: block; }
-  /* "Trailer" ganz links, Kaufen/Leihen/Ansehen rechts abgesetzt. Der
-     automatische Abstand rechts vom Trailer schiebt alles Nachfolgende ans
-     Ende -- und laesst ihn auf der Kino-Seite, wo er allein steht, ganz links. */
+  /* "Ähnliche Titel" ganz links, Kaufen/Leihen/Ansehen rechts abgesetzt. Der
+     automatische Abstand rechts davon schiebt alles Nachfolgende ans Ende --
+     und laesst ihn auf der Kino-Seite, wo er allein steht, ganz links. */
   /* 10px wie in .det-actions darunter -- mit unterschiedlichen Abstaenden
      saessen die beiden linken Bloecke sonst um 2px versetzt. */
   .watch-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-content: flex-start; }
-  /* "Trailer" und das Teilen-Zeichen bilden links eine Gruppe mit ihrer
-     natuerlichen Breite. Auf genau dasselbe Mass wie "Ähnliche Titel" in der
-     Zeile darunter bringt sie breitenAngleichenLi() -- in CSS allein ginge das
-     nur mit einem Raster ueber beide Zeilen, und ein Grid koennte auf schmalen
-     Geraeten nicht umbrechen. */
-  .watch-links { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; margin-right: auto; }
-  .watch-links > .watch-btn { flex: 0 0 auto; }
-  /* Das Teilen-Zeichen sitzt mittig im Knopf und bekommt weniger Rand als eine
-     Beschriftung -- sonst waere der Knopf fast so breit wie "Trailer". */
-  .teilen-btn { display: inline-flex; align-items: center; justify-content: center; padding-left: 10px; padding-right: 10px; }
   /* ZWEI GRUPPEN, nicht ausgemittelt (Christian, 20. August 2026): links
-     "Trailer" und das Teilen-Zeichen, rechts Kaufen/Leihen/Ansehen bzw.
+     "Ähnliche Titel" bzw. "Teilen", rechts Kaufen/Leihen/Ansehen bzw.
      Watchlist/Gesehen -- jede Gruppe mit ihrer natuerlichen Breite, die eine an
      der linken, die andere an der rechten Kante. Dazwischen bleibt Luft, und
      das ist Absicht.
@@ -983,7 +978,6 @@
   @media (max-width: 520px) {
     .watch-btns { gap: 8px; }
     .watch-rechts, .det-rechts { gap: 6px; }
-    .watch-links { gap: 6px; }
   }
   .watch-btn { border-radius: 8px; padding: 8px 15px; font-size: 13px; font-weight: 600; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--text-dim); transition: all .15s; }
@@ -1241,12 +1235,14 @@
   body.kompakte-aktionen .det-rechts > .seen-btn,
   body.kompakte-aktionen .det-rechts > .det-left { flex: 0 0 auto; }
   body.kompakte-aktionen .det-rechts > .det-left > .wl-btn { width: auto; }
-  /* "Ähnliche Titel" bleibt links (Gesehen/Watchlist weiter rechts gepackt) und ist
-     nur sichtbar, wenn die Details dieser Zeile aufgeklappt sind. */
-  .similar-btn { display: none; flex: 0 0 auto; margin-right: auto; }
-  li.item.show-details .similar-btn, li.disc.show-details .similar-btn { display: inline-block; }
+  /* "Ähnliche Titel" (Zeile mit Kaufen/Leihen/Ansehen) und "Teilen" (Zeile mit
+     Watchlist/Gesehen) stehen jeweils links und sind nur bei aufgeklappten
+     Details sichtbar. Gleich breit macht sie breitenAngleichenLi(). */
+  .similar-btn, .det-actions .teilen-btn { display: none; flex: 0 0 auto; margin-right: auto; }
+  li.item.show-details .similar-btn, li.disc.show-details .similar-btn,
+  li.item.show-details .det-actions .teilen-btn, li.disc.show-details .det-actions .teilen-btn { display: inline-block; }
   .watch-empty { text-align: center; color: var(--text-dim); font-size: 14px; margin: 26px auto; max-width: 520px; line-height: 1.7; padding: 0 20px; }
-  @media (max-width: 640px) { .details .detposter { width: 96px; } }
+  @media (max-width: 640px) { .details .detposter, .details .detkopf { width: 96px; } }
   /* Sortier-Button rechts neben dem Suchfeld */
   .sort-wrap { position: relative; display: flex; }
   .sort-wrap > #fSort { white-space: nowrap; }
@@ -5977,7 +5973,7 @@ async function fillPlots(){
     // Schlagworte stehen ja weiterhin darunter.
   } finally { _plotInFlight = null; }
 }
-function candDetailsHtml(c, kind){
+function candDetailsHtml(c, kind, trailerHtml){
   // Bei Serien steht im Feld die Idee/Entwicklung (TMDB created_by), keine Regie.
   var dirLabel = kind === 'series' ? TXT.idee : TXT.regie;
   var tagsHtml = detailChipsHtml(c.g, c.kw);
@@ -5995,7 +5991,7 @@ function candDetailsHtml(c, kind){
   // .dposter), damit die Buttons darunter die volle Breite bekommen und wie
   // unter Filme/Serien nebeneinander passen -- ohne dieses Poster hier waere
   // die aufgeklappte Zeile dann ganz ohne Bild.
-  var posterHtml = detPosterHtml(c.poster64 || (c.p ? (POSTER + c.p) : null));
+  var posterHtml = detKopfHtml(detPosterHtml(c.poster64 || (c.p ? (POSTER + c.p) : null)), trailerHtml);
   if (!plotHtml && !tagsHtml && !rows && !posterHtml) return '';
   // tagsHtml bringt seine Reihen-Container selbst mit (Genres und Schlagwoerter
   // sind zwei getrennte Reihen, siehe detailChipsHtml).
@@ -6244,29 +6240,28 @@ document.getElementById('trailerModalX').onclick = closeTrailerModal;
 _trailerModal.addEventListener('click', function(e){ if (e.target === _trailerModal) closeTrailerModal(); });
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && _trailerModal.style.display !== 'none') closeTrailerModal(); });
 
+// Steht IMMER zur Verfuegung: kennt TMDB keinen Trailer, oeffnet der Button
+// ersatzweise eine YouTube-Suche nach "Titel Trailer" (siehe openTrailerModal).
 function trailerBtnHtml(api, title){
-  // Steht IMMER zur Verfuegung: kennt TMDB keinen Trailer, oeffnet der Button
-  // ersatzweise eine YouTube-Suche nach "Titel Trailer" (siehe openTrailer).
-  //
-  // Daneben "Teilen" -- dasselbe Fenster wie beim Rechtswisch auf der Zeile
-  // (oeffneTeilen). Die beiden bilden links eine Gruppe, die zusammen genau so
-  // breit ist wie "Ähnliche Titel" in der Zeile darunter (siehe .watch-links).
-  return '<div class="watch-links">' +
-    '<button type="button" class="watch-btn trailer-btn" data-trailer="' + escAttr(api || '') +
-    '" data-ttitle="' + escAttr(title || '') + '">' + TXT.trailer + '</button>' +
-    '<button type="button" class="watch-btn teilen-btn" aria-label="' + escAttr(TXT.teilen) +
-    '" title="' + escAttr(TXT.teilen) + '">' + TEILEN_SYMBOL + '</button>' +
-  '</div>';
+  return '<button type="button" class="watch-btn trailer-btn" data-trailer="' + escAttr(api || '') +
+    '" data-ttitle="' + escAttr(title || '') + '">' + TXT.trailer + '</button>';
 }
-// Dasselbe Zeichen wie am Teilen-Knopf unten (teilenFab) -- im Zeilenraster
-// steht es allein, das Wort haette die linke Gruppe deutlich breiter gemacht
-// als "Ähnliche Titel" darunter. Die Bedeutung traegt das aria-label.
+function trailerApiFuer(tmdbId, type, realId){
+  var kennung = (tmdbId && type) ? (type + '/' + tmdbId) : (realId ? ('by-title/' + realId) : null);
+  return kennung ? ('/api/trailers/' + kennung) : null;
+}
+// Grosses Poster mit dem Trailer-Knopf direkt darunter, beide gleich breit.
+function detKopfHtml(posterHtml, trailerHtml){
+  if (!trailerHtml) return posterHtml;
+  return '<div class="detkopf">' + posterHtml + trailerHtml + '</div>';
+}
+// Dasselbe Zeichen wie am Teilen-Knopf unten (teilenFab).
 var TEILEN_SYMBOL =
   '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"' +
   ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
   '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>' +
   '<path d="M8.6 13.5l6.8 3.9M15.4 6.6L8.6 10.5"/></svg>';
-/* ---- Gleiche Breite: "Trailer + Teilen" und "Ähnliche Titel" ----
+/* ---- Gleiche Breite: "Ähnliche Titel" und "Teilen" ----
    Die beiden stehen in zwei getrennten Flex-Zeilen. Ein gemeinsames Raster
    liesse sich nur mit einem Grid ueber beide Zeilen ausdruecken -- und ein Grid
    koennte auf schmalen Geraeten nicht umbrechen, wo Kaufen/Leihen/Ansehen genau
@@ -6276,13 +6271,13 @@ var TEILEN_SYMBOL =
    Gemessen wird nur an aufgeklappten Zeilen -- zugeklappt ist die Breite 0. */
 function breitenAngleichenLi(li){
   rechtesPaarAngleichen(li);             // erst zuruecksetzen, dann neu messen
-  var gruppe = li.querySelector('.watch-links');
+  var teilen = li.querySelector('.det-actions .teilen-btn');
   var aehnlich = li.querySelector('.similar-btn');
-  if (!gruppe || !aehnlich) return;      // Kino-Zeile, "Ähnliche Titel"-Popup
-  gruppe.style.width = ''; aehnlich.style.width = '';
-  var mass = Math.max(gruppe.offsetWidth, aehnlich.offsetWidth);
+  if (!teilen || !aehnlich) return;      // "Ähnliche Titel"-Popup
+  teilen.style.width = ''; aehnlich.style.width = '';
+  var mass = Math.max(teilen.offsetWidth, aehnlich.offsetWidth);
   if (!mass) return;
-  gruppe.style.width = mass + 'px';
+  teilen.style.width = mass + 'px';
   aehnlich.style.width = mass + 'px';
   rechtesPaarAngleichen(li);
 }
@@ -6348,13 +6343,12 @@ function watchRowHtml(tmdbId, type, title, realId, opts){
   var kennung = (tmdbId && type) ? (type + '/' + tmdbId) : (realId ? ('by-title/' + realId) : null);
   // Region mitgeben: Ansehen/Leihen/Kaufen ist je Land verschieden.
   var api = kennung ? ('/api/watch-providers/' + kennung + '?region=' + REGION_WAHL) : null;
-  var trailerApi = kennung ? ('/api/trailers/' + kennung) : null;
   // Auf der Kino-Seite ergeben Ansehen/Leihen/Kaufen keinen Sinn -- die Filme
-  // laufen ja erst an. Dort bleibt nur der Trailer, linksbuendig.
-  var nurTrailer = !!(opts && opts.nurTrailer);
-  // Ohne jede Kennung liesse sich nichts abfragen; dann bleibt hoechstens die
-  // YouTube-Suche uebrig, die allein keine eigene Zeile rechtfertigt.
-  if (!api && !nurTrailer) return '';
+  // laufen ja erst an. Ohne Kennung liesse sich nichts abfragen. In beiden
+  // Faellen bleibt nur "Ähnliche Titel" links -- und ohne den gar keine Zeile.
+  var aehnlich = !!(opts && opts.aehnlich);
+  var nurTrailer = !!(opts && opts.nurTrailer) || !api;
+  if (nurTrailer && !aehnlich) return '';
   // escAttr statt esc: esc() laesst Anfuehrungszeichen unangetastet -- ein Titel
   // wie 'Good Night, and Good Luck."' wuerde das Attribut sonst vorzeitig beenden.
   return '<div class="watch-row' + (nurTrailer ? ' nur-trailer' : '') + '" data-wapi="' + escAttr(api || '') +
@@ -6363,7 +6357,7 @@ function watchRowHtml(tmdbId, type, title, realId, opts){
          '" data-wtid="' + escAttr(realId || '') +
          '" data-wtitle="' + escAttr(title || '') + '">' +
     '<div class="watch-btns">' +
-      trailerBtnHtml(trailerApi, title) +
+      (aehnlich ? '<button type="button" class="watch-btn similar-btn">' + TXT.aehnlicheTitel + '</button>' : '') +
       // Umgekehrte Reihenfolge: rechts aussen soll "Ansehen" stehen, davor
       // "Leihen", davor "Kaufen" -- WATCH_CATS ist andersherum sortiert.
       (nurTrailer ? '' : '<div class="watch-rechts">' + WATCH_CATS.slice().reverse().map(function(c){
@@ -6485,6 +6479,28 @@ document.addEventListener('click', function(e){
     }
     return;
   }
+  var tr = e.target.closest && e.target.closest('.trailer-btn');
+  if (tr) {
+    e.stopPropagation();
+    openTrailerModal(tr.dataset.trailer, tr.dataset.ttitle, tr);
+    return;
+  }
+  // "Teilen" -- derselbe Weg wie ueber den Rechtswisch. Der POOL-Eintrag haengt
+  // am li (siehe render/poolItemLi); ohne ihn liesse sich der Link nicht bauen.
+  var tl = e.target.closest && e.target.closest('.teilen-btn');
+  if (tl && tl.closest('li')) {
+    e.stopPropagation();
+    var zeile = tl.closest('li');
+    var eintrag = zeile._poolItem;
+    var wr = zeile.querySelector('.watch-row');
+    if (!eintrag && wr && wr.dataset.wtid) {
+      eintrag = POOL.filter(function(x){ return String(x.realId) === String(wr.dataset.wtid); })[0];
+    }
+    if (eintrag) oeffneTeilen(eintrag); else alert(TXT.nichtTeilbar);
+    return;
+  }
+  // Eigener Listener am Knopf (wireRow/poolItemLi) -- nicht hier abfangen.
+  if (e.target.closest && e.target.closest('.similar-btn')) return;
   var row = e.target.closest && e.target.closest('.watch-row');
   if (!row) return;
   e.stopPropagation();
@@ -6497,21 +6513,6 @@ document.addEventListener('click', function(e){
   }
   var btn = e.target.closest('.watch-btn');
   if (!btn) return;
-  if (btn.classList.contains('trailer-btn')) {
-    openTrailerModal(btn.dataset.trailer, btn.dataset.ttitle, row);
-    return;
-  }
-  // "Teilen" -- derselbe Weg wie ueber den Rechtswisch. Der POOL-Eintrag haengt
-  // am li (siehe render/poolItemLi); ohne ihn liesse sich der Link nicht bauen.
-  if (btn.classList.contains('teilen-btn')) {
-    var zeile = row.closest('li');
-    var eintrag = zeile && zeile._poolItem;
-    if (!eintrag && row.dataset.wtid) {
-      eintrag = POOL.filter(function(x){ return String(x.realId) === String(row.dataset.wtid); })[0];
-    }
-    if (eintrag) oeffneTeilen(eintrag); else alert(TXT.nichtTeilbar);
-    return;
-  }
   var cat = btn.dataset.cat;
   var panel = row.querySelector('.watch-panel');
   if (row.dataset.openCat === cat) {           // nochmal derselbe Button -> zuklappen
@@ -7301,12 +7302,12 @@ function eigeneZeileLi(tab, i, profile) {
   }
   if (d.c && d.c.length) creditRows += '<div class="credits"><b>' + TXT.besetzung + '</b> ' + nameChips(d.c) + '</div>';
   creditRows += ideeZeileHtml(dirLabel, d.d ? nameChips(splitNames(d.d)) : '', staffelnKnopfHtml(d.tmdbId, d.type, d.id), d.tmdbId, d.id);
-  const detPoster = detPosterHtml(d.poster);
+  const detPoster = detKopfHtml(detPosterHtml(d.poster), trailerBtnHtml(trailerApiFuer(d.tmdbId, d.type, d.id), item[0]));
   const _watched = isWatched(tab, item[0]);
   const _seen = s.checked[i];
   const actionsHtml =
     '<div class="det-actions">' +
-      '<button type="button" class="similar-btn">' + TXT.aehnlicheTitel + '</button>' +
+      '<button type="button" class="teilen-btn">' + TXT.teilen + '</button>' +
       '<div class="det-rechts">' +
         '<div class="det-left">' +
           '<button type="button" aria-label="' + TXT.watchliste + '" class="wl-btn' + (_watched ? ' on' : '') + '"><span class="wl-glyph">' + (_watched ? '★' : '☆') + '</span> <span class="btn-wort">' + TXT.watchliste + '</span></button>' +
@@ -7330,7 +7331,7 @@ function eigeneZeileLi(tab, i, profile) {
     '<span class="info"><div class="title">' + '<span class="ttext">' + item[0] + '</span>' + scoreBadge + '</div>' +
     '<div class="meta">' + metaHtml(item[1], tab, kinoStartMetaHtml(d.tmdbId, d.type)) + pinBtnHtml(d.id, pinCategory) + '</div>' +
     providerChipsHtml(d.providers) + detailsHtml +
-    watchRowHtml(d.tmdbId, d.type, item[0], d.id) + actionsHtml + '</span>';
+    watchRowHtml(d.tmdbId, d.type, item[0], d.id, { aehnlich: true }) + actionsHtml + '</span>';
   wireRow(li, tab, i);
   wirePinBtn(li, pinCategory, async () => s.det[i].id);
   attachSwipeToRemove(li, async function(){
@@ -13472,7 +13473,7 @@ function poolItemLi(item, score, opts){
   var orderedActionsHtml = '<div class="det-rechts">' + wlBtnHtml + seenBtnHtml + '</div>';
   var actionsHtml =
     '<div class="det-actions">' +
-      (showSimilarBtn ? '<button type="button" class="similar-btn">' + TXT.aehnlicheTitel + '</button>' : '') +
+      '<button type="button" class="teilen-btn">' + TXT.teilen + '</button>' +
       orderedActionsHtml +
     '</div>';
   li.innerHTML =
@@ -13500,9 +13501,9 @@ function poolItemLi(item, score, opts){
             : TXT.fremdUnbewertet(opts.fremdName)) + '</div>'
         : '') +
       providerChipsHtml(item.providers) +
-      candDetailsHtml(item, item.type) +
+      candDetailsHtml(item, item.type, trailerBtnHtml(trailerApiFuer(item.tmdbId, item.type, item.realId), item.t)) +
       watchRowHtml(item.tmdbId, item.type, item.t, item.realId,
-                   { nurTrailer: !!(opts && opts.nurTrailer) }) + actionsHtml + '</div>';
+                   { nurTrailer: !!(opts && opts.nurTrailer), aehnlich: showSimilarBtn }) + actionsHtml + '</div>';
   var seenBtn = li.querySelector('.seen-btn');
   seenBtn.addEventListener('click', function(e){
     e.stopPropagation();
