@@ -90,7 +90,8 @@
     color: var(--text);
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     min-height: 100vh;
-    padding-bottom: 60px;
+    /* Hoehe der festen Navigation (.bottom-nav) plus Luft */
+    padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
   }
   header {
     position: relative;
@@ -445,7 +446,7 @@
      Trailer-Knopf darueber buendig mit ihnen abschliesst (links Watchlist,
      rechts Gesehen) und nicht breiter wirkt. */
   #sharedActions button { flex:1; }
-  .to-top { position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  .to-top { position:fixed; right:16px; bottom:calc(72px + env(safe-area-inset-bottom, 0px));
     width:44px; height:44px; display:none; align-items:center; justify-content:center;
     background:var(--card); border:1px solid var(--border); border-radius:50%;
     color:var(--text); cursor:pointer; z-index:40; box-shadow:0 6px 18px rgba(0,0,0,.45); }
@@ -455,7 +456,7 @@
      sichtbar (Teilen soll keinen Scroll voraussetzen); z-index unter den
      Modal-Overlays, damit offene Fenster ihn ueberdecken. */
   .teilen-fab { position:fixed; left:50%; transform:translateX(-50%);
-    bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:900;
+    bottom:calc(72px + env(safe-area-inset-bottom, 0px)); z-index:900;
     display:flex; align-items:center; gap:7px; background:var(--teilen-soft);
     border:1px solid var(--teilen); border-radius:999px; padding:10px 18px;
     color:var(--teilen); font-size:14px; font-weight:700; cursor:pointer;
@@ -464,7 +465,7 @@
   /* Das Auswahlblatt sitzt DIREKT UEBER dem Knopf (ausdrueckliche Vorgabe),
      nicht mittig im Bild wie die Modals. */
   .teilen-sheet { position:fixed; left:50%; transform:translateX(-50%);
-    bottom:calc(66px + env(safe-area-inset-bottom, 0px)); z-index:901;
+    bottom:calc(122px + env(safe-area-inset-bottom, 0px)); z-index:901;
     display:flex; flex-direction:column; gap:8px; background:var(--bg);
     border:1px solid var(--border); border-radius:12px; padding:12px;
     width:min(320px, calc(100vw - 32px)); box-shadow:0 4px 24px rgba(0,0,0,.5); }
@@ -1350,6 +1351,21 @@
      ein Knopf, der spurlos weg ist, wirft mehr Fragen auf als einer, der
      erklaert, warum er nicht geht. */
   .filter-group button[disabled] { opacity: .45; cursor: not-allowed; }
+  /* Feste Navigation unten. Halbtransparent mit Unschaerfe, damit die Liste
+     sichtbar dahinter weiterlaeuft. z-index unter .teilen-fab (900) und den
+     Modals (1000). */
+  .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 890;
+    padding: 8px 16px calc(8px + env(safe-area-inset-bottom, 0px));
+    background: rgba(14, 17, 22, .82); border-top: 1px solid var(--border);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+  .bottom-nav .filter-group { max-width: 660px; margin: 0 auto; }
+  .bottom-nav button { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text-dim); cursor: pointer; transition: all .15s; }
+  @media (hover: hover) { .bottom-nav button:not([disabled]):hover { border-color: var(--accent); color: var(--accent); } }
+  .bottom-nav button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  /* "Alle" ist kurz und bekommt nur seine Textbreite, damit "Neue entdecken"
+     bei 375px ungekuerzt bleibt. */
+  .bottom-nav #fAlle { flex: 0 0 auto; padding-left: 12px; padding-right: 12px; }
   #fInStream { white-space: nowrap; }
   /* Groesse an der Schrift statt fest bei 13px: Das feste Mass machte die
      Streaming-Zeile 1px hoeher als die Statusreihe darueber, sobald die
@@ -1480,18 +1496,6 @@
 
 <div class="toolbar">
   <div class="tb-grid">
-    <!-- Statusreihe: die drei Zustaende, die ein Titel gegenueber DIR haben kann.
-         Watchlist und Gesehen sind markierte Titel, "Neue entdecken" ist der Rest --
-         alles, was du noch nicht markiert hast. Die drei sind frei
-         kombinierbar; der Typ (Film oder Serie) kommt aus dem aktiven Tab, es
-         gibt dafuer keine eigenen Knoepfe mehr. -->
-    <div class="tb-toprow">
-      <div class="filter-group">
-        <button id="fOpen" class="active">Watchlist</button>
-        <button id="fDone">Gesehen</button>
-        <button id="fDiscover">Neue entdecken</button>
-      </div>
-    </div>
     <!-- Zweite Zeile: der Streaming-Filter ist keine dritte Status-Auswahl,
          sondern ein zusaetzlicher UND-Filter ueber allen dreien -- deshalb steht
          er bewusst in einer eigenen Zeile. "Sortieren" sitzt daneben, weil die
@@ -1568,6 +1572,18 @@
     <a href="/de-de/kino">Kino</a>
   </nav>
 </footer>
+
+<!-- Statusfilter als feste Navigation unten; die Liste laeuft dahinter durch.
+     Watchlist und Gesehen sind markierte Titel, "Neue entdecken" ist der Rest,
+     frei kombinierbar. "Alle" schaltet alle drei an. -->
+<nav class="bottom-nav" aria-label="Statusfilter">
+  <div class="filter-group">
+    <button id="fAlle" type="button">Alle</button>
+    <button id="fOpen" type="button" class="active">Watchlist</button>
+    <button id="fDone" type="button">Gesehen</button>
+    <button id="fDiscover" type="button">Neue entdecken</button>
+  </div>
+</nav>
 
 <button type="button" id="toTop" class="to-top" aria-label="Nach oben">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
@@ -4735,6 +4751,7 @@ var MARKUP_TEXTE = {
     '#tabKino': { t: '🍿 Cinema' },
     '#search': { p: 'Search title, genre or name …' },
     '#fOpen': { t: 'Watchlist' },
+    '#fAlle': { t: 'All' },
     '#fDone': { t: 'Watched' },
     '#fDiscover': { t: 'Discover new' },
     '#fSort': { t: '⇅ Sort' },
@@ -4849,6 +4866,7 @@ var MARKUP_TEXTE = {
     '#tabKino': { t: '🍿 Cinéma' },
     '#search': { p: 'Chercher un titre, un genre ou un nom …' },
     '#fOpen': { t: 'Watchlist' },
+    '#fAlle': { t: 'Tous' },
     '#fDone': { t: 'Vus' },
     '#fDiscover': { t: 'Découvrir' },
     '#fSort': { t: '⇅ Trier' },
@@ -4963,6 +4981,7 @@ var MARKUP_TEXTE = {
     '#tabKino': { t: '🍿 Cine' },
     '#search': { p: 'Buscar título, género o nombre …' },
     '#fOpen': { t: 'Watchlist' },
+    '#fAlle': { t: 'Todos' },
     '#fDone': { t: 'Vistos' },
     '#fDiscover': { t: 'Descubrir' },
     '#fSort': { t: '⇅ Ordenar' },
@@ -5077,6 +5096,7 @@ var MARKUP_TEXTE = {
     '#tabKino': { t: '🍿 Cinema' },
     '#search': { p: 'Cerca titolo, genere o nome …' },
     '#fOpen': { t: 'Watchlist' },
+    '#fAlle': { t: 'Tutti' },
     '#fDone': { t: 'Visti' },
     '#fDiscover': { t: 'Scopri novità' },
     '#fSort': { t: '⇅ Ordina' },
@@ -5191,6 +5211,7 @@ var MARKUP_TEXTE = {
     '#tabKino': { t: '🍿 Bioscoop' },
     '#search': { p: 'Zoek op titel, genre of naam …' },
     '#fOpen': { t: 'Watchlist' },
+    '#fAlle': { t: 'Alle' },
     '#fDone': { t: 'Gezien' },
     '#fDiscover': { t: 'Nieuw ontdekken' },
     '#fSort': { t: '⇅ Sorteren' },
@@ -5305,6 +5326,7 @@ var MARKUP_TEXTE = {
     '#tabKino': { t: '🍿 Cinema' },
     '#search': { p: 'Busque por título, gênero ou nome …' },
     '#fOpen': { t: 'Watchlist' },
+    '#fAlle': { t: 'Todos' },
     '#fDone': { t: 'Assistidos' },
     '#fDiscover': { t: 'Descobrir novos' },
     '#fSort': { t: '⇅ Ordenar' },
@@ -8196,6 +8218,7 @@ function updateFilterRowUI(){
     btns.done.classList.toggle('active', pst.seen);
     btns.discover.classList.remove('active');
     btns.discover.disabled = true;
+    btns.alle.classList.toggle('active', pst.wl && pst.seen);
     btns.inStream.classList.toggle('active', inStreamFilterOn);
     var sz = document.querySelector('.tb-streamrow');
     if (sz) sz.style.display = '';
@@ -8211,6 +8234,7 @@ function updateFilterRowUI(){
   btns.open.classList.toggle('active', st.wl);
   btns.done.classList.toggle('active', st.seen);
   btns.discover.classList.toggle('active', st.disc);
+  btns.alle.classList.toggle('active', st.wl && st.seen && st.disc);
   btns.inStream.classList.toggle('active', inStreamFilterOn);
   btns.discover.disabled = false;   // nur in fremden Listen gesperrt (Zweig oben)
   // "Deine Streaming-Anbieter" ergibt im Kino keinen Sinn -- die Filme laufen
@@ -8288,7 +8312,7 @@ function setTab(t) {
   nachDemZeichnen(renderCurrentTab);
 }
 
-const btns = { open: document.getElementById('fOpen'), done: document.getElementById('fDone'), discover: document.getElementById('fDiscover'), inStream: document.getElementById('fInStream') };
+const btns = { alle: document.getElementById('fAlle'), open: document.getElementById('fOpen'), done: document.getElementById('fDone'), discover: document.getElementById('fDiscover'), inStream: document.getElementById('fInStream') };
 // Watchlist, Gesehen und Entdecken sind drei unabhaengige Haken auf derselben
 // Achse (welchen Status ein Titel bei dir hat). Auch der letzte aktive laesst
 // sich abwaehlen -- die Liste ist dann leer und sagt das ("Keine Titel fuer
@@ -8317,6 +8341,14 @@ function toggleStatus(feld){
   // Die Liste danach, damit der Knopf sofort umschlaegt (siehe nachDemZeichnen).
   nachDemZeichnen(renderCurrentTab);
 }
+// "Alle": alle Status an (in einer fremden Liste nur Watchlist + Gesehen).
+btns.alle.onclick = () => {
+  momentVerlassen();
+  statusSchreiben({ wl: true, seen: true, disc: !personenAnsicht() });
+  titelLimit = TITEL_PRO_SEITE;
+  updateFilterRowUI();
+  nachDemZeichnen(renderCurrentTab);
+};
 btns.open.onclick = () => toggleStatus('wl');
 btns.done.onclick = () => toggleStatus('seen');
 btns.discover.onclick = () => {
