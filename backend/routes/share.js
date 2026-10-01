@@ -153,8 +153,8 @@ router.get('/qr', GRENZE_QR, async (req, res) => {
    schlicht weg. */
 const GRENZE_MOMENT_NEU = mengenGrenze({ name: 'share-moment-neu', anzahl: 30, minuten: 1 });
 const GRENZE_MOMENT = mengenGrenze({ name: 'share-moment', anzahl: 120, minuten: 1 });
-const MOMENT_MAX_TITEL = 500;      // je Momentaufnahme (die aktuelle Liste, gekappt)
-const MOMENT_MAX_JE_KONTO = 500;
+const MOMENT_MAX_TITEL = 2000;     // je Momentaufnahme (die aktuelle Liste, gekappt)
+const MOMENT_MAX_JE_KONTO = 2000;
 
 router.post('/titel-liste', GRENZE_MOMENT_NEU, requireAuth, async (req, res) => {
   const roh = Array.isArray(req.body && req.body.ids) ? req.body.ids : [];

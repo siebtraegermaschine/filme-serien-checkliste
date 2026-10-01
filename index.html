@@ -11809,12 +11809,12 @@ function ansichtAusLink(){
    Der Ansicht-Link uebertrug nur EINSTELLUNGEN -- der Empfaenger sah seine
    eigenen Markierungen durch fremde Filter, also meist etwas anderes (oder
    nichts). Die Momentaufnahme friert stattdessen die KONKRETEN Titel der
-   aktuellen Liste ein (komplette Liste, gekappt bei 500 -- nicht nur die
+   aktuellen Liste ein (komplette Liste, gekappt bei 2000 -- nicht nur die
    sichtbaren 25) und teilt sie per Token-Link (?titel=...). Ohne Zeitverfall;
    der Link stirbt nur mit dem Konto. Erstellen nur angemeldet (siehe
    routes/share.js). Alte ?ansicht=-Links bleiben lesbar (ansichtAusLink). */
 var MOMENT = null;             // { ids: [...], von: Name } -- aktive geteilte Liste
-var MOMENT_MAX_TITEL = 500;    // muss zu MOMENT_MAX_TITEL in routes/share.js passen
+var MOMENT_MAX_TITEL = 2000;   // muss zu MOMENT_MAX_TITEL in routes/share.js passen
 function momentVerlassen(){ MOMENT = null; }
 // Die komplette aktuelle Liste in Anzeige-Reihenfolge. Nur Titel mit realId:
 // Kino-Eintraege ohne titles-Zeile lassen sich nicht einfrieren.
