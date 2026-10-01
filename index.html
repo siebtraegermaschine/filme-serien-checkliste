@@ -163,7 +163,7 @@
     color: var(--accent);
   }
   /* Der frueher hier stehende Discovery-Button ("Alle Filme & Serien
-     entdecken") ist entfallen: "Neue entdecken" ist jetzt ein dritter Status neben
+     entdecken") ist entfallen: "Entdecken" ist jetzt ein dritter Status neben
      Watchlist/Gesehen in .filter-group, der Typ kommt aus dem aktiven Tab. */
   /* Kein margin-top: Der Header bringt 14px padding-bottom mit, und die
      Statusreihe soll dicht unter den Tabs stehen -- beides ist seit dem
@@ -545,7 +545,7 @@
      unter der Statusreihe sitzt (nachgemessen). Vorher standen hier 22px -- der
      Knopf sass sichtbar tiefer als derselbe Knopf im anderen Bereich, obwohl er
      an derselben Stelle steht.
-     Der Sortier-Knopf steht rechts, wo auch "Neue entdecken" endet. */
+     Der Sortier-Knopf steht rechts, wo auch "Entdecken" endet. */
   .cinema-page-header { max-width:700px; margin:0 auto 6px; padding:0 20px; box-sizing:border-box;
     display:flex; align-items:flex-end; justify-content:flex-end; gap:4px; }
   /* "Laeuft jetzt" / "Laeuft bald" sitzen unter Watchlist und Gesehen: 4px Fuge
@@ -557,12 +557,12 @@
      Sortiermenue-Eintraege) 5px hoeher als die zwei Knoepfe daneben. */
   .cinema-filter button, #cinemaSort { flex:1; min-width:0; padding:9px 2px; font-size:12px; line-height:1.2;
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:center; }
-  /* Genauso breit wie "Neue entdecken" in der Statusreihe darueber: Dort teilen
+  /* Genauso breit wie "Entdecken" in der Statusreihe darueber: Dort teilen
      sich drei Knoepfe mit 4px Abstand die Zeile, eine Spalte ist also
      (100% - 8px) / 3. .cinema-page-header hat dieselbe Inhaltsbreite wie
      .toolbar (max-width 700px, 20px Innenabstand), die Rechnung geht damit
      direkt auf. justify-content:space-between schiebt den Block nach rechts,
-     wo auch "Neue entdecken" endet. */
+     wo auch "Entdecken" endet. */
   .cinema-page-actions { display:flex; align-items:center; gap:4px;
     flex: 0 0 calc((100% - 8px) / 3); min-width: 0; }
   .cinema-page-actions .sort-wrap { flex: 1; min-width: 0; }
@@ -1269,7 +1269,7 @@
      "links flexibel, rechts inhaltsbreit". Die zwei Zeilen trennen die beiden
      Achsen: oben der Status (Watchlist/Gesehen/Entdecken), unten der
      zusaetzliche Streaming-Filter samt Sortierung. "Sortieren" stand frueher
-     oben neben Watchlist/Gesehen -- mit "Neue entdecken" als drittem Status wurde
+     oben neben Watchlist/Gesehen -- mit "Entdecken" als drittem Status wurde
      die Zeile bei 375px zu eng, deshalb sitzt es jetzt unten. */
   .tb-grid { display: flex; flex-direction: column; gap: 10px; }
   .tb-toprow { display: flex; gap: 10px; align-items: stretch; }
@@ -1339,7 +1339,7 @@
      Dreispalten-Raster -- mit dem Grundmass (13px/14px) waren sie 5px hoeher
      als die Statusreihe darueber und die Kino-Zeile daneben. */
   .filter-group button, #fInStream, #fSort { flex: 1; min-width: 0; padding: 9px 2px; font-size: 12px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
-  /* "Neue entdecken" ist laenger als "Watchlist"/"Gesehen" und wuerde bei 320px
+  /* "Entdecken" ist laenger als "Watchlist"/"Gesehen" und wuerde bei 320px
      sonst als "Neue entde…" abgeschnitten -- nachgemessen per scrollWidth gegen
      clientWidth. Der Breakpoint muss NACH der Regel darueber stehen: beide haben
      dieselbe Spezifitaet, also gewinnt die spaetere. */
@@ -1366,8 +1366,6 @@
     color: var(--text-dim); cursor: pointer; transition: all .15s; }
   @media (hover: hover) { .bottom-nav button:not([disabled]):not(.active):hover { color: var(--accent); } }
   .bottom-nav button.active { background: var(--accent); color: #0e1116; font-weight: 600; }
-  /* Bei 320px fehlten "Neue entdecken" sonst 3px (nachgemessen per scrollWidth). */
-  @media (max-width: 360px) { .bottom-nav { padding-left: 10px; padding-right: 10px; } }
   #fInStream { white-space: nowrap; }
   /* Groesse an der Schrift statt fest bei 13px: Das feste Mass machte die
      Streaming-Zeile 1px hoeher als die Statusreihe darueber, sobald die
@@ -1576,13 +1574,13 @@
 </footer>
 
 <!-- Statusfilter als feste Navigation unten; die Liste laeuft dahinter durch.
-     Watchlist und Gesehen sind markierte Titel, "Neue entdecken" ist der Rest,
+     Watchlist und Gesehen sind markierte Titel, "Entdecken" ist der Rest,
      frei kombinierbar. -->
 <nav class="bottom-nav" aria-label="Statusfilter">
   <div class="filter-group">
     <button id="fOpen" type="button" class="active">Watchlist</button>
     <button id="fDone" type="button">Gesehen</button>
-    <button id="fDiscover" type="button">Neue entdecken</button>
+    <button id="fDiscover" type="button">Entdecken</button>
   </div>
 </nav>
 
@@ -2267,7 +2265,7 @@ var UI_TEXTE = {
     keineFreigabe: function(stufe){ return 'Keine Titel mit Altersfreigabe „' + stufe + '". Titel ohne hinterlegte Freigabe werden dabei ausgeblendet – das betrifft einen Teil des Katalogs. Den Filter hebst du oben links wieder auf.'; },
     keineGemeinsamen: function(wer){ return 'Keine gemeinsamen Titel mit ' + wer + '. Je mehr ihr beide eurer Watchlist hinzufügt, desto mehr Übereinstimmungen gibt es.'; },
     keineTitelAuswahl: 'Keine Titel für diese Auswahl.',
-    watchlisteLeer: 'Dies ist deine Watchlist. Füge mind. 20 Titel über „Neue entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>. ' +
+    watchlisteLeer: 'Dies ist deine Watchlist. Füge mind. 20 Titel über „Entdecken" hinzu. Je mehr Titel du hinzufügst, desto genauer wird dein <i class="info-word" data-ts role="button" tabindex="0" aria-label="Was ist der Taste-Score?">Taste-Score</i>. ' +
       'Zukünftig musst du nur noch auswählen, ob du einen Film oder eine Serie schauen möchtest oder ins Kino gehen willst. ' +
       'Hier siehst du dann deine persönliche Watchlist, sortiert nach deinem Geschmack.<br><br>' +
       '<u>Du möchtest mit anderen Filme genießen?</u><br>' +
@@ -2280,17 +2278,17 @@ var UI_TEXTE = {
     kinoLeer: 'Aktuell sind keine Titel hinterlegt.',
     kinoFehler: 'Kino-Daten konnten nicht geladen werden.',
     gesehenZuWl: 'Du hast diesen Titel als gesehen markiert. Auf der Watchlist gilt er nicht mehr als gesehen: Er verschwindet aus „Gesehen“ und deine Sterne-Bewertung zählt nicht mehr für deinen Taste-Score. Trotzdem auf die Watchlist setzen?',
-    wischFilme: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
-    wischSerien: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
-    wischDiscovery: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht unter „Neue entdecken“ nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
+    wischFilme: 'Wischen nach links entfernt den Titel aus deiner Filme-Liste. Du kannst ihn über „Entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
+    wischSerien: 'Wischen nach links entfernt den Titel aus deiner Serien-Liste. Du kannst ihn über „Entdecken“ oder die Suche jederzeit wieder hinzufügen. Diese Frage kommt nur dieses eine Mal. Jetzt entfernen?',
+    wischDiscovery: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht unter „Entdecken“ nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
     wischKino: 'Wischen nach links blendet den Titel dauerhaft aus. Er taucht auf der Kino-Seite nicht mehr auf. Du findest ihn unter Einstellungen → „Gelöschte Titel“ und kannst ihn von dort zurückholen. Diese Frage kommt nur dieses eine Mal. Jetzt ausblenden?',
-    ausListeEntfernen: function(wort, pron){ return wort + ' aus deiner Liste entfernen? Du kannst ' + pron + ' über „Neue entdecken“ oder die Suche jederzeit wieder hinzufügen.'; },
+    ausListeEntfernen: function(wort, pron){ return wort + ' aus deiner Liste entfernen? Du kannst ' + pron + ' über „Entdecken“ oder die Suche jederzeit wieder hinzufügen.'; },
     pronFilm: 'ihn', pronSerie: 'sie',
     sucheTitel: 'Titel', sucheAlternativtitel: 'Alternativtitel', sucheGenre: 'Genre',
     sucheDarsteller: 'Darsteller', sucheRegie: 'Regie', sucheSchlagwort: 'Schlagwort',
     filternNach: function(v){ return 'Möchtest du nach „' + v + '“ filtern?'; },
     tourSlides: [
-      { titel: 'Filme & Serien entdecken', text: '„Neue entdecken" listet alle Filme und Serien auf sowie aktuelle und zukünftige Kinofilme. Markiere Titel als gesehen oder füge sie deiner Watchlist hinzu. Dadurch bildet sich dein persönlicher Taste-Score.' },
+      { titel: 'Filme & Serien entdecken', text: '„Entdecken" listet alle Filme und Serien auf sowie aktuelle und zukünftige Kinofilme. Markiere Titel als gesehen oder füge sie deiner Watchlist hinzu. Dadurch bildet sich dein persönlicher Taste-Score.' },
       { titel: 'Dein Taste-Score', text: 'Ab 20 gespeicherten Titeln werden alle Filme, Serien und Kinofilme nach deinem Geschmack sortiert.' },
       { titel: 'Mit anderen schauen', text: '„Matche" deine Watchlist mit anderen und filtere nach Titeln, die ihr gemeinsam sehen wollt.' },
       { titel: 'Streaming & Taste-Score', text: 'Markiere unter Einstellungen die Streaminganbieter, die du nutzt. Filtere alle Filme und Serien, die bei deinen Anbietern aktuell kostenlos laufen. Diese werden nach deinem Taste-Score sortiert.' },
@@ -2594,7 +2592,7 @@ var UI_TEXTE = {
     keineFreigabe: function(stufe){ return 'No titles with age rating “' + stufe + '”. Titles without a rating on file are hidden – that affects part of the catalogue. Remove the filter at the top left.'; },
     keineGemeinsamen: function(wer){ return 'No shared titles with ' + wer + '. The more you both add to your watchlists, the more matches you get.'; },
     keineTitelAuswahl: 'No titles for this selection.',
-    watchlisteLeer: 'This is your watchlist. Add at least 20 titles via “Discover new”. The more titles you add, the more accurate your <i class="info-word" data-ts role="button" tabindex="0" aria-label="What is the Taste Score?">Taste Score</i> becomes. ' +
+    watchlisteLeer: 'This is your watchlist. Add at least 20 titles via “Discover”. The more titles you add, the more accurate your <i class="info-word" data-ts role="button" tabindex="0" aria-label="What is the Taste Score?">Taste Score</i> becomes. ' +
       'From then on you only choose whether you want to watch a movie, a series, or go to the cinema. ' +
       'You will see your personal watchlist here, sorted by your taste.<br><br>' +
       '<u>Want to enjoy movies with others?</u><br>' +
@@ -2606,17 +2604,17 @@ var UI_TEXTE = {
     kinoLeer: 'No titles on file right now.',
     kinoFehler: 'Cinema data could not be loaded.',
     gesehenZuWl: 'You marked this title as watched. On the watchlist it no longer counts as watched: it disappears from “Watched” and your star rating no longer counts towards your Taste Score. Add it to the watchlist anyway?',
-    wischFilme: 'Swiping left removes the title from your movies list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
-    wischSerien: 'Swiping left removes the title from your series list. You can add it again anytime via “Discover new” or the search. You will only be asked this once. Remove now?',
-    wischDiscovery: 'Swiping left hides the title permanently. It no longer appears under “Discover new”. You can bring it back under Settings → “Removed titles”. You will only be asked this once. Hide now?',
+    wischFilme: 'Swiping left removes the title from your movies list. You can add it again anytime via “Discover” or the search. You will only be asked this once. Remove now?',
+    wischSerien: 'Swiping left removes the title from your series list. You can add it again anytime via “Discover” or the search. You will only be asked this once. Remove now?',
+    wischDiscovery: 'Swiping left hides the title permanently. It no longer appears under “Discover”. You can bring it back under Settings → “Removed titles”. You will only be asked this once. Hide now?',
     wischKino: 'Swiping left hides the title permanently. It no longer appears on the cinema page. You can bring it back under Settings → “Removed titles”. You will only be asked this once. Hide now?',
-    ausListeEntfernen: function(wort){ return 'Remove this ' + wort.toLowerCase() + ' from your list? You can add it again anytime via “Discover new” or the search.'; },
+    ausListeEntfernen: function(wort){ return 'Remove this ' + wort.toLowerCase() + ' from your list? You can add it again anytime via “Discover” or the search.'; },
     pronFilm: 'it', pronSerie: 'it',
     sucheTitel: 'Title', sucheAlternativtitel: 'Alternative title', sucheGenre: 'Genre',
     sucheDarsteller: 'Actor', sucheRegie: 'Director', sucheSchlagwort: 'Keyword',
     filternNach: function(v){ return 'Filter by “' + v + '”?'; },
     tourSlides: [
-      { titel: 'Discover movies & series', text: '“Discover new” lists all movies and series as well as current and upcoming cinema releases. Mark titles as watched or add them to your watchlist. This builds your personal Taste Score.' },
+      { titel: 'Discover movies & series', text: '“Discover” lists all movies and series as well as current and upcoming cinema releases. Mark titles as watched or add them to your watchlist. This builds your personal Taste Score.' },
       { titel: 'Your Taste Score', text: 'Once you have saved 20 titles, all movies, series and cinema releases are sorted by your taste.' },
       { titel: 'Watch with others', text: '“Match” your watchlist with others and filter for titles you want to watch together.' },
       { titel: 'Streaming & Taste Score', text: 'Select the streaming services you use under Settings. Filter all movies and series currently included with your services – sorted by your Taste Score.' },
@@ -3563,7 +3561,7 @@ var UI_TEXTE = {
     keineFreigabe: function(stufe){ return 'Nessun titolo con classificazione per età “' + stufe + '”. I titoli senza classificazione registrata sono nascosti – ciò riguarda una parte del catalogo. Rimuovi il filtro in alto a sinistra.'; },
     keineGemeinsamen: function(wer){ return 'Nessun titolo in comune con ' + wer + '. Più titoli aggiungete entrambi alle vostre watchlist, più match otterrete.'; },
     keineTitelAuswahl: 'Nessun titolo per questa selezione.',
-    watchlisteLeer: 'Questa è la tua watchlist. Aggiungi almeno 20 titoli tramite “Scopri novità”. Più titoli aggiungi, più preciso diventa il tuo <i class="info-word" data-ts role="button" tabindex="0" aria-label="Cos’è il Taste Score?">Taste Score</i>. ' +
+    watchlisteLeer: 'Questa è la tua watchlist. Aggiungi almeno 20 titoli tramite “Scopri”. Più titoli aggiungi, più preciso diventa il tuo <i class="info-word" data-ts role="button" tabindex="0" aria-label="Cos’è il Taste Score?">Taste Score</i>. ' +
       'Da quel momento devi solo scegliere se guardare un film, una serie o andare al cinema. ' +
       'Qui vedrai la tua watchlist personale, ordinata secondo i tuoi gusti.<br><br>' +
       '<u>Vuoi goderti i film in compagnia?</u><br>' +
@@ -3575,17 +3573,17 @@ var UI_TEXTE = {
     kinoLeer: 'Nessun titolo registrato al momento.',
     kinoFehler: 'Impossibile caricare i dati del cinema.',
     gesehenZuWl: 'Hai segnato questo titolo come visto. Sulla watchlist non conta più come visto: sparisce da “Visti” e le tue stelle non contano più per il tuo Taste Score. Aggiungerlo comunque alla watchlist?',
-    wischFilme: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista dei film. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri novità” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
-    wischSerien: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista delle serie. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri novità” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
-    wischDiscovery: 'Scorrendo verso sinistra nascondi il titolo in modo permanente. Non appare più in “Scopri novità”. Puoi ripristinarlo in Impostazioni → “Titoli rimossi”. Questa domanda ti viene posta solo una volta. Nascondere ora?',
+    wischFilme: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista dei film. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
+    wischSerien: 'Scorrendo verso sinistra rimuovi il titolo dalla tua lista delle serie. Puoi aggiungerlo di nuovo in qualsiasi momento tramite “Scopri” o la ricerca. Questa domanda ti viene posta solo una volta. Rimuovere ora?',
+    wischDiscovery: 'Scorrendo verso sinistra nascondi il titolo in modo permanente. Non appare più in “Scopri”. Puoi ripristinarlo in Impostazioni → “Titoli rimossi”. Questa domanda ti viene posta solo una volta. Nascondere ora?',
     wischKino: 'Scorrendo verso sinistra nascondi il titolo in modo permanente. Non appare più nella pagina del cinema. Puoi ripristinarlo in Impostazioni → “Titoli rimossi”. Questa domanda ti viene posta solo una volta. Nascondere ora?',
-    ausListeEntfernen: function(wort){ return 'Rimuovere “' + wort.toLowerCase() + '” dalla tua lista? Puoi aggiungere di nuovo il titolo in qualsiasi momento tramite “Scopri novità” o la ricerca.'; },
+    ausListeEntfernen: function(wort){ return 'Rimuovere “' + wort.toLowerCase() + '” dalla tua lista? Puoi aggiungere di nuovo il titolo in qualsiasi momento tramite “Scopri” o la ricerca.'; },
     pronFilm: 'lo', pronSerie: 'la',
     sucheTitel: 'Titolo', sucheAlternativtitel: 'Titolo alternativo', sucheGenre: 'Genere',
     sucheDarsteller: 'Attore', sucheRegie: 'Regia', sucheSchlagwort: 'Parola chiave',
     filternNach: function(v){ return 'Filtrare per “' + v + '”?'; },
     tourSlides: [
-      { titel: 'Scopri film e serie', text: '“Scopri novità” elenca tutti i film e le serie oltre alle uscite al cinema attuali e in arrivo. Segna i titoli come visti o aggiungili alla tua watchlist. Così costruisci il tuo Taste Score personale.' },
+      { titel: 'Scopri film e serie', text: '“Scopri” elenca tutti i film e le serie oltre alle uscite al cinema attuali e in arrivo. Segna i titoli come visti o aggiungili alla tua watchlist. Così costruisci il tuo Taste Score personale.' },
       { titel: 'Il tuo Taste Score', text: 'Quando hai salvato 20 titoli, tutti i film, le serie e le uscite al cinema vengono ordinati secondo i tuoi gusti.' },
       { titel: 'Guarda in compagnia', text: 'Fai il “Match” della tua watchlist con altre persone e filtra i titoli che volete guardare insieme.' },
       { titel: 'Streaming e Taste Score', text: 'Seleziona nelle Impostazioni i servizi di streaming che usi. Filtra tutti i film e le serie attualmente inclusi nei tuoi servizi – ordinati secondo il tuo Taste Score.' },
@@ -3886,7 +3884,7 @@ var UI_TEXTE = {
     keineFreigabe: function(stufe){ return 'Geen titels met leeftijdsclassificatie “' + stufe + '”. Titels zonder geregistreerde classificatie worden verborgen – dat betreft een deel van de catalogus. Verwijder het filter linksboven.'; },
     keineGemeinsamen: function(wer){ return 'Geen gedeelde titels met ' + wer + '. Hoe meer jullie allebei aan je watchlists toevoegen, hoe meer matches je krijgt.'; },
     keineTitelAuswahl: 'Geen titels voor deze selectie.',
-    watchlisteLeer: 'Dit is je watchlist. Voeg via “Nieuw ontdekken” minstens 20 titels toe. Hoe meer titels je toevoegt, hoe nauwkeuriger je <i class="info-word" data-ts role="button" tabindex="0" aria-label="Wat is de Taste Score?">Taste Score</i> wordt. ' +
+    watchlisteLeer: 'Dit is je watchlist. Voeg via “Ontdekken” minstens 20 titels toe. Hoe meer titels je toevoegt, hoe nauwkeuriger je <i class="info-word" data-ts role="button" tabindex="0" aria-label="Wat is de Taste Score?">Taste Score</i> wordt. ' +
       'Daarna kies je alleen nog of je een film of serie wilt kijken of naar de bioscoop wilt. ' +
       'Hier zie je je persoonlijke watchlist, gesorteerd op jouw smaak.<br><br>' +
       '<u>Wil je samen met anderen van films genieten?</u><br>' +
@@ -3898,17 +3896,17 @@ var UI_TEXTE = {
     kinoLeer: 'Op dit moment geen titels bekend.',
     kinoFehler: 'Bioscoopgegevens konden niet worden geladen.',
     gesehenZuWl: 'Je hebt deze titel als gezien gemarkeerd. Op de watchlist telt hij niet meer als gezien: hij verdwijnt uit “Gezien” en je sterrenbeoordeling telt niet meer mee voor je Taste Score. Toch aan de watchlist toevoegen?',
-    wischFilme: 'Naar links vegen verwijdert de titel uit je filmlijst. Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
-    wischSerien: 'Naar links vegen verwijdert de titel uit je serielijst. Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
-    wischDiscovery: 'Naar links vegen verbergt de titel permanent. Hij verschijnt niet meer onder “Nieuw ontdekken”. Je kunt hem terughalen via Instellingen → “Verwijderde titels”. Dit wordt maar één keer gevraagd. Nu verbergen?',
+    wischFilme: 'Naar links vegen verwijdert de titel uit je filmlijst. Je kunt die altijd opnieuw toevoegen via “Ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
+    wischSerien: 'Naar links vegen verwijdert de titel uit je serielijst. Je kunt die altijd opnieuw toevoegen via “Ontdekken” of de zoekfunctie. Dit wordt maar één keer gevraagd. Nu verwijderen?',
+    wischDiscovery: 'Naar links vegen verbergt de titel permanent. Hij verschijnt niet meer onder “Ontdekken”. Je kunt hem terughalen via Instellingen → “Verwijderde titels”. Dit wordt maar één keer gevraagd. Nu verbergen?',
     wischKino: 'Naar links vegen verbergt de titel permanent. Hij verschijnt niet meer op de bioscooppagina. Je kunt hem terughalen via Instellingen → “Verwijderde titels”. Dit wordt maar één keer gevraagd. Nu verbergen?',
-    ausListeEntfernen: function(wort){ return 'Deze ' + wort.toLowerCase() + ' uit je lijst verwijderen? Je kunt die altijd opnieuw toevoegen via “Nieuw ontdekken” of de zoekfunctie.'; },
+    ausListeEntfernen: function(wort){ return 'Deze ' + wort.toLowerCase() + ' uit je lijst verwijderen? Je kunt die altijd opnieuw toevoegen via “Ontdekken” of de zoekfunctie.'; },
     pronFilm: 'die', pronSerie: 'die',
     sucheTitel: 'Titel', sucheAlternativtitel: 'Alternatieve titel', sucheGenre: 'Genre',
     sucheDarsteller: 'Acteur', sucheRegie: 'Regie', sucheSchlagwort: 'Trefwoord',
     filternNach: function(v){ return 'Filteren op “' + v + '”?'; },
     tourSlides: [
-      { titel: 'Films & series ontdekken', text: '“Nieuw ontdekken” toont alle films en series plus de huidige en komende bioscoopfilms. Markeer titels als gezien of zet ze op je watchlist. Zo bouw je je persoonlijke Taste Score op.' },
+      { titel: 'Films & series ontdekken', text: '“Ontdekken” toont alle films en series plus de huidige en komende bioscoopfilms. Markeer titels als gezien of zet ze op je watchlist. Zo bouw je je persoonlijke Taste Score op.' },
       { titel: 'Jouw Taste Score', text: 'Zodra je 20 titels hebt opgeslagen, worden alle films, series en bioscoopfilms gesorteerd op jouw smaak.' },
       { titel: 'Samen kijken', text: '“Match” je watchlist met anderen en filter op titels die jullie samen willen kijken.' },
       { titel: 'Streaming & Taste Score', text: 'Kies onder Instellingen de streamingdiensten die je gebruikt. Filter alle films en series die momenteel bij je diensten te zien zijn – gesorteerd op je Taste Score.' },
@@ -4209,7 +4207,7 @@ var UI_TEXTE = {
     keineFreigabe: function(stufe){ return 'Nenhum título com classificação etária “' + stufe + '”. Títulos sem classificação registrada ficam ocultos – isso afeta parte do catálogo. Remova o filtro no canto superior esquerdo.'; },
     keineGemeinsamen: function(wer){ return 'Nenhum título em comum com ' + wer + '. Quanto mais vocês adicionarem às suas watchlists, mais matches vocês terão.'; },
     keineTitelAuswahl: 'Nenhum título para esta seleção.',
-    watchlisteLeer: 'Esta é a sua watchlist. Adicione pelo menos 20 títulos em “Descobrir novos”. Quanto mais títulos você adicionar, mais preciso fica o seu <i class="info-word" data-ts role="button" tabindex="0" aria-label="O que é o Taste Score?">Taste Score</i>. ' +
+    watchlisteLeer: 'Esta é a sua watchlist. Adicione pelo menos 20 títulos em “Descobrir”. Quanto mais títulos você adicionar, mais preciso fica o seu <i class="info-word" data-ts role="button" tabindex="0" aria-label="O que é o Taste Score?">Taste Score</i>. ' +
       'A partir daí, você só escolhe se quer ver um filme, uma série ou ir ao cinema. ' +
       'Aqui você verá sua watchlist pessoal, ordenada pelo seu gosto.<br><br>' +
       '<u>Quer curtir filmes com outras pessoas?</u><br>' +
@@ -4221,17 +4219,17 @@ var UI_TEXTE = {
     kinoLeer: 'Nenhum título registrado no momento.',
     kinoFehler: 'Não foi possível carregar os dados de cinema.',
     gesehenZuWl: 'Você marcou este título como assistido. Na watchlist ele deixa de contar como assistido: ele some de “Assistidos” e sua avaliação em estrelas deixa de contar para o seu Taste Score. Adicionar à watchlist mesmo assim?',
-    wischFilme: 'Deslizar para a esquerda remove o título da sua lista de filmes. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
-    wischSerien: 'Deslizar para a esquerda remove o título da sua lista de séries. Você pode adicioná-lo de novo a qualquer momento em “Descobrir novos” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
-    wischDiscovery: 'Deslizar para a esquerda oculta o título permanentemente. Ele deixa de aparecer em “Descobrir novos”. Você pode trazê-lo de volta em Configurações → “Títulos removidos”. Esta pergunta aparece só uma vez. Ocultar agora?',
+    wischFilme: 'Deslizar para a esquerda remove o título da sua lista de filmes. Você pode adicioná-lo de novo a qualquer momento em “Descobrir” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
+    wischSerien: 'Deslizar para a esquerda remove o título da sua lista de séries. Você pode adicioná-lo de novo a qualquer momento em “Descobrir” ou pela busca. Esta pergunta aparece só uma vez. Remover agora?',
+    wischDiscovery: 'Deslizar para a esquerda oculta o título permanentemente. Ele deixa de aparecer em “Descobrir”. Você pode trazê-lo de volta em Configurações → “Títulos removidos”. Esta pergunta aparece só uma vez. Ocultar agora?',
     wischKino: 'Deslizar para a esquerda oculta o título permanentemente. Ele deixa de aparecer na página de cinema. Você pode trazê-lo de volta em Configurações → “Títulos removidos”. Esta pergunta aparece só uma vez. Ocultar agora?',
-    ausListeEntfernen: function(wort){ return 'Remover ' + wort.toLowerCase() + ' da sua lista? Você pode adicionar de novo a qualquer momento em “Descobrir novos” ou pela busca.'; },
+    ausListeEntfernen: function(wort){ return 'Remover ' + wort.toLowerCase() + ' da sua lista? Você pode adicionar de novo a qualquer momento em “Descobrir” ou pela busca.'; },
     pronFilm: 'ele', pronSerie: 'ela',
     sucheTitel: 'Título', sucheAlternativtitel: 'Título alternativo', sucheGenre: 'Gênero',
     sucheDarsteller: 'Ator', sucheRegie: 'Direção', sucheSchlagwort: 'Palavra-chave',
     filternNach: function(v){ return 'Filtrar por “' + v + '”?'; },
     tourSlides: [
-      { titel: 'Descubra filmes e séries', text: '“Descobrir novos” lista todos os filmes e séries, além dos lançamentos de cinema atuais e futuros. Marque títulos como assistidos ou adicione-os à sua watchlist. Assim você constrói o seu Taste Score pessoal.' },
+      { titel: 'Descubra filmes e séries', text: '“Descobrir” lista todos os filmes e séries, além dos lançamentos de cinema atuais e futuros. Marque títulos como assistidos ou adicione-os à sua watchlist. Assim você constrói o seu Taste Score pessoal.' },
       { titel: 'Seu Taste Score', text: 'Depois de você salvar 20 títulos, todos os filmes, séries e lançamentos de cinema são ordenados pelo seu gosto.' },
       { titel: 'Assista com outras pessoas', text: 'Faça “Match” da sua watchlist com outras pessoas e filtre os títulos que vocês querem assistir juntos.' },
       { titel: 'Streaming e Taste Score', text: 'Selecione nas Configurações os serviços de streaming que você usa. Filtre todos os filmes e séries incluídos atualmente nos seus serviços – ordenados pelo seu Taste Score.' },
@@ -4762,7 +4760,7 @@ var MARKUP_TEXTE = {
     '#search': { p: 'Search title, genre or name …' },
     '#fOpen': { t: 'Watchlist' },
     '#fDone': { t: 'Watched' },
-    '#fDiscover': { t: 'Discover new' },
+    '#fDiscover': { t: 'Discover' },
     '#fSort': { t: '⇅ Sort' },
     '#sortMenu [data-sort="imdb"]': { t: 'Sort by ★★★★ rating' },
     '#sortMenu [data-sort="year"]': { t: 'by release date' },
@@ -5104,7 +5102,7 @@ var MARKUP_TEXTE = {
     '#search': { p: 'Cerca titolo, genere o nome …' },
     '#fOpen': { t: 'Watchlist' },
     '#fDone': { t: 'Visti' },
-    '#fDiscover': { t: 'Scopri novità' },
+    '#fDiscover': { t: 'Scopri' },
     '#fSort': { t: '⇅ Ordina' },
     '#sortMenu [data-sort="imdb"]': { t: 'Ordina per valutazione ★★★★' },
     '#sortMenu [data-sort="year"]': { t: 'per data di uscita' },
@@ -5218,7 +5216,7 @@ var MARKUP_TEXTE = {
     '#search': { p: 'Zoek op titel, genre of naam …' },
     '#fOpen': { t: 'Watchlist' },
     '#fDone': { t: 'Gezien' },
-    '#fDiscover': { t: 'Nieuw ontdekken' },
+    '#fDiscover': { t: 'Ontdekken' },
     '#fSort': { t: '⇅ Sorteren' },
     '#sortMenu [data-sort="imdb"]': { t: 'Sorteren op ★★★★-beoordeling' },
     '#sortMenu [data-sort="year"]': { t: 'op verschijningsdatum' },
@@ -5332,7 +5330,7 @@ var MARKUP_TEXTE = {
     '#search': { p: 'Busque por título, gênero ou nome …' },
     '#fOpen': { t: 'Watchlist' },
     '#fDone': { t: 'Assistidos' },
-    '#fDiscover': { t: 'Descobrir novos' },
+    '#fDiscover': { t: 'Descobrir' },
     '#fSort': { t: '⇅ Ordenar' },
     '#sortMenu [data-sort="imdb"]': { t: 'Ordenar por avaliação ★★★★' },
     '#sortMenu [data-sort="year"]': { t: 'por data de lançamento' },
@@ -6639,7 +6637,7 @@ var POOL_OHNE_TMDB = new Map();   // 'movie|der name' -> Pool-Eintrag ohne tmdbI
    Die 600 urspruenglich kuratierten Katalog-Titel kamen beim Relaunch ohne
    TMDB-Kennung herein. Denselben Film gibt es meist ein zweites Mal aus dem
    TMDB-Abzug -- 591 der 600, nachgezaehlt. Wer einen davon markierte, bekam den
-   Zwilling weiter unter "Neue entdecken" vorgeschlagen.
+   Zwilling weiter unter "Entdecken" vorgeschlagen.
 
    Erkannt wird ueber die nachtraeglich ermittelte Kennung (tmdbIdAufgeloest,
    siehe backend/routes/titles.js), nicht ueber den Namen. Der Name taugt dafuer
@@ -7046,16 +7044,16 @@ function typenAngleichen(){
 }
 /* Die drei Status, die ein Titel gegenueber DIR haben kann. Frei kombinierbar,
    mindestens einer muss aktiv bleiben (siehe toggleStatus). Watchlist und
-   Gesehen sind markierte Titel und kommen aus state[activeTab], "Neue entdecken"
+   Gesehen sind markierte Titel und kommen aus state[activeTab], "Entdecken"
    ist der unmarkierte Rest und kommt direkt aus POOL (siehe discFilterPool).
    Alle drei landen in EINER Liste, gemeinsam sortiert nach dem gewaehlten
    Kriterium -- eigene Titel werden bewusst nicht nach oben gezogen, sonst
    stuende bei Taste-Score-Sortierung ein schwacher Watchlist-Titel ueber einem
-   starken Vorschlag. Wer nur die eigenen sehen will, schaltet "Neue entdecken"
+   starken Vorschlag. Wer nur die eigenen sehen will, schaltet "Entdecken"
    ab; das ist eine Entscheidung der Person, nicht des Programms.
 
    Immer genau einer aktiv (Einzelauswahl). Beim Start die Watchlist, wenn
-   darauf etwas steht, sonst "Neue entdecken". Dieselben drei gelten auch im
+   darauf etwas steht, sonst "Entdecken". Dieselben drei gelten auch im
    Kino: EIN Zustand, nicht zwei. Vorher fuehrte die Kino-Seite eine eigene
    Auswahl, die beim Tabwechsel still von der hier gesetzten abwich. */
 let watchlistFilterOn = true;
@@ -7091,7 +7089,7 @@ let inStreamFilterOn = false;
 //
 // Der Grund ist mit "beim Start ist alles an" entfallen, der Preis war hoch: Man
 // stellte unter Filme "Watchlist" ein, wechselte ins Kino und fand dort
-// "Watchlist + Gesehen + Neue entdecken" vor -- eine Kombination, die es unter
+// "Watchlist + Gesehen + Entdecken" vor -- eine Kombination, die es unter
 // Filme gar nicht mehr geben konnte. Der erste Tipp im Kino wirkte deshalb
 // falsch. Es gibt jetzt EINEN Zustand fuer alle Bereiche.
 // Ansicht einer fremden Liste: uid der Person und welche ihrer beiden Listen.
@@ -7138,7 +7136,7 @@ function fremderFortschritt(){
 // ueberschreibt ihn -- der Tabwechsel selbst aendert weiterhin nichts daran
 // (siehe setTab).
 /* ---- Startzustand ----
-   Beim Oeffnen Watchlist, sonst "Neue entdecken" (siehe startFilterSetzen).
+   Beim Oeffnen Watchlist, sonst "Entdecken" (siehe startFilterSetzen).
    Gemerkt wird die Auswahl nicht.
 
    Vorher suchte die App beim Start die erste Ansicht, in der etwas steht
@@ -7155,7 +7153,7 @@ function einstiegSetzen(){
   TYPEN.filme = true;
   TYPEN.serien = true;
   typenAngleichen();
-  // Watchlist, wenn die Person dort etwas hat, sonst Gesehen. "Neue entdecken"
+  // Watchlist, wenn die Person dort etwas hat, sonst Gesehen. "Entdecken"
   // gibt es in einer fremden Liste nicht (siehe updateFilterRowUI).
   var fremd = fremderFortschritt(), wl = true;
   if (fremd) { wl = false; for (var e of fremd.values()) if (e && e.w) { wl = true; break; } }
@@ -7388,13 +7386,13 @@ function eigeneZeileLi(tab, i, profile) {
   return li;
 }
 // Welches Geschmacksprofil zaehlt gerade? Normalerweise das eigene. Enthaelt
-// die Liste bei aktivem Abgleich dagegen Vorschlaege ("Neue entdecken" an), ist
+// die Liste bei aktivem Abgleich dagegen Vorschlaege ("Entdecken" an), ist
 // die Frage nicht "passt das zu MIR", sondern "passt das zu UNS" -- dann
 // fliessen die Profile aller Ausgewaehlten mit ein, genau wie auf der
 // Kino-Seite. Es gilt EIN Profil fuer die ganze Liste: Zwei Massstaebe
 // nebeneinander waeren an den Zahlen nicht zu unterscheiden.
 /* Der Taste-Score haengt an den Markierungen, nicht an den Filtern. Zwischen
-   zwei Klicks auf Filme/Serien/Watchlist/Gesehen/Neue entdecken aendert er sich
+   zwei Klicks auf Filme/Serien/Watchlist/Gesehen/Entdecken aendert er sich
    also nicht -- ausgerechnet wurde er trotzdem jedes Mal, und zwar fuer ALLE
    41.271 Eintraege, um 25 Zeilen zu zeigen. Gemessen an movietaste.de mit 600
    markierten Titeln: 39,9 ms je Klick gegenueber 5,6 ms mit einer der anderen
@@ -7403,7 +7401,7 @@ function eigeneZeileLi(tab, i, profile) {
    PROFIL_STAND zaehlt jede Aenderung an den Markierungen (siehe
    profilStandErhoehen). Daraus und aus den beiden Dingen, die das Profil sonst
    noch umstellen -- welche Personen beim Abgleich ausgewaehlt sind und ob
-   "Neue entdecken" an ist --, entsteht eine Kennung. Solange die gleich bleibt,
+   "Entdecken" an ist --, entsteht eine Kennung. Solange die gleich bleibt,
    gilt ein einmal gerechneter Wert weiter.
 
    Wichtig: Die Kennung haengt am Profil-Array, nicht an einer globalen
@@ -7447,7 +7445,7 @@ function eintragSortwert(e, sortBy, profile){
    Gezeichnet werden 25 Zeilen (TITEL_PRO_SEITE), sortiert wurden bisher alle:
    Mit allen Filtern an stehen rund 33.000 Eintraege in der Liste, und allein
    das Sortieren kostete 26 ms -- synchron im Klick-Handler, bei jedem Klick auf
-   Filme, Serien, Watchlist, Gesehen oder Neue entdecken. Ein Vergleich holte
+   Filme, Serien, Watchlist, Gesehen oder Entdecken. Ein Vergleich holte
    dabei zweimal aus einer Map; die Werte liegen jetzt in einem Float64Array und
    ausgewaehlt wird in einem Durchlauf. Gemessen an 32.698 Eintraegen:
    37 ms -> 3 ms.
@@ -7475,7 +7473,7 @@ function besteNachSortwert(eintraege, sortBy, profile, limit){
   return top.map(function(idx){ return eintraege[idx]; });
 }
 // Sammelt die Eintraege aller aktiven Status in EINER Liste: Watchlist/Gesehen
-// aus state[activeTab] (markierte Titel), "Neue entdecken" direkt aus dem POOL. Der
+// aus state[activeTab] (markierte Titel), "Entdecken" direkt aus dem POOL. Der
 // Typ (Film oder Serie) kommt in beiden Faellen aus dem aktiven Tab.
 function sammleEintraege(q){
   const eintraege = [];
@@ -7562,7 +7560,7 @@ function kinoHinweisAnhaengen(q){
   // q ist bei aktiver Suche ein Array (siehe aktiveSuchbegriffe), sonst ''.
   // Ein leeres Array ist in JS truthy -- "!q" allein reichte nicht und liess
   // den Hinweis faelschlich auch ohne jede Sucheingabe erscheinen (z.B. im
-  // Standardfilter "Neue entdecken" direkt nach dem ersten Aufruf).
+  // Standardfilter "Entdecken" direkt nach dem ersten Aufruf).
   if (!q || !q.length || cinemaMode) return;
   var n = kinoTrefferZahl(q);
   if (!n) return;
@@ -7581,7 +7579,7 @@ function renderLeerzustand(q){
     return;
   }
   // In einer fremden Liste sind die Texte darunter alle falsch -- sie sprechen
-  // von der EIGENEN Watchlist und schicken einen zu "Neue entdecken", was dort
+  // von der EIGENEN Watchlist und schicken einen zu "Entdecken", was dort
   // gesperrt ist.
   if (personenAnsicht()) {
     // Beide Status abgewaehlt: Die Leere kommt von der Auswahl, nicht von der
@@ -7614,7 +7612,7 @@ function renderLeerzustand(q){
     list.innerHTML = '<li class="watch-empty">' + TXT.keineGemeinsamen(esc(wer)) + '</li>';
     return;
   }
-  // Leer trotz "Neue entdecken" heisst: die Filterkombination passt auf nichts --
+  // Leer trotz "Entdecken" heisst: die Filterkombination passt auf nichts --
   // nicht, dass die eigene Liste noch leer ist. Der Einstiegstext waere hier
   // schlicht falsch.
   if (discoverFilterOn || !watchlistFilterOn) {
@@ -7855,7 +7853,7 @@ function bestaetigeGesehenZuWatchlist(){ return confirmRemove(GESEHEN_ZU_WL_FRAG
    zurueckgesetzt (siehe removeFromMyTitles) -- der Titel landet dort NICHT
    unter Einstellungen -> "Geloeschte Titel", die enthaelt ausschliesslich per
    Wisch ausgeblendete Discovery-/Kino-Titel. Deshalb nennen die beiden
-   Listen-Texte "Neue entdecken" bzw. die Suche als Rueckweg. */
+   Listen-Texte "Entdecken" bzw. die Suche als Rueckweg. */
 var WISCH_HINWEISE = {
   filme:     { key: 'mt.wischHinweis.filme',     text: TXT.wischFilme },
   serien:    { key: 'mt.wischHinweis.serien',    text: TXT.wischSerien },
@@ -7976,7 +7974,7 @@ tabBtns.kino.onclick = () => {
 // Liste und faengt wieder bei 25 an (siehe die Reset-Stellen: Status-Toggles,
 // Sortier-Menue, Tab-Wechsel, Suche).
 //
-// Gilt fuer ALLE drei Status, nicht nur fuer "Neue entdecken": Frueher wurden
+// Gilt fuer ALLE drei Status, nicht nur fuer "Entdecken": Frueher wurden
 // Watchlist und Gesehen ungekuerzt gerendert ("die sind ja kurz") -- bei ein
 // paar hundert markierten Titeln baut das jedes Mal mehrere hundert Zeilen samt
 // Postern auf, bevor ueberhaupt etwas zu sehen ist. Eine Seite soll nie lang
@@ -7997,7 +7995,7 @@ let sortManual = null;
 function renderList() {
   render();
 }
-// Rendert die aktuell sichtbare Seite neu. Seit "Neue entdecken" ein Status statt
+// Rendert die aktuell sichtbare Seite neu. Seit "Entdecken" ein Status statt
 // eines eigenen Modus ist, gibt es nur noch EINEN Render-Weg -- die frueheren
 // "if (inDiscoveryMode()) renderDiscovery() else ..."-Verzweigungen entfallen.
 function renderCurrentTab(){
@@ -8233,7 +8231,7 @@ function sucheZustandAnwenden(){
 // koennen.
 function updateFilterRowUI(){
   // In einer fremden Liste stehen Watchlist und Gesehen fuer DEREN beide
-  // Listen, zwischen denen man umschaltet -- "Neue entdecken" hat dort keine
+  // Listen, zwischen denen man umschaltet -- "Entdecken" hat dort keine
   // Entsprechung und ist gesperrt.
   if (personenAnsicht()) {
     var pst = statusLesen();
@@ -8339,7 +8337,7 @@ const btns = { open: document.getElementById('fOpen'), done: document.getElement
 function toggleStatus(feld){
   // Wie bei setTab: Statusklicks verlassen eine geteilte Momentaufnahme.
   momentVerlassen();
-  // In einer fremden Liste gibt es kein "Neue entdecken" -- die Person hat
+  // In einer fremden Liste gibt es kein "Entdecken" -- die Person hat
   // nichts Unmarkiertes. Watchlist und Gesehen dagegen verhalten sich hier
   // genau wie in den eigenen Listen, deshalb kein Sonderfall mehr.
   if (personenAnsicht() && feld === 'disc') return;
@@ -8358,7 +8356,7 @@ function toggleStatus(feld){
 btns.open.onclick = () => toggleStatus('wl');
 btns.done.onclick = () => toggleStatus('seen');
 btns.discover.onclick = () => {
-  // In einer fremden Liste gibt es keine Entsprechung zu "Neue entdecken" --
+  // In einer fremden Liste gibt es keine Entsprechung zu "Entdecken" --
   // was jemand NICHT markiert hat, ist keine Liste von ihm. Beim Abgleich ist
   // der Knopf dagegen wieder benutzbar: Er bedeutet dort "Vorschlaege fuer uns
   // alle" und schliesst Watchlist/Gesehen aus (siehe toggleStatus).
@@ -8473,7 +8471,7 @@ if (sortBtn && sortMenu) {
 // poolItemMatchesQuery), nicht nur bereits gerenderte Zeilen per CSS aus- und
 // einblenden -- sonst bleiben Treffer jenseits von titelLimit unsichtbar.
 //
-// Das galt frueher nur mit aktivem "Neue entdecken"; Watchlist und Gesehen
+// Das galt frueher nur mit aktivem "Entdecken"; Watchlist und Gesehen
 // wurden ungekuerzt gerendert und deshalb per applyFilter() ein-/ausgeblendet.
 // Seit jede Liste bei TITEL_PRO_SEITE endet, gibt es diesen Sonderfall nicht
 // mehr: Immer neu rendern, immer wieder bei der ersten Seite anfangen.
@@ -13632,7 +13630,7 @@ function poolItemLi(item, score, opts){
         // serien.data, das nur per rebuild() aktualisiert wird (Streaming liest
         // direkt aus POOL/PROGRESS und ist daher immer aktuell).
         rebuild();
-        /* Immer neu zeichnen, nicht nur unter "Neue entdecken".
+        /* Immer neu zeichnen, nicht nur unter "Entdecken".
 
            Frueher stand hier `if (discoverFilterOn)`. Damit verschwand eine
            Zeile nur dort zuverlaessig -- wer im Kino mit ausschliesslich
@@ -13821,10 +13819,10 @@ function discFilterPool(){
       'audience – there is no editorial team behind it, just the votes of many viewers. '+
       'The number in brackets is the vote count: an 8.0 '+
       'from a single vote says far less than an 8.3 from 28,000.' },
-    discovery: { title:'Discover new', body:'Shows everything you have not saved yet – neither on the watchlist '+
+    discovery: { title:'Discover', body:'Shows everything you have not saved yet – neither on the watchlist '+
       'nor marked as “watched”. Under “Movies” only movies, under “Series” only series. Sorted by your '+
       'Taste Score, i.e. by genres, cast, director and more from all the titles you have saved so far. '+
-      '“Discover new” can be combined with Watchlist and Watched – everything then appears in one shared, '+
+      '“Discover” can be combined with Watchlist and Watched – everything then appears in one shared, '+
       'uniformly sorted list.' },
     match: { title:'Match: your shared titles', body:'A match shows the titles that are on YOUR list AND on the '+
       'lists of the selected contacts – the intersection of your watchlists. That way you instantly find something '+
@@ -13863,10 +13861,10 @@ function discFilterPool(){
       'Publikum ankommt – es steckt also keine Redaktion dahinter, sondern die Stimmen vieler Zuschauer. '+
       'Die Zahl in Klammern dahinter ist die Anzahl der abgegebenen Stimmen: Eine 8,0 '+
       'aus einer einzigen Stimme sagt deutlich weniger aus als eine 8,3 aus 28.000.' },
-    discovery: { title:'Neue entdecken', body:'Zeigt alles, was du noch nicht markiert hast – also weder auf der Watchlist '+
+    discovery: { title:'Entdecken', body:'Zeigt alles, was du noch nicht markiert hast – also weder auf der Watchlist '+
       'noch als „gesehen“. Unter „Filme“ nur Filme, unter „Serien“ nur Serien. Sortiert wird nach deinem '+
       'Taste-Score, also nach Genres, Besetzung, Regie und mehr aus all deinen bisher markierten Titeln. '+
-      '„Neue entdecken“ lässt sich mit Watchlist und Gesehen kombinieren – dann steht alles in einer gemeinsamen, '+
+      '„Entdecken“ lässt sich mit Watchlist und Gesehen kombinieren – dann steht alles in einer gemeinsamen, '+
       'einheitlich sortierten Liste.' },
     match: { title:'Match: eure Übereinstimmungen', body:'Ein Match zeigt die Titel, die bei dir UND bei den '+
       'ausgewählten Kontakten auf der Liste stehen – die Schnittmenge eurer Watchlists. So findet ihr sofort etwas, '+
@@ -13989,10 +13987,10 @@ function discFilterPool(){
       'pubblico – non c’è una redazione dietro, solo i voti di tanti spettatori. '+
       'Il numero tra parentesi è il numero di voti: un 8,0 '+
       'con un solo voto dice molto meno di un 8,3 con 28.000 voti.' },
-    discovery: { title:'Scopri novità', body:'Mostra tutto ciò che non hai ancora salvato – né sulla watchlist '+
+    discovery: { title:'Scopri', body:'Mostra tutto ciò che non hai ancora salvato – né sulla watchlist '+
       'né segnato come “visto”. In “Film” solo i film, in “Serie” solo le serie. Ordinato secondo il tuo '+
       'Taste Score, cioè per generi, cast, regia e altro, in base a tutti i titoli che hai salvato finora. '+
-      '“Scopri novità” può essere combinato con Watchlist e Visti – tutto appare quindi in un’unica lista '+
+      '“Scopri” può essere combinato con Watchlist e Visti – tutto appare quindi in un’unica lista '+
       'ordinata in modo uniforme.' },
     match: { title:'Match: i vostri titoli in comune', body:'Un match mostra i titoli che sono sulla TUA lista E sulle '+
       'liste dei contatti selezionati – l’intersezione delle vostre watchlist. Così trovate subito qualcosa '+
@@ -14031,10 +14029,10 @@ function discFilterPool(){
       'publiek valt – er zit geen redactie achter, alleen de stemmen van veel kijkers. '+
       'Het getal tussen haakjes is het aantal stemmen: een 8,0 '+
       'op basis van één stem zegt veel minder dan een 8,3 van 28.000 stemmen.' },
-    discovery: { title:'Nieuw ontdekken', body:'Toont alles wat je nog niet hebt opgeslagen – niet op de watchlist '+
+    discovery: { title:'Ontdekken', body:'Toont alles wat je nog niet hebt opgeslagen – niet op de watchlist '+
       'en niet als “gezien” gemarkeerd. Onder “Films” alleen films, onder “Series” alleen series. Gesorteerd op je '+
       'Taste Score, dus op genres, cast, regie en meer uit alle titels die je tot nu toe hebt opgeslagen. '+
-      '“Nieuw ontdekken” kan worden gecombineerd met Watchlist en Gezien – alles verschijnt dan in één gedeelde, '+
+      '“Ontdekken” kan worden gecombineerd met Watchlist en Gezien – alles verschijnt dan in één gedeelde, '+
       'uniform gesorteerde lijst.' },
     match: { title:'Match: jullie gedeelde titels', body:'Een match toont de titels die op JOUW lijst staan ÉN op de '+
       'lijsten van de geselecteerde contacten – de doorsnede van jullie watchlists. Zo vind je meteen iets '+
@@ -14073,10 +14071,10 @@ function discFilterPool(){
       'amplo – não há uma equipe editorial por trás, apenas os votos de muitos espectadores. '+
       'O número entre parênteses é a quantidade de votos: um 8,0 '+
       'de um único voto diz muito menos do que um 8,3 de 28.000.' },
-    discovery: { title:'Descobrir novos', body:'Mostra tudo o que você ainda não salvou – nem na watchlist '+
+    discovery: { title:'Descobrir', body:'Mostra tudo o que você ainda não salvou – nem na watchlist '+
       'nem marcado como “assistido”. Em “Filmes” só filmes, em “Séries” só séries. Ordenado pelo seu '+
       'Taste Score, ou seja, por gêneros, elenco, direção e mais, a partir de todos os títulos que você já salvou. '+
-      '“Descobrir novos” pode ser combinado com Watchlist e Assistidos – tudo aparece então em uma única lista '+
+      '“Descobrir” pode ser combinado com Watchlist e Assistidos – tudo aparece então em uma única lista '+
       'compartilhada, ordenada de forma uniforme.' },
     match: { title:'Match: seus títulos em comum', body:'Um match mostra os títulos que estão na SUA lista E nas '+
       'listas dos contatos selecionados – a interseção das suas watchlists. Assim vocês encontram na hora algo '+
