@@ -1355,7 +1355,7 @@
      sichtbar dahinter weiterlaeuft. z-index unter .teilen-fab (900) und den
      Modals (1000). */
   .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 890;
-    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    padding: 15px 16px calc(9px + env(safe-area-inset-bottom, 0px));
     background: rgba(14, 17, 22, .82); border-top: 1px solid var(--border);
     -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
   .bottom-nav .filter-group { max-width: 660px; margin: 0 auto; }
@@ -2333,7 +2333,7 @@ var UI_TEXTE = {
     einladungShareFrage: 'Wer diesen Link öffnet, kann danach deine ganze Watchlist und deine „gesehen"-Liste ansehen, einschließlich deiner Sterne-Bewertungen. Umgekehrt gilt dasselbe. Lösen könnt ihr die Verknüpfung jederzeit.\n\nLink jetzt erstellen?',
     einladungShareText: function(wer){ return wer + ' möchte auf MovieMatch die Watchlist mit dir teilen. Entdecke neue Filme, Serien und Kinofilme, sortiert nach deinem Geschmack. „Matcht" eure Watchlists und findet Titel, die ihr beide als Nächstes sehen möchtet:'; },
     einladungShareFehler: 'Der Link konnte nicht erstellt werden.',
-    einladungRefTitel: 'Personen einladen',
+    einladungRefTitel: 'App teilen',
     einladungRefText: function(wer){ return wer + ' empfiehlt dir MovieMatch. Entdecke Filme, Serien und Kinofilme, sortiert nach deinem Geschmack – teile deine Watchlist mit anderen und seht, welche Titel ihr gemeinsam sehen möchtet:'; },
     einladungRefAusgeloggt: 'Entdecke MovieMatch. Filme, Serien und Kinofilme, sortiert nach deinem Geschmack. Teilt eure Watchlists und seht, welche Titel ihr gemeinsam sehen möchtet:',
     einladungRefFehler: 'Der Einladungslink konnte nicht erstellt werden.',
@@ -2659,7 +2659,7 @@ var UI_TEXTE = {
     einladungShareFrage: 'Anyone opening this link can then see your entire watchlist and your “watched” list, including your star ratings. The same applies the other way round. You can remove the connection at any time.\n\nCreate the link now?',
     einladungShareText: function(wer){ return wer + ' wants to share a watchlist with you on MovieMatch. Discover new movies, series and cinema releases, sorted by your taste. “Match” your watchlists and find titles you both want to watch next:'; },
     einladungShareFehler: 'The link could not be created.',
-    einladungRefTitel: 'Invite people',
+    einladungRefTitel: 'Share the app',
     einladungRefText: function(wer){ return wer + ' recommends MovieMatch. Discover movies, series and cinema releases sorted by your taste – share your watchlist with others and see which titles you want to watch together:'; },
     einladungRefAusgeloggt: 'Discover MovieMatch. Movies, series and cinema releases, sorted by your taste. Share your watchlists and see which titles you want to watch together:',
     einladungRefFehler: 'The invite link could not be created.',
@@ -2982,7 +2982,7 @@ var UI_TEXTE = {
     einladungShareFrage: 'Toute personne ouvrant ce lien pourra ensuite voir l’intégralité de ta watchlist et ta liste « Vus », y compris tes notes en étoiles. La réciproque est vraie aussi. Tu peux supprimer la connexion à tout moment.\n\nCréer le lien maintenant ?',
     einladungShareText: function(wer){ return wer + ' souhaite partager une watchlist avec toi sur MovieMatch. Découvre de nouveaux films, séries et sorties cinéma, triés selon tes goûts. « Matchez » vos watchlists et trouvez les titres que vous voulez regarder ensuite :'; },
     einladungShareFehler: 'Le lien n’a pas pu être créé.',
-    einladungRefTitel: 'Inviter des personnes',
+    einladungRefTitel: 'Partager l’app',
     einladungRefText: function(wer){ return wer + ' te recommande MovieMatch. Découvre films, séries et sorties cinéma triés selon tes goûts – partage ta watchlist avec d’autres et vois quels titres vous voulez regarder ensemble :'; },
     einladungRefAusgeloggt: 'Découvre MovieMatch. Films, séries et sorties cinéma, triés selon tes goûts. Partage tes watchlists et vois quels titres vous voulez regarder ensemble :',
     einladungRefFehler: 'Le lien d’invitation n’a pas pu être créé.',
@@ -3305,7 +3305,7 @@ var UI_TEXTE = {
     einladungShareFrage: 'Cualquiera que abra este enlace podrá ver toda tu watchlist y tu lista de «vistos», incluidas tus valoraciones con estrellas. Lo mismo ocurre a la inversa. Puedes eliminar la conexión en cualquier momento.\n\n¿Crear el enlace ahora?',
     einladungShareText: function(wer){ return wer + ' quiere compartir su watchlist contigo en MovieMatch. Descubre nuevas películas, series y estrenos de cine, ordenados según tu gusto. Haced «match» con vuestras watchlists y encontrad los títulos que los dos queréis ver próximamente:'; },
     einladungShareFehler: 'No se pudo crear el enlace.',
-    einladungRefTitel: 'Invitar a gente',
+    einladungRefTitel: 'Compartir la app',
     einladungRefText: function(wer){ return wer + ' te recomienda MovieMatch. Descubre películas, series y estrenos de cine ordenados según tu gusto – comparte tu watchlist con otras personas y ved qué títulos queréis ver juntos:'; },
     einladungRefAusgeloggt: 'Descubre MovieMatch. Películas, series y estrenos de cine, ordenados según tu gusto. Comparte tus watchlists y ved qué títulos queréis ver juntos:',
     einladungRefFehler: 'No se pudo crear el enlace de invitación.',
@@ -3628,7 +3628,7 @@ var UI_TEXTE = {
     einladungShareFrage: 'Chi apre questo link potrà vedere tutta la tua watchlist e la tua lista dei “visti”, incluse le tue stelle. Lo stesso vale al contrario. Puoi rimuovere il collegamento in qualsiasi momento.\n\nCreare il link adesso?',
     einladungShareText: function(wer){ return wer + ' vuole condividere una watchlist con te su MovieMatch. Scopri nuovi film, serie e uscite al cinema, ordinati secondo i tuoi gusti. Fate il “Match” delle vostre watchlist e trovate i titoli che entrambi volete guardare:'; },
     einladungShareFehler: 'Impossibile creare il link.',
-    einladungRefTitel: 'Invita persone',
+    einladungRefTitel: 'Condividi l’app',
     einladungRefText: function(wer){ return wer + ' ti consiglia MovieMatch. Scopri film, serie e uscite al cinema ordinati secondo i tuoi gusti – condividi la tua watchlist con altri e scopri quali titoli volete guardare insieme:'; },
     einladungRefAusgeloggt: 'Scopri MovieMatch. Film, serie e uscite al cinema, ordinati secondo i tuoi gusti. Condividi le tue watchlist e scopri quali titoli volete guardare insieme:',
     einladungRefFehler: 'Impossibile creare il link di invito.',
@@ -3951,7 +3951,7 @@ var UI_TEXTE = {
     einladungShareFrage: 'Iedereen die deze link opent, kan daarna je hele watchlist en je “gezien”-lijst zien, inclusief je sterrenbeoordelingen. Andersom geldt hetzelfde. Je kunt de verbinding op elk moment verwijderen.\n\nLink nu aanmaken?',
     einladungShareText: function(wer){ return wer + ' wil op MovieMatch een watchlist met je delen. Ontdek nieuwe films, series en bioscoopfilms, gesorteerd op jouw smaak. “Match” jullie watchlists en vind titels die jullie allebei als volgende willen kijken:'; },
     einladungShareFehler: 'De link kon niet worden aangemaakt.',
-    einladungRefTitel: 'Mensen uitnodigen',
+    einladungRefTitel: 'App delen',
     einladungRefText: function(wer){ return wer + ' beveelt MovieMatch aan. Ontdek films, series en bioscoopfilms gesorteerd op jouw smaak – deel je watchlist met anderen en zie welke titels jullie samen willen kijken:'; },
     einladungRefAusgeloggt: 'Ontdek MovieMatch. Films, series en bioscoopfilms, gesorteerd op jouw smaak. Deel je watchlists en zie welke titels jullie samen willen kijken:',
     einladungRefFehler: 'De uitnodigingslink kon niet worden aangemaakt.',
@@ -4274,7 +4274,7 @@ var UI_TEXTE = {
     einladungShareFrage: 'Quem abrir este link poderá ver toda a sua watchlist e a sua lista de “assistidos”, incluindo suas avaliações em estrelas. O mesmo vale no sentido contrário. Você pode remover a conexão a qualquer momento.\n\nCriar o link agora?',
     einladungShareText: function(wer){ return wer + ' quer compartilhar uma watchlist com você no MovieMatch. Descubra novos filmes, séries e lançamentos de cinema, ordenados pelo seu gosto. Faça “Match” das suas watchlists e encontrem os títulos que vocês dois querem assistir a seguir:'; },
     einladungShareFehler: 'Não foi possível criar o link.',
-    einladungRefTitel: 'Convidar pessoas',
+    einladungRefTitel: 'Compartilhar o app',
     einladungRefText: function(wer){ return wer + ' recomenda o MovieMatch. Descubra filmes, séries e lançamentos de cinema ordenados pelo seu gosto – compartilhe sua watchlist com outras pessoas e vejam quais títulos vocês querem assistir juntos:'; },
     einladungRefAusgeloggt: 'Descubra o MovieMatch. Filmes, séries e lançamentos de cinema, ordenados pelo seu gosto. Compartilhe suas watchlists e vejam quais títulos vocês querem assistir juntos:',
     einladungRefFehler: 'Não foi possível criar o link de convite.',
