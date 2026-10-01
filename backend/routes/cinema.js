@@ -140,8 +140,11 @@ router.post('/ingest', async (req, res) => {
     // und trotzdem Erfolg melden.
     const { rows: [{ anzahl: bestand }] } = await client.query(
       'SELECT COUNT(*)::int AS anzahl FROM cinema_cache WHERE region = $1', [region]);
+    // Kleine Regionen (z. B. CY mit 2-3 Titeln) schwanken prozentual stark --
+    // dort nur einen komplett leeren Lauf ablehnen.
     const MINDESTANTEIL = 0.7;
-    if (bestand > 0 && items.length < bestand * MINDESTANTEIL) {
+    const zuWenig = bestand >= 10 ? items.length < bestand * MINDESTANTEIL : items.length === 0;
+    if (bestand > 0 && zuWenig) {
       await client.query('ROLLBACK');
       console.error(`Kino-Ingest (${region}) abgelehnt: nur ${items.length} Titel geliefert, im Bestand sind ${bestand}.`);
       return res.status(409).json({
