@@ -1358,11 +1358,14 @@
     padding: 15px 16px calc(9px + env(safe-area-inset-bottom, 0px));
     background: rgba(14, 17, 22, .82); border-top: 1px solid var(--border);
     -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
-  .bottom-nav .filter-group { max-width: 660px; margin: 0 auto; }
-  .bottom-nav button { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  /* Segment-Schalter: eine Kapsel, der aktive Eintrag ist gefuellt. Gesamthoehe
+     wie vorher (3px Innenrand + Rahmen, dafuer 6px statt 9px Knopf-Padding). */
+  .bottom-nav .filter-group { max-width: 660px; margin: 0 auto; gap: 0; padding: 3px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 999px; }
+  .bottom-nav button { background: none; border: none; border-radius: 999px; padding-top: 6px; padding-bottom: 6px;
     color: var(--text-dim); cursor: pointer; transition: all .15s; }
-  @media (hover: hover) { .bottom-nav button:not([disabled]):hover { border-color: var(--accent); color: var(--accent); } }
-  .bottom-nav button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  @media (hover: hover) { .bottom-nav button:not([disabled]):not(.active):hover { color: var(--accent); } }
+  .bottom-nav button.active { background: var(--accent); color: #0e1116; font-weight: 600; }
   #fInStream { white-space: nowrap; }
   /* Groesse an der Schrift statt fest bei 13px: Das feste Mass machte die
      Streaming-Zeile 1px hoeher als die Statusreihe darueber, sobald die
