@@ -1596,8 +1596,9 @@
 
 <!-- Teilen-Knopf unten mittig, auf derselben Hoehe wie der Nach-oben-Knopf
      rechts. Oeffnet das kleine Auswahlblatt DARUEBER (teilenSheet) mit vier
-     Wegen: aktuelle Ansicht als Link, Hinweis zum Titel-Teilen, eigenes
-     Profil (= "Personen einladen" aus Gemeinsam schauen). Alle Beschriftungen
+     Wegen: aktuelle Ansicht als Link, eigenes Profil (= "Personen einladen"
+     aus Gemeinsam schauen), alle gesehenen Titel als Momentaufnahme. Der
+     Hinweis zum Titel-Teilen ist vorerst ausgeblendet. Alle Beschriftungen
      setzt das JS aus TXT (teilenFabEinrichten). -->
 <button type="button" id="teilenFab" class="teilen-fab">
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1611,9 +1612,10 @@
   <!-- "App teilen" = nur der App-Link (Einladungsart referral), gibt keine
        Liste preis. Danach "Titel teilen" als haeufigster Fall. -->
   <button type="button" id="teilenAppBtn">MovieMatch teilen</button>
-  <button type="button" id="teilenTitelBtn">Einen Titel teilen</button>
+  <button type="button" id="teilenTitelBtn" style="display:none">Einen Titel teilen</button>
   <button type="button" id="teilenAnsichtBtn">Diese Ansicht teilen</button>
   <button type="button" id="teilenProfilBtn">Meine Watchlist teilen</button>
+  <button type="button" id="teilenGesehenBtn">Gesehene Titel teilen</button>
 </div>
 
 <!-- Fertige Einladung. Seit dem 13. August nur noch der RUECKFALL: Der Link
@@ -2450,6 +2452,8 @@ var UI_TEXTE = {
     teilenAnsichtTitel: 'Ansicht teilen',
     teilenAnsichtText: 'Schau mal — meine aktuelle Ansicht bei MovieMatch:',
     teilenMoment: 'Diese Ansicht teilen',
+    teilenGesehen: 'Gesehene Titel teilen',
+    teilenGesehenText: 'Diese Titel habe ich gesehen — bei MovieMatch:',
     teilenMomentText: 'Schau mal — diese Titel bei MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' Titel, geteilt von ' + name : n + ' geteilte Titel'; },
     momentKeineTitel: 'Keine teilbaren Titel in dieser Liste.',
@@ -2776,6 +2780,8 @@ var UI_TEXTE = {
     teilenAnsichtTitel: 'Share view',
     teilenAnsichtText: 'Have a look — my current view on MovieMatch:',
     teilenMoment: 'Share this view',
+    teilenGesehen: 'Share watched titles',
+    teilenGesehenText: 'Titles I\'ve watched — on MovieMatch:',
     teilenMomentText: 'Have a look — these titles on MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' titles shared by ' + name : n + ' shared titles'; },
     momentKeineTitel: 'No shareable titles in this list.',
@@ -3099,6 +3105,8 @@ var UI_TEXTE = {
     teilenAnsichtTitel: 'Partager la vue',
     teilenAnsichtText: 'Regarde — ma vue actuelle sur MovieMatch :',
     teilenMoment: 'Partager cette vue',
+    teilenGesehen: 'Partager les titres vus',
+    teilenGesehenText: 'Les titres que j\'ai vus — sur MovieMatch :',
     teilenMomentText: 'Regarde — ces titres sur MovieMatch :',
     momentVon: function(n, name){ return name ? n + ' titres partagés par ' + name : n + ' titres partagés'; },
     momentKeineTitel: 'Aucun titre partageable dans cette liste.',
@@ -3422,6 +3430,8 @@ var UI_TEXTE = {
     teilenAnsichtTitel: 'Compartir vista',
     teilenAnsichtText: 'Mira — mi vista actual en MovieMatch:',
     teilenMoment: 'Compartir esta vista',
+    teilenGesehen: 'Compartir títulos vistos',
+    teilenGesehenText: 'Títulos que he visto — en MovieMatch:',
     teilenMomentText: 'Mira — estos títulos en MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' títulos compartidos por ' + name : n + ' títulos compartidos'; },
     momentKeineTitel: 'No hay títulos para compartir en esta lista.',
@@ -3745,6 +3755,8 @@ var UI_TEXTE = {
     teilenAnsichtTitel: 'Condividi vista',
     teilenAnsichtText: 'Guarda — la mia vista attuale su MovieMatch:',
     teilenMoment: 'Condividi questa vista',
+    teilenGesehen: 'Condividi i titoli visti',
+    teilenGesehenText: 'I titoli che ho visto — su MovieMatch:',
     teilenMomentText: 'Guarda — questi titoli su MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' titoli condivisi da ' + name : n + ' titoli condivisi'; },
     momentKeineTitel: 'Nessun titolo condivisibile in questa lista.',
@@ -4068,6 +4080,8 @@ var UI_TEXTE = {
     teilenAnsichtTitel: 'Weergave delen',
     teilenAnsichtText: 'Kijk — mijn huidige weergave op MovieMatch:',
     teilenMoment: 'Deze weergave delen',
+    teilenGesehen: 'Bekeken titels delen',
+    teilenGesehenText: 'Titels die ik heb gezien — op MovieMatch:',
     teilenMomentText: 'Kijk — deze titels op MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' titels gedeeld door ' + name : n + ' gedeelde titels'; },
     momentKeineTitel: 'Geen deelbare titels in deze lijst.',
@@ -4391,6 +4405,8 @@ var UI_TEXTE = {
     teilenAnsichtTitel: 'Compartilhar visão',
     teilenAnsichtText: 'Olha — minha visão atual no MovieMatch:',
     teilenMoment: 'Compartilhar esta visão',
+    teilenGesehen: 'Compartilhar títulos vistos',
+    teilenGesehenText: 'Títulos que já vi — no MovieMatch:',
     teilenMomentText: 'Olha — estes títulos no MovieMatch:',
     momentVon: function(n, name){ return name ? n + ' títulos compartilhados por ' + name : n + ' títulos compartilhados'; },
     momentKeineTitel: 'Nenhum título compartilhável nesta lista.',
@@ -11812,15 +11828,15 @@ function momentaufnahmeIds(){
   }
   return ids;
 }
-async function momentTeilen(){
-  var ids = momentaufnahmeIds();
+async function momentTeilen(ids, text){
+  ids = ids || momentaufnahmeIds();
   if (!ids.length) { alert(TXT.momentKeineTitel); return; }
   var url;
   try {
     var d = await apiRequest('POST', '/api/share/titel-liste', { ids: ids });
     url = location.origin + '/?titel=' + d.token;
   } catch (e) { alert(grenzeMeldung(e) || TXT.momentFehler); return; }
-  var text = TXT.teilenMomentText;
+  text = text || TXT.teilenMomentText;
   if (navigator.share) {
     navigator.share({ title: 'MovieMatch', text: text, url: url })
       .catch(function(err){
@@ -11912,6 +11928,8 @@ function renderMoment(profile){
   appBtn.textContent = TXT.teilenApp;
   titelBtn.textContent = TXT.teilenTitel;
   profilBtn.textContent = TXT.teilenProfil;
+  var gesehenBtn = document.getElementById('teilenGesehenBtn');
+  gesehenBtn.textContent = TXT.teilenGesehen;
   function schliessen(){ sheet.style.display = 'none'; }
   fab.onclick = function(e){
     e.stopPropagation();
@@ -11978,6 +11996,20 @@ function renderMoment(profile){
     schliessen();
     if (!eigeneAnsicht()) { infoZeigen('teilenNurEigene'); return; }
     einladungTeilen(profilBtn, 'share', function(){ einladungTeilen(profilBtn, 'share'); });
+  };
+  // Alle eigenen Gesehen-Titel als Momentaufnahme, unabhaengig von der gerade
+  // gewaehlten Ansicht. Bestbewertete zuerst, gekappt wie jede Momentaufnahme.
+  function gesehenTeilen(){
+    var liste = [];
+    PROGRESS.forEach(function(e, id){ if (e && e.seen) liste.push({ id: id, r: e.rating || 0 }); });
+    liste.sort(function(a, b){ return b.r - a.r; });
+    momentTeilen(liste.slice(0, MOMENT_MAX_TITEL).map(function(x){ return x.id; }), TXT.teilenGesehenText);
+  }
+  gesehenBtn.onclick = function(){
+    schliessen();
+    if (!eigeneAnsicht()) { infoZeigen('teilenNurEigene'); return; }
+    if (!CURRENT_USER) { requireLogin(gesehenTeilen); return; }
+    gesehenTeilen();
   };
 })();
 // Aus dem Menue rechts oben. Das Menue muss dabei zugehen, sonst stuende es
