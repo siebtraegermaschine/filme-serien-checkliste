@@ -91,7 +91,7 @@
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     min-height: 100vh;
     /* Hoehe der festen Navigation (.bottom-nav) plus Luft */
-    padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(118px + env(safe-area-inset-bottom, 0px));
   }
   header {
     position: relative;
@@ -103,7 +103,7 @@
        Navigations-Buttons kleben (die sitzen bei 6px, sind 40px hoch und wandern
        nicht mit, da absolut positioniert). Bewusst kein voller Abstand bis
        unter die Buttons -- das riss eine zu grosse Luecke auf. */
-    padding: calc(30px + env(safe-area-inset-top, 0px)) 20px 14px;
+    padding: calc(30px + env(safe-area-inset-top, 0px)) 20px 7px;
     /* Frueher ein Verlauf von #131820 nach var(--bg). Auf dem iPhone gehoert der
        Streifen unter der Statusleiste (env(safe-area-inset-top), siehe padding
        oben) mit zum Header -- dort stand also das dunkle Blau des Verlaufsanfangs
@@ -446,7 +446,7 @@
      Trailer-Knopf darueber buendig mit ihnen abschliesst (links Watchlist,
      rechts Gesehen) und nicht breiter wirkt. */
   #sharedActions button { flex:1; }
-  .to-top { position:fixed; right:16px; bottom:calc(72px + env(safe-area-inset-bottom, 0px));
+  .to-top { position:fixed; right:16px; bottom:calc(80px + env(safe-area-inset-bottom, 0px));
     width:44px; height:44px; display:none; align-items:center; justify-content:center;
     background:var(--card); border:1px solid var(--border); border-radius:50%;
     color:var(--text); cursor:pointer; z-index:40; box-shadow:0 6px 18px rgba(0,0,0,.45); }
@@ -456,7 +456,7 @@
      sichtbar (Teilen soll keinen Scroll voraussetzen); z-index unter den
      Modal-Overlays, damit offene Fenster ihn ueberdecken. */
   .teilen-fab { position:fixed; left:50%; transform:translateX(-50%);
-    bottom:calc(72px + env(safe-area-inset-bottom, 0px)); z-index:900;
+    bottom:calc(80px + env(safe-area-inset-bottom, 0px)); z-index:900;
     display:flex; align-items:center; gap:7px; background:var(--teilen-soft);
     border:1px solid var(--teilen); border-radius:999px; padding:10px 18px;
     color:var(--teilen); font-size:14px; font-weight:700; cursor:pointer;
@@ -465,7 +465,7 @@
   /* Das Auswahlblatt sitzt DIREKT UEBER dem Knopf (ausdrueckliche Vorgabe),
      nicht mittig im Bild wie die Modals. */
   .teilen-sheet { position:fixed; left:50%; transform:translateX(-50%);
-    bottom:calc(122px + env(safe-area-inset-bottom, 0px)); z-index:901;
+    bottom:calc(130px + env(safe-area-inset-bottom, 0px)); z-index:901;
     display:flex; flex-direction:column; gap:8px; background:var(--bg);
     border:1px solid var(--border); border-radius:12px; padding:12px;
     width:min(320px, calc(100vw - 32px)); box-shadow:0 4px 24px rgba(0,0,0,.5); }
@@ -1355,7 +1355,7 @@
      sichtbar dahinter weiterlaeuft. z-index unter .teilen-fab (900) und den
      Modals (1000). */
   .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 890;
-    padding: 8px 16px calc(8px + env(safe-area-inset-bottom, 0px));
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
     background: rgba(14, 17, 22, .82); border-top: 1px solid var(--border);
     -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
   .bottom-nav .filter-group { max-width: 660px; margin: 0 auto; }
