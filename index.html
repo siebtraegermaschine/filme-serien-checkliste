@@ -8109,6 +8109,9 @@ function suchChipsZeichnen(){
       SUCH_CHIPS.splice(i, 1);
       SUCH_VERKN.splice(i, 1);
       suchChipsZeichnen();
+      // Sonst bliebe die Suche als "laufend" gemerkt, und die naechste weitete nicht.
+      sucheZustandAnwenden();
+      updateFilterRowUI();
       titelLimit = TITEL_PRO_SEITE;
       renderCurrentTab();
     };
@@ -8145,6 +8148,7 @@ function suchChipHinzufuegen(){
   var v = searchEl.value.trim();
   if (!v || SUCH_CHIPS.length >= SUCH_CHIPS_MAX) return;
   suchChipAnhaengen(v);
+  sucheNeuWeiten();
   // Das Leeren laeuft ueber dasselbe input-Ereignis wie das X -- so bleiben
   // Suchzustand, Knopfleiste und verzoegerter Render an einer Stelle.
   searchEl.value = '';
@@ -8177,6 +8181,26 @@ function aktiveTypen(){
   if (TYPEN.serien) t.push('serien');
   return t;
 }
+// Eine Suche soll weiten statt im zuletzt gesetzten Ausschnitt zu suchen --
+// sonst faende man einen Titel nicht, nur weil vorher "nur Watchlist" oder
+// "nur Serien" eingestellt war. Der Streaming-Filter verengt, geht also aus.
+function sucheWeiten(){
+  watchlistFilterOn = true;
+  seenFilterOn = true;
+  discoverFilterOn = true;
+  TYPEN.filme = true;
+  TYPEN.serien = true;
+  typenAngleichen();
+  inStreamFilterOn = false;
+  titelLimit = TITEL_PRO_SEITE;
+}
+// Jede neu abgeschickte Suche (Enter, Vorschlag, "+") weitet wieder, auch wenn
+// waehrend der laufenden Suche ein Status von Hand gewaehlt wurde.
+function sucheNeuWeiten(){
+  if (!sucheZustandVorher || !sucheAktiv()) return;
+  sucheWeiten();
+  updateFilterRowUI();
+}
 function sucheZustandAnwenden(){
   // Tippen in der Suche verlaesst eine geteilte Momentaufnahme -- gesucht wird
   // im ganzen Katalog, nicht in der eingefrorenen Liste.
@@ -8186,19 +8210,7 @@ function sucheZustandAnwenden(){
     sucheZustandVorher = { wl: watchlistFilterOn, seen: seenFilterOn,
                            disc: discoverFilterOn, stream: inStreamFilterOn,
                            typen: { filme: TYPEN.filme, serien: TYPEN.serien } };
-    // Eine Suche soll weiten statt im zuletzt gesetzten Ausschnitt zu suchen --
-    // sonst faende man einen Titel nicht, nur weil vorher "nur Watchlist" oder
-    // "nur Serien" eingestellt war.
-    watchlistFilterOn = true;
-    seenFilterOn = true;
-    discoverFilterOn = true;
-    TYPEN.filme = true;
-    TYPEN.serien = true;
-    typenAngleichen();
-    // Der Streaming-Filter verengt, Suchen soll weiten -- er geht aus, bleibt
-    // aber anklickbar.
-    inStreamFilterOn = false;
-    titelLimit = TITEL_PRO_SEITE;
+    sucheWeiten();
   } else if (!jetzt && sucheZustandVorher) {
     watchlistFilterOn = sucheZustandVorher.wl;
     seenFilterOn = sucheZustandVorher.seen;
@@ -8797,6 +8809,7 @@ function chooseSearchSuggestion(text){
     searchEl.value = text;
   }
   searchEl.dispatchEvent(new Event('input'));
+  sucheNeuWeiten();
   clearTimeout(_searchSuggestTimer);
   _searchSuggestEl.style.display = 'none';
   _suppressSuggestOnFocus = true;
@@ -8831,6 +8844,7 @@ searchEl.addEventListener('keydown', function(e){
   if (e.key === 'Enter') {
     e.preventDefault();
     _searchSuggestEl.style.display = 'none';
+    if (sucheZustandVorher && sucheAktiv()) { sucheNeuWeiten(); renderCurrentTab(); }
     searchEl.blur();
   }
 });
