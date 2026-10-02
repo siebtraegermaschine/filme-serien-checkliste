@@ -180,6 +180,21 @@ const STICHPROBE     = Number(process.env.STREAM_STICHPROBE || 6);
  *
  * Bewusst an den Markennamen gebunden und nicht an "Channel" allein: Es gibt
  * eigenstaendige Dienste, die so heissen (etwa "Hallmark Channel"). */
+/* Kostenlose Angebote (Mediatheken) je Region. TMDB fuehrt sie unter `free`,
+ * nicht unter `flatrate` -- die Abo-Pruefung unten weist sie deshalb ab
+ * (ARD Mediathek: 26 % Abo-Anteil). Sie bekommen eine eigene Art: abgefragt
+ * wird `free`, geprueft per Gegenprobe, und sie zaehlen nicht gegen
+ * MAX_ANBIETER. TMDB-Nummern am 2. Oktober 2026 fuer DE nachgemessen. */
+const KOSTENLOS_JE_REGION = {
+  DE: [
+    { id: 219,  name: 'ARD Mediathek' },
+    { id: 537,  name: 'ZDF' },
+    { id: 234,  name: 'ARTE' },
+    { id: 2211, name: '3sat' },
+    { id: 2081, name: 'KiKA' },
+  ],
+};
+
 const KEIN_EIGENES_ABO = /^(?:Amazon|Apple TV|Roku)\b.*\bChannel$|\bKids$/i;
 
 /* Tarifstufen desselben Dienstes: In den USA fuehrt TMDB "Paramount Plus
@@ -397,7 +412,7 @@ async function genrePaare() {
 /* Fuehrt dieser Anbieter in DIESER Region ein Abo -- und wie gross ist es?
    Die beiden Pruefungen sind im Kopf-Kommentar bei MAX_ANBIETER begruendet.
    Liefert {ok, filme, serien, anteil, gegenprobe} zurueck. */
-async function aboAngebotPruefen(p) {
+async function aboAngebotPruefen(p, art = 'flatrate') {
   const umfang = { movie: 0, tv: 0 };
   let flat = 0, gesamt = 0;
   const proben = [];
@@ -408,7 +423,7 @@ async function aboAngebotPruefen(p) {
       language: LANG, watch_region: REGION,
       with_watch_providers: p.id, include_adult: 'false', page: 1,
     };
-    const mitAbo = await tmdb(`/discover/${kind}`, { ...basis, with_watch_monetization_types: 'flatrate' });
+    const mitAbo = await tmdb(`/discover/${kind}`, { ...basis, with_watch_monetization_types: art });
     const ohne   = await tmdb(`/discover/${kind}`, basis);
     umfang[kind] = mitAbo.total_results || 0;
     flat   += mitAbo.total_results || 0;
@@ -418,7 +433,8 @@ async function aboAngebotPruefen(p) {
   const anteil = gesamt ? flat / gesamt : 0;
   const ergebnis = { filme: umfang.movie, serien: umfang.tv, anteil, gegenprobe: null };
   if (flat < MIN_TITEL) return { ...ergebnis, ok: false, grund: `nur ${flat} Abo-Titel` };
-  if (anteil < MIN_ABO_ANTEIL) {
+  // Der Abo-Anteil sagt bei kostenlosen Angeboten nichts aus; dort traegt die Gegenprobe.
+  if (art === 'flatrate' && anteil < MIN_ABO_ANTEIL) {
     return { ...ergebnis, ok: false, grund: `Abo-Anteil ${(anteil * 100).toFixed(0)} %` };
   }
 
@@ -431,12 +447,12 @@ async function aboAngebotPruefen(p) {
     try {
       const w = await tmdb(`/${kind}/${id}/watch/providers`);
       const r = (w.results || {})[REGION] || {};
-      if ((r.flatrate || []).some((x) => x.provider_id === p.id)) treffer++;
+      if ((r[art] || []).some((x) => x.provider_id === p.id)) treffer++;
     } catch (e) { /* einzelner Ausfall soll den Kandidaten nicht kippen */ }
   }
   ergebnis.gegenprobe = `${treffer}/${stichprobe.length}`;
   if (treffer * 2 < stichprobe.length) {
-    return { ...ergebnis, ok: false, grund: `Gegenprobe ${ergebnis.gegenprobe} im Abo` };
+    return { ...ergebnis, ok: false, grund: `Gegenprobe ${ergebnis.gegenprobe} unter ${art}` };
   }
   return { ...ergebnis, ok: true };
 }
@@ -485,24 +501,41 @@ async function anbieterDerRegion() {
     });
   }
 
+  // Kostenlose Angebote (Mediatheken): eigene Art, zaehlen nicht gegen MAX_ANBIETER.
+  for (const k of KOSTENLOS_JE_REGION[REGION] || []) {
+    const eintrag = { ...k, slug: anbieterSlug(k.name) };
+    if (slugs.has(eintrag.slug)) continue;
+    const pruefung = await aboAngebotPruefen(eintrag, 'free');
+    await sleep(SEITEN_PAUSE);
+    if (!pruefung.ok) { verworfen.push(`${k.name} (kostenlos: ${pruefung.grund})`); continue; }
+    const umfang = pruefung.filme + pruefung.serien;
+    if (zeilen + umfang > MAX_ZEILEN) { verworfen.push(`${k.name} (Budget)`); continue; }
+    zeilen += umfang;
+    slugs.add(eintrag.slug);
+    gewaehlt.push({
+      id: eintrag.slug, name: k.name, tmdbId: k.id, art: 'free',
+      filme: pruefung.filme, serien: pruefung.serien, gegenprobe: pruefung.gegenprobe,
+    });
+  }
+
   // Ein plausibler Lauf findet mindestens die grossen Vier. Weniger heisst:
   // TMDB hat gerade eine kaputte Antwort geliefert. Dann lieber hier
   // abbrechen, als dem Ingest eine duenne Lieferung zu schicken -- der wuerde
   // sie zwar zurueckweisen (Mindestanteil), aber die Ursache staende nirgends.
-  if (gewaehlt.length < 3) {
+  if (gewaehlt.filter((a) => a.art !== 'free').length < 3) {
     throw new Error(`Nur ${gewaehlt.length} Abo-Anbieter fuer ${REGION} ermittelt -- Abbruch.`);
   }
 
   console.log(`Anbieter fuer ${REGION} (${gewaehlt.length} von ${kandidaten.length} geprueften):`);
   for (const a of gewaehlt) {
-    console.log(`   ${a.name} [${a.id}] TMDB ${a.tmdbId} -- ${a.filme} Filme, ${a.serien} Serien im Abo (Gegenprobe ${a.gegenprobe})`);
+    console.log(`   ${a.name} [${a.id}] TMDB ${a.tmdbId} -- ${a.filme} Filme, ${a.serien} Serien ${a.art === 'free' ? 'kostenlos' : 'im Abo'} (Gegenprobe ${a.gegenprobe})`);
   }
   console.log(`   zusammen ${zeilen} Anbieter-Zeilen (Budget ${MAX_ZEILEN}).`);
   if (verworfen.length) console.log(`   nicht aufgenommen: ${verworfen.join(', ')}`);
   return gewaehlt;
 }
 
-async function discover(kind, providerId, gmap) {
+async function discover(kind, providerId, gmap, art = 'flatrate') {
   const dateField = kind === 'movie' ? 'primary_release_date.gte' : 'first_air_date.gte';
   const out = [];
   const seen = new Set();
@@ -513,7 +546,7 @@ async function discover(kind, providerId, gmap) {
       language: LANG,
       watch_region: REGION,
       with_watch_providers: providerId,
-      with_watch_monetization_types: 'flatrate',
+      with_watch_monetization_types: art,
       sort_by: 'vote_average.desc',
       include_adult: 'false',
       page,
@@ -671,8 +704,8 @@ async function main() {
   const providers = [];
   for (const w of gewaehlt) {
     console.log(`→ ${w.name}  (TMDB ${w.tmdbId})`);
-    const f = w.filme  ? await discover('movie', w.tmdbId, movieGenres) : [];
-    const s = w.serien ? await discover('tv', w.tmdbId, tvGenres) : [];
+    const f = w.filme  ? await discover('movie', w.tmdbId, movieGenres, w.art) : [];
+    const s = w.serien ? await discover('tv', w.tmdbId, tvGenres, w.art) : [];
     // id ist der Slug -- an ihm haengen streaming_cache.provider_id und die
     // SEO-Seiten. tmdbId daneben, weil dieselbe Marke je Land verschiedene
     // TMDB-Nummern hat (Amazon Prime Video: 9 in DE/AT/GB/US, sonst 119).
