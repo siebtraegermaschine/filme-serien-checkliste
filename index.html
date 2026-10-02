@@ -6398,8 +6398,8 @@ function watchRowHtml(tmdbId, type, title, realId, opts){
   var kennung = (tmdbId && type) ? (type + '/' + tmdbId) : (realId ? ('by-title/' + realId) : null);
   // Region mitgeben: Ansehen/Leihen/Kaufen ist je Land verschieden.
   var api = kennung ? ('/api/watch-providers/' + kennung + '?region=' + REGION_WAHL) : null;
-  // Auf der Kino-Seite ergeben Ansehen/Leihen/Kaufen keinen Sinn -- die Filme
-  // laufen ja erst an. Ohne Kennung liesse sich nichts abfragen. In beiden
+  // Bei Kino-Neustarts ergeben Ansehen/Leihen/Kaufen keinen Sinn -- die Filme
+  // laufen ja erst an (Wiederauffuehrungen siehe renderCinemaPage). Ohne Kennung liesse sich nichts abfragen. In beiden
   // Faellen bleibt nur "Ähnliche Titel" links -- und ohne den gar keine Zeile.
   var aehnlich = !!(opts && opts.aehnlich);
   var nurTrailer = !!(opts && opts.nurTrailer) || !api;
@@ -9650,10 +9650,11 @@ async function renderCinemaPage(){
     if (pinIdx > 0) { var pinnedEntry = entries.splice(pinIdx, 1)[0]; entries.unshift(pinnedEntry); }
   });
   var visible = entries.slice(0, cinemaLimit);
-  // Kino: Ansehen/Leihen/Kaufen entfallen, die Filme laufen ja erst an --
-  // der Trailer ist hier das einzig Sinnvolle (siehe watchRowHtml).
+  // Kino: Ansehen/Leihen/Kaufen entfallen bei Neustarts, die laufen ja erst
+  // an. Wiederauffuehrungen (row.ord gesetzt) sind aelter und oft schon zu
+  // streamen, leihen oder kaufen -- nur dort bleiben die Knoepfe (siehe watchRowHtml).
   visible.forEach(function(e){
-    var opts = { nurTrailer: true, kinoDatum: e.row.rd || null, kinoOffen: !!e.row.o, pinCategory: 'cinema' };
+    var opts = { nurTrailer: !e.row.ord, kinoDatum: e.row.rd || null, kinoOffen: !!e.row.o, pinCategory: 'cinema' };
     if (fremd) {
       var fe = fremd.get(e.item.realId);
       opts.fremdName = profilName(ANSICHT_PERSON);
