@@ -1171,7 +1171,9 @@
   @media (hover: hover) { .prov-item:hover { background: var(--card-hover); } }
   .prov-item input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
   .prov-item img { width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0; background: var(--border); }
-  .laufzeit { font-size: 13px; color: var(--text-dim); margin: 4px 0 2px; }
+  .details .laufzeit { margin-top: 8px; font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+  .details .laufzeit:empty { display: none; }
+  .details .laufzeit::before { content: attr(data-label) ' '; color: var(--text); font-weight: 600; }
   .prov-item span { font-size: 14px; color: var(--text); }
   .prov-item .prov-free { font-size: 11px; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 0 5px; }
   .prov-more { background: none; border: none; color: var(--accent); font-size: 13px; font-weight: 600;
@@ -2239,7 +2241,7 @@ var UI_TEXTE = {
     textMehr: 'Mehr',
     textWeniger: 'Weniger',
     laedt: 'Lädt …',
-    regie: 'Regie', originaltitel: 'Originaltitel:', besetzung: 'Besetzung:',
+    dauer: 'Dauer:', regie: 'Regie', originaltitel: 'Originaltitel:', besetzung: 'Besetzung:',
     ansehen: '▶ Ansehen', leihen: 'Leihen', kaufen: 'Kaufen',
     trailer: '▶ Trailer',
     trailerTitel: function(t){ return 'Trailer: ' + t; },
@@ -2570,7 +2572,7 @@ var UI_TEXTE = {
     textMehr: 'More',
     textWeniger: 'Less',
     laedt: 'Loading …',
-    regie: 'Director', originaltitel: 'Original title:', besetzung: 'Cast:',
+    dauer: 'Duration:', regie: 'Director', originaltitel: 'Original title:', besetzung: 'Cast:',
     ansehen: '▶ Stream', leihen: 'Rent', kaufen: 'Buy',
     trailer: '▶ Trailer',
     trailerTitel: function(t){ return 'Trailer: ' + t; },
@@ -2897,7 +2899,7 @@ var UI_TEXTE = {
     textMehr: 'Plus',
     textWeniger: 'Moins',
     laedt: 'Chargement …',
-    regie: 'Réalisation', originaltitel: 'Titre original :', besetzung: 'Distribution :',
+    dauer: 'Durée :', regie: 'Réalisation', originaltitel: 'Titre original :', besetzung: 'Distribution :',
     ansehen: '▶ Regarder', leihen: 'Louer', kaufen: 'Acheter',
     trailer: '▶ Bande-annonce',
     trailerTitel: function(t){ return 'Bande-annonce : ' + t; },
@@ -3224,7 +3226,7 @@ var UI_TEXTE = {
     textMehr: 'Más',
     textWeniger: 'Menos',
     laedt: 'Cargando …',
-    regie: 'Dirección', originaltitel: 'Título original:', besetzung: 'Reparto:',
+    dauer: 'Duración:', regie: 'Dirección', originaltitel: 'Título original:', besetzung: 'Reparto:',
     ansehen: '▶ Ver', leihen: 'Alquilar', kaufen: 'Comprar',
     trailer: '▶ Tráiler',
     trailerTitel: function(t){ return 'Tráiler: ' + t; },
@@ -3551,7 +3553,7 @@ var UI_TEXTE = {
     textMehr: 'Altro',
     textWeniger: 'Meno',
     laedt: 'Caricamento …',
-    regie: 'Regia', originaltitel: 'Titolo originale:', besetzung: 'Cast:',
+    dauer: 'Durata:', regie: 'Regia', originaltitel: 'Titolo originale:', besetzung: 'Cast:',
     ansehen: '▶ Streaming', leihen: 'Noleggio', kaufen: 'Acquisto',
     trailer: '▶ Trailer',
     trailerTitel: function(t){ return 'Trailer: ' + t; },
@@ -3878,7 +3880,7 @@ var UI_TEXTE = {
     textMehr: 'Meer',
     textWeniger: 'Minder',
     laedt: 'Laden …',
-    regie: 'Regie', originaltitel: 'Originele titel:', besetzung: 'Cast:',
+    dauer: 'Duur:', regie: 'Regie', originaltitel: 'Originele titel:', besetzung: 'Cast:',
     ansehen: '▶ Streamen', leihen: 'Huren', kaufen: 'Kopen',
     trailer: '▶ Trailer',
     trailerTitel: function(t){ return 'Trailer: ' + t; },
@@ -4205,7 +4207,7 @@ var UI_TEXTE = {
     textMehr: 'Mais',
     textWeniger: 'Menos',
     laedt: 'Carregando …',
-    regie: 'Direção', originaltitel: 'Título original:', besetzung: 'Elenco:',
+    dauer: 'Duração:', regie: 'Direção', originaltitel: 'Título original:', besetzung: 'Elenco:',
     ansehen: '▶ Stream', leihen: 'Alugar', kaufen: 'Comprar',
     trailer: '▶ Trailer',
     trailerTitel: function(t){ return 'Trailer: ' + t; },
@@ -6011,7 +6013,7 @@ function laufzeitDivHtml(item){
   var key = plotKeyFor(item);
   if (!key) return '';
   var serie = item.type === 'series' || item.type === 'serie';
-  return '<div class="laufzeit" data-plotkey="' + escAttr(key) + '" data-serie="' + (serie ? 1 : 0) + '">' +
+  return '<div class="laufzeit" data-label="' + escAttr(TXT.dauer) + '" data-plotkey="' + escAttr(key) + '" data-serie="' + (serie ? 1 : 0) + '">' +
     esc(laufzeitText(RT_CACHE.get(key), serie)) + '</div>';
 }
 function plotDivHtml(item){
