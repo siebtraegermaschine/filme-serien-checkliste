@@ -1172,6 +1172,7 @@
   .prov-item input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
   .prov-item img { width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0; background: var(--border); }
   .prov-item span { font-size: 14px; color: var(--text); }
+  .prov-item .prov-free { font-size: 11px; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 0 5px; }
   .prov-more { background: none; border: none; color: var(--accent); font-size: 13px; font-weight: 600;
     cursor: pointer; padding: 10px 6px; text-decoration: underline; }
   .prov-foot { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding-top: 12px;
@@ -2378,6 +2379,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Speichern fehlgeschlagen. Bitte erneut versuchen.',
     anbieterFehler: 'Anbieter konnten nicht geladen werden.',
     keineAnbieter: 'Keine Anbieter verfügbar.',
+    kostenlos: 'kostenlos',
     weitereAnbieterZeigen: function(n){ return 'Weitere ' + n + ' Anbieter anzeigen'; },
     nAusgewaehlt: function(n){ return n + ' ausgewählt'; },
     nichtsAusgewaehlt: 'Nichts ausgewählt – es werden alle Anbieter angezeigt.',
@@ -2706,6 +2708,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Saving failed. Please try again.',
     anbieterFehler: 'Providers could not be loaded.',
     keineAnbieter: 'No providers available.',
+    kostenlos: 'free',
     weitereAnbieterZeigen: function(n){ return 'Show ' + n + ' more providers'; },
     nAusgewaehlt: function(n){ return n + ' selected'; },
     nichtsAusgewaehlt: 'Nothing selected – all providers are shown.',
@@ -3031,6 +3034,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'L’enregistrement a échoué. Réessaie.',
     anbieterFehler: 'Les services n’ont pas pu être chargés.',
     keineAnbieter: 'Aucun service disponible.',
+    kostenlos: 'gratuit',
     weitereAnbieterZeigen: function(n){ return 'Afficher ' + n + ' services de plus'; },
     nAusgewaehlt: function(n){ return n + ' sélectionné(s)'; },
     nichtsAusgewaehlt: 'Rien de sélectionné – tous les services sont affichés.',
@@ -3356,6 +3360,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Error al guardar. Inténtalo de nuevo.',
     anbieterFehler: 'No se pudieron cargar los proveedores.',
     keineAnbieter: 'No hay proveedores disponibles.',
+    kostenlos: 'gratis',
     weitereAnbieterZeigen: function(n){ return 'Mostrar ' + n + ' proveedores más'; },
     nAusgewaehlt: function(n){ return n + ' seleccionados'; },
     nichtsAusgewaehlt: 'Nada seleccionado – se muestran todos los proveedores.',
@@ -3681,6 +3686,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Salvataggio non riuscito. Riprova.',
     anbieterFehler: 'Impossibile caricare i servizi.',
     keineAnbieter: 'Nessun servizio disponibile.',
+    kostenlos: 'gratis',
     weitereAnbieterZeigen: function(n){ return 'Mostra altri ' + n + ' servizi'; },
     nAusgewaehlt: function(n){ return n + ' selezionati'; },
     nichtsAusgewaehlt: 'Nessuna selezione – vengono mostrati tutti i servizi.',
@@ -4006,6 +4012,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Opslaan is mislukt. Probeer het opnieuw.',
     anbieterFehler: 'Aanbieders konden niet worden geladen.',
     keineAnbieter: 'Geen aanbieders beschikbaar.',
+    kostenlos: 'gratis',
     weitereAnbieterZeigen: function(n){ return 'Nog ' + n + ' aanbieders tonen'; },
     nAusgewaehlt: function(n){ return n + ' geselecteerd'; },
     nichtsAusgewaehlt: 'Niets geselecteerd – alle aanbieders worden getoond.',
@@ -4331,6 +4338,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Falha ao salvar. Tente novamente.',
     anbieterFehler: 'Não foi possível carregar os serviços.',
     keineAnbieter: 'Nenhum serviço disponível.',
+    kostenlos: 'grátis',
     weitereAnbieterZeigen: function(n){ return 'Mostrar mais ' + n + ' serviços'; },
     nAusgewaehlt: function(n){ return n + ' selecionados'; },
     nichtsAusgewaehlt: 'Nada selecionado – todos os serviços são mostrados.',
@@ -12245,7 +12253,7 @@ function renderProvidersList(ziel, hinweisEl){
   var html = sichtbar.map(function(p){
     var logo = p.logo ? '<img src="https://image.tmdb.org/t/p/w45' + escAttr(p.logo) + '" alt="" loading="lazy">' : '<img alt="">';
     return '<label class="prov-item"><input type="checkbox" value="' + escAttr(String(p.id)) + '"' +
-           (chosen.has(p.id) ? ' checked' : '') + '>' + logo + '<span>' + esc(p.name) + '</span></label>';
+           (chosen.has(p.id) ? ' checked' : '') + '>' + logo + '<span>' + esc(p.name) + '</span>' + (p.kostenlos ? '<small class="prov-free">' + TXT.kostenlos + '</small>' : '') + '</label>';
   }).join('');
   if (!_provShowAll && PROVIDER_CATALOG.length > sichtbar.length) {
     // Ueber die KLASSE angesprochen, nicht ueber eine Kennung: die Liste kann

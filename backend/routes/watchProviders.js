@@ -166,14 +166,14 @@ async function katalogUndStandard(region) {
   const providers = await anbieterKatalog(region);
   // Ohne Katalog (TMDB nicht erreichbar, kein Schluessel) bleibt es bei der
   // frueheren globalen Vorauswahl -- sonst waere gar nichts vorausgewaehlt.
-  const defaults = providers.length ? standardAnbieterIds(providers) : STANDARD_RUECKFALL;
+  const defaults = providers.length ? standardAnbieterIds(providers, region) : STANDARD_RUECKFALL;
   return { providers, defaults };
 }
 
 // Die Antwort traegt bewusst nur, was die Auswahl anzeigt -- `priority`,
 // `kanonisch` und `arten` sind interne Felder des Katalogs.
 function katalogFuerClient(providers) {
-  return providers.map((p) => ({ id: p.id, name: p.name, logo: p.logo, common: p.common }));
+  return providers.map((p) => ({ id: p.id, name: p.name, logo: p.logo, common: p.common, kostenlos: !!p.kostenlos }));
 }
 
 async function standardIds(region) {

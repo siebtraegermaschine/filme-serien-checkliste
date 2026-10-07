@@ -96,6 +96,11 @@ export function landesPrioritaet(p, region) {
 // Suchlink kennt. Die IDs sind laenderuebergreifend dieselben.
 const SHOP_IDS = [2, 3, 10, 192, 35];
 
+// Kostenlose Anbieter (Mediatheken) je Region -- gleiche IDs wie
+// KOSTENLOS_JE_REGION in stream-fetch.mjs. Sie stehen immer in der Hauptliste
+// und in der Vorauswahl, obwohl TMDB sie weit hinten priorisiert.
+export const KOSTENLOS_IDS = { DE: [219, 537, 234, 2211, 2081] };
+
 // So viele der prominentesten Dienste eines Landes sind vorausgewaehlt.
 const STANDARD_TOP = 10;
 
@@ -103,10 +108,11 @@ const STANDARD_TOP = 10;
 // prominentesten Dienste des Landes plus die dortigen Shops. Frueher stand hier
 // eine feste deutsche Liste -- in Brasilien waren damit RTL+ und WOW
 // vorausgewaehlt und Globoplay gar nicht.
-export function standardAnbieterIds(katalog) {
+export function standardAnbieterIds(katalog, region) {
+  const gratis = (KOSTENLOS_IDS[region] || []).filter((id) => katalog.some((p) => p.id === id));
   const oben = katalog.slice(0, STANDARD_TOP).map((p) => p.id);
   const shops = katalog.filter((p) => SHOP_IDS.includes(p.id)).map((p) => p.id);
-  return [...new Set([...oben, ...shops])];
+  return [...new Set([...oben, ...shops, ...gratis])];
 }
 
 // Letzter Rueckfall, wenn TMDB nicht erreichbar ist und noch nie ein Katalog
@@ -174,7 +180,8 @@ async function katalogLaden(region) {
       priority: p.priority,
       kanonisch: p.kanonisch,
       arten: [...p.arten],
-      common: i < COMMON_COUNT,
+      common: i < COMMON_COUNT || (KOSTENLOS_IDS[region] || []).includes(p.id),
+      kostenlos: (KOSTENLOS_IDS[region] || []).includes(p.id),
     }));
 }
 
