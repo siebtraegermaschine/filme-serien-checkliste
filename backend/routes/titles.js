@@ -158,7 +158,7 @@ router.get('/', async (req, res) => {
 router.post('/plots', GRENZE_PLOTS, async (req, res) => {
   const { ids, tmdb } = req.body || {};
   const lang = sprachWahl((req.body || {}).lang);
-  const out = { ids: {}, tmdb: {} };
+  const out = { ids: {}, tmdb: {}, rt: {} };
 
   const numericIds = Array.isArray(ids)
     ? [...new Set(ids.map(Number).filter((n) => Number.isInteger(n) && n > 0))].slice(0, 1000)
@@ -170,6 +170,8 @@ router.post('/plots', GRENZE_PLOTS, async (req, res) => {
       [numericIds]
     );
     for (const r of rows) out.ids[r.id] = sprachFeld(lang, r.plot || '', r.overview_en, r.uebersetzungen, 'ov');
+    const lz = await pool.query('SELECT id, runtime FROM titles WHERE id = ANY($1) AND runtime > 0', [numericIds]);
+    for (const r of lz.rows) out.rt[`id:${r.id}`] = r.runtime;
   }
 
   // [[type, tmdbId], ...] -- zwei Parallel-Arrays, damit die Paare als ein
@@ -189,6 +191,12 @@ router.post('/plots', GRENZE_PLOTS, async (req, res) => {
       [typen, tmdbIds]
     );
     for (const r of rows) out.tmdb[`${r.type}:${r.tmdb_id}`] = sprachFeld(lang, r.overview || '', r.overview_en, r.uebersetzungen, 'ov');
+    const lz = await pool.query(
+      `SELECT DISTINCT ON (type, tmdb_id) type, tmdb_id, runtime FROM titles
+        WHERE (type, tmdb_id) IN (SELECT * FROM unnest($1::text[], $2::int[])) AND runtime > 0`,
+      [typen, tmdbIds]
+    );
+    for (const r of lz.rows) out.rt[`tmdb:${r.type}:${r.tmdb_id}`] = r.runtime;
   }
 
   res.json(out);

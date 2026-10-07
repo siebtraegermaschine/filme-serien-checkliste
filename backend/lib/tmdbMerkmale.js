@@ -11,7 +11,10 @@ export function merkmaleAusDetail(detail, kind) {
   return {
     originCountry: land.length ? land : null,
     originalLanguage: sprache,
-    runtime: kind === 'movie' ? positiv(d.runtime) : null,
+    // Serien: Minuten je Folge (episode_run_time ist bei TMDB oft leer, dann
+    // zaehlt die zuletzt gesendete Folge).
+    runtime: kind === 'movie' ? positiv(d.runtime)
+      : positiv((d.episode_run_time || [])[0]) || positiv(d.last_episode_to_air && d.last_episode_to_air.runtime),
     seasons: kind === 'movie' ? null : positiv(d.number_of_seasons),
   };
 }

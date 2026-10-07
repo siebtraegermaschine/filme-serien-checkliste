@@ -1171,6 +1171,7 @@
   @media (hover: hover) { .prov-item:hover { background: var(--card-hover); } }
   .prov-item input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
   .prov-item img { width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0; background: var(--border); }
+  .laufzeit { font-size: 13px; color: var(--text-dim); margin: 4px 0 2px; }
   .prov-item span { font-size: 14px; color: var(--text); }
   .prov-item .prov-free { font-size: 11px; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 0 5px; }
   .prov-more { background: none; border: none; color: var(--accent); font-size: 13px; font-weight: 600;
@@ -2379,6 +2380,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Speichern fehlgeschlagen. Bitte erneut versuchen.',
     anbieterFehler: 'Anbieter konnten nicht geladen werden.',
     keineAnbieter: 'Keine Anbieter verfügbar.',
+    laufzeitMin: function(m, s){ return (s ? 'ca. ' : '') + m + ' Min.' + (s ? ' pro Folge' : ''); },
     kostenlos: 'kostenlos',
     weitereAnbieterZeigen: function(n){ return 'Weitere ' + n + ' Anbieter anzeigen'; },
     nAusgewaehlt: function(n){ return n + ' ausgewählt'; },
@@ -2708,6 +2710,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Saving failed. Please try again.',
     anbieterFehler: 'Providers could not be loaded.',
     keineAnbieter: 'No providers available.',
+    laufzeitMin: function(m, s){ return (s ? 'approx. ' : '') + m + ' min' + (s ? ' per episode' : ''); },
     kostenlos: 'free',
     weitereAnbieterZeigen: function(n){ return 'Show ' + n + ' more providers'; },
     nAusgewaehlt: function(n){ return n + ' selected'; },
@@ -3034,6 +3037,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'L’enregistrement a échoué. Réessaie.',
     anbieterFehler: 'Les services n’ont pas pu être chargés.',
     keineAnbieter: 'Aucun service disponible.',
+    laufzeitMin: function(m, s){ return (s ? 'env. ' : '') + m + ' min' + (s ? ' par épisode' : ''); },
     kostenlos: 'gratuit',
     weitereAnbieterZeigen: function(n){ return 'Afficher ' + n + ' services de plus'; },
     nAusgewaehlt: function(n){ return n + ' sélectionné(s)'; },
@@ -3360,6 +3364,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Error al guardar. Inténtalo de nuevo.',
     anbieterFehler: 'No se pudieron cargar los proveedores.',
     keineAnbieter: 'No hay proveedores disponibles.',
+    laufzeitMin: function(m, s){ return (s ? 'aprox. ' : '') + m + ' min' + (s ? ' por episodio' : ''); },
     kostenlos: 'gratis',
     weitereAnbieterZeigen: function(n){ return 'Mostrar ' + n + ' proveedores más'; },
     nAusgewaehlt: function(n){ return n + ' seleccionados'; },
@@ -3686,6 +3691,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Salvataggio non riuscito. Riprova.',
     anbieterFehler: 'Impossibile caricare i servizi.',
     keineAnbieter: 'Nessun servizio disponibile.',
+    laufzeitMin: function(m, s){ return (s ? 'circa ' : '') + m + ' min' + (s ? ' a episodio' : ''); },
     kostenlos: 'gratis',
     weitereAnbieterZeigen: function(n){ return 'Mostra altri ' + n + ' servizi'; },
     nAusgewaehlt: function(n){ return n + ' selezionati'; },
@@ -4012,6 +4018,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Opslaan is mislukt. Probeer het opnieuw.',
     anbieterFehler: 'Aanbieders konden niet worden geladen.',
     keineAnbieter: 'Geen aanbieders beschikbaar.',
+    laufzeitMin: function(m, s){ return (s ? 'ca. ' : '') + m + ' min' + (s ? ' per aflevering' : ''); },
     kostenlos: 'gratis',
     weitereAnbieterZeigen: function(n){ return 'Nog ' + n + ' aanbieders tonen'; },
     nAusgewaehlt: function(n){ return n + ' geselecteerd'; },
@@ -4338,6 +4345,7 @@ var UI_TEXTE = {
     speichernFehlgeschlagen: 'Falha ao salvar. Tente novamente.',
     anbieterFehler: 'Não foi possível carregar os serviços.',
     keineAnbieter: 'Nenhum serviço disponível.',
+    laufzeitMin: function(m, s){ return (s ? 'aprox. ' : '') + m + ' min' + (s ? ' por episódio' : ''); },
     kostenlos: 'grátis',
     weitereAnbieterZeigen: function(n){ return 'Mostrar mais ' + n + ' serviços'; },
     nAusgewaehlt: function(n){ return n + ' selecionados'; },
@@ -5993,6 +6001,19 @@ function plotFor(item){
   var k = plotKeyFor(item);
   return (k && PLOT_CACHE.get(k)) || '';
 }
+/* Laufzeit unter den Tags. Kommt wie der Inhaltstext erst per
+   POST /api/titles/plots (Feld rt) und wird in fillPlots eingesetzt. */
+var RT_CACHE = new Map();
+function laufzeitText(min, serie){
+  return min ? TXT.laufzeitMin(min, serie) : '';
+}
+function laufzeitDivHtml(item){
+  var key = plotKeyFor(item);
+  if (!key) return '';
+  var serie = item.type === 'series' || item.type === 'serie';
+  return '<div class="laufzeit" data-plotkey="' + escAttr(key) + '" data-serie="' + (serie ? 1 : 0) + '">' +
+    esc(laufzeitText(RT_CACHE.get(key), serie)) + '</div>';
+}
 function plotDivHtml(item){
   var text = plotFor(item);
   var key = plotKeyFor(item);
@@ -6004,13 +6025,18 @@ function plotDivHtml(item){
 // PLOT_CACHE bedient, nur wirklich Fehlendes wird angefragt.
 var _plotInFlight = null;
 async function fillPlots(){
-  var leer = [...document.querySelectorAll('.plot[data-plotkey]')].filter(function(el){
+  var leer = [...document.querySelectorAll('.plot[data-plotkey], .laufzeit[data-plotkey]')].filter(function(el){
     return !el.textContent && el.dataset.plotkey;
   });
   if (!leer.length) return;
   var fehlend = new Set();
   leer.forEach(function(el){
     var k = el.dataset.plotkey;
+    if (el.classList.contains('laufzeit')) {
+      if (RT_CACHE.has(k)) el.textContent = laufzeitText(RT_CACHE.get(k), el.dataset.serie === '1');
+      else fehlend.add(k);
+      return;
+    }
     if (PLOT_CACHE.has(k)) { el.textContent = PLOT_CACHE.get(k); return; }
     fehlend.add(k);
   });
@@ -6026,9 +6052,13 @@ async function fillPlots(){
     Object.keys(d.ids || {}).forEach(function(id){ PLOT_CACHE.set('id:' + id, d.ids[id]); });
     Object.keys(d.tmdb || {}).forEach(function(k){ PLOT_CACHE.set('tmdb:' + k, d.tmdb[k]); });
     // Nicht gefundene als leer merken, damit sie nicht endlos erneut angefragt werden.
-    keys.forEach(function(k){ if (!PLOT_CACHE.has(k)) PLOT_CACHE.set(k, ''); });
+    Object.keys(d.rt || {}).forEach(function(k){ RT_CACHE.set(k, d.rt[k]); });
+    keys.forEach(function(k){ if (!PLOT_CACHE.has(k)) PLOT_CACHE.set(k, ''); if (!RT_CACHE.has(k)) RT_CACHE.set(k, 0); });
     document.querySelectorAll('.plot[data-plotkey]').forEach(function(el){
       if (!el.textContent) el.textContent = PLOT_CACHE.get(el.dataset.plotkey) || '';
+    });
+    document.querySelectorAll('.laufzeit[data-plotkey]').forEach(function(el){
+      if (!el.textContent) el.textContent = laufzeitText(RT_CACHE.get(el.dataset.plotkey), el.dataset.serie === '1');
     });
   } catch (e) {
     // Ohne Text bleibt die Detailansicht nutzbar -- Besetzung, Regie und
@@ -6058,7 +6088,7 @@ function candDetailsHtml(c, kind, trailerHtml){
   if (!plotHtml && !tagsHtml && !rows && !posterHtml) return '';
   // tagsHtml bringt seine Reihen-Container selbst mit (Genres und Schlagwoerter
   // sind zwei getrennte Reihen, siehe detailChipsHtml).
-  return '<div class="details">' + posterHtml + plotHtml + tagsHtml + rows + '</div>';
+  return '<div class="details">' + posterHtml + plotHtml + tagsHtml + laufzeitDivHtml(c) + rows + '</div>';
 }
 // Der Streaming-Abgleich fuehrt seine Anbieter unter Slugs ('netflix',
 // 'amazon', ... -- daran haengen auch die SEO-Seiten), die Anbieterauswahl
@@ -7389,7 +7419,7 @@ function eigeneZeileLi(tab, i, profile) {
   const detailsHtml =
     '<div class="details">' + detPoster +
       plotDivHtml(s.pool[i]) + matchNoteHtml(d.id) +
-      tagsHtml +
+      tagsHtml + laufzeitDivHtml(s.pool[i]) +
       creditRows +
     '</div>';
   li.dataset.src = tab;

@@ -48,8 +48,9 @@ async function main() {
   const { rows } = await pool.query(
     `SELECT t.type, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, array_agg(t.id) AS ids
        FROM titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
-      WHERE t.original_language IS NULL AND COALESCE(t.tmdb_id, r.tmdb_id) IS NOT NULL
-      GROUP BY 1, 2 ORDER BY 1, 2`
+      WHERE (t.original_language IS NULL OR (t.type = 'series' AND t.runtime IS NULL AND $1::boolean)) AND COALESCE(t.tmdb_id, r.tmdb_id) IS NOT NULL
+      GROUP BY 1, 2 ORDER BY 1, 2`,
+    [process.argv.includes('--serien-laufzeit')]
   );
   const arbeit = rows.slice(0, LIMIT);
   console.log(`${arbeit.length} von ${rows.length} Titeln ohne Herkunftsdaten${DRY ? ' (Probelauf)' : ''}.`);

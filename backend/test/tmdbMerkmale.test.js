@@ -8,8 +8,8 @@ test('Film: Produktionsland als Ersatz, Laufzeit, keine Staffeln', () => {
 });
 
 test('Serie: origin_country und Staffelzahl, keine Laufzeit', () => {
-  const m = merkmaleAusDetail({ original_language: 'ko', origin_country: ['KR'], number_of_seasons: 2, runtime: 60 }, 'tv');
-  assert.deepEqual(m, { originCountry: ['KR'], originalLanguage: 'ko', runtime: null, seasons: 2 });
+  const m = merkmaleAusDetail({ original_language: 'ko', origin_country: ['KR'], number_of_seasons: 2, runtime: 60, episode_run_time: [45] }, 'tv');
+  assert.deepEqual(m, { originCountry: ['KR'], originalLanguage: 'ko', runtime: 45, seasons: 2 });
 });
 
 test('Leere und unsinnige Werte werden null', () => {

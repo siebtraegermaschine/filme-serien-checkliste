@@ -1108,7 +1108,7 @@ ALTER TABLE personen_cache ADD COLUMN IF NOT EXISTS known_for_department TEXT;
 -- Herkunft und Laufzeit fuer die Bestenlisten nach Land/Sprache/Laufzeit
 -- (19.09.2026). Alle vier nur aus TMDB (backfill-herkunft.mjs und Discovery-
 -- Import): origin_country als ISO-3166-Codes, original_language als ISO-639-1,
--- runtime nur bei Filmen (Minuten), seasons nur bei Serien.
+-- runtime: Minuten (Serien: je Folge), seasons nur bei Serien.
 ALTER TABLE titles ADD COLUMN IF NOT EXISTS origin_country    TEXT[];
 ALTER TABLE titles ADD COLUMN IF NOT EXISTS original_language TEXT;
 ALTER TABLE titles ADD COLUMN IF NOT EXISTS runtime           INTEGER;
