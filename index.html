@@ -13286,7 +13286,19 @@ async function katalogCacheSchreiben(schluessel, wert){
 }
 
 /* ---- Katalog von der API laden (ersetzt die frueher eingebetteten Arrays) ---- */
+/* Netzabruf des Katalogs. Beim Start wird er schon VOR der Anmelde-Abfrage
+   angestossen (KATALOG_VORABRUF), damit Download und /api/auth/me parallel laufen. */
+var KATALOG_VORABRUF = null;
+function katalogNetzHolen(){
+  return Promise.all([
+    apiRequest('GET', mitSpracheRegion('/api/titles?source=catalog,discovery,streaming')),
+    apiRequest('GET', mitSpracheRegion('/api/streaming')),
+  ]);
+}
 async function loadCatalogAndRefresh(){
+  var netz = KATALOG_VORABRUF || katalogNetzHolen();
+  KATALOG_VORABRUF = null;
+  netz.catch(function(){});   // Fehler unten behandeln, hier nur keine "unhandled rejection"
   // Sprache/Region gehoeren in den Schluessel: der Server liefert je Kombination
   // andere Titel/Uebersetzungen (siehe mitSpracheRegion).
   var cacheSchluessel = 'katalog:' + INHALTS_SPRACHE + ':' + REGION_WAHL;
@@ -13299,19 +13311,15 @@ async function loadCatalogAndRefresh(){
       buildPool(cached.combinedRows, cached.streamDoc);
       KATALOG_DA = true;
       ausCache = true;
-      // Sofort zeichnen -- der Stand vom letzten Besuch steht in aller Regel
-      // noch, ohne aufs Netz zu warten. Gesehen/Watchlist-Marken fehlen hier
-      // noch kurz, die kommen gleich mit loadUserProgressAndRefresh() unten nach.
-      rebuild();
-      renderCurrentTab();
+      // Sofort zeichnen, ohne den grossen Katalog-Download abzuwarten -- aber erst
+      // mit dem (kleinen) Nutzerstand, sonst stimmen Taste-Score, Sortierung und
+      // Startfilter erst nach dem Netzabruf.
+      await loadUserProgressAndRefresh();
     }
   } catch (e) { /* kein Cache -- unten wird ohnehin frisch geladen */ }
 
   try {
-    const [combinedRows, streamDoc] = await Promise.all([
-      apiRequest('GET', mitSpracheRegion('/api/titles?source=catalog,discovery,streaming')),
-      apiRequest('GET', mitSpracheRegion('/api/streaming')),
-    ]);
+    const [combinedRows, streamDoc] = await netz;
     STREAM = streamDoc;
     genreAliasUebernehmen(streamDoc.genreAlias);
     buildPool(combinedRows, streamDoc);
@@ -13445,6 +13453,8 @@ renderAuthBar();
 listenAnsichtHerstellen();
 startFilterSetzen();
 renderCurrentTab();
+KATALOG_VORABRUF = katalogNetzHolen();
+KATALOG_VORABRUF.catch(function(){});
 apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() => { CURRENT_USER = null; }).finally(() => {
   renderAuthBar();
   updateProfileBtn();
