@@ -361,6 +361,22 @@ Pilot: 10 en-gb- und 10 es-es-Titeltexte in `backend/scripts/seo-pilot-en-es.mjs
 8. ~~Lokalisierte Titel in Listenkarten~~ — erledigt 12.10.2026, siehe unten.
 9. Kosten Batch-Lauf (siehe unten) — nur mit Freigabe.
 
+**Lokalisierte Titel ohne TMDB-Übersetzung (12.10.2026, live in DB).** Befund:
+1.542 Titel ohne `title_en` (1.537 mit `''`, alle bei TMDB ohne englischen
+Titel, dazu 5 Katalog-Titel ohne tmdb_id); die 600 Katalog-Titel haben
+`title_en` fast alle (595 über `title_tmdb_resolution` auflösbar).
+`original_title` war global leer. `scripts/titel-lokalisieren.mjs`
+(`holen` = Originaltitel per kostenlosem TMDB, `regeln`, `export`,
+`einspielen`, alles idempotent, `--trocken` = Rollback): 1.536 Originaltitel
+geholt, `title_en` = lateinischer Originaltitel (Regeln in `lib/titelLokal.js`,
+Test dabei) für 1.538 Titel; Nicht-en-Locales erben das über die Kette.
+3 Katalog-Titel von Hand (Twin Peaks: The Return, Killing Eve, Das Boot).
+Rest ohne en-Titel: 1 (id 1035089, chinesische Lehrserie, bewusst leer).
+Subagent-Vorschläge für fr/es/it/nl/pt (983 Titel ab 300 Stimmen mit Lücke,
+8 Chunks): sehr zurückhaltend, nur 19 sichere Titel eingespielt. Rest bleibt
+Fallback auf Original/Englisch. Die Skripte liefen vom Server-Mount, Tests:
+`node --test test/titelLokal.test.js`.
+
 **title_en-Lücke geschlossen (12.10.2026).** Befund: `titles.title_en` und
 `uebersetzungen` waren per `backfill-english.mjs` längst gefüllt (27.523 von
 27.558 Zeilen; 1.508 leer = TMDB kennt keinen englischen Titel). Es fehlte nur
