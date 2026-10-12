@@ -36,7 +36,8 @@ test('sprachVon und hatSeitenart', () => {
   assert.equal(sprachVon('de-de'), 'de');
   assert.equal(sprachVon('pt-pt'), 'pt');
   assert.equal(hatSeitenart('de-de', 'bestenliste'), true);
-  assert.equal(hatSeitenart('en-gb', 'bestenliste'), false);
+  assert.equal(hatSeitenart('en-gb', 'bestenlisten'), true);
+  assert.equal(hatSeitenart('en-gb', 'person'), false);
   assert.equal(hatSeitenart('en-gb', 'titel'), true);
 });
 

@@ -24,11 +24,15 @@ export const LOCALE_KONFIG = {
 // Indexierbare Locales: Sitemap-Index, Sitemap-Dateien, robots.txt.
 export const SEO_LOCALES = Object.keys(LOCALE_KONFIG).filter((l) => LOCALE_KONFIG[l].indexierbar);
 
-// Seitenarten, die in den Nicht-de-Locales schon lokalisiert sind (Stand: Start
-// und Titelseiten). Alle anderen liefern dort 404 und werden nirgends verlinkt
-// (seoRender.js). Weitere Arten ('hub', 'genre', 'anbieter', 'person', 'reihe', ...)
-// erst eintragen, wenn Renderer und Daten lokalisiert sind. de-de kennt alle.
-const ARTEN_LOKALISIERT = ['start', 'titel'];
+// Seitenarten, die in den Nicht-de-Locales lokalisiert sind (alle noindex, nicht in
+// der Sitemap). Eintraege sind Pfadwoerter UND die logischen Namen, nach denen der
+// Renderer fragt. Nicht dabei: Personen ('person', 'schauspieler', 'regisseur') --
+// dort 404 und nirgends verlinkt. de-de kennt alle.
+const ARTEN_LOKALISIERT = [
+  'start', 'titel',
+  'hub', 'genre', 'anbieter', 'reihe',
+  'filme', 'serien', 'streaming', 'bestenlisten', 'beste-filme', 'beste-serien', 'kino', 'neu-auf', 'reihen',
+];
 
 export function localeGueltig(locale) {
   return !!(LOCALE_KONFIG[locale] && LOCALE_KONFIG[locale].aktiv);

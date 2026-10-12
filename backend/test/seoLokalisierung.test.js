@@ -3,7 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { seiteTitelDetail, seiteStart, seite404 } from '../lib/seoRender.js';
+import { seiteTitelDetail, seiteStart, seite404, seiteFilmeSerienHub, seiteBestenlistenUebersicht } from '../lib/seoRender.js';
 import { SEO_TEXTE, ABSCHNITTE, seoTexte } from '../lib/seoTexte.js';
 import { LOCALE_KONFIG, hatSeitenart, seitenartFuerPfad } from '../lib/seoLocale.js';
 import { bereichFuerLocale, BEREICHE } from '../lib/seoSitemap.js';
@@ -46,9 +46,9 @@ test('Titelseite en-gb: englisch, lang=en, ohne deutsche Chrome-Texte', () => {
   assert.doesNotMatch(html, /Kurzüberblick|Zur Watchlist|Verfügbar|Laufzeit|Komödie/);
 });
 
-test('Nicht-de-Titelseite verlinkt keine nicht lokalisierten Seitenarten', () => {
+test('Nicht-de-Titelseite verlinkt keine Personen-Seiten (noch nicht lokalisiert)', () => {
   const html = seiteTitelDetail(titel('Text'), 'es-es');
-  for (const pfad of ['/es-es/filme', '/es-es/regisseur/', '/es-es/streaming/', '/es-es/reihen/']) {
+  for (const pfad of ['/es-es/regisseur/', '/es-es/schauspieler/']) {
     assert.ok(!html.includes(`href="${pfad}`), pfad);
   }
   assert.doesNotMatch(html, /impressum\.html/);
@@ -95,19 +95,20 @@ test('Startseite und 404 sind lokalisiert; Start ohne Text ist noindex', () => {
   assert.match(start, /<html lang="fr">/);
   assert.match(start, /Films et séries en un coup d’œil/);
   assert.equal(meta(start, 'robots'), 'noindex,follow');
-  assert.doesNotMatch(start, /start-bereiche/);
+  assert.doesNotMatch(start, /class="einleitung"/); // ohne Text kein Absatz
   assert.doesNotMatch(start, /"hasPart":\[\]/); // leeres Array waere JSON-LD-Fehler
   assert.match(seite404('nl-nl'), /Pagina niet gevonden/);
 });
 
-test('Seitenarten: Nicht-de kennt nur Start und Titel; Sitemap folgt', () => {
+test('Seitenarten: Nicht-de kennt alles ausser Personen; Sitemap unveraendert', () => {
   assert.equal(seitenartFuerPfad('/en-gb/film/x-1'), 'titel');
   assert.equal(seitenartFuerPfad('/en-gb'), 'start');
   assert.equal(seitenartFuerPfad('/en-gb/filme/drama'), 'filme');
+  assert.equal(seitenartFuerPfad('/en-gb/schauspieler/x-1'), 'schauspieler');
   assert.ok(hatSeitenart('de-de', 'person'));
   assert.ok(hatSeitenart('en-gb', 'titel') && hatSeitenart('en-gb', 'start'));
-  assert.ok(!hatSeitenart('en-gb', 'filme') && !hatSeitenart('en-gb', 'person'));
-  assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('en-gb', b)), ['titel', 'hub']);
+  assert.ok(hatSeitenart('en-gb', 'filme') && hatSeitenart('en-gb', 'bestenlisten') && !hatSeitenart('en-gb', 'person'));
+  assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('en-gb', b)), ['titel', 'genre', 'anbieter', 'hub', 'reihe']); // Sitemap nutzt nur SEO_LOCALES (de-de)
   assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('de-de', b)), BEREICHE);
 });
 
@@ -116,7 +117,7 @@ test('Nicht-EWR-Locales sind inaktiv und nicht indexierbar', () => {
   assert.equal(seoTexte('en-us').start, 'Home');
 });
 
-test('Route: nicht lokalisierte Arten in en-gb liefern 404 (ohne DB), inaktive Locales gehen durch', async () => {
+test('Route: Personen-Seiten in Nicht-de liefern 404 (ohne DB), inaktive Locales gehen durch', async () => {
   const { default: express } = await import('express');
   const { default: router } = await import('../routes/seo.js');
   const app = express();
@@ -125,7 +126,7 @@ test('Route: nicht lokalisierte Arten in en-gb liefern 404 (ohne DB), inaktive L
   const server = await new Promise((r) => { const s = app.listen(0, '127.0.0.1', () => r(s)); });
   const { port } = server.address();
   try {
-    for (const pfad of ['/en-gb/filme', '/en-gb/filme/drama', '/es-es/streaming/netflix', '/fr-fr/bestenlisten', '/it-it/schauspieler/x-1']) {
+    for (const pfad of ['/en-gb/regisseur/x-1', '/es-es/schauspieler/x-1', '/it-it/schauspieler/x-1', '/fr-fr/personen']) {
       const a = await fetch(`http://127.0.0.1:${port}${pfad}`);
       assert.equal(a.status, 404, pfad);
       assert.match(await a.text(), /<html lang="/);
@@ -135,4 +136,23 @@ test('Route: nicht lokalisierte Arten in en-gb liefern 404 (ohne DB), inaktive L
   } finally {
     server.close();
   }
+});
+
+test('Nicht-de-Hubs: noindex, ohne Text kein Einleitungsabsatz, kein hreflang, lokale Links, de-de behaelt Absatz', () => {
+  const daten = { text: null, indexierbar: true, type: 'movie', genres: [], titel: [] };
+  const html = seiteFilmeSerienHub(daten, 'fr-fr', 'filme');
+  assert.equal(meta(html, 'robots'), 'noindex,follow');
+  assert.doesNotMatch(html, /hreflang=/);
+  assert.doesNotMatch(html, /class="einleitung"/);
+  assert.match(html, /href="\/fr-fr\/(bestenlisten|streaming)/);
+  const mit = seiteFilmeSerienHub({ ...daten, text: 'Texte.' }, 'fr-fr', 'filme');
+  assert.match(mit, /class="einleitung"/);
+  assert.match(seiteFilmeSerienHub(daten, 'de-de', 'filme'), /class="einleitung"/);
+});
+
+test('Nicht-de-Bestenlisten-Uebersicht und Reihen-Uebersicht liefern 200-taugliches HTML in der Sprache', () => {
+  const b = seiteBestenlistenUebersicht({ text: null, indexierbar: true, katalog: null }, 'it-it');
+  assert.match(b, /<html lang="it">/);
+  assert.equal(meta(b, 'robots'), 'noindex,follow');
+  assert.doesNotMatch(b, /Bestenlisten/);
 });

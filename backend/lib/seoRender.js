@@ -2,12 +2,13 @@
 // (PLAN-SEO.md, Plan "SEO-Seiten: technische Umsetzung"). Kein Splicing wie
 // bei der App-OG-Route (server.js) -- jede Funktion hier gibt ein fertiges
 // Dokument zurueck. Kein App-JS, eigenes seo.css (Architektur-Entscheidung 1).
-import { hreflangCode, hatSeitenart, localeIndexierbar, sprachVon } from './seoLocale.js';
+import { hreflangCode, hatSeitenart, localeIndexierbar, sprachVon, regionFuerLocale } from './seoLocale.js';
 import { seoTexte, ABSCHNITTE, zahlFormat } from './seoTexte.js';
 import { genreAnzeige } from './genreNamen.js';
-import { listeSeitenPfad, THEMEN, jahrzehntName, LAUFZEITEN, STAFFELN } from './seoBestenlisten.js';
+import { listeSeitenPfad, THEMEN, LAUFZEITEN, STAFFELN } from './seoBestenlisten.js';
 import { slugify } from './slug.js';
-import { streamingEinleitung, kinoEinleitung, datumDeutsch, fensterWort } from './seoWochen.js';
+import { seitenTexte, listeTitelLokal, jahrzehntNameL, themaName, laufzeitKurz, staffelnKurz } from './seoSeitenTexte.js';
+import { landAnzeige, sprachAnzeige } from './herkunftsnamen.js';
 
 export const SITE = 'https://movietaste.de';
 
@@ -36,7 +37,9 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   const wurzel = basis || SITE;
   const url = wurzel + pfad;
   const robots = indexierbar ? 'index,follow' : 'noindex,follow';
-  const hreflangs = (alternates && alternates.length ? alternates : [{ locale, pfad }])
+  // noindex-Locale ohne Gegenseite im Cluster: gar kein hreflang (nichts, worauf es zeigen koennte).
+  const ohneHreflang = !(alternates && alternates.length) && locale !== 'de-de' && !localeIndexierbar(locale);
+  const hreflangs = ohneHreflang ? '' : (alternates && alternates.length ? alternates : [{ locale, pfad }])
     .map((a) => `<link rel="alternate" hreflang="${attrEsc(hreflangCode(a.locale))}" href="${attrEsc(wurzel + a.pfad)}">`)
     .join('\n  ');
   // x-default zeigt auf die de-de-Fassung, sofern der Cluster sie kennt.
@@ -50,7 +53,7 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   <meta name="robots" content="${robots}">
   <link rel="canonical" href="${attrEsc(url)}">
   ${hreflangs}
-  <link rel="alternate" hreflang="x-default" href="${attrEsc(xDefault)}">
+  ${ohneHreflang ? '' : `<link rel="alternate" hreflang="x-default" href="${attrEsc(xDefault)}">`}
   <link rel="stylesheet" href="/seo.css">
   <script src="/consent.js" defer></script>
   <link rel="icon" href="${attrEsc(favicon || '/favicon-32.png')}">
@@ -83,7 +86,9 @@ function fusszeile(locale) {
   const de = locale === 'de-de';
   // Nicht-de-Locales verlinken nur Bereiche, die dort lokalisiert sind; die Rechtstexte
   // sind dort die englischen Fassungen (imprint/privacy).
-  const bereiche = de ? FOOTER_BEREICHE.map(([pfad, name]) => [pfad, name]) : [];
+  const bereiche = de
+    ? FOOTER_BEREICHE.map(([pfad, name]) => [pfad, name])
+    : ['filme', 'serien', 'bestenlisten', 'reihen', 'streaming', 'kino'].filter((p) => hatSeitenart(locale, p)).map((p) => [p, T.bereiche[p]]);
   return `<footer>
     ${bereiche.length ? `<nav class="footer-seo" aria-label="${attrEsc(T.uebersichtsseiten)}">
       ${bereiche.map(([pfad, name]) => `<a href="/${locale}/${pfad}">${name}</a>`).join('\n      ')}
@@ -95,6 +100,8 @@ function fusszeile(locale) {
 }
 
 export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml, basis, kopfHtml, fussHtml, favicon }) {
+  // Nicht freigegebene Locales sind nie im Index, egal was die Seitenfunktion meldet.
+  if (locale !== 'de-de' && !localeIndexierbar(locale)) indexierbar = false;
   return `<!DOCTYPE html>
 <html lang="${sprachVon(locale)}">
 <head>
@@ -398,6 +405,19 @@ export function seiteTitelDetail(titel, locale) {
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates: alternates.length ? alternates : undefined, bodyHtml });
 }
 
+// Vorlagentexte der Listen-/Hub-/Wochen-/Reihenseiten je Locale (gecacht).
+const txCache = new Map();
+function TX(locale) {
+  if (!txCache.has(locale)) txCache.set(locale, seitenTexte(locale, regionFuerLocale(locale)));
+  return txCache.get(locale);
+}
+
+// Einleitungsabsatz: de wie bisher (mit Hinweis ohne Text); andere Locales lassen den Absatz ohne Text weg.
+function einleitungHtml(text, locale) {
+  if (locale === 'de-de') return `<p class="einleitung">${textBlock(text)}</p>`;
+  return text ? `<p class="einleitung">${textBlock(text, locale)}</p>` : '';
+}
+
 function textBlock(text, locale = 'de-de') {
   return text
     ? `<div class="seo-text">${text.split('\n\n').map((p) => `<p>${attrEsc(p)}</p>`).join('')}</div>`
@@ -408,11 +428,12 @@ function textBlock(text, locale = 'de-de') {
 // Bestenliste) i.d.R. nur einen Typ enthaelt, aber die Kartenfunktion das
 // nicht selbst kennt.
 function karte(t, artWort, locale) {
+  const dez = sprachVon(locale) === 'en' ? '.' : ',';
   const bild = t.posterPath ? `https://image.tmdb.org/t/p/w342${attrEsc(t.posterPath)}` : '';
   const href = `/${locale}/${artWort}/${attrEsc(t.slug)}-${t.tmdbId}`;
   const bewertung = t.communityBewertung
-    ? `⭐ ${String(t.communityBewertung.durchschnitt).replace('.', ',')}`
-    : (t.rating ? `⭐ ${String(t.rating).replace('.', ',')}` : '');
+    ? `⭐ ${String(t.communityBewertung.durchschnitt).replace('.', dez)}`
+    : (t.rating ? `⭐ ${String(t.rating).replace('.', dez)}` : '');
   return `<a class="karte" href="${href}">
     ${bild ? `<img src="${bild}" alt="${attrEsc(t.title)}" loading="lazy">` : ''}
     <div class="titel">${attrEsc(t.title)}</div>
@@ -431,14 +452,16 @@ function seitenNavigation(basisPfad, seite, seitenGesamt) {
 }
 
 export function seiteGenre(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
   const artWort = daten.type === 'series' ? 'serie' : 'film';
   const listenWort = daten.type === 'series' ? 'serien' : 'filme';
-  const hubWort = daten.type === 'series' ? 'Serien' : 'Filme';
+  const hubWort = S.bereiche[listenWort];
   const pfad = `/${locale}/${listenWort}/${daten.genreSlug}`;
-  const titelZeile = `Beste ${daten.genre}-${hubWort} | MovieMatch`;
-  const beschreibung = kurzfassung(daten.text) || `Die besten ${daten.genre}-Titel im Überblick, sortiert nach Bewertung.`;
+  const titelZeile = `${T.genreH1(daten.genre, hubWort)} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || T.genreBeschr(daten.genre);
   const kette = [
-    { label: 'Start', href: SITE + '/' },
+    { label: S.start, href: SITE + '/' },
     { label: hubWort, href: `/${locale}/${listenWort}` },
     { label: daten.genre },
   ];
@@ -448,10 +471,10 @@ export function seiteGenre(daten, locale) {
     itemListElement: titelListe(daten.titel, artWort, locale),
   }, brotkrumenJsonLd(kette)];
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>Beste ${attrEsc(daten.genre)}-${hubWort}</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
-    <p class="hinweis"><a href="${listeSeitenPfad(locale, daten.type, 'genre', daten.genreSlug)}">Beste ${attrEsc(daten.genre)}-${hubWort} — die Bestenliste</a></p>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${T.genreH1(attrEsc(daten.genre), hubWort)}</h1>
+    ${einleitungHtml(daten.text, locale)}
+    <p class="hinweis"><a href="${listeSeitenPfad(locale, daten.type, 'genre', daten.genreSlug)}">${T.genreListeLink(attrEsc(daten.genre), hubWort)}</a></p>
     <div class="raster">${daten.titel.map((t) => karte(t, artWort, locale)).join('')}</div>
     ${seitenNavigation(pfad, daten.seite, daten.seiten)}
   `;
@@ -459,32 +482,35 @@ export function seiteGenre(daten, locale) {
 }
 
 export function seiteAnbieter(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
   const pfad = `/${locale}/streaming/${daten.anbieterSlug}`;
-  const titelZeile = `Filme & Serien auf ${daten.name} | MovieMatch`;
-  const beschreibung = kurzfassung(daten.text) || `Aktuelle Filme und Serien auf ${daten.name} im Überblick.`;
+  const titelZeile = `${T.anbieterH1(daten.name)} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || T.anbieterBeschr(daten.name);
   const kette = [
-    { label: 'Start', href: SITE + '/' },
-    { label: 'Streaming', href: `/${locale}/streaming` },
+    { label: S.start, href: SITE + '/' },
+    { label: S.bereiche.streaming, href: `/${locale}/streaming` },
     { label: daten.name },
   ];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: itemListJsonLd(titelZeile, [[daten.filme, 'film'], [daten.serien, 'serie']], locale).itemListElement,
   }, brotkrumenJsonLd(kette)];
+  const name = attrEsc(daten.name);
   const besteLinks = [];
-  if (daten.besteListen && daten.besteListen.filme) besteLinks.push(`<a href="${listeSeitenPfad(locale, 'movie', 'anbieter', daten.anbieterSlug)}">Beste Filme auf ${attrEsc(daten.name)}</a>`);
-  if (daten.besteListen && daten.besteListen.serien) besteLinks.push(`<a href="${listeSeitenPfad(locale, 'series', 'anbieter', daten.anbieterSlug)}">Beste Serien auf ${attrEsc(daten.name)}</a>`);
-  besteLinks.push(`<a href="/${locale}/neu-auf/${daten.anbieterSlug}">Neu auf ${attrEsc(daten.name)}</a>`);
+  if (daten.besteListen && daten.besteListen.filme) besteLinks.push(`<a href="${listeSeitenPfad(locale, 'movie', 'anbieter', daten.anbieterSlug)}">${T.besteFilmeAuf(name)}</a>`);
+  if (daten.besteListen && daten.besteListen.serien) besteLinks.push(`<a href="${listeSeitenPfad(locale, 'series', 'anbieter', daten.anbieterSlug)}">${T.besteSerienAuf(name)}</a>`);
+  besteLinks.push(`<a href="/${locale}/neu-auf/${daten.anbieterSlug}">${T.neuAuf(name)}</a>`);
   const besteHtml = `<p class="hinweis">${besteLinks.join(' · ')}</p>`;
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>Filme & Serien auf ${attrEsc(daten.name)}</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${T.anbieterH1(name)}</h1>
+    ${einleitungHtml(daten.text, locale)}
     ${besteHtml}
-    <h2>Filme</h2>
-    ${wochenListeHtml(daten.filme, 'film', locale, 'Weitere')}
-    <h2>Serien</h2>
-    ${wochenListeHtml(daten.serien, 'serie', locale, 'Weitere')}
+    <h2>${attrEsc(S.bereiche.filme)}</h2>
+    ${wochenListeHtml(daten.filme, 'film', locale, 'weitere')}
+    <h2>${attrEsc(S.bereiche.serien)}</h2>
+    ${wochenListeHtml(daten.serien, 'serie', locale, 'weitere')}
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
@@ -495,49 +521,57 @@ function listenChips(locale, type, links) {
   return `<div class="chips">${links.map((l) => `<a class="chip" href="${listeSeitenPfad(locale, type, l.modus, l.wert)}">${attrEsc(l.label)}</a>`).join('')}</div>`;
 }
 
+// Der Katalog ist locale-neutral (deutsche Namen, Codes); die Namen werden hier in die Sprache der Seite gesetzt.
 function listenAbschnitte(katalog, type, locale, ebene = 'h2') {
-  const w = type === 'series' ? 'Serien' : 'Filme';
+  const T = TX(locale);
+  const sprache = sprachVon(locale);
+  const de = sprache === 'de';
+  const w = seoTexte(locale).bereiche[type === 'series' ? 'serien' : 'filme'];
   const teile = [];
   const aktuell = [];
-  if (katalog.kino) aktuell.push({ label: `${w} im Kino`, modus: 'kino', wert: 'aktuell' });
-  if (katalog.neu) aktuell.push({ label: `Neue ${w}`, modus: 'neu', wert: 'aktuell' });
-  if (aktuell.length) teile.push(`<${ebene}>Aktuell</${ebene}>${listenChips(locale, type, aktuell)}`);
+  if (katalog.kino) aktuell.push({ label: T.imKino(w), modus: 'kino', wert: 'aktuell' });
+  if (katalog.neu) aktuell.push({ label: T.neueTitel(w), modus: 'neu', wert: 'aktuell' });
+  if (aktuell.length) teile.push(`<${ebene}>${T.aktuell}</${ebene}>${listenChips(locale, type, aktuell)}`);
   if (katalog.anbieter.length) {
-    teile.push(`<${ebene}>Nach Streaming-Anbieter</${ebene}>${listenChips(locale, type, katalog.anbieter.map((a) => ({ label: a.name, modus: 'anbieter', wert: a.slug })))}`);
+    teile.push(`<${ebene}>${T.nachAnbieter}</${ebene}>${listenChips(locale, type, katalog.anbieter.map((a) => ({ label: a.name, modus: 'anbieter', wert: a.slug })))}`);
   }
   if (katalog.jahrzehnte.length) {
-    teile.push(`<${ebene}>Nach Jahrzehnt</${ebene}>${listenChips(locale, type, katalog.jahrzehnte.map((j) => ({ label: jahrzehntName(j), modus: 'jahrzehnt', wert: String(j) })))}`);
+    teile.push(`<${ebene}>${T.nachJahrzehnt}</${ebene}>${listenChips(locale, type, katalog.jahrzehnte.map((j) => ({ label: jahrzehntNameL(j, sprache), modus: 'jahrzehnt', wert: String(j) })))}`);
   }
   if (katalog.themen.length) {
-    teile.push(`<${ebene}>Nach Thema</${ebene}>${listenChips(locale, type, katalog.themen.map((t) => ({ label: THEMEN[t].name, modus: 'thema', wert: t })))}`);
+    teile.push(`<${ebene}>${T.nachThema}</${ebene}>${listenChips(locale, type, katalog.themen.map((t) => ({ label: themaName(t, sprache, THEMEN[t].name), modus: 'thema', wert: t })))}`);
   }
   if (katalog.laender.length) {
-    teile.push(`<${ebene}>Nach Land</${ebene}>${listenChips(locale, type, katalog.laender.map((l) => ({ label: l.name, modus: 'land', wert: l.slug })))}`);
+    teile.push(`<${ebene}>${T.nachLand}</${ebene}>${listenChips(locale, type, katalog.laender.map((l) => ({ label: de ? l.name : landAnzeige(l.code, sprache), modus: 'land', wert: l.slug })))}`);
   }
   if (katalog.sprachen.length) {
-    teile.push(`<${ebene}>Nach Originalsprache</${ebene}>${listenChips(locale, type, katalog.sprachen.map((l) => ({ label: l.name, modus: 'sprache', wert: l.slug })))}`);
+    teile.push(`<${ebene}>${T.nachSprache}</${ebene}>${listenChips(locale, type, katalog.sprachen.map((l) => ({ label: de ? l.name : sprachAnzeige(l.code, sprache), modus: 'sprache', wert: l.slug })))}`);
   }
   const laenge = type === 'series'
-    ? katalog.staffeln.map((k) => ({ label: `${w} ${STAFFELN[k].kurz}`, modus: 'staffeln', wert: k }))
-    : katalog.laufzeit.map((k) => ({ label: `${w} ${LAUFZEITEN[k].kurz}`, modus: 'laufzeit', wert: k }));
-  if (laenge.length) teile.push(`<${ebene}>${type === 'series' ? 'Nach Staffelzahl' : 'Nach Laufzeit'}</${ebene}>${listenChips(locale, type, laenge)}`);
+    ? katalog.staffeln.map((k) => ({ label: `${w} ${staffelnKurz(k, sprache, STAFFELN[k].kurz)}`, modus: 'staffeln', wert: k }))
+    : katalog.laufzeit.map((k) => ({ label: `${w} ${laufzeitKurz(k, sprache, LAUFZEITEN[k].kurz)}`, modus: 'laufzeit', wert: k }));
+  if (laenge.length) teile.push(`<${ebene}>${type === 'series' ? T.nachStaffeln : T.nachLaufzeit}</${ebene}>${listenChips(locale, type, laenge)}`);
   return teile.join('');
 }
 
 export function seiteBestenliste(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
+  const sprache = sprachVon(locale);
+  const de = sprache === 'de';
   const artWort = daten.type === 'series' ? 'serie' : 'film';
-  const wortTyp = daten.type === 'series' ? 'Serien' : 'Filme';
+  const wortTyp = S.bereiche[daten.type === 'series' ? 'serien' : 'filme'];
   const listenWort = daten.type === 'series' ? 'beste-serien' : 'beste-filme';
   const alleWort = daten.type === 'series' ? 'serien' : 'filme';
   const pfad = listeSeitenPfad(locale, daten.type, daten.modus, daten.wert);
   const ueberschrift = daten.ueberschrift;
   const titelZeile = `${ueberschrift} | MovieMatch`;
-  const beschreibung = kurzfassung(daten.text) || `${ueberschrift} im Überblick, sortiert nach Bewertung.`;
+  const beschreibung = kurzfassung(daten.text) || T.listeBeschr(ueberschrift);
   const kette = [
-    { label: 'Start', href: SITE + '/' },
-    { label: 'Bestenlisten', href: `${SITE}/${locale}/bestenlisten` },
-    { label: `Beste ${wortTyp}`, href: `/${locale}/${listenWort}` },
-    { label: ueberschrift.replace(/^Beste (Filme|Serien) /, '') || ueberschrift },
+    { label: S.start, href: SITE + '/' },
+    { label: S.bereiche.bestenlisten, href: `${SITE}/${locale}/bestenlisten` },
+    { label: T.besteWort(wortTyp), href: `/${locale}/${listenWort}` },
+    { label: de ? (ueberschrift.replace(/^Beste (Filme|Serien) /, '') || ueberschrift) : ueberschrift },
   ];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
@@ -546,22 +580,24 @@ export function seiteBestenliste(daten, locale) {
 
   // Rueckverweise auf die uebergeordneten Seiten (Genre-Liste, Jahrzehnt, Anbieter).
   const [erst, zweit] = String(daten.wert).split('+');
+  const lt = (modus, wert, namen) => listeTitelLokal(sprache, daten.type, modus, wert, namen);
+  const genreListe = de ? `Beste ${wortTyp} im Genre ${daten.genre}` : null;
   const rueck = [];
   if (daten.modus === 'genre') {
-    rueck.push({ href: `/${locale}/${alleWort}/${daten.genreSlug}`, label: `Alle ${daten.genre}-${wortTyp}` });
+    rueck.push({ href: `/${locale}/${alleWort}/${daten.genreSlug}`, label: T.alleGenre(daten.genre, wortTyp) });
   }
   if (daten.modus === 'genre-jahrzehnt' || daten.modus === 'genre-anbieter') {
-    rueck.push({ href: listeSeitenPfad(locale, daten.type, 'genre', erst), label: `Beste ${wortTyp} im Genre ${daten.genre}` });
+    rueck.push({ href: listeSeitenPfad(locale, daten.type, 'genre', erst), label: de ? genreListe : lt('genre', erst, { genre: daten.genre }) });
     rueck.push(daten.modus === 'genre-jahrzehnt'
-      ? { href: listeSeitenPfad(locale, daten.type, 'jahrzehnt', zweit), label: `Beste ${wortTyp} der ${jahrzehntName(zweit)}` }
-      : { href: listeSeitenPfad(locale, daten.type, 'anbieter', zweit), label: `Beste ${wortTyp} auf ${daten.anbieter}` });
+      ? { href: listeSeitenPfad(locale, daten.type, 'jahrzehnt', zweit), label: de ? `Beste ${wortTyp} der ${jahrzehntNameL(zweit, 'de')}` : lt('jahrzehnt', zweit) }
+      : { href: listeSeitenPfad(locale, daten.type, 'anbieter', zweit), label: de ? `Beste ${wortTyp} auf ${daten.anbieter}` : lt('anbieter', zweit, { anbieter: daten.anbieter }) });
   }
   if (daten.modus === 'land-genre') {
-    rueck.push({ href: listeSeitenPfad(locale, daten.type, 'land', erst), label: `Beste ${wortTyp} ${daten.landAus}` });
-    rueck.push({ href: listeSeitenPfad(locale, daten.type, 'genre', zweit), label: `Beste ${wortTyp} im Genre ${daten.genre}` });
+    rueck.push({ href: listeSeitenPfad(locale, daten.type, 'land', erst), label: de ? `Beste ${wortTyp} ${daten.landAus}` : lt('land', erst, { land: daten.landAus }) });
+    rueck.push({ href: listeSeitenPfad(locale, daten.type, 'genre', zweit), label: de ? genreListe : lt('genre', zweit, { genre: daten.genre }) });
   }
   if (daten.modus === 'anbieter') {
-    rueck.push({ href: `/${locale}/streaming/${daten.wert}`, label: `Alle Titel auf ${daten.anbieter}` });
+    rueck.push({ href: `/${locale}/streaming/${daten.wert}`, label: T.alleAuf(daten.anbieter) });
   }
   const rueckHtml = rueck.length
     ? `<p class="hinweis">${rueck.map((r) => `<a href="${attrEsc(r.href)}">${attrEsc(r.label)}</a>`).join(' · ')}</p>`
@@ -570,9 +606,9 @@ export function seiteBestenliste(daten, locale) {
     `<h2>${attrEsc(g.titel)}</h2>${listenChips(locale, daten.type, g.links)}`).join('');
 
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
+    ${brotkrumenHtml(kette, locale)}
     <h1>${attrEsc(ueberschrift)}</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
+    ${einleitungHtml(daten.text, locale)}
     ${rueckHtml}
     <div class="raster">${daten.titel.map((t) => karte(t, artWort, locale)).join('')}</div>
     ${verwandtHtml}
@@ -581,12 +617,14 @@ export function seiteBestenliste(daten, locale) {
 }
 
 export function seiteKinoStadt(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
   const pfad = `/${locale}/kino/${daten.stadtSlug}`;
-  const titelZeile = `Kino in ${daten.ort}: Aktuelle Filme | MovieMatch`;
-  const beschreibung = kurzfassung(daten.text) || `Aktuelle Kinostarts und Kinos in ${daten.ort} im Überblick.`;
+  const titelZeile = `${T.kinoStadtTitel(daten.ort)} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || T.kinoStadtBeschr(daten.ort);
   const kette = [
-    { label: 'Start', href: SITE + '/' },
-    { label: 'Kino', href: `/${locale}/kino` },
+    { label: S.start, href: SITE + '/' },
+    { label: S.bereiche.kino, href: `/${locale}/kino` },
     { label: daten.ort },
   ];
   const jsonLd = [{
@@ -594,44 +632,47 @@ export function seiteKinoStadt(daten, locale) {
     itemListElement: titelListe(daten.filme, 'film', locale),
   }, brotkrumenJsonLd(kette)];
   const kinosHtml = daten.kinos.map((k) =>
-    `<li><b>${attrEsc(k.name)}</b>${k.strasse ? `, ${attrEsc(k.strasse)}` : ''}${k.plz ? `, ${attrEsc(k.plz)} ${attrEsc(daten.ort)}` : ''}${k.website ? ` — <a href="${attrEsc(k.website)}">Website</a>` : ''}</li>`
+    `<li><b>${attrEsc(k.name)}</b>${k.strasse ? `, ${attrEsc(k.strasse)}` : ''}${k.plz ? `, ${attrEsc(k.plz)} ${attrEsc(daten.ort)}` : ''}${k.website ? ` — <a href="${attrEsc(k.website)}">${T.website}</a>` : ''}</li>`
   ).join('');
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>Kino in ${attrEsc(daten.ort)}: Aktuelle Filme</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
-    <p class="hinweis"><a href="/${locale}/kino/neustarts">Neu im Kino: Neustarts dieser und der nächsten Woche</a></p>
-    <h2>Aktuell im Kino</h2>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${T.kinoStadtTitel(attrEsc(daten.ort))}</h1>
+    ${einleitungHtml(daten.text, locale)}
+    <p class="hinweis"><a href="/${locale}/kino/neustarts">${T.neustartsLink}</a></p>
+    <h2>${T.aktuellKino}</h2>
     <div class="raster">${daten.filme.map((t) => karte(t, 'film', locale)).join('')}</div>
-    <h2>Kinos in ${attrEsc(daten.ort)}</h2>
-    <p class="hinweis">Spielzeiten sind noch nicht verfuegbar.</p>
+    <h2>${T.kinosIn(attrEsc(daten.ort))}</h2>
+    <p class="hinweis">${T.keineSpielzeiten}</p>
     <ul>${kinosHtml}</ul>
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
 function genreListeHtml(genres, type, locale) {
-  return `<div class="chips">${genres.map((g) => `<a class="chip" href="${genreHref(g, type, locale)}">${attrEsc(g)}</a>`).join('')}</div>`;
+  const sprache = sprachVon(locale);
+  return `<div class="chips">${genres.map((g) => `<a class="chip" href="${genreHref(g, type, locale)}">${attrEsc(genreAnzeige(g, sprache))}</a>`).join('')}</div>`;
 }
 
 export function seiteFilmeSerienHub(daten, locale, art) {
-  const hubWort = daten.type === 'series' ? 'Serien' : 'Filme';
+  const S = seoTexte(locale);
+  const T = TX(locale);
+  const hubWort = S.bereiche[daten.type === 'series' ? 'serien' : 'filme'];
   const artWort = daten.type === 'series' ? 'serie' : 'film';
   const pfad = `/${locale}/${art}`;
-  const titelZeile = `${hubWort} entdecken — Bewertung, Streaming & mehr | MovieMatch`;
-  const beschreibung = kurzfassung(daten.text) || `${hubWort} nach Genre, Bewertung und Verfügbarkeit entdecken.`;
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: hubWort }];
+  const titelZeile = `${T.entdeckenTitel(hubWort)} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || T.entdeckenBeschr(hubWort);
+  const kette = [{ label: S.start, href: SITE + '/' }, { label: hubWort }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: titelListe(daten.titel, artWort, locale),
   }, brotkrumenJsonLd(kette)];
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>${hubWort} entdecken</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
-    <h2>Genres</h2>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${T.entdeckenH1(hubWort)}</h1>
+    ${einleitungHtml(daten.text, locale)}
+    <h2>${T.genres}</h2>
     ${genreListeHtml(daten.genres, daten.type, locale)}
-    <h2>Beliebte ${hubWort}</h2>
+    <h2>${T.beliebte(hubWort)}</h2>
     <div class="raster">${daten.titel.map((t) => karte(t, artWort, locale)).join('')}</div>
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
@@ -675,87 +716,93 @@ export function seitePersonenHub(daten, locale) {
 }
 
 export function seiteKinoHub(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
   const pfad = `/${locale}/kino`;
-  const titelZeile = 'Kino: Aktuelle Filme & Kinos in deiner Stadt | MovieMatch';
-  const beschreibung = kurzfassung(daten.text) || 'Aktuelle Kinostarts und Kinos nach Stadt im Überblick.';
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Kino' }];
+  const titelZeile = `${T.kinoHubTitel} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || T.kinoHubBeschr;
+  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.kino }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: daten.staedte.map((s, i) => listItem(i, s.ort, `${SITE}/${locale}/kino/${s.slug}`)),
   }, brotkrumenJsonLd(kette)];
   const staedteHtml = daten.staedte.map((s) => `<a class="chip" href="/${locale}/kino/${s.slug}">${attrEsc(s.ort)}</a>`).join('');
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>Kino: Aktuelle Filme & Kinos in deiner Stadt</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
-    <p class="hinweis"><a href="/${locale}/kino/neustarts">Neu im Kino: Neustarts dieser und der nächsten Woche</a></p>
-    <h2>Aktuell im Kino</h2>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${T.kinoHubTitel}</h1>
+    ${einleitungHtml(daten.text, locale)}
+    <p class="hinweis"><a href="/${locale}/kino/neustarts">${T.neustartsLink}</a></p>
+    <h2>${T.aktuellKino}</h2>
     <div class="raster">${daten.filme.map((t) => karte(t, 'film', locale)).join('')}</div>
-    <h2>Kinos nach Stadt</h2>
+    <h2>${T.kinosNachStadt}</h2>
     <div class="chips">${staedteHtml}</div>
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
 export function seiteStreamingHub(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
   const pfad = `/${locale}/streaming`;
-  const titelZeile = 'Streaming-Anbieter im Überblick | MovieMatch';
-  const beschreibung = kurzfassung(daten.text) || 'Filme und Serien nach Streaming-Anbieter im Überblick.';
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Streaming' }];
+  const titelZeile = `${T.streamingHubTitel} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || T.streamingHubBeschr;
+  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.streaming }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: daten.anbieter.map((a, i) => listItem(i, a.name, `${SITE}/${locale}/streaming/${a.slug}`)),
   }, brotkrumenJsonLd(kette)];
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>Streaming-Anbieter im Überblick</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
-    <p class="hinweis"><a href="/${locale}/neu-auf">Neu im Streaming: Neuzugänge der letzten Tage nach Anbieter</a></p>
-    <ul>${daten.anbieter.map((a) => `<li><a href="/${locale}/streaming/${a.slug}">${attrEsc(a.name)}</a> — ${a.anzahl} Titel</li>`).join('')}</ul>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${T.streamingHubTitel}</h1>
+    ${einleitungHtml(daten.text, locale)}
+    <p class="hinweis"><a href="/${locale}/neu-auf">${T.neuStreamingLink}</a></p>
+    <ul>${daten.anbieter.map((a) => `<li><a href="/${locale}/streaming/${a.slug}">${attrEsc(a.name)}</a> — ${T.titelAnzahl(a.anzahl)}</li>`).join('')}</ul>
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
 export function seiteBestenlistenUebersicht(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
   const pfad = `/${locale}/bestenlisten`;
-  const titelZeile = 'Bestenlisten: Beste Filme & Beste Serien | MovieMatch';
-  const beschreibung = kurzfassung(daten.text) || 'Bestenlisten für Filme und Serien, nach Jahr und Genre.';
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Bestenlisten' }];
-  const eintraege = [
-    { pfad: 'beste-filme', name: 'Beste Filme', text: 'Die höchstbewerteten Filme nach Jahr und Genre.' },
-    { pfad: 'beste-serien', name: 'Beste Serien', text: 'Die höchstbewerteten Serien nach Jahr und Genre.' },
-  ];
+  const titelZeile = `${T.bestenTitel} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || T.bestenBeschr;
+  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.bestenlisten }];
+  const eintraege = T.bestenEintraege;
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: eintraege.map((e, i) => listItem(i, e.name, `${SITE}/${locale}/${e.pfad}`)),
   }, brotkrumenJsonLd(kette)];
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>Bestenlisten</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${attrEsc(S.bereiche.bestenlisten)}</h1>
+    ${einleitungHtml(daten.text, locale)}
     <ul>${eintraege.map((e) => `<li><a href="/${locale}/${e.pfad}">${e.name}</a> — ${e.text}</li>`).join('')}</ul>
-    ${daten.katalog ? `<h2>Beste Filme</h2>${listenAbschnitte(daten.katalog.filme, 'movie', locale, 'h3')}<h2>Beste Serien</h2>${listenAbschnitte(daten.katalog.serien, 'series', locale, 'h3')}` : ''}
+    ${daten.katalog ? `<h2>${T.besteWort(S.bereiche.filme)}</h2>${listenAbschnitte(daten.katalog.filme, 'movie', locale, 'h3')}<h2>${T.besteWort(S.bereiche.serien)}</h2>${listenAbschnitte(daten.katalog.serien, 'series', locale, 'h3')}` : ''}
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
 export function seiteBestenlisteHub(daten, locale) {
-  const wortTyp = daten.type === 'series' ? 'Serien' : 'Filme';
+  const S = seoTexte(locale);
+  const T = TX(locale);
+  const sprache = sprachVon(locale);
+  const wortTyp = S.bereiche[daten.type === 'series' ? 'serien' : 'filme'];
   const listenWort = daten.type === 'series' ? 'beste-serien' : 'beste-filme';
   const pfad = `/${locale}/${listenWort}`;
-  const titelZeile = `Beste ${wortTyp}: Bestenlisten nach Jahr & Genre | MovieMatch`;
-  const beschreibung = kurzfassung(daten.text) || `Bestenlisten der ${wortTyp} nach Jahr und Genre.`;
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Bestenlisten', href: `${SITE}/${locale}/bestenlisten` }, { label: `Beste ${wortTyp}` }];
+  const titelZeile = `${T.besteHubTitel(wortTyp)} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || T.besteHubBeschr(wortTyp);
+  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.bestenlisten, href: `${SITE}/${locale}/bestenlisten` }, { label: T.besteWort(wortTyp) }];
   const jsonLd = [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: titelZeile }, brotkrumenJsonLd(kette)];
   const jahreHtml = daten.jahre.map((j) => `<a class="chip" href="/${locale}/${listenWort}/jahr/${j}">${j}</a>`).join('');
-  const genreHtml = daten.genres.map((g) => `<a class="chip" href="/${locale}/${listenWort}/genre/${slugify(g)}">${attrEsc(g)}</a>`).join('');
+  const genreHtml = daten.genres.map((g) => `<a class="chip" href="/${locale}/${listenWort}/genre/${slugify(g)}">${attrEsc(genreAnzeige(g, sprache))}</a>`).join('');
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>Beste ${wortTyp}</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
-    <h2>Nach Jahr</h2>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${T.besteWort(wortTyp)}</h1>
+    ${einleitungHtml(daten.text, locale)}
+    <h2>${T.nachJahr}</h2>
     <div class="chips">${jahreHtml}</div>
-    <h2>Nach Genre</h2>
+    <h2>${T.nachGenre}</h2>
     <div class="chips">${genreHtml}</div>
     ${daten.katalog ? listenAbschnitte(daten.katalog, daten.type, locale) : ''}
   `;
@@ -763,19 +810,23 @@ export function seiteBestenlisteHub(daten, locale) {
 }
 
 function reiheStreamingHtml(flatrate, locale) {
+  const T = TX(locale);
   return flatrate.length
-    ? `Im Abo bei: ${flatrate.map((p) => anbieterHtml(p.name, p.anbieterSlug, locale)).join(', ')}`
-    : 'Aktuell bei keinem bekannten Anbieter im Abo';
+    ? T.imAboBei(flatrate.map((p) => anbieterHtml(p.name, p.anbieterSlug, locale)).join(', '))
+    : T.keinAboReihe;
 }
 
 export function seiteReihe(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
+  const dez = sprachVon(locale) === 'en' ? '.' : ',';
   const pfad = `/${locale}/reihen/${daten.slug}`;
-  const ueberschrift = `${daten.name} Filme in Erscheinungsreihenfolge`;
+  const ueberschrift = T.reiheH1(daten.name);
   const titelZeile = `${ueberschrift} | MovieMatch`;
-  const beschreibung = kurzfassung(daten.text) || `${ueberschrift}: alle ${daten.titel.length} Filme mit Bewertung und Streaming-Hinweis.`;
+  const beschreibung = kurzfassung(daten.text) || T.reiheBeschr(ueberschrift, daten.titel.length);
   const kette = [
-    { label: 'Start', href: SITE + '/' },
-    { label: 'Reihen', href: `${SITE}/${locale}/reihen` },
+    { label: S.start, href: SITE + '/' },
+    { label: S.bereiche.reihen, href: `${SITE}/${locale}/reihen` },
     { label: daten.name },
   ];
   const jsonLd = [{
@@ -789,26 +840,28 @@ export function seiteReihe(daten, locale) {
   }, brotkrumenJsonLd(kette)];
   const zeilen = daten.titel.map((t) => {
     const wert = t.communityBewertung ? t.communityBewertung.durchschnitt : t.rating;
-    const info = [t.year, wert ? `⭐ ${String(wert).replace('.', ',')}` : null].filter(Boolean).join(' · ');
+    const info = [t.year, wert ? `⭐ ${String(wert).replace('.', dez)}` : null].filter(Boolean).join(' · ');
     return `<li><a href="/${locale}/film/${attrEsc(t.slug)}-${t.tmdbId}">${attrEsc(t.title)}</a>${info ? ` (${info})` : ''}<br><span class="hinweis">${reiheStreamingHtml(t.flatrate, locale)}</span></li>`;
   }).join('');
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
+    ${brotkrumenHtml(kette, locale)}
     <h1>${attrEsc(ueberschrift)}</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
+    ${einleitungHtml(daten.text, locale)}
     <div class="raster">${daten.titel.map((t) => karte(t, 'film', locale)).join('')}</div>
-    <h2>Alle Filme im Überblick</h2>
+    <h2>${T.alleFilmeUeb}</h2>
     <ol>${zeilen}</ol>
-    <p class="hinweis">Die Reihenfolge folgt dem Erscheinungsdatum laut TMDB. Die Handlung kann zeitlich anders verlaufen. <a href="/${locale}/reihen">Alle Reihen</a></p>
+    <p class="hinweis">${T.reiheFuss(`<a href="/${locale}/reihen">${T.alleReihen}</a>`)}</p>
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
 export function seiteReihenUebersicht(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
   const pfad = `/${locale}/reihen`;
-  const titelZeile = 'Filmreihen & Franchises in Erscheinungsreihenfolge | MovieMatch';
-  const beschreibung = kurzfassung(daten.text) || 'Filmreihen und Franchises mit allen Filmen in Erscheinungsreihenfolge, mit Bewertung und Streaming-Hinweis.';
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Reihen' }];
+  const titelZeile = `${T.reihenTitel} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || T.reihenBeschr;
+  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.reihen }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'CollectionPage', name: titelZeile, url: SITE + pfad,
     mainEntity: {
@@ -819,16 +872,16 @@ export function seiteReihenUebersicht(daten, locale) {
   const kachel = (r) => `<a class="karte" href="/${locale}/reihen/${attrEsc(r.slug)}">
     ${r.posterPath ? `<img src="https://image.tmdb.org/t/p/w342${attrEsc(r.posterPath)}" alt="${attrEsc(r.name)}" loading="lazy">` : ''}
     <div class="titel">${attrEsc(r.name)}</div>
-    <div class="info">${r.anzahl} Filme</div>
+    <div class="info">${T.anzahlFilme(r.anzahl)}</div>
   </a>`;
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>Filmreihen &amp; Franchises</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
-    <h2>Beliebte Reihen</h2>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${attrEsc(T.reihenH1)}</h1>
+    ${einleitungHtml(daten.text, locale)}
+    <h2>${T.beliebteReihen}</h2>
     <div class="raster">${daten.beliebt.map(kachel).join('')}</div>
-    <h2>Alle Reihen von A bis Z</h2>
-    <ul>${daten.reihen.map((r) => `<li><a href="/${locale}/reihen/${attrEsc(r.slug)}">${attrEsc(r.name)}</a> — ${r.anzahl} Filme${r.jahrVon ? ` (${r.jahrVon}${r.jahrBis && r.jahrBis !== r.jahrVon ? '–' + r.jahrBis : ''})` : ''}</li>`).join('')}</ul>
+    <h2>${T.alleReihenAZ}</h2>
+    <ul>${daten.reihen.map((r) => `<li><a href="/${locale}/reihen/${attrEsc(r.slug)}">${attrEsc(r.name)}</a> — ${T.anzahlFilme(r.anzahl)}${r.jahrVon ? ` (${r.jahrVon}${r.jahrBis && r.jahrBis !== r.jahrVon ? '–' + r.jahrBis : ''})` : ''}</li>`).join('')}</ul>
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
@@ -855,7 +908,7 @@ export function seiteStart(daten, locale) {
   const beschreibung = kurzfassung(daten.text) || T.startBeschr;
   const indexierbar = locale === 'de-de' ? daten.indexierbar : !!(daten.indexierbar && localeIndexierbar(locale) && daten.text);
   // Kacheln nur fuer Bereiche, die in dieser Locale existieren.
-  const bereiche = locale === 'de-de' ? START_BEREICHE : [];
+  const bereiche = locale === 'de-de' ? START_BEREICHE : TX(locale).startKacheln.filter((b) => hatSeitenart(locale, b.pfad.split('/')[0]));
   // Kein Breadcrumb: Diese Seite IST die Wurzel des SEO-Baums, eine Kette mit
   // einem einzigen Glied waere weder fuer Nutzer noch fuer Google von Nutzen.
   const jsonLd = [{
@@ -868,7 +921,7 @@ export function seiteStart(daten, locale) {
     </li>`).join('');
   const bodyHtml = `
     <h1>${attrEsc(T.startTitel)}</h1>
-    <p class="einleitung">${textBlock(daten.text, locale)}</p>
+    ${einleitungHtml(daten.text, locale)}
     ${kachelnHtml ? `<ul class="start-bereiche">${kachelnHtml}</ul>` : ''}
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, jsonLd, bodyHtml });
@@ -932,13 +985,13 @@ export function seitePerson(daten, locale) {
 // ---- Wochen-Seiten (zeitabhaengig, Daten aus seoData.js, Regeln in seoWochen.js).
 
 // Titel mit eigener Seite als Karte, die uebrigen als einfache Liste ohne Link
-// (ein Link auf sie waere ein 404).
+// (ein Link auf sie waere ein 404). ohneWort: 'weitere' | 'neue' | null (dann je nach Karten).
 function wochenListeHtml(eintraege, artWort, locale, ohneWort = null) {
   const mit = eintraege.filter((e) => e.hatSeite);
   const ohne = eintraege.filter((e) => !e.hatSeite);
   return (mit.length ? `<div class="raster">${mit.map((t) => karte(t, artWort, locale)).join('')}</div>` : '')
     + (ohne.length
-      ? `<p class="hinweis">${ohneWort || (mit.length ? 'Weitere' : 'Neue')} Titel ohne eigene Seite:</p><ul>${ohne.map((t) => `<li>${attrEsc(t.title)}${t.year ? ` (${t.year})` : ''}</li>`).join('')}</ul>`
+      ? `<p class="hinweis">${TX(locale).ohneSeite(ohneWort || (mit.length ? 'weitere' : 'neue'))}</p><ul>${ohne.map((t) => `<li>${attrEsc(t.title)}${t.year ? ` (${t.year})` : ''}</li>`).join('')}</ul>`
       : '');
 }
 
@@ -950,78 +1003,83 @@ function itemListJsonLd(name, gruppen, locale) {
 }
 
 export function seiteNeuAufUebersicht(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
   const pfad = `/${locale}/neu-auf`;
-  const titelZeile = 'Neu im Streaming: Neuzugänge bei Netflix, Prime Video & Co. | MovieMatch';
-  const beschreibung = `Neue Filme und Serien nach Streaming-Anbieter in Deutschland, Stand ${datumDeutsch(daten.stand)}.`;
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Streaming', href: `/${locale}/streaming` }, { label: 'Neu im Streaming' }];
+  const titelZeile = `${T.neuUebTitel} | MovieMatch`;
+  const beschreibung = T.neuUebBeschr(daten.stand);
+  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.streaming, href: `/${locale}/streaming` }, { label: T.neuStreaming }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
-    itemListElement: daten.anbieter.map((a, i) => listItem(i, `Neu auf ${a.name}`, `${SITE}/${locale}/neu-auf/${a.slug}`)),
+    itemListElement: daten.anbieter.map((a, i) => listItem(i, T.neuAuf(a.name), `${SITE}/${locale}/neu-auf/${a.slug}`)),
   }, brotkrumenJsonLd(kette)];
   const zeilen = daten.anbieter.map((a) => {
     const n = a.filme.length + a.serien.length;
-    return `<li><a href="/${locale}/neu-auf/${a.slug}">Neu auf ${attrEsc(a.name)}</a> — ${n} neue${n === 1 ? 'r Titel' : ' Titel'} in ${fensterWort(a.tage)}</li>`;
+    return `<li><a href="/${locale}/neu-auf/${a.slug}">${T.neuAuf(attrEsc(a.name))}</a> — ${T.neuZeile(n, a.tage)}</li>`;
   }).join('');
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>Neu im Streaming</h1>
-    <p class="einleitung">Stand ${datumDeutsch(daten.stand)}: Was bei den Streaming-Anbietern in Deutschland neu dazugekommen ist. Als neu gilt ein Titel, den MovieMatch bei einem Anbieter zum ersten Mal sieht.</p>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${T.neuStreaming}</h1>
+    <p class="einleitung">${attrEsc(T.neuUebEinleitung(daten.stand))}</p>
     <ul>${zeilen}</ul>
-    <p class="hinweis"><a href="/${locale}/streaming">Alle Streaming-Anbieter</a> · <a href="/${locale}/kino/neustarts">Neu im Kino</a></p>
+    <p class="hinweis"><a href="/${locale}/streaming">${T.alleAnbieter}</a> · <a href="/${locale}/kino/neustarts">${T.neuImKino}</a></p>
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
 export function seiteNeuAufAnbieter(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
   const pfad = `/${locale}/neu-auf/${daten.slug}`;
-  const zeitraum = daten.tage === 7 ? 'der letzten 7 Tage' : `der letzten ${daten.tage} Tage`;
-  const titelZeile = `Neu auf ${daten.name}: Filme & Serien ${zeitraum} | MovieMatch`;
+  const zeitraum = T.zeitraumStreaming(daten.tage);
+  const titelZeile = `${T.neuAnbTitel(daten.name, zeitraum)} | MovieMatch`;
   const n = daten.filme.length + daten.serien.length;
-  const einleitung = streamingEinleitung({ name: daten.name, tage: daten.tage, filme: daten.filme.length, serien: daten.serien.length, stand: daten.stand });
+  const einleitung = T.streamingEinleitung({ name: daten.name, tage: daten.tage, filme: daten.filme.length, serien: daten.serien.length, stand: daten.stand });
   const beschreibung = kurzfassung(einleitung);
   const kette = [
-    { label: 'Start', href: SITE + '/' },
-    { label: 'Neu im Streaming', href: `/${locale}/neu-auf` },
+    { label: S.start, href: SITE + '/' },
+    { label: T.neuStreaming, href: `/${locale}/neu-auf` },
     { label: daten.name },
   ];
   const jsonLd = [itemListJsonLd(titelZeile, [[daten.filme, 'film'], [daten.serien, 'serie']], locale), brotkrumenJsonLd(kette)];
   const chips = [];
-  if (daten.filme.length) chips.push(`<a class="chip" href="#filme">Filme (${daten.filme.length})</a>`);
-  if (daten.serien.length) chips.push(`<a class="chip" href="#serien">Serien (${daten.serien.length})</a>`);
+  if (daten.filme.length) chips.push(`<a class="chip" href="#filme">${T.chipFilme(daten.filme.length)}</a>`);
+  if (daten.serien.length) chips.push(`<a class="chip" href="#serien">${T.chipSerien(daten.serien.length)}</a>`);
   const andere = (daten.andere || []).map((a) => `<a class="chip" href="/${locale}/neu-auf/${a.slug}">${attrEsc(a.name)}</a>`).join('');
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>Neu auf ${attrEsc(daten.name)}</h1>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${T.neuAuf(attrEsc(daten.name))}</h1>
     <p class="einleitung">${attrEsc(einleitung)}</p>
     ${chips.length ? `<div class="chips">${chips.join('')}</div>` : ''}
-    ${daten.filme.length ? `<h2 id="filme">Neue Filme</h2>${wochenListeHtml(daten.filme, 'film', locale)}` : ''}
-    ${daten.serien.length ? `<h2 id="serien">Neue Serien</h2>${wochenListeHtml(daten.serien, 'serie', locale)}` : ''}
-    <p class="hinweis"><a href="/${locale}/streaming/${daten.slug}">Alle Filme & Serien auf ${attrEsc(daten.name)}</a> · <a href="/${locale}/neu-auf">Neu bei allen Anbietern</a></p>
-    ${andere ? `<h2>Neu bei anderen Anbietern</h2><div class="chips">${andere}</div>` : ''}
+    ${daten.filme.length ? `<h2 id="filme">${T.neueFilme}</h2>${wochenListeHtml(daten.filme, 'film', locale)}` : ''}
+    ${daten.serien.length ? `<h2 id="serien">${T.neueSerien}</h2>${wochenListeHtml(daten.serien, 'serie', locale)}` : ''}
+    <p class="hinweis"><a href="/${locale}/streaming/${daten.slug}">${T.alleTitelAuf(attrEsc(daten.name))}</a> · <a href="/${locale}/neu-auf">${T.neuBeiAllen}</a></p>
+    ${andere ? `<h2>${T.neuBeiAnderen}</h2><div class="chips">${andere}</div>` : ''}
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar && n > 0, jsonLd, bodyHtml });
 }
 
 export function seiteKinoNeustarts(daten, locale) {
+  const S = seoTexte(locale);
+  const T = TX(locale);
   const pfad = `/${locale}/kino/neustarts`;
-  const zeitraum = daten.tage === 7 ? 'diese Woche' : `der letzten ${daten.tage} Tage`;
-  const titelZeile = `Neu im Kino: Kinostarts ${zeitraum} und nächste Woche | MovieMatch`;
-  const einleitung = kinoEinleitung({ tage: daten.tage, gestartet: daten.gestartet.length, naechste: daten.naechste.length, stand: daten.stand });
+  const titelZeile = `${T.kinoNeuTitel(T.zeitraumKino(daten.tage))} | MovieMatch`;
+  const einleitung = T.kinoEinleitung({ tage: daten.tage, gestartet: daten.gestartet.length, naechste: daten.naechste.length, stand: daten.stand });
   const beschreibung = kurzfassung(einleitung);
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Kino', href: `/${locale}/kino` }, { label: 'Neustarts' }];
+  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.kino, href: `/${locale}/kino` }, { label: T.neustarts }];
   const jsonLd = [itemListJsonLd(titelZeile, [[daten.gestartet, 'film'], [daten.naechste, 'film']], locale), brotkrumenJsonLd(kette)];
   // Starttag je Titel sichtbar: "Start 08.10." -- die Seite zeigt so selbst, was "neu" heisst.
   const mitStart = (liste) => liste.map((t) => ({ ...t, year: t.year }));
   const staedteHtml = daten.staedte.map((s) => `<a class="chip" href="/${locale}/kino/${s.slug}">${attrEsc(s.ort)}</a>`).join('');
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>Neu im Kino</h1>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${T.neuImKino}</h1>
     <p class="einleitung">${attrEsc(einleitung)}</p>
-    <h2>${daten.tage === 7 ? 'Diese Woche gestartet' : `Gestartet in den letzten ${daten.tage} Tagen`}</h2>
-    ${daten.gestartet.length ? wochenListeHtml(mitStart(daten.gestartet), 'film', locale) : '<p class="hinweis">Aktuell keine Neustarts erkannt.</p>'}
-    ${daten.naechste.length ? `<h2>Nächste Woche</h2>${wochenListeHtml(mitStart(daten.naechste), 'film', locale)}` : ''}
-    <p class="hinweis"><a href="/${locale}/kino">Kino-Übersicht</a> · <a href="/${locale}/beste-filme/im-kino">Beste Filme im Kino</a> · <a href="/${locale}/neu-auf">Neu im Streaming</a></p>
-    ${staedteHtml ? `<h2>Kinos nach Stadt</h2><div class="chips">${staedteHtml}</div>` : ''}
+    <h2>${T.gestartetH2(daten.tage)}</h2>
+    ${daten.gestartet.length ? wochenListeHtml(mitStart(daten.gestartet), 'film', locale) : `<p class="hinweis">${T.keineNeustarts}</p>`}
+    ${daten.naechste.length ? `<h2>${T.naechsteWoche}</h2>${wochenListeHtml(mitStart(daten.naechste), 'film', locale)}` : ''}
+    <p class="hinweis"><a href="/${locale}/kino">${T.kinoUebersicht}</a> · <a href="/${locale}/beste-filme/im-kino">${T.besteImKino}</a> · <a href="/${locale}/neu-auf">${T.neuStreaming}</a></p>
+    ${staedteHtml ? `<h2>${T.kinosNachStadt}</h2><div class="chips">${staedteHtml}</div>` : ''}
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }

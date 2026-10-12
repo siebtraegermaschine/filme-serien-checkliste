@@ -14,10 +14,12 @@ import { ladePersonDaten } from './personen.js';
 import { holeTitelDetails, holeTrailer } from './titeldetails.js';
 import { MIN_TITEL_REIHE, reihenName, reihenSlugs, inErscheinungsreihenfolge, reihenFakten } from './seoReihen.js';
 import { streamingFenster, kinoFenster, heuteBerlin, istImportTag, TAGE_LANG } from './seoWochen.js';
+import { genreAnzeige } from './genreNamen.js';
+import { listeTitelLokal, jahrzehntNameL, seitenTexte } from './seoSeitenTexte.js';
 import { MIN_TITEL, MIN_TITEL_KINO, MIN_TITEL_LAND_GENRE, NEU_JAHRE, THEMEN, LAUFZEITEN, STAFFELN, listeTitel } from './seoBestenlisten.js';
 import {
   landName, landAus, landSlug, codeAusLandSlug, landHatSeite,
-  sprachName, sprachSlug, codeAusSprachSlug, spracheHatSeite,
+  sprachName, sprachSlug, codeAusSprachSlug, spracheHatSeite, landAnzeige, sprachAnzeige,
 } from './herkunftsnamen.js';
 
 // Sortierung aller SEO-Titellisten: die GEWICHTETE TMDB-Bewertung, identisch
@@ -124,6 +126,29 @@ async function lokaleTitel(ids, locale) {
     [ids, sprache]
   );
   return new Map(rows.map((r) => [String(r.id), anzeigeTitel(r, locale)]));
+}
+
+// Kartenlisten lokalisieren, ohne gecachte Objekte zu veraendern (Kopien).
+// Mit Titel-Id (Genre, Bestenliste, Hub, Reihe) ...
+async function titelNachId(karten, locale) {
+  if (sprachVon(locale) === 'de' || !karten.length) return karten;
+  const m = await lokaleTitel(karten.map((k) => k.id), locale);
+  return karten.map((k) => (m.has(k.id) ? { ...k, title: m.get(k.id) } : k));
+}
+
+// ... und ohne Id (streaming_cache/cinema_cache kennen nur tmdb_id und Typ).
+async function titelNachKennung(karten, locale, standardTyp) {
+  if (sprachVon(locale) === 'de' || !karten.length) return karten;
+  const { rows } = await pool.query(
+    `SELECT id, type, tmdb_id FROM ${TITEL_MIT_KENNUNG} WHERE tmdb_id = ANY($1::int[])`,
+    [[...new Set(karten.map((k) => k.tmdbId))]]
+  );
+  const idVon = new Map(rows.map((r) => [`${r.type}:${r.tmdb_id}`, String(r.id)]));
+  const m = await lokaleTitel([...idVon.values()], locale);
+  return karten.map((k) => {
+    const id = idVon.get(`${k.type || standardTyp}:${k.tmdbId}`);
+    return id && m.has(id) ? { ...k, title: m.get(id) } : k;
+  });
 }
 
 // art hier ist 'film'/'serie' (die SEO-URL-Woerter), nicht 'movie'/'series'
@@ -300,16 +325,18 @@ export async function ladeGenreSeite(art, genreSlug, seite, locale) {
   const bewertungen = await bewertungenFuer(rows.map((r) => r.id));
   const text = await ladeSeoText('genre', genreSlug + ':' + type, locale);
 
+  const titel = await titelNachId(rows.map((r) => ({
+    id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
+    genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
+    voteCount: r.vote_count, posterPath: r.poster_path,
+    communityBewertung: bewertungen.get(String(r.id)) || null,
+  })), locale);
+
   return {
-    type, genre, genreSlug, seite, seiten: Math.max(1, Math.ceil(gesamt / SEITENGROESSE)), gesamt,
+    type, genre: genreAnzeige(genre, sprachVon(locale)), genreSlug, seite, seiten: Math.max(1, Math.ceil(gesamt / SEITENGROESSE)), gesamt,
     text,
     indexierbar: gesamt > 0,
-    titel: rows.map((r) => ({
-      id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
-      genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
-      voteCount: r.vote_count, posterPath: r.poster_path,
-      communityBewertung: bewertungen.get(String(r.id)) || null,
-    })),
+    titel,
   };
 }
 
@@ -345,9 +372,13 @@ export async function ladeAnbieterSeite(anbieterSlug, locale) {
     hatSeite: hatSeite.has(`${r.type}:${r.tmdb_id}`),
   });
 
+  const [filmeL, serienL] = await Promise.all([
+    titelNachKennung(filme.map(zuKarte), locale, 'movie'),
+    titelNachKennung(serien.map(zuKarte), locale, 'series'),
+  ]);
   return {
     anbieterSlug, name: rows[0].provider_name, besteListen,
-    filme: filme.map(zuKarte), serien: serien.map(zuKarte),
+    filme: filmeL, serien: serienL,
     text, indexierbar: true,
   };
 }
@@ -391,7 +422,7 @@ async function listeBedingung(type, modus, wert, region) {
   const landTeil = (slug) => {
     const code = codeAusLandSlug(slug);
     if (!code) return false;
-    namen.land = landAus(code); namen.landSlug = slug; namen.landKurz = landName(code);
+    namen.land = landAus(code); namen.landSlug = slug; namen.landKurz = landName(code); namen.landCode = code;
     teile.push(`origin_country @> ARRAY[${p(code)}::text]`);
     return true;
   };
@@ -422,7 +453,7 @@ async function listeBedingung(type, modus, wert, region) {
       const code = codeAusSprachSlug(a);
       ok = !!code;
       if (ok) {
-        namen.sprache = sprachName(code);
+        namen.sprache = sprachName(code); namen.spracheCode = code;
         teile.push(`original_language = ${p(code)}`);
       }
       break;
@@ -489,7 +520,7 @@ export async function ladeBestenliste(art, modus, wert, locale) {
   const bewertungen = await bewertungenFuer(rows.map((r) => r.id));
   // Community-Bewertung schlaegt TMDB, wo vorhanden -- danach nach der
   // gewichteten TMDB-Bewertung (NOTE_SQL, die Reihenfolge der SQL-Abfrage).
-  const sortiert = rows
+  const sortiertRoh = rows
     .map((r) => ({
       id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
       genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
@@ -499,17 +530,28 @@ export async function ladeBestenliste(art, modus, wert, locale) {
     .sort((a, b) => (b.communityBewertung ? b.communityBewertung.durchschnitt : -1) -
                      (a.communityBewertung ? a.communityBewertung.durchschnitt : -1))
     .slice(0, 20);
+  const sortiert = await titelNachId(sortiertRoh, locale);
 
   const text = await ladeSeoText('bestenliste', `${modus}:${wert}:${type}`, locale);
   const katalog = await bestenlistenKatalog(type, locale);
+  const sprache = sprachVon(locale);
+  const de = sprache === 'de';
+  const n = bed.namen;
+  // Andere Sprachen: Anzeigenamen der Locale; der deutsche Pfad bleibt unveraendert.
+  const lokal = {
+    genre: n.genre ? genreAnzeige(n.genre, sprache) : null,
+    anbieter: n.anbieter || null,
+    land: n.landCode ? landAnzeige(n.landCode, sprache) : null,
+    sprache: n.spracheCode ? sprachAnzeige(n.spracheCode, sprache) : null,
+  };
   const ergebnis = {
-    verwandt: verwandteListen(modus, wert, katalog),
+    verwandt: verwandteListen(modus, wert, katalog, locale),
     type, modus, wert, gesamtGefunden: gesamt, titel: sortiert,
-    ueberschrift: listeTitel(type, modus, wert, bed.namen),
-    genre: bed.namen.genre || null, genreSlug: bed.namen.genreSlug || null,
-    anbieter: bed.namen.anbieter || null,
-    land: bed.namen.landKurz || null, landAus: bed.namen.land || null, landSlug: bed.namen.landSlug || null,
-    sprache: bed.namen.sprache || null,
+    ueberschrift: de ? listeTitel(type, modus, wert, n) : listeTitelLokal(sprache, type, modus, wert, lokal),
+    genre: de ? (n.genre || null) : lokal.genre, genreSlug: n.genreSlug || null,
+    anbieter: n.anbieter || null,
+    land: de ? (n.landKurz || null) : lokal.land, landAus: de ? (n.land || null) : lokal.land, landSlug: n.landSlug || null,
+    sprache: de ? (n.sprache || null) : lokal.sprache,
     text, indexierbar: sortiert.length > 0,
   };
   bestenlisteCache.set(cacheKey, { at: jetzt, wert: ergebnis });
@@ -518,25 +560,28 @@ export async function ladeBestenliste(art, modus, wert, locale) {
 
 // Chips auf einer Liste: die naechstfeinere Kombination (Genre x Jahrzehnt,
 // Genre x Anbieter), nur wo die Schwelle erreicht ist.
-function verwandteListen(modus, wert, katalog) {
+function verwandteListen(modus, wert, katalog, locale = 'de-de') {
+  const sprache = sprachVon(locale);
+  const T = seitenTexte(locale, regionFuerLocale(locale));
+  const g = (name) => genreAnzeige(name, sprache);
   const gruppen = [];
   const add = (titel, links) => { if (links.length) gruppen.push({ titel, links }); };
   if (modus === 'land') {
-    add('Nach Genre', katalog.landGenre.filter((e) => e.land === wert)
-      .map((e) => ({ label: e.genre, modus: 'land-genre', wert: `${wert}+${e.genreSlug}` })));
+    add(T.nachGenre, katalog.landGenre.filter((e) => e.land === wert)
+      .map((e) => ({ label: g(e.genre), modus: 'land-genre', wert: `${wert}+${e.genreSlug}` })));
   } else if (modus === 'genre') {
-    add('Nach Land', katalog.landGenre.filter((e) => e.genreSlug === wert)
-      .map((e) => ({ label: e.landName, modus: 'land-genre', wert: `${e.land}+${wert}` })));
-    add('Nach Jahrzehnt', katalog.genreJahrzehnt.filter((e) => e.slug === wert).sort((x, y) => x.jz - y.jz)
-      .map((e) => ({ label: `${e.jz}er`, modus: 'genre-jahrzehnt', wert: `${wert}+${e.jz}` })));
-    add('Nach Anbieter', katalog.genreAnbieter.filter((e) => e.slug === wert)
+    add(T.nachLand, katalog.landGenre.filter((e) => e.genreSlug === wert)
+      .map((e) => ({ label: sprache === 'de' ? e.landName : landAnzeige(e.code, sprache), modus: 'land-genre', wert: `${e.land}+${wert}` })));
+    add(T.nachJahrzehnt, katalog.genreJahrzehnt.filter((e) => e.slug === wert).sort((x, y) => x.jz - y.jz)
+      .map((e) => ({ label: jahrzehntNameL(e.jz, sprache), modus: 'genre-jahrzehnt', wert: `${wert}+${e.jz}` })));
+    add(T.verwNachAnbieter, katalog.genreAnbieter.filter((e) => e.slug === wert)
       .map((e) => ({ label: e.anbieterName, modus: 'genre-anbieter', wert: `${wert}+${e.anbieter}` })));
   } else if (modus === 'jahrzehnt') {
-    add('Nach Genre', katalog.genreJahrzehnt.filter((e) => String(e.jz) === wert)
-      .map((e) => ({ label: e.genre, modus: 'genre-jahrzehnt', wert: `${e.slug}+${wert}` })));
+    add(T.nachGenre, katalog.genreJahrzehnt.filter((e) => String(e.jz) === wert)
+      .map((e) => ({ label: g(e.genre), modus: 'genre-jahrzehnt', wert: `${e.slug}+${wert}` })));
   } else if (modus === 'anbieter') {
-    add('Nach Genre', katalog.genreAnbieter.filter((e) => e.anbieter === wert)
-      .map((e) => ({ label: e.genre, modus: 'genre-anbieter', wert: `${e.slug}+${wert}` })));
+    add(T.nachGenre, katalog.genreAnbieter.filter((e) => e.anbieter === wert)
+      .map((e) => ({ label: g(e.genre), modus: 'genre-anbieter', wert: `${e.slug}+${wert}` })));
   }
   return gruppen;
 }
@@ -608,7 +653,7 @@ export async function bestenlistenKatalog(type, locale) {
     laender: laender.filter((r) => landHatSeite(r.code)).map((r) => ({ code: r.code, slug: landSlug(r.code), name: landName(r.code) })),
     sprachen: sprachen.filter((r) => spracheHatSeite(r.code)).map((r) => ({ code: r.code, slug: sprachSlug(r.code), name: sprachName(r.code) })),
     landGenre: gEintraege(landGenre).filter((r) => landHatSeite(r.code))
-      .map((r) => ({ genre: r.genre, genreSlug: slugify(r.genre), land: landSlug(r.code), landName: landName(r.code) })),
+      .map((r) => ({ genre: r.genre, genreSlug: slugify(r.genre), code: r.code, land: landSlug(r.code), landName: landName(r.code) })),
     laufzeit: laufzeit.filter((l) => l.n >= MIN_TITEL).map((l) => l.slug),
     staffeln: staffeln.filter((l) => l.n >= MIN_TITEL).map((l) => l.slug),
   };
@@ -660,7 +705,7 @@ async function topTitel(type, limit = HUB_ANZAHL) {
 async function filmeOderSerienHub(art, locale) {
   const type = LISTEN_TYP[art];
   const [titel, genres, text] = await Promise.all([
-    topTitel(type),
+    topTitel(type).then((t) => titelNachId(t, locale)),
     alleGenres(type),
     ladeSeoText('hub', art, locale),
   ]);
@@ -698,7 +743,7 @@ export async function ladeKinoHub(locale) {
   ]);
   const qualifiziert = staedte.filter((s) => s.anzahl >= MIN_KINOS_STADT).sort((a, b) => b.anzahl - a.anzahl);
   return {
-    filme: filme.map((f) => ({ tmdbId: f.tmdb_id, slug: slugify(f.title), title: f.title, year: f.year, genres: f.genres || [], posterPath: f.poster_path })),
+    filme: await titelNachKennung(filme.map((f) => ({ tmdbId: f.tmdb_id, slug: slugify(f.title), title: f.title, year: f.year, genres: f.genres || [], posterPath: f.poster_path })), locale, 'movie'),
     staedte: qualifiziert.map((s) => ({ ort: s.ort, slug: slugify(s.ort) })),
     text, indexierbar: true,
   };
@@ -911,10 +956,10 @@ export async function ladeKinoStadt(stadtSlug, locale) {
   return {
     stadtSlug, ort: stadt.ort, anzahlKinos: stadt.anzahl,
     kinos: kinos.map((k) => ({ name: k.name, strasse: k.strasse, plz: k.plz, website: k.website })),
-    filme: filme.map((f) => ({
+    filme: await titelNachKennung(filme.map((f) => ({
       tmdbId: f.tmdb_id, slug: slugify(f.title), title: f.title, year: f.year,
       genres: f.genres || [], posterPath: f.poster_path,
-    })),
+    })), locale, 'movie'),
     text, indexierbar: kinos.length > 0,
   };
 }
@@ -996,10 +1041,18 @@ export async function ladeNeuAufAnbieter(anbieterSlug, locale) {
   const a = d.anbieter.find((x) => x.slug === anbieterSlug);
   if (!a) return null;
   const andere = d.anbieter.filter((x) => x.indexierbar && x.slug !== anbieterSlug).map((x) => ({ slug: x.slug, name: x.name }));
-  return { ...a, stand: d.stand, andere };
+  const [filme, serien] = await Promise.all([titelNachKennung(a.filme, locale, 'movie'), titelNachKennung(a.serien, locale, 'series')]);
+  return { ...a, filme, serien, stand: d.stand, andere };
 }
 
 export async function ladeKinoNeustarts(locale) {
+  const d = await kinoNeustartsBasis(locale);
+  if (sprachVon(locale) === 'de') return d;
+  const [gestartet, naechste] = await Promise.all([titelNachKennung(d.gestartet, locale, 'movie'), titelNachKennung(d.naechste, locale, 'movie')]);
+  return { ...d, gestartet, naechste };
+}
+
+async function kinoNeustartsBasis(locale) {
   const region = regionFuerLocale(locale);
   return gecacht(`kino:${region}`, async () => {
     const { rows } = await pool.query(
@@ -1161,14 +1214,14 @@ export async function ladeReihe(slug, locale) {
     ladeSeoText('reihe', r.slug, locale),
   ]);
   const flatrate = new Map(stream.map((s) => [s.tmdb_id, s.flatrate || []]));
-  const titel = r.titel.map((t) => ({
+  const titel = await titelNachId(r.titel.map((t) => ({
     ...t,
     communityBewertung: bewertungen.get(t.id) || null,
     flatrate: (flatrate.get(t.tmdbId) || []).map((p) => {
       const as = anbieterSlug(p.name);
       return { name: p.name, anbieterSlug: seiten.has(as) ? as : null };
     }),
-  }));
+  })), locale);
   return { slug: r.slug, name: r.name, collectionId: r.id, titel, fakten: r.fakten, text, indexierbar: true };
 }
 

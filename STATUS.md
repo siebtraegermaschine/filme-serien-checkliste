@@ -339,8 +339,8 @@
 indexierbar in `backend/lib/seoLocale.js`; `seoTexte.js` (Chrome-Texte
 DE/EN/ES/FR/IT/NL/PT), `genreNamen.js` (Genre-Namen aus index.html), Render
 lokalisiert für Start, Titel, 404 (`seoRender.js`). Nicht lokalisierte
-Seitenarten (alles außer `start`/`titel`) liefern in Nicht-de-Locales 404 und
-werden dort nirgends verlinkt. hreflang nur über vorhandene Titeltexte
+Seitenarten: seit 12.10.2026 (siehe unten) alles außer Personen lokalisiert;
+Personen liefern in Nicht-de-Locales 404 und werden dort nirgends verlinkt. hreflang nur über vorhandene Titeltexte
 (`textLocales`), x-default → de-de. Sitemaps nur für indexierbare Locales,
 Titel nur mit Text. `index.html` unverändert, Rechtstexte unverändert (Footer
 verweist auf `imprint.html`/`privacy.html`). en-us/pt-br inaktiv (Nicht-EWR).
@@ -356,8 +356,8 @@ Pilot: 10 en-gb- und 10 es-es-Titeltexte in `backend/scripts/seo-pilot-en-es.mjs
 4. Anwaltsprüfung der englischen Rechtsentwürfe vor Indexierung.
 5. Englisch: Code `en-gb` (SEO-Locale) oder `en-us` (Nicht-EWR, inaktiv)?
 6. Welche Locale zuerst indexierbar, und wann.
-7. Weitere Seitenarten lokalisieren (Hubs, Genre, Streaming, Personen, Reihen,
-   Bestenlisten, Kino, neu-auf)? Bisher nur Start/Titel.
+7. ~~Weitere Seitenarten lokalisieren~~ — Hubs, Genre, Streaming/Anbieter,
+   Bestenlisten, Kino, neu-auf, Reihen erledigt 12.10.2026; Personen offen.
 8. ~~Lokalisierte Titel in Listenkarten~~ — erledigt 12.10.2026, siehe unten.
 9. Kosten Batch-Lauf (siehe unten) — nur mit Freigabe.
 
@@ -407,3 +407,19 @@ ANTHROPIC_API_KEY=... node scripts/seo-batch.mjs --locale en-gb --stufe B --max-
 Vorher prüfen, dass kein anderer Batch-Lauf aktiv ist (Statusdateien!).
 Texte wirken erst für hreflang/Sitemap, wenn die Locale zusätzlich in
 `SEO_LOCALES` indexierbar geschaltet ist.
+
+## Seitenarten in Nicht-de-Locales (12.10.2026)
+
+Hubs, Genre, Anbieter, Bestenlisten (inkl. Übersichten), Kino, neu-auf und
+Reihen rendern in en-gb/es-es/fr-fr/it-it/nl-nl/pt-pt (alle noindex, nicht in
+Sitemap/robots, kein hreflang ohne Gegenseite). Vorlagen in
+`backend/lib/seoSeitenTexte.js`, Titel über `anzeigeTitel`, Länder-/Sprachnamen
+über `Intl.DisplayNames`. Ohne `seo_content`-Text entfällt der Einleitungsabsatz;
+Texte mit gleichem Schlüssel und Locale greifen automatisch, sobald sie in der
+DB liegen. Slugs/Pfadwörter unverändert deutsch. de-de byte-gleich (Snapshot).
+TMDB lokal nicht testbar.
+
+**Offen:** Personen-Seiten lokalisieren. Übersetzung der `seo_content`-Texte je
+Locale (Stand de-de: hub 9, genre 35, anbieter 17, bestenliste 810, kino_stadt
+470, reihe 501 = rund 1.840 je Locale, Bestenlisten je Region ggf. abweichend;
+en-gb/es-es haben schon fast alles außer Bestenlisten).
