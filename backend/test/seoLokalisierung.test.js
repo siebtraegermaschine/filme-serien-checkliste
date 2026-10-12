@@ -96,6 +96,7 @@ test('Startseite und 404 sind lokalisiert; Start ohne Text ist noindex', () => {
   assert.match(start, /Films et séries en un coup d’œil/);
   assert.equal(meta(start, 'robots'), 'noindex,follow');
   assert.doesNotMatch(start, /start-bereiche/);
+  assert.doesNotMatch(start, /"hasPart":\[\]/); // leeres Array waere JSON-LD-Fehler
   assert.match(seite404('nl-nl'), /Pagina niet gevonden/);
 });
 

@@ -860,7 +860,7 @@ export function seiteStart(daten, locale) {
   // einem einzigen Glied waere weder fuer Nutzer noch fuer Google von Nutzen.
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'CollectionPage', name: titelZeile,
-    hasPart: bereiche.map((b) => ({ '@type': 'WebPage', name: b.titel, url: `${SITE}/${locale}/${b.pfad}` })),
+    ...(bereiche.length ? { hasPart: bereiche.map((b) => ({ '@type': 'WebPage', name: b.titel, url: `${SITE}/${locale}/${b.pfad}` })) } : {}),
   }];
   const kachelnHtml = bereiche.map((b) => `<li>
       <a href="/${locale}/${b.pfad}"><strong>${attrEsc(b.titel)}</strong></a>
