@@ -235,10 +235,12 @@
   beanstandet. Gemeinsame Datenzugriffe in `personen-daten.mjs`,
   Selbstprüfung für Bearbeiter ohne DB: `personen-selbstcheck.mjs`
   (im Auftrag `seo-auftrag-personen.md` verlinkt). Pilot: 119 von 120 Texten
-  live. Danach 3 Abo-Runden à 150 (10 Subagenten, ohne Geld) live
+  live. Danach 4 Abo-Runden à 150 (10 Subagenten, ohne Geld) live
   eingespielt, alle ohne Beanstandung; Kris Wu (schauspieler:1390948,
-  Haftstrafe in der Biografie) bewusst nicht eingespielt, bleibt offen.
-  Restbestand 12.10.2026: 2.223 offene Rollen (612 Regie). Weiter per
+  Haftstrafe in der Biografie), Robert Blake (schauspieler:9287) und
+  Robert Hughes (regisseur:1230838, Verurteilung) bewusst nicht eingespielt,
+  bleiben offen. Runde 4: 148 Texte.
+  Restbestand 12.10.2026: 2.075 offene Rollen (571 Regie). Weiter per
   `.a2`-Muster: `personen-pakete.mjs --mischen rN`, Texte, `personen-selbstcheck.mjs`,
   `personen-einspielen.mjs` (Probelauf, dann echt). Alternativ Batch:
   Rest per Batch vorbereitet, NICHT gestartet: nach Läufen 3/4 ca. 0,005 $
