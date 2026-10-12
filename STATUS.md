@@ -308,6 +308,7 @@
 - Neu: `backend/scripts/jsonld-check.mjs` (JSON-LD je Seitenart, auch als Modul) und `backend/scripts/seo-audit.mjs` (Stichprobe aus den Sitemaps: Status, Canonical, robots, Duplikate, JSON-LD, interne Links; 1 Req/s).
 - Befunde und Fix in `seoRender.js`: (1) alle ItemList-Eintraege ohne `url` (Genre, Anbieter, Bestenliste, Kino, Hubs, Neu-auf, Neustarts) -> url ergaenzt, bei Wochen-Listen nur fuer Titel mit eigener Seite; (2) `&` im `<title>` doppelt escaped (`Sci-Fi &amp;amp; Fantasy`, z. B. /serien/war-politics) -> Escaping nur noch im Head-Renderer. Test in `seoRender.test.js`.
 - Nach dem ersten Deploy zeigte der Link-Check zusaetzlich: Anbieter-Seiten (`/streaming/<anbieter>`) verlinkten Titel ohne eigene Titelseite (404, z. B. Crunchyroll). Behoben: `ladeAnbieterSeite` liefert `hatSeite`, ohne Seite = Liste ohne Link und ohne JSON-LD-Eintrag (wie bei den Wochen-Seiten).
+- Kino-Hub: Orte in nicht-lateinischer Schrift (z. B. Athen) ergaben leeren Slug -> Link auf `/kino/` selbst und Doppel-URL im JSON-LD (auch Sitemap betroffen). `staedteListe` verwirft sie jetzt. Offen: Slugs verlieren Sonderzeichen (`ciudad-de-m-xico`); Transliteration waere eine eigene Entscheidung.
 - Live-Stand vor dem Deploy: beide Befunde sichtbar (Audit 57 URLs, nur diese beiden Fehlerklassen). Nach dem Deploy Audit erneut laufen lassen: `node scripts/seo-audit.mjs --stichprobe=40` (aus `backend/`).
 - Offen: Bericht fuer den vollen Lauf (`--alle`, ~51.000 URLs, ~14 h bei 1 Req/s) nicht gefahren; ggf. woechentlich per Workflow mit kleiner Stichprobe.
 

@@ -599,8 +599,10 @@ async function staedteListe() {
   const { rows } = await pool.query(
     `SELECT ort, count(*)::int AS anzahl FROM kinos WHERE ort IS NOT NULL AND ort <> '' GROUP BY ort`
   );
-  staedteCache = { at: Date.now(), liste: rows };
-  return rows;
+  // Orte in nicht-lateinischer Schrift ergeben einen leeren Slug (Link auf /kino/ selbst).
+  const liste = rows.filter((r) => slugify(r.ort));
+  staedteCache = { at: Date.now(), liste };
+  return liste;
 }
 
 // ---- Hub-Seiten (/filme, /serien, /kino, /streaming, /beste-filme,
