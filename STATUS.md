@@ -239,8 +239,11 @@
   eingespielt, alle ohne Beanstandung; Kris Wu (schauspieler:1390948,
   Haftstrafe in der Biografie), Robert Blake (schauspieler:9287) und
   Robert Hughes (regisseur:1230838, Verurteilung) bewusst nicht eingespielt,
-  bleiben offen. Runde 4: 148 Texte.
-  Restbestand 12.10.2026: 2.075 offene Rollen (571 Regie). Weiter per
+  bleiben offen. Runde 4: 148 Texte. Runden 5 (148) und 6 (144) am
+  12.10.2026 live; offen gelassen u. a. Jamie Foreman, Brad Renfro, Bobby Brown,
+  Harald Reinl, Joshua Zeman, 박성웅 (Kriminalität/Drogen), Osgood Perkins
+  (Faktenverdacht).
+  Restbestand 12.10.2026: 1.783 offene Rollen (501 Regie). Weiter per
   `.a2`-Muster: `personen-pakete.mjs --mischen rN`, Texte, `personen-selbstcheck.mjs`,
   `personen-einspielen.mjs` (Probelauf, dann echt). Alternativ Batch:
   Rest per Batch vorbereitet, NICHT gestartet: nach Läufen 3/4 ca. 0,005 $
