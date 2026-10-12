@@ -8,7 +8,7 @@ import { SITE } from './seoRender.js';
 import { SEO_LOCALES } from './seoLocale.js';
 import {
   personenFuerSitemap, titelFuerSitemap, genresFuerSitemap, anbieterFuerSitemap,
-  staedteFuerSitemap, alleBestenlisten, reihenFuerSitemap,
+  staedteFuerSitemap, alleBestenlisten, reihenFuerSitemap, wochenSeitenFuerSitemap,
 } from './seoData.js';
 import { schluesselZuPfad } from './seoBestenlisten.js';
 
@@ -96,7 +96,15 @@ async function urlsFuerBereich(locale, bereich) {
   }
 
   if (bereich === 'hub') {
+    // Zeitabhaengige Seiten: nur wenn indexierbar, lastmod = heute (Berlin).
+    const w = await wochenSeitenFuerSitemap(locale);
+    const wochen = [
+      ...(w.neuAuf ? [`neu-auf`] : []),
+      ...w.anbieter.map((s) => `neu-auf/${s}`),
+      ...(w.kinoNeustarts ? ['kino/neustarts'] : []),
+    ].map((h) => ({ loc: `${SITE}/${locale}/${h}`, lastmod: w.stand }));
     return [
+      ...wochen,
       ...HUBS.map((h) => ({
         loc: h === 'start' ? `${SITE}/${locale}/` : `${SITE}/${locale}/${h}`,
         lastmod: stand.get(h) || null,

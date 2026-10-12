@@ -5,6 +5,7 @@
 import { hreflangCode } from './seoLocale.js';
 import { listeSeitenPfad, THEMEN, jahrzehntName, LAUFZEITEN, STAFFELN } from './seoBestenlisten.js';
 import { slugify } from './slug.js';
+import { streamingEinleitung, kinoEinleitung, datumDeutsch, fensterWort } from './seoWochen.js';
 
 export const SITE = 'https://movietaste.de';
 
@@ -432,7 +433,8 @@ export function seiteAnbieter(daten, locale) {
   const besteLinks = [];
   if (daten.besteListen && daten.besteListen.filme) besteLinks.push(`<a href="${listeSeitenPfad(locale, 'movie', 'anbieter', daten.anbieterSlug)}">Beste Filme auf ${attrEsc(daten.name)}</a>`);
   if (daten.besteListen && daten.besteListen.serien) besteLinks.push(`<a href="${listeSeitenPfad(locale, 'series', 'anbieter', daten.anbieterSlug)}">Beste Serien auf ${attrEsc(daten.name)}</a>`);
-  const besteHtml = besteLinks.length ? `<p class="hinweis">${besteLinks.join(' · ')}</p>` : '';
+  besteLinks.push(`<a href="/${locale}/neu-auf/${daten.anbieterSlug}">Neu auf ${attrEsc(daten.name)}</a>`);
+  const besteHtml = `<p class="hinweis">${besteLinks.join(' · ')}</p>`;
   const bodyHtml = `
     ${brotkrumenHtml(kette)}
     <h1>Filme & Serien auf ${attrEsc(daten.name)}</h1>
@@ -557,6 +559,7 @@ export function seiteKinoStadt(daten, locale) {
     ${brotkrumenHtml(kette)}
     <h1>Kino in ${attrEsc(daten.ort)}: Aktuelle Filme</h1>
     <p class="einleitung">${textBlock(daten.text)}</p>
+    <p class="hinweis"><a href="/${locale}/kino/neustarts">Neu im Kino: Neustarts dieser und der nächsten Woche</a></p>
     <h2>Aktuell im Kino</h2>
     <div class="raster">${daten.filme.map((t) => karte(t, 'film', locale)).join('')}</div>
     <h2>Kinos in ${attrEsc(daten.ort)}</h2>
@@ -644,6 +647,7 @@ export function seiteKinoHub(daten, locale) {
     ${brotkrumenHtml(kette)}
     <h1>Kino: Aktuelle Filme & Kinos in deiner Stadt</h1>
     <p class="einleitung">${textBlock(daten.text)}</p>
+    <p class="hinweis"><a href="/${locale}/kino/neustarts">Neu im Kino: Neustarts dieser und der nächsten Woche</a></p>
     <h2>Aktuell im Kino</h2>
     <div class="raster">${daten.filme.map((t) => karte(t, 'film', locale)).join('')}</div>
     <h2>Kinos nach Stadt</h2>
@@ -665,6 +669,7 @@ export function seiteStreamingHub(daten, locale) {
     ${brotkrumenHtml(kette)}
     <h1>Streaming-Anbieter im Überblick</h1>
     <p class="einleitung">${textBlock(daten.text)}</p>
+    <p class="hinweis"><a href="/${locale}/neu-auf">Neu im Streaming: Neuzugänge der letzten Tage nach Anbieter</a></p>
     <ul>${daten.anbieter.map((a) => `<li><a href="/${locale}/streaming/${a.slug}">${attrEsc(a.name)}</a> — ${a.anzahl} Titel</li>`).join('')}</ul>
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
@@ -798,6 +803,8 @@ const START_BEREICHE = [
   { pfad: 'regisseur', titel: 'Regisseure', text: 'Regisseurinnen und Regisseure mit ihren Filmen und Serien.' },
   { pfad: 'streaming', titel: 'Streaming', text: 'Was bei welchem Anbieter läuft.' },
   { pfad: 'kino', titel: 'Kino', text: 'Aktuelle Kinostarts und Kinos nach Stadt.' },
+  { pfad: 'neu-auf', titel: 'Neu im Streaming', text: 'Neuzugänge der letzten Tage bei Netflix, Prime Video und Co.' },
+  { pfad: 'kino/neustarts', titel: 'Neu im Kino', text: 'Kinostarts dieser und der nächsten Woche.' },
 ];
 
 export function seiteStart(daten, locale) {
@@ -874,6 +881,101 @@ export function seitePerson(daten, locale) {
     ${bioHtml}
     <h2>Filmografie${rolleWort === 'Regisseur' ? ' (Regie)' : ''}</h2>
     <div class="raster">${daten.filmografie.map((t) => karte(t, t.type === 'series' ? 'serie' : 'film', locale)).join('')}</div>
+  `;
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
+}
+
+// ---- Wochen-Seiten (zeitabhaengig, Daten aus seoData.js, Regeln in seoWochen.js).
+
+// Titel mit eigener Seite als Karte, die uebrigen als einfache Liste ohne Link
+// (ein Link auf sie waere ein 404).
+function wochenListeHtml(eintraege, artWort, locale) {
+  const mit = eintraege.filter((e) => e.hatSeite);
+  const ohne = eintraege.filter((e) => !e.hatSeite);
+  return (mit.length ? `<div class="raster">${mit.map((t) => karte(t, artWort, locale)).join('')}</div>` : '')
+    + (ohne.length
+      ? `<p class="hinweis">${mit.length ? 'Weitere' : 'Neue'} Titel ohne eigene Seite:</p><ul>${ohne.map((t) => `<li>${attrEsc(t.title)}${t.year ? ` (${t.year})` : ''}</li>`).join('')}</ul>`
+      : '');
+}
+
+function itemListJsonLd(name, eintraege) {
+  return { '@context': 'https://schema.org', '@type': 'ItemList', name,
+    itemListElement: eintraege.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.title })) };
+}
+
+export function seiteNeuAufUebersicht(daten, locale) {
+  const pfad = `/${locale}/neu-auf`;
+  const titelZeile = 'Neu im Streaming: Neuzugänge bei Netflix, Prime Video & Co. | MovieMatch';
+  const beschreibung = `Neue Filme und Serien nach Streaming-Anbieter in Deutschland, Stand ${datumDeutsch(daten.stand)}.`;
+  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Streaming', href: `/${locale}/streaming` }, { label: 'Neu im Streaming' }];
+  const jsonLd = [{
+    '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
+    itemListElement: daten.anbieter.map((a, i) => ({ '@type': 'ListItem', position: i + 1, name: `Neu auf ${a.name}` })),
+  }, brotkrumenJsonLd(kette)];
+  const zeilen = daten.anbieter.map((a) => {
+    const n = a.filme.length + a.serien.length;
+    return `<li><a href="/${locale}/neu-auf/${a.slug}">Neu auf ${attrEsc(a.name)}</a> — ${n} neue${n === 1 ? 'r Titel' : ' Titel'} in ${fensterWort(a.tage)}</li>`;
+  }).join('');
+  const bodyHtml = `
+    ${brotkrumenHtml(kette)}
+    <h1>Neu im Streaming</h1>
+    <p class="einleitung">Stand ${datumDeutsch(daten.stand)}: Was bei den Streaming-Anbietern in Deutschland neu dazugekommen ist. Als neu gilt ein Titel, den MovieMatch bei einem Anbieter zum ersten Mal sieht.</p>
+    <ul>${zeilen}</ul>
+    <p class="hinweis"><a href="/${locale}/streaming">Alle Streaming-Anbieter</a> · <a href="/${locale}/kino/neustarts">Neu im Kino</a></p>
+  `;
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
+}
+
+export function seiteNeuAufAnbieter(daten, locale) {
+  const pfad = `/${locale}/neu-auf/${daten.slug}`;
+  const zeitraum = daten.tage === 7 ? 'der letzten 7 Tage' : `der letzten ${daten.tage} Tage`;
+  const titelZeile = `Neu auf ${attrEsc(daten.name)}: Filme & Serien ${zeitraum} | MovieMatch`;
+  const n = daten.filme.length + daten.serien.length;
+  const einleitung = streamingEinleitung({ name: daten.name, tage: daten.tage, filme: daten.filme.length, serien: daten.serien.length, stand: daten.stand });
+  const beschreibung = kurzfassung(einleitung);
+  const kette = [
+    { label: 'Start', href: SITE + '/' },
+    { label: 'Neu im Streaming', href: `/${locale}/neu-auf` },
+    { label: daten.name },
+  ];
+  const jsonLd = [itemListJsonLd(titelZeile, [...daten.filme, ...daten.serien]), brotkrumenJsonLd(kette)];
+  const chips = [];
+  if (daten.filme.length) chips.push(`<a class="chip" href="#filme">Filme (${daten.filme.length})</a>`);
+  if (daten.serien.length) chips.push(`<a class="chip" href="#serien">Serien (${daten.serien.length})</a>`);
+  const andere = (daten.andere || []).map((a) => `<a class="chip" href="/${locale}/neu-auf/${a.slug}">${attrEsc(a.name)}</a>`).join('');
+  const bodyHtml = `
+    ${brotkrumenHtml(kette)}
+    <h1>Neu auf ${attrEsc(daten.name)}</h1>
+    <p class="einleitung">${attrEsc(einleitung)}</p>
+    ${chips.length ? `<div class="chips">${chips.join('')}</div>` : ''}
+    ${daten.filme.length ? `<h2 id="filme">Neue Filme</h2>${wochenListeHtml(daten.filme, 'film', locale)}` : ''}
+    ${daten.serien.length ? `<h2 id="serien">Neue Serien</h2>${wochenListeHtml(daten.serien, 'serie', locale)}` : ''}
+    <p class="hinweis"><a href="/${locale}/streaming/${daten.slug}">Alle Filme & Serien auf ${attrEsc(daten.name)}</a> · <a href="/${locale}/neu-auf">Neu bei allen Anbietern</a></p>
+    ${andere ? `<h2>Neu bei anderen Anbietern</h2><div class="chips">${andere}</div>` : ''}
+  `;
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar && n > 0, jsonLd, bodyHtml });
+}
+
+export function seiteKinoNeustarts(daten, locale) {
+  const pfad = `/${locale}/kino/neustarts`;
+  const zeitraum = daten.tage === 7 ? 'diese Woche' : `der letzten ${daten.tage} Tage`;
+  const titelZeile = `Neu im Kino: Kinostarts ${zeitraum} und nächste Woche | MovieMatch`;
+  const einleitung = kinoEinleitung({ tage: daten.tage, gestartet: daten.gestartet.length, naechste: daten.naechste.length, stand: daten.stand });
+  const beschreibung = kurzfassung(einleitung);
+  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Kino', href: `/${locale}/kino` }, { label: 'Neustarts' }];
+  const jsonLd = [itemListJsonLd(titelZeile, [...daten.gestartet, ...daten.naechste]), brotkrumenJsonLd(kette)];
+  // Starttag je Titel sichtbar: "Start 08.10." -- die Seite zeigt so selbst, was "neu" heisst.
+  const mitStart = (liste) => liste.map((t) => ({ ...t, year: t.year }));
+  const staedteHtml = daten.staedte.map((s) => `<a class="chip" href="/${locale}/kino/${s.slug}">${attrEsc(s.ort)}</a>`).join('');
+  const bodyHtml = `
+    ${brotkrumenHtml(kette)}
+    <h1>Neu im Kino</h1>
+    <p class="einleitung">${attrEsc(einleitung)}</p>
+    <h2>${daten.tage === 7 ? 'Diese Woche gestartet' : `Gestartet in den letzten ${daten.tage} Tagen`}</h2>
+    ${daten.gestartet.length ? wochenListeHtml(mitStart(daten.gestartet), 'film', locale) : '<p class="hinweis">Aktuell keine Neustarts erkannt.</p>'}
+    ${daten.naechste.length ? `<h2>Nächste Woche</h2>${wochenListeHtml(mitStart(daten.naechste), 'film', locale)}` : ''}
+    <p class="hinweis"><a href="/${locale}/kino">Kino-Übersicht</a> · <a href="/${locale}/beste-filme/im-kino">Beste Filme im Kino</a> · <a href="/${locale}/neu-auf">Neu im Streaming</a></p>
+    ${staedteHtml ? `<h2>Kinos nach Stadt</h2><div class="chips">${staedteHtml}</div>` : ''}
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }

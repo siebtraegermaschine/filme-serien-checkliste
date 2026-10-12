@@ -274,3 +274,11 @@
 - **Entschieden**: Reihenfolge = Erscheinungsdatum, nie "chronologisch nach Handlung" (TMDB kennt das nicht; die Seite sagt es offen). Texte deterministisch aus Katalogfakten, kein API-Aufruf. Reihenname deutsch (`language=de-DE`).
 - **Nicht lokal getestet**: TMDB-Abrufe (Schluessel nur auf dem Server); Backfill und Textlauf liefen dort.
 - **Offen**: Weitere Reihen-Facetten (Serien-Franchises, Reihe x Anbieter) erst nach Search-Console-Zahlen.
+
+## Wochen-Seiten (12.10.2026, live)
+- Neu: `/de-de/neu-auf` (Übersicht), `/de-de/neu-auf/<anbieter>` (Neu auf Netflix & Co.), `/de-de/kino/neustarts` (Starts der Woche + „Nächste Woche"). Kein Cron, nichts in `seo_content`: `seoData.js` rechnet bei jedem Cache-Aufbau (1 h) aus `streaming_cache.first_seen_at` bzw. `cinema_cache.release_date`; Regeln und Texte in `backend/lib/seoWochen.js`, „Stand" ist das Berliner Tagesdatum. HTTP-Cache 1 h.
+- Schwelle 5 Titel (Kino 3); darunter Fenster 14 statt 7 Tage (Seite sagt „letzte 14 Tage"), danach `noindex,follow` statt 404. Sitemap (Hub) führt nur indexierbare Wochen-Seiten, lastmod = heute.
+- **Importtag-Regel:** `first_seen_at` ist beim Erstimport eines Anbieters ein Artefakt (tausende Zeilen an einem Tag). Ein Tag zählt als Import, wenn er > 30 % der Zeilen des Anbieters trägt und ≥ 50 Zeilen hat; diese Tage fallen raus. Echte Spitzentage lagen bei ≤ 5 %.
+- Titel ohne eigene Titelseite (~28 %) erscheinen als Text ohne Link, zählen aber für die Schwelle.
+- Analytics-Typen: `neu-auf`, `neu-anbieter`, `kino-neustarts` (unbekannte Typen fallen im Frontend auf den Rohschlüssel zurück).
+- **Offen:** Footer-Link auf `/neu-auf` fehlt (Footer ist per Test an `index.html` gekoppelt, die nicht angefasst werden sollte); verlinkt ist von Start, Streaming-Hub, Anbieter-Seite, Kino-Hub und Kino-Städten. Kino-Neustarts bis zur Mitte der Woche ggf. dünn.

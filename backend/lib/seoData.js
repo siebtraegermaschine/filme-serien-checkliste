@@ -12,6 +12,7 @@ import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatist
 import { ladePersonDaten } from './personen.js';
 import { holeTitelDetails, holeTrailer } from './titeldetails.js';
 import { MIN_TITEL_REIHE, reihenName, reihenSlugs, inErscheinungsreihenfolge, reihenFakten } from './seoReihen.js';
+import { streamingFenster, kinoFenster, heuteBerlin, istImportTag, TAGE_LANG } from './seoWochen.js';
 import { MIN_TITEL, MIN_TITEL_KINO, MIN_TITEL_LAND_GENRE, NEU_JAHRE, THEMEN, LAUFZEITEN, STAFFELN, listeTitel } from './seoBestenlisten.js';
 import {
   landName, landAus, landSlug, codeAusLandSlug, landHatSeite,
@@ -878,6 +879,118 @@ export async function ladeKinoStadt(stadtSlug, locale) {
       genres: f.genres || [], posterPath: f.poster_path,
     })),
     text, indexierbar: kinos.length > 0,
+  };
+}
+
+// ---- Wochen-Seiten: "Neu auf <Anbieter>" und "Neu im Kino diese Woche".
+// Zeitabhaengig, deshalb nichts in seo_content: Titel und Zahlen kommen bei
+// jedem Cache-Aufbau (1 h) frisch aus streaming_cache/cinema_cache, die
+// Einleitung wird in seoWochen.js daraus gebaut. Regeln (Fenster, Schwelle,
+// Importtage) stehen dort.
+const wochenCache = new Map();   // 'streaming:DE' | 'kino:DE' -> { at, daten }
+
+async function gecacht(key, laden) {
+  const g = wochenCache.get(key);
+  if (g && Date.now() - g.at < BESTENLISTE_TTL_MS) return g.daten;
+  const daten = await laden();
+  wochenCache.set(key, { at: Date.now(), daten });
+  return daten;
+}
+
+function wochenKarte(r, datum) {
+  return {
+    tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
+    genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
+    posterPath: r.poster_path, hatSeite: !!r.hat_seite, datum,
+  };
+}
+
+// Alle Anbieter einer Region in EINER Abfrage (nur Zeilen der letzten 14 Tage
+// kommen zurueck; die Fensterfunktionen zaehlen vorher ueber den ganzen
+// Bestand, daran haengt die Importtag-Regel). Titel ohne eigene Titelseite
+// bleiben drin (ohne Link), sie zaehlen fuer die Schwelle mit.
+async function streamingWochen(region) {
+  return gecacht(`streaming:${region}`, async () => {
+    const [{ rows }, { rows: anbieter }] = await Promise.all([
+      pool.query(
+        `WITH basis AS (
+           SELECT s.provider_id, s.type, s.tmdb_id, s.title, s.year, s.genres, s.poster_path, s.rating,
+                  s.first_seen_at, ${NOTE_SQL} AS note,
+                  count(*) OVER (PARTITION BY s.provider_id) AS gesamt,
+                  count(*) OVER (PARTITION BY s.provider_id, (s.first_seen_at AT TIME ZONE 'Europe/Berlin')::date) AS am_tag
+             FROM streaming_cache s WHERE s.region = $1)
+         SELECT b.*, (titel.tmdb_id IS NOT NULL) AS hat_seite
+           FROM basis b LEFT JOIN ${TITEL_MIT_KENNUNG} ON titel.type = b.type AND titel.tmdb_id = b.tmdb_id
+          WHERE b.first_seen_at >= now() - make_interval(days => $2::int)
+          ORDER BY b.note DESC, b.title`,
+        [region, TAGE_LANG]
+      ),
+      pool.query(
+        `SELECT provider_id, min(provider_name) AS name FROM streaming_cache WHERE region = $1 GROUP BY provider_id`,
+        [region]
+      ),
+    ]);
+    const jetzt = Date.now();
+    const karten = new Map(anbieter.map((a) => [a.provider_id, []]));
+    for (const r of rows) {
+      if (istImportTag(Number(r.am_tag), Number(r.gesamt))) continue;
+      karten.get(r.provider_id)?.push({ ...wochenKarte(r, r.first_seen_at), type: r.type });
+    }
+    const liste = anbieter.map((a) => {
+      const f = streamingFenster(karten.get(a.provider_id), jetzt);
+      return {
+        slug: a.provider_id, name: a.name, tage: f.tage, indexierbar: f.indexierbar,
+        filme: f.eintraege.filter((e) => e.type === 'movie'),
+        serien: f.eintraege.filter((e) => e.type === 'series'),
+      };
+    }).sort((a, b) => (b.filme.length + b.serien.length) - (a.filme.length + a.serien.length));
+    return { stand: heuteBerlin(jetzt), anbieter: liste };
+  });
+}
+
+export async function ladeNeuAufUebersicht(locale) {
+  const d = await streamingWochen(regionFuerLocale(locale));
+  const anbieter = d.anbieter.filter((a) => a.indexierbar);
+  return { stand: d.stand, anbieter, indexierbar: anbieter.length > 0 };
+}
+
+export async function ladeNeuAufAnbieter(anbieterSlug, locale) {
+  const d = await streamingWochen(regionFuerLocale(locale));
+  const a = d.anbieter.find((x) => x.slug === anbieterSlug);
+  if (!a) return null;
+  const andere = d.anbieter.filter((x) => x.indexierbar && x.slug !== anbieterSlug).map((x) => ({ slug: x.slug, name: x.name }));
+  return { ...a, stand: d.stand, andere };
+}
+
+export async function ladeKinoNeustarts(locale) {
+  const region = regionFuerLocale(locale);
+  return gecacht(`kino:${region}`, async () => {
+    const { rows } = await pool.query(
+      `SELECT c.tmdb_id, c.title, c.year, c.genres, c.poster_path, c.rating, c.vote_count,
+              to_char(c.release_date, 'YYYY-MM-DD') AS start,
+              EXISTS (SELECT 1 FROM ${TITEL_MIT_KENNUNG} WHERE titel.type = 'movie' AND titel.tmdb_id = c.tmdb_id) AS hat_seite
+         FROM cinema_cache c
+        WHERE c.region = $1 AND c.release_date BETWEEN (now() AT TIME ZONE 'Europe/Berlin')::date - 13
+                                                    AND (now() AT TIME ZONE 'Europe/Berlin')::date + 7
+        ORDER BY c.release_date DESC, COALESCE(c.vote_count, 0) DESC, c.title`,
+      [region]
+    );
+    const heute = heuteBerlin();
+    const f = kinoFenster(rows.map((r) => ({ ...wochenKarte(r, null), start: r.start })), heute);
+    const staedte = (await staedteListe()).filter((s) => s.anzahl >= MIN_KINOS_STADT)
+      .sort((a, b) => b.anzahl - a.anzahl).slice(0, 12).map((s) => ({ ort: s.ort, slug: slugify(s.ort) }));
+    return { stand: heute, tage: f.tage, gestartet: f.gestartet, naechste: f.naechste, staedte, indexierbar: f.indexierbar };
+  });
+}
+
+// Sitemap: nur Wochen-Seiten, die index,follow tragen (kein noindex in der Sitemap).
+export async function wochenSeitenFuerSitemap(locale) {
+  const [uebersicht, kino] = await Promise.all([ladeNeuAufUebersicht(locale), ladeKinoNeustarts(locale)]);
+  return {
+    stand: uebersicht.stand,
+    neuAuf: uebersicht.indexierbar,
+    anbieter: uebersicht.anbieter.map((a) => a.slug),
+    kinoNeustarts: kino.indexierbar,
   };
 }
 

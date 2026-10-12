@@ -8,10 +8,12 @@ import {
   ladeTitelSeite, ladeGenreSeite, ladeAnbieterSeite, ladeBestenliste, ladeKinoStadt,
   ladeFilmeHub, ladeSerienHub, ladeKinoHub, ladeStreamingHub, ladeBestenlisteHub, ladePersonSeite,
   ladeStartHub, ladePersonenHub, ladeBestenlistenUebersicht, ladeReihenUebersicht, ladeReihe,
+  ladeNeuAufUebersicht, ladeNeuAufAnbieter, ladeKinoNeustarts,
 } from '../lib/seoData.js';
 import {
   seiteTitelDetail, seiteGenre, seiteAnbieter, seiteBestenliste, seiteKinoStadt, seite404, SITE,
   seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart, seitePersonenHub, seiteBestenlistenUebersicht, seiteReihenUebersicht, seiteReihe,
+  seiteNeuAufUebersicht, seiteNeuAufAnbieter, seiteKinoNeustarts,
 } from '../lib/seoRender.js';
 import { sitemapIndex, sitemapBereich, BEREICHE } from '../lib/seoSitemap.js';
 import { track } from '../lib/track.js';
@@ -45,6 +47,8 @@ export function seoAufrufTyp(pfad) {
   }
   // Reihen: Uebersicht 'reihen', einzelne Reihe 'reihe'.
   if (teile[1] === 'reihen' && teile[2]) return 'reihe';
+  if (teile[1] === 'neu-auf') return teile[2] ? 'neu-anbieter' : 'neu-auf';
+  if (teile[1] === 'kino' && teile[2] === 'neustarts') return 'kino-neustarts';
   return teile[1] || 'start';
 }
 export function seoAufrufPfad(pfad) {
@@ -197,6 +201,27 @@ router.get('/:locale/kino', GRENZE, async (req, res) => {
   const { locale } = req.params;
   if (!localeGueltig(locale)) return nichtGefunden(res, locale);
   res.type('html').send(seiteKinoHub(await ladeKinoHub(locale), locale));
+});
+
+// Zeitabhaengige Seiten: Daten werden beim Cache-Aufbau berechnet (seoData.js),
+// HTTP-Cache daher kurz. VOR '/kino/:stadtSlug', sonst frisst der 'neustarts'.
+const WOCHEN_CACHE = 'public, max-age=3600';
+router.get('/:locale/kino/neustarts', GRENZE, async (req, res) => {
+  const { locale } = req.params;
+  if (!localeGueltig(locale)) return nichtGefunden(res, locale);
+  res.set('Cache-Control', WOCHEN_CACHE).type('html').send(seiteKinoNeustarts(await ladeKinoNeustarts(locale), locale));
+});
+router.get('/:locale/neu-auf', GRENZE, async (req, res) => {
+  const { locale } = req.params;
+  if (!localeGueltig(locale)) return nichtGefunden(res, locale);
+  res.set('Cache-Control', WOCHEN_CACHE).type('html').send(seiteNeuAufUebersicht(await ladeNeuAufUebersicht(locale), locale));
+});
+router.get('/:locale/neu-auf/:anbieterSlug', GRENZE, async (req, res) => {
+  const { locale, anbieterSlug } = req.params;
+  if (!localeGueltig(locale)) return nichtGefunden(res, locale);
+  const daten = await ladeNeuAufAnbieter(anbieterSlug, locale);
+  if (!daten) return nichtGefunden(res, locale);
+  res.set('Cache-Control', WOCHEN_CACHE).type('html').send(seiteNeuAufAnbieter(daten, locale));
 });
 
 router.get('/:locale/kino/:stadtSlug', GRENZE, async (req, res) => {
