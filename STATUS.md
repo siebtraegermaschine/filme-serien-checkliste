@@ -235,8 +235,12 @@
   beanstandet. Gemeinsame Datenzugriffe in `personen-daten.mjs`,
   Selbstprüfung für Bearbeiter ohne DB: `personen-selbstcheck.mjs`
   (im Auftrag `seo-auftrag-personen.md` verlinkt). Pilot: 119 von 120 Texten
-  live. Zweite Runde (150 Zufallsrollen, 10 Subagenten): alle 150 bestehen
-  den neuen Prüfer im Probelauf, Einspielen live war nicht freigegeben.
+  live. Danach 3 Abo-Runden à 150 (10 Subagenten, ohne Geld) live
+  eingespielt, alle ohne Beanstandung; Kris Wu (schauspieler:1390948,
+  Haftstrafe in der Biografie) bewusst nicht eingespielt, bleibt offen.
+  Restbestand 12.10.2026: 2.223 offene Rollen (612 Regie). Weiter per
+  `.a2`-Muster: `personen-pakete.mjs --mischen rN`, Texte, `personen-selbstcheck.mjs`,
+  `personen-einspielen.mjs` (Probelauf, dann echt). Alternativ Batch:
   Rest per Batch vorbereitet, NICHT gestartet: nach Läufen 3/4 ca. 0,005 $
   je Eintrag, also ca. 13 $ für ~2.500 Rollen (Obergrenze 20 $):
   `ANTHROPIC_API_KEY=… node scripts/personen-batch.mjs --limit 2500 --max-kosten 20`
