@@ -5,7 +5,7 @@
 import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
 import { SITE } from './seoRender.js';
-import { SEO_LOCALES } from './seoLocale.js';
+import { SEO_LOCALES, hatSeitenart } from './seoLocale.js';
 import {
   personenFuerSitemap, titelFuerSitemap, genresFuerSitemap, anbieterFuerSitemap,
   staedteFuerSitemap, alleBestenlisten, reihenFuerSitemap, wochenSeitenFuerSitemap,
@@ -13,6 +13,12 @@ import {
 import { schluesselZuPfad } from './seoBestenlisten.js';
 
 export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person', 'reihe'];
+
+// Bereich -> Seitenart (seoLocale.js). Nicht-de-Locales fuehren nur lokalisierte Arten.
+const ART_JE_BEREICH = { titel: 'titel', hub: 'start' };
+export function bereichFuerLocale(locale, bereich) {
+  return hatSeitenart(locale, ART_JE_BEREICH[bereich] || bereich);
+}
 
 // Hub-Seiten ('start' = /<locale>/ selbst) und die deutschen Rechtstexte.
 const HUBS = ['start', 'filme', 'serien', 'kino', 'streaming', 'bestenlisten', 'reihen', 'beste-filme', 'beste-serien', 'schauspieler', 'regisseur'];
@@ -53,10 +59,13 @@ async function urlsFuerBereich(locale, bereich) {
     return urls;
   }
 
+  if (!bereichFuerLocale(locale, bereich)) return [];
   const stand = await textStaende(bereich, locale);
 
   if (bereich === 'titel') {
-    return (await titelFuerSitemap()).map((t) => ({
+    // Nicht-de: nur Titel mit Text in dieser Sprache (ohne Text ist die Seite noindex).
+    const alle = await titelFuerSitemap();
+    return (locale === 'de-de' ? alle : alle.filter((t) => stand.has(`${t.type}:${t.tmdb_id}`))).map((t) => ({
       loc: `${SITE}/${locale}/${t.type === 'series' ? 'serie' : 'film'}/${slugify(t.title)}-${t.tmdb_id}`,
       lastmod: stand.get(`${t.type}:${t.tmdb_id}`) || null,
     }));
@@ -93,6 +102,10 @@ async function urlsFuerBereich(locale, bereich) {
     return (await staedteFuerSitemap()).map((slug) => ({
       loc: `${SITE}/${locale}/kino/${slug}`, lastmod: stand.get(slug) || null,
     }));
+  }
+
+  if (bereich === 'hub' && locale !== 'de-de') {
+    return stand.has('start') ? [{ loc: `${SITE}/${locale}/`, lastmod: stand.get('start') }] : [];
   }
 
   if (bereich === 'hub') {
@@ -135,6 +148,7 @@ export async function sitemapIndex() {
   const zeilen = [];
   for (const locale of SEO_LOCALES) {
     for (const bereich of BEREICHE) {
+      if (!bereichFuerLocale(locale, bereich)) continue;
       zeilen.push(`  <sitemap><loc>${xmlEsc(`${SITE}/sitemap-${locale}-${bereich}.xml`)}</loc></sitemap>`);
     }
   }

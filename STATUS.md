@@ -318,3 +318,48 @@
 - **Runde 26**: 150 Langtexte per Faecher-Verfahren (Abo, keine API-Kosten) eingespielt; 6 Faktenverdachte (Zahlen/„Dreharbeiten“) umformuliert und nachgespielt.
 - **Befund**: ca. 600 Titel ohne `tmdb_id` kommen in den Paketen nicht vor, nicht angefasst.
 - **Als Nächstes**: Runde 27 per `scripts/seo-runde.sh` (in zsh ohne nomatch-Fehler; im Worktree Schritte einzeln).
+
+## Mehrsprachigkeit vorbereitet (12.10.2026, Worktree, noch nicht live)
+
+**Gebaut (Technik, alles noindex außer de-de):** Locale-Stufen aktiv vs.
+indexierbar in `backend/lib/seoLocale.js`; `seoTexte.js` (Chrome-Texte
+DE/EN/ES/FR/IT/NL/PT), `genreNamen.js` (Genre-Namen aus index.html), Render
+lokalisiert für Start, Titel, 404 (`seoRender.js`). Nicht lokalisierte
+Seitenarten (alles außer `start`/`titel`) liefern in Nicht-de-Locales 404 und
+werden dort nirgends verlinkt. hreflang nur über vorhandene Titeltexte
+(`textLocales`), x-default → de-de. Sitemaps nur für indexierbare Locales,
+Titel nur mit Text. `index.html` unverändert, Rechtstexte unverändert (Footer
+verweist auf `imprint.html`/`privacy.html`). en-us/pt-br inaktiv (Nicht-EWR).
+Pilot: 10 en-gb- und 10 es-es-Titeltexte in `backend/scripts/seo-pilot-en-es.mjs`
+(aus dem Datensatz geschrieben, NICHT in die DB eingespielt).
+
+**Entscheidungen für Christian:**
+1. Sollen die sechs Locales (en-gb, es-es, fr-fr, it-it, nl-nl, pt-pt) im Netz
+   aktiv geschaltet werden (zunächst noindex)? Erst dann Push auf main.
+2. Slugs/Pfadwörter bleiben deutsch in allen Locales — lokalisieren, ja/nein?
+3. Muttersprachler-Review der maschinellen FR/ES/IT/NL/PT-UI-Texte und der
+   Pilot-Texte, bevor eine Locale indexierbar wird.
+4. Anwaltsprüfung der englischen Rechtsentwürfe vor Indexierung.
+5. Englisch: Code `en-gb` (SEO-Locale) oder `en-us` (Nicht-EWR, inaktiv)?
+6. Welche Locale zuerst indexierbar, und wann.
+7. Weitere Seitenarten lokalisieren (Hubs, Genre, Streaming, Personen, Reihen,
+   Bestenlisten, Kino, neu-auf)? Bisher nur Start/Titel.
+8. Lokalisierte Titel in Listenkarten (Lücke: `TITEL_MIT_KENNUNG` ohne
+   `title_en`).
+9. Kosten Batch-Lauf (siehe unten) — nur mit Freigabe.
+
+**Kostenplan Batch (NICHT gestartet).** Basis: letzter Lauf 8.950 Texte =
+67,42 $ echt (~0,0075 $/Text, Sonnet 5, Batch). Bei rund 20.000 Titeln mit
+de-Text: ca. 150 $ je Locale (Sonnet 5), ca. 60 $ mit Haiku 4.5 (vorher 50
+Texte vergleichen). Reihenfolge, jeweils auf dem Server in `/opt/movietaste/backend`:
+```
+# 1. Trockenlauf, schreibt nichts, Kosten ~0,4 $
+ANTHROPIC_API_KEY=... node scripts/seo-batch.mjs --locale en-gb --stufe B --limit 50 --dry-run --max-kosten 2
+# 2. Erster echter Teillauf (nach Sichtprüfung), ca. 7,5 $
+ANTHROPIC_API_KEY=... node scripts/seo-batch.mjs --locale en-gb --stufe B --min-votes 1000 --limit 1000 --chunk-groesse 250 --max-kosten 10 --status-datei scripts/.seo-batch-en-gb.json --journal scripts/.seo-batch-en-gb.jsonl
+# 3. Vollauf einer Locale, ca. 150 $
+ANTHROPIC_API_KEY=... node scripts/seo-batch.mjs --locale en-gb --stufe B --max-kosten 160 --status-datei scripts/.seo-batch-en-gb.json --journal scripts/.seo-batch-en-gb.jsonl
+```
+Vorher prüfen, dass kein anderer Batch-Lauf aktiv ist (Statusdateien!).
+Texte wirken erst für hreflang/Sitemap, wenn die Locale zusätzlich in
+`SEO_LOCALES` indexierbar geschaltet ist.

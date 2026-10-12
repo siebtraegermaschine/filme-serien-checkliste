@@ -2,7 +2,9 @@
 // (PLAN-SEO.md, Plan "SEO-Seiten: technische Umsetzung"). Kein Splicing wie
 // bei der App-OG-Route (server.js) -- jede Funktion hier gibt ein fertiges
 // Dokument zurueck. Kein App-JS, eigenes seo.css (Architektur-Entscheidung 1).
-import { hreflangCode } from './seoLocale.js';
+import { hreflangCode, hatSeitenart, localeIndexierbar, sprachVon } from './seoLocale.js';
+import { seoTexte, ABSCHNITTE, zahlFormat } from './seoTexte.js';
+import { genreAnzeige } from './genreNamen.js';
 import { listeSeitenPfad, THEMEN, jahrzehntName, LAUFZEITEN, STAFFELN } from './seoBestenlisten.js';
 import { slugify } from './slug.js';
 import { streamingEinleitung, kinoEinleitung, datumDeutsch, fensterWort } from './seoWochen.js';
@@ -37,6 +39,9 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   const hreflangs = (alternates && alternates.length ? alternates : [{ locale, pfad }])
     .map((a) => `<link rel="alternate" hreflang="${attrEsc(hreflangCode(a.locale))}" href="${attrEsc(wurzel + a.pfad)}">`)
     .join('\n  ');
+  // x-default zeigt auf die de-de-Fassung, sofern der Cluster sie kennt.
+  const de = (alternates || []).find((a) => a.locale === 'de-de');
+  const xDefault = de ? wurzel + de.pfad : url;
   const ld = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
   return `<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +50,7 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   <meta name="robots" content="${robots}">
   <link rel="canonical" href="${attrEsc(url)}">
   ${hreflangs}
-  <link rel="alternate" hreflang="x-default" href="${attrEsc(url)}">
+  <link rel="alternate" hreflang="x-default" href="${attrEsc(xDefault)}">
   <link rel="stylesheet" href="/seo.css">
   <script src="/consent.js" defer></script>
   <link rel="icon" href="${attrEsc(favicon || '/favicon-32.png')}">
@@ -57,11 +62,11 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   ${ld.map((obj) => `<script type="application/ld+json">${JSON.stringify(obj)}</script>`).join('\n  ')}`;
 }
 
-function kopfzeile() {
+function kopfzeile(locale = 'de-de') {
   return `<header class="seo-kopf">
     <a class="marke" href="${SITE}/">Movie<span>Match</span></a>
     <nav class="seo-nav">
-      <a href="${SITE}/?von=app">Zur App</a>
+      <a href="${SITE}/?von=app">${attrEsc(seoTexte(locale).zurApp)}</a>
     </nav>
   </header>`;
 }
@@ -74,24 +79,29 @@ export const FOOTER_BEREICHE = [
 ];
 
 function fusszeile(locale) {
+  const T = seoTexte(locale);
+  const de = locale === 'de-de';
+  // Nicht-de-Locales verlinken nur Bereiche, die dort lokalisiert sind; die Rechtstexte
+  // sind dort die englischen Fassungen (imprint/privacy).
+  const bereiche = de ? FOOTER_BEREICHE.map(([pfad, name]) => [pfad, name]) : [];
   return `<footer>
-    <nav class="footer-seo" aria-label="Übersichtsseiten">
-      ${FOOTER_BEREICHE.map(([pfad, name]) => `<a href="/${locale}/${pfad}">${name}</a>`).join('\n      ')}
-    </nav>
-    <a href="${SITE}/impressum.html">Impressum</a>
-    <a href="${SITE}/datenschutz.html">Datenschutz</a>
-    <a href="#" data-cookie-einstellungen>Cookie-Einstellungen</a>
+    ${bereiche.length ? `<nav class="footer-seo" aria-label="${attrEsc(T.uebersichtsseiten)}">
+      ${bereiche.map(([pfad, name]) => `<a href="/${locale}/${pfad}">${name}</a>`).join('\n      ')}
+    </nav>` : ''}
+    <a href="${SITE}/${de ? 'impressum' : 'imprint'}.html">${attrEsc(T.impressum)}</a>
+    <a href="${SITE}/${de ? 'datenschutz' : 'privacy'}.html">${attrEsc(T.datenschutz)}</a>
+    <a href="#" data-cookie-einstellungen>${attrEsc(T.cookies)}</a>
   </footer>`;
 }
 
 export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml, basis, kopfHtml, fussHtml, favicon }) {
   return `<!DOCTYPE html>
-<html lang="${locale.split('-')[0]}">
+<html lang="${sprachVon(locale)}">
 <head>
   ${kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis, favicon })}
 </head>
 <body>
-  ${kopfHtml || kopfzeile()}
+  ${kopfHtml || kopfzeile(locale)}
   <main>
     ${bodyHtml}
   </main>
@@ -112,42 +122,50 @@ function kurzfassung(text, laenge = 160) {
   return t.slice(0, platz > 0 ? platz : laenge) + '…';
 }
 
-function bewertungsZeile(titel) {
+function bewertungsZeile(titel, locale = 'de-de') {
+  const sprache = sprachVon(locale);
   const teile = [];
   if (titel.rating != null && titel.rating > 0) {
-    teile.push('⭐ ' + String(titel.rating).replace('.', ','));
+    teile.push('⭐ ' + String(titel.rating).replace('.', sprache === 'en' ? '.' : ','));
   }
   if (titel.year) teile.push(String(titel.year));
-  if (titel.genres && titel.genres.length) teile.push(titel.genres.join(', '));
+  if (titel.genres && titel.genres.length) teile.push(titel.genres.map((g) => genreAnzeige(g, sprache)).join(', '));
   return teile.join(' · ');
 }
 
 function anbieterHtml(name, anbieterSlug, locale) {
-  return anbieterSlug
+  return anbieterSlug && hatSeitenart(locale, 'anbieter')
     ? `<a href="/${locale}/streaming/${anbieterSlug}">${attrEsc(name)}</a>`
     : attrEsc(name);
 }
 
 function verfuegbarkeitHtml(streaming, locale) {
   const flatrate = streaming.flatrate || [];
-  if (!flatrate.length) return '<p class="hinweis">Aktuell bei keinem bekannten Streaming-Anbieter im Abo verfuegbar.</p>';
-  return `<p>Im Abo verfuegbar bei: ${flatrate.map((p) => anbieterHtml(p.name, p.anbieterSlug, locale)).join(', ')}.</p>`;
+  const T = seoTexte(locale);
+  if (!flatrate.length) return `<p class="hinweis">${attrEsc(T.keinAbo)}</p>`;
+  return `<p>${T.imAbo(flatrate.map((p) => anbieterHtml(p.name, p.anbieterSlug, locale)).join(', '))}</p>`;
 }
 
 function genreHref(genre, type, locale) {
   return `/${locale}/${type === 'series' ? 'serien' : 'filme'}/${slugify(genre)}`;
 }
 
+// Die Genre-Namen aus der Datenbank sind deutsch; andere Sprachen zeigen die
+// Namen aus genreNamen.js. Verlinkt wird nur, wo die Genre-Seite lokalisiert ist.
 function genreLinksHtml(genres, type, locale) {
-  return (genres || []).map((g) => `<a href="${genreHref(g, type, locale)}">${attrEsc(g)}</a>`).join(', ');
+  const sprache = sprachVon(locale);
+  return (genres || []).map((g) => {
+    const name = attrEsc(genreAnzeige(g, sprache));
+    return hatSeitenart(locale, 'genre') ? `<a href="${genreHref(g, type, locale)}">${name}</a>` : name;
+  }).join(', ');
 }
 
 // Breadcrumbs dienen der Crawlbarkeit UND dem Nutzer: sichtbare Navigation
 // nach oben (Titel -> Genre -> Hub -> Start), zusaetzlich als BreadcrumbList
 // strukturierte Daten. `kette` ist [{label, href}], das letzte Glied (die
 // aktuelle Seite) traegt kein href.
-export function brotkrumenHtml(kette) {
-  return `<nav class="brotkrumen" aria-label="Brotkrumen">${kette.map((k, i) =>
+export function brotkrumenHtml(kette, locale = 'de-de') {
+  return `<nav class="brotkrumen" aria-label="${attrEsc(seoTexte(locale).brotkrumen)}">${kette.map((k, i) =>
     (i > 0 ? ' › ' : '') + (k.href ? `<a href="${k.href}">${attrEsc(k.label)}</a>` : `<span>${attrEsc(k.label)}</span>`)
   ).join('')}</nav>`;
 }
@@ -226,35 +244,45 @@ function parseNeueAbschnitte(text) {
   return Object.keys(ergebnis).length ? ergebnis : null;
 }
 
-function inhaltHtmlBauen(text) {
+function inhaltHtmlBauen(text, locale = 'de-de') {
+  const T = seoTexte(locale);
   const neu = parseNeueAbschnitte(text);
   if (neu) {
-    return NEUE_ABSCHNITTE
+    return (ABSCHNITTE[sprachVon(locale)] || NEUE_ABSCHNITTE)
       .filter((h) => neu[h])
       .map((h) => `<h2>${attrEsc(h)}</h2>${absaetzeHtml(neu[h].split('\n\n').map((p) => p.trim()).filter(Boolean))}`)
       .join('');
   }
   const { worum, warum } = textAbschnitte(text);
-  return `<h2>Worum es geht</h2>${worum ? absaetzeHtml(worum) : '<p class="hinweis">Beschreibung folgt in Kuerze.</p>'}`
+  return `<h2>${attrEsc((ABSCHNITTE[sprachVon(locale)] || NEUE_ABSCHNITTE)[0])}</h2>${worum ? absaetzeHtml(worum) : `<p class="hinweis">${attrEsc(T.keineBeschreibung)}</p>`}`
     + (warum ? `<h2>Warum sich der Titel lohnt</h2>${absaetzeHtml(warum)}` : '');
 }
 
 export function seiteTitelDetail(titel, locale) {
   const artWort = titel.type === 'series' ? 'serie' : 'film';
   const listenWort = titel.type === 'series' ? 'serien' : 'filme';
-  const hubWort = titel.type === 'series' ? 'Serien' : 'Filme';
+  const T = seoTexte(locale);
+  const sprache = sprachVon(locale);
+  const hubWort = T.bereiche[listenWort];
+  const zahl = (n, opt) => zahlFormat(n, locale, opt);
+  const dez = (n) => String(n).replace('.', sprache === 'en' ? '.' : ',');
   const pfad = `/${locale}/${artWort}/${titel.slug}-${titel.tmdbId}`;
-  const titelZeile = `${titel.title}${titel.year ? ' (' + titel.year + ')' : ''} — Stream, Bewertung & Kino | MovieMatch`;
-  const beschreibung = kurzfassung(titel.text) || `${titel.title}: Verfuegbarkeit, Bewertung und mehr auf MovieMatch.`;
+  const titelZeile = `${titel.title}${titel.year ? ' (' + titel.year + ')' : ''} — ${T.titelSuffix} | MovieMatch`;
+  const beschreibung = kurzfassung(titel.text) || T.titelBeschr(titel.title);
+  // Nicht-de-Locales: index nur, wenn die Locale freigegeben ist UND ein Text in
+  // dieser Sprache existiert -- sonst stuende deutsche/englische Katalogware im Index.
+  const indexierbar = locale === 'de-de'
+    ? titel.indexierbar
+    : !!(titel.indexierbar && localeIndexierbar(locale) && titel.text);
   const bild = titel.backdropPath
     ? 'https://image.tmdb.org/t/p/w1280' + titel.backdropPath
     : (titel.posterPath ? 'https://image.tmdb.org/t/p/w500' + titel.posterPath : null);
   const erstesGenre = (titel.genres || [])[0];
 
   const kette = [
-    { label: 'Start', href: SITE + '/' },
-    { label: hubWort, href: `/${locale}/${listenWort}` },
-    ...(erstesGenre ? [{ label: erstesGenre, href: genreHref(erstesGenre, titel.type, locale) }] : []),
+    { label: T.start, href: SITE + '/' },
+    ...(hatSeitenart(locale, 'hub') ? [{ label: hubWort, href: `/${locale}/${listenWort}` }] : []),
+    ...(erstesGenre && hatSeitenart(locale, 'genre') ? [{ label: genreAnzeige(erstesGenre, sprache), href: genreHref(erstesGenre, titel.type, locale) }] : []),
     { label: titel.title },
   ];
 
@@ -263,7 +291,7 @@ export function seiteTitelDetail(titel, locale) {
     '@type': titel.type === 'series' ? 'TVSeries' : 'Movie',
     name: titel.title,
     datePublished: titel.year ? String(titel.year) : undefined,
-    genre: titel.genres,
+    genre: (titel.genres || []).map((g) => genreAnzeige(g, sprache)),
     director: titel.director ? { '@type': 'Person', name: titel.director } : undefined,
     actor: (titel.castNames || []).slice(0, 8).map((n) => ({ '@type': 'Person', name: n })),
     aggregateRating: titel.communityBewertung ? {
@@ -282,24 +310,24 @@ export function seiteTitelDetail(titel, locale) {
 
   const faktenZeilen = [
     // Bei Serien fuehrt das Feld die Idee/Entwicklung (TMDB created_by), keine Regie.
-    titel.director ? [titel.type === 'series' ? 'Idee' : 'Regie', titel.regisseurPersonId
+    titel.director ? [titel.type === 'series' ? T.idee : T.regie, titel.regisseurPersonId && hatSeitenart(locale, 'person')
       ? `<a href="/${locale}/regisseur/${slugify(titel.director)}-${titel.regisseurPersonId}">${attrEsc(titel.director)}</a>`
       : attrEsc(titel.director)] : null,
-    (titel.genres || []).length ? ['Genre', genreLinksHtml(titel.genres, titel.type, locale)] : null,
-    titel.laufzeitMinuten ? ['Laufzeit', `${titel.laufzeitMinuten} Minuten`] : null,
-    titel.erscheinungsdatum ? ['Erscheinungsdatum', titel.erscheinungsdatum] : (titel.year ? ['Jahr', String(titel.year)] : null),
-    titel.certification ? ['Altersfreigabe', 'FSK ' + attrEsc(titel.certification)] : null,
-    titel.budget ? ['Budget', `${Number(titel.budget).toLocaleString('de-DE')} $`] : null,
-    titel.einspielergebnis ? ['Einspielergebnis', `${Number(titel.einspielergebnis).toLocaleString('de-DE')} $`] : null,
-    titel.rating != null ? ['TMDB-Bewertung', String(titel.rating).replace('.', ',') + (titel.voteCount ? ` (${titel.voteCount.toLocaleString('de-DE')} Stimmen)` : '')] : null,
+    (titel.genres || []).length ? [T.genre, genreLinksHtml(titel.genres, titel.type, locale)] : null,
+    titel.laufzeitMinuten ? [T.laufzeit, T.minuten(titel.laufzeitMinuten)] : null,
+    titel.erscheinungsdatum ? [T.erscheinung, titel.erscheinungsdatum] : (titel.year ? [T.jahr, String(titel.year)] : null),
+    titel.certification ? [T.freigabe, attrEsc(T.freigabeWert(titel.certification))] : null,
+    titel.budget ? [T.budget, `${zahl(titel.budget)} $`] : null,
+    titel.einspielergebnis ? [T.einspiel, `${zahl(titel.einspielergebnis)} $`] : null,
+    titel.rating != null ? [T.tmdb, dez(titel.rating) + (titel.voteCount ? ` (${T.stimmen(zahl(titel.voteCount))})` : '')] : null,
     // Vorerst ausgeblendet, solange keine Community-Bewertung vorliegt (Christian,
     // 17.09.2026) -- statt der Platzhalterzeile "noch unter der Mindestzahl" faellt
     // die Zeile ueber .filter(Boolean) einfach weg, wie bei den anderen optionalen Fakten.
     titel.communityBewertung
-      ? ['Community-Bewertung', `${String(titel.communityBewertung.durchschnitt).replace('.', ',')} von 10 (${titel.communityBewertung.gesamt} Bewertungen)`]
+      ? [T.community, T.communityWert(dez(titel.communityBewertung.durchschnitt), titel.communityBewertung.gesamt)]
       : null,
     (titel.streaming.flatrate || []).length
-      ? ['Verfügbar bei', titel.streaming.flatrate.map((p) => anbieterHtml(p.name, p.anbieterSlug, locale)).join(', ')]
+      ? [T.verfuegbarBei, titel.streaming.flatrate.map((p) => anbieterHtml(p.name, p.anbieterSlug, locale)).join(', ')]
       : null,
   ].filter(Boolean);
   const faktenHtml = `<table class="fakten">${faktenZeilen.map(([k, v]) => `<tr><th>${attrEsc(k)}</th><td>${v}</td></tr>`).join('')}</table>`;
@@ -307,69 +335,73 @@ export function seiteTitelDetail(titel, locale) {
   // Besetzung MIT Rollennamen, wenn vorhanden (titeldetails.js) -- sonst
   // Ruecksturz auf die reine Namensliste aus titles.cast_names.
   const schauspielerIds = titel.schauspielerIds || new Map();
-  const schauspielerName = (name) => schauspielerIds.has(name)
+  const schauspielerName = (name) => schauspielerIds.has(name) && hatSeitenart(locale, 'person')
     ? `<a href="/${locale}/schauspieler/${slugify(name)}-${schauspielerIds.get(name)}">${attrEsc(name)}</a>`
     : attrEsc(name);
   const besetzungHtml = (titel.besetzungRollen && titel.besetzungRollen.length)
-    ? `<ul class="besetzung-liste">${titel.besetzungRollen.map((c) => `<li><b>${schauspielerName(c.name)}</b>${c.rolle ? ` als ${attrEsc(c.rolle)}` : ''}</li>`).join('')}</ul>`
+    ? `<ul class="besetzung-liste">${titel.besetzungRollen.map((c) => `<li><b>${schauspielerName(c.name)}</b>${c.rolle ? ` ${attrEsc(T.als)} ${attrEsc(c.rolle)}` : ''}</li>`).join('')}</ul>`
     : ((titel.castNames || []).length
       ? `<p>${titel.castNames.slice(0, 10).map(schauspielerName).join(', ')}</p>`
-      : '<p class="hinweis">Keine Besetzung hinterlegt.</p>');
+      : `<p class="hinweis">${attrEsc(T.keineBesetzung)}</p>`);
 
   const trailerHtml = titel.trailerKey
-    ? `<h2>Trailer</h2><div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/${attrEsc(titel.trailerKey)}" title="Trailer zu ${attrEsc(titel.title)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`
+    ? `<h2>${attrEsc(T.trailer)}</h2><div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/${attrEsc(titel.trailerKey)}" title="${attrEsc(T.trailerVon(titel.title))}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`
     : '';
 
   const bilderHtml = (titel.bilder || []).length
-    ? `<h2>Bilder</h2><div class="galerie">${titel.bilder.map((pfad) => `<img src="https://image.tmdb.org/t/p/w500${attrEsc(pfad)}" alt="${attrEsc(titel.title)}" loading="lazy">`).join('')}</div>`
+    ? `<h2>${attrEsc(T.bilder)}</h2><div class="galerie">${titel.bilder.map((pfad) => `<img src="https://image.tmdb.org/t/p/w500${attrEsc(pfad)}" alt="${attrEsc(titel.title)}" loading="lazy">`).join('')}</div>`
     : '';
 
-  const regisseurName = titel.regisseurPersonId
+  const regisseurName = titel.regisseurPersonId && hatSeitenart(locale, 'person')
     ? `<a href="/${locale}/regisseur/${slugify(titel.director)}-${titel.regisseurPersonId}">${attrEsc(titel.director)}</a>`
     : attrEsc(titel.director);
-  const regisseurFilmeHtml = titel.regisseurFilme.length
-    ? `<h3>Weitere Filme von ${regisseurName}</h3><div class="raster">${titel.regisseurFilme.map((t) => karte(t, artWort, locale)).join('')}</div>`
+  const regisseurFilmeHtml = titel.regisseurFilme.length && hatSeitenart(locale, 'titel')
+    ? `<h3>${T.weitereVon(regisseurName)}</h3><div class="raster">${titel.regisseurFilme.map((t) => karte(t, artWort, locale)).join('')}</div>`
     : '';
 
-  const reiheHtml = titel.reihe
-    ? `<p class="hinweis">Teil der Reihe <a href="/${locale}/reihen/${attrEsc(titel.reihe.slug)}">${attrEsc(titel.reihe.name)}</a> — alle ${titel.reihe.anzahl} Filme in Erscheinungsreihenfolge.</p>`
+  const reiheHtml = titel.reihe && hatSeitenart(locale, 'reihe')
+    ? `<p class="hinweis">${T.reiheTeil(`<a href="/${locale}/reihen/${attrEsc(titel.reihe.slug)}">${attrEsc(titel.reihe.name)}</a>`, titel.reihe.anzahl)}</p>`
     : '';
 
   const aehnlicheHtml = titel.aehnlicheTitel.length
-    ? `<h2>Ähnliche Titel</h2><div class="raster">${titel.aehnlicheTitel.map((t) => karte(t, artWort, locale)).join('')}</div>`
+    ? `<h2>${attrEsc(T.aehnliche)}</h2><div class="raster">${titel.aehnlicheTitel.map((t) => karte(t, artWort, locale)).join('')}</div>`
     : '';
 
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
+    ${brotkrumenHtml(kette, locale)}
     <div class="detail-kopf">
       ${posterHtml}
       <div>
         <h1>${attrEsc(titel.title)}${titel.year ? ` <span class="hinweis">(${titel.year})</span>` : ''}</h1>
-        <div class="meta-zeile">${attrEsc(bewertungsZeile(titel))}</div>
-        <a class="cta" href="${SITE}/t/${titel.type}/${titel.tmdbId}?von=titel">Zur Watchlist hinzufügen</a>
+        <div class="meta-zeile">${attrEsc(bewertungsZeile(titel, locale))}</div>
+        <a class="cta" href="${SITE}/t/${titel.type}/${titel.tmdbId}?von=titel">${attrEsc(T.cta)}</a>
       </div>
     </div>
-    <h2>Kurzüberblick</h2>
+    <h2>${attrEsc(T.kurz)}</h2>
     ${faktenHtml}
     ${trailerHtml}
-    ${inhaltHtmlBauen(titel.text)}
+    ${inhaltHtmlBauen(titel.text, locale)}
     ${bilderHtml}
-    <h2>Besetzung & Stab</h2>
+    <h2>${attrEsc(T.besetzung)}</h2>
     ${besetzungHtml}
     ${regisseurFilmeHtml}
     ${reiheHtml}
     ${aehnlicheHtml}
-    <h2>Verfügbarkeit</h2>
+    <h2>${attrEsc(T.verfuegbarkeit)}</h2>
     ${verfuegbarkeitHtml(titel.streaming, locale)}
   `;
 
-  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: titel.indexierbar, bild, jsonLd, bodyHtml });
+  // hreflang-Cluster: nur indexierbare Locales mit Text; die eigene Seite gehoert nur dazu, wenn sie indexiert wird.
+  const alternates = (titel.textLocales || [])
+    .filter((l) => localeIndexierbar(l))
+    .map((l) => ({ locale: l, pfad: `/${l}/${artWort}/${titel.slug}-${titel.tmdbId}` }));
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates: alternates.length ? alternates : undefined, bodyHtml });
 }
 
-function textBlock(text) {
+function textBlock(text, locale = 'de-de') {
   return text
     ? `<div class="seo-text">${text.split('\n\n').map((p) => `<p>${attrEsc(p)}</p>`).join('')}</div>`
-    : '<p class="hinweis">Beschreibung folgt in Kuerze.</p>';
+    : `<p class="hinweis">${attrEsc(seoTexte(locale).keineBeschreibung)}</p>`;
 }
 
 // Aufrufer geben artWort ('film'|'serie') mit, da eine Trefferliste (Genre/
@@ -818,25 +850,28 @@ const START_BEREICHE = [
 
 export function seiteStart(daten, locale) {
   const pfad = `/${locale}/`;
-  const titelZeile = 'Filme & Serien im Überblick | MovieMatch';
-  const beschreibung = kurzfassung(daten.text)
-    || 'Filme und Serien nach Genre, Bestenlisten, Streaming-Anbieter und Kinostarts im Überblick.';
+  const T = seoTexte(locale);
+  const titelZeile = `${T.startTitel} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || T.startBeschr;
+  const indexierbar = locale === 'de-de' ? daten.indexierbar : !!(daten.indexierbar && localeIndexierbar(locale) && daten.text);
+  // Kacheln nur fuer Bereiche, die in dieser Locale existieren.
+  const bereiche = locale === 'de-de' ? START_BEREICHE : [];
   // Kein Breadcrumb: Diese Seite IST die Wurzel des SEO-Baums, eine Kette mit
   // einem einzigen Glied waere weder fuer Nutzer noch fuer Google von Nutzen.
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'CollectionPage', name: titelZeile,
-    hasPart: START_BEREICHE.map((b) => ({ '@type': 'WebPage', name: b.titel, url: `${SITE}/${locale}/${b.pfad}` })),
+    hasPart: bereiche.map((b) => ({ '@type': 'WebPage', name: b.titel, url: `${SITE}/${locale}/${b.pfad}` })),
   }];
-  const kachelnHtml = START_BEREICHE.map((b) => `<li>
+  const kachelnHtml = bereiche.map((b) => `<li>
       <a href="/${locale}/${b.pfad}"><strong>${attrEsc(b.titel)}</strong></a>
       <span>${attrEsc(b.text)}</span>
     </li>`).join('');
   const bodyHtml = `
-    <h1>Filme &amp; Serien im Überblick</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
-    <ul class="start-bereiche">${kachelnHtml}</ul>
+    <h1>${attrEsc(T.startTitel)}</h1>
+    <p class="einleitung">${textBlock(daten.text, locale)}</p>
+    ${kachelnHtml ? `<ul class="start-bereiche">${kachelnHtml}</ul>` : ''}
   `;
-  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, jsonLd, bodyHtml });
 }
 
 // Zwei Saetze nur aus Katalogdaten, fuer Personen ohne Redaktionstext und
@@ -992,13 +1027,14 @@ export function seiteKinoNeustarts(daten, locale) {
 }
 
 export function seite404(locale) {
+  const T = seoTexte(locale);
   return dokument({
     locale,
     pfad: `/${locale}/`,
-    titelZeile: 'Seite nicht gefunden | MovieMatch',
-    beschreibung: 'Diese Seite gibt es nicht (mehr).',
+    titelZeile: `${T.nf404Titel} | MovieMatch`,
+    beschreibung: T.nf404Beschr,
     indexierbar: false,
-    bodyHtml: '<h1>Seite nicht gefunden</h1><p>Vielleicht wurde der Titel/die Seite entfernt.</p>',
+    bodyHtml: `<h1>${attrEsc(T.nf404Titel)}</h1><p>${attrEsc(T.nf404Text)}</p>`,
   });
 }
 

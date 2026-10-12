@@ -127,13 +127,15 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
   if (!titel || titel.tmdb_id == null) return null;
 
   const region = regionFuerLocale(locale);
-  const [bewertung, streamingRows, text, regisseurRows, aehnlicheRows, details, trailer] = await Promise.all([
+  const [bewertung, streamingRows, text, fassungenRows, regisseurRows, aehnlicheRows, details, trailer] = await Promise.all([
     bewertungFuerTitel(titel.id),
     pool.query(
       `SELECT flatrate, rent, buy FROM watch_providers_cache WHERE tmdb_id = $1 AND type = $2 AND region = $3`,
       [titel.tmdb_id, type, region]
     ),
     ladeSeoText('titel', `${type}:${titel.tmdb_id}`, locale),
+    // Sprachfassungen mit Text -- Grundlage des hreflang-Clusters.
+    pool.query(`SELECT locale FROM seo_content WHERE bereich = 'titel' AND schluessel = $1`, [`${type}:${titel.tmdb_id}`]),
     // "Weitere Filme von X" -- nur, wenn eine Regie bekannt ist.
     titel.director
       ? pool.query(
@@ -210,6 +212,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     trailerKey: trailer ? trailer.key : null,
     reihe: await reiheFuerTitel(titel.collection_id),
     text,
+    textLocales: fassungenRows.rows.map((r) => r.locale),
     indexierbar: true,
   };
 }

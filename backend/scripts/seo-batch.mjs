@@ -30,7 +30,7 @@
 //   ANTHROPIC_API_KEY=... node scripts/seo-batch.mjs --max-kosten 120
 //
 // Optionen:
-//   --locale CODE        de-de (Standard), en-us, es-es, fr-fr, it-it, nl-nl, pt-pt
+//   --locale CODE        de-de (Standard), en-gb, en-us, es-es, fr-fr, it-it, nl-nl, pt-pt
 //   --limit N            Hoechstzahl Titel insgesamt (Standard: alle offenen)
 //   --chunk-groesse N    Titel je Batch (Standard 1000)
 //   --intervall N        Sekunden zwischen Status-Abfragen (Standard 30)
@@ -57,6 +57,7 @@ const MAX_WOERTER = 420;
 export const SPRACHEN = {
   'de-de': { sprache: 'Deutsch', uebKey: null, abschnitte: ['Worum es geht', 'Entstehungsgeschichte', 'Hinter den Kulissen', 'Einordnung & Wirkung'] },
   'en-us': { sprache: 'Englisch', uebKey: 'en', abschnitte: ['What it is about', 'How it came about', 'Behind the scenes', 'Context and impact'] },
+  'en-gb': { sprache: 'Englisch', uebKey: 'en', abschnitte: ['What it is about', 'How it came about', 'Behind the scenes', 'Context and impact'] },
   'es-es': { sprache: 'Spanisch', uebKey: 'es', abschnitte: ['De qué trata', 'Cómo surgió', 'Detrás de las cámaras', 'Contexto y repercusión'] },
   'fr-fr': { sprache: 'Franzoesisch', uebKey: 'fr', abschnitte: ['De quoi il s’agit', 'Genèse du projet', 'Dans les coulisses', 'Portée et réception'] },
   'it-it': { sprache: 'Italienisch', uebKey: 'it', abschnitte: ['Di cosa si tratta', 'Come è nato', 'Dietro le quinte', 'Contesto e ricezione'] },

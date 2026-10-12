@@ -3,7 +3,7 @@
 // Registrierung in server.js VOR express.static.
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { mengenGrenze } from '../middleware/rateLimit.js';
-import { SEO_LOCALES, localeGueltig } from '../lib/seoLocale.js';
+import { SEO_LOCALES, localeGueltig, hatSeitenart, seitenartFuerPfad } from '../lib/seoLocale.js';
 import {
   ladeTitelSeite, ladeGenreSeite, ladeAnbieterSeite, ladeBestenliste, ladeKinoStadt,
   ladeFilmeHub, ladeSerienHub, ladeKinoHub, ladeStreamingHub, ladeBestenlisteHub, ladePersonSeite,
@@ -15,7 +15,7 @@ import {
   seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart, seitePersonenHub, seiteBestenlistenUebersicht, seiteReihenUebersicht, seiteReihe,
   seiteNeuAufUebersicht, seiteNeuAufAnbieter, seiteKinoNeustarts,
 } from '../lib/seoRender.js';
-import { sitemapIndex, sitemapBereich, BEREICHE } from '../lib/seoSitemap.js';
+import { sitemapIndex, sitemapBereich, BEREICHE, bereichFuerLocale } from '../lib/seoSitemap.js';
 import { track } from '../lib/track.js';
 import { tageskennung } from '../lib/tageskennung.js';
 import { herkunftKategorie, geraetTyp, istBot } from '../lib/herkunft.js';
@@ -68,6 +68,16 @@ router.use((req, res, next) => {
       };
       tageskennung(req).then((tagesId) => track('seo_aufruf', { props, tagesId }));
     });
+  }
+  next();
+});
+
+// Nicht-de-Locales liefern nur Seitenarten aus, die dort lokalisiert sind --
+// alles andere waere deutscher Text unter einer fremdsprachigen URL.
+router.use((req, res, next) => {
+  const locale = String(req.path).split('/')[1];
+  if (localeGueltig(locale) && !hatSeitenart(locale, seitenartFuerPfad(req.path))) {
+    return res.status(404).type('html').send(seite404(locale));
   }
   next();
 });
@@ -254,7 +264,7 @@ router.get('/sitemap-index.xml', GRENZE, async (req, res) => {
 });
 router.get('/sitemap-:locale-:bereich.xml', GRENZE, async (req, res) => {
   const { locale, bereich } = req.params;
-  if (!SEO_LOCALES.includes(locale) || !BEREICHE.includes(bereich)) return res.status(404).end();
+  if (!SEO_LOCALES.includes(locale) || !BEREICHE.includes(bereich) || !bereichFuerLocale(locale, bereich)) return res.status(404).end();
   res.type('application/xml').send(await sitemapBereich(locale, bereich));
 });
 
