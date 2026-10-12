@@ -282,3 +282,10 @@
 - Titel ohne eigene Titelseite (~28 %) erscheinen als Text ohne Link, zählen aber für die Schwelle.
 - Analytics-Typen: `neu-auf`, `neu-anbieter`, `kino-neustarts` (unbekannte Typen fallen im Frontend auf den Rohschlüssel zurück).
 - **Offen:** Footer-Link auf `/neu-auf` fehlt (Footer ist per Test an `index.html` gekoppelt, die nicht angefasst werden sollte); verlinkt ist von Start, Streaming-Hub, Anbieter-Seite, Kino-Hub und Kino-Städten. Kino-Neustarts bis zur Mitte der Woche ggf. dünn.
+
+## Absicherung und Audit (12.10.2026)
+- CI (`ci.yml`, Backend-Tests mit Postgres-Service) und taegliche Smoke-Tests gegen die Live-Seite sind eingerichtet; CI blockiert den Deploy nicht.
+- Neu: `backend/scripts/jsonld-check.mjs` (JSON-LD je Seitenart, auch als Modul) und `backend/scripts/seo-audit.mjs` (Stichprobe aus den Sitemaps: Status, Canonical, robots, Duplikate, JSON-LD, interne Links; 1 Req/s).
+- Befunde und Fix in `seoRender.js`: (1) alle ItemList-Eintraege ohne `url` (Genre, Anbieter, Bestenliste, Kino, Hubs, Neu-auf, Neustarts) -> url ergaenzt, bei Wochen-Listen nur fuer Titel mit eigener Seite; (2) `&` im `<title>` doppelt escaped (`Sci-Fi &amp;amp; Fantasy`, z. B. /serien/war-politics) -> Escaping nur noch im Head-Renderer. Test in `seoRender.test.js`.
+- Live-Stand vor dem Deploy: beide Befunde sichtbar (Audit 57 URLs, nur diese beiden Fehlerklassen). Nach dem Deploy Audit erneut laufen lassen: `node scripts/seo-audit.mjs --stichprobe=40` (aus `backend/`).
+- Offen: Bericht fuer den vollen Lauf (`--alle`, ~51.000 URLs, ~14 h bei 1 Req/s) nicht gefahren; ggf. woechentlich per Workflow mit kleiner Stichprobe.

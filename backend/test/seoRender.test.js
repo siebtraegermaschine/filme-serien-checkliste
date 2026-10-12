@@ -78,6 +78,21 @@ test('seitePerson: Kurzprofil aus Katalogdaten, Brotkrumen ueber die Uebersicht'
   assert.doesNotMatch(html, /noindex/);
 });
 
+test('Genre-Seite: "&" nicht doppelt escaped, jeder ItemList-Eintrag hat eine url', async () => {
+  const { seiteGenre } = await import('../lib/seoRender.js');
+  const { pruefeJsonLd } = await import('../scripts/jsonld-check.mjs');
+  const html = seiteGenre({
+    type: 'series', genre: 'Sci-Fi & Fantasy', genreSlug: 'sci-fi-fantasy', seite: 1, seiten: 1, gesamt: 1,
+    titel: [{ slug: 'foo', tmdbId: 7, title: 'Foo' }], text: null, indexierbar: true,
+  }, 'de-de');
+  assert.ok(!html.includes('&amp;amp;'), 'doppelt escaped');
+  const roh = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+  const liste = JSON.parse(roh[0]);
+  assert.ok(liste.name.includes('Sci-Fi & Fantasy'));
+  assert.ok(liste.itemListElement.every((e) => e.url && e.url.startsWith('https://')));
+  assert.deepEqual(pruefeJsonLd('genre', roh).fehler, []);
+});
+
 test('Footer: SEO-Seiten und App-Footer (index.html) verlinken dieselben Uebersichten', async () => {
   const { FOOTER_BEREICHE, seite404 } = await import('../lib/seoRender.js');
   const { readFileSync } = await import('node:fs');
