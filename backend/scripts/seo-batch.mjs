@@ -112,7 +112,8 @@ async function kandidaten({ locale, limit, minVotes, stufe, ausschluss }) {
               SELECT 1 FROM seo_content s
                WHERE s.bereich = 'titel'
                  AND s.schluessel = t.type || ':' || t.tmdb_id
-                 AND s.locale = $1)
+                 AND s.locale = $1
+                 AND length(s.text) >= 1200)
         AND NOT (t.type || ':' || t.tmdb_id = ANY($6::text[]))
       ORDER BY t.vote_count DESC NULLS LAST
       LIMIT $2`,

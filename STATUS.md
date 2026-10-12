@@ -266,7 +266,7 @@
 ## Alles indexieren (21.09.2026, live)
 - `indexierbar` in `backend/lib/seoData.js` hängt nicht mehr am Text; Sitemap (`seoSitemap.js`) zählt alle vorhandenen Seiten auf, lastmod aus `seo_content`, sonst leer. Neu: `sitemap-de-de-kino_stadt.xml` wird befüllt, Hub-Sitemap enthält die drei Rechtstexte. `/t/`-Vorschau setzt den Canonical auf die SEO-Seite jetzt immer.
 - `seo.css`/`consent.js` in robots.txt freigegeben (waren für Crawler gesperrt).
-- **Offen: Texte nachziehen** (Ziel ≥100–200 Zeichen je Seite): ~6.800 Titel, alle Kino-Städte, ~25 Genre-, ~8 Anbieter-Seiten, Personen ohne Bio. Kino-Städte bleiben fast gleiche Seiten (dieselbe bundesweite Filmliste), bis es Spielzeiten oder Stadttexte gibt.
+- **Texte nachgezogen (12.10.2026), siehe Abschnitt unten.** Restoffen: Titel ohne `tmdb_id` (~600) und Kino-Städte ohne Spielzeiten bleiben fast gleiche Seiten.
 
 ## Reihen (12.10.2026, live)
 - **Seiten**: `/de-de/reihen` (Uebersicht, beliebte Reihen als Kacheln plus A-Z) und `/de-de/reihen/<slug>` ("<Reihe> Filme in Erscheinungsreihenfolge"). Quelle sind TMDB-Collections, nur Filme. Schwelle 3 Titel mit Titelseite (`MIN_TITEL_REIHE`), darunter 404 und nicht in `sitemap-de-de-reihe.xml`. Slug aus dem Namen ohne Suffix "Filmreihe/Collection", bei Kollision `-<collection_id>`. Footer, Startseiten-Kachel, kleiner Block "Teil der Reihe" auf der Titelseite. Analytics-Typen `reihen` und `reihe` (in `index.html` ohne Label, die Auswertung zeigt den Rohtyp).
@@ -290,3 +290,10 @@
 - Nach dem ersten Deploy zeigte der Link-Check zusaetzlich: Anbieter-Seiten (`/streaming/<anbieter>`) verlinkten Titel ohne eigene Titelseite (404, z. B. Crunchyroll). Behoben: `ladeAnbieterSeite` liefert `hatSeite`, ohne Seite = Liste ohne Link und ohne JSON-LD-Eintrag (wie bei den Wochen-Seiten).
 - Live-Stand vor dem Deploy: beide Befunde sichtbar (Audit 57 URLs, nur diese beiden Fehlerklassen). Nach dem Deploy Audit erneut laufen lassen: `node scripts/seo-audit.mjs --stichprobe=40` (aus `backend/`).
 - Offen: Bericht fuer den vollen Lauf (`--alle`, ~51.000 URLs, ~14 h bei 1 Req/s) nicht gefahren; ggf. woechentlich per Workflow mit kleiner Stichprobe.
+
+## Texte nachgezogen (12.10.2026, live)
+- **Kategorien**: Genre-, Anbieter- und Kino-Stadt-Seiten haben Texte (`backend/scripts/seo-kategorien-texte.mjs`, deterministisch aus DB-Fakten, nur Fehlendes, kein API-Aufruf).
+- **Titel-Kurztexte** (200-450 Zeichen) fuer Titelseiten ohne Text: `backend/scripts/seo-titel-kurztexte.mjs`. Kurztexte (< 1200 Zeichen) gelten in `seo-pakete.mjs` und `seo-batch.mjs` weiter als offen; `seo-einspielen` ersetzt sie durch den Langtext.
+- **Runde 26**: 150 Langtexte per Faecher-Verfahren (Abo, keine API-Kosten) eingespielt; 6 Faktenverdachte (Zahlen/„Dreharbeiten“) umformuliert und nachgespielt.
+- **Befund**: ca. 600 Titel ohne `tmdb_id` kommen in den Paketen nicht vor, nicht angefasst.
+- **Als Nächstes**: Runde 27 per `scripts/seo-runde.sh` (in zsh ohne nomatch-Fehler; im Worktree Schritte einzeln).
