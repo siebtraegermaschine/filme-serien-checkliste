@@ -82,6 +82,37 @@ test('ladeTitelSeite: indexierbar auch ohne Text, Community-Bewertung erst ab Mi
   assert.equal(mitText.indexierbar, true);
 });
 
+test('ladeTitelSeite: Nicht-de-Locales zeigen lokalisierte Titel (Wunschsprache -> Englisch -> Deutsch), de-de unveraendert', async (t) => {
+  await aufraeumen();
+  t.after(aufraeumen);
+
+  const ins = (tmdb, titel, en, ueb, regie, genres) => pool.query(
+    `INSERT INTO titles (tmdb_id, type, title, title_en, uebersetzungen, year, genres, director, vote_count)
+     VALUES ($1, 'movie', $2, $3, $4::jsonb, 2010, $5::text[], $6, $7)`,
+    [tmdb, TITEL_PRAEFIX + titel, en, JSON.stringify(ueb), genres, regie, 100 - (tmdb - TMDB_TEST_BASIS)]
+  );
+  const GENRE = ['SEOTEST-Genre'];
+  await ins(TMDB_TEST_BASIS, 'Hauptfilm', TITEL_PRAEFIX + 'Main Movie', { fr: { t: TITEL_PRAEFIX + 'Film Principal' } }, 'Test-Regie-L', GENRE);
+  await ins(TMDB_TEST_BASIS + 1, 'Nur Deutsch', null, {}, 'Test-Regie-L', GENRE);
+  await ins(TMDB_TEST_BASIS + 2, 'Mit Englisch', TITEL_PRAEFIX + 'With English', {}, 'Test-Regie-L', GENRE);
+
+  const de = await ladeTitelSeite('film', TMDB_TEST_BASIS, 'de-de');
+  assert.equal(de.title, TITEL_PRAEFIX + 'Hauptfilm');
+  assert.ok(de.aehnlicheTitel.every((k) => k.title.startsWith(TITEL_PRAEFIX) && !/Main|English|Principal/.test(k.title)));
+
+  const en = await ladeTitelSeite('film', TMDB_TEST_BASIS, 'en-gb');
+  assert.equal(en.title, TITEL_PRAEFIX + 'Main Movie');
+  assert.equal(en.slug, de.slug, 'Slug bleibt vom deutschen Titel abgeleitet');
+  const enKarten = [...en.regisseurFilme, ...en.aehnlicheTitel].map((k) => k.title).sort();
+  assert.ok(enKarten.includes(TITEL_PRAEFIX + 'With English'));
+  assert.ok(enKarten.includes(TITEL_PRAEFIX + 'Nur Deutsch'), 'Rueckfall auf Deutsch ohne title_en');
+
+  const fr = await ladeTitelSeite('film', TMDB_TEST_BASIS, 'fr-fr');
+  assert.equal(fr.title, TITEL_PRAEFIX + 'Film Principal');
+  const es = await ladeTitelSeite('film', TMDB_TEST_BASIS, 'es-es');
+  assert.equal(es.title, TITEL_PRAEFIX + 'Main Movie', 'ohne es-Titel Rueckfall auf Englisch');
+});
+
 test('ladeTitelSeite: unbekannte tmdbId liefert null (kein Absturz)', async () => {
   const ergebnis = await ladeTitelSeite('film', 999_999_999, 'de-de');
   assert.equal(ergebnis, null);

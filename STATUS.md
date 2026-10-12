@@ -355,9 +355,23 @@ Pilot: 10 en-gb- und 10 es-es-Titeltexte in `backend/scripts/seo-pilot-en-es.mjs
 6. Welche Locale zuerst indexierbar, und wann.
 7. Weitere Seitenarten lokalisieren (Hubs, Genre, Streaming, Personen, Reihen,
    Bestenlisten, Kino, neu-auf)? Bisher nur Start/Titel.
-8. Lokalisierte Titel in Listenkarten (Lücke: `TITEL_MIT_KENNUNG` ohne
-   `title_en`).
+8. ~~Lokalisierte Titel in Listenkarten~~ — erledigt 12.10.2026, siehe unten.
 9. Kosten Batch-Lauf (siehe unten) — nur mit Freigabe.
+
+**title_en-Lücke geschlossen (12.10.2026).** Befund: `titles.title_en` und
+`uebersetzungen` waren per `backfill-english.mjs` längst gefüllt (27.523 von
+27.558 Zeilen; 1.508 leer = TMDB kennt keinen englischen Titel). Es fehlte nur
+die Nutzung in `seoData.js`: `ladeTitelSeite` liefert jetzt in Nicht-de-Locales
+den Anzeigetitel (Wunschsprache → Englisch → Deutsch, `anzeigeTitel`) für H1,
+`<title>`, JSON-LD `name`, Alt-Texte und die Karten „Weitere von"/„Ähnliche"
+(`lokaleTitel`, eigene Abfrage, `TITEL_MIT_KENNUNG` bleibt schlank). Slugs
+bleiben vom deutschen Titel abgeleitet, hreflang unverändert, de-de
+unverändert (Test in `seoData.test.js`). `seo-batch.mjs` gab dem Modell den
+Zielsprachen-Titel schon mit. Von 502 abweichenden en-gb-Texten nennen nur 16
+ausschließlich den deutschen Titel — Neuerzeugung nicht nötig (ggf. nur diese
+16). Offen: 35 Zeilen ohne `title_en` (30 mit tmdb_id) per
+`backfill-english.mjs` nachziehbar; ~600 Katalog-Titel ohne TMDB-Kennung
+bleiben deutsch.
 
 **Kostenplan Batch (NICHT gestartet).** Basis: letzter Lauf 8.950 Texte =
 67,42 $ echt (~0,0075 $/Text, Sonnet 5, Batch). Bei rund 20.000 Titeln mit

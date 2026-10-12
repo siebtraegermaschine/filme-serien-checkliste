@@ -7,7 +7,8 @@
 import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
 import { anbieterSlug } from './anbieter.js';
-import { regionFuerLocale } from './seoLocale.js';
+import { regionFuerLocale, sprachVon } from './seoLocale.js';
+import { sprachFeld } from './i18n.js';
 import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatistik.js';
 import { ladePersonDaten } from './personen.js';
 import { holeTitelDetails, holeTrailer } from './titeldetails.js';
@@ -103,6 +104,28 @@ export async function ladeSeoText(bereich, schluessel, locale) {
   return rows[0] ? rows[0].text : null;
 }
 
+// Anzeigetitel je Locale. de-de bleibt der Stammtitel; andere Locales nehmen
+// Wunschsprache -> Englisch -> Deutsch (sprachFeld). Slugs bleiben bewusst vom
+// deutschen Titel abgeleitet, damit URLs je Locale gleich aufgebaut sind.
+export function anzeigeTitel(zeile, locale) {
+  const sprache = sprachVon(locale);
+  if (sprache === 'de') return zeile.title;
+  return sprachFeld(sprache, zeile.title, zeile.title_en, zeile.uebersetzungen, 't');
+}
+
+// Lokalisierte Titel fuer Kartenlisten (Id -> Titel). Eigene Abfrage statt
+// Spalten in TITEL_MIT_KENNUNG, damit die grossen Listenabfragen schlank bleiben.
+async function lokaleTitel(ids, locale) {
+  const sprache = sprachVon(locale);
+  if (sprache === 'de' || !ids.length) return new Map();
+  const { rows } = await pool.query(
+    `SELECT id, title, title_en, jsonb_build_object($2::text, jsonb_build_object('t', uebersetzungen -> $2::text ->> 't')) AS uebersetzungen
+       FROM titles WHERE id = ANY($1::bigint[])`,
+    [ids, sprache]
+  );
+  return new Map(rows.map((r) => [String(r.id), anzeigeTitel(r, locale)]));
+}
+
 // art hier ist 'film'/'serie' (die SEO-URL-Woerter), nicht 'movie'/'series'
 // wie in share.js -- die Uebersetzung passiert an dieser einen Stelle.
 export async function ladeTitelSeite(art, tmdbId, locale) {
@@ -171,7 +194,8 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
   ]);
   const regisseurPersonId = regisseurIds.get(titel.director) ?? null;
 
-  const zuKarte = (r) => ({ id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year, posterPath: r.poster_path });
+  const kartenTitel = await lokaleTitel([...regisseurRows.rows, ...aehnlicheRows.rows].map((r) => r.id), locale);
+  const zuKarte = (r) => ({ id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title, locale), title: kartenTitel.get(String(r.id)) || r.title, year: r.year, posterPath: r.poster_path });
   const streaming = streamingRows.rows[0] || { flatrate: [], rent: [], buy: [] };
   const seiten = await anbieterMitSeite(region);
   const flatrateMitSlug = (streaming.flatrate || []).map((p) => {
@@ -185,7 +209,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     tmdbId: titel.tmdb_id,
     type: titel.type,
     slug: slugify(titel.title, locale),
-    title: titel.title,
+    title: anzeigeTitel(titel, locale),
     year: titel.year,
     genres: titel.genres || [],
     director: titel.director,
