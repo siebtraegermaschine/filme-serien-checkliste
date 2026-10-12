@@ -26,3 +26,9 @@ test('Fehler werden erkannt', () => {
   assert.ok(uebersetzungPruefen(DE, 'Here is the translation:\n' + ok, 'en-gb').includes('vorrede'));
   assert.ok(uebersetzungPruefen(DE, '', 'en-gb').includes('leer'));
 });
+
+test('deutsche Titel in Anfuehrungszeichen loesen keinen Deutsch-Fehler aus', () => {
+  const q = 'Top sind „Der Pate“ und „Der Herr der Ringe - Die Rückkehr des Königs“ mit über 100 Stimmen.';
+  const z = 'Currently on top are "Der Pate" and "Der Herr der Ringe - Die Rückkehr des Königs" with over 100 votes.';
+  assert.deepEqual(uebersetzungPruefen(q, z, 'en-gb'), []);
+});

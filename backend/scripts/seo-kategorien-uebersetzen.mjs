@@ -70,7 +70,9 @@ export function uebersetzungPruefen(quelle, ziel, locale) {
   for (const n of new Set(zahlenZiel)) if (!zahlenIn(quelle).includes(n)) { f.push(`zusatzzahl ${n}`); break; }
   for (const t of titelIn(quelle)) if (!z.includes(t)) { f.push(`titel ${t}`); break; }
   for (const m of markenIn(quelle)) if (!z.includes(m)) { f.push(`marke ${m}`); break; }
-  const woerter = z.toLowerCase().match(/[\p{L}]+/gu) || [];
+  // Titel in Anfuehrungszeichen bleiben deutsch und zaehlen nicht als Rest.
+  const ohneTitel = z.replace(/[„“"”][^„“"”]*[“"”]/g, ' ');
+  const woerter = ohneTitel.toLowerCase().match(/[\p{L}]+/gu) || [];
   const de = new Set(DEUTSCH.filter((w) => !(locale === 'pt-pt' && w === 'das')));
   const treffer = woerter.filter((w) => de.has(w)).length;
   if (woerter.length && treffer / woerter.length > 0.03) f.push('deutsch');
