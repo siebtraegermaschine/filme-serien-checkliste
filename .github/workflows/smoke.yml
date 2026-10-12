@@ -1,0 +1,20 @@
+name: Smoke (live)
+
+# Taeglicher Lesetest gegen movietaste.de (nur GET, ~1,4 Req/s, keine Anmeldung).
+# Blockiert nichts; ein roter Lauf heisst: eine Seitenart ist live kaputt.
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Smoke-Tests
+        run: node --test tests/smoke/smoke.test.mjs
