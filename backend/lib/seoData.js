@@ -11,6 +11,7 @@ import { regionFuerLocale } from './seoLocale.js';
 import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatistik.js';
 import { ladePersonDaten } from './personen.js';
 import { holeTitelDetails, holeTrailer } from './titeldetails.js';
+import { MIN_TITEL_REIHE, reihenName, reihenSlugs, inErscheinungsreihenfolge, reihenFakten } from './seoReihen.js';
 import { MIN_TITEL, MIN_TITEL_KINO, MIN_TITEL_LAND_GENRE, NEU_JAHRE, THEMEN, LAUFZEITEN, STAFFELN, listeTitel } from './seoBestenlisten.js';
 import {
   landName, landAus, landSlug, codeAusLandSlug, landHatSeite,
@@ -48,7 +49,8 @@ const TITEL_MIT_KENNUNG = `(
   SELECT DISTINCT ON (t.type, COALESCE(t.tmdb_id, r.tmdb_id))
          t.id, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, t.type, t.title, t.year,
          t.genres, t.director, t.cast_names, t.rating, t.vote_count, t.poster_path, t.keywords,
-         t.origin_country, t.original_language, t.runtime, t.seasons
+         t.origin_country, t.original_language, t.runtime, t.seasons,
+         t.collection_id, t.collection_name, t.erschienen_am
     FROM titles t LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
    WHERE COALESCE(t.tmdb_id, r.tmdb_id) IS NOT NULL
    ORDER BY t.type, COALESCE(t.tmdb_id, r.tmdb_id), COALESCE(t.vote_count, 0) DESC, t.id
@@ -110,7 +112,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     `SELECT t.id, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id, t.type, t.title, t.title_en, t.year,
             t.genres, t.director, t.cast_names, t.keywords, t.rating, t.vote_count,
             t.poster_path, t.backdrop_path, t.plot, t.overview_en,
-            t.certification, t.certifications, t.uebersetzungen
+            t.certification, t.certifications, t.uebersetzungen, t.collection_id
        FROM titles t
        LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
       WHERE t.type = $1 AND COALESCE(t.tmdb_id, r.tmdb_id) = $2
@@ -205,6 +207,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     schauspielerIds, // Map Name -> tmdbPersonId, nur Personen mit indexierbarer Seite
     bilder: details ? details.bilder : [],
     trailerKey: trailer ? trailer.key : null,
+    reihe: await reiheFuerTitel(titel.collection_id),
     text,
     indexierbar: true,
   };
@@ -935,4 +938,101 @@ export async function alleBestenlisten(locale) {
     if (k.neu) liste.push([art, 'neu', 'aktuell']);
   }
   return liste;
+}
+
+// ---- Reihen/Franchises (TMDB-Collections), nur Filme.
+
+const REIHEN_TTL_MS = 60 * 60 * 1000;
+let reihenCache = null;   // { at, liste, nachSlug, nachId }
+
+// Alle Reihen mit mindestens MIN_TITEL_REIHE Filmen, die eine Titelseite haben.
+// Eine Abfrage fuer alle (Uebersicht, Reihenseite, Sitemap, Titelseiten-Block),
+// deshalb prozessintern gecacht.
+async function reihenKatalog() {
+  if (reihenCache && Date.now() - reihenCache.at < REIHEN_TTL_MS) return reihenCache;
+  const { rows } = await pool.query(
+    `SELECT collection_id, collection_name, id, tmdb_id, title, year, erschienen_am::text AS erschienen_am,
+            genres, rating, vote_count, poster_path, ${NOTE_SQL} AS note
+       FROM ${TITEL_MIT_KENNUNG} WHERE type = 'movie' AND collection_id IS NOT NULL`
+  );
+  const gruppen = new Map();
+  for (const r of rows) {
+    if (!gruppen.has(r.collection_id)) gruppen.set(r.collection_id, { id: r.collection_id, roh: r.collection_name, titel: [] });
+    gruppen.get(r.collection_id).titel.push({
+      id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
+      erschienenAm: r.erschienen_am, genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
+      voteCount: r.vote_count, posterPath: r.poster_path, note: Number(r.note),
+    });
+  }
+  const gueltig = [...gruppen.values()].filter((g) => g.titel.length >= MIN_TITEL_REIHE);
+  const slugs = reihenSlugs(gueltig.map((g) => ({ id: g.id, name: g.roh })));
+  const liste = gueltig.map((g) => {
+    const titel = inErscheinungsreihenfolge(g.titel);
+    return {
+      id: g.id, slug: slugs.get(g.id), name: reihenName(g.roh), titel, fakten: reihenFakten(titel),
+      stimmen: titel.reduce((s, t) => s + (t.voteCount || 0), 0),
+    };
+  }).sort((a, b) => a.name.localeCompare(b.name, 'de'));
+  reihenCache = {
+    at: Date.now(), liste,
+    nachSlug: new Map(liste.map((r) => [r.slug, r])), nachId: new Map(liste.map((r) => [r.id, r])),
+  };
+  return reihenCache;
+}
+
+// Kleiner Verweis auf der Titelseite: null, wenn der Film in keiner (qualifizierenden) Reihe ist.
+async function reiheFuerTitel(collectionId) {
+  if (!collectionId) return null;
+  const r = (await reihenKatalog()).nachId.get(collectionId);
+  return r ? { slug: r.slug, name: r.name, anzahl: r.titel.length } : null;
+}
+
+export async function ladeReihenUebersicht(locale) {
+  const [k, text] = await Promise.all([reihenKatalog(), ladeSeoText('hub', 'reihen', locale)]);
+  const eintrag = (r) => ({
+    slug: r.slug, name: r.name, anzahl: r.titel.length, jahrVon: r.fakten.jahrVon, jahrBis: r.fakten.jahrBis,
+    posterPath: (r.titel.find((t) => t.posterPath) || {}).posterPath || null,
+  });
+  const beliebt = [...k.liste].sort((a, b) => b.stimmen - a.stimmen).slice(0, 12).map(eintrag);
+  return { reihen: k.liste.map(eintrag), beliebt, text, indexierbar: k.liste.length > 0 };
+}
+
+export async function ladeReihe(slug, locale) {
+  const r = (await reihenKatalog()).nachSlug.get(slug);
+  if (!r) return null;
+  const region = regionFuerLocale(locale);
+  const [bewertungen, { rows: stream }, seiten, text] = await Promise.all([
+    bewertungenFuer(r.titel.map((t) => t.id)),
+    pool.query(
+      `SELECT tmdb_id, flatrate FROM watch_providers_cache WHERE type = 'movie' AND region = $1 AND tmdb_id = ANY($2::int[])`,
+      [region, r.titel.map((t) => t.tmdbId)]
+    ),
+    anbieterMitSeite(region),
+    ladeSeoText('reihe', r.slug, locale),
+  ]);
+  const flatrate = new Map(stream.map((s) => [s.tmdb_id, s.flatrate || []]));
+  const titel = r.titel.map((t) => ({
+    ...t,
+    communityBewertung: bewertungen.get(t.id) || null,
+    flatrate: (flatrate.get(t.tmdbId) || []).map((p) => {
+      const as = anbieterSlug(p.name);
+      return { name: p.name, anbieterSlug: seiten.has(as) ? as : null };
+    }),
+  }));
+  return { slug: r.slug, name: r.name, collectionId: r.id, titel, fakten: r.fakten, text, indexierbar: true };
+}
+
+// Nur fuer Tests: Cache verwerfen, damit frisch eingefuegte Testdaten sichtbar werden.
+export function reihenCacheLeeren() { reihenCache = null; }
+
+export async function reihenFuerSitemap() {
+  return (await reihenKatalog()).liste.map((r) => r.slug);
+}
+
+// Fuer scripts/seo-reihen-texte.mjs: Name, Fakten und vorhandenen Text je Reihe.
+export async function alleReihen(locale) {
+  const k = await reihenKatalog();
+  const { rows } = await pool.query(`SELECT schluessel FROM seo_content WHERE bereich = 'reihe' AND locale = $1`, [locale]);
+  const mitText = new Set(rows.map((r) => r.schluessel));
+  return k.liste.map((r) => ({ slug: r.slug, name: r.name, fakten: r.fakten, hatText: mitText.has(r.slug) }));
 }

@@ -7,11 +7,11 @@ import { SEO_LOCALES, localeGueltig } from '../lib/seoLocale.js';
 import {
   ladeTitelSeite, ladeGenreSeite, ladeAnbieterSeite, ladeBestenliste, ladeKinoStadt,
   ladeFilmeHub, ladeSerienHub, ladeKinoHub, ladeStreamingHub, ladeBestenlisteHub, ladePersonSeite,
-  ladeStartHub, ladePersonenHub, ladeBestenlistenUebersicht,
+  ladeStartHub, ladePersonenHub, ladeBestenlistenUebersicht, ladeReihenUebersicht, ladeReihe,
 } from '../lib/seoData.js';
 import {
   seiteTitelDetail, seiteGenre, seiteAnbieter, seiteBestenliste, seiteKinoStadt, seite404, SITE,
-  seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart, seitePersonenHub, seiteBestenlistenUebersicht,
+  seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart, seitePersonenHub, seiteBestenlistenUebersicht, seiteReihenUebersicht, seiteReihe,
 } from '../lib/seoRender.js';
 import { sitemapIndex, sitemapBereich, BEREICHE } from '../lib/seoSitemap.js';
 import { track } from '../lib/track.js';
@@ -43,6 +43,8 @@ export function seoAufrufTyp(pfad) {
   if (teile[1] === 'beste-filme' || teile[1] === 'beste-serien') {
     return analyticsTypFuerListe(teile.slice(1)) || teile[1];
   }
+  // Reihen: Uebersicht 'reihen', einzelne Reihe 'reihe'.
+  if (teile[1] === 'reihen' && teile[2]) return 'reihe';
   return teile[1] || 'start';
 }
 export function seoAufrufPfad(pfad) {
@@ -148,6 +150,18 @@ router.get('/:locale/bestenlisten', GRENZE, async (req, res) => {
   const { locale } = req.params;
   if (!localeGueltig(locale)) return nichtGefunden(res, locale);
   res.type('html').send(seiteBestenlistenUebersicht(await ladeBestenlistenUebersicht(locale), locale));
+});
+router.get('/:locale/reihen', GRENZE, async (req, res) => {
+  const { locale } = req.params;
+  if (!localeGueltig(locale)) return nichtGefunden(res, locale);
+  res.type('html').send(seiteReihenUebersicht(await ladeReihenUebersicht(locale), locale));
+});
+router.get('/:locale/reihen/:slug', GRENZE, async (req, res) => {
+  const { locale, slug } = req.params;
+  if (!localeGueltig(locale)) return nichtGefunden(res, locale);
+  const daten = await ladeReihe(slug, locale);
+  if (!daten) return nichtGefunden(res, locale);
+  res.type('html').send(seiteReihe(daten, locale));
 });
 router.get('/:locale/beste-filme', GRENZE, async (req, res) => {
   const { locale } = req.params;

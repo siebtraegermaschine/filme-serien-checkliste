@@ -251,6 +251,8 @@ async function main() {
     item.overviewEn = ex.ovEn;
     item.uebers = ex.uebers || {};
     Object.assign(item, ex.merkmale || {});
+    // Detailabruf lief durch -> TMDB wurde zur Reihe gefragt (auch ohne Treffer).
+    if (ex.merkmale && item.type === 'movie') item.collectionGeprueft = true;
     item.plot = (item.overviewRaw || '').trim() || ex.ovEn || await overviewWithFallback(kind, item.tmdbId, item.overviewRaw);
     delete item.overviewRaw;
     done++;

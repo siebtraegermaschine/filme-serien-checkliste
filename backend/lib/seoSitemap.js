@@ -8,14 +8,14 @@ import { SITE } from './seoRender.js';
 import { SEO_LOCALES } from './seoLocale.js';
 import {
   personenFuerSitemap, titelFuerSitemap, genresFuerSitemap, anbieterFuerSitemap,
-  staedteFuerSitemap, alleBestenlisten,
+  staedteFuerSitemap, alleBestenlisten, reihenFuerSitemap,
 } from './seoData.js';
 import { schluesselZuPfad } from './seoBestenlisten.js';
 
-export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person'];
+export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person', 'reihe'];
 
 // Hub-Seiten ('start' = /<locale>/ selbst) und die deutschen Rechtstexte.
-const HUBS = ['start', 'filme', 'serien', 'kino', 'streaming', 'bestenlisten', 'beste-filme', 'beste-serien', 'schauspieler', 'regisseur'];
+const HUBS = ['start', 'filme', 'serien', 'kino', 'streaming', 'bestenlisten', 'reihen', 'beste-filme', 'beste-serien', 'schauspieler', 'regisseur'];
 const RECHTSTEXTE = ['impressum.html', 'datenschutz.html', 'nutzungsbedingungen.html'];
 
 const TTL_MS = 60 * 60 * 1000;
@@ -81,6 +81,12 @@ async function urlsFuerBereich(locale, bereich) {
       const pfad = schluesselZuPfad(schluessel, locale);
       return pfad ? [{ loc: SITE + pfad, lastmod: stand.get(schluessel) || null }] : [];
     });
+  }
+
+  if (bereich === 'reihe') {
+    return (await reihenFuerSitemap()).map((slug) => ({
+      loc: `${SITE}/${locale}/reihen/${slug}`, lastmod: stand.get(slug) || null,
+    }));
   }
 
   if (bereich === 'kino_stadt') {

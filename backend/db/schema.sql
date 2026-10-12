@@ -1132,3 +1132,29 @@ CREATE TABLE IF NOT EXISTS serien_folgen_cache (
   fetched_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (tmdb_id, staffel, sprache)
 );
+
+-- Reihen/Franchises (12.10.2026): TMDB-Collection nur bei Filmen. collection_geprueft
+-- merkt sich, dass TMDB schon gefragt wurde -- sonst fragt der Backfill Titel ohne
+-- Reihe endlos neu ab. erschienen_am ordnet die Filme innerhalb einer Reihe.
+ALTER TABLE titles ADD COLUMN IF NOT EXISTS collection_id        INTEGER;
+ALTER TABLE titles ADD COLUMN IF NOT EXISTS collection_name      TEXT;
+ALTER TABLE titles ADD COLUMN IF NOT EXISTS collection_geprueft  BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE titles ADD COLUMN IF NOT EXISTS erschienen_am        DATE;
+CREATE INDEX IF NOT EXISTS titles_collection_idx ON titles (collection_id) WHERE collection_id IS NOT NULL;
+
+-- Eigener seo_content-Bereich 'reihe' (Schluessel = Slug der Reihe).
+DO $$
+DECLARE
+  old_cons TEXT;
+BEGIN
+  SELECT conname INTO old_cons FROM pg_constraint
+    WHERE conrelid = 'seo_content'::regclass
+      AND contype = 'c'
+      AND pg_get_constraintdef(oid) LIKE '%bereich%'
+      AND pg_get_constraintdef(oid) NOT LIKE '%reihe%';
+  IF old_cons IS NOT NULL THEN
+    EXECUTE format('ALTER TABLE seo_content DROP CONSTRAINT %I', old_cons);
+    ALTER TABLE seo_content ADD CONSTRAINT seo_content_bereich_check
+      CHECK (bereich IN ('titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person', 'reihe'));
+  END IF;
+END $$;

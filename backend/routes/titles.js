@@ -371,8 +371,8 @@ router.post('/bulk-ingest', async (req, res) => {
     for (const item of items) {
       if (!item || !item.tmdbId || (item.type !== 'movie' && item.type !== 'series') || !item.title) continue;
       const { rowCount } = await client.query(
-        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, certifications, plot, title_en, overview_en, uebersetzungen, origin_country, original_language, runtime, seasons, source)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,'discovery')
+        `INSERT INTO titles (tmdb_id, type, title, year, genres, director, cast_names, keywords, poster_path, rating, vote_count, certification, certifications, plot, title_en, overview_en, uebersetzungen, origin_country, original_language, runtime, seasons, collection_id, collection_name, erschienen_am, collection_geprueft, source)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,'{}',$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,'discovery')
          ON CONFLICT (tmdb_id, type) DO UPDATE SET
            year = EXCLUDED.year,
            genres = EXCLUDED.genres,
@@ -395,6 +395,10 @@ router.post('/bulk-ingest', async (req, res) => {
            original_language = COALESCE(EXCLUDED.original_language, titles.original_language),
            runtime = COALESCE(EXCLUDED.runtime, titles.runtime),
            seasons = COALESCE(EXCLUDED.seasons, titles.seasons),
+           collection_id = COALESCE(EXCLUDED.collection_id, titles.collection_id),
+           collection_name = COALESCE(EXCLUDED.collection_name, titles.collection_name),
+           erschienen_am = COALESCE(EXCLUDED.erschienen_am, titles.erschienen_am),
+           collection_geprueft = titles.collection_geprueft OR EXCLUDED.collection_geprueft,
            updated_at = now()
          WHERE titles.source <> 'catalog'`,
         [
@@ -418,6 +422,10 @@ router.post('/bulk-ingest', async (req, res) => {
           item.originalLanguage || null,
           Number.isInteger(item.runtime) ? item.runtime : null,
           Number.isInteger(item.seasons) ? item.seasons : null,
+          Number.isInteger(item.collectionId) ? item.collectionId : null,
+          item.collectionName ? String(item.collectionName) : null,
+          /^\d{4}-\d{2}-\d{2}$/.test(item.erschienenAm || '') ? item.erschienenAm : null,
+          item.collectionGeprueft === true,
         ]
       );
       inserted += rowCount;

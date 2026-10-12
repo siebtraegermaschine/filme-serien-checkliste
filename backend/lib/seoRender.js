@@ -69,7 +69,7 @@ function kopfzeile() {
 // App-Footer (index.html, .footer-seo); seoRender.test.js prueft die Gleichheit.
 export const FOOTER_BEREICHE = [
   ['filme', 'Filme'], ['serien', 'Serien'], ['schauspieler', 'Schauspieler'], ['regisseur', 'Regisseure'],
-  ['bestenlisten', 'Bestenlisten'], ['streaming', 'Streaming'], ['kino', 'Kino'],
+  ['bestenlisten', 'Bestenlisten'], ['reihen', 'Reihen'], ['streaming', 'Streaming'], ['kino', 'Kino'],
 ];
 
 function fusszeile(locale) {
@@ -321,6 +321,10 @@ export function seiteTitelDetail(titel, locale) {
     ? `<h3>Weitere Filme von ${regisseurName}</h3><div class="raster">${titel.regisseurFilme.map((t) => karte(t, artWort, locale)).join('')}</div>`
     : '';
 
+  const reiheHtml = titel.reihe
+    ? `<p class="hinweis">Teil der Reihe <a href="/${locale}/reihen/${attrEsc(titel.reihe.slug)}">${attrEsc(titel.reihe.name)}</a> — alle ${titel.reihe.anzahl} Filme in Erscheinungsreihenfolge.</p>`
+    : '';
+
   const aehnlicheHtml = titel.aehnlicheTitel.length
     ? `<h2>Ähnliche Titel</h2><div class="raster">${titel.aehnlicheTitel.map((t) => karte(t, artWort, locale)).join('')}</div>`
     : '';
@@ -343,6 +347,7 @@ export function seiteTitelDetail(titel, locale) {
     <h2>Besetzung & Stab</h2>
     ${besetzungHtml}
     ${regisseurFilmeHtml}
+    ${reiheHtml}
     ${aehnlicheHtml}
     <h2>Verfügbarkeit</h2>
     ${verfuegbarkeitHtml(titel.streaming, locale)}
@@ -711,12 +716,84 @@ export function seiteBestenlisteHub(daten, locale) {
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
+function reiheStreamingHtml(flatrate, locale) {
+  return flatrate.length
+    ? `Im Abo bei: ${flatrate.map((p) => anbieterHtml(p.name, p.anbieterSlug, locale)).join(', ')}`
+    : 'Aktuell bei keinem bekannten Anbieter im Abo';
+}
+
+export function seiteReihe(daten, locale) {
+  const pfad = `/${locale}/reihen/${daten.slug}`;
+  const ueberschrift = `${daten.name} Filme in Erscheinungsreihenfolge`;
+  const titelZeile = `${attrEsc(ueberschrift)} | MovieMatch`;
+  const beschreibung = kurzfassung(daten.text) || `${ueberschrift}: alle ${daten.titel.length} Filme mit Bewertung und Streaming-Hinweis.`;
+  const kette = [
+    { label: 'Start', href: SITE + '/' },
+    { label: 'Reihen', href: `${SITE}/${locale}/reihen` },
+    { label: daten.name },
+  ];
+  const jsonLd = [{
+    '@context': 'https://schema.org', '@type': 'CollectionPage', name: ueberschrift, url: SITE + pfad,
+    mainEntity: {
+      '@type': 'ItemList', numberOfItems: daten.titel.length, itemListOrder: 'https://schema.org/ItemListOrderAscending',
+      itemListElement: daten.titel.map((t, i) => ({
+        '@type': 'ListItem', position: i + 1, name: t.title, url: `${SITE}/${locale}/film/${t.slug}-${t.tmdbId}`,
+      })),
+    },
+  }, brotkrumenJsonLd(kette)];
+  const zeilen = daten.titel.map((t) => {
+    const wert = t.communityBewertung ? t.communityBewertung.durchschnitt : t.rating;
+    const info = [t.year, wert ? `⭐ ${String(wert).replace('.', ',')}` : null].filter(Boolean).join(' · ');
+    return `<li><a href="/${locale}/film/${attrEsc(t.slug)}-${t.tmdbId}">${attrEsc(t.title)}</a>${info ? ` (${info})` : ''}<br><span class="hinweis">${reiheStreamingHtml(t.flatrate, locale)}</span></li>`;
+  }).join('');
+  const bodyHtml = `
+    ${brotkrumenHtml(kette)}
+    <h1>${attrEsc(ueberschrift)}</h1>
+    <p class="einleitung">${textBlock(daten.text)}</p>
+    <div class="raster">${daten.titel.map((t) => karte(t, 'film', locale)).join('')}</div>
+    <h2>Alle Filme im Überblick</h2>
+    <ol>${zeilen}</ol>
+    <p class="hinweis">Die Reihenfolge folgt dem Erscheinungsdatum laut TMDB. Die Handlung kann zeitlich anders verlaufen. <a href="/${locale}/reihen">Alle Reihen</a></p>
+  `;
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
+}
+
+export function seiteReihenUebersicht(daten, locale) {
+  const pfad = `/${locale}/reihen`;
+  const titelZeile = 'Filmreihen & Franchises in Erscheinungsreihenfolge | MovieMatch';
+  const beschreibung = kurzfassung(daten.text) || 'Filmreihen und Franchises mit allen Filmen in Erscheinungsreihenfolge, mit Bewertung und Streaming-Hinweis.';
+  const kette = [{ label: 'Start', href: SITE + '/' }, { label: 'Reihen' }];
+  const jsonLd = [{
+    '@context': 'https://schema.org', '@type': 'CollectionPage', name: titelZeile, url: SITE + pfad,
+    mainEntity: {
+      '@type': 'ItemList', numberOfItems: daten.reihen.length,
+      itemListElement: daten.reihen.map((r, i) => ({ '@type': 'ListItem', position: i + 1, name: r.name, url: `${SITE}/${locale}/reihen/${r.slug}` })),
+    },
+  }, brotkrumenJsonLd(kette)];
+  const kachel = (r) => `<a class="karte" href="/${locale}/reihen/${attrEsc(r.slug)}">
+    ${r.posterPath ? `<img src="https://image.tmdb.org/t/p/w342${attrEsc(r.posterPath)}" alt="${attrEsc(r.name)}" loading="lazy">` : ''}
+    <div class="titel">${attrEsc(r.name)}</div>
+    <div class="info">${r.anzahl} Filme</div>
+  </a>`;
+  const bodyHtml = `
+    ${brotkrumenHtml(kette)}
+    <h1>Filmreihen &amp; Franchises</h1>
+    <p class="einleitung">${textBlock(daten.text)}</p>
+    <h2>Beliebte Reihen</h2>
+    <div class="raster">${daten.beliebt.map(kachel).join('')}</div>
+    <h2>Alle Reihen von A bis Z</h2>
+    <ul>${daten.reihen.map((r) => `<li><a href="/${locale}/reihen/${attrEsc(r.slug)}">${attrEsc(r.name)}</a> — ${r.anzahl} Filme${r.jahrVon ? ` (${r.jahrVon}${r.jahrBis && r.jahrBis !== r.jahrVon ? '–' + r.jahrBis : ''})` : ''}</li>`).join('')}</ul>
+  `;
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
+}
+
 // Bereiche der Einstiegsseite. Reihenfolge = Anzeigereihenfolge; der Pfad ist
 // zugleich der hub-Schluessel in seo_content (siehe seoSitemap.js).
 const START_BEREICHE = [
   { pfad: 'filme', titel: 'Filme', text: 'Alle Filme nach Genre, mit Bewertungen und Verfügbarkeit.' },
   { pfad: 'serien', titel: 'Serien', text: 'Serien nach Genre, von der laufenden Staffel bis zum Abschluss.' },
   { pfad: 'bestenlisten', titel: 'Bestenlisten', text: 'Beste Filme und beste Serien nach Jahr und Genre.' },
+  { pfad: 'reihen', titel: 'Reihen', text: 'Filmreihen und Franchises mit allen Filmen in Erscheinungsreihenfolge.' },
   { pfad: 'schauspieler', titel: 'Schauspieler', text: 'Bekannte Schauspielerinnen und Schauspieler mit Filmografie.' },
   { pfad: 'regisseur', titel: 'Regisseure', text: 'Regisseurinnen und Regisseure mit ihren Filmen und Serien.' },
   { pfad: 'streaming', titel: 'Streaming', text: 'Was bei welchem Anbieter läuft.' },
