@@ -423,3 +423,25 @@ TMDB lokal nicht testbar.
 Locale (Stand de-de: hub 9, genre 35, anbieter 17, bestenliste 810, kino_stadt
 470, reihe 501 = rund 1.840 je Locale, Bestenlisten je Region ggf. abweichend;
 en-gb/es-es haben schon fast alles außer Bestenlisten).
+
+## Batch-Programm 12.10.2026 (live, freigegeben, ca. 75 $ echt)
+
+- **Personen:** 855 Texte per `personen-batch.mjs` (6,83 $). 166 heikle Rollen
+  (Straftaten/Verfahren/Drogen/Gangster) vorab ausgeschlossen, bleiben offen.
+  Rest ca. 650 offen (Neuzählung nötig). Hinweis: `schauspieler:12951`
+  (O. J. Simpson) ist live und nennt Festnahme/Mordanklage/Haft — prüfen.
+- **Übersetzung Kategorien-Texte** (genre, anbieter, kino_stadt, reihe, hub →
+  en-gb, es-es, fr-fr, it-it, nl-nl, pt-pt): neues Skript
+  `scripts/seo-kategorien-uebersetzen.mjs` (Haiku 4.5, Batch, Prüfung auf
+  Zahlen/Marken/Titel/Deutschrest), ca. 0,55 $ je Locale, ~3,8 $ gesamt. Je
+  Locale 96-99 % der 1.034 Texte, Rest verworfen (nicht geschrieben; erneuter
+  Aufruf versucht sie noch einmal). Bestenlisten (810) sind nicht übersetzt.
+- **en-gb Titeltexte:** Haiku 4.5 (`--model claude-haiku-4-5-20251001`,
+  Vergleich 20 Texte: gleichwertig zu Sonnet, 0,002 $ statt 0,005 $/Text).
+  14.652 geschrieben, 4.827 verworfen (Format/Faktenverdacht, ~25 %), 38,7 $.
+  en-gb gesamt 15.613 Titeltexte; noindex bleibt. Retry der verworfenen
+  (neue `--status-datei`) würde ca. 10 $ kosten.
+- **de-de Titeltexte Stufe B + C:** 376 + 3.202 geschrieben, 25,2 $. Stufe C
+  ist damit durch; verworfene Faktenverdachte bleiben Vorlagentext.
+- Haiku braucht keinen `effort`-Parameter (API 400) — in `seo-batch.mjs`
+  behoben.
