@@ -335,7 +335,8 @@ function anfrageKoerper(model, locale, t) {
   return {
     model,
     max_tokens: 2048,
-    output_config: { effort: 'low' },
+    // Haiku 4.5 kennt den effort-Parameter nicht (API 400).
+    ...(/haiku/.test(model) ? {} : { output_config: { effort: 'low' } }),
     system: [{ type: 'text', text: systemPrompt(locale), cache_control: { type: 'ephemeral', ttl: '1h' } }],
     messages: [{ role: 'user', content: `DATENSATZ\n${datensatz(t, locale)}\n\nSchreibe den Titeltext.` }],
   };
