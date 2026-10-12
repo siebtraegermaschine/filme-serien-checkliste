@@ -437,7 +437,7 @@ export function seiteAnbieter(daten, locale) {
   ];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
-    itemListElement: [...titelListe(daten.filme, 'film', locale), ...titelListe(daten.serien, 'serie', locale)].map((e, i) => ({ ...e, position: i + 1 })),
+    itemListElement: itemListJsonLd(titelZeile, [[daten.filme, 'film'], [daten.serien, 'serie']], locale).itemListElement,
   }, brotkrumenJsonLd(kette)];
   const besteLinks = [];
   if (daten.besteListen && daten.besteListen.filme) besteLinks.push(`<a href="${listeSeitenPfad(locale, 'movie', 'anbieter', daten.anbieterSlug)}">Beste Filme auf ${attrEsc(daten.name)}</a>`);
@@ -450,9 +450,9 @@ export function seiteAnbieter(daten, locale) {
     <p class="einleitung">${textBlock(daten.text)}</p>
     ${besteHtml}
     <h2>Filme</h2>
-    <div class="raster">${daten.filme.map((t) => karte(t, 'film', locale)).join('')}</div>
+    ${wochenListeHtml(daten.filme, 'film', locale, 'Weitere')}
     <h2>Serien</h2>
-    <div class="raster">${daten.serien.map((t) => karte(t, 'serie', locale)).join('')}</div>
+    ${wochenListeHtml(daten.serien, 'serie', locale, 'Weitere')}
   `;
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
@@ -898,12 +898,12 @@ export function seitePerson(daten, locale) {
 
 // Titel mit eigener Seite als Karte, die uebrigen als einfache Liste ohne Link
 // (ein Link auf sie waere ein 404).
-function wochenListeHtml(eintraege, artWort, locale) {
+function wochenListeHtml(eintraege, artWort, locale, ohneWort = null) {
   const mit = eintraege.filter((e) => e.hatSeite);
   const ohne = eintraege.filter((e) => !e.hatSeite);
   return (mit.length ? `<div class="raster">${mit.map((t) => karte(t, artWort, locale)).join('')}</div>` : '')
     + (ohne.length
-      ? `<p class="hinweis">${mit.length ? 'Weitere' : 'Neue'} Titel ohne eigene Seite:</p><ul>${ohne.map((t) => `<li>${attrEsc(t.title)}${t.year ? ` (${t.year})` : ''}</li>`).join('')}</ul>`
+      ? `<p class="hinweis">${ohneWort || (mit.length ? 'Weitere' : 'Neue')} Titel ohne eigene Seite:</p><ul>${ohne.map((t) => `<li>${attrEsc(t.title)}${t.year ? ` (${t.year})` : ''}</li>`).join('')}</ul>`
       : '');
 }
 

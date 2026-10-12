@@ -93,6 +93,18 @@ test('Genre-Seite: "&" nicht doppelt escaped, jeder ItemList-Eintrag hat eine ur
   assert.deepEqual(pruefeJsonLd('genre', roh).fehler, []);
 });
 
+test('Anbieter-Seite: Titel ohne eigene Seite ohne Link und ohne JSON-LD-url', async () => {
+  const { seiteAnbieter } = await import('../lib/seoRender.js');
+  const html = seiteAnbieter({
+    anbieterSlug: 'x', name: 'X', besteListen: {}, text: null, indexierbar: true, serien: [],
+    filme: [{ slug: 'mit', tmdbId: 1, title: 'Mit', hatSeite: true }, { slug: 'ohne', tmdbId: 2, title: 'Ohne', hatSeite: false }],
+  }, 'de-de');
+  assert.ok(html.includes('/de-de/film/mit-1'));
+  assert.ok(!html.includes('/film/ohne-2'));
+  const liste = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  assert.equal(liste.itemListElement.length, 1);
+});
+
 test('Footer: SEO-Seiten und App-Footer (index.html) verlinken dieselben Uebersichten', async () => {
   const { FOOTER_BEREICHE, seite404 } = await import('../lib/seoRender.js');
   const { readFileSync } = await import('node:fs');

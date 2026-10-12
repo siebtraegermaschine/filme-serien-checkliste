@@ -133,6 +133,7 @@ test('ladeAnbieterSeite: unbekannter Anbieter liefert null, bekannter gruppiert 
   assert.equal(daten.name, 'SEOTEST Anbieter');
   assert.equal(daten.filme.length, 1);
   assert.equal(daten.serien.length, 0);
+  assert.equal(daten.filme[0].hatSeite, false, 'ohne Katalog-Titel keine eigene Seite');
 });
 
 test('ladeKinoStadt: Staedte unter der Mindestzahl liefern null', async (t) => {

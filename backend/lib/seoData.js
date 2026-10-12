@@ -294,6 +294,13 @@ export async function ladeAnbieterSeite(anbieterSlug, locale) {
   );
   if (!rows.length) return null;
 
+  // Nur Titel mit eigener Titelseite duerfen verlinkt werden (sonst 404).
+  const { rows: mitSeite } = await pool.query(
+    `SELECT type, tmdb_id FROM ${TITEL_MIT_KENNUNG} WHERE tmdb_id = ANY($1::int[])`,
+    [rows.map((r) => r.tmdb_id)]
+  );
+  const hatSeite = new Set(mitSeite.map((r) => `${r.type}:${r.tmdb_id}`));
+
   const neuGrenze = new Date(Date.now() - 30 * 24 * 3_600_000);
   const filme = rows.filter((r) => r.type === 'movie');
   const serien = rows.filter((r) => r.type === 'series');
@@ -308,6 +315,7 @@ export async function ladeAnbieterSeite(anbieterSlug, locale) {
     tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
     genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
     posterPath: r.poster_path, neu: r.first_seen_at && r.first_seen_at > neuGrenze,
+    hatSeite: hatSeite.has(`${r.type}:${r.tmdb_id}`),
   });
 
   return {
