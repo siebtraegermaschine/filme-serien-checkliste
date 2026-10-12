@@ -311,7 +311,7 @@ export function seiteTitelDetail(titel, locale) {
   const faktenZeilen = [
     // Bei Serien fuehrt das Feld die Idee/Entwicklung (TMDB created_by), keine Regie.
     titel.director ? [titel.type === 'series' ? T.idee : T.regie, titel.regisseurPersonId && hatSeitenart(locale, 'person')
-      ? `<a href="/${locale}/regisseur/${slugify(titel.director)}-${titel.regisseurPersonId}">${attrEsc(titel.director)}</a>`
+      ? `<a href="/${locale}/regisseur/${slugify(titel.director, locale)}-${titel.regisseurPersonId}">${attrEsc(titel.director)}</a>`
       : attrEsc(titel.director)] : null,
     (titel.genres || []).length ? [T.genre, genreLinksHtml(titel.genres, titel.type, locale)] : null,
     titel.laufzeitMinuten ? [T.laufzeit, T.minuten(titel.laufzeitMinuten)] : null,
@@ -336,7 +336,7 @@ export function seiteTitelDetail(titel, locale) {
   // Ruecksturz auf die reine Namensliste aus titles.cast_names.
   const schauspielerIds = titel.schauspielerIds || new Map();
   const schauspielerName = (name) => schauspielerIds.has(name) && hatSeitenart(locale, 'person')
-    ? `<a href="/${locale}/schauspieler/${slugify(name)}-${schauspielerIds.get(name)}">${attrEsc(name)}</a>`
+    ? `<a href="/${locale}/schauspieler/${slugify(name, locale)}-${schauspielerIds.get(name)}">${attrEsc(name)}</a>`
     : attrEsc(name);
   const besetzungHtml = (titel.besetzungRollen && titel.besetzungRollen.length)
     ? `<ul class="besetzung-liste">${titel.besetzungRollen.map((c) => `<li><b>${schauspielerName(c.name)}</b>${c.rolle ? ` ${attrEsc(T.als)} ${attrEsc(c.rolle)}` : ''}</li>`).join('')}</ul>`
@@ -353,7 +353,7 @@ export function seiteTitelDetail(titel, locale) {
     : '';
 
   const regisseurName = titel.regisseurPersonId && hatSeitenart(locale, 'person')
-    ? `<a href="/${locale}/regisseur/${slugify(titel.director)}-${titel.regisseurPersonId}">${attrEsc(titel.director)}</a>`
+    ? `<a href="/${locale}/regisseur/${slugify(titel.director, locale)}-${titel.regisseurPersonId}">${attrEsc(titel.director)}</a>`
     : attrEsc(titel.director);
   const regisseurFilmeHtml = titel.regisseurFilme.length && hatSeitenart(locale, 'titel')
     ? `<h3>${T.weitereVon(regisseurName)}</h3><div class="raster">${titel.regisseurFilme.map((t) => karte(t, artWort, locale)).join('')}</div>`

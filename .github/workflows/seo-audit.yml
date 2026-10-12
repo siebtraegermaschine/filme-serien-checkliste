@@ -1,0 +1,36 @@
+name: SEO-Audit (woechentlich)
+
+# Kleine Stichprobe (40 URLs, 1 Req/s) gegen movietaste.de plus JSON-LD-Probe je
+# Seitenart. Nur GET, blockiert nichts (continue-on-error); der Bericht liegt als
+# Artefakt am Lauf, ein roter Schritt heisst: Seitenart pruefen.
+on:
+  schedule:
+    - cron: '43 5 * * 1'
+  workflow_dispatch: {}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: SEO-Audit (Stichprobe)
+        continue-on-error: true
+        run: node scripts/seo-audit.mjs --stichprobe=40 --rate-ms=1000 --links=60 --out=/tmp/seo-audit.md
+      - name: JSON-LD je Seitenart
+        continue-on-error: true
+        run: node scripts/jsonld-check.mjs | tee /tmp/jsonld-check.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seo-audit
+          path: |
+            /tmp/seo-audit.md
+            /tmp/jsonld-check.md
+          if-no-files-found: ignore

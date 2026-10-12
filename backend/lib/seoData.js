@@ -184,7 +184,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     quelle: 'titles', // fuer ergaenzeBackdrop() aus share.js
     tmdbId: titel.tmdb_id,
     type: titel.type,
-    slug: slugify(titel.title),
+    slug: slugify(titel.title, locale),
     title: titel.title,
     year: titel.year,
     genres: titel.genres || [],

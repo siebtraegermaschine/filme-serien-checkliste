@@ -319,7 +319,12 @@
 - **Befund**: ca. 600 Titel ohne `tmdb_id` kommen in den Paketen nicht vor, nicht angefasst.
 - **Als Nächstes**: Runde 27 per `scripts/seo-runde.sh` (in zsh ohne nomatch-Fehler; im Worktree Schritte einzeln).
 
-## Mehrsprachigkeit vorbereitet (12.10.2026, Worktree, noch nicht live)
+## Freigaben 12.10.2026 (live)
+- Sechs Locales (en-gb, es-es, fr-fr, it-it, nl-nl, pt-pt) aktiv, alle noindex, nicht in Sitemap/robots. Start-JSON-LD ohne leeres `hasPart`.
+- Slug-Transliteration (`slugify(text, locale)`): nur Nicht-de-Locales (Akzente, ø/æ/ł...), de-de unveraendert, damit bestehende URLs bleiben. Test `slug.test.js`; Kino-Hub-Leer-Slug-Test `seoKinoHub.test.js`.
+- Woechentlicher Audit: `.github/workflows/seo-audit.yml` (40 URLs, 1 Req/s, nicht blockierend, Bericht als Artefakt).
+
+## Mehrsprachigkeit vorbereitet (12.10.2026)
 
 **Gebaut (Technik, alles noindex außer de-de):** Locale-Stufen aktiv vs.
 indexierbar in `backend/lib/seoLocale.js`; `seoTexte.js` (Chrome-Texte
