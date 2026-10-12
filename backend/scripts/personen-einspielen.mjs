@@ -29,11 +29,8 @@ import 'dotenv/config';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pool } from '../db/pool.js';
+import { personZuSchluessel } from './personen-daten.mjs';
 import { formatFehlerPerson, faktenVerdachtPerson } from './seo-personen-check.mjs';
-
-const NOTE_SQL = `CASE WHEN COALESCE(rating, 0) = 0 THEN 0
-  ELSE (COALESCE(vote_count, 0)::float / (COALESCE(vote_count, 0) + 1000)) * rating
-     + (1000::float / (COALESCE(vote_count, 0) + 1000)) * 6.76 END`;
 
 function argumente() {
   const a = process.argv.slice(2);
@@ -65,49 +62,6 @@ function texteLesen(opt) {
   return { dateien, texte };
 }
 
-const geburtstagString = (wert) => {
-  if (!wert) return null;
-  const d = new Date(wert);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-};
-
-// Holt zu einem Schluessel (rolle:tmdbPersonId) die Person aus dem Cache und
-// ihre rollengefilterte Filmografie -- dieselbe Abfrage wie in
-// personen-pakete.mjs, bewusst dupliziert statt importiert (das Paket-Skript
-// laeuft beim Import direkt in main(), ist also kein Modul zum Wiederverwenden).
-async function personDatensatz(schluessel) {
-  const [rolle, tmdbIdStr] = schluessel.split(':');
-  const tmdbId = Number(tmdbIdStr);
-  if (!['regisseur', 'schauspieler'].includes(rolle) || !Number.isInteger(tmdbId)) return null;
-
-  const { rows: personRows } = await pool.query(
-    `SELECT pr.name AS katalogname, pc.biografie, pc.geburtstag
-       FROM personen_resolution pr
-       JOIN personen_cache pc ON pc.tmdb_person_id = pr.tmdb_person_id
-      WHERE pr.tmdb_person_id = $1
-      LIMIT 1`,
-    [tmdbId]
-  );
-  if (!personRows.length) return null;
-  const person = personRows[0];
-
-  const bedingung = rolle === 'regisseur' ? 'director = $1' : '$1 = ANY(cast_names)';
-  const { rows: filmRows } = await pool.query(
-    `SELECT title, year, type, genres, rating FROM titles
-      WHERE ${bedingung} ORDER BY ${NOTE_SQL} DESC LIMIT 24`,
-    [person.katalogname]
-  );
-  if (!filmRows.length) return null;
-
-  return {
-    name: person.katalogname,
-    rolle: rolle === 'regisseur' ? 'Regisseur/in' : 'Schauspieler/in',
-    geburtstag: geburtstagString(person.geburtstag),
-    biografie: person.biografie,
-    filmografie: filmRows.map((f) => ({ title: f.title, year: f.year, type: f.type, genres: f.genres || [], rating: f.rating })),
-  };
-}
-
 async function main() {
   const opt = argumente();
   if (!opt.datei && !opt.verzeichnis) {
@@ -124,7 +78,7 @@ async function main() {
   const beanstandet = [];
 
   for (const [schluessel, { text, quelle }] of texte) {
-    const p = await personDatensatz(schluessel);
+    const p = await personZuSchluessel(schluessel);
     if (!p) {
       zaehler.unbekannt++;
       beanstandet.push({ schluessel, quelle, grund: ['Schluessel gehoert zu keiner bekannten Person/Rolle im Katalog'] });
@@ -134,15 +88,14 @@ async function main() {
     const fv = faktenVerdachtPerson(text, p);
     const eintrag = { schluessel, name: p.name, quelle, locale: opt.locale, formatFehler: ff, faktenVerdacht: fv };
 
-    if (ff.length) { zaehler.format++; beanstandet.push({ ...eintrag, grund: ff }); protokoll.write(JSON.stringify({ ...eintrag, status: 'format' }) + '\n'); continue; }
+    if (ff.length) { zaehler.format++; beanstandet.push({ ...eintrag, grund: ff }); protokoll.write(JSON.stringify({ ...eintrag, status: 'format', text }) + '\n'); continue; }
     if (fv.length) { zaehler.fakten++; beanstandet.push({ ...eintrag, grund: fv }); protokoll.write(JSON.stringify({ ...eintrag, status: 'fakten', text }) + '\n'); continue; }
 
     if (!opt.dryRun) {
       await pool.query(
         `INSERT INTO seo_content (bereich, schluessel, locale, text)
          VALUES ('person', $1, $2, $3)
-         ON CONFLICT (bereich, schluessel, locale) DO UPDATE
-           SET text = EXCLUDED.text, aktualisiert_am = now()`,
+         ON CONFLICT (bereich, schluessel, locale) DO NOTHING`,
         [schluessel, opt.locale, text]
       );
     }

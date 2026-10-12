@@ -128,3 +128,20 @@ Formulierungen (Auszeichnung, Privatleben, Werturteil, Karriereeinordnung,
 Kontroverse). Trotzdem: Texte sorgfältig gegen die obigen Regeln prüfen,
 bevor sie abgegeben werden — die automatische Prüfung fängt die häufigsten
 Fehler ab, ersetzt aber nicht die eigene Sorgfalt.
+
+Lauf die Prüfung selbst, bevor du fertig meldest (im Verzeichnis `backend`,
+ohne Datenbank):
+
+    node scripts/personen-selbstcheck.mjs PAKETDATEI TEXTDATEI
+
+Sie nennt je beanstandetem Text die Gründe. Beanstandete Texte überarbeiten,
+bis der Lauf „N von N ohne Beanstandung“ meldet. Häufige Gründe und ihre
+Abhilfe:
+- „Zahl ohne Beleg“: jede Zahl im Text muss im Datensatz stehen oder sich
+  zwingend daraus ergeben (Titelzahl, Zeitspanne, Abstand zum Geburtsjahr,
+  Bewertungen, deren Spanne und Schnitt). Sonst die Zahl streichen.
+- „Auszeichnung“, „Privatleben“, „Produktionsangabe“, „Rezeption“: nur
+  schreiben, wenn der Biografietext es sinngemäß nennt; sonst weglassen.
+- Wörter wie Oscar, nominiert, Sohn, Kinder, Dreharbeiten gelten als belegt,
+  wenn die Biografie die englische Entsprechung (Academy Award, nominated,
+  son, children, filming) nennt.

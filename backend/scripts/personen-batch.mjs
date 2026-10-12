@@ -36,12 +36,9 @@ import 'dotenv/config';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pool } from '../db/pool.js';
+import { kandidaten, personObjekt, personZuSchluessel } from './personen-daten.mjs';
 import { PERSON_ABSCHNITTE, datensatzPerson, formatFehlerPerson, faktenVerdachtPerson } from './seo-personen-check.mjs';
 import { PREISE, kostenBerechnen, customId, schluesselAusCustomId, ergebnisZeilenLesen, statusLesen } from './seo-batch.mjs';
-
-const NOTE_SQL = `CASE WHEN COALESCE(rating, 0) = 0 THEN 0
-  ELSE (COALESCE(vote_count, 0)::float / (COALESCE(vote_count, 0) + 1000)) * rating
-     + (1000::float / (COALESCE(vote_count, 0) + 1000)) * 6.76 END`;
 
 function argumente() {
   const a = process.argv.slice(2);
@@ -57,110 +54,6 @@ function argumente() {
     dryRun: a.includes('--dry-run'),
     journal: hol('journal', path.join(import.meta.dirname, '.personen-batch-journal.jsonl')),
     statusDatei: hol('status-datei', path.join(import.meta.dirname, '.personen-batch-lauf.json')),
-  };
-}
-
-// --- Kandidaten -------------------------------------------------------------
-// Dieselbe Priorisierung wie personen-pakete.mjs (Schwelle, Biografie
-// vorhanden, Namenskollisions-Plausibilitaetscheck), aber als flache Liste
-// von Rollen-Eintraegen mit direktem NOT EXISTS gegen seo_content -- so wie
-// kandidaten() in seo-batch.mjs. `ausschluss` sind Schluessel, die in DIESEM
-// Lauf schon versucht wurden (siehe Kopfkommentar zu seo-batch.mjs).
-async function kandidaten({ locale, limit, minTitel, ausschluss }) {
-  const { rows } = await pool.query(
-    `WITH regie AS (
-       SELECT director AS name, count(*) AS anzahl
-         FROM titles WHERE director IS NOT NULL AND director <> '' GROUP BY director
-     ),
-     besetzung AS (
-       SELECT unnest(cast_names) AS name, count(*) AS anzahl
-         FROM titles WHERE cast_names IS NOT NULL GROUP BY unnest(cast_names)
-     ),
-     titelzahl AS (
-       SELECT name, sum(anzahl) AS gesamt FROM (
-         SELECT * FROM regie UNION ALL SELECT * FROM besetzung
-       ) x GROUP BY name
-     ),
-     fruehestes AS (
-       SELECT name, min(year) AS jahr FROM (
-         SELECT director AS name, year FROM titles WHERE director IS NOT NULL AND director <> '' AND year IS NOT NULL
-         UNION ALL
-         SELECT unnest(cast_names) AS name, year FROM titles WHERE cast_names IS NOT NULL AND year IS NOT NULL
-       ) x GROUP BY name
-     ),
-     -- Ein tmdb_id kann mehrere Namens-Aliase in personen_resolution haben
-     -- (z. B. Kuenstlername und buergerlicher Name) -- ohne Gruppierung nach
-     -- tmdb_id entstehen doppelte Rollen-Eintraege mit demselben Schluessel,
-     -- was die Batch-API wegen doppelter custom_ids hart ablehnt.
-     personen AS (
-       SELECT pr.tmdb_person_id AS tmdb_id, array_agg(DISTINCT pr.name) AS namen,
-              max(pc.biografie) AS biografie, max(pc.geburtstag) AS geburtstag,
-              sum(coalesce(r.anzahl, 0)) AS regie_anzahl, sum(coalesce(b.anzahl, 0)) AS besetzung_anzahl
-         FROM personen_resolution pr
-         JOIN titelzahl t ON t.name = pr.name
-         JOIN personen_cache pc ON pc.tmdb_person_id = pr.tmdb_person_id
-         LEFT JOIN regie r ON r.name = pr.name
-         LEFT JOIN besetzung b ON b.name = pr.name
-         LEFT JOIN fruehestes f ON f.name = pr.name
-        WHERE pr.tmdb_person_id IS NOT NULL
-          AND t.gesamt >= $1
-          AND pc.biografie IS NOT NULL AND pc.biografie <> ''
-          AND NOT (
-                pc.geburtstag IS NOT NULL AND f.jahr IS NOT NULL
-                AND (extract(year FROM pc.geburtstag)::int > f.jahr
-                     OR f.jahr - extract(year FROM pc.geburtstag)::int < 5)
-              )
-        GROUP BY pr.tmdb_person_id
-     ),
-     rollen AS (
-       SELECT tmdb_id, namen, biografie, geburtstag, 'regisseur' AS rolle FROM personen WHERE regie_anzahl > 0
-       UNION ALL
-       SELECT tmdb_id, namen, biografie, geburtstag, 'schauspieler' AS rolle FROM personen WHERE besetzung_anzahl > 0
-     )
-     SELECT tmdb_id, namen, biografie, geburtstag, rolle
-       FROM rollen r
-      WHERE NOT EXISTS (
-              SELECT 1 FROM seo_content s
-               WHERE s.bereich = 'person' AND s.locale = $2
-                 AND s.schluessel = r.rolle || ':' || r.tmdb_id)
-        AND NOT (r.rolle || ':' || r.tmdb_id = ANY($4::text[]))
-      ORDER BY r.tmdb_id, r.rolle
-      LIMIT $3`,
-    [minTitel, locale, limit, [...ausschluss]]
-  );
-  return rows;
-}
-
-// namen: alle Aliase derselben tmdb_id (siehe kandidaten()) -- ein Titel kann
-// unter einem anderen Alias verzeichnet sein als dem, der spaeter als Name
-// angezeigt wird, deshalb hier gegen alle Aliase matchen.
-async function filmografieFuerRolle(namen, rolle) {
-  const bedingung = rolle === 'regisseur' ? 'director = ANY($1::text[])' : 'cast_names && $1::text[]';
-  const { rows } = await pool.query(
-    `SELECT title, year, type, genres, rating FROM titles
-      WHERE ${bedingung} ORDER BY ${NOTE_SQL} DESC LIMIT 24`,
-    [namen]
-  );
-  return rows;
-}
-
-const geburtstagString = (wert) => {
-  if (!wert) return null;
-  const d = new Date(wert);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-};
-
-// Reichert eine Kandidatenzeile um ihre rollengefilterte Filmografie an und
-// baut daraus dasselbe Person-Objekt, das datensatzPerson()/faktenVerdachtPerson()
-// erwarten -- identisch zu personDatensatz() in personen-einspielen.mjs.
-async function personObjekt(row) {
-  const filme = await filmografieFuerRolle(row.namen, row.rolle);
-  return {
-    name: row.namen[0],
-    rolle: row.rolle === 'regisseur' ? 'Regisseur/in' : 'Schauspieler/in',
-    geburtstag: geburtstagString(row.geburtstag),
-    biografie: row.biografie,
-    filmografie: filme.map((f) => ({ title: f.title, year: f.year, type: f.type, genres: f.genres || [], rating: f.rating })),
   };
 }
 
@@ -373,8 +266,7 @@ async function chunkVerarbeiten({ apiKey, opt, liste, protokoll, zaehler, status
       await pool.query(
         `INSERT INTO seo_content (bereich, schluessel, locale, text)
          VALUES ('person', $1, $2, $3)
-         ON CONFLICT (bereich, schluessel, locale) DO UPDATE
-           SET text = EXCLUDED.text, aktualisiert_am = now()`,
+         ON CONFLICT (bereich, schluessel, locale) DO NOTHING`,
         [schluessel, opt.locale, text]
       );
       if (beispieleGezeigt < 3) {
@@ -414,23 +306,10 @@ async function main() {
   if (status.ausgegeben) console.log(`Fortsetzung eines Laufs: ${status.ausgegeben.toFixed(2)} $ bereits ausgegeben, ${status.texte} Texte bisher.`);
 
   if (status.aktuellerBatch) {
-    const rows = status.aktuellerBatch.schluessel.map((s) => {
-      const [rolle, tmdb_id] = s.split(':');
-      return { rolle, tmdb_id: Number(tmdb_id) };
-    });
     const liste = [];
-    for (const r of rows) {
-      const { rows: personRows } = await pool.query(
-        `SELECT array_agg(DISTINCT pr.name) AS namen, max(pc.biografie) AS biografie, max(pc.geburtstag) AS geburtstag
-           FROM personen_resolution pr
-           JOIN personen_cache pc ON pc.tmdb_person_id = pr.tmdb_person_id
-          WHERE pr.tmdb_person_id = $1
-          GROUP BY pr.tmdb_person_id`,
-        [r.tmdb_id]
-      );
-      if (!personRows.length) continue;
-      const row = { ...personRows[0], tmdb_id: r.tmdb_id, rolle: r.rolle };
-      liste.push({ schluessel: `${r.rolle}:${r.tmdb_id}`, p: await personObjekt(row) });
+    for (const schluessel of status.aktuellerBatch.schluessel) {
+      const p = await personZuSchluessel(schluessel);
+      if (p) liste.push({ schluessel, p });
     }
     await chunkVerarbeiten({ apiKey, opt, liste, protokoll, zaehler, status });
   }

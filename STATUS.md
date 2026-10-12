@@ -221,6 +221,26 @@
   laufenden Batch-Läufen möglichst keinen Zwischen-Push auf `main`
   vornehmen, da jeder Push (auch dokumentationsseitig) einen Redeploy und
   damit Datenverlust bei den Lauf-Statusdateien auslöst.
+- Personen-Texte, abgelehnte neu versuchen (A2, 12.10.2026): offen waren
+  2.672 Rollen (745 Regie; 1.205 mit Biografie < 300 Zeichen, 598 mit >= 5
+  Titeln). Fehleranalyse an einer 120er-Pilotrunde im Abo: der alte Prüfer
+  beanstandete 51 von 120 (61x „Zahl ohne Beleg“, 9x Auszeichnung, 3x
+  Privatleben, 3x Produktion, 1x Rezeption) – überwiegend Falschpositive:
+  aus den Daten errechnete Zahlen (Bewertungsspanne, Schnitt, Anzahl−1,
+  Jahreskürzel), englische Zahlwörter/Tausendertrenner und englische Belege
+  für deutsche Wörter (Academy Award → Oscar, son → Sohn). Prüfer
+  (`seo-personen-check.mjs`) darum um abgeleitete Zahlen und eine enge
+  EN→DE-Belegtabelle erweitert (Tests `backend/test/personenCheck.test.js`);
+  echte Verstöße (erfundene Auszeichnung/Privatleben/Zahl/Person) bleiben
+  beanstandet. Gemeinsame Datenzugriffe in `personen-daten.mjs`,
+  Selbstprüfung für Bearbeiter ohne DB: `personen-selbstcheck.mjs`
+  (im Auftrag `seo-auftrag-personen.md` verlinkt). Pilot: 119 von 120 Texten
+  live. Zweite Runde (150 Zufallsrollen, 10 Subagenten): alle 150 bestehen
+  den neuen Prüfer im Probelauf, Einspielen live war nicht freigegeben.
+  Rest per Batch vorbereitet, NICHT gestartet: nach Läufen 3/4 ca. 0,005 $
+  je Eintrag, also ca. 13 $ für ~2.500 Rollen (Obergrenze 20 $):
+  `ANTHROPIC_API_KEY=… node scripts/personen-batch.mjs --limit 2500 --max-kosten 20`
+  (vorher `--dry-run --limit 50`; kein Zwischen-Push während des Laufs).
 - Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
   eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
 - Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
