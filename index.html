@@ -7656,7 +7656,7 @@ function kinoHinweisAnhaengen(q){
 function renderLeerzustand(q){
   // Solange der Katalog laeuft, ist "leer" keine Aussage ueber den Inhalt --
   // es ist schlicht noch nichts da.
-  if (!KATALOG_DA) {
+  if (!KATALOG_DA || (q && !KATALOG_VOLL)) {
     list.innerHTML = '<li class="watch-empty">' + TXT.titelWerdenGeladen + '</li>';
     return;
   }
@@ -9674,7 +9674,7 @@ async function renderCinemaPage(){
     return st.disc;
   });
   if (!entries.length) {
-    var text = !KATALOG_DA ? TXT.titelWerdenGeladen
+    var text = (!KATALOG_DA || (q && !KATALOG_VOLL)) ? TXT.titelWerdenGeladen
              : q ? TXT.keineTrefferFuer(searchEl.value.trim())
              // Beide Status abgewaehlt: Die Leere kommt von der Auswahl, nicht
              // von der Person (siehe renderLeerzustand).
@@ -13318,29 +13318,36 @@ function katalogNetzHolen(){
     apiRequest('GET', mitSpracheRegion('/api/streaming')),
   ]);
 }
-async function loadCatalogAndRefresh(){
-  var netz = KATALOG_VORABRUF || katalogNetzHolen();
-  KATALOG_VORABRUF = null;
-  netz.catch(function(){});   // Fehler unten behandeln, hier nur keine "unhandled rejection"
-  // Sprache/Region gehoeren in den Schluessel: der Server liefert je Kombination
-  // andere Titel/Uebersetzungen (siehe mitSpracheRegion).
-  var cacheSchluessel = 'katalog:' + INHALTS_SPRACHE + ':' + REGION_WAHL;
-  var ausCache = false;
-  try {
-    var cached = await katalogCacheLesen(cacheSchluessel);
-    if (cached && cached.combinedRows && cached.streamDoc) {
-      STREAM = cached.streamDoc;
-      genreAliasUebernehmen(cached.streamDoc.genreAlias);
-      buildPool(cached.combinedRows, cached.streamDoc);
-      KATALOG_DA = true;
-      ausCache = true;
-      // Sofort zeichnen, ohne den grossen Katalog-Download abzuwarten -- aber erst
-      // mit dem (kleinen) Nutzerstand, sonst stimmen Taste-Score, Sortierung und
-      // Startfilter erst nach dem Netzabruf.
-      await loadUserProgressAndRefresh();
-    }
-  } catch (e) { /* kein Cache -- unten wird ohnehin frisch geladen */ }
-
+/* Gestufter Start (nur Erstbesuch auf der Startseite, ohne Cache und ohne
+   Anmeldung): erst eine kleine Auswahl (/api/startkatalog), der komplette
+   Katalog (~8 MB gepackt) folgt bei der ersten Bedienung oder nach 20 s. */
+var KATALOG_VOLL = false;
+var KATALOG_VOLL_TIMER = null;
+async function katalogVorabruf(){
+  var einfach = location.pathname === '/' && !location.search;
+  var cached = null;
+  try { cached = await katalogCacheLesen('katalog:' + INHALTS_SPRACHE + ':' + REGION_WAHL); } catch (e) {}
+  if (cached || !einfach) return { start: null, voll: katalogNetzHolen() };
+  var start = apiRequest('GET', mitSpracheRegion('/api/startkatalog'));
+  start.catch(function(){});
+  return { start: start, voll: null };
+}
+function katalogVollWennNoetig(){
+  if (KATALOG_VOLL_TIMER === null || KATALOG_VOLL) return null;
+  clearTimeout(KATALOG_VOLL_TIMER);
+  KATALOG_VOLL_TIMER = null;
+  ['pointerdown', 'keydown', 'touchstart', 'wheel'].forEach(function(ev){
+    document.removeEventListener(ev, katalogVollWennNoetig, true);
+  });
+  return katalogVollUebernehmen(katalogNetzHolen(), 'katalog:' + INHALTS_SPRACHE + ':' + REGION_WAHL, false);
+}
+function katalogVollSpaeterLaden(){
+  KATALOG_VOLL_TIMER = setTimeout(katalogVollWennNoetig, 20000);
+  ['pointerdown', 'keydown', 'touchstart', 'wheel'].forEach(function(ev){
+    document.addEventListener(ev, katalogVollWennNoetig, { capture: true, passive: true });
+  });
+}
+async function katalogVollUebernehmen(netz, cacheSchluessel, ausCache){
   try {
     const [combinedRows, streamDoc] = await netz;
     STREAM = streamDoc;
@@ -13348,6 +13355,7 @@ async function loadCatalogAndRefresh(){
     buildPool(combinedRows, streamDoc);
     LETZTER_KATALOG_LOAD = Date.now();
     KATALOG_DA = true;
+    KATALOG_VOLL = true;
     katalogCacheSchreiben(cacheSchluessel, { combinedRows: combinedRows, streamDoc: streamDoc });
     // Im Hintergrund, damit die Suche unter Filme/Serien sagen kann, ob es zum
     // Begriff auch Kinotreffer gibt (siehe kinoHinweisAnhaengen). Bewusst ohne
@@ -13367,6 +13375,51 @@ async function loadCatalogAndRefresh(){
       console.warn('Katalog-Aktualisierung fehlgeschlagen, Stand aus dem Cache bleibt sichtbar:', err);
     }
   }
+}
+async function loadCatalogAndRefresh(){
+  var vorab = null;
+  try { vorab = KATALOG_VORABRUF ? await KATALOG_VORABRUF : null; } catch (e) {}
+  KATALOG_VORABRUF = null;
+  var netz = vorab && vorab.voll;
+  // Sprache/Region gehoeren in den Schluessel: der Server liefert je Kombination
+  // andere Titel/Uebersetzungen (siehe mitSpracheRegion).
+  var cacheSchluessel = 'katalog:' + INHALTS_SPRACHE + ':' + REGION_WAHL;
+  var ausCache = false;
+  if (vorab && vorab.start) {
+    // Angemeldete brauchen ihre Verknuepfungen im vollen Katalog -- gleich alles laden.
+    if (CURRENT_USER) {
+      netz = katalogNetzHolen();
+    } else {
+      try {
+        const start = await vorab.start;
+        STREAM = start.streamDoc;
+        genreAliasUebernehmen(start.streamDoc.genreAlias);
+        buildPool(start.combinedRows, start.streamDoc);
+        KATALOG_DA = true;
+        await loadUserProgressAndRefresh();
+        katalogVollSpaeterLaden();
+        return;
+      } catch (e) { netz = katalogNetzHolen(); }   // Kleinladung gescheitert: wie bisher alles laden
+    }
+  }
+  if (!netz) netz = katalogNetzHolen();
+  netz.catch(function(){});   // Fehler unten behandeln, hier nur keine "unhandled rejection"
+  try {
+    var cached = await katalogCacheLesen(cacheSchluessel);
+    if (cached && cached.combinedRows && cached.streamDoc) {
+      STREAM = cached.streamDoc;
+      genreAliasUebernehmen(cached.streamDoc.genreAlias);
+      buildPool(cached.combinedRows, cached.streamDoc);
+      KATALOG_DA = true;
+      KATALOG_VOLL = true;
+      ausCache = true;
+      // Sofort zeichnen, ohne den grossen Katalog-Download abzuwarten -- aber erst
+      // mit dem (kleinen) Nutzerstand, sonst stimmen Taste-Score, Sortierung und
+      // Startfilter erst nach dem Netzabruf.
+      await loadUserProgressAndRefresh();
+    }
+  } catch (e) { /* kein Cache -- unten wird ohnehin frisch geladen */ }
+  await katalogVollUebernehmen(netz, cacheSchluessel, ausCache);
 }
 
 /* ---- Auffrischen, wenn die App aus dem Hintergrund zurueckkehrt ----
@@ -13476,7 +13529,7 @@ renderAuthBar();
 listenAnsichtHerstellen();
 startFilterSetzen();
 renderCurrentTab();
-KATALOG_VORABRUF = katalogNetzHolen();
+KATALOG_VORABRUF = katalogVorabruf();
 KATALOG_VORABRUF.catch(function(){});
 apiRequest('GET', '/api/auth/me').then((u) => { CURRENT_USER = u; }).catch(() => { CURRENT_USER = null; }).finally(() => {
   renderAuthBar();
