@@ -56,7 +56,7 @@ test('Nicht-de-Titelseite verlinkt keine Personen-Seiten (noch nicht lokalisiert
 });
 
 test('Nicht-de bleibt noindex, auch mit Text, solange die Locale nicht freigegeben ist', () => {
-  for (const locale of ['en-gb', 'es-es', 'fr-fr', 'it-it', 'nl-nl', 'pt-pt']) {
+  for (const locale of ['es-es', 'it-it', 'nl-nl', 'pt-pt']) {
     assert.equal(meta(seiteTitelDetail(titel('Ein Text.'), locale), 'robots'), 'noindex,follow', locale);
     assert.equal(meta(seiteTitelDetail(titel(null), locale), 'robots'), 'noindex,follow', locale);
   }
@@ -84,10 +84,11 @@ test('Vier-Abschnitte-Text in der Zielsprache erzeugt die lokalisierten Uebersch
 });
 
 test('hreflang: x-default zeigt auf de-de, Cluster nur aus indexierbaren Locales mit Text', () => {
-  const html = seiteTitelDetail(titel('Text', { textLocales: ['de-de', 'en-gb', 'es-es'] }), 'en-gb');
+  const html = seiteTitelDetail(titel('Text', { textLocales: ['de-de', 'en-gb', 'es-es'] }), 'es-es');
   assert.match(html, /hreflang="de-DE" href="https:\/\/movietaste\.de\/de-de\/film\/beispiel-7"/);
   assert.match(html, /hreflang="x-default" href="https:\/\/movietaste\.de\/de-de\/film\/beispiel-7"/);
-  assert.doesNotMatch(html, /hreflang="en-GB"/);
+  assert.match(html, /hreflang="en-GB"/);
+  assert.doesNotMatch(html, /hreflang="es-ES"/);
 });
 
 test('Startseite und 404 sind lokalisiert; Start ohne Text ist noindex', () => {
@@ -140,12 +141,12 @@ test('Route: Personen-Seiten in Nicht-de liefern 404 (ohne DB), inaktive Locales
 
 test('Nicht-de-Hubs: noindex, ohne Text kein Einleitungsabsatz, kein hreflang, lokale Links, de-de behaelt Absatz', () => {
   const daten = { text: null, indexierbar: true, type: 'movie', genres: [], titel: [] };
-  const html = seiteFilmeSerienHub(daten, 'fr-fr', 'filme');
+  const html = seiteFilmeSerienHub(daten, 'es-es', 'filme');
   assert.equal(meta(html, 'robots'), 'noindex,follow');
   assert.doesNotMatch(html, /hreflang=/);
   assert.doesNotMatch(html, /class="einleitung"/);
-  assert.match(html, /href="\/fr-fr\/(bestenlisten|streaming)/);
-  const mit = seiteFilmeSerienHub({ ...daten, text: 'Texte.' }, 'fr-fr', 'filme');
+  assert.match(html, /href="\/es-es\/(bestenlisten|streaming)/);
+  const mit = seiteFilmeSerienHub({ ...daten, text: 'Texte.' }, 'es-es', 'filme');
   assert.match(mit, /class="einleitung"/);
   assert.match(seiteFilmeSerienHub(daten, 'de-de', 'filme'), /class="einleitung"/);
 });
@@ -157,14 +158,14 @@ test('Nicht-de-Bestenlisten-Uebersicht und Reihen-Uebersicht liefern 200-tauglic
   assert.doesNotMatch(b, /Bestenlisten/);
 });
 
-test('Personenseite en-gb/fr-fr: uebersetzte Ueberschriften, noindex solange Locale nicht indexierbar, deutsch unveraendert', () => {
+test('Personenseite en-gb/fr-fr: uebersetzte Ueberschriften, index (Locale indexierbar), deutsch unveraendert', () => {
   const basis = { tmdbPersonId: 7, rolle: 'regisseur', name: 'Ana Test', slug: 'ana-test', biografie: 'Deutsche Bio', fotoPfad: null,
     geburtstag: '1974-02-12', filmografie: [{ id: '1', tmdbId: 1, type: 'movie', slug: 'x', title: 'X', year: 2000 }], indexierbar: true };
   const en = seitePerson({ ...basis, text: '### Career\n\nShe directed films.\n\n### Filmography in our catalogue\n\nOne title.\n\n### Assessment\n\nGood.' }, 'en-gb');
   assert.match(en, /<h2>Career<\/h2>/);
   assert.match(en, /<h2>Filmography<\/h2>|<h2>Filmography \(as director\)<\/h2>/);
   assert.match(en, /Director · born 1974-02-12/);
-  assert.equal(meta(en, 'robots'), 'noindex,follow');
+  assert.equal(meta(en, 'robots'), 'index,follow');
   assert.doesNotMatch(en, /Deutsche Bio/);
   const fr = seitePerson({ ...basis, text: '### Parcours\n\nElle réalise.\n\n### Filmographie chez nous\n\nUn titre.\n\n### Analyse\n\nBien.' }, 'fr-fr');
   assert.match(fr, /<h2>Parcours<\/h2>/);

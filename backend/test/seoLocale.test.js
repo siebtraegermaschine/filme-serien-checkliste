@@ -26,8 +26,8 @@ test('regionFuerLocale: bekanntes Locale liefert seine Region, sonst DE', () => 
   assert.equal(regionFuerLocale('unbekannt'), 'DE');
 });
 
-test('SEO_LOCALES (Sitemap): nur de-de ist indexierbar', () => {
-  assert.deepEqual(SEO_LOCALES, ['de-de']);
+test('SEO_LOCALES (Sitemap): indexierbare Locales laut Konfiguration', () => {
+  assert.deepEqual(SEO_LOCALES, ['de-de', 'en-gb', 'fr-fr']);
   assert.equal(localeIndexierbar('de-de'), true);
   assert.equal(localeIndexierbar('es-es'), false);
 });

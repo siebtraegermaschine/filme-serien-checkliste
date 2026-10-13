@@ -22,6 +22,8 @@
 User-agent: *
 Allow: /$
 Allow: /de-de/
+Allow: /fr-fr/
+Allow: /en-gb/
 Allow: /sitemap-*.xml
 Allow: /impressum.html
 Allow: /datenschutz.html

@@ -10,9 +10,9 @@
 // fuer alle Locales deutsch -- eine Slug-Lokalisierung ist eine eigene Entscheidung.
 export const LOCALE_KONFIG = {
   'de-de': { sprache: 'de', region: 'DE', aktiv: true, indexierbar: true },
-  'en-gb': { sprache: 'en', region: 'GB', aktiv: true, indexierbar: false },
+  'en-gb': { sprache: 'en', region: 'GB', aktiv: true, indexierbar: true },
   'es-es': { sprache: 'es', region: 'ES', aktiv: true, indexierbar: false },
-  'fr-fr': { sprache: 'fr', region: 'FR', aktiv: true, indexierbar: false },
+  'fr-fr': { sprache: 'fr', region: 'FR', aktiv: true, indexierbar: true },
   'it-it': { sprache: 'it', region: 'IT', aktiv: true, indexierbar: false },
   'nl-nl': { sprache: 'nl', region: 'NL', aktiv: true, indexierbar: false },
   'pt-pt': { sprache: 'pt', region: 'PT', aktiv: true, indexierbar: false },
