@@ -145,6 +145,7 @@
     'border:1px solid var(--border,#2a323e);background:var(--card,#171c24);color:var(--text,#e8eaed)}' +
     '.mm-consent-knoepfe .mm-consent-ja{background:var(--accent-soft,rgba(230,179,76,.15));border-color:var(--accent,#e6b34c);color:var(--accent,#e6b34c)}' +
     '.mm-cookie-fuss{text-align:center;font-size:12px;margin:24px 0 16px}' +
+    '.mm-cookie-fuss a{color:inherit;text-decoration:underline}' +
     '[data-cookie-einstellungen]{cursor:pointer}';
 
   var banner = null;
