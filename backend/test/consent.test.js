@@ -18,6 +18,8 @@ import { dokument } from '../lib/seoRender.js';
 
 const WURZEL = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const EINBINDUNG = '<script src="/consent.js" defer></script>';
+// index.html bindet es am Anfang des <body> ein (frueher Banner, siehe consent.js).
+const EINBINDUNG_INDEX = '<script src="/consent.js"></script>';
 const OHNE_EINWILLIGUNG = /googletagmanager\.com|gtag\/js|google-analytics\.com/i;
 
 const htmlDateien = fs.readdirSync(WURZEL).filter((f) => f.endsWith('.html'));
@@ -30,6 +32,10 @@ test('es gibt HTML-Seiten im Wurzelordner (sonst prueft der naechste Test nichts
 test('jede HTML-Seite im Wurzelordner bindet /consent.js im <head> ein', () => {
   for (const f of htmlDateien) {
     const html = fs.readFileSync(path.join(WURZEL, f), 'utf8');
+    if (f === 'index.html') {
+      assert.ok(html.includes(EINBINDUNG_INDEX), `${f}: ${EINBINDUNG_INDEX} fehlt`);
+      continue;
+    }
     const kopf = html.slice(0, html.indexOf('</head>'));
     assert.ok(kopf.includes(EINBINDUNG), `${f}: ${EINBINDUNG} fehlt im <head>`);
   }

@@ -227,9 +227,7 @@
   }
 
   function start() {
-    // Style frueh einhaengen, damit auch ein spaeter geoeffnetes Banner passt.
     bannerBauen();
-    linksVerdrahten();
     var s = stand();
     if (s === 'ja') gaLaden();
     else if (s !== 'nein') zeigen();
@@ -237,6 +235,12 @@
 
   window.MMConsent = { zeigen: zeigen, stand: stand };
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
-  else start();
+  /* Steht das Skript am Anfang des <body> (index.html), erscheint der Banner
+     schon vor dem schweren Seitenskript -- sonst kaeme er erst nach
+     DOMContentLoaded und waere das spaete LCP-Element. Die Links in der
+     Fusszeile gibt es dann noch nicht und werden danach verdrahtet. */
+  if (document.readyState === 'loading') {
+    if (document.body) start();
+    document.addEventListener('DOMContentLoaded', function () { start(); linksVerdrahten(); });
+  } else { start(); linksVerdrahten(); }
 })();

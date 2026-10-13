@@ -1401,10 +1401,11 @@
   ol.list.main-list li.item .dposter { width: 68px; height: 102px; }
   @media (max-width: 640px) { ol.list.main-list li.item .dposter { width: 60px; height: 90px; } }
 </style>
-<!-- Cookie-Banner + Google Analytics (nur nach Zustimmung), siehe /consent.js -->
-<script src="/consent.js" defer></script>
 </head>
 <body>
+<!-- Cookie-Banner + Google Analytics (nur nach Zustimmung), siehe /consent.js.
+     Am Anfang des <body>, damit der Banner vor dem grossen Seitenskript steht. -->
+<script src="/consent.js"></script>
 <header>
   <h1><img class="logo" src="moviematch.webp" width="313" height="84" fetchpriority="high" alt="MovieMatch – Watch more. Search less."></h1>
   <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach DEINEM Geschmack!</b></p>
