@@ -442,6 +442,15 @@ en-gb/es-es haben schon fast alles außer Bestenlisten).
 - Haiku braucht keinen `effort`-Parameter (API 400) — in `seo-batch.mjs`
   behoben.
 
+## Länder-Locales, fr-fr Stufe C, Personen-Rest (13.10.2026)
+- **Länder-Locales live** (de-at, de-ch, fr-ch, en-ca, fr-ca, en-us): eigene Region, Texte der Sprachfassung (`textLocale`), noindex; Kinoorte nur DE (404 sonst).
+- **fr-fr/en-gb indexierbar vorbereitet, nicht umgeschaltet:** `node backend/scripts/indexierung-schalter.mjs an fr-fr en-gb`, danach `cd backend && npm test` und 4 Tests anpassen (seoLocale, SEO_LOCALES, robots). Risiko: englische Rechtstexte ungeprüft. Umschalten nur auf Zuruf.
+- **fr-fr Stufe C:** Lauf verwarf alles wegen Apostroph-Überschrift (56,09 $, 0 Texte). Fix `ueberschriftenNormalisieren` + `seo-journal-nachpruefen.mjs`; 16.665 Texte aus dem Journal eingespielt. Rest: 5.680 zu kurz, 1.620 Faktenverdacht (bleiben Vorlagentext).
+- **Streaming-Rest:** ca. 45.700 Titel anderer Regionen: Aufruf in `seo-titel-anlegen.sql`, dann `seo-titel-kurztexte.mjs` (Prod-Schreibzugriff durch Christian).
+- **Kurztexte-Stichprobe:** 12.033 Texte < 250 Zeichen (dünn), 448 Gruppen / 13.793 Texte mit Vorlagenähnlichkeit, 3.558 Titel ohne Text. Entscheidung offen: noindex oder anreichern.
+- **Personen-Rest (Haiku-Abo):** 524 Texte erzeugt (vor Einspielen: Chris Moore, Nils Poppe, Phil Tippett entfernt); ~109 ausgelassen, 112 heikle Personen liegen (nur einzeln, ohne Straftaten/Gerüchte). Katalogfehler: Rollen passen nicht zur Biografie (u. a. Blake Edwards, Antoine Fuqua), doppelte Einträge (Refn, Bob Gale).
+- **Kosten:** fr-fr Stufe C 56,09 $; Restguthaben ca. 114 $ von 300 $ (Stand 13.10.).
+
 ## Seiten für alle Titel, Pfadwörter (13.10.2026, live)
 - 70.263 Streaming-Titel (DE, AT, CH, FR, GB, US, CA) ohne Seite sind als
   `titles.source='seo'` angelegt (`backend/scripts/seo-titel-anlegen.sql`), mit

@@ -32,7 +32,7 @@ selbst ausführen.
   `docker compose -f docker-compose.yml --profile prod run --rm --no-deps -T -v /opt/movietaste:/repo -w /repo -e TMDB_REGION=XX -e STREAMING_API_URL=https://movietaste.de backend node stream-fetch.mjs`
 - Riskante SQL-Änderungen vor dem Push in `BEGIN;…ROLLBACK;` gegen die echte
   DB testen.
-- Lange Läufe abkoppeln (`setsid nohup … > /tmp/lauf.log 2>&1 &`), sonst
+- Lange Läufe abkoppeln (`setsid nohup … > /tmp/lauf.log 2>&1 &`; `docker compose exec -d` nicht, der Lauf hängt dort am Container), sonst
   stirbt der Lauf mit der SSH-Verbindung.
 - Lokaler Teststand ohne Docker: `embedded-postgres` auf Port 55432,
   `pg_hba.conf` auf `trust`, Backend über `.claude/launch.json` Eintrag
