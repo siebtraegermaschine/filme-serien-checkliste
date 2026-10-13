@@ -9,7 +9,7 @@ const router = createAsyncRouter();
 /* Kleine Erstladung: der kuratierte Katalog plus die bekanntesten Titel aus
    Discovery/Streaming. Damit zeichnet die Startseite, waehrend die komplette
    Liste (/api/titles + /api/streaming, rund 8 MB gepackt) erst danach kommt. */
-const TOP_TITEL = 1200;
+const TOP_TITEL = 600;
 const TOP_FILME = 500;
 const TOP_SERIEN = 300;
 
