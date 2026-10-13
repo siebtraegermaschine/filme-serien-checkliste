@@ -19,9 +19,27 @@ import { sitemapIndex, sitemapBereich, BEREICHE, bereichFuerLocale } from '../li
 import { track } from '../lib/track.js';
 import { tageskennung } from '../lib/tageskennung.js';
 import { herkunftKategorie, geraetTyp, istBot } from '../lib/herkunft.js';
+import { lokalisierePfade, pfadAnalysieren } from '../lib/seoPfade.js';
 import { listeAusPfad, analyticsTypFuerListe } from '../lib/seoBestenlisten.js';
 
 const router = createAsyncRouter();
+
+// Pfadwoerter je Sprache (lib/seoPfade.js): eingehend zurueck ins Deutsche, ausgehend
+// in allen URLs der Antwort lokalisiert. Muss vor allen anderen Handlern stehen.
+router.use((req, res, next) => {
+  const a = pfadAnalysieren(req.path);
+  if (a.umleiten) {
+    const q = req.originalUrl.includes('?') ? req.originalUrl.slice(req.originalUrl.indexOf('?')) : '';
+    return res.redirect(301, a.umleiten + q);
+  }
+  if (a.pfad !== req.path) req.url = a.pfad + (req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '');
+  const senden = res.send.bind(res);
+  res.send = (koerper) => {
+    const typ = String(res.get('content-type') || '');
+    return senden(typeof koerper === 'string' && /html|xml/.test(typ) ? lokalisierePfade(koerper) : koerper);
+  };
+  next();
+});
 
 /* Aufrufzaehler der SEO-Seiten (16.09.2026, fuer die Analytics-Ansicht des
    Betreibers, nach dem Vorbild von CouchUltras): serverseitig und OHNE
