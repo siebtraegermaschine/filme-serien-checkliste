@@ -256,6 +256,8 @@
     margin: 22px auto 0;
     padding: 0 20px;
   }
+  /* Platz vor dem ersten Rendern reservieren, sonst springt der Footer (CLS) */
+  ol.list#list:empty { min-height: 100vh; }
   li.item {
     display: flex;
     align-items: center;
@@ -1398,7 +1400,7 @@
 </head>
 <body>
 <header>
-  <h1><img class="logo" src="moviematch.png" alt="MovieMatch – Watch more. Search less."></h1>
+  <h1><img class="logo" src="moviematch.webp" width="313" height="84" fetchpriority="high" alt="MovieMatch – Watch more. Search less."></h1>
   <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach DEINEM Geschmack!</b></p>
   <!-- Zweite Zeile: Kursiv steht wie in der ersten Zeile der Schluesselbegriff
        -- dort "Filme & Serien", hier "Übereinstimmungen". Bewusst ohne "beide":
