@@ -7,6 +7,13 @@
 
 ## Offen
 
+- **Regie/Besetzung in CJK-Schrift** (13.10.2026) — bei ca. 1.994 Titeln
+  steht `director` (teils auch `cast_names`) in Originalschrift, z. B.
+  中田秀夫. Vermutlich liefert der TMDB-Abruf den Namen in Originalschrift,
+  wenn kein lateinischer hinterlegt ist. Zu klären: Ursache im Abruf, dann
+  Massenkorrektur (Transliteration) per Lauf. Nur `movie:20329` ist von Hand
+  korrigiert (Hideo Nakata, Ken'ichi Matsuyama).
+
 - **Rechtstexte: anwaltliche Prüfung weiterhin ausständig** (UEBERGABE-OFFEN
   3.1) — Sammelauftrag: datenschutz.html/impressum.html komplett, englische
   Arbeitsfassungen, Benachrichtigungs-Mails, Nicht-EWR-Länder (USA CCPA/COPPA,
