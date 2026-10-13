@@ -16,6 +16,7 @@
  */
 
 import { merkmaleAusDetail } from './backend/lib/tmdbMerkmale.js';
+import { tmdbText } from './backend/lib/tmdbText.js';
 
 const API = 'https://api.themoviedb.org/3';
 const KEY = process.env.TMDB_API_KEY;
@@ -90,8 +91,8 @@ function uebersetzungenAus(detail, kind) {
       && (u.data.overview || u.data.title || u.data.name));
     const beste = kandidaten.find((u) => u.iso_3166_1 === hauptland) || kandidaten[0];
     if (!beste) continue;
-    const t = ((kind === 'movie' ? beste.data.title : beste.data.name) || '').trim();
-    const ov = (beste.data.overview || '').trim();
+    const t = tmdbText(kind === 'movie' ? beste.data.title : beste.data.name);
+    const ov = tmdbText(beste.data.overview);
     if (!t && !ov) continue;
     aus[sprache] = {};
     if (t) aus[sprache].t = t;
