@@ -29,7 +29,7 @@ test('regionFuerLocale: bekanntes Locale liefert seine Region, sonst DE', () => 
 test('SEO_LOCALES (Sitemap): nur de-de ist indexierbar', () => {
   assert.deepEqual(SEO_LOCALES, ['de-de']);
   assert.equal(localeIndexierbar('de-de'), true);
-  assert.equal(localeIndexierbar('en-gb'), false);
+  assert.equal(localeIndexierbar('es-es'), false);
 });
 
 test('sprachVon und hatSeitenart', () => {
