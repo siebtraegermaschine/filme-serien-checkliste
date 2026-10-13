@@ -91,3 +91,12 @@ test('ergebnisZeilenLesen: JSONL mit leeren Zeilen wird korrekt zerlegt', () => 
   assert.equal(zeilen[0].custom_id, 'movie-1');
   assert.equal(zeilen[1].result.type, 'errored');
 });
+
+test('Ueberschriften: gerader Apostroph wird angeglichen (fr-fr), Text sonst unveraendert', async () => {
+  const { formatFehler, ueberschriftenNormalisieren } = await import('../scripts/seo-batch.mjs');
+  const text = `### De quoi il s'agit\n${'mot '.repeat(300)}\n### Genèse du projet\nl'idée\n### Dans les coulisses\nx\n### Portée et réception\nx`;
+  assert.ok(formatFehler(text, 'fr-fr').some((f) => f.startsWith('Ueberschriften')));
+  const norm = ueberschriftenNormalisieren(text);
+  assert.deepEqual(formatFehler(norm, 'fr-fr'), []);
+  assert.ok(norm.includes("l'idée"));
+});

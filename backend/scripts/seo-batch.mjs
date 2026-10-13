@@ -103,7 +103,6 @@ async function kandidaten({ locale, limit, minVotes, stufe, ausschluss }) {
             t.vote_count, t.plot, t.overview_en, t.certification, t.uebersetzungen
        FROM titles t
       WHERE t.tmdb_id IS NOT NULL
-        AND t.source <> 'seo'
         AND t.plot IS NOT NULL AND length(t.plot) > $4
         AND t.director IS NOT NULL AND t.director <> ''
         AND t.year IS NOT NULL
@@ -403,6 +402,12 @@ async function batchErgebnisse({ apiKey, resultsUrl }) {
 }
 
 // --- Formatpruefung ---------------------------------------------------------
+// Das Modell schreibt in Ueberschriften den geraden Apostroph (fr: "De quoi il s'agit"),
+// die Sollwerte tragen den typografischen. Vor der Pruefung angleichen.
+export function ueberschriftenNormalisieren(text) {
+  return text.replace(/^(#{1,6}\s*.+)$/gm, (z) => z.replace(/'/g, '\u2019'));
+}
+
 // Dieselben Regeln wie seo-texte-anhaengen.mjs, damit beide Wege dasselbe liefern.
 export function formatFehler(text, locale) {
   const soll = SPRACHEN[locale].abschnitte;
@@ -584,7 +589,7 @@ async function chunkVerarbeiten({ apiKey, opt, liste, protokoll, zaehler, status
     status.ausgegeben += kosten;
     status.aufrufe++;
 
-    const text = (nachricht.content || []).map((c) => c.text || '').join('').trim();
+    const text = ueberschriftenNormalisieren((nachricht.content || []).map((c) => c.text || '').join('').trim());
     const ff = formatFehler(text, opt.locale);
     const fv = faktenVerdacht(text, t, opt.locale);
     const basis = { schluessel, titel: t.title, jahr: t.year, locale: opt.locale, formatFehler: ff, faktenVerdacht: fv };
