@@ -2,6 +2,7 @@
 // (PLAN-SEO.md, Plan "SEO-Seiten: technische Umsetzung"). Kein Splicing wie
 // bei der App-OG-Route (server.js) -- jede Funktion hier gibt ein fertiges
 // Dokument zurueck. Kein App-JS, eigenes seo.css (Architektur-Entscheidung 1).
+import { PERSON_TX } from './seoPersonen.js';
 import { hreflangCode, hatSeitenart, localeIndexierbar, sprachVon, regionFuerLocale } from './seoLocale.js';
 import { seoTexte, ABSCHNITTE, zahlFormat } from './seoTexte.js';
 import { genreAnzeige } from './genreNamen.js';
@@ -229,10 +230,11 @@ const NEUE_ABSCHNITTE = ['Worum es geht', 'Entstehungsgeschichte', 'Hinter den K
 // beide Formate.
 const PERSON_ABSCHNITTE = ['Werdegang', 'Filmografie bei uns', 'Einordnung'];
 
-function personInhaltHtml(text) {
+function personInhaltHtml(text, locale = 'de-de') {
   const abschnitte = parseNeueAbschnitte(text);
   if (!abschnitte) return null;
-  return PERSON_ABSCHNITTE
+  const ueberschriften = PERSON_TX[sprachVon(locale)]?.abschnitte;
+  return (locale === 'de-de' || !ueberschriften ? PERSON_ABSCHNITTE : ueberschriften)
     .filter((h) => abschnitte[h])
     .map((h) => `<h2>${attrEsc(h)}</h2>${absaetzeHtml(abschnitte[h].split('\n\n').map((p) => p.trim()).filter(Boolean))}`)
     .join('');
@@ -692,10 +694,11 @@ const PERSONEN_HUB = {
 };
 
 export function seitePersonenHub(daten, locale) {
-  const cfg = PERSONEN_HUB[daten.rolle];
+  const tx = locale === 'de-de' ? null : PERSON_TX[sprachVon(locale)];
+  const cfg = tx ? tx.hub[daten.rolle] : PERSONEN_HUB[daten.rolle];
   const pfad = `/${locale}/${daten.rolle}`;
   const beschreibung = kurzfassung(daten.text) || cfg.beschreibung;
-  const kette = [{ label: 'Start', href: SITE + '/' }, { label: cfg.titel }];
+  const kette = [{ label: tx ? seoTexte(locale).start : 'Start', href: SITE + '/' }, { label: cfg.titel }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: cfg.titelZeile,
     itemListElement: daten.personen.map((p, i) => listItem(i, p.name, `${SITE}/${locale}/${daten.rolle}/${p.slug}-${p.tmdbPersonId}`)),
@@ -703,12 +706,12 @@ export function seitePersonenHub(daten, locale) {
   const kartenHtml = daten.personen.map((p) => `<a class="karte" href="/${locale}/${daten.rolle}/${p.slug}-${p.tmdbPersonId}">
       ${p.fotoPfad ? `<img src="https://image.tmdb.org/t/p/w300${attrEsc(p.fotoPfad)}" alt="${attrEsc(p.name)}" loading="lazy">` : ''}
       <div class="titel">${attrEsc(p.name)}</div>
-      <div class="info">${p.anzahl} Titel</div>
+      <div class="info">${tx ? tx.titelAnzahl(p.anzahl) : `${p.anzahl} Titel`}</div>
     </a>`).join('');
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
-    <h1>${cfg.h1}</h1>
-    <p class="einleitung">${textBlock(daten.text)}</p>
+    ${brotkrumenHtml(kette, locale)}
+    <h1>${cfg.h1 || cfg.titel}</h1>
+    ${tx ? einleitungHtml(daten.text, locale) : `<p class="einleitung">${textBlock(daten.text)}</p>`}
     <h2>${cfg.ueberschrift}</h2>
     <div class="raster">${kartenHtml}</div>
   `;
@@ -941,45 +944,54 @@ function kurzprofil(daten, rolleWort) {
 }
 
 export function seitePerson(daten, locale) {
-  const rolleWort = daten.rolle === 'regisseur' ? 'Regisseur' : 'Schauspieler';
+  const tx = locale === 'de-de' ? null : PERSON_TX[sprachVon(locale)];
+  const rolleWort = tx ? tx.rolle[daten.rolle] : (daten.rolle === 'regisseur' ? 'Regisseur' : 'Schauspieler');
   const pfad = `/${locale}/${daten.rolle}/${daten.slug}-${daten.tmdbPersonId}`;
-  const titelZeile = `${daten.name} — Filme & Serien im Überblick | MovieMatch`;
-  const profil = kurzprofil(daten, rolleWort);
-  const beschreibung = kurzfassung(daten.text) || kurzfassung(daten.biografie) || kurzfassung(profil);
+  const titelZeile = tx ? tx.titelZeile(daten.name) : `${daten.name} — Filme & Serien im Überblick | MovieMatch`;
+  const profil = tx ? '' : kurzprofil(daten, rolleWort);
+  // Nicht-de: nur mit uebersetztem Text (seoData.js), Biografie/Kurzprofil sind deutsch bzw. englisch und bleiben draussen.
+  const beschreibung = kurzfassung(daten.text) || (tx ? '' : kurzfassung(daten.biografie) || kurzfassung(profil));
+  const hubTitel = tx ? tx.hub[daten.rolle].titel : PERSONEN_HUB[daten.rolle].titel;
   const kette = [
-    { label: 'Start', href: SITE + '/' },
-    { label: PERSONEN_HUB[daten.rolle].titel, href: `${SITE}/${locale}/${daten.rolle}` },
+    { label: tx ? seoTexte(locale).start : 'Start', href: SITE + '/' },
+    { label: hubTitel, href: `${SITE}/${locale}/${daten.rolle}` },
     { label: daten.name },
   ];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'Person', name: daten.name,
     birthDate: daten.geburtstag || undefined,
     image: daten.fotoPfad ? 'https://image.tmdb.org/t/p/w300' + daten.fotoPfad : undefined,
-    description: daten.biografie ? kurzfassung(daten.biografie, 300) : undefined,
+    description: tx ? (beschreibung || undefined) : (daten.biografie ? kurzfassung(daten.biografie, 300) : undefined),
   }, brotkrumenJsonLd(kette)];
 
   const fotoHtml = daten.fotoPfad
     ? `<img src="https://image.tmdb.org/t/p/w300${attrEsc(daten.fotoPfad)}" alt="${attrEsc(daten.name)}">`
     : '';
-  const redaktionHtml = personInhaltHtml(daten.text);
-  const bioHtml = redaktionHtml || (daten.biografie
+  const redaktionHtml = personInhaltHtml(daten.text, locale);
+  const bioHtml = redaktionHtml || (tx ? '' : daten.biografie
     ? `<h2>Biografie</h2><div class="seo-text">${daten.biografie.split('\n').map((p) => p.trim()).filter(Boolean).map((p) => `<p>${attrEsc(p)}</p>`).join('')}</div>`
     : `<h2>Kurzprofil</h2><div class="seo-text"><p>${attrEsc(profil)}</p></div>`);
+  const geboren = tx ? tx.geboren : 'geboren';
+  const filmografie = tx ? tx.filmografie : 'Filmografie';
+  const regie = tx ? tx.regie : ' (Regie)';
 
   const bodyHtml = `
-    ${brotkrumenHtml(kette)}
+    ${brotkrumenHtml(kette, locale)}
     <div class="detail-kopf">
       ${fotoHtml}
       <div>
         <h1>${attrEsc(daten.name)}</h1>
-        <div class="meta-zeile">${rolleWort}${daten.geburtstag ? ' · geboren ' + attrEsc(daten.geburtstag) : ''}</div>
+        <div class="meta-zeile">${rolleWort}${daten.geburtstag ? ` · ${geboren} ` + attrEsc(daten.geburtstag) : ''}</div>
       </div>
     </div>
     ${bioHtml}
-    <h2>Filmografie${rolleWort === 'Regisseur' ? ' (Regie)' : ''}</h2>
+    <h2>${filmografie}${daten.rolle === 'regisseur' ? regie : ''}</h2>
     <div class="raster">${daten.filmografie.map((t) => karte(t, t.type === 'series' ? 'serie' : 'film', locale)).join('')}</div>
   `;
-  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
+  // hreflang nur zu indexierbaren Gegenstuecken; de-de gibt es immer, sobald die Seite indexiert wird.
+  const cluster = [...new Set(['de-de', ...(daten.textLocales || [])])].filter((l) => localeIndexierbar(l));
+  const alternates = cluster.map((l) => ({ locale: l, pfad: `/${l}/${daten.rolle}/${daten.slug}-${daten.tmdbPersonId}` }));
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, alternates: alternates.length ? alternates : undefined, bodyHtml });
 }
 
 // ---- Wochen-Seiten (zeitabhaengig, Daten aus seoData.js, Regeln in seoWochen.js).

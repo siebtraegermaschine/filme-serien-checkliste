@@ -21,6 +21,7 @@ import 'dotenv/config';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pool } from '../db/pool.js';
+import { PERSON_TX } from '../lib/seoPersonen.js';
 import { PREISE, kostenBerechnen, ergebnisZeilenLesen, statusLesen } from './seo-batch.mjs';
 
 export const ZIELE = {
@@ -31,6 +32,9 @@ export const ZIELE = {
   'nl-nl': { sprache: 'Niederlaendisch (Niederlande)', hinweis: 'Dezimalkomma (7,6), Tausender mit Punkt (27.000). Anfuehrungszeichen: „…” bzw. “…”.' },
   'pt-pt': { sprache: 'europaeisches Portugiesisch (Portugal)', hinweis: 'Dezimalkomma (7,6), Tausender mit Leerzeichen oder Punkt. Anfuehrungszeichen: «…».' },
 };
+// Personentexte haben drei feste Abschnitte ("### Werdegang" ...); die
+// Ueberschriften muessen exakt diesen Wortlaut tragen (seoRender.js liest sie).
+export const PERSON_ABSCHNITTE = { 'en-gb': PERSON_TX.en.abschnitte, 'fr-fr': PERSON_TX.fr.abschnitte };
 const MODELL = 'claude-haiku-4-5-20251001';
 const BEREICHE_STANDARD = ['genre', 'anbieter', 'kino_stadt', 'reihe', 'hub'];
 
@@ -79,8 +83,10 @@ export function uebersetzungPruefen(quelle, ziel, locale) {
   return f;
 }
 
-function systemPrompt(locale) {
+function systemPrompt(locale, bereiche = []) {
   const ziel = ZIELE[locale];
+  const ab = bereiche.includes('person') ? PERSON_ABSCHNITTE[locale] : null;
+  const abRegel = ab ? `\n- Der Text hat drei Abschnitte mit den Ueberschriften „### Werdegang", „### Filmografie bei uns", „### Einordnung". Uebernimm die Zeilen mit ### und uebersetze die Ueberschriften genau so: „### ${ab[0]}", „### ${ab[1]}", „### ${ab[2]}".\n- Titel von Filmen und Serien sowie Namen von Personen, Firmen und Orten bleiben im Wortlaut unveraendert.` : '';
   return `Du uebersetzt kurze redaktionelle Seitentexte des Filmportals movietaste.de aus dem Deutschen ins ${ziel.sprache}.
 
 REGELN
@@ -89,7 +95,7 @@ REGELN
 - Zahlen, Jahre, Bewertungen bleiben inhaltlich gleich; nur die Schreibweise folgt der Zielsprache. ${ziel.hinweis}
 - Titel in deutschen Anfuehrungszeichen („…") und alle Eigennamen (Kinos, Orte, Anbieter, Marken wie MovieMatch, TMDB, OpenStreetMap, Strassen) bleiben im Wortlaut unveraendert; nur die Anfuehrungszeichen passen sich an.
 - Genrebezeichnungen, Fachwoerter (Filme, Serien, Bestenliste, Watchlist, Abo, Leih- und Kaufkatalog) uebersetzt du so, wie sie in der Zielsprache auf Film- und Streamingseiten ueblich sind.
-- Natuerlicher, sachlicher Ton wie ein Redakteur der Zielsprache; keine woertliche Uebernahme deutscher Satzstellung.`;
+- Natuerlicher, sachlicher Ton wie ein Redakteur der Zielsprache; keine woertliche Uebernahme deutscher Satzstellung.${abRegel}`;
 }
 
 function argumente() {
@@ -138,7 +144,7 @@ async function chunkVerarbeiten({ apiKey, opt, rows, protokoll, zaehler, status 
       custom_id: `k${i}`,
       params: {
         model: opt.model, max_tokens: 2048,
-        system: systemPrompt(opt.locale),
+        system: systemPrompt(opt.locale, opt.bereiche),
         messages: [{ role: 'user', content: `Text:\n${r.text}` }],
       },
     }));
@@ -174,6 +180,7 @@ async function chunkVerarbeiten({ apiKey, opt, rows, protokoll, zaehler, status 
     kostenChunk += kosten; status.ausgegeben += kosten; status.aufrufe++;
     const text = (msg.content || []).map((c) => c.text || '').join('').trim();
     const fehler = uebersetzungPruefen(r.text, text, opt.locale);
+    if (r.bereich === 'person') for (const h of PERSON_ABSCHNITTE[opt.locale] || []) if (!text.includes(`### ${h}`)) { fehler.push(`ueberschrift ${h}`); break; }
     if (fehler.length) { zaehler.verworfen++; protokoll.write(JSON.stringify({ id, locale: opt.locale, status: 'verworfen', fehler, text }) + '\n'); continue; }
     status.texte++;
     if (!opt.dryRun) {

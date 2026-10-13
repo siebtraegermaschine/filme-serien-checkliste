@@ -37,7 +37,10 @@ test('sprachVon und hatSeitenart', () => {
   assert.equal(sprachVon('pt-pt'), 'pt');
   assert.equal(hatSeitenart('de-de', 'bestenliste'), true);
   assert.equal(hatSeitenart('en-gb', 'bestenlisten'), true);
-  assert.equal(hatSeitenart('en-gb', 'person'), false);
+  assert.equal(hatSeitenart('en-gb', 'person'), true); // uebersetzte Personentexte
+  assert.equal(hatSeitenart('fr-fr', 'regisseur'), true);
+  assert.equal(hatSeitenart('es-es', 'person'), false);
+  assert.equal(hatSeitenart('it-it', 'schauspieler'), false);
   assert.equal(hatSeitenart('en-gb', 'titel'), true);
 });
 

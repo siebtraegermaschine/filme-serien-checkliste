@@ -3,7 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { seiteTitelDetail, seiteStart, seite404, seiteFilmeSerienHub, seiteBestenlistenUebersicht } from '../lib/seoRender.js';
+import { seitePerson, seitePersonenHub, seiteTitelDetail, seiteStart, seite404, seiteFilmeSerienHub, seiteBestenlistenUebersicht } from '../lib/seoRender.js';
 import { SEO_TEXTE, ABSCHNITTE, seoTexte } from '../lib/seoTexte.js';
 import { LOCALE_KONFIG, hatSeitenart, seitenartFuerPfad } from '../lib/seoLocale.js';
 import { bereichFuerLocale, BEREICHE } from '../lib/seoSitemap.js';
@@ -100,15 +100,15 @@ test('Startseite und 404 sind lokalisiert; Start ohne Text ist noindex', () => {
   assert.match(seite404('nl-nl'), /Pagina niet gevonden/);
 });
 
-test('Seitenarten: Nicht-de kennt alles ausser Personen; Sitemap unveraendert', () => {
+test('Seitenarten: Nicht-de kennt Personen nur in en-gb/fr-fr; Sitemap unveraendert', () => {
   assert.equal(seitenartFuerPfad('/en-gb/film/x-1'), 'titel');
   assert.equal(seitenartFuerPfad('/en-gb'), 'start');
   assert.equal(seitenartFuerPfad('/en-gb/filme/drama'), 'filme');
   assert.equal(seitenartFuerPfad('/en-gb/schauspieler/x-1'), 'schauspieler');
   assert.ok(hatSeitenart('de-de', 'person'));
   assert.ok(hatSeitenart('en-gb', 'titel') && hatSeitenart('en-gb', 'start'));
-  assert.ok(hatSeitenart('en-gb', 'filme') && hatSeitenart('en-gb', 'bestenlisten') && !hatSeitenart('en-gb', 'person'));
-  assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('en-gb', b)), ['titel', 'genre', 'anbieter', 'hub', 'reihe']); // Sitemap nutzt nur SEO_LOCALES (de-de)
+  assert.ok(hatSeitenart('en-gb', 'filme') && hatSeitenart('en-gb', 'bestenlisten') && hatSeitenart('en-gb', 'person') && !hatSeitenart('es-es', 'person'));
+  assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('en-gb', b)), ['titel', 'genre', 'anbieter', 'hub', 'person', 'reihe']); // Sitemap nutzt nur SEO_LOCALES (de-de)
   assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('de-de', b)), BEREICHE);
 });
 
@@ -126,7 +126,7 @@ test('Route: Personen-Seiten in Nicht-de liefern 404 (ohne DB), inaktive Locales
   const server = await new Promise((r) => { const s = app.listen(0, '127.0.0.1', () => r(s)); });
   const { port } = server.address();
   try {
-    for (const pfad of ['/en-gb/regisseur/x-1', '/es-es/schauspieler/x-1', '/it-it/schauspieler/x-1', '/fr-fr/personen']) {
+    for (const pfad of ['/es-es/regisseur/x-1', '/es-es/schauspieler/x-1', '/it-it/schauspieler/x-1', '/fr-fr/personen']) {
       const a = await fetch(`http://127.0.0.1:${port}${pfad}`);
       assert.equal(a.status, 404, pfad);
       assert.match(await a.text(), /<html lang="/);
@@ -155,4 +155,23 @@ test('Nicht-de-Bestenlisten-Uebersicht und Reihen-Uebersicht liefern 200-tauglic
   assert.match(b, /<html lang="it">/);
   assert.equal(meta(b, 'robots'), 'noindex,follow');
   assert.doesNotMatch(b, /Bestenlisten/);
+});
+
+test('Personenseite en-gb/fr-fr: uebersetzte Ueberschriften, noindex solange Locale nicht indexierbar, deutsch unveraendert', () => {
+  const basis = { tmdbPersonId: 7, rolle: 'regisseur', name: 'Ana Test', slug: 'ana-test', biografie: 'Deutsche Bio', fotoPfad: null,
+    geburtstag: '1974-02-12', filmografie: [{ id: '1', tmdbId: 1, type: 'movie', slug: 'x', title: 'X', year: 2000 }], indexierbar: true };
+  const en = seitePerson({ ...basis, text: '### Career\n\nShe directed films.\n\n### Filmography in our catalogue\n\nOne title.\n\n### Assessment\n\nGood.' }, 'en-gb');
+  assert.match(en, /<h2>Career<\/h2>/);
+  assert.match(en, /<h2>Filmography<\/h2>|<h2>Filmography \(as director\)<\/h2>/);
+  assert.match(en, /Director · born 1974-02-12/);
+  assert.equal(meta(en, 'robots'), 'noindex,follow');
+  assert.doesNotMatch(en, /Deutsche Bio/);
+  const fr = seitePerson({ ...basis, text: '### Parcours\n\nElle réalise.\n\n### Filmographie chez nous\n\nUn titre.\n\n### Analyse\n\nBien.' }, 'fr-fr');
+  assert.match(fr, /<h2>Parcours<\/h2>/);
+  const de = seitePerson({ ...basis, text: '### Werdegang\n\nText.\n\n### Filmografie bei uns\n\nEin Titel.\n\n### Einordnung\n\nGut.' }, 'de-de');
+  assert.match(de, /<h2>Werdegang<\/h2>/);
+  assert.match(de, /hreflang="de-DE"/);
+  const hub = seitePersonenHub({ rolle: 'regisseur', personen: [{ name: 'Ana', slug: 'ana', tmdbPersonId: 7, fotoPfad: null, anzahl: 2 }], text: null, indexierbar: true }, 'en-gb');
+  assert.match(hub, /<h1>Directors<\/h1>/);
+  assert.match(hub, /2 titles/);
 });

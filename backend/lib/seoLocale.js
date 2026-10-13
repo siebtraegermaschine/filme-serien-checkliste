@@ -26,8 +26,8 @@ export const SEO_LOCALES = Object.keys(LOCALE_KONFIG).filter((l) => LOCALE_KONFI
 
 // Seitenarten, die in den Nicht-de-Locales lokalisiert sind (alle noindex, nicht in
 // der Sitemap). Eintraege sind Pfadwoerter UND die logischen Namen, nach denen der
-// Renderer fragt. Nicht dabei: Personen ('person', 'schauspieler', 'regisseur') --
-// dort 404 und nirgends verlinkt. de-de kennt alle.
+// Renderer fragt. Personen ('person', 'schauspieler', 'regisseur') nur in
+// PERSONEN_LOCALES (siehe unten). de-de kennt alle.
 const ARTEN_LOKALISIERT = [
   'start', 'titel',
   'hub', 'genre', 'anbieter', 'reihe',
@@ -42,8 +42,16 @@ export function localeIndexierbar(locale) {
   return !!(LOCALE_KONFIG[locale] && LOCALE_KONFIG[locale].indexierbar);
 }
 
+// Personen: nur in Locales mit uebersetzten Personentexten (PERSON_ABSCHNITTE in
+// scripts/seo-kategorien-uebersetzen.mjs, Ueberschriften in seoRender.js). Eine
+// Personenseite gibt es dort nur mit Text (seoData.js), sonst 404.
+export const PERSONEN_LOCALES = ['en-gb', 'fr-fr'];
+const ARTEN_PERSON = ['person', 'schauspieler', 'regisseur'];
+
 export function hatSeitenart(locale, art) {
-  return locale === 'de-de' || ARTEN_LOKALISIERT.includes(art);
+  if (locale === 'de-de') return true;
+  if (ARTEN_PERSON.includes(art)) return PERSONEN_LOCALES.includes(locale);
+  return ARTEN_LOKALISIERT.includes(art);
 }
 
 // 'de-de' -> 'de', 'pt-pt' -> 'pt'.

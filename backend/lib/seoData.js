@@ -815,7 +815,7 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
   if (!person) return null;
 
   const bedingung = rolle === 'regisseur' ? 'director = $1' : '$1 = ANY(cast_names)';
-  const [{ rows }, text, { rows: gleichnamig }] = await Promise.all([
+  const [{ rows }, text, { rows: gleichnamig }, { rows: sprachen }] = await Promise.all([
     pool.query(
       `SELECT id, tmdb_id, type, title, year, poster_path FROM ${TITEL_MIT_KENNUNG}
         WHERE ${bedingung} ORDER BY ${NOTE_SQL} DESC LIMIT 24`,
@@ -823,16 +823,20 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
     ),
     ladeSeoText('person', `${rolle}:${tmdbPersonId}`, locale),
     pool.query(`SELECT count(*)::int AS n FROM personen_cache WHERE name = $1`, [person.name]),
+    pool.query(`SELECT locale FROM seo_content WHERE bereich = 'person' AND schluessel = $1`, [`${rolle}:${tmdbPersonId}`]),
   ]);
   const filmografie = rows.map((r) => ({
     id: String(r.id), tmdbId: r.tmdb_id, type: r.type, slug: slugify(r.title), title: r.title, year: r.year, posterPath: r.poster_path,
   }));
+
+  if (locale !== 'de-de' && !text) return null;
 
   return {
     tmdbPersonId, rolle, name: person.name, slug: slugify(person.name),
     biografie: person.biografie, fotoPfad: person.foto_pfad,
     geburtstag: geburtstagString(person.geburtstag),
     filmografie, text,
+    textLocales: sprachen.map((r) => r.locale), // fuer hreflang: Gegenstuecke mit uebersetztem Text
     // Gleichnamige Personen zeigen dieselbe (namensbasierte) Filmografie --
     // Dublette. Die bleibt ohne eigenen Text draussen.
     indexierbar: filmografie.length > 0 && (!!text || gleichnamig[0].n <= 1),
@@ -846,8 +850,10 @@ const PERSONEN_CTES = `
   eindeutig AS (SELECT name FROM personen_cache GROUP BY name HAVING count(*) = 1),
   mit_text AS (SELECT split_part(schluessel, ':', 2)::int AS id FROM seo_content
                 WHERE bereich = 'person' AND locale = $2 AND schluessel LIKE $1 || ':%')`;
-const PERSON_HAT_SEITE = `(pc.tmdb_person_id IN (SELECT id FROM mit_text)
-     OR pc.name IN (SELECT name FROM eindeutig))`;
+// Nicht-de-Locales: Seite nur mit uebersetztem Text (sonst 404, siehe ladePersonSeite).
+const personHatSeite = (locale) => (locale === 'de-de'
+  ? `(pc.tmdb_person_id IN (SELECT id FROM mit_text) OR pc.name IN (SELECT name FROM eindeutig))`
+  : `pc.tmdb_person_id IN (SELECT id FROM mit_text)`);
 
 // Mindestmenge fuer eine indexierbare Personenseite: mindestens ein Titel im
 // Katalog UND (Redaktionstext ODER eindeutiger Name). Dieselbe Regel steht in
@@ -863,10 +869,14 @@ export async function personenMitSeite(namen, rolle, locale) {
   if (!eindeutig.length) return ids;
   // Laeuft bei jedem Seitenaufruf -- daher nur ueber die wenigen Kandidaten,
   // nicht ueber die ganze Tabelle. rolle/locale bleiben fuer die Aufrufer.
+  const mitText = locale !== 'de-de'
+    ? ` AND pc.tmdb_person_id IN (SELECT split_part(schluessel, ':', 2)::int FROM seo_content
+         WHERE bereich = 'person' AND locale = $2 AND schluessel LIKE $3 || ':%')`
+    : '';
   const { rows } = await pool.query(
     `SELECT pc.name, pc.tmdb_person_id FROM personen_cache pc
-      WHERE pc.name IN (SELECT name FROM personen_cache WHERE name = ANY($1::text[]) GROUP BY name HAVING count(*) = 1)`,
-    [eindeutig]
+      WHERE pc.name IN (SELECT name FROM personen_cache WHERE name = ANY($1::text[]) GROUP BY name HAVING count(*) = 1)${mitText}`,
+    locale !== 'de-de' ? [eindeutig, locale, rolle] : [eindeutig]
   );
   for (const r of rows) ids.set(r.name, r.tmdb_person_id);
   return ids;
@@ -893,7 +903,7 @@ async function personenRangliste(rolle, locale) {
      SELECT pc.tmdb_person_id, pc.name, pc.foto_pfad, z.anzahl
        FROM personen_cache pc
        JOIN zaehlung z ON z.name = pc.name
-      WHERE pc.name IN (SELECT name FROM eindeutig) AND ${PERSON_HAT_SEITE}
+      WHERE pc.name IN (SELECT name FROM eindeutig) AND ${personHatSeite(locale)}
       ORDER BY z.anzahl DESC, pc.name
       LIMIT $3`,
     [rolle, locale, HUB_PERSONEN]
@@ -926,7 +936,7 @@ export async function personenFuerSitemap(rolle, locale) {
     `WITH mit_titel AS (${zaehlung}), ${PERSONEN_CTES}
      SELECT pc.tmdb_person_id, pc.name FROM personen_cache pc
        JOIN mit_titel m ON m.name = pc.name
-      WHERE ${PERSON_HAT_SEITE}
+      WHERE ${personHatSeite(locale)}
       ORDER BY pc.tmdb_person_id`,
     [rolle, locale]
   );
