@@ -1,6 +1,15 @@
 # Build-Kontext ist das Repo-Root (siehe docker-compose.yml), damit das Image
 # neben dem Backend auch die statischen Frontend-Dateien (index.html,
 # impressum.html, datenschutz.html) enthält -- server.js liefert sie direkt aus.
+# Build-Stufe: verkleinert die Inline-Skripte/-Styles der index.html (siehe
+# scripts/minify-html.mjs). esbuild landet nur hier, nicht im Endimage.
+FROM node:20-alpine AS minify
+WORKDIR /m
+RUN npm init -y >/dev/null && npm install esbuild@0.25.10
+COPY scripts/minify-html.mjs ./
+COPY index.html ./
+RUN node minify-html.mjs index.html
+
 FROM node:20-alpine
 # pg_dump fuer die automatische Sicherung (siehe backend/lib/sicherung.js).
 # Rund 15 MB -- die Alternative waere ein Cronjob auf dem Server, der bei jedem
@@ -34,6 +43,8 @@ RUN cd backend && npm ci --omit=dev
 # consent.js (17.09.2026) ebenso einzeln: kein *.js-Glob, sonst kaemen die
 # Wurzel-Skripte mit ins Image. backend/test/consent.test.js prueft die Zeile.
 COPY *.html *.css *.png *.svg *.webp manifest.json robots.txt consent.js ./
+# index.html kommt verkleinert aus der Build-Stufe oben.
+COPY --from=minify /m/index.html ./index.html
 COPY tour/ ./tour/
 COPY backend/ ./backend/
 

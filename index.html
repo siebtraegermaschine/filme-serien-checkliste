@@ -1406,6 +1406,26 @@
 <!-- Cookie-Banner + Google Analytics (nur nach Zustimmung), siehe /consent.js.
      Am Anfang des <body>, damit der Banner vor dem grossen Seitenskript steht. -->
 <script src="/consent.js"></script>
+<!-- Startkatalog schon vor dem grossen Seitenskript anfordern (Sprache/Region wie
+     in sprachErmittlung/regionErmittlung; stimmt die URL spaeter nicht, ignoriert
+     katalogVorabruf() das Ergebnis und holt normal). -->
+<script>
+(function(){
+  try {
+    if (location.pathname !== '/' || location.search) return;
+    var s, r, n = String(navigator.language || 'de');
+    try { s = localStorage.getItem('mt.sprache'); r = localStorage.getItem('mt.region'); } catch (e) {}
+    if (['de','en','fr','es','it','nl','pt'].indexOf(s) === -1) {
+      s = n.toLowerCase().slice(0, 2);
+      if (['de','en','fr','es','it','nl','pt'].indexOf(s) === -1) s = 'en';
+    }
+    if (!(r && /^[A-Z]{2}$/.test(r))) { var m = n.match(/-([A-Za-z]{2})$/); r = m ? m[1].toUpperCase() : 'DE'; }
+    var url = '/api/startkatalog?lang=' + s + '&region=' + r;
+    window.__STARTKATALOG = { url: url, p: fetch(url, { credentials: 'same-origin' }).then(function(x){ if (!x.ok) throw new Error('HTTP ' + x.status); return x.json(); }) };
+    window.__STARTKATALOG.p.catch(function(){});
+  } catch (e) {}
+})();
+</script>
 <header>
   <h1><img class="logo" src="moviematch.webp" width="313" height="84" fetchpriority="high" alt="MovieMatch – Watch more. Search less."></h1>
   <p class="sub"><b><i>Filme &amp; Serien</i> sortiert nach DEINEM Geschmack!</b></p>
@@ -10551,7 +10571,7 @@ async function onboardingMarkenUebernehmen(){
      doppelte Kennungen im selben Dokument waeren eine Falle. */
   function karteHtml(it, stand){
     var poster = it.poster64 || (it.p ? (POSTER + it.p) : '');
-    return (poster ? '<img class="kennen-poster" alt="" src="' + escAttr(poster) + '">' : '') +
+    return (poster ? '<img class="kennen-poster" alt="" fetchpriority="high" src="' + escAttr(poster) + '">' : '') +
       '<div class="kennen-name">' + esc(it.t) + '</div>' +
       '<div class="kennen-meta">' + esc(String(it.y || '')) + ' · ' + esc(it.type === 'series' ? TXT.serie : TXT.film) + '</div>' +
       '<div class="kennen-knoepfe">' +
@@ -13343,7 +13363,9 @@ async function katalogVorabruf(){
   var cached = null;
   try { cached = await katalogCacheLesen('katalog:' + INHALTS_SPRACHE + ':' + REGION_WAHL); } catch (e) {}
   if (cached || !einfach) return { start: null, voll: katalogNetzHolen() };
-  var start = apiRequest('GET', mitSpracheRegion('/api/startkatalog'));
+  var url = mitSpracheRegion('/api/startkatalog');
+  var frueh = window.__STARTKATALOG;
+  var start = frueh && frueh.url === url ? frueh.p : apiRequest('GET', url);
   start.catch(function(){});
   return { start: start, voll: null };
 }
