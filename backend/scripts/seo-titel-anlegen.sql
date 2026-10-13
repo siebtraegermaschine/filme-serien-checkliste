@@ -1,6 +1,10 @@
 -- Legt fuer Streaming-Titel ohne Eintrag in titles eine reine SEO-Zeile an
 -- (source='seo'). Die App-Liste fragt source explizit ab, der Katalog waechst
 -- dadurch nicht. Aufruf: psql -v regionen="'DE','AT','CH','FR','GB','US','CA'" -f ...
+-- Rest (Stand 13.10.2026: 45.708 Titel, Regionen ES, IS, BR, CL, SK, NZ, ...):
+--   psql -v regionen="SELECT DISTINCT region FROM streaming_cache" -f ...
+-- (bereits angelegte Titel werden per NOT EXISTS uebersprungen; wiederholbar.)
+-- Danach: node scripts/seo-titel-kurztexte.mjs (legt Kurztexte fuer source='seo' an).
 -- Titel: erst deutsche Region, sonst die erste vorhandene; title_en und overview_en
 -- aus GB/US/CA, plot nur aus DE/AT/CH (sonst stuende fremdsprachiger Text auf de-Seiten).
 WITH kand AS (
