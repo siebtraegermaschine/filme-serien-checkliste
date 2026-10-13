@@ -12,6 +12,7 @@ import titlesRouter from './routes/titles.js';
 import progressRouter from './routes/progress.js';
 import streamingRouter from './routes/streaming.js';
 import startkatalogRouter from './routes/startkatalog.js';
+import { ladeStartkatalog, startkatalogSchluessel } from './routes/startkatalog.js';
 import feedbackRouter from './routes/feedback.js';
 import searchLogRouter from './routes/searchLog.js';
 import hiddenTitlesRouter from './routes/hiddenTitles.js';
@@ -326,5 +327,7 @@ app.listen(port, () => {
     { schluessel: listenSchluessel({ source: 'catalog,discovery,streaming' }),
       ermitteln: () => ladeListe({ source: 'catalog,discovery,streaming' }) },
     { schluessel: streamingSchluessel('de', 'DE'), ermitteln: () => ladeStreaming('de', 'DE') },
+    // Erstbesucher laden zuerst diese kleine Auswahl (siehe routes/startkatalog.js).
+    { schluessel: startkatalogSchluessel('de', 'DE'), ermitteln: () => ladeStartkatalog('de', 'DE') },
   ]);
 });
