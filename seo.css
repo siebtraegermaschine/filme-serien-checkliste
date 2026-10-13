@@ -76,6 +76,8 @@ footer { border-top: 1px solid var(--border); padding: 20px; text-align: center;
 footer a { color: var(--text-dim); margin: 0 8px; }
 footer a:hover { color: var(--accent); }
 footer .footer-seo { margin-bottom: 12px; line-height: 2; }
+footer .footer-laender { margin-bottom: 12px; font-size: 18px; line-height: 1.6; }
+footer .footer-laender a { text-decoration: none; margin: 0 4px; }
 
 .hinweis { color: var(--text-dim); font-size: 13.5px; font-style: italic; }
 

@@ -112,6 +112,9 @@ test('Footer: SEO-Seiten und App-Footer (index.html) verlinken dieselben Uebersi
   const nav = index.match(/<nav class="footer-seo"[\s\S]*?<\/nav>/)[0];
   const appLinks = [...nav.matchAll(/href="\/de-de\/([^"]+)"/g)].map((m) => m[1]);
   assert.deepEqual(appLinks, FOOTER_BEREICHE.map(([pfad]) => pfad));
+  const { FOOTER_LAENDER } = await import('../lib/seoRender.js');
+  const laender = index.match(/<nav class="footer-laender"[\s\S]*?<\/nav>/)[0];
+  assert.deepEqual([...laender.matchAll(/href="\/([a-z-]+)\/"/g)].map((m) => m[1]), FOOTER_LAENDER.map(([l]) => l));
   const html = seite404('de-de');
   for (const [pfad] of FOOTER_BEREICHE) assert.match(html, new RegExp(`<footer>[\\s\\S]*href="/de-de/${pfad}"`));
 });

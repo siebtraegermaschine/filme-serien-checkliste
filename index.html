@@ -326,6 +326,9 @@
     opacity: .75;
   }
 
+  .footer-laender { margin-top: 8px; font-size: 18px; line-height: 1.6; }
+  .footer-laender a { text-decoration: none; margin: 0 4px; }
+
   .details {
     display: none;
     margin-top: 11px;
@@ -1578,6 +1581,17 @@
     <a href="/de-de/reihen">Reihen</a> ·
     <a href="/de-de/streaming">Streaming</a> ·
     <a href="/de-de/kino">Kino</a>
+  </nav>
+  <!-- Laenderversionen der SEO-Seiten (Flaggen): fuehrt Crawler von der Startseite
+       zu jeder Version, auch zu noch nicht indexierten. -->
+  <nav class="footer-laender" aria-label="Languages">
+    <a href="/de-de/" hreflang="de-DE" lang="de" title="Deutsch" aria-label="Deutsch">🇩🇪</a>
+    <a href="/en-gb/" hreflang="en-GB" lang="en" title="English" aria-label="English">🇬🇧</a>
+    <a href="/fr-fr/" hreflang="fr-FR" lang="fr" title="Français" aria-label="Français">🇫🇷</a>
+    <a href="/es-es/" hreflang="es-ES" lang="es" title="Español" aria-label="Español">🇪🇸</a>
+    <a href="/it-it/" hreflang="it-IT" lang="it" title="Italiano" aria-label="Italiano">🇮🇹</a>
+    <a href="/nl-nl/" hreflang="nl-NL" lang="nl" title="Nederlands" aria-label="Nederlands">🇳🇱</a>
+    <a href="/pt-pt/" hreflang="pt-PT" lang="pt" title="Português" aria-label="Português">🇵🇹</a>
   </nav>
 </footer>
 

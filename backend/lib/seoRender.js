@@ -82,6 +82,14 @@ export const FOOTER_BEREICHE = [
   ['bestenlisten', 'Bestenlisten'], ['reihen', 'Reihen'], ['streaming', 'Streaming'], ['kino', 'Kino'],
 ];
 
+// Laenderversionen mit eigenen Texten (auch wenn noch noindex): die Flaggenzeile verlinkt
+// sie von jeder Seite und der App aus, damit Crawler jede Version finden. Gleiche Liste
+// steht im App-Footer (index.html, .footer-laender); seoRender.test.js prueft sie.
+export const FOOTER_LAENDER = [
+  ['de-de', '🇩🇪', 'Deutsch'], ['en-gb', '🇬🇧', 'English'], ['fr-fr', '🇫🇷', 'Français'],
+  ['es-es', '🇪🇸', 'Español'], ['it-it', '🇮🇹', 'Italiano'], ['nl-nl', '🇳🇱', 'Nederlands'], ['pt-pt', '🇵🇹', 'Português'],
+];
+
 function fusszeile(locale) {
   const T = seoTexte(locale);
   const de = istDeutsch(locale);
@@ -94,6 +102,9 @@ function fusszeile(locale) {
     ${bereiche.length ? `<nav class="footer-seo" aria-label="${attrEsc(T.uebersichtsseiten)}">
       ${bereiche.map(([pfad, name]) => `<a href="/${locale}/${pfad}">${name}</a>`).join('\n      ')}
     </nav>` : ''}
+    <nav class="footer-laender" aria-label="Languages">
+      ${FOOTER_LAENDER.map(([l, flagge, name]) => `<a href="/${l}/" hreflang="${attrEsc(hreflangCode(l))}" lang="${sprachVon(l)}" title="${name}" aria-label="${name}">${flagge}</a>`).join('\n      ')}
+    </nav>
     <a href="${SITE}/${de ? 'impressum' : 'imprint'}.html">${attrEsc(T.impressum)}</a>
     <a href="${SITE}/${de ? 'datenschutz' : 'privacy'}.html">${attrEsc(T.datenschutz)}</a>
     <a href="#" data-cookie-einstellungen>${attrEsc(T.cookies)}</a>
