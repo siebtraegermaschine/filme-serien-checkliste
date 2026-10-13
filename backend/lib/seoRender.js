@@ -103,7 +103,7 @@ function fusszeile(locale) {
       ${bereiche.map(([pfad, name]) => `<a href="/${locale}/${pfad}">${name}</a>`).join('\n      ')}
     </nav>` : ''}
     <nav class="footer-laender" aria-label="Languages">
-      ${FOOTER_LAENDER.map(([l, flagge, name]) => `<a href="/${l}/" hreflang="${attrEsc(hreflangCode(l))}" lang="${sprachVon(l)}" title="${name}" aria-label="${name}">${flagge}</a>`).join('\n      ')}
+      ${FOOTER_LAENDER.map(([l, flagge, name]) => `<a href="/${l}/" lang="${sprachVon(l)}" title="${name}" aria-label="${name}">${flagge}</a>`).join('\n      ')}
     </nav>
     <a href="${SITE}/${de ? 'impressum' : 'imprint'}.html">${attrEsc(T.impressum)}</a>
     <a href="${SITE}/${de ? 'datenschutz' : 'privacy'}.html">${attrEsc(T.datenschutz)}</a>
