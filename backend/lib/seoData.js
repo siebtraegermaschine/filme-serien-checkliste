@@ -7,7 +7,7 @@
 import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
 import { anbieterSlug } from './anbieter.js';
-import { regionFuerLocale, sprachVon } from './seoLocale.js';
+import { regionFuerLocale, sprachVon, textLocale, localesMitText } from './seoLocale.js';
 import { sprachFeld } from './i18n.js';
 import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatistik.js';
 import { ladePersonDaten } from './personen.js';
@@ -101,7 +101,7 @@ async function anbieterMitSeite(region) {
 export async function ladeSeoText(bereich, schluessel, locale) {
   const { rows } = await pool.query(
     `SELECT text FROM seo_content WHERE bereich = $1 AND schluessel = $2 AND locale = $3`,
-    [bereich, schluessel, locale]
+    [bereich, schluessel, textLocale(locale)]
   );
   return rows[0] ? rows[0].text : null;
 }
@@ -261,7 +261,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     trailerKey: trailer ? trailer.key : null,
     reihe: await reiheFuerTitel(titel.collection_id),
     text,
-    textLocales: fassungenRows.rows.map((r) => r.locale),
+    textLocales: localesMitText(fassungenRows.rows.map((r) => r.locale)),
     indexierbar: true,
   };
 }
@@ -738,7 +738,7 @@ export async function ladeKinoHub(locale) {
           AND tmdb_id IN (SELECT tmdb_id FROM ${TITEL_MIT_KENNUNG} WHERE type = 'movie') ORDER BY release_date DESC LIMIT $2`,
       [region, HUB_ANZAHL]
     ),
-    staedteListe(),
+    region === 'DE' ? staedteListe() : [],
     ladeSeoText('hub', 'kino', locale),
   ]);
   const qualifiziert = staedte.filter((s) => s.anzahl >= MIN_KINOS_STADT).sort((a, b) => b.anzahl - a.anzahl);
@@ -829,14 +829,14 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
     id: String(r.id), tmdbId: r.tmdb_id, type: r.type, slug: slugify(r.title), title: r.title, year: r.year, posterPath: r.poster_path,
   }));
 
-  if (locale !== 'de-de' && !text) return null;
+  if (textLocale(locale) !== 'de-de' && !text) return null;
 
   return {
     tmdbPersonId, rolle, name: person.name, slug: slugify(person.name),
     biografie: person.biografie, fotoPfad: person.foto_pfad,
     geburtstag: geburtstagString(person.geburtstag),
     filmografie, text,
-    textLocales: sprachen.map((r) => r.locale), // fuer hreflang: Gegenstuecke mit uebersetztem Text
+    textLocales: localesMitText(sprachen.map((r) => r.locale)), // fuer hreflang: Gegenstuecke mit uebersetztem Text
     // Gleichnamige Personen zeigen dieselbe (namensbasierte) Filmografie --
     // Dublette. Die bleibt ohne eigenen Text draussen.
     indexierbar: filmografie.length > 0 && (!!text || gleichnamig[0].n <= 1),
@@ -851,7 +851,7 @@ const PERSONEN_CTES = `
   mit_text AS (SELECT split_part(schluessel, ':', 2)::int AS id FROM seo_content
                 WHERE bereich = 'person' AND locale = $2 AND schluessel LIKE $1 || ':%')`;
 // Nicht-de-Locales: Seite nur mit uebersetztem Text (sonst 404, siehe ladePersonSeite).
-const personHatSeite = (locale) => (locale === 'de-de'
+const personHatSeite = (locale) => (textLocale(locale) === 'de-de'
   ? `(pc.tmdb_person_id IN (SELECT id FROM mit_text) OR pc.name IN (SELECT name FROM eindeutig))`
   : `pc.tmdb_person_id IN (SELECT id FROM mit_text)`);
 
@@ -869,14 +869,14 @@ export async function personenMitSeite(namen, rolle, locale) {
   if (!eindeutig.length) return ids;
   // Laeuft bei jedem Seitenaufruf -- daher nur ueber die wenigen Kandidaten,
   // nicht ueber die ganze Tabelle. rolle/locale bleiben fuer die Aufrufer.
-  const mitText = locale !== 'de-de'
+  const mitText = textLocale(locale) !== 'de-de'
     ? ` AND pc.tmdb_person_id IN (SELECT split_part(schluessel, ':', 2)::int FROM seo_content
          WHERE bereich = 'person' AND locale = $2 AND schluessel LIKE $3 || ':%')`
     : '';
   const { rows } = await pool.query(
     `SELECT pc.name, pc.tmdb_person_id FROM personen_cache pc
       WHERE pc.name IN (SELECT name FROM personen_cache WHERE name = ANY($1::text[]) GROUP BY name HAVING count(*) = 1)${mitText}`,
-    locale !== 'de-de' ? [eindeutig, locale, rolle] : [eindeutig]
+    textLocale(locale) !== 'de-de' ? [eindeutig, textLocale(locale), rolle] : [eindeutig]
   );
   for (const r of rows) ids.set(r.name, r.tmdb_person_id);
   return ids;
@@ -906,7 +906,7 @@ async function personenRangliste(rolle, locale) {
       WHERE pc.name IN (SELECT name FROM eindeutig) AND ${personHatSeite(locale)}
       ORDER BY z.anzahl DESC, pc.name
       LIMIT $3`,
-    [rolle, locale, HUB_PERSONEN]
+    [rolle, textLocale(locale), HUB_PERSONEN]
   );
   const liste = rows.map((r) => ({
     tmdbPersonId: r.tmdb_person_id, name: r.name, slug: slugify(r.name), fotoPfad: r.foto_pfad, anzahl: r.anzahl,
@@ -938,12 +938,14 @@ export async function personenFuerSitemap(rolle, locale) {
        JOIN mit_titel m ON m.name = pc.name
       WHERE ${personHatSeite(locale)}
       ORDER BY pc.tmdb_person_id`,
-    [rolle, locale]
+    [rolle, textLocale(locale)]
   );
   return rows.map((r) => ({ tmdbPersonId: r.tmdb_person_id, slug: slugify(r.name) }));
 }
 
 export async function ladeKinoStadt(stadtSlug, locale) {
+  // Die Kinodatenbank (kinos) kennt nur deutsche Orte.
+  if (regionFuerLocale(locale) !== 'DE') return null;
   const staedte = await staedteListe();
   const stadt = staedte.find((s) => slugify(s.ort) === stadtSlug);
   if (!stadt || stadt.anzahl < MIN_KINOS_STADT) return null;
@@ -1077,7 +1079,7 @@ async function kinoNeustartsBasis(locale) {
     );
     const heute = heuteBerlin();
     const f = kinoFenster(rows.map((r) => ({ ...wochenKarte(r, null), start: r.start })), heute);
-    const staedte = (await staedteListe()).filter((s) => s.anzahl >= MIN_KINOS_STADT)
+    const staedte = (region !== 'DE' ? [] : await staedteListe()).filter((s) => s.anzahl >= MIN_KINOS_STADT)
       .sort((a, b) => b.anzahl - a.anzahl).slice(0, 12).map((s) => ({ ort: s.ort, slug: slugify(s.ort) }));
     return { stand: heute, tage: f.tage, gestartet: f.gestartet, naechste: f.naechste, staedte, indexierbar: f.indexierbar };
   });
@@ -1245,7 +1247,7 @@ export async function reihenFuerSitemap() {
 // Fuer scripts/seo-reihen-texte.mjs: Name, Fakten und vorhandenen Text je Reihe.
 export async function alleReihen(locale) {
   const k = await reihenKatalog();
-  const { rows } = await pool.query(`SELECT schluessel FROM seo_content WHERE bereich = 'reihe' AND locale = $1`, [locale]);
+  const { rows } = await pool.query(`SELECT schluessel FROM seo_content WHERE bereich = 'reihe' AND locale = $1`, [textLocale(locale)]);
   const mitText = new Set(rows.map((r) => r.schluessel));
   return k.liste.map((r) => ({ slug: r.slug, name: r.name, fakten: r.fakten, hatText: mitText.has(r.slug) }));
 }

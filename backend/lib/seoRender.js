@@ -3,7 +3,7 @@
 // bei der App-OG-Route (server.js) -- jede Funktion hier gibt ein fertiges
 // Dokument zurueck. Kein App-JS, eigenes seo.css (Architektur-Entscheidung 1).
 import { PERSON_TX } from './seoPersonen.js';
-import { hreflangCode, hatSeitenart, localeIndexierbar, sprachVon, regionFuerLocale } from './seoLocale.js';
+import { hreflangCode, hatSeitenart, localeIndexierbar, sprachVon, regionFuerLocale, textLocale, localesMitText, istDeutsch } from './seoLocale.js';
 import { seoTexte, ABSCHNITTE, zahlFormat } from './seoTexte.js';
 import { genreAnzeige } from './genreNamen.js';
 import { listeSeitenPfad, THEMEN, LAUFZEITEN, STAFFELN } from './seoBestenlisten.js';
@@ -39,7 +39,7 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   const url = wurzel + pfad;
   const robots = indexierbar ? 'index,follow' : 'noindex,follow';
   // noindex-Locale ohne Gegenseite im Cluster: gar kein hreflang (nichts, worauf es zeigen koennte).
-  const ohneHreflang = !(alternates && alternates.length) && locale !== 'de-de' && !localeIndexierbar(locale);
+  const ohneHreflang = !(alternates && alternates.length) && !localeIndexierbar(locale);
   const hreflangs = ohneHreflang ? '' : (alternates && alternates.length ? alternates : [{ locale, pfad }])
     .map((a) => `<link rel="alternate" hreflang="${attrEsc(hreflangCode(a.locale))}" href="${attrEsc(wurzel + a.pfad)}">`)
     .join('\n  ');
@@ -84,7 +84,7 @@ export const FOOTER_BEREICHE = [
 
 function fusszeile(locale) {
   const T = seoTexte(locale);
-  const de = locale === 'de-de';
+  const de = istDeutsch(locale);
   // Nicht-de-Locales verlinken nur Bereiche, die dort lokalisiert sind; die Rechtstexte
   // sind dort die englischen Fassungen (imprint/privacy).
   const bereiche = de
@@ -102,7 +102,7 @@ function fusszeile(locale) {
 
 export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml, basis, kopfHtml, fussHtml, favicon }) {
   // Nicht freigegebene Locales sind nie im Index, egal was die Seitenfunktion meldet.
-  if (locale !== 'de-de' && !localeIndexierbar(locale)) indexierbar = false;
+  if (!localeIndexierbar(locale)) indexierbar = false;
   return `<!DOCTYPE html>
 <html lang="${sprachVon(locale)}">
 <head>
@@ -234,7 +234,7 @@ function personInhaltHtml(text, locale = 'de-de') {
   const abschnitte = parseNeueAbschnitte(text);
   if (!abschnitte) return null;
   const ueberschriften = PERSON_TX[sprachVon(locale)]?.abschnitte;
-  return (locale === 'de-de' || !ueberschriften ? PERSON_ABSCHNITTE : ueberschriften)
+  return (istDeutsch(locale) || !ueberschriften ? PERSON_ABSCHNITTE : ueberschriften)
     .filter((h) => abschnitte[h])
     .map((h) => `<h2>${attrEsc(h)}</h2>${absaetzeHtml(abschnitte[h].split('\n\n').map((p) => p.trim()).filter(Boolean))}`)
     .join('');
@@ -280,7 +280,7 @@ export function seiteTitelDetail(titel, locale) {
   const beschreibung = kurzfassung(titel.text) || T.titelBeschr(titel.title);
   // Nicht-de-Locales: index nur, wenn die Locale freigegeben ist UND ein Text in
   // dieser Sprache existiert -- sonst stuende deutsche/englische Katalogware im Index.
-  const indexierbar = locale === 'de-de'
+  const indexierbar = textLocale(locale) === 'de-de'
     ? titel.indexierbar
     : !!(titel.indexierbar && localeIndexierbar(locale) && titel.text);
   const bild = titel.backdropPath
@@ -416,7 +416,7 @@ function TX(locale) {
 
 // Einleitungsabsatz: de wie bisher (mit Hinweis ohne Text); andere Locales lassen den Absatz ohne Text weg.
 function einleitungHtml(text, locale) {
-  if (locale === 'de-de') return `<p class="einleitung">${textBlock(text)}</p>`;
+  if (istDeutsch(locale)) return `<p class="einleitung">${textBlock(text)}</p>`;
   return text ? `<p class="einleitung">${textBlock(text, locale)}</p>` : '';
 }
 
@@ -694,7 +694,7 @@ const PERSONEN_HUB = {
 };
 
 export function seitePersonenHub(daten, locale) {
-  const tx = locale === 'de-de' ? null : PERSON_TX[sprachVon(locale)];
+  const tx = istDeutsch(locale) ? null : PERSON_TX[sprachVon(locale)];
   const cfg = tx ? tx.hub[daten.rolle] : PERSONEN_HUB[daten.rolle];
   const pfad = `/${locale}/${daten.rolle}`;
   const beschreibung = kurzfassung(daten.text) || cfg.beschreibung;
@@ -909,9 +909,9 @@ export function seiteStart(daten, locale) {
   const T = seoTexte(locale);
   const titelZeile = `${T.startTitel} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.startBeschr;
-  const indexierbar = locale === 'de-de' ? daten.indexierbar : !!(daten.indexierbar && localeIndexierbar(locale) && daten.text);
+  const indexierbar = textLocale(locale) === 'de-de' ? daten.indexierbar : !!(daten.indexierbar && localeIndexierbar(locale) && daten.text);
   // Kacheln nur fuer Bereiche, die in dieser Locale existieren.
-  const bereiche = locale === 'de-de' ? START_BEREICHE : TX(locale).startKacheln.filter((b) => hatSeitenart(locale, b.pfad.split('/')[0]));
+  const bereiche = istDeutsch(locale) ? START_BEREICHE : TX(locale).startKacheln.filter((b) => hatSeitenart(locale, b.pfad.split('/')[0]));
   // Kein Breadcrumb: Diese Seite IST die Wurzel des SEO-Baums, eine Kette mit
   // einem einzigen Glied waere weder fuer Nutzer noch fuer Google von Nutzen.
   const jsonLd = [{
@@ -944,7 +944,7 @@ function kurzprofil(daten, rolleWort) {
 }
 
 export function seitePerson(daten, locale) {
-  const tx = locale === 'de-de' ? null : PERSON_TX[sprachVon(locale)];
+  const tx = istDeutsch(locale) ? null : PERSON_TX[sprachVon(locale)];
   const rolleWort = tx ? tx.rolle[daten.rolle] : (daten.rolle === 'regisseur' ? 'Regisseur' : 'Schauspieler');
   const pfad = `/${locale}/${daten.rolle}/${daten.slug}-${daten.tmdbPersonId}`;
   const titelZeile = tx ? tx.titelZeile(daten.name) : `${daten.name} — Filme & Serien im Überblick | MovieMatch`;
@@ -989,7 +989,7 @@ export function seitePerson(daten, locale) {
     <div class="raster">${daten.filmografie.map((t) => karte(t, t.type === 'series' ? 'serie' : 'film', locale)).join('')}</div>
   `;
   // hreflang nur zu indexierbaren Gegenstuecken; de-de gibt es immer, sobald die Seite indexiert wird.
-  const cluster = [...new Set(['de-de', ...(daten.textLocales || [])])].filter((l) => localeIndexierbar(l));
+  const cluster = [...new Set([...localesMitText(['de-de']), ...(daten.textLocales || [])])].filter((l) => localeIndexierbar(l));
   const alternates = cluster.map((l) => ({ locale: l, pfad: `/${l}/${daten.rolle}/${daten.slug}-${daten.tmdbPersonId}` }));
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, alternates: alternates.length ? alternates : undefined, bodyHtml });
 }

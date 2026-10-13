@@ -10,7 +10,7 @@ const SONDER = { 'æ': 'ae', 'œ': 'oe', 'ø': 'o', 'ł': 'l', 'đ': 'd', 'ð': 
 
 export function slugify(text, locale = 'de-de') {
   let s = String(text || '').toLowerCase();
-  if (locale !== 'de-de') {
+  if (!String(locale).startsWith('de-')) {
     // ä/ö/ü zuerst (sonst wuerde NFD sie zu a/o/u machen), dann Akzente entfernen.
     s = s.replace(/[äöüß]/g, (z) => UMLAUTE[z])
       .normalize('NFD').replace(/[̀-ͯ]/g, '')

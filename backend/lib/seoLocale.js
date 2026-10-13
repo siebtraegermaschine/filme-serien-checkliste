@@ -16,8 +16,14 @@ export const LOCALE_KONFIG = {
   'it-it': { sprache: 'it', region: 'IT', aktiv: true, indexierbar: false },
   'nl-nl': { sprache: 'nl', region: 'NL', aktiv: true, indexierbar: false },
   'pt-pt': { sprache: 'pt', region: 'PT', aktiv: true, indexierbar: false },
+  // Laender-Locales: eigene Region (Streaming/Kino), Texte der textLocale. Alle noindex.
+  'de-at': { sprache: 'de', region: 'AT', aktiv: true, indexierbar: false, textLocale: 'de-de' },
+  'de-ch': { sprache: 'de', region: 'CH', aktiv: true, indexierbar: false, textLocale: 'de-de' },
+  'fr-ch': { sprache: 'fr', region: 'CH', aktiv: true, indexierbar: false, textLocale: 'fr-fr' },
+  'en-ca': { sprache: 'en', region: 'CA', aktiv: true, indexierbar: false, textLocale: 'en-gb' },
+  'fr-ca': { sprache: 'fr', region: 'CA', aktiv: true, indexierbar: false, textLocale: 'fr-fr' },
+  'en-us': { sprache: 'en', region: 'US', aktiv: true, indexierbar: false, textLocale: 'en-gb' },
   // Nicht-EWR: nur vorbereitet (kein aktives Marketing ausserhalb des EWR, siehe STATUS.md).
-  'en-us': { sprache: 'en', region: 'US', aktiv: false, indexierbar: false },
   'pt-br': { sprache: 'pt', region: 'BR', aktiv: false, indexierbar: false },
 };
 
@@ -49,9 +55,28 @@ export const PERSONEN_LOCALES = ['en-gb', 'fr-fr'];
 const ARTEN_PERSON = ['person', 'schauspieler', 'regisseur'];
 
 export function hatSeitenart(locale, art) {
-  if (locale === 'de-de') return true;
-  if (ARTEN_PERSON.includes(art)) return PERSONEN_LOCALES.includes(locale);
+  const t = textLocale(locale);
+  if (t === 'de-de') return true;
+  if (ARTEN_PERSON.includes(art)) return PERSONEN_LOCALES.includes(t);
   return ARTEN_LOKALISIERT.includes(art);
+}
+
+// Locale, aus dem die Redaktionstexte (seo_content) kommen: bei Laender-Locales die
+// Sprachfassung (de-at -> de-de), sonst das Locale selbst.
+export function textLocale(locale) {
+  return (LOCALE_KONFIG[locale] && LOCALE_KONFIG[locale].textLocale) || locale;
+}
+
+// Alle aktiven Locales, die mit den vorhandenen Text-Locales eine Fassung haben
+// (hreflang-Cluster eines Titels/einer Person).
+export function localesMitText(textLocales) {
+  const vorhanden = new Set(textLocales);
+  return Object.keys(LOCALE_KONFIG).filter((l) => LOCALE_KONFIG[l].aktiv && vorhanden.has(textLocale(l)));
+}
+
+// Deutsche Sprache (de-de, de-at, de-ch): deutsche Vorlagen, Pfadwoerter, Rechtstexte.
+export function istDeutsch(locale) {
+  return sprachVon(locale) === 'de';
 }
 
 // 'de-de' -> 'de', 'pt-pt' -> 'pt'.

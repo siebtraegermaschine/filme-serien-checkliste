@@ -777,7 +777,7 @@ function regionName(sprache, region) {
 
 // Datum 'YYYY-MM-DD' in der Schreibweise der Locale ('12.10.2026' fuer de-de).
 function datumLokal(iso, locale) {
-  if (locale === 'de-de') return datumDeutsch(iso);
+  if (locale.startsWith('de-')) return datumDeutsch(iso);
   return new Date(iso + 'T00:00:00Z').toLocaleDateString(locale.replace(/-([a-z]+)$/, (_, l) => '-' + l.toUpperCase()), { timeZone: 'UTC' });
 }
 

@@ -7,8 +7,8 @@ test('localeGueltig: nur aktive Locales', () => {
   assert.equal(localeGueltig('de-de'), true);
   assert.equal(localeGueltig('en-gb'), true);
   assert.equal(localeGueltig('es-es'), true);
-  assert.equal(localeGueltig('de-at'), false); // noch nicht freigegeben
-  assert.equal(localeGueltig('en-us'), false); // Nicht-EWR: nur vorbereitet
+  assert.equal(localeGueltig('de-at'), true); // Laender-Locale, noindex
+  assert.equal(localeGueltig('pt-br'), false); // Nicht-EWR: nur vorbereitet
   assert.equal(localeGueltig('pt-br'), false);
   assert.equal(localeGueltig('xx-yy'), false);
   assert.equal(localeGueltig(''), false);
@@ -50,4 +50,18 @@ test('Jede indexierbare Locale hat eine Allow-Zeile in robots.txt, keine andere'
     const erlaubt = new RegExp(`^Allow: /${l}/`, 'm').test(robots);
     assert.equal(erlaubt, LOCALE_KONFIG[l].indexierbar, l);
   }
+});
+
+test('Laender-Locales: Texte aus der Sprachfassung, eigene Region, noindex', async () => {
+  const { textLocale, localesMitText, istDeutsch, hatSeitenart, regionFuerLocale, localeIndexierbar } = await import('../lib/seoLocale.js');
+  assert.equal(textLocale('de-at'), 'de-de');
+  assert.equal(textLocale('en-ca'), 'en-gb');
+  assert.equal(textLocale('fr-ca'), 'fr-fr');
+  assert.equal(textLocale('es-es'), 'es-es');
+  assert.deepEqual(localesMitText(['de-de']).sort(), ['de-at', 'de-ch', 'de-de']);
+  assert.ok(localesMitText(['fr-fr']).includes('fr-ch'));
+  assert.equal(regionFuerLocale('de-ch'), 'CH');
+  assert.ok(istDeutsch('de-at') && !istDeutsch('fr-ch'));
+  assert.ok(hatSeitenart('de-at', 'schauspieler') && hatSeitenart('en-us', 'schauspieler') && hatSeitenart('fr-ca', 'schauspieler') && !hatSeitenart('es-es', 'schauspieler'));
+  assert.ok(['de-at', 'de-ch', 'fr-ch', 'en-ca', 'fr-ca', 'en-us'].every((l) => !localeIndexierbar(l)));
 });

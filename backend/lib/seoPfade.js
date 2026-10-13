@@ -23,7 +23,7 @@ const WOERTER = {
     'cinema', 'novidades-no', 'colecoes', 'realizadores', 'atores'],
 };
 
-const aktiveLocales = () => Object.keys(LOCALE_KONFIG).filter((l) => l !== 'de-de');
+const aktiveLocales = () => Object.keys(LOCALE_KONFIG).filter((l) => LOCALE_KONFIG[l].sprache !== 'de');
 const wortFuer = (locale, de) => {
   const liste = WOERTER[LOCALE_KONFIG[locale]?.sprache];
   return liste ? liste[DE.indexOf(de)] : de;
@@ -31,7 +31,7 @@ const wortFuer = (locale, de) => {
 
 // 'bestenlisten' ist ein deutsches Wort fuer die Uebersicht; fremde Sprachen haben ein eigenes.
 export function lokalWort(locale, deutsch) {
-  if (locale === 'de-de' || !DE.includes(deutsch)) return deutsch;
+  if (LOCALE_KONFIG[locale]?.sprache === 'de' || !DE.includes(deutsch)) return deutsch;
   return wortFuer(locale, deutsch);
 }
 
@@ -58,7 +58,7 @@ export function pfadAnalysieren(pfad) {
   const teile = String(pfad).split('/');
   const locale = teile[1];
   const wort = teile[2];
-  if (!wort || locale === 'de-de' || !LOCALE_KONFIG[locale]) return { pfad };
+  if (!wort || !LOCALE_KONFIG[locale] || LOCALE_KONFIG[locale].sprache === 'de') return { pfad };
   const deutsch = deutschWort(locale, wort);
   if (deutsch) {
     teile[2] = deutsch;

@@ -5,7 +5,7 @@
 import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
 import { SITE } from './seoRender.js';
-import { SEO_LOCALES, hatSeitenart } from './seoLocale.js';
+import { SEO_LOCALES, hatSeitenart, textLocale, regionFuerLocale } from './seoLocale.js';
 import {
   personenFuerSitemap, titelFuerSitemap, genresFuerSitemap, anbieterFuerSitemap,
   staedteFuerSitemap, alleBestenlisten, reihenFuerSitemap, wochenSeitenFuerSitemap,
@@ -17,6 +17,8 @@ export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stad
 // Bereich -> Seitenart (seoLocale.js). Nicht-de-Locales fuehren nur lokalisierte Arten.
 const ART_JE_BEREICH = { titel: 'titel', hub: 'start' };
 export function bereichFuerLocale(locale, bereich) {
+  // Kinoorte (kinos) gibt es nur fuer Deutschland.
+  if (bereich === 'kino_stadt' && regionFuerLocale(locale) !== 'DE') return false;
   return hatSeitenart(locale, ART_JE_BEREICH[bereich] || bereich);
 }
 
@@ -41,7 +43,7 @@ function urlset(urls) {
 async function textStaende(bereich, locale) {
   const { rows } = await pool.query(
     `SELECT schluessel, aktualisiert_am FROM seo_content WHERE bereich = $1 AND locale = $2`,
-    [bereich, locale]
+    [bereich, textLocale(locale)]
   );
   return new Map(rows.map((r) => [r.schluessel, r.aktualisiert_am.toISOString().slice(0, 10)]));
 }
@@ -105,7 +107,7 @@ async function urlsFuerBereich(locale, bereich) {
     }));
   }
 
-  if (bereich === 'hub' && locale !== 'de-de') {
+  if (bereich === 'hub' && textLocale(locale) !== 'de-de') {
     return stand.has('start') ? [{ loc: `${SITE}/${locale}/`, lastmod: stand.get('start') }] : [];
   }
 

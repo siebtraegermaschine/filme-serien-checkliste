@@ -113,8 +113,8 @@ test('Seitenarten: Nicht-de kennt Personen nur in en-gb/fr-fr; Sitemap unveraend
 });
 
 test('Nicht-EWR-Locales sind inaktiv und nicht indexierbar', () => {
-  for (const l of ['en-us', 'pt-br']) assert.deepEqual([LOCALE_KONFIG[l].aktiv, LOCALE_KONFIG[l].indexierbar], [false, false]);
-  assert.equal(seoTexte('en-us').start, 'Home');
+  for (const l of ['pt-br']) assert.deepEqual([LOCALE_KONFIG[l].aktiv, LOCALE_KONFIG[l].indexierbar], [false, false]);
+  assert.ok(seoTexte('pt-br').start);
 });
 
 test('Route: Personen-Seiten in Nicht-de liefern 404 (ohne DB), inaktive Locales gehen durch', async () => {
@@ -131,7 +131,7 @@ test('Route: Personen-Seiten in Nicht-de liefern 404 (ohne DB), inaktive Locales
       assert.equal(a.status, 404, pfad);
       assert.match(await a.text(), /<html lang="/);
     }
-    const a = await fetch(`http://127.0.0.1:${port}/en-us`);
+    const a = await fetch(`http://127.0.0.1:${port}/pt-br`);
     assert.equal(await a.text(), 'DURCHGEREICHT');
   } finally {
     server.close();
@@ -174,4 +174,17 @@ test('Personenseite en-gb/fr-fr: uebersetzte Ueberschriften, noindex solange Loc
   const hub = seitePersonenHub({ rolle: 'regisseur', personen: [{ name: 'Ana', slug: 'ana', tmdbPersonId: 7, fotoPfad: null, anzahl: 2 }], text: null, indexierbar: true }, 'en-gb');
   assert.match(hub, /<h1>Directors<\/h1>/);
   assert.match(hub, /2 titles/);
+});
+
+test('Laender-Locales: de-at deutsch mit deutschem Chrome, en-ca englisch, beide noindex', () => {
+  const at = seiteTitelDetail(titel('Ein deutscher Text. '.repeat(20), { textLocales: ['de-de', 'de-at', 'de-ch'] }), 'de-at');
+  assert.match(at, /<html lang="de">/);
+  assert.equal(meta(at, 'robots'), 'noindex,follow');
+  assert.match(at, /href="\/de-at\/filme"/);
+  assert.match(at, /impressum\.html/);
+  assert.doesNotMatch(at, /hreflang="de-AT"/); // erst mit indexierbarer Locale
+  const ca = seiteTitelDetail(titel('An English text. '.repeat(20), { textLocales: ['en-gb', 'en-ca', 'en-us'] }), 'en-ca');
+  assert.match(ca, /<html lang="en">/);
+  assert.equal(meta(ca, 'robots'), 'noindex,follow');
+  assert.match(ca, /imprint\.html/);
 });
