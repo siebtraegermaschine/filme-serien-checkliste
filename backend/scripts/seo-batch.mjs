@@ -271,7 +271,7 @@ Publikum im vierstelligen Bereich"). Die Durchschnittsbewertung selbst darfst du
 nennen, im Deutschen mit Komma (7,4 statt 7.4).
 
 LAENGE MIT PUFFER
-Ziel sind 290 bis 330 Woerter, nicht die Untergrenze von 280 -- wer knapp darueber
+Ziel sind 290 bis 330 Woerter, nicht die Untergrenze von 250 -- wer knapp darueber
 schreibt, rutscht beim Nachschaerfen leicht darunter und faellt durch die Pruefung.
 
 Gib ausschliesslich den Text aus, ohne Vorrede und ohne Nachbemerkung.`;

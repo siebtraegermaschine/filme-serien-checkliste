@@ -27,7 +27,7 @@ FORMAT — exakt diese vier Überschriften, in dieser Reihenfolge, keine weitere
 ### Hinter den Kulissen
 ### Einordnung & Wirkung
 
-Keine Aufzählungen, keine Fettschrift, keine Zwischenüberschriften. Fließtext in kurzen Absätzen. 280 bis 340 Wörter je Titel (Überschriften zählen nicht mit; unter 250 wird verworfen, über 420 ebenfalls).
+Keine Aufzählungen, keine Fettschrift, keine Zwischenüberschriften. Fließtext in kurzen Absätzen. Ziel 290 bis 330 Wörter je Titel (Überschriften zählen nicht mit; unter 250 wird verworfen, über 420 ebenfalls).
 
 INHALT DER ABSCHNITTE
 1. Worum es geht — die Ausgangslage aus der Inhaltsangabe, erzählt statt zusammengefasst. Hält den Ausgang zurück, wenn die Inhaltsangabe ihn verrät.
