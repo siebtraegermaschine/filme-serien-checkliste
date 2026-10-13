@@ -7,10 +7,9 @@
 
 ## Offen
 
-- **PageSpeed: Rest-LCP mobil 4,5 s** (13.10.2026) — nur noch per Eingriff in den
-  Ladeablauf zu senken (erstes Poster im Kennenlern-Dialog vorab festlegen);
-  Nutzen gering, bewusst offen. Echte Messwerte später in der Search Console
-  prüfen.
+- **PageSpeed: Rest-LCP mobil** (13.10.2026) — Frühabruf, Poster-Priorität und Minify sind
+  live; neuen PageSpeed-Lauf (einige Minuten nach dem Deploy) abwarten und
+  danach entscheiden. Echte Messwerte später in der Search Console prüfen.
 
 - **Regie/Besetzung in CJK-Schrift** (13.10.2026) — bei ca. 1.994 Titeln
   steht `director` (teils auch `cast_names`) in Originalschrift, z. B.
@@ -497,6 +496,7 @@ en-gb/es-es haben schon fast alles außer Bestenlisten).
 - Gestufte Katalogladung: Erstbesucher (kein IndexedDB-Cache, Pfad `/`, nicht angemeldet) holen zuerst `/api/startkatalog` (600 kuratierte + 600 beliebteste Zusatztitel, ca. 250 KB gepackt); der volle Katalog (~8 MB) folgt bei der ersten Bedienung oder nach 20 s. Schlägt der Startabruf fehl, lädt die App wie früher alles.
 - Der Startkatalog wird beim Serverstart für de/DE und en/US vorgewärmt (`server.js`). Andere Sprachen/Regionen sind nach einem Deploy kalt (erster Abruf bis ca. 15 s). PageSpeed testet mit en/US: Lauf erst einige Minuten nach einem Deploy anstoßen, sonst fehlt die Titelliste.
 - Weitere Änderungen: Logo als WebP, Platzhalter gegen Layout-Verschiebung (`ol.list.laedt`), Cookie-Banner-Skript am Anfang von `<body>` statt `defer` (früherer Banner), Meta-Description und Titel, `Cross-Origin-Opener-Policy`, Kontraste, `/api/auth/me` ohne Sitzung 200 + `null` statt 401 (kein Konsolenfehler).
-- Bewusst nicht gemacht: Minify/DOM-Größe/Posterformate, CSP, Trusted Types, HSTS-`preload` (schwer rückgängig), Sourcemaps.
-- Rest-LCP mobil (4,5 s): erstes Poster im Dialog „Welche Titel kennst du?“, das erst nach dem Startkatalog angefordert werden kann. Weiter drücken nur mit Eingriff in den Ladeablauf.
+- Nachgezogen (13.10. abends): `/api/startkatalog` wird per kleinem Inline-Skript vor dem großen Seitenskript angefordert (`window.__STARTKATALOG`, `katalogVorabruf` nutzt es nur bei gleicher URL), erstes Poster im Kennenlern-Dialog mit `fetchpriority="high"`, Inline-JS/CSS der `index.html` werden im Docker-Build per esbuild minifiziert (`scripts/minify-html.mjs`, Quelle in Git bleibt lesbar; 886 → 540 KB). Live geprüft: Startabruf bei ~90 ms, keine Konsolenfehler.
+- Bewusst nicht gemacht: DOM-Größe/Posterformate (TMDB w154, Fremdserver), CSP, Trusted Types, HSTS-`preload` (schwer rückgängig), Sourcemaps, ungenutztes CSS/JS entfernen.
+- Rest-LCP mobil (zuletzt 4,2 s vor dem Frühabruf): erstes Poster im Dialog „Welche Titel kennst du?“, das erst nach dem Startkatalog angefordert werden kann. Neuer PageSpeed-Lauf nach dem Frühabruf steht aus.
 - Core Web Vitals mit echten Nutzerdaten erst in einigen Wochen in der Search Console sichtbar.
