@@ -49,6 +49,7 @@ async function kandidaten({ locale, limit, minVotes, stufe }) {
             t.vote_count, t.plot, t.overview_en, t.certification, t.uebersetzungen
        FROM titles t
       WHERE t.tmdb_id IS NOT NULL
+        AND t.source <> 'seo'
         AND t.plot IS NOT NULL AND length(t.plot) > $4
         AND t.director IS NOT NULL AND t.director <> ''
         AND t.year IS NOT NULL

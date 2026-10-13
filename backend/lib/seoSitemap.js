@@ -63,9 +63,10 @@ async function urlsFuerBereich(locale, bereich) {
   const stand = await textStaende(bereich, locale);
 
   if (bereich === 'titel') {
-    // Nicht-de: nur Titel mit Text in dieser Sprache (ohne Text ist die Seite noindex).
+    // Nur Titel mit Text in dieser Sprache (Thin-Content-Schutz, gilt auch fuer
+    // die reinen SEO-Titel aus streaming_cache).
     const alle = await titelFuerSitemap();
-    return (locale === 'de-de' ? alle : alle.filter((t) => stand.has(`${t.type}:${t.tmdb_id}`))).map((t) => ({
+    return alle.filter((t) => stand.has(`${t.type}:${t.tmdb_id}`)).map((t) => ({
       loc: `${SITE}/${locale}/${t.type === 'series' ? 'serie' : 'film'}/${slugify(t.title, locale)}-${t.tmdb_id}`,
       lastmod: stand.get(`${t.type}:${t.tmdb_id}`) || null,
     }));
