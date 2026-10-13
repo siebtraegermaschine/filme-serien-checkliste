@@ -471,3 +471,9 @@ en-gb/es-es haben schon fast alles außer Bestenlisten).
 - Stand nach Runde 25 (13.10.2026): 3.503 it-it-Titeltexte, Rest ca. 12.600 Titel, Personentexte nicht begonnen. Ausbeute sinkt (ca. 60 %), weil die restlichen Datensätze dünner sind (Inhaltsangabe zu kurz für 250 Wörter, nichts wird aufgefüllt); Filter Inhaltsangabe ≥ 620 Zeichen, Titel ohne Text werden übersprungen (221 gemerkt). Bei Agenten-Prompts: Altersfreigabe 0, Namen in Fremdschrift und Vorlagen-/Fortsetzungsbezüge weglassen, Paketdatei mehrfach lesbar (Einmal-Lesen fördert Erfundenes).
 - nl-nl Probe (Runde 1): nur 46 Texte aus 150 Titeln (ca. 31 %), weil bei vielen Titeln die niederländische Inhaltsangabe fehlt und der Datensatz Italienisch/Französisch/Spanisch liefert. Lohnt per Abo kaum; 46 nl-nl-Titeltexte liegen in der DB (noindex).
 - Der Rest geht nur per Batch-API (ca. 40–60 $, nur nach Freigabe) oder in weiteren Abo-Sitzungen. it-it bleibt noindex, bis `indexierung-schalter.mjs` auf Zuruf läuft.
+
+## TMDB-Quelltexte bereinigt (13.10.2026, live)
+- Live-DB (`titles.uebersetzungen`/`plot`): U+A789 statt ":" in 4 es-Titeln (Dragon Ball Z), `571891` Titel + „Pókemon", `12819` „sakvo", `11937` „Kalahari-Buschmannes".
+- Import: `backend/lib/tmdbText.js` ersetzt Doppelpunkt-Lookalikes in `backfill-english.mjs` und `discover-rated-titles.mjs`. Bindestriche bewusst nicht pauschal angefasst.
+- es-es-Titeltexte brauchen **keine** Neuerzeugung (enthielten die Fehler nicht); die 201 es-Titel mit Bindestrich gesichtet, alles echte Namen.
+- Hinweis: CI-Test `streamingIngestStapel` war einmal rot, beim Neustart grün (vermutlich instabil).
