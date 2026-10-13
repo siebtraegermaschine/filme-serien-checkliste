@@ -329,5 +329,7 @@ app.listen(port, () => {
     { schluessel: streamingSchluessel('de', 'DE'), ermitteln: () => ladeStreaming('de', 'DE') },
     // Erstbesucher laden zuerst diese kleine Auswahl (siehe routes/startkatalog.js).
     { schluessel: startkatalogSchluessel('de', 'DE'), ermitteln: () => ladeStartkatalog('de', 'DE') },
+    // Englische Erstbesucher (und PageSpeed/Lighthouse) kommen mit en/US.
+    { schluessel: startkatalogSchluessel('en', 'US'), ermitteln: () => ladeStartkatalog('en', 'US') },
   ]);
 });

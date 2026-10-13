@@ -173,13 +173,11 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/me', async (req, res) => {
-  if (!req.session?.userId) {
-    return res.status(401).json({ error: 'not_authenticated' });
-  }
+  // Ohne Sitzung 200 + null statt 401: Jeder abgemeldete Besucher loest sonst
+  // einen roten Konsoleneintrag aus (Lighthouse: Best Practices).
+  if (!req.session?.userId) return res.json(null);
   const { rows } = await pool.query(`SELECT id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung FROM users WHERE id = $1`, [req.session.userId]);
-  if (!rows[0]) {
-    return res.status(401).json({ error: 'not_authenticated' });
-  }
+  if (!rows[0]) return res.json(null);
   res.json(publicUser(rows[0]));
 });
 
