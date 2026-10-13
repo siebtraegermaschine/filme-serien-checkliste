@@ -28,6 +28,8 @@ movietaste.de, www.movietaste.de {
 		# fremde Server (z.B. TMDB-Bild-CDN) lecken.
 		Referrer-Policy "strict-origin-when-cross-origin"
 		# Verrät die Caddy-Version nicht.
+		# Trennt das Fenster von fremden Seiten, die es per window.open oeffnen.
+		Cross-Origin-Opener-Policy "same-origin"
 		-Server
 	}
 
