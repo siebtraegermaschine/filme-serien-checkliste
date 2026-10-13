@@ -88,6 +88,7 @@ export const FOOTER_BEREICHE = [
 export const FOOTER_LAENDER = [
   ['de-de', '🇩🇪', 'Deutsch'], ['en-gb', '🇬🇧', 'English'], ['fr-fr', '🇫🇷', 'Français'],
   ['es-es', '🇪🇸', 'Español'], ['it-it', '🇮🇹', 'Italiano'], ['nl-nl', '🇳🇱', 'Nederlands'], ['pt-pt', '🇵🇹', 'Português'],
+['de-at', '🇦🇹', 'Österreich'], ['de-ch', '🇨🇭', 'Schweiz'], ['fr-ch', '🇨🇭', 'Suisse'], ['en-ca', '🇨🇦', 'Canada'], ['fr-ca', '🇨🇦', 'Canada (français)'], ['en-us', '🇺🇸', 'United States'],
 ];
 
 function fusszeile(locale) {
