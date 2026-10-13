@@ -83,10 +83,6 @@
   Content-Befüllung ist der SEO-Content-Prozess oben. Personen-Seiten
   (Schauspieler/Regisseur): siehe eigener Punkt oben, Technik existiert
   bereits, TMDB-Personen-Import läuft (Bulk-Resolve).
-- **Sportcode-Rückbau**: CouchUltras seit 24.08. ausgegliedert, alter
-  Sportcode liegt noch tot im Repo (siehe Tabelle UEBERGABE-OFFEN
-  0.0.0.0.0.0) — Rückbau erst, wenn CouchUltras länger unauffällig läuft.
-  Sport-Workflow läuft noch unnütz mit, kann sofort weg.
 - **Muttersprachler-Review** der maschinellen Übersetzungen (fr/es/it/nl/pt)
   liegt bei Christian, noch nicht durchgeführt.
 - **Tour-Screenshots** veraltet (seit 11.08.), Update erst nach Abschluss
@@ -445,3 +441,18 @@ en-gb/es-es haben schon fast alles außer Bestenlisten).
   ist damit durch; verworfene Faktenverdachte bleiben Vorlagentext.
 - Haiku braucht keinen `effort`-Parameter (API 400) — in `seo-batch.mjs`
   behoben.
+
+## Seiten für alle Titel, Pfadwörter (13.10.2026, live)
+- 70.263 Streaming-Titel (DE, AT, CH, FR, GB, US, CA) ohne Seite sind als
+  `titles.source='seo'` angelegt (`backend/scripts/seo-titel-anlegen.sql`), mit
+  66.705 Kurztexten (`seo-titel-kurztexte.mjs`). Die App lädt `source='seo'`
+  nicht; `seo-batch`/`seo-pakete` überspringen sie; Sitemap nur mit Text.
+  Rest-Regionen (ca. 45.000 Titel nur in anderen Regionen): Skript mit anderer
+  Regionenliste wiederholen. Bei Google Search Console die Indexierung beobachten.
+- Pfadwörter je Sprache (`lib/seoPfade.js`, en/fr/es/it/nl/pt): intern bleibt
+  alles deutsch, Umsetzung an der Grenze in `routes/seo.js`; deutsche Wörter in
+  Nicht-de-Locales leiten per 301 um.
+- Offen: Länder-Locales (de-at, de-ch, en-ca, fr-ca, en-us). Braucht
+  `textLocale`-Rückfall (Texte der Basissprache) und Ersatz der fest
+  verdrahteten `'de-de'`-Prüfungen in seoData/seoRender/seoSitemap; erst nach
+  fr-fr/en-gb-Indexierung. Titeltexte es/it/nl/pt (ca. 40–60 $ je Locale).
