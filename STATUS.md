@@ -465,3 +465,8 @@ en-gb/es-es haben schon fast alles außer Bestenlisten).
   `textLocale`-Rückfall (Texte der Basissprache) und Ersatz der fest
   verdrahteten `'de-de'`-Prüfungen in seoData/seoRender/seoSitemap; erst nach
   fr-fr/en-gb-Indexierung. Titeltexte es/it/nl/pt (ca. 40–60 $ je Locale).
+
+## it-it Titeltexte per Abo (13.10.2026)
+- Verfahren wie es-es: `seo-pakete.mjs --locale it-it --pakete 10 --je 15`, Haiku-Subagenten schreiben JSON, `seo-einspielen.mjs --locale it-it` (erst `--dry-run`). Kein API-Geld. Eine Runde (150 Texte) dauert ca. 10 Min.
+- Stand nach Runde 9: 1.348 it-it-Titeltexte, Rest ca. 14.800 Titel, Personentexte nicht begonnen. Bei Agenten-Prompts: Altersfreigabe 0, Namen in Fremdschrift und Vorlagen-/Fortsetzungsbezüge weglassen, Paketdatei mehrfach lesbar (Einmal-Lesen fördert Erfundenes).
+- Der Rest geht nur per Batch-API (ca. 40–60 $, nur nach Freigabe) oder in weiteren Abo-Sitzungen. it-it bleibt noindex, bis `indexierung-schalter.mjs` auf Zuruf läuft.
