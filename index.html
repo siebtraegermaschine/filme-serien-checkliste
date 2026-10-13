@@ -258,7 +258,7 @@
     padding: 0 20px;
   }
   /* Platz vor dem ersten Rendern reservieren, sonst springt der Footer (CLS) */
-  ol.list#list:empty { min-height: 100vh; }
+  ol.list#list:empty, ol.list#list.laedt { min-height: 100vh; }
   li.item {
     display: flex;
     align-items: center;
@@ -320,6 +320,11 @@
     padding: 0 20px;
     line-height: 1.6;
   }
+
+  /* Ohne Farbe standen die Links im Browser-Blau (#0000ee) auf dunklem Grund. */
+  footer a { color: inherit; text-decoration: underline; }
+  li.list-knopf { list-style: none; }
+  #kennenTitelEl { color:var(--accent); font-size:17px; margin-bottom:10px; }
 
   /* Links auf die SEO-Uebersichtsseiten -- bewusst zurueckhaltend, sie sind
      fuer Suchmaschinen da und sollen die Rechtstexte darueber nicht
@@ -1985,7 +1990,7 @@
 <div id="kennenModal" class="modal-overlay" style="display:none">
   <div class="modal kennen-modal">
     <button class="modal-x" id="kennenModalX" aria-label="Schließen">✕</button>
-    <h3 id="kennenTitelEl"></h3>
+    <h2 id="kennenTitelEl"></h2>
     <p class="prov-intro" id="kennenIntroEl"></p>
     <div id="kennenInhalt"></div>
   </div>
@@ -7652,7 +7657,7 @@ function kinoHinweisAnhaengen(q){
   b.className = 'load-more-btn kino-hinweis';
   b.textContent = TXT.auchImKino(n);
   b.onclick = function(){ openCinemaPage(); };
-  list.appendChild(b);
+  listeKnopfAnhaengen(b);
 }
 function renderLeerzustand(q){
   // Solange der Katalog laeuft, ist "leer" keine Aussage ueber den Inhalt --
@@ -7737,6 +7742,13 @@ function renderLeerzustand(q){
    leert die Liste, bevor es sie neu fuellt. In dem Moment ist die Seite kurz
    zu kurz fuer die aktuelle Bildlaufposition, und der Browser zieht sie nach
    oben. Ohne das Zuruecksetzen landet man wieder ganz woanders. */
+// Ein <ol> darf nur <li> enthalten -- Knoepfe daher in ein eigenes Element.
+function listeKnopfAnhaengen(knopf){
+  var li = document.createElement('li');
+  li.className = 'list-knopf';
+  li.appendChild(knopf);
+  list.appendChild(li);
+}
 async function nachladenOhneSprung(nachladen){
   var vorher = window.scrollY;
   await nachladen();
@@ -7745,6 +7757,7 @@ async function nachladenOhneSprung(nachladen){
 function render() {
   const profile = aktuellesProfil();
   list.classList.add('main-list');
+  list.classList.toggle('laedt', !KATALOG_DA);   // Platz halten, solange nur "wird geladen" drinsteht (CLS)
   list.innerHTML = '';
   updateSortMenuActive();
   // Geteilte Momentaufnahme (?titel=...): feste Liste in fester Reihenfolge,
@@ -7791,7 +7804,7 @@ function render() {
     moreBtn.onclick = function(){
       nachladenOhneSprung(function(){ titelLimit += NACHLADE_SCHRITT; renderCurrentTab(); });
     };
-    list.appendChild(moreBtn);
+    listeKnopfAnhaengen(moreBtn);
   }
   kinoHinweisAnhaengen(q);
 }
@@ -11977,7 +11990,7 @@ function renderMoment(profile){
     moreBtn.onclick = function(){
       nachladenOhneSprung(function(){ titelLimit += NACHLADE_SCHRITT; renderCurrentTab(); });
     };
-    list.appendChild(moreBtn);
+    listeKnopfAnhaengen(moreBtn);
   }
 }
 
