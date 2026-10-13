@@ -26,6 +26,10 @@
  * je Land -- dadurch ist auch dieser Modus abbrechbar/fortsetzbar, und der
  * Leerstring ist falsy, faellt im Backend also weiter auf DE zurueck.
  *
+ * --leere: nimmt nur Zeilen mit leerem overview_en (frueher "gesucht, nichts
+ * gefunden") erneut an, weil TMDB-Uebersetzungen nachwachsen (Probe 13.10.2026:
+ * 73 % von 120 Zufallstreffern hatten inzwischen eine englische Fassung).
+ *
  * Aufruf im Backend-Verzeichnis:
  *   TMDB_API_KEY=xxxx node scripts/backfill-english.mjs
  *   TMDB_API_KEY=xxxx node scripts/backfill-english.mjs --limit=500   # Probelauf
@@ -42,6 +46,7 @@ const CERT_REGIONS = (process.env.TMDB_CERT_REGIONS || 'DE,AT,CH,GB,FR,IT,ES,NL,
 const LIMIT_ARG = (process.argv.find((a) => a.startsWith('--limit=')) || '').split('=')[1];
 const LIMIT = LIMIT_ARG ? parseInt(LIMIT_ARG, 10) : null;
 const NUR_FREIGABEN = process.argv.includes('--nur-freigaben');
+const LEERE = process.argv.includes('--leere');
 
 if (!KEY) { console.error('FEHLER: TMDB_API_KEY ist nicht gesetzt.'); process.exit(1); }
 
@@ -69,7 +74,7 @@ function englischAus(detail, kind) {
   if (!beste) return { titel: '', ov: '' };
   return {
     titel: ((kind === 'movie' ? beste.data.title : beste.data.name) || '').trim(),
-    ov: (beste.data.overview || '').trim(),
+    ov: tmdbText((beste.data.overview || '').trim()),
   };
 }
 
@@ -133,7 +138,9 @@ async function main() {
         `SELECT t.id, t.type, COALESCE(t.tmdb_id, r.tmdb_id) AS tmdb_id
            FROM titles t
            LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id
-          WHERE (t.title_en IS NULL OR t.overview_en IS NULL OR t.uebersetzungen = '{}'::jsonb)
+          WHERE ${LEERE
+            ? "t.overview_en = ''"
+            : "(t.title_en IS NULL OR t.overview_en IS NULL OR t.uebersetzungen = '{}'::jsonb)"}
           ORDER BY t.id
           ${LIMIT ? `LIMIT ${LIMIT}` : ''}`
       );
