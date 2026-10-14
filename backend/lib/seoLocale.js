@@ -27,6 +27,11 @@ export const LOCALE_KONFIG = {
   'pt-br': { sprache: 'pt', region: 'BR', aktiv: false, indexierbar: false },
 };
 
+// Titelseiten in Nicht-de-Locales: unter dieser Textlaenge noindex und nicht in der
+// Sitemap (Thin Content). de-de ist ausgenommen, dort werden die Texte noch aufgefuellt.
+export const MIN_TITELTEXT = 250;
+export const titelTextReicht = (locale, text) => textLocale(locale) === 'de-de' || (text || '').length >= MIN_TITELTEXT;
+
 // Indexierbare Locales: Sitemap-Index, Sitemap-Dateien, robots.txt.
 export const SEO_LOCALES = Object.keys(LOCALE_KONFIG).filter((l) => LOCALE_KONFIG[l].indexierbar);
 

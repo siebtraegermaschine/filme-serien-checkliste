@@ -7,7 +7,7 @@
 import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
 import { anbieterSlug } from './anbieter.js';
-import { regionFuerLocale, sprachVon, textLocale, localesMitText } from './seoLocale.js';
+import { regionFuerLocale, sprachVon, textLocale, localesMitText, titelTextReicht } from './seoLocale.js';
 import { sprachFeld } from './i18n.js';
 import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatistik.js';
 import { ladePersonDaten } from './personen.js';
@@ -262,7 +262,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     reihe: await reiheFuerTitel(titel.collection_id),
     text,
     textLocales: localesMitText(fassungenRows.rows.map((r) => r.locale)),
-    indexierbar: true,
+    indexierbar: titelTextReicht(locale, text),
   };
 }
 

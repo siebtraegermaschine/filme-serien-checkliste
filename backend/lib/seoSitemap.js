@@ -5,7 +5,7 @@
 import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
 import { SITE } from './seoRender.js';
-import { SEO_LOCALES, hatSeitenart, textLocale, regionFuerLocale } from './seoLocale.js';
+import { SEO_LOCALES, hatSeitenart, textLocale, regionFuerLocale, MIN_TITELTEXT } from './seoLocale.js';
 import {
   personenFuerSitemap, titelFuerSitemap, genresFuerSitemap, anbieterFuerSitemap,
   staedteFuerSitemap, alleBestenlisten, reihenFuerSitemap, wochenSeitenFuerSitemap,
@@ -42,8 +42,9 @@ function urlset(urls) {
 // Letzte Textaenderung je Schluessel -- als lastmod, wo es schon einen Text gibt.
 async function textStaende(bereich, locale) {
   const { rows } = await pool.query(
-    `SELECT schluessel, aktualisiert_am FROM seo_content WHERE bereich = $1 AND locale = $2`,
-    [bereich, textLocale(locale)]
+    `SELECT schluessel, aktualisiert_am FROM seo_content WHERE bereich = $1 AND locale = $2
+        AND ($1 <> 'titel' OR $2 = 'de-de' OR length(text) >= $3)`,
+    [bereich, textLocale(locale), MIN_TITELTEXT]
   );
   return new Map(rows.map((r) => [r.schluessel, r.aktualisiert_am.toISOString().slice(0, 10)]));
 }
