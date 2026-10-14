@@ -2,7 +2,7 @@
 # Faecher-Verfahren fuer SEO-Titeltexte: eine Runde vorbereiten oder abschliessen.
 # Ablauf und Regeln: docs/archiv/UEBERGABE-SEO.md, Abschnitt 3b.
 #
-#   scripts/seo-runde.sh pakete <arbeitsordner>          10 Pakete à 15 offene Titel nach <arbeitsordner>/pakete holen
+#   scripts/seo-runde.sh pakete <arbeitsordner>          10 Pakete à 15 offene Titel nach <arbeitsordner>/pakete holen (STUFE=C für dünnere Daten)
 #   scripts/seo-runde.sh pruefen <arbeitsordner>         lokale Suche: Laenge, Quellwoerter, „Regie“ in Serientexten
 #   scripts/seo-runde.sh einspielen <arbeitsordner> <nr> Probelauf + scharf einspielen, texte/ nach runden/runde-<nr>
 #
@@ -13,6 +13,7 @@
 # WICHTIG (17.09.2026): „einspielen“ erst, wenn ALLE Bearbeiter fertig gemeldet haben — vorhandene
 # Dateien reichen nicht. Neue Pakete erst danach mit „pakete“ holen (gleiche Dateinamen!).
 set -e
+setopt nonomatch
 BEFEHL=$1; W=$2
 [ -n "$W" ] || { echo "Aufruf: $0 pakete|pruefen|einspielen <arbeitsordner> [runde]"; exit 1; }
 SSH=(ssh -i $HOME/.ssh/id_ed25519 -o BatchMode=yes -o ServerAliveInterval=20 root@movietaste.de)
@@ -22,7 +23,7 @@ case $BEFEHL in
 pakete)
   ls $W/texte/*.json >/dev/null 2>&1 && { echo "texte/ ist nicht leer — erst einspielen oder aufraeumen"; exit 1; }
   rm -f $W/pakete/*.json
-  $SSH "docker exec movietaste-backend-1 sh -c 'cd /app/backend && rm -rf /tmp/pakete && node scripts/seo-pakete.mjs --pakete 10 --je 15 --ziel /tmp/pakete' | head -1 && rm -rf /tmp/pakete-host && docker cp movietaste-backend-1:/tmp/pakete /tmp/pakete-host >/dev/null"
+  $SSH "docker exec movietaste-backend-1 sh -c 'cd /app/backend && rm -rf /tmp/pakete && node scripts/seo-pakete.mjs --pakete 10 --je 15 --stufe ${STUFE:-B} --ziel /tmp/pakete' | head -1 && rm -rf /tmp/pakete-host && docker cp movietaste-backend-1:/tmp/pakete /tmp/pakete-host >/dev/null"
   scp -q -i ~/.ssh/id_ed25519 "root@movietaste.de:/tmp/pakete-host/*.json" $W/pakete/
   echo "Pakete: $(ls $W/pakete | wc -l | tr -d ' ')"
   ;;
