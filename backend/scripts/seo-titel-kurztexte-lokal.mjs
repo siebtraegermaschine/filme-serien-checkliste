@@ -149,6 +149,16 @@ function zielTitel(t, locale) {
   return t.original_title || t.title;
 }
 
+// Handlungstext (nur en-gb: overview_en), auf ganze Saetze bis ca. 600 Zeichen gekuerzt; sonst null.
+function handlung(t, locale) {
+  const o = locale === 'en-gb' ? (t.overview_en || '').replace(/\s+/g, ' ').trim() : '';
+  if (o.length < 80) return null;
+  if (o.length <= 600) return /[.!?…”"]$/.test(o) ? o : null;
+  const teil = o.slice(0, 600);
+  const i = Math.max(teil.lastIndexOf('. '), teil.lastIndexOf('! '), teil.lastIndexOf('? '));
+  return i >= 80 ? teil.slice(0, i + 1) : null;
+}
+
 // null, wenn die Felder fuer MIN Zeichen nicht reichen.
 export function bauKurztext(t, locale) {
   const x = L[locale];
@@ -158,6 +168,8 @@ export function bauKurztext(t, locale) {
   const s = [];
   const woher = laender(locale, t.origin_country);
   s.push(x.intro(titel, serie, t.year) + (woher.length ? x.land(aufz(locale, woher)) : '') + '.');
+  const hand = handlung(t, locale);
+  if (hand) s.push(hand);
   if (genres.length) s.push(x.genre(aufz(locale, genres), serie));
   if (t.director) s.push(x.dir(t.director, serie));
   const cast = (t.cast_names || []).slice(0, 4);
@@ -190,7 +202,7 @@ async function main() {
     const { rows } = await pool.query(
       `SELECT DISTINCT ON (t.type, t.tmdb_id) t.type, t.tmdb_id, t.title, t.title_en, t.original_title, t.uebersetzungen,
               t.year, t.genres, t.director, t.cast_names, t.rating, t.vote_count, t.origin_country,
-              t.original_language, t.runtime, t.seasons
+              t.original_language, t.runtime, t.seasons, t.overview_en
          FROM titles t
         WHERE t.tmdb_id IS NOT NULL
           AND NOT EXISTS (SELECT 1 FROM seo_content s WHERE s.bereich = 'titel'
