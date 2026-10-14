@@ -118,7 +118,9 @@ async function api(url, opts, versuche = 5) {
 }
 const kopf = (key) => ({ 'x-api-key': key, 'anthropic-version': '2023-06-01' });
 
+// Niederlaendisch teilt 'die'/'der'/'het'-aehnliche Woerter mit Deutsch, dort nur eindeutig deutsche zaehlen.
 const DE_WOERTER = /\b(der|die|das|und|nicht|ist|mit|eine?n?|sich|auf|für|wird)\b/gi;
+const DE_WOERTER_NL = /\b(und|nicht|ist|mit|eine?n?|sich|auf|für|wird|dem|zum|zur|aber|oder|wurde)\b/gi;
 const woerterZahl = (s) => s.replace(/^#{1,6}.*$/gm, '').split(/\s+/).filter(Boolean).length;
 
 export function pruefe(text, t, locale) {
@@ -129,7 +131,7 @@ export function pruefe(text, t, locale) {
   const w = woerterZahl(text), q = woerterZahl(t.quelle);
   if (w < q * 0.6 || w > q * 1.7) fehler.push(`Laenge ${w} Woerter bei Quelle ${q}`);
   if (/\*\*/.test(text) || /^\s*[-*•]\s/m.test(text)) fehler.push('Fett/Aufzaehlung');
-  if (!locale.startsWith('de') && (text.match(DE_WOERTER) || []).length > 6) fehler.push('deutsche Reste');
+  if (!locale.startsWith('de') && (text.match(locale === 'nl-nl' ? DE_WOERTER_NL : DE_WOERTER) || []).length > 6) fehler.push('deutsche Reste');
   if (/\bFSK\b/.test(text)) fehler.push('FSK');
   const quelle = [t.quelle, t.title, t.original_title, t.title_en, t.director, (t.cast_names || []).join(' '),
     zielTitel(t, locale), JSON.stringify(t.uebersetzungen?.[locale.slice(0, 2)] || {})].filter(Boolean).join(' ');
