@@ -48,7 +48,7 @@ function cidParse(id) {
   return { locale: l.replace('_', '-'), schluessel: `${rest.slice(0, i)}:${rest.slice(i + 1)}` };
 }
 
-async function kandidaten({ locale, limit, zufall, versucht }) {
+export async function kandidaten({ locale, limit, zufall, versucht }) {
   const { rows } = await pool.query(
     `SELECT t.type, t.tmdb_id, t.title, t.original_title, t.title_en, t.year, t.rating,
             t.director, t.cast_names, t.uebersetzungen, d.text AS quelle
@@ -67,7 +67,7 @@ async function kandidaten({ locale, limit, zufall, versucht }) {
 
 // Titel, wie er im Zieltext stehen soll: TMDB-Fassung der Sprache, sonst
 // englischer bzw. Originaltitel. Gleich dem deutschen Titel => keine Zuordnung.
-function zielTitel(t, locale) {
+export function zielTitel(t, locale) {
   const k = locale.startsWith('en') ? 'en' : locale.slice(0, 2);
   const nativ = t.uebersetzungen?.[k]?.t;
   if (nativ) return nativ;
@@ -75,7 +75,7 @@ function zielTitel(t, locale) {
   return t.original_title || t.title_en || t.title;
 }
 
-function systemPrompt(locale) {
+export function systemPrompt(locale) {
   const s = SPRACHEN[locale];
   const dezimal = locale.startsWith('en') ? 'Punkt (7.4)' : 'Komma (7,4)';
   return `Du uebersetzt redaktionelle Titeltexte des Filmportals movietaste.de aus dem Deutschen ins ${s.sprache} (${locale}).
@@ -135,7 +135,11 @@ export function pruefe(text, t, locale) {
   if (/\bFSK\b/.test(text)) fehler.push('FSK');
   const quelle = [t.quelle, t.title, t.original_title, t.title_en, t.director, (t.cast_names || []).join(' '),
     zielTitel(t, locale), JSON.stringify(t.uebersetzungen?.[locale.slice(0, 2)] || {})].filter(Boolean).join(' ');
-  const v = pruefeGegenQuelle(text, quelle, { year: t.year, rating: t.rating, castCount: (t.cast_names || []).length });
+  // Englische Tausender (21,000) wie die deutschen lesen. Die Wortmuster (Preise, Remake …)
+  // suchen die Zielsprache im deutschen Quelltext und schlagen bei Uebersetzungen grundlos an.
+  const vergleich = locale.startsWith('en') ? text.replace(/(\d),(?=\d{3}\b)/g, '$1.') : text;
+  const v = pruefeGegenQuelle(vergleich, quelle, { year: t.year, rating: t.rating, castCount: (t.cast_names || []).length })
+    .filter((x) => /^(Zahl|Beteiligte)/.test(x));
   return { fehler, verdacht: v };
 }
 
