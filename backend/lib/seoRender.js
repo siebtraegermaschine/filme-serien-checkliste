@@ -312,9 +312,10 @@ export function seiteTitelDetail(titel, locale) {
     '@type': titel.type === 'series' ? 'TVSeries' : 'Movie',
     name: titel.title,
     datePublished: titel.year ? String(titel.year) : undefined,
-    genre: (titel.genres || []).map((g) => genreAnzeige(g, sprache)),
+    // Leere Arrays weglassen: Google wertet sie als fehlerhafte Angabe.
+    genre: (titel.genres || []).length ? titel.genres.map((g) => genreAnzeige(g, sprache)) : undefined,
     director: titel.director ? { '@type': 'Person', name: titel.director } : undefined,
-    actor: (titel.castNames || []).slice(0, 8).map((n) => ({ '@type': 'Person', name: n })),
+    actor: (titel.castNames || []).length ? titel.castNames.slice(0, 8).map((n) => ({ '@type': 'Person', name: n })) : undefined,
     aggregateRating: titel.communityBewertung ? {
       '@type': 'AggregateRating',
       ratingValue: titel.communityBewertung.durchschnitt,
