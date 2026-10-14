@@ -2,7 +2,7 @@
 # Faecher-Verfahren fuer SEO-Titeltexte: eine Runde vorbereiten oder abschliessen.
 # Ablauf und Regeln: docs/archiv/UEBERGABE-SEO.md, Abschnitt 3b.
 #
-#   scripts/seo-runde.sh pakete <arbeitsordner>          10 Pakete à 15 offene Titel nach <arbeitsordner>/pakete holen (STUFE=C für dünnere Daten)
+#   scripts/seo-runde.sh pakete <arbeitsordner>          10 Pakete à 15 offene Titel nach <arbeitsordner>/pakete holen (STUFE=C/D für dünnere Daten)
 #   scripts/seo-runde.sh pruefen <arbeitsordner>         lokale Suche: Laenge, Quellwoerter, „Regie“ in Serientexten
 #   scripts/seo-runde.sh einspielen <arbeitsordner> <nr> Probelauf + scharf einspielen, texte/ nach runden/runde-<nr>
 #
@@ -18,6 +18,8 @@ BEFEHL=$1; W=$2
 [ -n "$W" ] || { echo "Aufruf: $0 pakete|pruefen|einspielen <arbeitsordner> [runde]"; exit 1; }
 SSH=(ssh -i $HOME/.ssh/id_ed25519 -o BatchMode=yes -o ServerAliveInterval=20 root@movietaste.de)
 mkdir -p $W/pakete $W/texte $W/runden
+# Stufe D: Länge folgt den dünnen Daten, Untergrenze 180 Wörter (≈1.200 Zeichen = Langtext).
+MIN=250; [ "${STUFE:-B}" = D ] && MIN=180
 
 case $BEFEHL in
 pakete)
@@ -34,7 +36,7 @@ pruefen)
   for(const f of fs.readdirSync(W+'/texte').filter(f=>f.endsWith('.json'))){
     const o=JSON.parse(fs.readFileSync(W+'/texte/'+f,'utf8'));
     for(const [k,v] of Object.entries(o)){n++;
-      const w=v.replace(/^#{1,6}.*$/gm,'').split(/\s+/).filter(Boolean).length;if(w<250||w>420){bad++;console.log('LAENGE',f,k,w)}
+      const w=v.replace(/^#{1,6}.*$/gm,'').split(/\s+/).filter(Boolean).length;if(w<$MIN||w>420){bad++;console.log('LAENGE',f,k,w)}
       if(v.split(/^#{1,6}.*\$/m).slice(1).some(x=>x.trim().length<40)){bad++;console.log('LEERER ABSCHNITT',f,k)}
       const s=v.split(/(?<=[.!?])\s+/).filter(x=>Q.test(x)||(k.startsWith('series:')&&/Regie(?!r)|Regisseur/.test(x)));
       if(s.length){h++;console.log('PRUEFEN',f,k,'|',s.join(' || ').replace(/\n/g,' ').slice(0,260))}}}
@@ -44,8 +46,8 @@ einspielen)
   R=$3; [ -n "$R" ] || { echo "Rundennummer fehlt"; exit 1; }
   $SSH "rm -rf /tmp/texte-host && mkdir -p /tmp/texte-host"
   scp -q -i ~/.ssh/id_ed25519 $W/texte/*.json root@movietaste.de:/tmp/texte-host/
-  $SSH "docker exec movietaste-backend-1 rm -rf /tmp/texte && docker cp /tmp/texte-host movietaste-backend-1:/tmp/texte >/dev/null && docker exec movietaste-backend-1 sh -c 'cd /app/backend && node scripts/seo-einspielen.mjs --verzeichnis /tmp/texte --dry-run' | grep -A40 '^Probelauf'"
-  $SSH "docker exec movietaste-backend-1 sh -c 'cd /app/backend && node scripts/seo-einspielen.mjs --verzeichnis /tmp/texte' | grep '^Geschrieben'"
+  $SSH "docker exec movietaste-backend-1 rm -rf /tmp/texte && docker cp /tmp/texte-host movietaste-backend-1:/tmp/texte >/dev/null && docker exec movietaste-backend-1 sh -c 'cd /app/backend && node scripts/seo-einspielen.mjs --verzeichnis /tmp/texte --min-woerter $MIN --dry-run' | grep -A40 '^Probelauf'"
+  $SSH "docker exec movietaste-backend-1 sh -c 'cd /app/backend && node scripts/seo-einspielen.mjs --verzeichnis /tmp/texte --min-woerter $MIN' | grep '^Geschrieben'"
   echo "Titeltexte in DB: $($SSH "cd /opt/movietaste && docker compose -f docker-compose.yml --profile prod exec -T postgres psql -U postgres -d filme_serien -Atc \"SELECT count(*) FROM seo_content WHERE bereich='titel' AND locale='de-de'\"")"
   mv $W/texte $W/runden/runde-$R && mkdir -p $W/texte
   ;;

@@ -27,7 +27,7 @@ FORMAT — exakt diese vier Überschriften, in dieser Reihenfolge, keine weitere
 ### Hinter den Kulissen
 ### Einordnung & Wirkung
 
-Unter jeder der vier Überschriften steht mindestens ein Absatz Fließtext; leere Abschnitte werden verworfen. Keine Aufzählungen, keine Fettschrift, keine Zwischenüberschriften. Fließtext in kurzen Absätzen. Ziel 290 bis 330 Wörter je Titel (Überschriften zählen nicht mit; unter 250 wird verworfen, über 420 ebenfalls).
+Unter jeder der vier Überschriften steht mindestens ein Absatz Fließtext; leere Abschnitte werden verworfen. Keine Aufzählungen, keine Fettschrift, keine Zwischenüberschriften. Fließtext in kurzen Absätzen. Ziel 290 bis 330 Wörter je Titel (Überschriften zählen nicht mit; unter 250 wird verworfen, über 420 ebenfalls). Ausnahme Stufe D (siehe „DÜNNE DATEN“).
 
 INHALT DER ABSCHNITTE
 1. Worum es geht — die Ausgangslage aus der Inhaltsangabe, erzählt statt zusammengefasst. Hält den Ausgang zurück, wenn die Inhaltsangabe ihn verrät.
@@ -145,6 +145,15 @@ Die Pruefung verwirft jeden Text unter 250 Woertern. Ziele deshalb auf 290 bis 3
 und nicht auf die Untergrenze: Wer beim Nachfeilen kuerzt, rutscht sonst darunter,
 und der Text faellt beim Einspielen durch. Zaehle die Woerter ohne die vier
 Ueberschriften, so wie es die Pruefung tut.
+
+DÜNNE DATEN (STUFE D)
+Steht in der Prompt-Vorlage „Stufe D“, sind die Daten knapp: oft nur eine kurze
+Handlung, wenige Darsteller, bei Serien kein „Entwickelt von“. Dann folgt die Länge
+den Daten: Ziel 190 bis 260 Wörter, unter 180 wird verworfen. Lieber kürzer als
+gestreckt — keine Füllsätze, keine allgemeinen Genre-Betrachtungen, keine
+Wiederholungen. Fehlt eine Angabe (Regie, Idee, Freigabe), entfällt sie still; nie
+schreiben, dass sie fehlt. Alle vier Abschnitte bleiben Pflicht, jeder mit
+mindestens einem Absatz.
 
 STIMMENZAHLEN NICHT BEZIFFERN
 Die Stimmenzahl aendert sich taeglich: Ein Titel mit heute 834 Stimmen hat morgen

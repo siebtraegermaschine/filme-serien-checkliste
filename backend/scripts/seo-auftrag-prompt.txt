@@ -1,5 +1,5 @@
 Prompt-Vorlage fuer einen Bearbeiter im Faecher-Verfahren (ein Agent je Paket, 10 parallel).
-NN = Paketnummer (01–10), RR = Rundennummer, W = Arbeitsordner (siehe scripts/seo-runde.sh).
+NN = Paketnummer (01–10), S = Stufe (B/C/D), RR = Rundennummer, W = Arbeitsordner (siehe scripts/seo-runde.sh).
 Stand 17.09.2026, so in den Runden 19–25 verwendet.
 ---
 Lies zuerst die Auftragsbeschreibung /Users/digital-wings/Documents/GitHub/filme-serien-checkliste/backend/scripts/seo-auftrag-faecher.md und befolge sie genau (besonders „QUELLE NICHT ERWAEHNEN“ und bei Serien „Entwickelt von“ statt Regie).
@@ -8,7 +8,8 @@ Paketdatei: W/pakete/paket-de-de-NN.json
 Zieldatei: W/texte/texte-NN.json
 Hilfsskripte nur mit „rRR-NN“ im Namen, im Verzeichnis W/rRR/.
 Laufendes Jahr: 2026.
-Vor der Abgabe: Selbstprüfung aus der Auftragsbeschreibung bis „nichts zu beanstanden“, jeder Text 250–420 Wörter (ohne Überschriften), unter jeder der vier Überschriften mindestens ein Absatz, keines dieser Wörter (Groß/Klein egal): Datensatz, Inhaltsangabe, Beschreibung, verzeichnet, hinterlegt, eingetragen, vermerkt, Schlagwort, Schlagwörter, angegeben, ausgewiesen, Angabe, Eintrag; keine Sätze, die fehlende Rollen oder unpassende Angaben kommentieren; bei Serien kein „Regie“ für die unter „Entwickelt von“ genannten Personen.
+Stufe: S (bei D gilt der Abschnitt „DÜNNE DATEN“).
+Vor der Abgabe: Selbstprüfung aus der Auftragsbeschreibung bis „nichts zu beanstanden“, jeder Text 250–420 Wörter (ohne Überschriften; bei Stufe D 180–420, Länge folgt den Daten, keine Füllsätze), unter jeder der vier Überschriften mindestens ein Absatz, keines dieser Wörter (Groß/Klein egal): Datensatz, Inhaltsangabe, Beschreibung, verzeichnet, hinterlegt, eingetragen, vermerkt, Schlagwort, Schlagwörter, angegeben, ausgewiesen, Angabe, Eintrag; keine Sätze, die fehlende Rollen oder unpassende Angaben kommentieren; bei Serien kein „Regie“ für die unter „Entwickelt von“ genannten Personen.
 Keine Wörter in nicht-lateinischer Schrift (Hangul, Kanji, Kyrillisch …), nicht selbst transliterieren.
 Auch wenn sie in der Quelle stehen, NICHT übernehmen: Kritikerwertungen, Werbesprache, Biografisches zu Regie oder Besetzung, Preise.
 Offensichtliche Fehler in der Quelle (falsche Jahreszahlen, fremdsprachige Synchron-Figurennamen statt der deutschen, verdrehte Zusammenhänge, unvollständige Regie-Duos) nicht übernehmen: im Zweifel weglassen und in der Schlusszeile melden.

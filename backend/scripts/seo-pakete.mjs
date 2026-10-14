@@ -16,7 +16,8 @@
 //   --locale CODE    Zielsprache (Standard de-de)
 //   --pakete N       Zahl der Pakete (Standard 6)
 //   --je N           Titel je Paket (Standard 15)
-//   --stufe B|C      B = Plot>250 und >=4 Darsteller (Standard), C = Plot>150 und >=3
+//   --stufe B|C|D    B = Plot>250 und >=4 Darsteller (Standard), C = Plot>150 und >=3,
+//                    D = deutsche oder englische Handlung >=150, >=2 Darsteller, Regie optional
 //   --min-votes N    Nur Titel ab dieser Stimmenzahl (Standard 0)
 //   --ziel PFAD      Ablageort (Standard scripts/.pakete)
 import 'dotenv/config';
@@ -42,7 +43,12 @@ function argumente() {
 // Das Batchskript exportiert seine Abfrage nicht, und eine zweite Fassung mit
 // eigenem Kommentar ist hier ehrlicher als ein Umbau des anderen Skripts.
 async function kandidaten({ locale, limit, minVotes, stufe }) {
-  const [minPlot, minCast] = stufe === 'C' ? [150, 3] : [250, 4];
+  const [minPlot, minCast] = { C: [150, 3], D: [149, 2] }[stufe] || [250, 4];
+  // Stufe D: Serien ohne „Entwickelt von“ und Titel nur mit englischer Handlung zulassen.
+  const handlung = stufe === 'D'
+    ? `(length(coalesce(t.plot, '')) > $4 OR length(coalesce(t.overview_en, '')) > $4)`
+    : `t.plot IS NOT NULL AND length(t.plot) > $4
+        AND t.director IS NOT NULL AND t.director <> ''`;
   const { rows } = await pool.query(
     `SELECT t.tmdb_id, t.type, t.title, t.original_title, t.title_en, t.year,
             t.genres, t.director, t.cast_names, t.keywords, t.rating,
@@ -50,8 +56,7 @@ async function kandidaten({ locale, limit, minVotes, stufe }) {
        FROM titles t
       WHERE t.tmdb_id IS NOT NULL
         AND t.source <> 'seo'
-        AND t.plot IS NOT NULL AND length(t.plot) > $4
-        AND t.director IS NOT NULL AND t.director <> ''
+        AND ${handlung}
         AND t.year IS NOT NULL
         AND array_length(t.cast_names, 1) >= $5
         AND array_length(t.genres, 1) >= 1

@@ -5,7 +5,7 @@
 // Erwartet JSON-Dateien der Form { "movie:123": "### ...", ... }.
 //
 // Geprueft wird dreifach, und zwar bevor irgendetwas geschrieben wird:
-//   1. Format -- exakt die vier Ueberschriften der Zielsprache, 250-420 Woerter
+//   1. Format -- exakt die vier Ueberschriften der Zielsprache, 250-420 Woerter (Stufe D ab 180)
 //   2. Fakten mechanisch -- Zahlen und Eigennamen ohne Beleg im Datensatz
 //   3. Schluessel -- muss zu einem Titel gehoeren, der noch keinen Text hat
 // Faellt ein Text durch, wird er verworfen und protokolliert. Der Lauf bricht
@@ -20,6 +20,7 @@
 //   --datei PFAD         Einzelne Textdatei
 //   --verzeichnis PFAD   Alle *.json darin
 //   --locale CODE        Zielsprache (Standard de-de)
+//   --min-woerter N      Untergrenze (Standard 250, Stufe D 180)
 //   --dry-run            Nur pruefen, nichts schreiben
 //   --protokoll PFAD     JSONL-Protokoll (Standard scripts/.seo-einspielen.jsonl)
 import 'dotenv/config';
@@ -35,6 +36,7 @@ function argumente() {
     datei: hol('datei', null),
     verzeichnis: hol('verzeichnis', null),
     locale: hol('locale', 'de-de'),
+    minWoerter: Number(hol('min-woerter', '250')),
     dryRun: a.includes('--dry-run'),
     protokoll: hol('protokoll', path.join(import.meta.dirname, '.seo-einspielen.jsonl')),
   };
@@ -100,7 +102,7 @@ async function main() {
       beanstandet.push({ schluessel, quelle, grund: ['Schluessel gehoert zu keinem Titel'] });
       continue;
     }
-    const ff = formatFehler(text, opt.locale);
+    const ff = formatFehler(text, opt.locale, opt.minWoerter);
     const fv = faktenVerdacht(text, t, opt.locale);
     const eintrag = { schluessel, titel: t.title, quelle, locale: opt.locale, formatFehler: ff, faktenVerdacht: fv };
 

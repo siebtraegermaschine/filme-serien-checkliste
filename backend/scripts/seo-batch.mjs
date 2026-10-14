@@ -418,7 +418,8 @@ export function ueberschriftenNormalisieren(text) {
 }
 
 // Dieselben Regeln wie seo-texte-anhaengen.mjs, damit beide Wege dasselbe liefern.
-export function formatFehler(text, locale) {
+// minWoerter: Stufe D (dünne Daten) arbeitet mit 180, alles andere mit 250.
+export function formatFehler(text, locale, minWoerter = MIN_WOERTER) {
   const soll = SPRACHEN[locale].abschnitte;
   const fehler = [];
   const ueberschriften = [...text.matchAll(/^#{1,6}\s*(.+)$/gm)].map((m) => m[1].trim());
@@ -429,7 +430,7 @@ export function formatFehler(text, locale) {
   const leer = text.split(/^#{1,6}.*$/m).slice(1).filter((s) => s.trim().length < 40).length;
   if (leer) fehler.push(`${leer} leere(r) Abschnitt(e)`);
   const woerter = text.replace(/^#{1,6}.*$/gm, '').split(/\s+/).filter(Boolean).length;
-  if (woerter < MIN_WOERTER) fehler.push(`zu kurz: ${woerter} Woerter`);
+  if (woerter < minWoerter) fehler.push(`zu kurz: ${woerter} Woerter`);
   if (woerter > MAX_WOERTER) fehler.push(`zu lang: ${woerter} Woerter`);
   if (/^\s*[-*•]\s/m.test(text)) fehler.push('Aufzaehlung enthalten');
   if (/\*\*/.test(text)) fehler.push('Fettschrift enthalten');
