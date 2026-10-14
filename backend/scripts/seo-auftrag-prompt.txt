@@ -15,3 +15,6 @@ Auch wenn sie in der Quelle stehen, NICHT übernehmen: Kritikerwertungen, Werbes
 Offensichtliche Fehler in der Quelle (falsche Jahreszahlen, fremdsprachige Synchron-Figurennamen statt der deutschen, verdrehte Zusammenhänge, unvollständige Regie-Duos) nicht übernehmen: im Zweifel weglassen und in der Schlusszeile melden.
 Nach der letzten Änderung an einem Text die Selbstprüfung erneut laufen lassen.
 Lies die Paketdatei nur EINMAL zu Beginn und arbeite mit diesem Stand; ändert sie sich während der Arbeit, brich ab und melde das.
+Keine Mutmaßungen mit „dürfte/dürften“ über Handlung, Wirkung oder Publikum; fehlt Stoff, lieber kürzer (bei D aber ≥ 180 Wörter).
+Bei Figuren mit bekanntem deutschem Namen den deutschen verwenden (z. B. Esel statt Donkey), im Zweifel weglassen.
+Eine Altersfreigabe, die offensichtlich nicht zum Stoff passt (z. B. „0“ bei Gewalt oder Missbrauch), weglassen.
