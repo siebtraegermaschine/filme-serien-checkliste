@@ -528,4 +528,5 @@ Langtexte jetzt: nl-nl 21.299, pt-pt 21.463, it-it 21.666 (en-gb 23.530, fr-fr 2
 - **Runde 30** (Stufe D): 150/150 eingespielt. Korrigiert: Monty Python (Produzenten nicht als Entwickler), Star Wars Clone Wars (kein „Regisseur“ für Entwickler), drei „genannt/geführt“-Sätze. Selbstprüfung in `seo-auftrag-faecher.md` nimmt jetzt `MIN_W` (180 bei D). Live geprüft: Monty Python, Star Wars Clone Wars.
 - **Runde 31** (Stufe D): 150/150 eingespielt. Korrigiert: Noblesse (Frankenstein), Cars on the Road (deutsche Namen Lightning McQueen/Hook statt franz. Synchron), Shrek-Kurzfilm (Esel statt Donkey), ein „genannt“-Satz. Live geprüft: Noblesse, Cars on the Road.
 - **Runde 32** (Stufe D): 150/150 eingespielt. Korrigiert: Leaving Neverland (Freigabe-0-Satz raus), Edens Zero (Sakura-Kosmos). Prompt-Zusatz: deutsche Figurennamen. Live geprüft: Leaving Neverland, Edens Zero.
-- **Als Nächstes**: weitere Stufe-D-Runden ab 33 (noch ~740 Titel).
+- **Runde 33** (Stufe D): 150/150 eingespielt. Korrigiert: Ein Engel auf Erden (nur Landon als Schöpfer, Claxton war Regie), Yu-Gi-Oh 5D's (Verweis auf GX raus), fünf „dürfte“-Mutmaßungen. Prompt-Zusatz: unpassende Freigabe weglassen. Live geprüft: Ein Engel auf Erden, Yu-Gi-Oh 5D's.
+- **Als Nächstes**: weitere Stufe-D-Runden ab 34 (noch ~590 Titel).
