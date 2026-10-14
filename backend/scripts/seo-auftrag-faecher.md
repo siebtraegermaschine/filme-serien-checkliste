@@ -27,7 +27,7 @@ FORMAT — exakt diese vier Überschriften, in dieser Reihenfolge, keine weitere
 ### Hinter den Kulissen
 ### Einordnung & Wirkung
 
-Keine Aufzählungen, keine Fettschrift, keine Zwischenüberschriften. Fließtext in kurzen Absätzen. Ziel 290 bis 330 Wörter je Titel (Überschriften zählen nicht mit; unter 250 wird verworfen, über 420 ebenfalls).
+Unter jeder der vier Überschriften steht mindestens ein Absatz Fließtext; leere Abschnitte werden verworfen. Keine Aufzählungen, keine Fettschrift, keine Zwischenüberschriften. Fließtext in kurzen Absätzen. Ziel 290 bis 330 Wörter je Titel (Überschriften zählen nicht mit; unter 250 wird verworfen, über 420 ebenfalls).
 
 INHALT DER ABSCHNITTE
 1. Worum es geht — die Ausgangslage aus der Inhaltsangabe, erzählt statt zusammengefasst. Hält den Ausgang zurück, wenn die Inhaltsangabe ihn verrät.
@@ -68,6 +68,11 @@ Pruefe vor der Abgabe, dass keines dieser Woerter vorkommt: Datensatz, Inhaltsan
 verzeichnet, hinterlegt, eingetragen, vermerkt, Schlagwort, Schlagwörter, angegeben,
 ausgewiesen, Angabe — und „Beschreibung“ als Verweis auf die Handlungsangabe („lässt die
 Beschreibung offen“, „wie es die Beschreibung formuliert“). Stattdessen: „bleibt hier offen“.
+
+SCHRIFT UND NAMENSFORMEN
+Keine Wörter in nicht-lateinischer Schrift (Hangul, Kanji, Kyrillisch …) — auch nicht, wenn sie
+im Datensatz stehen; nicht selbst transliterieren. Fremdsprachige Namensformen in Deutsch
+üblicher Form: „Franz I." statt „Francis I.", „20. Jahrhundert" statt „XX. Jahrhundert".
 
 ZEIT- UND EPOCHENANGABEN
 Nenne Epochen so, wie der Datensatz sie nennt. Steht dort „viktorianisch", schreibe

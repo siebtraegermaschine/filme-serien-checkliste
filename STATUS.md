@@ -333,7 +333,7 @@
 - **Titel-Kurztexte** (200-450 Zeichen) fuer Titelseiten ohne Text: `backend/scripts/seo-titel-kurztexte.mjs`. Kurztexte (< 1200 Zeichen) gelten in `seo-pakete.mjs` und `seo-batch.mjs` weiter als offen; `seo-einspielen` ersetzt sie durch den Langtext.
 - **Runde 26**: 150 Langtexte per Faecher-Verfahren (Abo, keine API-Kosten) eingespielt; 6 Faktenverdachte (Zahlen/„Dreharbeiten“) umformuliert und nachgespielt.
 - **Befund**: ca. 600 Titel ohne `tmdb_id` kommen in den Paketen nicht vor, nicht angefasst.
-- **Als Nächstes**: Runde 27 per `scripts/seo-runde.sh` (in zsh ohne nomatch-Fehler; im Worktree Schritte einzeln).
+- **Als Nächstes**: siehe „de-de Langtexte Stufe C“ (14.10.2026).
 
 ## Freigaben 12.10.2026 (live)
 - Sechs Locales (en-gb, es-es, fr-fr, it-it, nl-nl, pt-pt) aktiv, alle noindex, nicht in Sitemap/robots. Start-JSON-LD ohne leeres `hasPart`.
@@ -511,3 +511,12 @@ en-gb/es-es haben schon fast alles außer Bestenlisten).
 
 ### Nachtrag 14.10.2026: Aufstockungslauf (20 $) fertig
 Langtexte jetzt: nl-nl 21.299, pt-pt 21.463, it-it 21.666 (en-gb 23.530, fr-fr 23.818, de-de 23.755 unverändert). Gesamtkosten je Sprache laut Lauf: nl 47,04 $, pt 46,01 $, it 38,71 $. nl-nl-Fehlalarm "deutsche Reste" behoben (`DE_WOERTER_NL`), Journal nachgeprüft. Rest bleibt Kurztext (je ca. 2.300–2.700 Langtexte offen).
+
+## de-de Langtexte Stufe C (14.10.2026, live)
+- `seo-audit.mjs` geprüft: wertet noindex-Seiten in der Sitemap schon als harten Fehler (`noindex-in-sitemap`), keine Änderung nötig. JSON-LD der Titelseiten ohne leere `actor`/`genre`-Arrays (live).
+- Stufe B ist fast leer (4 Titel), deshalb `STUFE=C scripts/seo-runde.sh pakete …` (Inhaltsangabe >150 Zeichen, ≥3 Besetzung). Entscheidung Nutzer: Stufe C mit 250–420 Wörtern zu Ende, danach datenabhängige Untergrenze (z. B. ≥120 Wörter, nichts auffüllen) für den dünneren Rest.
+- **Runde 27** (Archiv lokal `runden/runde-26`): 150 Texte, alle eingespielt. de-de-Langtexte jetzt 23.905.
+  - 28 Texte enthielten Namen in Hangul/Kanji/Kyrillisch → entfernt, nicht transliteriert. Ursache behoben: `datensatz()` lässt solche Namen/Titel weg, Auftrag verbietet Fremdschrift.
+  - Ein Schreiber hängte drei Überschriften leer an (15 Texte) → umsortiert. `formatFehler` und `seo-runde.sh pruefen` verwerfen jetzt leere Abschnitte.
+  - Live gefunden: pt-pt movie:21868 mit leerem Abschnitt und Datenlage-Kommentar → bei den Übersetzungslücken neu machen.
+- **Als Nächstes**: Runde 28 (Rest Stufe B/C, ca. 135 Titel), dann Untergrenze umstellen (Auftrag, `pruefen`, `formatFehler`/`seo-einspielen`, Prompt, `seo-pakete` lockere Stufe).

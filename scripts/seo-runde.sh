@@ -35,9 +35,10 @@ pruefen)
     const o=JSON.parse(fs.readFileSync(W+'/texte/'+f,'utf8'));
     for(const [k,v] of Object.entries(o)){n++;
       const w=v.replace(/^#{1,6}.*$/gm,'').split(/\s+/).filter(Boolean).length;if(w<250||w>420){bad++;console.log('LAENGE',f,k,w)}
+      if(v.split(/^#{1,6}.*\$/m).slice(1).some(x=>x.trim().length<40)){bad++;console.log('LEERER ABSCHNITT',f,k)}
       const s=v.split(/(?<=[.!?])\s+/).filter(x=>Q.test(x)||(k.startsWith('series:')&&/Regie(?!r)|Regisseur/.test(x)));
       if(s.length){h++;console.log('PRUEFEN',f,k,'|',s.join(' || ').replace(/\n/g,' ').slice(0,260))}}}
-  console.log(n,'Texte,',bad,'Laengenverstoesse,',h,'Texte zum Ansehen (Treffer koennen Handlung sein)');"
+  console.log(n,'Texte,',bad,'Format-/Laengenverstoesse,',h,'Texte zum Ansehen (Treffer koennen Handlung sein)');"
   ;;
 einspielen)
   R=$3; [ -n "$R" ] || { echo "Rundennummer fehlt"; exit 1; }

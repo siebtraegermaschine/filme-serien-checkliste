@@ -170,20 +170,27 @@ export function inhaltsangabe(t, locale) {
   return nah.text;
 }
 
+// Namen/Titel in Hangul, Kanji, Kyrillisch usw. kann der Text nicht sinnvoll nennen (Runde 26:
+// 28 von 150 Texten); sie fallen aus dem Datensatz, statt geraten transliteriert zu werden.
+const FREMDSCHRIFT = /[\u0400-\u04FF\u0590-\u06FF\u0E00-\u0E7F\u3040-\u30FF\u3400-\u9FFF\uAC00-\uD7AF]/;
+const lesbar = (s) => !!s && !FREMDSCHRIFT.test(s);
+
 export function datensatz(t, locale) {
   const k = SPRACHEN[locale]?.uebKey;
   const nativerTitel = k && t.uebersetzungen?.[k]?.t;
   const z = [];
   z.push(`Titel (deutsch): ${t.title}`);
   if (nativerTitel && nativerTitel !== t.title) z.push(`Titel in der Zielsprache: ${nativerTitel}`);
-  if (t.original_title && t.original_title !== t.title) z.push(`Originaltitel: ${t.original_title}`);
+  if (lesbar(t.original_title) && t.original_title !== t.title) z.push(`Originaltitel: ${t.original_title}`);
   if (t.title_en && t.title_en !== t.title && t.title_en !== t.original_title) z.push(`Englischer Titel: ${t.title_en}`);
   z.push(`Art: ${t.type === 'movie' ? 'Film' : 'Serie'}`);
   z.push(`Erscheinungsjahr: ${t.year}`);
   // Bei Serien steht in director die Idee/Entwicklung (TMDB created_by), nicht die Regie --
   // bis 17.09.2026 hiess es auch hier "Regie", und 344 Serientexte schrieben "Regie führte".
-  z.push(t.type === 'series' ? `Entwickelt von (Idee, nicht Regie): ${t.director}` : `Regie: ${t.director}`);
-  z.push(`Besetzung: ${(t.cast_names || []).slice(0, 8).join(', ')}`);
+  const leitung = (t.director || '').split(/,\s*/).filter(lesbar).join(', ');
+  if (leitung) z.push(t.type === 'series' ? `Entwickelt von (Idee, nicht Regie): ${leitung}` : `Regie: ${leitung}`);
+  const besetzung = (t.cast_names || []).filter(lesbar).slice(0, 8);
+  if (besetzung.length) z.push(`Besetzung: ${besetzung.join(', ')}`);
   z.push(`Genres: ${(t.genres || []).join(', ')}`);
   if ((t.keywords || []).length) z.push(`Schlagwoerter: ${t.keywords.slice(0, 12).join(', ')}`);
   if (t.certification) z.push(`Altersfreigabe: ${t.certification}`);
@@ -416,6 +423,9 @@ export function formatFehler(text, locale) {
   if (ueberschriften.length !== 4 || ueberschriften.some((u, i) => u !== soll[i])) {
     fehler.push(`Ueberschriften falsch: ${JSON.stringify(ueberschriften)}`);
   }
+  // Fängt Texte ab, die alles unter die erste Überschrift packen und den Rest leer anhängen.
+  const leer = text.split(/^#{1,6}.*$/m).slice(1).filter((s) => s.trim().length < 40).length;
+  if (leer) fehler.push(`${leer} leere(r) Abschnitt(e)`);
   const woerter = text.replace(/^#{1,6}.*$/gm, '').split(/\s+/).filter(Boolean).length;
   if (woerter < MIN_WOERTER) fehler.push(`zu kurz: ${woerter} Woerter`);
   if (woerter > MAX_WOERTER) fehler.push(`zu lang: ${woerter} Woerter`);
