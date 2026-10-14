@@ -172,17 +172,19 @@ export function inhaltsangabe(t, locale) {
 
 // Namen/Titel in Hangul, Kanji, Kyrillisch usw. kann der Text nicht sinnvoll nennen (Runde 26:
 // 28 von 150 Texten); sie fallen aus dem Datensatz, statt geraten transliteriert zu werden.
-const FREMDSCHRIFT = /[\u0400-\u04FF\u0590-\u06FF\u0E00-\u0E7F\u3040-\u30FF\u3400-\u9FFF\uAC00-\uD7AF]/;
+const FREMDSCHRIFT = /[\u0400-\u04FF\u0530-\u06FF\u0900-\u0DFF\u0E00-\u0E7F\u10A0-\u10FF\u3040-\u30FF\u3400-\u9FFF\uAC00-\uD7AF]/;
 const lesbar = (s) => !!s && !FREMDSCHRIFT.test(s);
 
 export function datensatz(t, locale) {
   const k = SPRACHEN[locale]?.uebKey;
   const nativerTitel = k && t.uebersetzungen?.[k]?.t;
   const z = [];
-  z.push(`Titel (deutsch): ${t.title}`);
+  // Ohne lateinische Schreibweise trägt der englische Titel den Text.
+  if (lesbar(t.title)) z.push(`Titel (deutsch): ${t.title}`);
+  else if (lesbar(t.title_en)) z.push(`Titel (im Text verwenden): ${t.title_en}`);
   if (nativerTitel && nativerTitel !== t.title) z.push(`Titel in der Zielsprache: ${nativerTitel}`);
   if (lesbar(t.original_title) && t.original_title !== t.title) z.push(`Originaltitel: ${t.original_title}`);
-  if (t.title_en && t.title_en !== t.title && t.title_en !== t.original_title) z.push(`Englischer Titel: ${t.title_en}`);
+  if (lesbar(t.title) && lesbar(t.title_en) && t.title_en !== t.title && t.title_en !== t.original_title) z.push(`Englischer Titel: ${t.title_en}`);
   z.push(`Art: ${t.type === 'movie' ? 'Film' : 'Serie'}`);
   z.push(`Erscheinungsjahr: ${t.year}`);
   // Bei Serien steht in director die Idee/Entwicklung (TMDB created_by), nicht die Regie --

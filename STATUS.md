@@ -519,4 +519,6 @@ Langtexte jetzt: nl-nl 21.299, pt-pt 21.463, it-it 21.666 (en-gb 23.530, fr-fr 2
   - 28 Texte enthielten Namen in Hangul/Kanji/Kyrillisch → entfernt, nicht transliteriert. Ursache behoben: `datensatz()` lässt solche Namen/Titel weg, Auftrag verbietet Fremdschrift.
   - Ein Schreiber hängte drei Überschriften leer an (15 Texte) → umsortiert. `formatFehler` und `seo-runde.sh pruefen` verwerfen jetzt leere Abschnitte.
   - Live gefunden: pt-pt movie:21868 mit leerem Abschnitt und Datenlage-Kommentar → bei den Übersetzungslücken neu machen.
-- **Als Nächstes**: Runde 28 (Rest Stufe B/C, ca. 135 Titel), dann Untergrenze umstellen (Auftrag, `pruefen`, `formatFehler`/`seo-einspielen`, Prompt, `seo-pakete` lockere Stufe).
+- **Runde 28** (Stufe C, letzter Rest): 133 von 135 Texten eingespielt (2 zu dünn), de-de-Langtexte jetzt 24.038. Stufe B/C ist damit leer. Titel ohne lateinischen deutschen Titel (12) laufen mit dem englischen Titel (`datensatz()`); Fremdschrift-Regex um indische Schriften, Armenisch, Georgisch ergänzt.
+  - Befund, nicht angefasst: de-de-Slugs solcher Titel sind leer (`/de-de/film/-623135`, Sinkhole); de-de-Slugs bleiben bewusst unverändert.
+- **Als Nächstes**: Untergrenze umstellen (Auftrag, `pruefen`, `formatFehler`/`seo-einspielen`, Prompt, `seo-pakete` lockere Stufe).
