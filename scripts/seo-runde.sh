@@ -19,14 +19,16 @@ BEFEHL=$1; W=$2
 SSH=(ssh -i $HOME/.ssh/id_ed25519 -o BatchMode=yes -o ServerAliveInterval=20 root@movietaste.de)
 mkdir -p $W/pakete $W/texte $W/runden
 # Stufe D: Länge folgt den dünnen Daten, Untergrenze 180 Wörter (≈1.200 Zeichen = Langtext).
+# Eigene Temp-Pfade je Lauf: parallele Sitzungen (andere Sprachen) teilen sich Server und Container.
+T=/tmp/seo-runde-$$
 MIN=250; [ "${STUFE:-B}" = D ] && MIN=180
 
 case $BEFEHL in
 pakete)
   ls $W/texte/*.json >/dev/null 2>&1 && { echo "texte/ ist nicht leer — erst einspielen oder aufraeumen"; exit 1; }
   rm -f $W/pakete/*.json
-  $SSH "docker exec movietaste-backend-1 sh -c 'cd /app/backend && rm -rf /tmp/pakete && node scripts/seo-pakete.mjs --pakete 10 --je 15 --stufe ${STUFE:-B} --ziel /tmp/pakete' | head -1 && rm -rf /tmp/pakete-host && docker cp movietaste-backend-1:/tmp/pakete /tmp/pakete-host >/dev/null"
-  scp -q -i ~/.ssh/id_ed25519 "root@movietaste.de:/tmp/pakete-host/*.json" $W/pakete/
+  $SSH "docker exec movietaste-backend-1 sh -c 'cd /app/backend && node scripts/seo-pakete.mjs --pakete 10 --je 15 --stufe ${STUFE:-B} --ziel $T-p' | head -1 && docker cp movietaste-backend-1:$T-p $T-p >/dev/null && docker exec movietaste-backend-1 rm -rf $T-p"
+  scp -q -i ~/.ssh/id_ed25519 "root@movietaste.de:$T-p/*.json" $W/pakete/ && $SSH "rm -rf $T-p"
   echo "Pakete: $(ls $W/pakete | wc -l | tr -d ' ')"
   ;;
 pruefen)
@@ -44,10 +46,10 @@ pruefen)
   ;;
 einspielen)
   R=$3; [ -n "$R" ] || { echo "Rundennummer fehlt"; exit 1; }
-  $SSH "rm -rf /tmp/texte-host && mkdir -p /tmp/texte-host"
-  scp -q -i ~/.ssh/id_ed25519 $W/texte/*.json root@movietaste.de:/tmp/texte-host/
-  $SSH "docker exec movietaste-backend-1 rm -rf /tmp/texte && docker cp /tmp/texte-host movietaste-backend-1:/tmp/texte >/dev/null && docker exec movietaste-backend-1 sh -c 'cd /app/backend && node scripts/seo-einspielen.mjs --verzeichnis /tmp/texte --min-woerter $MIN --dry-run' | grep -A40 '^Probelauf'"
-  $SSH "docker exec movietaste-backend-1 sh -c 'cd /app/backend && node scripts/seo-einspielen.mjs --verzeichnis /tmp/texte --min-woerter $MIN' | grep '^Geschrieben'"
+  $SSH "mkdir -p $T-t"
+  scp -q -i ~/.ssh/id_ed25519 $W/texte/*.json root@movietaste.de:$T-t/
+  $SSH "docker cp $T-t movietaste-backend-1:$T-t >/dev/null && docker exec movietaste-backend-1 sh -c 'cd /app/backend && node scripts/seo-einspielen.mjs --verzeichnis $T-t --min-woerter $MIN --dry-run' | grep -A40 '^Probelauf'"
+  $SSH "docker exec movietaste-backend-1 sh -c 'cd /app/backend && node scripts/seo-einspielen.mjs --verzeichnis $T-t --min-woerter $MIN' | grep '^Geschrieben'; docker exec movietaste-backend-1 rm -rf $T-t; rm -rf $T-t"
   echo "Titeltexte in DB: $($SSH "cd /opt/movietaste && docker compose -f docker-compose.yml --profile prod exec -T postgres psql -U postgres -d filme_serien -Atc \"SELECT count(*) FROM seo_content WHERE bereich='titel' AND locale='de-de'\"")"
   mv $W/texte $W/runden/runde-$R && mkdir -p $W/texte
   ;;
