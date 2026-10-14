@@ -521,4 +521,8 @@ Langtexte jetzt: nl-nl 21.299, pt-pt 21.463, it-it 21.666 (en-gb 23.530, fr-fr 2
   - Live gefunden: pt-pt movie:21868 mit leerem Abschnitt und Datenlage-Kommentar → bei den Übersetzungslücken neu machen.
 - **Runde 28** (Stufe C, letzter Rest): 133 von 135 Texten eingespielt (2 zu dünn), de-de-Langtexte jetzt 24.038. Stufe B/C ist damit leer. Titel ohne lateinischen deutschen Titel (12) laufen mit dem englischen Titel (`datensatz()`); Fremdschrift-Regex um indische Schriften, Armenisch, Georgisch ergänzt.
   - Befund, nicht angefasst: de-de-Slugs solcher Titel sind leer (`/de-de/film/-623135`, Sinkhole); de-de-Slugs bleiben bewusst unverändert.
-- **Als Nächstes**: Untergrenze umstellen (Auftrag, `pruefen`, `formatFehler`/`seo-einspielen`, Prompt, `seo-pakete` lockere Stufe).
+- **Stufe D** (live): offener Rest 2.923 Titel. `STUFE=D` nimmt deutsche *oder* englische Inhaltsangabe ≥150 Zeichen, ≥2 Besetzung, Regie/Idee optional (sonst fielen 1.017 Serien ohne „Entwickelt von“ heraus) → 1.340 Titel. Länge folgt den Daten: Ziel 190–260, Untergrenze 180 Wörter (sicher über 1.200 Zeichen = Langtext). Die Untergrenze ist ein Parameter (`--min-woerter`), andere Sprachen bleiben bei 250. ~1.580 Titel bleiben bewusst ohne Langtext (zu dünn).
+  - `seo-runde.sh` nutzt eigene Temp-Pfade je Lauf; vorher überschrieben sich de-de- und es-es-Pakete gegenseitig (`/tmp/pakete`).
+- **Runde 29** (Stufe D): 150/150 eingespielt. Vor dem Einspielen korrigiert: fremdsprachige Figurennamen (Pokémon, Dragonball, Dragonball Super), zwei „… genannt“-Sätze. Live geprüft: Das Damengambit, Pokémon.
+  - Befunde, nicht angefasst: Slug `pok-mon-60572` verliert das „é“ (wie die leeren Slugs oben). Yu-Gi-Oh! (series:902) hat in der Besetzung „Yugi M?t?“ (Kodierungsfehler in `titles`).
+- **Als Nächstes**: weitere Stufe-D-Runden ab 30 (noch ~1.190 Titel).
