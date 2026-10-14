@@ -525,4 +525,5 @@ Langtexte jetzt: nl-nl 21.299, pt-pt 21.463, it-it 21.666 (en-gb 23.530, fr-fr 2
   - `seo-runde.sh` nutzt eigene Temp-Pfade je Lauf; vorher überschrieben sich de-de- und es-es-Pakete gegenseitig (`/tmp/pakete`).
 - **Runde 29** (Stufe D): 150/150 eingespielt. Vor dem Einspielen korrigiert: fremdsprachige Figurennamen (Pokémon, Dragonball, Dragonball Super), zwei „… genannt“-Sätze. Live geprüft: Das Damengambit, Pokémon.
   - Befunde, nicht angefasst: Slug `pok-mon-60572` verliert das „é“ (wie die leeren Slugs oben). Yu-Gi-Oh! (series:902) hat in der Besetzung „Yugi M?t?“ (Kodierungsfehler in `titles`).
-- **Als Nächstes**: weitere Stufe-D-Runden ab 30 (noch ~1.190 Titel).
+- **Runde 30** (Stufe D): 150/150 eingespielt. Korrigiert: Monty Python (Produzenten nicht als Entwickler), Star Wars Clone Wars (kein „Regisseur“ für Entwickler), drei „genannt/geführt“-Sätze. Selbstprüfung in `seo-auftrag-faecher.md` nimmt jetzt `MIN_W` (180 bei D). Live geprüft: Monty Python, Star Wars Clone Wars.
+- **Als Nächstes**: weitere Stufe-D-Runden ab 31 (noch ~1.040 Titel).

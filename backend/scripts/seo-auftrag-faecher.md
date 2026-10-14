@@ -101,7 +101,7 @@ Faelle, die sonst durchfallen (unbelegte Zahl, unbelegter Name, Formatfehler).
 
 Wichtig: Die Kennzahlen muessen mitgegeben werden, sonst faellt jeder berechnete
 Jahresabstand faelschlich als „Zahl ohne Beleg“ durch. Das folgende Skript liest
-sie aus dem Datensatz. Setze PFAD_PAKET und PFAD_TEXTE ein:
+sie aus dem Datensatz. Setze PFAD_PAKET und PFAD_TEXTE ein (MIN_W: 180 bei Stufe D, sonst 250):
 
   cd /Users/digital-wings/Documents/GitHub/filme-serien-checkliste/backend
   node -e '
@@ -123,7 +123,7 @@ sie aus dem Datensatz. Setze PFAD_PAKET und PFAD_TEXTE ein:
         castCount: liste(d,/Besetzung: (.+)/),
         genreCount: liste(d,/Genres: (.+)/),
       };
-      const f=[...formatFehler(text,"de-de"),...pruefeGegenQuelle(text,d,kennzahlen)];
+      const f=[...formatFehler(text,"de-de",MIN_W),...pruefeGegenQuelle(text,d,kennzahlen)];
       if(f.length){console.log(t.schluessel,t.anzeige,f.join(" | "));offen++;}
     }
     console.log(offen?offen+" offene Punkte":"Pruefung durch, nichts zu beanstanden");
