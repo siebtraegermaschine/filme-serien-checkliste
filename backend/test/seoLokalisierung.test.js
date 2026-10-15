@@ -62,7 +62,7 @@ test('Nicht-de: index ab 250 Zeichen Text, darunter und ohne Text noindex', () =
     // Laengen-Schwelle entscheidet seoData (daten.indexierbar), der Renderer folgt dem Flag.
     assert.equal(titelTextReicht(locale, 'Ein Text.'), false, locale);
     assert.equal(meta(seiteTitelDetail(titel('Ein Text.', { indexierbar: false }), locale), 'robots'), 'noindex,follow', locale);
-    assert.equal(meta(seiteTitelDetail(titel(null), locale), 'robots'), 'noindex,follow', locale);
+    assert.equal(meta(seiteTitelDetail(titel(null, { indexierbar: false }), locale), 'robots'), 'noindex,follow', locale);
   }
 });
 
@@ -97,7 +97,7 @@ test('hreflang: x-default zeigt auf de-de, Cluster nur aus Locales mit Text', ()
 });
 
 test('Startseite und 404 sind lokalisiert; Start ohne Text ist noindex', () => {
-  const start = seiteStart({ text: null, indexierbar: true }, 'fr-fr');
+  const start = seiteStart({ text: null, indexierbar: false }, 'fr-fr');
   assert.match(start, /<html lang="fr">/);
   assert.match(start, /Films et séries en un coup d’œil/);
   assert.equal(meta(start, 'robots'), 'noindex,follow');
@@ -106,7 +106,7 @@ test('Startseite und 404 sind lokalisiert; Start ohne Text ist noindex', () => {
   assert.match(seite404('nl-nl'), /Pagina niet gevonden/);
 });
 
-test('Seitenarten: Nicht-de kennt Personen nur in en-gb/fr-fr; Sitemap unveraendert', () => {
+test('Seitenarten: Nicht-de kennt Personen nur in en-gb/fr-fr; Sitemap-Bereiche', () => {
   assert.equal(seitenartFuerPfad('/en-gb/film/x-1'), 'titel');
   assert.equal(seitenartFuerPfad('/en-gb'), 'start');
   assert.equal(seitenartFuerPfad('/en-gb/filme/drama'), 'filme');
@@ -114,7 +114,7 @@ test('Seitenarten: Nicht-de kennt Personen nur in en-gb/fr-fr; Sitemap unveraend
   assert.ok(hatSeitenart('de-de', 'person'));
   assert.ok(hatSeitenart('en-gb', 'titel') && hatSeitenart('en-gb', 'start'));
   assert.ok(hatSeitenart('en-gb', 'filme') && hatSeitenart('en-gb', 'bestenlisten') && hatSeitenart('en-gb', 'person') && !hatSeitenart('es-es', 'person'));
-  assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('en-gb', b)), ['titel', 'genre', 'anbieter', 'hub', 'person', 'reihe']); // Sitemap nutzt nur SEO_LOCALES (de-de)
+  assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('en-gb', b)), ['titel', 'genre', 'anbieter', 'bestenliste', 'hub', 'person', 'reihe']);
   assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('de-de', b)), BEREICHE);
 });
 

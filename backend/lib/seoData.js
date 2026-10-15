@@ -263,6 +263,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     reihe: await reiheFuerTitel(titel.collection_id),
     text,
     textLocales: localesMitText(fassungenRows.rows.map((r) => r.locale)),
+    // de: immer; Nicht-de: nur mit ausreichend Text in der Sprache (Thin-Content-Schutz).
     indexierbar: titelTextReicht(locale, text),
   };
 }
@@ -380,7 +381,7 @@ export async function ladeAnbieterSeite(anbieterSlug, locale) {
   return {
     anbieterSlug, name: rows[0].provider_name, besteListen,
     filme: filmeL, serien: serienL,
-    text, indexierbar: true,
+    text, indexierbar: rows.length >= MIN_TITEL_ANBIETER_SEITE,
   };
 }
 
@@ -711,7 +712,8 @@ async function filmeOderSerienHub(art, locale) {
 // bis 16.08.2026 in einen 404, Crawler landeten also auf einer Fehlerseite.
 export async function ladeStartHub(locale) {
   const text = await ladeSeoText('hub', 'start', locale);
-  return { text, indexierbar: true };
+  // Nicht-de-Locales: Start nur mit Text in der Sprache (Thin-Content-Schutz).
+  return { text, indexierbar: textLocale(locale) === 'de-de' || !!text };
 }
 
 export async function ladeFilmeHub(locale) {
@@ -722,10 +724,35 @@ export async function ladeSerienHub(locale) {
   return filmeOderSerienHub('serien', locale);
 }
 
+// Schwellen fuer Hub-/Anbieterseiten: darunter noindex und nicht in der Sitemap.
+const MIN_ANBIETER_HUB = 3;           // Streaming-Hub: Anbieter ...
+const MIN_TITEL_ANBIETER_HUB = 30;    // ... mit mindestens so vielen Titeln
+const MIN_TITEL_ANBIETER_SEITE = 10;  // Anbieterseite
+const MIN_KINOFILME_HUB = 10;         // Kino-Hub: aktuelle Filme mit Titelseite
+
+const kinoAnzahlCache = new Map();
+function kinoFilmeAnzahl(region) {
+  return swrCache(kinoAnzahlCache, region, BESTENLISTE_TTL_MS, async () => {
+    const { rows: [r] } = await pool.query(
+      `SELECT count(*)::int AS n FROM cinema_cache
+        WHERE region = $1 AND category = 'now'
+          AND tmdb_id IN (SELECT tmdb_id FROM ${TITEL_MIT_KENNUNG} WHERE type = 'movie')`,
+      [region]
+    );
+    return r.n;
+  });
+}
+
+// Kino-Hub: genug aktuelle Filme mit Titelseite ODER Kinostaedte (nur DE).
+export async function kinoHubIndexierbar(region) {
+  if ((await kinoFilmeAnzahl(region)) >= MIN_KINOFILME_HUB) return true;
+  return region === 'DE' && (await staedteListe()).some((s) => s.anzahl >= MIN_KINOS_STADT);
+}
+
 // Nur Kinofilme mit Titelseite: die anderen (~150 von ~180) fuehrten auf 404.
 export async function ladeKinoHub(locale) {
   const region = regionFuerLocale(locale);
-  const [{ rows: filme }, staedte, text] = await Promise.all([
+  const [{ rows: filme }, staedte, text, indexierbar] = await Promise.all([
     pool.query(
       `SELECT tmdb_id, title, year, genres, poster_path FROM cinema_cache
         WHERE region = $1 AND category = 'now'
@@ -734,31 +761,46 @@ export async function ladeKinoHub(locale) {
     ),
     region === 'DE' ? staedteListe() : [],
     ladeSeoText('hub', 'kino', locale),
+    kinoHubIndexierbar(region),
   ]);
   const qualifiziert = staedte.filter((s) => s.anzahl >= MIN_KINOS_STADT).sort((a, b) => b.anzahl - a.anzahl);
   return {
     filme: await titelNachKennung(filme.map((f) => ({ tmdbId: f.tmdb_id, slug: slugify(f.title), title: f.title, year: f.year, genres: f.genres || [], posterPath: f.poster_path })), locale, 'movie'),
     staedte: qualifiziert.map((s) => ({ ort: s.ort, slug: slugify(s.ort) })),
-    text, indexierbar: true,
+    text, indexierbar,
   };
 }
 
 // Die Anbieter-Zaehlung liest ~30.000 Zeilen je Region (kalt ~6 s) -- gecacht.
 const streamingHubCache = new Map();
 
+function streamingHubZeilen(region) {
+  return swrCache(streamingHubCache, region, BESTENLISTE_TTL_MS, async () => (await pool.query(
+    `SELECT provider_id, provider_name, count(*)::int AS anzahl
+       FROM streaming_cache WHERE region = $1 GROUP BY provider_id, provider_name ORDER BY anzahl DESC`,
+    [region]
+  )).rows);
+}
+
+const hubIndexierbar = (rows) => rows.filter((r) => r.anzahl >= MIN_TITEL_ANBIETER_HUB).length >= MIN_ANBIETER_HUB;
+
+export async function streamingHubIndexierbar(region) {
+  return hubIndexierbar(await streamingHubZeilen(region));
+}
+
+// Anbieter, deren Seite indexiert wird (genug Titel in der Region).
+export async function anbieterIndexierbar(region) {
+  const summe = new Map();
+  for (const r of await streamingHubZeilen(region)) summe.set(r.provider_id, (summe.get(r.provider_id) || 0) + r.anzahl);
+  return new Set([...summe].filter(([, n]) => n >= MIN_TITEL_ANBIETER_SEITE).map(([id]) => id));
+}
+
 export async function ladeStreamingHub(locale) {
   const region = regionFuerLocale(locale);
-  const [rows, text] = await Promise.all([
-    swrCache(streamingHubCache, region, BESTENLISTE_TTL_MS, async () => (await pool.query(
-      `SELECT provider_id, provider_name, count(*)::int AS anzahl
-         FROM streaming_cache WHERE region = $1 GROUP BY provider_id, provider_name ORDER BY anzahl DESC`,
-      [region]
-    )).rows),
-    ladeSeoText('hub', 'streaming', locale),
-  ]);
+  const [rows, text] = await Promise.all([streamingHubZeilen(region), ladeSeoText('hub', 'streaming', locale)]);
   return {
     anbieter: rows.map((r) => ({ slug: r.provider_id, name: r.provider_name, anzahl: r.anzahl })),
-    text, indexierbar: true,
+    text, indexierbar: hubIndexierbar(rows),
   };
 }
 
@@ -1116,7 +1158,7 @@ export async function genresFuerSitemap() {
 }
 
 export async function anbieterFuerSitemap(locale) {
-  return [...await anbieterMitSeite(regionFuerLocale(locale))];
+  return [...await anbieterIndexierbar(regionFuerLocale(locale))];
 }
 
 export async function staedteFuerSitemap() {

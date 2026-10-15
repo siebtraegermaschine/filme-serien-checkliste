@@ -11,13 +11,14 @@ import { SEO_LOCALES, hatSeitenart, textLocale, regionFuerLocale, MIN_TITELTEXT 
 import {
   personenFuerSitemap, titelFuerSitemap, genresFuerSitemap, anbieterFuerSitemap,
   staedteFuerSitemap, alleBestenlisten, reihenFuerSitemap, wochenSeitenFuerSitemap,
+  ladeStartHub, ladePersonenHub, reihenKatalog, streamingHubIndexierbar, kinoHubIndexierbar,
 } from './seoData.js';
 import { schluesselZuPfad } from './seoBestenlisten.js';
 
 export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person', 'reihe'];
 
 // Bereich -> Seitenart (seoLocale.js). Nicht-de-Locales fuehren nur lokalisierte Arten.
-const ART_JE_BEREICH = { titel: 'titel', hub: 'start' };
+const ART_JE_BEREICH = { titel: 'titel', hub: 'start', bestenliste: 'beste-filme' };
 export function bereichFuerLocale(locale, bereich) {
   // Kinoorte (kinos) gibt es nur fuer Deutschland.
   if (bereich === 'kino_stadt' && regionFuerLocale(locale) !== 'DE') return false;
@@ -110,26 +111,30 @@ async function urlsFuerBereich(locale, bereich) {
     }));
   }
 
-  if (bereich === 'hub' && textLocale(locale) !== 'de-de') {
-    return stand.has('start') ? [{ loc: `${SITE}/${locale}/`, lastmod: stand.get('start') }] : [];
-  }
-
   if (bereich === 'hub') {
-    // Zeitabhaengige Seiten: nur wenn indexierbar, lastmod = heute (Berlin).
+    // Je Hub dieselbe Regel wie `indexierbar` der lade*-Funktion; Seitenarten, die das
+    // Locale nicht kennt (404), fehlen. Wochenseiten: nur wenn index,follow, lastmod = heute.
+    const region = regionFuerLocale(locale);
     const w = await wochenSeitenFuerSitemap(locale);
     const wochen = [
-      ...(w.neuAuf ? [`neu-auf`] : []),
-      ...w.anbieter.map((s) => `neu-auf/${s}`),
-      ...(w.kinoNeustarts ? ['kino/neustarts'] : []),
+      ...(w.neuAuf && hatSeitenart(locale, 'neu-auf') ? [`neu-auf`] : []),
+      ...(hatSeitenart(locale, 'neu-auf') ? w.anbieter.map((s) => `neu-auf/${s}`) : []),
+      ...(w.kinoNeustarts && hatSeitenart(locale, 'kino') ? ['kino/neustarts'] : []),
     ].map((h) => ({ loc: `${SITE}/${locale}/${h}`, lastmod: w.stand }));
-    return [
-      ...wochen,
-      ...HUBS.map((h) => ({
-        loc: h === 'start' ? `${SITE}/${locale}/` : `${SITE}/${locale}/${h}`,
-        lastmod: stand.get(h) || null,
-      })),
-      ...RECHTSTEXTE.map((d) => ({ loc: `${SITE}/${d}`, lastmod: null })),
-    ];
+    const hubs = [];
+    for (const h of HUBS) {
+      if (!hatSeitenart(locale, h === 'start' ? 'start' : h)) continue;
+      let ok = true;
+      if (h === 'start') ok = (await ladeStartHub(locale)).indexierbar;
+      else if (h === 'streaming') ok = await streamingHubIndexierbar(region);
+      else if (h === 'kino') ok = await kinoHubIndexierbar(region);
+      else if (h === 'reihen') ok = (await reihenKatalog()).liste.length > 0;
+      else if (h === 'schauspieler' || h === 'regisseur') ok = (await ladePersonenHub(h, locale)).indexierbar;
+      if (ok) hubs.push({ loc: h === 'start' ? `${SITE}/${locale}/` : `${SITE}/${locale}/${h}`, lastmod: stand.get(h) || null });
+    }
+    const recht = locale === 'de-de'
+      ? RECHTSTEXTE.map((d) => ({ loc: `${SITE}/${d}`, lastmod: null })) : [];
+    return [...wochen, ...hubs, ...recht];
   }
 
   return [];

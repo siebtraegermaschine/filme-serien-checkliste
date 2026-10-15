@@ -293,11 +293,7 @@ export function seiteTitelDetail(titel, locale) {
   const pfad = `/${locale}/${artWort}/${titel.slug}-${titel.tmdbId}`;
   const titelZeile = `${titel.title}${titel.year ? ' (' + titel.year + ')' : ''} — ${T.titelSuffix} | MovieMatch`;
   const beschreibung = kurzfassung(titel.text) || T.titelBeschr(titel.title);
-  // Nicht-de-Locales: index nur, wenn die Locale freigegeben ist UND ein Text in
-  // dieser Sprache existiert -- sonst stuende deutsche/englische Katalogware im Index.
-  const indexierbar = textLocale(locale) === 'de-de'
-    ? titel.indexierbar
-    : !!(titel.indexierbar && localeIndexierbar(locale) && titel.text);
+  const indexierbar = titel.indexierbar;
   const bild = titel.backdropPath
     ? 'https://image.tmdb.org/t/p/w1280' + titel.backdropPath
     : (titel.posterPath ? 'https://image.tmdb.org/t/p/w500' + titel.posterPath : null);
@@ -925,7 +921,7 @@ export function seiteStart(daten, locale) {
   const T = seoTexte(locale);
   const titelZeile = `${T.startTitel} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.startBeschr;
-  const indexierbar = textLocale(locale) === 'de-de' ? daten.indexierbar : !!(daten.indexierbar && localeIndexierbar(locale) && daten.text);
+  const indexierbar = daten.indexierbar;
   // Kacheln nur fuer Bereiche, die in dieser Locale existieren.
   const bereiche = istDeutsch(locale) ? START_BEREICHE : TX(locale).startKacheln.filter((b) => hatSeitenart(locale, b.pfad.split('/')[0]));
   // Kein Breadcrumb: Diese Seite IST die Wurzel des SEO-Baums, eine Kette mit

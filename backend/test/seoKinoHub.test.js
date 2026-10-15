@@ -4,7 +4,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { pool } from '../db/pool.js';
-import { ladeKinoHub, ladeKinoStadt } from '../lib/seoData.js';
+import { ladeKinoHub, ladeKinoStadt, kinoHubIndexierbar, streamingHubIndexierbar } from '../lib/seoData.js';
 import { sitemapBereich } from '../lib/seoSitemap.js';
 
 const QUELLE = 'seotest-kinohub';
@@ -35,6 +35,11 @@ test('Kino-Hub und Sitemap: Ort mit leerem Slug wird verworfen, lateinischer ble
   assert.ok(locs.every((l) => !/\/kino\/$/.test(l)), 'keine Sitemap-URL auf /kino/ selbst');
   assert.ok(locs.some((l) => l.endsWith('/kino/seotest-kinostadt')), 'lateinischer Ort in der Sitemap');
   assert.equal(new Set(locs).size, locs.length, 'keine Doppel-URLs');
+});
+
+test('Hubs ohne Bestand (Region ZZ) sind nicht indexierbar', async () => {
+  assert.equal(await kinoHubIndexierbar('ZZ'), false);
+  assert.equal(await streamingHubIndexierbar('ZZ'), false);
 });
 
 test.after(async () => { await pool.end(); });
