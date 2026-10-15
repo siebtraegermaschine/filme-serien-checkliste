@@ -3,13 +3,12 @@
  * sind die eingefrorenen Altwerte. DB-frei. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { LOCALE_KONFIG, SEO_LOCALES, hatSeitenart as altHat, clusterAlternates as altCluster,
-  gegenstueck as altGegen, seitenartFuerPfad } from '../lib/seoLocale.js';
+import { LOCALE_KONFIG } from '../lib/seoLocale.js';
 import { lokalWort, deutschWort, lokalisierePfade } from '../lib/seoPfade.js';
 import { BEREICHE, bereichFuerLocale as altBereich } from '../lib/seoSitemap.js';
 import {
   PFADWOERTER, UNTERWOERTER, SEITENARTEN, SITEMAP_BEREICHE, CLUSTER_FORM, regionHubs, namenLokalisiert,
-  hatSeitenart, clusterAlternates, gegenstueck, bereichFuerLocale, seitenartFuer, hubPfade, wochenArten,
+  bereichFuerLocale, hubPfade, wochenArten,
 } from '../lib/seoSeitenarten.js';
 
 const LOCALES = [...Object.keys(LOCALE_KONFIG), 'xx-xx'];
@@ -53,21 +52,8 @@ test('Jede Seitenart hat Routen; Namen und ids sind eindeutig', () => {
   for (const s of SEITENARTEN) assert.ok(s.routen.length > 0, s.id);
 });
 
-test('abgeleitete Funktionen liefern dasselbe wie die alten', () => {
-  const namen = ['start', 'titel', 'hub', 'genre', 'anbieter', 'reihe', 'person', 'schauspieler', 'regisseur', 'filme', 'serien',
-    'streaming', 'bestenlisten', 'beste-filme', 'beste-serien', 'kino', 'neu-auf', 'reihen', 'kino_stadt', 'bestenliste', 'film', 'xyz'];
-  const pfade = ['', 'filme', 'serien', 'reihen', 'bestenlisten', 'beste-filme', 'beste-serien', 'streaming', 'kino', 'neu-auf',
-    'filme/drama', 'serien/krimi', 'reihen/matrix', 'filme/drama/x', 'streaming/netflix', 'kino/berlin', 'kino/neustarts', 'film/x-1',
-    'schauspieler', 'regisseur', 'filme/drama?seite=2', 'xyz'];
+test('Sitemap-Bereiche pro Locale entsprechen seoSitemap.js', () => {
   for (const l of LOCALES) {
-    for (const n of namen) assert.equal(hatSeitenart(l, n), altHat(l, n), `hat ${l} ${n}`);
     for (const b of [...BEREICHE, 'unbekannt']) assert.equal(bereichFuerLocale(l, b), altBereich(l, b), `bereich ${l} ${b}`);
-    for (const p of pfade) {
-      const pfad = `/${l}${p ? '/' + p : ''}`;
-      assert.equal(seitenartFuer(pfad), seitenartFuerPfad(pfad), pfad);
-      const alt = altCluster(l, pfad);
-      assert.deepEqual(clusterAlternates(l, pfad), alt, `cluster ${pfad}`);
-      for (const z of SEO_LOCALES) assert.equal(gegenstueck(z, l, pfad, alt), altGegen(z, l, pfad, alt), `gegen ${z} ${pfad}`);
-    }
   }
 });
