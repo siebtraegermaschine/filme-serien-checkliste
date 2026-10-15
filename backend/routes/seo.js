@@ -21,6 +21,7 @@ import { track } from '../lib/track.js';
 import { tageskennung } from '../lib/tageskennung.js';
 import { herkunftKategorie, geraetTyp, istBot } from '../lib/herkunft.js';
 import { lokalisierePfade, pfadAnalysieren } from '../lib/seoPfade.js';
+import { analyticsTyp } from '../lib/seoSeitenarten.js';
 import { listeAusPfad, analyticsTypFuerListe } from '../lib/seoBestenlisten.js';
 
 const router = createAsyncRouter();
@@ -61,14 +62,7 @@ const PFAD_RE = /^[a-z0-9\/-]{1,160}$/;
 export function seoAufrufTyp(pfad) {
   const teile = String(pfad || '').split('/').filter(Boolean);
   if (!localeGueltig(teile[0])) return null;
-  if (teile[1] === 'beste-filme' || teile[1] === 'beste-serien') {
-    return analyticsTypFuerListe(teile.slice(1)) || teile[1];
-  }
-  // Reihen: Uebersicht 'reihen', einzelne Reihe 'reihe'.
-  if (teile[1] === 'reihen' && teile[2]) return 'reihe';
-  if (teile[1] === 'neu-auf') return teile[2] ? 'neu-anbieter' : 'neu-auf';
-  if (teile[1] === 'kino' && teile[2] === 'neustarts') return 'kino-neustarts';
-  return teile[1] || 'start';
+  return analyticsTyp(teile, analyticsTypFuerListe);
 }
 export function seoAufrufPfad(pfad) {
   const p = String(pfad || '').replace(/\/+$/, '') || '/';

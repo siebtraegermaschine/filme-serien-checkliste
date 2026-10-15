@@ -5,6 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { LOCALE_KONFIG, localeIndexierbar, localesMitText } from '../lib/seoLocale.js';
 import { slugify } from '../lib/slug.js';
+import router from '../routes/seo.js';
 import { lokalWort, deutschWort, lokalisierePfade } from '../lib/seoPfade.js';
 import { BEREICHE, bereichFuerLocale as altBereich } from '../lib/seoSitemap.js';
 import {
@@ -69,4 +70,10 @@ test('hreflang-Listen von Titel und Person wie vor dem Verzeichnis', () => {
   const person = { rolle: 'regisseur', slug: 'x', tmdbPersonId: 5, textLocales: ['en-gb', 'nl-nl'] };
   const cluster = [...new Set([...localesMitText(['de-de']), ...person.textLocales])].filter((l) => localeIndexierbar(l));
   assert.deepEqual(alternatesPerson(person), cluster.map((l) => ({ locale: l, pfad: `/${l}/regisseur/x-5` })));
+});
+
+test('Router registriert genau die Routen des Verzeichnisses in dessen Reihenfolge', () => {
+  const ist = router.stack.filter((l) => l.route).map((l) => String(l.route.path));
+  const soll = SEITENARTEN.flatMap((s) => s.routen).map(String);
+  assert.deepEqual(ist, soll);
 });
