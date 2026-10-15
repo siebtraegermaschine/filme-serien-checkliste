@@ -559,4 +559,5 @@ Welle 1 (160 Pakettexte): 158 live (en-gb 40, it 39, nl 39, pt 40). Welle 2 (40 
 
 ## Routen-Verzeichnis (15.10.2026, in Arbeit)
 - `backend/lib/seoSeitenarten.js` beschreibt alle Seitenarten an einer Stelle (Routen, Pfadwörter, Sprachen, Cluster, Sitemap); Altlisten leiten sich schrittweise daraus ab. Jede Etappe verhaltensgleich, abgesichert durch `test/seoSeitenarten.golden.test.js` (Funktionen) und `test/seoSeitenarten.test.js` (Verzeichnis = Altwerte).
-- Stand: Etappe 0 (Golden) und 1 (Verzeichnis angelegt, noch nicht angeschlossen). Offen: Etappen 2–8 (seoPfade, seoLocale, seoSitemap, seoRender, Router-Test, Konsistenztest), Etappe 9 (bekannte Abweichungen bereinigen, nicht neutral, nur nach Freigabe).
+- Stand: Etappen 0–8 fertig (seoPfade, seoLocale, seoSitemap, seoRender, seoAufrufTyp und Konsistenztest lesen aus dem Verzeichnis; `seoSeitenartenDaten.js` hält die DB-Seite). Neue Seitenart = ein Eintrag in `SEITENARTEN` + ggf. `PFADWOERTER`, Route im Router in derselben Reihenfolge (Test prüft).
+- Offen: Etappe 9 (nicht neutral, nur nach Freigabe): neu-auf/<a> n>0 nur im Renderer, `*FuerSitemap` wiederholen die `lade*`-Regeln, gemischte Benennung in `hatSeitenart`, Hub-Liste im Test doppelt.
