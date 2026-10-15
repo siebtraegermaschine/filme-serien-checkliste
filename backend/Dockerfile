@@ -42,7 +42,7 @@ RUN cd backend && npm ci --omit=dev
 # nachtragen -- das Manifest fehlte zunaechst (20.08.) und lieferte still 404.
 # consent.js (17.09.2026) ebenso einzeln: kein *.js-Glob, sonst kaemen die
 # Wurzel-Skripte mit ins Image. backend/test/consent.test.js prueft die Zeile.
-COPY *.html *.css *.png *.svg *.webp manifest.json robots.txt consent.js ./
+COPY *.html *.css *.png *.svg *.webp manifest.json robots.txt consent.js sprachhinweis.js ./
 # index.html kommt verkleinert aus der Build-Stufe oben.
 COPY --from=minify /m/index.html ./index.html
 COPY tour/ ./tour/
