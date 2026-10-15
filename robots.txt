@@ -24,6 +24,16 @@ Allow: /$
 Allow: /de-de/
 Allow: /fr-fr/
 Allow: /en-gb/
+Allow: /es-es/
+Allow: /it-it/
+Allow: /nl-nl/
+Allow: /pt-pt/
+Allow: /de-at/
+Allow: /de-ch/
+Allow: /fr-ch/
+Allow: /en-ca/
+Allow: /fr-ca/
+Allow: /en-us/
 Allow: /sitemap-*.xml
 Allow: /impressum.html
 Allow: /datenschutz.html

@@ -2,6 +2,7 @@
 // aendern sich taeglich), prozessintern gecacht -- dieselbe Kosten-Ueberlegung
 // wie bestenlisteCache in seoData.js: die zugrundeliegenden Abfragen sind zu
 // teuer fuer jeden Crawl-Treffer einzeln.
+import { gzipSync, gunzipSync } from 'node:zlib';
 import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
 import { SITE } from './seoRender.js';
@@ -133,15 +134,44 @@ async function urlsFuerBereich(locale, bereich) {
   return [];
 }
 
-export async function sitemapBereich(locale, bereich) {
+// Eine Sitemap-Datei darf hoechstens 50.000 URLs haben; Titel-Dateien sind groesser.
+// Seite 1 behaelt den alten Dateinamen (sitemap-<locale>-<bereich>.xml), weitere
+// heissen ...-<bereich>-2.xml. Gecacht wird gzip-komprimiert (Speicher).
+const MAX_URLS = 45000;
+
+async function gzipTeile(locale, bereich) {
   const key = `${locale}:${bereich}`;
   const jetzt = Date.now();
   const gecacht = cache.get(key);
-  if (gecacht && jetzt - gecacht.at < TTL_MS) return gecacht.xml;
+  if (gecacht && jetzt - gecacht.at < TTL_MS) return gecacht.teile;
   const urls = await urlsFuerBereich(locale, bereich);
-  const xml = urlset(urls);
-  cache.set(key, { at: jetzt, xml });
-  return xml;
+  const teile = [];
+  for (let i = 0; i < Math.max(urls.length, 1); i += MAX_URLS) {
+    teile.push(gzipSync(urlset(urls.slice(i, i + MAX_URLS))));
+  }
+  cache.set(key, { at: jetzt, teile });
+  return teile;
+}
+
+// Gzip-Puffer der Seite (1-basiert); hinter dem Ende eine leere Liste statt Fehler.
+export async function sitemapBereichGz(locale, bereich, seite = 1) {
+  const teile = await gzipTeile(locale, bereich);
+  return teile[seite - 1] || gzipSync(urlset([]));
+}
+
+export async function sitemapBereich(locale, bereich, seite = 1) {
+  return gunzipSync(await sitemapBereichGz(locale, bereich, seite)).toString('utf8');
+}
+
+// Anzahl Dateien eines Bereichs fuer den Index. Nur Titel koennen die Grenze
+// reissen; der Rest ist deutlich kleiner und bleibt bei einer Datei.
+async function dateiAnzahl(locale, bereich) {
+  if (bereich !== 'titel') return 1;
+  const { rows: [r] } = await pool.query(
+    `SELECT count(*)::int AS n FROM seo_content WHERE bereich = 'titel' AND locale = $1 AND ($1 = 'de-de' OR length(text) >= $2)`,
+    [textLocale(locale), MIN_TITELTEXT]
+  );
+  return Math.max(1, Math.ceil(r.n / MAX_URLS));
 }
 
 export async function sitemapIndex() {
@@ -153,7 +183,10 @@ export async function sitemapIndex() {
   for (const locale of SEO_LOCALES) {
     for (const bereich of BEREICHE) {
       if (!bereichFuerLocale(locale, bereich)) continue;
-      zeilen.push(`  <sitemap><loc>${xmlEsc(`${SITE}/sitemap-${locale}-${bereich}.xml`)}</loc></sitemap>`);
+      const n = await dateiAnzahl(locale, bereich);
+      for (let i = 1; i <= n; i++) {
+        zeilen.push(`  <sitemap><loc>${xmlEsc(`${SITE}/sitemap-${locale}-${bereich}${i > 1 ? `-${i}` : ''}.xml`)}</loc></sitemap>`);
+      }
     }
   }
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${zeilen.join('\n')}\n</sitemapindex>`;

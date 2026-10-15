@@ -7,7 +7,7 @@
 import { pool } from '../db/pool.js';
 import { slugify } from './slug.js';
 import { anbieterSlug } from './anbieter.js';
-import { regionFuerLocale, sprachVon, textLocale, localesMitText, titelTextReicht } from './seoLocale.js';
+import { regionFuerLocale, sprachVon, textLocale, localesMitText, titelTextReicht, MIN_TITELTEXT } from './seoLocale.js';
 import { sprachFeld } from './i18n.js';
 import { bewertungFuerTitel, MINDESTZAHL_BEWERTUNGEN } from './bewertungsstatistik.js';
 import { ladePersonDaten } from './personen.js';
@@ -183,7 +183,8 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     ),
     ladeSeoText('titel', `${type}:${titel.tmdb_id}`, locale),
     // Sprachfassungen mit Text -- Grundlage des hreflang-Clusters.
-    pool.query(`SELECT locale FROM seo_content WHERE bereich = 'titel' AND schluessel = $1`, [`${type}:${titel.tmdb_id}`]),
+    pool.query(`SELECT locale FROM seo_content WHERE bereich = 'titel' AND schluessel = $1
+        AND (locale = 'de-de' OR length(text) >= $2)`, [`${type}:${titel.tmdb_id}`, MIN_TITELTEXT]),
     // "Weitere Filme von X" -- nur, wenn eine Regie bekannt ist.
     titel.director
       ? pool.query(

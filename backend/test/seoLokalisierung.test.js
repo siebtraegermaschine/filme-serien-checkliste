@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { seitePerson, seitePersonenHub, seiteTitelDetail, seiteStart, seite404, seiteFilmeSerienHub, seiteBestenlistenUebersicht } from '../lib/seoRender.js';
 import { SEO_TEXTE, ABSCHNITTE, seoTexte } from '../lib/seoTexte.js';
-import { LOCALE_KONFIG, hatSeitenart, seitenartFuerPfad } from '../lib/seoLocale.js';
+import { LOCALE_KONFIG, hatSeitenart, seitenartFuerPfad, titelTextReicht } from '../lib/seoLocale.js';
 import { bereichFuerLocale, BEREICHE } from '../lib/seoSitemap.js';
 
 const meta = (html, name) => (html.match(new RegExp(`<meta name="${name}" content="([^"]*)">`)) || [])[1];
@@ -55,9 +55,13 @@ test('Nicht-de-Titelseite verlinkt keine Personen-Seiten (noch nicht lokalisiert
   assert.match(html, /imprint\.html/);
 });
 
-test('Nicht-de bleibt noindex, auch mit Text, solange die Locale nicht freigegeben ist', () => {
+test('Nicht-de: index ab 250 Zeichen Text, darunter und ohne Text noindex', () => {
+  const lang = 'Ein ausreichend langer Text. '.repeat(10);
   for (const locale of ['es-es', 'it-it', 'nl-nl', 'pt-pt']) {
-    assert.equal(meta(seiteTitelDetail(titel('Ein Text.'), locale), 'robots'), 'noindex,follow', locale);
+    assert.equal(meta(seiteTitelDetail(titel(lang), locale), 'robots'), 'index,follow', locale);
+    // Laengen-Schwelle entscheidet seoData (daten.indexierbar), der Renderer folgt dem Flag.
+    assert.equal(titelTextReicht(locale, 'Ein Text.'), false, locale);
+    assert.equal(meta(seiteTitelDetail(titel('Ein Text.', { indexierbar: false }), locale), 'robots'), 'noindex,follow', locale);
     assert.equal(meta(seiteTitelDetail(titel(null), locale), 'robots'), 'noindex,follow', locale);
   }
 });
@@ -83,12 +87,13 @@ test('Vier-Abschnitte-Text in der Zielsprache erzeugt die lokalisierten Uebersch
   assert.match(html, /Ganó premios/);
 });
 
-test('hreflang: x-default zeigt auf de-de, Cluster nur aus indexierbaren Locales mit Text', () => {
+test('hreflang: x-default zeigt auf de-de, Cluster nur aus Locales mit Text', () => {
   const html = seiteTitelDetail(titel('Text', { textLocales: ['de-de', 'en-gb', 'es-es'] }), 'es-es');
   assert.match(html, /hreflang="de-DE" href="https:\/\/movietaste\.de\/de-de\/film\/beispiel-7"/);
   assert.match(html, /hreflang="x-default" href="https:\/\/movietaste\.de\/de-de\/film\/beispiel-7"/);
   assert.match(html, /hreflang="en-GB"/);
-  assert.doesNotMatch(html, /hreflang="es-ES"/);
+  assert.match(html, /hreflang="es-ES" href="https:\/\/movietaste\.de\/es-es\/film\/beispiel-7"/);
+  assert.doesNotMatch(html, /hreflang="it-IT"/); // kein Text in it-it
 });
 
 test('Startseite und 404 sind lokalisiert; Start ohne Text ist noindex', () => {
@@ -139,11 +144,12 @@ test('Route: Personen-Seiten in Nicht-de liefern 404 (ohne DB), inaktive Locales
   }
 });
 
-test('Nicht-de-Hubs: noindex, ohne Text kein Einleitungsabsatz, kein hreflang, lokale Links, de-de behaelt Absatz', () => {
+test('Nicht-de-Hubs: index, hreflang-Cluster, ohne Text kein Einleitungsabsatz, lokale Links, de-de behaelt Absatz', () => {
   const daten = { text: null, indexierbar: true, type: 'movie', genres: [], titel: [] };
   const html = seiteFilmeSerienHub(daten, 'es-es', 'filme');
-  assert.equal(meta(html, 'robots'), 'noindex,follow');
-  assert.doesNotMatch(html, /hreflang=/);
+  assert.equal(meta(html, 'robots'), 'index,follow');
+  assert.match(html, /hreflang="de-DE" href="https:\/\/movietaste\.de\/de-de\/filme"/);
+  assert.match(html, /hreflang="es-ES" href="https:\/\/movietaste\.de\/es-es\/filme"/);
   assert.doesNotMatch(html, /class="einleitung"/);
   assert.match(html, /href="\/es-es\/(bestenlisten|streaming)/);
   const mit = seiteFilmeSerienHub({ ...daten, text: 'Texte.' }, 'es-es', 'filme');
@@ -154,7 +160,7 @@ test('Nicht-de-Hubs: noindex, ohne Text kein Einleitungsabsatz, kein hreflang, l
 test('Nicht-de-Bestenlisten-Uebersicht und Reihen-Uebersicht liefern 200-taugliches HTML in der Sprache', () => {
   const b = seiteBestenlistenUebersicht({ text: null, indexierbar: true, katalog: null }, 'it-it');
   assert.match(b, /<html lang="it">/);
-  assert.equal(meta(b, 'robots'), 'noindex,follow');
+  assert.equal(meta(b, 'robots'), 'index,follow');
   assert.doesNotMatch(b, /Bestenlisten/);
 });
 
@@ -177,15 +183,17 @@ test('Personenseite en-gb/fr-fr: uebersetzte Ueberschriften, index (Locale index
   assert.match(hub, /2 titles/);
 });
 
-test('Laender-Locales: de-at deutsch mit deutschem Chrome, en-ca englisch, beide noindex', () => {
+test('Laender-Locales: de-at deutsch mit deutschem Chrome, en-ca englisch, beide index mit eigenem Canonical', () => {
   const at = seiteTitelDetail(titel('Ein deutscher Text. '.repeat(20), { textLocales: ['de-de', 'de-at', 'de-ch'] }), 'de-at');
   assert.match(at, /<html lang="de">/);
-  assert.equal(meta(at, 'robots'), 'noindex,follow');
+  assert.equal(meta(at, 'robots'), 'index,follow');
   assert.match(at, /href="\/de-at\/filme"/);
   assert.match(at, /impressum\.html/);
-  assert.doesNotMatch(at, /hreflang="de-AT"/); // erst mit indexierbarer Locale
+  assert.match(at, /rel="canonical" href="https:\/\/movietaste\.de\/de-at\/film\/beispiel-7"/); // eigener Canonical je Landesversion
+  assert.match(at, /hreflang="de-AT" href="https:\/\/movietaste\.de\/de-at\/film\/beispiel-7"/);
+  assert.match(at, /hreflang="de-CH"/);
   const ca = seiteTitelDetail(titel('An English text. '.repeat(20), { textLocales: ['en-gb', 'en-ca', 'en-us'] }), 'en-ca');
   assert.match(ca, /<html lang="en">/);
-  assert.equal(meta(ca, 'robots'), 'noindex,follow');
+  assert.equal(meta(ca, 'robots'), 'index,follow');
   assert.match(ca, /imprint\.html/);
 });

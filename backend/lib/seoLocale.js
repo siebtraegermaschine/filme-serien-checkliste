@@ -11,18 +11,18 @@
 export const LOCALE_KONFIG = {
   'de-de': { sprache: 'de', region: 'DE', aktiv: true, indexierbar: true },
   'en-gb': { sprache: 'en', region: 'GB', aktiv: true, indexierbar: true },
-  'es-es': { sprache: 'es', region: 'ES', aktiv: true, indexierbar: false },
+  'es-es': { sprache: 'es', region: 'ES', aktiv: true, indexierbar: true },
   'fr-fr': { sprache: 'fr', region: 'FR', aktiv: true, indexierbar: true },
-  'it-it': { sprache: 'it', region: 'IT', aktiv: true, indexierbar: false },
-  'nl-nl': { sprache: 'nl', region: 'NL', aktiv: true, indexierbar: false },
-  'pt-pt': { sprache: 'pt', region: 'PT', aktiv: true, indexierbar: false },
+  'it-it': { sprache: 'it', region: 'IT', aktiv: true, indexierbar: true },
+  'nl-nl': { sprache: 'nl', region: 'NL', aktiv: true, indexierbar: true },
+  'pt-pt': { sprache: 'pt', region: 'PT', aktiv: true, indexierbar: true },
   // Laender-Locales: eigene Region (Streaming/Kino), Texte der textLocale. Alle noindex.
-  'de-at': { sprache: 'de', region: 'AT', aktiv: true, indexierbar: false, textLocale: 'de-de' },
-  'de-ch': { sprache: 'de', region: 'CH', aktiv: true, indexierbar: false, textLocale: 'de-de' },
-  'fr-ch': { sprache: 'fr', region: 'CH', aktiv: true, indexierbar: false, textLocale: 'fr-fr' },
-  'en-ca': { sprache: 'en', region: 'CA', aktiv: true, indexierbar: false, textLocale: 'en-gb' },
-  'fr-ca': { sprache: 'fr', region: 'CA', aktiv: true, indexierbar: false, textLocale: 'fr-fr' },
-  'en-us': { sprache: 'en', region: 'US', aktiv: true, indexierbar: false, textLocale: 'en-gb' },
+  'de-at': { sprache: 'de', region: 'AT', aktiv: true, indexierbar: true, textLocale: 'de-de' },
+  'de-ch': { sprache: 'de', region: 'CH', aktiv: true, indexierbar: true, textLocale: 'de-de' },
+  'fr-ch': { sprache: 'fr', region: 'CH', aktiv: true, indexierbar: true, textLocale: 'fr-fr' },
+  'en-ca': { sprache: 'en', region: 'CA', aktiv: true, indexierbar: true, textLocale: 'en-gb' },
+  'fr-ca': { sprache: 'fr', region: 'CA', aktiv: true, indexierbar: true, textLocale: 'fr-fr' },
+  'en-us': { sprache: 'en', region: 'US', aktiv: true, indexierbar: true, textLocale: 'en-gb' },
   // Nicht-EWR: nur vorbereitet (kein aktives Marketing ausserhalb des EWR, siehe STATUS.md).
   'pt-br': { sprache: 'pt', region: 'BR', aktiv: false, indexierbar: false },
 };
@@ -70,6 +70,27 @@ export function hatSeitenart(locale, art) {
 // Sprachfassung (de-at -> de-de), sonst das Locale selbst.
 export function textLocale(locale) {
   return (LOCALE_KONFIG[locale] && LOCALE_KONFIG[locale].textLocale) || locale;
+}
+
+// hreflang-Cluster fuer Seiten ohne eigene Gegenstueck-Logik (Start, Genre, Reihen,
+// Uebersichten): dieselbe Adresse in jedem indexierbaren Locale, das die Seitenart
+// kennt. Region-abhaengige Seiten (Anbieter, Bestenlisten-Unterseiten, Kino, Neu-auf)
+// bekommen keinen Cluster -- ob es sie in der anderen Region gibt, haengt an deren
+// Katalog, und hreflang auf eine 404- oder noindex-Seite waere falsch.
+const CLUSTER_EINSEGMENTIG = ['filme', 'serien', 'reihen', 'bestenlisten', 'beste-filme', 'beste-serien', 'streaming'];
+const CLUSTER_MIT_UNTERSEITE = { filme: 'genre', serien: 'genre', reihen: 'reihe' };
+export function clusterAlternates(locale, pfad) {
+  if (!pfad || pfad.includes('?') || !pfad.startsWith(`/${locale}`)) return undefined;
+  const teile = pfad.slice(locale.length + 1).split('/').filter(Boolean);
+  let art;
+  if (teile.length === 0) art = 'start';
+  else if (teile.length === 1 && CLUSTER_EINSEGMENTIG.includes(teile[0])) art = teile[0];
+  else if (teile.length === 2 && CLUSTER_MIT_UNTERSEITE[teile[0]]) art = CLUSTER_MIT_UNTERSEITE[teile[0]];
+  else return undefined;
+  const rest = teile.length ? '/' + teile.join('/') : '/';
+  const locales = SEO_LOCALES.filter((l) => hatSeitenart(l, art));
+  if (locales.length < 2 || !locales.includes(locale)) return undefined;
+  return locales.map((l) => ({ locale: l, pfad: `/${l}${rest}` }));
 }
 
 // Alle aktiven Locales, die mit den vorhandenen Text-Locales eine Fassung haben

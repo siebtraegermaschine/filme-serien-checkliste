@@ -3,7 +3,7 @@
 // bei der App-OG-Route (server.js) -- jede Funktion hier gibt ein fertiges
 // Dokument zurueck. Kein App-JS, eigenes seo.css (Architektur-Entscheidung 1).
 import { PERSON_TX } from './seoPersonen.js';
-import { hreflangCode, hatSeitenart, localeIndexierbar, sprachVon, regionFuerLocale, textLocale, localesMitText, istDeutsch } from './seoLocale.js';
+import { clusterAlternates, hreflangCode, hatSeitenart, localeIndexierbar, sprachVon, regionFuerLocale, textLocale, localesMitText, istDeutsch } from './seoLocale.js';
 import { seoTexte, ABSCHNITTE, zahlFormat } from './seoTexte.js';
 import { genreAnzeige } from './genreNamen.js';
 import { listeSeitenPfad, THEMEN, LAUFZEITEN, STAFFELN } from './seoBestenlisten.js';
@@ -115,6 +115,7 @@ function fusszeile(locale) {
 export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml, basis, kopfHtml, fussHtml, favicon }) {
   // Nicht freigegebene Locales sind nie im Index, egal was die Seitenfunktion meldet.
   if (!localeIndexierbar(locale)) indexierbar = false;
+  if (indexierbar && !alternates) alternates = clusterAlternates(locale, pfad);
   return `<!DOCTYPE html>
 <html lang="${sprachVon(locale)}">
 <head>
