@@ -542,3 +542,9 @@ Welle 1 (160 Pakettexte): 158 live (en-gb 40, it 39, nl 39, pt 40). Welle 2 (40 
 
 ### Nachtrag 14.10.2026: en-gb Kurztexte mit TMDB-Beschreibung
 `seo-titel-kurztexte-lokal.mjs` setzt für en-gb die englische TMDB-Beschreibung (gekürzt auf ganze Sätze, max. ca. 600 Zeichen) als Handlungssatz ein. 16.431 neue Texte geschrieben; en-gb jetzt 93.326 Titeltexte, keiner unter 250 Zeichen, Sitemap 93.326 URLs (live geprüft, Stichproben `index,follow`). 3.899 Titel bleiben ohne Text (noindex). Gleiches für andere Sprachen offen: dort gibt es keine Beschreibung in der Zielsprache (nur Übersetzung per Langtext).
+
+## Canonical/hreflang und Indexierung aller Locales (15.10.2026, live)
+- Jede Landesversion hat ihren eigenen Canonical; hreflang-Cluster (`clusterAlternates` in `seoLocale.js`) nur zwischen indexierbaren Locales mit echtem Inhalt, x-default → de-de. Region-abhängige Seiten (Streaming, Kino, Anbieter-Bestenlisten) bleiben ohne Cluster.
+- Index: es-es, it-it, nl-nl, pt-pt, de-at, de-ch, fr-ch, en-ca, fr-ca, en-us (Titel erst ab 250 Zeichen Text; pt-br bleibt inaktiv). robots.txt-Allow-Zeilen ergänzt.
+- Sitemaps je Bereich ab 45.000 URLs in `…-titel-N.xml` geteilt (Google-Limit 50.000), gzip-Cache, Pfadwörter lokalisiert.
+- Offen: Muttersprachler-Review der Texte, Anwaltsprüfung der Rechtstexte-Entwürfe, Near-Duplicate-Risiko der Landesversionen (in Search Console beobachten), kurze Titeltexte in de-de (12.033, de-de von der Schwelle ausgenommen), kurze Texte anderer Seitenarten ohne Längenschwelle. TMDB lokal nicht testbar.
