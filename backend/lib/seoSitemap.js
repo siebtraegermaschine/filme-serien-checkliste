@@ -5,29 +5,14 @@
 import { gzipSync, gunzipSync } from 'node:zlib';
 import { pool } from '../db/pool.js';
 import { swrCache } from './swrCache.js';
-import { slugify } from './slug.js';
 import { SITE } from './seoRender.js';
-import { SEO_LOCALES, hatSeitenart, textLocale, regionFuerLocale, MIN_TITELTEXT } from './seoLocale.js';
-import {
-  personenFuerSitemap, titelFuerSitemap, genresFuerSitemap, anbieterFuerSitemap,
-  staedteFuerSitemap, alleBestenlisten, reihenFuerSitemap, wochenSeitenFuerSitemap,
-  ladeStartHub, ladePersonenHub, reihenKatalog, streamingHubIndexierbar, kinoHubIndexierbar,
-} from './seoData.js';
-import { schluesselZuPfad } from './seoBestenlisten.js';
+import { SEO_LOCALES, textLocale, MIN_TITELTEXT } from './seoLocale.js';
+import { SITEMAP_BEREICHE, bereichFuerLocale } from './seoSeitenarten.js';
+import { SITEMAP_URLS } from './seoSeitenartenDaten.js';
 
-export const BEREICHE = ['titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person', 'reihe'];
-
-// Bereich -> Seitenart (seoLocale.js). Nicht-de-Locales fuehren nur lokalisierte Arten.
-const ART_JE_BEREICH = { titel: 'titel', hub: 'start', bestenliste: 'beste-filme' };
-export function bereichFuerLocale(locale, bereich) {
-  // Kinoorte (kinos) gibt es nur fuer Deutschland.
-  if (bereich === 'kino_stadt' && regionFuerLocale(locale) !== 'DE') return false;
-  return hatSeitenart(locale, ART_JE_BEREICH[bereich] || bereich);
-}
-
-// Hub-Seiten ('start' = /<locale>/ selbst) und die deutschen Rechtstexte.
-const HUBS = ['start', 'filme', 'serien', 'kino', 'streaming', 'bestenlisten', 'reihen', 'beste-filme', 'beste-serien', 'schauspieler', 'regisseur'];
-const RECHTSTEXTE = ['impressum.html', 'datenschutz.html', 'nutzungsbedingungen.html'];
+// Bereiche, Hub-Liste und Bereich -> Seitenart stehen im Verzeichnis (seoSeitenarten.js).
+export const BEREICHE = SITEMAP_BEREICHE;
+export { bereichFuerLocale };
 
 const TTL_MS = 60 * 60 * 1000;
 const cache = new Map();
@@ -53,91 +38,12 @@ async function textStaende(bereich, locale) {
 }
 
 // Alle Seiten, die es gibt (Regeln wie `indexierbar` in seoData.js) -- nicht
-// mehr nur die mit eigenem Text.
+// mehr nur die mit eigenem Text. Die Bereiche selbst: SITEMAP_URLS (seoSeitenartenDaten.js).
 async function urlsFuerBereich(locale, bereich) {
-  if (bereich === 'person') {
-    const urls = [];
-    for (const rolle of ['regisseur', 'schauspieler']) {
-      for (const p of await personenFuerSitemap(rolle, locale)) {
-        urls.push({ loc: `${SITE}/${locale}/${rolle}/${p.slug}-${p.tmdbPersonId}`, lastmod: null });
-      }
-    }
-    return urls;
-  }
-
+  if (bereich === 'person') return SITEMAP_URLS.person(locale);
   if (!bereichFuerLocale(locale, bereich)) return [];
   const stand = await textStaende(bereich, locale);
-
-  if (bereich === 'titel') {
-    // Nur Titel mit Text in dieser Sprache (Thin-Content-Schutz, gilt auch fuer
-    // die reinen SEO-Titel aus streaming_cache).
-    const alle = await titelFuerSitemap();
-    return alle.filter((t) => stand.has(`${t.type}:${t.tmdb_id}`)).map((t) => ({
-      loc: `${SITE}/${locale}/${t.type === 'series' ? 'serie' : 'film'}/${slugify(t.title, locale)}-${t.tmdb_id}`,
-      lastmod: stand.get(`${t.type}:${t.tmdb_id}`) || null,
-    }));
-  }
-
-  if (bereich === 'genre') {
-    return (await genresFuerSitemap()).map((g) => ({
-      loc: `${SITE}/${locale}/${g.type === 'series' ? 'serien' : 'filme'}/${g.slug}`,
-      lastmod: stand.get(`${g.slug}:${g.type}`) || null,
-    }));
-  }
-
-  if (bereich === 'anbieter') {
-    return (await anbieterFuerSitemap(locale)).map((slug) => ({
-      loc: `${SITE}/${locale}/streaming/${slug}`, lastmod: stand.get(slug) || null,
-    }));
-  }
-
-  if (bereich === 'bestenliste') {
-    return (await alleBestenlisten(locale)).flatMap(([art, modus, wert]) => {
-      const schluessel = `${modus}:${wert}:${art === 'serien' ? 'series' : 'movie'}`;
-      const pfad = schluesselZuPfad(schluessel, locale);
-      return pfad ? [{ loc: SITE + pfad, lastmod: stand.get(schluessel) || null }] : [];
-    });
-  }
-
-  if (bereich === 'reihe') {
-    return (await reihenFuerSitemap()).map((slug) => ({
-      loc: `${SITE}/${locale}/reihen/${slug}`, lastmod: stand.get(slug) || null,
-    }));
-  }
-
-  if (bereich === 'kino_stadt') {
-    return (await staedteFuerSitemap()).map((slug) => ({
-      loc: `${SITE}/${locale}/kino/${slug}`, lastmod: stand.get(slug) || null,
-    }));
-  }
-
-  if (bereich === 'hub') {
-    // Je Hub dieselbe Regel wie `indexierbar` der lade*-Funktion; Seitenarten, die das
-    // Locale nicht kennt (404), fehlen. Wochenseiten: nur wenn index,follow, lastmod = heute.
-    const region = regionFuerLocale(locale);
-    const w = await wochenSeitenFuerSitemap(locale);
-    const wochen = [
-      ...(w.neuAuf && hatSeitenart(locale, 'neu-auf') ? [`neu-auf`] : []),
-      ...(hatSeitenart(locale, 'neu-auf') ? w.anbieter.map((s) => `neu-auf/${s}`) : []),
-      ...(w.kinoNeustarts && hatSeitenart(locale, 'kino') ? ['kino/neustarts'] : []),
-    ].map((h) => ({ loc: `${SITE}/${locale}/${h}`, lastmod: w.stand }));
-    const hubs = [];
-    for (const h of HUBS) {
-      if (!hatSeitenart(locale, h === 'start' ? 'start' : h)) continue;
-      let ok = true;
-      if (h === 'start') ok = (await ladeStartHub(locale)).indexierbar;
-      else if (h === 'streaming') ok = await streamingHubIndexierbar(region);
-      else if (h === 'kino') ok = await kinoHubIndexierbar(region);
-      else if (h === 'reihen') ok = (await reihenKatalog()).liste.length > 0;
-      else if (h === 'schauspieler' || h === 'regisseur') ok = (await ladePersonenHub(h, locale)).indexierbar;
-      if (ok) hubs.push({ loc: h === 'start' ? `${SITE}/${locale}/` : `${SITE}/${locale}/${h}`, lastmod: stand.get(h) || null });
-    }
-    const recht = locale === 'de-de'
-      ? [`${SITE}/international`, ...RECHTSTEXTE.map((d) => `${SITE}/${d}`)].map((loc) => ({ loc, lastmod: null })) : [];
-    return [...wochen, ...hubs, ...recht];
-  }
-
-  return [];
+  return SITEMAP_URLS[bereich] ? SITEMAP_URLS[bereich](locale, stand) : [];
 }
 
 // Eine Sitemap-Datei darf hoechstens 50.000 URLs haben; Titel-Dateien sind groesser.
