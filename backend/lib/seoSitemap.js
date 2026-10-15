@@ -4,6 +4,7 @@
 // teuer fuer jeden Crawl-Treffer einzeln.
 import { gzipSync, gunzipSync } from 'node:zlib';
 import { pool } from '../db/pool.js';
+import { swrCache } from './swrCache.js';
 import { slugify } from './slug.js';
 import { SITE } from './seoRender.js';
 import { SEO_LOCALES, hatSeitenart, textLocale, regionFuerLocale, MIN_TITELTEXT } from './seoLocale.js';
@@ -139,18 +140,15 @@ async function urlsFuerBereich(locale, bereich) {
 // heissen ...-<bereich>-2.xml. Gecacht wird gzip-komprimiert (Speicher).
 const MAX_URLS = 45000;
 
-async function gzipTeile(locale, bereich) {
-  const key = `${locale}:${bereich}`;
-  const jetzt = Date.now();
-  const gecacht = cache.get(key);
-  if (gecacht && jetzt - gecacht.at < TTL_MS) return gecacht.teile;
-  const urls = await urlsFuerBereich(locale, bereich);
-  const teile = [];
-  for (let i = 0; i < Math.max(urls.length, 1); i += MAX_URLS) {
-    teile.push(gzipSync(urlset(urls.slice(i, i + MAX_URLS))));
-  }
-  cache.set(key, { at: jetzt, teile });
-  return teile;
+export function gzipTeile(locale, bereich) {
+  return swrCache(cache, `${locale}:${bereich}`, TTL_MS, async () => {
+    const urls = await urlsFuerBereich(locale, bereich);
+    const teile = [];
+    for (let i = 0; i < Math.max(urls.length, 1); i += MAX_URLS) {
+      teile.push(gzipSync(urlset(urls.slice(i, i + MAX_URLS))));
+    }
+    return teile;
+  });
 }
 
 // Gzip-Puffer der Seite (1-basiert); hinter dem Ende eine leere Liste statt Fehler.
@@ -174,11 +172,11 @@ async function dateiAnzahl(locale, bereich) {
   return Math.max(1, Math.ceil(r.n / MAX_URLS));
 }
 
-export async function sitemapIndex() {
-  const key = 'index';
-  const jetzt = Date.now();
-  const gecacht = cache.get(key);
-  if (gecacht && jetzt - gecacht.at < TTL_MS) return gecacht.xml;
+export function sitemapIndex() {
+  return swrCache(cache, 'index', TTL_MS, baueIndex);
+}
+
+async function baueIndex() {
   const zeilen = [];
   for (const locale of SEO_LOCALES) {
     for (const bereich of BEREICHE) {
@@ -190,6 +188,5 @@ export async function sitemapIndex() {
     }
   }
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${zeilen.join('\n')}\n</sitemapindex>`;
-  cache.set(key, { at: jetzt, xml });
   return xml;
 }

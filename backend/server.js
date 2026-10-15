@@ -46,6 +46,7 @@ import { mengenGrenze } from './middleware/rateLimit.js';
 import { starteSicherung } from './lib/sicherung.js';
 import { starteThemen } from './lib/themen.js';
 import { vorwaermen } from './lib/listenCache.js';
+import { starteSeoVorwaermen } from './lib/seoVorwaermen.js';
 import { ladeListe, listenSchluessel } from './routes/titles.js';
 import { ladeStreaming, streamingSchluessel } from './routes/streaming.js';
 
@@ -332,4 +333,6 @@ app.listen(port, () => {
     // Englische Erstbesucher (und PageSpeed/Lighthouse) kommen mit en/US.
     { schluessel: startkatalogSchluessel('en', 'US'), ermitteln: () => ladeStartkatalog('en', 'US') },
   ]);
+  // SEO-Hubs, Kataloge und Sitemaps vorbauen und alle ~50 min auffrischen.
+  if (process.env.NODE_ENV !== 'test') starteSeoVorwaermen();
 });

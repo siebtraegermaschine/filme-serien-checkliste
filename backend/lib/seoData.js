@@ -5,6 +5,7 @@
 // ein eigener Text ist KEINE Bedingung mehr. seoSitemap.js listet dieselben
 // Seiten ueber die *FuerSitemap-Funktionen unten.
 import { pool } from '../db/pool.js';
+import { swrCache } from './swrCache.js';
 import { slugify } from './slug.js';
 import { anbieterSlug } from './anbieter.js';
 import { regionFuerLocale, sprachVon, textLocale, localesMitText, titelTextReicht, MIN_TITELTEXT } from './seoLocale.js';
@@ -85,17 +86,15 @@ const MIN_KINOS_STADT = 3;
 // nennt sie inzwischen 'Disney Plus'/'Apple TV', die beiden Links entstanden
 // deshalb gar nicht mehr.
 const ANBIETER_SEITEN_TTL_MS = 60 * 60 * 1000;
-const anbieterSeitenCache = new Map();   // region -> { at, slugs:Set }
+const anbieterSeitenCache = new Map();   // region -> { at, wert:Set }
 
-async function anbieterMitSeite(region) {
-  const gecacht = anbieterSeitenCache.get(region);
-  if (gecacht && Date.now() - gecacht.at < ANBIETER_SEITEN_TTL_MS) return gecacht.slugs;
-  const { rows } = await pool.query(
-    `SELECT DISTINCT provider_id FROM streaming_cache WHERE region = $1`, [region]
-  );
-  const slugs = new Set(rows.map((r) => r.provider_id));
-  anbieterSeitenCache.set(region, { at: Date.now(), slugs });
-  return slugs;
+function anbieterMitSeite(region) {
+  return swrCache(anbieterSeitenCache, region, ANBIETER_SEITEN_TTL_MS, async () => {
+    const { rows } = await pool.query(
+      `SELECT DISTINCT provider_id FROM streaming_cache WHERE region = $1`, [region]
+    );
+    return new Set(rows.map((r) => r.provider_id));
+  });
 }
 
 export async function ladeSeoText(bereich, schluessel, locale) {
@@ -495,12 +494,11 @@ const ALTE_MODI = new Set(['jahr', 'genre']);
 export async function ladeBestenliste(art, modus, wert, locale) {
   const type = LISTEN_TYP[art];
   if (!type) return null;
+  return swrCache(bestenlisteCache, `${type}:${modus}:${wert}:${locale}`, BESTENLISTE_TTL_MS,
+    () => baueBestenliste(type, modus, wert, locale));
+}
 
-  const cacheKey = `${type}:${modus}:${wert}:${locale}`;
-  const jetzt = Date.now();
-  const gecacht = bestenlisteCache.get(cacheKey);
-  if (gecacht && jetzt - gecacht.at < BESTENLISTE_TTL_MS) return gecacht.wert;
-
+async function baueBestenliste(type, modus, wert, locale) {
   const region = regionFuerLocale(locale);
   const bed = await listeBedingung(type, modus, wert, region);
   if (!bed) return null;
@@ -514,7 +512,6 @@ export async function ladeBestenliste(art, modus, wert, locale) {
   const gesamt = rows.length ? rows[0].gesamt : 0;
   const mindest = modus === 'kino' ? MIN_TITEL_KINO : modus === 'land-genre' ? MIN_TITEL_LAND_GENRE : MIN_TITEL;
   if (!ALTE_MODI.has(modus) && gesamt < mindest) {
-    bestenlisteCache.set(cacheKey, { at: jetzt, wert: null });
     return null;
   }
 
@@ -555,7 +552,6 @@ export async function ladeBestenliste(art, modus, wert, locale) {
     sprache: de ? (n.sprache || null) : lokal.sprache,
     text, indexierbar: sortiert.length > 0,
   };
-  bestenlisteCache.set(cacheKey, { at: jetzt, wert: ergebnis });
   return ergebnis;
 }
 
@@ -592,12 +588,12 @@ function verwandteListen(modus, wert, katalog, locale = 'de-de') {
 // Textgenerators. Eine Handvoll gruppierter Abfragen, 1 h gecacht.
 const katalogCache = new Map();
 
-export async function bestenlistenKatalog(type, locale) {
+export function bestenlistenKatalog(type, locale) {
   const region = regionFuerLocale(locale);
-  const key = `${type}:${region}`;
-  const gecacht = katalogCache.get(key);
-  if (gecacht && Date.now() - gecacht.at < BESTENLISTE_TTL_MS) return gecacht.wert;
+  return swrCache(katalogCache, `${type}:${region}`, BESTENLISTE_TTL_MS, () => baueKatalog(type, region));
+}
 
+async function baueKatalog(type, region) {
   const erlaubteGenres = new Set(await alleGenres(type));
   const q = (sql, params) => pool.query(sql, params).then((r) => r.rows);
   const [jz, anb, gj, ga, themen, kino, neu, laender, sprachen, landGenre, laufzeit, staffeln] = await Promise.all([
@@ -658,24 +654,20 @@ export async function bestenlistenKatalog(type, locale) {
     laufzeit: laufzeit.filter((l) => l.n >= MIN_TITEL).map((l) => l.slug),
     staffeln: staffeln.filter((l) => l.n >= MIN_TITEL).map((l) => l.slug),
   };
-  katalogCache.set(key, { at: Date.now(), wert });
   return wert;
 }
 
 // Wie providerCatalog in watchProviders.js: kleine, sich selten aendernde
 // Liste, deshalb im Prozessspeicher statt bei jedem Aufruf neu aus der DB.
-let staedteCache = { at: 0, liste: [] };
-async function staedteListe() {
-  if (staedteCache.liste.length && Date.now() - staedteCache.at < BESTENLISTE_TTL_MS) {
-    return staedteCache.liste;
-  }
-  const { rows } = await pool.query(
-    `SELECT ort, count(*)::int AS anzahl FROM kinos WHERE ort IS NOT NULL AND ort <> '' GROUP BY ort`
-  );
-  // Orte in nicht-lateinischer Schrift ergeben einen leeren Slug (Link auf /kino/ selbst).
-  const liste = rows.filter((r) => slugify(r.ort));
-  staedteCache = { at: Date.now(), liste };
-  return liste;
+const staedteCache = new Map();
+export function staedteListe() {
+  return swrCache(staedteCache, 'liste', BESTENLISTE_TTL_MS, async () => {
+    const { rows } = await pool.query(
+      `SELECT ort, count(*)::int AS anzahl FROM kinos WHERE ort IS NOT NULL AND ort <> '' GROUP BY ort`
+    );
+    // Orte in nicht-lateinischer Schrift ergeben einen leeren Slug (Link auf /kino/ selbst).
+    return rows.filter((r) => slugify(r.ort));
+  });
 }
 
 // ---- Hub-Seiten (/filme, /serien, /kino, /streaming, /beste-filme,
@@ -750,14 +742,17 @@ export async function ladeKinoHub(locale) {
   };
 }
 
+// Die Anbieter-Zaehlung liest ~30.000 Zeilen je Region (kalt ~6 s) -- gecacht.
+const streamingHubCache = new Map();
+
 export async function ladeStreamingHub(locale) {
   const region = regionFuerLocale(locale);
-  const [{ rows }, text] = await Promise.all([
-    pool.query(
+  const [rows, text] = await Promise.all([
+    swrCache(streamingHubCache, region, BESTENLISTE_TTL_MS, async () => (await pool.query(
       `SELECT provider_id, provider_name, count(*)::int AS anzahl
          FROM streaming_cache WHERE region = $1 GROUP BY provider_id, provider_name ORDER BY anzahl DESC`,
       [region]
-    ),
+    )).rows),
     ladeSeoText('hub', 'streaming', locale),
   ]);
   return {
@@ -895,10 +890,11 @@ const TITEL_ZAEHLUNG = {
   regisseur: `SELECT director AS name, count(*)::int AS anzahl FROM titles WHERE director IS NOT NULL GROUP BY 1`,
 };
 
-async function personenRangliste(rolle, locale) {
-  const key = `${rolle}:${locale}`;
-  const gecacht = personenHubCache.get(key);
-  if (gecacht && Date.now() - gecacht.at < BESTENLISTE_TTL_MS) return gecacht.liste;
+export function personenRangliste(rolle, locale) {
+  return swrCache(personenHubCache, `${rolle}:${locale}`, BESTENLISTE_TTL_MS, () => baueRangliste(rolle, locale));
+}
+
+async function baueRangliste(rolle, locale) {
   const { rows } = await pool.query(
     `WITH zaehlung AS (${TITEL_ZAEHLUNG[rolle]}), ${PERSONEN_CTES}
      SELECT pc.tmdb_person_id, pc.name, pc.foto_pfad, z.anzahl
@@ -912,7 +908,6 @@ async function personenRangliste(rolle, locale) {
   const liste = rows.map((r) => ({
     tmdbPersonId: r.tmdb_person_id, name: r.name, slug: slugify(r.name), fotoPfad: r.foto_pfad, anzahl: r.anzahl,
   }));
-  personenHubCache.set(key, { at: Date.now(), liste });
   return liste;
 }
 
@@ -984,12 +979,8 @@ export async function ladeKinoStadt(stadtSlug, locale) {
 // Importtage) stehen dort.
 const wochenCache = new Map();   // 'streaming:DE' | 'kino:DE' -> { at, daten }
 
-async function gecacht(key, laden) {
-  const g = wochenCache.get(key);
-  if (g && Date.now() - g.at < BESTENLISTE_TTL_MS) return g.daten;
-  const daten = await laden();
-  wochenCache.set(key, { at: Date.now(), daten });
-  return daten;
+function gecacht(key, laden) {
+  return swrCache(wochenCache, key, BESTENLISTE_TTL_MS, laden);
 }
 
 function wochenKarte(r, datum) {
@@ -1004,7 +995,7 @@ function wochenKarte(r, datum) {
 // kommen zurueck; die Fensterfunktionen zaehlen vorher ueber den ganzen
 // Bestand, daran haengt die Importtag-Regel). Titel ohne eigene Titelseite
 // bleiben drin (ohne Link), sie zaehlen fuer die Schwelle mit.
-async function streamingWochen(region) {
+export async function streamingWochen(region) {
   return gecacht(`streaming:${region}`, async () => {
     const [{ rows }, { rows: anbieter }] = await Promise.all([
       pool.query(
@@ -1065,7 +1056,7 @@ export async function ladeKinoNeustarts(locale) {
   return { ...d, gestartet, naechste };
 }
 
-async function kinoNeustartsBasis(locale) {
+export async function kinoNeustartsBasis(locale) {
   const region = regionFuerLocale(locale);
   return gecacht(`kino:${region}`, async () => {
     const { rows } = await pool.query(
@@ -1159,13 +1150,16 @@ export async function alleBestenlisten(locale) {
 // ---- Reihen/Franchises (TMDB-Collections), nur Filme.
 
 const REIHEN_TTL_MS = 60 * 60 * 1000;
-let reihenCache = null;   // { at, liste, nachSlug, nachId }
+const reihenCache = new Map();   // 'alle' -> { at, wert:{ liste, nachSlug, nachId } }
 
 // Alle Reihen mit mindestens MIN_TITEL_REIHE Filmen, die eine Titelseite haben.
 // Eine Abfrage fuer alle (Uebersicht, Reihenseite, Sitemap, Titelseiten-Block),
 // deshalb prozessintern gecacht.
-async function reihenKatalog() {
-  if (reihenCache && Date.now() - reihenCache.at < REIHEN_TTL_MS) return reihenCache;
+export function reihenKatalog() {
+  return swrCache(reihenCache, 'alle', REIHEN_TTL_MS, baueReihenKatalog);
+}
+
+async function baueReihenKatalog() {
   const { rows } = await pool.query(
     `SELECT collection_id, collection_name, id, tmdb_id, title, year, erschienen_am::text AS erschienen_am,
             genres, rating, vote_count, poster_path, ${NOTE_SQL} AS note
@@ -1189,11 +1183,10 @@ async function reihenKatalog() {
       stimmen: titel.reduce((s, t) => s + (t.voteCount || 0), 0),
     };
   }).sort((a, b) => a.name.localeCompare(b.name, 'de'));
-  reihenCache = {
-    at: Date.now(), liste,
+  return {
+    liste,
     nachSlug: new Map(liste.map((r) => [r.slug, r])), nachId: new Map(liste.map((r) => [r.id, r])),
   };
-  return reihenCache;
 }
 
 // Kleiner Verweis auf der Titelseite: null, wenn der Film in keiner (qualifizierenden) Reihe ist.
@@ -1239,7 +1232,7 @@ export async function ladeReihe(slug, locale) {
 }
 
 // Nur fuer Tests: Cache verwerfen, damit frisch eingefuegte Testdaten sichtbar werden.
-export function reihenCacheLeeren() { reihenCache = null; }
+export function reihenCacheLeeren() { reihenCache.clear(); }
 
 export async function reihenFuerSitemap() {
   return (await reihenKatalog()).liste.map((r) => r.slug);
