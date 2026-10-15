@@ -24,3 +24,14 @@ test('Woerter sind je Sprache eindeutig und umkehrbar', () => {
     lokal.forEach((w) => assert.ok(deutschWort(locale, w), `${locale}:${w}`));
   }
 });
+
+test('kino/neustarts: lokales Unterwort, Rundreise und 301', () => {
+  const aus = lokalisierePfade('/en-gb/kino/neustarts /fr-fr/kino/neustarts" /de-de/kino/neustarts /en-gb/kino/berlin /en-gb/neu-auf/neustarts');
+  assert.equal(aus, '/en-gb/cinema/new-releases /fr-fr/cinema/nouveautes" /de-de/kino/neustarts /en-gb/cinema/berlin /en-gb/new-on/neustarts');
+  assert.deepEqual(pfadAnalysieren('/en-gb/cinema/new-releases'), { pfad: '/en-gb/kino/neustarts' });
+  assert.deepEqual(pfadAnalysieren('/pt-pt/cinema/estreias'), { pfad: '/pt-pt/kino/neustarts' });
+  assert.deepEqual(pfadAnalysieren('/en-gb/cinema/neustarts'), { pfad: '/en-gb/cinema/neustarts', umleiten: '/en-gb/cinema/new-releases' });
+  assert.deepEqual(pfadAnalysieren('/en-gb/kino/neustarts'), { pfad: '/en-gb/kino/neustarts', umleiten: '/en-gb/cinema/new-releases' });
+  assert.deepEqual(pfadAnalysieren('/de-de/kino/neustarts'), { pfad: '/de-de/kino/neustarts' });
+  assert.deepEqual(pfadAnalysieren('/en-gb/cinema/berlin'), { pfad: '/en-gb/kino/berlin' });
+});
