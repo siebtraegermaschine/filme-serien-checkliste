@@ -215,3 +215,26 @@ test('Titel-hreflang: Slug je Locale aus dem Rohtitel (Akzente)', () => {
   assert.match(en, /\/en-gb\/film\/amelie-7$/);
   assert.match(html, /hreflang="x-default" href="[^"]*\/de-de\/film\//);
 });
+
+test('gegenstueck: Partner, gleiche Uebersicht, sonst Start des Ziellandes', async () => {
+  const { gegenstueck } = await import('../lib/seoLocale.js');
+  const alt = [{ locale: 'de-de', pfad: '/de-de/film/a-1' }, { locale: 'en-gb', pfad: '/en-gb/film/a-1' }];
+  assert.equal(gegenstueck('en-gb', 'de-de', '/de-de/film/a-1', alt), '/en-gb/film/a-1');
+  assert.equal(gegenstueck('fr-fr', 'de-de', '/de-de/film/a-1', alt), '/fr-fr/');
+  assert.equal(gegenstueck('en-gb', 'de-de', '/de-de/streaming', undefined), '/en-gb/streaming');
+  assert.equal(gegenstueck('de-at', 'de-de', '/de-de/filme/drama', undefined), '/de-at/filme/drama');
+  assert.equal(gegenstueck('en-gb', 'de-de', '/de-de/streaming/netflix', undefined), '/en-gb/');
+  assert.equal(gegenstueck('en-gb', 'de-de', '/de-de/kino/berlin', undefined), '/en-gb/');
+  assert.equal(gegenstueck('en-gb', 'de-de', '/de-de/bestenlisten?seite=2', undefined), '/en-gb/');
+  assert.equal(gegenstueck('es-es', 'de-de', '/de-de/schauspieler', undefined), '/es-es/');
+});
+
+test('Kopf- und Fusszeile: locale zur App, Flaggen fuehren zum Gegenstueck', () => {
+  const html = seiteStreamingHub({ anbieter: [], text: null, indexierbar: true }, 'en-gb');
+  assert.match(html, /href="https:\/\/movietaste\.de\/\?von=app&amp;locale=en-gb"/);
+  const flaggen = html.match(/<nav class="footer-laender"[\s\S]*?<\/nav>/)[0];
+  assert.match(flaggen, /href="\/de-de\/streaming" data-locale="de-de"/);
+  assert.match(flaggen, /href="\/fr-fr\/streaming" data-locale="fr-fr"/);
+  const titelHtml = seiteTitelDetail(titel('x'.repeat(300)), 'en-gb');
+  assert.match(titelHtml, /\/t\/movie\/7\?von=titel&amp;locale=en-gb/);
+});

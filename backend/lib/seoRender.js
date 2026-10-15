@@ -3,7 +3,7 @@
 // bei der App-OG-Route (server.js) -- jede Funktion hier gibt ein fertiges
 // Dokument zurueck. Kein App-JS, eigenes seo.css (Architektur-Entscheidung 1).
 import { PERSON_TX } from './seoPersonen.js';
-import { clusterAlternates, hreflangCode, hatSeitenart, localeIndexierbar, sprachVon, regionFuerLocale, textLocale, localesMitText, istDeutsch } from './seoLocale.js';
+import { clusterAlternates, gegenstueck, hreflangCode, hatSeitenart, localeIndexierbar, sprachVon, regionFuerLocale, textLocale, localesMitText, istDeutsch } from './seoLocale.js';
 import { seoTexte, ABSCHNITTE, zahlFormat } from './seoTexte.js';
 import { genreAnzeige } from './genreNamen.js';
 import { listeSeitenPfad, THEMEN, LAUFZEITEN, STAFFELN } from './seoBestenlisten.js';
@@ -72,7 +72,7 @@ function kopfzeile(locale = 'de-de') {
   return `<header class="seo-kopf">
     <a class="marke" href="${SITE}/${locale}/">Movie<span>Match</span></a>
     <nav class="seo-nav">
-      <a href="${SITE}/?von=app">${attrEsc(seoTexte(locale).zurApp)}</a>
+      <a href="${SITE}/?von=app&amp;locale=${locale}">${attrEsc(seoTexte(locale).zurApp)}</a>
     </nav>
   </header>`;
 }
@@ -93,7 +93,7 @@ export const FOOTER_LAENDER = [
 ['de-at', '🇦🇹', 'Österreich'], ['de-ch', '🇨🇭', 'Schweiz'], ['fr-ch', '🇨🇭', 'Suisse'], ['en-ca', '🇨🇦', 'Canada'], ['fr-ca', '🇨🇦', 'Canada (français)'], ['en-us', '🇺🇸', 'United States'],
 ];
 
-function fusszeile(locale) {
+function fusszeile(locale, pfad, alternates) {
   const T = seoTexte(locale);
   const de = istDeutsch(locale);
   // Nicht-de-Locales verlinken nur Bereiche, die dort lokalisiert sind; die Rechtstexte
@@ -106,7 +106,7 @@ function fusszeile(locale) {
       ${bereiche.map(([pfad, name]) => `<a href="/${locale}/${pfad}">${name}</a>`).join('\n      ')}
     </nav>` : ''}
     <nav class="footer-laender" aria-label="Languages">
-      ${FOOTER_LAENDER.map(([l, flagge, name]) => `<a href="/${l}/" lang="${sprachVon(l)}" title="${name}" aria-label="${name}">${flagge}</a>`).join('\n      ')}
+      ${FOOTER_LAENDER.map(([l, flagge, name]) => `<a href="${gegenstueck(l, locale, pfad, alternates)}" data-locale="${l}" lang="${sprachVon(l)}" title="${name}" aria-label="${name}">${flagge}</a>`).join('\n      ')}
     </nav>
     <a href="${SITE}/${de ? 'impressum' : 'imprint'}.html">${attrEsc(T.impressum)}</a>
     <a href="${SITE}/${de ? 'datenschutz' : 'privacy'}.html">${attrEsc(T.datenschutz)}</a>
@@ -128,7 +128,7 @@ export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, 
   <main>
     ${bodyHtml}
   </main>
-  ${fussHtml || fusszeile(locale)}
+  ${fussHtml || fusszeile(locale, pfad, alternates)}
 </body>
 </html>`;
 }
@@ -395,7 +395,7 @@ export function seiteTitelDetail(titel, locale) {
       <div>
         <h1>${attrEsc(titel.title)}${titel.year ? ` <span class="hinweis">(${titel.year})</span>` : ''}</h1>
         <div class="meta-zeile">${attrEsc(bewertungsZeile(titel, locale))}</div>
-        <a class="cta" href="${SITE}/t/${titel.type}/${titel.tmdbId}?von=titel">${attrEsc(T.cta)}</a>
+        <a class="cta" href="${SITE}/t/${titel.type}/${titel.tmdbId}?von=titel&amp;locale=${locale}">${attrEsc(T.cta)}</a>
       </div>
     </div>
     <h2>${attrEsc(T.kurz)}</h2>

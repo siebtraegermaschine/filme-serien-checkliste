@@ -94,6 +94,26 @@ export function clusterAlternates(locale, pfad) {
   return locales.map((l) => ({ locale: l, pfad: `/${l}${rest}` }));
 }
 
+// Wohin die Laender-Flagge `ziel` von der Seite `pfad` (in `locale`) aus fuehrt:
+// (1) der hreflang-Partner der Seite, (2) dieselbe Uebersichtsseite (Start, Cluster-
+// und Region-Hubs) im Zielland, wenn es die Seitenart dort gibt, sonst (3) dessen Start.
+// Region-Unterseiten (Anbieter, Kinoorte) und Titel ohne Partner fuehren auf den Start:
+// ob es sie im Zielland gibt, haengt an dessen Katalog.
+const REGION_HUBS = ['streaming', 'kino', 'neu-auf'];
+export function gegenstueck(ziel, locale, pfad, alternates) {
+  const partner = (alternates || []).find((a) => a.locale === ziel);
+  if (partner) return partner.pfad;
+  if (pfad && !pfad.includes('?') && pfad.startsWith(`/${locale}`)) {
+    const teile = pfad.slice(locale.length + 1).split('/').filter(Boolean);
+    const einfach = teile.length === 1 && (CLUSTER_EINSEGMENTIG.includes(teile[0]) || REGION_HUBS.includes(teile[0]));
+    if (einfach && hatSeitenart(ziel, teile[0])) return `/${ziel}/${teile[0]}`;
+    if (teile.length === 2 && CLUSTER_MIT_UNTERSEITE[teile[0]] && hatSeitenart(ziel, CLUSTER_MIT_UNTERSEITE[teile[0]])) {
+      return `/${ziel}/${teile.join('/')}`;
+    }
+  }
+  return `/${ziel}/`;
+}
+
 // Alle aktiven Locales, die mit den vorhandenen Text-Locales eine Fassung haben
 // (hreflang-Cluster eines Titels/einer Person).
 export function localesMitText(textLocales) {

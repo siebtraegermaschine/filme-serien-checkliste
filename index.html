@@ -2237,10 +2237,24 @@ var REGIONEN_VERFUEGBAR = ['DE', 'AT', 'CH', 'GB', 'FR', 'IT', 'ES', 'NL',
                            'CZ', 'GR', 'HU', 'RO', 'BG', 'HR', 'SI', 'SK',
                            'LT', 'LV', 'EE', 'LU', 'MT', 'CY', 'US', 'IS',
                            'LI', 'CA', 'AU', 'NZ', 'MX', 'AR', 'CL', 'CO', 'BR'];
+// ?locale=xx-yy kommt von den SEO-Seiten (Link in die App). Nur die 13 Laender-Locales;
+// eine gespeicherte Wahl hat Vorrang, sonst wird die der Seite uebernommen und gespeichert.
+var SEO_LOCALES_APP = ['de-de','en-gb','es-es','fr-fr','it-it','nl-nl','pt-pt','de-at','de-ch','fr-ch','en-ca','fr-ca','en-us'];
+function urlLocale(){
+  try {
+    var l = new URLSearchParams(location.search).get('locale');
+    return SEO_LOCALES_APP.indexOf(l) !== -1 ? l : null;
+  } catch (e) { return null; }
+}
 function sprachErmittlung(){
   try {
     var s = localStorage.getItem(SPRACHE_KEY);
     if (SPRACHEN_VERFUEGBAR.indexOf(s) !== -1) return s;
+    var ul = urlLocale();
+    if (ul && SPRACHEN_VERFUEGBAR.indexOf(ul.slice(0, 2)) !== -1) {
+      try { localStorage.setItem(SPRACHE_KEY, ul.slice(0, 2)); } catch (e2) {}
+      return ul.slice(0, 2);
+    }
   } catch (e) {}
   var browser = String(navigator.language || 'de').toLowerCase().slice(0, 2);
   return SPRACHEN_VERFUEGBAR.indexOf(browser) !== -1 ? browser : 'en';
@@ -2249,6 +2263,11 @@ function regionErmittlung(){
   try {
     var r = localStorage.getItem(REGION_KEY);
     if (r && /^[A-Z]{2}$/.test(r)) return r;
+    var ul = urlLocale();
+    if (ul && REGIONEN_VERFUEGBAR.indexOf(ul.slice(3).toUpperCase()) !== -1) {
+      try { localStorage.setItem(REGION_KEY, ul.slice(3).toUpperCase()); } catch (e2) {}
+      return ul.slice(3).toUpperCase();
+    }
   } catch (e) {}
   // Browser-Region (z.B. "de-AT" -> AT), sonst DE. Die Liste entspricht
   // REGIONEN in backend/lib/i18n.js -- nur Laender, fuer die tatsaechlich
@@ -5766,8 +5785,9 @@ seitePing('/', document.referrer);
 (function vonParameterEntfernen(){
   try {
     var u = new URL(location.href);
-    if (!u.searchParams.has('von')) return;
+    if (!u.searchParams.has('von') && !u.searchParams.has('locale')) return;
     u.searchParams.delete('von');
+    u.searchParams.delete('locale');
     history.replaceState(null, '', u.pathname + (u.search || '') + (u.hash || ''));
   } catch (e) {}
 })();
