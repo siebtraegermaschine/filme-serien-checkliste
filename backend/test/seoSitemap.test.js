@@ -7,7 +7,8 @@ import express from 'express';
 import { pool } from '../db/pool.js';
 import seoRouter from '../routes/seo.js';
 import { bereichFuerLocale, BEREICHE } from '../lib/seoSitemap.js';
-import { lokalisierePfade } from '../lib/seoPfade.js';
+import { lokalisierePfade, pfadAnalysieren } from '../lib/seoPfade.js';
+import { SEITENARTEN, hubPfade, wochenArten, seitenartFuer } from '../lib/seoSeitenarten.js';
 import { SEO_LOCALES, hatSeitenart } from '../lib/seoLocale.js';
 
 // Startseiten-Texte aller Sprachen, damit der Start-Cluster in der leeren Testdatenbank vollstaendig ist.
@@ -61,13 +62,28 @@ test('Sitemap-URLs: 200, index,follow, canonical == loc', async () => {
 test('Hubs: index,follow <=> in der Sitemap', async () => {
   for (const locale of SEO_LOCALES) {
     const inSitemap = new Set(await locs(locale, 'hub'));
-    const pfade = ['', 'filme', 'serien', 'kino', 'streaming', 'bestenlisten', 'reihen', 'beste-filme', 'beste-serien', 'schauspieler', 'regisseur', 'neu-auf', 'kino/neustarts'];
+    const pfade = [...hubPfade().map((h) => (h.pfad === 'start' ? '' : h.pfad)), ...wochenArten().filter((a) => !a.liste).map((a) => a.pfad)];
     for (const p of pfade) {
       if (!hatSeitenart(locale, p.split('/')[0] || 'start')) continue;
       const pfad = lokalisierePfade(`/${locale}/${p}`);
       const { status, html } = await holen(pfad);
       const index = status === 200 && robots(html) === 'index,follow';
       assert.equal(inSitemap.has(SITE + pfad), index, `${pfad}: Sitemap und Seite widersprechen sich`);
+    }
+  }
+});
+
+test('Jede Sitemap-URL gehoert zur Seitenart ihres Bereichs', async () => {
+  const erste = (r) => (r.split('/')[2] ? seitenartFuer(r.replace(':locale', 'x')) : 'start');
+  for (const bereich of BEREICHE) {
+    const erlaubt = new Set(SEITENARTEN.filter((s) => s.sitemap?.bereich === bereich).flatMap((s) => s.routen).map(erste));
+    for (const locale of SEO_LOCALES) {
+      if (!bereichFuerLocale(locale, bereich)) continue;
+      const alle = (await locs(locale, bereich)).filter((l) => l.startsWith(`${SITE}/${locale}/`));
+      for (const loc of stichprobe(alle, 40)) {
+        const intern = pfadAnalysieren(loc.slice(SITE.length)).pfad;
+        assert.ok(erlaubt.has(seitenartFuer(intern)), `${loc}: Seitenart ${seitenartFuer(intern)} passt nicht zu Bereich ${bereich}`);
+      }
     }
   }
 });

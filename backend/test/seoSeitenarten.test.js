@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import { LOCALE_KONFIG, localeIndexierbar, localesMitText } from '../lib/seoLocale.js';
 import { slugify } from '../lib/slug.js';
 import router from '../routes/seo.js';
+import { SITEMAP_URLS } from '../lib/seoSeitenartenDaten.js';
 import { lokalWort, deutschWort, lokalisierePfade } from '../lib/seoPfade.js';
 import { BEREICHE, bereichFuerLocale as altBereich } from '../lib/seoSitemap.js';
 import {
@@ -76,4 +77,17 @@ test('Router registriert genau die Routen des Verzeichnisses in dessen Reihenfol
   const ist = router.stack.filter((l) => l.route).map((l) => String(l.route.path));
   const soll = SEITENARTEN.flatMap((s) => s.routen).map(String);
   assert.deepEqual(ist, soll);
+});
+
+test('Jedes Pfadwort steht in allen Sprachen; jeder Sitemap-Bereich hat Seitenart und URL-Funktion', () => {
+  const sprachen = [...new Set(Object.values(LOCALE_KONFIG).map((k) => k.sprache))].filter((x) => x !== 'de');
+  for (const [wort, je] of Object.entries(PFADWOERTER)) {
+    for (const sp of sprachen) assert.ok(je[sp], `${wort} fehlt in ${sp}`);
+  }
+  for (const sp of sprachen) assert.ok(UNTERWOERTER.kino.neustarts[sp], `neustarts fehlt in ${sp}`);
+  for (const b of SITEMAP_BEREICHE) {
+    assert.ok(SEITENARTEN.some((s) => s.sitemap?.bereich === b && s.routen.length), `${b}: keine Seitenart`);
+    assert.equal(typeof SITEMAP_URLS[b], 'function', `${b}: keine URL-Funktion`);
+  }
+  for (const s of SEITENARTEN.filter((x) => x.sitemap)) assert.ok(SITEMAP_BEREICHE.includes(s.sitemap.bereich), s.id);
 });
