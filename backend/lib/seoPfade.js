@@ -4,29 +4,14 @@
 // in jeder URL der Antwort (Links, canonical, hreflang, JSON-LD, Sitemap).
 // de-de bleibt unveraendert.
 import { LOCALE_KONFIG } from './seoLocale.js';
+import { PFADWOERTER, UNTERWOERTER as UNTER_JE_WORT } from './seoSeitenarten.js';
 
-const DE = ['film', 'serie', 'filme', 'serien', 'streaming', 'bestenlisten', 'beste-filme', 'beste-serien',
-  'kino', 'neu-auf', 'reihen', 'regisseur', 'schauspieler'];
-
-const WOERTER = {
-  en: ['movie', 'tv-show', 'movies', 'tv-shows', 'streaming', 'rankings', 'best-movies', 'best-tv-shows',
-    'cinema', 'new-on', 'collections', 'directors', 'actors'],
-  fr: ['film', 'serie', 'films', 'series', 'streaming', 'classements', 'meilleurs-films', 'meilleures-series',
-    'cinema', 'nouveautes-sur', 'sagas', 'realisateurs', 'acteurs'],
-  es: ['pelicula', 'serie', 'peliculas', 'series', 'streaming', 'rankings', 'mejores-peliculas', 'mejores-series',
-    'cine', 'novedades-en', 'sagas', 'directores', 'actores'],
-  it: ['film', 'serie-tv', 'i-film', 'le-serie-tv', 'streaming', 'classifiche', 'migliori-film', 'migliori-serie-tv',
-    'cinema', 'novita-su', 'saghe', 'registi', 'attori'],
-  nl: ['film', 'serie', 'films', 'series', 'streaming', 'ranglijsten', 'beste-films', 'beste-series',
-    'bioscoop', 'nieuw-op', 'filmreeksen', 'regisseurs', 'acteurs'],
-  pt: ['filme', 'serie', 'filmes', 'series', 'streaming', 'rankings', 'melhores-filmes', 'melhores-series',
-    'cinema', 'novidades-no', 'colecoes', 'realizadores', 'atores'],
-};
+const DE = Object.keys(PFADWOERTER);
+const SPRACHEN = Object.keys(PFADWOERTER.film);
+const WOERTER = Object.fromEntries(SPRACHEN.map((sp) => [sp, DE.map((d) => PFADWOERTER[d][sp])]));
 
 // Zweites Segment, nur hinter kino: /<locale>/kino/neustarts -> .../cinema/new-releases.
-const UNTERWOERTER = {
-  neustarts: { en: 'new-releases', fr: 'nouveautes', es: 'estrenos', it: 'nuove-uscite', nl: 'nieuwe-films', pt: 'estreias' },
-};
+const UNTERWOERTER = UNTER_JE_WORT.kino;
 const unterwort = (locale, deutsch) => UNTERWOERTER[deutsch]?.[LOCALE_KONFIG[locale]?.sprache] || deutsch;
 const unterDeutsch = (locale, wort) =>
   Object.keys(UNTERWOERTER).find((d) => UNTERWOERTER[d][LOCALE_KONFIG[locale]?.sprache] === wort) || null;
