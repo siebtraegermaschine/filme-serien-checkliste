@@ -6,12 +6,18 @@ const fehler = [];
 const zaehlung = {};
 const meldung = (m) => { fehler.push(m); console.log('FEHLER', m); };
 
-let nr = 0;
+// Das Mengenlimit der Seite liegt bei 120 Anfragen/min/IP: gedrosselt, bei 429 mit Pause wiederholt.
+const PAUSE_MS = 600;
+const warte = (ms) => new Promise((ok) => setTimeout(ok, ms));
 async function holen(url) {
-  const t0 = Date.now();
-  const r = await fetch(url, { redirect: 'manual', headers: { 'user-agent': 'seo-konsistenz-live' } });
-  const html = await r.text();
-  return { status: r.status, html, ms: Date.now() - t0, location: r.headers.get('location') };
+  for (let versuch = 0; ; versuch++) {
+    await warte(PAUSE_MS);
+    const t0 = Date.now();
+    const r = await fetch(url, { redirect: 'manual', headers: { 'user-agent': 'seo-konsistenz-live' } });
+    const html = await r.text();
+    if (r.status === 429 && versuch < 4) { await warte(20000); continue; }
+    return { status: r.status, html, ms: Date.now() - t0, location: r.headers.get('location') };
+  }
 }
 const robots = (h) => (h.match(/<meta name="robots" content="([^"]*)">/) || [])[1];
 const canonical = (h) => (h.match(/<link rel="canonical" href="([^"]*)">/) || [])[1];
