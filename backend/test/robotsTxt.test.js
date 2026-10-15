@@ -66,7 +66,7 @@ test('Sitemap-Dateien sind trotz "Disallow: /" erlaubt', () => {
 
 test('SEO-Seiten und Startseite bleiben erlaubt', () => {
   for (const pfad of ['/', '/de-de/film/x-1', '/de-de/serie/x-1', '/og-image.png', '/manifest.json',
-    '/impressum.html', '/datenschutz.html', '/nutzungsbedingungen.html', '/imprint.html', '/privacy.html', '/terms.html', '/seo.css', '/consent.js']) {
+    '/impressum.html', '/datenschutz.html', '/nutzungsbedingungen.html', '/imprint.html', '/privacy.html', '/terms.html', '/seo.css', '/consent.js', '/sprachhinweis.js', '/international']) {
     assert.ok(robotsErlaubt(ROBOTS_TEXT, pfad), `${pfad} sollte erlaubt sein`);
   }
 });

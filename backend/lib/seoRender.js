@@ -59,6 +59,7 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   ${ohneHreflang || !xDefault ? '' : `<link rel="alternate" hreflang="x-default" href="${attrEsc(xDefault)}">`}
   <link rel="stylesheet" href="/seo.css">
   <script src="/consent.js" defer></script>
+  <script src="/sprachhinweis.js" defer></script>
   <link rel="icon" href="${attrEsc(favicon || '/favicon-32.png')}">
   <meta property="og:site_name" content="MovieMatch">
   <meta property="og:url" content="${attrEsc(url)}">
@@ -939,7 +940,27 @@ export function seiteStart(daten, locale) {
     ${einleitungHtml(daten.text, locale)}
     ${kachelnHtml ? `<ul class="start-bereiche">${kachelnHtml}</ul>` : ''}
   `;
-  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, jsonLd, bodyHtml });
+  // x-default des Start-Clusters: die Sprachauswahl statt einer einzelnen Fassung.
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, jsonLd, bodyHtml, xDefault: indexierbar ? '/international' : undefined });
+}
+
+// /international: Auswahl von Land und Sprache, x-default der Startseiten. Eigenes
+// Gesicht (englisch/mehrsprachig), weil die Seite zu keiner Locale gehoert.
+export function seiteSprachwahl() {
+  const pfad = '/international';
+  const titelZeile = 'MovieMatch – Choose your country and language';
+  const beschreibung = 'MovieMatch: movies, TV shows, cinema and streaming. Choose your country and language – Filme, Serien, Kino und Streaming.';
+  const alternates = FOOTER_LAENDER.map(([l]) => ({ locale: l, pfad: `/${l}/` }));
+  const liste = FOOTER_LAENDER.map(([l, flagge, name]) => `<li>
+      <a href="/${l}/" hreflang="${hreflangCode(l)}" lang="${sprachVon(l)}"><strong>${flagge} ${attrEsc(name)}</strong></a>
+    </li>`).join('');
+  const bodyHtml = `
+    <h1>Choose your country and language</h1>
+    <p>MovieMatch helps you decide what to watch – movies, TV shows, cinema and streaming. Wähle dein Land und deine Sprache · Choisissez votre pays et votre langue · Elige tu país y tu idioma.</p>
+    <ul class="start-bereiche">${liste}</ul>
+  `;
+  const jsonLd = [{ '@context': 'https://schema.org', '@type': 'WebPage', name: titelZeile, url: `${SITE}${pfad}` }];
+  return dokument({ locale: 'en-gb', pfad, titelZeile, beschreibung, indexierbar: true, jsonLd, bodyHtml, alternates, xDefault: pfad });
 }
 
 // Zwei Saetze nur aus Katalogdaten, fuer Personen ohne Redaktionstext und

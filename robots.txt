@@ -21,6 +21,8 @@
 
 User-agent: *
 Allow: /$
+Allow: /international$
+Allow: /sprachhinweis.js
 Allow: /de-de/
 Allow: /fr-fr/
 Allow: /en-gb/

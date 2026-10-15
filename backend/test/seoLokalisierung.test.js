@@ -3,7 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { seiteStreamingHub, seitePerson, seitePersonenHub, seiteTitelDetail, seiteStart, seite404, seiteFilmeSerienHub, seiteBestenlistenUebersicht } from '../lib/seoRender.js';
+import { seiteSprachwahl, seiteStreamingHub, seitePerson, seitePersonenHub, seiteTitelDetail, seiteStart, seite404, seiteFilmeSerienHub, seiteBestenlistenUebersicht } from '../lib/seoRender.js';
 import { SEO_TEXTE, ABSCHNITTE, seoTexte } from '../lib/seoTexte.js';
 import { LOCALE_KONFIG, hatSeitenart, seitenartFuerPfad, titelTextReicht } from '../lib/seoLocale.js';
 import { bereichFuerLocale, BEREICHE } from '../lib/seoSitemap.js';
@@ -237,4 +237,16 @@ test('Kopf- und Fusszeile: locale zur App, Flaggen fuehren zum Gegenstueck', () 
   assert.match(flaggen, /href="\/fr-fr\/streaming" data-locale="fr-fr"/);
   const titelHtml = seiteTitelDetail(titel('x'.repeat(300)), 'en-gb');
   assert.match(titelHtml, /\/t\/movie\/7\?von=titel&amp;locale=en-gb/);
+});
+
+test('Start-x-default zeigt auf /international; Sprachwahl: 13 hreflang + x-default auf sich', () => {
+  const start = seiteStart({ text: 'Ein Text.', indexierbar: true }, 'de-de');
+  assert.match(start, /hreflang="x-default" href="https:\/\/movietaste\.de\/international"/);
+  assert.doesNotMatch(seiteStart({ text: null, indexierbar: false }, 'de-de'), /x-default/);
+  const html = seiteSprachwahl();
+  assert.equal(meta(html, 'robots'), 'index,follow');
+  assert.equal([...html.matchAll(/<link rel="alternate" hreflang="(?!x-default)/g)].length, 13);
+  assert.match(html, /hreflang="x-default" href="https:\/\/movietaste\.de\/international"/);
+  assert.equal([...html.matchAll(/<li>\s*<a href="\/[a-z]{2}-[a-z]{2}\/"/g)].length, 13);
+  assert.match(html, /<script src="\/sprachhinweis.js" defer>/);
 });

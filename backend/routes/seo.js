@@ -12,7 +12,7 @@ import {
 } from '../lib/seoData.js';
 import {
   seiteTitelDetail, seiteGenre, seiteAnbieter, seiteBestenliste, seiteKinoStadt, seite404, SITE,
-  seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart, seitePersonenHub, seiteBestenlistenUebersicht, seiteReihenUebersicht, seiteReihe,
+  seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteSprachwahl, seiteStart, seitePersonenHub, seiteBestenlistenUebersicht, seiteReihenUebersicht, seiteReihe,
   seiteNeuAufUebersicht, seiteNeuAufAnbieter, seiteKinoNeustarts,
 } from '../lib/seoRender.js';
 import { gunzipSync, gzipSync } from 'node:zlib';
@@ -311,6 +311,9 @@ router.get(/^\/sitemap-([a-z]{2}-[a-z]{2})-([a-z_]+)(?:-(\d{1,2}))?\.xml$/, GREN
 //     ab, bevor express.static sie ausliefern kann.
 // Hintergrund: robots.txt gibt /de-de/ ausdruecklich frei, der Pfad lief aber
 // bis 16.08.2026 in einen 404 -- Crawler landeten auf einer Fehlerseite.
+router.get('/international', GRENZE, (req, res) => {
+  res.type('html').send(seiteSprachwahl());
+});
 router.get('/:locale', GRENZE, async (req, res, next) => {
   const { locale } = req.params;
   if (!localeGueltig(locale)) return next();

@@ -133,7 +133,7 @@ async function urlsFuerBereich(locale, bereich) {
       if (ok) hubs.push({ loc: h === 'start' ? `${SITE}/${locale}/` : `${SITE}/${locale}/${h}`, lastmod: stand.get(h) || null });
     }
     const recht = locale === 'de-de'
-      ? RECHTSTEXTE.map((d) => ({ loc: `${SITE}/${d}`, lastmod: null })) : [];
+      ? [`${SITE}/international`, ...RECHTSTEXTE.map((d) => `${SITE}/${d}`)].map((loc) => ({ loc, lastmod: null })) : [];
     return [...wochen, ...hubs, ...recht];
   }
 

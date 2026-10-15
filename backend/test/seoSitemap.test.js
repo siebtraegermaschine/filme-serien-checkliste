@@ -72,6 +72,14 @@ test('Hubs: index,follow <=> in der Sitemap', async () => {
   }
 });
 
+test('/international: 200, index,follow, canonical, in der de-de-Hub-Sitemap', async () => {
+  const { status, html } = await holen('/international');
+  assert.equal(status, 200);
+  assert.equal(robots(html), 'index,follow');
+  assert.equal(canonical(html), `${SITE}/international`);
+  assert.ok((await locs('de-de', 'hub')).includes(`${SITE}/international`));
+});
+
 test('hreflang: Ziele sind 200, index und verlinken zurueck; x-default nur mit Cluster', async () => {
   for (const locale of SEO_LOCALES) {
     for (const p of ['', 'filme', 'streaming', 'kino']) {
