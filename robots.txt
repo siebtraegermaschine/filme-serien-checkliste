@@ -38,6 +38,9 @@ Allow: /sitemap-*.xml
 Allow: /impressum.html
 Allow: /datenschutz.html
 Allow: /nutzungsbedingungen.html
+Allow: /imprint.html
+Allow: /privacy.html
+Allow: /terms.html
 Allow: /seo.css
 Allow: /consent.js
 Allow: /og-image.png

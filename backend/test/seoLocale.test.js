@@ -76,7 +76,7 @@ test('clusterAlternates: gleiche Adresse in jedem indexierbaren Locale, region-a
   assert.ok(genre.some((a) => a.locale === 'de-de' && a.pfad === '/de-de/filme/drama'));
   assert.ok(genre.some((a) => a.locale === 'es-es'));
   assert.ok(clusterAlternates('en-gb', '/en-gb/reihen/star-wars'));
-  for (const pfad of ['/en-gb/streaming/netflix', '/en-gb/kino/berlin', '/en-gb/beste-filme/anbieter/netflix', '/en-gb/neu-auf', '/en-gb/filme?seite=2']) {
+  for (const pfad of ['/en-gb/streaming', '/en-gb/streaming/netflix', '/en-gb/kino/berlin', '/en-gb/beste-filme/anbieter/netflix', '/en-gb/neu-auf', '/en-gb/filme?seite=2']) {
     assert.equal(clusterAlternates('en-gb', pfad), undefined, pfad);
   }
   assert.equal(clusterAlternates('en-gb', '/de-de/filme'), undefined); // Pfad passt nicht zum Locale

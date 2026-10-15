@@ -234,6 +234,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     tmdbId: titel.tmdb_id,
     type: titel.type,
     slug: slugify(titel.title, locale),
+    slugBasis: titel.title, // Rohtitel: Slug je Gegenstueck-Locale (hreflang)
     title: anzeigeTitel(titel, locale),
     year: titel.year,
     genres: titel.genres || [],

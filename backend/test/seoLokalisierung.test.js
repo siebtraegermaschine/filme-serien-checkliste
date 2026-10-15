@@ -3,7 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { seitePerson, seitePersonenHub, seiteTitelDetail, seiteStart, seite404, seiteFilmeSerienHub, seiteBestenlistenUebersicht } from '../lib/seoRender.js';
+import { seiteStreamingHub, seitePerson, seitePersonenHub, seiteTitelDetail, seiteStart, seite404, seiteFilmeSerienHub, seiteBestenlistenUebersicht } from '../lib/seoRender.js';
 import { SEO_TEXTE, ABSCHNITTE, seoTexte } from '../lib/seoTexte.js';
 import { LOCALE_KONFIG, hatSeitenart, seitenartFuerPfad, titelTextReicht } from '../lib/seoLocale.js';
 import { bereichFuerLocale, BEREICHE } from '../lib/seoSitemap.js';
@@ -196,4 +196,22 @@ test('Laender-Locales: de-at deutsch mit deutschem Chrome, en-ca englisch, beide
   assert.match(ca, /<html lang="en">/);
   assert.equal(meta(ca, 'robots'), 'index,follow');
   assert.match(ca, /imprint\.html/);
+});
+
+test('Region-Seiten: Streaming-Hub nur Self-hreflang, kein x-default; Start-Links locale-eigen', () => {
+  const html = seiteStreamingHub({ text: null, anbieter: [], indexierbar: true }, 'en-gb');
+  assert.equal((html.match(/rel="alternate" hreflang=/g) || []).length, 1);
+  assert.match(html, /hreflang="en-GB" href="https:\/\/movietaste\.de\/en-gb\/streaming"/);
+  assert.doesNotMatch(html, /x-default/);
+  assert.match(html, /class="marke" href="https:\/\/movietaste\.de\/en-gb\/"/);
+  assert.doesNotMatch(html, /href="https:\/\/movietaste\.de\/"/);
+});
+
+test('Titel-hreflang: Slug je Locale aus dem Rohtitel (Akzente)', () => {
+  const html = seiteTitelDetail(titel('Text', { title: 'Amélie', slug: 'amelie', slugBasis: 'Amélie', textLocales: ['de-de', 'en-gb'] }), 'en-gb');
+  const de = html.match(/hreflang="de-DE" href="([^"]*)"/)[1];
+  const en = html.match(/hreflang="en-GB" href="([^"]*)"/)[1];
+  assert.match(de, /\/de-de\/film\/am-lie-7$|\/de-de\/film\/amelie-7$/);
+  assert.match(en, /\/en-gb\/film\/amelie-7$/);
+  assert.match(html, /hreflang="x-default" href="[^"]*\/de-de\/film\//);
 });

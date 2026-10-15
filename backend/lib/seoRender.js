@@ -33,7 +33,7 @@ const BILD_FALLBACK = SITE + '/og-image.png';
 // Wer beides gleichzeitig macht (Disallow + noindex), erreicht das Gegenteil --
 // bereits indexierte Seiten blieben dann im Index stehen.
 
-function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis, favicon }) {
+function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis, favicon, xDefault: xDefaultPfad }) {
   // basis: Ursprung fuer canonical/og/hreflang -- Standard movietaste.de.
   const wurzel = basis || SITE;
   const url = wurzel + pfad;
@@ -43,9 +43,11 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   const hreflangs = ohneHreflang ? '' : (alternates && alternates.length ? alternates : [{ locale, pfad }])
     .map((a) => `<link rel="alternate" hreflang="${attrEsc(hreflangCode(a.locale))}" href="${attrEsc(wurzel + a.pfad)}">`)
     .join('\n  ');
-  // x-default zeigt auf die de-de-Fassung, sofern der Cluster sie kennt.
+  // x-default nur bei echtem Cluster (>= 2 Fassungen): auf die de-de-Fassung bzw. einen
+  // ausdruecklichen Pfad. Ohne Cluster waere er ein Verweis auf sich selbst.
   const de = (alternates || []).find((a) => a.locale === 'de-de');
-  const xDefault = de ? wurzel + de.pfad : url;
+  const cluster = (alternates || []).length >= 2;
+  const xDefault = xDefaultPfad ? wurzel + xDefaultPfad : (cluster && de ? wurzel + de.pfad : null);
   const ld = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
   return `<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -54,7 +56,7 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   <meta name="robots" content="${robots}">
   <link rel="canonical" href="${attrEsc(url)}">
   ${hreflangs}
-  ${ohneHreflang ? '' : `<link rel="alternate" hreflang="x-default" href="${attrEsc(xDefault)}">`}
+  ${ohneHreflang || !xDefault ? '' : `<link rel="alternate" hreflang="x-default" href="${attrEsc(xDefault)}">`}
   <link rel="stylesheet" href="/seo.css">
   <script src="/consent.js" defer></script>
   <link rel="icon" href="${attrEsc(favicon || '/favicon-32.png')}">
@@ -68,7 +70,7 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
 
 function kopfzeile(locale = 'de-de') {
   return `<header class="seo-kopf">
-    <a class="marke" href="${SITE}/">Movie<span>Match</span></a>
+    <a class="marke" href="${SITE}/${locale}/">Movie<span>Match</span></a>
     <nav class="seo-nav">
       <a href="${SITE}/?von=app">${attrEsc(seoTexte(locale).zurApp)}</a>
     </nav>
@@ -112,14 +114,14 @@ function fusszeile(locale) {
   </footer>`;
 }
 
-export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml, basis, kopfHtml, fussHtml, favicon }) {
+export function dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, bodyHtml, basis, kopfHtml, fussHtml, favicon, xDefault }) {
   // Nicht freigegebene Locales sind nie im Index, egal was die Seitenfunktion meldet.
   if (!localeIndexierbar(locale)) indexierbar = false;
   if (indexierbar && !alternates) alternates = clusterAlternates(locale, pfad);
   return `<!DOCTYPE html>
 <html lang="${sprachVon(locale)}">
 <head>
-  ${kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis, favicon })}
+  ${kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates, basis, favicon, xDefault })}
 </head>
 <body>
   ${kopfHtml || kopfzeile(locale)}
@@ -302,7 +304,7 @@ export function seiteTitelDetail(titel, locale) {
   const erstesGenre = (titel.genres || [])[0];
 
   const kette = [
-    { label: T.start, href: SITE + '/' },
+    { label: T.start, href: `${SITE}/${locale}/` },
     ...(hatSeitenart(locale, 'hub') ? [{ label: hubWort, href: `/${locale}/${listenWort}` }] : []),
     ...(erstesGenre && hatSeitenart(locale, 'genre') ? [{ label: genreAnzeige(erstesGenre, sprache), href: genreHref(erstesGenre, titel.type, locale) }] : []),
     { label: titel.title },
@@ -417,7 +419,7 @@ export function seiteTitelDetail(titel, locale) {
   // hreflang-Cluster: nur indexierbare Locales mit Text; die eigene Seite gehoert nur dazu, wenn sie indexiert wird.
   const alternates = (titel.textLocales || [])
     .filter((l) => localeIndexierbar(l))
-    .map((l) => ({ locale: l, pfad: `/${l}/${artWort}/${titel.slug}-${titel.tmdbId}` }));
+    .map((l) => ({ locale: l, pfad: `/${l}/${artWort}/${titel.slugBasis ? slugify(titel.slugBasis, l) : titel.slug}-${titel.tmdbId}` }));
   return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates: alternates.length ? alternates : undefined, bodyHtml });
 }
 
@@ -477,7 +479,7 @@ export function seiteGenre(daten, locale) {
   const titelZeile = `${T.genreH1(daten.genre, hubWort)} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.genreBeschr(daten.genre);
   const kette = [
-    { label: S.start, href: SITE + '/' },
+    { label: S.start, href: `${SITE}/${locale}/` },
     { label: hubWort, href: `/${locale}/${listenWort}` },
     { label: daten.genre },
   ];
@@ -504,7 +506,7 @@ export function seiteAnbieter(daten, locale) {
   const titelZeile = `${T.anbieterH1(daten.name)} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.anbieterBeschr(daten.name);
   const kette = [
-    { label: S.start, href: SITE + '/' },
+    { label: S.start, href: `${SITE}/${locale}/` },
     { label: S.bereiche.streaming, href: `/${locale}/streaming` },
     { label: daten.name },
   ];
@@ -584,7 +586,7 @@ export function seiteBestenliste(daten, locale) {
   const titelZeile = `${ueberschrift} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.listeBeschr(ueberschrift);
   const kette = [
-    { label: S.start, href: SITE + '/' },
+    { label: S.start, href: `${SITE}/${locale}/` },
     { label: S.bereiche.bestenlisten, href: `${SITE}/${locale}/bestenlisten` },
     { label: T.besteWort(wortTyp), href: `/${locale}/${listenWort}` },
     { label: de ? (ueberschrift.replace(/^Beste (Filme|Serien) /, '') || ueberschrift) : ueberschrift },
@@ -639,7 +641,7 @@ export function seiteKinoStadt(daten, locale) {
   const titelZeile = `${T.kinoStadtTitel(daten.ort)} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.kinoStadtBeschr(daten.ort);
   const kette = [
-    { label: S.start, href: SITE + '/' },
+    { label: S.start, href: `${SITE}/${locale}/` },
     { label: S.bereiche.kino, href: `/${locale}/kino` },
     { label: daten.ort },
   ];
@@ -677,7 +679,7 @@ export function seiteFilmeSerienHub(daten, locale, art) {
   const pfad = `/${locale}/${art}`;
   const titelZeile = `${T.entdeckenTitel(hubWort)} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.entdeckenBeschr(hubWort);
-  const kette = [{ label: S.start, href: SITE + '/' }, { label: hubWort }];
+  const kette = [{ label: S.start, href: `${SITE}/${locale}/` }, { label: hubWort }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: titelListe(daten.titel, artWort, locale),
@@ -712,7 +714,7 @@ export function seitePersonenHub(daten, locale) {
   const cfg = tx ? tx.hub[daten.rolle] : PERSONEN_HUB[daten.rolle];
   const pfad = `/${locale}/${daten.rolle}`;
   const beschreibung = kurzfassung(daten.text) || cfg.beschreibung;
-  const kette = [{ label: tx ? seoTexte(locale).start : 'Start', href: SITE + '/' }, { label: cfg.titel }];
+  const kette = [{ label: tx ? seoTexte(locale).start : 'Start', href: `${SITE}/${locale}/` }, { label: cfg.titel }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: cfg.titelZeile,
     itemListElement: daten.personen.map((p, i) => listItem(i, p.name, `${SITE}/${locale}/${daten.rolle}/${p.slug}-${p.tmdbPersonId}`)),
@@ -738,7 +740,7 @@ export function seiteKinoHub(daten, locale) {
   const pfad = `/${locale}/kino`;
   const titelZeile = `${T.kinoHubTitel} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.kinoHubBeschr;
-  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.kino }];
+  const kette = [{ label: S.start, href: `${SITE}/${locale}/` }, { label: S.bereiche.kino }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: daten.staedte.map((s, i) => listItem(i, s.ort, `${SITE}/${locale}/kino/${s.slug}`)),
@@ -763,7 +765,7 @@ export function seiteStreamingHub(daten, locale) {
   const pfad = `/${locale}/streaming`;
   const titelZeile = `${T.streamingHubTitel} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.streamingHubBeschr;
-  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.streaming }];
+  const kette = [{ label: S.start, href: `${SITE}/${locale}/` }, { label: S.bereiche.streaming }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: daten.anbieter.map((a, i) => listItem(i, a.name, `${SITE}/${locale}/streaming/${a.slug}`)),
@@ -784,7 +786,7 @@ export function seiteBestenlistenUebersicht(daten, locale) {
   const pfad = `/${locale}/bestenlisten`;
   const titelZeile = `${T.bestenTitel} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.bestenBeschr;
-  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.bestenlisten }];
+  const kette = [{ label: S.start, href: `${SITE}/${locale}/` }, { label: S.bereiche.bestenlisten }];
   const eintraege = T.bestenEintraege;
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
@@ -809,7 +811,7 @@ export function seiteBestenlisteHub(daten, locale) {
   const pfad = `/${locale}/${listenWort}`;
   const titelZeile = `${T.besteHubTitel(wortTyp)} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.besteHubBeschr(wortTyp);
-  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.bestenlisten, href: `${SITE}/${locale}/bestenlisten` }, { label: T.besteWort(wortTyp) }];
+  const kette = [{ label: S.start, href: `${SITE}/${locale}/` }, { label: S.bereiche.bestenlisten, href: `${SITE}/${locale}/bestenlisten` }, { label: T.besteWort(wortTyp) }];
   const jsonLd = [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: titelZeile }, brotkrumenJsonLd(kette)];
   const jahreHtml = daten.jahre.map((j) => `<a class="chip" href="/${locale}/${listenWort}/jahr/${j}">${j}</a>`).join('');
   const genreHtml = daten.genres.map((g) => `<a class="chip" href="/${locale}/${listenWort}/genre/${slugify(g)}">${attrEsc(genreAnzeige(g, sprache))}</a>`).join('');
@@ -842,7 +844,7 @@ export function seiteReihe(daten, locale) {
   const titelZeile = `${ueberschrift} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.reiheBeschr(ueberschrift, daten.titel.length);
   const kette = [
-    { label: S.start, href: SITE + '/' },
+    { label: S.start, href: `${SITE}/${locale}/` },
     { label: S.bereiche.reihen, href: `${SITE}/${locale}/reihen` },
     { label: daten.name },
   ];
@@ -878,7 +880,7 @@ export function seiteReihenUebersicht(daten, locale) {
   const pfad = `/${locale}/reihen`;
   const titelZeile = `${T.reihenTitel} | MovieMatch`;
   const beschreibung = kurzfassung(daten.text) || T.reihenBeschr;
-  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.reihen }];
+  const kette = [{ label: S.start, href: `${SITE}/${locale}/` }, { label: S.bereiche.reihen }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'CollectionPage', name: titelZeile, url: SITE + pfad,
     mainEntity: {
@@ -967,7 +969,7 @@ export function seitePerson(daten, locale) {
   const beschreibung = kurzfassung(daten.text) || (tx ? '' : kurzfassung(daten.biografie) || kurzfassung(profil));
   const hubTitel = tx ? tx.hub[daten.rolle].titel : PERSONEN_HUB[daten.rolle].titel;
   const kette = [
-    { label: tx ? seoTexte(locale).start : 'Start', href: SITE + '/' },
+    { label: tx ? seoTexte(locale).start : 'Start', href: `${SITE}/${locale}/` },
     { label: hubTitel, href: `${SITE}/${locale}/${daten.rolle}` },
     { label: daten.name },
   ];
@@ -1034,7 +1036,7 @@ export function seiteNeuAufUebersicht(daten, locale) {
   const pfad = `/${locale}/neu-auf`;
   const titelZeile = `${T.neuUebTitel} | MovieMatch`;
   const beschreibung = T.neuUebBeschr(daten.stand);
-  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.streaming, href: `/${locale}/streaming` }, { label: T.neuStreaming }];
+  const kette = [{ label: S.start, href: `${SITE}/${locale}/` }, { label: S.bereiche.streaming, href: `/${locale}/streaming` }, { label: T.neuStreaming }];
   const jsonLd = [{
     '@context': 'https://schema.org', '@type': 'ItemList', name: titelZeile,
     itemListElement: daten.anbieter.map((a, i) => listItem(i, T.neuAuf(a.name), `${SITE}/${locale}/neu-auf/${a.slug}`)),
@@ -1063,7 +1065,7 @@ export function seiteNeuAufAnbieter(daten, locale) {
   const einleitung = T.streamingEinleitung({ name: daten.name, tage: daten.tage, filme: daten.filme.length, serien: daten.serien.length, stand: daten.stand });
   const beschreibung = kurzfassung(einleitung);
   const kette = [
-    { label: S.start, href: SITE + '/' },
+    { label: S.start, href: `${SITE}/${locale}/` },
     { label: T.neuStreaming, href: `/${locale}/neu-auf` },
     { label: daten.name },
   ];
@@ -1092,7 +1094,7 @@ export function seiteKinoNeustarts(daten, locale) {
   const titelZeile = `${T.kinoNeuTitel(T.zeitraumKino(daten.tage))} | MovieMatch`;
   const einleitung = T.kinoEinleitung({ tage: daten.tage, gestartet: daten.gestartet.length, naechste: daten.naechste.length, stand: daten.stand });
   const beschreibung = kurzfassung(einleitung);
-  const kette = [{ label: S.start, href: SITE + '/' }, { label: S.bereiche.kino, href: `/${locale}/kino` }, { label: T.neustarts }];
+  const kette = [{ label: S.start, href: `${SITE}/${locale}/` }, { label: S.bereiche.kino, href: `/${locale}/kino` }, { label: T.neustarts }];
   const jsonLd = [itemListJsonLd(titelZeile, [[daten.gestartet, 'film'], [daten.naechste, 'film']], locale), brotkrumenJsonLd(kette)];
   // Starttag je Titel sichtbar: "Start 08.10." -- die Seite zeigt so selbst, was "neu" heisst.
   const mitStart = (liste) => liste.map((t) => ({ ...t, year: t.year }));

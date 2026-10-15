@@ -74,10 +74,11 @@ export function textLocale(locale) {
 
 // hreflang-Cluster fuer Seiten ohne eigene Gegenstueck-Logik (Start, Genre, Reihen,
 // Uebersichten): dieselbe Adresse in jedem indexierbaren Locale, das die Seitenart
-// kennt. Region-abhaengige Seiten (Anbieter, Bestenlisten-Unterseiten, Kino, Neu-auf)
-// bekommen keinen Cluster -- ob es sie in der anderen Region gibt, haengt an deren
-// Katalog, und hreflang auf eine 404- oder noindex-Seite waere falsch.
-const CLUSTER_EINSEGMENTIG = ['filme', 'serien', 'reihen', 'bestenlisten', 'beste-filme', 'beste-serien', 'streaming'];
+// kennt. Region-abhaengige Seiten (streaming, streaming/<anbieter>, kino, kino/*,
+// neu-auf, neu-auf/*, Anbieter-/Kino-Bestenlisten) bekommen keinen Cluster -- ob es
+// sie in der anderen Region gibt, haengt an deren Katalog, und hreflang auf eine
+// 404- oder noindex-Seite waere falsch.
+const CLUSTER_EINSEGMENTIG = ['filme', 'serien', 'reihen', 'bestenlisten', 'beste-filme', 'beste-serien'];
 const CLUSTER_MIT_UNTERSEITE = { filme: 'genre', serien: 'genre', reihen: 'reihe' };
 export function clusterAlternates(locale, pfad) {
   if (!pfad || pfad.includes('?') || !pfad.startsWith(`/${locale}`)) return undefined;
