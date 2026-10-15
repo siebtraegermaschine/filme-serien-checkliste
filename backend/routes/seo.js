@@ -15,7 +15,7 @@ import {
   seiteFilmeSerienHub, seiteKinoHub, seiteStreamingHub, seiteBestenlisteHub, seitePerson, seiteStart, seitePersonenHub, seiteBestenlistenUebersicht, seiteReihenUebersicht, seiteReihe,
   seiteNeuAufUebersicht, seiteNeuAufAnbieter, seiteKinoNeustarts,
 } from '../lib/seoRender.js';
-import { gunzipSync } from 'node:zlib';
+import { gunzipSync, gzipSync } from 'node:zlib';
 import { sitemapIndex, sitemapBereichGz, BEREICHE, bereichFuerLocale } from '../lib/seoSitemap.js';
 import { track } from '../lib/track.js';
 import { tageskennung } from '../lib/tageskennung.js';
@@ -281,17 +281,24 @@ async function personSeite(req, res, rolle) {
 router.get('/sitemap-index.xml', GRENZE, async (req, res) => {
   res.type('application/xml').send(await sitemapIndex());
 });
+// Lokalisierte Sitemap je Cache-Puffer einmal packen (der Puffer wechselt mit dem Cache).
+const lokalisiertCache = new WeakMap();
+function lokalisiertesGz(gz) {
+  if (!lokalisiertCache.has(gz)) lokalisiertCache.set(gz, gzipSync(lokalisierePfade(gunzipSync(gz).toString('utf8'))));
+  return lokalisiertCache.get(gz);
+}
 router.get(/^\/sitemap-([a-z]{2}-[a-z]{2})-([a-z_]+)(?:-(\d{1,2}))?\.xml$/, GRENZE, async (req, res) => {
   // Dateiname: sitemap-<locale>-<bereich>[-N].xml; N > 1 bei mehr als 45.000 URLs
   const locale = req.params[0], bereich = req.params[1], nr = req.params[2];
   const seite = nr ? Number(nr) : 1;
   if (!SEO_LOCALES.includes(locale) || !BEREICHE.includes(bereich) || !bereichFuerLocale(locale, bereich) || seite < 1) return res.status(404).end();
-  const gz = await sitemapBereichGz(locale, bereich, seite);
+  const gz = lokalisiertesGz(await sitemapBereichGz(locale, bereich, seite));
   res.type('application/xml');
+  // Sende-Hook (Pfadwoerter) greift nur bei Strings, daher hier schon lokalisiert.
   if (req.acceptsEncodings('gzip')) {
-    res.set('Content-Encoding', 'gzip').set('Vary', 'Accept-Encoding').send(gz);
+    res.set('Content-Encoding', 'gzip').set('Vary', 'Accept-Encoding').end(gz);
   } else {
-    res.send(gunzipSync(gz));
+    res.end(gunzipSync(gz));
   }
 });
 
