@@ -9,7 +9,8 @@ import seoRouter from '../routes/seo.js';
 import { bereichFuerLocale, BEREICHE } from '../lib/seoSitemap.js';
 import { lokalisierePfade, pfadAnalysieren } from '../lib/seoPfade.js';
 import { SEITENARTEN, hubPfade, wochenArten, seitenartFuer } from '../lib/seoSeitenarten.js';
-import { SEO_LOCALES, hatSeitenart } from '../lib/seoLocale.js';
+import { SEO_LOCALES, hatSeitenart, regionFuerLocale } from '../lib/seoLocale.js';
+import { slugify } from '../lib/slug.js';
 
 // Startseiten-Texte aller Sprachen, damit der Start-Cluster in der leeren Testdatenbank vollstaendig ist.
 const FIXTURE_LOCALES = ['en-gb', 'es-es', 'fr-fr', 'it-it', 'nl-nl', 'pt-pt'];
@@ -123,3 +124,28 @@ test('de-at: keine Kinoort-Seiten in der Sitemap', async () => {
 test.after(async () => {
   await pool.query(`DELETE FROM seo_content WHERE bereich = 'hub' AND schluessel = 'start' AND text = 'SEOTEST Starttext'`);
   server.close(); await pool.end(); });
+
+// Umkehrung: eine Seite traegt index,follow <=> sie steht in der Sitemap (Kandidaten aus der DB).
+test('Anbieter, neu-auf/<Anbieter> und Kino-Staedte: index <=> in der Sitemap', async () => {
+  for (const locale of ['de-de', 'en-gb', 'fr-fr']) {
+    const region = regionFuerLocale(locale);
+    const { rows: anb } = await pool.query(`SELECT DISTINCT provider_id FROM streaming_cache WHERE region = $1 LIMIT 60`, [region]);
+    const { rows: orte } = region === 'DE' ? await pool.query(`SELECT DISTINCT ort FROM kinos LIMIT 60`) : { rows: [] };
+    const faelle = [
+      ['anbieter', 'streaming', anb.map((r) => r.provider_id)],
+      ['hub', 'neu-auf', anb.map((r) => r.provider_id)],
+      ['kino_stadt', 'kino', orte.map((r) => slugify(r.ort))],
+    ];
+    for (const [bereich, wort, slugs] of faelle) {
+      if (!bereichFuerLocale(locale, bereich)) continue;
+      const inSitemap = new Set((await locs(locale, bereich)).map((l) => l.slice(`${SITE}/${locale}/`.length)));
+      for (const slug of slugs) {
+        const pfad = `${wort}/${slug}`;
+        const lokal = lokalisierePfade(`/${locale}/${pfad}`, locale);
+        const { status, html } = await holen(lokal);
+        const index = status === 200 && /index,follow/.test(robots(html) || '');
+        assert.equal(index, inSitemap.has(lokal.slice(`/${locale}/`.length)), `${locale}/${pfad}: index=${index}, Sitemap=${inSitemap.has(lokal.slice(`/${locale}/`.length))}`);
+      }
+    }
+  }
+});

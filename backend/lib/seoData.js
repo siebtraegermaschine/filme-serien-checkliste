@@ -73,6 +73,10 @@ const SEITENGROESSE = 40;
 // Ab dieser Zahl an Kinos gilt eine Stadt als eigene Seite wert -- weniger
 // waere zu duenner Inhalt (Thin-Content-Vermeidung, siehe PLAN-SEO.md 3.9).
 const MIN_KINOS_STADT = 3;
+// Praedikate, die Seite (lade*) und Sitemap (*FuerSitemap) gemeinsam nutzen.
+const stadtHatSeite = (s) => s.anzahl >= MIN_KINOS_STADT;
+const genreHatSeite = (gesamt) => gesamt > 0;
+const anbieterHatSeite = (anzahl) => anzahl >= MIN_TITEL_ANBIETER_SEITE;
 
 // Eine eigene Anbieter-Seite hat nur, wer im Streaming-Abgleich vorkommt --
 // der Name aus watch_providers_cache.flatrate muss dafuer auf den
@@ -337,7 +341,7 @@ export async function ladeGenreSeite(art, genreSlug, seite, locale) {
   return {
     type, genre: genreAnzeige(genre, sprachVon(locale)), genreSlug, seite, seiten: Math.max(1, Math.ceil(gesamt / SEITENGROESSE)), gesamt,
     text,
-    indexierbar: gesamt > 0,
+    indexierbar: genreHatSeite(gesamt),
     titel,
   };
 }
@@ -381,7 +385,7 @@ export async function ladeAnbieterSeite(anbieterSlug, locale) {
   return {
     anbieterSlug, name: rows[0].provider_name, besteListen,
     filme: filmeL, serien: serienL,
-    text, indexierbar: rows.length >= MIN_TITEL_ANBIETER_SEITE,
+    text, indexierbar: anbieterHatSeite(rows.length),
   };
 }
 
@@ -746,7 +750,7 @@ function kinoFilmeAnzahl(region) {
 // Kino-Hub: genug aktuelle Filme mit Titelseite ODER Kinostaedte (nur DE).
 export async function kinoHubIndexierbar(region) {
   if ((await kinoFilmeAnzahl(region)) >= MIN_KINOFILME_HUB) return true;
-  return region === 'DE' && (await staedteListe()).some((s) => s.anzahl >= MIN_KINOS_STADT);
+  return region === 'DE' && (await staedteListe()).some(stadtHatSeite);
 }
 
 // Nur Kinofilme mit Titelseite: die anderen (~150 von ~180) fuehrten auf 404.
@@ -763,7 +767,7 @@ export async function ladeKinoHub(locale) {
     ladeSeoText('hub', 'kino', locale),
     kinoHubIndexierbar(region),
   ]);
-  const qualifiziert = staedte.filter((s) => s.anzahl >= MIN_KINOS_STADT).sort((a, b) => b.anzahl - a.anzahl);
+  const qualifiziert = staedte.filter(stadtHatSeite).sort((a, b) => b.anzahl - a.anzahl);
   return {
     filme: await titelNachKennung(filme.map((f) => ({ tmdbId: f.tmdb_id, slug: slugify(f.title), title: f.title, year: f.year, genres: f.genres || [], posterPath: f.poster_path })), locale, 'movie'),
     staedte: qualifiziert.map((s) => ({ ort: s.ort, slug: slugify(s.ort) })),
@@ -792,7 +796,7 @@ export async function streamingHubIndexierbar(region) {
 export async function anbieterIndexierbar(region) {
   const summe = new Map();
   for (const r of await streamingHubZeilen(region)) summe.set(r.provider_id, (summe.get(r.provider_id) || 0) + r.anzahl);
-  return new Set([...summe].filter(([, n]) => n >= MIN_TITEL_ANBIETER_SEITE).map(([id]) => id));
+  return new Set([...summe].filter(([, n]) => anbieterHatSeite(n)).map(([id]) => id));
 }
 
 export async function ladeStreamingHub(locale) {
@@ -987,7 +991,7 @@ export async function ladeKinoStadt(stadtSlug, locale) {
   if (regionFuerLocale(locale) !== 'DE') return null;
   const staedte = await staedteListe();
   const stadt = staedte.find((s) => slugify(s.ort) === stadtSlug);
-  if (!stadt || stadt.anzahl < MIN_KINOS_STADT) return null;
+  if (!stadt || !stadtHatSeite(stadt)) return null;
 
   const region = regionFuerLocale(locale);
   const [{ rows: kinos }, { rows: filme }, text] = await Promise.all([
@@ -1067,11 +1071,10 @@ export async function streamingWochen(region) {
     }
     const liste = anbieter.map((a) => {
       const f = streamingFenster(karten.get(a.provider_id), jetzt);
-      return {
-        slug: a.provider_id, name: a.name, tage: f.tage, indexierbar: f.indexierbar,
-        filme: f.eintraege.filter((e) => e.type === 'movie'),
-        serien: f.eintraege.filter((e) => e.type === 'series'),
-      };
+      const filme = f.eintraege.filter((e) => e.type === 'movie');
+      const serien = f.eintraege.filter((e) => e.type === 'series');
+      // Eine Regel fuer Seite, Uebersicht und Sitemap: genug Neuzugaenge und mindestens einer sichtbar.
+      return { slug: a.provider_id, name: a.name, tage: f.tage, indexierbar: f.indexierbar && filme.length + serien.length > 0, filme, serien };
     }).sort((a, b) => (b.filme.length + b.serien.length) - (a.filme.length + a.serien.length));
     return { stand: heuteBerlin(jetzt), anbieter: liste };
   });
@@ -1114,7 +1117,7 @@ export async function kinoNeustartsBasis(locale) {
     );
     const heute = heuteBerlin();
     const f = kinoFenster(rows.map((r) => ({ ...wochenKarte(r, null), start: r.start })), heute);
-    const staedte = (region !== 'DE' ? [] : await staedteListe()).filter((s) => s.anzahl >= MIN_KINOS_STADT)
+    const staedte = (region !== 'DE' ? [] : await staedteListe()).filter(stadtHatSeite)
       .sort((a, b) => b.anzahl - a.anzahl).slice(0, 12).map((s) => ({ ort: s.ort, slug: slugify(s.ort) }));
     return { stand: heute, tage: f.tage, gestartet: f.gestartet, naechste: f.naechste, staedte, indexierbar: f.indexierbar };
   });
@@ -1162,7 +1165,7 @@ export async function anbieterFuerSitemap(locale) {
 }
 
 export async function staedteFuerSitemap() {
-  return (await staedteListe()).filter((s) => s.anzahl >= MIN_KINOS_STADT).map((s) => slugify(s.ort));
+  return (await staedteListe()).filter(stadtHatSeite).map((s) => slugify(s.ort));
 }
 
 // Alle Bestenlisten als [art, modus, wert] -- auch fuer scripts/seo-bestenlisten-texte.mjs.

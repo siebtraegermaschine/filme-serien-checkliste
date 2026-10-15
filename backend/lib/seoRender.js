@@ -1074,7 +1074,6 @@ export function seiteNeuAufAnbieter(daten, locale) {
   const pfad = `/${locale}/neu-auf/${daten.slug}`;
   const zeitraum = T.zeitraumStreaming(daten.tage);
   const titelZeile = `${T.neuAnbTitel(daten.name, zeitraum)} | MovieMatch`;
-  const n = daten.filme.length + daten.serien.length;
   const einleitung = T.streamingEinleitung({ name: daten.name, tage: daten.tage, filme: daten.filme.length, serien: daten.serien.length, stand: daten.stand });
   const beschreibung = kurzfassung(einleitung);
   const kette = [
@@ -1097,7 +1096,7 @@ export function seiteNeuAufAnbieter(daten, locale) {
     <p class="hinweis"><a href="/${locale}/streaming/${daten.slug}">${T.alleTitelAuf(attrEsc(daten.name))}</a> · <a href="/${locale}/neu-auf">${T.neuBeiAllen}</a></p>
     ${andere ? `<h2>${T.neuBeiAnderen}</h2><div class="chips">${andere}</div>` : ''}
   `;
-  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar && n > 0, jsonLd, bodyHtml });
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, bodyHtml });
 }
 
 export function seiteKinoNeustarts(daten, locale) {
