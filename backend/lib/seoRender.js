@@ -3,7 +3,8 @@
 // bei der App-OG-Route (server.js) -- jede Funktion hier gibt ein fertiges
 // Dokument zurueck. Kein App-JS, eigenes seo.css (Architektur-Entscheidung 1).
 import { PERSON_TX } from './seoPersonen.js';
-import { clusterAlternates, gegenstueck, hreflangCode, hatSeitenart, localeIndexierbar, sprachVon, regionFuerLocale, textLocale, localesMitText, istDeutsch } from './seoLocale.js';
+import { alternatesTitel, alternatesPerson } from './seoSeitenarten.js';
+import { clusterAlternates, gegenstueck, hreflangCode, hatSeitenart, localeIndexierbar, sprachVon, regionFuerLocale, textLocale, istDeutsch } from './seoLocale.js';
 import { seoTexte, ABSCHNITTE, zahlFormat } from './seoTexte.js';
 import { genreAnzeige } from './genreNamen.js';
 import { listeSeitenPfad, THEMEN, LAUFZEITEN, STAFFELN } from './seoBestenlisten.js';
@@ -413,11 +414,8 @@ export function seiteTitelDetail(titel, locale) {
     ${verfuegbarkeitHtml(titel.streaming, locale)}
   `;
 
-  // hreflang-Cluster: nur indexierbare Locales mit Text; die eigene Seite gehoert nur dazu, wenn sie indexiert wird.
-  const alternates = (titel.textLocales || [])
-    .filter((l) => localeIndexierbar(l))
-    .map((l) => ({ locale: l, pfad: `/${l}/${artWort}/${titel.slugBasis ? slugify(titel.slugBasis, l) : titel.slug}-${titel.tmdbId}` }));
-  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates: alternates.length ? alternates : undefined, bodyHtml });
+  // hreflang-Cluster: siehe alternatesTitel (seoSeitenarten.js).
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonLd, alternates: alternatesTitel(titel, artWort), bodyHtml });
 }
 
 // Vorlagentexte der Listen-/Hub-/Wochen-/Reihenseiten je Locale (gecacht).
@@ -1021,10 +1019,8 @@ export function seitePerson(daten, locale) {
     <h2>${filmografie}${daten.rolle === 'regisseur' ? regie : ''}</h2>
     <div class="raster">${daten.filmografie.map((t) => karte(t, t.type === 'series' ? 'serie' : 'film', locale)).join('')}</div>
   `;
-  // hreflang nur zu indexierbaren Gegenstuecken; de-de gibt es immer, sobald die Seite indexiert wird.
-  const cluster = [...new Set([...localesMitText(['de-de']), ...(daten.textLocales || [])])].filter((l) => localeIndexierbar(l));
-  const alternates = cluster.map((l) => ({ locale: l, pfad: `/${l}/${daten.rolle}/${daten.slug}-${daten.tmdbPersonId}` }));
-  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, alternates: alternates.length ? alternates : undefined, bodyHtml });
+  // hreflang: siehe alternatesPerson (seoSeitenarten.js).
+  return dokument({ locale, pfad, titelZeile, beschreibung, indexierbar: daten.indexierbar, jsonLd, alternates: alternatesPerson(daten), bodyHtml });
 }
 
 // ---- Wochen-Seiten (zeitabhaengig, Daten aus seoData.js, Regeln in seoWochen.js).

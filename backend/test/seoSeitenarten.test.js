@@ -3,12 +3,13 @@
  * sind die eingefrorenen Altwerte. DB-frei. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { LOCALE_KONFIG } from '../lib/seoLocale.js';
+import { LOCALE_KONFIG, localeIndexierbar, localesMitText } from '../lib/seoLocale.js';
+import { slugify } from '../lib/slug.js';
 import { lokalWort, deutschWort, lokalisierePfade } from '../lib/seoPfade.js';
 import { BEREICHE, bereichFuerLocale as altBereich } from '../lib/seoSitemap.js';
 import {
   PFADWOERTER, UNTERWOERTER, SEITENARTEN, SITEMAP_BEREICHE, CLUSTER_FORM, regionHubs, namenLokalisiert,
-  bereichFuerLocale, hubPfade, wochenArten,
+  bereichFuerLocale, hubPfade, wochenArten, alternatesTitel, alternatesPerson,
 } from '../lib/seoSeitenarten.js';
 
 const LOCALES = [...Object.keys(LOCALE_KONFIG), 'xx-xx'];
@@ -56,4 +57,16 @@ test('Sitemap-Bereiche pro Locale entsprechen seoSitemap.js', () => {
   for (const l of LOCALES) {
     for (const b of [...BEREICHE, 'unbekannt']) assert.equal(bereichFuerLocale(l, b), altBereich(l, b), `bereich ${l} ${b}`);
   }
+});
+
+test('hreflang-Listen von Titel und Person wie vor dem Verzeichnis', () => {
+  const titel = { textLocales: ['de-de', 'en-gb', 'fr-fr', 'xx-xx'], slugBasis: 'Der Pate', slug: 'der-pate', tmdbId: 238 };
+  const erwartetT = titel.textLocales.filter((l) => localeIndexierbar(l))
+    .map((l) => ({ locale: l, pfad: `/${l}/film/${slugify(titel.slugBasis, l)}-238` }));
+  assert.deepEqual(alternatesTitel(titel, 'film'), erwartetT);
+  assert.equal(alternatesTitel({ textLocales: [], slug: 'x', tmdbId: 1 }, 'film'), undefined);
+  assert.deepEqual(alternatesTitel({ textLocales: ['en-gb'], slug: 'x', tmdbId: 1 }, 'serie'), [{ locale: 'en-gb', pfad: '/en-gb/serie/x-1' }]);
+  const person = { rolle: 'regisseur', slug: 'x', tmdbPersonId: 5, textLocales: ['en-gb', 'nl-nl'] };
+  const cluster = [...new Set([...localesMitText(['de-de']), ...person.textLocales])].filter((l) => localeIndexierbar(l));
+  assert.deepEqual(alternatesPerson(person), cluster.map((l) => ({ locale: l, pfad: `/${l}/regisseur/x-5` })));
 });

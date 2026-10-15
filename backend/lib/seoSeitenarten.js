@@ -3,7 +3,8 @@
 // Cluster, Sprachumschalter, Sitemap und Konsistenztest leiten sich daraus ab.
 // Rein: importiert nur seoLocale.js (und nur zur Laufzeit, nicht beim Laden -- seoLocale.js
 // importiert dieses Verzeichnis ebenfalls). Die Datenfunktionen haengt seoSeitenartenDaten.js an.
-import { LOCALE_KONFIG, SEO_LOCALES, PERSONEN_LOCALES, textLocale } from './seoLocale.js';
+import { LOCALE_KONFIG, SEO_LOCALES, PERSONEN_LOCALES, textLocale, localeIndexierbar, localesMitText } from './seoLocale.js';
+import { slugify } from './slug.js';
 
 // Pfadwoerter je Sprache (erstes Segment hinter dem Locale); intern und in de-de deutsch.
 const SPRACHEN = ['en', 'fr', 'es', 'it', 'nl', 'pt'];
@@ -212,3 +213,17 @@ export function analyticsTyp(teile, liste = () => null) {
 
 // Express-Pfade (Strings und Regex) der Seitenart `id` oder aller.
 export const routenVon = (id) => SEITENARTEN.find((s) => s.id === id)?.routen || [];
+
+// hreflang der Seitenarten mit hreflang:'eigen' -- die Seite liefert die Locale-Liste selbst.
+// Titel: nur indexierbare Locales mit Text, Slug je Locale. Person: de-de gibt es immer, dazu Locales mit Text.
+export function alternatesTitel(titel, artWort) {
+  const liste = (titel.textLocales || [])
+    .filter((l) => localeIndexierbar(l))
+    .map((l) => ({ locale: l, pfad: `/${l}/${artWort}/${titel.slugBasis ? slugify(titel.slugBasis, l) : titel.slug}-${titel.tmdbId}` }));
+  return liste.length ? liste : undefined;
+}
+export function alternatesPerson(daten) {
+  const cluster = [...new Set([...localesMitText(['de-de']), ...(daten.textLocales || [])])].filter((l) => localeIndexierbar(l));
+  const liste = cluster.map((l) => ({ locale: l, pfad: `/${l}/${daten.rolle}/${daten.slug}-${daten.tmdbPersonId}` }));
+  return liste.length ? liste : undefined;
+}
