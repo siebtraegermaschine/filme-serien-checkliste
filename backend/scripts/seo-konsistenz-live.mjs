@@ -73,7 +73,7 @@ async function erwarte(pfad, pruefung, text) {
   if (!pruefung(r)) meldung(`Stichprobe ${pfad}: ${text} (Status ${r.status}${r.location ? ' -> ' + r.location : ''})`);
   else console.log('ok  ', pfad, '-', text);
 }
-await erwarte('/international', (r) => r.status === 200 && robots(r.html) === 'index,follow' && (r.html.match(/hreflang="(?!x-default)/g) || []).length === 13 && r.html.includes('hreflang="x-default" href="https://movietaste.de/international"'), '13 hreflang + x-default auf sich');
+await erwarte('/international', (r) => r.status === 200 && robots(r.html) === 'index,follow' && (r.html.match(/<link rel="alternate" hreflang="(?!x-default)/g) || []).length === 13 && r.html.includes('hreflang="x-default" href="https://movietaste.de/international"'), '13 hreflang + x-default auf sich');
 await erwarte('/', (r) => r.status === 200 && robots(r.html) === 'noindex,follow', 'App-Start noindex');
 await erwarte('/de-de/', (r) => r.html.includes('hreflang="x-default" href="https://movietaste.de/international"'), 'Start-x-default = /international');
 await erwarte('/de-de/streaming', (r) => r.status === 200 && !r.html.includes('hreflang="x-default"') && r.html.includes('hreflang="de-DE"'), 'Streaming ohne Cluster, kein x-default');
