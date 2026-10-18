@@ -18,7 +18,14 @@ before(async () => {
   const idx = await abruf('/sitemap-index.xml');
   assert.equal(idx.status, 200, 'Sitemap-Index erreichbar');
   sitemap.index = locs(idx.body);
-  for (const bereich of ['titel', 'genre', 'anbieter', 'bestenliste', 'reihe', 'hub', 'kino_stadt']) {
+  // Titel-Sitemap ist in Teile (titel, titel-2, ...) gesplittet; Serien stehen erst in Teil 2.
+  sitemap.titel = [];
+  for (const u of sitemap.index.filter((x) => /\/sitemap-de-de-titel(-\d+)?\.xml$/.test(x))) {
+    const r = await abruf(u);
+    assert.equal(r.status, 200, `Sitemap ${u} erreichbar`);
+    sitemap.titel.push(...locs(r.body));
+  }
+  for (const bereich of ['genre', 'anbieter', 'bestenliste', 'reihe', 'hub', 'kino_stadt']) {
     const r = await abruf(`/sitemap-${L}-${bereich}.xml`);
     assert.equal(r.status, 200, `Sitemap ${bereich} erreichbar`);
     sitemap[bereich] = locs(r.body);
