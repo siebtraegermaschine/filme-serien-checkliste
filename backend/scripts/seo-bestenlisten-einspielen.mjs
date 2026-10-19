@@ -30,10 +30,11 @@ for (const [k, text] of Object.entries(neu)) {
   if (NICHT_LATEIN.test(text)) fehler.push('nicht-lateinische Schrift');
   if (/\d{2,}\s*(?:Filme|Serien|Titel)\b/.test(text)) fehler.push('Trefferzahl im Text');
   const { rows } = await pool.query(`SELECT text FROM seo_content WHERE bereich='bestenliste' AND schluessel=$1 AND locale='de-de'`, [k]);
-  if (!rows.length) fehler.push('Schluessel unbekannt');
+  if (!/^[a-z-]+:[^:]+:(movie|series)$/.test(k)) fehler.push('Schluessel unbekannt');
   if (fehler.length) { bad.push(`${k}: ${fehler.join(', ')}`); continue; }
-  alt[k] = rows[0].text;
-  if (!dry) await pool.query(`UPDATE seo_content SET text=$2, aktualisiert_am=now() WHERE bereich='bestenliste' AND schluessel=$1 AND locale='de-de'`, [k, text]);
+  alt[k] = rows.length ? rows[0].text : null;
+  if (!dry) await pool.query(`INSERT INTO seo_content (bereich, schluessel, locale, text) VALUES ('bestenliste', $1, 'de-de', $2)
+    ON CONFLICT (bereich, schluessel, locale) DO UPDATE SET text = EXCLUDED.text, aktualisiert_am = now()`, [k, text]);
   ok++;
 }
 if (!dry && ok) fs.writeFileSync(sicherung, JSON.stringify(alt, null, 1));
