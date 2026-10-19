@@ -18,13 +18,6 @@
   Massenkorrektur (Transliteration) per Lauf. Nur `movie:20329` ist von Hand
   korrigiert (Hideo Nakata, Ken'ichi Matsuyama).
 
-- **Rechtstexte: anwaltliche Prüfung weiterhin ausständig** (UEBERGABE-OFFEN
-  3.1) — Sammelauftrag: datenschutz.html/impressum.html komplett, englische
-  Arbeitsfassungen, Benachrichtigungs-Mails, Nicht-EWR-Länder (USA CCPA/COPPA,
-  BR LGPD, CA/AU/NZ/MX/AR/CL/CO). Bis dahin kein aktives Marketing außerhalb
-  EWR.
-- **Drei TODO-Platzhalter in datenschutz.html** und **impressum.html
-  rechtlich prüfen** (UEBERGABE-CHAT 1).
 - **Wochenend-Mail „Drei für dein Wochenende"**: gebaut, Versand deaktiviert
   (`WOCHENEND_MAIL_AKTIV`) — Freigabe ist Christians Entscheidung.
 - **Taste-Match** (Kreuz-Score bei „Gemeinsam schauen") fertig gebaut, aber
@@ -86,10 +79,6 @@
   funktioniert in der nativen Hülle nicht (Token-Auth nötig), Kontolöschung
   muss künftig auch Token/Push-Kennungen entfernen, Katalog-Größe (~27 MB)
   vor Feinschliff auf schwachem Gerät messen.
-- **„Deine Kinos"-Filter** (PLAN-KINOS): Ortssuche/Auswahl live, aber ohne
-  Wirkung — echte Spielzeiten fehlen. Geldentscheidung offen (Basic+OSM
-  ~1.800 €/Jahr vs. Business ~3.600 €/Jahr); drei Angebote (Cinepass Trial,
-  MovieGlu, Kinoheld-Anfrage) noch einzuholen.
 - **PLAN-SEO** (redaktionelle SEO-Landingpages, /de-de/...): Technik fertig,
   Content-Befüllung ist der SEO-Content-Prozess oben. Personen-Seiten
   (Schauspieler/Regisseur): siehe eigener Punkt oben, Technik existiert
@@ -257,12 +246,6 @@
   je Eintrag, also ca. 13 $ für ~2.500 Rollen (Obergrenze 20 $):
   `ANTHROPIC_API_KEY=… node scripts/personen-batch.mjs --limit 2500 --max-kosten 20`
   (vorher `--dry-run --limit 50`; kein Zwischen-Push während des Laufs).
-- Rechtsprüfung der Datenschutz-/Impressumstexte als ein Sammelauftrag an
-  eine Kanzlei anstoßen (deckt SEO, Onboarding, Push, Nicht-EWR mit ab).
-- Vor App-Store-Vorbereitung: Apple-Entwicklerkonto samt D-U-N-S-Nummer
-  beantragen (einzige nicht beschleunigbare Wartezeit im Native-Apps-Plan).
-- Kino-Filter-Entscheidung treffen: Angebote von Cinepass (Free Trial),
-  MovieGlu und Kinoheld einholen, dann Weg A/B/C wählen.
 - Onboarding-Fenster nach Rechtstext-Freigabe und Zähler-Reset live schalten.
 - Wochenend-Mail-Versand freigeben lassen (Christian) oder bewusst weiter
   pausieren.
