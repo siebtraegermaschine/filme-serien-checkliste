@@ -515,6 +515,9 @@ Welle 1 (160 Pakettexte): 158 live (en-gb 40, it 39, nl 39, pt 40). Welle 2 (40 
 ### Nachtrag 14.10.2026: en-gb Kurztexte mit TMDB-Beschreibung
 `seo-titel-kurztexte-lokal.mjs` setzt für en-gb die englische TMDB-Beschreibung (gekürzt auf ganze Sätze, max. ca. 600 Zeichen) als Handlungssatz ein. 16.431 neue Texte geschrieben; en-gb jetzt 93.326 Titeltexte, keiner unter 250 Zeichen, Sitemap 93.326 URLs (live geprüft, Stichproben `index,follow`). 3.899 Titel bleiben ohne Text (noindex). Gleiches für andere Sprachen offen: dort gibt es keine Beschreibung in der Zielsprache (nur Übersetzung per Langtext).
 
+### Übersetzungslücken geschlossen (19.10.2026, live)
+Mit Abo-Sonnet-Agenten in Runden à 10 Pakete × 25 (`seo-uebersetzen-dateien.mjs`, kein API-Geld) fertig für it-it, nl-nl, pt-pt, fr-fr, en-gb. Rest laut Messung: it 52, nl 17, pt 70, fr 17 – dauerhafte Ablehnungen der Faktenprüfung (Zahlen ohne Beleg wie Jahreszahlen/„103.000“) bzw. Format. en-gb: die letzten 91 „offenen“ sind kein Rest, sondern bereits übersetzte Texte unter 1.200 Zeichen (Englisch ist kürzer als Deutsch); das Maß `length ≥ 1200` zählt sie immer wieder als offen – nicht erneut fahren.
+
 ## Canonical/hreflang und Indexierung aller Locales (15.10.2026, live)
 - Jede Landesversion hat ihren eigenen Canonical; hreflang-Cluster (`clusterAlternates` in `seoLocale.js`) nur zwischen indexierbaren Locales mit echtem Inhalt, x-default → de-de. Region-abhängige Seiten (Streaming, Kino, Anbieter-Bestenlisten) bleiben ohne Cluster.
 - Index: es-es, it-it, nl-nl, pt-pt, de-at, de-ch, fr-ch, en-ca, fr-ca, en-us (Titel erst ab 250 Zeichen Text; pt-br bleibt inaktiv). robots.txt-Allow-Zeilen ergänzt.
