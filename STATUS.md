@@ -540,4 +540,9 @@ Welle 1 (160 Pakettexte): 158 live (en-gb 40, it 39, nl 39, pt 40). Welle 2 (40 
 - 233 vorher textlose Listen sind dadurch indexierbar und erscheinen in `sitemap-de-de-bestenliste.xml` (Katalog-Cache 1 h).
 - Sicherungen der überschriebenen Texte: `/root/bl-sicherung-runde1.json` … `runde5.json` auf dem Server.
 - Bekannte Schwächen: Schlusssätze wiederholen sich („Die Liste eignet sich für …“), einzelne Anbieter-Listen überschneiden sich inhaltlich (Anime-Titel). Möglicherweise falsches Genre bei „Willkommen bei den Louds“ in „Mystery auf WOW“ (Datenfrage, nicht Text).
-- **Als Nächstes**: Titel de-de Stufe C, Personen de-de, Übersetzungslücken (siehe Liste oben).
+- **Als Nächstes**: Personen de-de weiter (siehe unten), Übersetzungslücken (Titel de-de Stufe C ist erledigt, ~1.580 Titel bewusst ohne Langtext).
+
+## Personen de-de per Fächer (19.10.2026, läuft)
+- Verfahren wie Bestenlisten: `personen-pakete.mjs --pakete 10 --je 15 [--ausschluss-datei]`, Auftrag `seo-auftrag-personen.md`, `personen-selbstcheck.mjs`, `personen-einspielen.mjs --verzeichnis DIR [--dry-run]`. Texte mit Meta-Sätzen über den Katalog und Katalogfehler vor dem Einspielen von Hand entfernt.
+- Runde 1: 119 live, Runde 2: 72 live (von je 150 Rollen). Bestand de-de Personen: 16.748. Offen ca. 1.680 Rollen.
+- Ausbeute sinkt (79 % → 48 %): Der offene Rest besteht oft aus Einzeltiteln und im Katalog vertauschten Rollen (Regisseur-Eintrag mit Schauspieler-Biografie und umgekehrt). Das ist ein Datenproblem im Katalog, kein Textproblem; vor weiteren Runden lohnt eine Katalogbereinigung der Rollen.
