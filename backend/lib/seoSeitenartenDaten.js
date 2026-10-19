@@ -1,7 +1,7 @@
 // Datenseite des Verzeichnisses (seoSeitenarten.js): ordnet den Schluesseln `indexierbar` und
 // `sitemap.bereich` die Funktionen zu, die Datenbank/Renderer brauchen. Getrennt vom Verzeichnis,
 // damit dieses rein bleibt (seoLocale.js importiert es).
-import { slugify } from './slug.js';
+import { slugifyName } from './slug.js';
 import { SITE } from './seoRender.js';
 import { hatSeitenart, regionFuerLocale } from './seoLocale.js';
 import { hubPfade, wochenArten } from './seoSeitenarten.js';
@@ -40,7 +40,7 @@ export const SITEMAP_URLS = {
   async titel(locale, stand) {
     const alle = await titelFuerSitemap();
     return alle.filter((t) => stand.has(`${t.type}:${t.tmdb_id}`)).map((t) => ({
-      loc: `${SITE}/${locale}/${t.type === 'series' ? 'serie' : 'film'}/${slugify(t.title, locale)}-${t.tmdb_id}`,
+      loc: `${SITE}/${locale}/${t.type === 'series' ? 'serie' : 'film'}/${slugifyName(t.title)}-${t.tmdb_id}`,
       lastmod: stand.get(`${t.type}:${t.tmdb_id}`) || null,
     }));
   },

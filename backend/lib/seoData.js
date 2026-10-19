@@ -6,7 +6,7 @@
 // Seiten ueber die *FuerSitemap-Funktionen unten.
 import { pool } from '../db/pool.js';
 import { swrCache } from './swrCache.js';
-import { slugify } from './slug.js';
+import { slugify, slugifyName } from './slug.js';
 import { anbieterSlug } from './anbieter.js';
 import { regionFuerLocale, sprachVon, textLocale, localesMitText, titelTextReicht, MIN_TITELTEXT } from './seoLocale.js';
 import { sprachFeld } from './i18n.js';
@@ -224,7 +224,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
   const regisseurPersonId = regisseurIds.get(titel.director) ?? null;
 
   const kartenTitel = await lokaleTitel([...regisseurRows.rows, ...aehnlicheRows.rows].map((r) => r.id), locale);
-  const zuKarte = (r) => ({ id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title, locale), title: kartenTitel.get(String(r.id)) || r.title, year: r.year, posterPath: r.poster_path });
+  const zuKarte = (r) => ({ id: String(r.id), tmdbId: r.tmdb_id, slug: slugifyName(r.title, locale), title: kartenTitel.get(String(r.id)) || r.title, year: r.year, posterPath: r.poster_path });
   const streaming = streamingRows.rows[0] || { flatrate: [], rent: [], buy: [] };
   const seiten = await anbieterMitSeite(region);
   const flatrateMitSlug = (streaming.flatrate || []).map((p) => {
@@ -237,7 +237,7 @@ export async function ladeTitelSeite(art, tmdbId, locale) {
     quelle: 'titles', // fuer ergaenzeBackdrop() aus share.js
     tmdbId: titel.tmdb_id,
     type: titel.type,
-    slug: slugify(titel.title, locale),
+    slug: slugifyName(titel.title, locale),
     slugBasis: titel.title, // Rohtitel: Slug je Gegenstueck-Locale (hreflang)
     title: anzeigeTitel(titel, locale),
     year: titel.year,
@@ -332,7 +332,7 @@ export async function ladeGenreSeite(art, genreSlug, seite, locale) {
   const text = await ladeSeoText('genre', genreSlug + ':' + type, locale);
 
   const titel = await titelNachId(rows.map((r) => ({
-    id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
+    id: String(r.id), tmdbId: r.tmdb_id, slug: slugifyName(r.title), title: r.title, year: r.year,
     genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
     voteCount: r.vote_count, posterPath: r.poster_path,
     communityBewertung: bewertungen.get(String(r.id)) || null,
@@ -372,7 +372,7 @@ export async function ladeAnbieterSeite(anbieterSlug, locale) {
   };
 
   const zuKarte = (r) => ({
-    tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
+    tmdbId: r.tmdb_id, slug: slugifyName(r.title), title: r.title, year: r.year,
     genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
     posterPath: r.poster_path, neu: r.first_seen_at && r.first_seen_at > neuGrenze,
     hatSeite: hatSeite.has(`${r.type}:${r.tmdb_id}`),
@@ -526,7 +526,7 @@ async function baueBestenliste(type, modus, wert, locale) {
   // gewichteten TMDB-Bewertung (NOTE_SQL, die Reihenfolge der SQL-Abfrage).
   const sortiertRoh = rows
     .map((r) => ({
-      id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
+      id: String(r.id), tmdbId: r.tmdb_id, slug: slugifyName(r.title), title: r.title, year: r.year,
       genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
       voteCount: r.vote_count, posterPath: r.poster_path,
       communityBewertung: bewertungen.get(String(r.id)) || null,
@@ -695,7 +695,7 @@ async function topTitel(type, limit = HUB_ANZAHL) {
   );
   const bewertungen = await bewertungenFuer(rows.map((r) => r.id));
   return rows.map((r) => ({
-    id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
+    id: String(r.id), tmdbId: r.tmdb_id, slug: slugifyName(r.title), title: r.title, year: r.year,
     genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
     communityBewertung: bewertungen.get(String(r.id)) || null,
   }));
@@ -769,7 +769,7 @@ export async function ladeKinoHub(locale) {
   ]);
   const qualifiziert = staedte.filter(stadtHatSeite).sort((a, b) => b.anzahl - a.anzahl);
   return {
-    filme: await titelNachKennung(filme.map((f) => ({ tmdbId: f.tmdb_id, slug: slugify(f.title), title: f.title, year: f.year, genres: f.genres || [], posterPath: f.poster_path })), locale, 'movie'),
+    filme: await titelNachKennung(filme.map((f) => ({ tmdbId: f.tmdb_id, slug: slugifyName(f.title), title: f.title, year: f.year, genres: f.genres || [], posterPath: f.poster_path })), locale, 'movie'),
     staedte: qualifiziert.map((s) => ({ ort: s.ort, slug: slugify(s.ort) })),
     text, indexierbar,
   };
@@ -869,13 +869,13 @@ export async function ladePersonSeite(rolle, tmdbPersonId, locale) {
     pool.query(`SELECT locale FROM seo_content WHERE bereich = 'person' AND schluessel = $1`, [`${rolle}:${tmdbPersonId}`]),
   ]);
   const filmografie = rows.map((r) => ({
-    id: String(r.id), tmdbId: r.tmdb_id, type: r.type, slug: slugify(r.title), title: r.title, year: r.year, posterPath: r.poster_path,
+    id: String(r.id), tmdbId: r.tmdb_id, type: r.type, slug: slugifyName(r.title), title: r.title, year: r.year, posterPath: r.poster_path,
   }));
 
   if (textLocale(locale) !== 'de-de' && !text) return null;
 
   return {
-    tmdbPersonId, rolle, name: person.name, slug: slugify(person.name),
+    tmdbPersonId, rolle, name: person.name, slug: slugifyName(person.name),
     biografie: person.biografie, fotoPfad: person.foto_pfad,
     geburtstag: geburtstagString(person.geburtstag),
     filmografie, text,
@@ -953,7 +953,7 @@ async function baueRangliste(rolle, locale) {
     [rolle, textLocale(locale), HUB_PERSONEN]
   );
   const liste = rows.map((r) => ({
-    tmdbPersonId: r.tmdb_person_id, name: r.name, slug: slugify(r.name), fotoPfad: r.foto_pfad, anzahl: r.anzahl,
+    tmdbPersonId: r.tmdb_person_id, name: r.name, slug: slugifyName(r.name), fotoPfad: r.foto_pfad, anzahl: r.anzahl,
   }));
   return liste;
 }
@@ -983,7 +983,7 @@ export async function personenFuerSitemap(rolle, locale) {
       ORDER BY pc.tmdb_person_id`,
     [rolle, textLocale(locale)]
   );
-  return rows.map((r) => ({ tmdbPersonId: r.tmdb_person_id, slug: slugify(r.name) }));
+  return rows.map((r) => ({ tmdbPersonId: r.tmdb_person_id, slug: slugifyName(r.name) }));
 }
 
 export async function ladeKinoStadt(stadtSlug, locale) {
@@ -1012,7 +1012,7 @@ export async function ladeKinoStadt(stadtSlug, locale) {
     stadtSlug, ort: stadt.ort, anzahlKinos: stadt.anzahl,
     kinos: kinos.map((k) => ({ name: k.name, strasse: k.strasse, plz: k.plz, website: k.website })),
     filme: await titelNachKennung(filme.map((f) => ({
-      tmdbId: f.tmdb_id, slug: slugify(f.title), title: f.title, year: f.year,
+      tmdbId: f.tmdb_id, slug: slugifyName(f.title), title: f.title, year: f.year,
       genres: f.genres || [], posterPath: f.poster_path,
     })), locale, 'movie'),
     text, indexierbar: kinos.length > 0,
@@ -1032,7 +1032,7 @@ function gecacht(key, laden) {
 
 function wochenKarte(r, datum) {
   return {
-    tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
+    tmdbId: r.tmdb_id, slug: slugifyName(r.title), title: r.title, year: r.year,
     genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
     posterPath: r.poster_path, hatSeite: !!r.hat_seite, datum,
   };
@@ -1215,7 +1215,7 @@ async function baueReihenKatalog() {
   for (const r of rows) {
     if (!gruppen.has(r.collection_id)) gruppen.set(r.collection_id, { id: r.collection_id, roh: r.collection_name, titel: [] });
     gruppen.get(r.collection_id).titel.push({
-      id: String(r.id), tmdbId: r.tmdb_id, slug: slugify(r.title), title: r.title, year: r.year,
+      id: String(r.id), tmdbId: r.tmdb_id, slug: slugifyName(r.title), title: r.title, year: r.year,
       erschienenAm: r.erschienen_am, genres: r.genres || [], rating: r.rating != null ? Number(r.rating) : null,
       voteCount: r.vote_count, posterPath: r.poster_path, note: Number(r.note),
     });

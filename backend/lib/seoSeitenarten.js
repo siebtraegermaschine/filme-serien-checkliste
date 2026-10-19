@@ -4,7 +4,7 @@
 // Rein: importiert nur seoLocale.js (und nur zur Laufzeit, nicht beim Laden -- seoLocale.js
 // importiert dieses Verzeichnis ebenfalls). Die Datenfunktionen haengt seoSeitenartenDaten.js an.
 import { LOCALE_KONFIG, SEO_LOCALES, PERSONEN_LOCALES, textLocale, localeIndexierbar, localesMitText } from './seoLocale.js';
-import { slugify } from './slug.js';
+import { slugifyName } from './slug.js';
 
 // Pfadwoerter je Sprache (erstes Segment hinter dem Locale); intern und in de-de deutsch.
 const SPRACHEN = ['en', 'fr', 'es', 'it', 'nl', 'pt'];
@@ -218,7 +218,7 @@ export const routenVon = (id) => SEITENARTEN.find((s) => s.id === id)?.routen ||
 export function alternatesTitel(titel, artWort) {
   const liste = (titel.textLocales || [])
     .filter((l) => localeIndexierbar(l))
-    .map((l) => ({ locale: l, pfad: `/${l}/${artWort}/${titel.slugBasis ? slugify(titel.slugBasis, l) : titel.slug}-${titel.tmdbId}` }));
+    .map((l) => ({ locale: l, pfad: `/${l}/${artWort}/${titel.slugBasis ? slugifyName(titel.slugBasis) : titel.slug}-${titel.tmdbId}` }));
   return liste.length ? liste : undefined;
 }
 export function alternatesPerson(daten) {

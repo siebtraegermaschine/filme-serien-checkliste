@@ -9,7 +9,7 @@
 
 - **PageSpeed: Rest-LCP mobil** (13.10.2026) — Frühabruf, Poster-Priorität und Minify sind
   live; neuen PageSpeed-Lauf (einige Minuten nach dem Deploy) abwarten und
-  danach entscheiden. Echte Messwerte später in der Search Console prüfen.
+  danach entscheiden.
 
 - **Regie/Besetzung in CJK-Schrift** (13.10.2026) — bei ca. 1.994 Titeln
   steht `director` (teils auch `cast_names`) in Originalschrift, z. B.
@@ -18,8 +18,6 @@
   Massenkorrektur (Transliteration) per Lauf. Nur `movie:20329` ist von Hand
   korrigiert (Hideo Nakata, Ken'ichi Matsuyama).
 
-- **Wochenend-Mail „Drei für dein Wochenende"**: gebaut, Versand deaktiviert
-  (`WOCHENEND_MAIL_AKTIV`) — Freigabe ist Christians Entscheidung.
 - **Taste-Match** (Kreuz-Score bei „Gemeinsam schauen") fertig gebaut, aber
   ausgeblendet (`TASTE_MATCH_SICHTBAR = false`).
 - **„Personen einladen" im Menü rechts oben** ausgeblendet — Referral-Weg
@@ -33,9 +31,7 @@
   dauerhaft offen (Faktenprüfung schlug auch beim einmaligen Wiederholungslauf
   an, kein weiterer Automatik-Retry). Fächer-Verfahren damit für Stufe B
   hinfällig. Offen: 3.336 Titel Stufe C und ~2.900 ohne ausreichende Daten
-  (Datenlage prüfen, ob sich ein weiterer Batch-Lauf lohnt), sowie die
-  Messfrage aus PLAN-KOSTEN.md 7.6 (bringen die vorhandenen Seiten Klicks?,
-  vor weiterer Skalierung per Search Console prüfen).
+  (Datenlage prüfen, ob sich ein weiterer Batch-Lauf lohnt).
 - **Personen-Seiten** (Schauspieler/Regisseur, `/schauspieler/`,
   `/regisseur/`): Technik existiert bereits (`personen.js`, `seoData.js`,
   `seoRender.js`), aber bisher kaum genutzt — reine Lazy-Load-Kette ohne
@@ -83,8 +79,6 @@
   Content-Befüllung ist der SEO-Content-Prozess oben. Personen-Seiten
   (Schauspieler/Regisseur): siehe eigener Punkt oben, Technik existiert
   bereits, TMDB-Personen-Import läuft (Bulk-Resolve).
-- **Muttersprachler-Review** der maschinellen Übersetzungen (fr/es/it/nl/pt)
-  liegt bei Christian, noch nicht durchgeführt.
 - **Tour-Screenshots** veraltet (seit 11.08.), Update erst nach Abschluss
   der Oberflächen-Änderungen geplant.
 - **Externe Erreichbarkeitsprüfung** (Server-Ausfall-Monitoring von außen)
@@ -92,8 +86,6 @@
 - Kleinere UI-Unstimmigkeiten, bewusst nicht behoben: Match filtert im Kino
   nicht (Absicht), eigene Titel verschwinden bei Community-/Datum-Sortierung
   (Absicht), Schwelle „20 Titel" im Text vs. „10" im Code (kosmetisch).
-- **MovieTaste-Gesellschaftsfrage**: ob/wann eigene Gesellschaft bzw.
-  Ausgliederung von CouchUltras — Christian muss entscheiden.
 
 ## Entschieden
 
@@ -247,9 +239,6 @@
   `ANTHROPIC_API_KEY=… node scripts/personen-batch.mjs --limit 2500 --max-kosten 20`
   (vorher `--dry-run --limit 50`; kein Zwischen-Push während des Laufs).
 - Onboarding-Fenster nach Rechtstext-Freigabe und Zähler-Reset live schalten.
-- Wochenend-Mail-Versand freigeben lassen (Christian) oder bewusst weiter
-  pausieren.
-- Muttersprachler-Reviews der Übersetzungen einholen und einarbeiten.
 - Tour-Screenshots aktualisieren, sobald aktuelle Oberflächen-Änderungen
   abgeschlossen sind.
 
@@ -320,7 +309,7 @@
 
 ## Freigaben 12.10.2026 (live)
 - Sechs Locales (en-gb, es-es, fr-fr, it-it, nl-nl, pt-pt) aktiv, alle noindex, nicht in Sitemap/robots. Start-JSON-LD ohne leeres `hasPart`.
-- Slug-Transliteration (`slugify(text, locale)`): nur Nicht-de-Locales (Akzente, ø/æ/ł...), de-de unveraendert, damit bestehende URLs bleiben. Test `slug.test.js`; Kino-Hub-Leer-Slug-Test `seoKinoHub.test.js`.
+- Slug-Transliteration: `slugify(text, locale)` nur Nicht-de-Locales (Land/Genre/Ort/Anbieter, de-de unveraendert). Titel und Personen nutzen `slugifyName` (19.10.2026, immer volle Transliteration: `pokemon-60572`; alte URLs liefern weiter 200 mit Canonical auf die neue). Leere Slugs bei Nicht-Latin-Titeln (~5.000) bleiben, URL funktioniert ueber die tmdbId. Test `slug.test.js`; Kino-Hub-Leer-Slug-Test `seoKinoHub.test.js`.
 - Woechentlicher Audit: `.github/workflows/seo-audit.yml` (40 URLs, 1 Req/s, nicht blockierend, Bericht als Artefakt).
 
 ## Mehrsprachigkeit vorbereitet (12.10.2026)
@@ -503,11 +492,11 @@ Langtexte jetzt: nl-nl 21.299, pt-pt 21.463, it-it 21.666 (en-gb 23.530, fr-fr 2
   - Ein Schreiber hängte drei Überschriften leer an (15 Texte) → umsortiert. `formatFehler` und `seo-runde.sh pruefen` verwerfen jetzt leere Abschnitte.
   - Live gefunden: pt-pt movie:21868 mit leerem Abschnitt und Datenlage-Kommentar → bei den Übersetzungslücken neu machen.
 - **Runde 28** (Stufe C, letzter Rest): 133 von 135 Texten eingespielt (2 zu dünn), de-de-Langtexte jetzt 24.038. Stufe B/C ist damit leer. Titel ohne lateinischen deutschen Titel (12) laufen mit dem englischen Titel (`datensatz()`); Fremdschrift-Regex um indische Schriften, Armenisch, Georgisch ergänzt.
-  - Befund, nicht angefasst: de-de-Slugs solcher Titel sind leer (`/de-de/film/-623135`, Sinkhole); de-de-Slugs bleiben bewusst unverändert.
+  - Befund: de-de-Slugs solcher Titel sind leer (`/de-de/film/-623135`, Sinkhole); URL funktioniert über die tmdbId.
 - **Stufe D** (live): offener Rest 2.923 Titel. `STUFE=D` nimmt deutsche *oder* englische Inhaltsangabe ≥150 Zeichen, ≥2 Besetzung, Regie/Idee optional (sonst fielen 1.017 Serien ohne „Entwickelt von“ heraus) → 1.340 Titel. Länge folgt den Daten: Ziel 190–260, Untergrenze 180 Wörter (sicher über 1.200 Zeichen = Langtext). Die Untergrenze ist ein Parameter (`--min-woerter`), andere Sprachen bleiben bei 250. ~1.580 Titel bleiben bewusst ohne Langtext (zu dünn).
   - `seo-runde.sh` nutzt eigene Temp-Pfade je Lauf; vorher überschrieben sich de-de- und es-es-Pakete gegenseitig (`/tmp/pakete`).
 - **Runde 29** (Stufe D): 150/150 eingespielt. Vor dem Einspielen korrigiert: fremdsprachige Figurennamen (Pokémon, Dragonball, Dragonball Super), zwei „… genannt“-Sätze. Live geprüft: Das Damengambit, Pokémon.
-  - Befunde, nicht angefasst: Slug `pok-mon-60572` verliert das „é“ (wie die leeren Slugs oben). Yu-Gi-Oh! (series:902) hat in der Besetzung „Yugi M?t?“ (Kodierungsfehler in `titles`).
+  - Befunde, nicht angefasst: Slug `pok-mon-60572` verlor das „é“ (am 19.10.2026 mit `slugifyName` behoben). Yu-Gi-Oh! (series:902) hat in der Besetzung „Yugi M?t?“ (Kodierungsfehler in `titles`).
 - **Runde 30** (Stufe D): 150/150 eingespielt. Korrigiert: Monty Python (Produzenten nicht als Entwickler), Star Wars Clone Wars (kein „Regisseur“ für Entwickler), drei „genannt/geführt“-Sätze. Selbstprüfung in `seo-auftrag-faecher.md` nimmt jetzt `MIN_W` (180 bei D). Live geprüft: Monty Python, Star Wars Clone Wars.
 - **Runde 31** (Stufe D): 150/150 eingespielt. Korrigiert: Noblesse (Frankenstein), Cars on the Road (deutsche Namen Lightning McQueen/Hook statt franz. Synchron), Shrek-Kurzfilm (Esel statt Donkey), ein „genannt“-Satz. Live geprüft: Noblesse, Cars on the Road.
 - **Runde 32** (Stufe D): 150/150 eingespielt. Korrigiert: Leaving Neverland (Freigabe-0-Satz raus), Edens Zero (Sakura-Kosmos). Prompt-Zusatz: deutsche Figurennamen. Live geprüft: Leaving Neverland, Edens Zero.

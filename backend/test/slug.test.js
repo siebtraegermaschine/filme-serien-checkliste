@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { slugify } from '../lib/slug.js';
+import { slugify, slugifyName } from '../lib/slug.js';
 
 test('slugify: Umlaute und scharfes S', () => {
   assert.equal(slugify('Der Übeltäter'), 'der-uebeltaeter');
@@ -31,4 +31,11 @@ test('slugify: neue Locales transliterieren Akzente und Sonderbuchstaben', () =>
   assert.equal(slugify('Ægir Søren Łódź', 'nl-nl'), 'aegir-soren-lodz');
   assert.equal(slugify('Œuvre', 'it-it'), 'oeuvre');
   assert.equal(slugify('Αθήνα', 'pt-pt'), ''); // nicht-lateinisch bleibt leer (wird vom Aufrufer verworfen)
+});
+
+test('slugifyName: Titel/Personen transliterieren immer, auch fuer de-de', () => {
+  assert.equal(slugifyName('Pokémon'), 'pokemon');
+  assert.equal(slugifyName('Amélie'), 'amelie');
+  assert.equal(slugifyName('Für Elise'), 'fuer-elise');
+  assert.equal(slugifyName('千と千尋の神隠し'), '');
 });
