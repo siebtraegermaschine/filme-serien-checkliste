@@ -534,3 +534,10 @@ Welle 1 (160 Pakettexte): 158 live (en-gb 40, it 39, nl 39, pt 40). Welle 2 (40 
 - Stand: Etappen 0–8 fertig (seoPfade, seoLocale, seoSitemap, seoRender, seoAufrufTyp und Konsistenztest lesen aus dem Verzeichnis; `seoSeitenartenDaten.js` hält die DB-Seite). Neue Seitenart = ein Eintrag in `SEITENARTEN` + ggf. `PFADWOERTER`, Route im Router in derselben Reihenfolge (Test prüft).
 - Etappe 9 (live): Stadt-/Genre-/Anbieter-Schwellen sind gemeinsame Praedikate in `seoData.js` (Seite und `*FuerSitemap` nutzen dieselben); neu-auf/<Anbieter> `n>0` steckt in `indexierbar` der Daten, nicht mehr im Renderer; Umkehr-Test index <=> Sitemap in `seoSitemap.test.js`. Sitemap-Zahlen live vorher/nachher identisch.
 - Offen: `hatSeitenart` gemischt benannt; Titel-Sitemap haengt an vorhandenem Text (`seo_content`), die Seite nicht (bewusst, Thin-Content-Schutz).
+
+## Bestenlisten-Texte verlängert (19.10.2026, live)
+- Alle 1.043 de-de-Bestenlisten haben jetzt einen Langtext (900–2.200 Zeichen; vorher oft ~430). Fächer-Verfahren mit Sonnet-Subagenten im Abo, kein API-Geld: `seo-bestenlisten-pakete.mjs` (53 Pakete à 20), Auftrag `seo-auftrag-bestenlisten.md`, `seo-bestenlisten-einspielen.mjs --verzeichnis DIR [--dry-run] [--sicherung DATEI]`. 5 Runden (220/200/200/200/223 Texte), 0 Ablehnungen.
+- 233 vorher textlose Listen sind dadurch indexierbar und erscheinen in `sitemap-de-de-bestenliste.xml` (Katalog-Cache 1 h).
+- Sicherungen der überschriebenen Texte: `/root/bl-sicherung-runde1.json` … `runde5.json` auf dem Server.
+- Bekannte Schwächen: Schlusssätze wiederholen sich („Die Liste eignet sich für …“), einzelne Anbieter-Listen überschneiden sich inhaltlich (Anime-Titel). Möglicherweise falsches Genre bei „Willkommen bei den Louds“ in „Mystery auf WOW“ (Datenfrage, nicht Text).
+- **Als Nächstes**: Titel de-de Stufe C, Personen de-de, Übersetzungslücken (siehe Liste oben).
