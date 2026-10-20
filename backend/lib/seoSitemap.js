@@ -75,6 +75,10 @@ export async function sitemapBereich(locale, bereich, seite = 1) {
 // Anzahl Dateien eines Bereichs fuer den Index. Nur Titel koennen die Grenze
 // reissen; der Rest ist deutlich kleiner und bleibt bei einer Datei.
 async function dateiAnzahl(locale, bereich) {
+  if (bereich === 'person') { // Locales ohne Personentexte: keine leere Sitemap im Index
+    const { rows: [p] } = await pool.query(`SELECT count(*)::int AS n FROM seo_content WHERE bereich = 'person' AND locale = $1`, [textLocale(locale)]);
+    return p.n > 0 ? 1 : 0;
+  }
   if (bereich !== 'titel') return 1;
   const { rows: [r] } = await pool.query(
     `SELECT count(*)::int AS n FROM seo_content WHERE bereich = 'titel' AND locale = $1 AND ($1 = 'de-de' OR length(text) >= $2)`,

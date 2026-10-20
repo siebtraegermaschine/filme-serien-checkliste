@@ -6,6 +6,7 @@
 //    ruft je Seitenart eine Probe-Seite aus den Sitemaps ab (1 Req/s).
 import { fileURLToPath } from 'node:url';
 import { BASIS, hole, parseSeite, drossel, locs, istIndexierbar } from './lib/seo-crawl.mjs';
+import { deutschWort } from '../lib/seoPfade.js';
 
 /** Seitenart aus dem Pfad, z. B. '/de-de/film/x-1' -> 'titel'. */
 export function seitenart(pfad) {
@@ -14,7 +15,8 @@ export function seitenart(pfad) {
   if (t.length === 0) return 'app';
   if (/\.(html|xml|txt|css|png)$/.test(p)) return 'statisch';
   if (t.length === 1) return 'start';
-  const [, a, b, c] = t;
+  const [loc, a0, b, c] = t;
+  const a = deutschWort(loc, a0) || a0; // lokales Pfadwort (pt-pt /filme/ = Titel) zurueck ins Deutsche
   if (a === 'film' || a === 'serie') return 'titel';
   if (a === 'filme' || a === 'serien') return b ? 'genre' : 'hub';
   if (a === 'streaming') return b ? 'anbieter' : 'hub';
