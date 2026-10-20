@@ -159,7 +159,7 @@ export function bauStadtText(d) {
   const haupt = Object.entries(ziffern).sort((a, b) => b[1] - a[1])[0];
   let kandidaten = kinos.filter((x) => x.website && x.strasse && (!haupt || (x.plz && x.plz[0] === haupt[0])));
   if (kandidaten.length < 3) kandidaten = kinos.filter((x) => x.website && x.strasse);
-  const nennen = kandidaten.slice(0, 3).map((x) => x.name);
+  const nennen = [...new Set(kandidaten.map((x) => x.name))].slice(0, 3);
   const k = d.stadtSlug;
   const s = [];
   s.push(wahl(k, [
