@@ -115,8 +115,8 @@ test('Seitenarten: Personen in den EWR-Locales, nicht pt-br; Sitemap-Bereiche', 
   assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('de-de', b)), BEREICHE);
 });
 
-test('Phase 7b: neue Laender-Varianten sind aktiv, aber noch nicht indexierbar', () => {
-  for (const l of ['pt-br', 'es-mx', 'nl-be']) assert.deepEqual([LOCALE_KONFIG[l].aktiv, LOCALE_KONFIG[l].indexierbar], [true, false]);
+test('Phase 7b: neue Laender-Varianten sind aktiv und indexierbar', () => {
+  for (const l of ['pt-br', 'es-mx', 'nl-be']) assert.deepEqual([LOCALE_KONFIG[l].aktiv, LOCALE_KONFIG[l].indexierbar], [true, true]);
   assert.ok(seoTexte('pt-br').start);
 });
 

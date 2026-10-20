@@ -8,7 +8,7 @@
   'use strict';
   var KEY = 'mt.sprachhinweis';
   var STANDARD = { de: 'de-de', en: 'en-gb', fr: 'fr-fr', es: 'es-es', it: 'it-it', nl: 'nl-nl', pt: 'pt-pt' };
-  var LOCALES = ['de-de', 'en-gb', 'es-es', 'fr-fr', 'it-it', 'nl-nl', 'pt-pt', 'de-at', 'de-ch', 'fr-ch', 'en-ca', 'fr-ca', 'en-us'];
+  var LOCALES = ['de-de', 'en-gb', 'es-es', 'fr-fr', 'it-it', 'nl-nl', 'pt-pt', 'de-at', 'de-ch', 'fr-ch', 'en-ca', 'fr-ca', 'en-us', 'nl-be', 'fr-be', 'de-lu', 'en-ie', 'es-mx', 'es-ar', 'es-co', 'es-cl', 'pt-br'];
   var TEXTE = {
     de: { text: 'Diese Seite gibt es auch auf Deutsch.', los: 'Auf Deutsch ansehen', zu: 'Schließen' },
     en: { text: 'This page is also available in English.', los: 'View in English', zu: 'Close' },

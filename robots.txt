@@ -36,6 +36,15 @@ Allow: /fr-ch/
 Allow: /en-ca/
 Allow: /fr-ca/
 Allow: /en-us/
+Allow: /nl-be/
+Allow: /fr-be/
+Allow: /de-lu/
+Allow: /en-ie/
+Allow: /es-mx/
+Allow: /es-ar/
+Allow: /es-co/
+Allow: /es-cl/
+Allow: /pt-br/
 Allow: /sitemap-*.xml
 Allow: /impressum.html
 Allow: /datenschutz.html

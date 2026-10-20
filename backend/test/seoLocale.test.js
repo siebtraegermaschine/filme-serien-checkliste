@@ -26,10 +26,10 @@ test('regionFuerLocale: bekanntes Locale liefert seine Region, sonst DE', () => 
 });
 
 test('SEO_LOCALES (Sitemap): indexierbare Locales laut Konfiguration', () => {
-  assert.deepEqual(SEO_LOCALES, ['de-de', 'en-gb', 'es-es', 'fr-fr', 'it-it', 'nl-nl', 'pt-pt', 'de-at', 'de-ch', 'fr-ch', 'en-ca', 'fr-ca', 'en-us']);
+  assert.deepEqual(SEO_LOCALES, ['de-de', 'en-gb', 'es-es', 'fr-fr', 'it-it', 'nl-nl', 'pt-pt', 'de-at', 'de-ch', 'fr-ch', 'en-ca', 'fr-ca', 'en-us', 'nl-be', 'fr-be', 'de-lu', 'en-ie', 'es-mx', 'es-ar', 'es-co', 'es-cl', 'pt-br']);
   assert.equal(localeIndexierbar('de-de'), true);
   assert.equal(localeIndexierbar('es-es'), true);
-  assert.equal(localeIndexierbar('pt-br'), false); // 7b: noch noindex
+  assert.equal(localeIndexierbar('pt-br'), true); // 7b: freigeschaltet
 });
 
 test('sprachVon und hatSeitenart', () => {
