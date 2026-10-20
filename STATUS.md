@@ -32,7 +32,7 @@
   Titeltexte (Phase-2-Tabelle) sind aber de-Kurztexte von 250–1199 Zeichen (Phase-1-Bausteine, ca. 450 Zeichen, ohne die vier
   Überschriften, `pruefe()` würde sie ablehnen). Echt fehlende lange Texte: es-es 1.405 (−250 jetzt), fr 17, nl 17, it 52, pt 70, en 91.
   Übersetzen der Kurztexte per Subagent = ca. 5.600 Pakete, unrealistisch; Alternative: Kurztexte je Sprache direkt aus DB-Fakten
-  erzeugen (Phase 5, ohne Modell, kostenlos). Bis zur Entscheidung nur die langen Texte weiter übersetzen.
+  erzeugen (Phase 5, ohne Modell, kostenlos). **Entschieden (20.10.2026, Nutzer): so vorgehen** – lange Texte weiter per Abo, Kurztexte aus DB-Fakten je Sprache.
 - **SEO-Gleichstand Phase 2 erledigt** (20.10.2026, nur gemessen, nichts geändert).
   Basis de-de ≥ 250 Zeichen; „fehlt" = Schlüssel ohne Text in der Ziel-Locale
   (Texte < 250 in Fremdsprachen: nur Anbieter/Genre/Hub je 1–6, Kino 0–5).
