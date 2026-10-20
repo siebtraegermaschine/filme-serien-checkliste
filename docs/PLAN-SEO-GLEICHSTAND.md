@@ -56,14 +56,14 @@ Ergebnis: 11.968 Titel + 12 redaktionelle Texte verlängert; Rest 65 Titel ohne 
 ## Phase 3 – Priorisieren
 Reihenfolge je Locale nach Nutzen: (a) Titel nach Beliebtheit (Bewertungs-/Aufrufzahlen), (b) Bestenlisten, Reihen, (c) Personen nach Titelzahl (Top zuerst). Sprachen: `es-es` zuerst (größte Lücke, ca. 70.000 Titel), danach it/pt/nl/fr/en. `pt-br` bleibt inaktiv.
 
-## Phase 4 – Übersetzen (Abo) — läuft; Runden 1–2 erledigt (es-es 248, dazu 220 andere Sprachen). Entscheidung Weg 2: Langtexte nur für Top-Titel, Rest Kurztexte aus DB-Fakten (Phase 5); siehe STATUS.md
+## Phase 4 – Übersetzen (Abo) — es-es-Langtexte fertig (1.117 Texte), en/fr/it/nl/pt Top-Titel offen; Runden 1–2 erledigt (es-es 248, dazu 220 andere Sprachen). Entscheidung Weg 2: Langtexte nur für Top-Titel, Rest Kurztexte aus DB-Fakten (Phase 5); siehe STATUS.md
 1. Verfahren: `seo-uebersetzen-dateien.mjs` (Pakete → Sonnet-Subagenten → einspielen, Faktenprüfung wie `seo-uebersetzen.mjs`). Runden à 10 Pakete × 25 Texte, je Runde ca. 10–15 Min.
 2. **Erst 3 Runden `es-es`**, danach Wochenlimit ablesen (Nutzungsanzeige) und Gesamtdauer neu schätzen; Ergebnis in STATUS.md. Reicht das Abo nicht, dem Nutzer Batch-API-Kosten (ca. 0,22 Cent/Text) nennen und **Freigabe abwarten**.
 3. Quellsprache: `de-de` (nach Phase 1); fehlt dort etwas, die nächste fertige Sprache.
 4. Personen: für es/it/nl/pt zuerst Code vorbereiten (`PERSONEN_LOCALES`, `PERSON_ABSCHNITTE` in `scripts/seo-kategorien-uebersetzen.mjs`, Überschriften in `seoRender.js`, Tests in `npm test` anpassen). Das ist ein Push auf `main` = live → vorher Nutzer fragen.
 5. Läuft abgekoppelt (`setsid nohup … > /tmp/lauf.log 2>&1 &`), Logs auf dem Server prüfen.
 
-## Phase 5 – Texte < 250 Zeichen nach der Übersetzung
+## Phase 5 – Texte < 250 Zeichen nach der Übersetzung — ERLEDIGT 20.10.2026 (Kurztexte alle Sprachen, Zahlen in STATUS.md)
 Alle übersetzten Texte der Ziel-Locale messen. Unter 250 Zeichen: wie Phase 1 mit Bausteinen aus DB-Fakten in der Zielsprache verlängern (Bausteine je Sprache; `seoTexte.js` / `genreNamen.js` liefern Wörter). Hinweis aus Oktober: englische Übersetzungen sind kürzer als deutsche, `length ≥ 1200` als Maß für „offen" nicht erneut verwenden.
 
 ## Phase 6 – Abschluss
