@@ -19,6 +19,12 @@
 # Gegenteil bewirken, weil ein Crawler die Seite abrufen koennen muss, um das
 # noindex ueberhaupt zu lesen.
 
+# Metas KI-Crawler hielt den 1-CPU-Server mit ~50 parallelen Abrufen dauerhaft
+# auf Anschlag. Die Link-Vorschau (facebookexternalhit) bleibt erlaubt.
+User-agent: meta-externalagent
+User-agent: meta-webindexer
+Disallow: /
+
 User-agent: *
 Allow: /$
 Allow: /international$
