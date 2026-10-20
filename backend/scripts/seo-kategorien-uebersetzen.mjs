@@ -49,6 +49,9 @@ export function zahlenIn(text) {
 
 // Woerter mit Ziffern, Grossbuchstabenfolgen oder InnenGrossschreibung
 // (TMDB, MovieMatch, OpenStreetMap, AMC) -- muessen unveraendert uebernommen sein.
+// Laender-/Kuerzel, die in den Zielsprachen ihre eigene Form haben (EE.UU., RDA, TV -> TV bleibt aber ok).
+const UEBERSETZBAR = new Set(['USA', 'US', 'TV', 'DDR', 'NS', 'UK', 'BRD', 'UdSSR', 'EU']);
+
 export function markenIn(text) {
   const w = String(text).match(/[\p{L}\d]+/gu) || [];
   return [...new Set(w.filter((x) => /[A-ZÄÖÜ]{2,}|[a-zäöü][A-ZÄÖÜ]/.test(x)))];
@@ -70,10 +73,12 @@ export function uebersetzungPruefen(quelle, ziel, locale) {
   const absQ = quelle.split(/\n\s*\n/).length, absZ = z.split(/\n\s*\n/).length;
   if (absQ !== absZ) f.push(`absaetze ${absQ}/${absZ}`);
   const zahlenZiel = zahlenIn(z);
-  for (const n of zahlenIn(quelle)) if (!zahlenZiel.includes(n)) { f.push(`zahl ${n}`); break; }
-  for (const n of new Set(zahlenZiel)) if (!zahlenIn(quelle).includes(n)) { f.push(`zusatzzahl ${n}`); break; }
+  // Jahrzehnte und Jahrhunderte (1970er, 19. Jahrhundert) werden in den Zielsprachen oft ausgeschrieben.
+  const rund = (n) => /^(1[5-9]|20)$/.test(n) || /^(1[5-9]|20)\d0$/.test(n);
+  for (const n of zahlenIn(quelle)) if (!rund(n) && !zahlenZiel.includes(n)) { f.push(`zahl ${n}`); break; }
+  for (const n of new Set(zahlenZiel)) if (!rund(n) && !zahlenIn(quelle).includes(n)) { f.push(`zusatzzahl ${n}`); break; }
   for (const t of titelIn(quelle)) if (!z.includes(t)) { f.push(`titel ${t}`); break; }
-  for (const m of markenIn(quelle)) if (!z.includes(m)) { f.push(`marke ${m}`); break; }
+  for (const m of markenIn(quelle)) if (!UEBERSETZBAR.has(m) && !z.includes(m)) { f.push(`marke ${m}`); break; }
   // Titel in Anfuehrungszeichen bleiben deutsch und zaehlen nicht als Rest.
   const ohneTitel = z.replace(/[„“"”][^„“"”]*[“"”]/g, ' ').replace(/[«»][^«»]*[«»]/g, ' ');
   const woerter = ohneTitel.toLowerCase().match(/[\p{L}]+/gu) || [];
