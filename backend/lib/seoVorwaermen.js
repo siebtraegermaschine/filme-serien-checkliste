@@ -15,6 +15,7 @@ async function schritt(name, fn) {
 
 export async function seoVorwaermen() {
   const start = Date.now();
+  await schritt('sitemap-index', () => sitemapIndex()); // zuerst: Crawler holen ihn als Erstes
   const proRegion = new Map();
   for (const l of SEO_LOCALES) if (!proRegion.has(regionFuerLocale(l))) proRegion.set(regionFuerLocale(l), l);
   for (const [region, locale] of proRegion) {
@@ -29,7 +30,6 @@ export async function seoVorwaermen() {
   for (const rolle of ['schauspieler', 'regisseur']) {
     for (const l of ['de-de', 'en-gb', 'fr-fr']) await schritt(`personen ${rolle} ${l}`, () => personenRangliste(rolle, l));
   }
-  await schritt('sitemap-index', () => sitemapIndex());
   for (const l of SEO_LOCALES) {
     for (const b of BEREICHE) {
       if (bereichFuerLocale(l, b)) await schritt(`sitemap ${l}/${b}`, () => gzipTeile(l, b));

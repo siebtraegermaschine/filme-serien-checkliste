@@ -74,7 +74,14 @@ export async function sitemapBereich(locale, bereich, seite = 1) {
 
 // Anzahl Dateien eines Bereichs fuer den Index. Nur Titel koennen die Grenze
 // reissen; der Rest ist deutlich kleiner und bleibt bei einer Datei.
-async function dateiAnzahl(locale, bereich) {
+async function dateiAnzahl(locale, bereich, memo = new Map()) {
+  // Laender-Varianten teilen sich die Texte ihrer textLocale: je textLocale nur einmal zaehlen (das length()-Zaehlen dauert Sekunden).
+  const schluessel = `${textLocale(locale)}:${bereich}`;
+  if (!memo.has(schluessel)) memo.set(schluessel, zaehleDateien(locale, bereich));
+  return memo.get(schluessel);
+}
+
+async function zaehleDateien(locale, bereich) {
   if (bereich === 'person') { // Locales ohne Personentexte: keine leere Sitemap im Index
     const { rows: [p] } = await pool.query(`SELECT count(*)::int AS n FROM seo_content WHERE bereich = 'person' AND locale = $1`, [textLocale(locale)]);
     return p.n > 0 ? 1 : 0;
@@ -93,10 +100,11 @@ export function sitemapIndex() {
 
 async function baueIndex() {
   const zeilen = [];
+  const memo = new Map();
   for (const locale of SEO_LOCALES) {
     for (const bereich of BEREICHE) {
       if (!bereichFuerLocale(locale, bereich)) continue;
-      const n = await dateiAnzahl(locale, bereich);
+      const n = await dateiAnzahl(locale, bereich, memo);
       for (let i = 1; i <= n; i++) {
         zeilen.push(`  <sitemap><loc>${xmlEsc(`${SITE}/sitemap-${locale}-${bereich}${i > 1 ? `-${i}` : ''}.xml`)}</loc></sitemap>`);
       }
