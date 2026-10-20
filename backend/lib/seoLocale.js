@@ -25,6 +25,8 @@ export const LOCALE_KONFIG = {
   'en-us': { sprache: 'en', region: 'US', aktiv: true, indexierbar: true, textLocale: 'en-gb' },
   // Nicht-EWR: nur vorbereitet (kein aktives Marketing ausserhalb des EWR, siehe STATUS.md).
   'pt-br': { sprache: 'pt', region: 'BR', aktiv: false, indexierbar: false },
+  // Phase 7b (Vorlage fuer weitere Laender-Varianten, siehe docs/PLAN-SEO-GLEICHSTAND.md): erst nach Freigabe aktiv.
+  'es-mx': { sprache: 'es', region: 'MX', aktiv: false, indexierbar: false, textLocale: 'es-es' },
 };
 
 // Titelseiten in Nicht-de-Locales: unter dieser Textlaenge noindex und nicht in der

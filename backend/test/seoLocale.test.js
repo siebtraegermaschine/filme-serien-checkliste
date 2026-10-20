@@ -68,6 +68,16 @@ test('Laender-Locales: Texte aus der Sprachfassung, eigene Region, indexierbar',
   assert.ok(['de-at', 'de-ch', 'fr-ch', 'en-ca', 'fr-ca', 'en-us'].every((l) => localeIndexierbar(l)));
 });
 
+test('es-mx (Phase 7b) ist vorbereitet, aber weder aktiv noch indexierbar noch in der Sitemap', async () => {
+  const { textLocale, localesMitText } = await import('../lib/seoLocale.js');
+  assert.equal(localeGueltig('es-mx'), false);
+  assert.equal(localeIndexierbar('es-mx'), false);
+  assert.ok(!SEO_LOCALES.includes('es-mx'));
+  assert.equal(textLocale('es-mx'), 'es-es');
+  assert.equal(regionFuerLocale('es-mx'), 'MX');
+  assert.ok(!localesMitText(['es-es']).includes('es-mx'));
+});
+
 test('clusterAlternates: gleiche Adresse in jedem indexierbaren Locale, region-abhaengige Seiten ohne Cluster', async () => {
   const { clusterAlternates } = await import('../lib/seoLocale.js');
   const start = clusterAlternates('de-at', '/de-at/');
