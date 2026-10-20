@@ -7,6 +7,10 @@
 
 ## Offen
 
+- **SEO-Gleichstand Phase 6 Sitemap-Zählung** (20.10.2026, live, `gzipTeile` im Container): Titel-URLs de-de 93.667 · en-gb 95.977 · fr-fr 92.750 ·
+  nl-nl 90.174 · pt-pt 87.272 · it-it 87.015 · es-es 86.789 (= 92,7 % von de). Personen: de 23.773, en 11.112, fr 10.192, es/it/nl/pt 0
+  (noch keine Personentexte, Hubs noindex). Kino-Städte nur de (470). Länder-Varianten spiegeln ihre Sprachfassung. Ziel 95–98 % bei es/it/pt/nl
+  noch nicht erreicht: weitere Option-2-Wellen oder Langtexte nötig.
 - **SEO-Gleichstand Schritte 4–5 erledigt** (20.10.2026): Kino-Städte de-de: 131 Texte <200 Zeichen mit echten Kino-Adressen
   ersetzt (`--kurze-ersetzen`, Commit d100b65), jetzt 0 <200. Anbieter/Genre/Hub in allen Nicht-de-Sprachen: 38 Texte neu
   übersetzt bzw. vervollständigt (die alten endeten ohne den letzten Satz), jetzt 0 <200. Bewusst kurz bleiben die 65 Titel
