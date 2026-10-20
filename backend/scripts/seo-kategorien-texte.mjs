@@ -167,16 +167,21 @@ export function bauStadtText(d) {
     `Für ${d.ort} sind bei MovieMatch ${n} Kinos gelistet`,
   ]) + (mitWeb ? `, ${mitWeb === n ? 'alle' : mitWeb} davon mit Website.` : '.'));
   if (nennen.length >= 2) s.push(`Dazu zählen ${aufzaehlung(nennen)}.`);
+  // Ohne Websites bleibt der Text kurz: dann die Kinos mit Strasse nennen (echte Daten, kein Fuellstoff).
+  if (s.join(' ').length < 170) {
+    const mitAdresse = [...new Map(kinos.filter((x) => x.strasse).map((x) => [x.name, `${x.name} (${x.strasse})`])).values()].slice(0, 3);
+    if (mitAdresse.length) s.push(`Gelistet sind unter anderem ${aufzaehlung(mitAdresse)}.`);
+  }
   s.push('Adresse und Website stammen aus OpenStreetMap und stehen weiter unten bei jedem Kino.');
   return s.join(' ');
 }
 
 // ---- Lauf ----------------------------------------------------------------
-async function schreiben(bereich, schluessel, text, dryRun) {
+async function schreiben(bereich, schluessel, text, dryRun, ersetzen = false) {
   if (dryRun) return true;
   const r = await pool.query(
     `INSERT INTO seo_content (bereich, schluessel, locale, text) VALUES ($1, $2, $3, $4)
-     ON CONFLICT (bereich, schluessel, locale) DO NOTHING`,
+     ON CONFLICT (bereich, schluessel, locale) DO ${ersetzen ? 'UPDATE SET text = EXCLUDED.text' : 'NOTHING'}`,
     [bereich, schluessel, LOCALE, text]);
   return r.rowCount === 1;
 }
@@ -217,10 +222,13 @@ async function main() {
   if (!nur || nur === 'kino_stadt') {
     for (const slug of await staedteFuerSitemap()) {
       const d = await ladeKinoStadt(slug, LOCALE);
-      if (!d || d.text || d.kinos.length < 3) { z.kino_stadt[1]++; continue; }
+      // --kurze-ersetzen: vorhandene Generator-Texte unter 200 Zeichen neu bauen (laengere = Handarbeit, bleiben).
+      const ersetzen = !!d && !!d.text && a.includes('--kurze-ersetzen') && d.text.length < 200;
+      if (!d || (d.text && !ersetzen) || d.kinos.length < 3) { z.kino_stadt[1]++; continue; }
       const text = bauStadtText(d);
+      if (ersetzen && text.length <= d.text.length) { z.kino_stadt[1]++; continue; }
       zeigen('kino_stadt', slug, text);
-      (await schreiben('kino_stadt', slug, text, dryRun)) ? z.kino_stadt[0]++ : z.kino_stadt[1]++;
+      (await schreiben('kino_stadt', slug, text, dryRun, ersetzen)) ? z.kino_stadt[0]++ : z.kino_stadt[1]++;
     }
   }
   for (const [b, [neu, rest]] of Object.entries(z)) {
