@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Kurztexte (ca. 250-500 Zeichen) fuer Titelseiten in en-gb/fr-fr/it-it/nl-nl/pt-pt
+// Kurztexte (ca. 250-500 Zeichen) fuer Titelseiten in en-gb/fr-fr/it-it/nl-nl/pt-pt/es-es
 // (seo_content, bereich 'titel'), deterministisch aus Katalogfeldern, kein API-Aufruf.
 // Gegenstueck zu seo-titel-kurztexte.mjs (de-de). Legt nur FEHLENDE Eintraege an
 // (DO NOTHING); der Uebersetzungslauf (seo-uebersetzen.mjs) ersetzt sie spaeter durch Langtexte.
@@ -8,6 +8,7 @@
 import 'dotenv/config';
 import { pathToFileURL } from 'node:url';
 import { pool } from '../db/pool.js';
+import { genreAnzeige } from '../lib/genreNamen.js';
 
 const MIN = 250;
 
@@ -119,6 +120,21 @@ const L = {
     schluss: (serie) => `No MovieTaste pode adicionar ${serie ? 'a série' : 'o filme'} à sua watchlist e compará-lo com o seu gosto.`,
     zahl: (n) => n.toFixed(1).replace('.', ','),
   },
+  'es-es': {
+    dn: 'es', and: 'y',
+    intro: (t, serie, jahr) => `«${t}» es ${serie ? 'una serie' : 'una película'}${jahr ? ` de ${jahr}` : ''}`,
+    land: (l) => ` (país de producción: ${l})`,
+    genre: (g, serie) => `En el catálogo figura en ${g}.`,
+    dir: (d, serie) => serie ? `La serie fue creada por ${d}.` : `La dirección es de ${d}.`,
+    cast: (c) => `En el reparto figuran ${c}.`,
+    staffeln: (n, r) => `La serie cuenta con ${n} ${n === 1 ? 'temporada' : 'temporadas'}${r ? `, con episodios de unos ${r} minutos` : ''}.`,
+    laufzeit: (r) => `La duración es de ${r} ${r === 1 ? 'minuto' : 'minutos'}.`,
+    sprache: (s) => `El idioma original es ${s}.`,
+    orig: (o) => `El título original es «${o}».`,
+    rating: (r) => `En TMDB el público le da una media de ${r} sobre 10.`,
+    schluss: (serie) => `En MovieTaste puedes añadir ${serie ? 'la serie' : 'la película'} a tu watchlist y compararla con tu propio gusto.`,
+    zahl: (n) => n.toFixed(1).replace('.', ','),
+  },
 };
 
 const dnCache = {};
@@ -164,7 +180,7 @@ export function bauKurztext(t, locale) {
   const x = L[locale];
   const serie = t.type === 'series';
   const titel = zielTitel(t, locale);
-  const genres = (t.genres || []).map((g) => GENRES[g]?.[locale]).filter(Boolean).slice(0, 3);
+  const genres = (t.genres || []).map((g) => GENRES[g]?.[locale] ?? (locale === 'es-es' ? genreAnzeige(g, 'es') : null)).filter(Boolean).slice(0, 3);
   const s = [];
   const woher = laender(locale, t.origin_country);
   s.push(x.intro(titel, serie, t.year) + (woher.length ? x.land(aufz(locale, woher)) : '') + '.');

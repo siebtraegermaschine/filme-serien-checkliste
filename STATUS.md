@@ -33,6 +33,11 @@
   Überschriften, `pruefe()` würde sie ablehnen). Echt fehlende lange Texte: es-es 1.405 (−250 jetzt), fr 17, nl 17, it 52, pt 70, en 91.
   Übersetzen der Kurztexte per Subagent = ca. 5.600 Pakete, unrealistisch; Alternative: Kurztexte je Sprache direkt aus DB-Fakten
   erzeugen (Phase 5, ohne Modell, kostenlos). **Entschieden (20.10.2026, Nutzer): so vorgehen** – lange Texte weiter per Abo, Kurztexte aus DB-Fakten je Sprache.
+- **SEO-Gleichstand Phase 4 es-es-Langtexte fertig** (20.10.2026): Alle 45 Pakete (1.117 Texte) per Sonnet-Abo übersetzt und eingespielt
+  (Wellen 249 + 224 + 639 geschrieben, je 1 wegen „Zahl ohne Beleg" verworfen). Von den de-Langtexten (≥1200) fehlen in es-es nur noch 3
+  (dauerhaft abgelehnt). Kurztexte-Generator (`seo-titel-kurztexte-lokal.mjs`) um es-es ergänzt, Probelauf auf dem Server:
+  71.857 Kandidaten, 49.536 erreichen ≥250 Zeichen, 22.321 haben zu wenig Fakten. Noch NICHT scharf gelaufen – vorher mit dem Nutzer
+  Top-Titel-Auswahl je Sprache abstimmen. Beobachtung: Regisseursnamen kommen teils in Originalschrift (z. B. Hebräisch) aus der DB.
 - **SEO-Gleichstand Phase 4, Titel Runde 2 – Entscheidung „Weg 2"** (20.10.2026, Nutzer): Kurztexte NICHT übersetzen. Stattdessen
   (a) nur die wichtigsten Titel je Sprache (Vorschlag Top ca. 5.000 nach Beliebtheit) bekommen lange Texte per Abo (übersetzt aus de ≥ 1200),
   (b) alle übrigen Titel bekommen Kurztexte aus DB-Fakten je Sprache (Phase 5, kein Modell, nur Mindeststand ≥ 250 Zeichen).
