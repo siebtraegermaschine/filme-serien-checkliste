@@ -71,6 +71,8 @@ Alle übersetzten Texte der Ziel-Locale messen. Unter 250 Zeichen: wie Phase 1 m
 - Stichprobe live auf movietaste.de (`seo-audit.mjs`): Status, Canonical, robots, Duplikate.
 - STATUS.md aktualisieren, Memory-Eintrag zum Stand, offene Reste auflisten.
 
+**Messung 20.10.2026 abends (live, Sitemap-URLs):** Titel de-de 93.667 · en-gb 95.977 · fr-fr 92.750 · es-es 89.286 (95,3 %) · it-it 89.514 (95,6 %) · nl-nl 90.174 (96,3 %) · pt-pt 89.069 (95,1 %). Personen: es 999 · it 999 · nl 999 · pt 998 (de-de 23.773, en-gb 11.112, fr-fr 10.192). Hubs 17–23 je Sprache. Die früher gesehenen 104–210 Personen-URLs waren nur Cache. Dauerhaft abgelehnt: ca. 5 Personentexte (z. B. schauspieler:4520, :2638, regisseur:6593) und 7 Titel (zu kurz).
+
 ## Phase 7 – Erweitertes Ziel: alle großen Westsprachen, alle Länder Europas + Amerikas (Plan 20.10.2026, Entscheidungen offen)
 Ziel: jede Titelseite hat Text in allen großen westlichen Sprachen; weitere Länder bekommen **keine eigenen Texte**, sondern Länder-Varianten (`textLocale` erbt die Sprachfassung, eigene `region` für Streaming/Kino, hreflang-Cluster über `localesMitText()`), wie de-at/de-ch/fr-ch/en-ca/fr-ca/en-us.
 **Stufe 7a – Vorhandene Sprachen vollständig (ohne Entscheidung, Abo) — ERLEDIGT 20.10.2026 (Wellen 1–10, Personen, Kino-Städte, Anbieter/Genre/Hub-Reste; 65 Titel ohne Fakten bleiben kurz):** Option 2 (Entscheidung 20.10.): je Sprache ca. 1.000 weitere Top-Titel per `--kurz`-Übersetzung (≈120 Pakete à 50, Wellen à 8); danach Personen, Kino-Städte, 65 Titel ohne Fakten, Anbieter/Genre/Hub-Reste, Phase 6.

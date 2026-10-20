@@ -23,7 +23,7 @@
 - **SEO-Gleichstand Titel-Lücke es/it/pt geschlossen** (20.10.2026, Abo-Sonnet, kein Geld): Kurztext-Wellen 11–15 (`--kurz`, Pakete à 50),
   zusammen 6.793 Texte, 7 wegen „zu kurz“ verworfen. Titel mit de-Text ≥200 Zeichen, aber ohne Zieltext ≥200: es 6.896→4.399,
   it 6.670→4.171, pt 6.413→4.616, nl 3.511 (unverändert), fr 956, en 64 (de-de 93.667) = Abdeckung es 95,3 %, it 95,5 %, pt 95,1 %,
-  nl 96,3 %. Ziel 95 % erreicht. Sitemap-Zahlen neu zählen, sobald der Cache abgelaufen ist (noch nicht gemessen).
+  nl 96,3 %. Ziel 95 % erreicht. Sitemap gemessen 20.10.: Titel es 89.286 / it 89.514 / nl 90.174 / pt 89.069 (de 93.667); Personen je ~999; Details im Plan.
 - **SEO-Gleichstand Phase 6 Sitemap-Zählung** (20.10.2026, live, `gzipTeile` im Container): Titel-URLs de-de 93.667 · en-gb 95.977 · fr-fr 92.750 ·
   nl-nl 90.174 · pt-pt 87.272 · it-it 87.015 · es-es 86.789 (= 92,7 % von de). Personen: de 23.773, en 11.112, fr 10.192, es/it/nl/pt 0
   (noch keine Personentexte, Hubs noindex). Kino-Städte nur de (470). Länder-Varianten spiegeln ihre Sprachfassung. Ziel 95–98 % bei es/it/pt/nl
