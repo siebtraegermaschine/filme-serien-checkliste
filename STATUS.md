@@ -33,6 +33,14 @@
   Überschriften, `pruefe()` würde sie ablehnen). Echt fehlende lange Texte: es-es 1.405 (−250 jetzt), fr 17, nl 17, it 52, pt 70, en 91.
   Übersetzen der Kurztexte per Subagent = ca. 5.600 Pakete, unrealistisch; Alternative: Kurztexte je Sprache direkt aus DB-Fakten
   erzeugen (Phase 5, ohne Modell, kostenlos). **Entschieden (20.10.2026, Nutzer): so vorgehen** – lange Texte weiter per Abo, Kurztexte aus DB-Fakten je Sprache.
+- **SEO-Gleichstand Phase 4, Titel Runde 2 – Entscheidung „Weg 2"** (20.10.2026, Nutzer): Kurztexte NICHT übersetzen. Stattdessen
+  (a) nur die wichtigsten Titel je Sprache (Vorschlag Top ca. 5.000 nach Beliebtheit) bekommen lange Texte per Abo (übersetzt aus de ≥ 1200),
+  (b) alle übrigen Titel bekommen Kurztexte aus DB-Fakten je Sprache (Phase 5, kein Modell, nur Mindeststand ≥ 250 Zeichen).
+  Erledigt: die echt fehlenden Langtexte, 10 Pakete (es 50, it 50, pt 50, en 50, fr 17, nl 17): **220 eingespielt**, 14 wegen
+  „Zahl ohne Beleg" verworfen (Jahre/Tausenderzahlen im Fließtext), Stichprobe 50 gelesen, gut. Rest der Langtexte: es-es ca. 1.100, it/pt/en je ca. 0–20.
+  **Messung:** 10 Pakete (234 Texte) kosteten ca. +1 Prozentpunkt am 5-Stunden-Limit (13 → 14 %), Wochenlimit blieb bei 18 %; Dauer ca. 2 Min.
+  (Die frühere Angabe „13 % je Runde" war der Gesamtstand, nicht der Verbrauch.) Damit sind ca. 1.100 es-es-Texte (~45 Pakete) in einem Fenster machbar.
+  Nächster Schritt: es-es-Langtexte weiter, dann Beliebtheits-Auswahl für Weg 2 festlegen, dann Kurztexte-Generator je Sprache.
 - **SEO-Gleichstand Phase 2 erledigt** (20.10.2026, nur gemessen, nichts geändert).
   Basis de-de ≥ 250 Zeichen; „fehlt" = Schlüssel ohne Text in der Ziel-Locale
   (Texte < 250 in Fremdsprachen: nur Anbieter/Genre/Hub je 1–6, Kino 0–5).
