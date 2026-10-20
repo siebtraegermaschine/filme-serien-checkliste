@@ -83,7 +83,7 @@ export function uebersetzungPruefen(quelle, ziel, locale) {
   return f;
 }
 
-function systemPrompt(locale, bereiche = []) {
+export function systemPrompt(locale, bereiche = []) {
   const ziel = ZIELE[locale];
   const ab = bereiche.includes('person') ? PERSON_ABSCHNITTE[locale] : null;
   const abRegel = ab ? `\n- Der Text hat drei Abschnitte mit den Ueberschriften „### Werdegang", „### Filmografie bei uns", „### Einordnung". Uebernimm die Zeilen mit ### und uebersetze die Ueberschriften genau so: „### ${ab[0]}", „### ${ab[1]}", „### ${ab[2]}".\n- Titel von Filmen und Serien sowie Namen von Personen, Firmen und Orten bleiben im Wortlaut unveraendert.` : '';
