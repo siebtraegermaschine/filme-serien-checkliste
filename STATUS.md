@@ -7,6 +7,16 @@
 
 ## Offen
 
+- **SEO-Gleichstand Phase 1 erledigt** (20.10.2026, live in der DB): 11.968
+  de-de-Titeltexte < 250 Zeichen per `backend/scripts/seo-titel-verlaengern.mjs`
+  verlängert (Streaming-Anbieter je Land, einzelner Besetzungseintrag; kein
+  API-Geld). Sicherung der Alttexte: Server `/tmp/verl/titel-sicherung.json`.
+  Dazu 12 redaktionelle Texte (anbieter 2, genre 6, hub 4) von Hand verlängert.
+  Rest unter 250 in de-de: 65 Titel (nur Jahr/Genre bekannt, Auffüllen wäre
+  Füllstoff; **Entscheidung nötig**: so lassen oder mit einem Hinweissatz
+  füllen) und 443 Kino-Städte (bewusst kurz, Entscheidung offen).
+  Nächster Schritt: Phase 2 (Differenzen messen), siehe `docs/PLAN-SEO-GLEICHSTAND.md`.
+
 - **PageSpeed: Rest-LCP mobil** (13.10.2026) — Frühabruf, Poster-Priorität und Minify sind
   live; neuen PageSpeed-Lauf (einige Minuten nach dem Deploy) abwarten und
   danach entscheiden.

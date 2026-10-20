@@ -37,7 +37,8 @@ direkt in `seo_content` (kein Deploy nötig); Code-Änderungen sind ein Push auf
   - Kino-Stadt-Texte (469, Ø ca. 206 Zeichen) bewusst kurz, weil je Stadt keine Spielzeiten vorliegen; mehr Text wäre Füllstoff. Doppelte Kinonamen entfernt und neu erzeugt. Die Schwelle 250 gilt im Code nur für Titel (`titelTextReicht`); **Entscheidung nötig**, ob Kino-Städte trotzdem auf 250 sollen (Konflikt mit dem Ziel „alle ≥ 250").
   - Ca. 528 Titel dauerhaft von der Faktenprüfung abgelehnt.
 
-## Phase 1 – de-de-Texte auf ≥ 250 Zeichen (Quelle für alle Sprachen)
+## Phase 1 – de-de-Texte auf ≥ 250 Zeichen (Quelle für alle Sprachen) — ERLEDIGT 20.10.2026
+Ergebnis: 11.968 Titel + 12 redaktionelle Texte verlängert; Rest 65 Titel ohne Fakten (Entscheidung offen) und 443 Kino-Städte (nicht angefasst).
 1. Liste ziehen: alle `seo_content`-Zeilen `locale='de-de'` mit `length(text) < 250`, je Bereich (Titel zuerst, dann Rest). Zahl und Längenverteilung festhalten.
 2. Bausteine aus DB-Fakten entwerfen (Genre, Jahr, Laufzeit, Land/Sprache, Besetzung/Regie, Anbieter, Bewertung, Staffeln/Folgen). Nur belegte Fakten, keine Behauptungen über reale Personen. Mehrere Satzvarianten je Baustein, damit keine Vorlagenähnlichkeit entsteht (Stichprobe: 448 Gruppen / 13.793 Texte sind schon vorlagenähnlich). Vorhandene Skripte als Ausgangspunkt: `seo-titel-kurztexte.mjs`, `seo-titel-kurztexte-lokal.mjs`.
 3. Bestehenden Text **anhängen**, nicht ersetzen (`seo-texte-anhaengen.mjs` prüfen).
