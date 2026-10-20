@@ -7,6 +7,12 @@
 
 ## Offen
 
+- **SEO-Gleichstand Phase 7a/Option 2 läuft** (20.10.2026): Personenseiten in es-es/it-it/nl-nl/pt-pt freigeschaltet
+  (Commit c671065, live; Hubs 200 aber noindex, solange keine Personentexte existieren; Personenseite nur mit Text).
+  Kurztext-Übersetzung der Top-Titel (`--kurz`, 50 je Paket, 12 Pakete je Welle, Abo-Sonnet): Welle 1 (it/pt, 399), Welle 2
+  (600, alle 6 Sprachen à 100) eingespielt, Stichprobe unauffällig; Welle 3 läuft. Pipeline: Scratchpad-Skript `welle.sh`
+  (pakete/hoch/dry/scharf). Verbrauch je Welle ca. 1,1 Mio. Sonnet-Tokens. Danach Generator `seo-titel-kurztexte-lokal.mjs` nochmal laufen lassen.
+
 - **SEO-Gleichstand Phase 1 erledigt** (20.10.2026, live in der DB): 11.968
   de-de-Titeltexte < 250 Zeichen per `backend/scripts/seo-titel-verlaengern.mjs`
   verlängert (Streaming-Anbieter je Land, einzelner Besetzungseintrag; kein
