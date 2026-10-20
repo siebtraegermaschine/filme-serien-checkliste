@@ -25,6 +25,14 @@
   `PERSON_TX` hat jetzt es/it/nl/pt; `PERSONEN_LOCALES` (seoLocale.js:49) noch `['en-gb','fr-fr']`.
   Offen: Titel (en,fr,it,nl,pt,es; nach 3 Runden es-es Wochenlimit messen), Personen + Freischaltung, Kino-Städte auf 250 Zeichen,
   65 Titel ohne Fakten, Anbieter/Genre/Hub-Reste, Phase 6.
+- **SEO-Gleichstand Phase 4, Titel Runde 1** (20.10.2026): es-es 248 von 250 Titeltexten übersetzt und live
+  (2 wegen „Zahl ohne Beleg" verworfen). Stichprobe 50 Texte gelesen, Qualität gut. Verbrauch: 10 Sonnet-Pakete à 25 Texte
+  ≈ 13 % des 5-Stunden-Limits, Wochenlimit stand danach bei 18 % (Ausgangswert vor der Runde nicht gemessen), ca. 3 Min je Runde.
+  **Befund, Entscheidung nötig:** `kandidaten()` in `seo-uebersetzen.mjs` wählt nur de-Texte ≥ 1200 Zeichen. Die ca. 140.000 fehlenden
+  Titeltexte (Phase-2-Tabelle) sind aber de-Kurztexte von 250–1199 Zeichen (Phase-1-Bausteine, ca. 450 Zeichen, ohne die vier
+  Überschriften, `pruefe()` würde sie ablehnen). Echt fehlende lange Texte: es-es 1.405 (−250 jetzt), fr 17, nl 17, it 52, pt 70, en 91.
+  Übersetzen der Kurztexte per Subagent = ca. 5.600 Pakete, unrealistisch; Alternative: Kurztexte je Sprache direkt aus DB-Fakten
+  erzeugen (Phase 5, ohne Modell, kostenlos). Bis zur Entscheidung nur die langen Texte weiter übersetzen.
 - **SEO-Gleichstand Phase 2 erledigt** (20.10.2026, nur gemessen, nichts geändert).
   Basis de-de ≥ 250 Zeichen; „fehlt" = Schlüssel ohne Text in der Ziel-Locale
   (Texte < 250 in Fremdsprachen: nur Anbieter/Genre/Hub je 1–6, Kino 0–5).

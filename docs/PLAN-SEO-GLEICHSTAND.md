@@ -56,7 +56,7 @@ Ergebnis: 11.968 Titel + 12 redaktionelle Texte verlängert; Rest 65 Titel ohne 
 ## Phase 3 – Priorisieren
 Reihenfolge je Locale nach Nutzen: (a) Titel nach Beliebtheit (Bewertungs-/Aufrufzahlen), (b) Bestenlisten, Reihen, (c) Personen nach Titelzahl (Top zuerst). Sprachen: `es-es` zuerst (größte Lücke, ca. 70.000 Titel), danach it/pt/nl/fr/en. `pt-br` bleibt inaktiv.
 
-## Phase 4 – Übersetzen (Abo)
+## Phase 4 – Übersetzen (Abo) — läuft; Runde 1 es-es erledigt, Befund zu Kurztexten siehe STATUS.md
 1. Verfahren: `seo-uebersetzen-dateien.mjs` (Pakete → Sonnet-Subagenten → einspielen, Faktenprüfung wie `seo-uebersetzen.mjs`). Runden à 10 Pakete × 25 Texte, je Runde ca. 10–15 Min.
 2. **Erst 3 Runden `es-es`**, danach Wochenlimit ablesen (Nutzungsanzeige) und Gesamtdauer neu schätzen; Ergebnis in STATUS.md. Reicht das Abo nicht, dem Nutzer Batch-API-Kosten (ca. 0,22 Cent/Text) nennen und **Freigabe abwarten**.
 3. Quellsprache: `de-de` (nach Phase 1); fehlt dort etwas, die nächste fertige Sprache.
