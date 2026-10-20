@@ -11,6 +11,15 @@
   (a) 24× HTTP 502 während des laufenden Deploys, danach Stichproben 200; (b) leere Personen-Sitemaps es/it/nl/pt im Index → behoben
   (Index listet Personen nur mit Text); (c) JSON-LD-Fehlalarme: der Audit hielt `/pt-pt/filme/<titel>` für eine Liste → `seitenart()` löst
   jetzt lokale Pfadwörter auf. Kein echter Seitenfehler gefunden. Nächster Audit-Lauf zur Bestätigung außerhalb eines Deploys.
+- **SEO-Gleichstand Phase 7 Personentexte es/it/nl/pt erledigt** (20.10.2026, Abo-Sonnet, kein Geld): je Sprache die Top-1.000
+  Personen übersetzt (es 999, it 999, nl 999, pt 998 in `seo_content`). Wellen 6–8 plus Nachübersetzung der 797 abgelehnten/fehlenden Texte
+  (Wellen A/B, danach gezielte Korrekturen). Dauerhaft abgelehnt bleiben ca. 5 Texte (schauspieler:4520 „TDR“, schauspieler:2638 und
+  regisseur:6593 „zu viele deutsche Wörter“, Reste). Lehre: Der Validator verlangt Titel in „…“ UND deutsche Zitate in „…“ wortgleich,
+  Wörter mit Großbuchstaben (BWL, KI, KZ, CD, McQueens) unverändert; USA/US/TV/EU dürfen übersetzt werden.
+  Quellfehler in de-de behoben (Moretz 56734, Minase 1325949, Elliott 16431) und in allen vier Sprachen neu übersetzt.
+  Personen-Hubs `/es-es/actores` usw. sind jetzt `index,follow` und im Sitemap-Hub-Index; Personen-Sitemaps füllen sich mit dem Cache
+  (zuletzt 115/104/210/188 gelistet, Nachzählen nach Cache-Ablauf offen). Noch offen aus Phase 7: Titel-Lücke es/it/pt/nl (Langtexte
+  für Top-Titel, `--kurz`), Phase 7c Sprachen, Bestätigungs-Audit auf ruhigem Server, Personen über Rang 1.000 hinaus.
 - **SEO-Gleichstand Phase 6 Sitemap-Zählung** (20.10.2026, live, `gzipTeile` im Container): Titel-URLs de-de 93.667 · en-gb 95.977 · fr-fr 92.750 ·
   nl-nl 90.174 · pt-pt 87.272 · it-it 87.015 · es-es 86.789 (= 92,7 % von de). Personen: de 23.773, en 11.112, fr 10.192, es/it/nl/pt 0
   (noch keine Personentexte, Hubs noindex). Kino-Städte nur de (470). Länder-Varianten spiegeln ihre Sprachfassung. Ziel 95–98 % bei es/it/pt/nl
