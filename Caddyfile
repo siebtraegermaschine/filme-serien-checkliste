@@ -33,6 +33,11 @@ movietaste.de, www.movietaste.de {
 		-Server
 	}
 
+	# Metas KI-Crawler (57.141.0.0/16) hielt den Server mit ~50 parallelen
+	# Abrufen auf Anschlag; robots.txt wirkt dort nur langsam.
+	@meta_crawler remote_ip 57.141.0.0/16
+	respond @meta_crawler 429
+
 	reverse_proxy backend:3000
 }
 
