@@ -3,8 +3,8 @@
 // Bearbeiter (Abo-Subagenten) schreiben und deren Ergebnisse geprueft einspielen.
 // Gleiche Kandidaten, Regeln und Pruefung wie seo-uebersetzen.mjs.
 //
-//   node scripts/seo-uebersetzen-dateien.mjs pakete --locales it-it,nl-nl --pakete 10 --je 20 --ziel DIR
-//   node scripts/seo-uebersetzen-dateien.mjs einspielen --verzeichnis DIR [--dry-run]
+//   node scripts/seo-uebersetzen-dateien.mjs pakete --locales it-it,nl-nl --pakete 10 --je 20 --ziel DIR [--kurz]
+//   node scripts/seo-uebersetzen-dateien.mjs einspielen --verzeichnis DIR [--dry-run] [--kurz]
 // Pakete heissen paket-<locale>-NN.json, Ergebnisse texte-<locale>-NN.json ({schluessel: text}).
 import 'dotenv/config';
 import fs from 'node:fs';
@@ -14,6 +14,7 @@ import { SPRACHEN, ueberschriftenNormalisieren } from './seo-batch.mjs';
 import { kandidaten, zielTitel, systemPrompt, pruefe } from './seo-uebersetzen.mjs';
 
 const a = process.argv.slice(2);
+const kurz = a.includes('--kurz');
 const hol = (n, s) => { const i = a.indexOf(`--${n}`); return i >= 0 && a[i + 1] && !a[i + 1].startsWith('--') ? a[i + 1] : s; };
 
 async function pakete() {
@@ -26,14 +27,14 @@ async function pakete() {
   const proLocale = Object.fromEntries(locales.map((l, i) => [l, Math.floor(anzahl / locales.length) + (i < anzahl % locales.length ? 1 : 0)]));
   let nr = 0;
   for (const l of locales) {
-    const liste = await kandidaten({ locale: l, limit: proLocale[l] * je, zufall: false, versucht: [] });
+    const liste = await kandidaten({ locale: l, limit: proLocale[l] * je, zufall: false, versucht: [], kurz });
     for (let i = 0; i < liste.length; i += je) {
       nr++;
       const titel = liste.slice(i, i + je).map((t) => ({
         schluessel: `${t.type}:${t.tmdb_id}`, titel_de: t.title, titel_ziel: zielTitel(t, l), quelle: t.quelle,
       }));
       const datei = path.join(ziel, `paket-${l}-${String(nr).padStart(2, '0')}.json`);
-      fs.writeFileSync(datei, JSON.stringify({ locale: l, regeln: systemPrompt(l), titel }, null, 1));
+      fs.writeFileSync(datei, JSON.stringify({ locale: l, regeln: systemPrompt(l, kurz), titel }, null, 1));
     }
     console.log(`${l}: ${liste.length} Titel`);
   }
@@ -57,7 +58,7 @@ async function einspielen() {
       const t = nach.get(schluessel);
       if (!t) { z.unbekannt++; console.log(`UNBEKANNT ${f} ${schluessel}`); continue; }
       const text = ueberschriftenNormalisieren(String(roh).trim());
-      const { fehler, verdacht } = pruefe(text, t, locale);
+      const { fehler, verdacht } = pruefe(text, t, locale, kurz);
       if (fehler.length) { z.format++; console.log(`FORMAT ${locale} ${schluessel} ${fehler.join('; ')}`); continue; }
       if (verdacht.length) { z.fakten++; console.log(`FAKTEN ${locale} ${schluessel} ${verdacht.join('; ')}`); continue; }
       z.ok++;

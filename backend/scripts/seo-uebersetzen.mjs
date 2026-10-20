@@ -48,15 +48,15 @@ function cidParse(id) {
   return { locale: l.replace('_', '-'), schluessel: `${rest.slice(0, i)}:${rest.slice(i + 1)}` };
 }
 
-export async function kandidaten({ locale, limit, zufall, versucht }) {
+export async function kandidaten({ locale, limit, zufall, versucht, kurz = false }) {
   const { rows } = await pool.query(
     `SELECT t.type, t.tmdb_id, t.title, t.original_title, t.title_en, t.year, t.rating,
             t.director, t.cast_names, t.uebersetzungen, d.text AS quelle
        FROM seo_content d
        JOIN titles t ON d.schluessel = t.type || ':' || t.tmdb_id
-      WHERE d.bereich = 'titel' AND d.locale = 'de-de' AND length(d.text) >= 1200
+      WHERE d.bereich = 'titel' AND d.locale = 'de-de' AND length(d.text) >= ${kurz ? 200 : 1200}
         AND NOT EXISTS (SELECT 1 FROM seo_content s WHERE s.bereich = 'titel'
-              AND s.schluessel = d.schluessel AND s.locale = $1 AND length(s.text) >= 1200)
+              AND s.schluessel = d.schluessel AND s.locale = $1 AND length(s.text) >= ${kurz ? 200 : 1200})
         AND NOT (d.schluessel = ANY($3::text[]))
       ORDER BY ${zufall ? 'random()' : 't.vote_count DESC NULLS LAST'}
       LIMIT $2`,
@@ -75,7 +75,7 @@ export function zielTitel(t, locale) {
   return t.original_title || t.title_en || t.title;
 }
 
-export function systemPrompt(locale) {
+export function systemPrompt(locale, kurz = false) {
   const s = SPRACHEN[locale];
   const dezimal = locale.startsWith('en') ? 'Punkt (7.4)' : 'Komma (7,4)';
   return `Du uebersetzt redaktionelle Titeltexte des Filmportals movietaste.de aus dem Deutschen ins ${s.sprache} (${locale}).
@@ -83,11 +83,11 @@ export function systemPrompt(locale) {
 REGELN
 - Gib nur die Uebersetzung aus, ohne Vorrede und Nachbemerkung.
 - Uebertrage Inhalt und Aufbau getreu. Nichts hinzufuegen, nichts erfinden, keine Fakten aus eigenem Wissen. Jede Zahl, jeder Name bleibt wie im Text.
-- Exakt vier Ueberschriften in dieser Reihenfolge, als "### ..." (die deutschen Ueberschriften ersetzt du so):
+${kurz ? '- Kurztext ohne Ueberschriften: ein einziger Absatz, keine "###".' : `- Exakt vier Ueberschriften in dieser Reihenfolge, als "### ..." (die deutschen Ueberschriften ersetzt du so):
 ### ${s.abschnitte[0]}
 ### ${s.abschnitte[1]}
 ### ${s.abschnitte[2]}
-### ${s.abschnitte[3]}
+### ${s.abschnitte[3]}`}
 - Fliesstext wie in der Vorlage, keine Aufzaehlungen, keine Fettschrift.
 - Personennamen unveraendert. Den Titel schreibst du so, wie unter TITEL angegeben.
 - Dezimalzahlen mit ${dezimal}.
@@ -123,11 +123,12 @@ const DE_WOERTER = /\b(der|die|das|und|nicht|ist|mit|eine?n?|sich|auf|für|wird)
 const DE_WOERTER_NL = /\b(und|nicht|ist|mit|eine?n?|sich|auf|für|wird|dem|zum|zur|aber|oder|wurde)\b/gi;
 const woerterZahl = (s) => s.replace(/^#{1,6}.*$/gm, '').split(/\s+/).filter(Boolean).length;
 
-export function pruefe(text, t, locale) {
+export function pruefe(text, t, locale, kurz = false) {
   const fehler = [];
   const soll = SPRACHEN[locale].abschnitte;
   const u = [...text.matchAll(/^#{1,6}\s*(.+)$/gm)].map((m) => m[1].trim());
-  if (u.length !== 4 || u.some((x, i) => x !== soll[i])) fehler.push(`Ueberschriften: ${JSON.stringify(u)}`);
+  if (kurz) { if (u.length) fehler.push('Ueberschriften im Kurztext'); if (text.length < 200) fehler.push(`zu kurz (${text.length})`); }
+  else if (u.length !== 4 || u.some((x, i) => x !== soll[i])) fehler.push(`Ueberschriften: ${JSON.stringify(u)}`);
   const w = woerterZahl(text), q = woerterZahl(t.quelle);
   if (w < q * 0.6 || w > q * 1.7) fehler.push(`Laenge ${w} Woerter bei Quelle ${q}`);
   if (/\*\*/.test(text) || /^\s*[-*•]\s/m.test(text)) fehler.push('Fett/Aufzaehlung');

@@ -55,7 +55,7 @@ test('Nicht-de-Titelseite verlinkt keine Personen-Seiten (noch nicht lokalisiert
   assert.match(html, /imprint\.html/);
 });
 
-test('Nicht-de: index ab 250 Zeichen Text, darunter und ohne Text noindex', () => {
+test('Nicht-de: index ab 200 Zeichen Text, darunter und ohne Text noindex', () => {
   const lang = 'Ein ausreichend langer Text. '.repeat(10);
   for (const locale of ['es-es', 'it-it', 'nl-nl', 'pt-pt']) {
     assert.equal(meta(seiteTitelDetail(titel(lang), locale), 'robots'), 'index,follow', locale);

@@ -10,7 +10,7 @@ import { pathToFileURL } from 'node:url';
 import { pool } from '../db/pool.js';
 import { genreAnzeige } from '../lib/genreNamen.js';
 
-const MIN = 250;
+const MIN = 200;
 
 const GENRES = {
   Drama: { 'en-gb': 'Drama', 'fr-fr': 'Drame', 'it-it': 'Drammatico', 'nl-nl': 'Drama', 'pt-pt': 'Drama' },
