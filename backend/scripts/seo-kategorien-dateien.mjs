@@ -4,6 +4,7 @@
 // deren Ergebnisse mit denselben Pruefungen wie seo-kategorien-uebersetzen.mjs einspielen.
 //
 //   node scripts/seo-kategorien-dateien.mjs pakete --bereich reihe --locale es-es --je 40 --ziel DIR [--ersetzen] [--limit N]
+//   (nur person) --top N: die N Personen mit den meisten Katalog-Titeln zuerst
 //   node scripts/seo-kategorien-dateien.mjs einspielen --verzeichnis DIR [--dry-run]
 // Pakete: paket-<bereich>-<locale>-NN.json, Ergebnisse texte-<bereich>-<locale>-NN.json ({schluessel: text}).
 // --ersetzen nimmt auch Zieltexte, die aelter sind als der de-de-Text.
@@ -19,15 +20,25 @@ const hol = (n, s) => { const i = a.indexOf(`--${n}`); return i >= 0 && a[i + 1]
 
 async function pakete() {
   const bereich = hol('bereich'), locale = hol('locale'), ziel = hol('ziel');
-  const je = Number(hol('je', '40')), limit = Number(hol('limit', 1e9)), ersetzen = a.includes('--ersetzen');
+  const top0 = Number(hol('top', 0));
+  const je = Number(hol('je', '40')), limit = Number(hol('limit', top0 || 1e9)), ersetzen = a.includes('--ersetzen');
   if (!bereich || !ZIELE[locale] || !ziel) throw new Error('--bereich, --locale (nicht de-de) und --ziel noetig');
   fs.mkdirSync(ziel, { recursive: true });
+  const top = Number(hol('top', 0));
+  const rang = top > 0 && bereich === 'person'
+    ? `JOIN (SELECT k.schluessel, k.anzahl FROM (
+           SELECT 'regisseur:' || pc.tmdb_person_id AS schluessel, count(*) AS anzahl
+             FROM titles t JOIN personen_cache pc ON pc.name = t.director GROUP BY 1
+           UNION ALL
+           SELECT 'schauspieler:' || pc.tmdb_person_id, count(*)
+             FROM (SELECT unnest(cast_names) AS name FROM titles) c JOIN personen_cache pc ON pc.name = c.name GROUP BY 1) k
+           ORDER BY k.anzahl DESC LIMIT ${top * 3}) rk ON rk.schluessel = d.schluessel` : '';
   const { rows } = await pool.query(
-    `SELECT d.schluessel, d.text FROM seo_content d
+    `SELECT d.schluessel, d.text FROM seo_content d ${rang}
       WHERE d.locale = 'de-de' AND d.bereich = $1
         AND NOT EXISTS (SELECT 1 FROM seo_content z WHERE z.bereich = d.bereich AND z.schluessel = d.schluessel AND z.locale = $2
                           AND ($3::boolean = false OR z.aktualisiert_am >= d.aktualisiert_am))
-      ORDER BY d.schluessel LIMIT $4`, [bereich, locale, ersetzen, limit]);
+      ORDER BY ${rang ? 'rk.anzahl DESC, ' : ''}d.schluessel LIMIT $4`, [bereich, locale, ersetzen, limit]);
   const regeln = systemPrompt(locale, [bereich]);
   for (let i = 0, n = 1; i < rows.length; i += je, n++) {
     const datei = path.join(ziel, `paket-${bereich}-${locale}-${String(n).padStart(2, '0')}.json`);
