@@ -995,6 +995,8 @@ CREATE TABLE IF NOT EXISTS personen_cache (
   geburtstag     DATE,
   fetched_at     TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+-- personenMitSeite() sucht bei jedem Seitenaufruf nach Namen.
+CREATE INDEX IF NOT EXISTS idx_personen_cache_name ON personen_cache (name);
 
 CREATE TABLE IF NOT EXISTS seo_content (
   id              BIGSERIAL PRIMARY KEY,

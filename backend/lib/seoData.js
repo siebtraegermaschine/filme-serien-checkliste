@@ -599,30 +599,21 @@ export function bestenlistenKatalog(type, locale) {
   return swrCache(katalogCache, `${type}:${region}`, BESTENLISTE_TTL_MS, () => baueKatalog(type, region));
 }
 
-async function baueKatalog(type, region) {
-  const erlaubteGenres = new Set(await alleGenres(type));
+// Regionsunabhaengiger Teil des Katalogs: einmal je Typ statt je Region (sonst
+// rechnet jede der Regionen dieselben ~9 schweren Abfragen neu).
+const katalogBasisCache = new Map();
+const katalogBasis = (type) => swrCache(katalogBasisCache, type, BESTENLISTE_TTL_MS, () => {
   const q = (sql, params) => pool.query(sql, params).then((r) => r.rows);
-  const [jz, anb, gj, ga, themen, kino, neu, laender, sprachen, landGenre, laufzeit, staffeln] = await Promise.all([
+  return Promise.all([
     q(`SELECT (year / 10 * 10) AS jz, count(*)::int AS n FROM ${TITEL_MIT_KENNUNG}
         WHERE type = $1 AND year >= 1900 GROUP BY 1 HAVING count(*) >= $2 ORDER BY 1`, [type, MIN_TITEL]),
-    q(`SELECT s.provider_id AS slug, min(s.provider_name) AS name, count(DISTINCT titel.tmdb_id)::int AS n
-         FROM ${TITEL_MIT_KENNUNG} JOIN streaming_cache s ON s.type = titel.type AND s.tmdb_id = titel.tmdb_id AND s.region = $2
-        WHERE titel.type = $1 GROUP BY 1 HAVING count(DISTINCT titel.tmdb_id) >= $3 ORDER BY n DESC`, [type, region, MIN_TITEL]),
     q(`SELECT g AS genre, (year / 10 * 10) AS jz, count(*)::int AS n
          FROM ${TITEL_MIT_KENNUNG}, unnest(genres) g
         WHERE type = $1 AND year >= 1900 GROUP BY 1, 2 HAVING count(*) >= $2`, [type, MIN_TITEL]),
-    q(`SELECT g AS genre, s.provider_id AS slug, min(s.provider_name) AS name, count(DISTINCT titel.tmdb_id)::int AS n
-         FROM ${TITEL_MIT_KENNUNG} JOIN streaming_cache s ON s.type = titel.type AND s.tmdb_id = titel.tmdb_id AND s.region = $2,
-              unnest(titel.genres) g
-        WHERE titel.type = $1 GROUP BY 1, 2 HAVING count(DISTINCT titel.tmdb_id) >= $3`, [type, region, MIN_TITEL]),
     Promise.all(Object.entries(THEMEN).map(async ([slug, t]) => {
       const [r] = await q(`SELECT count(*)::int AS n FROM ${TITEL_MIT_KENNUNG} WHERE type = $1 AND keywords && $2::text[]`, [type, t.keywords]);
       return { slug, n: r.n };
     })),
-    type === 'movie'
-      ? q(`SELECT count(*)::int AS n FROM ${TITEL_MIT_KENNUNG}
-            WHERE type = 'movie' AND EXISTS (SELECT 1 FROM cinema_cache c WHERE c.tmdb_id = titel.tmdb_id AND c.region = $1 AND c.category = 'now')`, [region])
-      : Promise.resolve([{ n: 0 }]),
     q(`SELECT count(*)::int AS n FROM ${TITEL_MIT_KENNUNG} WHERE type = $1 AND year >= $2`, [type, new Date().getFullYear() - NEU_JAHRE + 1]),
     q(`SELECT c AS code, count(*)::int AS n FROM ${TITEL_MIT_KENNUNG}, unnest(origin_country) c
         WHERE type = $1 GROUP BY 1 HAVING count(*) >= $2 ORDER BY n DESC, 1`, [type, MIN_TITEL]),
@@ -642,6 +633,25 @@ async function baueKatalog(type, region) {
         : [{ n: 0 }];
       return { slug, n: r.n };
     })),
+  ]);
+});
+
+async function baueKatalog(type, region) {
+  const erlaubteGenres = new Set(await alleGenres(type));
+  const q = (sql, params) => pool.query(sql, params).then((r) => r.rows);
+  const [[jz, gj, themen, neu, laender, sprachen, landGenre, laufzeit, staffeln], anb, ga, kino] = await Promise.all([
+    katalogBasis(type),
+    q(`SELECT s.provider_id AS slug, min(s.provider_name) AS name, count(DISTINCT titel.tmdb_id)::int AS n
+         FROM ${TITEL_MIT_KENNUNG} JOIN streaming_cache s ON s.type = titel.type AND s.tmdb_id = titel.tmdb_id AND s.region = $2
+        WHERE titel.type = $1 GROUP BY 1 HAVING count(DISTINCT titel.tmdb_id) >= $3 ORDER BY n DESC`, [type, region, MIN_TITEL]),
+    q(`SELECT g AS genre, s.provider_id AS slug, min(s.provider_name) AS name, count(DISTINCT titel.tmdb_id)::int AS n
+         FROM ${TITEL_MIT_KENNUNG} JOIN streaming_cache s ON s.type = titel.type AND s.tmdb_id = titel.tmdb_id AND s.region = $2,
+              unnest(titel.genres) g
+        WHERE titel.type = $1 GROUP BY 1, 2 HAVING count(DISTINCT titel.tmdb_id) >= $3`, [type, region, MIN_TITEL]),
+    type === 'movie'
+      ? q(`SELECT count(*)::int AS n FROM ${TITEL_MIT_KENNUNG}
+            WHERE type = 'movie' AND EXISTS (SELECT 1 FROM cinema_cache c WHERE c.tmdb_id = titel.tmdb_id AND c.region = $1 AND c.category = 'now')`, [region])
+      : Promise.resolve([{ n: 0 }]),
   ]);
 
   const gEintraege = (rows) => rows.filter((r) => erlaubteGenres.has(r.genre));
