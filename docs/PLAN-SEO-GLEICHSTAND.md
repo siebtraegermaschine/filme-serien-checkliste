@@ -45,7 +45,7 @@ Ergebnis: 11.968 Titel + 12 redaktionelle Texte verlängert; Rest 65 Titel ohne 
 4. Probe 50 Texte lesen, Dubletten-/Ähnlichkeitsprüfung, dann `--dry-run`, dann einspielen.
 5. Nachmessen: Anzahl < 250 muss 0 sein (außer begründete Ausnahmen, in STATUS.md notieren).
 
-## Phase 2 – Differenzen ermitteln (nur Messen, nichts ändern)
+## Phase 2 – Differenzen ermitteln (nur Messen, nichts ändern) — ERLEDIGT 20.10.2026 (Zahlen in STATUS.md)
 1. Je Locale und Bereich: Schlüssel, die in `de-de` mit Text existieren, aber in der Ziel-Textsprache fehlen oder < 250 Zeichen haben. Ergebnis als Tabelle (Zahl + Schlüsselliste in Datei im Scratchpad).
 2. Prüfen, ob Seiten ohne `de-de`-Text existieren (Stufe C, ca. 528 abgelehnte, Personen ohne Text, Bestenlisten): Quelle bestimmen (andere Sprache vorhanden? sonst neu).
 3. Kino-Städte: je Locale vollständig bestätigen; wegen Ø 206 Zeichen die Entscheidung zur 250-Schwelle beim Nutzer einholen (siehe Ausgangslage), nicht eigenmächtig mit Füllstoff auffüllen.

@@ -15,7 +15,27 @@
   Rest unter 250 in de-de: 65 Titel (nur Jahr/Genre bekannt, Auffüllen wäre
   Füllstoff; **Entscheidung nötig**: so lassen oder mit einem Hinweissatz
   füllen) und 443 Kino-Städte (bewusst kurz, Entscheidung offen).
-  Nächster Schritt: Phase 2 (Differenzen messen), siehe `docs/PLAN-SEO-GLEICHSTAND.md`.
+  Nächster Schritt: Phase 3 (Priorisieren), siehe `docs/PLAN-SEO-GLEICHSTAND.md`.
+
+- **SEO-Gleichstand Phase 2 erledigt** (20.10.2026, nur gemessen, nichts geändert).
+  Basis de-de ≥ 250 Zeichen; „fehlt" = Schlüssel ohne Text in der Ziel-Locale
+  (Texte < 250 in Fremdsprachen: nur Anbieter/Genre/Hub je 1–6, Kino 0–5).
+  | Bereich | en-gb | fr-fr | it-it | nl-nl | pt-pt | es-es |
+  |---|---:|---:|---:|---:|---:|---:|
+  | Titel (Basis 93.602) | 2.532 | 13.484 | 18.709 | 16.033 | 19.617 | 69.624 |
+  | Personen (Basis 17.186) | 6.053 | 6.974 | 17.186 | 17.186 | 17.186 | 17.186 |
+  | Bestenlisten (1.043) | 293 | 371 | 406 | 409 | 357 | 467 |
+  | Reihen (502) | 13 | 30 | 56 | 27 | 65 | 46 |
+  | Anbieter/Genre | 0/1 | 4/0 | 1/1 | 1/3 | 2/1 | 4/3 |
+  Funde: (1) Alle fremdsprachigen **Reihen-Texte sind veraltet** (2.775 Zeilen,
+  älter als der neue de-de-Text) → neu übersetzen. (2) **Titel ohne de-Text
+  ≥ 250**: nur en-gb hat welche (2.256: 2.204 ohne de-Zeile, 52 zu kurz); die
+  anderen Sprachen höchstens 6 (es-es). Quelle dafür en-gb → de übersetzen oder
+  neu. (3) Kino-Städte: je Locale ca. 465 Texte vorhanden, aber de-de hat nur 26 mit ≥ 250 (443 kurz, Entscheidung offen); Fremdsprachen fehlt nichts. (4) 65 Titel
+  ohne Fakten offen. (5) Personen es/it/nl/pt: 0 Texte, braucht Code
+  (`PERSONEN_LOCALES`) = Push auf `main`, vorher Nutzer fragen.
+  Summe Titel-Lücke ca. 140.000, Personen ca. 82.000, Rest ca. 2.500 Texte.
+  Rohdaten: Scratchpad `p2.out`, `p2-reihen.out`.
 
 - **PageSpeed: Rest-LCP mobil** (13.10.2026) — Frühabruf, Poster-Priorität und Minify sind
   live; neuen PageSpeed-Lauf (einige Minuten nach dem Deploy) abwarten und
