@@ -8,8 +8,7 @@ test('localeGueltig: nur aktive Locales', () => {
   assert.equal(localeGueltig('en-gb'), true);
   assert.equal(localeGueltig('es-es'), true);
   assert.equal(localeGueltig('de-at'), true); // Laender-Locale, noindex
-  assert.equal(localeGueltig('pt-br'), false); // Nicht-EWR: nur vorbereitet
-  assert.equal(localeGueltig('pt-br'), false);
+  assert.equal(localeGueltig('pt-br'), true); // Phase 7b: aktiv, noindex bis zur Pruefung
   assert.equal(localeGueltig('xx-yy'), false);
   assert.equal(localeGueltig(''), false);
 });
@@ -30,7 +29,7 @@ test('SEO_LOCALES (Sitemap): indexierbare Locales laut Konfiguration', () => {
   assert.deepEqual(SEO_LOCALES, ['de-de', 'en-gb', 'es-es', 'fr-fr', 'it-it', 'nl-nl', 'pt-pt', 'de-at', 'de-ch', 'fr-ch', 'en-ca', 'fr-ca', 'en-us']);
   assert.equal(localeIndexierbar('de-de'), true);
   assert.equal(localeIndexierbar('es-es'), true);
-  assert.equal(localeIndexierbar('pt-br'), false); // Nicht-EWR bleibt draussen
+  assert.equal(localeIndexierbar('pt-br'), false); // 7b: noch noindex
 });
 
 test('sprachVon und hatSeitenart', () => {
@@ -42,7 +41,7 @@ test('sprachVon und hatSeitenart', () => {
   assert.equal(hatSeitenart('fr-fr', 'regisseur'), true);
   assert.equal(hatSeitenart('es-es', 'person'), true);
   assert.equal(hatSeitenart('it-it', 'schauspieler'), true);
-  assert.equal(hatSeitenart('pt-br', 'schauspieler'), false); // keine Personentexte
+  assert.equal(hatSeitenart('pt-br', 'schauspieler'), true); // erbt pt-pt (Seite nur mit Text)
   assert.equal(hatSeitenart('en-gb', 'titel'), true);
 });
 
@@ -60,22 +59,24 @@ test('Laender-Locales: Texte aus der Sprachfassung, eigene Region, indexierbar',
   assert.equal(textLocale('en-ca'), 'en-gb');
   assert.equal(textLocale('fr-ca'), 'fr-fr');
   assert.equal(textLocale('es-es'), 'es-es');
-  assert.deepEqual(localesMitText(['de-de']).sort(), ['de-at', 'de-ch', 'de-de']);
+  assert.deepEqual(localesMitText(['de-de']).sort(), ['de-at', 'de-ch', 'de-de', 'de-lu']);
   assert.ok(localesMitText(['fr-fr']).includes('fr-ch'));
   assert.equal(regionFuerLocale('de-ch'), 'CH');
   assert.ok(istDeutsch('de-at') && !istDeutsch('fr-ch'));
-  assert.ok(hatSeitenart('de-at', 'schauspieler') && hatSeitenart('en-us', 'schauspieler') && hatSeitenart('fr-ca', 'schauspieler') && hatSeitenart('es-es', 'schauspieler') && !hatSeitenart('pt-br', 'schauspieler'));
+  assert.ok(hatSeitenart('de-at', 'schauspieler') && hatSeitenart('en-us', 'schauspieler') && hatSeitenart('fr-ca', 'schauspieler') && hatSeitenart('es-es', 'schauspieler') && hatSeitenart('pt-br', 'schauspieler'));
   assert.ok(['de-at', 'de-ch', 'fr-ch', 'en-ca', 'fr-ca', 'en-us'].every((l) => localeIndexierbar(l)));
 });
 
-test('es-mx (Phase 7b) ist vorbereitet, aber weder aktiv noch indexierbar noch in der Sitemap', async () => {
+test('Phase 7b: Laender-Varianten sind aktiv, erben die Sprachfassung und haben eigene Region', async () => {
   const { textLocale, localesMitText } = await import('../lib/seoLocale.js');
-  assert.equal(localeGueltig('es-mx'), false);
-  assert.equal(localeIndexierbar('es-mx'), false);
-  assert.ok(!SEO_LOCALES.includes('es-mx'));
-  assert.equal(textLocale('es-mx'), 'es-es');
-  assert.equal(regionFuerLocale('es-mx'), 'MX');
-  assert.ok(!localesMitText(['es-es']).includes('es-mx'));
+  const erwartet = { 'nl-be': ['nl-nl', 'BE'], 'fr-be': ['fr-fr', 'BE'], 'de-lu': ['de-de', 'LU'], 'en-ie': ['en-gb', 'IE'],
+    'es-mx': ['es-es', 'MX'], 'es-ar': ['es-es', 'AR'], 'es-co': ['es-es', 'CO'], 'es-cl': ['es-es', 'CL'], 'pt-br': ['pt-pt', 'BR'] };
+  for (const [l, [text, region]] of Object.entries(erwartet)) {
+    assert.equal(localeGueltig(l), true, l);
+    assert.equal(textLocale(l), text, l);
+    assert.equal(regionFuerLocale(l), region, l);
+    assert.ok(localesMitText([text]).includes(l), l);
+  }
 });
 
 test('clusterAlternates: gleiche Adresse in jedem indexierbaren Locale, region-abhaengige Seiten ohne Cluster', async () => {

@@ -23,10 +23,17 @@ export const LOCALE_KONFIG = {
   'en-ca': { sprache: 'en', region: 'CA', aktiv: true, indexierbar: true, textLocale: 'en-gb' },
   'fr-ca': { sprache: 'fr', region: 'CA', aktiv: true, indexierbar: true, textLocale: 'fr-fr' },
   'en-us': { sprache: 'en', region: 'US', aktiv: true, indexierbar: true, textLocale: 'en-gb' },
-  // Nicht-EWR: nur vorbereitet (kein aktives Marketing ausserhalb des EWR, siehe STATUS.md).
-  'pt-br': { sprache: 'pt', region: 'BR', aktiv: false, indexierbar: false },
-  // Phase 7b (Vorlage fuer weitere Laender-Varianten, siehe docs/PLAN-SEO-GLEICHSTAND.md): erst nach Freigabe aktiv.
-  'es-mx': { sprache: 'es', region: 'MX', aktiv: false, indexierbar: false, textLocale: 'es-es' },
+  // Phase 7b: Laender-Varianten ohne eigene Texte (Sprachfassung der textLocale). Erst aktiv/noindex,
+  // indexierbar nach Pruefung (indexierung-schalter.mjs).
+  'nl-be': { sprache: 'nl', region: 'BE', aktiv: true, indexierbar: false, textLocale: 'nl-nl' },
+  'fr-be': { sprache: 'fr', region: 'BE', aktiv: true, indexierbar: false, textLocale: 'fr-fr' },
+  'de-lu': { sprache: 'de', region: 'LU', aktiv: true, indexierbar: false, textLocale: 'de-de' },
+  'en-ie': { sprache: 'en', region: 'IE', aktiv: true, indexierbar: false, textLocale: 'en-gb' },
+  'es-mx': { sprache: 'es', region: 'MX', aktiv: true, indexierbar: false, textLocale: 'es-es' },
+  'es-ar': { sprache: 'es', region: 'AR', aktiv: true, indexierbar: false, textLocale: 'es-es' },
+  'es-co': { sprache: 'es', region: 'CO', aktiv: true, indexierbar: false, textLocale: 'es-es' },
+  'es-cl': { sprache: 'es', region: 'CL', aktiv: true, indexierbar: false, textLocale: 'es-es' },
+  'pt-br': { sprache: 'pt', region: 'BR', aktiv: true, indexierbar: false, textLocale: 'pt-pt' },
 };
 
 // Titelseiten in Nicht-de-Locales: unter dieser Textlaenge noindex und nicht in der

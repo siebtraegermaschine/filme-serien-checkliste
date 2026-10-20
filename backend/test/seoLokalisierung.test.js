@@ -46,11 +46,8 @@ test('Titelseite en-gb: englisch, lang=en, ohne deutsche Chrome-Texte', () => {
   assert.doesNotMatch(html, /Kurzüberblick|Zur Watchlist|Verfügbar|Laufzeit|Komödie/);
 });
 
-test('Titelseite ohne Personentexte (pt-br) verlinkt keine Personen-Seiten', () => {
-  const html = seiteTitelDetail(titel('Text'), 'pt-br');
-  for (const pfad of ['/pt-br/regisseur/', '/pt-br/schauspieler/']) {
-    assert.ok(!html.includes(`href="${pfad}`), pfad);
-  }
+test('Titelseite pt-pt: portugiesische Rechtsseiten', () => {
+  const html = seiteTitelDetail(titel('Text'), 'pt-pt');
   assert.doesNotMatch(html, /impressum\.html/);
   assert.match(html, /imprint\.html/);
 });
@@ -113,13 +110,13 @@ test('Seitenarten: Personen in den EWR-Locales, nicht pt-br; Sitemap-Bereiche', 
   assert.equal(seitenartFuerPfad('/en-gb/schauspieler/x-1'), 'schauspieler');
   assert.ok(hatSeitenart('de-de', 'person'));
   assert.ok(hatSeitenart('en-gb', 'titel') && hatSeitenart('en-gb', 'start'));
-  assert.ok(hatSeitenart('en-gb', 'filme') && hatSeitenart('en-gb', 'bestenlisten') && hatSeitenart('en-gb', 'person') && hatSeitenart('es-es', 'person') && !hatSeitenart('pt-br', 'person'));
+  assert.ok(hatSeitenart('en-gb', 'filme') && hatSeitenart('en-gb', 'bestenlisten') && hatSeitenart('en-gb', 'person') && hatSeitenart('es-es', 'person') && hatSeitenart('pt-br', 'person'));
   assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('en-gb', b)), ['titel', 'genre', 'anbieter', 'bestenliste', 'hub', 'person', 'reihe']);
   assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('de-de', b)), BEREICHE);
 });
 
-test('Nicht-EWR-Locales sind inaktiv und nicht indexierbar', () => {
-  for (const l of ['pt-br']) assert.deepEqual([LOCALE_KONFIG[l].aktiv, LOCALE_KONFIG[l].indexierbar], [false, false]);
+test('Phase 7b: neue Laender-Varianten sind aktiv, aber noch nicht indexierbar', () => {
+  for (const l of ['pt-br', 'es-mx', 'nl-be']) assert.deepEqual([LOCALE_KONFIG[l].aktiv, LOCALE_KONFIG[l].indexierbar], [true, false]);
   assert.ok(seoTexte('pt-br').start);
 });
 
@@ -137,7 +134,7 @@ test('Route: Personen-Seiten in Nicht-de liefern 404 (ohne DB), inaktive Locales
       assert.equal(a.status, 404, pfad);
       assert.match(await a.text(), /<html lang="/);
     }
-    const a = await fetch(`http://127.0.0.1:${port}/pt-br`);
+    const a = await fetch(`http://127.0.0.1:${port}/xx-yy`);
     assert.equal(await a.text(), 'DURCHGEREICHT');
   } finally {
     server.close();
