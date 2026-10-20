@@ -17,6 +17,14 @@
   füllen) und 443 Kino-Städte (bewusst kurz, Entscheidung offen).
   Nächster Schritt: Phase 3 (Priorisieren), siehe `docs/PLAN-SEO-GLEICHSTAND.md`.
 
+- **SEO-Gleichstand Phase 4 teilweise** (20.10.2026): Reihen (alle 6 Sprachen, 4.473 Texte) und Bestenlisten
+  (2.217 von 2.303) per Abo-Verfahren übersetzt und live. Werkzeug: `backend/scripts/seo-kategorien-dateien.mjs`
+  (`pakete`/`einspielen --dry-run`), Pakete auf dem Server unter /tmp/reihen bzw. /tmp/bl. Verworfen: Reihen 45, Bestenlisten 86
+  (Titel mit anderem Apostroph, geänderte Zahlen) – bei Bedarf einzeln nachziehen.
+  Prüfung angepasst: « » zählt nicht als deutscher Rest, Jahrzehnte/Länderkürzel dürfen ausgeschrieben werden.
+  `PERSON_TX` hat jetzt es/it/nl/pt; `PERSONEN_LOCALES` (seoLocale.js:49) noch `['en-gb','fr-fr']`.
+  Offen: Titel (en,fr,it,nl,pt,es; nach 3 Runden es-es Wochenlimit messen), Personen + Freischaltung, Kino-Städte auf 250 Zeichen,
+  65 Titel ohne Fakten, Anbieter/Genre/Hub-Reste, Phase 6.
 - **SEO-Gleichstand Phase 2 erledigt** (20.10.2026, nur gemessen, nichts geändert).
   Basis de-de ≥ 250 Zeichen; „fehlt" = Schlüssel ohne Text in der Ziel-Locale
   (Texte < 250 in Fremdsprachen: nur Anbieter/Genre/Hub je 1–6, Kino 0–5).
