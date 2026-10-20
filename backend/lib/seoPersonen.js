@@ -25,4 +25,48 @@ export const PERSON_TX = {
       regisseur: { titel: 'Réalisateurs', ueberschrift: 'Réalisateurs avec le plus de titres', titelZeile: 'Réalisateurs : filmographie et films les plus connus | MovieMatch', beschreibung: 'Réalisateurs connus avec filmographie, notes et disponibilité.' },
     },
   },
+  es: {
+    abschnitte: ['Trayectoria', 'Filmografía en nuestro catálogo', 'Valoración'],
+    rolle: { schauspieler: 'Actor', regisseur: 'Director' },
+    geboren: 'nacido/a el', filmografie: 'Filmografía', regie: ' (dirección)',
+    titelZeile: (name) => `${name} — películas y series de un vistazo | MovieMatch`,
+    titelAnzahl: (n) => `${n} ${n === 1 ? 'título' : 'títulos'}`,
+    hub: {
+      schauspieler: { titel: 'Actores', ueberschrift: 'Caras conocidas', titelZeile: 'Actores: filmografía y papeles más conocidos | MovieMatch', beschreibung: 'Actores conocidos con filmografía, valoraciones y disponibilidad.' },
+      regisseur: { titel: 'Directores', ueberschrift: 'Directores con más títulos', titelZeile: 'Directores: filmografía y películas más conocidas | MovieMatch', beschreibung: 'Directores conocidos con filmografía, valoraciones y disponibilidad.' },
+    },
+  },
+  it: {
+    abschnitte: ['Percorso', 'Filmografia nel nostro catalogo', 'Valutazione'],
+    rolle: { schauspieler: 'Attore', regisseur: 'Regista' },
+    geboren: 'nato/a il', filmografie: 'Filmografia', regie: ' (regia)',
+    titelZeile: (name) => `${name} — film e serie in sintesi | MovieMatch`,
+    titelAnzahl: (n) => `${n} ${n === 1 ? 'titolo' : 'titoli'}`,
+    hub: {
+      schauspieler: { titel: 'Attori', ueberschrift: 'Volti noti', titelZeile: 'Attori: filmografia e ruoli più noti | MovieMatch', beschreibung: 'Attori noti con filmografia, valutazioni e disponibilità.' },
+      regisseur: { titel: 'Registi', ueberschrift: 'Registi con più titoli', titelZeile: 'Registi: filmografia e film più noti | MovieMatch', beschreibung: 'Registi noti con filmografia, valutazioni e disponibilità.' },
+    },
+  },
+  nl: {
+    abschnitte: ['Loopbaan', 'Filmografie in onze catalogus', 'Beoordeling'],
+    rolle: { schauspieler: 'Acteur', regisseur: 'Regisseur' },
+    geboren: 'geboren op', filmografie: 'Filmografie', regie: ' (regie)',
+    titelZeile: (name) => `${name} — films en series in één overzicht | MovieMatch`,
+    titelAnzahl: (n) => `${n} ${n === 1 ? 'titel' : 'titels'}`,
+    hub: {
+      schauspieler: { titel: 'Acteurs', ueberschrift: 'Bekende gezichten', titelZeile: 'Acteurs: filmografie en bekendste rollen | MovieMatch', beschreibung: 'Bekende acteurs met filmografie, beoordelingen en beschikbaarheid.' },
+      regisseur: { titel: 'Regisseurs', ueberschrift: 'Regisseurs met de meeste titels', titelZeile: 'Regisseurs: filmografie en bekendste films | MovieMatch', beschreibung: 'Bekende regisseurs met filmografie, beoordelingen en beschikbaarheid.' },
+    },
+  },
+  pt: {
+    abschnitte: ['Percurso', 'Filmografia no nosso catálogo', 'Apreciação'],
+    rolle: { schauspieler: 'Ator', regisseur: 'Realizador' },
+    geboren: 'nascido/a em', filmografie: 'Filmografia', regie: ' (realização)',
+    titelZeile: (name) => `${name} — filmes e séries num relance | MovieMatch`,
+    titelAnzahl: (n) => `${n} ${n === 1 ? 'título' : 'títulos'}`,
+    hub: {
+      schauspieler: { titel: 'Atores', ueberschrift: 'Rostos conhecidos', titelZeile: 'Atores: filmografia e papéis mais conhecidos | MovieMatch', beschreibung: 'Atores conhecidos com filmografia, avaliações e disponibilidade.' },
+      regisseur: { titel: 'Realizadores', ueberschrift: 'Realizadores com mais títulos', titelZeile: 'Realizadores: filmografia e filmes mais conhecidos | MovieMatch', beschreibung: 'Realizadores conhecidos com filmografia, avaliações e disponibilidade.' },
+    },
+  },
 };
