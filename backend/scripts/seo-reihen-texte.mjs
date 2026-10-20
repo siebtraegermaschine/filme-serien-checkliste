@@ -4,7 +4,8 @@
 // API-Aufruf, keine Kosten. Legt nur FEHLENDE Eintraege an.
 //
 // Aufruf (im Backend-Container):
-//   node scripts/seo-reihen-texte.mjs [--dry-run] [--zeige 3]
+//   node scripts/seo-reihen-texte.mjs [--dry-run] [--zeige 3] [--neu]
+// --neu erzeugt auch schon vorhandene Reihen-Texte neu (nur fuer unveraenderte Vorlagentexte).
 import 'dotenv/config';
 import { pool } from '../db/pool.js';
 import { alleReihen } from '../lib/seoData.js';
@@ -18,18 +19,19 @@ export function bauHubText(anzahl) {
 
 async function main() {
   const dryRun = process.argv.includes('--dry-run');
+  const neuBauen = process.argv.includes('--neu');
   const zi = process.argv.indexOf('--zeige');
   const zeige = zi >= 0 ? Number(process.argv[zi + 1]) || 3 : 0;
   const reihen = await alleReihen(LOCALE);
   let neu = 0, vorhanden = 0, gezeigt = 0;
   for (const r of reihen) {
-    if (r.hatText) { vorhanden++; continue; }
+    if (r.hatText && !neuBauen) { vorhanden++; continue; }
     const text = bauReihenText(r.name, r.fakten);
     if (gezeigt < zeige) { gezeigt++; console.log(`\n${r.slug}:\n${text}`); }
     if (!dryRun) {
       await pool.query(
         `INSERT INTO seo_content (bereich, schluessel, locale, text) VALUES ('reihe', $1, $2, $3)
-         ON CONFLICT (bereich, schluessel, locale) DO NOTHING`,
+         ON CONFLICT (bereich, schluessel, locale) ${neuBauen ? 'DO UPDATE SET text = EXCLUDED.text, aktualisiert_am = now()' : 'DO NOTHING'}`,
         [r.slug, LOCALE, text]
       );
     }

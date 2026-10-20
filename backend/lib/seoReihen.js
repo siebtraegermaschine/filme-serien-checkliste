@@ -46,7 +46,12 @@ export function reihenFakten(titel) {
   const schnitt = bewertet.length
     ? Math.round(bewertet.reduce((s, t) => s + t.rating, 0) / bewertet.length * 10) / 10
     : null;
-  const bester = bewertet.length ? [...bewertet].sort((a, b) => (b.note || 0) - (a.note || 0))[0] : null;
+  // Bestwert nach der angezeigten TMDB-Bewertung (bei Gleichstand die gewichtete Note), sonst
+  // stuende "am besten" mit einer niedrigeren Zahl als der Schnitt im Text.
+  const nachWert = (a, b) => b.rating - a.rating || (b.note || 0) - (a.note || 0);
+  const bester = bewertet.length ? [...bewertet].sort(nachWert)[0] : null;
+  const schwaechster = bewertet.length > 1 ? [...bewertet].sort(nachWert).at(-1) : null;
+  const geordnet = inErscheinungsreihenfolge(titel);
   const zaehler = new Map();
   for (const t of titel) for (const g of t.genres || []) zaehler.set(g, (zaehler.get(g) || 0) + 1);
   const genres = [...zaehler.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 3).map(([g]) => g);
@@ -54,10 +59,13 @@ export function reihenFakten(titel) {
     anzahl: titel.length,
     jahrVon: jahre.length ? Math.min(...jahre) : null,
     jahrBis: jahre.length ? Math.max(...jahre) : null,
-    schnitt, bester, genres,
+    schnitt, bester, schwaechster, genres,
+    erster: geordnet[0] || null, letzter: geordnet.length > 1 ? geordnet.at(-1) : null,
   };
 }
 
+// Titel in nicht-lateinischer Schrift (Hindi, Koreanisch ...) bleiben im Fliesstext weg.
+const lateinisch = (t) => !!t && /^[\p{Script=Latin}\p{N}\p{P}\p{S}\p{Z}]+$/u.test(t);
 const komma = (n) => String(n).replace('.', ',');
 const aufzaehlung = (liste) => (liste.length < 2 ? liste.join('') : `${liste.slice(0, -1).join(', ')} und ${liste[liste.length - 1]}`);
 
@@ -71,8 +79,16 @@ export function bauReihenText(name, fakten) {
   const absatz1 = `Die Reihe „${name}“ umfasst im MovieMatch-Katalog ${f.anzahl} Filme${zeitraum}. Die Liste führt sie in der Reihenfolge ihres Erscheinens auf — das muss nicht die Reihenfolge der erzählten Handlung sein.`;
   const teile = [];
   if (f.schnitt != null) teile.push(`Im Schnitt liegen die Filme bei ${komma(f.schnitt)} von 10 (TMDB-Bewertung)`);
-  if (f.bester) teile.push(`${teile.length ? 'am' : 'Am'} besten bewertet ist „${f.bester.title}“ mit ${komma(f.bester.rating)}`);
+  if (f.bester && lateinisch(f.bester.title)) teile.push(`${teile.length ? 'am' : 'Am'} besten bewertet ist „${f.bester.title}“ mit ${komma(f.bester.rating)}`);
   if (f.genres.length) teile.push(`${teile.length ? 'die' : 'Die'} häufigsten Genres sind ${aufzaehlung(f.genres)}`);
   const absatz2 = teile.length ? `${teile.join('; ')}.` : '';
-  return [absatz1, absatz2].filter(Boolean).join('\n\n');
+  const satz = [];
+  const mitJahr = (t) => `„${t.title}“${t.year ? ` (${t.year})` : ''}`;
+  if (f.erster && f.letzter && lateinisch(f.erster.title) && lateinisch(f.letzter.title)) {
+    satz.push(`Der Auftakt ist ${mitJahr(f.erster)}, der bisher jüngste Teil ${mitJahr(f.letzter)}.`);
+  }
+  if (f.bester && f.schwaechster && f.bester.rating !== f.schwaechster.rating && lateinisch(f.schwaechster.title)) {
+    satz.push(`Die Bewertungen reichen von ${komma(f.schwaechster.rating)} („${f.schwaechster.title}“) bis ${komma(f.bester.rating)}.`);
+  }
+  return [absatz1, absatz2, satz.join(' ')].filter(Boolean).join('\n\n');
 }

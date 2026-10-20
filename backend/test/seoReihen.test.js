@@ -48,6 +48,8 @@ test('bauReihenText: nur Katalogfakten, Hinweis auf Erscheinungsreihenfolge', ()
   const text = bauReihenText('Testreihe', reihenFakten(titel));
   assert.match(text, /3 Filme, erschienen zwischen 2001 und 2005/);
   assert.match(text, /„B“ mit 8/);
+  assert.match(text, /Der Auftakt ist „A“ \(2001\), der bisher jüngste Teil „C“ \(2005\)/);
+  assert.match(text, /von 6 \(„C“\) bis 8/);
   assert.match(text, /Action/);
   assert.match(text, /nicht die Reihenfolge der erzählten Handlung/);
 });
