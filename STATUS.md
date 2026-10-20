@@ -7,6 +7,11 @@
 
 ## Offen
 
+- **SEO-Gleichstand Schritte 4–5 erledigt** (20.10.2026): Kino-Städte de-de: 131 Texte <200 Zeichen mit echten Kino-Adressen
+  ersetzt (`--kurze-ersetzen`, Commit d100b65), jetzt 0 <200. Anbieter/Genre/Hub in allen Nicht-de-Sprachen: 38 Texte neu
+  übersetzt bzw. vervollständigt (die alten endeten ohne den letzten Satz), jetzt 0 <200. Bewusst kurz bleiben die 65 Titel
+  ohne Fakten (kein Füllstoff). Beobachtung: `kino_stadt` enthält auch ausländische Orte, die Seite gibt es nur für Region DE;
+  die Übersetzungen der Kino-Städte (je Sprache 85–121 <200 Zeichen) werden nirgends ausgespielt, daher nicht nachgezogen.
 - **SEO-Gleichstand Phase 7a/Option 2 erledigt** (20.10.2026): Personenseiten in es-es/it-it/nl-nl/pt-pt freigeschaltet
   (Commit c671065, live; Hubs 200 aber noindex, solange keine Personentexte existieren; Personenseite nur mit Text).
   Kurztext-Übersetzung (`--kurz`, 12 Pakete à 50 je Welle, Abo-Sonnet, kein Geld): Wellen 1–10 eingespielt, zusammen
