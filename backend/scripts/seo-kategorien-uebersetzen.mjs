@@ -34,7 +34,7 @@ export const ZIELE = {
 };
 // Personentexte haben drei feste Abschnitte ("### Werdegang" ...); die
 // Ueberschriften muessen exakt diesen Wortlaut tragen (seoRender.js liest sie).
-export const PERSON_ABSCHNITTE = { 'en-gb': PERSON_TX.en.abschnitte, 'fr-fr': PERSON_TX.fr.abschnitte };
+export const PERSON_ABSCHNITTE = { 'en-gb': PERSON_TX.en.abschnitte, 'fr-fr': PERSON_TX.fr.abschnitte, 'es-es': PERSON_TX.es.abschnitte, 'it-it': PERSON_TX.it.abschnitte, 'nl-nl': PERSON_TX.nl.abschnitte, 'pt-pt': PERSON_TX.pt.abschnitte };
 const MODELL = 'claude-haiku-4-5-20251001';
 const BEREICHE_STANDARD = ['genre', 'anbieter', 'kino_stadt', 'reihe', 'hub'];
 
@@ -75,7 +75,7 @@ export function uebersetzungPruefen(quelle, ziel, locale) {
   for (const t of titelIn(quelle)) if (!z.includes(t)) { f.push(`titel ${t}`); break; }
   for (const m of markenIn(quelle)) if (!z.includes(m)) { f.push(`marke ${m}`); break; }
   // Titel in Anfuehrungszeichen bleiben deutsch und zaehlen nicht als Rest.
-  const ohneTitel = z.replace(/[„“"”][^„“"”]*[“"”]/g, ' ');
+  const ohneTitel = z.replace(/[„“"”][^„“"”]*[“"”]/g, ' ').replace(/[«»][^«»]*[«»]/g, ' ');
   const woerter = ohneTitel.toLowerCase().match(/[\p{L}]+/gu) || [];
   const de = new Set(DEUTSCH.filter((w) => !(locale === 'pt-pt' && w === 'das')));
   const treffer = woerter.filter((w) => de.has(w)).length;
