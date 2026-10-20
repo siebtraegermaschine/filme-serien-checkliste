@@ -7,6 +7,10 @@
 
 ## Offen
 
+- **SEO-Gleichstand Phase 6 Audit** (20.10.2026, `seo-audit.mjs --stichprobe=400`, 602 URLs): 57 „harte Fehler" waren
+  (a) 24× HTTP 502 während des laufenden Deploys, danach Stichproben 200; (b) leere Personen-Sitemaps es/it/nl/pt im Index → behoben
+  (Index listet Personen nur mit Text); (c) JSON-LD-Fehlalarme: der Audit hielt `/pt-pt/filme/<titel>` für eine Liste → `seitenart()` löst
+  jetzt lokale Pfadwörter auf. Kein echter Seitenfehler gefunden. Nächster Audit-Lauf zur Bestätigung außerhalb eines Deploys.
 - **SEO-Gleichstand Phase 6 Sitemap-Zählung** (20.10.2026, live, `gzipTeile` im Container): Titel-URLs de-de 93.667 · en-gb 95.977 · fr-fr 92.750 ·
   nl-nl 90.174 · pt-pt 87.272 · it-it 87.015 · es-es 86.789 (= 92,7 % von de). Personen: de 23.773, en 11.112, fr 10.192, es/it/nl/pt 0
   (noch keine Personentexte, Hubs noindex). Kino-Städte nur de (470). Länder-Varianten spiegeln ihre Sprachfassung. Ziel 95–98 % bei es/it/pt/nl
