@@ -46,9 +46,9 @@ test('Titelseite en-gb: englisch, lang=en, ohne deutsche Chrome-Texte', () => {
   assert.doesNotMatch(html, /Kurzüberblick|Zur Watchlist|Verfügbar|Laufzeit|Komödie/);
 });
 
-test('Nicht-de-Titelseite verlinkt keine Personen-Seiten (noch nicht lokalisiert)', () => {
-  const html = seiteTitelDetail(titel('Text'), 'es-es');
-  for (const pfad of ['/es-es/regisseur/', '/es-es/schauspieler/']) {
+test('Titelseite ohne Personentexte (pt-br) verlinkt keine Personen-Seiten', () => {
+  const html = seiteTitelDetail(titel('Text'), 'pt-br');
+  for (const pfad of ['/pt-br/regisseur/', '/pt-br/schauspieler/']) {
     assert.ok(!html.includes(`href="${pfad}`), pfad);
   }
   assert.doesNotMatch(html, /impressum\.html/);
@@ -106,14 +106,14 @@ test('Startseite und 404 sind lokalisiert; Start ohne Text ist noindex', () => {
   assert.match(seite404('nl-nl'), /Pagina niet gevonden/);
 });
 
-test('Seitenarten: Nicht-de kennt Personen nur in en-gb/fr-fr; Sitemap-Bereiche', () => {
+test('Seitenarten: Personen in den EWR-Locales, nicht pt-br; Sitemap-Bereiche', () => {
   assert.equal(seitenartFuerPfad('/en-gb/film/x-1'), 'titel');
   assert.equal(seitenartFuerPfad('/en-gb'), 'start');
   assert.equal(seitenartFuerPfad('/en-gb/filme/drama'), 'filme');
   assert.equal(seitenartFuerPfad('/en-gb/schauspieler/x-1'), 'schauspieler');
   assert.ok(hatSeitenart('de-de', 'person'));
   assert.ok(hatSeitenart('en-gb', 'titel') && hatSeitenart('en-gb', 'start'));
-  assert.ok(hatSeitenart('en-gb', 'filme') && hatSeitenart('en-gb', 'bestenlisten') && hatSeitenart('en-gb', 'person') && !hatSeitenart('es-es', 'person'));
+  assert.ok(hatSeitenart('en-gb', 'filme') && hatSeitenart('en-gb', 'bestenlisten') && hatSeitenart('en-gb', 'person') && hatSeitenart('es-es', 'person') && !hatSeitenart('pt-br', 'person'));
   assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('en-gb', b)), ['titel', 'genre', 'anbieter', 'bestenliste', 'hub', 'person', 'reihe']);
   assert.deepEqual(BEREICHE.filter((b) => bereichFuerLocale('de-de', b)), BEREICHE);
 });

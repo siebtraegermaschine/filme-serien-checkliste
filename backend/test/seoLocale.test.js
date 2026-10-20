@@ -40,8 +40,9 @@ test('sprachVon und hatSeitenart', () => {
   assert.equal(hatSeitenart('en-gb', 'bestenlisten'), true);
   assert.equal(hatSeitenart('en-gb', 'person'), true); // uebersetzte Personentexte
   assert.equal(hatSeitenart('fr-fr', 'regisseur'), true);
-  assert.equal(hatSeitenart('es-es', 'person'), false);
-  assert.equal(hatSeitenart('it-it', 'schauspieler'), false);
+  assert.equal(hatSeitenart('es-es', 'person'), true);
+  assert.equal(hatSeitenart('it-it', 'schauspieler'), true);
+  assert.equal(hatSeitenart('pt-br', 'schauspieler'), false); // keine Personentexte
   assert.equal(hatSeitenart('en-gb', 'titel'), true);
 });
 
@@ -63,7 +64,7 @@ test('Laender-Locales: Texte aus der Sprachfassung, eigene Region, indexierbar',
   assert.ok(localesMitText(['fr-fr']).includes('fr-ch'));
   assert.equal(regionFuerLocale('de-ch'), 'CH');
   assert.ok(istDeutsch('de-at') && !istDeutsch('fr-ch'));
-  assert.ok(hatSeitenart('de-at', 'schauspieler') && hatSeitenart('en-us', 'schauspieler') && hatSeitenart('fr-ca', 'schauspieler') && !hatSeitenart('es-es', 'schauspieler'));
+  assert.ok(hatSeitenart('de-at', 'schauspieler') && hatSeitenart('en-us', 'schauspieler') && hatSeitenart('fr-ca', 'schauspieler') && hatSeitenart('es-es', 'schauspieler') && !hatSeitenart('pt-br', 'schauspieler'));
   assert.ok(['de-at', 'de-ch', 'fr-ch', 'en-ca', 'fr-ca', 'en-us'].every((l) => localeIndexierbar(l)));
 });
 

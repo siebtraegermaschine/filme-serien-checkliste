@@ -46,7 +46,7 @@ export function localeIndexierbar(locale) {
 // Personen: nur in Locales mit uebersetzten Personentexten (PERSON_ABSCHNITTE in
 // scripts/seo-kategorien-uebersetzen.mjs, Ueberschriften in seoRender.js). Eine
 // Personenseite gibt es dort nur mit Text (seoData.js), sonst 404.
-export const PERSONEN_LOCALES = ['en-gb', 'fr-fr'];
+export const PERSONEN_LOCALES = ['en-gb', 'fr-fr', 'es-es', 'it-it', 'nl-nl', 'pt-pt'];
 
 // Welche Seitenarten es in welchem Locale gibt, welche Cluster und Gegenstuecke:
 // siehe lib/seoSeitenarten.js (Verzeichnis). Hier nur durchgereicht.
