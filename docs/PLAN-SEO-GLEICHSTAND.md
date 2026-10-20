@@ -71,6 +71,13 @@ Alle übersetzten Texte der Ziel-Locale messen. Unter 250 Zeichen: wie Phase 1 m
 - Stichprobe live auf movietaste.de (`seo-audit.mjs`): Status, Canonical, robots, Duplikate.
 - STATUS.md aktualisieren, Memory-Eintrag zum Stand, offene Reste auflisten.
 
+## Phase 7 – Erweitertes Ziel: alle großen Westsprachen, alle Länder Europas + Amerikas (Plan 20.10.2026, Entscheidungen offen)
+Ziel: jede Titelseite hat Text in allen großen westlichen Sprachen; weitere Länder bekommen **keine eigenen Texte**, sondern Länder-Varianten (`textLocale` erbt die Sprachfassung, eigene `region` für Streaming/Kino, hreflang-Cluster über `localesMitText()`), wie de-at/de-ch/fr-ch/en-ca/fr-ca/en-us.
+**Stufe 7a – Vorhandene Sprachen vollständig (ohne Entscheidung, Abo):** Option 2 (Entscheidung 20.10.): je Sprache ca. 1.000 weitere Top-Titel per `--kurz`-Übersetzung (≈120 Pakete à 50, Wellen à 8); danach Personen, Kino-Städte, 65 Titel ohne Fakten, Anbieter/Genre/Hub-Reste, Phase 6.
+**Stufe 7b – Neue Länder mit vorhandener Sprache (billig, kein Übersetzen):** Kandidaten als Länder-Varianten: es-mx, es-ar, es-co, es-cl (→ es-es); en-ie, en-au? (nur Europa/Amerika: en-ie); nl-be (→ nl-nl), fr-be, fr-lu, de-lu, de-li (→ de-de/fr-fr), pt-br (→ pt-pt, aber Nicht-EWR, derzeit inaktiv), es-us/en-ca existieren teils. Je Variante prüfen: `LOCALE_KONFIG`, `seoSitemap.js`, robots.txt-Allow, hreflang-Cluster, Region-Daten (TMDB-Region, Kino-Städte), Tests. Nur **aktiv + indexierbar** schalten nach Nutzer-Freigabe (Push = live).
+**Stufe 7c – Neue Sprachen (Übersetzungsaufwand, Entscheidung Nutzer):** pl, sv, da, nb, fi, cs, el, ro, hu, tr, … jeweils komplette Texte (≈105.000 Titel) wären ein Vielfaches des heutigen Abo-Verbrauchs. Vorschlag: erst nach 7a/7b messen (Suchanfragen/Impressionen je Land in der Search Console), dann 1–2 Sprachen mit größtem Potential, Texte nur Kurzfassung (Generator ohne Modell, `seo-titel-kurztexte-lokal.mjs`) + Top-Titel übersetzt.
+**Offene Entscheidungen Nutzer:** (1) Nicht-EWR (pt-br, US/CA/MX/AR/CO/CL) aktiv bewerben/indexieren? STATUS.md sagt bisher nein außer en-us/en-ca/fr-ca (de facto aktiv). (2) Welche neuen Sprachen (7c). (3) Slugs bleiben deutsch.
+
 ## Hinweise
 - Server: `ssh -i ~/.ssh/id_ed25519 root@movietaste.de`, Projekt `/opt/movietaste`, DB-Service heißt `postgres` (Befehle siehe CLAUDE.md).
 - Server war am 20.10. zeitweise stark ausgelastet (Load ~14); Sitemap-Zählung dauerte über 20 Minuten.
