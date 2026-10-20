@@ -7,11 +7,14 @@
 
 ## Offen
 
-- **SEO-Gleichstand Phase 7a/Option 2 läuft** (20.10.2026): Personenseiten in es-es/it-it/nl-nl/pt-pt freigeschaltet
+- **SEO-Gleichstand Phase 7a/Option 2 erledigt** (20.10.2026): Personenseiten in es-es/it-it/nl-nl/pt-pt freigeschaltet
   (Commit c671065, live; Hubs 200 aber noindex, solange keine Personentexte existieren; Personenseite nur mit Text).
-  Kurztext-Übersetzung der Top-Titel (`--kurz`, 50 je Paket, 12 Pakete je Welle, Abo-Sonnet): Welle 1 (it/pt, 399), Welle 2
-  (600, alle 6 Sprachen à 100) eingespielt, Stichprobe unauffällig; Welle 3 läuft. Pipeline: Scratchpad-Skript `welle.sh`
-  (pakete/hoch/dry/scharf). Verbrauch je Welle ca. 1,1 Mio. Sonnet-Tokens. Danach Generator `seo-titel-kurztexte-lokal.mjs` nochmal laufen lassen.
+  Kurztext-Übersetzung (`--kurz`, 12 Pakete à 50 je Welle, Abo-Sonnet, kein Geld): Wellen 1–10 eingespielt, zusammen
+  5.794 Texte (je Sprache ca. 1.000; 5 in Welle 3 wegen „zu kurz" verworfen). Stichproben unauffällig. Verbrauch je Welle
+  ca. 1,06 Mio. Sonnet-Tokens, keine Limit-Meldung. Rest-Lücke (Titel <200 Zeichen, zu wenig Fakten) jetzt:
+  en 1.266 (vorher 2.265), fr 4.493 (5.492), it 10.228 (11.228), nl 7.069 (8.068), pt 9.971 (10.971), es 10.454 (11.452).
+  Generator `seo-titel-kurztexte-lokal.mjs` nach dem Einspielen: 0 neue Texte (Dry-Run). Weitere Wellen möglich
+  (Pipeline: Scratchpad-Skript `welle.sh`, Befehle `pakete/hoch/dry/scharf`), je Welle +600 Texte.
 
 - **SEO-Gleichstand Phase 1 erledigt** (20.10.2026, live in der DB): 11.968
   de-de-Titeltexte < 250 Zeichen per `backend/scripts/seo-titel-verlaengern.mjs`
