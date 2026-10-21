@@ -7,6 +7,24 @@
 
 ## Offen
 
+### Gesammelt: offene Aufgaben, Optionen, Fragen (Stand 21.10.2026, später priorisieren)
+
+**Entscheidungen (Nutzer):**
+1. **Phase 7c neue Sprachen** (pl, sv, da, nb, fi, cs, el, ro, hu, tr …): erst in der Search Console Impressionen je Land messen, dann 1–2 Sprachen wählen; Texte als Kurzfassung (`seo-titel-kurztexte-lokal.mjs`, ohne Modell) plus übersetzte Top-Titel. Vollübersetzung wäre ein Vielfaches des bisherigen Abo-Verbrauchs.
+2. **Nicht-EWR-Länder** (pt-br, MX, AR, CO, CL) aktiv bewerben und indexieren? Bisher nein, außer en-us/en-ca/fr-ca (de facto aktiv). Freischalt-Checkliste für Länder-Varianten (Vorlage es-mx) steht in `docs/PLAN-SEO-GLEICHSTAND.md` Phase 7b.
+3. **Personen über Rang 1.000 hinaus** in es/it/nl/pt übersetzen (de-de hat 23.773, en 11.112, fr 10.192) oder Stand belassen.
+4. Slugs bleiben deutsch (bisher so entschieden, nur bestätigen).
+
+**Aufgaben (Abo, kein Geld):**
+5. **Abgelehnte Texte:** ca. 5 Personentexte (schauspieler:4520 „TDR“ in es/it/nl, schauspieler:2638 „deutsch“ in pt, regisseur:6593, weitere nicht einzeln geprüft) und 7 Titeltexte „zu kurz“ (Welle 11) von Hand oder gezielt neu.
+6. **it-it:** deutsche Ortsnamen (Wien, Tokio, Hongkong) in italienischen Texten.
+7. **Plan-Datei Phase 7b:** Text sagt „vorbereitet, nicht live“, Sitemap listet aber schon weitere Varianten (nl-be, fr-be …). Prüfen, was wirklich live ist, und Plan korrigieren.
+8. **Restlücken Titel:** es ~4.400, it ~4.200, pt ~4.600, nl ~3.500 Titel ohne Zieltext ≥200 (95 % erreicht; 98 % wäre weitere Wellen, nur falls gewollt).
+9. **Audit-Skript:** Dauer im Bericht falsch („17856 s“, real ~20 Min.); optional Stichprobe der doppelten Titel/Beschreibungen über alle 182 Seiten (Canonical/hreflang der de-Varianten bei einer Seite geprüft: korrekt, Fehlalarm).
+10. **Phase 6 Rest:** `en-us` Sitemap nicht gemessen (erbt en-gb); Kino-Städte nur de (470).
+
+**Erledigt am 21.10.2026:** Bestätigungs-Audit (789 URLs, alle 200); echter Fund: leere JSON-LD-`ItemList` auf Kino-Seiten (es/it/nl/pt-br/de-at) → zentral weggelassen, live; Audit-Absturz bei Timeout behoben; Sitemap-Zahlen es/it/nl/pt im Plan.
+
 - **SEO-Gleichstand Phase 6 Audit** (20.10.2026, `seo-audit.mjs --stichprobe=400`, 602 URLs): 57 „harte Fehler" waren
   (a) 24× HTTP 502 während des laufenden Deploys, danach Stichproben 200; (b) leere Personen-Sitemaps es/it/nl/pt im Index → behoben
   (Index listet Personen nur mit Text); (c) JSON-LD-Fehlalarme: der Audit hielt `/pt-pt/filme/<titel>` für eine Liste → `seitenart()` löst
