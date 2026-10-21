@@ -57,7 +57,9 @@ export async function hole(url, { warten = async () => {}, maxSprunge = 5, text 
       aktuell = new URL(ort, aktuell).href;
       continue;
     }
-    const body = text ? await antwort.text() : (await antwort.arrayBuffer(), '');
+    let body;
+    try { body = text ? await antwort.text() : (await antwort.arrayBuffer(), ''); }
+    catch (e) { return { url, endUrl: aktuell, status: 0, fehler: String(e.message || e), kette, body: '', headers: antwort.headers }; }
     return { url, endUrl: aktuell, status: antwort.status, kette, body, headers: antwort.headers };
   }
   return { url, endUrl: aktuell, status: 0, fehler: 'zu viele Weiterleitungen', kette, body: '', headers: new Headers() };

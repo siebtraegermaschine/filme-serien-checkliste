@@ -49,7 +49,8 @@ function kopf({ locale, pfad, titelZeile, beschreibung, indexierbar, bild, jsonL
   const de = (alternates || []).find((a) => a.locale === 'de-de');
   const cluster = (alternates || []).length >= 2;
   const xDefault = xDefaultPfad ? wurzel + xDefaultPfad : (cluster && de ? wurzel + de.pfad : null);
-  const ld = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+  // ItemList ohne Eintraege ist laut Schema ungueltig (z. B. Kino ohne Spielplan): weglassen.
+  const ld = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter((b) => !(b && b['@type'] === 'ItemList' && !(b.itemListElement || []).length));
   return `<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${attrEsc(titelZeile)}</title>
