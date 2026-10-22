@@ -91,7 +91,7 @@ router.post('/invite', mengenGrenze({ name: 'invite', anzahl: 20, minuten: 60 })
   res.status(201).json({
     token,
     kind,
-    url: kind === 'referral' ? `${basis}/?ref=${token}` : `${basis}/?einladung=${token}`,
+    url: kind === 'referral' ? `${basis}/app?ref=${token}` : `${basis}/app?einladung=${token}`,
     expiresInDays: kind === 'referral' ? null : INVITE_TTL_TAGE,
   });
 });

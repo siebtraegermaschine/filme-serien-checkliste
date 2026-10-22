@@ -27,6 +27,8 @@ Disallow: /
 
 User-agent: *
 Allow: /$
+Allow: /app$
+Allow: /app/$
 Allow: /international$
 Allow: /sprachhinweis.js
 Allow: /de-de/

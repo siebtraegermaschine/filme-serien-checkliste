@@ -1414,7 +1414,7 @@
 <script>
 (function(){
   try {
-    if (location.pathname !== '/' || location.search) return;
+    if (!/^\/(app\/?)?$/.test(location.pathname) || location.search) return;
     var s, r, n = String(navigator.language || 'de');
     try { s = localStorage.getItem('mt.sprache'); r = localStorage.getItem('mt.region'); } catch (e) {}
     if (['de','en','fr','es','it','nl','pt'].indexOf(s) === -1) {
@@ -11873,7 +11873,7 @@ function ansichtLink(){
   // bleiben durchgehend ODER.
   var vs = aktiveVerknuepfungen();
   if (vs.indexOf('und') !== -1) p.set('verknuepfung', vs.join('.'));
-  return location.origin + '/?' + p.toString();
+  return location.origin + '/app?' + p.toString();
 }
 // Beim Laden: einen geteilten Ansicht-Link anwenden. Liefert true, wenn einer
 // da war -- die Kennenlern-Strecke bleibt dann weg (zwei Fenster uebereinander,
@@ -11955,7 +11955,7 @@ async function momentTeilen(ids, text){
   var url;
   try {
     var d = await apiRequest('POST', '/api/share/titel-liste', { ids: ids });
-    url = location.origin + '/?titel=' + d.token;
+    url = location.origin + '/app?titel=' + d.token;
   } catch (e) { alert(grenzeMeldung(e) || TXT.momentFehler); return; }
   text = text || TXT.teilenMomentText;
   if (navigator.share) {
@@ -13381,7 +13381,7 @@ function katalogNetzHolen(){
 var KATALOG_VOLL = false;
 var KATALOG_VOLL_TIMER = null;
 async function katalogVorabruf(){
-  var einfach = location.pathname === '/' && !location.search;
+  var einfach = istAppStart() && !location.search;
   var cached = null;
   try { cached = await katalogCacheLesen('katalog:' + INHALTS_SPRACHE + ':' + REGION_WAHL); } catch (e) {}
   if (cached || !einfach) return { start: null, voll: katalogNetzHolen() };
@@ -14706,9 +14706,10 @@ var _sharedModal = document.getElementById('sharedTitleModal');
 // Die Pruefung ist wichtig: Ein Einladungslink (?einladung=...) muss stehen
 // bleiben, er wird nach dem Anmelden erneut ausgewertet. Nur ein /t/-Pfad wird
 // zurueckgesetzt.
+function istAppStart(){ return /^\/(app\/?)?$/.test(location.pathname); }
 function pfadAufStartseite(){
   if (geteilterTitelAusPfad()) {
-    try { history.replaceState(null, '', '/'); } catch (e) {}
+    try { history.replaceState(null, '', '/app'); } catch (e) {}
   }
 }
 function schliesseGeteilt(){ _sharedModal.style.display = 'none'; pfadAufStartseite(); }

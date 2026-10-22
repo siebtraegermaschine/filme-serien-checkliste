@@ -246,6 +246,15 @@ app.get('/', (req, res, next) => {
   next();
 });
 
+/* Die App zieht nach /app um (damit "/" Startseite werden kann). index.html
+   traegt noindex,follow; /app und /app/ liefern sie direkt aus. */
+app.get(['/app', '/app/'], (req, res) => {
+  if (req.query.von === 'app') {
+    track('seo_weiter', { props: { von: 'app', bot: istBot(req.get('user-agent')) } });
+  }
+  res.type('html').send(indexHtml());
+});
+
 // Viele Vorschau-Dienste und Browser fragen zuerst /favicon.ico ab, bevor sie
 // die <link rel="icon">-Angaben auswerten. Ohne diese Zeile kam dort ein 404,
 // und manche zeigten daraufhin ihren eigenen Platzhalter statt des Logos.

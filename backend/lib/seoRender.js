@@ -75,7 +75,7 @@ function kopfzeile(locale = 'de-de') {
   return `<header class="seo-kopf">
     <a class="marke" href="${SITE}/${locale}/">Movie<span>Match</span></a>
     <nav class="seo-nav">
-      <a href="${SITE}/?von=app&amp;locale=${locale}">${attrEsc(seoTexte(locale).zurApp)}</a>
+      <a href="${SITE}/app?von=app&amp;locale=${locale}">${attrEsc(seoTexte(locale).zurApp)}</a>
     </nav>
   </header>`;
 }

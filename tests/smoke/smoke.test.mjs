@@ -58,6 +58,7 @@ async function pruefeSeite(pfad, { index = true } = {}) {
 
 const seiten = [
   ['Startseite /', () => '/'],
+  ['App /app', () => '/app'],
   ['Start /de-de/', () => `/${L}/`],
   ['Film', () => proben.film],
   ['Serie', () => proben.serie],
@@ -78,10 +79,11 @@ for (const [name, pfadFn] of seiten) {
     const pfad = pfadFn();
     assert.ok(pfad, 'keine Probe-URL aus der Sitemap');
     // Die Startseite "/" ist die App (index.html) und hat keine H1 in der SEO-Form.
-    if (pfad === '/') {
+    if (pfad === '/' || pfad === '/app') {
       const r = await abruf('/');
       assert.equal(r.status, 200);
       assert.ok(parseSeite(r.body).title);
+      assert.match(r.body, /<meta name="robots" content="noindex,follow">/);
       return;
     }
     await pruefeSeite(pfad);

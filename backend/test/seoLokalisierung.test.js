@@ -228,7 +228,7 @@ test('gegenstueck: Partner, gleiche Uebersicht, sonst Start des Ziellandes', asy
 
 test('Kopf- und Fusszeile: locale zur App, Flaggen fuehren zum Gegenstueck', () => {
   const html = seiteStreamingHub({ anbieter: [], text: null, indexierbar: true }, 'en-gb');
-  assert.match(html, /href="https:\/\/movietaste\.de\/\?von=app&amp;locale=en-gb"/);
+  assert.match(html, /href="https:\/\/movietaste\.de\/app\?von=app&amp;locale=en-gb"/);
   const flaggen = html.match(/<nav class="footer-laender"[\s\S]*?<\/nav>/)[0];
   assert.match(flaggen, /href="\/de-de\/streaming" data-locale="de-de"/);
   assert.match(flaggen, /href="\/fr-fr\/streaming" data-locale="fr-fr"/);

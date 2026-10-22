@@ -75,4 +75,7 @@ test('App-Pfade und Momentaufnahmen bleiben gesperrt (Absicht)', () => {
   assert.ok(!robotsErlaubt(ROBOTS_TEXT, '/index.html'));
   assert.ok(!robotsErlaubt(ROBOTS_TEXT, '/t/movie/157336'));
   assert.ok(!robotsErlaubt(ROBOTS_TEXT, '/?titel=abc123'));
+  assert.ok(!robotsErlaubt(ROBOTS_TEXT, '/app?titel=abc123'));
+  // /app selbst muss abrufbar bleiben, damit das noindex gelesen wird.
+  assert.ok(robotsErlaubt(ROBOTS_TEXT, '/app'));
 });
