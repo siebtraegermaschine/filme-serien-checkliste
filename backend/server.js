@@ -277,6 +277,12 @@ app.use((req, res, next) => {
 app.use(express.static(frontendRoot, { index: 'index.html', extensions: ['html'] }));
 
 app.use((err, req, res, next) => {
+  // Kaputte Pfade (z. B. /%c0) und zu grosse/ungueltige Bodies sind Fehler des
+  // Clients, keine des Backends -- 4xx zurueckgeben, keine Mail.
+  const status = err && (err.status || err.statusCode);
+  if (status >= 400 && status < 500) {
+    return res.status(status).type('txt').send('Bad request');
+  }
   console.error(err);
   // Der Fehlerbehandler ist die letzte Stelle, an der ein Fehler ueberhaupt
   // noch auffaellt -- ohne Meldung stuende er nur im Container-Protokoll, das
