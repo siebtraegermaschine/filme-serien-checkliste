@@ -39,7 +39,7 @@ router.get('/', async (req, res) => {
 // hinzufügen will, ohne direkt eine gesehen-/Watchlist-Angabe zu machen
 // (siehe GET /api/titles/mine, das anhand der Zeilen-Existenz filtert).
 // Angeheftete Titel je Bereich (Film/Serie/Kino).
-const MAX_PINS = 2;
+const MAX_PINS = 3;
 router.put('/:titleId', async (req, res) => {
   const titleId = Number(req.params.titleId);
   if (!Number.isInteger(titleId)) {

@@ -5789,7 +5789,7 @@ function getPinnedCategory(id) { return progressFor(id).pinnedCategory || null; 
 // Welcher Titel haelt gerade den Pin-Platz dieser Kategorie (movie/series/
 // cinema)? Es gibt je Kategorie hoechstens MAX_PINS (server-seitig erzwungen,
 // siehe backend/routes/progress.js).
-var MAX_PINS = 2;
+var MAX_PINS = 3;
 function pinnedTitleIds(category) {
   var ids = [];
   for (const [id, p] of PROGRESS) { if (p.pinnedCategory === category) ids.push(id); }
