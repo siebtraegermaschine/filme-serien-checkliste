@@ -39,8 +39,10 @@ async function tmdb(path, params = {}) {
   u.searchParams.set('api_key', KEY);
   for (const [k, v] of Object.entries(params)) u.searchParams.set(k, v);
   for (let attempt = 0; attempt < 4; attempt++) {
-    const res = await fetch(u);
-    if (res.status === 429) { await sleep(2000 + attempt * 1000); continue; }
+    let res;
+    // Netzfehler/Header-Timeout (kommt bei TMDB vor) erneut versuchen statt den Lauf abzubrechen.
+    try { res = await fetch(u); } catch (e) { if (attempt === 3) throw e; await sleep(5000 * (attempt + 1)); continue; }
+    if (res.status === 429 || res.status >= 500) { await sleep(2000 + attempt * 1000); continue; }
     if (!res.ok) throw new Error(`TMDB ${res.status} für ${path}`);
     return res.json();
   }
