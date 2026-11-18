@@ -9,7 +9,15 @@ import { hole, parseSeite, drossel, locs, istIndexierbar } from '../../backend/s
 const BASIS = (process.env.SMOKE_BASE || 'https://movietaste.de').replace(/\/$/, '');
 const L = 'de-de';
 const warten = drossel(700);
-const abruf = (pfad, opt) => hole(pfad.startsWith('http') ? pfad : BASIS + pfad, { warten, ...opt });
+// Der Server hat 1 CPU und ist bei Hintergrundjobs zeitweise minutenlang traege:
+// laengerer Timeout, und bei Status 0 (Timeout/Netz) nach Pause ein Zusatzversuch.
+const abruf = async (pfad, opt) => {
+  const url = pfad.startsWith('http') ? pfad : BASIS + pfad;
+  const r = await hole(url, { warten, timeoutMs: 60000, ...opt });
+  if (r.status !== 0) return r;
+  await new Promise((ok) => setTimeout(ok, 30000));
+  return hole(url, { warten, timeoutMs: 60000, ...opt });
+};
 
 const sitemap = {};
 const proben = {};

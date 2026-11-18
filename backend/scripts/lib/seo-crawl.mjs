@@ -22,7 +22,7 @@ export function drossel(intervallMs = 700) {
 }
 
 /** Ruft eine URL ab und folgt Redirects von Hand (zaehlt die Spruenge). */
-export async function hole(url, { warten = async () => {}, maxSprunge = 5, text = true } = {}) {
+export async function hole(url, { warten = async () => {}, maxSprunge = 5, text = true, timeoutMs = 30000 } = {}) {
   const kette = [];
   let aktuell = url;
   for (let i = 0; i <= maxSprunge; i += 1) {
@@ -33,7 +33,7 @@ export async function hole(url, { warten = async () => {}, maxSprunge = 5, text 
         antwort = await fetch(aktuell, {
           redirect: 'manual',
           headers: { 'user-agent': USER_AGENT, 'accept-language': 'de' },
-          signal: AbortSignal.timeout(30000),
+          signal: AbortSignal.timeout(timeoutMs),
         });
       } catch (e) {
         antwort = null;
