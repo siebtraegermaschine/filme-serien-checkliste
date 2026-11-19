@@ -261,6 +261,19 @@
   dem Konto, Aggregate bleiben anonym für immer (Kinos nur auf Ortsebene,
   Mindestzahl-Schwelle bei Auswertung).
 
+## Native Apps: Code-Stand (19.11.2026, Zweig claude/native-apps-20667d, NICHT auf main)
+Fertig und lokal getestet (Backend 240 Tests): Token-Login (`auth_tokens`, Bearer vor Cookie, Geräteliste),
+PLATFORM-Schicht in `index.html`, Capacitor iOS (`native/ios`) und Android (`native/android`),
+natives Teilen mit Datei, Deep Links, Haptik, Offline-Lesecache, `/.well-known`-Routen
+(`backend/lib/appLinks.js`), Push-Tabelle + `/api/push/register|unregister`, `lib/pushVersand.js`.
+- Aus bis Schlüssel da: `APPLE_TEAM_ID` / `ANDROID_CERT_SHA256` (sonst 404), `PUSH_ENABLED=1` +
+  `FIREBASE_SERVICE_ACCOUNT` + `npm i firebase-admin` im backend/.
+- Nicht verifiziert: Android-Build (kein SDK auf dem Mac), Katalog-Ladezeit/Speicher im Simulator gegen live
+  (braucht Block 1 live), TMDB-Abrufe, Simulator nur iPhone 18 Pro (kleine Größen/Pro Max/Hell-Dunkel offen).
+- Offen für dich: Entwicklerkonten, D-U-N-S, APNs-Schlüssel, Firebase, App-Store-Connect, Name, Signierung,
+  Datenschutz-Absatz (Entwurf im Notizordner `datenschutz-push-entwurf.md`), CORS in docs/DEPLOYMENT.md prüfen.
+- Vor Push auf main: Freigabe nötig (Backend-Blöcke sind rückwärtskompatibel, Schema-Änderungen additiv).
+
 ## Als Nächstes
 
 - SEO Stufe C / fehlende Daten: prüfen, ob sich ein weiterer Batch-API-Lauf
