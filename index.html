@@ -52,6 +52,8 @@
     token: null,
     ready: Promise.resolve(),
   };
+  // Adresse fuer geteilte Links: im Browser die eigene, in der App die oeffentliche.
+  window.APP_ORIGIN = nativ ? P.apiBase : location.origin;
   if (!nativ) return;
 
   document.documentElement.classList.add('native', 'os-' + P.os);
@@ -59,9 +61,41 @@
   // Token einmal aus dem sicheren Speicher laden; Anfragen warten darauf.
   var TOKEN_KEY = 'mt.token';
   var sec = P.plugin('SecureStoragePlugin');
-  P.ready = (sec ? sec.get({ key: TOKEN_KEY }).then(function(r){ P.token = r && r.value || null; }) : Promise.resolve())
+  var tokenLaden = (sec ? sec.get({ key: TOKEN_KEY }).then(function(r){ P.token = r && r.value || null; }) : Promise.resolve())
     .catch(function(){ P.token = null; }); // "Schluessel fehlt" wirft -- heisst nur: nicht angemeldet
+
+  // Universal Links: Die Seite liest Pfad und Query aus location. In der App ist
+  // der Pfad "/", also wird der Link-Pfad vor dem Start per replaceState gesetzt.
+  // Offen laufende App: Pfad merken und neu laden, damit der Start ihn auswertet.
+  var LINK_KEY = 'mt.link', LINK_EINMAL = 'mt.link.einmal';
+  var AppPl = P.plugin('App');
+  function linkPfad(u){
+    var x; try { x = new URL(u); } catch (e) { return null; }
+    if (!/^(www\.)?movietaste\.de$/.test(x.hostname)) return null;
+    return (x.pathname === '/' || /^\/(app|t)(\/|$)/.test(x.pathname)) ? x.pathname + x.search : null;
+  }
+  function ssGet(k){ try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+  function ssSet(k, v){ try { if (v == null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, v); } catch (e) {} }
+  function linkAnwenden(pfad){ try { history.replaceState(null, '', pfad); } catch (e) {} }
+  var linkLaden = Promise.resolve().then(function(){
+    var wartend = ssGet(LINK_KEY);
+    if (wartend) { ssSet(LINK_KEY, null); linkAnwenden(wartend); return; }
+    if (!AppPl || ssGet(LINK_EINMAL)) return;
+    ssSet(LINK_EINMAL, '1');
+    return AppPl.getLaunchUrl().then(function(r){ var p = r && r.url && linkPfad(r.url); if (p) { P.startLink = p; linkAnwenden(p); } });
+  }).catch(function(){});
+  if (AppPl) AppPl.addListener('appUrlOpen', function(e){
+    var p = linkPfad(e.url);
+    if (!p) { var b0 = P.plugin('Browser'); if (b0) b0.open({ url: e.url }); return; }
+    if (p === P.startLink) { P.startLink = null; return; } // Kaltstart-Link, schon angewendet
+    ssSet(LINK_KEY, p);
+    try { history.replaceState(null, '', '/'); } catch (x) {}
+    location.reload();
+  });
+  var linkMax = new Promise(function(r){ setTimeout(r, 1500); }); // haengendes Plugin darf den Start nicht blockieren
+  P.ready = Promise.all([tokenLaden, Promise.race([linkLaden, linkMax])]).then(function(){});
   function tokenSetzen(t){
+    cacheLeeren();
     P.token = t || null;
     if (!sec) return; // ohne Plugin nur im Speicher: lieber abmelden als Token in localStorage
     (t ? sec.set({ key: TOKEN_KEY, value: t }) : sec.remove({ key: TOKEN_KEY })).catch(function(){});
@@ -88,7 +122,10 @@
       var hatToken = !!P.token;
       if (hatToken) h.set('Authorization', 'Bearer ' + P.token);
       init.headers = h;
+      var lesen = (!init.method || init.method === 'GET') && NETZ_CACHE.test(url);
       return echt(P.apiBase + url, init).then(function(res){
+        offlineSetzen(false);
+        if (lesen && res.ok) res.clone().text().then(function(t){ try { localStorage.setItem(CACHE_PRAEFIX + url, t); } catch (e) {} });
         if (res.status === 401 && hatToken) tokenSetzen(null); // Token abgelaufen oder widerrufen
         if (/^\/api\/auth\/(logout|account)(\?|$)/.test(url) && res.ok && init.method !== 'PUT') tokenSetzen(null);
         if (!/^\/api\/auth\/(login|register)(\?|$)/.test(url) || !res.ok) return res;
@@ -98,9 +135,83 @@
           delete u.token;
           return new Response(JSON.stringify(u), { status: res.status, headers: { 'Content-Type': 'application/json' } });
         });
+      }, function(err){
+        // Kein Netz: eigene Listen aus dem zuletzt geladenen Stand zeigen.
+        offlineSetzen(true);
+        var t = null; try { t = lesen && localStorage.getItem(CACHE_PRAEFIX + url); } catch (e) {}
+        if (t) return new Response(t, { status: 200, headers: { 'Content-Type': 'application/json', 'X-Offline': '1' } });
+        throw err;
       });
     });
   };
+
+  // Zwischenspeicher fuer Lesezugriffe auf den eigenen Stand (Konto, Listen,
+  // Anbieter, Verknuepfungen). Er gehoert zum angemeldeten Konto und wird beim
+  // Abmelden und bei jeder neuen Anmeldung geleert.
+  var NETZ_CACHE = /^\/api\/(auth\/me|progress|hidden-titles|links|links\/progress|watch-providers\/selection)(\?|$)/;
+  var CACHE_PRAEFIX = 'mt.c:';
+  function cacheLeeren(){
+    try { Object.keys(localStorage).filter(function(k){ return k.indexOf(CACHE_PRAEFIX) === 0; }).forEach(function(k){ localStorage.removeItem(k); }); } catch (e) {}
+  }
+  P.offline = false;
+  var banner = null;
+  function offlineSetzen(an){
+    if (P.offline === an) return;
+    P.offline = an;
+    document.documentElement.classList.toggle('offline', an);
+    if (!document.body) return;
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.setAttribute('role', 'status');
+      banner.style.cssText = 'padding:calc(env(safe-area-inset-top,0px) + 6px) 14px 8px;background:#2a323e;color:#e8eaed;font-size:13px;text-align:center';
+      document.body.insertBefore(banner, document.body.firstChild);
+    }
+    banner.textContent = (window.TXT && window.TXT.offlineHinweis) || 'Offline';
+    banner.hidden = !an;
+  }
+  window.addEventListener('DOMContentLoaded', function(){ if (P.offline) { P.offline = false; offlineSetzen(true); } });
+  var Netz = P.plugin('Network');
+  if (Netz) {
+    Netz.getStatus().then(function(st){ offlineSetzen(!st.connected); }).catch(function(){});
+    Netz.addListener('networkStatusChange', function(st){ offlineSetzen(!st.connected); });
+  }
+
+  // Teilen ueber das System-Blatt. Dateien (Story-Bild) gehen ueber den Cache-Ordner.
+  var Teilen = P.plugin('Share'), Dateien = P.plugin('Filesystem');
+  if (Teilen) {
+    navigator.canShare = function(d){ return !!d && (!d.files || !!Dateien); };
+    navigator.share = function(d){
+      d = d || {};
+      if (!d.files || !d.files.length) return Teilen.share({ title: d.title, text: d.text, url: d.url, dialogTitle: d.title });
+      return Promise.all(d.files.map(function(f){
+        return new Promise(function(ok, err){
+          var r = new FileReader();
+          r.onerror = function(){ err(r.error); };
+          r.onload = function(){
+            Dateien.writeFile({ path: 'teilen/' + f.name, data: String(r.result).split(',')[1], directory: 'CACHE', recursive: true })
+              .then(function(x){ ok(x.uri); }, err);
+          };
+          r.readAsDataURL(f);
+        });
+      })).then(function(uris){ return Teilen.share({ title: d.title, text: d.text, files: uris, dialogTitle: d.title }); });
+    };
+  }
+
+  // Haptik: leichter Tipp in der Tab-Leiste, Erfolgsimpuls beim Setzen von Watchlist/Gesehen.
+  var Haptik = P.plugin('Haptics');
+  P.haptik = function(art){
+    if (!Haptik) return;
+    try { Promise.resolve(art === 'ok' ? Haptik.notification({ type: 'SUCCESS' }) : Haptik.impact({ style: 'LIGHT' })).catch(function(){}); } catch (e) {}
+  };
+  document.addEventListener('click', function(e){ if (e.target.closest && e.target.closest('.bottom-nav button')) P.haptik(); }, true);
+  window.addEventListener('load', function(){
+    var orig = window.updateProgressRemote;
+    if (typeof orig !== 'function') return;
+    window.updateProgressRemote = function(id, patch){
+      P.haptik(patch && (patch.watchlist || patch.seen) ? 'ok' : '');
+      return orig.apply(this, arguments);
+    };
+  });
 
   // Seiten von movietaste.de (Recht, SEO) und fremde Links oeffnen im System-Browser-Fenster.
   document.addEventListener('click', function(e){
@@ -178,6 +289,7 @@
   html.native body { -webkit-user-select:none; user-select:none; overscroll-behavior-y:none; }
   html.native input, html.native textarea { -webkit-user-select:text; user-select:text; }
   html.native button, html.native .chip, html.native [role="button"] { min-height:44px; min-width:44px; }
+  html.native.offline header { padding-top:30px; }
   html.native .footer-seo, html.native .footer-laender, html.native [data-cookie-einstellungen], html.native [data-cookie-einstellungen-trenner] { display:none; }
   body {
     background: var(--bg);
@@ -2512,6 +2624,7 @@ var UI_TEXTE = {
     jemand: 'Jemand',
     linkGueltig: function(tage){ return 'Der Link ist ' + tage + ' Tage gültig.'; },
     linkLaeuftNichtAb: 'Der Link läuft nicht ab.',
+    offlineHinweis: 'Offline: Du siehst deinen zuletzt geladenen Stand. Änderungen gehen wieder, sobald du online bist.',
     kopiert: 'In die Zwischenablage kopiert.',
     kopierenFehler: 'Kopieren hat nicht geklappt – Link oben von Hand markieren.',
     einladungAnmelden: 'Melde dich an oder lege ein Konto an, um die Einladung anzunehmen.',
@@ -2840,6 +2953,7 @@ var UI_TEXTE = {
     jemand: 'Someone',
     linkGueltig: function(tage){ return 'The link is valid for ' + tage + ' days.'; },
     linkLaeuftNichtAb: 'The link does not expire.',
+    offlineHinweis: 'Offline: showing your last saved state. Changes work again once you are online.',
     kopiert: 'Copied to clipboard.',
     kopierenFehler: 'Copying failed – select the link above by hand.',
     einladungAnmelden: 'Sign in or create an account to accept the invitation.',
@@ -3165,6 +3279,7 @@ var UI_TEXTE = {
     jemand: 'Quelqu’un',
     linkGueltig: function(tage){ return 'Le lien est valable ' + tage + ' jours.'; },
     linkLaeuftNichtAb: 'Le lien n’expire pas.',
+    offlineHinweis: 'Hors ligne : voici ton dernier état enregistré. Les modifications reprendront une fois en ligne.',
     kopiert: 'Copié dans le presse-papiers.',
     kopierenFehler: 'La copie a échoué – sélectionne le lien ci-dessus à la main.',
     einladungAnmelden: 'Connecte-toi ou crée un compte pour accepter l’invitation.',
@@ -3490,6 +3605,7 @@ var UI_TEXTE = {
     jemand: 'Alguien',
     linkGueltig: function(tage){ return 'El enlace es válido durante ' + tage + ' días.'; },
     linkLaeuftNichtAb: 'El enlace no caduca.',
+    offlineHinweis: 'Sin conexión: ves tu último estado guardado. Los cambios vuelven a funcionar con conexión.',
     kopiert: 'Copiado al portapapeles.',
     kopierenFehler: 'No se pudo copiar – selecciona el enlace de arriba a mano.',
     einladungAnmelden: 'Inicia sesión o crea una cuenta para aceptar la invitación.',
@@ -3815,6 +3931,7 @@ var UI_TEXTE = {
     jemand: 'Qualcuno',
     linkGueltig: function(tage){ return 'Il link è valido per ' + tage + ' giorni.'; },
     linkLaeuftNichtAb: 'Il link non scade.',
+    offlineHinweis: 'Offline: vedi l’ultimo stato salvato. Le modifiche tornano a funzionare online.',
     kopiert: 'Copiato negli appunti.',
     kopierenFehler: 'Copia non riuscita – seleziona manualmente il link qui sopra.',
     einladungAnmelden: 'Accedi o crea un account per accettare l’invito.',
@@ -4140,6 +4257,7 @@ var UI_TEXTE = {
     jemand: 'Iemand',
     linkGueltig: function(tage){ return 'De link is ' + tage + ' dagen geldig.'; },
     linkLaeuftNichtAb: 'De link verloopt niet.',
+    offlineHinweis: 'Offline: je ziet je laatst opgeslagen stand. Wijzigingen werken weer zodra je online bent.',
     kopiert: 'Gekopieerd naar het klembord.',
     kopierenFehler: 'Kopiëren is mislukt – selecteer de link hierboven handmatig.',
     einladungAnmelden: 'Log in of maak een account aan om de uitnodiging te accepteren.',
@@ -4465,6 +4583,7 @@ var UI_TEXTE = {
     jemand: 'Alguém',
     linkGueltig: function(tage){ return 'O link é válido por ' + tage + ' dias.'; },
     linkLaeuftNichtAb: 'O link não expira.',
+    offlineHinweis: 'Offline: estás a ver o último estado guardado. As alterações voltam a funcionar quando estiveres online.',
     kopiert: 'Copiado para a área de transferência.',
     kopierenFehler: 'A cópia falhou – selecione o link acima manualmente.',
     einladungAnmelden: 'Entre ou crie uma conta para aceitar o convite.',
@@ -10201,7 +10320,7 @@ var MOVIE_NIGHT_KINO = [];
     return poolJeId.get(String(id)) || null;
   }
 
-  function link(token){ return location.origin + location.pathname + '?nacht=' + token; }
+  function link(token){ return APP_ORIGIN + (window.PLATFORM.native ? '/' : location.pathname) + '?nacht=' + token; }
 
   function zeichneRunde(daten){
     var scrollVorher = bk.querySelector('.modal').scrollTop;
@@ -11852,7 +11971,7 @@ async function einladungTeilen(btn, artName, weiter){
     // koennte. "Watchlist teilen" bleibt gesperrt, dabei werden zwei Konten
     // verknuepft und eine Liste offengelegt.
     if (artName === 'referral') {
-      zeigeEinladung(art.titel, art.textAusgeloggt, location.origin, TXT.linkLaeuftNichtAb);
+      zeigeEinladung(art.titel, art.textAusgeloggt, APP_ORIGIN, TXT.linkLaeuftNichtAb);
       return;
     }
     closeProfileModal(); requireLogin(weiter || openProfileModal); return;
@@ -11948,7 +12067,7 @@ function ansichtLink(){
   // bleiben durchgehend ODER.
   var vs = aktiveVerknuepfungen();
   if (vs.indexOf('und') !== -1) p.set('verknuepfung', vs.join('.'));
-  return location.origin + '/app?' + p.toString();
+  return APP_ORIGIN + '/app?' + p.toString();
 }
 // Beim Laden: einen geteilten Ansicht-Link anwenden. Liefert true, wenn einer
 // da war -- die Kennenlern-Strecke bleibt dann weg (zwei Fenster uebereinander,
@@ -12030,7 +12149,7 @@ async function momentTeilen(ids, text){
   var url;
   try {
     var d = await apiRequest('POST', '/api/share/titel-liste', { ids: ids });
-    url = location.origin + '/app?titel=' + d.token;
+    url = APP_ORIGIN + '/app?titel=' + d.token;
   } catch (e) { alert(grenzeMeldung(e) || TXT.momentFehler); return; }
   text = text || TXT.teilenMomentText;
   if (navigator.share) {
@@ -12175,7 +12294,7 @@ function renderMoment(profile){
     var art = EINLADUNGSARTEN.referral;
     var eingeloggt = !!CURRENT_USER;
     var text = eingeloggt ? art.text(CURRENT_USER.displayName || TXT.jemand) : art.textAusgeloggt;
-    var url = (eingeloggt && refLinkFuer === CURRENT_USER.id && refLink) || location.origin;
+    var url = (eingeloggt && refLinkFuer === CURRENT_USER.id && refLink) || APP_ORIGIN;
     if (navigator.share) {
       navigator.share({ title: 'MovieMatch', text: text, url: url })
         .catch(function(err){
@@ -14460,7 +14579,7 @@ function teilenZiel(item){
 }
 function teilenUrl(item){
   var z = teilenZiel(item);
-  return z ? (location.origin + '/t/' + z.art + '/' + z.kennung) : null;
+  return z ? (APP_ORIGIN + '/t/' + z.art + '/' + z.kennung) : null;
 }
 function teilenText(item){
   var wer = (CURRENT_USER && CURRENT_USER.displayName) ? CURRENT_USER.displayName : null;
