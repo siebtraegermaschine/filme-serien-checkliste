@@ -1,3 +1,5 @@
+> **Veraltet (Stand 03.08.2026).** Abgelöst durch `docs/PLAN-NATIVE-APPS.md` (04.11.2026). Nur noch Detail-Nachschlagewerk für Token-Design (Phase 1), Universal Links (4) und Push (6).
+
 # Plan: MovieMatch auf drei Wegen — Web, iOS, Android
 
 Stand: 2026-08-03. Diese Datei ist die Umsetzungsvorlage für den Weg von der

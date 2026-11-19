@@ -189,8 +189,10 @@
   Paketier-Skript (inkl. Ausschluss der 26 kollisionsverdächtigen Personen),
   vor dem ersten echten (kostenpflichtigen) Erzeugungslauf separate Freigabe
   einholen.
-- **Native Apps** (iOS/Android via Capacitor): kompletter 11-Phasen-Plan
-  steht, noch nicht begonnen. Kritischer Vorab-Punkt: Sitzungs-Cookie
+- **Native Apps** (iOS/Android via Capacitor): Plan neu gefasst am 04.11.2026
+  in `docs/PLAN-NATIVE-APPS.md` (alter Plan: `PLAN-NATIVE-APPS-ALT.md`);
+  Vorschlag: Vite-Umbau streichen (index.html jetzt 14.894 Zeilen), nur
+  Plattform-Schicht; Store-Name klären; noch nicht begonnen. Kritischer Vorab-Punkt: Sitzungs-Cookie
   funktioniert in der nativen Hülle nicht (Token-Auth nötig), Kontolöschung
   muss künftig auch Token/Push-Kennungen entfernen, Katalog-Größe (~27 MB)
   vor Feinschliff auf schwachem Gerät messen.
