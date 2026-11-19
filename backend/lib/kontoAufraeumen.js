@@ -60,6 +60,7 @@ export async function loescheKonto(userId, email) {
     // sess ist JSON; die userId liegt dort als Zeichenkette (bigint aus pg).
     await client.query(`DELETE FROM session WHERE sess->>'userId' = $1`, [String(userId)]);
     await client.query(`DELETE FROM auth_tokens WHERE user_id = $1`, [userId]);
+    await client.query(`DELETE FROM push_tokens WHERE user_id = $1`, [userId]);
     await client.query(`DELETE FROM users WHERE id = $1`, [userId]);
     await client.query('COMMIT');
   } catch (err) {

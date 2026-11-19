@@ -4,6 +4,7 @@ import { requireAuth } from '../middleware/requireAuth.js';
 import { createAsyncRouter } from '../lib/asyncRouter.js';
 import { mengenGrenze } from '../middleware/rateLimit.js';
 import { track } from '../lib/track.js';
+import { sendePush } from '../lib/pushVersand.js';
 
 const router = createAsyncRouter();
 
@@ -179,6 +180,16 @@ router.post('/invite/:token/accept', async (req, res) => {
     });
 
     const { rows: partner } = await pool.query('SELECT id, display_name FROM users WHERE id = $1', [einladung.inviter_id]);
+    // Push an die einladende Person (nur bei neuer Verknuepfung, nur wenn Push an ist).
+    if (neu) {
+      pool.query('SELECT display_name FROM users WHERE id = $1', [req.userId])
+        .then(({ rows: ich }) => sendePush(einladung.inviter_id, {
+          titel: 'MovieMatch',
+          text: `${anzeigename(ich[0] || {})} hat deine Einladung angenommen.`,
+          daten: { pfad: '/app' },
+        }))
+        .catch((e) => console.error('[push] Einladung:', e.message));
+    }
     res.json({ linked: { id: partner[0].id, name: anzeigename(partner[0]) } });
   } catch (err) {
     await client.query('ROLLBACK');

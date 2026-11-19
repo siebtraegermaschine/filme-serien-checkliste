@@ -1174,3 +1174,16 @@ CREATE TABLE IF NOT EXISTS auth_tokens (
   laeuft_ab_am  TIMESTAMPTZ NOT NULL
 );
 CREATE INDEX IF NOT EXISTS auth_tokens_user_idx ON auth_tokens (user_id);
+
+-- Push-Tokens der nativen Apps (FCM/APNs). Opt-in: aktiv bleibt false, bis die
+-- App nach Systemfreigabe ausdruecklich aktiviert. Versand ist per PUSH_ENABLED
+-- abgeschaltet (lib/pushVersand.js).
+CREATE TABLE IF NOT EXISTS push_tokens (
+  id            BIGSERIAL PRIMARY KEY,
+  user_id       BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  token         TEXT NOT NULL UNIQUE,
+  plattform     TEXT NOT NULL CHECK (plattform IN ('ios', 'android')),
+  aktiv         BOOLEAN NOT NULL DEFAULT false,
+  erstellt_am   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS push_tokens_user_idx ON push_tokens (user_id);
