@@ -261,7 +261,7 @@
   dem Konto, Aggregate bleiben anonym für immer (Kinos nur auf Ortsebene,
   Mindestzahl-Schwelle bei Auswertung).
 
-## Native Apps: Code-Stand (19.11.2026, Zweig claude/native-apps-20667d, NICHT auf main)
+## Native Apps: Code-Stand (19.11.2026, alles auf main und live)
 Fertig und lokal getestet (Backend 240 Tests): Token-Login (`auth_tokens`, Bearer vor Cookie, Geräteliste),
 PLATFORM-Schicht in `index.html`, Capacitor iOS (`native/ios`) und Android (`native/android`),
 natives Teilen mit Datei, Deep Links, Haptik, Offline-Lesecache, `/.well-known`-Routen
@@ -273,6 +273,8 @@ natives Teilen mit Datei, Deep Links, Haptik, Offline-Lesecache, `/.well-known`-
   `?search=&limit=200`. Web unverändert. Messung iPhone-18-Pro-Simulator: WebContent ~253 MB statt ~740 MB,
   Liste sofort da. Preis: Empfehlungen/Taste-Score rechnen nur über Startkatalog + eigene Titel + Suchtreffer,
   Genre-/Filterlisten zeigen nur diese Auswahl. Backend vor App ausliefern (ältere Server ignorieren `?ids=`).
+- Kartendesign nativ (nur `html.native`): Score-Pille 24x18 statt 44x44, Buttons 34 px, Cover/Titel/Score bündig; schwebender Teilen-Knopf in der App aus. Im Simulator geprüft (Gast).
+- Ablehnungsrisiken geprüft (PLAN-NATIVE-APPS Abschnitt 5): Kontolöschung, kein Social-Login, GA in der App aus, Export-Flag, Rechtstexte-Links in Ordnung. Löschdialog nennt jetzt die 14-Tage-Frist (7 Sprachen). Nicht geprüft: Testkonto für Prüfer, Altersfreigabe, Trailer auf dem Gerät, tote Links, vier Gerätegrößen.
 - Nicht verifiziert: Android-Build (kein SDK auf dem Mac), TMDB-Abrufe, Nachladen mit echtem Konto gegen live
   (erst nach Deploy), Simulator nur iPhone 18 Pro (kleine Größen/Pro Max/Hell-Dunkel offen), Speicher auf echtem Gerät.
 - Offen für dich: Entwicklerkonten, D-U-N-S, APNs-Schlüssel, Firebase, App-Store-Connect, Name, Signierung,
