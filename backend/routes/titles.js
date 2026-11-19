@@ -85,7 +85,7 @@ const LISTEN_SPALTEN = `t.id, t.tmdb_id, t.type, t.title, t.title_en, t.original
   t.genres, t.director, t.cast_names, t.keywords, t.rating, t.vote_count,
   t.certification, t.certifications, t.poster_path, t.poster_base64, t.source, t.uebersetzungen`;
 
-export async function ladeListe({ type, source, search, withPlot, lang = 'de', region = 'DE' }) {
+export async function ladeListe({ type, source, search, ids, limit, withPlot, lang = 'de', region = 'DE' }) {
   const conditions = [];
   const params = [];
 
@@ -107,6 +107,12 @@ export async function ladeListe({ type, source, search, withPlot, lang = 'de', r
     conditions.push(`t.title ILIKE $${params.length}`);
   }
 
+  // Nur fuer die native App (schlanker Katalog): gezielt einzelne Titel per id.
+  if (Array.isArray(ids)) {
+    params.push(ids);
+    conditions.push(`t.id = ANY($${params.length})`);
+  }
+
   // Kein LIMIT: der Client baut aus dieser Antwort seinen kompletten Titel-Pool
   // (Suche, Watchlist-/Gesehen-Verknuepfung per title_id) -- ein Deckel wuerde
   // alphabetisch spaeter einsortierte Titel silent abschneiden. Frueher lag hier
@@ -122,7 +128,8 @@ export async function ladeListe({ type, source, search, withPlot, lang = 'de', r
        FROM titles t
        LEFT JOIN title_tmdb_resolution r ON r.title_id = t.id AND t.tmdb_id IS NULL
        ${where}
-      ORDER BY t.title ASC`,
+      ${limit ? 'ORDER BY t.vote_count DESC NULLS LAST, t.title ASC' : 'ORDER BY t.title ASC'}
+      ${limit ? `LIMIT ${limit}` : ''}`,
     params
   );
   return rows.map((r) => serializeTitle(r, { withPlot, lang, region }));
@@ -144,8 +151,17 @@ router.get('/', async (req, res) => {
   const lang = sprachWahl(req.query.lang);
   const region = regionWahl(req.query.region);
 
+  // Beide nur fuer die native App (schlanker Katalog), nie gecacht: ?ids=1,2,3
+  // (max. 2000) und ?limit=n (max. 300, meistbewertete zuerst) zur Suche.
+  const idListe = typeof req.query.ids === 'string'
+    ? [...new Set(req.query.ids.split(',').map(Number).filter((n) => Number.isInteger(n) && n > 0))].slice(0, 2000)
+    : null;
+  const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 0, 0), 300) || undefined;
+  if (idListe) {
+    return res.json(await ladeListe({ ids: idListe, withPlot, lang, region }));
+  }
   if (typeof search === 'string' && search.trim()) {
-    return res.json(await ladeListe({ type, source, search, withPlot, lang, region }));
+    return res.json(await ladeListe({ type, source, search, limit, withPlot, lang, region }));
   }
   await ausListe(req, res, listenSchluessel({ type, source, withPlot, lang, region }),
     () => ladeListe({ type, source, withPlot, lang, region }));

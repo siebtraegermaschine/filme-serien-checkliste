@@ -13561,7 +13561,9 @@ var KATALOG_VOLL_TIMER = null;
 async function katalogVorabruf(){
   var einfach = istAppStart() && !location.search;
   var cached = null;
-  try { cached = await katalogCacheLesen('katalog:' + INHALTS_SPRACHE + ':' + REGION_WAHL); } catch (e) {}
+  // Native App: immer der schlanke Katalog, nie der Cache mit allem (Speicher).
+  if (window.PLATFORM.native) einfach = true;
+  else try { cached = await katalogCacheLesen('katalog:' + INHALTS_SPRACHE + ':' + REGION_WAHL); } catch (e) {}
   if (cached || !einfach) return { start: null, voll: katalogNetzHolen() };
   var url = mitSpracheRegion('/api/startkatalog');
   var frueh = window.__STARTKATALOG;
@@ -13569,6 +13571,54 @@ async function katalogVorabruf(){
   start.catch(function(){});
   return { start: start, voll: null };
 }
+/* Nur native App: der Pool bleibt klein (Speicher im Webview). Zusaetzlich
+   kommen per ?ids= die Titel dazu, die die Person oder verknuepfte Profile
+   markiert haben, und per ?search= die Treffer einer Suche. */
+var NATIV_ROWS = [];
+var NATIV_IDS = null;
+var NATIV_SUCHEN = {};
+function nativRowsAufnehmen(rows){
+  if (!NATIV_IDS) { NATIV_IDS = new Set(); NATIV_ROWS.forEach(function(r){ NATIV_IDS.add(r.id); }); }
+  var neu = rows.filter(function(r){ return !NATIV_IDS.has(r.id); });
+  if (!neu.length) return false;
+  neu.forEach(function(r){ NATIV_IDS.add(r.id); NATIV_ROWS.push(r); });
+  buildPool(NATIV_ROWS, STREAM);
+  dublettenUmlegen();
+  rebuild();
+  renderCurrentTab();
+  return true;
+}
+async function katalogNachladen(){
+  if (!window.PLATFORM.native) return;
+  if (!NATIV_IDS) { NATIV_IDS = new Set(); NATIV_ROWS.forEach(function(r){ NATIV_IDS.add(r.id); }); }
+  var ids = new Set();
+  PROGRESS.forEach(function(v, k){ if (!NATIV_IDS.has(k)) ids.add(k); });
+  Object.keys(LINKED_PROGRESS).forEach(function(uid){
+    LINKED_PROGRESS[uid].forEach(function(v, t){ if (!NATIV_IDS.has(t)) ids.add(t); });
+  });
+  HIDDEN_TITLE_IDS.forEach(function(k){ if (!NATIV_IDS.has(k)) ids.add(k); });
+  var liste = Array.from(ids);
+  for (var i = 0; i < liste.length; i += 1000) {
+    try {
+      var rows = await apiRequest('GET', mitSpracheRegion('/api/titles?ids=' + liste.slice(i, i + 1000).join(',')));
+      nativRowsAufnehmen(rows);
+    } catch (e) { console.warn('Nachladen der eigenen Titel:', e); }
+  }
+}
+async function katalogSucheNachladen(begriff){
+  begriff = String(begriff || '').trim();
+  if (!window.PLATFORM.native || begriff.length < 2 || NATIV_SUCHEN[begriff]) return;
+  NATIV_SUCHEN[begriff] = true;
+  try {
+    var rows = await apiRequest('GET', mitSpracheRegion('/api/titles?source=catalog,discovery,streaming&limit=200&search=' + encodeURIComponent(begriff)));
+    if (nativRowsAufnehmen(rows)) renderSearchSuggestions();
+  } catch (e) { delete NATIV_SUCHEN[begriff]; }
+}
+var _nativSucheTimer = null;
+if (window.PLATFORM.native) searchEl.addEventListener('input', function(){
+  clearTimeout(_nativSucheTimer);
+  _nativSucheTimer = setTimeout(function(){ katalogSucheNachladen(searchEl.value); }, 350);
+});
 function katalogVollWennNoetig(){
   if (KATALOG_VOLL_TIMER === null || KATALOG_VOLL) return null;
   clearTimeout(KATALOG_VOLL_TIMER);
@@ -13623,6 +13673,23 @@ async function loadCatalogAndRefresh(){
   var cacheSchluessel = 'katalog:' + INHALTS_SPRACHE + ':' + REGION_WAHL;
   var ausCache = false;
   if (vorab && vorab.start) {
+    if (window.PLATFORM.native) {
+      // App: bleibt beim schlanken Katalog (rund 1.100 Titel statt 41.000, siehe
+      // katalogNachladen). Eigene und verknuepfte Titel kommen gezielt dazu,
+      // der Rest bei der Suche.
+      try {
+        const start = await vorab.start;
+        STREAM = start.streamDoc;
+        genreAliasUebernehmen(start.streamDoc.genreAlias);
+        NATIV_ROWS = start.combinedRows.slice();
+        buildPool(NATIV_ROWS, STREAM);
+        KATALOG_DA = true;
+        LETZTER_KATALOG_LOAD = Date.now();
+        await loadUserProgressAndRefresh();
+        katalogNachladen();
+        return;
+      } catch (e) { console.error('Startkatalog:', e); list.innerHTML = '<div class="disc-hint">' + TXT.katalogFehler + '</div>'; return; }
+    }
     // Angemeldete brauchen ihre Verknuepfungen im vollen Katalog -- gleich alles laden.
     if (CURRENT_USER) {
       netz = katalogNetzHolen();

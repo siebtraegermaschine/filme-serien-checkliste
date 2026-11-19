@@ -268,8 +268,13 @@ natives Teilen mit Datei, Deep Links, Haptik, Offline-Lesecache, `/.well-known`-
 (`backend/lib/appLinks.js`), Push-Tabelle + `/api/push/register|unregister`, `lib/pushVersand.js`.
 - Aus bis Schlüssel da: `APPLE_TEAM_ID` / `ANDROID_CERT_SHA256` (sonst 404), `PUSH_ENABLED=1` +
   `FIREBASE_SERVICE_ACCOUNT` + `npm i firebase-admin` im backend/.
-- Nicht verifiziert: Android-Build (kein SDK auf dem Mac), Katalog-Ladezeit/Speicher im Simulator gegen live
-  (braucht Block 1 live), TMDB-Abrufe, Simulator nur iPhone 18 Pro (kleine Größen/Pro Max/Hell-Dunkel offen).
+- Schlanker Katalog (nur App, `window.PLATFORM.native`): Pool = `/api/startkatalog` (~650 Titel lokal, ~1.100 live)
+  statt 41.000. Eigene und verknüpfte Titel kommen per `GET /api/titles?ids=` nach, Suchtreffer per
+  `?search=&limit=200`. Web unverändert. Messung iPhone-18-Pro-Simulator: WebContent ~253 MB statt ~740 MB,
+  Liste sofort da. Preis: Empfehlungen/Taste-Score rechnen nur über Startkatalog + eigene Titel + Suchtreffer,
+  Genre-/Filterlisten zeigen nur diese Auswahl. Backend vor App ausliefern (ältere Server ignorieren `?ids=`).
+- Nicht verifiziert: Android-Build (kein SDK auf dem Mac), TMDB-Abrufe, Nachladen mit echtem Konto gegen live
+  (erst nach Deploy), Simulator nur iPhone 18 Pro (kleine Größen/Pro Max/Hell-Dunkel offen), Speicher auf echtem Gerät.
 - Offen für dich: Entwicklerkonten, D-U-N-S, APNs-Schlüssel, Firebase, App-Store-Connect, Name, Signierung,
   Datenschutz-Absatz (Entwurf im Notizordner `datenschutz-push-entwurf.md`), CORS in docs/DEPLOYMENT.md prüfen.
 - Vor Push auf main: Freigabe nötig (Backend-Blöcke sind rückwärtskompatibel, Schema-Änderungen additiv).
