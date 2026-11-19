@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MovieMatch</string>
+    <string name="title_activity_main">MovieMatch</string>
+    <string name="package_name">de.movietaste.app</string>
+    <string name="custom_url_scheme">de.movietaste.app</string>
+</resources>
