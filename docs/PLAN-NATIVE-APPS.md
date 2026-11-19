@@ -187,3 +187,23 @@ einladen, auf 2 echten iPhones durchspielen, dann „Zur Prüfung einreichen".
 - [ ] Push getestet · [ ] Offline-Anzeige · [ ] Katalog auf Altgerät gemessen
 - [ ] Testkonto angelegt · [ ] Screenshots 6,9" · [ ] Etiketten · [ ] Altersfragebogen
 - [ ] TestFlight auf echten Geräten
+
+## Anhang: Antworten zum Altersfragebogen (Stand 19.11.2026)
+
+Faktenbasis: Importe setzen `include_adult: false`, der Katalog enthält aber
+Titel ab FSK 16/18 mit Postern und YouTube-Trailern. Keine Werbung, keine
+In-App-Käufe, kein Glücksspiel, Analytics in der App aus. Nutzer erzeugen keine
+öffentlichen Texte (nur Bewertungen und Verknüpfung), Konto-Löschung vorhanden.
+
+**Apple:** Medien als Hauptzweck nein · Gewalt/Sex/Horror/Drogen/Profanität
+„selten bis mäßig" (nur Poster, Titel, Trailer) · Glücksspiel nein ·
+unbeschränkter Webzugriff nein (feste Links, YouTube-Einbettung in der
+Prüfer-Notiz nennen) · nutzergenerierte Inhalte/Chat nein · Werbung nein.
+Erwartet 13+ oder 16+.
+
+**Google Play (IARC):** Kategorie Referenz/Bildung, nicht Spiel · Inhalte Dritter
+(Poster/Trailer) ehrlich angeben, nicht alles auf „Keine" · Nutzer-Interaktion:
+Verknüpfung ohne öffentliche Inhalte · Standort optional (Kinos). Erwartet 12+ bis 16+.
+
+**Wichtig:** Alles auf „Keine" wäre falsch (FSK-18-Poster sichtbar) und führt zur
+Ablehnung. Kommen Reviews/Kommentare, ändert sich alles (Melde-/Blockierfunktion).
