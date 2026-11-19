@@ -19,7 +19,7 @@ let server; let dbDa = false;
 
 before(async () => {
   try { await pool.query('SELECT 1 FROM auth_tokens LIMIT 1'); dbDa = true; } catch { return; }
-  server = spawn(process.execPath, ['server.js'], { cwd: wurzel, env: { ...process.env, PORT: String(PORT) }, stdio: 'ignore' });
+  server = spawn(process.execPath, ['server.js'], { cwd: wurzel, env: { SESSION_SECRET: 'test', ...process.env, PORT: String(PORT) }, stdio: 'ignore' });
   for (let i = 0; i < 60; i++) {
     try { await fetch(`${BASE}/api/auth/me`); return; } catch { await new Promise((r) => setTimeout(r, 500)); }
   }
