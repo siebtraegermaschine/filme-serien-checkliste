@@ -30,6 +30,12 @@
 
   if (window.MMConsent) return; // doppelt eingebunden
 
+  // Native App: kein Google Analytics, kein Banner (Cookie-Link blendet die App per CSS aus).
+  if (window.PLATFORM && window.PLATFORM.native) {
+    window.MMConsent = { zeigen: function () {}, stand: function () { return 'nein'; } };
+    return;
+  }
+
   /* ---- Texte, sieben Sprachen wie die App. FR/ES/IT/NL/PT maschinell
      angelehnt an DE/EN -- gehoeren in die Muttersprachler-Durchsicht. ---- */
   var TEXTE = {

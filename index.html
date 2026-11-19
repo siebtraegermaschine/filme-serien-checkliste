@@ -33,6 +33,84 @@
       .setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover');
   }
 </script>
+<script>
+/* PLATFORM-Schicht fuer die native App (Capacitor). Im Browser tut dieser
+   Block nichts: window.PLATFORM.native ist false, fetch bleibt unangetastet.
+   In der App (capacitor://localhost) werden relative /api-Pfade auf den Server
+   gelegt, jede Anfrage traegt X-Client: native und den Bearer-Token. Der Token
+   liegt in der iOS-Keychain (SecureStoragePlugin), nie im localStorage.
+   Die App wird aus derselben index.html gebaut (native/build.mjs). */
+(function(){
+  var cap = window.Capacitor;
+  var nativ = !!(cap && cap.isNativePlatform && cap.isNativePlatform());
+  var P = window.PLATFORM = {
+    native: nativ,
+    os: nativ ? cap.getPlatform() : 'web',
+    // Platzhalter: Server der App. Wechselt nur, wenn die Domain wechselt.
+    apiBase: 'https://movietaste.de',
+    plugin: function(name){ return (nativ && cap.Plugins && cap.Plugins[name]) || null; },
+    token: null,
+    ready: Promise.resolve(),
+  };
+  if (!nativ) return;
+
+  document.documentElement.classList.add('native', 'os-' + P.os);
+
+  // Token einmal aus dem sicheren Speicher laden; Anfragen warten darauf.
+  var TOKEN_KEY = 'mt.token';
+  var sec = P.plugin('SecureStoragePlugin');
+  P.ready = (sec ? sec.get({ key: TOKEN_KEY }).then(function(r){ P.token = r && r.value || null; }) : Promise.resolve())
+    .catch(function(){ P.token = null; }); // "Schluessel fehlt" wirft -- heisst nur: nicht angemeldet
+  function tokenSetzen(t){
+    P.token = t || null;
+    if (!sec) return; // ohne Plugin nur im Speicher: lieber abmelden als Token in localStorage
+    (t ? sec.set({ key: TOKEN_KEY, value: t }) : sec.remove({ key: TOKEN_KEY })).catch(function(){});
+  }
+  P.tokenSetzen = tokenSetzen;
+
+  var echt = window.fetch.bind(window);
+  var API = /^\/api\//;
+  window.fetch = function(input, init){
+    var url = typeof input === 'string' ? input : (input && input.url) || '';
+    if (!API.test(url)) return echt(input, init);
+    init = Object.assign({}, init);
+    // Cookies gibt es in der App nicht; Identitaet laeuft ueber den Token.
+    init.credentials = 'omit';
+    return P.ready.then(function(){
+      var h = new Headers(init.headers || {});
+      h.set('X-Client', 'native');
+      var hatToken = !!P.token;
+      if (hatToken) h.set('Authorization', 'Bearer ' + P.token);
+      init.headers = h;
+      return echt(P.apiBase + url, init).then(function(res){
+        if (res.status === 401 && hatToken) tokenSetzen(null); // Token abgelaufen oder widerrufen
+        if (/^\/api\/auth\/(logout|account)(\?|$)/.test(url) && res.ok && init.method !== 'PUT') tokenSetzen(null);
+        if (!/^\/api\/auth\/(login|register)(\?|$)/.test(url) || !res.ok) return res;
+        // Antwort enthaelt den Token: sichern und aus dem Nutzerobjekt entfernen.
+        return res.json().then(function(u){
+          if (u && u.token) tokenSetzen(u.token);
+          delete u.token;
+          return new Response(JSON.stringify(u), { status: res.status, headers: { 'Content-Type': 'application/json' } });
+        });
+      });
+    });
+  };
+
+  // Seiten von movietaste.de (Recht, SEO) und fremde Links oeffnen im System-Browser-Fenster.
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest && e.target.closest('a[href]');
+    if (!a || a.hasAttribute('data-cookie-einstellungen')) return;
+    var u; try { u = new URL(a.href, location.href); } catch (x) { return; }
+    var intern = u.origin === location.origin;
+    if (intern && (u.pathname === '/' || u.pathname === '/app' || u.pathname === '/app/' || u.pathname === '/index.html') && !u.hash.length) return;
+    if (intern && u.hash && u.pathname === location.pathname) return;
+    var b = P.plugin('Browser');
+    if (!b) return;
+    e.preventDefault();
+    b.open({ url: intern ? P.apiBase + u.pathname + u.search : u.href });
+  }, true);
+})();
+</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -88,6 +166,13 @@
      aufeinanderfolgende Taps auf demselben Button als Zoom-Geste statt als
      zwei normale Klicks. */
   button { touch-action: manipulation; }
+  /* App-Optik (nur in der nativen App, siehe PLATFORM-Block im Kopf): kein
+     Browser-Gefuehl durch Textmarkierung, Lupe oder Gummiband-Scroll. */
+  html.native { -webkit-touch-callout:none; -webkit-tap-highlight-color:transparent; background:var(--bg); }
+  html.native body { -webkit-user-select:none; user-select:none; overscroll-behavior-y:none; }
+  html.native input, html.native textarea { -webkit-user-select:text; user-select:text; }
+  html.native button, html.native .chip, html.native [role="button"] { min-height:44px; min-width:44px; }
+  html.native .footer-seo, html.native .footer-laender, html.native [data-cookie-einstellungen], html.native [data-cookie-einstellungen-trenner] { display:none; }
   body {
     background: var(--bg);
     color: var(--text);
@@ -1597,7 +1682,7 @@
        unter Einstellungen -> Credits, weil der Fussbereich auch ohne Konto zu
        sehen ist -- das Einstellungsmenue nicht. -->
   This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.<br>
-  <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a> · <a href="#" data-cookie-einstellungen>Cookie-Einstellungen</a>
+  <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a><span data-cookie-einstellungen-trenner> · </span><a href="#" data-cookie-einstellungen>Cookie-Einstellungen</a>
   <!-- Verweise auf die eigenstaendigen SEO-Seiten unter /de-de/ (siehe
        backend/routes/seo.js). Bis 16.08.2026 verlinkten die SEO-Seiten zwar
        hierher ("Zur App"), aber nicht zurueck -- einziger Entdeckungsweg fuer
