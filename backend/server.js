@@ -1,3 +1,4 @@
+import { registriereAppLinks } from './lib/appLinks.js';
 import 'dotenv/config';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -278,6 +279,9 @@ app.get('/favicon.ico', (req, res) => res.sendFile(path.join(frontendRoot, 'favi
 // express.static stehen, sonst faengt dessen SPA-Fallback (index.html mit
 // extensions:['html']) diese Pfade zuerst ab.
 app.use(seoRouter);
+
+// Universal Links / App Links (.well-known), vor express.static.
+registriereAppLinks(app);
 
 /* frontendRoot ist /app im Image, und dort liegt neben den Frontend-Dateien
    auch das Backend selbst (siehe backend/Dockerfile: COPY backend/ ./backend/).
