@@ -170,7 +170,7 @@ router.post('/titel-liste', GRENZE_MOMENT_NEU, requireAuth, async (req, res) => 
   if (!ids.length) return res.status(400).json({ error: 'keine_titel' });
   const { rows: anzahl } = await pool.query(
     `SELECT COUNT(*)::int AS n FROM titel_momentaufnahmen WHERE user_id = $1`,
-    [req.session.userId]
+    [req.userId]
   );
   if (anzahl[0].n >= MOMENT_MAX_JE_KONTO) {
     return res.status(409).json({ error: 'zu_viele_momentaufnahmen' });
@@ -178,7 +178,7 @@ router.post('/titel-liste', GRENZE_MOMENT_NEU, requireAuth, async (req, res) => 
   const token = crypto.randomBytes(16).toString('hex');
   await pool.query(
     `INSERT INTO titel_momentaufnahmen (token, user_id, title_ids) VALUES ($1, $2, $3)`,
-    [token, req.session.userId, ids]
+    [token, req.userId, ids]
   );
   res.status(201).json({ token });
 });
@@ -197,7 +197,7 @@ router.get('/titel-liste/:token', GRENZE_MOMENT, async (req, res) => {
   // Er hat nur Sinn, wenn hier jemand angemeldet ist, dem die Liste nicht
   // selbst gehoert und der noch nicht verknuepft ist. Abgemeldet bleiben beide
   // Angaben false -- der Knopf fragt dann erst nach dem Anmelden.
-  const ich = req.session && req.session.userId ? String(req.session.userId) : null;
+  const ich = req.userId ? String(req.userId) : null;
   const vonMir = ich != null && ich === String(rows[0].user_id);
   let verknuepft = false;
   let angefragt = false;

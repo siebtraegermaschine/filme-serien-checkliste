@@ -56,7 +56,7 @@ router.post('/', GRENZE, async (req, res) => {
     const geprueft = pruefen(props && typeof props === 'object' ? props : {});
     if (geprueft) {
       await track(name, {
-        userId: req.session?.userId ?? null,
+        userId: req.userId ?? null,
         anonId: req.anonId,
         props: geprueft,
       });

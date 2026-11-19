@@ -195,7 +195,7 @@ router.get('/catalog', async (req, res) => {
 router.get('/selection', requireAuth, async (req, res) => {
   const region = regionWahl(req.query.region || REGION);
   const [{ rows }, defaults] = await Promise.all([
-    pool.query('SELECT watch_provider_ids FROM users WHERE id = $1', [req.session.userId]),
+    pool.query('SELECT watch_provider_ids FROM users WHERE id = $1', [req.userId]),
     standardIds(region),
   ]);
   const stored = rows[0] ? rows[0].watch_provider_ids : null;
@@ -212,7 +212,7 @@ router.put('/selection', requireAuth, async (req, res) => {
   const { selected } = req.body || {};
   if (!Array.isArray(selected)) return res.status(400).json({ error: 'invalid_payload' });
   const ids = [...new Set(selected.map(Number).filter((n) => Number.isInteger(n) && n > 0))];
-  await pool.query('UPDATE users SET watch_provider_ids = $1 WHERE id = $2', [ids, req.session.userId]);
+  await pool.query('UPDATE users SET watch_provider_ids = $1 WHERE id = $2', [ids, req.userId]);
   res.json({ selected: ids, configured: true, defaults: await standardIds(region), region });
 });
 

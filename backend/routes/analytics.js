@@ -227,7 +227,7 @@ async function herkunft() {
 }
 
 router.get('/', requireAuth, async (req, res) => {
-  const { rows } = await pool.query('SELECT email FROM users WHERE id = $1', [req.session.userId]);
+  const { rows } = await pool.query('SELECT email FROM users WHERE id = $1', [req.userId]);
   if (!rows[0] || !istBetreiber(rows[0].email)) {
     return res.status(404).json({ error: 'not_found' });
   }

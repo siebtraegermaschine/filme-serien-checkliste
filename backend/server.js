@@ -42,6 +42,7 @@ import { starteFeedbackAufraeumen } from './lib/feedback.js';
 import { starteWache, ueberwacheProzess, melde } from './lib/wache.js';
 import { starteBenachrichtigung } from './lib/benachrichtigung.js';
 import { starteWochenendmail } from './lib/wochenendmail.js';
+import { authKontext } from './middleware/requireAuth.js';
 import { mengenGrenze } from './middleware/rateLimit.js';
 import { starteSicherung } from './lib/sicherung.js';
 import { starteThemen } from './lib/themen.js';
@@ -61,9 +62,19 @@ app.set('trust proxy', 1); // hinter Caddy/Traefik als Reverse Proxy
 // jeder Route auftreten koennen (siehe lib/wache.js).
 ueberwacheProzess();
 
-if (process.env.CORS_ORIGIN) {
-  app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
-}
+// CORS: Ursprung der nativen Huellen (iOS capacitor://localhost, Android
+// https://localhost) und der Web-Domain, dazu optional CORS_ORIGIN (kommagetrennt).
+// Apps schicken Bearer-Token und brauchen keine Cookies. Fremde Ursprung
+// bekommen keine CORS-Kopfzeilen; same-origin Web-Aufrufe sind nicht betroffen.
+const corsUrspruenge = [
+  'https://movietaste.de', 'capacitor://localhost', 'https://localhost',
+  ...(process.env.CORS_ORIGIN || '').split(',').map((s) => s.trim()).filter(Boolean),
+];
+app.use(cors({
+  origin: corsUrspruenge,
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Client'],
+}));
 
 // /api/titles/bulk-ingest und /api/streaming/ingest bekommen ein hoeheres
 // Limit -- seit dem Wegfall der Titel-Obergrenzen (kein STREAM_COUNT-Deckel
@@ -103,6 +114,8 @@ app.use(
 // Anonyme Geraetekennung (Cookie mt_anon) fuer die KPI-Erfassung -- vor den
 // Routen, damit jede davon req.anonId hat (siehe middleware/anonId.js).
 app.use('/api', anonId);
+// Setzt req.userId aus Bearer-Token (Apps) oder Cookie-Sitzung (Web).
+app.use('/api', authKontext);
 
 app.use('/api/auth', authRouter);
 app.use('/api/titles', titlesRouter);

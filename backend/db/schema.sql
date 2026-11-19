@@ -1160,3 +1160,17 @@ BEGIN
       CHECK (bereich IN ('titel', 'genre', 'anbieter', 'bestenliste', 'kino_stadt', 'hub', 'person', 'reihe'));
   END IF;
 END $$;
+
+-- Anmelde-Token fuer die nativen Apps (iOS/Android). Das Web bleibt bei der
+-- Cookie-Sitzung. Nur der SHA-256 des Tokens liegt in der DB, nie der Klartext.
+CREATE TABLE IF NOT EXISTS auth_tokens (
+  id            BIGSERIAL PRIMARY KEY,
+  user_id       BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  token_hash    TEXT NOT NULL UNIQUE,
+  plattform     TEXT,
+  geraet        TEXT,
+  erstellt_am   TIMESTAMPTZ NOT NULL DEFAULT now(),
+  zuletzt_am    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  laeuft_ab_am  TIMESTAMPTZ NOT NULL
+);
+CREATE INDEX IF NOT EXISTS auth_tokens_user_idx ON auth_tokens (user_id);

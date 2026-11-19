@@ -22,8 +22,8 @@ router.post('/', mengenGrenze({ name: 'feedback', anzahl: 5, minuten: 60 }), asy
   const text = message.trim().slice(0, MAX_LENGTH);
 
   let email = null;
-  if (req.session && req.session.userId) {
-    const { rows } = await pool.query('SELECT email FROM users WHERE id = $1', [req.session.userId]);
+  if (req.userId) {
+    const { rows } = await pool.query('SELECT email FROM users WHERE id = $1', [req.userId]);
     if (rows[0]) email = rows[0].email;
   }
   const fromLine = email || 'Anonym (nicht angemeldet)';
@@ -31,7 +31,7 @@ router.post('/', mengenGrenze({ name: 'feedback', anzahl: 5, minuten: 60 }), asy
   // Erst in die Datenbank -- scheitert das, bricht die Anfrage ab und die
   // Person sieht einen Fehler, statt eine verlorene Nachricht fuer gesendet zu
   // halten.
-  await speichereFeedback({ nachricht: text, userId: req.session?.userId ?? null, email });
+  await speichereFeedback({ nachricht: text, userId: req.userId ?? null, email });
 
   // Die Mail ist ab hier nur noch die Benachrichtigung. Scheitert sie, ist die
   // Rueckmeldung trotzdem gesichert und ueber `npm run feedback` zu lesen --

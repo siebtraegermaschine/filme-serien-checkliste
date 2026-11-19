@@ -8,6 +8,7 @@ import { WIDERRUFSFRIST_TAGE } from '../lib/kontoAufraeumen.js';
 import { mengenGrenze } from '../middleware/rateLimit.js';
 import { metrikZaehlen } from '../lib/metrik.js';
 import { track } from '../lib/track.js';
+import { istNativ, erzeugeToken, widerrufeAlle, widerrufeToken, listeGeraete } from '../lib/tokenAuth.js';
 
 const router = createAsyncRouter();
 
@@ -123,14 +124,20 @@ router.post('/register', GRENZE_REGISTER, async (req, res) => {
        RETURNING id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung`,
       [normalizedEmail, passwordHash, name, werber ? werber.inviterId : null]
     );
-    await sessionErneuern(req);
-    req.session.userId = rows[0].id;
+    const nativ = istNativ(req);
+    let token = null;
+    if (nativ) {
+      token = await erzeugeToken(rows[0].id, req.body?.plattform, req.body?.geraet);
+    } else {
+      await sessionErneuern(req);
+      req.session.userId = rows[0].id;
+    }
     // Anonymer Trichter-Zaehler (siehe lib/metrik.js) -- bewusst ohne await:
     // Das Zaehlen darf die Registrierung weder verzoegern noch scheitern lassen.
     metrikZaehlen('konto');
     // KPI-Ereignis user_signed_up, ebenfalls ohne await.
     signupTracken(rows[0].id, req.anonId, werber);
-    res.status(201).json(publicUser(rows[0]));
+    res.status(201).json(token ? { ...publicUser(rows[0]), token } : publicUser(rows[0]));
   } catch (err) {
     if (err.code === '23505') {
       return res.status(409).json({ error: 'email_taken' });
@@ -160,12 +167,22 @@ router.post('/login', GRENZE_LOGIN, async (req, res) => {
     return res.status(401).json({ error: 'invalid_credentials' });
   }
 
+  if (istNativ(req)) {
+    // Apps: Token statt Cookie (WKWebView schickt Cookies cross-site nicht mit).
+    const token = await erzeugeToken(user.id, req.body?.plattform, req.body?.geraet);
+    return res.json({ ...publicUser(user), token });
+  }
   await sessionErneuern(req);
   req.session.userId = user.id;
   res.json(publicUser(user));
 });
 
-router.post('/logout', (req, res) => {
+router.post('/logout', async (req, res) => {
+  if (req.tokenId) {
+    // Bearer-Anfrage: nur dieses Geraet abmelden.
+    await widerrufeToken(req.userId, req.tokenId);
+    return res.status(204).end();
+  }
   req.session.destroy(() => {
     res.clearCookie('fs.sid');
     res.status(204).end();
@@ -175,8 +192,8 @@ router.post('/logout', (req, res) => {
 router.get('/me', async (req, res) => {
   // Ohne Sitzung 200 + null statt 401: Jeder abgemeldete Besucher loest sonst
   // einen roten Konsoleneintrag aus (Lighthouse: Best Practices).
-  if (!req.session?.userId) return res.json(null);
-  const { rows } = await pool.query(`SELECT id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung FROM users WHERE id = $1`, [req.session.userId]);
+  if (!req.userId) return res.json(null);
+  const { rows } = await pool.query(`SELECT id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung FROM users WHERE id = $1`, [req.userId]);
   if (!rows[0]) return res.json(null);
   res.json(publicUser(rows[0]));
 });
@@ -184,13 +201,13 @@ router.get('/me', async (req, res) => {
 // Anzeigename setzen oder aendern. Konten aus der Zeit vor dieser Funktion
 // haben keinen -- die App fragt beim naechsten Besuch einmalig nach.
 router.put('/display-name', async (req, res) => {
-  if (!req.session?.userId) return res.status(401).json({ error: 'not_authenticated' });
+  if (!req.userId) return res.status(401).json({ error: 'not_authenticated' });
   const { displayName } = req.body || {};
   const name = typeof displayName === 'string' ? displayName.trim() : '';
   if (!name || name.length > 40) return res.status(400).json({ error: 'invalid_display_name' });
   const { rows } = await pool.query(
     'UPDATE users SET display_name = $1 WHERE id = $2 RETURNING id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung',
-    [name, req.session.userId]
+    [name, req.userId]
   );
   res.json(publicUser(rows[0]));
 });
@@ -199,7 +216,7 @@ router.put('/display-name', async (req, res) => {
 // Abschnitt 1: "Merken ... bei angemeldeten Personen am Konto"). Beide Felder
 // optional -- es wird nur geschrieben, was mitgeschickt wurde.
 router.put('/settings', async (req, res) => {
-  if (!req.session?.userId) return res.status(401).json({ error: 'not_authenticated' });
+  if (!req.userId) return res.status(401).json({ error: 'not_authenticated' });
   const { sprache, region, benachrichtigung } = req.body || {};
   // Oberflaechensprachen -- muss zur Frontend-Liste SPRACHEN_VERFUEGBAR passen.
   const neueSprache = ['de', 'en', 'fr', 'es', 'it', 'nl', 'pt'].includes(sprache) ? sprache : undefined;
@@ -215,7 +232,7 @@ router.put('/settings', async (req, res) => {
        benachrichtigung = COALESCE($4, benachrichtigung)
      WHERE id = $3
      RETURNING id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung`,
-    [neueSprache ?? null, neueRegion ?? null, req.session.userId, neueBenachrichtigung ?? null]
+    [neueSprache ?? null, neueRegion ?? null, req.userId, neueBenachrichtigung ?? null]
   );
   res.json(publicUser(rows[0]));
 });
@@ -288,7 +305,7 @@ router.put('/password', requireAuth, async (req, res) => {
     return res.status(400).json({ error: 'invalid_request' });
   }
 
-  const { rows } = await pool.query(`SELECT password_hash FROM users WHERE id = $1`, [req.session.userId]);
+  const { rows } = await pool.query(`SELECT password_hash FROM users WHERE id = $1`, [req.userId]);
   const user = rows[0];
   const ok = user && (await bcrypt.compare(currentPassword, user.password_hash));
   if (!ok) {
@@ -296,7 +313,7 @@ router.put('/password', requireAuth, async (req, res) => {
   }
 
   const passwordHash = await bcrypt.hash(newPassword, BCRYPT_ROUNDS);
-  await pool.query(`UPDATE users SET password_hash = $1 WHERE id = $2`, [passwordHash, req.session.userId]);
+  await pool.query(`UPDATE users SET password_hash = $1 WHERE id = $2`, [passwordHash, req.userId]);
   res.status(204).end();
 });
 
@@ -306,7 +323,7 @@ router.put('/email', requireAuth, async (req, res) => {
     return res.status(400).json({ error: 'invalid_request' });
   }
 
-  const { rows } = await pool.query(`SELECT password_hash FROM users WHERE id = $1`, [req.session.userId]);
+  const { rows } = await pool.query(`SELECT password_hash FROM users WHERE id = $1`, [req.userId]);
   const user = rows[0];
   const ok = user && (await bcrypt.compare(currentPassword, user.password_hash));
   if (!ok) {
@@ -317,7 +334,7 @@ router.put('/email', requireAuth, async (req, res) => {
   try {
     const { rows: updated } = await pool.query(
       `UPDATE users SET email = $1 WHERE id = $2 RETURNING id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung`,
-      [normalizedEmail, req.session.userId]
+      [normalizedEmail, req.userId]
     );
     res.json(publicUser(updated[0]));
   } catch (err) {
@@ -343,22 +360,23 @@ router.delete('/account', requireAuth, async (req, res) => {
     return res.status(400).json({ error: 'invalid_request' });
   }
 
-  const { rows } = await pool.query(`SELECT password_hash FROM users WHERE id = $1`, [req.session.userId]);
+  const { rows } = await pool.query(`SELECT password_hash FROM users WHERE id = $1`, [req.userId]);
   const user = rows[0];
   const ok = user && (await bcrypt.compare(currentPassword, user.password_hash));
   if (!ok) {
     return res.status(401).json({ error: 'wrong_current_password' });
   }
 
-  const userId = req.session.userId;
+  const userId = req.userId;
   const { rows: [beantragt] } = await pool.query(
     `UPDATE users SET deletion_requested_at = now() WHERE id = $1 RETURNING deletion_requested_at`,
     [userId]
   );
   await pool.query(`DELETE FROM session WHERE sess->>'userId' = $1`, [String(userId)]);
+  await widerrufeAlle(userId);
 
   const faellig = new Date(beantragt.deletion_requested_at.getTime() + WIDERRUFSFRIST_TAGE * 86400000);
-  req.session.destroy(() => {
+  (req.session ? req.session.destroy.bind(req.session) : (cb) => cb())(() => {
     res.clearCookie('fs.sid');
     res.json({ deletionRequestedAt: beantragt.deletion_requested_at.toISOString(),
                deletionDueAt: faellig.toISOString(),
@@ -373,10 +391,24 @@ router.post('/account/restore', requireAuth, async (req, res) => {
   const { rows } = await pool.query(
     `UPDATE users SET deletion_requested_at = NULL WHERE id = $1
      RETURNING id, email, display_name, deletion_requested_at, sprache, region, benachrichtigung`,
-    [req.session.userId]
+    [req.userId]
   );
   if (!rows[0]) return res.status(404).json({ error: 'not_found' });
   res.json(publicUser(rows[0]));
+});
+
+// Angemeldete Geraete (Token der Apps) -- einzeln abmeldbar, der einzige Weg,
+// ein verlorenes Handy auszusperren.
+router.get('/devices', requireAuth, async (req, res) => {
+  const geraete = await listeGeraete(req.userId);
+  res.json(geraete.map((g) => ({ ...g, aktuell: req.tokenId != null && g.id === String(req.tokenId) })));
+});
+
+router.delete('/devices/:id', requireAuth, async (req, res) => {
+  if (!/^\d+$/.test(req.params.id)) return res.status(400).json({ error: 'invalid_request' });
+  const ok = await widerrufeToken(req.userId, req.params.id);
+  if (!ok) return res.status(404).json({ error: 'not_found' });
+  res.status(204).end();
 });
 
 export default router;

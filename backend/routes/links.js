@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
        FROM user_links l JOIN users u ON u.id = l.linked_user_id
       WHERE l.user_id = $1
       ORDER BY lower(coalesce(u.display_name, '')), u.id`,
-    [req.session.userId]
+    [req.userId]
   );
   res.json(rows.map((r) => ({ id: r.id, name: anzeigename(r) })));
 });
@@ -52,7 +52,7 @@ router.get('/progress', async (req, res) => {
        FROM user_links l
        JOIN user_progress p ON p.user_id = l.linked_user_id
       WHERE l.user_id = $1 AND (p.seen OR p.watchlist)`,
-    [req.session.userId]
+    [req.userId]
   );
   const proProfil = {};
   for (const r of rows) {
@@ -78,12 +78,12 @@ router.post('/invite', mengenGrenze({ name: 'invite', anzahl: 20, minuten: 60 })
     `INSERT INTO user_link_invites (token_hash, inviter_id, kind, expires_at)
      VALUES ($1, $2, $3, CASE WHEN $3 = 'referral' THEN NULL
                               ELSE now() + ($4 || ' days')::interval END)`,
-    [hashOf(token), req.session.userId, kind, String(INVITE_TTL_TAGE)]
+    [hashOf(token), req.userId, kind, String(INVITE_TTL_TAGE)]
   );
   // KPI-Ereignis (docs/kpi.md) -- ohne await, wie ueberall: invite_id ist der
   // Hash, nie der einloesbare Rohtoken.
   track('invite_sent', {
-    userId: req.session.userId,
+    userId: req.userId,
     anonId: req.anonId,
     props: { invite_id: hashOf(token), channel: kind },
   });
@@ -112,11 +112,11 @@ router.get('/invite/:token', async (req, res) => {
   if (einladung.expires_at && new Date(einladung.expires_at) < new Date()) {
     return res.status(410).json({ error: 'invite_expired' });
   }
-  if (einladung.inviter_id === req.session.userId) return res.status(400).json({ error: 'invite_own' });
+  if (einladung.inviter_id === req.userId) return res.status(400).json({ error: 'invite_own' });
 
   const { rows: schon } = await pool.query(
     'SELECT 1 FROM user_links WHERE user_id = $1 AND linked_user_id = $2',
-    [req.session.userId, einladung.inviter_id]
+    [req.userId, einladung.inviter_id]
   );
   res.json({
     inviter: { id: einladung.inviter_id, name: anzeigename(einladung) },
@@ -138,7 +138,7 @@ router.post('/invite/:token/accept', async (req, res) => {
     if (einladung.expires_at && new Date(einladung.expires_at) < new Date()) {
       await client.query('ROLLBACK'); return res.status(410).json({ error: 'invite_expired' });
     }
-    if (einladung.inviter_id === req.session.userId) { await client.query('ROLLBACK'); return res.status(400).json({ error: 'invite_own' }); }
+    if (einladung.inviter_id === req.userId) { await client.query('ROLLBACK'); return res.status(400).json({ error: 'invite_own' }); }
 
     // Beide Richtungen -- eine Verknuepfung ist immer gegenseitig.
     // Der Hinweis "X hat deine Einladung angenommen" haengt an der Zeile der
@@ -147,17 +147,17 @@ router.post('/invite/:token/accept', async (req, res) => {
     const { rowCount: neu } = await client.query(
       `INSERT INTO user_links (user_id, linked_user_id) VALUES ($1,$2)
        ON CONFLICT DO NOTHING`,
-      [einladung.inviter_id, req.session.userId]
+      [einladung.inviter_id, req.userId]
     );
     await client.query(
       `INSERT INTO user_links (user_id, linked_user_id) VALUES ($1,$2)
        ON CONFLICT DO NOTHING`,
-      [req.session.userId, einladung.inviter_id]
+      [req.userId, einladung.inviter_id]
     );
     if (neu) {
       await client.query(
         'UPDATE user_links SET hinweis_offen = true WHERE user_id = $1 AND linked_user_id = $2',
-        [einladung.inviter_id, req.session.userId]
+        [einladung.inviter_id, req.userId]
       );
     }
     // Zaehlt die Einloesung. Ohne FOR UPDATE-Sperre auf der Einladung: Sie ist
@@ -166,14 +166,14 @@ router.post('/invite/:token/accept', async (req, res) => {
     await client.query(
       `INSERT INTO user_link_invite_uses (token_hash, user_id) VALUES ($1,$2)
        ON CONFLICT DO NOTHING`,
-      [tokenHash, req.session.userId]
+      [tokenHash, req.userId]
     );
     await client.query('COMMIT');
 
     // KPI-Ereignis: Annehmen mit Konto. Die Gast-Teilnahme (guest: true)
     // kommt vom Client ueber POST /api/events (siehe routes/events.js).
     track('invite_accepted', {
-      userId: req.session.userId,
+      userId: req.userId,
       anonId: req.anonId,
       props: { invite_id: tokenHash, guest: false },
     });
@@ -198,7 +198,7 @@ router.get('/hinweise', async (req, res) => {
        FROM user_links l JOIN users u ON u.id = l.linked_user_id
       WHERE l.user_id = $1 AND l.hinweis_offen
       ORDER BY l.created_at`,
-    [req.session.userId]
+    [req.userId]
   );
   res.json(rows.map((r) => ({ id: r.id, name: anzeigename(r) })));
 });
@@ -206,7 +206,7 @@ router.get('/hinweise', async (req, res) => {
 router.post('/hinweise/gelesen', async (req, res) => {
   await pool.query(
     'UPDATE user_links SET hinweis_offen = false WHERE user_id = $1 AND hinweis_offen',
-    [req.session.userId]
+    [req.userId]
   );
   res.status(204).end();
 });
@@ -247,7 +247,7 @@ router.post('/anfrage', mengenGrenze({ name: 'link-anfrage', anzahl: 20, minuten
   const { rows } = await pool.query('SELECT user_id FROM titel_momentaufnahmen WHERE token = $1', [token]);
   if (!rows.length) return res.status(404).json({ error: 'unbekannt' });
   const ziel = String(rows[0].user_id);
-  const ich = String(req.session.userId);
+  const ich = String(req.userId);
   if (ziel === ich) return res.status(400).json({ error: 'anfrage_eigene' });
   const { rows: person } = await pool.query('SELECT id, display_name FROM users WHERE id = $1', [ziel]);
   if (!person.length) return res.status(404).json({ error: 'unbekannt' });
@@ -289,7 +289,7 @@ router.get('/anfragen', async (req, res) => {
        FROM user_link_anfragen a JOIN users u ON u.id = a.von_id
       WHERE a.an_id = $1
       ORDER BY a.created_at`,
-    [req.session.userId]
+    [req.userId]
   );
   res.json(rows.map((r) => ({ id: String(r.id), name: anzeigename(r) })));
 });
@@ -300,7 +300,7 @@ router.get('/anfragen', async (req, res) => {
 router.post('/anfragen/:userId', async (req, res) => {
   const anderer = String(req.params.userId || '');
   if (!/^[0-9]+$/.test(anderer)) return res.status(400).json({ error: 'invalid_params' });
-  const ich = String(req.session.userId);
+  const ich = String(req.userId);
   const annehmen = !!(req.body && req.body.annehmen);
   const client = await pool.connect();
   try {
@@ -328,14 +328,14 @@ router.delete('/:userId', async (req, res) => {
   await pool.query(
     `DELETE FROM user_links
       WHERE (user_id = $1 AND linked_user_id = $2) OR (user_id = $2 AND linked_user_id = $1)`,
-    [req.session.userId, anderer]
+    [req.userId, anderer]
   );
   // Eine noch offene Anfrage in eine der beiden Richtungen faellt mit weg --
   // sonst stuende sie nach dem Loesen als Angebot wieder im Raum.
   await pool.query(
     `DELETE FROM user_link_anfragen
       WHERE (von_id = $1 AND an_id = $2) OR (von_id = $2 AND an_id = $1)`,
-    [req.session.userId, anderer]
+    [req.userId, anderer]
   );
   res.status(204).end();
 });

@@ -64,7 +64,7 @@ async function regionLesen(client, userId) {
    ohne beides nichts anzeigen kann -- und weil die Listen damit nur an einer
    Stelle gepflegt werden (siehe lib/onboarding.js). */
 router.get('/', async (req, res) => {
-  const stand = await standLesen(req.session.userId);
+  const stand = await standLesen(req.userId);
   res.json({
     ...stand,
     // Faellig, solange nicht abgeschlossen und noch Anlaeufe offen sind.
@@ -158,7 +158,7 @@ router.put('/schritt', async (req, res) => {
     return res.status(400).json({ error: 'invalid_step' });
   }
 
-  const userId = req.session.userId;
+  const userId = req.userId;
   const client = await pool.connect();
   let ergebnis;
   let gezaehlt = false;
@@ -213,7 +213,7 @@ router.put('/schritt', async (req, res) => {
    Das Fenster wurde per X geschlossen. Zaehlt den Anlauf hoch; ab
    ANLAEUFE_MAX kommt es nicht mehr von selbst. */
 router.post('/abbruch', async (req, res) => {
-  const userId = req.session.userId;
+  const userId = req.userId;
   const client = await pool.connect();
   let stand;
   try {
@@ -243,7 +243,7 @@ router.post('/abbruch', async (req, res) => {
    Abschluss. Verlangt, dass alle Schritte durch sind -- sonst waere der
    Prozess ueber einen nachgebauten Aufruf abkuerzbar. */
 router.post('/fertig', async (req, res) => {
-  const userId = req.session.userId;
+  const userId = req.userId;
   const client = await pool.connect();
   try {
     await client.query('BEGIN');

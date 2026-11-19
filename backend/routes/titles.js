@@ -210,7 +210,7 @@ router.post('/plots', GRENZE_PLOTS, async (req, res) => {
 // (vorher zufällig user-spezifisch, weil in localStorage).
 router.get('/mine', requireAuth, async (req, res) => {
   const { type } = req.query;
-  const params = [req.session.userId];
+  const params = [req.userId];
   let typeCondition = '';
   if (type === 'movie' || type === 'series') {
     params.push(type);

@@ -24,8 +24,8 @@ router.post('/', GRENZE, async (req, res) => {
   const text = query.trim().slice(0, MAX_LENGTH);
 
   let email = null;
-  if (req.session && req.session.userId) {
-    const { rows } = await pool.query('SELECT email FROM users WHERE id = $1', [req.session.userId]);
+  if (req.userId) {
+    const { rows } = await pool.query('SELECT email FROM users WHERE id = $1', [req.userId]);
     if (rows[0]) email = rows[0].email;
   }
 

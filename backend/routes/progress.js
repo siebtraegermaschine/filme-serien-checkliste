@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
     `SELECT up.title_id, up.seen, up.watchlist, up.via_stream, up.rating, up.pinned_category, t.tmdb_id, t.type
      FROM user_progress up JOIN titles t ON t.id = up.title_id
      WHERE up.user_id = $1`,
-    [req.session.userId]
+    [req.userId]
   );
   res.json(
     rows.map((r) => ({
@@ -71,11 +71,11 @@ router.put('/:titleId', async (req, res) => {
     // Hoechstens MAX_PINS je Kategorie. Die Sperre je Nutzer verhindert, dass
     // zwei Geraete gleichzeitig den letzten freien Platz belegen.
     if (pinnedCategoryGesetzt && pinnedCategory !== null) {
-      await client.query('SELECT pg_advisory_xact_lock($1)', [req.session.userId]);
+      await client.query('SELECT pg_advisory_xact_lock($1)', [req.userId]);
       const { rows: [{ n }] } = await client.query(
         `SELECT count(*)::int AS n FROM user_progress
           WHERE user_id = $1 AND pinned_category = $2 AND title_id <> $3`,
-        [req.session.userId, pinnedCategory, titleId]);
+        [req.userId, pinnedCategory, titleId]);
       if (n >= MAX_PINS) {
         await client.query('ROLLBACK');
         return res.status(409).json({ error: 'pin_slot_taken' });
@@ -92,7 +92,7 @@ router.put('/:titleId', async (req, res) => {
          pinned_category = CASE WHEN $8 THEN $7 ELSE user_progress.pinned_category END,
          updated_at = now()
        RETURNING title_id, seen, watchlist, via_stream, rating, pinned_category`,
-      [req.session.userId, titleId, seen ?? null, watchlist ?? null, viaStream ?? null, rating ?? null, pinnedCategory, pinnedCategoryGesetzt]
+      [req.userId, titleId, seen ?? null, watchlist ?? null, viaStream ?? null, rating ?? null, pinnedCategory, pinnedCategoryGesetzt]
     ));
     await client.query('COMMIT');
   } catch (err) {
@@ -104,7 +104,7 @@ router.put('/:titleId', async (req, res) => {
 
   // Anonymer Trichter-Schritt "zehn Titel erreicht" -- ohne await, das
   // Zaehlen darf das Speichern nicht verzoegern (siehe lib/metrik.js).
-  zehnTitelPruefen(req.session.userId);
+  zehnTitelPruefen(req.userId);
 
   // KPI title_rated (docs/kpi.md): nur ausdrueckliche POSITIV-Markierungen im
   // Body zaehlen (gesehen, Watchlist, Sterne) -- das blosse Anlegen der Zeile
@@ -116,7 +116,7 @@ router.put('/:titleId', async (req, res) => {
     : null;
   if (verdict) {
     track('title_rated', {
-      userId: req.session.userId,
+      userId: req.userId,
       anonId: req.anonId,
       props: { title_id: titleId, verdict },
     });

@@ -30,7 +30,7 @@ router.post('/', GRENZE, async (req, res) => {
   if (APP_PFADE.includes(pfad)) {
     const ua = req.get('user-agent') || '';
     await track('seite_aufruf', {
-      userId: req.session?.userId ?? null,
+      userId: req.userId ?? null,
       anonId: req.anonId,
       tagesId: await tageskennung(req),
       props: {

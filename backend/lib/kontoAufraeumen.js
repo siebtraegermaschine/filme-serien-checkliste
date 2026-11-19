@@ -19,6 +19,7 @@ export const WIDERRUFSFRIST_TAGE = 14;
 //     Zeilen einer Person zuordnen liessen.
 //
 // Eines haengt technisch nicht am Nutzer und muss daher von Hand weg:
+//   (auth_tokens haengen per CASCADE am Nutzer; die explizite Loeschung unten ist Absicherung)
 //   - die Sitzungstabelle von connect-pg-simple kennt keinen Fremdschluessel.
 //
 // Alles in einer Transaktion, damit kein Zwischenstand entstehen kann: Die
@@ -58,6 +59,7 @@ export async function loescheKonto(userId, email) {
     await client.query(`UPDATE search_queries SET user_email = NULL WHERE user_email = $1`, [email]);
     // sess ist JSON; die userId liegt dort als Zeichenkette (bigint aus pg).
     await client.query(`DELETE FROM session WHERE sess->>'userId' = $1`, [String(userId)]);
+    await client.query(`DELETE FROM auth_tokens WHERE user_id = $1`, [userId]);
     await client.query(`DELETE FROM users WHERE id = $1`, [userId]);
     await client.query('COMMIT');
   } catch (err) {

@@ -44,13 +44,13 @@ router.post('/', requireAuth, GRENZE_ANLEGEN, async (req, res) => {
   const token = crypto.randomBytes(16).toString('hex');
   const { rows: [neu] } = await pool.query(
     'INSERT INTO movie_night_runden (token, ersteller_user_id, titel_ids) VALUES ($1, $2, $3) RETURNING id',
-    [token, req.session.userId, geprueft]
+    [token, req.userId, geprueft]
   );
   // KPI: Eine Movie-Night-Runde IST die Match-Session (docs/kpi.md). Beim
   // Start ist nur die erstellende Person dabei; den tatsaechlichen Stand
   // tragen die Stimmen-Ereignisse nach (participant_count je Stimme).
   track('session_started', {
-    userId: req.session.userId,
+    userId: req.userId,
     anonId: req.anonId,
     sessionId: String(neu.id),
     props: { participant_count: 1 },
@@ -153,7 +153,7 @@ router.post('/:token/stimmen', GRENZE_STIMMEN, async (req, res) => {
 async function stimmenTracken(runde, paare, req) {
   try {
     const sessionId = String(runde.id);
-    const basis = { userId: req.session?.userId ?? null, anonId: req.anonId, sessionId };
+    const basis = { userId: req.userId ?? null, anonId: req.anonId, sessionId };
     const { rows: [z] } = await pool.query(
       'SELECT COUNT(DISTINCT teilnehmer)::int AS n FROM movie_night_stimmen WHERE runde_id = $1',
       [runde.id]

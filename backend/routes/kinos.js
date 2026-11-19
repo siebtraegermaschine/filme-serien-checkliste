@@ -139,7 +139,7 @@ router.get('/meine', requireAuth, async (req, res) => {
        FROM user_kinos uk JOIN kinos k ON k.id = uk.kino_id
       WHERE uk.user_id = $1
       ORDER BY k.ort NULLS LAST, k.name`,
-    [req.session.userId]
+    [req.userId]
   );
   res.json({ kinos: rows.map((r) => ({ ...r, id: Number(r.id) })) });
 });
@@ -154,12 +154,12 @@ router.put('/meine', requireAuth, async (req, res) => {
     await client.query('BEGIN');
     // Vollstaendig ersetzen statt einzeln abgleichen: Die Oberflaeche schickt
     // immer die ganze Auswahl, und so kann kein Zwischenstand entstehen.
-    await client.query('DELETE FROM user_kinos WHERE user_id = $1', [req.session.userId]);
+    await client.query('DELETE FROM user_kinos WHERE user_id = $1', [req.userId]);
     if (sauber.length) {
       await client.query(
         `INSERT INTO user_kinos (user_id, kino_id)
          SELECT $1, id FROM kinos WHERE id = ANY($2)`,
-        [req.session.userId, sauber]
+        [req.userId, sauber]
       );
     }
     await client.query('COMMIT');
@@ -175,7 +175,7 @@ router.put('/meine', requireAuth, async (req, res) => {
        FROM user_kinos uk JOIN kinos k ON k.id = uk.kino_id
       WHERE uk.user_id = $1
       ORDER BY k.ort NULLS LAST, k.name`,
-    [req.session.userId]
+    [req.userId]
   );
   res.json({ kinos: rows.map((r) => ({ ...r, id: Number(r.id) })) });
 });

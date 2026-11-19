@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
      JOIN titles t ON t.id = h.title_id
      WHERE h.user_id = $1
      ORDER BY h.hidden_at DESC`,
-    [req.session.userId]
+    [req.userId]
   );
   res.json(rows.map(serializeTitle));
 });
@@ -30,7 +30,7 @@ router.post('/:titleId', async (req, res) => {
   await pool.query(
     `INSERT INTO user_hidden_titles (user_id, title_id) VALUES ($1, $2)
      ON CONFLICT (user_id, title_id) DO NOTHING`,
-    [req.session.userId, titleId]
+    [req.userId, titleId]
   );
   res.status(204).end();
 });
@@ -43,7 +43,7 @@ router.delete('/:titleId', async (req, res) => {
   }
   await pool.query(
     `DELETE FROM user_hidden_titles WHERE user_id = $1 AND title_id = $2`,
-    [req.session.userId, titleId]
+    [req.userId, titleId]
   );
   res.status(204).end();
 });
