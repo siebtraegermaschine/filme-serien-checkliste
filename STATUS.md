@@ -274,6 +274,7 @@ natives Teilen mit Datei, Deep Links, Haptik, Offline-Lesecache, `/.well-known`-
   Liste sofort da. Preis: Empfehlungen/Taste-Score rechnen nur über Startkatalog + eigene Titel + Suchtreffer,
   Genre-/Filterlisten zeigen nur diese Auswahl. Backend vor App ausliefern (ältere Server ignorieren `?ids=`).
 - Kartendesign nativ (nur `html.native`): Score-Pille 24x18 statt 44x44, Buttons 34 px, Cover/Titel/Score bündig; schwebender Teilen-Knopf in der App aus. Im Simulator geprüft (Gast).
+- Touch-Sweep (19.11.2026, lokal gemessen mit/ohne `html.native`): Suchchips, Vorschlagszeilen und Pin-Knopf auf Web-Höhe zurückgesetzt (unsichtbare Trefferfläche bleibt). Bewusst bei 44 px belassen: Filterleiste (Entdecken/Watchlist/Gesehen/Sortieren), Menü- und Sortier-Einträge, Modal-Buttons und ✕. Nicht gemessen: Personenseite, Detailansicht mit echten Postern (Teststand ohne Daten), Kino-/Trailer-Ansichten.
 - Ablehnungsrisiken geprüft (PLAN-NATIVE-APPS Abschnitt 5): Kontolöschung, kein Social-Login, GA in der App aus, Export-Flag, Rechtstexte-Links in Ordnung. Löschdialog nennt jetzt die 14-Tage-Frist (7 Sprachen). Nicht geprüft: Testkonto für Prüfer, Altersfreigabe, Trailer auf dem Gerät, tote Links, vier Gerätegrößen.
 - Nicht verifiziert: Android-Build (kein SDK auf dem Mac), TMDB-Abrufe, Nachladen mit echtem Konto gegen live
   (erst nach Deploy), Simulator nur iPhone 18 Pro (kleine Größen/Pro Max/Hell-Dunkel offen), Speicher auf echtem Gerät.

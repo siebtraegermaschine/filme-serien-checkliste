@@ -1610,6 +1610,8 @@
      ::after, die Knoepfe sind 34px hoch wie im Web. Titel-/Score-Oberkante
      liegt buendig mit dem Cover (Textoberkante statt Zeilenoberkante). */
   html.native .teilen-fab { display:none; }
+  html.native .pin-btn { min-height:0; min-width:0; position:relative; }
+  html.native .pin-btn::after { content:''; position:absolute; inset:-10px -8px; }
   html.native .search-suggest button { min-height:0; min-width:0; }
   html.native .such-chips .chip, html.native .such-chips .chip button, html.native .such-chips .such-bindewort { min-height:0; min-width:0; position:relative; }
   html.native .such-chips .chip button::after, html.native .such-chips .such-bindewort::after { content:''; position:absolute; inset:-10px -8px; }
