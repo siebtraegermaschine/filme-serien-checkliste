@@ -1605,6 +1605,14 @@
   /* Groessere Cover in der Haupt-Liste (Alle/Offen/Gesehen) als in Discovery & Watchlist */
   ol.list.main-list li.item .dposter { width: 68px; height: 102px; }
   @media (max-width: 640px) { ol.list.main-list li.item .dposter { width: 60px; height: 90px; } }
+  /* App: Die 44px-Mindestgroesse (oben) blaeht Score und Kartenknoepfe auf.
+     Sichtbar bleibt die Web-Groesse; die Tippflaeche des Scores waechst per
+     ::after, die Knoepfe sind 34px hoch wie im Web. Titel-/Score-Oberkante
+     liegt buendig mit dem Cover (Textoberkante statt Zeilenoberkante). */
+  html.native .score { min-height:0; min-width:0; position:relative; line-height:16px; }
+  html.native .score::after { content:''; position:absolute; inset:-14px -8px; }
+  html.native .det-actions button, html.native .watch-btns .watch-btn, html.native .detkopf .watch-btn { min-height:0; min-width:0; }
+  html.native li.item .title, html.native li.disc .dtitle { margin-top:-4px; }
 </style>
 </head>
 <body>
