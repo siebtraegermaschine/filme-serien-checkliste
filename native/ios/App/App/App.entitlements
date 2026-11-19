@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Universal Links: Domain muss zur Datei /.well-known/apple-app-site-association passen. -->
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:movietaste.de</string>
+	</array>
+	<!-- Push: erst mit APNs-Schluessel im Entwicklerkonto wirksam; Wert 'development'
+	     gilt fuer Debug, Xcode setzt fuer Distribution automatisch 'production'. -->
+	<key>aps-environment</key>
+	<string>development</string>
+</dict>
+</plist>

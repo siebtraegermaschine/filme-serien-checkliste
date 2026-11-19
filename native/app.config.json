@@ -1,0 +1,6 @@
+{
+  "appName": "MovieMatch",
+  "appId": "de.movietaste.app",
+  "apiBase": "https://movietaste.de",
+  "hinweis": "appName ist ein Platzhalter bis der App-Name feststeht. Aenderung hier, dann 'npm run sync'. Der Anzeigename wird in Info.plist und strings.xml uebernommen."
+}

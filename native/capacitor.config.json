@@ -1,0 +1,23 @@
+{
+  "appId": "de.movietaste.app",
+  "appName": "MovieMatch",
+  "webDir": "www",
+  "ios": {
+    "contentInset": "never",
+    "backgroundColor": "#0e1116"
+  },
+  "android": {
+    "backgroundColor": "#0e1116"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false,
+      "backgroundColor": "#0e1116",
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#0e1116"
+    }
+  }
+}

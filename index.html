@@ -68,6 +68,12 @@
   }
   P.tokenSetzen = tokenSetzen;
 
+  // Splash steht (launchAutoHide aus), bis die Seite steht; Timer als Notausstieg.
+  var splash = P.plugin('SplashScreen');
+  var splashWeg = function(){ if (splash) { var s = splash; splash = null; s.hide({ fadeOutDuration: 200 }).catch(function(){}); } };
+  window.addEventListener('load', function(){ setTimeout(splashWeg, 150); });
+  setTimeout(splashWeg, 4000);
+
   var echt = window.fetch.bind(window);
   var API = /^\/api\//;
   window.fetch = function(input, init){
